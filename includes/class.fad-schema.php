@@ -5375,6 +5375,4031 @@
 
 		}
 
+	// Add data to an array defining schema data for brand organization
+
+		// Construct a single brand organization item
+
+			function uamswp_fad_schema_brand_organization(
+				string $slug // string // Required // Brand Organization term slug
+			) {
+
+				// Base array
+
+					$output = array();
+
+				$term = get_term_by(
+					'slug', // string // Required // Either 'slug', 'name', 'term_id' (or 'id', 'ID'), or 'term_taxonomy_id'.
+					$slug, // string|int // Required // Search for this term value.
+					'brand_organization_uams' // string // Optional // Taxonomy name. Optional, if $field is 'term_taxonomy_id'.
+				);
+
+				// If term is invalid, bail early
+
+					if ( !is_object($term) ) {
+
+						return $output;
+
+					}
+
+				// Construct schema item
+
+					// mainEntityOfPage (common use)
+
+						$mainEntityOfPage = get_field( 'foo', $term ) ?? null;
+
+					// @id
+
+						$id = $mainEntityOfPage ? $mainEntityOfPage . '#Organization' : '';
+
+						if ( $id ) {
+
+							$output['@id'] = $id;
+
+						}
+
+					// @type
+
+						$type = get_field( 'foo', $term ) ?? null;
+
+						if ( $type ) {
+
+							$output['@type'] = $type;
+
+						}
+
+					// acceptsReservations
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$acceptsReservations = get_field( 'foo', $term ) ?? null;
+
+						if ( $acceptsReservations ) {
+
+							$output['acceptsReservations'] = $acceptsReservations;
+
+						}
+
+					// actionableFeedbackPolicy
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$actionableFeedbackPolicy = get_field( 'foo', $term ) ?? null;
+
+						if ( $actionableFeedbackPolicy ) {
+
+							$output['actionableFeedbackPolicy'] = $actionableFeedbackPolicy;
+
+						}
+
+					// additionalProperty
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$additionalProperty = get_field( 'foo', $term ) ?? null;
+
+						if ( $additionalProperty ) {
+
+							$output['additionalProperty'] = $additionalProperty;
+
+						}
+
+					// additionalType
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$additionalType = get_field( 'foo', $term ) ?? null;
+
+						if ( $additionalType ) {
+
+							$output['additionalType'] = $additionalType;
+
+						}
+
+					// address
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$address = get_field( 'foo', $term ) ?? null;
+
+						if ( $address ) {
+
+							$output['address'] = $address;
+
+						}
+
+					// aggregateRating
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$aggregateRating = get_field( 'foo', $term ) ?? null;
+
+						if ( $aggregateRating ) {
+
+							$output['aggregateRating'] = $aggregateRating;
+
+						}
+
+					// album
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$album = get_field( 'foo', $term ) ?? null;
+
+						if ( $album ) {
+
+							$output['album'] = $album;
+
+						}
+
+					// albums
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$albums = get_field( 'foo', $term ) ?? null;
+
+						if ( $albums ) {
+
+							$output['albums'] = $albums;
+
+						}
+
+					// alternateName
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$alternateName = get_field( 'foo', $term ) ?? null;
+
+						if ( $alternateName ) {
+
+							$output['alternateName'] = $alternateName;
+
+						}
+
+					// alumni
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$alumni = get_field( 'foo', $term ) ?? null;
+
+						if ( $alumni ) {
+
+							$output['alumni'] = $alumni;
+
+						}
+
+					// amenityFeature
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$amenityFeature = get_field( 'foo', $term ) ?? null;
+
+						if ( $amenityFeature ) {
+
+							$output['amenityFeature'] = $amenityFeature;
+
+						}
+
+					// archiveHeld
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$archiveHeld = get_field( 'foo', $term ) ?? null;
+
+						if ( $archiveHeld ) {
+
+							$output['archiveHeld'] = $archiveHeld;
+
+						}
+
+					// areaServed
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$areaServed = get_field( 'foo', $term ) ?? null;
+
+						if ( $areaServed ) {
+
+							$output['areaServed'] = $areaServed;
+
+						}
+
+					// athlete
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$athlete = get_field( 'foo', $term ) ?? null;
+
+						if ( $athlete ) {
+
+							$output['athlete'] = $athlete;
+
+						}
+
+					// audience
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$audience = get_field( 'foo', $term ) ?? null;
+
+						if ( $audience ) {
+
+							$output['audience'] = $audience;
+
+						}
+
+					// availableLanguage
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$availableLanguage = get_field( 'foo', $term ) ?? null;
+
+						if ( $availableLanguage ) {
+
+							$output['availableLanguage'] = $availableLanguage;
+
+						}
+
+					// availableService
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$availableService = get_field( 'foo', $term ) ?? null;
+
+						if ( $availableService ) {
+
+							$output['availableService'] = $availableService;
+
+						}
+
+					// availableTest
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$availableTest = get_field( 'foo', $term ) ?? null;
+
+						if ( $availableTest ) {
+
+							$output['availableTest'] = $availableTest;
+
+						}
+
+					// award
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$award = get_field( 'foo', $term ) ?? null;
+
+						if ( $award ) {
+
+							$output['award'] = $award;
+
+						}
+
+					// awards
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$awards = get_field( 'foo', $term ) ?? null;
+
+						if ( $awards ) {
+
+							$output['awards'] = $awards;
+
+						}
+
+					// boardingPolicy
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$boardingPolicy = get_field( 'foo', $term ) ?? null;
+
+						if ( $boardingPolicy ) {
+
+							$output['boardingPolicy'] = $boardingPolicy;
+
+						}
+
+					// branchCode
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$branchCode = get_field( 'foo', $term ) ?? null;
+
+						if ( $branchCode ) {
+
+							$output['branchCode'] = $branchCode;
+
+						}
+
+					// branchOf
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$branchOf = get_field( 'foo', $term ) ?? null;
+
+						if ( $branchOf ) {
+
+							$output['branchOf'] = $branchOf;
+
+						}
+
+					// brand
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$brand = get_field( 'foo', $term ) ?? null;
+
+						if ( $brand ) {
+
+							$output['brand'] = $brand;
+
+						}
+
+					// checkinTime
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$checkinTime = get_field( 'foo', $term ) ?? null;
+
+						if ( $checkinTime ) {
+
+							$output['checkinTime'] = $checkinTime;
+
+						}
+
+					// checkoutTime
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$checkoutTime = get_field( 'foo', $term ) ?? null;
+
+						if ( $checkoutTime ) {
+
+							$output['checkoutTime'] = $checkoutTime;
+
+						}
+
+					// coach
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$coach = get_field( 'foo', $term ) ?? null;
+
+						if ( $coach ) {
+
+							$output['coach'] = $coach;
+
+						}
+
+					// contactPoint
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$contactPoint = get_field( 'foo', $term ) ?? null;
+
+						if ( $contactPoint ) {
+
+							$output['contactPoint'] = $contactPoint;
+
+						}
+
+					// contactPoints
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$contactPoints = get_field( 'foo', $term ) ?? null;
+
+						if ( $contactPoints ) {
+
+							$output['contactPoints'] = $contactPoints;
+
+						}
+
+					// containedIn
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$containedIn = get_field( 'foo', $term ) ?? null;
+
+						if ( $containedIn ) {
+
+							$output['containedIn'] = $containedIn;
+
+						}
+
+					// containedInPlace
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$containedInPlace = get_field( 'foo', $term ) ?? null;
+
+						if ( $containedInPlace ) {
+
+							$output['containedInPlace'] = $containedInPlace;
+
+						}
+
+					// containsPlace
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$containsPlace = get_field( 'foo', $term ) ?? null;
+
+						if ( $containsPlace ) {
+
+							$output['containsPlace'] = $containsPlace;
+
+						}
+
+					// correctionsPolicy
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$correctionsPolicy = get_field( 'foo', $term ) ?? null;
+
+						if ( $correctionsPolicy ) {
+
+							$output['correctionsPolicy'] = $correctionsPolicy;
+
+						}
+
+					// currenciesAccepted
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$currenciesAccepted = get_field( 'foo', $term ) ?? null;
+
+						if ( $currenciesAccepted ) {
+
+							$output['currenciesAccepted'] = $currenciesAccepted;
+
+						}
+
+					// department
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$department = get_field( 'foo', $term ) ?? null;
+
+						if ( $department ) {
+
+							$output['department'] = $department;
+
+						}
+
+					// description
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$description = get_field( 'foo', $term ) ?? null;
+
+						if ( $description ) {
+
+							$output['description'] = $description;
+
+						}
+
+					// disambiguatingDescription
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$disambiguatingDescription = get_field( 'foo', $term ) ?? null;
+
+						if ( $disambiguatingDescription ) {
+
+							$output['disambiguatingDescription'] = $disambiguatingDescription;
+
+						}
+
+					// dissolutionDate
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$dissolutionDate = get_field( 'foo', $term ) ?? null;
+
+						if ( $dissolutionDate ) {
+
+							$output['dissolutionDate'] = $dissolutionDate;
+
+						}
+
+					// diversityPolicy
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$diversityPolicy = get_field( 'foo', $term ) ?? null;
+
+						if ( $diversityPolicy ) {
+
+							$output['diversityPolicy'] = $diversityPolicy;
+
+						}
+
+					// diversityStaffingReport
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$diversityStaffingReport = get_field( 'foo', $term ) ?? null;
+
+						if ( $diversityStaffingReport ) {
+
+							$output['diversityStaffingReport'] = $diversityStaffingReport;
+
+						}
+
+					// duns
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$duns = get_field( 'foo', $term ) ?? null;
+
+						if ( $duns ) {
+
+							$output['duns'] = $duns;
+
+						}
+
+					// email
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$email = get_field( 'foo', $term ) ?? null;
+
+						if ( $email ) {
+
+							$output['email'] = $email;
+
+						}
+
+					// employee
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$employee = get_field( 'foo', $term ) ?? null;
+
+						if ( $employee ) {
+
+							$output['employee'] = $employee;
+
+						}
+
+					// employees
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$employees = get_field( 'foo', $term ) ?? null;
+
+						if ( $employees ) {
+
+							$output['employees'] = $employees;
+
+						}
+
+					// ethicsPolicy
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$ethicsPolicy = get_field( 'foo', $term ) ?? null;
+
+						if ( $ethicsPolicy ) {
+
+							$output['ethicsPolicy'] = $ethicsPolicy;
+
+						}
+
+					// event
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$event = get_field( 'foo', $term ) ?? null;
+
+						if ( $event ) {
+
+							$output['event'] = $event;
+
+						}
+
+					// events
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$events = get_field( 'foo', $term ) ?? null;
+
+						if ( $events ) {
+
+							$output['events'] = $events;
+
+						}
+
+					// faxNumber
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$faxNumber = get_field( 'foo', $term ) ?? null;
+
+						if ( $faxNumber ) {
+
+							$output['faxNumber'] = $faxNumber;
+
+						}
+
+					// feesAndCommissionsSpecification
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$feesAndCommissionsSpecification = get_field( 'foo', $term ) ?? null;
+
+						if ( $feesAndCommissionsSpecification ) {
+
+							$output['feesAndCommissionsSpecification'] = $feesAndCommissionsSpecification;
+
+						}
+
+					// founder
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$founder = get_field( 'foo', $term ) ?? null;
+
+						if ( $founder ) {
+
+							$output['founder'] = $founder;
+
+						}
+
+					// founders
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$founders = get_field( 'foo', $term ) ?? null;
+
+						if ( $founders ) {
+
+							$output['founders'] = $founders;
+
+						}
+
+					// foundingDate
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$foundingDate = get_field( 'foo', $term ) ?? null;
+
+						if ( $foundingDate ) {
+
+							$output['foundingDate'] = $foundingDate;
+
+						}
+
+					// foundingLocation
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$foundingLocation = get_field( 'foo', $term ) ?? null;
+
+						if ( $foundingLocation ) {
+
+							$output['foundingLocation'] = $foundingLocation;
+
+						}
+
+					// funder
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$funder = get_field( 'foo', $term ) ?? null;
+
+						if ( $funder ) {
+
+							$output['funder'] = $funder;
+
+						}
+
+					// funding
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$funding = get_field( 'foo', $term ) ?? null;
+
+						if ( $funding ) {
+
+							$output['funding'] = $funding;
+
+						}
+
+					// gender
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$gender = get_field( 'foo', $term ) ?? null;
+
+						if ( $gender ) {
+
+							$output['gender'] = $gender;
+
+						}
+
+					// genre
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$genre = get_field( 'foo', $term ) ?? null;
+
+						if ( $genre ) {
+
+							$output['genre'] = $genre;
+
+						}
+
+					// geo
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$geo = get_field( 'foo', $term ) ?? null;
+
+						if ( $geo ) {
+
+							$output['geo'] = $geo;
+
+						}
+
+					// geoContains
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$geoContains = get_field( 'foo', $term ) ?? null;
+
+						if ( $geoContains ) {
+
+							$output['geoContains'] = $geoContains;
+
+						}
+
+					// geoCoveredBy
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$geoCoveredBy = get_field( 'foo', $term ) ?? null;
+
+						if ( $geoCoveredBy ) {
+
+							$output['geoCoveredBy'] = $geoCoveredBy;
+
+						}
+
+					// geoCovers
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$geoCovers = get_field( 'foo', $term ) ?? null;
+
+						if ( $geoCovers ) {
+
+							$output['geoCovers'] = $geoCovers;
+
+						}
+
+					// geoCrosses
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$geoCrosses = get_field( 'foo', $term ) ?? null;
+
+						if ( $geoCrosses ) {
+
+							$output['geoCrosses'] = $geoCrosses;
+
+						}
+
+					// geoDisjoint
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$geoDisjoint = get_field( 'foo', $term ) ?? null;
+
+						if ( $geoDisjoint ) {
+
+							$output['geoDisjoint'] = $geoDisjoint;
+
+						}
+
+					// geoEquals
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$geoEquals = get_field( 'foo', $term ) ?? null;
+
+						if ( $geoEquals ) {
+
+							$output['geoEquals'] = $geoEquals;
+
+						}
+
+					// geoIntersects
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$geoIntersects = get_field( 'foo', $term ) ?? null;
+
+						if ( $geoIntersects ) {
+
+							$output['geoIntersects'] = $geoIntersects;
+
+						}
+
+					// geoOverlaps
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$geoOverlaps = get_field( 'foo', $term ) ?? null;
+
+						if ( $geoOverlaps ) {
+
+							$output['geoOverlaps'] = $geoOverlaps;
+
+						}
+
+					// geoTouches
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$geoTouches = get_field( 'foo', $term ) ?? null;
+
+						if ( $geoTouches ) {
+
+							$output['geoTouches'] = $geoTouches;
+
+						}
+
+					// geoWithin
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$geoWithin = get_field( 'foo', $term ) ?? null;
+
+						if ( $geoWithin ) {
+
+							$output['geoWithin'] = $geoWithin;
+
+						}
+
+					// globalLocationNumber
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$globalLocationNumber = get_field( 'foo', $term ) ?? null;
+
+						if ( $globalLocationNumber ) {
+
+							$output['globalLocationNumber'] = $globalLocationNumber;
+
+						}
+
+					// hasCredential
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$hasCredential = get_field( 'foo', $term ) ?? null;
+
+						if ( $hasCredential ) {
+
+							$output['hasCredential'] = $hasCredential;
+
+						}
+
+					// hasDriveThroughService
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$hasDriveThroughService = get_field( 'foo', $term ) ?? null;
+
+						if ( $hasDriveThroughService ) {
+
+							$output['hasDriveThroughService'] = $hasDriveThroughService;
+
+						}
+
+					// hasMap
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$hasMap = get_field( 'foo', $term ) ?? null;
+
+						if ( $hasMap ) {
+
+							$output['hasMap'] = $hasMap;
+
+						}
+
+					// hasMenu
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$hasMenu = get_field( 'foo', $term ) ?? null;
+
+						if ( $hasMenu ) {
+
+							$output['hasMenu'] = $hasMenu;
+
+						}
+
+					// hasMerchantReturnPolicy
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$hasMerchantReturnPolicy = get_field( 'foo', $term ) ?? null;
+
+						if ( $hasMerchantReturnPolicy ) {
+
+							$output['hasMerchantReturnPolicy'] = $hasMerchantReturnPolicy;
+
+						}
+
+					// hasOfferCatalog
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$hasOfferCatalog = get_field( 'foo', $term ) ?? null;
+
+						if ( $hasOfferCatalog ) {
+
+							$output['hasOfferCatalog'] = $hasOfferCatalog;
+
+						}
+
+					// hasPOS
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$hasPOS = get_field( 'foo', $term ) ?? null;
+
+						if ( $hasPOS ) {
+
+							$output['hasPOS'] = $hasPOS;
+
+						}
+
+					// hasProductReturnPolicy
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$hasProductReturnPolicy = get_field( 'foo', $term ) ?? null;
+
+						if ( $hasProductReturnPolicy ) {
+
+							$output['hasProductReturnPolicy'] = $hasProductReturnPolicy;
+
+						}
+
+					// healthPlanNetworkId
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$healthPlanNetworkId = get_field( 'foo', $term ) ?? null;
+
+						if ( $healthPlanNetworkId ) {
+
+							$output['healthPlanNetworkId'] = $healthPlanNetworkId;
+
+						}
+
+					// healthcareReportingData
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$healthcareReportingData = get_field( 'foo', $term ) ?? null;
+
+						if ( $healthcareReportingData ) {
+
+							$output['healthcareReportingData'] = $healthcareReportingData;
+
+						}
+
+					// hospitalAffiliation
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$hospitalAffiliation = get_field( 'foo', $term ) ?? null;
+
+						if ( $hospitalAffiliation ) {
+
+							$output['hospitalAffiliation'] = $hospitalAffiliation;
+
+						}
+
+					// iataCode
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$iataCode = get_field( 'foo', $term ) ?? null;
+
+						if ( $iataCode ) {
+
+							$output['iataCode'] = $iataCode;
+
+						}
+
+					// identifier
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$identifier = get_field( 'foo', $term ) ?? null;
+
+						if ( $identifier ) {
+
+							$output['identifier'] = $identifier;
+
+						}
+
+					// image
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$image = get_field( 'foo', $term ) ?? null;
+
+						if ( $image ) {
+
+							$output['image'] = $image;
+
+						}
+
+					// interactionStatistic
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$interactionStatistic = get_field( 'foo', $term ) ?? null;
+
+						if ( $interactionStatistic ) {
+
+							$output['interactionStatistic'] = $interactionStatistic;
+
+						}
+
+					// isAcceptingNewPatients
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$isAcceptingNewPatients = get_field( 'foo', $term ) ?? null;
+
+						if ( $isAcceptingNewPatients ) {
+
+							$output['isAcceptingNewPatients'] = $isAcceptingNewPatients;
+
+						}
+
+					// isAccessibleForFree
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$isAccessibleForFree = get_field( 'foo', $term ) ?? null;
+
+						if ( $isAccessibleForFree ) {
+
+							$output['isAccessibleForFree'] = $isAccessibleForFree;
+
+						}
+
+					// isicV4
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$isicV4 = get_field( 'foo', $term ) ?? null;
+
+						if ( $isicV4 ) {
+
+							$output['isicV4'] = $isicV4;
+
+						}
+
+					// iso6523Code
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$iso6523Code = get_field( 'foo', $term ) ?? null;
+
+						if ( $iso6523Code ) {
+
+							$output['iso6523Code'] = $iso6523Code;
+
+						}
+
+					// keywords
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$keywords = get_field( 'foo', $term ) ?? null;
+
+						if ( $keywords ) {
+
+							$output['keywords'] = $keywords;
+
+						}
+
+					// knowsAbout
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$knowsAbout = get_field( 'foo', $term ) ?? null;
+
+						if ( $knowsAbout ) {
+
+							$output['knowsAbout'] = $knowsAbout;
+
+						}
+
+					// knowsLanguage
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$knowsLanguage = get_field( 'foo', $term ) ?? null;
+
+						if ( $knowsLanguage ) {
+
+							$output['knowsLanguage'] = $knowsLanguage;
+
+						}
+
+					// latitude
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$latitude = get_field( 'foo', $term ) ?? null;
+
+						if ( $latitude ) {
+
+							$output['latitude'] = $latitude;
+
+						}
+
+					// legalName
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$legalName = get_field( 'foo', $term ) ?? null;
+
+						if ( $legalName ) {
+
+							$output['legalName'] = $legalName;
+
+						}
+
+					// leiCode
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$leiCode = get_field( 'foo', $term ) ?? null;
+
+						if ( $leiCode ) {
+
+							$output['leiCode'] = $leiCode;
+
+						}
+
+					// location
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$location = get_field( 'foo', $term ) ?? null;
+
+						if ( $location ) {
+
+							$output['location'] = $location;
+
+						}
+
+					// logo
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$logo = get_field( 'foo', $term ) ?? null;
+
+						if ( $logo ) {
+
+							$output['logo'] = $logo;
+
+						}
+
+					// longitude
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$longitude = get_field( 'foo', $term ) ?? null;
+
+						if ( $longitude ) {
+
+							$output['longitude'] = $longitude;
+
+						}
+
+					// mainEntityOfPage (specific property)
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						if ( $mainEntityOfPage ) {
+
+							$output['mainEntityOfPage'] = $mainEntityOfPage;
+
+						}
+
+					// makesOffer
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$makesOffer = get_field( 'foo', $term ) ?? null;
+
+						if ( $makesOffer ) {
+
+							$output['makesOffer'] = $makesOffer;
+
+						}
+
+					// map
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$map = get_field( 'foo', $term ) ?? null;
+
+						if ( $map ) {
+
+							$output['map'] = $map;
+
+						}
+
+					// maps
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$maps = get_field( 'foo', $term ) ?? null;
+
+						if ( $maps ) {
+
+							$output['maps'] = $maps;
+
+						}
+
+					// masthead
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$masthead = get_field( 'foo', $term ) ?? null;
+
+						if ( $masthead ) {
+
+							$output['masthead'] = $masthead;
+
+						}
+
+					// maximumAttendeeCapacity
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$maximumAttendeeCapacity = get_field( 'foo', $term ) ?? null;
+
+						if ( $maximumAttendeeCapacity ) {
+
+							$output['maximumAttendeeCapacity'] = $maximumAttendeeCapacity;
+
+						}
+
+					// medicalSpecialty
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$medicalSpecialty = get_field( 'foo', $term ) ?? null;
+
+						if ( $medicalSpecialty ) {
+
+							$output['medicalSpecialty'] = $medicalSpecialty;
+
+						}
+
+					// member
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$member = get_field( 'foo', $term ) ?? null;
+
+						if ( $member ) {
+
+							$output['member'] = $member;
+
+						}
+
+					// memberOf
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$memberOf = get_field( 'foo', $term ) ?? null;
+
+						if ( $memberOf ) {
+
+							$output['memberOf'] = $memberOf;
+
+						}
+
+					// members
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$members = get_field( 'foo', $term ) ?? null;
+
+						if ( $members ) {
+
+							$output['members'] = $members;
+
+						}
+
+					// menu
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$menu = get_field( 'foo', $term ) ?? null;
+
+						if ( $menu ) {
+
+							$output['menu'] = $menu;
+
+						}
+
+					// missionCoveragePrioritiesPolicy
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$missionCoveragePrioritiesPolicy = get_field( 'foo', $term ) ?? null;
+
+						if ( $missionCoveragePrioritiesPolicy ) {
+
+							$output['missionCoveragePrioritiesPolicy'] = $missionCoveragePrioritiesPolicy;
+
+						}
+
+					// musicGroupMember
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$musicGroupMember = get_field( 'foo', $term ) ?? null;
+
+						if ( $musicGroupMember ) {
+
+							$output['musicGroupMember'] = $musicGroupMember;
+
+						}
+
+					// naics
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$naics = get_field( 'foo', $term ) ?? null;
+
+						if ( $naics ) {
+
+							$output['naics'] = $naics;
+
+						}
+
+					// name
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$name = get_field( 'foo', $term ) ?? null;
+
+						if ( $name ) {
+
+							$output['name'] = $name;
+
+						}
+
+					// noBylinesPolicy
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$noBylinesPolicy = get_field( 'foo', $term ) ?? null;
+
+						if ( $noBylinesPolicy ) {
+
+							$output['noBylinesPolicy'] = $noBylinesPolicy;
+
+						}
+
+					// nonprofitStatus
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$nonprofitStatus = get_field( 'foo', $term ) ?? null;
+
+						if ( $nonprofitStatus ) {
+
+							$output['nonprofitStatus'] = $nonprofitStatus;
+
+						}
+
+					// numberOfEmployees
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$numberOfEmployees = get_field( 'foo', $term ) ?? null;
+
+						if ( $numberOfEmployees ) {
+
+							$output['numberOfEmployees'] = $numberOfEmployees;
+
+						}
+
+					// numberOfRooms
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$numberOfRooms = get_field( 'foo', $term ) ?? null;
+
+						if ( $numberOfRooms ) {
+
+							$output['numberOfRooms'] = $numberOfRooms;
+
+						}
+
+					// openingHours
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$openingHours = get_field( 'foo', $term ) ?? null;
+
+						if ( $openingHours ) {
+
+							$output['openingHours'] = $openingHours;
+
+						}
+
+					// openingHoursSpecification
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$openingHoursSpecification = get_field( 'foo', $term ) ?? null;
+
+						if ( $openingHoursSpecification ) {
+
+							$output['openingHoursSpecification'] = $openingHoursSpecification;
+
+						}
+
+					// ownershipFundingInfo
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$ownershipFundingInfo = get_field( 'foo', $term ) ?? null;
+
+						if ( $ownershipFundingInfo ) {
+
+							$output['ownershipFundingInfo'] = $ownershipFundingInfo;
+
+						}
+
+					// owns
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$owns = get_field( 'foo', $term ) ?? null;
+
+						if ( $owns ) {
+
+							$output['owns'] = $owns;
+
+						}
+
+					// parentOrganization
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$parentOrganization = get_field( 'foo', $term ) ?? null;
+
+						if ( $parentOrganization ) {
+
+							$output['parentOrganization'] = $parentOrganization;
+
+						}
+
+					// paymentAccepted
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$paymentAccepted = get_field( 'foo', $term ) ?? null;
+
+						if ( $paymentAccepted ) {
+
+							$output['paymentAccepted'] = $paymentAccepted;
+
+						}
+
+					// petsAllowed
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$petsAllowed = get_field( 'foo', $term ) ?? null;
+
+						if ( $petsAllowed ) {
+
+							$output['petsAllowed'] = $petsAllowed;
+
+						}
+
+					// photo
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$photo = get_field( 'foo', $term ) ?? null;
+
+						if ( $photo ) {
+
+							$output['photo'] = $photo;
+
+						}
+
+					// photos
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$photos = get_field( 'foo', $term ) ?? null;
+
+						if ( $photos ) {
+
+							$output['photos'] = $photos;
+
+						}
+
+					// potentialAction
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$potentialAction = get_field( 'foo', $term ) ?? null;
+
+						if ( $potentialAction ) {
+
+							$output['potentialAction'] = $potentialAction;
+
+						}
+
+					// priceRange
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$priceRange = get_field( 'foo', $term ) ?? null;
+
+						if ( $priceRange ) {
+
+							$output['priceRange'] = $priceRange;
+
+						}
+
+					// publicAccess
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$publicAccess = get_field( 'foo', $term ) ?? null;
+
+						if ( $publicAccess ) {
+
+							$output['publicAccess'] = $publicAccess;
+
+						}
+
+					// publishingPrinciples
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$publishingPrinciples = get_field( 'foo', $term ) ?? null;
+
+						if ( $publishingPrinciples ) {
+
+							$output['publishingPrinciples'] = $publishingPrinciples;
+
+						}
+
+					// review
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$review = get_field( 'foo', $term ) ?? null;
+
+						if ( $review ) {
+
+							$output['review'] = $review;
+
+						}
+
+					// reviews
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$reviews = get_field( 'foo', $term ) ?? null;
+
+						if ( $reviews ) {
+
+							$output['reviews'] = $reviews;
+
+						}
+
+					// sameAs
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$sameAs = get_field( 'foo', $term ) ?? null;
+
+						if ( $sameAs ) {
+
+							$output['sameAs'] = $sameAs;
+
+						}
+
+					// screenCount
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$screenCount = get_field( 'foo', $term ) ?? null;
+
+						if ( $screenCount ) {
+
+							$output['screenCount'] = $screenCount;
+
+						}
+
+					// seeks
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$seeks = get_field( 'foo', $term ) ?? null;
+
+						if ( $seeks ) {
+
+							$output['seeks'] = $seeks;
+
+						}
+
+					// servesCuisine
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$servesCuisine = get_field( 'foo', $term ) ?? null;
+
+						if ( $servesCuisine ) {
+
+							$output['servesCuisine'] = $servesCuisine;
+
+						}
+
+					// serviceArea
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$serviceArea = get_field( 'foo', $term ) ?? null;
+
+						if ( $serviceArea ) {
+
+							$output['serviceArea'] = $serviceArea;
+
+						}
+
+					// slogan
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$slogan = get_field( 'foo', $term ) ?? null;
+
+						if ( $slogan ) {
+
+							$output['slogan'] = $slogan;
+
+						}
+
+					// smokingAllowed
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$smokingAllowed = get_field( 'foo', $term ) ?? null;
+
+						if ( $smokingAllowed ) {
+
+							$output['smokingAllowed'] = $smokingAllowed;
+
+						}
+
+					// specialOpeningHoursSpecification
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$specialOpeningHoursSpecification = get_field( 'foo', $term ) ?? null;
+
+						if ( $specialOpeningHoursSpecification ) {
+
+							$output['specialOpeningHoursSpecification'] = $specialOpeningHoursSpecification;
+
+						}
+
+					// sponsor
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$sponsor = get_field( 'foo', $term ) ?? null;
+
+						if ( $sponsor ) {
+
+							$output['sponsor'] = $sponsor;
+
+						}
+
+					// sport
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$sport = get_field( 'foo', $term ) ?? null;
+
+						if ( $sport ) {
+
+							$output['sport'] = $sport;
+
+						}
+
+					// starRating
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$starRating = get_field( 'foo', $term ) ?? null;
+
+						if ( $starRating ) {
+
+							$output['starRating'] = $starRating;
+
+						}
+
+					// subOrganization
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$subOrganization = get_field( 'foo', $term ) ?? null;
+
+						if ( $subOrganization ) {
+
+							$output['subOrganization'] = $subOrganization;
+
+						}
+
+					// subjectOf
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$subjectOf = get_field( 'foo', $term ) ?? null;
+
+						if ( $subjectOf ) {
+
+							$output['subjectOf'] = $subjectOf;
+
+						}
+
+					// taxID
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$taxID = get_field( 'foo', $term ) ?? null;
+
+						if ( $taxID ) {
+
+							$output['taxID'] = $taxID;
+
+						}
+
+					// telephone
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$telephone = get_field( 'foo', $term ) ?? null;
+
+						if ( $telephone ) {
+
+							$output['telephone'] = $telephone;
+
+						}
+
+					// tickerSymbol
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$tickerSymbol = get_field( 'foo', $term ) ?? null;
+
+						if ( $tickerSymbol ) {
+
+							$output['tickerSymbol'] = $tickerSymbol;
+
+						}
+
+					// tourBookingPage
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$tourBookingPage = get_field( 'foo', $term ) ?? null;
+
+						if ( $tourBookingPage ) {
+
+							$output['tourBookingPage'] = $tourBookingPage;
+
+						}
+
+					// track
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$track = get_field( 'foo', $term ) ?? null;
+
+						if ( $track ) {
+
+							$output['track'] = $track;
+
+						}
+
+					// tracks
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$tracks = get_field( 'foo', $term ) ?? null;
+
+						if ( $tracks ) {
+
+							$output['tracks'] = $tracks;
+
+						}
+
+					// unnamedSourcesPolicy
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$unnamedSourcesPolicy = get_field( 'foo', $term ) ?? null;
+
+						if ( $unnamedSourcesPolicy ) {
+
+							$output['unnamedSourcesPolicy'] = $unnamedSourcesPolicy;
+
+						}
+
+					// url
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$url = get_field( 'foo', $term ) ?? null;
+
+						if ( $url ) {
+
+							$output['url'] = $url;
+
+						}
+
+					// vatID
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$vatID = get_field( 'foo', $term ) ?? null;
+
+						if ( $vatID ) {
+
+							$output['vatID'] = $vatID;
+
+						}
+
+					// verificationFactCheckingPolicy
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+						$verificationFactCheckingPolicy = get_field( 'foo', $term ) ?? null;
+
+						if ( $verificationFactCheckingPolicy ) {
+
+							$output['verificationFactCheckingPolicy'] = $verificationFactCheckingPolicy;
+
+						}
+
+
+						/**
+						 * [Insert definition here]
+						 *
+						 * Subproperty of:
+						 *
+						 *     - [Insert property name here]
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - [Insert type name here]
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
+						 */
+
+			}
+
+		// Get the default brand organization
+
+			function uamswp_fad_schema_brand_organization_default() {
+
+				$slug = get_field( 'schema_brandorg', 'option' ) ?? null;
+
+				// If there is no value, bail early
+
+					if ( !$slug ) {
+
+						return;
+
+					}
+
+				// Construct the brand organization item
+
+					$output = uamswp_fad_schema_brand_organization(
+						$slug // string // Required // Brand Organization term slug
+					);
+
+				// Return the value
+
+					return $output;
+
+			}
+
+		// Construct a list of brand organization items associated with an entity
+
+			function uamswp_fad_schema_brand_organization_list(
+				int $entity, // int // Required // Post ID
+				array $brand_org = array() // array // Optional // Pre-existing list array for brand organizations to which to add additional items
+			) {
+
+				// If $entity is not valid, bail early
+
+					if ( !$entity ) {
+
+						return $brand_org;
+
+					}
+
+				// Check pre-existing list array, nesting the array if it is not a list array
+
+					if ( !array_is_list($brand_org) ) {
+
+						$brand_org = array($brand_org);
+
+					}
+
+				// Get brand organization slug(s)
+
+					// Check for multiple brand organization field value
+
+						$field_value = get_field( 'schema_brandorg_multiple', $entity ) ?? null;
+
+					// If no multiple brand organization field value, check for single brand organization value
+
+						if ( !$field_value ) {
+
+							$field_value = get_field( 'schema_brandorg', $entity ) ?? null;
+
+							if ( $field_value ) {
+
+								$field_value = array($field_value);
+
+							}
+
+						}
+
+				// If there is no field value, bail early
+
+					if ( !$field_value ) {
+
+						return $brand_org;
+
+					}
+
+				// Construct the list of brand organization items
+
+					foreach ( $field_value as $slug ) {
+
+						if ( $slug ) {
+
+							// Construct the brand organization items
+
+								$brand_org_temp = uamswp_fad_schema_brand_organization(
+									$slug // string // Required // Brand Organization term slug
+								);
+
+							// If the item is valid, add it to the list
+
+								if ( $brand_org_temp ) {
+
+									$brand_org[] = $brand_org_temp;
+
+								}
+
+						}
+
+					}
+
+				// Return the value
+
+					return $brand_org;
+
+			}
+
 // Generate schema arrays of ontology page types
 
 	// Providers (MedicalWebPage; MedicalBusiness; Person)
