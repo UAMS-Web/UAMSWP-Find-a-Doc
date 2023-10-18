@@ -1799,7 +1799,7 @@
 
 	}
 
-// Populate ACF fields with terms from custom taxonomies
+// Populate ACF field choices with terms from custom taxonomies
 
 	// UAMS Brand Organizations
 
