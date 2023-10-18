@@ -17,7 +17,7 @@
 			array $schema_PostalAddress = array() // array // Optional // Main address or location schema array
 		) {
 
-			/*
+			/**
 			 * Example use:
 			 *
 			 * 	// address Schema Data
@@ -445,7 +445,7 @@
 				$alternate_name = '' // string (optional) // An alias for the item.
 			) {
 
-				/*
+				/**
 				 * Example use:
 				 *
 				 * 	// MedicalSpecialty Schema Data
@@ -943,7 +943,7 @@
 			$fax_number = '' // string (optional) // The fax number.
 		) {
 
-			/*
+			/**
 			 * Example use:
 			 *
 			 * 	// FaxNumber Schema Data
@@ -995,7 +995,7 @@
 			$telephone_number = '' // string (optional) // The telephone number.
 		) {
 
-			/*
+			/**
 			 * Example use:
 			 *
 			 * 	// Telephone Schema Data
@@ -1051,7 +1051,7 @@
 			$valid_through = '' // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 		) {
 
-			/*
+			/**
 			 * Example use:
 			 *
 			 * 	// OpeningHoursSpecification Schema Data
@@ -1144,7 +1144,7 @@
 			$closes = '' // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 		) {
 
-			/*
+			/**
 			 * Example use:
 			 *
 			 * 	// OpeningHours Schema Data
@@ -1193,7 +1193,7 @@
 			array $schema_geo_coordinates = array() // array // Optional // Existing main GeoCoordinates schema array
 		) {
 
-			/*
+			/**
 			 * Example use:
 			 *
 			 * 	// GeoCoordinates Schema Data
@@ -1383,7 +1383,7 @@
 
 			if ( !empty( $schema ) ) {
 
-				/*
+				/**
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -1392,7 +1392,7 @@
 
 			} else {
 
-				/*
+				/**
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -1864,7 +1864,7 @@
 			array $input // array of MedicineSystem values
 		) {
 
-			/*
+			/**
 			 * The system of medicine that includes this MedicalEntity
 			 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
 			 *
@@ -1915,7 +1915,7 @@
 			array $sameAs_schema = array() // array // Optional // Pre-existing schema array for sameAs to which to add sameAs items
 		) {
 
-			/*
+			/**
 			 * URL of a reference Web page that unambiguously indicates the item's identity
 			 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 			 * website).
@@ -1984,7 +1984,7 @@
 			string $field_name = 'schema_additionalType_uri' // additionalType item field name
 		) {
 
-			/*
+			/**
 			 * An additional type for the item, typically used for adding more specific types
 			 * from external vocabularies in microdata syntax. This is a relationship between
 			 * something and a class that the thing is in. Typically the value is a
@@ -5495,7 +5495,7 @@
 							)
 						) {
 
-							/*
+							/**
 							 * The transient exists.
 							 * Return the variable.
 							 */
@@ -5540,7 +5540,7 @@
 
 						} else {
 
-							/*
+							/**
 							 * The transient does not exist.
 							 * Define the variable again.
 							 */
@@ -5954,7 +5954,7 @@
 
 								// url
 
-									/*
+									/**
 									 * URL of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -6652,7 +6652,7 @@
 
 										// givenName
 
-											/*
+											/**
 											 * Given name. In the U.S., the first name of a Person.
 											 *
 											 * Values expected to be one of these types:
@@ -6703,7 +6703,7 @@
 
 										// additionalName
 
-											/*
+											/**
 											 * An additional name for a Person, can be used for a middle name.
 											 *
 											 * Values expected to be one of these types:
@@ -6754,7 +6754,7 @@
 
 										// familyName
 
-											/*
+											/**
 											 * Family name. In the U.S., the last name of a Person.
 											 *
 											 * Values expected to be one of these types:
@@ -6805,7 +6805,7 @@
 
 										// legalName [WIP]
 
-											/*
+											/**
 											 * The official name of the organization (e.g., the registered company name).
 											 *
 											 * Values expected to be one of these types:
@@ -6864,7 +6864,7 @@
 
 										// honorificPrefix
 
-											/*
+											/**
 											 * An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.
 											 *
 											 * Values expected to be one of these types:
@@ -6915,7 +6915,7 @@
 
 										// honorificSuffix
 
-											/*
+											/**
 											 * An honorific suffix following a Person's name such as M.D./PhD/MSCSW.
 											 *
 											 * Values expected to be one of these types:
@@ -6970,7 +6970,7 @@
 
 										// name
 
-											/*
+											/**
 											 * The name of the item.
 											 *
 											 * Subproperty of:
@@ -7074,7 +7074,7 @@
 
 										// alternateName [WIP]
 
-											/*
+											/**
 											 * An alias for the item.
 											 *
 											 * Values expected to be one of these types:
@@ -7896,7 +7896,7 @@
 
 								// about (MedicalWebPage only)
 
-									/*
+									/**
 									 * The subject matter of the content.
 									 *
 									 * Inverse-property: subjectOf
@@ -7954,7 +7954,7 @@
 
 								// availableService
 
-									/*
+									/**
 									 * A medical service available from this provider.
 									 *
 									 * Values expected to be one of these types:
@@ -8043,7 +8043,7 @@
 
 								// description (common)
 
-									/*
+									/**
 									 * If the common schema template part did not generate a value, get the
 									 * non-excerpt fallback value specific to this entity
 									 */
@@ -8125,7 +8125,7 @@
 
 								// description (specific property)
 
-									/*
+									/**
 									 * A description of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -8209,7 +8209,7 @@
 
 								// abstract
 
-									/*
+									/**
 									 * An abstract is a short description that summarizes a CreativeWork.
 									 *
 									 * Values expected to be one of these types:
@@ -8351,7 +8351,7 @@
 
 										// medicalSpecialty
 
-											/*
+											/**
 											 * A medical specialty of the provider.
 											 *
 											 * Values expected to be one of these types:
@@ -8402,7 +8402,7 @@
 
 										// specialty
 
-											/*
+											/**
 											 * One of the domain specialties to which this web page's content applies.
 											 *
 											 * Values expected to be one of these types:
@@ -8455,7 +8455,7 @@
 
 								// additionalType
 
-									/*
+									/**
 									 * An additional type for the item, typically used for adding more specific types
 									 * from external vocabularies in microdata syntax. This is a relationship between
 									 * something and a class that the thing is in. Typically the value is a
@@ -8672,7 +8672,7 @@
 
 								// affiliation
 
-									/*
+									/**
 									 * An organization that this person is affiliated with. For example, a
 									 * school/university, a club, or a team.
 									 *
@@ -8820,7 +8820,7 @@
 
 								// aggregateRating [WIP]
 
-									/*
+									/**
 									 * The overall rating, based on a collection of reviews or ratings, of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -9030,7 +9030,7 @@
 
 								// alumniOf [WIP]
 
-									/*
+									/**
 									 * An organization that the person is an alumni of.
 									 *
 									 * Inverse property: alumni
@@ -9043,7 +9043,7 @@
 
 								// award [WIP]
 
-									/*
+									/**
 									 * An award won by or for this item.
 									 *
 									 * Values expected to be one of these types:
@@ -9053,7 +9053,7 @@
 
 								// brand
 
-									/*
+									/**
 									 * The brand(s) associated with a product or service, or the brand(s) maintained
 									 * by an organization or business person.
 									 *
@@ -9175,7 +9175,7 @@
 
 								// containedInPlace
 
-									/*
+									/**
 									 * The basic containment relation between a place and one that contains it.
 									 * expected to be one of these types:
 									 *
@@ -9262,7 +9262,7 @@
 
 								// currenciesAccepted [WIP]
 
-									/*
+									/**
 									 * The currency accepted.
 									 *
 									 * Use standard formats:
@@ -9356,7 +9356,7 @@
 
 								// employee
 
-									/*
+									/**
 									 * Someone working for this organization.
 									 *
 									 * Values expected to be one of these types:
@@ -9430,7 +9430,7 @@
 
 								// gender
 
-									/*
+									/**
 									 * Gender of something, typically a Person, but possibly also fictional
 									 * characters, animals, etc. While https://schema.org/Male and
 									 * https://schema.org/Female may be used, text strings are also acceptable for
@@ -9566,7 +9566,7 @@
 
 								// hasCredential
 
-									/*
+									/**
 									 * A credential awarded to the Person or Organization.
 									 *
 									 * Values expected to be one of these types:
@@ -9702,7 +9702,7 @@
 
 								// hasOccupation
 
-									/*
+									/**
 									 * The Person's occupation. For past professions, use Role for expressing dates.
 									 *
 									 * Values expected to be one of these types:
@@ -9808,7 +9808,7 @@
 
 								// hasMap
 
-									/*
+									/**
 									 * A URL to a map of the place.
 									 *
 									 * Values expected to be one of these types:
@@ -9903,7 +9903,7 @@
 
 								// hasPart [excluded]
 
-									/*
+									/**
 									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork
 									 * (in some sense).
 									 *
@@ -9919,7 +9919,7 @@
 
 								// hospitalAffiliation
 
-									/*
+									/**
 									 * A hospital with which the physician or office is affiliated.
 									 *
 									 * Values expected to be one of these types:
@@ -10035,7 +10035,7 @@
 
 										// 'duns' property [WIP]
 
-											/*
+											/**
 											 * The Dun & Bradstreet DUNS number for identifying an organization or business
 											 * person.
 											 *
@@ -10106,7 +10106,7 @@
 
 										// globalLocationNumber [WIP]
 
-											/*
+											/**
 											 * The Global Location Number (GLN, sometimes also referred to as International
 											 * Location Number or ILN) of the respective organization, person, or place. The
 											 * GLN is a 13-digit number used to identify parties and physical locations.
@@ -10178,7 +10178,7 @@
 
 										// isicV4 [WIP]
 
-											/*
+											/**
 											 * The International Standard of Industrial Classification of All Economic
 											 * Activities (ISIC), Revision 4 code for a particular organization, business
 											 * person, or place.
@@ -10250,7 +10250,7 @@
 
 										// leiCode [WIP]
 
-											/*
+											/**
 											 * An organization identifier that uniquely identifies a legal entity as defined
 											 * in ISO 17442.
 											 *
@@ -10321,7 +10321,7 @@
 
 										// naics [WIP]
 
-											/*
+											/**
 											 * The North American Industry Classification System (NAICS) code for a particular
 											 * organization or business person.
 											 *
@@ -10392,7 +10392,7 @@
 
 										// taxID [WIP]
 
-											/*
+											/**
 											 * The Tax / Fiscal ID of the organization or person (e.g., the TIN in the US;
 											 * the CIF/NIF in Spain).
 											 *
@@ -10501,7 +10501,7 @@
 
 										// vatID [WIP]
 
-											/*
+											/**
 											 * The Value-added Tax ID of the organization or person.
 											 *
 											 *     - Text
@@ -10569,7 +10569,7 @@
 
 										// iso6523Code [WIP]
 
-											/*
+											/**
 											 * An organization identifier as defined in ISO 6523(-1). Note that many existing
 											 * organization identifiers such as leiCode, duns and vatID can be expressed as an
 											 * ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier
@@ -10662,7 +10662,7 @@
 												$nesting_level == 0
 											) {
 
-												/*
+												/**
 												 * The identifier property represents any kind of identifier for any kind of
 												 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
 												 * properties for representing many of these, either as textual strings or as
@@ -11026,7 +11026,7 @@
 
 								// image (specific property)
 
-									/*
+									/**
 									 * An image of the item. This can be a URL or a fully described ImageObject.
 									 *
 									 * Values expected to be one of these types:
@@ -11101,7 +11101,7 @@
 
 								// isAcceptingNewPatients
 
-									/*
+									/**
 									 * Whether the provider is accepting new patients.
 									 *
 									 * Values expected to be one of these types:
@@ -11191,7 +11191,7 @@
 
 								// isAccessibleForFree [WIP]
 
-									/*
+									/**
 									 * A flag to signal that the item, event, or place is accessible for free.
 									 *
 									 * Values expected to be one of these types:
@@ -11240,7 +11240,7 @@
 
 								// jobTitle
 
-									/*
+									/**
 									 * The job title of the person (for example, Financial Manager).
 									 *
 									 * Values expected to be one of these types:
@@ -11433,7 +11433,7 @@
 
 								// knowsLanguage
 
-									/*
+									/**
 									 * Of a Person, and less typically of an Organization, to indicate a known
 									 * language. We do not distinguish skill levels or reading / writing / speaking /
 									 * signing here. Use language codes from the IETF BCP 47 standard.
@@ -11540,7 +11540,7 @@
 
 								// location (specific property)
 
-									/*
+									/**
 									 * The location of, for example, where an event is happening, where an
 									 * organization is located, or where an action takes place.
 									 *
@@ -11632,7 +11632,7 @@
 
 								// mainEntity
 
-									/*
+									/**
 									 * Indicates the primary entity described in some page or other CreativeWork.
 									 *
 									 * Inverse-property: mainEntityOfPage
@@ -11719,7 +11719,7 @@
 
 								// makesOffer [WIP]
 
-									/*
+									/**
 									 * A pointer to products or services offered by the organization or person.
 									 *
 									 * Inverse-property: offeredBy
@@ -11731,7 +11731,7 @@
 
 								// memberOf
 
-									/*
+									/**
 									 * An Organization (or ProgramMembership) to which this Person or Organization
 									 * belongs.
 									 *
@@ -11868,7 +11868,7 @@
 
 								// offers [WIP]
 
-									/*
+									/**
 									 * An offer to provide this item—for example, an offer to sell a product, rent the
 									 * DVD of a movie, perform a service, or give away tickets to an event.
 									 *
@@ -11891,7 +11891,7 @@
 
 								// parentOrganization
 
-									/*
+									/**
 									 * The larger organization that this organization is a subOrganization of, if any.
 									 *
 									 * Values expected to be one of these types:
@@ -12003,7 +12003,7 @@
 
 								// paymentAccepted [WIP]
 
-									/*
+									/**
 									 * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
 									 *
 									 * Values expected to be one of these types:
@@ -12090,7 +12090,7 @@
 
 								// photo
 
-									/*
+									/**
 									 * A photograph of this place.
 									 *
 									 * Values expected to be one of these types:
@@ -12165,7 +12165,7 @@
 
 								// potentialAction [WIP]
 
-									/*
+									/**
 									 * Indicates a potential Action, which describes an idealized action in which this
 									 * thing would play an 'object' role.
 									 *
@@ -12240,7 +12240,7 @@
 
 								// primaryImageOfPage [WIP]
 
-									/*
+									/**
 									 * Indicates the main image on the page.
 									 *
 									 * Values expected to be one of these types:
@@ -12250,7 +12250,7 @@
 
 								// review [WIP]
 
-									/*
+									/**
 									 * A review of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -12260,7 +12260,7 @@
 
 								// sameAs
 
-									/*
+									/**
 									 * URL of a reference Web page that unambiguously indicates the item's identity
 									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 									 * website).
@@ -12333,7 +12333,7 @@
 
 								// speakable [WIP]
 
-									/*
+									/**
 									 * Indicates sections of a Web page that are particularly 'speakable' in the sense
 									 * of being highlighted as being especially appropriate for text-to-speech
 									 * conversion. Other sections of a page may also be usefully spoken in particular
@@ -12367,7 +12367,7 @@
 
 								// timeRequired [WIP]
 
-									/*
+									/**
 									 * Approximate or typical time it usually takes to work with or through the
 									 * content of this work for the typical or target audience.
 									 *
@@ -12378,7 +12378,7 @@
 
 								// video
 
-									/*
+									/**
 									 * An embedded video object.
 									 *
 									 * Values expected to be one of these types:
@@ -12674,7 +12674,7 @@
 
 								// workLocation
 
-									/*
+									/**
 									 * A contact location for a person's place of work.
 									 *
 									 * Values expected to be one of these types:
@@ -12763,7 +12763,7 @@
 
 								// worksFor
 
-									/*
+									/**
 									 * Organizations that the person works for.
 									 *
 									 * Values expected to be one of these types:
@@ -12879,7 +12879,7 @@
 
 								// knowsAbout
 
-									/*
+									/**
 									 * Of a Person, and less typically of an Organization, to indicate a topic that is
 									 * known about — suggesting possible expertise but not implying it. We do not
 									 * distinguish skill levels here, or relate this to educational content, events,
@@ -13108,7 +13108,7 @@
 
 								// mentions
 
-									/*
+									/**
 									 * Indicates that the CreativeWork contains a reference to, but is not necessarily
 									 * about a concept.
 									 *
@@ -13287,7 +13287,7 @@
 
 								// relatedLink
 
-									/*
+									/**
 									 * A link related to this web page, for example to other related web pages.
 									 *
 									 * Values expected to be one of these types:
@@ -13361,7 +13361,7 @@
 
 								// significantLink
 
-									/*
+									/**
 									 * One of the more significant URLs on the page. Typically, these are the
 									 * non-navigation links that are clicked on the most.
 									 *
@@ -13436,7 +13436,7 @@
 
 								// keywords
 
-									/*
+									/**
 									 * Keywords or tags used to describe some item. Multiple textual entries in a
 									 * keywords list are typically delimited by commas, or by repeating the property.
 									 *
@@ -13781,7 +13781,7 @@
 							)
 						) {
 
-							/*
+							/**
 							 * The transient exists.
 							 * Return the variable.
 							 */
@@ -13814,7 +13814,7 @@
 
 						} else {
 
-							/*
+							/**
 							 * The transient does not exist.
 							 * Define the variable again.
 							 */
@@ -14157,7 +14157,7 @@
 
 								// url
 
-									/*
+									/**
 									 * URL of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -15739,7 +15739,7 @@
 
 								// name
 
-									/*
+									/**
 									 * The name of the item.
 									 *
 									 * Subproperty of:
@@ -15803,7 +15803,7 @@
 
 								// about (MedicalWebPage only)
 
-									/*
+									/**
 									 * The subject matter of the content.
 									 *
 									 * Inverse-property: subjectOf
@@ -15854,7 +15854,7 @@
 
 								// abstract
 
-									/*
+									/**
 									 * An abstract is a short description that summarizes a CreativeWork.
 									 *
 									 * Values expected to be one of these types:
@@ -15923,7 +15923,7 @@
 
 								// additionalType
 
-									/*
+									/**
 									 * An additional type for the item, typically used for adding more specific types
 									 * from external vocabularies in microdata syntax. This is a relationship between
 									 * something and a class that the thing is in. Typically the value is a
@@ -16069,7 +16069,7 @@
 
 								// address
 
-									/*
+									/**
 									 * Physical address of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -16329,7 +16329,7 @@
 
 								// aggregateRating [WIP]
 
-									/*
+									/**
 									 * The overall rating, based on a collection of reviews or ratings, of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -16339,7 +16339,7 @@
 
 								// alternateName
 
-									/*
+									/**
 									 * An alias for the item.
 									 *
 									 * Values expected to be one of these types:
@@ -16458,7 +16458,7 @@
 
 								// availableService
 
-									/*
+									/**
 									 * A medical service available from this provider.
 									 *
 									 * Values expected to be one of these types:
@@ -16529,7 +16529,7 @@
 
 								// award [WIP]
 
-									/*
+									/**
 									 * An award won by or for this item.
 									 *
 									 * Values expected to be one of these types:
@@ -16539,7 +16539,7 @@
 
 								// brand
 
-									/*
+									/**
 									 * The brand(s) associated with a product or service, or the brand(s) maintained
 									 * by an organization or business person.
 									 *
@@ -16621,7 +16621,7 @@
 
 								// contactPoint [WIP]
 
-									/*
+									/**
 									 * A contact point for a person or organization.
 									 *
 									 *     - ContactPoint
@@ -16637,7 +16637,7 @@
 
 								// containedInPlace
 
-									/*
+									/**
 									 * The basic containment relation between a place and one that contains it.
 									 * expected to be one of these types:
 									 *
@@ -16708,7 +16708,7 @@
 
 								// containsPlace
 
-									/*
+									/**
 									 * The basic containment relation between a place and another that it contains.
 									 *
 									 * Inverse property: 'containedInPlace'
@@ -16814,7 +16814,7 @@
 
 								// currenciesAccepted [WIP]
 
-									/*
+									/**
 									 * The currency accepted.
 									 *
 									 * Use standard formats:
@@ -16830,7 +16830,7 @@
 
 								// department
 
-									/*
+									/**
 									 * A relationship between an organization and a department of that organization,
 									 * also described as an organization (allowing different urls, logos, opening
 									 * hours). For example: a store with a pharmacy, or a bakery with a cafe.
@@ -16936,7 +16936,7 @@
 
 								// description (specific property)
 
-									/*
+									/**
 									 * A description of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -17002,7 +17002,7 @@
 
 								// diversityPolicy [WIP]
 
-									/*
+									/**
 									 * Statement on diversity policy by an Organization
 									 * (e.g., a NewsMediaOrganization).
 									 *
@@ -17021,7 +17021,7 @@
 
 								// diversityStaffingReport [WIP]
 
-									/*
+									/**
 									 * For an Organization (often but not necessarily a NewsMediaOrganization), a
 									 * report on staffing diversity issues. In a news context this might be for
 									 * example ASNE or RTDNA (US) reports, or self-reported.
@@ -17038,7 +17038,7 @@
 
 								// ethicsPolicy [WIP]
 
-									/*
+									/**
 									 * Statement about ethics policy, (e.g., journalistic and publishing practices of
 									 * a NewsMediaOrganization; food source policies of a Restaurant).
 									 *
@@ -17058,7 +17058,7 @@
 
 								// employee
 
-									/*
+									/**
 									 * Someone working for this organization.
 									 *
 									 * Values expected to be one of these types:
@@ -17141,7 +17141,7 @@
 
 								// event [WIP]
 
-									/*
+									/**
 									 * Upcoming or past event associated with this place, organization, or action.
 									 *
 									 * Values expected to be one of these types:
@@ -17151,7 +17151,7 @@
 
 								// foundingDate [WIP]
 
-									/*
+									/**
 									 * The date that this organization was founded.
 									 *
 									 * Values expected to be one of these types:
@@ -17161,7 +17161,7 @@
 
 								// geo (specific property)
 
-									/*
+									/**
 									 * The geo coordinates of the place.
 									 *
 									 * Values expected to be one of these types:
@@ -17225,7 +17225,7 @@
 
 								// hasCredential [WIP]
 
-									/*
+									/**
 									 * A credential awarded to the Person or Organization.
 									 *
 									 * Values expected to be one of these types:
@@ -17239,7 +17239,7 @@
 
 								// hasDriveThroughService [WIP]
 
-									/*
+									/**
 									 * Indicates whether some facility (e.g., FoodEstablishment, CovidTestingFacility)
 									 * offers a service that can be used by driving through in a car.
 									 *
@@ -17257,7 +17257,7 @@
 
 								// hasMap
 
-									/*
+									/**
 									 * A URL to a map of the place.
 									 *
 									 * Values expected to be one of these types:
@@ -17321,7 +17321,7 @@
 
 								// hasPart [excluded]
 
-									/*
+									/**
 									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork
 									 * (in some sense).
 									 *
@@ -17341,7 +17341,7 @@
 
 										// 'duns' property [WIP]
 
-											/*
+											/**
 											 * The Dun & Bradstreet DUNS number for identifying an organization or business
 											 * person.
 											 *
@@ -17352,7 +17352,7 @@
 
 										// globalLocationNumber [WIP]
 
-											/*
+											/**
 											 * The Global Location Number (GLN, sometimes also referred to as International
 											 * Location Number or ILN) of the respective organization, person, or place. The
 											 * GLN is a 13-digit number used to identify parties and physical locations.
@@ -17364,7 +17364,7 @@
 
 										// isicV4 [WIP]
 
-											/*
+											/**
 											 * The International Standard of Industrial Classification of All Economic
 											 * Activities (ISIC), Revision 4 code for a particular organization, business
 											 * person, or place.
@@ -17376,7 +17376,7 @@
 
 										// leiCode [WIP]
 
-											/*
+											/**
 											 * An organization identifier that uniquely identifies a legal entity as defined
 											 * in ISO 17442.
 											 *
@@ -17387,7 +17387,7 @@
 
 										// naics [WIP]
 
-											/*
+											/**
 											 * The North American Industry Classification System (NAICS) code for a particular
 											 * organization or business person.
 											 *
@@ -17398,7 +17398,7 @@
 
 										// taxID [WIP]
 
-											/*
+											/**
 											 * The Tax / Fiscal ID of the organization or person (e.g., the TIN in the US;
 											 * the CIF/NIF in Spain).
 											 *
@@ -17409,7 +17409,7 @@
 
 										// vatID [WIP]
 
-											/*
+											/**
 											 * The Value-added Tax ID of the organization or person.
 											 *
 											 *     - Text
@@ -17417,7 +17417,7 @@
 
 										// iso6523Code [WIP]
 
-											/*
+											/**
 											 * An organization identifier as defined in ISO 6523(-1). Note that many existing
 											 * organization identifiers such as leiCode, duns and vatID can be expressed as an
 											 * ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier
@@ -17446,7 +17446,7 @@
 												)
 											) {
 
-												/*
+												/**
 												 * The identifier property represents any kind of identifier for any kind of
 												 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
 												 * properties for representing many of these, either as textual strings or as
@@ -17936,7 +17936,7 @@
 
 								// image (specific property)
 
-									/*
+									/**
 									 * An image of the item. This can be a URL or a fully described ImageObject.
 									 *
 									 * Values expected to be one of these types:
@@ -17989,7 +17989,7 @@
 
 								// isAcceptingNewPatients [WIP]
 
-									/*
+									/**
 									 * Whether the provider is accepting new patients.
 									 *
 									 * Values expected to be one of these types:
@@ -18003,7 +18003,7 @@
 
 								// isAccessibleForFree (LocalBusiness) [WIP]
 
-									/*
+									/**
 									 * A flag to signal that the item, event, or place is accessible for free.
 									 *
 									 * Values expected to be one of these types:
@@ -18023,7 +18023,7 @@
 
 								// knowsLanguage [WIP]
 
-									/*
+									/**
 									 * Of a Person, and less typically of an Organization, to indicate a known
 									 * language. We do not distinguish skill levels or reading / writing / speaking /
 									 * signing here. Use language codes from the IETF BCP 47 standard.
@@ -18086,7 +18086,7 @@
 
 								// legalName [WIP]
 
-									/*
+									/**
 									 * The official name of the organization (e.g., the registered company name).
 									 *
 									 *     - Text
@@ -18094,7 +18094,7 @@
 
 								// logo [WIP]
 
-									/*
+									/**
 									 * An associated logo.
 									 *
 									 * Values expected to be one of these types:
@@ -18105,7 +18105,7 @@
 
 								// mainEntity
 
-									/*
+									/**
 									 * Indicates the primary entity described in some page or other CreativeWork.
 									 *
 									 * Inverse-property: mainEntityOfPage
@@ -18176,7 +18176,7 @@
 
 								// makesOffer [WIP]
 
-									/*
+									/**
 									 * A pointer to products or services offered by the organization or person.
 									 *
 									 * Inverse-property: offeredBy
@@ -18188,7 +18188,7 @@
 
 								// maximumAttendeeCapacity [WIP]
 
-									/*
+									/**
 									 * The total number of individuals that may attend an event or venue.
 									 *
 									 * Values expected to be one of these types:
@@ -18198,7 +18198,7 @@
 
 								// medicalSpecialty (specific property)
 
-									/*
+									/**
 									 * A medical specialty of the provider.
 									 *
 									 * Values expected to be one of these types:
@@ -18254,7 +18254,7 @@
 
 								// memberOf [WIP]
 
-									/*
+									/**
 									 * An Organization (or ProgramMembership) to which this Person or Organization
 									 * belongs.
 									 *
@@ -18372,7 +18372,7 @@
 
 								// nonprofitStatus [WIP]
 
-									/*
+									/**
 									 * nonprofitStatus indicates the legal status of a non-profit organization in its
 									 * primary place of business.
 									 *
@@ -18387,7 +18387,7 @@
 
 								// numberOfEmployees [WIP]
 
-									/*
+									/**
 									 * The number of employees in an organization (e.g., business).
 									 *
 									 * Values expected to be one of these types:
@@ -18397,7 +18397,7 @@
 
 								// offers [WIP]
 
-									/*
+									/**
 									 * An offer to provide this item—for example, an offer to sell a product, rent the
 									 * DVD of a movie, perform a service, or give away tickets to an event.
 									 *
@@ -18420,7 +18420,7 @@
 
 								// openingHours [WIP]
 
-									/*
+									/**
 									 * The general opening hours for a business. Opening hours can be specified as a
 									 * weekly time range, starting with days, then times per day. Multiple days can be
 									 * listed with commas ',' separating each day. Day or time ranges are specified
@@ -18445,7 +18445,7 @@
 
 								// openingHoursSpecification [WIP]
 
-									/*
+									/**
 									 * The opening hours of a certain place.
 									 *
 									 * Values expected to be one of these types:
@@ -18455,7 +18455,7 @@
 
 								// parentOrganization
 
-									/*
+									/**
 									 * The larger organization that this organization is a subOrganization of, if any.
 									 *
 									 * Values expected to be one of these types:
@@ -18535,7 +18535,7 @@
 
 								// paymentAccepted [WIP]
 
-									/*
+									/**
 									 * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
 									 *
 									 * Values expected to be one of these types:
@@ -18545,7 +18545,7 @@
 
 								// photo
 
-									/*
+									/**
 									 * A photograph of this place.
 									 *
 									 * Values expected to be one of these types:
@@ -18598,7 +18598,7 @@
 
 								// potentialAction [WIP]
 
-									/*
+									/**
 									 * Indicates a potential Action, which describes an idealized action in which this
 									 * thing would play an 'object' role.
 									 *
@@ -18673,7 +18673,7 @@
 
 								// primaryImageOfPage [WIP]
 
-									/*
+									/**
 									 * Indicates the main image on the page.
 									 *
 									 * Values expected to be one of these types:
@@ -18683,7 +18683,7 @@
 
 								// publicAccess [WIP]
 
-									/*
+									/**
 									 * A flag to signal that the Place is open to public visitors. If this property is
 									 * omitted there is no assumed default boolean value.
 									 *
@@ -18694,7 +18694,7 @@
 
 								// review [WIP]
 
-									/*
+									/**
 									 * A review of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -18704,7 +18704,7 @@
 
 								// sameAs
 
-									/*
+									/**
 									 * URL of a reference Web page that unambiguously indicates the item's identity
 									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 									 * website).
@@ -18764,7 +18764,7 @@
 
 								// speakable [WIP]
 
-									/*
+									/**
 									 * Indicates sections of a Web page that are particularly 'speakable' in the sense
 									 * of being highlighted as being especially appropriate for text-to-speech
 									 * conversion. Other sections of a page may also be usefully spoken in particular
@@ -18798,7 +18798,7 @@
 
 								// specialOpeningHoursSpecification
 
-									/*
+									/**
 									 * The special opening hours of a certain place.
 									 *
 									 * Use this to explicitly override general opening hours brought in scope by
@@ -18861,7 +18861,7 @@
 
 								// specialty
 
-									/*
+									/**
 									 * One of the domain specialties to which this web page's content applies.
 									 *
 									 * Values expected to be one of these types:
@@ -18917,7 +18917,7 @@
 
 								// subOrganization
 
-									/*
+									/**
 									 * A relationship between two organizations where the first includes the second
 									 * (e.g., as a subsidiary).
 									 *
@@ -19026,7 +19026,7 @@
 
 								// timeRequired [WIP]
 
-									/*
+									/**
 									 * Approximate or typical time it usually takes to work with or through the
 									 * content of this work for the typical or target audience.
 									 *
@@ -19037,7 +19037,7 @@
 
 								// knowsAbout
 
-									/*
+									/**
 									 * Of a Person, and less typically of an Organization, to indicate a topic that is
 									 * known about — suggesting possible expertise but not implying it. We do not
 									 * distinguish skill levels here, or relate this to educational content, events,
@@ -19171,7 +19171,7 @@
 
 								// mentions
 
-									/*
+									/**
 									 * Indicates that the CreativeWork contains a reference to, but is not necessarily
 									 * about a concept.
 									 *
@@ -19374,7 +19374,7 @@
 
 								// relatedLink
 
-									/*
+									/**
 									 * A link related to this web page, for example to other related web pages.
 									 *
 									 * Values expected to be one of these types:
@@ -19430,7 +19430,7 @@
 
 								// significantLink
 
-									/*
+									/**
 									 * One of the more significant URLs on the page. Typically, these are the
 									 * non-navigation links that are clicked on the most.
 									 *
@@ -19487,7 +19487,7 @@
 
 								// keywords
 
-									/*
+									/**
 									 * Keywords or tags used to describe some item. Multiple textual entries in a
 									 * keywords list are typically delimited by commas, or by repeating the property.
 									 *
@@ -19792,7 +19792,7 @@
 								)
 							) {
 
-							/*
+							/**
 							 * The transient exists.
 							 * Return the variable.
 							 */
@@ -19825,7 +19825,7 @@
 
 						} else {
 
-							/*
+							/**
 							 * The transient does not exist.
 							 * Define the variable again.
 							 */
@@ -19948,7 +19948,7 @@
 
 								// url
 
-									/*
+									/**
 									 * URL of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -20329,7 +20329,7 @@
 
 								// name
 
-									/*
+									/**
 									 * The name of the item.
 									 *
 									 * Subproperty of:
@@ -20393,7 +20393,7 @@
 
 								// about (MedicalWebPage only)
 
-									/*
+									/**
 									 * The subject matter of the content.
 									 *
 									 * Inverse-property: subjectOf
@@ -20444,7 +20444,7 @@
 
 								// abstract
 
-									/*
+									/**
 									 * An abstract is a short description that summarizes a CreativeWork.
 									 *
 									 * Values expected to be one of these types:
@@ -20513,7 +20513,7 @@
 
 								// additionalType
 
-									/*
+									/**
 									 * An additional type for the item, typically used for adding more specific types
 									 * from external vocabularies in microdata syntax. This is a relationship between
 									 * something and a class that the thing is in. Typically the value is a
@@ -20607,7 +20607,7 @@
 
 								// aggregateRating [excluded]
 
-									/*
+									/**
 									 * The overall rating, based on a collection of reviews or ratings, of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -20620,7 +20620,7 @@
 
 								// alternateName
 
-									/*
+									/**
 									 * An alias for the item.
 									 *
 									 * Values expected to be one of these types:
@@ -20701,7 +20701,7 @@
 
 								// citation [WIP]
 
-									/*
+									/**
 									 * A citation or reference to another creative work, such as another publication,
 									 * web page, scholarly article, etc.
 									 *
@@ -20713,7 +20713,7 @@
 
 								// code
 
-									/*
+									/**
 									 * A medical code for the entity, taken from a controlled vocabulary or ontology
 									 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
 									 *
@@ -20795,7 +20795,7 @@
 
 								// contentLocation [excluded]
 
-									/*
+									/**
 									 * The location depicted or described in the content. For example, the location in
 									 * a photograph or painting.
 									 *
@@ -20809,7 +20809,7 @@
 
 								// description (specific property)
 
-									/*
+									/**
 									 * A description of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -20875,7 +20875,7 @@
 
 								// disambiguatingDescription [WIP]
 
-									/*
+									/**
 									 * A sub property of description. A short description of the item used to
 									 * disambiguate from other, similar items. Information from other properties (in
 									 * particular, name) may be necessary for the description to be useful for
@@ -20888,7 +20888,7 @@
 
 								// encodingFormat [WIP]
 
-									/*
+									/**
 									 * Media type typically expressed using a MIME format (see IANA site and MDN
 									 * reference), (e.g., application/zip for a SoftwareApplication binary,
 									 * audio/mpeg for .mp3).
@@ -20909,7 +20909,7 @@
 
 								// guideline [WIP]
 
-									/*
+									/**
 									 * A medical guideline related to this entity.
 									 *
 									 * Values expected to be one of these types:
@@ -20919,7 +20919,7 @@
 
 								// hasPart [excluded]
 
-									/*
+									/**
 									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork
 									 * (in some sense).
 									 *
@@ -20935,7 +20935,7 @@
 
 								// identifier [WIP]
 
-									/*
+									/**
 									 * The identifier property represents any kind of identifier for any kind of
 									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
 									 * properties for representing many of these, either as textual strings or as URL
@@ -20950,7 +20950,7 @@
 
 								// image
 
-									/*
+									/**
 									 * An image of the item. This can be a URL or a fully described ImageObject.
 									 *
 									 * Values expected to be one of these types:
@@ -21085,7 +21085,7 @@
 
 								// legalStatus [excluded]
 
-									/*
+									/**
 									 * The drug or supplement's legal status, including any controlled substance
 									 * schedules that apply.
 									 *
@@ -21101,7 +21101,7 @@
 
 								// mainEntity [WIP]
 
-									/*
+									/**
 									 * Indicates the primary entity described in some page or other CreativeWork.
 									 *
 									 * Inverse-property: mainEntityOfPage
@@ -21113,7 +21113,7 @@
 
 								// medicineSystem
 
-									/*
+									/**
 									 * The system of medicine that includes this MedicalEntity
 									 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
 									 *
@@ -21182,7 +21182,7 @@
 
 								// offers [WIP]
 
-									/*
+									/**
 									 * An offer to provide this item—for example, an offer to sell a product, rent the
 									 * DVD of a movie, perform a service, or give away tickets to an event.
 									 *
@@ -21205,7 +21205,7 @@
 
 								// potentialAction [WIP]
 
-									/*
+									/**
 									 * Indicates a potential Action, which describes an idealized action in which this
 									 * thing would play an 'object' role.
 									 *
@@ -21280,7 +21280,7 @@
 
 								// primaryImageOfPage [WIP]
 
-									/*
+									/**
 									 * Indicates the main image on the page.
 									 *
 									 * Values expected to be one of these types:
@@ -21290,7 +21290,7 @@
 
 								// recognizingAuthority [WIP]
 
-									/*
+									/**
 									 * If applicable, the organization that officially recognizes this entity as part
 									 * of its endorsed system of medicine.
 									 *
@@ -21301,7 +21301,7 @@
 
 								// relatedLink [WIP]
 
-									/*
+									/**
 									 * A link related to this web page, for example to other related web pages.
 									 *
 									 * Values expected to be one of these types:
@@ -21311,7 +21311,7 @@
 
 								// relevantSpecialty
 
-									/*
+									/**
 									 * If applicable, a medical specialty in which this entity is relevant.
 									 *
 									 * Values expected to be one of these types:
@@ -21380,7 +21380,7 @@
 
 								// sameAs
 
-									/*
+									/**
 									 * URL of a reference Web page that unambiguously indicates the item's identity
 									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 									 * website).
@@ -21451,7 +21451,7 @@
 
 								// speakable [WIP]
 
-									/*
+									/**
 									 * Indicates sections of a Web page that are particularly 'speakable' in the sense
 									 * of being highlighted as being especially appropriate for text-to-speech
 									 * conversion. Other sections of a page may also be usefully spoken in particular
@@ -21485,7 +21485,7 @@
 
 								// specialty [WIP]
 
-									/*
+									/**
 									 * One of the domain specialities to which this web page's content applies.
 									 *
 									 * Values expected to be one of these types:
@@ -21495,7 +21495,7 @@
 
 								// study [WIP]
 
-									/*
+									/**
 									 * A medical study or trial related to this entity.
 									 *
 									 * Values expected to be one of these types:
@@ -21505,7 +21505,7 @@
 
 								// text [WIP]
 
-									/*
+									/**
 									 * The textual content of this CreativeWork.
 									 *
 									 * Values expected to be one of these types:
@@ -21515,7 +21515,7 @@
 
 								// timeRequired [WIP]
 
-									/*
+									/**
 									 * Approximate or typical time it usually takes to work with or through the
 									 * content of this work for the typical or target audience.
 									 *
@@ -21526,7 +21526,7 @@
 
 								// video [WIP]
 
-									/*
+									/**
 									 * An embedded video object.
 									 *
 									 * Values expected to be one of these types:
@@ -21537,7 +21537,7 @@
 
 								// mentions [WIP]
 
-									/*
+									/**
 									 * Indicates that the CreativeWork contains a reference to, but is not necessarily
 									 * about a concept.
 									 *
@@ -21548,7 +21548,7 @@
 
 								// significantLink [WIP]
 
-									/*
+									/**
 									 * One of the more significant URLs on the page. Typically, these are the
 									 * non-navigation links that are clicked on the most.
 									 *
@@ -21559,7 +21559,7 @@
 
 								// keywords [WIP]
 
-									/*
+									/**
 									 * Keywords or tags used to describe some item. Multiple textual entries in a
 									 * keywords list are typically delimited by commas, or by repeating the property.
 									 *
@@ -21770,7 +21770,7 @@
 							)
 						) {
 
-							/*
+							/**
 							 * The transient exists.
 							 * Return the variable.
 							 */
@@ -21803,7 +21803,7 @@
 
 						} else {
 
-							/*
+							/**
 							 * The transient does not exist.
 							 * Define the variable again.
 							 */
@@ -21974,7 +21974,7 @@
 
 								// url
 
-									/*
+									/**
 									 * URL of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -22533,7 +22533,7 @@
 
 								// description (common)
 
-									/*
+									/**
 									 * If the common schema template part did not generate a value, get the
 									 * non-excerpt fallback value specific to this entity
 									 */
@@ -22634,7 +22634,7 @@
 
 								// name
 
-									/*
+									/**
 									 * The name of the item.
 									 *
 									 * Subproperty of:
@@ -22694,7 +22694,7 @@
 
 								// about [WIP]
 
-									/*
+									/**
 									 * The subject matter of the content.
 									 *
 									 * Inverse-property: subjectOf
@@ -22776,7 +22776,7 @@
 
 								// abstract
 
-									/*
+									/**
 									 * An abstract is a short description that summarizes a CreativeWork.
 									 *
 									 * Values expected to be one of these types:
@@ -22840,7 +22840,7 @@
 
 								// additionalType
 
-									/*
+									/**
 									 * An additional type for the item, typically used for adding more specific types
 									 * from external vocabularies in microdata syntax. This is a relationship between
 									 * something and a class that the thing is in. Typically the value is a
@@ -22916,7 +22916,7 @@
 
 								// aggregateRating [excluded]
 
-									/*
+									/**
 									 * The overall rating, based on a collection of reviews or ratings, of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -22929,7 +22929,7 @@
 
 								// alternateName
 
-									/*
+									/**
 									 * An alias for the item.
 									 *
 									 * Values expected to be one of these types:
@@ -23003,7 +23003,7 @@
 
 								// articleBody
 
-									/*
+									/**
 									 * The actual body of the article.
 									 *
 									 * Values expected to be one of these types:
@@ -23088,7 +23088,7 @@
 
 								// audio [excluded]
 
-									/*
+									/**
 									 * An embedded audio object.
 									 *
 									 * Values expected to be one of these types:
@@ -23106,7 +23106,7 @@
 
 								// award [excluded]
 
-									/*
+									/**
 									 * An award won by or for this item.
 									 *
 									 * Values expected to be one of these types:
@@ -23119,7 +23119,7 @@
 
 								// bitrate (CreativeWork only) [WIP]
 
-									/*
+									/**
 									 * The bitrate of the media object.
 									 *
 									 * Values expected to be one of these types:
@@ -23129,7 +23129,7 @@
 
 								// caption (CreativeWork only) [WIP]
 
-									/*
+									/**
 									 * The caption for this object. For downloadable machine formats (closed caption,
 									 * subtitles etc.) use MediaObject and indicate the encodingFormat.
 									 *
@@ -23141,7 +23141,7 @@
 
 								// citation [excluded]
 
-									/*
+									/**
 									 * A citation or reference to another creative work, such as another publication,
 									 * web page, scholarly article, etc.
 									 *
@@ -23156,7 +23156,7 @@
 
 								// contentLocation [excluded]
 
-									/*
+									/**
 									 * The location depicted or described in the content. For example, the location in
 									 * a photograph or painting.
 									 *
@@ -23170,7 +23170,7 @@
 
 								// contentSize
 
-									/*
+									/**
 									 * File size in (mega/kilo)bytes.
 									 *
 									 * Values expected to be one of these types:
@@ -23226,7 +23226,7 @@
 
 								// contentUrl
 
-									/*
+									/**
 									 * Actual bytes of the media object, for example the image file or video file.
 									 *
 									 * Values expected to be one of these types:
@@ -23282,7 +23282,7 @@
 
 								// description (specific property)
 
-									/*
+									/**
 									 * A description of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -23343,7 +23343,7 @@
 
 								// disambiguatingDescription [excluded]
 
-									/*
+									/**
 									 * A sub property of description. A short description of the item used to
 									 * disambiguate from other, similar items. Information from other properties (in
 									 * particular, name) may be necessary for the description to be useful for
@@ -23359,7 +23359,7 @@
 
 								// duration
 
-									/*
+									/**
 									 * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date
 									 * format.
 									 *
@@ -23416,7 +23416,7 @@
 
 								// embeddedTextCaption
 
-									/*
+									/**
 									 * Represents textual captioning from a MediaObject (e.g., text of a 'meme').
 									 *
 									 * Values expected to be one of these types:
@@ -23490,7 +23490,7 @@
 
 								// embedUrl
 
-									/*
+									/**
 									 * A URL pointing to a player for a specific video. In general, this is the
 									 * information in the src element of an embed tag and should not be the same as
 									 * the content of the loc tag.
@@ -23548,7 +23548,7 @@
 
 								// encodingFormat
 
-									/*
+									/**
 									 * Media type typically expressed using a MIME format (see IANA site and MDN
 									 * reference) (e.g., application/zip for a SoftwareApplication binary, audio/mpeg
 									 * for .mp3).
@@ -23619,7 +23619,7 @@
 
 								// hasDigitalDocumentPermission
 
-									/*
+									/**
 									 * A permission related to the access to this document (e.g., permission to read
 									 * or  write an electronic document). For a public document, specify a grantee
 									 * with an  Audience with audienceType equal to "public".
@@ -23688,7 +23688,7 @@
 
 								// hasPart [WIP]
 
-									/*
+									/**
 									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork
 									 * (in some sense).
 									 *
@@ -23710,7 +23710,7 @@
 
 								// headline (CreativeWork only) [WIP]
 
-									/*
+									/**
 									 * Headline of the article.
 									 *
 									 * Values expected to be one of these types:
@@ -23726,7 +23726,7 @@
 
 								// height
 
-									/*
+									/**
 									 * The height of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -23788,7 +23788,7 @@
 
 								// identifier [excluded]
 
-									/*
+									/**
 									 * The identifier property represents any kind of identifier for any kind of
 									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
 									 * properties for representing many of these, either as textual strings or as URL
@@ -23806,7 +23806,7 @@
 
 								// image (specific property)
 
-									/*
+									/**
 									 * An image of the item. This can be a URL or a fully described ImageObject.
 									 *
 									 * Values expected to be one of these types:
@@ -23861,7 +23861,7 @@
 
 								// inLanguage (CreativeWork only) [WIP]
 
-									/*
+									/**
 									 * The language of the content or performance or used in an action. Please use one
 									 * of the language codes from the IETF BCP 47 standard. See also availableLanguage.
 									 *
@@ -23882,7 +23882,7 @@
 
 								// isAccessibleForFree (CreativeWork only)
 
-									/*
+									/**
 									 * A flag to signal that the item, event, or place is accessible for free.
 									 *
 									 * Values expected to be one of these types:
@@ -23922,7 +23922,7 @@
 
 								// isBasedOn (CreativeWork only) [WIP]
 
-									/*
+									/**
 									 * A resource from which this work is derived or from which it is a modification
 									 * or adaptation.
 									 *
@@ -23944,7 +23944,7 @@
 
 								// isPartOf (CreativeWork only)
 
-									/*
+									/**
 									 * Indicates an item or CreativeWork that this item, or CreativeWork (in some
 									 * sense), is part of.
 									 *
@@ -23997,7 +23997,7 @@
 
 								// keywords [WIP]
 
-									/*
+									/**
 									 * Keywords or tags used to describe some item. Multiple textual entries in a
 									 * keywords list are typically delimited by commas, or by repeating the property.
 									 *
@@ -24010,7 +24010,7 @@
 
 								// mainEntity [WIP]
 
-									/*
+									/**
 									 * Indicates the primary entity described in some page or other CreativeWork.
 									 *
 									 * Inverse-property: mainEntityOfPage
@@ -24022,7 +24022,7 @@
 
 								// mentions [WIP]
 
-									/*
+									/**
 									 * Indicates that the CreativeWork contains a reference to, but is not necessarily
 									 * about a concept.
 									 *
@@ -24033,7 +24033,7 @@
 
 								// offers [WIP]
 
-									/*
+									/**
 									 * An offer to provide this item—for example, an offer to sell a product, rent the
 									 * DVD of a movie, perform a service, or give away tickets to an event.
 									 *
@@ -24056,7 +24056,7 @@
 
 								// potentialAction [WIP]
 
-									/*
+									/**
 									 * Indicates a potential Action, which describes an idealized action in which this
 									 * thing would play an 'object' role.
 									 *
@@ -24131,7 +24131,7 @@
 
 								// primaryImageOfPage [WIP]
 
-									/*
+									/**
 									 * Indicates the main image on the page.
 									 *
 									 * Values expected to be one of these types:
@@ -24141,7 +24141,7 @@
 
 								// relatedLink [WIP]
 
-									/*
+									/**
 									 * A link related to this web page, for example to other related web pages.
 									 *
 									 * Values expected to be one of these types:
@@ -24151,7 +24151,7 @@
 
 								// representativeOfPage (CreativeWork only)
 
-									/*
+									/**
 									 * Indicates whether this image is representative of the content of the page.
 									 *
 									 * Values expected to be one of these types:
@@ -24189,7 +24189,7 @@
 
 								// review [excluded]
 
-									/*
+									/**
 									 * A review of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -24202,7 +24202,7 @@
 
 								// sameAs
 
-									/*
+									/**
 									 * URL of a reference Web page that unambiguously indicates the item's identity
 									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 									 * website).
@@ -24277,7 +24277,7 @@
 
 								// significantLink [WIP]
 
-									/*
+									/**
 									 * One of the more significant URLs on the page. Typically, these are the
 									 * non-navigation links that are clicked on the most.
 									 *
@@ -24288,7 +24288,7 @@
 
 								// size [excluded]
 
-									/*
+									/**
 									 * A standardized size of a product or creative work, specified either through a
 									 * simple textual string (for example 'XL', '32Wx34L'), a QuantitativeValue with a
 									 * unitCode, or a comprehensive and structured SizeSpecification; in other cases,
@@ -24308,7 +24308,7 @@
 
 								// speakable
 
-									/*
+									/**
 									 * Indicates sections of a Web page that are particularly 'speakable' in the sense
 									 * of being highlighted as being especially appropriate for text-to-speech
 									 * conversion. Other sections of a page may also be usefully spoken in particular
@@ -24437,7 +24437,7 @@
 
 								// specialty [WIP]
 
-									/*
+									/**
 									 * One of the domain specialties to which this web page's content applies.
 									 *
 									 * Values expected to be one of these types:
@@ -24447,7 +24447,7 @@
 
 								// text [WIP]
 
-									/*
+									/**
 									 * The textual content of this CreativeWork.
 									 *
 									 * Values expected to be one of these types:
@@ -24457,7 +24457,7 @@
 
 								// thumbnail
 
-									/*
+									/**
 									 * Thumbnail image for an image or video.
 									 *
 									 * Values expected to be one of these types:
@@ -24513,7 +24513,7 @@
 
 								// thumbnailUrl [WIP]
 
-									/*
+									/**
 									 * A thumbnail image relevant to the Thing.
 									 *
 									 * Values expected to be one of these types:
@@ -24530,7 +24530,7 @@
 
 								// timeRequired
 
-									/*
+									/**
 									 * Approximate or typical time it usually takes to work with or through the
 									 * content of this work for the typical or target audience.
 									 *
@@ -24627,7 +24627,7 @@
 
 								// transcript
 
-									/*
+									/**
 									 * If this MediaObject is an AudioObject or VideoObject, the transcript of that
 									 * object.
 									 *
@@ -24698,7 +24698,7 @@
 
 								// translator [excluded]
 
-									/*
+									/**
 									 * Organization or person who adapts a creative work to different languages,
 									 * regional differences and technical requirements of a target market, or that
 									 * translates during some event.
@@ -24715,7 +24715,7 @@
 
 								// uploadDate (CreativeWork only) [WIP]
 
-									/*
+									/**
 									 * Date when this media object was uploaded to this site.
 									 *
 									 * Values expected to be one of these types:
@@ -24732,7 +24732,7 @@
 
 								// video (MedicalWebPage only) [WIP]
 
-									/*
+									/**
 									 * An embedded video object.
 									 *
 									 * Values expected to be one of these types:
@@ -24750,7 +24750,7 @@
 
 								// videoFrameSize
 
-									/*
+									/**
 									 * The frame size of the video.
 									 *
 									 * Values expected to be one of these types:
@@ -24806,7 +24806,7 @@
 
 								// videoQuality
 
-									/*
+									/**
 									 * The quality of the video.
 									 *
 									 * Values expected to be one of these types:
@@ -24864,7 +24864,7 @@
 
 								// width
 
-									/*
+									/**
 									 * The width of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -24926,7 +24926,7 @@
 
 								// wordCount
 
-									/*
+									/**
 									 * The number of words in the text of the Article.
 									 *
 									 * Values expected to be one of these types:
@@ -25551,7 +25551,7 @@
 
 											// provider (CreativeWork, syndicated only)
 
-												/*
+												/**
 												 * The service provider, service operator, or service performer; the goods
 												 * producer.
 												 *
@@ -25993,7 +25993,7 @@
 							!empty( $condition_item_MedicalCondition )
 						) {
 
-							/*
+							/**
 							 * The transient exists.
 							 * Return the variable.
 							 */
@@ -26004,7 +26004,7 @@
 
 						} else {
 
-							/*
+							/**
 							 * The transient does not exist.
 							 * Define the variable again.
 							 */
@@ -26101,7 +26101,7 @@
 
 								// url
 
-									/*
+									/**
 									 * URL of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -26275,7 +26275,7 @@
 
 								// name
 
-									/*
+									/**
 									 * The name of the item.
 									 *
 									 * Subproperty of:
@@ -26317,7 +26317,7 @@
 
 								// additionalType [WIP]
 
-									/*
+									/**
 									 * An additional type for the item, typically used for adding more specific types
 									 * from external vocabularies in microdata syntax. This is a relationship between
 									 * something and a class that the thing is in. Typically the value is a
@@ -26337,7 +26337,7 @@
 
 								// alternateName
 
-									/*
+									/**
 									 * An alias for the item.
 									 *
 									 * Values expected to be one of these types:
@@ -26388,7 +26388,7 @@
 
 								// associatedAnatomy [excluded]
 
-									/*
+									/**
 									 * The anatomy of the underlying organ system or structures associated with this
 									 * entity.
 									 *
@@ -26404,7 +26404,7 @@
 
 								// additionalType
 
-									/*
+									/**
 									 * An additional type for the item, typically used for adding more specific types
 									 * from external vocabularies in microdata syntax. This is a relationship between
 									 * something and a class that the thing is in. Typically the value is a
@@ -26465,7 +26465,7 @@
 
 								// code
 
-									/*
+									/**
 									 * A medical code for the entity, taken from a controlled vocabulary or ontology
 									 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
 									 *
@@ -26516,7 +26516,7 @@
 
 								// description [excluded]
 
-									/*
+									/**
 									 * A description of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -26538,7 +26538,7 @@
 
 								// differentialDiagnosis [excluded]
 
-									/*
+									/**
 									 * One of a set of differential diagnoses for the condition. Specifically, a
 									 * closely-related or competing diagnosis typically considered later in the
 									 * cognitive process whereby this medical condition is distinguished from others
@@ -26555,7 +26555,7 @@
 
 								// disambiguatingDescription [excluded]
 
-									/*
+									/**
 									 * A sub property of description. A short description of the item used to
 									 * disambiguate from other, similar items. Information from other properties (in
 									 * particular, name) may be necessary for the description to be useful for
@@ -26571,7 +26571,7 @@
 
 								// drug [excluded]
 
-									/*
+									/**
 									 * Specifying a drug or medicine used in a medication procedure.
 									 *
 									 * Values expected to be one of these types:
@@ -26584,7 +26584,7 @@
 
 								// epidemiology [excluded]
 
-									/*
+									/**
 									 * The characteristics of associated patients, such as age, gender, race etc.
 									 *
 									 * Values expected to be one of these types:
@@ -26597,7 +26597,7 @@
 
 								// expectedPrognosis [excluded]
 
-									/*
+									/**
 									 * The likely outcome in either the short term or long term of the medical condition.
 									 *
 									 * Values expected to be one of these types:
@@ -26610,7 +26610,7 @@
 
 								// guideline [excluded]
 
-									/*
+									/**
 									 * A medical guideline related to this entity.
 									 *
 									 * Values expected to be one of these types:
@@ -26623,7 +26623,7 @@
 
 								// identifier [WIP]
 
-									/*
+									/**
 									 * The identifier property represents any kind of identifier for any kind of
 									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
 									 * properties for representing many of these, either as textual strings or as URL
@@ -26638,7 +26638,7 @@
 
 								// identifyingExam [WIP]
 
-									/*
+									/**
 									 * A physical examination that can identify this sign.
 									 *
 									 * Values expected to be one of these types:
@@ -26648,7 +26648,7 @@
 
 								// identifyingTest [WIP]
 
-									/*
+									/**
 									 * A diagnostic test that can identify this sign.
 									 *
 									 * Values expected to be one of these types:
@@ -26658,7 +26658,7 @@
 
 								// image [excluded]
 
-									/*
+									/**
 									 * An image of the item. This can be a URL or a fully described ImageObject.
 									 *
 									 * Values expected to be one of these types:
@@ -26672,7 +26672,7 @@
 
 								// infectiousAgent
 
-									/*
+									/**
 									 * The actual infectious agent, such as a specific bacterium.
 									 *
 									 * Values expected to be one of these types:
@@ -26710,7 +26710,7 @@
 
 								// infectiousAgentClass
 
-									/*
+									/**
 									 * The class of infectious agent (bacteria, prion, etc.) that causes the disease.
 									 *
 									 * Values expected to be one of these types:
@@ -26748,7 +26748,7 @@
 
 								// legalStatus [excluded]
 
-									/*
+									/**
 									 * The drug or supplement's legal status, including any controlled substance
 									 * schedules that apply.
 									 *
@@ -26764,7 +26764,7 @@
 
 								// mainEntityOfPage [excluded]
 
-									/*
+									/**
 									 * Indicates a page (or other CreativeWork) for which this thing is the main
 									 * entity being described. See background notes at
 									 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
@@ -26782,7 +26782,7 @@
 
 								// medicineSystem [excluded]
 
-									/*
+									/**
 									 * The system of medicine that includes this MedicalEntity
 									 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
 									 *
@@ -26796,7 +26796,7 @@
 
 								// naturalProgression [excluded]
 
-									/*
+									/**
 									 * The expected progression of the condition if it is not treated and allowed to
 									 * progress naturally.
 									 *
@@ -26810,7 +26810,7 @@
 
 								// pathophysiology [excluded]
 
-									/*
+									/**
 									 * Changes in the normal mechanical, physical, and biochemical functions that are
 									 * associated with this activity or condition.
 									 *
@@ -26824,7 +26824,7 @@
 
 								// possibleComplication [excluded]
 
-									/*
+									/**
 									 * A possible unexpected and unfavorable evolution of a medical condition.
 									 * Complications may include worsening of the signs or symptoms of the disease,
 									 * extension of the condition to other organ systems, etc.
@@ -26839,7 +26839,7 @@
 
 								// potentialAction [excluded]
 
-									/*
+									/**
 									 * Indicates a potential Action, which describes an idealized action in which this
 									 * thing would play an 'object' role.
 									 *
@@ -26853,7 +26853,7 @@
 
 								// recognizingAuthority [excluded]
 
-									/*
+									/**
 									 * If applicable, the organization that officially recognizes this entity as part
 									 * of its endorsed system of medicine.
 									 *
@@ -26867,7 +26867,7 @@
 
 								// relevantSpecialty [excluded]
 
-									/*
+									/**
 									 * If applicable, a medical specialty in which this entity is relevant.
 									 *
 									 * Values expected to be one of these types:
@@ -26880,7 +26880,7 @@
 
 								// riskFactor [excluded]
 
-									/*
+									/**
 									 * A modifiable or non-modifiable factor that increases the risk of a patient
 									 * contracting this condition (e.g., age, coexisting condition).
 									 *
@@ -26894,7 +26894,7 @@
 
 								// sameAs
 
-									/*
+									/**
 									 * URL of a reference Web page that unambiguously indicates the item's identity
 									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 									 * website).
@@ -26947,7 +26947,7 @@
 
 								// signOrSymptom [WIP]
 
-									/*
+									/**
 									 * A sign or symptom of this condition. Signs are objective or physically
 									 * observable manifestations of the medical condition while symptoms are the
 									 * subjective experience of the medical condition.
@@ -26959,7 +26959,7 @@
 
 								// stage [excluded]
 
-									/*
+									/**
 									 * The stage of the condition, if applicable.
 									 *
 									 * Values expected to be one of these types:
@@ -26972,7 +26972,7 @@
 
 								// status [excluded]
 
-									/*
+									/**
 									 * The status of the study (enumerated).
 									 *
 									 * Values expected to be one of these types:
@@ -26987,7 +26987,7 @@
 
 								// study [excluded]
 
-									/*
+									/**
 									 * A medical study or trial related to this entity.
 									 *
 									 * Values expected to be one of these types:
@@ -27000,7 +27000,7 @@
 
 								// subjectOf [excluded]
 
-									/*
+									/**
 									 * A CreativeWork or Event about this Thing.
 									 *
 									 * Inverse-property: about
@@ -27016,7 +27016,7 @@
 
 								// possibleTreatment
 
-									/*
+									/**
 									 * A possible treatment to address this condition, sign or symptom.
 									 *
 									 * Values expected to be one of these types:
@@ -27075,7 +27075,7 @@
 
 								// primaryPrevention
 
-									/*
+									/**
 									 * A preventative therapy used to prevent an initial occurrence of the medical
 									 * condition, such as vaccination.
 									 *
@@ -27135,7 +27135,7 @@
 
 								// secondaryPrevention
 
-									/*
+									/**
 									 * A preventative therapy used to prevent reoccurrence of the medical condition
 									 * after an initial episode of the condition.
 									 *
@@ -27195,7 +27195,7 @@
 
 								// transmissionMethod [excluded]
 
-									/*
+									/**
 									 * How the disease spreads, either as a route or vector, for example
 									 * 'direct contact', 'Aedes aegypti', etc.
 									 *
@@ -27209,7 +27209,7 @@
 
 								 // typicalTest
 
-									/*
+									/**
 									 * A medical test typically performed given this condition.
 									 *
 									 * Values expected to be one of these types:
@@ -27364,7 +27364,7 @@
 
 						if ( !empty( $treatment_item_Service ) ) {
 
-							/*
+							/**
 							 * The transient exists.
 							 * Return the variable.
 							 */
@@ -27375,7 +27375,7 @@
 
 						} else {
 
-							/*
+							/**
 							 * The transient does not exist.
 							 * Define the variable again.
 							 */
@@ -27501,7 +27501,7 @@
 
 								// url
 
-									/*
+									/**
 									 * URL of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -27730,7 +27730,7 @@
 
 								// name
 
-									/*
+									/**
 									 * The name of the item.
 									 *
 									 * Subproperty of:
@@ -27772,7 +27772,7 @@
 
 								// additionalType
 
-									/*
+									/**
 									 * An additional type for the item, typically used for adding more specific types
 									 * from external vocabularies in microdata syntax. This is a relationship between
 									 * something and a class that the thing is in. Typically the value is a
@@ -27833,7 +27833,7 @@
 
 								// adverseOutcome [excluded]
 
-									/*
+									/**
 									 * A possible complication and/or side effect of this therapy. If it is known that
 									 * an adverse outcome is serious (resulting in death, disability, or permanent
 									 * damage; requiring hospitalization; or otherwise life-threatening or requiring
@@ -27849,7 +27849,7 @@
 
 								// affectedBy [excluded]
 
-									/*
+									/**
 									 * Drugs that affect the test's results.
 									 *
 									 * Values expected to be one of these types:
@@ -27862,7 +27862,7 @@
 
 								// alternateName
 
-									/*
+									/**
 									 * An alias for the item.
 									 *
 									 * Values expected to be one of these types:
@@ -27913,7 +27913,7 @@
 
 								// code
 
-									/*
+									/**
 									 * A medical code for the entity, taken from a controlled vocabulary or ontology
 									 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
 									 *
@@ -27964,7 +27964,7 @@
 
 								// bodyLocation [excluded]
 
-									/*
+									/**
 									 * Location in the body of the anatomical structure.
 									 *
 									 * Values expected to be one of these types:
@@ -27977,7 +27977,7 @@
 
 								// contraindication [excluded]
 
-									/*
+									/**
 									 * A contraindication for this therapy.
 									 *
 									 * Values expected to be one of these types:
@@ -27991,7 +27991,7 @@
 
 								// description [excluded]
 
-									/*
+									/**
 									 * A description of the item.
 									 *
 									 * Values expected to be one of these types:
@@ -28013,7 +28013,7 @@
 
 								// disambiguatingDescription [excluded]
 
-									/*
+									/**
 									 * A sub property of description. A short description of the item used to
 									 * disambiguate from other, similar items. Information from other properties (in
 									 * particular, name) may be necessary for the description to be useful for
@@ -28029,7 +28029,7 @@
 
 								// doseSchedule [excluded]
 
-									/*
+									/**
 									 * A dosing schedule for the drug for a given population, either observed,
 									 * recommended, or maximum dose based on the type used.
 									 *
@@ -28043,7 +28043,7 @@
 
 								// drug
 
-									/*
+									/**
 									 * Specifying a drug or medicine used in a medication procedure.
 									 *
 									 * Values expected to be one of these types:
@@ -28216,7 +28216,7 @@
 
 								// duplicateTherapy
 
-									/*
+									/**
 									 * A therapy that duplicates or overlaps this one.
 									 *
 									 * Values expected to be one of these types:
@@ -28275,7 +28275,7 @@
 
 								// followup [excluded]
 
-									/*
+									/**
 									 * Typical or recommended followup care after the procedure is performed.
 									 *
 									 * Values expected to be one of these types:
@@ -28288,7 +28288,7 @@
 
 								// guideline [excluded]
 
-									/*
+									/**
 									 * A medical guideline related to this entity.
 									 *
 									 * Values expected to be one of these types:
@@ -28301,7 +28301,7 @@
 
 								// howPerformed [excluded]
 
-									/*
+									/**
 									 * How the procedure is performed.
 									 *
 									 * Values expected to be one of these types:
@@ -28314,7 +28314,7 @@
 
 								// identifier [WIP]
 
-									/*
+									/**
 									 * The identifier property represents any kind of identifier for any kind of
 									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
 									 * properties for representing many of these, either as textual strings or as URL
@@ -28329,7 +28329,7 @@
 
 								// image [excluded]
 
-									/*
+									/**
 									 * An image of the item. This can be a URL or a fully described ImageObject.
 									 *
 									 * Values expected to be one of these types:
@@ -28343,7 +28343,7 @@
 
 								// imagingTechnique
 
-									/*
+									/**
 									 * Imaging technique used.
 									 *
 									 * Values expected to be one of these types:
@@ -28381,7 +28381,7 @@
 
 								// legalStatus [WIP]
 
-									/*
+									/**
 									 * The drug or supplement's legal status, including any controlled substance
 									 * schedules that apply.
 									 *
@@ -28394,7 +28394,7 @@
 
 								// mainEntityOfPage [excluded]
 
-									/*
+									/**
 									 * Indicates a page (or other CreativeWork) for which this thing is the main
 									 * entity being described. See background notes at
 									 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
@@ -28412,7 +28412,7 @@
 
 								// medicineSystem [WIP]
 
-									/*
+									/**
 									 * The system of medicine that includes this MedicalEntity
 									 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
 									 *
@@ -28423,7 +28423,7 @@
 
 								// normalRange [excluded]
 
-									/*
+									/**
 									 * Range of acceptable values for a typical patient, when applicable.
 									 *
 									 * Values expected to be one of these types:
@@ -28437,7 +28437,7 @@
 
 								// potentialAction [excluded]
 
-									/*
+									/**
 									 * Indicates a potential Action, which describes an idealized action in which this
 									 * thing would play an 'object' role.
 									 *
@@ -28451,7 +28451,7 @@
 
 								// preparation [excluded]
 
-									/*
+									/**
 									 * Typical preparation that a patient must undergo before having the procedure
 									 * performed.
 									 *
@@ -28466,7 +28466,7 @@
 
 								// procedureType
 
-									/*
+									/**
 									 * The type of procedure, for example Surgical, Noninvasive, or Percutaneous.
 									 *
 									 * Values expected to be one of these types:
@@ -28506,7 +28506,7 @@
 
 								// recognizingAuthority [WIP]
 
-									/*
+									/**
 									 * If applicable, the organization that officially recognizes this entity as part
 									 * of its endorsed system of medicine.
 									 *
@@ -28517,7 +28517,7 @@
 
 								// relevantSpecialty
 
-									/*
+									/**
 									 * If applicable, a medical specialty in which this entity is relevant.
 									 *
 									 * Values expected to be one of these types:
@@ -28573,7 +28573,7 @@
 
 								// sameAs
 
-									/*
+									/**
 									 * URL of a reference Web page that unambiguously indicates the item's identity
 									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 									 * website).
@@ -28626,7 +28626,7 @@
 
 								// seriousAdverseOutcome [excluded]
 
-									/*
+									/**
 									 * A possible serious complication and/or serious side effect of this therapy.
 									 * Serious adverse outcomes include those that are life-threatening; result in
 									 * death, disability, or permanent damage; require hospitalization or prolong
@@ -28644,7 +28644,7 @@
 
 								// signDetected [WIP]
 
-									/*
+									/**
 									 * A sign detected by the test.
 									 *
 									 * Values expected to be one of these types:
@@ -28654,7 +28654,7 @@
 
 								// status [excluded]
 
-									/*
+									/**
 									 * The status of the study (enumerated).
 									 *
 									 * Values expected to be one of these types:
@@ -28669,7 +28669,7 @@
 
 								// study [excluded]
 
-									/*
+									/**
 									 * The status of the study (enumerated).
 									 *
 									 * Values expected to be one of these types:
@@ -28684,7 +28684,7 @@
 
 								// subjectOf [excluded]
 
-									/*
+									/**
 									 * A CreativeWork or Event about this Thing.
 									 *
 									 * Inverse-property: about
@@ -28700,7 +28700,7 @@
 
 								// subTest
 
-									/*
+									/**
 									 * A component test of the panel.
 									 *
 									 * Values expected to be one of these types:
@@ -28759,7 +28759,7 @@
 
 								// tissueSample
 
-									/*
+									/**
 									 * The type of tissue sample required for the test.
 									 *
 									 * Values expected to be one of these types:
@@ -28815,7 +28815,7 @@
 
 								// usedToDiagnose
 
-									/*
+									/**
 									 * A condition the test is used to diagnose.
 									 *
 									 * Values expected to be one of these types:
@@ -28874,7 +28874,7 @@
 
 								// usesDevice
 
-									/*
+									/**
 									 * Device used to perform the test.
 									 *
 									 * Values expected to be one of these types:
@@ -28915,7 +28915,7 @@
 
 														// name
 
-															/*
+															/**
 															 * The name of the item.
 															 *
 															 * Subproperty of:
@@ -28931,7 +28931,7 @@
 
 														// alternateName
 
-															/*
+															/**
 															 * An alias for the item.
 															 *
 															 * Values expected to be one of these types:
@@ -28964,7 +28964,7 @@
 
 														// code
 
-															/*
+															/**
 															 * A medical code for the entity, taken from a controlled vocabulary or ontology
 															 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
 															 *
