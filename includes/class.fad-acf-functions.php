@@ -1803,70 +1803,66 @@
 
 	// UAMS Brand Organizations
 
-		add_filter(
-			'acf/load_field/key=field_fad_default_brandorg',
-			function ( $field ) {
+		add_filter( 'acf/load_field/key=field_fad_default_brandorg', 'uamswp_fad_acf_load_default_brandorg' );
 
-				// Get all taxonomy terms
+		function uamswp_fad_acf_load_brandorg_uams ( $field ) {
 
-					$brand_organizations = get_terms(
-						array(
-							'taxonomy' => 'brand_organization_uams',
-							'hide_empty' => false
-						)
-					);
+			// Get all taxonomy terms
 
-				// Add each term to the choices array.
+				$brand_organizations = get_terms(
+					array(
+						'taxonomy' => 'brand_organization_uams',
+						'hide_empty' => false
+					)
+				);
 
-					/*
+			// Add each term to the choices array.
 
-						Example: $field['choices']['review'] = Review
+				/*
 
-					*/
+					Example: $field['choices']['review'] = Review
 
-					foreach ( $brand_organizations as $item ) {
+				*/
 
-						$field['choices'][$item->slug] = $item->name;
+				foreach ( $brand_organizations as $item ) {
 
-					}
+					$field['choices'][$item->slug] = $item->name;
 
-				return $field;
+				}
 
-			}
+			return $field;
 
-		);
+		}
 
 	// Third-Party Brand Organizations
 
-		add_filter(
-			'acf/load_field/key=field_schema_brandorg',
-			function ( $field ) {
+		add_filter( 'acf/load_field/key=field_schema_brandorg', 'uamswp_fad_acf_load_brandorg_3p' );
 
-				// Get all taxonomy terms
+		function uamswp_fad_acf_load_brandorg_3p ( $field ) {
 
-					$brand_organizations = get_terms(
-						array(
-							'taxonomy' => 'brand_organization',
-							'hide_empty' => false
-						)
-					);
+			// Get all taxonomy terms
 
-				// Add each term to the choices array.
+				$brand_organizations = get_terms(
+					array(
+						'taxonomy' => 'brand_organization',
+						'hide_empty' => false
+					)
+				);
 
-					/*
+			// Add each term to the choices array.
 
-						Example: $field['choices']['review'] = Review
+				/*
 
-					*/
+					Example: $field['choices']['review'] = Review
 
-					foreach ( $brand_organizations as $item ) {
+				*/
 
-						$field['choices'][$item->slug] = $item->name;
+				foreach ( $brand_organizations as $item ) {
 
-					}
+					$field['choices'][$item->slug] = $item->name;
 
-				return $field;
+				}
 
-			}
+			return $field;
 
-		);
+		}
