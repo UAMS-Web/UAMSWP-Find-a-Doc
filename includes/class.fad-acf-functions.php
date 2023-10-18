@@ -1837,6 +1837,7 @@
 	// Third-Party Brand Organizations
 
 		add_filter( 'acf/load_field/key=field_schema_brandorg', 'uamswp_fad_acf_load_brandorg_3p' );
+		add_filter( 'acf/load_field/key=field_schema_brandorg_multiple', 'uamswp_fad_acf_load_brandorg_3p' );
 
 		function uamswp_fad_acf_load_brandorg_3p ( $field ) {
 
