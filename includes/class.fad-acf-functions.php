@@ -1832,7 +1832,7 @@
 
 	// UAMS Brand Organizations
 
-		add_filter( 'acf/load_field/key=field_fad_default_brandorg', 'uamswp_fad_acf_load_default_brandorg' );
+		add_filter( 'acf/load_field/key=field_fad_default_brandorg', 'uamswp_fad_acf_load_brandorg_uams' );
 
 		function uamswp_fad_acf_load_brandorg_uams ( $field ) {
 
