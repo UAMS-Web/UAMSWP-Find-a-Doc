@@ -306,9 +306,9 @@
 					"maxlength": ""
 				},
 				{
-					"key": "field_brandorg_streetaddress_query",
+					"key": "field_brandorg_contactpoint_postaladdress_streetaddress_query",
 					"label": "Street Address or Post Office Box?",
-					"name": "brandorg_streetaddress_query",
+					"name": "brandorg_contactpoint_postaladdress_streetaddress_query",
 					"type": "radio",
 					"instructions": "",
 					"required": 1,
@@ -330,16 +330,16 @@
 					"save_other_choice": 0
 				},
 				{
-					"key": "field_brandorg_streetaddress",
+					"key": "field_brandorg_contactpoint_postaladdress_streetaddress",
 					"label": "Street Address (streetAddress > Text)",
-					"name": "brandorg_streetaddress",
+					"name": "brandorg_contactpoint_postaladdress_streetaddress",
 					"type": "text",
 					"instructions": "The street address. For example, 1600 Amphitheatre Pkwy.",
 					"required": 1,
 					"conditional_logic": [
 						[
 							{
-								"field": "field_brandorg_streetaddress_query",
+								"field": "field_brandorg_contactpoint_postaladdress_streetaddress_query",
 								"operator": "==",
 								"value": "1"
 							}
@@ -357,16 +357,16 @@
 					"maxlength": ""
 				},
 				{
-					"key": "field_brandorg_postofficeboxnumber",
+					"key": "field_brandorg_contactpoint_postaladdress_postofficeboxnumber",
 					"label": "Post Office Box Number (postOfficeBoxNumber > Text)",
-					"name": "brandorg_postofficeboxnumber",
+					"name": "brandorg_contactpoint_postaladdress_postofficeboxnumber",
 					"type": "text",
 					"instructions": "The post office box number for PO box addresses.",
 					"required": 1,
 					"conditional_logic": [
 						[
 							{
-								"field": "field_brandorg_streetaddress_query",
+								"field": "field_brandorg_contactpoint_postaladdress_streetaddress_query",
 								"operator": "==",
 								"value": "0"
 							}
@@ -384,9 +384,9 @@
 					"maxlength": ""
 				},
 				{
-					"key": "field_brandorg_addresslocality",
+					"key": "field_brandorg_contactpoint_postaladdress_addresslocality",
 					"label": "City or Other Locality (addressLocality > Text)",
-					"name": "brandorg_addresslocality",
+					"name": "brandorg_contactpoint_postaladdress_addresslocality",
 					"type": "text",
 					"instructions": "The locality in which the street address is, and which is in the region. For example, Mountain View.",
 					"required": 1,
@@ -403,9 +403,9 @@
 					"maxlength": ""
 				},
 				{
-					"key": "field_brandorg_addressregion",
+					"key": "field_brandorg_contactpoint_postaladdress_addressregion",
 					"label": "State or Other Region (addressRegion > Text)",
-					"name": "brandorg_addressregion",
+					"name": "brandorg_contactpoint_postaladdress_addressregion",
 					"type": "text",
 					"instructions": "The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.",
 					"required": 1,
@@ -441,9 +441,9 @@
 					"maxlength": ""
 				},
 				{
-					"key": "field_brandorg_addresscountry",
+					"key": "field_brandorg_contactpoint_postaladdress_addresscountry",
 					"label": "Country (addressCountry > Country or Text)",
-					"name": "brandorg_addresscountry",
+					"name": "brandorg_contactpoint_postaladdress_addresscountry",
 					"type": "text",
 					"instructions": "The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.",
 					"required": 1,
