@@ -5405,7 +5405,7 @@
 
 					// mainEntityOfPage (common use)
 
-						$mainEntityOfPage = get_field( 'foo', $term ) ?? null;
+						$mainEntityOfPage = get_field( 'brandorg_mainentityofpage', $term ) ?? null;
 
 					// @id
 
@@ -5419,7 +5419,24 @@
 
 					// @type
 
-						$type = get_field( 'foo', $term ) ?? null;
+						$type = 'Organization';
+						$Organization_subtype = get_field( 'brandorg_organization_subtype', $term ) ?? $null;
+						$EducationalOrganization_subtype = get_field( 'brandorg_educationalorganization_subtype', $term ) ?? $null;
+
+						if (
+							$Organization_subtype
+							&&
+							$EducationalOrganization_subtype
+						) {
+
+							$type = $EducationalOrganization_subtype;
+
+						} elseif ( $Organization_subtype ) {
+
+							$type = $Organization_subtype;
+
+						}
+
 
 						if ( $type ) {
 
@@ -5444,14 +5461,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$acceptsReservations = get_field( 'foo', $term ) ?? null;
-
-						if ( $acceptsReservations ) {
-
-							$output['acceptsReservations'] = $acceptsReservations;
-
-						}
-
 					// actionableFeedbackPolicy
 
 						/**
@@ -5464,12 +5473,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$actionableFeedbackPolicy = get_field( 'foo', $term ) ?? null;
+						$actionableFeedbackPolicy = get_field( 'brandorg_actionablefeedbackpolicy', $term ) ?? null;
 
 						if ( $actionableFeedbackPolicy ) {
 
@@ -5494,14 +5500,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$additionalProperty = get_field( 'foo', $term ) ?? null;
-
-						if ( $additionalProperty ) {
-
-							$output['additionalProperty'] = $additionalProperty;
-
-						}
-
 					// additionalType
 
 						/**
@@ -5514,12 +5512,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$additionalType = get_field( 'foo', $term ) ?? null;
+						$additionalType = get_field( 'schema_additionalType', $term ) ?? null;
 
 						if ( $additionalType ) {
 
@@ -5544,14 +5539,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$address = get_field( 'foo', $term ) ?? null;
-
-						if ( $address ) {
-
-							$output['address'] = $address;
-
-						}
-
 					// aggregateRating
 
 						/**
@@ -5568,14 +5555,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$aggregateRating = get_field( 'foo', $term ) ?? null;
-
-						if ( $aggregateRating ) {
-
-							$output['aggregateRating'] = $aggregateRating;
-
-						}
 
 					// album
 
@@ -5594,14 +5573,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$album = get_field( 'foo', $term ) ?? null;
-
-						if ( $album ) {
-
-							$output['album'] = $album;
-
-						}
-
 					// albums
 
 						/**
@@ -5619,14 +5590,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$albums = get_field( 'foo', $term ) ?? null;
-
-						if ( $albums ) {
-
-							$output['albums'] = $albums;
-
-						}
-
 					// alternateName
 
 						/**
@@ -5639,12 +5602,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$alternateName = get_field( 'foo', $term ) ?? null;
+						$alternateName = get_field( 'schema_alternatename', $term ) ?? null;
 
 						if ( $alternateName ) {
 
@@ -5669,14 +5629,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$alumni = get_field( 'foo', $term ) ?? null;
-
-						if ( $alumni ) {
-
-							$output['alumni'] = $alumni;
-
-						}
-
 					// amenityFeature
 
 						/**
@@ -5693,14 +5645,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$amenityFeature = get_field( 'foo', $term ) ?? null;
-
-						if ( $amenityFeature ) {
-
-							$output['amenityFeature'] = $amenityFeature;
-
-						}
 
 					// archiveHeld
 
@@ -5719,14 +5663,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$archiveHeld = get_field( 'foo', $term ) ?? null;
-
-						if ( $archiveHeld ) {
-
-							$output['archiveHeld'] = $archiveHeld;
-
-						}
-
 					// areaServed
 
 						/**
@@ -5743,14 +5679,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$areaServed = get_field( 'foo', $term ) ?? null;
-
-						if ( $areaServed ) {
-
-							$output['areaServed'] = $areaServed;
-
-						}
 
 					// athlete
 
@@ -5769,14 +5697,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$athlete = get_field( 'foo', $term ) ?? null;
-
-						if ( $athlete ) {
-
-							$output['athlete'] = $athlete;
-
-						}
-
 					// audience
 
 						/**
@@ -5793,14 +5713,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$audience = get_field( 'foo', $term ) ?? null;
-
-						if ( $audience ) {
-
-							$output['audience'] = $audience;
-
-						}
 
 					// availableLanguage
 
@@ -5819,14 +5731,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$availableLanguage = get_field( 'foo', $term ) ?? null;
-
-						if ( $availableLanguage ) {
-
-							$output['availableLanguage'] = $availableLanguage;
-
-						}
-
 					// availableService
 
 						/**
@@ -5843,14 +5747,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$availableService = get_field( 'foo', $term ) ?? null;
-
-						if ( $availableService ) {
-
-							$output['availableService'] = $availableService;
-
-						}
 
 					// availableTest
 
@@ -5869,14 +5765,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$availableTest = get_field( 'foo', $term ) ?? null;
-
-						if ( $availableTest ) {
-
-							$output['availableTest'] = $availableTest;
-
-						}
-
 					// award
 
 						/**
@@ -5893,14 +5781,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$award = get_field( 'foo', $term ) ?? null;
-
-						if ( $award ) {
-
-							$output['award'] = $award;
-
-						}
 
 					// awards
 
@@ -5919,14 +5799,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$awards = get_field( 'foo', $term ) ?? null;
-
-						if ( $awards ) {
-
-							$output['awards'] = $awards;
-
-						}
-
 					// boardingPolicy
 
 						/**
@@ -5943,14 +5815,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$boardingPolicy = get_field( 'foo', $term ) ?? null;
-
-						if ( $boardingPolicy ) {
-
-							$output['boardingPolicy'] = $boardingPolicy;
-
-						}
 
 					// branchCode
 
@@ -5969,14 +5833,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$branchCode = get_field( 'foo', $term ) ?? null;
-
-						if ( $branchCode ) {
-
-							$output['branchCode'] = $branchCode;
-
-						}
-
 					// branchOf
 
 						/**
@@ -5993,14 +5849,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$branchOf = get_field( 'foo', $term ) ?? null;
-
-						if ( $branchOf ) {
-
-							$output['branchOf'] = $branchOf;
-
-						}
 
 					// brand
 
@@ -6019,14 +5867,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$brand = get_field( 'foo', $term ) ?? null;
-
-						if ( $brand ) {
-
-							$output['brand'] = $brand;
-
-						}
-
 					// checkinTime
 
 						/**
@@ -6043,14 +5883,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$checkinTime = get_field( 'foo', $term ) ?? null;
-
-						if ( $checkinTime ) {
-
-							$output['checkinTime'] = $checkinTime;
-
-						}
 
 					// checkoutTime
 
@@ -6069,14 +5901,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$checkoutTime = get_field( 'foo', $term ) ?? null;
-
-						if ( $checkoutTime ) {
-
-							$output['checkoutTime'] = $checkoutTime;
-
-						}
-
 					// coach
 
 						/**
@@ -6093,14 +5917,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$coach = get_field( 'foo', $term ) ?? null;
-
-						if ( $coach ) {
-
-							$output['coach'] = $coach;
-
-						}
 
 					// contactPoint
 
@@ -6119,11 +5935,321 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$contactPoint = get_field( 'foo', $term ) ?? null;
+						// Base list array
 
-						if ( $contactPoint ) {
+							$contactPoint_list = array();
 
-							$output['contactPoint'] = $contactPoint;
+						// PostalAddress
+
+							// Base root-level address value
+
+								$address = null;
+
+							// Get the repeater field
+
+								$contactPoint_PostalAddress_repeater = get_field( 'brandorg_contactpoint_postaladdress', $term ) ?? null;
+
+							// Get the subfields
+
+								if ( $contactPoint_PostalAddress_repeater ) {
+
+									foreach ( $contactPoint_PostalAddress_repeater as $item ) {
+
+										// Base array
+
+										$contactPoint_PostalAddress_item = array(
+											'addressCountry' => '',
+											'addressLocality' => '',
+											'addressRegion' => '',
+											'contactType' => '',
+											'postalCode' => '',
+											'postOfficeBoxNumber' => '',
+											'streetAddress' => ''
+										);
+
+										// Set values
+
+											// contactType
+
+												$contactPoint_PostalAddress_item['contactType'] = $item['brandorg_contactpoint_postaladdress_contacttype'] ?? '';
+
+											// streetAddress / postOfficeBoxNumber
+
+												// Query: Street Address or Post Office Box?
+
+													$contactPoint_PostalAddress_item_streetaddress_query = $item['brandorg_contactpoint_postaladdress_streetaddress_query'] ?? '';
+
+												// streetAddress
+
+													if ( $contactPoint_PostalAddress_item_streetaddress_query ) {
+
+														$contactPoint_PostalAddress_item['streetaddress'] = $item['brandorg_contactpoint_postaladdress_streetaddress'] ?? '';
+
+													}
+
+												// postOfficeBoxNumber
+
+													if ( !$contactPoint_PostalAddress_item_streetaddress_query ) {
+
+														$contactPoint_PostalAddress_item['postofficeboxnumber'] = $item['brandorg_contactpoint_postaladdress_postofficeboxnumber'] ?? '';
+
+													}
+
+											// addressLocality
+
+												$contactPoint_PostalAddress_item['addresslocality'] = $item['brandorg_contactpoint_postaladdress_addresslocality'] ?? '';
+
+											// addressRegion
+
+												$contactPoint_PostalAddress_item['addressregion'] = $item['brandorg_contactpoint_postaladdress_addressregion'] ?? '';
+
+											// postalCode
+
+												$contactPoint_PostalAddress_item['postalCode'] = $item['brandorg_contactpoint_postaladdress_postalcode'] ?? '';
+
+											// addressCountry
+
+												$contactPoint_PostalAddress_item['addresscountry'] = $item['brandorg_contactpoint_postaladdress_addresscountry'] ?? '';
+
+										// Clean up item schema array
+
+											$contactPoint_PostalAddress_item = array_filter($contactPoint_PostalAddress_item);
+
+										// Add @type
+
+											if ( $contactPoint_PostalAddress_item ) {
+
+												$contactPoint_PostalAddress_item = array( '@type' => 'PostalAddress' ) + $contactPoint_PostalAddress_item;
+
+											}
+
+										// Add to list
+
+											if ( $contactPoint_PostalAddress_item ) {
+
+												$contactPoint_list[] = $contactPoint_PostalAddress_item;
+												$address = $address ?? $contactPoint_PostalAddress_item;
+
+											}
+
+									}
+
+								}
+
+						// telephone
+
+							// Base root-level telephone value
+
+								$telephone = null;
+
+							// Get the repeater field
+
+								$contactPoint_telephone_repeater = get_field( 'brandorg_contactpoint_telephone', $term ) ?? null;
+
+							// Get the subfields
+
+								if ( $contactPoint_telephone_repeater ) {
+
+									foreach ( $contactPoint_telephone_repeater as $item ) {
+
+										// Base array
+
+										$contactPoint_telephone_item = array(
+											'contactOption' => '',
+											'contactType' => '',
+											'telephone' => ''
+										);
+
+										// Set values
+
+											// contactType
+
+												$contactPoint_telephone_item['contactType'] = $item['brandorg_contactpoint_telephone_contacttype'] ?? '';
+
+											// telephone
+
+												$contactPoint_telephone_item['telephone'] = $item['brandorg_contactpoint_telephone_text'] ?? '';
+
+											// contactOption
+
+												$contactPoint_telephone_item['contactOption'] = $item['brandorg_contactpoint_telephone_contactoption'] ?? '';
+
+										// Clean up item schema array
+
+											$contactPoint_telephone_item = array_filter($contactPoint_telephone_item);
+
+										// Add @type
+
+											if ( $contactPoint_telephone_item ) {
+
+												$contactPoint_telephone_item = array( '@type' => 'ContactPoint' ) + $contactPoint_telephone_item;
+
+											}
+
+										// Add to list
+
+											if ( $contactPoint_telephone_item ) {
+
+												$contactPoint_list[] = $contactPoint_telephone_item;
+
+											}
+
+											if (
+												$contactPoint_telephone_item
+												&&
+												isset($contactPoint_telephone_item['telephone'])
+												&&
+												!empty($contactPoint_telephone_item['telephone'])
+											) {
+
+												$contactPoint_list[] = $contactPoint_telephone_item;
+												$telephone = $telephone ?? $contactPoint_telephone_item['telephone'];
+
+											}
+
+									}
+
+								}
+
+						// faxNumber
+
+							// Base root-level faxNumber value
+
+								$faxNumber = null;
+
+							// Get the repeater field
+
+								$contactPoint_faxNumber_repeater = get_field( 'brandorg_contactpoint_faxnumber', $term ) ?? null;
+
+							// Get the subfields
+
+								if ( $contactPoint_faxNumber_repeater ) {
+
+									foreach ( $contactPoint_faxNumber_repeater as $item ) {
+
+										// Base array
+
+										$contactPoint_faxNumber_item = array(
+											'contactType' => '',
+											'faxNumber' => ''
+										);
+
+										// Set values
+
+											// contactType
+
+												$contactPoint_faxNumber_item['contactType'] = $item['brandorg_contactpoint_faxnumber_contacttype'] ?? '';
+
+											// faxNumber
+
+												$contactPoint_faxNumber_item['faxNumber'] = $item['brandorg_contactpoint_faxnumber_text'] ?? '';
+
+										// Clean up item schema array
+
+											$contactPoint_faxNumber_item = array_filter($contactPoint_faxNumber_item);
+
+										// Add @type
+
+											if ( $contactPoint_faxNumber_item ) {
+
+												$contactPoint_faxNumber_item = array( '@type' => 'ContactPoint' ) + $contactPoint_faxNumber_item;
+
+											}
+
+										// Add to list
+
+											if (
+												$contactPoint_faxNumber_item
+												&&
+												isset($contactPoint_faxNumber_item['faxNumber'])
+												&&
+												!empty($contactPoint_faxNumber_item['faxNumber'])
+											) {
+
+												$contactPoint_list[] = $contactPoint_faxNumber_item;
+												$faxNumber = $faxNumber ?? $contactPoint_faxNumber_item['faxNumber'];
+
+											}
+
+									}
+
+								}
+
+						// email
+
+							// Base root-level email value
+
+								$email = null;
+
+							// Get the repeater field
+
+								$contactPoint_email_repeater = get_field( 'brandorg_contactpoint_email', $term ) ?? null;
+
+							// Get the subfields
+
+								if ( $contactPoint_email_repeater ) {
+
+									foreach ( $contactPoint_email_repeater as $item ) {
+
+										// Base array
+
+										$contactPoint_email_item = array(
+											'contactType' => '',
+											'email' => ''
+										);
+
+										// Set values
+
+											// contactType
+
+												$contactPoint_email_item['contactType'] = $item['brandorg_contactpoint_email_contacttype'] ?? '';
+
+											// email
+
+												$contactPoint_email_item['email'] = $item['brandorg_contactpoint_email_text'] ?? '';
+
+										// Clean up item schema array
+
+											$contactPoint_email_item = array_filter($contactPoint_email_item);
+
+										// Add @type
+
+											if (
+												$contactPoint_email_item
+											) {
+
+												$contactPoint_email_item = array( '@type' => 'ContactPoint' ) + $contactPoint_email_item;
+
+											}
+
+										// Add to list
+
+											if (
+												$contactPoint_email_item
+												&&
+												isset($contactPoint_email_item['email'])
+												&&
+												!empty($contactPoint_email_item['email'])
+											) {
+
+												$contactPoint_list[] = $contactPoint_email_item;
+												$email = $email ?? $contactPoint_email_item['email'];
+
+											}
+
+										// Add
+
+									}
+
+								}
+
+						// Clean up the list array
+
+							uamswp_fad_flatten_multidimensional_array($contactPoint_list);
+
+						if ( $contactPoint_list ) {
+
+							$output['contactPoint'] = $contactPoint_list;
 
 						}
 
@@ -6144,14 +6270,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$contactPoints = get_field( 'foo', $term ) ?? null;
-
-						if ( $contactPoints ) {
-
-							$output['contactPoints'] = $contactPoints;
-
-						}
-
 					// containedIn
 
 						/**
@@ -6168,14 +6286,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$containedIn = get_field( 'foo', $term ) ?? null;
-
-						if ( $containedIn ) {
-
-							$output['containedIn'] = $containedIn;
-
-						}
 
 					// containedInPlace
 
@@ -6194,14 +6304,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$containedInPlace = get_field( 'foo', $term ) ?? null;
-
-						if ( $containedInPlace ) {
-
-							$output['containedInPlace'] = $containedInPlace;
-
-						}
-
 					// containsPlace
 
 						/**
@@ -6219,14 +6321,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$containsPlace = get_field( 'foo', $term ) ?? null;
-
-						if ( $containsPlace ) {
-
-							$output['containsPlace'] = $containsPlace;
-
-						}
-
 					// correctionsPolicy
 
 						/**
@@ -6239,12 +6333,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$correctionsPolicy = get_field( 'foo', $term ) ?? null;
+						$correctionsPolicy = get_field( 'brandorg_correctionspolicy', $term ) ?? null;
 
 						if ( $correctionsPolicy ) {
 
@@ -6269,14 +6360,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$currenciesAccepted = get_field( 'foo', $term ) ?? null;
-
-						if ( $currenciesAccepted ) {
-
-							$output['currenciesAccepted'] = $currenciesAccepted;
-
-						}
-
 					// department
 
 						/**
@@ -6294,14 +6377,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$department = get_field( 'foo', $term ) ?? null;
-
-						if ( $department ) {
-
-							$output['department'] = $department;
-
-						}
-
 					// description
 
 						/**
@@ -6314,12 +6389,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$description = get_field( 'foo', $term ) ?? null;
+						$description = get_field( 'brandorg_description', $term ) ?? null;
 
 						if ( $description ) {
 
@@ -6339,12 +6411,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$disambiguatingDescription = get_field( 'foo', $term ) ?? null;
+						$disambiguatingDescription = get_field( 'brandorg_disambiguatingdescription', $term ) ?? null;
 
 						if ( $disambiguatingDescription ) {
 
@@ -6369,14 +6438,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$dissolutionDate = get_field( 'foo', $term ) ?? null;
-
-						if ( $dissolutionDate ) {
-
-							$output['dissolutionDate'] = $dissolutionDate;
-
-						}
-
 					// diversityPolicy
 
 						/**
@@ -6389,12 +6450,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$diversityPolicy = get_field( 'foo', $term ) ?? null;
+						$diversityPolicy = get_field( 'brandorg_diversitypolicy', $term ) ?? null;
 
 						if ( $diversityPolicy ) {
 
@@ -6414,12 +6472,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$diversityStaffingReport = get_field( 'foo', $term ) ?? null;
+						$diversityStaffingReport = get_field( 'brandorg_diversitystaffingreport', $term ) ?? null;
 
 						if ( $diversityStaffingReport ) {
 
@@ -6439,12 +6494,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$duns = get_field( 'foo', $term ) ?? null;
+						$duns = get_field( 'brandorg_duns', $term ) ?? null;
 
 						if ( $duns ) {
 
@@ -6469,14 +6521,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$email = get_field( 'foo', $term ) ?? null;
-
-						if ( $email ) {
-
-							$output['email'] = $email;
-
-						}
-
 					// employee
 
 						/**
@@ -6493,14 +6537,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$employee = get_field( 'foo', $term ) ?? null;
-
-						if ( $employee ) {
-
-							$output['employee'] = $employee;
-
-						}
 
 					// employees
 
@@ -6519,14 +6555,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$employees = get_field( 'foo', $term ) ?? null;
-
-						if ( $employees ) {
-
-							$output['employees'] = $employees;
-
-						}
-
 					// ethicsPolicy
 
 						/**
@@ -6539,12 +6567,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$ethicsPolicy = get_field( 'foo', $term ) ?? null;
+						$ethicsPolicy = get_field( 'brandorg_ethicspolicy', $term ) ?? null;
 
 						if ( $ethicsPolicy ) {
 
@@ -6569,14 +6594,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$event = get_field( 'foo', $term ) ?? null;
-
-						if ( $event ) {
-
-							$output['event'] = $event;
-
-						}
-
 					// events
 
 						/**
@@ -6593,14 +6610,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$events = get_field( 'foo', $term ) ?? null;
-
-						if ( $events ) {
-
-							$output['events'] = $events;
-
-						}
 
 					// faxNumber
 
@@ -6619,14 +6628,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$faxNumber = get_field( 'foo', $term ) ?? null;
-
-						if ( $faxNumber ) {
-
-							$output['faxNumber'] = $faxNumber;
-
-						}
-
 					// feesAndCommissionsSpecification
 
 						/**
@@ -6643,14 +6644,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$feesAndCommissionsSpecification = get_field( 'foo', $term ) ?? null;
-
-						if ( $feesAndCommissionsSpecification ) {
-
-							$output['feesAndCommissionsSpecification'] = $feesAndCommissionsSpecification;
-
-						}
 
 					// founder
 
@@ -6669,14 +6662,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$founder = get_field( 'foo', $term ) ?? null;
-
-						if ( $founder ) {
-
-							$output['founder'] = $founder;
-
-						}
-
 					// founders
 
 						/**
@@ -6693,14 +6678,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$founders = get_field( 'foo', $term ) ?? null;
-
-						if ( $founders ) {
-
-							$output['founders'] = $founders;
-
-						}
 
 					// foundingDate
 
@@ -6719,14 +6696,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$foundingDate = get_field( 'foo', $term ) ?? null;
-
-						if ( $foundingDate ) {
-
-							$output['foundingDate'] = $foundingDate;
-
-						}
-
 					// foundingLocation
 
 						/**
@@ -6743,14 +6712,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$foundingLocation = get_field( 'foo', $term ) ?? null;
-
-						if ( $foundingLocation ) {
-
-							$output['foundingLocation'] = $foundingLocation;
-
-						}
 
 					// funder
 
@@ -6769,14 +6730,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$funder = get_field( 'foo', $term ) ?? null;
-
-						if ( $funder ) {
-
-							$output['funder'] = $funder;
-
-						}
-
 					// funding
 
 						/**
@@ -6793,14 +6746,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$funding = get_field( 'foo', $term ) ?? null;
-
-						if ( $funding ) {
-
-							$output['funding'] = $funding;
-
-						}
 
 					// gender
 
@@ -6819,14 +6764,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$gender = get_field( 'foo', $term ) ?? null;
-
-						if ( $gender ) {
-
-							$output['gender'] = $gender;
-
-						}
-
 					// genre
 
 						/**
@@ -6843,14 +6780,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$genre = get_field( 'foo', $term ) ?? null;
-
-						if ( $genre ) {
-
-							$output['genre'] = $genre;
-
-						}
 
 					// geo
 
@@ -6869,14 +6798,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$geo = get_field( 'foo', $term ) ?? null;
-
-						if ( $geo ) {
-
-							$output['geo'] = $geo;
-
-						}
-
 					// geoContains
 
 						/**
@@ -6893,14 +6814,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$geoContains = get_field( 'foo', $term ) ?? null;
-
-						if ( $geoContains ) {
-
-							$output['geoContains'] = $geoContains;
-
-						}
 
 					// geoCoveredBy
 
@@ -6919,14 +6832,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$geoCoveredBy = get_field( 'foo', $term ) ?? null;
-
-						if ( $geoCoveredBy ) {
-
-							$output['geoCoveredBy'] = $geoCoveredBy;
-
-						}
-
 					// geoCovers
 
 						/**
@@ -6943,14 +6848,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$geoCovers = get_field( 'foo', $term ) ?? null;
-
-						if ( $geoCovers ) {
-
-							$output['geoCovers'] = $geoCovers;
-
-						}
 
 					// geoCrosses
 
@@ -6969,14 +6866,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$geoCrosses = get_field( 'foo', $term ) ?? null;
-
-						if ( $geoCrosses ) {
-
-							$output['geoCrosses'] = $geoCrosses;
-
-						}
-
 					// geoDisjoint
 
 						/**
@@ -6993,14 +6882,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$geoDisjoint = get_field( 'foo', $term ) ?? null;
-
-						if ( $geoDisjoint ) {
-
-							$output['geoDisjoint'] = $geoDisjoint;
-
-						}
 
 					// geoEquals
 
@@ -7019,14 +6900,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$geoEquals = get_field( 'foo', $term ) ?? null;
-
-						if ( $geoEquals ) {
-
-							$output['geoEquals'] = $geoEquals;
-
-						}
-
 					// geoIntersects
 
 						/**
@@ -7043,14 +6916,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$geoIntersects = get_field( 'foo', $term ) ?? null;
-
-						if ( $geoIntersects ) {
-
-							$output['geoIntersects'] = $geoIntersects;
-
-						}
 
 					// geoOverlaps
 
@@ -7069,14 +6934,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$geoOverlaps = get_field( 'foo', $term ) ?? null;
-
-						if ( $geoOverlaps ) {
-
-							$output['geoOverlaps'] = $geoOverlaps;
-
-						}
-
 					// geoTouches
 
 						/**
@@ -7093,14 +6950,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$geoTouches = get_field( 'foo', $term ) ?? null;
-
-						if ( $geoTouches ) {
-
-							$output['geoTouches'] = $geoTouches;
-
-						}
 
 					// geoWithin
 
@@ -7119,14 +6968,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$geoWithin = get_field( 'foo', $term ) ?? null;
-
-						if ( $geoWithin ) {
-
-							$output['geoWithin'] = $geoWithin;
-
-						}
-
 					// globalLocationNumber
 
 						/**
@@ -7139,12 +6980,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$globalLocationNumber = get_field( 'foo', $term ) ?? null;
+						$globalLocationNumber = get_field( 'brandorg_globallocationnumber', $term ) ?? null;
 
 						if ( $globalLocationNumber ) {
 
@@ -7169,14 +7007,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$hasCredential = get_field( 'foo', $term ) ?? null;
-
-						if ( $hasCredential ) {
-
-							$output['hasCredential'] = $hasCredential;
-
-						}
-
 					// hasDriveThroughService
 
 						/**
@@ -7193,14 +7023,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$hasDriveThroughService = get_field( 'foo', $term ) ?? null;
-
-						if ( $hasDriveThroughService ) {
-
-							$output['hasDriveThroughService'] = $hasDriveThroughService;
-
-						}
 
 					// hasMap
 
@@ -7219,14 +7041,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$hasMap = get_field( 'foo', $term ) ?? null;
-
-						if ( $hasMap ) {
-
-							$output['hasMap'] = $hasMap;
-
-						}
-
 					// hasMenu
 
 						/**
@@ -7243,14 +7057,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$hasMenu = get_field( 'foo', $term ) ?? null;
-
-						if ( $hasMenu ) {
-
-							$output['hasMenu'] = $hasMenu;
-
-						}
 
 					// hasMerchantReturnPolicy
 
@@ -7269,14 +7075,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$hasMerchantReturnPolicy = get_field( 'foo', $term ) ?? null;
-
-						if ( $hasMerchantReturnPolicy ) {
-
-							$output['hasMerchantReturnPolicy'] = $hasMerchantReturnPolicy;
-
-						}
-
 					// hasOfferCatalog
 
 						/**
@@ -7293,14 +7091,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$hasOfferCatalog = get_field( 'foo', $term ) ?? null;
-
-						if ( $hasOfferCatalog ) {
-
-							$output['hasOfferCatalog'] = $hasOfferCatalog;
-
-						}
 
 					// hasPOS
 
@@ -7319,14 +7109,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$hasPOS = get_field( 'foo', $term ) ?? null;
-
-						if ( $hasPOS ) {
-
-							$output['hasPOS'] = $hasPOS;
-
-						}
-
 					// hasProductReturnPolicy
 
 						/**
@@ -7344,14 +7126,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$hasProductReturnPolicy = get_field( 'foo', $term ) ?? null;
-
-						if ( $hasProductReturnPolicy ) {
-
-							$output['hasProductReturnPolicy'] = $hasProductReturnPolicy;
-
-						}
-
 					// healthPlanNetworkId
 
 						/**
@@ -7364,12 +7138,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$healthPlanNetworkId = get_field( 'foo', $term ) ?? null;
+						$healthPlanNetworkId = get_field( 'brandorg_healthplannetworkid', $term ) ?? null;
 
 						if ( $healthPlanNetworkId ) {
 
@@ -7394,14 +7165,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$healthcareReportingData = get_field( 'foo', $term ) ?? null;
-
-						if ( $healthcareReportingData ) {
-
-							$output['healthcareReportingData'] = $healthcareReportingData;
-
-						}
-
 					// hospitalAffiliation
 
 						/**
@@ -7418,14 +7181,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$hospitalAffiliation = get_field( 'foo', $term ) ?? null;
-
-						if ( $hospitalAffiliation ) {
-
-							$output['hospitalAffiliation'] = $hospitalAffiliation;
-
-						}
 
 					// iataCode
 
@@ -7444,14 +7199,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$iataCode = get_field( 'foo', $term ) ?? null;
-
-						if ( $iataCode ) {
-
-							$output['iataCode'] = $iataCode;
-
-						}
-
 					// identifier
 
 						/**
@@ -7469,11 +7216,143 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$identifier = get_field( 'foo', $term ) ?? null;
+						// Base list array
 
-						if ( $identifier ) {
+							$identifier_list = array();
 
-							$output['identifier'] = $identifier;
+						// Google My Business customer ID (CID)
+
+							// Query: Does this organization have a listing on Google My Business?
+
+								$google_cid_query = get_field( 'brandorg_google_cid_query', $term ) ?? false;
+
+							// Get value
+
+								$google_cid = null;
+
+								if ( $google_cid_query ) {
+
+									$google_cid = get_field( 'schema_google_cid', $term ) ?? null;
+
+								}
+
+							// Add value to identifier list
+
+								if ( $google_cid ) {
+
+									$identifier_list = uamswp_fad_schema_propertyvalue_google_cid(
+										$google_cid, // mixed // Required // Google customer ID
+										$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+									);
+
+								}
+
+						// Other identifiers
+
+							// Get the repeater field
+
+								$identifier_repeater = get_field( 'brandorg_identifier', $term ) ?? null;
+
+							// Get the subfields
+
+								if ( $identifier_repeater ) {
+
+									foreach ( $identifier_repeater as $item ) {
+
+										// Base array
+
+										$identifier_item = array(
+											'alternateName' => '',
+											'maxValue' => '',
+											'minValue' => '',
+											'name' => '',
+											'propertyID' => '',
+											'unitCode' => '',
+											'unitText' => '',
+											'url' => '',
+											'value' => ''
+										);
+
+										// Set values
+
+											// alternateName
+
+												// Get alternateName repeater field value
+
+													$identifier_item_alternateName_repeater = get_field( 'schema_alternatename', $entity ) ?? null;
+
+												// Add each item to alternateName property values array
+
+													if ( $identifier_item_alternateName_repeater ) {
+
+														$identifier_item_alternateName = uamswp_fad_schema_alternatename(
+															$identifier_item_alternateName_repeater, // array // Required // alternateName repeater field
+															'schema_alternatename_text' // string // Optional // alternateName item field name
+														);
+
+													}
+
+												$identifier_item['alternateName'] = $identifier_item_alternateName ?? '';
+
+											// maxValue
+
+												$identifier_item['maxValue'] = $item['brandorg_identifier_maxvalue'] ?? '';
+
+											// minValue
+
+												$identifier_item['minValue'] = $item['brandorg_identifier_minvalue'] ?? '';
+
+											// name
+
+												$identifier_item['name'] = $item['brandorg_identifier_name'] ?? '';
+
+											// propertyID
+
+												$identifier_item['propertyID'] = $item['brandorg_identifier_propertyid'] ?? '';
+
+											// unitCode
+
+												$identifier_item['unitCode'] = $item['brandorg_identifier_unitcode'] ?? '';
+
+											// unitText
+
+												$identifier_item['unitText'] = $item['brandorg_identifier_unittext'] ?? '';
+
+											// url
+
+												$identifier_item['url'] = $item['brandorg_identifier_url'] ?? '';
+
+											// value
+
+												$identifier_item['value'] = $item['brandorg_identifier_value'] ?? '';
+
+										// Clean up item schema array
+
+											$identifier_item = array_filter($contactPoint_email_item);
+
+										// Add @type
+
+											if ( $identifier_item ) {
+
+												$identifier_item = array( '@type' => 'PropertyValue' ) + $identifier_item;
+
+											}
+
+										// Add to list
+
+											if ( $identifier_item ) {
+
+												$identifier_list[] = $identifier_item;
+
+											}
+
+									}
+
+								}
+
+						if ( $identifier_list ) {
+
+							$output['identifier'] = $identifier_list;
 
 						}
 
@@ -7489,12 +7368,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$image = get_field( 'foo', $term ) ?? null;
+						$image = get_field( 'brandorg_image', $term ) ?? null;
 
 						if ( $image ) {
 
@@ -7519,14 +7395,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$interactionStatistic = get_field( 'foo', $term ) ?? null;
-
-						if ( $interactionStatistic ) {
-
-							$output['interactionStatistic'] = $interactionStatistic;
-
-						}
-
 					// isAcceptingNewPatients
 
 						/**
@@ -7539,14 +7407,15 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$isAcceptingNewPatients = get_field( 'foo', $term ) ?? null;
+						$isAcceptingNewPatients = get_field( 'brandorg_isacceptingnewpatients', $term ) ?? null;
 
-						if ( $isAcceptingNewPatients ) {
+						if (
+							isset($isAcceptingNewPatients)
+							&&
+							!empty($isAcceptingNewPatients)
+						) {
 
 							$output['isAcceptingNewPatients'] = $isAcceptingNewPatients;
 
@@ -7569,14 +7438,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$isAccessibleForFree = get_field( 'foo', $term ) ?? null;
-
-						if ( $isAccessibleForFree ) {
-
-							$output['isAccessibleForFree'] = $isAccessibleForFree;
-
-						}
-
 					// isicV4
 
 						/**
@@ -7589,12 +7450,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$isicV4 = get_field( 'foo', $term ) ?? null;
+						$isicV4 = get_field( 'brandorg_isicv4', $term ) ?? null;
 
 						if ( $isicV4 ) {
 
@@ -7614,12 +7472,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$iso6523Code = get_field( 'foo', $term ) ?? null;
+						$iso6523Code = get_field( 'brandorg_iso6523code', $term ) ?? null;
 
 						if ( $iso6523Code ) {
 
@@ -7644,14 +7499,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$keywords = get_field( 'foo', $term ) ?? null;
-
-						if ( $keywords ) {
-
-							$output['keywords'] = $keywords;
-
-						}
-
 					// knowsAbout
 
 						/**
@@ -7668,14 +7515,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$knowsAbout = get_field( 'foo', $term ) ?? null;
-
-						if ( $knowsAbout ) {
-
-							$output['knowsAbout'] = $knowsAbout;
-
-						}
 
 					// knowsLanguage
 
@@ -7694,14 +7533,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$knowsLanguage = get_field( 'foo', $term ) ?? null;
-
-						if ( $knowsLanguage ) {
-
-							$output['knowsLanguage'] = $knowsLanguage;
-
-						}
-
 					// latitude
 
 						/**
@@ -7719,14 +7550,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$latitude = get_field( 'foo', $term ) ?? null;
-
-						if ( $latitude ) {
-
-							$output['latitude'] = $latitude;
-
-						}
-
 					// legalName
 
 						/**
@@ -7739,12 +7562,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$legalName = get_field( 'foo', $term ) ?? null;
+						$legalName = get_field( 'brandorg_legalname', $term ) ?? null;
 
 						if ( $legalName ) {
 
@@ -7764,12 +7584,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$leiCode = get_field( 'foo', $term ) ?? null;
+						$leiCode = get_field( 'brandorg_leicode', $term ) ?? null;
 
 						if ( $leiCode ) {
 
@@ -7794,14 +7611,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$location = get_field( 'foo', $term ) ?? null;
-
-						if ( $location ) {
-
-							$output['location'] = $location;
-
-						}
-
 					// logo
 
 						/**
@@ -7814,12 +7623,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$logo = get_field( 'foo', $term ) ?? null;
+						$logo = get_field( 'brandorg_logo', $term ) ?? null;
 
 						if ( $logo ) {
 
@@ -7843,14 +7649,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$longitude = get_field( 'foo', $term ) ?? null;
-
-						if ( $longitude ) {
-
-							$output['longitude'] = $longitude;
-
-						}
 
 					// mainEntityOfPage (specific property)
 
@@ -7892,14 +7690,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$makesOffer = get_field( 'foo', $term ) ?? null;
-
-						if ( $makesOffer ) {
-
-							$output['makesOffer'] = $makesOffer;
-
-						}
-
 					// map
 
 						/**
@@ -7916,14 +7706,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$map = get_field( 'foo', $term ) ?? null;
-
-						if ( $map ) {
-
-							$output['map'] = $map;
-
-						}
 
 					// maps
 
@@ -7942,14 +7724,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$maps = get_field( 'foo', $term ) ?? null;
-
-						if ( $maps ) {
-
-							$output['maps'] = $maps;
-
-						}
-
 					// masthead
 
 						/**
@@ -7966,14 +7740,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$masthead = get_field( 'foo', $term ) ?? null;
-
-						if ( $masthead ) {
-
-							$output['masthead'] = $masthead;
-
-						}
 
 					// maximumAttendeeCapacity
 
@@ -7992,14 +7758,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$maximumAttendeeCapacity = get_field( 'foo', $term ) ?? null;
-
-						if ( $maximumAttendeeCapacity ) {
-
-							$output['maximumAttendeeCapacity'] = $maximumAttendeeCapacity;
-
-						}
-
 					// medicalSpecialty
 
 						/**
@@ -8017,7 +7775,28 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$medicalSpecialty = get_field( 'foo', $term ) ?? null;
+						// Get values
+
+							// Get medicalSpecialty multiselect field value
+
+								$medicalSpecialty_multiselect = get_field( 'schema_medicalspecialty_multiple', $entity ) ?? null;
+
+						// Format value
+
+							// Simple list of MedicalSpecialty values
+
+								$medicalSpecialty = array();
+
+							// Schema property values
+
+								if ( $medicalSpecialty_multiselect ) {
+
+									$medicalSpecialty = uamswp_fad_schema_medicalSpecialty_select(
+										$medicalSpecialty_multiselect, // mixed // Required // MedicalSpecialty select or multi-select field value
+										$medicalSpecialty // Optional // Array to populate with the list of MedicalSpecialty values
+									);
+
+								}
 
 						if ( $medicalSpecialty ) {
 
@@ -8042,14 +7821,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$member = get_field( 'foo', $term ) ?? null;
-
-						if ( $member ) {
-
-							$output['member'] = $member;
-
-						}
-
 					// memberOf
 
 						/**
@@ -8066,14 +7837,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$memberOf = get_field( 'foo', $term ) ?? null;
-
-						if ( $memberOf ) {
-
-							$output['memberOf'] = $memberOf;
-
-						}
 
 					// members
 
@@ -8092,14 +7855,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$members = get_field( 'foo', $term ) ?? null;
-
-						if ( $members ) {
-
-							$output['members'] = $members;
-
-						}
-
 					// menu
 
 						/**
@@ -8116,14 +7871,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$menu = get_field( 'foo', $term ) ?? null;
-
-						if ( $menu ) {
-
-							$output['menu'] = $menu;
-
-						}
 
 					// missionCoveragePrioritiesPolicy
 
@@ -8142,14 +7889,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$missionCoveragePrioritiesPolicy = get_field( 'foo', $term ) ?? null;
-
-						if ( $missionCoveragePrioritiesPolicy ) {
-
-							$output['missionCoveragePrioritiesPolicy'] = $missionCoveragePrioritiesPolicy;
-
-						}
-
 					// musicGroupMember
 
 						/**
@@ -8167,14 +7906,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$musicGroupMember = get_field( 'foo', $term ) ?? null;
-
-						if ( $musicGroupMember ) {
-
-							$output['musicGroupMember'] = $musicGroupMember;
-
-						}
-
 					// naics
 
 						/**
@@ -8187,12 +7918,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$naics = get_field( 'foo', $term ) ?? null;
+						$naics = get_field( 'brandorg_naics', $term ) ?? null;
 
 						if ( $naics ) {
 
@@ -8212,12 +7940,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$name = get_field( 'foo', $term ) ?? null;
+						$name = get_field( 'brandorg_name', $term ) ?? null;
 
 						if ( $name ) {
 
@@ -8242,14 +7967,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$noBylinesPolicy = get_field( 'foo', $term ) ?? null;
-
-						if ( $noBylinesPolicy ) {
-
-							$output['noBylinesPolicy'] = $noBylinesPolicy;
-
-						}
-
 					// nonprofitStatus
 
 						/**
@@ -8262,12 +7979,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$nonprofitStatus = get_field( 'foo', $term ) ?? null;
+						$nonprofitStatus = get_field( 'schema_nonprofitstatus', $term ) ?? null;
 
 						if ( $nonprofitStatus ) {
 
@@ -8292,14 +8006,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$numberOfEmployees = get_field( 'foo', $term ) ?? null;
-
-						if ( $numberOfEmployees ) {
-
-							$output['numberOfEmployees'] = $numberOfEmployees;
-
-						}
-
 					// numberOfRooms
 
 						/**
@@ -8316,14 +8022,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$numberOfRooms = get_field( 'foo', $term ) ?? null;
-
-						if ( $numberOfRooms ) {
-
-							$output['numberOfRooms'] = $numberOfRooms;
-
-						}
 
 					// openingHours
 
@@ -8342,14 +8040,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$openingHours = get_field( 'foo', $term ) ?? null;
-
-						if ( $openingHours ) {
-
-							$output['openingHours'] = $openingHours;
-
-						}
-
 					// openingHoursSpecification
 
 						/**
@@ -8367,14 +8057,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$openingHoursSpecification = get_field( 'foo', $term ) ?? null;
-
-						if ( $openingHoursSpecification ) {
-
-							$output['openingHoursSpecification'] = $openingHoursSpecification;
-
-						}
-
 					// ownershipFundingInfo
 
 						/**
@@ -8387,12 +8069,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$ownershipFundingInfo = get_field( 'foo', $term ) ?? null;
+						$ownershipFundingInfo = get_field( 'brandorg_ownershipfundinginfo', $term ) ?? null;
 
 						if ( $ownershipFundingInfo ) {
 
@@ -8417,14 +8096,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$owns = get_field( 'foo', $term ) ?? null;
-
-						if ( $owns ) {
-
-							$output['owns'] = $owns;
-
-						}
-
 					// parentOrganization
 
 						/**
@@ -8441,14 +8112,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$parentOrganization = get_field( 'foo', $term ) ?? null;
-
-						if ( $parentOrganization ) {
-
-							$output['parentOrganization'] = $parentOrganization;
-
-						}
 
 					// paymentAccepted
 
@@ -8467,14 +8130,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$paymentAccepted = get_field( 'foo', $term ) ?? null;
-
-						if ( $paymentAccepted ) {
-
-							$output['paymentAccepted'] = $paymentAccepted;
-
-						}
-
 					// petsAllowed
 
 						/**
@@ -8491,14 +8146,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$petsAllowed = get_field( 'foo', $term ) ?? null;
-
-						if ( $petsAllowed ) {
-
-							$output['petsAllowed'] = $petsAllowed;
-
-						}
 
 					// photo
 
@@ -8517,14 +8164,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$photo = get_field( 'foo', $term ) ?? null;
-
-						if ( $photo ) {
-
-							$output['photo'] = $photo;
-
-						}
-
 					// photos
 
 						/**
@@ -8541,14 +8180,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$photos = get_field( 'foo', $term ) ?? null;
-
-						if ( $photos ) {
-
-							$output['photos'] = $photos;
-
-						}
 
 					// potentialAction
 
@@ -8567,14 +8198,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$potentialAction = get_field( 'foo', $term ) ?? null;
-
-						if ( $potentialAction ) {
-
-							$output['potentialAction'] = $potentialAction;
-
-						}
-
 					// priceRange
 
 						/**
@@ -8591,14 +8214,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$priceRange = get_field( 'foo', $term ) ?? null;
-
-						if ( $priceRange ) {
-
-							$output['priceRange'] = $priceRange;
-
-						}
 
 					// publicAccess
 
@@ -8617,14 +8232,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$publicAccess = get_field( 'foo', $term ) ?? null;
-
-						if ( $publicAccess ) {
-
-							$output['publicAccess'] = $publicAccess;
-
-						}
-
 					// publishingPrinciples
 
 						/**
@@ -8637,12 +8244,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$publishingPrinciples = get_field( 'foo', $term ) ?? null;
+						$publishingPrinciples = get_field( 'brandorg_publishingprinciples', $term ) ?? null;
 
 						if ( $publishingPrinciples ) {
 
@@ -8667,14 +8271,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$review = get_field( 'foo', $term ) ?? null;
-
-						if ( $review ) {
-
-							$output['review'] = $review;
-
-						}
-
 					// reviews
 
 						/**
@@ -8691,14 +8287,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$reviews = get_field( 'foo', $term ) ?? null;
-
-						if ( $reviews ) {
-
-							$output['reviews'] = $reviews;
-
-						}
 
 					// sameAs
 
@@ -8717,7 +8305,20 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$sameAs = get_field( 'foo', $term ) ?? null;
+						// Get sameAs repeater field value
+
+							$sameAs_repeater = get_field( 'schema_sameas', $term ) ?? null;
+
+						// Add each item to sameAs property values array
+
+							if ( $sameAs_repeater ) {
+
+								$sameAs = uamswp_fad_schema_sameas(
+									$sameAs_repeater, // sameAs repeater field
+									'schema_sameas_url' // sameAs item field name
+								);
+
+							}
 
 						if ( $sameAs ) {
 
@@ -8742,14 +8343,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$screenCount = get_field( 'foo', $term ) ?? null;
-
-						if ( $screenCount ) {
-
-							$output['screenCount'] = $screenCount;
-
-						}
-
 					// seeks
 
 						/**
@@ -8766,14 +8359,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$seeks = get_field( 'foo', $term ) ?? null;
-
-						if ( $seeks ) {
-
-							$output['seeks'] = $seeks;
-
-						}
 
 					// servesCuisine
 
@@ -8792,14 +8377,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$servesCuisine = get_field( 'foo', $term ) ?? null;
-
-						if ( $servesCuisine ) {
-
-							$output['servesCuisine'] = $servesCuisine;
-
-						}
-
 					// serviceArea
 
 						/**
@@ -8817,14 +8394,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$serviceArea = get_field( 'foo', $term ) ?? null;
-
-						if ( $serviceArea ) {
-
-							$output['serviceArea'] = $serviceArea;
-
-						}
-
 					// slogan
 
 						/**
@@ -8837,12 +8406,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$slogan = get_field( 'foo', $term ) ?? null;
+						$slogan = get_field( 'brandorg_slogan', $term ) ?? null;
 
 						if ( $slogan ) {
 
@@ -8867,14 +8433,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$smokingAllowed = get_field( 'foo', $term ) ?? null;
-
-						if ( $smokingAllowed ) {
-
-							$output['smokingAllowed'] = $smokingAllowed;
-
-						}
-
 					// specialOpeningHoursSpecification
 
 						/**
@@ -8891,14 +8449,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$specialOpeningHoursSpecification = get_field( 'foo', $term ) ?? null;
-
-						if ( $specialOpeningHoursSpecification ) {
-
-							$output['specialOpeningHoursSpecification'] = $specialOpeningHoursSpecification;
-
-						}
 
 					// sponsor
 
@@ -8917,14 +8467,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$sponsor = get_field( 'foo', $term ) ?? null;
-
-						if ( $sponsor ) {
-
-							$output['sponsor'] = $sponsor;
-
-						}
-
 					// sport
 
 						/**
@@ -8941,14 +8483,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$sport = get_field( 'foo', $term ) ?? null;
-
-						if ( $sport ) {
-
-							$output['sport'] = $sport;
-
-						}
 
 					// starRating
 
@@ -8967,14 +8501,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$starRating = get_field( 'foo', $term ) ?? null;
-
-						if ( $starRating ) {
-
-							$output['starRating'] = $starRating;
-
-						}
-
 					// subOrganization
 
 						/**
@@ -8991,14 +8517,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$subOrganization = get_field( 'foo', $term ) ?? null;
-
-						if ( $subOrganization ) {
-
-							$output['subOrganization'] = $subOrganization;
-
-						}
 
 					// subjectOf
 
@@ -9017,14 +8535,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$subjectOf = get_field( 'foo', $term ) ?? null;
-
-						if ( $subjectOf ) {
-
-							$output['subjectOf'] = $subjectOf;
-
-						}
-
 					// taxID
 
 						/**
@@ -9037,12 +8547,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$taxID = get_field( 'foo', $term ) ?? null;
+						$taxID = get_field( 'brandorg_taxid', $term ) ?? null;
 
 						if ( $taxID ) {
 
@@ -9067,14 +8574,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$telephone = get_field( 'foo', $term ) ?? null;
-
-						if ( $telephone ) {
-
-							$output['telephone'] = $telephone;
-
-						}
-
 					// tickerSymbol
 
 						/**
@@ -9087,12 +8586,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$tickerSymbol = get_field( 'foo', $term ) ?? null;
+						$tickerSymbol = get_field( 'brandorg_tickersymbol', $term ) ?? null;
 
 						if ( $tickerSymbol ) {
 
@@ -9117,14 +8613,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$tourBookingPage = get_field( 'foo', $term ) ?? null;
-
-						if ( $tourBookingPage ) {
-
-							$output['tourBookingPage'] = $tourBookingPage;
-
-						}
-
 					// track
 
 						/**
@@ -9141,14 +8629,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$track = get_field( 'foo', $term ) ?? null;
-
-						if ( $track ) {
-
-							$output['track'] = $track;
-
-						}
 
 					// tracks
 
@@ -9167,14 +8647,6 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-						$tracks = get_field( 'foo', $term ) ?? null;
-
-						if ( $tracks ) {
-
-							$output['tracks'] = $tracks;
-
-						}
-
 					// unnamedSourcesPolicy
 
 						/**
@@ -9187,12 +8659,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$unnamedSourcesPolicy = get_field( 'foo', $term ) ?? null;
+						$unnamedSourcesPolicy = get_field( 'brandorg_unnamedsourcespolicy', $term ) ?? null;
 
 						if ( $unnamedSourcesPolicy ) {
 
@@ -9212,12 +8681,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$url = get_field( 'foo', $term ) ?? null;
+						$url = get_field( 'brandorg_url', $term ) ?? null;
 
 						if ( $url ) {
 
@@ -9237,12 +8703,9 @@
 						 * Values expected to be one of these types:
 						 *
 						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
 						 */
 
-						$vatID = get_field( 'foo', $term ) ?? null;
+						$vatID = get_field( 'brandorg_vatid', $term ) ?? null;
 
 						if ( $vatID ) {
 
@@ -9266,14 +8729,6 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
-
-						$verificationFactCheckingPolicy = get_field( 'foo', $term ) ?? null;
-
-						if ( $verificationFactCheckingPolicy ) {
-
-							$output['verificationFactCheckingPolicy'] = $verificationFactCheckingPolicy;
-
-						}
 
 
 						/**
