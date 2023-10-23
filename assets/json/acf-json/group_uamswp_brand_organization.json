@@ -1069,10 +1069,10 @@
 		},
 		{
 			"key": "field_brandorg_taxid",
-			"label": "Tax \/ Fiscal ID (taxID > Text)",
+			"label": "Taxpayer Identification Number (taxID > Text)",
 			"name": "brandorg_taxid",
 			"type": "text",
-			"instructions": "The Tax \/ Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF\/NIF in Spain.",
+			"instructions": "The Taxpayer Identification Number of the organization.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
