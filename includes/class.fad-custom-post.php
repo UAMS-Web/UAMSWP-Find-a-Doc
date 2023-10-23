@@ -1139,6 +1139,13 @@
 					 * Arkansas Children's Hospital (Slug: 'ach')
 					 * Arkansas Children's Northwest (Slug: 'arkansas-childrens-northwest')
 					 * Arkansas State Hospital (Slug: 'arkansas-state-hospital')
+					 * Baptist Health Medical Center-Arkadelphia (Slug: 'baptist-health-medical-center_arkadelphia')
+					 * Baptist Health Medical Center-Conway (Slug: 'baptist-health-medical-center_conway')
+					 * Baptist Health Medical Center-Heber Springs (Slug: 'baptist-health-medical-center_heber-springs')
+					 * Baptist Health Medical Center-Hot Spring County (Slug: 'baptist-health-medical-center_hot-spring-county')
+					 * Baptist Health Medical Center-Little Rock (Slug: 'baptist-health-medical-center_little-rock')
+					 * Baptist Health Medical Center-North Little Rock (Slug: 'baptist-health-medical-center_north-little-rock')
+					 * Baptist Health Medical Center-Stuttgart (Slug: 'baptist-health-medical-center_stuttgart')
 					 * John L. McClellan Memorial Veterans' Hospital (Slug: 'cavhs')
 					 * UAMS Medical Center (Slug: 'uams')
 
