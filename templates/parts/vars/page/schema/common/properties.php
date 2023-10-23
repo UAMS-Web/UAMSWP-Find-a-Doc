@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * Required vars:
  *     $entity ($id of current post)
  *     $schema_base_org_uams
@@ -140,7 +140,7 @@
 
 	// abstract [WIP]
 
-		/*
+		/**
 		 * An abstract is a short description that summarizes a CreativeWork.
 		 *
 		 * Values expected to be one of these types:
@@ -165,7 +165,7 @@
 
 	// accessibilityAPI [WIP]
 
-		/*
+		/**
 		 * Indicates that the resource is compatible with the referenced accessibility
 		 * API. Values should be drawn from the approved vocabulary
 		 * (https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityAPI-vocabulary).
@@ -193,7 +193,7 @@
 
 	// accessibilityControl [WIP]
 
-		/*
+		/**
 		 * Identifies input methods that are sufficient to fully control the described
 		 * resource. Values should be drawn from the approved vocabulary
 		 * (https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityControl-vocabulary).
@@ -221,7 +221,7 @@
 
 	// accessibilityFeature [WIP]
 
-		/*
+		/**
 		 * Content features of the resource, such as accessible media, alternatives and
 		 * supported enhancements for accessibility. Values should be drawn from the
 		 * approved vocabulary
@@ -250,7 +250,7 @@
 
 	// accessibilityHazard [WIP]
 
-		/*
+		/**
 		 * A characteristic of the described resource that is physiologically dangerous to
 		 * some users. Related to WCAG 2.0 guideline 2.3. Values should be drawn from the
 		 * approved vocabulary.
@@ -278,7 +278,7 @@
 
 	// accessibilitySummary [WIP]
 
-		/*
+		/**
 		 * A human-readable summary of specific accessibility features or deficiencies,
 		 * consistent with the other accessibility metadata but expressing subtleties such
 		 * as "short descriptions are present but long descriptions will be needed for
@@ -308,7 +308,7 @@
 
 	// accessMode [WIP]
 
-		/*
+		/**
 		 * The human sensory perceptual system or cognitive faculty through which a person
 		 * may process or perceive information. Values should be drawn from the approved
 		 * vocabulary.
@@ -336,7 +336,7 @@
 
 	// accessModeSufficient [WIP]
 
-		/*
+		/**
 		 * A list of single or combined accessModes that are sufficient to understand all
 		 * the intellectual content of a resource. Values should be drawn from the
 		 * approved vocabulary.
@@ -364,7 +364,7 @@
 
 	// accountablePerson [excluded]
 
-		/*
+		/**
 		 * Specifies the Person that is legally accountable for the CreativeWork.
 		 *
 		 * Values expected to be one of these types:
@@ -378,7 +378,7 @@
 
 	// acquireLicensePage [excluded]
 
-		/*
+		/**
 		 * Indicates a page documenting how licenses can be purchased or otherwise
 		 * acquired, for the current item.
 		 *
@@ -397,7 +397,7 @@
 
 	// actor [excluded]
 
-		/*
+		/**
 		 * An actor (e.g., in TV, radio, movie, video games, an event). Actors can be
 		 * associated with individual items or with a series, episode, clip.
 		 *
@@ -408,13 +408,13 @@
 
 	// actors [superseded]
 
-		/*
+		/**
 		 * SupersededBy: actor
 		 */
 
 	// affiliation
 
-		/*
+		/**
 		 * An organization that this person is affiliated with. For example, a
 		 * school/university, a club, or a team.
 		 *
@@ -446,7 +446,7 @@
 
 	// alternativeHeadline [excluded]
 
-		/*
+		/**
 		 * A secondary title of the CreativeWork.
 		 *
 		 * Values expected to be one of these types:
@@ -459,7 +459,7 @@
 
 	// archivedAt [excluded for MedicalWebPage]
 
-		/*
+		/**
 		 * Indicates a page or other link involved in archival of a CreativeWork. In the
 		 * case of MediaReview, the items in a MediaReviewItem may often become
 		 * inaccessible, but be archived by archival, journalistic, activist, or law
@@ -481,7 +481,7 @@
 
 	// areaServed
 
-		/*
+		/**
 		 * The geographic area where a service or offered item is provided.
 		 *
 		 * Values expected to be one of these types:
@@ -510,7 +510,7 @@
 
 	// articleSection [excluded]
 
-		/*
+		/**
 		 * Articles may belong to one or more 'sections' in a magazine or newspaper, such
 		 * as Sports, Lifestyle, etc.
 		 *
@@ -524,13 +524,13 @@
 
 	// aspect [superseded]
 
-		/*
+		/**
 		 * SupersededBy: mainContentOfPage
 		 */
 
 	// assesses [excluded]
 
-		/*
+		/**
 		 * The item being described is intended to assess the competency or learning
 		 * outcome defined by the referenced term.
 		 *
@@ -546,7 +546,7 @@
 
 	// associatedArticle [excluded]
 
-		/*
+		/**
 		 * A NewsArticle associated with the Media Object.
 		 *
 		 * Values expected to be one of these types:
@@ -559,7 +559,7 @@
 
 	// associatedMedia [excluded]
 
-		/*
+		/**
 		 * A media object that encodes this CreativeWork. This property is a synonym for
 		 * encoding.
 		 *
@@ -573,7 +573,7 @@
 
 	// audience
 
-		/*
+		/**
 		 * An intended audience, i.e. a group for whom something was created.
 		 *
 		 * Values expected to be one of these types:
@@ -595,7 +595,7 @@
 
 	// audio [excluded for MedicalWebPage]
 
-		/*
+		/**
 		 * An embedded audio object.
 		 *
 		 * Values expected to be one of these types:
@@ -610,7 +610,7 @@
 
 	// author
 
-		/*
+		/**
 		 * The author of this content or rating. Please note that author is special in
 		 * that HTML 5 provides a special mechanism for indicating authorship via the rel
 		 * tag. That is equivalent to this and may be used interchangeably.
@@ -648,7 +648,7 @@
 
 	// award [excluded for MedicalWebPage]
 
-		/*
+		/**
 		 * An award won by or for this item.
 		 *
 		 * Values expected to be one of these types:
@@ -661,13 +661,13 @@
 
 	// awards [superseded]
 
-		/*
+		/**
 		 * SupersededBy: award
 		 */
 
 	// backstory [excluded]
 
-		/*
+		/**
 		 * For an Article, typically a NewsArticle, the backstory property provides a
 		 * textual summary giving a brief explanation of why and how an article was
 		 * created. In a journalistic setting this could include information about
@@ -688,7 +688,7 @@
 
 	// brand
 
-		/*
+		/**
 		 * The brand(s) associated with a product or service, or the brand(s) maintained
 		 * by an organization or business person.
 		 *
@@ -721,7 +721,7 @@
 
 	// character [excluded]
 
-		/*
+		/**
 		 * Fictional person connected with a creative work.
 		 *
 		 * Values expected to be one of these types:
@@ -734,7 +734,7 @@
 
 	// comment [excluded]
 
-		/*
+		/**
 		 * Comments, typically from users.
 		 *
 		 * Values expected to be one of these types:
@@ -747,7 +747,7 @@
 
 	// commentCount [excluded]
 
-		/*
+		/**
 		 * The number of comments this CreativeWork (e.g. Article, Question or Answer) has
 		 * received. This is most applicable to works published in Web sites with
 		 * commenting system; additional comments may exist elsewhere.
@@ -762,7 +762,7 @@
 
 	// conditionsOfAccess [excluded]
 
-		/*
+		/**
 		 * Conditions that affect the availability of, or method(s) of access to, an item.
 		 * Typically used for real world items such as an ArchiveComponent held by an
 		 * ArchiveOrganization. This property is not suitable for use as a general Web
@@ -785,7 +785,7 @@
 
 	// contentRating [excluded]
 
-		/*
+		/**
 		 * Official rating of a piece of content (e.g., 'MPAA PG-13').
 		 *
 		 * Values expected to be one of these types:
@@ -799,7 +799,7 @@
 
 	// contentReferenceTime [excluded]
 
-		/*
+		/**
 		 * The specific time described by a creative work, for works (e.g., articles,
 		 * video objects) that emphasize a particular moment within an Event.
 		 *
@@ -817,7 +817,7 @@
 
 	// contributor
 
-		/*
+		/**
 		 * A secondary contributor to the CreativeWork or Event.
 		 *
 		 * Values expected to be one of these types:
@@ -853,7 +853,7 @@
 
 	// copyrightHolder
 
-		/*
+		/**
 		 * The party holding the legal copyright to the CreativeWork.
 		 *
 		 * Values expected to be one of these types:
@@ -889,7 +889,7 @@
 
 	// copyrightNotice [WIP]
 
-		/*
+		/**
 		 * Text of a notice appropriate for describing the copyright aspects of this
 		 * Creative Work, ideally indicating the owner of the copyright for the Work.
 		 *
@@ -920,7 +920,7 @@
 
 	// copyrightYear [WIP]
 
-		/*
+		/**
 		 * The year during which the claimed copyright for the CreativeWork was first
 		 * asserted.
 		 *
@@ -947,7 +947,7 @@
 
 	// correction [excluded]
 
-		/*
+		/**
 		 * Indicates a correction to a CreativeWork, either via a CorrectionComment,
 		 * textually or in another document.
 		 *
@@ -967,7 +967,7 @@
 
 	// countryOfOrigin
 
-		/*
+		/**
 		 * The country of origin of something, including products as well as creative
 		 * works such as movie and TV content.
 		 *
@@ -1003,7 +1003,7 @@
 
 	// creativeWorkStatus
 
-		/*
+		/**
 		 * The status of a creative work in terms of its stage in a lifecycle. Example
 		 * terms include Incomplete, Draft, Published, Obsolete. Some organizations define
 		 * a set of terms for the stages of their publication lifecycle.
@@ -1036,7 +1036,7 @@
 
 	// creator
 
-		/*
+		/**
 		 * The creator/author of this CreativeWork. This is the same as the Author
 		 * property for CreativeWork.
 		 *
@@ -1073,7 +1073,7 @@
 
 	// creditText
 
-		/*
+		/**
 		 * Text that can be used to credit person(s) and/or organization(s) associated
 		 * with a published Creative Work.
 		 *
@@ -1100,7 +1100,7 @@
 
 	// dateCreated [excluded]
 
-		/*
+		/**
 		 * The date on which the CreativeWork was created or the item was added to a
 		 * DataFeed.
 		 *
@@ -1116,7 +1116,7 @@
 
 	// dateModified
 
-		/*
+		/**
 		 * The date on which the CreativeWork was most recently modified or when the
 		 * item's entry was modified within a DataFeed.
 		 *
@@ -1148,7 +1148,7 @@
 
 	// datePublished
 
-		/*
+		/**
 		 * Date of first broadcast/publication.
 		 *
 		 * Values expected to be one of these types:
@@ -1175,7 +1175,7 @@
 
 	// description
 
-		/*
+		/**
 		 * A description of the item.
 		 *
 		 * Values expected to be one of these types:
@@ -1197,7 +1197,7 @@
 
 	// director [excluded]
 
-		/*
+		/**
 		 * A director of e.g. TV, radio, movie, video gaming etc. content, or of an event.
 		 * Directors can be associated with individual items or with a series, episode,
 		 * clip.
@@ -1212,13 +1212,13 @@
 
 	// directors [superseded]
 
-		/*
+		/**
 		 * SupersededBy: director
 		 */
 
 	// discussionUrl [excluded]
 
-		/*
+		/**
 		 * A link to the page containing the comments of the CreativeWork.
 		 *
 		 * Values expected to be one of these types:
@@ -1231,7 +1231,7 @@
 
 	// editEIDR [excluded]
 
-		/*
+		/**
 		 * An EIDR (Entertainment Identifier Registry) identifier representing a specific
 		 * edit / edition for a work of film or television.
 		 *
@@ -1266,7 +1266,7 @@
 
 	// editor [excluded]
 
-		/*
+		/**
 		 * Specifies the Person who edited the CreativeWork.
 		 *
 		 * Values expected to be one of these types:
@@ -1279,7 +1279,7 @@
 
 	// educationalAlignment [excluded]
 
-		/*
+		/**
 		 * An alignment to an established educational framework.
 		 *
 		 * This property should not be used where the nature of the alignment can be
@@ -1299,7 +1299,7 @@
 
 	// educationalLevel [excluded]
 
-		/*
+		/**
 		 * The level in terms of progression through an educational or training context.
 		 * Examples of educational levels include 'beginner', 'intermediate' or
 		 * 'advanced', and formal sets of level indicators.
@@ -1320,7 +1320,7 @@
 
 	// educationalUse [excluded]
 
-		/*
+		/**
 		 * The purpose of a work in the context of education; for example, 'assignment',
 		 * 'group work'.
 		 *
@@ -1335,7 +1335,7 @@
 
 	// endTime [excluded]
 
-		/*
+		/**
 		 * The endTime of something. For a reserved event or service
 		 * (e.g., FoodEstablishmentReservation), the time that it is expected to end.
 		 * For actions that span a period of time, when the action was performed
@@ -1357,7 +1357,7 @@
 
 	// encodesCreativeWork [excluded]
 
-		/*
+		/**
 		 * The CreativeWork encoded by this media object.
 		 *
 		 * Inverse-property: encoding
@@ -1372,7 +1372,7 @@
 
 	// encoding [excluded]
 
-		/*
+		/**
 		 * A media object that encodes this CreativeWork. This property is a synonym for
 		 * associatedMedia.
 		 *
@@ -1388,13 +1388,13 @@
 
 	// encodings [superseded]
 
-		/*
+		/**
 		 * SupersededBy: encoding
 		 */
 
 	// exampleOfWork [excluded]
 
-		/*
+		/**
 		 * A creative work that this work is an example/instance/realization/derivation of.
 		 *
 		 * Inverse-property: workExample
@@ -1409,7 +1409,7 @@
 
 	// exifData [excluded]
 
-		/*
+		/**
 		 * exif data for this object.
 		 *
 		 * Values expected to be one of these types:
@@ -1423,7 +1423,7 @@
 
 	// expires [excluded]
 
-		/*
+		/**
 		 * Date the content expires and is no longer useful or available. For example a
 		 * VideoObject or NewsArticle whose availability or relevance is time-limited, or
 		 * a ClaimReview fact check whose publisher wants to indicate that it may no
@@ -1440,13 +1440,13 @@
 
 	// fileFormat [superseded]
 
-		/*
+		/**
 		 * SupersededBy: encodingFormat
 		 */
 
 	// funder [excluded]
 
-		/*
+		/**
 		 * A person or organization that supports (sponsors) something through some kind
 		 * of financial contribution.
 		 *
@@ -1461,7 +1461,7 @@
 
 	// funding [excluded]
 
-		/*
+		/**
 		 * A Grant that directly or indirectly provide funding or sponsorship for this
 		 * item. See also ownershipFundingInfo.
 		 *
@@ -1484,7 +1484,7 @@
 
 	// genre [excluded]
 
-		/*
+		/**
 		 * Genre of the creative work, broadcast channel or group.
 		 *
 		 * Values expected to be one of these types:
@@ -1498,7 +1498,7 @@
 
 	// headline [excluded for MedicalWebPage]
 
-		/*
+		/**
 		 * Headline of the article.
 		 *
 		 * Values expected to be one of these types:
@@ -1511,7 +1511,7 @@
 
 	// ineligibleRegion [excluded]
 
-		/*
+		/**
 		 * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the
 		 * GeoShape for the geo-political region(s) for which the offer or delivery charge
 		 * specification is not valid (e.g., a region where the transaction is not
@@ -1535,7 +1535,7 @@
 
 	// inLanguage
 
-		/*
+		/**
 		 * The language of the content or performance or used in an action. Please use one
 		 * of the language codes from the IETF BCP 47 standard. See also availableLanguage.
 		 *
@@ -1563,7 +1563,7 @@
 
 	// interactionStatistic [excluded]
 
-		/*
+		/**
 		 * The number of interactions for the CreativeWork using the WebSite or
 		 * SoftwareApplication. The most specific child type of InteractionCounter should
 		 * be used.
@@ -1579,7 +1579,7 @@
 
 	// interactivityType [excluded]
 
-		/*
+		/**
 		 * The predominant mode of learning supported by the learning resource. Acceptable
 		 * values are 'active', 'expositive', or 'mixed'.
 		 *
@@ -1593,7 +1593,7 @@
 
 	// interpretedAsClaim [excluded]
 
-		/*
+		/**
 		 * Used to indicate a specific claim contained, implied, translated or refined
 		 * from the content of a MediaObject or other CreativeWork. The interpreting party
 		 * can be indicated using claimInterpreter.
@@ -1612,7 +1612,7 @@
 
 	// isAccessibleForFree (MedicalWebPage only)
 
-		/*
+		/**
 		 * A flag to signal that the item, event, or place is accessible for free.
 		 *
 		 * Values expected to be one of these types:
@@ -1634,7 +1634,7 @@
 
 	// isBasedOn [excluded for MedicalWebPage]
 
-		/*
+		/**
 		 * A resource from which this work is derived or from which it is a modification
 		 * or adaptation.
 		 *
@@ -1650,13 +1650,13 @@
 
 	// isBasedOnUrl [superseded]
 
-		/*
+		/**
 		 * SupersededBy: isBasedOn
 		 */
 
 	// isFamilyFriendly
 
-		/*
+		/**
 		 * Indicates whether this content is family friendly.
 		 *
 		 * Values expected to be one of these types:
@@ -1678,7 +1678,7 @@
 
 	// isPartOf (MedicalWebPage only)
 
-		/*
+		/**
 		 * Indicates an item or CreativeWork that this item, or CreativeWork (in some
 		 * sense), is part of.
 		 *
@@ -1717,7 +1717,7 @@
 
 	// lastReviewed
 
-		/*
+		/**
 		 * Date on which the content on this web page was last reviewed for accuracy
 		 * and/or completeness.
 		 *
@@ -1748,7 +1748,7 @@
 
 	// learningResourceType [excluded for MedicalWebPage]
 
-		/*
+		/**
 		 * The predominant type or kind characterizing the learning resource. For example,
 		 * 'presentation', 'handout'.
 		 *
@@ -1763,7 +1763,7 @@
 
 	// license [excluded]
 
-		/*
+		/**
 		 * A license document that applies to this content, typically indicated by URL.
 		 *
 		 * Values expected to be one of these types:
@@ -1777,7 +1777,7 @@
 
 	// locationCreated
 
-		/*
+		/**
 		 * The location where the CreativeWork was created, which may not be the same as
 		 * the location depicted in the CreativeWork.
 		 *
@@ -1813,7 +1813,7 @@
 
 	// mainContentOfPage (MedicalWebPage only)
 
-		/*
+		/**
 		 * Indicates if this web page element is the main subject of the page.
 		 *
 		 * Values expected to be one of these types:
@@ -1842,7 +1842,7 @@
 
 	// mainEntityOfPage (excluding MedicalWebPage)
 
-		/*
+		/**
 		 * Indicates a page (or other CreativeWork) for which this thing is the main
 		 * entity being described. See background notes at
 		 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
@@ -1878,7 +1878,7 @@
 
 	// maintainer
 
-		/*
+		/**
 		 * A maintainer of a Dataset, software package (SoftwareApplication), or other
 		 * Project.
 		 *
@@ -1932,7 +1932,7 @@
 
 	// material [excluded]
 
-		/*
+		/**
 		 * A material that something is made from, e.g. leather, wool, cotton, paper.
 		 *
 		 * Values expected to be one of these types:
@@ -1947,7 +1947,7 @@
 
 	// materialExtent [excluded]
 
-		/*
+		/**
 		 * The quantity of the materials being described or an expression of the physical
 		 * space they occupy.
 		 *
@@ -1966,7 +1966,7 @@
 
 	// medicalAudience
 
-		/*
+		/**
 		 * Medical audience for page.
 		 *
 		 * Values expected to be one of these types:
@@ -1985,7 +1985,7 @@
 
 	// memberOf
 
-		/*
+		/**
 		 * An Organization (or ProgramMembership) to which this Person or Organization
 		 * belongs.
 		 *
@@ -2020,7 +2020,7 @@
 
 	// musicBy [excluded]
 
-		/*
+		/**
 		 * The composer of the soundtrack.
 		 *
 		 * Values expected to be one of these types:
@@ -2034,7 +2034,7 @@
 
 	// pageEnd [excluded]
 
-		/*
+		/**
 		 * The page on which the work ends; for example "138" or "xvi".
 		 *
 		 * Values expected to be one of these types:
@@ -2048,7 +2048,7 @@
 
 	// pageStart [excluded]
 
-		/*
+		/**
 		 * The page on which the work starts; for example "135" or "xiii".
 		 *
 		 * Values expected to be one of these types:
@@ -2062,7 +2062,7 @@
 
 	// pagination [excluded]
 
-		/*
+		/**
 		 * Any description of pages that is not separated into pageStart and pageEnd; for
 		 * example, "1-6, 9, 55" or "10-12, 46-49".
 		 *
@@ -2076,7 +2076,7 @@
 
 	// parentOrganization
 
-		/*
+		/**
 		 * The larger organization that this organization is a subOrganization of, if any.
 		 *
 		 * Values expected to be one of these types:
@@ -2107,7 +2107,7 @@
 
 	// pattern [excluded]
 
-		/*
+		/**
 		 * A pattern that something has, for example 'polka dot', 'striped',
 		 * 'Canadian flag'. Values are typically expressed as text, although links to
 		 * controlled value schemes are also supported.
@@ -2127,7 +2127,7 @@
 
 	// playerType [excluded]
 
-		/*
+		/**
 		 * Player type required—for example, Flash or Silverlight.
 		 *
 		 * Values expected to be one of these types:
@@ -2140,7 +2140,7 @@
 
 	// position [excluded]
 
-		/*
+		/**
 		 * The position of an item in a series or sequence of items.
 		 *
 		 * Values expected to be one of these types:
@@ -2154,7 +2154,7 @@
 
 	// producer
 
-		/*
+		/**
 		 * The person or organization who produced the work (e.g., music album, movie,
 		 * TV/radio series).
 		 *
@@ -2191,7 +2191,7 @@
 
 	// productionCompany [excluded]
 
-		/*
+		/**
 		 * The production company or studio responsible for the item (e.g., series, video
 		 * game, episode).
 		 *
@@ -2205,7 +2205,7 @@
 
 	// provider
 
-		/*
+		/**
 		 * The service provider, service operator, or service performer; the goods
 		 * producer.
 		 *
@@ -2270,7 +2270,7 @@
 
 	// publication [excluded]
 
-		/*
+		/**
 		 * A publication event associated with the item.
 		 *
 		 * Values expected to be one of these types:
@@ -2283,7 +2283,7 @@
 
 	// publisher
 
-		/*
+		/**
 		 * The publisher of the creative work.
 		 *
 		 * Values expected to be one of these types:
@@ -2319,7 +2319,7 @@
 
 	// publisherImprint [excluded]
 
-		/*
+		/**
 		 * The publishing division which published the comic.
 		 *
 		 * Values expected to be one of these types:
@@ -2332,7 +2332,7 @@
 
 	// publishingPrinciples [WIP]
 
-		/*
+		/**
 		 * The publishingPrinciples property indicates (typically via URL) a document
 		 * describing the editorial principles of an Organization or individual
 		 * (e.g., a Person writing a blog) that relate to their activities as a publisher
@@ -2352,7 +2352,7 @@
 
 	// recordedAt [excluded]
 
-		/*
+		/**
 		 * The Event where the CreativeWork was recorded. The CreativeWork may capture all
 		 * or part of the event.
 		 *
@@ -2368,7 +2368,7 @@
 
 	// regionsAllowed [excluded]
 
-		/*
+		/**
 		 * The regions where the media is allowed. If not specified, then it's assumed to
 		 * be allowed everywhere. Specify the countries in ISO 3166 format.
 		 *
@@ -2382,7 +2382,7 @@
 
 	// releasedEvent [excluded]
 
-		/*
+		/**
 		 * The place and time the release was issued, expressed as a PublicationEvent.
 		 *
 		 * Values expected to be one of these types:
@@ -2395,7 +2395,7 @@
 
 	// requiresSubscription
 
-		/*
+		/**
 		 * Indicates if use of the media require a subscription (either paid or free).
 		 * Allowed values are true or false (note that an earlier version had 'yes', 'no').
 		 *
@@ -2423,7 +2423,7 @@
 
 	// review [excluded for MedicalWebPage]
 
-		/*
+		/**
 		 * A review of the item.
 		 *
 		 * Values expected to be one of these types:
@@ -2436,7 +2436,7 @@
 
 	// reviewedBy
 
-		/*
+		/**
 		 * People or organizations that have reviewed the content on this web page for
 		 * accuracy and/or completeness.
 		 *
@@ -2473,13 +2473,13 @@
 
 	// reviews [superseded]
 
-		/*
+		/**
 		 * SupersededBy: review
 		 */
 
 	// schemaVersion
 
-		/*
+		/**
 		 * Indicates (by URL or string) a particular version of a schema used in some
 		 * CreativeWork. This property was created primarily to indicate the use of a
 		 * specific schema.org release (e.g., 10.0 as a simple string, or more explicitly
@@ -2512,7 +2512,7 @@
 
 	// sdDatePublished
 
-		/*
+		/**
 		 * Indicates the date on which the current structured data was generated /
 		 * published. Typically used alongside sdPublisher.
 		 *
@@ -2545,7 +2545,7 @@
 
 	// sdLicense [excluded for MedicalWebPage]
 
-		/*
+		/**
 		 * A license document that applies to this structured data, typically indicated
 		 * by URL.
 		 *
@@ -2564,7 +2564,7 @@
 
 	// sdPublisher
 
-		/*
+		/**
 		 * Indicates the party responsible for generating and publishing the current
 		 * structured data markup, typically in cases where the structured data is derived
 		 * automatically from existing published content but published on a different
@@ -2609,7 +2609,7 @@
 
 	// sha256 [excluded]
 
-		/*
+		/**
 		 * The SHA-2 SHA256 hash of the content of the item. For example, a zero-length
 		 * input has value
 		 * 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
@@ -2628,13 +2628,13 @@
 
 	// significantLinks [superseded]
 
-		/*
+		/**
 		 * SupersededBy: significantLink
 		 */
 
 	// size [excluded for MedicalWebPage]
 
-		/*
+		/**
 		 * A standardized size of a product or creative work, specified either through a
 		 * simple textual string (for example 'XL', '32Wx34L'), a QuantitativeValue with a
 		 * unitCode, or a comprehensive and structured SizeSpecification; in other cases,
@@ -2654,7 +2654,7 @@
 
 	// smokingAllowed
 
-		/*
+		/**
 		 * Indicates whether it is allowed to smoke in the place (e.g., in the restaurant,
 		 * hotel or hotel room).
 		 *
@@ -2681,7 +2681,7 @@
 
 	// sourceOrganization
 
-		/*
+		/**
 		 * The Organization on whose behalf the creator was working.
 		 *
 		 * Values expected to be one of these types:
@@ -2716,7 +2716,7 @@
 
 	// spatial [excluded]
 
-		/*
+		/**
 		 * The "spatial" property can be used in cases when more specific properties
 		 * (e.g., locationCreated, spatialCoverage, contentLocation) are not known to be
 		 * appropriate.
@@ -2731,7 +2731,7 @@
 
 	// spatialCoverage [excluded]
 
-		/*
+		/**
 		 * The spatialCoverage of a CreativeWork indicates the place(s) which are the
 		 * focus of the content. It is a subproperty of contentLocation intended primarily
 		 * for more technical and detailed materials. For example with a Dataset, it
@@ -2748,7 +2748,7 @@
 
 	// sponsor [excluded]
 
-		/*
+		/**
 		 * A person or organization that supports a thing through a pledge, promise, or
 		 * financial contribution (e.g., a sponsor of a Medical Study or a corporate
 		 * sponsor of an event).
@@ -2764,7 +2764,7 @@
 
 	// startTime [excluded]
 
-		/*
+		/**
 		 * The startTime of something. For a reserved event or service
 		 * (e.g., FoodEstablishmentReservation), the time that it is expected to start.
 		 * For actions that span a period of time, when the action was performed
@@ -2786,7 +2786,7 @@
 
 	// subjectOf
 
-		/*
+		/**
 		 * A CreativeWork or Event about this Thing.
 		 *
 		 * Inverse-property: about
@@ -2824,7 +2824,7 @@
 
 	// teaches [excluded]
 
-		/*
+		/**
 		 * The item being described is intended to help a person learn the competency or
 		 * learning outcome defined by the referenced term.
 		 *
@@ -2843,7 +2843,7 @@
 
 	// temporal [excluded]
 
-		/*
+		/**
 		 * The "temporal" property can be used in cases where more specific properties
 		 * (e.g., temporalCoverage, dateCreated, dateModified, datePublished) are not
 		 * known to be appropriate.
@@ -2859,7 +2859,7 @@
 
 	// temporalCoverage [excluded]
 
-		/*
+		/**
 		 * The temporalCoverage of a CreativeWork indicates the period that the content
 		 * applies to (i.e., that it describes), either as a DateTime or as a textual
 		 * string indicating a time period in ISO 8601 time interval format. In the case
@@ -2888,7 +2888,7 @@
 
 	// thumbnail [excluded for MedicalWebPage]
 
-		/*
+		/**
 		 * Thumbnail image for an image or video.
 		 *
 		 * Values expected to be one of these types:
@@ -2901,7 +2901,7 @@
 
 	// thumbnailUrl
 
-		/*
+		/**
 		 * A thumbnail image relevant to the Thing.
 		 *
 		 * Values expected to be one of these types:
@@ -2946,7 +2946,7 @@
 
 	// translationOfWork [excluded]
 
-		/*
+		/**
 		 * The work that this work has been translated from (e.g., 物种起源 is a
 		 * translationOf "On the Origin of Species".
 		 *
@@ -2962,7 +2962,7 @@
 
 	// translator [excluded for MedicalWebPage]
 
-		/*
+		/**
 		 * Organization or person who adapts a creative work to different languages,
 		 * regional differences and technical requirements of a target market, or that
 		 * translates during some event.
@@ -2978,7 +2978,7 @@
 
 	// typicalAgeRange [excluded]
 
-		/*
+		/**
 		 * The typical expected age range (e.g. '7-9', '11-').
 		 *
 		 * Values expected to be one of these types:
@@ -2991,7 +2991,7 @@
 
 	// usageInfo [WIP]
 
-		/*
+		/**
 		 * The schema.org usageInfo property indicates further information about a
 		 * CreativeWork. This property is applicable both to works that are freely
 		 * available and to those that require payment or other transactions. It can
@@ -3018,7 +3018,7 @@
 
 	// version [excluded]
 
-		/*
+		/**
 		 * The version of the CreativeWork embodied by a specified resource.
 		 *
 		 * Values expected to be one of these types:
@@ -3032,7 +3032,7 @@
 
 	// workExample [excluded]
 
-		/*
+		/**
 		 * Example/instance/realization/derivation of the concept of this creative work
 		 * (e.g., paperback edition, first edition, e-book).
 		 *
@@ -3048,7 +3048,7 @@
 
 	// worksFor
 
-		/*
+		/**
 		 * Organizations that the person works for.
 		 *
 		 * Values expected to be one of these types:
@@ -3079,7 +3079,7 @@
 
 	// workTranslation [excluded]
 
-		/*
+		/**
 		 * A work that is a translation of the content of this work (e.g., 西遊記 has an
 		 * English workTranslation "Journey to the West", a German workTranslation
 		 * "Monkeys Pilgerfahrt" and a Vietnamese translation Tây du ký bình khảo).
