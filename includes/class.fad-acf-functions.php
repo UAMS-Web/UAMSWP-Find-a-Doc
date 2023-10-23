@@ -1832,7 +1832,11 @@
 
 	// UAMS Brand Organizations
 
-		add_filter( 'acf/load_field/key=field_fad_default_brandorg', 'uamswp_fad_acf_load_brandorg_uams' );
+		add_filter( 'acf/load_field/key=field_fad_default_brandorg_clinical', 'uamswp_fad_acf_load_brandorg_uams' ); // Default Clinical UAMS Brand Organization
+		add_filter( 'acf/load_field/key=field_fad_default_brandorg_affiliation', 'uamswp_fad_acf_load_brandorg_uams' ); // Default UAMS Brand Organizations as Affiliations
+		add_filter( 'acf/load_field/key=field_fad_default_brandorg_credit', 'uamswp_fad_acf_load_brandorg_uams' ); // Default UAMS Brand Organizations to Credit
+		add_filter( 'acf/load_field/key=field_fad_default_brandorg_locationcreated', 'uamswp_fad_acf_load_brandorg_uams' ); // Default UAMS Brand Organizations as Location Created
+		add_filter( 'acf/load_field/key=field_fad_default_brandorg_copyright', 'uamswp_fad_acf_load_brandorg_uams' ); // Default UAMS Brand Organizations as Copyright Holder
 
 		function uamswp_fad_acf_load_brandorg_uams ( $field ) {
 
