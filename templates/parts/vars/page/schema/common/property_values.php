@@ -68,84 +68,84 @@
 			)
 		);
 
-		// Default UAMS Brand Organizations
+	// Default UAMS Brand Organizations
 
-			// Default Clinical UAMS Brand Organization
+		// Default Clinical UAMS Brand Organization
 
-				$schema_default_brand_organization_clinical = uamswp_fad_schema_default_brand_organization(
-					'clinical' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
-				) ?? array();
+			$schema_default_brand_organization_clinical = uamswp_fad_schema_default_brand_organization(
+				'clinical' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
+			) ?? array();
 
-			// Default UAMS Brand Organizations as Affiliations
+		// Default UAMS Brand Organizations as Affiliations
 
-				$schema_default_brand_organization_affiliation = uamswp_fad_schema_default_brand_organization(
-					'affiliation' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
-				) ?? array();
+			$schema_default_brand_organization_affiliation = uamswp_fad_schema_default_brand_organization(
+				'affiliation' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
+			) ?? array();
 
-			// Default UAMS Brand Organizations to Credit
+		// Default UAMS Brand Organizations to Credit
 
-				$schema_default_brand_organization_credit = uamswp_fad_schema_default_brand_organization(
-					'credit' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
-				) ?? array();
+			$schema_default_brand_organization_credit = uamswp_fad_schema_default_brand_organization(
+				'credit' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
+			) ?? array();
 
-				// Name(s) of Default UAMS Brand Organizations to Credit
+			// Name(s) of Default UAMS Brand Organizations to Credit
 
-					$schema_default_brand_organization_credit_name = null;
+				$schema_default_brand_organization_credit_name = null;
 
-					if ( $schema_default_brand_organization_credit ) {
+				if ( $schema_default_brand_organization_credit ) {
 
-						if ( is_array($schema_default_brand_organization_credit) ) {
+					if ( is_array($schema_default_brand_organization_credit) ) {
 
-							if ( array_is_list($schema_default_brand_organization_credit) ) {
+						if ( array_is_list($schema_default_brand_organization_credit) ) {
 
-								$schema_default_brand_organization_credit_name = array();
+							$schema_default_brand_organization_credit_name = array();
 
-								foreach ( $schema_default_brand_organization_credit_name as $item ) {
-
-									if (
-										isset($item['name'])
-										&&
-										!empty($item['name'])
-									) {
-
-										$schema_default_brand_organization_credit_name[] = $item['name'];
-
-									}
-
-								}
-
-								uamswp_fad_flatten_multidimensional_array($schema_default_brand_organization_credit_name);
-
-							} else {
+							foreach ( $schema_default_brand_organization_credit_name as $item ) {
 
 								if (
-									isset($schema_default_brand_organization_credit['name'])
+									isset($item['name'])
 									&&
-									!empty($schema_default_brand_organization_credit['name'])
+									!empty($item['name'])
 								) {
 
-									$schema_default_brand_organization_credit_name = $schema_default_brand_organization_credit['name'];
+									$schema_default_brand_organization_credit_name[] = $item['name'];
 
 								}
 
 							}
 
+							uamswp_fad_flatten_multidimensional_array($schema_default_brand_organization_credit_name);
+
 						} else {
 
-							$schema_default_brand_organization_credit_name = $schema_default_brand_organization_credit;
+							if (
+								isset($schema_default_brand_organization_credit['name'])
+								&&
+								!empty($schema_default_brand_organization_credit['name'])
+							) {
+
+								$schema_default_brand_organization_credit_name = $schema_default_brand_organization_credit['name'];
+
+							}
 
 						}
 
+					} else {
+
+						$schema_default_brand_organization_credit_name = $schema_default_brand_organization_credit;
+
 					}
 
-			// Default UAMS Brand Organizations as the Locations Where the Website and Its Contents Were Created
+				}
 
-				$schema_default_brand_organization_locationcreated = uamswp_fad_schema_default_brand_organization(
-					'locationcreated' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
-				) ?? array();
+		// Default UAMS Brand Organizations as the Locations Where the Website and Its Contents Were Created
 
-			// Default UAMS Brand Organizations as Copyright Holder
+			$schema_default_brand_organization_locationcreated = uamswp_fad_schema_default_brand_organization(
+				'locationcreated' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
+			) ?? array();
 
-				$schema_default_brand_organization_copyright = uamswp_fad_schema_default_brand_organization(
-					'copyright' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
-				) ?? array();
+		// Default UAMS Brand Organizations as Copyright Holder
+
+			$schema_default_brand_organization_copyright = uamswp_fad_schema_default_brand_organization(
+				'copyright' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
+			) ?? array();
