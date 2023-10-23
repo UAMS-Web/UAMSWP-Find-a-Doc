@@ -35,7 +35,7 @@
 
 			$schema_common_properties = array();
 
-		// Common schema properties for MedicalWebPage only
+		// Common schema properties for WebSite and MedicalWebPage only
 
 			$schema_common_properties_MedicalWebPage = array();
 
@@ -442,7 +442,7 @@
 		 * content and will not be included.
 		 */
 
-	// archivedAt [excluded for MedicalWebPage]
+	// archivedAt [excluded for WebSite and MedicalWebPage]
 
 		/**
 		 * Indicates a page or other link involved in archival of a CreativeWork. In the
@@ -578,7 +578,7 @@
 
 		}
 
-	// audio [excluded for MedicalWebPage]
+	// audio [excluded for WebSite and MedicalWebPage]
 
 		/**
 		 * An embedded audio object.
@@ -631,7 +631,7 @@
 
 		}
 
-	// award [excluded for MedicalWebPage]
+	// award [excluded for WebSite and MedicalWebPage]
 
 		/**
 		 * An award won by or for this item.
@@ -1481,7 +1481,7 @@
 		 * content and will not be included.
 		 */
 
-	// headline [excluded for MedicalWebPage]
+	// headline [excluded for WebSite and MedicalWebPage]
 
 		/**
 		 * Headline of the article.
@@ -1595,7 +1595,7 @@
 		 * content and will not be included.
 		 */
 
-	// isAccessibleForFree (MedicalWebPage only)
+	// isAccessibleForFree (WebSite and MedicalWebPage only)
 
 		/**
 		 * A flag to signal that the item, event, or place is accessible for free.
@@ -1609,15 +1609,15 @@
 
 			$schema_common_isAccessibleForFree_MedicalWebPage = 'True';
 
-		// Add to common schema properties array for MedicalWebPage only
+		// Add to common schema properties array for WebSite and MedicalWebPage only
 
 			if ( $schema_common_isAccessibleForFree_MedicalWebPage ) {
 
-				$schema_common_properties_MedicalWebPage['inLanguage'] = $schema_common_isAccessibleForFree_MedicalWebPage;
+				$schema_common_properties_MedicalWebPage['isAccessibleForFree'] = $schema_common_isAccessibleForFree_MedicalWebPage;
 
 			}
 
-	// isBasedOn [excluded for MedicalWebPage]
+	// isBasedOn [excluded for WebSite and MedicalWebPage]
 
 		/**
 		 * A resource from which this work is derived or from which it is a modification
@@ -1661,7 +1661,7 @@
 
 			}
 
-	// isPartOf (MedicalWebPage only)
+	// isPartOf (WebSite and MedicalWebPage only)
 
 		/**
 		 * Indicates an item or CreativeWork that this item, or CreativeWork (in some
@@ -1690,7 +1690,7 @@
 						$schema_base_website_uams_health // mixed // Required // Incoming schema item property value
 					);
 
-			// Add to common schema properties array for MedicalWebPage only
+			// Add to common schema properties array for WebSite and MedicalWebPage only
 
 				if ( $schema_common_isPartOf_MedicalWebPage ) {
 
@@ -1731,7 +1731,7 @@
 
 		}
 
-	// learningResourceType [excluded for MedicalWebPage]
+	// learningResourceType [excluded for WebSite and MedicalWebPage]
 
 		/**
 		 * The predominant type or kind characterizing the learning resource. For example,
@@ -1796,7 +1796,7 @@
 
 		}
 
-	// mainContentOfPage (MedicalWebPage only)
+	// mainContentOfPage (WebSite and MedicalWebPage only)
 
 		/**
 		 * Indicates if this web page element is the main subject of the page.
@@ -1815,7 +1815,7 @@
 					'cssSelector' => 'main'
 				);
 
-			// Add to common schema properties array for MedicalWebPage only
+			// Add to common schema properties array for WebSite and MedicalWebPage only
 
 				if ( $schema_common_mainContentOfPage ) {
 
@@ -2406,7 +2406,7 @@
 
 		}
 
-	// review [excluded for MedicalWebPage]
+	// review [excluded for WebSite and MedicalWebPage]
 
 		/**
 		 * A review of the item.
@@ -2528,7 +2528,7 @@
 
 		}
 
-	// sdLicense [excluded for MedicalWebPage]
+	// sdLicense [excluded for WebSite and MedicalWebPage]
 
 		/**
 		 * A license document that applies to this structured data, typically indicated
@@ -2617,7 +2617,7 @@
 		 * SupersededBy: significantLink
 		 */
 
-	// size [excluded for MedicalWebPage]
+	// size [excluded for WebSite and MedicalWebPage]
 
 		/**
 		 * A standardized size of a product or creative work, specified either through a
@@ -2871,7 +2871,7 @@
 		 * content and will not be included.
 		 */
 
-	// thumbnail [excluded for MedicalWebPage]
+	// thumbnail [excluded for WebSite and MedicalWebPage]
 
 		/**
 		 * Thumbnail image for an image or video.
@@ -2945,7 +2945,7 @@
 		 * content and will not be included.
 		 */
 
-	// translator [excluded for MedicalWebPage]
+	// translator [excluded for WebSite and MedicalWebPage]
 
 		/**
 		 * Organization or person who adapts a creative work to different languages,
