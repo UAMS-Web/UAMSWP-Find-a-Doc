@@ -8906,14 +8906,16 @@
 
 			}
 
-		// Get the default brand organization
+		// Get the default brand organizations
 
-			function uamswp_fad_schema_brand_organization_default() {
+			function uamswp_fad_schema_default_brand_organization(
+				string $field_suffix // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
+			) {
 
 				// Retrieve the value of the transient
 
 					uamswp_fad_get_transient(
-						'0', // Required // String added to transient name for disambiguation.
+						$field_suffix, // Required // String added to transient name for disambiguation.
 						$output, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 						__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 					);
@@ -8934,7 +8936,7 @@
 					 * Define the variable again.
 					 */
 
-					$slug = get_field( 'schema_brandorg', 'option' ) ?? null;
+					$slug = get_field( 'fad_default_brandorg_' . $field_suffix, 'option' ) ?? null;
 
 					// If there is no value, bail early
 
@@ -8946,14 +8948,38 @@
 
 					// Construct the brand organization item
 
-						$output = uamswp_fad_schema_brand_organization(
-							$slug // string // Required // Brand Organization term slug
-						);
+						if ( is_array($slug) ) {
+
+							// Base output array
+
+								$output = array();
+
+							// Loop through each item, adding the Organization array to the output array
+
+								foreach ( $slug as $item ) {
+
+									if ( $item ) {
+
+										$output[] = uamswp_fad_schema_brand_organization(
+											$item // string // Required // Brand Organization term slug
+										);
+
+									}
+
+								}
+
+						} else {
+
+							$output = uamswp_fad_schema_brand_organization(
+								$slug // string // Required // Brand Organization term slug
+							);
+
+						}
 
 					// Set/update the value of the transient
 
 						uamswp_fad_set_transient(
-							'0', // Required // String added to transient name for disambiguation.
+							$field_suffix, // Required // String added to transient name for disambiguation.
 							$output, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 							__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 						);
