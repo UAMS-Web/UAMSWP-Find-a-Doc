@@ -41,11 +41,11 @@
 			"maxlength": ""
 		},
 		{
-			"key": "field_fad_default_brandorg",
-			"label": "Default UAMS Brand Organization",
-			"name": "fad_default_brandorg",
+			"key": "field_fad_default_brandorg_clinical",
+			"label": "Default Clinical UAMS Brand Organization",
+			"name": "fad_default_brandorg_clinical",
 			"type": "radio",
-			"instructions": "Select the most specific UAMS brand organization to associate with every provider and location in schema data by default.",
+			"instructions": "Select the most specific UAMS brand organization to associate with every provider and location in schema data properties relevant to clinical practice by default.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
