@@ -5411,11 +5411,13 @@
 
 						$output = array();
 
-					$term = get_term_by(
-						'slug', // string // Required // Either 'slug', 'name', 'term_id' (or 'id', 'ID'), or 'term_taxonomy_id'.
-						$slug, // string|int // Required // Search for this term value.
-						'brand_organization_uams' // string // Optional // Taxonomy name. Optional, if $field is 'term_taxonomy_id'.
-					);
+					// Get the term object
+
+						$term = get_term_by(
+							'slug', // string // Required // Either 'slug', 'name', 'term_id' (or 'id', 'ID'), or 'term_taxonomy_id'.
+							$slug, // string|int // Required // Search for this term value.
+							'brand_organization_uams' // string // Optional // Taxonomy name. Optional, if $field is 'term_taxonomy_id'.
+						);
 
 					// If term is invalid, bail early
 
@@ -8970,6 +8972,12 @@
 				int $entity, // int // Required // Post ID
 				array $brand_org = array() // array // Optional // Pre-existing list array for brand organizations to which to add additional items
 			) {
+
+				/**
+				 * This function expects the brand organization(s) to be defined by either a field
+				 * with the name 'schema_brandorg_multiple' (for multiple values) or a field with
+				 * the name 'schema_brandorg' (for a single value).
+				 */
 
 				// Retrieve the value of the transient
 
