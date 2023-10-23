@@ -5503,15 +5503,21 @@
 					// additionalType
 
 						/**
-						 * [Insert definition here]
+						 * An additional type for the item, typically used for adding more specific types
+						 * from external vocabularies in microdata syntax. This is a relationship between
+						 * something and a class that the thing is in. Typically the value is a
+						 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+						 * in RDF. Text values can be used sparingly, for cases where useful information
+						 * can be added without their being an appropriate schema to reference. In the
+						 * case of text values, the class label should follow the schema.org style guide.
 						 *
 						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 *     - rdf:type
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Text
+						 *     - URL
 						 */
 
 						$additionalType = get_field( 'schema_additionalType', $term ) ?? null;
@@ -5522,35 +5528,14 @@
 
 						}
 
-					// address
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// aggregateRating
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * The overall rating, based on a collection of reviews or ratings, of the item.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - AggregateRating
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -5593,15 +5578,11 @@
 					// alternateName
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * An alias for the item.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Text
 						 */
 
 						$alternateName = get_field( 'schema_alternatename', $term ) ?? null;
@@ -5666,15 +5647,14 @@
 					// areaServed
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * The geographic area where a service or offered item is provided.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - AdministrativeArea
+						 *     - GeoShape
+						 *     - Place
+						 *     - Text
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -5700,15 +5680,11 @@
 					// audience
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * An intended audience, i.e. a group for whom something was created.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Audience
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -5717,15 +5693,16 @@
 					// availableLanguage
 
 						/**
-						 * [Insert definition here]
+						 * A language someone may use with or at the item, service or place.
 						 *
-						 * Subproperty of:
+						 * Please use one of the language codes from the IETF BCP 47 standard.
 						 *
-						 *     - [Insert property name here]
+						 * See also inLanguage.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Language
+						 *     - Text
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -5734,15 +5711,12 @@
 					// availableService
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * A medical service available from this provider.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - MedicalProcedure
+						 *     - MedicalTest
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -5768,35 +5742,20 @@
 					// award
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * An award won by or for this item.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Text
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
 
-					// awards
+					// awards [superseded]
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
+						 * SupersededBy: award
 						 */
 
 					// boardingPolicy
@@ -5853,15 +5812,13 @@
 					// brand
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * The brand(s) associated with a product or service, or the brand(s) maintained
+						 * by an organization or business person.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Brand
+						 *     - Organization
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -6253,6 +6210,71 @@
 
 						}
 
+					// address
+
+						/**
+						 * Physical address of the item.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - PostalAddress
+						 *     - Text
+						 */
+
+						if ( $address ) {
+
+							$output['address'] = $address;
+
+						}
+
+					// email
+
+						/**
+						 * Email address.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Text
+						 */
+
+						if ( $email ) {
+
+							$output['email'] = $email;
+
+						}
+
+					// faxNumber
+
+						/**
+						 * The fax number.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Text
+						 */
+
+						if ( $faxNumber ) {
+
+							$output['faxNumber'] = $faxNumber;
+
+						}
+
+					// telephone
+
+						/**
+						 * The telephone number.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Text
+						 */
+
+						if ( $telephone ) {
+
+							$output['telephone'] = $telephone;
+
+						}
+
 					// contactPoints
 
 						/**
@@ -6290,15 +6312,10 @@
 					// containedInPlace
 
 						/**
-						 * [Insert definition here]
+						 * The basic containment relation between a place and one that contains it.
+						 * expected to be one of these types:
 						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
+						 *     - Place
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -6307,15 +6324,13 @@
 					// containsPlace
 
 						/**
-						 * [Insert definition here]
+						 * The basic containment relation between a place and another that it contains.
 						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Inverse property: 'containedInPlace'
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Place
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -6346,15 +6361,17 @@
 					// currenciesAccepted
 
 						/**
-						 * [Insert definition here]
+						 * The currency accepted.
 						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Use standard formats:
+						 *     - ISO 4217 currency format (e.g., "USD")
+						 *     - Ticker symbol for cryptocurrencies (e.g., "BTC")
+						 *     - Well-known names for Local Exchange Trading Systems (LETS) and other
+						 *       currency types (e.g., "Ithaca HOUR")
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Text
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -6363,15 +6380,13 @@
 					// department
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * A relationship between an organization and a department of that organization,
+						 * also described as an organization (allowing different urls, logos, opening
+						 * hours). For example: a store with a pharmacy, or a bakery with a cafe.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Organization
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -6380,15 +6395,12 @@
 					// description
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * A description of the item.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Text
+						 *     - TextObject
 						 */
 
 						$description = get_field( 'brandorg_description', $term ) ?? null;
@@ -6402,15 +6414,14 @@
 					// disambiguatingDescription
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * A sub property of description. A short description of the item used to
+						 * disambiguate from other, similar items. Information from other properties (in
+						 * particular, name) may be necessary for the description to be useful for
+						 * disambiguation.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Text
 						 */
 
 						$disambiguatingDescription = get_field( 'brandorg_disambiguatingdescription', $term ) ?? null;
@@ -6441,15 +6452,20 @@
 					// diversityPolicy
 
 						/**
-						 * [Insert definition here]
+						 * Statement on diversity policy by an Organization
+						 * (e.g., a NewsMediaOrganization).
 						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * For a NewsMediaOrganization, a statement  describing the newsroom’s diversity
+						 * policy on both staffing and sources, typically providing staffing data.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - CreativeWork
+						 *     - URL
+						 *
+						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+						 * feedback and adoption from applications and websites can help improve their
+						 * definitions.
 						 */
 
 						$diversityPolicy = get_field( 'brandorg_diversitypolicy', $term ) ?? null;
@@ -6463,15 +6479,18 @@
 					// diversityStaffingReport
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * For an Organization (often but not necessarily a NewsMediaOrganization), a
+						 * report on staffing diversity issues. In a news context this might be for
+						 * example ASNE or RTDNA (US) reports, or self-reported.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Article
+						 *     - URL
+						 *
+						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+						 * feedback and adoption from applications and websites can help improve their
+						 * definitions.
 						 */
 
 						$diversityStaffingReport = get_field( 'brandorg_diversitystaffingreport', $term ) ?? null;
@@ -6482,57 +6501,14 @@
 
 						}
 
-					// duns
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 */
-
-						$duns = get_field( 'brandorg_duns', $term ) ?? null;
-
-						if ( $duns ) {
-
-							$output['duns'] = $duns;
-
-						}
-
-					// email
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// employee
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Someone working for this organization.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Person
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -6558,15 +6534,21 @@
 					// ethicsPolicy
 
 						/**
-						 * [Insert definition here]
+						 * Statement about ethics policy, (e.g., journalistic and publishing practices of
+						 * a NewsMediaOrganization; food source policies of a Restaurant).
 						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * In the case of a NewsMediaOrganization, an ethicsPolicy is typically a
+						 * statement describing the personal, organizational, and corporate standards of
+						 * behavior expected by the organization.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - CreativeWork
+						 *     - URL
+						 *
+						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+						 * feedback and adoption from applications and websites can help improve their
+						 * definitions.
 						 */
 
 						$ethicsPolicy = get_field( 'brandorg_ethicspolicy', $term ) ?? null;
@@ -6580,38 +6562,17 @@
 					// event
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Upcoming or past event associated with this place, organization, or action.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Event
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
 
 					// events
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// faxNumber
 
 						/**
 						 * [Insert definition here]
@@ -6682,15 +6643,11 @@
 					// foundingDate
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * The date that this organization was founded.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Date
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -6716,15 +6673,13 @@
 					// funder
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * A person or organization that supports (sponsors) something through some kind
+						 * of financial contribution.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Organization
+						 *     - Person
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -6733,15 +6688,21 @@
 					// funding
 
 						/**
-						 * [Insert definition here]
+						 * A Grant that directly or indirectly provide funding or sponsorship for this
+						 * item. See also ownershipFundingInfo.
 						 *
-						 * Subproperty of:
+						 * Inverse-property: fundedItem
 						 *
-						 *     - [Insert property name here]
+						 * Grant: https://schema.org/Grant
+						 * ownershipFundingInfo: https://schema.org/ownershipFundingInfo
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Grant
+						 *
+						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+						 * feedback and adoption from applications and websites can help improve their
+						 * definitions.
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -6750,15 +6711,18 @@
 					// gender
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Gender of something, typically a Person, but possibly also fictional
+						 * characters, animals, etc. While https://schema.org/Male and
+						 * https://schema.org/Female may be used, text strings are also acceptable for
+						 * people who do not identify as a binary gender. The gender property can also be
+						 * used in an extended sense to cover (e.g., the gender of sports teams). As with
+						 * the gender of individuals, we do not try to enumerate all possibilities. A
+						 * mixed-gender SportsTeam can be indicated with a text value of "Mixed".
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - GenderType
+						 *     - Text
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -6767,15 +6731,12 @@
 					// genre
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Genre of the creative work, broadcast channel or group.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Text
+						 *     - URL
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -6784,15 +6745,12 @@
 					// geo
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * The geo coordinates of the place.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - GeoCoordinates
+						 *     - GeoShape
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -6968,40 +6926,18 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-					// globalLocationNumber
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 */
-
-						$globalLocationNumber = get_field( 'brandorg_globallocationnumber', $term ) ?? null;
-
-						if ( $globalLocationNumber ) {
-
-							$output['globalLocationNumber'] = $globalLocationNumber;
-
-						}
-
 					// hasCredential
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * A credential awarded to the Person or Organization.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - EducationalOccupationalCredential
+						 *
+						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+						 * feedback and adoption from applications and websites can help improve their
+						 * definitions.
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -7010,32 +6946,19 @@
 					// hasDriveThroughService
 
 						/**
-						 * [Insert definition here]
+						 * Indicates whether some facility (e.g., FoodEstablishment, CovidTestingFacility)
+						 * offers a service that can be used by driving through in a car.
 						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// hasMap
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * In the case of CovidTestingFacility such facilities could potentially help with
+						 * social distancing from other potentially-infected users.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Boolean
+						 *
+						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+						 * feedback and adoption from applications and websites can help improve their
+						 * definitions.
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -7168,15 +7091,11 @@
 					// hospitalAffiliation
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * A hospital with which the physician or office is affiliated.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Hospital
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -7199,154 +7118,514 @@
 						 * organization item schema and so it will not be included.
 						 */
 
+					// identifiers (multiple properties)
+
+						// duns
+
+							/**
+							 * The Dun & Bradstreet DUNS number for identifying an organization or business
+							 * person.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Text
+							 */
+
+							$duns = get_field( 'brandorg_duns', $term ) ?? null;
+
+							if ( $duns ) {
+
+								$output['duns'] = $duns;
+
+							}
+
+						// globalLocationNumber
+
+							/**
+							 * The Global Location Number (GLN, sometimes also referred to as International
+							 * Location Number or ILN) of the respective organization, person, or place. The
+							 * GLN is a 13-digit number used to identify parties and physical locations.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Text
+							 */
+
+							$globalLocationNumber = get_field( 'brandorg_globallocationnumber', $term ) ?? null;
+
+							if ( $globalLocationNumber ) {
+
+								$output['globalLocationNumber'] = $globalLocationNumber;
+
+							}
+
+						// isicV4
+
+							/**
+							 * The International Standard of Industrial Classification of All Economic
+							 * Activities (ISIC), Revision 4 code for a particular organization, business
+							 * person, or place.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Text
+							 */
+
+							$isicV4 = get_field( 'brandorg_isicv4', $term ) ?? null;
+
+							if ( $isicV4 ) {
+
+								$output['isicV4'] = $isicV4;
+
+							}
+
+						// iso6523Code
+
+							/**
+							 * An organization identifier as defined in ISO 6523(-1). Note that many existing
+							 * organization identifiers such as leiCode, duns and vatID can be expressed as an
+							 * ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier
+							 * accordingly.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Text
+							 *
+							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+							 * feedback and adoption from applications and websites can help improve their
+							 * definitions.
+							 */
+
+							$iso6523Code = get_field( 'brandorg_iso6523code', $term ) ?? null;
+
+							if ( $iso6523Code ) {
+
+								$output['iso6523Code'] = $iso6523Code;
+
+							}
+
+						// leiCode
+
+							/**
+							 * An organization identifier that uniquely identifies a legal entity as defined
+							 * in ISO 17442.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Text
+							 */
+
+							$leiCode = get_field( 'brandorg_leicode', $term ) ?? null;
+
+							if ( $leiCode ) {
+
+								$output['leiCode'] = $leiCode;
+
+							}
+
+						// naics
+
+							/**
+							 * The North American Industry Classification System (NAICS) code for a particular
+							 * organization or business person.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Text
+							 */
+
+							$naics = get_field( 'brandorg_naics', $term ) ?? null;
+
+							if ( $naics ) {
+
+								$output['naics'] = $naics;
+
+							}
+
+						// taxID (Taxpayer Identification Number)
+
+							/**
+							 * The Tax / Fiscal ID of the organization or person (e.g., the TIN in the US;
+							 * the CIF/NIF in Spain).
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Text
+							 */
+
+							$taxID = get_field( 'brandorg_taxid', $term ) ?? null;
+
+							if ( $taxID ) {
+
+								$output['taxID'] = $taxID;
+
+							}
+
+						// vatID
+
+							/**
+							 * The Value-added Tax ID of the organization or person.
+							 *
+							 *     - Text
+							 */
+
+							$vatID = get_field( 'brandorg_vatid', $term ) ?? null;
+
+							if ( $vatID ) {
+
+								$output['vatID'] = $vatID;
+
+							}
+
 					// identifier
 
 						/**
-						 * [Insert definition here]
+						 * The identifier property represents any kind of identifier for any kind of
+						 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
+						 * properties for representing many of these, either as textual strings or as
+						 * URL (URI) links.
 						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * See https://schema.org/docs/datamodel.html#identifierBg for more details.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
+						 *     - PropertyValue
+						 *     - Text
+						 *     - URL
 						 */
 
 						// Base list array
 
 							$identifier_list = array();
 
-						// Google My Business customer ID (CID)
+						// Get the repeater field
 
-							// Query: Does this organization have a listing on Google My Business?
+							$identifier_repeater = get_field( 'brandorg_identifier', $term ) ?? null;
 
-								$google_cid_query = get_field( 'brandorg_google_cid_query', $term ) ?? false;
+						// Get the subfields
 
-							// Get value
+							if ( $identifier_repeater ) {
 
-								$google_cid = null;
+								foreach ( $identifier_repeater as $item ) {
 
-								if ( $google_cid_query ) {
+									// Base array
 
-									$google_cid = get_field( 'schema_google_cid', $term ) ?? null;
+									$identifier_item = array(
+										'alternateName' => '',
+										'maxValue' => '',
+										'minValue' => '',
+										'name' => '',
+										'propertyID' => '',
+										'unitCode' => '',
+										'unitText' => '',
+										'url' => '',
+										'value' => ''
+									);
+
+									// Set values
+
+										// alternateName
+
+											// Get alternateName repeater field value
+
+												$identifier_item_alternateName_repeater = get_field( 'schema_alternatename', $entity ) ?? null;
+
+											// Add each item to alternateName property values array
+
+												if ( $identifier_item_alternateName_repeater ) {
+
+													$identifier_item_alternateName = uamswp_fad_schema_alternatename(
+														$identifier_item_alternateName_repeater, // array // Required // alternateName repeater field
+														'schema_alternatename_text' // string // Optional // alternateName item field name
+													);
+
+												}
+
+											$identifier_item['alternateName'] = $identifier_item_alternateName ?? '';
+
+										// maxValue
+
+											$identifier_item['maxValue'] = $item['brandorg_identifier_maxvalue'] ?? '';
+
+										// minValue
+
+											$identifier_item['minValue'] = $item['brandorg_identifier_minvalue'] ?? '';
+
+										// name
+
+											$identifier_item['name'] = $item['brandorg_identifier_name'] ?? '';
+
+										// propertyID
+
+											$identifier_item['propertyID'] = $item['brandorg_identifier_propertyid'] ?? '';
+
+										// unitCode
+
+											$identifier_item['unitCode'] = $item['brandorg_identifier_unitcode'] ?? '';
+
+										// unitText
+
+											$identifier_item['unitText'] = $item['brandorg_identifier_unittext'] ?? '';
+
+										// url
+
+											$identifier_item['url'] = $item['brandorg_identifier_url'] ?? '';
+
+										// value
+
+											$identifier_item['value'] = $item['brandorg_identifier_value'] ?? '';
+
+									// Clean up item schema array
+
+										$identifier_item = array_filter($contactPoint_email_item);
+
+									// Add @type
+
+										if ( $identifier_item ) {
+
+											$identifier_item = array( '@type' => 'PropertyValue' ) + $identifier_item;
+
+										}
+
+									// Add to list
+
+										if ( $identifier_item ) {
+
+											$identifier_list[] = $identifier_item;
+
+										}
 
 								}
 
-							// Add value to identifier list
+							}
 
-								if ( $google_cid ) {
+						// Other specific identifiers
 
-									$identifier_list = uamswp_fad_schema_propertyvalue_google_cid(
-										$google_cid, // mixed // Required // Google customer ID
+							// Google My Business customer ID (CID)
+
+								// Query: Does this organization have a listing on Google My Business?
+
+									$google_cid_query = get_field( 'brandorg_google_cid_query', $term ) ?? false;
+
+								// Get value
+
+									$google_cid = null;
+
+									if ( $google_cid_query ) {
+
+										$google_cid = get_field( 'schema_google_cid', $term ) ?? null;
+
+									}
+
+								// Add value to identifier list
+
+									if ( $google_cid ) {
+
+										$identifier_list = uamswp_fad_schema_propertyvalue_google_cid(
+											$google_cid, // mixed // Required // Google customer ID
+											$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+										);
+
+									}
+
+							// duns (Dun & Bradstreet DUNS number)
+
+								$duns = $duns ?? null;
+
+								if ( $duns ) {
+
+									$identifier_list = uamswp_fad_schema_propertyvalue(
+										array(
+											'Data Universal Numbering System (DUNS) number',
+											'DUNS number',
+											'D-U-N-S number'
+										), // mixed // Optional // alternateName property value
+										null, // string // Optional // description property value
+										null, // int // Optional // maxValue property value
+										null, // mixed // Optional // measurementMethod property value
+										null, // mixed // Optional // measurementTechnique property value
+										null, // int // Optional // minValue property value
+										'Data Universal Numbering System number', // string // Optional // name property value
+										'https://www.wikidata.org/wiki/Q246386', // string // Optional // propertyID property value
+										null, // string // Optional // unitCode property value
+										null, // string // Optional // unitText property value
+										null, // string // Optional // url property value
+										$duns, // mixed // Optional // value property value
+										null, // mixed // Optional // valueReference property value
 										$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 									);
 
 								}
 
-						// Other identifiers
+							// globalLocationNumber (Global Location Number)
 
-							// Get the repeater field
+								$globalLocationNumber = $globalLocationNumber ?? null;
 
-								$identifier_repeater = get_field( 'brandorg_identifier', $term ) ?? null;
+								if ( $globalLocationNumber ) {
 
-							// Get the subfields
+									$identifier_list = uamswp_fad_schema_propertyvalue(
+										'GLN', // mixed // Optional // alternateName property value
+										null, // string // Optional // description property value
+										null, // int // Optional // maxValue property value
+										null, // mixed // Optional // measurementMethod property value
+										null, // mixed // Optional // measurementTechnique property value
+										null, // int // Optional // minValue property value
+										'Global Location Number', // string // Optional // name property value
+										'https://www.wikidata.org/wiki/Q1258830', // string // Optional // propertyID property value
+										null, // string // Optional // unitCode property value
+										null, // string // Optional // unitText property value
+										null, // string // Optional // url property value
+										$globalLocationNumber, // mixed // Optional // value property value
+										null, // mixed // Optional // valueReference property value
+										$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+									);
 
-								if ( $identifier_repeater ) {
+								}
 
-									foreach ( $identifier_repeater as $item ) {
+							// isicV4 (International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code)
 
-										// Base array
+								$isicV4 = $isicV4 ?? null;
 
-										$identifier_item = array(
-											'alternateName' => '',
-											'maxValue' => '',
-											'minValue' => '',
-											'name' => '',
-											'propertyID' => '',
-											'unitCode' => '',
-											'unitText' => '',
-											'url' => '',
-											'value' => ''
-										);
+								if ( $isicV4 ) {
 
-										// Set values
+									$identifier_list = uamswp_fad_schema_propertyvalue(
+										array(
+											'ISIC 2008',
+											'ISIC Rev 4'
+										), // mixed // Optional // alternateName property value
+										null, // string // Optional // description property value
+										null, // int // Optional // maxValue property value
+										null, // mixed // Optional // measurementMethod property value
+										null, // mixed // Optional // measurementTechnique property value
+										null, // int // Optional // minValue property value
+										'International Standard Industrial Classification Rev. 4', // string // Optional // name property value
+										'https://www.wikidata.org/wiki/Q112111674', // string // Optional // propertyID property value
+										null, // string // Optional // unitCode property value
+										null, // string // Optional // unitText property value
+										null, // string // Optional // url property value
+										$isicV4, // mixed // Optional // value property value
+										null, // mixed // Optional // valueReference property value
+										$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+									);
 
-											// alternateName
+								}
 
-												// Get alternateName repeater field value
+							// leiCode (Legal Entity Identifier (LEI))
 
-													$identifier_item_alternateName_repeater = get_field( 'schema_alternatename', $entity ) ?? null;
+								$leiCode = $leiCode ?? null;
 
-												// Add each item to alternateName property values array
+								if ( $leiCode ) {
 
-													if ( $identifier_item_alternateName_repeater ) {
+									$identifier_list = uamswp_fad_schema_propertyvalue(
+										array(
+											'Global Legal Entity Identifier',
+											'LEI',
+											'LEI code',
+											'LEI number'
+										), // mixed // Optional // alternateName property value
+										null, // string // Optional // description property value
+										null, // int // Optional // maxValue property value
+										null, // mixed // Optional // measurementMethod property value
+										null, // mixed // Optional // measurementTechnique property value
+										null, // int // Optional // minValue property value
+										'Legal Entity Identifier', // string // Optional // name property value
+										'https://www.wikidata.org/wiki/Q6517388', // string // Optional // propertyID property value
+										null, // string // Optional // unitCode property value
+										null, // string // Optional // unitText property value
+										null, // string // Optional // url property value
+										$leiCode, // mixed // Optional // value property value
+										null, // mixed // Optional // valueReference property value
+										$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+									);
 
-														$identifier_item_alternateName = uamswp_fad_schema_alternatename(
-															$identifier_item_alternateName_repeater, // array // Required // alternateName repeater field
-															'schema_alternatename_text' // string // Optional // alternateName item field name
-														);
+								}
 
-													}
+							// naics (North American Industry Classification System (NAICS) code)
 
-												$identifier_item['alternateName'] = $identifier_item_alternateName ?? '';
+								$naics = $naics ?? null;
 
-											// maxValue
+								if ( $naics ) {
 
-												$identifier_item['maxValue'] = $item['brandorg_identifier_maxvalue'] ?? '';
+									$identifier_list = uamswp_fad_schema_propertyvalue(
+										array(
+											'North American Industry Classification System',
+											'NAICS code',
+											'NAICS',
+											'NAICS-SCIAN code',
+											'NAICS-SCIAN'
+										), // mixed // Optional // alternateName property value
+										null, // string // Optional // description property value
+										null, // int // Optional // maxValue property value
+										null, // mixed // Optional // measurementMethod property value
+										null, // mixed // Optional // measurementTechnique property value
+										null, // int // Optional // minValue property value
+										'North American Industry Classification System code', // string // Optional // name property value
+										'https://www.wikidata.org/wiki/Q3509282', // string // Optional // propertyID property value
+										null, // string // Optional // unitCode property value
+										null, // string // Optional // unitText property value
+										null, // string // Optional // url property value
+										$naics, // mixed // Optional // value property value
+										null, // mixed // Optional // valueReference property value
+										$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+									);
 
-											// minValue
+								}
 
-												$identifier_item['minValue'] = $item['brandorg_identifier_minvalue'] ?? '';
+							// taxID (Taxpayer Identification Number)
 
-											// name
+								$taxID = $taxID ?? null;
 
-												$identifier_item['name'] = $item['brandorg_identifier_name'] ?? '';
+								if ( $taxID ) {
 
-											// propertyID
+									$identifier_list = uamswp_fad_schema_propertyvalue(
+										array(
+											'TIN',
+											'IRS TIN',
+											'TIN IRS'
+										), // mixed // Optional // alternateName property value
+										null, // string // Optional // description property value
+										null, // int // Optional // maxValue property value
+										null, // mixed // Optional // measurementMethod property value
+										null, // mixed // Optional // measurementTechnique property value
+										null, // int // Optional // minValue property value
+										'Taxpayer Identification Number', // string // Optional // name property value
+										'https://www.wikidata.org/wiki/Q1444804', // string // Optional // propertyID property value
+										null, // string // Optional // unitCode property value
+										null, // string // Optional // unitText property value
+										null, // string // Optional // url property value
+										$taxID, // mixed // Optional // value property value
+										null, // mixed // Optional // valueReference property value
+										$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+									);
 
-												$identifier_item['propertyID'] = $item['brandorg_identifier_propertyid'] ?? '';
+								}
 
-											// unitCode
+							// vatID (Value-added tax (VAT) identification number)
 
-												$identifier_item['unitCode'] = $item['brandorg_identifier_unitcode'] ?? '';
+								$vatID = $vatID ?? null;
 
-											// unitText
+								if ( $vatID ) {
 
-												$identifier_item['unitText'] = $item['brandorg_identifier_unittext'] ?? '';
-
-											// url
-
-												$identifier_item['url'] = $item['brandorg_identifier_url'] ?? '';
-
-											// value
-
-												$identifier_item['value'] = $item['brandorg_identifier_value'] ?? '';
-
-										// Clean up item schema array
-
-											$identifier_item = array_filter($contactPoint_email_item);
-
-										// Add @type
-
-											if ( $identifier_item ) {
-
-												$identifier_item = array( '@type' => 'PropertyValue' ) + $identifier_item;
-
-											}
-
-										// Add to list
-
-											if ( $identifier_item ) {
-
-												$identifier_list[] = $identifier_item;
-
-											}
-
-									}
+									$identifier_list = uamswp_fad_schema_propertyvalue(
+										array(
+											'value-added tax identification number',
+											'VAT ID',
+											'VATIN'
+										), // mixed // Optional // alternateName property value
+										null, // string // Optional // description property value
+										null, // int // Optional // maxValue property value
+										null, // mixed // Optional // measurementMethod property value
+										null, // mixed // Optional // measurementTechnique property value
+										null, // int // Optional // minValue property value
+										'VAT identification number', // string // Optional // name property value
+										'https://www.wikidata.org/wiki/Q2319042', // string // Optional // propertyID property value
+										null, // string // Optional // unitCode property value
+										null, // string // Optional // unitText property value
+										null, // string // Optional // url property value
+										$vatID, // mixed // Optional // value property value
+										null, // mixed // Optional // valueReference property value
+										$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+									);
 
 								}
 
@@ -7356,18 +7635,43 @@
 
 						}
 
-					// image
+					// hasMap
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * A URL to a map of the place.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Map
+						 *     - URL
+						 *
+						 * The examples on Schema.org indicate that a URL to the location on Google Maps
+						 * is acceptable.
+						 */
+
+						$hasMap = null;
+
+						if ( $google_cid ) {
+
+							$hasMap = 'https://www.google.com/maps?cid=' . $google_cid;
+
+						}
+
+						if ( $hasMap ) {
+
+							$output['hasMap'] = $hasMap;
+
+						}
+
+					// image
+
+						/**
+						 * An image of the item. This can be a URL or a fully described ImageObject.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - ImageObject
+						 *     - URL
 						 */
 
 						$image = get_field( 'brandorg_image', $term ) ?? null;
@@ -7381,15 +7685,13 @@
 					// interactionStatistic
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * The number of interactions for the CreativeWork using the WebSite or
+						 * SoftwareApplication. The most specific child type of InteractionCounter should
+						 * be used.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - InteractionCounter
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -7398,15 +7700,15 @@
 					// isAcceptingNewPatients
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Whether the provider is accepting new patients.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Boolean
+						 *
+						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+						 * feedback and adoption from applications and websites can help improve their
+						 * definitions.
 						 */
 
 						$isAcceptingNewPatients = get_field( 'brandorg_isacceptingnewpatients', $term ) ?? null;
@@ -7424,76 +7726,27 @@
 					// isAccessibleForFree
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * A flag to signal that the item, event, or place is accessible for free.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Boolean
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
 
-					// isicV4
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 */
-
-						$isicV4 = get_field( 'brandorg_isicv4', $term ) ?? null;
-
-						if ( $isicV4 ) {
-
-							$output['isicV4'] = $isicV4;
-
-						}
-
-					// iso6523Code
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 */
-
-						$iso6523Code = get_field( 'brandorg_iso6523code', $term ) ?? null;
-
-						if ( $iso6523Code ) {
-
-							$output['iso6523Code'] = $iso6523Code;
-
-						}
-
 					// keywords
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Keywords or tags used to describe some item. Multiple textual entries in a
+						 * keywords list are typically delimited by commas, or by repeating the property.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - DefinedTerm
+						 *     - Text
+						 *     - URL
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -7502,15 +7755,20 @@
 					// knowsAbout
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Of a Person, and less typically of an Organization, to indicate a topic that is
+						 * known about — suggesting possible expertise but not implying it. We do not
+						 * distinguish skill levels here, or relate this to educational content, events,
+						 * objectives or JobPosting descriptions.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Text
+						 *     - Thing
+						 *     - URL
+						 *
+						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+						 * feedback and adoption from applications and websites can help improve their
+						 * definitions.
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -7519,15 +7777,14 @@
 					// knowsLanguage
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Of a Person, and less typically of an Organization, to indicate a known
+						 * language. We do not distinguish skill levels or reading / writing / speaking /
+						 * signing here. Use language codes from the IETF BCP 47 standard.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Language
+						 *     - Text
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -7553,15 +7810,11 @@
 					// legalName
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * The official name of the organization (e.g., the registered company name).
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Text
 						 */
 
 						$legalName = get_field( 'brandorg_legalname', $term ) ?? null;
@@ -7572,40 +7825,18 @@
 
 						}
 
-					// leiCode
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 */
-
-						$leiCode = get_field( 'brandorg_leicode', $term ) ?? null;
-
-						if ( $leiCode ) {
-
-							$output['leiCode'] = $leiCode;
-
-						}
-
 					// location
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * The location of, for example, where an event is happening, where an
+						 * organization is located, or where an action takes place.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Place
+						 *     - PostalAddress
+						 *     - Text
+						 *     - VirtualLocation
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -7614,15 +7845,15 @@
 					// logo
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * An associated logo.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - ImageObject
+						 *     - URL
+						 *
+						 * This property is beyond the scope of what is being included in the brand
+						 * organization item schema and so it will not be included.
 						 */
 
 						$logo = get_field( 'brandorg_logo', $term ) ?? null;
@@ -7653,18 +7884,16 @@
 					// mainEntityOfPage (specific property)
 
 						/**
-						 * [Insert definition here]
+						 * Indicates a page (or other CreativeWork) for which this thing is the main
+						 * entity being described. See background notes at
+						 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
 						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Inverse-property: mainEntity
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
+						 *     - CreativeWork
+						 *     - URL
 						 */
 
 						if ( $mainEntityOfPage ) {
@@ -7676,15 +7905,13 @@
 					// makesOffer
 
 						/**
-						 * [Insert definition here]
+						 * A pointer to products or services offered by the organization or person.
 						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Inverse-property: offeredBy
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Offer
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -7744,15 +7971,11 @@
 					// maximumAttendeeCapacity
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * The total number of individuals that may attend an event or venue.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Integer
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -7761,18 +7984,11 @@
 					// medicalSpecialty
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * A medical specialty of the provider.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
+						 *     - MedicalSpecialty
 						 */
 
 						// Get values
@@ -7824,15 +8040,15 @@
 					// memberOf
 
 						/**
-						 * [Insert definition here]
+						 * An Organization (or ProgramMembership) to which this Person or Organization
+						 * belongs.
 						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Inverse-property: member
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Organization
+						 *     - ProgramMembership
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -7906,40 +8122,18 @@
 						 * organization item schema and so it will not be included.
 						 */
 
-					// naics
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 */
-
-						$naics = get_field( 'brandorg_naics', $term ) ?? null;
-
-						if ( $naics ) {
-
-							$output['naics'] = $naics;
-
-						}
-
 					// name
 
 						/**
-						 * [Insert definition here]
+						 * The name of the item.
 						 *
 						 * Subproperty of:
 						 *
-						 *     - [Insert property name here]
+						 *     - rdfs:label
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Text
 						 */
 
 						$name = get_field( 'brandorg_name', $term ) ?? null;
@@ -7970,15 +8164,16 @@
 					// nonprofitStatus
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * nonprofitStatus indicates the legal status of a non-profit organization in its
+						 * primary place of business.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - NonprofitType
+						 *
+						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+						 * feedback and adoption from applications and websites can help improve their
+						 * definitions.
 						 */
 
 						$nonprofitStatus = get_field( 'schema_nonprofitstatus', $term ) ?? null;
@@ -7992,15 +8187,11 @@
 					// numberOfEmployees
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * The number of employees in an organization (e.g., business).
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - QuantitativeValue
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -8026,15 +8217,26 @@
 					// openingHours
 
 						/**
-						 * [Insert definition here]
+						 * The general opening hours for a business. Opening hours can be specified as a
+						 * weekly time range, starting with days, then times per day. Multiple days can be
+						 * listed with commas ',' separating each day. Day or time ranges are specified
+						 * using a hyphen '-'.
 						 *
-						 * Subproperty of:
+						 * Days are specified using the following two-letter combinations:
+						 * Mo, Tu, We, Th, Fr, Sa, Su.
 						 *
-						 *     - [Insert property name here]
+						 * Times are specified using 24:00 format. For example, 3 p.m. is specified as
+						 * 15:00, 10 a.m. as 10:00.
+						 *
+						 * Here is an example:
+						 * <time itemprop="openingHours" datetime="Tu,Th 16:00-20:00">Tuesdays and Thursdays 4-8pm</time>.
+						 *
+						 * If a business is open 7 days a week, then it can be specified as
+						 * <time itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all day</time>.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Text
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -8043,15 +8245,11 @@
 					// openingHoursSpecification
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * The opening hours of a certain place.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - OpeningHoursSpecification
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -8099,32 +8297,38 @@
 					// parentOrganization
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * The larger organization that this organization is a subOrganization of, if any.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
+						 *     - Organization
 						 */
+
+						$parent_term = wp_get_term_taxonomy_parent_id( $term->term_id, 'brand_organization_uams' );
+						$parentOrganization = null;
+
+						if ( is_object($parent_term) ) {
+
+							$parentOrganization = uamswp_fad_schema_brand_organization(
+								$parent_term->slug // string // Required // Brand Organization term slug
+							);
+
+						}
+
+						if ( $parentOrganization ) {
+
+							$output['parentOrganization'] = $parentOrganization;
+
+						}
 
 					// paymentAccepted
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Text
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -8150,15 +8354,12 @@
 					// photo
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * A photograph of this place.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - ImageObject
+						 *     - Photograph
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -8184,18 +8385,15 @@
 					// potentialAction
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Indicates a potential Action, which describes an idealized action in which this
+						 * thing would play an 'object' role.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Action
 						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
+						 * This schema property is beyond the scope of what is being included for
+						 * condition schema and so it will not be included.
 						 */
 
 					// priceRange
@@ -8218,15 +8416,12 @@
 					// publicAccess
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * A flag to signal that the Place is open to public visitors. If this property is
+						 * omitted there is no assumed default boolean value.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Boolean
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -8235,15 +8430,21 @@
 					// publishingPrinciples
 
 						/**
-						 * [Insert definition here]
+						 * The publishingPrinciples property indicates (typically via URL) a document
+						 * describing the editorial principles of an Organization or individual
+						 * (e.g., a Person writing a blog) that relate to their activities as a publisher
+						 * (e.g., ethics or diversity policies). When applied to a CreativeWork
+						 * (e.g., NewsArticle) the principles are those of the party primarily responsible
+						 * for the creation of the CreativeWork.
 						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * While such policies are most typically expressed in natural language, sometimes
+						 * related information (e.g., indicating a funder) can be expressed using
+						 * schema.org terminology.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - CreativeWork
+						 *     - URL
 						 */
 
 						$publishingPrinciples = get_field( 'brandorg_publishingprinciples', $term ) ?? null;
@@ -8257,15 +8458,14 @@
 					// review
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * A review of the item.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Review
+						 *
+						 * This schema property is not relevant to clinical resources or their webpages,
+						 * and so it will not be included.
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -8274,35 +8474,19 @@
 					// reviews
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
+						 * SupersededBy: review
 						 */
 
 					// sameAs
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * URL of a reference Web page that unambiguously indicates the item's identity
+						 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+						 * website).
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
+						 *     - URL
 						 */
 
 						// Get sameAs repeater field value
@@ -8419,15 +8603,12 @@
 					// smokingAllowed
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Indicates whether it is allowed to smoke in the place (e.g., in the restaurant,
+						 * hotel or hotel room).
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Boolean
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -8436,15 +8617,14 @@
 					// specialOpeningHoursSpecification
 
 						/**
-						 * [Insert definition here]
+						 * The special opening hours of a certain place.
 						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Use this to explicitly override general opening hours brought in scope by
+						 * openingHoursSpecification or openingHours.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - OpeningHoursSpecification
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -8453,15 +8633,14 @@
 					// sponsor
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * A person or organization that supports a thing through a pledge, promise, or
+						 * financial contribution (e.g., a sponsor of a Medical Study or a corporate
+						 * sponsor of an event).
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Organization
+						 *     - Person
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -8504,15 +8683,16 @@
 					// subOrganization
 
 						/**
-						 * [Insert definition here]
+						 * A relationship between two organizations where the first includes the second
+						 * (e.g., as a subsidiary).
 						 *
-						 * Subproperty of:
+						 * See also: the more specific 'department' property.
 						 *
-						 *     - [Insert property name here]
+						 * Inverse-property: parentOrganization
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - Organization
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -8521,54 +8701,14 @@
 					// subjectOf
 
 						/**
-						 * [Insert definition here]
+						 * A CreativeWork or Event about this Thing.
 						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * Inverse-property: about
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// taxID
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 */
-
-						$taxID = get_field( 'brandorg_taxid', $term ) ?? null;
-
-						if ( $taxID ) {
-
-							$output['taxID'] = $taxID;
-
-						}
-
-					// telephone
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
+						 *     - CreativeWork
+						 *     - Event
 						 *
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
@@ -8672,15 +8812,11 @@
 					// url
 
 						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
+						 * URL of the item.
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - [Insert type name here]
+						 *     - URL
 						 */
 
 						$url = get_field( 'brandorg_url', $term ) ?? null;
@@ -8691,45 +8827,7 @@
 
 						}
 
-					// vatID
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 */
-
-						$vatID = get_field( 'brandorg_vatid', $term ) ?? null;
-
-						if ( $vatID ) {
-
-							$output['vatID'] = $vatID;
-
-						}
-
 					// verificationFactCheckingPolicy
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *     - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *     - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 
 						/**
 						 * [Insert definition here]
