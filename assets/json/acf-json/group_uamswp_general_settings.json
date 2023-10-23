@@ -60,6 +60,97 @@
 			"layout": "vertical",
 			"return_format": "value",
 			"save_other_choice": 0
+		},
+		{
+			"key": "field_fad_default_brandorg_affiliation",
+			"label": "Default UAMS Brand Organizations as Affiliations",
+			"name": "fad_default_brandorg_affiliation",
+			"type": "checkbox",
+			"instructions": "Select the most specific UAMS brand organizations to list in the affiliations for every provider and location in schema data properties by default.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": [],
+			"allow_custom": 0,
+			"default_value": [
+				"uams",
+				"uams-health"
+			],
+			"layout": "vertical",
+			"toggle": 0,
+			"return_format": "value",
+			"save_custom": 0
+		},
+		{
+			"key": "field_fad_default_brandorg_credit",
+			"label": "Default UAMS Brand Organizations to Credit",
+			"name": "fad_default_brandorg_credit",
+			"type": "checkbox",
+			"instructions": "Select the UAMS brand organizations to credit as the creator for all creative works on the website by default. In order to ",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": [],
+			"allow_custom": 0,
+			"default_value": [
+				"uams"
+			],
+			"layout": "vertical",
+			"toggle": 0,
+			"return_format": "value",
+			"save_custom": 0
+		},
+		{
+			"key": "field_fad_default_brandorg_locationcreated",
+			"label": "Default UAMS Brand Organizations as the Locations Where the Website and Its Contents Were Created",
+			"name": "fad_default_brandorg_locationcreated",
+			"type": "checkbox",
+			"instructions": "Select the UAMS brand organization(s) to credit as the default location(s) where all creative works on the website were created. In order to generate valid schema data, the schema type or subtype of the selected organization(s) must also be a subtype of Location.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": [],
+			"allow_custom": 0,
+			"default_value": [
+				"uams"
+			],
+			"layout": "vertical",
+			"toggle": 0,
+			"return_format": "value",
+			"save_custom": 0
+		},
+		{
+			"key": "field_fad_default_brandorg_copyright",
+			"label": "Default UAMS Brand Organizations as Copyright Holder",
+			"name": "fad_default_brandorg_copyright",
+			"type": "radio",
+			"instructions": "Select the UAMS brand organizations to indicate as the default copyright holder for all creative works on the website.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": [],
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "uams",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
 		}
 	],
 	"location": [
