@@ -73,6 +73,16 @@
 		$schema_base_org_uams_health_url = user_trailingslashit( get_site_url() );
 		$schema_base_org_uams_health_url_trailingslashit = trailingslashit( $schema_base_org_uams_health_url );
 
+	// UAMS Health Website Language
+
+		$schema_base_website_uams_health_inLanguage = array(
+			'@id' => $schema_base_org_uams_health_url . '#inLanguage',
+			'@type' => 'Language',
+			'alternateName' => 'en',
+			'name' => 'English',
+			'sameAs' => 'https://www.wikidata.org/wiki/Q1860' // Wikidata entry for 'English'
+		);
+
 	// Default UAMS Brand Organizations
 
 		// Default Clinical UAMS Brand Organization

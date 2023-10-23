@@ -60,8 +60,8 @@ $page_id = get_the_ID();
 
 	echo '<pre>'; // test
 
-	// // Full
-	// echo print_r($schema_expertise); // test
+	// Full
+	echo print_r($schema_expertise); // test
 
 	// // UAMS
 	// echo print_r($schema_expertise['@graph'][0]); // test
@@ -72,11 +72,11 @@ $page_id = get_the_ID();
 	// // UAMSHealth.com
 	// echo print_r($schema_expertise['@graph'][2]); // test
 
-	// MedicalWebPage
-	echo print_r($schema_expertise['@graph'][3]); // test
+	// // MedicalWebPage
+	// echo print_r($schema_expertise['@graph'][3]); // test
 
-	// MedicalEntity
-	echo print_r($schema_expertise['@graph'][4]); // test
+	// // MedicalEntity
+	// echo print_r($schema_expertise['@graph'][4]); // test
 
 	// // Specific @graph item
 	// echo print_r($schema_expertise['@graph'][3]); // test
