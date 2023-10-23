@@ -13,7 +13,7 @@
 	// URL
 
 		$schema_base_org_uams_health_url = user_trailingslashit( get_site_url() );
-		$schema_base_org_uams_health_url_trailingslashit = trailingslashit( get_site_url() );
+		$schema_base_org_uams_health_url_trailingslashit = trailingslashit( $schema_base_org_uams_health_url );
 
 	// Base array
 
