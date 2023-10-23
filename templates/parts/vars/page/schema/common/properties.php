@@ -3,9 +3,6 @@
 /**
  * Required vars:
  *     $entity ($id of current post)
- *     $schema_base_org_uams
- *     $schema_base_org_uams_health
- *     $schema_base_org_uams_health_name
  *     $schema_common_state
  *     $schema_common_usa
  *     $schema_common_item_MedicalWebPage
@@ -18,9 +15,6 @@
 // Check/define variables
 
 	$entity = $entity ?? null;
-	$schema_base_org_uams = $schema_base_org_uams ?? null;
-	$schema_base_org_uams_health = $schema_base_org_uams_health ?? null;
-	$schema_base_org_uams_health_name = $schema_base_org_uams_health_name ?? null;
 	$schema_common_state = $schema_common_state ?? null;
 	$schema_common_usa = $schema_common_usa ?? null;
 	$schema_common_item_MedicalWebPage = $schema_common_item_MedicalWebPage ?? null;
@@ -50,24 +44,99 @@
 
 	// Common values used in these properties
 
+		// Default UAMS Brand Organizations
+
+			// Default Clinical UAMS Brand Organization
+
+				$schema_default_brand_organization_clinical = uamswp_fad_schema_default_brand_organization(
+					'clinical' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
+				) ?? array();
+
+			// Default UAMS Brand Organizations as Affiliations
+
+				$schema_default_brand_organization_affiliation = uamswp_fad_schema_default_brand_organization(
+					'affiliation' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
+				) ?? array();
+
+			// Default UAMS Brand Organizations to Credit
+
+				$schema_default_brand_organization_credit = uamswp_fad_schema_default_brand_organization(
+					'credit' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
+				) ?? array();
+
+				// Name(s) of Default UAMS Brand Organizations to Credit
+
+					$schema_default_brand_organization_credit_name = null;
+
+					if ( $schema_default_brand_organization_credit ) {
+
+						if ( is_array($schema_default_brand_organization_credit) ) {
+
+							if ( array_is_list($schema_default_brand_organization_credit) ) {
+
+								$schema_default_brand_organization_credit_name = array();
+
+								foreach ( $schema_default_brand_organization_credit_name as $item ) {
+
+									if (
+										isset($item['name'])
+										&&
+										!empty($item['name'])
+									) {
+
+										$schema_default_brand_organization_credit_name[] = $item['name'];
+
+									}
+
+								}
+
+								uamswp_fad_flatten_multidimensional_array($schema_default_brand_organization_credit_name);
+
+							} else {
+
+								if (
+									isset($schema_default_brand_organization_credit['name'])
+									&&
+									!empty($schema_default_brand_organization_credit['name'])
+								) {
+
+									$schema_default_brand_organization_credit_name = $schema_default_brand_organization_credit['name'];
+
+								}
+
+							}
+
+						} else {
+
+							$schema_default_brand_organization_credit_name = $schema_default_brand_organization_credit;
+
+						}
+
+					}
+
+			// Default UAMS Brand Organizations as the Locations Where the Website and Its Contents Were Created
+
+				$schema_default_brand_organization_locationcreated = uamswp_fad_schema_default_brand_organization(
+					'locationcreated' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
+				) ?? array();
+
+			// Default UAMS Brand Organizations as Copyright Holder
+
+				$schema_default_brand_organization_copyright = uamswp_fad_schema_default_brand_organization(
+					'copyright' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
+				) ?? array();
+
 		// Common organization credited
 
 			// Base array
 
 				$schema_common_credit = array();
 
-			// Merge in UAMS organization values
+			// Merge in Default UAMS Brand Organizations to Credit
 
 				$schema_common_credit = uamswp_fad_schema_merge_values(
 					$schema_common_credit, // mixed // Required // Initial schema item property value
-					$schema_base_org_uams // mixed // Required // Incoming schema item property value
-				);
-
-			// Merge in UAMS Health organization values
-
-				$schema_common_credit = uamswp_fad_schema_merge_values(
-					$schema_common_credit, // mixed // Required // Initial schema item property value
-					$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
+					$schema_default_brand_organization_credit // mixed // Required // Incoming schema item property value
 				);
 
 		// Common affiliation organizations
@@ -76,18 +145,11 @@
 
 				$schema_common_affiliation_organization = array();
 
-			// UAMS
+			// Merge in Default UAMS Brand Organizations as Affiliations
 
 				$schema_common_affiliation_organization = uamswp_fad_schema_merge_values(
 					$schema_common_affiliation_organization, // mixed // Required // Initial schema item property value
-					$schema_base_org_uams // mixed // Required // Incoming schema item property value
-				);
-
-			// UAMS Health
-
-				$schema_common_affiliation_organization = uamswp_fad_schema_merge_values(
-					$schema_common_affiliation_organization, // mixed // Required // Initial schema item property value
-					$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
+					$schema_default_brand_organization_affiliation // mixed // Required // Incoming schema item property value
 				);
 
 		// Common clinical organizations
@@ -96,11 +158,11 @@
 
 				$schema_common_clinical_organization = array();
 
-			// UAMS Health
+			// Merge in Default Clinical UAMS Brand Organization
 
 				$schema_common_clinical_organization = uamswp_fad_schema_merge_values(
 					$schema_common_clinical_organization, // mixed // Required // Initial schema item property value
-					$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
+					$schema_default_brand_organization_clinical // mixed // Required // Incoming schema item property value
 				);
 
 		// Excerpt
@@ -870,11 +932,11 @@
 
 					$schema_common_copyrightHolder = array();
 
-				// Merge in UAMS organization values
+				// Merge in Default UAMS Brand Organizations as Copyright Holder
 
 					$schema_common_copyrightHolder = uamswp_fad_schema_merge_values(
 						$schema_common_copyrightHolder, // mixed // Required // Initial schema item property value
-						$schema_base_org_uams // mixed // Required // Incoming schema item property value
+						$schema_default_brand_organization_copyright // mixed // Required // Incoming schema item property value
 					);
 
 			// Add to common schema properties array
@@ -1086,7 +1148,7 @@
 
 			// Get values
 
-				$schema_common_creditText = $schema_base_org_uams_health_name ?? '';
+				$schema_common_creditText = $schema_default_brand_organization_credit_name ?? '';
 
 			// Add to common schema properties array
 
@@ -1794,11 +1856,11 @@
 
 					$schema_common_locationCreated = array();
 
-				// Merge in UAMS organization values
+				// Merge in Default UAMS Brand Organizations as the Locations Where the Website and Its Contents Were Created
 
 					$schema_common_locationCreated = uamswp_fad_schema_merge_values(
 						$schema_common_locationCreated, // mixed // Required // Initial schema item property value
-						$schema_base_org_uams // mixed // Required // Incoming schema item property value
+						$schema_default_brand_organization_locationcreated // mixed // Required // Incoming schema item property value
 					);
 
 			// Add to common schema properties array
@@ -2590,11 +2652,11 @@
 
 					$schema_common_sdPublisher = array();
 
-				// Merge in UAMS organization values
+				// Merge in Default UAMS Brand Organizations to Credit
 
 					$schema_common_sdPublisher = uamswp_fad_schema_merge_values(
 						$schema_common_sdPublisher, // mixed // Required // Initial schema item property value
-						$schema_base_org_uams // mixed // Required // Incoming schema item property value
+						$schema_default_brand_organization_credit // mixed // Required // Incoming schema item property value
 					);
 
 			// Add to common schema properties array
