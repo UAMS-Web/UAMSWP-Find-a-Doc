@@ -422,6 +422,25 @@
 					"maxlength": ""
 				},
 				{
+					"key": "field_brandorg_contactpoint_postaladdress_postalcode",
+					"label": "Postal Code (postalCode > Text)",
+					"name": "brandorg_contactpoint_postaladdress_postalcode",
+					"type": "text",
+					"instructions": "The postal code. For example, 94043.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
 					"key": "field_brandorg_addresscountry",
 					"label": "Country (addressCountry > Country or Text)",
 					"name": "brandorg_addresscountry",
