@@ -5437,13 +5437,6 @@
 
 						}
 
-
-						if ( $type ) {
-
-							$output['@type'] = $type;
-
-						}
-
 					// acceptsReservations
 
 						/**
@@ -8843,6 +8836,36 @@
 						 * This property is beyond the scope of what is being included in the brand
 						 * organization item schema and so it will not be included.
 						 */
+
+				// Clean up the output array
+
+					// Remove empty rows
+
+						if ( $output ) {
+
+							$output = array_filter($output);
+
+						}
+
+					// Add @type
+
+						if ( $output ) {
+
+							$output = array( '@type' => $type ) + $output;
+
+						}
+
+					// Sort rows by key
+
+						if ( $output ) {
+
+							ksort($output);
+
+						}
+
+				// Return the array
+
+					return $output;
 
 			}
 
