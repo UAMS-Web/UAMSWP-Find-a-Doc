@@ -9113,6 +9113,714 @@
 
 			}
 
+	// Add data to an array defining schema data for UAMSHealth.com (WebSite)
+
+		function uamswp_fad_schema_uamshealth_website(
+			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
+			int $nesting_level = 1 // int // Optional // Nesting level within the main schema
+		) {
+
+			// Retrieve the value of the item transient
+
+				uamswp_fad_get_transient(
+					'0', // Required // String added to transient name for disambiguation.
+					$schema, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
+				);
+
+			if ( !empty( $schema ) ) {
+
+				/**
+				 * The transient exists.
+				 * Return the variable.
+				 */
+
+				return $schema;
+
+			} else {
+
+				/**
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
+
+				// Base schema function variables
+
+					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/base_function.php' );
+
+				// List of valid types
+
+					$uamshealth_website_valid_types = array(
+						'WebSite'
+					);
+
+				// List of valid properties for each type
+
+					// Base array
+
+						$uamshealth_website_properties_map = array();
+
+					// Get list of valid properties from Schema.org type list
+
+						foreach ( $uamshealth_website_valid_types as $item ) {
+
+							$uamshealth_website_properties_map[$item]['properties'] = $schema_org_types[$item]['properties'] ?? array();
+							$uamshealth_website_properties_map[$item]['properties'] = is_array($uamshealth_website_properties_map[$item]['properties']) ? $uamshealth_website_properties_map[$item]['properties'] : array($uamshealth_website_properties_map[$item]['properties']);
+
+						}
+
+				// Eliminate PHP errors / reset variables
+
+					$schema = array(); // Base array
+
+				// Add values
+
+					// @type
+
+						$type = 'WebSite';
+						$schema['@type'] = $type;
+
+					// @id
+
+						$id = $schema_base_org_uams_health_url . '#' . $type;
+						$output['@id'] = $id;
+
+					// url
+
+						$url = $schema_base_org_uams_health_url;
+
+						if ( $url ) {
+
+							$schema['url'] = $url;
+
+						}
+
+					// Add common properties
+
+						include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/properties.php' );
+
+						// All types
+
+							/*
+
+								Loop through an associative array of properties common to all of our schema
+								types, adding each row to this item's schema when the key matches a property
+								valid for the type, replacing full values with only the node identifier where
+								appropriate.
+
+							*/
+
+							if (
+								isset($schema_common_properties)
+								&&
+								!empty($schema_common_properties)
+							) {
+
+								foreach ( $schema_common_properties as $key => $value ) {
+
+									// Add to item values
+
+										${ 'schema_common_' . $key . '_ref' } = null;
+
+										uamswp_fad_schema_add_to_item_values(
+											$type, // string // Required // The @type value for the schema item
+											$output, // array // Required // The list array for the schema item to which to add the property value
+											$key, // string // Required // Name of schema property
+											$value, // mixed // Required // Variable to add as the property value
+											${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
+											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+											$uamshealth_website_properties_map, // array // Required // Map array to match schema types with allowed properties
+											($nesting_level + 1) // int // Required // Current nesting level value
+										);
+
+								}
+
+							}
+
+						// WebSite and MedicalWebPage only
+
+							/*
+
+								Loop through an associative array of properties specific to the WebSite and
+								MedicalWebPage type, adding each row to this item's schema when the key matches
+								a property valid for the type, replacing full values with only the node
+								identifier where appropriate.
+
+							*/
+
+							if (
+								isset($schema_common_properties_MedicalWebPage)
+								&&
+								!empty($schema_common_properties_MedicalWebPage)
+							) {
+
+								foreach ( $schema_common_properties_MedicalWebPage as $key => $value ) {
+
+									// Add to item values
+
+										${ 'schema_common_' . $key . '_MedicalWebPage_ref' } = null;
+
+										uamswp_fad_schema_add_to_item_values(
+											$type, // string // Required // The @type value for the schema item
+											$output, // array // Required // The list array for the schema item to which to add the property value
+											$key, // string // Required // Name of schema property
+											$value, // mixed // Required // Variable to add as the property value
+											${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
+											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+											$uamshealth_website_properties_map, // array // Required // Map array to match schema types with allowed properties
+											($nesting_level + 1) // int // Required // Current nesting level value
+										);
+
+								}
+
+							}
+
+						// Main entity type
+
+							/*
+
+								Loop through an associative array of properties specific to the main entity
+								type, adding each row to this item's schema when the key matches a property
+								valid for the type, replacing full values with only the node identifier where
+								appropriate.
+
+							*/
+
+							if (
+								isset($schema_common_properties_main_entity)
+								&&
+								!empty($schema_common_properties_main_entity)
+							) {
+
+								foreach ( $schema_common_properties_main_entity as $key => $value ) {
+
+									// Add to item values
+
+										${ 'schema_common_' . $key . '_main_entity_ref' } = null;
+
+										uamswp_fad_schema_add_to_item_values(
+											$type, // string // Required // The @type value for the schema item
+											$output, // array // Required // The list array for the schema item to which to add the property value
+											$key, // string // Required // Name of schema property
+											$value, // mixed // Required // Variable to add as the property value
+											${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
+											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+											$uamshealth_website_properties_map, // array // Required // Map array to match schema types with allowed properties
+											($nesting_level + 1) // int // Required // Current nesting level value
+										);
+
+								}
+
+							}
+
+					// name
+
+						$name = 'UAMS Health';
+						$schema['name'] = $name;
+
+					// about
+
+						/**
+						 * The subject matter of the content.
+						 *
+						 * Inverse-property: subjectOf
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Thing
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['about'] = '';
+
+					// abstract
+
+						/**
+						 * An abstract is a short description that summarizes a CreativeWork.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Text
+						 *
+						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+						 * feedback and adoption from applications and websites can help improve their
+						 * definitions.
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['abstract'] = '';
+
+					// additionalType
+
+						/**
+						 * An additional type for the item, typically used for adding more specific types
+						 * from external vocabularies in microdata syntax. This is a relationship between
+						 * something and a class that the thing is in. Typically the value is a
+						 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+						 * in RDF. Text values can be used sparingly, for cases where useful information
+						 * can be added without their being an appropriate schema to reference. In the
+						 * case of text values, the class label should follow the schema.org style guide.
+						 *
+						 * Subproperty of:
+						 *     - rdf:type
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Text
+						 *     - URL
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['additionalType'] = '';
+
+					// aggregateRating
+
+						/**
+						 * The overall rating, based on a collection of reviews or ratings, of the item.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - AggregateRating
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['aggregateRating'] = '';
+
+					// alternateName
+
+						/**
+						 * An alias for the item.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Text
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['alternateName'] = '';
+
+					// citation
+
+						/**
+						 * A citation or reference to another creative work, such as another publication,
+						 * web page, scholarly article, etc.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - CreativeWork
+						 *     - Text
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['citation'] = '';
+
+					// contentLocation
+
+						/**
+						 * The location depicted or described in the content. For example, the location in
+						 * a photograph or painting.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Place
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['contentLocation'] = '';
+
+					// dateModified
+
+						/**
+						 * The date on which the CreativeWork was most recently modified or when the
+						 * item's entry was modified within a DataFeed.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Date
+						 *     - DateTime
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['dateModified'] = '';
+
+					// datePublished
+
+						/**
+						 * Date of first broadcast/publication.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Date
+						 *     - DateTime
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['datePublished'] = '';
+
+					// description
+
+						/**
+						 * A description of the item.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Text
+						 *     - TextObject
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['description'] = '';
+
+					// disambiguatingDescription
+
+						/**
+						 * A sub property of description. A short description of the item used to
+						 * disambiguate from other, similar items. Information from other properties (in
+						 * particular, name) may be necessary for the description to be useful for
+						 * disambiguation.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Text
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['disambiguatingDescription'] = '';
+
+					// encodingFormat
+
+						/**
+						 * Media type typically expressed using a MIME format (see IANA site and MDN
+						 * reference), (e.g., application/zip for a SoftwareApplication binary,
+						 * audio/mpeg for .mp3).
+						 *
+						 * In cases where a CreativeWork has several media type representations, encoding
+						 * can be used to indicate each MediaObject alongside particular encodingFormat
+						 * information.
+						 *
+						 * Unregistered or niche encoding and file formats can be indicated instead via
+						 * the most appropriate URL (e.g., defining Web page, a Wikipedia/Wikidata
+						 * entry).
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Text
+						 *     - URL
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['encodingFormat'] = '';
+
+					// hasPart
+
+						/**
+						 * Indicates an item or CreativeWork that is part of this item, or CreativeWork
+						 * (in some sense).
+						 *
+						 * Inverse-property: isPartOf
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - CreativeWork
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['hasPart'] = '';
+
+					// identifier
+
+						/**
+						 * The identifier property represents any kind of identifier for any kind of
+						 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
+						 * properties for representing many of these, either as textual strings or as
+						 * URL (URI) links.
+						 *
+						 * See https://schema.org/docs/datamodel.html#identifierBg for more details.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - PropertyValue
+						 *     - Text
+						 *     - URL
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['identifier'] = '';
+
+					// image
+
+						/**
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['image'] = '';
+
+					// isPartOf
+
+						/**
+						 * Indicates an item or CreativeWork that this item, or CreativeWork (in some
+						 * sense), is part of.
+						 *
+						 * Inverse-property: hasPart
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - CreativeWork
+						 *     - URL
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['isPartOf'] = '';
+
+					// issn
+
+						/**
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['issn'] = '';
+
+					// keywords
+
+						/**
+						 * Keywords or tags used to describe some item. Multiple textual entries in a
+						 * keywords list are typically delimited by commas, or by repeating the property.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - DefinedTerm
+						 *     - Text
+						 *     - URL
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['keywords'] = '';
+
+					// mainEntity
+
+						/**
+						 * Indicates the primary entity described in some page or other CreativeWork.
+						 *
+						 * Inverse-property: mainEntityOfPage
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Thing
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['mainEntity'] = '';
+
+					// mentions
+
+						/**
+						 * Indicates that the CreativeWork contains a reference to, but is not necessarily
+						 * about a concept.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Thing
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['mentions'] = '';
+
+					// offers
+
+						/**
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['offers'] = '';
+
+					// potentialAction
+
+						/**
+						 * Indicates a potential Action, which describes an idealized action in which this
+						 * thing would play an 'object' role.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Action
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['potentialAction'] = '';
+
+					// sameAs
+
+						/**
+						 * URL of a reference Web page that unambiguously indicates the item's identity
+						 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+						 * website).
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - URL
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['sameAs'] = '';
+
+					// subjectOf
+
+						/**
+						 * A CreativeWork or Event about this Thing.
+						 *
+						 * Inverse-property: about
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - CreativeWork
+						 *     - Event
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['subjectOf'] = '';
+
+					// text
+
+						/**
+						 * The textual content of this CreativeWork.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Text
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['text'] = '';
+
+					// thumbnailUrl
+
+						/**
+						 * A thumbnail image relevant to the Thing.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - URL
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['thumbnailUrl'] = '';
+
+					// timeRequired
+
+						/**
+						 * Approximate or typical time it usually takes to work with or through the
+						 * content of this work for the typical or target audience.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Duration (use ISO 8601 duration format).
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['timeRequired'] = '';
+
+					// video
+
+						/**
+						 * An embedded video object.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *     - Clip
+						 *     - VideoObject
+						 *
+						 * This property is beyond the scope of what is being included in the UAMS Health
+						 * WebSite item schema and so it will not be included.
+						 */
+
+						$schema['video'] = '';
+
+				// Clean up the schema array
+
+					if ( $schema ) {
+
+						// Remove empty rows
+
+							if ( is_array($schema) ) {
+
+								$schema = array_filter($schema);
+
+							}
+
+						// Sort by key
+
+							if ( is_array($schema) ) {
+
+								ksort($schema);
+
+							}
+
+					}
+
+				// Set/update the value of the item transient
+
+					uamswp_fad_set_transient(
+						'0', // Required // String added to transient name for disambiguation.
+						$schema, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+						__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
+					);
+
+				return $schema;
+
+			}
+
+		}
+
 // Generate schema arrays of ontology page types
 
 	// Providers (MedicalWebPage; MedicalBusiness; Person)
