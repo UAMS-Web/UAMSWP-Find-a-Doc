@@ -57,7 +57,7 @@
 			'@type' => 'Language',
 			'alternateName' => 'en',
 			'name' => 'English',
-			'sameAs' => 'https://www.wikidata.org/wiki/Q1860'
+			'sameAs' => 'https://www.wikidata.org/wiki/Q1860' // Wikidata entry for 'English'
 		);
 		$node_identifier_list[] = $schema_base_website_uams_health['inLanguage']['@id']; // Add to the list of existing node identifiers
 
