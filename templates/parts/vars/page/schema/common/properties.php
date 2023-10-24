@@ -3,6 +3,7 @@
 /**
  * Required vars:
  *     $entity ($id of current post)
+ *     $nesting_level
  *     $schema_common_state
  *     $schema_common_usa
  *     $schema_common_item_MedicalWebPage
@@ -14,7 +15,6 @@
  *     $schema_default_brand_organization_credit
  *     $schema_default_brand_organization_locationcreated
  *     $schema_default_brand_organization_copyright
- *
  */
 
 // Check/define variables
