@@ -1563,7 +1563,7 @@
 									'diseasesdatabase.com'
 								),
 								'name' => 'Diseases Database',
-								'sameAs' => 'https://www.wikidata.org/wiki/Q213103',
+								'sameAs' => 'https://www.wikidata.org/wiki/Q213103', // Wikidata entry for 'Diseases Database'
 								'url' => 'http://www.diseasesdatabase.com/'
 							),
 							'ICD-9' => array(
@@ -1573,7 +1573,7 @@
 									'ICD9',
 								),
 								'name' => 'International Statistical Classification of Diseases and Related Health Problems, Ninth Revision',
-								'sameAs' => 'https://www.wikidata.org/wiki/Q14067712',
+								'sameAs' => 'https://www.wikidata.org/wiki/Q14067712', // Wikidata entry for 'International Classification of Diseases, Ninth Revision (ICD-9)'
 								'url' => 'https://www.cdc.gov/nchs/icd/icd9.htm'
 							),
 							'ICD-9-CM' => array(
@@ -1585,8 +1585,8 @@
 								),
 								'dateModified' => 'International Statistical Classification of Diseases and Related Health Problems, Ninth Revision, Clinical Modification',
 								'sameAs' => array(
-									'https://id.loc.gov/authorities/names/n2009185485.html',
-									'https://www.wikidata.org/wiki/Q5737131'
+									'http://id.loc.gov/authorities/names/n2009185485', // Library of Congress Name Authority File entry for 'International classification of diseases. 9th revision. Clinical modification'
+									'https://www.wikidata.org/wiki/Q5737131' // Wikidata entry for 'ICD-9-CM'
 								),
 								'url' => 'https://www.cdc.gov/nchs/icd/icd9cm.htm'
 							),
@@ -1598,8 +1598,8 @@
 								),
 								'name' => 'International Statistical Classification of Diseases and Related Health Problems, Tenth Revision',
 								'sameAs' => array(
-									'http://id.loc.gov/authorities/names/n2009019647',
-									'https://www.wikidata.org/wiki/Q45127'
+									'http://id.loc.gov/authorities/names/n2009019647', // Library of Congress Name Authority File entry for 'International statistical classification of diseases and related health problems. 10th revision'
+									'https://www.wikidata.org/wiki/Q45127' // Wikidata entry for 'International Classification of Diseases, Tenth Revision (ICD-10)'
 								),
 								'url' => 'https://icd.who.int/browse10/'
 							),
@@ -1612,8 +1612,8 @@
 								),
 								'name' => 'International Statistical Classification of Diseases and Related Health Problems, Tenth Revision, Clinical Modification',
 								'sameAs' => array(
-									'http://id.loc.gov/authorities/names/n2009185486',
-									'https://www.wikidata.org/wiki/Q5969475'
+									'http://id.loc.gov/authorities/names/n2009185486', // Library of Congress Name Authority File entry for 'International statistical classification of diseases and related health problems. 10th revision. Clinical modification'
+									'https://www.wikidata.org/wiki/Q5969475' // Wikidata entry for 'ICD-10 Clinical Modification'
 								),
 								'url' => 'https://www.cms.gov/medicare/coding/icd10'
 							),
@@ -1626,8 +1626,8 @@
 								),
 								'name' => 'International Statistical Classification of Diseases and Related Health Problems, Tenth Revision, Procedure Coding System',
 								'sameAs' => array(
-									'http://id.loc.gov/authorities/names/n2009185487',
-									'https://www.wikidata.org/wiki/Q9006342'
+									'http://id.loc.gov/authorities/names/n2009185487', // Library of Congress Name Authority File entry for 'International statistical classification of diseases and related health problems. 10th revision. Procedure coding system'
+									'https://www.wikidata.org/wiki/Q9006342' // Wikidata entry for 'ICD-10 Procedure Coding System'
 								),
 								'url' => 'https://www.cms.gov/medicare/coding/icd10'
 							),
@@ -1639,15 +1639,15 @@
 								),
 								'name' => 'International Statistical Classification of Diseases and Related Health Problems, Eleventh Revision',
 								'sameAs' => array(
-									'http://id.loc.gov/authorities/names/n2010022952',
-									'https://www.wikidata.org/wiki/Q55695727'
+									'http://id.loc.gov/authorities/names/n2010022952', // Library of Congress Name Authority File entry for 'International statistical classification of diseases and related health problems. 11th revision'
+									'https://www.wikidata.org/wiki/Q55695727' // Wikidata entry for 'International Classification of Diseases, Eleventh Revision (ICD-11)'
 								),
 								'url' => 'https://icd.who.int/en'
 							),
 							'ICHI' => array(
 								'alternateName' => 'ICHI',
 								'name' => 'International Classification of Health Interventions',
-								'sameAs' => 'https://www.wikidata.org/wiki/Q3505045',
+								'sameAs' => 'https://www.wikidata.org/wiki/Q3505045', // Wikidata entry for 'International Classification of Health Interventions'
 								'url' => 'https://www.who.int/standards/classifications/international-classification-of-health-interventions'
 							),
 							'ICPC-2' => array(
@@ -1663,15 +1663,15 @@
 								'alternateName' => 'MeSH',
 								'name' => 'Medical Subject Headings',
 								'sameAs' => array(
-									'http://id.loc.gov/authorities/names/n2013188677',
-									'https://www.wikidata.org/wiki/Q199897'
+									'http://id.loc.gov/authorities/names/n2013188677', // Library of Congress Name Authority File entry for 'National Library of Medicine (U.S.). Medical subject headings'
+									'https://www.wikidata.org/wiki/Q199897' // Wikidata entry for 'Medical Subject Headings'
 								),
 								'url' => 'https://www.nlm.nih.gov/mesh/meshhome.html'
 							),
 							'RxNorm' => array(
 								'name' => 'RxNorm',
 								'sameAs' => array(
-									'https://www.wikidata.org/wiki/Q7383767',
+									'https://www.wikidata.org/wiki/Q7383767', // Wikidata entry for 'RxNorm'
 									'https://id.nlm.nih.gov/mesh/D062245.html'
 								),
 								'url' => 'https://www.nlm.nih.gov/research/umls/rxnorm/'
@@ -1680,8 +1680,8 @@
 								'alternateName' => 'SNOMED Clinical Terms',
 								'name' => 'SNOMED CT',
 								'sameAs' => array(
-									'http://id.loc.gov/authorities/names/n2005182509',
-									'https://www.wikidata.org/wiki/Q1753883'
+									'http://id.loc.gov/authorities/names/n2005182509', // Library of Congress Name Authority File entry for 'SNOMED CT'
+									'https://www.wikidata.org/wiki/Q1753883' // Wikidata entry for 'SNOMED CT'
 								),
 								'url' => 'https://www.snomed.org/'
 							)
@@ -29511,8 +29511,8 @@
 														'@type' => 'ResearchOrganization',
 														'name' => 'National Cancer Institute',
 														'sameAs' => array(
-															'http://id.loc.gov/authorities/names/n79107940',
-															'https://www.wikidata.org/wiki/Q664846'
+															'http://id.loc.gov/authorities/names/n79107940', // Library of Congress Name Authority File entry for 'National Cancer Institute (U.S.)'
+															'https://www.wikidata.org/wiki/Q664846' // Wikidata entry for 'National Cancer Institute'
 														),
 														'url' => 'https://www.cancer.gov/'
 													);

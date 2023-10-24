@@ -249,23 +249,23 @@
 
 		// Wikipedia: https://en.wikipedia.org/
 
-			$schema_base_org_uams['sameAs'][] = 'https://en.wikipedia.org/wiki/University_of_Arkansas_for_Medical_Sciences';
+			$schema_base_org_uams['sameAs'][] = 'https://en.wikipedia.org/wiki/University_of_Arkansas_for_Medical_Sciences'; // Wikipedia entry for 'University of Arkansas for Medical Sciences'
 
 		// Wikidata: https://www.wikidata.org/
 
-			$schema_base_org_uams['sameAs'][] = 'https://www.wikidata.org/wiki/Q941298';
+			$schema_base_org_uams['sameAs'][] = 'https://www.wikidata.org/wiki/Q941298'; // Wikidata entry for 'University of Arkansas for Medical Sciences'
 
 		// Library of Congress Name Authority File: https://id.loc.gov/authorities/names.html
 
-			$schema_base_org_uams['sameAs'][] = 'http://id.loc.gov/authorities/names/n79026333';
+			$schema_base_org_uams['sameAs'][] = 'http://id.loc.gov/authorities/names/n79026333'; // Library of Congress Name Authority File entry for 'University of Arkansas for Medical Sciences'
 
 		// Virtual International Authority File: https://viaf.org/
 
-			$schema_base_org_uams['sameAs'][] = 'http://viaf.org/viaf/140704690';
+			$schema_base_org_uams['sameAs'][] = 'http://viaf.org/viaf/267863216'; // Virtual International Authority File entry for 'University of Arkansas for Medical Sciences'
 
 		// FAST Authority File: https://experimental.worldcat.org/fast/
 
-			$schema_base_org_uams['sameAs'][] = 'http://id.worldcat.org/fast/530628';
+			$schema_base_org_uams['sameAs'][] = 'http://id.worldcat.org/fast/530628'; // FAST Authority File entry for 'University of Arkansas for Medical Sciences'
 
 	// slogan
 
@@ -406,7 +406,7 @@
 			'@type' => 'Language',
 			'alternateName' => 'en',
 			'name' => 'English',
-			'sameAs' => 'https://www.wikidata.org/wiki/Q1860'
+			'sameAs' => 'https://www.wikidata.org/wiki/Q1860' // Wikidata entry for 'English'
 		);
 		$node_identifier_list[] = $schema_base_website_uams_health['inLanguage']['@id']; // Add to the list of existing node identifiers
 

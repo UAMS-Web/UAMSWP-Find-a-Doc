@@ -125,7 +125,7 @@
 			'areaServed' => array(
 				'@type' => 'State',
 				'name' => 'Arkansas',
-				'sameAs' => 'https://www.wikidata.org/wiki/Q1612'
+				'sameAs' => 'https://www.wikidata.org/wiki/Q1612' // Wikidata entry for 'Arkansas'
 			),
 			'availableService' => array(
 				array( // Repeat as necessary

@@ -11,7 +11,7 @@
 				'Ark.'
 			),
 			'name' => 'Arkansas',
-			'sameAs' => 'https://www.wikidata.org/wiki/Q1612'
+			'sameAs' => 'https://www.wikidata.org/wiki/Q1612' // Wikidata entry for 'Arkansas'
 		);
 
 	// USA as Country
@@ -25,7 +25,7 @@
 				'USA'
 			),
 			'name' => 'US',
-			'sameAs' => 'https://www.wikidata.org/wiki/Q30',
+			'sameAs' => 'https://www.wikidata.org/wiki/Q30', // Wikidata entry for 'United States of America'
 		);
 
 	// audience (untyped)
