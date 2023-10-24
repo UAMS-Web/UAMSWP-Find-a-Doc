@@ -9228,7 +9228,6 @@
 											$schema, // array // Required // The list array for the schema item to which to add the property value
 											$key, // string // Required // Name of schema property
 											$value, // mixed // Required // Variable to add as the property value
-											${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 											$uamshealth_website_properties_map, // array // Required // Map array to match schema types with allowed properties
 											($nesting_level + 1) // int // Required // Current nesting level value
@@ -9265,7 +9264,6 @@
 											$schema, // array // Required // The list array for the schema item to which to add the property value
 											$key, // string // Required // Name of schema property
 											$value, // mixed // Required // Variable to add as the property value
-											${ 'schema_common_' . $key . '_WebSite_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 											$uamshealth_website_properties_map, // array // Required // Map array to match schema types with allowed properties
 											($nesting_level + 1) // int // Required // Current nesting level value
@@ -9303,7 +9301,6 @@
 											$schema, // array // Required // The list array for the schema item to which to add the property value
 											$key, // string // Required // Name of schema property
 											$value, // mixed // Required // Variable to add as the property value
-											${ 'schema_common_' . $key . '_main_entity_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 											$uamshealth_website_properties_map, // array // Required // Map array to match schema types with allowed properties
 											($nesting_level + 1) // int // Required // Current nesting level value
@@ -9326,7 +9323,6 @@
 								$schema, // array // Required // The list array for the schema item to which to add the property value
 								'name', // string // Required // Name of schema property
 								$name, // mixed // Required // Variable to add as the property value
-								$name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 								$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 								$uamshealth_website_properties_map, // array // Required // Map array to match schema types with allowed properties
 								($nesting_level + 1) // int // Required // Current nesting level value
@@ -10027,38 +10023,22 @@
 								$Person_type = null;
 								$Physician_degree_query = null;
 								$provider_about = null;
-								$provider_about_ref = null;
 								$provider_abstract = null;
-								$provider_abstract_ref = null;
 								$provider_accessibilityAPI = null;
-								$provider_accessibilityAPI_ref = null;
 								$provider_accessibilityControl = null;
-								$provider_accessibilityControl_ref = null;
 								$provider_accessibilityFeature = null;
-								$provider_accessibilityFeature_ref = null;
 								$provider_accessibilityHazard = null;
-								$provider_accessibilityHazard_ref = null;
 								$provider_accessibilitySummary = null;
-								$provider_accessibilitySummary_ref = null;
 								$provider_accessMode = null;
-								$provider_accessMode_ref = null;
 								$provider_accessModeSufficient = null;
-								$provider_accessModeSufficient_ref = null;
 								$provider_accountablePerson = null;
-								$provider_accountablePerson_ref = null;
 								$provider_acquireLicensePage = null;
-								$provider_acquireLicensePage_ref = null;
 								$provider_additionalName = null;
 								$provider_additionalName_initial = null;
-								$provider_additionalName_ref = null;
 								$provider_additionalType = null;
 								$provider_additionalType_clinical_specialization = null;
-								$provider_additionalType_clinical_specialization_ref = null;
 								$provider_additionalType_MedicalSpecialty = null;
-								$provider_additionalType_MedicalSpecialty_ref = null;
-								$provider_additionalType_ref = null;
 								$provider_affiliation = null;
-								$provider_affiliation_ref = null;
 								$provider_aggregateRating = null;
 								$provider_aggregateRating_api = null;
 								$provider_aggregateRating_description = null;
@@ -10066,7 +10046,6 @@
 								$provider_aggregateRating_query = null;
 								$provider_aggregateRating_ratingCount = null;
 								$provider_aggregateRating_ratingValue = null;
-								$provider_aggregateRating_ref = null;
 								$provider_aggregateRating_reviewAspect = null;
 								$provider_aggregateRating_reviewCount = null;
 								$provider_alternateName = null;
@@ -10074,94 +10053,53 @@
 								$provider_alternateName_additional_repeater = null;
 								$provider_alternateName_combinations = null;
 								$provider_alternateName_options = null;
-								$provider_alternateName_ref = null;
 								$provider_alternateName_variants = null;
 								$provider_areaServed = null;
-								$provider_areaServed_ref = null;
 								$provider_associations = null;
-								$provider_associations_ref = null;
 								$provider_audience = null;
-								$provider_audience_ref = null;
 								$provider_author = null;
-								$provider_author_ref = null;
 								$provider_availableService = null;
 								$provider_availableService_keywords = null;
-								$provider_availableService_keywords_ref = null;
-								$provider_availableService_ref = null;
 								$provider_availableService_significantLink = null;
-								$provider_availableService_significantLink_ref = null;
 								$provider_brand = null;
-								$provider_brand_ref = null;
 								$provider_brand_keywords = null;
-								$provider_brand_keywords_ref = null;
 								$provider_cid = null;
-								$provider_cid_ref = null;
 								$provider_clinical_resource = null;
-								$provider_clinical_resource_ref = null;
 								$provider_clinical_resource_significantLink = null;
-								$provider_clinical_resource_significantLink_ref = null;
 								$provider_clinical_specialization = null;
 								$provider_clinical_specialization_keywords = null;
-								$provider_clinical_specialization_keywords_ref = null;
 								$provider_clinical_specialization_knowsAbout = null;
-								$provider_clinical_specialization_knowsAbout_ref = null;
 								$provider_clinical_specialization_name = null;
-								$provider_clinical_specialization_ref = null;
 								$provider_clinical_specialization_term = null;
 								$provider_condition = null;
 								$provider_condition_keywords = null;
-								$provider_condition_keywords_ref = null;
 								$provider_condition_list = null;
-								$provider_condition_ref = null;
 								$provider_condition_significantLink = null;
-								$provider_condition_significantLink_ref = null;
 								$provider_containedInPlace = null;
-								$provider_containedInPlace_ref = null;
 								$provider_contributor = null;
-								$provider_contributor_ref = null;
 								$provider_copyrightHolder = null;
-								$provider_copyrightHolder_ref = null;
 								$provider_copyrightNotice = null;
-								$provider_copyrightNotice_ref = null;
 								$provider_copyrightYear = null;
-								$provider_copyrightYear_ref = null;
 								$provider_countryOfOrigin = null;
-								$provider_countryOfOrigin_ref = null;
 								$provider_creativeWorkStatus = null;
-								$provider_creativeWorkStatus_ref = null;
 								$provider_creator = null;
-								$provider_creator_ref = null;
 								$provider_creditText = null;
-								$provider_creditText_ref = null;
 								$provider_currenciesAccepted = null;
-								$provider_currenciesAccepted_ref = null;
 								$provider_current_fpage = null;
 								$provider_dateCreated = null;
-								$provider_dateCreated_ref = null;
 								$provider_dateModified = null;
-								$provider_dateModified_ref = null;
 								$provider_datePublished = null;
-								$provider_datePublished_ref = null;
 								$provider_degree_array = null;
 								$provider_degrees = null;
 								$provider_description = null;
-								$provider_description_ref = null;
 								$provider_description_TextObject = null;
-								$provider_description_TextObject_ref = null;
 								$provider_duns = null;
-								$provider_duns_ref = null;
 								$provider_editor = null;
-								$provider_editor_ref = null;
 								$provider_employee = null;
-								$provider_employee_ref = null;
 								$provider_expertise = null;
 								$provider_expertise_keywords = null;
-								$provider_expertise_keywords_ref = null;
-								$provider_expertise_ref = null;
 								$provider_expertise_significantLink = null;
-								$provider_expertise_significantLink_ref = null;
 								$provider_familyName = null;
-								$provider_familyName_ref = null;
 								$provider_forename_combinations = null;
 								$provider_forename_list = null;
 								$provider_forename_options = null;
@@ -10171,151 +10109,85 @@
 								$provider_fpage_query = null;
 								$provider_gender = null;
 								$provider_gender_keywords = null;
-								$provider_gender_keywords_ref = null;
-								$provider_gender_ref = null;
 								$provider_generational_suffix = null;
 								$provider_givenName = null;
 								$provider_givenName_initial = null;
-								$provider_givenName_ref = null;
 								$provider_globalLocationNumber = null;
-								$provider_globalLocationNumber_ref = null;
 								$provider_has_parent = null;
 								$provider_hasCredential = null;
-								$provider_hasCredential_ref = null;
 								$provider_hasMap = null;
-								$provider_hasMap_ref = null;
 								$provider_hasOccupation = null;
 								$provider_hasOccupation_keywords = null;
-								$provider_hasOccupation_keywords_ref = null;
-								$provider_hasOccupation_ref = null;
 								$provider_honorificPrefix = null;
-								$provider_honorificPrefix_ref = null;
 								$provider_honorificSuffix = null;
-								$provider_honorificSuffix_ref = null;
 								$provider_hospitalAffiliation = null;
 								$provider_hospitalAffiliation_keywords = null;
-								$provider_hospitalAffiliation_keywords_ref = null;
 								$provider_hospitalAffiliation_multiselect = null;
-								$provider_hospitalAffiliation_ref = null;
 								$provider_identifier = null;
-								$provider_identifier_ref = null;
 								$provider_image = null;
 								$provider_image_general = null;
 								$provider_image_id = null;
-								$provider_image_ref = null;
 								$provider_image_wide_id = null;
 								$provider_inLanguage = null;
-								$provider_inLanguage_ref = null;
 								$provider_isAcceptingNewPatients = null;
-								$provider_isAcceptingNewPatients_ref = null;
 								$provider_isAccessibleForFree_MedicalBusiness = null;
-								$provider_isAccessibleForFree_MedicalBusiness_ref = null;
 								$provider_isAccessibleForFree_MedicalWebPage = null;
-								$provider_isAccessibleForFree_MedicalWebPage_ref = null;
 								$provider_isFamilyFriendly = null;
-								$provider_isFamilyFriendly_ref = null;
 								$provider_isicV4 = null;
-								$provider_isicV4_ref = null;
 								$provider_iso6523Code = null;
-								$provider_iso6523Code_ref = null;
 								$provider_isPartOf = null;
-								$provider_isPartOf_ref = null;
-								$provider_item_MedicalBusiness_ref = null;
-								$provider_item_MedicalWebPage_ref = null;
-								$provider_item_Person_ref = null;
 								$provider_jobTitle = null;
 								$provider_jobTitle_keywords = null;
-								$provider_jobTitle_keywords_ref = null;
-								$provider_jobTitle_ref = null;
 								$provider_keywords = null;
-								$provider_keywords_ref = null;
 								$provider_knowsAbout = null;
-								$provider_knowsAbout_ref = null;
 								$provider_knowsLanguage = null;
 								$provider_knowsLanguage_keywords = null;
-								$provider_knowsLanguage_keywords_ref = null;
-								$provider_knowsLanguage_ref = null;
 								$provider_languages = null;
 								$provider_lastReviewed = null;
-								$provider_lastReviewed_ref = null;
 								$provider_legalName = null;
-								$provider_legalName_ref = null;
 								$provider_leiCode = null;
-								$provider_leiCode_ref = null;
 								$provider_location = null;
 								$provider_location_array = null;
 								$provider_location_keywords = null;
-								$provider_location_keywords_ref = null;
-								$provider_location_ref = null;
 								$provider_location_significantLink = null;
-								$provider_location_significantLink_ref = null;
 								$provider_mainContentOfPage = null;
-								$provider_mainContentOfPage_ref = null;
 								$provider_mainEntity = null;
-								$provider_mainEntity_ref = null;
 								$provider_mainEntityOfPage = null;
-								$provider_mainEntityOfPage_ref = null;
 								$provider_maintainer = null;
-								$provider_maintainer_ref = null;
 								$provider_medicalAudience = null;
-								$provider_medicalAudience_ref = null;
 								$provider_medicalSpecialty = null;
 								$provider_medicalSpecialty_list = null;
-								$provider_medicalSpecialty_ref = null;
 								$provider_memberOf = null;
-								$provider_memberOf_ref = null;
 								$provider_mentions = null;
-								$provider_mentions_ref = null;
 								$provider_naics = null;
-								$provider_naics_ref = null;
 								$provider_name = null;
-								$provider_name_ref = null;
 								$provider_nickname = null;
 								$provider_npi = null;
 								$provider_occupationalCategory = null;
-								$provider_occupationalCategory_ref = null;
 								$provider_ontology_type = null;
 								$provider_organization_common = null;
-								$provider_organization_common_ref = null;
 								$provider_specific_clinical_organization = null;
-								$provider_specific_clinical_organization_ref = null;
 								$provider_parentOrganization = null;
 								$provider_parentOrganization_keywords = null;
-								$provider_parentOrganization_keywords_ref = null;
-								$provider_parentOrganization_ref = null;
 								$provider_paymentAccepted = null;
-								$provider_paymentAccepted_ref = null;
 								$provider_photo = null;
-								$provider_photo_ref = null;
 								$provider_producer = null;
-								$provider_producer_ref = null;
 								$provider_provider = null;
-								$provider_provider_ref = null;
 								$provider_publisher = null;
-								$provider_publisher_ref = null;
 								$provider_reviewedBy = null;
-								$provider_reviewedBy_ref = null;
 								$provider_sameAs = null;
-								$provider_sameAs_ref = null;
 								$provider_sameAs_repeater = null;
 								$provider_significantLink = null;
-								$provider_significantLink_ref = null;
 								$provider_smokingAllowed = null;
-								$provider_smokingAllowed_ref = null;
 								$provider_sourceOrganization = null;
-								$provider_sourceOrganization_ref = null;
 								$provider_specialization_isco08 = null;
 								$provider_specialization_isco08_code = null;
-								$provider_specialization_isco08_ref = null;
 								$provider_specialization_isco08_schema = null;
 								$provider_specialization_onetsoc = null;
 								$provider_specialization_onetsoc_code = null;
 								$provider_specialization_onetsoc_code_name = null;
-								$provider_specialization_onetsoc_ref = null;
 								$provider_specialty = null;
-								$provider_specialty_ref = null;
 								$provider_subjectOf = null;
-								$provider_subjectOf_ref = null;
 								$provider_surname_combinations = null;
 								$provider_surname_list = null;
 								$provider_surname_options = null;
@@ -10323,15 +10195,11 @@
 								$provider_surname_options_suffix = null;
 								$provider_taxID = null;
 								$provider_taxID_employer = null;
-								$provider_taxID_ref = null;
 								$provider_taxID_taxpayer = null;
 								$provider_thumbnailUrl = null;
-								$provider_thumbnailUrl_ref = null;
 								$provider_treatment = null;
 								$provider_url = null;
-								$provider_url_ref = null;
 								$provider_vatID = null;
-								$provider_vatID_ref = null;
 								$provider_video = null;
 								$provider_video_caption = null;
 								$provider_video_caption_query = null;
@@ -10341,18 +10209,13 @@
 								$provider_video_info = null;
 								$provider_video_parsed = null;
 								$provider_video_published = null;
-								$provider_video_ref = null;
 								$provider_video_thumbnail = null;
 								$provider_video_title = null;
 								$provider_video_videoFrameSize = null;
 								$provider_video_videoQuality = null;
 								$provider_workLocation = null;
-								$provider_workLocation_ref = null;
 								$provider_worksFor = null;
 								$provider_worksFor_keywords = null;
-								$provider_worksFor_keywords_ref = null;
-								$provider_worksFor_ref = null;
-								$schema_provider_hospitalAffiliation_ref = null;
 								$MedicalCondition_i = 1;
 								$Service_i = 1;
 
@@ -10768,7 +10631,6 @@
 															$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -10781,7 +10643,6 @@
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -10794,7 +10655,6 @@
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -10834,7 +10694,6 @@
 															$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_MedicalWebPage_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -10874,7 +10733,6 @@
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_exclude_MedicalWebPage_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -10887,7 +10745,6 @@
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_exclude_MedicalWebPage_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -10927,7 +10784,6 @@
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_main_entity_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -11129,7 +10985,6 @@
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'givenName', // string // Required // Name of schema property
 														$provider_givenName, // mixed // Required // Variable to add as the property value
-														$provider_givenName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11142,7 +10997,6 @@
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'givenName', // string // Required // Name of schema property
 														$provider_givenName, // mixed // Required // Variable to add as the property value
-														$provider_givenName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11155,7 +11009,6 @@
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'givenName', // string // Required // Name of schema property
 														$provider_givenName, // mixed // Required // Variable to add as the property value
-														$provider_givenName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11180,7 +11033,6 @@
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'additionalName', // string // Required // Name of schema property
 														$provider_additionalName, // mixed // Required // Variable to add as the property value
-														$provider_additionalName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11193,7 +11045,6 @@
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'additionalName', // string // Required // Name of schema property
 														$provider_additionalName, // mixed // Required // Variable to add as the property value
-														$provider_additionalName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11206,7 +11057,6 @@
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'additionalName', // string // Required // Name of schema property
 														$provider_additionalName, // mixed // Required // Variable to add as the property value
-														$provider_additionalName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11231,7 +11081,6 @@
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'familyName', // string // Required // Name of schema property
 														$provider_familyName, // mixed // Required // Variable to add as the property value
-														$provider_familyName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11244,7 +11093,6 @@
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'familyName', // string // Required // Name of schema property
 														$provider_familyName, // mixed // Required // Variable to add as the property value
-														$provider_familyName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11257,7 +11105,6 @@
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'familyName', // string // Required // Name of schema property
 														$provider_familyName, // mixed // Required // Variable to add as the property value
-														$provider_familyName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11290,7 +11137,6 @@
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'legalName', // string // Required // Name of schema property
 														$provider_legalName, // mixed // Required // Variable to add as the property value
-														$provider_legalName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11303,7 +11149,6 @@
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'legalName', // string // Required // Name of schema property
 														$provider_legalName, // mixed // Required // Variable to add as the property value
-														$provider_legalName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11316,7 +11161,6 @@
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'legalName', // string // Required // Name of schema property
 														$provider_legalName, // mixed // Required // Variable to add as the property value
-														$provider_legalName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11341,7 +11185,6 @@
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'honorificPrefix', // string // Required // Name of schema property
 														$provider_honorificPrefix, // mixed // Required // Variable to add as the property value
-														$provider_honorificPrefix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11354,7 +11197,6 @@
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'honorificPrefix', // string // Required // Name of schema property
 														$provider_honorificPrefix, // mixed // Required // Variable to add as the property value
-														$provider_honorificPrefix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11367,7 +11209,6 @@
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'honorificPrefix', // string // Required // Name of schema property
 														$provider_honorificPrefix, // mixed // Required // Variable to add as the property value
-														$provider_honorificPrefix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11396,7 +11237,6 @@
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'honorificSuffix', // string // Required // Name of schema property
 														$provider_honorificSuffix, // mixed // Required // Variable to add as the property value
-														$provider_honorificSuffix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11409,7 +11249,6 @@
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'honorificSuffix', // string // Required // Name of schema property
 														$provider_honorificSuffix, // mixed // Required // Variable to add as the property value
-														$provider_honorificSuffix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11422,7 +11261,6 @@
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'honorificSuffix', // string // Required // Name of schema property
 														$provider_honorificSuffix, // mixed // Required // Variable to add as the property value
-														$provider_honorificSuffix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11500,7 +11338,6 @@
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'name', // string // Required // Name of schema property
 														$provider_name, // mixed // Required // Variable to add as the property value
-														$provider_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11513,7 +11350,6 @@
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'name', // string // Required // Name of schema property
 														$provider_name, // mixed // Required // Variable to add as the property value
-														$provider_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11526,7 +11362,6 @@
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'name', // string // Required // Name of schema property
 														$provider_name, // mixed // Required // Variable to add as the property value
-														$provider_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -11856,7 +11691,6 @@
 															$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'alternateName', // string // Required // Name of schema property
 															$provider_alternateName, // mixed // Required // Variable to add as the property value
-															$provider_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1), // int // Required // Current nesting level value
@@ -11871,7 +11705,6 @@
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'alternateName', // string // Required // Name of schema property
 															$provider_alternateName, // mixed // Required // Variable to add as the property value
-															$provider_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1), // int // Required // Current nesting level value
@@ -11886,7 +11719,6 @@
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'alternateName', // string // Required // Name of schema property
 															$provider_alternateName, // mixed // Required // Variable to add as the property value
-															$provider_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1), // int // Required // Current nesting level value
@@ -12404,7 +12236,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'about', // string // Required // Name of schema property
 													$provider_about, // mixed // Required // Variable to add as the property value
-													$provider_about_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -12453,7 +12284,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'availableService', // string // Required // Name of schema property
 													$provider_availableService, // mixed // Required // Variable to add as the property value
-													$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -12466,7 +12296,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'availableService', // string // Required // Name of schema property
 													$provider_availableService, // mixed // Required // Variable to add as the property value
-													$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -12479,7 +12308,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'availableService', // string // Required // Name of schema property
 													$provider_availableService, // mixed // Required // Variable to add as the property value
-													$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -12633,7 +12461,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
 													$provider_description_TextObject, // mixed // Required // Variable to add as the property value
-													$provider_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -12646,7 +12473,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
 													$provider_description_TextObject, // mixed // Required // Variable to add as the property value
-													$provider_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -12659,7 +12485,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
 													$provider_description_TextObject, // mixed // Required // Variable to add as the property value
-													$provider_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -12718,7 +12543,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // Name of schema property
 													$provider_description, // mixed // Required // Variable to add as the property value
-													$provider_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -12731,7 +12555,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // Name of schema property
 													$provider_description, // mixed // Required // Variable to add as the property value
-													$provider_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -12744,7 +12567,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // Name of schema property
 													$provider_description, // mixed // Required // Variable to add as the property value
-													$provider_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -12828,7 +12650,6 @@
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'additionalType', // string // Required // Name of schema property
 														$provider_medicalSpecialty, // mixed // Required // Variable to add as the property value
-														$provider_medicalSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -12841,7 +12662,6 @@
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'additionalType', // string // Required // Name of schema property
 														$provider_medicalSpecialty, // mixed // Required // Variable to add as the property value
-														$provider_medicalSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -12854,7 +12674,6 @@
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'additionalType', // string // Required // Name of schema property
 														$provider_medicalSpecialty, // mixed // Required // Variable to add as the property value
-														$provider_medicalSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -12879,7 +12698,6 @@
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'specialty', // string // Required // Name of schema property
 														$provider_medicalSpecialty, // mixed // Required // Variable to add as the property value
-														$provider_medicalSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -12892,7 +12710,6 @@
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'specialty', // string // Required // Name of schema property
 														$provider_medicalSpecialty, // mixed // Required // Variable to add as the property value
-														$provider_medicalSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -12905,7 +12722,6 @@
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'specialty', // string // Required // Name of schema property
 														$provider_medicalSpecialty, // mixed // Required // Variable to add as the property value
-														$provider_medicalSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -12969,7 +12785,6 @@
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'additionalType', // string // Required // Name of schema property
 														$provider_additionalType_MedicalWebPage, // mixed // Required // Variable to add as the property value
-														$provider_additionalType_MedicalWebPage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -13096,7 +12911,6 @@
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'additionalType', // string // Required // Name of schema property
 														$provider_additionalType, // mixed // Required // Variable to add as the property value
-														$provider_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -13109,7 +12923,6 @@
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'additionalType', // string // Required // Name of schema property
 														$provider_additionalType, // mixed // Required // Variable to add as the property value
-														$provider_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -13122,7 +12935,6 @@
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'additionalType', // string // Required // Name of schema property
 														$provider_additionalType, // mixed // Required // Variable to add as the property value
-														$provider_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -13244,7 +13056,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'affiliation', // string // Required // Name of schema property
 													$provider_affiliation, // mixed // Required // Variable to add as the property value
-													$provider_affiliation_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13257,7 +13068,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'affiliation', // string // Required // Name of schema property
 													$provider_affiliation, // mixed // Required // Variable to add as the property value
-													$provider_affiliation_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13270,7 +13080,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'affiliation', // string // Required // Name of schema property
 													$provider_affiliation, // mixed // Required // Variable to add as the property value
-													$provider_affiliation_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13454,7 +13263,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'aggregateRating', // string // Required // Name of schema property
 													$provider_aggregateRating, // mixed // Required // Variable to add as the property value
-													$provider_aggregateRating_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13467,7 +13275,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'aggregateRating', // string // Required // Name of schema property
 													$provider_aggregateRating, // mixed // Required // Variable to add as the property value
-													$provider_aggregateRating_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13480,7 +13287,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'aggregateRating', // string // Required // Name of schema property
 													$provider_aggregateRating, // mixed // Required // Variable to add as the property value
-													$provider_aggregateRating_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13585,7 +13391,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'brand', // string // Required // Name of schema property
 													$provider_brand, // mixed // Required // Variable to add as the property value
-													$provider_brand_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13598,7 +13403,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'brand', // string // Required // Name of schema property
 													$provider_brand, // mixed // Required // Variable to add as the property value
-													$provider_brand_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13611,7 +13415,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'brand', // string // Required // Name of schema property
 													$provider_brand, // mixed // Required // Variable to add as the property value
-													$provider_brand_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13672,7 +13475,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'containedInPlace', // string // Required // Name of schema property
 													$provider_location, // mixed // Required // Variable to add as the property value
-													$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13685,7 +13487,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'containedInPlace', // string // Required // Name of schema property
 													$provider_location, // mixed // Required // Variable to add as the property value
-													$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13698,7 +13499,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'containedInPlace', // string // Required // Name of schema property
 													$provider_location, // mixed // Required // Variable to add as the property value
-													$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13780,7 +13580,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'currenciesAccepted', // string // Required // Name of schema property
 													$provider_currenciesAccepted, // mixed // Required // Variable to add as the property value
-													$provider_currenciesAccepted_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13793,7 +13592,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'currenciesAccepted', // string // Required // Name of schema property
 													$provider_currenciesAccepted, // mixed // Required // Variable to add as the property value
-													$provider_currenciesAccepted_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13806,7 +13604,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'currenciesAccepted', // string // Required // Name of schema property
 													$provider_currenciesAccepted, // mixed // Required // Variable to add as the property value
-													$provider_currenciesAccepted_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13854,7 +13651,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'employee', // string // Required // Name of schema property
 													$provider_item_Person, // mixed // Required // Variable to add as the property value
-													$provider_item_Person_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13867,7 +13663,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'employee', // string // Required // Name of schema property
 													$provider_item_Person, // mixed // Required // Variable to add as the property value
-													$provider_item_Person_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13880,7 +13675,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'employee', // string // Required // Name of schema property
 													$provider_item_Person, // mixed // Required // Variable to add as the property value
-													$provider_item_Person_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13976,7 +13770,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'gender', // string // Required // Name of schema property
 													$provider_gender, // mixed // Required // Variable to add as the property value
-													$provider_gender_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -13989,7 +13782,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'gender', // string // Required // Name of schema property
 													$provider_gender, // mixed // Required // Variable to add as the property value
-													$provider_gender_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14002,7 +13794,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'gender', // string // Required // Name of schema property
 													$provider_gender, // mixed // Required // Variable to add as the property value
-													$provider_gender_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14126,7 +13917,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'hasCredential', // string // Required // Name of schema property
 													$provider_hasCredential, // mixed // Required // Variable to add as the property value
-													$provider_hasCredential_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14139,7 +13929,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'hasCredential', // string // Required // Name of schema property
 													$provider_hasCredential, // mixed // Required // Variable to add as the property value
-													$provider_hasCredential_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14152,7 +13941,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'hasCredential', // string // Required // Name of schema property
 													$provider_hasCredential, // mixed // Required // Variable to add as the property value
-													$provider_hasCredential_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14218,7 +14006,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'hasOccupation', // string // Required // Name of schema property
 													$provider_hasOccupation, // mixed // Required // Variable to add as the property value
-													$provider_hasOccupation_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14231,7 +14018,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'hasOccupation', // string // Required // Name of schema property
 													$provider_hasOccupation, // mixed // Required // Variable to add as the property value
-													$provider_hasOccupation_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14244,7 +14030,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'hasOccupation', // string // Required // Name of schema property
 													$provider_hasOccupation, // mixed // Required // Variable to add as the property value
-													$provider_hasOccupation_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14327,7 +14112,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'hasMap', // string // Required // Name of schema property
 													$provider_hasMap, // mixed // Required // Variable to add as the property value
-													$provider_hasMap_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14340,7 +14124,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'hasMap', // string // Required // Name of schema property
 													$provider_hasMap, // mixed // Required // Variable to add as the property value
-													$provider_hasMap_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14353,7 +14136,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'hasMap', // string // Required // Name of schema property
 													$provider_hasMap, // mixed // Required // Variable to add as the property value
-													$provider_hasMap_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14441,7 +14223,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'hospitalAffiliation', // string // Required // Name of schema property
 													$provider_hospitalAffiliation, // mixed // Required // Variable to add as the property value
-													$provider_hospitalAffiliation_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14454,7 +14235,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'hospitalAffiliation', // string // Required // Name of schema property
 													$provider_hospitalAffiliation, // mixed // Required // Variable to add as the property value
-													$provider_hospitalAffiliation_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14467,7 +14247,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'hospitalAffiliation', // string // Required // Name of schema property
 													$provider_hospitalAffiliation, // mixed // Required // Variable to add as the property value
-													$provider_hospitalAffiliation_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14543,7 +14322,6 @@
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'duns', // string // Required // Name of schema property
 															$provider_duns, // mixed // Required // Variable to add as the property value
-															$provider_duns_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -14556,7 +14334,6 @@
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'duns', // string // Required // Name of schema property
 															$provider_duns, // mixed // Required // Variable to add as the property value
-															$provider_duns_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -14615,7 +14392,6 @@
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'globalLocationNumber', // string // Required // Name of schema property
 															$provider_globalLocationNumber, // mixed // Required // Variable to add as the property value
-															$provider_globalLocationNumber_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -14628,7 +14404,6 @@
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'globalLocationNumber', // string // Required // Name of schema property
 															$provider_globalLocationNumber, // mixed // Required // Variable to add as the property value
-															$provider_globalLocationNumber_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -14687,7 +14462,6 @@
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'isicV4', // string // Required // Name of schema property
 															$provider_isicV4, // mixed // Required // Variable to add as the property value
-															$provider_isicV4_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -14700,7 +14474,6 @@
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'isicV4', // string // Required // Name of schema property
 															$provider_isicV4, // mixed // Required // Variable to add as the property value
-															$provider_isicV4_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -14758,7 +14531,6 @@
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'leiCode', // string // Required // Name of schema property
 															$provider_leiCode, // mixed // Required // Variable to add as the property value
-															$provider_leiCode_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -14771,7 +14543,6 @@
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'leiCode', // string // Required // Name of schema property
 															$provider_leiCode, // mixed // Required // Variable to add as the property value
-															$provider_leiCode_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -14829,7 +14600,6 @@
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'naics', // string // Required // Name of schema property
 															$provider_naics, // mixed // Required // Variable to add as the property value
-															$provider_naics_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -14842,7 +14612,6 @@
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'naics', // string // Required // Name of schema property
 															$provider_naics, // mixed // Required // Variable to add as the property value
-															$provider_naics_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -14938,7 +14707,6 @@
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'taxID', // string // Required // Name of schema property
 															$provider_taxID, // mixed // Required // Variable to add as the property value
-															$provider_taxID_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -14951,7 +14719,6 @@
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'taxID', // string // Required // Name of schema property
 															$provider_taxID, // mixed // Required // Variable to add as the property value
-															$provider_taxID_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -15006,7 +14773,6 @@
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'vatID', // string // Required // Name of schema property
 															$provider_vatID, // mixed // Required // Variable to add as the property value
-															$provider_vatID_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -15019,7 +14785,6 @@
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'vatID', // string // Required // Name of schema property
 															$provider_vatID, // mixed // Required // Variable to add as the property value
-															$provider_vatID_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -15083,7 +14848,6 @@
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'iso6523Code', // string // Required // Name of schema property
 															$provider_iso6523Code, // mixed // Required // Variable to add as the property value
-															$provider_iso6523Code_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -15096,7 +14860,6 @@
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'iso6523Code', // string // Required // Name of schema property
 															$provider_iso6523Code, // mixed // Required // Variable to add as the property value
-															$provider_iso6523Code_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -15389,7 +15152,6 @@
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'identifier', // string // Required // Name of schema property
 															$provider_identifier, // mixed // Required // Variable to add as the property value
-															$provider_identifier_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -15402,7 +15164,6 @@
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'identifier', // string // Required // Name of schema property
 															$provider_identifier, // mixed // Required // Variable to add as the property value
-															$provider_identifier_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -15525,7 +15286,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'image', // string // Required // Name of schema property
 													$provider_image, // mixed // Required // Variable to add as the property value
-													$provider_image_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -15538,7 +15298,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'image', // string // Required // Name of schema property
 													$provider_image, // mixed // Required // Variable to add as the property value
-													$provider_image_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -15551,7 +15310,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'image', // string // Required // Name of schema property
 													$provider_image, // mixed // Required // Variable to add as the property value
-													$provider_image_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -15615,7 +15373,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'isAcceptingNewPatients', // string // Required // Name of schema property
 													$provider_isAcceptingNewPatients, // mixed // Required // Variable to add as the property value
-													$provider_isAcceptingNewPatients_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -15628,7 +15385,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'isAcceptingNewPatients', // string // Required // Name of schema property
 													$provider_isAcceptingNewPatients, // mixed // Required // Variable to add as the property value
-													$provider_isAcceptingNewPatients_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -15641,7 +15397,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'isAcceptingNewPatients', // string // Required // Name of schema property
 													$provider_isAcceptingNewPatients, // mixed // Required // Variable to add as the property value
-													$provider_isAcceptingNewPatients_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -15690,7 +15445,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'isAccessibleForFree', // string // Required // Name of schema property
 													$provider_isAccessibleForFree_MedicalBusiness, // mixed // Required // Variable to add as the property value
-													$provider_isAccessibleForFree_MedicalBusiness_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -15835,7 +15589,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'jobTitle', // string // Required // Name of schema property
 													$provider_jobTitle, // mixed // Required // Variable to add as the property value
-													$provider_jobTitle_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -15848,7 +15601,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'jobTitle', // string // Required // Name of schema property
 													$provider_jobTitle, // mixed // Required // Variable to add as the property value
-													$provider_jobTitle_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -15861,7 +15613,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'jobTitle', // string // Required // Name of schema property
 													$provider_jobTitle, // mixed // Required // Variable to add as the property value
-													$provider_jobTitle_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -15950,7 +15701,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'knowsLanguage', // string // Required // Name of schema property
 													$provider_knowsLanguage, // mixed // Required // Variable to add as the property value
-													$provider_knowsLanguage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -15963,7 +15713,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'knowsLanguage', // string // Required // Name of schema property
 													$provider_knowsLanguage, // mixed // Required // Variable to add as the property value
-													$provider_knowsLanguage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -15976,7 +15725,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'knowsLanguage', // string // Required // Name of schema property
 													$provider_knowsLanguage, // mixed // Required // Variable to add as the property value
-													$provider_knowsLanguage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16042,7 +15790,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'location', // string // Required // Name of schema property
 													$provider_location, // mixed // Required // Variable to add as the property value
-													$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16055,7 +15802,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'location', // string // Required // Name of schema property
 													$provider_location, // mixed // Required // Variable to add as the property value
-													$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16068,7 +15814,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'location', // string // Required // Name of schema property
 													$provider_location, // mixed // Required // Variable to add as the property value
-													$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16143,7 +15888,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'mainEntity', // string // Required // Name of schema property
 													$provider_mainEntity, // mixed // Required // Variable to add as the property value
-													$provider_mainEntity_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16156,7 +15900,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'mainEntity', // string // Required // Name of schema property
 													$provider_mainEntity, // mixed // Required // Variable to add as the property value
-													$provider_mainEntity_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16169,7 +15912,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'mainEntity', // string // Required // Name of schema property
 													$provider_mainEntity, // mixed // Required // Variable to add as the property value
-													$provider_mainEntity_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16292,7 +16034,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'memberOf', // string // Required // Name of schema property
 													$provider_memberOf, // mixed // Required // Variable to add as the property value
-													$provider_memberOf_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16305,7 +16046,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'memberOf', // string // Required // Name of schema property
 													$provider_memberOf, // mixed // Required // Variable to add as the property value
-													$provider_memberOf_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16318,7 +16058,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'memberOf', // string // Required // Name of schema property
 													$provider_memberOf, // mixed // Required // Variable to add as the property value
-													$provider_memberOf_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16413,7 +16152,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'parentOrganization', // string // Required // Name of schema property
 													$provider_parentOrganization, // mixed // Required // Variable to add as the property value
-													$provider_parentOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16426,7 +16164,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'parentOrganization', // string // Required // Name of schema property
 													$provider_parentOrganization, // mixed // Required // Variable to add as the property value
-													$provider_parentOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16439,7 +16176,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'parentOrganization', // string // Required // Name of schema property
 													$provider_parentOrganization, // mixed // Required // Variable to add as the property value
-													$provider_parentOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16514,7 +16250,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'paymentAccepted', // string // Required // Name of schema property
 													$provider_paymentAccepted, // mixed // Required // Variable to add as the property value
-													$provider_paymentAccepted_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16527,7 +16262,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'paymentAccepted', // string // Required // Name of schema property
 													$provider_paymentAccepted, // mixed // Required // Variable to add as the property value
-													$provider_paymentAccepted_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16540,7 +16274,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'paymentAccepted', // string // Required // Name of schema property
 													$provider_paymentAccepted, // mixed // Required // Variable to add as the property value
-													$provider_paymentAccepted_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16589,7 +16322,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'photo', // string // Required // Name of schema property
 													$provider_photo, // mixed // Required // Variable to add as the property value
-													$provider_photo_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16602,7 +16334,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'photo', // string // Required // Name of schema property
 													$provider_photo, // mixed // Required // Variable to add as the property value
-													$provider_photo_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16615,7 +16346,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'photo', // string // Required // Name of schema property
 													$provider_photo, // mixed // Required // Variable to add as the property value
-													$provider_photo_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16770,7 +16500,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'sameAs', // string // Required // Name of schema property
 													$provider_sameAs, // mixed // Required // Variable to add as the property value
-													$provider_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16783,7 +16512,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'sameAs', // string // Required // Name of schema property
 													$provider_sameAs, // mixed // Required // Variable to add as the property value
-													$provider_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17098,7 +16826,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'video', // string // Required // Name of schema property
 													$provider_video, // mixed // Required // Variable to add as the property value
-													$provider_video_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17111,7 +16838,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'video', // string // Required // Name of schema property
 													$provider_video, // mixed // Required // Variable to add as the property value
-													$provider_video_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17124,7 +16850,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'video', // string // Required // Name of schema property
 													$provider_video, // mixed // Required // Variable to add as the property value
-													$provider_video_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17173,7 +16898,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'workLocation', // string // Required // Name of schema property
 													$provider_location, // mixed // Required // Variable to add as the property value
-													$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17186,7 +16910,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'workLocation', // string // Required // Name of schema property
 													$provider_location, // mixed // Required // Variable to add as the property value
-													$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17199,7 +16922,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'workLocation', // string // Required // Name of schema property
 													$provider_location, // mixed // Required // Variable to add as the property value
-													$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17289,7 +17011,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'workLocation', // string // Required // Name of schema property
 													$provider_worksFor, // mixed // Required // Variable to add as the property value
-													$provider_worksFor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17302,7 +17023,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'workLocation', // string // Required // Name of schema property
 													$provider_worksFor, // mixed // Required // Variable to add as the property value
-													$provider_worksFor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17315,7 +17035,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'worksFor', // string // Required // Name of schema property
 													$provider_worksFor, // mixed // Required // Variable to add as the property value
-													$provider_worksFor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17532,7 +17251,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'knowsAbout', // string // Required // Name of schema property
 													$provider_knowsAbout, // mixed // Required // Variable to add as the property value
-													$provider_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17545,7 +17263,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'knowsAbout', // string // Required // Name of schema property
 													$provider_knowsAbout, // mixed // Required // Variable to add as the property value
-													$provider_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17558,7 +17275,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'knowsAbout', // string // Required // Name of schema property
 													$provider_knowsAbout, // mixed // Required // Variable to add as the property value
-													$provider_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17711,7 +17427,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'mentions', // string // Required // Name of schema property
 													$provider_mentions, // mixed // Required // Variable to add as the property value
-													$provider_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17724,7 +17439,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'mentions', // string // Required // Name of schema property
 													$provider_mentions, // mixed // Required // Variable to add as the property value
-													$provider_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17737,7 +17451,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'mentions', // string // Required // Name of schema property
 													$provider_mentions, // mixed // Required // Variable to add as the property value
-													$provider_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17785,7 +17498,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'significantLink', // string // Required // Name of schema property
 													$provider_significantLink, // mixed // Required // Variable to add as the property value
-													$provider_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17798,7 +17510,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'significantLink', // string // Required // Name of schema property
 													$provider_significantLink, // mixed // Required // Variable to add as the property value
-													$provider_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17811,7 +17522,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'significantLink', // string // Required // Name of schema property
 													$provider_significantLink, // mixed // Required // Variable to add as the property value
-													$provider_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17860,7 +17570,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'significantLink', // string // Required // Name of schema property
 													$provider_significantLink, // mixed // Required // Variable to add as the property value
-													$provider_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17873,7 +17582,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'significantLink', // string // Required // Name of schema property
 													$provider_significantLink, // mixed // Required // Variable to add as the property value
-													$provider_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17886,7 +17594,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'significantLink', // string // Required // Name of schema property
 													$provider_significantLink, // mixed // Required // Variable to add as the property value
-													$provider_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17966,7 +17673,6 @@
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'keywords', // string // Required // Name of schema property
 													$provider_keywords, // mixed // Required // Variable to add as the property value
-													$provider_keywords_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17979,7 +17685,6 @@
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'keywords', // string // Required // Name of schema property
 													$provider_keywords, // mixed // Required // Variable to add as the property value
-													$provider_keywords_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17992,7 +17697,6 @@
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'keywords', // string // Required // Name of schema property
 													$provider_keywords, // mixed // Required // Variable to add as the property value
-													$provider_keywords_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -18291,67 +17995,36 @@
 
 								$location_item = array(); // Base array
 								$location_item_MedicalWebPage = array(); // Base MedicalWebPage array
-								$location_item_MedicalWebPage_ref = null;
 								$location_item_LocalBusiness = array(); // Base LocalBusiness array
-								$location_item_LocalBusiness_ref = null;
 								$LocalBusiness_id = null;
-								$LocalBusiness_id_ref = null;
 								$LocalBusiness_type = null;
-								$LocalBusiness_type_ref = null;
 								$location_about = null;
-								$location_about_ref = null;
 								$location_abstract = null;
-								$location_abstract_ref = null;
 								$location_accessibilityAPI = null;
-								$location_accessibilityAPI_ref = null;
 								$location_accessibilityControl = null;
-								$location_accessibilityControl_ref = null;
 								$location_accessibilityFeature = null;
-								$location_accessibilityFeature_ref = null;
 								$location_accessibilityHazard = null;
-								$location_accessibilityHazard_ref = null;
 								$location_accessibilitySummary = null;
-								$location_accessibilitySummary_ref = null;
 								$location_accessMode = null;
-								$location_accessMode_ref = null;
 								$location_accessModeSufficient = null;
-								$location_accessModeSufficient_ref = null;
 								$location_accountablePerson = null;
-								$location_accountablePerson_ref = null;
 								$location_additionalType_field = null;
-								$location_additionalType_field_ref = null;
 								$location_additionalType_LocalBusiness = null;
-								$location_additionalType_LocalBusiness_ref = null;
 								$location_additionalType_medicalSpecialty = null;
-								$location_additionalType_medicalSpecialty_ref = null;
 								$location_additionalType_MedicalWebPage = null;
-								$location_additionalType_MedicalWebPage_ref = null;
 								$location_additionalType_repeater = null;
-								$location_additionalType_repeater_ref = null;
 								$location_address = null;
 								$location_address_1 = null;
-								$location_address_1_ref = null;
 								$location_address_2_array = null;
-								$location_address_2_array_ref = null;
-								$location_address_ref = null;
 								$location_addressLocality = null;
-								$location_addressLocality_ref = null;
 								$location_addressRegion = null;
-								$location_addressRegion_ref = null;
 								$location_alternateName = null;
-								$location_alternateName_ref = null;
 								$location_alternateName_repeater = null;
-								$location_alternateName_repeater_ref = null;
 								$location_areaServed = null;
-								$location_areaServed_ref = null;
 								$location_audience = null;
-								$location_audience_ref = null;
 								$location_author = null;
-								$location_author_ref = null;
 								$location_availableService = null;
-								$location_availableService_ref = null;
 								$location_brand = null;
-								$location_brand_ref = null;
 								$location_building = null;
 								$location_building_additionalType = null;
 								$location_building_additionalType_repeater = null;
@@ -18367,191 +18040,100 @@
 								$location_building_latitude = null;
 								$location_building_longitude = null;
 								$location_building_name = null;
-								$location_building_name_ref = null;
 								$location_building_photo = null;
 								$location_building_Place = null;
-								$location_building_ref = null;
 								$location_building_sameAs = null;
 								$location_building_sameAs_repeater = null;
 								$location_building_slug = null;
-								$location_building_slug_ref = null;
 								$location_building_term = null;
-								$location_building_term_ref = null;
 								$location_containedInPlace = null;
-								$location_containedInPlace_ref = null;
 								$location_containsPlace = null;
-								$location_containsPlace_ref = null;
 								$location_contributor = null;
-								$location_contributor_ref = null;
 								$location_copyrightHolder = null;
-								$location_copyrightHolder_ref = null;
 								$location_copyrightNotice = null;
-								$location_copyrightNotice_ref = null;
 								$location_copyrightYear = null;
-								$location_copyrightYear_ref = null;
 								$location_countryOfOrigin = null;
-								$location_countryOfOrigin_ref = null;
 								$location_creativeWorkStatus = null;
-								$location_creativeWorkStatus_ref = null;
 								$location_creator = null;
-								$location_creator_ref = null;
 								$location_creditText = null;
-								$location_creditText_ref = null;
 								$location_current_fpage = null;
-								$location_current_fpage_ref = null;
 								$location_dateModified = null;
-								$location_dateModified_ref = null;
 								$location_datePublished = null;
-								$location_datePublished_ref = null;
 								$location_department = null;
-								$location_department_ref = null;
 								$location_descendant_location = null;
 								$location_descendant_location_ids = null;
-								$location_descendant_location_ids_ref = null;
-								$location_descendant_location_ref = null;
 								$location_description = null;
-								$location_description_ref = null;
 								$location_description_TextObject = null;
-								$location_description_TextObject_ref = null;
 								$location_editor = null;
-								$location_editor_ref = null;
 								$location_employee = null;
-								$location_employee_ref = null;
 								$location_featured_image_id = null;
-								$location_featured_image_id_ref = null;
 								$location_floor = null;
 								$location_floor_label = null;
-								$location_floor_label_ref = null;
-								$location_floor_ref = null;
 								$location_floor_value = null;
-								$location_floor_value_ref = null;
 								$location_fpage_query = null;
-								$location_fpage_query_ref = null;
 								$location_funding = null;
-								$location_funding_ref = null;
 								$location_gallery_image_id = null;
-								$location_gallery_image_id_ref = null;
 								$location_geo = null;
-								$location_geo_ref = null;
 								$location_geo_value = null;
-								$location_geo_value_ref = null;
 								$location_has_parent = null;
-								$location_has_parent_ref = null;
 								$location_hasMap = null;
-								$location_hasMap_ref = null;
 								$location_identifier = null;
-								$location_identifier_ref = null;
 								$location_image = null;
 								$location_image_general = null;
-								$location_image_general_ref = null;
 								$location_image_id = null;
-								$location_image_id_ref = null;
-								$location_image_ref = null;
 								$location_inLanguage = null;
-								$location_inLanguage_ref = null;
 								$location_isAcceptingNewPatients = null;
-								$location_isAcceptingNewPatients_ref = null;
 								$location_isFamilyFriendly = null;
-								$location_isFamilyFriendly_ref = null;
 								$location_isPartOf = null;
-								$location_isPartOf_ref = null;
 								$location_keywords = null;
-								$location_keywords_ref = null;
 								$location_lastReviewed = null;
-								$location_lastReviewed_ref = null;
 								$location_mainContentOfPage = null;
-								$location_mainContentOfPage_ref = null;
 								$location_mainEntity = null;
-								$location_mainEntity_ref = null;
 								$location_mainEntityOfPage = null;
-								$location_mainEntityOfPage_ref = null;
 								$location_maintainer = null;
-								$location_maintainer_ref = null;
 								$location_medicalAudience = null;
-								$location_medicalAudience_ref = null;
 								$location_medicalSpecialty = null;
 								$location_medicalSpecialty_multiselect = null;
-								$location_medicalSpecialty_multiselect_ref = null;
-								$location_medicalSpecialty_ref = null;
 								$location_memberOf = null;
-								$location_memberOf_ref = null;
 								$location_mentions = null;
-								$location_mentions_ref = null;
 								$location_name = null;
-								$location_name_ref = null;
 								$location_ontology_type = null;
-								$location_ontology_type_ref = null;
 								$location_override_parent_photo = null;
 								$location_override_parent_photo_featured = null;
-								$location_override_parent_photo_featured_ref = null;
 								$location_override_parent_photo_gallery = null;
-								$location_override_parent_photo_gallery_ref = null;
-								$location_override_parent_photo_ref = null;
 								$location_override_parent_photo_wayfinding = null;
-								$location_override_parent_photo_wayfinding_ref = null;
 								$location_parent_id = null;
-								$location_parent_id_ref = null;
 								$location_parent_LocalBusiness = null;
-								$location_parent_LocalBusiness_ref = null;
 								$location_parentOrganization = null;
-								$location_parentOrganization_ref = null;
 								$location_photo = null;
-								$location_photo_ref = null;
 								$location_postalCode = null;
-								$location_postalCode_ref = null;
 								$location_producer = null;
-								$location_producer_ref = null;
 								$location_provider = null;
 								$location_provider_ids = null;
-								$location_provider_ids_ref = null;
-								$location_provider_ref = null;
 								$location_provider_MedicalBusiness = null;
-								$location_provider_MedicalBusiness_ref = null;
 								$location_provider_Person = null;
-								$location_provider_Person_ref = null;
 								$location_publisher = null;
-								$location_publisher_ref = null;
 								$location_relatedLink = null;
-								$location_relatedLink_ref = null;
 								$location_reviewedBy = null;
-								$location_reviewedBy_ref = null;
 								$location_sameAs = null;
-								$location_sameAs_ref = null;
 								$location_sameAs_repeater = null;
-								$location_sameAs_repeater_ref = null;
 								$location_significantLink = null;
-								$location_significantLink_ref = null;
 								$location_smokingAllowed = null;
-								$location_smokingAllowed_ref = null;
 								$location_sourceOrganization = null;
-								$location_sourceOrganization_ref = null;
 								$location_speakable = null;
-								$location_speakable_ref = null;
 								$location_specialty_common = null;
 								$location_streetAddress = null;
 								$location_streetAddress_array = null;
-								$location_streetAddress_array_ref = null;
-								$location_streetAddress_ref = null;
 								$location_subjectOf = null;
-								$location_subjectOf_ref = null;
 								$location_subOrganization = null;
-								$location_subOrganization_ref = null;
 								$location_suite = null;
-								$location_suite_ref = null;
 								$location_thumbnailUrl = null;
-								$location_thumbnailUrl_ref = null;
 								$location_treatments = null;
-								$location_treatments_ref = null;
 								$location_url = null;
-								$location_url_ref = null;
 								$location_vatID = null;
-								$location_vatID_ref = null;
 								$location_wayfinding_image_id = null;
-								$location_wayfinding_image_id_ref = null;
 								$MedicalWebPage_id = null;
-								$MedicalWebPage_id_ref = null;
 								$MedicalWebPage_type = null;
-								$MedicalWebPage_type_ref = null;
 								$MedicalCondition_i = 1;
 								$Service_i = 1;
 
@@ -18809,7 +18391,6 @@
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -18822,7 +18403,6 @@
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -18862,7 +18442,6 @@
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_MedicalWebPage_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -18902,7 +18481,6 @@
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_exclude_MedicalWebPage_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -18942,7 +18520,6 @@
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_main_entity_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -20240,7 +19817,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'name', // string // Required // Name of schema property
 													$location_name, // mixed // Required // Variable to add as the property value
-													$location_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -20253,7 +19829,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'name', // string // Required // Name of schema property
 													$location_name, // mixed // Required // Variable to add as the property value
-													$location_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -20304,7 +19879,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'about', // string // Required // Name of schema property
 													$location_about, // mixed // Required // Variable to add as the property value
-													$location_about_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -20360,7 +19934,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // Name of schema property
 													$location_description, // mixed // Required // Variable to add as the property value
-													$location_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -20373,7 +19946,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // Name of schema property
 													$location_description, // mixed // Required // Variable to add as the property value
-													$location_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -20437,7 +20009,6 @@
 														$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'additionalType', // string // Required // Name of schema property
 														$location_additionalType_MedicalWebPage, // mixed // Required // Variable to add as the property value
-														$location_additionalType_MedicalWebPage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -20519,7 +20090,6 @@
 														$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'additionalType', // string // Required // Name of schema property
 														$location_additionalType_LocalBusiness, // mixed // Required // Variable to add as the property value
-														$location_additionalType_LocalBusiness_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 														$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 														($nesting_level + 1) // int // Required // Current nesting level value
@@ -20766,7 +20336,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'address', // string // Required // Name of schema property
 													$location_address, // mixed // Required // Variable to add as the property value
-													$location_address_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -20779,7 +20348,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'address', // string // Required // Name of schema property
 													$location_address, // mixed // Required // Variable to add as the property value
-													$location_address_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -20895,7 +20463,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'alternateName', // string // Required // Name of schema property
 													$location_alternateName, // mixed // Required // Variable to add as the property value
-													$location_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -20908,7 +20475,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'alternateName', // string // Required // Name of schema property
 													$location_alternateName, // mixed // Required // Variable to add as the property value
-													$location_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -20952,7 +20518,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'availableService', // string // Required // Name of schema property
 													$location_availableService, // mixed // Required // Variable to add as the property value
-													$location_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -20965,7 +20530,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'availableService', // string // Required // Name of schema property
 													$location_availableService, // mixed // Required // Variable to add as the property value
-													$location_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21058,7 +20622,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'brand', // string // Required // Name of schema property
 													$location_brand, // mixed // Required // Variable to add as the property value
-													$location_brand_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21071,7 +20634,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'brand', // string // Required // Name of schema property
 													$location_brand, // mixed // Required // Variable to add as the property value
-													$location_brand_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21145,7 +20707,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'containedInPlace', // string // Required // Name of schema property
 													$location_containedInPlace, // mixed // Required // Variable to add as the property value
-													$location_containedInPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21158,7 +20719,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'containedInPlace', // string // Required // Name of schema property
 													$location_containedInPlace, // mixed // Required // Variable to add as the property value
-													$location_containedInPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21251,7 +20811,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'containsPlace', // string // Required // Name of schema property
 													$location_containsPlace, // mixed // Required // Variable to add as the property value
-													$location_containsPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21264,7 +20823,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'containsPlace', // string // Required // Name of schema property
 													$location_containsPlace, // mixed // Required // Variable to add as the property value
-													$location_containsPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21373,7 +20931,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'department', // string // Required // Name of schema property
 													$location_department, // mixed // Required // Variable to add as the property value
-													$location_department_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21386,7 +20943,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'department', // string // Required // Name of schema property
 													$location_department, // mixed // Required // Variable to add as the property value
-													$location_department_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21439,7 +20995,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
 													$location_description_TextObject, // mixed // Required // Variable to add as the property value
-													$location_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21452,7 +21007,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
 													$location_description_TextObject, // mixed // Required // Variable to add as the property value
-													$location_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21578,7 +21132,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'employee', // string // Required // Name of schema property
 													$location_employee, // mixed // Required // Variable to add as the property value
-													$location_employee_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21591,7 +21144,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'employee', // string // Required // Name of schema property
 													$location_employee, // mixed // Required // Variable to add as the property value
-													$location_employee_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21662,7 +21214,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'geo', // string // Required // Name of schema property
 													$location_geo, // mixed // Required // Variable to add as the property value
-													$location_geo_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21675,7 +21226,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'geo', // string // Required // Name of schema property
 													$location_geo, // mixed // Required // Variable to add as the property value
-													$location_geo_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21758,7 +21308,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'hasMap', // string // Required // Name of schema property
 													$location_hasMap, // mixed // Required // Variable to add as the property value
-													$location_hasMap_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21771,7 +21320,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'hasMap', // string // Required // Name of schema property
 													$location_hasMap, // mixed // Required // Variable to add as the property value
-													$location_hasMap_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -22371,7 +21919,6 @@
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'identifier', // string // Required // Name of schema property
 															$location_identifier, // mixed // Required // Variable to add as the property value
-															$location_identifier_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -22384,7 +21931,6 @@
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'identifier', // string // Required // Name of schema property
 															$location_identifier, // mixed // Required // Variable to add as the property value
-															$location_identifier_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -22426,7 +21972,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'image', // string // Required // Name of schema property
 													$location_image_general, // mixed // Required // Variable to add as the property value
-													$location_image_general_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -22439,7 +21984,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'image', // string // Required // Name of schema property
 													$location_image_general, // mixed // Required // Variable to add as the property value
-													$location_image_general_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -22523,7 +22067,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'knowsLanguage', // string // Required // Name of schema property
 													$location_knowsLanguage, // mixed // Required // Variable to add as the property value
-													$location_knowsLanguage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -22536,7 +22079,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'knowsLanguage', // string // Required // Name of schema property
 													$location_knowsLanguage, // mixed // Required // Variable to add as the property value
-													$location_knowsLanguage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -22613,7 +22155,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'mainEntity', // string // Required // Name of schema property
 													$location_mainEntity, // mixed // Required // Variable to add as the property value
-													$location_mainEntity_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -22626,7 +22167,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'mainEntity', // string // Required // Name of schema property
 													$location_mainEntity, // mixed // Required // Variable to add as the property value
-													$location_mainEntity_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -22691,7 +22231,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'medicalSpecialty', // string // Required // Name of schema property
 													$location_medicalSpecialty, // mixed // Required // Variable to add as the property value
-													$location_medicalSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -22704,7 +22243,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'medicalSpecialty', // string // Required // Name of schema property
 													$location_medicalSpecialty, // mixed // Required // Variable to add as the property value
-													$location_medicalSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -22809,7 +22347,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'memberOf', // string // Required // Name of schema property
 													$location_memberOf, // mixed // Required // Variable to add as the property value
-													$location_memberOf_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -22822,7 +22359,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'memberOf', // string // Required // Name of schema property
 													$location_memberOf, // mixed // Required // Variable to add as the property value
-													$location_memberOf_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -22972,7 +22508,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'parentOrganization', // string // Required // Name of schema property
 													$location_parentOrganization, // mixed // Required // Variable to add as the property value
-													$location_parentOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -22985,7 +22520,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'parentOrganization', // string // Required // Name of schema property
 													$location_parentOrganization, // mixed // Required // Variable to add as the property value
-													$location_parentOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23035,7 +22569,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'photo', // string // Required // Name of schema property
 													$location_image_general, // mixed // Required // Variable to add as the property value
-													$location_image_general_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23048,7 +22581,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'photo', // string // Required // Name of schema property
 													$location_image_general, // mixed // Required // Variable to add as the property value
-													$location_image_general_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23298,7 +22830,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'specialOpeningHoursSpecification', // string // Required // Name of schema property
 													$location_specialOpeningHoursSpecification, // mixed // Required // Variable to add as the property value
-													$location_specialOpeningHoursSpecification_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23311,7 +22842,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'specialOpeningHoursSpecification', // string // Required // Name of schema property
 													$location_specialOpeningHoursSpecification, // mixed // Required // Variable to add as the property value
-													$location_specialOpeningHoursSpecification_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23354,7 +22884,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'specialty', // string // Required // Name of schema property
 													$location_medicalSpecialty, // mixed // Required // Variable to add as the property value
-													$location_medicalSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23367,7 +22896,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'specialty', // string // Required // Name of schema property
 													$location_medicalSpecialty, // mixed // Required // Variable to add as the property value
-													$location_medicalSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23463,7 +22991,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'subOrganization', // string // Required // Name of schema property
 													$location_subOrganization, // mixed // Required // Variable to add as the property value
-													$location_subOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23476,7 +23003,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'subOrganization', // string // Required // Name of schema property
 													$location_subOrganization, // mixed // Required // Variable to add as the property value
-													$location_subOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23608,7 +23134,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'knowsAbout', // string // Required // Name of schema property
 													$location_knowsAbout, // mixed // Required // Variable to add as the property value
-													$location_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23621,7 +23146,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'knowsAbout', // string // Required // Name of schema property
 													$location_knowsAbout, // mixed // Required // Variable to add as the property value
-													$location_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23811,7 +23335,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'mentions', // string // Required // Name of schema property
 													$location_mentions, // mixed // Required // Variable to add as the property value
-													$location_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23824,7 +23347,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'mentions', // string // Required // Name of schema property
 													$location_mentions, // mixed // Required // Variable to add as the property value
-													$location_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23867,7 +23389,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'significantLink', // string // Required // Name of schema property
 													$location_significantLink, // mixed // Required // Variable to add as the property value
-													$location_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23880,7 +23401,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'significantLink', // string // Required // Name of schema property
 													$location_significantLink, // mixed // Required // Variable to add as the property value
-													$location_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23924,7 +23444,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'significantLink', // string // Required // Name of schema property
 													$location_significantLink, // mixed // Required // Variable to add as the property value
-													$location_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23937,7 +23456,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'significantLink', // string // Required // Name of schema property
 													$location_significantLink, // mixed // Required // Variable to add as the property value
-													$location_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -24036,7 +23554,6 @@
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'keywords', // string // Required // Name of schema property
 													$location_keywords, // mixed // Required // Variable to add as the property value
-													$location_keywords_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -24049,7 +23566,6 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'keywords', // string // Required // Name of schema property
 													$location_keywords, // mixed // Required // Variable to add as the property value
-													$location_keywords_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -24305,43 +23821,30 @@
 								$MedicalEntity_item = array(); // Base array
 								$current_fpage = null;
 								$expertise_additionalType = null;
-								$expertise_additionalType_ref = null;
 								$expertise_alternateName = null;
 								$expertise_alternateName_array = null;
-								$expertise_alternateName_ref = null;
 								$expertise_alternateName_repeater = null;
 								$expertise_code = null;
-								$expertise_code_ref = null;
 								$expertise_code_repeater = null;
 								$expertise_description = null;
-								$expertise_description_ref = null;
 								$expertise_description_TextObject = null;
-								$expertise_description_TextObject_ref = null;
 								$expertise_featured_image = null;
 								$expertise_grant = null;
-								$expertise_grant_ref = null;
 								$expertise_id = null;
 								$expertise_image = null;
 								$expertise_image_id = null;
 								$expertise_level = null;
 								$expertise_mainEntityOfPage = '';
 								$expertise_medicineSystem = null;
-								$expertise_medicineSystem_ref = null;
 								$expertise_medicineSystem_select = null;
 								$expertise_name = null;
-								$expertise_name_ref = null;
 								$expertise_nucc_array = null;
 								$expertise_potentialAction = null;
-								$expertise_potentialAction_ref = null;
 								$expertise_recognizingAuthority = null;
-								$expertise_recognizingAuthority_ref = null;
 								$expertise_relevantSpecialty = null;
-								$expertise_relevantSpecialty_ref = null;
 								$expertise_sameAs = null;
-								$expertise_sameAs_ref = null;
 								$expertise_sameAs_repeater = null;
 								$expertise_study = null;
-								$expertise_study_ref = null;
 								$expertise_subjectOf = null;
 								$expertise_url = null;
 								$fpage_query = null;
@@ -24567,7 +24070,6 @@
 															$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key. '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -24580,7 +24082,6 @@
 															$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key. '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -24620,7 +24121,6 @@
 															$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_MedicalWebPage_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -24660,7 +24160,6 @@
 															$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_exclude_MedicalWebPage_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -24700,7 +24199,6 @@
 															$location_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_main_entity_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -24830,7 +24328,6 @@
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'name', // string // Required // Name of schema property
 													$expertise_name, // mixed // Required // Variable to add as the property value
-													$expertise_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -24843,7 +24340,6 @@
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													'name', // string // Required // Name of schema property
 													$expertise_name, // mixed // Required // Variable to add as the property value
-													$expertise_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -24894,7 +24390,6 @@
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'about', // string // Required // Name of schema property
 													$expertise_about, // mixed // Required // Variable to add as the property value
-													$expertise_about_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -24950,7 +24445,6 @@
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // Name of schema property
 													$expertise_description, // mixed // Required // Variable to add as the property value
-													$expertise_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -24963,7 +24457,6 @@
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // Name of schema property
 													$expertise_description, // mixed // Required // Variable to add as the property value
-													$expertise_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25044,7 +24537,6 @@
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
 													$expertise_additionalType, // mixed // Required // Variable to add as the property value
-													$expertise_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25057,7 +24549,6 @@
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
 													$expertise_additionalType, // mixed // Required // Variable to add as the property value
-													$expertise_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25138,7 +24629,6 @@
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'alternateName', // string // Required // Name of schema property
 													$expertise_alternateName, // mixed // Required // Variable to add as the property value
-													$expertise_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25151,7 +24641,6 @@
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													'alternateName', // string // Required // Name of schema property
 													$expertise_alternateName, // mixed // Required // Variable to add as the property value
-													$expertise_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25232,7 +24721,6 @@
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'code', // string // Required // Name of schema property
 													$expertise_code, // mixed // Required // Variable to add as the property value
-													$expertise_code_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25245,7 +24733,6 @@
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													'code', // string // Required // Name of schema property
 													$expertise_code, // mixed // Required // Variable to add as the property value
-													$expertise_code_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25312,7 +24799,6 @@
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
 													$expertise_description_TextObject, // mixed // Required // Variable to add as the property value
-													$expertise_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25325,7 +24811,6 @@
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
 													$expertise_description_TextObject, // mixed // Required // Variable to add as the property value
-													$expertise_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25522,7 +25007,6 @@
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'image', // string // Required // Name of schema property
 													$expertise_image, // mixed // Required // Variable to add as the property value
-													$expertise_image_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25535,7 +25019,6 @@
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													'image', // string // Required // Name of schema property
 													$expertise_image, // mixed // Required // Variable to add as the property value
-													$expertise_image_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25619,7 +25102,6 @@
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'medicineSystem', // string // Required // Name of schema property
 													$expertise_medicineSystem, // mixed // Required // Variable to add as the property value
-													$expertise_medicineSystem_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25632,7 +25114,6 @@
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													'medicineSystem', // string // Required // Name of schema property
 													$expertise_medicineSystem, // mixed // Required // Variable to add as the property value
-													$expertise_medicineSystem_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25817,7 +25298,6 @@
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'relevantSpecialty', // string // Required // Name of schema property
 													$expertise_relevantSpecialty, // mixed // Required // Variable to add as the property value
-													$expertise_relevantSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25830,7 +25310,6 @@
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													'relevantSpecialty', // string // Required // Name of schema property
 													$expertise_relevantSpecialty, // mixed // Required // Variable to add as the property value
-													$expertise_relevantSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25888,7 +25367,6 @@
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'sameAs', // string // Required // Name of schema property
 													$expertise_sameAs, // mixed // Required // Variable to add as the property value
-													$expertise_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -25901,7 +25379,6 @@
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													'sameAs', // string // Required // Name of schema property
 													$expertise_sameAs, // mixed // Required // Variable to add as the property value
-													$expertise_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -26356,8 +25833,6 @@
 								$clinical_resource_subjectOf = '';
 								$clinical_resource_syndication_org = null;
 								$clinical_resource_syndication_org_name = null;
-								$clinical_resource_syndication_org_ref = null;
-								$clinical_resource_syndication_org_name_ref = null;
 								$clinical_resource_syndication_query = '';
 								$clinical_resource_syndication_URL = '';
 								$clinical_resource_thumbnail = array();
@@ -26598,7 +26073,6 @@
 															$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key. '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -26611,7 +26085,6 @@
 															$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key. '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -26651,7 +26124,6 @@
 															$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_MedicalWebPage_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -26691,7 +26163,6 @@
 															$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key. '_exclude_MedicalWebPage_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -26731,7 +26202,6 @@
 															$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_main_entity_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -27131,7 +26601,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'name', // string // Required // Name of schema property
 													$clinical_resource_name, // mixed // Required // Variable to add as the property value
-													$clinical_resource_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27144,7 +26613,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'name', // string // Required // Name of schema property
 													$clinical_resource_name, // mixed // Required // Variable to add as the property value
-													$clinical_resource_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27213,7 +26681,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'about', // string // Required // Name of schema property
 													$clinical_resource_about_MedicalWebPage, // mixed // Required // Variable to add as the property value
-													$clinical_resource_about_MedicalWebPage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27226,7 +26693,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'about', // string // Required // Name of schema property
 													$clinical_resource_about_CreativeWork, // mixed // Required // Variable to add as the property value
-													$clinical_resource_about_CreativeWork_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27277,7 +26743,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // Name of schema property
 													$clinical_resource_description, // mixed // Required // Variable to add as the property value
-													$clinical_resource_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27290,7 +26755,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // Name of schema property
 													$clinical_resource_description, // mixed // Required // Variable to add as the property value
-													$clinical_resource_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27353,7 +26817,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
 													$clinical_resource_additionalType, // mixed // Required // Variable to add as the property value
-													$clinical_resource_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27366,7 +26829,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
 													$clinical_resource_additionalType, // mixed // Required // Variable to add as the property value
-													$clinical_resource_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27440,7 +26902,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'alternateName', // string // Required // Name of schema property
 													$clinical_resource_alternateName, // mixed // Required // Variable to add as the property value
-													$clinical_resource_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27453,7 +26914,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'alternateName', // string // Required // Name of schema property
 													$clinical_resource_alternateName, // mixed // Required // Variable to add as the property value
-													$clinical_resource_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27525,7 +26985,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'articleBody', // string // Required // Name of schema property
 													$clinical_resource_articleBody, // mixed // Required // Variable to add as the property value
-													$clinical_resource_articleBody_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27538,7 +26997,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'articleBody', // string // Required // Name of schema property
 													$clinical_resource_articleBody, // mixed // Required // Variable to add as the property value
-													$clinical_resource_articleBody_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27663,7 +27121,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'contentSize', // string // Required // Name of schema property
 													$clinical_resource_asset_filesize, // mixed // Required // Variable to add as the property value
-													$clinical_resource_asset_filesize_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27676,7 +27133,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'contentSize', // string // Required // Name of schema property
 													$clinical_resource_asset_filesize, // mixed // Required // Variable to add as the property value
-													$clinical_resource_asset_filesize_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27719,7 +27175,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'contentUrl', // string // Required // Name of schema property
 													$clinical_resource_asset_url, // mixed // Required // Variable to add as the property value
-													$clinical_resource_asset_url_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27732,7 +27187,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'contentUrl', // string // Required // Name of schema property
 													$clinical_resource_asset_url, // mixed // Required // Variable to add as the property value
-													$clinical_resource_asset_url_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27780,7 +27234,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
 													$clinical_resource_description, // mixed // Required // Variable to add as the property value
-													$clinical_resource_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27793,7 +27246,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
 													$clinical_resource_description, // mixed // Required // Variable to add as the property value
-													$clinical_resource_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27853,7 +27305,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'duration', // string // Required // Name of schema property
 													$clinical_resource_asset_duration, // mixed // Required // Variable to add as the property value
-													$clinical_resource_asset_duration_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27866,7 +27317,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'duration', // string // Required // Name of schema property
 													$clinical_resource_asset_duration, // mixed // Required // Variable to add as the property value
-													$clinical_resource_asset_duration_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27927,7 +27377,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'embeddedTextCaption', // string // Required // Name of schema property
 													$clinical_resource_embeddedTextCaption, // mixed // Required // Variable to add as the property value
-													$clinical_resource_embeddedTextCaption_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27940,7 +27389,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'embeddedTextCaption', // string // Required // Name of schema property
 													$clinical_resource_embeddedTextCaption, // mixed // Required // Variable to add as the property value
-													$clinical_resource_embeddedTextCaption_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27985,7 +27433,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'embedUrl', // string // Required // Name of schema property
 													$clinical_resource_asset_embedUrl, // mixed // Required // Variable to add as the property value
-													$clinical_resource_asset_embedUrl_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27998,7 +27445,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'embedUrl', // string // Required // Name of schema property
 													$clinical_resource_asset_embedUrl, // mixed // Required // Variable to add as the property value
-													$clinical_resource_asset_embedUrl_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28056,7 +27502,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'encodingFormat', // string // Required // Name of schema property
 													$clinical_resource_encodingFormat, // mixed // Required // Variable to add as the property value
-													$clinical_resource_encodingFormat_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28069,7 +27514,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'encodingFormat', // string // Required // Name of schema property
 													$clinical_resource_encodingFormat, // mixed // Required // Variable to add as the property value
-													$clinical_resource_encodingFormat_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28125,7 +27569,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'hasDigitalDocumentPermission', // string // Required // Name of schema property
 													$clinical_resource_hasDigitalDocumentPermission, // mixed // Required // Variable to add as the property value
-													$clinical_resource_hasDigitalDocumentPermission_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28138,7 +27581,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'hasDigitalDocumentPermission', // string // Required // Name of schema property
 													$clinical_resource_hasDigitalDocumentPermission, // mixed // Required // Variable to add as the property value
-													$clinical_resource_hasDigitalDocumentPermission_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28225,7 +27667,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'height', // string // Required // Name of schema property
 													$clinical_resource_height, // mixed // Required // Variable to add as the property value
-													$clinical_resource_height_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28238,7 +27679,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'height', // string // Required // Name of schema property
 													$clinical_resource_height, // mixed // Required // Variable to add as the property value
-													$clinical_resource_height_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28298,7 +27738,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'image', // string // Required // Name of schema property
 													$clinical_resource_image, // mixed // Required // Variable to add as the property value
-													$clinical_resource_image_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28311,7 +27750,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'image', // string // Required // Name of schema property
 													$clinical_resource_image, // mixed // Required // Variable to add as the property value
-													$clinical_resource_image_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28372,7 +27810,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'isAccessibleForFree', // string // Required // Name of schema property
 													$clinical_resource_isAccessibleForFree, // mixed // Required // Variable to add as the property value
-													$clinical_resource_isAccessibleForFree_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28447,7 +27884,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'isPartOf', // string // Required // Name of schema property
 													$clinical_resource_isPartOf, // mixed // Required // Variable to add as the property value
-													$clinical_resource_isPartOf_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28639,7 +28075,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'representativeOfPage', // string // Required // Name of schema property
 													$clinical_resource_representativeOfPage, // mixed // Required // Variable to add as the property value
-													$clinical_resource_representativeOfPage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28714,7 +28149,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'sameAs', // string // Required // Name of schema property
 													$clinical_resource_sameAs, // mixed // Required // Variable to add as the property value
-													$clinical_resource_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28727,7 +28161,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'sameAs', // string // Required // Name of schema property
 													$clinical_resource_sameAs, // mixed // Required // Variable to add as the property value
-													$clinical_resource_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28874,7 +28307,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'speakable', // string // Required // Name of schema property
 													$clinical_resource_speakable, // mixed // Required // Variable to add as the property value
-													$clinical_resource_speakable_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28887,7 +28319,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'speakable', // string // Required // Name of schema property
 													$clinical_resource_speakable, // mixed // Required // Variable to add as the property value
-													$clinical_resource_speakable_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28950,7 +28381,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'thumbnail', // string // Required // Name of schema property
 													$clinical_resource_thumbnail, // mixed // Required // Variable to add as the property value
-													$clinical_resource_thumbnail_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -28963,7 +28393,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'thumbnail', // string // Required // Name of schema property
 													$clinical_resource_thumbnail, // mixed // Required // Variable to add as the property value
-													$clinical_resource_thumbnail_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -29064,7 +28493,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'timeRequired', // string // Required // Name of schema property
 													$clinical_resource_timeRequired, // mixed // Required // Variable to add as the property value
-													$clinical_resource_timeRequired_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -29077,7 +28505,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'timeRequired', // string // Required // Name of schema property
 													$clinical_resource_timeRequired, // mixed // Required // Variable to add as the property value
-													$clinical_resource_timeRequired_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -29135,7 +28562,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'transcript', // string // Required // Name of schema property
 													$clinical_resource_transcript, // mixed // Required // Variable to add as the property value
-													$clinical_resource_transcript_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -29148,7 +28574,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'transcript', // string // Required // Name of schema property
 													$clinical_resource_transcript, // mixed // Required // Variable to add as the property value
-													$clinical_resource_transcript_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -29243,7 +28668,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'videoFrameSize', // string // Required // Name of schema property
 													$clinical_resource_asset_videoFrameSize, // mixed // Required // Variable to add as the property value
-													$clinical_resource_asset_videoFrameSize_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -29256,7 +28680,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'videoFrameSize', // string // Required // Name of schema property
 													$clinical_resource_asset_videoFrameSize, // mixed // Required // Variable to add as the property value
-													$clinical_resource_asset_videoFrameSize_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -29301,7 +28724,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'videoQuality', // string // Required // Name of schema property
 													$clinical_resource_asset_videoQuality, // mixed // Required // Variable to add as the property value
-													$clinical_resource_asset_videoQuality_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -29314,7 +28736,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'videoQuality', // string // Required // Name of schema property
 													$clinical_resource_asset_videoQuality, // mixed // Required // Variable to add as the property value
-													$clinical_resource_asset_videoQuality_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -29363,7 +28784,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'foo', // string // Required // Name of schema property
 													$clinical_resource_foo, // mixed // Required // Variable to add as the property value
-													$clinical_resource_foo_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -29376,7 +28796,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'foo', // string // Required // Name of schema property
 													$clinical_resource_foo, // mixed // Required // Variable to add as the property value
-													$clinical_resource_foo_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -29430,7 +28849,6 @@
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'wordCount', // string // Required // Name of schema property
 													$clinical_resource_wordCount, // mixed // Required // Variable to add as the property value
-													$clinical_resource_wordCount_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -29443,7 +28861,6 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'wordCount', // string // Required // Name of schema property
 													$clinical_resource_wordCount, // mixed // Required // Variable to add as the property value
-													$clinical_resource_wordCount_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -29559,7 +28976,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'author', // string // Required // Name of schema property
 																$clinical_resource_syndication_author, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_author_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29585,7 +29001,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'contributor', // string // Required // Name of schema property
 																$clinical_resource_syndication_contributor, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_contributor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29611,7 +29026,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'copyrightHolder', // string // Required // Name of schema property
 																$clinical_resource_syndication_copyrightHolder, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_copyrightHolder_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29637,7 +29051,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'copyrightNotice', // string // Required // Name of schema property
 																$clinical_resource_syndication_copyrightNotice, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_copyrightNotice_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29663,7 +29076,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'copyrightYear', // string // Required // Name of schema property
 																$clinical_resource_syndication_copyrightYear, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_copyrightYear_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29689,7 +29101,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'countryOfOrigin', // string // Required // Name of schema property
 																$clinical_resource_syndication_countryOfOrigin, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_countryOfOrigin_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29715,7 +29126,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'creator', // string // Required // Name of schema property
 																$clinical_resource_syndication_creator, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_creator_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29741,7 +29151,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'creditText', // string // Required // Name of schema property
 																$clinical_resource_syndication_creditText, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_creditText_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29767,7 +29176,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'dateModified', // string // Required // Name of schema property
 																$clinical_resource_syndication_dateModified, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_dateModified_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29793,7 +29201,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'datePublished', // string // Required // Name of schema property
 																$clinical_resource_syndication_datePublished, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_datePublished_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29819,7 +29226,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'director', // string // Required // Name of schema property
 																$clinical_resource_syndication_director, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_director_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29845,7 +29251,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'editor', // string // Required // Name of schema property
 																$clinical_resource_syndication_editor, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_editor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29871,7 +29276,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'funder', // string // Required // Name of schema property
 																$clinical_resource_syndication_funder, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_funder_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29897,7 +29301,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'funding', // string // Required // Name of schema property
 																$clinical_resource_syndication_funding, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_funding_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29923,7 +29326,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'maintainer', // string // Required // Name of schema property
 																$clinical_resource_syndication_maintainer, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_maintainer_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29949,7 +29351,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'musicBy', // string // Required // Name of schema property
 																$clinical_resource_syndication_musicBy, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_musicBy_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -29975,7 +29376,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'producer', // string // Required // Name of schema property
 																$clinical_resource_syndication_producer, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_producer_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -30001,7 +29401,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'productionCompany', // string // Required // Name of schema property
 																$clinical_resource_syndication_productionCompany, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_productionCompany_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -30042,7 +29441,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'provider', // string // Required // Name of schema property
 																$clinical_resource_syndication_provider, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_provider_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -30068,7 +29466,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'publisher', // string // Required // Name of schema property
 																$clinical_resource_syndication_publisher, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_publisher_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -30094,7 +29491,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'publisherImprint', // string // Required // Name of schema property
 																$clinical_resource_syndication_publisherImprint, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_publisherImprint_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -30120,7 +29516,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'publishingPrinciples', // string // Required // Name of schema property
 																$clinical_resource_syndication_publishingPrinciples, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_publishingPrinciples_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -30146,7 +29541,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'recordedAt', // string // Required // Name of schema property
 																$clinical_resource_syndication_recordedAt, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_recordedAt_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -30185,7 +29579,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'sameAs', // string // Required // Name of schema property
 																$clinical_resource_sameAs, // mixed // Required // Variable to add as the property value
-																$clinical_resource_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -30211,7 +29604,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'sourceOrganization', // string // Required // Name of schema property
 																$clinical_resource_syndication_sourceOrganization, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_sourceOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -30237,7 +29629,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'sponsor', // string // Required // Name of schema property
 																$clinical_resource_syndication_sponsor, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_sponsor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -30263,7 +29654,6 @@
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 																'translator', // string // Required // Name of schema property
 																$clinical_resource_syndication_translator, // mixed // Required // Variable to add as the property value
-																$clinical_resource_syndication_translator_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
@@ -30643,7 +30033,6 @@
 															$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -30683,7 +30072,6 @@
 															$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_exclude_MedicalWebPage_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -30723,7 +30111,6 @@
 															$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_main_entity_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -30767,7 +30154,6 @@
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 													'name', // string // Required // Name of schema property
 													$condition_name, // mixed // Required // Variable to add as the property value
-													$condition_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -30838,7 +30224,6 @@
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 													'alternateName', // string // Required // Name of schema property
 													$condition_alternateName, // mixed // Required // Variable to add as the property value
-													$condition_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -30915,7 +30300,6 @@
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
 													$condition_additionalType, // mixed // Required // Variable to add as the property value
-													$condition_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -30966,7 +30350,6 @@
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 													'code', // string // Required // Name of schema property
 													$condition_code, // mixed // Required // Variable to add as the property value
-													$condition_code_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -31160,7 +30543,6 @@
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 													'infectiousAgent', // string // Required // Name of schema property
 													$condition_infectiousAgent, // mixed // Required // Variable to add as the property value
-													$condition_infectiousAgent_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -31198,7 +30580,6 @@
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 													'infectiousAgentClass', // string // Required // Name of schema property
 													$condition_infectiousAgentClass, // mixed // Required // Variable to add as the property value
-													$condition_infectiousAgentClass_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -31397,7 +30778,6 @@
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 													'sameAs', // string // Required // Name of schema property
 													$condition_sameAs, // mixed // Required // Variable to add as the property value
-													$condition_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -31525,7 +30905,6 @@
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 													'possibleTreatment', // string // Required // Name of schema property
 													$condition_possibleTreatment, // mixed // Required // Variable to add as the property value
-													$condition_possibleTreatment_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -31585,7 +30964,6 @@
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 													'primaryPrevention', // string // Required // Name of schema property
 													$condition_primaryPrevention, // mixed // Required // Variable to add as the property value
-													$condition_primaryPrevention_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -31645,7 +31023,6 @@
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 													'secondaryPrevention', // string // Required // Name of schema property
 													$condition_secondaryPrevention, // mixed // Required // Variable to add as the property value
-													$condition_secondaryPrevention_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -31718,7 +31095,6 @@
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 													'typicalTest', // string // Required // Name of schema property
 													$condition_typicalTest, // mixed // Required // Variable to add as the property value
-													$condition_typicalTest_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -31852,44 +31228,31 @@
 
 								$treatment_item_Service = array(); // Base array
 								$treatment_additionalType = null;
-								$treatment_additionalType_ref = null;
 								$treatment_additionalType_repeater = null;
 								$treatment_alternateName = null;
-								$treatment_alternateName_ref = null;
 								$treatment_alternateName_repeater = null;
 								$treatment_code = null;
-								$treatment_code_ref = null;
 								$treatment_code_repeater = null;
 								$treatment_drug = null;
 								$treatment_drug_item = null;
 								$treatment_drug_item_nonProprietaryName_list = null;
 								$treatment_drug_item_proprietaryName_list = null;
-								$treatment_drug_ref = null;
 								$treatment_drug_repeater = null;
 								$treatment_duplicateTherapy = null;
-								$treatment_duplicateTherapy_ref = null;
 								$treatment_duplicateTherapy_relationship = null;
 								$treatment_id = null;
 								$treatment_imagingTechnique = null;
-								$treatment_imagingTechnique_ref = null;
 								$treatment_name = null;
-								$treatment_name_ref = null;
 								$treatment_procedureType = null;
-								$treatment_procedureType_ref = null;
 								$treatment_relevantSpecialty = null;
 								$treatment_relevantSpecialty_multiselect = null;
-								$treatment_relevantSpecialty_ref = null;
 								$treatment_sameAs = null;
-								$treatment_sameAs_ref = null;
 								$treatment_sameAs_repeater = null;
 								$treatment_subTest = null;
-								$treatment_subTest_ref = null;
 								$treatment_subTest_relationship = null;
 								$treatment_tissueSample = null;
-								$treatment_tissueSample_ref = null;
 								$treatment_tissueSample_repeater = null;
 								$treatment_usedToDiagnose = null;
-								$treatment_usedToDiagnose_ref = null;
 								$treatment_usedToDiagnose_relationship = null;
 								$treatment_usesDevice = null;
 								$treatment_usesDevice_item = null;
@@ -31897,7 +31260,6 @@
 								$treatment_usesDevice_item_alternateName_repeater = null;
 								$treatment_usesDevice_item_code = null;
 								$treatment_usesDevice_item_code_repeater = null;
-								$treatment_usesDevice_ref = null;
 								$treatment_usesDevice_repeater = null;
 								$MedicalCondition_i = 1;
 								$Service_type = null;
@@ -32098,7 +31460,6 @@
 															$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -32138,7 +31499,6 @@
 															$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_exclude_MedicalWebPage_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -32178,7 +31538,6 @@
 															$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
-															${ 'schema_common_' . $key . '_main_entity_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 															$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
@@ -32222,7 +31581,6 @@
 													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 													'name', // string // Required // Name of schema property
 													$treatment_name, // mixed // Required // Variable to add as the property value
-													$treatment_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -32283,7 +31641,6 @@
 													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
 													$treatment_additionalType, // mixed // Required // Variable to add as the property value
-													$treatment_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -32363,7 +31720,6 @@
 													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 													'alternateName', // string // Required // Name of schema property
 													$treatment_alternateName, // mixed // Required // Variable to add as the property value
-													$treatment_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -32414,7 +31770,6 @@
 													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 													'code', // string // Required // Name of schema property
 													$treatment_code, // mixed // Required // Variable to add as the property value
-													$treatment_code_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -32666,7 +32021,6 @@
 													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 													'drug', // string // Required // Name of schema property
 													$treatment_drug, // mixed // Required // Variable to add as the property value
-													$treatment_drug_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -32725,7 +32079,6 @@
 													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 													'duplicateTherapy', // string // Required // Name of schema property
 													$treatment_duplicateTherapy, // mixed // Required // Variable to add as the property value
-													$treatment_duplicateTherapy_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -32831,7 +32184,6 @@
 													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 													'imagingTechnique', // string // Required // Name of schema property
 													$treatment_imagingTechnique, // mixed // Required // Variable to add as the property value
-													$treatment_imagingTechnique_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -32956,7 +32308,6 @@
 													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 													'procedureType', // string // Required // Name of schema property
 													$treatment_procedureType, // mixed // Required // Variable to add as the property value
-													$treatment_procedureType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -33023,7 +32374,6 @@
 													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 													'relevantSpecialty', // string // Required // Name of schema property
 													$treatment_relevantSpecialty, // mixed // Required // Variable to add as the property value
-													$treatment_relevantSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -33076,7 +32426,6 @@
 													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 													'sameAs', // string // Required // Name of schema property
 													$treatment_sameAs, // mixed // Required // Variable to add as the property value
-													$treatment_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -33209,7 +32558,6 @@
 													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 													'subTest', // string // Required // Name of schema property
 													$treatment_subTest, // mixed // Required // Variable to add as the property value
-													$treatment_subTest_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -33265,7 +32613,6 @@
 													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 													'tissueSample', // string // Required // Name of schema property
 													$treatment_tissueSample, // mixed // Required // Variable to add as the property value
-													$treatment_tissueSample_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -33324,7 +32671,6 @@
 													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 													'usedToDiagnose', // string // Required // Name of schema property
 													$treatment_usedToDiagnose, // mixed // Required // Variable to add as the property value
-													$treatment_usedToDiagnose_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -33472,7 +32818,6 @@
 													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 													'usesDevice', // string // Required // Name of schema property
 													$treatment_usesDevice, // mixed // Required // Variable to add as the property value
-													$treatment_usesDevice_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -33580,7 +32925,6 @@
 		function uamswp_fad_schema_values_or_reference(
 			&$property, // Property variable
 			$value, // Full value variable
-			&$reference, // @id reference variable
 			array &$node_identifier_list // array // Required // List of node identifiers (@id) already defined in the schema
 		) {
 
@@ -33745,7 +33089,6 @@
 			array &$schema_type_list, // array // Required // The list array for the schema item to which to add the property value
 			string $property_name, // string // Required // Name of schema property
 			$property_value, // mixed // Required // Variable to add as the property value
-			&$property_value_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 			array &$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 			array $property_map, // array // Required // Map array to match schema types with allowed properties
 			int $nesting_level, // int // Required // Current nesting level value
@@ -33836,12 +33179,9 @@
 
 							foreach ( $property_value as &$item ) {
 
-								$item_ref = null;
-
 								uamswp_fad_schema_values_or_reference(
 									$property_value_temp, // Property variable
 									$item, // Full value variable
-									$item_ref, // @id reference variable
 									$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 								);
 
@@ -33863,7 +33203,6 @@
 							uamswp_fad_schema_values_or_reference(
 								$property_value_temp, // Property variable
 								$property_value, // Full value variable
-								$property_value_ref, // @id reference variable
 								$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 							);
 
