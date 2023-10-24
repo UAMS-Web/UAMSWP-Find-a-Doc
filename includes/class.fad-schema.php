@@ -9099,6 +9099,19 @@
 
 							}
 
+						// De-duplicate the brand organization field value
+
+							if (
+								$field_value
+								&&
+								is_array($field_value)
+							) {
+
+								$field_value = array_unique( $field_value, SORT_REGULAR );
+								$field_value = array_values($field_value);
+
+							}
+
 					// If there is no field value, bail early
 
 						if ( !$field_value ) {
