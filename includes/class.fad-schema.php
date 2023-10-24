@@ -7347,7 +7347,7 @@
 
 												// Get alternateName repeater field value
 
-													$identifier_item_alternateName_repeater = get_field( 'schema_alternatename', $entity ) ?? null;
+													$identifier_item_alternateName_repeater = $item['schema_alternatename'] ?? null;
 
 												// Add each item to alternateName property values array
 
