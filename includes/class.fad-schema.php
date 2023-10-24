@@ -9237,35 +9237,34 @@
 
 							}
 
-						// WebSite and MedicalWebPage only
+						// WebSite
 
 							/*
 
-								Loop through an associative array of properties specific to the WebSite and
-								MedicalWebPage type, adding each row to this item's schema when the key matches
-								a property valid for the type, replacing full values with only the node
-								identifier where appropriate.
+								Loop through an associative array of properties specific to the WebSite type,
+								adding each row to this item's schema when the key matches a property valid for
+								the type, replacing full values with only the node identifier where appropriate.
 
 							*/
 
 							if (
-								isset($schema_common_properties_MedicalWebPage)
+								isset($schema_common_properties_WebSite)
 								&&
-								!empty($schema_common_properties_MedicalWebPage)
+								!empty($schema_common_properties_WebSite)
 							) {
 
-								foreach ( $schema_common_properties_MedicalWebPage as $key => $value ) {
+								foreach ( $schema_common_properties_WebSite as $key => $value ) {
 
 									// Add to item values
 
-										${ 'schema_common_' . $key . '_MedicalWebPage_ref' } = null;
+										${ 'schema_common_' . $key . '_WebSite_ref' } = null;
 
 										uamswp_fad_schema_add_to_item_values(
 											$type, // string // Required // The @type value for the schema item
 											$output, // array // Required // The list array for the schema item to which to add the property value
 											$key, // string // Required // Name of schema property
 											$value, // mixed // Required // Variable to add as the property value
-											${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
+											${ 'schema_common_' . $key . '_WebSite_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 											$uamshealth_website_properties_map, // array // Required // Map array to match schema types with allowed properties
 											($nesting_level + 1) // int // Required // Current nesting level value

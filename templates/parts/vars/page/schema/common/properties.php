@@ -35,9 +35,13 @@
 
 			$schema_common_properties = array();
 
-		// Common schema properties for WebSite and MedicalWebPage only
+		// Common schema properties for MedicalWebPage only
 
 			$schema_common_properties_MedicalWebPage = array();
+
+		// Common schema properties for WebSite only
+
+			$schema_common_properties_WebSite = array();
 
 		// Common schema properties for the main entity type
 
@@ -1614,6 +1618,7 @@
 			if ( $schema_common_isAccessibleForFree_MedicalWebPage ) {
 
 				$schema_common_properties_MedicalWebPage['isAccessibleForFree'] = $schema_common_isAccessibleForFree_MedicalWebPage;
+				$schema_common_properties_WebSite['isAccessibleForFree'] = $schema_common_isAccessibleForFree_MedicalWebPage;
 
 			}
 
@@ -1661,7 +1666,7 @@
 
 			}
 
-	// isPartOf (WebSite and MedicalWebPage only)
+	// isPartOf (MedicalWebPage only)
 
 		/**
 		 * Indicates an item or CreativeWork that this item, or CreativeWork (in some
@@ -1820,12 +1825,13 @@
 				if ( $schema_common_mainContentOfPage ) {
 
 					$schema_common_properties_MedicalWebPage['mainContentOfPage'] = $schema_common_mainContentOfPage;
+					$schema_common_properties_WebSite['mainContentOfPage'] = $schema_common_mainContentOfPage;
 
 				}
 
 		}
 
-	// mainEntityOfPage (excluding MedicalWebPage)
+	// mainEntityOfPage (excluding WebSite and MedicalWebPage)
 
 		/**
 		 * Indicates a page (or other CreativeWork) for which this thing is the main
