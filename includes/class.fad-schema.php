@@ -9184,7 +9184,7 @@
 					// @id
 
 						$id = $schema_common_website_url . '#' . $type;
-						$output['@id'] = $id;
+						$schema['@id'] = $id;
 
 					// url
 
@@ -9225,7 +9225,7 @@
 
 										uamswp_fad_schema_add_to_item_values(
 											$type, // string // Required // The @type value for the schema item
-											$output, // array // Required // The list array for the schema item to which to add the property value
+											$schema, // array // Required // The list array for the schema item to which to add the property value
 											$key, // string // Required // Name of schema property
 											$value, // mixed // Required // Variable to add as the property value
 											${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
@@ -9262,7 +9262,7 @@
 
 										uamswp_fad_schema_add_to_item_values(
 											$type, // string // Required // The @type value for the schema item
-											$output, // array // Required // The list array for the schema item to which to add the property value
+											$schema, // array // Required // The list array for the schema item to which to add the property value
 											$key, // string // Required // Name of schema property
 											$value, // mixed // Required // Variable to add as the property value
 											${ 'schema_common_' . $key . '_WebSite_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
@@ -9300,7 +9300,7 @@
 
 										uamswp_fad_schema_add_to_item_values(
 											$type, // string // Required // The @type value for the schema item
-											$output, // array // Required // The list array for the schema item to which to add the property value
+											$schema, // array // Required // The list array for the schema item to which to add the property value
 											$key, // string // Required // Name of schema property
 											$value, // mixed // Required // Variable to add as the property value
 											${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
