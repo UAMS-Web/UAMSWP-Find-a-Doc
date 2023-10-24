@@ -24544,7 +24544,7 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key. '_ref' } = null;
+													${ 'schema_common_' . $key . '_ref' } = null;
 
 													// MedicalWebPage
 
@@ -26575,7 +26575,7 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key. '_ref' } = null;
+													${ 'schema_common_' . $key . '_ref' } = null;
 
 													// MedicalWebPage
 
