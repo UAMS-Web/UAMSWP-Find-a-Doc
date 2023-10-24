@@ -11,7 +11,3 @@
 // Common property values
 
 	include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
-
-// UAMS organization values
-
-	include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/uams.php' );
