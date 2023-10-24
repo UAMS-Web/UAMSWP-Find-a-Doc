@@ -9182,12 +9182,12 @@
 
 					// @id
 
-						$id = $schema_base_org_uams_health_url . '#' . $type;
+						$id = $schema_common_website_url . '#' . $type;
 						$output['@id'] = $id;
 
 					// url
 
-						$url = $schema_base_org_uams_health_url;
+						$url = $schema_common_website_url;
 
 						if ( $url ) {
 

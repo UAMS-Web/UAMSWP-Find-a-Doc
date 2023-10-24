@@ -70,8 +70,8 @@
 
 	// UAMS Health Website URL
 
-		$schema_base_org_uams_health_url = user_trailingslashit( get_site_url() );
-		$schema_base_org_uams_health_url_trailingslashit = trailingslashit( $schema_base_org_uams_health_url );
+		$schema_common_website_url = user_trailingslashit( get_site_url() );
+		$schema_common_website_url_trailingslashit = trailingslashit( $schema_common_website_url );
 
 	// UAMS Health Website Language
 
