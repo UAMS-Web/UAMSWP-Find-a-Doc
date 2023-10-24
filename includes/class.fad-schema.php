@@ -9222,8 +9222,6 @@
 
 									// Add to item values
 
-										${ 'schema_common_' . $key . '_ref' } = null;
-
 										uamswp_fad_schema_add_to_item_values(
 											$type, // string // Required // The @type value for the schema item
 											$schema, // array // Required // The list array for the schema item to which to add the property value
@@ -9257,8 +9255,6 @@
 								foreach ( $schema_common_properties_WebSite as $key => $value ) {
 
 									// Add to item values
-
-										${ 'schema_common_' . $key . '_WebSite_ref' } = null;
 
 										uamswp_fad_schema_add_to_item_values(
 											$type, // string // Required // The @type value for the schema item
@@ -9294,8 +9290,6 @@
 								foreach ( $schema_common_properties_main_entity as $key => $value ) {
 
 									// Add to item values
-
-										${ 'schema_common_' . $key . '_main_entity_ref' } = null;
 
 										uamswp_fad_schema_add_to_item_values(
 											$type, // string // Required // The @type value for the schema item
@@ -10623,8 +10617,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_ref' } = null;
-
 													// MedicalWebPage
 
 														uamswp_fad_schema_add_to_item_values(
@@ -10686,8 +10678,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_MedicalWebPage_ref' } = null;
-
 													// MedicalWebPage
 
 														uamswp_fad_schema_add_to_item_values(
@@ -10724,8 +10714,6 @@
 											foreach ( $schema_common_properties_exclude_MedicalWebPage as $key => $value ) {
 
 												// Add to item values
-
-													${ 'schema_common_' . $key . '_exclude_MedicalWebPage_ref' } = null;
 
 													// MedicalBusiness
 
@@ -10775,8 +10763,6 @@
 											foreach ( $schema_common_properties_main_entity as $key => $value ) {
 
 												// Add to item values
-
-													${ 'schema_common_' . $key . '_main_entity_ref' } = null;
 
 													// MedicalBusiness
 
@@ -18383,8 +18369,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_ref' } = null;
-
 													// MedicalWebPage
 
 														uamswp_fad_schema_add_to_item_values(
@@ -18434,8 +18418,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_MedicalWebPage_ref' } = null;
-
 													// MedicalWebPage
 
 														uamswp_fad_schema_add_to_item_values(
@@ -18473,8 +18455,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_exclude_MedicalWebPage_ref' } = null;
-
 													// LocalBusiness
 
 														uamswp_fad_schema_add_to_item_values(
@@ -18511,8 +18491,6 @@
 											foreach ( $schema_common_properties_main_entity as $key => $value ) {
 
 												// Add to item values
-
-													${ 'schema_common_' . $key . '_main_entity_ref' } = null;
 
 													// LocalBusiness
 
@@ -24062,8 +24040,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_ref' } = null;
-
 													// MedicalWebPage
 
 														uamswp_fad_schema_add_to_item_values(
@@ -24113,8 +24089,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_MedicalWebPage_ref' } = null;
-
 													// MedicalWebPage
 
 														uamswp_fad_schema_add_to_item_values(
@@ -24152,8 +24126,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_exclude_MedicalWebPage_ref' } = null;
-
 													// MedicalEntity
 
 														uamswp_fad_schema_add_to_item_values(
@@ -24190,8 +24162,6 @@
 											foreach ( $schema_common_properties_main_entity as $key => $value ) {
 
 												// Add to item values
-
-													${ 'schema_common_' . $key . '_main_entity_ref' } = null;
 
 													// MedicalEntity
 
@@ -26065,8 +26035,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_ref' } = null;
-
 													// MedicalWebPage
 
 														uamswp_fad_schema_add_to_item_values(
@@ -26116,8 +26084,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_MedicalWebPage_ref' } = null;
-
 													// MedicalWebPage
 
 														uamswp_fad_schema_add_to_item_values(
@@ -26155,8 +26121,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_exclude_MedicalWebPage_ref' } = null;
-
 													// CreativeWork
 
 														uamswp_fad_schema_add_to_item_values(
@@ -26193,8 +26157,6 @@
 											foreach ( $schema_common_properties_main_entity as $key => $value ) {
 
 												// Add to item values
-
-													${ 'schema_common_' . $key . '_main_entity_ref' } = null;
 
 													// CreativeWork
 
@@ -30025,8 +29987,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_ref' } = null;
-
 													// MedicalCondition
 
 														uamswp_fad_schema_add_to_item_values(
@@ -30064,8 +30024,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_exclude_MedicalWebPage_ref' } = null;
-
 													// MedicalCondition
 
 														uamswp_fad_schema_add_to_item_values(
@@ -30102,8 +30060,6 @@
 											foreach ( $schema_common_properties_main_entity as $key => $value ) {
 
 												// Add to item values
-
-													${ 'schema_common_' . $key . '_main_entity_ref' } = null;
 
 													// MedicalCondition
 
@@ -31452,8 +31408,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_ref' } = null;
-
 													// Service
 
 														uamswp_fad_schema_add_to_item_values(
@@ -31491,8 +31445,6 @@
 
 												// Add to item values
 
-													${ 'schema_common_' . $key . '_exclude_MedicalWebPage_ref' } = null;
-
 													// Service
 
 														uamswp_fad_schema_add_to_item_values(
@@ -31529,8 +31481,6 @@
 											foreach ( $schema_common_properties_main_entity as $key => $value ) {
 
 												// Add to item values
-
-													${ 'schema_common_' . $key . '_main_entity_ref' } = null;
 
 													// Service
 
