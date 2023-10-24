@@ -1534,7 +1534,7 @@
 
 			// Get values
 
-				$schema_common_inLanguage = $schema_base_website_uams_health_inLanguage;
+				$schema_common_inLanguage = $schema_common_english;
 
 			// Add to common schema properties array
 
