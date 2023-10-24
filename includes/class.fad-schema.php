@@ -9315,8 +9315,22 @@
 
 					// name
 
-						$name = 'UAMS Health';
-						$schema['name'] = $name;
+						// Get values
+
+							$name = 'UAMS Health';
+
+						// Add to item values
+
+							uamswp_fad_schema_add_to_item_values(
+								$type, // string // Required // The @type value for the schema item
+								$schema, // array // Required // The list array for the schema item to which to add the property value
+								'name', // string // Required // Name of schema property
+								$name, // mixed // Required // Variable to add as the property value
+								$name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+								$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+								$uamshealth_website_properties_map, // array // Required // Map array to match schema types with allowed properties
+								($nesting_level + 1) // int // Required // Current nesting level value
+							);
 
 					// about
 
