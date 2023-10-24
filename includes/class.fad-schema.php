@@ -10678,8 +10678,8 @@
 
 										// Pass the values to common schema properties template part
 
-											$schema_common_specific_clinical_organization_override = false; // Query for whether to override common clinical organization(s) with those specific to the current entity
-											$schema_common_specific_clinical_organization = $provider_specific_clinical_organization; // Clinical organization(s) specific to the current entity
+											$schema_common_specific_brand_organization_override = false; // Query for whether to override common clinical organization(s) with those specific to the current entity
+											$schema_common_specific_brand_organization = $provider_specific_clinical_organization; // Clinical organization(s) specific to the current entity
 
 									}
 
@@ -18460,7 +18460,7 @@
 
 										// Pass values to common schema properties template part
 
-											$schema_common_specific_clinical_organization = $location_specific_clinical_organization;
+											$schema_common_specific_brand_organization = $location_specific_clinical_organization;
 
 									}
 

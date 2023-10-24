@@ -8,8 +8,8 @@
  *     $schema_common_state
  *     $schema_common_usa
  *     $schema_common_item_MedicalWebPage
- *     $schema_common_specific_clinical_organization // Clinical organization(s) specific to the current entity
- *     $schema_common_specific_clinical_organization_override // bool // Query for whether to override common clinical organization(s) with those specific to the current entity
+ *     $schema_common_specific_brand_organization // Clinical organization(s) specific to the current entity
+ *     $schema_common_specific_brand_organization_override // bool // Query for whether to override common clinical organization(s) with those specific to the current entity
  *     $schema_common_url // URL of the current entity
  *     $schema_common_excerpt
  *     $schema_default_brand_organization_clinical
@@ -25,8 +25,8 @@
 	$schema_common_state = $schema_common_state ?? null;
 	$schema_common_usa = $schema_common_usa ?? null;
 	$schema_common_item_MedicalWebPage = $schema_common_item_MedicalWebPage ?? null;
-	$schema_common_specific_clinical_organization = $schema_common_specific_clinical_organization ?? null;
-	$schema_common_specific_clinical_organization_override = $schema_common_specific_clinical_organization_override ?? false;
+	$schema_common_specific_brand_organization = $schema_common_specific_brand_organization ?? null;
+	$schema_common_specific_brand_organization_override = $schema_common_specific_brand_organization_override ?? false;
 	$schema_common_url = $schema_common_url ?? null;
 	$schema_common_excerpt = $schema_common_excerpt ?? null;
 
@@ -82,6 +82,13 @@
 					$schema_default_brand_organization_affiliation // mixed // Required // Incoming schema item property value
 				);
 
+			// Merge in specific third-party brand organizations values
+
+				$schema_common_affiliation_organization = uamswp_fad_schema_merge_values(
+					$schema_common_affiliation_organization, // mixed // Required // Initial schema item property value
+					$schema_common_specific_brand_organization // mixed // Required // Incoming schema item property value
+				);
+
 		// Common clinical organizations
 
 			// Base array
@@ -90,9 +97,20 @@
 
 			// Merge in Default Clinical UAMS Brand Organization
 
+				if ( !$schema_common_specific_brand_organization_override ) {
+
+					$schema_common_clinical_organization = uamswp_fad_schema_merge_values(
+						$schema_common_clinical_organization, // mixed // Required // Initial schema item property value
+						$schema_default_brand_organization_clinical // mixed // Required // Incoming schema item property value
+					);
+
+				}
+
+			// Merge in specific third-party brand organizations values
+
 				$schema_common_clinical_organization = uamswp_fad_schema_merge_values(
 					$schema_common_clinical_organization, // mixed // Required // Initial schema item property value
-					$schema_default_brand_organization_clinical // mixed // Required // Incoming schema item property value
+					$schema_common_specific_brand_organization // mixed // Required // Incoming schema item property value
 				);
 
 		// Excerpt
@@ -698,20 +716,9 @@
 
 			// Merge in common clinical organizations values
 
-				if ( !$schema_common_specific_clinical_organization_override ) {
-
-					$schema_common_brand = uamswp_fad_schema_merge_values(
-						$schema_common_brand, // mixed // Required // Initial schema item property value
-						$schema_common_clinical_organization // mixed // Required // Incoming schema item property value
-					);
-
-				}
-
-			// Merge in specific clinical organizations values
-
 				$schema_common_brand = uamswp_fad_schema_merge_values(
 					$schema_common_brand, // mixed // Required // Initial schema item property value
-					$schema_common_specific_clinical_organization // mixed // Required // Incoming schema item property value
+					$schema_common_clinical_organization // mixed // Required // Incoming schema item property value
 				);
 
 		// Add to common schema properties array
@@ -2108,11 +2115,11 @@
 
 				$schema_common_parentOrganization = array();
 
-			// Merge in common affiliation organizations values
+			// Merge in common clinical organizations values
 
 				$schema_common_parentOrganization = uamswp_fad_schema_merge_values(
 					$schema_common_parentOrganization, // mixed // Required // Initial schema item property value
-					$schema_common_affiliation_organization // mixed // Required // Incoming schema item property value
+					$schema_common_clinical_organization // mixed // Required // Incoming schema item property value
 				);
 
 		// Add to common schema properties array
@@ -2246,35 +2253,12 @@
 
 					$schema_common_provider = array();
 
-				// Merge in relevant clinical 'Organization' value
+				// Merge in common clinical organizations values
 
-					if (
-						isset($schema_common_specific_clinical_organization)
-						&&
-						!empty($schema_common_specific_clinical_organization)
-					) {
-
-						// Merge in specific clinical 'Organization' value
-
-							$schema_common_provider = uamswp_fad_schema_merge_values(
-								$schema_common_provider, // mixed // Required // Initial schema item property value
-								$schema_common_specific_clinical_organization // mixed // Required // Incoming schema item property value
-							);
-
-					} elseif (
-						isset($schema_common_common_clinical_organization)
-						&&
-						!empty($schema_common_common_clinical_organization)
-					) {
-
-						// Merge in common clinical 'Organization' value
-
-							$schema_common_provider = uamswp_fad_schema_merge_values(
-								$schema_common_provider, // mixed // Required // Initial schema item property value
-								$schema_common_common_clinical_organization // mixed // Required // Incoming schema item property value
-							);
-
-					}
+					$schema_common_brand = uamswp_fad_schema_merge_values(
+						$schema_common_brand, // mixed // Required // Initial schema item property value
+						$schema_common_clinical_organization // mixed // Required // Incoming schema item property value
+					);
 
 			// Add to common schema properties array
 
