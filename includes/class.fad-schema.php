@@ -10589,7 +10589,7 @@
 
 											}
 
-								// Specific Clinical Organizations [WIP]
+								// Specific Clinical Organizations
 
 									/*
 
@@ -10629,15 +10629,23 @@
 										$nesting_level == 0
 									) {
 
-										// Get values [WIP]
+										// Get values
 
 											// Base array
 
 												$provider_specific_clinical_organization = array();
 
+											// Get list of Third-Party Brand Organizations
+
+												$provider_specific_clinical_organization = uamswp_fad_schema_brand_organization_list(
+													$entity, // int // Required // Post ID
+													$provider_specific_clinical_organization = array() // array // Optional // Pre-existing list array for brand organizations to which to add additional items
+												);
+
 										// Pass the values to common schema properties template part
 
-											$schema_common_specific_clinical_organization = $provider_specific_clinical_organization;
+											$schema_common_specific_clinical_organization_override = false; // Query for whether to override common clinical organization(s) with those specific to the current entity
+											$schema_common_specific_clinical_organization = $provider_specific_clinical_organization; // Clinical organization(s) specific to the current entity
 
 									}
 
