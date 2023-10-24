@@ -4,6 +4,7 @@
  * Required vars:
  *     $entity ($id of current post)
  *     $nesting_level
+ *     $node_identifier_list // List of node identifiers (@id) already defined in the schema
  *     $schema_common_state
  *     $schema_common_usa
  *     $schema_common_item_MedicalWebPage
