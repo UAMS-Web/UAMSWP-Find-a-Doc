@@ -1693,8 +1693,10 @@
 
 					if ( !isset($schema_base_website_uams_health) ) {
 
+						$node_identifier_list_MedicalWebPage = $node_identifier_list;
+
 						$schema_base_website_uams_health = uamswp_fad_schema_uamshealth_website(
-							$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
+							$node_identifier_list_MedicalWebPage, // array // Optional // List of node identifiers (@id) already defined in the schema
 							$nesting_level // int // Optional // Nesting level within the main schema
 						);
 
