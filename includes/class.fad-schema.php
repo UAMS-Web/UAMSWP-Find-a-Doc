@@ -10641,7 +10641,7 @@
 
 												$provider_specific_clinical_organization = uamswp_fad_schema_brand_organization_list(
 													$entity, // int // Required // Post ID
-													$provider_specific_clinical_organization = array() // array // Optional // Pre-existing list array for brand organizations to which to add additional items
+													$provider_specific_clinical_organization // array // Optional // Pre-existing list array for brand organizations to which to add additional items
 												);
 
 										// Pass the values to common schema properties template part
