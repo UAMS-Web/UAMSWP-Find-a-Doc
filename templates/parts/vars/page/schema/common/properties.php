@@ -1688,6 +1688,17 @@
 
 					$schema_common_isPartOf_MedicalWebPage = array();
 
+				// UAMSHealth.com as WebSite
+
+					if ( !isset($schema_base_website_uams_health) ) {
+
+						$schema_base_website_uams_health = uamswp_fad_schema_uamshealth_website(
+							$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
+							$nesting_level // int // Optional // Nesting level within the main schema
+						);
+
+					}
+
 				// Merge in UAMSHealth.com WebSite values
 
 					$schema_common_isPartOf_MedicalWebPage = uamswp_fad_schema_merge_values(

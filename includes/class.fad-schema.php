@@ -9146,6 +9146,7 @@
 
 				// Base schema function variables
 
+					$schema_base_website_uams_health = array(); // Prevent this function from being called repeatedly from within the following included template part
 					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/base_function.php' );
 
 				// List of valid types
