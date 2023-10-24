@@ -164,7 +164,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -192,7 +192,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -221,7 +221,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -249,7 +249,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -279,7 +279,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -307,7 +307,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -335,7 +335,7 @@
 		 *     - ItemList
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -481,7 +481,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -570,7 +570,7 @@
 		 *     - Audience
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Add to common schema properties array
 
@@ -610,7 +610,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -815,7 +815,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -851,7 +851,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -891,7 +891,7 @@
 		 * definitions.
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -918,7 +918,7 @@
 		 *     - Number
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -974,7 +974,7 @@
 		 *     - Country
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -1007,7 +1007,7 @@
 		 * definitions.
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -1035,7 +1035,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -1071,7 +1071,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -1115,7 +1115,7 @@
 		 *     - DateTime
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -1146,7 +1146,7 @@
 		 *     - DateTime
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -1534,7 +1534,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -1680,7 +1680,7 @@
 		 *     - URL
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -1727,7 +1727,7 @@
 		 *     - Date
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -1787,7 +1787,7 @@
 		 *     - Place
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -1822,7 +1822,7 @@
 		 *     - WebPageElement
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -1907,7 +1907,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -2166,7 +2166,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -2222,7 +2222,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -2294,7 +2294,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -2407,7 +2407,7 @@
 		 *     - MediaSubscription
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -2448,7 +2448,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -2496,7 +2496,7 @@
 		 *     - URL
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -2529,7 +2529,7 @@
 		 * definitions.
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get current date
 
@@ -2584,7 +2584,7 @@
 		 * definitions.
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -2665,7 +2665,7 @@
 		 *     - Boolean
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Define value
 
@@ -2691,7 +2691,7 @@
 		 *     - Organization
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
@@ -2799,7 +2799,7 @@
 		 *     - Event
 		 */
 
-		if ( $nesting_level == 0 ) {
+		if ( $nesting_level <= 1 ) {
 
 			// Get values
 
