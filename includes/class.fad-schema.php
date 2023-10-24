@@ -8511,6 +8511,7 @@
 							// Get sameAs repeater field value
 
 								$sameAs_repeater = get_field( 'schema_sameas', $term ) ?? null;
+								$sameAs = null;
 
 							// Add each item to sameAs property values array
 
