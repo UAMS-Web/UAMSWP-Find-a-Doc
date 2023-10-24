@@ -33587,9 +33587,16 @@
 			if (
 				isset($value['@id'])
 				&&
-				in_array(
-					$value['@id'],
-					$node_identifier_list
+				(
+					in_array(
+						$value['@id'],
+						$node_identifier_list
+					)
+					||
+					in_array(
+						array( '@id' => $value['@id'] ),
+						$node_identifier_list
+					)
 				)
 			) {
 
@@ -33646,160 +33653,6 @@
 
 					}
 
-			} elseif (
-				isset($reference)
-				&&
-				!empty($reference)
-			) {
-
-				// Set the property value
-
-					if (
-						isset($property)
-						&&
-						!empty($property)
-					) {
-
-						/*
-
-							If a node identifier reference variable with a value exists ...
-							and if the property variable already has a value ...
-							then merge an array containing that node identifier into the property array
-
-						*/
-
-						$property = array_merge(
-							( ( is_array($property) && array_is_list($property) ) ? $property : array($property) ),
-							( ( is_array($reference) && array_is_list($reference) ) ? $reference : array($reference) )
-						);
-
-						if ( $property ) {
-
-							$property = array_filter($property);
-							$property = array_unique( $property, SORT_REGULAR );
-							$property = array_values($property);
-
-							if ( !isset($property['@id']) ) {
-
-								uamswp_fad_flatten_multidimensional_array($property);
-
-							}
-
-						}
-
-					} else {
-
-						/*
-
-							If a node identifier reference variable with a value exists ...
-							and if the property variable does not already have a value ...
-							then set the property value using the node identifier
-
-						*/
-
-						$property = $reference;
-
-					}
-
-				// Add the node identifier to the list of existing node identifiers
-
-					if (
-						is_array($reference)
-						&&
-						array_is_list($reference)
-					) {
-
-						/*
-
-							If a node identifier reference variable with a value exists ...
-							and if the node identifier reference variable is a list array ...
-							then loop through each row in that array
-
-						*/
-
-						foreach ( $reference as $item ) {
-
-							if (
-								!in_array(
-									$item['@id'],
-									$node_identifier_list
-								)
-							) {
-
-								/*
-
-									If a node identifier reference variable with a value exists ...
-									and if the node identifier reference variable is a list array ...
-									and if the node identifier in the current row of that array is not already in the list of existing node identifiers ...
-									then add that node identifier to the list of existing node identifiers
-
-								*/
-
-								$node_identifier_list[] = $item['@id'];
-
-							}
-
-						}
-
-					} elseif ( is_array($reference) ) {
-
-						if (
-							isset($reference['@id'])
-							&&
-							!empty($reference['@id'])
-						) {
-
-							if (
-								!in_array(
-									$reference['@id'],
-									$node_identifier_list
-								)
-							) {
-
-								/*
-
-									If a node identifier reference variable with a value exists ...
-									and if the node identifier reference variable is an associative array ...
-									and if the '@id' key in that array has a value ...
-									and if the node identifier in that variable is not already in the list of existing node identifiers ...
-									then add that node identifier to the list of existing node identifiers
-
-								*/
-
-								$node_identifier_list[] = $reference['@id'];
-
-							}
-
-						}
-
-					} elseif ( is_string($reference) ) {
-
-						if ( !empty($reference) ) {
-
-							if (
-								!in_array(
-									$reference,
-									$node_identifier_list
-								)
-							) {
-
-								/*
-
-									If a node identifier reference variable with a value exists ...
-									and if the node identifier reference variable is a non-empty string ...
-									and if the node identifier in that variable is not already in the list of existing node identifiers ...
-									then add that node identifier to the list of existing node identifiers
-
-								*/
-
-								$node_identifier_list[] = $reference;
-
-							}
-
-						}
-
-					}
-
 			} else {
 
 				if (
@@ -33849,30 +33702,37 @@
 
 				}
 
-				// Define reference to the @id
+				// Add node identifiers (@id) to the list of node identifiers already defined in the schema
 
-					if (
-						(
-							!isset($reference)
-							||
-							empty($reference)
-						)
-						&&
-						!empty($value)
-						&&
-						is_array($value)
-					) {
+					// Get node identifiers from value
 
-						/*
+						$value_node_identifiers = uamswp_fad_schema_node_references(is_array($value) ? $value : array($value));
 
-							If a node identifier reference variable with a value does not exist ...
-							then define the node identifier reference variable
+					// Make sure node identifiers arrays are list arrays
 
-						*/
+						$value_node_identifiers = array_is_list($value_node_identifiers) ? $value_node_identifiers : array($value_node_identifiers);
+						$node_identifier_list = array_is_list($node_identifier_list) ? $node_identifier_list : array($node_identifier_list);
 
-						$reference = uamswp_fad_schema_node_references($value);
+					// Merge value node identifiers into the list of node identifiers already defined in the schema
 
-					}
+						$node_identifier_list = array_merge(
+							$node_identifier_list,
+							$value_node_identifiers
+						);
+
+					// De-duplicate the list of node identifiers already defined in the schema
+
+						if (
+							$node_identifier_list
+							&&
+							is_array($node_identifier_list)
+							&&
+							array_is_list($node_identifier_list)
+						) {
+
+							$node_identifier_list = array_unique( $node_identifier_list, SORT_REGULAR );
+
+						}
 
 			}
 
@@ -33950,25 +33810,27 @@
 					$property_value
 				) {
 
-					// Check list array for existing node identifiers
+					// Check array for existing node identifiers
 
-						/*
-
-							If there is no nesting level limit or if the current nesting level is at/under the limit ....
-							and if the specific schema property is a valid property for the schema type ...
-							and if the property value exists ...
-							and if the property value is a list array ...
-							then loop through the rows in that array.
-								Check the current row for if its node identifier is already on the list of node identifiers.
-								If so, replace the full value with only the node identifier.
-
-						*/
+						/**
+						 * If there is no nesting level limit or if the current nesting level is at/under the limit ...
+						 * and if the specific schema property is a valid property for the schema type ...
+						 * and if the property value exists ...
+						 */
 
 						if (
 							is_array($property_value)
 							&&
 							array_is_list($property_value)
 						) {
+
+							/**
+							 * ... and if the property value is a list array ...
+							 * then loop through the rows in that array.
+							 *
+							 * Check the current row for if its node identifier is already on the list of node identifiers.
+							 * If so, replace the full value of that row with only the node identifier.
+							 */
 
 							$property_value_temp = array();
 
@@ -33987,47 +33849,31 @@
 
 							$property_value = $property_value_temp;
 
-						}
+						} elseif ( is_array($property_value) ) {
 
-					// Add the value to the property
+							/**
+							 * ... and if the property value is an associative array.
+							 *
+							 * Check the array for if its node identifier is already on the list of node identifiers.
+							 * If so, replace the full value with only the node identifier.
+							 */
 
-						/*
-
-							If there is no nesting level limit or if the current nesting level is at/under the limit ....
-							and if the specific schema property is a valid property for the schema type ...
-							and if the property value exists ...
-							then add the value to the property
-
-						*/
-
-						if ( is_array($property_value) ) {
-
-							/*
-
-								If the value is an array ...
-								then first check for node identifier references before adding it to the property
-
-							*/
+							$property_value_temp = array();
 
 							uamswp_fad_schema_values_or_reference(
-								$schema_type_list[$property_name], // Property variable
+								$property_value_temp, // Property variable
 								$property_value, // Full value variable
 								$property_value_ref, // @id reference variable
 								$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 							);
 
-						} else {
-
-							/*
-
-								If the value is not an array ...
-								then add the value to the property with no prior checks.
-
-							*/
-
-							$schema_type_list[$property_name] = $property_value;
+							$property_value = $property_value_temp;
 
 						}
+
+					// Add the value to the property
+
+						$schema_type_list[$property_name] = $property_value;
 
 				}
 
