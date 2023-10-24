@@ -5539,7 +5539,22 @@
 							 *     - URL
 							 */
 
-							$additionalType = get_field( 'schema_additionalType', $term ) ?? null;
+							// Get additionalType repeater field value
+
+								$additionalType_repeater = get_field( 'schema_additionalType', $term ) ?? null;
+
+							// Add each item to an array
+
+								$additionalType = null;
+
+								if ( $additionalType_repeater ) {
+
+									$additionalType = uamswp_fad_schema_additionaltype(
+										$additionalType_repeater, // additionalType repeater field
+										'schema_additionalType_uri' // additionalType item field name
+									);
+
+								}
 
 							if ( $additionalType ) {
 
@@ -5604,7 +5619,22 @@
 							 *     - Text
 							 */
 
-							$alternateName = get_field( 'schema_alternatename', $term ) ?? null;
+							// Get alternateName repeater field value
+
+								$alternateName_repeater = get_field( 'schema_alternatename', $term ) ?? null;
+
+							// Add each item to alternateName property values array
+
+								$alternateName = null;
+
+								if ( $alternateName_repeater ) {
+
+									$alternateName = uamswp_fad_schema_alternatename(
+										$alternateName_repeater, // array // Required // alternateName repeater field
+										'schema_alternatename_text' // string // Optional // alternateName item field name
+									);
+
+								}
 
 							if ( $alternateName ) {
 
@@ -8511,9 +8541,10 @@
 							// Get sameAs repeater field value
 
 								$sameAs_repeater = get_field( 'schema_sameas', $term ) ?? null;
-								$sameAs = null;
 
 							// Add each item to sameAs property values array
+
+								$sameAs = null;
 
 								if ( $sameAs_repeater ) {
 
