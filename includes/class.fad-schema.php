@@ -9077,17 +9077,19 @@
 
 						}
 
+						$output = $brand_org;
+
 					// Get brand organization slug(s)
 
 						// Check for multiple brand organization field value
 
-							$field_value = get_field( 'schema_brandorg_multiple', $term ) ?? null;
+							$field_value = get_field( 'schema_brandorg_multiple', $entity ) ?? null;
 
 						// If no multiple brand organization field value, check for single brand organization value
 
 							if ( !$field_value ) {
 
-								$field_value = get_field( 'schema_brandorg', $term ) ?? null;
+								$field_value = get_field( 'schema_brandorg', $entity ) ?? null;
 
 								if ( $field_value ) {
 
@@ -9101,7 +9103,7 @@
 
 						if ( !$field_value ) {
 
-							return $brand_org;
+							return $output;
 
 						}
 
@@ -9113,15 +9115,15 @@
 
 								// Construct the brand organization items
 
-									$brand_org_temp = uamswp_fad_schema_brand_organization(
+									$output_temp = uamswp_fad_schema_brand_organization(
 										$slug // string // Required // Brand Organization term slug
 									);
 
 								// If the item is valid, add it to the list
 
-									if ( $brand_org_temp ) {
+									if ( $output_temp ) {
 
-										$brand_org[] = $brand_org_temp;
+										$output[] = $output_temp;
 
 									}
 
