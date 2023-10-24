@@ -8372,16 +8372,56 @@
 							 *     - Organization
 							 */
 
-							$parent_term = wp_get_term_taxonomy_parent_id( $term->term_id, 'brand_organization_uams' );
-							$parentOrganization = null;
+							// Get the term ID
 
-							if ( is_object($parent_term) ) {
+								$term_id = $term->term_id;
 
-								$parentOrganization = uamswp_fad_schema_brand_organization(
-									$parent_term->slug // string // Required // Brand Organization term slug
-								);
+							// Get the parent term ID, object and slug
 
-							}
+								// Define the list of taxonomy names to check
+
+									$taxonomy_name = array(
+										'brand_organization',
+										'brand_organization_uams'
+									);
+
+								$parent_term_id = null;
+								$parent_term = null;
+								$parent_term_slug = null;
+
+								foreach ( $taxonomy_name as $name ) {
+
+									$parent_term_id = wp_get_term_taxonomy_parent_id( $term_id, $name ) ?? null;
+
+									if ( $parent_term_id ) {
+
+										$parent_term = get_term( $parent_term_id, $name ) ?? null;
+
+									}
+
+									// If term is valid, break the foreach loop
+
+										if ( is_object($parent_term) ) {
+
+											$parent_term_slug = $parent_term->slug ?? null;
+
+											break;
+
+										}
+
+								}
+
+							// Construct the Organization schema for the parent
+
+								$parentOrganization = null;
+
+								if ( $parent_term_slug ) {
+
+									$parentOrganization = uamswp_fad_schema_brand_organization(
+										$parent_term_slug // string // Required // Brand Organization term slug
+									);
+
+								}
 
 							if ( $parentOrganization ) {
 
