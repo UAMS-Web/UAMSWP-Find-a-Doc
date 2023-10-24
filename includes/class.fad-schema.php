@@ -8014,7 +8014,7 @@
 
 								// Get medicalSpecialty multiselect field value
 
-									$medicalSpecialty_multiselect = get_field( 'schema_medicalspecialty_multiple', $entity ) ?? null;
+									$medicalSpecialty_multiselect = get_field( 'schema_medicalspecialty_multiple', $term ) ?? null;
 
 							// Format value
 
@@ -9049,13 +9049,13 @@
 
 						// Check for multiple brand organization field value
 
-							$field_value = get_field( 'schema_brandorg_multiple', $entity ) ?? null;
+							$field_value = get_field( 'schema_brandorg_multiple', $term ) ?? null;
 
 						// If no multiple brand organization field value, check for single brand organization value
 
 							if ( !$field_value ) {
 
-								$field_value = get_field( 'schema_brandorg', $entity ) ?? null;
+								$field_value = get_field( 'schema_brandorg', $term ) ?? null;
 
 								if ( $field_value ) {
 
