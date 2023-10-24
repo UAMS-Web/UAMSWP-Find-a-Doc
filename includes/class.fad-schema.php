@@ -5411,13 +5411,32 @@
 
 						$output = array();
 
+					// Define the list of taxonomy names to check
+
+						$taxonomy_name = array(
+							'brand_organization',
+							'brand_organization_uams'
+						);
+
 					// Get the term object
 
-						$term = get_term_by(
-							'slug', // string // Required // Either 'slug', 'name', 'term_id' (or 'id', 'ID'), or 'term_taxonomy_id'.
-							$slug, // string|int // Required // Search for this term value.
-							'brand_organization_uams' // string // Optional // Taxonomy name. Optional, if $field is 'term_taxonomy_id'.
-						);
+						foreach ( $taxonomy_name as $name ) {
+
+							$term = get_term_by(
+								'slug', // string // Required // Either 'slug', 'name', 'term_id' (or 'id', 'ID'), or 'term_taxonomy_id'.
+								$slug, // string|int // Required // Search for this term value.
+								$name // string // Optional // Taxonomy name. Optional, if $field is 'term_taxonomy_id'.
+							);
+
+							// If term is valid, break the foreach loop
+
+								if ( is_object($term) ) {
+
+									break;
+
+								}
+
+						}
 
 					// If term is invalid, bail early
 
