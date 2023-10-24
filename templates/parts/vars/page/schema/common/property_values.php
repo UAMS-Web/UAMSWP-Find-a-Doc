@@ -76,7 +76,6 @@
 	// UAMS Health Website Language
 
 		$schema_common_english = array(
-			'@id' => $schema_base_org_uams_health_url . '#inLanguage',
 			'@type' => 'Language',
 			'alternateName' => 'en',
 			'name' => 'English',
