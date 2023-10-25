@@ -664,7 +664,7 @@
 
 							remove_action( 'save_post', 'expertise_save_post_after', 50 );
 
-						// Update the post with new post data
+						// Set the post thumbnail (featured image) for the given post
 
 							set_post_thumbnail(
 								$post_id, // int|WP_Post // Required // Post ID or post object where thumbnail should be attached.
