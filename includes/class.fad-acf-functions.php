@@ -650,16 +650,34 @@
 
 				// Update the post with the new thumbnail value
 
+					/**
+					 * Source: https://support.advancedcustomfields.com/forums/topic/set-wordpress-excerpt-and-post-thumbnail-based-on-custom-field/#post-49965
+					 */
+
 					if (
 						!empty($post_id) // If the post ID is not empty ...
 						&&
 						$post_thumbnail // and if the post thumbnail value exists ...
 					) {
 
-						$post_array = array( $post_id, $post_thumbnail );
-						remove_action('save_post', 'expertise_save_post_after', 50); // Unhook this function so it doesn't loop infinitely
-						set_post_thumbnail( $post_array ); // Update the post with new post data
-						add_action( 'save_post', 'expertise_save_post_after', 50); // Re-hook this function
+						// Unhook this function so it doesn't loop infinitely
+
+							remove_action( 'save_post', 'expertise_save_post_after', 50 );
+
+						// Define the arguments for set_post_thumbnail
+
+							$post_array = array(
+								$post_id, // int|WP_Post // Required // Post ID or post object where thumbnail should be attached.
+								$post_thumbnail // int // Required // Thumbnail to attach.
+							);
+
+						// Update the post with new post data
+
+							set_post_thumbnail( $post_array );
+
+						// Re-hook this function
+
+							add_action( 'save_post', 'expertise_save_post_after', 50 );
 
 					}
 
@@ -1229,19 +1247,36 @@
 
 			// Update the post with the new excerpt value
 
+				/**
+				 * Source: https://support.advancedcustomfields.com/forums/topic/set-wordpress-excerpt-and-post-thumbnail-based-on-custom-field/#post-49965
+				 */
+
 				if (
 					!empty($post_id) // If the post ID is not empty ...
 					&&
 					$post_excerpt // and if the post excerpt value exists ...
 				) {
 
-					$post_array = array(
-						'ID' => $post_id,
-						'post_excerpt' => $post_excerpt
-					);
-					remove_action('save_post', 'custom_excerpt_acf', 50); // Unhook this function so it doesn't loop infinitely
-					wp_update_post( $post_array ); // Update the post with new post data
-					add_action( 'save_post', 'custom_excerpt_acf', 50); // Re-hook this function
+					// Unhook this function so it doesn't loop infinitely
+
+						remove_action( 'save_post', 'custom_excerpt_acf', 50 );
+
+					// Define an array of elements that make up a post to update or insert.
+
+						$post_array = array(
+							'ID' => $post_id,
+							'post_excerpt' => $post_excerpt
+						);
+
+					// Update the post with new post data
+
+						wp_update_post(
+							$post_array // array|object // Optional // Post data. Arrays are expected to be escaped, objects are not. See wp_insert_post() for accepted arguments. // Default array()
+						);
+
+					// Re-hook this function
+
+						add_action( 'save_post', 'custom_excerpt_acf', 50 );
 
 				}
 
