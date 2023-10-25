@@ -24201,6 +24201,61 @@
 
 											}
 
+								// Specific Clinical Organizations
+
+									/*
+
+										e.g., Arkansas Children's, Baptist Health, Central Arkansas Veterans Healthcare System
+
+									*/
+
+									// List of properties that reference organizations (i.e., 'Organization')
+
+										$expertise_organization_common = array(
+											'affiliation',
+											'brand',
+											'hospitalAffiliation',
+											'memberOf',
+											'parentOrganization',
+											'worksFor'
+										);
+
+									if (
+										array_intersect(
+											$expertise_properties_map[$MedicalWebPage_type]['properties'],
+											$expertise_organization_common
+										)
+										||
+										array_intersect(
+											$expertise_properties_map[$MedicalEntity_type]['properties'],
+											$expertise_organization_common
+										)
+									) {
+
+										// Get values
+
+											// Query: Whether to override the default clinical brand organization for this entity
+
+												$expertise_specific_clinical_organization_override = false;
+
+											// Get list of Third-Party Brand Organizations
+
+												// Base array
+
+													$expertise_specific_clinical_organization = array();
+
+												$expertise_specific_clinical_organization = uamswp_fad_schema_brand_organization_list(
+													$entity, // int // Required // Post ID
+													$expertise_specific_clinical_organization // array // Optional // Pre-existing list array for brand organizations to which to add additional items
+												);
+
+										// Pass the values to common schema properties template part
+
+											$schema_common_specific_brand_organization_override = $expertise_specific_clinical_organization_override; // Query for whether to override common clinical organization(s) with those specific to the current entity
+											$schema_common_specific_brand_organization = $expertise_specific_clinical_organization; // Clinical organization(s) specific to the current entity
+
+									}
+
 								// Add common properties
 
 									// Pass variables to template part
