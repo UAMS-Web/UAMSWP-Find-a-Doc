@@ -423,7 +423,7 @@
 
 						}
 
-					// Set the provider's region and portal values
+					// Set the desired values from each associated location
 
 						// Region
 
