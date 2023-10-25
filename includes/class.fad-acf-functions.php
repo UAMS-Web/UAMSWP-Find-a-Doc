@@ -511,6 +511,59 @@
 					wp_update_post( $post_array ); // Update the post with new post data
 					add_action( 'save_post', 'custom_excerpt_acf', 50); // Re-hook this function
 
+				// Add values from the associated locations
+
+					// Get the list of locations associated with the area of expertise
+
+						$locations = $_POST['acf']['field_expertise_locations'];
+
+						// Get the desired values from each associated location
+
+							if ( $locations ) {
+
+								// Base arrays
+
+									$region = array();
+									$brand_organization = array();
+
+								foreach ( $locations as $location ) {
+
+									// Get the values
+
+										// Region
+
+											$location_region = get_field( 'location_region', $location ) ?? null;
+
+											if ( $location_region ) {
+
+												$region[] = $location_region;
+
+											}
+
+										// Third-Party Brand Organization
+
+											$location_brand_organization = get_field( 'schema_brandorg', $location ) ?? null;
+
+											if ( $location_brand_organization ) {
+
+												$brand_organization[] = $location_brand_organization;
+
+											}
+
+								} // endforeach
+
+							} // endif ( $locations )
+
+						// Set the desired values from each associated location
+
+							// Region
+
+								$_POST['acf']['field_expertise_region'] = $region;
+
+							// Third-Party Brand Organization
+
+								$_POST['acf']['field_schema_brandorg_multiple'] = $brand_organization;
+
 			}
 
 		// Fire after saving data to post
