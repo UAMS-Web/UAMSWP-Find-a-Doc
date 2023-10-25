@@ -2505,7 +2505,10 @@
 					null, // mixed // Optional // measurementTechnique property value
 					null, // int // Optional // minValue property value
 					'Google customer ID', // string // Optional // name property value
-					'https://support.google.com/google-ads/answer/29198', // string // Optional // propertyID property value
+					array(
+						'https://support.google.com/google-ads/answer/29198', // Google Ads Help Glossary entry for 'Customer ID: Definition'
+						'https://www.wikidata.org/wiki/Property:P3749' // Wikidata entry for the 'Google Maps Customer ID' property
+					), // string // Optional // propertyID property value
 					null, // string // Optional // unitCode property value
 					null, // string // Optional // unitText property value
 					null, // string // Optional // url property value
