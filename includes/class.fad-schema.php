@@ -2047,7 +2047,7 @@
 			$measurementTechnique = null, // mixed // Optional // measurementTechnique property value
 			int $minValue = null, // int // Optional // minValue property value
 			string $name = null, // string // Optional // name property value
-			string $propertyID = null, // string // Optional // propertyID property value
+			$propertyID = null, // string|array // Optional // propertyID property value
 			string $unitCode = null, // string // Optional // unitCode property value
 			string $unitText = null, // string // Optional // unitText property value
 			string $url = null, // string // Optional // url property value
@@ -2058,14 +2058,32 @@
 
 			/*
 
-				If $value is an array, a schema item will be added for each row in the array.
+				# Arguments Notes
 
-				If there are other property values that should be paired with a specific
-				'value' value, then this function should be called within a foreach loop, with
-				the values of those properties being added individually within each foreach
-				iteration.
+				$value
+
+					If $value is an array, a schema item will be added for each row in the array.
+
+					If there are other property values that should be paired with a specific
+					'value' value, then this function should be called within a foreach loop, with
+					the values of those properties being added individually within each foreach
+					iteration.
+
+				$propertyID
+
+					If $propertyID is an array, it is expected to be a list array with each value
+					being a string.
+
+					Example:
+
+					$propertyID = array(
+						'https://foo.com/bar',
+						'https://baz.com/qux'
+					);
 
 				**********
+
+				# Schema.org Definitions
 
 				A property-value pair (e.g., representing a feature of a product or place). Use
 				the 'name' property for the name of the property. If there is an additional
@@ -2427,7 +2445,7 @@
 								null, // mixed // Optional // measurementTechnique property value
 								null, // int // Optional // minValue property value
 								'National Provider Identifier', // string // Optional // name property value
-								'https://www.wikidata.org/wiki/Q6975101', // string // Optional // propertyID property value
+								'https://www.wikidata.org/wiki/Q6975101', // string|array // Optional // propertyID property value
 								null, // string // Optional // unitCode property value
 								null, // string // Optional // unitText property value
 								'https://npiregistry.cms.hhs.gov/provider-view/' . $item, // string // Optional // url property value
@@ -2508,7 +2526,7 @@
 					array(
 						'https://support.google.com/google-ads/answer/29198', // Google Ads Help Glossary entry for 'Customer ID: Definition'
 						'https://www.wikidata.org/wiki/Property:P3749' // Wikidata entry for the 'Google Maps Customer ID' property
-					), // string // Optional // propertyID property value
+					), // string|array // Optional // propertyID property value
 					null, // string // Optional // unitCode property value
 					null, // string // Optional // unitText property value
 					null, // string // Optional // url property value
@@ -7581,7 +7599,7 @@
 											null, // mixed // Optional // measurementTechnique property value
 											null, // int // Optional // minValue property value
 											'Data Universal Numbering System number', // string // Optional // name property value
-											'https://www.wikidata.org/wiki/Q246386', // string // Optional // propertyID property value
+											'https://www.wikidata.org/wiki/Q246386', // string|array // Optional // propertyID property value
 											null, // string // Optional // unitCode property value
 											null, // string // Optional // unitText property value
 											null, // string // Optional // url property value
@@ -7606,7 +7624,7 @@
 											null, // mixed // Optional // measurementTechnique property value
 											null, // int // Optional // minValue property value
 											'Global Location Number', // string // Optional // name property value
-											'https://www.wikidata.org/wiki/Q1258830', // string // Optional // propertyID property value
+											'https://www.wikidata.org/wiki/Q1258830', // string|array // Optional // propertyID property value
 											null, // string // Optional // unitCode property value
 											null, // string // Optional // unitText property value
 											null, // string // Optional // url property value
@@ -7634,7 +7652,7 @@
 											null, // mixed // Optional // measurementTechnique property value
 											null, // int // Optional // minValue property value
 											'International Standard Industrial Classification Rev. 4', // string // Optional // name property value
-											'https://www.wikidata.org/wiki/Q112111674', // string // Optional // propertyID property value
+											'https://www.wikidata.org/wiki/Q112111674', // string|array // Optional // propertyID property value
 											null, // string // Optional // unitCode property value
 											null, // string // Optional // unitText property value
 											null, // string // Optional // url property value
@@ -7664,7 +7682,7 @@
 											null, // mixed // Optional // measurementTechnique property value
 											null, // int // Optional // minValue property value
 											'Legal Entity Identifier', // string // Optional // name property value
-											'https://www.wikidata.org/wiki/Q6517388', // string // Optional // propertyID property value
+											'https://www.wikidata.org/wiki/Q6517388', // string|array // Optional // propertyID property value
 											null, // string // Optional // unitCode property value
 											null, // string // Optional // unitText property value
 											null, // string // Optional // url property value
@@ -7695,7 +7713,7 @@
 											null, // mixed // Optional // measurementTechnique property value
 											null, // int // Optional // minValue property value
 											'North American Industry Classification System code', // string // Optional // name property value
-											'https://www.wikidata.org/wiki/Q3509282', // string // Optional // propertyID property value
+											'https://www.wikidata.org/wiki/Q3509282', // string|array // Optional // propertyID property value
 											null, // string // Optional // unitCode property value
 											null, // string // Optional // unitText property value
 											null, // string // Optional // url property value
@@ -7724,7 +7742,7 @@
 											null, // mixed // Optional // measurementTechnique property value
 											null, // int // Optional // minValue property value
 											'Taxpayer Identification Number', // string // Optional // name property value
-											'https://www.wikidata.org/wiki/Q1444804', // string // Optional // propertyID property value
+											'https://www.wikidata.org/wiki/Q1444804', // string|array // Optional // propertyID property value
 											null, // string // Optional // unitCode property value
 											null, // string // Optional // unitText property value
 											null, // string // Optional // url property value
@@ -7753,7 +7771,7 @@
 											null, // mixed // Optional // measurementTechnique property value
 											null, // int // Optional // minValue property value
 											'VAT identification number', // string // Optional // name property value
-											'https://www.wikidata.org/wiki/Q2319042', // string // Optional // propertyID property value
+											'https://www.wikidata.org/wiki/Q2319042', // string|array // Optional // propertyID property value
 											null, // string // Optional // unitCode property value
 											null, // string // Optional // unitText property value
 											null, // string // Optional // url property value
@@ -15140,7 +15158,7 @@
 																null, // mixed // Optional // measurementTechnique property value
 																null, // int // Optional // minValue property value
 																'Data Universal Numbering System number', // string // Optional // name property value
-																'https://www.wikidata.org/wiki/Q246386', // string // Optional // propertyID property value
+																'https://www.wikidata.org/wiki/Q246386', // string|array // Optional // propertyID property value
 																null, // string // Optional // unitCode property value
 																null, // string // Optional // unitText property value
 																null, // string // Optional // url property value
@@ -15163,7 +15181,7 @@
 																null, // mixed // Optional // measurementTechnique property value
 																null, // int // Optional // minValue property value
 																'Global Location Number', // string // Optional // name property value
-																'https://www.wikidata.org/wiki/Q1258830', // string // Optional // propertyID property value
+																'https://www.wikidata.org/wiki/Q1258830', // string|array // Optional // propertyID property value
 																null, // string // Optional // unitCode property value
 																null, // string // Optional // unitText property value
 																null, // string // Optional // url property value
@@ -15189,7 +15207,7 @@
 																null, // mixed // Optional // measurementTechnique property value
 																null, // int // Optional // minValue property value
 																'International Standard Industrial Classification Rev. 4', // string // Optional // name property value
-																'https://www.wikidata.org/wiki/Q112111674', // string // Optional // propertyID property value
+																'https://www.wikidata.org/wiki/Q112111674', // string|array // Optional // propertyID property value
 																null, // string // Optional // unitCode property value
 																null, // string // Optional // unitText property value
 																null, // string // Optional // url property value
@@ -15217,7 +15235,7 @@
 																null, // mixed // Optional // measurementTechnique property value
 																null, // int // Optional // minValue property value
 																'Legal Entity Identifier', // string // Optional // name property value
-																'https://www.wikidata.org/wiki/Q6517388', // string // Optional // propertyID property value
+																'https://www.wikidata.org/wiki/Q6517388', // string|array // Optional // propertyID property value
 																null, // string // Optional // unitCode property value
 																null, // string // Optional // unitText property value
 																null, // string // Optional // url property value
@@ -15246,7 +15264,7 @@
 																null, // mixed // Optional // measurementTechnique property value
 																null, // int // Optional // minValue property value
 																'North American Industry Classification System code', // string // Optional // name property value
-																'https://www.wikidata.org/wiki/Q3509282', // string // Optional // propertyID property value
+																'https://www.wikidata.org/wiki/Q3509282', // string|array // Optional // propertyID property value
 																null, // string // Optional // unitCode property value
 																null, // string // Optional // unitText property value
 																null, // string // Optional // url property value
@@ -15275,7 +15293,7 @@
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
 																	'Taxpayer Identification Number', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q1444804', // string // Optional // propertyID property value
+																	'https://www.wikidata.org/wiki/Q1444804', // string|array // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
@@ -15301,7 +15319,7 @@
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
 																	'Employer Identification Number', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q2397748', // string // Optional // propertyID property value
+																	'https://www.wikidata.org/wiki/Q2397748', // string|array // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
@@ -15328,7 +15346,7 @@
 																null, // mixed // Optional // measurementTechnique property value
 																null, // int // Optional // minValue property value
 																'VAT identification number', // string // Optional // name property value
-																'https://www.wikidata.org/wiki/Q2319042', // string // Optional // propertyID property value
+																'https://www.wikidata.org/wiki/Q2319042', // string|array // Optional // propertyID property value
 																null, // string // Optional // unitCode property value
 																null, // string // Optional // unitText property value
 																null, // string // Optional // url property value
@@ -21734,7 +21752,7 @@
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
 																	'Data Universal Numbering System number', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q246386', // string // Optional // propertyID property value
+																	'https://www.wikidata.org/wiki/Q246386', // string|array // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
@@ -21759,7 +21777,7 @@
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
 																	'Global Location Number', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q1258830', // string // Optional // propertyID property value
+																	'https://www.wikidata.org/wiki/Q1258830', // string|array // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
@@ -21787,7 +21805,7 @@
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
 																	'International Standard Industrial Classification Rev. 4', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q112111674', // string // Optional // propertyID property value
+																	'https://www.wikidata.org/wiki/Q112111674', // string|array // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
@@ -21817,7 +21835,7 @@
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
 																	'Legal Entity Identifier', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q6517388', // string // Optional // propertyID property value
+																	'https://www.wikidata.org/wiki/Q6517388', // string|array // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
@@ -21848,7 +21866,7 @@
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
 																	'North American Industry Classification System code', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q3509282', // string // Optional // propertyID property value
+																	'https://www.wikidata.org/wiki/Q3509282', // string|array // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
@@ -21879,7 +21897,7 @@
 																		null, // mixed // Optional // measurementTechnique property value
 																		null, // int // Optional // minValue property value
 																		'Taxpayer Identification Number', // string // Optional // name property value
-																		'https://www.wikidata.org/wiki/Q1444804', // string // Optional // propertyID property value
+																		'https://www.wikidata.org/wiki/Q1444804', // string|array // Optional // propertyID property value
 																		null, // string // Optional // unitCode property value
 																		null, // string // Optional // unitText property value
 																		null, // string // Optional // url property value
@@ -21907,7 +21925,7 @@
 																		null, // mixed // Optional // measurementTechnique property value
 																		null, // int // Optional // minValue property value
 																		'Employer Identification Number', // string // Optional // name property value
-																		'https://www.wikidata.org/wiki/Q2397748', // string // Optional // propertyID property value
+																		'https://www.wikidata.org/wiki/Q2397748', // string|array // Optional // propertyID property value
 																		null, // string // Optional // unitCode property value
 																		null, // string // Optional // unitText property value
 																		null, // string // Optional // url property value
@@ -21936,7 +21954,7 @@
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
 																	'VAT identification number', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q2319042', // string // Optional // propertyID property value
+																	'https://www.wikidata.org/wiki/Q2319042', // string|array // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
@@ -22071,7 +22089,7 @@
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
 																	'STA6A', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Property:P8755', // string // Optional // propertyID property value
+																	'https://www.wikidata.org/wiki/Property:P8755', // string|array // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
@@ -22099,7 +22117,7 @@
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
 																	'American Hospital Association Hospital Identifier', // string // Optional // name property value
-																	null, // string // Optional // propertyID property value
+																	null, // string|array // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
@@ -22136,7 +22154,7 @@
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
 																	'Centers for Medicare & Medicaid Services Certification Number', // string // Optional // name property value
-																	null, // string // Optional // propertyID property value
+																	null, // string|array // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
