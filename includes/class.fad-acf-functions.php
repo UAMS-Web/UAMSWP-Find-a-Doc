@@ -227,7 +227,7 @@
 
 				$post_type = get_post_type($post_id);
 
-				// Bail early if no data sent.
+				// Bail early if no data sent or not provider post type
 
 					if (
 						empty( $_POST['acf'] )
@@ -464,7 +464,7 @@
 
 				$post_type = get_post_type($post_id);
 
-				// Bail early if no data sent or not location post type
+				// Bail early if no data sent or not area of expertise post type
 
 					if ( empty($_POST['acf']) || ($post_type != 'expertise') ) {
 						return;
@@ -582,7 +582,7 @@
 
 					$post_type = get_post_type( $post_id );
 
-				// Bail early if no data sent or not location post type
+				// Bail early if no data sent or not area of expertise post type
 
 					if (
 						empty($_POST['acf'])
@@ -637,7 +637,7 @@
 
 				$post_type = get_post_type($post_id);
 
-				// Bail early if no data sent.
+				// Bail early if no data sent or not clinical resource post type
 
 					if (
 						empty($_POST['acf'])
@@ -875,11 +875,13 @@
 
 				$post_type = get_post_type($post_id);
 
-				if ( $post_type != 'location' ) {
+				// Bail early if not location post type
 
-					return;
+					if ( $post_type != 'location' ) {
 
-				}
+						return;
+
+					}
 
 				$post = get_post($post_id);
 				$location_has_parent = get_field('location_parent');
