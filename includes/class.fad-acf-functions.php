@@ -466,8 +466,14 @@
 
 				// Bail early if no data sent or not area of expertise post type
 
-					if ( empty($_POST['acf']) || ($post_type != 'expertise') ) {
+					if (
+						empty( $_POST['acf'] )
+						||
+						( $post_type != 'expertise' )
+					) {
+
 						return;
+
 					}
 
 				// Dynamically populate a hidden field with the value from the field chosen to use for the post excerpt
@@ -585,9 +591,9 @@
 				// Bail early if no data sent or not area of expertise post type
 
 					if (
-						empty($_POST['acf'])
+						empty( $_POST['acf'] )
 						||
-						($post_type != 'expertise')
+						( $post_type != 'expertise' )
 					) {
 
 						return;
@@ -640,9 +646,9 @@
 				// Bail early if no data sent or not clinical resource post type
 
 					if (
-						empty($_POST['acf'])
+						empty( $_POST['acf'] )
 						||
-						($post_type != 'clinical-resource')
+						( $post_type != 'clinical-resource' )
 					) {
 
 						return;
@@ -805,9 +811,9 @@
 				// Bail early if no data sent or not location post type
 
 					if (
-						empty($_POST['acf'])
+						empty( $_POST['acf'] )
 						||
-						($post_type != 'location')
+						( $post_type != 'location' )
 					) {
 
 						return;
