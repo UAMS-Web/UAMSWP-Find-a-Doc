@@ -2463,11 +2463,15 @@
 
 				}
 
-				if ( is_array($google_cid) ) {
+				if (
+					is_array($google_cid)
+					&&
+					count($google_cid) == 1
+				) {
 
-					// If there is only one item, flatten the multi-dimensional array by one step
+					// If there is only one item, get the value of the item
 
-						uamswp_fad_flatten_multidimensional_array($google_cid);
+						$google_cid = reset($google_cid);
 
 				}
 
