@@ -13569,112 +13569,67 @@
 									 *     - Organization
 									 */
 
-									if (
-										in_array(
-											'brand',
-											$provider_properties_map[$MedicalWebPage_type]['properties']
-										)
-										||
-										in_array(
-											'brand',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
-										)
-										||
-										in_array(
-											'brand',
-											$provider_properties_map[$Person_type]['properties']
-										)
-									) {
+									// Get names for keywords property
 
-										// Get values
+										// Base array
 
-											// Base array
+											$provider_brand_keywords = array();
 
-												$provider_brand = array();
+										// brand (WebSite and MedicalWebPage only)
 
-											// Merge in common 'brand' value
+											if (
+												$schema_common_brand_MedicalWebPage
+												&&
+												in_array(
+													'brand',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
+											) {
 
-												if (
-													isset($schema_common_brand)
-													&&
-													!empty($schema_common_brand)
-												) {
-
-													$provider_brand = uamswp_fad_schema_merge_values(
-														$provider_brand, // mixed // Required // Initial schema item property value
-														$schema_common_brand // mixed // Required // Incoming schema item property value
-													);
-
-												}
-
-											// Merge in specific clinical 'Organization' value
-
-												if (
-													isset($provider_specific_clinical_organization)
-													&&
-													!empty($provider_specific_clinical_organization)
-												) {
-
-													$provider_brand = uamswp_fad_schema_merge_values(
-														$provider_brand, // mixed // Required // Initial schema item property value
-														$provider_specific_clinical_organization // mixed // Required // Incoming schema item property value
-													);
-
-												}
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'brand', // string // Required // Name of schema property
-													$provider_brand, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
+												$provider_brand_keywords = uamswp_fad_schema_property_values(
+													$schema_common_brand_MedicalWebPage, // array // Required // Property values from which to extract specific values
+													array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
+													$provider_brand_keywords // mixed // Optional // Pre-existing list to which to add additional items
 												);
 
-											// MedicalBusiness
+											}
 
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalBusiness_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'brand', // string // Required // Name of schema property
-													$provider_brand, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
+										// brand (excluding WebSite and MedicalWebPage)
+
+											if (
+												$schema_common_brand_exclude_MedicalWebPage
+												&&
+												(
+													in_array(
+														'brand',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													||
+													in_array(
+														'brand',
+														$provider_properties_map[$Person_type]['properties']
+													)
+												)
+											) {
+
+												$provider_brand_keywords = uamswp_fad_schema_property_values(
+													$schema_common_brand_exclude_MedicalWebPage, // array // Required // Property values from which to extract specific values
+													array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
+													$provider_brand_keywords // mixed // Optional // Pre-existing list to which to add additional items
 												);
 
-											// Person
+											}
 
-												uamswp_fad_schema_add_to_item_values(
-													$Person_type, // string // Required // The @type value for the schema item
-													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-													'brand', // string // Required // Name of schema property
-													$provider_brand, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+										// Merge brand keywords value into keywords
 
-										// Get names for keywords property
-
-											$provider_brand_keywords = uamswp_fad_schema_property_values(
-												$provider_brand, // array // Required // Property values from which to extract specific values
-												array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-											);
-
-											// Merge brand keywords value into keywords
+											if ( $provider_brand_keywords ) {
 
 												$provider_keywords = uamswp_fad_schema_merge_values(
 													$provider_keywords, // mixed // Required // Initial schema item property value
 													$provider_brand_keywords // mixed // Required // Incoming schema item property value
 												);
 
-									}
+											}
 
 								// containedInPlace
 
@@ -20850,73 +20805,60 @@
 									 *     - Organization
 									 */
 
-									if (
-										in_array(
-											'brand',
-											$location_properties_map[$MedicalWebPage_type]['properties']
-										)
-										||
-										in_array(
-											'brand',
-											$location_properties_map[$LocalBusiness_type]['properties']
-										)
-									) {
+									// Get names for keywords property
 
-										// Get values
+										// Base array
 
-											// Base array
+											$location_brand_keywords = array();
 
-												$location_brand = array();
+										// brand (WebSite and MedicalWebPage only)
 
-											// Merge in common 'brand' value
+											if (
+												$schema_common_brand_MedicalWebPage
+												&&
+												in_array(
+													'brand',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
+											) {
 
-												if (
-													isset($schema_common_brand)
-													&&
-													!empty($schema_common_brand)
-												) {
-
-													$location_brand = uamswp_fad_schema_merge_values(
-														$location_brand, // mixed // Required // Initial schema item property value
-														$schema_common_brand // mixed // Required // Incoming schema item property value
-													);
-
-												}
-
-											// Merge in specific clinical 'Organization' value
-
-												$location_brand = uamswp_fad_schema_merge_values(
-													$location_brand, // mixed // Required // Initial schema item property value
-													$location_specific_clinical_organization // mixed // Required // Incoming schema item property value
+												$location_brand_keywords = uamswp_fad_schema_property_values(
+													$schema_common_brand_MedicalWebPage, // array // Required // Property values from which to extract specific values
+													array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
+													$location_brand_keywords // mixed // Optional // Pre-existing list to which to add additional items
 												);
 
-										// Add to item values
+											}
 
-											// MedicalWebPage
+										// brand (excluding WebSite and MedicalWebPage)
 
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'brand', // string // Required // Name of schema property
-													$location_brand, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
+											if (
+												$schema_common_brand_exclude_MedicalWebPage
+												&&
+												in_array(
+													'brand',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
+											) {
+
+												$location_brand_keywords = uamswp_fad_schema_property_values(
+													$schema_common_brand_exclude_MedicalWebPage, // array // Required // Property values from which to extract specific values
+													array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
+													$location_brand_keywords // mixed // Optional // Pre-existing list to which to add additional items
 												);
 
-											// LocalBusiness
+											}
 
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'brand', // string // Required // Name of schema property
-													$location_brand, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
+										// Merge brand keywords value into keywords
+
+											if ( $location_brand_keywords ) {
+
+												$location_keywords = uamswp_fad_schema_merge_values(
+													$location_keywords, // mixed // Required // Initial schema item property value
+													$location_brand_keywords // mixed // Required // Incoming schema item property value
 												);
 
-									}
+											}
 
 								// contactPoint [WIP]
 
