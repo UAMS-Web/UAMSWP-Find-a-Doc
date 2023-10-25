@@ -2374,9 +2374,21 @@
 		// Add data to an array defining schema data for National Provider Identifier (NPI)
 
 			function uamswp_fad_schema_propertyvalue_npi(
-				$npi, // mixed // Required // National Provider Identifier
+				$npi, // string|array // Required // National Provider Identifier
 				array $list = array() // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 			) {
+
+				/**
+				 * If $npi is an array, it is expected to be a list array with the values being
+				 * the NPI value string.
+				 *
+				 * Example:
+				 *
+				 *     $npi = array(
+				 *         '0123456789',
+				 *         '9876543210'
+				 *     );
+				 */
 
 				if ( !$npi ) {
 
@@ -2384,24 +2396,57 @@
 
 				}
 
-				$list = uamswp_fad_schema_propertyvalue(
-					'NPI', // mixed // Optional // alternateName property value
-					null, // string // Optional // description property value
-					null, // int // Optional // maxValue property value
-					null, // mixed // Optional // measurementMethod property value
-					null, // mixed // Optional // measurementTechnique property value
-					null, // int // Optional // minValue property value
-					'National Provider Identifier', // string // Optional // name property value
-					'https://www.wikidata.org/wiki/Q6975101', // string // Optional // propertyID property value
-					null, // string // Optional // unitCode property value
-					null, // string // Optional // unitText property value
-					'https://npiregistry.cms.hhs.gov/provider-view/' . $npi, // string // Optional // url property value
-					$npi, // mixed // Optional // value property value
-					null, // mixed // Optional // valueReference property value
-					$list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
-				);
+				// Convert string value to array value
 
-				return $list;
+					$npi = is_array($npi) ? $npi : array($npi);
+
+				// De-duplicate the array
+
+					$npi = array_unique( $npi, SORT_REGULAR );
+					$npi = array_values($npi);
+
+				// Base list array
+
+					$list = array();
+
+				// Loop through the values, construct the schema item and add them to the list array
+
+					foreach ( $npi as $item ) {
+
+						if (
+							$item
+							&&
+							is_string($item)
+						) {
+
+							$list = uamswp_fad_schema_propertyvalue(
+								'NPI', // mixed // Optional // alternateName property value
+								null, // string // Optional // description property value
+								null, // int // Optional // maxValue property value
+								null, // mixed // Optional // measurementMethod property value
+								null, // mixed // Optional // measurementTechnique property value
+								null, // int // Optional // minValue property value
+								'National Provider Identifier', // string // Optional // name property value
+								'https://www.wikidata.org/wiki/Q6975101', // string // Optional // propertyID property value
+								null, // string // Optional // unitCode property value
+								null, // string // Optional // unitText property value
+								'https://npiregistry.cms.hhs.gov/provider-view/' . $item, // string // Optional // url property value
+								$item, // mixed // Optional // value property value
+								null, // mixed // Optional // valueReference property value
+								$list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+							);
+
+						}
+
+					}
+
+				// Clean up the list array
+
+					uamswp_fad_flatten_multidimensional_array($list);
+
+				// Return the list array
+
+					return $list;
 
 			}
 
@@ -15277,7 +15322,7 @@
 														if ( $provider_npi ) {
 
 															$provider_identifier = uamswp_fad_schema_propertyvalue_npi(
-																$provider_npi, // mixed // Required // National Provider Identifier
+																$provider_npi, // string|array // Required // National Provider Identifier
 																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 															);
 
@@ -21896,7 +21941,7 @@
 															if ( $location_npi ) {
 
 																$location_identifier = uamswp_fad_schema_propertyvalue_npi(
-																	$location_npi, // mixed // Required // National Provider Identifier
+																	$location_npi, // string|array // Required // National Provider Identifier
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
 
