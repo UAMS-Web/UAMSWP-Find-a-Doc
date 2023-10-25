@@ -2286,34 +2286,12 @@
 
 				}
 
-				// If the arguments are all empty, end here
+				// If any of the important arguments are empty, end here
 
 					if (
-						!$alternateName
-						&&
-						!$description
-						&&
-						!$maxValue
-						&&
-						!$measurementMethod
-						&&
-						!$measurementTechnique
-						&&
-						!$minValue
-						&&
 						!$name
-						&&
-						!$propertyID
-						&&
-						!$unitCode
-						&&
-						!$unitText
-						&&
-						!$url
-						&&
+						||
 						!$value
-						&&
-						!$valueReference
 					) {
 
 						return $propertyvalue_list;
