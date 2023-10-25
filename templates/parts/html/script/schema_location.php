@@ -54,26 +54,14 @@ $page_id = get_the_ID();
 
 	echo '<pre>'; // test
 
-	// // Full
-	// echo print_r($schema_location); // test
+	// Full
+	echo print_r($schema_location); // test
 
-	// // UAMS
+	// // MedicalWebPage
 	// echo print_r($schema_location['@graph'][0]); // test
 
-	// // UAMS Health
+	// // LocalBusiness
 	// echo print_r($schema_location['@graph'][1]); // test
-
-	// // UAMSHealth.com
-	// echo print_r($schema_location['@graph'][2]); // test
-
-	// MedicalWebPage
-	echo print_r($schema_location['@graph'][3]); // test
-
-	// LocalBusiness
-	echo print_r($schema_location['@graph'][4]); // test
-
-	// // Specific @graph item
-	// echo print_r($schema_location['@graph'][3]); // test
 
 	echo '</pre>'; // test
 
