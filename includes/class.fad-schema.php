@@ -18581,15 +18581,31 @@
 										)
 									) {
 
-										// Get values [WIP]
+										// Get values
 
-											// Base array
+											// Query: Whether to override the default clinical brand organization for this entity
 
-												$location_specific_clinical_organization = array();
+												$location_specific_clinical_organization_override = get_field( 'schema_brandorg_query', $entity ) ?? false;
 
-										// Pass values to common schema properties template part
+											// Get list of Third-Party Brand Organizations
 
-											$schema_common_specific_brand_organization = $location_specific_clinical_organization;
+												// Base array
+
+													$location_specific_clinical_organization = array();
+
+												if ( $location_specific_clinical_organization_override ) {
+
+													$location_specific_clinical_organization = uamswp_fad_schema_brand_organization_list(
+														$entity, // int // Required // Post ID
+														$location_specific_clinical_organization // array // Optional // Pre-existing list array for brand organizations to which to add additional items
+													);
+
+												}
+
+										// Pass the values to common schema properties template part
+
+											$schema_common_specific_brand_organization_override = $location_specific_clinical_organization_override; // Query for whether to override the default clinical brand organization for this entity
+											$schema_common_specific_brand_organization = $location_specific_clinical_organization; // Clinical organization(s) specific to the current entity
 
 									}
 
