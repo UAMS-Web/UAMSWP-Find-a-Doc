@@ -2740,141 +2740,77 @@
 
 	function remove_provider_meta() {
 
-		// Conditions
+		$slugs = array(
+			'condition',
+			'treatment',
+			'specialty',
+			'department',
+			'service_line',
+			'degree',
+			'patient_type',
+			'clinical_title',
+			'clinical_admin_title',
+			'affiliation',
+			'institute_affiliation',
+			'language',
+			'medical_terms',
+			'medical_term',
+			'academic_position',
+			'academic_college',
+			'school',
+			'residency_year',
+			'academic_department',
+			'board',
+			'certifying_body',
+			'association',
+			'educationtype',
+			'portal',
+			'academic_title',
+			'academic_admin_title',
+			'recognition',
+			'region',
+			'location_type',
+			'gmb_cat_provider',
+			'gmb_cat_location',
+			'building',
+			'brand_organization',
+			'brand_organization_uams'
+		);
 
-			remove_meta_box( 'conditiondiv', 'provider', 'side' );
+		$screens = array(
+			'provider',
+			'location',
+			'expertise',
+			'clinical-resource',
+			'condition',
+			'treatment'
+		);
 
-		// Treatments and Procedures
+		$contexts = array(
+			'side'
+		);
 
-			remove_meta_box( 'treatmentdiv', 'provider', 'side' );
+		foreach ( $slugs as $slug ) {
 
-		// Medical Specialties
+			foreach ( $contexts as $context ) {
 
-			remove_meta_box( 'specialtydiv', 'provider', 'side' );
+				remove_meta_box(
+					$slug . 'div', // string // Required // Meta box ID (used in the 'id' attribute for the meta box).
+					$screens, // string|array|WP_Screen // Required // The screen or screens on which the meta box is shown (such as a post type, 'link', or 'comment'). Accepts a single screen ID, WP_Screen object, or array of screen IDs.
+					$context // string // Required // The context within the screen where the box is set to display. Contexts vary from screen to screen. Post edit screen contexts include 'normal', 'side', and 'advanced'. Comments screen contexts include 'normal' and 'side'. Menus meta boxes (accordion sections) all use the 'side' context.
+				);
 
-		// Clinical Departments
+			}
 
-			remove_meta_box( 'departmentdiv', 'provider', 'side' );
-
-		// Service Lines
-
-			remove_meta_box( 'service_linediv', array( 'location', 'provider' ), 'side' );
-
-		// Degrees and Credentials
-
-			remove_meta_box( 'degreediv', 'provider', 'side' );
-
-		// Patient Types
-
-			remove_meta_box( 'patient_typediv', array( 'location', 'provider' ), 'side' );
-
-		// Clinical Specializations
-
-			remove_meta_box( 'clinical_titlediv', 'provider', 'side' );
-
-		// Clinical Administrative Title
-
-			remove_meta_box( 'clinical_admin_titlediv', 'provider', 'side' );
-
-		// Hospital Affiliations
-
-			remove_meta_box( 'affiliationdiv', 'provider', 'side' );
-
-		// Institute Affiliations
-
-			remove_meta_box( 'institute_affiliationdiv', 'provider', 'side' );
-
-		// Languages
-
-			remove_meta_box( 'languagediv', array( 'location', 'provider' ), 'side' );
-
-		// Medical Terms
-
-			remove_meta_box( 'medical_termsdiv', 'provider', 'side' );
-			remove_meta_box( 'medical_termdiv', 'provider', 'side' );
-
-		// Academic Position Types
-
-			remove_meta_box( 'academic_positiondiv', 'provider', 'side' );
-
-		// Academic Position Types
-
-			remove_meta_box( 'academic_collegediv', 'provider', 'side' );
-
-		// Education and Training Organizations
-
-			remove_meta_box( 'schooldiv', 'provider', 'side' );
-
-		// Residency Years
-
-			remove_meta_box( 'residency_yeardiv', 'provider', 'side' );
-
-		// Academic Departments
-
-			remove_meta_box( 'academic_departmentdiv', 'provider', 'side' );
-
-		// Specialty and Subspecialty Certificates
-
-			remove_meta_box( 'boarddiv', 'provider', 'side' );
-
-		// Certifying Bodies
-
-			remove_meta_box( 'certifying_bodydiv', 'provider', 'side' );
-
-		// Health Care Professional Associations
-
-			remove_meta_box( 'associationdiv', 'provider', 'side' );
-
-		// Education and Training Types
-
-			remove_meta_box( 'educationtypediv', 'provider', 'side' );
-
-		// Portals
-
-			remove_meta_box( 'portaldiv', array( 'location', 'provider' ), 'side' );
-
-		// Faculty Titles
-
-			remove_meta_box( 'academic_titlediv', 'provider', 'side' );
-
-		// Academic Administrative Titles
-
-			remove_meta_box( 'academic_admin_titlediv', 'provider', 'side' );
-
-		// Recognition Lists
-
-			remove_meta_box( 'recognitiondiv', 'provider', 'side' );
-			remove_meta_box( 'tagsdiv-recognition', 'provider', 'side' );
-
-		// Regions
-
-			remove_meta_box( 'regiondiv', 'location', 'side' );
-
-		// Types of Locations
-
-			remove_meta_box( 'location_typediv', 'location', 'side' );
-
-		// Google My Business Categories for Providers
-
-			remove_meta_box( 'gmb_cat_providerdiv', 'location', 'side' );
-
-		// Google My Business Categories for Locations
-
-			remove_meta_box( 'gmb_cat_locationdiv', 'location', 'side' );
-
-		// Buildings
-
-			remove_meta_box( 'buildingdiv', 'location', 'side' );
-
-		// Brand Organizations
-
-			remove_meta_box( 'brand_organizationdiv', array( 'location', 'provider' ), 'side' );
+		}
 
 		// Other
 
-			remove_meta_box( 'tagsdiv-medical_procedures', 'provider', 'side' );
+			remove_meta_box( 'tagsdiv-recognition', $post_types, 'side' );
 
-			remove_meta_box( 'custom-post-type-onomies-locations', 'provider', 'side');
+			remove_meta_box( 'tagsdiv-medical_procedures', $post_types, 'side' );
+
+			remove_meta_box( 'custom-post-type-onomies-locations', $post_types, 'side' );
 
 	}
 
