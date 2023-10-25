@@ -91,27 +91,46 @@
 
 		// Common clinical organizations
 
-			// Base array
+			// Common clinical organizations (excluding WebSite and MedicalWebPage)
 
-				$schema_common_clinical_organization = array();
+				// Base array
 
-			// Merge in Default Clinical UAMS Brand Organization
+					$schema_common_clinical_organization_exclude_MedicalWebPage = array();
 
-				if ( !$schema_common_specific_brand_organization_override ) {
+				// Merge in Default Clinical UAMS Brand Organization
 
-					$schema_common_clinical_organization = uamswp_fad_schema_merge_values(
-						$schema_common_clinical_organization, // mixed // Required // Initial schema item property value
-						$schema_default_brand_organization_clinical // mixed // Required // Incoming schema item property value
+					if ( !$schema_common_specific_brand_organization_override ) {
+
+						$schema_common_clinical_organization_exclude_MedicalWebPage = uamswp_fad_schema_merge_values(
+							$schema_common_clinical_organization_exclude_MedicalWebPage, // mixed // Required // Initial schema item property value
+							$schema_default_brand_organization_clinical // mixed // Required // Incoming schema item property value
+						);
+
+					}
+
+				// Merge in specific third-party brand organizations values
+
+					$schema_common_clinical_organization_exclude_MedicalWebPage = uamswp_fad_schema_merge_values(
+						$schema_common_clinical_organization_exclude_MedicalWebPage, // mixed // Required // Initial schema item property value
+						$schema_common_specific_brand_organization // mixed // Required // Incoming schema item property value
 					);
 
-				}
+			// Common clinical organizations (WebSite and MedicalWebPage only)
 
-			// Merge in specific third-party brand organizations values
+				// Base array
 
-				$schema_common_clinical_organization = uamswp_fad_schema_merge_values(
-					$schema_common_clinical_organization, // mixed // Required // Initial schema item property value
-					$schema_common_specific_brand_organization // mixed // Required // Incoming schema item property value
-				);
+					$schema_common_clinical_organization_MedicalWebPage = $schema_common_clinical_organization_exclude_MedicalWebPage;
+
+				// Merge in Default Clinical UAMS Brand Organization
+
+					if ( $schema_common_specific_brand_organization_override ) {
+
+						$schema_common_clinical_organization_MedicalWebPage = uamswp_fad_schema_merge_values(
+							$schema_common_clinical_organization_MedicalWebPage, // mixed // Required // Initial schema item property value
+							$schema_default_brand_organization_clinical // mixed // Required // Incoming schema item property value
+						);
+
+					}
 
 		// Excerpt
 
@@ -710,33 +729,9 @@
 
 		// brand (WebSite and MedicalWebPage only)
 
-			// Get values
+			// Get common clinical organizations values (WebSite and MedicalWebPage only)
 
-				// Base array
-
-					$schema_common_brand_MedicalWebPage = array();
-
-				// Merge in Default Clinical UAMS Brand Organization
-
-					$schema_common_brand_MedicalWebPage = uamswp_fad_schema_merge_values(
-						$schema_common_brand_MedicalWebPage, // mixed // Required // Initial schema item property value
-						$schema_default_brand_organization_clinical // mixed // Required // Incoming schema item property value
-					);
-
-				// Merge in common clinical organizations values
-
-					$schema_common_brand_MedicalWebPage = uamswp_fad_schema_merge_values(
-						$schema_common_brand_MedicalWebPage, // mixed // Required // Initial schema item property value
-						$schema_common_clinical_organization // mixed // Required // Incoming schema item property value
-					);
-
-				// De-duplicate the array
-
-					if ( $schema_common_brand_MedicalWebPage ) {
-
-						$schema_common_brand_MedicalWebPage = array_unique( $schema_common_brand_MedicalWebPage, SORT_REGULAR );
-
-					}
+				$schema_common_brand_MedicalWebPage = $schema_common_clinical_organization_MedicalWebPage;
 
 			// Add to common schema properties array for WebSite and MedicalWebPage only
 
@@ -749,18 +744,9 @@
 
 		// brand (excluding WebSite and MedicalWebPage)
 
-			// Get values
+			// Get common clinical organizations (excluding WebSite and MedicalWebPage)
 
-				// Base array
-
-					$schema_common_brand_exclude_MedicalWebPage = array();
-
-				// Merge in common clinical organizations values
-
-					$schema_common_brand_exclude_MedicalWebPage = uamswp_fad_schema_merge_values(
-						$schema_common_brand_exclude_MedicalWebPage, // mixed // Required // Initial schema item property value
-						$schema_common_clinical_organization // mixed // Required // Incoming schema item property value
-					);
+				$schema_common_brand_exclude_MedicalWebPage = $schema_common_clinical_organization_exclude_MedicalWebPage;
 
 			// Add to common schema properties for types other than MedicalWebPage array
 
@@ -2150,26 +2136,34 @@
 		 *     - Organization
 		 */
 
-		// Get values
+		// parentOrganization (WebSite and MedicalWebPage only)
 
-			// Base array
+			// Get common clinical organizations values (WebSite and MedicalWebPage only)
 
-				$schema_common_parentOrganization = array();
+			$schema_common_parentOrganization_MedicalWebPage = $schema_common_clinical_organization_MedicalWebPage;
 
-			// Merge in common clinical organizations values
+			// Add to common schema properties array for WebSite and MedicalWebPage only
 
-				$schema_common_parentOrganization = uamswp_fad_schema_merge_values(
-					$schema_common_parentOrganization, // mixed // Required // Initial schema item property value
-					$schema_common_clinical_organization // mixed // Required // Incoming schema item property value
-				);
+				if ( $schema_common_parentOrganization_MedicalWebPage ) {
 
-		// Add to common schema properties array
+					$schema_common_properties_MedicalWebPage['parentOrganization'] = $schema_common_parentOrganization_MedicalWebPage;
+					$schema_common_properties_WebSite['parentOrganization'] = $schema_common_parentOrganization_MedicalWebPage;
 
-			if ( $schema_common_parentOrganization ) {
+				}
 
-				$schema_common_properties['parentOrganization'] = $schema_common_parentOrganization;
+		// parentOrganization (excluding WebSite and MedicalWebPage)
 
-			}
+			// Get common clinical organizations (excluding WebSite and MedicalWebPage)
+
+				$schema_common_parentOrganization_exclude_MedicalWebPage = $schema_common_clinical_organization_exclude_MedicalWebPage;
+
+			// Add to common schema properties for types other than MedicalWebPage array
+
+				if ( $schema_common_parentOrganization_exclude_MedicalWebPage ) {
+
+					$schema_common_properties_exclude_MedicalWebPage['parentOrganization'] = $schema_common_parentOrganization_exclude_MedicalWebPage;
+
+				}
 
 	// pattern [excluded]
 
@@ -2288,26 +2282,34 @@
 
 		if ( $nesting_level <= 1 ) {
 
-			// Get values
+			// provider (WebSite and MedicalWebPage only)
 
-				// Base array
+				// Get common clinical organizations values (WebSite and MedicalWebPage only)
 
-					$schema_common_provider = array();
+					$schema_common_provider_MedicalWebPage = $schema_common_clinical_organization_MedicalWebPage;
 
-				// Merge in common clinical organizations values
+				// Add to common schema properties array for WebSite and MedicalWebPage only
 
-					$schema_common_brand = uamswp_fad_schema_merge_values(
-						$schema_common_brand, // mixed // Required // Initial schema item property value
-						$schema_common_clinical_organization // mixed // Required // Incoming schema item property value
-					);
+					if ( $schema_common_provider_MedicalWebPage ) {
 
-			// Add to common schema properties array
+						$schema_common_properties_MedicalWebPage['provider'] = $schema_common_provider_MedicalWebPage;
+						$schema_common_properties_WebSite['provider'] = $schema_common_provider_MedicalWebPage;
 
-				if ( $schema_common_provider ) {
+					}
 
-					$schema_common_properties['provider'] = $schema_common_provider;
+			// provider (excluding WebSite and MedicalWebPage)
 
-				}
+				// Get common clinical organizations (excluding WebSite and MedicalWebPage)
+
+					$schema_common_provider_exclude_MedicalWebPage = $schema_common_clinical_organization_exclude_MedicalWebPage;
+
+				// Add to common schema properties for types other than MedicalWebPage array
+
+					if ( $schema_common_provider_exclude_MedicalWebPage ) {
+
+						$schema_common_properties_exclude_MedicalWebPage['provider'] = $schema_common_provider_exclude_MedicalWebPage;
+
+					}
 
 		}
 
