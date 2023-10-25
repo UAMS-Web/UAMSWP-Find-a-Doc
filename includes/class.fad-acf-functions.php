@@ -555,52 +555,52 @@
 
 						$locations = $_POST['acf']['field_expertise_locations'];
 
-						// Get the desired values from each associated location
+					// Get the desired values from each associated location
 
-							if ( $locations ) {
+						if ( $locations ) {
 
-								// Base arrays
+							// Base arrays
 
-									$region = array();
-									$brand_organization = array();
+								$region = array();
+								$brand_organization = array();
 
-								foreach ( $locations as $location ) {
+							foreach ( $locations as $location ) {
 
-									// Get the values
+								// Get the values
 
-										// Region
+									// Region
 
-											$location_region = get_field( 'location_region', $location ) ?? null;
+										$location_region = get_field( 'location_region', $location ) ?? null;
 
-											if ( $location_region ) {
+										if ( $location_region ) {
 
-												$region[] = $location_region;
+											$region[] = $location_region;
 
-											}
+										}
 
-										// Third-Party Brand Organization
+									// Third-Party Brand Organization
 
-											$location_brand_organization = get_field( 'schema_brandorg', $location ) ?? null;
+										$location_brand_organization = get_field( 'schema_brandorg', $location ) ?? null;
 
-											if ( $location_brand_organization ) {
+										if ( $location_brand_organization ) {
 
-												$brand_organization[] = $location_brand_organization;
+											$brand_organization[] = $location_brand_organization;
 
-											}
+										}
 
-								} // endforeach
+							} // endforeach
 
-							} // endif ( $locations )
+						} // endif ( $locations )
 
-						// Set the desired values from each associated location
+					// Set the desired values from each associated location
 
-							// Region
+						// Region
 
-								$_POST['acf']['field_expertise_region'] = $region;
+							$_POST['acf']['field_expertise_region'] = $region;
 
-							// Third-Party Brand Organization
+						// Third-Party Brand Organization
 
-								$_POST['acf']['field_schema_brandorg_multiple'] = $brand_organization;
+							$_POST['acf']['field_schema_brandorg_multiple'] = $brand_organization;
 
 			}
 
