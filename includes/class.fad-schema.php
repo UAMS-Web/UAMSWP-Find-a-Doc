@@ -2453,9 +2453,21 @@
 		// Add data to an array defining schema data for Google customer ID (CID)
 
 			function uamswp_fad_schema_propertyvalue_google_cid(
-				$google_cid, // mixed // Required // Google customer ID
+				$google_cid, // string|array // Required // Google customer ID
 				array $list = array() // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 			) {
+
+				/**
+				 * If $google_cid is an array, it is expected to be a list array with the values being
+				 * the Google customer ID value string.
+				 *
+				 * Example:
+				 *
+				 *     $google_cid = array(
+				 *         '0123456789',
+				 *         '9876543210'
+				 *     );
+				 */
 
 				if ( !$google_cid ) {
 
@@ -7539,7 +7551,7 @@
 										if ( $google_cid ) {
 
 											$identifier_list = uamswp_fad_schema_propertyvalue_google_cid(
-												$google_cid, // mixed // Required // Google customer ID
+												$google_cid, // string|array // Required // Google customer ID
 												$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 											);
 
@@ -15337,7 +15349,7 @@
 														if ( $provider_google_cid ) {
 
 															$provider_identifier = uamswp_fad_schema_propertyvalue_google_cid(
-																$provider_google_cid, // mixed // Required // Google customer ID
+																$provider_google_cid, // string|array // Required // Google customer ID
 																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 															);
 
@@ -21934,7 +21946,7 @@
 															if ( $location_google_cid ) {
 
 																$location_identifier = uamswp_fad_schema_propertyvalue_google_cid(
-																	$location_google_cid, // mixed // Required // Google customer ID
+																	$location_google_cid, // string|array // Required // Google customer ID
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
 
