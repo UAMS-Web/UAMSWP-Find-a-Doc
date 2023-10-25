@@ -2489,12 +2489,15 @@
 
 				$list = uamswp_fad_schema_propertyvalue(
 					array(
-						'Google Ads customer ID',
+						'CID',
+						'GM CID',
+						'GMCID',
 						'Google Ads CID',
-						'Google Maps customer ID',
-						'Google Maps CID',
+						'Google Ads customer ID',
 						'Google CID',
-						'CID'
+						'Google Maps CID',
+						'Google Maps customer ID',
+						'Google Maps Place CID'
 					), // mixed // Optional // alternateName property value
 					null, // string // Optional // description property value
 					null, // int // Optional // maxValue property value
