@@ -664,16 +664,12 @@
 
 							remove_action( 'save_post', 'expertise_save_post_after', 50 );
 
-						// Define the arguments for set_post_thumbnail
+						// Update the post with new post data
 
-							$post_array = array(
+							set_post_thumbnail(
 								$post_id, // int|WP_Post // Required // Post ID or post object where thumbnail should be attached.
 								$post_thumbnail // int // Required // Thumbnail to attach.
 							);
-
-						// Update the post with new post data
-
-							set_post_thumbnail( $post_array );
 
 						// Re-hook this function
 
