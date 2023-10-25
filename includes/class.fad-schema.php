@@ -10790,11 +10790,15 @@
 
 										// Get values
 
-											// Base array
+											// Query: Whether to override the default clinical brand organization for this entity
 
-												$provider_specific_clinical_organization = array();
+												$provider_specific_clinical_organization_override = false;
 
 											// Get list of Third-Party Brand Organizations
+
+												// Base array
+
+													$provider_specific_clinical_organization = array();
 
 												$provider_specific_clinical_organization = uamswp_fad_schema_brand_organization_list(
 													$entity, // int // Required // Post ID
@@ -10803,7 +10807,7 @@
 
 										// Pass the values to common schema properties template part
 
-											$schema_common_specific_brand_organization_override = false; // Query for whether to override common clinical organization(s) with those specific to the current entity
+											$schema_common_specific_brand_organization_override = $provider_specific_clinical_organization_override; // Query for whether to override common clinical organization(s) with those specific to the current entity
 											$schema_common_specific_brand_organization = $provider_specific_clinical_organization; // Clinical organization(s) specific to the current entity
 
 									}
