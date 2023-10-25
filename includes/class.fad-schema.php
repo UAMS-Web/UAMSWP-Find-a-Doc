@@ -2409,10 +2409,6 @@
 					$npi = array_unique( $npi, SORT_REGULAR );
 					$npi = array_values($npi);
 
-				// Base list array
-
-					$list = array();
-
 				// Loop through the values, construct the schema item and add them to the list array
 
 					foreach ( $npi as $item ) {
