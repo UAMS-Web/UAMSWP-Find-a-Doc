@@ -2740,43 +2740,6 @@
 
 	function remove_provider_meta() {
 
-		$slugs = array(
-			'condition',
-			'treatment',
-			'specialty',
-			'department',
-			'service_line',
-			'degree',
-			'patient_type',
-			'clinical_title',
-			'clinical_admin_title',
-			'affiliation',
-			'institute_affiliation',
-			'language',
-			'medical_terms',
-			'medical_term',
-			'academic_position',
-			'academic_college',
-			'school',
-			'residency_year',
-			'academic_department',
-			'board',
-			'certifying_body',
-			'association',
-			'educationtype',
-			'portal',
-			'academic_title',
-			'academic_admin_title',
-			'recognition',
-			'region',
-			'location_type',
-			'gmb_cat_provider',
-			'gmb_cat_location',
-			'building',
-			'brand_organization',
-			'brand_organization_uams'
-		);
-
 		$screens = array(
 			'provider',
 			'location',
@@ -2790,25 +2753,89 @@
 			'side'
 		);
 
-		foreach ( $slugs as $slug ) {
+		// [slug]div
 
-			foreach ( $contexts as $context ) {
+			$slugs = array(
+				'condition',
+				'treatment',
+				'specialty',
+				'department',
+				'service_line',
+				'degree',
+				'patient_type',
+				'clinical_title',
+				'clinical_admin_title',
+				'affiliation',
+				'institute_affiliation',
+				'language',
+				'medical_terms',
+				'medical_term',
+				'academic_position',
+				'academic_college',
+				'school',
+				'residency_year',
+				'academic_department',
+				'board',
+				'certifying_body',
+				'association',
+				'educationtype',
+				'portal',
+				'academic_title',
+				'academic_admin_title',
+				'recognition',
+				'region',
+				'location_type',
+				'gmb_cat_provider',
+				'gmb_cat_location',
+				'building',
+				'brand_organization',
+				'brand_organization_uams'
+			);
 
-				remove_meta_box(
-					$slug . 'div', // string // Required // Meta box ID (used in the 'id' attribute for the meta box).
-					$screens, // string|array|WP_Screen // Required // The screen or screens on which the meta box is shown (such as a post type, 'link', or 'comment'). Accepts a single screen ID, WP_Screen object, or array of screen IDs.
-					$context // string // Required // The context within the screen where the box is set to display. Contexts vary from screen to screen. Post edit screen contexts include 'normal', 'side', and 'advanced'. Comments screen contexts include 'normal' and 'side'. Menus meta boxes (accordion sections) all use the 'side' context.
-				);
+			foreach ( $slugs as $slug ) {
+
+				foreach ( $screens as $screen ) {
+
+					foreach ( $contexts as $context ) {
+
+						remove_meta_box(
+							$slug . 'div', // string // Required // Meta box ID (used in the 'id' attribute for the meta box).
+							$screen, // string|array|WP_Screen // Required // The screen or screens on which the meta box is shown (such as a post type, 'link', or 'comment'). Accepts a single screen ID, WP_Screen object, or array of screen IDs.
+							$context // string // Required // The context within the screen where the box is set to display. Contexts vary from screen to screen. Post edit screen contexts include 'normal', 'side', and 'advanced'. Comments screen contexts include 'normal' and 'side'. Menus meta boxes (accordion sections) all use the 'side' context.
+						);
+
+					}
+
+				}
 
 			}
 
-		}
+		// tagsdiv-[slug]
+
+			$tags_slugs = array(
+				'recognition',
+				'medical_procedures'
+			);
+
+			foreach ( $tags_slugs as $slug ) {
+
+				foreach ( $screens as $screen ) {
+
+					foreach ( $contexts as $context ) {
+
+						remove_meta_box(
+							'tagsdiv-' . $slug, // string // Required // Meta box ID (used in the 'id' attribute for the meta box).
+							$screen, // string|array|WP_Screen // Required // The screen or screens on which the meta box is shown (such as a post type, 'link', or 'comment'). Accepts a single screen ID, WP_Screen object, or array of screen IDs.
+							$context // string // Required // The context within the screen where the box is set to display. Contexts vary from screen to screen. Post edit screen contexts include 'normal', 'side', and 'advanced'. Comments screen contexts include 'normal' and 'side'. Menus meta boxes (accordion sections) all use the 'side' context.
+						);
+
+					}
+
+				}
+
+			}
 
 		// Other
-
-			remove_meta_box( 'tagsdiv-recognition', $post_types, 'side' );
-
-			remove_meta_box( 'tagsdiv-medical_procedures', $post_types, 'side' );
 
 			remove_meta_box( 'custom-post-type-onomies-locations', $post_types, 'side' );
 
