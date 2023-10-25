@@ -2051,12 +2051,21 @@
 			string $unitCode = null, // string // Optional // unitCode property value
 			string $unitText = null, // string // Optional // unitText property value
 			string $url = null, // string // Optional // url property value
-			$value = null, // mixed // Optional // value property value
+			$value = null, // string|array // Optional // value property value
 			$valueReference = null, // mixed // Optional // valueReference property value
 			array $propertyvalue_list = array() // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 		) {
 
 			/*
+
+				If $value is an array, a schema item will be added for each row in the array.
+
+				If there are other property values that should be paired with a specific
+				'value' value, then this function should be called within a foreach loop, with
+				the values of those properties being added individually within each foreach
+				iteration.
+
+				**********
 
 				A property-value pair (e.g., representing a feature of a product or place). Use
 				the 'name' property for the name of the property. If there is an additional
@@ -2311,41 +2320,58 @@
 
 					}
 
+				// Convert value string to value array
+
+					$value = is_array($value) ? $value : array($value);
+
+				// De-duplicate the value array
+
+					$value = array_unique( $value, SORT_REGULAR );
+					$value = array_values($value);
+
 			// Set property values
 
-				$propertyvalue_item = array(
-					'alternateName' => $alternateName,
-					'description' => $description,
-					'maxValue' => $maxValue,
-					'measurementMethod' => $measurementMethod,
-					'measurementTechnique' => $measurementTechnique,
-					'minValue' => $minValue,
-					'name' => $name,
-					'propertyID' => $propertyID,
-					'unitCode' => $unitCode,
-					'unitText' => $unitText,
-					'url' => $url,
-					'value' => $value,
-					'valueReference' => $valueReference
-				);
+				foreach ( $value as $value_item ) {
 
-			// Clean up item array
+					if ( $value_item ) {
 
-				$propertyvalue_item = array_filter($propertyvalue_item);
+						$propertyvalue_item = array(
+							'alternateName' => $alternateName,
+							'description' => $description,
+							'maxValue' => $maxValue,
+							'measurementMethod' => $measurementMethod,
+							'measurementTechnique' => $measurementTechnique,
+							'minValue' => $minValue,
+							'name' => $name,
+							'propertyID' => $propertyID,
+							'unitCode' => $unitCode,
+							'unitText' => $unitText,
+							'url' => $url,
+							'value' => $value_item,
+							'valueReference' => $valueReference
+						);
 
-			// Add @type
+						// Clean up item array
 
-				if ( $propertyvalue_item ) {
+							$propertyvalue_item = array_filter($propertyvalue_item);
 
-					$propertyvalue_item = array( '@type' => 'PropertyValue' ) + $propertyvalue_item;
+						// Add @type
 
-				}
+							if ( $propertyvalue_item ) {
 
-			// Add item to the list array
+								$propertyvalue_item = array( '@type' => 'PropertyValue' ) + $propertyvalue_item;
 
-				if ( $propertyvalue_item ) {
+							}
 
-					$propertyvalue_list[] = $propertyvalue_item;
+						// Add item to the list array
+
+							if ( $propertyvalue_item ) {
+
+								$propertyvalue_list[] = $propertyvalue_item;
+
+							}
+
+					}
 
 				}
 
@@ -2396,11 +2422,11 @@
 
 				}
 
-				// Convert string value to array value
+				// Convert value string to value array
 
 					$npi = is_array($npi) ? $npi : array($npi);
 
-				// De-duplicate the array
+				// De-duplicate the value array
 
 					$npi = array_unique( $npi, SORT_REGULAR );
 					$npi = array_values($npi);
@@ -2431,7 +2457,7 @@
 								null, // string // Optional // unitCode property value
 								null, // string // Optional // unitText property value
 								'https://npiregistry.cms.hhs.gov/provider-view/' . $item, // string // Optional // url property value
-								$item, // mixed // Optional // value property value
+								$item, // string|array // Optional // value property value
 								null, // mixed // Optional // valueReference property value
 								$list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 							);
@@ -2490,7 +2516,7 @@
 					null, // string // Optional // unitCode property value
 					null, // string // Optional // unitText property value
 					null, // string // Optional // url property value
-					$google_cid, // mixed // Optional // value property value
+					$google_cid, // string|array // Optional // value property value
 					null, // mixed // Optional // valueReference property value
 					$list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 				);
@@ -7563,7 +7589,7 @@
 											null, // string // Optional // unitCode property value
 											null, // string // Optional // unitText property value
 											null, // string // Optional // url property value
-											$duns, // mixed // Optional // value property value
+											$duns, // string|array // Optional // value property value
 											null, // mixed // Optional // valueReference property value
 											$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 										);
@@ -7588,7 +7614,7 @@
 											null, // string // Optional // unitCode property value
 											null, // string // Optional // unitText property value
 											null, // string // Optional // url property value
-											$globalLocationNumber, // mixed // Optional // value property value
+											$globalLocationNumber, // string|array // Optional // value property value
 											null, // mixed // Optional // valueReference property value
 											$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 										);
@@ -7616,7 +7642,7 @@
 											null, // string // Optional // unitCode property value
 											null, // string // Optional // unitText property value
 											null, // string // Optional // url property value
-											$isicV4, // mixed // Optional // value property value
+											$isicV4, // string|array // Optional // value property value
 											null, // mixed // Optional // valueReference property value
 											$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 										);
@@ -7646,7 +7672,7 @@
 											null, // string // Optional // unitCode property value
 											null, // string // Optional // unitText property value
 											null, // string // Optional // url property value
-											$leiCode, // mixed // Optional // value property value
+											$leiCode, // string|array // Optional // value property value
 											null, // mixed // Optional // valueReference property value
 											$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 										);
@@ -7677,7 +7703,7 @@
 											null, // string // Optional // unitCode property value
 											null, // string // Optional // unitText property value
 											null, // string // Optional // url property value
-											$naics, // mixed // Optional // value property value
+											$naics, // string|array // Optional // value property value
 											null, // mixed // Optional // valueReference property value
 											$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 										);
@@ -7706,7 +7732,7 @@
 											null, // string // Optional // unitCode property value
 											null, // string // Optional // unitText property value
 											null, // string // Optional // url property value
-											$taxID, // mixed // Optional // value property value
+											$taxID, // string|array // Optional // value property value
 											null, // mixed // Optional // valueReference property value
 											$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 										);
@@ -7735,7 +7761,7 @@
 											null, // string // Optional // unitCode property value
 											null, // string // Optional // unitText property value
 											null, // string // Optional // url property value
-											$vatID, // mixed // Optional // value property value
+											$vatID, // string|array // Optional // value property value
 											null, // mixed // Optional // valueReference property value
 											$identifier_list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 										);
@@ -15122,7 +15148,7 @@
 																null, // string // Optional // unitCode property value
 																null, // string // Optional // unitText property value
 																null, // string // Optional // url property value
-																$provider_duns, // mixed // Optional // value property value
+																$provider_duns, // string|array // Optional // value property value
 																null, // mixed // Optional // valueReference property value
 																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 															);
@@ -15145,7 +15171,7 @@
 																null, // string // Optional // unitCode property value
 																null, // string // Optional // unitText property value
 																null, // string // Optional // url property value
-																$provider_globalLocationNumber, // mixed // Optional // value property value
+																$provider_globalLocationNumber, // string|array // Optional // value property value
 																null, // mixed // Optional // valueReference property value
 																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 															);
@@ -15171,7 +15197,7 @@
 																null, // string // Optional // unitCode property value
 																null, // string // Optional // unitText property value
 																null, // string // Optional // url property value
-																$provider_isicV4, // mixed // Optional // value property value
+																$provider_isicV4, // string|array // Optional // value property value
 																null, // mixed // Optional // valueReference property value
 																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 															);
@@ -15199,7 +15225,7 @@
 																null, // string // Optional // unitCode property value
 																null, // string // Optional // unitText property value
 																null, // string // Optional // url property value
-																$provider_leiCode, // mixed // Optional // value property value
+																$provider_leiCode, // string|array // Optional // value property value
 																null, // mixed // Optional // valueReference property value
 																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 															);
@@ -15228,7 +15254,7 @@
 																null, // string // Optional // unitCode property value
 																null, // string // Optional // unitText property value
 																null, // string // Optional // url property value
-																$provider_naics, // mixed // Optional // value property value
+																$provider_naics, // string|array // Optional // value property value
 																null, // mixed // Optional // valueReference property value
 																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 															);
@@ -15257,7 +15283,7 @@
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
-																	$provider_taxID_taxpayer, // mixed // Optional // value property value
+																	$provider_taxID_taxpayer, // string|array // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
@@ -15283,7 +15309,7 @@
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
-																	$provider_taxID_employer, // mixed // Optional // value property value
+																	$provider_taxID_employer, // string|array // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
@@ -15310,7 +15336,7 @@
 																null, // string // Optional // unitCode property value
 																null, // string // Optional // unitText property value
 																null, // string // Optional // url property value
-																$provider_vatID, // mixed // Optional // value property value
+																$provider_vatID, // string|array // Optional // value property value
 																null, // mixed // Optional // valueReference property value
 																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 															);
@@ -21716,7 +21742,7 @@
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
-																	$location_duns, // mixed // Optional // value property value
+																	$location_duns, // string|array // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
@@ -21741,7 +21767,7 @@
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
-																	$location_globalLocationNumber, // mixed // Optional // value property value
+																	$location_globalLocationNumber, // string|array // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
@@ -21769,7 +21795,7 @@
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
-																	$location_isicV4, // mixed // Optional // value property value
+																	$location_isicV4, // string|array // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
@@ -21799,7 +21825,7 @@
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
-																	$location_leiCode, // mixed // Optional // value property value
+																	$location_leiCode, // string|array // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
@@ -21830,7 +21856,7 @@
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
-																	$location_naics, // mixed // Optional // value property value
+																	$location_naics, // string|array // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
@@ -21861,7 +21887,7 @@
 																		null, // string // Optional // unitCode property value
 																		null, // string // Optional // unitText property value
 																		null, // string // Optional // url property value
-																		$location_taxID_taxpayer, // mixed // Optional // value property value
+																		$location_taxID_taxpayer, // string|array // Optional // value property value
 																		null, // mixed // Optional // valueReference property value
 																		$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																	);
@@ -21889,7 +21915,7 @@
 																		null, // string // Optional // unitCode property value
 																		null, // string // Optional // unitText property value
 																		null, // string // Optional // url property value
-																		$location_taxID_employer, // mixed // Optional // value property value
+																		$location_taxID_employer, // string|array // Optional // value property value
 																		null, // mixed // Optional // valueReference property value
 																		$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																	);
@@ -21918,7 +21944,7 @@
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
-																	$location_vatID, // mixed // Optional // value property value
+																	$location_vatID, // string|array // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
@@ -22053,7 +22079,7 @@
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
-																	$location_va_station_id, // mixed // Optional // value property value
+																	$location_va_station_id, // string|array // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
@@ -22081,7 +22107,7 @@
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
-																	$location_ahaid, // mixed // Optional // value property value
+																	$location_ahaid, // string|array // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
@@ -22118,7 +22144,7 @@
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
-																	$location_cms_ccn, // mixed // Optional // value property value
+																	$location_cms_ccn, // string|array // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
