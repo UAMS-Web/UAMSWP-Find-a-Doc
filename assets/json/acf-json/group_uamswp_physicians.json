@@ -1876,7 +1876,7 @@
 					"label": "Organization",
 					"name": "school",
 					"type": "taxonomy",
-					"instructions": "The organization that provided the education or training to the provider",
+					"instructions": "The organization that provided the education or training to the provider. If for something like an internship, residency or fellowship, select the sponsoring institution.",
 					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
