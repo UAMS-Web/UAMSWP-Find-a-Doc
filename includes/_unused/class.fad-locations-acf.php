@@ -210,7 +210,7 @@ if( function_exists('acf_add_local_field_group') ):
 					'class' => '',
 					'id' => '',
 				),
-				'input_mask' => '99999[-999]',
+				'input_mask' => '99999[-9999]',
 				'default_value' => 72205,
 				'placeholder' => 72205,
 				'prepend' => '',
