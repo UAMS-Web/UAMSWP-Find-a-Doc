@@ -4941,8 +4941,8 @@
 			},
 			"acfe_permissions": "",
 			"collapsed": "field_location_npi_item",
-			"min": 0,
-			"max": 10,
+			"min": 1,
+			"max": 0,
 			"layout": "block",
 			"button_label": "Add National Provider Identifier",
 			"sub_fields": [
