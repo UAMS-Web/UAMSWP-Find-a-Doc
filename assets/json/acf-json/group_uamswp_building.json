@@ -1,0 +1,487 @@
+{
+	"key": "group_uamswp_building",
+	"title": "Building Item Configuration",
+	"fields": [
+		{
+			"key": "field_building_name",
+			"label": "Name of the Building for Schema",
+			"name": "building_name",
+			"type": "text",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_building_alternatename",
+			"label": "Alternate Names for the Building (alternateName > Text)",
+			"name": "building_alternatename",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_alternatename"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_building_location_subtype",
+			"label": "Location Subtype (@type)",
+			"name": "building_location_subtype",
+			"type": "select",
+			"instructions": "Select the most specific subtype of the Schema.org Location type. If there is no match, then select \"None.\"",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this organization",
+				"EducationalOrganization": "<strong>CivicStructure > EducationalOrganization</strong> &mdash; An educational organization.",
+				"CivicStructure": "<strong>CivicStructure</strong> &mdash; A public structure, such as a town hall or concert hall.",
+				"EventVenue": "<strong>CivicStructure > EventVenue</strong> &mdash; An event venue.",
+				"GovernmentBuilding": "<strong>CivicStructure > GovernmentBuilding</strong> &mdash; A government building.",
+				"CityHall": "<strong>CivicStructure > GovernmentBuilding > CityHall</strong> &mdash; A city hall.",
+				"Courthouse": "<strong>CivicStructure > GovernmentBuilding > Courthouse</strong> &mdash; A courthouse.",
+				"LegislativeBuilding": "<strong>CivicStructure > GovernmentBuilding > LegislativeBuilding</strong> &mdash; A legislative building (e.g., the state capitol).",
+				"Hospital": "<strong>CivicStructure > Hospital</strong> &mdash; A hospital.",
+				"Museum": "<strong>CivicStructure > Museum</strong> &mdash; A museum.",
+				"PerformingArtsTheater": "<strong>CivicStructure > PerformingArtsTheater</strong> &mdash; A theater or other performing art center.",
+				"StadiumOrArena": "<strong>CivicStructure > StadiumOrArena</strong> &mdash; A stadium.",
+				"LandmarksOrHistoricalBuildings": "<strong>LandmarksOrHistoricalBuildings</strong> &mdash; An historical landmark or building.",
+				"LocalBusiness": "<strong>LocalBusiness</strong> &mdash; A particular physical business or branch of an organization. Examples of LocalBusiness include a restaurant, a particular branch of a restaurant chain, a branch of a bank, a medical practice, a club, a bowling alley, etc."
+			},
+			"default_value": false,
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"return_format": "value",
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"ajax": 0
+		},
+		{
+			"key": "field_building_additionaltype",
+			"label": "More Specific Type(s) for This Building From External Vocabularies in Microdata Syntax (additionalType > URL)",
+			"name": "building_additionaltype",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_additionalType"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_building_sameas",
+			"label": "Reference Webpage(s) About This Building (sameAs > URL)",
+			"name": "building_sameas",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_building_google_cid_query",
+			"label": "Does this organization have a listing on Google My Business?",
+			"name": "building_google_cid_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": [
+				"No",
+				"Yes"
+			],
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_building_google_cid",
+			"label": "Google CID Number (identifier > PropertyValue)",
+			"name": "building_google_cid",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_building_google_cid_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_google_cid"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_building_address",
+			"label": "Street Address",
+			"name": "building_address",
+			"type": "text",
+			"instructions": "Spell out numbered streets nine and under; use figures for <em>10</em> and above (e.g., <em>5 Sixth Ave.</em>, <em>3012 50th St.</em>, <em>No. 10 Downing St.</em>).</p><p class='description' style='margin-top: 0.5em;'>Use the abbreviations <em>Ave.</em>, <em>Blvd.</em> and <em>St.</em> Otherwise, spell out similar words (e.g., <em>Alley</em>, <em>Drive</em>, <em>Road</em>, <em>Terrace</em>).</p><p class='description' style='margin-top: 0.5em;'>Always use figures for an address number (e.g., <em>9 Morningside Circle</em>).</p><p class='description' style='margin-top: 0.5em;'>Spell out and capitalize <em>First</em> through <em>Ninth</em> when used as street names; use figures for <em>10th</em> and above (e.g., <em>7 Fifth Ave.</em>, <em>100 21st St.</em>).</p><p class='description' style='margin-top: 0.5em;'>Abbreviate compass points used to indicate directional ends of a street or quadrants of a city in a numbered address (e.g., <em>222 E. 42nd St.</em>, <em>562 W. 43rd St.</em>, <em>600 K St. NW</em>). Do not use periods in quadrant abbreviations (e.g., <em>NW</em>, <em>SE</em>).</p><p class='description' style='margin-top: 0.5em;'>Use these forms, as appropriate in the context, for highways identified by number: <em>U.S. Highway 67</em>, <em>Arkansas Highway 10</em>, <em>Interstate 630</em>.</p><p class='description' style='margin-top: 0.5em;'>When a letter is appended to a number, capitalize it but do not use a hyphen (e.g., <em>U.S. Highway 71B</em>).",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_building_city",
+			"label": "City",
+			"name": "building_city",
+			"type": "text",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_building_state",
+			"label": "State",
+			"name": "building_state",
+			"type": "select",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"AL": "Alabama",
+				"AK": "Alaska",
+				"AZ": "Arizona",
+				"AR": "Arkansas",
+				"CA": "California",
+				"CO": "Colorado",
+				"CT": "Connecticut",
+				"DE": "Delaware",
+				"DC": "District Of Columbia",
+				"FL": "Florida",
+				"GA": "Georgia",
+				"HI": "Hawaii",
+				"ID": "Idaho",
+				"IL": "Illinois",
+				"IN": "Indiana",
+				"IA": "Iowa",
+				"KS": "Kansas",
+				"KY": "Kentucky",
+				"LA": "Louisiana",
+				"ME": "Maine",
+				"MD": "Maryland",
+				"MA": "Massachusetts",
+				"MI": "Michigan",
+				"MN": "Minnesota",
+				"MS": "Mississippi",
+				"MO": "Missouri",
+				"MT": "Montana",
+				"NE": "Nebraska",
+				"NV": "Nevada",
+				"NH": "New Hampshire",
+				"NJ": "New Jersey",
+				"NM": "New Mexico",
+				"NY": "New York",
+				"NC": "North Carolina",
+				"ND": "North Dakota",
+				"OH": "Ohio",
+				"OK": "Oklahoma",
+				"OR": "Oregon",
+				"PA": "Pennsylvania",
+				"RI": "Rhode Island",
+				"SC": "South Carolina",
+				"SD": "South Dakota",
+				"TN": "Tennessee",
+				"TX": "Texas",
+				"UT": "Utah",
+				"VT": "Vermont",
+				"VA": "Virginia",
+				"WA": "Washington",
+				"WV": "West Virginia",
+				"WI": "Wisconsin",
+				"WY": "Wyoming"
+			},
+			"default_value": false,
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 0,
+			"return_format": "value",
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"ajax": 0
+		},
+		{
+			"key": "field_building_zip",
+			"label": "ZIP Code",
+			"name": "building_zip",
+			"type": "maskfield",
+			"instructions": "Find the ZIP+4 Code for an address at <a href='https://tools.usps.com/zip-code-lookup.htm?byaddress' target='_blank'>https://tools.usps.com/zip-code-lookup.htm?byaddress</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"input_mask": "99999[-9999]",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_building_region",
+			"label": "Arkansas Region",
+			"name": "building_region",
+			"type": "taxonomy",
+			"instructions": "For information on how the Arkansas regions are defined, visit <a href='https://communications.uams.edu/web/kb/location-regions/' target='_blank'>https://communications.uams.edu/web/kb/location-regions/</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"taxonomy": "region",
+			"field_type": "radio",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"multiple": 0
+		},
+		{
+			"key": "field_building_map",
+			"label": "GPS Location of the Main Building Entrance",
+			"name": "building_map",
+			"type": "google_map",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"center_lat": "34.7492719",
+			"center_lng": "-92.3198281",
+			"zoom": "",
+			"height": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_building_parking_map",
+			"label": "GPS Location of the Main Parking Area for the Building",
+			"name": "building_parking_map",
+			"type": "google_map",
+			"instructions": "If the parking area is a parking deck, place the pin on the entrance to the parking deck from the street.</p><p class='description' style='margin-top: 0.5em;'>If the parking area is a surface-level parking lot, place the pin in the middle of the parking lot.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"center_lat": "34.7492719",
+			"center_lng": "-92.3198281",
+			"zoom": "",
+			"height": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_building_parking_instructions",
+			"label": "General Parking Instructions for the Building",
+			"name": "building_parking_instructions",
+			"type": "wysiwyg",
+			"instructions": "Indicate whether patients will park in a parking deck or surface-level parking.</p><p class='description' style='margin-top: 0.5em;'>Indicate which parking lot, parking deck or other area in which patients will park when coming to this location.</p><p class='description' style='margin-top: 0.5em;'>Indicate whether or not patients will have to pay for parking.</p><p class='description' style='margin-top: 0.5em;'>If there is a parking fee for patients, indicate whether locations in this building typically validate parking.</p><p class='description' style='margin-top: 0.5em;'>If patients will be parking in a specific parking deck, indicate the ideal area of the parking deck in which patients should park for most locations within this building. If there is a patient drop-off area, also include details about that.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "very_simple",
+			"media_upload": 0,
+			"delay": 0,
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_building_photo",
+			"label": "Photo of the Building Exterior",
+			"name": "building_photo",
+			"type": "image",
+			"instructions": "Select an image that will help the patient find the appropriate building from the road.</p><p class='description' style='margin-top: 0.5em;'>The photo orientation must be landscape / horizontal.</p><p class='description' style='margin-top: 0.5em;'>It is restricted to a 16:9 aspect ratio (or close to it) and has a minimum dimension of 1200x675.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1200,
+			"min_height": 675,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "taxonomy",
+				"operator": "==",
+				"value": "building"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "acf_after_title",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_form": 1,
+	"acfe_meta": "",
+	"acfe_note": ""
+}
