@@ -563,7 +563,7 @@
 			"name": "location_zip",
 			"type": "maskfield",
 			"label": "ZIP Code",
-			"instructions": "",
+			"instructions": "Find the ZIP+4 Code for an address at <a href='https://tools.usps.com/zip-code-lookup.htm?byaddress' target='_blank'>https://tools.usps.com/zip-code-lookup.htm?byaddress</a>.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
