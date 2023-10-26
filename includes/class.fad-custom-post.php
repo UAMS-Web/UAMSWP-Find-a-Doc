@@ -872,8 +872,8 @@
 
 				Expected taxonomy items:
 
-					 * D.O.
-					 * M.D.
+					 * "D.O."
+					 * "M.D."
 
 			*/
 
@@ -938,8 +938,8 @@
 
 				Expected taxonomy items:
 
-					 * Adults
-					 * Children and Adolescents
+					 * "Adults"
+					 * "Children and Adolescents"
 
 			*/
 
@@ -1068,10 +1068,10 @@
 
 				Expected taxonomy items:
 
-					 * Administrator
-					 * Director
-					 * Medical Director
-					 * Nursing Director
+					 * "Administrator"
+					 * "Director"
+					 * "Medical Director"
+					 * "Nursing Director"
 
 			*/
 
@@ -1136,18 +1136,18 @@
 
 				Expected taxonomy items:
 
-					 * Arkansas Children's Hospital (Slug: 'ach')
-					 * Arkansas Children's Northwest (Slug: 'arkansas-childrens-northwest')
-					 * Arkansas State Hospital (Slug: 'arkansas-state-hospital')
-					 * Baptist Health Medical Center-Arkadelphia (Slug: 'baptist-health-medical-center_arkadelphia')
-					 * Baptist Health Medical Center-Conway (Slug: 'baptist-health-medical-center_conway')
-					 * Baptist Health Medical Center-Heber Springs (Slug: 'baptist-health-medical-center_heber-springs')
-					 * Baptist Health Medical Center-Hot Spring County (Slug: 'baptist-health-medical-center_hot-spring-county')
-					 * Baptist Health Medical Center-Little Rock (Slug: 'baptist-health-medical-center_little-rock')
-					 * Baptist Health Medical Center-North Little Rock (Slug: 'baptist-health-medical-center_north-little-rock')
-					 * Baptist Health Medical Center-Stuttgart (Slug: 'baptist-health-medical-center_stuttgart')
-					 * John L. McClellan Memorial Veterans' Hospital (Slug: 'cavhs')
-					 * UAMS Medical Center (Slug: 'uams')
+					 * "Arkansas Children's Hospital" (Slug: "ach")
+					 * "Arkansas Children's Northwest" (Slug: "arkansas-childrens-northwest")
+					 * "Arkansas State Hospital" (Slug: "arkansas-state-hospital")
+					 * "Baptist Health Medical Center-Arkadelphia" (Slug: "baptist-health-medical-center_arkadelphia")
+					 * "Baptist Health Medical Center-Conway" (Slug: "baptist-health-medical-center_conway")
+					 * "Baptist Health Medical Center-Heber Springs" (Slug: "baptist-health-medical-center_heber-springs")
+					 * "Baptist Health Medical Center-Hot Spring County" (Slug: "baptist-health-medical-center_hot-spring-county")
+					 * "Baptist Health Medical Center-Little Rock" (Slug: "baptist-health-medical-center_little-rock")
+					 * "Baptist Health Medical Center-North Little Rock" (Slug: "baptist-health-medical-center_north-little-rock")
+					 * "Baptist Health Medical Center-Stuttgart" (Slug: "baptist-health-medical-center_stuttgart")
+					 * "John L. McClellan Memorial Veterans' Hospital" (Slug: "cavhs")
+					 * "UAMS Medical Center" (Slug: "uams")
 
 			*/
 
@@ -1259,7 +1259,7 @@
 
 				Expected taxonomy items:
 
-					 * English
+					 * "English"
 
 			*/
 
@@ -1371,10 +1371,10 @@
 
 				Expected taxonomy items:
 
-					 * Administration
-					 * Faculty
-					 * Leadership
-					 * Staff
+					 * "Administration"
+					 * "Faculty"
+					 * "Leadership"
+					 * "Staff"
 
 			*/
 
@@ -1435,12 +1435,12 @@
 
 				Expected taxonomy items:
 
-					 * College of Health Professions (slug: 'health-professions')
-					 * College of Medicine (slug: 'medicine')
-					 * College of Nursing (slug: 'nursing')
-					 * College of Pharmacy (slug: 'pharmacy')
-					 * College of Public Health (slug: 'public-health')
-					 * Graduate School (slug: 'graduate')
+					 * "College of Health Professions" (slug: "health-professions")
+					 * "College of Medicine" (slug: "medicine")
+					 * "College of Nursing" (slug: "nursing")
+					 * "College of Pharmacy" (slug: "pharmacy")
+					 * "College of Public Health" (slug: "public-health")
+					 * "Graduate School" (slug: "graduate")
 
 			*/
 
@@ -1805,15 +1805,15 @@
 
 				Expected taxonomy items:
 
-					 * Chief Residency
-					 * Externship
-					 * Fellowship
-					 * Internship
-					 * Medical School
-					 * Postdoctoral Fellowship
-					 * Postgraduate Education
-					 * Residency
-					 * Undergraduate Education
+					 * "Chief Residency"
+					 * "Externship"
+					 * "Fellowship"
+					 * "Internship"
+					 * "Medical School"
+					 * "Postdoctoral Fellowship"
+					 * "Postgraduate Education"
+					 * "Residency"
+					 * "Undergraduate Education"
 
 			*/
 
@@ -1875,12 +1875,12 @@
 
 				Expected taxonomy items:
 
-					 * Arkansas Children's MyChart (Slug: 'ach-mychart')
-					 * Baptist Health MyChart (Slug: 'baptist-health-mychart')
-					 * My HealtheVet (Slug: 'my-healthevet')
-					 * MyPortal (Slug: 'fmc-patient-portal')
-					 * None (Slug: '_none')
-					 * UAMS Health MyChart (Slug: 'uams-mychart')
+					 * "Arkansas Children's MyChart" (Slug: "ach-mychart")
+					 * "Baptist Health MyChart" (Slug: "baptist-health-mychart")
+					 * "My HealtheVet" (Slug: "my-healthevet")
+					 * "MyPortal" (Slug: "fmc-patient-portal")
+					 * "None" (Slug: "_none")
+					 * "UAMS Health MyChart" (Slug: "uams-mychart")
 
 			*/
 
@@ -1945,14 +1945,14 @@
 
 				Expected taxonomy items:
 
-					 * Professor
-						 * Adjunct Professor
-					 * Associate Professor
-						 * Adjunct Associate Professor
-					 * Assistant Professor
-						 * Adjunct Assistant Professor
-					 * Instructor
-						 * Adjunct Instructor
+					 * "Professor"
+						 * "Adjunct Professor"
+					 * "Associate Professor"
+						 * "Adjunct Associate Professor"
+					 * "Assistant Professor"
+						 * "Adjunct Assistant Professor"
+					 * "Instructor"
+						 * "Adjunct Instructor"
 
 			*/
 
@@ -2017,25 +2017,25 @@
 
 				Expected taxonomy items:
 
-					 * Dean
-					 * Associate Dean
-					 * Assistant Dean
-					 * Department Chair
-					 * Department Vice Chair
-					 * Department Associate Vice Chair
-					 * Department Assistant Vice Chair
-					 * Director of Clinical Education
-					 * Associate Director of Clinical Education
-					 * Assistant Director of Clinical Education
-					 * Division Chief
-					 * Fellowship Program Director
-					 * Fellowship Program Associate Director
-					 * Fellowship Program Assistant Director
-					 * Residency Program Director
-					 * Residency Program Associate Director
-					 * Residency Program Assistant Director
-					 * Medical Student Clerkship Director
-					 * Medical Student Clerkship Co-Director
+					 * "Dean"
+					 * "Associate Dean"
+					 * "Assistant Dean"
+					 * "Department Chair"
+					 * "Department Vice Chair"
+					 * "Department Associate Vice Chair"
+					 * "Department Assistant Vice Chair"
+					 * "Director of Clinical Education"
+					 * "Associate Director of Clinical Education"
+					 * "Assistant Director of Clinical Education"
+					 * "Division Chief"
+					 * "Fellowship Program Director"
+					 * "Fellowship Program Associate Director"
+					 * "Fellowship Program Assistant Director"
+					 * "Residency Program Director"
+					 * "Residency Program Associate Director"
+					 * "Residency Program Assistant Director"
+					 * "Medical Student Clerkship Director"
+					 * "Medical Student Clerkship Co-Director"
 
 			*/
 
@@ -2100,10 +2100,10 @@
 
 				Expected taxonomy items:
 
-					 * Best Doctors in America 20XX
-					 * AY Magazine Best Healthcare Professionals 20XX
-					 * Castle Connolly Top Doctors 20XX
-					 * Soirée Top Docs 20XX
+					 * "Best Doctors in America 20XX"
+					 * "AY Magazine Best Healthcare Professionals 20XX"
+					 * "Castle Connolly Top Doctors 20XX"
+					 * "Soirée Top Docs 20XX"
 
 			*/
 
@@ -2164,11 +2164,11 @@
 
 				Expected taxonomy items:
 
-					 * Central Arkansas
-					 * Northeast Arkansas
-					 * Northwest Arkansas
-					 * Southeast Arkansas
-					 * Southwest Arkansas
+					 * "Central Arkansas"
+					 * "Northeast Arkansas"
+					 * "Northwest Arkansas"
+					 * "Southeast Arkansas"
+					 * "Southwest Arkansas"
 
 			*/
 
@@ -2229,18 +2229,18 @@
 
 				Expected taxonomy items:
 
-					 * COVID-19 Testing
-					 * COVID-19 Vaccines
-					 * Emergency Room
-					 * Hospital
-					 * Imaging
-					 * Inpatient Unit
-					 * Laboratory
-					 * Outpatient Clinic
-					 * Pediatric Care
-					 * Pharmacy
-					 * Primary Care
-					 * Specialty Care
+					 * "COVID-19 Testing"
+					 * "COVID-19 Vaccines"
+					 * "Emergency Room"
+					 * "Hospital"
+					 * "Imaging"
+					 * "Inpatient Unit"
+					 * "Laboratory"
+					 * "Outpatient Clinic"
+					 * "Pediatric Care"
+					 * "Pharmacy"
+					 * "Primary Care"
+					 * "Specialty Care"
 
 			*/
 
@@ -2407,7 +2407,7 @@
 
 				Expected taxonomy items:
 
-					 * None (Slug: '_none')
+					 * "None" (Slug: "_none")
 
 			*/
 
@@ -2476,8 +2476,8 @@
 
 				Expected taxonomy items:
 
-					 * UAMS (Slug: 'uams')
-						 * UAMS Health (Slug: 'uamshealth')
+					 * "University of Arkansas for Medical Sciences" (Slug: "uams")
+						 * "UAMS Health" (Slug: "uamshealth")
 
 			*/
 
@@ -2548,10 +2548,10 @@
 
 				Expected taxonomy items:
 
-					 * Arkansas Children's (Slug: 'arkansas-childrens')
-					 * Baptist Health (Slug: 'baptist-health')
-					 * United States Department of Veterans Affairs (Slug: 'va')
-						 * Central Arkansas Veterans Healthcare System (Slug: '_va_cavhs')
+					 * "Arkansas Children's" (Slug: "arkansas-childrens")
+					 * "Baptist Health" (Slug: "baptist-health")
+					 * "United States Department of Veterans Affairs" (Slug: "va")
+						 * "Central Arkansas Veterans Healthcare System" (Slug: "_va_cavhs")
 
 			*/
 
