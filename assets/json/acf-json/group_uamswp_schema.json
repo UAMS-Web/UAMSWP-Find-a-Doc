@@ -1033,7 +1033,7 @@
 				{
 					"key": "field_schema_drug_rxcui",
 					"name": "schema_drug_rxcui",
-					"label": "RxCUI drug identifier from RXNORM (rxcui > Text)",
+					"label": "RxCUI drug identifier from RxNorm (rxcui > Text)",
 					"type": "text",
 					"instructions": "Search RxNorm at <a href='https://mor.nlm.nih.gov/RxNav/' target='_blank'>https://mor.nlm.nih.gov/RxNav/</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the rxcui Schema.org property, visit <a href='https://schema.org/rxcui' target='_blank'>https://schema.org/rxcui</a>.",
 					"required": 1,
