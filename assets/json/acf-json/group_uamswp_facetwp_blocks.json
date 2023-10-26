@@ -198,7 +198,7 @@
 		},
 		{
 			"key": "field_facetwp_block_include_pager",
-			"label": "Inlude Pager",
+			"label": "Include Pager",
 			"name": "facetwp_block_include_pager",
 			"type": "true_false",
 			"instructions": "",
