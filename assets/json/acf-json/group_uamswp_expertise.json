@@ -605,7 +605,7 @@
 			"label": "Override Intro Text for Related Providers Subpage",
 			"name": "expertise_providers_fpage_intro",
 			"type": "textarea",
-			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related providers subpage in a pararaph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related providers subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -758,7 +758,7 @@
 			"label": "Override Intro Text for Related Locations Subpage",
 			"name": "expertise_locations_fpage_intro",
 			"type": "textarea",
-			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related locations subpage in a pararaph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related locations subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -913,7 +913,7 @@
 			"label": "Override Intro Text for Descendant Areas of Expertise Subpage",
 			"name": "expertise_descendant_fpage_intro",
 			"type": "textarea",
-			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the descendant areas of expertise subpage in a pararaph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the descendant areas of expertise subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1060,7 +1060,7 @@
 			"label": "Override Intro Text for Related Areas of Expertise Subpage",
 			"name": "expertise_associated_fpage_intro",
 			"type": "textarea",
-			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related areas of expertise subpage in a pararaph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related areas of expertise subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1213,7 +1213,7 @@
 			"label": "Override Intro Text for Related Clinical Resources Subpage",
 			"name": "expertise_clinical_resources_fpage_intro",
 			"type": "textarea",
-			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related clinical resources subpage in a pararaph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related clinical resources subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1335,7 +1335,7 @@
 			"label": "Override Intro Text for Combined Related Conditions and Treatments Block",
 			"name": "expertise_condition_treatment_fpage_intro",
 			"type": "textarea",
-			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all blocks of this type on any area of expertise page(s). If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display in a related conditions and treatments block on the main page for this area of expertise in a pararaph underneath the block title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all blocks of this type on any area of expertise page(s). If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display in a related conditions and treatments block on the main page for this area of expertise in a paragraph underneath the block title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1388,7 +1388,7 @@
 			"label": "Override Intro Text for Related Conditions Block",
 			"name": "expertise_conditions_fpage_intro",
 			"type": "textarea",
-			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all blocks of this type on any area of expertise page(s). If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display in a related conditions block on the main page for this area of expertise in a pararaph underneath the block title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all blocks of this type on any area of expertise page(s). If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display in a related conditions block on the main page for this area of expertise in a paragraph underneath the block title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1441,7 +1441,7 @@
 			"label": "Override Intro Text for Related Treatments and Procedures Block",
 			"name": "expertise_treatments_fpage_intro",
 			"type": "textarea",
-			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all blocks of this type on any area of expertise page(s). If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display in a related treatments and procedures block on the main page for this area of expertise in a pararaph underneath the block title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all blocks of this type on any area of expertise page(s). If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display in a related treatments and procedures block on the main page for this area of expertise in a paragraph underneath the block title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
