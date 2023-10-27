@@ -10139,6 +10139,7 @@
 						 * correctionsPolicy
 						 * currenciesAccepted
 						 * department
+						 * description
 						 * dissolutionDate
 						 * diversityPolicy
 						 * diversityStaffingReport
@@ -10496,25 +10497,6 @@
 							if ( $containedInPlace ) {
 
 								$output['containedInPlace'] = $containedInPlace;
-
-							}
-
-						// description [WIP]
-
-							/**
-							 * A description of the item.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *     - Text
-							 *     - TextObject
-							 */
-
-							$description = null;
-
-							if ( $description ) {
-
-								$output['description'] = $description;
 
 							}
 
