@@ -10326,6 +10326,22 @@
 
 							}
 
+						// Google customer ID (CID) (common use)
+
+							// Query: Does this organization have a listing on Google My Business?
+
+								$google_cid_query = get_field( 'building_google_cid_query', $term ) ?? false;
+
+							// Get value
+
+								$google_cid = null;
+
+								if ( $google_cid_query ) {
+
+									$google_cid = get_field( 'schema_google_cid', $term ) ?? null;
+
+								}
+
 						// additionalType
 
 							/**
@@ -10553,7 +10569,7 @@
 
 							}
 
-						// hasMap [WIP]
+						// hasMap
 
 							/**
 							 * A URL to a map of the place.
@@ -10567,7 +10583,15 @@
 							 * is acceptable.
 							 */
 
-							$hasMap = null;
+							// Get value
+
+								$hasMap = null;
+
+								if ( $google_cid ) {
+
+									$hasMap = 'https://www.google.com/maps?cid=' . $google_cid;
+
+								}
 
 							if ( $hasMap ) {
 
@@ -10575,7 +10599,7 @@
 
 							}
 
-						// identifier [WIP]
+						// identifier
 
 							/**
 							 * The identifier property represents any kind of identifier for any kind of
@@ -10592,13 +10616,30 @@
 							 *     - URL
 							 */
 
-							$identifier = null;
+							// Get values
 
-							if ( $identifier ) {
+								// Base array
 
-								$output['identifier'] = $identifier;
+									$identifier = array();
 
-							}
+								// Google customer ID (CID)
+
+									if ( $google_cid ) {
+
+										$identifier = uamswp_fad_schema_propertyvalue_google_cid(
+											$google_cid, // string|array // Required // Google customer ID
+											$identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+										);
+
+									}
+
+							// Add value to property
+
+								if ( $identifier ) {
+
+									$output['identifier'] = $identifier;
+
+								}
 
 						// image [WIP]
 
