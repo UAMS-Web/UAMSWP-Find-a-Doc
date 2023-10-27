@@ -10479,13 +10479,16 @@
 
 							}
 
-						// containedInPlace [WIP]
+						// containedInPlace [blocked]
 
 							/**
 							 * The basic containment relation between a place and one that contains it.
 							 * expected to be one of these types:
 							 *
 							 *     - Place
+							 *
+							 * Create a taxonomy (or other solution) to define a campus in which this building
+							 * is contained.
 							 */
 
 							$containedInPlace = null;
