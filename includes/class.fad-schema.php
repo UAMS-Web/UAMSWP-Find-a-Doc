@@ -1247,8 +1247,18 @@
 
 				$schema = array(
 					'@type' => 'GeoCoordinates',
-					'latitude' => $latitude,
-					'longitude' => $longitude
+					'latitude' => number_format(
+						$latitude, // float // The number being formatted.
+						5, // int // Sets the number of decimal digits. If 0, the decimal_separator is omitted from the return value.
+						'.', // ?string // Sets the separator for the decimal point.
+						'' // ?string // Sets the thousands separator.
+					),
+					'longitude' => number_format(
+						$longitude, // float // The number being formatted.
+						5, // int // Sets the number of decimal digits. If 0, the decimal_separator is omitted from the return value.
+						'.', // ?string // Sets the separator for the decimal point.
+						'' // ?string // Sets the thousands separator.
+					),
 				);
 
 				if ( $elevation ) {
