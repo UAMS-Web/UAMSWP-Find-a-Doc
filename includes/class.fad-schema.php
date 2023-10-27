@@ -10304,6 +10304,26 @@
 
 							}
 
+						// geo (common use)
+
+							// Get map field value
+
+								$geo_value = get_field( 'location_map', $term ) ?? null;
+
+							// Check field values
+
+								if ( $geo_value ) {
+
+									$geo_value = ( array_key_exists( 'lat', $geo_value ) && array_key_exists( 'lng', $geo_value ) ) ? $geo_value : null;
+
+								}
+
+							if ( $geo ) {
+
+								$output['geo'] = $geo;
+
+							}
+
 						// additionalType
 
 							/**
@@ -10513,26 +10533,6 @@
 							if ( $disambiguatingDescription ) {
 
 								$output['disambiguatingDescription'] = $disambiguatingDescription;
-
-							}
-
-						// geo (common use)
-
-							// Get map field value
-
-								$geo_value = get_field( 'location_map', $term ) ?? null;
-
-							// Check field values
-
-								if ( $geo_value ) {
-
-									$geo_value = ( array_key_exists( 'lat', $geo_value ) && array_key_exists( 'lng', $geo_value ) ) ? $geo_value : null;
-
-								}
-
-							if ( $geo ) {
-
-								$output['geo'] = $geo;
 
 							}
 
