@@ -10118,7 +10118,6 @@
 						 * accommodationCategory
 						 * accommodationFloorPlan
 						 * actionableFeedbackPolicy
-						 * additionalProperty
 						 * aggregateRating
 						 * alumni
 						 * amenityFeature
@@ -10363,6 +10362,83 @@
 									$photo_id, // ID of image to use for 4:3 aspect ratio
 									$photo_id // ID of image to use for 16:9 aspect ratio
 								)
+
+						// additionalProperty
+
+							/**
+							 * A property-value pair representing an additional characteristic of the entity
+							 * (e.g., a product feature or another characteristic for which there is no
+							 * matching property in schema.org).
+							 *
+							 * Note: Publishers should be aware that applications designed to use specific
+							 * schema.org properties (e.g., https://schema.org/width,
+							 * https://schema.org/color, https://schema.org/gtin13) will typically expect such
+							 * data to be provided using those properties, rather than using the generic
+							 * property/value mechanism.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - PropertyValue
+							 */
+
+							// Parking location
+
+								// Base property value
+
+									$additionalProperty_parking = array();
+
+								// Geo value
+
+									// Get Google Map field value
+
+										$parking_geo_value = get_field( 'building_parking_map', $term ) ?? null;
+
+									// Check Google Map field value
+
+										if ( $parking_geo_value ) {
+
+											$parking_geo_value = ( array_key_exists( 'lat', $parking_geo_value ) && array_key_exists( 'lng', $parking_geo_value ) ) ? $parking_geo_value : null;
+
+										}
+
+									// Format Google Map field value as GeoCoordinates
+
+										$parking_geo = null;
+
+										if ( $parking_geo_value ) {
+
+											$parking_geo = uamswp_schema_geo_coordinates(
+												$parking_geo_value['lat'], // string|int // Required // The latitude of a location. For example 37.42242 (WGS 84). // The precision must be at least 5 decimal places.
+												$parking_geo_value['lng'] // string|int // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+											);
+
+										}
+
+								// Construct PropertyValue
+
+									if ( $parking_geo ) {
+
+										$additionalProperty_parking['additionalType'] = 'https://schema.org/ParkingFacility';
+										$additionalProperty_parking['alternateName'] = array(
+											'parking deck',
+											'parking garage',
+											'parking lot',
+											'parking structure'
+										);
+										$additionalProperty_parking['description'] = 'A parking lot or other parking facility.';
+										$additionalProperty_parking['name'] = 'Parking Facility';
+										$additionalProperty_parking['propertyID'] = 'https://www.wikidata.org/wiki/Q55697304'; // Wikidata entry for 'parking facility'
+										$additionalProperty_parking['value'] = $parking_geo;
+
+									}
+
+								// Add to additionalProperty
+
+								if ( $additionalProperty_parking ) {
+
+									$output['additionalProperty'] = $additionalProperty_parking;
+
+								}
 
 						// additionalType
 
