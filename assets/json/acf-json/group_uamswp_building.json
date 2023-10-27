@@ -380,8 +380,8 @@
 			"acfe_permissions": "",
 			"center_lat": "34.7492719",
 			"center_lng": "-92.3198281",
-			"zoom": "",
-			"height": "",
+			"zoom": 14,
+			"height": 400,
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
