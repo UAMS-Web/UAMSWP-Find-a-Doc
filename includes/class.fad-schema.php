@@ -1203,9 +1203,9 @@
 	// Add data to an array defining schema data for GeoCoordinates
 
 		function uamswp_schema_geo_coordinates(
-			string $latitude, // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-			string $longitude, // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-			string $elevation = '', // string // Optional // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
+			$latitude, // string|int // Required // The latitude of a location. For example 37.42242 (WGS 84). // The precision must be at least 5 decimal places.
+			$longitude, // string|int // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+			$elevation = '', // string|int // Optional // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
 			array $schema_geo_coordinates = array() // array // Optional // Existing main GeoCoordinates schema array
 		) {
 
@@ -1222,8 +1222,8 @@
 			 * 		// Add this location's details to the main GeoCoordinates schema array
 			 *
 			 * 			$schema_geo_coordinates = uamswp_schema_geo_coordinates(
-			 * 				$schema_latitude, // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-			 * 				$schema_longitude, // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+			 * 				$schema_latitude, // string|int // Required // The latitude of a location. For example 37.42242 (WGS 84). // The precision must be at least 5 decimal places.
+			 * 				$schema_longitude, // string|int // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
 			 * 				$schema_elevation, // string // Optional // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
 			 * 				$schema_geo_coordinates // array // Optional // Main GeoCoordinates schema array
 			 * 			);
@@ -22819,8 +22819,8 @@
 											if ( $location_geo_value ) {
 
 												$location_geo = uamswp_schema_geo_coordinates(
-													$location_geo_value['lat'], // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-													$location_geo_value['lng'] // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+													$location_geo_value['lat'], // string|int // Required // The latitude of a location. For example 37.42242 (WGS 84). // The precision must be at least 5 decimal places.
+													$location_geo_value['lng'] // string|int // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
 												);
 
 											}
