@@ -519,6 +519,30 @@
 			"acfe_settings": "",
 			"acfe_validate": "",
 			"library": "all"
+		},
+		{
+			"key": "field_building_globallocationnumber",
+			"label": "Global Location Number (globalLocationNumber > Text)",
+			"name": "building_globallocationnumber",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_globallocationnumber"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
 		}
 	],
 	"location": [
