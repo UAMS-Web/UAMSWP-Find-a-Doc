@@ -10134,6 +10134,7 @@
 						 * branchOf
 						 * checkinTime
 						 * checkoutTime
+						 * contactPoint
 						 * contactPoints
 						 * containedIn
 						 * containsPlace
@@ -10499,22 +10500,6 @@
 							if ( $brand ) {
 
 								$output['brand'] = $brand;
-
-							}
-
-						// contactPoint [WIP]
-
-							/**
-							 * A contact point for a person or organization.
-							 *
-							 *     - ContactPoint
-							 */
-
-							$contactPoint = null;
-
-							if ( $contactPoint ) {
-
-								$output['contactPoint'] = $contactPoint;
 
 							}
 
