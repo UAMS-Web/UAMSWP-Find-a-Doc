@@ -10096,6 +10096,144 @@
 
 					// Construct schema item
 
+						/**
+						 * The following properties are either beyond the scope of what is being included
+						 * in the building item schema, irrelevant to the building item schema, or are
+						 * superseded by another property, and so they will not be included:
+						 *
+						 * acceptsReservations
+						 * accommodationCategory
+						 * accommodationFloorPlan
+						 * actionableFeedbackPolicy
+						 * aggregateRating
+						 * alumni
+						 * amenityFeature
+						 * archiveHeld
+						 * areaServed
+						 * audience
+						 * availableLanguage
+						 * availableService
+						 * award
+						 * awards
+						 * bed
+						 * branchCode
+						 * branchOf
+						 * checkinTime
+						 * checkoutTime
+						 * contactPoints
+						 * containedIn
+						 * containsPlace
+						 * correctionsPolicy
+						 * currenciesAccepted
+						 * department
+						 * dissolutionDate
+						 * diversityPolicy
+						 * diversityStaffingReport
+						 * duns
+						 * email
+						 * employee
+						 * employees
+						 * ethicsPolicy
+						 * event
+						 * events
+						 * faxNumber
+						 * feesAndCommissionsSpecification
+						 * floorLevel
+						 * floorSize
+						 * founder
+						 * founders
+						 * foundingDate
+						 * foundingLocation
+						 * funder
+						 * funding
+						 * geoContains
+						 * geoCoveredBy
+						 * geoCovers
+						 * geoCrosses
+						 * geoDisjoint
+						 * geoEquals
+						 * geoIntersects
+						 * geoOverlaps
+						 * geoTouches
+						 * geoWithin
+						 * hasCredential
+						 * hasDriveThroughService
+						 * hasMenu
+						 * hasMerchantReturnPolicy
+						 * hasOfferCatalog
+						 * hasPOS
+						 * hasProductReturnPolicy
+						 * healthPlanNetworkId
+						 * healthcareReportingData
+						 * hospitalAffiliation
+						 * iataCode
+						 * icaoCode
+						 * includesAttraction
+						 * interactionStatistic
+						 * isAcceptingNewPatients
+						 * isicV4
+						 * iso6523Code
+						 * keywords
+						 * knowsAbout
+						 * knowsLanguage
+						 * leaseLength
+						 * legalName
+						 * leiCode
+						 * logo
+						 * mainEntityOfPage
+						 * makesOffer
+						 * map
+						 * maps
+						 * maximumAttendeeCapacity
+						 * medicalSpecialty
+						 * member
+						 * memberOf
+						 * members
+						 * menu
+						 * naics
+						 * nonprofitStatus
+						 * numberOfAccommodationUnits
+						 * numberOfAvailableAccommodationUnits
+						 * numberOfBathroomsTotal
+						 * numberOfBedrooms
+						 * numberOfEmployees
+						 * numberOfFullBathrooms
+						 * numberOfPartialBathrooms
+						 * numberOfRooms
+						 * occupancy
+						 * openingHours
+						 * openingHoursSpecification
+						 * ownershipFundingInfo
+						 * owns
+						 * paymentAccepted
+						 * permittedUsage
+						 * petsAllowed
+						 * photos
+						 * potentialAction
+						 * priceRange
+						 * publishingPrinciples
+						 * review
+						 * reviews
+						 * screenCount
+						 * seeks
+						 * servesCuisine
+						 * serviceArea
+						 * slogan
+						 * specialOpeningHoursSpecification
+						 * sponsor
+						 * starRating
+						 * subOrganization
+						 * subjectOf
+						 * taxID
+						 * telephone
+						 * tourBookingPage
+						 * touristType
+						 * unnamedSourcesPolicy
+						 * url
+						 * vatID
+						 * yearBuilt
+						 */
+
 						// Get common property values
 
 							include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
@@ -10121,12 +10259,560 @@
 
 							}
 
-						// foo
+						// additionalProperty [WIP]
 
 							/**
-							 * This property is beyond the scope of what is being included in the building
-							 * item schema and so it will not be included.
+							 * A property-value pair representing an additional characteristic of the entity
+							 * (e.g., a product feature or another characteristic for which there is no
+							 * matching property in schema.org).
+							 *
+							 * Note: Publishers should be aware that applications designed to use specific
+							 * schema.org properties (e.g., https://schema.org/width,
+							 * https://schema.org/color, https://schema.org/gtin13) will typically expect such
+							 * data to be provided using those properties, rather than using the generic
+							 * property/value mechanism.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - PropertyValue
 							 */
+
+							$additionalProperty = null;
+
+							if ( $additionalProperty ) {
+
+								$output['additionalProperty'] = $additionalProperty;
+
+							}
+
+						// additionalType
+
+							/**
+							 * An additional type for the item, typically used for adding more specific types
+							 * from external vocabularies in microdata syntax. This is a relationship between
+							 * something and a class that the thing is in. Typically the value is a
+							 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+							 * in RDF. Text values can be used sparingly, for cases where useful information
+							 * can be added without their being an appropriate schema to reference. In the
+							 * case of text values, the class label should follow the schema.org style guide.
+							 *
+							 * Subproperty of:
+							 *     - rdf:type
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Text
+							 *     - URL
+							 */
+
+							// Get additionalType repeater field value
+
+								$additionalType_repeater = get_field( 'schema_additionalType', $entity ) ?? null;
+
+							// Add each item to additionalType property values array
+
+								$additionalType = null;
+
+								if ( $additionalType_repeater ) {
+
+									$additionalType = uamswp_fad_schema_additionaltype(
+										$additionalType_repeater, // additionalType repeater field
+										'schema_additionalType_uri' // additionalType item field name
+									);
+
+								}
+
+							if ( $additionalType ) {
+
+								$output['additionalType'] = $additionalType;
+
+							}
+
+						// address
+
+							/**
+							 * Physical address of the item.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - PostalAddress
+							 *     - Text
+							 */
+
+							$address = null;
+							$address_streetAddress = get_field( 'building_streetaddress', $term ) ?? '';
+							$address_addressRegion = get_field( 'building_state', $term ) ?? '';
+							$address_addressLocality = get_field( 'building_city', $term ) ?? '';
+							$address_postalCode = get_field( 'building_zip', $term ) ?? '';
+							$address_addressCountry = $schema_common_usa;
+
+							if (
+								$address_streetAddress
+								&&
+								$address_addressRegion
+								&&
+								$address_addressLocality
+								&&
+								$address_postalCode
+							) {
+
+								$address = uamswp_fad_schema_postaladdress(
+									$address_streetAddress, // string // Required // The street address or the post office box number for PO box addresses.
+									true, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
+									$address_addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
+									$address_addressRegion, // string // Required // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+									$address_postalCode, // string // Required // The postal code (e.g., 94043).
+									$address_addressCountry // string|array // Optional // The country's ISO 3166-1 alpha-2 country code.
+								);
+
+							}
+
+							if ( $address ) {
+
+								$output['address'] = $address;
+
+							}
+
+						// alternateName
+
+							/**
+							 * An alias for the item.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Text
+							 */
+
+							// Get alternateName repeater field value
+
+								$alternateName_repeater = get_field( 'schema_alternatename', $term ) ?? null;
+
+							// Add each item to alternateName property values array
+
+								$alternateName = null;
+
+								if ( $alternateName_repeater ) {
+
+									$alternateName = uamswp_fad_schema_alternatename(
+										$alternateName_repeater, // array // Required // alternateName repeater field
+										'schema_alternatename_text' // string // Optional // alternateName item field name
+									);
+
+								}
+
+							if ( $alternateName ) {
+
+								$output['alternateName'] = $alternateName;
+
+							}
+
+						// brand [WIP]
+
+							/**
+							 * The brand(s) associated with a product or service, or the brand(s) maintained
+							 * by an organization or business person.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Brand
+							 *     - Organization
+							 */
+
+							$brand = null;
+
+							if ( $brand ) {
+
+								$output['brand'] = $brand;
+
+							}
+
+						// contactPoint [WIP]
+
+							/**
+							 * A contact point for a person or organization.
+							 *
+							 *     - ContactPoint
+							 */
+
+							$contactPoint = null;
+
+							if ( $contactPoint ) {
+
+								$output['contactPoint'] = $contactPoint;
+
+							}
+
+						// containedInPlace [WIP]
+
+							/**
+							 * The basic containment relation between a place and one that contains it.
+							 * expected to be one of these types:
+							 *
+							 *     - Place
+							 */
+
+							$containedInPlace = null;
+
+							if ( $containedInPlace ) {
+
+								$output['containedInPlace'] = $containedInPlace;
+
+							}
+
+						// description [WIP]
+
+							/**
+							 * A description of the item.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Text
+							 *     - TextObject
+							 */
+
+							$description = null;
+
+							if ( $description ) {
+
+								$output['description'] = $description;
+
+							}
+
+						// disambiguatingDescription [WIP]
+
+							/**
+							 * A sub property of description. A short description of the item used to
+							 * disambiguate from other, similar items. Information from other properties (in
+							 * particular, name) may be necessary for the description to be useful for
+							 * disambiguation.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Text
+							 */
+
+							$disambiguatingDescription = null;
+
+							if ( $disambiguatingDescription ) {
+
+								$output['disambiguatingDescription'] = $disambiguatingDescription;
+
+							}
+
+						// geo [WIP]
+
+							/**
+							 * The geo coordinates of the place.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - GeoCoordinates
+							 *     - GeoShape
+							 */
+
+							$geo = null;
+
+							if ( $geo ) {
+
+								$output['geo'] = $geo;
+
+							}
+
+						// globalLocationNumber [WIP]
+
+							/**
+							 * The Global Location Number (GLN, sometimes also referred to as International
+							 * Location Number or ILN) of the respective organization, person, or place. The
+							 * GLN is a 13-digit number used to identify parties and physical locations.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Text
+							 */
+
+							$globalLocationNumber = null;
+
+							if ( $globalLocationNumber ) {
+
+								$output['globalLocationNumber'] = $globalLocationNumber;
+
+							}
+
+						// hasMap [WIP]
+
+							/**
+							 * A URL to a map of the place.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Map
+							 *     - URL
+							 *
+							 * The examples on Schema.org indicate that a URL to the location on Google Maps
+							 * is acceptable.
+							 */
+
+							$hasMap = null;
+
+							if ( $hasMap ) {
+
+								$output['hasMap'] = $hasMap;
+
+							}
+
+						// identifier [WIP]
+
+							/**
+							 * The identifier property represents any kind of identifier for any kind of
+							 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
+							 * properties for representing many of these, either as textual strings or as
+							 * URL (URI) links.
+							 *
+							 * See https://schema.org/docs/datamodel.html#identifierBg for more details.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - PropertyValue
+							 *     - Text
+							 *     - URL
+							 */
+
+							$identifier = null;
+
+							if ( $identifier ) {
+
+								$output['identifier'] = $identifier;
+
+							}
+
+						// image [WIP]
+
+							/**
+							 * An image of the item. This can be a URL or a fully described ImageObject.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - ImageObject
+							 *     - URL
+							 */
+
+							$image = null;
+
+							if ( $image ) {
+
+								$output['image'] = $image;
+
+							}
+
+						// isAccessibleForFree
+
+							/**
+							 * A flag to signal that the item, event, or place is accessible for free.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Boolean
+							 */
+
+							$isAccessibleForFree = 'True';
+
+							if ( $isAccessibleForFree ) {
+
+								$output['isAccessibleForFree'] = $isAccessibleForFree;
+
+							}
+
+						// latitude [WIP]
+
+							/**
+							 * The latitude of a location. For example 37.42242 (WGS 84).
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Number
+							 *     - Text
+							 */
+
+							$latitude = null;
+
+							if ( $latitude ) {
+
+								$output['latitude'] = $latitude;
+
+							}
+
+						// location
+
+							/**
+							 * The location of, for example, where an event is happening, where an
+							 * organization is located, or where an action takes place.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Place
+							 *     - PostalAddress
+							 *     - Text
+							 *     - VirtualLocation
+							 */
+
+							$location = $address;
+
+							if ( $location ) {
+
+								$output['location'] = $location;
+
+							}
+
+						// longitude [WIP]
+
+							/**
+							 * The longitude of a location. For example -122.08585 (WGS 84).
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Number
+							 *     - Text
+							 */
+
+							$longitude = null;
+
+							if ( $longitude ) {
+
+								$output['longitude'] = $longitude;
+
+							}
+
+						// name
+
+							/**
+							 * The name of the item.
+							 *
+							 * Subproperty of:
+							 *
+							 *     - rdfs:label
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Text
+							 */
+
+							$name = get_field( 'building_name', $term ) ?? null;
+
+							if ( $name ) {
+
+								$output['name'] = $name;
+
+							}
+
+						// parentOrganization [WIP]
+
+							/**
+							 * The larger organization that this organization is a subOrganization of, if any.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Organization
+							 */
+
+							$parentOrganization = null;
+
+							if ( $parentOrganization ) {
+
+								$output['parentOrganization'] = $parentOrganization;
+
+							}
+
+						// photo [WIP]
+
+							/**
+							 * A photograph of this place.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - ImageObject
+							 *     - Photograph
+							 */
+
+							$photo = null;
+
+							if ( $photo ) {
+
+								$output['photo'] = $photo;
+
+							}
+
+						// publicAccess
+
+							/**
+							 * A flag to signal that the Place is open to public visitors. If this property
+							 * is omitted there is no assumed default boolean value.
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Boolean
+							 */
+
+							$publicAccess = 'True';
+
+							if ( $publicAccess ) {
+
+								$output['publicAccess'] = $publicAccess;
+
+							}
+
+						// sameAs
+
+							/**
+							 * URL of a reference Web page that unambiguously indicates the item's identity
+							 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+							 * website).
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - URL
+							 */
+
+							// Get sameAs repeater field value
+
+								$sameAs_repeater = get_field( 'schema_sameas', $entity ) ?? null;
+
+							// Add each item to sameAs property values array
+
+								$sameAs = null;
+
+								if ( $sameAs_repeater ) {
+
+									$sameAs = uamswp_fad_schema_sameas(
+										$sameAs_repeater, // sameAs repeater field
+										'schema_sameas_url' // sameAs item field name
+									);
+
+								}
+
+							if ( $sameAs ) {
+
+								$output['sameAs'] = $sameAs;
+
+							}
+
+						// smokingAllowed
+
+							/**
+							 * Indicates whether it is allowed to smoke in the place (e.g., in the restaurant,
+							 * hotel or hotel room).
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - Boolean
+							 */
+
+							$smokingAllowed = 'False';
+
+							if ( $smokingAllowed ) {
+
+								$output['smokingAllowed'] = $smokingAllowed;
+
+							}
 
 					// Clean up the output array
 
