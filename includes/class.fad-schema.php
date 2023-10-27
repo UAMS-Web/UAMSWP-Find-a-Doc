@@ -6912,6 +6912,8 @@
 							/**
 							 * The geo coordinates of the place.
 							 *
+							 * The precision must be at least 5 decimal places.
+							 *
 							 * Values expected to be one of these types:
 							 *
 							 *     - GeoCoordinates
@@ -10508,6 +10510,8 @@
 
 							/**
 							 * The geo coordinates of the place.
+							 *
+							 * The precision must be at least 5 decimal places.
 							 *
 							 * Values expected to be one of these types:
 							 *
@@ -22795,6 +22799,8 @@
 
 									/**
 									 * The geo coordinates of the place.
+									 *
+									 * The precision must be at least 5 decimal places.
 									 *
 									 * Values expected to be one of these types:
 									 *
