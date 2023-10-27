@@ -10344,6 +10344,25 @@
 
 								}
 
+						// photo (common use)
+
+							// Get image ID
+
+								$photo_id = get_field( 'building_photo', $term ) ?? 0;
+
+							// Create ImageObject from image ID
+
+								$photo_ImageObject = uamswp_fad_schema_imageobject_thumbnails(
+									$schema_common_website_url, // URL of entity with which the image is associated
+									$nesting_level + 1, // Nesting level within the main schema
+									'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9', 'full')
+									$id_fragment . '-Photo', // Base fragment identifier
+									$photo_id, // ID of image to use for 1:1 aspect ratio
+									0, // ID of image to use for 3:4 aspect ratio
+									$photo_id, // ID of image to use for 4:3 aspect ratio
+									$photo_id // ID of image to use for 16:9 aspect ratio
+								)
+
 						// additionalType
 
 							/**
@@ -10643,7 +10662,7 @@
 
 								}
 
-						// image [WIP]
+						// image
 
 							/**
 							 * An image of the item. This can be a URL or a fully described ImageObject.
@@ -10654,7 +10673,7 @@
 							 *     - URL
 							 */
 
-							$image = null;
+							$image = $photo_ImageObject;
 
 							if ( $image ) {
 
@@ -10804,7 +10823,7 @@
 
 							}
 
-						// photo [WIP]
+						// photo
 
 							/**
 							 * A photograph of this place.
@@ -10815,7 +10834,7 @@
 							 *     - Photograph
 							 */
 
-							$photo = null;
+							$photo = $photo_ImageObject;
 
 							if ( $photo ) {
 
