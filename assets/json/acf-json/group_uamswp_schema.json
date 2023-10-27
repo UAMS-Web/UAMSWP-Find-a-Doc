@@ -1480,7 +1480,23 @@
 			"acfe_permissions": "",
 			"input_mask": "999999999999",
 			"acfe_settings": "",
-			"acfe_validate": ""
+			"acfe_validate": {
+				"globallocationnumber_653c27a5323a4": {
+					"acfe_validate_location": "",
+					"acfe_validate_rules_and": {
+						"globallocationnumber_653c2815323a5": {
+							"acfe_validate_function": "value",
+							"acfe_validate_operator": "!empty"
+						},
+						"globallocationnumber_653c2a907a06c": {
+							"acfe_validate_function": "strlen",
+							"acfe_validate_operator": "<=",
+							"acfe_validate_match": "12"
+						}
+					},
+					"acfe_validate_error": "The expected format for this value is 12 digits"
+				}
+			}
 		}
 	},
 	"location": "",
