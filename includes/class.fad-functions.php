@@ -11510,7 +11510,7 @@ function uamswp_prevent_orphan($string) {
 												( isset($location_city) ? $location_city : '' ), // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
 												( isset($location_state) ? $location_state : '' ), // string // Required // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
 												( isset($location_zip) ? $location_zip : '' ), // string // Required // The postal code (e.g., 94043).
-												'', // string // Optional // The country's ISO 3166-1 alpha-2 country code. // Default: 'US'
+												'', // string|array // Optional // The country's ISO 3166-1 alpha-2 country code.
 												( isset($location_title) ? $location_title : '' ), // string // Optional // The name of the item.
 												( isset($location_phone) ? $location_phone : '' ), // string // Optional // The telephone number.
 												( isset($location_fax) ? $location_fax : '' ), // string // Optional // The fax number.

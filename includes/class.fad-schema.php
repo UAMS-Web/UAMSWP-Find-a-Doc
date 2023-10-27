@@ -10,7 +10,7 @@
 			string $addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
 			string $addressRegion, // string // Required // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
 			string $postalCode, // string // Required // The postal code (e.g., 94043).
-			string $addressCountry = 'US', // string // Optional // The country's ISO 3166-1 alpha-2 country code. // Default: 'US'
+			$addressCountry = '', // string|array // Optional // The country's ISO 3166-1 alpha-2 country code.
 			string $name = '', // string // Optional // The name of the item.
 			string $telephone = '', // string // Optional // The telephone number.
 			string $faxNumber = '', // string // Optional // The fax number.
@@ -34,7 +34,7 @@
 			 * 				$location_addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
 			 * 				$location_addressRegion, // string // Required // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
 			 * 				$location_postalCode, // string // Required // The postal code (e.g., 94043).
-			 * 				'', // string // Optional // The country's ISO 3166-1 alpha-2 country code. // Default: 'US'
+			 * 				'', // string|array // Optional // The country's ISO 3166-1 alpha-2 country code.
 			 * 				$location_title = '', // string // Optional // The name of the item.
 			 * 				$location_phone_format_dash = '', // string // Optional // The telephone number.
 			 * 				$location_fax_format_dash = '', // string // Optional // The fax number.
@@ -42,9 +42,25 @@
 			 * 			);
 			 */
 
+			// Get common property values
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
+
 			// Check/define variables
 
-				$addressCountry = $addressCountry ?: 'US';
+				// Set fallback value for addressCountry
+
+					if (
+						empty($addressCountry)
+						||
+						$addressCountry == 'US'
+						||
+						$addressCountry == 'USA'
+					) {
+
+						$addressCountry = $schema_common_usa;
+
+					}
 
 				// Check streetAddress vs. postOfficeBoxNumber
 
