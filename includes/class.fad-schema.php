@@ -9177,7 +9177,7 @@
 		// Construct a list of brand organization items associated with an entity
 
 			function uamswp_fad_schema_brand_organization_list(
-				int $entity, // int // Required // Post ID
+				$entity, // int|WP_Term // Required // Post ID or term object
 				array $brand_org = array() // array // Optional // Pre-existing list array for brand organizations to which to add additional items
 			) {
 
@@ -11620,7 +11620,7 @@
 													$provider_specific_clinical_organization = array();
 
 												$provider_specific_clinical_organization = uamswp_fad_schema_brand_organization_list(
-													$entity, // int // Required // Post ID
+													$entity, // int|WP_Term // Required // Post ID or term object
 													$provider_specific_clinical_organization // array // Optional // Pre-existing list array for brand organizations to which to add additional items
 												);
 
@@ -19725,7 +19725,7 @@
 												if ( $location_specific_clinical_organization_override ) {
 
 													$location_specific_clinical_organization = uamswp_fad_schema_brand_organization_list(
-														$entity, // int // Required // Post ID
+														$entity, // int|WP_Term // Required // Post ID or term object
 														$location_specific_clinical_organization // array // Optional // Pre-existing list array for brand organizations to which to add additional items
 													);
 
@@ -25904,7 +25904,7 @@
 													$expertise_specific_clinical_organization = array();
 
 												$expertise_specific_clinical_organization = uamswp_fad_schema_brand_organization_list(
-													$entity, // int // Required // Post ID
+													$entity, // int|WP_Term // Required // Post ID or term object
 													$expertise_specific_clinical_organization // array // Optional // Pre-existing list array for brand organizations to which to add additional items
 												);
 
