@@ -10140,6 +10140,7 @@
 						 * currenciesAccepted
 						 * department
 						 * description
+						 * disambiguatingDescription
 						 * dissolutionDate
 						 * diversityPolicy
 						 * diversityStaffingReport
@@ -10497,27 +10498,6 @@
 							if ( $containedInPlace ) {
 
 								$output['containedInPlace'] = $containedInPlace;
-
-							}
-
-						// disambiguatingDescription [WIP]
-
-							/**
-							 * A sub property of description. A short description of the item used to
-							 * disambiguate from other, similar items. Information from other properties (in
-							 * particular, name) may be necessary for the description to be useful for
-							 * disambiguation.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *     - Text
-							 */
-
-							$disambiguatingDescription = null;
-
-							if ( $disambiguatingDescription ) {
-
-								$output['disambiguatingDescription'] = $disambiguatingDescription;
 
 							}
 
