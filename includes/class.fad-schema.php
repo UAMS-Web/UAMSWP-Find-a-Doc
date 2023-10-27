@@ -10533,7 +10533,7 @@
 
 							}
 
-						// globalLocationNumber [WIP]
+						// globalLocationNumber
 
 							/**
 							 * The Global Location Number (GLN, sometimes also referred to as International
@@ -10545,7 +10545,7 @@
 							 *     - Text
 							 */
 
-							$globalLocationNumber = null;
+							$globalLocationNumber = get_field( 'schema_globallocationnumber', $term ) ?? $null;
 
 							if ( $globalLocationNumber ) {
 
