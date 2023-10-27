@@ -10256,7 +10256,8 @@
 
 						// @id
 
-							$id = $schema_common_website_url . '#Building-' . $term_id;
+							$id_fragment = 'Building-' . $term_id;
+							$id = $schema_common_website_url . '#' . $id_fragment;
 
 							if ( $id ) {
 
