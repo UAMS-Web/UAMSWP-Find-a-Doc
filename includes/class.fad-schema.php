@@ -5637,15 +5637,19 @@
 						// additionalProperty
 
 							/**
-							 * [Insert definition here]
+							 * A property-value pair representing an additional characteristic of the entity
+							 * (e.g., a product feature or another characteristic for which there is no
+							 * matching property in schema.org).
 							 *
-							 * Subproperty of:
-							 *
-							 *     - [Insert property name here]
+							 * Note: Publishers should be aware that applications designed to use specific
+							 * schema.org properties (e.g., https://schema.org/width,
+							 * https://schema.org/color, https://schema.org/gtin13) will typically expect such
+							 * data to be provided using those properties, rather than using the generic
+							 * property/value mechanism.
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *     - PropertyValue
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -6059,18 +6063,9 @@
 						// contactPoint
 
 							/**
-							 * [Insert definition here]
+							 * A contact point for a person or organization.
 							 *
-							 * Subproperty of:
-							 *
-							 *     - [Insert property name here]
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *     - [Insert type name here]
-							 *
-							 * This property is beyond the scope of what is being included in the brand
-							 * organization item schema and so it will not be included.
+							 *     - ContactPoint
 							 */
 
 							// Base list array
@@ -6456,21 +6451,10 @@
 
 							}
 
-						// contactPoints
+						// contactPoints [superseded]
 
 							/**
-							 * [Insert definition here]
-							 *
-							 * Subproperty of:
-							 *
-							 *     - [Insert property name here]
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *     - [Insert type name here]
-							 *
-							 * This property is beyond the scope of what is being included in the brand
-							 * organization item schema and so it will not be included.
+							 * SupersededBy: contactPoint
 							 */
 
 						// containedIn
@@ -7974,15 +7958,12 @@
 						// latitude
 
 							/**
-							 * [Insert definition here]
-							 *
-							 * Subproperty of:
-							 *
-							 *     - [Insert property name here]
+							 * The latitude of a location. For example 37.42242 (WGS 84).
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *     - Number
+							 *     - Text
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8048,15 +8029,12 @@
 						// longitude
 
 							/**
-							 * [Insert definition here]
-							 *
-							 * Subproperty of:
-							 *
-							 *     - [Insert property name here]
+							 * The longitude of a location. For example -122.08585 (WGS 84).
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *     - Number
+							 *     - Text
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
