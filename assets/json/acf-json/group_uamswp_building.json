@@ -198,9 +198,9 @@
 			"acfe_settings": ""
 		},
 		{
-			"key": "field_building_address",
+			"key": "field_building_streetaddress",
 			"label": "Street Address",
-			"name": "building_address",
+			"name": "building_streetaddress",
 			"type": "text",
 			"instructions": "Spell out numbered streets nine and under; use figures for <em>10</em> and above (e.g., <em>5 Sixth Ave.</em>, <em>3012 50th St.</em>, <em>No. 10 Downing St.</em>).</p><p class='description' style='margin-top: 0.5em;'>Use the abbreviations <em>Ave.</em>, <em>Blvd.</em> and <em>St.</em> Otherwise, spell out similar words (e.g., <em>Alley</em>, <em>Drive</em>, <em>Road</em>, <em>Terrace</em>).</p><p class='description' style='margin-top: 0.5em;'>Always use figures for an address number (e.g., <em>9 Morningside Circle</em>).</p><p class='description' style='margin-top: 0.5em;'>Spell out and capitalize <em>First</em> through <em>Ninth</em> when used as street names; use figures for <em>10th</em> and above (e.g., <em>7 Fifth Ave.</em>, <em>100 21st St.</em>).</p><p class='description' style='margin-top: 0.5em;'>Abbreviate compass points used to indicate directional ends of a street or quadrants of a city in a numbered address (e.g., <em>222 E. 42nd St.</em>, <em>562 W. 43rd St.</em>, <em>600 K St. NW</em>). Do not use periods in quadrant abbreviations (e.g., <em>NW</em>, <em>SE</em>).</p><p class='description' style='margin-top: 0.5em;'>Use these forms, as appropriate in the context, for highways identified by number: <em>U.S. Highway 67</em>, <em>Arkansas Highway 10</em>, <em>Interstate 630</em>.</p><p class='description' style='margin-top: 0.5em;'>When a letter is appended to a number, capitalize it but do not use a hyphen (e.g., <em>U.S. Highway 71B</em>).",
 			"required": 1,
