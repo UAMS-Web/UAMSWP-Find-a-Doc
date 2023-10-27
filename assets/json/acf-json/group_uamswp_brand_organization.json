@@ -976,20 +976,25 @@
 			"key": "field_brandorg_globallocationnumber",
 			"label": "Global Location Number (globalLocationNumber > Text)",
 			"name": "brandorg_globallocationnumber",
-			"type": "text",
-			"instructions": "The Global Location Number — a.k.a. GLN, International Location Number or ILN — of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.",
+			"type": "clone",
+			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
-				"class": "",
+				"class": "uamswp-hide-clone-label",
 				"id": ""
 			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_globallocationnumber"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
 		},
 		{
 			"key": "field_brandorg_isicv4",

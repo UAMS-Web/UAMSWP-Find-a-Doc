@@ -1463,6 +1463,24 @@
 			"layout": "vertical",
 			"return_format": "value",
 			"save_other_choice": 0
+		},
+		"field_schema_globallocationnumber": {
+			"key": "field_schema_globallocationnumber",
+			"label": "Global Location Number (globalLocationNumber > Text)",
+			"name": "schema_globallocationnumber",
+			"type": "maskfield",
+			"instructions": "The Global Location Number — a.k.a. GLN, International Location Number or ILN — of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"input_mask": "999999999999",
+			"acfe_settings": "",
+			"acfe_validate": ""
 		}
 	},
 	"location": "",

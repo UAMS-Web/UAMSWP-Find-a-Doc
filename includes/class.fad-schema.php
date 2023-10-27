@@ -7328,7 +7328,7 @@
 								 *     - Text
 								 */
 
-								$globalLocationNumber = get_field( 'brandorg_globallocationnumber', $term ) ?? null;
+								$globalLocationNumber = get_field( 'schema_globallocationnumber', $term ) ?? null;
 
 								if ( $globalLocationNumber ) {
 
