@@ -10516,7 +10516,27 @@
 
 							}
 
-						// geo [WIP]
+						// geo (common use)
+
+							// Get map field value
+
+								$geo_value = get_field( 'location_map', $term ) ?? null;
+
+							// Check field values
+
+								if ( $geo_value ) {
+
+									$geo_value = ( array_key_exists( 'lat', $geo_value ) && array_key_exists( 'lng', $geo_value ) ) ? $geo_value : null;
+
+								}
+
+							if ( $geo ) {
+
+								$output['geo'] = $geo;
+
+							}
+
+						// geo
 
 							/**
 							 * The geo coordinates of the place.
@@ -10529,7 +10549,18 @@
 							 *     - GeoShape
 							 */
 
-							$geo = null;
+							// Get values
+
+								$geo = null;
+
+								if ( $geo_value ) {
+
+									$geo = uamswp_schema_geo_coordinates(
+										$geo_value['lat'], // string|int // Required // The latitude of a location. For example 37.42242 (WGS 84). // The precision must be at least 5 decimal places.
+										$geo_value['lng'] // string|int // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+									);
+
+								}
 
 							if ( $geo ) {
 
@@ -10641,7 +10672,7 @@
 
 							}
 
-						// latitude [WIP]
+						// latitude
 
 							/**
 							 * The latitude of a location. For example 37.42242 (WGS 84).
@@ -10652,7 +10683,20 @@
 							 *     - Text
 							 */
 
-							$latitude = null;
+							// Get values
+
+								$latitude = null;
+
+								if ( $geo_value ) {
+
+									$latitude = number_format(
+										$geo_value['lat'], // float // The number being formatted.
+										5, // int // Sets the number of decimal digits. If 0, the decimal_separator is omitted from the return value.
+										'.', // ?string // Sets the separator for the decimal point.
+										'' // ?string // Sets the thousands separator.
+									);
+
+								}
 
 							if ( $latitude ) {
 
@@ -10682,7 +10726,7 @@
 
 							}
 
-						// longitude [WIP]
+						// longitude
 
 							/**
 							 * The longitude of a location. For example -122.08585 (WGS 84).
@@ -10693,7 +10737,20 @@
 							 *     - Text
 							 */
 
-							$longitude = null;
+							// Get values
+
+								$latitude = null;
+
+								if ( $geo_value ) {
+
+									$latitude = number_format(
+										$geo_value['lng'], // float // The number being formatted.
+										5, // int // Sets the number of decimal digits. If 0, the decimal_separator is omitted from the return value.
+										'.', // ?string // Sets the separator for the decimal point.
+										'' // ?string // Sets the thousands separator.
+									);
+
+								}
 
 							if ( $longitude ) {
 
