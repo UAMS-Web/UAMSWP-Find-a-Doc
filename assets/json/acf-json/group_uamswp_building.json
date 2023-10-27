@@ -198,6 +198,66 @@
 			"acfe_settings": ""
 		},
 		{
+			"key": "field_building_brandorg_query",
+			"label": "Primary Brand Organization for This Location",
+			"name": "building_brandorg_query",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_brandorg_query"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_building_brandorg",
+			"label": "Third-Party Brand Organization",
+			"name": "building_brandorg",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "!=empty"
+					},
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "!=",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_brandorg"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
 			"key": "field_building_streetaddress",
 			"label": "Street Address",
 			"name": "building_streetaddress",
