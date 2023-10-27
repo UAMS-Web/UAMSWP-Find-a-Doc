@@ -10050,6 +10050,133 @@
 
 		}
 
+	// Add data to an array defining schema data for a building (Place)
+
+		function uamswp_fad_schema_building(
+			int $term_id, // int // Required // Term ID for the building
+			array $building_items = array() // array // Optional // Pre-existing list array for buildings to which to add additional items
+		) {
+
+				// Retrieve the value of the transient
+
+					uamswp_fad_get_transient(
+						'val_' . $term_id, // Required // String added to transient name for disambiguation.
+						$output, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+						__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
+					);
+
+				if ( !empty( $output ) ) {
+
+					/**
+					 * The transient exists.
+					 * Return the variable.
+					 */
+
+					return $output;
+
+				} else {
+
+					/**
+					 * The transient does not exist.
+					 * Define the variable again.
+					 */
+
+					// Base array
+
+						$output = array();
+
+					// Get the term object
+
+						$term = get_term(
+							$term_id, // int|WP_Term|object // If integer, term data will be fetched from the database, or from the cache if available. If stdClass object (as in the results of a database query), will apply filters and return a WP_Term object with the $term data. If WP_Term, will return $term.
+							'building' // string // Optional // Taxonomy name that $term is part of. // Default: ''
+						);
+
+					// If term is invalid, bail early
+
+						if ( !is_object($term) ) {
+
+							return $output;
+
+						}
+
+					// Construct schema item
+
+						// Get common property values
+
+							include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
+
+						// @id
+
+							$id = $schema_common_website_url . '#Building-' . $term_id;
+
+							if ( $id ) {
+
+								$output['@id'] = $id;
+
+							}
+
+						// @type
+
+							$type = 'Place';
+							$Place_subtype = get_field( 'building_location_subtype', $term ) ?? $null;
+
+							if ( $Place_subtype ) {
+
+								$type = $Place_subtype;
+
+							}
+
+						// foo
+
+							/**
+							 * This property is beyond the scope of what is being included in the building
+							 * item schema and so it will not be included.
+							 */
+
+					// Clean up the output array
+
+						// Remove empty rows
+
+							if ( $output ) {
+
+								$output = array_filter($output);
+
+							}
+
+						// Add @type
+
+							if ( $output ) {
+
+								$output = array( '@type' => $type ) + $output;
+
+							}
+
+						// Sort rows by key
+
+							if ( $output ) {
+
+								ksort($output);
+
+							}
+
+
+					// Set/update the value of the transient
+
+						uamswp_fad_set_transient(
+							'val_' . $term_id, // Required // String added to transient name for disambiguation.
+							$output, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+							__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
+						);
+
+					// Return the array
+
+						return $output;
+
+				}
+
+		}
+
 // Generate schema arrays of ontology page types
 
 	// Providers (MedicalWebPage; MedicalBusiness; Person)
