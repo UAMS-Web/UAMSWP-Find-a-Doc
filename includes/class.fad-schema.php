@@ -10060,6 +10060,7 @@
 
 		function uamswp_fad_schema_building(
 			int $term_id, // int // Required // Term ID for the building
+			int $nesting_level, // Nesting level within the main schema
 			array $building_items = array() // array // Optional // Pre-existing list array for buildings to which to add additional items
 		) {
 
