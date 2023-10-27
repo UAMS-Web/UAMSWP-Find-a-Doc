@@ -10260,6 +10260,38 @@
 
 							}
 
+						// brand organization (common use)
+
+							// Get values
+
+								// Query: Whether to override the default clinical brand organization for this entity
+
+									$brand_override = get_field( 'schema_brandorg_query', $term ) ?? false;
+
+								// Get the brand organization
+
+									if ( $brand_override ) {
+
+										// Get the third-party brand organization
+
+											$brand = uamswp_fad_schema_brand_organization_list(
+												$term // int|WP_Term // Required // Post ID or term object
+											);
+
+									} else {
+
+										// Get the default clinical brand organization
+
+											$brand = $schema_default_brand_organization_affiliation ?? null;
+
+									}
+
+							if ( $brand ) {
+
+								$output['brand'] = $brand;
+
+							}
+
 						// additionalType
 
 							/**
@@ -10381,7 +10413,7 @@
 
 							}
 
-						// brand [WIP]
+						// brand (specific property)
 
 							/**
 							 * The brand(s) associated with a product or service, or the brand(s) maintained
@@ -10392,8 +10424,6 @@
 							 *     - Brand
 							 *     - Organization
 							 */
-
-							$brand = null;
 
 							if ( $brand ) {
 
@@ -10679,7 +10709,7 @@
 
 							}
 
-						// parentOrganization [WIP]
+						// parentOrganization
 
 							/**
 							 * The larger organization that this organization is a subOrganization of, if any.
@@ -10689,11 +10719,9 @@
 							 *     - Organization
 							 */
 
-							$parentOrganization = null;
+							if ( $brand ) {
 
-							if ( $parentOrganization ) {
-
-								$output['parentOrganization'] = $parentOrganization;
+								$output['parentOrganization'] = $brand;
 
 							}
 
