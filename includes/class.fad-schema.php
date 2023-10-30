@@ -10322,12 +10322,6 @@
 
 								}
 
-							if ( $geo ) {
-
-								$output['geo'] = $geo;
-
-							}
-
 						// Google customer ID (CID) (common use)
 
 							// Query: Does this organization have a listing on Google My Business?
