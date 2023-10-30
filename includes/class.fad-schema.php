@@ -21447,11 +21447,11 @@
 
 													if ( !isset($location_building_name) ) {
 
-														$location_building_id = get_field( 'location_building', $location_address_id ) ?? '';
+														$location_building_id = get_field( 'location_building', $location_address_id ) ?? null;
 
 														if ( $location_building_id ) {
 
-															$location_building_term = get_term( $location_building_id, 'building' ) ?? '';
+															$location_building_term = get_term( $location_building_id, 'building' ) ?? null;
 
 															if ( $location_building_term ) {
 
