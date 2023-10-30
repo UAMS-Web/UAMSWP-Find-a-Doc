@@ -21453,7 +21453,7 @@
 
 															$location_building_term = get_term( $location_building_id, 'building' ) ?? null;
 
-															if ( $location_building_term ) {
+															if ( is_object($location_building_term) ) {
 
 																$location_building_slug = $location_building_term->slug;
 
