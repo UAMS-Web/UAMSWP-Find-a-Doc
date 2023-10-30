@@ -10298,7 +10298,7 @@
 
 										// Get the default clinical brand organization
 
-											$brand = $schema_default_brand_organization_affiliation ?? null;
+											$brand = $schema_default_brand_organization_clinical ?? null;
 
 									}
 
