@@ -50,7 +50,9 @@
 		if (
 			$hook == 'post.php'
 			||
-			$hook == 'term.php'
+			$hook == 'edit-tags.php' // Taxonomy list (Add New [Term])
+			||
+			$hook == 'term.php' // Taxonomy term
 		) {
 			wp_enqueue_script( 'acf-admin-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-admin.js', array('jquery'), null, true );
 			wp_enqueue_script( 'medline-acf-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-medline.js', array('jquery'), null, true );
