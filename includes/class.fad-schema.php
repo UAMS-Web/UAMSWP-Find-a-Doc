@@ -22331,7 +22331,7 @@
 
 												}
 
-											// Merge in building Place value
+											// Merge in building (Place) value
 
 												$location_building_Place = $location_building_Place ?? null;
 
