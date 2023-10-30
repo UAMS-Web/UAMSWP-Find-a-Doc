@@ -21409,6 +21409,10 @@
 
 											$location_streetAddress_array = array();
 
+										// Base address keywords array
+
+											$location_address_keywords = array();
+
 										// Get values
 
 											// Conditionally get parent location ID
@@ -21434,6 +21438,10 @@
 												if ( $location_address_1 ) {
 
 													$location_streetAddress_array[] = $location_address_1;
+
+													// Add values to location keywords
+
+														$location_address_keywords[] = $location_address_1;
 
 												}
 
@@ -21482,6 +21490,10 @@
 														if ( $location_building_name ) {
 
 															$location_address_2_array[] = $location_building_name;
+
+															// Add values to location keywords
+
+																$location_address_keywords[] = $location_building_name;
 
 														}
 
@@ -21573,7 +21585,15 @@
 
 												if ( !isset($location_addressLocality) ) {
 
-													$location_addressLocality = get_field( 'location_city', $location_address_id ) ?? '';
+													$location_addressLocality = get_field( 'location_city', $location_address_id ) ?? null;
+
+													// Add values to location keywords
+
+														if ( $location_addressLocality ) {
+
+															$location_address_keywords[] = $location_addressLocality;
+
+														}
 
 												}
 
@@ -21581,7 +21601,15 @@
 
 												if ( !isset($location_addressRegion) ) {
 
-													$location_addressRegion = get_field( 'location_state', $location_address_id ) ?? '';
+													$location_addressRegion = get_field( 'location_state', $location_address_id ) ?? null;
+
+													// Add values to location keywords
+
+														if ( $location_addressRegion ) {
+
+															$location_address_keywords[] = $location_addressRegion;
+
+														}
 
 												}
 
@@ -21589,7 +21617,15 @@
 
 												if ( !isset($location_postalCode) ) {
 
-													$location_postalCode = get_field( 'location_zip', $location_address_id ) ?? '';
+													$location_postalCode = get_field( 'location_zip', $location_address_id ) ?? null;
+
+													// Add values to location keywords
+
+														if ( $location_postalCode ) {
+
+															$location_address_keywords[] = $location_postalCode;
+
+														}
 
 												}
 
@@ -21616,6 +21652,19 @@
 													);
 
 												}
+
+											}
+
+										// Merge address keywords value into keywords
+
+											$location_address_keywords = $location_address_keywords ?? null;
+
+											if ( $location_address_keywords ) {
+
+												$location_keywords = uamswp_fad_schema_merge_values(
+													$location_keywords, // mixed // Required // Initial schema item property value
+													$location_address_keywords // mixed // Required // Incoming schema item property value
+												);
 
 											}
 
