@@ -21456,11 +21456,10 @@
 															if ( $location_building_term ) {
 
 																$location_building_slug = $location_building_term->slug;
-																$location_building_name = $location_building_term->name;
 
 																if ( $location_building_slug != '_none' ) {
 
-																	$location_building_name = '';
+																	$location_building_name = $location_building_term->name;
 
 																}
 
