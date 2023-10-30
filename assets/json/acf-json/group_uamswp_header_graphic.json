@@ -67,7 +67,7 @@
 					"max_width": "",
 					"max_height": "",
 					"max_size": "",
-					"mime_types": "jpg",
+					"mime_types": "jpg,jpeg",
 					"ratio_width": 8,
 					"ratio_height": 3,
 					"ratio_margin": 78,

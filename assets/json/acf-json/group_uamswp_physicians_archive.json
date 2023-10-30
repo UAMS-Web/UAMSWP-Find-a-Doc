@@ -49,7 +49,7 @@
 			"max_width": "",
 			"max_height": "",
 			"max_size": "",
-			"mime_types": "jpg",
+			"mime_types": "jpg,jpeg",
 			"ratio_width": 16,
 			"ratio_height": 9,
 			"ratio_margin": 19,
