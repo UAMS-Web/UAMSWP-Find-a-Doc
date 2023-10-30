@@ -11507,6 +11507,7 @@ function uamswp_prevent_orphan($string) {
 										// Add this location's details to the main address schema array
 
 											$schema_address = uamswp_fad_schema_postaladdress(
+												'physical address', // string // Required // A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.
 												( isset($location_address_schema) ? $location_address_schema : '' ), // string // Required // The street address or the post office box number for PO box addresses.
 												true, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
 												( isset($location_city) ? $location_city : '' ), // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.

@@ -5,6 +5,7 @@
 	// Add data to an array defining schema data for PostalAddress
 
 		function uamswp_fad_schema_postaladdress(
+			string $contactType, // string // Required // A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.
 			string $address, // string // Required // The street address or the post office box number for PO box addresses.
 			bool $address_query, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
 			string $addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
@@ -29,6 +30,7 @@
 			 * 		// Add this location's details to the main address or location schema array
 			 *
 			 * 			$schema_address = uamswp_fad_schema_postaladdress(
+			 * 				'physical address', // string // Required // A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.
 			 * 				$location_postOfficeBoxNumber, // string // Required // The street address or the post office box number for PO box addresses.
 			 * 				false, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
 			 * 				$location_addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
@@ -173,6 +175,7 @@
 			// Add values to the array
 
 				$schema = array(
+					'contactType' => $contactType,
 					'addressCountry' => $addressCountry,
 					'addressLocality' => $addressLocality,
 					'addressRegion' => $addressRegion,
@@ -10506,6 +10509,7 @@
 							) {
 
 								$address = uamswp_fad_schema_postaladdress(
+									'physical address', // string // Required // A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.
 									$address_streetAddress, // string // Required // The street address or the post office box number for PO box addresses.
 									true, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
 									$address_addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
@@ -21644,6 +21648,7 @@
 												) {
 
 													$location_address = uamswp_fad_schema_postaladdress(
+														'physical address', // string // Required // A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.
 														$location_streetAddress, // string // Required // The street address or the post office box number for PO box addresses.
 														true, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
 														$location_addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
