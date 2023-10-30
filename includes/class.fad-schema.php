@@ -20726,7 +20726,7 @@
 													$location_has_parent == false
 												) {
 
-													$location_building_id = '';
+													$location_building_id = get_field( 'location_building', $entity );
 
 												}
 
@@ -20734,47 +20734,10 @@
 
 												if ( $location_building_id ) {
 
-													$location_building_term = array();
-
-													if ( is_object($location_building_term) ) {
-
-														$location_building_additionalType_repeater = '';
-														$location_building_additionalType = $location_building_additionalType ?: 'https://www.wikidata.org/wiki/Q41176'; // Wikidata entry for 'building'
-														$location_building_address = '';
-														$location_building_alternateName_repeater = '';
-														$location_building_alternateName = '';
-														$location_building_containedIn = '';
-														$location_building_containedInPlace = '';
-														$location_building_geo = '';
-														$location_building_hasMap = '';
-														$location_building_image = '';
-														$location_building_latitude = '';
-														$location_building_longitude = '';
-														$location_building_name = '';
-														$location_building_photo = '';
-														$location_building_sameAs_repeater = '';
-														$location_building_sameAs = '';
-
-														$location_building_Place = array(
-															'@id' => $location_url . '#Building',
-															'@type' => 'Place',
-															'additionalType' => $location_building_additionalType,
-															'address' => $location_building_address,
-															'alternateName' => $location_building_alternateName,
-															'containedIn' => $location_building_containedIn,
-															'containedInPlace' => $location_building_containedInPlace,
-															'geo' => $location_building_geo,
-															'hasMap' => $location_building_hasMap,
-															'image' => $location_building_image,
-															'latitude' => $location_building_latitude,
-															'longitude' => $location_building_longitude,
-															'name' => $location_building_name,
-															'photo' => $location_building_photo,
-															'sameAs' => $location_building_sameAs
-														);
-														$node_identifier_list[] = $location_building_Place['@id']; // Add to the list of existing node identifiers
-
-													}
+													$location_building_Place = uamswp_fad_schema_building(
+														$location_building_id, // int // Required // Term ID for the building
+														$nesting_level // Nesting level within the main schema
+													);
 
 												}
 
