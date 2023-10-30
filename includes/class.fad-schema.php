@@ -10456,7 +10456,7 @@
 
 							// Get additionalType repeater field value
 
-								$additionalType_repeater = get_field( 'schema_additionalType', $entity ) ?? null;
+								$additionalType_repeater = get_field( 'schema_additionalType', $term ) ?? null;
 
 							// Add each item to additionalType property values array
 
@@ -10821,11 +10821,11 @@
 
 							// Get values
 
-								$latitude = null;
+								$longitude = null;
 
 								if ( $geo_value ) {
 
-									$latitude = number_format(
+									$longitude = number_format(
 										$geo_value['lng'], // float // The number being formatted.
 										5, // int // Sets the number of decimal digits. If 0, the decimal_separator is omitted from the return value.
 										'.', // ?string // Sets the separator for the decimal point.
@@ -10930,7 +10930,7 @@
 
 							// Get sameAs repeater field value
 
-								$sameAs_repeater = get_field( 'schema_sameas', $entity ) ?? null;
+								$sameAs_repeater = get_field( 'schema_sameas', $term ) ?? null;
 
 							// Add each item to sameAs property values array
 
