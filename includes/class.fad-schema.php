@@ -20716,23 +20716,23 @@
 
 												}
 
-										// Get building [WIP]
+										// Get Building term ID
 
-											// Parent location query and ID
+											if ( !isset($location_building_id) ) {
+
+												$location_building_id = get_field( 'location_building', $entity );
+
+											}
+
+											// Format values as Place if the location has no parent
 
 												if (
+													$location_building_id
+													&&
 													isset($location_has_parent)
 													&&
 													$location_has_parent == false
 												) {
-
-													$location_building_id = get_field( 'location_building', $entity );
-
-												}
-
-											// Format values (Place)
-
-												if ( $location_building_id ) {
 
 													$location_building_Place = uamswp_fad_schema_building(
 														$location_building_id, // int // Required // Term ID for the building
