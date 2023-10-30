@@ -22380,7 +22380,13 @@
 
 									// Get values
 
-										// Street Address
+										// Address
+
+											if ( $location_address ) {
+
+												$location_contactPoint[] = $location_address;
+
+											}
 
 										// Telephone
 
