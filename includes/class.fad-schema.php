@@ -21385,6 +21385,236 @@
 
 										}
 
+								// address (common use)
+
+									// List of properties that reference address
+
+										$location_address_common = array(
+											'address',
+											'contactPoint'
+										);
+
+									if (
+										array_intersect(
+											$location_properties_map[$MedicalWebPage_type]['properties'],
+											$location_address_common
+										)
+										||
+										array_intersect(
+											$location_properties_map[$LocalBusiness_type]['properties'],
+											$location_address_common
+										)
+									) {
+
+										// Base array
+
+											$location_streetAddress_array = array();
+
+										// Get values
+
+											// Conditionally get parent location ID
+
+												if ( $location_has_parent ) {
+
+													$location_address_id = $location_parent_id;
+
+												} else {
+
+													$location_address_id = $entity;
+
+												}
+
+											// Address line 1
+
+												if ( !isset($location_address_1) ) {
+
+													$location_address_1 = get_field( 'location_address_1', $location_address_id ) ?? '';
+
+												}
+
+												if ( $location_address_1 ) {
+
+													$location_streetAddress_array[] = $location_address_1;
+
+												}
+
+											// Address line 2
+
+												// Base array
+
+													$location_address_2_array = array();
+
+												// Building values
+
+													if ( !isset($location_building_name) ) {
+
+														$location_building = get_field( 'location_building', $location_address_id ) ?? '';
+
+														if ( $location_building ) {
+
+															$location_building_term = get_term( $location_building, 'building' ) ?? '';
+
+															if ( $location_building_term ) {
+
+																$location_building_slug = $location_building_term->slug;
+																$location_building_name = $location_building_term->name;
+
+																if ( $location_building_slug != '_none' ) {
+
+																	$location_building_name = '';
+
+																}
+
+															}
+
+														}
+
+													}
+
+													// Add to the address 2 array
+
+														if ( $location_building_name ) {
+
+															$location_address_2_array[] = $location_building_name;
+
+														}
+
+												// Floor values
+
+													if ( !isset($location_floor_label) ) {
+
+														$location_floor = get_field_object( 'location_building_floor', $location_address_id ) ?? array();
+
+														if (
+															$location_floor
+															&&
+															array_key_exists( 'value', $location_floor )
+															&&
+															array_key_exists( 'choices', $location_floor )
+														) {
+
+															// Floor label
+
+																$location_floor_value = $location_floor['value'];
+
+																// Check floor value
+
+																	if (
+																		$location_floor_value == '0'
+																		||
+																		$location_floor_value == 'false'
+																		||
+																		!$location_floor_value
+																	) {
+																		$location_floor_value = '';
+																	}
+
+															// Floor label
+
+																$location_floor_label = $location_floor_value ? $location_floor['choices'][$location_floor_value] : '';
+
+														}
+
+													}
+
+													// Add to the address 2 array
+
+														if ( $location_floor_label ) {
+
+															$location_address_2_array[] = $location_floor_label;
+
+														}
+
+												// Suite value
+
+													if ( !isset($location_suite) ) {
+
+														$location_suite = get_field(' location_suite', $location_address_id ) ?? '';
+
+													}
+
+													// Add to the address 2 array
+
+														if ( $location_suite ) {
+
+															$location_address_2_array[] = $location_suite;
+
+														}
+
+												// Explode the array and add to streetAddress values array
+
+													if ( $location_address_2_array ) {
+
+														$location_streetAddress_array[] = implode(
+															' ',
+															$location_address_2_array
+														);
+
+													}
+
+											// Combine the lines
+
+												if ( $location_streetAddress_array ) {
+
+													$location_streetAddress = implode(
+														' ',
+														$location_streetAddress_array
+													);
+
+												}
+
+											// City
+
+												if ( !isset($location_addressLocality) ) {
+
+													$location_addressLocality = get_field( 'location_city', $location_address_id ) ?? '';
+
+												}
+
+											// State
+
+												if ( !isset($location_addressRegion) ) {
+
+													$location_addressRegion = get_field( 'location_state', $location_address_id ) ?? '';
+
+												}
+
+											// ZIP
+
+												if ( !isset($location_postalCode) ) {
+
+													$location_postalCode = get_field( 'location_zip', $location_address_id ) ?? '';
+
+												}
+
+										// Format values as PostalAddress
+
+											if ( !isset($location_address) ) {
+
+												if (
+													$location_streetAddress
+													&&
+													$location_addressLocality
+													&&
+													$location_addressRegion
+													&&
+													$location_postalCode
+												) {
+
+													$location_address = uamswp_fad_schema_postaladdress(
+														$location_streetAddress, // string // Required // The street address or the post office box number for PO box addresses.
+														true, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
+														$location_addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
+														$location_addressRegion, // string // Required // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+														$location_postalCode // string // Required // The postal code (e.g., 94043).
+													);
+
+												}
+
+											}
+
+									}
+
 								// name
 
 									/**
@@ -21749,213 +21979,6 @@
 										)
 									) {
 
-										// Base array
-
-											$location_streetAddress_array = array();
-
-										// Get values
-
-											// Conditionally get parent location ID
-
-												if ( $location_has_parent ) {
-
-													$location_address_id = $location_parent_id;
-
-												} else {
-
-													$location_address_id = $entity;
-
-												}
-
-											// Address line 1
-
-												if ( !isset($location_address_1) ) {
-
-													$location_address_1 = get_field( 'location_address_1', $location_address_id ) ?? '';
-
-												}
-
-												if ( $location_address_1 ) {
-
-													$location_streetAddress_array[] = $location_address_1;
-
-												}
-
-											// Address line 2
-
-												// Base array
-
-													$location_address_2_array = array();
-
-												// Building values
-
-													if ( !isset($location_building_name) ) {
-
-														$location_building = get_field( 'location_building', $location_address_id ) ?? '';
-
-														if ( $location_building ) {
-
-															$location_building_term = get_term( $location_building, 'building' ) ?? '';
-
-															if ( $location_building_term ) {
-
-																$location_building_slug = $location_building_term->slug;
-																$location_building_name = $location_building_term->name;
-
-																if ( $location_building_slug != '_none' ) {
-
-																	$location_building_name = '';
-
-																}
-
-															}
-
-														}
-
-													}
-
-													// Add to the address 2 array
-
-														if ( $location_building_name ) {
-
-															$location_address_2_array[] = $location_building_name;
-
-														}
-
-												// Floor values
-
-													if ( !isset($location_floor_label) ) {
-
-														$location_floor = get_field_object( 'location_building_floor', $location_address_id ) ?? array();
-
-														if (
-															$location_floor
-															&&
-															array_key_exists( 'value', $location_floor )
-															&&
-															array_key_exists( 'choices', $location_floor )
-														) {
-
-															// Floor label
-
-																$location_floor_value = $location_floor['value'];
-
-																// Check floor value
-
-																	if (
-																		$location_floor_value == '0'
-																		||
-																		$location_floor_value == 'false'
-																		||
-																		!$location_floor_value
-																	) {
-																		$location_floor_value = '';
-																	}
-
-															// Floor label
-
-																$location_floor_label = $location_floor_value ? $location_floor['choices'][$location_floor_value] : '';
-
-														}
-
-													}
-
-													// Add to the address 2 array
-
-														if ( $location_floor_label ) {
-
-															$location_address_2_array[] = $location_floor_label;
-
-														}
-
-												// Suite value
-
-													if ( !isset($location_suite) ) {
-
-														$location_suite = get_field(' location_suite', $location_address_id ) ?? '';
-
-													}
-
-													// Add to the address 2 array
-
-														if ( $location_suite ) {
-
-															$location_address_2_array[] = $location_suite;
-
-														}
-
-												// Explode the array and add to streetAddress values array
-
-													if ( $location_address_2_array ) {
-
-														$location_streetAddress_array[] = implode(
-															' ',
-															$location_address_2_array
-														);
-
-													}
-
-											// Combine the lines
-
-												if ( $location_streetAddress_array ) {
-
-													$location_streetAddress = implode(
-														' ',
-														$location_streetAddress_array
-													);
-
-												}
-
-											// City
-
-												if ( !isset($location_addressLocality) ) {
-
-													$location_addressLocality = get_field( 'location_city', $location_address_id ) ?? '';
-
-												}
-
-											// State
-
-												if ( !isset($location_addressRegion) ) {
-
-													$location_addressRegion = get_field( 'location_state', $location_address_id ) ?? '';
-
-												}
-
-											// ZIP
-
-												if ( !isset($location_postalCode) ) {
-
-													$location_postalCode = get_field( 'location_zip', $location_address_id ) ?? '';
-
-												}
-
-										// Format values
-
-											if ( !isset($location_address) ) {
-
-												if (
-													$location_streetAddress
-													&&
-													$location_addressLocality
-													&&
-													$location_addressRegion
-													&&
-													$location_postalCode
-												) {
-
-													$location_address = uamswp_fad_schema_postaladdress(
-														$location_streetAddress, // string // Required // The street address or the post office box number for PO box addresses.
-														true, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
-														$location_addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
-														$location_addressRegion, // string // Required // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
-														$location_postalCode // string // Required // The postal code (e.g., 94043).
-													);
-
-												}
-
-											}
-
 										// Add to item values
 
 											// MedicalWebPage
@@ -22290,6 +22313,26 @@
 										telephone
 
 									*/
+
+									// Base array
+
+										$location_contactPoint = array();
+
+									// Get values
+
+										// Street Address
+
+										// Telephone
+
+										// Fax
+
+										// Email
+
+										// Website/Webpage
+
+									// Add to item property
+
+
 
 								// containedInPlace
 
