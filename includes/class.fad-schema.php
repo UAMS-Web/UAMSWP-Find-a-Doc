@@ -21455,7 +21455,11 @@
 
 														if ( $location_building_id ) {
 
-															$location_building_term = get_term( $location_building_id, 'building' ) ?? null;
+															if ( !isset($location_building_term) ) {
+
+																$location_building_term = get_term( $location_building_id, 'building' ) ?? null;
+
+															}
 
 															if ( is_object($location_building_term) ) {
 
