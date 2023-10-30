@@ -10361,7 +10361,7 @@
 									0, // ID of image to use for 3:4 aspect ratio
 									$photo_id, // ID of image to use for 4:3 aspect ratio
 									$photo_id // ID of image to use for 16:9 aspect ratio
-								)
+								);
 
 						// additionalProperty
 
