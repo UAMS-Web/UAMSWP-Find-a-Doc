@@ -22368,7 +22368,7 @@
 
 												}
 
-											// Merge in building MedicalBusiness value
+											// Merge in building Place value
 
 												$location_building_Place = $location_building_Place ?? null;
 
