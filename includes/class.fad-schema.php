@@ -9193,7 +9193,8 @@
 
 			function uamswp_fad_schema_brand_organization_list(
 				$entity, // int|WP_Term // Required // Post ID or term object
-				array $brand_org = array() // array // Optional // Pre-existing list array for brand organizations to which to add additional items
+				array $brand_org = array(), // array // Optional // Pre-existing list array for brand organizations to which to add additional items
+				array &$brand_org_slug = array() // array // Optional // Pre-existing list array for brand organizations slugs to which to add additional slugs
 			) {
 
 				/**
@@ -9234,7 +9235,7 @@
 
 						}
 
-					// Check pre-existing list array, nesting the array if it is not a list array
+					// Check pre-existing list arrays, nesting the arrays if they are not list arrays
 
 						if ( !array_is_list($brand_org) ) {
 
@@ -9243,6 +9244,12 @@
 						}
 
 						$output = $brand_org;
+
+						if ( !array_is_list($brand_org_slug) ) {
+
+							$brand_org_slug = array($brand_org_slug);
+
+						}
 
 					// Get brand organization slug(s)
 
@@ -9290,6 +9297,10 @@
 						foreach ( $field_value as $slug ) {
 
 							if ( $slug ) {
+
+								// Add the slug to the slug list
+
+									$brand_org_slug[] = $slug;
 
 								// Construct the brand organization items
 
