@@ -1262,6 +1262,11 @@
 						"field": "field_location_ac_appointments_query",
 						"operator": "==",
 						"value": "0"
+					},
+					{
+						"field": "field_location_clinic_phone_query",
+						"operator": "==",
+						"value": "1"
 					}
 				],
 				[
@@ -1274,6 +1279,11 @@
 						"field": "field_location_ac_appointments_query",
 						"operator": "==",
 						"value": "0"
+					},
+					{
+						"field": "field_location_clinic_phone_query",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
