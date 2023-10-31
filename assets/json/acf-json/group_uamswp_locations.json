@@ -1252,6 +1252,11 @@
 						"value": "arkansas-childrens"
 					},
 					{
+						"field": "field_location_ac_appointments_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
 						"field": "field_location_appointments_query",
 						"operator": "==",
 						"value": "1"
