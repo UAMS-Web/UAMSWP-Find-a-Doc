@@ -201,10 +201,17 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 
 				// Add this location's details to the main telephone schema array
 
-					$schema_telephone = uamswp_fad_schema_telephone(
-						$schema_telephone, // array (optional) // Main telephone schema array
-						$location_phone_format_dash // string (optional) // The telephone number.
-					);
+					$location_phone_format_dash = $location_phone_format_dash ?? null;
+					$schema_telephone = $schema_telephone ?? array();
+
+					if ( $location_phone_format_dash ) {
+
+						$schema_telephone = uamswp_fad_schema_telephone_text(
+							$location_phone_format_dash, // string|array // Required // The telephone number as a string or as a list array containing strings
+							$schema_telephone // array // Optional  // Pre-existing list array for telephone (as the Text type) to which to add additional items
+						);
+
+					}
 
 			} // endif ( !empty($location_phone) )
 
@@ -251,10 +258,17 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 
 							// Add this location's details to the main telephone schema array
 
-								$schema_telephone = uamswp_fad_schema_telephone(
-									$schema_telephone, // array (optional) // Main telephone schema array
-									$location_new_appointments_phone_format_dash // string (optional) // The telephone number.
-								);
+								$location_new_appointments_phone_format_dash = $location_new_appointments_phone_format_dash ?? null;
+								$schema_telephone = $schema_telephone ?? array();
+
+								if ( $location_new_appointments_phone_format_dash ) {
+
+									$schema_telephone = uamswp_fad_schema_telephone_text(
+										$location_new_appointments_phone_format_dash, // string|array // Required // The telephone number as a string or as a list array containing strings
+										$schema_telephone // array // Optional  // Pre-existing list array for telephone (as the Text type) to which to add additional items
+									);
+
+								}
 
 						} // endif ( !empty($location_new_appointments_phone) )
 
@@ -283,10 +297,17 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 
 							// Add this location's details to the main telephone schema array
 
-								$schema_telephone = uamswp_fad_schema_telephone(
-									$schema_telephone, // array (optional) // Main telephone schema array
-									$location_return_appointments_phone_format_dash // string (optional) // The telephone number.
-								);
+								$location_return_appointments_phone_format_dash = $location_return_appointments_phone_format_dash ?? null;
+								$schema_telephone = $schema_telephone ?? array();
+
+								if ( $location_return_appointments_phone_format_dash ) {
+
+									$schema_telephone = uamswp_fad_schema_telephone_text(
+										$location_return_appointments_phone_format_dash, // string|array // Required // The telephone number as a string or as a list array containing strings
+										$schema_telephone // array // Optional  // Pre-existing list array for telephone (as the Text type) to which to add additional items
+									);
+
+								}
 
 						} // endif ( !empty($location_return_appointments_phone) && $location_appointment_phone_query )
 
@@ -327,10 +348,17 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 
 							// Add this location's details to the main telephone schema array
 
-								$schema_telephone = uamswp_fad_schema_telephone(
-									$schema_telephone, // array (optional) // Main telephone schema array
-									$location_ac_appointments_primary_format_dash // string (optional) // The telephone number.
-								);
+								$location_ac_appointments_primary_format_dash = $location_ac_appointments_primary_format_dash ?? null;
+								$schema_telephone = $schema_telephone ?? array();
+
+								if ( $location_ac_appointments_primary_format_dash ) {
+
+									$schema_telephone = uamswp_fad_schema_telephone_text(
+										$location_ac_appointments_primary_format_dash, // string|array // Required // The telephone number as a string or as a list array containing strings
+										$schema_telephone // array // Optional  // Pre-existing list array for telephone (as the Text type) to which to add additional items
+									);
+
+								}
 
 						} // endif ( !empty($location_ac_appointments_primary) )
 
@@ -355,10 +383,17 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 
 							// Add this location's details to the main telephone schema array
 
-								$schema_telephone = uamswp_fad_schema_telephone(
-									$schema_telephone, // array (optional) // Main telephone schema array
-									$location_ac_appointments_specialty_format_dash // string (optional) // The telephone number.
-								);
+								$location_ac_appointments_specialty_format_dash = $location_ac_appointments_specialty_format_dash ?? null;
+								$schema_telephone = $schema_telephone ?? array();
+
+								if ( $location_ac_appointments_specialty_format_dash ) {
+
+									$schema_telephone = uamswp_fad_schema_telephone_text(
+										$location_ac_appointments_specialty_format_dash, // string|array // Required // The telephone number as a string or as a list array containing strings
+										$schema_telephone // array // Optional  // Pre-existing list array for telephone (as the Text type) to which to add additional items
+									);
+
+								}
 
 						} // endif ( !empty($location_ac_appointments_specialty) )
 
@@ -415,10 +450,18 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 						$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
 
 						// Add this location's details to the main telephone schema array
-						$schema_telephone = uamswp_fad_schema_telephone(
-							$schema_telephone, // array (optional) // Main telephone schema array
-							$phone_format_dash // string (optional) // The telephone number.
-						);
+
+							$phone_format_dash = $phone_format_dash ?? null;
+							$schema_telephone = $schema_telephone ?? array();
+
+							if ( $phone_format_dash ) {
+
+								$schema_telephone = uamswp_fad_schema_telephone_text(
+									$phone_format_dash, // string|array // Required // The telephone number as a string or as a list array containing strings
+									$schema_telephone // array // Optional  // Pre-existing list array for telephone (as the Text type) to which to add additional items
+								);
+
+							}
 
 					}
 

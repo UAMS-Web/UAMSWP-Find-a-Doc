@@ -1007,53 +1007,66 @@
 
 		}
 
-	// Add data to an array defining schema data for telephone
+	// Add data to an array defining schema data for telephone as the Text type
 
-		function uamswp_fad_schema_telephone(
-			$schema_telephone = array(), // array (optional) // Main telephone schema array
-			$telephone_number = '' // string (optional) // The telephone number.
+		function uamswp_fad_schema_telephone_text(
+			$telephone_number, // string|array // Required // The telephone number as a string or as a list array containing strings
+			array $schema_telephone = array() // array // Optional // Pre-existing list array for telephone (as the Text type) to which to add additional items
 		) {
 
-			/**
-			 * Example use:
-			 *
-			 * 	// Telephone Schema Data
-			 *
-			 * 		// Check/define the main telephone schema array
-			 * 		$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-			 *
-			 * 		// Add this location's details to the main telephone schema array
-			 * 		$schema_telephone = uamswp_fad_schema_telephone(
-			 * 			$schema_telephone, // array (optional) // Main telephone schema array
-			 * 			$telephone_number // string (optional) // The telephone number.
-			 * 		);
-			 */
+			// Check telephone number value, converting a string to an array
 
-			// Check/define variables
+				if (
+					$telephone_number
+					||
+					!is_array($telephone_number)
+				) {
 
-				$schema_telephone = is_array($schema_telephone) ? $schema_telephone : array();
+					$telephone_number = array($telephone_number);
+
+				}
+
+			// Check pre-existing list array, nesting the array if it is not a list array
+
+				if ( !array_is_list($schema_telephone) ) {
+
+					$schema_telephone = array($schema_telephone);
+
+				}
 
 			// Add values to the main telephone schema array
 
 				if ( $telephone_number ) {
 
-					if ( is_array($telephone_number) ) {
+					foreach ( $telephone_number as $item ) {
 
-						foreach ( $telephone_number as $item ) {
+						if (
+							$item
+							&&
+							is_string($item)
+						) {
 
 							$schema_telephone[] = format_phone_dash($item);
 
 						}
 
-					} else {
-
-						$schema_telephone[] = format_phone_dash($telephone_number);
-
 					}
 
 				}
 
-			// Return the main telephone schema array
+			// Format the list array
+
+				$schema_telephone = $schema_telephone ? array_filter($schema_telephone) : array();
+				$schema_telephone = $schema_telephone ? array_unique( $schema_telephone, SORT_REGULAR ) : array();
+				$schema_telephone = $schema_telephone ? array_values($schema_telephone) : array();
+
+				if ( $schema_telephone ) {
+
+					uamswp_fad_flatten_multidimensional_array($schema_geo_coordinates);
+
+				}
+
+			// Return the list array
 
 				return $schema_telephone;
 

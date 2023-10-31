@@ -11524,14 +11524,21 @@ function uamswp_prevent_orphan($string) {
 
 										// Check/define the main telephone schema array
 
-											$schema_telephone =  (( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array() );
+											$schema_telephone = (( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array() );
 
 										// Add this location's details to the main telephone schema array
 
-											$schema_telephone = uamswp_fad_schema_telephone(
-												$schema_telephone, // array (optional) // Main telephone schema array
-												( isset($location_phone) ? $location_phone : '' ) // string (optional) // The telephone number.
-											);
+											$location_phone = $location_phone ?? null;
+											$schema_telephone = $schema_telephone ?? array();
+
+											if ( $location_phone ) {
+
+												$schema_telephone = uamswp_fad_schema_telephone_text(
+													$location_phone, // string|array // Required // The telephone number as a string or as a list array containing strings
+													$schema_telephone // array // Optional  // Pre-existing list array for telephone (as the Text type) to which to add additional items
+												);
+
+											}
 
 									// Fax Schema Data
 
