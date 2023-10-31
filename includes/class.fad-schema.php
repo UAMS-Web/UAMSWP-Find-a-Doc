@@ -598,6 +598,24 @@
 			 * (e.g., 'OpeningHoursSpecification', 'PropertyValue') are expected to be a
 			 * fully-formatted string or array (as relevant) before being passed as an
 			 * argument of this function.
+			 *
+			 * $additionalType
+			 *
+			 *     If the specific ContactPoint item is a telephone number, use the following
+			 *     value for the $additionalType argument:
+			 *
+			 *         'https://www.wikidata.org/wiki/Q214995' // Wikidata entry for telephone number
+			 *
+			 *     If the specific ContactPoint item is a toll-free telephone number, use the
+			 *     following value for the $additionalType argument:
+			 *
+			 *         ‘https://www.wikidata.org/wiki/Q348308’ // Wikidata entry for toll-free telephone number
+			 *
+			 *     If the specific ContactPoint item is a fax number, use the same
+			 *     value for the $additionalType argument that was used for telephone number
+			 *     unless there is a Wikidata entry published that is specific to fax number.
+			 *     Include 'fax number' in the contactType property value to further distinguish
+			 *     it from a standard telephone number.
 			 */
 
 			// Check argument values
