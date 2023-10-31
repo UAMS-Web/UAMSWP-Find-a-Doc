@@ -19321,6 +19321,10 @@
 								$location_item = array(); // Base array
 								$location_item_MedicalWebPage = array(); // Base MedicalWebPage array
 								$location_item_LocalBusiness = array(); // Base LocalBusiness array
+								$item_contactType = null;
+								$item_description = null;
+								$item_telephone = null;
+								$item_value = null;
 								$LocalBusiness_id = null;
 								$LocalBusiness_type = null;
 								$location_about = null;
@@ -19341,10 +19345,13 @@
 								$location_address = null;
 								$location_address_1 = null;
 								$location_address_2_array = null;
+								$location_address_id = null;
+								$location_address_keywords = null;
 								$location_addressLocality = null;
 								$location_addressRegion = null;
 								$location_alternateName = null;
 								$location_alternateName_repeater = null;
+								$location_appointments_query = null;
 								$location_areaServed = null;
 								$location_audience = null;
 								$location_author = null;
@@ -19370,6 +19377,7 @@
 								$location_building_sameAs_repeater = null;
 								$location_building_slug = null;
 								$location_building_term = null;
+								$location_contactPoint = null;
 								$location_containedInPlace = null;
 								$location_containsPlace = null;
 								$location_contributor = null;
@@ -19390,6 +19398,8 @@
 								$location_description_TextObject = null;
 								$location_editor = null;
 								$location_employee = null;
+								$location_faxNumber = null;
+								$location_faxNumber_Text_array = null;
 								$location_featured_image_id = null;
 								$location_floor = null;
 								$location_floor_label = null;
@@ -19446,21 +19456,29 @@
 								$location_sourceOrganization = null;
 								$location_speakable = null;
 								$location_specialty_common = null;
+								$location_specific_clinical_organization_slug = null;
 								$location_streetAddress = null;
 								$location_streetAddress_array = null;
 								$location_subjectOf = null;
 								$location_subOrganization = null;
 								$location_suite = null;
+								$location_telephone_appointment_ac_primary = null;
+								$location_telephone_appointment_ac_query = null;
+								$location_telephone_appointment_ac_specialty = null;
+								$location_telephone_appointment_existing = null;
+								$location_telephone_appointment_new = null;
+								$location_telephone_appointment_query = null;
+								$location_telephone_general = null;
+								$location_telephone_Text_array = null;
 								$location_thumbnailUrl = null;
 								$location_treatments = null;
 								$location_url = null;
 								$location_vatID = null;
 								$location_wayfinding_image_id = null;
+								$MedicalCondition_i = 1;
 								$MedicalWebPage_id = null;
 								$MedicalWebPage_type = null;
-								$MedicalCondition_i = 1;
 								$Service_i = 1;
-								$location_specific_clinical_organization_slug = null;
 
 								// Reused variables
 
@@ -21495,6 +21513,16 @@
 
 											}
 
+										// Add PostalAddress to contactPoint property
+
+											$location_contactPoint = $location_contactPoint ?? array();
+
+											if ( $location_address ) {
+
+												$location_contactPoint[] = $location_address;
+
+											}
+
 										// Merge address keywords value into keywords
 
 											$location_address_keywords = $location_address_keywords ?? null;
@@ -21536,6 +21564,490 @@
 											$location_appointments_query = get_field( 'location_appointments_query', $entity ) ?? null;
 
 										}
+
+									}
+
+								// telephone number (common use)
+
+									// List of properties that reference telephone number
+
+										$location_telephone_common = array(
+											'contactPoint',
+											'telephone'
+										);
+
+									if (
+										array_intersect(
+											$location_properties_map[$MedicalWebPage_type]['properties'],
+											$location_telephone_common
+										)
+										||
+										array_intersect(
+											$location_properties_map[$LocalBusiness_type]['properties'],
+											$location_telephone_common
+										)
+									) {
+
+										// Base arrays
+
+											// ContactPoint type
+
+												$location_contactPoint = $location_contactPoint ?? array();
+
+											// Text type
+
+												$location_telephone_Text_array = array();
+
+										// Get values
+
+											// General Information Telephone Number
+
+												$location_telephone_general = $location_telephone_general ?? null;
+
+												if ( !isset($location_telephone_general) ) {
+
+													$location_telephone_general = get_field( 'location_phone', $entity ) ?? null;
+													$location_telephone_general = $location_telephone_general ? format_phone_dash($location_telephone_general) : null;
+
+												}
+
+												// Add value to the list arrays
+
+													if ( $location_telephone_general ) {
+
+														// ContactPoint type
+
+															$location_contactPoint = uamswp_fad_schema_contactpoint(
+																'https://www.wikidata.org/wiki/Q214995', // string|array // Optional // additionalType // An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. // Allowed schema types: 'Text', 'URL'
+																null, // string|array // Optional // 'areaServed' // The geographic area where a service or offered item is provided. // Allowed schema types: 'AdministrativeArea', 'GeoShape', 'Place', 'Text'
+																null, // string|array // Optional // 'availableLanguage' // A language someone may use with or at the item, service or place. Must use one of the language codes from the IETF BCP 47 standard. // Allowed schema types: 'Language', 'Text'
+																null, // string|array enum('HearingImpairedSupported', 'TollFree') // Optional // 'contactOption' // An option available on this contact point. // Allowed schema types: 'ContactPointOption'
+																'general information', // string // Optional // 'contactType' // A person or organization can have different contact points, for different purposes (e.g., sales, PR, bill payment, customer service, technical support). This property is used to specify the kind of contact point. // Allowed schema types: 'Text'
+																null, // string // Optional // 'description' // A description of the item. // Allowed schema types: 'Text'
+																null, // string // Optional // 'disambiguatingDescription' // A short description of the item used to disambiguate from other, similar items. // Allowed schema types: 'Text'
+																null, // string // Optional // 'email' // Email address. // Allowed schema types: 'Text'
+																null, // string // Optional // 'faxNumber' // The fax number. // Allowed schema types: 'Text'
+																null, // array // Optional // 'hoursAvailable' // The hours during which this service or contact is available. // Allowed schema types: 'OpeningHoursSpecification'
+																null, // string|array // Optional // 'mainEntityOfPage' // Indicates a page (or other CreativeWork) for which this thing is the main entity being described. // Allowed schema types: 'CreativeWork', 'URL'
+																null, // array // Optional // 'potentialAction' // Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role. // Allowed schema types: 'Action'
+																null, // string|array // Optional // 'productSupported' // The product or service this support contact point is related to (such as product support for a particular product line). // Allowed schema types: 'Product  or Text'
+																null, // string|array // Optional // 'sameAs' // URL of a reference Web page that unambiguously indicates the item's identity (e.g., the item's Wikipedia page, the item's Wikidata entry, the item's official website). // Allowed schema types: 'URL'
+																null, // array // Optional // 'subjectOf' // A CreativeWork or Event about this Thing. // Allowed schema types: 'CreativeWork', 'Event'
+																$location_telephone_general, // string // Optional // 'telephone' // The telephone number. // Allowed schema types: 'Text'
+																null, // string // Optional // 'url' // URL of the item. // Allowed schema types: 'URL'
+																$location_contactPoint // array // Optional // Pre-existing list array of ContactPoint items to which to add additional items
+															);
+
+														// Text type
+
+															$location_telephone_Text_array[] = $location_telephone_general;
+
+													}
+
+											// Appointments Telephone Number
+
+												if ( $location_appointments_query ) {
+
+													$location_specific_clinical_organization_slug = $location_specific_clinical_organization_slug ?? array();
+
+													// Query: Does this Arkansas Children's location have separate telephone numbers for primary care appointments and specialty care appointments?
+
+														$location_telephone_appointment_ac_query = $location_telephone_appointment_ac_query ?? null;
+
+														if (
+															in_array(
+																$brand_organization_slug_arkansas_childrens,
+																$location_specific_clinical_organization_slug
+															)
+														) {
+
+															if ( !isset($location_telephone_appointment_ac_query) ) {
+
+																$location_telephone_appointment_ac_query = get_field( 'location_ac_appointments_query', $entity ) ?? null;
+
+															}
+
+														}
+
+													if ( $location_telephone_appointment_ac_query ) {
+
+														// Arkansas Children's primary care and specialty care appointments telephone numbers
+
+															// Primary care appointments telephone number
+
+																$location_telephone_appointment_ac_primary = $location_telephone_appointment_ac_primary ?? null;
+
+																if ( !isset($location_telephone_appointment_ac_primary) ) {
+
+																	$location_telephone_appointment_ac_primary = get_field( 'location_ac_appointments_primary', $entity ) ?? null;
+																	$location_telephone_appointment_ac_primary = $location_telephone_appointment_ac_primary ? format_phone_dash($location_telephone_appointment_ac_primary) : null;
+
+																}
+
+																// Add value to the list arrays
+
+																	if ( $location_telephone_appointment_ac_primary ) {
+
+																		// ContactPoint type
+
+																			$location_contactPoint = uamswp_fad_schema_contactpoint(
+																				'https://www.wikidata.org/wiki/Q214995', // string|array // Optional // additionalType // An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. // Allowed schema types: 'Text', 'URL'
+																				null, // string|array // Optional // 'areaServed' // The geographic area where a service or offered item is provided. // Allowed schema types: 'AdministrativeArea', 'GeoShape', 'Place', 'Text'
+																				null, // string|array // Optional // 'availableLanguage' // A language someone may use with or at the item, service or place. Must use one of the language codes from the IETF BCP 47 standard. // Allowed schema types: 'Language', 'Text'
+																				null, // string|array enum('HearingImpairedSupported', 'TollFree') // Optional // 'contactOption' // An option available on this contact point. // Allowed schema types: 'ContactPointOption'
+																				'appointment scheduling for primary care', // string // Optional // 'contactType' // A person or organization can have different contact points, for different purposes (e.g., sales, PR, bill payment, customer service, technical support). This property is used to specify the kind of contact point. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'description' // A description of the item. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'disambiguatingDescription' // A short description of the item used to disambiguate from other, similar items. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'email' // Email address. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'faxNumber' // The fax number. // Allowed schema types: 'Text'
+																				null, // array // Optional // 'hoursAvailable' // The hours during which this service or contact is available. // Allowed schema types: 'OpeningHoursSpecification'
+																				null, // string|array // Optional // 'mainEntityOfPage' // Indicates a page (or other CreativeWork) for which this thing is the main entity being described. // Allowed schema types: 'CreativeWork', 'URL'
+																				null, // array // Optional // 'potentialAction' // Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role. // Allowed schema types: 'Action'
+																				null, // string|array // Optional // 'productSupported' // The product or service this support contact point is related to (such as product support for a particular product line). // Allowed schema types: 'Product  or Text'
+																				null, // string|array // Optional // 'sameAs' // URL of a reference Web page that unambiguously indicates the item's identity (e.g., the item's Wikipedia page, the item's Wikidata entry, the item's official website). // Allowed schema types: 'URL'
+																				null, // array // Optional // 'subjectOf' // A CreativeWork or Event about this Thing. // Allowed schema types: 'CreativeWork', 'Event'
+																				$location_telephone_appointment_ac_primary, // string // Optional // 'telephone' // The telephone number. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'url' // URL of the item. // Allowed schema types: 'URL'
+																				$location_contactPoint // array // Optional // Pre-existing list array of ContactPoint items to which to add additional items
+																			);
+
+																		// Text type
+
+																			$location_telephone_Text_array[] = $location_telephone_appointment_ac_primary;
+
+																	}
+
+															// Specialty care appointments telephone number
+
+																$location_telephone_appointment_ac_specialty = $location_telephone_appointment_ac_specialty ?? null;
+
+																if ( !isset($location_telephone_appointment_ac_specialty) ) {
+
+																	$location_telephone_appointment_ac_specialty = get_field( 'location_ac_appointments_specialty', $entity ) ?? null;
+																	$location_telephone_appointment_ac_specialty = $location_telephone_appointment_ac_specialty ? format_phone_dash($location_telephone_appointment_ac_specialty) : null;
+
+																}
+
+																// Add value to the list arrays
+
+																	if ( $location_telephone_appointment_ac_specialty ) {
+
+																		// ContactPoint type
+
+																			$location_contactPoint = uamswp_fad_schema_contactpoint(
+																				'https://www.wikidata.org/wiki/Q214995', // string|array // Optional // additionalType // An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. // Allowed schema types: 'Text', 'URL'
+																				null, // string|array // Optional // 'areaServed' // The geographic area where a service or offered item is provided. // Allowed schema types: 'AdministrativeArea', 'GeoShape', 'Place', 'Text'
+																				null, // string|array // Optional // 'availableLanguage' // A language someone may use with or at the item, service or place. Must use one of the language codes from the IETF BCP 47 standard. // Allowed schema types: 'Language', 'Text'
+																				null, // string|array enum('HearingImpairedSupported', 'TollFree') // Optional // 'contactOption' // An option available on this contact point. // Allowed schema types: 'ContactPointOption'
+																				'appointment scheduling for specialty care', // string // Optional // 'contactType' // A person or organization can have different contact points, for different purposes (e.g., sales, PR, bill payment, customer service, technical support). This property is used to specify the kind of contact point. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'description' // A description of the item. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'disambiguatingDescription' // A short description of the item used to disambiguate from other, similar items. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'email' // Email address. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'faxNumber' // The fax number. // Allowed schema types: 'Text'
+																				null, // array // Optional // 'hoursAvailable' // The hours during which this service or contact is available. // Allowed schema types: 'OpeningHoursSpecification'
+																				null, // string|array // Optional // 'mainEntityOfPage' // Indicates a page (or other CreativeWork) for which this thing is the main entity being described. // Allowed schema types: 'CreativeWork', 'URL'
+																				null, // array // Optional // 'potentialAction' // Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role. // Allowed schema types: 'Action'
+																				null, // string|array // Optional // 'productSupported' // The product or service this support contact point is related to (such as product support for a particular product line). // Allowed schema types: 'Product  or Text'
+																				null, // string|array // Optional // 'sameAs' // URL of a reference Web page that unambiguously indicates the item's identity (e.g., the item's Wikipedia page, the item's Wikidata entry, the item's official website). // Allowed schema types: 'URL'
+																				null, // array // Optional // 'subjectOf' // A CreativeWork or Event about this Thing. // Allowed schema types: 'CreativeWork', 'Event'
+																				$location_telephone_appointment_ac_specialty, // string // Optional // 'telephone' // The telephone number. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'url' // URL of the item. // Allowed schema types: 'URL'
+																				$location_contactPoint // array // Optional // Pre-existing list array of ContactPoint items to which to add additional items
+																			);
+
+																		// Text type
+
+																			$location_telephone_Text_array[] = $location_telephone_appointment_ac_specialty;
+
+																	}
+
+													} else {
+
+														// All other appointment telephone numbers
+
+															// Query: Is there a separate appointment telephone number for patients?
+
+																$location_telephone_appointment_query = $location_telephone_appointment_query ?? null;
+
+																if ( !isset($location_telephone_appointment_query) ) {
+
+																	$location_telephone_appointment_query = get_field( 'location_clinic_phone_query', $entity ) ?? false;
+
+																}
+
+															// Query: Is there a separate appointment telephone number for patients?
+
+																$location_telephone_appointment_existing_query = $location_telephone_appointment_existing_query ?? null;
+
+																if ( $location_telephone_appointment_query ) {
+
+																	if ( !isset($location_telephone_appointment_existing_query) ) {
+
+																		$location_telephone_appointment_existing_query = get_field( 'location_appointment_phone_query', $entity ) ?? false;
+
+																	}
+
+																}
+
+															// New Patients
+
+																$location_telephone_appointment_new = $location_telephone_appointment_new ?? null;
+
+																if ( $location_telephone_appointment_query ) {
+
+																	if ( !isset($location_telephone_appointment_new) ) {
+
+																		$location_telephone_appointment_new = get_field( 'location_new_appointments_phone', $entity ) ?? null;
+																		$location_telephone_appointment_new = $location_telephone_appointment_new ? format_phone_dash($location_telephone_appointment_new) : null;
+
+																	}
+
+																} else {
+
+																	$location_telephone_appointment_new = $location_telephone;
+
+																}
+
+																// Add value to the list arrays
+
+																	if ( $location_telephone_appointment_new ) {
+
+																		// ContactPoint type
+
+																			$location_contactPoint = uamswp_fad_schema_contactpoint(
+																				'https://www.wikidata.org/wiki/Q214995', // string|array // Optional // additionalType // An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. // Allowed schema types: 'Text', 'URL'
+																				null, // string|array // Optional // 'areaServed' // The geographic area where a service or offered item is provided. // Allowed schema types: 'AdministrativeArea', 'GeoShape', 'Place', 'Text'
+																				null, // string|array // Optional // 'availableLanguage' // A language someone may use with or at the item, service or place. Must use one of the language codes from the IETF BCP 47 standard. // Allowed schema types: 'Language', 'Text'
+																				null, // string|array enum('HearingImpairedSupported', 'TollFree') // Optional // 'contactOption' // An option available on this contact point. // Allowed schema types: 'ContactPointOption'
+																				'appointment scheduling for new patients', // string // Optional // 'contactType' // A person or organization can have different contact points, for different purposes (e.g., sales, PR, bill payment, customer service, technical support). This property is used to specify the kind of contact point. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'description' // A description of the item. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'disambiguatingDescription' // A short description of the item used to disambiguate from other, similar items. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'email' // Email address. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'faxNumber' // The fax number. // Allowed schema types: 'Text'
+																				null, // array // Optional // 'hoursAvailable' // The hours during which this service or contact is available. // Allowed schema types: 'OpeningHoursSpecification'
+																				null, // string|array // Optional // 'mainEntityOfPage' // Indicates a page (or other CreativeWork) for which this thing is the main entity being described. // Allowed schema types: 'CreativeWork', 'URL'
+																				null, // array // Optional // 'potentialAction' // Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role. // Allowed schema types: 'Action'
+																				null, // string|array // Optional // 'productSupported' // The product or service this support contact point is related to (such as product support for a particular product line). // Allowed schema types: 'Product  or Text'
+																				null, // string|array // Optional // 'sameAs' // URL of a reference Web page that unambiguously indicates the item's identity (e.g., the item's Wikipedia page, the item's Wikidata entry, the item's official website). // Allowed schema types: 'URL'
+																				null, // array // Optional // 'subjectOf' // A CreativeWork or Event about this Thing. // Allowed schema types: 'CreativeWork', 'Event'
+																				$location_telephone_appointment_new, // string // Optional // 'telephone' // The telephone number. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'url' // URL of the item. // Allowed schema types: 'URL'
+																				$location_contactPoint // array // Optional // Pre-existing list array of ContactPoint items to which to add additional items
+																			);
+
+																		// Text type
+
+																			$location_telephone_Text_array[] = $location_telephone_appointment_new;
+
+																	}
+
+															// Existing Patients
+
+																$location_telephone_appointment_existing = $location_telephone_appointment_existing ?? null;
+
+																if (
+																	$location_telephone_appointment_query
+																	&&
+																	$location_telephone_appointment_existing_query
+																) {
+
+																	if ( !isset($location_telephone_appointment_existing) ) {
+
+																		$location_telephone_appointment_existing = get_field( 'location_return_appointments_phone', $entity ) ?? null;
+																		$location_telephone_appointment_existing = $location_telephone_appointment_existing ? format_phone_dash($location_telephone_appointment_existing) : null;
+
+																	}
+
+																} else {
+
+																	$location_telephone_appointment_existing = $location_telephone_appointment_new;
+
+																}
+
+																// Add value to the list arrays
+
+																	if ( $location_telephone_appointment_existing ) {
+
+																		// ContactPoint type
+
+																			$location_contactPoint = uamswp_fad_schema_contactpoint(
+																				'https://www.wikidata.org/wiki/Q214995', // string|array // Optional // additionalType // An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. // Allowed schema types: 'Text', 'URL'
+																				null, // string|array // Optional // 'areaServed' // The geographic area where a service or offered item is provided. // Allowed schema types: 'AdministrativeArea', 'GeoShape', 'Place', 'Text'
+																				null, // string|array // Optional // 'availableLanguage' // A language someone may use with or at the item, service or place. Must use one of the language codes from the IETF BCP 47 standard. // Allowed schema types: 'Language', 'Text'
+																				null, // string|array enum('HearingImpairedSupported', 'TollFree') // Optional // 'contactOption' // An option available on this contact point. // Allowed schema types: 'ContactPointOption'
+																				'appointment scheduling for returning patients', // string // Optional // 'contactType' // A person or organization can have different contact points, for different purposes (e.g., sales, PR, bill payment, customer service, technical support). This property is used to specify the kind of contact point. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'description' // A description of the item. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'disambiguatingDescription' // A short description of the item used to disambiguate from other, similar items. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'email' // Email address. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'faxNumber' // The fax number. // Allowed schema types: 'Text'
+																				null, // array // Optional // 'hoursAvailable' // The hours during which this service or contact is available. // Allowed schema types: 'OpeningHoursSpecification'
+																				null, // string|array // Optional // 'mainEntityOfPage' // Indicates a page (or other CreativeWork) for which this thing is the main entity being described. // Allowed schema types: 'CreativeWork', 'URL'
+																				null, // array // Optional // 'potentialAction' // Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role. // Allowed schema types: 'Action'
+																				null, // string|array // Optional // 'productSupported' // The product or service this support contact point is related to (such as product support for a particular product line). // Allowed schema types: 'Product  or Text'
+																				null, // string|array // Optional // 'sameAs' // URL of a reference Web page that unambiguously indicates the item's identity (e.g., the item's Wikipedia page, the item's Wikidata entry, the item's official website). // Allowed schema types: 'URL'
+																				null, // array // Optional // 'subjectOf' // A CreativeWork or Event about this Thing. // Allowed schema types: 'CreativeWork', 'Event'
+																				$location_telephone_appointment_existing, // string // Optional // 'telephone' // The telephone number. // Allowed schema types: 'Text'
+																				null, // string // Optional // 'url' // URL of the item. // Allowed schema types: 'URL'
+																				$location_contactPoint // array // Optional // Pre-existing list array of ContactPoint items to which to add additional items
+																			);
+
+																		// Text type
+
+																			$location_telephone_Text_array[] = $location_telephone_appointment_existing;
+
+																	}
+
+														}
+
+												}
+
+											// Additional Phone Numbers
+
+												// Get the Additional Phone Numbers repeater
+
+													if ( !isset($location_telephone_additional_repeater) ) {
+
+														$location_telephone_additional_repeater = get_field( 'location_phone_numbers', $entity ) ?? null;
+
+													}
+
+												// Add each item to an array
+
+													if ( $location_telephone_additional_repeater ) {
+
+														foreach ( $location_telephone_additional_repeater as $item ) {
+
+															// Eliminate PHP errors
+
+																$item_value = null;
+																$item_contactType = null;
+																$item_telephone = null;
+																$item_description = null;
+
+															// Get the values of the subfields
+
+																if ( $item ) {
+
+																	$item_contactType = $item['location_appointments_text'] ?? null;
+																	$item_description = $item['location_appointments_additional_text'] ?? null;
+																	$item_telephone = $item['location_appointments_phone'] ?? null;
+																	$item_telephone = $item_telephone ? format_phone_dash($item_telephone) : null;
+
+																}
+
+															// Add the item to the list arrays
+
+																if ( $item_telephone ) {
+
+																	// ContactPoint type
+
+																		$location_contactPoint = uamswp_fad_schema_contactpoint(
+																			'https://www.wikidata.org/wiki/Q214995', // string|array // Optional // additionalType // An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. // Allowed schema types: 'Text', 'URL'
+																			null, // string|array // Optional // 'areaServed' // The geographic area where a service or offered item is provided. // Allowed schema types: 'AdministrativeArea', 'GeoShape', 'Place', 'Text'
+																			null, // string|array // Optional // 'availableLanguage' // A language someone may use with or at the item, service or place. Must use one of the language codes from the IETF BCP 47 standard. // Allowed schema types: 'Language', 'Text'
+																			null, // string|array enum('HearingImpairedSupported', 'TollFree') // Optional // 'contactOption' // An option available on this contact point. // Allowed schema types: 'ContactPointOption'
+																			$item_contactType, // string // Optional // 'contactType' // A person or organization can have different contact points, for different purposes (e.g., sales, PR, bill payment, customer service, technical support). This property is used to specify the kind of contact point. // Allowed schema types: 'Text'
+																			$item_description, // string // Optional // 'description' // A description of the item. // Allowed schema types: 'Text'
+																			null, // string // Optional // 'disambiguatingDescription' // A short description of the item used to disambiguate from other, similar items. // Allowed schema types: 'Text'
+																			null, // string // Optional // 'email' // Email address. // Allowed schema types: 'Text'
+																			null, // string // Optional // 'faxNumber' // The fax number. // Allowed schema types: 'Text'
+																			null, // array // Optional // 'hoursAvailable' // The hours during which this service or contact is available. // Allowed schema types: 'OpeningHoursSpecification'
+																			null, // string|array // Optional // 'mainEntityOfPage' // Indicates a page (or other CreativeWork) for which this thing is the main entity being described. // Allowed schema types: 'CreativeWork', 'URL'
+																			null, // array // Optional // 'potentialAction' // Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role. // Allowed schema types: 'Action'
+																			null, // string|array // Optional // 'productSupported' // The product or service this support contact point is related to (such as product support for a particular product line). // Allowed schema types: 'Product  or Text'
+																			null, // string|array // Optional // 'sameAs' // URL of a reference Web page that unambiguously indicates the item's identity (e.g., the item's Wikipedia page, the item's Wikidata entry, the item's official website). // Allowed schema types: 'URL'
+																			null, // array // Optional // 'subjectOf' // A CreativeWork or Event about this Thing. // Allowed schema types: 'CreativeWork', 'Event'
+																			$item_telephone, // string // Optional // 'telephone' // The telephone number. // Allowed schema types: 'Text'
+																			null, // string // Optional // 'url' // URL of the item. // Allowed schema types: 'URL'
+																			$location_contactPoint // array // Optional // Pre-existing list array of ContactPoint items to which to add additional items
+																		);
+
+																	// Text type
+
+																		$location_telephone_Text_array[] = $item_telephone;
+
+																}
+
+														}
+
+													}
+
+									}
+
+								// fax number (common use)
+
+									// List of properties that reference fax number
+
+										$location_faxNumber_common = array(
+											'faxNumber',
+											'contactPoint'
+										);
+
+									if (
+										array_intersect(
+											$location_properties_map[$MedicalWebPage_type]['properties'],
+											$location_faxNumber_common
+										)
+										||
+										array_intersect(
+											$location_properties_map[$LocalBusiness_type]['properties'],
+											$location_faxNumber_common
+										)
+									) {
+
+										// Base arrays
+
+											// ContactPoint type
+
+												$location_contactPoint = $location_contactPoint ?? array();
+
+											// Text type
+
+												$location_faxNumber_Text_array = array();
+
+										// Get values
+
+											// Clinic Fax Number
+
+												if ( !isset($location_faxNumber) ) {
+
+													$location_faxNumber = get_field( 'location_fax', $entity ) ?? null;
+													$location_faxNumber = $location_faxNumber ? format_phone_dash($location_faxNumber) : null;
+
+												}
+
+										// Add the item to the list arrays
+
+											if ( $location_faxNumber ) {
+
+												// ContactPoint type
+
+													$location_contactPoint = uamswp_fad_schema_contactpoint(
+														'https://www.wikidata.org/wiki/Q214995', // string|array // Optional // additionalType // An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. // Allowed schema types: 'Text', 'URL'
+														null, // string|array // Optional // 'areaServed' // The geographic area where a service or offered item is provided. // Allowed schema types: 'AdministrativeArea', 'GeoShape', 'Place', 'Text'
+														null, // string|array // Optional // 'availableLanguage' // A language someone may use with or at the item, service or place. Must use one of the language codes from the IETF BCP 47 standard. // Allowed schema types: 'Language', 'Text'
+														null, // string|array enum('HearingImpairedSupported', 'TollFree') // Optional // 'contactOption' // An option available on this contact point. // Allowed schema types: 'ContactPointOption'
+														'fax', // string // Optional // 'contactType' // A person or organization can have different contact points, for different purposes (e.g., sales, PR, bill payment, customer service, technical support). This property is used to specify the kind of contact point. // Allowed schema types: 'Text'
+														null, // string // Optional // 'description' // A description of the item. // Allowed schema types: 'Text'
+														null, // string // Optional // 'disambiguatingDescription' // A short description of the item used to disambiguate from other, similar items. // Allowed schema types: 'Text'
+														null, // string // Optional // 'email' // Email address. // Allowed schema types: 'Text'
+														$location_faxNumber, // string // Optional // 'faxNumber' // The fax number. // Allowed schema types: 'Text'
+														null, // array // Optional // 'hoursAvailable' // The hours during which this service or contact is available. // Allowed schema types: 'OpeningHoursSpecification'
+														null, // string|array // Optional // 'mainEntityOfPage' // Indicates a page (or other CreativeWork) for which this thing is the main entity being described. // Allowed schema types: 'CreativeWork', 'URL'
+														null, // array // Optional // 'potentialAction' // Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role. // Allowed schema types: 'Action'
+														null, // string|array // Optional // 'productSupported' // The product or service this support contact point is related to (such as product support for a particular product line). // Allowed schema types: 'Product  or Text'
+														null, // string|array // Optional // 'sameAs' // URL of a reference Web page that unambiguously indicates the item's identity (e.g., the item's Wikipedia page, the item's Wikidata entry, the item's official website). // Allowed schema types: 'URL'
+														null, // array // Optional // 'subjectOf' // A CreativeWork or Event about this Thing. // Allowed schema types: 'CreativeWork', 'Event'
+														null, // string // Optional // 'telephone' // The telephone number. // Allowed schema types: 'Text'
+														null, // string // Optional // 'url' // URL of the item. // Allowed schema types: 'URL'
+														$location_contactPoint // array // Optional // Pre-existing list array of ContactPoint items to which to add additional items
+													);
+
+												// Text type
+
+													$location_faxNumber_Text_array[] = $location_faxNumber;
+
+											}
 
 									}
 
@@ -22222,7 +22734,7 @@
 
 											}
 
-								// contactPoint [WIP]
+								// contactPoint
 
 									/**
 									 * A contact point for a person or organization.
@@ -22230,39 +22742,45 @@
 									 *     - ContactPoint
 									 */
 
-									/*
+									if (
+										in_array(
+											'contactPoint',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'contactPoint',
+											$location_properties_map[$LocalBusiness_type]['properties']
+										)
+									) {
 
-										email
-										faxNumber
-										telephone
+										// Add to item values
 
-									*/
+											// MedicalWebPage
 
-									// Base array
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'contactPoint', // string // Required // Name of schema property
+													$location_contactPoint, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
-										$location_contactPoint = array();
+											// LocalBusiness
 
-									// Get values
+												uamswp_fad_schema_add_to_item_values(
+													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'contactPoint', // string // Required // Name of schema property
+													$location_contactPoint, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
-										// Address
-
-											if ( $location_address ) {
-
-												$location_contactPoint[] = $location_address;
-
-											}
-
-										// Telephone
-
-										// Fax
-
-										// Email
-
-										// Website/Webpage
-
-									// Add to item property
-
-
+									}
 
 								// containedInPlace
 
@@ -22869,6 +23387,56 @@
 									 *
 									 *     - Event
 									 */
+
+								// faxNumber
+
+									/**
+									 * The fax number.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - Text
+									 */
+
+									 if (
+										in_array(
+											'faxNumber',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'faxNumber',
+											$location_properties_map[$LocalBusiness_type]['properties']
+										)
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'faxNumber', // string // Required // Name of schema property
+													$location_faxNumber_Text_array, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// LocalBusiness
+
+												uamswp_fad_schema_add_to_item_values(
+													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'faxNumber', // string // Required // Name of schema property
+													$location_faxNumber_Text_array, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
 
 								// foundingDate [WIP]
 
@@ -24751,6 +25319,56 @@
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'subOrganization', // string // Required // Name of schema property
 													$location_subOrganization, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// telephone
+
+									/**
+									 * The telephone number.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - Text
+									 */
+
+									if (
+										in_array(
+											'telephone',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'telephone',
+											$location_properties_map[$LocalBusiness_type]['properties']
+										)
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'telephone', // string // Required // Name of schema property
+													$location_telephone_Text_array, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// LocalBusiness
+
+												uamswp_fad_schema_add_to_item_values(
+													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'telephone', // string // Required // Name of schema property
+													$location_telephone_Text_array, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
