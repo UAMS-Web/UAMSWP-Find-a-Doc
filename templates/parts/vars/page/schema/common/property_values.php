@@ -163,3 +163,21 @@
 			$schema_default_brand_organization_copyright = uamswp_fad_schema_default_brand_organization(
 				'copyright' // string enum('affiliation', 'clinical', 'copyright', 'credit', 'locationcreated') // Required // The suffix of the relevant Default UAMS Brand Organizations field
 			) ?? array();
+
+	// Third-Party Brand Organization Slugs
+
+		// Arkansas Children's
+
+			$brand_organization_slug_arkansas_childrens = 'arkansas-childrens';
+
+		// Baptist Health
+
+			$brand_organization_slug_baptist_health = 'baptist-health';
+
+		// United States Department of Veterans Affairs
+
+			$brand_organization_slug_va = 'va';
+
+				// Central Arkansas Veterans Healthcare System
+
+					$brand_organization_slug_va_cavhs = '_' . $brand_organization_slug_va . '_cavhs'; // _va_cavhs
