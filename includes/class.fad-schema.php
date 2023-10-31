@@ -19675,6 +19675,7 @@
 								$MedicalWebPage_type = null;
 								$MedicalCondition_i = 1;
 								$Service_i = 1;
+								$location_specific_clinical_organization_slug = null;
 
 								// Reused variables
 
@@ -19884,20 +19885,57 @@
 
 											// Query: Whether to override the default clinical brand organization for this entity
 
-												$location_specific_clinical_organization_override = get_field( 'schema_brandorg_query', $entity ) ?? false;
+												$location_specific_clinical_organization_override = get_field( 'schema_brandorg_query', $entity ) ?? null;
 
 											// Get list of Third-Party Brand Organizations
 
 												// Base array
 
 													$location_specific_clinical_organization = array();
+													$location_specific_clinical_organization_slug = array();
 
 												if ( $location_specific_clinical_organization_override ) {
 
 													$location_specific_clinical_organization = uamswp_fad_schema_brand_organization_list(
 														$entity, // int|WP_Term // Required // Post ID or term object
-														$location_specific_clinical_organization // array // Optional // Pre-existing list array for brand organizations to which to add additional items
+														$location_specific_clinical_organization, // array // Optional // Pre-existing list array for brand organizations to which to add additional items
+														$location_specific_clinical_organization_slug // array // Optional // Pre-existing list array for brand organizations slugs to which to add additional slugs
 													);
+
+												}
+
+											// Fallback query (deprecated): Is this an Arkansas Children's location?
+
+												/**
+												 * If the brand organization fields do not yet have a value (i.e., the location
+												 * profile hasn't been updated since this functionality was added), then use the
+												 * value from the deprecated query for whether this location is an
+												 * Arkansas Children's location.
+												 */
+
+												if ( !isset($location_specific_clinical_organization_override) ) {
+
+													if ( !isset($location_ac_query) ) {
+
+														$location_ac_query = get_field( 'location_ac_query', $entity ) ?? null;
+
+													}
+
+													$brand_organization_slug_arkansas_childrens = $brand_organization_slug_arkansas_childrens ?? null;
+
+													if (
+														$location_ac_query
+														&&
+														$brand_organization_slug_arkansas_childrens
+													) {
+
+														$location_specific_clinical_organization = uamswp_fad_schema_brand_organization(
+															$brand_organization_slug_arkansas_childrens // string // Required // Brand Organization term slug
+														);
+
+														$location_specific_clinical_organization_slug[] = $brand_organization_slug_arkansas_childrens;
+
+													}
 
 												}
 
