@@ -19648,6 +19648,7 @@
 										$location_organization_common = array(
 											'affiliation',
 											'brand',
+											'contactPoint',
 											'hospitalAffiliation',
 											'memberOf',
 											'parentOrganization',
