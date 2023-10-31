@@ -563,28 +563,24 @@
 	// Add data to an array defining schema data for ContactPoint
 
 		function uamswp_fad_schema_contactpoint(
-			$additionalType = null, // string|array // Optional // foo // Allowed schema types: 'Text', 'URL'
-			$alternateName = null, // string|array // Optional // An alias for the item. // Allowed schema types: 'Text'
-			$areaServed = null, // string|array // Optional // The geographic area where a service or offered item is provided. // Allowed schema types: 'AdministrativeArea', 'GeoShape', 'Place', 'Text'
-			$availableLanguage = null, // string|array // Optional // A language someone may use with or at the item, service or place. Must use one of the language codes from the IETF BCP 47 standard. // Allowed schema types: 'Language', 'Text'
-			string $contactOption = null, // string|array enum('HearingImpairedSupported', 'TollFree') // Optional // An option available on this contact point. // Allowed schema types: 'ContactPointOption'
-			string $contactType = null, // string // Optional // The kind of contact point // Allowed schema types: 'Text'
-			string $description = null, // string // Optional // A description of the item. // Allowed schema types: 'Text'
-			string $disambiguatingDescription = null, // string // Optional // A short description of the item used to disambiguate from other, similar items. // Allowed schema types: 'Text'
-			string $email = null, // string // Optional // Email address. // Allowed schema types: 'Text'
-			string $faxNumber = null, // string // Optional // The fax number. // Allowed schema types: 'Text'
-			array $hoursAvailable = null, // array // Optional // The hours during which this service or contact is available. // Allowed schema types: 'OpeningHoursSpecification'
-			$identifier = null, // string|array // Optional // Any kind of identifier for the item // Allowed schema types: 'PropertyValue', 'Text', 'URL'
-			$image = null, // string|array // Optional // An image of the item. // Allowed schema types: 'ImageObject', 'URL'
-			$mainEntityOfPage = null, // string|array // Optional // Indicates a page (or other CreativeWork) for which this thing is the main entity being described. // Allowed schema types: 'CreativeWork', 'URL'
-			string $name = null, // string // Optional // The name of the item. // Allowed schema types: 'Text'
-			array $potentialAction = null, // array // Optional // Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role. // Allowed schema types: 'Action'
-			$productSupported = null, // string|array // Optional // The product or service this support contact point is related to (such as product support for a particular product line). // Allowed schema types: 'Product  or Text'
-			$sameAs = null, // string|array // Optional // URL of a reference Web page that unambiguously indicates the item's identity (e.g., the item's Wikipedia page, the item's Wikidata entry, the item's official website). // Allowed schema types: 'URL'
-			array $subjectOf = null, // array // Optional // A CreativeWork or Event about this Thing. // Allowed schema types: 'CreativeWork', 'Event'
-			string $telephone = null, // string // Optional // The telephone number. // Allowed schema types: 'Text'
-			string $url = null, // string // Optional // URL of the item. // Allowed schema types: 'URL'
-			array $output = array()  // array // Optional // Pre-existing list array of ContactPoint items to which to add additional items
+			$additionalType = null, // string|array // Optional // additionalType // An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. // Allowed schema types: 'Text', 'URL'
+			$areaServed = null, // string|array // Optional // 'areaServed' // The geographic area where a service or offered item is provided. // Allowed schema types: 'AdministrativeArea', 'GeoShape', 'Place', 'Text'
+			$availableLanguage = null, // string|array // Optional // 'availableLanguage' // A language someone may use with or at the item, service or place. Must use one of the language codes from the IETF BCP 47 standard. // Allowed schema types: 'Language', 'Text'
+			$contactOption = null, // string|array enum('HearingImpairedSupported', 'TollFree') // Optional // 'contactOption' // An option available on this contact point. // Allowed schema types: 'ContactPointOption'
+			string $contactType = null, // string // Optional // 'contactType' // A person or organization can have different contact points, for different purposes (e.g., sales, PR, bill payment, customer service, technical support). This property is used to specify the kind of contact point. // Allowed schema types: 'Text'
+			string $description = null, // string // Optional // 'description' // A description of the item. // Allowed schema types: 'Text'
+			string $disambiguatingDescription = null, // string // Optional // 'disambiguatingDescription' // A short description of the item used to disambiguate from other, similar items. // Allowed schema types: 'Text'
+			string $email = null, // string // Optional // 'email' // Email address. // Allowed schema types: 'Text'
+			string $faxNumber = null, // string // Optional // 'faxNumber' // The fax number. // Allowed schema types: 'Text'
+			array $hoursAvailable = null, // array // Optional // 'hoursAvailable' // The hours during which this service or contact is available. // Allowed schema types: 'OpeningHoursSpecification'
+			$mainEntityOfPage = null, // string|array // Optional // 'mainEntityOfPage' // Indicates a page (or other CreativeWork) for which this thing is the main entity being described. // Allowed schema types: 'CreativeWork', 'URL'
+			array $potentialAction = null, // array // Optional // 'potentialAction' // Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role. // Allowed schema types: 'Action'
+			$productSupported = null, // string|array // Optional // 'productSupported' // The product or service this support contact point is related to (such as product support for a particular product line). // Allowed schema types: 'Product  or Text'
+			$sameAs = null, // string|array // Optional // 'sameAs' // URL of a reference Web page that unambiguously indicates the item's identity (e.g., the item's Wikipedia page, the item's Wikidata entry, the item's official website). // Allowed schema types: 'URL'
+			array $subjectOf = null, // array // Optional // 'subjectOf' // A CreativeWork or Event about this Thing. // Allowed schema types: 'CreativeWork', 'Event'
+			string $telephone = null, // string // Optional // 'telephone' // The telephone number. // Allowed schema types: 'Text'
+			string $url = null, // string // Optional // 'url' // URL of the item. // Allowed schema types: 'URL'
+			array $output = array() // array // Optional // Pre-existing list array of ContactPoint items to which to add additional items
 		) {
 
 			/**
@@ -623,11 +619,8 @@
 				// Check the values that should be either a string or an array
 
 					$additionalType = ( is_string($additionalType) || is_array($additionalType) ) ? $additionalType : null;
-					$alternateName = ( is_string($alternateName) || is_array($alternateName) ) ? $alternateName : null;
 					$areaServed = ( is_string($areaServed) || is_array($areaServed) ) ? $areaServed : null;
 					$availableLanguage = ( is_string($availableLanguage) || is_array($availableLanguage) ) ? $availableLanguage : null;
-					$identifier = ( is_string($identifier) || is_array($identifier) ) ? $identifier : null;
-					$image = ( is_string($image) || is_array($image) ) ? $image : null;
 					$mainEntityOfPage = ( is_string($mainEntityOfPage) || is_array($mainEntityOfPage) ) ? $mainEntityOfPage : null;
 					$productSupported = ( is_string($productSupported) || is_array($productSupported) ) ? $productSupported : null;
 					$sameAs = ( is_string($sameAs) || is_array($sameAs) ) ? $sameAs : null;
@@ -668,7 +661,6 @@
 
 						}
 
-
 				// Check pre-existing list array, nesting the array if it is not a list array
 
 					if ( !array_is_list($output) ) {
@@ -681,7 +673,6 @@
 
 				$ContactPoint_item = array(
 					'additionalType' => $additionalType,
-					'alternateName' => $alternateName,
 					'areaServed' => $areaServed,
 					'availableLanguage' => $availableLanguage,
 					'contactOption' => $contactOption,
@@ -691,10 +682,7 @@
 					'email' => $email,
 					'faxNumber' => $faxNumber,
 					'hoursAvailable' => $hoursAvailable,
-					'identifier' => $identifier,
-					'image' => $image,
 					'mainEntityOfPage' => $mainEntityOfPage,
-					'name' => $name,
 					'potentialAction' => $potentialAction,
 					'productSupported' => $productSupported,
 					'sameAs' => $sameAs,
