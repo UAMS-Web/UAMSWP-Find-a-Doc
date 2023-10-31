@@ -1391,36 +1391,7 @@
 			"label": "Clinic Fax Number",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_schema_brandorg_query",
-						"operator": "==",
-						"value": "0"
-					}
-				],
-				[
-					{
-						"field": "field_schema_brandorg_query",
-						"operator": "==",
-						"value": "1"
-					},
-					{
-						"field": "field_schema_brandorg",
-						"operator": "!=empty"
-					},
-					{
-						"field": "field_schema_brandorg",
-						"operator": "!=",
-						"value": "arkansas-childrens"
-					},
-					{
-						"field": "field_location_ac_query",
-						"operator": "!=",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
