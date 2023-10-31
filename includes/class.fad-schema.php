@@ -21724,6 +21724,35 @@
 
 									}
 
+								// Query: Can a patient schedule an appointment for services rendered at this location? (common use)
+
+									// List of properties that reference address
+
+										$location_appointments_query_common = array(
+											'contactPoint',
+											'telephone'
+										);
+
+									if (
+										array_intersect(
+											$location_properties_map[$MedicalWebPage_type]['properties'],
+											$location_appointments_query_common
+										)
+										||
+										array_intersect(
+											$location_properties_map[$LocalBusiness_type]['properties'],
+											$location_appointments_query_common
+										)
+									) {
+
+										if ( !isset($location_appointments_query) ) {
+
+											$location_appointments_query = get_field( 'location_appointments_query', $entity ) ?? null;
+
+										}
+
+									}
+
 								// name
 
 									/**
