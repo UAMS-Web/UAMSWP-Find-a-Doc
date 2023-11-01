@@ -28956,8 +28956,6 @@
 								$clinical_resource_description = '';
 								$clinical_resource_description_count = '';
 								$clinical_resource_description_ref = '';
-								$clinical_resource_description_TextObject = '';
-								$clinical_resource_description_TextObject_ref = '';
 								$clinical_resource_duration = '';
 								$clinical_resource_embeddedTextCaption = '';
 								$clinical_resource_embeddedTextCaption_count = '';
@@ -29751,20 +29749,6 @@
 															$clinical_resource_description = uamswp_attr_conversion($clinical_resource_description);
 
 														}
-
-												}
-
-											// Format schema value
-
-												$clinical_resource_description_TextObject = array();
-
-												if ( $clinical_resource_description ) {
-
-													$clinical_resource_description_TextObject = array(
-														'@id' => $clinical_resource_url . '#description',
-														'@type' => 'TextObject',
-														'text' => $clinical_resource_description,
-													);
 
 												}
 
