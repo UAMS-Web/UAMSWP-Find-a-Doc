@@ -296,6 +296,21 @@
 
 	// MAIN / ARTICLE
 
+		// Add classes to main element
+
+			add_filter( 'genesis_attr_content', function( $attributes ) {
+
+				$classes = array(
+					$attributes['class'],
+					'condition-item'
+				);
+
+				$attributes['class'] = implode( ' ', $classes );
+
+				return $attributes;
+
+			} );
+
 		// Add bg-white class to article.entry element
 
 			// add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
