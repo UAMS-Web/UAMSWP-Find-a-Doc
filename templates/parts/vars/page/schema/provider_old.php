@@ -1683,51 +1683,5 @@ $page_id = get_the_ID();
 	$schema_provider['@graph'][] = $schema_provider_Person;
 
 // Construct the schema JSON script tag
-uamswp_fad_schema_construct($schema_provider);
 
-// Display array as development testing
-
-	echo '<pre>'; // test
-
-	// Full
-	echo print_r($schema_provider); // test
-
-	// // UAMS
-	// echo print_r($schema_provider['@graph'][0]); // test
-
-	// // UAMS Health
-	// echo print_r($schema_provider['@graph'][1]); // test
-
-	// // UAMSHealth.com
-	// echo print_r($schema_provider['@graph'][1]); // test
-
-	// // MedicalWebPage
-	// echo print_r($schema_provider['@graph'][3]); // test
-
-		// // MedicalWebPage[mentions]
-		// echo print_r($schema_provider['@graph'][3]['mentions']); // test
-
-	// // BreadcrumbList
-	// echo print_r($schema_provider['@graph'][4]); // test
-
-	// // Physician
-	// echo print_r($schema_provider['@graph'][5]); // test
-
-		// // Physician
-		// echo print_r($schema_provider['@graph'][5]['containedInPlace']); // test
-
-		// // Physician
-		// echo print_r($schema_provider['@graph'][5]['location']); // test
-
-	// // Person
-	// echo print_r($schema_provider['@graph'][6]); // test
-
-	// // Specific variable
-	// echo print_r($schema_provider_location_ref); // test
-
-	echo '</pre>'; // test
-
-// Reusable test display lines
-
-	// echo '<p>$foo = ' . ( is_array($foo) ? 'Array' : ( is_object($foo) ? 'Object' : ( $foo ) ) ) . '</p>'; // test
-	// if ( is_array($foo) || is_object($foo) ) { echo '<pre>'; print_r($foo); echo '</pre>'; } // test
+	uamswp_fad_schema_construct($schema_provider);

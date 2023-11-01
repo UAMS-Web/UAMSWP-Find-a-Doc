@@ -36568,4 +36568,17 @@
 			echo '</script>';
 			echo $schema_line_break;
 
+		// Display array as development testing
+
+			echo '<pre><code>'; // test
+
+			echo json_encode($input, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT); // test
+
+			echo '</code></pre>'; // test
+
+		// Reusable test display lines
+
+			// echo '<p>$foo = ' . ( is_array($foo) ? 'Array' : ( is_object($foo) ? 'Object' : ( is_null($foo) ? 'Null' : ( $foo ) ) ) ) . '</p>'; // test
+			// if ( is_array($foo) || is_object($foo) ) { echo '<pre>'; print_r($foo); echo '</pre>'; } // test
+
 	}

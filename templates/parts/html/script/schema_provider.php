@@ -58,20 +58,3 @@ $page_id = get_the_ID();
 // Construct the schema JSON script tag
 
 	uamswp_fad_schema_construct($schema_provider);
-
-// Display array as development testing
-
-	echo '<pre>'; // test
-
-	// Full
-	echo print_r($schema_provider); // test
-
-	// // Specific @graph item
-	// echo print_r($schema_provider['@graph'][0]); // test
-
-	echo '</pre>'; // test
-
-// Reusable test display lines
-
-	// echo '<p>$foo = ' . ( is_array($foo) ? 'Array' : ( is_object($foo) ? 'Object' : ( is_null($foo) ? 'Null' : ( $foo ) ) ) ) . '</p>'; // test
-	// if ( is_array($foo) || is_object($foo) ) { echo '<pre>'; print_r($foo); echo '</pre>'; } // test
