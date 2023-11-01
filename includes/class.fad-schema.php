@@ -14198,7 +14198,7 @@
 
 											// Get values
 
-												$provider_additionalType_MedicalWebPage = 'ProfilePage';
+												$provider_additionalType_MedicalWebPage = 'https://schema.org/ProfilePage/';
 
 											// Clean up additionalType property values array
 
@@ -22524,7 +22524,7 @@
 
 											// Get values
 
-												$location_additionalType_MedicalWebPage = 'ProfilePage';
+												$location_additionalType_MedicalWebPage = 'https://schema.org/ProfilePage/';
 
 											// Clean up additionalType property values array
 
