@@ -13214,7 +13214,7 @@
 
 												// MedicalWebPage
 
-													$provider_location_MedicalWebPage = $provider_provider['MedicalWebPage'];
+													$provider_location_MedicalWebPage = $provider_location['MedicalWebPage'];
 
 													// Get URLs for significantLink property
 
@@ -13231,7 +13231,7 @@
 
 												// LocalBusiness and subtypes
 
-													$provider_location_LocalBusiness = $provider_provider['LocalBusiness'];
+													$provider_location_LocalBusiness = $provider_location['LocalBusiness'];
 
 													// Get names for keywords property
 
@@ -13303,7 +13303,7 @@
 
 												// MedicalWebPage
 
-													$provider_expertise_MedicalWebPage = $provider_provider['MedicalWebPage'];
+													$provider_expertise_MedicalWebPage = $provider_expertise['MedicalWebPage'];
 
 													// Get URLs for significantLink property
 
@@ -13320,7 +13320,7 @@
 
 												// MedicalEntity and subtypes
 
-													$provider_expertise_MedicalEntity = $provider_provider['MedicalEntity'];
+													$provider_expertise_MedicalEntity = $provider_expertise['MedicalEntity'];
 
 													// Get names for keywords property
 
@@ -13396,7 +13396,7 @@
 
 												// MedicalWebPage
 
-													$provider_clinical_resource_MedicalWebPage = $provider_provider['MedicalWebPage'];
+													$provider_clinical_resource_MedicalWebPage = $provider_clinical_resource['MedicalWebPage'];
 
 													// Get URLs for significantLink property
 
@@ -13413,7 +13413,7 @@
 
 												// CreativeWork and subtypes
 
-													$provider_clinical_resource_CreativeWork = $provider_provider['CreativeWork'];
+													$provider_clinical_resource_CreativeWork = $provider_clinical_resource['CreativeWork'];
 
 													// Get names for keywords property
 
@@ -20669,7 +20669,7 @@
 
 													// MedicalWebPage
 
-														$location_descendant_location_MedicalWebPage = $location_provider['MedicalWebPage'];
+														$location_descendant_location_MedicalWebPage = $location_descendant_location['MedicalWebPage'];
 
 														// Get URLs for significantLink property
 
@@ -20686,7 +20686,7 @@
 
 													// LocalBusiness and subtypes
 
-														$location_descendant_location_LocalBusiness = $location_provider['LocalBusiness'];
+														$location_descendant_location_LocalBusiness = $location_descendant_location['LocalBusiness'];
 
 														// Get names for keywords property
 
@@ -20755,7 +20755,7 @@
 
 													// MedicalWebPage
 
-														$location_expertise_MedicalWebPage = $location_provider['MedicalWebPage'];
+														$location_expertise_MedicalWebPage = $location_expertise['MedicalWebPage'];
 
 														// Get URLs for significantLink property
 
@@ -20772,7 +20772,7 @@
 
 													// MedicalEntity and subtypes
 
-														$location_expertise_MedicalEntity = $location_provider['MedicalEntity'];
+														$location_expertise_MedicalEntity = $location_expertise['MedicalEntity'];
 
 														// Get names for keywords property
 
@@ -20849,7 +20849,7 @@
 
 												// MedicalWebPage
 
-													$location_clinical_resource_MedicalWebPage = $location_provider['MedicalWebPage'];
+													$location_clinical_resource_MedicalWebPage = $location_clinical_resource['MedicalWebPage'];
 
 													// Get URLs for significantLink property
 
@@ -20866,7 +20866,7 @@
 
 												// CreativeWork and subtypes
 
-													$location_clinical_resource_CreativeWork = $location_provider['CreativeWork'];
+													$location_clinical_resource_CreativeWork = $location_clinical_resource['CreativeWork'];
 
 													// Get names for keywords property
 
