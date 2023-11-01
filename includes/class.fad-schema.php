@@ -22212,7 +22212,7 @@
 
 																} else {
 
-																	$location_telephone_appointment_new = $location_telephone;
+																	$location_telephone_appointment_new = $location_telephone_general;
 
 																}
 
