@@ -27297,6 +27297,22 @@
 
 										}
 
+								// Associated ontology items (e.g., providers, areas of expertise, clinical resources, conditions, treatments)
+
+									// Associated providers
+
+									// Associated locations
+
+									// Descendant areas of expertise
+
+									// Associated areas of expertise
+
+									// Associated clinical resources
+
+									// Associated conditions
+
+									// Associated treatments and procedures
+
 								// description (common)
 
 									// List of properties that reference treatments and procedures
@@ -29388,6 +29404,20 @@
 											}
 
 										}
+
+								// Associated ontology items (e.g., providers, areas of expertise, clinical resources, conditions, treatments)
+
+									// Associated providers
+
+									// Associated locations
+
+									// Associated areas of expertise
+
+									// Associated clinical resources
+
+									// Associated conditions
+
+									// Associated treatments and procedures
 
 								// Main image asset info (common)
 
