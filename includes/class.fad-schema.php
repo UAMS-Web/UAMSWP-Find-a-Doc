@@ -4899,7 +4899,7 @@
 
 						// Image Data
 
-							$image_full_src = wp_get_attachment_image_src( $input_full, 'aspect-16-9' ) ?? array();
+							$image_full_src = wp_get_attachment_image_src( $input_full, 'full' ) ?? array();
 
 							if ( $image_full_src ) {
 
@@ -4913,7 +4913,7 @@
 						// ImageObject
 
 							$image_full = array();
-							$image_full['@id'] = ( isset($url) && !empty($url) ) ? $url . '#' . $page_fragment .  '-16-9' : '';
+							$image_full['@id'] = ( isset($url) && !empty($url) ) ? $url . '#' . $page_fragment .  '-full' : '';
 							$image_full['caption'] = $image_caption_full ?? '';
 							$image_full['contentSize'] = $image_full_size ?: '';
 							$image_full['contentUrl'] = $image_full_url ?: '';
@@ -4925,7 +4925,7 @@
 
 							if ( $image_full ) {
 
-								$image_16_9 = array_merge(
+								$image_full = array_merge(
 									$image_ImageObject_base,
 									$image_full
 								);
