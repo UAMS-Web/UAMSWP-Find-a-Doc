@@ -9863,6 +9863,35 @@
 			array $building_items = array() // array // Optional // Pre-existing list array for buildings to which to add additional items
 		) {
 
+				// Base schema function variables
+
+					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/base_function.php' );
+
+				// List of valid types
+
+					$building_valid_types = array(
+						'Place'
+					);
+
+					// Get subtypes
+
+						uamswp_fad_schema_subtypes($building_valid_types);
+
+				// List of valid properties for each type
+
+					// Base array
+
+						$building_properties_map = array();
+
+					// Get list of valid properties from Schema.org type list
+
+						foreach ( $building_valid_types as $item ) {
+
+							$building_properties_map[$item]['properties'] = $schema_org_types[$item]['properties'] ?? array();
+							$building_properties_map[$item]['properties'] = is_array($building_properties_map[$item]['properties']) ? $building_properties_map[$item]['properties'] : array($building_properties_map[$item]['properties']);
+
+						}
+
 				// Retrieve the value of the transient
 
 					uamswp_fad_get_transient(
@@ -10055,25 +10084,33 @@
 
 						// @id
 
-							$id_fragment = 'Building-' . $term_id;
-							$id = $schema_common_website_url . '#' . $id_fragment;
+							// Get the value
 
-							if ( $id ) {
+								$id_fragment = 'Building-' . $term_id;
+								$id = $schema_common_website_url . '#' . $id_fragment;
 
-								$output['@id'] = $id;
+							// Add the value to the property
 
-							}
+								if ( $id ) {
+
+									$output['@id'] = $id;
+
+								}
 
 						// @type
 
-							$type = 'Place';
-							$Place_subtype = get_field( 'building_location_subtype', $term ) ?? $null;
+							// Get the value
 
-							if ( $Place_subtype ) {
+								$type = 'Place';
+								$Place_subtype = get_field( 'building_location_subtype', $term ) ?? $null;
 
-								$type = $Place_subtype;
+							// Add the value to the property
 
-							}
+								if ( $Place_subtype ) {
+
+									$type = $Place_subtype;
+
+								}
 
 						// brand organization (common use)
 
@@ -10100,12 +10137,6 @@
 											$brand = $schema_default_brand_organization_clinical ?? null;
 
 									}
-
-							if ( $brand ) {
-
-								$output['brand'] = $brand;
-
-							}
 
 						// geo (common use)
 
@@ -10174,64 +10205,80 @@
 							 *     - PropertyValue
 							 */
 
-							// Parking location
+							if (
+								in_array(
+									'additionalProperty',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'additionalProperty',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-								// Base property value
+								// Parking location
 
-									$additionalProperty_parking = array();
+									// Get the value
 
-								// Geo value
+										// Base property value
 
-									// Get Google Map field value
+											$additionalProperty_parking = array();
 
-										$parking_geo_value = get_field( 'building_parking_map', $term ) ?? null;
+										// Geo value
 
-									// Check Google Map field value
+											// Get Google Map field value
 
-										if ( $parking_geo_value ) {
+												$parking_geo_value = get_field( 'building_parking_map', $term ) ?? null;
 
-											$parking_geo_value = ( array_key_exists( 'lat', $parking_geo_value ) && array_key_exists( 'lng', $parking_geo_value ) ) ? $parking_geo_value : null;
+											// Check Google Map field value
+
+												if ( $parking_geo_value ) {
+
+													$parking_geo_value = ( array_key_exists( 'lat', $parking_geo_value ) && array_key_exists( 'lng', $parking_geo_value ) ) ? $parking_geo_value : null;
+
+												}
+
+											// Format Google Map field value as GeoCoordinates
+
+												$parking_geo = null;
+
+												if ( $parking_geo_value ) {
+
+													$parking_geo = uamswp_schema_geo_coordinates(
+														$parking_geo_value['lat'], // string|int // Required // The latitude of a location. For example 37.42242 (WGS 84). // The precision must be at least 5 decimal places.
+														$parking_geo_value['lng'] // string|int // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+													);
+
+												}
+
+										// Construct PropertyValue
+
+											if ( $parking_geo ) {
+
+												$additionalProperty_parking['additionalType'] = 'https://schema.org/ParkingFacility';
+												$additionalProperty_parking['alternateName'] = array(
+													'parking deck',
+													'parking garage',
+													'parking lot',
+													'parking structure'
+												);
+												$additionalProperty_parking['description'] = 'A parking lot or other parking facility.';
+												$additionalProperty_parking['name'] = 'Parking Facility';
+												$additionalProperty_parking['propertyID'] = 'https://www.wikidata.org/wiki/Q55697304'; // Wikidata entry for 'parking facility'
+												$additionalProperty_parking['value'] = $parking_geo;
+
+											}
+
+									// Add the value to the property
+
+										if ( $additionalProperty_parking ) {
+
+											$output['additionalProperty'] = $additionalProperty_parking;
 
 										}
 
-									// Format Google Map field value as GeoCoordinates
-
-										$parking_geo = null;
-
-										if ( $parking_geo_value ) {
-
-											$parking_geo = uamswp_schema_geo_coordinates(
-												$parking_geo_value['lat'], // string|int // Required // The latitude of a location. For example 37.42242 (WGS 84). // The precision must be at least 5 decimal places.
-												$parking_geo_value['lng'] // string|int // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-											);
-
-										}
-
-								// Construct PropertyValue
-
-									if ( $parking_geo ) {
-
-										$additionalProperty_parking['additionalType'] = 'https://schema.org/ParkingFacility';
-										$additionalProperty_parking['alternateName'] = array(
-											'parking deck',
-											'parking garage',
-											'parking lot',
-											'parking structure'
-										);
-										$additionalProperty_parking['description'] = 'A parking lot or other parking facility.';
-										$additionalProperty_parking['name'] = 'Parking Facility';
-										$additionalProperty_parking['propertyID'] = 'https://www.wikidata.org/wiki/Q55697304'; // Wikidata entry for 'parking facility'
-										$additionalProperty_parking['value'] = $parking_geo;
-
-									}
-
-								// Add to additionalProperty
-
-								if ( $additionalProperty_parking ) {
-
-									$output['additionalProperty'] = $additionalProperty_parking;
-
-								}
+							}
 
 						// additionalType
 
@@ -10253,26 +10300,44 @@
 							 *     - URL
 							 */
 
-							// Get additionalType repeater field value
+							if (
+								in_array(
+									'additionalType',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'additionalType',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-								$additionalType_repeater = get_field( 'schema_additionalType', $term ) ?? null;
+								// Get the value
 
-							// Add each item to additionalType property values array
+									// Get additionalType repeater field value
 
-								$additionalType = null;
+										$additionalType_repeater = get_field( 'schema_additionalType', $term ) ?? null;
 
-								if ( $additionalType_repeater ) {
+									// Add each item to additionalType property values array
 
-									$additionalType = uamswp_fad_schema_additionaltype(
-										$additionalType_repeater, // additionalType repeater field
-										'schema_additionalType_uri' // additionalType item field name
-									);
+										$additionalType = null;
 
-								}
+										if ( $additionalType_repeater ) {
 
-							if ( $additionalType ) {
+											$additionalType = uamswp_fad_schema_additionaltype(
+												$additionalType_repeater, // additionalType repeater field
+												'schema_additionalType_uri' // additionalType item field name
+											);
 
-								$output['additionalType'] = $additionalType;
+										}
+
+								// Add the value to the property
+
+									if ( $additionalType ) {
+
+										$output['additionalType'] = $additionalType;
+
+									}
 
 							}
 
@@ -10287,38 +10352,56 @@
 							 *     - Text
 							 */
 
-							$address = null;
-							$address_streetAddress = get_field( 'building_streetaddress', $term ) ?? '';
-							$address_addressRegion = get_field( 'building_state', $term ) ?? '';
-							$address_addressLocality = get_field( 'building_city', $term ) ?? '';
-							$address_postalCode = get_field( 'building_zip', $term ) ?? '';
-							$address_addressCountry = $schema_common_usa;
-
 							if (
-								$address_streetAddress
-								&&
-								$address_addressRegion
-								&&
-								$address_addressLocality
-								&&
-								$address_postalCode
+								in_array(
+									'address',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'address',
+									$building_properties_map[$type]['properties']
+								)
 							) {
 
-								$address = uamswp_fad_schema_postaladdress(
-									'physical address', // string // Required // A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.
-									$address_streetAddress, // string // Required // The street address or the post office box number for PO box addresses.
-									true, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
-									$address_addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
-									$address_addressRegion, // string // Required // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
-									$address_postalCode, // string // Required // The postal code (e.g., 94043).
-									$address_addressCountry // string|array // Optional // The country's ISO 3166-1 alpha-2 country code.
-								);
+								// Get the value
 
-							}
+									$address = null;
+									$address_streetAddress = get_field( 'building_streetaddress', $term ) ?? '';
+									$address_addressRegion = get_field( 'building_state', $term ) ?? '';
+									$address_addressLocality = get_field( 'building_city', $term ) ?? '';
+									$address_postalCode = get_field( 'building_zip', $term ) ?? '';
+									$address_addressCountry = $schema_common_usa;
 
-							if ( $address ) {
+									if (
+										$address_streetAddress
+										&&
+										$address_addressRegion
+										&&
+										$address_addressLocality
+										&&
+										$address_postalCode
+									) {
 
-								$output['address'] = $address;
+										$address = uamswp_fad_schema_postaladdress(
+											'physical address', // string // Required // A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.
+											$address_streetAddress, // string // Required // The street address or the post office box number for PO box addresses.
+											true, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
+											$address_addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
+											$address_addressRegion, // string // Required // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+											$address_postalCode, // string // Required // The postal code (e.g., 94043).
+											$address_addressCountry // string|array // Optional // The country's ISO 3166-1 alpha-2 country code.
+										);
+
+									}
+
+								// Add the value to the property
+
+									if ( $address ) {
+
+										$output['address'] = $address;
+
+									}
 
 							}
 
@@ -10332,26 +10415,44 @@
 							 *     - Text
 							 */
 
-							// Get alternateName repeater field value
+							if (
+								in_array(
+									'alternateName',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'alternateName',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-								$alternateName_repeater = get_field( 'schema_alternatename', $term ) ?? null;
+								// Get the value
 
-							// Add each item to alternateName property values array
+									// Get alternateName repeater field value
 
-								$alternateName = null;
+										$alternateName_repeater = get_field( 'schema_alternatename', $term ) ?? null;
 
-								if ( $alternateName_repeater ) {
+									// Add each item to alternateName property values array
 
-									$alternateName = uamswp_fad_schema_alternatename(
-										$alternateName_repeater, // array // Required // alternateName repeater field
-										'schema_alternatename_text' // string // Optional // alternateName item field name
-									);
+										$alternateName = null;
 
-								}
+										if ( $alternateName_repeater ) {
 
-							if ( $alternateName ) {
+											$alternateName = uamswp_fad_schema_alternatename(
+												$alternateName_repeater, // array // Required // alternateName repeater field
+												'schema_alternatename_text' // string // Optional // alternateName item field name
+											);
 
-								$output['alternateName'] = $alternateName;
+										}
+
+								// Add the value to the property
+
+									if ( $alternateName ) {
+
+										$output['alternateName'] = $alternateName;
+
+									}
 
 							}
 
@@ -10367,9 +10468,29 @@
 							 *     - Organization
 							 */
 
-							if ( $brand ) {
+							if (
+								in_array(
+									'brand',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'brand',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-								$output['brand'] = $brand;
+								// Get the value
+
+									$brand = $brand ?? null;
+
+								// Add the value to the property
+
+									if ( $brand ) {
+
+										$output['brand'] = $brand;
+
+									}
 
 							}
 
@@ -10385,11 +10506,29 @@
 							 * is contained.
 							 */
 
-							$containedInPlace = null;
+							if (
+								in_array(
+									'containedInPlace',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'containedInPlace',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-							if ( $containedInPlace ) {
+								// Get the value
 
-								$output['containedInPlace'] = $containedInPlace;
+									$containedInPlace = null;
+
+								// Add the value to the property
+
+									if ( $containedInPlace ) {
+
+										$output['containedInPlace'] = $containedInPlace;
+
+									}
 
 							}
 
@@ -10406,22 +10545,39 @@
 							 *     - GeoShape
 							 */
 
-							// Get values
+							if (
+								in_array(
+									'geo',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'geo',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-								$geo = null;
+								// Get the value
 
-								if ( $geo_value ) {
+									$geo_value = $geo_value ?? null;
+									$geo = null;
 
-									$geo = uamswp_schema_geo_coordinates(
-										$geo_value['lat'], // string|int // Required // The latitude of a location. For example 37.42242 (WGS 84). // The precision must be at least 5 decimal places.
-										$geo_value['lng'] // string|int // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-									);
+									if ( $geo_value ) {
 
-								}
+										$geo = uamswp_schema_geo_coordinates(
+											$geo_value['lat'], // string|int // Required // The latitude of a location. For example 37.42242 (WGS 84). // The precision must be at least 5 decimal places.
+											$geo_value['lng'] // string|int // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+										);
 
-							if ( $geo ) {
+									}
 
-								$output['geo'] = $geo;
+								// Add the value to the property
+
+									if ( $geo ) {
+
+										$output['geo'] = $geo;
+
+									}
 
 							}
 
@@ -10437,11 +10593,29 @@
 							 *     - Text
 							 */
 
-							$globalLocationNumber = get_field( 'schema_globallocationnumber', $term ) ?? $null;
+							if (
+								in_array(
+									'globalLocationNumber',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'globalLocationNumber',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-							if ( $globalLocationNumber ) {
+								// Get the value
 
-								$output['globalLocationNumber'] = $globalLocationNumber;
+									$globalLocationNumber = get_field( 'schema_globallocationnumber', $term ) ?? $null;
+
+								// Add the value to the property
+
+									if ( $globalLocationNumber ) {
+
+										$output['globalLocationNumber'] = $globalLocationNumber;
+
+									}
 
 							}
 
@@ -10459,19 +10633,36 @@
 							 * is acceptable.
 							 */
 
-							// Get value
+							if (
+								in_array(
+									'hasMap',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'hasMap',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-								$hasMap = null;
+								// Get the value
 
-								if ( $google_cid ) {
+									$google_cid = $google_cid ?? null;
+									$hasMap = null;
 
-									$hasMap = 'https://www.google.com/maps?cid=' . $google_cid;
+									if ( $google_cid ) {
 
-								}
+										$hasMap = 'https://www.google.com/maps?cid=' . $google_cid;
 
-							if ( $hasMap ) {
+									}
 
-								$output['hasMap'] = $hasMap;
+								// Add the value to the property
+
+									if ( $hasMap ) {
+
+										$output['hasMap'] = $hasMap;
+
+									}
 
 							}
 
@@ -10492,30 +10683,46 @@
 							 *     - URL
 							 */
 
-							// Get values
+							if (
+								in_array(
+									'identifier',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'identifier',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-								// Base array
+								// Get the value
 
-									$identifier = array();
+									// Base array
 
-								// Google customer ID (CID)
+										$identifier = array();
 
-									if ( $google_cid ) {
+									// Google customer ID (CID)
 
-										$identifier = uamswp_fad_schema_propertyvalue_google_cid(
-											$google_cid, // string|array // Required // Google customer ID
-											$identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
-										);
+										$google_cid = $google_cid ?? null;
+
+										if ( $google_cid ) {
+
+											$identifier = uamswp_fad_schema_propertyvalue_google_cid(
+												$google_cid, // string|array // Required // Google customer ID
+												$identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+											);
+
+										}
+
+								// Add the value to the property
+
+									if ( $identifier ) {
+
+										$output['identifier'] = $identifier;
 
 									}
 
-							// Add value to property
-
-								if ( $identifier ) {
-
-									$output['identifier'] = $identifier;
-
-								}
+							}
 
 						// image
 
@@ -10528,11 +10735,30 @@
 							 *     - URL
 							 */
 
-							$image = $photo_ImageObject;
+							if (
+								in_array(
+									'image',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'image',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-							if ( $image ) {
+								// Get the value
 
-								$output['image'] = $image;
+									$photo_ImageObject = $photo_ImageObject ?? null;
+									$image = $photo_ImageObject;
+
+								// Add the value to the property
+
+									if ( $image ) {
+
+										$output['image'] = $image;
+
+									}
 
 							}
 
@@ -10546,11 +10772,29 @@
 							 *     - Boolean
 							 */
 
-							$isAccessibleForFree = 'True';
+							if (
+								in_array(
+									'isAccessibleForFree',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'isAccessibleForFree',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-							if ( $isAccessibleForFree ) {
+								// Get the value
 
-								$output['isAccessibleForFree'] = $isAccessibleForFree;
+									$isAccessibleForFree = 'True';
+
+								// Add the value to the property
+
+									if ( $isAccessibleForFree ) {
+
+										$output['isAccessibleForFree'] = $isAccessibleForFree;
+
+									}
 
 							}
 
@@ -10565,24 +10809,41 @@
 							 *     - Text
 							 */
 
-							// Get values
+							if (
+								in_array(
+									'latitude',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'latitude',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-								$latitude = null;
+								// Get the value
 
-								if ( $geo_value ) {
+									$latitude = null;
+									$geo_value = $geo_value ?? null;
 
-									$latitude = number_format(
-										$geo_value['lat'], // float // The number being formatted.
-										5, // int // Sets the number of decimal digits. If 0, the decimal_separator is omitted from the return value.
-										'.', // ?string // Sets the separator for the decimal point.
-										'' // ?string // Sets the thousands separator.
-									);
+									if ( $geo_value ) {
 
-								}
+										$latitude = number_format(
+											$geo_value['lat'], // float // The number being formatted.
+											5, // int // Sets the number of decimal digits. If 0, the decimal_separator is omitted from the return value.
+											'.', // ?string // Sets the separator for the decimal point.
+											'' // ?string // Sets the thousands separator.
+										);
 
-							if ( $latitude ) {
+									}
 
-								$output['latitude'] = $latitude;
+								// Add the value to the property
+
+									if ( $latitude ) {
+
+										$output['latitude'] = $latitude;
+
+									}
 
 							}
 
@@ -10600,11 +10861,30 @@
 							 *     - VirtualLocation
 							 */
 
-							$location = $address;
+							if (
+								in_array(
+									'location',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'location',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-							if ( $location ) {
+								// Get the value
 
-								$output['location'] = $location;
+									$address = $address ?? null;
+									$location = $address;
+
+								// Add the value to the property
+
+									if ( $location ) {
+
+										$output['location'] = $location;
+
+									}
 
 							}
 
@@ -10619,24 +10899,41 @@
 							 *     - Text
 							 */
 
-							// Get values
+							if (
+								in_array(
+									'longitude',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'longitude',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-								$longitude = null;
+								// Get the value
 
-								if ( $geo_value ) {
+									$geo_value = $geo_value ?? null;
+									$longitude = null;
 
-									$longitude = number_format(
-										$geo_value['lng'], // float // The number being formatted.
-										5, // int // Sets the number of decimal digits. If 0, the decimal_separator is omitted from the return value.
-										'.', // ?string // Sets the separator for the decimal point.
-										'' // ?string // Sets the thousands separator.
-									);
+									if ( $geo_value ) {
 
-								}
+										$longitude = number_format(
+											$geo_value['lng'], // float // The number being formatted.
+											5, // int // Sets the number of decimal digits. If 0, the decimal_separator is omitted from the return value.
+											'.', // ?string // Sets the separator for the decimal point.
+											'' // ?string // Sets the thousands separator.
+										);
 
-							if ( $longitude ) {
+									}
 
-								$output['longitude'] = $longitude;
+								// Add the value to the property
+
+									if ( $longitude ) {
+
+										$output['longitude'] = $longitude;
+
+									}
 
 							}
 
@@ -10654,11 +10951,29 @@
 							 *     - Text
 							 */
 
-							$name = get_field( 'building_name', $term ) ?? null;
+							if (
+								in_array(
+									'name',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'name',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-							if ( $name ) {
+								// Get the value
 
-								$output['name'] = $name;
+									$name = get_field( 'building_name', $term ) ?? null;
+
+								// Add the value to the property
+
+									if ( $name ) {
+
+										$output['name'] = $name;
+
+									}
 
 							}
 
@@ -10672,9 +10987,29 @@
 							 *     - Organization
 							 */
 
-							if ( $brand ) {
+							if (
+								in_array(
+									'parentOrganization',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'parentOrganization',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-								$output['parentOrganization'] = $brand;
+								// Get the value
+
+									$brand = $brand ?? null;
+
+								// Add the value to the property
+
+									if ( $brand ) {
+
+										$output['parentOrganization'] = $brand;
+
+									}
 
 							}
 
@@ -10689,11 +11024,30 @@
 							 *     - Photograph
 							 */
 
-							$photo = $photo_ImageObject;
+							if (
+								in_array(
+									'photo',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'photo',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-							if ( $photo ) {
+								// Get the value
 
-								$output['photo'] = $photo;
+									$photo_ImageObject = $photo_ImageObject ?? null;
+									$photo = $photo_ImageObject;
+
+								// Add the value to the property
+
+									if ( $photo ) {
+
+										$output['photo'] = $photo;
+
+									}
 
 							}
 
@@ -10708,11 +11062,29 @@
 							 *     - Boolean
 							 */
 
-							$publicAccess = 'True';
+							if (
+								in_array(
+									'publicAccess',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'publicAccess',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-							if ( $publicAccess ) {
+								// Get the value
 
-								$output['publicAccess'] = $publicAccess;
+									$publicAccess = 'True';
+
+								// Add the value to the property
+
+									if ( $publicAccess ) {
+
+										$output['publicAccess'] = $publicAccess;
+
+									}
 
 							}
 
@@ -10728,26 +11100,44 @@
 							 *     - URL
 							 */
 
-							// Get sameAs repeater field value
+							if (
+								in_array(
+									'sameAs',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'sameAs',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-								$sameAs_repeater = get_field( 'schema_sameas', $term ) ?? null;
+								// Get the value
 
-							// Add each item to sameAs property values array
+									// Get sameAs repeater field value
 
-								$sameAs = null;
+										$sameAs_repeater = get_field( 'schema_sameas', $term ) ?? null;
 
-								if ( $sameAs_repeater ) {
+									// Add each item to sameAs property values array
 
-									$sameAs = uamswp_fad_schema_sameas(
-										$sameAs_repeater, // sameAs repeater field
-										'schema_sameas_url' // sameAs item field name
-									);
+										$sameAs = null;
 
-								}
+										if ( $sameAs_repeater ) {
 
-							if ( $sameAs ) {
+											$sameAs = uamswp_fad_schema_sameas(
+												$sameAs_repeater, // sameAs repeater field
+												'schema_sameas_url' // sameAs item field name
+											);
 
-								$output['sameAs'] = $sameAs;
+										}
+
+								// Add the value to the property
+
+									if ( $sameAs ) {
+
+										$output['sameAs'] = $sameAs;
+
+									}
 
 							}
 
@@ -10762,11 +11152,29 @@
 							 *     - Boolean
 							 */
 
-							$smokingAllowed = 'False';
+							if (
+								in_array(
+									'smokingAllowed',
+									$building_properties_map[$type]['properties']
+								)
+								||
+								in_array(
+									'smokingAllowed',
+									$building_properties_map[$type]['properties']
+								)
+							) {
 
-							if ( $smokingAllowed ) {
+								// Get the value
 
-								$output['smokingAllowed'] = $smokingAllowed;
+									$smokingAllowed = 'False';
+
+								// Add the value to the property
+
+									if ( $smokingAllowed ) {
+
+										$output['smokingAllowed'] = $smokingAllowed;
+
+									}
 
 							}
 
