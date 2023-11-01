@@ -11539,8 +11539,10 @@
 								$provider_leiCode = null;
 								$provider_location = null;
 								$provider_location_array = null;
-								$provider_location_keywords = null;
-								$provider_location_significantLink = null;
+								$provider_location_LocalBusiness = null;
+								$provider_location_LocalBusiness_keywords = null;
+								$provider_location_MedicalWebPage = null;
+								$provider_location_MedicalWebPage_significantLink = null;
 								$provider_mainContentOfPage = null;
 								$provider_mainEntity = null;
 								$provider_mainEntityOfPage = null;
@@ -13203,42 +13205,43 @@
 														$provider_url, // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ) // Nesting level within the main schema
-													)['LocalBusiness'];
-
-												}
-
-											// Get URLs for significantLink property
-
-												$provider_location = $provider_location ?? null;
-
-												if ( $provider_location ) {
-
-													$provider_location_significantLink = uamswp_fad_schema_property_values(
-														$provider_location, // array // Required // Property values from which to extract specific values
-														array( 'url' ) // mixed // Required // List of properties from which to collect values
 													);
 
 												}
 
-											// Get names for keywords property
+												// MedicalWebPage
 
-												$provider_location = $provider_location ?? null;
+													$provider_location_MedicalWebPage = $provider_provider['MedicalWebPage'];
 
-												if ( $provider_location ) {
+													// Get URLs for significantLink property
 
-													$provider_location_keywords = uamswp_fad_schema_property_values(
-														$provider_location, // array // Required // Property values from which to extract specific values
-														array(
-															'name',
-															'alternateName',
-															'address' => array(
-																'addressLocality',
-																'addressRegion'
-															)
-														) // mixed // Required // List of properties from which to collect values
-													);
+														$provider_location_MedicalWebPage = $provider_location_MedicalWebPage ?? null;
 
-												}
+														if ( $provider_location_MedicalWebPage ) {
+
+															$provider_location_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																$provider_location_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																array( 'url' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+												// LocalBusiness and subtypes
+
+													$provider_location_LocalBusiness = $provider_provider['LocalBusiness'];
+
+													// Get names for keywords property
+
+														$provider_location_LocalBusiness = $provider_location_LocalBusiness ?? null;
+
+														if ( $provider_location_LocalBusiness ) {
+
+															$provider_location_LocalBusiness_keywords = uamswp_fad_schema_property_values(
+																$provider_location_LocalBusiness, // array // Required // Property values from which to extract specific values
+																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
 
 										}
 
@@ -14971,7 +14974,7 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'containedInPlace', // string // Required // Name of schema property
-													$provider_location, // mixed // Required // Variable to add as the property value
+													$provider_location_LocalBusiness, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14983,7 +14986,7 @@
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'containedInPlace', // string // Required // Name of schema property
-													$provider_location, // mixed // Required // Variable to add as the property value
+													$provider_location_LocalBusiness, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -14995,7 +14998,7 @@
 													$Person_type, // string // Required // The @type value for the schema item
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'containedInPlace', // string // Required // Name of schema property
-													$provider_location, // mixed // Required // Variable to add as the property value
+													$provider_location_LocalBusiness, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -15003,26 +15006,26 @@
 
 										// Merge location significantLink value into significantLink
 
-											$provider_location_significantLink = $provider_location_significantLink ?? null;
+											$provider_location_MedicalWebPage_significantLink = $provider_location_MedicalWebPage_significantLink ?? null;
 
-											if ( $provider_location_significantLink ) {
+											if ( $provider_location_MedicalWebPage_significantLink ) {
 
 												$provider_significantLink = uamswp_fad_schema_merge_values(
 													$provider_significantLink, // mixed // Required // Initial schema item property value
-													$provider_location_significantLink // mixed // Required // Incoming schema item property value
+													$provider_location_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
 												);
 
 											}
 
 										// Merge location keywords value into keywords
 
-											$provider_location_keywords = $provider_location_keywords ?? null;
+											$provider_location_LocalBusiness_keywords = $provider_location_LocalBusiness_keywords ?? null;
 
-											if ( $provider_location_keywords ) {
+											if ( $provider_location_LocalBusiness_keywords ) {
 
 												$provider_keywords = uamswp_fad_schema_merge_values(
 													$provider_keywords, // mixed // Required // Initial schema item property value
-													$provider_location_keywords // mixed // Required // Incoming schema item property value
+													$provider_location_LocalBusiness_keywords // mixed // Required // Incoming schema item property value
 												);
 
 											}
@@ -17356,7 +17359,7 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'location', // string // Required // Name of schema property
-													$provider_location, // mixed // Required // Variable to add as the property value
+													$provider_location_LocalBusiness, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17368,7 +17371,7 @@
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'location', // string // Required // Name of schema property
-													$provider_location, // mixed // Required // Variable to add as the property value
+													$provider_location_LocalBusiness, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17380,7 +17383,7 @@
 													$Person_type, // string // Required // The @type value for the schema item
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'location', // string // Required // Name of schema property
-													$provider_location, // mixed // Required // Variable to add as the property value
+													$provider_location_LocalBusiness, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17388,26 +17391,26 @@
 
 										// Merge location significantLink value into significantLink
 
-											$provider_location_significantLink = $provider_location_significantLink ?? null;
+											$provider_location_MedicalWebPage_significantLink = $provider_location_MedicalWebPage_significantLink ?? null;
 
-											if ( $provider_location_significantLink ) {
+											if ( $provider_location_MedicalWebPage_significantLink ) {
 
 												$provider_significantLink = uamswp_fad_schema_merge_values(
 													$provider_significantLink, // mixed // Required // Initial schema item property value
-													$provider_location_significantLink // mixed // Required // Incoming schema item property value
+													$provider_location_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
 												);
 
 											}
 
 										// Merge location keywords value into keywords
 
-											$provider_location_keywords = $provider_location_keywords ?? null;
+											$provider_location_LocalBusiness_keywords = $provider_location_LocalBusiness_keywords ?? null;
 
-											if ( $provider_location_keywords ) {
+											if ( $provider_location_LocalBusiness_keywords ) {
 
 												$provider_keywords = uamswp_fad_schema_merge_values(
 													$provider_keywords, // mixed // Required // Initial schema item property value
-													$provider_location_keywords // mixed // Required // Incoming schema item property value
+													$provider_location_LocalBusiness_keywords // mixed // Required // Incoming schema item property value
 												);
 
 											}
@@ -18531,7 +18534,7 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'workLocation', // string // Required // Name of schema property
-													$provider_location, // mixed // Required // Variable to add as the property value
+													$provider_location_LocalBusiness, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -18543,7 +18546,7 @@
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'workLocation', // string // Required // Name of schema property
-													$provider_location, // mixed // Required // Variable to add as the property value
+													$provider_location_LocalBusiness, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -18555,7 +18558,7 @@
 													$Person_type, // string // Required // The @type value for the schema item
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'workLocation', // string // Required // Name of schema property
-													$provider_location, // mixed // Required // Variable to add as the property value
+													$provider_location_LocalBusiness, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -18563,26 +18566,26 @@
 
 										// Merge location significantLink value into significantLink
 
-											$provider_location_significantLink = $provider_location_significantLink ?? null;
+											$provider_location_MedicalWebPage_significantLink = $provider_location_MedicalWebPage_significantLink ?? null;
 
-											if ( $provider_location_significantLink ) {
+											if ( $provider_location_MedicalWebPage_significantLink ) {
 
 												$provider_significantLink = uamswp_fad_schema_merge_values(
 													$provider_significantLink, // mixed // Required // Initial schema item property value
-													$provider_location_significantLink // mixed // Required // Incoming schema item property value
+													$provider_location_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
 												);
 
 											}
 
 										// Merge location keywords value into keywords
 
-											$provider_location_keywords = $provider_location_keywords ?? null;
+											$provider_location_LocalBusiness_keywords = $provider_location_LocalBusiness_keywords ?? null;
 
-											if ( $provider_location_keywords ) {
+											if ( $provider_location_LocalBusiness_keywords ) {
 
 												$provider_keywords = uamswp_fad_schema_merge_values(
 													$provider_keywords, // mixed // Required // Initial schema item property value
-													$provider_location_keywords // mixed // Required // Incoming schema item property value
+													$provider_location_LocalBusiness_keywords // mixed // Required // Incoming schema item property value
 												);
 
 											}
@@ -19058,39 +19061,39 @@
 
 											// Merge in related locations value
 
-												$provider_location = $provider_location ?? null;
+												$provider_location_LocalBusiness = $provider_location_LocalBusiness ?? null;
 
-												if ( $provider_location ) {
+												if ( $provider_location_LocalBusiness ) {
 
 													$provider_mentions = uamswp_fad_schema_merge_values(
 														$provider_mentions, // mixed // Required // Initial schema item property value
-														$provider_location // mixed // Required // Incoming schema item property value
+														$provider_location_LocalBusiness // mixed // Required // Incoming schema item property value
 													);
 
 												}
 
 												// Merge location significantLink value into significantLink
 
-													$provider_location_significantLink = $provider_location_significantLink ?? null;
+													$provider_location_MedicalWebPage_significantLink = $provider_location_MedicalWebPage_significantLink ?? null;
 
-													if ( $provider_location_significantLink ) {
+													if ( $provider_location_MedicalWebPage_significantLink ) {
 
 														$provider_significantLink = uamswp_fad_schema_merge_values(
 															$provider_significantLink, // mixed // Required // Initial schema item property value
-															$provider_location_significantLink // mixed // Required // Incoming schema item property value
+															$provider_location_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
 														);
 
 													}
 
 												// Merge location keywords value into keywords
 
-													$provider_location_keywords = $provider_location_keywords ?? null;
+													$provider_location_LocalBusiness_keywords = $provider_location_LocalBusiness_keywords ?? null;
 
-													if ( $provider_location_keywords ) {
+													if ( $provider_location_LocalBusiness_keywords ) {
 
 														$provider_keywords = uamswp_fad_schema_merge_values(
 															$provider_keywords, // mixed // Required // Initial schema item property value
-															$provider_location_keywords // mixed // Required // Incoming schema item property value
+															$provider_location_LocalBusiness_keywords // mixed // Required // Incoming schema item property value
 														);
 
 													}
@@ -19889,6 +19892,10 @@
 								$location_department = null;
 								$location_descendant_location = null;
 								$location_descendant_location_ids = null;
+								$location_descendant_location_LocalBusiness = null;
+								$location_descendant_location_LocalBusiness_keywords = null;
+								$location_descendant_location_MedicalWebPage = null;
+								$location_descendant_location_MedicalWebPage_significantLink = null;
 								$location_description = null;
 								$location_description_TextObject = null;
 								$location_editor = null;
@@ -20629,9 +20636,7 @@
 
 													}
 
-												// Format values (LocalBusiness and subtypes)
-
-													$location_descendant_location = null;
+												// Format values
 
 													if ( $location_descendant_location_ids ) {
 
@@ -20642,35 +20647,43 @@
 															$location_url, // Page URL
 															$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 															($nesting_level + 1) // Nesting level within the main schema
-														)['LocalBusiness'] ?? array();
-
-													}
-
-												// Get URLs for significantLink property
-
-													$location_descendant_location = $location_descendant_location ?? null;
-
-													if ( $location_descendant_location ) {
-
-														$location_descendant_location_significantLink = uamswp_fad_schema_property_values(
-															$location_descendant_location, // array // Required // Property values from which to extract specific values
-															array( 'url' ) // mixed // Required // List of properties from which to collect values
 														);
 
 													}
 
-												// Get names for keywords property
+													// MedicalWebPage
 
-													$location_descendant_location = $location_descendant_location ?? null;
+														$location_descendant_location_MedicalWebPage = $location_provider['MedicalWebPage'];
 
-													if ( $location_descendant_location ) {
+														// Get URLs for significantLink property
 
-														$location_descendant_location_keywords = uamswp_fad_schema_property_values(
-															$location_descendant_location, // array // Required // Property values from which to extract specific values
-															array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-														);
+															$location_descendant_location_MedicalWebPage = $location_descendant_location_MedicalWebPage ?? null;
 
-													}
+															if ( $location_descendant_location_MedicalWebPage ) {
+
+																$location_descendant_location_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																	$location_descendant_location_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																	array( 'url' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													// LocalBusiness and subtypes
+
+														$location_descendant_location_LocalBusiness = $location_provider['LocalBusiness'];
+
+														// Get names for keywords property
+
+															$location_descendant_location_LocalBusiness = $location_descendant_location_LocalBusiness ?? null;
+
+															if ( $location_descendant_location_LocalBusiness ) {
+
+																$location_descendant_location_LocalBusiness_keywords = uamswp_fad_schema_property_values(
+																	$location_descendant_location_LocalBusiness, // array // Required // Property values from which to extract specific values
+																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
 
 										}
 
@@ -23404,39 +23417,39 @@
 
 											// Merge in descendant location (LocalBusiness) value
 
-												$location_descendant_location = $location_descendant_location ?? null;
+												$location_descendant_location_LocalBusiness = $location_descendant_location_LocalBusiness ?? null;
 
-												if ( $location_descendant_location ) {
+												if ( $location_descendant_location_LocalBusiness ) {
 
 													$location_containsPlace = uamswp_fad_schema_merge_values(
 														$location_containsPlace, // mixed // Required // Initial schema item property value
-														$location_descendant_location // mixed // Required // Incoming schema item property value
+														$location_descendant_location_LocalBusiness // mixed // Required // Incoming schema item property value
 													);
 
 												}
 
 												// Merge related descendant location (LocalBusiness) significantLink value into significantLink
 
-													$location_descendant_location_significantLink = $location_descendant_location_significantLink ?? null;
+													$location_descendant_location_MedicalWebPage_significantLink = $location_descendant_location_MedicalWebPage_significantLink ?? null;
 
-													if ( $location_descendant_location_significantLink ) {
+													if ( $location_descendant_location_MedicalWebPage_significantLink ) {
 
 														$location_significantLink = uamswp_fad_schema_merge_values(
 															$location_significantLink, // mixed // Required // Initial schema item property value
-															$location_descendant_location_significantLink // mixed // Required // Incoming schema item property value
+															$location_descendant_location_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
 														);
 
 													}
 
 												// Merge related descendant location (LocalBusiness) keywords value into keywords
 
-													$location_descendant_location_keywords = $location_descendant_location_keywords ?? null;
+													$location_descendant_location_LocalBusiness_keywords = $location_descendant_location_LocalBusiness_keywords ?? null;
 
-													if ( $location_descendant_location_keywords ) {
+													if ( $location_descendant_location_LocalBusiness_keywords ) {
 
 														$location_keywords = uamswp_fad_schema_merge_values(
 															$location_keywords, // mixed // Required // Initial schema item property value
-															$location_descendant_location_keywords // mixed // Required // Incoming schema item property value
+															$location_descendant_location_LocalBusiness_keywords // mixed // Required // Incoming schema item property value
 														);
 
 													}
@@ -23560,39 +23573,39 @@
 
 											// Merge in location (LocalBusiness) value
 
-												$location_descendant_location = $location_descendant_location ?? null;
+												$location_descendant_location_LocalBusiness = $location_descendant_location_LocalBusiness ?? null;
 
-												if ( $location_descendant_location ) {
+												if ( $location_descendant_location_LocalBusiness ) {
 
 													$location_department = uamswp_fad_schema_merge_values(
 														$location_department, // mixed // Required // Initial schema item property value
-														$location_descendant_location // mixed // Required // Incoming schema item property value
+														$location_descendant_location_LocalBusiness // mixed // Required // Incoming schema item property value
 													);
 
 												}
 
 												// Merge related descendant location (LocalBusiness) significantLink value into significantLink
 
-													$location_descendant_location_significantLink = $location_descendant_location_significantLink ?? null;
+													$location_descendant_location_MedicalWebPage_significantLink = $location_descendant_location_MedicalWebPage_significantLink ?? null;
 
-													if ( $location_descendant_location_significantLink ) {
+													if ( $location_descendant_location_MedicalWebPage_significantLink ) {
 
 														$location_significantLink = uamswp_fad_schema_merge_values(
 															$location_significantLink, // mixed // Required // Initial schema item property value
-															$location_descendant_location_significantLink // mixed // Required // Incoming schema item property value
+															$location_descendant_location_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
 														);
 
 													}
 
 												// Merge related descendant location (LocalBusiness) keywords value into keywords
 
-													$location_descendant_location_keywords = $location_descendant_location_keywords ?? null;
+													$location_descendant_location_LocalBusiness_keywords = $location_descendant_location_LocalBusiness_keywords ?? null;
 
-													if ( $location_descendant_location_keywords ) {
+													if ( $location_descendant_location_LocalBusiness_keywords ) {
 
 														$location_keywords = uamswp_fad_schema_merge_values(
 															$location_keywords, // mixed // Required // Initial schema item property value
-															$location_descendant_location_keywords // mixed // Required // Incoming schema item property value
+															$location_descendant_location_LocalBusiness_keywords // mixed // Required // Incoming schema item property value
 														);
 
 													}
@@ -25788,39 +25801,39 @@
 
 											// Merge in location (LocalBusiness) value
 
-												$location_descendant_location = $location_descendant_location ?? null;
+												$location_descendant_location_LocalBusiness = $location_descendant_location_LocalBusiness ?? null;
 
-												if ( $location_descendant_location ) {
+												if ( $location_descendant_location_LocalBusiness ) {
 
 													$location_subOrganization = uamswp_fad_schema_merge_values(
 														$location_subOrganization, // mixed // Required // Initial schema item property value
-														$location_descendant_location // mixed // Required // Incoming schema item property value
+														$location_descendant_location_LocalBusiness // mixed // Required // Incoming schema item property value
 													);
 
 												}
 
 												// Merge related descendant location (LocalBusiness) significantLink value into significantLink
 
-													$location_descendant_location_significantLink = $location_descendant_location_significantLink ?? null;
+													$location_descendant_location_MedicalWebPage_significantLink = $location_descendant_location_MedicalWebPage_significantLink ?? null;
 
-													if ( $location_descendant_location_significantLink ) {
+													if ( $location_descendant_location_MedicalWebPage_significantLink ) {
 
 														$location_significantLink = uamswp_fad_schema_merge_values(
 															$location_significantLink, // mixed // Required // Initial schema item property value
-															$location_descendant_location_significantLink // mixed // Required // Incoming schema item property value
+															$location_descendant_location_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
 														);
 
 													}
 
 												// Merge related descendant location (LocalBusiness) keywords value into keywords
 
-													$location_descendant_location_keywords = $location_descendant_location_keywords ?? null;
+													$location_descendant_location_LocalBusiness_keywords = $location_descendant_location_LocalBusiness_keywords ?? null;
 
-													if ( $location_descendant_location_keywords ) {
+													if ( $location_descendant_location_LocalBusiness_keywords ) {
 
 														$location_keywords = uamswp_fad_schema_merge_values(
 															$location_keywords, // mixed // Required // Initial schema item property value
-															$location_descendant_location_keywords // mixed // Required // Incoming schema item property value
+															$location_descendant_location_LocalBusiness_keywords // mixed // Required // Incoming schema item property value
 														);
 
 													}
@@ -26252,39 +26265,39 @@
 
 											// Merge in descendant locations value
 
-												$location_descendant_location = $location_descendant_location ?? null;
+												$location_descendant_location_LocalBusiness = $location_descendant_location_LocalBusiness ?? null;
 
-												if ( $location_descendant_location ) {
+												if ( $location_descendant_location_LocalBusiness ) {
 
 													$location_mentions = uamswp_fad_schema_merge_values(
 														$location_mentions, // mixed // Required // Initial schema item property value
-														$location_descendant_location // mixed // Required // Incoming schema item property value
+														$location_descendant_location_LocalBusiness // mixed // Required // Incoming schema item property value
 													);
 
 												}
 
 												// Merge descendant locations significantLink value into significantLink
 
-													$location_descendant_location_significantLink = $location_descendant_location_significantLink ?? null;
+													$location_descendant_location_MedicalWebPage_significantLink = $location_descendant_location_MedicalWebPage_significantLink ?? null;
 
-													if ( $location_descendant_location_significantLink ) {
+													if ( $location_descendant_location_MedicalWebPage_significantLink ) {
 
 														$location_significantLink = uamswp_fad_schema_merge_values(
 															$location_significantLink, // mixed // Required // Initial schema item property value
-															$location_descendant_location_significantLink // mixed // Required // Incoming schema item property value
+															$location_descendant_location_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
 														);
 
 													}
 
 												// Merge descendant locations keywords value into keywords
 
-													$location_descendant_location_keywords = $location_descendant_location_keywords ?? null;
+													$location_descendant_location_LocalBusiness_keywords = $location_descendant_location_LocalBusiness_keywords ?? null;
 
-													if ( $location_descendant_location_keywords ) {
+													if ( $location_descendant_location_LocalBusiness_keywords ) {
 
 														$location_keywords = uamswp_fad_schema_merge_values(
 															$location_keywords, // mixed // Required // Initial schema item property value
-															$location_descendant_location_keywords // mixed // Required // Incoming schema item property value
+															$location_descendant_location_LocalBusiness_keywords // mixed // Required // Incoming schema item property value
 														);
 
 													}
