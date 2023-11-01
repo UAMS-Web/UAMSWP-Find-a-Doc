@@ -149,22 +149,6 @@
 
 					}
 
-				// Create TextObject version
-
-					$schema_common_excerpt_TextObject = null;
-
-					if ( $schema_common_excerpt ) {
-
-						$schema_common_excerpt_TextObject = array(
-							'@id' => $schema_common_url ? $schema_common_url . '#Description' : '',
-							'@type' => 'TextObject',
-							'text' => $schema_common_excerpt,
-						);
-
-						$schema_common_excerpt_TextObject = array_filter($schema_common_excerpt_TextObject);
-
-					}
-
 			}
 
 	// abstract [WIP]
@@ -1226,9 +1210,9 @@
 
 		// Add to common schema properties array
 
-			if ( $schema_common_excerpt_TextObject ) {
+			if ( $schema_common_excerpt ) {
 
-				$schema_common_properties['description'] = $schema_common_excerpt_TextObject;
+				$schema_common_properties['description'] = $schema_common_excerpt;
 
 			}
 
