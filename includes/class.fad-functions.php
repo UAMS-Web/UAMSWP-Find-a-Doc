@@ -2945,13 +2945,14 @@ function uamswp_keyword_hook_header( $keywords ) {
 }
 
 // Add bg-white class to article.entry element
-function uamswp_add_entry_class( $attributes ) {
 
-	$attributes['class'] = $attributes['class']. ' bg-white';
+	function uamswp_add_entry_class( $attributes ) {
 
-	return $attributes;
+		$attributes['class'] = $attributes['class']. ' bg-white';
 
-}
+		return $attributes;
+
+	}
 
 // Query for whether UAMS Health Talk podcast section should be displayed on ontology pages/subsections
 function uamswp_fad_podcast_query(
