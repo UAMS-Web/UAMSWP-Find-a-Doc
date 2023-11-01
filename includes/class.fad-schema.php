@@ -17506,7 +17506,7 @@
 
 									}
 
-								// mainEntity
+								// mainEntity (MedicalWebPage only) [WIP]
 
 									/**
 									 * Indicates the primary entity described in some page or other CreativeWork.
@@ -17517,84 +17517,6 @@
 									 *
 									 *     - Thing
 									 */
-
-									if (
-										(
-											in_array(
-												'mainEntity',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'mainEntity',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'mainEntity',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base array
-
-												$provider_mainEntity = array();
-
-											$provider_item_MedicalBusiness = $provider_item_MedicalBusiness ?? null;
-
-											if ( $provider_item_MedicalBusiness ) {
-
-												$provider_mainEntity = uamswp_fad_schema_merge_values(
-													$provider_mainEntity, // mixed // Required // Initial schema item property value
-													$provider_item_MedicalBusiness // mixed // Required // Incoming schema item property value
-												);
-
-											}
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'mainEntity', // string // Required // Name of schema property
-													$provider_mainEntity, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// MedicalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalBusiness_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'mainEntity', // string // Required // Name of schema property
-													$provider_mainEntity, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// Person
-
-												uamswp_fad_schema_add_to_item_values(
-													$Person_type, // string // Required // The @type value for the schema item
-													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-													'mainEntity', // string // Required // Name of schema property
-													$provider_mainEntity, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
 
 								// makesOffer [WIP]
 
@@ -24998,7 +24920,7 @@
 
 									}
 
-								// mainEntity
+								// mainEntity (MedicalWebPage only) [WIP]
 
 									/**
 									 * Indicates the primary entity described in some page or other CreativeWork.
@@ -25009,69 +24931,6 @@
 									 *
 									 *     - Thing
 									 */
-
-									if (
-										(
-											in_array(
-												'mainEntity',
-												$location_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'mainEntity',
-												$location_properties_map[$LocalBusiness_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base array
-
-												$location_mainEntity = array();
-
-											// Merge in the LocalBusiness item values
-
-												$location_item_LocalBusiness = $location_item_LocalBusiness ?? null;
-
-												if ( $location_item_LocalBusiness ) {
-
-													$location_mainEntity = uamswp_fad_schema_merge_values(
-														$location_mainEntity, // mixed // Required // Initial schema item property value
-														$location_item_LocalBusiness // mixed // Required // Incoming schema item property value
-													);
-
-												}
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'mainEntity', // string // Required // Name of schema property
-													$location_mainEntity, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'mainEntity', // string // Required // Name of schema property
-													$location_mainEntity, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
 
 								// makesOffer [WIP]
 
@@ -28339,7 +28198,7 @@
 
 									}
 
-								// mainEntity [WIP]
+								// mainEntity (MedicalWebPage only) [WIP]
 
 									/**
 									 * Indicates the primary entity described in some page or other CreativeWork.
@@ -31296,7 +31155,7 @@
 
 									}
 
-								// mainEntity [WIP]
+								// mainEntity (MedicalWebPage only) [WIP]
 
 									/**
 									 * Indicates the primary entity described in some page or other CreativeWork.
