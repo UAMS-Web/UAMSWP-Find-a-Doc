@@ -4578,6 +4578,8 @@
 						!$input_4_3
 						&&
 						!$input_16_9
+						&&
+						!$input_full
 					) {
 
 						return;
