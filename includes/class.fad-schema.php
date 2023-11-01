@@ -11455,7 +11455,10 @@
 								$provider_brand_keywords = null;
 								$provider_cid = null;
 								$provider_clinical_resource = null;
-								$provider_clinical_resource_significantLink = null;
+								$provider_clinical_resource_CreativeWork = null;
+								$provider_clinical_resource_CreativeWork_keywords = null;
+								$provider_clinical_resource_MedicalWebPage = null;
+								$provider_clinical_resource_MedicalWebPage_significantLink = null;
 								$provider_clinical_specialization = null;
 								$provider_clinical_specialization_keywords = null;
 								$provider_clinical_specialization_knowsAbout = null;
@@ -13391,31 +13394,39 @@
 
 												}
 
-											// Get URLs for significantLink property
+												// MedicalWebPage
 
-												$provider_clinical_resource = $provider_clinical_resource ?? null;
+													$provider_clinical_resource_MedicalWebPage = $provider_provider['MedicalWebPage'];
 
-												if ( $provider_clinical_resource ) {
+													// Get URLs for significantLink property
 
-													$provider_clinical_resource_significantLink = uamswp_fad_schema_property_values(
-														$provider_clinical_resource, // array // Required // Property values from which to extract specific values
-														array( 'url' ) // mixed // Required // List of properties from which to collect values
-													);
+														$provider_clinical_resource_MedicalWebPage = $provider_clinical_resource_MedicalWebPage ?? null;
 
-												}
+														if ( $provider_clinical_resource_MedicalWebPage ) {
 
-												// Merge clinical resource significantLink value into significantLink
+															$provider_clinical_resource_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																$provider_clinical_resource_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																array( 'url' ) // mixed // Required // List of properties from which to collect values
+															);
 
-													$provider_clinical_resource_significantLink = $provider_clinical_resource_significantLink ?? null;
+														}
 
-													if ( $provider_clinical_resource_significantLink ) {
+												// CreativeWork and subtypes
 
-														$provider_significantLink = uamswp_fad_schema_merge_values(
-															$provider_significantLink, // mixed // Required // Initial schema item property value
-															$provider_clinical_resource_significantLink // mixed // Required // Incoming schema item property value
-														);
+													$provider_clinical_resource_CreativeWork = $provider_provider['CreativeWork'];
 
-													}
+													// Get names for keywords property
+
+														$provider_clinical_resource_CreativeWork = $provider_clinical_resource_CreativeWork ?? null;
+
+														if ( $provider_clinical_resource_CreativeWork ) {
+
+															$provider_clinical_resource_CreativeWork_keywords = uamswp_fad_schema_property_values(
+																$provider_clinical_resource_CreativeWork, // array // Required // Property values from which to extract specific values
+																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
 
 										}
 
@@ -19139,26 +19150,26 @@
 
 											// Merge in related clinical resources value
 
-												$provider_clinical_resource = $provider_clinical_resource ?? null;
+												$provider_clinical_resource_CreativeWork = $provider_clinical_resource_CreativeWork ?? null;
 
-												if ( $provider_clinical_resource ) {
+												if ( $provider_clinical_resource_CreativeWork ) {
 
 													$provider_mentions = uamswp_fad_schema_merge_values(
 														$provider_mentions, // mixed // Required // Initial schema item property value
-														$provider_clinical_resource // mixed // Required // Incoming schema item property value
+														$provider_clinical_resource_CreativeWork // mixed // Required // Incoming schema item property value
 													);
 
 												}
 
 												// Merge clinical resources significantLink value into significantLink
 
-													$provider_clinical_resource_significantLink = $provider_clinical_resource_significantLink ?? null;
+													$provider_clinical_resource_MedicalWebPage_significantLink = $provider_clinical_resource_MedicalWebPage_significantLink ?? null;
 
-													if ( $provider_clinical_resource_significantLink ) {
+													if ( $provider_clinical_resource_MedicalWebPage_significantLink ) {
 
 														$provider_significantLink = uamswp_fad_schema_merge_values(
 															$provider_significantLink, // mixed // Required // Initial schema item property value
-															$provider_clinical_resource_significantLink // mixed // Required // Incoming schema item property value
+															$provider_clinical_resource_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
 														);
 
 													}
@@ -19875,6 +19886,11 @@
 								$location_building_sameAs_repeater = null;
 								$location_building_slug = null;
 								$location_building_term = null;
+								$location_clinical_resource = null;
+								$location_clinical_resource_CreativeWork = null;
+								$location_clinical_resource_CreativeWork_keywords = null;
+								$location_clinical_resource_MedicalWebPage = null;
+								$location_clinical_resource_MedicalWebPage_significantLink = null;
 								$location_contactPoint = null;
 								$location_containedInPlace = null;
 								$location_containsPlace = null;
@@ -20818,8 +20834,6 @@
 
 											// Format values
 
-												$location_clinical_resource = null;
-
 												if ( $location_clinical_resource_list ) {
 
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
@@ -20833,18 +20847,39 @@
 
 												}
 
-											// Get URLs for significantLink property
+												// MedicalWebPage
 
-												$location_clinical_resource = $location_clinical_resource ?? null;
+													$location_clinical_resource_MedicalWebPage = $location_provider['MedicalWebPage'];
 
-												if ( $location_clinical_resource ) {
+													// Get URLs for significantLink property
 
-													$location_clinical_resource_significantLink = uamswp_fad_schema_property_values(
-														$location_clinical_resource, // array // Required // Property values from which to extract specific values
-														array( 'url' ) // mixed // Required // List of properties from which to collect values
-													);
+														$location_clinical_resource_MedicalWebPage = $location_clinical_resource_MedicalWebPage ?? null;
 
-												}
+														if ( $location_clinical_resource_MedicalWebPage ) {
+
+															$location_clinical_resource_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																$location_clinical_resource_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																array( 'url' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+												// CreativeWork and subtypes
+
+													$location_clinical_resource_CreativeWork = $location_provider['CreativeWork'];
+
+													// Get names for keywords property
+
+														$location_clinical_resource_CreativeWork = $location_clinical_resource_CreativeWork ?? null;
+
+														if ( $location_clinical_resource_CreativeWork ) {
+
+															$location_clinical_resource_CreativeWork_keywords = uamswp_fad_schema_property_values(
+																$location_clinical_resource_CreativeWork, // array // Required // Property values from which to extract specific values
+																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
 
 										}
 
@@ -26343,26 +26378,26 @@
 
 											// Merge in related clinical resources value
 
-												$location_clinical_resource = $location_clinical_resource ?? null;
+												$location_clinical_resource_CreativeWork = $location_clinical_resource_CreativeWork ?? null;
 
-												if ( $location_clinical_resource ) {
+												if ( $location_clinical_resource_CreativeWork ) {
 
 													$location_mentions = uamswp_fad_schema_merge_values(
 														$location_mentions, // mixed // Required // Initial schema item property value
-														$location_clinical_resource // mixed // Required // Incoming schema item property value
+														$location_clinical_resource_CreativeWork // mixed // Required // Incoming schema item property value
 													);
 
 												}
 
 												// Merge clinical resources significantLink value into significantLink
 
-													$location_clinical_resource_significantLink = $location_clinical_resource_significantLink ?? null;
+													$location_clinical_resource_MedicalWebPage_significantLink = $location_clinical_resource_MedicalWebPage_significantLink ?? null;
 
-													if ( $location_clinical_resource_significantLink ) {
+													if ( $location_clinical_resource_MedicalWebPage_significantLink ) {
 
 														$location_significantLink = uamswp_fad_schema_merge_values(
 															$location_significantLink, // mixed // Required // Initial schema item property value
-															$location_clinical_resource_significantLink // mixed // Required // Incoming schema item property value
+															$location_clinical_resource_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
 														);
 
 													}
