@@ -62,7 +62,6 @@
 			array(
 				array(
 					'@type' => 'MedicalAudienceType', // Thing > Intangible > Enumeration > MedicalEnumeration > MedicalAudienceType
-					'geographicArea' => $schema_common_arkansas,
 					'name' => 'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
 				)
 			)
