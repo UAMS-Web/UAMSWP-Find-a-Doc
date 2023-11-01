@@ -1217,6 +1217,14 @@
 					'treatment' => 'treatment_procedure_short_desc'
 				);
 
+			// 2. Add post types (key) and corresponding field names (value) to be used as a fallback to set the excerpt if the initial fields do not have a value
+
+				$excerpt_fallback_field_name = array(
+					'provider' => 'physician_clinical_bio',
+					'location' => 'location_about',
+					'expertise' => 'page_header_landingpage_intro'
+				);
+
 			// Get the post type of the current page/post
 
 				$post_type = get_post_type( $post_id );
@@ -1231,9 +1239,31 @@
 					array_key_exists( $post_type, $excerpt_field_name )//  and if a key for the current post type exists in the array...
 				) {
 
-					// Get field name relevant to the current post type
+					// Get field value relevant to the current post type
 
-						$post_excerpt = get_field( $excerpt_field_name[$post_type], $post_id );
+						$post_excerpt = get_field( $excerpt_field_name[$post_type], $post_id ) ?? null;
+
+					// If excerpt is empty, get fallback field value relevant to the current post type
+
+						if (
+							!$post_excerpt
+							&&
+							$excerpt_fallback_field_name // and if the $excerpt_fallback_field_name array has a value ...
+							&&
+							array_key_exists( $post_type, $excerpt_fallback_field_name )//  and if a key for the current post type exists in the array...
+						) {
+
+							$post_excerpt = get_field( $excerpt_fallback_field_name[$post_type], $post_id ) ?? null;
+
+							if ( $post_excerpt ) {
+
+								$post_excerpt = wp_strip_all_tags($post_excerpt);
+								$post_excerpt = str_replace("\n", ' ', $post_excerpt); // Strip line breaks
+								$post_excerpt = strlen($post_excerpt) > 160 ? mb_strimwidth($post_excerpt, 0, 156, '...') : $post_excerpt; // Limit to 160 characters
+
+							}
+
+						}
 
 				} else {
 
