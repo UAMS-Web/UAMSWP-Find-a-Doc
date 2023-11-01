@@ -10607,7 +10607,7 @@
 
 								// Get the value
 
-									$globalLocationNumber = get_field( 'schema_globallocationnumber', $term ) ?? $null;
+									$globalLocationNumber = get_field( 'schema_globallocationnumber', $term ) ?? null;
 
 								// Add the value to the property
 
