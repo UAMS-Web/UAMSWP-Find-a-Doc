@@ -10046,10 +10046,6 @@
 					 * Define the variable again.
 					 */
 
-					// Base array
-
-						$output = array();
-
 					// Get the term object
 
 						$term = get_term(
@@ -10059,11 +10055,27 @@
 
 					// If term is invalid, bail early
 
-						if ( !is_object($term) ) {
+						if (
+							!is_object($term)
+							||
+							$term->slug == '_none'
+						) {
 
 							return $output;
 
 						}
+
+					// Check variables
+
+						if ( !array_is_list($building_items) ) {
+
+							$building_items = array($building_items);
+
+						}
+
+					// Base array
+
+						$output = $building_items;
 
 					// Construct schema item
 
