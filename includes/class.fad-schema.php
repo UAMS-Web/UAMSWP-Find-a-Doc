@@ -4963,27 +4963,23 @@
 			int $input_full = 0 // ID of image to use for full image
 		) {
 
-			// Check variables
+			// If values are 0 or empty, bail early
 
-				$page_fragment = $page_fragment ?: 'Image';
+				if (
+					!$input_1_1
+					&&
+					!$input_3_4
+					&&
+					!$input_4_3
+					&&
+					!$input_16_9
+					&&
+					!$input_full
+				) {
 
-				// If values are 0 or empty, end now
+					return;
 
-					if (
-						!$input_1_1
-						&&
-						!$input_3_4
-						&&
-						!$input_4_3
-						&&
-						!$input_16_9
-						&&
-						!$input_full
-					) {
-
-						return;
-
-					}
+				}
 
 			// Base array
 
