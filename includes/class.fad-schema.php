@@ -424,7 +424,7 @@
 							!is_array($item)
 						) {
 
-							$list_values[] = $item;
+							$list_values[] = 'https://schema.org/' . $item . '/';
 							$output_values[] = 'https://schema.org/' . $item . '/';
 
 						}
