@@ -5059,15 +5059,15 @@
 
 			// Clean up the list array
 
-				$MedicalWebPage_list = $MedicalWebPage_list ? array_filter($MedicalWebPage_list) : null;
-				$MedicalWebPage_list = $MedicalWebPage_list ? array_unique( $MedicalWebPage_list, SORT_REGULAR ) : null;
-				$MedicalWebPage_list = $MedicalWebPage_list ? array_values($MedicalWebPage_list) : null;
+				$output = $output ? array_filter($output) : null;
+				$output = $output ? array_unique( $output, SORT_REGULAR ) : null;
+				$output = $output ? array_values($output) : null;
 
 				// If there is only one item, flatten the multi-dimensional array by one step
 
-					if ( $MedicalWebPage_list ) {
+					if ( $output ) {
 
-						uamswp_fad_flatten_multidimensional_array($MedicalWebPage_list);
+						uamswp_fad_flatten_multidimensional_array($output);
 
 					}
 
