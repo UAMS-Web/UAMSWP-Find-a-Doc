@@ -4953,6 +4953,134 @@
 
 		}
 
+	// Add data to an array defining schema data for image URL from thumbnails (thumbnailUrl)
+
+		function uamswp_fad_schema_image_url_thumbnails(
+			int $input_1_1 = 0, // ID of image to use for 1:1 aspect ratio
+			int $input_3_4 = 0, // ID of image to use for 3:4 aspect ratio
+			int $input_4_3 = 0, // ID of image to use for 4:3 aspect ratio
+			int $input_16_9 = 0, // ID of image to use for 16:9 aspect ratio
+			int $input_full = 0 // ID of image to use for full image
+		) {
+
+			// Check variables
+
+				$page_fragment = $page_fragment ?: 'Image';
+
+				// If values are 0 or empty, end now
+
+					if (
+						!$input_1_1
+						&&
+						!$input_3_4
+						&&
+						!$input_4_3
+						&&
+						!$input_16_9
+						&&
+						!$input_full
+					) {
+
+						return;
+
+					}
+
+			// Base array
+
+				$output = array();
+
+			// Get the URL of the image thumbnails
+
+				// 1:1 aspect ratio source image
+
+					if ( $input_1_1 ) {
+
+						$image_1_1_url = wp_get_attachment_image_url( $input_1_1, 'aspect-1-1' ) ?? null;
+
+						if ( $image_1_1_url ) {
+
+							$output[] = $image_1_1_url;
+
+						}
+
+					}
+
+				// 3:4 aspect ratio source image
+
+					if ( $input_3_4 ) {
+
+						$image_3_4_url = wp_get_attachment_image_url( $input_3_4, 'aspect-3-4' ) ?? null;
+
+						if ( $image_3_4_url ) {
+
+							$output[] = $image_3_4_url;
+
+						}
+
+					}
+
+				// 4:3 aspect ratio source image
+
+					if ( $input_4_3 ) {
+
+						$image_4_3_url = wp_get_attachment_image_url( $input_4_3, 'aspect-4-3' ) ?? null;
+
+						if ( $image_4_3_url ) {
+
+							$output[] = $image_4_3_url;
+
+						}
+
+					}
+
+				// 16:9 aspect ratio source image
+
+					if ( $input_16_9 ) {
+
+						$image_16_9_url = wp_get_attachment_image_url( $input_16_9, 'aspect-16-9' ) ?? null;
+
+						if ( $image_16_9_url ) {
+
+							$output[] = $image_16_9_url;
+
+						}
+
+					}
+
+				// Full-size image output
+
+					if ( $input_full ) {
+
+						$image_full_url = wp_get_attachment_image_url( $input_full, 'full' ) ?? null;
+
+						if ( $image_full_url ) {
+
+							$output[] = $image_full_url;
+
+						}
+
+					}
+
+			// Clean up the list array
+
+				$MedicalWebPage_list = $MedicalWebPage_list ? array_filter($MedicalWebPage_list) : null;
+				$MedicalWebPage_list = $MedicalWebPage_list ? array_unique( $MedicalWebPage_list, SORT_REGULAR ) : null;
+				$MedicalWebPage_list = $MedicalWebPage_list ? array_values($MedicalWebPage_list) : null;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					if ( $MedicalWebPage_list ) {
+
+						uamswp_fad_flatten_multidimensional_array($MedicalWebPage_list);
+
+					}
+
+			// Return the list array
+
+				return $output;
+
+		}
+
 	// Add data to an array defining schema data for the Health Care Provider Taxonomy code set
 
 		function uamswp_fad_schema_nucc_code_set(
