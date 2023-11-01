@@ -29932,6 +29932,10 @@
 										)
 									) {
 
+										// Get values
+
+											$clinical_resource_description = $clinical_resource_description ?? null;
+
 										// Add to item values
 
 											// MedicalWebPage
@@ -30422,6 +30426,10 @@
 											)
 										)
 									) {
+
+										// Get values
+
+											$clinical_resource_description = $clinical_resource_description ?? null;
 
 										// Add to item values
 
