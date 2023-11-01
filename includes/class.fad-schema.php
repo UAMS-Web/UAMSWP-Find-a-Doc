@@ -11384,9 +11384,16 @@
 						'Person'
 					);
 
+					// Base array for schema.org type URLs
+
+						$provider_valid_types_url = array();
+
 					// Get subtypes
 
-						uamswp_fad_schema_subtypes($provider_valid_types);
+						uamswp_fad_schema_subtypes(
+							$provider_valid_types, // array // Required // List of Schema.org types
+							$provider_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
+						);
 
 				// List of valid properties for each type
 
@@ -14033,16 +14040,24 @@
 
 												// Get MedicalSpecialty from Clinical Specialization value
 
-													// Simple list of MedicalSpecialty values
+													if ( !isset($provider_medicalSpecialty_list) ) {
 
-														$provider_medicalSpecialty_list = array();
+														if ( $provider_clinical_specialization ) {
 
-													// Schema property values
+															// Simple list of MedicalSpecialty values
 
-														$provider_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_specialization(
-															$provider_clinical_specialization, // mixed // Required // Clinical Specialization value(s)
-															$provider_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
-														);
+																$provider_medicalSpecialty_list = array();
+
+															// Schema property values
+
+																$provider_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_specialization(
+																	$provider_clinical_specialization, // mixed // Required // Clinical Specialization value(s)
+																	$provider_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
+																);
+
+														}
+
+													}
 
 											}
 
@@ -14241,29 +14256,35 @@
 
 														// Get MedicalSpecialty from Clinical Specialization value
 
-															if ( $provider_clinical_specialization ) {
+															if ( !isset($provider_medicalSpecialty_list) ) {
 
-																// Simple list of MedicalSpecialty values
+																if ( $provider_clinical_specialization ) {
 
-																	$provider_medicalSpecialty_list = array();
+																	// Simple list of MedicalSpecialty values
 
-																// Schema property values
+																		$provider_medicalSpecialty_list = array();
 
-																	$provider_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_specialization(
-																		$provider_clinical_specialization, // mixed // Required // Clinical Specialization value(s)
-																		$provider_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
-																	);
+																	// Schema property values
 
-																	if ( $provider_medicalSpecialty_list ) {
-
-																		$provider_medicalSpecialty_list = is_array($provider_medicalSpecialty_list) ? $provider_medicalSpecialty_list : array($provider_medicalSpecialty_list);
-
-																		$provider_additionalType_MedicalSpecialty = array_intersect(
-																			$provider_valid_types,
-																			$provider_medicalSpecialty_list
+																		$provider_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_specialization(
+																			$provider_clinical_specialization, // mixed // Required // Clinical Specialization value(s)
+																			$provider_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
 																		);
 
-																	}
+																}
+
+															}
+
+														// Check medicalSpecialty list against valid schema types
+
+															if ( $provider_medicalSpecialty_list ) {
+
+																$provider_medicalSpecialty_list = is_array($provider_medicalSpecialty_list) ? $provider_medicalSpecialty_list : array($provider_medicalSpecialty_list);
+
+																$provider_additionalType_MedicalSpecialty = array_intersect(
+																	$provider_valid_types_url,
+																	$provider_medicalSpecialty_list
+																);
 
 															}
 
@@ -19537,9 +19558,16 @@
 						'Hospital'
 					);
 
+					// Base array for schema.org type URLs
+
+						$location_valid_types_url = array();
+
 					// Get subtypes
 
-						uamswp_fad_schema_subtypes($location_valid_types);
+						uamswp_fad_schema_subtypes(
+							$location_valid_types, // array // Required // List of Schema.org types
+							$location_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
+						);
 
 				// List of valid properties for each type
 
@@ -22542,7 +22570,7 @@
 														if ( $location_medicalSpecialty_list ) {
 
 															$location_additionalType_medicalSpecialty = array_intersect(
-																$location_valid_types,
+																$location_valid_types_url,
 																$location_medicalSpecialty_list
 															);
 
@@ -36170,8 +36198,33 @@
 	// Get list of Schema.org subtypes
 
 		function uamswp_fad_schema_subtypes(
-			array &$types // List of Schema.org types
+			array &$types, // array // Required // List of Schema.org types
+			&$urls = array() // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
 		) {
+
+			// Check variables
+
+				if (
+					$urls
+					&&
+					!is_string($urls)
+					&&
+					!is_array($urls)
+				) {
+
+					$urls = array();
+
+				}
+
+				if (
+					$urls
+					&&
+					is_string($urls)
+				) {
+
+					$urls = array( $urls );
+
+				}
 
 			// Schema.org types and properties
 
@@ -36179,24 +36232,45 @@
 
 			foreach ( $types as $item ) {
 
-				$subtypes = $schema_org_types[$item]['subTypes'] ?? array();
-				$subtypes = !empty($subtypes) ? $subtypes : array();
-				$subtypes = is_array($subtypes) ? $subtypes : array($subtypes);
+				if ( $item ) {
 
-				uamswp_fad_schema_subtypes($subtypes);
+					$subtypes = $schema_org_types[$item]['subTypes'] ?? array();
+					$subtypes = !empty($subtypes) ? $subtypes : array();
+					$subtypes = is_array($subtypes) ? $subtypes : array($subtypes);
 
-				$types = array_merge(
-					$types,
-					$subtypes
-				);
+					uamswp_fad_schema_subtypes($subtypes);
 
+					$types = array_merge(
+						$types,
+						$subtypes
+					);
+
+					// Add schema.org URLs to list
+
+						$urls[] = 'https://schema.org/' . $item . '/';
+
+						foreach ( $subtypes as $subtype ) {
+
+							if ( $subtype ) {
+
+								$urls[] = 'https://schema.org/' . $subtype . '/';
+
+							}
+
+						}
+
+				}
 			}
 
-			// Clean up the array
+			// Clean up the arrays
 
-				$types = array_filter($types);
-				$types = array_unique( $types, SORT_REGULAR );
-				$types = array_values($types);
+				$types = $types ? array_filter($types) : array();
+				$types = $types ? array_unique( $types, SORT_REGULAR ) : array();
+				$types = $types ? array_values($types) : array();
+
+				$urls = $urls ? array_filter($urls) : array();
+				$urls = $urls ? array_unique( $urls, SORT_REGULAR ) : array();
+				$urls = $urls ? array_values($urls) : array();
 
 		}
 
