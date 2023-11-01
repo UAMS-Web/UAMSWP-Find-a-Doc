@@ -1862,36 +1862,6 @@
 
 		}
 
-	// mainContentOfPage (WebSite and MedicalWebPage only)
-
-		/**
-		 * Indicates if this web page element is the main subject of the page.
-		 *
-		 * Values expected to be one of these types:
-		 *
-		 *     - WebPageElement
-		 */
-
-		if ( $nesting_level <= 1 ) {
-
-			// Get values
-
-				$schema_common_mainContentOfPage = array(
-					'@type' => 'WebPageElement',
-					'cssSelector' => 'main'
-				);
-
-			// Add to common schema properties array for WebSite and MedicalWebPage only
-
-				if ( $schema_common_mainContentOfPage ) {
-
-					$schema_common_properties_MedicalWebPage['mainContentOfPage'] = $schema_common_mainContentOfPage;
-					$schema_common_properties_WebSite['mainContentOfPage'] = $schema_common_mainContentOfPage;
-
-				}
-
-		}
-
 	// mainEntityOfPage (excluding WebSite and MedicalWebPage)
 
 		/**
