@@ -1861,30 +1861,17 @@
 		 *     - URL
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		// Get values
 
-			// Get values
+			$schema_common_mainEntityOfPage = $schema_common_url;
 
-				// Base array
+		// Add to common schema properties for types other than MedicalWebPage array
 
-					$schema_common_mainEntityOfPage = array();
+			if ( $schema_common_mainEntityOfPage ) {
 
-				// Merge in current entity's MedicalWebPage type item
+				$schema_common_properties_exclude_MedicalWebPage['mainEntityOfPage'] = $schema_common_mainEntityOfPage;
 
-					$schema_common_mainEntityOfPage = uamswp_fad_schema_merge_values(
-						$schema_common_mainEntityOfPage, // mixed // Required // Initial schema item property value
-						$schema_common_item_MedicalWebPage // mixed // Required // Incoming schema item property value
-					);
-
-			// Add to common schema properties for types other than MedicalWebPage array
-
-				if ( $schema_common_mainEntityOfPage ) {
-
-					$schema_common_properties_exclude_MedicalWebPage['mainEntityOfPage'] = $schema_common_mainEntityOfPage;
-
-				}
-
-		}
+			}
 
 	// maintainer
 
