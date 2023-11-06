@@ -982,20 +982,26 @@
 
 					$location_suite = get_field('location_suite', $post_id );
 
-				$location_address_2 =
-					( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
-					. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
-					. ( $location_suite ? $location_suite : '' );
-				$location_address_2_schema =
-					( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
-					. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
-					. ( $location_suite ? $location_suite : '' );
+				// Construct Address 2
 
-				$location_address_2_deprecated = get_field('location_address_2', $post_id );
-				if (!$location_address_2) {
-					$location_address_2 = $location_address_2_deprecated;
-					$location_address_2_schema = $location_address_2_deprecated;
-				}
+					$location_address_2 =
+						( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
+						. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
+						. ( $location_suite ? $location_suite : '' );
+
+					$location_address_2_schema =
+						( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
+						. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
+						. ( $location_suite ? $location_suite : '' );
+
+					$location_address_2_deprecated = get_field('location_address_2', $post_id );
+
+					if ( !$location_address_2 ) {
+
+						$location_address_2 = $location_address_2_deprecated;
+						$location_address_2_schema = $location_address_2_deprecated;
+
+					}
 
 				$location_state = get_field('location_state', $post_id);
 				$location_zip = get_field('location_zip', $post_id);
