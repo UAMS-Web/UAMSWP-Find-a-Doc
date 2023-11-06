@@ -10256,9 +10256,34 @@
 
 								$type = 'Place';
 
-								// Subtype
+								// Place Subtype (building or building complex)
 
-									$Place_subtype = get_field( 'facility_place_subtype', $term ) ?? $null;
+									$Place_facility_query = get_field( 'facility_place_subtype', $term ) ?? $null;
+									$Place_subtype = $type;
+
+									// Building subtype
+
+										if (
+											$Place_facility_query
+											&&
+											$Place_facility_query == 'building'
+										) {
+
+											$Place_subtype = get_field( 'facility_place_subtype_building', $term ) ?? $type;
+
+										}
+
+									// Building Complex subtype
+
+										if (
+											$Place_facility_query
+											&&
+											$Place_facility_query == 'complex'
+										) {
+
+											$Place_subtype = get_field( 'facility_place_subtype_complex', $term ) ?? $type;
+
+										}
 
 									// Schema.org subtype
 
@@ -10267,7 +10292,7 @@
 										 * the Schema.org type URL.
 										 */
 
-										$Place_subtype_SchemaOrg = null;
+										$Place_subtype_SchemaOrg = $type;
 										$Place_subtype_SchemaOrg_url = null;
 
 										if ( $Place_subtype ) {
@@ -10280,9 +10305,13 @@
 													$Place_subtype // haystack
 												);
 
-												$Place_subtype_SchemaOrg_url = 'https://schema.org/' . $Place_subtype_SchemaOrg . '/';
-
 											}
+
+										}
+
+										if ( $Place_subtype_SchemaOrg ) {
+
+											$Place_subtype_SchemaOrg_url = 'https://schema.org/' . $Place_subtype_SchemaOrg . '/';
 
 										}
 
