@@ -919,6 +919,7 @@
 						// Get building term and its values
 
 							$building = $location_building ? get_term( $location_building, 'building' ) : null;
+							$building_type = null;
 							$building_slug = null;
 							$building_name = null;
 
@@ -928,6 +929,7 @@
 								is_object($building)
 							) {
 
+								$building_type = get_field( 'facility_place_subtype', $building ) ?? null;
 								$building_slug = $building->slug;
 								$building_name = $building->name;
 
@@ -943,6 +945,7 @@
 
 								$location_building = null;
 								$building = null;
+								$building_type = null;
 								$building_slug = null;
 								$building_name = null;
 
