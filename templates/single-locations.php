@@ -978,6 +978,20 @@
 
 								}
 
+								// Reset values if building is set to 'Single-Story Building'
+
+									if (
+										isset($location_floor_value)
+										&&
+										!$location_floor_value
+									) {
+
+										$location_floor = null;
+										$location_floor_value = null;
+										$location_floor_label = null;
+
+									}
+
 				// Suite
 
 					$location_suite = get_field('location_suite', $post_id );
