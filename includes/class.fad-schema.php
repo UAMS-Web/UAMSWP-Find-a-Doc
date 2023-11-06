@@ -9981,17 +9981,17 @@
 
 		}
 
-	// Add data to an array defining schema data for a building (Place)
+	// Add data to an array defining schema data for a facility (Place)
 
-		function uamswp_fad_schema_building(
-			int $term_id, // int // Required // Term ID for the building
+		function uamswp_fad_schema_facility(
+			int $term_id, // int // Required // Term ID for the facility
 			int $nesting_level, // Nesting level within the main schema
-			array $building_items = array() // array // Optional // Pre-existing list array for buildings to which to add additional items
+			array $facility_items = array() // array // Optional // Pre-existing list array for facilities to which to add additional items
 		) {
 
 			/**
 			 * The values of the 'Specific Type of Location'
-			 * ('field_building_place_subtype') field are expected to use the following
+			 * ('field_facility_place_subtype') field are expected to use the following
 			 * structure:
 			 *
 			 *     Values representing a Schema.org type must begin with 'SchemaOrg_' followed by
@@ -10010,26 +10010,26 @@
 
 				// List of valid types
 
-					$building_valid_types = array(
+					$facility_valid_types = array(
 						'Place'
 					);
 
 					// Get subtypes
 
-						uamswp_fad_schema_subtypes($building_valid_types);
+						uamswp_fad_schema_subtypes($facility_valid_types);
 
 				// List of valid properties for each type
 
 					// Base array
 
-						$building_properties_map = array();
+						$facility_properties_map = array();
 
 					// Get list of valid properties from Schema.org type list
 
-						foreach ( $building_valid_types as $item ) {
+						foreach ( $facility_valid_types as $item ) {
 
-							$building_properties_map[$item]['properties'] = $schema_org_types[$item]['properties'] ?? array();
-							$building_properties_map[$item]['properties'] = is_array($building_properties_map[$item]['properties']) ? $building_properties_map[$item]['properties'] : array($building_properties_map[$item]['properties']);
+							$facility_properties_map[$item]['properties'] = $schema_org_types[$item]['properties'] ?? array();
+							$facility_properties_map[$item]['properties'] = is_array($facility_properties_map[$item]['properties']) ? $facility_properties_map[$item]['properties'] : array($facility_properties_map[$item]['properties']);
 
 						}
 
@@ -10078,21 +10078,21 @@
 
 					// Check variables
 
-						if ( !array_is_list($building_items) ) {
+						if ( !array_is_list($facility_items) ) {
 
-							$building_items = array($building_items);
+							$facility_items = array($facility_items);
 
 						}
 
 					// Base array
 
-						$output = $building_items;
+						$output = $facility_items;
 
 					// Construct schema item
 
 						/**
 						 * The following properties are either beyond the scope of what is being included
-						 * in the building item schema, irrelevant to the building item schema, or are
+						 * in the facility item schema, irrelevant to the facility item schema, or are
 						 * superseded by another property, and so they will not be included:
 						 *
 						 * acceptsReservations
@@ -10239,7 +10239,7 @@
 
 							// Get the value
 
-								$id_fragment = 'Building-' . $term_id;
+								$id_fragment = 'Facility-' . $term_id;
 								$id = $schema_common_website_url . '#' . $id_fragment;
 
 							// Add the value to the property
@@ -10258,7 +10258,7 @@
 
 								// Subtype
 
-									$Place_subtype = get_field( 'building_place_subtype', $term ) ?? $null;
+									$Place_subtype = get_field( 'facility_place_subtype', $term ) ?? $null;
 
 									// Schema.org subtype
 
@@ -10361,7 +10361,7 @@
 
 							// Query: Does this organization have a listing on Google My Business?
 
-								$google_cid_query = get_field( 'building_google_cid_query', $term ) ?? false;
+								$google_cid_query = get_field( 'facility_google_cid_query', $term ) ?? false;
 
 							// Get value
 
@@ -10377,7 +10377,7 @@
 
 							// Get image ID
 
-								$photo_id = get_field( 'building_photo', $term ) ?? 0;
+								$photo_id = get_field( 'facility_photo', $term ) ?? 0;
 
 							// Create ImageObject from image ID
 
@@ -10413,12 +10413,12 @@
 							if (
 								in_array(
 									'additionalProperty',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'additionalProperty',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -10434,7 +10434,7 @@
 
 											// Get Google Map field value
 
-												$parking_geo_value = get_field( 'building_parking_map', $term ) ?? null;
+												$parking_geo_value = get_field( 'facility_parking_map', $term ) ?? null;
 
 											// Check Google Map field value
 
@@ -10508,12 +10508,12 @@
 							if (
 								in_array(
 									'additionalType',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'additionalType',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -10568,22 +10568,22 @@
 							if (
 								in_array(
 									'address',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'address',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
 								// Get the value
 
 									$address = null;
-									$address_streetAddress = get_field( 'building_streetaddress', $term ) ?? '';
-									$address_addressRegion = get_field( 'building_state', $term ) ?? '';
-									$address_addressLocality = get_field( 'building_city', $term ) ?? '';
-									$address_postalCode = get_field( 'building_zip', $term ) ?? '';
+									$address_streetAddress = get_field( 'facility_streetaddress', $term ) ?? '';
+									$address_addressRegion = get_field( 'facility_state', $term ) ?? '';
+									$address_addressLocality = get_field( 'facility_city', $term ) ?? '';
+									$address_postalCode = get_field( 'facility_zip', $term ) ?? '';
 									$address_addressCountry = $schema_common_usa;
 
 									if (
@@ -10631,12 +10631,12 @@
 							if (
 								in_array(
 									'alternateName',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'alternateName',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -10684,12 +10684,12 @@
 							if (
 								in_array(
 									'brand',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'brand',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -10715,19 +10715,19 @@
 							 *
 							 *     - Place
 							 *
-							 * Create a taxonomy (or other solution) to define a campus in which this building
+							 * Create a taxonomy (or other solution) to define a campus in which this facility
 							 * is contained.
 							 */
 
 							if (
 								in_array(
 									'containedInPlace',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'containedInPlace',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -10761,12 +10761,12 @@
 							if (
 								in_array(
 									'geo',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'geo',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -10809,12 +10809,12 @@
 							if (
 								in_array(
 									'globalLocationNumber',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'globalLocationNumber',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -10849,12 +10849,12 @@
 							if (
 								in_array(
 									'hasMap',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'hasMap',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -10899,12 +10899,12 @@
 							if (
 								in_array(
 									'identifier',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'identifier',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -10951,12 +10951,12 @@
 							if (
 								in_array(
 									'image',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'image',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -10988,12 +10988,12 @@
 							if (
 								in_array(
 									'isAccessibleForFree',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'isAccessibleForFree',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -11025,12 +11025,12 @@
 							if (
 								in_array(
 									'latitude',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'latitude',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -11077,12 +11077,12 @@
 							if (
 								in_array(
 									'location',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'location',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -11115,12 +11115,12 @@
 							if (
 								in_array(
 									'longitude',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'longitude',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -11167,18 +11167,18 @@
 							if (
 								in_array(
 									'name',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'name',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
 								// Get the value
 
-									$name = get_field( 'building_name', $term ) ?? null;
+									$name = get_field( 'facility_name', $term ) ?? null;
 
 								// Add the value to the property
 
@@ -11203,12 +11203,12 @@
 							if (
 								in_array(
 									'parentOrganization',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'parentOrganization',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -11240,12 +11240,12 @@
 							if (
 								in_array(
 									'photo',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'photo',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -11278,12 +11278,12 @@
 							if (
 								in_array(
 									'publicAccess',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'publicAccess',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -11316,12 +11316,12 @@
 							if (
 								in_array(
 									'sameAs',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'sameAs',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -11368,12 +11368,12 @@
 							if (
 								in_array(
 									'smokingAllowed',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 								||
 								in_array(
 									'smokingAllowed',
-									$building_properties_map[$type]['properties']
+									$facility_properties_map[$type]['properties']
 								)
 							) {
 
@@ -20835,26 +20835,26 @@
 								$location_author = null;
 								$location_availableService = null;
 								$location_brand = null;
-								$location_building_additionalType = null;
-								$location_building_additionalType_repeater = null;
-								$location_building_address = null;
-								$location_building_alternateName = null;
-								$location_building_alternateName_repeater = null;
-								$location_building_containedIn = null;
-								$location_building_containedInPlace = null;
-								$location_building_geo = null;
-								$location_building_hasMap = null;
-								$location_building_id = null;
-								$location_building_image = null;
-								$location_building_latitude = null;
-								$location_building_longitude = null;
-								$location_building_name = null;
-								$location_building_photo = null;
-								$location_building_Place = null;
-								$location_building_sameAs = null;
-								$location_building_sameAs_repeater = null;
-								$location_building_slug = null;
-								$location_building_term = null;
+								$location_facility_additionalType = null;
+								$location_facility_additionalType_repeater = null;
+								$location_facility_address = null;
+								$location_facility_alternateName = null;
+								$location_facility_alternateName_repeater = null;
+								$location_facility_containedIn = null;
+								$location_facility_containedInPlace = null;
+								$location_facility_geo = null;
+								$location_facility_hasMap = null;
+								$location_facility_id = null;
+								$location_facility_image = null;
+								$location_facility_latitude = null;
+								$location_facility_longitude = null;
+								$location_facility_name = null;
+								$location_facility_photo = null;
+								$location_facility_Place = null;
+								$location_facility_sameAs = null;
+								$location_facility_sameAs_repeater = null;
+								$location_facility_slug = null;
+								$location_facility_term = null;
 								$location_clinical_resource = null;
 								$location_clinical_resource_CreativeWork = null;
 								$location_clinical_resource_CreativeWork_keywords = null;
@@ -22095,26 +22095,26 @@
 
 												}
 
-										// Get Building term ID
+										// Get Facility term ID
 
-											if ( !isset($location_building_id) ) {
+											if ( !isset($location_facility_id) ) {
 
-												$location_building_id = get_field( 'location_building', $entity );
+												$location_facility_id = get_field( 'location_building', $entity );
 
 											}
 
 											// Format values as Place if the location has no parent
 
 												if (
-													$location_building_id
+													$location_facility_id
 													&&
 													isset($location_has_parent)
 													&&
 													$location_has_parent == false
 												) {
 
-													$location_building_Place = uamswp_fad_schema_building(
-														$location_building_id, // int // Required // Term ID for the building
+													$location_facility_Place = uamswp_fad_schema_facility(
+														$location_facility_id, // int // Required // Term ID for the facility
 														$nesting_level // Nesting level within the main schema
 													);
 
@@ -22759,31 +22759,31 @@
 
 													$location_address_2_array = array();
 
-												// Building values
+												// Facility values
 
-													if ( !isset($location_building_name) ) {
+													if ( !isset($location_facility_name) ) {
 
-														if ( !isset($location_building_id) ) {
+														if ( !isset($location_facility_id) ) {
 
-															$location_building_id = get_field( 'location_building', $location_address_id ) ?? null;
+															$location_facility_id = get_field( 'location_building', $location_address_id ) ?? null;
 
 														}
 
-														if ( $location_building_id ) {
+														if ( $location_facility_id ) {
 
-															if ( !isset($location_building_term) ) {
+															if ( !isset($location_facility_term) ) {
 
-																$location_building_term = get_term( $location_building_id, 'building' ) ?? null;
+																$location_facility_term = get_term( $location_facility_id, 'building' ) ?? null;
 
 															}
 
-															if ( is_object($location_building_term) ) {
+															if ( is_object($location_facility_term) ) {
 
-																$location_building_slug = $location_building_term->slug;
+																$location_facility_slug = $location_facility_term->slug;
 
-																if ( $location_building_slug != '_none' ) {
+																if ( $location_facility_slug != '_none' ) {
 
-																	$location_building_name = $location_building_term->name;
+																	$location_facility_name = $location_facility_term->name;
 
 																}
 
@@ -22795,13 +22795,13 @@
 
 													// Add to the address 2 array
 
-														if ( $location_building_name ) {
+														if ( $location_facility_name ) {
 
-															$location_address_2_array[] = $location_building_name;
+															$location_address_2_array[] = $location_facility_name;
 
 															// Add values to location keywords
 
-																$location_address_keywords[] = $location_building_name;
+																$location_address_keywords[] = $location_facility_name;
 
 														}
 
@@ -24206,15 +24206,15 @@
 
 												}
 
-											// Merge in building (Place) value
+											// Merge in facility (Place) value
 
-												$location_building_Place = $location_building_Place ?? null;
+												$location_facility_Place = $location_facility_Place ?? null;
 
-												if ( $location_building_Place ) {
+												if ( $location_facility_Place ) {
 
 													$location_containedInPlace = uamswp_fad_schema_merge_values(
 														$location_containedInPlace, // mixed // Required // Initial schema item property value
-														$location_building_Place // mixed // Required // Incoming schema item property value
+														$location_facility_Place // mixed // Required // Incoming schema item property value
 													);
 
 												}

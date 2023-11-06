@@ -470,10 +470,6 @@
 
 			add_action( 'init', 'create_brand_organization_uams_taxonomy', 0 );
 
-		// Buildings
-
-			add_action( 'init', 'create_building_taxonomy', 0 );
-
 		// Certifications —  Certifying Bodies
 
 			add_action( 'init', 'create_certifying_body_taxonomy', 0 );
@@ -505,6 +501,10 @@
 		// Education and Training Types
 
 			add_action( 'init', 'create_education_taxonomy', 0 );
+
+		// Facilities
+
+			add_action( 'init', 'create_building_taxonomy', 0 );
 
 		// Google My Business Categories for Providers
 
@@ -2401,7 +2401,7 @@
 
 			}
 
-		// Buildings
+		// Facilities
 
 			/*
 
@@ -2415,26 +2415,26 @@
 				// Plugin assumes there is a 'None' taxonomy item with slug '_none'
 
 				$labels = array(
-					'name' => 'Buildings',
-					'singular_name' => 'Building',
-					'menu_name' => 'Buildings',
-					'all_items' => 'All Buildings',
-					'parent_item' => 'Parent Building',
-					'parent_item_colon' => 'Parent Building:',
-					'new_item_name' => 'New Building',
-					'add_new_item' => 'Add New Building',
-					'edit_item' => 'Edit Building',
-					'update_item' => 'Update Building',
-					'view_item' => 'View Building',
-					'separate_items_with_commas' => 'Separate Buildings with commas',
-					'add_or_remove_items' => 'Add or remove Buildings',
+					'name' => 'Facilities',
+					'singular_name' => 'Facility',
+					'menu_name' => 'Facilities',
+					'all_items' => 'All Facilities',
+					'parent_item' => 'Parent Facility',
+					'parent_item_colon' => 'Parent Facility:',
+					'new_item_name' => 'New Facility',
+					'add_new_item' => 'Add New Facility',
+					'edit_item' => 'Edit Facility',
+					'update_item' => 'Update Facility',
+					'view_item' => 'View Facility',
+					'separate_items_with_commas' => 'Separate Facilities with commas',
+					'add_or_remove_items' => 'Add or remove Facilities',
 					'choose_from_most_used' => 'Choose from the most used',
-					'popular_items' => 'Popular Buildings',
-					'search_items' => 'Search Buildings',
+					'popular_items' => 'Popular Facilities',
+					'search_items' => 'Search Facilities',
 					'not_found' => 'Not Found',
-					'no_terms' => 'No Buildings',
-					'items_list' => 'Buildings list',
-					'items_list_navigation' => 'Buildings list navigation',
+					'no_terms' => 'No Facilities',
+					'items_list' => 'Facilities list',
+					'items_list_navigation' => 'Facilities list navigation',
 				);
 				$rewrite = array(
 					'slug' => 'building',
