@@ -8998,51 +8998,54 @@ function uamswp_meta_image_values( $featured_image ) {
 
 }
 
-// Create array_is_list function that is available in PHP 8
-if ( !function_exists('array_is_list') ) {
+// Polyfills of functions available in PHP 8
 
-	function array_is_list(array $array): bool {
+	// Create array_is_list function that is available in PHP 8
 
-		if (empty($array)) {
-			return true;
-		}
+		if ( !function_exists('array_is_list') ) {
 
-		$current_key = 0;
-		foreach ($array as $key => $noop) {
-			if ($key !== $current_key) {
-				return false;
+			function array_is_list(array $array): bool {
+
+				if (empty($array)) {
+					return true;
+				}
+
+				$current_key = 0;
+				foreach ($array as $key => $noop) {
+					if ($key !== $current_key) {
+						return false;
+					}
+					++$current_key;
+				}
+
+				return true;
+
 			}
-			++$current_key;
-		}
-
-		return true;
-
-	}
-
-}
-
-// Create str_contains function that is available in PHP 8
-
-	if ( !function_exists('str_contains') ) {
-
-		function str_contains(
-			string $haystack, // string // Required // The string to search in.
-			string $needle // string // Required // The substring to search for in the haystack.
-		) {
-
-			/*
-
-				Performs a case-sensitive check indicating if needle is contained in haystack.
-
-				Returns true if needle is in haystack, false otherwise.
-
-			*/
-
-			return $needle !== '' || mb_strpos($haystack, $needle) !== false;
 
 		}
 
-	}
+	// Create str_contains function that is available in PHP 8
+
+		if ( !function_exists('str_contains') ) {
+
+			function str_contains(
+				string $haystack, // string // Required // The string to search in.
+				string $needle // string // Required // The substring to search for in the haystack.
+			) {
+
+				/*
+
+					Performs a case-sensitive check indicating if needle is contained in haystack.
+
+					Returns true if needle is in haystack, false otherwise.
+
+				*/
+
+				return $needle !== '' || mb_strpos($haystack, $needle) !== false;
+
+			}
+
+		}
 
 // Construct UAMS Text & Image Overlay Block on Ontology Fake Subpages
 function uamswp_fad_fpage_text_image_overlay(
