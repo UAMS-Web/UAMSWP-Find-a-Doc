@@ -9989,6 +9989,21 @@
 			array $building_items = array() // array // Optional // Pre-existing list array for buildings to which to add additional items
 		) {
 
+			/**
+			 * The values of the 'Specific Type of Location'
+			 * ('field_building_location_subtype') field are expected to use the following
+			 * structure:
+			 *
+			 *     Values representing a Schema.org type must begin with 'SchemaOrg_' followed by
+			 *     the type value (e.g., 'SchemaOrg_CivicStructure' for a Schema.org type with the
+			 *     URL 'https://schema.org/CivicStructure').
+			 *
+			 *     Values representing a Wikidata entry must begin with 'Wikidata_' followed by
+			 *     the name of the entry in camel case, followed by an underscore, followed by the
+			 *     entity ID of the Wikidata entry (e.g., 'Wikidata_MedicalFacility_Q4260475' for
+			 *     an entry with the URL 'https://www.wikidata.org/wiki/Q4260475').
+			 */
+
 				// Base schema function variables
 
 					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/base_function.php' );
@@ -10240,13 +10255,65 @@
 							// Get the value
 
 								$type = 'Place';
-								$Place_subtype = get_field( 'building_location_subtype', $term ) ?? $null;
+
+								// Subtype
+
+									$Place_subtype = get_field( 'building_location_subtype', $term ) ?? $null;
+
+									// Schema.org subtype
+
+										/**
+										 * Extract the Schema.org type value from the field value and use it to construct
+										 * the Schema.org type URL.
+										 */
+
+										$Place_subtype_SchemaOrg = null;
+										$Place_subtype_SchemaOrg_url = null;
+
+										if ( $Place_subtype ) {
+
+											if ( str_starts_with( $Place_subtype, 'SchemaOrg_' ) ) {
+
+												$Place_subtype_SchemaOrg = str_replace(
+													'SchemaOrg_', // needle
+													'', // replacement value
+													$Place_subtype // haystack
+												);
+
+												$Place_subtype_SchemaOrg_url = 'https://schema.org/' . $Place_subtype_SchemaOrg . '/';
+
+											}
+
+										}
+
+									// Wikidata additionalType
+
+										/**
+										 * Extract the Wikidata entry entity ID value from the field value and use it to
+										 * construct the Wikidata.org entry URL.
+										 */
+
+										$Place_subtype_Wikidata = null;
+
+										if ( $Place_subtype ) {
+
+											if ( str_starts_with( $Place_subtype, 'Wikidata_' ) ) {
+
+												$Place_subtype_Wikidata = 'https://www.wikidata.org/wiki/' . str_replace(
+													'Wikidata_', // needle
+													'', // replacement value
+													$Place_subtype // haystack
+												);
+
+											}
+
+										}
 
 							// Add the value to the property
 
-								if ( $Place_subtype ) {
+								if ( $Place_subtype_SchemaOrg ) {
 
-									$type = $Place_subtype;
+									$type = $Place_subtype_SchemaOrg;
 
 								}
 
@@ -10452,22 +10519,30 @@
 
 								// Get the value
 
-									// Get additionalType repeater field value
+									$additionalType = null;
 
-										$additionalType_repeater = get_field( 'schema_additionalType', $term ) ?? null;
+									if ( $Place_subtype_Wikidata ) {
 
-									// Add each item to additionalType property values array
+										$additionalType = $Place_subtype_Wikidata;
 
-										$additionalType = null;
+									} else {
 
-										if ( $additionalType_repeater ) {
+										// Get additionalType repeater field value
 
-											$additionalType = uamswp_fad_schema_additionaltype(
-												$additionalType_repeater, // additionalType repeater field
-												'schema_additionalType_uri' // additionalType item field name
-											);
+											$additionalType_repeater = get_field( 'schema_additionalType', $term ) ?? null;
 
-										}
+										// Add each item to additionalType property values array
+
+											if ( $additionalType_repeater ) {
+
+												$additionalType = uamswp_fad_schema_additionaltype(
+													$additionalType_repeater, // additionalType repeater field
+													'schema_additionalType_uri' // additionalType item field name
+												);
+
+											}
+
+									}
 
 								// Add the value to the property
 
