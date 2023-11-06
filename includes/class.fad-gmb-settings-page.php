@@ -35,56 +35,69 @@ function uamswp_fad_gmb_export_page() {
 }
 
 // Add action hook only if action=download_doximity_csv
-if ( isset($_GET['action'] ) && $_GET['action'] == 'download_doximity_csv' ) {
-	// Handle CSV Export
-	add_action( 'admin_init', 'doximity_csv_export' );
-}
+
+	if ( isset($_GET['action'] ) && $_GET['action'] == 'download_doximity_csv' ) {
+		// Handle CSV Export
+		add_action( 'admin_init', 'doximity_csv_export' );
+	}
 
 // Add action hook only if action=download_gmb_provider_csv
-if ( isset($_GET['action'] ) && $_GET['action'] == 'download_gmb_provider_csv' ) {
-	// Handle CSV Export
-	add_action( 'admin_init', 'gmb_provider_csv_export' );
-}
+
+	if ( isset($_GET['action'] ) && $_GET['action'] == 'download_gmb_provider_csv' ) {
+		// Handle CSV Export
+		add_action( 'admin_init', 'gmb_provider_csv_export' );
+	}
 
 // Add action hook only if action=download_gmb_provider_csv
-if ( isset($_GET['action'] ) && $_GET['action'] == 'download_gmb_location_csv' ) {
-	// Handle CSV Export
-	add_action( 'admin_init', 'gmb_location_csv_export' );
-}
+
+	if ( isset($_GET['action'] ) && $_GET['action'] == 'download_gmb_location_csv' ) {
+		// Handle CSV Export
+		add_action( 'admin_init', 'gmb_location_csv_export' );
+	}
 
 // Add action hook only if action=download_mychart_csv
-if ( isset($_GET['action'] ) && $_GET['action'] == 'download_mychart_csv' ) {
-	// Handle CSV Export
-	add_action( 'admin_init', 'mychart_csv_export' );
-}
+
+	if ( isset($_GET['action'] ) && $_GET['action'] == 'download_mychart_csv' ) {
+		// Handle CSV Export
+		add_action( 'admin_init', 'mychart_csv_export' );
+	}
 
 function doximity_csv_export() {
+
 	// Check for current user privileges
-	if( !current_user_can( 'manage_options' ) ){ return false; }
+
+		if ( !current_user_can( 'manage_options' ) ){ return false; }
 
 	// Check if we are in WP-Admin
-	if( !is_admin() ){ return false; }
+
+		if ( !is_admin() ){ return false; }
 
 	// Nonce Check
-	$nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
-	if ( ! wp_verify_nonce( $nonce, 'download_doximity_csv' ) ) {
-		die( 'Security check error' );
-	}
+
+		$nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+
+		if ( ! wp_verify_nonce( $nonce, 'download_doximity_csv' ) ) {
+
+			die( 'Security check error' );
+
+		}
 
 	ob_start();
 
 	// Custom WP_Query args
-	$args = array(
-		'post_type' => 'provider',
-		'post_status' => 'publish',
-		'posts_per_page' => '-1', // Set for all
-		'orderby' => 'title',
-		'order' => 'ASC',
-	);
+
+		$args = array(
+			'post_type' => 'provider',
+			'post_status' => 'publish',
+			'posts_per_page' => '-1', // Set for all
+			'orderby' => 'title',
+			'order' => 'ASC',
+		);
 
 	$query = new WP_Query( $args );
 
-	if ( $query->have_posts() ) :
+	if ( $query->have_posts() ) {
+
 		$table_head = array();
 		$table_head[0] = 'NPI Number';
 		$table_head[1] = 'First Name';
@@ -104,214 +117,389 @@ function doximity_csv_export() {
 
 		$table_body = array();
 		$row = array();
-		while( $query->have_posts() ) : $query->the_post();
+
+		while ( $query->have_posts() ) {
+
+			$query->the_post();
+
 			$post_id = get_the_ID();
 
 			// First, check if provider has desired degree
-			$degree_md = array( // list valid versions of MD
-				'M.D.'
-			);
-			$degree_do = array( // list valid versions of DO
-				'D.O.'
-			);
-			$degree_np = array( // list valid versions of NP
-				'CNP',
-				'FNP-C'
-			);
-			$degree_pa = array( // list valid versions of PA
-				'PA'
-			);
-			$degrees = get_field('physician_degree',$post_id);
-			$degree_valid = '';
-			$d = 1;
-			$npi = get_field('physician_npi',$post_id);
-			$npi = str_pad($npi, 10, '0', STR_PAD_LEFT); // Add enough leading zeroes to reach 10 digits
-			$npi_valid = false;
-			if ( !empty($npi) && '0' != $npi ) {
-				$npi_valid = true;
-			}
-			if ( $degrees ) {
-				foreach( $degrees as $degree ):
-					$degree_term = get_term( $degree, 'degree');
-					$degree_name = $degree_term->name;
-					if ( ( 2 > $d ) && ( in_array($degree_name, $degree_md) || in_array($degree_name, $degree_do) || in_array($degree_name, $degree_np) || in_array($degree_name, $degree_pa) ) ) {
-						$degree_valid = $degree_name;
-						if (in_array($degree_valid, $degree_md)) {
-							$degree_valid = 'MD';
-						} elseif (in_array($degree_valid, $degree_do)) {
-							$degree_valid = 'DO';
-						} elseif (in_array($degree_valid, $degree_np)) {
-							$degree_valid = 'NP';
-						} elseif (in_array($degree_valid, $degree_pa)) {
-							$degree_valid = 'PA';
-						} else {
-							$degree_valid = '';
-						}
-						$d++;
-					}
-				endforeach;
-			}
-			// Check if there is a hospital affiliation
-			$affiliation_valid = false;
-			$affiliations = get_field('physician_affiliation',$post_id);
-			if ( !empty($affiliations) ) {
-				$affiliation_valid = true;
-			}
-			// Check for valid locations
-			$locations = get_field('physician_locations',$post_id);
-			$location_valid = false;
-			foreach( $locations as $location ) {
-				if ( get_post_status ( $location ) == 'publish' ) {
-					$location_valid = true;
-					$break;
+
+				$degree_md = array( // list valid versions of MD
+					'M.D.'
+				);
+				$degree_do = array( // list valid versions of DO
+					'D.O.'
+				);
+				$degree_np = array( // list valid versions of NP
+					'CNP',
+					'FNP-C'
+				);
+				$degree_pa = array( // list valid versions of PA
+					'PA'
+				);
+				$degrees = get_field( 'physician_degree', $post_id );
+				$degree_valid = '';
+				$d = 1;
+				$npi = get_field( 'physician_npi', $post_id );
+				$npi = str_pad($npi, 10, '0', STR_PAD_LEFT); // Add enough leading zeroes to reach 10 digits
+				$npi_valid = false;
+
+				if (
+					!empty($npi)
+					&&
+					'0' != $npi
+				) {
+
+					$npi_valid = true;
+
 				}
-			}
+
+				if ( $degrees ) {
+
+					foreach ( $degrees as $degree ) {
+
+						$degree_term = get_term( $degree, 'degree');
+						$degree_name = $degree_term->name;
+
+						if (
+							( 2 > $d )
+							&&
+							(
+								in_array($degree_name, $degree_md)
+								||
+								in_array($degree_name, $degree_do)
+								||
+								in_array($degree_name, $degree_np)
+								||
+								in_array($degree_name, $degree_pa)
+							)
+						) {
+
+							$degree_valid = $degree_name;
+
+							if ( in_array($degree_valid, $degree_md) ) {
+
+								$degree_valid = 'MD';
+
+							} elseif ( in_array($degree_valid, $degree_do) ) {
+
+								$degree_valid = 'DO';
+
+							} elseif ( in_array($degree_valid, $degree_np) ) {
+
+								$degree_valid = 'NP';
+
+							} elseif ( in_array($degree_valid, $degree_pa) ) {
+
+								$degree_valid = 'PA';
+
+							} else {
+
+								$degree_valid = '';
+
+							}
+
+							$d++;
+
+						}
+
+					} // endforeach
+
+				}
+
+			// Check if there is a hospital affiliation
+
+				$affiliation_valid = false;
+				$affiliations = get_field( 'physician_affiliation', $post_id );
+
+				if ( !empty($affiliations) ) {
+
+					$affiliation_valid = true;
+
+				}
+
+			// Check for valid locations
+
+				$locations = get_field( 'physician_locations', $post_id );
+				$location_valid = false;
+
+				foreach ( $locations as $location ) {
+
+					if ( get_post_status ( $location ) == 'publish' ) {
+
+						$location_valid = true;
+						$break;
+
+					}
+
+				}
+
 			// Create the table
-			if ( $degree_valid && $npi_valid && $affiliation_valid && $location_valid ) {
-				// NPI Number field
-					$row[0] = $npi; // only display value if value is not empty or zero
 
-				// First Name field
-					$first_name = get_field('physician_first_name',$post_id);
-					$row[1] = html_entity_decode($first_name);
+				if (
+					$degree_valid
+					&&
+					$npi_valid
+					&&
+					$affiliation_valid
+					&&
+					$location_valid
+				) {
 
-				// Last Name field
-					$last_name = get_field('physician_last_name',$post_id);
-					$row[2] = html_entity_decode($last_name);
+					// NPI Number field
 
-				// Credentials (MD or DO) field
-					$row[3] = $degree_valid;
+						$row[0] = $npi; // only display value if value is not empty or zero
 
-				// Email Address field
-					$e = 1;
-					$contact_type = '';
-					$contact_info = '';
-					$email_list = '';
-					if( have_rows('physician_contact_information',$post_id) ):
-						while ( have_rows('physician_contact_information',$post_id) ) : the_row();
-							$contact_type = get_sub_field('type');
-							$contact_info = get_sub_field('information');
-							if ( $contact_type == 'email' && 2 > $e ) { // Only display the first instance of an email row
-								$email_list = $contact_info;
-								$e++;
-							}
-						endwhile;
-					endif;
-					$row[4] = $email_list;
+					// First Name field
 
-				// Facility Name field
-					$affiliation_list = '';
-					$i = 1;
-					if ( $affiliations ) {
-						foreach( $affiliations as $affiliation ):
-							$affiliation_object = get_term( $affiliation, 'affiliation');
-							$affiliation_aha_name = get_field('affiliation_name', $affiliation_object) ?: $affiliation_object->name;
-							$affiliation_aha_id = get_field('affiliation_id', $affiliation_object);
-							$affiliation_list .= $affiliation_aha_name . ( $affiliation_aha_id ? ' (AHA ID: ' . $affiliation_aha_id . ')' : '');
-							if( count($affiliations) > $i ) {
-								$affiliation_list .= ', ';
-							}
-							$i++;
-						endforeach;
-					}
-					$row[5] = $affiliation_list ? $affiliation_list : '';
+						$first_name = get_field( 'physician_first_name', $post_id );
+						$row[1] = html_entity_decode($first_name);
 
-				// Office Address 1 field
+					// Last Name field
 
-					// Get primary appointment location information
-					$l = 1;
-					$primary_appointment_address_1 = '';
-					$primary_appointment_address_2 = '';
-					$primary_appointment_city = '';
-					$primary_appointment_state = '';
-					$primary_appointment_zip = '';
-					$primary_appointment_phone = '';
-					$primary_appointment_fax = '';
-					if( $locations && $location_valid ) {
-						foreach( $locations as $location ) {
-							if ( 2 > $l ){
-								if ( get_post_status ( $location ) == 'publish' ) {
-									$primary_appointment_address_1 = get_field( 'location_address_1', $location ); // Get the street address
+						$last_name = get_field( 'physician_last_name', $post_id );
+						$row[2] = html_entity_decode($last_name);
 
-									// Construct the value for Address 2
-									$primary_appointment_building = get_field('location_building', $location ); // Get building taxonomy input
-									if ($primary_appointment_building) {
-										$building = get_term($primary_appointment_building, "building"); // Get building object
-										$building_slug = $building->slug; // Get the building slug
-										$building_name = $building->name; // Get the building name
-									}
-									$primary_appointment_floor_object = get_field_object('location_building_floor', $location ); // Get floor object from input
-										$primary_appointment_floor_value = $primary_appointment_floor_object['value']; // Get the floor selection value
-										$primary_appointment_floor_label = $primary_appointment_floor_value != "0" ? $primary_appointment_floor_object['choices'][ $primary_appointment_floor_value ] : ''; // If the floor value is not 0, get the floor selection label
-									$primary_appointment_suite = get_field('location_suite', $location ); // Get the suite input
-									$primary_appointment_address_2_arr = Array(); // Create empty array for constructing Address 2 value
-									if ( $primary_appointment_building && $building_slug != '_none' && isset($building_name) && !empty($building_name) ) {
-										// If the building input has a value
-										// and if the chosen building isn't 'None'
-										// and if the building's name exists...
-										$primary_appointment_address_2_arr[] = $building_name; // Add the building name to the Address 2 list
-									}
-									if ( $primary_appointment_floor_value != "0" && isset($primary_appointment_floor_label) & !empty($primary_appointment_floor_label) ) {
-										// If the building floor isn't set to 'Single-Story Building'
-										// and if the floor's label exists...
-										$primary_appointment_address_2_arr[] = $primary_appointment_floor_label; // Add the building floor to the Address 2 list
-									}
-									if ( isset($primary_appointment_suite) & !empty($primary_appointment_suite) ) {
-										// If the suite exists...
-										$primary_appointment_address_2_arr[] = $primary_appointment_suite; // Add the suite to the Address 2 list
-									}
-									$primary_appointment_address_2 = implode(', ', $primary_appointment_address_2_arr); // Create a comma-separated list from the array
-									$primary_appointment_address_2_deprecated = get_field('location_address_2', $location ); // Get the deprecated Address 2 input
-									if ( !$primary_appointment_address_2 ) {
-										// If the non-deprecated Address 2 value doesn't exist...
-										$primary_appointment_address_2 = $primary_appointment_address_2_deprecated; // Set the Address 2 value using the deprecated input value
-									}
+					// Credentials (MD or DO) field
 
-									// Get remaining address values
-									$primary_appointment_city = get_field( 'location_city', $location ); // Get the city
-									$primary_appointment_state = get_field( 'location_state', $location ); // Get the state
-									$primary_appointment_zip = get_field( 'location_zip', $location ); // Get the ZIP code
-									$primary_appointment_phone = get_field( 'location_phone', $location ); // Get the general clinic phone number
-									$primary_appointment_fax = get_field( 'location_fax', $location ); // Get the clinic fax number
-									$l++;
+						$row[3] = $degree_valid;
+
+					// Email Address field
+
+						$e = 1;
+						$contact_type = '';
+						$contact_info = '';
+						$email_list = '';
+
+						if ( have_rows( 'physician_contact_information', $post_id ) ) {
+
+							while ( have_rows( 'physician_contact_information', $post_id ) ) {
+
+								the_row();
+
+								$contact_type = get_sub_field('type');
+								$contact_info = get_sub_field('information');
+
+								if (
+									$contact_type == 'email'
+									&&
+									2 > $e
+								) { // Only display the first instance of an email row
+
+									$email_list = $contact_info;
+									$e++;
+
 								}
+
+							} // endwhile
+
+						} // endif
+
+						$row[4] = $email_list;
+
+					// Facility Name field
+
+						$affiliation_list = '';
+						$i = 1;
+
+						if ( $affiliations ) {
+
+							foreach ( $affiliations as $affiliation ) {
+
+								$affiliation_object = get_term( $affiliation, 'affiliation' );
+								$affiliation_aha_name = get_field( 'affiliation_name', $affiliation_object ) ?: $affiliation_object->name;
+								$affiliation_aha_id = get_field( 'affiliation_id', $affiliation_object );
+								$affiliation_list .= $affiliation_aha_name . ( $affiliation_aha_id ? ' (AHA ID: ' . $affiliation_aha_id . ')' : '');
+
+								if ( count($affiliations) > $i ) {
+
+									$affiliation_list .= ', ';
+
+								}
+
+								$i++;
+
+							} // endforeach
+						}
+
+						$row[5] = $affiliation_list ? $affiliation_list : '';
+
+					// Office Address 1 field
+
+						// Get primary appointment location information
+
+							$l = 1;
+							$primary_appointment_address_1 = '';
+							$primary_appointment_address_2 = '';
+							$primary_appointment_city = '';
+							$primary_appointment_state = '';
+							$primary_appointment_zip = '';
+							$primary_appointment_phone = '';
+							$primary_appointment_fax = '';
+
+							if ( $locations && $location_valid ) {
+
+								foreach ( $locations as $location ) {
+
+									if ( 2 > $l ){
+
+										if ( get_post_status ( $location ) == 'publish' ) {
+
+											$primary_appointment_address_1 = get_field( 'location_address_1', $location ); // Get the street address
+
+											// Construct the value for Address 2
+
+												$primary_appointment_building = get_field( 'location_building', $location ); // Get building taxonomy input
+
+												if ( $primary_appointment_building ) {
+
+													$building = get_term($primary_appointment_building, "building"); // Get building object
+													$building_slug = $building->slug; // Get the building slug
+													$building_name = $building->name; // Get the building name
+
+												}
+
+												$primary_appointment_floor_object = get_field_object( 'location_building_floor', $location ); // Get floor object from input
+													$primary_appointment_floor_value = $primary_appointment_floor_object['value']; // Get the floor selection value
+													$primary_appointment_floor_label = $primary_appointment_floor_value != "0" ? $primary_appointment_floor_object['choices'][ $primary_appointment_floor_value ] : ''; // If the floor value is not 0, get the floor selection label
+												$primary_appointment_suite = get_field( 'location_suite', $location ); // Get the suite input
+												$primary_appointment_address_2_arr = Array(); // Create empty array for constructing Address 2 value
+
+												if (
+													$primary_appointment_building
+													&&
+													$building_slug != '_none'
+													&&
+													isset($building_name)
+													&&
+													!empty($building_name)
+												) {
+
+													/**
+													 * If the building input has a value
+													 * and if the chosen building isn't 'None'
+													 * and if the building's name exists...
+													 */
+
+													$primary_appointment_address_2_arr[] = $building_name; // Add the building name to the Address 2 list
+
+												}
+
+												if (
+													$primary_appointment_floor_value != "0"
+													&&
+													isset($primary_appointment_floor_label)
+													&&
+													!empty($primary_appointment_floor_label)
+												) {
+
+													/**
+													 * If the building floor isn't set to 'Single-Story Building'
+													 * and if the floor's label exists...
+													 */
+
+													$primary_appointment_address_2_arr[] = $primary_appointment_floor_label; // Add the building floor to the Address 2 list
+
+												}
+
+												if (
+													isset($primary_appointment_suite)
+													&&
+													!empty($primary_appointment_suite)
+												) {
+
+													/**
+													 * If the suite exists...
+													 */
+
+													$primary_appointment_address_2_arr[] = $primary_appointment_suite; // Add the suite to the Address 2 list
+
+												}
+
+												$primary_appointment_address_2 = implode( ', ', $primary_appointment_address_2_arr ); // Create a comma-separated list from the array
+												$primary_appointment_address_2_deprecated = get_field( 'location_address_2', $location ); // Get the deprecated Address 2 input
+
+												if ( !$primary_appointment_address_2 ) {
+
+													/**
+													 * If the non-deprecated Address 2 value doesn't exist...
+													 */
+
+													$primary_appointment_address_2 = $primary_appointment_address_2_deprecated; // Set the Address 2 value using the deprecated input value
+
+												}
+
+											// Get remaining address values
+
+												$primary_appointment_city = get_field( 'location_city', $location ); // Get the city
+												$primary_appointment_state = get_field( 'location_state', $location ); // Get the state
+												$primary_appointment_zip = get_field( 'location_zip', $location ); // Get the ZIP code
+												$primary_appointment_phone = get_field( 'location_phone', $location ); // Get the general clinic phone number
+												$primary_appointment_fax = get_field( 'location_fax', $location ); // Get the clinic fax number
+
+											$l++;
+
+										}
+
+									}
+
+								} // endforeach
 							}
-						} // endforeach
-					}
-					$row[6] = $primary_appointment_address_1 ? html_entity_decode($primary_appointment_address_1) : '';
 
-				// Office Address 2 field
-					$row[7] = $primary_appointment_address_2 ? html_entity_decode($primary_appointment_address_2) : '';
+							$row[6] = $primary_appointment_address_1 ? html_entity_decode($primary_appointment_address_1) : '';
 
-				// Office City field
-					$row[8] = $primary_appointment_city ? $primary_appointment_city : '';
+					// Office Address 2 field
 
-				// Office State field
-					$row[9] = $primary_appointment_state ? $primary_appointment_state : '';
+						$row[7] = $primary_appointment_address_2 ? html_entity_decode($primary_appointment_address_2) : '';
 
-				// Office Zip field
-					$row[10] = $primary_appointment_zip ? $primary_appointment_zip : '';
+					// Office City field
 
-				// Phone field
-					$row[11] = $primary_appointment_phone ? $primary_appointment_phone : '';
+						$row[8] = $primary_appointment_city ? $primary_appointment_city : '';
 
-				// Fax field
-					$row[12] = $primary_appointment_fax ? $primary_appointment_fax : '';
+					// Office State field
 
-				// Specialty field
-					// Intentionally left blank
-					$row[13] = '';
+						$row[9] = $primary_appointment_state ? $primary_appointment_state : '';
 
-				// Sub-Specialty field
-					// Intentionally left blank
-					$row[14] = '';
+					// Office ZIP Code field
 
-			}
-		$table_body[] = $row;
-		endwhile;
-	endif;
+						$row[10] = $primary_appointment_zip ? $primary_appointment_zip : '';
+
+					// Phone field
+
+						$row[11] = $primary_appointment_phone ? $primary_appointment_phone : '';
+
+					// Fax field
+
+						$row[12] = $primary_appointment_fax ? $primary_appointment_fax : '';
+
+					// Specialty field
+
+						/**
+						 * Intentionally left blank
+						 */
+
+						$row[13] = '';
+
+					// Sub-Specialty field
+
+						/**
+						 * Intentionally left blank
+						 */
+
+						$row[14] = '';
+
+				}
+
+			$table_body[] = $row;
+
+		} // endwhile
+
+	} // endif
 
 	ob_end_clean ();
+
 	$filename = 'Doximity_List_' . time() . '.csv';
 	$delimiter=",";
 	$fh = @fopen( 'php://output', 'w' );
@@ -323,45 +511,66 @@ function doximity_csv_export() {
 	header( 'Pragma: no-cache' ); // no cache
 	header( 'Expires: 0' ); // expire date
 	fputcsv( $fh, $table_head, $delimiter );
-	foreach ( $table_body as $data_row )
-	{
+
+	foreach ( $table_body as $data_row ) {
+
 		fputcsv( $fh, $data_row, $delimiter );
+
 	}
 
 	exit();
+
 }
 
 function gmb_provider_csv_export() {
+
 	// Check for current user privileges
-	if( !current_user_can( 'manage_options' ) ){ return false; }
+
+		if ( !current_user_can( 'manage_options' ) ) {
+
+			return false;
+
+		}
 
 	// Check if we are in WP-Admin
-	if( !is_admin() ){ return false; }
+
+		if ( !is_admin() ) {
+
+			return false;
+
+		}
 
 	// Nonce Check
-	$nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
-	if ( ! wp_verify_nonce( $nonce, 'download_gmb_provider_csv' ) ) {
-		die( 'Security check error' );
-	}
+
+		$nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+
+		if ( ! wp_verify_nonce( $nonce, 'download_gmb_provider_csv' ) ) {
+
+			die( 'Security check error' );
+
+		}
 
 	ob_start();
 
 	// Custom WP_Query args
-	$args = array(
-		'post_type' => 'provider',
-		'post_status' => 'publish',
-		'posts_per_page' => '-1', // -1 => Set for all
-		'orderby' => 'title',
-		'order' => 'ASC',
-		// 'paged' => get_query_var( 'paged' ),
-	);
+
+		$args = array(
+			'post_type' => 'provider',
+			'post_status' => 'publish',
+			'posts_per_page' => '-1', // -1 => Set for all
+			'orderby' => 'title',
+			'order' => 'ASC',
+			// 'paged' => get_query_var( 'paged' ),
+		);
 
 	// Bring in variables from outside of the function
-	global $wp_query; // WordPress-specific global variable
+
+		global $wp_query; // WordPress-specific global variable
 
 	$wp_query = new WP_Query( $args );
 
-	if ( $wp_query->have_posts() ) :
+	if ( $wp_query->have_posts() ) {
+
 		$table_head = array();
 		$table_head[0] = 'Store code';
 		$table_head[1] = 'Business name';
@@ -658,439 +867,493 @@ function gmb_provider_csv_export() {
 		// $table_head[] = 'Amenities: Wi-Fi (wi_fi)';
 
 		$table_body = array();
-		while( $wp_query->have_posts() ) : $wp_query->the_post();
+
+		while ( $wp_query->have_posts() ) {
+
+			$wp_query->the_post();
+
 			$post_id = get_the_ID();
 
 			// COVID-19 Restrictions
-			// Set to true if COVID-19 restrictions are still in place.
-			$covid19 = true;
+
+				/**
+				 * Set to true if COVID-19 restrictions are still in place.
+				 */
+
+				$covid19 = true;
 
 			// Get slug
-			$profile_slug = get_post_field( 'post_name', $post_id );
+
+				$profile_slug = get_post_field( 'post_name', $post_id );
 
 			// List degrees
-			$degrees = get_field('physician_degree',$post_id);
-			$degree_list = '';
-			$d = 1;
-			if ( $degrees ) {
-				foreach( $degrees as $degree ):
-					$degree_name = get_term( $degree, 'degree');
-					$degree_list .= $degree_name->name;
-					if( count($degrees) > $d ) {
-						$degree_list .= ', ';
-					}
-					$d++;
-				endforeach;
-			}
+
+				$degrees = get_field( 'physician_degree', $post_id );
+				$degree_list = '';
+				$d = 1;
+
+				if ( $degrees ) {
+
+					foreach ( $degrees as $degree ) {
+
+						$degree_name = get_term( $degree, 'degree');
+						$degree_list .= $degree_name->name;
+
+						if ( count($degrees) > $d ) {
+
+							$degree_list .= ', ';
+
+						}
+
+						$d++;
+
+					} // endforeach
+
+				}
 
 			// Check for valid locations
-			$locations = get_field('physician_locations', $post_id);
-			$location_valid = false;
-			if ( $locations ) {
-				foreach( $locations as $location ) {
-					if ( get_post_status ( $location ) == 'publish' ) {
-						$location_valid = true;
-						$break;
+
+				$locations = get_field( 'physician_locations', $post_id );
+				$location_valid = false;
+
+				if ( $locations ) {
+
+					foreach ( $locations as $location ) {
+
+						if ( get_post_status ( $location ) == 'publish' ) {
+
+							$location_valid = true;
+							$break;
+
+						}
+
 					}
+
 				}
-			}
 
 			// Create location variables
-			$l = 1;
-			$location_title = '';
-			$location_address_1 = '';
-			$location_address_2 = '';
-			$location_city = '';
-			$location_state = '';
-			$location_zip = '';
-			$location_phone = '';
-			$location_fax = '';
-			$location_telemed_query = '';
+
+				$l = 1;
+				$location_title = '';
+				$location_address_1 = '';
+				$location_address_2 = '';
+				$location_city = '';
+				$location_state = '';
+				$location_zip = '';
+				$location_phone = '';
+				$location_fax = '';
+				$location_telemed_query = '';
 
 			// Create the description variables
-			$prefix = get_field('physician_prefix',$post_id);
-			$full_name = get_field('physician_first_name',$post_id) .' ' .(get_field('physician_middle_name',$post_id) ? get_field('physician_middle_name',$post_id) . ' ' : '') . get_field('physician_last_name',$post_id) . (get_field('physician_pedigree',$post_id) ? '&nbsp;' . get_field('physician_pedigree',$post_id) : '') . ( $degree_list ? ', ' . $degree_list : '' );
-			$medium_name = ($prefix ? $prefix .' ' : '') . get_field('physician_first_name',$post_id) .' ' .(get_field('physician_middle_name',$post_id) ? get_field('physician_middle_name',$post_id) . ' ' : '') . get_field('physician_last_name',$post_id);
-			$short_name = $prefix ? $prefix .'&nbsp;' .get_field('physician_last_name',$post_id) : get_field('physician_first_name',$post_id) .' ' .(get_field('physician_middle_name',$post_id) ? get_field('physician_middle_name',$post_id) . ' ' : '') . get_field('physician_last_name',$post_id) . (get_field('physician_pedigree',$post_id) ? '&nbsp;' . get_field('physician_pedigree',$post_id) : '');
-			$resident = get_field('physician_resident',$post_id);
-			$provider_specialty = get_field('physician_title',$post_id);
-			$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
-			$provider_specialty_name = $provider_specialty_term->name;
-			$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term);
-			$provider_occupation_title = $provider_occupation_title ?: $provider_specialty_name;
-			$vowels = array('a','e','i','o','u');
-			if (in_array(strtolower($provider_occupation_title)[0], $vowels)) { // Defines a or an, based on whether clinical occupation title starts with vowel
-				$provider_occupation_title_indef_article = 'an';
-			} else {
-				$provider_occupation_title_indef_article = 'a';
-			}
 
-			$provider_gmb_exclude = get_field( 'physician_gmb_exclude', $post_id );
-			$provider_gmb_cats = get_field( 'physician_gmb_cat', $post_id );
-			$provider_gmb_cat_primary_name = 'Doctor';
-			$provider_gmb_cat_additional_names = '';
-			$c = 1;
-			if( $provider_gmb_cats ) {
-				foreach( $provider_gmb_cats as $provider_gmb_cat ) {
-					$provider_gmb_cat_term = get_term($provider_gmb_cat, 'gmb_cat_provider');
-					if ( 2 > $c ){
-						$provider_gmb_cat_primary_name = esc_html( $provider_gmb_cat_term->name );
-					} elseif ( 2 == $c ) {
-						$provider_gmb_cat_additional_names = esc_html( $provider_gmb_cat_term->name );
-					} elseif ( 11 > $c ) {
-						$provider_gmb_cat_additional_names .= ', ' . esc_html( $provider_gmb_cat_term->name );
-					}
-					$c++;
-				} // endforeach
-			}
+				$prefix = get_field( 'physician_prefix', $post_id );
+				$full_name = get_field( 'physician_first_name', $post_id ) .' ' .(get_field( 'physician_middle_name', $post_id ) ? get_field( 'physician_middle_name', $post_id ) . ' ' : '') . get_field( 'physician_last_name', $post_id ) . (get_field( 'physician_pedigree', $post_id ) ? '&nbsp;' . get_field( 'physician_pedigree', $post_id ) : '') . ( $degree_list ? ', ' . $degree_list : '' );
+				$medium_name = ($prefix ? $prefix .' ' : '') . get_field( 'physician_first_name', $post_id ) .' ' .(get_field( 'physician_middle_name', $post_id ) ? get_field( 'physician_middle_name', $post_id ) . ' ' : '') . get_field( 'physician_last_name', $post_id );
+				$short_name = $prefix ? $prefix .'&nbsp;' .get_field( 'physician_last_name', $post_id ) : get_field( 'physician_first_name', $post_id ) .' ' .(get_field( 'physician_middle_name', $post_id ) ? get_field( 'physician_middle_name', $post_id ) . ' ' : '') . get_field( 'physician_last_name', $post_id ) . (get_field( 'physician_pedigree', $post_id ) ? '&nbsp;' . get_field( 'physician_pedigree', $post_id ) : '');
+				$resident = get_field( 'physician_resident', $post_id );
+				$provider_specialty = get_field( 'physician_title', $post_id );
+				$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+				$provider_specialty_name = $provider_specialty_term->name;
+				$provider_occupation_title = get_field( 'clinical_specialization_title', $provider_specialty_term );
+				$provider_occupation_title = $provider_occupation_title ?: $provider_specialty_name;
+				$vowels = array('a','e','i','o','u');
+
+				if ( in_array(strtolower($provider_occupation_title)[0], $vowels)) { // Defines a or an, based on whether clinical occupation title starts with vowel
+
+					$provider_occupation_title_indef_article = 'an';
+
+				} else {
+
+					$provider_occupation_title_indef_article = 'a';
+
+				}
+
+				$provider_gmb_exclude = get_field( 'physician_gmb_exclude', $post_id );
+				$provider_gmb_cats = get_field( 'physician_gmb_cat', $post_id );
+				$provider_gmb_cat_primary_name = 'Doctor';
+				$provider_gmb_cat_additional_names = '';
+				$c = 1;
+
+				if ( $provider_gmb_cats ) {
+
+					foreach ( $provider_gmb_cats as $provider_gmb_cat ) {
+
+						$provider_gmb_cat_term = get_term($provider_gmb_cat, 'gmb_cat_provider');
+
+						if ( 2 > $c ){
+
+							$provider_gmb_cat_primary_name = esc_html( $provider_gmb_cat_term->name );
+
+						} elseif ( 2 == $c ) {
+
+							$provider_gmb_cat_additional_names = esc_html( $provider_gmb_cat_term->name );
+
+						} elseif ( 11 > $c ) {
+
+							$provider_gmb_cat_additional_names .= ', ' . esc_html( $provider_gmb_cat_term->name );
+
+						}
+
+						$c++;
+
+					} // endforeach
+
+				}
 
 			// Create the table
-			if ( $locations && $location_valid && !$resident && !$provider_gmb_exclude ) {
-				$row = array();
 
-				// Create row for each valid location
-				foreach( $locations as $location ) {
-					if ( get_post_status ( $location ) == 'publish' ) {
+				if ( $locations && $location_valid && !$resident && !$provider_gmb_exclude ) {
 
-						// Store code
-							$location_slug = get_post_field( 'post_name', $location );
-							$store_code = $profile_slug . '_' . $location_slug;
+					$row = array();
 
-							$row[0] = $store_code; // . '-' . implode(",",$locations) . '-' . $location;
+					// Create row for each valid location
+					foreach ( $locations as $location ) {
+						if ( get_post_status ( $location ) == 'publish' ) {
 
-						// Business name
-							$row[1] = 'UAMS Health - ' . html_entity_decode($full_name);
+							// Store code
+								$location_slug = get_post_field( 'post_name', $location );
+								$store_code = $profile_slug . '_' . $location_slug;
 
-						// Address line 1
+								$row[0] = $store_code; // . '-' . implode(",",$locations) . '-' . $location;
 
-							// Parent Location
-							$location_post_id = $location;
-							$location_child_id = $location;
-							$location_has_parent = get_field('location_parent',$location_post_id);
-							$location_parent_id = get_field('location_parent_id',$location_post_id);
-							$location_parent_title = ''; // Eliminate PHP errors
-							$location_parent_url = ''; // Eliminate PHP errors
-							$location_parent_location = ''; // Eliminate PHP errors
-							if ($location_has_parent && $location_parent_id) {
-								$location_parent_location = get_post( $location_parent_id );
-							}
-							// Get Post ID for Address & Image fields
-							if ($location_parent_location) {
-								$location_post_id = $location_parent_location->ID;
-								$location_parent_title = $location_parent_location->post_title;
-								$location_parent_url = user_trailingslashit(get_permalink( $location_post_id ));
-							}
-
-							// Create location variables
-							$location_title = get_the_title( $location_child_id );
-							$location_address_1 = get_field( 'location_address_1', $location_post_id );
-							$location_building = get_field('location_building', $location_post_id );
-							if ($location_building) {
-								$building = get_term($location_building, "building");
-								$building_slug = $building->slug;
-								$building_name = $building->name;
-							}
-							$location_floor = get_field_object('location_building_floor', $location_post_id );
-								$location_floor_value = '';
-								$location_floor_label = '';
-								if ( $location_floor ) {
-									$location_floor_value = $location_floor['value'];
-									$location_floor_label = $location_floor['choices'][ $location_floor_value ];
-								}
-							$location_suite = get_field('location_suite', $location_post_id );
-
-								// Option 1:
-								// Address Line 1 = Street address (covered above)
-								// Address Line 2+ = Cascading options based on presence of values...
-								// 	Building Name
-								// 	Building Floor Number
-								// 	Suite Number
-
-								// $location_addresses = [];
-								// if ( $location_building && $building_slug != '_none' ) {
-								//	 array_push($location_addresses, $building_name);
-								// }
-								// if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ) {
-								//	 array_push($location_addresses, $location_floor_label);
-								// }
-								// if ( $location_suite && !empty($location_suite) ) {
-								//	 array_push($location_addresses, $location_suite);
-								// }
-								// $location_address_2 = $location_addresses[0];
-								// $location_address_3 = $location_addresses[1];
-								// $location_address_4 = $location_addresses[2];
-								// $location_address_5 = $location_addresses[3];
-								// $location_address_2_deprecated = get_field('location_address_2', $location_post_id );
-								// if (!$location_address_2) {
-								//	 $location_address_2 = $location_address_2_deprecated;
-								// }
-
-								// Option 2:
-								// Address Line 1 = Street address (covered above)
-								// Address Line 2+ = Cascading options based on presence of values...
-								// 	Building Name
-								// 	Top-Level Location Name
-								// 	Child Location Name
-
-								$location_addresses = [];
-								if ( $location_building && $building_slug != '_none' ) {
-									array_push($location_addresses, $building_name);
-								}
-								if ( !$location_has_parent ) {
-									array_push($location_addresses, $location_title);
-								} else {
-									array_push($location_addresses, $location_parent_title, $location_title);
-								}
-
-								$location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
-								$location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
-								$location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
-								$location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
-
-								$location_city = get_field( 'location_city', $location_post_id );
-								$location_state = get_field( 'location_state', $location_post_id );
-								$location_zip = get_field( 'location_zip', $location_post_id );
-								$location_phone = get_field( 'location_phone', $location_child_id );
-								$location_fax = get_field( 'location_fax', $location_child_id );
-								$location_hours_group = get_field('location_hours_group', $location_child_id );
-								$location_telemed_query = $location_hours_group['location_telemed_query'];
-
-								$location_gmb_wheelchair_elevator = get_field( 'has_wheelchair_accessible_elevator', $location_post_id );
-								$location_gmb_wheelchair_elevator = ( $location_gmb_wheelchair_elevator == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
-								$location_gmb_wheelchair_entrance = get_field( 'has_wheelchair_accessible_entrance', $location_post_id );
-								$location_gmb_wheelchair_entrance = ( $location_gmb_wheelchair_entrance == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_entrance;
-								$location_gmb_wheelchair_restroom = get_field( 'has_wheelchair_accessible_restroom', $location_post_id );
-								$location_gmb_wheelchair_restroom = ( $location_gmb_wheelchair_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_restroom;
-								$location_gmb_restroom = get_field( 'has_restroom', $location_post_id );
-								$location_gmb_restroom = ( $location_gmb_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_restroom;
-								$location_gmb_appointments = get_field( 'requires_appointments', $location_post_id );
-								$location_gmb_appointments = ( $location_gmb_appointments == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_appointments;
-								$location_gmb_temp_customers = get_field( 'requires_temperature_check_customers', $location_post_id );
-								$location_gmb_temp_customers = ( $location_gmb_temp_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_customers;
-								$location_gmb_masks_customers = get_field( 'requires_masks_customers', $location_post_id );
-								$location_gmb_masks_customers = ( $location_gmb_masks_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_customers;
-								$location_gmb_temp_staff = get_field( 'requires_temperature_check_staff', $location_post_id );
-								$location_gmb_temp_staff = ( $location_gmb_temp_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_staff;
-								$location_gmb_masks_staff = get_field( 'requires_masks_staff', $location_post_id );
-								$location_gmb_masks_staff = ( $location_gmb_masks_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_staff;
-								$location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
-								$location_gmb_sanitizing = ( $location_gmb_sanitizing == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
-								$location_map = get_field( 'location_map', $location_post_id );
-								$location_latitude = '';
-								$location_longitude = '';
-								if ( $location_map ) {
-									$location_latitude = $location_map['lat'];
-									$location_longitude = $location_map['lng'];
-								}
+							// Business name
+								$row[1] = 'UAMS Health - ' . html_entity_decode($full_name);
 
 							// Address line 1
-								$row[2] = $location_address_1 ? html_entity_decode($location_address_1) : '';
 
-							// Address line 2
-								$row[3] = ( $location_address_2 && !empty($location_address_2) ) ? html_entity_decode($location_address_2) : '';
+								// Parent Location
+								$location_post_id = $location;
+								$location_child_id = $location;
+								$location_has_parent = get_field( 'location_parent', $location_post_id );
+								$location_parent_id = get_field( 'location_parent_id', $location_post_id );
+								$location_parent_title = ''; // Eliminate PHP errors
+								$location_parent_url = ''; // Eliminate PHP errors
+								$location_parent_location = ''; // Eliminate PHP errors
+								if ( $location_has_parent && $location_parent_id ) {
+									$location_parent_location = get_post( $location_parent_id );
+								}
+								// Get Post ID for Address & Image fields
+								if ( $location_parent_location ) {
+									$location_post_id = $location_parent_location->ID;
+									$location_parent_title = $location_parent_location->post_title;
+									$location_parent_url = user_trailingslashit(get_permalink( $location_post_id ));
+								}
 
-							// Address line 3
-								$row[4] = ( $location_address_3 && !empty($location_address_3) ) ? html_entity_decode($location_address_3) : '';
-
-							// Address line 4
-								$row[5] = ( $location_address_4 && !empty($location_address_4) ) ? html_entity_decode($location_address_4) : '';
-
-							// Address line 5
-								$row[6] = ( $location_address_5 && !empty($location_address_5) ) ? html_entity_decode($location_address_5) : '';
-
-							// Sub-locality
-							// Intentionally left blank
-								// $row[7] = '';
-
-							// Locality
-								$row[7] = $location_city ? $location_city : '';
-
-							// Administrative area
-								$row[8] = $location_state ? $location_state : '';
-
-							// Country / Region
-								$row[9] = 'US';
-
-							// Postal code
-								$row[10] = $location_zip ? $location_zip : '';
-
-							// Latitude
-								$row[11] = $location_latitude ? $location_latitude : '';
-
-							// Longitude
-								$row[12] = $location_longitude ? $location_longitude : '';
-
-							// Primary phone
-								$row[13] = $location_phone ? $location_phone : '';
-
-							// Additional phones
-							// Intentionally left blank
-								// $row[15] = '';
-
-							// Website
-								$row[14] = 'https://uamshealth.com/provider/' . $profile_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=profile&utm_specs=' . $store_code;
-
-							// Primary category
-								$row[15] = $provider_gmb_cat_primary_name;
-
-							// Additional categories
-								$row[16] = $provider_gmb_cat_additional_names;
-
-							// Sunday hours
-							// Intentionally left blank for now
-							// Format = 08:00-16:30
-								// $row[19] = '';
-
-							// Monday hours
-							// Intentionally left blank for now
-							// Format = 08:00-16:30
-								// $row[20] = '';
-
-							// Tuesday hours
-							// Intentionally left blank for now
-							// Format = 08:00-16:30
-								// $row[21] = '';
-
-							// Wednesday hours
-							// Intentionally left blank for now
-							// Format = 08:00-16:30
-								// $row[22] = '';
-
-							// Thursday hours
-							// Intentionally left blank for now
-							// Format = 08:00-16:30
-								// $row[23] = '';
-
-							// Friday hours
-							// Intentionally left blank for now
-							// Format = 08:00-16:30
-								// $row[24] = '';
-
-							// Saturday hours
-							// Intentionally left blank for now
-							// Format = 08:00-16:30
-								// $row[25] = '';
-
-							// Special hours
-							// Intentionally left blank for now
-							// Format = 2021-12-31: 05:00-23:00, 2022-01-01: x
-								// $row[26] = '';
-
-							// From the business
-								$excerpt = '';
-								$bio = get_field('physician_clinical_bio',$post_id); // Get the clinical bio
-								$bio = wp_strip_all_tags($bio); // Strip all HTML tags
-								$bio = str_replace(array("\n", "\r"), ' ', $bio); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
-								$bio = mb_strimwidth($bio, 0, 747, '...'); // Truncate the string
-								$bio_short = get_field('physician_short_clinical_bio',$post_id); // Strip all HTML tags
-								$bio_short = wp_strip_all_tags($bio_short); // Get the short clinical bio
-								$bio_short = str_replace(array("\n", "\r"), ' ', $bio_short); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
-								$bio_short = mb_strimwidth($bio_short, 0, 747, '...'); // Truncate the string
-
-								if (empty($excerpt)){
-									if ($bio_short){
-										$excerpt = $bio_short;
-									} elseif ($bio) {
-										$excerpt = $bio;
-									} else {
-										$fallback_desc = $medium_name . ' is ' . ($provider_occupation_title ? $provider_occupation_title_indef_article . ' ' . strtolower($provider_occupation_title) : 'a health care provider' ) . ($location_title ? ' at ' . $location_title : '') . ' employed by UAMS Health.';
-										$excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 747, '...');
+								// Create location variables
+								$location_title = get_the_title( $location_child_id );
+								$location_address_1 = get_field( 'location_address_1', $location_post_id );
+								$location_building = get_field( 'location_building', $location_post_id );
+								if ( $location_building ) {
+									$building = get_term($location_building, "building");
+									$building_slug = $building->slug;
+									$building_name = $building->name;
+								}
+								$location_floor = get_field_object('location_building_floor', $location_post_id );
+									$location_floor_value = '';
+									$location_floor_label = '';
+									if ( $location_floor ) {
+										$location_floor_value = $location_floor['value'];
+										$location_floor_label = $location_floor['choices'][ $location_floor_value ];
 									}
-								}
-								$row[17] = html_entity_decode($excerpt);
+								$location_suite = get_field( 'location_suite', $location_post_id );
 
-							// Opening date
-							// Intentionally left blank
-								// $row[28] = '';
+									// Option 1:
+									// Address Line 1 = Street address (covered above)
+									// Address Line 2+ = Cascading options based on presence of values...
+									// 	Building Name
+									// 	Building Floor Number
+									// 	Suite Number
 
-							// Logo photo
-								$provider_gmb_logo_photo = UAMS_FAD_ROOT_URL . 'assets/img/uams-health-1024x1024.png';
-								$row[18] = $provider_gmb_logo_photo;
+									// $location_addresses = [];
+									// if ( $location_building && $building_slug != '_none' ) {
+									//	 array_push($location_addresses, $building_name);
+									// }
+									// if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ) {
+									//	 array_push($location_addresses, $location_floor_label);
+									// }
+									// if ( $location_suite && !empty($location_suite) ) {
+									//	 array_push($location_addresses, $location_suite);
+									// }
+									// $location_address_2 = $location_addresses[0];
+									// $location_address_3 = $location_addresses[1];
+									// $location_address_4 = $location_addresses[2];
+									// $location_address_5 = $location_addresses[3];
+									// $location_address_2_deprecated = get_field( 'location_address_2', $location_post_id );
+									// if ( !$location_address_2 ) {
+									//	 $location_address_2 = $location_address_2_deprecated;
+									// }
 
-							// Cover photo
-								$provider_image_wide = get_field( 'physician_image_wide', $post_id );
-								if ( function_exists( 'fly_add_image_size' ) && !empty($provider_image_wide) ) {
-									$provider_gmb_cover_photo = image_sizer($provider_image_wide, 2120, 1192, 'center', 'center'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
-								} else {
-									$provider_gmb_cover_photo = wp_get_attachment_image_url($provider_image_wide, 'large');
-								}
-								$row[19] = $provider_gmb_cover_photo ?: '';
+									// Option 2:
+									// Address Line 1 = Street address (covered above)
+									// Address Line 2+ = Cascading options based on presence of values...
+									// 	Building Name
+									// 	Top-Level Location Name
+									// 	Child Location Name
 
-							// Other photos
-							// Intentionally left blank
-								// $row[31] = '';
+									$location_addresses = [];
+									if ( $location_building && $building_slug != '_none' ) {
+										array_push($location_addresses, $building_name);
+									}
+									if ( !$location_has_parent ) {
+										array_push($location_addresses, $location_title);
+									} else {
+										array_push($location_addresses, $location_parent_title, $location_title);
+									}
 
-							// Labels
-								$service_line = '';
-								$service_line = get_field('physician_service_line',$post_id);
-								$service_line_name = $service_line ? get_term( $service_line, 'service_line' )->name : '';
+									$location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
+									$location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
+									$location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
+									$location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
 
-								$row[20] = $service_line_name;
+									$location_city = get_field( 'location_city', $location_post_id );
+									$location_state = get_field( 'location_state', $location_post_id );
+									$location_zip = get_field( 'location_zip', $location_post_id );
+									$location_phone = get_field( 'location_phone', $location_child_id );
+									$location_fax = get_field( 'location_fax', $location_child_id );
+									$location_hours_group = get_field( 'location_hours_group', $location_child_id );
+									$location_telemed_query = $location_hours_group['location_telemed_query'];
 
-							// AdWords location extensions phone
-							// Intentionally left blank
-								// $row[33] = '';
+									$location_gmb_wheelchair_elevator = get_field( 'has_wheelchair_accessible_elevator', $location_post_id );
+									$location_gmb_wheelchair_elevator = ( $location_gmb_wheelchair_elevator == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
+									$location_gmb_wheelchair_entrance = get_field( 'has_wheelchair_accessible_entrance', $location_post_id );
+									$location_gmb_wheelchair_entrance = ( $location_gmb_wheelchair_entrance == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_entrance;
+									$location_gmb_wheelchair_restroom = get_field( 'has_wheelchair_accessible_restroom', $location_post_id );
+									$location_gmb_wheelchair_restroom = ( $location_gmb_wheelchair_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_restroom;
+									$location_gmb_restroom = get_field( 'has_restroom', $location_post_id );
+									$location_gmb_restroom = ( $location_gmb_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_restroom;
+									$location_gmb_appointments = get_field( 'requires_appointments', $location_post_id );
+									$location_gmb_appointments = ( $location_gmb_appointments == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_appointments;
+									$location_gmb_temp_customers = get_field( 'requires_temperature_check_customers', $location_post_id );
+									$location_gmb_temp_customers = ( $location_gmb_temp_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_customers;
+									$location_gmb_masks_customers = get_field( 'requires_masks_customers', $location_post_id );
+									$location_gmb_masks_customers = ( $location_gmb_masks_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_customers;
+									$location_gmb_temp_staff = get_field( 'requires_temperature_check_staff', $location_post_id );
+									$location_gmb_temp_staff = ( $location_gmb_temp_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_staff;
+									$location_gmb_masks_staff = get_field( 'requires_masks_staff', $location_post_id );
+									$location_gmb_masks_staff = ( $location_gmb_masks_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_staff;
+									$location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
+									$location_gmb_sanitizing = ( $location_gmb_sanitizing == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
+									$location_map = get_field( 'location_map', $location_post_id );
+									$location_latitude = '';
+									$location_longitude = '';
+									if ( $location_map ) {
+										$location_latitude = $location_map['lat'];
+										$location_longitude = $location_map['lng'];
+									}
 
-							// Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)
-								if (!empty($location_gmb_wheelchair_elevator)) {
-									$row[21] = $location_gmb_wheelchair_elevator;
-								} else {
-									$row[21] = 'Yes';
-								}
+								// Address line 1
+									$row[2] = $location_address_1 ? html_entity_decode($location_address_1) : '';
 
-							// Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)
-								if (!empty($location_gmb_wheelchair_entrance)) {
-									$row[22] = $location_gmb_wheelchair_entrance;
-								} else {
-									$row[22] = 'Yes';
-								}
+								// Address line 2
+									$row[3] = ( $location_address_2 && !empty($location_address_2) ) ? html_entity_decode($location_address_2) : '';
 
-							// Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)
-								if (!empty($location_gmb_wheelchair_restroom)) {
-									$row[23] = $location_gmb_wheelchair_restroom;
-								} else {
-									$row[23] = 'Yes';
-								}
+								// Address line 3
+									$row[4] = ( $location_address_3 && !empty($location_address_3) ) ? html_entity_decode($location_address_3) : '';
 
-							// Amenities: Restroom (has_restroom)
-								if (!empty($location_gmb_restroom)) {
-									$row[24] = $location_gmb_restroom;
-								} else {
-									$row[24] = 'Yes';
-								}
+								// Address line 4
+									$row[5] = ( $location_address_4 && !empty($location_address_4) ) ? html_entity_decode($location_address_4) : '';
 
-							// Planning: Appointment required (requires_appointments)
-								if ( $covid19 ) {
-									if (!empty($location_gmb_appointments)) {
-										$row[25] = $location_gmb_appointments;
+								// Address line 5
+									$row[6] = ( $location_address_5 && !empty($location_address_5) ) ? html_entity_decode($location_address_5) : '';
+
+								// Sub-locality
+								// Intentionally left blank
+									// $row[7] = '';
+
+								// Locality
+									$row[7] = $location_city ? $location_city : '';
+
+								// Administrative area
+									$row[8] = $location_state ? $location_state : '';
+
+								// Country / Region
+									$row[9] = 'US';
+
+								// Postal code
+									$row[10] = $location_zip ? $location_zip : '';
+
+								// Latitude
+									$row[11] = $location_latitude ? $location_latitude : '';
+
+								// Longitude
+									$row[12] = $location_longitude ? $location_longitude : '';
+
+								// Primary phone
+									$row[13] = $location_phone ? $location_phone : '';
+
+								// Additional phones
+								// Intentionally left blank
+									// $row[15] = '';
+
+								// Website
+									$row[14] = 'https://uamshealth.com/provider/' . $profile_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=profile&utm_specs=' . $store_code;
+
+								// Primary category
+									$row[15] = $provider_gmb_cat_primary_name;
+
+								// Additional categories
+									$row[16] = $provider_gmb_cat_additional_names;
+
+								// Sunday hours
+								// Intentionally left blank for now
+								// Format = 08:00-16:30
+									// $row[19] = '';
+
+								// Monday hours
+								// Intentionally left blank for now
+								// Format = 08:00-16:30
+									// $row[20] = '';
+
+								// Tuesday hours
+								// Intentionally left blank for now
+								// Format = 08:00-16:30
+									// $row[21] = '';
+
+								// Wednesday hours
+								// Intentionally left blank for now
+								// Format = 08:00-16:30
+									// $row[22] = '';
+
+								// Thursday hours
+								// Intentionally left blank for now
+								// Format = 08:00-16:30
+									// $row[23] = '';
+
+								// Friday hours
+								// Intentionally left blank for now
+								// Format = 08:00-16:30
+									// $row[24] = '';
+
+								// Saturday hours
+								// Intentionally left blank for now
+								// Format = 08:00-16:30
+									// $row[25] = '';
+
+								// Special hours
+								// Intentionally left blank for now
+								// Format = 2021-12-31: 05:00-23:00, 2022-01-01: x
+									// $row[26] = '';
+
+								// From the business
+									$excerpt = '';
+									$bio = get_field( 'physician_clinical_bio', $post_id ); // Get the clinical bio
+									$bio = wp_strip_all_tags($bio); // Strip all HTML tags
+									$bio = str_replace(array("\n", "\r"), ' ', $bio); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
+									$bio = mb_strimwidth($bio, 0, 747, '...'); // Truncate the string
+									$bio_short = get_field( 'physician_short_clinical_bio', $post_id ); // Strip all HTML tags
+									$bio_short = wp_strip_all_tags($bio_short); // Get the short clinical bio
+									$bio_short = str_replace(array("\n", "\r"), ' ', $bio_short); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
+									$bio_short = mb_strimwidth($bio_short, 0, 747, '...'); // Truncate the string
+
+									if ( empty($excerpt)){
+										if ( $bio_short){
+											$excerpt = $bio_short;
+										} elseif ( $bio ) {
+											$excerpt = $bio;
+										} else {
+											$fallback_desc = $medium_name . ' is ' . ($provider_occupation_title ? $provider_occupation_title_indef_article . ' ' . strtolower($provider_occupation_title) : 'a health care provider' ) . ($location_title ? ' at ' . $location_title : '') . ' employed by UAMS Health.';
+											$excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 747, '...');
+										}
+									}
+									$row[17] = html_entity_decode($excerpt);
+
+								// Opening date
+								// Intentionally left blank
+									// $row[28] = '';
+
+								// Logo photo
+									$provider_gmb_logo_photo = UAMS_FAD_ROOT_URL . 'assets/img/uams-health-1024x1024.png';
+									$row[18] = $provider_gmb_logo_photo;
+
+								// Cover photo
+									$provider_image_wide = get_field( 'physician_image_wide', $post_id );
+									if ( function_exists( 'fly_add_image_size' ) && !empty($provider_image_wide) ) {
+										$provider_gmb_cover_photo = image_sizer($provider_image_wide, 2120, 1192, 'center', 'center'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
+									} else {
+										$provider_gmb_cover_photo = wp_get_attachment_image_url($provider_image_wide, 'large');
+									}
+									$row[19] = $provider_gmb_cover_photo ?: '';
+
+								// Other photos
+								// Intentionally left blank
+									// $row[31] = '';
+
+								// Labels
+									$service_line = '';
+									$service_line = get_field( 'physician_service_line', $post_id );
+									$service_line_name = $service_line ? get_term( $service_line, 'service_line' )->name : '';
+
+									$row[20] = $service_line_name;
+
+								// AdWords location extensions phone
+								// Intentionally left blank
+									// $row[33] = '';
+
+								// Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)
+									if ( !empty($location_gmb_wheelchair_elevator) ) {
+										$row[21] = $location_gmb_wheelchair_elevator;
+									} else {
+										$row[21] = 'Yes';
+									}
+
+								// Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)
+									if ( !empty($location_gmb_wheelchair_entrance) ) {
+										$row[22] = $location_gmb_wheelchair_entrance;
+									} else {
+										$row[22] = 'Yes';
+									}
+
+								// Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)
+									if ( !empty($location_gmb_wheelchair_restroom) ) {
+										$row[23] = $location_gmb_wheelchair_restroom;
+									} else {
+										$row[23] = 'Yes';
+									}
+
+								// Amenities: Restroom (has_restroom)
+									if ( !empty($location_gmb_restroom) ) {
+										$row[24] = $location_gmb_restroom;
+									} else {
+										$row[24] = 'Yes';
+									}
+
+								// Planning: Appointment required (requires_appointments)
+									if ( $covid19 ) {
+										if ( !empty($location_gmb_appointments) ) {
+											$row[25] = $location_gmb_appointments;
+										} else {
+											$row[25] = '';
+										}
 									} else {
 										$row[25] = '';
 									}
-								} else {
-									$row[25] = '';
-								}
 
-							// Service options: Has online care (has_video_visits)
-							// Value based on the relevant location profile
-								$row[50] = $location_telemed_query ? 'Yes' : '';
+								// Service options: Has online care (has_video_visits)
+								// Value based on the relevant location profile
+									$row[50] = $location_telemed_query ? 'Yes' : '';
 
-							// Place page URLs: COVID-19 info link (url_covid_19_info_page)
-								$row[42] = 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=covid-19-info-link&utm_specs=' . $store_code;
+								// Place page URLs: COVID-19 info link (url_covid_19_info_page)
+									$row[42] = 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=covid-19-info-link&utm_specs=' . $store_code;
 
-							// Place page URLs: Virtual care link (url_facility_telemedicine_page)
-								$row[44] = $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
+								// Place page URLs: Virtual care link (url_facility_telemedicine_page)
+									$row[44] = $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
 
-						$l++;
-					} else {
-						continue;
-					}
-					$table_body[] = $row;
-				} // endforeach
-			}
+							$l++;
+						} else {
+							continue;
+						}
+						$table_body[] = $row;
+					} // endforeach
+				}
+
 			// $table_body[] = $row;
-		endwhile;
-	endif;
+
+		} // endwhile
+
+	} // endif
+
 	ob_end_clean ();
+
 	$filename = 'GMB_Providers_' . time() . '.csv';
 	$delimiter=",";
 	$fh = @fopen( 'php://output', 'w' );
@@ -1102,42 +1365,60 @@ function gmb_provider_csv_export() {
 	header( 'Pragma: no-cache' ); // no cache
 	header( 'Expires: 0' ); // expire date
 	fputcsv( $fh, $table_head, $delimiter );
-	foreach ( $table_body as $data_row )
-	{
-		fputcsv( $fh, $data_row, $delimiter );
-	}
 
+	foreach ( $table_body as $data_row ) {
+
+		fputcsv( $fh, $data_row, $delimiter );
+
+	}
 
 	exit();
 }
 
 function gmb_location_csv_export() {
+
 	// Check for current user privileges
-	if( !current_user_can( 'manage_options' ) ){ return false; }
+
+		if ( !current_user_can( 'manage_options' ) ) {
+
+			return false;
+
+		}
 
 	// Check if we are in WP-Admin
-	if( !is_admin() ){ return false; }
+
+		if ( !is_admin() ) {
+
+			return false;
+
+		}
 
 	// Nonce Check
-	$nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
-	if ( ! wp_verify_nonce( $nonce, 'download_gmb_location_csv' ) ) {
-		die( 'Security check error' );
-	}
+
+		$nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+
+		if ( ! wp_verify_nonce( $nonce, 'download_gmb_location_csv' ) ) {
+
+			die( 'Security check error' );
+
+		}
 
 	ob_start();
 
 	// Custom WP_Query args
-	$args = array(
-		'post_type' => 'location',
-		'post_status' => 'publish',
-		'posts_per_page' => '-1', // Set for all
-		'orderby' => 'title',
-		'order' => 'ASC',
-	);
+
+		$args = array(
+			'post_type' => 'location',
+			'post_status' => 'publish',
+			'posts_per_page' => '-1', // Set for all
+			'orderby' => 'title',
+			'order' => 'ASC',
+		);
 
 	$query = new WP_Query( $args );
 
-	if ( $query->have_posts() ) :
+	if ( $query->have_posts() ) {
+
 		$table_head = array();
 		$table_head[0] = 'Store code';
 		$table_head[1] = 'Business name';
@@ -1434,425 +1715,591 @@ function gmb_location_csv_export() {
 		// $table_head[] = 'Amenities: Wi-Fi (wi_fi)';
 
 		$table_body = array();
-		while( $query->have_posts() ) : $query->the_post();
+
+		while ( $query->have_posts() ) {
+
+			$query->the_post();
+
 			// Parent Location
-			$location_post_id = get_the_ID();
-			$location_child_id = get_the_ID();
-			$location_has_parent = get_field('location_parent',$location_post_id);
-			$location_parent_id = get_field('location_parent_id',$location_post_id);
-			$location_parent_title = ''; // Eliminate PHP errors
-			$location_parent_url = ''; // Eliminate PHP errors
-			$location_parent_location = ''; // Eliminate PHP errors
-			if ($location_has_parent && $location_parent_id) {
-				$location_parent_location = get_post( $location_parent_id );
-			}
+
+				$location_post_id = get_the_ID();
+				$location_child_id = get_the_ID();
+				$location_has_parent = get_field( 'location_parent', $location_post_id );
+				$location_parent_id = get_field( 'location_parent_id', $location_post_id );
+				$location_parent_title = ''; // Eliminate PHP errors
+				$location_parent_url = ''; // Eliminate PHP errors
+				$location_parent_location = ''; // Eliminate PHP errors
+
+				if ( $location_has_parent && $location_parent_id ) {
+
+					$location_parent_location = get_post( $location_parent_id );
+
+				}
+
 			// Get Post ID for Address & Image fields
-			if ($location_parent_location) {
-				$location_post_id = $location_parent_location->ID;
-				$location_parent_title = $location_parent_location->post_title;
-				$location_parent_url = user_trailingslashit(get_permalink( $location_post_id ));
-			}
+
+				if ( $location_parent_location ) {
+
+					$location_post_id = $location_parent_location->ID;
+					$location_parent_title = $location_parent_location->post_title;
+					$location_parent_url = user_trailingslashit(get_permalink( $location_post_id ));
+
+				}
 
 			// COVID-19 Restrictions
-			// Set to true if COVID-19 restrictions are still in place.
-			$covid19 = true;
+
+				/**
+				 * Set to true if COVID-19 restrictions are still in place.
+				 */
+
+				$covid19 = true;
 
 			// Get slug
-			$store_code = ( $location_parent_location ? get_post_field( 'post_name', $location_post_id ) . '_' : '' ) . get_post_field( 'post_name', $location_child_id );
-			$location_slug = ( $location_parent_location ? get_post_field( 'post_name', $location_post_id ) . '/' : '' ) . get_post_field( 'post_name', $location_child_id );
+
+				$store_code = ( $location_parent_location ? get_post_field( 'post_name', $location_post_id ) . '_' : '' ) . get_post_field( 'post_name', $location_child_id );
+				$location_slug = ( $location_parent_location ? get_post_field( 'post_name', $location_post_id ) . '/' : '' ) . get_post_field( 'post_name', $location_child_id );
 
 			// Create location variables
-			$location_title = get_the_title( $location_child_id );
-			$location_address_1 = get_field( 'location_address_1', $location_post_id );
-			$location_building = get_field('location_building', $location_post_id );
-			if ($location_building) {
-				$building = get_term($location_building, 'building');
-				$building_slug = $building->slug;
-				$building_name = $building->name;
-			}
-			$location_floor = get_field_object('location_building_floor', $location_post_id );
-				$location_floor_value = '';
-				$location_floor_label = '';
-				if ( $location_floor ) {
-					$location_floor_value = $location_floor['value'];
-					$location_floor_label = $location_floor['choices'][ $location_floor_value ];
-				}
-			$location_suite = get_field('location_suite', $location_post_id );
 
-				// Option 1:
-				// Address Line 1 = Street address (covered above)
-				// Address Line 2+ = Cascading options based on presence of values...
-				// 	Building Name
-				// 	Building Floor Number
-				// 	Suite Number
+				$location_title = get_the_title( $location_child_id );
+				$location_address_1 = get_field( 'location_address_1', $location_post_id );
+				$location_building = get_field( 'location_building', $location_post_id );
 
-				$location_addresses = [];
-				if ( $location_building && $building_slug != '_none' ) {
-					array_push($location_addresses, $building_name);
-				}
-				if ( $location_floor && !empty($location_floor_value) && $location_floor_value != '0' ) {
-					array_push($location_addresses, $location_floor_label);
-				}
-				if ( $location_suite && !empty($location_suite) ) {
-					array_push($location_addresses, $location_suite);
-				}
-				$location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
-				$location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
-				$location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
-				$location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
-				$location_address_2_deprecated = get_field('location_address_2', $location_post_id );
-				if (!$location_address_2) {
-					$location_address_2 = $location_address_2_deprecated;
+				if ( $location_building ) {
+
+					$building = get_term($location_building, 'building');
+					$building_slug = $building->slug;
+					$building_name = $building->name;
+
 				}
 
-				// Option 2:
-				// Address Line 1 = Street address (covered above)
-				// Address Line 2+ = Cascading options based on presence of values...
-				// 	Building Name
-				// 	Top-Level Location Name
-				// 	Child Location Name
+				$location_floor = get_field_object('location_building_floor', $location_post_id );
+					$location_floor_value = '';
+					$location_floor_label = '';
 
-				// $location_addresses = [];
-				// if ( $location_building && $building_slug != '_none' ) {
-				//	 array_push($location_addresses, $building_name);
-				// }
-				// if ( !$location_has_parent ) {
-				//	 array_push($location_addresses, $location_title);
-				// } else {
-				//	 array_push($location_addresses, $location_parent_title, $location_title);
-				// }
-				// $location_address_2 = $location_addresses[0];
-				// $location_address_3 = $location_addresses[1];
-				// $location_address_4 = $location_addresses[2];
-				// $location_address_5 = $location_addresses[3];
+					if ( $location_floor ) {
 
-			$location_city = get_field( 'location_city', $location_post_id );
-			$location_state = get_field( 'location_state', $location_post_id );
-			$location_zip = get_field( 'location_zip', $location_post_id );
-			$location_phone = get_field( 'location_phone', $location_child_id );
-			$location_fax = get_field( 'location_fax', $location_child_id );
-			$location_hours_group = get_field('location_hours_group', $location_child_id );
-			$location_telemed_query = $location_hours_group['location_telemed_query'];
-
-			$location_gmb_cats = get_field( 'location_gmb_cat', $location_child_id );
-			$location_gmb_cat_primary_name = 'Medical Clinic';
-			$location_gmb_cat_additional_names = '';
-			$c = 1;
-			if( $location_gmb_cats ) {
-				foreach( $location_gmb_cats as $location_gmb_cat ) {
-					$location_gmb_cat_term = get_term($location_gmb_cat, 'gmb_cat_location');
-					if ( 2 > $c ){
-						$location_gmb_cat_primary_name = esc_html( $location_gmb_cat_term->name );
-					} elseif ( 2 == $c ) {
-						$location_gmb_cat_additional_names = esc_html( $location_gmb_cat_term->name );
-					} elseif ( 11 > $c ) {
-						$location_gmb_cat_additional_names .= ', ' . esc_html( $location_gmb_cat_term->name );
+						$location_floor_value = $location_floor['value'];
+						$location_floor_label = $location_floor['choices'][ $location_floor_value ];
 					}
-					$c++;
-				} // endforeach
-			}
 
-			$location_gmb_wheelchair_elevator = get_field( 'has_wheelchair_accessible_elevator', $location_post_id );
-			$location_gmb_wheelchair_elevator = ( $location_gmb_wheelchair_elevator == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
-			$location_gmb_wheelchair_entrance = get_field( 'has_wheelchair_accessible_entrance', $location_post_id );
-			$location_gmb_wheelchair_entrance = ( $location_gmb_wheelchair_entrance == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_entrance;
-			$location_gmb_wheelchair_restroom = get_field( 'has_wheelchair_accessible_restroom', $location_post_id );
-			$location_gmb_wheelchair_restroom = ( $location_gmb_wheelchair_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_restroom;
-			$location_gmb_restroom = get_field( 'has_restroom', $location_post_id );
-			$location_gmb_restroom = ( $location_gmb_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_restroom;
-			$location_gmb_appointments = get_field( 'requires_appointments', $location_post_id );
-			$location_gmb_appointments = ( $location_gmb_appointments == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_appointments;
-			$location_gmb_temp_customers = get_field( 'requires_temperature_check_customers', $location_post_id );
-			$location_gmb_temp_customers = ( $location_gmb_temp_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_customers;
-			$location_gmb_masks_customers = get_field( 'requires_masks_customers', $location_post_id );
-			$location_gmb_masks_customers = ( $location_gmb_masks_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_customers;
-			$location_gmb_temp_staff = get_field( 'requires_temperature_check_staff', $location_post_id );
-			$location_gmb_temp_staff = ( $location_gmb_temp_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_staff;
-			$location_gmb_masks_staff = get_field( 'requires_masks_staff', $location_post_id );
-			$location_gmb_masks_staff = ( $location_gmb_masks_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_staff;
-			$location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
-			$location_gmb_sanitizing = ( $location_gmb_sanitizing == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
-			$location_map = get_field( 'location_map', $location_post_id );
-				$location_latitude = '';
-				$location_longitude = '';
-				if ( $location_map ) {
-					$location_latitude = $location_map['lat'];
-					$location_longitude = $location_map['lng'];
+				$location_suite = get_field( 'location_suite', $location_post_id );
+
+					// Option 1:
+					// Address Line 1 = Street address (covered above)
+					// Address Line 2+ = Cascading options based on presence of values...
+					// 	Building Name
+					// 	Building Floor Number
+					// 	Suite Number
+
+					$location_addresses = [];
+
+					if ( $location_building && $building_slug != '_none' ) {
+
+						array_push($location_addresses, $building_name);
+
+					}
+
+					if ( $location_floor && !empty($location_floor_value) && $location_floor_value != '0' ) {
+
+						array_push($location_addresses, $location_floor_label);
+
+					}
+
+					if ( $location_suite && !empty($location_suite) ) {
+
+						array_push($location_addresses, $location_suite);
+
+					}
+
+					$location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
+					$location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
+					$location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
+					$location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
+					$location_address_2_deprecated = get_field( 'location_address_2', $location_post_id );
+
+					if ( !$location_address_2 ) {
+
+						$location_address_2 = $location_address_2_deprecated;
+
+					}
+
+					// Option 2:
+					// Address Line 1 = Street address (covered above)
+					// Address Line 2+ = Cascading options based on presence of values...
+					// 	Building Name
+					// 	Top-Level Location Name
+					// 	Child Location Name
+
+					// $location_addresses = [];
+					// if ( $location_building && $building_slug != '_none' ) {
+					//	 array_push($location_addresses, $building_name);
+					// }
+					// if ( !$location_has_parent ) {
+					//	 array_push($location_addresses, $location_title);
+					// } else {
+					//	 array_push($location_addresses, $location_parent_title, $location_title);
+					// }
+					// $location_address_2 = $location_addresses[0];
+					// $location_address_3 = $location_addresses[1];
+					// $location_address_4 = $location_addresses[2];
+					// $location_address_5 = $location_addresses[3];
+
+				$location_city = get_field( 'location_city', $location_post_id );
+				$location_state = get_field( 'location_state', $location_post_id );
+				$location_zip = get_field( 'location_zip', $location_post_id );
+				$location_phone = get_field( 'location_phone', $location_child_id );
+				$location_fax = get_field( 'location_fax', $location_child_id );
+				$location_hours_group = get_field( 'location_hours_group', $location_child_id );
+				$location_telemed_query = $location_hours_group['location_telemed_query'];
+
+				$location_gmb_cats = get_field( 'location_gmb_cat', $location_child_id );
+				$location_gmb_cat_primary_name = 'Medical Clinic';
+				$location_gmb_cat_additional_names = '';
+				$c = 1;
+
+				if ( $location_gmb_cats ) {
+
+					foreach ( $location_gmb_cats as $location_gmb_cat ) {
+
+						$location_gmb_cat_term = get_term($location_gmb_cat, 'gmb_cat_location');
+
+						if ( 2 > $c ){
+
+							$location_gmb_cat_primary_name = esc_html( $location_gmb_cat_term->name );
+
+						} elseif ( 2 == $c ) {
+
+							$location_gmb_cat_additional_names = esc_html( $location_gmb_cat_term->name );
+
+						} elseif ( 11 > $c ) {
+
+							$location_gmb_cat_additional_names .= ', ' . esc_html( $location_gmb_cat_term->name );
+
+						}
+
+						$c++;
+
+					} // endforeach
+
 				}
-			$location_gmb_exclude = get_field( 'location_gmb_exclude', $location_post_id );
-			$location_gmb_prefix = get_field( 'location_gmb_prefix', $location_post_id );
+
+				$location_gmb_wheelchair_elevator = get_field( 'has_wheelchair_accessible_elevator', $location_post_id );
+				$location_gmb_wheelchair_elevator = ( $location_gmb_wheelchair_elevator == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
+				$location_gmb_wheelchair_entrance = get_field( 'has_wheelchair_accessible_entrance', $location_post_id );
+				$location_gmb_wheelchair_entrance = ( $location_gmb_wheelchair_entrance == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_entrance;
+				$location_gmb_wheelchair_restroom = get_field( 'has_wheelchair_accessible_restroom', $location_post_id );
+				$location_gmb_wheelchair_restroom = ( $location_gmb_wheelchair_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_restroom;
+				$location_gmb_restroom = get_field( 'has_restroom', $location_post_id );
+				$location_gmb_restroom = ( $location_gmb_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_restroom;
+				$location_gmb_appointments = get_field( 'requires_appointments', $location_post_id );
+				$location_gmb_appointments = ( $location_gmb_appointments == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_appointments;
+				$location_gmb_temp_customers = get_field( 'requires_temperature_check_customers', $location_post_id );
+				$location_gmb_temp_customers = ( $location_gmb_temp_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_customers;
+				$location_gmb_masks_customers = get_field( 'requires_masks_customers', $location_post_id );
+				$location_gmb_masks_customers = ( $location_gmb_masks_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_customers;
+				$location_gmb_temp_staff = get_field( 'requires_temperature_check_staff', $location_post_id );
+				$location_gmb_temp_staff = ( $location_gmb_temp_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_staff;
+				$location_gmb_masks_staff = get_field( 'requires_masks_staff', $location_post_id );
+				$location_gmb_masks_staff = ( $location_gmb_masks_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_staff;
+				$location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
+				$location_gmb_sanitizing = ( $location_gmb_sanitizing == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
+
+				$location_map = get_field( 'location_map', $location_post_id );
+					$location_latitude = '';
+					$location_longitude = '';
+
+					if ( $location_map ) {
+
+						$location_latitude = $location_map['lat'];
+						$location_longitude = $location_map['lng'];
+
+					}
+
+				$location_gmb_exclude = get_field( 'location_gmb_exclude', $location_post_id );
+				$location_gmb_prefix = get_field( 'location_gmb_prefix', $location_post_id );
 
 			// Create the table
-			if ( true !== $location_gmb_exclude ) {
 
-				// Start table row
+				if ( true !== $location_gmb_exclude ) {
 
-				// Store code
-					// Option 1: Provider slug plus numeral
-					$row[0] = $store_code;
+					/**
+					 * Start table row
+					 */
 
-				// Business name
-					$row[1] = ($location_gmb_prefix ? 'UAMS Health - ' : '') . html_entity_decode($location_title);
+					// Store code
 
-				// Address line 1
-					$row[2] = $location_address_1 ? html_entity_decode($location_address_1) : '';
+						// Option 1: Provider slug plus numeral
+						$row[0] = $store_code;
 
-				// Address line 2
-					$row[3] = ( $location_address_2 && !empty($location_address_2) ) ? html_entity_decode($location_address_2) : '';
+					// Business name
 
-				// Address line 3
-					$row[4] = ( $location_address_3 && !empty($location_address_3) ) ? html_entity_decode($location_address_3) : '';
+						$row[1] = ($location_gmb_prefix ? 'UAMS Health - ' : '') . html_entity_decode($location_title);
 
-				// Address line 4
-					$row[5] = ( $location_address_4 && !empty($location_address_4) ) ? html_entity_decode($location_address_4) : '';
+					// Address line 1
 
-				// Address line 5
-					$row[6] = ( $location_address_5 && !empty($location_address_5) ) ? html_entity_decode($location_address_5) : '';
+						$row[2] = $location_address_1 ? html_entity_decode($location_address_1) : '';
 
-				// Sub-locality
-				// Intentionally left blank
-					// $row[7] = '';
+					// Address line 2
 
-				// Locality
-					$row[7] = $location_city ? $location_city : '';
+						$row[3] = ( $location_address_2 && !empty($location_address_2) ) ? html_entity_decode($location_address_2) : '';
 
-				// Administrative area
-					$row[8] = $location_state ? $location_state : '';
+					// Address line 3
 
-				// Country / Region
-					$row[9] = 'US';
+						$row[4] = ( $location_address_3 && !empty($location_address_3) ) ? html_entity_decode($location_address_3) : '';
 
-				// Postal code
-					$row[10] = $location_zip ? $location_zip : '';
+					// Address line 4
 
-				// Latitude
-					$row[11] = $location_latitude ? $location_latitude : '';
+						$row[5] = ( $location_address_4 && !empty($location_address_4) ) ? html_entity_decode($location_address_4) : '';
 
-				// Longitude
-					$row[12] = $location_longitude ? $location_longitude : '';
+					// Address line 5
 
-				// Primary phone
-					$row[13] = $location_phone ? $location_phone : '';
+						$row[6] = ( $location_address_5 && !empty($location_address_5) ) ? html_entity_decode($location_address_5) : '';
 
-				// Additional phones
-				// Intentionally left blank
-					// $row[15] = '';
+					// Sub-locality
 
-				// Website
-					$row[14] = 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=profile&utm_specs=' . $store_code;
+						/**
+						 * Intentionally left blank
+						 */
 
-				// Primary category
-					$row[15] = $location_gmb_cat_primary_name;
+						// $row[7] = '';
 
-				// Additional categories
-					$row[16] = $location_gmb_cat_additional_names;
+					// Locality
 
-				// Sunday hours
-				// Intentionally left blank for now
-				// Format = 08:00-16:30
-					// $row[19] = '';
+						$row[7] = $location_city ? $location_city : '';
 
-				// Monday hours
-				// Intentionally left blank for now
-				// Format = 08:00-16:30
-					// $row[20] = '';
+					// Administrative area
 
-				// Tuesday hours
-				// Intentionally left blank for now
-				// Format = 08:00-16:30
-					// $row[21] = '';
+						$row[8] = $location_state ? $location_state : '';
 
-				// Wednesday hours
-				// Intentionally left blank for now
-				// Format = 08:00-16:30
-					// $row[22] = '';
+					// Country / Region
 
-				// Thursday hours
-				// Intentionally left blank for now
-				// Format = 08:00-16:30
-					// $row[23] = '';
+						$row[9] = 'US';
 
-				// Friday hours
-				// Intentionally left blank for now
-				// Format = 08:00-16:30
-					// $row[24] = '';
+					// Postal code
 
-				// Saturday hours
-				// Intentionally left blank for now
-				// Format = 08:00-16:30
-					// $row[25] = '';
+						$row[10] = $location_zip ? $location_zip : '';
 
-				// Special hours
-				// Intentionally left blank for now
-				// Format = 2021-12-31: 05:00-23:00, 2022-01-01: x
-					// $row[26] = '';
+					// Latitude
 
-				// From the business
-					$excerpt = '';
-					$descr = get_field('location_about',$location_post_id); // Get the description
-					$descr = wp_strip_all_tags($descr); // Strip all HTML tags
-					$descr = str_replace(array('\n', '\r'), ' ', $descr); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
-					$descr = mb_strimwidth($descr, 0, 747, '...'); // Truncate the string
-					$descr_short = get_field('location_short_desc',$location_post_id); // Strip all HTML tags
-					$descr_short = wp_strip_all_tags($descr_short); // Get the short description
-					$descr_short = str_replace(array("\n", "\r"), ' ', $descr_short); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
-					$descr_short = mb_strimwidth($descr_short, 0, 747, '...'); // Truncate the string
+						$row[11] = $location_latitude ? $location_latitude : '';
 
-					if (empty($excerpt)){
-						if ($descr_short){
-							$excerpt = $descr_short;
-						} elseif ($descr) {
-							$excerpt = $descr;
-						} else {
-							$excerpt = '';
-						}
-					}
-					$row[17] = html_entity_decode($excerpt);
+					// Longitude
 
-				// Opening date
-				// Intentionally left blank
-					// $row[28] = '';
+						$row[12] = $location_longitude ? $location_longitude : '';
 
-				// Logo photo
-					$location_gmb_logo_photo = UAMS_FAD_ROOT_URL . 'assets/img/uams-health-1024x1024.png';
-					$row[18] = $location_gmb_logo_photo;
+					// Primary phone
 
-				// Cover photo
+						$row[13] = $location_phone ? $location_phone : '';
 
-					// Image values
-					$featured_image = get_post_thumbnail_id($location_post_id); // Get the ID of location's featured image
-					$featured_img_url = get_the_post_thumbnail_url($location_post_id,'full'); // Get the URL of location's featured image
-					$override_parent_photo = get_field('location_image_override_parent',$location_child_id); // Get toggle value of "Override Parent Images?"
-					$override_parent_photo_featured = get_field('location_image_override_parent_featured',$location_child_id); // Get toggle value of "Override Parent Featured Image?"
-					$override_parent_photo_wayfinding = get_field('location_image_override_parent_wayfinding',$location_child_id); // Get toggle value of "Override Parent Wayfinding Photo?"
-					$override_parent_photo_gallery = get_field('location_image_override_parent_gallery',$location_child_id); // Get toggle value of "Override Parent Photo Gallery?"
-					// Set image for featured image
-					if ($override_parent_photo && $location_parent_location && $override_parent_photo_featured) { // If child location & override is true
-						$featured_image = get_post_thumbnail_id($location_child_id);
-					} else { // Use parent/standard image
-						$featured_image = get_post_thumbnail_id($location_post_id);
-					}
-					// Set image for wayfinding image
-					if ($override_parent_photo && $location_parent_location && $override_parent_photo_wayfinding) {
-						$wayfinding_photo = get_field('location_wayfinding_photo',$location_child_id);
-					} else { // Use parent/standard image
-						$wayfinding_photo = get_field('location_wayfinding_photo',$location_post_id);
-					}
-					// Set image(s) for gallery image(s)
-					if ($override_parent_photo && $location_parent_location && $override_parent_photo_gallery) {
-						$photo_gallery = get_field('location_photo_gallery',$location_child_id);
-					} else { // Use parent/standard image(s)
-						$photo_gallery = get_field('location_photo_gallery',$location_post_id);
-					}
+					// Additional phones
 
-					$location_images = array(); // Create empty array for location images
-					if ($featured_image && !empty($featured_image)) {
-						// If featured image exists...
-						$location_images[] = $featured_image; // add it to the array for location images
-					}
-					if ($wayfinding_photo && !empty($wayfinding_photo)) {
-						// If featured image exists...
-						$location_images[] = $wayfinding_photo; // add it to the array for location images
-					}
-					if ($photo_gallery && !empty($photo_gallery)) {
-						// If image gallery values exist...
-						foreach( $photo_gallery as $photo_gallery_image ) {
-							$location_images[] = $photo_gallery_image; // add them to the array for location images
-						}
-					}
-					$location_images = array_unique($location_images); // Remove duplicate values from the array for location images
-					$location_images_count = count($location_images); // Count how many images are in the array for location images
-					if ( $location_images_count > 0 ) {
-						$p = 1;
-						$location_gmb_other_photos = '';
-						foreach( $location_images as $location_images_item ) {
-							if ( $p == 1 ) {
-								if ( function_exists( 'fly_add_image_size' ) ) {
-									$location_gmb_cover_photo = image_sizer($location_images_item, 2120, 1192, 'center', 'center'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
-								} else {
-									$location_gmb_cover_photo = wp_get_attachment_image_url($location_images_item, 'large');
-								}
+						/**
+						 * Intentionally left blank
+						 */
+
+						// $row[15] = '';
+
+					// Website
+
+						$row[14] = 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=profile&utm_specs=' . $store_code;
+
+					// Primary category
+
+						$row[15] = $location_gmb_cat_primary_name;
+
+					// Additional categories
+
+						$row[16] = $location_gmb_cat_additional_names;
+
+					// Sunday hours
+
+						/**
+						 * Intentionally left blank
+						 *
+						 * Format = 08:00-16:30
+						 */
+
+						// $row[19] = '';
+
+					// Monday hours
+
+						/**
+						 * Intentionally left blank
+						 *
+						 * Format = 08:00-16:30
+						 */
+
+						// $row[20] = '';
+
+					// Tuesday hours
+
+						/**
+						 * Intentionally left blank
+						 *
+						 * Format = 08:00-16:30
+						 */
+
+						// $row[21] = '';
+
+					// Wednesday hours
+
+						/**
+						 * Intentionally left blank
+						 *
+						 * Format = 08:00-16:30
+						 */
+
+						// $row[22] = '';
+
+					// Thursday hours
+
+						/**
+						 * Intentionally left blank
+						 *
+						 * Format = 08:00-16:30
+						 */
+
+						// $row[23] = '';
+
+					// Friday hours
+
+						/**
+						 * Intentionally left blank
+						 *
+						 * Format = 08:00-16:30
+						 */
+
+						// $row[24] = '';
+
+					// Saturday hours
+
+						/**
+						 * Intentionally left blank
+						 *
+						 * Format = 08:00-16:30
+						 */
+
+						// $row[25] = '';
+
+					// Special hours
+
+						/**
+						 * Intentionally left blank
+						 *
+						 * Format = 2021-12-31: 05:00-23:00, 2022-01-01: x
+						 */
+
+						// $row[26] = '';
+
+					// From the business
+
+						$excerpt = '';
+						$descr = get_field( 'location_about', $location_post_id ); // Get the description
+						$descr = wp_strip_all_tags($descr); // Strip all HTML tags
+						$descr = str_replace(array('\n', '\r'), ' ', $descr); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
+						$descr = mb_strimwidth($descr, 0, 747, '...'); // Truncate the string
+						$descr_short = get_field( 'location_short_desc', $location_post_id ); // Strip all HTML tags
+						$descr_short = wp_strip_all_tags($descr_short); // Get the short description
+						$descr_short = str_replace(array("\n", "\r"), ' ', $descr_short); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
+						$descr_short = mb_strimwidth($descr_short, 0, 747, '...'); // Truncate the string
+
+						if ( empty($excerpt)){
+							if ( $descr_short){
+								$excerpt = $descr_short;
+							} elseif ( $descr ) {
+								$excerpt = $descr;
 							} else {
-								if ( function_exists( 'fly_add_image_size' ) ) {
-									$location_gmb_other_photos .= image_sizer($location_images_item, 2120, 1192, 'center', 'center'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
-								} else {
-									$location_gmb_other_photos .= wp_get_attachment_image_url($location_images_item, 'large');
-								}
-								$location_gmb_other_photos .= $p < $location_images_count ? ',' : '';
+								$excerpt = '';
 							}
-							$p++;
-						} // endforeach
-					}
-					$row[19] = $location_gmb_cover_photo ?: '';
+						}
+						$row[17] = html_entity_decode($excerpt);
 
-				// Other photos
-					$row[20] = $location_gmb_other_photos ?: '';
+					// Opening date
+					// Intentionally left blank
+						// $row[28] = '';
 
-				// Labels
-					$region = get_term( get_field('location_region',$location_post_id), 'region' )->name;
-					$row[21] = $region ? $region : '';
+					// Logo photo
+						$location_gmb_logo_photo = UAMS_FAD_ROOT_URL . 'assets/img/uams-health-1024x1024.png';
+						$row[18] = $location_gmb_logo_photo;
 
-				// AdWords location extensions phone
-				// Intentionally left blank
-					// $row[33] = '';
+					// Cover photo
 
-				// Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)
-					if (!empty($location_gmb_wheelchair_elevator)) {
-						$row[22] = $location_gmb_wheelchair_elevator;
-					} else {
-						$row[22] = 'Yes';
-					}
+						// Image values
 
-				// Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)
-					if (!empty($location_gmb_wheelchair_entrance)) {
-						$row[23] = $location_gmb_wheelchair_entrance;
-					} else {
-						$row[23] = 'Yes';
-					}
+							$featured_image = get_post_thumbnail_id($location_post_id); // Get the ID of location's featured image
+							$featured_img_url = get_the_post_thumbnail_url($location_post_id,'full'); // Get the URL of location's featured image
+							$override_parent_photo = get_field( 'location_image_override_parent', $location_child_id ); // Get toggle value of "Override Parent Images?"
+							$override_parent_photo_featured = get_field( 'location_image_override_parent_featured', $location_child_id ); // Get toggle value of "Override Parent Featured Image?"
+							$override_parent_photo_wayfinding = get_field( 'location_image_override_parent_wayfinding', $location_child_id ); // Get toggle value of "Override Parent Wayfinding Photo?"
+							$override_parent_photo_gallery = get_field( 'location_image_override_parent_gallery', $location_child_id ); // Get toggle value of "Override Parent Photo Gallery?"
 
-				// Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)
-					if (!empty($location_gmb_wheelchair_restroom)) {
-						$row[24] = $location_gmb_wheelchair_restroom;
-					} else {
-						$row[24] = 'Yes';
-					}
+						// Set image for featured image
 
-				// Amenities: Restroom (has_restroom)
-					if (!empty($location_gmb_restroom)) {
-						$row[25] = $location_gmb_restroom;
-					} else {
-						$row[25] = 'Yes';
-					}
+							if ( $override_parent_photo && $location_parent_location && $override_parent_photo_featured ) { // If child location & override is true
+								$featured_image = get_post_thumbnail_id($location_child_id);
+							} else { // Use parent/standard image
+								$featured_image = get_post_thumbnail_id($location_post_id);
+							}
 
-				// Planning: Appointment required (requires_appointments)
-					if ( $covid19 ) {
-						if (!empty($location_gmb_appointments)) {
-							$row[26] = $location_gmb_appointments;
+						// Set image for wayfinding image
+
+							if ( $override_parent_photo && $location_parent_location && $override_parent_photo_wayfinding ) {
+								$wayfinding_photo = get_field( 'location_wayfinding_photo', $location_child_id );
+							} else { // Use parent/standard image
+								$wayfinding_photo = get_field( 'location_wayfinding_photo', $location_post_id );
+							}
+
+						// Set image(s) for gallery image(s)
+
+							if ( $override_parent_photo && $location_parent_location && $override_parent_photo_gallery ) {
+								$photo_gallery = get_field( 'location_photo_gallery', $location_child_id );
+							} else { // Use parent/standard image(s)
+								$photo_gallery = get_field( 'location_photo_gallery', $location_post_id );
+							}
+
+							$location_images = array(); // Create empty array for location images
+
+							if ( $featured_image && !empty($featured_image) ) {
+								// If featured image exists...
+								$location_images[] = $featured_image; // add it to the array for location images
+							}
+
+							if ( $wayfinding_photo && !empty($wayfinding_photo) ) {
+								// If featured image exists...
+								$location_images[] = $wayfinding_photo; // add it to the array for location images
+							}
+
+							if ( $photo_gallery && !empty($photo_gallery) ) {
+								// If image gallery values exist...
+								foreach ( $photo_gallery as $photo_gallery_image ) {
+									$location_images[] = $photo_gallery_image; // add them to the array for location images
+								}
+							}
+
+							$location_images = array_unique($location_images); // Remove duplicate values from the array for location images
+							$location_images_count = count($location_images); // Count how many images are in the array for location images
+
+							if ( $location_images_count > 0 ) {
+
+								$p = 1;
+								$location_gmb_other_photos = '';
+
+								foreach ( $location_images as $location_images_item ) {
+
+									if ( $p == 1 ) {
+
+										if ( function_exists( 'fly_add_image_size' ) ) {
+
+											$location_gmb_cover_photo = image_sizer($location_images_item, 2120, 1192, 'center', 'center'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
+
+										} else {
+
+											$location_gmb_cover_photo = wp_get_attachment_image_url($location_images_item, 'large');
+
+										}
+
+									} else {
+
+										if ( function_exists( 'fly_add_image_size' ) ) {
+
+											$location_gmb_other_photos .= image_sizer($location_images_item, 2120, 1192, 'center', 'center'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
+
+										} else {
+
+											$location_gmb_other_photos .= wp_get_attachment_image_url($location_images_item, 'large');
+
+										}
+
+										$location_gmb_other_photos .= $p < $location_images_count ? ',' : '';
+
+									}
+
+									$p++;
+
+								} // endforeach
+							}
+
+						$row[19] = $location_gmb_cover_photo ?: '';
+
+					// Other photos
+
+						$row[20] = $location_gmb_other_photos ?: '';
+
+					// Labels
+
+						$region = get_term( get_field( 'location_region', $location_post_id ), 'region' )->name;
+						$row[21] = $region ? $region : '';
+
+					// AdWords location extensions phone
+					// Intentionally left blank
+						// $row[33] = '';
+
+					// Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)
+
+						if ( !empty($location_gmb_wheelchair_elevator) ) {
+							$row[22] = $location_gmb_wheelchair_elevator;
+						} else {
+							$row[22] = 'Yes';
+						}
+
+					// Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)
+
+						if ( !empty($location_gmb_wheelchair_entrance) ) {
+							$row[23] = $location_gmb_wheelchair_entrance;
+						} else {
+							$row[23] = 'Yes';
+						}
+
+					// Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)
+
+						if ( !empty($location_gmb_wheelchair_restroom) ) {
+							$row[24] = $location_gmb_wheelchair_restroom;
+						} else {
+							$row[24] = 'Yes';
+						}
+
+					// Amenities: Restroom (has_restroom)
+						if ( !empty($location_gmb_restroom) ) {
+							$row[25] = $location_gmb_restroom;
+						} else {
+							$row[25] = 'Yes';
+						}
+
+					// Planning: Appointment required (requires_appointments)
+
+						if ( $covid19 ) {
+							if ( !empty($location_gmb_appointments) ) {
+								$row[26] = $location_gmb_appointments;
+							} else {
+								$row[26] = '';
+							}
 						} else {
 							$row[26] = '';
 						}
-					} else {
-						$row[26] = '';
-					}
 
-				// Service options: Has online care (has_video_visits)
-				// Value based on the relevant location profile
-					$row[52] = $location_telemed_query ? 'Yes' : '';
+					// Service options: Has online care (has_video_visits)
+					// Value based on the relevant location profile
+						$row[52] = $location_telemed_query ? 'Yes' : '';
 
-				// Place page URLs: COVID-19 info link (url_covid_19_info_page)
-					$row[44] = 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link&utm_specs=' . $store_code;
+					// Place page URLs: COVID-19 info link (url_covid_19_info_page)
 
-				// Place page URLs: Virtual care link (url_facility_telemedicine_page)
-					$row[46] = $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
+						$row[44] = 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link&utm_specs=' . $store_code;
 
-			} // endif
+					// Place page URLs: Virtual care link (url_facility_telemedicine_page)
+
+						$row[46] = $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
+
+				} // endif
+
 			$table_body[] = $row;
 
-		endwhile;
+		} // endwhile
 
-	endif;
+	} // endif
 
 	ob_end_clean ();
+
 	$filename = 'GMB_Locations_' . time() . '.csv';
 	$delimiter=",";
 	$fh = @fopen( 'php://output', 'w' );
@@ -1864,41 +2311,61 @@ function gmb_location_csv_export() {
 	header( 'Pragma: no-cache' ); // no cache
 	header( 'Expires: 0' ); // expire date
 	fputcsv( $fh, $table_head, $delimiter );
-	foreach ( $table_body as $data_row )
-	{
+
+	foreach ( $table_body as $data_row ) {
+
 		fputcsv( $fh, $data_row, $delimiter );
+
 	}
 
 	exit();
+
 }
 
 function mychart_csv_export() {
+
 	// Check for current user privileges
-	if( !current_user_can( 'manage_options' ) ){ return false; }
+
+		if ( !current_user_can( 'manage_options' ) ) {
+
+			return false;
+
+		}
 
 	// Check if we are in WP-Admin
-	if( !is_admin() ){ return false; }
+
+		if ( !is_admin() ) {
+
+			return false;
+
+		}
 
 	// Nonce Check
-	$nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
-	if ( ! wp_verify_nonce( $nonce, 'download_mychart_csv' ) ) {
-		die( 'Security check error' );
-	}
+
+		$nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+
+		if ( ! wp_verify_nonce( $nonce, 'download_mychart_csv' ) ) {
+
+			die( 'Security check error' );
+
+		}
 
 	ob_start();
 
 	// Custom WP_Query args
-	$args = array(
-		'post_type' => 'provider',
-		'post_status' => 'publish',
-		'posts_per_page' => '-1', // Set for all
-		'orderby' => 'title',
-		'order' => 'ASC',
-	);
+
+		$args = array(
+			'post_type' => 'provider',
+			'post_status' => 'publish',
+			'posts_per_page' => '-1', // Set for all
+			'orderby' => 'title',
+			'order' => 'ASC',
+		);
 
 	$query = new WP_Query( $args );
 
-	if ( $query->have_posts() ) :
+	if ( $query->have_posts() ) {
+
 		$table_head = array();
 		$table_head[0] = 'SER ID';
 		$table_head[1] = 'Provider Name';
@@ -1907,53 +2374,63 @@ function mychart_csv_export() {
 
 		$table_body = array();
 		$row = array();
-		while( $query->have_posts() ) : $query->the_post();
+
+		while ( $query->have_posts() ) {
+
+			$query->the_post();
+
 			$post_id = get_the_ID();
 
 			// Create the Name variables
-			$ser_id = get_field('physician_pid',$post_id);
-			$ser_id = ( $ser_id == 0 ) ? '' : $ser_id;
-			$sort_name = get_the_title($post_id);
-			$profile_url = user_trailingslashit(get_the_permalink($post_id));
+
+				$ser_id = get_field( 'physician_pid', $post_id );
+				$ser_id = ( $ser_id == 0 ) ? '' : $ser_id;
+				$sort_name = get_the_title($post_id);
+				$profile_url = user_trailingslashit(get_the_permalink($post_id));
 
 			// Get slug
-			$profile_slug = get_post_field( 'post_name', $post_id );
+
+				$profile_slug = get_post_field( 'post_name', $post_id );
 
 			// Get featured image
-			// Epic restricts images to a maximum of 1000px per side.
-			// One image is used in all placements, with no server-side crop happening.
-			// Most placements are background images inside a circular container no larger than 122x122.
-			// The details window for a provider displays the full image, restricted only by the max-width of the window and Epic's 1000px maximum on image size.
-			// Defining hot spots within the media library, placing them between the provider's front teeth, yields the best result.
-			$provider_mychart_photo = wp_get_attachment_image_url(get_post_thumbnail_id($post_id), 'thumbnail'); // 150x150
 
-			$resident = get_field('physician_resident',$post_id);
+				// Epic restricts images to a maximum of 1000px per side.
+				// One image is used in all placements, with no server-side crop happening.
+				// Most placements are background images inside a circular container no larger than 122x122.
+				// The details window for a provider displays the full image, restricted only by the max-width of the window and Epic's 1000px maximum on image size.
+				// Defining hot spots within the media library, placing them between the provider's front teeth, yields the best result.
+				$provider_mychart_photo = wp_get_attachment_image_url(get_post_thumbnail_id($post_id), 'thumbnail'); // 150x150
+
+			$resident = get_field( 'physician_resident', $post_id );
 
 			// Create the table
-			if ( !$resident ) {
 
-				// Start table row
+				if ( !$resident ) {
 
-				// PID
-					$row[0] = $ser_id;
+					// Start table row
 
-				// Provider Name
-					$row[1] = html_entity_decode($sort_name);
+					// PID
+						$row[0] = $ser_id;
 
-				// Provider Profile URL
-					$row[2] = $profile_url . '?utm_source=mychart&utm_medium=link&utm_campaign=clinical_service&utm_term=provider&utm_content=' . $profile_slug . '&utm_specs=' . $ser_id;
+					// Provider Name
+						$row[1] = html_entity_decode($sort_name);
 
-				// Provider Photo URL
-					$row[3] = $provider_mychart_photo ?: '';
+					// Provider Profile URL
+						$row[2] = $profile_url . '?utm_source=mychart&utm_medium=link&utm_campaign=clinical_service&utm_term=provider&utm_content=' . $profile_slug . '&utm_specs=' . $ser_id;
 
-			} // endif !$resident
+					// Provider Photo URL
+						$row[3] = $provider_mychart_photo ?: '';
+
+				} // endif !$resident
 
 			$table_body[] = $row;
-		endwhile;
 
-	endif;
+		} // endwhile
+
+	} // endif
 
 	ob_end_clean ();
+
 	$filename = 'MyChart_List_' . time() . '.csv';
 	$delimiter=",";
 	$fh = @fopen( 'php://output', 'w' );
@@ -1965,9 +2442,11 @@ function mychart_csv_export() {
 	header( 'Pragma: no-cache' ); // no cache
 	header( 'Expires: 0' ); // expire date
 	fputcsv( $fh, $table_head, $delimiter );
-	foreach ( $table_body as $data_row )
-	{
+
+	foreach ( $table_body as $data_row ) {
+
 		fputcsv( $fh, $data_row, $delimiter );
+
 	}
 
 	exit();
