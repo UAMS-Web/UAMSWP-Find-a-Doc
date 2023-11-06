@@ -9024,6 +9024,44 @@ function uamswp_meta_image_values( $featured_image ) {
 
 		}
 
+	// Create str_starts_with function that is available in PHP 8
+
+		/**
+		 * @see https://www.php.net/manual/en/function.str-starts-with.php
+		 */
+
+		if ( !function_exists('str_starts_with') ) {
+
+			function str_starts_with(
+				string $haystack,
+				string $needle
+			) {
+
+				return strlen($needle) === 0 || strpos($haystack, $needle) === 0;
+
+			}
+
+		}
+
+	// Create str_ends_with function that is available in PHP 8
+
+		/**
+		 * @see https://www.php.net/manual/en/function.str-ends-with.php
+		 */
+
+		if ( !function_exists('str_ends_with') ) {
+
+			function str_ends_with(
+				string $haystack,
+				string $needle
+			) {
+
+				return strlen($needle) === 0 || substr($haystack, -strlen($needle)) === $needle;
+
+			}
+
+		}
+
 	// Create str_contains function that is available in PHP 8
 
 		if ( !function_exists('str_contains') ) {
