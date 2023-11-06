@@ -933,6 +933,21 @@
 
 							}
 
+						// Reset values if building is set to 'None'
+
+							if (
+								$building_slug
+								&&
+								$building_slug == '_none'
+							) {
+
+								$location_building = null;
+								$building = null;
+								$building_slug = null;
+								$building_name = null;
+
+							}
+
 					// Building Floor
 
 						$location_floor = null;
