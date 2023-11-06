@@ -51,7 +51,7 @@
 		},
 		{
 			"key": "field_building_location_subtype",
-			"label": "Specific Type of Location (@type; additionalType)",
+			"label": "Specific Type of Place (@type; additionalType)",
 			"name": "building_location_subtype",
 			"type": "radio",
 			"instructions": "Select the most specific type of location that matches this building. If there is no match, then select \"None.\"",
