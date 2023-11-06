@@ -898,28 +898,67 @@
 
 				// Building
 
-					$location_building = get_field('location_building', $post_id );
+					// Query: Is this location contained within a larger building rather than being its own standalone facility?
 
-					if ( $location_building ) {
+						$location_building_query = get_field('location_building_query', $post_id ) ?? null;
 
-						$building = get_term($location_building, "building");
-						$building_slug = $building->slug;
-						$building_name = $building->name;
+					// Get building selection
 
-					}
+						$location_building = null;
+
+						if (
+							!isset($location_building_query)
+							||
+							$location_building_query
+						) {
+
+							$location_building = get_field( 'location_building', $post_id );
+
+						}
+
+						// Get building term and its values
+
+							$building = $location_building ? get_term( $location_building, 'building' ) : null;
+							$building_slug = null;
+							$building_name = null;
+
+							if (
+								$building
+								&&
+								is_object($building)
+							) {
+
+								$building_slug = $building->slug;
+								$building_name = $building->name;
+
+							}
 
 					// Building Floor
 
-						$location_floor = get_field_object('location_building_floor', $post_id );
-						$location_floor_value = '';
-						$location_floor_label = '';
+						$location_floor = null;
+						$location_floor_value = null;
+						$location_floor_label = null;
 
-						if ( $location_floor ) {
+						// Get building floor selection
 
-							$location_floor_value = $location_floor['value'];
-							$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+							if (
+								!isset($location_building_query)
+								||
+								$location_building_query
+							) {
 
-						}
+								$location_floor = get_field_object('location_building_floor', $post_id );
+
+							}
+
+							// Get building floor values
+
+								if ( $location_floor ) {
+
+									$location_floor_value = $location_floor['value'];
+									$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+
+								}
 
 				$location_suite = get_field('location_suite', $post_id );
 				$location_address_2 =
