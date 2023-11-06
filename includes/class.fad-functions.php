@@ -9002,6 +9002,10 @@ function uamswp_meta_image_values( $featured_image ) {
 
 	// Create array_is_list function that is available in PHP 8
 
+		/**
+		 * @see https://www.php.net/manual/en/function.array-is-list.php
+		 */
+
 		if ( !function_exists('array_is_list') ) {
 
 			function array_is_list(array $array): bool {
@@ -9063,6 +9067,10 @@ function uamswp_meta_image_values( $featured_image ) {
 		}
 
 	// Create str_contains function that is available in PHP 8
+
+		/**
+		 * @see https://www.php.net/manual/en/function.str-contains.php
+		 */
 
 		if ( !function_exists('str_contains') ) {
 
