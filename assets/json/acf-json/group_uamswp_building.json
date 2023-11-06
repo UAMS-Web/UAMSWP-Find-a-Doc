@@ -51,10 +51,10 @@
 		},
 		{
 			"key": "field_building_location_subtype",
-			"label": "Location Subtype (@type)",
+			"label": "Specific Type of Location (@type; additionalType)",
 			"name": "building_location_subtype",
-			"type": "select",
-			"instructions": "Select the most specific subtype of the Schema.org Location type. If there is no match, then select \"None.\"",
+			"type": "radio",
+			"instructions": "Select the most specific type of location that matches this building. If there is no match, then select \"None.\"",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -65,29 +65,33 @@
 			"acfe_permissions": "",
 			"choices": {
 				"0": "<strong>None</strong> &mdash; No available option is relevant to this organization",
-				"EducationalOrganization": "<strong>CivicStructure > EducationalOrganization</strong> &mdash; An educational organization.",
-				"CivicStructure": "<strong>CivicStructure</strong> &mdash; A public structure, such as a town hall or concert hall.",
-				"EventVenue": "<strong>CivicStructure > EventVenue</strong> &mdash; An event venue.",
-				"GovernmentBuilding": "<strong>CivicStructure > GovernmentBuilding</strong> &mdash; A government building.",
-				"CityHall": "<strong>CivicStructure > GovernmentBuilding > CityHall</strong> &mdash; A city hall.",
-				"Courthouse": "<strong>CivicStructure > GovernmentBuilding > Courthouse</strong> &mdash; A courthouse.",
-				"LegislativeBuilding": "<strong>CivicStructure > GovernmentBuilding > LegislativeBuilding</strong> &mdash; A legislative building (e.g., the state capitol).",
-				"Hospital": "<strong>CivicStructure > Hospital</strong> &mdash; A hospital.",
-				"Museum": "<strong>CivicStructure > Museum</strong> &mdash; A museum.",
-				"PerformingArtsTheater": "<strong>CivicStructure > PerformingArtsTheater</strong> &mdash; A theater or other performing art center.",
-				"StadiumOrArena": "<strong>CivicStructure > StadiumOrArena</strong> &mdash; A stadium.",
-				"LandmarksOrHistoricalBuildings": "<strong>LandmarksOrHistoricalBuildings</strong> &mdash; An historical landmark or building.",
-				"LocalBusiness": "<strong>LocalBusiness</strong> &mdash; A particular physical business or branch of an organization. Examples of LocalBusiness include a restaurant, a particular branch of a restaurant chain, a branch of a bank, a medical practice, a club, a bowling alley, etc."
+				"Wikidata_Building_Q41176": "<strong>Building (specific Facility)</strong> &mdash; structure, typically with a roof and walls, standing more or less permanently in one place (<a href='https://www.wikidata.org/wiki/Q41176' target='_blank'>https://www.wikidata.org/wiki/Q41176</a>)",
+				"SchemaOrg_CityHall_Q25550691": "<strong>City Hall (specific Government Building)</strong> &mdash; A city hall (<a href='https://schema.org/CityHall' target='_blank'>https://schema.org/CityHall</a>; <a href='https://www.wikidata.org/wiki/Q25550691' target='_blank'>https://www.wikidata.org/wiki/Q25550691</a>)",
+				"SchemaOrg_CivicStructure_Q107123630": "<strong>Civic Structure</strong> &mdash; A public structure, such as a town hall or concert hall (<a href='https://schema.org/CivicStructure' target='_blank'>https://schema.org/CivicStructure</a>; <a href='https://www.wikidata.org/wiki/Q107123630' target='_blank'>https://www.wikidata.org/wiki/Q107123630</a>)",
+				"Wikidata_CommercialBuilding": "<strong>Commercial Building (specific Building)</strong> &mdash; buildings associated with any aspect of the various activities and business relationships of industry and trade (<a href='https://www.wikidata.org/wiki/Q655686' target='_blank'>https://www.wikidata.org/wiki/Q655686</a>)",
+				"SchemaOrg_Courthouse": "<strong>Courthouse (specific Government Building)</strong> &mdash; A courthouse (<a href='https://schema.org/Courthouse' target='_blank'>https://schema.org/Courthouse</a>; <a href='https://www.wikidata.org/wiki/Q1137809' target='_blank'>https://www.wikidata.org/wiki/Q1137809</a>)",
+				"SchemaOrg_EventVenue": "<strong>Event Venue (specific Civic Structure)</strong> &mdash; An event venue (<a href='https://schema.org/EventVenue' target='_blank'>https://schema.org/EventVenue</a>; <a href='https://www.wikidata.org/wiki/Q18674739' target='_blank'>https://www.wikidata.org/wiki/Q18674739</a>)",
+				"Wikidata_Facility_Q13226383": "<strong>Facility</strong> &mdash; structure, typically with a roof and walls, standing more or less permanently in one place (<a href='https://www.wikidata.org/wiki/Q13226383' target='_blank'>https://www.wikidata.org/wiki/Q13226383</a>)",
+				"SchemaOrg_GovernmentBuilding": "<strong>Government Building (specific Civic Structure)</strong> &mdash; A government building (<a href='https://schema.org/GovernmentBuilding' target='_blank'>https://schema.org/GovernmentBuilding</a>; <a href='https://www.wikidata.org/wiki/Q16831714' target='_blank'>https://www.wikidata.org/wiki/Q16831714</a>)",
+				"SchemaOrg_LandmarksOrHistoricalBuildings": "<strong>Historical Landmark / Historical Building</strong> &mdash; An historical landmark or building (<a href='https://schema.org/LandmarksOrHistoricalBuildings' target='_blank'>https://schema.org/LandmarksOrHistoricalBuildings</a>; <a href='https://www.wikidata.org/wiki/Q51369558' target='_blank'>https://www.wikidata.org/wiki/Q51369558</a>)",
+				"SchemaOrg_Hospital": "<strong>Hospital (specific Civic Structure; specific Medical Facility)</strong> &mdash; A hospital (<a href='https://schema.org/Hospital' target='_blank'>https://schema.org/Hospital</a>; <a href='https://www.wikidata.org/wiki/Q16917' target='_blank'>https://www.wikidata.org/wiki/Q16917</a>)",
+				"SchemaOrg_LegislativeBuilding": "<strong>Legislative Building (specific Government Building)</strong> &mdash; A legislative building (e.g., the state capitol) (<a href='https://schema.org/LegislativeBuilding' target='_blank'>https://schema.org/LegislativeBuilding</a>)",
+				"Wikidata_MedicalFacility_Q4260475": "<strong>Medical Facility (specific Facility)</strong> &mdash; any location at which medicine is practiced regularly (<a href='https://www.wikidata.org/wiki/Q4260475' target='_blank'>https://www.wikidata.org/wiki/Q4260475</a>)",
+				"SchemaOrg_Museum": "<strong>Museum (specific Civic Structure)</strong> &mdash; A museum (<a href='https://schema.org/Museum' target='_blank'>https://schema.org/Museum</a>; <a href='https://www.wikidata.org/wiki/Q33506' target='_blank'>https://www.wikidata.org/wiki/Q33506</a>)",
+				"SchemaOrg_PerformingArtsTheater": "<strong>Performing Arts Theater (specific Civic Structure)</strong> &mdash; A theater or other performing art center (<a href='https://schema.org/PerformingArtsTheater' target='_blank'>https://schema.org/PerformingArtsTheater</a>; <a href='https://www.wikidata.org/wiki/Q24354' target='_blank'>https://www.wikidata.org/wiki/Q24354</a>)",
+				"Wikidata_RetailBuilding_Q18760388": "<strong>Retail Building (specific Commercial Building)</strong> &mdash; building housing businesses engaged in the sale of consumer goods or services (<a href='https://www.wikidata.org/wiki/Q18760388' target='_blank'>https://www.wikidata.org/wiki/Q18760388</a>)",
+				"Wikidata_ShoppingCenter_Q11315": "<strong>Shopping Center (specific Retail Building)</strong> &mdash; complex of shops (<a href='https://www.wikidata.org/wiki/Q11315' target='_blank'>https://www.wikidata.org/wiki/Q11315</a>)",
+				"SchemaOrg_StadiumOrArena": "<strong>Stadium or Arena (specific Civic Structure)</strong> &mdash; A stadium (<a href='https://schema.org/StadiumOrArena' target='_blank'>https://schema.org/StadiumOrArena</a>; <a href='https://www.wikidata.org/wiki/Q483110' target='_blank'>https://www.wikidata.org/wiki/Q483110</a>)",
+				"Wikidata_UniversityBuilding_Q19844914": "<strong>University Building (specific Building)</strong> &mdash; building used by a higher education institution (<a href='https://www.wikidata.org/wiki/Q19844914' target='_blank'>https://www.wikidata.org/wiki/Q19844914</a>)"
 			},
-			"default_value": false,
+			"default_value": "",
 			"allow_null": 1,
-			"multiple": 0,
-			"ui": 1,
+			"other_choice": 0,
+			"save_other_choice": 0,
+			"layout": "vertical",
 			"return_format": "value",
-			"placeholder": "",
 			"acfe_settings": "",
-			"acfe_validate": "",
-			"ajax": 0
+			"acfe_validate": ""
 		},
 		{
 			"key": "field_building_additionaltype",
@@ -96,7 +100,15 @@
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_building_location_subtype",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "uamswp-hide-clone-label",
