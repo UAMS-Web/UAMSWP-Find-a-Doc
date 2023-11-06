@@ -998,24 +998,84 @@
 
 				// Construct Address 2
 
-					$location_address_2 =
-						( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
-						. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
-						. ( $location_suite ? $location_suite : '' );
+					// For display
 
-					$location_address_2_schema =
-						( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
-						. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
-						. ( $location_suite ? $location_suite : '' );
+						// Base array
 
-					$location_address_2_deprecated = get_field('location_address_2', $post_id );
+							$location_address_2_array = array();
 
-					if ( !$location_address_2 ) {
+						// Add building name
 
-						$location_address_2 = $location_address_2_deprecated;
-						$location_address_2_schema = $location_address_2_deprecated;
+							$location_address_2_array[] = $building_name;
 
-					}
+						// Add building floor and suite
+
+							/**
+							 * Add both values to the same line.
+							 *
+							 * If both values exist, separate them with a comma and a space.
+							 */
+
+							$location_address_2_array[] = implode(
+								', ',
+								array_filter(
+									array(
+										$location_floor_label,
+										$location_suite
+									)
+								)
+							);
+
+						// Implode array
+
+							/**
+							 * Split up the array rows with line breaks.
+							 */
+
+							$location_address_2 = implode(
+								'<br />',
+								array_filter($location_address_2_array)
+							);
+
+					// For schema
+
+						// Base array
+
+							$location_address_2_schema_array = array();
+
+						// Add building name
+
+							$location_address_2_schema_array[] = $building_name;
+
+						// Add building floor
+
+							$location_address_2_schema_array[] = $location_floor_label;
+
+						// Add suite
+
+							$location_address_2_schema_array[] = $location_suite;
+
+						// Implode array
+
+							/**
+							 * Split up the array rows with spaces.
+							 */
+
+							$location_address_2_schema = implode(
+								' ',
+								array_filter($location_address_2_schema_array)
+							);
+
+					// Deprecated Address 2 field
+
+						$location_address_2_deprecated = get_field('location_address_2', $post_id );
+
+						if ( !$location_address_2 ) {
+
+							$location_address_2 = $location_address_2_deprecated;
+							$location_address_2_schema = $location_address_2_deprecated;
+
+						}
 
 				$location_state = get_field('location_state', $post_id);
 				$location_zip = get_field('location_zip', $post_id);
