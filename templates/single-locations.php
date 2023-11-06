@@ -1006,7 +1006,20 @@
 
 						// Add building name
 
-							$location_address_2_array[] = $building_name;
+							/**
+							 * Add the value if the Facility taxonomy term's facility subtype has either not
+							 * been set or if it has been set as 'Building'.
+							 */
+
+							if (
+								!isset($building_type)
+								||
+								$building_type == 'building'
+							) {
+
+								$location_address_2_array[] = $building_name;
+
+							}
 
 						// Add building floor and suite
 
@@ -1045,7 +1058,20 @@
 
 						// Add building name
 
-							$location_address_2_schema_array[] = $building_name;
+							/**
+							 * Add the value if the Facility taxonomy term's facility subtype has either not
+							 * been set or if it has been set as 'Building'.
+							 */
+
+							if (
+								!isset($building_type)
+								||
+								$building_type == 'building'
+							) {
+
+								$location_address_2_schema_array[] = $building_name;
+
+							}
 
 						// Add building floor
 
