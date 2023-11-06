@@ -9117,7 +9117,7 @@
 				// Retrieve the value of the transient
 
 					uamswp_fad_get_transient(
-						'val_' . $entity, // Required // String added to transient name for disambiguation.
+						'val_' . ( is_object($entity) ? $entity->term_id : $entity ), // Required // String added to transient name for disambiguation.
 						$output, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 						__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 					);
@@ -9234,7 +9234,7 @@
 					// Set/update the value of the transient
 
 						uamswp_fad_set_transient(
-							'val_' . $entity, // Required // String added to transient name for disambiguation.
+							'val_' . ( is_object($entity) ? $entity->term_id : $entity ), // Required // String added to transient name for disambiguation.
 							$output, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 							__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 						);
