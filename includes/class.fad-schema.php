@@ -9991,7 +9991,7 @@
 
 			/**
 			 * The values of the 'Specific Type of Location'
-			 * ('field_building_location_subtype') field are expected to use the following
+			 * ('field_building_place_subtype') field are expected to use the following
 			 * structure:
 			 *
 			 *     Values representing a Schema.org type must begin with 'SchemaOrg_' followed by
@@ -10258,7 +10258,7 @@
 
 								// Subtype
 
-									$Place_subtype = get_field( 'building_location_subtype', $term ) ?? $null;
+									$Place_subtype = get_field( 'building_place_subtype', $term ) ?? $null;
 
 									// Schema.org subtype
 

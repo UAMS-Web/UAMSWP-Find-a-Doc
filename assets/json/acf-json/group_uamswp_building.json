@@ -50,11 +50,11 @@
 			"acfe_settings": ""
 		},
 		{
-			"key": "field_building_location_subtype",
+			"key": "field_building_place_subtype",
 			"label": "Specific Type of Place (@type; additionalType)",
-			"name": "building_location_subtype",
+			"name": "building_place_subtype",
 			"type": "radio",
-			"instructions": "Select the most specific type of location that matches this building. If there is no match, then select \"None.\"",
+			"instructions": "Select the most specific type of place that matches this building. If there is no match, then select \"None.\"",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -107,7 +107,7 @@
 			"conditional_logic": [
 				[
 					{
-						"field": "field_building_location_subtype",
+						"field": "field_building_place_subtype",
 						"operator": "==",
 						"value": "0"
 					}
