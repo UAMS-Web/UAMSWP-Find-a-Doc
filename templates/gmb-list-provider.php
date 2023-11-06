@@ -258,124 +258,244 @@ function display_provider_image() {
 									// Address line 1
 
 										// Parent Location
-										$location_post_id = $location;
-										$location_child_id = $location;
-										$location_has_parent = get_field('location_parent',$location_post_id);
-										$location_parent_id = get_field('location_parent_id',$location_post_id);
-										$location_parent_title = ''; // Eliminate PHP errors
-										$location_parent_url = ''; // Eliminate PHP errors
-										$location_parent_location = ''; // Eliminate PHP errors
-										if ($location_has_parent && $location_parent_id) {
-											$location_parent_location = get_post( $location_parent_id );
-										}
+
+											$location_post_id = $location;
+											$location_child_id = $location;
+											$location_has_parent = get_field('location_parent',$location_post_id);
+											$location_parent_id = get_field('location_parent_id',$location_post_id);
+											$location_parent_title = ''; // Eliminate PHP errors
+											$location_parent_url = ''; // Eliminate PHP errors
+											$location_parent_location = ''; // Eliminate PHP errors
+
+											if (
+												$location_has_parent
+												&&
+												$location_parent_id
+											) {
+
+												$location_parent_location = get_post( $location_parent_id );
+
+											}
+
 										// Get Post ID for Address & Image fields
-										if ($location_parent_location) {
-											$location_post_id = $location_parent_location->ID;
-											$location_parent_title = $location_parent_location->post_title;
-											$location_parent_url = user_trailingslashit(get_permalink( $location_post_id ));
-										}
+
+											if ( $location_parent_location ) {
+
+												$location_post_id = $location_parent_location->ID;
+												$location_parent_title = $location_parent_location->post_title;
+												$location_parent_url = user_trailingslashit(get_permalink( $location_post_id ));
+
+											}
 
 										// Create location variables
-										$location_title = get_the_title( $location_child_id );
-										$location_address_1 = get_field( 'location_address_1', $location_post_id );
-										$location_building = get_field('location_building', $location_post_id );
-										if ($location_building) {
-											$building = get_term($location_building, "building");
-											$building_slug = $building->slug;
-											$building_name = $building->name;
-										}
-										$location_floor = get_field_object('location_building_floor', $location_post_id );
-											$location_floor_value = '';
-											$location_floor_label = '';
-											if ( $location_floor ) {
-												$location_floor_value = $location_floor['value'];
-												$location_floor_label = $location_floor['choices'][ $location_floor_value ];
-											}
-										$location_suite = get_field('location_suite', $location_post_id );
 
-											// Option 1:
-											// Address Line 1 = Street address (covered above)
-											// Address Line 2+ = Cascading options based on presence of values...
-											// 	Building Name
-											// 	Building Floor Number
-											// 	Suite Number
+											// Location title
 
-											// $location_addresses = [];
-											// if ( $location_building && $building_slug != '_none' ) {
-											//	 array_push($location_addresses, $building_name);
-											// }
-											// if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ) {
-											//	 array_push($location_addresses, $location_floor_label);
-											// }
-											// if ( $location_suite && !empty($location_suite) ) {
-											//	 array_push($location_addresses, $location_suite);
-											// }
-											// $location_address_2 = $location_addresses[0];
-											// $location_address_3 = $location_addresses[1];
-											// $location_address_4 = $location_addresses[2];
-											// $location_address_5 = $location_addresses[3];
-											// $location_address_2_deprecated = get_field('location_address_2', $location_post_id );
-											// if (!$location_address_2) {
-											//	 $location_address_2 = $location_address_2_deprecated;
-											// }
+												$location_title = get_the_title( $location_child_id );
 
-											// Option 2:
-											// Address Line 1 = Street address (covered above)
-											// Address Line 2+ = Cascading options based on presence of values...
-											// 	Building Name
-											// 	Top-Level Location Name
-											// 	Child Location Name
+											// Address 1
 
-											$location_addresses = [];
-											if ( $location_building && $building_slug != '_none' ) {
-												array_push($location_addresses, $building_name);
-											}
-											if ( !$location_has_parent ) {
-												array_push($location_addresses, $location_title);
-											} else {
-												array_push($location_addresses, $location_parent_title, $location_title);
-											}
+												$location_address_1 = get_field( 'location_address_1', $location_post_id );
 
-											$location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
-											$location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
-											$location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
-											$location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
+											// Address 2
 
-										$location_city = get_field( 'location_city', $location_post_id );
-										$location_state = get_field( 'location_state', $location_post_id );
-										$location_zip = get_field( 'location_zip', $location_post_id );
-										$location_phone = get_field( 'location_phone', $location_child_id );
-										$location_fax = get_field( 'location_fax', $location_child_id );
-										$location_hours_group = get_field('location_hours_group', $location_child_id );
-										$location_telemed_query = $location_hours_group['location_telemed_query'];
+												// Building
 
-										$location_gmb_wheelchair_elevator = get_field( 'has_wheelchair_accessible_elevator', $location_post_id );
-										$location_gmb_wheelchair_elevator = ( $location_gmb_wheelchair_elevator == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
-										$location_gmb_wheelchair_entrance = get_field( 'has_wheelchair_accessible_entrance', $location_post_id );
-										$location_gmb_wheelchair_entrance = ( $location_gmb_wheelchair_entrance == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_entrance;
-										$location_gmb_wheelchair_restroom = get_field( 'has_wheelchair_accessible_restroom', $location_post_id );
-										$location_gmb_wheelchair_restroom = ( $location_gmb_wheelchair_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_restroom;
-										$location_gmb_restroom = get_field( 'has_restroom', $location_post_id );
-										$location_gmb_restroom = ( $location_gmb_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_restroom;
-										$location_gmb_appointments = get_field( 'requires_appointments', $location_post_id );
-										$location_gmb_appointments = ( $location_gmb_appointments == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_appointments;
-										$location_gmb_temp_customers = get_field( 'requires_temperature_check_customers', $location_post_id );
-										$location_gmb_temp_customers = ( $location_gmb_temp_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_customers;
-										$location_gmb_masks_customers = get_field( 'requires_masks_customers', $location_post_id );
-										$location_gmb_masks_customers = ( $location_gmb_masks_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_customers;
-										$location_gmb_temp_staff = get_field( 'requires_temperature_check_staff', $location_post_id );
-										$location_gmb_temp_staff = ( $location_gmb_temp_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_staff;
-										$location_gmb_masks_staff = get_field( 'requires_masks_staff', $location_post_id );
-										$location_gmb_masks_staff = ( $location_gmb_masks_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_staff;
-										$location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
-										$location_gmb_sanitizing = ( $location_gmb_sanitizing == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
-										$location_map = get_field( 'location_map', $location_post_id );
-											$location_latitude = '';
-											$location_longitude = '';
-											if ( $location_map ) {
-												$location_latitude = $location_map['lat'];
-												$location_longitude = $location_map['lng'];
-											}
+													// Query: Is this location contained within a larger facility rather than being its own standalone facility?
+
+														$location_building_query = get_field('location_building_query', $location_post_id ) ?? null;
+
+													// Get building selection
+
+														$location_building = null;
+
+														if (
+															!isset($location_building_query)
+															||
+															$location_building_query
+														) {
+
+															$location_building = get_field( 'location_building', $location_post_id );
+
+														}
+
+														// Get building term and its values
+
+															$building = $location_building ? get_term( $location_building, 'building' ) : null;
+															$building_type = null;
+															$building_slug = null;
+															$building_name = null;
+
+															if (
+																$building
+																&&
+																is_object($building)
+															) {
+
+																$building_type = get_field( 'facility_place_subtype', $building ) ?? null;
+																$building_slug = $building->slug;
+																$building_name = $building->name;
+
+															}
+
+														// Reset values if building is set to 'None'
+
+															if (
+																$building_slug
+																&&
+																$building_slug == '_none'
+															) {
+
+																$location_building = null;
+																$building = null;
+																$building_type = null;
+																$building_slug = null;
+																$building_name = null;
+
+															}
+
+													// Building Floor
+
+														$location_floor = null;
+														$location_floor_value = null;
+														$location_floor_label = null;
+
+														// Get building floor selection
+
+															if (
+																!isset($location_building_query)
+																||
+																$location_building_query
+															) {
+
+																$location_floor = get_field_object('location_building_floor', $location_post_id );
+
+															}
+
+															// Get building floor values
+
+																if ( $location_floor ) {
+
+																	$location_floor_value = $location_floor['value'];
+																	$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+
+																}
+
+																// Reset values if building is set to 'Single-Story Building'
+
+																	if (
+																		isset($location_floor_value)
+																		&&
+																		!$location_floor_value
+																	) {
+
+																		$location_floor = null;
+																		$location_floor_value = null;
+																		$location_floor_label = null;
+
+																	}
+
+												// Suite
+
+													$location_suite = get_field('location_suite', $location_post_id );
+
+												// Construct Address 2+
+
+													// Base array
+
+														$location_addresses = array();
+
+													// Add building name
+
+														/**
+														 * Add the value if the Facility taxonomy term's facility subtype has either not
+														 * been set or if it has been set as 'Building'.
+														 */
+
+														if (
+															!isset($building_type)
+															||
+															$building_type == 'building'
+														) {
+
+															$location_addresses[] = $building_name;
+
+														}
+
+													// Add parent location name
+
+														$location_addresses[] = $location_parent_title;
+
+													// Add location name
+
+														$location_addresses[] = $location_title;
+
+													// Add building floor
+
+														$location_addresses[] = $location_floor_label;
+
+													// Add suite
+
+														$location_addresses[] = $location_suite;
+
+													// Clean up array
+
+														$location_addresses = array_filter($location_address_2_array);
+														$location_addresses = array_values($location_address_2_array);
+
+													// Define column values for Address 2 through Address 5
+
+														$location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
+														$location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
+														$location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
+														$location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
+
+											// City, State and ZIP Code
+
+												$location_city = get_field( 'location_city', $location_post_id );
+												$location_state = get_field( 'location_state', $location_post_id );
+												$location_zip = get_field( 'location_zip', $location_post_id );
+
+											$location_phone = get_field( 'location_phone', $location_child_id );
+											$location_fax = get_field( 'location_fax', $location_child_id );
+											$location_hours_group = get_field('location_hours_group', $location_child_id );
+											$location_telemed_query = $location_hours_group['location_telemed_query'];
+
+											// Google My Business Specific Attributes
+
+												$location_gmb_wheelchair_elevator = get_field( 'has_wheelchair_accessible_elevator', $location_post_id );
+												$location_gmb_wheelchair_elevator = ( $location_gmb_wheelchair_elevator == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
+												$location_gmb_wheelchair_entrance = get_field( 'has_wheelchair_accessible_entrance', $location_post_id );
+												$location_gmb_wheelchair_entrance = ( $location_gmb_wheelchair_entrance == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_entrance;
+												$location_gmb_wheelchair_restroom = get_field( 'has_wheelchair_accessible_restroom', $location_post_id );
+												$location_gmb_wheelchair_restroom = ( $location_gmb_wheelchair_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_restroom;
+												$location_gmb_restroom = get_field( 'has_restroom', $location_post_id );
+												$location_gmb_restroom = ( $location_gmb_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_restroom;
+												$location_gmb_appointments = get_field( 'requires_appointments', $location_post_id );
+												$location_gmb_appointments = ( $location_gmb_appointments == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_appointments;
+												$location_gmb_temp_customers = get_field( 'requires_temperature_check_customers', $location_post_id );
+												$location_gmb_temp_customers = ( $location_gmb_temp_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_customers;
+												$location_gmb_masks_customers = get_field( 'requires_masks_customers', $location_post_id );
+												$location_gmb_masks_customers = ( $location_gmb_masks_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_customers;
+												$location_gmb_temp_staff = get_field( 'requires_temperature_check_staff', $location_post_id );
+												$location_gmb_temp_staff = ( $location_gmb_temp_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_staff;
+												$location_gmb_masks_staff = get_field( 'requires_masks_staff', $location_post_id );
+												$location_gmb_masks_staff = ( $location_gmb_masks_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_staff;
+												$location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
+												$location_gmb_sanitizing = ( $location_gmb_sanitizing == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
+
+											// Map / GPS
+
+												$location_map = get_field( 'location_map', $location_post_id );
+												$location_latitude = '';
+												$location_longitude = '';
+
+												if ( $location_map ) {
+
+													$location_latitude = $location_map['lat'];
+													$location_longitude = $location_map['lng'];
+
+												}
 
 										echo '<td data-gmb-column="Address line 1" class="no-break">';
 										echo $location_address_1 ? $location_address_1 : '';
