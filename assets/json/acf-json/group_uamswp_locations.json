@@ -375,7 +375,7 @@
 		"field_location_building_query": {
 			"key": "field_location_building_query",
 			"name": "location_building_query",
-			"label": "Is this location contained within a larger building rather than being its own standalone facility?",
+			"label": "Is this location contained within a larger facility rather than being its own standalone facility?",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -398,9 +398,9 @@
 		"field_location_building": {
 			"key": "field_location_building",
 			"name": "location_building",
-			"label": "Building",
+			"label": "Facility",
 			"type": "taxonomy",
-			"instructions": "Select the building this location is contained within.",
+			"instructions": "Select the most specific building or building complex this location is contained within.",
 			"required": "1",
 			"conditional_logic": [
 				[
@@ -451,7 +451,7 @@
 			},
 			"choices": {
 				"": "(Select an option)",
-				"0": "Single-Story Building",
+				"0": "Single-Story Building / The Location Is the Building",
 				"B": "Level B",
 				"G": "Ground Floor",
 				"1": "First Floor",

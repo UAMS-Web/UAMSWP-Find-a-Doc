@@ -898,7 +898,7 @@
 
 				// Building
 
-					// Query: Is this location contained within a larger building rather than being its own standalone facility?
+					// Query: Is this location contained within a larger facility rather than being its own standalone facility?
 
 						$location_building_query = get_field('location_building_query', $post_id ) ?? null;
 
