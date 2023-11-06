@@ -895,19 +895,32 @@
 				$map = get_field('location_map', $post_id );
 				$map = ( array_key_exists( 'lat', $map ) && array_key_exists( 'lng', $map ) ) ? $map : array(); // Check values
 				$location_address_1 = get_field('location_address_1', $post_id );
-				$location_building = get_field('location_building', $post_id );
-				if ($location_building) {
-					$building = get_term($location_building, "building");
-					$building_slug = $building->slug;
-					$building_name = $building->name;
-				}
-				$location_floor = get_field_object('location_building_floor', $post_id );
-					$location_floor_value = '';
-					$location_floor_label = '';
-					if ( $location_floor ) {
-						$location_floor_value = $location_floor['value'];
-						$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+
+				// Building
+
+					$location_building = get_field('location_building', $post_id );
+
+					if ( $location_building ) {
+
+						$building = get_term($location_building, "building");
+						$building_slug = $building->slug;
+						$building_name = $building->name;
+
 					}
+
+					// Building Floor
+
+						$location_floor = get_field_object('location_building_floor', $post_id );
+						$location_floor_value = '';
+						$location_floor_label = '';
+
+						if ( $location_floor ) {
+
+							$location_floor_value = $location_floor['value'];
+							$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+
+						}
+
 				$location_suite = get_field('location_suite', $post_id );
 				$location_address_2 =
 					( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
