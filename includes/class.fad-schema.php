@@ -22812,7 +22812,7 @@
 
 															if ( !isset($location_facility_query) ) {
 
-																$location_facility_query = get_field('location_building_query', $entity ) ?? null;
+																$location_facility_query = get_field('location_building_query', $location_address_id ) ?? null;
 
 															}
 
@@ -22822,7 +22822,7 @@
 
 																if ( $location_facility_query ) {
 
-																	$location_facility_id = get_field( 'location_building', $entity ) ?? null;
+																	$location_facility_id = get_field( 'location_building', $location_address_id ) ?? null;
 
 																}
 
@@ -22904,7 +22904,7 @@
 																	$location_building_query
 																) {
 
-																	$location_floor = get_field_object('location_building_floor', $post_id );
+																	$location_floor = get_field_object('location_building_floor', $location_address_id );
 
 																}
 
