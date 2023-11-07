@@ -10746,21 +10746,56 @@ function uamswp_prevent_orphan($string) {
 
 							// Building, Floor and Suite
 
-								// Building
+								// Query: Is this location contained within a larger facility rather than being its own standalone facility?
 
-									$location_building = get_field('location_building', $location_address_id ) ?: '';
-									$location_building_term = $location_building ? get_term( $location_building, 'building' ) : '';
-									$location_building_slug = $location_building_term ? $location_building_term->slug : '';
-									$location_building_name = $location_building_term ? $location_building_term->name : '';
+									$location_building_query = get_field('location_building_query', $location_address_id ) ?? null;
 
-									// If building slug is set to '_none' (standalone building), reset the values
+								// Get building selection
 
-										if ( $location_building_slug == '_none' ) {
+									$location_building = null;
 
-											$location_building = '';
-											$location_building_term = '';
-											$location_building_slug = '';
-											$location_building_name = '';
+									if (
+										!isset($location_building_query)
+										||
+										$location_building_query
+									) {
+
+										$location_building = get_field( 'location_building', $location_address_id );
+
+									}
+
+									// Get building term and its values
+
+										$location_building_term = $location_building ? get_term( $location_building, 'building' ) : null;
+										$location_building_type = null;
+										$location_building_slug = null;
+										$location_building_name = null;
+
+										if (
+											$location_building_term
+											&&
+											is_object($location_building_term)
+										) {
+
+											$location_building_type = get_field( 'facility_place_subtype', $location_building_term ) ?? null;
+											$location_building_slug = $location_building_term->slug;
+											$location_building_name = $location_building_term->name;
+
+										}
+
+									// Reset values if building is set to 'None'
+
+										if (
+											$location_building_slug
+											&&
+											$location_building_slug == '_none'
+										) {
+
+											$location_building = null;
+											$location_building_term = null;
+											$location_building_type = null;
+											$location_building_slug = null;
+											$location_building_name = null;
 
 										}
 
@@ -10770,21 +10805,46 @@ function uamswp_prevent_orphan($string) {
 										$location_card_fields_vars['location_building_slug'] = isset($location_building_slug) ? $location_building_slug : '';
 										$location_card_fields_vars['location_building_name'] = isset($location_building_name) ? $location_building_name : '';
 
-								// Building floor
+								// Building Floor
 
-									$location_floor = get_field_object('location_building_floor', $location_address_id ) ?: '';
-									$location_floor_value = $location_floor ? $location_floor['value'] : '';
-									$location_floor_label = $location_floor ? $location_floor['choices'][$location_floor_value] : '';
+									$location_floor = null;
+									$location_floor_value = null;
+									$location_floor_label = null;
 
-									// If floor value is set to '0' (single-story building), reset the values
+									// Get building floor selection
 
-										if ( $location_floor_value == '0' ) {
+										if (
+											!isset($location_building_query)
+											||
+											$location_building_query
+										) {
 
-											$location_floor = '';
-											$location_floor_value = '';
-											$location_floor_label = '';
+											$location_floor = get_field_object('location_building_floor', $location_address_id );
 
 										}
+
+										// Get building floor values
+
+											if ( $location_floor ) {
+
+												$location_floor_value = $location_floor['value'];
+												$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+
+											}
+
+											// Reset values if building is set to 'Single-Story Building'
+
+												if (
+													isset($location_floor_value)
+													&&
+													!$location_floor_value
+												) {
+
+													$location_floor = null;
+													$location_floor_value = null;
+													$location_floor_label = null;
+
+												}
 
 									// Add to the variables array
 
