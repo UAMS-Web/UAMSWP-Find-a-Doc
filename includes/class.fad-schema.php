@@ -13634,31 +13634,35 @@
 
 										if (
 											(
-												isset($provider_item_MedicalWebPage)
-												&&
-												array_intersect(
-													$provider_properties_map[$MedicalWebPage_type]['properties'],
-													$provider_location_common
+												(
+													isset($provider_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$provider_properties_map[$MedicalWebPage_type]['properties'],
+														$provider_location_common
+													)
+												)
+												||
+												(
+													isset($provider_item_MedicalBusiness)
+													&&
+													array_intersect(
+														$provider_properties_map[$MedicalBusiness_type]['properties'],
+														$provider_location_common
+													)
+												)
+												||
+												(
+													isset($provider_item_Person)
+													&&
+													array_intersect(
+														$provider_properties_map[$Person_type]['properties'],
+														$provider_location_common
+													)
 												)
 											)
-											||
-											(
-												isset($provider_item_MedicalBusiness)
-												&&
-												array_intersect(
-													$provider_properties_map[$MedicalBusiness_type]['properties'],
-													$provider_location_common
-												)
-											)
-											||
-											(
-												isset($provider_item_Person)
-												&&
-												array_intersect(
-													$provider_properties_map[$Person_type]['properties'],
-													$provider_location_common
-												)
-											)
+											&&
+											$nesting_level == 0
 										) {
 
 											// Get values
@@ -13733,31 +13737,35 @@
 
 										if (
 											(
-												isset($provider_item_MedicalWebPage)
-												&&
-												array_intersect(
-													$provider_properties_map[$MedicalWebPage_type]['properties'],
-													$provider_expertise_common
+												(
+													isset($provider_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$provider_properties_map[$MedicalWebPage_type]['properties'],
+														$provider_expertise_common
+													)
+												)
+												||
+												(
+													isset($provider_item_MedicalBusiness)
+													&&
+													array_intersect(
+														$provider_properties_map[$MedicalBusiness_type]['properties'],
+														$provider_expertise_common
+													)
+												)
+												||
+												(
+													isset($provider_item_Person)
+													&&
+													array_intersect(
+														$provider_properties_map[$Person_type]['properties'],
+														$provider_expertise_common
+													)
 												)
 											)
-											||
-											(
-												isset($provider_item_MedicalBusiness)
-												&&
-												array_intersect(
-													$provider_properties_map[$MedicalBusiness_type]['properties'],
-													$provider_expertise_common
-												)
-											)
-											||
-											(
-												isset($provider_item_Person)
-												&&
-												array_intersect(
-													$provider_properties_map[$Person_type]['properties'],
-													$provider_expertise_common
-												)
-											)
+											&&
+											$nesting_level == 0
 										) {
 
 											// Get related areas of expertise
@@ -13833,31 +13841,35 @@
 
 										if (
 											(
-												isset($provider_item_MedicalWebPage)
-												&&
-												array_intersect(
-													$provider_properties_map[$MedicalWebPage_type]['properties'],
-													$provider_clinical_resource_common
+												(
+													isset($provider_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$provider_properties_map[$MedicalWebPage_type]['properties'],
+														$provider_clinical_resource_common
+													)
+												)
+												||
+												(
+													isset($provider_item_MedicalBusiness)
+													&&
+													array_intersect(
+														$provider_properties_map[$MedicalBusiness_type]['properties'],
+														$provider_clinical_resource_common
+													)
+												)
+												||
+												(
+													isset($provider_item_Person)
+													&&
+													array_intersect(
+														$provider_properties_map[$Person_type]['properties'],
+														$provider_clinical_resource_common
+													)
 												)
 											)
-											||
-											(
-												isset($provider_item_MedicalBusiness)
-												&&
-												array_intersect(
-													$provider_properties_map[$MedicalBusiness_type]['properties'],
-													$provider_clinical_resource_common
-												)
-											)
-											||
-											(
-												isset($provider_item_Person)
-												&&
-												array_intersect(
-													$provider_properties_map[$Person_type]['properties'],
-													$provider_clinical_resource_common
-												)
-											)
+											&&
+											$nesting_level == 0
 										) {
 
 											// Get related clinical resources
@@ -13937,31 +13949,35 @@
 
 										if (
 											(
-												isset($provider_item_MedicalWebPage)
-												&&
-												array_intersect(
-													$provider_properties_map[$MedicalWebPage_type]['properties'],
-													$provider_condition_common
+												(
+													isset($provider_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$provider_properties_map[$MedicalWebPage_type]['properties'],
+														$provider_condition_common
+													)
+												)
+												||
+												(
+													isset($provider_item_MedicalBusiness)
+													&&
+													array_intersect(
+														$provider_properties_map[$MedicalBusiness_type]['properties'],
+														$provider_condition_common
+													)
+												)
+												||
+												(
+													isset($provider_item_Person)
+													&&
+													array_intersect(
+														$provider_properties_map[$Person_type]['properties'],
+														$provider_condition_common
+													)
 												)
 											)
-											||
-											(
-												isset($provider_item_MedicalBusiness)
-												&&
-												array_intersect(
-													$provider_properties_map[$MedicalBusiness_type]['properties'],
-													$provider_condition_common
-												)
-											)
-											||
-											(
-												isset($provider_item_Person)
-												&&
-												array_intersect(
-													$provider_properties_map[$Person_type]['properties'],
-													$provider_condition_common
-												)
-											)
+											&&
+											$nesting_level == 0
 										) {
 
 											// Get related conditions
@@ -14029,31 +14045,35 @@
 
 										if (
 											(
-												isset($provider_item_MedicalWebPage)
-												&&
-												array_intersect(
-													$provider_properties_map[$MedicalWebPage_type]['properties'],
-													$provider_treatment_common
+												(
+													isset($provider_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$provider_properties_map[$MedicalWebPage_type]['properties'],
+														$provider_treatment_common
+													)
+												)
+												||
+												(
+													isset($provider_item_MedicalBusiness)
+													&&
+													array_intersect(
+														$provider_properties_map[$MedicalBusiness_type]['properties'],
+														$provider_treatment_common
+													)
+												)
+												||
+												(
+													isset($provider_item_Person)
+													&&
+													array_intersect(
+														$provider_properties_map[$Person_type]['properties'],
+														$provider_treatment_common
+													)
 												)
 											)
-											||
-											(
-												isset($provider_item_MedicalBusiness)
-												&&
-												array_intersect(
-													$provider_properties_map[$MedicalBusiness_type]['properties'],
-													$provider_treatment_common
-												)
-											)
-											||
-											(
-												isset($provider_item_Person)
-												&&
-												array_intersect(
-													$provider_properties_map[$Person_type]['properties'],
-													$provider_treatment_common
-												)
-											)
+											&&
+											$nesting_level == 0
 										) {
 
 											// Get related treatments
