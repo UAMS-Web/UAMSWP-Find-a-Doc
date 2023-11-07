@@ -10865,7 +10865,7 @@ function uamswp_prevent_orphan($string) {
 										'<br />',
 										array_filter(
 											array(
-												$location_building_name,
+												( ( !isset($location_building_type) || $location_building_type == 'building' ) ? $location_building_name : null),
 												implode(
 													', ',
 													array_filter(
