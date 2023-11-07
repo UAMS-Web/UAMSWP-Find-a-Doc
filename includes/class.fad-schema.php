@@ -37203,7 +37203,53 @@
 
 					// Add the value to the property
 
-						$schema_type_list[$property_name] = $property_value;
+						if (
+							isset($schema_type_list[$property_name])
+							&&
+							!empty($schema_type_list[$property_name])
+							&&
+							!$property_value_overwrite
+						) {
+
+							/**
+							 * If the row value for the property already exists
+							 * and the row value for the property is not empty
+							 * and existing the row value for the property should not be overwritten with the incoming property value
+							 */
+
+							if (
+								(
+									is_array($schema_type_list[$property_name])
+									&&
+									!array_is_list($schema_type_list[$property_name])
+								)
+								||
+								(
+									!is_array($schema_type_list[$property_name])
+								)
+							) {
+
+								/**
+								 * If the row value for the property is an associative array...
+								 *
+								 * Or if the row value for the property is not an array...
+								 */
+
+								// Nest the row value for the property in an array to make the row value a list array
+
+									$schema_type_list[$property_name] = array($schema_type_list[$property_name]);
+
+							}
+
+							// Add the property value to the row value list array for the property
+
+								$schema_type_list[$property_name][] = $property_value;
+
+						} else {
+
+							$schema_type_list[$property_name] = $property_value;
+
+						}
 
 				}
 
