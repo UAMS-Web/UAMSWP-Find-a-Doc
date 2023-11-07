@@ -949,6 +949,44 @@
 		) {
 
 			/**
+			 * Schema.org Documentation for the 'openingHours' property:
+			 *
+			 *     The general opening hours for a business.
+			 *
+			 *     Opening hours can be specified as a weekly time range, starting with days, then
+			 *     times per day.
+			 *
+			 *     Multiple days can be listed with commas ',' separating each day.
+			 *
+			 *     Day or time ranges are specified using a hyphen '-'.
+			 *
+			 *     Days are specified using the following two-letter combinations:
+			 *
+			 *         - Sunday is specified as 'Su'
+			 *         - Monday is specified as 'Mo'
+			 *         - Tuesday is specified as 'Tu'
+			 *         - Wednesday is specified as 'We'
+			 *         - Thursday is specified as 'Th'
+			 *         - Friday is specified as 'Fr'
+			 *         - Saturday is specified as 'Sa'
+			 *
+			 *     Times are specified using 24:00 format. For example:
+			 *
+			 *         - 3 p.m. is specified as '15:00'
+			 *         - 10 a.m. is specified as '10:00'
+			 *
+			 *     Examples:
+			 *
+			 *         - Tuesdays and Thursdays from 4-8 p.m. is specified as 'Tu,Th 16:00-20:00'
+			 *         - All day, seven days a week is specified as 'Mo-Su'
+			 *         - Monday through Thursday, 9 a.m.-noon is specified as 'Mo,Tu,We,Th 09:00-12:00'
+			 *         - Monday through Friday, 10 a.m.-7 p.m.; Saturday, 10 a.m.-10 p.m.; Sunday, 10 a.m.-9 p.m. is specified as [ 'Mo-Fr 10:00-19:00', 'Sa 10:00-22:00', 'Su 10:00-21:00' ]
+			 *
+			 *     Values expected to be one of these types
+			 *
+			 *         - Text
+
+			 *
 			 * Example use:
 			 *
 			 * 	// OpeningHours Schema Data
