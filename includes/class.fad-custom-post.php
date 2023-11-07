@@ -3542,21 +3542,6 @@
 
 				$map = get_field( 'location_map', $postId );
 
-			// Floor
-
-				$location_floor = get_field_object('location_building_floor', $postId );
-					$location_floor_value = '';
-					$location_floor_label = '';
-
-					if ( $location_floor ) {
-
-						$location_floor_value = $location_floor['value'];
-						$location_floor_label = $location_floor['choices'][ $location_floor_value ];
-
-					}
-
-			// Map / GPS
-
 				$data['location_lat'] = $map['lat'];
 				$data['location_lng'] = $map['lng'];
 
@@ -3570,21 +3555,103 @@
 
 			// Building
 
-				$location_building = get_field( 'location_building', $postId );
+				// Query: Is this location contained within a larger facility rather than being its own standalone facility?
 
-				if ( $location_building ) {
+					$location_building_query = get_field( 'location_building_query', $postId ) ?? null;
 
-					$building = get_term($location_building, "building");
-					$building_slug = $building->slug;
-					$building_name = $building->name;
+				// Get building selection
 
-				}
+					$location_building = null;
 
-				$data['location_building'] = $building_name;
+					if (
+						!isset($location_building_query)
+						||
+						$location_building_query
+					) {
 
-			// Floor
+						$location_building = get_field( 'location_building', $postId );
 
-				$data['location_building_floor'] = $location_floor_label;
+					}
+
+					// Get building term and its values
+
+						$building = $location_building ? get_term( $location_building, 'building' ) : null;
+						$building_type = null;
+						$building_slug = null;
+						$building_name = null;
+
+						if (
+							$building
+							&&
+							is_object($building)
+						) {
+
+							$building_type = get_field( 'facility_place_subtype', $building ) ?? null;
+							$building_slug = $building->slug;
+							$building_name = $building->name;
+
+						}
+
+					// Reset values if building is set to 'None'
+
+						if (
+							$building_slug
+							&&
+							$building_slug == '_none'
+						) {
+
+							$location_building = null;
+							$building = null;
+							$building_type = null;
+							$building_slug = null;
+							$building_name = null;
+
+						}
+
+					$data['location_building'] = $building_name;
+
+				// Building Floor
+
+					$location_floor = null;
+					$location_floor_value = null;
+					$location_floor_label = null;
+
+					// Get building floor selection
+
+						if (
+							!isset($location_building_query)
+							||
+							$location_building_query
+						) {
+
+							$location_floor = get_field_object( 'location_building_floor', $postId );
+
+						}
+
+						// Get building floor values
+
+							if ( $location_floor ) {
+
+								$location_floor_value = $location_floor['value'];
+								$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+
+							}
+
+							// Reset values if building is set to 'Single-Story Building'
+
+								if (
+									isset($location_floor_value)
+									&&
+									!$location_floor_value
+								) {
+
+									$location_floor = null;
+									$location_floor_value = null;
+									$location_floor_label = null;
+
+								}
+
+					$data['location_building_floor'] = $location_floor_label;
 
 			// Suite
 
