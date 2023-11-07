@@ -21690,7 +21690,7 @@
 
 													// MedicalWebPage
 
-														$location_descendant_location_MedicalWebPage = $location_descendant_location['MedicalWebPage'];
+														$location_descendant_location_MedicalWebPage = $location_descendant_location['MedicalWebPage'] ?? null;
 
 														// Get URLs for significantLink property
 
@@ -21707,7 +21707,7 @@
 
 													// LocalBusiness and subtypes
 
-														$location_descendant_location_LocalBusiness = $location_descendant_location['LocalBusiness'];
+														$location_descendant_location_LocalBusiness = $location_descendant_location['LocalBusiness'] ?? null;
 
 														// Get names for keywords property
 
