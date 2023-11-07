@@ -20864,26 +20864,6 @@
 								$location_author = null;
 								$location_availableService = null;
 								$location_brand = null;
-								$location_facility_additionalType = null;
-								$location_facility_additionalType_repeater = null;
-								$location_facility_address = null;
-								$location_facility_alternateName = null;
-								$location_facility_alternateName_repeater = null;
-								$location_facility_containedIn = null;
-								$location_facility_containedInPlace = null;
-								$location_facility_geo = null;
-								$location_facility_hasMap = null;
-								$location_facility_id = null;
-								$location_facility_image = null;
-								$location_facility_latitude = null;
-								$location_facility_longitude = null;
-								$location_facility_name = null;
-								$location_facility_photo = null;
-								$location_facility_Place = null;
-								$location_facility_sameAs = null;
-								$location_facility_sameAs_repeater = null;
-								$location_facility_slug = null;
-								$location_facility_term = null;
 								$location_clinical_resource = null;
 								$location_clinical_resource_CreativeWork = null;
 								$location_clinical_resource_CreativeWork_keywords = null;
@@ -20918,6 +20898,28 @@
 								$location_expertise_MedicalEntity = null;
 								$location_expertise_MedicalEntity_keywords = null;
 								$location_expertise_MedicalWebPage_significantLink = null;
+								$location_facility_additionalType = null;
+								$location_facility_additionalType_repeater = null;
+								$location_facility_address = null;
+								$location_facility_alternateName = null;
+								$location_facility_alternateName_repeater = null;
+								$location_facility_containedIn = null;
+								$location_facility_containedInPlace = null;
+								$location_facility_geo = null;
+								$location_facility_hasMap = null;
+								$location_facility_id = null;
+								$location_facility_image = null;
+								$location_facility_latitude = null;
+								$location_facility_longitude = null;
+								$location_facility_name = null;
+								$location_facility_photo = null;
+								$location_facility_Place = null;
+								$location_facility_query = null;
+								$location_facility_sameAs = null;
+								$location_facility_sameAs_repeater = null;
+								$location_facility_slug = null;
+								$location_facility_term = null;
+								$location_facility_type = null;
 								$location_faxNumber = null;
 								$location_faxNumber_Text_array = null;
 								$location_featured_image_id = null;
@@ -22124,13 +22126,27 @@
 
 												}
 
-										// Get Facility term ID
+										// Facility
 
-											if ( !isset($location_facility_id) ) {
+											// Query: Is this location contained within a larger facility rather than being its own standalone facility?
 
-												$location_facility_id = get_field( 'location_building', $entity );
+												if ( !isset($location_facility_query) ) {
 
-											}
+													$location_facility_query = get_field( 'location_building_query', $entity ) ?? null;
+
+												}
+
+											// Get selected Facility term ID
+
+												if ( !isset($location_facility_id) ) {
+
+													if ( $location_facility_query ) {
+
+														$location_facility_id = get_field( 'location_building', $entity ) ?? null;
+
+													}
+
+												}
 
 											// Format values as Place if the location has no parent
 
@@ -22792,39 +22808,79 @@
 
 													if ( !isset($location_facility_name) ) {
 
-														if ( !isset($location_facility_id) ) {
+														// Query: Is this location contained within a larger facility rather than being its own standalone facility?
 
-															$location_facility_id = get_field( 'location_building', $location_address_id ) ?? null;
+															if ( !isset($location_facility_query) ) {
 
-														}
-
-														if ( $location_facility_id ) {
-
-															if ( !isset($location_facility_term) ) {
-
-																$location_facility_term = get_term( $location_facility_id, 'building' ) ?? null;
+																$location_facility_query = get_field('location_building_query', $entity ) ?? null;
 
 															}
 
-															if ( is_object($location_facility_term) ) {
+														// Get selected Facility term ID
 
-																$location_facility_slug = $location_facility_term->slug;
+															if ( !isset($location_facility_id) ) {
 
-																if ( $location_facility_slug != '_none' ) {
+																if ( $location_facility_query ) {
 
+																	$location_facility_id = get_field( 'location_building', $entity ) ?? null;
+
+																}
+
+															}
+
+														// Get building term and its values
+
+															if ( $location_facility_id ) {
+
+																if ( !isset($location_facility_term) ) {
+
+																	$location_facility_term = get_term( $location_facility_id, 'building' ) ?? null;
+
+																}
+
+																if (
+																	$location_facility_term
+																	&&
+																	is_object($location_facility_term)
+																) {
+
+																	$location_facility_type = get_field( 'facility_place_subtype', $location_facility_term ) ?? null;
+																	$location_facility_slug = $location_facility_term->slug;
 																	$location_facility_name = $location_facility_term->name;
 
 																}
 
 															}
 
-														}
+														// Reset values if building is set to 'None'
+
+															if (
+																$location_facility_slug
+																&&
+																$location_facility_slug == '_none'
+															) {
+
+																$location_facility_id = null;
+																$location_facility_term = null;
+																$location_facility_type = null;
+																$location_facility_slug = null;
+																$location_facility_name = null;
+
+															}
 
 													}
 
 													// Add to the address 2 array
 
-														if ( $location_facility_name ) {
+														if (
+															$location_facility_name
+															&&
+															(
+																!isset($location_facility_type)
+																||
+																$location_facility_type == 'building'
+															)
+														) {
 
 															$location_address_2_array[] = $location_facility_name;
 
@@ -22836,41 +22892,48 @@
 
 												// Floor values
 
-													if ( !isset($location_floor_label) ) {
+													// Get building floor selection
 
-														$location_floor = get_field_object( 'location_building_floor', $location_address_id ) ?? array();
+														if ( !isset($location_floor_label) ) {
 
-														if (
-															$location_floor
-															&&
-															array_key_exists( 'value', $location_floor )
-															&&
-															array_key_exists( 'choices', $location_floor )
-														) {
+															if ( !isset($location_floor) ) {
 
-															// Floor label
+																if (
+																	!isset($location_building_query)
+																	||
+																	$location_building_query
+																) {
 
-																$location_floor_value = $location_floor['value'];
+																	$location_floor = get_field_object('location_building_floor', $post_id );
 
-																// Check floor value
+																}
+
+															}
+
+															// Get building floor values
+
+																if ( $location_floor ) {
+
+																	$location_floor_value = $location_floor['value'] ?? null;
+																	$location_floor_label = $location_floor['choices'][ $location_floor_value ] ?? null;
+
+																}
+
+																// Reset values if building is set to 'Single-Story Building'
 
 																	if (
-																		$location_floor_value == '0'
-																		||
-																		$location_floor_value == 'false'
-																		||
+																		isset($location_floor_value)
+																		&&
 																		!$location_floor_value
 																	) {
-																		$location_floor_value = '';
+
+																		$location_floor = null;
+																		$location_floor_value = null;
+																		$location_floor_label = null;
+
 																	}
 
-															// Floor label
-
-																$location_floor_label = $location_floor_value ? $location_floor['choices'][$location_floor_value] : '';
-
 														}
-
-													}
 
 													// Add to the address 2 array
 
