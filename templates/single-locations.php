@@ -1656,7 +1656,7 @@
 																		// 			$schema_day_of_week, // string // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 																		// 			$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																		// 			$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																		// 			$schema_opening_hours // array // Optional // Pre-existing list array for openingHours to which to add additional items
+																		// 			$schema_opening_hours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
 																		// 		);
 
 																		// Google method: OpeningHoursSpecification Schema Data
@@ -1829,7 +1829,7 @@
 																				// 			$schema_day_of_week, // string // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 																				// 			$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																				// 			$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																				// 			$schema_opening_hours // array // Optional // Pre-existing list array for openingHours to which to add additional items
+																				// 			$schema_opening_hours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
 																				// 		);
 
 																				// Google method: OpeningHoursSpecification Schema Data

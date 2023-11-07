@@ -945,7 +945,7 @@
 			string $day_of_week, // string // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 			string $opens = '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 			string $closes = '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			array $schema_opening_hours = array() // array // Optional // Pre-existing list array for openingHours to which to add additional items
+			$schema_opening_hours = array() // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
 		) {
 
 			/**
@@ -999,27 +999,88 @@
 			 * 				$schema_day_of_week, // string // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 			 * 				$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 			 * 				$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			 * 				$schema_opening_hours // array // Optional // Pre-existing list array for openingHours to which to add additional items
+			 * 				$schema_opening_hours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
 			 * 			);
 			 */
 
 			// Check/define variables
 
-				$schema_opening_hours = is_array($schema_opening_hours) ? $schema_opening_hours : array();
+				if (
+					$schema_opening_hours
+					&&
+					!array_is_list($schema_opening_hours)
+				) {
+
+					$schema_opening_hours = array($schema_opening_hours);
+
+				}
 
 			// Add values to the array
 
-				if (
-					$day_of_week
-					&&
-					$opens
-					&&
-					$closes
-				) {
-					$schema_opening_hours[] = $day_of_week . ' ' . $opens . '-' . $closes;
-				}
+				// Base item
 
-			// Return the main address schema array
+					$schema_item = '';
+
+				// Add day of week
+
+					$schema_item .= $day_of_week;
+
+				// Add opening and closing time
+
+
+					if (
+						$opens
+						&&
+						$closes
+						&&
+						(
+							$opens != '00:00'
+							&&
+							$closes != '23:59'
+						)
+					) {
+
+						$schema_item .= ' ' . $opens . '-' . $closes;
+
+					}
+
+				// Add the item to the output
+
+					if ( $schema_item ) {
+
+						if ( $schema_opening_hours ) {
+
+							if (
+								(
+									is_array($schema_opening_hours)
+									&&
+									!array_is_list($schema_opening_hours)
+								)
+								||
+								!is_array($schema_opening_hours)
+							) {
+
+								// Nest the existing value in an array to make the value a list array
+
+									$schema_opening_hours = array($schema_opening_hours);
+
+							}
+
+							// Add the value to the list array
+
+								$schema_opening_hours[] = $schema_item;
+
+						} else {
+
+							// Add the value to the output
+
+								$schema_opening_hours = $schema_item;
+
+						}
+
+					}
+
+			// Return the output
 
 				return $schema_opening_hours;
 
