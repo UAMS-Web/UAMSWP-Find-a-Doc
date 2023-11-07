@@ -19,7 +19,8 @@
 // Check/define variables
 
 	// Page ID
-	$page_id = get_the_ID();
+
+		$page_id = get_the_ID();
 
 	// Get the field values for the card
 
@@ -28,7 +29,8 @@
 		include( UAMS_FAD_PATH . '/templates/parts/vars/page/cards/location.php' );
 
 	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
+
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 	$location_primary_heading = implode(
 		' ',
