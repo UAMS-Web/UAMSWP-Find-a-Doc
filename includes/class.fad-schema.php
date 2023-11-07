@@ -22105,7 +22105,7 @@
 
 									}
 
-								// Parent entities (common use) [WIP]
+								// Parent entities (common use)
 
 									// List of properties that reference parent Place/Organization
 
