@@ -26180,22 +26180,22 @@
 									 *     - Organization
 									 */
 
-									// Get names for keywords property
+									// WebSite and MedicalWebPage only
 
-										// Base array
+										if (
+											$schema_common_parentOrganization_MedicalWebPage
+											&&
+											in_array(
+												'parentOrganization',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+										) {
 
-											$location_parentOrganization_keywords = array();
+											// Get names for keywords property
 
-										// WebSite and MedicalWebPage only
+												// Base array
 
-											if (
-												$schema_common_parentOrganization_MedicalWebPage
-												&&
-												in_array(
-													'parentOrganization',
-													$location_properties_map[$MedicalWebPage_type]['properties']
-												)
-											) {
+													$location_parentOrganization_keywords = $location_parentOrganization_keywords ?? array();
 
 												$location_parentOrganization_keywords = uamswp_fad_schema_property_values(
 													$schema_common_parentOrganization_MedicalWebPage, // array // Required // Property values from which to extract specific values
@@ -26203,39 +26203,94 @@
 													$location_parentOrganization_keywords // mixed // Optional // Pre-existing list to which to add additional items
 												);
 
-											}
+												// Merge brand keywords value into keywords
 
-										// Excluding WebSite and MedicalWebPage
+													$location_parentOrganization_keywords = $location_parentOrganization_keywords ?? array();
 
-											if (
+													if ( $location_parentOrganization_keywords ) {
+
+														$location_keywords = uamswp_fad_schema_merge_values(
+															$location_keywords, // mixed // Required // Initial schema item property value
+															$location_parentOrganization_keywords // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+										}
+
+									// Excluding WebSite and MedicalWebPage
+
+										if (
+											(
 												$schema_common_parentOrganization_exclude_MedicalWebPage
-												&&
-												in_array(
-													'parentOrganization',
-													$location_properties_map[$LocalBusiness_type]['properties']
-												)
-											) {
+												||
+												$location_parent_LocalBusiness
+											)
+											&&
+											in_array(
+												'parentOrganization',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
+										) {
 
-												$location_parentOrganization_keywords = uamswp_fad_schema_property_values(
-													$schema_common_parentOrganization_exclude_MedicalWebPage, // array // Required // Property values from which to extract specific values
-													array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-													$location_parentOrganization_keywords // mixed // Optional // Pre-existing list to which to add additional items
-												);
+											// Get parent location value
 
-											}
+												$location_parentOrganization_exclude_MedicalWebPage = $location_parent_LocalBusiness ?? array();
 
-										// Merge brand keywords value into keywords
+											// Add to item values
 
-											$location_parentOrganization_keywords = $location_parentOrganization_keywords ?? null;
+												// LocalBusiness
 
-											if ( $location_parentOrganization_keywords ) {
+													uamswp_fad_schema_add_to_item_values(
+														$LocalBusiness_type, // string // Required // The @type value for the schema item
+														$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+														'parentOrganization', // string // Required // Name of schema property
+														$location_parentOrganization_exclude_MedicalWebPage, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1), // int // Required // Current nesting level value
+														-1, // int // Optional // Max nesting level at which to add the property value // Default: -1 (no limit)
+														'==', // string // Optional // Operator used to compare nesting level with max nesting level. The possible operators are: <, lt, <=, le, >, gt, >=, ge, ==, =, eq, !=, <>, ne respectively. // Default: ==
+														'properties', // string // Optional // Key in the property map containing the list of allowed properties as its value // Default: 'properties'
+														false // bool // Optional // Query for whether to overwite any existing property value of the list array with the incoming property value // Default: true
+													);
 
-												$location_keywords = uamswp_fad_schema_merge_values(
-													$location_keywords, // mixed // Required // Initial schema item property value
-													$location_parentOrganization_keywords // mixed // Required // Incoming schema item property value
-												);
+											// Get names for keywords property
 
-											}
+												// Base array
+
+													$location_parentOrganization_keywords = $location_parentOrganization_keywords ?? array();
+
+												// Common parentOrganization keywords
+
+													$location_parentOrganization_keywords = uamswp_fad_schema_property_values(
+														$schema_common_parentOrganization_exclude_MedicalWebPage, // array // Required // Property values from which to extract specific values
+														array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
+														$location_parentOrganization_keywords // mixed // Optional // Pre-existing list to which to add additional items
+													);
+
+												// Parent location keywords
+
+													$location_parentOrganization_keywords = uamswp_fad_schema_property_values(
+														$location_parentOrganization_exclude_MedicalWebPage, // array // Required // Property values from which to extract specific values
+														array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
+														$location_parentOrganization_keywords // mixed // Optional // Pre-existing list to which to add additional items
+													);
+
+												// Merge brand keywords value into keywords
+
+													$location_parentOrganization_keywords = $location_parentOrganization_keywords ?? array();
+
+													if ( $location_parentOrganization_keywords ) {
+
+														$location_keywords = uamswp_fad_schema_merge_values(
+															$location_keywords, // mixed // Required // Initial schema item property value
+															$location_parentOrganization_keywords // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+										}
 
 								// paymentAccepted [WIP]
 
