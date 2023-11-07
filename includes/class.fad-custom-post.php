@@ -524,6 +524,10 @@
 
 			add_action( 'init', 'create_languages_taxonomy', 0 );
 
+		// Parking Facilities
+
+			add_action( 'init', 'create_parking_taxonomy', 0 );
+
 		// Patient Types
 
 			add_action( 'init', 'create_patient_type_taxonomy', 0 );
@@ -2490,6 +2494,59 @@
 					'show_in_quick_edit' => false,
 				);
 				register_taxonomy( 'building', array( 'location' ), $args );
+
+			}
+
+		// Parking Facilities
+
+			function create_parking_taxonomy() {
+
+				$labels = array(
+					'name' => 'Parking Facilities',
+					'singular_name' => 'Parking Facility',
+					'menu_name' => 'Parking Facilities',
+					'all_items' => 'All Parking Facilities',
+					'parent_item' => 'Parent Parking Facility',
+					'parent_item_colon' => 'Parent Parking Facility:',
+					'new_item_name' => 'New Parking Facility',
+					'add_new_item' => 'Add New Parking Facility',
+					'edit_item' => 'Edit Parking Facility',
+					'update_item' => 'Update Parking Facility',
+					'view_item' => 'View Parking Facility',
+					'separate_items_with_commas' => 'Separate Parking Facilities with commas',
+					'add_or_remove_items' => 'Add or remove Parking Facilities',
+					'choose_from_most_used' => 'Choose from the most used',
+					'popular_items' => 'Popular Parking Facilities',
+					'search_items' => 'Search Parking Facilities',
+					'not_found' => 'Not Found',
+					'no_terms' => 'No Parking Facilities',
+					'items_list' => 'Parking Facilities list',
+					'items_list_navigation' => 'Parking Facilities list navigation',
+				);
+				$rewrite = array(
+					'slug' => 'parking',
+					'with_front' => false,
+					'hierarchical' => false,
+				);
+				$capabilities = array(
+					'manage_terms' => 'manage_options',
+					'edit_terms' => 'manage_options',
+					'delete_terms' => 'manage_options',
+					'assign_terms' => 'edit_physicians',
+				);
+				$args = array(
+					'labels' => $labels,
+					'hierarchical' => false,
+					'public' => false,
+					'show_ui' => true,
+					'show_admin_column' => false,
+					'show_in_nav_menus' => false,
+					'show_tagcloud' => false,
+					'rewrite' => $rewrite,
+					'capabilities' => $capabilities,
+					'show_in_quick_edit' => false,
+				);
+				register_taxonomy( 'parking', array( 'location' ), $args );
 
 			}
 
