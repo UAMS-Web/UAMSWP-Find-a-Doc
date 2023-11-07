@@ -37084,7 +37084,8 @@
 			int $nesting_level, // int // Required // Current nesting level value
 			int $nesting_level_max = -1, // int // Optional // Max nesting level at which to add the property value // Default: -1 (no limit)
 			string $nesting_level_operator = '==', // string // Optional // Operator used to compare nesting level with max nesting level. The possible operators are: <, lt, <=, le, >, gt, >=, ge, ==, =, eq, !=, <>, ne respectively. // Default: ==
-			string $property_map_key = 'properties' // string // Optional // Key in the property map containing the list of allowed properties as its value // Default: 'properties'
+			string $property_map_key = 'properties', // string // Optional // Key in the property map containing the list of allowed properties as its value // Default: 'properties'
+			bool $property_value_overwrite = true // bool // Optional // Query for whether to overwite any existing property value of the list array with the incoming property value // Default: true
 		) {
 
 			if (
