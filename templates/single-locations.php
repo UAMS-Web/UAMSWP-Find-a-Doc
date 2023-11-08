@@ -1425,7 +1425,7 @@
 																					// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 																					// 	 */
 																					//
-																					// 	$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
+																					// 	$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
 																					// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 																					// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
 																					// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1441,7 +1441,7 @@
 																						 */
 
 																						foreach ( $schema_day_of_week as $day) {
-																							$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
+																							$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
 																								$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 																								$day, // array|string (optional) // The day of the week for which these opening hours are valid.
 																								$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1537,7 +1537,7 @@
 																							// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 																							// 	 */
 																							//
-																							// 	$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
+																							// 	$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
 																							// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 																							// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
 																							// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1553,7 +1553,7 @@
 																								 */
 
 																								foreach ( $schema_day_of_week as $day) {
-																									$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
+																									$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
 																										$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 																										$day, // array|string (optional) // The day of the week for which these opening hours are valid.
 																										$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1695,7 +1695,7 @@
 																			// Loop through all the days in the array separately
 
 																				foreach ( $schema_day_of_week as $day) {
-																					$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
+																					$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
 																						$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 																						$day, // array|string (optional) // The day of the week for which these opening hours are valid.
 																						$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1898,7 +1898,7 @@
 																					// Loop through all the days in the array separately
 
 																						foreach ( $schema_day_of_week as $day) {
-																							$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
+																							$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
 																								$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 																								$day, // array|string (optional) // The day of the week for which these opening hours are valid.
 																								$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
