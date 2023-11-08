@@ -848,15 +848,15 @@
 
 		function uamswp_fad_schema_openinghoursspecification(
 			$day_of_week = array(), // array|string // Optional // The day of the week for which these opening hours are valid.
-			string $opens = '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using hh:mm:ss[Z|(+|-)hh:mm] format.
-			string $closes = '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using hh:mm:ss[Z|(+|-)hh:mm] format.
-			string $valid_from = '', // string // Optional // The date when the item becomes valid.
-			string $valid_through = '', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+			string $opens = '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+			string $closes = '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+			string $valid_from = '', // string // Optional // The date when the item becomes valid. // Date is specified using the ISO 8601 date format (YYYY-MM-DD).
+			string $valid_through = '', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours. //  Date is specified using the ISO 8601 date format (YYYY-MM-DD).
 			array $schema_OpeningHoursSpecification = array() // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 		) {
 
 			/**
-			 * Schema.org Documentation for the 'OpeningHoursSpecification' property:
+			 * Schema.org Documentation for the 'OpeningHoursSpecification' type:
 			 *
 			 *     A structured value providing information about the opening hours of a place or
 			 *     a certain service inside a place.
@@ -875,14 +875,14 @@
 			 *             Expected Type:
 			 *
 			 *                 - DayOfWeek (Schema.org Enumeration Type)
-			 *                       - https://schema.org/Sunday
-			 *                       - https://schema.org/Monday
-			 *                       - https://schema.org/Tuesday
-			 *                       - https://schema.org/Wednesday
-			 *                       - https://schema.org/Thursday
-			 *                       - https://schema.org/Friday
-			 *                       - https://schema.org/Saturday
-			 *                       - https://schema.org/PublicHolidays
+			 *                       - Sunday
+			 *                       - Monday
+			 *                       - Tuesday
+			 *                       - Wednesday
+			 *                       - Thursday
+			 *                       - Friday
+			 *                       - Saturday
+			 *                       - PublicHolidays
 			 *
 			 *         'opens'
 			 *
@@ -919,6 +919,79 @@
 			 *
 			 *                 - Date
 			 *                 - DateTime
+			 *
+			 * Google documentation for the 'openingHoursSpecification' property / 'OpeningHoursSpecification' type:
+			 * (https://developers.google.com/search/docs/appearance/structured-data/local-business)
+			 *
+			 *     Standard hours:
+			 *
+			 *         Excluding the 'validFrom' and 'validThrough' properties signify that the hours
+			 *         are valid year-round. This example defines a business that is open weekdays
+			 *         from 9am to 9pm, with weekend hours from 10am until 11pm.
+			 *
+			 *             Set 1 (weekday hours):
+			 *
+			 *                 $day_of_week = array(
+			 *                     'Monday',
+			 *                     'Tuesday',
+			 *                     'Wednesday',
+			 *                     'Thursday',
+			 *                     'Friday'
+			 *                 );
+			 *
+			 *                 $opens = '09:00';
+			 *
+			 *                 $closes = '21:00';
+			 *
+			 *             Set 2 (weekend hours):
+			 *
+			 *                 $day_of_week = array(
+			 *                     'Saturday',
+			 *                     'Sunday'
+			 *                 );
+			 *
+			 *                 $opens = '10:00';
+			 *
+			 *                 $closes = '23:00';
+			 *
+			 *     Late night hours:
+			 *
+			 *         For hours past midnight, define opening and closing hours using a single
+			 *         'OpeningHoursSpecification' property. This example defines hours from Saturday
+			 *         at 6pm until Sunday at 3am.
+			 *
+			 *             $day_of_week = 'Saturday';
+			 *             $opens = '18:00';
+			 *             $closes = '03:00';
+			 *
+			 *     All-day hours:
+			 *
+			 *         To show a business as open 24 hours a day, set the 'opens' property to "00:00"
+			 *         and the 'closes' property to "23:59".To show a business is closed all day, set
+			 *         both 'opens' and 'closes' properties to "00:00". This example shows a business
+			 *         open all day Saturday and closed all day Sunday.
+			 *
+			 *             Set 1 (open all day):
+			 *
+			 *                 $day_of_week = 'Saturday';
+			 *                 $opens = '00:00';
+			 *                 $closes = '23:59';
+			 *
+			 *             Set 2 (closed all day):
+			 *
+			 *                 $day_of_week = 'Sunday';
+			 *                 $opens = '00:00';
+			 *                 $closes = '00:00';
+			 *
+			 *     Seasonal hours:
+			 *
+			 *         Use both the 'validFrom' and 'validThrough' properties to define seasonal
+			 *         hours. This example shows a business closed for winter holidays.
+			 *
+			 *             $opens = '00:00';
+			 *             $closes = '00:00';
+			 *             $valid_from = '2015-12-23';
+			 *             $valid_through = '2016-01-05';
 			 *
 			 * Example use:
 			 *
