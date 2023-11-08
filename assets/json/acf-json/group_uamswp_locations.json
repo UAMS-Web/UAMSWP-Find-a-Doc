@@ -2248,7 +2248,7 @@
 				{
 					"key": "field_location_modified_hours",
 					"name": "location_modified_hours",
-					"label": "Upcoming Modified Hours",
+					"label": "Are there any upcoming modified hours?",
 					"type": "button_group",
 					"instructions": "",
 					"required": 1,
