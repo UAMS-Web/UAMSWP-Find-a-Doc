@@ -350,7 +350,7 @@
 
 								if ( $item_MedicalSpecialty ) {
 
-									$values[] = 'https://schema.org/' . $item_MedicalSpecialty . '/';
+									$values[] = 'https://schema.org/' . $item_MedicalSpecialty;
 
 								}
 
@@ -424,8 +424,8 @@
 							!is_array($item)
 						) {
 
-							$list_values[] = 'https://schema.org/' . $item . '/';
-							$output_values[] = 'https://schema.org/' . $item . '/';
+							$list_values[] = 'https://schema.org/' . $item;
+							$output_values[] = 'https://schema.org/' . $item;
 
 						}
 
@@ -10562,7 +10562,7 @@
 
 										if ( $Place_subtype_SchemaOrg ) {
 
-											$Place_subtype_SchemaOrg_url = 'https://schema.org/' . $Place_subtype_SchemaOrg . '/';
+											$Place_subtype_SchemaOrg_url = 'https://schema.org/' . $Place_subtype_SchemaOrg;
 
 										}
 
@@ -14875,7 +14875,7 @@
 
 											// Get values
 
-												$provider_additionalType_MedicalWebPage = 'https://schema.org/ProfilePage/';
+												$provider_additionalType_MedicalWebPage = 'https://schema.org/ProfilePage';
 
 											// Clean up additionalType property values array
 
@@ -24014,7 +24014,7 @@
 
 											// Get values
 
-												$location_additionalType_MedicalWebPage = 'https://schema.org/ProfilePage/';
+												$location_additionalType_MedicalWebPage = 'https://schema.org/ProfilePage';
 
 											// Clean up additionalType property values array
 
@@ -37847,13 +37847,13 @@
 
 					// Add schema.org URLs to list
 
-						$urls[] = 'https://schema.org/' . $item . '/';
+						$urls[] = 'https://schema.org/' . $item;
 
 						foreach ( $subtypes as $subtype ) {
 
 							if ( $subtype ) {
 
-								$urls[] = 'https://schema.org/' . $subtype . '/';
+								$urls[] = 'https://schema.org/' . $subtype;
 
 							}
 
