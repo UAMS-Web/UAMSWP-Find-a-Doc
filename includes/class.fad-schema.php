@@ -945,7 +945,7 @@
 			$day_of_week, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 			string $opens = '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 			string $closes = '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			$schema_opening_hours = array() // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
+			$schema_openingHours = array() // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
 		) {
 
 			/**
@@ -991,15 +991,15 @@
 			 * 	// openingHours Schema Data
 			 *
 			 * 		// Check/define the main openingHours schema array
-			 * 		$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array();
+			 * 		$schema_openingHours = ( isset($schema_openingHours) && is_array($schema_openingHours) && !empty($schema_openingHours) ) ? $schema_openingHours : array();
 			 *
 			 * 		// Add this location's details to the main openingHours schema array
 			 *
-			 * 			$schema_opening_hours = uamswp_fad_schema_openinghours(
+			 * 			$schema_openingHours = uamswp_fad_schema_openinghours(
 			 * 				$schema_day_of_week, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 			 * 				$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 			 * 				$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			 * 				$schema_opening_hours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
+			 * 				$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
 			 * 			);
 			 */
 
@@ -1013,7 +1013,7 @@
 						!is_string($day_of_week)
 					) {
 
-						return $schema_opening_hours;
+						return $schema_openingHours;
 
 					}
 
@@ -1025,19 +1025,19 @@
 						!array_is_list($day_of_week)
 					) {
 
-						return $schema_opening_hours;
+						return $schema_openingHours;
 
 					}
 
 				// Check whether the pre-existing list is a list array
 
 					if (
-						$schema_opening_hours
+						$schema_openingHours
 						&&
-						!array_is_list($schema_opening_hours)
+						!array_is_list($schema_openingHours)
 					) {
 
-						$schema_opening_hours = array($schema_opening_hours);
+						$schema_openingHours = array($schema_openingHours);
 
 					}
 
@@ -1085,33 +1085,33 @@
 
 					if ( $schema_item ) {
 
-						if ( $schema_opening_hours ) {
+						if ( $schema_openingHours ) {
 
 							if (
 								(
-									is_array($schema_opening_hours)
+									is_array($schema_openingHours)
 									&&
-									!array_is_list($schema_opening_hours)
+									!array_is_list($schema_openingHours)
 								)
 								||
-								!is_array($schema_opening_hours)
+								!is_array($schema_openingHours)
 							) {
 
 								// Nest the existing value in an array to make the value a list array
 
-									$schema_opening_hours = array($schema_opening_hours);
+									$schema_openingHours = array($schema_openingHours);
 
 							}
 
 							// Add the value to the list array
 
-								$schema_opening_hours[] = $schema_item;
+								$schema_openingHours[] = $schema_item;
 
 						} else {
 
 							// Add the value to the output
 
-								$schema_opening_hours = $schema_item;
+								$schema_openingHours = $schema_item;
 
 						}
 
@@ -1119,7 +1119,7 @@
 
 			// Return the output
 
-				return $schema_opening_hours;
+				return $schema_openingHours;
 
 		}
 

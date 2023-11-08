@@ -1605,7 +1605,7 @@
 
 																// 	// Check/define/reset schema data variables
 
-																// 		$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array(); // Main openingHours schema array
+																// 		$schema_openingHours = ( isset($schema_openingHours) && is_array($schema_openingHours) && !empty($schema_openingHours) ) ? $schema_openingHours : array(); // Main openingHours schema array
 																// 		$schema_day_of_week = ''; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 																// 		$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																// 		$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1652,11 +1652,11 @@
 
 																		// 	// Add this location's details to the main openingHours schema array
 
-																		// 		$schema_opening_hours = uamswp_fad_schema_openinghours(
+																		// 		$schema_openingHours = uamswp_fad_schema_openinghours(
 																		// 			$schema_day_of_week, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 																		// 			$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																		// 			$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																		// 			$schema_opening_hours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
+																		// 			$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
 																		// 		);
 
 																		// Google method: OpeningHoursSpecification Schema Data
@@ -1825,11 +1825,11 @@
 
 																				// 	// Add this location's details to the main openingHours schema array
 
-																				// 		$schema_opening_hours = uamswp_fad_schema_opening_hours(
+																				// 		$schema_openingHours = uamswp_fad_schema_opening_hours(
 																				// 			$schema_day_of_week, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 																				// 			$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																				// 			$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																				// 			$schema_opening_hours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
+																				// 			$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
 																				// 		);
 
 																				// Google method: OpeningHoursSpecification Schema Data
@@ -2864,7 +2864,7 @@
 							$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array(); // array
 
 							// Property: openingHours
-							// $schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array(); // array
+							// $schema_openingHours = ( isset($schema_openingHours) && is_array($schema_openingHours) && !empty($schema_openingHours) ) ? $schema_openingHours : array(); // array
 
 					// Construct the schema script tag
 
