@@ -2362,7 +2362,7 @@
 				{
 					"key": "field_location_modified_hours_group",
 					"name": "location_modified_hours_group",
-					"label": "Modified In-Person Hours of Operation",
+					"label": "Individual Modified In-Person Hours of Operation",
 					"type": "repeater",
 					"instructions": "",
 					"required": 0,
@@ -2454,7 +2454,7 @@
 						{
 							"key": "field_location_modified_hours_times",
 							"name": "location_modified_hours_times",
-							"label": "Hours",
+							"label": "Modified In-Person Hours of Operation",
 							"type": "repeater",
 							"instructions": "Set the time for all seven days.",
 							"required": 0,
