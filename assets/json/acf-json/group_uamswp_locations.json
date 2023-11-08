@@ -1999,12 +1999,8 @@
 						[
 							{
 								"field": "field_location_hours_variable",
-								"operator": "!=",
-								"value": "1"
-							},
-							{
-								"field": "field_location_hours_variable",
-								"operator": "!=empty"
+								"operator": "==",
+								"value": "0"
 							}
 						]
 					],
@@ -2034,21 +2030,13 @@
 						[
 							{
 								"field": "field_location_hours_variable",
-								"operator": "!=",
-								"value": "1"
-							},
-							{
-								"field": "field_location_hours_variable",
-								"operator": "!=empty"
+								"operator": "==",
+								"value": "0"
 							},
 							{
 								"field": "field_location_24_7",
-								"operator": "!=",
-								"value": "1"
-							},
-							{
-								"field": "field_location_24_7",
-								"operator": "!=empty"
+								"operator": "==",
+								"value": "0"
 							}
 						]
 					],
@@ -2196,12 +2184,8 @@
 						[
 							{
 								"field": "field_location_24_7",
-								"operator": "!=",
-								"value": "1"
-							},
-							{
-								"field": "field_location_24_7",
-								"operator": "!=empty"
+								"operator": "==",
+								"value": "0"
 							}
 						]
 					],
@@ -2227,8 +2211,8 @@
 						[
 							{
 								"field": "field_location_hours_variable",
-								"operator": "!=",
-								"value": "1"
+								"operator": "==",
+								"value": "0"
 							}
 						]
 					],
@@ -2483,8 +2467,8 @@
 									},
 									{
 										"field": "field_location_modified_hours_24_7",
-										"operator": "!=",
-										"value": "1"
+										"operator": "==",
+										"value": "0"
 									}
 								]
 							],
@@ -2910,8 +2894,8 @@
 							},
 							{
 								"field": "field_location_telemed_24_7",
-								"operator": "!=",
-								"value": "1"
+								"operator": "==",
+								"value": "0"
 							}
 						]
 					],
@@ -3262,8 +3246,8 @@
 							},
 							{
 								"field": "field_location_telemed_modified_hours_24_7",
-								"operator": "!=",
-								"value": "1"
+								"operator": "==",
+								"value": "0"
 							}
 						]
 					],
