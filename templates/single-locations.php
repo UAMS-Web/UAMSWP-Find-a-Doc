@@ -1420,8 +1420,11 @@
 																				// Add this location's details to the main OpeningHoursSpecification schema array
 
 																					// // Schema.org method: Add all days as an array under the dayOfWeek property
-																					// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-
+																					//
+																					// 	/**
+																					// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																					// 	 */
+																					//
 																					// 	$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
 																					// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 																					// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
@@ -1432,7 +1435,10 @@
 																					// 	);
 
 																					// Google method: Loop through all the days defined in the current Hours repeater row separately
-																					// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+
+																						/**
+																						 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																						 */
 
 																						foreach ( $schema_day_of_week as $day) {
 																							$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
@@ -1526,8 +1532,11 @@
 																						// Add this location's details to the main OpeningHoursSpecification schema array
 
 																							// // Schema.org method: Add all days as an array under the dayOfWeek property
-																							// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-
+																							//
+																							// 	/**
+																							// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																							// 	 */
+																							//
 																							// 	$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
 																							// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 																							// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
@@ -1538,7 +1547,10 @@
 																							// 	);
 
 																							// Google method: Loop through all the days defined in the current Hours repeater row separately
-																							// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+
+																								/**
+																								 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																								 */
 
 																								foreach ( $schema_day_of_week as $day) {
 																									$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
@@ -1601,17 +1613,23 @@
 															// Schema Data
 
 																// // Schema.org method: openingHours Schema Data
-																// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-
+																//
+																// 	/**
+																// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																// 	 */
+																//
 																// 	// Check/define/reset schema data variables
-
+																//
 																// 		$schema_openingHours = ( isset($schema_openingHours) && is_array($schema_openingHours) && !empty($schema_openingHours) ) ? $schema_openingHours : array(); // Main openingHours schema array
 																// 		$schema_day_of_week = ''; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 																// 		$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																// 		$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
 																// Google method: OpeningHoursSpecification Schema Data
-																// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+
+																	/**
+																	 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																	 */
 
 																	// Check/define/reset schema data variables
 
@@ -1642,16 +1660,19 @@
 																	// Schema Data
 
 																		// // Schema.org method: openingHours Schema Data
-																		// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-
+																		//
+																		// 	/**
+																		// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																		// 	 */
+																		//
 																		// 	// Define schema data variables
-
+																		//
 																		// 		$schema_day_of_week = 'Mo-Su'; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 																		// 		$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																		// 		$schema_closes = '23:59'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
+																		//
 																		// 	// Add this location's details to the main openingHours schema array
-
+																		//
 																		// 		$schema_openingHours = uamswp_fad_schema_openinghours(
 																		// 			$schema_day_of_week, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 																		// 			$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1660,7 +1681,10 @@
 																		// 		);
 
 																		// Google method: OpeningHoursSpecification Schema Data
-																		// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+
+																			/**
+																			 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																			 */
 
 																			// Define schema data variables
 
@@ -1702,16 +1726,22 @@
 																			// Schema Data
 
 																				// // Schema.org method: openingHours Schema Data
-																				// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-
+																				//
+																				// 	/**
+																				// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																				// 	 */
+																				//
 																				// 	// Define/reset schema data variables
-
+																				//
 																				// 		$schema_day_of_week = ''; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 																				// 		$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																				// 		$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
 																				// Google method: OpeningHoursSpecification Schema Data
-																				// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+
+																					/**
+																					 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																					 */
 
 																					// Define/reset schema data variables
 
@@ -1742,12 +1772,18 @@
 																				) {
 
 																					// // Schema.org method: openingHours Schema Data
-																					// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-
-																					// 	// Do nothing
+																					//
+																					// 	/**
+																					// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																					// 	 *
+																					// 	 * Do nothing
+																					// 	 */
 
 																					// Google method: OpeningHoursSpecification Schema Data
-																					// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+
+																						/**
+																						 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																						 */
 
 																						// Define schema data variables
 
@@ -1761,14 +1797,20 @@
 																				) {
 
 																					// // Schema.org method: openingHours Schema Data
-																					// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-
+																					//
+																					// 	/**
+																					// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																					// 	 */
+																					//
 																					// 	// Define schema data variables
-
+																					//
 																					// 		$schema_day_of_week = 'Mo-Fr'; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 
 																					// Google method: OpeningHoursSpecification Schema Data
-																					// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+
+																						/**
+																						 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																						 */
 
 																						// Define schema data variables
 
@@ -1782,12 +1824,18 @@
 																				) {
 
 																					// // Schema.org method: openingHours Schema Data
-																					// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-
-																					// 	// Do nothing
+																					//
+																					// 	/**
+																					// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																					// 	 *
+																					// 	 * Do nothing
+																					// 	 */
 
 																					// Google method: OpeningHoursSpecification Schema Data
-																					// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+
+																						/**
+																						 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																						 */
 
 																						// Define schema data variables
 
@@ -1801,16 +1849,22 @@
 																					// And the current repeater row is not marked as closed
 
 																					// // Schema.org method: openingHours Schema Data
-																					// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-
+																					//
+																					// 	/**
+																					// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																					// 	 */
+																					//
 																					// 	// Define schema data variables
-
+																					//
 																					// 		$schema_day_of_week = substr( $hour['day'], 0, 2 ); // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 																					// 		$schema_opens = date('H:i', strtotime($hour['open'])); // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																					// 		$schema_closes = date('H:i', strtotime($hour['close'])); // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
 																					// Google method: OpeningHoursSpecification Schema Data
-																					// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+
+																						/**
+																						 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																						 */
 
 																						// Define schema data variables
 
@@ -1821,10 +1875,13 @@
 																				}
 
 																				// // Schema.org method: openingHours Schema Data
-																				// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-
+																				//
+																				// 	/**
+																				// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																				// 	 */
+																				//
 																				// 	// Add this location's details to the main openingHours schema array
-
+																				//
 																				// 		$schema_openingHours = uamswp_fad_schema_opening_hours(
 																				// 			$schema_day_of_week, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 																				// 			$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1833,7 +1890,10 @@
 																				// 		);
 
 																				// Google method: OpeningHoursSpecification Schema Data
-																				// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+
+																					/**
+																					 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																					 */
 
 																					// Loop through all the days in the array separately
 
@@ -2823,7 +2883,10 @@
 					// Set the values
 
 						// Required for Google Structured Data
-						// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+
+							/**
+							 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+							 */
 
 							// Type: MedicalClinic
 							$schema_type = 'MedicalClinic'; // string
@@ -2835,7 +2898,10 @@
 							$schema_address = ( isset($schema_address) && is_array($schema_address) && !empty($schema_address) ) ? $schema_address : array(); // array
 
 						// Recommended by Google Structured Data
-						// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+
+							/**
+							 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+							 */
 
 							// Property: openingHoursSpecification
 							$schema_opening_hours_specification = isset($schema_opening_hours_specification) ? $schema_opening_hours_specification : '';
