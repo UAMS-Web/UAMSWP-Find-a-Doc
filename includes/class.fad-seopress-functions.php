@@ -9,14 +9,14 @@
 	// Call before setting $meta_title on template
 	function uamswp_fad_meta_title_vars(
 		$page_title_attr, // string
-		$meta_title_base_addition = '', // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
-		$meta_title_base_order = '', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
-		$meta_title_enhanced_addition = '', // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
-		$meta_title_enhanced_order = '', // array (optional) // Pre-defined array for name order of enhanced meta title level 1 // Expects two values but will accommodate any number
-		$meta_title_enhanced_x2_addition = '', // string (optional) // Second word or phrase to inject into base meta title to form enhanced meta title level 2
-		$meta_title_enhanced_x2_order = '', // array (optional) // Pre-defined array for name order of enhanced meta title level 2 // Expects three values but will accommodate any number
-		$meta_title_enhanced_x3_addition = '', // string (optional) // Third word or phrase to inject into base meta title to form enhanced meta title level 3
-		$meta_title_enhanced_x3_order = '' // array (optional) // Pre-defined array for name order of enhanced meta title level 3 // Expects four values but will accommodate any number
+		$meta_title_base_addition = '', // string // Optional // Word or phrase to use to form base meta title // Defaults to $page_title_attr
+		$meta_title_base_order = '', // array // Optional // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
+		$meta_title_enhanced_addition = '', // string // Optional // Word or phrase to inject into base meta title to form enhanced meta title level 1
+		$meta_title_enhanced_order = '', // array // Optional // Pre-defined array for name order of enhanced meta title level 1 // Expects two values but will accommodate any number
+		$meta_title_enhanced_x2_addition = '', // string // Optional // Second word or phrase to inject into base meta title to form enhanced meta title level 2
+		$meta_title_enhanced_x2_order = '', // array // Optional // Pre-defined array for name order of enhanced meta title level 2 // Expects three values but will accommodate any number
+		$meta_title_enhanced_x3_addition = '', // string // Optional // Third word or phrase to inject into base meta title to form enhanced meta title level 3
+		$meta_title_enhanced_x3_order = '' // array // Optional // Pre-defined array for name order of enhanced meta title level 3 // Expects four values but will accommodate any number
 	) {
 
 		// Check/define variables

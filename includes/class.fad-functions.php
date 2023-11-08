@@ -1451,9 +1451,9 @@ function uamswp_attr_conversion($input) {
 // Get site header and site nav values for ontology subsections
 function uamswp_fad_ontology_site_values(
 	$page_id, // int // ID of the post
-	$ontology_type = true, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
-	$page_title = '', // string (optional) // Title of the post
-	$page_url = '' // string (optional) // Permalink of the post
+	$ontology_type = true, // bool // Optional // Ontology type of the post (true is ontology type, false is content type)
+	$page_title = '', // string // Optional // Title of the post
+	$page_url = '' // string // Optional // Permalink of the post
 ) {
 
 	// Retrieve the value of the transient
@@ -1704,9 +1704,9 @@ function uamswp_fad_ontology_site_values(
 			$page_id, // int // ID of the current ontology item
 			$page_title_attr, // string // Attribute-friendly title of the current ontology item
 			&$related_array, // int[] // List of related ontology item IDs
-			$post_type = '', // string (optional) // Post type of the related ontology items
-			$data_category_title = '', // string (optional) // 'data-categorytitle' attribute value of links
-			$max = 3 // int (optional) // Maximum number of related ontology items to display
+			$post_type = '', // string // Optional // Post type of the related ontology items
+			$data_category_title = '', // string // Optional // 'data-categorytitle' attribute value of links
+			$max = 3 // int // Optional // Maximum number of related ontology items to display
 		) {
 
 			// Check/define variables
@@ -9097,9 +9097,9 @@ function uamswp_meta_image_values( $featured_image ) {
 function uamswp_fad_fpage_text_image_overlay(
 	$page_id, // int
 	$page_titles, // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-	$current_fpage = '', // string (optional) // Fake subpage slug
+	$current_fpage = '', // string // Optional // Fake subpage slug
 	$ontology_type = true, // bool (optional)
-	$text_image_overlay_id = 'archives' // string (optional) // Section ID attribute value
+	$text_image_overlay_id = 'archives' // string // Optional // Section ID attribute value
 ) {
 
 	// Retrieve the value of the transients
@@ -11659,8 +11659,8 @@ function uamswp_prevent_orphan($string) {
 										// Add this location's details to the main fax number schema array
 
 											$schema_fax_number = uamswp_fad_schema_fax_number(
-												$schema_fax_number, // array (optional) // Main faxNumber schema array
-												( isset($location_fax) ? $location_fax : '' ) // string (optional) // The fax number.
+												$schema_fax_number, // array // Optional // Main faxNumber schema array
+												( isset($location_fax) ? $location_fax : '' ) // string // Optional // The fax number.
 											);
 
 									// GeoCoordinates Schema Data
@@ -12786,7 +12786,7 @@ function uamswp_prevent_orphan($string) {
 											$page_id, // int // ID of the current ontology item
 											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
 											$clinical_resource_providers, // int[] // List of related ontology item IDs
-											'provider' // string (optional) // Post type of the related ontology items
+											'provider' // string // Optional // Post type of the related ontology items
 										);
 
 									// Define the list label
@@ -12816,7 +12816,7 @@ function uamswp_prevent_orphan($string) {
 											$page_id, // int // ID of the current ontology item
 											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
 											$clinical_resource_locations, // int[] // List of related ontology item IDs
-											'location' // string (optional) // Post type of the related ontology items
+											'location' // string // Optional // Post type of the related ontology items
 										);
 
 									// Define the list label
@@ -12846,7 +12846,7 @@ function uamswp_prevent_orphan($string) {
 											$page_id, // int // ID of the current ontology item
 											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
 											$clinical_resource_expertises, // int[] // List of related ontology item IDs
-											'expertise' // string (optional) // Post type of the related ontology items
+											'expertise' // string // Optional // Post type of the related ontology items
 										);
 
 									// Define the list label
@@ -12876,7 +12876,7 @@ function uamswp_prevent_orphan($string) {
 											$page_id, // int // ID of the current ontology item
 											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
 											$clinical_resource_conditions, // int[] // List of related ontology item IDs
-											'condition' // string (optional) // Post type of the related ontology items
+											'condition' // string // Optional // Post type of the related ontology items
 										);
 
 									// Define the list label
@@ -12906,7 +12906,7 @@ function uamswp_prevent_orphan($string) {
 											$page_id, // int // ID of the current ontology item
 											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
 											$clinical_resource_treatments, // int[] // List of related ontology item IDs
-											'treatment' // string (optional) // Post type of the related ontology items
+											'treatment' // string // Optional // Post type of the related ontology items
 										);
 
 									// Define the list label

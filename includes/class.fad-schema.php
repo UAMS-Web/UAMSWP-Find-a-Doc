@@ -458,10 +458,10 @@
 		// Add data from associated conditions and treatments
 
 			function uamswp_fad_schema_medicalSpecialty_old(
-				$schema_medical_specialty = array(), // array (optional) // Main medicalSpecialty schema array
-				$name = '', // string (optional) // The name of the item.
-				$url = '', // string (optional) // URL of the item.
-				$alternate_name = '' // string (optional) // An alias for the item.
+				$schema_medical_specialty = array(), // array // Optional // Main medicalSpecialty schema array
+				$name = '', // string // Optional // The name of the item.
+				$url = '', // string // Optional // URL of the item.
+				$alternate_name = '' // string // Optional // An alias for the item.
 			) {
 
 				/**
@@ -474,9 +474,9 @@
 				 *
 				 * 		// Add this location's details to the main medicalSpecialty schema array
 				 * 		$schema_medical_specialty = uamswp_fad_schema_medicalSpecialty_old(
-				 * 			$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
-				 * 			$condition_title_attr, // string (optional) // The name of the item.
-				 * 			$condition_url // string (optional) // URL of the item.
+				 * 			$schema_medical_specialty, // array // Optional // Main medicalSpecialty schema array
+				 * 			$condition_title_attr, // string // Optional // The name of the item.
+				 * 			$condition_url // string // Optional // URL of the item.
 				 * 		);
 				 */
 
@@ -730,8 +730,8 @@
 	// Add data to an array defining schema data for faxNumber
 
 		function uamswp_fad_schema_fax_number(
-			$schema_fax_number = array(), // array (optional) // Main faxNumber schema array
-			$fax_number = '' // string (optional) // The fax number.
+			$schema_fax_number = array(), // array // Optional // Main faxNumber schema array
+			$fax_number = '' // string // Optional // The fax number.
 		) {
 
 			/**
@@ -744,8 +744,8 @@
 			 *
 			 * 		// Add this location's details to the main faxNumber schema array
 			 * 		$schema_fax_number = uamswp_fad_schema_fax_number(
-			 * 			$schema_fax_number, // array (optional) // Main faxNumber schema array
-			 * 			$location_fax_format_dash // string (optional) // The fax number.
+			 * 			$schema_fax_number, // array // Optional // Main faxNumber schema array
+			 * 			$location_fax_format_dash // string // Optional // The fax number.
 			 * 		);
 			 */
 
@@ -847,12 +847,12 @@
 	// Add data to an array defining schema data for OpeningHoursSpecification
 
 		function uamswp_fad_schema_openinghoursspecification(
-			$schema_opening_hours_specification = array(), // array (optional) // Main OpeningHoursSpecification schema array
-			$day_of_week = array(), // array|string (optional) // The day of the week for which these opening hours are valid.
-			$opens = '', // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			$closes = '', // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			$valid_from = '', // string (optional) // The date when the item becomes valid.
-			$valid_through = '' // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+			$schema_opening_hours_specification = array(), // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+			$day_of_week = array(), // array|string // Optional // The day of the week for which these opening hours are valid.
+			$opens = '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+			$closes = '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+			$valid_from = '', // string // Optional // The date when the item becomes valid.
+			$valid_through = '' // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 		) {
 
 			/**
@@ -869,12 +869,12 @@
 			 * 			// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 			 *
 			 * 			// 	$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
-			 * 			// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
-			 * 			// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
-			 * 			// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			 * 			// 		$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			 * 			// 		$schema_valid_from, // string (optional) // The date when the item becomes valid.
-			 * 			// 		$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+			 * 			// 		$schema_opening_hours_specification, // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+			 * 			// 		$schema_day_of_week, // array|string // Optional // The day of the week for which these opening hours are valid.
+			 * 			// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+			 * 			// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+			 * 			// 		$schema_valid_from, // string // Optional // The date when the item becomes valid.
+			 * 			// 		$schema_valid_through // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 			 * 			// 	);
 			 *
 			 * 			// Google method: Loop through all the days defined in the current Hours repeater row separately
@@ -882,12 +882,12 @@
 			 *
 			 * 				foreach ( $schema_day_of_week as $day) {
 			 * 					$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
-			 * 						$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
-			 * 						$day, // array|string (optional) // The day of the week for which these opening hours are valid.
-			 * 						$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			 * 						$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			 * 						$schema_valid_from, // string (optional) // The date when the item becomes valid.
-			 * 						$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+			 * 						$schema_opening_hours_specification, // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+			 * 						$day, // array|string // Optional // The day of the week for which these opening hours are valid.
+			 * 						$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+			 * 						$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+			 * 						$schema_valid_from, // string // Optional // The date when the item becomes valid.
+			 * 						$schema_valid_through // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 			 * 					);
 			 * 				}
 			 */

@@ -1,18 +1,18 @@
 <?php
 /*
  * Template Name: Treatment List Section
- * 
- * Description: A template part that displays a list of treatments associated with 
+ *
+ * Description: A template part that displays a list of treatments associated with
  * the current page.
- * 
+ *
  * Designed for UAMS Health Find-a-Doc
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the current page
  * 	$treatments_cpt // int[]
  * 	$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 	$hide_medical_ontology // bool // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
- * 
+ *
  * Optional vars:
  * 	$schema_medical_specialty // array // MedicalSpecialty Schema data
  * 	$treatment_section_show // bool
@@ -162,9 +162,9 @@ if ( $treatment_section_show ) {
 
 										// Add this location's details to the main medicalSpecialty schema array
 										$schema_medical_specialty = uamswp_fad_schema_medicalSpecialty_old(
-											$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
-											$treatment_title_attr, // string (optional) // The name of the item.
-											$treatment_url // string (optional) // URL of the item.
+											$schema_medical_specialty, // array // Optional // Main medicalSpecialty schema array
+											$treatment_title_attr, // string // Optional // The name of the item.
+											$treatment_url // string // Optional // URL of the item.
 										);
 
 									?>
@@ -197,6 +197,6 @@ if ( $treatment_section_show ) {
 			</div>
 		</div>
 	</section>
-<?php 
+<?php
 } // endif ( $treatment_section_show )
 ?>

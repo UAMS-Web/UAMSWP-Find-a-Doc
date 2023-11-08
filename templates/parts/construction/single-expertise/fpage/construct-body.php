@@ -64,7 +64,7 @@
 					uamswp_fad_fpage_text_image_overlay(
 						$page_id, // int
 						$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-						$current_fpage, // string (optional) // Fake subpage slug
+						$current_fpage, // string // Optional // Fake subpage slug
 						$ontology_type // bool (optional)
 					);
 

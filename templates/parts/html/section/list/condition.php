@@ -1,18 +1,18 @@
 <?php
 /*
  * Template Name: Condition List Section
- * 
- * Description: A template part that displays a list of conditions associated with 
+ *
+ * Description: A template part that displays a list of conditions associated with
  * the current page.
- * 
+ *
  * Designed for UAMS Health Find-a-Doc
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the current page
  * 	$conditions_cpt // int[] // Value of the related conditions input (or $condition_descendants, List of this condition item's descendant items)
  * 	$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 	$hide_medical_ontology // bool // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
- * 
+ *
  * Optional vars:
  * 	$schema_medical_specialty // array // MedicalSpecialty Schema data
  * 	$condition_section_show // bool // Query for whether to show the conditions section (or $condition_descendant_section_show, Query for whether to show the descendant condition section)
@@ -31,7 +31,7 @@
  * 	$condition_cpt_query // WP_Post[]
  * 	$condition_ids // int[]
  * 	$condition_count // int
- * 
+ *
  * Return:
  * 	var $schema_medical_specialty // array
  * 	html <section />
@@ -155,9 +155,9 @@ if ( $condition_section_show ) {
 
 										// Add this location's details to the main medicalSpecialty schema array
 										$schema_medical_specialty = uamswp_fad_schema_medicalSpecialty_old(
-											$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
-											$condition_title_attr, // string (optional) // The name of the item.
-											$condition_url // string (optional) // URL of the item.
+											$schema_medical_specialty, // array // Optional // Main medicalSpecialty schema array
+											$condition_title_attr, // string // Optional // The name of the item.
+											$condition_url // string // Optional // URL of the item.
 										);
 
 									?>
@@ -190,6 +190,6 @@ if ( $condition_section_show ) {
 			</div>
 		</div>
 	</section>
-<?php 
+<?php
 } // endif ( $condition_section_show )
 ?>

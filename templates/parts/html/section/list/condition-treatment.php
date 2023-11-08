@@ -1,20 +1,20 @@
 <?php
 /*
  * Template Name: Combined Condition and Treatment List Section
- * 
- * Description: A template part that displays a list of conditions and treatments 
+ *
+ * Description: A template part that displays a list of conditions and treatments
  * associated with the current page.
- * 
- * When this template part is needed for a hook, use the 
+ *
+ * When this template part is needed for a hook, use the
  * uamswp_fad_section_condition_treatment() function.
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the current page
  * 	$conditions_cpt // int[] // Value of the related conditions input (or $condition_descendants, List of this condition item's descendant items)
  * 	$treatments_cpt // int[] // Value of the related treatments input (or $treatment_descendants, List of this treatment item's descendant items)
  * 	$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 	$hide_medical_ontology // bool // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
- * 
+ *
  * Optional vars:
  * 	$schema_medical_specialty // array // MedicalSpecialty Schema data
  * 	$condition_treatment_section_show // bool
@@ -50,7 +50,7 @@
  * 	$condition_count // int
  * 	$treatment_cpt_query // WP_Post[]
  * 	$treatment_count // int
- * 
+ *
  * Return:
  * 	var $schema_medical_specialty; // array
  * 	html <section />
@@ -308,9 +308,9 @@ if ( $condition_treatment_section_show ) {
 
 												// Add this location's details to the main medicalSpecialty schema array
 												$schema_medical_specialty = uamswp_fad_schema_medicalSpecialty_old(
-													$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
-													$condition_title_attr, // string (optional) // The name of the item.
-													$condition_url // string (optional) // URL of the item.
+													$schema_medical_specialty, // array // Optional // Main medicalSpecialty schema array
+													$condition_title_attr, // string // Optional // The name of the item.
+													$condition_url // string // Optional // URL of the item.
 												);
 
 											?>
@@ -428,7 +428,7 @@ if ( $condition_treatment_section_show ) {
 			</div>
 		</div>
 	</section>
-<?php 
+<?php
 } // endif ( $treatment_section_show )
 
 ?>

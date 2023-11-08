@@ -417,8 +417,8 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 					// Add this location's details to the main faxNumber schema array
 
 						$schema_fax_number = uamswp_fad_schema_fax_number(
-							$schema_fax_number, // array (optional) // Main faxNumber schema array
-							$location_fax_format_dash // string (optional) // The fax number.
+							$schema_fax_number, // array // Optional // Main faxNumber schema array
+							$location_fax_format_dash // string // Optional // The fax number.
 						);
 
 			} // endif ( !empty($location_fax)
