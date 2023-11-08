@@ -2095,22 +2095,26 @@
 						},
 						{
 							"key": "field_hours_closed",
+							"label": "Status",
 							"name": "closed",
-							"label": "Closed",
-							"type": "true_false",
+							"type": "button_group",
 							"instructions": "",
-							"required": 0,
+							"required": 1,
 							"conditional_logic": 0,
 							"wrapper": {
 								"width": "",
 								"class": "",
 								"id": ""
 							},
-							"message": "Closed",
-							"default_value": 0,
-							"ui": 0,
-							"ui_on_text": "",
-							"ui_off_text": ""
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
 						},
 						{
 							"key": "field_hours_open",
@@ -2538,11 +2542,11 @@
 								},
 								{
 									"key": "field_location_modified_hours_closed",
+									"label": "Status",
 									"name": "location_modified_hours_closed",
-									"label": "Closed",
-									"type": "true_false",
+									"type": "button_group",
 									"instructions": "",
-									"required": 0,
+									"required": 1,
 									"conditional_logic": 0,
 									"wrapper": {
 										"width": "",
@@ -2550,11 +2554,14 @@
 										"id": ""
 									},
 									"acfe_permissions": "",
-									"message": "",
-									"default_value": 0,
-									"ui": 0,
-									"ui_on_text": "",
-									"ui_off_text": ""
+									"choices": {
+										"0": "Open",
+										"1": "Closed"
+									},
+									"allow_null": 1,
+									"default_value": "",
+									"layout": "horizontal",
+									"return_format": "value"
 								},
 								{
 									"key": "field_location_modified_hours_open",
@@ -2695,22 +2702,26 @@
 						},
 						{
 							"key": "field_holiday_closed",
+							"label": "Status",
 							"name": "closed",
-							"label": "Closed",
-							"type": "true_false",
+							"type": "button_group",
 							"instructions": "",
-							"required": 0,
+							"required": 1,
 							"conditional_logic": 0,
 							"wrapper": {
 								"width": "",
 								"class": "",
 								"id": ""
 							},
-							"message": "Closed",
-							"default_value": 0,
-							"ui": 0,
-							"ui_on_text": "",
-							"ui_off_text": ""
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
 						},
 						{
 							"key": "field_holiday_open",
@@ -2955,22 +2966,26 @@
 						},
 						{
 							"key": "field_telemed_hours_closed",
+							"label": "Status",
 							"name": "closed",
-							"label": "Closed",
-							"type": "true_false",
+							"type": "button_group",
 							"instructions": "",
-							"required": 0,
+							"required": 1,
 							"conditional_logic": 0,
 							"wrapper": {
 								"width": "",
 								"class": "",
 								"id": ""
 							},
-							"message": "Closed",
-							"default_value": 0,
-							"ui": 0,
-							"ui_on_text": "",
-							"ui_off_text": ""
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
 						},
 						{
 							"key": "field_telemed_hours_open",
@@ -3306,11 +3321,11 @@
 						},
 						{
 							"key": "field_location_telemed_modified_hours_closed",
+							"label": "Status",
 							"name": "location_telemed_modified_hours_closed",
-							"label": "Closed",
-							"type": "true_false",
+							"type": "button_group",
 							"instructions": "",
-							"required": 0,
+							"required": 1,
 							"conditional_logic": 0,
 							"wrapper": {
 								"width": "",
@@ -3318,11 +3333,14 @@
 								"id": ""
 							},
 							"acfe_permissions": "",
-							"message": "",
-							"default_value": 0,
-							"ui": 0,
-							"ui_on_text": "",
-							"ui_off_text": ""
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
 						},
 						{
 							"key": "field_location_telemed_modified_hours_open",
