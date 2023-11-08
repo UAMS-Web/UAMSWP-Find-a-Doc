@@ -939,7 +939,7 @@
 
 		}
 
-	// Add data to an array defining schema data for openingHours
+	// Add data to an array defining schema data for openingHours (Text)
 
 		function uamswp_fad_schema_openinghours(
 			$day_of_week, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
