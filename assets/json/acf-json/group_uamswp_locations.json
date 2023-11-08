@@ -1898,7 +1898,7 @@
 			"sub_fields": [
 				{
 					"key": "field_location_typical_hours_tab",
-					"label": "Typical Hours",
+					"label": "Typical In-Person Hours",
 					"name": "",
 					"type": "tab",
 					"instructions": "",
@@ -1917,7 +1917,7 @@
 					"key": "field_hours_message",
 					"name": "",
 					"type": "message",
-					"label": "Hours of Operation",
+					"label": "In-Person Hours of Operation (Deprecated)",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": [
@@ -1942,7 +1942,7 @@
 					"key": "field_location_hours_variable",
 					"name": "location_hours_variable",
 					"type": "button_group",
-					"label": "Do the location's hours vary?",
+					"label": "Do the location's typical in-person hours of operation vary?",
 					"instructions": "For example, does this location operate only periodically or as needed?",
 					"required": 1,
 					"conditional_logic": 0,
@@ -1965,8 +1965,8 @@
 					"key": "field_location_hours_variable_info",
 					"name": "location_hours_variable_info",
 					"type": "wysiwyg",
-					"label": "Variable Hours Information",
 					"instructions": "Describe how the hours work for this location.",
+					"label": "Information about the Location's Variable Hours of Operation",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -1992,7 +1992,7 @@
 					"key": "field_location_24_7",
 					"name": "location_24_7",
 					"type": "button_group",
-					"label": "Is the location typically available 24/7?",
+					"label": "Is the location typically open 24/7?",
 					"instructions": "",
 					"required": 1,
 					"conditional_logic": [
@@ -2027,8 +2027,8 @@
 					"key": "field_location_hours",
 					"name": "location_hours",
 					"type": "repeater",
-					"label": "Typical Hours",
 					"instructions": "Set the time for all seven days.",
+					"label": "Typical In-Person Hours of Operation",
 					"required": 0,
 					"conditional_logic": [
 						[
@@ -2115,7 +2115,7 @@
 						{
 							"key": "field_hours_open",
 							"name": "open",
-							"label": "Open",
+							"label": "Opens",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -2139,7 +2139,7 @@
 						{
 							"key": "field_hours_close",
 							"name": "close",
-							"label": "Close",
+							"label": "Closes",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -2193,8 +2193,8 @@
 					"key": "field_after_hours",
 					"name": "location_after_hours",
 					"type": "wysiwyg",
-					"label": "After Hours Information",
 					"instructions": "",
+					"label": "Information for When the Location Is Closed",
 					"required": 0,
 					"conditional_logic": [
 						[
@@ -2248,7 +2248,7 @@
 				{
 					"key": "field_location_modified_hours",
 					"name": "location_modified_hours",
-					"label": "Are there any upcoming modified hours?",
+					"label": "Are there any upcoming modified in-person hours of operation?",
 					"type": "button_group",
 					"instructions": "",
 					"required": 1,
@@ -2271,7 +2271,7 @@
 				{
 					"key": "field_location_modified_hours_reason",
 					"name": "location_modified_hours_reason",
-					"label": "Reason for Modified Hours",
+					"label": "Reason for Modified In-Person Hours of Operation",
 					"type": "wysiwyg",
 					"instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>The date range will be displayed automatically, so that does not have to be included in this field.",
 					"required": 1,
@@ -2299,7 +2299,7 @@
 				{
 					"key": "field_location_modified_hours_start_date",
 					"name": "location_modified_hours_start_date",
-					"label": "Modified Hours Start Date",
+					"label": "Start Date For the Modified In-Person Hours of Operation",
 					"type": "date_picker",
 					"instructions": "",
 					"required": 1,
@@ -2325,7 +2325,7 @@
 				{
 					"key": "field_location_modified_hours_end",
 					"name": "location_modified_hours_end",
-					"label": "Is there a Modified Hours End Date?",
+					"label": "Is there an end date for the modified in-person hours of operation?",
 					"type": "button_group",
 					"instructions": "",
 					"required": 1,
@@ -2356,7 +2356,7 @@
 				{
 					"key": "field_location_modified_hours_end_date",
 					"name": "location_modified_hours_end_date",
-					"label": "Modified Hours End Date",
+					"label": "End Date For the Modified In-Person Hours of Operation",
 					"type": "date_picker",
 					"instructions": "",
 					"required": 1,
@@ -2382,7 +2382,7 @@
 				{
 					"key": "field_location_modified_hours_group",
 					"name": "location_modified_hours_group",
-					"label": "Modified Hours",
+					"label": "Modified In-Person Hours of Operation",
 					"type": "repeater",
 					"instructions": "",
 					"required": 0,
@@ -2560,7 +2560,7 @@
 								{
 									"key": "field_location_modified_hours_open",
 									"name": "location_modified_hours_open",
-									"label": "Open",
+									"label": "Opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -2585,7 +2585,7 @@
 								{
 									"key": "field_location_modified_hours_close",
 									"name": "location_modified_hours_close",
-									"label": "Close",
+									"label": "Closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -2716,7 +2716,7 @@
 						{
 							"key": "field_holiday_open",
 							"name": "open",
-							"label": "Open",
+							"label": "Opens",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -2740,7 +2740,7 @@
 						{
 							"key": "field_holiday_close",
 							"name": "close",
-							"label": "Close",
+							"label": "Closes",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -2832,7 +2832,7 @@
 					"key": "field_location_telemed_patients",
 					"name": "location_telemed_patients",
 					"type": "radio",
-					"label": "Patient Type",
+					"label": "Telemedicine Patient Type",
 					"instructions": "Which type of patients can use the telemedicine services offered at this location?",
 					"required": 1,
 					"conditional_logic": [
@@ -2896,7 +2896,7 @@
 					"key": "field_location_telemed_hours",
 					"name": "location_telemed_hours",
 					"type": "repeater",
-					"label": "Typical Telemedicine Hours",
+					"label": "Typical Telemedicine Hours of Operation",
 					"instructions": "Set the time for all seven days.",
 					"required": 0,
 					"conditional_logic": [
@@ -2977,7 +2977,7 @@
 						{
 							"key": "field_telemed_hours_open",
 							"name": "open",
-							"label": "Open Time",
+							"label": "Opens",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -3001,7 +3001,7 @@
 						{
 							"key": "field_telemed_hours_close",
 							"name": "close",
-							"label": "Close Time",
+							"label": "Closes",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -3071,7 +3071,7 @@
 				{
 					"key": "field_location_telemed_modified_hours_query",
 					"name": "location_telemed_modified_hours_query",
-					"label": "Upcoming Modified Telemedicine Hours",
+					"label": "Are there any upcoming modified telemedicine hours of operation?",
 					"type": "button_group",
 					"instructions": "",
 					"required": 1,
@@ -3102,7 +3102,7 @@
 				{
 					"key": "field_location_telemed_modified_hours_reason",
 					"name": "location_telemed_modified_hours_reason",
-					"label": "Reason for Modified Telemedicine Hours",
+					"label": "Reason for Modified Telemedicine Hours of Operation",
 					"type": "wysiwyg",
 					"instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>This field can also include a description of the modification, if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>The date range will be displayed automatically, so that does not have to be included in this field..",
 					"required": 1,
@@ -3130,7 +3130,7 @@
 				{
 					"key": "field_location_telemed_modified_hours_start_date",
 					"name": "location_telemed_modified_hours_start_date",
-					"label": "Modified Telemedicine Hours Start Date",
+					"label": "Start Date For the Modified Telemedicine Hours of Operation",
 					"type": "date_picker",
 					"instructions": "",
 					"required": 1,
@@ -3156,7 +3156,7 @@
 				{
 					"key": "field_location_telemed_modified_hours_end",
 					"name": "location_telemed_modified_hours_end",
-					"label": "Is there a Modified Telemedicine Hours End Date?",
+					"label": "Is there an end date for the modified telemedicine hours of operation?",
 					"type": "button_group",
 					"instructions": "",
 					"required": 1,
@@ -3187,7 +3187,7 @@
 				{
 					"key": "field_location_telemed_modified_hours_end_date",
 					"name": "location_telemed_modified_hours_end_date",
-					"label": "Modified Telemedicine Hours End Date",
+					"label": "End Date For the Modified Telemedicine Hours of Operation",
 					"type": "date_picker",
 					"instructions": "",
 					"required": 1,
@@ -3214,7 +3214,7 @@
 					"key": "field_location_telemed_modified_hours_24_7",
 					"name": "location_telemed_modified_hours_24_7",
 					"type": "button_group",
-					"label": "Is telemedicine available 24\/7 during these modified hours?",
+					"label": "Is telemedicine available 24\/7 during these modified telemedicine hours of operation?",
 					"instructions": "",
 					"required": 1,
 					"conditional_logic": [
@@ -3244,7 +3244,7 @@
 				{
 					"key": "field_location_telemed_modified_hours_times",
 					"name": "location_telemed_modified_hours_times",
-					"label": "Hours",
+					"label": "Modified Telemedicine Hours of Operation",
 					"type": "repeater",
 					"instructions": "Set the time for all seven days.",
 					"required": 0,
@@ -3330,7 +3330,7 @@
 						{
 							"key": "field_location_telemed_modified_hours_open",
 							"name": "location_telemed_modified_hours_open",
-							"label": "Open",
+							"label": "Opens",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -3355,7 +3355,7 @@
 						{
 							"key": "field_location_telemed_modified_hours_close",
 							"name": "location_telemed_modified_hours_close",
-							"label": "Close",
+							"label": "Closes",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
