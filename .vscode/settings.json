@@ -3054,5 +3054,6 @@
 		"wpautop",
 		"wpdocs",
 		"yeardiv"
-	]
+	],
+	"editor.inlineSuggest.enabled": false
 }
