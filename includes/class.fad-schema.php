@@ -1143,41 +1143,41 @@
 
 				}
 
-			// Create an array for this item
+			// Base item array
 
 				$schema = array();
 
-			// Add values to the array
+			// Add values to the item array
 
-				if ( $day_of_week ) {
-					$schema['dayOfWeek'] = $day_of_week;
+				$schema['dayOfWeek'] = $day_of_week;
+				$schema['opens'] = $opens;
+				$schema['closes'] = $closes;
+				$schema['validFrom'] = $valid_from;
+				$schema['validThrough'] = $valid_through;
+
+			// Clean up the item array
+
+				$schema = $schema ? array_filter($schema) : null;
+
+			// Add @type to the item array
+
+				if ( $schema ) {
+
+					$schema = array( '@type' => 'OpeningHoursSpecification' ) + $schema;
+
 				}
 
-				if ( $opens ) {
-					$schema['opens'] = $opens;
-				}
+			// Add the item to the pre-existing list array
 
-				if ( $closes ) {
-					$schema['closes'] = $closes;
-				}
+				if ( $schema ) {
 
-				if ( $valid_from ) {
-					$schema['validFrom'] = $valid_from;
-				}
-
-				if ( $valid_through ) {
-					$schema['validThrough'] = $valid_through;
-				}
-
-				if ( !empty($schema) ) {
-					$schema = array('@type' => 'OpeningHoursSpecification') + $schema;
-				}
-
-			// Add this item's array to the main openingHoursSpecification schema array
-
-				if ( !empty($schema) ) {
 					$schema_OpeningHoursSpecification[] = $schema;
+
 				}
+
+			// Clean up the pre-existing list array
+
+				uamswp_fad_flatten_multidimensional_array($schema_OpeningHoursSpecification);
 
 			// Return the main address schema array
 
