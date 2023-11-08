@@ -2520,14 +2520,13 @@
 									},
 									"acfe_permissions": "",
 									"choices": {
+										"Sunday": "Sunday",
 										"Monday": "Monday",
 										"Tuesday": "Tuesday",
 										"Wednesday": "Wednesday",
 										"Thursday": "Thursday",
 										"Friday": "Friday",
-										"Saturday": "Saturday",
-										"Sunday": "Sunday",
-										"Mon - Fri": "Mon - Fri"
+										"Saturday": "Saturday"
 									},
 									"default_value": [],
 									"allow_null": 1,
@@ -2938,14 +2937,13 @@
 								"id": ""
 							},
 							"choices": {
+								"Sunday": "Sunday",
 								"Monday": "Monday",
 								"Tuesday": "Tuesday",
 								"Wednesday": "Wednesday",
 								"Thursday": "Thursday",
 								"Friday": "Friday",
-								"Saturday": "Saturday",
-								"Sunday": "Sunday",
-								"Mon - Fri": "Mon - Fri"
+								"Saturday": "Saturday"
 							},
 							"default_value": [],
 							"allow_null": 1,
@@ -3290,14 +3288,13 @@
 							},
 							"acfe_permissions": "",
 							"choices": {
+								"Sunday": "Sunday",
 								"Monday": "Monday",
 								"Tuesday": "Tuesday",
 								"Wednesday": "Wednesday",
 								"Thursday": "Thursday",
 								"Friday": "Friday",
-								"Saturday": "Saturday",
-								"Sunday": "Sunday",
-								"Mon - Fri": "Mon - Fri"
+								"Saturday": "Saturday"
 							},
 							"default_value": [],
 							"allow_null": 1,
