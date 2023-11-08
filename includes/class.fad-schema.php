@@ -986,6 +986,53 @@
 			 *
 			 *         - Text
 			 *
+			 * $opens and $closes arguments:
+			 *
+			 *     The strings can be any of the following formats:
+			 *
+			 *         - ##:##
+			 *         - #:##
+			 *         - ##:## A.M./P.M.
+			 *         - ##:## a.m./p.m.
+			 *         - ##:## am/pm
+			 *         - ##:## AM/PM
+			 *         - ##:##A.M./P.M.
+			 *         - ##:##a.m./p.m.
+			 *         - ##:##am/pm
+			 *         - ##:##AM/PM
+			 *         - #:## A.M./P.M.
+			 *         - #:## a.m./p.m.
+			 *         - #:## am/pm
+			 *         - #:## AM/PM
+			 *         - #:##A.M./P.M.
+			 *         - #:##a.m./p.m.
+			 *         - #:##am/pm
+			 *         - #:##AM/PM
+			 *         - ## A.M./P.M.
+			 *         - ## a.m./p.m.
+			 *         - ## AM/PM
+			 *         - ## am/pm
+			 *         - ##A.M./P.M.
+			 *         - ##a.m./p.m.
+			 *         - ##AM/PM
+			 *         - ##am/pm
+			 *         - # A.M./P.M.
+			 *         - # a.m./p.m.
+			 *         - # AM/PM
+			 *         - # am/pm
+			 *         - #A.M./P.M.
+			 *         - #a.m./p.m.
+			 *         - #AM/PM
+			 *         - #am/pm
+			 *         - Noon
+			 *         - noon
+			 *         - Midnight
+			 *         - midnight
+			 *
+			 *     The latest time defined for a day should be '23:59' (a.k.a., 11:59 p.m.).
+			 *
+			 *     Do not mix 24-hour format of an hour with a.m./p.m. (or their capitalization/punctuation variants).
+			 *
 			 * Example use:
 			 *
 			 * 	// openingHours Schema Data
