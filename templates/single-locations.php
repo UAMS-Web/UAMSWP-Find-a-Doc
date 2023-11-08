@@ -63,7 +63,8 @@
 		$location_has_parent = $parent_location ? true : false;
 
 	// Relevant ID for determining address and images
-	$post_id = $location_has_parent ? $location_parent_id : $page_id;
+
+		$post_id = $location_has_parent ? $location_parent_id : $page_id;
 
 // Get the page title and other name values
 
@@ -96,23 +97,32 @@
 	// Get system settings for elements of a fake subpage (or section) in a Location subsection (or profile)
 
 		// Get system settings for text elements in a location subsection (or profile)
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/specific-placement/location.php' );
+
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/specific-placement/location.php' );
 
 		// Image elements
 
-			// Do nothing
+			/**
+			 * Do nothing
+			 */
 
 	// Name of ontology item type represented by this fake subpage
 
-		// Do nothing
+		/**
+		 * Do nothing
+		 */
 
 	// Fake subpage page title
 
-		// Do nothing
+		/**
+		 * Do nothing
+		 */
 
 	// Fake subpage intro text
 
-		// Do nothing
+		/**
+		 * Do nothing
+		 */
 
 // Get the page URL and slug
 
@@ -127,11 +137,15 @@
 
 	// Fake subpage
 
-		// Do nothing
+		/**
+		 * Do nothing
+		 */
 
 // Get site header and site nav values for ontology subsections
 
-	// Do nothing
+	/**
+	 * Do nothing
+	 */
 
 // Image values
 
@@ -140,22 +154,28 @@
 		$override_parent_photo = $location_has_parent ? get_field('location_image_override_parent') : '';
 
 		// Query on whether to override the parent location's featured image
-		$override_parent_photo_featured = $override_parent_photo ? get_field('location_image_override_parent_featured') : false;
+
+			$override_parent_photo_featured = $override_parent_photo ? get_field('location_image_override_parent_featured') : false;
 
 		// Query on whether to override the parent location's wayfinding photo
-		$override_parent_photo_wayfinding = $override_parent_photo ? get_field('location_image_override_parent_wayfinding') : false;
+
+			$override_parent_photo_wayfinding = $override_parent_photo ? get_field('location_image_override_parent_wayfinding') : false;
 
 		// Query on whether to override the parent location's gallery photos
-		$override_parent_photo_gallery = $override_parent_photo ? get_field('location_image_override_parent_gallery') : false;
+
+			$override_parent_photo_gallery = $override_parent_photo ? get_field('location_image_override_parent_gallery') : false;
 
 	// Get the wayfinding photo ID
-	$wayfinding_photo = $override_parent_photo_wayfinding ? get_field('location_wayfinding_photo') : get_field('location_wayfinding_photo', $post_id); // int
+
+		$wayfinding_photo = $override_parent_photo_wayfinding ? get_field('location_wayfinding_photo') : get_field('location_wayfinding_photo', $post_id); // int
 
 	// Get the list of photo gallery item IDs
-	$photo_gallery = $override_parent_photo_gallery ? get_field('location_photo_gallery') : get_field('location_photo_gallery', $post_id); // array
+
+		$photo_gallery = $override_parent_photo_gallery ? get_field('location_photo_gallery') : get_field('location_photo_gallery', $post_id); // array
 
 	// Get the featured image ID
-	$featured_image = $override_parent_photo_featured ? get_post_thumbnail_id() : get_post_thumbnail_id($post_id); // int
+
+		$featured_image = $override_parent_photo_featured ? get_post_thumbnail_id() : get_post_thumbnail_id($post_id); // int
 
 	// Create the list of photos to use in the photo carousel
 
@@ -181,7 +201,8 @@
 			}
 
 		// Count the number of items in the photo carousel list
-		$location_images_count = count($location_images);
+
+			$location_images_count = count($location_images);
 
 	// Set image for schema
 
@@ -340,12 +361,15 @@
 
 	// Canonical URL
 
-		// Do nothing
+		/**
+		 * Do nothing
+		 */
 
 	// Meta Social Media Tags
 
 		// Filter hooks
-		include( UAMS_FAD_PATH . '/templates/parts/html/meta/social.php' );
+
+			include( UAMS_FAD_PATH . '/templates/parts/html/meta/social.php' );
 
 // BODY
 
@@ -409,11 +433,15 @@
 
 		// Override Genesis standard breadcrumbs settings
 
-			// Do nothing
+			/**
+			 * Do nothing
+			 */
 
 		// Override SEOPress standard breadcrumbs settings
 
-			// Do nothing
+			/**
+			 * Do nothing
+			 */
 
 	// Page Header (before entry element)
 
@@ -480,30 +508,62 @@
 
 					$location_alert_title = $location_alert_title_sys;
 
-					if ( !empty($location_alert_title_local) && $location_alert_modification == 'override' ) {
+					if (
+						!empty($location_alert_title_local)
+						&&
+						$location_alert_modification == 'override'
+					) {
+
 						$location_alert_title = $location_alert_title_local;
+
 					}
 
 					$location_alert_color = $location_alert_color_sys;
 
-					if ( $location_alert_modification == 'override' && $location_alert_color_local != 'inherit' ) {
+					if (
+						$location_alert_modification == 'override'
+						&&
+						$location_alert_color_local != 'inherit'
+					) {
+
 						$location_alert_color = $location_alert_color_local;
+
 					}
 
 					$location_alert_text = $location_alert_text_sys;
 
-					if ( $location_alert_modification == 'override' && !empty($location_alert_text_local) ) {
+					if (
+						$location_alert_modification == 'override'
+						&&
+						!empty($location_alert_text_local)
+					) {
+
 						$location_alert_text = $location_alert_text_local;
-					} elseif ( $location_alert_modification == 'prepend' && !empty($location_alert_text_local) ) {
+
+					} elseif (
+						$location_alert_modification == 'prepend'
+						&&
+						!empty($location_alert_text_local)
+					) {
+
 						$location_alert_text = $location_alert_text_local . $location_alert_text_sys;
-					} elseif ( $location_alert_modification == 'append' && !empty($location_alert_text_local) ) {
+
+					} elseif (
+						$location_alert_modification == 'append'
+						&&
+						!empty($location_alert_text_local)
+					) {
+
 						$location_alert_text = $location_alert_text_sys . $location_alert_text_local;
+
 					}
 
 					if ( $location_alert_modification == 'suppress' ) {
+
 						$location_alert_suppress = true;
 						$location_alert_title = '';
 						$location_alert_text = '';
+
 					}
 
 				// Set location closing information values
@@ -520,38 +580,71 @@
 					$location_closing_display = false;
 
 					if ( $location_closing ) {
+
 						$location_closing_date = get_field('location_closing_date'); // F j, Y
-						if (new DateTime() >= new DateTime($location_closing_date)) {
+
+						if ( new DateTime() >= new DateTime($location_closing_date) ) {
+
 							$location_closing_date_past = true;
+
 						}
+
 						$location_closing_length = get_field('location_closing_length');
 						$location_reopen_known = get_field('location_reopen_known');
 						$location_reopen_date = get_field('location_reopen_date'); // F j, Y
-						if (new DateTime() >= new DateTime($location_reopen_date)) {
+
+						if ( new DateTime() >= new DateTime($location_reopen_date) ) {
+
 							$location_reopen_date_past = true;
+
 						}
+
 						$location_closing_info = get_field('location_closing_info');
-						if ($location_closing_length == 'temporary') {
+
+						if ( $location_closing_length == 'temporary' ) {
+
 							$location_closing_telemed = get_field('location_closing_telemed'); // Will telemedicine be available during closure?
+
 						}
+
 						if (
 							$location_closing_length == 'permanent'
-							|| ($location_closing_length == 'temporary' && !$location_reopen_date_past)
-							) {
+							||
+							(
+								$location_closing_length == 'temporary'
+								&&
+								!$location_reopen_date_past
+							)
+						) {
+
 							$location_closing_display = true;
+
 						}
+
 					}
 
 				if (
 					(
-						( $location_closing && !$location_closing_date_past ) // If location closing is toggled, but closing start date is future
+						(
+							$location_closing
+							&&
+							!$location_closing_date_past
+						) // If location closing is toggled, but closing start date is future
 						||
-						( $location_closing && $location_reopen_date_past ) // If location closing is toggled, but reopening date is past (or is TBD)
+						(
+							$location_closing
+							&&
+							$location_reopen_date_past
+						) // If location closing is toggled, but reopening date is past (or is TBD)
 						||
 						!$location_closing // If location closing is not toggled
 					)
 					&&
-					( $location_alert_title || $location_alert_text ) // If location alert title or location alert description has value
+					(
+						$location_alert_title
+						||
+						$location_alert_text
+					) // If location alert title or location alert description has value
 				) {
 
 					$location_alert_section_show = true;
@@ -677,6 +770,7 @@
 						$location_about_section_label = 'Jump to the section of this page about ' . $location_about_section_title;
 
 					}
+
 				} else {
 
 					$location_about_section_show = false;
@@ -689,11 +783,21 @@
 				$location_direction = get_field('location_direction', $post_id);
 				$parking_map = get_field('location_parking_map', $post_id);
 
-				if ( $location_parking || $location_direction || $parking_map ) {
+				if (
+					$location_parking
+					||
+					$location_direction
+					||
+					$parking_map
+				) {
+
 					$parking_section_show = true;
 					$jump_link_count++;
+
 				} else {
+
 					$parking_section_show = false;
+
 				}
 
 			// Query for whether Appointment Information section should be displayed
@@ -739,12 +843,20 @@
 
 				// Change main appointment scheduling section title and intro if only one scheduling widget
 
-					if ($location_scheduling_query && (count((array)$location_scheduling_options) < 2)) {
+					if (
+						$location_scheduling_query
+						&&
+						(
+							count((array)$location_scheduling_options) < 2
+						)
+					) {
+
 						$row = $location_scheduling_options[0];
 						$location_scheduling_item_title_main = $row['location_scheduling_title']; // Get input for specific appointment section standalone title
 						$location_scheduling_title = ( isset($location_scheduling_item_title_main) && !empty($location_scheduling_item_title_main) ) ? $location_scheduling_item_title_main : $location_scheduling_title; // If input for specific appointment section title exists, use that. Otherwise, keep original value.
 						$location_scheduling_item_intro_main = $row['location_scheduling_intro']; // Get input for specific appointment section standalone intro
 						$location_scheduling_intro = ( isset($location_scheduling_item_intro_main) && !empty($location_scheduling_item_intro_main) ) ? $location_scheduling_item_intro_main : $location_scheduling_intro; // If input for specific appointment section intro exists, use that. Otherwise, keep original value.
+
 					}
 
 
@@ -753,10 +865,18 @@
 				$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
 				$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
 
-				if ( $mychart_scheduling_query_system && $location_scheduling_query ) {
+				if (
+					$mychart_scheduling_query_system
+					&&
+					$location_scheduling_query
+				) {
+
 					$mychart_scheduling_section_show = true;
+
 				} else {
+
 					$mychart_scheduling_section_show = false;
+
 				}
 
 			// Check if Telemedicine Information section should be displayed
@@ -809,25 +929,41 @@
 				$location_portal = get_field('location_portal');
 
 				if ( $location_portal ) {
+
 					$portal = get_term($location_portal, "portal");
 					$portal_slug = $portal->slug;
 					$portal_name = $portal->name;
 					$portal_name_attr = uamswp_attr_conversion($portal_name);
 					$portal_content = get_field('portal_content', $portal);
 					$portal_link = get_field('portal_url', $portal);
-					if ($portal_link) {
+
+					if ( $portal_link ) {
+
 						$portal_url = $portal_link['url'];
 						$portal_link_title = $portal_link['title'];
+
 					} else {
+
 						$portal_url = '';
 						$portal_link_title = '';
+
 					}
+
 				}
-				if ($portal && $portal_slug !== "_none") {
+
+				if (
+					$portal
+					&&
+					$portal_slug !== "_none"
+				) {
+
 					$portal_section_show = true;
 					$jump_link_count++;
+
 				} else {
+
 					$portal_section_show = false;
+
 				}
 
 			// Related Providers Section Query
@@ -1113,11 +1249,15 @@
 
 		// Get remaining details content associated with this item
 
-			// Do nothing
+			/**
+			 * Do nothing
+			 */
 
 		// Classes for indicating presence of content
 
-			// Do nothing
+			/**
+			 * Do nothing
+			 */
 
 		// Remove standard post content
 
@@ -1141,53 +1281,63 @@
 								<div class="row mx-0 mx-md-n8">
 									<div class="col-12 col-md text">
 										<div class="content-width">
-											<h1 class="page-title"><?php echo $page_title; ?>
-											<?php if ($parent_location) { ?>
-											<span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
-											<?php } // endif ?>
-											</h1>
-											<?php if ($location_closing_display) { ?>
+											<h1 class="page-title"><?php
+
+												echo $page_title;
+
+												if ( $parent_location ) {
+
+													?><span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span><?php
+
+												} // endif
+
+											?></h1>
+											<?php
+
+											if ( $location_closing_display ) {
+
+												?>
 												<div class="alert alert-warning" role="alert">
 													<p><?php
 
-													if ($location_closing_date_past) {
+														if ( $location_closing_date_past ) {
 
-														?>This <?php echo strtolower($location_single_name); ?> is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed. <?php
+															?>This <?php echo strtolower($location_single_name); ?> is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed. <?php
 
-													} else {
+														} else {
 
-														?>This <?php echo strtolower($location_single_name); ?> will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>. <?php
+															?>This <?php echo strtolower($location_single_name); ?> will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>. <?php
 
-													} // endif
+														} // endif
 
-													if (
-														$location_closing_length == 'temporary'
-														&& $location_reopen_known == 'date'
-														&& !empty($location_reopen_date)
-														&& (new DateTime($location_reopen_date) >= new DateTime($location_closing_date))
-													) {
+														if (
+															$location_closing_length == 'temporary'
+															&& $location_reopen_known == 'date'
+															&& !empty($location_reopen_date)
+															&& (new DateTime($location_reopen_date) >= new DateTime($location_closing_date))
+														) {
 
-														?>It is scheduled to reopen on <?php echo $location_reopen_date; ?>. <?php
+															?>It is scheduled to reopen on <?php echo $location_reopen_date; ?>. <?php
 
-													} elseif (
-														$location_closing_length == 'temporary'
-														&& $location_reopen_known == 'tbd'
-													) {
+														} elseif (
+															$location_closing_length == 'temporary'
+															&& $location_reopen_known == 'tbd'
+														) {
 
-														?>It will remain closed until further notice. <?php
+															?>It will remain closed until further notice. <?php
 
-													} // endif
+														} // endif
 
-													if (!empty($location_closing_info)) {
+														if ( !empty($location_closing_info) ) {
 
-														?><a href="#closing-info" class="alert-link no-break" aria-label="Learn more information about the closure of this <?php echo strtolower($location_single_name_attr); ?>">Learn more</a>. <?php
+															?><a href="#closing-info" class="alert-link no-break" aria-label="Learn more information about the closure of this <?php echo strtolower($location_single_name_attr); ?>">Learn more</a>. <?php
 
-													} // endif
+														} // endif
 
 													?></p>
 													<?php
 
-													if ($location_closing_telemed) {
+													if ( $location_closing_telemed ) {
 
 														?>
 														<p>Telemedicine will still be available. <a href="#telemedicine-info" class="alert-link no-break" aria-label="Learn more information about telemedicine at this <?php echo strtolower($location_single_name_attr); ?>">Learn more</a>.</p>
@@ -1213,10 +1363,17 @@
 											<div class="btn-container">
 												<div class="inner-container">
 													<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title_phrase; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>
-													<?php if ($parking_section_show) { ?>
-														<a class="btn btn-outline-primary" href="#parking-info" aria-label="Parking instructions for <?php echo $page_title_phrase; ?>" data-typetitle="Parking instructions for the clinic">Parking Instructions</a>
-													<?php } // endif $parking_section_show ?>
+													<?php
 
+													if ( $parking_section_show ) {
+
+														?>
+														<a class="btn btn-outline-primary" href="#parking-info" aria-label="Parking instructions for <?php echo $page_title_phrase; ?>" data-typetitle="Parking instructions for the clinic">Parking Instructions</a>
+														<?php
+
+													} // endif $parking_section_show
+
+													?>
 												</div>
 											</div>
 											<?php
@@ -1230,6 +1387,7 @@
 												?>
 												<p><a class="btn btn-secondary" href="<?php echo $location_external_web_url['url']; ?>" target="_blank" data-categorytitle="External Link"><?php echo $location_external_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
 												<?php
+
 											}
 
 											// Address Schema Data
@@ -1295,20 +1453,26 @@
 
 												if ( $hoursvary ) {
 
-													// If the location's hours vary...
+													/**
+													 * If the location's hours vary...
+													 */
 
 													echo '<h2>Hours Vary</h2>';
 													echo $hoursvary_info;
 
 												} else {
 
-													// If the location's hours do not vary...
+													/**
+													 * If the location's hours do not vary...
+													 */
 
 													// Begin Modified Hours Logic
 
 														if ( $modified ) {
 
-															// If there are upcoming modified hours...
+															/**
+															 * If there are upcoming modified hours...
+															 */
 
 															$modified_day = ''; // Previous Day
 															$modified_comment = ''; // Comment on previous day
@@ -1329,205 +1493,101 @@
 																	$schema_validThrough = ( $modified_end && $modified_end_date) ? $modified_end_date : null; // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 
 															// Display the modified hours if they have started or if they start within 30 days
-															if (
-																strtotime($modified_start) <= $today_30 // If the modified hours start date is less or equal to 30 days in the future...
-																&&
-																(
-																	strtotime($modified_end_date) >= $today // If the modified hours end date is greater than or equal to today
-																	||
-																	!$modified_end // If there is no end date for the modified hours
-																)
-															) {
 
-																$modified_text .= $modified_reason;
-																$modified_text .= '<p class="small font-italic">These modified hours start on ' . $modified_start . ', ';
-																$modified_text .= $modified_end && $modified_end_date ? 'and are scheduled to end after ' . $modified_end_date . '.' : 'and will remain in effect until further notice.';
-																$modified_text .= '</p>';
+																if (
+																	strtotime($modified_start) <= $today_30 // If the modified hours start date is less or equal to 30 days in the future...
+																	&&
+																	(
+																		strtotime($modified_end_date) >= $today // If the modified hours end date is greater than or equal to today
+																		||
+																		!$modified_end // If there is no end date for the modified hours
+																	)
+																) {
 
-																if ( $modified_hours ) {
+																	$modified_text .= $modified_reason;
+																	$modified_text .= '<p class="small font-italic">These modified hours start on ' . $modified_start . ', ';
+																	$modified_text .= $modified_end && $modified_end_date ? 'and are scheduled to end after ' . $modified_end_date . '.' : 'and will remain in effect until further notice.';
+																	$modified_text .= '</p>';
 
-																	// If the Modified Hours repeater has at least one row...
+																	if ( $modified_hours ) {
 
-																	// Loop through the Modified Hours repeater rows
-																	foreach ( $modified_hours as $modified_hour ) {
+																		/**
+																		 * If the Modified Hours repeater has at least one row...
+																		 */
 
-																		// Get data from fields in the Modified Hours repeater
+																		// Loop through the Modified Hours repeater rows
 
-																			$modified_title = $modified_hour['location_modified_hours_title']; // Title (in Modified Hours repeater; in Modified Hours tab) // string
-																			$modified_info = $modified_hour['location_modified_hours_information']; // Information (in Modified Hours repeater; in Modified Hours tab) // string (wysiwyg)
-																			$modified_times = $modified_hour['location_modified_hours_times']; // Hours (in Modified Hours repeater; in Modified Hours tab) // repeater
-																			$modified_hours247 = $modified_hour['location_modified_hours_24_7']; // Is this location available 24/7 during these modified hours? (in Modified Hours repeater; in Modified Hours tab) // bool
+																			foreach ( $modified_hours as $modified_hour ) {
 
-																		$modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
-																		$modified_text .= $modified_info ? $modified_info : '';
+																				// Get data from fields in the Modified Hours repeater
 
-																		// OpeningHoursSpecification Schema Data
+																					$modified_title = $modified_hour['location_modified_hours_title']; // Title (in Modified Hours repeater; in Modified Hours tab) // string
+																					$modified_info = $modified_hour['location_modified_hours_information']; // Information (in Modified Hours repeater; in Modified Hours tab) // string (wysiwyg)
+																					$modified_times = $modified_hour['location_modified_hours_times']; // Hours (in Modified Hours repeater; in Modified Hours tab) // repeater
+																					$modified_hours247 = $modified_hour['location_modified_hours_24_7']; // Is this location available 24/7 during these modified hours? (in Modified Hours repeater; in Modified Hours tab) // bool
 
-																			// Reset schema data variables
+																				$modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
+																				$modified_text .= $modified_info ? $modified_info : '';
 
-																				$schema_dayOfWeek = array(); // The day of the week for which these opening hours are valid.
-																				$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																				$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																				// OpeningHoursSpecification Schema Data
 
-																		// Get the earliest (most past) modified hours start date from all the rows in the Modified hours repeater
-																		if (
-																			$active_start > strtotime($modified_start) // If previous loop's modified hours start date is greater than the current loop's modified hours start date
-																			||
-																			'' == $active_start // Or if there is no modified hours start date from a previous loop
-																		) {
+																					// Reset schema data variables
 
-																			$active_start = strtotime($modified_start); // Store the modified hours start date for comparison in future loops
+																						$schema_dayOfWeek = array(); // The day of the week for which these opening hours are valid.
+																						$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																						$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
-																		} // endif ( $active_start > strtotime($modified_start) || '' == $active_start )
-
-																		// Get the latest (most future) modified hours end date from all the rows in the Modified hours repeater
-																		if (
-																			$active_end <= strtotime($modified_end_date) // If previous loop's modified hours end date is less than or equal to the current loop's modified hours end date
-																			||
-																			'' == $active_start // Or if there is no modified hours end date from a previous loop
-																			||
-																			!$modified_end // Or if the current loop has no modified hours end date
-																		) {
-
-																			if ( !$modified_end ) {
-
-																				// If the current loop has no modified hours end date...
-
-																				$active_end = 'TBD';
-
-																			} else {
-
-																				// Else if the current loop has a modified hours end date...
-
-																				$active_end = strtotime($modified_end_date);
-
-																			} // endif ( !$modified_end ) else
-
-																		} // endif ( $active_end <= strtotime($modified_end_date) || !$modified_end )
-
-																		if ( $modified_hours247 ) {
-
-																			// If the modified hours are 24/7...
-
-																			$modified_text .= '<strong>Open 24/7</strong>';
-
-																			// OpeningHoursSpecification Schema Data for Modified Hours That Are 24/7
-
-																				$schema_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ); // The day of the week for which these opening hours are valid.
-																				$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																				$schema_closes = '23:59'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-																				// Add this location's details to the main OpeningHoursSpecification schema array
-
-																					// // Schema.org method: Add all days as an array under the dayOfWeek property
-																					//
-																					// 	/**
-																					// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-																					// 	 */
-																					//
-																					// 	$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-																					// 		$schema_dayOfWeek, // array|string // Optional // The day of the week for which these opening hours are valid.
-																					// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																					// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																					// 		$schema_validFrom, // string // Optional // The date when the item becomes valid.
-																					// 		$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-																					// 		$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-																					// 	);
-
-																					// Google method: Loop through all the days defined in the current Hours repeater row separately
-
-																						/**
-																						 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-																						 */
-
-																						foreach ( $schema_dayOfWeek as $day) {
-																							$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-																								$day, // array|string // Optional // The day of the week for which these opening hours are valid.
-																								$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																								$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																								$schema_validFrom, // string // Optional // The date when the item becomes valid.
-																								$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-																								$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-																							);
-																						}
-
-																		} else {
-
-																			// If the modified hours are not 24/7...
-
-																			if (
-																				is_array($modified_times)
-																				||
-																				is_object($modified_times)
-																			) {
-
-																				$modified_text .= '<dl class="hours">';
-
-																				// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
-
-																				// Loop through all the Hours repeater rows (in Modified Hours repeater; in Modified Hours tab)
-																				foreach ( $modified_times as $modified_time ) {
-
-																					$modified_text .= $modified_day !== $modified_time['location_modified_hours_day'] ? '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ' : '';
-																					$modified_text .= '<dd>';
-
-																					// OpeningHoursSpecification Schema Data
-
-																						// Reset/define variables
-
-																							$schema_dayOfWeek = array();
+																				// Get the earliest (most past) modified hours start date from all the rows in the Modified hours repeater
 
 																					if (
-																						'Mon - Fri' == $modified_time['location_modified_hours_day']
-																						&&
-																						!$modified_time['location_modified_hours_closed']
+																						$active_start > strtotime($modified_start) // If previous loop's modified hours start date is greater than the current loop's modified hours start date
+																						||
+																						'' == $active_start // Or if there is no modified hours start date from a previous loop
 																					) {
 
-																						// OpeningHoursSpecification Schema Data
+																						$active_start = strtotime($modified_start); // Store the modified hours start date for comparison in future loops
 
-																							$schema_dayOfWeek = array_merge( $schema_dayOfWeek, array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ) ); // The day of the week for which these opening hours are valid.
+																					} // endif ( $active_start > strtotime($modified_start) || '' == $active_start )
 
-																					} else {
+																				// Get the latest (most future) modified hours end date from all the rows in the Modified hours repeater
 
-																						// OpeningHoursSpecification Schema Data
+																					if (
+																						$active_end <= strtotime($modified_end_date) // If previous loop's modified hours end date is less than or equal to the current loop's modified hours end date
+																						||
+																						'' == $active_start // Or if there is no modified hours end date from a previous loop
+																						||
+																						!$modified_end // Or if the current loop has no modified hours end date
+																					) {
 
-																							$schema_dayOfWeek[] = $modified_time['location_modified_hours_day']; // The day of the week for which these opening hours are valid.
+																						if ( !$modified_end ) {
 
-																					} // endif ( 'Mon - Fri' == $modified_time['location_modified_hours_day'] && !$modified_time['location_modified_hours_closed'] ) else
+																							// If the current loop has no modified hours end date...
 
-																					if ( $modified_time['location_modified_hours_closed'] ) {
+																							$active_end = 'TBD';
 
-																						// OpeningHoursSpecification Schema Data
+																						} else {
 
-																							$schema_opens = '00:00'; // string // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																							$schema_closes = '00:00'; // string // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																							// Else if the current loop has a modified hours end date...
 
-																						$modified_text .= 'Closed ';
+																							$active_end = strtotime($modified_end_date);
 
-																					} else {
+																						} // endif ( !$modified_end ) else
 
-																						$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] ) ? '' . ap_time_span( strtotime($modified_time['location_modified_hours_open']), strtotime($modified_time['location_modified_hours_close']) ). '' : '' );
+																					} // endif ( $active_end <= strtotime($modified_end_date) || !$modified_end )
 
-																						$schema_opens = $modified_time['location_modified_hours_open']; // string // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																						$schema_closes = $modified_time['location_modified_hours_close']; // string // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																					if ( $modified_hours247 ) {
 
-																					} // endif ( $modified_time['location_modified_hours_closed'] ) else
+																						/**
+																						 * If the modified hours are 24/7...
+																						 */
 
-																					if ( $modified_time['location_modified_hours_comment'] ) {
+																						$modified_text .= '<strong>Open 24/7</strong>';
 
-																						$modified_text .= ' <br /><span class="subtitle">' .$modified_time['location_modified_hours_comment'] . '</span>';
-																						$modified_comment = $modified_time['location_modified_hours_comment'];
+																					// OpeningHoursSpecification Schema Data for Modified Hours That Are 24/7
 
-																					} else {
-
-																						$modified_comment = '';
-
-																					} // endif ( $modified_time['location_modified_hours_comment'] ) else
-
-																					$modified_text .= '</dd>';
-																					$modified_day = $modified_time['location_modified_hours_day']; // Reset the day
-
-																					// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+																						$schema_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ); // The day of the week for which these opening hours are valid.
+																						$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																						$schema_closes = '23:59'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
 																						// Add this location's details to the main OpeningHoursSpecification schema array
 
@@ -1563,22 +1623,138 @@
 																									);
 																								}
 
-																					$i++;
+																				} else {
 
-																				} // endforeach ( $modified_times as $modified_time )
+																					/**
+																					 * If the modified hours are not 24/7...
+																					 */
 
-																				$modified_text .= '</dl>';
+																					if (
+																						is_array($modified_times)
+																						||
+																						is_object($modified_times)
+																					) {
 
-																			} // endif ( is_array($modified_times) || is_object($modified_times) )
+																						$modified_text .= '<dl class="hours">';
 
-																		} // endif ( $modified_hours247 ) else
-																	} // endforeach ( $modified_hours as $modified_hour )
+																						// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
 
-																} // endif ( $modified_hours )
+																						// Loop through all the Hours repeater rows (in Modified Hours repeater; in Modified Hours tab)
 
-															} // endif ( strtotime($modified_start) <= $today_30 && ( strtotime($modified_end_date) >= $today || !$modified_end ) )
+																							foreach ( $modified_times as $modified_time ) {
 
-															echo $modified_text ? '<h2>Modified Hours</h2>' . $modified_text: '';
+																								$modified_text .= $modified_day !== $modified_time['location_modified_hours_day'] ? '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ' : '';
+																								$modified_text .= '<dd>';
+
+																								// OpeningHoursSpecification Schema Data
+
+																									// Reset/define variables
+
+																										$schema_dayOfWeek = array();
+
+																								if (
+																									'Mon - Fri' == $modified_time['location_modified_hours_day']
+																									&&
+																									!$modified_time['location_modified_hours_closed']
+																								) {
+
+																									// OpeningHoursSpecification Schema Data
+
+																										$schema_dayOfWeek = array_merge( $schema_dayOfWeek, array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ) ); // The day of the week for which these opening hours are valid.
+
+																								} else {
+
+																									// OpeningHoursSpecification Schema Data
+
+																										$schema_dayOfWeek[] = $modified_time['location_modified_hours_day']; // The day of the week for which these opening hours are valid.
+
+																								} // endif ( 'Mon - Fri' == $modified_time['location_modified_hours_day'] && !$modified_time['location_modified_hours_closed'] ) else
+
+																								if ( $modified_time['location_modified_hours_closed'] ) {
+
+																									// OpeningHoursSpecification Schema Data
+
+																										$schema_opens = '00:00'; // string // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																										$schema_closes = '00:00'; // string // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+																									$modified_text .= 'Closed ';
+
+																								} else {
+
+																									$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] ) ? '' . ap_time_span( strtotime($modified_time['location_modified_hours_open']), strtotime($modified_time['location_modified_hours_close']) ). '' : '' );
+
+																									$schema_opens = $modified_time['location_modified_hours_open']; // string // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																									$schema_closes = $modified_time['location_modified_hours_close']; // string // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+																								} // endif ( $modified_time['location_modified_hours_closed'] ) else
+
+																								if ( $modified_time['location_modified_hours_comment'] ) {
+
+																									$modified_text .= ' <br /><span class="subtitle">' .$modified_time['location_modified_hours_comment'] . '</span>';
+																									$modified_comment = $modified_time['location_modified_hours_comment'];
+
+																								} else {
+
+																									$modified_comment = '';
+
+																								} // endif ( $modified_time['location_modified_hours_comment'] ) else
+
+																								$modified_text .= '</dd>';
+																								$modified_day = $modified_time['location_modified_hours_day']; // Reset the day
+
+																								// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+
+																									// Add this location's details to the main OpeningHoursSpecification schema array
+
+																										// // Schema.org method: Add all days as an array under the dayOfWeek property
+																										//
+																										// 	/**
+																										// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																										// 	 */
+																										//
+																										// 	$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
+																										// 		$schema_dayOfWeek, // array|string // Optional // The day of the week for which these opening hours are valid.
+																										// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																										// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																										// 		$schema_validFrom, // string // Optional // The date when the item becomes valid.
+																										// 		$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																										// 		$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+																										// 	);
+
+																										// Google method: Loop through all the days defined in the current Hours repeater row separately
+
+																											/**
+																											 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																											 */
+
+																											foreach ( $schema_dayOfWeek as $day) {
+																												$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
+																													$day, // array|string // Optional // The day of the week for which these opening hours are valid.
+																													$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																													$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																													$schema_validFrom, // string // Optional // The date when the item becomes valid.
+																													$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																													$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+																												);
+																											}
+
+																								$i++;
+
+																							} // endforeach ( $modified_times as $modified_time )
+
+																						$modified_text .= '</dl>';
+
+																					} // endif ( is_array($modified_times) || is_object($modified_times) )
+
+																				} // endif ( $modified_hours247 ) else
+
+																			} // endforeach ( $modified_hours as $modified_hour )
+
+																	} // endif ( $modified_hours )
+
+																} // endif ( strtotime($modified_start) <= $today_30 && ( strtotime($modified_end_date) >= $today || !$modified_end ) )
+
+																echo $modified_text ? '<h2>Modified Hours</h2>' . $modified_text: '';
 
 														} // endif ( $modified )
 
@@ -1600,13 +1776,19 @@
 															)
 														) {
 
-															// If the modified hours are the current hours for at least the next 30 days...
-															// Do not display the typical hours
+															/**
+															 * If the modified hours are the current hours for at least the next 30 days...
+															 *
+															 * Do not display the typical hours
+															 */
 
 														} else {
 
-															// If the modified hours end within 30 days or if they haven't started yet...
-															// Display the typical hours
+															/**
+															 * If the modified hours end within 30 days or if they haven't started yet...
+															 *
+															 * Display the typical hours
+															 */
 
 															$hours = $location_hours_group['location_hours']; // Typical Hours // repeater
 
@@ -1644,8 +1826,10 @@
 																$hours[0]['day'] // Typical daily hours have been set
 															) {
 
-																// If the location is typically available 24/7
-																// or if typical daily hours have been set...
+																/**
+																 * If the location is typically available 24/7
+																 * or if typical daily hours have been set...
+																 */
 
 																?>
 																<h2><?php echo $modified_text ? 'Typical ' : ''; ?>Hours</h2>
@@ -1653,7 +1837,9 @@
 
 																if ( $hours247 ) {
 
-																	// If the location is typically available 24/7...
+																	/**
+																	 * If the location is typically available 24/7...
+																	 */
 
 																	echo '<strong>Open 24/7</strong>';
 
@@ -1709,13 +1895,17 @@
 
 																} else {
 
-																	// If typical daily hours have been set...
+																	/**
+																	 * If typical daily hours have been set...
+																	 */
 
 																	echo '<dl class="hours">';
 
 																	if ( $hours ) {
 
-																		// If the Typical Hours repeater has at least one row...
+																		/**
+																		 * If the Typical Hours repeater has at least one row...
+																		 */
 
 																		$hours_text = ''; // Definition term and definition description tag set
 																		$day = ''; // Previous Day
@@ -1723,323 +1913,368 @@
 																		$i = 1;
 
 																		// Loop through the Typical Hours repeater
-																		foreach ( $hours as $hour ) {
 
-																			// openingHours Schema Data for Typical Hours That Are 24/7
+																			foreach ( $hours as $hour ) {
 
-																			// Schema Data
+																				/**
+																				 * openingHours Schema Data for Typical Hours That Are 24/7
+																				 */
 
-																				// // Schema.org method: openingHours Schema Data
-																				//
-																				// 	/**
-																				// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-																				// 	 */
-																				//
-																				// 	// Define/reset schema data variables
-																				//
-																				// 		$schema_dayOfWeek = ''; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-																				// 		$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																				// 		$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																				// Schema Data
 
-																				// Google method: OpeningHoursSpecification Schema Data
+																					// // Schema.org method: openingHours Schema Data
+																					//
+																					// 	/**
+																					// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																					// 	 */
+																					//
+																					// 	// Define/reset schema data variables
+																					//
+																					// 		$schema_dayOfWeek = ''; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+																					// 		$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																					// 		$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+																					// Google method: OpeningHoursSpecification Schema Data
+
+																						/**
+																						 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																						 */
+
+																						// Define/reset schema data variables
+
+																						$schema_dayOfWeek = array(); // The day of the week for which these opening hours are valid.
+																						$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																						$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+																				if ( $day !== $hour['day'] ) {
 
 																					/**
-																					 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																					 * If the current repeater row's day does not match the previous repeater row's day...
 																					 */
 
-																					// Define/reset schema data variables
+																					// Definition term and definition description tag set
 
-																					$schema_dayOfWeek = array(); // The day of the week for which these opening hours are valid.
-																					$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																					$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																						/**
+																						 * Write a new definition term element with the current repeater row's day
+																						 */
 
-																			if ( $day !== $hour['day'] ) {
+																						$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
 
-																				// If the current repeater row's day does not match the previous repeater row's day...
+																				}
 
 																				// Definition term and definition description tag set
-																				// Write a new definition term element with the current repeater row's day
-																				$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
-
-																			}
-
-																			// Definition term and definition description tag set
-																			// Open a definition description tag
-																			$hours_text .= '<dd>';
-
-																			// Schema Data
-
-																				if (
-																					'Mon - Fri' == $hour['day'] // The current repeater row's day is set as 'Mon - Fri'
-																					&&
-																					$hour['closed'] // And the current repeater row is marked as closed
-																				) {
-
-																					// // Schema.org method: openingHours Schema Data
-																					//
-																					// 	/**
-																					// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-																					// 	 *
-																					// 	 * Do nothing
-																					// 	 */
-
-																					// Google method: OpeningHoursSpecification Schema Data
-
-																						/**
-																						 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-																						 */
-
-																						// Define schema data variables
-
-																							$schema_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ); // The day of the week for which these opening hours are valid.
-																							$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																							$schema_closes = '00:00'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-																				} elseif (
-																					'Mon - Fri' == $hour['day'] // The current repeater row's day is set as 'Mon - Fri'
-																					// And the current repeater row is not marked as closed
-																				) {
-
-																					// // Schema.org method: openingHours Schema Data
-																					//
-																					// 	/**
-																					// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-																					// 	 */
-																					//
-																					// 	// Define schema data variables
-																					//
-																					// 		$schema_dayOfWeek = 'Mo-Fr'; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-
-																					// Google method: OpeningHoursSpecification Schema Data
-
-																						/**
-																						 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-																						 */
-
-																						// Define schema data variables
-
-																							$schema_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ); // The day of the week for which these opening hours are valid.
-																							$schema_opens = $hour['open']; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																							$schema_closes = $hour['close']; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-																				} elseif (
-																					// The current repeater row's day is not set as 'Mon - Fri'
-																					$hour['closed'] // And the current repeater row is marked as closed
-																				) {
-
-																					// // Schema.org method: openingHours Schema Data
-																					//
-																					// 	/**
-																					// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-																					// 	 *
-																					// 	 * Do nothing
-																					// 	 */
-
-																					// Google method: OpeningHoursSpecification Schema Data
-
-																						/**
-																						 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-																						 */
-
-																						// Define schema data variables
-
-																							$schema_dayOfWeek[] = $hour['day']; // The day of the week for which these opening hours are valid.
-																							$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																							$schema_closes = '00:00'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-																				} else {
-
-																					// If the current repeater row's day is not set as 'Mon - Fri'
-																					// And the current repeater row is not marked as closed
-
-																					// // Schema.org method: openingHours Schema Data
-																					//
-																					// 	/**
-																					// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-																					// 	 */
-																					//
-																					// 	// Define schema data variables
-																					//
-																					// 		$schema_dayOfWeek = substr( $hour['day'], 0, 2 ); // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-																					// 		$schema_opens = $hour['open']; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																					// 		$schema_closes = $hour['close']; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-																					// Google method: OpeningHoursSpecification Schema Data
-
-																						/**
-																						 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-																						 */
-
-																						// Define schema data variables
-
-																							$schema_dayOfWeek[] = $hour['day']; // The day of the week for which these opening hours are valid.
-																							$schema_opens = $hour['open']; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																							$schema_closes = $hour['close']; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-																				}
-
-																				// // Schema.org method: openingHours Schema Data
-																				//
-																				// 	/**
-																				// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-																				// 	 */
-																				//
-																				// 	// Add this location's details to the main openingHours schema array
-																				//
-																				// 		$schema_openingHours = uamswp_fad_schema_opening_hours(
-																				// 			$schema_dayOfWeek, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-																				// 			$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																				// 			$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																				// 			$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
-																				// 		);
-
-																				// Google method: OpeningHoursSpecification Schema Data
 
 																					/**
-																					 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																					 * Open a definition description tag
 																					 */
 
-																					// Loop through all the days in the array separately
+																					$hours_text .= '<dd>';
 
-																						foreach ( $schema_dayOfWeek as $day) {
+																				// Schema Data
 
-																							$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-																								$day, // array|string // Optional // The day of the week for which these opening hours are valid.
-																								$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																								$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																								'', // string // Optional // The date when the item becomes valid.
-																								'', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-																								$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-																							);
+																					if (
+																						'Mon - Fri' == $hour['day'] // The current repeater row's day is set as 'Mon - Fri'
+																						&&
+																						$hour['closed'] // And the current repeater row is marked as closed
+																					) {
 
-																						}
+																						// // Schema.org method: openingHours Schema Data
+																						//
+																						// 	/**
+																						// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																						// 	 *
+																						// 	 * Do nothing
+																						// 	 */
 
-																			// Set the text for the day or time span (closed or hours open)
+																						// Google method: OpeningHoursSpecification Schema Data
 
-																				if ( $hour['closed'] ) {
+																							/**
+																							 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																							 */
 
-																					// If the location is closed on this day or time span...
+																							// Define schema data variables
 
-																					// Definition term and definition description tag set
-																					// Set the text for the day or time span (closed)
-																					$hours_text .= 'Closed ';
+																								$schema_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ); // The day of the week for which these opening hours are valid.
+																								$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																								$schema_closes = '00:00'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
-																				} else {
+																					} elseif (
+																						'Mon - Fri' == $hour['day'] // The current repeater row's day is set as 'Mon - Fri'
+																						// And the current repeater row is not marked as closed
+																					) {
 
-																					// Else if the location is open on this day or time span...
+																						// // Schema.org method: openingHours Schema Data
+																						//
+																						// 	/**
+																						// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																						// 	 */
+																						//
+																						// 	// Define schema data variables
+																						//
+																						// 		$schema_dayOfWeek = 'Mo-Fr'; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 
-																					// Definition term and definition description tag set
-																					// Set the text for the day or time span (hours open)
-																					$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] ) ? '' . ap_time_span( strtotime($hour['open']), strtotime($hour['close']) ) . '' : '' );
+																						// Google method: OpeningHoursSpecification Schema Data
 
-																				}
+																							/**
+																							 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																							 */
 
-																			// Set the comment for the day or time span
+																							// Define schema data variables
 
-																				if ( $hour['comment'] ) {
+																								$schema_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ); // The day of the week for which these opening hours are valid.
+																								$schema_opens = $hour['open']; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																								$schema_closes = $hour['close']; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
-																					// If a comment exists for this day or time span...
+																					} elseif (
+																						// The current repeater row's day is not set as 'Mon - Fri'
+																						$hour['closed'] // And the current repeater row is marked as closed
+																					) {
 
-																					// Definition term and definition description tag set
-																					$hours_text .= ' <br /><span class="subtitle">' .$hour['comment'] . '</span>';
+																						// // Schema.org method: openingHours Schema Data
+																						//
+																						// 	/**
+																						// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																						// 	 *
+																						// 	 * Do nothing
+																						// 	 */
 
-																					// Store comment for comparison on next repeater row
-																					$comment = $hour['comment'];
+																						// Google method: OpeningHoursSpecification Schema Data
 
-																				} else {
+																							/**
+																							 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																							 */
 
-																					// Else if no comment exists for this day or time span...
+																							// Define schema data variables
 
-																					$comment = '';
+																								$schema_dayOfWeek[] = $hour['day']; // The day of the week for which these opening hours are valid.
+																								$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																								$schema_closes = '00:00'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
-																				} // if ( $hour['comment'] ) else
+																					} else {
 
-																			// Definition term and definition description tag set
-																			// Close the definition description tag
-																			$hours_text .= '</dd>';
+																						/**
+																						 * If the current repeater row's day is not set as 'Mon - Fri'
+																						 *  And the current repeater row is not marked as closed
+																						 */
 
-																			// Store day for comparison on next repeater row
-																			$day = $hour['day'];
+																						// // Schema.org method: openingHours Schema Data
+																						//
+																						// 	/**
+																						// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																						// 	 */
+																						//
+																						// 	// Define schema data variables
+																						//
+																						// 		$schema_dayOfWeek = substr( $hour['day'], 0, 2 ); // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+																						// 		$schema_opens = $hour['open']; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																						// 		$schema_closes = $hour['close']; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
-																		} // endforeach ( $hours as $hour )
+																						// Google method: OpeningHoursSpecification Schema Data
+
+																							/**
+																							 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																							 */
+
+																							// Define schema data variables
+
+																								$schema_dayOfWeek[] = $hour['day']; // The day of the week for which these opening hours are valid.
+																								$schema_opens = $hour['open']; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																								$schema_closes = $hour['close']; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+																					}
+
+																					// // Schema.org method: openingHours Schema Data
+																					//
+																					// 	/**
+																					// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+																					// 	 */
+																					//
+																					// 	// Add this location's details to the main openingHours schema array
+																					//
+																					// 		$schema_openingHours = uamswp_fad_schema_opening_hours(
+																					// 			$schema_dayOfWeek, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+																					// 			$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																					// 			$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																					// 			$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
+																					// 		);
+
+																					// Google method: OpeningHoursSpecification Schema Data
+
+																						/**
+																						 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																						 */
+
+																						// Loop through all the days in the array separately
+
+																							foreach ( $schema_dayOfWeek as $day) {
+
+																								$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
+																									$day, // array|string // Optional // The day of the week for which these opening hours are valid.
+																									$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																									$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																									'', // string // Optional // The date when the item becomes valid.
+																									'', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																									$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+																								);
+
+																							}
+
+																				// Set the text for the day or time span (closed or hours open)
+
+																					if ( $hour['closed'] ) {
+
+																						/**
+																						 * If the location is closed on this day or time span...
+																						 */
+
+																						// Definition term and definition description tag set
+
+																							/**
+																							 * Set the text for the day or time span (closed)
+																							 */
+
+																							$hours_text .= 'Closed ';
+
+																					} else {
+
+																						/**
+																						 * Else if the location is open on this day or time span...
+																						 */
+
+																						// Definition term and definition description tag set
+
+																							/**
+																							 *  Set the text for the day or time span (hours open)
+																							 */
+
+																							$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] ) ? '' . ap_time_span( strtotime($hour['open']), strtotime($hour['close']) ) . '' : '' );
+
+																					}
+
+																				// Set the comment for the day or time span
+
+																					if ( $hour['comment'] ) {
+
+																						/**
+																						 * If a comment exists for this day or time span...
+																						 */
+
+																						// Definition term and definition description tag set
+
+																							$hours_text .= ' <br /><span class="subtitle">' .$hour['comment'] . '</span>';
+
+																						// Store comment for comparison on next repeater row
+
+																							$comment = $hour['comment'];
+
+																					} else {
+
+																						/**
+																						 * Else if no comment exists for this day or time span...
+																						 */
+
+																						$comment = '';
+
+																					} // if ( $hour['comment'] ) else
+
+																				// Definition term and definition description tag set
+
+																					/**
+																					 * Close the definition description tag
+																					 */
+
+																					$hours_text .= '</dd>';
+
+																				// Store day for comparison on next repeater row
+
+																					$day = $hour['day'];
+
+																			} // endforeach ( $hours as $hour )
 
 																		// Definition term and definition description tag set
-																		echo $hours_text;
+
+																			echo $hours_text;
 
 																	} else {
 
 																		// Write a definition term tag
-																		echo '<dt>No information</dt>';
+
+																			echo '<dt>No information</dt>';
 
 																	} // endif ( $hours ) else
 
 																	// Close the definition list tag
-																	echo '</dl>';
+
+																		echo '</dl>';
 
 																} // endif ( $hours247 ) else
 
 																// $holidayhours = get_field('location_holiday_hours'); // Holiday Hours // repeater
-
+																//
 																// if ( $holidayhours ) {
-
+																//
 																// 	// If the Holiday Hours repeater has at least one row
-
+																//
 																// 	/**
 																// 	 * Sort by date
 																// 	 * if current date is before date & within 30 days
 																// 	 * Display results
 																// 	 */
-
+																//
 																// 	$order = array();
-
+																//
 																// 	// populate order
 																// 	foreach ( $holidayhours as $i => $row ) {
-
+																//
 																// 		$order[ $i ] = $row['date'];
-
+																//
 																// 	} // endforeach ( $holidayhours as $i => $row )
-
+																//
 																// 	// multisort
 																// 	array_multisort( $order, SORT_ASC, $holidayhours );
-
+																//
 																// 	$i = 0;
-
+																//
 																// 	foreach ( $holidayhours as $row ) {
-
+																//
 																// 		$holidayDate = $row['date']; // Text
 																// 		$holidayDateTime = DateTime::createFromFormat('m/d/Y', $holidayDate); // Date for evaluation
 																// 		$dateNow = new DateTime("now", new DateTimeZone('America/Chicago') );
-
-																// 		if ( ( $dateNow < $holidayDateTime ) && ( $holidayDateTime->diff($dateNow)->days < 30 ) ) {
-
+																//
+																//		if (
+																//			( $dateNow < $holidayDateTime )
+																//			&&
+																//			( $holidayDateTime->diff($dateNow)->days < 30 )
+																//		) {
+																//
 																// 			if ( 0 == $i ) {
 																// 				echo '<h3>Upcoming Holiday Hours</h3>';
 																// 				echo '<dl class="hours">';
 																// 				$i++;
 																// 			}
-
+																//
 																// 			echo '<dt>'. $row['label'] . '<br />' . $holidayDate . '<br/>';
 																// 			echo '</dt>' . '<dd>';
-
+																//
 																// 			if ( $row['closed'] ) {
-
+																//
 																// 				echo $row['closed'] ? 'Closed</dd>': '';
-
+																//
 																// 			} else {
-
+																//
 																// 				echo ( ( $hour['open'] && '00:00:00' != $row['open'] ) ? '' . ap_time_span( strtotime($row['open']), strtotime($row['close']) ) . ' ' : '' );
-
+																//
 																// 			}
 																// 		}
-
+																//
 																// 	} // endforeach ( $holidayhours as $row )
-
+																//
 																// 	if ( 0 < $i ) {
-
+																//
 																// 		echo '</dl>';
-
+																//
 																// 	} // endif ( 0 < $i )
-
+																//
 																// } // endif ( $holidayhours )
 
 															} // endif ( $hours247 || $hours[0]['day'] )
@@ -2070,7 +2305,7 @@
 
 													echo $afterhours_system;
 
-												} // endif ($location_hours_group['location_after_hours'] && !$location_hours_group['location_24_7']) elseif ( !$location_hours_group['location_24_7'] )
+												} // endif ( $location_hours_group['location_after_hours'] && !$location_hours_group['location_24_7']) elseif ( !$location_hours_group['location_24_7'] )
 
 											?>
 										</div>
@@ -2082,9 +2317,21 @@
 										?>
 										<div class="col-12 col-md image">
 											<div class="content-width">
-												<?php if ( $location_images_count == 1 ) { ?>
+												<?php
+
+												if ( $location_images_count == 1 ) {
+
+													?>
 													<picture>
-														<?php if ( function_exists( 'fly_add_image_size' ) && !empty($location_images[0]) ) { ?>
+														<?php
+
+														if (
+															function_exists( 'fly_add_image_size' )
+															&&
+															!empty($location_images[0])
+														) {
+
+															?>
 															<source srcset="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?>"
 																media="(min-width: 1350px)">
 															<source srcset="<?php echo image_sizer($location_images[0], 572, 429, 'center', 'center'); ?>"
@@ -2096,18 +2343,30 @@
 															<source srcset="<?php echo image_sizer($location_images[0], 576, 324, 'center', 'center'); ?>"
 																media="(min-width: 1px)">
 															<img src="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[0], '_wp_attachment_image_alt', true ); ?>" class="single-image" />
-														<?php } else { ?>
+															<?php
+
+														} else {
+
+															?>
 															<img src="<?php echo wp_get_attachment_image_url($location_images[0], 'large'); ?>" class="single-image">
-														<?php } //endif ?>
+															<?php
+
+														} //endif
+
+														?>
 													</picture>
-												<?php } else { ?>
+													<?php
+
+												} else {
+
+													?>
 													<div class="carousel slide carousel-thumbnails" id="location-info-carousel" data-interval="false" data-ride="carousel">
 														<div class="carousel-inner">
 															<?php
 
 															$location_carousel_slide = 1;
 
-															foreach( $location_images as $location_images_item ) {
+															foreach ( $location_images as $location_images_item ) {
 
 																?>
 																<div class="carousel-item<?php echo ($location_carousel_slide == 1) ? ' active' : '' ?>">
@@ -2129,6 +2388,7 @@
 																				media="(min-width: 1px)">
 																			<img src="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images_item, '_wp_attachment_image_alt', true ); ?>" />
 																			<?php
+
 																		} else {
 
 																			?>
@@ -2163,11 +2423,23 @@
 
 																?>
 																<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo (0 == $i ? 'class="active"' : ''); ?>>
-																	<?php if ( function_exists( 'fly_add_image_size' )) { ?>
+																	<?php
+
+																	if ( function_exists( 'fly_add_image_size' )) {
+
+																		?>
 																		<img src="<?php echo image_sizer($location_images[$i], 60, 45, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>" />
-																	<?php } else { ?>
+																		<?php
+
+																	} else {
+
+																		?>
 																		<img src="<?php echo wp_get_attachment_image_url($location_images[$i], 'small'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>">
-																	<?php } //endif ?>
+																		<?php
+
+																	} //endif
+
+																	?>
 																</li>
 																<?php
 
@@ -2206,7 +2478,11 @@
 										<div class="row">
 											<div class="col-xs-12">
 												<h2 class="module-title<?php echo empty($location_alert_title) ? ' sr-only' : ''; ?>"><?php echo $location_alert_title ? $location_alert_title : 'Alert'; ?></h2>
-												<?php echo $location_alert_text ? '<div class="module-body"><p>' . $location_alert_text . '</p></div>' : ''; ?>
+												<?php
+
+												echo $location_alert_text ? '<div class="module-body"><p>' . $location_alert_text . '</p></div>' : '';
+
+												?>
 											</div>
 										</div>
 									</div>
@@ -2226,7 +2502,11 @@
 											<div class="col-xs-12">
 												<h2 class="module-title"><span class="title">Closing Information</span></h2>
 												<div class="module-body">
-													<?php echo $location_closing_info; ?>
+													<?php
+
+													echo $location_closing_info;
+
+													?>
 												</div>
 											</div>
 										</div>
@@ -2279,7 +2559,11 @@
 
 																?>
 																<div class="alignwide">
-																	<?php echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $location_youtube_link ) ); ?>
+																	<?php
+
+																	echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $location_youtube_link ) );
+
+																	?>
 																</div>
 																<?php
 
@@ -2287,7 +2571,11 @@
 
 																?>
 																<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
-																	<?php echo wp_oembed_get( $location_youtube_link ); ?>
+																	<?php
+
+																	echo wp_oembed_get( $location_youtube_link );
+
+																	?>
 																</div>
 																<?php
 
@@ -2346,22 +2634,46 @@
 									<div class="container-fluid">
 										<div class="row">
 											<div class="col-xs-12<?php echo $parking_map ? ' col-md-6' : '' ?>">
-												<?php if ($parking_map) { ?>
+												<?php
+
+												if ( $parking_map ) {
+
+													?>
 													<div class="module-body">
-													<h2><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
-												<?php } else { ?>
+														<h2><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
+														<?php
+
+												} else {
+
+													?>
 													<h2 class="module-title"><span class="title"><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></span></h2>
 													<div class="module-body">
-												<?php } // endif ?>
-													<?php echo $location_parking; ?>
-													<?php if ( $parking_map ) { ?>
+														<?php
+
+												} // endif
+
+													echo $location_parking;
+
+													if ( $parking_map ) {
+
+														?>
 														<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>
-													<?php } // endif ?>
-													<?php echo ( $location_parking && $location_direction ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
-													<?php echo $location_direction; ?>
+														<?php
+
+													} // endif
+
+													echo ( $location_parking && $location_direction ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking.
+
+													echo $location_direction;
+
+													?>
 												</div>
 											</div>
-											<?php if ( $parking_map ) { ?>
+											<?php
+
+											if ( $parking_map ) {
+
+												?>
 												<div class="col-xs-12 col-md-6 parking-map-container">
 													<div class="embed-responsive embed-responsive-16by9" id="map"></div>
 													<script type='text/javascript'>
@@ -2426,7 +2738,11 @@
 														</ol>
 													</div>
 												</div>
-											<?php } ?>
+												<?php
+
+											} // if ( $parking_map )
+
+											?>
 										</div>
 									</div>
 								</section>
@@ -2450,18 +2766,41 @@
 												<?php if ( $location_appointment ) { ?>
 													<h2 class="module-title"><span class="title"><?php echo $location_appointment_heading; ?></span></h2>
 													<div class="module-body">
-														<?php echo $location_appointment; ?>
-														<?php if ( $location_appointment_bring ) { ?>
-															<h3><?php echo $location_appointment_bring_heading; ?></h3>
-															<?php echo $location_appointment_bring; ?>
-														<?php } // endif ?>
-														<?php if ( $location_appointment_expect ) { ?>
-															<h3><?php echo $location_appointment_expect_heading; ?></h3>
-															<?php echo $location_appointment_expect; ?>
-														<?php } // endif ?>
-													</div>
+														<?php
 
-												<?php } elseif ( $location_appointment_bring && $location_appointment_expect ) { ?>
+														echo $location_appointment;
+
+														if ( $location_appointment_bring ) {
+
+															?>
+															<h3><?php echo $location_appointment_bring_heading; ?></h3>
+															<?php
+
+															echo $location_appointment_bring;
+
+														} // endif
+
+														if ( $location_appointment_expect ) {
+
+															?>
+															<h3><?php echo $location_appointment_expect_heading; ?></h3>
+															<?php
+
+															echo $location_appointment_expect;
+
+														} // endif
+
+														?>
+													</div>
+													<?php
+
+												} elseif (
+													$location_appointment_bring
+													&&
+													$location_appointment_expect
+												) {
+
+													?>
 													<h2 class="module-title"><span class="title"><?php echo $location_appointment_heading; ?></span></h2>
 													<div class="module-body">
 														<h3><?php echo $location_appointment_bring_heading; ?></h3>
@@ -2469,17 +2808,29 @@
 														<h3><?php echo $location_appointment_expect_heading; ?></h3>
 														<?php echo $location_appointment_expect; ?>
 													</div>
-												<?php } elseif ( $location_appointment_bring ) { ?>
+													<?php
+
+												} elseif ( $location_appointment_bring ) {
+
+													?>
 													<h2 class="module-title"><span class="title"><?php echo $location_appointment_bring_heading; ?></span></h2>
 													<div class="module-body">
 														<?php echo $location_appointment_bring; ?>
 													</div>
-												<?php } elseif ( $location_appointment_expect ) { ?>
+													<?php
+
+												} elseif ( $location_appointment_expect ) {
+
+													?>
 													<h2 class="module-title"><span class="title"><?php echo $location_appointment_expect_heading; ?></span></h2>
 													<div class="module-body">
 														<?php echo $location_appointment_expect; ?>
 													</div>
-												<?php } // endif ?>
+													<?php
+
+												} // endif
+
+												?>
 											</div>
 										</div>
 									</div>
@@ -2498,35 +2849,68 @@
 										<div class="row">
 											<div class="col-xs-12">
 												<h2 class="module-title"><span class="title"><?php echo $location_scheduling_title; ?></span></h2>
-												<?php if ( $location_scheduling_intro && !empty($location_scheduling_intro) ) { ?>
+												<?php
+
+												if (
+													$location_scheduling_intro
+													&&
+													!empty($location_scheduling_intro)
+												) {
+
+													?>
 													<p class="note"><?php echo $location_scheduling_intro; ?></p>
-												<?php } ?>
+													<?php
+
+												}
+
+												?>
 												<div class="module-body">
-													<?php if ($location_scheduling_query && (count((array)$location_scheduling_options) > 1)) { ?>
+													<?php
+
+													if (
+														$location_scheduling_query
+														&&
+														(count((array)$location_scheduling_options) > 1)
+													) {
+
+														?>
 														<form action="" method="get" class="mychart-scheduling-select">
 															<div class="form-group">
 																<label for="schedule_options" class="lead">Available Services</label>
 																<select name="schedule_options" id="schedule_options" class="form-control">
 																	<option value="">Select an option</option>
-																	<?php foreach($location_scheduling_options as $key => $title) :
+																	<?php
+
+																	foreach ( $location_scheduling_options as $key => $title ) {
+
 																		$location_scheduling_item_title_nested = $title['location_scheduling_item_title_nested'];
 																		$location_scheduling_item_title_nested = ( isset($location_scheduling_item_title_nested) && !empty($location_scheduling_item_title_nested) ) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
+
 																		?>
 																		<option value="<?= $key; ?>"<?php //echo ($key == $provider_title) ? ' selected' : ''; ?>><? echo $location_scheduling_item_title_nested; ?></option>
-																	<?php endforeach; ?>
+																		<?php
+
+																	} // endforeach
+
+																	?>
 																</select>
 																<input type="hidden" id="pid" name="pid" value="<?php echo get_the_id(); ?>">
 															</div>
 														</form>
 														<div class="mychart-scheduling"></div>
-														<?php //var_dump($location_scheduling_options); ?>
-													<?php } else {
+														<?php
+
+														//var_dump($location_scheduling_options);
+
+													} else {
+
 														$row = $location_scheduling_options[0];
 														$location_scheduling_ser = $row['location_scheduling_ser'];
 														$location_scheduling_dep = $row['location_scheduling_dep'];
 														$location_scheduling_vt = $row['location_scheduling_vt'];
 														$location_scheduling_fallback = $row['location_scheduling_fallback'];
-													?>
+
+														?>
 														<div id="scheduleContainer">
 															<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
 														</div>
@@ -2552,12 +2936,29 @@
 															'toggleBtnCollapseHelpText': 'Exit fullscreen',
 														});
 														</script>
-														<?php if ( $location_scheduling_fallback && !empty($location_scheduling_fallback) ) { ?>
+														<?php
+
+														if (
+															$location_scheduling_fallback
+															&&
+															!empty($location_scheduling_fallback)
+														) {
+
+															?>
 															<div class="more">
-																<?php echo $location_scheduling_fallback; ?>
+																<?php
+
+																echo $location_scheduling_fallback;
+
+																?>
 															</div>
-														<?php } ?>
-													<?php } ?>
+															<?php
+
+														}
+
+													}
+
+													?>
 												</div>
 											</div>
 										</div>
@@ -2577,169 +2978,336 @@
 										<div class="row">
 											<div class="col-12">
 												<h2 class="module-title"><span class="title">Telemedicine Information</span></h2>
-												<?php if ($location_closing_display && !$location_closing_telemed) { ?>
+												<?php
+
+												if (
+													$location_closing_display
+													&&
+													!$location_closing_telemed
+												) {
+
+													?>
 													<div class="module-body">
-														<p class="text-center"><strong>
-															<?php if ($location_closing_date_past) { ?>
-																Telemedicine is not available while this <?php echo strtolower($location_single_name); ?> is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
-															<?php } else { ?>
-																Telemedicine will not be available after this <?php echo strtolower($location_single_name); ?> closes <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
-															<?php } // endif ?>
-														</strong></p>
+														<p class="text-center"><strong><?php
+
+															if ( $location_closing_date_past ) {
+
+																?>Telemedicine is not available while this <?php echo strtolower($location_single_name); ?> is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.<?php
+
+															} else {
+
+																?>Telemedicine will not be available after this <?php echo strtolower($location_single_name); ?> closes <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.<?php
+
+															} // endif
+
+														?></strong></p>
 													</div>
-												<?php } else { ?>
+													<?php
+
+												} else {
+
+													?>
 													<div class="row content-split-lg">
 														<div class="col-xs-12 col-lg-7">
 															<div class="content-width">
-																<?php echo $telemedicine_info ? $telemedicine_info : '' ?>
-																<p>
-																	<?php // Declare which patients can use the service.
-																	if ($telemedicine_patients == 'all') { ?>
-																		This service is available to both new and existing patients.
-																	<?php } elseif ($telemedicine_patients == 'new') { ?>
-																		This service is available to new patients only.
-																	<?php } elseif ($telemedicine_patients == 'existing') { ?>
-																		This service is available to existing patients only.
-																	<?php } // endif
+																<?php
+
+																echo $telemedicine_info ? $telemedicine_info : ''
+
+																?>
+																<p><?php
+
+																	// Declare which patients can use the service.
+
+																		if ( $telemedicine_patients == 'all' ) {
+
+																			?>This service is available to both new and existing patients.<?php
+
+																		} elseif ( $telemedicine_patients == 'new' ) {
+
+																			?>This service is available to new patients only.<?php
+
+																		} elseif ( $telemedicine_patients == 'existing' ) {
+
+																			?>This service is available to existing patients only.<?php
+
+																		} // endif
 
 																	// Declare which phone number should be called.
 
-																		if (!$location_clinic_phone_query) { // If there is only one phone number ?>
-																			Patients should call <?php echo $location_phone_link; ?> to schedule a telemedicine appointment.
-																		<?php } elseif ($location_clinic_phone_query && !$location_appointment_phone_query) { // If there is only one appointment number ?>
-																			Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
-																		<?php } else { // If there are two appointment numbers (one for new, one for existing)
-																			if ($telemedicine_patients == 'all') { ?>
-																				New patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment, while existing patients should call <?php echo $location_return_appointments_phone_link; ?>.
-																			<?php } elseif ($telemedicine_patients == 'new') { ?>
-																				Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
-																			<?php } elseif ($telemedicine_patients == 'existing') { ?>
-																				Patients should call <?php echo $location_return_appointments_phone_link; ?> to schedule a telemedicine appointment.
-																			<?php }
-																		} // endif ?>
-																</p>
+																		if ( !$location_clinic_phone_query ) {
+
+																			/**
+																			 * If there is only one phone number
+																			 */
+
+																			?>Patients should call <?php echo $location_phone_link; ?> to schedule a telemedicine appointment.<?php
+
+																		} elseif (
+																			$location_clinic_phone_query
+																			&&
+																			!$location_appointment_phone_query
+																		) {
+
+																			/**
+																			 * If there is only one appointment number
+																			 */
+
+																			?>Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.<?php
+
+																		} else {
+
+																			/**
+																			 * If there are two appointment numbers (one for new, one for existing)
+																			 */
+
+																			if ( $telemedicine_patients == 'all' ) {
+
+																				?>New patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment, while existing patients should call <?php echo $location_return_appointments_phone_link; ?>.<?php
+
+																			} elseif ( $telemedicine_patients == 'new' ) {
+
+																				?>Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.<?php
+
+																			} elseif ( $telemedicine_patients == 'existing' ) {
+
+																				?>Patients should call <?php echo $location_return_appointments_phone_link; ?> to schedule a telemedicine appointment.<?php
+
+																			}
+
+																		} // endif
+
+																?></p>
 															</div>
 														</div>
 														<div class="col-xs-12 col-lg-5">
 															<div class="content-width">
-															<?php
-															$telemedicine_modified_text = '';
-															$telemedicine_active_start = '';
-															$telemedicine_active_end = '';
-															if ($telemedicine_modified) :
-															?>
-															<?php
-
-																$telemedicine_modified_day = ''; // Previous Day
-																$telemedicine_modified_comment = ''; // Comment on previous day
-																$i = 1;
-
-																$telemedicine_today = strtotime("today");
-																$telemedicine_today_30 = strtotime("+30 days");
-
-																if( strtotime($telemedicine_modified_start) <= $telemedicine_today_30 && ( strtotime($telemedicine_modified_end_date) >= $telemedicine_today || !$telemedicine_modified_end ) ){
-																	$telemedicine_modified_text .= $telemedicine_modified_reason;
-																	$telemedicine_modified_text .= '<p class="small font-italic">These modified hours start on ' . $telemedicine_modified_start . ', ';
-																	$telemedicine_modified_text .= $telemedicine_modified_end && $telemedicine_modified_end_date ? 'and are scheduled to end after ' . $telemedicine_modified_end_date . '.' : 'and will remain in effect until further notice.';
-																	$telemedicine_modified_text .= '</p>';
-
-																	if ($telemedicine_modified_hours247):
-																		$telemedicine_modified_text .= '<strong>Open 24/7</strong>';
-																	else :
-																		$telemedicine_modified_times = $location_hours_group['location_telemed_modified_hours_times'];
-																		if ($telemedicine_active_start > strtotime($telemedicine_modified_start) || '' == $telemedicine_active_start) {
-																			$telemedicine_active_start = strtotime($telemedicine_modified_start);
-																		}
-																		if ( $telemedicine_active_end <= strtotime($telemedicine_modified_end_date) || !$telemedicine_modified_end ) {
-																			if (!$telemedicine_modified_end) {
-																				$telemedicine_active_end = 'TBD';
-																			} else {
-																				$telemedicine_active_end = strtotime($telemedicine_modified_end_date);
-																			}
-																		}
-
-																		if (is_array($telemedicine_modified_times) || is_object($telemedicine_modified_times)) {
-																			$telemedicine_modified_text .= '<dl class="hours">';
-																			foreach ( $telemedicine_modified_times as $telemedicine_modified_time ) {
-
-																				$telemedicine_modified_text .= $telemedicine_modified_day !== $telemedicine_modified_time['location_telemed_modified_hours_day'] ? '<dt>'. $telemedicine_modified_time['location_telemed_modified_hours_day'] .'</dt> ' : '';
-																				$telemedicine_modified_text .= '<dd>';
-
-																				if ( $telemedicine_modified_time['location_telemed_modified_hours_closed'] ) {
-																					$telemedicine_modified_text .= 'Closed ';
-																				} else {
-																					$telemedicine_modified_text .= ( ( $telemedicine_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemedicine_modified_time['location_telemed_modified_hours_open'] ) ? '' . ap_time_span( strtotime($telemedicine_modified_time['location_telemed_modified_hours_open']), strtotime($telemedicine_modified_time['location_telemed_modified_hours_close']) ) . '' : '' );
-																				}
-																				if ( $telemedicine_modified_time['location_telemed_modified_hours_comment'] ) {
-																					$telemedicine_modified_text .= ' <br /><span class="subtitle">' .$telemedicine_modified_time['location_telemed_modified_hours_comment'] . '</span>';
-																					$telemedicine_modified_comment = $telemedicine_modified_time['location_telemed_modified_hours_comment'];
-																				} else {
-																					$telemedicine_modified_comment = '';
-																				}
-																				$telemedicine_modified_text .= '</dd>';
-																				$telemedicine_modified_day = $telemedicine_modified_time['location_telemed_modified_hours_day']; // Reset the day
-																				$i++;
-
-																			} // endforeach
-																			$telemedicine_modified_text .= '</dl>';
-
-																		} // End if (array)
-																	endif;
-																}
-
-																echo $telemedicine_modified_text ? '<h3>Modified Hours</h3>' . $telemedicine_modified_text: '';
-
-															endif; // End Modified Hours
-															if (($telemedicine_active_start != '' && $telemedicine_active_start <= $telemedicine_today) && ( strtotime($telemedicine_active_end) > $telemedicine_today || $telemedicine_active_end == 'TBD' ) ) {
-																// Do Nothing;
-																// Future Option
-															} else {
-																if ( $telemedicine_hours247 || $telemedicine_hours[0]['day'] ) : ?>
-																<h3><?php echo $telemedicine_modified_text ? 'Typical ' : ''; ?>Hours</h3>
 																<?php
-																	if ($telemedicine_hours247):
-																		echo '<strong>Open 24/7</strong>';
-																	else :
-																		echo '<dl class="hours">';
-																		if( $telemedicine_hours ) {
-																			$telemedicine_hours_text = '';
-																			$telemedicine_day = ''; // Previous Day
-																			$telemedicine_comment = ''; // Comment on previous day
-																			$i = 1;
-																			foreach ($telemedicine_hours as $telemedicine_hour) :
-																				$telemedicine_hours_text .= $telemedicine_day !== $telemedicine_hour['day'] ? '<dt>'. $telemedicine_hour['day'] .'</dt> ' : '';
-																				$telemedicine_hours_text .= '<dd>';
 
-																				if ( $telemedicine_hour['closed'] ) {
-																					$telemedicine_hours_text .= 'Closed ';
-																				} else {
-																					$telemedicine_hours_text .= ( ( $telemedicine_hour['open'] && '00:00:00' != $telemedicine_hour['open'] ) ? '' . ap_time_span( strtotime($telemedicine_hour['open']), strtotime($telemedicine_hour['close']) ) . '' : '' );
-																				}
-																				if ( $telemedicine_hour['comment'] ) {
-																					$telemedicine_hours_text .= ' <br /><span class="subtitle">' .$telemedicine_hour['comment'] . '</span>';
-																					$telemedicine_comment = $telemedicine_hour['comment'];
-																				} else {
-																					$telemedicine_comment = '';
-																				}
-																				$telemedicine_hours_text .= '</dd>';
-																				$telemedicine_day = $telemedicine_hour['day']; // Reset the day
-																				if (!$telemedicine_hour['closed']) {
-																				$i++;
-																				}
-																			endforeach;
-																			echo $telemedicine_hours_text;
+																$telemedicine_modified_text = '';
+																$telemedicine_active_start = '';
+																$telemedicine_active_end = '';
+
+																if ( $telemedicine_modified ) {
+
+																	$telemedicine_modified_day = ''; // Previous Day
+																	$telemedicine_modified_comment = ''; // Comment on previous day
+																	$i = 1;
+
+																	$telemedicine_today = strtotime("today");
+																	$telemedicine_today_30 = strtotime("+30 days");
+
+																	if (
+																		strtotime($telemedicine_modified_start) <= $telemedicine_today_30
+																		&&
+																		(
+																			strtotime($telemedicine_modified_end_date) >= $telemedicine_today
+																			||
+																			!$telemedicine_modified_end
+																		)
+																	) {
+
+																		$telemedicine_modified_text .= $telemedicine_modified_reason;
+																		$telemedicine_modified_text .= '<p class="small font-italic">These modified hours start on ' . $telemedicine_modified_start . ', ';
+																		$telemedicine_modified_text .= $telemedicine_modified_end && $telemedicine_modified_end_date ? 'and are scheduled to end after ' . $telemedicine_modified_end_date . '.' : 'and will remain in effect until further notice.';
+																		$telemedicine_modified_text .= '</p>';
+
+																		if ( $telemedicine_modified_hours247 ) {
+
+																			$telemedicine_modified_text .= '<strong>Open 24/7</strong>';
+
 																		} else {
-																			echo '<dt>No information</dt>';
-																		}
-																		echo '</dl>';
-																	endif;
-																endif;
+
+																			$telemedicine_modified_times = $location_hours_group['location_telemed_modified_hours_times'];
+
+																			if (
+																				$telemedicine_active_start > strtotime($telemedicine_modified_start)
+																				||
+																				'' == $telemedicine_active_start
+																			) {
+
+																				$telemedicine_active_start = strtotime($telemedicine_modified_start);
+
+																			}
+
+																			if (
+																				$telemedicine_active_end <= strtotime($telemedicine_modified_end_date)
+																				||
+																				!$telemedicine_modified_end
+																			) {
+
+																				if ( !$telemedicine_modified_end ) {
+
+																					$telemedicine_active_end = 'TBD';
+
+																				} else {
+
+																					$telemedicine_active_end = strtotime($telemedicine_modified_end_date);
+
+																				}
+
+																			}
+
+																			if (
+																				is_array($telemedicine_modified_times)
+																				||
+																				is_object($telemedicine_modified_times)
+																			) {
+
+																				$telemedicine_modified_text .= '<dl class="hours">';
+
+																				foreach ( $telemedicine_modified_times as $telemedicine_modified_time ) {
+
+																					$telemedicine_modified_text .= $telemedicine_modified_day !== $telemedicine_modified_time['location_telemed_modified_hours_day'] ? '<dt>'. $telemedicine_modified_time['location_telemed_modified_hours_day'] .'</dt> ' : '';
+																					$telemedicine_modified_text .= '<dd>';
+
+																					if ( $telemedicine_modified_time['location_telemed_modified_hours_closed'] ) {
+
+																						$telemedicine_modified_text .= 'Closed ';
+
+																					} else {
+
+																						$telemedicine_modified_text .= ( ( $telemedicine_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemedicine_modified_time['location_telemed_modified_hours_open'] ) ? '' . ap_time_span( strtotime($telemedicine_modified_time['location_telemed_modified_hours_open']), strtotime($telemedicine_modified_time['location_telemed_modified_hours_close']) ) . '' : '' );
+
+																					}
+
+																					if ( $telemedicine_modified_time['location_telemed_modified_hours_comment'] ) {
+
+																						$telemedicine_modified_text .= ' <br /><span class="subtitle">' .$telemedicine_modified_time['location_telemed_modified_hours_comment'] . '</span>';
+																						$telemedicine_modified_comment = $telemedicine_modified_time['location_telemed_modified_hours_comment'];
+
+																					} else {
+
+																						$telemedicine_modified_comment = '';
+
+																					}
+
+																					$telemedicine_modified_text .= '</dd>';
+																					$telemedicine_modified_day = $telemedicine_modified_time['location_telemed_modified_hours_day']; // Reset the day
+																					$i++;
+
+																				} // endforeach
+
+																				$telemedicine_modified_text .= '</dl>';
+
+																			} // End if (array)
+
+																		} // endif
+
+																	}
+
+																	echo $telemedicine_modified_text ? '<h3>Modified Hours</h3>' . $telemedicine_modified_text: '';
+
+																} // endif // End Modified Hours
+
+																if (
+																	(
+																		$telemedicine_active_start != ''
+																		&&
+																		$telemedicine_active_start <= $telemedicine_today
+																	)
+																	&&
+																	(
+																		strtotime($telemedicine_active_end) > $telemedicine_today
+																		||
+																		$telemedicine_active_end == 'TBD'
+																	)
+																) {
+
+																	/**
+																	 * Do nothing;
+																	 * Future option
+																	 */
+
+																} else {
+
+																	if (
+																		$telemedicine_hours247
+																		||
+																		$telemedicine_hours[0]['day']
+																	) {
+
+																		?>
+																		<h3><?php echo $telemedicine_modified_text ? 'Typical ' : ''; ?>Hours</h3>
+																		<?php
+
+																		if ( $telemedicine_hours247 ) {
+
+																			echo '<strong>Open 24/7</strong>';
+
+																		} else {
+
+																			echo '<dl class="hours">';
+
+																			if ( $telemedicine_hours ) {
+
+																				$telemedicine_hours_text = '';
+																				$telemedicine_day = ''; // Previous Day
+																				$telemedicine_comment = ''; // Comment on previous day
+																				$i = 1;
+
+																				foreach ( $telemedicine_hours as $telemedicine_hour ) {
+
+																					$telemedicine_hours_text .= $telemedicine_day !== $telemedicine_hour['day'] ? '<dt>'. $telemedicine_hour['day'] .'</dt> ' : '';
+																					$telemedicine_hours_text .= '<dd>';
+
+																					if ( $telemedicine_hour['closed'] ) {
+
+																						$telemedicine_hours_text .= 'Closed ';
+
+																					} else {
+
+																						$telemedicine_hours_text .= ( ( $telemedicine_hour['open'] && '00:00:00' != $telemedicine_hour['open'] ) ? '' . ap_time_span( strtotime($telemedicine_hour['open']), strtotime($telemedicine_hour['close']) ) . '' : '' );
+
+																					}
+
+																					if ( $telemedicine_hour['comment'] ) {
+
+																						$telemedicine_hours_text .= ' <br /><span class="subtitle">' .$telemedicine_hour['comment'] . '</span>';
+																						$telemedicine_comment = $telemedicine_hour['comment'];
+
+																					} else {
+
+																						$telemedicine_comment = '';
+
+																					}
+
+																					$telemedicine_hours_text .= '</dd>';
+																					$telemedicine_day = $telemedicine_hour['day']; // Reset the day
+
+																					if ( !$telemedicine_hour['closed'] ) {
+
+																						$i++;
+
+																					}
+
+																				} // endforeach
+
+																				echo $telemedicine_hours_text;
+
+																			} else {
+
+																				echo '<dt>No information</dt>';
+
+																			}
+
+																			echo '</dl>';
+
+																		} // endif
+
+																	} // endif
+
 																}
+
 																?>
 															</div>
 														</div>
 													</div>
-												<?php } // endif ?>
+													<?php
+
+												} // endif
+
+												?>
 											</div>
 										</div>
 									</div>
@@ -2761,20 +3329,49 @@
 													<div class="cta-heading">
 														<h2><?php echo $portal_name; ?></h2>
 													</div>
-													<?php if ( $portal_content || $portal_link ) { ?>
-													<div class="cta-body">
-														<?php if ( $portal_content ) { ?>
-														<div class="text-container">
-															<?php echo $portal_content; ?>
+													<?php
+
+													if (
+														$portal_content
+														||
+														$portal_link
+													) {
+
+														?>
+														<div class="cta-body">
+															<?php
+
+															if ( $portal_content ) {
+
+																?>
+																<div class="text-container">
+																	<?php
+
+																	echo $portal_content;
+
+																	?>
+																</div>
+																<?php
+
+															}
+
+															if ( $portal_content ) {
+
+																?>
+																<div class="btn-container">
+																	<a href="<?php echo $portal_url; ?>" aria-label="Log in to <?php echo $portal_name_attr; ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo $portal_name_attr; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
+																</div>
+																<?php
+
+															}
+
+															?>
 														</div>
-														<?php }
-														if ( $portal_content ) { ?>
-														<div class="btn-container">
-															<a href="<?php echo $portal_url; ?>" aria-label="Log in to <?php echo $portal_name_attr; ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo $portal_name_attr; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
-														</div>
-														<?php } ?>
-													</div>
-													<?php } ?>
+														<?php
+
+													}
+
+													?>
 												</div>
 											</div>
 										</div>
@@ -2892,10 +3489,6 @@
 
 						// Required for Google Structured Data
 
-							/**
-							 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-							 */
-
 							// Type: MedicalClinic
 							$schema_type = 'MedicalClinic'; // string
 
@@ -2906,10 +3499,6 @@
 							$schema_address = ( isset($schema_address) && is_array($schema_address) && !empty($schema_address) ) ? $schema_address : array(); // array
 
 						// Recommended by Google Structured Data
-
-							/**
-							 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-							 */
 
 							// Property: openingHoursSpecification
 							$schema_openingHoursSpecification = isset($schema_openingHoursSpecification) ? $schema_openingHoursSpecification : '';
