@@ -1145,6 +1145,8 @@
 					if (
 						$schema_openingHours
 						&&
+						is_array($schema_openingHours)
+						&&
 						!array_is_list($schema_openingHours)
 					) {
 
