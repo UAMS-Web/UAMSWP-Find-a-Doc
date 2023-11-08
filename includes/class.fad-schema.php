@@ -847,11 +847,11 @@
 	// Add data to an array defining schema data for OpeningHoursSpecification
 
 		function uamswp_fad_schema_openinghoursspecification(
-			$day_of_week = null, // array|string // Optional // The day of the week for which these opening hours are valid.
+			$dayOfWeek = null, // array|string // Optional // The day of the week for which these opening hours are valid.
 			string $opens = null, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
 			string $closes = null, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-			string $valid_from = null, // string // Optional // The date when the item becomes valid. // Date is specified using the ISO 8601 date format (YYYY-MM-DD).
-			string $valid_through = null, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours. //  Date is specified using the ISO 8601 date format (YYYY-MM-DD).
+			string $validFrom = null, // string // Optional // The date when the item becomes valid. // Date is specified using the ISO 8601 date format (YYYY-MM-DD).
+			string $validThrough = null, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours. //  Date is specified using the ISO 8601 date format (YYYY-MM-DD).
 			array $schema_OpeningHoursSpecification = array() // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 		) {
 
@@ -931,7 +931,7 @@
 			 *
 			 *             Set 1 (weekday hours):
 			 *
-			 *                 $day_of_week = array(
+			 *                 $dayOfWeek = array(
 			 *                     'Monday',
 			 *                     'Tuesday',
 			 *                     'Wednesday',
@@ -945,7 +945,7 @@
 			 *
 			 *             Set 2 (weekend hours):
 			 *
-			 *                 $day_of_week = array(
+			 *                 $dayOfWeek = array(
 			 *                     'Saturday',
 			 *                     'Sunday'
 			 *                 );
@@ -960,7 +960,7 @@
 			 *         'OpeningHoursSpecification' property. This example defines hours from Saturday
 			 *         at 6pm until Sunday at 3am.
 			 *
-			 *             $day_of_week = 'Saturday';
+			 *             $dayOfWeek = 'Saturday';
 			 *             $opens = '18:00';
 			 *             $closes = '03:00';
 			 *
@@ -973,13 +973,13 @@
 			 *
 			 *             Set 1 (open all day):
 			 *
-			 *                 $day_of_week = 'Saturday';
+			 *                 $dayOfWeek = 'Saturday';
 			 *                 $opens = '00:00';
 			 *                 $closes = '23:59';
 			 *
 			 *             Set 2 (closed all day):
 			 *
-			 *                 $day_of_week = 'Sunday';
+			 *                 $dayOfWeek = 'Sunday';
 			 *                 $opens = '00:00';
 			 *                 $closes = '00:00';
 			 *
@@ -990,8 +990,8 @@
 			 *
 			 *             $opens = '00:00';
 			 *             $closes = '00:00';
-			 *             $valid_from = '2015-12-23';
-			 *             $valid_through = '2016-01-05';
+			 *             $validFrom = '2015-12-23';
+			 *             $validThrough = '2016-01-05';
 			 *
 			 * Example use:
 			 *
@@ -1032,39 +1032,39 @@
 			// Check/define variables
 
 				$schema_OpeningHoursSpecification = is_array($schema_OpeningHoursSpecification) ? $schema_OpeningHoursSpecification : array();
-				$day_of_week = !empty($day_of_week) ? $day_of_week : array();
+				$dayOfWeek = !empty($dayOfWeek) ? $dayOfWeek : array();
 
-				// If $day_of_week argument is not a string, an array or null, bail early
+				// If $dayOfWeek argument is not a string, an array or null, bail early
 
 					if (
-						$day_of_week
+						$dayOfWeek
 						&&
-						!is_array($day_of_week)
+						!is_array($dayOfWeek)
 						&&
-						!is_string($day_of_week)
+						!is_string($dayOfWeek)
 						&&
-						!is_null($day_of_week)
+						!is_null($dayOfWeek)
 					) {
 
 						return $schema_OpeningHoursSpecification;
 
 					}
 
-				// If $day_of_week argument is an associative array (not a list array), bail early
+				// If $dayOfWeek argument is an associative array (not a list array), bail early
 
 					if (
-						is_array($day_of_week)
+						is_array($dayOfWeek)
 						&&
-						!array_is_list($day_of_week)
+						!array_is_list($dayOfWeek)
 					) {
 
 						return $schema_OpeningHoursSpecification;
 
 					}
 
-				// Check $day_of_week against list of valid values
+				// Check $dayOfWeek against list of valid values
 
-					$day_of_week_valid = array(
+					$dayOfWeek_valid = array(
 						'Sunday',
 						'Monday',
 						'Tuesday',
@@ -1075,34 +1075,34 @@
 						'PublicHolidays'
 					);
 
-					if ( $day_of_week ) {
+					if ( $dayOfWeek ) {
 
-						if ( is_array($day_of_week) ) {
+						if ( is_array($dayOfWeek) ) {
 
-							$day_of_week = array_intersect(
-								$day_of_week_valid, // array // The array with master values to check.
-								$day_of_week // array // Arrays to compare values against.
+							$dayOfWeek = array_intersect(
+								$dayOfWeek_valid, // array // The array with master values to check.
+								$dayOfWeek // array // Arrays to compare values against.
 							);
 
 						} else {
 
-							$day_of_week = in_array(
-								$day_of_week, // mixed // The searched value.
-								$day_of_week_valid // array // The array.
-							) ? $day_of_week : null;
+							$dayOfWeek = in_array(
+								$dayOfWeek, // mixed // The searched value.
+								$dayOfWeek_valid // array // The array.
+							) ? $dayOfWeek : null;
 
 						}
 
 					}
 
-				// If there is no value in either $day_of_week, $valid_from or $valid_through arguments, bail early
+				// If there is no value in either $dayOfWeek, $validFrom or $validThrough arguments, bail early
 
 					if (
-						!$day_of_week
+						!$dayOfWeek
 						&&
-						!$valid_from
+						!$validFrom
 						&&
-						!$valid_through
+						!$validThrough
 					) {
 
 						return $schema_OpeningHoursSpecification;
@@ -1128,18 +1128,18 @@
 				$opens = $opens ? date( 'H:i:s', strtotime($opens) ) : null;
 				$closes = $closes ? date( 'H:i:s', strtotime($closes) ) : null;
 
-			// Convert $valid_from to the ISO 8601 date and time format ([-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm])
+			// Convert $validFrom to the ISO 8601 date and time format ([-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm])
 
-				$valid_from = $valid_from ? date( 'c', strtotime($valid_from) ) : null;
+				$validFrom = $validFrom ? date( 'c', strtotime($validFrom) ) : null;
 
-			// Add time value to $valid_through Date as the last second of the day, then convert $valid_through to the ISO 8601 date and time format ([-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm])
+			// Add time value to $validThrough Date as the last second of the day, then convert $validThrough to the ISO 8601 date and time format ([-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm])
 
-				$valid_through = $valid_through ?? null;
+				$validThrough = $validThrough ?? null;
 
-				if ( $valid_through ) {
+				if ( $validThrough ) {
 
-					$valid_through .= ' 23:59:59';
-					$valid_from = date( 'c', strtotime($valid_through) );
+					$validThrough .= ' 23:59:59';
+					$validFrom = date( 'c', strtotime($validThrough) );
 
 				}
 
@@ -1149,11 +1149,11 @@
 
 			// Add values to the item array
 
-				$schema['dayOfWeek'] = $day_of_week;
+				$schema['dayOfWeek'] = $dayOfWeek;
 				$schema['opens'] = $opens;
 				$schema['closes'] = $closes;
-				$schema['validFrom'] = $valid_from;
-				$schema['validThrough'] = $valid_through;
+				$schema['validFrom'] = $validFrom;
+				$schema['validThrough'] = $validThrough;
 
 			// Clean up the item array
 
