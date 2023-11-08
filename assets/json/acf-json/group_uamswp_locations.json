@@ -2171,15 +2171,7 @@
 							"type": "text",
 							"instructions": "",
 							"required": 0,
-							"conditional_logic": [
-								[
-									{
-										"field": "field_location_24_7",
-										"operator": "!=",
-										"value": "1"
-									}
-								]
-							],
+							"conditional_logic": 0,
 							"wrapper": {
 								"width": "",
 								"class": "",
