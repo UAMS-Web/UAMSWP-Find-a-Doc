@@ -1426,12 +1426,12 @@
 																					// 	 */
 																					//
 																					// 	$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
-																					// 		$schema_opening_hours_specification, // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 																					// 		$schema_day_of_week, // array|string // Optional // The day of the week for which these opening hours are valid.
 																					// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																					// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																					// 		$schema_valid_from, // string // Optional // The date when the item becomes valid.
-																					// 		$schema_valid_through // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																					// 		$schema_valid_through, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																					// 		$schema_opening_hours_specification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 																					// 	);
 
 																					// Google method: Loop through all the days defined in the current Hours repeater row separately
@@ -1442,12 +1442,12 @@
 
 																						foreach ( $schema_day_of_week as $day) {
 																							$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
-																								$schema_opening_hours_specification, // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 																								$day, // array|string // Optional // The day of the week for which these opening hours are valid.
 																								$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																								$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																								$schema_valid_from, // string // Optional // The date when the item becomes valid.
-																								$schema_valid_through // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																								$schema_valid_through, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																								$schema_opening_hours_specification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 																							);
 																						}
 
@@ -1538,12 +1538,12 @@
 																							// 	 */
 																							//
 																							// 	$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
-																							// 		$schema_opening_hours_specification, // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 																							// 		$schema_day_of_week, // array|string // Optional // The day of the week for which these opening hours are valid.
 																							// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																							// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																							// 		$schema_valid_from, // string // Optional // The date when the item becomes valid.
-																							// 		$schema_valid_through // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																							// 		$schema_valid_through, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																							// 		$schema_opening_hours_specification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 																							// 	);
 
 																							// Google method: Loop through all the days defined in the current Hours repeater row separately
@@ -1554,12 +1554,12 @@
 
 																								foreach ( $schema_day_of_week as $day) {
 																									$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
-																										$schema_opening_hours_specification, // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 																										$day, // array|string // Optional // The day of the week for which these opening hours are valid.
 																										$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																										$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																										$schema_valid_from, // string // Optional // The date when the item becomes valid.
-																										$schema_valid_through // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																										$schema_valid_through, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																										$schema_opening_hours_specification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 																									);
 																								}
 
@@ -1695,12 +1695,16 @@
 																			// Loop through all the days in the array separately
 
 																				foreach ( $schema_day_of_week as $day) {
+
 																					$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
-																						$schema_opening_hours_specification, // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 																						$day, // array|string // Optional // The day of the week for which these opening hours are valid.
 																						$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																						$schema_closes // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																						$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																						'', // string // Optional // The date when the item becomes valid.
+																						'', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																						$schema_opening_hours_specification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 																					);
+
 																				}
 
 																} else {
@@ -1898,12 +1902,16 @@
 																					// Loop through all the days in the array separately
 
 																						foreach ( $schema_day_of_week as $day) {
+
 																							$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
-																								$schema_opening_hours_specification, // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 																								$day, // array|string // Optional // The day of the week for which these opening hours are valid.
 																								$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																								$schema_closes // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																								$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																								'', // string // Optional // The date when the item becomes valid.
+																								'', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																								$schema_opening_hours_specification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 																							);
+
 																						}
 
 																			// Set the text for the day or time span (closed or hours open)
