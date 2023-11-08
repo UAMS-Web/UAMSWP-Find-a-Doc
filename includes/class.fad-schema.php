@@ -847,12 +847,12 @@
 	// Add data to an array defining schema data for OpeningHoursSpecification
 
 		function uamswp_fad_schema_openinghoursspecification(
-			$schema_opening_hours_specification = array(), // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+			array $schema_opening_hours_specification = array(), // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 			$day_of_week = array(), // array|string // Optional // The day of the week for which these opening hours are valid.
-			$opens = '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			$closes = '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			$valid_from = '', // string // Optional // The date when the item becomes valid.
-			$valid_through = '' // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+			string $opens = '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+			string $closes = '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+			string $valid_from = '', // string // Optional // The date when the item becomes valid.
+			string $valid_through = '' // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 		) {
 
 			/**
