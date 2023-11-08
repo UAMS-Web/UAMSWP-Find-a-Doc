@@ -1034,6 +1034,115 @@
 				$schema_OpeningHoursSpecification = is_array($schema_OpeningHoursSpecification) ? $schema_OpeningHoursSpecification : array();
 				$day_of_week = !empty($day_of_week) ? $day_of_week : array();
 
+				// If $day_of_week argument is not a string, an array or null, bail early
+
+					if (
+						$day_of_week
+						&&
+						!is_array($day_of_week)
+						&&
+						!is_string($day_of_week)
+						&&
+						!is_null($day_of_week)
+					) {
+
+						return $schema_OpeningHoursSpecification;
+
+					}
+
+				// If $day_of_week argument is an associative array (not a list array), bail early
+
+					if (
+						is_array($day_of_week)
+						&&
+						!array_is_list($day_of_week)
+					) {
+
+						return $schema_OpeningHoursSpecification;
+
+					}
+
+				// Check $day_of_week against list of valid values
+
+					$day_of_week_valid = array(
+						'Sunday',
+						'Monday',
+						'Tuesday',
+						'Wednesday',
+						'Thursday',
+						'Friday',
+						'Saturday',
+						'PublicHolidays'
+					);
+
+					if ( $day_of_week ) {
+
+						if ( is_array($day_of_week) ) {
+
+							$day_of_week = array_intersect(
+								$day_of_week_valid, // array // The array with master values to check.
+								$day_of_week // array // Arrays to compare values against.
+							);
+
+						} else {
+
+							$day_of_week = in_array(
+								$day_of_week, // mixed // The searched value.
+								$day_of_week_valid // array // The array.
+							) ? $day_of_week : null;
+
+						}
+
+					}
+
+				// If there is no value in either $day_of_week, $valid_from or $valid_through arguments, bail early
+
+					if (
+						!$day_of_week
+						&&
+						!$valid_from
+						&&
+						!$valid_through
+					) {
+
+						return $schema_OpeningHoursSpecification;
+
+					}
+
+				// Check whether the pre-existing list is a list array
+
+					if (
+						$schema_OpeningHoursSpecification
+						&&
+						is_array($schema_OpeningHoursSpecification)
+						&&
+						!array_is_list($schema_OpeningHoursSpecification)
+					) {
+
+						$schema_OpeningHoursSpecification = array($schema_OpeningHoursSpecification);
+
+					}
+
+			// Convert $opens and $closes to the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+
+				$opens = $opens ? date( 'H:i:s', strtotime($opens) ) : null;
+				$closes = $closes ? date( 'H:i:s', strtotime($closes) ) : null;
+
+			// Convert $valid_from to the ISO 8601 date and time format ([-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm])
+
+				$valid_from = $valid_from ? date( 'c', strtotime($valid_from) ) : null;
+
+			// Add time value to $valid_through Date as the last second of the day, then convert $valid_through to the ISO 8601 date and time format ([-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm])
+
+				$valid_through = $valid_through ?? null;
+
+				if ( $valid_through ) {
+
+					$valid_through .= ' 23:59:59';
+					$valid_from = date( 'c', strtotime($valid_through) );
+
+				}
+
 			// Create an array for this item
 
 				$schema = array();
