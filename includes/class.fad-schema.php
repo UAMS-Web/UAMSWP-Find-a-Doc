@@ -1041,6 +1041,11 @@
 
 					}
 
+				// Convert $opens and $closes to 24-hour format with leading zeroes
+
+					$opens = date( 'H:i', strtotime($opens) );
+					$closes = date( 'H:i', strtotime($closes) );
+
 			// Add values to the array
 
 				// Base item
