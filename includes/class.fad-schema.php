@@ -852,7 +852,7 @@
 			string $closes = '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 			string $valid_from = '', // string // Optional // The date when the item becomes valid.
 			string $valid_through = '', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-			array $schema_opening_hours_specification = array() // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+			array $schema_OpeningHoursSpecification = array() // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 		) {
 
 			/**
@@ -861,40 +861,40 @@
 			 * 	// OpeningHoursSpecification Schema Data
 			 *
 			 * 		// Check/define the main OpeningHoursSpecification schema array
-			 * 		$schema_opening_hours_specification = ( isset($schema_opening_hours_specification) && is_array($schema_opening_hours_specification) && !empty($schema_opening_hours_specification) ) ? $schema_opening_hours_specification : array();
+			 * 		$schema_OpeningHoursSpecification = ( isset($schema_OpeningHoursSpecification) && is_array($schema_OpeningHoursSpecification) && !empty($schema_OpeningHoursSpecification) ) ? $schema_OpeningHoursSpecification : array();
 			 *
 			 * 		// Add this location's details to the main OpeningHoursSpecification schema array
 			 *
 			 * 			// // Schema.org method: Add all days as an array under the dayOfWeek property
 			 * 			// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 			 *
-			 * 			// 	$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
+			 * 			// 	$schema_OpeningHoursSpecification = uamswp_fad_schema_openinghoursspecification(
 			 * 			// 		$schema_day_of_week, // array|string // Optional // The day of the week for which these opening hours are valid.
 			 * 			// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 			 * 			// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 			 * 			// 		$schema_valid_from, // string // Optional // The date when the item becomes valid.
 			 * 			// 		$schema_valid_through, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-			 * 			// 		$schema_opening_hours_specification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+			 * 			// 		$schema_OpeningHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 			 * 			// 	);
 			 *
 			 * 			// Google method: Loop through all the days defined in the current Hours repeater row separately
 			 * 			// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
 			 *
 			 * 				foreach ( $schema_day_of_week as $day) {
-			 * 					$schema_opening_hours_specification = uamswp_fad_schema_openinghoursspecification(
+			 * 					$schema_OpeningHoursSpecification = uamswp_fad_schema_openinghoursspecification(
 			 * 						$day, // array|string // Optional // The day of the week for which these opening hours are valid.
 			 * 						$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 			 * 						$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 			 * 						$schema_valid_from, // string // Optional // The date when the item becomes valid.
 			 * 						$schema_valid_through // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours., // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-			 * 						$schema_opening_hours_specification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+			 * 						$schema_OpeningHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 			 * 					);
 			 * 				}
 			 */
 
 			// Check/define variables
 
-				$schema_opening_hours_specification = is_array($schema_opening_hours_specification) ? $schema_opening_hours_specification : array();
+				$schema_OpeningHoursSpecification = is_array($schema_OpeningHoursSpecification) ? $schema_OpeningHoursSpecification : array();
 				$day_of_week = !empty($day_of_week) ? $day_of_week : array();
 
 			// Create an array for this item
@@ -930,12 +930,12 @@
 			// Add this item's array to the main openingHoursSpecification schema array
 
 				if ( !empty($schema) ) {
-					$schema_opening_hours_specification[] = $schema;
+					$schema_OpeningHoursSpecification[] = $schema;
 				}
 
 			// Return the main address schema array
 
-				return $schema_opening_hours_specification;
+				return $schema_OpeningHoursSpecification;
 
 		}
 

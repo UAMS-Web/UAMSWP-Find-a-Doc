@@ -1,14 +1,14 @@
 <?php
 /*
  * Template Name: Schema Data Script Tag
- * 
+ *
  * Description: A template part that displays the schema data script tag
- * 
+ *
  * Required vars:
  * 	$schema_type // string
  * 	$schema_name // string
  * 	$schema_address // array
- * 
+ *
  * Optional vars:
  * 	$schema_aggregate_rating; // bool
  * 	$schema_aggregate_rating_value; // string
@@ -16,7 +16,7 @@
  * 	$schema_aggregate_rating_review_count; // int
  * 	$schema_geo_coordinates; // array
  * 	$schema_hospital_affiliation; // array
- * 	$schema_opening_hours_specification // array
+ * 	$schema_OpeningHoursSpecification // array
  * 	$schema_telephone // array
  * 	$schema_url // string
  * 	$schema_fax_number // string
@@ -45,7 +45,7 @@
 		// Property: address
 			// 	Expected Type: PostalAddress or Text
 			// 	Description: The physical location of the business.
-			// 
+			//
 			// Google Structured Data Documentation:
 			// 	- Include as many properties as possible. The more properties you provide, the higher quality the result is to users.
 
@@ -57,7 +57,7 @@
 		// Property: aggregateRating
 			// 	Expected Type: AggregateRating
 			// 	Description: The overall rating, based on a collection of reviews or ratings, of the item.
-			// 
+			//
 			// Google Structured Data Documentation:
 			// 	- For sites that capture reviews about other local businesses: The average rating of the local business based on multiple ratings or reviews. Follow the Review snippet guidelines and the list of required and recommended aggregate rating properties.
 
@@ -70,7 +70,7 @@
 		// Property: department
 			// 	Expected Type: Organization
 			// 	Description: A relationship between an organization and a department of that organization, also described as an organization (allowing different urls, logos, opening hours). For example: a store with a pharmacy, or a bakery with a cafe.
-			// 
+			//
 			// Google Structured Data Documentation:
 			// 	- A nested item for a single department. You can define any of the properties in this table for a department.
 			// 	- Include the store name with the department name in the following format: {store name} {department name}. For example, gMart and gMart Pharmacy.
@@ -79,7 +79,7 @@
 		// Property: geo
 			// 	Expected Type: GeoCoordinates or GeoShape
 			// 	Description: The geo coordinates of the place.
-			// 
+			//
 			// Google Structured Data Documentation:
 			// 	- Geographic coordinates of the business
 			// 	- latitude and longitude: The precision must be at least 5 decimal places.
@@ -88,17 +88,17 @@
 		// Property: openingHoursSpecification
 			// 	Expected Type: OpeningHoursSpecification
 			// 	Description: The opening hours of a certain place.
-			// 
+			//
 			// Google Structured Data Documentation:
 			// 	- opens and closes: hh:mm:ss format.
 			// 	- validFrom and validThrough: YYYY-MM-DD format
 
-			$schema_opening_hours_specification = isset($schema_opening_hours_specification) ? $schema_opening_hours_specification : '';
+			$schema_OpeningHoursSpecification = isset($schema_OpeningHoursSpecification) ? $schema_OpeningHoursSpecification : '';
 
 		// Property: priceRange
 			// 	Expected Type: Text
 			// 	Description: The price range of the business, for example $$$.
-			// 
+			//
 			// Google Structured Data Documentation:
 			// 	- The relative price range of a business, commonly specified by either a numerical range (for example, "$10-15") or a normalized number of currency signs (for example, "$$$").
 			// 	- This field must be shorter than 100 characters. If it's longer than 100 characters, Google won't show a price range for the business.
@@ -106,14 +106,14 @@
 		// Property: review
 			// 	Expected Type: Review
 			// 	Description: A review of the item. Supersedes reviews.
-			// 
+			//
 			// Google Structured Data Documentation:
 			// 	- For sites that capture reviews about other local businesses: A review of the local business. Follow the Review snippet guidelines and the list of required and recommended review properties.
 
 		// Property: telephone
 			// 	Expected Type: Text
 			// 	Description: The telephone number.
-			// 
+			//
 			// Google Structured Data Documentation:
 			// 	- A business phone number meant to be the primary contact method for customers.
 			// 	- Be sure to include the country code and area code in the phone number.
@@ -123,7 +123,7 @@
 		// Property: url
 			// 	Expected Type: URL
 			// 	Description: URL of the item.
-			// 
+			//
 			// Google Structured Data Documentation:
 			// 	- The fully-qualified URL of the specific business location.
 			// 	- The URL must be a working link.
@@ -159,7 +159,7 @@
 		// Property: image
 			// 	Expected Type: ImageObject or URL
 			// 	Description: One or more images of the MedicalClinic.
-			// 
+			//
 			// Google Structured Data Documentation:
 			// 	- Image URLs must be crawlable and indexable. To check if Google can access your URLs, use the URL Inspection tool.
 			// 	- Images must be in a file format that's supported by Google Images.
@@ -170,7 +170,7 @@
 		// Property: logo
 			// 	Expected Type: ImageObject or URL
 			// 	Description: An associated logo.
-			// 
+			//
 			// Google Structured Data Documentation:
 			// 	- A logo that is representative of the organization.
 			// 	- The image must be 112x112px, at minimum.
@@ -715,24 +715,24 @@ if ( $schema_geo_coordinates ) {
 
 // Add openingHoursSpecification
 
-	if ( $schema_opening_hours_specification ) {
+	if ( $schema_OpeningHoursSpecification ) {
 
 		// If the openingHoursSpecification schema array only contains one top-level item/array, flatten the openingHoursSpecification schema array
-		if ( is_array($schema_opening_hours_specification) ) {
+		if ( is_array($schema_OpeningHoursSpecification) ) {
 
-			if ( 1 == count($schema_opening_hours_specification) && is_array($schema_opening_hours_specification[0]) ) {
+			if ( 1 == count($schema_OpeningHoursSpecification) && is_array($schema_OpeningHoursSpecification[0]) ) {
 
-				$schema_opening_hours_specification = array_reduce( $schema_opening_hours_specification, 'array_merge', array() );
+				$schema_OpeningHoursSpecification = array_reduce( $schema_OpeningHoursSpecification, 'array_merge', array() );
 
-			} elseif ( 1 == count($schema_opening_hours_specification) && !is_array($schema_opening_hours_specification[0]) ) {
+			} elseif ( 1 == count($schema_OpeningHoursSpecification) && !is_array($schema_OpeningHoursSpecification[0]) ) {
 
-				$schema_opening_hours_specification = $schema_opening_hours_specification[0];
+				$schema_OpeningHoursSpecification = $schema_OpeningHoursSpecification[0];
 
 			}
 
 		}
 
-		$schema_block['openingHoursSpecification'] = $schema_opening_hours_specification; // Add the relevant 'openingHoursSpecification' value
+		$schema_block['openingHoursSpecification'] = $schema_OpeningHoursSpecification; // Add the relevant 'openingHoursSpecification' value
 
 	}
 
