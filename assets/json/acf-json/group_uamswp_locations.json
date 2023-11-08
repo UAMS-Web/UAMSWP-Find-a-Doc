@@ -1898,7 +1898,7 @@
 			"sub_fields": [
 				{
 					"key": "field_location_typical_hours_tab",
-					"label": "Normal\/Typical Hours",
+					"label": "Typical Hours",
 					"name": "",
 					"type": "tab",
 					"instructions": "",
