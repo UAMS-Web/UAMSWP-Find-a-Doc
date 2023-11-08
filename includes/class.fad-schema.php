@@ -847,11 +847,11 @@
 	// Add data to an array defining schema data for OpeningHoursSpecification
 
 		function uamswp_fad_schema_openinghoursspecification(
-			$day_of_week = array(), // array|string // Optional // The day of the week for which these opening hours are valid.
-			string $opens = '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-			string $closes = '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-			string $valid_from = '', // string // Optional // The date when the item becomes valid. // Date is specified using the ISO 8601 date format (YYYY-MM-DD).
-			string $valid_through = '', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours. //  Date is specified using the ISO 8601 date format (YYYY-MM-DD).
+			$day_of_week = null, // array|string // Optional // The day of the week for which these opening hours are valid.
+			string $opens = null, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+			string $closes = null, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+			string $valid_from = null, // string // Optional // The date when the item becomes valid. // Date is specified using the ISO 8601 date format (YYYY-MM-DD).
+			string $valid_through = null, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours. //  Date is specified using the ISO 8601 date format (YYYY-MM-DD).
 			array $schema_OpeningHoursSpecification = array() // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 		) {
 
