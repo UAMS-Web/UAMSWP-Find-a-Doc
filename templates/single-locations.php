@@ -1600,12 +1600,12 @@
 
 															// Schema Data
 
-																// // Schema.org method: OpeningHours Schema Data
+																// // Schema.org method: openingHours Schema Data
 																// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 
 																// 	// Check/define/reset schema data variables
 
-																// 		$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array(); // Main OpeningHours schema array
+																// 		$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array(); // Main openingHours schema array
 																// 		$schema_day_of_week = ''; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 																// 		$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																// 		$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1641,7 +1641,7 @@
 
 																	// Schema Data
 
-																		// // Schema.org method: OpeningHours Schema Data
+																		// // Schema.org method: openingHours Schema Data
 																		// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 
 																		// 	// Define schema data variables
@@ -1650,7 +1650,7 @@
 																		// 		$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																		// 		$schema_closes = '23:59'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
-																		// 	// Add this location's details to the main OpeningHours schema array
+																		// 	// Add this location's details to the main openingHours schema array
 
 																		// 		$schema_opening_hours = uamswp_fad_schema_openinghours(
 																		// 			$schema_day_of_week, // string // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
@@ -1697,11 +1697,11 @@
 																		// Loop through the Typical Hours repeater
 																		foreach ( $hours as $hour ) {
 
-																			// OpeningHours Schema Data for Typical Hours That Are 24/7
+																			// openingHours Schema Data for Typical Hours That Are 24/7
 
 																			// Schema Data
 
-																				// // Schema.org method: OpeningHours Schema Data
+																				// // Schema.org method: openingHours Schema Data
 																				// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 
 																				// 	// Define/reset schema data variables
@@ -1741,7 +1741,7 @@
 																					$hour['closed'] // And the current repeater row is marked as closed
 																				) {
 
-																					// // Schema.org method: OpeningHours Schema Data
+																					// // Schema.org method: openingHours Schema Data
 																					// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 
 																					// 	// Do nothing
@@ -1760,7 +1760,7 @@
 																					// And the current repeater row is not marked as closed
 																				) {
 
-																					// // Schema.org method: OpeningHours Schema Data
+																					// // Schema.org method: openingHours Schema Data
 																					// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 
 																					// 	// Define schema data variables
@@ -1781,7 +1781,7 @@
 																					$hour['closed'] // And the current repeater row is marked as closed
 																				) {
 
-																					// // Schema.org method: OpeningHours Schema Data
+																					// // Schema.org method: openingHours Schema Data
 																					// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 
 																					// 	// Do nothing
@@ -1800,7 +1800,7 @@
 																					// If the current repeater row's day is not set as 'Mon - Fri'
 																					// And the current repeater row is not marked as closed
 
-																					// // Schema.org method: OpeningHours Schema Data
+																					// // Schema.org method: openingHours Schema Data
 																					// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 
 																					// 	// Define schema data variables
@@ -1820,10 +1820,10 @@
 
 																				}
 
-																				// // Schema.org method: OpeningHours Schema Data
+																				// // Schema.org method: openingHours Schema Data
 																				// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 
-																				// 	// Add this location's details to the main OpeningHours schema array
+																				// 	// Add this location's details to the main openingHours schema array
 
 																				// 		$schema_opening_hours = uamswp_fad_schema_opening_hours(
 																				// 			$schema_day_of_week, // string // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
