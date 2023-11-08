@@ -1965,8 +1965,8 @@
 					"key": "field_location_hours_variable_info",
 					"name": "location_hours_variable_info",
 					"type": "wysiwyg",
-					"instructions": "Describe how the hours work for this location.",
 					"label": "Information about the Location's Variable Hours of Operation",
+					"instructions": "Describe how the hours of operation work for this location.",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -2027,8 +2027,8 @@
 					"key": "field_location_hours",
 					"name": "location_hours",
 					"type": "repeater",
-					"instructions": "Set the time for all seven days.",
 					"label": "Typical In-Person Hours of Operation",
+					"instructions": "Set the time for all seven days, beginning with Sunday.</p><p class='description' style='margin-top: 0.5em;'>If there are multiple separate time spans on a single day (e.g., Monday, 8-11 a.m. and 1-4 p.m.), add additional rows for each time span, setting the day dropdown as the same value. Keep the rows in chronological order.",
 					"required": 0,
 					"conditional_logic": [
 						[
@@ -2193,8 +2193,8 @@
 					"key": "field_after_hours",
 					"name": "location_after_hours",
 					"type": "wysiwyg",
-					"instructions": "",
 					"label": "Information for When the Location Is Closed",
+					"instructions": "Describe what patients should do if they need assistance when this location is closed.",
 					"required": 0,
 					"conditional_logic": [
 						[
@@ -2273,7 +2273,7 @@
 					"name": "location_modified_hours_reason",
 					"label": "Reason for Modified In-Person Hours of Operation",
 					"type": "wysiwyg",
-					"instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>The date range will be displayed automatically, so that does not have to be included in this field.",
+					"instructions": "Describe the overall reason the in-person hours of operation are being modified. This might be because of a holiday or public health emergency.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>The date range will be displayed automatically, so that does not have to be included in this field.",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -2301,7 +2301,7 @@
 					"name": "location_modified_hours_start_date",
 					"label": "Start Date For the Modified In-Person Hours of Operation",
 					"type": "date_picker",
-					"instructions": "",
+					"instructions": "The date when the modified in-person hours of operation begin.",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -2358,7 +2358,7 @@
 					"name": "location_modified_hours_end_date",
 					"label": "End Date For the Modified In-Person Hours of Operation",
 					"type": "date_picker",
-					"instructions": "",
+					"instructions": "The date after which the modified in-person hours of operation end.",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -3132,7 +3132,7 @@
 					"name": "location_telemed_modified_hours_start_date",
 					"label": "Start Date For the Modified Telemedicine Hours of Operation",
 					"type": "date_picker",
-					"instructions": "",
+					"instructions": "The date when the modified telemedicine hours of operation begin.",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -3189,7 +3189,7 @@
 					"name": "location_telemed_modified_hours_end_date",
 					"label": "End Date For the Modified Telemedicine Hours of Operation",
 					"type": "date_picker",
-					"instructions": "",
+					"instructions": "The date after which the modified telemedicine hours of operation end.",
 					"required": 1,
 					"conditional_logic": [
 						[
