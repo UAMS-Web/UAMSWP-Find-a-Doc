@@ -856,6 +856,70 @@
 		) {
 
 			/**
+			 * Schema.org Documentation for the 'OpeningHoursSpecification' property:
+			 *
+			 *     A structured value providing information about the opening hours of a place or
+			 *     a certain service inside a place.
+			 *
+			 *     The place is open if the opens property is specified, and closed otherwise.
+			 *
+			 *     If the value for the closes property is less than the value for the opens
+			 *     property then the hour range is assumed to span over the next day.
+			 *
+			 *     Properties from OpeningHoursSpecification:
+			 *
+			 *         'dayOfWeek'
+			 *
+			 *             The day of the week for which these opening hours are valid.
+			 *
+			 *             Expected Type:
+			 *
+			 *                 - DayOfWeek (Schema.org Enumeration Type)
+			 *                       - https://schema.org/Sunday
+			 *                       - https://schema.org/Monday
+			 *                       - https://schema.org/Tuesday
+			 *                       - https://schema.org/Wednesday
+			 *                       - https://schema.org/Thursday
+			 *                       - https://schema.org/Friday
+			 *                       - https://schema.org/Saturday
+			 *                       - https://schema.org/PublicHolidays
+			 *
+			 *         'opens'
+			 *
+			 *             The opening hour of the place or service on the given day(s) of the
+			 *             week.
+			 *
+			 *             Expected Type:
+			 *
+			 *                 - Time
+			 *
+			 *         'closes'
+			 *
+			 *             The closing hour of the place or service on the given day(s) of the week.
+			 *
+			 *             Expected Type:
+			 *
+			 *                 - Time
+			 *
+			 *         'validFrom'
+			 *
+			 *             The date when the item becomes valid.
+			 *
+			 *             Expected Type:
+			 *
+			 *                 - Date
+			 *                 - DateTime
+			 *
+			 *         'validThrough'
+			 *
+			 *             The date after when the item is not valid. For example the end of an offer,
+			 *             salary period, or a period of opening hours.
+			 *
+			 *             Expected Type:
+			 *
+			 *                 - Date
+			 *                 - DateTime
+			 *
 			 * Example use:
 			 *
 			 * 	// OpeningHoursSpecification Schema Data
