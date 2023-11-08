@@ -21289,6 +21289,7 @@
 								$item_value = null;
 								$LocalBusiness_id = null;
 								$LocalBusiness_type = null;
+								$location_24_7 = null;
 								$location_about = null;
 								$location_abstract = null;
 								$location_accessibilityAPI = null;
@@ -21311,6 +21312,7 @@
 								$location_address_keywords = null;
 								$location_addressLocality = null;
 								$location_addressRegion = null;
+								$location_after_hours = null;
 								$location_alternateName = null;
 								$location_alternateName_repeater = null;
 								$location_appointments_query = null;
@@ -21388,6 +21390,10 @@
 								$location_geo_value = null;
 								$location_has_parent = null;
 								$location_hasMap = null;
+								$location_hours = null;
+								$location_hours_group = null;
+								$location_hours_variable = null;
+								$location_hours_variable_info = null;
 								$location_identifier = null;
 								$location_image = null;
 								$location_image_general = null;
@@ -21407,6 +21413,12 @@
 								$location_medicalSpecialty_multiselect = null;
 								$location_memberOf = null;
 								$location_mentions = null;
+								$location_modified_hours = null;
+								$location_modified_hours_end = null;
+								$location_modified_hours_end_date = null;
+								$location_modified_hours_group = null;
+								$location_modified_hours_reason = null;
+								$location_modified_hours_start_date = null;
 								$location_name = null;
 								$location_ontology_type = null;
 								$location_override_parent_photo = null;
@@ -21439,6 +21451,17 @@
 								$location_subjectOf = null;
 								$location_subOrganization = null;
 								$location_suite = null;
+								$location_telemed_24_7 = null;
+								$location_telemed_hours = null;
+								$location_telemed_modified_hours_24_7 = null;
+								$location_telemed_modified_hours_end = null;
+								$location_telemed_modified_hours_end_date = null;
+								$location_telemed_modified_hours_query = null;
+								$location_telemed_modified_hours_reason = null;
+								$location_telemed_modified_hours_start_date = null;
+								$location_telemed_modified_hours_times = null;
+								$location_telemed_patients = null;
+								$location_telemed_query = null;
 								$location_telephone_appointment_ac_primary = null;
 								$location_telephone_appointment_ac_query = null;
 								$location_telephone_appointment_ac_specialty = null;
@@ -24046,6 +24069,192 @@
 													$location_faxNumber_Text_array[] = $location_faxNumber;
 
 											}
+
+									}
+
+								// Hours of operation (common use)
+
+									// List of properties that reference hours of operation
+
+										$location_hours_common = array(
+											'businessDays',
+											'hoursAvailable',
+											'openingHours',
+											'openingHoursSpecification',
+											'specialOpeningHoursSpecification'
+										);
+
+									if (
+										array_intersect(
+											$location_properties_map[$MedicalWebPage_type]['properties'],
+											$location_hours_common
+										)
+										||
+										array_intersect(
+											$location_properties_map[$LocalBusiness_type]['properties'],
+											$location_hours_common
+										)
+									) {
+
+										// Get values
+
+											// Get hours group
+
+												$location_hours_group = $location_hours_group ?? ( get_field( 'location_hours_group', $entity ) ?? null );
+
+											// Get typical in-person hours tab fields
+
+												if ( $location_hours_group ) {
+
+													// Query: Do the location's typical hours of operation vary? (button_group)
+
+														$location_hours_variable = $location_hours_group['location_hours_variable'] ?? null;
+
+													if ( $location_hours_variable ) {
+
+														// Information about the Location's Variable Hours of Operation (wysiwyg)
+
+															$location_hours_variable_info = $location_hours_group['location_hours_variable_info'] ?? null;
+
+													} else {
+
+														// Query: Is the location typically open 24/7? (button_group)
+
+															$location_24_7 = $location_hours_group['location_24_7'] ?? null;
+
+														if ( !$location_24_7 ) {
+
+															// Typical In-Person Hours of Operation (repeater)
+
+																$location_hours = $location_hours_group['location_hours'] ?? null;
+
+															// Information for When the Location Is Closed (wysiwyg)
+
+																$location_after_hours = $location_hours_group['location_after_hours'] ?? null;
+
+														}
+
+													}
+
+												}
+
+											// Get modified hours tab fields
+
+												if ( $location_hours_group ) {
+
+													// Query: Are there any upcoming modified in-person hours of operation? (button_group)
+
+														$location_modified_hours = $location_hours_group['location_modified_hours'] ?? null;
+
+													if ( $location_modified_hours ) {
+
+														// Reason for Modified In-Person Hours of Operation (wysiwyg)
+
+															$location_modified_hours_reason = $location_hours_group['location_modified_hours_reason'] ?? null;
+
+														// Start Date For the Modified In-Person Hours of Operation (date_picker)
+
+															$location_modified_hours_start_date = $location_hours_group['location_modified_hours_start_date'] ?? null;
+
+														// Query: Is there an end date for the modified in-person hours of operation? (button_group)
+
+															$location_modified_hours_end = $location_hours_group['location_modified_hours_end'] ?? null;
+
+														// End Date For the Modified In-Person Hours of Operation (date_picker)
+
+															if ( $location_modified_hours_end ) {
+
+																$location_modified_hours_end_date = $location_hours_group['location_modified_hours_end_date'] ?? null;
+
+															}
+
+														// Modified In-Person Hours of Operation (repeater)
+
+															$location_modified_hours_group = $location_hours_group['location_modified_hours_group'] ?? null;
+
+													}
+
+												}
+
+											// Get typical telemedicine hours tab fields
+
+												if ( $location_hours_group ) {
+
+													// Query: Does this location offer a telemedicine option? (button_group)
+
+														$location_telemed_query = $location_hours_group['location_telemed_query'] ?? null;
+
+													if ( $location_telemed_query ) {
+
+														// Telemedicine Patient Type (radio)
+
+															$location_telemed_patients = $location_hours_group['location_telemed_patients'] ?? null;
+
+														// Query: Is telemedicine typically available 24/7? (button_group)
+
+															$location_telemed_24_7 = $location_hours_group['location_telemed_24_7'] ?? null;
+
+														if ( !$location_telemed_24_7 ) {
+
+															// Typical Telemedicine Hours of Operation (repeater)
+
+																$location_telemed_hours = $location_hours_group['location_telemed_hours'] ?? null;
+
+														}
+
+													}
+
+												}
+
+											// Get modified telemedicine hours tab fields
+
+												if (
+													$location_hours_group
+													&&
+													$location_telemed_query
+												) {
+
+													// Query: Are there any upcoming modified telemedicine hours of operation? (button_group)
+
+														$location_telemed_modified_hours_query = $location_hours_group['location_telemed_modified_hours_query'] ?? null;
+
+													if ( $location_telemed_modified_hours_query ) {
+
+														// Reason for Modified Telemedicine Hours of Operation (wysiwyg)
+
+															$location_telemed_modified_hours_reason = $location_hours_group['location_telemed_modified_hours_reason'] ?? null;
+
+														// Modified Telemedicine Hours Start Date (date_picker)
+
+															$location_telemed_modified_hours_start_date = $location_hours_group['location_telemed_modified_hours_start_date'] ?? null;
+
+														// Query: Is there an end date for the modified telemedicine hours of operation? (button_group)
+
+															$location_telemed_modified_hours_end = $location_hours_group['location_telemed_modified_hours_end'] ?? null;
+
+														// End Date For the Modified Telemedicine Hours of Operation (date_picker)
+
+															if ( $location_telemed_modified_hours_end ) {
+
+																$location_telemed_modified_hours_end_date = $location_hours_group['location_telemed_modified_hours_end_date'] ?? null;
+
+															}
+
+														// Query: Is telemedicine available 24/7 during these modified telemedicine hours of operation? (button_group)
+
+															$location_telemed_modified_hours_24_7 = $location_hours_group['flocation_telemed_modified_hours_24_7oo'] ?? null;
+
+														// Modified Telemedicine Hours of Operation (repeater)
+
+															if ( !$location_telemed_modified_hours_24_7 ) {
+
+																$location_telemed_modified_hours_times = $location_hours_group['location_telemed_modified_hours_times'] ?? null;
+
+															}
+
+													}
+
+												}
 
 									}
 
