@@ -1612,7 +1612,8 @@
 																								 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
 																								 */
 
-																								foreach ( $schema_dayOfWeek as $day) {
+																								foreach ( $schema_dayOfWeek as $day ) {
+
 																									$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
 																										$day, // array|string // Optional // The day of the week for which these opening hours are valid.
 																										$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1621,6 +1622,7 @@
 																										$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 																										$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 																									);
+
 																								}
 
 																				} else {
