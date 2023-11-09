@@ -1796,7 +1796,7 @@
 															 * Display the typical hours
 															 */
 
-															$hours = $location_hours_group['location_hours']; // Typical Hours // repeater
+															$location_hours_repeater = $location_hours_group['location_hours']; // Typical Hours // repeater
 
 															// Schema Data
 
@@ -1829,7 +1829,7 @@
 															if (
 																$location_hours_24_7_query // The location is typically available 24/7
 																||
-																$hours[0]['day'] // Typical daily hours have been set
+																$location_hours_repeater[0]['day'] // Typical daily hours have been set
 															) {
 
 																/**
@@ -1907,7 +1907,7 @@
 
 																	echo '<dl class="hours">';
 
-																	if ( $hours ) {
+																	if ( $location_hours_repeater ) {
 
 																		/**
 																		 * If the Typical Hours repeater has at least one row...
@@ -1920,7 +1920,7 @@
 
 																		// Loop through the Typical Hours repeater
 
-																			foreach ( $hours as $hour ) {
+																			foreach ( $location_hours_repeater as $hour ) {
 
 																				/**
 																				 * openingHours Schema Data for Typical Hours That Are 24/7
@@ -2195,7 +2195,7 @@
 
 																					$day = $hour['day'];
 
-																			} // endforeach ( $hours as $hour )
+																			} // endforeach ( $location_hours_repeater as $hour )
 
 																		// Definition term and definition description tag set
 
@@ -2207,7 +2207,7 @@
 
 																			echo '<dt>No information</dt>';
 
-																	} // endif ( $hours ) else
+																	} // endif ( $location_hours_repeater ) else
 
 																	// Close the definition list tag
 
@@ -2283,7 +2283,7 @@
 																//
 																// } // endif ( $holidayhours )
 
-															} // endif ( $location_hours_24_7_query || $hours[0]['day'] )
+															} // endif ( $location_hours_24_7_query || $location_hours_repeater[0]['day'] )
 
 														} // endif ( ( $location_hours_modified_active_start != '' && $location_hours_modified_active_start <= $today) && ( $location_hours_modified_active_end > $today_30 || $location_hours_modified_active_end == 'TBD' ) ) else
 
