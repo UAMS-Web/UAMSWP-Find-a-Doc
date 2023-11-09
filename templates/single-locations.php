@@ -1523,7 +1523,7 @@
 
 																					$item_title = $item['location_modified_hours_title']; // Title (in Modified Hours repeater; in Modified Hours tab) // string
 																					$item_info = $item['location_modified_hours_information']; // Information (in Modified Hours repeater; in Modified Hours tab) // string (wysiwyg)
-																					$modified_times = $item['location_modified_hours_times']; // Hours (in Modified Hours repeater; in Modified Hours tab) // repeater
+																					$item_times = $item['location_modified_hours_times']; // Hours (in Modified Hours repeater; in Modified Hours tab) // repeater
 																					$modified_hours247 = $item['location_modified_hours_24_7']; // Is this location available 24/7 during these modified hours? (in Modified Hours repeater; in Modified Hours tab) // bool
 
 																				$location_hours_modified_text .= $item_title ? '<h3 class="h4">'. $item_title . '</h3>' : '';
@@ -1630,9 +1630,9 @@
 																					 */
 
 																					if (
-																						is_array($modified_times)
+																						is_array($item_times)
 																						||
-																						is_object($modified_times)
+																						is_object($item_times)
 																					) {
 
 																						$location_hours_modified_text .= '<dl class="hours">';
@@ -1641,7 +1641,7 @@
 
 																						// Loop through all the Hours repeater rows (in Modified Hours repeater; in Modified Hours tab)
 
-																							foreach ( $modified_times as $modified_time ) {
+																							foreach ( $item_times as $modified_time ) {
 
 																								$location_hours_modified_text .= $modified_day !== $modified_time['location_modified_hours_day'] ? '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ' : '';
 																								$location_hours_modified_text .= '<dd>';
@@ -1740,11 +1740,11 @@
 
 																								$i++;
 
-																							} // endforeach ( $modified_times as $modified_time )
+																							} // endforeach ( $item_times as $modified_time )
 
 																						$location_hours_modified_text .= '</dl>';
 
-																					} // endif ( is_array($modified_times) || is_object($modified_times) )
+																					} // endif ( is_array($item_times) || is_object($item_times) )
 
 																				} // endif ( $modified_hours247 ) else
 
