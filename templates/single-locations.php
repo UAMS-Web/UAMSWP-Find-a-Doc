@@ -1561,13 +1561,17 @@
 
 																						if ( !$location_hours_modified_end_query ) {
 
-																							// If the current loop has no modified hours end date...
+																							/**
+																							 * If the current loop has no modified hours end date...
+																							 */
 
 																							$location_hours_modified_active_end = 'TBD';
 
 																						} else {
 
-																							// Else if the current loop has a modified hours end date...
+																							/**
+																							 * Else if the current loop has a modified hours end date...
+																							 */
 
 																							$location_hours_modified_active_end = strtotime($location_hours_modified_end_date);
 
@@ -1730,6 +1734,7 @@
 																											 */
 
 																											foreach ( $schema_dayOfWeek as $day) {
+
 																												$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
 																													$day, // array|string // Optional // The day of the week for which these opening hours are valid.
 																													$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1738,6 +1743,7 @@
 																													$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 																													$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 																												);
+
 																											}
 
 																								$i++;
