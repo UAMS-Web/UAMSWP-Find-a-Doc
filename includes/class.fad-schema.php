@@ -21392,7 +21392,7 @@
 								$location_hasMap = null;
 								$location_hours = null;
 								$location_hours_group = null;
-								$location_hours_variable = null;
+								$location_hours_variable_query = null;
 								$location_hours_variable_info = null;
 								$location_identifier = null;
 								$location_image = null;
@@ -24108,9 +24108,9 @@
 
 													// Query: Do the location's typical hours of operation vary? (button_group)
 
-														$location_hours_variable = $location_hours_group['location_hours_variable'] ?? null;
+														$location_hours_variable_query = $location_hours_group['location_hours_variable'] ?? null;
 
-													if ( $location_hours_variable ) {
+													if ( $location_hours_variable_query ) {
 
 														// Information about the Location's Variable Hours of Operation (wysiwyg)
 
