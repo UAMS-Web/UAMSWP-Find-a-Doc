@@ -1517,14 +1517,14 @@
 
 																		// Loop through the Modified Hours repeater rows
 
-																			foreach ( $location_hours_modified as $modified_hour ) {
+																			foreach ( $location_hours_modified as $item ) {
 
 																				// Get data from fields in the Modified Hours repeater
 
-																					$modified_title = $modified_hour['location_modified_hours_title']; // Title (in Modified Hours repeater; in Modified Hours tab) // string
-																					$modified_info = $modified_hour['location_modified_hours_information']; // Information (in Modified Hours repeater; in Modified Hours tab) // string (wysiwyg)
-																					$modified_times = $modified_hour['location_modified_hours_times']; // Hours (in Modified Hours repeater; in Modified Hours tab) // repeater
-																					$modified_hours247 = $modified_hour['location_modified_hours_24_7']; // Is this location available 24/7 during these modified hours? (in Modified Hours repeater; in Modified Hours tab) // bool
+																					$modified_title = $item['location_modified_hours_title']; // Title (in Modified Hours repeater; in Modified Hours tab) // string
+																					$modified_info = $item['location_modified_hours_information']; // Information (in Modified Hours repeater; in Modified Hours tab) // string (wysiwyg)
+																					$modified_times = $item['location_modified_hours_times']; // Hours (in Modified Hours repeater; in Modified Hours tab) // repeater
+																					$modified_hours247 = $item['location_modified_hours_24_7']; // Is this location available 24/7 during these modified hours? (in Modified Hours repeater; in Modified Hours tab) // bool
 
 																				$location_hours_modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
 																				$location_hours_modified_text .= $modified_info ? $modified_info : '';
@@ -1748,7 +1748,7 @@
 
 																				} // endif ( $modified_hours247 ) else
 
-																			} // endforeach ( $location_hours_modified as $modified_hour )
+																			} // endforeach ( $location_hours_modified as $item )
 
 																	} // endif ( $location_hours_modified )
 
