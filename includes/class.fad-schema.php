@@ -21416,7 +21416,7 @@
 								$location_hours_modified_query = null;
 								$location_hours_modified_end_query = null;
 								$location_hours_modified_end_date = null;
-								$location_modified_hours_group = null;
+								$location_hours_modified = null;
 								$location_hours_modified_reason = null;
 								$location_hours_modified_start_date = null;
 								$location_name = null;
@@ -24170,7 +24170,7 @@
 
 														// Modified In-Person Hours of Operation (repeater)
 
-															$location_modified_hours_group = $location_hours_group['location_modified_hours_group'] ?? null;
+															$location_hours_modified = $location_hours_group['location_modified_hours_group'] ?? null;
 
 													}
 
