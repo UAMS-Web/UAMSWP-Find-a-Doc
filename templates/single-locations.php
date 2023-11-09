@@ -1436,7 +1436,7 @@
 												$phone_output_id = $page_id;
 												include( UAMS_FAD_PATH . '/templates/parts/html/contacts/phone-numbers_location-profile.php' );
 
-											// Hours values
+											// Hours of Operation
 
 												$location_hours_variable_query = $location_hours_group['location_hours_variable']; // Do the location's hours vary? // bool
 												$location_hours_variable_info = $location_hours_group['location_hours_variable_info']; // Variable Hours Information // string (WYSIWYG)
