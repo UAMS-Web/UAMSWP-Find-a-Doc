@@ -21413,7 +21413,7 @@
 								$location_medicalSpecialty_multiselect = null;
 								$location_memberOf = null;
 								$location_mentions = null;
-								$location_modified_hours = null;
+								$location_hours_modified_query = null;
 								$location_modified_hours_end = null;
 								$location_modified_hours_end_date = null;
 								$location_modified_hours_group = null;
@@ -24144,9 +24144,9 @@
 
 													// Query: Are there any upcoming modified in-person hours of operation? (button_group)
 
-														$location_modified_hours = $location_hours_group['location_modified_hours'] ?? null;
+														$location_hours_modified_query = $location_hours_group['location_modified_hours'] ?? null;
 
-													if ( $location_modified_hours ) {
+													if ( $location_hours_modified_query ) {
 
 														// Reason for Modified In-Person Hours of Operation (wysiwyg)
 
