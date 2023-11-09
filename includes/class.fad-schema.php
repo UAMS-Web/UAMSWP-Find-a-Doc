@@ -24124,7 +24124,17 @@
 
 																$location_hours_24_7_query = $location_hours_group['location_24_7'] ?? null;
 
-															if ( !$location_hours_24_7_query ) {
+															if ( $location_hours_24_7_query ) {
+
+																/**
+																 * If the location is typically open 24/7...
+																 */
+
+															} else {
+
+																/**
+																 * If the location is not typically open 24/7...
+																 */
 
 																// Typical In-Person Hours of Operation (repeater)
 
@@ -24198,7 +24208,17 @@
 
 																$location_telemed_24_7 = $location_hours_group['location_telemed_24_7'] ?? null;
 
-															if ( !$location_telemed_24_7 ) {
+															if ( $location_telemed_24_7 ) {
+
+																/**
+																 * If the location's telemedicine is typically available 24/7...
+																 */
+
+															} else {
+
+																/**
+																 * If the location's telemedicine is not typically available 24/7...
+																 */
 
 																// Typical Telemedicine Hours of Operation (repeater)
 
@@ -24250,7 +24270,17 @@
 
 															// Modified Telemedicine Hours of Operation (repeater)
 
-																if ( !$location_telemed_modified_hours_24_7 ) {
+																if ( $location_telemed_modified_hours_24_7 ) {
+
+																	/**
+																	 * If the location's telemedicine is available 24/7 during the modified hours...
+																	 */
+
+																} else {
+
+																	/**
+																	 * If the location's telemedicine is not available 24/7 during the modified hours...
+																	 */
 
 																	$location_telemed_modified_hours_times = $location_hours_group['location_telemed_modified_hours_times'] ?? null;
 
