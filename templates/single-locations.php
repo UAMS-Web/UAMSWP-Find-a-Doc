@@ -1446,7 +1446,7 @@
 												$location_hours_modified_start_date = $location_hours_group['location_modified_hours_start_date']; // Modified Hours Start Date // string (F j, Y)
 												$location_hours_modified_end_query = $location_hours_group['location_modified_hours_end']; // Is there a Modified Hours End Date? // bool
 												$location_hours_modified_end_date = $location_hours_group['location_modified_hours_end_date']; // Modified Hours End Date // string (F j, Y)
-												$modified_hours = $location_hours_group['location_modified_hours_group']; // Modified Hours // repeater
+												$location_hours_modified = $location_hours_group['location_modified_hours_group']; // Modified Hours // repeater
 												$modified_text = '';
 												$active_start = '';
 												$active_end = '';
@@ -1509,7 +1509,7 @@
 																	$modified_text .= $location_hours_modified_end_query && $location_hours_modified_end_date ? 'and are scheduled to end after ' . $location_hours_modified_end_date . '.' : 'and will remain in effect until further notice.';
 																	$modified_text .= '</p>';
 
-																	if ( $modified_hours ) {
+																	if ( $location_hours_modified ) {
 
 																		/**
 																		 * If the Modified Hours repeater has at least one row...
@@ -1517,7 +1517,7 @@
 
 																		// Loop through the Modified Hours repeater rows
 
-																			foreach ( $modified_hours as $modified_hour ) {
+																			foreach ( $location_hours_modified as $modified_hour ) {
 
 																				// Get data from fields in the Modified Hours repeater
 
@@ -1748,9 +1748,9 @@
 
 																				} // endif ( $modified_hours247 ) else
 
-																			} // endforeach ( $modified_hours as $modified_hour )
+																			} // endforeach ( $location_hours_modified as $modified_hour )
 
-																	} // endif ( $modified_hours )
+																	} // endif ( $location_hours_modified )
 
 																} // endif ( strtotime($location_hours_modified_start_date) <= $today_30 && ( strtotime($location_hours_modified_end_date) >= $today || !$location_hours_modified_end_query ) )
 
