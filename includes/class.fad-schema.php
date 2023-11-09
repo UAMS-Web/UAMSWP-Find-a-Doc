@@ -21418,7 +21418,7 @@
 								$location_modified_hours_end_date = null;
 								$location_modified_hours_group = null;
 								$location_hours_modified_reason = null;
-								$location_modified_hours_start_date = null;
+								$location_hours_modified_start_date = null;
 								$location_name = null;
 								$location_ontology_type = null;
 								$location_override_parent_photo = null;
@@ -24154,7 +24154,7 @@
 
 														// Start Date For the Modified In-Person Hours of Operation (date_picker)
 
-															$location_modified_hours_start_date = $location_hours_group['location_modified_hours_start_date'] ?? null;
+															$location_hours_modified_start_date = $location_hours_group['location_modified_hours_start_date'] ?? null;
 
 														// Query: Is there an end date for the modified in-person hours of operation? (button_group)
 
