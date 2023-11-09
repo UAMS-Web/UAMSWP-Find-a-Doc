@@ -1524,7 +1524,7 @@
 																					$item_title = $item['location_modified_hours_title']; // Title (in Modified Hours repeater; in Modified Hours tab) // string
 																					$item_info = $item['location_modified_hours_information']; // Information (in Modified Hours repeater; in Modified Hours tab) // string (wysiwyg)
 																					$item_times = $item['location_modified_hours_times']; // Hours (in Modified Hours repeater; in Modified Hours tab) // repeater
-																					$modified_hours247 = $item['location_modified_hours_24_7']; // Is this location available 24/7 during these modified hours? (in Modified Hours repeater; in Modified Hours tab) // bool
+																					$item_24_7_query = $item['location_modified_hours_24_7']; // Is this location available 24/7 during these modified hours? (in Modified Hours repeater; in Modified Hours tab) // bool
 
 																				$location_hours_modified_text .= $item_title ? '<h3 class="h4">'. $item_title . '</h3>' : '';
 																				$location_hours_modified_text .= $item_info ? $item_info : '';
@@ -1575,7 +1575,7 @@
 
 																					} // endif ( $location_hours_modified_active_end <= strtotime($location_hours_modified_end_date) || !$location_hours_modified_end_query )
 
-																					if ( $modified_hours247 ) {
+																					if ( $item_24_7_query ) {
 
 																						/**
 																						 * If the modified hours are 24/7...
@@ -1746,7 +1746,7 @@
 
 																					} // endif ( is_array($item_times) || is_object($item_times) )
 
-																				} // endif ( $modified_hours247 ) else
+																				} // endif ( $item_24_7_query ) else
 
 																			} // endforeach ( $location_hours_modified as $item )
 
