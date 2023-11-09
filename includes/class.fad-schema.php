@@ -21415,7 +21415,7 @@
 								$location_mentions = null;
 								$location_hours_modified_query = null;
 								$location_hours_modified_end_query = null;
-								$location_modified_hours_end_date = null;
+								$location_hours_modified_end_date = null;
 								$location_modified_hours_group = null;
 								$location_hours_modified_reason = null;
 								$location_hours_modified_start_date = null;
@@ -24164,7 +24164,7 @@
 
 															if ( $location_hours_modified_end_query ) {
 
-																$location_modified_hours_end_date = $location_hours_group['location_modified_hours_end_date'] ?? null;
+																$location_hours_modified_end_date = $location_hours_group['location_modified_hours_end_date'] ?? null;
 
 															}
 
