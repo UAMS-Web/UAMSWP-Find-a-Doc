@@ -1440,7 +1440,7 @@
 
 												$location_hours_variable_query = $location_hours_group['location_hours_variable']; // Do the location's hours vary? // bool
 												$location_hours_variable_info = $location_hours_group['location_hours_variable_info']; // Variable Hours Information // string (WYSIWYG)
-												$hours247 = $location_hours_group['location_24_7']; // Is the location typically available 24/7? // bool
+												$location_hours_24_7_query = $location_hours_group['location_24_7']; // Is the location typically available 24/7? // bool
 												$modified = $location_hours_group['location_modified_hours']; // Upcoming Modified Hours // bool
 												$modified_reason = $location_hours_group['location_modified_hours_reason']; // Reason for Modified Hours // string (WYSIWYG)
 												$modified_start = $location_hours_group['location_modified_hours_start_date']; // Modified Hours Start Date // string (F j, Y)
@@ -1821,7 +1821,7 @@
 																		$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
 															if (
-																$hours247 // The location is typically available 24/7
+																$location_hours_24_7_query // The location is typically available 24/7
 																||
 																$hours[0]['day'] // Typical daily hours have been set
 															) {
@@ -1835,7 +1835,7 @@
 																<h2><?php echo $modified_text ? 'Typical ' : ''; ?>Hours</h2>
 																<?php
 
-																if ( $hours247 ) {
+																if ( $location_hours_24_7_query ) {
 
 																	/**
 																	 * If the location is typically available 24/7...
@@ -2207,7 +2207,7 @@
 
 																		echo '</dl>';
 
-																} // endif ( $hours247 ) else
+																} // endif ( $location_hours_24_7_query ) else
 
 																// $holidayhours = get_field('location_holiday_hours'); // Holiday Hours // repeater
 																//
@@ -2277,7 +2277,7 @@
 																//
 																// } // endif ( $holidayhours )
 
-															} // endif ( $hours247 || $hours[0]['day'] )
+															} // endif ( $location_hours_24_7_query || $hours[0]['day'] )
 
 														} // endif ( ( $active_start != '' && $active_start <= $today) && ( $active_end > $today_30 || $active_end == 'TBD' ) ) else
 
