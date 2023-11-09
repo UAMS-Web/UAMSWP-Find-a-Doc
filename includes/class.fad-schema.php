@@ -5937,8 +5937,8 @@
 						// @type
 
 							$type = 'Organization';
-							$Organization_subtype = get_field( 'brandorg_organization_subtype', $term ) ?? $null;
-							$EducationalOrganization_subtype = get_field( 'brandorg_educationalorganization_subtype', $term ) ?? $null;
+							$Organization_subtype = get_field( 'brandorg_organization_subtype', $term ) ?? null;
+							$EducationalOrganization_subtype = get_field( 'brandorg_educationalorganization_subtype', $term ) ?? null;
 
 							if (
 								$Organization_subtype
@@ -10693,7 +10693,7 @@
 
 								// Place Subtype (building or building complex)
 
-									$Place_facility_query = get_field( 'facility_place_subtype', $term ) ?? $null;
+									$Place_facility_query = get_field( 'facility_place_subtype', $term ) ?? null;
 									$Place_subtype = $type;
 
 									// Building subtype
