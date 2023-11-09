@@ -1766,8 +1766,6 @@
 
 														} // endif ( $location_hours_modified_query )
 
-													// End Modified Hours Logic
-
 													// Begin Typical Hours Logic
 
 														if (
@@ -2288,8 +2286,6 @@
 															} // endif ( $location_hours_24_7_query || $hours[0]['day'] )
 
 														} // endif ( ( $location_hours_modified_active_start != '' && $location_hours_modified_active_start <= $today) && ( $location_hours_modified_active_end > $today_30 || $location_hours_modified_active_end == 'TBD' ) ) else
-
-													// End Typical Hours Logic
 
 												} // endif ( $location_hours_variable_query )
 
