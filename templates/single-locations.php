@@ -1444,7 +1444,7 @@
 												$location_hours_modified_query = $location_hours_group['location_modified_hours']; // Upcoming Modified Hours // bool
 												$location_hours_modified_reason = $location_hours_group['location_modified_hours_reason']; // Reason for Modified Hours // string (WYSIWYG)
 												$location_hours_modified_start_date = $location_hours_group['location_modified_hours_start_date']; // Modified Hours Start Date // string (F j, Y)
-												$modified_end = $location_hours_group['location_modified_hours_end']; // Is there a Modified Hours End Date? // bool
+												$location_hours_modified_end_query = $location_hours_group['location_modified_hours_end']; // Is there a Modified Hours End Date? // bool
 												$modified_end_date = $location_hours_group['location_modified_hours_end_date']; // Modified Hours End Date // string (F j, Y)
 												$modified_hours = $location_hours_group['location_modified_hours_group']; // Modified Hours // repeater
 												$modified_text = '';
@@ -1490,7 +1490,7 @@
 																	$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																	$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																	$schema_validFrom = $location_hours_modified_start_date; // The date when the item becomes valid.
-																	$schema_validThrough = ( $modified_end && $modified_end_date) ? $modified_end_date : null; // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																	$schema_validThrough = ( $location_hours_modified_end_query && $modified_end_date) ? $modified_end_date : null; // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 
 															// Display the modified hours if they have started or if they start within 30 days
 
@@ -1500,13 +1500,13 @@
 																	(
 																		strtotime($modified_end_date) >= $today // If the modified hours end date is greater than or equal to today
 																		||
-																		!$modified_end // If there is no end date for the modified hours
+																		!$location_hours_modified_end_query // If there is no end date for the modified hours
 																	)
 																) {
 
 																	$modified_text .= $location_hours_modified_reason;
 																	$modified_text .= '<p class="small font-italic">These modified hours start on ' . $location_hours_modified_start_date . ', ';
-																	$modified_text .= $modified_end && $modified_end_date ? 'and are scheduled to end after ' . $modified_end_date . '.' : 'and will remain in effect until further notice.';
+																	$modified_text .= $location_hours_modified_end_query && $modified_end_date ? 'and are scheduled to end after ' . $modified_end_date . '.' : 'and will remain in effect until further notice.';
 																	$modified_text .= '</p>';
 
 																	if ( $modified_hours ) {
@@ -1556,10 +1556,10 @@
 																						||
 																						'' == $active_start // Or if there is no modified hours end date from a previous loop
 																						||
-																						!$modified_end // Or if the current loop has no modified hours end date
+																						!$location_hours_modified_end_query // Or if the current loop has no modified hours end date
 																					) {
 
-																						if ( !$modified_end ) {
+																						if ( !$location_hours_modified_end_query ) {
 
 																							// If the current loop has no modified hours end date...
 
@@ -1571,9 +1571,9 @@
 
 																							$active_end = strtotime($modified_end_date);
 
-																						} // endif ( !$modified_end ) else
+																						} // endif ( !$location_hours_modified_end_query ) else
 
-																					} // endif ( $active_end <= strtotime($modified_end_date) || !$modified_end )
+																					} // endif ( $active_end <= strtotime($modified_end_date) || !$location_hours_modified_end_query )
 
 																					if ( $modified_hours247 ) {
 
@@ -1752,7 +1752,7 @@
 
 																	} // endif ( $modified_hours )
 
-																} // endif ( strtotime($location_hours_modified_start_date) <= $today_30 && ( strtotime($modified_end_date) >= $today || !$modified_end ) )
+																} // endif ( strtotime($location_hours_modified_start_date) <= $today_30 && ( strtotime($modified_end_date) >= $today || !$location_hours_modified_end_query ) )
 
 																echo $modified_text ? '<h2>Modified Hours</h2>' . $modified_text: '';
 
