@@ -1474,7 +1474,7 @@
 															 * If there are upcoming modified hours...
 															 */
 
-															$modified_day = ''; // Previous Day
+															$item_day = ''; // Previous Day
 															$modified_comment = ''; // Comment on previous day
 															$i = 1;
 
@@ -1649,7 +1649,7 @@
 
 																							foreach ( $item_times as $item_time ) {
 
-																								$location_hours_modified_text .= $modified_day !== $item_time['location_modified_hours_day'] ? '<dt>'. $item_time['location_modified_hours_day'] .'</dt> ' : '';
+																								$location_hours_modified_text .= $item_day !== $item_time['location_modified_hours_day'] ? '<dt>'. $item_time['location_modified_hours_day'] .'</dt> ' : '';
 																								$location_hours_modified_text .= '<dd>';
 
 																								// OpeningHoursSpecification Schema Data
@@ -1706,7 +1706,7 @@
 																								} // endif ( $item_time['location_modified_hours_comment'] ) else
 
 																								$location_hours_modified_text .= '</dd>';
-																								$modified_day = $item_time['location_modified_hours_day']; // Reset the day
+																								$item_day = $item_time['location_modified_hours_day']; // Reset the day
 
 																								// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
 
