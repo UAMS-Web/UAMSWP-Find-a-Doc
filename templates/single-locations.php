@@ -1439,7 +1439,7 @@
 											// Hours values
 
 												$location_hours_variable_query = $location_hours_group['location_hours_variable']; // Do the location's hours vary? // bool
-												$hoursvary_info = $location_hours_group['location_hours_variable_info']; // Variable Hours Information // string (WYSIWYG)
+												$location_hours_variable_info = $location_hours_group['location_hours_variable_info']; // Variable Hours Information // string (WYSIWYG)
 												$hours247 = $location_hours_group['location_24_7']; // Is the location typically available 24/7? // bool
 												$modified = $location_hours_group['location_modified_hours']; // Upcoming Modified Hours // bool
 												$modified_reason = $location_hours_group['location_modified_hours_reason']; // Reason for Modified Hours // string (WYSIWYG)
@@ -1458,7 +1458,7 @@
 													 */
 
 													echo '<h2>Hours Vary</h2>';
-													echo $hoursvary_info;
+													echo $location_hours_variable_info;
 
 												} else {
 
