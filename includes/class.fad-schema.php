@@ -21390,7 +21390,7 @@
 								$location_geo_value = null;
 								$location_has_parent = null;
 								$location_hasMap = null;
-								$location_hours = null;
+								$location_hours_repeater = null;
 								$location_hours_group = null;
 								$location_hours_variable_query = null;
 								$location_hours_variable_info = null;
@@ -24126,7 +24126,7 @@
 
 															// Typical In-Person Hours of Operation (repeater)
 
-																$location_hours = $location_hours_group['location_hours'] ?? null;
+																$location_hours_repeater = $location_hours_group['location_hours'] ?? null;
 
 															// Information for When the Location Is Closed (wysiwyg)
 
