@@ -1475,7 +1475,7 @@
 															 */
 
 															$item_day = ''; // Previous Day
-															$modified_comment = ''; // Comment on previous day
+															$item_comment = ''; // Comment on previous day
 															$i = 1;
 
 															$today = strtotime("today");
@@ -1697,11 +1697,11 @@
 																								if ( $item_time['location_modified_hours_comment'] ) {
 
 																									$location_hours_modified_text .= ' <br /><span class="subtitle">' .$item_time['location_modified_hours_comment'] . '</span>';
-																									$modified_comment = $item_time['location_modified_hours_comment'];
+																									$item_comment = $item_time['location_modified_hours_comment'];
 
 																								} else {
 
-																									$modified_comment = '';
+																									$item_comment = '';
 
 																								} // endif ( $item_time['location_modified_hours_comment'] ) else
 
