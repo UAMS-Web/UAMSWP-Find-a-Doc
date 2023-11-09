@@ -1449,7 +1449,7 @@
 												$location_hours_modified = $location_hours_group['location_modified_hours_group']; // Modified Hours // repeater
 												$location_hours_modified_text = '';
 												$location_hours_modified_active_start = '';
-												$active_end = '';
+												$location_hours_modified_active_end = '';
 
 												if ( $location_hours_variable_query ) {
 
@@ -1552,7 +1552,7 @@
 																				// Get the latest (most future) modified hours end date from all the rows in the Modified hours repeater
 
 																					if (
-																						$active_end <= strtotime($location_hours_modified_end_date) // If previous loop's modified hours end date is less than or equal to the current loop's modified hours end date
+																						$location_hours_modified_active_end <= strtotime($location_hours_modified_end_date) // If previous loop's modified hours end date is less than or equal to the current loop's modified hours end date
 																						||
 																						'' == $location_hours_modified_active_start // Or if there is no modified hours end date from a previous loop
 																						||
@@ -1563,17 +1563,17 @@
 
 																							// If the current loop has no modified hours end date...
 
-																							$active_end = 'TBD';
+																							$location_hours_modified_active_end = 'TBD';
 
 																						} else {
 
 																							// Else if the current loop has a modified hours end date...
 
-																							$active_end = strtotime($location_hours_modified_end_date);
+																							$location_hours_modified_active_end = strtotime($location_hours_modified_end_date);
 
 																						} // endif ( !$location_hours_modified_end_query ) else
 
-																					} // endif ( $active_end <= strtotime($location_hours_modified_end_date) || !$location_hours_modified_end_query )
+																					} // endif ( $location_hours_modified_active_end <= strtotime($location_hours_modified_end_date) || !$location_hours_modified_end_query )
 
 																					if ( $modified_hours247 ) {
 
@@ -1770,9 +1770,9 @@
 															)
 															&&
 															(
-																$active_end > $today_30 // If the modified hours end date is after 30 days in the future
+																$location_hours_modified_active_end > $today_30 // If the modified hours end date is after 30 days in the future
 																||
-																$active_end == 'TBD' // Or if there is no modified hours end date
+																$location_hours_modified_active_end == 'TBD' // Or if there is no modified hours end date
 															)
 														) {
 
@@ -2279,7 +2279,7 @@
 
 															} // endif ( $location_hours_24_7_query || $hours[0]['day'] )
 
-														} // endif ( ( $location_hours_modified_active_start != '' && $location_hours_modified_active_start <= $today) && ( $active_end > $today_30 || $active_end == 'TBD' ) ) else
+														} // endif ( ( $location_hours_modified_active_start != '' && $location_hours_modified_active_start <= $today) && ( $location_hours_modified_active_end > $today_30 || $location_hours_modified_active_end == 'TBD' ) ) else
 
 													// End Typical Hours Logic
 
