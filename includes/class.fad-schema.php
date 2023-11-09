@@ -21289,7 +21289,7 @@
 								$item_value = null;
 								$LocalBusiness_id = null;
 								$LocalBusiness_type = null;
-								$location_24_7 = null;
+								$location_hours_24_7_query = null;
 								$location_about = null;
 								$location_abstract = null;
 								$location_accessibilityAPI = null;
@@ -24120,9 +24120,9 @@
 
 														// Query: Is the location typically open 24/7? (button_group)
 
-															$location_24_7 = $location_hours_group['location_24_7'] ?? null;
+															$location_hours_24_7_query = $location_hours_group['location_24_7'] ?? null;
 
-														if ( !$location_24_7 ) {
+														if ( !$location_hours_24_7_query ) {
 
 															// Typical In-Person Hours of Operation (repeater)
 
