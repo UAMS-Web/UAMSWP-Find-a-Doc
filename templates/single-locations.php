@@ -1643,9 +1643,9 @@
 
 																						// Loop through all the Hours repeater rows (in Modified Hours repeater; in Modified Hours tab)
 
-																							foreach ( $item_times as $modified_time ) {
+																							foreach ( $item_times as $item_time ) {
 
-																								$location_hours_modified_text .= $modified_day !== $modified_time['location_modified_hours_day'] ? '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ' : '';
+																								$location_hours_modified_text .= $modified_day !== $item_time['location_modified_hours_day'] ? '<dt>'. $item_time['location_modified_hours_day'] .'</dt> ' : '';
 																								$location_hours_modified_text .= '<dd>';
 
 																								// OpeningHoursSpecification Schema Data
@@ -1655,9 +1655,9 @@
 																										$schema_dayOfWeek = array();
 
 																								if (
-																									'Mon - Fri' == $modified_time['location_modified_hours_day']
+																									'Mon - Fri' == $item_time['location_modified_hours_day']
 																									&&
-																									!$modified_time['location_modified_hours_closed']
+																									!$item_time['location_modified_hours_closed']
 																								) {
 
 																									// OpeningHoursSpecification Schema Data
@@ -1668,11 +1668,11 @@
 
 																									// OpeningHoursSpecification Schema Data
 
-																										$schema_dayOfWeek[] = $modified_time['location_modified_hours_day']; // The day of the week for which these opening hours are valid.
+																										$schema_dayOfWeek[] = $item_time['location_modified_hours_day']; // The day of the week for which these opening hours are valid.
 
-																								} // endif ( 'Mon - Fri' == $modified_time['location_modified_hours_day'] && !$modified_time['location_modified_hours_closed'] ) else
+																								} // endif ( 'Mon - Fri' == $item_time['location_modified_hours_day'] && !$item_time['location_modified_hours_closed'] ) else
 
-																								if ( $modified_time['location_modified_hours_closed'] ) {
+																								if ( $item_time['location_modified_hours_closed'] ) {
 
 																									// OpeningHoursSpecification Schema Data
 
@@ -1683,26 +1683,26 @@
 
 																								} else {
 
-																									$location_hours_modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] ) ? '' . ap_time_span( strtotime($modified_time['location_modified_hours_open']), strtotime($modified_time['location_modified_hours_close']) ). '' : '' );
+																									$location_hours_modified_text .= ( ( $item_time['location_modified_hours_open'] && '00:00:00' != $item_time['location_modified_hours_open'] ) ? '' . ap_time_span( strtotime($item_time['location_modified_hours_open']), strtotime($item_time['location_modified_hours_close']) ). '' : '' );
 
-																									$schema_opens = $modified_time['location_modified_hours_open']; // string // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																									$schema_closes = $modified_time['location_modified_hours_close']; // string // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																									$schema_opens = $item_time['location_modified_hours_open']; // string // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																									$schema_closes = $item_time['location_modified_hours_close']; // string // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
-																								} // endif ( $modified_time['location_modified_hours_closed'] ) else
+																								} // endif ( $item_time['location_modified_hours_closed'] ) else
 
-																								if ( $modified_time['location_modified_hours_comment'] ) {
+																								if ( $item_time['location_modified_hours_comment'] ) {
 
-																									$location_hours_modified_text .= ' <br /><span class="subtitle">' .$modified_time['location_modified_hours_comment'] . '</span>';
-																									$modified_comment = $modified_time['location_modified_hours_comment'];
+																									$location_hours_modified_text .= ' <br /><span class="subtitle">' .$item_time['location_modified_hours_comment'] . '</span>';
+																									$modified_comment = $item_time['location_modified_hours_comment'];
 
 																								} else {
 
 																									$modified_comment = '';
 
-																								} // endif ( $modified_time['location_modified_hours_comment'] ) else
+																								} // endif ( $item_time['location_modified_hours_comment'] ) else
 
 																								$location_hours_modified_text .= '</dd>';
-																								$modified_day = $modified_time['location_modified_hours_day']; // Reset the day
+																								$modified_day = $item_time['location_modified_hours_day']; // Reset the day
 
 																								// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
 
@@ -1742,7 +1742,7 @@
 
 																								$i++;
 
-																							} // endforeach ( $item_times as $modified_time )
+																							} // endforeach ( $item_times as $item_time )
 
 																						$location_hours_modified_text .= '</dl>';
 
