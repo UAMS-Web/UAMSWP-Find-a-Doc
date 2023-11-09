@@ -21417,7 +21417,7 @@
 								$location_modified_hours_end = null;
 								$location_modified_hours_end_date = null;
 								$location_modified_hours_group = null;
-								$location_modified_hours_reason = null;
+								$location_hours_modified_reason = null;
 								$location_modified_hours_start_date = null;
 								$location_name = null;
 								$location_ontology_type = null;
@@ -24150,7 +24150,7 @@
 
 														// Reason for Modified In-Person Hours of Operation (wysiwyg)
 
-															$location_modified_hours_reason = $location_hours_group['location_modified_hours_reason'] ?? null;
+															$location_hours_modified_reason = $location_hours_group['location_modified_hours_reason'] ?? null;
 
 														// Start Date For the Modified In-Person Hours of Operation (date_picker)
 
