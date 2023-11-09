@@ -1441,7 +1441,7 @@
 												$location_hours_variable_query = $location_hours_group['location_hours_variable']; // Do the location's hours vary? // bool
 												$location_hours_variable_info = $location_hours_group['location_hours_variable_info']; // Variable Hours Information // string (WYSIWYG)
 												$location_hours_24_7_query = $location_hours_group['location_24_7']; // Is the location typically available 24/7? // bool
-												$modified = $location_hours_group['location_modified_hours']; // Upcoming Modified Hours // bool
+												$location_hours_modified_query = $location_hours_group['location_modified_hours']; // Upcoming Modified Hours // bool
 												$modified_reason = $location_hours_group['location_modified_hours_reason']; // Reason for Modified Hours // string (WYSIWYG)
 												$modified_start = $location_hours_group['location_modified_hours_start_date']; // Modified Hours Start Date // string (F j, Y)
 												$modified_end = $location_hours_group['location_modified_hours_end']; // Is there a Modified Hours End Date? // bool
@@ -1468,7 +1468,7 @@
 
 													// Begin Modified Hours Logic
 
-														if ( $modified ) {
+														if ( $location_hours_modified_query ) {
 
 															/**
 															 * If there are upcoming modified hours...
@@ -1756,7 +1756,7 @@
 
 																echo $modified_text ? '<h2>Modified Hours</h2>' . $modified_text: '';
 
-														} // endif ( $modified )
+														} // endif ( $location_hours_modified_query )
 
 													// End Modified Hours Logic
 
