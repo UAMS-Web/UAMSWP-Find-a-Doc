@@ -1442,7 +1442,7 @@
 												$location_hours_variable_info = $location_hours_group['location_hours_variable_info']; // Variable Hours Information // string (WYSIWYG)
 												$location_hours_24_7_query = $location_hours_group['location_24_7']; // Is the location typically available 24/7? // bool
 												$location_hours_modified_query = $location_hours_group['location_modified_hours']; // Upcoming Modified Hours // bool
-												$modified_reason = $location_hours_group['location_modified_hours_reason']; // Reason for Modified Hours // string (WYSIWYG)
+												$location_hours_modified_reason = $location_hours_group['location_modified_hours_reason']; // Reason for Modified Hours // string (WYSIWYG)
 												$modified_start = $location_hours_group['location_modified_hours_start_date']; // Modified Hours Start Date // string (F j, Y)
 												$modified_end = $location_hours_group['location_modified_hours_end']; // Is there a Modified Hours End Date? // bool
 												$modified_end_date = $location_hours_group['location_modified_hours_end_date']; // Modified Hours End Date // string (F j, Y)
@@ -1504,7 +1504,7 @@
 																	)
 																) {
 
-																	$modified_text .= $modified_reason;
+																	$modified_text .= $location_hours_modified_reason;
 																	$modified_text .= '<p class="small font-italic">These modified hours start on ' . $modified_start . ', ';
 																	$modified_text .= $modified_end && $modified_end_date ? 'and are scheduled to end after ' . $modified_end_date . '.' : 'and will remain in effect until further notice.';
 																	$modified_text .= '</p>';
