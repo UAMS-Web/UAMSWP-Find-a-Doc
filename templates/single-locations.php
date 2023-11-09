@@ -1448,7 +1448,7 @@
 												$location_hours_modified_end_date = $location_hours_group['location_modified_hours_end_date']; // Modified Hours End Date // string (F j, Y)
 												$location_hours_modified = $location_hours_group['location_modified_hours_group']; // Modified Hours // repeater
 												$location_hours_modified_text = '';
-												$active_start = '';
+												$location_hours_modified_active_start = '';
 												$active_end = '';
 
 												if ( $location_hours_variable_query ) {
@@ -1540,21 +1540,21 @@
 																				// Get the earliest (most past) modified hours start date from all the rows in the Modified hours repeater
 
 																					if (
-																						$active_start > strtotime($location_hours_modified_start_date) // If previous loop's modified hours start date is greater than the current loop's modified hours start date
+																						$location_hours_modified_active_start > strtotime($location_hours_modified_start_date) // If previous loop's modified hours start date is greater than the current loop's modified hours start date
 																						||
-																						'' == $active_start // Or if there is no modified hours start date from a previous loop
+																						'' == $location_hours_modified_active_start // Or if there is no modified hours start date from a previous loop
 																					) {
 
-																						$active_start = strtotime($location_hours_modified_start_date); // Store the modified hours start date for comparison in future loops
+																						$location_hours_modified_active_start = strtotime($location_hours_modified_start_date); // Store the modified hours start date for comparison in future loops
 
-																					} // endif ( $active_start > strtotime($location_hours_modified_start_date) || '' == $active_start )
+																					} // endif ( $location_hours_modified_active_start > strtotime($location_hours_modified_start_date) || '' == $location_hours_modified_active_start )
 
 																				// Get the latest (most future) modified hours end date from all the rows in the Modified hours repeater
 
 																					if (
 																						$active_end <= strtotime($location_hours_modified_end_date) // If previous loop's modified hours end date is less than or equal to the current loop's modified hours end date
 																						||
-																						'' == $active_start // Or if there is no modified hours end date from a previous loop
+																						'' == $location_hours_modified_active_start // Or if there is no modified hours end date from a previous loop
 																						||
 																						!$location_hours_modified_end_query // Or if the current loop has no modified hours end date
 																					) {
@@ -1764,9 +1764,9 @@
 
 														if (
 															(
-																$active_start != '' // If there is a modified hours start date
+																$location_hours_modified_active_start != '' // If there is a modified hours start date
 																&&
-																$active_start <= $today // And if that modified hours start date is today or earlier
+																$location_hours_modified_active_start <= $today // And if that modified hours start date is today or earlier
 															)
 															&&
 															(
@@ -2279,7 +2279,7 @@
 
 															} // endif ( $location_hours_24_7_query || $hours[0]['day'] )
 
-														} // endif ( ( $active_start != '' && $active_start <= $today) && ( $active_end > $today_30 || $active_end == 'TBD' ) ) else
+														} // endif ( ( $location_hours_modified_active_start != '' && $location_hours_modified_active_start <= $today) && ( $active_end > $today_30 || $active_end == 'TBD' ) ) else
 
 													// End Typical Hours Logic
 
