@@ -4390,6 +4390,11 @@
 								"field": "field_location_hours_variable",
 								"operator": "==",
 								"value": "0"
+							},
+							{
+								"field": "field_location_modified_hours",
+								"operator": "==",
+								"value": "1"
 							}
 						]
 					],
