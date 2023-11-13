@@ -24429,35 +24429,57 @@
 
 																			foreach ( $location_hours_repeater as $item ) {
 
-																				// Reset item variables
+																				if ( $item ) {
 
-																					$item_dayOfWeek = $item['dayOfWeek'] ?? null;
-																					$item_opens = $item['opens'] ?? null;
-																					$item_closes = $item['closes'] ?? null;
-																					$item_validFrom = $item['validFrom'] ?? null;
-																					$item_validThrough = $item['validThrough'] ?? null;
+																					// Reset item variables
 
-																				// Construct item schema array
+																						$item_dayOfWeek = $item['day'] ?? null;
 
-																					$item_schema = array(
-																						'dayOfWeek' => $item_dayOfWeek,
-																						'opens' => $item_opens,
-																						'closes' => $item_closes,
-																						'validFrom' => $item_validFrom,
-																						'validThrough' => $item_validThrough
-																					);
+																						if ( $item_dayOfWeek == 'Mon - Fri') {
 
-																				// Remove empty rows from item schema array
+																							$item_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' );
 
-																					$item_schema = array_filter($item_schema);
+																						}
 
-																				// Add item schema array to function input argument value
+																						$item_closed = $item['closed'] ?? null;
 
-																					if ( $item_schema ) {
+																						if ( $item_closed ) {
 
-																						$location_hours_loop_input[] = $item_schema;
+																							$item_opens = '00:00';
+																							$item_closes = '00:00';
 
-																					}
+																						} else {
+
+																							$item_opens = $item['open'] ?? null;
+																							$item_closes = $item['close'] ?? null;
+
+																						}
+
+																						$item_comment = $item['comment'] ?? null;
+
+																					// Construct item schema array
+
+																						$item_schema = array(
+																							'dayOfWeek' => $item_dayOfWeek,
+																							'opens' => $item_opens,
+																							'closes' => $item_closes,
+																							'validFrom' => null,
+																							'validThrough' => null,
+																						);
+
+																					// Remove empty rows from item schema array
+
+																						$item_schema = array_filter($item_schema);
+
+																					// Add item schema array to function input argument value
+
+																						if ( $item_schema ) {
+
+																							$location_hours_loop_input[] = $item_schema;
+
+																						}
+
+																				}
 
 																			}
 
