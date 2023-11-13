@@ -24535,11 +24535,11 @@
 
 																$location_hours_modified_start_date = $location_hours_group['location_modified_hours_start_date'] ?? null;
 
-															// Query: Is there an end date for the modified in-person hours of operation? (button_group)
-
-																$location_hours_modified_end_query = $location_hours_group['location_modified_hours_end'] ?? null;
-
 															// End Date For the Modified In-Person Hours of Operation (date_picker)
+
+																// Query: Is there an end date for the modified in-person hours of operation? (button_group)
+
+																	$location_hours_modified_end_query = $location_hours_group['location_modified_hours_end'] ?? null;
 
 																if ( $location_hours_modified_end_query ) {
 
@@ -24619,11 +24619,11 @@
 
 																$location_telemed_modified_hours_start_date = $location_hours_group['location_telemed_modified_hours_start_date'] ?? null;
 
-															// Query: Is there an end date for the modified telemedicine hours of operation? (button_group)
-
-																$location_telemed_modified_hours_end = $location_hours_group['location_telemed_modified_hours_end'] ?? null;
-
 															// End Date For the Modified Telemedicine Hours of Operation (date_picker)
+
+																// Query: Is there an end date for the modified telemedicine hours of operation? (button_group)
+
+																	$location_telemed_modified_hours_end = $location_hours_group['location_telemed_modified_hours_end'] ?? null;
 
 																if ( $location_telemed_modified_hours_end ) {
 
