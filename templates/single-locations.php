@@ -1589,7 +1589,15 @@
 
 																					// OpeningHoursSpecification Schema Data for Modified Hours That Are 24/7
 
-																						$schema_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ); // The day of the week for which these opening hours are valid.
+																						$schema_dayOfWeek = array(
+																							'Monday',
+																							'Tuesday',
+																							'Wednesday',
+																							'Thursday',
+																							'Friday',
+																							'Saturday',
+																							'Sunday'
+																						); // The day of the week for which these opening hours are valid.
 																						$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																						$schema_closes = '23:59'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
@@ -1664,7 +1672,16 @@
 
 																									// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
 
-																										$schema_dayOfWeek = array_merge( $schema_dayOfWeek, array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ) ); // The day of the week for which these opening hours are valid.
+																										$schema_dayOfWeek = array_merge(
+																											$schema_dayOfWeek,
+																											array(
+																												'Monday',
+																												'Tuesday',
+																												'Wednesday',
+																												'Thursday',
+																												'Friday'
+																											)
+																										); // The day of the week for which these opening hours are valid.
 
 																								} else {
 
