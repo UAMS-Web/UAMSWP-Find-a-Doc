@@ -21627,7 +21627,7 @@
 								$location_hours_group = null;
 								$location_hours_openingHours = null;
 								$location_hours_openingHoursSpecification = null;
-								$location_hours_openingHoursSpecification_input = null;
+								$location_hours_loop_input = null;
 								$location_hours_specialOpeningHoursSpecification = null;
 								$location_hours_specialOpeningHoursSpecification_input = null;
 								$location_hours_variable_query = null;
@@ -24391,11 +24391,11 @@
 
 																	// Define array for openingHoursSpecification function input argument
 
-																		$location_hours_openingHoursSpecification_input = array();
+																		$location_hours_loop_input = array();
 
 																		foreach ( array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ) as $item ) {
 
-																			$location_hours_openingHoursSpecification_input[] = array(
+																			$location_hours_loop_input[] = array(
 																				'dayOfWeek' => $item,
 																				'opens' => '00:00',
 																				'closes' => '23:59',
@@ -24406,7 +24406,7 @@
 																		}
 
 																	$location_hours_openingHoursSpecification = uamswp_fad_schema_hours_loop(
-																		$location_hours_openingHoursSpecification_input, // array // Required // Array containing the argument values for the openingHours and openingHoursSpecification functions
+																		$location_hours_loop_input, // array // Required // Array containing the argument values for the openingHours and openingHoursSpecification functions
 																		'openingHoursSpecification', // string enum('openingHours', 'openingHoursSpecification', 'specialOpeningHoursSpecification') // string // Required // Which property to define
 																		( $location_hours_openingHoursSpecification ?? array() ) // array // Optional // Pre-existing list array for openingHours, openingHoursSpecification or specialOpeningHoursSpecification to which to add additional items
 																	);
