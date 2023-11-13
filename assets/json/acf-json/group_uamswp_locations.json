@@ -2202,7 +2202,7 @@
 				},
 				{
 					"key": "field_location_modified_hours_tab",
-					"label": "Modified Hours",
+					"label": "Modified In-Person Hours",
 					"name": "",
 					"type": "tab",
 					"instructions": "",
@@ -3034,7 +3034,7 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_tab",
-					"label": "Telemedicine Modified Hours",
+					"label": "Modified Telemedicine Hours",
 					"name": "",
 					"type": "tab",
 					"instructions": "",
