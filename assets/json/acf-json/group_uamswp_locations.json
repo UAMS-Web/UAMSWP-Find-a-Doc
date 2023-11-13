@@ -2023,8 +2023,8 @@
 					"key": "field_location_hours",
 					"name": "location_hours",
 					"type": "repeater",
-					"label": "Typical In-Person Hours of Operation",
-					"instructions": "Set the time for all seven days, beginning with Sunday.</p><p class='description' style='margin-top: 0.5em;'>If there are multiple separate time spans on a single day (e.g., Monday, 8-11 a.m. and 1-4 p.m.), add additional rows for each time span, setting the day dropdown as the same value. Keep the rows in chronological order.",
+					"label": "Typical Days and Hours for In-Person Operation",
+					"instructions": "Set the time for all seven days, beginning with Sunday.</p><p class='description' style='margin-top: 0.5em;'>If there are multiple separate time spans on a single day (e.g., Monday, 8-11:30 a.m. and 12:30-4:30 p.m.), add additional rows for each time span, setting the day dropdown as the same value. Keep the rows in chronological order.",
 					"required": 0,
 					"conditional_logic": [
 						[
