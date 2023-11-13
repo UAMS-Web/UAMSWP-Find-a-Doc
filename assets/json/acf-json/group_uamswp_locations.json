@@ -2393,7 +2393,7 @@
 							"name": "location_modified_hours_title",
 							"label": "Title",
 							"type": "text",
-							"instructions": "",
+							"instructions": "Define the text to be used in the heading for this set of modified hours (e.g., \"Thanksgiving Holiday Hours\").",
 							"required": 0,
 							"conditional_logic": 0,
 							"wrapper": {
