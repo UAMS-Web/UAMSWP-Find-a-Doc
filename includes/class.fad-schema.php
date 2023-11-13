@@ -844,769 +844,771 @@
 
 		}
 
-	// Add data to an array defining schema data for openingHoursSpecification and specialOpeningHoursSpecification (OpeningHoursSpecification)
+	// Add data to an array defining schema data for hours of operation
 
-		function uamswp_fad_schema_openinghoursspecification(
-			$dayOfWeek = null, // array|string // Optional // The day of the week for which these opening hours are valid.
-			string $opens = null, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-			string $closes = null, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-			string $validFrom = null, // string // Optional // The date when the item becomes valid. // Date is specified using the ISO 8601 date format (YYYY-MM-DD).
-			string $validThrough = null, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours. //  Date is specified using the ISO 8601 date format (YYYY-MM-DD).
-			array $schema_OpeningHoursSpecification = array() // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-		) {
+		// Add data to an array defining schema data for openingHoursSpecification and specialOpeningHoursSpecification (OpeningHoursSpecification)
 
-			/**
-			 * Schema.org Documentation for the 'OpeningHoursSpecification' type:
-			 *
-			 *     A structured value providing information about the opening hours of a place or
-			 *     a certain service inside a place.
-			 *
-			 *     The place is open if the opens property is specified, and closed otherwise.
-			 *
-			 *     If the value for the closes property is less than the value for the opens
-			 *     property then the hour range is assumed to span over the next day.
-			 *
-			 *     Properties from OpeningHoursSpecification:
-			 *
-			 *         'dayOfWeek'
-			 *
-			 *             The day of the week for which these opening hours are valid.
-			 *
-			 *             Expected Type:
-			 *
-			 *                 - DayOfWeek (Schema.org Enumeration Type)
-			 *                       - Sunday
-			 *                       - Monday
-			 *                       - Tuesday
-			 *                       - Wednesday
-			 *                       - Thursday
-			 *                       - Friday
-			 *                       - Saturday
-			 *                       - PublicHolidays
-			 *
-			 *         'opens'
-			 *
-			 *             The opening hour of the place or service on the given day(s) of the
-			 *             week.
-			 *
-			 *             Expected Type:
-			 *
-			 *                 - Time
-			 *
-			 *         'closes'
-			 *
-			 *             The closing hour of the place or service on the given day(s) of the week.
-			 *
-			 *             Expected Type:
-			 *
-			 *                 - Time
-			 *
-			 *         'validFrom'
-			 *
-			 *             The date when the item becomes valid.
-			 *
-			 *             Expected Type:
-			 *
-			 *                 - Date
-			 *                 - DateTime
-			 *
-			 *         'validThrough'
-			 *
-			 *             The date after when the item is not valid. For example the end of an offer,
-			 *             salary period, or a period of opening hours.
-			 *
-			 *             Expected Type:
-			 *
-			 *                 - Date
-			 *                 - DateTime
-			 *
-			 * Google documentation for the 'openingHoursSpecification' property / 'OpeningHoursSpecification' type:
-			 * (https://developers.google.com/search/docs/appearance/structured-data/local-business)
-			 *
-			 *     Standard hours:
-			 *
-			 *         Excluding the 'validFrom' and 'validThrough' properties signify that the hours
-			 *         are valid year-round. This example defines a business that is open weekdays
-			 *         from 9am to 9pm, with weekend hours from 10am until 11pm.
-			 *
-			 *             Set 1 (weekday hours):
-			 *
-			 *                 $dayOfWeek = array(
-			 *                     'Monday',
-			 *                     'Tuesday',
-			 *                     'Wednesday',
-			 *                     'Thursday',
-			 *                     'Friday'
-			 *                 );
-			 *
-			 *                 $opens = '09:00';
-			 *
-			 *                 $closes = '21:00';
-			 *
-			 *             Set 2 (weekend hours):
-			 *
-			 *                 $dayOfWeek = array(
-			 *                     'Saturday',
-			 *                     'Sunday'
-			 *                 );
-			 *
-			 *                 $opens = '10:00';
-			 *
-			 *                 $closes = '23:00';
-			 *
-			 *     Late night hours:
-			 *
-			 *         For hours past midnight, define opening and closing hours using a single
-			 *         'OpeningHoursSpecification' property. This example defines hours from Saturday
-			 *         at 6pm until Sunday at 3am.
-			 *
-			 *             $dayOfWeek = 'Saturday';
-			 *             $opens = '18:00';
-			 *             $closes = '03:00';
-			 *
-			 *     All-day hours:
-			 *
-			 *         To show a business as open 24 hours a day, set the 'opens' property to "00:00"
-			 *         and the 'closes' property to "23:59".To show a business is closed all day, set
-			 *         both 'opens' and 'closes' properties to "00:00". This example shows a business
-			 *         open all day Saturday and closed all day Sunday.
-			 *
-			 *             Set 1 (open all day):
-			 *
-			 *                 $dayOfWeek = 'Saturday';
-			 *                 $opens = '00:00';
-			 *                 $closes = '23:59';
-			 *
-			 *             Set 2 (closed all day):
-			 *
-			 *                 $dayOfWeek = 'Sunday';
-			 *                 $opens = '00:00';
-			 *                 $closes = '00:00';
-			 *
-			 *     Seasonal hours:
-			 *
-			 *         Use both the 'validFrom' and 'validThrough' properties to define seasonal
-			 *         hours. This example shows a business closed for winter holidays.
-			 *
-			 *             $opens = '00:00';
-			 *             $closes = '00:00';
-			 *             $validFrom = '2015-12-23';
-			 *             $validThrough = '2016-01-05';
-			 *
-			 * Example use:
-			 *
-			 * 	// OpeningHoursSpecification Schema Data
-			 *
-			 * 		// Check/define the main OpeningHoursSpecification schema array
-			 * 		$schema_OpeningHoursSpecification = ( isset($schema_OpeningHoursSpecification) && is_array($schema_OpeningHoursSpecification) && !empty($schema_OpeningHoursSpecification) ) ? $schema_OpeningHoursSpecification : array();
-			 *
-			 * 		// Add this location's details to the main OpeningHoursSpecification schema array
-			 *
-			 * 			// // Schema.org method: Add all days as an array under the dayOfWeek property
-			 * 			// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-			 *
-			 * 			// 	$schema_OpeningHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-			 * 			// 		$schema_day_of_week, // array|string // Optional // The day of the week for which these opening hours are valid.
-			 * 			// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			 * 			// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			 * 			// 		$schema_valid_from, // string // Optional // The date when the item becomes valid.
-			 * 			// 		$schema_valid_through, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-			 * 			// 		$schema_OpeningHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-			 * 			// 	);
-			 *
-			 * 			// Google method: Loop through all the days defined in the current Hours repeater row separately
-			 * 			// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-			 *
-			 * 				foreach ( $schema_day_of_week as $day) {
-			 * 					$schema_OpeningHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-			 * 						$day, // array|string // Optional // The day of the week for which these opening hours are valid.
-			 * 						$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			 * 						$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			 * 						$schema_valid_from, // string // Optional // The date when the item becomes valid.
-			 * 						$schema_valid_through // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours., // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-			 * 						$schema_OpeningHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-			 * 					);
-			 * 				}
-			 */
+			function uamswp_fad_schema_openinghoursspecification(
+				$dayOfWeek = null, // array|string // Optional // The day of the week for which these opening hours are valid.
+				string $opens = null, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+				string $closes = null, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+				string $validFrom = null, // string // Optional // The date when the item becomes valid. // Date is specified using the ISO 8601 date format (YYYY-MM-DD).
+				string $validThrough = null, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours. //  Date is specified using the ISO 8601 date format (YYYY-MM-DD).
+				array $schema_OpeningHoursSpecification = array() // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+			) {
 
-			// Check/define variables
+				/**
+				 * Schema.org Documentation for the 'OpeningHoursSpecification' type:
+				 *
+				 *     A structured value providing information about the opening hours of a place or
+				 *     a certain service inside a place.
+				 *
+				 *     The place is open if the opens property is specified, and closed otherwise.
+				 *
+				 *     If the value for the closes property is less than the value for the opens
+				 *     property then the hour range is assumed to span over the next day.
+				 *
+				 *     Properties from OpeningHoursSpecification:
+				 *
+				 *         'dayOfWeek'
+				 *
+				 *             The day of the week for which these opening hours are valid.
+				 *
+				 *             Expected Type:
+				 *
+				 *                 - DayOfWeek (Schema.org Enumeration Type)
+				 *                       - Sunday
+				 *                       - Monday
+				 *                       - Tuesday
+				 *                       - Wednesday
+				 *                       - Thursday
+				 *                       - Friday
+				 *                       - Saturday
+				 *                       - PublicHolidays
+				 *
+				 *         'opens'
+				 *
+				 *             The opening hour of the place or service on the given day(s) of the
+				 *             week.
+				 *
+				 *             Expected Type:
+				 *
+				 *                 - Time
+				 *
+				 *         'closes'
+				 *
+				 *             The closing hour of the place or service on the given day(s) of the week.
+				 *
+				 *             Expected Type:
+				 *
+				 *                 - Time
+				 *
+				 *         'validFrom'
+				 *
+				 *             The date when the item becomes valid.
+				 *
+				 *             Expected Type:
+				 *
+				 *                 - Date
+				 *                 - DateTime
+				 *
+				 *         'validThrough'
+				 *
+				 *             The date after when the item is not valid. For example the end of an offer,
+				 *             salary period, or a period of opening hours.
+				 *
+				 *             Expected Type:
+				 *
+				 *                 - Date
+				 *                 - DateTime
+				 *
+				 * Google documentation for the 'openingHoursSpecification' property / 'OpeningHoursSpecification' type:
+				 * (https://developers.google.com/search/docs/appearance/structured-data/local-business)
+				 *
+				 *     Standard hours:
+				 *
+				 *         Excluding the 'validFrom' and 'validThrough' properties signify that the hours
+				 *         are valid year-round. This example defines a business that is open weekdays
+				 *         from 9am to 9pm, with weekend hours from 10am until 11pm.
+				 *
+				 *             Set 1 (weekday hours):
+				 *
+				 *                 $dayOfWeek = array(
+				 *                     'Monday',
+				 *                     'Tuesday',
+				 *                     'Wednesday',
+				 *                     'Thursday',
+				 *                     'Friday'
+				 *                 );
+				 *
+				 *                 $opens = '09:00';
+				 *
+				 *                 $closes = '21:00';
+				 *
+				 *             Set 2 (weekend hours):
+				 *
+				 *                 $dayOfWeek = array(
+				 *                     'Saturday',
+				 *                     'Sunday'
+				 *                 );
+				 *
+				 *                 $opens = '10:00';
+				 *
+				 *                 $closes = '23:00';
+				 *
+				 *     Late night hours:
+				 *
+				 *         For hours past midnight, define opening and closing hours using a single
+				 *         'OpeningHoursSpecification' property. This example defines hours from Saturday
+				 *         at 6pm until Sunday at 3am.
+				 *
+				 *             $dayOfWeek = 'Saturday';
+				 *             $opens = '18:00';
+				 *             $closes = '03:00';
+				 *
+				 *     All-day hours:
+				 *
+				 *         To show a business as open 24 hours a day, set the 'opens' property to "00:00"
+				 *         and the 'closes' property to "23:59".To show a business is closed all day, set
+				 *         both 'opens' and 'closes' properties to "00:00". This example shows a business
+				 *         open all day Saturday and closed all day Sunday.
+				 *
+				 *             Set 1 (open all day):
+				 *
+				 *                 $dayOfWeek = 'Saturday';
+				 *                 $opens = '00:00';
+				 *                 $closes = '23:59';
+				 *
+				 *             Set 2 (closed all day):
+				 *
+				 *                 $dayOfWeek = 'Sunday';
+				 *                 $opens = '00:00';
+				 *                 $closes = '00:00';
+				 *
+				 *     Seasonal hours:
+				 *
+				 *         Use both the 'validFrom' and 'validThrough' properties to define seasonal
+				 *         hours. This example shows a business closed for winter holidays.
+				 *
+				 *             $opens = '00:00';
+				 *             $closes = '00:00';
+				 *             $validFrom = '2015-12-23';
+				 *             $validThrough = '2016-01-05';
+				 *
+				 * Example use:
+				 *
+				 * 	// OpeningHoursSpecification Schema Data
+				 *
+				 * 		// Check/define the main OpeningHoursSpecification schema array
+				 * 		$schema_OpeningHoursSpecification = ( isset($schema_OpeningHoursSpecification) && is_array($schema_OpeningHoursSpecification) && !empty($schema_OpeningHoursSpecification) ) ? $schema_OpeningHoursSpecification : array();
+				 *
+				 * 		// Add this location's details to the main OpeningHoursSpecification schema array
+				 *
+				 * 			// // Schema.org method: Add all days as an array under the dayOfWeek property
+				 * 			// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+				 *
+				 * 			// 	$schema_OpeningHoursSpecification = uamswp_fad_schema_openinghoursspecification(
+				 * 			// 		$schema_day_of_week, // array|string // Optional // The day of the week for which these opening hours are valid.
+				 * 			// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+				 * 			// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+				 * 			// 		$schema_valid_from, // string // Optional // The date when the item becomes valid.
+				 * 			// 		$schema_valid_through, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+				 * 			// 		$schema_OpeningHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+				 * 			// 	);
+				 *
+				 * 			// Google method: Loop through all the days defined in the current Hours repeater row separately
+				 * 			// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+				 *
+				 * 				foreach ( $schema_day_of_week as $day) {
+				 * 					$schema_OpeningHoursSpecification = uamswp_fad_schema_openinghoursspecification(
+				 * 						$day, // array|string // Optional // The day of the week for which these opening hours are valid.
+				 * 						$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+				 * 						$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+				 * 						$schema_valid_from, // string // Optional // The date when the item becomes valid.
+				 * 						$schema_valid_through // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours., // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+				 * 						$schema_OpeningHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+				 * 					);
+				 * 				}
+				 */
 
-				$schema_OpeningHoursSpecification = is_array($schema_OpeningHoursSpecification) ? $schema_OpeningHoursSpecification : array();
-				$dayOfWeek = !empty($dayOfWeek) ? $dayOfWeek : array();
+				// Check/define variables
 
-				// If $dayOfWeek argument is not a string, an array or null, bail early
+					$schema_OpeningHoursSpecification = is_array($schema_OpeningHoursSpecification) ? $schema_OpeningHoursSpecification : array();
+					$dayOfWeek = !empty($dayOfWeek) ? $dayOfWeek : array();
 
-					if (
-						$dayOfWeek
-						&&
-						!is_array($dayOfWeek)
-						&&
-						!is_string($dayOfWeek)
-						&&
-						!is_null($dayOfWeek)
-					) {
+					// If $dayOfWeek argument is not a string, an array or null, bail early
 
-						return $schema_OpeningHoursSpecification;
+						if (
+							$dayOfWeek
+							&&
+							!is_array($dayOfWeek)
+							&&
+							!is_string($dayOfWeek)
+							&&
+							!is_null($dayOfWeek)
+						) {
 
-					}
-
-				// If $dayOfWeek argument is an associative array (not a list array), bail early
-
-					if (
-						is_array($dayOfWeek)
-						&&
-						!array_is_list($dayOfWeek)
-					) {
-
-						return $schema_OpeningHoursSpecification;
-
-					}
-
-				// Check $dayOfWeek against list of valid values
-
-					$dayOfWeek_valid = array(
-						'Sunday',
-						'Monday',
-						'Tuesday',
-						'Wednesday',
-						'Thursday',
-						'Friday',
-						'Saturday',
-						'PublicHolidays'
-					);
-
-					if ( $dayOfWeek ) {
-
-						if ( is_array($dayOfWeek) ) {
-
-							$dayOfWeek = array_intersect(
-								$dayOfWeek_valid, // array // The array with master values to check.
-								$dayOfWeek // array // Arrays to compare values against.
-							);
-
-						} else {
-
-							$dayOfWeek = in_array(
-								$dayOfWeek, // mixed // The searched value.
-								$dayOfWeek_valid // array // The array.
-							) ? $dayOfWeek : null;
+							return $schema_OpeningHoursSpecification;
 
 						}
 
-					}
+					// If $dayOfWeek argument is an associative array (not a list array), bail early
 
-				// If there is no value in either $dayOfWeek, $validFrom or $validThrough arguments, bail early
+						if (
+							is_array($dayOfWeek)
+							&&
+							!array_is_list($dayOfWeek)
+						) {
 
-					if (
-						!$dayOfWeek
-						&&
-						!$validFrom
-						&&
-						!$validThrough
-					) {
+							return $schema_OpeningHoursSpecification;
 
-						return $schema_OpeningHoursSpecification;
+						}
 
-					}
+					// Check $dayOfWeek against list of valid values
 
-				// Check whether the pre-existing list is a list array
-
-					if (
-						$schema_OpeningHoursSpecification
-						&&
-						is_array($schema_OpeningHoursSpecification)
-						&&
-						!array_is_list($schema_OpeningHoursSpecification)
-					) {
-
-						$schema_OpeningHoursSpecification = array($schema_OpeningHoursSpecification);
-
-					}
-
-			// Convert $opens and $closes to the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-
-				$opens = $opens ? date( 'H:i:s', strtotime($opens) ) : null;
-				$closes = $closes ? date( 'H:i:s', strtotime($closes) ) : null;
-
-			// Convert $validFrom to the ISO 8601 date and time format ([-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm])
-
-				$validFrom = $validFrom ? date( 'c', strtotime($validFrom) ) : null;
-
-			// Add time value to $validThrough Date as the last second of the day, then convert $validThrough to the ISO 8601 date and time format ([-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm])
-
-				$validThrough = $validThrough ?? null;
-
-				if ( $validThrough ) {
-
-					$validThrough .= ' 23:59:59';
-					$validFrom = date( 'c', strtotime($validThrough) );
-
-				}
-
-			// Base item array
-
-				$schema = array();
-
-			// Add values to the item array
-
-				$schema['dayOfWeek'] = $dayOfWeek;
-				$schema['opens'] = $opens;
-				$schema['closes'] = $closes;
-				$schema['validFrom'] = $validFrom;
-				$schema['validThrough'] = $validThrough;
-
-			// Clean up the item array
-
-				$schema = $schema ? array_filter($schema) : null;
-
-			// Add @type to the item array
-
-				if ( $schema ) {
-
-					$schema = array( '@type' => 'OpeningHoursSpecification' ) + $schema;
-
-				}
-
-			// Add the item to the pre-existing list array
-
-				if ( $schema ) {
-
-					$schema_OpeningHoursSpecification[] = $schema;
-
-				}
-
-			// Clean up the pre-existing list array
-
-				uamswp_fad_flatten_multidimensional_array($schema_OpeningHoursSpecification);
-
-			// Return the main address schema array
-
-				return $schema_OpeningHoursSpecification;
-
-		}
-
-	// Add data to an array defining schema data for openingHours (Text)
-
-		function uamswp_fad_schema_openinghours(
-			$day_of_week, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-			string $opens = '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			string $closes = '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			$schema_openingHours = array() // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
-		) {
-
-			/**
-			 * Schema.org Documentation for the 'openingHours' property:
-			 *
-			 *     The general opening hours for a business.
-			 *
-			 *     Opening hours can be specified as a weekly time range, starting with days, then
-			 *     times per day.
-			 *
-			 *     Multiple days can be listed with commas ',' separating each day.
-			 *
-			 *     Day or time ranges are specified using a hyphen '-'.
-			 *
-			 *     Days are specified using the following two-letter combinations:
-			 *
-			 *         - Sunday is specified as 'Su'
-			 *         - Monday is specified as 'Mo'
-			 *         - Tuesday is specified as 'Tu'
-			 *         - Wednesday is specified as 'We'
-			 *         - Thursday is specified as 'Th'
-			 *         - Friday is specified as 'Fr'
-			 *         - Saturday is specified as 'Sa'
-			 *
-			 *     Times are specified using 24:00 format. For example:
-			 *
-			 *         - 3 p.m. is specified as '15:00'
-			 *         - 10 a.m. is specified as '10:00'
-			 *
-			 *     Examples:
-			 *
-			 *         - Tuesdays and Thursdays from 4-8 p.m. is specified as 'Tu,Th 16:00-20:00'
-			 *         - All day, seven days a week is specified as 'Mo-Su'
-			 *         - Monday through Thursday, 9 a.m.-noon is specified as 'Mo,Tu,We,Th 09:00-12:00'
-			 *         - Monday through Friday, 10 a.m.-7 p.m.; Saturday, 10 a.m.-10 p.m.; Sunday, 10 a.m.-9 p.m. is specified as [ 'Mo-Fr 10:00-19:00', 'Sa 10:00-22:00', 'Su 10:00-21:00' ]
-			 *
-			 *     Values expected to be one of these types
-			 *
-			 *         - Text
-			 *
-			 * $opens and $closes arguments:
-			 *
-			 *     The strings can be any of the following formats:
-			 *
-			 *         - ##:##
-			 *         - #:##
-			 *         - ##:## A.M./P.M.
-			 *         - ##:## a.m./p.m.
-			 *         - ##:## am/pm
-			 *         - ##:## AM/PM
-			 *         - ##:##A.M./P.M.
-			 *         - ##:##a.m./p.m.
-			 *         - ##:##am/pm
-			 *         - ##:##AM/PM
-			 *         - #:## A.M./P.M.
-			 *         - #:## a.m./p.m.
-			 *         - #:## am/pm
-			 *         - #:## AM/PM
-			 *         - #:##A.M./P.M.
-			 *         - #:##a.m./p.m.
-			 *         - #:##am/pm
-			 *         - #:##AM/PM
-			 *         - ## A.M./P.M.
-			 *         - ## a.m./p.m.
-			 *         - ## AM/PM
-			 *         - ## am/pm
-			 *         - ##A.M./P.M.
-			 *         - ##a.m./p.m.
-			 *         - ##AM/PM
-			 *         - ##am/pm
-			 *         - # A.M./P.M.
-			 *         - # a.m./p.m.
-			 *         - # AM/PM
-			 *         - # am/pm
-			 *         - #A.M./P.M.
-			 *         - #a.m./p.m.
-			 *         - #AM/PM
-			 *         - #am/pm
-			 *         - Noon
-			 *         - noon
-			 *         - Midnight
-			 *         - midnight
-			 *
-			 *     The latest time defined for a day should be '23:59' (a.k.a., 11:59 p.m.).
-			 *
-			 *     Do not mix 24-hour format of an hour with a.m./p.m. (or their capitalization/punctuation variants).
-			 *
-			 * Example use:
-			 *
-			 * 	// openingHours Schema Data
-			 *
-			 * 		// Check/define the main openingHours schema array
-			 * 		$schema_openingHours = ( isset($schema_openingHours) && is_array($schema_openingHours) && !empty($schema_openingHours) ) ? $schema_openingHours : array();
-			 *
-			 * 		// Add this location's details to the main openingHours schema array
-			 *
-			 * 			$schema_openingHours = uamswp_fad_schema_openinghours(
-			 * 				$schema_day_of_week, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-			 * 				$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			 * 				$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			 * 				$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
-			 * 			);
-			 */
-
-			// Check/define variables
-
-				// If $day_of_week argument is not a string or array, bail early
-
-					if (
-						!is_array($day_of_week)
-						&&
-						!is_string($day_of_week)
-					) {
-
-						return $schema_openingHours;
-
-					}
-
-				// If $day_of_week argument is an associative array (not a list array), bail early
-
-					if (
-						is_array($day_of_week)
-						&&
-						!array_is_list($day_of_week)
-					) {
-
-						return $schema_openingHours;
-
-					}
-
-				// Check whether the pre-existing list is a list array
-
-					if (
-						$schema_openingHours
-						&&
-						is_array($schema_openingHours)
-						&&
-						!array_is_list($schema_openingHours)
-					) {
-
-						$schema_openingHours = array($schema_openingHours);
-
-					}
-
-				// Convert $opens and $closes to 24-hour format with leading zeroes
-
-					$opens = date( 'H:i', strtotime($opens) );
-					$closes = date( 'H:i', strtotime($closes) );
-
-			// Add values to the array
-
-				// Base item
-
-					$schema_item = '';
-
-				// Add day of week
-
-					if ( is_array($day_of_week) ) {
-
-						$schema_item .= implode(
-							',',
-							$day_of_week
+						$dayOfWeek_valid = array(
+							'Sunday',
+							'Monday',
+							'Tuesday',
+							'Wednesday',
+							'Thursday',
+							'Friday',
+							'Saturday',
+							'PublicHolidays'
 						);
 
-					} elseif( is_string($day_of_week) ) {
+						if ( $dayOfWeek ) {
 
-						$schema_item .= $day_of_week;
+							if ( is_array($dayOfWeek) ) {
 
-					}
+								$dayOfWeek = array_intersect(
+									$dayOfWeek_valid, // array // The array with master values to check.
+									$dayOfWeek // array // Arrays to compare values against.
+								);
 
-				// Add opening and closing time
+							} else {
 
-
-					if (
-						$opens
-						&&
-						$closes
-						&&
-						(
-							$opens != '00:00'
-							&&
-							$closes != '23:59'
-						)
-					) {
-
-						$schema_item .= ' ' . $opens . '-' . $closes;
-
-					}
-
-				// Add the item to the output
-
-					if ( $schema_item ) {
-
-						if ( $schema_openingHours ) {
-
-							if (
-								(
-									is_array($schema_openingHours)
-									&&
-									!array_is_list($schema_openingHours)
-								)
-								||
-								!is_array($schema_openingHours)
-							) {
-
-								// Nest the existing value in an array to make the value a list array
-
-									$schema_openingHours = array($schema_openingHours);
+								$dayOfWeek = in_array(
+									$dayOfWeek, // mixed // The searched value.
+									$dayOfWeek_valid // array // The array.
+								) ? $dayOfWeek : null;
 
 							}
 
-							// Add the value to the list array
+						}
 
-								$schema_openingHours[] = $schema_item;
+					// If there is no value in either $dayOfWeek, $validFrom or $validThrough arguments, bail early
 
-						} else {
+						if (
+							!$dayOfWeek
+							&&
+							!$validFrom
+							&&
+							!$validThrough
+						) {
 
-							// Add the value to the output
-
-								$schema_openingHours = $schema_item;
+							return $schema_OpeningHoursSpecification;
 
 						}
+
+					// Check whether the pre-existing list is a list array
+
+						if (
+							$schema_OpeningHoursSpecification
+							&&
+							is_array($schema_OpeningHoursSpecification)
+							&&
+							!array_is_list($schema_OpeningHoursSpecification)
+						) {
+
+							$schema_OpeningHoursSpecification = array($schema_OpeningHoursSpecification);
+
+						}
+
+				// Convert $opens and $closes to the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+
+					$opens = $opens ? date( 'H:i:s', strtotime($opens) ) : null;
+					$closes = $closes ? date( 'H:i:s', strtotime($closes) ) : null;
+
+				// Convert $validFrom to the ISO 8601 date and time format ([-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm])
+
+					$validFrom = $validFrom ? date( 'c', strtotime($validFrom) ) : null;
+
+				// Add time value to $validThrough Date as the last second of the day, then convert $validThrough to the ISO 8601 date and time format ([-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm])
+
+					$validThrough = $validThrough ?? null;
+
+					if ( $validThrough ) {
+
+						$validThrough .= ' 23:59:59';
+						$validFrom = date( 'c', strtotime($validThrough) );
 
 					}
 
-			// Return the output
+				// Base item array
 
-				return $schema_openingHours;
+					$schema = array();
 
-		}
+				// Add values to the item array
 
-	// Loop through an input array to add data to an array defining schema data for openingHours, openingHoursSpecification and specialOpeningHoursSpecification
+					$schema['dayOfWeek'] = $dayOfWeek;
+					$schema['opens'] = $opens;
+					$schema['closes'] = $closes;
+					$schema['validFrom'] = $validFrom;
+					$schema['validThrough'] = $validThrough;
 
-		function uamswp_fad_schema_hours_loop(
-			array $input, // array // Required // Array containing the argument values for the openingHours and openingHoursSpecification functions
-			string $property, // string enum('openingHours', 'openingHoursSpecification', 'specialOpeningHoursSpecification') // string // Required // Which property to define
-			array $output = array() // array // Optional // Pre-existing list array for openingHours, openingHoursSpecification or specialOpeningHoursSpecification to which to add additional items
-		) {
+				// Clean up the item array
 
-			// If $input argument is empty/false or is not an array, bail early
+					$schema = $schema ? array_filter($schema) : null;
 
-				if (
-					!$input
-					||
-					!is_array($input)
-				) {
+				// Add @type to the item array
 
-					return $output;
+					if ( $schema ) {
 
-				}
+						$schema = array( '@type' => 'OpeningHoursSpecification' ) + $schema;
 
-			// If $property argument is not valid, bail early
+					}
 
-				if (
-					!$property
-					||
-					!in_array(
-						$property,
-						array(
-							'openingHours',
-							'openingHoursSpecification',
-							'specialOpeningHoursSpecification'
-						)
-					)
-				) {
+				// Add the item to the pre-existing list array
 
-					return $output;
+					if ( $schema ) {
 
-				}
+						$schema_OpeningHoursSpecification[] = $schema;
 
-			// Ensure $input argument is a list array
+					}
 
-				if (
-					is_array($input)
-					&&
-					!array_is_list($input)
-				) {
+				// Clean up the pre-existing list array
 
-					$input = array($input);
+					uamswp_fad_flatten_multidimensional_array($schema_OpeningHoursSpecification);
 
-				}
+				// Return the main address schema array
 
-			// Loop through the input array
+					return $schema_OpeningHoursSpecification;
 
-				foreach ( $input as $item ) {
+			}
 
-					// If $item is empty/false or if $item is not an array, bail on this iteration
+		// Add data to an array defining schema data for openingHours (Text)
+
+			function uamswp_fad_schema_openinghours(
+				$day_of_week, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+				string $opens = '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+				string $closes = '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+				$schema_openingHours = array() // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
+			) {
+
+				/**
+				 * Schema.org Documentation for the 'openingHours' property:
+				 *
+				 *     The general opening hours for a business.
+				 *
+				 *     Opening hours can be specified as a weekly time range, starting with days, then
+				 *     times per day.
+				 *
+				 *     Multiple days can be listed with commas ',' separating each day.
+				 *
+				 *     Day or time ranges are specified using a hyphen '-'.
+				 *
+				 *     Days are specified using the following two-letter combinations:
+				 *
+				 *         - Sunday is specified as 'Su'
+				 *         - Monday is specified as 'Mo'
+				 *         - Tuesday is specified as 'Tu'
+				 *         - Wednesday is specified as 'We'
+				 *         - Thursday is specified as 'Th'
+				 *         - Friday is specified as 'Fr'
+				 *         - Saturday is specified as 'Sa'
+				 *
+				 *     Times are specified using 24:00 format. For example:
+				 *
+				 *         - 3 p.m. is specified as '15:00'
+				 *         - 10 a.m. is specified as '10:00'
+				 *
+				 *     Examples:
+				 *
+				 *         - Tuesdays and Thursdays from 4-8 p.m. is specified as 'Tu,Th 16:00-20:00'
+				 *         - All day, seven days a week is specified as 'Mo-Su'
+				 *         - Monday through Thursday, 9 a.m.-noon is specified as 'Mo,Tu,We,Th 09:00-12:00'
+				 *         - Monday through Friday, 10 a.m.-7 p.m.; Saturday, 10 a.m.-10 p.m.; Sunday, 10 a.m.-9 p.m. is specified as [ 'Mo-Fr 10:00-19:00', 'Sa 10:00-22:00', 'Su 10:00-21:00' ]
+				 *
+				 *     Values expected to be one of these types
+				 *
+				 *         - Text
+				 *
+				 * $opens and $closes arguments:
+				 *
+				 *     The strings can be any of the following formats:
+				 *
+				 *         - ##:##
+				 *         - #:##
+				 *         - ##:## A.M./P.M.
+				 *         - ##:## a.m./p.m.
+				 *         - ##:## am/pm
+				 *         - ##:## AM/PM
+				 *         - ##:##A.M./P.M.
+				 *         - ##:##a.m./p.m.
+				 *         - ##:##am/pm
+				 *         - ##:##AM/PM
+				 *         - #:## A.M./P.M.
+				 *         - #:## a.m./p.m.
+				 *         - #:## am/pm
+				 *         - #:## AM/PM
+				 *         - #:##A.M./P.M.
+				 *         - #:##a.m./p.m.
+				 *         - #:##am/pm
+				 *         - #:##AM/PM
+				 *         - ## A.M./P.M.
+				 *         - ## a.m./p.m.
+				 *         - ## AM/PM
+				 *         - ## am/pm
+				 *         - ##A.M./P.M.
+				 *         - ##a.m./p.m.
+				 *         - ##AM/PM
+				 *         - ##am/pm
+				 *         - # A.M./P.M.
+				 *         - # a.m./p.m.
+				 *         - # AM/PM
+				 *         - # am/pm
+				 *         - #A.M./P.M.
+				 *         - #a.m./p.m.
+				 *         - #AM/PM
+				 *         - #am/pm
+				 *         - Noon
+				 *         - noon
+				 *         - Midnight
+				 *         - midnight
+				 *
+				 *     The latest time defined for a day should be '23:59' (a.k.a., 11:59 p.m.).
+				 *
+				 *     Do not mix 24-hour format of an hour with a.m./p.m. (or their capitalization/punctuation variants).
+				 *
+				 * Example use:
+				 *
+				 * 	// openingHours Schema Data
+				 *
+				 * 		// Check/define the main openingHours schema array
+				 * 		$schema_openingHours = ( isset($schema_openingHours) && is_array($schema_openingHours) && !empty($schema_openingHours) ) ? $schema_openingHours : array();
+				 *
+				 * 		// Add this location's details to the main openingHours schema array
+				 *
+				 * 			$schema_openingHours = uamswp_fad_schema_openinghours(
+				 * 				$schema_day_of_week, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+				 * 				$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+				 * 				$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+				 * 				$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
+				 * 			);
+				 */
+
+				// Check/define variables
+
+					// If $day_of_week argument is not a string or array, bail early
 
 						if (
-							!$item
-							||
-							!is_array($item)
+							!is_array($day_of_week)
+							&&
+							!is_string($day_of_week)
 						) {
 
-							continue;
+							return $schema_openingHours;
 
 						}
 
-					// If 'dayOfWeek' is not set or is empty/false, bail on this iteration
+					// If $day_of_week argument is an associative array (not a list array), bail early
 
 						if (
-							!array_key_exists( 'dayOfWeek', $item )
-							||
-							array_key_exists( 'dayOfWeek', $item ) && !$item['dayOfWeek']
+							is_array($day_of_week)
+							&&
+							!array_is_list($day_of_week)
 						) {
 
-							continue;
+							return $schema_openingHours;
 
 						}
 
-					// Check secondary keys/values
+					// Check whether the pre-existing list is a list array
 
 						if (
-							!array_key_exists( 'opens', $item )
-							||
-							array_key_exists( 'opens', $item ) && !$item['opens']
+							$schema_openingHours
+							&&
+							is_array($schema_openingHours)
+							&&
+							!array_is_list($schema_openingHours)
 						) {
 
-							$item['opens'] = null;
+							$schema_openingHours = array($schema_openingHours);
 
 						}
 
-						if (
-							!array_key_exists( 'closes', $item )
-							||
-							array_key_exists( 'closes', $item ) && !$item['closes']
-						) {
+					// Convert $opens and $closes to 24-hour format with leading zeroes
 
-							$item['closes'] = null;
+						$opens = date( 'H:i', strtotime($opens) );
+						$closes = date( 'H:i', strtotime($closes) );
 
-						}
+				// Add values to the array
 
-						if (
-							!array_key_exists( 'validFrom', $item )
-							||
-							array_key_exists( 'validFrom', $item ) && !$item['validFrom']
-						) {
+					// Base item
 
-							$item['validFrom'] = null;
+						$schema_item = '';
 
-						}
+					// Add day of week
 
-						if (
-							!array_key_exists( 'validThrough', $item )
-							||
-							array_key_exists( 'validThrough', $item ) && !$item['validThrough']
-						) {
+						if ( is_array($day_of_week) ) {
 
-							$item['validThrough'] = null;
+							$schema_item .= implode(
+								',',
+								$day_of_week
+							);
+
+						} elseif( is_string($day_of_week) ) {
+
+							$schema_item .= $day_of_week;
 
 						}
 
-					// Ensure existing $output value is a list array
+					// Add opening and closing time
+
 
 						if (
-							$output
+							$opens
+							&&
+							$closes
 							&&
 							(
-								(
-									is_array($output)
-									&&
-									!array_is_list($output)
-								)
-								||
-								is_string($output)
+								$opens != '00:00'
+								&&
+								$closes != '23:59'
 							)
 						) {
 
-							$output = array($output);
+							$schema_item .= ' ' . $opens . '-' . $closes;
 
 						}
 
-					// Add item schema to the output array
+					// Add the item to the output
 
-						if (
-							$property == 'openingHoursSpecification'
-							||
-							$property == 'specialOpeningHoursSpecification'
-						) {
+						if ( $schema_item ) {
 
-							// openingHoursSpecification or specialOpeningHoursSpecification
+							if ( $schema_openingHours ) {
 
-								$output = uamswp_fad_schema_openinghoursspecification(
-									$item['dayOfWeek'], // array|string // Optional // The day of the week for which these opening hours are valid.
-									$item['opens'], // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-									$item['closes'], // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-									$item['validFrom'], // string // Optional // The date when the item becomes valid. // Date is specified using the ISO 8601 date format (YYYY-MM-DD).
-									$item['validThrough'], // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours. //  Date is specified using the ISO 8601 date format (YYYY-MM-DD).
-									$output // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-								);
+								if (
+									(
+										is_array($schema_openingHours)
+										&&
+										!array_is_list($schema_openingHours)
+									)
+									||
+									!is_array($schema_openingHours)
+								) {
 
-						} elseif ( $property == 'openingHours' ) {
+									// Nest the existing value in an array to make the value a list array
 
-							// openingHours
+										$schema_openingHours = array($schema_openingHours);
 
-								$output = uamswp_fad_schema_openinghours(
-									$item['dayOfWeek'], // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-									$item['opens'], // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-									$item['closes'], // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-									$output // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
-								);
+								}
+
+								// Add the value to the list array
+
+									$schema_openingHours[] = $schema_item;
+
+							} else {
+
+								// Add the value to the output
+
+									$schema_openingHours = $schema_item;
+
+							}
 
 						}
 
-				}
+				// Return the output
 
-			// Clean up $output
+					return $schema_openingHours;
 
-				uamswp_fad_flatten_multidimensional_array($output);
+			}
 
-			// Return $output
+		// Loop through an input array to add data to an array defining schema data for openingHours, openingHoursSpecification and specialOpeningHoursSpecification
 
-				return $output;
+			function uamswp_fad_schema_hours_loop(
+				array $input, // array // Required // Array containing the argument values for the openingHours and openingHoursSpecification functions
+				string $property, // string enum('openingHours', 'openingHoursSpecification', 'specialOpeningHoursSpecification') // string // Required // Which property to define
+				array $output = array() // array // Optional // Pre-existing list array for openingHours, openingHoursSpecification or specialOpeningHoursSpecification to which to add additional items
+			) {
 
-		}
+				// If $input argument is empty/false or is not an array, bail early
+
+					if (
+						!$input
+						||
+						!is_array($input)
+					) {
+
+						return $output;
+
+					}
+
+				// If $property argument is not valid, bail early
+
+					if (
+						!$property
+						||
+						!in_array(
+							$property,
+							array(
+								'openingHours',
+								'openingHoursSpecification',
+								'specialOpeningHoursSpecification'
+							)
+						)
+					) {
+
+						return $output;
+
+					}
+
+				// Ensure $input argument is a list array
+
+					if (
+						is_array($input)
+						&&
+						!array_is_list($input)
+					) {
+
+						$input = array($input);
+
+					}
+
+				// Loop through the input array
+
+					foreach ( $input as $item ) {
+
+						// If $item is empty/false or if $item is not an array, bail on this iteration
+
+							if (
+								!$item
+								||
+								!is_array($item)
+							) {
+
+								continue;
+
+							}
+
+						// If 'dayOfWeek' is not set or is empty/false, bail on this iteration
+
+							if (
+								!array_key_exists( 'dayOfWeek', $item )
+								||
+								array_key_exists( 'dayOfWeek', $item ) && !$item['dayOfWeek']
+							) {
+
+								continue;
+
+							}
+
+						// Check secondary keys/values
+
+							if (
+								!array_key_exists( 'opens', $item )
+								||
+								array_key_exists( 'opens', $item ) && !$item['opens']
+							) {
+
+								$item['opens'] = null;
+
+							}
+
+							if (
+								!array_key_exists( 'closes', $item )
+								||
+								array_key_exists( 'closes', $item ) && !$item['closes']
+							) {
+
+								$item['closes'] = null;
+
+							}
+
+							if (
+								!array_key_exists( 'validFrom', $item )
+								||
+								array_key_exists( 'validFrom', $item ) && !$item['validFrom']
+							) {
+
+								$item['validFrom'] = null;
+
+							}
+
+							if (
+								!array_key_exists( 'validThrough', $item )
+								||
+								array_key_exists( 'validThrough', $item ) && !$item['validThrough']
+							) {
+
+								$item['validThrough'] = null;
+
+							}
+
+						// Ensure existing $output value is a list array
+
+							if (
+								$output
+								&&
+								(
+									(
+										is_array($output)
+										&&
+										!array_is_list($output)
+									)
+									||
+									is_string($output)
+								)
+							) {
+
+								$output = array($output);
+
+							}
+
+						// Add item schema to the output array
+
+							if (
+								$property == 'openingHoursSpecification'
+								||
+								$property == 'specialOpeningHoursSpecification'
+							) {
+
+								// openingHoursSpecification or specialOpeningHoursSpecification
+
+									$output = uamswp_fad_schema_openinghoursspecification(
+										$item['dayOfWeek'], // array|string // Optional // The day of the week for which these opening hours are valid.
+										$item['opens'], // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+										$item['closes'], // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+										$item['validFrom'], // string // Optional // The date when the item becomes valid. // Date is specified using the ISO 8601 date format (YYYY-MM-DD).
+										$item['validThrough'], // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours. //  Date is specified using the ISO 8601 date format (YYYY-MM-DD).
+										$output // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+									);
+
+							} elseif ( $property == 'openingHours' ) {
+
+								// openingHours
+
+									$output = uamswp_fad_schema_openinghours(
+										$item['dayOfWeek'], // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+										$item['opens'], // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+										$item['closes'], // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+										$output // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
+									);
+
+							}
+
+					}
+
+				// Clean up $output
+
+					uamswp_fad_flatten_multidimensional_array($output);
+
+				// Return $output
+
+					return $output;
+
+			}
 
 	// Add data to an array defining schema data for GeoCoordinates
 
