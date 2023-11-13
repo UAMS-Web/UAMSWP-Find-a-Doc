@@ -153,7 +153,7 @@
 		} // end public function load_content_from_relationship
 
 		public function enqueue_script() {
-			// enqueue acf extenstion
+			// enqueue acf extension
 
 			// only enqueue the script on the post page where it needs to run
 			/* *** THIS IS IMPORTANT
@@ -183,7 +183,7 @@
 			wp_enqueue_script($handle);
 		} // end public function enqueue_script
 
-	} // end class my_dynmamic_field_on_relationship
+	} // end class pubmed_field_on_change
 
 // Pubmed API shortcode
 // Example: [pubmed terms="Chernoff%20R%5BAuthor%5D" count="10"]
@@ -1291,7 +1291,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 	}
 
-// Remove unused / overly agressive scripts
+// Remove unused / overly aggressive scripts
 
 	function uamswp_fad_disable_scripts() {
 
