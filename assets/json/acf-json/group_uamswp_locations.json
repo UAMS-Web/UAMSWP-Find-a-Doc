@@ -2851,7 +2851,7 @@
 					"key": "field_location_telemed_24_7",
 					"name": "location_telemed_24_7",
 					"type": "button_group",
-					"label": "Is telemedicine typically available 24\/7?",
+					"label": "Is telemedicine typically available 24\/7 at this location?",
 					"instructions": "",
 					"required": 1,
 					"conditional_logic": [
