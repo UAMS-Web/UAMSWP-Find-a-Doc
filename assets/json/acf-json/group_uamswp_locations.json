@@ -3353,6 +3353,1639 @@
 					]
 				},
 				{
+					"key": "field_location_telemed_hours_days_group",
+					"label": "Typical Days and Hours for Telemedicine (v2)",
+					"name": "location_telemed_hours_days_group",
+					"type": "group",
+					"instructions": "Begin entering the data into this new field group so that it can replace the previous version soon.",
+					"required": 0,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_location_telemed_query",
+								"operator": "==",
+								"value": "1"
+							},
+							{
+								"field": "field_location_telemed_hours_parity_query",
+								"operator": "==",
+								"value": "0"
+							},
+							{
+								"field": "field_location_telemed_24_7",
+								"operator": "==",
+								"value": "0"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"layout": "block",
+					"acfe_seamless_style": 0,
+					"acfe_group_modal": 0,
+					"acfe_settings": "",
+					"sub_fields": [
+						{
+							"key": "field_location_telemed_hours_weekday_query",
+							"label": "Are the hours for Monday through Friday the same?",
+							"name": "weekday_query",
+							"type": "button_group",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": 0,
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "No",
+								"1": "Yes"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_weekend_query",
+							"label": "Are the hours for Saturday and Sunday the same?",
+							"name": "weekend_query",
+							"type": "button_group",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": 0,
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "No",
+								"1": "Yes"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "location_telemed_hours_monday_accordion",
+							"label": "Monday Hours",
+							"name": "",
+							"type": "accordion",
+							"instructions": "",
+							"required": 0,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_weekday_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"open": 1,
+							"multi_expand": 0,
+							"endpoint": 0
+						},
+						{
+							"key": "field_location_telemed_hours_monday_closed",
+							"label": "Status",
+							"name": "monday_closed",
+							"type": "button_group",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": 0,
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_monday_24_query",
+							"name": "monday_24_query",
+							"type": "button_group",
+							"label": "Is telemedicine at this location be available 24 hours on Mondays?",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_monday_closed",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "No",
+								"1": "Yes"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_monday_time_span",
+							"name": "monday_time_span",
+							"label": "Time Span",
+							"type": "repeater",
+							"instructions": "Add a row for each time span during Mondays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_monday_closed",
+										"operator": "==",
+										"value": "0"
+									},
+									{
+										"field": "field_location_telemed_hours_monday_24_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"acfe_repeater_stylised_button": 0,
+							"collapsed": "field_location_telemed_hours_monday_times_opens",
+							"min": 1,
+							"max": 0,
+							"layout": "block",
+							"button_label": "Add Time Span",
+							"sub_fields": [
+								{
+									"key": "field_location_telemed_hours_monday_times_opens",
+									"name": "opens",
+									"label": "Opens",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_monday_times_closes",
+									"name": "closes",
+									"label": "Closes",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_monday_times_comment",
+									"name": "comment",
+									"label": "Comment",
+									"type": "text",
+									"instructions": "",
+									"required": 0,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"default_value": "",
+									"placeholder": "",
+									"prepend": "",
+									"append": "",
+									"maxlength": ""
+								}
+							]
+						},
+						{
+							"key": "location_telemed_hours_tuesday_accordion",
+							"label": "Tuesday Hours",
+							"name": "",
+							"type": "accordion",
+							"instructions": "",
+							"required": 0,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_weekday_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"open": 0,
+							"multi_expand": 0,
+							"endpoint": 0
+						},
+						{
+							"key": "field_location_telemed_hours_tuesday_closed",
+							"label": "Status",
+							"name": "tuesday_closed",
+							"type": "button_group",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": 0,
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_tuesday_24_query",
+							"name": "tuesday_24_query",
+							"type": "button_group",
+							"label": "Is telemedicine at this location be available 24 hours on Tuesdays?",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_tuesday_closed",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "No",
+								"1": "Yes"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_tuesday_time_span",
+							"name": "tuesday_time_span",
+							"label": "Time Span",
+							"type": "repeater",
+							"instructions": "Add a row for each time span during Tuesdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_tuesday_closed",
+										"operator": "==",
+										"value": "0"
+									},
+									{
+										"field": "field_location_telemed_hours_tuesday_24_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"acfe_repeater_stylised_button": 0,
+							"collapsed": "field_location_telemed_hours_tuesday_times_opens",
+							"min": 1,
+							"max": 0,
+							"layout": "block",
+							"button_label": "Add Time Span",
+							"sub_fields": [
+								{
+									"key": "field_location_telemed_hours_tuesday_times_opens",
+									"name": "opens",
+									"label": "Opens",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_tuesday_times_closes",
+									"name": "closes",
+									"label": "Closes",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_tuesday_times_comment",
+									"name": "comment",
+									"label": "Comment",
+									"type": "text",
+									"instructions": "",
+									"required": 0,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"default_value": "",
+									"placeholder": "",
+									"prepend": "",
+									"append": "",
+									"maxlength": ""
+								}
+							]
+						},
+						{
+							"key": "location_telemed_hours_wednesday_accordion",
+							"label": "Wednesday Hours",
+							"name": "",
+							"type": "accordion",
+							"instructions": "",
+							"required": 0,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_weekday_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"open": 0,
+							"multi_expand": 0,
+							"endpoint": 0
+						},
+						{
+							"key": "field_location_telemed_hours_wednesday_closed",
+							"label": "Status",
+							"name": "wednesday_closed",
+							"type": "button_group",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": 0,
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_wednesday_24_query",
+							"name": "wednesday_24_query",
+							"type": "button_group",
+							"label": "Is telemedicine at this location be available 24 hours on Wednesdays?",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_wednesday_closed",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "No",
+								"1": "Yes"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_wednesday_time_span",
+							"name": "wednesday_time_span",
+							"label": "Time Span",
+							"type": "repeater",
+							"instructions": "Add a row for each time span during Wednesdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_wednesday_closed",
+										"operator": "==",
+										"value": "0"
+									},
+									{
+										"field": "field_location_telemed_hours_wednesday_24_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"acfe_repeater_stylised_button": 0,
+							"collapsed": "field_location_telemed_hours_wednesday_times_opens",
+							"min": 1,
+							"max": 0,
+							"layout": "block",
+							"button_label": "Add Time Span",
+							"sub_fields": [
+								{
+									"key": "field_location_telemed_hours_wednesday_times_opens",
+									"name": "opens",
+									"label": "Opens",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_wednesday_times_closes",
+									"name": "closes",
+									"label": "Closes",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_wednesday_times_comment",
+									"name": "comment",
+									"label": "Comment",
+									"type": "text",
+									"instructions": "",
+									"required": 0,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"default_value": "",
+									"placeholder": "",
+									"prepend": "",
+									"append": "",
+									"maxlength": ""
+								}
+							]
+						},
+						{
+							"key": "location_telemed_hours_thursday_accordion",
+							"label": "Thursday Hours",
+							"name": "",
+							"type": "accordion",
+							"instructions": "",
+							"required": 0,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_weekday_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"open": 0,
+							"multi_expand": 0,
+							"endpoint": 0
+						},
+						{
+							"key": "field_location_telemed_hours_thursday_closed",
+							"label": "Status",
+							"name": "thursday_closed",
+							"type": "button_group",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": 0,
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_thursday_24_query",
+							"name": "thursday_24_query",
+							"type": "button_group",
+							"label": "Is telemedicine at this location be available 24 hours on Thursdays?",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_thursday_closed",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "No",
+								"1": "Yes"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_thursday_time_span",
+							"name": "thursday_time_span",
+							"label": "Time Span",
+							"type": "repeater",
+							"instructions": "Add a row for each time span during Thursdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_thursday_closed",
+										"operator": "==",
+										"value": "0"
+									},
+									{
+										"field": "field_location_telemed_hours_thursday_24_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"acfe_repeater_stylised_button": 0,
+							"collapsed": "field_location_telemed_hours_thursday_times_opens",
+							"min": 1,
+							"max": 0,
+							"layout": "block",
+							"button_label": "Add Time Span",
+							"sub_fields": [
+								{
+									"key": "field_location_telemed_hours_thursday_times_opens",
+									"name": "opens",
+									"label": "Opens",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_thursday_times_closes",
+									"name": "closes",
+									"label": "Closes",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_thursday_times_comment",
+									"name": "comment",
+									"label": "Comment",
+									"type": "text",
+									"instructions": "",
+									"required": 0,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"default_value": "",
+									"placeholder": "",
+									"prepend": "",
+									"append": "",
+									"maxlength": ""
+								}
+							]
+						},
+						{
+							"key": "location_telemed_hours_friday_accordion",
+							"label": "Friday Hours",
+							"name": "",
+							"type": "accordion",
+							"instructions": "",
+							"required": 0,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_weekday_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"open": 0,
+							"multi_expand": 0,
+							"endpoint": 0
+						},
+						{
+							"key": "field_location_telemed_hours_friday_closed",
+							"label": "Status",
+							"name": "friday_closed",
+							"type": "button_group",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": 0,
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_friday_24_query",
+							"name": "friday_24_query",
+							"type": "button_group",
+							"label": "Is telemedicine at this location be available 24 hours on Fridays?",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_friday_closed",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "No",
+								"1": "Yes"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_friday_time_span",
+							"name": "friday_time_span",
+							"label": "Time Span",
+							"type": "repeater",
+							"instructions": "Add a row for each time span during Fridays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_friday_closed",
+										"operator": "==",
+										"value": "0"
+									},
+									{
+										"field": "field_location_telemed_hours_friday_24_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"acfe_repeater_stylised_button": 0,
+							"collapsed": "field_location_telemed_hours_friday_times_opens",
+							"min": 1,
+							"max": 0,
+							"layout": "block",
+							"button_label": "Add Time Span",
+							"sub_fields": [
+								{
+									"key": "field_location_telemed_hours_friday_times_opens",
+									"name": "opens",
+									"label": "Opens",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_friday_times_closes",
+									"name": "closes",
+									"label": "Closes",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_friday_times_comment",
+									"name": "comment",
+									"label": "Comment",
+									"type": "text",
+									"instructions": "",
+									"required": 0,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"default_value": "",
+									"placeholder": "",
+									"prepend": "",
+									"append": "",
+									"maxlength": ""
+								}
+							]
+						},
+						{
+							"key": "location_telemed_hours_weekday_accordion",
+							"label": "Weekday Hours",
+							"name": "",
+							"type": "accordion",
+							"instructions": "",
+							"required": 0,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_weekday_query",
+										"operator": "==",
+										"value": "1"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"open": 1,
+							"multi_expand": 0,
+							"endpoint": 0
+						},
+						{
+							"key": "field_location_telemed_hours_weekday_closed",
+							"label": "Status",
+							"name": "weekday_closed",
+							"type": "button_group",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": 0,
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_weekday_24_query",
+							"name": "weekday_24_query",
+							"type": "button_group",
+							"label": "Is telemedicine at this location be available 24 hours on weekdays?",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_weekday_closed",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "No",
+								"1": "Yes"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_weekday_time_span",
+							"name": "weekday_time_span",
+							"label": "Time Span",
+							"type": "repeater",
+							"instructions": "Add a row for each time span during weekdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_weekday_closed",
+										"operator": "==",
+										"value": "0"
+									},
+									{
+										"field": "field_location_telemed_hours_weekday_24_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"acfe_repeater_stylised_button": 0,
+							"collapsed": "field_location_telemed_hours_weekday_times_opens",
+							"min": 1,
+							"max": 0,
+							"layout": "block",
+							"button_label": "Add Time Span",
+							"sub_fields": [
+								{
+									"key": "field_location_telemed_hours_weekday_times_opens",
+									"name": "opens",
+									"label": "Opens",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_weekday_times_closes",
+									"name": "closes",
+									"label": "Closes",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_weekday_times_comment",
+									"name": "comment",
+									"label": "Comment",
+									"type": "text",
+									"instructions": "",
+									"required": 0,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"default_value": "",
+									"placeholder": "",
+									"prepend": "",
+									"append": "",
+									"maxlength": ""
+								}
+							]
+						},
+						{
+							"key": "location_telemed_hours_saturday_accordion",
+							"label": "Saturday Hours",
+							"name": "",
+							"type": "accordion",
+							"instructions": "",
+							"required": 0,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_weekend_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"open": 0,
+							"multi_expand": 0,
+							"endpoint": 0
+						},
+						{
+							"key": "field_location_telemed_hours_saturday_closed",
+							"label": "Status",
+							"name": "saturday_closed",
+							"type": "button_group",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": 0,
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_saturday_24_query",
+							"name": "saturday_24_query",
+							"type": "button_group",
+							"label": "Is telemedicine at this location be available 24 hours on Saturdays?",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_saturday_closed",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "No",
+								"1": "Yes"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_saturday_time_span",
+							"name": "saturday_time_span",
+							"label": "Time Span",
+							"type": "repeater",
+							"instructions": "Add a row for each time span during Saturdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_saturday_closed",
+										"operator": "==",
+										"value": "0"
+									},
+									{
+										"field": "field_location_telemed_hours_saturday_24_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"acfe_repeater_stylised_button": 0,
+							"collapsed": "field_location_telemed_hours_saturday_times_opens",
+							"min": 1,
+							"max": 0,
+							"layout": "block",
+							"button_label": "Add Time Span",
+							"sub_fields": [
+								{
+									"key": "field_location_telemed_hours_saturday_times_opens",
+									"name": "opens",
+									"label": "Opens",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_saturday_times_closes",
+									"name": "closes",
+									"label": "Closes",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_saturday_times_comment",
+									"name": "comment",
+									"label": "Comment",
+									"type": "text",
+									"instructions": "",
+									"required": 0,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"default_value": "",
+									"placeholder": "",
+									"prepend": "",
+									"append": "",
+									"maxlength": ""
+								}
+							]
+						},
+						{
+							"key": "location_telemed_hours_sunday_accordion",
+							"label": "Sunday Hours",
+							"name": "",
+							"type": "accordion",
+							"instructions": "",
+							"required": 0,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_weekend_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"open": 0,
+							"multi_expand": 0,
+							"endpoint": 0
+						},
+						{
+							"key": "field_location_telemed_hours_sunday_closed",
+							"label": "Status",
+							"name": "sunday_closed",
+							"type": "button_group",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": 0,
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_sunday_24_query",
+							"name": "sunday_24_query",
+							"type": "button_group",
+							"label": "Is telemedicine at this location be available 24 hours on Sundays?",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_sunday_closed",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "No",
+								"1": "Yes"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_sunday_time_span",
+							"name": "sunday_time_span",
+							"label": "Time Span",
+							"type": "repeater",
+							"instructions": "Add a row for each time span during Sundays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_sunday_closed",
+										"operator": "==",
+										"value": "0"
+									},
+									{
+										"field": "field_location_telemed_hours_sunday_24_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"acfe_repeater_stylised_button": 0,
+							"collapsed": "field_location_telemed_hours_sunday_times_opens",
+							"min": 1,
+							"max": 0,
+							"layout": "block",
+							"button_label": "Add Time Span",
+							"sub_fields": [
+								{
+									"key": "field_location_telemed_hours_sunday_times_opens",
+									"name": "opens",
+									"label": "Opens",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_sunday_times_closes",
+									"name": "closes",
+									"label": "Closes",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_sunday_times_comment",
+									"name": "comment",
+									"label": "Comment",
+									"type": "text",
+									"instructions": "",
+									"required": 0,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"default_value": "",
+									"placeholder": "",
+									"prepend": "",
+									"append": "",
+									"maxlength": ""
+								}
+							]
+						},
+						{
+							"key": "location_telemed_hours_weekend_accordion",
+							"label": "Weekend Hours",
+							"name": "",
+							"type": "accordion",
+							"instructions": "",
+							"required": 0,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_weekend_query",
+										"operator": "==",
+										"value": "1"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"open": 1,
+							"multi_expand": 0,
+							"endpoint": 0
+						},
+						{
+							"key": "field_location_telemed_hours_weekend_closed",
+							"label": "Status",
+							"name": "weekend_closed",
+							"type": "button_group",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": 0,
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_weekend_24_query",
+							"name": "weekend_24_query",
+							"type": "button_group",
+							"label": "Is telemedicine at this location be available 24 hours on weekends?",
+							"instructions": "",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_weekend_closed",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"choices": {
+								"0": "No",
+								"1": "Yes"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
+						},
+						{
+							"key": "field_location_telemed_hours_weekend_time_span",
+							"name": "weekend_time_span",
+							"label": "Time Span",
+							"type": "repeater",
+							"instructions": "Add a row for each time span during weekends (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
+							"required": 1,
+							"conditional_logic": [
+								[
+									{
+										"field": "field_location_telemed_hours_weekend_closed",
+										"operator": "==",
+										"value": "0"
+									},
+									{
+										"field": "field_location_telemed_hours_weekend_24_query",
+										"operator": "==",
+										"value": "0"
+									}
+								]
+							],
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"acfe_repeater_stylised_button": 0,
+							"collapsed": "field_location_telemed_hours_weekend_times_opens",
+							"min": 1,
+							"max": 0,
+							"layout": "block",
+							"button_label": "Add Time Span",
+							"sub_fields": [
+								{
+									"key": "field_location_telemed_hours_weekend_times_opens",
+									"name": "opens",
+									"label": "Opens",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_weekend_times_closes",
+									"name": "closes",
+									"label": "Closes",
+									"type": "time_picker",
+									"instructions": "",
+									"required": 1,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "50",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"display_format": "g:i a",
+									"return_format": "g:i a"
+								},
+								{
+									"key": "field_location_telemed_hours_weekend_times_comment",
+									"name": "comment",
+									"label": "Comment",
+									"type": "text",
+									"instructions": "",
+									"required": 0,
+									"conditional_logic": 0,
+									"wrapper": {
+										"width": "",
+										"class": "",
+										"id": ""
+									},
+									"acfe_permissions": "",
+									"default_value": "",
+									"placeholder": "",
+									"prepend": "",
+									"append": "",
+									"maxlength": ""
+								}
+							]
+						},
+						{
+							"key": "location_telemed_hours_accordion_endpoint",
+							"label": "",
+							"name": "",
+							"type": "accordion",
+							"instructions": "",
+							"required": 0,
+							"conditional_logic": 0,
+							"wrapper": {
+								"width": "",
+								"class": "",
+								"id": ""
+							},
+							"acfe_permissions": "",
+							"open": 0,
+							"multi_expand": 0,
+							"endpoint": 1
+						}
+					]
+				},
+				{
 					"key": "field_location_telemed_modified_hours_tab",
 					"label": "Modified Telemedicine Hours",
 					"name": "",
