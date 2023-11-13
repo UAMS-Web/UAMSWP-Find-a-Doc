@@ -3310,8 +3310,8 @@
 							},
 							"acfe_permissions": "",
 							"choices": {
-								"0": "Open",
-								"1": "Closed"
+								"0": "Available",
+								"1": "Unavailable"
 							},
 							"allow_null": 1,
 							"default_value": "",
