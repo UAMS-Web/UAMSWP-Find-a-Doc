@@ -1338,6 +1338,52 @@
 
 						}
 
+					// Convert full names of days to two-letter abbreviations
+
+						$dayOfWeek_map = array(
+							'Monday' => 'Mo',
+							'Tuesday' => 'Tu',
+							'Wednesday' => 'We',
+							'Thursday' => 'Th',
+							'Friday' => 'Fr',
+							'Saturday' => 'Sa',
+							'Sunday' => 'Su'
+						);
+
+						if ( is_array($day_of_week) ) {
+
+							foreach ( $day_of_week as &$item ) {
+
+								if (
+									$item
+									&&
+									is_string($item)
+									&&
+									array_key_exists( $item, $dayOfWeek_map )
+								) {
+
+									$item = $dayOfWeek_map[$item];
+
+								}
+
+							}
+
+						} elseif ( is_string($day_of_week) ) {
+
+							if (
+								$day_of_week
+								&&
+								is_string($day_of_week)
+								&&
+								array_key_exists( $day_of_week, $dayOfWeek_map )
+							) {
+
+								$day_of_week = $dayOfWeek_map[$day_of_week];
+
+							}
+
+						}
+
 					// Convert $opens and $closes to 24-hour format with leading zeroes
 
 						$opens = date( 'H:i', strtotime($opens) );
