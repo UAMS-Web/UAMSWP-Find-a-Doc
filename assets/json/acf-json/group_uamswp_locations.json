@@ -3409,6 +3409,42 @@
 					"return_format": "value"
 				},
 				{
+					"key": "field_location_telemed_modified_hours_parity_query",
+					"label": "Are the modified hours for telemedicine the same as the modified in-person hours of operation?",
+					"name": "location_telemed_modified_hours_parity_query",
+					"type": "button_group",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_location_modified_hours",
+								"operator": "==",
+								"value": "1"
+							},
+							{
+								"field": "field_location_telemed_modified_hours_query",
+								"operator": "==",
+								"value": "1"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"choices": {
+						"0": "No",
+						"1": "Yes"
+					},
+					"allow_null": 1,
+					"default_value": "",
+					"layout": "horizontal",
+					"return_format": "value"
+				},
+				{
 					"key": "field_location_telemed_modified_hours_reason",
 					"name": "location_telemed_modified_hours_reason",
 					"label": "Reason for Modified Telemedicine Hours of Operation",
