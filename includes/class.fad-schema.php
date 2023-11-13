@@ -1423,6 +1423,191 @@
 
 		}
 
+	// Loop through an input array to add data to an array defining schema data for openingHours, openingHoursSpecification and specialOpeningHoursSpecification
+
+		function uamswp_fad_schema_hours_loop(
+			array $input, // array // Required // Array containing the argument values for the openingHours and openingHoursSpecification functions
+			string $property, // string enum('openingHours', 'openingHoursSpecification', 'specialOpeningHoursSpecification') // string // Required // Which property to define
+			array $output = array() // array // Optional // Pre-existing list array for openingHours, openingHoursSpecification or specialOpeningHoursSpecification to which to add additional items
+		) {
+
+			// If $input argument is empty/false or is not an array, bail early
+
+				if (
+					!$input
+					||
+					!is_array($input)
+				) {
+
+					return $output;
+
+				}
+
+			// If $property argument is not valid, bail early
+
+				if (
+					!$property
+					||
+					!in_array(
+						$property,
+						array(
+							'openingHours',
+							'openingHoursSpecification',
+							'specialOpeningHoursSpecification'
+						)
+					)
+				) {
+
+					return $output;
+
+				}
+
+			// Ensure $input argument is a list array
+
+				if (
+					is_array($input)
+					&&
+					!array_is_list($input)
+				) {
+
+					$input = array($input);
+
+				}
+
+			// Loop through the input array
+
+				foreach ( $input as $item ) {
+
+					// If $item is empty/false or if $item is not an array, bail on this iteration
+
+						if (
+							!$item
+							||
+							!is_array($item)
+						) {
+
+							continue;
+
+						}
+
+					// If 'dayOfWeek' is not set or is empty/false, bail on this iteration
+
+						if (
+							!array_key_exists( 'dayOfWeek', $item )
+							||
+							array_key_exists( 'dayOfWeek', $item ) && !$item['dayOfWeek']
+						) {
+
+							continue;
+
+						}
+
+					// Check secondary keys/values
+
+						if (
+							!array_key_exists( 'opens', $item )
+							||
+							array_key_exists( 'opens', $item ) && !$item['opens']
+						) {
+
+							$item['opens'] = null;
+
+						}
+
+						if (
+							!array_key_exists( 'closes', $item )
+							||
+							array_key_exists( 'closes', $item ) && !$item['closes']
+						) {
+
+							$item['closes'] = null;
+
+						}
+
+						if (
+							!array_key_exists( 'validFrom', $item )
+							||
+							array_key_exists( 'validFrom', $item ) && !$item['validFrom']
+						) {
+
+							$item['validFrom'] = null;
+
+						}
+
+						if (
+							!array_key_exists( 'validThrough', $item )
+							||
+							array_key_exists( 'validThrough', $item ) && !$item['validThrough']
+						) {
+
+							$item['validThrough'] = null;
+
+						}
+
+					// Ensure existing $output value is a list array
+
+						if (
+							$output
+							&&
+							(
+								(
+									is_array($output)
+									&&
+									!array_is_list($output)
+								)
+								||
+								is_string($output)
+							)
+						) {
+
+							$output = array($output);
+
+						}
+
+					// Add item schema to the output array
+
+						if (
+							$property == 'openingHoursSpecification'
+							||
+							$property == 'specialOpeningHoursSpecification'
+						) {
+
+							// openingHoursSpecification or specialOpeningHoursSpecification
+
+								$output = uamswp_fad_schema_openinghoursspecification(
+									$item['dayOfWeek'], // array|string // Optional // The day of the week for which these opening hours are valid.
+									$item['opens'], // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+									$item['closes'], // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+									$item['validFrom'], // string // Optional // The date when the item becomes valid. // Date is specified using the ISO 8601 date format (YYYY-MM-DD).
+									$item['validThrough'], // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours. //  Date is specified using the ISO 8601 date format (YYYY-MM-DD).
+									$output // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+								);
+
+						} elseif ( $property == 'openingHours' ) {
+
+							// openingHours
+
+								$output = uamswp_fad_schema_openinghours(
+									$item['dayOfWeek'], // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+									$item['opens'], // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+									$item['closes'], // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+									$output // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
+								);
+
+						}
+
+				}
+
+			// Clean up $output
+
+				uamswp_fad_flatten_multidimensional_array($output);
+
+			// Return $output
+
+				return $output;
+
+		}
+
 	// Add data to an array defining schema data for GeoCoordinates
 
 		function uamswp_schema_geo_coordinates(
