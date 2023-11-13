@@ -3137,6 +3137,37 @@
 					"save_other_choice": 0
 				},
 				{
+					"key": "field_location_telemed_hours_parity_query",
+					"label": "Are the hours for telemedicine the same as the typical in-person hours of operation?",
+					"name": "location_telemed_hours_parity_query",
+					"type": "button_group",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_location_telemed_query",
+								"operator": "==",
+								"value": "1"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"choices": {
+						"0": "No",
+						"1": "Yes"
+					},
+					"allow_null": 1,
+					"default_value": "",
+					"layout": "horizontal",
+					"return_format": "value"
+				},
+				{
 					"key": "field_location_telemed_24_7",
 					"name": "location_telemed_24_7",
 					"type": "button_group",
