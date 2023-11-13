@@ -24421,6 +24421,70 @@
 
 																	$location_hours_repeater = $location_hours_group['location_hours'] ?? null;
 
+																	// Loop through the Typical In-Person Hours of Operation repeater to create the hours of operation loop function input argument
+
+																		$location_hours_loop_input = $location_hours_loop_input ?? array();
+
+																		if ( $location_hours_repeater ) {
+
+																			foreach ( $location_hours_repeater as $item ) {
+
+																				// Reset item variables
+
+																					$item_dayOfWeek = $item['dayOfWeek'] ?? null;
+																					$item_opens = $item['opens'] ?? null;
+																					$item_closes = $item['closes'] ?? null;
+																					$item_validFrom = $item['validFrom'] ?? null;
+																					$item_validThrough = $item['validThrough'] ?? null;
+
+																				// Construct item schema array
+
+																					$item_schema = array(
+																						'dayOfWeek' => $item_dayOfWeek,
+																						'opens' => $item_opens,
+																						'closes' => $item_closes,
+																						'validFrom' => $item_validFrom,
+																						'validThrough' => $item_validThrough
+																					);
+
+																				// Remove empty rows from item schema array
+
+																					$item_schema = array_filter($item_schema);
+
+																				// Add item schema array to function input argument value
+
+																					if ( $item_schema ) {
+
+																						$location_hours_loop_input[] = $item_schema;
+
+																					}
+
+																			}
+
+																		}
+
+																	// Add values to schema properties
+
+																		if ( $location_hours_loop_input ) {
+
+																			// openingHours
+
+																				$location_hours_openingHoursSpecification = uamswp_fad_schema_hours_loop(
+																					$location_hours_loop_input, // array // Required // Array containing the argument values for the openingHours and openingHoursSpecification functions
+																					'openingHours', // string enum('openingHours', 'openingHoursSpecification', 'specialOpeningHoursSpecification') // string // Required // Which property to define
+																					( $location_hours_openingHours ?? array() ) // array // Optional // Pre-existing list array for openingHours, openingHoursSpecification or specialOpeningHoursSpecification to which to add additional items
+																				);
+
+																			// openingHoursSpecification
+
+																				$location_hours_openingHoursSpecification = uamswp_fad_schema_hours_loop(
+																					$location_hours_loop_input, // array // Required // Array containing the argument values for the openingHours and openingHoursSpecification functions
+																					'openingHoursSpecification', // string enum('openingHours', 'openingHoursSpecification', 'specialOpeningHoursSpecification') // string // Required // Which property to define
+																					( $location_hours_openingHoursSpecification ?? array() ) // array // Optional // Pre-existing list array for openingHours, openingHoursSpecification or specialOpeningHoursSpecification to which to add additional items
+																				);
+
+																		}
+
 																// Information for When the Location Is Closed (wysiwyg)
 
 																	$location_after_hours = $location_hours_group['location_after_hours'] ?? null;
