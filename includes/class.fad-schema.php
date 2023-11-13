@@ -844,7 +844,7 @@
 
 		}
 
-	// Add data to an array defining schema data for OpeningHoursSpecification
+	// Add data to an array defining schema data for openingHoursSpecification and specialOpeningHoursSpecification (OpeningHoursSpecification)
 
 		function uamswp_fad_schema_openinghoursspecification(
 			$dayOfWeek = null, // array|string // Optional // The day of the week for which these opening hours are valid.
