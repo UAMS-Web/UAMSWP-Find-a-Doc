@@ -1190,7 +1190,7 @@
 		// Add data to an array defining schema data for openingHours (Text)
 
 			function uamswp_fad_schema_openinghours(
-				$day_of_week, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+				$dayOfWeek, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 				string $opens = '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 				string $closes = '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 				$schema_openingHours = array() // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
@@ -1300,24 +1300,24 @@
 
 				// Check/define variables
 
-					// If $day_of_week argument is not a string or array, bail early
+					// If $dayOfWeek argument is not a string or array, bail early
 
 						if (
-							!is_array($day_of_week)
+							!is_array($dayOfWeek)
 							&&
-							!is_string($day_of_week)
+							!is_string($dayOfWeek)
 						) {
 
 							return $schema_openingHours;
 
 						}
 
-					// If $day_of_week argument is an associative array (not a list array), bail early
+					// If $dayOfWeek argument is an associative array (not a list array), bail early
 
 						if (
-							is_array($day_of_week)
+							is_array($dayOfWeek)
 							&&
-							!array_is_list($day_of_week)
+							!array_is_list($dayOfWeek)
 						) {
 
 							return $schema_openingHours;
@@ -1350,9 +1350,9 @@
 							'Sunday' => 'Su'
 						);
 
-						if ( is_array($day_of_week) ) {
+						if ( is_array($dayOfWeek) ) {
 
-							foreach ( $day_of_week as &$item ) {
+							foreach ( $dayOfWeek as &$item ) {
 
 								if (
 									$item
@@ -1368,17 +1368,17 @@
 
 							}
 
-						} elseif ( is_string($day_of_week) ) {
+						} elseif ( is_string($dayOfWeek) ) {
 
 							if (
-								$day_of_week
+								$dayOfWeek
 								&&
-								is_string($day_of_week)
+								is_string($dayOfWeek)
 								&&
-								array_key_exists( $day_of_week, $dayOfWeek_map )
+								array_key_exists( $dayOfWeek, $dayOfWeek_map )
 							) {
 
-								$day_of_week = $dayOfWeek_map[$day_of_week];
+								$dayOfWeek = $dayOfWeek_map[$dayOfWeek];
 
 							}
 
@@ -1397,16 +1397,16 @@
 
 					// Add day of week
 
-						if ( is_array($day_of_week) ) {
+						if ( is_array($dayOfWeek) ) {
 
 							$schema_item .= implode(
 								',',
-								$day_of_week
+								$dayOfWeek
 							);
 
-						} elseif( is_string($day_of_week) ) {
+						} elseif( is_string($dayOfWeek) ) {
 
-							$schema_item .= $day_of_week;
+							$schema_item .= $dayOfWeek;
 
 						}
 
