@@ -2430,7 +2430,11 @@
 
 			// Add each repeater row to the list array
 
-				if ( $repeater ) {
+				if (
+					$repeater
+					&&
+					$field_name
+				) {
 
 					foreach ( $repeater as $sameAs ) {
 
