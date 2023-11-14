@@ -1109,7 +1109,12 @@
 		*
 		*/
 
-		function bidirectional_acf_update( $field_name, $field_key, $value, $post_id ) {
+		function bidirectional_acf_update(
+			$field_name, // Required // ACF field name
+			$field_key, // Required // ACF field key of field with new value
+			$value, // Required // Incoming/new value
+			$post_id // Required // ID of post being updated
+		) {
 
 			// Get previous values.
 
