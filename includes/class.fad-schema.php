@@ -5162,48 +5162,41 @@
 
 						// sameAs
 
+							/**
+							 * URL of a reference Web page that unambiguously indicates the item's identity
+							 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+							 * website).
+							 *
+							 * Values expected to be one of these types:
+							 *
+							 *     - URL
+							 */
+
 							// Base array
 
 								$specialization_sameAs = array();
 
-							// Get Wikidata entry URL for occupation
+							// Get sameAs repeater field value for occupation
 
-								$specialization_sameAs_wikidata = get_field( 'clinical_specialization_wikidata_url_occupation', $specialization_term ) ?? '';
+								$specialization_sameAs_repeater = get_field( 'clinical_specialization_sameas_occupation_schema_sameas', $specialization_term ) ?? null;
 
-								if ( $specialization_sameAs_wikidata ) {
+								// Add each item to sameAs property values array
 
-									$specialization_sameAs[] = $specialization_sameAs_wikidata;
+									if ( $specialization_sameAs_repeater ) {
 
-								}
+										$specialization_sameAs = uamswp_fad_schema_sameas(
+											$specialization_sameAs_repeater, // sameAs repeater field
+											'schema_sameas_url', // sameAs item field name
+											$specialization_sameAs // array // Optional // Pre-existing schema array for sameAs to which to add sameAs items
+										);
 
-								// Clean up the array
+									} else {
 
 									// If there is only one item, flatten the multi-dimensional array by one step
 
 										uamswp_fad_flatten_multidimensional_array($specialization_sameAs);
 
-
-							// Get sameAs repeater field value
-
-								// $specialization_sameAs_array = get_field( 'schema_sameas', $specialization_term ) ?? array();
-								//
-								// // Add each item to sameAs property values array
-								//
-								// 	if ( $specialization_sameAs_array ) {
-								//
-								// 		$specialization_sameAs = uamswp_fad_schema_sameas(
-								// 			$specialization_sameAs_array, // sameAs repeater field
-								// 			'schema_sameas_url', // sameAs item field name
-								// 			$specialization_sameAs // array // Optional // Pre-existing schema array for sameAs to which to add sameAs items
-								// 		);
-								//
-								// 	} else {
-								//
-								// 	// If there is only one item, flatten the multi-dimensional array by one step
-								//
-								// 		uamswp_fad_flatten_multidimensional_array($specialization_sameAs);
-								//
-								// }
+								}
 
 							// Add to schema item
 
