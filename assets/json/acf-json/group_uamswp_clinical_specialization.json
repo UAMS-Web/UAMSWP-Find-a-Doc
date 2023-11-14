@@ -1019,6 +1019,28 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
+		"field_clinical_specialization_cms_code_inherit_query": {
+			"key": "field_clinical_specialization_cms_code_inherit_query",
+			"name": "clinical_specialization_cms_code_inherit_query",
+			"type": "button_group",
+			"label": "Inherit the related CMS Specialty Code and Provider/Supplier Type from the parent?",
+			"instructions": "Note that changing the relevant value in the parent term will not automatically update this term. After any change to the relevant value in the parent term this term will need to be updated by simply opening the term and clicking \"Update.\"",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
 		"field_clinical_specialization_cms_code": {
 			"key": "field_clinical_specialization_cms_code",
 			"name": "clinical_specialization_cms_code",
@@ -1026,7 +1048,15 @@
 			"type": "text",
 			"instructions": "Example: \"79\" for taxonomy code 207LA0401X.",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_cms_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -1045,7 +1075,15 @@
 			"type": "text",
 			"instructions": "Include \"Physician/\" at the beginning if the specialty code is in the list of Physician/Limited License Physician Specialty Codes.</p><p class='description' style='margin-top: 0.5em;'>Examples: \"Physician/Addiction Medicine\" for taxonomy code 207LA0401X, \"Certified Nurse Midwife\" for taxonomy code 367A00000X.",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_cms_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -1109,12 +1147,12 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_clinical_specialization_medicalspecialty_member": {
-			"key": "field_clinical_specialization_medicalspecialty_member",
-			"name": "clinical_specialization_medicalspecialty_member",
-			"label": "MedicalSpecialty Enumeration Member",
-			"type": "clone",
-			"instructions": "",
+		"field_clinical_specialization_medicalspecialty_member_inherit_query": {
+			"key": "field_clinical_specialization_medicalspecialty_member_inherit_query",
+			"name": "clinical_specialization_medicalspecialty_member_inherit_query",
+			"type": "button_group",
+			"label": "Inherit the related Schema.org MedicalSpecialty enumeration member from the parent?",
+			"instructions": "Note that changing the relevant value in the parent term will not automatically update this term. After any change to the relevant value in the parent term this term will need to be updated by simply opening the term and clicking \"Update.\"",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1122,14 +1160,45 @@
 				"class": "",
 				"id": ""
 			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_clinical_specialization_medicalspecialty_member": {
+			"key": "field_clinical_specialization_medicalspecialty_member",
+			"name": "clinical_specialization_medicalspecialty_member",
+			"label": "MedicalSpecialty Enumeration Member",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_medicalspecialty_member_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
 			"acfe_permissions": "",
 			"clone": [
 				"field_schema_medicalspecialty_single"
 			],
-			"display": "seamless",
+			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
 			"prefix_name": 0,
+			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
 		"field_clinical_specialization_tab_onetsoc": {
@@ -1197,6 +1266,28 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
+		"field_clinical_specialization_onetsoc_code_inherit_query": {
+			"key": "field_clinical_specialization_onetsoc_code_inherit_query",
+			"name": "clinical_specialization_onetsoc_code_inherit_query",
+			"type": "button_group",
+			"label": "Inherit the related O*Net-SOC Occupation Code and Occupation Name from the parent?",
+			"instructions": "Note that changing the relevant value in the parent term will not automatically update this term. After any change to the relevant value in the parent term this term will need to be updated by simply opening the term and clicking \"Update.\"",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
 		"field_clinical_specialization_onetsoc_code": {
 			"key": "field_clinical_specialization_onetsoc_code",
 			"name": "clinical_specialization_onetsoc_code",
@@ -1204,7 +1295,15 @@
 			"type": "text",
 			"instructions": "Example: \"29-1211.00\" — the code for Anesthesiologists — for taxonomy code 207LA0401X (Addiction Medicine [Anesthesiology] Physician).",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_onetsoc_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -1223,7 +1322,15 @@
 			"type": "text",
 			"instructions": "Example: \"Anesthesiologists\" — the name associated with the code 29-1211.00 — for taxonomy code 207LA0401X (Addiction Medicine [Anesthesiology] Physician).",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_onetsoc_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -1305,6 +1412,28 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
+		"field_clinical_specialization_isco08_code_inherit_query": {
+			"key": "field_clinical_specialization_isco08_code_inherit_query",
+			"name": "clinical_specialization_isco08_code_inherit_query",
+			"type": "button_group",
+			"label": "Inherit the related ISCO-08 Code from the parent?",
+			"instructions": "Note that changing the relevant value in the parent term will not automatically update this term. After any change to the relevant value in the parent term this term will need to be updated by simply opening the term and clicking \"Update.\"",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
 		"field_clinical_specialization_isco08_code": {
 			"key": "field_clinical_specialization_isco08_code",
 			"name": "clinical_specialization_isco08_code",
@@ -1312,7 +1441,15 @@
 			"type": "select",
 			"instructions": "",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_isco08_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -1369,6 +1506,28 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_clinical_specialization_sameas_occupation_inherit_query": {
+			"key": "field_clinical_specialization_sameas_occupation_inherit_query",
+			"name": "clinical_specialization_sameas_occupation_inherit_query",
+			"type": "button_group",
+			"label": "Inherit the reference webpages about the occupation from the parent?",
+			"instructions": "Note that changing the relevant value in the parent term will not automatically update this term. After any change to the relevant value in the parent term this term will need to be updated by simply opening the term and clicking \"Update.\"",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
 		"field_clinical_specialization_sameas_occupation": {
 			"key": "field_clinical_specialization_sameas_occupation",
 			"name": "clinical_specialization_sameas_occupation",
@@ -1376,7 +1535,15 @@
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_sameas_occupation_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "uamswp-hide-clone-label",
@@ -1393,6 +1560,28 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
+		"field_clinical_specialization_sameas_field_inherit_query": {
+			"key": "field_clinical_specialization_sameas_field_inherit_query",
+			"name": "clinical_specialization_sameas_field_inherit_query",
+			"type": "button_group",
+			"label": "Inherit the reference webpages about the specialty \/ field from the parent?",
+			"instructions": "Note that changing the relevant value in the parent term will not automatically update this term. After any change to the relevant value in the parent term this term will need to be updated by simply opening the term and clicking \"Update.\"",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
 		"field_clinical_specialization_sameas_field": {
 			"key": "field_clinical_specialization_sameas_field",
 			"name": "clinical_specialization_sameas_field",
@@ -1400,7 +1589,15 @@
 			"type": "clone",
 			"instructions": "The field is often linked from a section titled \"field of this occupation\" on the Wikidata item page for the occupation.",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_sameas_field_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "uamswp-hide-clone-label",
