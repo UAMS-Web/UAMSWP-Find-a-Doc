@@ -1345,9 +1345,9 @@
 			"search_placeholder": "Select one",
 			"placeholder": ""
 		},
-		"field_clinical_specialization_tab_wikidata": {
-			"key": "field_clinical_specialization_tab_wikidata",
-			"label": "Related Wikidata Items",
+		"field_clinical_specialization_tab_sameas": {
+			"key": "field_clinical_specialization_tab_sameas",
+			"label": "Reference Webpages",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
@@ -1369,41 +1369,29 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_clinical_specialization_wikidata_about": {
-			"key": "field_clinical_specialization_wikidata_about",
-			"name": "",
-			"label": "About Wikidata",
-			"type": "message",
+		"field_clinical_specialization_sameas_occupation": {
+			"key": "field_clinical_specialization_sameas_occupation",
+			"name": "clinical_specialization_sameas_occupation",
+			"label": "Reference Webpages About the Occupation",
+			"type": "clone",
 			"instructions": "",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
-				"class": "",
+				"class": "uamswp-hide-clone-label",
 				"id": ""
 			},
 			"acfe_permissions": "",
-			"message": "Wikidata is a free and open knowledge base that can be read and edited by both humans and machines. Wikidata acts as central storage for the structured data of its Wikimedia sister projects including Wikipedia, Wikivoyage, Wiktionary, Wikisource, and others. Wikidata also provides support to many other sites and services beyond just Wikimedia projects! The content of Wikidata is available under a free license, exported using standard formats, and can be interlinked to other open data sets on the linked data web.",
-			"new_lines": "",
-			"esc_html": 0
-		},
-		"field_clinical_specialization_wikidata_source": {
-			"key": "field_clinical_specialization_wikidata_source",
-			"name": "",
-			"label": "How to Find the Related Wikidata Items",
-			"type": "message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"message": "Search for the item at <a href='https://www.wikidata.org/' target='_blank'>https://www.wikidata.org/</a>.",
-			"new_lines": "",
-			"esc_html": 0
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
 		},
 		"field_clinical_specialization_wikidata_url_occupation": {
 			"key": "field_clinical_specialization_wikidata_url_occupation",
@@ -1420,6 +1408,30 @@
 			},
 			"default_value": "",
 			"placeholder": "e.g., https://www.wikidata.org/wiki/Q28837"
+		},
+		"field_clinical_specialization_sameas_field": {
+			"key": "field_clinical_specialization_sameas_field",
+			"name": "clinical_specialization_sameas_field",
+			"label": "Reference Webpages About the Specialty \/ Field",
+			"type": "clone",
+			"instructions": "The field is often linked from a section titled \"field of this occupation\" on the Wikidata item page for the occupation.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
 		},
 		"field_clinical_specialization_wikidata_url_field": {
 			"key": "field_clinical_specialization_wikidata_url_field",
