@@ -1393,22 +1393,6 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_clinical_specialization_wikidata_url_occupation": {
-			"key": "field_clinical_specialization_wikidata_url_occupation",
-			"name": "clinical_specialization_wikidata_url_occupation",
-			"label": "Wikidata Item URL for the Occupation",
-			"type": "url",
-			"instructions": "Example: \"https://www.wikidata.org/wiki/Q28837\" — the URL for \"anesthesiologist\" — for taxonomy code 207LA0401X (Addiction Medicine [Anesthesiology] Physician).",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "e.g., https://www.wikidata.org/wiki/Q28837"
-		},
 		"field_clinical_specialization_sameas_field": {
 			"key": "field_clinical_specialization_sameas_field",
 			"name": "clinical_specialization_sameas_field",
@@ -1432,22 +1416,6 @@
 			"prefix_name": 1,
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
-		},
-		"field_clinical_specialization_wikidata_url_field": {
-			"key": "field_clinical_specialization_wikidata_url_field",
-			"name": "clinical_specialization_wikidata_url_field",
-			"label": "Wikidata Item URL for the Specialty \/ Field",
-			"type": "url",
-			"instructions": "The field is often linked from a section titled \"field of this occupation\" on the Wikidata item page for the occupation.</p><p class='description' style='margin-top: 0.5em;'>Example: \"https://www.wikidata.org/wiki/Q28837\" — the URL for \"anesthesiologist\" — for taxonomy code 207LA0401X (Addiction Medicine [Anesthesiology] Physician).",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "e.g., https://www.wikidata.org/wiki/Q615057"
 		},
 		"field_clinical_specialization_tab_endpoint": {
 			"key": "field_clinical_specialization_tab_endpoint",
