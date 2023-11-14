@@ -2422,7 +2422,11 @@
 
 					}
 
-				$sameAs_schema = array_is_list($sameAs_schema) ? $sameAs_schema : array($sameAs_schema);
+				if ( $sameAs_schema ) {
+
+					$sameAs_schema = array_is_list($sameAs_schema) ? $sameAs_schema : array($sameAs_schema);
+
+				}
 
 			// Add each repeater row to the list array
 
