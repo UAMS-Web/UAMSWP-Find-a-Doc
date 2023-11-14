@@ -1118,7 +1118,7 @@
 
 			// Get previous values.
 
-				$old_value = get_field($field_name, $post_id, false);
+				$old_value = get_field( $field_name, $post_id, false );
 
 			if (
 				isset($value)
@@ -1126,11 +1126,11 @@
 				is_array($value)
 			) {
 
-				foreach( $value as $post_id2new ) {
+				foreach ( $value as $post_id2new ) {
 
 					// load existing related posts
 
-						$value2new = get_field($field_name, $post_id2new, false);
+						$value2new = get_field( $field_name, $post_id2new, false );
 
 					// allow for selected posts to not contain a value
 
