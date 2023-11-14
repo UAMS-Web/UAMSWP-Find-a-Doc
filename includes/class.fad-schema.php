@@ -2438,7 +2438,17 @@
 
 					foreach ( $repeater as $sameAs ) {
 
-						$sameAs_schema[] = $sameAs[$field_name];
+						if (
+							$sameAs
+							&&
+							array_key_exists( $field_name, $sameAs)
+							&&
+							$sameAs[$field_name]
+						) {
+
+							$sameAs_schema[] = $sameAs[$field_name];
+
+						}
 
 					} // endforeach ( $repeater as $sameAs )
 
@@ -2511,7 +2521,17 @@
 
 					foreach ( $repeater as $additionalType ) {
 
-						$additionalType_schema[] = $additionalType[$field_name];
+						if (
+							$additionalType
+							&&
+							array_key_exists( $field_name, $additionalType)
+							&&
+							$additionalType[$field_name]
+						) {
+
+							$additionalType_schema[] = $additionalType[$field_name];
+
+						}
 
 					} // endforeach ( $repeater as $additionalType )
 
