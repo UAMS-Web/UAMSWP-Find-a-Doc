@@ -36,17 +36,18 @@
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
-				"class": "",
+				"class": "uamswp-hide-clone-label",
 				"id": ""
 			},
 			"acfe_permissions": "",
 			"clone": [
 				"field_schema_url"
 			],
-			"display": "seamless",
+			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
 			"prefix_name": 0,
+			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
 		"field_association_sameas": {
@@ -59,17 +60,18 @@
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
-				"class": "",
+				"class": "uamswp-hide-clone-label",
 				"id": ""
 			},
 			"acfe_permissions": "",
 			"clone": [
 				"field_schema_sameas"
 			],
-			"display": "seamless",
+			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
 			"prefix_name": 0,
+			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
 		"field_association_alternatename": {
@@ -82,17 +84,18 @@
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
-				"class": "",
+				"class": "uamswp-hide-clone-label",
 				"id": ""
 			},
 			"acfe_permissions": "",
 			"clone": [
 				"field_schema_alternatename"
 			],
-			"display": "seamless",
+			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
 			"prefix_name": 0,
+			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		}
 	},
