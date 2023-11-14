@@ -15356,6 +15356,24 @@
 
 									// additionalType (MedicalBusiness; Person)
 
+										/**
+										 * An additional type for the item, typically used for adding more specific types
+										 * from external vocabularies in microdata syntax. This is a relationship between
+										 * something and a class that the thing is in. Typically the value is a
+										 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+										 * in RDF. Text values can be used sparingly, for cases where useful information
+										 * can be added without their being an appropriate schema to reference. In the
+										 * case of text values, the class label should follow the schema.org style guide.
+										 *
+										 * Subproperty of:
+										 *     - rdf:type
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *     - Text
+										 *     - URL
+										 */
+
 										if (
 											(
 												isset($provider_item_MedicalBusiness)
@@ -15441,51 +15459,24 @@
 
 														}
 
-												// Get Wikidata item URL for the occupation from associated Clinical Specialization items
+												// Get reference webpage(s) for the occupation from associated Clinical Specialization items
 
-													// Get values
+													// Get additionalType repeater field value
 
-														if ( !isset($provider_additionalType_clinical_specialization) ) {
+														if ( !isset($provider_additionalType_clinical_specialization_repeater) ) {
 
-															// Get Clinical Specialization value
-
-																if ( !isset($provider_clinical_specialization_term) ) {
-
-																	if ( !isset($provider_clinical_specialization) ) {
-
-																		$provider_clinical_specialization = get_field( 'physician_title', $entity );
-
-																	}
-
-																	if ( $provider_clinical_specialization ) {
-
-																		$provider_clinical_specialization_term = get_term( $provider_clinical_specialization, 'clinical_title' ) ?? '';
-
-																	}
-
-																	// Get Wikidata Item URL for the Occupation field value
-
-																		$provider_additionalType_clinical_specialization = '';
-
-																		if ( is_object($provider_clinical_specialization_term) ) {
-
-																			$provider_additionalType_clinical_specialization = get_field( 'clinical_specialization_wikidata_url_occupation', $provider_clinical_specialization_term ) ?? '';
-
-																		}
-
-																}
+															$provider_additionalType_clinical_specialization_repeater = get_field( 'clinical_specialization_sameas_occupation_schema_sameas', $term ) ?? null;
 
 														}
 
-													// Merge value into the additionalType property values array
+													// Add each item to additionalType property values array
 
-														$provider_additionalType_clinical_specialization = $provider_additionalType_clinical_specialization ?? null;
+														if ( $provider_additionalType_clinical_specialization_repeater ) {
 
-														if ( $provider_additionalType_clinical_specialization ) {
-
-															$provider_additionalType = uamswp_fad_schema_merge_values(
-																$provider_additionalType, // mixed // Required // Initial schema item property value
-																$provider_additionalType_clinical_specialization // mixed // Required // Incoming schema item property value
+															$provider_additionalType = uamswp_fad_schema_additionaltype(
+																$provider_additionalType_clinical_specialization_repeater, // additionalType repeater field
+																'schema_sameas_url', // additionalType item field name
+																$provider_additionalType // array // Optional // Pre-existing schema array for additionalType to which to add sameAs items
 															);
 
 														}
