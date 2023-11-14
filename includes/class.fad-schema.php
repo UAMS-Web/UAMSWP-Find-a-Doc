@@ -2467,7 +2467,8 @@
 
 		function uamswp_fad_schema_additionaltype(
 			array $repeater, // additionalType repeater field
-			string $field_name = 'schema_additionalType_uri' // additionalType item field name
+			string $field_name = 'schema_additionalType_uri', // additionalType item field name
+			array $additionalType_schema = array() // array // Optional // Pre-existing schema array for additionalType to which to add sameAs items
 		) {
 
 			/**
@@ -2488,9 +2489,13 @@
 			 *     - URL
 			 */
 
-			// Base list array
+			// Check / define variables
 
-				$additionalType_list = array();
+				if ( $additionalType_schema ) {
+
+					$additionalType_schema = array_is_list($additionalType_schema) ? $additionalType_schema : array($additionalType_schema);
+
+				}
 
 			// Add each repeater row to the list array
 
@@ -2502,24 +2507,24 @@
 
 					foreach ( $repeater as $additionalType ) {
 
-						$additionalType_list[] = $additionalType[$field_name];
+						$additionalType_schema[] = $additionalType[$field_name];
 
 					} // endforeach ( $repeater as $additionalType )
 
 					// Clean up list array
 
-						$additionalType_list = array_filter($additionalType_list);
-						$additionalType_list = array_unique( $additionalType_list, SORT_REGULAR );
-						$additionalType_list = array_values($additionalType_list);
-						sort( $additionalType_list, SORT_NATURAL | SORT_FLAG_CASE );
+						$additionalType_schema = array_filter($additionalType_schema);
+						$additionalType_schema = array_unique( $additionalType_schema, SORT_REGULAR );
+						$additionalType_schema = array_values($additionalType_schema);
+						sort( $additionalType_schema, SORT_NATURAL | SORT_FLAG_CASE );
 
 						// If there is only one item, flatten the multi-dimensional array by one step
 
-							uamswp_fad_flatten_multidimensional_array($additionalType_list);
+							uamswp_fad_flatten_multidimensional_array($additionalType_schema);
 
 				} // endif ( $repeater )
 
-			return $additionalType_list;
+			return $additionalType_schema;
 
 		}
 
