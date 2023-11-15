@@ -671,7 +671,8 @@
 		// Clinical Departments
 
 			function create_departments_taxonomy() {
-			$labels = array(
+		
+				$labels = array(
 					'name' => 'Clinical Departments',
 					'singular_name' => 'Clinical Departments',
 					'search_items' => 'Search Clinical Departments',
@@ -722,7 +723,7 @@
 					'show_in_quick_edit' => false,
 				);
 				register_taxonomy( 'department', array( 'provider' ), $args );
-			
+
 			}
 
 		// Service Lines
