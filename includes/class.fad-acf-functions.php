@@ -36,22 +36,29 @@
 
 		// add_filter( 'acfcdt/settings/store_acf_keys_in_core_meta', '__return_false' );
 
-add_filter('acf/settings/load_json', 'uamswp_fad_json_load_point');
+// Add a new load point for ACF to look in for local JSON
 
-function uamswp_fad_json_load_point( $paths ) {
-    
-    // remove original path (optional)
-    // unset($paths[0]);
-    
-    
-    // append path
-    $paths[] = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-json';
-    
-    
-    // return
-    return $paths;
-    
-}
+	/**
+	 * Advanced Custom Fields documentation: https://www.advancedcustomfields.com/resources/local-json/#loading-explained
+	 */
+
+	add_filter('acf/settings/load_json', 'uamswp_fad_json_load_point');
+
+	function uamswp_fad_json_load_point( $paths ) {
+		
+		// Remove the original path (optional)
+
+			// unset($paths[0]);
+		
+		// Append the new path
+
+			$paths[] = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-json';
+		
+		// Return
+
+			return $paths;
+		
+	}
 
 add_filter('acf/prepare_field/key=field_physician_portal', 'set_default_portal', 20, 3);
 add_filter('acf/prepare_field/key=field_location_portal', 'set_default_portal', 20, 3);
