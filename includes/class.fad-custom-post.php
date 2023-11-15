@@ -2837,6 +2837,7 @@
 				'residency_year',
 				'academic_department',
 				'board',
+				'certifying_body',
 				'association',
 				'educationtype',
 				'portal',
@@ -2847,7 +2848,10 @@
 				'location_type',
 				'gmb_cat_provider',
 				'gmb_cat_location',
-				'building'
+				'building',
+				'parking',
+				'brand_organization',
+				'brand_organization_uams'
 			);
 
 			foreach ( $slugs as $slug ) {
