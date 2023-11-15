@@ -2866,16 +2866,15 @@
 					'posts_per_page' => -1,
 					'post__in' => $conditions_cpt
 				));
-				$conditions_cpt_query = new WP_Query( $args );
+				$condition_cpt_query = new WP_Query( $args );
 
 				if (
 					$conditions_cpt
 					&&
-					$conditions_cpt_query->posts
+					$condition_cpt_query->posts
 				) {
 
-					foreach ( $conditions_cpt_query->posts as $condition ) {
-
+					foreach ( $condition_cpt_query->posts as $condition ) {
 
 						$data['physician_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
 						$data['physician_conditions'][$condition->ID]['title'] = $condition->post_title;
@@ -3567,15 +3566,15 @@
 						'posts_per_page' => -1,
 						'post__in' => $conditions_cpt
 					));
-					$conditions_cpt_query = new WP_Query( $args );
+					$condition_cpt_query = new WP_Query( $args );
 
 					if (
 						$conditions_cpt
 						&&
-						$conditions_cpt_query->posts
+						$condition_cpt_query->posts
 					) {
 
-						foreach ( $conditions_cpt_query->posts as $condition ) {
+						foreach ( $condition_cpt_query->posts as $condition ) {
 
 							$data['location_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
 							$data['location_conditions'][$condition->ID]['title'] = $condition->post_title;
@@ -3696,15 +3695,15 @@
 					'posts_per_page' => -1,
 					'post__in' => $conditions_cpt
 				));
-				$conditions_cpt_query = new WP_Query( $args );
+				$condition_cpt_query = new WP_Query( $args );
 
 				if (
 					$conditions_cpt
 					&&
-					$conditions_cpt_query->posts
+					$condition_cpt_query->posts
 				) {
 
-					foreach ( $conditions_cpt_query->posts as $condition ) {
+					foreach ( $condition_cpt_query->posts as $condition ) {
 
 						$data['expertise_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
 						$data['expertise_conditions'][$condition->ID]['title'] = $condition->post_title;
@@ -4125,15 +4124,15 @@
 					'posts_per_page' => -1,
 					'post__in' => $conditions_cpt
 				));
-				$conditions_cpt_query = new WP_Query( $args );
+				$condition_cpt_query = new WP_Query( $args );
 
 				if (
 					$conditions_cpt
 					&&
-					$conditions_cpt_query->posts
+					$condition_cpt_query->posts
 				) {
 
-					foreach ( $conditions_cpt_query->posts as $condition ) {
+					foreach ( $condition_cpt_query->posts as $condition ) {
 
 						$data['treatment_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
 						$data['treatment_conditions'][$condition->ID]['title'] = $condition->post_title;
@@ -4272,7 +4271,7 @@
 					'posts_per_page' => -1,
 					'post__in' => $conditions_cpt
 				));
-				$conditions_cpt_query = new WP_Query( $args );
+				$condition_cpt_query = new WP_Query( $args );
 
 			}
 
