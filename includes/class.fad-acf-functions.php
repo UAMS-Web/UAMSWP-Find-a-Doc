@@ -776,17 +776,20 @@ function location_save_post_after( $post_id ) {
 
 		add_action('acf/render_field/name=location_current_alert', 'location_current_alert_message');
 
-		function location_current_alert_message(){
+		function location_current_alert_message() {
 
 			$alert_title = get_field('location_alert_heading_system', 'option');
 			$alert_body = get_field('location_alert_body_system', 'option');
 			$alert_color = get_field('location_alert_color_system', 'option');
 
-
-			if (!empty($alert_title) && !empty($alert_body)) {
+			if (
+				!empty($alert_title)
+				&&
+				!empty($alert_body)
+			) {
 
 				$alert_txt = '<blockquote class="notice notice-warning">';
-				$alert_txt .=  '<h3 class="notice-title">'. $alert_title .'</h3>';
+				$alert_txt .= '<h3 class="notice-title">'. $alert_title .'</h3>';
 				$alert_txt .= $alert_body;
 				$alert_txt .= '<hr />';
 				$alert_txt .= '<p><strong>Alert color:</strong> '. ucfirst(str_replace( 'alert-', '', $alert_color)) .'</p>';
@@ -795,7 +798,9 @@ function location_save_post_after( $post_id ) {
 				echo $alert_txt;
 
 			} else {
+
 				echo 'None active';
+
 			}
 
 		}
