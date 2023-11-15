@@ -833,8 +833,7 @@ function location_save_post_after( $post_id ) {
 
 				$prescription_pharm_sys = get_field('location_prescription_pharm_system', 'option');
 
-
-				if (!empty($prescription_pharm_sys)) {
+				if ( !empty($prescription_pharm_sys) ) {
 
 					$prescr_txt = '<blockquote class="notice notice-info">';
 					$prescr_txt .= $prescription_pharm_sys;
@@ -843,7 +842,9 @@ function location_save_post_after( $post_id ) {
 					echo $prescr_txt;
 
 				} else {
+
 					echo 'None active';
+
 				}
 
 			}
