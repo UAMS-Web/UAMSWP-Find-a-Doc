@@ -2489,42 +2489,42 @@
 
 	function acf_hide_title() {
 
-	echo
-	'<style>
-		.acf-field.hide-acf-field {
-			display: none;
-		}
+		echo
+		'<style>
+			.acf-field.hide-acf-field {
+				display: none;
+			}
 
-		.acf-field.hide-acf-title {
-		border: none;
-		padding: 6px 12px;
-		}
+			.acf-field.hide-acf-title {
+				border: none;
+				padding: 6px 12px;
+			}
 
-		.acf-field.hide-acf-border,
-		.acf-field[data-width]+.acf-field[data-width].hide-acf-border {
-		border-color: transparent;
-		}
+			.acf-field.hide-acf-border,
+			.acf-field[data-width]+.acf-field[data-width].hide-acf-border {
+				border-color: transparent;
+			}
 
-		.hide-acf-title .acf-label {
-			display: none;
-		}
+			.hide-acf-title .acf-label {
+				display: none;
+			}
 
-		.acf-field.pbn {
-			padding-bottom:0;
-		}';
+			.acf-field.pbn {
+				padding-bottom:0;
+			}';
 
-	// Hide second label in clone field where display style is set to 'Group' and one field is cloned (".uamswp-hide-clone-label")
-	echo '
-		.acf-fields > .uamswp-hide-clone-label.acf-field-clone.acfe-field-clone-layout-block.acfe-seamless-style > .acf-input > .acf-clone-fields > .acf-field:first-child:last-child {
-			padding-top: 0;
-		}
+		// Hide second label in clone field where display style is set to 'Group' and one field is cloned (".uamswp-hide-clone-label")
+		echo '
+			.acf-fields > .uamswp-hide-clone-label.acf-field-clone.acfe-field-clone-layout-block.acfe-seamless-style > .acf-input > .acf-clone-fields > .acf-field:first-child:last-child {
+				padding-top: 0;
+			}
 
-		.acf-fields > .uamswp-hide-clone-label.acf-field-clone.acfe-field-clone-layout-block.acfe-seamless-style > .acf-input > .acf-clone-fields > .acf-field:first-child:last-child > .acf-label > label {
-			display: none;
-		}';
+			.acf-fields > .uamswp-hide-clone-label.acf-field-clone.acfe-field-clone-layout-block.acfe-seamless-style > .acf-input > .acf-clone-fields > .acf-field:first-child:last-child > .acf-label > label {
+				display: none;
+			}';
 
-	echo '
-	</style>';
+		echo '
+		</style>';
 
 	}
 
