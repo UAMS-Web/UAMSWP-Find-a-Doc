@@ -1,0 +1,1642 @@
+{
+	"key": "group_uamswp_clinical_specialization",
+	"title": "Health Care Provider Taxonomy Code Set",
+	"location": [
+		[
+			{
+				"param": "taxonomy",
+				"operator": "==",
+				"value": "clinical_title"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "acf_after_title",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": [
+		"description"
+	],
+	"active": 1,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": "",
+	"fields": {
+		"field_clinical_specialization_extension_query": {
+			"key": "field_clinical_specialization_extension_query",
+			"name": "clinical_specialization_extension_query",
+			"type": "button_group",
+			"label": "Is this clinical specialization part of the UAMS Health extension to the Health Care Provider Taxonomy Code Set?",
+			"instructions": "Answer \"Yes\" if this is a clinical specialization that is <strong>not</strong> a part of the core Health Care Provider Taxonomy Code Set found at <a href='https://taxonomy.nucc.org/' target='_blank'>https://taxonomy.nucc.org/</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_clinical_specialization_tab_extension": {
+			"key": "field_clinical_specialization_tab_extension",
+			"label": "Qualifications for Inclusion in the UAMS Health Extension to the Health Care Provider Taxonomy Code Set",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_clinical_specialization_extension_national_query": {
+			"key": "field_clinical_specialization_extension_national_query",
+			"name": "clinical_specialization_extension_national_query",
+			"type": "true_false",
+			"label": "Applies Nationally",
+			"instructions": "The clinical specialization applies at a national level and is not restricted to local use.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No"
+		},
+		"field_clinical_specialization_extension_unique_query": {
+			"key": "field_clinical_specialization_extension_unique_query",
+			"name": "clinical_specialization_extension_unique_query",
+			"type": "true_false",
+			"label": "Unique Need",
+			"instructions": "The clinical specialization meets a unique need that is well-defined and separate and distinct from other clinical specializations currently in the Health Care Provider Taxonomy Code Set.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No"
+		},
+		"field_clinical_specialization_extension_org_query": {
+			"key": "field_clinical_specialization_extension_org_query",
+			"name": "clinical_specialization_extension_org_query",
+			"type": "true_false",
+			"label": "Organizational Unit Supports the Addition",
+			"instructions": "The addition of the specialization has the support of the related UAMS organizational unit(s), if applicable.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No"
+		},
+		"field_clinical_specialization_extension_provider_type": {
+			"key": "field_clinical_specialization_extension_provider_type",
+			"name": "clinical_specialization_extension_provider_type",
+			"label": "Provider Type",
+			"type": "radio",
+			"instructions": "Identify the type of provider impacted by this new clinical specialization.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"md-do": "Medical doctors (M.D.) or doctors of osteopathy (D.O.)",
+				"other": "Other providers"
+			},
+			"default_value": [],
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"allow_custom": 0,
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		"field_clinical_specialization_extension_authority": {
+			"key": "field_clinical_specialization_extension_authority",
+			"name": "clinical_specialization_extension_authority",
+			"label": "Recognizing Authority",
+			"type": "radio",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_provider_type",
+						"operator": "==",
+						"value": "md-do"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"board-certification-abms": "The area of specialty is recognized for certification by the American Board of Medical Specialties.",
+				"board-certification-aoa": "The area of specialty is recognized for certification by the American Osteopathic Association certifying boards or conjoint examination committees.",
+				"training-program-acgme": "There is an accredited residency/fellowship specialty/subspecialty training program by the Accreditation Council for Graduate Medical Education.",
+				"training-program-aoa": "There is an accredited residency/fellowship specialty/subspecialty training program by AOA-accredited Osteopathic Graduate Medical Education.",
+				"none": "None of the above"
+			},
+			"default_value": [],
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"allow_custom": 0,
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		"field_clinical_specialization_extension_board": {
+			"key": "field_clinical_specialization_extension_board",
+			"name": "clinical_specialization_extension_board",
+			"label": "Name of the Member Board, Certifying Board or Conjoint Examination Committee",
+			"type": "text",
+			"instructions": "Member board of the American Board of Medical Specialties, American Osteopathic Association certifying board or American Osteopathic Association conjoint examination committee recognizing the area of specialty.</p><p class='description' style='margin-top: 0.5em;'>The names of member boards, specialty certificates and subspecialty certificates can be found at <a href='https://www.abms.org/member-boards/specialty-subspecialty-certificates/' target='_blank'>https://www.abms.org/member-boards/specialty-subspecialty-certificates/</a>.</p><p class='description' style='margin-top: 0.5em;'>Information on the certifying boards, conjoint examination committees, specialty certificates and subspecialty certificates can be found at <a href='https://certification.osteopathic.org/' target='_blank'>https://certification.osteopathic.org/</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "board-certification-abms"
+					}
+				],
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "board-certification-aoa"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_clinical_specialization_extension_board_url": {
+			"key": "field_clinical_specialization_extension_board_url",
+			"name": "clinical_specialization_extension_board_url",
+			"label": "Official Webpage Concerning the Member Board, Certifying Board or Conjoint Examination Committee Certificate",
+			"type": "url",
+			"instructions": "Webpage with information on the member board of the American Board of Medical Specialties, American Osteopathic Association certifying board or American Osteopathic Association conjoint examination committee recognizing the area of specialty.</p><p class='description' style='margin-top: 0.5em;'>The names of member boards, specialty certificates and subspecialty certificates can be found at <a href='https://www.abms.org/member-boards/specialty-subspecialty-certificates/' target='_blank'>https://www.abms.org/member-boards/specialty-subspecialty-certificates/</a>.</p><p class='description' style='margin-top: 0.5em;'>Information on the certifying boards, conjoint examination committees, specialty certificates and subspecialty certificates can be found at <a href='https://certification.osteopathic.org/' target='_blank'>https://certification.osteopathic.org/</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "board-certification-abms"
+					}
+				],
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "board-certification-aoa"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "50",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		"field_clinical_specialization_extension_board_certificate": {
+			"key": "field_clinical_specialization_extension_board_certificate",
+			"name": "clinical_specialization_extension_board_certificate",
+			"label": "Name of Specialty Certificate or Subspecialty Certificate",
+			"type": "text",
+			"instructions": "Name of the specialty certificate or subspecialty certificate from the member board of the American Board of Medical Specialties, American Osteopathic Association certifying board or American Osteopathic Association conjoint examination committee recognizing the area of specialty..</p><p class='description' style='margin-top: 0.5em;'>Information on the member boards, specialty certificates and subspecialty certificates can be found at <a href='https://www.abms.org/member-boards/specialty-subspecialty-certificates/' target='_blank'>https://www.abms.org/member-boards/specialty-subspecialty-certificates/</a>.</p><p class='description' style='margin-top: 0.5em;'>The names of certifying boards, conjoint examination committees, specialty certificates and subspecialty certificates can be found at <a href='https://certification.osteopathic.org/' target='_blank'>https://certification.osteopathic.org/</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "board-certification-abms"
+					}
+				],
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "board-certification-aoa"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_clinical_specialization_extension_board_certificate_url": {
+			"key": "field_clinical_specialization_extension_board_certificate_url",
+			"name": "clinical_specialization_extension_board_certificate_url",
+			"label": "Official Webpage Concerning the Specialty Certificate or Subspecialty Certificate",
+			"type": "url",
+			"instructions": "Webpage with information on the specialty certificate or subspecialty certificate from the member board of the American Board of Medical Specialties, American Osteopathic Association certifying board or American Osteopathic Association conjoint examination committee recognizing the area of specialty..</p><p class='description' style='margin-top: 0.5em;'>Information on the member boards, specialty certificates and subspecialty certificates can be found at <a href='https://www.abms.org/member-boards/specialty-subspecialty-certificates/' target='_blank'>https://www.abms.org/member-boards/specialty-subspecialty-certificates/</a>.</p><p class='description' style='margin-top: 0.5em;'>The names of certifying boards, conjoint examination committees, specialty certificates and subspecialty certificates can be found at <a href='https://certification.osteopathic.org/' target='_blank'>https://certification.osteopathic.org/</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "board-certification-abms"
+					}
+				],
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "board-certification-aoa"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "50",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		"field_clinical_specialization_extension_training_type": {
+			"key": "field_clinical_specialization_extension_training_type",
+			"name": "clinical_specialization_extension_training_type",
+			"label": "Training Type",
+			"type": "radio",
+			"instructions": "Identify the type of training program.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "training-program-acgme"
+					}
+				],
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "training-program-aoa"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"residency": "Residency",
+				"fellowship": "Fellowship",
+				"both": "Residency and Fellowship"
+			},
+			"default_value": [],
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"allow_custom": 0,
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		"field_clinical_specialization_extension_training_distinct_query": {
+			"key": "field_clinical_specialization_extension_training_distinct_query",
+			"name": "clinical_specialization_extension_training_distinct_query",
+			"type": "true_false",
+			"label": "The training requirements demonstrate that the provider has a recognized area of specialty / subspecialty that is separate and distinct from others.",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "none"
+					}
+				],
+				[
+					{
+						"field": "field_clinical_specialization_extension_provider_type",
+						"operator": "==",
+						"value": "other"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No"
+		},
+		"field_clinical_specialization_extension_training_level": {
+			"key": "field_clinical_specialization_extension_training_level",
+			"name": "clinical_specialization_extension_training_level",
+			"label": "Training Level",
+			"type": "radio",
+			"instructions": "Identify the specificity of the training program.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "training-program-acgme"
+					}
+				],
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "training-program-aoa"
+					}
+				],
+				[
+					{
+						"field": "field_clinical_specialization_extension_training_distinct_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"specialty": "Specialty",
+				"subspecialty": "Subspecialty"
+			},
+			"default_value": [],
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"allow_custom": 0,
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		"field_clinical_specialization_extension_training_specialty": {
+			"key": "field_clinical_specialization_extension_training_specialty",
+			"name": "clinical_specialization_extension_training_specialty",
+			"label": "Name of the Training Program's Specialty",
+			"type": "text",
+			"instructions": "For the Accreditation Council for Graduate Medical Education, this information can be found at <a href='https://www.acgme.org/specialties/' target='_blank'>https://www.acgme.org/specialties/</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_training_level",
+						"operator": "!=",
+						"value": ""
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_clinical_specialization_extension_training_subspecialty": {
+			"key": "field_clinical_specialization_extension_training_subspecialty",
+			"name": "clinical_specialization_extension_training_subspecialty",
+			"label": "Name of the Training Program's Subspecialty",
+			"type": "text",
+			"instructions": "For the Accreditation Council for Graduate Medical Education, this information can be found in the specialty sections linked at <a href='https://www.acgme.org/specialties/' target='_blank'>https://www.acgme.org/specialties/</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_training_level",
+						"operator": "==",
+						"value": "subspecialty"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_clinical_specialization_extension_training_url": {
+			"key": "field_clinical_specialization_extension_training_url",
+			"name": "clinical_specialization_extension_training_url",
+			"label": "Official Webpage Concerning the Training Program's Specialty/Subspecialty",
+			"type": "url",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_training_level",
+						"operator": "!=",
+						"value": ""
+					}
+				]
+			],
+			"wrapper": {
+				"width": "50",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		"field_clinical_specialization_extension_training_accreditation_query": {
+			"key": "field_clinical_specialization_extension_training_accreditation_query",
+			"name": "clinical_specialization_extension_training_accreditation_query",
+			"type": "true_false",
+			"label": "The training program is accredited by a third party.",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "none"
+					}
+				],
+				[
+					{
+						"field": "field_clinical_specialization_extension_provider_type",
+						"operator": "==",
+						"value": "other"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No"
+		},
+		"field_clinical_specialization_extension_training_accreditation_org": {
+			"key": "field_clinical_specialization_extension_training_accreditation_org",
+			"name": "clinical_specialization_extension_training_accreditation_org",
+			"label": "Name of the Third Party Accrediting Organization",
+			"type": "text",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_training_accreditation_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_clinical_specialization_extension_training_accreditation_org_url": {
+			"key": "field_clinical_specialization_extension_training_accreditation_org_url",
+			"name": "clinical_specialization_extension_training_accreditation_org_url",
+			"label": "Official Website of the Third Party Accrediting Organization",
+			"type": "url",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_training_accreditation_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "50",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		"field_clinical_specialization_extension_accrediting_authority_query": {
+			"key": "field_clinical_specialization_extension_accrediting_authority_query",
+			"name": "clinical_specialization_extension_accrediting_authority_query",
+			"type": "true_false",
+			"label": "The third party accrediting organization establishes training program requirements, conducts periodic reviews of the programs, and has the authority to sanction programs.",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "none"
+					}
+				],
+				[
+					{
+						"field": "field_clinical_specialization_extension_provider_type",
+						"operator": "==",
+						"value": "other"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No"
+		},
+		"field_clinical_specialization_extension_examination_query": {
+			"key": "field_clinical_specialization_extension_examination_query",
+			"name": "clinical_specialization_extension_examination_query",
+			"type": "true_false",
+			"label": "A certification examination is required for graduates of the specialty / subspecialty training program to earn the designation.",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "none"
+					}
+				],
+				[
+					{
+						"field": "field_clinical_specialization_extension_provider_type",
+						"operator": "==",
+						"value": "other"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No"
+		},
+		"field_clinical_specialization_tab_code_set": {
+			"key": "field_clinical_specialization_tab_code_set",
+			"label": "Health Care Provider Taxonomy Code Set",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "!=",
+						"value": ""
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_clinical_specialization_code_set_extension": {
+			"key": "field_clinical_specialization_code_set_extension",
+			"name": "",
+			"label": "Field Values for UAMS Health Extension to the Health Care Provider Taxonomy Code Set",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "Enter the values in the fields below as if this clinical specialization was part of the core code set.",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_clinical_specialization_code_query": {
+			"key": "field_clinical_specialization_code_query",
+			"name": "clinical_specialization_code_query",
+			"type": "button_group",
+			"label": "Does this specialization have a taxonomy code in the Health Care Provider Taxonomy Code Set?",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_clinical_specialization_code": {
+			"key": "field_clinical_specialization_code",
+			"name": "clinical_specialization_code",
+			"label": "Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set",
+			"type": "text",
+			"instructions": "This information can be found in the Health Care Provider Taxonomy Code Set at <a href='https://taxonomy.nucc.org/' target='_blank'>https://taxonomy.nucc.org/</a>.</p><p class='description' style='margin-top: 0.5em;'>Example: \"207LA0401X\".",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_code_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., 207LA0401X",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_clinical_specialization_name": {
+			"key": "field_clinical_specialization_name",
+			"name": "clinical_specialty_name",
+			"label": "Specialization Name in the Health Care Provider Taxonomy Code Set",
+			"type": "text",
+			"instructions": "This information can be found in the Health Care Provider Taxonomy Code Set at <a href='https://taxonomy.nucc.org/' target='_blank'>https://taxonomy.nucc.org/</a>.</p><p class='description' style='margin-top: 0.5em;'>Example: \"Addiction Medicine\" for taxonomy code 207LA0401X.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., Addiction Medicine",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_clinical_specialization_name_display": {
+			"key": "field_clinical_specialization_name_display",
+			"name": "clinical_specialization_name_display",
+			"label": "Specialization Display Name in the Health Care Provider Taxonomy Code Set",
+			"type": "text",
+			"instructions": "This information can be found in the Health Care Provider Taxonomy Code Set at <a href='https://taxonomy.nucc.org/' target='_blank'>https://taxonomy.nucc.org/</a>.</p><p class='description' style='margin-top: 0.5em;'>Example: \"Addiction Medicine (Anesthesiology) Physician\" for taxonomy code 207LA0401X.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., Addiction Medicine (Anesthesiology) Physician",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_clinical_specialization_valid": {
+			"key": "field_clinical_specialization_valid",
+			"name": "clinical_specialization_valid",
+			"type": "button_group",
+			"label": "Is this clinical specialization a valid selection?",
+			"instructions": "Some taxonomy codes are strictly grouping codes for taxonomy codes within their group, and are not to be used as a taxonomy code (e.g., Pathology [207Z00000X]). One of the other codes within their group that describes provider practice, training and certification must be used instead.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_clinical_specialization_title": {
+			"key": "field_clinical_specialization_title",
+			"name": "clinical_specialization_title",
+			"label": "Clinical Occupation Title Based on the Health Care Provider Taxonomy Code Set",
+			"type": "text",
+			"instructions": "Determine the patient-facing clinical occupation title to be used for this specialization based on its name, context and description in the Health Care Provider Taxonomy Code Set; the word choices used by the certifying organization; and standard nomenclature.</p><p class='description' style='margin-top: 0.5em;'>Example: \"Addiction Medicine Anesthesiologist\" for taxonomy code 207LA0401X.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., Addiction Medicine Anesthesiologist",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_clinical_specialization_title_alt": {
+			"key": "field_clinical_specialization_title_alt",
+			"name": "clinical_specialization_title_alt",
+			"label": "Alternate Names for the Clinical Occupation Title",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_alternatename"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_clinical_specialization_definition": {
+			"key": "field_clinical_specialization_definition",
+			"name": "clinical_specialization_definition",
+			"label": "Specialization Definition in the Health Care Provider Taxonomy Code Set",
+			"type": "textarea",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "==",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_clinical_specialization_valid",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., An anesthesiologist who specializes in the diagnosis and treatment of addictions.",
+			"maxlength": "",
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		"field_clinical_specialization_definition_source": {
+			"key": "field_clinical_specialization_definition_source",
+			"name": "clinical_specialization_definition_source",
+			"label": "Source of Specialization Definition in the Health Care Provider Taxonomy Code Set",
+			"type": "textarea",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_valid",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., National Uniform Claim Committee, 2009",
+			"maxlength": "",
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		"field_clinical_specialization_tab_medicare": {
+			"key": "field_clinical_specialization_tab_medicare",
+			"label": "Related CMS Specialty Code",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_valid",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_clinical_specialization_cms_code_source": {
+			"key": "field_clinical_specialization_cms_code_source",
+			"name": "",
+			"label": "How to Find the CMS Specialty Code",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "The official list of specialty codes can be found in Centers for Medicare & Medicaid Services <a href='https://www.cms.gov/regulations-and-guidance/guidance/manuals/internet-only-manuals-ioms-items/cms019018' target='_blank'>Publication 100-06: Medicare Financial Management Manual</a>; Chapter 6: Medicare Administrator Contractor (MAC) Financial Reports; Section 400.3: Specialty Codes.</p><p class='description' style='margin-top: 0.5em;'>Find which CMS specialty code is paired with each taxonomy code at Data.CMS.gov in the <a href='https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk/data' target='_blank'>Medicare Provider and Supplier Taxonomy Crosswalk</a>.</p><p class='description' style='margin-top: 0.5em;'>It can also be found on <a href='https://npidb.org/' target='_blank'>NPIdb.org</a> on each taxonomy code page (e.g., <a href='https://npidb.org/taxonomy/207LA0401X/' target='_blank'>https://npidb.org/taxonomy/207LA0401X/</a>).",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_clinical_specialization_cms_code_inherit_query": {
+			"key": "field_clinical_specialization_cms_code_inherit_query",
+			"name": "clinical_specialization_cms_code_inherit_query",
+			"type": "button_group",
+			"label": "Inherit the related CMS Specialty Code and Provider/Supplier Type from the parent?",
+			"instructions": "Note that changing the relevant value in the parent term will not automatically update this term. After any change to the relevant value in the parent term this term will need to be updated by simply opening the term and clicking \"Update.\"",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_clinical_specialization_cms_code": {
+			"key": "field_clinical_specialization_cms_code",
+			"name": "clinical_specialization_cms_code",
+			"label": "Related CMS Specialty Code",
+			"type": "text",
+			"instructions": "Example: \"79\" for taxonomy code 207LA0401X.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_cms_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., 79",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_clinical_specialization_cms_code_type": {
+			"key": "field_clinical_specialization_cms_code_type",
+			"name": "clinical_specialization_cms_code_type",
+			"label": "Related CMS Provider/Supplier Type",
+			"type": "text",
+			"instructions": "Include \"Physician/\" at the beginning if the specialty code is in the list of Physician/Limited License Physician Specialty Codes.</p><p class='description' style='margin-top: 0.5em;'>Examples: \"Physician/Addiction Medicine\" for taxonomy code 207LA0401X, \"Certified Nurse Midwife\" for taxonomy code 367A00000X.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_cms_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "e.g., Physician/Addiction Medicine",
+			"prepend": "",
+			"append": "",
+			"min": "",
+			"max": "",
+			"step": 1,
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		"field_clinical_specialization_tab_medicalspecialty": {
+			"key": "field_clinical_specialization_tab_medicalspecialty",
+			"label": "Related Schema.org MedicalSpecialty",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "!=",
+						"value": ""
+					},
+					{
+						"field": "field_clinical_specialization_valid",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_clinical_specialization_medicalspecialty_about": {
+			"key": "field_clinical_specialization_medicalspecialty_about",
+			"name": "",
+			"label": "About the Schema.org MedicalSpecialty Enumeration Type",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "The Schema.org MedicalSpecialty enumeration type is a limited set of possible values for the specific branch of medical science or practice. The enumeration members include clinical specialties that pertain to particular organ systems and their respective disease states, as well as allied health specialties",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_clinical_specialization_medicalspecialty_member_inherit_query": {
+			"key": "field_clinical_specialization_medicalspecialty_member_inherit_query",
+			"name": "clinical_specialization_medicalspecialty_member_inherit_query",
+			"type": "button_group",
+			"label": "Inherit the related Schema.org MedicalSpecialty enumeration member from the parent?",
+			"instructions": "Note that changing the relevant value in the parent term will not automatically update this term. After any change to the relevant value in the parent term this term will need to be updated by simply opening the term and clicking \"Update.\"",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_clinical_specialization_medicalspecialty_member": {
+			"key": "field_clinical_specialization_medicalspecialty_member",
+			"name": "clinical_specialization_medicalspecialty_member",
+			"label": "MedicalSpecialty Enumeration Member",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_medicalspecialty_member_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalspecialty_single"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_clinical_specialization_tab_onetsoc": {
+			"key": "field_clinical_specialization_tab_onetsoc",
+			"label": "Related O*Net-SOC Occupation Code",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "!=",
+						"value": ""
+					},
+					{
+						"field": "field_clinical_specialization_valid",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_clinical_specialization_onetsoc_about": {
+			"key": "field_clinical_specialization_onetsoc_about",
+			"name": "",
+			"label": "About O*Net-SOC",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "The Occupational Information Network — or O*NET — is a free online database that contains hundreds of job definitions to help students, job seekers, businesses and workforce development professionals to understand today's world of work in the United States.</p><p class='description' style='margin-top: 0.5em;'>O*NET classifies jobs in job families (functional areas which include workers from entry level to advanced, and may include several sub-specialties).</p><p class='description' style='margin-top: 0.5em;'>All O*NET occupations conform to the Standard Occupational Classification — or SOC — the United States government system of classifying occupations.",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_clinical_specialization_onetsoc_code_source": {
+			"key": "field_clinical_specialization_onetsoc_code_source",
+			"name": "",
+			"label": "How to Find the O*Net-SOC Occupation Code",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "Search for occupations at <a href='https://www.onetonline.org/find/quick' target='_blank'>https://www.onetonline.org/find/quick</a>.",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_clinical_specialization_onetsoc_code_inherit_query": {
+			"key": "field_clinical_specialization_onetsoc_code_inherit_query",
+			"name": "clinical_specialization_onetsoc_code_inherit_query",
+			"type": "button_group",
+			"label": "Inherit the related O*Net-SOC Occupation Code and Occupation Name from the parent?",
+			"instructions": "Note that changing the relevant value in the parent term will not automatically update this term. After any change to the relevant value in the parent term this term will need to be updated by simply opening the term and clicking \"Update.\"",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_clinical_specialization_onetsoc_code": {
+			"key": "field_clinical_specialization_onetsoc_code",
+			"name": "clinical_specialization_onetsoc_code",
+			"label": "Related O*Net-SOC Occupation Code",
+			"type": "text",
+			"instructions": "Example: \"29-1211.00\" — the code for Anesthesiologists — for taxonomy code 207LA0401X (Addiction Medicine [Anesthesiology] Physician).",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_onetsoc_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., 29-1211.00",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_clinical_specialization_onetsoc_code_name": {
+			"key": "field_clinical_specialization_onetsoc_code_name",
+			"name": "clinical_specialization_onetsoc_code_name",
+			"label": "Related O*Net-SOC Occupation Name",
+			"type": "text",
+			"instructions": "Example: \"Anesthesiologists\" — the name associated with the code 29-1211.00 — for taxonomy code 207LA0401X (Addiction Medicine [Anesthesiology] Physician).",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_onetsoc_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "e.g., Anesthesiologists",
+			"prepend": "",
+			"append": "",
+			"min": "",
+			"max": "",
+			"step": 1,
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		"field_clinical_specialization_tab_isco08": {
+			"key": "field_clinical_specialization_tab_isco08",
+			"label": "Related ISCO-08 Code",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "!=",
+						"value": ""
+					},
+					{
+						"field": "field_clinical_specialization_valid",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_clinical_specialization_isco08_about": {
+			"key": "field_clinical_specialization_isco08_about",
+			"name": "",
+			"label": "About ISCO-08",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "The International Standard Classification of Occupations — or ISCO — is an International Labour Organization classification structure for organizing information on labour and jobs. It is part of the international family of economic and social classifications of the United Nations. The current version is known as ISCO-08.",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_clinical_specialization_isco08_code_source": {
+			"key": "field_clinical_specialization_isco08_code_source",
+			"name": "",
+			"label": "Information About Each ISCO-08 Code",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "For descriptions and examples of each occupation, see pages 82-108 of \"ISCO-08 Part 3: Definitions of Major Groups, Sub-Major Groups, Minor Groups and Unit Groups\" at <a href='https://www.ilo.org/public/english/bureau/stat/isco/docs/groupdefn08.pdf' target='_blank'>https://www.ilo.org/public/english/bureau/stat/isco/docs/groupdefn08.pdf</a> (archived at <a href='https://archive.is/TTr4R' target='_blank'>https://archive.is/TTr4R</a>).",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_clinical_specialization_isco08_code_inherit_query": {
+			"key": "field_clinical_specialization_isco08_code_inherit_query",
+			"name": "clinical_specialization_isco08_code_inherit_query",
+			"type": "button_group",
+			"label": "Inherit the related ISCO-08 Code from the parent?",
+			"instructions": "Note that changing the relevant value in the parent term will not automatically update this term. After any change to the relevant value in the parent term this term will need to be updated by simply opening the term and clicking \"Update.\"",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_clinical_specialization_isco08_code": {
+			"key": "field_clinical_specialization_isco08_code",
+			"name": "clinical_specialization_isco08_code",
+			"label": "ISCO-08 Code",
+			"type": "select",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_isco08_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"2211": "Medical Doctors, Generalist Medical Practitioners (2211)",
+				"2212": "Medical Doctors, Specialist Medical Practitioners (2212)",
+				"2221": "Nursing Professionals (2221)",
+				"2222": "Midwifery Professionals (2222)",
+				"2230": "Traditional and Complementary Medicine Professionals (2230)",
+				"2240": "Paramedical Practitioners (2240)",
+				"2250": "Veterinarians (2250)",
+				"2261": "Dentists (2261)",
+				"2262": "Pharmacists (2262)",
+				"2263": "Environmental and Occupational Health and Hygiene Professionals (2263)",
+				"2264": "Physiotherapists (2264)",
+				"2265": "Dieticians and Nutritionists (2265)",
+				"2266": "Audiologists and Speech Therapists (2266)",
+				"2267": "Optometrists and Ophthalmic Opticians (2267)",
+				"2269": "Health Professionals Not Elsewhere Classified (2269)"
+			},
+			"default_value": false,
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"allow_custom": 0,
+			"search_placeholder": "Select one",
+			"placeholder": ""
+		},
+		"field_clinical_specialization_tab_sameas": {
+			"key": "field_clinical_specialization_tab_sameas",
+			"label": "Reference Webpages",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "!=",
+						"value": ""
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_clinical_specialization_sameas_occupation_inherit_query": {
+			"key": "field_clinical_specialization_sameas_occupation_inherit_query",
+			"name": "clinical_specialization_sameas_occupation_inherit_query",
+			"type": "button_group",
+			"label": "Inherit the reference webpages about the occupation from the parent?",
+			"instructions": "Note that changing the relevant value in the parent term will not automatically update this term. After any change to the relevant value in the parent term this term will need to be updated by simply opening the term and clicking \"Update.\"",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_clinical_specialization_sameas_occupation": {
+			"key": "field_clinical_specialization_sameas_occupation",
+			"name": "clinical_specialization_sameas_occupation",
+			"label": "Reference Webpages About the Occupation",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_sameas_occupation_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_clinical_specialization_sameas_field_inherit_query": {
+			"key": "field_clinical_specialization_sameas_field_inherit_query",
+			"name": "clinical_specialization_sameas_field_inherit_query",
+			"type": "button_group",
+			"label": "Inherit the reference webpages about the specialty \/ field from the parent?",
+			"instructions": "Note that changing the relevant value in the parent term will not automatically update this term. After any change to the relevant value in the parent term this term will need to be updated by simply opening the term and clicking \"Update.\"",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_clinical_specialization_sameas_field": {
+			"key": "field_clinical_specialization_sameas_field",
+			"name": "clinical_specialization_sameas_field",
+			"label": "Reference Webpages About the Specialty \/ Field",
+			"type": "clone",
+			"instructions": "The field is often linked from a section titled \"field of this occupation\" on the Wikidata item page for the occupation.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_sameas_field_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_clinical_specialization_tab_endpoint": {
+			"key": "field_clinical_specialization_tab_endpoint",
+			"label": "",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 1
+		}
+	},
+	"modified": false
+}
