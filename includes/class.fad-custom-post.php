@@ -3042,7 +3042,7 @@
 
 					$post_id = $parent_location->ID;
 					$parent_title = $parent_location->post_title;
-					$parent_url = get_permalink( $post_id );
+					$parent_url = user_trailingslashit( get_permalink( $post_id ) );
 
 				} else {
 
