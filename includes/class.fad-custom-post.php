@@ -446,47 +446,54 @@
 			
 		}
 
-/*
- *
- * Register Taxonomies
- * 
- */
-// Actions for Taxonomy - place in order for sub-menu
-// Provider Taxonomies
-// Clinical
-// add_action( 'init', 'create_clinical_conditions_taxonomy', 0 );
-// add_action( 'init', 'create_clinical_treatments_taxonomy', 0 );
+// Register Taxonomies
 
-add_action( 'init', 'create_affiliations_taxonomy', 0 );
-add_action( 'init', 'create_institute_affiliations_taxonomy', 0 );
-add_action( 'init', 'create_clinical_title_taxonomy', 0 );
-add_action( 'init', 'create_clinical_admin_title_taxonomy', 0 );
-add_action( 'init', 'create_languages_taxonomy', 0 );
-add_action( 'init', 'create_departments_taxonomy', 0 );
-add_action( 'init', 'create_degrees_taxonomy', 0 );
-add_action( 'init', 'create_patient_type_taxonomy', 0 );
-add_action( 'init', 'create_portal_taxonomy', 0 );
-add_action( 'init', 'create_recognition_taxonomy', 0 );
-add_action( 'init', 'create_service_line_taxonomy', 0 );
-add_action( 'init', 'create_gmb_cat_provider_taxonomy', 0 );
-// add_action( 'init', 'create_medical_specialties_taxonomy', 0 ); // Disabled
-// add_action( 'init', 'create_medical_terms_taxonomy', 0 ); // Disabled
-// Academic
-add_action( 'init', 'create_associations_taxonomy', 0 );
-add_action( 'init', 'create_boards_taxonomy', 0 );
-add_action( 'init', 'create_academic_departments_taxonomy', 0 );
-add_action( 'init', 'create_academic_position_taxonomy', 0 );
-add_action( 'init', 'create_academic_title_taxonomy', 0 );
-add_action( 'init', 'create_academic_admin_title_taxonomy', 0 );
-add_action( 'init', 'create_academic_college_taxonomy', 0 );
-add_action( 'init', 'create_education_taxonomy', 0 );
-add_action( 'init', 'create_schools_taxonomy', 0 );
-add_action( 'init', 'create_residency_years_taxonomy', 0 );
-// Locations Taxonomies
-add_action( 'init', 'create_region_taxonomy', 0 );
-add_action( 'init', 'create_location_type_taxonomy', 0 );
-add_action( 'init', 'create_building_taxonomy', 0 );
-add_action( 'init', 'create_gmb_cat_location_taxonomy', 0 );
+	// Actions for Taxonomy
+
+		/**
+		 * Place in order for sub-menu
+		 */
+
+		// Provider Taxonomies
+
+			// Clinical
+
+				// add_action( 'init', 'create_clinical_conditions_taxonomy', 0 );
+				// add_action( 'init', 'create_clinical_treatments_taxonomy', 0 );
+				add_action( 'init', 'create_affiliations_taxonomy', 0 );
+				add_action( 'init', 'create_institute_affiliations_taxonomy', 0 );
+				add_action( 'init', 'create_clinical_title_taxonomy', 0 );
+				add_action( 'init', 'create_clinical_admin_title_taxonomy', 0 );
+				add_action( 'init', 'create_languages_taxonomy', 0 );
+				add_action( 'init', 'create_departments_taxonomy', 0 );
+				add_action( 'init', 'create_degrees_taxonomy', 0 );
+				add_action( 'init', 'create_patient_type_taxonomy', 0 );
+				add_action( 'init', 'create_portal_taxonomy', 0 );
+				add_action( 'init', 'create_recognition_taxonomy', 0 );
+				add_action( 'init', 'create_service_line_taxonomy', 0 );
+				add_action( 'init', 'create_gmb_cat_provider_taxonomy', 0 );
+				// add_action( 'init', 'create_medical_specialties_taxonomy', 0 ); // Disabled
+				// add_action( 'init', 'create_medical_terms_taxonomy', 0 ); // Disabled
+
+			// Academic
+
+				add_action( 'init', 'create_associations_taxonomy', 0 );
+				add_action( 'init', 'create_boards_taxonomy', 0 );
+				add_action( 'init', 'create_academic_departments_taxonomy', 0 );
+				add_action( 'init', 'create_academic_position_taxonomy', 0 );
+				add_action( 'init', 'create_academic_title_taxonomy', 0 );
+				add_action( 'init', 'create_academic_admin_title_taxonomy', 0 );
+				add_action( 'init', 'create_academic_college_taxonomy', 0 );
+				add_action( 'init', 'create_education_taxonomy', 0 );
+				add_action( 'init', 'create_schools_taxonomy', 0 );
+				add_action( 'init', 'create_residency_years_taxonomy', 0 );
+
+		// Locations Taxonomies
+
+			add_action( 'init', 'create_region_taxonomy', 0 );
+			add_action( 'init', 'create_location_type_taxonomy', 0 );
+			add_action( 'init', 'create_building_taxonomy', 0 );
+			add_action( 'init', 'create_gmb_cat_location_taxonomy', 0 );
 
 /* Taxonomy Functions */
 function create_clinical_conditions_taxonomy() {
