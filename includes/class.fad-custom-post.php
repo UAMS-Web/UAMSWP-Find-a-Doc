@@ -1621,8 +1621,8 @@
 			function create_associations_taxonomy() {
 
 				$labels = array(
-					'name' => 'Associations',
-					'singular_name' => 'Association',
+					'name' => 'Health Care Professional Associations',
+					'singular_name' => 'Health Care Professional Association',
 					'search_items' => 'Search Associations',
 					'all_items' => 'All Associations',
 					'edit_item' => 'Edit Association',
@@ -1649,7 +1649,7 @@
 					'assign_terms' => 'edit_physicians',
 				);
 				$args = array(
-					'label' => __( 'Associations' ),
+					'label' => __( 'Health Care Professional Associations' ),
 					'labels' => $labels,
 					'hierarchical' => false,
 					'public' => true,
