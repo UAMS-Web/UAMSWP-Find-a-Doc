@@ -559,47 +559,51 @@ function location_save_post_after( $post_id ) {
 
 		}
 
+// Set the post excerpt from ACF fields
 
-add_action('acf/save_post', 'custom_excerpt_acf', 50);
-function custom_excerpt_acf() {
+	// Fire after saving data to post
 
-    global $post;
+		add_action('acf/save_post', 'custom_excerpt_acf', 50);
 
-    $post_id        = ( $post->ID ); // Current post ID
-    $post_type      = get_post_type( $post_id ); // Get Post Type
+		function custom_excerpt_acf() {
 
-    if ( 'expertise' == $post_type || 'provider' == $post_type || 'location' == $post_type || 'clinical-resource' == $post_type  ) {
+			global $post;
 
-        if ('expertise' == $post_type ) {
-            $post_excerpt   = get_field( 'post_excerpt', $post_id ); // ACF field
-        } elseif ( 'provider' == $post_type ) {
-            $post_excerpt   = get_field( 'physician_short_clinical_bio', $post_id ); // ACF field
-        } elseif ( 'location' == $post_type ) {
-            $post_excerpt   = get_field( 'location_short_desc', $post_id ); // ACF field
-        } elseif ( 'clinical-resource' == $post_type ){
-			$post_excerpt   = get_field( 'clinical_resource_excerpt', $post_id );
+			$post_id        = ( $post->ID ); // Current post ID
+			$post_type      = get_post_type( $post_id ); // Get Post Type
+
+			if ( 'expertise' == $post_type || 'provider' == $post_type || 'location' == $post_type || 'clinical-resource' == $post_type  ) {
+
+				if ('expertise' == $post_type ) {
+					$post_excerpt   = get_field( 'post_excerpt', $post_id ); // ACF field
+				} elseif ( 'provider' == $post_type ) {
+					$post_excerpt   = get_field( 'physician_short_clinical_bio', $post_id ); // ACF field
+				} elseif ( 'location' == $post_type ) {
+					$post_excerpt   = get_field( 'location_short_desc', $post_id ); // ACF field
+				} elseif ( 'clinical-resource' == $post_type ){
+					$post_excerpt   = get_field( 'clinical_resource_excerpt', $post_id );
+				}
+
+				if ( ( !empty( $post_id ) ) AND ( $post_excerpt ) ) {
+
+					$post_array     = array(
+
+						'ID'            => $post_id,
+						'post_excerpt'	=> $post_excerpt
+
+					);
+
+					remove_action('save_post', 'custom_excerpt_acf', 50); // Unhook this function so it doesn't loop infinitely
+
+					wp_update_post( $post_array );
+
+					add_action( 'save_post', 'custom_excerpt_acf', 50); // Re-hook this function
+
+				}
+
+			}
+
 		}
-
-        if ( ( !empty( $post_id ) ) AND ( $post_excerpt ) ) {
-
-            $post_array     = array(
-
-                'ID'            => $post_id,
-                'post_excerpt'	=> $post_excerpt
-
-            );
-
-            remove_action('save_post', 'custom_excerpt_acf', 50); // Unhook this function so it doesn't loop infinitely
-
-            wp_update_post( $post_array );
-
-            add_action( 'save_post', 'custom_excerpt_acf', 50); // Re-hook this function
-
-        }
-
-    }
-
-}
 
 // Custom Blocks
 if( function_exists('acf_register_block_type') ):
