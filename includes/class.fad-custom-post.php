@@ -466,6 +466,10 @@
 
 			add_action( 'init', 'create_associations_taxonomy', 0 );
 
+		// Brand Organizations — UAMS
+
+		add_action( 'init', 'create_brand_organization_uams_taxonomy', 0 );
+
 		// Certifications —  Certifying Bodies
 
 		add_action( 'init', 'create_certifying_body_taxonomy', 0 );
@@ -2509,6 +2513,72 @@
 			register_taxonomy( 'parking', array( 'location' ), $args );
 
 		}
+
+		// Brand Organizations — UAMS
+
+			/**
+			 * The taxonomy is intended to define values for organizations like UAMS and
+			 * UAMS Health.
+			 * 
+			 * It should be limited to UAMS, UAMS Health, and any other clinical organizations
+			 * within UAMS.
+			 * 
+			 * Expected taxonomy items:
+			 * 
+			 *      * "University of Arkansas for Medical Sciences" (Slug: "uams")
+			 *             * "UAMS Health" (Slug: "uamshealth")
+			 */
+
+			function create_brand_organization_uams_taxonomy() {
+
+				$labels = array(
+					'name' => 'UAMS Brand Organizations',
+					'singular_name' => 'UAMS Brand Organization',
+					'menu_name' => 'Brand Organizations, UAMS',
+					'all_items' => 'All UAMS Brand Organizations',
+					'parent_item' => 'Parent UAMS Brand Organization',
+					'parent_item_colon' => 'Parent UAMS Brand Organization:',
+					'new_item_name' => 'New UAMS Brand Organization',
+					'add_new_item' => 'Add New UAMS Brand Organization',
+					'edit_item' => 'Edit UAMS Brand Organization',
+					'update_item' => 'Update UAMS Brand Organization',
+					'view_item' => 'View UAMS Brand Organization',
+					'separate_items_with_commas' => 'Separate UAMS Brand Organizations With Commas',
+					'add_or_remove_items' => 'Add or Remove UAMS Brand Organizations',
+					'choose_from_most_used' => 'Choose from the most used',
+					'popular_items' => 'Popular UAMS Brand Organizations',
+					'search_items' => 'Search UAMS Brand Organizations',
+					'not_found' => 'Not Found',
+					'no_terms' => 'No UAMS Brand Organizations',
+					'items_list' => 'UAMS Brand Organizations List',
+					'items_list_navigation' => 'UAMS Brand Organizations List Navigation',
+				);
+				$rewrite = array(
+					'slug' => 'brand_organization_uams',
+					'with_front' => false,
+					'hierarchical' => true,
+				);
+				$capabilities = array(
+					'manage_terms' => 'manage_options',
+					'edit_terms' => 'manage_options',
+					'delete_terms' => 'manage_options',
+					'assign_terms' => 'edit_physicians',
+				);
+				$args = array(
+					'labels' => $labels,
+					'hierarchical' => true,
+					'public' => false,
+					'show_ui' => true,
+					'show_admin_column' => false,
+					'show_in_nav_menus' => false,
+					'show_tagcloud' => false,
+					'rewrite' => $rewrite,
+					'capabilities' => $capabilities,
+					'show_in_quick_edit' => false,
+				);
+				register_taxonomy( 'brand_organization_uams', array( 'location', 'provider' ), $args );
+
+			}
 
 // Custom Roles
 
