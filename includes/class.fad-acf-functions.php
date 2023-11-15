@@ -579,70 +579,99 @@ function location_save_post_after( $post_id ) {
 
 				$post_type = get_post_type( $post_id );
 
-			if (
-				'expertise' == $post_type
-				||
-				'provider' == $post_type
-				||
-				'location' == $post_type
-				||
-				'clinical-resource' == $post_type
-			) {
+			// 1. Add post types (key) and corresponding field names (value) to be used to set the excerpt
 
-				if ( 'expertise' == $post_type ) {
+				$excerpt_field_name = array(
+					'provider' => 'physician_short_clinical_bio',
+					'location' => 'location_short_desc',
+					'expertise' => 'post_excerpt',
+					'clinical-resource' => 'clinical_resource_excerpt',
+				);
 
-					$post_excerpt   = get_field( 'post_excerpt', $post_id ); // ACF field
+			// 2. Add post types (key) and corresponding field names (value) to be used as a fallback to set the excerpt if the initial fields do not have a value
 
-				} elseif ( 'provider' == $post_type ) {
+				$excerpt_fallback_field_name = array(
+					'provider' => 'physician_clinical_bio',
+					'location' => 'location_about',
+				);
 
-					$post_excerpt   = get_field( 'physician_short_clinical_bio', $post_id ); // ACF field
+			// Set the post excerpt value
 
-				} elseif ( 'location' == $post_type ) {
+				if (
+					!empty($post_id) // If the post ID is not empty ...
+					&&
+					$excerpt_field_name // and if the $excerpt_field_name array has a value ...
+					&&
+					array_key_exists( $post_type, $excerpt_field_name )//  and if a key for the current post type exists in the array...
+				) {
 
-					$post_excerpt   = get_field( 'location_short_desc', $post_id ); // ACF field
+					// Get field value relevant to the current post type
 
-				} elseif ( 'clinical-resource' == $post_type ) {
+						$post_excerpt = get_field( $excerpt_field_name[$post_type], $post_id ) ?? null;
 
-					$post_excerpt   = get_field( 'clinical_resource_excerpt', $post_id );
+					// If excerpt is empty, get fallback field value relevant to the current post type
+
+						if (
+							!$post_excerpt
+							&&
+							$excerpt_fallback_field_name // and if the $excerpt_fallback_field_name array has a value ...
+							&&
+							array_key_exists( $post_type, $excerpt_fallback_field_name )//  and if a key for the current post type exists in the array...
+						) {
+
+							$post_excerpt = get_field( $excerpt_fallback_field_name[$post_type], $post_id ) ?? null;
+
+							if ( $post_excerpt ) {
+
+								$post_excerpt = wp_strip_all_tags($post_excerpt);
+								$post_excerpt = str_replace("\n", ' ', $post_excerpt); // Strip line breaks
+								$post_excerpt = strlen($post_excerpt) > 160 ? mb_strimwidth($post_excerpt, 0, 156, '...') : $post_excerpt; // Limit to 160 characters
+
+							}
+
+						}
+
+				} else {
+
+					$post_excerpt = '';
 
 				}
 
-				// Update the post with the new excerpt value
+			// Update the post with the new excerpt value
 
-					/**
-					 * Source: https://support.advancedcustomfields.com/forums/topic/set-wordpress-excerpt-and-post-thumbnail-based-on-custom-field/#post-49965
-					 */
+				/**
+				 * Source: https://support.advancedcustomfields.com/forums/topic/set-wordpress-excerpt-and-post-thumbnail-based-on-custom-field/#post-49965
+				 */
 
-					if (
-						!empty($post_id) // If the post ID is not empty ...
-						&&
-						$post_excerpt // and if the post excerpt value exists ...
-					) {
+				if (
+					!empty($post_id) // If the post ID is not empty ...
+					&&
+					$post_excerpt // and if the post excerpt value exists ...
+				) {
 
-						// Define an array of elements that make up a post to update or insert.
+					// Define an array of elements that make up a post to update or insert.
 
-							$post_array = array(
-								'ID' => $post_id,
-								'post_excerpt' => $post_excerpt
-							);
+						$post_array = array(
+							'ID' => $post_id,
+							'post_excerpt' => $post_excerpt
+						);
 
-						// Unhook this function so it doesn't loop infinitely
+					// Unhook this function so it doesn't loop infinitely
 
-							remove_action('save_post', 'custom_excerpt_acf', 50);
+						remove_action('save_post', 'custom_excerpt_acf', 50);
 
-						// Update the post with new post data
+					// Update the post with new post data
 
-							wp_update_post(
-								$post_array // array|object // Optional // Post data. Arrays are expected to be escaped, objects are not. See wp_insert_post() for accepted arguments. // Default array()
-							);
+						wp_update_post(
+							$post_array // array|object // Optional // Post data. Arrays are expected to be escaped, objects are not. See wp_insert_post() for accepted arguments. // Default array()
+						);
 
-						// Re-hook this function
+					// Re-hook this function
 
-							add_action( 'save_post', 'custom_excerpt_acf', 50);
+						add_action( 'save_post', 'custom_excerpt_acf', 50);
 
-					}
+				}
 
-			}
 
 		}
 
