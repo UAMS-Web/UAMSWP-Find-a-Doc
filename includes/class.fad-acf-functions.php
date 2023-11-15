@@ -174,6 +174,26 @@
 		
 	}
 
+// Trigger FacetWP to re-index a single post when saving the submitted $_POST data
+
+	/**
+	 * FacetWP documentation: https://facetwp.com/help-center/indexing/#how-to-trigger-the-indexer-programmatically
+	 * 
+	 * Advanced Custom Fields documentation: https://www.advancedcustomfields.com/resources/acf-save_post/
+	 */
+
+	add_action( 'acf/save_post', 'update_facetwp_index');
+
+	function update_facetwp_index( $post_id ) {
+
+		if ( function_exists( 'FWP' ) ) {
+
+			FWP()->indexer->index( $post_id );
+
+		}
+
+	}
+ 
 // Fires before saving data to post - only updates ACF data
 add_action('acf/save_post', 'physician_save_post', 5); 
 function physician_save_post( $post_id ) {
@@ -361,26 +381,6 @@ function resources_save_post( $post_id ) {
 	$filter_list = $provider_list . ', ' . $location_list . ', ' . $expertise_list . ', ' . $condition_list . ', ' . $treatment_list . ', ' . $resource_list;
 	$_POST['acf']['field_clinical_resource_asp_filter'] = $filter_list;
 }
-
-// Trigger FacetWP to re-index a single post when saving the submitted $_POST data
-
-	/**
-	 * FacetWP documentation: https://facetwp.com/help-center/indexing/#how-to-trigger-the-indexer-programmatically
-	 * 
-	 * Advanced Custom Fields documentation: https://www.advancedcustomfields.com/resources/acf-save_post/
-	 */
-
-	add_action( 'acf/save_post', 'update_facetwp_index');
-
-	function update_facetwp_index( $post_id ) {
-
-		if ( function_exists( 'FWP' ) ) {
-
-			FWP()->indexer->index( $post_id );
-
-		}
-
-	}
 
 // Fires before saving data to post - only updates ACF data
 add_action('acf/save_post', 'location_save_post', 7); 
