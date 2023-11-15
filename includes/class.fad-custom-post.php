@@ -466,6 +466,10 @@
 
 			add_action( 'init', 'create_associations_taxonomy', 0 );
 
+		// Certifications —  Certifying Bodies
+
+		add_action( 'init', 'create_certifying_body_taxonomy', 0 );
+
 		// Certification — Specialty and Subspecialty Certificates
 
 			add_action( 'init', 'create_boards_taxonomy', 0 );
@@ -1694,6 +1698,56 @@
 				register_taxonomy( 'board', array( 'provider' ), $args );
 
 			}
+
+		// Certifying Bodies
+
+		function create_certifying_body_taxonomy() {
+
+			$labels = array(
+				'name' => 'Certifying Bodies',
+				'singular_name' => 'Certifying Body',
+				'search_items' => 'Search Certifying Bodies',
+				'all_items' => 'All Certifying Bodies',
+				'edit_item' => 'Edit Certifying Body',
+				'update_item' => 'Update Certifying Body',
+				'add_new_item' => 'Add New Certifying Body',
+				'new_item_name' => 'New Certifying Body',
+				'menu_name' => 'Certification — Certifying Bodies',
+				'view_item' => 'View Certifying Body',
+				'popular_items' => 'Popular Certifying Bodies',
+				'separate_items_with_commas' => 'Separate Certifying Bodies With Commas',
+				'add_or_remove_items' => 'Add or Remove Certifying Bodies',
+				'choose_from_most_used' => 'Choose From the Most Used Certifying Bodies',
+				'not_found' => 'No Certifying Bodies Found'
+			);
+			$rewrite = array(
+				'slug' => 'certifying_body',
+				'with_front' => false,
+				'hierarchical' => false,
+			);
+			$capabilities = array(
+				'manage_terms' => 'manage_options',
+				'edit_terms' => 'manage_options',
+				'delete_terms' => 'manage_options',
+				'assign_terms' => 'edit_physicians',
+			);
+			$args = array(
+				'label' => __( 'Certifying Bodies' ),
+				'labels' => $labels,
+				'hierarchical' => false,
+				'public' => true,
+				'show_ui' => true, //Made true to add / edit
+				'meta_box_cb' => false,
+				'show_admin_column' => false,
+				'show_in_nav_menus' => false,
+				'show_tagcloud' => false,
+				'rewrite' => $rewrite,
+				'capabilities' => $capabilities,
+				'show_in_quick_edit' => false,
+			);
+			register_taxonomy( 'certifying_body', array( 'provider' ), $args );
+
+		}
 
 		// Health Care Professional Associations
 
