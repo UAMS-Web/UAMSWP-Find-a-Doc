@@ -831,7 +831,7 @@
 				$args = array(
 					'label' => __( 'Medical Degrees' ),
 					'labels' => $labels,
-					'hierarchical' => true,
+					'hierarchical' => false,
 					'public' => true,
 					'show_ui' => true,
 					'meta_box_cb' => false,
