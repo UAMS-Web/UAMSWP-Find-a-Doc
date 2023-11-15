@@ -444,58 +444,82 @@ function location_save_post_after( $post_id ) {
 	// Fire before saving data to post (by using a priority less than 10)
 
 		add_action('acf/save_post', 'uamswp_sync_acf_save_post', 5);
+		
 		function uamswp_sync_acf_save_post( $post_id ) {
-			// Setup the variables
-			$post_type = get_post_type( $post_id );
-			$values = $_POST['acf'];
 
-			if ('location' == $post_type ) {
+			// Set up the variables
+
+				$post_type = get_post_type( $post_id );
+				$values = $_POST['acf'];
+
+			if ( 'location' == $post_type ) {
+
 				$field_name = 'physician_locations';
 				$field_key = 'field_location_physicians';
-				// Get submitted values.
-				$value = $values[$field_key];
-				bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+
+				// Get submitted values
+
+					$value = $values[$field_key];
+					bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
 
 				$field_name = 'location_expertise';
 				$field_key = 'field_location_expertise';
-				// Get submitted values.
-				$value = $values[$field_key];
-				bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+
+				// Get submitted values
+
+					$value = $values[$field_key];
+					bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+
 			}
 
-			if ('provider' == $post_type ) {
+			if ( 'provider' == $post_type ) {
+
 				$field_name = 'physician_locations';
 				$field_key = 'field_physician_locations';
-				// Get submitted values.
-				$value = $values[$field_key];
-				bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+
+				// Get submitted values
+
+					$value = $values[$field_key];
+					bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
 
 				$field_name = 'physician_expertise';
 				$field_key = 'field_physician_expertise';
-				// Get submitted values.
-				$value = $values[$field_key];
-				bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+
+				// Get submitted values
+
+					$value = $values[$field_key];
+					bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+
 			}
 
-			if ('expertise' == $post_type ) {
+			if ( 'expertise' == $post_type ) {
+
 				$field_name = 'location_expertise';
 				$field_key = 'field_expertise_locations';
-				// Get submitted values.
-				$value = $values[$field_key];
-				bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+
+				// Get submitted values
+
+					$value = $values[$field_key];
+					bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
 
 				$field_name = 'physician_expertise';
 				$field_key = 'field_expertise_physicians';
-				// Get submitted values.
-				$value = $values[$field_key];
-				bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+
+				// Get submitted values
+
+					$value = $values[$field_key];
+					bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
 
 				$field_name = 'expertise_associated';
 				$field_key = 'field_expertise_associated';
-				// Get submitted values.
-				$value = $values[$field_key];
-				bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+
+				// Get submitted values
+
+					$value = $values[$field_key];
+					bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+
 			}
+
 		}
 
 	// Function for Bidirectional ACF
