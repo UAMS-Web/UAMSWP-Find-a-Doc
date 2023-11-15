@@ -609,53 +609,58 @@ function location_save_post_after( $post_id ) {
 
 	if( function_exists('acf_register_block_type') ):
 
-		acf_register_block_type(array(
-			'name' => 'uamswp_fad_facetwp_cards',
-			'title' => 'FacetWP Cards',
-			'description' => '',
-			'category' => 'common',
-			'keywords' => array(
-				0 => 'provider',
-				1 => 'location',
-				2 => 'facetwp',
-			),
-			'mode' => 'auto',
-			'align' => '',
-			'render_template' => '',
-			'render_callback' => 'fad_facetwp_cards_callback',
-			'enqueue_style' => '',
-			'enqueue_script' => '',
-			'enqueue_assets' => '',
-			'icon' => 'id',
-			'supports' => array(
-				'align' => array('full'),
-				'mode' => true,
-				'multiple' => true,
-			),
-		));
-		acf_register_block_type(array(
-			'name' => 'uamswp_fad_facetwp_blocks',
-			'title' => 'FacetWP Block',
-			'description' => '',
-			'category' => 'common',
-			'keywords' => array(
-				0 => 'facetwp',
-				1 => 'shortcode',
-			),
-			'mode' => 'auto',
-			'align' => '',
-			'render_template' => '',
-			'render_callback' => 'fad_facetwp_blocks_callback',
-			'enqueue_style' => '',
-			'enqueue_script' => '',
-			'enqueue_assets' => '',
-			'icon' => 'list-view',
-			'supports' => array(
-				'align' => true,
-				'mode' => true,
-				'multiple' => true,
-			),
-		));
+		// Register "FacetWP Cards" block
+
+			acf_register_block_type(array(
+				'name' => 'uamswp_fad_facetwp_cards',
+				'title' => 'FacetWP Cards',
+				'description' => '',
+				'category' => 'common',
+				'keywords' => array(
+					0 => 'provider',
+					1 => 'location',
+					2 => 'facetwp',
+				),
+				'mode' => 'auto',
+				'align' => '',
+				'render_template' => '',
+				'render_callback' => 'fad_facetwp_cards_callback',
+				'enqueue_style' => '',
+				'enqueue_script' => '',
+				'enqueue_assets' => '',
+				'icon' => 'id',
+				'supports' => array(
+					'align' => array('full'),
+					'mode' => true,
+					'multiple' => true,
+				),
+			));
+
+		// Register "FacetWP Block" block
+
+			acf_register_block_type(array(
+				'name' => 'uamswp_fad_facetwp_blocks',
+				'title' => 'FacetWP Block',
+				'description' => '',
+				'category' => 'common',
+				'keywords' => array(
+					0 => 'facetwp',
+					1 => 'shortcode',
+				),
+				'mode' => 'auto',
+				'align' => '',
+				'render_template' => '',
+				'render_callback' => 'fad_facetwp_blocks_callback',
+				'enqueue_style' => '',
+				'enqueue_script' => '',
+				'enqueue_assets' => '',
+				'icon' => 'list-view',
+				'supports' => array(
+					'align' => true,
+					'mode' => true,
+					'multiple' => true,
+				),
+			));
 
 	endif;
 
