@@ -1004,19 +1004,34 @@ function location_save_post_after( $post_id ) {
 
 	add_filter('acf/format_value/key=field_physician_select_publications_pubmed', 'pubmed_information_format_value', 10, 3);
 
-// Exclude current post/page from relationship field results
+// Modify ACF Relationship fields
 
-// 1. Add the key=[NAME_OF_RELATIONSHIP_FIELD].
-add_filter('acf/fields/relationship/query/key=field_clinical_resource_related', 'relationship_exclude_id', 10, 3);
-add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'relationship_exclude_id', 10, 3);
-// 2. Add the $field and $post arguments.
-function relationship_exclude_id ( $args, $field, $post_id ) {
+	/**
+	 * Field type documentation: https://www.advancedcustomfields.com/resources/relationship/
+	 */
 
-    //3. $post argument passed in from the query hook is the $post_id.
-    $args['post__not_in'] = array( $post_id );
+	// Exclude current post/page from ACF Relationship field results
 
-    return $args;
-}
+		/**
+		 * Filter documentation: https://www.advancedcustomfields.com/resources/acf-fields-relationship-query/
+		 */
+
+		// 1. Add a filter for each specific relationship field with key=[NAME_OF_RELATIONSHIP_FIELD].
+
+			add_filter('acf/fields/relationship/query/key=field_clinical_resource_related', 'relationship_exclude_id', 10, 3);
+			add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'relationship_exclude_id', 10, 3);
+			
+		// 2. Add the $field and $post arguments.
+
+			function relationship_exclude_id ( $args, $field, $post_id ) {
+
+				// 3. $post argument passed in from the query hook is the $post_id.
+
+					$args['post__not_in'] = array( $post_id );
+
+				return $args;
+
+			}
 
 // Conditional Logic to check if Find-a-Doc Settings are set to allow MyChart Scheduling
 function uamswp_mychart_scheduling_query($field) {
