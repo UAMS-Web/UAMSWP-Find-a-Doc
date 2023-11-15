@@ -362,12 +362,25 @@ function resources_save_post( $post_id ) {
 	$_POST['acf']['field_clinical_resource_asp_filter'] = $filter_list;
 }
 
-add_action( 'acf/save_post', 'update_facetwp_index');
-function update_facetwp_index( $post_id ) {
-    if ( function_exists( 'FWP' ) ) {
-        FWP()->indexer->index( $post_id );
-    }
-}
+// Trigger FacetWP to re-index a single post when saving the submitted $_POST data
+
+	/**
+	 * FacetWP documentation: https://facetwp.com/help-center/indexing/#how-to-trigger-the-indexer-programmatically
+	 * 
+	 * Advanced Custom Fields documentation: https://www.advancedcustomfields.com/resources/acf-save_post/
+	 */
+
+	add_action( 'acf/save_post', 'update_facetwp_index');
+
+	function update_facetwp_index( $post_id ) {
+
+		if ( function_exists( 'FWP' ) ) {
+
+			FWP()->indexer->index( $post_id );
+
+		}
+
+	}
 
 // Fires before saving data to post - only updates ACF data
 add_action('acf/save_post', 'location_save_post', 7); 
