@@ -648,123 +648,123 @@
 
 	// Location profile
 
-	// Fire before saving data to post (by using a priority less than 10)
+		// Fire before saving data to post (by using a priority less than 10)
 
-		/**
-		 * Only updates ACF data
-		 */
+			/**
+			 * Only updates ACF data
+			 */
 
-		add_action('acf/save_post', 'location_save_post', 7);
+			add_action('acf/save_post', 'location_save_post', 7);
 
-		function location_save_post( $post_id ) {
+			function location_save_post( $post_id ) {
 
-			$post_type = get_post_type($post_id);
+				$post_type = get_post_type($post_id);
 
-			// Bail early if no data sent or not location post type
+				// Bail early if no data sent or not location post type
+
+					if (
+						empty( $_POST['acf'] )
+						||
+						( $post_type != 'location' )
+					) {
+
+						return;
+
+					}
+
+				// Create full name to store in 'physician_full_name' field
+
+					$featured_image = $_POST['acf']['field_location_featured_image'];
+					$wayfinding_image = $_POST['acf']['field_location_wayfinding_photo'];
+
+				// If featured image is set & wayfinding is empty, set wayfinding image to featured image
+
+					if (
+						$featured_image
+						&&
+						empty($wayfinding_image)
+					) {
+
+						$_POST['acf']['field_location_wayfinding_photo'] = $featured_image;
+
+					}
+
+				// If wayfinding image is set & featured image is empty, set featured image to wayfinding image
+
+					if (
+						empty($featured_image)
+						&&
+						$wayfinding_image
+					) {
+
+						$_POST['acf']['field_location_featured_image'] = $wayfinding_image;
+
+					}
+
+				$has_parent = $_POST['acf']['field_location_parent'];
+				$location_parent = $_POST['acf']['field_location_parent_id'];
 
 				if (
-					empty( $_POST['acf'] )
-					||
-					( $post_type != 'location' )
-				) {
-
-					return;
-
-				}
-
-			// Create full name to store in 'physician_full_name' field
-
-				$featured_image = $_POST['acf']['field_location_featured_image'];
-				$wayfinding_image = $_POST['acf']['field_location_wayfinding_photo'];
-
-			// If featured image is set & wayfinding is empty, set wayfinding image to featured image
-
-				if (
-					$featured_image
+					$has_parent
 					&&
-					empty($wayfinding_image)
+					!empty($location_parent)
 				) {
 
-					$_POST['acf']['field_location_wayfinding_photo'] = $featured_image;
+					$region = array();
+					$region[] = get_field( 'location_region', $location_parent);
+
+					$_POST['acf']['field_location_region'] = $region;
 
 				}
-
-			// If wayfinding image is set & featured image is empty, set featured image to wayfinding image
-
-				if (
-					empty($featured_image)
-					&&
-					$wayfinding_image
-				) {
-
-					$_POST['acf']['field_location_featured_image'] = $wayfinding_image;
-
-				}
-
-			$has_parent = $_POST['acf']['field_location_parent'];
-			$location_parent = $_POST['acf']['field_location_parent_id'];
-
-			if (
-				$has_parent
-				&&
-				!empty($location_parent)
-			) {
-
-				$region = array();
-				$region[] = get_field( 'location_region', $location_parent);
-
-				$_POST['acf']['field_location_region'] = $region;
 
 			}
 
-		}
+		// Fire after saving data to post
 
-	// Fire after saving data to post
+			/**
+			 * Change post data
+			 */
 
-		/**
-		 * Change post data
-		 */
+			add_action('acf/save_post', 'location_save_post_after', 20);
 
-		add_action('acf/save_post', 'location_save_post_after', 20);
+			function location_save_post_after( $post_id ) {
 
-		function location_save_post_after( $post_id ) {
+				$post_type = get_post_type($post_id);
 
-			$post_type = get_post_type($post_id);
+				// Bail early if not location post type
 
-			// Bail early if not location post type
+					if ( $post_type != 'location' ) {
 
-				if ( $post_type != 'location' ) {
+						return;
 
-					return;
+					}
 
-				}
+				$post = get_post($post_id);
+				$location_has_parent = get_field('location_parent');
+				$location_parent_id = get_field('location_parent_id');
 
-			$post = get_post($post_id);
-			$location_has_parent = get_field('location_parent');
-			$location_parent_id = get_field('location_parent_id');
+				// If the location has a parent and parent ID is set, set the parent D
 
-			// If the location has a parent and parent ID is set, set the parent D
+					if (
+						$location_has_parent
+						&&
+						$location_parent_id
+					) {
 
-				if (
-					$location_has_parent
-					&&
-					$location_parent_id
-				) {
+						$post->post_parent = $location_parent_id;
 
-					$post->post_parent = $location_parent_id;
+					} else { // clear the parent data
 
-				} else { // clear the parent data
+						$post->post_parent = 0;
 
-					$post->post_parent = 0;
+					}
 
-				}
+				// Remove this filter to prevent an infinite loop
 
-			// Remove this filter to prevent an infinite loop
+					remove_filter('acf/save_post', 'save_location_parent');
+					wp_update_post($post);
 
-				remove_filter('acf/save_post', 'save_location_parent');
-				wp_update_post($post);
-
-		}
+			}
 
 // Bidirectionally update ACF data
 
