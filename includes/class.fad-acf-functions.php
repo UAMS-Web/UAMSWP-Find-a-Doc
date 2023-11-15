@@ -194,455 +194,457 @@
 
 	}
 
-// Provider profile
+// Update post data / ACF data for profiles
 
-	// Fire before saving data to post (by using a priority less than 10)
+	// Provider profile
 
-		/**
-		 * Only updates ACF data
-		 */
+		// Fire before saving data to post (by using a priority less than 10)
 
-		add_action('acf/save_post', 'physician_save_post', 5);
-		
-		function physician_save_post( $post_id ) {
+			/**
+			 * Only updates ACF data
+			 */
 
-			$post_type = get_post_type($post_id);
+			add_action('acf/save_post', 'physician_save_post', 5);
+			
+			function physician_save_post( $post_id ) {
 
-			// Bail early if no data sent or not provider post type
+				$post_type = get_post_type($post_id);
 
-				if (
-					empty( $_POST['acf'] )
-					||
-					( $post_type != 'provider' )
-				) {
+				// Bail early if no data sent or not provider post type
 
-					return;
+					if (
+						empty( $_POST['acf'] )
+						||
+						( $post_type != 'provider' )
+					) {
 
-				}
+						return;
 
-			// Create provider name combinations to store in fields
+					}
 
-				$first_name = $_POST['acf']['field_physician_first_name'];
-				$middle_name = $_POST['acf']['field_physician_middle_name'];
-				$last_name = $_POST['acf']['field_physician_last_name'];
-				$pedigree = $_POST['acf']['field_physician_pedigree'];
+				// Create provider name combinations to store in fields
 
-				// Create full name to store in 'physician_full_name' field (e.g., "Leonard H. McCoy, M.D.")
+					$first_name = $_POST['acf']['field_physician_first_name'];
+					$middle_name = $_POST['acf']['field_physician_middle_name'];
+					$last_name = $_POST['acf']['field_physician_last_name'];
+					$pedigree = $_POST['acf']['field_physician_pedigree'];
 
-					$degrees = $_POST['acf']['field_physician_degree'];
+					// Create full name to store in 'physician_full_name' field (e.g., "Leonard H. McCoy, M.D.")
 
-					$i = 1;
+						$degrees = $_POST['acf']['field_physician_degree'];
 
-					if ( $degrees ) {
+						$i = 1;
 
-						foreach ( $degrees as $degree ) {
+						if ( $degrees ) {
 
-							$degree_name = get_term( $degree, 'degree');
-							$degree_list .= $degree_name->name;
+							foreach ( $degrees as $degree ) {
 
-							if ( count($degrees) > $i ) {
+								$degree_name = get_term( $degree, 'degree');
+								$degree_list .= $degree_name->name;
 
-								$degree_list .= ", ";
+								if ( count($degrees) > $i ) {
+
+									$degree_list .= ", ";
+
+								}
+
+								$i++;
+
+							} // endforeach
+
+						}
+
+						$full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+
+						$_POST['acf']['field_physician_full_name'] = $full_name;
+
+				// Create list of related ontology items to store in fields
+
+					/**
+					 * The purpose is to have a hidden field populated by a string of titles of the
+					 * related ontology items that can then be searched by Ajax Search Pro.
+					 */
+
+					// Create list of related areas of expertise
+
+						// Get related areas of expertise
+
+							$expertises = $_POST['acf']['field_physician_expertise'];
+
+						// Loop through the areas of expertise and add each item's title to a list
+
+							if ( $expertises ) {
+
+								$i = 1;
+
+								foreach ( $expertises as $expertise ) {
+
+									$expertise_name = get_the_title( $expertise );
+									$expertise_list .= $expertise_name;
+
+									if ( count($expertises) > $i ) {
+
+										$expertise_list .= ", ";
+
+									}
+
+									$i++;
+
+								} // endforeach
 
 							}
 
-							$i++;
+					// Create list of related conditions
 
-						} // endforeach
+						// Get related conditions
 
-					}
+							$conditions = $_POST['acf']['field_physician_conditions_cpt'];
 
-					$full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+						// Loop through the conditions and add each item's title to a list
 
-					$_POST['acf']['field_physician_full_name'] = $full_name;
+							if ( $conditions ) {
 
-			// Create list of related ontology items to store in fields
+								$i = 1;
 
-				/**
-				 * The purpose is to have a hidden field populated by a string of titles of the
-				 * related ontology items that can then be searched by Ajax Search Pro.
-				 */
+								foreach ( $conditions as $condition ) {
 
-				// Create list of related areas of expertise
+									$condition_name = get_the_title( $condition );
+									$condition_list .= $condition_name;
 
-					// Get related areas of expertise
+									if ( count($conditions) > $i ) {
 
-						$expertises = $_POST['acf']['field_physician_expertise'];
-
-					// Loop through the areas of expertise and add each item's title to a list
-
-						if ( $expertises ) {
-
-							$i = 1;
-
-							foreach ( $expertises as $expertise ) {
-
-								$expertise_name = get_the_title( $expertise );
-								$expertise_list .= $expertise_name;
-
-								if ( count($expertises) > $i ) {
-
-									$expertise_list .= ", ";
-
-								}
-
-								$i++;
-
-							} // endforeach
-
-						}
-
-				// Create list of related conditions
-
-					// Get related conditions
-
-						$conditions = $_POST['acf']['field_physician_conditions_cpt'];
-
-					// Loop through the conditions and add each item's title to a list
-
-						if ( $conditions ) {
-
-							$i = 1;
-
-							foreach ( $conditions as $condition ) {
-
-								$condition_name = get_the_title( $condition );
-								$condition_list .= $condition_name;
-
-								if ( count($conditions) > $i ) {
-
-									$condition_list .= ", ";
-
-								}
-
-								$i++;
-
-							} // endforeach
-
-						}
-
-				// Create list of related treatments
-
-					// Get related treatments
-
-						$treatments = $_POST['acf']['field_physician_treatments_cpt'];
-
-					// Loop through the treatments and add each item's title to a list
-
-						if ( $treatments ) {
-
-							$i = 1;
-
-							foreach ( $treatments as $treatment ) {
-
-								$treatment_name = get_the_title( $treatment );
-								$treatment_list .= $treatment_name;
-
-								if ( count($treatments) > $i ) {
-
-									$treatment_list .= ", ";
-
-								}
-
-								$i++;
-
-							} // endforeach
-
-						}
-
-				// Combine the lists
-
-					$filter_list = $expertise_list . ', ' . $condition_list . ', ' . $treatment_list;
-
-				// Store the value of the combined list in a field
-
-					$_POST['acf']['field_physician_asp_filter'] = $filter_list;
-
-			// Add values from the associated locations
-
-				// Get the list of locations associated with the provider
-			
-					$locations = $_POST['acf']['field_physician_locations'];
-
-				// Get the desired values from each associated location
-
-					if ( $locations ) {
-
-						// Base arrays
-
-							$region = array();
-							$portal = array();
-							
-						foreach ( $locations as $location ) {
-
-							// Get the values
-
-								// Region
-
-									$location_region = get_field( 'location_region', $location ) ?? null;
-
-									if ( $location_region ) {
-
-										$region[] = $location_region;
+										$condition_list .= ", ";
 
 									}
 
-								// Portal
+									$i++;
 
-									$location_portal = get_field( 'location_portal', $location ) ?? null;
+								} // endforeach
 
-									if ( $location_portal ) {
+							}
 
-										$portal[] = $location_portal;
+					// Create list of related treatments
+
+						// Get related treatments
+
+							$treatments = $_POST['acf']['field_physician_treatments_cpt'];
+
+						// Loop through the treatments and add each item's title to a list
+
+							if ( $treatments ) {
+
+								$i = 1;
+
+								foreach ( $treatments as $treatment ) {
+
+									$treatment_name = get_the_title( $treatment );
+									$treatment_list .= $treatment_name;
+
+									if ( count($treatments) > $i ) {
+
+										$treatment_list .= ", ";
 
 									}
-							// Break the loop after first iteration (optional)
 
-								/**
-								 * The first location in the list of the provider's associated locations should be
-								 * the provider's primary location.
-								 * 
-								 * If the relevant values of the provider's primary location are all that
-								 * matter, break the loop here.
-								 */
+									$i++;
 
-								// break;
+								} // endforeach
 
-						} // endforeach
-					}
+							}
 
-				// Set the desired values from each associated location
+					// Combine the lists
 
-					// Region
+						$filter_list = $expertise_list . ', ' . $condition_list . ', ' . $treatment_list;
 
-						$_POST['acf']['field_physician_region'] = $region;
+					// Store the value of the combined list in a field
 
-					// Portal
+						$_POST['acf']['field_physician_asp_filter'] = $filter_list;
 
-						/**
-						 * Use the first portal only.
-						 * 
-						 * The first portal value should be the portal value of the provider's primary
-						 * location.
-						 */
+				// Add values from the associated locations
 
-						$_POST['acf']['field_physician_portal'] = $portal[0];
+					// Get the list of locations associated with the provider
+				
+						$locations = $_POST['acf']['field_physician_locations'];
 
-		}
-
-// Clinical resource profile
-
-	// Fire before saving data to post (by using a priority less than 10)
-
-		add_action('acf/save_post', 'resources_save_post', 6);
-
-		function resources_save_post( $post_id ) {
-
-			$post_type = get_post_type($post_id);
-
-			// Bail early if no data sent or not clinical resource post type
-
-				if (
-					empty( $_POST['acf'] )
-					||
-					( $post_type != 'clinical-resource' )
-				) {
-
-					return;
-
-				}
-
-			// Create list of related ontology items to store in fields
-
-				/**
-				 * The purpose is to have a hidden field populated by a string of titles of the
-				 * related ontology items that can then be searched by Ajax Search Pro.
-				 */
-
-				// Create list of related providers
-
-					// Get related providers
-
-						$providers = $_POST['acf']['field_clinical_resource_providers'];
-
-					// Loop through the providers and add each item's title to a list
-
-						if ( $providers ) {
-
-							$i = 1;
-
-							foreach( $providers as $provider ) {
-
-								$provider_name = get_the_title( $provider );
-								$provider_list .= $provider_name;
-
-								if ( count($providers) > $i ) {
-
-									$provider_list .= ", ";
-
-								}
-
-								$i++;
-
-							} // endforeach
-						}
-
-				// Create list of related locations
-
-					// Get related locations
-
-						$locations = $_POST['acf']['field_clinical_resource_locations'];
-
-					// Loop through the locations and add each item's title to a list
+					// Get the desired values from each associated location
 
 						if ( $locations ) {
 
-							$i = 1;
+							// Base arrays
 
-							foreach( $locations as $location ) {
+								$region = array();
+								$portal = array();
+								
+							foreach ( $locations as $location ) {
 
-								$location_name = get_the_title( $location );
-								$location_list .= $location_name;
+								// Get the values
 
-								if ( count($locations) > $i ) {
+									// Region
 
-									$location_list .= ", ";
+										$location_region = get_field( 'location_region', $location ) ?? null;
 
-								}
+										if ( $location_region ) {
 
-								$i++;
+											$region[] = $location_region;
 
-							} // endforeach
+										}
 
-						}
+									// Portal
 
-				// Create list of related areas of expertise
+										$location_portal = get_field( 'location_portal', $location ) ?? null;
 
-					// Get related areas of expertise
+										if ( $location_portal ) {
 
-						$expertises = $_POST['acf']['field_clinical_resource_aoe'];
+											$portal[] = $location_portal;
 
-					// Loop through the areas of expertise and add each item's title to a list
+										}
+								// Break the loop after first iteration (optional)
 
-						if ( $expertises ) {
+									/**
+									 * The first location in the list of the provider's associated locations should be
+									 * the provider's primary location.
+									 * 
+									 * If the relevant values of the provider's primary location are all that
+									 * matter, break the loop here.
+									 */
 
-							$i = 1;
-
-							foreach ( $expertises as $expertise ) {
-
-								$expertise_name = get_the_title( $expertise );
-								$expertise_list .= $expertise_name;
-
-								if ( count($expertises) > $i ) {
-
-									$expertise_list .= ", ";
-
-								}
-
-								$i++;
+									// break;
 
 							} // endforeach
-
 						}
 
-				// Create list of related conditions
+					// Set the desired values from each associated location
 
-					// Get related conditions
+						// Region
 
-						$conditions = $_POST['acf']['field_clinical_resource_conditions'];
+							$_POST['acf']['field_physician_region'] = $region;
 
-					// Loop through the conditions and add each item's title to a list
+						// Portal
 
-						if ( $conditions ) {
+							/**
+							 * Use the first portal only.
+							 * 
+							 * The first portal value should be the portal value of the provider's primary
+							 * location.
+							 */
 
-							$i = 1;
+							$_POST['acf']['field_physician_portal'] = $portal[0];
 
-							foreach ( $conditions as $condition ) {
+			}
 
-								$condition_name = get_the_title( $condition );
-								$condition_list .= $condition_name;
+	// Clinical resource profile
 
-								if ( count($conditions) > $i ) {
+		// Fire before saving data to post (by using a priority less than 10)
 
-									$condition_list .= ", ";
+			add_action('acf/save_post', 'resources_save_post', 6);
 
-								}
+			function resources_save_post( $post_id ) {
 
-								$i++;
+				$post_type = get_post_type($post_id);
 
-							} // endforeach
+				// Bail early if no data sent or not clinical resource post type
 
-						}
+					if (
+						empty( $_POST['acf'] )
+						||
+						( $post_type != 'clinical-resource' )
+					) {
 
-				// Create list of related treatments
+						return;
 
-					// Get related treatments
+					}
 
-						$treatments = $_POST['acf']['field_clinical_resource_treatments'];
+				// Create list of related ontology items to store in fields
 
-					// Loop through the treatments and add each item's title to a list
+					/**
+					 * The purpose is to have a hidden field populated by a string of titles of the
+					 * related ontology items that can then be searched by Ajax Search Pro.
+					 */
 
-						if ( $treatments ) {
+					// Create list of related providers
 
-							$i = 1;
+						// Get related providers
 
-							foreach( $treatments as $treatment ):
+							$providers = $_POST['acf']['field_clinical_resource_providers'];
 
-								$treatment_name = get_the_title( $treatment );
-								$treatment_list .= $treatment_name;
+						// Loop through the providers and add each item's title to a list
 
-								if( count($treatments) > $i ) {
+							if ( $providers ) {
 
-									$treatment_list .= ", ";
+								$i = 1;
 
-								}
+								foreach( $providers as $provider ) {
 
-								$i++;
+									$provider_name = get_the_title( $provider );
+									$provider_list .= $provider_name;
 
-							endforeach;
+									if ( count($providers) > $i ) {
 
-						}
+										$provider_list .= ", ";
 
-				// Create list of related clinical resources
+									}
 
-					// Get related clinical resources
+									$i++;
 
-						$clinical_resources = $_POST['acf']['field_clinical_resource_related'];
+								} // endforeach
+							}
 
-					// Loop through the clinical resources and add each item's title to a list
+					// Create list of related locations
 
-						if ( $clinical_resources ) {
+						// Get related locations
 
-							$i = 1;
+							$locations = $_POST['acf']['field_clinical_resource_locations'];
 
-							foreach ( $clinical_resources as $resource ) {
+						// Loop through the locations and add each item's title to a list
 
-								$resource_name = get_the_title( $resource );
-								$resource_list .= $resource_name;
+							if ( $locations ) {
 
-								if ( count($clinical_resources) > $i ) {
+								$i = 1;
 
-									$resource_list .= ", ";
+								foreach( $locations as $location ) {
 
-								}
+									$location_name = get_the_title( $location );
+									$location_list .= $location_name;
 
-								$i++;
+									if ( count($locations) > $i ) {
 
-							} // endforeach
+										$location_list .= ", ";
 
-						}
+									}
 
-				// Combine the lists
+									$i++;
 
-					$filter_list = $provider_list . ', ' . $location_list . ', ' . $expertise_list . ', ' . $condition_list . ', ' . $treatment_list . ', ' . $resource_list;
+								} // endforeach
 
-				// Store the value of the combined list in a field
+							}
 
-					$_POST['acf']['field_clinical_resource_asp_filter'] = $filter_list;
+					// Create list of related areas of expertise
 
-		}
+						// Get related areas of expertise
 
-// Location profile
+							$expertises = $_POST['acf']['field_clinical_resource_aoe'];
+
+						// Loop through the areas of expertise and add each item's title to a list
+
+							if ( $expertises ) {
+
+								$i = 1;
+
+								foreach ( $expertises as $expertise ) {
+
+									$expertise_name = get_the_title( $expertise );
+									$expertise_list .= $expertise_name;
+
+									if ( count($expertises) > $i ) {
+
+										$expertise_list .= ", ";
+
+									}
+
+									$i++;
+
+								} // endforeach
+
+							}
+
+					// Create list of related conditions
+
+						// Get related conditions
+
+							$conditions = $_POST['acf']['field_clinical_resource_conditions'];
+
+						// Loop through the conditions and add each item's title to a list
+
+							if ( $conditions ) {
+
+								$i = 1;
+
+								foreach ( $conditions as $condition ) {
+
+									$condition_name = get_the_title( $condition );
+									$condition_list .= $condition_name;
+
+									if ( count($conditions) > $i ) {
+
+										$condition_list .= ", ";
+
+									}
+
+									$i++;
+
+								} // endforeach
+
+							}
+
+					// Create list of related treatments
+
+						// Get related treatments
+
+							$treatments = $_POST['acf']['field_clinical_resource_treatments'];
+
+						// Loop through the treatments and add each item's title to a list
+
+							if ( $treatments ) {
+
+								$i = 1;
+
+								foreach( $treatments as $treatment ):
+
+									$treatment_name = get_the_title( $treatment );
+									$treatment_list .= $treatment_name;
+
+									if( count($treatments) > $i ) {
+
+										$treatment_list .= ", ";
+
+									}
+
+									$i++;
+
+								endforeach;
+
+							}
+
+					// Create list of related clinical resources
+
+						// Get related clinical resources
+
+							$clinical_resources = $_POST['acf']['field_clinical_resource_related'];
+
+						// Loop through the clinical resources and add each item's title to a list
+
+							if ( $clinical_resources ) {
+
+								$i = 1;
+
+								foreach ( $clinical_resources as $resource ) {
+
+									$resource_name = get_the_title( $resource );
+									$resource_list .= $resource_name;
+
+									if ( count($clinical_resources) > $i ) {
+
+										$resource_list .= ", ";
+
+									}
+
+									$i++;
+
+								} // endforeach
+
+							}
+
+					// Combine the lists
+
+						$filter_list = $provider_list . ', ' . $location_list . ', ' . $expertise_list . ', ' . $condition_list . ', ' . $treatment_list . ', ' . $resource_list;
+
+					// Store the value of the combined list in a field
+
+						$_POST['acf']['field_clinical_resource_asp_filter'] = $filter_list;
+
+			}
+
+	// Location profile
 
 	// Fire before saving data to post (by using a priority less than 10)
 
