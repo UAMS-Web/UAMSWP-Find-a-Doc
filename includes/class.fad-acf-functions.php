@@ -377,12 +377,23 @@
 
 							// Region
 
-								$region[] = get_field( 'location_region', $location);
+								$location_region = get_field( 'location_region', $location ) ?? null;
+
+								if ( $location_region ) {
+
+									$region[] = $location_region;
+
+								}
 
 							// Portal
 
-								$portal[] = get_field( 'location_portal', $location);
-								
+								$location_portal = get_field( 'location_portal', $location ) ?? null;
+
+								if ( $location_portal ) {
+
+									$portal[] = $location_portal;
+
+								}
 						// Break the loop after first iteration (optional)
 
 							/**
