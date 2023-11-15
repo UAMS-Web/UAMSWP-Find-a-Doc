@@ -2625,11 +2625,11 @@
 			}
 
 			$full_name = get_field( 'physician_first_name', $postId ) .' ' .(get_field( 'physician_middle_name', $postId ) ? get_field( 'physician_middle_name', $postId ) . ' ' : '') . get_field( 'physician_last_name', $postId ) . (get_field( 'physician_pedigree', $postId ) ? '&nbsp;' . get_field( 'physician_pedigree', $postId ) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
-			$physician_resident = get_field( 'physician_resident', $postId );
-			$physician_resident_name = 'Resident Physician';
-			$physician_title = get_field( 'physician_title', $postId );
-			$physician_title_name = $physician_resident ? $physician_resident_name : get_term( $physician_title, 'clinical_title' )->name;
-			$physician_service_line = get_field( 'physician_service_line', $postId );
+			$provider_resident = get_field( 'physician_resident', $postId );
+			$provider_resident_name = 'Resident Physician';
+			$provider_title = get_field( 'physician_title', $postId );
+			$provider_title_name = $provider_resident ? $provider_resident_name : get_term( $provider_title, 'clinical_title' )->name;
+			$provider_service_line = get_field( 'physician_service_line', $postId );
 			$resident_profile_group = get_field( 'physician_resident_profile_group', $postId );
 			$resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
 			$resident_academic_department_name = get_term( $resident_academic_department, 'academic_department' )->name;
@@ -2640,8 +2640,8 @@
 			$resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
 			$data['physician_full_name'] = $full_name;
 			//Physician Data
-			$data['physician_title'] = $physician_title_name; //(get_field( 'physician_title', $postId ) ? get_term( get_field( 'physician_title', $postId ), 'clinical_title' )->name : '');
-			$data['physician_service_line'] = $physician_service_line ? get_term( $physician_service_line, 'service_line' )->name : '';
+			$data['physician_title'] = $provider_title_name; //(get_field( 'physician_title', $postId ) ? get_term( get_field( 'physician_title', $postId ), 'clinical_title' )->name : '');
+			$data['physician_service_line'] = $provider_service_line ? get_term( $provider_service_line, 'service_line' )->name : '';
 			$data['physician_clinical_bio'] = get_field( 'physician_clinical_bio', $postId );
 			$data['physician_short_clinical_bio'] = get_field( 'physician_short_clinical_bio', $postId ) ? get_field( 'physician_short_clinical_bio', $postId ) : wp_trim_words( get_field( 'physician_clinical_bio', $postId ), 30, ' &hellip;' );
 			$data['physician_gender'] = get_field( 'physician_gender', $postId );
@@ -2695,12 +2695,12 @@
 			}
 
 			$data['physician_languages'] = $language_list;
-			$data['physician_eligible_appointments'] = $physician_resident ? 0 : get_field( 'physician_eligible_appointments', $postId );
+			$data['physician_eligible_appointments'] = $provider_resident ? 0 : get_field( 'physician_eligible_appointments', $postId );
 			$data['physician_thumbnail'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center');
 			$data['physician_photo'] = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
 			$data['physician_referral_required'] = get_field( 'physician_referral_required', $postId );
-			$physician_portal = get_field( 'physician_portal', $postId );
-			$portal = get_term( $physician_portal, 'portal' );
+			$provider_portal = get_field( 'physician_portal', $postId );
+			$portal = get_term( $provider_portal, 'portal' );
 			$data['physician_portal']['name'] = $portal->name;
 			$data['physician_portal']['content'] = get_field( 'portal_content', $portal );
 			$data['physician_portal']['url'] = get_field( 'portal_url', $portal );
@@ -2760,7 +2760,7 @@
 
 			}
 
-			$data['physician_residency_program'] = $physician_resident ? $resident_academic_department_name .', '. $resident_academic_name : '';
+			$data['physician_residency_program'] = $provider_resident ? $resident_academic_department_name .', '. $resident_academic_name : '';
 			$boards = get_field( 'physician_boards', $postId );
 			$data['physician_boards'] ='';
 
