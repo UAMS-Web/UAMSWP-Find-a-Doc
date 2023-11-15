@@ -4401,7 +4401,7 @@
 				$document_file = get_sub_field('document_file');
 				$document_url = user_trailingslashit($document_file['url']);
 				$data['clinical_resource_document'][$i]['title'] = $document_title;
-				$data['clinical_resource_document'][$i]['url'] = $document_title;
+				$data['clinical_resource_document'][$i]['url'] = $document_url;
 				$i++;
 				
 			} // endwhile
