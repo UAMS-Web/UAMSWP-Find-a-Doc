@@ -1034,14 +1034,27 @@ function location_save_post_after( $post_id ) {
 			}
 
 // Conditional Logic to check if Find-a-Doc Settings are set to allow MyChart Scheduling
-function uamswp_mychart_scheduling_query($field) {
-    // Set to field name for option
-    if(get_field('mychart_scheduling_query_system', 'option')){
-		return $field;
-    }
-    else{
-        return;
-    }
-}
-// Make sure to use correct field key for tab
-add_filter('acf/prepare_field/key=field_location_scheduling_tab', 'uamswp_mychart_scheduling_query', 20);
+
+	function uamswp_mychart_scheduling_query($field) {
+
+		/**
+		 * Set to field name for option
+		 */
+
+		if ( get_field( 'mychart_scheduling_query_system', 'option' ) ) {
+
+			return $field;
+
+		} else {
+
+			return;
+
+		}
+
+	}
+
+	/**
+	 * Make sure to use correct field key for tab
+	 */
+
+	add_filter('acf/prepare_field/key=field_location_scheduling_tab', 'uamswp_mychart_scheduling_query', 20);
