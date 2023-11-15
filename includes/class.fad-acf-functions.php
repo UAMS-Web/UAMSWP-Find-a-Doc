@@ -893,12 +893,14 @@ function location_save_post_after( $post_id ) {
 		add_filter('acf/render_field_settings/type=image', 'acf_image_aspect_ratio_settings', 20);
 		
 		function acf_image_aspect_ratio_settings($field) {
-			// the technique used for adding multiple fields to a
-			// single setting is copied directly from the ACF Image
-			// field code. anything that ACF does can be replicated,
-			// you just need to look at how Elliot does it
-			// also, any ACF field type can be used as a setting
-			// field for other field types
+
+			/**
+			 * The technique used for adding multiple fields to a single setting is copied
+			 * directly from the ACF Image field code. Anything that ACF does can be
+			 * replicated, you just need to look at how Elliot does it also, any ACF field
+			 * type can be used as a setting field for other field types.
+			 */
+
 			$args = array(
 				'name' => 'ratio_width',
 				'type' => 'number',
@@ -909,6 +911,7 @@ function location_save_post_after( $post_id ) {
 				'step' => 1,
 				'prepend' => __('Width'),
 			);
+
 			acf_render_field_setting($field, $args);
 
 			$args = array(
@@ -921,13 +924,14 @@ function location_save_post_after( $post_id ) {
 				'step' => 1,
 				'prepend' => __('Height'),
 				// this how we append a setting to the previous one
-				'wrapper'		=> array(
+				'wrapper' => array(
 					'data-append' => 'ratio_width',
 					'width' => '',
 					'class' => '',
 					'id' => ''
 				)
 			);
+
 			acf_render_field_setting($field, $args);
 
 			$args = array(
@@ -938,15 +942,17 @@ function location_save_post_after( $post_id ) {
 				'min' => 0,
 				'step' => .5,
 				'prepend' => __('&plusmn;'),
-				'append'		=> __('%'),
-				'wrapper'		=> array(
+				'append' => __('%'),
+				'wrapper' => array(
 					'data-append' => 'ratio_width',
 					'width' => '',
 					'class' => '',
 					'id' => ''
 				)
 			);
+
 			acf_render_field_setting($field, $args);
+
 		} // end function acf_image_aspect_ratio_settings
 
 	// Add filter to validate images to ratio
