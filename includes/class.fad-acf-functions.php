@@ -713,31 +713,48 @@ function location_save_post_after( $post_id ) {
 		 * @param	(int|string) $post_id The post ID this block is saved to.
 		 */
 
-		function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
+		function fad_facetwp_blocks_callback(
+			$block, // array // RequiredThe block settings and attributes.
+			$content = '', // string // Optional // The block inner HTML (empty).
+			$is_preview = false, // bool // Optional // True during AJAX preview.
+			$post_id = 0 // (int|string) // Optional // The post ID this block is saved to.
+		) {
 
 			// Create id attribute allowing for custom "anchor" value.
-			$id = 'facetwp-block-' . $block['id'];
-			if( !empty($block['anchor']) ) {
-				$id = $block['anchor'];
-			}
+
+				$id = 'facetwp-block-' . $block['id'];
+
+				if ( !empty($block['anchor']) ) {
+
+					$id = $block['anchor'];
+
+				}
 
 			// Create class attribute allowing for custom "className" and "align" values.
-			$className = 'facetwp-blocks';
-			if( !empty($block['className']) ) {
-				$className .= ' ' . $block['className'];
-			}
-			if( !empty($block['align']) ) {
-				$className .= ' align' . $block['align'];
-			}
 
-			// Load values and assing defaults.
-			$heading = get_field('facetwp_block_heading') ?: 'Cards List';
-			$hideheading = get_field('facetwp_block_hide_heading');
-			$prefacets = get_field('facetwp_block_pre_template_facets');
-			$template = get_field('facetwp_block_facet_template');
-			$postfacets = get_field('facetwp_block_post_template_facets');
-			$pager = get_field('facetwp_block_include_pager');
-			$background_color = get_field('facetwp_block_background_color') ?: 'bg-white';
+				$className = 'facetwp-blocks';
+
+				if ( !empty($block['className']) ) {
+
+					$className .= ' ' . $block['className'];
+
+				}
+
+				if ( !empty($block['align']) ) {
+
+					$className .= ' align' . $block['align'];
+
+				}
+
+			// Load values and assign defaults.
+
+				$heading = get_field('facetwp_block_heading') ?: 'Cards List';
+				$hideheading = get_field('facetwp_block_hide_heading');
+				$prefacets = get_field('facetwp_block_pre_template_facets');
+				$template = get_field('facetwp_block_facet_template');
+				$postfacets = get_field('facetwp_block_post_template_facets');
+				$pager = get_field('facetwp_block_include_pager');
+				$background_color = get_field('facetwp_block_background_color') ?: 'bg-white';
 
 			?>
 			<section class="uams-module <?php echo $className; ?> <?php echo $background_color; ?>">
@@ -768,6 +785,7 @@ function location_save_post_after( $post_id ) {
 				</div>
 			</section>
 			<?php
+
 		}
 
 // Populate ACFE dynamic message fields with current value(s) defined in Find-a-Doc Settings
