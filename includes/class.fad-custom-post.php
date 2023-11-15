@@ -500,6 +500,7 @@
 		// Conditions
 
 			function create_clinical_conditions_taxonomy() {
+
 				$labels = array(
 					'name' => 'Conditions',
 					'singular_name' => 'Condition',
@@ -556,6 +557,7 @@
 		// Treatments and Procedures
 
 			function create_clinical_treatments_taxonomy() {
+
 				$labels = array(
 					'name' => 'Treatments and Procedures',
 					'singular_name' => 'Treatments and Procedures',
@@ -616,7 +618,7 @@
 			// 	$labels = array(
 			// 		'name' => 'Medical Specialties',
 			// 		'singular_name' => 'Medical Specialty',
-			// 		'menu_name' => 'Medical Specialty',
+			// 		'menu_name' => 'Medical Specialties',
 			// 		'all_items' => 'All Specialties',
 			// 		'parent_item' => 'Parent Specialty',
 			// 		'parent_item_colon' => 'Parent Specialty:',
@@ -659,8 +661,8 @@
 			// 		'rewrite' => $rewrite,
 			// 		'capabilities' => $capabilities,
 			// 		'show_in_rest' => true,
-			//   		'rest_base' => 'specialties',
-			//   		'rest_controller_class' => 'WP_REST_Terms_Controller',
+			// 			'rest_base' => 'specialties',
+			// 			'rest_controller_class' => 'WP_REST_Terms_Controller',
 			// 	);
 			// 	register_taxonomy( 'specialty', array( 'provider' ), $args );
 			//
