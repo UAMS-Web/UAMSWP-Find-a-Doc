@@ -671,7 +671,7 @@
 		// Clinical Departments
 
 			function create_departments_taxonomy() {
-		
+
 				$labels = array(
 					'name' => 'Clinical Departments',
 					'singular_name' => 'Clinical Departments',
@@ -729,6 +729,7 @@
 		// Service Lines
 
 			function create_service_line_taxonomy() {
+
 				$labels = array(
 					'name' => 'Service Lines',
 					'singular_name' => 'Service Lines',
@@ -793,6 +794,7 @@
 			 */
 
 			function create_degrees_taxonomy() {
+
 			$labels = array(
 					'name' => 'Medical Degrees',
 					'singular_name' => 'Medical Degrees',
@@ -857,6 +859,7 @@
 			 */
 
 			function create_patient_type_taxonomy() {
+
 				$labels = array(
 					'name' => 'Patient Types',
 					'singular_name' => 'Patient Type',
@@ -919,6 +922,7 @@
 			 */
 
 			function create_clinical_title_taxonomy() {
+
 				$labels = array(
 					'name' => 'Clinical Titles',
 					'singular_name' => 'Clinical Title',
@@ -985,6 +989,7 @@
 			 */
 
 			function create_clinical_admin_title_taxonomy() {
+
 				$labels = array(
 					'name' => 'Clinical Administrative Titles',
 					'singular_name' => 'Clinical Administrative Title',
@@ -1059,6 +1064,7 @@
 			 */
 
 			function create_affiliations_taxonomy() {
+
 			$labels = array(
 					'name' => 'Hospital Affiliations',
 					'singular_name' => 'Hospital Affiliations',
@@ -1111,6 +1117,7 @@
 		// Institute Affiliations
 
 			function create_institute_affiliations_taxonomy() {
+
 			$labels = array(
 					'name' => 'Institute Affiliations',
 					'singular_name' => 'Institute Affiliations',
@@ -1169,6 +1176,7 @@
 			 */
 
 			function create_languages_taxonomy() {
+
 				$labels = array(
 					'name' => 'Languages',
 					'singular_name' => 'Languages',
@@ -1282,6 +1290,7 @@
 			 */
 
 			function create_academic_position_taxonomy() {
+
 				$labels = array(
 					'name' => 'Position Types',
 					'singular_name' => 'Position Type',
@@ -1346,6 +1355,7 @@
 			 */
 
 			function create_academic_college_taxonomy() {
+
 				$labels = array(
 					'name' => 'Colleges',
 					'singular_name' => 'College',
@@ -1383,7 +1393,7 @@
 					'labels' => $labels,
 					'hierarchical' => true,
 					'public' => true,
-					'show_ui' => true,  //Made true to add / edit
+					'show_ui' => true, //Made true to add / edit
 					'meta_box_cb' => false,
 					'show_admin_column' => false,
 					'show_in_nav_menus' => false,
@@ -1399,6 +1409,7 @@
 		// Education and Training Organizations
 
 			function create_schools_taxonomy() {
+
 				$labels = array(
 					'name' => 'Education and Training Organizations',
 					'singular_name' => 'Education and Training Organization',
@@ -1436,7 +1447,7 @@
 					'labels' => $labels,
 					'hierarchical' => false,
 					'public' => true,
-					'show_ui' => true,  //Made true to add / edit
+					'show_ui' => true, //Made true to add / edit
 					'meta_box_cb' => false,
 					'show_admin_column' => false,
 					'show_in_nav_menus' => false,
@@ -1452,6 +1463,7 @@
 		// Residency Years
 
 			function create_residency_years_taxonomy() {
+
 				$labels = array(
 					'name' => 'Residency Years',
 					'singular_name' => 'Residency Year',
@@ -1489,7 +1501,7 @@
 					'labels' => $labels,
 					'hierarchical' => false,
 					'public' => true,
-					'show_ui' => true,  //Made true to add / edit
+					'show_ui' => true, //Made true to add / edit
 					'meta_box_cb' => false,
 					'show_admin_column' => false,
 					'show_in_nav_menus' => false,
@@ -1505,6 +1517,7 @@
 		// Academic Departments
 
 			function create_academic_departments_taxonomy() {
+
 				$labels = array(
 					'name' => 'Academic Departments',
 					'singular_name' => 'Academic Departments',
@@ -1540,7 +1553,7 @@
 					'labels' => $labels,
 					'hierarchical' => true,
 					'public' => true,
-					'show_ui' => true,  //Made true to add / edit
+					'show_ui' => true, //Made true to add / edit
 					'meta_box_cb' => false,
 					'show_admin_column' => false,
 					'show_in_nav_menus' => false,
@@ -1556,6 +1569,7 @@
 		// Specialty and Subspecialty Certificates
 
 			function create_boards_taxonomy() {
+
 				$labels = array(
 					'name' => 'Boards and Certifications',
 					'singular_name' => 'Board or Certification',
@@ -1589,7 +1603,7 @@
 					'labels' => $labels,
 					'hierarchical' => false,
 					'public' => true,
-					'show_ui' => true,  //Made true to add / edit
+					'show_ui' => true, //Made true to add / edit
 					'meta_box_cb' => false,
 					'show_admin_column' => false,
 					'show_in_nav_menus' => false,
@@ -1605,6 +1619,7 @@
 		// Health Care Professional Associations
 
 			function create_associations_taxonomy() {
+
 				$labels = array(
 					'name' => 'Associations',
 					'singular_name' => 'Association',
@@ -1638,7 +1653,7 @@
 					'labels' => $labels,
 					'hierarchical' => false,
 					'public' => true,
-					'show_ui' => true,  //Made true to add / edit
+					'show_ui' => true, //Made true to add / edit
 					'meta_box_cb' => false,
 					'show_admin_column' => false,
 					'show_in_nav_menus' => false,
@@ -1706,7 +1721,7 @@
 					'labels' => $labels,
 					'hierarchical' => false,
 					'public' => true,
-					'show_ui' => true,  //Made true to add / edit
+					'show_ui' => true, //Made true to add / edit
 					'meta_box_cb' => false,
 					'show_admin_column' => false,
 					'show_in_nav_menus' => false,
@@ -1733,6 +1748,7 @@
 			 */
 
 			function create_portal_taxonomy() {
+
 				$labels = array(
 					'name' => 'Portals',
 					'singular_name' => 'Portal',
@@ -1803,6 +1819,7 @@
 			 */
 
 			function create_academic_title_taxonomy() {
+
 				$labels = array(
 					'name' => 'Faculty Titles',
 					'singular_name' => 'Faculty Title',
@@ -1884,6 +1901,7 @@
 			 */
 
 			function create_academic_admin_title_taxonomy() {
+
 				$labels = array(
 					'name' => 'Academic Administrative Titles',
 					'singular_name' => 'Academic Administrative Title',
@@ -2248,7 +2266,10 @@
 			 */
 
 			function create_building_taxonomy() {
-				// Plugin assumes there is a 'None' taxonomy item with slug '_none'
+
+				/**
+				 * Plugin assumes there is a 'None' taxonomy item with slug '_none'
+				 */
 
 				$labels = array(
 					'name' => 'Buildings',
@@ -2304,8 +2325,9 @@
 	// Add roles
 
 		function add_roles_on_plugin_activation() {
+
 			add_role( 'doc_editor', 'Doc Profile Editor',
-					array( 	'read' => true,
+					array( 'read' => true,
 							'level_1' => true, // Dropdown as author support
 							'read_physician' => true,
 							'edit_physician' => true,
@@ -2331,7 +2353,7 @@
 						)
 			);
 			add_role( 'doc_admin', 'Doc Profile Admin',
-					array( 	'read' => true,
+					array( 'read' => true,
 							'level_1' => true, // Dropdown as author support
 							'read_physician' => true,
 							'edit_physician' => true,
@@ -2355,6 +2377,7 @@
 							'edit_files' => true,
 						)
 				);
+
 		}
 
 		// register_activation_hook( __FILE__, 'add_roles_on_plugin_activation' );
@@ -2374,6 +2397,7 @@
 	// Assign roles a capability
 
 		function add_theme_caps() {
+
 			// gets the author role
 			$role = get_role( 'administrator' );
 
@@ -2431,6 +2455,7 @@
 			$role->add_cap( 'edit_others_clinical_resources');
 			$role->add_cap( 'publish_clinical_resources');
 			$role->add_cap( 'read_private_clinical_resources');
+
 		}
 
 		add_action( 'admin_init', 'add_theme_caps');
@@ -2438,6 +2463,7 @@
 // Remove the taxonomy meta boxes [slugnamediv]
 
 	function remove_provider_meta() {
+
 		remove_meta_box( 'conditiondiv', 'provider', 'side' );
 		remove_meta_box( 'specialtydiv', 'provider', 'side' );
 		remove_meta_box( 'departmentdiv', 'provider', 'side' );
@@ -2452,29 +2478,38 @@
 		remove_meta_box( 'location_typediv', 'location', 'side' );
 		remove_meta_box( 'buildingdiv', 'location', 'side' );
 		remove_meta_box( 'gmb_cat_locationdiv', 'location', 'side' );
+
 	}
 
 	add_action( 'admin_menu' , 'remove_provider_meta' );
 
 // Styles for ACF Fields
 
-	add_action('admin_head', 'acf_hide_title');
+	add_action( 'admin_head', 'acf_hide_title' );
 
 	function acf_hide_title() {
-	echo '<style>
+
+	echo
+	'<style>
 		.acf-field.hide-acf-title {
 		border: none;
 		padding: 6px 12px;
 		}
+
 		.acf-field.hide-acf-border,
 		.acf-field[data-width]+.acf-field[data-width].hide-acf-border {
 		border-color: transparent;
 		}
+
 		.hide-acf-title .acf-label {
 			display: none;
 		}
-		.acf-field.pbn { padding-bottom:0; }
+
+		.acf-field.pbn {
+			padding-bottom:0;
+		}
 	</style>';
+
 	}
 
 // Changes strings referencing Featured Images for a post type
@@ -2485,18 +2520,18 @@
 	 * In this example, the post type in the filter name is "employee"
 	 * and the new reference in the labels is "headshot".
 	 *
-	 * @see 	https://developer.wordpress.org/reference/hooks/post_type_labels_post_type/
+	 * @see	https://developer.wordpress.org/reference/hooks/post_type_labels_post_type/
 	 *
-	 * @param 		object 		$labels 		Current post type labels
-	 * @return 		object 					Modified post type labels
+	 * @param	object	$labels	Current post type labels
+	 * @return	object			Modified post type labels
 	 */
 
 	function change_featured_image_labels_provider( $labels ) {
 
-		$labels->featured_image 	= 'Headshot';
-		$labels->set_featured_image 	= 'Set headshot';
-		$labels->remove_featured_image 	= 'Remove headshot';
-		$labels->use_featured_image 	= 'Use as headshot';
+		$labels->featured_image = 'Headshot';
+		$labels->set_featured_image = 'Set headshot';
+		$labels->remove_featured_image = 'Remove headshot';
+		$labels->use_featured_image = 'Use as headshot';
 
 		return $labels;
 
@@ -2509,6 +2544,7 @@
 	// Add REST API support to Teams Meta.
 
 		function rest_api_provider_meta() {
+
 			register_rest_field('provider', 'provider_meta', array(
 					'get_callback' => 'get_provider_meta',
 					'update_callback' => null,
@@ -2545,32 +2581,40 @@
 					'schema' => null,
 				)
 			);
+
 		}
 
 	// Providers API
 
 		function get_provider_meta($object) {
+
 			$postId = $object['id'];
 			//Provider
-			$data['physician_first_name'] = get_field('physician_first_name', $postId);
+			$data['physician_first_name'] = get_field( 'physician_first_name', $postId );
 			$data['physician_middle_name'] = get_field( 'physician_middle_name', $postId );
 			$data['physician_last_name'] = get_field( 'physician_last_name', $postId );
-			$degrees = get_field('physician_degree', $postId );
+			$degrees = get_field( 'physician_degree', $postId );
 			$degree_list = '';
+
 			if ( $degrees ) {
-				foreach( $degrees as $degree ):
-					$degree_name = get_term( $degree, 'degree');
+
+				foreach ( $degrees as $degree ) {
+
+					$degree_name = get_term( $degree, 'degree' );
 					$degree_list .= $degree_list != '' ? ', ' : '';
 					$degree_list .= $degree_name->name;
-				endforeach;
+
+				} // endforeach
+
 			}
-			$full_name = get_field('physician_first_name', $postId) .' ' .(get_field('physician_middle_name', $postId) ? get_field('physician_middle_name', $postId) . ' ' : '') . get_field('physician_last_name', $postId) . (get_field('physician_pedigree', $postId) ? '&nbsp;' . get_field('physician_pedigree', $postId ) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
-			$physician_resident = get_field('physician_resident', $postId);
+
+			$full_name = get_field( 'physician_first_name', $postId ) .' ' .(get_field( 'physician_middle_name', $postId ) ? get_field( 'physician_middle_name', $postId ) . ' ' : '') . get_field( 'physician_last_name', $postId ) . (get_field( 'physician_pedigree', $postId ) ? '&nbsp;' . get_field( 'physician_pedigree', $postId ) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+			$physician_resident = get_field( 'physician_resident', $postId );
 			$physician_resident_name = 'Resident Physician';
-			$physician_title = get_field('physician_title', $postId);
+			$physician_title = get_field( 'physician_title', $postId );
 			$physician_title_name = $physician_resident ? $physician_resident_name : get_term( $physician_title, 'clinical_title' )->name;
-			$physician_service_line = get_field('physician_service_line', $postId);
-			$resident_profile_group = get_field('physician_resident_profile_group',$postId);
+			$physician_service_line = get_field( 'physician_service_line', $postId );
+			$resident_profile_group = get_field( 'physician_resident_profile_group', $postId );
 			$resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
 			$resident_academic_department_name = get_term( $resident_academic_department, 'academic_department' )->name;
 			$resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
@@ -2580,27 +2624,33 @@
 			$resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
 			$data['physician_full_name'] = $full_name;
 			//Physician Data
-			$data['physician_title'] = $physician_title_name; //(get_field('physician_title', $postId) ? get_term( get_field('physician_title', $postId), 'clinical_title' )->name : '');
+			$data['physician_title'] = $physician_title_name; //(get_field( 'physician_title', $postId ) ? get_term( get_field( 'physician_title', $postId ), 'clinical_title' )->name : '');
 			$data['physician_service_line'] = $physician_service_line ? get_term( $physician_service_line, 'service_line' )->name : '';
 			$data['physician_clinical_bio'] = get_field( 'physician_clinical_bio', $postId );
-			$data['physician_short_clinical_bio'] = get_field('physician_short_clinical_bio', $postId) ? get_field( 'physician_short_clinical_bio', $postId) : wp_trim_words( get_field( 'physician_clinical_bio', $postId ), 30, ' &hellip;' );
+			$data['physician_short_clinical_bio'] = get_field( 'physician_short_clinical_bio', $postId ) ? get_field( 'physician_short_clinical_bio', $postId ) : wp_trim_words( get_field( 'physician_clinical_bio', $postId ), 30, ' &hellip;' );
 			$data['physician_gender'] = get_field( 'physician_gender', $postId );
 			$data['physician_accepting_new_patients'] = get_post_meta( $postId, 'physician_accepting_patients', true );
 			$data['physician_second_opinion'] = get_field( 'physician_second_opinion', $postId );
-			$patients = get_field('physician_patient_types',$postId);
+			$patients = get_field( 'physician_patient_types', $postId );
 			$patient_list = '';
-			if( $patients ) {
-				foreach( $patients as $patient ):
-					$patient_name = get_term( $patient, 'patient_type');
+
+			if ( $patients ) {
+
+				foreach ( $patients as $patient ) {
+
+					$patient_name = get_term( $patient, 'patient_type' );
 					$patient_list .= $patient_list != '' ? ', ' : '';
 					$patient_list .= $patient_name->name;
-				endforeach;
+
+				} // endforeach
+
 			}
+
 			$data['physician_patient_types'] = $patient_list;
 			$data['physician_npi'] = get_field( 'physician_npi', $postId );
 			$data['physician_youtube_link'] = get_field( 'physician_youtube_link', $postId );
 			$data['physician_hidden'] = get_field( 'physician_hidden', $postId );
-			$podcast_name = get_field('physician_podcast_name',$postId);
+			$podcast_name = get_field( 'physician_podcast_name', $postId );
 			$data['provider_podcast'] = '<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
 			</script>
 			<script type="text/javascript">
@@ -2613,83 +2663,124 @@
 			}
 			</style>
 			<div class="content-width mt-8" id="radiomd-embedded-filtered-tag"></div>';
-			$languages = get_field('physician_languages',$postId);
+			$languages = get_field( 'physician_languages', $postId );
 			$language_list = '';
+
 			if ( $languages ) {
-				foreach( $languages as $language ):
-					$language_name = get_term( $language, 'language');
+
+				foreach ( $languages as $language ) {
+
+					$language_name = get_term( $language, 'language' );
 					$language_list .= $language_list != '' ? ', ' : '';
 					$language_list .= $language_name->name;
-				endforeach;
+
+				} // endforeach
+
 			}
+
 			$data['physician_languages'] = $language_list;
-			$data['physician_eligible_appointments'] = $physician_resident ? 0 : get_field('physician_eligible_appointments',$postId);
+			$data['physician_eligible_appointments'] = $physician_resident ? 0 : get_field( 'physician_eligible_appointments', $postId );
 			$data['physician_thumbnail'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center');
 			$data['physician_photo'] = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
-			$data['physician_referral_required'] = get_field('physician_referral_required', $postId);
-			$physician_portal = get_field('physician_portal', $postId);
-			$portal = get_term($physician_portal, 'portal');
+			$data['physician_referral_required'] = get_field( 'physician_referral_required', $postId );
+			$physician_portal = get_field( 'physician_portal', $postId );
+			$portal = get_term( $physician_portal, 'portal' );
 			$data['physician_portal']['name'] = $portal->name;
-			$data['physician_portal']['content'] = get_field('portal_content', $portal);
-			$data['physician_portal']['url'] = get_field('portal_url', $portal);
-			//$data['physician_clinical_admin_title'] = get_field('physician_clinical_admin_title', $postId);
-			$data['physician_clinical_focus'] = get_field('physician_clinical_focus',$postId);
-			//$data['physician_awards'] = get_field('physician_awards',$postId);
-			//$data['physician_additional_info'] = get_field('physician_additional_info',$postId);
+			$data['physician_portal']['content'] = get_field( 'portal_content', $portal );
+			$data['physician_portal']['url'] = get_field( 'portal_url', $portal );
+			//$data['physician_clinical_admin_title'] = get_field( 'physician_clinical_admin_title', $postId );
+			$data['physician_clinical_focus'] = get_field( 'physician_clinical_focus', $postId );
+			//$data['physician_awards'] = get_field( 'physician_awards', $postId );
+			//$data['physician_additional_info'] = get_field( 'physician_additional_info', $postId );
 			// Academic
-			//$data['physician_college_affiliation'] = get_field('physician_academic_college',$postId);
-			$data['physician_academic_bio'] = get_field('physician_academic_bio',$postId);
-			$educations = get_field('physician_education',$postId);
-			if( ! empty( $educations ) ){
+			//$data['physician_college_affiliation'] = get_field( 'physician_academic_college', $postId );
+			$data['physician_academic_bio'] = get_field( 'physician_academic_bio', $postId );
+			$educations = get_field( 'physician_education', $postId );
+
+			if ( ! empty( $educations ) ){
+
 				$i = 0;
+
 				foreach ($educations as $education) {
-					$data['physician_education'][$i]['type'] = get_term( $education['education_type'], 'educationtype')->name;
-					$data['physician_education'][$i]['school'] = get_term( $education['school'], 'school')->name;
+
+					$data['physician_education'][$i]['type'] = get_term( $education['education_type'], 'educationtype' )->name;
+					$data['physician_education'][$i]['school'] = get_term( $education['school'], 'school' )->name;
 					$data['physician_education'][$i]['description'] = $education['description'];
 					$i++;
+
 				}
+
 			}
-			$academic_appointments = get_field('physician_academic_appointment',$postId);
-			if( ! empty( $academic_appointments ) ){
+
+			$academic_appointments = get_field( 'physician_academic_appointment', $postId );
+
+			if ( ! empty( $academic_appointments ) ){
+
 				$i = 0;
+
 				foreach ($academic_appointments as $academic_appointment) {
-					$data['physician_faculty_appointment'][$i]['department'] = get_term( $academic_appointment['department'], 'academic_department')->name;
-					$data['physician_faculty_appointment'][$i]['title'] = get_term( $academic_appointment['academic_title_tax'], 'academic_title')->name;
+
+					$data['physician_faculty_appointment'][$i]['department'] = get_term( $academic_appointment['department'], 'academic_department' )->name;
+					$data['physician_faculty_appointment'][$i]['title'] = get_term( $academic_appointment['academic_title_tax'], 'academic_title' )->name;
 					$i++;
+
 				}
+
 			}
-			$academic_admin_titles = get_field('physician_academic_admin_title',$postId);
-			if( ! empty( $academic_admin_titles ) ){
+
+			$academic_admin_titles = get_field( 'physician_academic_admin_title', $postId );
+
+			if ( ! empty( $academic_admin_titles ) ){
+
 				$i = 0;
+
 				foreach ($academic_admin_titles as $academic_admin_title) {
-					$data['physician_academic_admin_role'][$i]['department'] = get_term( $academic_admin_title['department'], 'academic_department')->name;
-					$data['physician_academic_admin_role'][$i]['title'] = get_term( $academic_admin_title['academic_admin_title_tax'], 'academic_admin_title')->name;
+
+					$data['physician_academic_admin_role'][$i]['department'] = get_term( $academic_admin_title['department'], 'academic_department' )->name;
+					$data['physician_academic_admin_role'][$i]['title'] = get_term( $academic_admin_title['academic_admin_title_tax'], 'academic_admin_title' )->name;
 					$i++;
+
 				}
+
 			}
+
 			$data['physician_residency_program'] = $physician_resident ? $resident_academic_department_name .', '. $resident_academic_name : '';
-			$boards = get_field('physician_boards',$postId);
+			$boards = get_field( 'physician_boards', $postId );
 			$data['physician_boards'] ='';
-			if( ! empty( $boards ) ):
-				foreach ( $boards as $board ) :
-					$board_name = get_term( $board, 'board');
+
+			if ( ! empty( $boards ) ) {
+
+				foreach ( $boards as $board ) {
+
+					$board_name = get_term( $board, 'board' );
 					$data['physician_boards'] .= $data['physician_boards'] != '' ? ',' : '';
 					$data['physician_boards'] .= $board_name->name;
-				endforeach;
-			endif;
-			$associations = get_field('physician_associations',$postId);
+
+				} // endforeach
+
+			} // endif
+
+			$associations = get_field( 'physician_associations', $postId );
 			$data['physician_associations'] ='';
-			if( ! empty( $associations ) ):
-				foreach ( $associations as $association ) :
-					$association_name = get_term( $association, 'association');
+
+			if ( ! empty( $associations ) ) {
+
+				foreach ( $associations as $association ) {
+
+					$association_name = get_term( $association, 'association' );
 					$data['physician_associations'] .= $data['physician_associations'] != '' ? ',' : '';
 					$data['physician_associations'] .= $association_name->name;
-				endforeach;
-			endif;
+
+				} // endforeach
+
+			} // endif
+
 			// Locations
 			$i = 1;
-			$locations = get_field('physician_locations', $postId);
+			$locations = get_field( 'physician_locations', $postId );
+
 			foreach ($locations as $location) {
+
 				$data['physician_locations'][$location]['link'] = get_permalink( $location );
 				$data['physician_locations'][$location]['title'] = get_the_title( $location );
 				$data['physician_locations'][$location]['slug'] = get_post_field( 'post_name', $location );
@@ -2697,22 +2788,33 @@
 				// $data['physician_locations'][$location]['location_address_2'] = get_post_meta( $location, 'location_address_2', true );
 				// $data['physician_locations'][$location]['location_city'] = get_post_meta( $location, 'location_city', true );
 				// $data['physician_locations'][$location]['location_state'] = get_post_meta( $location, 'location_state', true );
-				// $data['physician_locations'][$location]['location_zip'] =  get_post_meta( $location, 'location_zip', true );
+				// $data['physician_locations'][$location]['location_zip'] = get_post_meta( $location, 'location_zip', true );
 				$data['physician_locations'][$location]['locations_phone_title'] = 'Clinic Phone Number';
 				$data['physician_locations'][$location]['location_clinic_phone'] = get_field( 'location_phone', $location );
-				$location_clinic_phone_query = get_field('location_clinic_phone_query', $location ); // separate number for (new) appointments?
+				$location_clinic_phone_query = get_field( 'location_clinic_phone_query', $location ); // separate number for (new) appointments?
+
 				if ($location_clinic_phone_query) {
-					$location_new_appointments_phone = get_field('location_new_appointments_phone', $location ); // phone number for (new) appointments
-					$location_appointment_phone_query = get_field('field_location_appointment_phone_query', $location ); // separate number for existing appointments?
+
+					$location_new_appointments_phone = get_field( 'location_new_appointments_phone', $location ); // phone number for (new) appointments
+					$location_appointment_phone_query = get_field( 'field_location_appointment_phone_query', $location ); // separate number for existing appointments?
+
 				} else {
+
 					$location_new_appointments_phone = '';
 					$location_appointment_phone_query = '0';
+
 				}
+
 				if ($location_appointment_phone_query) {
-					$location_return_appointments_phone = get_field('location_return_appointments_phone', $location ); // phone number for existing appointments
+
+					$location_return_appointments_phone = get_field( 'location_return_appointments_phone', $location ); // phone number for existing appointments
+
 				} else {
+
 					$location_return_appointments_phone = '';
+
 				}
+
 				$data['physician_locations'][$location]['location_phone_text'] = 'Appointment Phone Number'. ( $location_clinic_phone_query ? 's' : '' );
 				$data['physician_locations'][$location]['location_new_appointments_phone'] = $location_new_appointments_phone;
 				$data['physician_locations'][$location]['location_new_appointments_phonetext'] = ( $location_new_appointments_phone && $location_clinic_phone_query) ? 'New Patients' : 'New and Returning Patients';
@@ -2730,12 +2832,16 @@
 				$i++;
 				// $data['location_link'][$location] = get_post_permalink( $location );
 				// $data['location_title'] .= get_the_title( $location ) . ',';
+
 			}
+
 			// Conditions
-			$conditions_cpt = get_field('physician_conditions_cpt', $postId);
+			$conditions_cpt = get_field( 'physician_conditions_cpt', $postId );
 			$condition_list = '';
 			$i = 1;
-			if( $conditions_cpt ) {
+
+			if ( $conditions_cpt ) {
+
 				$args = (array(
 					'post_type' => 'condition',
 					'post_status' => 'publish',
@@ -2746,26 +2852,42 @@
 				));
 				$conditions_cpt_query = new WP_Query( $args );
 
-				if( $conditions_cpt && $conditions_cpt_query->posts ):
+				if (
+					$conditions_cpt
+					&&
+					$conditions_cpt_query->posts
+				) {
 
-					foreach( $conditions_cpt_query->posts as $condition ):
+					foreach ( $conditions_cpt_query->posts as $condition ) {
+
+
 						$data['physician_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
 						$data['physician_conditions'][$condition->ID]['title'] = $condition->post_title;
 						$data['physician_conditions'][$condition->ID]['slug'] = $condition->post_name;
 						$condition_list .= $condition->post_title;
-						if( count($conditions_cpt) > $i ) {
+
+						if ( count($conditions_cpt) > $i ) {
+
 							$condition_list .= ', ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['physician_conditions_list'] = $condition_list;
 			// Treatments
-			$treatments_cpt = get_field('physician_treatments_cpt', $postId);
+			$treatments_cpt = get_field( 'physician_treatments_cpt', $postId );
 			$treatment_list = '';
 			$i = 1;
-			if( $treatments_cpt ) {
+
+			if ( $treatments_cpt ) {
+
 				$args = (array(
 					'post_type' => 'treatment',
 					'post_status' => 'publish',
@@ -2775,26 +2897,42 @@
 					'post__in' => $treatments_cpt
 				));
 				$treatments_cpt_query = new WP_Query( $args );
-				if( $treatments_cpt && $treatments_cpt_query->posts ):
 
-					foreach( $treatments_cpt_query->posts as $treatment ):
+				if (
+					$treatments_cpt
+					&&
+					$treatments_cpt_query->posts
+				) {
+
+					foreach ( $treatments_cpt_query->posts as $treatment ) {
+
 						$data['physician_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
 						$data['physician_treatments'][$treatment->ID]['title'] = $treatment->post_title;
 						$data['physician_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
 						$treatment_list .= $treatment->post_title;
-						if( count($treatments_cpt) > $i ) {
+
+						if ( count($treatments_cpt) > $i ) {
+
 							$treatment_list .= ', ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['physician_treatments_list'] = $treatment_list;
 			// Expertise
-			$expertises = get_field('physician_expertise', $postId);
+			$expertises = get_field( 'physician_expertise', $postId );
 			$expertise_list = '';
 			$i = 1;
-			if( $expertises ) {
+
+			if ( $expertises ) {
+
 				$args = (array(
 					'post_type' => 'expertise',
 					'post_status' => 'publish',
@@ -2804,35 +2942,55 @@
 					'post__in' => $expertises
 				));
 				$expertise_query = new WP_Query( $args );
-				if( $expertises && $expertise_query->posts ):
 
-					foreach( $expertise_query->posts as $expertise ):
+				if (
+					$expertises
+					&&
+					$expertise_query->posts
+				) {
+
+					foreach ( $expertise_query->posts as $expertise ) {
+
 						$data['physician_expertise'][$expertise->ID]['link'] = get_permalink( $expertise->ID );
 						$data['physician_expertise'][$expertise->ID]['title'] = $expertise->post_title;
 						$data['physician_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
 						$expertise_list .= $expertise->post_title;
-						if( count($expertises) > $i ) {
+
+						if ( count($expertises) > $i ) {
+
 							$expertise_list .= ', ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['physician_expertise_list'] = $expertise_list;
 
 			// Research
-			$data['physician_research_bio'] = get_field('physician_research_bio',$postId);
-			$data['physician_research_interests'] = get_field('physician_research_interests',$postId);
-			$data['physician_research_profiles_link'] = get_field('physician_research_profiles_link',$postId);
-			$publications = get_field('physician_select_publications',$postId);
-			foreach( $publications as $publication) {
-				$data['physician_pubmed'][$i]['information'] = $publication['pubmed_information'];
-			}
-			$data['physician_pubmed_author_id'] = get_field('physician_pubmed_author_id',$postId);
-			$pubmed_author_number = get_field('physician_author_number',$postId);
-			$data['physician_pubmed_count'] = $pubmed_author_number ? $pubmed_author_number : '3';
+
+				$data['physician_research_bio'] = get_field( 'physician_research_bio', $postId );
+				$data['physician_research_interests'] = get_field( 'physician_research_interests', $postId );
+				$data['physician_research_profiles_link'] = get_field( 'physician_research_profiles_link', $postId );
+				$publications = get_field( 'physician_select_publications', $postId );
+
+				foreach ( $publications as $publication) {
+
+					$data['physician_pubmed'][$i]['information'] = $publication['pubmed_information'];
+
+				}
+
+				$data['physician_pubmed_author_id'] = get_field( 'physician_pubmed_author_id', $postId );
+				$pubmed_author_number = get_field( 'physician_author_number', $postId );
+				$data['physician_pubmed_count'] = $pubmed_author_number ? $pubmed_author_number : '3';
 
 			return $data;
+
 		}
 
 		add_action('rest_api_init', 'rest_api_provider_meta');
@@ -2840,376 +2998,646 @@
 	// Locations API
 
 		function get_location_meta($object) {
+
 			$postId = $object['id'];
 			$data['location_title'] = get_the_title( $postId );
 			$data['location_link'] = get_permalink($postId );
-			// Parent Location
-			$location_has_parent = get_field('location_parent',$postId);
-			$location_parent_id = get_field('location_parent_id',$postId);
-			$parent_title = ''; // Eliminate PHP errors
-			$parent_url = ''; // Eliminate PHP errors
-			$parent_location = ''; // Eliminate PHP errors
-			if ($location_has_parent && $location_parent_id) {
-				$parent_location = get_post( $location_parent_id );
-			}
-			// Get Post ID for Address & Image fields
-			if ($parent_location) {
-				$post_id = $parent_location->ID;
-				$parent_title = $parent_location->post_title;
-				$parent_url = get_permalink( $post_id );
-			} else {
-				$post_id = $postId;
-			}
-			// Parent Location
-			$data['location_parent']['id'] = $location_parent_id;
-			$data['location_parent']['title'] = $parent_title;
-			$data['location_parent']['url'] = $parent_url;
-			// Image values
-			$override_parent_photo = get_field('location_image_override_parent', $postId);
-			$override_parent_photo_featured = get_field('location_image_override_parent_featured', $postId);
-			$override_parent_photo_wayfinding = get_field('location_image_override_parent_wayfinding', $postId);
-			$override_parent_photo_gallery = get_field('location_image_override_parent_gallery', $postId);
-			// if ($override_parent_photo && $parent_location) { // If child location & override is true
-			if ($override_parent_photo && $parent_location && $override_parent_photo_wayfinding) {
-				$wayfinding_photo = get_field('location_wayfinding_photo', $postId);
-			} else { // Use parent/standard images
-				$wayfinding_photo = get_field('location_wayfinding_photo', $post_id);
-			}
-			if ($override_parent_photo && $parent_location && $override_parent_photo_gallery) {
-				$photo_gallery = get_field('location_photo_gallery', $postId);
-			} else { // Use parent/standard images
-				$photo_gallery = get_field('location_photo_gallery', $post_id);
-			}
 
-			$location_images = array();
-			if ($wayfinding_photo && !empty($wayfinding_photo)) {
-				$location_images[] = $wayfinding_photo;
-			}
-			if ($photo_gallery && !empty($photo_gallery)) {
-				foreach( $photo_gallery as $photo_gallery_image ) {
-					$location_images[] = $photo_gallery_image;
+			// Parent Location
+
+				$location_has_parent = get_field( 'location_parent', $postId );
+				$location_parent_id = get_field( 'location_parent_id', $postId );
+				$parent_title = ''; // Eliminate PHP errors
+				$parent_url = ''; // Eliminate PHP errors
+				$parent_location = ''; // Eliminate PHP errors
+
+				if (
+					$location_has_parent
+					&&
+					$location_parent_id
+				) {
+
+					$parent_location = get_post( $location_parent_id );
+
 				}
-			}
-			if( ! empty( $location_images ) ){
-				$i = 0;
-				foreach ($location_images as $location_images_item) {
-					$data['location_photo'][$i]['thumb'] = image_sizer($location_images_item, 60, 45, 'center', 'center');
-					$data['location_photo'][$i]['sml'] = image_sizer($location_images_item, 576, 324, 'center', 'center');
-					$data['location_photo'][$i]['med'] = image_sizer($location_images_item, 630, 473, 'center', 'center');
-					$data['location_photo'][$i]['lrg'] = image_sizer($location_images_item, 992, 558, 'center', 'center');
-					$i++;
+
+				// Get Post ID for Address & Image fields
+
+				if ( $parent_location ) {
+
+					$post_id = $parent_location->ID;
+					$parent_title = $parent_location->post_title;
+					$parent_url = get_permalink( $post_id );
+
+				} else {
+
+					$post_id = $postId;
+
 				}
-			}
-			//$data['location_photo'] = get_the_post_thumbnail($postId, 'aspect-16-9-small', ['class' => 'card-img-top']);
-			$map = get_field('location_map', $postId );
+
+				$data['location_parent']['id'] = $location_parent_id;
+				$data['location_parent']['title'] = $parent_title;
+				$data['location_parent']['url'] = $parent_url;
+
+			// Image values
+
+				$override_parent_photo = get_field( 'location_image_override_parent', $postId );
+				$override_parent_photo_featured = get_field( 'location_image_override_parent_featured', $postId );
+				$override_parent_photo_wayfinding = get_field( 'location_image_override_parent_wayfinding', $postId );
+				$override_parent_photo_gallery = get_field( 'location_image_override_parent_gallery', $postId );
+				
+				// if ($override_parent_photo && $parent_location) { // If child location & override is true
+
+				if (
+					$override_parent_photo
+					&&
+					$parent_location
+					&&
+					$override_parent_photo_wayfinding
+				) {
+
+					$wayfinding_photo = get_field( 'location_wayfinding_photo', $postId );
+
+				} else { // Use parent/standard images
+
+					$wayfinding_photo = get_field( 'location_wayfinding_photo', $post_id );
+
+				}
+
+				if (
+					$override_parent_photo
+					&&
+					$parent_location
+					&&
+					$override_parent_photo_gallery
+				) {
+
+					$photo_gallery = get_field( 'location_photo_gallery', $postId );
+
+				} else { // Use parent/standard images
+
+					$photo_gallery = get_field( 'location_photo_gallery', $post_id );
+
+				}
+
+				$location_images = array();
+
+				if (
+					$wayfinding_photo
+					&&
+					!empty($wayfinding_photo)
+				) {
+
+					$location_images[] = $wayfinding_photo;
+
+				}
+
+				if (
+					$photo_gallery
+					&&
+					!empty($photo_gallery)
+				) {
+
+					foreach ( $photo_gallery as $photo_gallery_image ) {
+
+						$location_images[] = $photo_gallery_image;
+
+					}
+
+				}
+
+				if ( ! empty( $location_images ) ) {
+
+					$i = 0;
+
+					foreach ( $location_images as $location_images_item ) {
+
+						$data['location_photo'][$i]['thumb'] = image_sizer($location_images_item, 60, 45, 'center', 'center');
+						$data['location_photo'][$i]['sml'] = image_sizer($location_images_item, 576, 324, 'center', 'center');
+						$data['location_photo'][$i]['med'] = image_sizer($location_images_item, 630, 473, 'center', 'center');
+						$data['location_photo'][$i]['lrg'] = image_sizer($location_images_item, 992, 558, 'center', 'center');
+						$i++;
+
+					}
+
+				}
+
+				//$data['location_photo'] = get_the_post_thumbnail($postId, 'aspect-16-9-small', ['class' => 'card-img-top']);
+
+			// Map / GPS
+
+				$map = get_field( 'location_map', $postId );
+				
+				$data['location_lat'] = $map['lat'];
+				$data['location_lng'] = $map['lng'];
+
 			$location_floor = get_field_object('location_building_floor', $postId );
 				$location_floor_value = '';
 				$location_floor_label = '';
+
 				if ( $location_floor ) {
+
 					$location_floor_value = $location_floor['value'];
 					$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+
 				}
-			$data['location_lat'] = $map['lat'];
-			$data['location_lng'] = $map['lng'];
-			$data['location_address_1'] = get_field('location_address_1', $postId );
-			$data['location_address_2'] = ( get_field('location_address_2', $postId ) ? get_field('location_address_2', $postId ) . '<br/>' : '');
-			$location_building = get_field('location_building', $postId );
+			$data['location_address_1'] = get_field( 'location_address_1', $postId );
+			$data['location_address_2'] = ( get_field( 'location_address_2', $postId ) ? get_field( 'location_address_2', $postId ) . '<br/>' : '');
+			$location_building = get_field( 'location_building', $postId );
+
 			if ($location_building) {
-				$building = get_term($location_building, 'building');
+
+				$building = get_term( $location_building, 'building' );
 				$building_slug = $building->slug;
 				$building_name = $building->name;
+
 			}
 			$data['location_building'] = $building_name;
 			$data['location_building_floor'] = $location_floor_label;
-			$data['location_suite'] = get_field('location_suite', $postId );
-			$data['location_city'] = get_field('location_city', $postId );
-			$data['location_state'] = get_field('location_state', $postId );
-			$data['location_zip'] = get_field('location_zip', $postId );
-			$location_region = get_field('location_region', $postId );
-			$data['location_hidden'] = get_field( 'location_hidden', $postId );
-			$data['location_region'] = get_term($location_region, 'region')->slug;
-			$types = get_field('location_type',$postId);
-			$data['location_types'] ='';
-			if( ! empty( $types ) ):
-				foreach ( $types as $type ) :
-					$type_name = get_term( $type, 'location_type');
-					$data['location_types'] .= $data['location_types'] != '' ? ',' : '';
-					$data['location_types'] .= $type_name->name;
-				endforeach;
-			endif;
-			$data['location_direction'] = get_field('location_direction', $postId);
-			$location_phone = get_field('location_phone', $postId );
-			$location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone">' . format_phone_us( $location_phone ) . '</a>';
-			$location_clinic_phone_query = get_field('location_clinic_phone_query', $postId ); // separate number for (new) appointments?
-			if ($location_clinic_phone_query) {
-				$location_new_appointments_phone = get_field('location_new_appointments_phone', $postId ); // phone number for (new) appointments
-				$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone">' . format_phone_us( $location_new_appointments_phone ) . '</a>';
-				$location_appointment_phone_query = get_field('field_location_appointment_phone_query', $postId ); // separate number for existing appointments?
-			} else {
-				$location_new_appointments_phone = '';
-				$location_appointment_phone_query = '0';
-			}
-			if ($location_appointment_phone_query) {
-				$location_return_appointments_phone = get_field('location_return_appointments_phone', $postId ); // phone number for existing appointments
-				$location_return_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_return_appointments_phone ) . '" class="icon-phone">' . format_phone_us( $location_return_appointments_phone ) . '</a>';
-			} else {
-				$location_return_appointments_phone = '';
-			}
-			$data['locations_phone_title'] = 'Clinic Phone Number';
-			$data['location_phone'] = $location_phone;
-			$data['location_phone_text'] = 'Appointment Phone Number'. ( $location_clinic_phone_query ? 's' : '' );
-			$data['location_new_appointments_phone'] = $location_new_appointments_phone;
-			$data['location_new_appointments_phonetext'] = ( $location_new_appointments_phone && $location_clinic_phone_query) ? 'New Patients' : 'New and Returning Patients';
-			$data['location_return_appointments_phone'] = $location_return_appointments_phone;
-			$data['location_return_appointments_phone_text'] = ($location_return_appointments_phone && $location_clinic_phone_query) ? 'Returning Patients' : '';
-			$data['location_fax'] = get_field('location_fax', $postId);
-			$additional_phones = get_field('location_phone_numbers', $postId);
-			$i=0;
-			foreach ($additional_phones as $additional_phone) {
-				$data['location_additional_phone_numbers'][$i]['text'] = $additional_phone['location_appointments_text'];
-				$data['location_additional_phone_numbers'][$i]['phone'] = $additional_phone['location_appointments_phone'];
-				$data['location_additional_phone_numbers'][$i]['additional_text'] = $additional_phone['location_appointments_additional_text'];
-				$i++;
-			}
+
+			// Suite
+
+				$data['location_suite'] = get_field( 'location_suite', $postId );
+
+			// City, State, ZIP Code
+
+				$data['location_city'] = get_field( 'location_city', $postId );
+				$data['location_state'] = get_field( 'location_state', $postId );
+				$data['location_zip'] = get_field( 'location_zip', $postId );
+
+			// Region
+
+				$location_region = get_field( 'location_region', $postId );
+
+			// Hidden
+
+				$data['location_hidden'] = get_field( 'location_hidden', $postId );
+
+			// Region
+
+				$data['location_region'] = get_term( $location_region, 'region' )->slug;
+
+			// Location Type
+
+				$types = get_field( 'location_type', $postId );
+				$data['location_types'] ='';
+
+				if ( !empty( $types ) ) {
+
+					foreach ( $types as $type ) {
+
+						$type_name = get_term( $type, 'location_type' );
+						$data['location_types'] .= $data['location_types'] != '' ? ',' : '';
+						$data['location_types'] .= $type_name->name;
+
+					} // endforeach
+
+				} // endif
+
+			// Directions From Parking Area
+
+				$data['location_direction'] = get_field( 'location_direction', $postId );
+
+			// Phone numbers
+
+				$location_phone = get_field( 'location_phone', $postId );
+				$location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone">' . format_phone_us( $location_phone ) . '</a>';
+				$location_clinic_phone_query = get_field( 'location_clinic_phone_query', $postId ); // separate number for (new) appointments?
+
+				if ( $location_clinic_phone_query ) {
+
+					$location_new_appointments_phone = get_field( 'location_new_appointments_phone', $postId ); // phone number for (new) appointments
+					$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone">' . format_phone_us( $location_new_appointments_phone ) . '</a>';
+					$location_appointment_phone_query = get_field( 'field_location_appointment_phone_query', $postId ); // separate number for existing appointments?
+
+				} else {
+
+					$location_new_appointments_phone = '';
+					$location_appointment_phone_query = '0';
+
+				}
+
+				if ( $location_appointment_phone_query ) {
+
+					$location_return_appointments_phone = get_field( 'location_return_appointments_phone', $postId ); // phone number for existing appointments
+					$location_return_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_return_appointments_phone ) . '" class="icon-phone">' . format_phone_us( $location_return_appointments_phone ) . '</a>';
+
+				} else {
+
+					$location_return_appointments_phone = '';
+
+				}
+
+				$data['locations_phone_title'] = 'Clinic Phone Number';
+				$data['location_phone'] = $location_phone;
+				$data['location_phone_text'] = 'Appointment Phone Number'. ( $location_clinic_phone_query ? 's' : '' );
+				$data['location_new_appointments_phone'] = $location_new_appointments_phone;
+				$data['location_new_appointments_phonetext'] = ( $location_new_appointments_phone && $location_clinic_phone_query) ? 'New Patients' : 'New and Returning Patients';
+				$data['location_return_appointments_phone'] = $location_return_appointments_phone;
+				$data['location_return_appointments_phone_text'] = ($location_return_appointments_phone && $location_clinic_phone_query) ? 'Returning Patients' : '';
+				$data['location_fax'] = get_field( 'location_fax', $postId );
+				$additional_phones = get_field( 'location_phone_numbers', $postId );
+
+				$i=0;
+
+				foreach ($additional_phones as $additional_phone) {
+
+					$data['location_additional_phone_numbers'][$i]['text'] = $additional_phone['location_appointments_text'];
+					$data['location_additional_phone_numbers'][$i]['phone'] = $additional_phone['location_appointments_phone'];
+					$data['location_additional_phone_numbers'][$i]['additional_text'] = $additional_phone['location_appointments_additional_text'];
+					$i++;
+
+				}
+
 			// Hours
-			$location_hours_group = get_field('location_hours_group', $postId);
-			$data['location_hours_variable'] = $location_hours_group['location_hours_variable'];
-			$data['location_hours_variable_info'] = $location_hours_group['location_hours_variable_info'];
-			$data['location_24_7'] = $location_hours_group['location_24_7'];
-			$data['location_modified'] = $location_hours_group['location_modified_hours'];
-			$data['location_modified_reason'] = $location_hours_group['location_modified_hours_reason'];
-			$data['location_modified_start_date'] = $location_hours_group['location_modified_hours_start_date'];
-			$data['location_modified_end'] = $location_hours_group['location_modified_hours_end'];
-			$data['location_modified_end_date'] = $location_hours_group['location_modified_hours_end_date'];
-			$modified_hours = $location_hours_group['location_modified_hours_group'];
-			$i=0;
-			foreach ($modified_hours as $modified_hour) {
-				$data['location_modified_hours'][$i]['title'] = $modified_hour['location_modified_hours_title'];
-				$data['location_modified_hours'][$i]['information'] = $modified_hour['location_modified_hours_information'];
-				$data['location_modified_hours'][$i]['times'] = $modified_hour['location_modified_hours_times'];
-				$data['location_modified_hours'][$i]['24_7'] = $modified_hour['location_modified_hours_24_7'];
-				$i++;
-			}
-			$hours = $location_hours_group['location_hours'];
-			$i=0;
-			foreach ($hours as $hour) :
-				$data['location_hours'][$i]['day'] = $hour['day'];
-				$data['location_hours'][$i]['closed'] = $hour['closed'];
-				$data['location_hours'][$i]['open'] = $hour['open'];
-				$data['location_hours'][$i]['close'] = $hour['close'];
-				$data['location_hours'][$i]['comment'] = $hour['comment'];
-				$i++;
-			endforeach;
-			// Holiday Hours - Deprecated for Modified Hours
-			// $holidayhours = get_field('location_holiday_hours',$postId);
-			// if ($holidayhours):
-			// 	$order = array();
-			// 	// populate order
-			// 	foreach( $holidayhours as $i => $row ) {
-			// 		$order[ $i ] = $row['date'];
-			// 	}
-			// 	// multisort
-			// 	array_multisort( $order, SORT_ASC, $holidayhours );
-			// 	$i = 1;
-			// 	foreach( $holidayhours as $holidayhour ):
-			// 		$data['location_holiday_hours'][$i]['day'] = $holidayhour['date'];
-			// 		$data['location_holiday_hours'][$i]['label'] = $holidayhour['label'];
-			// 		$data['location_holiday_hours'][$i]['closed'] = $holidayhour['closed'];
-			// 		$data['location_holiday_hours'][$i]['open'] = $holidayhour['open'];
-			// 		$data['location_holiday_hours'][$i]['close'] = $holidayhour['close'];
-			// 	endforeach;
-			// endif;
 
-			$data['location_after_hours'] = $location_hours_group['location_after_hours'];
+				$location_hours_group = get_field( 'location_hours_group', $postId );
+				$data['location_hours_variable'] = $location_hours_group['location_hours_variable'];
+				$data['location_hours_variable_info'] = $location_hours_group['location_hours_variable_info'];
+				$data['location_24_7'] = $location_hours_group['location_24_7'];
+				$data['location_modified'] = $location_hours_group['location_modified_hours'];
+				$data['location_modified_reason'] = $location_hours_group['location_modified_hours_reason'];
+				$data['location_modified_start_date'] = $location_hours_group['location_modified_hours_start_date'];
+				$data['location_modified_end'] = $location_hours_group['location_modified_hours_end'];
+				$data['location_modified_end_date'] = $location_hours_group['location_modified_hours_end_date'];
+				$modified_hours = $location_hours_group['location_modified_hours_group'];
+				$i=0;
 
-			$data['location_telemed_query'] = $location_hours_group['location_telemed_query']; // Is there telemedicine?
-			$data['location_telemed_patients'] = $location_hours_group['location_telemed_patients']; // New patients, existing or both?
-			$data['location_telemed_hours247'] = $location_hours_group['location_telemed_24_7']; // typically 24/7?
-			$data['location_telemed_hours'] = $location_hours_group['location_telemed_hours']; // telemedicine hours repeater
-			$data['location_telemed_modified'] = $location_hours_group['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
-			$data['location_telemed_modified_reason'] = $location_hours_group['location_telemed_modified_hours_reason']; // Why are there modified hours for telemedicine?
-			$data['location_telemed_modified_start'] = $location_hours_group['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
-			$data['location_telemed_modified_end'] = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
-			$data['location_telemed_modified_end_date'] = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
-			$data['location_telemed_modified_hours247'] = $location_hours_group['location_telemed_modified_hours_24_7'];
-			$data['location_telemed_info'] = get_field('location_telemed_descr_system', 'option');
+				foreach ( $modified_hours as $modified_hour ) {
 
-			$data['location_closing'] = get_field('location_closing',$postId); // true or false
-			$data['location_closing_date'] = get_field('location_closing_date',$postId);
-			$data['location_closing_length'] = get_field('location_closing_length',$postId);
-			$data['location_reopen_known'] = get_field('location_reopen_known',$postId);
-			$data['location_reopen_date'] = get_field('location_reopen_date',$postId);
-			$data['location_closing_info'] = get_field('location_closing_info',$postId);
-			$data['location_closing_telemed'] = get_field('location_closing_telemed',$postId);
+					$data['location_modified_hours'][$i]['title'] = $modified_hour['location_modified_hours_title'];
+					$data['location_modified_hours'][$i]['information'] = $modified_hour['location_modified_hours_information'];
+					$data['location_modified_hours'][$i]['times'] = $modified_hour['location_modified_hours_times'];
+					$data['location_modified_hours'][$i]['24_7'] = $modified_hour['location_modified_hours_24_7'];
+					$i++;
 
-			$data['location_prescription_query'] = get_field('location_prescription_query',$postId);
-			$data['location_prescription_type'] = get_field('location_prescription_type',$postId);
-			$data['location_prescription'] = get_field('location_prescription',$postId);
+				}
 
-			$data['location_about'] = get_field('location_about', $postId);
-			$data['location_appointment'] = get_field('location_appointment',$postId);
-			$data['location_appointment_bring'] = get_field('location_appointment_bring',$postId);
-			$location_portal = get_field('location_portal', $postId);
-			$portal = get_term($location_portal, 'portal');
-			$data['location_portal']['name'] = $portal->name;
-			$data['location_portal']['content'] = get_field('portal_content', $portal);
-			$data['location_portal']['url'] = get_field('portal_url', $portal);
+				$hours = $location_hours_group['location_hours'];
+				$i=0;
+
+				foreach ( $hours as $hour ) {
+
+					$data['location_hours'][$i]['day'] = $hour['day'];
+					$data['location_hours'][$i]['closed'] = $hour['closed'];
+					$data['location_hours'][$i]['open'] = $hour['open'];
+					$data['location_hours'][$i]['close'] = $hour['close'];
+					$data['location_hours'][$i]['comment'] = $hour['comment'];
+					$i++;
+
+				} // endforeach
+
+				// Holiday Hours - Deprecated for Modified Hours
+
+						// $holidayhours = get_field( 'location_holiday_hours', $postId );
+					//
+						// if ($holidayhours) {
+					//
+					// 	$order = array();
+					//
+					// 	// populate order
+					//
+					// 		foreach ( $holidayhours as $i => $row ) {
+					//
+					// 			$order[ $i ] = $row['date'];
+					//
+					// 		}
+					//
+					// 	// multisort
+					//
+					// 		array_multisort( $order, SORT_ASC, $holidayhours );
+					//
+					// 	$i = 1;
+					//
+					// 	foreach ( $holidayhours as $holidayhour ) {
+					//
+					// 		$data['location_holiday_hours'][$i]['day'] = $holidayhour['date'];
+					// 		$data['location_holiday_hours'][$i]['label'] = $holidayhour['label'];
+					// 		$data['location_holiday_hours'][$i]['closed'] = $holidayhour['closed'];
+					// 		$data['location_holiday_hours'][$i]['open'] = $holidayhour['open'];
+					// 		$data['location_holiday_hours'][$i]['close'] = $holidayhour['close'];
+					//
+					// 	} // endforeach
+					//
+					// } // endif
+
+				$data['location_after_hours'] = $location_hours_group['location_after_hours'];
+
+			// Telemedicine
+
+				$data['location_telemed_query'] = $location_hours_group['location_telemed_query']; // Is there telemedicine?
+				$data['location_telemed_patients'] = $location_hours_group['location_telemed_patients']; // New patients, existing or both?
+				$data['location_telemed_hours247'] = $location_hours_group['location_telemed_24_7']; // typically 24/7?
+				$data['location_telemed_hours'] = $location_hours_group['location_telemed_hours']; // telemedicine hours repeater
+				$data['location_telemed_modified'] = $location_hours_group['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
+				$data['location_telemed_modified_reason'] = $location_hours_group['location_telemed_modified_hours_reason']; // Why are there modified hours for telemedicine?
+				$data['location_telemed_modified_start'] = $location_hours_group['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
+				$data['location_telemed_modified_end'] = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
+				$data['location_telemed_modified_end_date'] = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
+				$data['location_telemed_modified_hours247'] = $location_hours_group['location_telemed_modified_hours_24_7'];
+				$data['location_telemed_info'] = get_field( 'location_telemed_descr_system', 'option' );
+
+			// Closing
+
+				$data['location_closing'] = get_field( 'location_closing', $postId ); // true or false
+				$data['location_closing_date'] = get_field( 'location_closing_date', $postId );
+				$data['location_closing_length'] = get_field( 'location_closing_length', $postId );
+				$data['location_reopen_known'] = get_field( 'location_reopen_known', $postId );
+				$data['location_reopen_date'] = get_field( 'location_reopen_date', $postId );
+				$data['location_closing_info'] = get_field( 'location_closing_info', $postId );
+				$data['location_closing_telemed'] = get_field( 'location_closing_telemed', $postId );
+
+			// Prescription information
+
+				$data['location_prescription_query'] = get_field( 'location_prescription_query', $postId );
+				$data['location_prescription_type'] = get_field( 'location_prescription_type', $postId );
+				$data['location_prescription'] = get_field( 'location_prescription', $postId );
+
+			// About the location
+
+				$data['location_about'] = get_field( 'location_about', $postId );
+
+			// Appointment information
+
+				$data['location_appointment'] = get_field( 'location_appointment', $postId );
+				$data['location_appointment_bring'] = get_field( 'location_appointment_bring', $postId );
+
+			// Portal
+
+				$location_portal = get_field( 'location_portal', $postId );
+				$portal = get_term( $location_portal, 'portal' );
+				$data['location_portal']['name'] = $portal->name;
+				$data['location_portal']['content'] = get_field( 'portal_content', $portal );
+				$data['location_portal']['url'] = get_field( 'portal_url', $portal );
 
 			// Alert with logic
-			$location_alert_title_sys = get_field('location_alert_heading_system', 'option');
-			$location_alert_text_sys = get_field('location_alert_body_system', 'option');
-			$location_alert_color_sys = get_field('location_alert_color_system', 'option');
 
-			$location_alert_suppress = get_field('location_alert_suppress',$postId);
-			$location_alert_modification = get_field('location_alert_modification',$postId);
+				$location_alert_title_sys = get_field( 'location_alert_heading_system', 'option' );
+				$location_alert_text_sys = get_field( 'location_alert_body_system', 'option' );
+				$location_alert_color_sys = get_field( 'location_alert_color_system', 'option' );
 
-			$location_alert_title_local = get_field('location_alert_heading',$postId);
-			$location_alert_text_local = get_field('location_alert_body',$postId);
-			$location_alert_color_local = get_field('location_alert_color',$postId);
+				$location_alert_suppress = get_field( 'location_alert_suppress', $postId );
+				$location_alert_modification = get_field( 'location_alert_modification', $postId );
 
-			$location_alert_title = $location_alert_title_sys;
-			if ( !empty($location_alert_title_local) && $location_alert_modification == 'override' ) {
-				$location_alert_title = $location_alert_title_local;
-			}
-			$location_alert_color = $location_alert_color_sys;
-			if ( $location_alert_modification == 'override' && $location_alert_color_local != 'inherit' ) {
-				$location_alert_color = $location_alert_color_local;
-			}
-			$location_alert_text = $location_alert_text_sys;
-			if ( $location_alert_modification == 'override' && !empty($location_alert_text_local) ) {
-				$location_alert_text = $location_alert_text_local;
-			} elseif ( $location_alert_modification == 'prepend' && !empty($location_alert_text_local) ) {
-				$location_alert_text = $location_alert_text_local . $location_alert_text_sys;
-			} elseif ( $location_alert_modification == 'append' && !empty($location_alert_text_local) ) {
-				$location_alert_text = $location_alert_text_sys . $location_alert_text_local;
-			}
-			if ( $location_alert_modification == 'suppress' ) {
-				$location_alert_suppress = true;
-				$location_alert_title = '';
-				$location_alert_text = '';
-			}
-			$data['location_alert_title'] = $location_alert_title ? $location_alert_title : '';
-			$data['location_alert_text'] = $location_alert_text ? $location_alert_text : '';
-			$data['location_alert_color'] = $location_alert_color ? $location_alert_color : 'alert-warning';
+				$location_alert_title_local = get_field( 'location_alert_heading', $postId );
+				$location_alert_text_local = get_field( 'location_alert_body', $postId );
+				$location_alert_color_local = get_field( 'location_alert_color', $postId );
 
-			$providers = get_field('physician_locations', $postId);
-			$provider_list = '';
-			$i = 1;
-			if( $providers ) {
-				$args = (array(
-					'post_type' => 'provider',
-					'post_status' => 'publish',
-					'orderby' => 'title',
-					'order' => 'ASC',
-					'posts_per_page' => -1,
-					'post__in' => $providers
-				));
-				$provider_query = new WP_Query( $args );
-				if( $providers && $provider_query->posts ):
+				$location_alert_title = $location_alert_title_sys;
 
-					foreach( $provider_query->posts as $provider ):
-						$data['location_provider'][$provider->ID]['link'] = get_permalink( $provider->ID );
-						$data['location_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
-						$data['location_provider'][$provider->ID]['slug'] = $provider->post_name;
-						$provider_list .= get_field('physician_full_name', $provider->ID);
-						if( count($providers) > $i ) {
-							$provider_list .= ' | ';
-						}
-						$i++;
-					endforeach;
-				endif;
-			}
-			$data['location_provider_list'] = $provider_list;
-			$expertises =  get_field('location_expertise', $postId);
-			$expertise_list = '';
-			$i = 1;
-			if( $expertises ) {
-				$args = (array(
-					'post_type' => 'expertise',
-					'post_status' => 'publish',
-					'orderby' => 'title',
-					'order' => 'ASC',
-					'posts_per_page' => -1,
-					'post__in' => $expertises
-				));
-				$expertise_query = new WP_Query( $args );
-				if( $expertises && $expertise_query->posts ):
+				if (
+					!empty($location_alert_title_local)
+					&&
+					$location_alert_modification == 'override'
+				) {
 
-					foreach( $expertise_query->posts as $expertise ):
-						$data['location_expertise'][$expertise->ID]['link'] = get_permalink( $expertise->ID );
-						$data['location_expertise'][$expertise->ID]['title'] = $expertise->post_title;
-						$data['location_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
-						$expertise_list .= $expertise->post_title;
-						if( count($expertises) > $i ) {
-							$expertise_list .= ', ';
-						}
-						$i++;
-					endforeach;
-				endif;
-			}
-			$data['location_expertise_list'] = $expertise_list;
-			$conditions_cpt = get_field('location_conditions_cpt', $postId);
-			$condition_list = '';
-			$i = 1;
-			if( $conditions_cpt ) {
-				$args = (array(
-					'post_type' => 'condition',
-					'post_status' => 'publish',
-					'orderby' => 'title',
-					'order' => 'ASC',
-					'posts_per_page' => -1,
-					'post__in' => $conditions_cpt
-				));
-				$conditions_cpt_query = new WP_Query( $args );
+					$location_alert_title = $location_alert_title_local;
 
-				if( $conditions_cpt && $conditions_cpt_query->posts ):
+				}
 
-					foreach( $conditions_cpt_query->posts as $condition ):
-						$data['location_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
-						$data['location_conditions'][$condition->ID]['title'] = $condition->post_title;
-						$data['location_conditions'][$condition->ID]['slug'] = $condition->post_name;
-						$condition_list .= $condition->post_title;
-						if( count($conditions_cpt) > $i ) {
-							$condition_list .= ', ';
-						}
-						$i++;
-					endforeach;
-				endif;
-			}
-			$data['location_conditions_list'] = $condition_list;
+				$location_alert_color = $location_alert_color_sys;
+
+				if (
+					$location_alert_modification == 'override'
+					&&
+					$location_alert_color_local != 'inherit'
+				) {
+
+					$location_alert_color = $location_alert_color_local;
+
+				}
+
+				$location_alert_text = $location_alert_text_sys;
+
+				if (
+					$location_alert_modification == 'override'
+					&&
+					!empty($location_alert_text_local)
+				) {
+
+					$location_alert_text = $location_alert_text_local;
+
+				} elseif ( $location_alert_modification == 'prepend' && !empty($location_alert_text_local) ) {
+
+					$location_alert_text = $location_alert_text_local . $location_alert_text_sys;
+
+				} elseif ( $location_alert_modification == 'append' && !empty($location_alert_text_local) ) {
+
+					$location_alert_text = $location_alert_text_sys . $location_alert_text_local;
+
+				}
+
+				if ( $location_alert_modification == 'suppress' ) {
+
+					$location_alert_suppress = true;
+					$location_alert_title = '';
+					$location_alert_text = '';
+
+				}
+				
+				$data['location_alert_title'] = $location_alert_title ? $location_alert_title : '';
+				$data['location_alert_text'] = $location_alert_text ? $location_alert_text : '';
+				$data['location_alert_color'] = $location_alert_color ? $location_alert_color : 'alert-warning';
+
+			// Providers
+
+				$providers = get_field( 'physician_locations', $postId );
+				$provider_list = '';
+
+				$i = 1;
+
+				if ( $providers ) {
+
+					$args = (array(
+						'post_type' => 'provider',
+						'post_status' => 'publish',
+						'orderby' => 'title',
+						'order' => 'ASC',
+						'posts_per_page' => -1,
+						'post__in' => $providers
+					));
+					$provider_query = new WP_Query( $args );
+
+					if (
+						$providers
+						&&
+						$provider_query->posts
+					) {
+
+						foreach ( $provider_query->posts as $provider ) {
+
+							$data['location_provider'][$provider->ID]['link'] = get_permalink( $provider->ID );
+							$data['location_provider'][$provider->ID]['title'] = get_field( 'physician_full_name', $provider->ID );
+							$data['location_provider'][$provider->ID]['slug'] = $provider->post_name;
+							$provider_list .= get_field( 'physician_full_name', $provider->ID );
+
+							if ( count($providers) > $i ) {
+
+								$provider_list .= ' | ';
+
+							}
+
+							$i++;
+
+						} // endforeach
+
+					} // endif
+
+				}
+
+				$data['location_provider_list'] = $provider_list;
+
+			// Areas of expertise
+
+				$expertises = get_field( 'location_expertise', $postId );
+				$expertise_list = '';
+				$i = 1;
+
+				if ( $expertises ) {
+
+					$args = (array(
+						'post_type' => 'expertise',
+						'post_status' => 'publish',
+						'orderby' => 'title',
+						'order' => 'ASC',
+						'posts_per_page' => -1,
+						'post__in' => $expertises
+					));
+					$expertise_query = new WP_Query( $args );
+
+
+					if (
+						$expertises
+						&&
+						$expertise_query->posts
+					) {
+
+						foreach ( $expertise_query->posts as $expertise ) {
+
+							$data['location_expertise'][$expertise->ID]['link'] = get_permalink( $expertise->ID );
+							$data['location_expertise'][$expertise->ID]['title'] = $expertise->post_title;
+							$data['location_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
+							$expertise_list .= $expertise->post_title;
+
+							if ( count($expertises) > $i ) {
+
+								$expertise_list .= ', ';
+
+							}
+
+							$i++;
+
+						} // endforeach
+
+					} // endif
+
+				}
+
+				$data['location_expertise_list'] = $expertise_list;
+
+			// Conditions
+
+				$conditions_cpt = get_field( 'location_conditions_cpt', $postId );
+				$condition_list = '';
+				$i = 1;
+
+				if ( $conditions_cpt ) {
+
+					$args = (array(
+						'post_type' => 'condition',
+						'post_status' => 'publish',
+						'orderby' => 'title',
+						'order' => 'ASC',
+						'posts_per_page' => -1,
+						'post__in' => $conditions_cpt
+					));
+					$conditions_cpt_query = new WP_Query( $args );
+
+					if (
+						$conditions_cpt
+						&&
+						$conditions_cpt_query->posts
+					) {
+
+						foreach ( $conditions_cpt_query->posts as $condition ) {
+
+							$data['location_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
+							$data['location_conditions'][$condition->ID]['title'] = $condition->post_title;
+							$data['location_conditions'][$condition->ID]['slug'] = $condition->post_name;
+							$condition_list .= $condition->post_title;
+
+							if ( count($conditions_cpt) > $i ) {
+
+								$condition_list .= ', ';
+
+							}
+
+							$i++;
+
+						} // endforeach
+
+					} // endif
+
+				}
+
+				$data['location_conditions_list'] = $condition_list;
+
 			// Treatments
-			$treatments_cpt = get_field('location_treatments_cpt', $postId);
-			$treatment_list = '';
-			$i = 1;
-			if( $treatments_cpt ) {
-				$args = (array(
-					'post_type' => 'treatment',
-					'post_status' => 'publish',
-					'orderby' => 'title',
-					'order' => 'ASC',
-					'posts_per_page' => -1,
-					'post__in' => $treatments_cpt
-				));
-				$treatments_cpt_query = new WP_Query( $args );
-				if( $treatments_cpt && $treatments_cpt_query->posts ):
 
-					foreach( $treatments_cpt_query->posts as $treatment ):
-						$data['location_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
-						$data['location_treatments'][$treatment->ID]['title'] = $treatment->post_title;
-						$data['location_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
-						$treatment_list .= $treatment->post_title;
-						if( count($treatments_cpt) > $i ) {
-							$treatment_list .= ', ';
-						}
-						$i++;
-					endforeach;
-				endif;
-			}
-			$data['location_treatments_list'] = $treatment_list;
-			$data['location_parking'] = get_field('location_parking', $postId);
-			$parking_map = get_field('location_parking_map', $postId);
-			$data['location_parking_link'] = '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'. $parking_map['lat'] .','. $parking_map['lng'] .'" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>';
-			$data['location_directions_link'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title($postId) .'">Get Directions</a>';
+				$treatments_cpt = get_field( 'location_treatments_cpt', $postId );
+				$treatment_list = '';
+				$i = 1;
+
+				if ( $treatments_cpt ) {
+
+					$args = (array(
+						'post_type' => 'treatment',
+						'post_status' => 'publish',
+						'orderby' => 'title',
+						'order' => 'ASC',
+						'posts_per_page' => -1,
+						'post__in' => $treatments_cpt
+					));
+					$treatments_cpt_query = new WP_Query( $args );
+
+					if (
+						$treatments_cpt
+						&&
+						$treatments_cpt_query->posts
+					) {
+
+						foreach ( $treatments_cpt_query->posts as $treatment ) {
+
+							$data['location_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
+							$data['location_treatments'][$treatment->ID]['title'] = $treatment->post_title;
+							$data['location_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
+							$treatment_list .= $treatment->post_title;
+
+							if ( count($treatments_cpt) > $i ) {
+
+								$treatment_list .= ', ';
+
+							}
+
+							$i++;
+
+						} // endforeach
+
+					} // endif
+
+				}
+
+				$data['location_treatments_list'] = $treatment_list;
+			
+			// Parking information
+
+				$data['location_parking'] = get_field( 'location_parking', $postId );
+				$parking_map = get_field( 'location_parking_map', $postId );
+				$data['location_parking_link'] = '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'. $parking_map['lat'] .','. $parking_map['lng'] .'" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>';
+			
+			// Directions to location
+
+				$data['location_directions_link'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title($postId) .'">Get Directions</a>';
 
 			return $data;
 
@@ -3220,10 +3648,11 @@
 	// Areas of Expertise API
 
 		function get_expertise_meta($object) {
+
 			$postId = $object['id'];
 			$data['expertise_title'] = get_the_title( $postId );
 			$data['expertise_link'] = get_permalink($postId );
-			$podcast_name = get_field('expertise_podcast_name', $postId);
+			$podcast_name = get_field( 'expertise_podcast_name', $postId );
 			$data['expertise_podcast'] = '<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
 			</script>
 			<script type="text/javascript">
@@ -3237,10 +3666,12 @@
 			</style>
 			<div class="content-width mt-8" id="radiomd-embedded-filtered-tag"></div>';
 			// Conditions
-			$conditions_cpt = get_field('expertise_conditions_cpt', $postId);
+			$conditions_cpt = get_field( 'expertise_conditions_cpt', $postId );
 			$condition_list = '';
 			$i = 1;
-			if( $conditions_cpt ) {
+
+			if ( $conditions_cpt ) {
+
 				$args = (array(
 					'post_type' => 'condition',
 					'post_status' => 'publish',
@@ -3251,26 +3682,41 @@
 				));
 				$conditions_cpt_query = new WP_Query( $args );
 
-				if( $conditions_cpt && $conditions_cpt_query->posts ):
+				if (
+					$conditions_cpt
+					&&
+					$conditions_cpt_query->posts
+				) {
 
-					foreach( $conditions_cpt_query->posts as $condition ):
+					foreach ( $conditions_cpt_query->posts as $condition ) {
+
 						$data['expertise_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
 						$data['expertise_conditions'][$condition->ID]['title'] = $condition->post_title;
 						$data['expertise_conditions'][$condition->ID]['slug'] = $condition->post_name;
 						$condition_list .= $condition->post_title;
-						if( count($conditions_cpt) > $i ) {
+
+						if ( count($conditions_cpt) > $i ) {
+
 							$condition_list .= ', ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['expertise_conditions_list'] = $condition_list;
 			// Treatments
-			$treatments_cpt = get_field('expertise_treatments_cpt', $postId);
+			$treatments_cpt = get_field( 'expertise_treatments_cpt', $postId );
 			$treatment_list = '';
 			$i = 1;
-			if( $treatments_cpt ) {
+
+			if ( $treatments_cpt ) {
+
 				$args = (array(
 					'post_type' => 'treatment',
 					'post_status' => 'publish',
@@ -3280,26 +3726,42 @@
 					'post__in' => $treatments_cpt
 				));
 				$treatments_cpt_query = new WP_Query( $args );
-				if( $treatments_cpt && $treatments_cpt_query->posts ):
 
-					foreach( $treatments_cpt_query->posts as $treatment ):
+				if (
+					$treatments_cpt
+					&&
+					$treatments_cpt_query->posts
+				) {
+
+					foreach ( $treatments_cpt_query->posts as $treatment ) {
+
 						$data['expertise_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
 						$data['expertise_treatments'][$treatment->ID]['title'] = $treatment->post_title;
 						$data['expertise_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
 						$treatment_list .= $treatment->post_title;
-						if( count($treatments_cpt) > $i ) {
+
+						if ( count($treatments_cpt) > $i ) {
+
 							$treatment_list .= ', ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['expertise_treatments_list'] = $treatment_list;
 			// Providers
-			$providers = get_field('physician_expertise', $postId);
+			$providers = get_field( 'physician_expertise', $postId );
 			$provider_list = '';
 			$i = 1;
-			if( $providers ) {
+
+			if ( $providers ) {
+
 				$args = (array(
 					'post_type' => 'provider',
 					'post_status' => 'publish',
@@ -3309,26 +3771,42 @@
 					'post__in' => $providers
 				));
 				$provider_query = new WP_Query( $args );
-				if( $providers && $provider_query->posts ):
 
-					foreach( $provider_query->posts as $provider ):
+				if (
+					$providers
+					&&
+					$provider_query->posts
+				) {
+
+					foreach ( $provider_query->posts as $provider ) {
+
 						$data['expertise_provider'][$provider->ID]['link'] = get_permalink( $provider->ID );
-						$data['expertise_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
+						$data['expertise_provider'][$provider->ID]['title'] = get_field( 'physician_full_name', $provider->ID );
 						$data['expertise_provider'][$provider->ID]['slug'] = $provider->post_name;
-						$provider_list .= get_field('physician_full_name', $provider->ID);
-						if( count($providers) > $i ) {
+						$provider_list .= get_field( 'physician_full_name', $provider->ID );
+
+						if ( count($providers) > $i ) {
+
 							$provider_list .= ' | ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['expertise_provider_list'] = $provider_list;
 			// Locations
-			$locations = get_field('location_expertise', $postId);
+			$locations = get_field( 'location_expertise', $postId );
 			$location_list = '';
 			$i = 1;
-			if( $locations ) {
+
+			if ( $locations ) {
+
 				$args = (array(
 					'post_type' => 'location',
 					'order' => 'ASC',
@@ -3338,20 +3816,34 @@
 					'post__in' => $locations
 				));
 				$location_query = new WP_Query( $args );
-				if( $locations && $location_query->posts ):
 
-					foreach( $location_query->posts as $location ):
+				if (
+					$locations
+					&&
+					$location_query->posts
+				) {
+
+					foreach ( $location_query->posts as $location ) {
+
 						$data['expertise_location'][$location->ID]['link'] = get_permalink( $location->ID );
 						$data['expertise_location'][$location->ID]['title'] = $location->post_title;
 						$data['expertise_location'][$location->ID]['slug'] = $location->post_name;
 						$location_list .= $location->post_title;
-						if( count($locations) > $i ) {
+
+						if ( count($locations) > $i ) {
+
 							$location_list .= ', ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['expertise_location_list'] = $location_list;
 
 			return $data;
@@ -3363,12 +3855,15 @@
 	// Conditions API
 
 		function get_condition_meta($object) {
+
 			$postId = $object['id'];
 			// Expertise
-			$expertises =  get_field('condition_expertise', $postId);
+			$expertises = get_field( 'condition_expertise', $postId );
 			$expertise_list = '';
 			$i = 1;
-			if( $expertises ) {
+
+			if ( $expertises ) {
+
 				$args = (array(
 					'post_type' => 'expertise',
 					'post_status' => 'publish',
@@ -3378,26 +3873,42 @@
 					'post__in' => $expertises
 				));
 				$expertise_query = new WP_Query( $args );
-				if( $expertises && $expertise_query->posts ):
 
-					foreach( $expertise_query->posts as $expertise ):
+				if (
+					$expertises
+					&&
+					$expertise_query->posts
+				) {
+
+					foreach ( $expertise_query->posts as $expertise ) {
+
 						$data['condition_expertise'][$expertise->ID]['link'] = get_permalink( $expertise->ID );
 						$data['condition_expertise'][$expertise->ID]['title'] = $expertise->post_title;
 						$data['condition_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
 						$expertise_list .= $expertise->post_title;
-						if( count($expertises) > $i ) {
+
+						if ( count($expertises) > $i ) {
+
 							$expertise_list .= ', ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['condition_expertise_list'] = $expertise_list;
 			// Treatments
-			$treatments_cpt = get_field('condition_treatments', $postId);
+			$treatments_cpt = get_field( 'condition_treatments', $postId );
 			$treatment_list = '';
 			$i = 1;
-			if( $treatments_cpt ) {
+
+			if ( $treatments_cpt ) {
+
 				$args = (array(
 					'post_type' => 'treatment',
 					'post_status' => 'publish',
@@ -3407,26 +3918,42 @@
 					'post__in' => $treatments_cpt
 				));
 				$treatments_cpt_query = new WP_Query( $args );
-				if( $treatments_cpt && $treatments_cpt_query->posts ):
 
-					foreach( $treatments_cpt_query->posts as $treatment ):
+				if (
+					$treatments_cpt
+					&&
+					$treatments_cpt_query->posts
+				) {
+
+					foreach ( $treatments_cpt_query->posts as $treatment ) {
+
 						$data['condition_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
 						$data['condition_treatments'][$treatment->ID]['title'] = $treatment->post_title;
 						$data['condition_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
 						$treatment_list .= $treatment->post_title;
-						if( count($treatments_cpt) > $i ) {
+
+						if ( count($treatments_cpt) > $i ) {
+
 							$treatment_list .= ', ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['condition_treatments_list'] = $treatment_list;
 			// Providers
-			$providers = get_field('condition_physicians', $postId);
+			$providers = get_field( 'condition_physicians', $postId );
 			$provider_list = '';
 			$i = 1;
-			if( $providers ) {
+
+			if ( $providers ) {
+
 				$args = (array(
 					'post_type' => 'provider',
 					'post_status' => 'publish',
@@ -3436,26 +3963,42 @@
 					'post__in' => $providers
 				));
 				$provider_query = new WP_Query( $args );
-				if( $providers && $provider_query->posts ):
 
-					foreach( $provider_query->posts as $provider ):
+				if (
+					$providers
+					&&
+					$provider_query->posts
+				) {
+
+					foreach ( $provider_query->posts as $provider ) {
+
 						$data['condition_provider'][$provider->ID]['link'] = get_permalink( $provider->ID );
-						$data['condition_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
+						$data['condition_provider'][$provider->ID]['title'] = get_field( 'physician_full_name', $provider->ID );
 						$data['condition_provider'][$provider->ID]['slug'] = $provider->post_name;
-						$provider_list .= get_field('physician_full_name', $provider->ID);
-						if( count($providers) > $i ) {
+						$provider_list .= get_field( 'physician_full_name', $provider->ID );
+
+						if ( count($providers) > $i ) {
+
 							$provider_list .= ' | ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['condition_provider_list'] = $provider_list;
 			// Locations
-			$locations = get_field('condition_locations', $postId);
+			$locations = get_field( 'condition_locations', $postId );
 			$location_list = '';
 			$i = 1;
-			if( $locations ) {
+
+			if ( $locations ) {
+
 				$args = (array(
 					'post_type' => 'location',
 					'order' => 'ASC',
@@ -3465,20 +4008,34 @@
 					'post__in' => $locations
 				));
 				$location_query = new WP_Query( $args );
-				if( $locations && $location_query->posts ):
 
-					foreach( $location_query->posts as $location ):
+				if (
+					$locations
+					&&
+					$location_query->posts
+				) {
+
+					foreach ( $location_query->posts as $location ) {
+
 						$data['condition_location'][$location->ID]['link'] = get_permalink( $location->ID );
 						$data['condition_location'][$location->ID]['title'] = $location->post_title;
 						$data['condition_location'][$location->ID]['slug'] = $location->post_name;
 						$location_list .= $location->post_title;
-						if( count($locations) > $i ) {
+
+						if ( count($locations) > $i ) {
+
 							$location_list .= ', ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['condition_location_list'] = $location_list;
 
 			return $data;
@@ -3490,12 +4047,15 @@
 	// Treatments API
 
 		function get_treatment_meta($object) {
+
 			$postId = $object['id'];
 			// Expertise
-			$expertises =  get_field('treatment_procedure_expertise', $postId);
+			$expertises = get_field( 'treatment_procedure_expertise', $postId );
 			$expertise_list = '';
 			$i = 1;
-			if( $expertises ) {
+
+			if ( $expertises ) {
+
 				$args = (array(
 					'post_type' => 'expertise',
 					'post_status' => 'publish',
@@ -3505,26 +4065,42 @@
 					'post__in' => $expertises
 				));
 				$expertise_query = new WP_Query( $args );
-				if( $expertises && $expertise_query->posts ):
 
-					foreach( $expertise_query->posts as $expertise ):
+				if (
+					$expertises
+					&&
+					$expertise_query->posts
+				) {
+
+					foreach ( $expertise_query->posts as $expertise ) {
+
 						$data['treatment_expertise'][$expertise->ID]['link'] = get_permalink( $expertise->ID );
 						$data['treatment_expertise'][$expertise->ID]['title'] = $expertise->post_title;
 						$data['treatment_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
 						$expertise_list .= $expertise->post_title;
-						if( count($expertises) > $i ) {
+
+						if ( count($expertises) > $i ) {
+
 							$expertise_list .= ', ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['treatment_expertise_list'] = $expertise_list;
 			// Conditions
-			$conditions_cpt = get_field('treatment_conditions', $postId);
+			$conditions_cpt = get_field( 'treatment_conditions', $postId );
 			$condition_list = '';
 			$i = 1;
-			if( $conditions_cpt ) {
+
+			if ( $conditions_cpt ) {
+
 				$args = (array(
 					'post_type' => 'condition',
 					'post_status' => 'publish',
@@ -3534,26 +4110,42 @@
 					'post__in' => $conditions_cpt
 				));
 				$conditions_cpt_query = new WP_Query( $args );
-				if( $conditions_cpt && $conditions_cpt_query->posts ):
 
-					foreach( $conditions_cpt_query->posts as $condition ):
+				if (
+					$conditions_cpt
+					&&
+					$conditions_cpt_query->posts
+				) {
+
+					foreach ( $conditions_cpt_query->posts as $condition ) {
+
 						$data['treatment_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
 						$data['treatment_conditions'][$condition->ID]['title'] = $condition->post_title;
 						$data['treatment_conditions'][$condition->ID]['slug'] = $condition->post_name;
 						$condition_list .= $condition->post_title;
-						if( count($conditions_cpt) > $i ) {
+
+						if ( count($conditions_cpt) > $i ) {
+
 							$condition_list .= ', ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['treatment_conditions_list'] = $condition_list;
 			// Providers
-			$providers = get_field('treatment_procedure_physicians', $postId);
+			$providers = get_field( 'treatment_procedure_physicians', $postId );
 			$provider_list = '';
 			$i = 1;
-			if( $providers ) {
+
+			if ( $providers ) {
+
 				$args = (array(
 					'post_type' => 'provider',
 					'post_status' => 'publish',
@@ -3563,26 +4155,42 @@
 					'post__in' => $providers
 				));
 				$provider_query = new WP_Query( $args );
-				if( $providers && $provider_query->posts ):
 
-					foreach( $provider_query->posts as $provider ):
+				if (
+					$providers
+					&&
+					$provider_query->posts
+				) {
+
+					foreach ( $provider_query->posts as $provider ) {
+
 						$data['treatment_provider'][$provider->ID]['link'] = get_permalink( $provider->ID );
-						$data['treatment_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
+						$data['treatment_provider'][$provider->ID]['title'] = get_field( 'physician_full_name', $provider->ID );
 						$data['treatment_provider'][$provider->ID]['slug'] = $provider->post_name;
-						$provider_list .= get_field('physician_full_name', $provider->ID);
-						if( count($providers) > $i ) {
+						$provider_list .= get_field( 'physician_full_name', $provider->ID );
+
+						if ( count($providers) > $i ) {
+
 							$provider_list .= ' | ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['treatment_provider_list'] = $provider_list;
 			// Locations
-			$locations = get_field('treatment_procedure_locations', $postId);
+			$locations = get_field( 'treatment_procedure_locations', $postId );
 			$location_list = '';
 			$i = 1;
-			if( $locations ) {
+
+			if ( $locations ) {
+
 				$args = (array(
 					'post_type' => 'location',
 					'order' => 'ASC',
@@ -3592,20 +4200,34 @@
 					'post__in' => $locations
 				));
 				$location_query = new WP_Query( $args );
-				if( $locations && $location_query->posts ):
 
-					foreach( $location_query->posts as $location ):
+				if (
+					$locations
+					&&
+					$location_query->posts
+				) {
+
+					foreach ( $location_query->posts as $location ) {
+
 						$data['treatment_location'][$location->ID]['link'] = get_permalink( $location->ID );
 						$data['treatment_location'][$location->ID]['title'] = $location->post_title;
 						$data['treatment_location'][$location->ID]['slug'] = $location->post_name;
 						$location_list .= $location->post_title;
-						if( count($locations) > $i ) {
+
+						if ( count($locations) > $i ) {
+
 							$location_list .= ', ';
+
 						}
+
 						$i++;
-					endforeach;
-				endif;
+
+					} // endforeach
+
+				} // endif
+
 			}
+
 			$data['treatment_location_list'] = $location_list;
 
 			return $data;
@@ -3615,14 +4237,17 @@
 	// Clinical Resources API
 
 		function get_resource_meta($object) {
+
 			$postId = $object['id'];
 			$resource_image = get_the_post_thumbnail_url( $postId, 'large' );
-			$resource_type = get_field('clinical_resource_type', $postId);
+			$resource_type = get_field( 'clinical_resource_type', $postId );
 			$resource_type_value = $resource_type['value'];
 			$resource_type_label = $resource_type['label'];
 			// Conditions
-			$conditions_cpt = get_field('clinical_resource_conditions', $postId);
-			if($conditions_cpt) {
+			$conditions_cpt = get_field( 'clinical_resource_conditions', $postId );
+
+			if ( $conditions_cpt ) {
+
 				$args = (array(
 					'post_type' => 'condition',
 					'post_status' => 'publish',
@@ -3632,10 +4257,14 @@
 					'post__in' => $conditions_cpt
 				));
 				$conditions_cpt_query = new WP_Query( $args );
+
 			}
+
 			// Treatments
-			$treatments_cpt = get_field('clinical_resource_treatments', $postId);
-			if($treatments_cpt) {
+			$treatments_cpt = get_field( 'clinical_resource_treatments', $postId );
+
+			if ( $treatments_cpt ) {
+
 				$args = (array(
 					'post_type' => 'treatment',
 					'post_status' => 'publish',
@@ -3645,10 +4274,14 @@
 					'post__in' => $treatments_cpt
 				));
 				$treatments_cpt_query = new WP_Query( $args );
+
 			}
+
 			// Physicians
 			$providers = get_field( 'clinical_resource_providers', $postId );
-			if($providers) {
+
+			if ($providers) {
+
 				$args = array(
 					'post_type' => 'provider',
 					'post_status' => 'publish',
@@ -3658,10 +4291,14 @@
 					'post__in' => $providers
 				);
 				$provider_query = New WP_Query( $args );
+
 			}
+
 			// Locations
-			$locations = get_field('clinical_resource_locations', $postId);
-			if($locations) {
+			$locations = get_field( 'clinical_resource_locations', $postId );
+
+			if ($locations) {
+
 				$args = (array(
 					'post_type' => 'location',
 					'order' => 'ASC',
@@ -3671,10 +4308,14 @@
 					'post__in' => $locations
 				));
 				$location_query = new WP_Query( $args );
+
 			}
+
 			// Expertise
-			$expertises =  get_field('clinical_resource_aoe', $postId);
-			if($expertises) {
+			$expertises = get_field( 'clinical_resource_aoe', $postId );
+
+			if ($expertises) {
+
 				$args = (array(
 					'post_type' => 'expertise',
 					'order' => 'ASC',
@@ -3684,10 +4325,14 @@
 					'post__in' => $expertises
 				));
 				$expertise_query = new WP_Query( $args );
+
 			}
+
 			// Related Resources
-			$resources =  get_field('clinical_resource_related', $postId);
-			if($resources) {
+			$resources = get_field( 'clinical_resource_related', $postId );
+
+			if ( $resources ) {
+
 				$args = (array(
 					'post_type' => 'clinical-resource',
 					'order' => 'DESC',
@@ -3697,26 +4342,27 @@
 					'post__in' => $resources
 				));
 				$resource_query = new WP_Query( $args );
+
 			}
 
-			$text = get_field('clinical_resource_text', $postId);
-			$nci_query = get_field('clinical_resource_text_nci_query', $postId);
-			$nci_embed = get_field('clinical_resource_nci_embed', $postId);
+			$text = get_field( 'clinical_resource_text', $postId );
+			$nci_query = get_field( 'clinical_resource_text_nci_query', $postId );
+			$nci_embed = get_field( 'clinical_resource_nci_embed', $postId );
 
-			$infographic = get_field('clinical_resource_infographic', $postId);
-			$infographic_descr = get_field('clinical_resource_infographic_descr', $postId);
-			$infographic_transcript = get_field('clinical_resource_infographic_transcript', $postId);
+			$infographic = get_field( 'clinical_resource_infographic', $postId );
+			$infographic_descr = get_field( 'clinical_resource_infographic_descr', $postId );
+			$infographic_transcript = get_field( 'clinical_resource_infographic_transcript', $postId );
 
-			$document_descr = get_field('clinical_resource_document_descr', $postId);
-			$document = get_field('clinical_resource_document', $postId);
+			$document_descr = get_field( 'clinical_resource_document_descr', $postId );
+			$document = get_field( 'clinical_resource_document', $postId );
 
-			$video = get_field('clinical_resource_video', $postId);
-			$video_descr = get_field('clinical_resource_video_descr', $postId);
-			$video_transcript = get_field('clinical_resource_video_transcript', $postId);
+			$video = get_field( 'clinical_resource_video', $postId );
+			$video_descr = get_field( 'clinical_resource_video_descr', $postId );
+			$video_transcript = get_field( 'clinical_resource_video_transcript', $postId );
 
 			$data['clinical_resource_title'] = get_the_title( $postId );
 			$data['clinical_resource_link'] = get_permalink($postId );
-			$data['clinical_resource_excerpt'] = get_field( 'clinical_resource_excerpt', $postId);
+			$data['clinical_resource_excerpt'] = get_field( 'clinical_resource_excerpt', $postId );
 			$data['clinical_resource_image'] = $resource_image;
 			$data['clinical_resource_type'] = $resource_type_label;
 			$data['clinical_resource_text'] = $text;
@@ -3731,101 +4377,185 @@
 			// $data['clinical_resource_document'] = $document;
 			$data['clinical_resource_document_descr'] = $document_descr;
 			$i = 0;
-			while( have_rows($document) ): the_row();
+
+			while ( have_rows($document) ) {
+
+				the_row();
+
 				$document_title = get_sub_field('document_title');
 				$document_file = get_sub_field('document_file');
 				$document_url = $document_file['url'];
 				$data['clinical_resource_document'][$i]['title'] = $document_title;
 				$data['clinical_resource_document'][$i]['url'] = $document_title;
 				$i++;
-			endwhile;
-			if( $resources && $resource_query->posts ):
-				foreach( $resource_query->posts as $resource ):
+				
+			} // endwhile
+
+			if (
+				$clinical_resources
+				&&
+				$clinical_resource_query->posts
+			) {
+
+				foreach ( $clinical_resource_query->posts as $resource ) {
+
 					$data['clinical_resource_associated'][$resource->ID]['link'] = get_permalink( $resource->ID );
 					$data['clinical_resource_associated'][$resource->ID]['title'] = $resource->post_title;
 					$data['clinical_resource_associated'][$resource->ID]['slug'] = $resource->post_name;
-				endforeach;
-			endif;
+
+				} // endforeach
+
+			} // endif
+
 			$condition_list = '';
 			$i = 1;
-			if( $conditions_cpt && $conditions_cpt_query->posts ):
-				foreach( $conditions_cpt_query->posts as $condition ):
+
+			if (
+				$conditions_cpt
+				&&
+				$condition_cpt_query->posts
+			) {
+
+				foreach ( $condition_cpt_query->posts as $condition ) {
+
 					$data['clinical_resource_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
 					$data['clinical_resource_conditions'][$condition->ID]['title'] = $condition->post_title;
 					$data['clinical_resource_conditions'][$condition->ID]['slug'] = $condition->post_name;
 					$condition_list .= $condition->post_title;
-					if( count($conditions_cpt) > $i ) {
+
+					if ( count($conditions_cpt) > $i ) {
+
 						$condition_list .= ', ';
+
 					}
+
 					$i++;
-				endforeach;
-			endif;
+
+				} // endforeach
+
+			} // endif
+
 			$data['clinical_resource_conditions_list'] = $condition_list;
 			$treatment_list = '';
 			$i = 1;
-			if( $treatments_cpt && $treatments_cpt_query->posts ):
-				foreach( $treatments_cpt_query->posts as $treatment ):
+
+			if (
+				$treatments_cpt
+				&&
+				$treatments_cpt_query->posts
+			) {
+
+				foreach ( $treatments_cpt_query->posts as $treatment ) {
+
 					$data['clinical_resource_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
 					$data['clinical_resource_treatments'][$treatment->ID]['title'] = $treatment->post_title;
 					$data['clinical_resource_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
 					$treatment_list .= $treatment->post_title;
-					if( count($treatments_cpt) > $i ) {
+
+					if ( count($treatments_cpt) > $i ) {
+
 						$treatment_list .= ', ';
+
 					}
+
 					$i++;
-				endforeach;
-			endif;
+
+				} // endforeach
+
+			} // endif
+
 			$data['clinical_resource_treatments_list'] = $treatment_list;
 			$provider_list = '';
 			$i = 1;
-			if( $providers && $provider_query->posts ):
 
-				foreach( $provider_query->posts as $provider ):
+			if (
+				$providers
+				&&
+				$provider_query->posts
+			) {
+
+				foreach ( $provider_query->posts as $provider ) {
+
 					$data['clinical_resource_provider'][$provider->ID]['link'] = get_permalink( $provider->ID );
-					$data['clinical_resource_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
+					$data['clinical_resource_provider'][$provider->ID]['title'] = get_field( 'physician_full_name', $provider->ID );
 					$data['clinical_resource_provider'][$provider->ID]['slug'] = $provider->post_name;
-					$provider_list .= get_field('physician_full_name', $provider->ID);
-					if( count($providers) > $i ) {
+					$provider_list .= get_field( 'physician_full_name', $provider->ID );
+
+					if ( count($providers) > $i ) {
+
 						$provider_list .= ' | ';
+
 					}
+
 					$i++;
-				endforeach;
-			endif;
+
+				} // endforeach
+
+
+			} // endif
+
 			$data['clinical_resource_provider_list'] = $provider_list;
 			$location_list = '';
 			$i = 1;
-			if( $locations && $location_query->posts ):
 
-				foreach( $location_query->posts as $location ):
+			if (
+				$locations
+				&&
+				$location_query->posts
+			) {
+
+				foreach ( $location_query->posts as $location ) {
+
 					$data['clinical_resource_location'][$location->ID]['link'] = get_permalink( $location->ID );
 					$data['clinical_resource_location'][$location->ID]['title'] = $location->post_title;
 					$data['clinical_resource_location'][$location->ID]['slug'] = $location->post_name;
 					$location_list .= $location->post_title;
-					if( count($locations) > $i ) {
+
+					if ( count($locations) > $i ) {
+
 						$location_list .= ', ';
+
 					}
+
 					$i++;
-				endforeach;
-			endif;
+
+				} // endforeach
+
+			} // endif
+
 			$data['clinical_resource_location_list'] = $location_list;
 			$expertise_list = '';
 			$i = 1;
-			if( $expertises && $expertise_query->posts ):
 
-				foreach( $expertise_query->posts as $expertise ):
+			if (
+				$expertises
+				&&
+				$expertise_query->posts
+			) {
+
+				foreach ( $expertise_query->posts as $expertise ) {
+
 					$data['clinical_resource_expertise'][$expertise->ID]['link'] = get_permalink( $expertise->ID );
 					$data['clinical_resource_expertise'][$expertise->ID]['title'] = $expertise->post_title;
 					$data['clinical_resource_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
 					$expertise_list .= $expertise->post_title;
-					if( count($expertises) > $i ) {
+
+					if ( count($expertises) > $i ) {
+
 						$expertise_list .= ', ';
+
 					}
+
 					$i++;
-				endforeach;
-			endif;
+
+				} // endforeach
+
+			} // endif
+
 			$data['clinical_resource_expertise_list'] = $expertise_list;
 
 			return $data;
+
 		}
 
 	// Add REST API query var filters
