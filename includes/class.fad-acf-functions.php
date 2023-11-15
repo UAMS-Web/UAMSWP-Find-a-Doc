@@ -848,18 +848,20 @@ function location_save_post_after( $post_id ) {
 
 			}
 
-add_filter('acf/fields/post_object/query/key=field_location_parent_id', 'limit_post_top_level', 10, 3);
+// Limit ACF field results to top-level pages/posts that are published
 
-function limit_post_top_level( $args, $field, $post ) {
+	add_filter('acf/fields/post_object/query/key=field_location_parent_id', 'limit_post_top_level', 10, 3);
 
-    $args['post_parent'] = 0;
-    // $args['sort_order'] = 'ASC';
-    // $args['orderby'] = 'title';
-    // $args['order'] = 'ASC';
-    $args['post_status'] = 'publish';
+	function limit_post_top_level( $args, $field, $post ) {
 
-    return $args;
-}
+		$args['post_parent'] = 0;
+		// $args['sort_order'] = 'ASC';
+		// $args['orderby'] = 'title';
+		// $args['order'] = 'ASC';
+		$args['post_status'] = 'publish';
+
+		return $args;
+	}
 
 /*
 		ACF Image Field Image Aspect Ratio Validation
