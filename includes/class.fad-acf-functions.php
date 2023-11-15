@@ -508,53 +508,89 @@ function location_save_post_after( $post_id ) {
 		 * $post_id = $post_id being updated
 		 */
 
-		function bidirectional_acf_update( $field_name, $field_key, $value, $post_id ){
+		 function bidirectional_acf_update(
+			$field_name, // Required // ACF field name
+			$field_key, // Required // ACF field key of field with new value
+			$value, // Required // Incoming/new value
+			$post_id // Required // ID of post being updated
+		) {
+
 			// Get previous values.
-			$old_value = get_field($field_name, $post_id, false);
 
-			if( isset($value) && is_array($value) ) {
+				$old_value = get_field( $field_name, $post_id, false );
 
-				foreach( $value as $post_id2new ) {
+			if (
+				isset($value)
+				&&
+				is_array($value)
+			) {
+
+				foreach ( $value as $post_id2new ) {
+
 					// load existing related posts
-					$value2new = get_field($field_name, $post_id2new, false);
+
+						$value2new = get_field( $field_name, $post_id2new, false );
 
 					// allow for selected posts to not contain a value
-					if( empty($value2new) ) {
-						$value2new = array();
-					}
+
+						if ( empty($value2new) ) {
+
+							$value2new = array();
+
+						}
+
 					// write_log('New Values for ' . $post_id2new . ': '. print_r($value2new, true));
+
 					// bail early if the current $post_id is already found in selected post's $value2new
-					if( in_array($post_id, $value2new) ) continue;
+
+						if ( in_array( $post_id, $value2new ) ) continue;
 
 					// append the current $post_id to the selected post's 'related_posts' value
-					$value2new[] = $post_id;
+
+						$value2new[] = $post_id;
 
 					// update the selected post's value (use field's key for performance)
-					update_field($field_key, $value2new, $post_id2new);
+
+						update_field( $field_key, $value2new, $post_id2new );
+
 				}
+
 			}
 
-			if( isset($old_value) && is_array($old_value) ) {
+			if (
+				isset($old_value)
+				&&
+				is_array($old_value)
+			) {
 
-				foreach( $old_value as $post_id2old ) {
+				foreach ( $old_value as $post_id2old ) {
+
 					// bail early if this value has not been removed
-					if( is_array($value) && in_array($post_id2old, $value) ) continue;
+
+						if ( is_array($value) && in_array( $post_id2old, $value ) ) continue;
 
 					// load existing related posts
-					$value2old = get_field($field_name, $post_id2old, false);
+
+						$value2old = get_field( $field_name, $post_id2old, false );
 
 					// bail early if no value
-					if( empty($value2old) ) continue;
+
+						if ( empty($value2old) ) continue;
 
 					// find the position of $post_id within $value2old so we can remove it
-					$pos = array_search($post_id, $value2old);
+
+						$pos = array_search( $post_id, $value2old );
 
 					// remove
-					unset( $value2old[$pos] );
+
+						unset( $value2old[$pos] );
 
 					// update the un-selected post's value (use field's key for performance)
-					update_field($field_key, $value2old, $post_id2old);
+
+						update_field( $field_key, $value2old, $post_id2old );
+
 				}
+
 			}
 
 		}
