@@ -2474,30 +2474,32 @@
 	</style>';
 	}
 
-/**
- * Changes strings referencing Featured Images for a post type
- *
- * In this example, the post type in the filter name is "employee"
- * and the new reference in the labels is "headshot".
- *
- * @see 	https://developer.wordpress.org/reference/hooks/post_type_labels_post_type/
- *
- * @param 		object 		$labels 		Current post type labels
- * @return 		object 					Modified post type labels
- */
-function change_featured_image_labels_provider( $labels ) {
+// Changes strings referencing Featured Images for a post type
 
-	$labels->featured_image 	= 'Headshot';
-	$labels->set_featured_image 	= 'Set headshot';
-	$labels->remove_featured_image 	= 'Remove headshot';
-	$labels->use_featured_image 	= 'Use as headshot';
+	/**
+	 * Changes strings referencing Featured Images for a post type
+	 *
+	 * In this example, the post type in the filter name is "employee"
+	 * and the new reference in the labels is "headshot".
+	 *
+	 * @see 	https://developer.wordpress.org/reference/hooks/post_type_labels_post_type/
+	 *
+	 * @param 		object 		$labels 		Current post type labels
+	 * @return 		object 					Modified post type labels
+	 */
 
-	return $labels;
+	function change_featured_image_labels_provider( $labels ) {
 
-} // change_featured_image_labels()
+		$labels->featured_image 	= 'Headshot';
+		$labels->set_featured_image 	= 'Set headshot';
+		$labels->remove_featured_image 	= 'Remove headshot';
+		$labels->use_featured_image 	= 'Use as headshot';
 
-add_filter( 'post_type_labels_provider', 'change_featured_image_labels_provider', 10, 1 );
+		return $labels;
 
+	} // change_featured_image_labels()
+
+	add_filter( 'post_type_labels_provider', 'change_featured_image_labels_provider', 10, 1 );
 
 /**
  * Add REST API support to Teams Meta.
