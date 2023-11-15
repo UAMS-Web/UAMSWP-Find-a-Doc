@@ -439,119 +439,126 @@ function location_save_post_after( $post_id ) {
 
 }
 
-add_action('acf/save_post', 'uamswp_sync_acf_save_post', 5);
-function uamswp_sync_acf_save_post( $post_id ) {
-	// Setup the variables
-	$post_type = get_post_type( $post_id );
-	$values = $_POST['acf'];
+// Bidirectionally update ACF data
 
-	if ('location' == $post_type ) {
-		$field_name = 'physician_locations';
-		$field_key = 'field_location_physicians';
-		// Get submitted values.
-		$value = $values[$field_key];
-		bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+	// Fire before saving data to post (by using a priority less than 10)
 
-		$field_name = 'location_expertise';
-		$field_key = 'field_location_expertise';
-		// Get submitted values.
-		$value = $values[$field_key];
-		bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
-	}
+		add_action('acf/save_post', 'uamswp_sync_acf_save_post', 5);
+		function uamswp_sync_acf_save_post( $post_id ) {
+			// Setup the variables
+			$post_type = get_post_type( $post_id );
+			$values = $_POST['acf'];
 
-	if ('provider' == $post_type ) {
-		$field_name = 'physician_locations';
-		$field_key = 'field_physician_locations';
-		// Get submitted values.
-		$value = $values[$field_key];
-		bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+			if ('location' == $post_type ) {
+				$field_name = 'physician_locations';
+				$field_key = 'field_location_physicians';
+				// Get submitted values.
+				$value = $values[$field_key];
+				bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
 
-		$field_name = 'physician_expertise';
-		$field_key = 'field_physician_expertise';
-		// Get submitted values.
-		$value = $values[$field_key];
-		bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
-	}
-
-	if ('expertise' == $post_type ) {
-		$field_name = 'location_expertise';
-		$field_key = 'field_expertise_locations';
-		// Get submitted values.
-		$value = $values[$field_key];
-		bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
-
-		$field_name = 'physician_expertise';
-		$field_key = 'field_expertise_physicians';
-		// Get submitted values.
-		$value = $values[$field_key];
-		bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
-
-		$field_name = 'expertise_associated';
-		$field_key = 'field_expertise_associated';
-		// Get submitted values.
-		$value = $values[$field_key];
-		bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
-	}
-}
-/*
- * Function for Bidirectional ACF
- * Req:
- * $field_name = ACF field name
- * $field_key = ACF field key of field with new value
- * $value = incoming/new value
- * $post_id = $post_id being updated
- *
- */
-function bidirectional_acf_update( $field_name, $field_key, $value, $post_id ){
-	// Get previous values.
-	$old_value = get_field($field_name, $post_id, false);
-
-	if( isset($value) && is_array($value) ) {
-
-		foreach( $value as $post_id2new ) {
-			// load existing related posts
-			$value2new = get_field($field_name, $post_id2new, false);
-
-			// allow for selected posts to not contain a value
-			if( empty($value2new) ) {
-				$value2new = array();
+				$field_name = 'location_expertise';
+				$field_key = 'field_location_expertise';
+				// Get submitted values.
+				$value = $values[$field_key];
+				bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
 			}
-			// write_log('New Values for ' . $post_id2new . ': '. print_r($value2new, true));
-			// bail early if the current $post_id is already found in selected post's $value2new
-			if( in_array($post_id, $value2new) ) continue;
 
-			// append the current $post_id to the selected post's 'related_posts' value
-			$value2new[] = $post_id;
+			if ('provider' == $post_type ) {
+				$field_name = 'physician_locations';
+				$field_key = 'field_physician_locations';
+				// Get submitted values.
+				$value = $values[$field_key];
+				bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
 
-			// update the selected post's value (use field's key for performance)
-			update_field($field_key, $value2new, $post_id2new);
+				$field_name = 'physician_expertise';
+				$field_key = 'field_physician_expertise';
+				// Get submitted values.
+				$value = $values[$field_key];
+				bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+			}
+
+			if ('expertise' == $post_type ) {
+				$field_name = 'location_expertise';
+				$field_key = 'field_expertise_locations';
+				// Get submitted values.
+				$value = $values[$field_key];
+				bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+
+				$field_name = 'physician_expertise';
+				$field_key = 'field_expertise_physicians';
+				// Get submitted values.
+				$value = $values[$field_key];
+				bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+
+				$field_name = 'expertise_associated';
+				$field_key = 'field_expertise_associated';
+				// Get submitted values.
+				$value = $values[$field_key];
+				bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+			}
 		}
-	}
 
-	if( isset($old_value) && is_array($old_value) ) {
+	// Function for Bidirectional ACF
 
-		foreach( $old_value as $post_id2old ) {
-			// bail early if this value has not been removed
-			if( is_array($value) && in_array($post_id2old, $value) ) continue;
+		/*
+		* Req:
+		* $field_name = ACF field name
+		* $field_key = ACF field key of field with new value
+		* $value = incoming/new value
+		* $post_id = $post_id being updated
+		*/
 
-			// load existing related posts
-			$value2old = get_field($field_name, $post_id2old, false);
+		function bidirectional_acf_update( $field_name, $field_key, $value, $post_id ){
+			// Get previous values.
+			$old_value = get_field($field_name, $post_id, false);
 
-			// bail early if no value
-			if( empty($value2old) ) continue;
+			if( isset($value) && is_array($value) ) {
 
-			// find the position of $post_id within $value2old so we can remove it
-			$pos = array_search($post_id, $value2old);
+				foreach( $value as $post_id2new ) {
+					// load existing related posts
+					$value2new = get_field($field_name, $post_id2new, false);
 
-			// remove
-			unset( $value2old[$pos] );
+					// allow for selected posts to not contain a value
+					if( empty($value2new) ) {
+						$value2new = array();
+					}
+					// write_log('New Values for ' . $post_id2new . ': '. print_r($value2new, true));
+					// bail early if the current $post_id is already found in selected post's $value2new
+					if( in_array($post_id, $value2new) ) continue;
 
-			// update the un-selected post's value (use field's key for performance)
-			update_field($field_key, $value2old, $post_id2old);
+					// append the current $post_id to the selected post's 'related_posts' value
+					$value2new[] = $post_id;
+
+					// update the selected post's value (use field's key for performance)
+					update_field($field_key, $value2new, $post_id2new);
+				}
+			}
+
+			if( isset($old_value) && is_array($old_value) ) {
+
+				foreach( $old_value as $post_id2old ) {
+					// bail early if this value has not been removed
+					if( is_array($value) && in_array($post_id2old, $value) ) continue;
+
+					// load existing related posts
+					$value2old = get_field($field_name, $post_id2old, false);
+
+					// bail early if no value
+					if( empty($value2old) ) continue;
+
+					// find the position of $post_id within $value2old so we can remove it
+					$pos = array_search($post_id, $value2old);
+
+					// remove
+					unset( $value2old[$pos] );
+
+					// update the un-selected post's value (use field's key for performance)
+					update_field($field_key, $value2old, $post_id2old);
+				}
+			}
+
 		}
-	}
 
-}
 
 add_action('acf/save_post', 'custom_excerpt_acf', 50);
 function custom_excerpt_acf() {
