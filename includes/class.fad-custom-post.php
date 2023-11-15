@@ -672,26 +672,26 @@
 
 			function create_departments_taxonomy() {
 			$labels = array(
-					'name' => 'Medical Departments',
-					'singular_name' => 'Medical Departments',
-					'search_items' => 'Search Departments',
-					'all_items' => 'All Departments',
-					'edit_item' => 'Edit Department',
-					'update_item' => 'Update Department',
-					'add_new_item' => 'Add New Department',
-					'new_item_name' => 'New Department',
-					'menu_name' => 'Medical Departments',
-					'view_item' => 'View Department',
-					'popular_items' => 'Popular Department',
-					'separate_items_with_commas' => 'Separate departments with commas',
-					'add_or_remove_items' => 'Add or remove departments',
-					'choose_from_most_used' => 'Choose from the most used departments',
-					'not_found' => 'No departments found',
-					'parent_item' => 'Parent Department',
-					'parent_item_colon' => 'Parent Department:',
-					'no_terms' => 'No Medical Departments',
-					'items_list' => 'Medical Departments list',
-					'items_list_navigation' => 'Medical Departments list navigation',
+					'name' => 'Clinical Departments',
+					'singular_name' => 'Clinical Departments',
+					'search_items' => 'Search Clinical Departments',
+					'all_items' => 'All Clinical Departments',
+					'edit_item' => 'Edit Clinical Department',
+					'update_item' => 'Update Clinical Department',
+					'add_new_item' => 'Add New Clinical Department',
+					'new_item_name' => 'New Clinical Department',
+					'menu_name' => 'Departments, Clinical',
+					'view_item' => 'View Clinical Department',
+					'popular_items' => 'Popular Clinical Department',
+					'separate_items_with_commas' => 'Separate Clinical Departments With Commas',
+					'add_or_remove_items' => 'Add or Remove Clinical Departments',
+					'choose_from_most_used' => 'Choose From the Most Used Clinical Departments',
+					'not_found' => 'No Clinical Departments Found',
+					'parent_item' => 'Parent Clinical Department',
+					'parent_item_colon' => 'Parent Clinical Department:',
+					'no_terms' => 'No Clinical Departments',
+					'items_list' => 'Clinical Clinical Departments List',
+					'items_list_navigation' => 'Clinical Departments List Navigation',
 				);
 				$rewrite = array(
 					'slug' => 'department',
@@ -722,7 +722,7 @@
 					'show_in_quick_edit' => false,
 				);
 				register_taxonomy( 'department', array( 'provider' ), $args );
-
+			
 			}
 
 		// Service Lines
