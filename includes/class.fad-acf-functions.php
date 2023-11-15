@@ -80,7 +80,7 @@
 			 * Only add default content if no value has been set
 			 */
 
-			 if ( empty( $field['value'] ) ) {
+			if ( empty( $field['value'] ) ) {
 
 				$term = get_term_by('slug', 'uams-mychart', 'portal');
 				$term_id = $term->term_id;
@@ -205,7 +205,7 @@
 			 */
 
 			add_action('acf/save_post', 'physician_save_post', 5);
-			
+
 			function physician_save_post( $post_id ) {
 
 				$post_type = get_post_type($post_id);
@@ -254,7 +254,7 @@
 
 						}
 
-						$full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+						$full_name = $first_name . ' ' . ( $middle_name ? $middle_name . ' ' : '' ) . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '' ) . ( $degree_list ? ', ' . $degree_list : '' );
 
 						$_POST['acf']['field_physician_full_name'] = $full_name;
 
@@ -363,7 +363,7 @@
 				// Add values from the associated locations
 
 					// Get the list of locations associated with the provider
-				
+
 						$locations = $_POST['acf']['field_physician_locations'];
 
 					// Get the desired values from each associated location
@@ -374,7 +374,7 @@
 
 								$region = array();
 								$portal = array();
-								
+
 							foreach ( $locations as $location ) {
 
 								// Get the values
@@ -398,12 +398,13 @@
 											$portal[] = $location_portal;
 
 										}
+
 								// Break the loop after first iteration (optional)
 
 									/**
 									 * The first location in the list of the provider's associated locations should be
 									 * the provider's primary location.
-									 * 
+									 *
 									 * If the relevant values of the provider's primary location are all that
 									 * matter, break the loop here.
 									 */
@@ -411,6 +412,7 @@
 									// break;
 
 							} // endforeach
+
 						}
 
 					// Set the desired values from each associated location
@@ -423,7 +425,7 @@
 
 							/**
 							 * Use the first portal only.
-							 * 
+							 *
 							 * The first portal value should be the portal value of the provider's primary
 							 * location.
 							 */
@@ -769,7 +771,7 @@
 	// Fire before saving data to post (by using a priority less than 10)
 
 		add_action('acf/save_post', 'uamswp_sync_acf_save_post', 5);
-		
+
 		function uamswp_sync_acf_save_post( $post_id ) {
 
 			// Set up the variables
@@ -850,14 +852,14 @@
 	// Function for Bidirectional ACF
 
 		/**
-		 * Req:
-		 * $field_name = ACF field name
-		 * $field_key = ACF field key of field with new value
-		 * $value = incoming/new value
-		 * $post_id = $post_id being updated
+		* Req:
+		* $field_name = ACF field name
+		* $field_key = ACF field key of field with new value
+		* $value = incoming/new value
+		* $post_id = $post_id being updated
 		 */
 
-		 function bidirectional_acf_update(
+		function bidirectional_acf_update(
 			$field_name, // Required // ACF field name
 			$field_key, // Required // ACF field key of field with new value
 			$value, // Required // Incoming/new value
@@ -1043,7 +1045,7 @@
 
 					// Unhook this function so it doesn't loop infinitely
 
-						remove_action('save_post', 'custom_excerpt_acf', 50);
+						remove_action( 'save_post', 'custom_excerpt_acf', 50 );
 
 					// Update the post with new post data
 
@@ -1053,10 +1055,9 @@
 
 					// Re-hook this function
 
-						add_action( 'save_post', 'custom_excerpt_acf', 50);
+						add_action( 'save_post', 'custom_excerpt_acf', 50 );
 
 				}
-
 
 		}
 
@@ -1395,7 +1396,7 @@
 	// Add new settings for aspect ratio to image field
 
 		add_filter('acf/render_field_settings/type=image', 'acf_image_aspect_ratio_settings', 20);
-		
+
 		function acf_image_aspect_ratio_settings($field) {
 
 			/**
@@ -1479,7 +1480,7 @@
 
 					/**
 					 * The values we need are not set or otherwise empty.
-					 * 
+					 *
 					 * Bail early.
 					 */
 
@@ -1502,7 +1503,7 @@
 
 					/**
 					 * You cannot do calculations if something is 0.
-					 * 
+					 *
 					 * Bail early.
 					 */
 
@@ -1539,7 +1540,7 @@
 
 					/**
 					 * It does not meet the requirement.
-					 * 
+					 *
 					 * Generate an error.
 					 */
 
@@ -1559,7 +1560,7 @@
 	function pubmed_information_format_value( $value, $post_id, $field ) {
 
 		// Render shortcodes in all textarea values.
-		
+
 			return html_entity_decode( $value ); // Convert HTML entities to their corresponding characters
 
 	}
@@ -1582,7 +1583,7 @@
 
 			add_filter('acf/fields/relationship/query/key=field_clinical_resource_related', 'relationship_exclude_id', 10, 3);
 			add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'relationship_exclude_id', 10, 3);
-			
+
 		// 2. Add the $field and $post arguments.
 
 			function relationship_exclude_id ( $args, $field, $post_id ) {
