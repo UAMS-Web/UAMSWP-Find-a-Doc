@@ -567,39 +567,80 @@ function location_save_post_after( $post_id ) {
 
 		function custom_excerpt_acf() {
 
-			global $post;
+			// Bring in variables from outside of the function
 
-			$post_id        = ( $post->ID ); // Current post ID
-			$post_type      = get_post_type( $post_id ); // Get Post Type
+				global $post; // WordPress-specific global variable
 
-			if ( 'expertise' == $post_type || 'provider' == $post_type || 'location' == $post_type || 'clinical-resource' == $post_type  ) {
+			// Get the current post ID
 
-				if ('expertise' == $post_type ) {
+				$post_id = ( $post->ID );
+
+			// Get the post type of the current page/post
+
+				$post_type = get_post_type( $post_id );
+
+			if (
+				'expertise' == $post_type
+				||
+				'provider' == $post_type
+				||
+				'location' == $post_type
+				||
+				'clinical-resource' == $post_type
+			) {
+
+				if ( 'expertise' == $post_type ) {
+
 					$post_excerpt   = get_field( 'post_excerpt', $post_id ); // ACF field
+
 				} elseif ( 'provider' == $post_type ) {
+
 					$post_excerpt   = get_field( 'physician_short_clinical_bio', $post_id ); // ACF field
+
 				} elseif ( 'location' == $post_type ) {
+
 					$post_excerpt   = get_field( 'location_short_desc', $post_id ); // ACF field
-				} elseif ( 'clinical-resource' == $post_type ){
+
+				} elseif ( 'clinical-resource' == $post_type ) {
+
 					$post_excerpt   = get_field( 'clinical_resource_excerpt', $post_id );
-				}
-
-				if ( ( !empty( $post_id ) ) AND ( $post_excerpt ) ) {
-
-					$post_array     = array(
-
-						'ID'            => $post_id,
-						'post_excerpt'	=> $post_excerpt
-
-					);
-
-					remove_action('save_post', 'custom_excerpt_acf', 50); // Unhook this function so it doesn't loop infinitely
-
-					wp_update_post( $post_array );
-
-					add_action( 'save_post', 'custom_excerpt_acf', 50); // Re-hook this function
 
 				}
+
+				// Update the post with the new excerpt value
+
+					/**
+					 * Source: https://support.advancedcustomfields.com/forums/topic/set-wordpress-excerpt-and-post-thumbnail-based-on-custom-field/#post-49965
+					 */
+
+					if (
+						!empty($post_id) // If the post ID is not empty ...
+						&&
+						$post_excerpt // and if the post excerpt value exists ...
+					) {
+
+						// Define an array of elements that make up a post to update or insert.
+
+							$post_array = array(
+								'ID' => $post_id,
+								'post_excerpt' => $post_excerpt
+							);
+
+						// Unhook this function so it doesn't loop infinitely
+
+							remove_action('save_post', 'custom_excerpt_acf', 50);
+
+						// Update the post with new post data
+
+							wp_update_post(
+								$post_array // array|object // Optional // Post data. Arrays are expected to be escaped, objects are not. See wp_insert_post() for accepted arguments. // Default array()
+							);
+
+						// Re-hook this function
+
+							add_action( 'save_post', 'custom_excerpt_acf', 50);
+
+					}
 
 			}
 
