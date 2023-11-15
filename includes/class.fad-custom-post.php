@@ -2624,7 +2624,7 @@
 
 			}
 
-			$full_name = get_field( 'physician_first_name', $postId ) .' ' .(get_field( 'physician_middle_name', $postId ) ? get_field( 'physician_middle_name', $postId ) . ' ' : '') . get_field( 'physician_last_name', $postId ) . (get_field( 'physician_pedigree', $postId ) ? '&nbsp;' . get_field( 'physician_pedigree', $postId ) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+			$full_name = get_field( 'physician_first_name', $postId ) . ' ' . ( get_field( 'physician_middle_name', $postId ) ? get_field( 'physician_middle_name', $postId ) . ' ' : '' ) . get_field( 'physician_last_name', $postId ) . ( get_field( 'physician_pedigree', $postId ) ? '&nbsp;' . get_field( 'physician_pedigree', $postId ) : '') . ( $degree_list ? ', ' . $degree_list : '' );
 			$provider_resident = get_field( 'physician_resident', $postId );
 			$provider_resident_name = 'Resident Physician';
 			$provider_title = get_field( 'physician_title', $postId );
