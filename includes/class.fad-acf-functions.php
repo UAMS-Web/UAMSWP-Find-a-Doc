@@ -861,6 +861,7 @@ function location_save_post_after( $post_id ) {
 		$args['post_status'] = 'publish';
 
 		return $args;
+
 	}
 
 // ACF Image Field Image Aspect Ratio Validation
