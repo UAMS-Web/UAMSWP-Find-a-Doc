@@ -2429,28 +2429,29 @@
 			$role->add_cap( 'publish_clinical_resources');
 			$role->add_cap( 'read_private_clinical_resources');
 		}
-		
+
 		add_action( 'admin_init', 'add_theme_caps');
 
-// Remove the taxonomy metabox [slugnamediv]
-function remove_provider_meta() {
-	remove_meta_box( 'conditiondiv', 'provider', 'side' );
-	remove_meta_box( 'specialtydiv', 'provider', 'side' );
-	remove_meta_box( 'departmentdiv', 'provider', 'side' );
-	remove_meta_box( 'patient_typediv', 'provider', 'side' );
-	remove_meta_box( 'tagsdiv-medical_procedures', 'provider', 'side' );
-	remove_meta_box( 'medical_termsdiv', 'provider', 'side' );
-	remove_meta_box( 'tagsdiv-recognition', 'provider', 'side' );
-	remove_meta_box( 'custom-post-type-onomies-locations', 'provider', 'side');
-	remove_meta_box( 'gmb_cat_providerdiv', 'provider', 'side' );
-	// Location
-	remove_meta_box( 'regiondiv', 'location', 'side' );
-	remove_meta_box( 'location_typediv', 'location', 'side' );
-	remove_meta_box( 'buildingdiv', 'location', 'side' );
-	remove_meta_box( 'gmb_cat_locationdiv', 'location', 'side' );
-}
+// Remove the taxonomy meta boxes [slugnamediv]
 
-add_action( 'admin_menu' , 'remove_provider_meta' );
+	function remove_provider_meta() {
+		remove_meta_box( 'conditiondiv', 'provider', 'side' );
+		remove_meta_box( 'specialtydiv', 'provider', 'side' );
+		remove_meta_box( 'departmentdiv', 'provider', 'side' );
+		remove_meta_box( 'patient_typediv', 'provider', 'side' );
+		remove_meta_box( 'tagsdiv-medical_procedures', 'provider', 'side' );
+		remove_meta_box( 'medical_termsdiv', 'provider', 'side' );
+		remove_meta_box( 'tagsdiv-recognition', 'provider', 'side' );
+		remove_meta_box( 'custom-post-type-onomies-locations', 'provider', 'side');
+		remove_meta_box( 'gmb_cat_providerdiv', 'provider', 'side' );
+		// Location
+		remove_meta_box( 'regiondiv', 'location', 'side' );
+		remove_meta_box( 'location_typediv', 'location', 'side' );
+		remove_meta_box( 'buildingdiv', 'location', 'side' );
+		remove_meta_box( 'gmb_cat_locationdiv', 'location', 'side' );
+	}
+
+	add_action( 'admin_menu' , 'remove_provider_meta' );
 
 add_action('admin_head', 'acf_hide_title');
 
