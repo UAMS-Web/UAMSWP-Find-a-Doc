@@ -605,168 +605,171 @@ function location_save_post_after( $post_id ) {
 
 		}
 
-// Custom Blocks
-if( function_exists('acf_register_block_type') ):
+// Register Custom Blocks
 
-	acf_register_block_type(array(
-		'name' => 'uamswp_fad_facetwp_cards',
-		'title' => 'FacetWP Cards',
-		'description' => '',
-		'category' => 'common',
-		'keywords' => array(
-			0 => 'provider',
-			1 => 'location',
-			2 => 'facetwp',
-		),
-		'mode' => 'auto',
-		'align' => '',
-		'render_template' => '',
-		'render_callback' => 'fad_facetwp_cards_callback',
-		'enqueue_style' => '',
-		'enqueue_script' => '',
-		'enqueue_assets' => '',
-		'icon' => 'id',
-		'supports' => array(
-			'align' => array('full'),
-			'mode' => true,
-			'multiple' => true,
-		),
-	));
-	acf_register_block_type(array(
-		'name' => 'uamswp_fad_facetwp_blocks',
-		'title' => 'FacetWP Block',
-		'description' => '',
-		'category' => 'common',
-		'keywords' => array(
-			0 => 'facetwp',
-			1 => 'shortcode',
-		),
-		'mode' => 'auto',
-		'align' => '',
-		'render_template' => '',
-		'render_callback' => 'fad_facetwp_blocks_callback',
-		'enqueue_style' => '',
-		'enqueue_script' => '',
-		'enqueue_assets' => '',
-		'icon' => 'list-view',
-		'supports' => array(
-			'align' => true,
-			'mode' => true,
-			'multiple' => true,
-		),
-	));
+	if( function_exists('acf_register_block_type') ):
 
-endif;
+		acf_register_block_type(array(
+			'name' => 'uamswp_fad_facetwp_cards',
+			'title' => 'FacetWP Cards',
+			'description' => '',
+			'category' => 'common',
+			'keywords' => array(
+				0 => 'provider',
+				1 => 'location',
+				2 => 'facetwp',
+			),
+			'mode' => 'auto',
+			'align' => '',
+			'render_template' => '',
+			'render_callback' => 'fad_facetwp_cards_callback',
+			'enqueue_style' => '',
+			'enqueue_script' => '',
+			'enqueue_assets' => '',
+			'icon' => 'id',
+			'supports' => array(
+				'align' => array('full'),
+				'mode' => true,
+				'multiple' => true,
+			),
+		));
+		acf_register_block_type(array(
+			'name' => 'uamswp_fad_facetwp_blocks',
+			'title' => 'FacetWP Block',
+			'description' => '',
+			'category' => 'common',
+			'keywords' => array(
+				0 => 'facetwp',
+				1 => 'shortcode',
+			),
+			'mode' => 'auto',
+			'align' => '',
+			'render_template' => '',
+			'render_callback' => 'fad_facetwp_blocks_callback',
+			'enqueue_style' => '',
+			'enqueue_script' => '',
+			'enqueue_assets' => '',
+			'icon' => 'list-view',
+			'supports' => array(
+				'align' => true,
+				'mode' => true,
+				'multiple' => true,
+			),
+		));
 
+	endif;
 
-/**
- * FacetWP Cards Block Callback Function.
- *
- * @param   array $block The block settings and attributes.
- * @param   string $content The block inner HTML (empty).
- * @param   bool $is_preview True during AJAX preview.
- * @param   (int|string) $post_id The post ID this block is saved to.
- */
-function fad_facetwp_cards_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
+	// FacetWP Cards Callback Function
 
-    // Create id attribute allowing for custom "anchor" value.
-    $id = 'facetwp-cards-' . $block['id'];
-    if( !empty($block['anchor']) ) {
-        $id = $block['anchor'];
-    }
+		/**
+		 * @param	array $block The block settings and attributes.
+		 * @param	string $content The block inner HTML (empty).
+		 * @param	bool $is_preview True during AJAX preview.
+		 * @param	(int|string) $post_id The post ID this block is saved to.
+		 */
 
-    // Create class attribute allowing for custom "className" and "align" values.
-    $className = 'facetwp-cards';
-    if( !empty($block['className']) ) {
-        $className .= ' ' . $block['className'];
-    }
-    if( !empty($block['align']) ) {
-        $className .= ' align' . $block['align'];
-    }
+		function fad_facetwp_cards_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
 
-    // Load values and assing defaults.
-    $heading = get_field('facetwp_heading') ?: 'Cards List';
-    $template = get_field('facetwp_template_name');
-    $background_color = get_field('facetwp_background_color') ?: 'bg-white';
+			// Create id attribute allowing for custom "anchor" value.
+			$id = 'facetwp-cards-' . $block['id'];
+			if( !empty($block['anchor']) ) {
+				$id = $block['anchor'];
+			}
 
-    ?>
-	<section class="uams-module container-fluid p-8 p-sm-10 <?php echo $className; ?> <?php echo $background_color; ?>">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="module-title"><?php echo $heading; ?></h2>
-				<div class="card-list-container">
-					<?php echo facetwp_display( 'template', $template ); ?>
-				</div>
-			</div>
-		</div>
-	</section>
-    <?php
-}
+			// Create class attribute allowing for custom "className" and "align" values.
+			$className = 'facetwp-cards';
+			if( !empty($block['className']) ) {
+				$className .= ' ' . $block['className'];
+			}
+			if( !empty($block['align']) ) {
+				$className .= ' align' . $block['align'];
+			}
 
-/**
- * FacetWP Cards Block Callback Function.
- *
- * @param   array $block The block settings and attributes.
- * @param   string $content The block inner HTML (empty).
- * @param   bool $is_preview True during AJAX preview.
- * @param   (int|string) $post_id The post ID this block is saved to.
- */
-function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
+			// Load values and assing defaults.
+			$heading = get_field('facetwp_heading') ?: 'Cards List';
+			$template = get_field('facetwp_template_name');
+			$background_color = get_field('facetwp_background_color') ?: 'bg-white';
 
-    // Create id attribute allowing for custom "anchor" value.
-    $id = 'facetwp-block-' . $block['id'];
-    if( !empty($block['anchor']) ) {
-        $id = $block['anchor'];
-    }
-
-    // Create class attribute allowing for custom "className" and "align" values.
-    $className = 'facetwp-blocks';
-    if( !empty($block['className']) ) {
-        $className .= ' ' . $block['className'];
-    }
-    if( !empty($block['align']) ) {
-        $className .= ' align' . $block['align'];
-    }
-
-    // Load values and assing defaults.
-	$heading = get_field('facetwp_block_heading') ?: 'Cards List';
-	$hideheading = get_field('facetwp_block_hide_heading');
-	$prefacets = get_field('facetwp_block_pre_template_facets');
-	$template = get_field('facetwp_block_facet_template');
-	$postfacets = get_field('facetwp_block_post_template_facets');
-	$pager = get_field('facetwp_block_include_pager');
-    $background_color = get_field('facetwp_block_background_color') ?: 'bg-white';
-
-    ?>
-	<section class="uams-module <?php echo $className; ?> <?php echo $background_color; ?>">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="module-title<?php echo ('1' == $hideheading ? ' sr-only': ''); ?>" ><?php echo $heading; ?></h2>
-					<div class="">
-						<?php
-						if ($prefacets) {
-							foreach ($prefacets as $prefacet) {
-								echo '<div class="text-'. $prefacet['alignment'] .'">'. facetwp_display( 'facet', $prefacet['facet_name'] ) .'</div>';
-							}
-						}
-						?>
-						<?php echo facetwp_display( 'template', $template ); ?>
-						<?php
-						if ($postfacets) {
-							foreach ($postfacets as $postfacet) {
-								echo '<div class="text-'. $postfacet['alignment'] .'">'. facetwp_display( 'facet', $postfacet['facet_name'] ) .'</div>';
-							}
-						}
-						echo ($pager ? facetwp_display( 'pager' ) : '');
-						?>
+			?>
+			<section class="uams-module container-fluid p-8 p-sm-10 <?php echo $className; ?> <?php echo $background_color; ?>">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="module-title"><?php echo $heading; ?></h2>
+						<div class="card-list-container">
+							<?php echo facetwp_display( 'template', $template ); ?>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</section>
-    <?php
-}
+			</section>
+			<?php
+		}
+
+	// FacetWP Block Callback Function
+
+		/**
+		 * @param	array $block The block settings and attributes.
+		 * @param	string $content The block inner HTML (empty).
+		 * @param	bool $is_preview True during AJAX preview.
+		 * @param	(int|string) $post_id The post ID this block is saved to.
+		 */
+
+		function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
+
+			// Create id attribute allowing for custom "anchor" value.
+			$id = 'facetwp-block-' . $block['id'];
+			if( !empty($block['anchor']) ) {
+				$id = $block['anchor'];
+			}
+
+			// Create class attribute allowing for custom "className" and "align" values.
+			$className = 'facetwp-blocks';
+			if( !empty($block['className']) ) {
+				$className .= ' ' . $block['className'];
+			}
+			if( !empty($block['align']) ) {
+				$className .= ' align' . $block['align'];
+			}
+
+			// Load values and assing defaults.
+			$heading = get_field('facetwp_block_heading') ?: 'Cards List';
+			$hideheading = get_field('facetwp_block_hide_heading');
+			$prefacets = get_field('facetwp_block_pre_template_facets');
+			$template = get_field('facetwp_block_facet_template');
+			$postfacets = get_field('facetwp_block_post_template_facets');
+			$pager = get_field('facetwp_block_include_pager');
+			$background_color = get_field('facetwp_block_background_color') ?: 'bg-white';
+
+			?>
+			<section class="uams-module <?php echo $className; ?> <?php echo $background_color; ?>">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title<?php echo ('1' == $hideheading ? ' sr-only': ''); ?>" ><?php echo $heading; ?></h2>
+							<div class="">
+								<?php
+								if ($prefacets) {
+									foreach ($prefacets as $prefacet) {
+										echo '<div class="text-'. $prefacet['alignment'] .'">'. facetwp_display( 'facet', $prefacet['facet_name'] ) .'</div>';
+									}
+								}
+								?>
+								<?php echo facetwp_display( 'template', $template ); ?>
+								<?php
+								if ($postfacets) {
+									foreach ($postfacets as $postfacet) {
+										echo '<div class="text-'. $postfacet['alignment'] .'">'. facetwp_display( 'facet', $postfacet['facet_name'] ) .'</div>';
+									}
+								}
+								echo ($pager ? facetwp_display( 'pager' ) : '');
+								?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<?php
+		}
+
 add_action('acf/render_field/name=location_current_alert', 'location_current_alert_message');
 function location_current_alert_message(){
 
