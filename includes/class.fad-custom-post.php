@@ -466,6 +466,10 @@
 
 			add_action( 'init', 'create_associations_taxonomy', 0 );
 
+		// Brand Organizations — Third-Party
+
+		add_action( 'init', 'create_brand_organization_taxonomy', 0 );
+
 		// Brand Organizations — UAMS
 
 		add_action( 'init', 'create_brand_organization_uams_taxonomy', 0 );
@@ -2577,6 +2581,79 @@
 					'show_in_quick_edit' => false,
 				);
 				register_taxonomy( 'brand_organization_uams', array( 'location', 'provider' ), $args );
+
+			}
+
+		// Brand Organizations — Third-Party
+
+			/**
+			 * The taxonomy is intended to define values for primary third-party clinical
+			 * organizations (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare
+			 * System).
+			 * 
+			 * It should be limited to third-party organizations at which we have clinical
+			 * oversight — or within which there are clinical locations at which we have
+			 * clinical oversight.
+			 * 
+			 * Prefix slugs for any nested third-party brand organization terms with the
+			 * top-level term's slug preceded and followed by an underscore.
+			 * 
+			 * Expected taxonomy items:
+			 * 
+			 *      * "Arkansas Children's" (Slug: "arkansas-childrens")
+			 *      * "Baptist Health" (Slug: "baptist-health")
+			 *      * "United States Department of Veterans Affairs" (Slug: "va")
+			 *             * "Central Arkansas Veterans Healthcare System" (Slug: "_va_cavhs")
+			 */
+
+			 function create_brand_organization_taxonomy() {
+
+				$labels = array(
+					'name' => 'Third-Party Brand Organizations',
+					'singular_name' => 'Third-Party Brand Organization',
+					'menu_name' => 'Brand Organizations, Third-Party',
+					'all_items' => 'All Third-Party Brand Organizations',
+					'parent_item' => 'Parent Third-Party Brand Organization',
+					'parent_item_colon' => 'Parent Third-Party Brand Organization:',
+					'new_item_name' => 'New Third-Party Brand Organization',
+					'add_new_item' => 'Add New Third-Party Brand Organization',
+					'edit_item' => 'Edit Third-Party Brand Organization',
+					'update_item' => 'Update Third-Party Brand Organization',
+					'view_item' => 'View Third-Party Brand Organization',
+					'separate_items_with_commas' => 'Separate Third-Party Brand Organizations With Commas',
+					'add_or_remove_items' => 'Add or Remove Third-Party Brand Organizations',
+					'choose_from_most_used' => 'Choose from the most used',
+					'popular_items' => 'Popular Third-Party Brand Organizations',
+					'search_items' => 'Search Third-Party Brand Organizations',
+					'not_found' => 'Not Found',
+					'no_terms' => 'No Third-Party Brand Organizations',
+					'items_list' => 'Third-Party Brand Organizations List',
+					'items_list_navigation' => 'Third-Party Brand Organizations List Navigation',
+				);
+				$rewrite = array(
+					'slug' => 'brand_organization',
+					'with_front' => false,
+					'hierarchical' => true,
+				);
+				$capabilities = array(
+					'manage_terms' => 'manage_options',
+					'edit_terms' => 'manage_options',
+					'delete_terms' => 'manage_options',
+					'assign_terms' => 'edit_physicians',
+				);
+				$args = array(
+					'labels' => $labels,
+					'hierarchical' => true,
+					'public' => false,
+					'show_ui' => true,
+					'show_admin_column' => false,
+					'show_in_nav_menus' => false,
+					'show_tagcloud' => false,
+					'rewrite' => $rewrite,
+					'capabilities' => $capabilities,
+					'show_in_quick_edit' => false,
+				);
+				register_taxonomy( 'brand_organization', array( 'location', 'provider' ), $args );
 
 			}
 
