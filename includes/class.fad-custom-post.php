@@ -4344,9 +4344,9 @@
 			}
 
 			// Related Resources
-			$resources = get_field( 'clinical_resource_related', $postId );
+			$clinical_resources = get_field( 'clinical_resource_related', $postId );
 
-			if ( $resources ) {
+			if ( $clinical_resources ) {
 
 				$args = (array(
 					'post_type' => 'clinical-resource',
@@ -4354,9 +4354,9 @@
 					'orderby' => 'post_date',
 					'posts_per_page' => -1,
 					'post_status' => 'publish',
-					'post__in' => $resources
+					'post__in' => $clinical_resources
 				));
-				$resource_query = new WP_Query( $args );
+				$clinical_resource_query = new WP_Query( $args );
 
 			}
 
