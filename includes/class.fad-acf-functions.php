@@ -770,68 +770,83 @@ function location_save_post_after( $post_id ) {
 			<?php
 		}
 
-add_action('acf/render_field/name=location_current_alert', 'location_current_alert_message');
-function location_current_alert_message(){
+// Populate ACFE dynamic message fields with current value(s) defined in Find-a-Doc Settings
 
-	$alert_title = get_field('location_alert_heading_system', 'option');
-	$alert_body = get_field('location_alert_body_system', 'option');
-	$alert_color = get_field('location_alert_color_system', 'option');
+	// Location alert
 
+		add_action('acf/render_field/name=location_current_alert', 'location_current_alert_message');
 
-	if (!empty($alert_title) && !empty($alert_body)) {
+		function location_current_alert_message(){
 
-		$alert_txt = '<blockquote class="notice notice-warning">';
-		$alert_txt .=  '<h3 class="notice-title">'. $alert_title .'</h3>';
-		$alert_txt .= $alert_body;
-		$alert_txt .= '<hr />';
-		$alert_txt .= '<p><strong>Alert color:</strong> '. ucfirst(str_replace( 'alert-', '', $alert_color)) .'</p>';
-		$alert_txt .= '</blockquote>';
-
-		echo $alert_txt;
-
-	} else {
-		echo 'None active';
-	}
-
-}
-add_action('acf/render_field/name=location_current_prescription_clinic', 'location_current_prescription_clinic_message');
-function location_current_prescription_clinic_message(){
-
-	$prescription_clinic_sys = get_field('location_prescription_clinic_system', 'option');
+			$alert_title = get_field('location_alert_heading_system', 'option');
+			$alert_body = get_field('location_alert_body_system', 'option');
+			$alert_color = get_field('location_alert_color_system', 'option');
 
 
-	if (!empty($prescription_clinic_sys)) {
+			if (!empty($alert_title) && !empty($alert_body)) {
 
-		$prescr_txt = '<blockquote class="notice notice-info">';
-		$prescr_txt .= $prescription_clinic_sys;
-		$prescr_txt .= '</blockquote>';
+				$alert_txt = '<blockquote class="notice notice-warning">';
+				$alert_txt .=  '<h3 class="notice-title">'. $alert_title .'</h3>';
+				$alert_txt .= $alert_body;
+				$alert_txt .= '<hr />';
+				$alert_txt .= '<p><strong>Alert color:</strong> '. ucfirst(str_replace( 'alert-', '', $alert_color)) .'</p>';
+				$alert_txt .= '</blockquote>';
 
-		echo $prescr_txt;
+				echo $alert_txt;
 
-	} else {
-		echo 'None active';
-	}
+			} else {
+				echo 'None active';
+			}
 
-}
-add_action('acf/render_field/name=location_current_prescription_pharm', 'location_current_prescription_pharm_message');
-function location_current_prescription_pharm_message(){
+		}
 
-	$prescription_pharm_sys = get_field('location_prescription_pharm_system', 'option');
+	// Location prescription information
+
+		// Information instructing patients to call the clinic for prescriptions
+
+			add_action('acf/render_field/name=location_current_prescription_clinic', 'location_current_prescription_clinic_message');
+
+			function location_current_prescription_clinic_message(){
+
+				$prescription_clinic_sys = get_field('location_prescription_clinic_system', 'option');
 
 
-	if (!empty($prescription_pharm_sys)) {
+				if (!empty($prescription_clinic_sys)) {
 
-		$prescr_txt = '<blockquote class="notice notice-info">';
-		$prescr_txt .= $prescription_pharm_sys;
-		$prescr_txt .= '</blockquote>';
+					$prescr_txt = '<blockquote class="notice notice-info">';
+					$prescr_txt .= $prescription_clinic_sys;
+					$prescr_txt .= '</blockquote>';
 
-		echo $prescr_txt;
+					echo $prescr_txt;
 
-	} else {
-		echo 'None active';
-	}
+				} else {
+					echo 'None active';
+				}
 
-}
+			}
+
+		// Information instructing patients to call their pharmacy for prescriptions
+
+			add_action('acf/render_field/name=location_current_prescription_pharm', 'location_current_prescription_pharm_message');
+
+			function location_current_prescription_pharm_message(){
+
+				$prescription_pharm_sys = get_field('location_prescription_pharm_system', 'option');
+
+
+				if (!empty($prescription_pharm_sys)) {
+
+					$prescr_txt = '<blockquote class="notice notice-info">';
+					$prescr_txt .= $prescription_pharm_sys;
+					$prescr_txt .= '</blockquote>';
+
+					echo $prescr_txt;
+
+				} else {
+					echo 'None active';
+				}
+
+			}
 
 add_filter('acf/fields/post_object/query/key=field_location_parent_id', 'limit_post_top_level', 10, 3);
 
