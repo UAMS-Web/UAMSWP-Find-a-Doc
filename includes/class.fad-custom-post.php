@@ -151,7 +151,7 @@
 	// Register 'Areas of Expertise' Custom Post Type
 
 		if ( ! function_exists('expertise_cpt') ) {
-			
+
 			function expertise_cpt() {
 
 				$labels = array(
@@ -193,7 +193,7 @@
 				);
 				$args = array(
 					'label' => 'Areas of Expertise',
-					'description' => 'UAMS Areas of Expertise', 
+					'description' => 'UAMS Areas of Expertise',
 					'labels' => $labels,
 					'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes', 'revisions' ),
 					'taxonomies' => array( 'treatment', 'condition' ),
@@ -221,7 +221,7 @@
 			}
 
 			add_action( 'init', 'expertise_cpt', 0 );
-			
+
 		}
 
 	// Register 'Conditions' Custom Post Type
@@ -229,7 +229,7 @@
 		if ( ! function_exists('conditions_cpt') ) {
 
 			function conditions_cpt() {
-			
+
 				$labels = array(
 					'name' => 'Conditions',
 					'singular_name' => 'Condition',
@@ -291,11 +291,11 @@
 					'rest_controller_class' => 'WP_REST_Posts_Controller',
 				);
 				register_post_type( 'condition', $args );
-			
+
 			}
-			
+
 			add_action( 'init', 'conditions_cpt', 0 );
-			
+
 		}
 
 	// Register 'Treatments' Custom Post Type
@@ -303,7 +303,7 @@
 		if ( ! function_exists('treatments_cpt') ) {
 
 			function treatments_cpt() {
-			
+
 				$labels = array(
 					'name' => 'Treatments & Procedures',
 					'singular_name' => 'Treatment & Procedure',
@@ -365,11 +365,11 @@
 					'rest_controller_class' => 'WP_REST_Posts_Controller',
 				);
 				register_post_type( 'treatment', $args );
-			
+
 			}
-			
+
 			add_action( 'init', 'treatments_cpt', 0 );
-			
+
 		}
 
 	// Register 'Clinical Resources' Custom Post Type
@@ -377,7 +377,7 @@
 		if ( ! function_exists('clinical_resources_cpt') ) {
 
 			function clinical_resources_cpt() {
-			
+
 				$labels = array(
 					'name' => 'Clinical Resources',
 					'singular_name' => 'Clinical Resource',
@@ -439,11 +439,11 @@
 					'rest_controller_class' => 'WP_REST_Posts_Controller',
 				);
 				register_post_type( 'clinical-resource', $args );
-			
+
 			}
-			
+
 			add_action( 'init', 'clinical_resources_cpt', 0 );
-			
+
 		}
 
 // Register Taxonomies
@@ -1788,7 +1788,7 @@
 
 			/**
 			 * Expected taxonomy items:
-			 * 
+			 *
 			 *      * "Professor"
 			 *            * "Adjunct Professor"
 			 *      * "Associate Professor"
@@ -1858,7 +1858,7 @@
 
 			/**
 			 * Expected taxonomy items:
-			 * 
+			 *
 			 *      * "Dean"
 			 *      * "Associate Dean"
 			 *      * "Assistant Dean"
@@ -1939,7 +1939,7 @@
 
 			/**
 			 * Expected taxonomy items:
-			 * 
+			 *
 			 *      * "Best Doctors in America 20XX"
 			 *      * "AY Magazine Best Healthcare Professionals 20XX"
 			 *      * "Castle Connolly Top Doctors 20XX"
@@ -2001,7 +2001,7 @@
 
 			/**
 			 * Expected taxonomy items:
-			 * 
+			 *
 			 *      * "Central Arkansas"
 			 *      * "Northeast Arkansas"
 			 *      * "Northwest Arkansas"
@@ -2064,7 +2064,7 @@
 
 			/**
 			 * Expected taxonomy items:
-			 * 
+			 *
 			 *      * "COVID-19 Testing"
 			 *      * "COVID-19 Vaccines"
 			 *      * "Emergency Room"
@@ -2240,7 +2240,7 @@
 
 			/**
 			 * Expected taxonomy items:
-			 * 
+			 *
 			 *      * "None" (Slug: "_none")
 			 */
 
@@ -2559,8 +2559,8 @@
 					$degree_name = get_term( $degree, 'degree');
 					$degree_list .= $degree_list != '' ? ', ' : '';
 					$degree_list .= $degree_name->name;
-				endforeach; 
-			} 
+				endforeach;
+			}
 			$full_name = get_field('physician_first_name', $postId) .' ' .(get_field('physician_middle_name', $postId) ? get_field('physician_middle_name', $postId) . ' ' : '') . get_field('physician_last_name', $postId) . (get_field('physician_pedigree', $postId) ? '&nbsp;' . get_field('physician_pedigree', $postId ) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
 			$physician_resident = get_field('physician_resident', $postId);
 			$physician_resident_name = 'Resident Physician';
@@ -2755,7 +2755,7 @@
 						}
 						$i++;
 					endforeach;
-				endif; 
+				endif;
 			}
 			$data['physician_conditions_list'] = $condition_list;
 			// Treatments
@@ -2840,13 +2840,13 @@
 			$postId = $object['id'];
 			$data['location_title'] = get_the_title( $postId );
 			$data['location_link'] = get_permalink($postId );
-			// Parent Location 
+			// Parent Location
 			$location_has_parent = get_field('location_parent',$postId);
 			$location_parent_id = get_field('location_parent_id',$postId);
 			$parent_title = ''; // Eliminate PHP errors
 			$parent_url = ''; // Eliminate PHP errors
 			$parent_location = ''; // Eliminate PHP errors
-			if ($location_has_parent && $location_parent_id) { 
+			if ($location_has_parent && $location_parent_id) {
 				$parent_location = get_post( $location_parent_id );
 			}
 			// Get Post ID for Address & Image fields
@@ -2896,7 +2896,7 @@
 					$data['location_photo'][$i]['lrg'] = image_sizer($location_images_item, 992, 558, 'center', 'center');
 					$i++;
 				}
-			}	
+			}
 			//$data['location_photo'] = get_the_post_thumbnail($postId, 'aspect-16-9-small', ['class' => 'card-img-top']);
 			$map = get_field('location_map', $postId );
 			$location_floor = get_field_object('location_building_floor', $postId );
@@ -3002,7 +3002,7 @@
 			// if ($holidayhours):
 			// 	$order = array();
 			// 	// populate order
-			// 	foreach( $holidayhours as $i => $row ) {	
+			// 	foreach( $holidayhours as $i => $row ) {
 			// 		$order[ $i ] = $row['date'];
 			// 	}
 			// 	// multisort
@@ -3016,7 +3016,7 @@
 			// 		$data['location_holiday_hours'][$i]['close'] = $holidayhour['close'];
 			// 	endforeach;
 			// endif;
-			
+
 			$data['location_after_hours'] = $location_hours_group['location_after_hours'];
 
 			$data['location_telemed_query'] = $location_hours_group['location_telemed_query']; // Is there telemedicine?
@@ -3042,7 +3042,7 @@
 			$data['location_prescription_query'] = get_field('location_prescription_query',$postId);
 			$data['location_prescription_type'] = get_field('location_prescription_type',$postId);
 			$data['location_prescription'] = get_field('location_prescription',$postId);
-			
+
 			$data['location_about'] = get_field('location_about', $postId);
 			$data['location_appointment'] = get_field('location_appointment',$postId);
 			$data['location_appointment_bring'] = get_field('location_appointment_bring',$postId);
@@ -3171,7 +3171,7 @@
 						}
 						$i++;
 					endforeach;
-				endif; 
+				endif;
 			}
 			$data['location_conditions_list'] = $condition_list;
 			// Treatments
@@ -3260,7 +3260,7 @@
 						}
 						$i++;
 					endforeach;
-				endif; 
+				endif;
 			}
 			$data['expertise_conditions_list'] = $condition_list;
 			// Treatments
