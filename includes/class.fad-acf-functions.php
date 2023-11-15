@@ -954,42 +954,94 @@ function location_save_post_after( $post_id ) {
 		add_filter('acf/validate_attachment/type=image', 'acf_image_aspect_ratio_validate', 10, 5);
 
 		function acf_image_aspect_ratio_validate($errors, $file, $attachment, $field, $content) {
-			// check to make sure everything has a value
-			if (empty($field['ratio_width']) || empty($field['ratio_height']) ||
-				empty($file['width']) || empty($file['height'])) {
-				// values we need are not set or otherwise empty
-				// bail early
-				return $errors;
-			}
-			// make sure all values are numbers, you never know
-			$ratio_width = intval($field['ratio_width']);
-			$ratio_height = intval($field['ratio_height']);
-			// make sure we don't try to divide by 0
-			if (!$ratio_width || !$ratio_height) {
-				// cannot do calculations if something is 0
-				// bail early
-				return $errors;
-			}
+
+			// Check to make sure everything has a value
+
+				if (
+					empty($field['ratio_width'])
+					||
+					empty($field['ratio_height'])
+					||
+					empty($file['width'])
+					||
+					empty($file['height'])
+				) {
+
+					/**
+					 * The values we need are not set or otherwise empty.
+					 * 
+					 * Bail early.
+					 */
+
+					return $errors;
+
+				}
+
+			// Make sure all values are numbers. You never know.
+
+				$ratio_width = intval($field['ratio_width']);
+				$ratio_height = intval($field['ratio_height']);
+
+			// Make sure we don't try to divide by 0
+
+				if (
+					!$ratio_width
+					||
+					!$ratio_height
+				) {
+
+					/**
+					 * You cannot do calculations if something is 0.
+					 * 
+					 * Bail early.
+					 */
+
+					return $errors;
+
+				}
+
 			$width = intval($file['width']);
 			$height = intval($file['height']);
-			// do simple ratio math to see how tall
-			// the image is allowed to be based on width
-			$allowed_height = $width/$ratio_width*$ratio_height;
-			// get margin and calc min/max
-			$margin = 0;
-			if (!empty($field['ratio_margin'])) {
-				$margin = floatval($field['ratio_margin']);
-			}
-			$margin = $margin/100; // convert % to decimal
-			$min = round($allowed_height - ($allowed_height*$margin));
-			$max = round($allowed_height + ($allowed_height*$margin));
-			if ($height < $min || $height > $max) {
-				// does not meet the requirement, generate an error
-				$errors['aspect_ratio'] = __('Image does not meet Aspect Ratio Requirements of ').
-										$ratio_width.__(':').$ratio_height.__(' (±').($margin*100).__('%)');
-			}
-			// return the errors
-			return $errors;
+
+			// Do simple ratio math to see how tall the image is allowed to be based on width
+
+				$allowed_height = $width/$ratio_width*$ratio_height;
+
+			// Get the margin and calculate min/max
+
+				$margin = 0;
+
+				if ( !empty($field['ratio_margin']) ) {
+
+					$margin = floatval($field['ratio_margin']);
+
+				}
+
+				$margin = $margin/100; // convert % to decimal
+				$min = round($allowed_height - ($allowed_height*$margin));
+				$max = round($allowed_height + ($allowed_height*$margin));
+
+				if (
+					$height < $min
+					||
+					$height > $max
+				) {
+
+					/**
+					 * It does not meet the requirement.
+					 * 
+					 * Generate an error.
+					 */
+
+					$errors['aspect_ratio'] = __('Image does not meet Aspect Ratio Requirements of ').
+						$ratio_width.__(':').$ratio_height.__(' (±').($margin*100).__('%)');
+
+				}
+
+			// Return the errors
+
+				return $errors;
+
 		} // end function acf_image_aspect_ratio_validate
 
 // Render shortcode(s) in provider editor's Pubmed Information (HTML) field
