@@ -607,7 +607,7 @@ function location_save_post_after( $post_id ) {
 
 // Register Custom Blocks
 
-	if( function_exists('acf_register_block_type') ):
+	if ( function_exists('acf_register_block_type') ) {
 
 		// Register "FacetWP Cards" block
 
@@ -662,7 +662,7 @@ function location_save_post_after( $post_id ) {
 				),
 			));
 
-	endif;
+	} // endif
 
 	// FacetWP Cards Callback Function
 
