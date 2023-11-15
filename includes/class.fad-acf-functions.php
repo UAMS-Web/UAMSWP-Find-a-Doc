@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Advanced Custom Fields Functions
  */
 
@@ -7,32 +7,32 @@
 
 	// Change the ACF Custom Database Tables JSON directory
 
-		/*
-		* Changes the ACF Custom Database Tables JSON directory.
-		* This needs to run before the 'plugins_loaded' action hook, so
-		* you need to put this in a plugin or in your wp-config.php file.
-		*/
+		/**
+		 * Changes the ACF Custom Database Tables JSON directory.
+		 * This needs to run before the 'plugins_loaded' action hook, so
+		 * you need to put this in a plugin or in your wp-config.php file.
+		 */
 
 		define( 'ACFCDT_JSON_DIR', WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-tables' );
 
 	// Disable storing of meta data values in core meta tables
 
-		/*
-		* Disables storing of meta data values in core meta tables where a custom
-		* database table has been defined for fields. Any fields that aren't mapped
-		* to a custom database table will still be stored in the core meta tables.
-		*/
+		/**
+		 * Disables storing of meta data values in core meta tables where a custom
+		 * database table has been defined for fields. Any fields that aren't mapped
+		 * to a custom database table will still be stored in the core meta tables.
+		 */
 
 		add_filter( 'acfcdt/settings/store_acf_values_in_core_meta', '__return_false' );
 
 	// Disable storing of ACF field key references in core meta tables
 
-		/*
-		* Disables storing of ACF field key references in core meta tables where a custom
-		* database table has been defined for fields. Any fields that aren't mapped to a
-		* custom database table will still have their key references stored in the core
-		* meta tables.
-		*/
+		/**
+		 * Disables storing of ACF field key references in core meta tables where a custom
+		 * database table has been defined for fields. Any fields that aren't mapped to a
+		 * custom database table will still have their key references stored in the core
+		 * meta tables.
+		 */
 
 		// add_filter( 'acfcdt/settings/store_acf_keys_in_core_meta', '__return_false' );
 
@@ -500,13 +500,13 @@ function location_save_post_after( $post_id ) {
 
 	// Function for Bidirectional ACF
 
-		/*
-		* Req:
-		* $field_name = ACF field name
-		* $field_key = ACF field key of field with new value
-		* $value = incoming/new value
-		* $post_id = $post_id being updated
-		*/
+		/**
+		 * Req:
+		 * $field_name = ACF field name
+		 * $field_key = ACF field key of field with new value
+		 * $value = incoming/new value
+		 * $post_id = $post_id being updated
+		 */
 
 		function bidirectional_acf_update( $field_name, $field_key, $value, $post_id ){
 			// Get previous values.
