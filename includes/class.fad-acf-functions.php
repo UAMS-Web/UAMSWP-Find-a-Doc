@@ -60,44 +60,97 @@
 		
 	}
 
-add_filter('acf/prepare_field/key=field_physician_portal', 'set_default_portal', 20, 3);
-add_filter('acf/prepare_field/key=field_location_portal', 'set_default_portal', 20, 3);
-function set_default_portal( $field ) {
-    // Only if no value set
-    if( empty( $field['value'] ) ){
-        $term = get_term_by('slug', 'uams-mychart', 'portal');
-        $id = $term->term_id;
-        $default = array($id);
-        // Set field to default value
-        $field[ 'value' ] = $default ;
-    }
-    return $field;
-}
-add_filter('acf/load_value/key=field_physician_languages', 'set_default_language', 20, 3);
-function set_default_language($value, $post_id, $field) {
-    // Only add default content for new posts
-    if ( $value !== null ) {
-        return $value;
-    }
-    
-    $term = get_term_by('slug', 'english', 'language');
-	$id = $term->term_id;
-    $value = array($id);
-  	return $value;
-}
+// Set default values for taxonomy fields used in profiles
 
-add_filter('acf/load_value/key=field_location_region', 'set_default_region', 20, 3);
-function set_default_region($value, $post_id, $field) {
-    // Only add default content for empty fields
-    if ( $value !== null ) {
-        return $value;
-    }
-    
-    $term = get_term_by('slug', 'central', 'region');
-	$id = $term->term_id;
-    $value = array($id);
-  	return $value;
-}
+	// Patient portal
+
+		/**
+		 * Set 'UAMS Health MyChart' as the default patient portal for provider profiles
+		 * and location profiles.
+		 * 
+		 * The slug for 'UAMS Health MyChart' must be set as 'uams-mychart'.
+		 */
+
+		add_filter('acf/prepare_field/key=field_physician_portal', 'set_default_portal', 20, 3);
+		add_filter('acf/prepare_field/key=field_location_portal', 'set_default_portal', 20, 3);
+
+		function set_default_portal( $field ) {
+
+			/**
+			 * Only add default content if no value has been set
+			 */
+
+			 if ( empty( $field['value'] ) ) {
+
+				$term = get_term_by('slug', 'uams-mychart', 'portal');
+				$term_id = $term->term_id;
+				$default = array($term_id);
+
+				// Set field to default value
+
+					$field[ 'value' ] = $default;
+
+			}
+
+			return $field;
+			
+		}
+
+	// Language
+
+		/**
+		 * Set 'English' as the default language for provider profiles.
+		 * 
+		 * The slug for 'English' must be set as 'english'.
+		 */
+
+		add_filter('acf/load_value/key=field_physician_languages', 'set_default_language', 20, 3);
+		
+		function set_default_language($value, $post_id, $field) {
+
+			// Only add default content for new posts
+
+				if ( $value !== null ) {
+
+					return $value;
+
+				}
+
+			$term = get_term_by('slug', 'english', 'language');
+			$term_id = $term->term_id;
+			$value = array($term_id);
+
+			return $value;
+
+		}
+
+	// Region
+
+		/**
+		 * Set 'Central Arkansas' as the default region for location profiles.
+		 * 
+		 * The slug for 'Central Arkansas' must be set as 'central'.
+		 */
+
+		add_filter('acf/load_value/key=field_location_region', 'set_default_region', 20, 3);
+
+		function set_default_region($value, $post_id, $field) {
+
+			// Only add default content for empty fields
+
+				if ( $value !== null ) {
+
+					return $value;
+
+				}
+
+			$term = get_term_by('slug', 'central', 'region');
+			$term_id = $term->term_id;
+			$value = array($term_id);
+
+			return $value;
+
+		}
 
 // Order for Portal - None slug set to "_none"
 add_filter('acf/fields/taxonomy/wp_list_categories/key=field_location_portal', 'my_taxonomy_query', 10, 2);
