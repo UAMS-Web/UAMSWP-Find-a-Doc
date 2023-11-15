@@ -382,40 +382,76 @@ function resources_save_post( $post_id ) {
 	$_POST['acf']['field_clinical_resource_asp_filter'] = $filter_list;
 }
 
-// Fires before saving data to post - only updates ACF data
-add_action('acf/save_post', 'location_save_post', 7);
-function location_save_post( $post_id ) {
-	$post_type = get_post_type($post_id);
+// Fire before saving data to post (by using a priority less than 10)
 
-	// Bail early if no data sent or not location post type
-	if( empty($_POST['acf']) || ($post_type != 'location') ) {
-		return;
+	/**
+	 * Only updates ACF data
+	 */
+
+	add_action('acf/save_post', 'location_save_post', 7);
+
+	function location_save_post( $post_id ) {
+
+		$post_type = get_post_type($post_id);
+
+		// Bail early if no data sent or not location post type
+
+			if (
+				empty( $_POST['acf'] )
+				||
+				( $post_type != 'location' )
+			) {
+
+				return;
+
+			}
+
+		// Create full name to store in 'physician_full_name' field
+
+			$featured_image = $_POST['acf']['field_location_featured_image'];
+			$wayfinding_image = $_POST['acf']['field_location_wayfinding_photo'];
+
+		// If featured image is set & wayfinding is empty, set wayfinding image to featured image
+
+			if (
+				$featured_image
+				&&
+				empty($wayfinding_image)
+			) {
+
+				$_POST['acf']['field_location_wayfinding_photo'] = $featured_image;
+
+			}
+
+		// If wayfinding image is set & featured image is empty, set featured image to wayfinding image
+
+			if (
+				empty($featured_image)
+				&&
+				$wayfinding_image
+			) {
+
+				$_POST['acf']['field_location_featured_image'] = $wayfinding_image;
+
+			}
+
+		$has_parent = $_POST['acf']['field_location_parent'];
+		$location_parent = $_POST['acf']['field_location_parent_id'];
+
+		if (
+			$has_parent
+			&&
+			!empty($location_parent)
+		) {
+
+			$region = array();
+			$region[] = get_field( 'location_region', $location_parent);
+
+			$_POST['acf']['field_location_region'] = $region;
+
+		}
+
 	}
-
-	// Create full name to store in 'physician_full_name' field
-	$featured_image = $_POST['acf']['field_location_featured_image'];
-	$wayfinding_image = $_POST['acf']['field_location_wayfinding_photo'];
-
-	// If featured image is set & wayfinding is empty, set wayfinding image to featured image
-	if ($featured_image && empty($wayfinding_image)) {
-		$_POST['acf']['field_location_wayfinding_photo'] = $featured_image;
-	}
-	// If wayfinding image is set & featured image is empty, set featured image to wayfinding image
-	if (empty($featured_image) && $wayfinding_image) {
-		$_POST['acf']['field_location_featured_image'] = $wayfinding_image;
-	}
-
-	$has_parent = $_POST['acf']['field_location_parent'];
-	$location_parent = $_POST['acf']['field_location_parent_id'];
-
-	if ($has_parent && !empty($location_parent)) {
-		$region = array();
-		$region[] = get_field( 'location_region', $location_parent);
-
-		$_POST['acf']['field_location_region'] = $region;
-	}
-
-}
 
 // Fire after saving data to post
 
