@@ -2464,20 +2464,101 @@
 
 	function remove_provider_meta() {
 
-		remove_meta_box( 'conditiondiv', 'provider', 'side' );
-		remove_meta_box( 'specialtydiv', 'provider', 'side' );
-		remove_meta_box( 'departmentdiv', 'provider', 'side' );
-		remove_meta_box( 'patient_typediv', 'provider', 'side' );
-		remove_meta_box( 'tagsdiv-medical_procedures', 'provider', 'side' );
-		remove_meta_box( 'medical_termsdiv', 'provider', 'side' );
-		remove_meta_box( 'tagsdiv-recognition', 'provider', 'side' );
-		remove_meta_box( 'custom-post-type-onomies-locations', 'provider', 'side');
-		remove_meta_box( 'gmb_cat_providerdiv', 'provider', 'side' );
-		// Location
-		remove_meta_box( 'regiondiv', 'location', 'side' );
-		remove_meta_box( 'location_typediv', 'location', 'side' );
-		remove_meta_box( 'buildingdiv', 'location', 'side' );
-		remove_meta_box( 'gmb_cat_locationdiv', 'location', 'side' );
+		$screens = array(
+			'provider',
+			'location',
+			'expertise',
+			'clinical-resource',
+			'condition',
+			'treatment'
+		);
+
+		$contexts = array(
+			'side'
+		);
+
+		// [slug]div
+
+			$slugs = array(
+				'condition',
+				'treatment',
+				'specialty',
+				'department',
+				'service_line',
+				'degree',
+				'patient_type',
+				'clinical_title',
+				'clinical_admin_title',
+				'affiliation',
+				'institute_affiliation',
+				'language',
+				'medical_terms',
+				'medical_term',
+				'academic_position',
+				'academic_college',
+				'school',
+				'residency_year',
+				'academic_department',
+				'board',
+				'association',
+				'educationtype',
+				'portal',
+				'academic_title',
+				'academic_admin_title',
+				'recognition',
+				'region',
+				'location_type',
+				'gmb_cat_provider',
+				'gmb_cat_location',
+				'building'
+			);
+
+			foreach ( $slugs as $slug ) {
+
+				foreach ( $screens as $screen ) {
+
+					foreach ( $contexts as $context ) {
+
+						remove_meta_box(
+							$slug . 'div', // string // Required // Meta box ID (used in the 'id' attribute for the meta box).
+							$screen, // string|array|WP_Screen // Required // The screen or screens on which the meta box is shown (such as a post type, 'link', or 'comment'). Accepts a single screen ID, WP_Screen object, or array of screen IDs.
+							$context // string // Required // The context within the screen where the box is set to display. Contexts vary from screen to screen. Post edit screen contexts include 'normal', 'side', and 'advanced'. Comments screen contexts include 'normal' and 'side'. Menus meta boxes (accordion sections) all use the 'side' context.
+						);
+
+					}
+
+				}
+
+			}
+
+		// tagsdiv-[slug]
+
+			$tags_slugs = array(
+				'recognition',
+				'medical_procedures'
+			);
+
+			foreach ( $tags_slugs as $slug ) {
+
+				foreach ( $screens as $screen ) {
+
+					foreach ( $contexts as $context ) {
+
+						remove_meta_box(
+							'tagsdiv-' . $slug, // string // Required // Meta box ID (used in the 'id' attribute for the meta box).
+							$screen, // string|array|WP_Screen // Required // The screen or screens on which the meta box is shown (such as a post type, 'link', or 'comment'). Accepts a single screen ID, WP_Screen object, or array of screen IDs.
+							$context // string // Required // The context within the screen where the box is set to display. Contexts vary from screen to screen. Post edit screen contexts include 'normal', 'side', and 'advanced'. Comments screen contexts include 'normal' and 'side'. Menus meta boxes (accordion sections) all use the 'side' context.
+						);
+
+					}
+
+				}
+
+			}
+
+		// Other
+
+			remove_meta_box( 'custom-post-type-onomies-locations', $post_types, 'side' );
 
 	}
 
