@@ -668,27 +668,44 @@ function location_save_post_after( $post_id ) {
 		 * @param	(int|string) $post_id The post ID this block is saved to.
 		 */
 
-		function fad_facetwp_cards_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
+		function fad_facetwp_cards_callback(
+			$block, // array // Required // The block settings and attributes.
+			$content = '', // string // Optional // The block inner HTML (empty).
+			$is_preview = false, // bool // Optional // True during AJAX preview.
+			$post_id = 0 // (int|string) // Optional // The post ID this block is saved to.
+		) {
 
 			// Create id attribute allowing for custom "anchor" value.
-			$id = 'facetwp-cards-' . $block['id'];
-			if( !empty($block['anchor']) ) {
-				$id = $block['anchor'];
-			}
+
+				$id = 'facetwp-cards-' . $block['id'];
+
+				if ( !empty($block['anchor']) ) {
+
+					$id = $block['anchor'];
+
+				}
 
 			// Create class attribute allowing for custom "className" and "align" values.
-			$className = 'facetwp-cards';
-			if( !empty($block['className']) ) {
-				$className .= ' ' . $block['className'];
-			}
-			if( !empty($block['align']) ) {
-				$className .= ' align' . $block['align'];
-			}
 
-			// Load values and assing defaults.
-			$heading = get_field('facetwp_heading') ?: 'Cards List';
-			$template = get_field('facetwp_template_name');
-			$background_color = get_field('facetwp_background_color') ?: 'bg-white';
+				$className = 'facetwp-cards';
+
+				if ( !empty($block['className']) ) {
+
+					$className .= ' ' . $block['className'];
+
+				}
+
+				if ( !empty($block['align']) ) {
+
+					$className .= ' align' . $block['align'];
+
+				}
+
+			// Load values and assign defaults.
+
+				$heading = get_field('facetwp_heading') ?: 'Cards List';
+				$template = get_field('facetwp_template_name');
+				$background_color = get_field('facetwp_background_color') ?: 'bg-white';
 
 			?>
 			<section class="uams-module container-fluid p-8 p-sm-10 <?php echo $className; ?> <?php echo $background_color; ?>">
@@ -702,6 +719,7 @@ function location_save_post_after( $post_id ) {
 				</div>
 			</section>
 			<?php
+
 		}
 
 	// FacetWP Block Callback Function
