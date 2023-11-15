@@ -2296,132 +2296,141 @@
 
 			}
 
-/* Custom Roles */
-function add_roles_on_plugin_activation() {
-	add_role( 'doc_editor', 'Doc Profile Editor',
-			array( 	'read' => true,
-					'level_1' => true, // Dropdown as author support
-					'read_physician' => true,
-					'edit_physician' => true,
-					'delete_physician' => true,
-					'delete_published_physicians' => false,
-					'edit_physicians' => true,
-					'edit_published_physicians' => true,
-					'edit_others_physicians' => false,
-					'publish_physicians' => false,
-					'read_private_physicians' => true,
-					'read_location' => true,
-					'edit_location' => true,
-					'delete_location' => true,
-					'delete_published_locations' => false,
-					'edit_locations' => true,
-					'edit_published_locations' => true,
-					'edit_others_locations' => false,
-					'publish_locations' => false,
-					'read_private_locations' => true,
-					'upload_files' => true,
-					'edit_files' => true,
+// Custom Roles
 
-				)
-	 );
-	 add_role( 'doc_admin', 'Doc Profile Admin',
-			array( 	'read' => true,
-					'level_1' => true, // Dropdown as author support
-					'read_physician' => true,
-					'edit_physician' => true,
-					'delete_physician' => true,
-					'delete_published_physicians' => false,
-					'edit_physicians' => true,
-					'edit_published_physicians' => true,
-					'edit_others_physicians' => true,
-					'publish_physicians' => false,
-					'read_private_physicians' => true,
-					'read_location' => true,
-					'edit_location' => true,
-					'delete_location' => true,
-					'delete_published_locations' => false,
-					'edit_locations' => true,
-					'edit_published_locations' => true,
-					'edit_others_locations' => true,
-					'publish_locations' => false,
-					'read_private_locations' => true,
-					'upload_files' => true,
-					'edit_files' => true,
-				)
-		);
-}
-// register_activation_hook( __FILE__, 'add_roles_on_plugin_activation' );
-add_action( 'init', 'add_roles_on_plugin_activation', 0 );
+	// Add roles
 
-/* 
-// Remove roles, if they need to be reset
-function remove_roles_temp(){
-	remove_role( 'doc_editor' );
-	remove_role( 'doc_admin' );
-}
-add_action( 'init', 'remove_roles_temp' );
-*/
+		function add_roles_on_plugin_activation() {
+			add_role( 'doc_editor', 'Doc Profile Editor',
+					array( 	'read' => true,
+							'level_1' => true, // Dropdown as author support
+							'read_physician' => true,
+							'edit_physician' => true,
+							'delete_physician' => true,
+							'delete_published_physicians' => false,
+							'edit_physicians' => true,
+							'edit_published_physicians' => true,
+							'edit_others_physicians' => false,
+							'publish_physicians' => false,
+							'read_private_physicians' => true,
+							'read_location' => true,
+							'edit_location' => true,
+							'delete_location' => true,
+							'delete_published_locations' => false,
+							'edit_locations' => true,
+							'edit_published_locations' => true,
+							'edit_others_locations' => false,
+							'publish_locations' => false,
+							'read_private_locations' => true,
+							'upload_files' => true,
+							'edit_files' => true,
 
-function add_theme_caps() {
-	// gets the author role
-	$role = get_role( 'administrator' );
+						)
+			);
+			add_role( 'doc_admin', 'Doc Profile Admin',
+					array( 	'read' => true,
+							'level_1' => true, // Dropdown as author support
+							'read_physician' => true,
+							'edit_physician' => true,
+							'delete_physician' => true,
+							'delete_published_physicians' => false,
+							'edit_physicians' => true,
+							'edit_published_physicians' => true,
+							'edit_others_physicians' => true,
+							'publish_physicians' => false,
+							'read_private_physicians' => true,
+							'read_location' => true,
+							'edit_location' => true,
+							'delete_location' => true,
+							'delete_published_locations' => false,
+							'edit_locations' => true,
+							'edit_published_locations' => true,
+							'edit_others_locations' => true,
+							'publish_locations' => false,
+							'read_private_locations' => true,
+							'upload_files' => true,
+							'edit_files' => true,
+						)
+				);
+		}
 
-	// This only works, because it accesses the class instance.
-	// would allow the author to edit others' posts for current theme only
-	$role->add_cap( 'edit_others_posts' );
-	$role->add_cap( 'edit_physician' );
-	$role->add_cap( 'read_physician');
-	$role->add_cap( 'delete_physician');
-	$role->add_cap( 'delete_published_physicians');
-	$role->add_cap( 'edit_physicians');
-	$role->add_cap( 'edit_others_physicians');
-	$role->add_cap( 'edit_published_physicians');
-	$role->add_cap( 'publish_physicians');
-	$role->add_cap( 'read_private_physicians');
-	$role->add_cap( 'edit_location');
-	$role->add_cap( 'read_location');
-	$role->add_cap( 'delete_location');
-	$role->add_cap( 'edit_locations');
-	$role->add_cap( 'edit_others_locations');
-	$role->add_cap( 'publish_locations');
-	$role->add_cap( 'read_private_locations');
-	$role->add_cap( 'edit_expertise');
-	$role->add_cap( 'read_expertise');
-	$role->add_cap( 'delete_expertise');
-	$role->add_cap( 'edit_expertises');
-	$role->add_cap( 'edit_others_expertises');
-	$role->add_cap( 'publish_expertises');
-	$role->add_cap( 'read_private_expertises');
-	$role->add_cap( 'edit_condition');
-	$role->add_cap( 'read_condition');
-	$role->add_cap( 'delete_condition');
-	$role->add_cap( 'edit_conditions');
-	$role->add_cap( 'edit_others_conditions');
-	$role->add_cap( 'publish_conditions');
-	$role->add_cap( 'read_private_conditions');
-	$role->add_cap( 'edit_treatment');
-	$role->add_cap( 'read_treatment');
-	$role->add_cap( 'delete_treatment');
-	$role->add_cap( 'edit_treatments');
-	$role->add_cap( 'edit_others_treatments');
-	$role->add_cap( 'publish_treatments');
-	$role->add_cap( 'read_private_treatments');
-	$role->add_cap( 'edit_clinical-resource');
-	$role->add_cap( 'read_clinical-resource');
-	$role->add_cap( 'delete_clinical-resource');
-	$role->add_cap( 'edit_clinical-resources');
-	$role->add_cap( 'edit_others_clinical-resources');
-	$role->add_cap( 'publish_clinical-resources');
-	$role->add_cap( 'read_private_clinical-resources');
-	$role->add_cap( 'edit_clinical_resource');
-	$role->add_cap( 'read_clinical_resource');
-	$role->add_cap( 'delete_clinical_resource');
-	$role->add_cap( 'edit_clinical_resources');
-	$role->add_cap( 'edit_others_clinical_resources');
-	$role->add_cap( 'publish_clinical_resources');
-	$role->add_cap( 'read_private_clinical_resources');
-}
-add_action( 'admin_init', 'add_theme_caps');
+		// register_activation_hook( __FILE__, 'add_roles_on_plugin_activation' );
+		add_action( 'init', 'add_roles_on_plugin_activation', 0 );
+
+	// Remove roles, if they need to be reset
+
+		// function remove_roles_temp(){
+		//
+		// 	remove_role( 'doc_editor' );
+		// 	remove_role( 'doc_admin' );
+		//
+		// }
+		//
+		// add_action( 'init', 'remove_roles_temp' );
+
+	// Assign roles a capability
+
+		function add_theme_caps() {
+			// gets the author role
+			$role = get_role( 'administrator' );
+
+			// This only works, because it accesses the class instance.
+			// would allow the author to edit others' posts for current theme only
+			$role->add_cap( 'edit_others_posts' );
+			$role->add_cap( 'edit_physician' );
+			$role->add_cap( 'read_physician');
+			$role->add_cap( 'delete_physician');
+			$role->add_cap( 'delete_published_physicians');
+			$role->add_cap( 'edit_physicians');
+			$role->add_cap( 'edit_others_physicians');
+			$role->add_cap( 'edit_published_physicians');
+			$role->add_cap( 'publish_physicians');
+			$role->add_cap( 'read_private_physicians');
+			$role->add_cap( 'edit_location');
+			$role->add_cap( 'read_location');
+			$role->add_cap( 'delete_location');
+			$role->add_cap( 'edit_locations');
+			$role->add_cap( 'edit_others_locations');
+			$role->add_cap( 'publish_locations');
+			$role->add_cap( 'read_private_locations');
+			$role->add_cap( 'edit_expertise');
+			$role->add_cap( 'read_expertise');
+			$role->add_cap( 'delete_expertise');
+			$role->add_cap( 'edit_expertises');
+			$role->add_cap( 'edit_others_expertises');
+			$role->add_cap( 'publish_expertises');
+			$role->add_cap( 'read_private_expertises');
+			$role->add_cap( 'edit_condition');
+			$role->add_cap( 'read_condition');
+			$role->add_cap( 'delete_condition');
+			$role->add_cap( 'edit_conditions');
+			$role->add_cap( 'edit_others_conditions');
+			$role->add_cap( 'publish_conditions');
+			$role->add_cap( 'read_private_conditions');
+			$role->add_cap( 'edit_treatment');
+			$role->add_cap( 'read_treatment');
+			$role->add_cap( 'delete_treatment');
+			$role->add_cap( 'edit_treatments');
+			$role->add_cap( 'edit_others_treatments');
+			$role->add_cap( 'publish_treatments');
+			$role->add_cap( 'read_private_treatments');
+			$role->add_cap( 'edit_clinical-resource');
+			$role->add_cap( 'read_clinical-resource');
+			$role->add_cap( 'delete_clinical-resource');
+			$role->add_cap( 'edit_clinical-resources');
+			$role->add_cap( 'edit_others_clinical-resources');
+			$role->add_cap( 'publish_clinical-resources');
+			$role->add_cap( 'read_private_clinical-resources');
+			$role->add_cap( 'edit_clinical_resource');
+			$role->add_cap( 'read_clinical_resource');
+			$role->add_cap( 'delete_clinical_resource');
+			$role->add_cap( 'edit_clinical_resources');
+			$role->add_cap( 'edit_others_clinical_resources');
+			$role->add_cap( 'publish_clinical_resources');
+			$role->add_cap( 'read_private_clinical_resources');
+		}
+		
+		add_action( 'admin_init', 'add_theme_caps');
 
 // Remove the taxonomy metabox [slugnamediv]
 function remove_provider_meta() {
