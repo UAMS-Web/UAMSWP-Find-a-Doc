@@ -416,28 +416,53 @@ function location_save_post( $post_id ) {
 	}
 
 }
-// Fires after saving data to post - change post data
-add_action('acf/save_post', 'location_save_post_after', 20);
-function location_save_post_after( $post_id ) {
-	$post_type = get_post_type($post_id);
-	if ($post_type != 'location') {
-		return;
-	}
-	$post = get_post($post_id);
-	$location_has_parent = get_field('location_parent');
-	$location_parent_id = get_field('location_parent_id');
 
-	// If location has parent & parent id set, set parent id
-	if ($location_has_parent && $location_parent_id) {
-		$post->post_parent = $location_parent_id;
-	} else { // clear the parent data
-		$post->post_parent = 0;
-	}
-	// remove this filter to prevent infinite loop
-	remove_filter('acf/save_post', 'save_location_parent');
-	wp_update_post($post);
+// Fire after saving data to post
 
-}
+	/**
+	 * Change post data
+	 */
+
+	add_action('acf/save_post', 'location_save_post_after', 20);
+
+	function location_save_post_after( $post_id ) {
+
+		$post_type = get_post_type($post_id);
+
+		// Bail early if not location post type
+
+			if ( $post_type != 'location' ) {
+
+				return;
+
+			}
+
+		$post = get_post($post_id);
+		$location_has_parent = get_field('location_parent');
+		$location_parent_id = get_field('location_parent_id');
+
+		// If the location has a parent and parent ID is set, set the parent D
+
+			if (
+				$location_has_parent
+				&&
+				$location_parent_id
+			) {
+
+				$post->post_parent = $location_parent_id;
+
+			} else { // clear the parent data
+
+				$post->post_parent = 0;
+
+			}
+
+		// Remove this filter to prevent an infinite loop
+
+			remove_filter('acf/save_post', 'save_location_parent');
+			wp_update_post($post);
+
+	}
 
 // Bidirectionally update ACF data
 
