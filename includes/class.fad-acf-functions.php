@@ -152,20 +152,27 @@
 
 		}
 
-// Order for Portal - None slug set to "_none"
-add_filter('acf/fields/taxonomy/wp_list_categories/key=field_location_portal', 'my_taxonomy_query', 10, 2);
-add_filter('acf/fields/taxonomy/wp_list_categories/key=field_physician_portal', 'my_taxonomy_query', 10, 2);
-function my_taxonomy_query( $args, $field ) {
-    
-    // modify args
-    $args['orderby'] = 'slug';
-    $args['order'] = 'ASC';
-    
-    
-    // return
-    return $args;
-    
-}
+// Order for Portal
+
+	/**
+	 * 'None' slug set to '_none'
+	 */
+
+	add_filter('acf/fields/taxonomy/wp_list_categories/key=field_location_portal', 'my_taxonomy_query', 10, 2);
+	add_filter('acf/fields/taxonomy/wp_list_categories/key=field_physician_portal', 'my_taxonomy_query', 10, 2);
+
+	function my_taxonomy_query( $args, $field ) {
+		
+		// modify args
+
+			$args['orderby'] = 'slug';
+			$args['order'] = 'ASC';
+		
+		// return
+		
+			return $args;
+		
+	}
 
 // Fires before saving data to post - only updates ACF data
 add_action('acf/save_post', 'physician_save_post', 5); 
