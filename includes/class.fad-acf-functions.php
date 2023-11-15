@@ -998,7 +998,7 @@ function location_save_post_after( $post_id ) {
 
 		// Render shortcodes in all textarea values.
 		
-			return html_entity_decode( $value );
+			return html_entity_decode( $value ); // Convert HTML entities to their corresponding characters
 
 	}
 
