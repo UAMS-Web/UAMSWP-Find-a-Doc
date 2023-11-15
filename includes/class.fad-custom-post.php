@@ -1,434 +1,450 @@
 <?php
 
-// Register 'Providers' Custom Post Type
-function providers() {
+// Register Custom Post Types
 
-	$labels = array(
-		'name'                  => 'Providers',
-		'singular_name'         => 'Provider',
-		'menu_name'             => 'Providers',
-		'name_admin_bar'        => 'Provider',
-		'archives'              => 'Provider Archives',
-		'attributes'            => 'Provider Attributes',
-		'parent_item_colon'     => 'Parent Item:',
-		'all_items'             => 'All Providers',
-		'add_new_item'          => 'Add New Provider',
-		'add_new'               => 'Add New',
-		'new_item'              => 'New Provider',
-		'edit_item'             => 'Edit Provider',
-		'update_item'           => 'Update Provider',
-		'view_item'             => 'View Provider',
-		'view_items'            => 'View Providers',
-		'search_items'          => 'Search Providers',
-		'uploaded_to_this_item' => 'Uploaded to this item',
-		'items_list'            => 'Providers list',
-		'items_list_navigation' => 'Providers list navigation',
-		'filter_items_list'     => 'Filter Providers list',
-	);
-	$capabilities = array(
-		'edit_post'      		=> "edit_physician",
-        'read_post'      		=> "read_physician",
-        'delete_post'        	=> "delete_physician",
-        'edit_posts'         	=> "edit_physicians",
-        'edit_others_posts'  	=> "edit_others_physicians",
-        'publish_posts'      	=> "publish_physicians",
-        'read_private_posts'    => "read_private_physicians",
-        'read'                  => "read",
-        'delete_posts'          => "delete_physicians",
-        'delete_private_posts'  => "delete_private_physicians",
-        'delete_published_posts' => "delete_published_physicians",
-        'delete_others_posts'   => "delete_others_physicians",
-        'edit_private_posts'    => "edit_private_physicians",
-        'edit_published_posts'  => "edit_published_physicians",
-	);
-	$args = array(
-		'label'                 => 'Provider',
-		'description'           => 'UAMS Providers for Find-a-Doctor',
-		'labels'                => $labels,
-		'supports'              => array( 'title', 'author', 'thumbnail', 'revisions' ),
-		'taxonomies'            => array( 'department', 'patient_type', 'treatment', 'medical_term', 'condition' ),
-		'hierarchical'          => false,
-		'public'                => true,
-		'show_ui'               => true,
-		'show_in_menu'          => true,
-		'menu_position'         => 30,
-		'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/physicians-icon.png',
-		'show_in_admin_bar'     => true,
-		'show_in_nav_menus'     => true,
-		'slug'					=> 'provider',
-		'can_export'            => true,
-		'has_archive'           => true,
-		'exclude_from_search'   => false,
-		'publicly_queryable'    => true,
-		'capabilities'          => $capabilities,
-		'show_in_rest'          => true,
-		'rest_base'             => 'provider',
-		'rest_controller_class' => 'WP_REST_Posts_Controller',
-	);
-	register_post_type( 'provider', $args );
+	// Register 'Providers' Custom Post Type
 
-}
-add_action( 'init', 'providers', 0 );
+		function providers() {
 
-if ( ! function_exists('locations') ) {
+			$labels = array(
+				'name'                  => 'Providers',
+				'singular_name'         => 'Provider',
+				'menu_name'             => 'Providers',
+				'name_admin_bar'        => 'Provider',
+				'archives'              => 'Provider Archives',
+				'attributes'            => 'Provider Attributes',
+				'parent_item_colon'     => 'Parent Item:',
+				'all_items'             => 'All Providers',
+				'add_new_item'          => 'Add New Provider',
+				'add_new'               => 'Add New',
+				'new_item'              => 'New Provider',
+				'edit_item'             => 'Edit Provider',
+				'update_item'           => 'Update Provider',
+				'view_item'             => 'View Provider',
+				'view_items'            => 'View Providers',
+				'search_items'          => 'Search Providers',
+				'uploaded_to_this_item' => 'Uploaded to this item',
+				'items_list'            => 'Providers list',
+				'items_list_navigation' => 'Providers list navigation',
+				'filter_items_list'     => 'Filter Providers list',
+			);
+			$capabilities = array(
+				'edit_post'      		=> "edit_physician",
+				'read_post'      		=> "read_physician",
+				'delete_post'        	=> "delete_physician",
+				'edit_posts'         	=> "edit_physicians",
+				'edit_others_posts'  	=> "edit_others_physicians",
+				'publish_posts'      	=> "publish_physicians",
+				'read_private_posts'    => "read_private_physicians",
+				'read'                  => "read",
+				'delete_posts'          => "delete_physicians",
+				'delete_private_posts'  => "delete_private_physicians",
+				'delete_published_posts' => "delete_published_physicians",
+				'delete_others_posts'   => "delete_others_physicians",
+				'edit_private_posts'    => "edit_private_physicians",
+				'edit_published_posts'  => "edit_published_physicians",
+			);
+			$args = array(
+				'label'                 => 'Provider',
+				'description'           => 'UAMS Providers for Find-a-Doctor',
+				'labels'                => $labels,
+				'supports'              => array( 'title', 'author', 'thumbnail', 'revisions' ),
+				'taxonomies'            => array( 'department', 'patient_type', 'treatment', 'medical_term', 'condition' ),
+				'hierarchical'          => false,
+				'public'                => true,
+				'show_ui'               => true,
+				'show_in_menu'          => true,
+				'menu_position'         => 30,
+				'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/physicians-icon.png',
+				'show_in_admin_bar'     => true,
+				'show_in_nav_menus'     => true,
+				'slug'					=> 'provider',
+				'can_export'            => true,
+				'has_archive'           => true,
+				'exclude_from_search'   => false,
+				'publicly_queryable'    => true,
+				'capabilities'          => $capabilities,
+				'show_in_rest'          => true,
+				'rest_base'             => 'provider',
+				'rest_controller_class' => 'WP_REST_Posts_Controller',
+			);
+			register_post_type( 'provider', $args );
 
-// Register Custom Post Type
-function locations() {
+		}
 
-	$labels = array(
-		'name'                  => 'Locations',
-		'singular_name'         => 'Location',
-		'menu_name'             => 'Locations',
-		'name_admin_bar'        => 'Location',
-		'archives'              => 'Location Archives',
-		'attributes'            => 'Location Attributes',
-		'parent_item_colon'     => 'Parent Item:',
-		'all_items'             => 'All Locations',
-		'add_new_item'          => 'Add New Location',
-		'add_new'               => 'Add New',
-		'new_item'              => 'New Location',
-		'edit_item'             => 'Edit Location',
-		'update_item'           => 'Update Location',
-		'view_item'             => 'View Location',
-		'view_items'            => 'View Locations',
-		'search_items'          => 'Search Locations',
-		'uploaded_to_this_item' => 'Uploaded to this item',
-		'items_list'            => 'Locations list',
-		'items_list_navigation' => 'Locations list navigation',
-		'filter_items_list'     => 'Filter Locations list',
-	);
-	$capabilities = array(
-		'edit_post'      		=> "edit_location",
-        'read_post'      		=> "read_location",
-        'delete_post'        	=> "delete_location",
-        'edit_posts'         	=> "edit_locations",
-        'edit_others_posts'  	=> "edit_others_locations",
-        'publish_posts'      	=> "publish_locations",
-        'read_private_posts'    => "read_private_locations",
-        'read'                  => "read",
-        'delete_posts'          => "delete_locations",
-        'delete_private_posts'  => "delete_private_locations",
-        'delete_published_posts' => "delete_published_locations",
-        'delete_others_posts'   => "delete_others_locations",
-        'edit_private_posts'    => "edit_private_locations",
-        'edit_published_posts'  => "edit_published_locations",
-	);
-	$args = array(
-		'label'                 => 'Location',
-		'labels'                => $labels,
-		'supports'              => array( 'title', 'author', 'thumbnail','revisions','page-attributes' ),
-		'taxonomies'            => array( 'treatment', 'condition' ),
-		'hierarchical'          => true,
-		'public'                => true,
-		'show_ui'               => true,
-		'show_in_menu'          => true,
-		'menu_position'         => 30,
-		'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/locations-icon.png',
-		'show_in_admin_bar'     => true,
-		'show_in_nav_menus'     => true,
-		'can_export'            => true,
-		'has_archive'           => true,
-		'exclude_from_search'   => false,
-		'publicly_queryable'    => true,
-		'capabilities'          => $capabilities,
-		'show_in_rest'          => true,
-		'rest_base'             => 'location',
-		'rest_controller_class' => 'WP_REST_Posts_Controller',
-	);
-	register_post_type( 'location', $args );
+		add_action( 'init', 'providers', 0 );
 
-}
-add_action( 'init', 'locations', 0 );
+	// Register 'Locations' Custom Post Type
 
-}
+		if ( ! function_exists('locations') ) {
 
-if ( ! function_exists('expertise_cpt') ) {
+			function locations() {
+
+				$labels = array(
+					'name'                  => 'Locations',
+					'singular_name'         => 'Location',
+					'menu_name'             => 'Locations',
+					'name_admin_bar'        => 'Location',
+					'archives'              => 'Location Archives',
+					'attributes'            => 'Location Attributes',
+					'parent_item_colon'     => 'Parent Item:',
+					'all_items'             => 'All Locations',
+					'add_new_item'          => 'Add New Location',
+					'add_new'               => 'Add New',
+					'new_item'              => 'New Location',
+					'edit_item'             => 'Edit Location',
+					'update_item'           => 'Update Location',
+					'view_item'             => 'View Location',
+					'view_items'            => 'View Locations',
+					'search_items'          => 'Search Locations',
+					'uploaded_to_this_item' => 'Uploaded to this item',
+					'items_list'            => 'Locations list',
+					'items_list_navigation' => 'Locations list navigation',
+					'filter_items_list'     => 'Filter Locations list',
+				);
+				$capabilities = array(
+					'edit_post'      		=> "edit_location",
+					'read_post'      		=> "read_location",
+					'delete_post'        	=> "delete_location",
+					'edit_posts'         	=> "edit_locations",
+					'edit_others_posts'  	=> "edit_others_locations",
+					'publish_posts'      	=> "publish_locations",
+					'read_private_posts'    => "read_private_locations",
+					'read'                  => "read",
+					'delete_posts'          => "delete_locations",
+					'delete_private_posts'  => "delete_private_locations",
+					'delete_published_posts' => "delete_published_locations",
+					'delete_others_posts'   => "delete_others_locations",
+					'edit_private_posts'    => "edit_private_locations",
+					'edit_published_posts'  => "edit_published_locations",
+				);
+				$args = array(
+					'label'                 => 'Location',
+					'labels'                => $labels,
+					'supports'              => array( 'title', 'author', 'thumbnail','revisions','page-attributes' ),
+					'taxonomies'            => array( 'treatment', 'condition' ),
+					'hierarchical'          => true,
+					'public'                => true,
+					'show_ui'               => true,
+					'show_in_menu'          => true,
+					'menu_position'         => 30,
+					'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/locations-icon.png',
+					'show_in_admin_bar'     => true,
+					'show_in_nav_menus'     => true,
+					'can_export'            => true,
+					'has_archive'           => true,
+					'exclude_from_search'   => false,
+					'publicly_queryable'    => true,
+					'capabilities'          => $capabilities,
+					'show_in_rest'          => true,
+					'rest_base'             => 'location',
+					'rest_controller_class' => 'WP_REST_Posts_Controller',
+				);
+				register_post_type( 'location', $args );
+
+			}
+
+			add_action( 'init', 'locations', 0 );
+
+		}
+
 	// Register 'Areas of Expertise' Custom Post Type
-	function expertise_cpt() {
 
-		$labels = array(
-			'name'                  => 'Areas of Expertise',
-			'singular_name'         => 'Area of Expertise',
-			'menu_name'             => 'Areas of Expertise',
-			'name_admin_bar'        => 'Area of Expertise',
-			'archives'              => 'Area of Expertise Archives',
-			'attributes'            => 'Area of Expertise Attributes',
-			'parent_item_colon'     => 'Parent Item:',
-			'all_items'             => 'All Areas of Expertise',
-			'add_new_item'          => 'Add New Area of Expertise',
-			'add_new'               => 'Add New',
-			'new_item'              => 'New Area of Expertise',
-			'edit_item'             => 'Edit Area of Expertise',
-			'update_item'           => 'Update Area of Expertise',
-			'view_item'             => 'View Area of Expertise',
-			'view_items'            => 'View Areas of Expertise',
-			'search_items'          => 'Search Areas of Expertise',
-			'uploaded_to_this_item' => 'Uploaded to this item',
-			'items_list'            => 'Areas of expertise list',
-			'items_list_navigation' => 'Areas of expertise list navigation',
-			'filter_items_list'     => 'Filter Areas of expertise list',
-		);
-		$capabilities = array(
-			'edit_post'             => 'edit_expertise',
-			'read_post'             => 'read_expertise',
-			'delete_post'           => 'delete_expertise',
-			'edit_posts'            => 'edit_expertises',
-			'edit_others_posts'     => 'edit_others_expertises',
-			'publish_posts'         => 'publish_expertises',
-			'read_private_posts'    => 'read_private_expertises',
-		);
-		$rewrite = array(
-			'slug'                  => 'expertise',
-			'with_front'            => true,
-			'pages'                 => true,
-			'feeds'                 => true,
-		);
-		$args = array(
-			'label'                 => 'Areas of Expertise',
-			'description'           => 'UAMS Areas of Expertise', 
-			'labels'                => $labels,
-			'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes', 'revisions' ),
-			'taxonomies'            => array( 'treatment', 'condition' ),
-			'hierarchical'          => true,
-			'capability_type' 		=> 'page',
-			'public'                => true,
-			'show_ui'               => true,
-			'show_in_menu'          => true,
-			'menu_position'         => 30,
-			'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/services-icon.png',
-			'show_in_admin_bar'     => true,
-			'show_in_nav_menus'     => true,
-			'can_export'            => true,
-			'has_archive'           => true,
-			'exclude_from_search'   => false,
-			'publicly_queryable'    => true,
-			'capabilities'          => $capabilities,
-			'show_in_rest'          => true,
-			'rest_base'             => 'expertise',
-			'rest_controller_class' => 'WP_REST_Posts_Controller',
-			'rewrite'               => $rewrite,
-		);
-		register_post_type( 'expertise', $args );
+		if ( ! function_exists('expertise_cpt') ) {
+			
+			function expertise_cpt() {
 
-	}
-	add_action( 'init', 'expertise_cpt', 0 );
-}
+				$labels = array(
+					'name'                  => 'Areas of Expertise',
+					'singular_name'         => 'Area of Expertise',
+					'menu_name'             => 'Areas of Expertise',
+					'name_admin_bar'        => 'Area of Expertise',
+					'archives'              => 'Area of Expertise Archives',
+					'attributes'            => 'Area of Expertise Attributes',
+					'parent_item_colon'     => 'Parent Item:',
+					'all_items'             => 'All Areas of Expertise',
+					'add_new_item'          => 'Add New Area of Expertise',
+					'add_new'               => 'Add New',
+					'new_item'              => 'New Area of Expertise',
+					'edit_item'             => 'Edit Area of Expertise',
+					'update_item'           => 'Update Area of Expertise',
+					'view_item'             => 'View Area of Expertise',
+					'view_items'            => 'View Areas of Expertise',
+					'search_items'          => 'Search Areas of Expertise',
+					'uploaded_to_this_item' => 'Uploaded to this item',
+					'items_list'            => 'Areas of expertise list',
+					'items_list_navigation' => 'Areas of expertise list navigation',
+					'filter_items_list'     => 'Filter Areas of expertise list',
+				);
+				$capabilities = array(
+					'edit_post'             => 'edit_expertise',
+					'read_post'             => 'read_expertise',
+					'delete_post'           => 'delete_expertise',
+					'edit_posts'            => 'edit_expertises',
+					'edit_others_posts'     => 'edit_others_expertises',
+					'publish_posts'         => 'publish_expertises',
+					'read_private_posts'    => 'read_private_expertises',
+				);
+				$rewrite = array(
+					'slug'                  => 'expertise',
+					'with_front'            => true,
+					'pages'                 => true,
+					'feeds'                 => true,
+				);
+				$args = array(
+					'label'                 => 'Areas of Expertise',
+					'description'           => 'UAMS Areas of Expertise', 
+					'labels'                => $labels,
+					'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes', 'revisions' ),
+					'taxonomies'            => array( 'treatment', 'condition' ),
+					'hierarchical'          => true,
+					'capability_type' 		=> 'page',
+					'public'                => true,
+					'show_ui'               => true,
+					'show_in_menu'          => true,
+					'menu_position'         => 30,
+					'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/services-icon.png',
+					'show_in_admin_bar'     => true,
+					'show_in_nav_menus'     => true,
+					'can_export'            => true,
+					'has_archive'           => true,
+					'exclude_from_search'   => false,
+					'publicly_queryable'    => true,
+					'capabilities'          => $capabilities,
+					'show_in_rest'          => true,
+					'rest_base'             => 'expertise',
+					'rest_controller_class' => 'WP_REST_Posts_Controller',
+					'rewrite'               => $rewrite,
+				);
+				register_post_type( 'expertise', $args );
 
-if ( ! function_exists('conditions_cpt') ) {
+			}
 
-	// Register Custom Post Type
-	function conditions_cpt() {
-	
-		$labels = array(
-			'name'                  => 'Conditions',
-			'singular_name'         => 'Condition',
-			'menu_name'             => 'Conditions',
-			'name_admin_bar'        => 'Condition',
-			'archives'              => 'Condition Archives',
-			'attributes'            => 'Condition Attributes',
-			'parent_item_colon'     => 'Parent Item:',
-			'all_items'             => 'All Conditions',
-			'add_new_item'          => 'Add New Condition',
-			'add_new'               => 'Add New',
-			'new_item'              => 'New Condition',
-			'edit_item'             => 'Edit Condition',
-			'update_item'           => 'Update Condition',
-			'view_item'             => 'View Condition',
-			'view_items'            => 'View Conditions',
-			'search_items'          => 'Search Conditions',
-			'uploaded_to_this_item' => 'Uploaded to this item',
-			'items_list'            => 'Conditions list',
-			'items_list_navigation' => 'Conditions list navigation',
-			'filter_items_list'     => 'Filter Conditions list',
-		);
-		$capabilities = array(
-			'edit_post'      		=> "edit_condition",
-			'read_post'      		=> "read_condition",
-			'delete_post'        	=> "delete_condition",
-			'edit_posts'         	=> "edit_conditions",
-			'edit_others_posts'  	=> "edit_others_conditions",
-			'publish_posts'      	=> "publish_conditions",
-			'read_private_posts'    => "read_private_conditions",
-			'read'                  => "read",
-			'delete_posts'          => "delete_conditions",
-			'delete_private_posts'  => "delete_private_conditions",
-			'delete_published_posts' => "delete_published_conditions",
-			'delete_others_posts'   => "delete_others_conditions",
-			'edit_private_posts'    => "edit_private_conditions",
-			'edit_published_posts'  => "edit_published_conditions",
-		);
-		$args = array(
-			'label'                 => 'Conditions',
-			'labels'                => $labels,
-			'supports'              => array( 'title', 'editor', 'author', 'thumbnail','revisions','custom-fields' ),
-			'taxonomies'            => array( ),
-			'hierarchical'          => false,
-			'public'                => true,
-			'show_ui'               => true,
-			'show_in_menu'          => true,
-			'menu_position'         => 30,
-			'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/locations-icon.png',
-			'show_in_admin_bar'     => true,
-			'show_in_nav_menus'     => true,
-			'can_export'            => true,
-			'has_archive'           => true,
-			'exclude_from_search'   => false,
-			'publicly_queryable'    => true,
-			'capabilities'          => $capabilities,
-			'show_in_rest'          => true,
-			'rest_base'             => 'condition',
-			'rest_controller_class' => 'WP_REST_Posts_Controller',
-		);
-		register_post_type( 'condition', $args );
-	
-	}
-	add_action( 'init', 'conditions_cpt', 0 );
-	
-}
+			add_action( 'init', 'expertise_cpt', 0 );
+			
+		}
 
-if ( ! function_exists('treatments_cpt') ) {
+	// Register 'Conditions' Custom Post Type
 
-	// Register Custom Post Type
-	function treatments_cpt() {
-	
-		$labels = array(
-			'name'                  => 'Treatments & Procedures',
-			'singular_name'         => 'Treatment & Procedure',
-			'menu_name'             => 'Treatments & Procedures',
-			'name_admin_bar'        => 'Treatment & Procedure',
-			'archives'              => 'Treatments & Procedure Archives',
-			'attributes'            => 'Treatments & Procedure Attributes',
-			'parent_item_colon'     => 'Parent Item:',
-			'all_items'             => 'All Treatments & Procedures',
-			'add_new_item'          => 'Add New Treatment & Procedure',
-			'add_new'               => 'Add New',
-			'new_item'              => 'New Treatment & Procedure',
-			'edit_item'             => 'Edit Treatment & Procedure',
-			'update_item'           => 'Update Treatment & Procedure',
-			'view_item'             => 'View Treatment & Procedure',
-			'view_items'            => 'View Treatments & Procedures',
-			'search_items'          => 'Search Treatments & Procedures',
-			'uploaded_to_this_item' => 'Uploaded to this item',
-			'items_list'            => 'Treatments & Procedures list',
-			'items_list_navigation' => 'Treatments & Procedures list navigation',
-			'filter_items_list'     => 'Filter Treatments & Procedures list',
-		);
-		$capabilities = array(
-			'edit_post'      		=> "edit_treatment",
-			'read_post'      		=> "read_treatment",
-			'delete_post'        	=> "delete_treatment",
-			'edit_posts'         	=> "edit_treatments",
-			'edit_others_posts'  	=> "edit_others_treatments",
-			'publish_posts'      	=> "publish_treatments",
-			'read_private_posts'    => "read_private_treatments",
-			'read'                  => "read",
-			'delete_posts'          => "delete_treatments",
-			'delete_private_posts'  => "delete_private_treatments",
-			'delete_published_posts' => "delete_published_treatments",
-			'delete_others_posts'   => "delete_others_treatments",
-			'edit_private_posts'    => "edit_private_treatments",
-			'edit_published_posts'  => "edit_published_treatments",
-		);
-		$args = array(
-			'label'                 => 'Treatments & Procedures',
-			'labels'                => $labels,
-			'supports'              => array( 'title', 'editor', 'author', 'thumbnail','revisions','custom-fields' ),
-			'taxonomies'            => array( ),
-			'hierarchical'          => false,
-			'public'                => true,
-			'show_ui'               => true,
-			'show_in_menu'          => true,
-			'menu_position'         => 30,
-			'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/locations-icon.png',
-			'show_in_admin_bar'     => true,
-			'show_in_nav_menus'     => true,
-			'can_export'            => true,
-			'has_archive'           => true,
-			'exclude_from_search'   => false,
-			'publicly_queryable'    => true,
-			'capabilities'          => $capabilities,
-			'show_in_rest'          => true,
-			'rest_base'             => 'treatment',
-			'rest_controller_class' => 'WP_REST_Posts_Controller',
-		);
-		register_post_type( 'treatment', $args );
-	
-	}
-	add_action( 'init', 'treatments_cpt', 0 );
-	
-}
+		if ( ! function_exists('conditions_cpt') ) {
 
-if ( ! function_exists('clinical_resources_cpt') ) {
+			function conditions_cpt() {
+			
+				$labels = array(
+					'name'                  => 'Conditions',
+					'singular_name'         => 'Condition',
+					'menu_name'             => 'Conditions',
+					'name_admin_bar'        => 'Condition',
+					'archives'              => 'Condition Archives',
+					'attributes'            => 'Condition Attributes',
+					'parent_item_colon'     => 'Parent Item:',
+					'all_items'             => 'All Conditions',
+					'add_new_item'          => 'Add New Condition',
+					'add_new'               => 'Add New',
+					'new_item'              => 'New Condition',
+					'edit_item'             => 'Edit Condition',
+					'update_item'           => 'Update Condition',
+					'view_item'             => 'View Condition',
+					'view_items'            => 'View Conditions',
+					'search_items'          => 'Search Conditions',
+					'uploaded_to_this_item' => 'Uploaded to this item',
+					'items_list'            => 'Conditions list',
+					'items_list_navigation' => 'Conditions list navigation',
+					'filter_items_list'     => 'Filter Conditions list',
+				);
+				$capabilities = array(
+					'edit_post'      		=> "edit_condition",
+					'read_post'      		=> "read_condition",
+					'delete_post'        	=> "delete_condition",
+					'edit_posts'         	=> "edit_conditions",
+					'edit_others_posts'  	=> "edit_others_conditions",
+					'publish_posts'      	=> "publish_conditions",
+					'read_private_posts'    => "read_private_conditions",
+					'read'                  => "read",
+					'delete_posts'          => "delete_conditions",
+					'delete_private_posts'  => "delete_private_conditions",
+					'delete_published_posts' => "delete_published_conditions",
+					'delete_others_posts'   => "delete_others_conditions",
+					'edit_private_posts'    => "edit_private_conditions",
+					'edit_published_posts'  => "edit_published_conditions",
+				);
+				$args = array(
+					'label'                 => 'Conditions',
+					'labels'                => $labels,
+					'supports'              => array( 'title', 'editor', 'author', 'thumbnail','revisions','custom-fields' ),
+					'taxonomies'            => array( ),
+					'hierarchical'          => false,
+					'public'                => true,
+					'show_ui'               => true,
+					'show_in_menu'          => true,
+					'menu_position'         => 30,
+					'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/locations-icon.png',
+					'show_in_admin_bar'     => true,
+					'show_in_nav_menus'     => true,
+					'can_export'            => true,
+					'has_archive'           => true,
+					'exclude_from_search'   => false,
+					'publicly_queryable'    => true,
+					'capabilities'          => $capabilities,
+					'show_in_rest'          => true,
+					'rest_base'             => 'condition',
+					'rest_controller_class' => 'WP_REST_Posts_Controller',
+				);
+				register_post_type( 'condition', $args );
+			
+			}
+			
+			add_action( 'init', 'conditions_cpt', 0 );
+			
+		}
 
-	// Register Custom Post Type
-	function clinical_resources_cpt() {
-	
-		$labels = array(
-			'name'                  => 'Clinical Resources',
-			'singular_name'         => 'Clinical Resource',
-			'menu_name'             => 'Clinical Resources',
-			'name_admin_bar'        => 'Resource',
-			'archives'              => 'Resource Archives',
-			'attributes'            => 'Resource Attributes',
-			'parent_item_colon'     => 'Parent Resource:',
-			'all_items'             => 'All Resources',
-			'add_new_item'          => 'Add New Resource',
-			'add_new'               => 'Add New',
-			'new_item'              => 'New Resource',
-			'edit_item'             => 'Edit Resource',
-			'update_item'           => 'Update Resource',
-			'view_item'             => 'View Resource',
-			'view_items'            => 'View Resources',
-			'search_items'          => 'Search Resources',
-			'uploaded_to_this_item' => 'Uploaded to this item',
-			'items_list'            => 'Resources list',
-			'items_list_navigation' => 'Resources list navigation',
-			'filter_items_list'     => 'Filter Resources list',
-		);
-		$capabilities = array(
-			'edit_post'      		=> "edit_clinical_resource",
-			'read_post'      		=> "read_clinical_resource",
-			'delete_post'        	=> "delete_clinical_resource",
-			'edit_posts'         	=> "edit_clinical_resources",
-			'edit_others_posts'  	=> "edit_others_clinical_resources",
-			'publish_posts'      	=> "publish_clinical_resources",
-			'read_private_posts'    => "read_private_clinical_resources",
-			'read'                  => "read",
-			'delete_posts'          => "delete_clinical_resources",
-			'delete_private_posts'  => "delete_private_clinical_resources",
-			'delete_published_posts' => "delete_published_clinical_resources",
-			'delete_others_posts'   => "delete_others_clinical_resources",
-			'edit_private_posts'    => "edit_private_clinical_resources",
-			'edit_published_posts'  => "edit_published_clinical_resources",
-		);
-		$args = array(
-			'label'                 => 'Resources',
-			'labels'                => $labels,
-			'supports'              => array( 'title', 'author', 'revisions','custom-fields' ),
-			'taxonomies'            => array(),
-			'hierarchical'          => false,
-			'public'                => true,
-			'show_ui'               => true,
-			'show_in_menu'          => true,
-			'menu_position'         => 30,
-			'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/trl-cube.svg',
-			'show_in_admin_bar'     => true,
-			'show_in_nav_menus'     => true,
-			'can_export'            => true,
-			'has_archive'           => true,
-			'exclude_from_search'   => false,
-			'publicly_queryable'    => true,
-			'capabilities'          => $capabilities,
-			'show_in_rest'          => true,
-			'rest_base'             => 'clinical_resource',
-			'rest_controller_class' => 'WP_REST_Posts_Controller',
-		);
-		register_post_type( 'clinical-resource', $args );
-	
-	}
-	add_action( 'init', 'clinical_resources_cpt', 0 );
-	
-}
+	// Register 'Treatments' Custom Post Type
+
+		if ( ! function_exists('treatments_cpt') ) {
+
+			function treatments_cpt() {
+			
+				$labels = array(
+					'name'                  => 'Treatments & Procedures',
+					'singular_name'         => 'Treatment & Procedure',
+					'menu_name'             => 'Treatments & Procedures',
+					'name_admin_bar'        => 'Treatment & Procedure',
+					'archives'              => 'Treatments & Procedure Archives',
+					'attributes'            => 'Treatments & Procedure Attributes',
+					'parent_item_colon'     => 'Parent Item:',
+					'all_items'             => 'All Treatments & Procedures',
+					'add_new_item'          => 'Add New Treatment & Procedure',
+					'add_new'               => 'Add New',
+					'new_item'              => 'New Treatment & Procedure',
+					'edit_item'             => 'Edit Treatment & Procedure',
+					'update_item'           => 'Update Treatment & Procedure',
+					'view_item'             => 'View Treatment & Procedure',
+					'view_items'            => 'View Treatments & Procedures',
+					'search_items'          => 'Search Treatments & Procedures',
+					'uploaded_to_this_item' => 'Uploaded to this item',
+					'items_list'            => 'Treatments & Procedures list',
+					'items_list_navigation' => 'Treatments & Procedures list navigation',
+					'filter_items_list'     => 'Filter Treatments & Procedures list',
+				);
+				$capabilities = array(
+					'edit_post'      		=> "edit_treatment",
+					'read_post'      		=> "read_treatment",
+					'delete_post'        	=> "delete_treatment",
+					'edit_posts'         	=> "edit_treatments",
+					'edit_others_posts'  	=> "edit_others_treatments",
+					'publish_posts'      	=> "publish_treatments",
+					'read_private_posts'    => "read_private_treatments",
+					'read'                  => "read",
+					'delete_posts'          => "delete_treatments",
+					'delete_private_posts'  => "delete_private_treatments",
+					'delete_published_posts' => "delete_published_treatments",
+					'delete_others_posts'   => "delete_others_treatments",
+					'edit_private_posts'    => "edit_private_treatments",
+					'edit_published_posts'  => "edit_published_treatments",
+				);
+				$args = array(
+					'label'                 => 'Treatments & Procedures',
+					'labels'                => $labels,
+					'supports'              => array( 'title', 'editor', 'author', 'thumbnail','revisions','custom-fields' ),
+					'taxonomies'            => array( ),
+					'hierarchical'          => false,
+					'public'                => true,
+					'show_ui'               => true,
+					'show_in_menu'          => true,
+					'menu_position'         => 30,
+					'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/locations-icon.png',
+					'show_in_admin_bar'     => true,
+					'show_in_nav_menus'     => true,
+					'can_export'            => true,
+					'has_archive'           => true,
+					'exclude_from_search'   => false,
+					'publicly_queryable'    => true,
+					'capabilities'          => $capabilities,
+					'show_in_rest'          => true,
+					'rest_base'             => 'treatment',
+					'rest_controller_class' => 'WP_REST_Posts_Controller',
+				);
+				register_post_type( 'treatment', $args );
+			
+			}
+			
+			add_action( 'init', 'treatments_cpt', 0 );
+			
+		}
+
+	// Register 'Clinical Resources' Custom Post Type
+
+		if ( ! function_exists('clinical_resources_cpt') ) {
+
+			function clinical_resources_cpt() {
+			
+				$labels = array(
+					'name'                  => 'Clinical Resources',
+					'singular_name'         => 'Clinical Resource',
+					'menu_name'             => 'Clinical Resources',
+					'name_admin_bar'        => 'Resource',
+					'archives'              => 'Resource Archives',
+					'attributes'            => 'Resource Attributes',
+					'parent_item_colon'     => 'Parent Resource:',
+					'all_items'             => 'All Resources',
+					'add_new_item'          => 'Add New Resource',
+					'add_new'               => 'Add New',
+					'new_item'              => 'New Resource',
+					'edit_item'             => 'Edit Resource',
+					'update_item'           => 'Update Resource',
+					'view_item'             => 'View Resource',
+					'view_items'            => 'View Resources',
+					'search_items'          => 'Search Resources',
+					'uploaded_to_this_item' => 'Uploaded to this item',
+					'items_list'            => 'Resources list',
+					'items_list_navigation' => 'Resources list navigation',
+					'filter_items_list'     => 'Filter Resources list',
+				);
+				$capabilities = array(
+					'edit_post'      		=> "edit_clinical_resource",
+					'read_post'      		=> "read_clinical_resource",
+					'delete_post'        	=> "delete_clinical_resource",
+					'edit_posts'         	=> "edit_clinical_resources",
+					'edit_others_posts'  	=> "edit_others_clinical_resources",
+					'publish_posts'      	=> "publish_clinical_resources",
+					'read_private_posts'    => "read_private_clinical_resources",
+					'read'                  => "read",
+					'delete_posts'          => "delete_clinical_resources",
+					'delete_private_posts'  => "delete_private_clinical_resources",
+					'delete_published_posts' => "delete_published_clinical_resources",
+					'delete_others_posts'   => "delete_others_clinical_resources",
+					'edit_private_posts'    => "edit_private_clinical_resources",
+					'edit_published_posts'  => "edit_published_clinical_resources",
+				);
+				$args = array(
+					'label'                 => 'Resources',
+					'labels'                => $labels,
+					'supports'              => array( 'title', 'author', 'revisions','custom-fields' ),
+					'taxonomies'            => array(),
+					'hierarchical'          => false,
+					'public'                => true,
+					'show_ui'               => true,
+					'show_in_menu'          => true,
+					'menu_position'         => 30,
+					'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/trl-cube.svg',
+					'show_in_admin_bar'     => true,
+					'show_in_nav_menus'     => true,
+					'can_export'            => true,
+					'has_archive'           => true,
+					'exclude_from_search'   => false,
+					'publicly_queryable'    => true,
+					'capabilities'          => $capabilities,
+					'show_in_rest'          => true,
+					'rest_base'             => 'clinical_resource',
+					'rest_controller_class' => 'WP_REST_Posts_Controller',
+				);
+				register_post_type( 'clinical-resource', $args );
+			
+			}
+			
+			add_action( 'init', 'clinical_resources_cpt', 0 );
+			
+		}
 
 /*
  *
