@@ -533,23 +533,6 @@
 			"endpoint": 0
 		},
 		{
-			"key": "field_clinical_resource_relationships",
-			"label": "Relationships",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "",
-			"new_lines": "",
-			"esc_html": 0
-		},
-		{
 			"key": "field_clinical_resource_providers",
 			"label": "Provider(s)",
 			"name": "clinical_resource_providers",
@@ -812,6 +795,23 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		{
+			"key": "field_clinical_resource_relationships",
+			"label": "Relationships",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"new_lines": "",
+			"esc_html": 0
 		},
 		{
 			"key": "field_clinical_resource_syndicated",
