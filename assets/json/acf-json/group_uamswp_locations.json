@@ -3386,7 +3386,7 @@
 		},
 		"field_location_physician_tab": {
 			"key": "field_location_physician_tab",
-			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Providers",
+			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Related Providers",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
