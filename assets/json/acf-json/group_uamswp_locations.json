@@ -645,7 +645,7 @@
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
-				"class": "",
+				"class": "hide-acf-border",
 				"id": ""
 			},
 			"taxonomy": "region",
