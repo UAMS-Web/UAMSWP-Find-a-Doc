@@ -103,7 +103,7 @@
 			"key": "field_location_type",
 			"name": "location_type",
 			"type": "taxonomy",
-			"label": "Type",
+			"label": "Location Type",
 			"instructions": "Used for filtering only",
 			"required": 0,
 			"conditional_logic": 0,
