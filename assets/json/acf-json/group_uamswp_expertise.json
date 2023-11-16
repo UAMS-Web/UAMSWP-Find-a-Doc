@@ -618,6 +618,104 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
+		"field_expertise_providers_fpage_intro": {
+			"key": "field_expertise_providers_fpage_intro",
+			"label": "Override Intro Text for Related Providers Subpage",
+			"name": "expertise_providers_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related providers subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		"field_expertise_providers_fpage_short_desc_query": {
+			"key": "field_expertise_providers_fpage_short_desc_query",
+			"label": "Use Intro Text as the Short Description for Related Providers Subpage?",
+			"name": "expertise_providers_fpage_short_desc_query",
+			"type": "true_false",
+			"instructions": "Decide which text to use as the short description. The short description is what is included for the related providers subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No",
+			"ui": 1
+		},
+		"field_expertise_providers_fpage_short_desc": {
+			"key": "field_expertise_providers_fpage_short_desc",
+			"label": "Short Description for Related Providers Subpage",
+			"name": "expertise_providers_fpage_short_desc",
+			"type": "textarea",
+			"instructions": "This will be the description included for the related providers subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_providers_fpage_short_desc_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 4,
+			"new_lines": ""
+		},
+		"field_expertise_providers_fpage_featured_image": {
+			"key": "field_expertise_providers_fpage_featured_image",
+			"label": "Override Featured Image for Related Providers Subpage",
+			"name": "expertise_providers_fpage_featured_image",
+			"type": "image",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1280,
+			"min_height": 720,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg,jpeg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
 		"field_expertise_tab_locations": {
 			"key": "field_expertise_tab_locations",
 			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Related Locations",
@@ -665,6 +763,137 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
+		"field_expertise_locations_fpage_intro": {
+			"key": "field_expertise_locations_fpage_intro",
+			"label": "Override Intro Text for Related Locations Subpage",
+			"name": "expertise_locations_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related locations subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		"field_expertise_locations_fpage_short_desc_query": {
+			"key": "field_expertise_locations_fpage_short_desc_query",
+			"label": "Use Intro Text as the Short Description for Related Locations Subpage?",
+			"name": "expertise_locations_fpage_short_desc_query",
+			"type": "true_false",
+			"instructions": "Decide which text to use as the short description. The short description is what is included for the related locations subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No",
+			"ui": 1
+		},
+		"field_expertise_locations_fpage_short_desc": {
+			"key": "field_expertise_locations_fpage_short_desc",
+			"label": "Short Description for Related Locations Subpage",
+			"name": "expertise_locations_fpage_short_desc",
+			"type": "textarea",
+			"instructions": "This will be the description included for the related locations subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_locations_fpage_short_desc_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 4,
+			"new_lines": ""
+		},
+		"field_expertise_locations_fpage_featured_image": {
+			"key": "field_expertise_locations_fpage_featured_image",
+			"label": "Override Featured Image for Related Locations Subpage",
+			"name": "expertise_locations_fpage_featured_image",
+			"type": "image",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1280,
+			"min_height": 720,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg,jpeg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
+		"field_expertise_region": {
+			"key": "field_expertise_region",
+			"label": "Region",
+			"name": "expertise_region",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_tab_locations",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "region",
+			"field_type": "multi_select",
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0,
+			"allow_null": 0
+		},
 		"field_expertise_tab_expertise_descendant": {
 			"key": "field_expertise_tab_expertise_descendant",
 			"label": "<i class=\"dashicons-open-folder dashicons\"><\/i> Descendant Areas of Expertise",
@@ -680,6 +909,104 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_expertise_descendant_fpage_intro": {
+			"key": "field_expertise_descendant_fpage_intro",
+			"label": "Override Intro Text for Descendant Areas of Expertise Subpage",
+			"name": "expertise_descendant_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the descendant areas of expertise subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		"field_expertise_descendant_fpage_short_desc_query": {
+			"key": "field_expertise_descendant_fpage_short_desc_query",
+			"label": "Use Intro Text as the Short Description for Descendant Areas of Expertise Subpage?",
+			"name": "expertise_descendant_fpage_short_desc_query",
+			"type": "true_false",
+			"instructions": "Decide which text to use as the short description. The short description is what is included for the descendant areas of expertise subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No",
+			"ui": 1
+		},
+		"field_expertise_descendant_fpage_short_desc": {
+			"key": "field_expertise_descendant_fpage_short_desc",
+			"label": "Short Description for Descendant Areas of Expertise Subpage",
+			"name": "expertise_descendant_fpage_short_desc",
+			"type": "textarea",
+			"instructions": "This will be the description included for the descendant areas of expertise subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_descendant_fpage_short_desc_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 4,
+			"new_lines": ""
+		},
+		"field_expertise_descendant_fpage_featured_image": {
+			"key": "field_expertise_descendant_fpage_featured_image",
+			"label": "Override Featured Image for Descendant Areas of Expertise Subpage",
+			"name": "expertise_descendant_fpage_featured_image",
+			"type": "image",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1280,
+			"min_height": 720,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg,jpeg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
 		},
 		"field_expertise_tab_expertise": {
 			"key": "field_expertise_tab_expertise",
@@ -721,6 +1048,104 @@
 			"min": "",
 			"max": "",
 			"return_format": "id"
+		},
+		"field_expertise_associated_fpage_intro": {
+			"key": "field_expertise_associated_fpage_intro",
+			"label": "Override Intro Text for Related Areas of Expertise Subpage",
+			"name": "expertise_associated_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related areas of expertise subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		"field_expertise_associated_fpage_short_desc_query": {
+			"key": "field_expertise_associated_fpage_short_desc_query",
+			"label": "Use Intro Text as the Short Description for Related Areas of Expertise Subpage?",
+			"name": "expertise_associated_fpage_short_desc_query",
+			"type": "true_false",
+			"instructions": "Decide which text to use as the short description. The short description is what is included for the related areas of expertise subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No",
+			"ui": 1
+		},
+		"field_expertise_associated_fpage_short_desc": {
+			"key": "field_expertise_associated_fpage_short_desc",
+			"label": "Short Description for Related Areas of Expertise Subpage",
+			"name": "expertise_associated_fpage_short_desc",
+			"type": "textarea",
+			"instructions": "This will be the description included for the related areas of expertise subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_associated_fpage_short_desc_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 4,
+			"new_lines": ""
+		},
+		"field_expertise_associated_fpage_featured_image": {
+			"key": "field_expertise_associated_fpage_featured_image",
+			"label": "Override Featured Image for Related Areas of Expertise Subpage",
+			"name": "expertise_associated_fpage_featured_image",
+			"type": "image",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1280,
+			"min_height": 720,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg,jpeg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
 		},
 		"field_expertise_tab_clinical_resources": {
 			"key": "field_expertise_tab_clinical_resources",
@@ -769,6 +1194,104 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
+		"field_expertise_clinical_resources_fpage_intro": {
+			"key": "field_expertise_clinical_resources_fpage_intro",
+			"label": "Override Intro Text for Related Clinical Resources Subpage",
+			"name": "expertise_clinical_resources_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related clinical resources subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		"field_expertise_clinical_resources_fpage_short_desc_query": {
+			"key": "field_expertise_clinical_resources_fpage_short_desc_query",
+			"label": "Use Intro Text as the Short Description for Related Clinical Resources Subpage?",
+			"name": "expertise_clinical_resources_fpage_short_desc_query",
+			"type": "true_false",
+			"instructions": "Decide which text to use as the short description. The short description is what is included for the related clinical resources subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No",
+			"ui": 1
+		},
+		"field_expertise_clinical_resources_fpage_short_desc": {
+			"key": "field_expertise_clinical_resources_fpage_short_desc",
+			"label": "Short Description for Related Clinical Resources Subpage",
+			"name": "expertise_clinical_resources_fpage_short_desc",
+			"type": "textarea",
+			"instructions": "This will be the description included for the related clinical resources subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_clinical_resources_fpage_short_desc_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 4,
+			"new_lines": ""
+		},
+		"field_expertise_clinical_resources_fpage_featured_image": {
+			"key": "field_expertise_clinical_resources_fpage_featured_image",
+			"label": "Override Featured Image for Related Clinical Resources Subpage",
+			"name": "expertise_clinical_resources_fpage_featured_image",
+			"type": "image",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1280,
+			"min_height": 720,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg,jpeg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
 		"field_expertise_tab_condition_treatment": {
 			"key": "field_expertise_tab_condition_treatment",
 			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
@@ -784,6 +1307,26 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_expertise_condition_treatment_fpage_intro": {
+			"key": "field_expertise_condition_treatment_fpage_intro",
+			"label": "Override Intro Text for Combined Related Conditions and Treatments Block",
+			"name": "expertise_condition_treatment_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all blocks of this type on any area of expertise page(s). If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display in a related conditions and treatments block on the main page for this area of expertise in a paragraph underneath the block title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
 		},
 		"field_expertise_conditions_cpt": {
 			"key": "field_expertise_conditions_cpt",
@@ -813,6 +1356,26 @@
 			"acfe_update": "",
 			"ui": 1
 		},
+		"field_expertise_conditions_fpage_intro": {
+			"key": "field_expertise_conditions_fpage_intro",
+			"label": "Override Intro Text for Related Conditions Block",
+			"name": "expertise_conditions_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all blocks of this type on any area of expertise page(s). If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display in a related conditions block on the main page for this area of expertise in a paragraph underneath the block title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
 		"field_expertise_treatments_cpt": {
 			"key": "field_expertise_treatments_cpt",
 			"label": "Related Treatments and Procedures",
@@ -840,6 +1403,26 @@
 			"acfe_validate": "",
 			"acfe_update": "",
 			"ui": 1
+		},
+		"field_expertise_treatments_fpage_intro": {
+			"key": "field_expertise_treatments_fpage_intro",
+			"label": "Override Intro Text for Related Treatments and Procedures Block",
+			"name": "expertise_treatments_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all blocks of this type on any area of expertise page(s). If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display in a related treatments and procedures block on the main page for this area of expertise in a paragraph underneath the block title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
 		},
 		"field_expertise_tab_schema": {
 			"key": "field_expertise_tab_schema",
