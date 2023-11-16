@@ -1744,7 +1744,7 @@
 					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
-						"width": "",
+						"width": "30",
 						"class": "",
 						"id": ""
 					},
@@ -1763,7 +1763,7 @@
 					"required": 0,
 					"conditional_logic": 0,
 					"wrapper": {
-						"width": "",
+						"width": "20",
 						"class": "",
 						"id": ""
 					},
@@ -1784,7 +1784,7 @@
 					"required": 0,
 					"conditional_logic": 0,
 					"wrapper": {
-						"width": "",
+						"width": "50",
 						"class": "",
 						"id": ""
 					},
