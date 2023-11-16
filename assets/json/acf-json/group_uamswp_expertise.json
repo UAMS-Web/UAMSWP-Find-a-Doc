@@ -24,22 +24,6 @@
 	"acfe_note": "",
 	"acfe_meta": "",
 	"fields": {
-		"field_expertise_youtube_link": {
-			"key": "field_expertise_youtube_link",
-			"label": "Featured Youtube video",
-			"name": "expertise_youtube_link",
-			"type": "url",
-			"instructions": "Full URL, including https:\/\/",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "50",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": ""
-		},
 		"field_expertise_cta": {
 			"key": "field_expertise_cta",
 			"label": "Call-to-Action (CTA) Bar(s)",
@@ -547,25 +531,6 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
-		"field_physician_podcast_name": {
-			"key": "field_expertise_podcast_name",
-			"label": "UAMS Health Talk Podcast Topic Name",
-			"name": "expertise_podcast_name",
-			"type": "text",
-			"instructions": "Topic name as listed in the dropdown",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
 		"field_expertise_tab_general": {
 			"key": "field_expertise_tab_general",
 			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
@@ -761,6 +726,41 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_expertise_youtube_link": {
+			"key": "field_expertise_youtube_link",
+			"label": "Featured Youtube video",
+			"name": "expertise_youtube_link",
+			"type": "url",
+			"instructions": "Full URL, including https:\/\/",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "50",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		"field_physician_podcast_name": {
+			"key": "field_expertise_podcast_name",
+			"label": "UAMS Health Talk Podcast Topic Name",
+			"name": "expertise_podcast_name",
+			"type": "text",
+			"instructions": "Topic name as listed in the dropdown",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
 		},
 		"field_expertise_tab_providers": {
 			"key": "field_expertise_tab_providers",
