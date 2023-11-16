@@ -1081,31 +1081,6 @@
 			"acfe_update": "",
 			"multiple": 0
 		},
-		"field_physician_recognitions": {
-			"key": "field_physician_recognitions",
-			"name": "physician_recognitions",
-			"type": "taxonomy",
-			"label": "Recognition Lists",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "recognition",
-			"field_type": "multi_select",
-			"add_term": 0,
-			"save_terms": 1,
-			"load_terms": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 1,
-			"allow_null": 1
-		},
 		"field_physician_hidden": {
 			"key": "field_physician_hidden",
 			"name": "physician_hidden",
@@ -2626,6 +2601,109 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_physician_recognitions": {
+			"key": "field_physician_recognitions",
+			"name": "physician_recognitions",
+			"type": "taxonomy",
+			"label": "Recognition Lists",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "recognition",
+			"field_type": "multi_select",
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 1,
+			"allow_null": 1
+		},
+		"field_physician_awards": {
+			"key": "field_physician_awards",
+			"name": "physician_awards",
+			"type": "repeater",
+			"label": "Award(s)",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"collapsed": "field_physician_awards_title",
+			"min": 0,
+			"max": 0,
+			"layout": "table",
+			"button_label": "",
+			"sub_fields": [
+				{
+					"key": "field_physician_awards_year",
+					"label": "Year",
+					"name": "year",
+					"type": "text",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_physician_awards_title",
+					"label": "Award Title",
+					"name": "title",
+					"type": "text",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_physician_awards_information",
+					"label": "Information",
+					"name": "information",
+					"type": "text",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				}
+			]
+		},
 		"field_physician_gmb_tab": {
 			"key": "field_physician_gmb_tab",
 			"name": "",
@@ -2741,84 +2819,6 @@
 			},
 			"placement": "left",
 			"endpoint": 0
-		},
-		"field_physician_awards": {
-			"key": "field_physician_awards",
-			"name": "physician_awards",
-			"type": "repeater",
-			"label": "Award(s)",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"collapsed": "field_physician_awards_title",
-			"min": 0,
-			"max": 0,
-			"layout": "table",
-			"button_label": "",
-			"sub_fields": [
-				{
-					"key": "field_physician_awards_year",
-					"label": "Year",
-					"name": "year",
-					"type": "text",
-					"instructions": "",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_physician_awards_title",
-					"label": "Award Title",
-					"name": "title",
-					"type": "text",
-					"instructions": "",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_physician_awards_information",
-					"label": "Information",
-					"name": "information",
-					"type": "text",
-					"instructions": "",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				}
-			]
 		},
 		"field_physician_additional_info": {
 			"key": "field_physician_additional_info",
