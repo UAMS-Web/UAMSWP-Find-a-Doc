@@ -24,6 +24,7 @@
 
 	$degree_count = $degrees ? count($degrees) : 0;
 	$degree_list = '';
+	$degree_attr_array = array();
 	$i = 1;
 
 	if ( $degrees ) {
@@ -36,6 +37,7 @@
 
 				$degree_name = $degree_term->name;
 				$degree_list .= $degree_name;
+				$degree_attr_array[] = uamswp_attr_conversion($degree_name);
 
 				if ( $degree_count > $i ) {
 
