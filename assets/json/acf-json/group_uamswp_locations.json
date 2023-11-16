@@ -3777,22 +3777,6 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_location_schema_tab": {
-			"key": "field_location_schema_tab",
-			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
-			"name": "",
-			"type": "tab",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"placement": "left",
-			"endpoint": 0
-		},
 		"field_location_alert_tab": {
 			"key": "field_location_alert_tab",
 			"label": "<i class=\"dashicons-warning dashicons\"><\/i> Alert",
@@ -4654,6 +4638,22 @@
 			"default_value": "",
 			"layout": "horizontal",
 			"return_format": "label"
+		},
+		"field_location_schema_tab": {
+			"key": "field_location_schema_tab",
+			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_location_deprecated_tab": {
 			"key": "field_location_deprecated_tab",
