@@ -1019,23 +1019,6 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_location_contact_message": {
-			"key": "field_location_contact_message",
-			"label": "",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "<h3>Contact Information<\/h3>",
-			"new_lines": "",
-			"esc_html": 0
-		},
 		"field_location_phone": {
 			"key": "field_location_phone",
 			"name": "location_phone",
@@ -1082,39 +1065,6 @@
 			"ui": 1,
 			"ui_on_text": "",
 			"ui_off_text": ""
-		},
-		"field_location_clinic_phone_query_spacer": {
-			"key": "field_location_clinic_phone_query_spacer",
-			"label": "",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_ac_query",
-						"operator": "==",
-						"value": "1"
-					}
-				],
-				[
-					{
-						"field": "field_location_appointments_query",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"message": "&nbsp;",
-			"new_lines": "",
-			"esc_html": 0
 		},
 		"field_location_ac_appointments_query": {
 			"key": "field_location_ac_appointments_query",
@@ -1256,37 +1206,6 @@
 			"ui_on_text": "",
 			"ui_off_text": ""
 		},
-		"field_location_appointment_phone_query_spacer": {
-			"key": "field_location_appointment_phone_query_spacer",
-			"label": "",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_ac_query",
-						"operator": "==",
-						"value": "1"
-					},
-					{
-						"field": "field_location_appointments_query",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"message": "&nbsp;",
-			"new_lines": "",
-			"esc_html": 0
-		},
 		"field_location_return_appointments_phone": {
 			"key": "field_location_return_appointments_phone",
 			"name": "location_return_appointments_phone",
@@ -1309,32 +1228,6 @@
 				"id": ""
 			},
 			"input_mask": "(999) 999-9999 [x 99999]"
-		},
-		"field_phone_spacer": {
-			"key": "field_phone_spacer",
-			"label": "",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_appointment_phone_query",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"message": "&nbsp;",
-			"new_lines": "",
-			"esc_html": 0
 		},
 		"field_location_fax": {
 			"key": "field_location_fax",
@@ -1441,92 +1334,6 @@
 				}
 			]
 		},
-		"field_location_about_message": {
-			"key": "field_location_about_message",
-			"label": "",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "<h3>\"About\" Section<\/h3>",
-			"new_lines": "",
-			"esc_html": 0
-		},
-		"field_location_spacer_2": {
-			"key": "field_location_spacer_2",
-			"label": "hidden",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_prescription_query",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"message": "&nbsp;",
-			"new_lines": "",
-			"esc_html": 0
-		},
-		"field_location_spacer_3": {
-			"key": "field_location_spacer_3",
-			"label": "hidden",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_prescription_query",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"message": "&nbsp;",
-			"new_lines": "",
-			"esc_html": 0
-		},
-		"field_location_appointment_message": {
-			"key": "field_location_appointment_message",
-			"label": "",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "<h3>\"Appointment Information\" Section<\/h3>",
-			"new_lines": "",
-			"esc_html": 0
-		},
 		"field_link_message": {
 			"key": "field_link_message",
 			"name": "",
@@ -1578,128 +1385,6 @@
 			},
 			"return_format": "array",
 			"endpoint": 0
-		},
-		"field_details_other_message": {
-			"key": "field_details_other_message",
-			"name": "",
-			"type": "message",
-			"label": "",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "<h3>Other Details<\/h3>",
-			"new_lines": "",
-			"esc_html": 0
-		},
-		"field_details_deprecated_open": {
-			"key": "field_details_deprecated_open",
-			"name": "",
-			"type": "accordion",
-			"label": "Deprecated",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"open": 0,
-			"multi_expand": 0,
-			"endpoint": 0
-		},
-		"field_location_abbreviation": {
-			"key": "field_location_abbreviation",
-			"name": "location_abbreviation",
-			"type": "text",
-			"label": "Abbreviation",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
-		"field_location_description": {
-			"key": "field_location_description",
-			"name": "location_description",
-			"type": "text",
-			"label": "Location Description",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
-		"field_location_email": {
-			"key": "field_location_email",
-			"name": "location_email",
-			"type": "maskfield",
-			"label": "Email",
-			"instructions": "[Deprecated]",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"input_mask": "email",
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": "",
-			"acfe_validate": {
-				"row-5d43116652d09": {
-					"acfe_validate_rules_and": {
-						"row-5d43116852d0a": {
-							"acfe_validate_function": "email_exists",
-							"acfe_validate_operator": "==",
-							"acfe_validate_match": "true"
-						}
-					},
-					"acfe_validate_error": ""
-				}
-			},
-			"acfe_update": ""
-		},
-		"field_details_deprecated_end": {
-			"key": "field_details_deprecated_end",
-			"name": "",
-			"type": "accordion",
-			"label": "Deprecated End",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"open": 0,
-			"multi_expand": 0,
-			"endpoint": 1
 		},
 		"field_location_photos_tab": {
 			"key": "field_location_photos_tab",
@@ -4010,33 +3695,6 @@
 			},
 			"acfe_permissions": ""
 		},
-		"field_location_alert_suppress": {
-			"key": "field_location_alert_suppress",
-			"label": "Suppress alert from Find-a-Doc Settings? (Deprecated)",
-			"name": "location_alert_suppress",
-			"type": "true_false",
-			"instructions": "Move this value to the Alert Modification field. This field will be removed soon.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_alert_tab",
-						"operator": "==",
-						"value": "false"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
-		},
 		"field_location_alert_modification": {
 			"key": "field_location_alert_modification",
 			"label": "Alert Modification",
@@ -4911,11 +4569,82 @@
 			"append": "",
 			"maxlength": ""
 		},
+		"field_location_abbreviation": {
+			"key": "field_location_abbreviation",
+			"name": "location_abbreviation",
+			"type": "text",
+			"label": "Abbreviation (Deprecated)",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_location_description": {
+			"key": "field_location_description",
+			"name": "location_description",
+			"type": "text",
+			"label": "Location Description (Deprecated)",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_location_email": {
+			"key": "field_location_email",
+			"name": "location_email",
+			"type": "maskfield",
+			"label": "Email (Deprecated)",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"input_mask": "email",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": {
+				"row-5d43116652d09": {
+					"acfe_validate_rules_and": {
+						"row-5d43116852d0a": {
+							"acfe_validate_function": "email_exists",
+							"acfe_validate_operator": "==",
+							"acfe_validate_match": "true"
+						}
+					},
+					"acfe_validate_error": ""
+				}
+			},
+			"acfe_update": ""
+		},
 		"field_location_medical_specialties": {
 			"key": "field_location_medical_specialties",
 			"name": "location_medical_specialties",
 			"type": "taxonomy",
-			"label": "Medical Specialties Offered",
+			"label": "Medical Specialties Offered (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4940,7 +4669,7 @@
 			"key": "field_location_medical_terms",
 			"name": "location_medical_terms",
 			"type": "taxonomy",
-			"label": "Medical Terms",
+			"label": "Medical Terms (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4965,8 +4694,8 @@
 			"key": "field_location_clinic",
 			"name": "location_clinic",
 			"type": "true_false",
-			"label": "Clinic",
-			"instructions": "[Deprecated]",
+			"label": "Clinic (Deprecated)",
+			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -4984,8 +4713,8 @@
 			"key": "field_location_facility",
 			"name": "location_facility",
 			"type": "true_false",
-			"label": "Facility",
-			"instructions": "[Deprecated]",
+			"label": "Facility (Deprecated)",
+			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -4999,11 +4728,188 @@
 			"ui_on_text": "",
 			"ui_off_text": ""
 		},
+		"field_location_alert_suppress": {
+			"key": "field_location_alert_suppress",
+			"label": "Suppress alert from Find-a-Doc Settings? (Deprecated)",
+			"name": "location_alert_suppress",
+			"type": "true_false",
+			"instructions": "Move this value to the Alert Modification field.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		"field_location_contact_message": {
+			"key": "field_location_contact_message",
+			"label": "(Deprecated)",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>Contact Information<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_location_clinic_phone_query_spacer": {
+			"key": "field_location_clinic_phone_query_spacer",
+			"label": "(Deprecated)",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "&nbsp;",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_location_appointment_phone_query_spacer": {
+			"key": "field_location_appointment_phone_query_spacer",
+			"label": "(Deprecated)",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "&nbsp;",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_phone_spacer": {
+			"key": "field_phone_spacer",
+			"label": "(Deprecated)",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "&nbsp;",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_location_about_message": {
+			"key": "field_location_about_message",
+			"label": "(Deprecated)",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>\"About\" Section<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_location_spacer_2": {
+			"key": "field_location_spacer_2",
+			"label": "(Deprecated)",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "&nbsp;",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_location_spacer_3": {
+			"key": "field_location_spacer_3",
+			"label": "(Deprecated)",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "&nbsp;",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_location_appointment_message": {
+			"key": "field_location_appointment_message",
+			"label": "(Deprecated)",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>\"Appointment Information\" Section<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_details_other_message": {
+			"key": "field_details_other_message",
+			"name": "",
+			"type": "message",
+			"label": "(Deprecated)",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>Other Details<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
 		"field_info_depreciated_open": {
 			"key": "field_info_depreciated_open",
 			"name": "",
 			"type": "accordion",
-			"label": "Deprecated",
+			"label": "(Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -5020,7 +4926,41 @@
 			"key": "field_info_depreciated_end",
 			"name": "",
 			"type": "accordion",
-			"label": "Deprecated End",
+			"label": "(Deprecated)",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"open": 0,
+			"multi_expand": 0,
+			"endpoint": 1
+		},
+		"field_details_deprecated_open": {
+			"key": "field_details_deprecated_open",
+			"name": "",
+			"type": "accordion",
+			"label": "(Deprecated)",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"open": 0,
+			"multi_expand": 0,
+			"endpoint": 0
+		},
+		"field_details_deprecated_end": {
+			"key": "field_details_deprecated_end",
+			"name": "",
+			"type": "accordion",
+			"label": "(Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
