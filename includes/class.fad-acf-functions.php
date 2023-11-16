@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Advanced Custom Fields Functions
  */
 
@@ -7,49 +7,40 @@
 
 	// Change the ACF Custom Database Tables JSON directory
 
-		/*
-
-			Changes the ACF Custom Database Tables JSON directory.
-			This needs to run before the 'plugins_loaded' action hook, so
-			you need to put this in a plugin or in your wp-config.php file.
-
+		/**
+		 * Changes the ACF Custom Database Tables JSON directory.
+		 * This needs to run before the 'plugins_loaded' action hook, so
+		 * you need to put this in a plugin or in your wp-config.php file.
 		 */
 
 		define( 'ACFCDT_JSON_DIR', WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-tables' );
 
-
 	// Disable storing of meta data values in core meta tables
 
-		/*
-
-			Disables storing of meta data values in core meta tables where a custom
-			database table has been defined for fields. Any fields that aren't mapped
-			to a custom database table will still be stored in the core meta tables.
-
-		*/
+		/**
+		 * Disables storing of meta data values in core meta tables where a custom
+		 * database table has been defined for fields. Any fields that aren't mapped
+		 * to a custom database table will still be stored in the core meta tables.
+		 */
 
 		add_filter( 'acfcdt/settings/store_acf_values_in_core_meta', '__return_false' );
 
 	// Disable storing of ACF field key references in core meta tables
 
-		/*
-
-			Disables storing of ACF field key references in core meta tables where a custom
-			database table has been defined for fields. Any fields that aren't mapped to a
-			custom database table will still have their key references stored in the core
-			meta tables.
-
-		*/
+		/**
+		 * Disables storing of ACF field key references in core meta tables where a custom
+		 * database table has been defined for fields. Any fields that aren't mapped to a
+		 * custom database table will still have their key references stored in the core
+		 * meta tables.
+		 */
 
 		// add_filter( 'acfcdt/settings/store_acf_keys_in_core_meta', '__return_false' );
 
 // Add a new load point for ACF to look in for local JSON
 
-	/*
-
-		Advanced Custom Fields documentation: https://www.advancedcustomfields.com/resources/local-json/#loading-explained
-
-	*/
+	/**
+	 * Advanced Custom Fields documentation: https://www.advancedcustomfields.com/resources/local-json/#loading-explained
+	 */
 
 	add_filter('acf/settings/load_json', 'uamswp_fad_json_load_point');
 
@@ -59,9 +50,11 @@
 
 			// unset($paths[0]);
 
-		// Append the new path and return it
+		// Append the new path
 
 			$paths[] = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-json';
+
+		// Return
 
 			return $paths;
 
@@ -71,24 +64,21 @@
 
 	// Patient portal
 
-		/*
-
-			Set 'UAMS Health MyChart' as the default patient portal for provider profiles
-			and location profiles.
-
-			The slug for 'UAMS Health MyChart' must be set as 'uams-mychart'.
-
-		*/
+		/**
+		 * Set 'UAMS Health MyChart' as the default patient portal for provider profiles
+		 * and location profiles.
+		 *
+		 * The slug for 'UAMS Health MyChart' must be set as 'uams-mychart'.
+		 */
 
 		add_filter('acf/prepare_field/key=field_physician_portal', 'set_default_portal', 20, 3);
 		add_filter('acf/prepare_field/key=field_location_portal', 'set_default_portal', 20, 3);
+
 		function set_default_portal( $field ) {
 
-			/*
-
-				Only add default content if no value has been set
-
-			*/
+			/**
+			 * Only add default content if no value has been set
+			 */
 
 			if ( empty( $field['value'] ) ) {
 
@@ -98,38 +88,33 @@
 
 				// Set field to default value
 
-					$field[ 'value' ] = $default ;
+					$field[ 'value' ] = $default;
 
 			}
 
 			return $field;
+
 		}
 
 	// Language
 
-		/*
-
-			Set 'English' as the default language for provider profiles.
-
-			The slug for 'English' must be set as 'english'.
-
-		*/
+		/**
+		 * Set 'English' as the default language for provider profiles.
+		 *
+		 * The slug for 'English' must be set as 'english'.
+		 */
 
 		add_filter('acf/load_value/key=field_physician_languages', 'set_default_language', 20, 3);
 
 		function set_default_language($value, $post_id, $field) {
 
-			/*
+			// Only add default content for new posts
 
-				Only add default content for new posts
+				if ( $value !== null ) {
 
-			*/
+					return $value;
 
-			if ( $value !== null ) {
-
-				return $value;
-
-			}
+				}
 
 			$term = get_term_by('slug', 'english', 'language');
 			$term_id = $term->term_id;
@@ -141,13 +126,11 @@
 
 	// Region
 
-		/*
-
-			Set 'Central Arkansas' as the default region for location profiles.
-
-			The slug for 'Central Arkansas' must be set as 'central'.
-
-		*/
+		/**
+		 * Set 'Central Arkansas' as the default region for location profiles.
+		 *
+		 * The slug for 'Central Arkansas' must be set as 'central'.
+		 */
 
 		add_filter('acf/load_value/key=field_location_region', 'set_default_region', 20, 3);
 
@@ -169,7 +152,11 @@
 
 		}
 
-// Order for Portal - None slug set to "_none"
+// Order for Portal
+
+	/**
+	 * 'None' slug set to '_none'
+	 */
 
 	add_filter('acf/fields/taxonomy/wp_list_categories/key=field_location_portal', 'my_taxonomy_query', 10, 2);
 	add_filter('acf/fields/taxonomy/wp_list_categories/key=field_physician_portal', 'my_taxonomy_query', 10, 2);
@@ -189,13 +176,11 @@
 
 // Trigger FacetWP to re-index a single post when saving the submitted $_POST data
 
-	/*
-
-		FacetWP documentation: https://facetwp.com/help-center/indexing/#how-to-trigger-the-indexer-programmatically
-
-		Advanced Custom Fields documentation: https://www.advancedcustomfields.com/resources/acf-save_post/
-
-	*/
+	/**
+	 * FacetWP documentation: https://facetwp.com/help-center/indexing/#how-to-trigger-the-indexer-programmatically
+	 *
+	 * Advanced Custom Fields documentation: https://www.advancedcustomfields.com/resources/acf-save_post/
+	 */
 
 	add_action( 'acf/save_post', 'update_facetwp_index');
 
@@ -215,11 +200,9 @@
 
 		// Fire before saving data to post (by using a priority less than 10)
 
-			/*
-
-				Only updates ACF data
-
-			*/
+			/**
+			 * Only updates ACF data
+			 */
 
 			add_action('acf/save_post', 'physician_save_post', 5);
 
@@ -251,18 +234,27 @@
 						$degrees = $_POST['acf']['field_physician_degree'];
 
 						$i = 1;
-							if ( $degrees ) {
-								foreach( $degrees as $degree ):
-									$degree_name = get_term( $degree, 'degree');
-									$degree_list .= $degree_name->name;
-									if( count($degrees) > $i ) {
-										$degree_list .= ", ";
-									}
-									$i++;
-								endforeach;
-							}
 
-						$full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') . ( $degree_list ? ', ' . $degree_list : '' );
+						if ( $degrees ) {
+
+							foreach ( $degrees as $degree ) {
+
+								$degree_name = get_term( $degree, 'degree');
+								$degree_list .= $degree_name->name;
+
+								if ( count($degrees) > $i ) {
+
+									$degree_list .= ", ";
+
+								}
+
+								$i++;
+
+							} // endforeach
+
+						}
+
+						$full_name = $first_name . ' ' . ( $middle_name ? $middle_name . ' ' : '' ) . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '' ) . ( $degree_list ? ', ' . $degree_list : '' );
 
 						$_POST['acf']['field_physician_full_name'] = $full_name;
 
@@ -439,15 +431,13 @@
 
 								// Break the loop after first iteration (optional)
 
-									/*
-
-										The first location in the list of the provider's associated locations should be
-										the provider's primary location.
-
-										If the relevant values of the provider's primary location are all that
-										matter, break the loop here.
-
-									*/
+									/**
+									 * The first location in the list of the provider's associated locations should be
+									 * the provider's primary location.
+									 *
+									 * If the relevant values of the provider's primary location are all that
+									 * matter, break the loop here.
+									 */
 
 									// break;
 
@@ -463,14 +453,12 @@
 
 						// Portal
 
-							/*
-
-								Use the first portal only.
-
-								The first portal value should be the portal value of the provider's primary
-								location.
-
-							*/
+							/**
+							 * Use the first portal only.
+							 *
+							 * The first portal value should be the portal value of the provider's primary
+							 * location.
+							 */
 
 							$_POST['acf']['field_physician_portal'] = $portal[0];
 
@@ -895,11 +883,9 @@
 
 		// Fire before saving data to post (by using a priority less than 10)
 
-			/*
-
-				Only updates ACF data
-
-			*/
+			/**
+			 * Only updates ACF data
+			 */
 
 			add_action('acf/save_post', 'location_save_post', 7);
 
@@ -968,11 +954,9 @@
 
 		// Fire after saving data to post
 
-			/*
-
-				Change post data
-
-			*/
+			/**
+			 * Change post data
+			 */
 
 			add_action('acf/save_post', 'location_save_post_after', 20);
 
@@ -1183,7 +1167,7 @@
 
 		function uamswp_sync_acf_save_post( $post_id ) {
 
-			// Setup the variables
+			// Set up the variables
 
 				$post_type = get_post_type( $post_id );
 				$values = $_POST['acf'];
@@ -1260,14 +1244,13 @@
 
 	// Function for Bidirectional ACF
 
-		/*
+		/**
 		* Req:
 		* $field_name = ACF field name
 		* $field_key = ACF field key of field with new value
 		* $value = incoming/new value
 		* $post_id = $post_id being updated
-		*
-		*/
+		 */
 
 		function bidirectional_acf_update(
 			$field_name, // Required // ACF field name
@@ -1368,8 +1351,13 @@
 
 				global $post; // WordPress-specific global variable
 
-			$post_id = ( $post->ID ); // Current post ID
-			$post_type = get_post_type( $post_id ); // Get the post type of the current page/post
+			// Get the current post ID
+
+				$post_id = ( $post->ID );
+
+			// Get the post type of the current page/post
+
+				$post_type = get_post_type( $post_id );
 
 			// 1. Add post types (key) and corresponding field names (value) to be used to set the excerpt
 
@@ -1389,10 +1377,6 @@
 					'location' => 'location_about',
 					'expertise' => 'page_header_landingpage_intro'
 				);
-
-			// Get the post type of the current page/post
-
-				$post_type = get_post_type( $post_id );
 
 			// Set the post excerpt value
 
@@ -1448,16 +1432,16 @@
 					$post_excerpt // and if the post excerpt value exists ...
 				) {
 
-					// Unhook this function so it doesn't loop infinitely
-
-						remove_action( 'save_post', 'custom_excerpt_acf', 50 );
-
 					// Define an array of elements that make up a post to update or insert.
 
 						$post_array = array(
 							'ID' => $post_id,
 							'post_excerpt' => $post_excerpt
 						);
+
+					// Unhook this function so it doesn't loop infinitely
+
+						remove_action( 'save_post', 'custom_excerpt_acf', 50 );
 
 					// Update the post with new post data
 
@@ -1541,7 +1525,12 @@
 		 * @param	(int|string) $post_id The post ID this block is saved to.
 		 */
 
-		function fad_facetwp_cards_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
+		 function fad_facetwp_cards_callback(
+			$block, // array // Required // The block settings and attributes.
+			$content = '', // string // Optional // The block inner HTML (empty).
+			$is_preview = false, // bool // Optional // True during AJAX preview.
+			$post_id = 0 // (int|string) // Optional // The post ID this block is saved to.
+		) {
 
 			// Create id attribute allowing for custom "anchor" value.
 
@@ -1599,7 +1588,12 @@
 		 * @param	(int|string) $post_id The post ID this block is saved to.
 		 */
 
-		function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
+		function fad_facetwp_blocks_callback(
+			$block, // array // RequiredThe block settings and attributes.
+			$content = '', // string // Optional // The block inner HTML (empty).
+			$is_preview = false, // bool // Optional // True during AJAX preview.
+			$post_id = 0 // (int|string) // Optional // The post ID this block is saved to.
+		) {
 
 			// Create id attribute allowing for custom "anchor" value.
 
@@ -1675,7 +1669,7 @@
 
 		add_action('acf/render_field/name=location_current_alert', 'location_current_alert_message');
 
-		function location_current_alert_message(){
+		function location_current_alert_message() {
 
 			$alert_title = get_field('location_alert_heading_system', 'option');
 			$alert_body = get_field('location_alert_body_system', 'option');
@@ -1772,29 +1766,28 @@
 
 // ACF Image Field Image Aspect Ratio Validation
 
-	/*
-		Adds a field setting to ACF Image fields and validates images
-		to ensure that they meet image aspect ratio requirement
-
-		This also serves as an example of how to add multiple settings
-		to a single row when adding settings to an ACF field type
-
-		side note: after implementing this code clear your browser cache
-		to ensure the needed JS and WP media window is refreshed
-
-		What is "Margin"?
-
-		Let's say that you set an aspect ratio of 1:1 with a margin of 10%
-		If the width of the image is 100 pixels, this means that the
-		height of the image can be from 90 pixels to 110 pixels
-		100 +/- 10% (10px)
-
-		If the aspect ration is set to 4:3 and the margin at 1%
-		if the width of the uploaded image is 800 pixels
-		then the height can be 594 to 606 pixels
-		600 +/- 1% (6px)
-
-	*/
+	/**
+	 * Adds a field setting to ACF Image fields and validates images
+	 * to ensure that they meet image aspect ratio requirement
+	 *
+	 * This also serves as an example of how to add multiple settings
+	 * to a single row when adding settings to an ACF field type
+	 *
+	 * side note: after implementing this code clear your browser cache
+	 * to ensure the needed JS and WP media window is refreshed
+	 *
+	 * What is "Margin"?
+	 *
+	 * Let's say that you set an aspect ratio of 1:1 with a margin of 10%
+	 * If the width of the image is 100 pixels, this means that the
+	 * height of the image can be from 90 pixels to 110 pixels
+	 * 100 +/- 10% (10px)
+	 *
+	 * If the aspect ration is set to 4:3 and the margin at 1%
+	 * if the width of the uploaded image is 800 pixels
+	 * then the height can be 594 to 606 pixels
+	 * 600 +/- 1% (6px)
+	 */
 
 	// Add new settings for aspect ratio to image field
 
@@ -1802,14 +1795,12 @@
 
 		function acf_image_aspect_ratio_settings($field) {
 
-			/*
-
-				The technique used for adding multiple fields to a single setting is copied
-				directly from the ACF Image field code. Anything that ACF does can be
-				replicated, you just need to look at how Elliot does it also, any ACF field
-				type can be used as a setting field for other field types.
-
-			*/
+			/**
+			 * The technique used for adding multiple fields to a single setting is copied
+			 * directly from the ACF Image field code. Anything that ACF does can be
+			 * replicated, you just need to look at how Elliot does it also, any ACF field
+			 * type can be used as a setting field for other field types.
+			 */
 
 			$args = array(
 				'name' => 'ratio_width',
@@ -1883,13 +1874,11 @@
 					empty($file['height'])
 				) {
 
-					/*
-
-						The values we need are not set or otherwise empty.
-
-						Bail early
-
-					*/
+					/**
+					 * The values we need are not set or otherwise empty.
+					 *
+					 * Bail early.
+					 */
 
 					return $errors;
 
@@ -1908,13 +1897,11 @@
 					!$ratio_height
 				) {
 
-					/*
-
-						You cannot do calculations if something is 0.
-
-						Bail early.
-
-					*/
+					/**
+					 * You cannot do calculations if something is 0.
+					 *
+					 * Bail early.
+					 */
 
 					return $errors;
 
@@ -1947,13 +1934,11 @@
 					$height > $max
 				) {
 
-					/*
-
-						It does not meet the requirement.
-
-						Generate an error.
-
-					*/
+					/**
+					 * It does not meet the requirement.
+					 *
+					 * Generate an error.
+					 */
 
 					$errors['aspect_ratio'] = __('Image does not meet Aspect Ratio Requirements of ').
 					$ratio_width.__(':').$ratio_height.__(' (±').($margin*100).__('%)');
@@ -1981,19 +1966,15 @@
 
 // Modify ACF Relationship fields
 
-	/*
-
-		Field type documentation: https://www.advancedcustomfields.com/resources/relationship/
-
-	*/
+	/**
+	 * Field type documentation: https://www.advancedcustomfields.com/resources/relationship/
+	 */
 
 	// Exclude current post/page from ACF Relationship field results
 
-		/*
-
-			Filter documentation: https://www.advancedcustomfields.com/resources/acf-fields-relationship-query/
-
-		*/
+		/**
+		 * Filter documentation: https://www.advancedcustomfields.com/resources/acf-fields-relationship-query/
+		 */
 
 		// 1. Add a filter for each specific relationship field with key=[NAME_OF_RELATIONSHIP_FIELD].
 
@@ -2123,11 +2104,9 @@
 
 	function uamswp_mychart_scheduling_query($field) {
 
-		/*
-
-			Set to field name for option
-
-		*/
+		/**
+		 * Set to field name for option
+		 */
 
 		if ( get_field( 'mychart_scheduling_query_system', 'option' ) ) {
 
@@ -2141,11 +2120,9 @@
 
 	}
 
-	/*
-
-		Make sure to use correct field key for tab
-
-	*/
+	/**
+	 * Make sure to use correct field key for tab
+	 */
 
 	add_filter('acf/prepare_field/key=field_location_scheduling_tab', 'uamswp_mychart_scheduling_query', 20);
 
