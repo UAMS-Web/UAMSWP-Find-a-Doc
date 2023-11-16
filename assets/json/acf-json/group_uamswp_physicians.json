@@ -26,9 +26,9 @@
 	"fields": [
 		{
 			"key": "field_physician_details_tab",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -42,9 +42,9 @@
 		},
 		{
 			"key": "field_physician_first_name",
+			"label": "First Name",
 			"name": "physician_first_name",
 			"type": "text",
-			"label": "First Name",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -61,9 +61,9 @@
 		},
 		{
 			"key": "field_physician_middle_name",
+			"label": "Middle Name",
 			"name": "physician_middle_name",
 			"type": "text",
-			"label": "Middle Name",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -80,9 +80,9 @@
 		},
 		{
 			"key": "field_physician_last_name",
+			"label": "Last Name",
 			"name": "physician_last_name",
 			"type": "text",
-			"label": "Last Name",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -99,9 +99,9 @@
 		},
 		{
 			"key": "field_physician_pedigree",
+			"label": "Generational Suffix",
 			"name": "physician_pedigree",
 			"type": "select",
-			"label": "Generational Suffix",
 			"instructions": "Example: Jr., Sr., III",
 			"required": 0,
 			"conditional_logic": 0,
@@ -136,9 +136,9 @@
 		},
 		{
 			"key": "field_physician_degree",
+			"label": "Clinical Degrees and Credentials",
 			"name": "physician_degree",
 			"type": "taxonomy",
-			"label": "Clinical Degrees and Credentials",
 			"instructions": "Select the clinical degrees and credentials that allow the provider to practice their form of health care in the state. Select multiple if necessary.</p><p class='description' style='margin-top: 0.5em;'>The display order of the items in the provider's name is based on the order of the selected items here. You may click and drag to rearrange the selected items in this field.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -166,9 +166,9 @@
 		},
 		{
 			"key": "field_physician_prefix",
+			"label": "Prefix",
 			"name": "physician_prefix",
 			"type": "select",
-			"label": "Prefix",
 			"instructions": "Only select \"Dr.\" if the provider has any of the following degrees: M.D., D.D.S., D.O., DPM or O.D.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -196,9 +196,9 @@
 		},
 		{
 			"key": "field_physician_gender",
+			"label": "Gender",
 			"name": "physician_gender",
 			"type": "radio",
-			"label": "Gender",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -221,9 +221,9 @@
 		},
 		{
 			"key": "field_physician_searchable",
+			"label": "Searchable",
 			"name": "physician_searchable",
 			"type": "true_false",
-			"label": "Searchable",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -248,9 +248,9 @@
 		},
 		{
 			"key": "field_physician_full_name",
+			"label": "Full Name",
 			"name": "physician_full_name",
 			"type": "text",
-			"label": "Full Name",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -275,9 +275,9 @@
 		},
 		{
 			"key": "field_physician_medium_name",
+			"label": "Medium Name",
 			"name": "physician_medium_name",
 			"type": "text",
-			"label": "Medium Name",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -302,9 +302,9 @@
 		},
 		{
 			"key": "field_physician_languages",
+			"label": "Language(s)",
 			"name": "physician_languages",
 			"type": "taxonomy",
-			"label": "Language(s)",
 			"instructions": "This is displayed on the provider's profile if any languages are included other than English. This also enables users to filter the main list of providers by each language.</p><p class='description' style='margin-top: 0.5em;'>Be sure to also include English (presuming that is applicable for this provider). Select multiple languages if necessary.</p><p class='description' style='margin-top: 0.5em;'>The display order of the selected languages on the provider's profile is based on the order of the selected languages here. You may click and drag to rearrange the selected languages in this field.",
 			"required": 1,
 			"conditional_logic": 0,
@@ -330,9 +330,9 @@
 		},
 		{
 			"key": "field_physician_brand_tab",
+			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -391,9 +391,9 @@
 		},
 		{
 			"key": "field_physician_portrait_tab",
+			"label": "<i class=\"dashicons dashicons-images-alt2\"><\/i> Portraits",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons dashicons-images-alt2\"><\/i> Portraits",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -479,9 +479,9 @@
 		},
 		{
 			"key": "field_physician_media_tab",
+			"label": "<i class=\"dashicons dashicons-embed-video\"><\/i> Associated Media",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons dashicons-embed-video\"><\/i> Associated Media",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -495,9 +495,9 @@
 		},
 		{
 			"key": "field_physician_youtube_link",
+			"label": "Featured Video",
 			"name": "physician_youtube_link",
 			"type": "url",
-			"label": "Featured Video",
 			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this provider and that supports the Patient-focused Clinical Biography. Include the full URL, including https:\/\/.",
 			"required": 0,
 			"conditional_logic": [
@@ -519,9 +519,9 @@
 		},
 		{
 			"key": "field_physician_podcast_name",
+			"label": "UAMS Health Talk Podcast Guest Name",
 			"name": "physician_podcast_name",
 			"type": "text",
-			"label": "UAMS Health Talk Podcast Guest Name",
 			"instructions": "Include a single guest name as listed in the \"Guests\" dropdown of the embedded player on <a href=\"https://uamshealth.com/podcast/\" title=\"UAMS Health Talk Podcast\" target=\"_blank\">https://uamshealth.com/podcast/</a>.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -538,9 +538,9 @@
 		},
 		{
 			"key": "field_physician_clinical_tab",
+			"label": "<i class=\"dashicons-id-alt dashicons\"><\/i> Clinical Role Details",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-id-alt dashicons\"><\/i> Clinical Role Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -554,9 +554,9 @@
 		},
 		{
 			"key": "field_physician_resident",
+			"label": "Is the Provider a Resident?",
 			"name": "physician_resident",
 			"type": "true_false",
-			"label": "Is the Provider a Resident?",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -573,9 +573,9 @@
 		},
 		{
 			"key": "field_physician_eligible_appointments",
+			"label": "Does the Provider See Patients Via Appointments?",
 			"name": "physician_eligible_appointments",
 			"type": "button_group",
-			"label": "Does the Provider See Patients Via Appointments?",
 			"instructions": "Does the provider see patients via appointments <strong>and</strong> are those patients appointed to the <em>provider</em> rather than to a <em>resource</em>?",
 			"required": 1,
 			"conditional_logic": [
@@ -603,9 +603,9 @@
 		},
 		{
 			"key": "field_physician_primary_care",
+			"label": "Is the Provider a Primary Care Provider?",
 			"name": "physician_primary_care",
 			"type": "button_group",
-			"label": "Is the Provider a Primary Care Provider?",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -633,9 +633,9 @@
 		},
 		{
 			"key": "field_physician_accepting_patients",
+			"label": "Is the Provider Accepting New Patients?",
 			"name": "physician_accepting_patients",
 			"type": "button_group",
-			"label": "Is the Provider Accepting New Patients?",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -663,9 +663,9 @@
 		},
 		{
 			"key": "field_physician_referral_required",
+			"label": "Does the Provider Require a Referral for New Patients?",
 			"name": "physician_referral_required",
 			"type": "button_group",
-			"label": "Does the Provider Require a Referral for New Patients?",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -693,9 +693,9 @@
 		},
 		{
 			"key": "field_physician_second_opinion",
+			"label": "Does the Provider Offer Second Opinions?",
 			"name": "physician_second_opinion",
 			"type": "button_group",
-			"label": "Does the Provider Offer Second Opinions?",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -723,9 +723,9 @@
 		},
 		{
 			"key": "field_physician_appointment_link",
+			"label": "Appointment Link",
 			"name": "physician_appointment_link",
 			"type": "url",
-			"label": "Appointment Link",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -752,9 +752,9 @@
 		},
 		{
 			"key": "field_physician_title",
+			"label": "Clinical Specialty and Occupational Title",
 			"name": "physician_title",
 			"type": "taxonomy",
-			"label": "Clinical Specialty and Occupational Title",
 			"instructions": "The provider's clinical occupation title is defined based on the provider's clinical specialty.</p><p class='description' style='margin-top: 0.5em;'>The provider's clinical specialty should be defined according to the primary taxonomy code currently defined by the provider on their National Provider Identifier record in the National Plan and Provider Enumeration System.</p><p class='description' style='margin-top: 0.5em;'>The provider's NPI record can be found at <a href='https://npiregistry.cms.hhs.gov/search' target='_blank'>https://npiregistry.cms.hhs.gov/search</a>. The taxonomy code(s) will be found at the bottom of the provider's record. The primary taxonomy code will be indicated with a \"Yes\" in the \"Primary Taxonomy\" column.</p><p class='description' style='margin-top: 0.5em;'>If the primary taxonomy does not reflect the provider's current classification or specialization, contact UAMS Provider Enrollment at <a href='mailto:enrollment@uams.edu'>enrollment@uams.edu</a>.</p><p class='description' style='margin-top: 0.5em;'>Copy the 10-character code for the primary taxonomy from the \"Selected Taxonomy\" column. Switch back to this provider profile editor. Click this field to open the dropdown. Click the text input area at the top of the dropdown. Paste the primary taxonomy code into that input. Select the clinical specialty that is returned.</p><p class='description' style='margin-top: 0.5em;'>If no clinical specialty is returned using the primary taxonomy code, it may be that the primary taxonomy is not valid for our purposes (e.g., it is the taxonomy for a student or for a hospital). Contact UAMS Web Services for guidance. </p><p class='description' style='margin-top: 0.5em;'><a href='https://communications.uams.edu/web/kb/provider-titles/#clinical-title' target='_blank' title='UAMS Web Services Knowledge Base, Provider Titles, Clinical Title'>Find more information about the Clinical Specialty and Occupation Title.</a>",
 			"required": 1,
 			"conditional_logic": [
@@ -785,9 +785,9 @@
 		},
 		{
 			"key": "field_physician_service_line",
+			"label": "UAMS Health Service Line",
 			"name": "physician_service_line",
 			"type": "taxonomy",
-			"label": "UAMS Health Service Line",
 			"instructions": "If the provider does not belong to a UAMS Health service line, select the relevant option that begins with \"None.\"",
 			"required": 1,
 			"conditional_logic": [
@@ -818,9 +818,9 @@
 		},
 		{
 			"key": "field_physician_npi",
+			"label": "National Provider Identifier (NPI)",
 			"name": "physician_npi",
 			"type": "number",
-			"label": "National Provider Identifier (NPI)",
 			"instructions": "This value may be found in the provider's UAMS Health Epic SER record. It would be in the \"Related Group 9300\" item. Look for \"Provider NPI\" in the column for \"9300 - MPI ID TYPE\" and copy the value from that row under the \"9301 - MPI ID\" column.</p><p class='description' style='margin-top: 0.5em;'>It may also be found in the <a href='http://echo.uams.edu/echonet/payerportal/DrListing.asp' target='_blank'>UAMS Provider Enrollment Participation Portal</a>, which is only accessible on the UAMS network or by connecting to the UAMS virtual private network.</p><p class='description' style='margin-top: 0.5em;'>It may also be found by searching for the provider in the <a href='https://npiregistry.cms.hhs.gov/search' target='_blank'>NPPES NPI Registry</a>.",
 			"required": 1,
 			"conditional_logic": 0,
@@ -839,9 +839,9 @@
 		},
 		{
 			"key": "field_physician_pid",
+			"label": "UAMS Health Epic SER ID",
 			"name": "physician_pid",
 			"type": "number",
-			"label": "UAMS Health Epic SER ID",
 			"instructions": "This value can be found in the provider's UAMS Health Epic SER record under \".1 - ID.\"",
 			"required": 1,
 			"conditional_logic": 0,
@@ -858,9 +858,9 @@
 		},
 		{
 			"key": "field_physician_patient_types",
+			"label": "Patient Type(s)",
 			"name": "physician_patient_types",
 			"type": "taxonomy",
-			"label": "Patient Type(s)",
 			"instructions": "This is displayed on the provider's profile. This also enables users to filter the main provider list at <a href='http://uamshealth.com/provider/' target='_blank'>http://uamshealth.com/provider/</a> by each patient type.",
 			"required": 1,
 			"conditional_logic": 0,
@@ -883,9 +883,9 @@
 		},
 		{
 			"key": "field_physician_clinical_bio",
+			"label": "Patient-focused Clinical Biography",
 			"name": "physician_clinical_bio",
 			"type": "wysiwyg",
-			"label": "Patient-focused Clinical Biography",
 			"instructions": "While this field is not required, it is heavily encouraged.</p><p class='description' style='margin-top: 0.5em;'>It should be written with the patient in mind (e.g., What can the provider do for the patient? Why should the patient choose to make an appointment with this provider or with UAMS Health in general?).</p><p class='description' style='margin-top: 0.5em;'>Write this from the third-person point of view. Use complete sentences. Use only paragraphs (no headings or lists). Do not use any line breaks, text formatting, images or links.</p><p class='description' style='margin-top: 0.5em;'>Move any academic and training background to the \"Academic Biography\" field, which is under the \"Academic Role Details\" tab.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -902,9 +902,9 @@
 		},
 		{
 			"key": "field_physician_short_clinical_bio",
+			"label": "Short Patient-focused Clinical Biography",
 			"name": "physician_short_clinical_bio",
 			"type": "textarea",
-			"label": "Short Patient-focused Clinical Biography",
 			"instructions": "This will be the description included for this page when it appears in search results and in some lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests potential patients with a short, relevant summary of this provider and their clinical role. Think of it like a pitch that convinces the potential patient that this provider is exactly who they're looking for.</p><p class='description' style='margin-top: 0.5em;'>Follow the instructions used for the longer Patient-focused Clinical Biography field but using a single paragraph with a limit of 160 characters. The preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -921,9 +921,9 @@
 		},
 		{
 			"key": "field_physician_clinical_focus",
+			"label": "Clinical Focus",
 			"name": "physician_clinical_focus",
 			"type": "wysiwyg",
-			"label": "Clinical Focus",
 			"instructions": "This is displayed alongside the content from the Patient-focused Clinical Biography. It allows you to include a quick glimpse of the provider's main clinical focus in case the content in the Patient-focused Clinical Biography is so long that users may not read the whole thing. This should not be an outline of their services (that is covered by Conditions Treated and Treatments &amp; Procedures).</p><p class='description' style='margin-top: 0.5em;'>If you are including the information as a list, use a single-level bulleted list. If you are not including the information as a list, use full sentences in a single paragraph of less than 344 characters.</p><p class='description' style='margin-top: 0.5em;'>Do not simply repeat the content of the Patient-focused Clinical Biography.",
 			"required": 0,
 			"conditional_logic": [
@@ -948,9 +948,9 @@
 		},
 		{
 			"key": "field_medical_specialties",
+			"label": "Medical Specialties",
 			"name": "physician_medical_specialties",
 			"type": "taxonomy",
-			"label": "Medical Specialties",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -981,9 +981,9 @@
 		},
 		{
 			"key": "field_physician_portal",
+			"label": "Portal",
 			"name": "physician_portal",
 			"type": "taxonomy",
-			"label": "Portal",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -1016,9 +1016,9 @@
 		},
 		{
 			"key": "field_physician_hidden",
+			"label": "Hide from Provider List",
 			"name": "physician_hidden",
 			"type": "true_false",
-			"label": "Hide from Provider List",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1035,9 +1035,9 @@
 		},
 		{
 			"key": "field_physician_asp_filter",
+			"label": "Ajax Search Filter",
 			"name": "physician_asp_filter",
 			"type": "text",
-			"label": "Ajax Search Filter",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -1062,9 +1062,9 @@
 		},
 		{
 			"key": "field_physician_resident_profile_tab",
+			"label": "<i class=\"dashicons dashicons-id-alt\"><\/i> Resident Role Details",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons dashicons-id-alt\"><\/i> Resident Role Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -1114,9 +1114,9 @@
 				},
 				{
 					"key": "field_physician_resident_hometown_international",
+					"label": "Is the hometown outside the U.S.?",
 					"name": "physician_resident_hometown_international",
 					"type": "true_false",
-					"label": "Is the hometown outside the U.S.?",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": 0,
@@ -1133,9 +1133,9 @@
 				},
 				{
 					"key": "field_physician_resident_hometown_city",
+					"label": "Hometown City",
 					"name": "physician_resident_hometown_city",
 					"type": "text",
-					"label": "Hometown City",
 					"instructions": "",
 					"required": 1,
 					"conditional_logic": 0,
@@ -1152,9 +1152,9 @@
 				},
 				{
 					"key": "field_physician_resident_hometown_state",
+					"label": "Hometown State \/ District \/ Territory",
 					"name": "physician_resident_hometown_state",
 					"type": "select",
-					"label": "Hometown State \/ District \/ Territory",
 					"instructions": "",
 					"required": 1,
 					"conditional_logic": [
@@ -1236,9 +1236,9 @@
 				},
 				{
 					"key": "field_physician_resident_hometown_country",
+					"label": "Hometown Country",
 					"name": "physician_resident_hometown_country",
 					"type": "text",
-					"label": "Hometown Country",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": [
@@ -1264,8 +1264,8 @@
 				{
 					"key": "field_physician_resident_school",
 					"label": "Medical School",
-					"type": "taxonomy",
 					"name": "physician_resident_school",
+					"type": "taxonomy",
 					"instructions": "The medical school the resident graduated from, not an institution associated with their current residency program",
 					"required": 1,
 					"conditional_logic": 0,
@@ -1305,9 +1305,9 @@
 				},
 				{
 					"key": "field_physician_resident_academic_department",
+					"label": "Academic Department",
 					"name": "physician_resident_academic_department",
 					"type": "taxonomy",
-					"label": "Academic Department",
 					"instructions": "",
 					"required": 1,
 					"conditional_logic": 0,
@@ -1330,9 +1330,9 @@
 				},
 				{
 					"key": "field_physician_resident_academic_chief",
+					"label": "Chief Resident?",
 					"name": "physician_resident_academic_chief",
 					"type": "true_false",
-					"label": "Chief Resident?",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": 0,
@@ -1349,9 +1349,9 @@
 				},
 				{
 					"key": "field_physician_resident_academic_year",
+					"label": "Residency Year",
 					"name": "physician_resident_academic_year",
 					"type": "taxonomy",
-					"label": "Residency Year",
 					"instructions": "",
 					"required": 1,
 					"conditional_logic": [
@@ -1384,9 +1384,9 @@
 		},
 		{
 			"key": "field_physician_academic_profile_tab",
+			"label": "<i class=\"dashicons-id-alt dashicons\"><\/i> Academic Role Details",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-id-alt dashicons\"><\/i> Academic Role Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -1408,9 +1408,9 @@
 		},
 		{
 			"key": "field_physician_academic_title",
+			"label": "Academic Title",
 			"name": "physician_academic_title",
 			"type": "text",
-			"label": "Academic Title",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -1438,9 +1438,9 @@
 		},
 		{
 			"key": "field_physician_academic_appointment",
+			"label": "Faculty Title",
 			"name": "physician_academic_appointment",
 			"type": "repeater",
-			"label": "Faculty Title",
 			"instructions": "Both fields are required if you add a row.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1536,9 +1536,9 @@
 		},
 		{
 			"key": "field_physician_academic_admin_title",
+			"label": "Academic Administrative Title",
 			"name": "physician_academic_admin_title",
 			"type": "repeater",
-			"label": "Academic Administrative Title",
 			"instructions": "Both fields are required if you add a row.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1607,9 +1607,9 @@
 		},
 		{
 			"key": "field_physician_academic_bio",
+			"label": "Academic Biography",
 			"name": "physician_academic_bio",
 			"type": "wysiwyg",
-			"label": "Academic Biography",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1626,9 +1626,9 @@
 		},
 		{
 			"key": "field_physician_research_tab",
+			"label": "<i class=\"dashicons-id-alt dashicons\"><\/i> Research Role Details",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-id-alt dashicons\"><\/i> Research Role Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1642,9 +1642,9 @@
 		},
 		{
 			"key": "field_physician_research_bio",
+			"label": "Research Bio",
 			"name": "physician_research_bio",
 			"type": "wysiwyg",
-			"label": "Research Bio",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1661,9 +1661,9 @@
 		},
 		{
 			"key": "field_physician_research_interests",
+			"label": "Research Interests",
 			"name": "physician_research_interests",
 			"type": "textarea",
-			"label": "Research Interests",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1680,9 +1680,9 @@
 		},
 		{
 			"key": "field_physician_profiles_link",
+			"label": "UAMS Profiles Link",
 			"name": "physician_research_profiles_link",
 			"type": "url",
-			"label": "UAMS Profiles Link",
 			"instructions": "Please include the full URL, including https:\/\/",
 			"required": 0,
 			"conditional_logic": [
@@ -1704,9 +1704,9 @@
 		},
 		{
 			"key": "field_pubmed_author_id",
+			"label": "Pubmed Author ID \/ Name",
 			"name": "physician_pubmed_author_id",
 			"type": "text",
-			"label": "Pubmed Author ID \/ Name",
 			"instructions": "Used to link to Pubmed complete list. Ex. 'Smith JD' More information at <a href='https://www.ncbi.nlm.nih.gov/pubmed/advanced' target='_blank'>https://www.ncbi.nlm.nih.gov/pubmed/advanced</a>",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1723,9 +1723,9 @@
 		},
 		{
 			"key": "field_physician_author_number",
+			"label": "Number of Latest Articles to Display",
 			"name": "physician_author_number",
 			"type": "select",
-			"label": "Number of Latest Articles to Display",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1750,9 +1750,9 @@
 		},
 		{
 			"key": "field_physician_select_publications",
+			"label": "Selected Publications",
 			"name": "physician_select_publications",
 			"type": "repeater",
-			"label": "Selected Publications",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1843,9 +1843,9 @@
 		},
 		{
 			"key": "field_physician_education_tab",
+			"label": "<i class=\"dashicons-bank dashicons\"><\/i> Education, Training, Certifications and Memberships",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-bank dashicons\"><\/i> Education, Training, Certifications and Memberships",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1859,9 +1859,9 @@
 		},
 		{
 			"key": "field_physician_appointment_education",
+			"label": "Education and Training",
 			"name": "physician_education",
 			"type": "repeater",
-			"label": "Education and Training",
 			"instructions": "Arrange the rows in reverse chronological order, with the most recent item at the top and the oldest item at the bottom.</p><p class='description' style='margin-top: 0.5em;'>\"Education Type\" and \"Organization\" are both required if you add a row.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1949,9 +1949,9 @@
 		},
 		{
 			"key": "field_physician_boards",
+			"label": "Specialty and Subspecialty Certifications",
 			"name": "physician_boards",
 			"type": "taxonomy",
-			"label": "Specialty and Subspecialty Certifications",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1974,9 +1974,9 @@
 		},
 		{
 			"key": "field_physician_associations",
+			"label": "Health Care Professional Memberships",
 			"name": "physician_associations",
 			"type": "taxonomy",
-			"label": "Health Care Professional Memberships",
 			"instructions": "Examples: Fellow of the American College of Obstetricians and Gynecologists, American Society of Breast Surgeons, American Burn Association, etc.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1999,8 +1999,8 @@
 		},
 		{
 			"key": "field_physician_location_tab",
-			"name": "",
 			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Related Locations",
+			"name": "",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -2015,9 +2015,9 @@
 		},
 		{
 			"key": "field_physician_locations",
+			"label": "Locations",
 			"name": "physician_locations",
 			"type": "relationship",
-			"label": "Locations",
 			"instructions": "These items will be displayed in the order they are entered. You may click and drag to rearrange. Put the provider's primary location first.",
 			"required": 1,
 			"conditional_logic": 0,
@@ -2043,9 +2043,9 @@
 		},
 		{
 			"key": "field_physician_affiliation",
+			"label": "Hospital Affiliations",
 			"name": "physician_affiliation",
 			"type": "taxonomy",
-			"label": "Hospital Affiliations",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -2076,9 +2076,9 @@
 		},
 		{
 			"key": "field_physician_region",
+			"label": "Region",
 			"name": "physician_region",
 			"type": "taxonomy",
-			"label": "Region",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -2109,8 +2109,8 @@
 		},
 		{
 			"key": "field_physician_expertise_tab",
-			"name": "",
 			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
+			"name": "",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -2133,9 +2133,9 @@
 		},
 		{
 			"key": "field_physician_expertise",
+			"label": "Areas of Expertise",
 			"name": "physician_expertise",
 			"type": "relationship",
-			"label": "Areas of Expertise",
 			"instructions": "Areas of Expertise are hierarchical. If a child area is included here (e.g., Lung Cancer Care), please also select the parent area (e.g., Cancer Care).",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2164,8 +2164,8 @@
 		},
 		{
 			"key": "field_physician_condition_treatment_tab",
-			"name": "",
 			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
+			"name": "",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -2180,9 +2180,9 @@
 		},
 		{
 			"key": "field_physician_conditions_cpt",
+			"label": "Conditions Treated",
 			"name": "physician_conditions_cpt",
 			"type": "post_object",
-			"label": "Conditions Treated",
 			"instructions": "Select any conditions this provider treats or diagnoses. These items will be displayed in the order they are entered. You may click and drag to rearrange.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2209,9 +2209,9 @@
 		},
 		{
 			"key": "field_physician_treatments_cpt",
+			"label": "Treatments & Procedures",
 			"name": "physician_treatments_cpt",
 			"type": "post_object",
-			"label": "Treatments & Procedures",
 			"instructions": "Select any treatments or procedures this provider performs or prescribes. These items will be displayed in the order they are entered. You may click and drag to rearrange.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2238,9 +2238,9 @@
 		},
 		{
 			"key": "field_medical_terms",
+			"label": "Medical Terms (Tags)",
 			"name": "physician_medical_terms",
 			"type": "taxonomy",
-			"label": "Medical Terms (Tags)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -2271,8 +2271,8 @@
 		},
 		{
 			"key": "field_physician_clinical_resource_tab",
-			"name": "",
 			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
+			"name": "",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -2295,9 +2295,9 @@
 		},
 		{
 			"key": "field_physician_clinical_resources",
+			"label": "Clinical Resources",
 			"name": "physician_clinical_resources",
 			"type": "relationship",
-			"label": "Clinical Resources",
 			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2326,9 +2326,9 @@
 		},
 		{
 			"key": "field_physician_recognition_tab",
+			"label": "<i class=\"dashicons dashicons-awards\"><\/i> Recognition and Awards",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons dashicons-awards\"><\/i> Recognition and Awards",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2342,9 +2342,9 @@
 		},
 		{
 			"key": "field_physician_recognitions",
+			"label": "Recognition Lists",
 			"name": "physician_recognitions",
 			"type": "taxonomy",
-			"label": "Recognition Lists",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2367,9 +2367,9 @@
 		},
 		{
 			"key": "field_physician_awards",
+			"label": "Award(s)",
 			"name": "physician_awards",
 			"type": "repeater",
-			"label": "Award(s)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2445,9 +2445,9 @@
 		},
 		{
 			"key": "field_physician_gmb_tab",
+			"label": "<i class=\"dashicons-google dashicons\"><\/i> Google My Business Details",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-google dashicons\"><\/i> Google My Business Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -2469,8 +2469,8 @@
 		},
 		{
 			"key": "field_physician_schema_gmb_query",
-			"name": "physician_schema_gmb_query",
 			"label": "Does this provider have one or more listings on Google My Business?",
+			"name": "physician_schema_gmb_query",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -2492,8 +2492,8 @@
 		},
 		{
 			"key": "field_physician_schema_google_cid",
-			"name": "physician_schema_google_cid",
 			"label": "Google CID Numbers (hasMap, identifier)",
+			"name": "physician_schema_google_cid",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
@@ -2579,9 +2579,9 @@
 		},
 		{
 			"key": "field_physician_schema_tab",
+			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2600,8 +2600,8 @@
 		},
 		{
 			"key": "field_physician_alternatename",
-			"name": "physician_alternatename",
 			"label": "Alternate Names for the Provider (alternateName > Text)",
+			"name": "physician_alternatename",
 			"type": "clone",
 			"instructions": "Do not include degrees and credentials in the alternate names.",
 			"required": 0,
@@ -2624,8 +2624,8 @@
 		},
 		{
 			"key": "field_physician_sameas",
-			"name": "physician_sameas",
 			"label": "Reference Webpages for the Provider (sameAs > URL)",
+			"name": "physician_sameas",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
@@ -2648,9 +2648,9 @@
 		},
 		{
 			"key": "field_physician_extra_tab",
+			"label": "<i class=\"dashicons dashicons-info\"><\/i> Additional Information",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons dashicons-info\"><\/i> Additional Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -2672,9 +2672,9 @@
 		},
 		{
 			"key": "field_physician_additional_info",
+			"label": "Additional Information",
 			"name": "physician_additional_info",
 			"type": "wysiwyg",
-			"label": "Additional Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2691,9 +2691,9 @@
 		},
 		{
 			"key": "field_physician_deprecated_tab",
+			"label": "Deprecated Fields",
 			"name": "",
 			"type": "tab",
-			"label": "Deprecated Fields",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -2715,9 +2715,9 @@
 		},
 		{
 			"key": "field_profile_message",
+			"label": "Profile Information",
 			"name": "",
 			"type": "message",
-			"label": "Profile Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2732,9 +2732,9 @@
 		},
 		{
 			"key": "field_physician_academic_short_bio",
+			"label": "Short Academic Biography",
 			"name": "physician_academic_short_bio",
 			"type": "text",
-			"label": "Short Academic Biography",
 			"instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2751,9 +2751,9 @@
 		},
 		{
 			"key": "field_physician_academic_office",
+			"label": "Office Location",
 			"name": "physician_academic_office",
 			"type": "text",
-			"label": "Office Location",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2770,9 +2770,9 @@
 		},
 		{
 			"key": "field_physician_academic_map",
+			"label": "Building \/ Map",
 			"name": "physician_academic_map",
 			"type": "select",
-			"label": "Building \/ Map",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2833,9 +2833,9 @@
 		},
 		{
 			"key": "field_physician_contact_information",
+			"label": "Contact Information",
 			"name": "physician_contact_information",
 			"type": "repeater",
-			"label": "Contact Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2901,9 +2901,9 @@
 		},
 		{
 			"key": "field_physician_clinical_admin_title",
+			"label": "Clinical Administrative Title",
 			"name": "physician_clinical_admin_title",
 			"type": "repeater",
-			"label": "Clinical Administrative Title",
 			"instructions": "Both fields are required if you add a row. This is not displayed on the front end at this time.",
 			"required": 0,
 			"conditional_logic": [
@@ -2980,9 +2980,9 @@
 		},
 		{
 			"key": "field_physician_institute_affiliation",
+			"label": "Institute Affiliations",
 			"name": "physician_institute_affiliation",
 			"type": "taxonomy",
-			"label": "Institute Affiliations",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -3013,9 +3013,9 @@
 		},
 		{
 			"key": "field_physician_academic_college",
+			"label": "College Affiliation",
 			"name": "physician_academic_college",
 			"type": "taxonomy",
-			"label": "College Affiliation",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3038,9 +3038,9 @@
 		},
 		{
 			"key": "field_physician_academic_position",
+			"label": "Academic Position Type",
 			"name": "physician_academic_position",
 			"type": "taxonomy",
-			"label": "Academic Position Type",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,

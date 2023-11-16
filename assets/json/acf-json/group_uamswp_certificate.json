@@ -45,8 +45,8 @@
 		},
 		{
 			"key": "field_certificate_name",
-			"name": "certificate_name",
 			"label": "Official Name of the Specialty or Subspecialty Certificate",
+			"name": "certificate_name",
 			"type": "text",
 			"instructions": "<p class='description' style='margin-top: 0.5em;'>Do not include the name of the certifying body.</p><p class='description' style='margin-top: 0.5em;'>For subspecialty certificates, do not include the name of a related primary specialty certificate.</p>",
 			"required": 1,
@@ -65,8 +65,8 @@
 		},
 		{
 			"key": "field_certificate_certifying_body",
-			"name": "certificate_certifying_body",
 			"label": "Certifying Body for the Specialty or Subspecialty Certificate.",
+			"name": "certificate_certifying_body",
 			"type": "taxonomy",
 			"instructions": "",
 			"required": 1,
@@ -91,8 +91,8 @@
 		},
 		{
 			"key": "field_certificate_type",
-			"name": "certificate_type",
 			"label": "Certificate Type",
+			"name": "certificate_type",
 			"type": "radio",
 			"instructions": "",
 			"required": 1,
@@ -120,8 +120,8 @@
 		},
 		{
 			"key": "field_certificate_primary_specialty_query",
-			"name": "certificate_primary_specialty_query",
 			"label": "Is primary specialty certification is a core requirement for this subspecialty?",
+			"name": "certificate_primary_specialty_query",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -153,8 +153,8 @@
 		},
 		{
 			"key": "field_certificate_primary_specialty_options",
-			"name": "certificate_primary_specialty_options",
 			"label": "What type of primary specialty certification is required?",
+			"name": "certificate_primary_specialty_options",
 			"type": "radio",
 			"instructions": "",
 			"required": 1,
@@ -190,8 +190,8 @@
 		},
 		{
 			"key": "field_certificate_primary_specialty_certifying_body",
-			"name": "certificate_primary_specialty_certifying_body",
 			"label": "Select the certifying bodies that meet the subspecialty's requirements for primary specialty certification",
+			"name": "certificate_primary_specialty_certifying_body",
 			"type": "taxonomy",
 			"instructions": "",
 			"required": 1,
@@ -229,8 +229,8 @@
 		},
 		{
 			"key": "field_certificate_primary_specialty_certificate",
-			"name": "certificate_primary_specialty_certificate",
 			"label": "Select the specialty certificates that meet the subspecialty's requirements for primary specialty certification",
+			"name": "certificate_primary_specialty_certificate",
 			"type": "taxonomy",
 			"instructions": "",
 			"required": 1,
@@ -268,8 +268,8 @@
 		},
 		{
 			"key": "field_certificate_url_query",
-			"name": "certificate_url_query",
 			"label": "Does this specialty or subspecialty certificate have a webpage on the certifying body's official website?",
+			"name": "certificate_url_query",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -293,8 +293,8 @@
 		},
 		{
 			"key": "field_certificate_url",
-			"name": "certificate_url",
 			"label": "Specialty or Subspecialty Certificate Webpage URL",
+			"name": "certificate_url",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
@@ -325,8 +325,8 @@
 		},
 		{
 			"key": "field_certificate_alternatename",
-			"name": "certificate_alternatename",
 			"label": "Alternate Names for the Specialty or Subspecialty Certificate",
+			"name": "certificate_alternatename",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
@@ -349,8 +349,8 @@
 		},
 		{
 			"key": "field_certificate_sameas",
-			"name": "certificate_sameas",
 			"label": "Reference Webpages for the Specialty or Subspecialty Certificate",
+			"name": "certificate_sameas",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,

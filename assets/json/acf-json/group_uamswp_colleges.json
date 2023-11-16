@@ -26,9 +26,9 @@
 	"fields": [
 		{
 			"key": "field_college_url",
+			"label": "Website URL",
 			"name": "college_url",
 			"type": "link",
-			"label": "Website URL",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
