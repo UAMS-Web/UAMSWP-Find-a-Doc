@@ -24,50 +24,6 @@
 	"acfe_note": "",
 	"acfe_meta": "",
 	"fields": {
-		"field_expertise_alternate_names": {
-			"key": "field_expertise_alternate_names",
-			"label": "Alternate Name(s) for This Area of Expertise",
-			"name": "expertise_alternate_names",
-			"type": "repeater",
-			"instructions": "Insert any other names, phrases or acronyms that this area of expertise may be known by. Separate each alternate name into its own item.</p><p class='description' style='margin-top: 0.5em;'>These alternate names will be used to help this page appear in search results for those terms.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"collapsed": "field_alternate_text",
-			"min": 0,
-			"max": 10,
-			"layout": "table",
-			"button_label": "Add Alternate Name",
-			"sub_fields": [
-				{
-					"key": "field_alternate_text",
-					"label": "Alternate Name",
-					"name": "text",
-					"type": "text",
-					"instructions": "",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": "",
-					"acfe_validate": "",
-					"acfe_update": ""
-				}
-			]
-		},
 		"field_expertise_youtube_link": {
 			"key": "field_expertise_youtube_link",
 			"label": "Featured Youtube video",
@@ -745,6 +701,50 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_expertise_alternate_names": {
+			"key": "field_expertise_alternate_names",
+			"label": "Alternate Name(s) for This Area of Expertise",
+			"name": "expertise_alternate_names",
+			"type": "repeater",
+			"instructions": "Insert any other names, phrases or acronyms that this area of expertise may be known by. Separate each alternate name into its own item.</p><p class='description' style='margin-top: 0.5em;'>These alternate names will be used to help this page appear in search results for those terms.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "field_alternate_text",
+			"min": 0,
+			"max": 10,
+			"layout": "table",
+			"button_label": "Add Alternate Name",
+			"sub_fields": [
+				{
+					"key": "field_alternate_text",
+					"label": "Alternate Name",
+					"name": "text",
+					"type": "text",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": "",
+					"acfe_validate": "",
+					"acfe_update": ""
+				}
+			]
 		},
 		"field_expertise_tab_podcast": {
 			"key": "field_expertise_tab_podcast",
