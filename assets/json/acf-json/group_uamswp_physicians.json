@@ -460,8 +460,8 @@
 			"key": "field_physician_podcast_name",
 			"name": "physician_podcast_name",
 			"type": "text",
-			"label": "UAMS Health Talk Podcast Doctor Name",
-			"instructions": "Doctor name as listed in the dropdown",
+			"label": "UAMS Health Talk Podcast Guest Name",
+			"instructions": "Include a single guest name as listed in the \"Guests\" dropdown of the embedded player on <a href=\"https://uamshealth.com/podcast/\" title=\"UAMS Health Talk Podcast\" target=\"_blank\">https://uamshealth.com/podcast/</a>.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
