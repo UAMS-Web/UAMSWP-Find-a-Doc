@@ -946,6 +946,63 @@
 			"ui_on_text": "",
 			"ui_off_text": ""
 		},
+		"field_location_appointment": {
+			"key": "field_location_appointment",
+			"name": "location_appointment",
+			"type": "wysiwyg",
+			"label": "Information on setting up an appointment",
+			"instructions": "This section should ideally not contain headings. But if it does, use Heading 3 and down.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0
+		},
+		"field_location_appointment_bring": {
+			"key": "field_location_appointment_bring",
+			"name": "location_appointment_bring",
+			"type": "wysiwyg",
+			"label": "What to Bring to Your Appointment",
+			"instructions": "This section should ideally not contain headings. But if it does ...<br />If \"Information on setting up an appointment\" or \"What to Expect at Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0
+		},
+		"field_location_appointment_expect": {
+			"key": "field_location_appointment_expect",
+			"name": "location_appointment_expect",
+			"type": "wysiwyg",
+			"label": "What to Expect at Your Appointment",
+			"instructions": "This section should ideally not contain headings. But if it does ...<br />If \"Information on setting up an appointment\" or \"What to Bring to Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0
+		},
 		"field_location_contact_message": {
 			"key": "field_location_contact_message",
 			"label": "",
@@ -1453,63 +1510,6 @@
 			"message": "<h3>\"Appointment Information\" Section<\/h3>",
 			"new_lines": "",
 			"esc_html": 0
-		},
-		"field_location_appointment": {
-			"key": "field_location_appointment",
-			"name": "location_appointment",
-			"type": "wysiwyg",
-			"label": "Information on setting up an appointment",
-			"instructions": "This section should ideally not contain headings. But if it does, use Heading 3 and down.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "full",
-			"media_upload": 1,
-			"delay": 0
-		},
-		"field_location_appointment_bring": {
-			"key": "field_location_appointment_bring",
-			"name": "location_appointment_bring",
-			"type": "wysiwyg",
-			"label": "What to Bring to Your Appointment",
-			"instructions": "This section should ideally not contain headings. But if it does ...<br />If \"Information on setting up an appointment\" or \"What to Expect at Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "full",
-			"media_upload": 1,
-			"delay": 0
-		},
-		"field_location_appointment_expect": {
-			"key": "field_location_appointment_expect",
-			"name": "location_appointment_expect",
-			"type": "wysiwyg",
-			"label": "What to Expect at Your Appointment",
-			"instructions": "This section should ideally not contain headings. But if it does ...<br />If \"Information on setting up an appointment\" or \"What to Bring to Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "full",
-			"media_upload": 1,
-			"delay": 0
 		},
 		"field_link_message": {
 			"key": "field_link_message",
