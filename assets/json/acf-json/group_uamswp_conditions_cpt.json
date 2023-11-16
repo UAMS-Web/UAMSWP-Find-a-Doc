@@ -19,6 +19,29 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_condition_searchable",
+			"label": "Make this condition searchable?",
+			"name": "condition_searchable",
+			"type": "button_group",
+			"instructions": "Should this condition be used to help return results for associated items like providers, locations, etc.?",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_condition_alternate",
 			"label": "Alternate Name(s) for This Condition",
 			"name": "condition_alternate",
