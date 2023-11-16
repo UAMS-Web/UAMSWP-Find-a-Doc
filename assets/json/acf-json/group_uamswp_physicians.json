@@ -947,72 +947,6 @@
 			},
 			"multiple": 0
 		},
-		"field_physician_region": {
-			"key": "field_physician_region",
-			"name": "physician_region",
-			"type": "taxonomy",
-			"label": "Region",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_clinical_tab",
-						"operator": "==",
-						"value": "false"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "region",
-			"field_type": "multi_select",
-			"add_term": 0,
-			"save_terms": 1,
-			"load_terms": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 0,
-			"allow_null": 0
-		},
-		"field_physician_affiliation": {
-			"key": "field_physician_affiliation",
-			"name": "physician_affiliation",
-			"type": "taxonomy",
-			"label": "Hospital Affiliations",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_resident",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "affiliation",
-			"field_type": "checkbox",
-			"add_term": 0,
-			"save_terms": 0,
-			"load_terms": 0,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 0,
-			"allow_null": 0
-		},
 		"field_location_portal": {
 			"key": "field_physician_portal",
 			"name": "physician_portal",
@@ -2090,6 +2024,72 @@
 			"acfe_bidirectional": 0,
 			"acfe_validate": "",
 			"acfe_update": ""
+		},
+		"field_physician_affiliation": {
+			"key": "field_physician_affiliation",
+			"name": "physician_affiliation",
+			"type": "taxonomy",
+			"label": "Hospital Affiliations",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_resident",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "affiliation",
+			"field_type": "checkbox",
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0,
+			"allow_null": 0
+		},
+		"field_physician_region": {
+			"key": "field_physician_region",
+			"name": "physician_region",
+			"type": "taxonomy",
+			"label": "Region",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_tab_location",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "region",
+			"field_type": "multi_select",
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0,
+			"allow_null": 0
 		},
 		"field_physician_expertise_tab": {
 			"key": "field_physician_expertise_tab",
