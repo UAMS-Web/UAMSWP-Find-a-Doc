@@ -538,14 +538,14 @@
 		},
 		"field_expertise_youtube_link": {
 			"key": "field_expertise_youtube_link",
-			"label": "Featured Youtube video",
+			"label": "Featured Video",
 			"name": "expertise_youtube_link",
 			"type": "url",
-			"instructions": "Full URL, including https:\/\/",
+			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this area of expertise and that supports the content of this page. Include the full URL, including https:\/\/",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
