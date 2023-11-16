@@ -2905,7 +2905,7 @@
 						"id": ""
 					},
 					"collapsed": "field_telemed_hours_day",
-					"min": 1,
+					"min": 7,
 					"max": 0,
 					"layout": "table",
 					"button_label": "Add Day \/ Time",
