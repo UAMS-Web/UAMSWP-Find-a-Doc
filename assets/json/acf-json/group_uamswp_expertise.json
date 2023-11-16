@@ -628,6 +628,219 @@
 			"prepend": "",
 			"append": "",
 			"maxlength": ""
+		},
+		"field_expertise_tab_general": {
+			"key": "field_expertise_tab_general",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_brand_tab": {
+			"key": "field_expertise_brand_tab",
+			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_brand_tab",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": [
+				"super_admin",
+				"administrator",
+				"editor"
+			],
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_details": {
+			"key": "field_expertise_tab_details",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> Area of Expertise Details",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_podcast": {
+			"key": "field_expertise_tab_podcast",
+			"label": "<i class=\"dashicons dashicons-embed-video\"><\/i> Associated Media",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_providers": {
+			"key": "field_expertise_tab_providers",
+			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Related Providers",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_locations": {
+			"key": "field_expertise_tab_locations",
+			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Related Locations",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_expertise_descendant": {
+			"key": "field_expertise_tab_expertise_descendant",
+			"label": "<i class=\"dashicons-open-folder dashicons\"><\/i> Descendant Areas of Expertise",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_expertise": {
+			"key": "field_expertise_tab_expertise",
+			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_clinical_resources": {
+			"key": "field_expertise_tab_clinical_resources",
+			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_condition_treatment": {
+			"key": "field_expertise_tab_condition_treatment",
+			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_schema": {
+			"key": "field_expertise_tab_schema",
+			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_deprecated": {
+			"key": "field_expertise_tab_deprecated",
+			"label": "Deprecated Fields",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_tab_deprecated",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		}
 	},
 	"modified": false
