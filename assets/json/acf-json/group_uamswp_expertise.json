@@ -552,7 +552,7 @@
 			"default_value": "",
 			"placeholder": ""
 		},
-		"field_physician_podcast_name": {
+		"field_expertise_podcast_name": {
 			"key": "field_expertise_podcast_name",
 			"label": "UAMS Health Talk Podcast Topic Name",
 			"name": "expertise_podcast_name",
