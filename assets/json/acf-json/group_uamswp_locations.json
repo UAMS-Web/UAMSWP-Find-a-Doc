@@ -892,6 +892,22 @@
 			"media_upload": 0,
 			"delay": 0
 		},
+		"field_location_appointment_info_tab": {
+			"key": "field_location_appointment_info_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Appointment Information",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_location_ac_query": {
 			"key": "field_location_ac_query",
 			"name": "location_ac_query",
@@ -1668,22 +1684,6 @@
 			"open": 0,
 			"multi_expand": 0,
 			"endpoint": 1
-		},
-		"field_location_appointment_info_tab": {
-			"key": "field_location_appointment_info_tab",
-			"name": "",
-			"type": "tab",
-			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Appointment Information",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"placement": "left",
-			"endpoint": 0
 		},
 		"field_location_contact_tab": {
 			"key": "field_location_contact_tab",
