@@ -25,8 +25,8 @@
 	"acfe_permissions": "",
 	"acfe_note": "",
 	"acfe_meta": "",
-	"fields": {
-		"field_clinical_specialization_extension_query": {
+	"fields": [
+		{
 			"key": "field_clinical_specialization_extension_query",
 			"label": "Is this clinical specialization part of the UAMS Health extension to the Health Care Provider Taxonomy Code Set?",
 			"name": "clinical_specialization_extension_query",
@@ -48,7 +48,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_clinical_specialization_tab_extension": {
+		{
 			"key": "field_clinical_specialization_tab_extension",
 			"label": "Qualifications for Inclusion in the UAMS Health Extension to the Health Care Provider Taxonomy Code Set",
 			"name": "",
@@ -72,7 +72,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_clinical_specialization_extension_national_query": {
+		{
 			"key": "field_clinical_specialization_extension_national_query",
 			"label": "Applies Nationally",
 			"name": "clinical_specialization_extension_national_query",
@@ -91,7 +91,7 @@
 			"ui_on_text": "Yes",
 			"ui_off_text": "No"
 		},
-		"field_clinical_specialization_extension_unique_query": {
+		{
 			"key": "field_clinical_specialization_extension_unique_query",
 			"label": "Unique Need",
 			"name": "clinical_specialization_extension_unique_query",
@@ -110,7 +110,7 @@
 			"ui_on_text": "Yes",
 			"ui_off_text": "No"
 		},
-		"field_clinical_specialization_extension_org_query": {
+		{
 			"key": "field_clinical_specialization_extension_org_query",
 			"label": "Organizational Unit Supports the Addition",
 			"name": "clinical_specialization_extension_org_query",
@@ -129,7 +129,7 @@
 			"ui_on_text": "Yes",
 			"ui_off_text": "No"
 		},
-		"field_clinical_specialization_extension_provider_type": {
+		{
 			"key": "field_clinical_specialization_extension_provider_type",
 			"label": "Provider Type",
 			"name": "clinical_specialization_extension_provider_type",
@@ -157,7 +157,7 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_clinical_specialization_extension_authority": {
+		{
 			"key": "field_clinical_specialization_extension_authority",
 			"label": "Recognizing Authority",
 			"name": "clinical_specialization_extension_authority",
@@ -196,7 +196,7 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_clinical_specialization_extension_certificate": {
+		{
 			"key": "field_clinical_specialization_extension_certificate",
 			"label": "Specialty Certificate or Subspecialty Certificate",
 			"name": "clinical_specialization_extension_certificate",
@@ -237,7 +237,7 @@
 			},
 			"multiple": 0
 		},
-		"field_clinical_specialization_extension_training_type": {
+		{
 			"key": "field_clinical_specialization_extension_training_type",
 			"label": "Training Type",
 			"name": "clinical_specialization_extension_training_type",
@@ -281,7 +281,7 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_clinical_specialization_extension_training_distinct_query": {
+		{
 			"key": "field_clinical_specialization_extension_training_distinct_query",
 			"label": "The training requirements demonstrate that the provider has a recognized area of specialty / subspecialty that is separate and distinct from others.",
 			"name": "clinical_specialization_extension_training_distinct_query",
@@ -315,7 +315,7 @@
 			"ui_on_text": "Yes",
 			"ui_off_text": "No"
 		},
-		"field_clinical_specialization_extension_training_level": {
+		{
 			"key": "field_clinical_specialization_extension_training_level",
 			"label": "Training Level",
 			"name": "clinical_specialization_extension_training_level",
@@ -365,7 +365,7 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_clinical_specialization_extension_training_specialty": {
+		{
 			"key": "field_clinical_specialization_extension_training_specialty",
 			"label": "Name of the Training Program's Specialty",
 			"name": "clinical_specialization_extension_training_specialty",
@@ -392,7 +392,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_clinical_specialization_extension_training_subspecialty": {
+		{
 			"key": "field_clinical_specialization_extension_training_subspecialty",
 			"label": "Name of the Training Program's Subspecialty",
 			"name": "clinical_specialization_extension_training_subspecialty",
@@ -419,7 +419,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_clinical_specialization_extension_training_url": {
+		{
 			"key": "field_clinical_specialization_extension_training_url",
 			"label": "Official Webpage Concerning the Training Program's Specialty/Subspecialty",
 			"name": "clinical_specialization_extension_training_url",
@@ -443,7 +443,7 @@
 			"default_value": "",
 			"placeholder": ""
 		},
-		"field_clinical_specialization_extension_training_accreditation_query": {
+		{
 			"key": "field_clinical_specialization_extension_training_accreditation_query",
 			"label": "The training program is accredited by a third party.",
 			"name": "clinical_specialization_extension_training_accreditation_query",
@@ -477,7 +477,7 @@
 			"ui_on_text": "Yes",
 			"ui_off_text": "No"
 		},
-		"field_clinical_specialization_extension_training_accreditation_org": {
+		{
 			"key": "field_clinical_specialization_extension_training_accreditation_org",
 			"label": "Name of the Third Party Accrediting Organization",
 			"name": "clinical_specialization_extension_training_accreditation_org",
@@ -504,7 +504,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_clinical_specialization_extension_training_accreditation_org_url": {
+		{
 			"key": "field_clinical_specialization_extension_training_accreditation_org_url",
 			"label": "Official Website of the Third Party Accrediting Organization",
 			"name": "clinical_specialization_extension_training_accreditation_org_url",
@@ -528,7 +528,7 @@
 			"default_value": "",
 			"placeholder": ""
 		},
-		"field_clinical_specialization_extension_accrediting_authority_query": {
+		{
 			"key": "field_clinical_specialization_extension_accrediting_authority_query",
 			"label": "The third party accrediting organization establishes training program requirements, conducts periodic reviews of the programs, and has the authority to sanction programs.",
 			"name": "clinical_specialization_extension_accrediting_authority_query",
@@ -562,7 +562,7 @@
 			"ui_on_text": "Yes",
 			"ui_off_text": "No"
 		},
-		"field_clinical_specialization_extension_examination_query": {
+		{
 			"key": "field_clinical_specialization_extension_examination_query",
 			"label": "A certification examination is required for graduates of the specialty / subspecialty training program to earn the designation.",
 			"name": "clinical_specialization_extension_examination_query",
@@ -596,7 +596,7 @@
 			"ui_on_text": "Yes",
 			"ui_off_text": "No"
 		},
-		"field_clinical_specialization_tab_code_set": {
+		{
 			"key": "field_clinical_specialization_tab_code_set",
 			"label": "Health Care Provider Taxonomy Code Set",
 			"name": "",
@@ -620,7 +620,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_clinical_specialization_code_set_extension": {
+		{
 			"key": "field_clinical_specialization_code_set_extension",
 			"label": "Field Values for UAMS Health Extension to the Health Care Provider Taxonomy Code Set",
 			"name": "",
@@ -646,7 +646,7 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_clinical_specialization_code_query": {
+		{
 			"key": "field_clinical_specialization_code_query",
 			"label": "Does this specialization have a taxonomy code in the Health Care Provider Taxonomy Code Set?",
 			"name": "clinical_specialization_code_query",
@@ -676,7 +676,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_clinical_specialization_code": {
+		{
 			"key": "field_clinical_specialization_code",
 			"label": "Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set",
 			"name": "clinical_specialization_code",
@@ -708,7 +708,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_clinical_specialization_name": {
+		{
 			"key": "field_clinical_specialization_name",
 			"label": "Specialization Name in the Health Care Provider Taxonomy Code Set",
 			"name": "clinical_specialty_name",
@@ -727,7 +727,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_clinical_specialization_name_display": {
+		{
 			"key": "field_clinical_specialization_name_display",
 			"label": "Specialization Display Name in the Health Care Provider Taxonomy Code Set",
 			"name": "clinical_specialization_name_display",
@@ -754,7 +754,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_clinical_specialization_valid": {
+		{
 			"key": "field_clinical_specialization_valid",
 			"label": "Is this clinical specialization a valid selection?",
 			"name": "clinical_specialization_valid",
@@ -784,7 +784,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_clinical_specialization_title": {
+		{
 			"key": "field_clinical_specialization_title",
 			"label": "Clinical Occupation Title Based on the Health Care Provider Taxonomy Code Set",
 			"name": "clinical_specialization_title",
@@ -803,7 +803,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_clinical_specialization_title_alt": {
+		{
 			"key": "field_clinical_specialization_title_alt",
 			"label": "Alternate Names for the Clinical Occupation Title",
 			"name": "clinical_specialization_title_alt",
@@ -827,7 +827,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_clinical_specialization_definition": {
+		{
 			"key": "field_clinical_specialization_definition",
 			"label": "Specialization Definition in the Health Care Provider Taxonomy Code Set",
 			"name": "clinical_specialization_definition",
@@ -862,7 +862,7 @@
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		},
-		"field_clinical_specialization_definition_source": {
+		{
 			"key": "field_clinical_specialization_definition_source",
 			"label": "Source of Specialization Definition in the Health Care Provider Taxonomy Code Set",
 			"name": "clinical_specialization_definition_source",
@@ -890,7 +890,7 @@
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		},
-		"field_clinical_specialization_tab_medicare": {
+		{
 			"key": "field_clinical_specialization_tab_medicare",
 			"label": "Related CMS Specialty Code",
 			"name": "",
@@ -919,7 +919,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_clinical_specialization_cms_code_source": {
+		{
 			"key": "field_clinical_specialization_cms_code_source",
 			"label": "How to Find the CMS Specialty Code",
 			"name": "",
@@ -937,7 +937,7 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_clinical_specialization_cms_code_inherit_query": {
+		{
 			"key": "field_clinical_specialization_cms_code_inherit_query",
 			"label": "Inherit the related CMS Specialty Code and Provider/Supplier Type from the parent?",
 			"name": "clinical_specialization_cms_code_inherit_query",
@@ -959,7 +959,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_clinical_specialization_cms_code": {
+		{
 			"key": "field_clinical_specialization_cms_code",
 			"label": "Related CMS Specialty Code",
 			"name": "clinical_specialization_cms_code",
@@ -986,7 +986,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_clinical_specialization_cms_code_type": {
+		{
 			"key": "field_clinical_specialization_cms_code_type",
 			"label": "Related CMS Provider/Supplier Type",
 			"name": "clinical_specialization_cms_code_type",
@@ -1018,7 +1018,7 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_clinical_specialization_tab_medicalspecialty": {
+		{
 			"key": "field_clinical_specialization_tab_medicalspecialty",
 			"label": "Related Schema.org MedicalSpecialty",
 			"name": "",
@@ -1047,7 +1047,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_clinical_specialization_medicalspecialty_about": {
+		{
 			"key": "field_clinical_specialization_medicalspecialty_about",
 			"label": "About the Schema.org MedicalSpecialty Enumeration Type",
 			"name": "",
@@ -1065,7 +1065,7 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_clinical_specialization_medicalspecialty_member_inherit_query": {
+		{
 			"key": "field_clinical_specialization_medicalspecialty_member_inherit_query",
 			"label": "Inherit the related Schema.org MedicalSpecialty enumeration member from the parent?",
 			"name": "clinical_specialization_medicalspecialty_member_inherit_query",
@@ -1087,7 +1087,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_clinical_specialization_medicalspecialty_member": {
+		{
 			"key": "field_clinical_specialization_medicalspecialty_member",
 			"label": "MedicalSpecialty Enumeration Member",
 			"name": "clinical_specialization_medicalspecialty_member",
@@ -1119,7 +1119,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_clinical_specialization_tab_onetsoc": {
+		{
 			"key": "field_clinical_specialization_tab_onetsoc",
 			"label": "Related O*Net-SOC Occupation Code",
 			"name": "",
@@ -1148,7 +1148,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_clinical_specialization_onetsoc_about": {
+		{
 			"key": "field_clinical_specialization_onetsoc_about",
 			"label": "About O*Net-SOC",
 			"name": "",
@@ -1166,7 +1166,7 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_clinical_specialization_onetsoc_code_source": {
+		{
 			"key": "field_clinical_specialization_onetsoc_code_source",
 			"label": "How to Find the O*Net-SOC Occupation Code",
 			"name": "",
@@ -1184,7 +1184,7 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_clinical_specialization_onetsoc_code_inherit_query": {
+		{
 			"key": "field_clinical_specialization_onetsoc_code_inherit_query",
 			"label": "Inherit the related O*Net-SOC Occupation Code and Occupation Name from the parent?",
 			"name": "clinical_specialization_onetsoc_code_inherit_query",
@@ -1206,7 +1206,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_clinical_specialization_onetsoc_code": {
+		{
 			"key": "field_clinical_specialization_onetsoc_code",
 			"label": "Related O*Net-SOC Occupation Code",
 			"name": "clinical_specialization_onetsoc_code",
@@ -1233,7 +1233,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_clinical_specialization_onetsoc_code_name": {
+		{
 			"key": "field_clinical_specialization_onetsoc_code_name",
 			"label": "Related O*Net-SOC Occupation Name",
 			"name": "clinical_specialization_onetsoc_code_name",
@@ -1265,7 +1265,7 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_clinical_specialization_tab_isco08": {
+		{
 			"key": "field_clinical_specialization_tab_isco08",
 			"label": "Related ISCO-08 Code",
 			"name": "",
@@ -1294,7 +1294,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_clinical_specialization_isco08_about": {
+		{
 			"key": "field_clinical_specialization_isco08_about",
 			"label": "About ISCO-08",
 			"name": "",
@@ -1312,7 +1312,7 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_clinical_specialization_isco08_code_source": {
+		{
 			"key": "field_clinical_specialization_isco08_code_source",
 			"label": "Information About Each ISCO-08 Code",
 			"name": "",
@@ -1330,7 +1330,7 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_clinical_specialization_isco08_code_inherit_query": {
+		{
 			"key": "field_clinical_specialization_isco08_code_inherit_query",
 			"label": "Inherit the related ISCO-08 Code from the parent?",
 			"name": "clinical_specialization_isco08_code_inherit_query",
@@ -1352,7 +1352,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_clinical_specialization_isco08_code": {
+		{
 			"key": "field_clinical_specialization_isco08_code",
 			"label": "ISCO-08 Code",
 			"name": "clinical_specialization_isco08_code",
@@ -1400,7 +1400,7 @@
 			"search_placeholder": "Select one",
 			"placeholder": ""
 		},
-		"field_clinical_specialization_tab_sameas": {
+		{
 			"key": "field_clinical_specialization_tab_sameas",
 			"label": "Reference Webpages",
 			"name": "",
@@ -1424,7 +1424,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_clinical_specialization_sameas_occupation_inherit_query": {
+		{
 			"key": "field_clinical_specialization_sameas_occupation_inherit_query",
 			"label": "Inherit the reference webpages about the occupation from the parent?",
 			"name": "clinical_specialization_sameas_occupation_inherit_query",
@@ -1446,7 +1446,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_clinical_specialization_sameas_occupation": {
+		{
 			"key": "field_clinical_specialization_sameas_occupation",
 			"label": "Reference Webpages About the Occupation",
 			"name": "clinical_specialization_sameas_occupation",
@@ -1478,7 +1478,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_clinical_specialization_sameas_field_inherit_query": {
+		{
 			"key": "field_clinical_specialization_sameas_field_inherit_query",
 			"label": "Inherit the reference webpages about the specialty \/ field from the parent?",
 			"name": "clinical_specialization_sameas_field_inherit_query",
@@ -1500,7 +1500,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_clinical_specialization_sameas_field": {
+		{
 			"key": "field_clinical_specialization_sameas_field",
 			"label": "Reference Webpages About the Specialty \/ Field",
 			"name": "clinical_specialization_sameas_field",
@@ -1532,7 +1532,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_clinical_specialization_tab_endpoint": {
+		{
 			"key": "field_clinical_specialization_tab_endpoint",
 			"label": "",
 			"name": "",
@@ -1548,6 +1548,6 @@
 			"placement": "left",
 			"endpoint": 1
 		}
-	},
+	],
 	"modified": false
 }

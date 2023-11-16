@@ -23,8 +23,8 @@
 	"acfe_permissions": "",
 	"acfe_note": "",
 	"acfe_meta": "",
-	"fields": {
-		"field_expertise_tab_general": {
+	"fields": [
+		{
 			"key": "field_expertise_tab_general",
 			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
 			"name": "",
@@ -40,7 +40,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_expertise_type": {
+		{
 			"key": "field_expertise_type",
 			"label": "What Type of Content Is This Page?",
 			"name": "expertise_type",
@@ -59,7 +59,7 @@
 			"ui_off_text": "Content",
 			"ui": 1
 		},
-		"field_expertise_short_desc_query": {
+		{
 			"key": "field_expertise_short_desc_query",
 			"label": "Use This Page's Intro Text As the Short Description for This Page?",
 			"name": "expertise_short_desc_query",
@@ -86,7 +86,7 @@
 			"ui_off_text": "No",
 			"ui": 1
 		},
-		"field_expertise_short_desc": {
+		{
 			"key": "field_expertise_short_desc",
 			"label": "Short Description for This Page",
 			"name": "post_excerpt",
@@ -120,7 +120,7 @@
 			"rows": 4,
 			"new_lines": ""
 		},
-		"field_expertise_selected_post_excerpt": {
+		{
 			"key": "field_expertise_selected_post_excerpt",
 			"label": "Selected Post Excerpt",
 			"name": "expertise_selected_post_excerpt",
@@ -149,7 +149,7 @@
 			"acfe_textarea_code": 0,
 			"readonly": 1
 		},
-		"field_expertise_featured_image": {
+		{
 			"key": "field_expertise_featured_image",
 			"label": "Featured Image for This Page",
 			"name": "_thumbnail_id",
@@ -181,7 +181,7 @@
 			"acfe_validate": "",
 			"library": "all"
 		},
-		"field_expertise_tab_header": {
+		{
 			"key": "field_expertise_tab_header",
 			"label": "<i class=\"dashicons-cover-image dashicons\"><\/i> Page Header Details",
 			"name": "",
@@ -197,7 +197,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_expertise_page_title_options": {
+		{
 			"key": "field_expertise_page_title_options",
 			"label": "Page Header Style",
 			"name": "expertise_page_title_options",
@@ -235,7 +235,7 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_expertise_page_title_graphic": {
+		{
 			"key": "field_expertise_page_title_graphic",
 			"label": "Graphic Header Style Options",
 			"name": "expertise_page_title_graphic",
@@ -266,7 +266,7 @@
 			"prefix_name": 0,
 			"acfe_settings": ""
 		},
-		"field_expertise_page_title_landingpage": {
+		{
 			"key": "field_expertise_page_title_landingpage",
 			"label": "Marketing Landing Page Header Style Options",
 			"name": "expertise_page_title_landingpage",
@@ -304,7 +304,7 @@
 			"prefix_name": 0,
 			"acfe_settings": ""
 		},
-		"field_expertise_page_title_hero": {
+		{
 			"key": "field_expertise_page_title_hero",
 			"label": "Hero Header Style Options",
 			"name": "expertise_page_title_hero",
@@ -335,7 +335,7 @@
 			"prefix_name": 0,
 			"acfe_settings": ""
 		},
-		"field_expertise_brand_tab": {
+		{
 			"key": "field_expertise_brand_tab",
 			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
 			"name": "",
@@ -364,7 +364,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_expertise_brandorg": {
+		{
 			"key": "field_expertise_brandorg",
 			"label": "Third-Party Brand Organization",
 			"name": "expertise_brandorg",
@@ -396,7 +396,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_expertise_tab_details": {
+		{
 			"key": "field_expertise_tab_details",
 			"label": "<i class=\"dashicons-info dashicons\"><\/i> Area of Expertise Details",
 			"name": "",
@@ -420,7 +420,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_expertise_alternate_names": {
+		{
 			"key": "field_expertise_alternate_names",
 			"label": "Alternate Name(s) for This Area of Expertise",
 			"name": "expertise_alternate_names",
@@ -486,7 +486,7 @@
 				}
 			]
 		},
-		"field_expertise_tab_podcast": {
+		{
 			"key": "field_expertise_tab_podcast",
 			"label": "<i class=\"dashicons dashicons-embed-video\"><\/i> Associated Media",
 			"name": "",
@@ -510,7 +510,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_expertise_youtube_link": {
+		{
 			"key": "field_expertise_youtube_link",
 			"label": "Featured Video (Deprecated)",
 			"name": "expertise_youtube_link",
@@ -526,7 +526,7 @@
 			"default_value": "",
 			"placeholder": ""
 		},
-		"field_expertise_podcast_name": {
+		{
 			"key": "field_expertise_podcast_name",
 			"label": "UAMS Health Talk Podcast Topic Name",
 			"name": "expertise_podcast_name",
@@ -545,7 +545,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_expertise_tab_providers": {
+		{
 			"key": "field_expertise_tab_providers",
 			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Related Providers",
 			"name": "",
@@ -569,7 +569,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_expertise_physicians": {
+		{
 			"key": "field_expertise_physicians",
 			"label": "Related Providers",
 			"name": "physician_expertise",
@@ -600,7 +600,7 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
-		"field_expertise_providers_fpage_intro": {
+		{
 			"key": "field_expertise_providers_fpage_intro",
 			"label": "Override Intro Text for Related Providers Subpage",
 			"name": "expertise_providers_fpage_intro",
@@ -620,7 +620,7 @@
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		},
-		"field_expertise_providers_fpage_short_desc_query": {
+		{
 			"key": "field_expertise_providers_fpage_short_desc_query",
 			"label": "Use Intro Text as the Short Description for Related Providers Subpage?",
 			"name": "expertise_providers_fpage_short_desc_query",
@@ -639,7 +639,7 @@
 			"ui_off_text": "No",
 			"ui": 1
 		},
-		"field_expertise_providers_fpage_short_desc": {
+		{
 			"key": "field_expertise_providers_fpage_short_desc",
 			"label": "Short Description for Related Providers Subpage",
 			"name": "expertise_providers_fpage_short_desc",
@@ -666,7 +666,7 @@
 			"rows": 4,
 			"new_lines": ""
 		},
-		"field_expertise_providers_fpage_featured_image": {
+		{
 			"key": "field_expertise_providers_fpage_featured_image",
 			"label": "Override Featured Image for Related Providers Subpage",
 			"name": "expertise_providers_fpage_featured_image",
@@ -698,7 +698,7 @@
 			"acfe_validate": "",
 			"library": "all"
 		},
-		"field_expertise_tab_locations": {
+		{
 			"key": "field_expertise_tab_locations",
 			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Related Locations",
 			"name": "",
@@ -722,7 +722,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_expertise_locations": {
+		{
 			"key": "field_expertise_locations",
 			"label": "Related Locations",
 			"name": "location_expertise",
@@ -753,7 +753,7 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
-		"field_expertise_locations_fpage_intro": {
+		{
 			"key": "field_expertise_locations_fpage_intro",
 			"label": "Override Intro Text for Related Locations Subpage",
 			"name": "expertise_locations_fpage_intro",
@@ -773,7 +773,7 @@
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		},
-		"field_expertise_locations_fpage_short_desc_query": {
+		{
 			"key": "field_expertise_locations_fpage_short_desc_query",
 			"label": "Use Intro Text as the Short Description for Related Locations Subpage?",
 			"name": "expertise_locations_fpage_short_desc_query",
@@ -792,7 +792,7 @@
 			"ui_off_text": "No",
 			"ui": 1
 		},
-		"field_expertise_locations_fpage_short_desc": {
+		{
 			"key": "field_expertise_locations_fpage_short_desc",
 			"label": "Short Description for Related Locations Subpage",
 			"name": "expertise_locations_fpage_short_desc",
@@ -819,7 +819,7 @@
 			"rows": 4,
 			"new_lines": ""
 		},
-		"field_expertise_locations_fpage_featured_image": {
+		{
 			"key": "field_expertise_locations_fpage_featured_image",
 			"label": "Override Featured Image for Related Locations Subpage",
 			"name": "expertise_locations_fpage_featured_image",
@@ -851,7 +851,7 @@
 			"acfe_validate": "",
 			"library": "all"
 		},
-		"field_expertise_region": {
+		{
 			"key": "field_expertise_region",
 			"label": "Region",
 			"name": "expertise_region",
@@ -884,7 +884,7 @@
 			"multiple": 0,
 			"allow_null": 0
 		},
-		"field_expertise_tab_expertise_descendant": {
+		{
 			"key": "field_expertise_tab_expertise_descendant",
 			"label": "<i class=\"dashicons-open-folder dashicons\"><\/i> Descendant Areas of Expertise",
 			"name": "",
@@ -908,7 +908,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_expertise_descendant_fpage_intro": {
+		{
 			"key": "field_expertise_descendant_fpage_intro",
 			"label": "Override Intro Text for Descendant Areas of Expertise Subpage",
 			"name": "expertise_descendant_fpage_intro",
@@ -928,7 +928,7 @@
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		},
-		"field_expertise_descendant_fpage_short_desc_query": {
+		{
 			"key": "field_expertise_descendant_fpage_short_desc_query",
 			"label": "Use Intro Text as the Short Description for Descendant Areas of Expertise Subpage?",
 			"name": "expertise_descendant_fpage_short_desc_query",
@@ -947,7 +947,7 @@
 			"ui_off_text": "No",
 			"ui": 1
 		},
-		"field_expertise_descendant_fpage_short_desc": {
+		{
 			"key": "field_expertise_descendant_fpage_short_desc",
 			"label": "Short Description for Descendant Areas of Expertise Subpage",
 			"name": "expertise_descendant_fpage_short_desc",
@@ -974,7 +974,7 @@
 			"rows": 4,
 			"new_lines": ""
 		},
-		"field_expertise_descendant_fpage_featured_image": {
+		{
 			"key": "field_expertise_descendant_fpage_featured_image",
 			"label": "Override Featured Image for Descendant Areas of Expertise Subpage",
 			"name": "expertise_descendant_fpage_featured_image",
@@ -1006,7 +1006,7 @@
 			"acfe_validate": "",
 			"library": "all"
 		},
-		"field_expertise_tab_expertise": {
+		{
 			"key": "field_expertise_tab_expertise",
 			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
 			"name": "",
@@ -1030,7 +1030,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_expertise_associated": {
+		{
 			"key": "field_expertise_associated",
 			"label": "Related Areas of Expertise",
 			"name": "expertise_associated",
@@ -1055,7 +1055,7 @@
 			"max": "",
 			"return_format": "id"
 		},
-		"field_expertise_associated_fpage_intro": {
+		{
 			"key": "field_expertise_associated_fpage_intro",
 			"label": "Override Intro Text for Related Areas of Expertise Subpage",
 			"name": "expertise_associated_fpage_intro",
@@ -1075,7 +1075,7 @@
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		},
-		"field_expertise_associated_fpage_short_desc_query": {
+		{
 			"key": "field_expertise_associated_fpage_short_desc_query",
 			"label": "Use Intro Text as the Short Description for Related Areas of Expertise Subpage?",
 			"name": "expertise_associated_fpage_short_desc_query",
@@ -1094,7 +1094,7 @@
 			"ui_off_text": "No",
 			"ui": 1
 		},
-		"field_expertise_associated_fpage_short_desc": {
+		{
 			"key": "field_expertise_associated_fpage_short_desc",
 			"label": "Short Description for Related Areas of Expertise Subpage",
 			"name": "expertise_associated_fpage_short_desc",
@@ -1121,7 +1121,7 @@
 			"rows": 4,
 			"new_lines": ""
 		},
-		"field_expertise_associated_fpage_featured_image": {
+		{
 			"key": "field_expertise_associated_fpage_featured_image",
 			"label": "Override Featured Image for Related Areas of Expertise Subpage",
 			"name": "expertise_associated_fpage_featured_image",
@@ -1153,7 +1153,7 @@
 			"acfe_validate": "",
 			"library": "all"
 		},
-		"field_expertise_tab_clinical_resources": {
+		{
 			"key": "field_expertise_tab_clinical_resources",
 			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
 			"name": "",
@@ -1177,7 +1177,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_expertise_clinical_resources": {
+		{
 			"key": "field_expertise_clinical_resources",
 			"label": "Related Clinical Resources",
 			"name": "expertise_clinical_resources",
@@ -1208,7 +1208,7 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
-		"field_expertise_clinical_resources_fpage_intro": {
+		{
 			"key": "field_expertise_clinical_resources_fpage_intro",
 			"label": "Override Intro Text for Related Clinical Resources Subpage",
 			"name": "expertise_clinical_resources_fpage_intro",
@@ -1228,7 +1228,7 @@
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		},
-		"field_expertise_clinical_resources_fpage_short_desc_query": {
+		{
 			"key": "field_expertise_clinical_resources_fpage_short_desc_query",
 			"label": "Use Intro Text as the Short Description for Related Clinical Resources Subpage?",
 			"name": "expertise_clinical_resources_fpage_short_desc_query",
@@ -1247,7 +1247,7 @@
 			"ui_off_text": "No",
 			"ui": 1
 		},
-		"field_expertise_clinical_resources_fpage_short_desc": {
+		{
 			"key": "field_expertise_clinical_resources_fpage_short_desc",
 			"label": "Short Description for Related Clinical Resources Subpage",
 			"name": "expertise_clinical_resources_fpage_short_desc",
@@ -1274,7 +1274,7 @@
 			"rows": 4,
 			"new_lines": ""
 		},
-		"field_expertise_clinical_resources_fpage_featured_image": {
+		{
 			"key": "field_expertise_clinical_resources_fpage_featured_image",
 			"label": "Override Featured Image for Related Clinical Resources Subpage",
 			"name": "expertise_clinical_resources_fpage_featured_image",
@@ -1306,7 +1306,7 @@
 			"acfe_validate": "",
 			"library": "all"
 		},
-		"field_expertise_tab_condition_treatment": {
+		{
 			"key": "field_expertise_tab_condition_treatment",
 			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
 			"name": "",
@@ -1330,7 +1330,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_expertise_condition_treatment_fpage_intro": {
+		{
 			"key": "field_expertise_condition_treatment_fpage_intro",
 			"label": "Override Intro Text for Combined Related Conditions and Treatments Block",
 			"name": "expertise_condition_treatment_fpage_intro",
@@ -1350,7 +1350,7 @@
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		},
-		"field_expertise_conditions_cpt": {
+		{
 			"key": "field_expertise_conditions_cpt",
 			"label": "Related Conditions",
 			"name": "expertise_conditions_cpt",
@@ -1383,7 +1383,7 @@
 			"acfe_update": "",
 			"ui": 1
 		},
-		"field_expertise_conditions_fpage_intro": {
+		{
 			"key": "field_expertise_conditions_fpage_intro",
 			"label": "Override Intro Text for Related Conditions Block",
 			"name": "expertise_conditions_fpage_intro",
@@ -1403,7 +1403,7 @@
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		},
-		"field_expertise_treatments_cpt": {
+		{
 			"key": "field_expertise_treatments_cpt",
 			"label": "Related Treatments and Procedures",
 			"name": "expertise_treatments_cpt",
@@ -1436,7 +1436,7 @@
 			"acfe_update": "",
 			"ui": 1
 		},
-		"field_expertise_treatments_fpage_intro": {
+		{
 			"key": "field_expertise_treatments_fpage_intro",
 			"label": "Override Intro Text for Related Treatments and Procedures Block",
 			"name": "expertise_treatments_fpage_intro",
@@ -1456,7 +1456,7 @@
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		},
-		"field_expertise_tab_schema": {
+		{
 			"key": "field_expertise_tab_schema",
 			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
 			"name": "",
@@ -1480,7 +1480,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_expertise_schema_medicalspecialty": {
+		{
 			"key": "field_expertise_schema_medicalspecialty",
 			"label": "Relevant Specialty (relevantSpecialty > MedicalSpecialty)",
 			"name": "expertise_schema_medicalspecialty",
@@ -1504,7 +1504,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_expertise_schema_code_nucc": {
+		{
 			"key": "field_expertise_schema_code_nucc",
 			"label": "Matching Classification(s) and/or Specialization(s) From the Health Care Provider Taxonomy Code Set (code > MedicalCode)",
 			"name": "expertise_schema_code_nucc",
@@ -1529,7 +1529,7 @@
 			"acfe_clone_modal": 0,
 			"acfe_settings": ""
 		},
-		"field_expertise_schema_medicalcode": {
+		{
 			"key": "field_expertise_schema_medicalcode",
 			"label": "Medical Code(s) for This Entity (code > MedicalCode)",
 			"name": "expertise_schema_medicalcode",
@@ -1554,7 +1554,7 @@
 			"acfe_clone_modal": 0,
 			"acfe_settings": ""
 		},
-		"field_expertise_schema_sameas": {
+		{
 			"key": "field_expertise_schema_sameas",
 			"label": "Reference Webpage(s) About This Area of Expertise (sameAs > URL)",
 			"name": "expertise_schema_sameas",
@@ -1578,7 +1578,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_expertise_schema_medicinesystem": {
+		{
 			"key": "field_expertise_schema_medicinesystem",
 			"label": "Related System(s) of Medical Practice (medicineSystem > MedicineSystem)",
 			"name": "expertise_schema_medicinesystem",
@@ -1602,7 +1602,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_expertise_tab_deprecated": {
+		{
 			"key": "field_expertise_tab_deprecated",
 			"label": "Deprecated Fields",
 			"name": "",
@@ -1626,7 +1626,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_expertise_cta": {
+		{
 			"key": "field_expertise_cta",
 			"label": "Call-to-Action (CTA) Bar(s)",
 			"name": "expertise_cta",
@@ -1934,7 +1934,7 @@
 				}
 			]
 		},
-		"field_medical_terms": {
+		{
 			"key": "field_expertise_medical_terms",
 			"label": "Medical Terms (Tags)",
 			"name": "expertise_medical_terms",
@@ -1974,6 +1974,6 @@
 			},
 			"multiple": 0
 		}
-	},
+	],
 	"modified": false
 }

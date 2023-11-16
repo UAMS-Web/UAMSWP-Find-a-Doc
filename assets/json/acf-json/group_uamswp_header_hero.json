@@ -1,8 +1,8 @@
 {
-    "key": "group_uamswp_header_hero",
-    "title": "Hero Header Style Options",
-    "fields": {
-		"field_hero_repeater": {
+	"key": "group_uamswp_header_hero",
+	"title": "Hero Header Style Options",
+	"fields": [
+		{
 			"key": "field_fad_hero_repeater",
 			"label": "Hero Slide(s)",
 			"name": "page_header_hero",
@@ -345,19 +345,19 @@
 			"max": 4,
 			"button_label": "Add Slide"
 		}
-    },
-    "location": "",
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "above_field",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_meta": "",
-    "acfe_note": ""
+	],
+	"location": "",
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "above_field",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_meta": "",
+	"acfe_note": ""
 }

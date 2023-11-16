@@ -25,8 +25,8 @@
 	"acfe_permissions": "",
 	"acfe_note": "",
 	"acfe_meta": "",
-	"fields": {
-		"field_language_name_native_query": {
+	"fields": [
+		{
 			"key": "field_language_name_native_query",
 			"label": "Is the English name for this language (exonym / xenonym) different from the native name (endonym / autonym)?",
 			"name": "language_name_native_query",
@@ -48,7 +48,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_language_name_native": {
+		{
 			"key": "field_language_name_native",
 			"label": "Native Name of Language (Endonym / Autonym)",
 			"name": "language_name_native",
@@ -75,7 +75,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_language_bcp47": {
+		{
 			"key": "field_language_bcp47",
 			"label": "Internet Engineering Task Force Best Current Practice 47 (IETF BCP 47) Language Tag",
 			"name": "language_bcp47",
@@ -94,7 +94,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_language_schema_sameas": {
+		{
 			"key": "field_language_schema_sameas",
 			"label": "Reference Webpage(s) About This Language (sameAs > URL)",
 			"name": "language_schema_sameas",
@@ -118,6 +118,6 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		}
-	},
+	],
 	"modified": false
 }

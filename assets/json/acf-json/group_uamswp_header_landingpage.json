@@ -1,8 +1,8 @@
 {
-    "key": "group_uamswp_header_landingpage",
-    "title": "Marketing Landing Page Header Style Options",
-    "fields": {
-		"field_page_header_landingpage": {
+	"key": "group_uamswp_header_landingpage",
+	"title": "Marketing Landing Page Header Style Options",
+	"fields": [
+		{
 			"key": "field_fad_page_header_landingpage",
 			"label": "",
 			"name": "page_header_landingpage",
@@ -130,19 +130,19 @@
 			],
 			"acfe_group_modal": 0
 		}
-    },
-    "location": "",
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "above_field",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_meta": "",
-    "acfe_note": ""
+	],
+	"location": "",
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "above_field",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_meta": "",
+	"acfe_note": ""
 }

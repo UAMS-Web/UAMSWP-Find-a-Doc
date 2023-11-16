@@ -1,8 +1,8 @@
 {
-    "key": "group_uamswp_header_graphic",
-    "title": "Graphic Header Style Options",
-    "fields": {
-		"field_page_header_graphic": {
+	"key": "group_uamswp_header_graphic",
+	"title": "Graphic Header Style Options",
+	"fields": [
+		{
 			"key": "field_fad_page_header_graphic",
 			"label": "",
 			"name": "page_header_graphic",
@@ -78,19 +78,19 @@
 			],
 			"acfe_group_modal": 0
 		}
-    },
-    "location": "",
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "above_field",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_meta": "",
-    "acfe_note": ""
+	],
+	"location": "",
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "above_field",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_meta": "",
+	"acfe_note": ""
 }

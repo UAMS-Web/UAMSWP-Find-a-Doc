@@ -23,8 +23,8 @@
 	"acfcdt_manage_table_definition": 1,
 	"acfcdt_table_name": "uamswp_physicians",
 	"acfcdt_table_definition_file_name": "table_uamswp_physicians",
-	"fields": {
-		"field_physician_details_tab": {
+	"fields": [
+		{
 			"key": "field_physician_details_tab",
 			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
 			"name": "",
@@ -40,7 +40,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_first_name": {
+		{
 			"key": "field_physician_first_name",
 			"label": "First Name",
 			"name": "physician_first_name",
@@ -59,7 +59,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_physician_middle_name": {
+		{
 			"key": "field_physician_middle_name",
 			"label": "Middle Name",
 			"name": "physician_middle_name",
@@ -78,7 +78,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_physician_last_name": {
+		{
 			"key": "field_physician_last_name",
 			"label": "Last Name",
 			"name": "physician_last_name",
@@ -97,7 +97,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_physician_pedigree": {
+		{
 			"key": "field_physician_pedigree",
 			"label": "Generational Suffix",
 			"name": "physician_pedigree",
@@ -134,7 +134,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_physician_degree": {
+		{
 			"key": "field_physician_degree",
 			"label": "Clinical Degrees and Credentials",
 			"name": "physician_degree",
@@ -164,7 +164,7 @@
 			"multiple": 1,
 			"allow_null": 0
 		},
-		"field_physician_gender": {
+		{
 			"key": "field_physician_gender",
 			"label": "Gender",
 			"name": "physician_gender",
@@ -189,7 +189,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_physician_searchable": {
+		{
 			"key": "field_physician_searchable",
 			"label": "Searchable",
 			"name": "physician_searchable",
@@ -216,7 +216,7 @@
 			"ui_on_text": "",
 			"ui_off_text": ""
 		},
-		"field_physician_full_name": {
+		{
 			"key": "field_physician_full_name",
 			"label": "Full Name",
 			"name": "physician_full_name",
@@ -243,7 +243,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_physician_medium_name": {
+		{
 			"key": "field_physician_medium_name",
 			"label": "Medium Name",
 			"name": "physician_medium_name",
@@ -270,7 +270,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_physician_languages": {
+		{
 			"key": "field_physician_languages",
 			"label": "Language(s)",
 			"name": "physician_languages",
@@ -298,7 +298,7 @@
 			},
 			"multiple": 0
 		},
-		"field_physician_brand_tab": {
+		{
 			"key": "field_physician_brand_tab",
 			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
 			"name": "",
@@ -327,7 +327,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_brandorg": {
+		{
 			"key": "field_physician_brandorg",
 			"label": "Third-Party Brand Organization",
 			"name": "physician_brandorg",
@@ -359,7 +359,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_physician_portrait_tab": {
+		{
 			"key": "field_physician_portrait_tab",
 			"label": "<i class=\"dashicons dashicons-images-alt2\"><\/i> Portraits",
 			"name": "",
@@ -380,7 +380,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_featured_image": {
+		{
 			"key": "field_physician_featured_image",
 			"label": "Headshot",
 			"name": "_thumbnail_id",
@@ -412,7 +412,7 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
-		"field_physician_wide_image": {
+		{
 			"key": "field_physician_image_wide",
 			"label": "Wide Image",
 			"name": "physician_image_wide",
@@ -447,7 +447,7 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
-		"field_physician_media_tab": {
+		{
 			"key": "field_physician_media_tab",
 			"label": "<i class=\"dashicons dashicons-embed-video\"><\/i> Associated Media",
 			"name": "",
@@ -463,7 +463,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_youtube_link": {
+		{
 			"key": "field_physician_youtube_link",
 			"label": "Featured Video",
 			"name": "physician_youtube_link",
@@ -487,7 +487,7 @@
 			"default_value": "",
 			"placeholder": ""
 		},
-		"field_physician_podcast_name": {
+		{
 			"key": "field_physician_podcast_name",
 			"label": "UAMS Health Talk Podcast Guest Name",
 			"name": "physician_podcast_name",
@@ -506,7 +506,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_physician_clinical_tab": {
+		{
 			"key": "field_physician_clinical_tab",
 			"label": "<i class=\"dashicons-id-alt dashicons\"><\/i> Clinical Role Details",
 			"name": "",
@@ -522,7 +522,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_resident": {
+		{
 			"key": "field_physician_resident",
 			"label": "Is the Provider a Resident?",
 			"name": "physician_resident",
@@ -541,7 +541,7 @@
 			"ui_on_text": "",
 			"ui_off_text": ""
 		},
-		"field_physician_eligible_appointments": {
+		{
 			"key": "field_physician_eligible_appointments",
 			"label": "Does the Provider See Patients Via Appointments?",
 			"name": "physician_eligible_appointments",
@@ -571,7 +571,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_physician_primary_care": {
+		{
 			"key": "field_physician_primary_care",
 			"label": "Is the Provider a Primary Care Provider?",
 			"name": "physician_primary_care",
@@ -601,7 +601,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_physician_accepting_patients": {
+		{
 			"key": "field_physician_accepting_patients",
 			"label": "Is the Provider Accepting New Patients?",
 			"name": "physician_accepting_patients",
@@ -631,7 +631,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_physician_referral_required": {
+		{
 			"key": "field_physician_referral_required",
 			"label": "Does the Provider Require a Referral for New Patients?",
 			"name": "physician_referral_required",
@@ -661,7 +661,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_physician_second_opinion": {
+		{
 			"key": "field_physician_second_opinion",
 			"label": "Does the Provider Offer Second Opinions?",
 			"name": "physician_second_opinion",
@@ -691,7 +691,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_physician_appointment_link": {
+		{
 			"key": "field_physician_appointment_link",
 			"label": "Appointment Link",
 			"name": "physician_appointment_link",
@@ -720,7 +720,7 @@
 			"default_value": "https:\/\/uamshealth.com\/appointments",
 			"placeholder": "https:\/\/uamshealth.com\/appointments"
 		},
-		"field_physician_title": {
+		{
 			"key": "field_physician_title",
 			"label": "Clinical Specialty and Occupational Title",
 			"name": "physician_title",
@@ -753,7 +753,7 @@
 			},
 			"multiple": 0
 		},
-		"field_physician_service_line": {
+		{
 			"key": "field_physician_service_line",
 			"label": "UAMS Health Service Line",
 			"name": "physician_service_line",
@@ -786,7 +786,7 @@
 			"multiple": 0,
 			"allow_null": 1
 		},
-		"field_physician_npi": {
+		{
 			"key": "field_physician_npi",
 			"label": "National Provider Identifier (NPI)",
 			"name": "physician_npi",
@@ -807,7 +807,7 @@
 			"max": 9999999999,
 			"step": 1
 		},
-		"field_physician_pid": {
+		{
 			"key": "field_physician_pid",
 			"label": "UAMS Health Epic SER ID",
 			"name": "physician_pid",
@@ -826,7 +826,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_physician_patient_types": {
+		{
 			"key": "field_physician_patient_types",
 			"label": "Patient Type(s)",
 			"name": "physician_patient_types",
@@ -851,7 +851,7 @@
 			"multiple": 0,
 			"allow_null": 0
 		},
-		"field_physician_clinical_bio": {
+		{
 			"key": "field_physician_clinical_bio",
 			"label": "Patient-focused Clinical Biography",
 			"name": "physician_clinical_bio",
@@ -870,7 +870,7 @@
 			"media_upload": 0,
 			"delay": 0
 		},
-		"field_physician_short_clinical_bio": {
+		{
 			"key": "field_physician_short_clinical_bio",
 			"label": "Short Patient-focused Clinical Biography",
 			"name": "physician_short_clinical_bio",
@@ -889,7 +889,7 @@
 			"rows": 4,
 			"new_lines": ""
 		},
-		"field_physician_clinical_focus": {
+		{
 			"key": "field_physician_clinical_focus",
 			"label": "Clinical Focus",
 			"name": "physician_clinical_focus",
@@ -916,7 +916,7 @@
 			"media_upload": 0,
 			"delay": 0
 		},
-		"field_medical_specialties": {
+		{
 			"key": "field_medical_specialties",
 			"label": "Medical Specialties",
 			"name": "physician_medical_specialties",
@@ -949,7 +949,7 @@
 			},
 			"multiple": 0
 		},
-		"field_location_portal": {
+		{
 			"key": "field_physician_portal",
 			"label": "Portal",
 			"name": "physician_portal",
@@ -984,7 +984,7 @@
 			"acfe_update": "",
 			"multiple": 0
 		},
-		"field_physician_hidden": {
+		{
 			"key": "field_physician_hidden",
 			"label": "Hide from Provider List",
 			"name": "physician_hidden",
@@ -1003,7 +1003,7 @@
 			"ui_on_text": "",
 			"ui_off_text": ""
 		},
-		"field_physician_asp_filter": {
+		{
 			"key": "field_physician_asp_filter",
 			"label": "Ajax Search Filter",
 			"name": "physician_asp_filter",
@@ -1030,7 +1030,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_physician_resident_profile_tab": {
+		{
 			"key": "field_physician_resident_profile_tab",
 			"label": "<i class=\"dashicons dashicons-id-alt\"><\/i> Resident Role Details",
 			"name": "",
@@ -1054,7 +1054,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_resident_profile_group": {
+		{
 			"key": "field_physician_resident_profile_group",
 			"label": "",
 			"name": "physician_resident_profile_group",
@@ -1352,7 +1352,7 @@
 				}
 			]
 		},
-		"field_physician_academic_profile_tab": {
+		{
 			"key": "field_physician_academic_profile_tab",
 			"label": "<i class=\"dashicons-id-alt dashicons\"><\/i> Academic Role Details",
 			"name": "",
@@ -1376,7 +1376,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_academic_title": {
+		{
 			"key": "field_physician_academic_title",
 			"label": "Academic Title",
 			"name": "physician_academic_title",
@@ -1406,7 +1406,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_physician_academic_appointment": {
+		{
 			"key": "field_physician_academic_appointment",
 			"label": "Faculty Title",
 			"name": "physician_academic_appointment",
@@ -1504,7 +1504,7 @@
 				}
 			]
 		},
-		"field_physician_academic_admin_title": {
+		{
 			"key": "field_physician_academic_admin_title",
 			"label": "Academic Administrative Title",
 			"name": "physician_academic_admin_title",
@@ -1575,7 +1575,7 @@
 				}
 			]
 		},
-		"field_physician_academic_bio": {
+		{
 			"key": "field_physician_academic_bio",
 			"label": "Academic Biography",
 			"name": "physician_academic_bio",
@@ -1594,7 +1594,7 @@
 			"media_upload": 1,
 			"delay": 0
 		},
-		"field_physician_research_tab": {
+		{
 			"key": "field_physician_research_tab",
 			"label": "<i class=\"dashicons-id-alt dashicons\"><\/i> Research Role Details",
 			"name": "",
@@ -1610,7 +1610,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_research_bio": {
+		{
 			"key": "field_physician_research_bio",
 			"label": "Research Bio",
 			"name": "physician_research_bio",
@@ -1629,7 +1629,7 @@
 			"media_upload": 1,
 			"delay": 0
 		},
-		"field_physician_research_interests": {
+		{
 			"key": "field_physician_research_interests",
 			"label": "Research Interests",
 			"name": "physician_research_interests",
@@ -1648,7 +1648,7 @@
 			"rows": "",
 			"new_lines": ""
 		},
-		"field_physician_profiles_link": {
+		{
 			"key": "field_physician_profiles_link",
 			"label": "UAMS Profiles Link",
 			"name": "physician_research_profiles_link",
@@ -1672,7 +1672,7 @@
 			"default_value": "",
 			"placeholder": ""
 		},
-		"field_pubmed_author_id": {
+		{
 			"key": "field_pubmed_author_id",
 			"label": "Pubmed Author ID \/ Name",
 			"name": "physician_pubmed_author_id",
@@ -1691,7 +1691,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_physician_author_number": {
+		{
 			"key": "field_physician_author_number",
 			"label": "Number of Latest Articles to Display",
 			"name": "physician_author_number",
@@ -1718,7 +1718,7 @@
 			"ajax": 0,
 			"placeholder": ""
 		},
-		"field_physician_select_publications": {
+		{
 			"key": "field_physician_select_publications",
 			"label": "Selected Publications",
 			"name": "physician_select_publications",
@@ -1811,7 +1811,7 @@
 				}
 			]
 		},
-		"field_physician_education_tab": {
+		{
 			"key": "field_physician_education_tab",
 			"label": "<i class=\"dashicons-bank dashicons\"><\/i> Education, Training, Certifications and Memberships",
 			"name": "",
@@ -1827,7 +1827,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_appointment_education": {
+		{
 			"key": "field_physician_appointment_education",
 			"label": "Education and Training",
 			"name": "physician_education",
@@ -1917,7 +1917,7 @@
 				}
 			]
 		},
-		"field_physician_boards": {
+		{
 			"key": "field_physician_boards",
 			"label": "Specialty and Subspecialty Certifications",
 			"name": "physician_boards",
@@ -1942,7 +1942,7 @@
 			},
 			"multiple": 0
 		},
-		"field_physician_associations": {
+		{
 			"key": "field_physician_associations",
 			"label": "Health Care Professional Memberships",
 			"name": "physician_associations",
@@ -1967,7 +1967,7 @@
 			},
 			"multiple": 0
 		},
-		"field_physician_location_tab": {
+		{
 			"key": "field_physician_location_tab",
 			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Related Locations",
 			"name": "",
@@ -1983,7 +1983,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_locations": {
+		{
 			"key": "field_physician_locations",
 			"label": "Locations",
 			"name": "physician_locations",
@@ -2011,7 +2011,7 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
-		"field_physician_affiliation": {
+		{
 			"key": "field_physician_affiliation",
 			"label": "Hospital Affiliations",
 			"name": "physician_affiliation",
@@ -2044,7 +2044,7 @@
 			"multiple": 0,
 			"allow_null": 0
 		},
-		"field_physician_region": {
+		{
 			"key": "field_physician_region",
 			"label": "Region",
 			"name": "physician_region",
@@ -2077,7 +2077,7 @@
 			"multiple": 0,
 			"allow_null": 0
 		},
-		"field_physician_expertise_tab": {
+		{
 			"key": "field_physician_expertise_tab",
 			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
 			"name": "",
@@ -2101,7 +2101,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_expertise": {
+		{
 			"key": "field_physician_expertise",
 			"label": "Areas of Expertise",
 			"name": "physician_expertise",
@@ -2132,7 +2132,7 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
-		"field_physician_condition_treatment_tab": {
+		{
 			"key": "field_physician_condition_treatment_tab",
 			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
 			"name": "",
@@ -2148,7 +2148,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_conditions_cpt": {
+		{
 			"key": "field_physician_conditions_cpt",
 			"label": "Conditions Treated",
 			"name": "physician_conditions_cpt",
@@ -2177,7 +2177,7 @@
 			"acfe_update": "",
 			"ui": 1
 		},
-		"field_physician_treatments_cpt": {
+		{
 			"key": "field_physician_treatments_cpt",
 			"label": "Treatments & Procedures",
 			"name": "physician_treatments_cpt",
@@ -2206,7 +2206,7 @@
 			"acfe_update": "",
 			"ui": 1
 		},
-		"field_medical_terms": {
+		{
 			"key": "field_medical_terms",
 			"label": "Medical Terms (Tags)",
 			"name": "physician_medical_terms",
@@ -2239,7 +2239,7 @@
 			},
 			"multiple": 0
 		},
-		"field_physician_clinical_resource_tab": {
+		{
 			"key": "field_physician_clinical_resource_tab",
 			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
 			"name": "",
@@ -2263,7 +2263,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_clinical_resources": {
+		{
 			"key": "field_physician_clinical_resources",
 			"label": "Clinical Resources",
 			"name": "physician_clinical_resources",
@@ -2294,7 +2294,7 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
-		"field_physician_recognition_tab": {
+		{
 			"key": "field_physician_recognition_tab",
 			"label": "<i class=\"dashicons dashicons-awards\"><\/i> Recognition and Awards",
 			"name": "",
@@ -2310,7 +2310,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_recognitions": {
+		{
 			"key": "field_physician_recognitions",
 			"label": "Recognition Lists",
 			"name": "physician_recognitions",
@@ -2335,7 +2335,7 @@
 			"multiple": 1,
 			"allow_null": 1
 		},
-		"field_physician_awards": {
+		{
 			"key": "field_physician_awards",
 			"label": "Award(s)",
 			"name": "physician_awards",
@@ -2413,7 +2413,7 @@
 				}
 			]
 		},
-		"field_physician_gmb_tab": {
+		{
 			"key": "field_physician_gmb_tab",
 			"label": "<i class=\"dashicons-google dashicons\"><\/i> Google My Business Details",
 			"name": "",
@@ -2437,7 +2437,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_schema_gmb_query": {
+		{
 			"key": "field_physician_schema_gmb_query",
 			"label": "Does this provider have one or more listings on Google My Business?",
 			"name": "physician_schema_gmb_query",
@@ -2460,7 +2460,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_physician_schema_google_cid": {
+		{
 			"key": "field_physician_schema_google_cid",
 			"label": "Google CID Numbers (hasMap, identifier)",
 			"name": "physician_schema_google_cid",
@@ -2492,7 +2492,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_physician_gmb_exclude": {
+		{
 			"key": "field_physician_gmb_exclude",
 			"label": "Should this provider be excluded from any bulk imports and updates in Google My Business?",
 			"name": "physician_gmb_exclude",
@@ -2514,7 +2514,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_physician_gmb_cat": {
+		{
 			"key": "field_physician_gmb_cat",
 			"label": "Google My Business Category",
 			"name": "physician_gmb_cat",
@@ -2547,7 +2547,7 @@
 			"multiple": "0",
 			"allow_null": "0"
 		},
-		"field_physician_schema_tab": {
+		{
 			"key": "field_physician_schema_tab",
 			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
 			"name": "",
@@ -2568,7 +2568,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_alternatename": {
+		{
 			"key": "field_physician_alternatename",
 			"label": "Alternate Names for the Provider (alternateName > Text)",
 			"name": "physician_alternatename",
@@ -2592,7 +2592,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_physician_sameas": {
+		{
 			"key": "field_physician_sameas",
 			"label": "Reference Webpages for the Provider (sameAs > URL)",
 			"name": "physician_sameas",
@@ -2616,7 +2616,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_physician_extra_tab": {
+		{
 			"key": "field_physician_extra_tab",
 			"label": "<i class=\"dashicons dashicons-info\"><\/i> Additional Information",
 			"name": "",
@@ -2640,7 +2640,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_additional_info": {
+		{
 			"key": "field_physician_additional_info",
 			"label": "Additional Information",
 			"name": "physician_additional_info",
@@ -2659,7 +2659,7 @@
 			"media_upload": 1,
 			"delay": 0
 		},
-		"field_physician_deprecated_tab": {
+		{
 			"key": "field_physician_deprecated_tab",
 			"label": "Deprecated Fields",
 			"name": "",
@@ -2683,7 +2683,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_prefix": {
+		{
 			"key": "field_physician_prefix",
 			"label": "Prefix",
 			"name": "physician_prefix",
@@ -2713,7 +2713,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_profile_message": {
+		{
 			"key": "field_profile_message",
 			"label": "Profile Information",
 			"name": "",
@@ -2730,7 +2730,7 @@
 			"new_lines": "wpautop",
 			"esc_html": 0
 		},
-		"field_physician_academic_short_bio": {
+		{
 			"key": "field_physician_academic_short_bio",
 			"label": "Short Academic Biography",
 			"name": "physician_academic_short_bio",
@@ -2749,7 +2749,7 @@
 			"append": "",
 			"maxlength": 160
 		},
-		"field_physician_academic_office": {
+		{
 			"key": "field_physician_academic_office",
 			"label": "Office Location",
 			"name": "physician_academic_office",
@@ -2768,7 +2768,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_physician_academic_map": {
+		{
 			"key": "field_physician_academic_map",
 			"label": "Building \/ Map",
 			"name": "physician_academic_map",
@@ -2831,7 +2831,7 @@
 			"ajax": 0,
 			"placeholder": ""
 		},
-		"field_physician_contact_information": {
+		{
 			"key": "field_physician_contact_information",
 			"label": "Contact Information",
 			"name": "physician_contact_information",
@@ -2899,7 +2899,7 @@
 				}
 			]
 		},
-		"field_physician_clinical_admin_title": {
+		{
 			"key": "field_physician_clinical_admin_title",
 			"label": "Clinical Administrative Title",
 			"name": "physician_clinical_admin_title",
@@ -2978,7 +2978,7 @@
 				}
 			]
 		},
-		"field_physician_institute_affiliation": {
+		{
 			"key": "field_physician_institute_affiliation",
 			"label": "Institute Affiliations",
 			"name": "physician_institute_affiliation",
@@ -3011,7 +3011,7 @@
 			"multiple": 0,
 			"allow_null": 0
 		},
-		"field_physician_academic_college": {
+		{
 			"key": "field_physician_academic_college",
 			"label": "College Affiliation",
 			"name": "physician_academic_college",
@@ -3036,7 +3036,7 @@
 			"multiple": 0,
 			"allow_null": 0
 		},
-		"field_physician_academic_position": {
+		{
 			"key": "field_physician_academic_position",
 			"label": "Academic Position Type",
 			"name": "physician_academic_position",
@@ -3061,6 +3061,6 @@
 			"multiple": 0,
 			"allow_null": 0
 		}
-	},
+	],
 	"modified": false
 }

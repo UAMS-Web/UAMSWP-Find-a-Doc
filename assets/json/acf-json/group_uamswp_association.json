@@ -25,8 +25,8 @@
 	"acfe_permissions": "",
 	"acfe_note": "",
 	"acfe_meta": "",
-	"fields": {
-		"field_association_url": {
+	"fields": [
+		{
 			"key": "field_association_url",
 			"label": "Association Website URL",
 			"name": "association_url",
@@ -50,7 +50,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_association_sameas": {
+		{
 			"key": "field_association_sameas",
 			"label": "Association Reference Webpages",
 			"name": "association_sameas",
@@ -74,7 +74,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_association_alternatename": {
+		{
 			"key": "field_association_alternatename",
 			"label": "Alternate Names for the Association",
 			"name": "association_alternatename",
@@ -98,6 +98,6 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		}
-	},
+	],
 	"modified": false
 }
