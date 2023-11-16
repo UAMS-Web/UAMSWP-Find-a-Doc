@@ -995,20 +995,24 @@
 			"key": "field_location_appointments_query",
 			"label": "Can a patient schedule an appointment for services rendered at this location?",
 			"name": "location_appointments_query",
-			"type": "true_false",
+			"type": "button_group",
 			"instructions": "",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"default_value": 1,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		"field_location_appointment": {
 			"key": "field_location_appointment",
