@@ -99,6 +99,124 @@
 			"return_format": "id",
 			"ui": 1
 		},
+		"field_location_type": {
+			"key": "field_location_type",
+			"name": "location_type",
+			"type": "taxonomy",
+			"label": "Type",
+			"instructions": "Used for filtering only",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "50",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "location_type",
+			"field_type": "multi_select",
+			"allow_null": 0,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"multiple": 0
+		},
+		"field_location_portal": {
+			"key": "field_location_portal",
+			"name": "location_portal",
+			"type": "taxonomy",
+			"label": "Patient Portal",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-border",
+				"id": ""
+			},
+			"taxonomy": "portal",
+			"field_type": "radio",
+			"allow_null": 0,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"multiple": 0
+		},
+		"field_location_prepend_the": {
+			"key": "field_location_prepend_the",
+			"name": "location_prepend_the",
+			"type": "true_false",
+			"label": "Automatically prepend location name with \"the\" in phrases?",
+			"instructions": "Setting this to \"Yes\" will add the word \"the\" before the location name in headings such as \"About [Location Name]\".",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-border",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		"field_location_hidden": {
+			"key": "field_location_hidden",
+			"name": "location_hidden",
+			"type": "true_false",
+			"label": "Exclude from Primary Location List?",
+			"instructions": "Setting this to \"Yes\" will remove this location from the Location archive. This input will not affect whether the location will be displayed on profiles and search results.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-border",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		"field_location_service_line": {
+			"key": "field_location_service_line",
+			"name": "location_service_line",
+			"type": "taxonomy",
+			"label": "Service Line(s)",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"taxonomy": "service_line",
+			"field_type": "multi_select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
 		"field_location_brand_tab": {
 			"key": "field_location_brand_tab",
 			"name": "",
@@ -422,33 +540,6 @@
 			"taxonomy": "region",
 			"field_type": "radio",
 			"allow_null": 1,
-			"add_term": 0,
-			"save_terms": 1,
-			"load_terms": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"multiple": 0
-		},
-		"field_location_type": {
-			"key": "field_location_type",
-			"name": "location_type",
-			"type": "taxonomy",
-			"label": "Type",
-			"instructions": "Used for filtering only",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "50",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "location_type",
-			"field_type": "multi_select",
-			"allow_null": 0,
 			"add_term": 0,
 			"save_terms": 1,
 			"load_terms": 1,
@@ -1444,71 +1535,6 @@
 			"message": "<h3>Other Details<\/h3>",
 			"new_lines": "",
 			"esc_html": 0
-		},
-		"field_location_portal": {
-			"key": "field_location_portal",
-			"name": "location_portal",
-			"type": "taxonomy",
-			"label": "Patient Portal",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"taxonomy": "portal",
-			"field_type": "radio",
-			"allow_null": 0,
-			"add_term": 0,
-			"save_terms": 1,
-			"load_terms": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"multiple": 0
-		},
-		"field_location_prepend_the": {
-			"key": "field_location_prepend_the",
-			"name": "location_prepend_the",
-			"type": "true_false",
-			"label": "Automatically prepend location name with \"the\" in phrases?",
-			"instructions": "Setting this to \"Yes\" will add the word \"the\" before the location name in headings such as \"About [Location Name]\".",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
-		},
-		"field_location_hidden": {
-			"key": "field_location_hidden",
-			"name": "location_hidden",
-			"type": "true_false",
-			"label": "Exclude from Primary Location List?",
-			"instructions": "Setting this to \"Yes\" will remove this location from the Location archive. This input will not affect whether the location will be displayed on profiles and search results.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
 		},
 		"field_details_deprecated_open": {
 			"key": "field_details_deprecated_open",
@@ -3621,32 +3647,6 @@
 			},
 			"acfe_validate": "",
 			"acfe_update": ""
-		},
-		"field_location_service_line": {
-			"key": "field_location_service_line",
-			"name": "location_service_line",
-			"type": "taxonomy",
-			"label": "Service Line(s)",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"taxonomy": "service_line",
-			"field_type": "multi_select",
-			"allow_null": 1,
-			"add_term": 0,
-			"save_terms": 0,
-			"load_terms": 0,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 0
 		},
 		"field_location_scheduling_tab": {
 			"key": "field_location_scheduling_tab",
