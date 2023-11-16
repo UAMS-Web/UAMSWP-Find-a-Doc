@@ -592,6 +592,284 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_condition_schema_subtype",
+			"name": "condition_schema_subtype",
+			"label": "MedicalCondition Subtype",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalcondition_subtype"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_condition_schema_infectiousagent",
+			"name": "condition_schema_infectiousagent",
+			"label": "Infectious Agent (infectiousAgent > Text)",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalcondition_subtype",
+						"operator": "==",
+						"value": "InfectiousDisease"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_infectiousagent"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_condition_schema_infectiousagentclass",
+			"name": "condition_schema_infectiousagentclass",
+			"label": "Infectious Agent Class (infectiousAgentClass > InfectiousAgentClass)",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalcondition_subtype",
+						"operator": "==",
+						"value": "InfectiousDisease"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_infectiousagentclass"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_condition_schema_primaryprevention",
+			"name": "condition_schema_primaryprevention",
+			"label": "Primary Prevention Therapies (primaryPrevention > MedicalTherapy)",
+			"type": "relationship",
+			"instructions": "Select any therapies used to prevent an initial occurrence of the medical condition, such as vaccination.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_schema_primaryprevention"
+			}
+		},
+		{
+			"key": "field_condition_schema_secondaryprevention",
+			"name": "condition_schema_secondaryprevention",
+			"label": "Secondary Prevention Therapies (secondaryPrevention > MedicalTherapy)",
+			"type": "relationship",
+			"instructions": "Select any therapies used to prevent reoccurrence of the medical condition after an initial episode of the condition",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_schema_secondaryprevention"
+			}
+		},
+		{
+			"key": "field_condition_schema_possibletreatment",
+			"name": "condition_schema_possibletreatment",
+			"label": "Possible Treatment(s) (possibleTreatment > MedicalTherapy)",
+			"type": "relationship",
+			"instructions": "Select any possible therapies used to address this condition.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_schema_treatedmedicalcondition"
+			}
+		},
+		{
+			"key": "field_condition_schema_typicaltest",
+			"name": "condition_schema_typicaltest",
+			"label": "Typical Test(s) (typicalTest > MedicalTest)",
+			"type": "relationship",
+			"instructions": "Select any medical tests typically performed to diagnose this condition.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_schema_usedtodiagnose"
+			}
+		},
+		{
+			"key": "field_condition_schema_code",
+			"name": "condition_schema_code",
+			"label": "Medical Code(s) for This Condition (code > MedicalCode)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalcode"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_condition_schema_sameas",
+			"name": "condition_schema_sameas",
+			"label": "Reference Webpage(s) About This Condition (sameAs > URL)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_condition_schema_additionalType",
+			"name": "condition_schema_additionalType",
+			"label": "More Specific Type(s) for This Condition From External Vocabularies in Microdata Syntax (additionalType > Text or URL)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_additionalType"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
 			"key": "field_condition_tab_treatments",
 			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Treatments",
 			"name": "",
