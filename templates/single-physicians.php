@@ -3,38 +3,68 @@
  *  Get ACF fields to use for meta data
  *  Add description from provider short description or full description *
  */
-$degrees = get_field('physician_degree',$post->ID);
-$degree_list = '';
-$i = 1;
-if ( $degrees ) {
-    foreach( $degrees as $degree ):
-        $degree_name = get_term( $degree, 'degree');
-        $degree_list .= $degree_name->name;
-        if( count($degrees) > $i ) {
-            $degree_list .= ", ";
-        }
-        $i++;
-    endforeach;
-}
-$languages = get_field('physician_languages',$post->ID);
-$language_count = 0;
-if ($languages) {
-    $language_count = count($languages);
-}
-$language_list = '';
-$i = 1;
-if ( $languages ) {
-    foreach( $languages as $language ):
-        $language_name = get_term_by( 'id', $language, 'language');
-        if( is_object($language_name) ) {
-            $language_list .= $language_name->name;
-            if( $language_count > $i ) {
-                $language_list .= ", ";
-            }
-        }
-        $i++;
-    endforeach;
-}
+
+// Degrees and credentials (e.g., M.D., Ph.D.)
+
+	$degrees = get_field( 'physician_degree', $post->ID );
+
+	$degree_list = '';
+	$i = 1;
+
+	if ( $degrees ) {
+
+		foreach ( $degrees as $degree ) {
+
+			$degree_name = get_term( $degree, 'degree' );
+			$degree_list .= $degree_name->name;
+
+			if ( count($degrees) > $i ) {
+
+				$degree_list .= ", ";
+
+			}
+
+			$i++;
+
+		} // endforeach
+
+	}
+
+	$languages = get_field( 'physician_languages', $post->ID );
+	$language_count = 0;
+
+	if ($languages) {
+
+		$language_count = count($languages);
+
+	}
+
+	$language_list = '';
+	$i = 1;
+
+	if ( $languages ) {
+
+		foreach ( $languages as $language ) {
+
+			$language_name = get_term_by( 'id', $language, 'language' );
+
+			if ( is_object($language_name) ) {
+
+				$language_list .= $language_name->name;
+
+				if ( $language_count > $i ) {
+
+					$language_list .= ", ";
+
+				}
+
+			}
+
+			$i++;
+
+		} // endforeach
+
+	}
 
 $prefix = get_field('physician_prefix',$post->ID);
 $first_name = get_field('physician_first_name',$post->ID);
