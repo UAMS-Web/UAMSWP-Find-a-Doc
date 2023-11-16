@@ -1975,8 +1975,8 @@
 						"id": ""
 					},
 					"default_value": "",
-					"tabs": "all",
-					"toolbar": "basic",
+					"tabs": "visual",
+					"toolbar": "very_simple",
 					"media_upload": 0,
 					"delay": 0
 				},
