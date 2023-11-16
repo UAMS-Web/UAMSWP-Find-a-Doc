@@ -1003,6 +1003,22 @@
 			"media_upload": 1,
 			"delay": 0
 		},
+		"field_location_contact_tab": {
+			"key": "field_location_contact_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-phone dashicons\"><\/i> Contact Information",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_location_contact_message": {
 			"key": "field_location_contact_message",
 			"label": "",
@@ -1684,22 +1700,6 @@
 			"open": 0,
 			"multi_expand": 0,
 			"endpoint": 1
-		},
-		"field_location_contact_tab": {
-			"key": "field_location_contact_tab",
-			"name": "",
-			"type": "tab",
-			"label": "<i class=\"dashicons-phone dashicons\"><\/i> Contact Information",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"placement": "left",
-			"endpoint": 0
 		},
 		"field_location_photos_tab": {
 			"key": "field_location_photos_tab",
