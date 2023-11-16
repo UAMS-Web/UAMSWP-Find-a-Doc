@@ -324,62 +324,6 @@
 				}
 			]
 		},
-		"field_expertise_conditions_cpt": {
-			"key": "field_expertise_conditions_cpt",
-			"label": "Conditions",
-			"name": "expertise_conditions_cpt",
-			"type": "post_object",
-			"instructions": "The conditions will display in alphabetical order.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"condition"
-			],
-			"taxonomy": "",
-			"allow_null": 1,
-			"multiple": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_condition_expertise"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"ui": 1
-		},
-		"field_expertise_treatments_cpt": {
-			"key": "field_expertise_treatments_cpt",
-			"label": "Treatments & Procedures",
-			"name": "expertise_treatments_cpt",
-			"type": "post_object",
-			"instructions": "The treatments and procedures will display in alphabetical order.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"treatment"
-			],
-			"taxonomy": "",
-			"allow_null": 1,
-			"multiple": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_treatment_procedure_expertise"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"ui": 1
-		},
 		"field_medical_terms": {
 			"key": "field_expertise_medical_terms",
 			"label": "Medical Terms (Tags)",
@@ -412,125 +356,6 @@
 				"acfe_bidirectional_enabled": "0"
 			},
 			"multiple": 0
-		},
-		"field_expertise_physicians": {
-			"key": "field_expertise_physicians",
-			"label": "Providers",
-			"name": "physician_expertise",
-			"type": "relationship",
-			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"provider"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_physician_expertise"
-			},
-			"acfe_validate": "",
-			"acfe_update": ""
-		},
-		"field_expertise_locations": {
-			"key": "field_expertise_locations",
-			"label": "Locations",
-			"name": "location_expertise",
-			"type": "relationship",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"location"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_location_expertise"
-			},
-			"acfe_validate": "",
-			"acfe_update": ""
-		},
-		"field_expertise_associated": {
-			"key": "field_expertise_associated",
-			"label": "Associated Areas of Expertise",
-			"name": "expertise_associated",
-			"type": "relationship",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"expertise"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id"
-		},
-		"field_expertise_clinical_resources": {
-			"key": "field_expertise_clinical_resources",
-			"label": "Clinical Resources",
-			"name": "expertise_clinical_resources",
-			"type": "relationship",
-			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"clinical-resource"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_clinical_resource_aoe"
-			},
-			"acfe_validate": "",
-			"acfe_update": ""
-		},
 		"field_expertise_tab_general": {
 			"key": "field_expertise_tab_general",
 			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
@@ -778,6 +603,37 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_expertise_physicians": {
+			"key": "field_expertise_physicians",
+			"label": "Providers",
+			"name": "physician_expertise",
+			"type": "relationship",
+			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"provider"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_physician_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
 		"field_expertise_tab_locations": {
 			"key": "field_expertise_tab_locations",
 			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Related Locations",
@@ -793,6 +649,37 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_expertise_locations": {
+			"key": "field_expertise_locations",
+			"label": "Locations",
+			"name": "location_expertise",
+			"type": "relationship",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"location"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_location_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
 		},
 		"field_expertise_tab_expertise_descendant": {
 			"key": "field_expertise_tab_expertise_descendant",
@@ -826,6 +713,31 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_expertise_associated": {
+			"key": "field_expertise_associated",
+			"label": "Associated Areas of Expertise",
+			"name": "expertise_associated",
+			"type": "relationship",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"expertise"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id"
+		},
 		"field_expertise_tab_clinical_resources": {
 			"key": "field_expertise_tab_clinical_resources",
 			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
@@ -842,6 +754,37 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_expertise_clinical_resources": {
+			"key": "field_expertise_clinical_resources",
+			"label": "Clinical Resources",
+			"name": "expertise_clinical_resources",
+			"type": "relationship",
+			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"clinical-resource"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_clinical_resource_aoe"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
 		"field_expertise_tab_condition_treatment": {
 			"key": "field_expertise_tab_condition_treatment",
 			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
@@ -857,6 +800,62 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_expertise_conditions_cpt": {
+			"key": "field_expertise_conditions_cpt",
+			"label": "Conditions",
+			"name": "expertise_conditions_cpt",
+			"type": "post_object",
+			"instructions": "The conditions will display in alphabetical order.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"allow_null": 1,
+			"multiple": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		"field_expertise_treatments_cpt": {
+			"key": "field_expertise_treatments_cpt",
+			"label": "Treatments & Procedures",
+			"name": "expertise_treatments_cpt",
+			"type": "post_object",
+			"instructions": "The treatments and procedures will display in alphabetical order.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"allow_null": 1,
+			"multiple": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
 		},
 		"field_expertise_tab_schema": {
 			"key": "field_expertise_tab_schema",
