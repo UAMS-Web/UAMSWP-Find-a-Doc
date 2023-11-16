@@ -26,6 +26,34 @@
 	"acfe_note": "",
 	"acfe_meta": "",
 	"fields": {
+		"field_affiliation_location": {
+			"key": "field_affiliation_location",
+			"label": "Associated Location Profile",
+			"name": "affiliation_location",
+			"type": "relationship",
+			"instructions": "Select the location profile that matches this affiliated hospital.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"location"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			}
+		},
 		"field_affiliation_name": {
 			"key": "field_affiliation_name",
 			"label": "Name of Hospital in American Hospital Association (AHA) Records",
