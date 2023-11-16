@@ -236,7 +236,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "25",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -547,7 +547,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -571,7 +571,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -604,7 +604,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -708,7 +708,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -729,7 +729,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -748,7 +748,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -773,7 +773,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -820,7 +820,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -847,7 +847,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1083,7 +1083,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1116,7 +1116,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1149,7 +1149,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1254,7 +1254,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "75",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1279,7 +1279,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "25",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1415,7 +1415,7 @@
 					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
-						"width": "50",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -1442,7 +1442,7 @@
 						]
 					],
 					"wrapper": {
-						"width": "50",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -1526,7 +1526,7 @@
 						]
 					],
 					"wrapper": {
-						"width": "50",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -1715,7 +1715,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "51",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1737,7 +1737,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1762,7 +1762,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1994,7 +1994,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -2013,7 +2013,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -2378,7 +2378,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "33",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -2394,7 +2394,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "33",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -2413,7 +2413,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "33",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -2459,7 +2459,7 @@
 					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
-						"width": "30",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -2478,7 +2478,7 @@
 					"required": 0,
 					"conditional_logic": 0,
 					"wrapper": {
-						"width": "20",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -2499,7 +2499,7 @@
 					"required": 0,
 					"conditional_logic": 0,
 					"wrapper": {
-						"width": "50",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
