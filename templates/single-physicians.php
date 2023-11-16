@@ -110,7 +110,34 @@
 
 	}
 
-$prefix = get_field('physician_prefix',$post->ID);
+// Dr. Prefix
+
+	// Define list of degrees or credentials need for "Dr." prefix (per UAMS Health clinical administration)
+
+		$prefix_degrees = array(
+			'M.D.',
+			'D.O.'
+		);
+
+	// Set the "Dr." prefix
+
+		// Eliminate PHP errors
+
+			$prefix = '';
+			$prefix_attr = '';
+
+		if (
+			array_intersect(
+				$prefix_degrees, // The array with master values to check.
+				$degree_attr_array // Arrays to compare values against.
+			)
+		) {
+
+			$prefix = 'Dr.';
+			$prefix_attr = uamswp_attr_conversion($prefix);
+
+		}
+
 $first_name = get_field('physician_first_name',$post->ID);
 $middle_name = get_field('physician_middle_name',$post->ID);
 $last_name = get_field('physician_last_name',$post->ID);
