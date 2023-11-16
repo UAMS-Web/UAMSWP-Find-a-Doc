@@ -352,7 +352,15 @@
 			"type": "select",
 			"instructions": "Select the floor of the building where the patient would first check in.",
 			"required": "1",
-			"conditional_logic": "0",
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_building_query",
+						"operator": "!=",
+						"value": "0"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
