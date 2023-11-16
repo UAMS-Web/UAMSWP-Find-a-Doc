@@ -164,7 +164,7 @@
 			"key": "field_clinical_resource_syndicated",
 			"label": "Is this syndicated from another source?",
 			"name": "clinical_resource_syndicated",
-			"type": "radio",
+			"type": "button_group",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -174,8 +174,8 @@
 				"id": ""
 			},
 			"choices": {
-				"1": "Yes",
-				"0": "No"
+				"0": "No",
+				"1": "Yes"
 			},
 			"allow_null": 1,
 			"other_choice": 0,
