@@ -1,7 +1,7 @@
-<?php 
+<?php
 /*
  *  Get ACF fields to use for meta data
- *  Add description from provider short description or full description * 
+ *  Add description from provider short description or full description *
  */
 $degrees = get_field('physician_degree',$post->ID);
 $degree_list = '';
@@ -15,7 +15,7 @@ if ( $degrees ) {
         }
         $i++;
     endforeach;
-} 
+}
 $languages = get_field('physician_languages',$post->ID);
 $language_count = 0;
 if ($languages) {
@@ -168,7 +168,7 @@ if( have_rows('remove_ontology_criteria', 'option') ):
     while( have_rows('remove_ontology_criteria', 'option') ): the_row();
         $remove_region = get_sub_field('remove_regions', 'option');
         $remove_service_line = get_sub_field('remove_service_lines', 'option');
-        if ( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && empty($remove_service_line) ) { 
+        if ( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && empty($remove_service_line) ) {
             $hide_medical_ontology = true;
             break;
         } elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
@@ -195,13 +195,13 @@ $schema_description = $excerpt;  // Used for Schema Data. Should ALWAYS have a v
 // Override theme's method of defining the meta description
 function sp_titles_desc($html) {
     global $excerpt;
-	$html = $excerpt; 
+	$html = $excerpt;
 	return $html;
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html) { 
+function uamswp_fad_title($html) {
     global $full_name_attr;
     global $phys_title_name_attr;
     global $primary_appointment_city_attr;
@@ -258,7 +258,7 @@ add_filter('seopress_pro_breadcrumbs_crumbs', 'sp_change_title_from_provider_cru
 
 get_header();
 
-while ( have_posts() ) : the_post(); 
+while ( have_posts() ) : the_post();
     // ACF Fields - get_fields
     $service_line = get_field('physician_service_line');
     $npi =  get_field('physician_npi');
@@ -375,7 +375,7 @@ while ( have_posts() ) : the_post();
     if ($resident && !empty($resident)) { $provider_field_classes = $provider_field_classes . ' is-resident'; }
 
     $title_append = ' by ' . $short_name;
-            
+
     // Set Conditions variables
     $args = (array(
         'post_type' => "condition",
@@ -544,13 +544,13 @@ while ( have_posts() ) : the_post();
                 <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
                     <h1 class="page-title">
                         <span class="name"><?php echo $full_name; ?></span>
-                        <?php 
-                        
+                        <?php
+
                         if ($phys_title_name && !empty($phys_title_name)) { ?>
                             <span class="subtitle"><?php echo ($phys_title_name ? $phys_title_name : ''); ?></span>
                         <?php } ?>
                     </h1>
-                    <?php 
+                    <?php
                         $l = 1;
                         if( $locations && $location_valid ): ?>
                         <div data-sectiontitle="Primary Location">
@@ -565,16 +565,16 @@ while ( have_posts() ) : the_post();
 
                                             // Reset variables
                                             $address_id = $location;
-                                        
-                                            // Parent Location 
+
+                                            // Parent Location
                                             $location_has_parent = get_field('location_parent', $location);
                                             $location_parent_id = get_field('location_parent_id', $location);
                                             $parent_location = '';
                                             $parent_id = '';
                                             $parent_title = '';
                                             $parent_url = '';
-                                        
-                                            if ($location_has_parent && $location_parent_id) { 
+
+                                            if ($location_has_parent && $location_parent_id) {
                                                 $parent_location = get_post( $location_parent_id );
                                             }
                                             // Get Post ID for Address & Image fields
@@ -584,7 +584,7 @@ while ( have_posts() ) : the_post();
                                                 $parent_url = get_permalink( $parent_id );
                                                 $address_id = $parent_id;
                                             }
-                                            
+
                                             $location_address_1 = get_field('location_address_1', $address_id );
                                             $location_building = get_field('location_building', $address_id );
                                             if ($location_building) {
@@ -652,12 +652,12 @@ while ( have_posts() ) : the_post();
                             <?php endforeach;
 								// wp_reset_postdata(); ?>
                         </div>
-						<?php endif; ?> 
+						<?php endif; ?>
                     <h2 class="h3">Overview</h2>
                     <dl data-sectiontitle="Overview">
                     <?php // Display area(s) of expertise
                     $expertise_valid = false;
-                    if ($expertises && !empty($expertises) && !$hide_medical_ontology) { 
+                    if ($expertises && !empty($expertises) && !$hide_medical_ontology) {
                         foreach( $expertises as $expertise ) {
                             if ( get_post_status ( $expertise ) == 'publish' ) {
                                $expertise_valid = true;
@@ -677,7 +677,7 @@ while ( have_posts() ) : the_post();
                     <?php // Display if they accept new patients
                     if ( $eligible_appt ) { ?>
                         <dt>Accepting New Patients</dt>
-                        <?php 
+                        <?php
                         if ($accept_new) {
                             // Display if they require referrals for new patients
                             if ( $refer_req ) { ?>
@@ -689,13 +689,13 @@ while ( have_posts() ) : the_post();
                             <dd>No</dd>
                         <?php } // endif
                     } // endif ?>
-                    <?php  // Display if they will provide second opinions    
+                    <?php  // Display if they will provide second opinions
                     if ($second_opinion) { ?>
                         <dt>Provides Second Opinion</dt>
                         <dd>Yes</dd>
                     <?php } ?>
                     <?php // Display all patient types
-                        if( $patients ) { 
+                        if( $patients ) {
                         ?>
                             <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
                             <?php foreach( $patients as $patient ): ?>
@@ -705,7 +705,7 @@ while ( have_posts() ) : the_post();
                             <?php endforeach; ?>
                     <?php } // endif ?>
                     <?php // Display all languages
-                        if( $languages && $language_list == 'English') { 
+                        if( $languages && $language_list == 'English') {
                         ?>
                         <dt class="sr-only">Language</dt>
                         <?php echo '<dd class="sr-only">' . $language_list . '</dd>';?>
@@ -729,7 +729,7 @@ while ( have_posts() ) : the_post();
                             echo '<div class="ratings-comments-lg" aria-hidden="true">'.  $comment_count .' comments</div>';
                             echo '</a>';
                         } else { ?>
-                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider" data-sectiontitle="Overview"><span aria-hidden="true">Why not?</span></a></em></p> 
+                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider" data-sectiontitle="Overview"><span aria-hidden="true">Why not?</span></a></em></p>
                         <?php
                         }
                         echo '</div>';
@@ -760,7 +760,7 @@ while ( have_posts() ) : the_post();
                         </div>
                     <?php } ?>
                 </div>
-                <?php 
+                <?php
                 $docphoto = '/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg';
                 if ( has_post_thumbnail() ) { ?>
                 <div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
@@ -860,8 +860,8 @@ while ( have_posts() ) : the_post();
             $appointment_block_instance = 1;
 			include( UAMS_FAD_PATH . '/templates/blocks/appointment-provider.php' );
 		} ?>
-        
-        <?php 
+
+        <?php
             $physician_clinical_split = false;
             if (
                 ( $show_clinical_bio_section ) // column A stuff
@@ -870,7 +870,7 @@ while ( have_posts() ) : the_post();
                 ) {
                 $physician_clinical_split = true; // If there is stuff for column A and column B, split the section into two columns
             }
-        
+
             // Display section for Clinical Bio, Clinical Video, Clinical Administrative Title(s), Clinical Focus ... only if there is a bio or video.
             if ( $show_clinical_bio_section ) { ?>
             <section class="uams-module clinical-info bg-auto" id="clinical-info">
@@ -895,11 +895,11 @@ while ( have_posts() ) : the_post();
                             if($video) { ?>
                                 <?php if(function_exists('lyte_preparse')) {
                                     echo '<div class="alignwide">';
-                                    echo lyte_parse( str_replace(['https:', 'http:'], 'httpv:', $video ) ); 
+                                    echo lyte_parse( str_replace(['https:', 'http:'], 'httpv:', $video ) );
                                     echo '</div>';
                                 } else {
                                     echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-                                    echo wp_oembed_get( $video ); 
+                                    echo wp_oembed_get( $video );
                                     echo '</div>';
                                 } ?>
                             <?php } // endif
@@ -915,14 +915,14 @@ while ( have_posts() ) : the_post();
                                     <h3 class="h4">Administrative Roles</h3>
                                     <dl>
                                     <?php while( have_rows('physician_clinical_admin_title') ): the_row();
-                                        $department = get_term( get_sub_field('physician_clinical_admin_area'), 'service_line' ); 
+                                        $department = get_term( get_sub_field('physician_clinical_admin_area'), 'service_line' );
                                         $clinical_admin_title_tax = get_term( get_sub_field('clinical_admin_title_tax'), 'clinical_admin_title' );
                                     ?>
                                         <dt><?php echo $department->name; ?></dt>
                                         <dd><?php echo $clinical_admin_title_tax->name; ?></dd>
                                     <?php endwhile; ?>
                                     </dl>
-                                <?php endif; 
+                                <?php endif;
                             } // endif ?>
                             <?php if($physician_clinical_focus) { ?>
                                 <h3 class="h4">Clinical Focus</h3>
@@ -975,7 +975,7 @@ while ( have_posts() ) : the_post();
             </section>
         <?php }
         // End UAMS Health Talk Podcast
-        
+
         // Begin Clinical Resources Section
         $resource_heading_related_pre = false; // "Related Resources"
         $resource_heading_related_post = true; // "Resources Related to __"
@@ -987,13 +987,13 @@ while ( have_posts() ) : the_post();
             include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
         }
         // End Clinical Resources Section
-        
+
         // Begin Academic Bio Section
         $physician_academic_split = false;
             if ( $academic_bio && ( $academic_appointment || $academic_admin_title || $education || $boards ) ) {
                 $physician_academic_split = true;
             }
-        
+
             if( $show_academic_section ): ?>
         <section class="uams-module academic-info bg-auto" id="academic-info">
             <div class="container-fluid">
@@ -1023,8 +1023,8 @@ while ( have_posts() ) : the_post();
                                     <h3 class="h4">Administrative Roles</h3>
                                     <dl>
                                     <?php while( have_rows('physician_academic_admin_title') ): the_row(); ?>
-                                    <?php 
-                                        $department = get_term( get_sub_field('department'), 'academic_department' ); 
+                                    <?php
+                                        $department = get_term( get_sub_field('department'), 'academic_department' );
                                         $academic_admin_title_tax = get_term( get_sub_field('academic_admin_title_tax'), 'academic_admin_title' );
                                     ?>
                                         <dt><?php echo $department->name; ?></dt>
@@ -1038,8 +1038,8 @@ while ( have_posts() ) : the_post();
                                     <h3 class="h4">Faculty Appointments</h3>
                                     <dl>
                                     <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
-                                    <?php 
-                                        $department = get_term( get_sub_field('department'), 'academic_department' ); 
+                                    <?php
+                                        $department = get_term( get_sub_field('department'), 'academic_department' );
                                         $academic_title_tax = get_term( get_sub_field('academic_title_tax'), 'academic_title' );
                                         if ($academic_title_tax->name) {
                                             $academic_title = $academic_title_tax->name;
@@ -1073,7 +1073,7 @@ while ( have_posts() ) : the_post();
                                     <?php endwhile; ?>
                                     </dl>
                             <?php endif;
-                                
+
                                 if( ! empty( $boards ) ): ?>
                             <h3 class="h4">Professional Certifications</h3>
                             <ul>
@@ -1084,7 +1084,7 @@ while ( have_posts() ) : the_post();
                             <?php endforeach; ?>
                             </ul>
                             <?php endif;
-                                
+
                                 if( ! empty( $associations ) ): ?>
                             <h3 class="h4">Associations</h3>
                             <ul>
@@ -1164,7 +1164,7 @@ while ( have_posts() ) : the_post();
 
         // Begin Conditions Section
         // load all 'conditions' terms for the post
-             
+
             // Conditions CPT
             // we will use the first term to load ACF data from
             if( $show_conditions_section ) {
@@ -1187,7 +1187,7 @@ while ( have_posts() ) : the_post();
                     $i++;
                 } // endforeach;
                 // $condition_schema .= '"" ]';
-            } // endif; 
+            } // endif;
 
             // Treatments CPT
             if( $show_treatments_section ) {
@@ -1210,7 +1210,7 @@ while ( have_posts() ) : the_post();
                 } // endforeach
                 // $treatment_schema .= ']';
             } // endif
-        
+
         if ( $show_aoe_section && !empty($expertises) ) { ?>
             <section class="uams-module expertise-list bg-auto" id="expertise">
                 <div class="container-fluid">
@@ -1232,7 +1232,7 @@ while ( have_posts() ) : the_post();
                 </div>
             </section>
         <?php } // endif ?>
-        <?php 
+        <?php
         if( $show_locations_section && !empty($locations) ): ?>
         <section class="uams-module location-list bg-auto" id="locations">
             <div class="container-fluid">
@@ -1245,10 +1245,10 @@ while ( have_posts() ) : the_post();
                                 $location_schema = ',
     "address": [';
                             ?>
-                            <?php foreach( $locations as $location ): 
-                                if ( get_post_status ( $location ) == 'publish' ) { 
+                            <?php foreach( $locations as $location ):
+                                if ( get_post_status ( $location ) == 'publish' ) {
 
-                                    $id = $location; 
+                                    $id = $location;
                                     include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
                                         // Schema data
                                         if ($l > 1){
@@ -1268,7 +1268,7 @@ while ( have_posts() ) : the_post();
 
                                     <?php $l++; ?>
                                 <?php } ?>
-                            <?php endforeach; 
+                            <?php endforeach;
                                 $location_schema .= ']
                                 ';
                             ?>
@@ -1278,7 +1278,7 @@ while ( have_posts() ) : the_post();
                 </div>
             </div>
         </section>
-        <?php endif; ?> 
+        <?php endif; ?>
         <?php if ( $show_ratings_section ) : ?>
         <section class="uams-module ratings-and-reviews bg-auto" id="ratings">
             <div class="container-fluid">
@@ -1291,7 +1291,7 @@ while ( have_posts() ) : the_post();
                                 <dl>
                                     <?php
                                     $questionRatings = $rating_data->profile->questionRatings;
-                                    foreach( $questionRatings as $questionRating ): 
+                                    foreach( $questionRatings as $questionRating ):
                                         if ($questionRating->questionCount > 0){ ?>
                                     <dt><?php echo $questionRating->question; ?></dt>
                                     <dd>
@@ -1309,7 +1309,7 @@ while ( have_posts() ) : the_post();
                                 <p>(<?php echo $rating_data->profile->reviewBodyCountStr; ?>)</p>
                             </div>
                         </div>
-                        <?php 
+                        <?php
                         $reviews = $rating_data->reviews;
                         // if ( $reviews ) : ?>
                         <?php //print_r($rating_data); ?>
@@ -1369,10 +1369,10 @@ while ( have_posts() ) : the_post();
                                         // grab the profile data
                                         var review = data.reviewMeta;
                                         if(review){
-                                            // setup the variables that the template will need	
+                                            // setup the variables that the template will need
                                             var templateData = {
                                                 moreUrl:    review.moreUrl
-                                            }; 
+                                            };
                                             // build the HTML markup using {{var-name}} for the template variables
                                             var template = [
                                                 '<div class="ds-comments-more ds-comments-more-placeholder">',
@@ -1383,12 +1383,12 @@ while ( have_posts() ) : the_post();
                                             // apply the variables to the template
                                             x = ctx.tmpl(template, templateData);
                                         }
-                                    }      
+                                    }
                                     return x;
                                 }
                             };
                         </script>
-                        <script src="https://transparency.nrchealth.com/widget/v3/uams/npi/<?php echo $npi; ?>/lotw.js" async></script>                           
+                        <script src="https://transparency.nrchealth.com/widget/v3/uams/npi/<?php echo $npi; ?>/lotw.js" async></script>
                         <?php // endif; ?>
                     </div>
                 </div>
@@ -1439,8 +1439,8 @@ while ( have_posts() ) : the_post();
             </div>
         </section> -->
         <?php if (
-            $show_appointment_section && 
-            ( 
+            $show_appointment_section &&
+            (
                 $show_clinical_bio_section
                 || $show_academic_section
                 || $show_podcast_section
@@ -1468,7 +1468,7 @@ while ( have_posts() ) : the_post();
   "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>",
   "image": "<?php echo $docphoto; ?>",
   "description": "<?php echo $schema_description; ?>"
-  <?php 
+  <?php
         if ($condition_schema || $treatment_schema) {
             echo ',';
             echo '"medicalSpecialty": [';
