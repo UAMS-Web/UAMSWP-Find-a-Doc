@@ -32,9 +32,9 @@
 	"fields": {
 		"field_location_parent_tab": {
 			"key": "field_location_parent_tab",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -48,9 +48,9 @@
 		},
 		"field_location_parent": {
 			"key": "field_location_parent",
+			"label": "Does this location have a parent location?",
 			"name": "location_parent",
 			"type": "button_group",
-			"label": "Does this location have a parent location?",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -71,9 +71,9 @@
 		},
 		"field_location_parent_id": {
 			"key": "field_location_parent_id",
+			"label": "Parent Location",
 			"name": "location_parent_id",
 			"type": "post_object",
-			"label": "Parent Location",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -101,9 +101,9 @@
 		},
 		"field_location_type": {
 			"key": "field_location_type",
+			"label": "Location Type",
 			"name": "location_type",
 			"type": "taxonomy",
-			"label": "Location Type",
 			"instructions": "Used for filtering only",
 			"required": 0,
 			"conditional_logic": 0,
@@ -128,9 +128,9 @@
 		},
 		"field_location_portal": {
 			"key": "field_location_portal",
+			"label": "Patient Portal",
 			"name": "location_portal",
 			"type": "taxonomy",
-			"label": "Patient Portal",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -155,9 +155,9 @@
 		},
 		"field_location_prepend_the": {
 			"key": "field_location_prepend_the",
+			"label": "Automatically prepend location name with \"the\" in phrases?",
 			"name": "location_prepend_the",
 			"type": "button_group",
-			"label": "Automatically prepend location name with \"the\" in phrases?",
 			"instructions": "Setting this to \"Yes\" will add the word \"the\" before the location name in headings such as \"About [Location Name]\".",
 			"required": 1,
 			"conditional_logic": 0,
@@ -178,9 +178,9 @@
 		},
 		"field_location_hidden": {
 			"key": "field_location_hidden",
+			"label": "Exclude from Primary Location List?",
 			"name": "location_hidden",
 			"type": "button_group",
-			"label": "Exclude from Primary Location List?",
 			"instructions": "Setting this to \"Yes\" will remove this location from the Location archive. This input will not affect whether the location will be displayed on profiles and search results.",
 			"required": 1,
 			"conditional_logic": 0,
@@ -201,9 +201,9 @@
 		},
 		"field_location_service_line": {
 			"key": "field_location_service_line",
+			"label": "Service Line(s)",
 			"name": "location_service_line",
 			"type": "taxonomy",
-			"label": "Service Line(s)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -227,9 +227,9 @@
 		},
 		"field_location_brand_tab": {
 			"key": "field_location_brand_tab",
+			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -248,9 +248,9 @@
 		},
 		"field_location_address_tab": {
 			"key": "field_location_address_tab",
+			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Address",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Address",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -272,9 +272,9 @@
 		},
 		"field_location_address_1": {
 			"key": "field_location_address_1",
+			"label": "Street Address",
 			"name": "location_address_1",
 			"type": "text",
-			"label": "Street Address",
 			"instructions": "Spell out numbered streets nine and under; use figures for <em>10</em> and above (e.g., <em>5 Sixth Ave.</em>, <em>3012 50th St.</em>, <em>No. 10 Downing St.</em>).</p><p class='description' style='margin-top: 0.5em;'>Use the abbreviations <em>Ave.</em>, <em>Blvd.</em> and <em>St.</em> Otherwise, spell out similar words (e.g., <em>Alley</em>, <em>Drive</em>, <em>Road</em>, <em>Terrace</em>).</p><p class='description' style='margin-top: 0.5em;'>Always use figures for an address number (e.g., <em>9 Morningside Circle</em>).</p><p class='description' style='margin-top: 0.5em;'>Spell out and capitalize <em>First</em> through <em>Ninth</em> when used as street names; use figures for <em>10th</em> and above (e.g., <em>7 Fifth Ave.</em>, <em>100 21st St.</em>).</p><p class='description' style='margin-top: 0.5em;'>Abbreviate compass points used to indicate directional ends of a street or quadrants of a city in a numbered address (e.g., <em>222 E. 42nd St.</em>, <em>562 W. 43rd St.</em>, <em>600 K St. NW</em>). Do not use periods in quadrant abbreviations (e.g., <em>NW</em>, <em>SE</em>).</p><p class='description' style='margin-top: 0.5em;'>Use these forms, as appropriate in the context, for highways identified by number: <em>U.S. Highway 67</em>, <em>Arkansas Highway 10</em>, <em>Interstate 630</em>.</p><p class='description' style='margin-top: 0.5em;'>When a letter is appended to a number, capitalize it but do not use a hyphen (e.g., <em>U.S. Highway 71B</em>).",
 			"required": 1,
 			"conditional_logic": 0,
@@ -291,8 +291,8 @@
 		},
 		"field_location_building_query": {
 			"key": "field_location_building_query",
-			"name": "location_building_query",
 			"label": "Is this location contained within a larger facility rather than being its own standalone facility?",
+			"name": "location_building_query",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -421,9 +421,9 @@
 		},
 		"field_location_city": {
 			"key": "field_location_city",
+			"label": "City",
 			"name": "location_city",
 			"type": "text",
-			"label": "City",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -440,9 +440,9 @@
 		},
 		"field_location_state": {
 			"key": "field_location_state",
+			"label": "State",
 			"name": "location_state",
 			"type": "select",
-			"label": "State",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -516,9 +516,9 @@
 		},
 		"field_location_zip": {
 			"key": "field_location_zip",
+			"label": "ZIP Code",
 			"name": "location_zip",
 			"type": "maskfield",
-			"label": "ZIP Code",
 			"instructions": "Find the ZIP+4 Code for an address at <a href='https://tools.usps.com/zip-code-lookup.htm?byaddress' target='_blank'>https://tools.usps.com/zip-code-lookup.htm?byaddress</a>.",
 			"required": 1,
 			"conditional_logic": 0,
@@ -536,9 +536,9 @@
 		},
 		"field_location_map": {
 			"key": "field_location_map",
+			"label": "GPS Location of the Relevant Building Entrance",
 			"name": "location_map",
 			"type": "google_map",
-			"label": "GPS Location of the Relevant Building Entrance",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -554,9 +554,9 @@
 		},
 		"field_location_region": {
 			"key": "field_location_region",
+			"label": "Arkansas Region",
 			"name": "location_region",
 			"type": "taxonomy",
-			"label": "Arkansas Region",
 			"instructions": "For information on how the Arkansas regions are defined, visit <a href='https://communications.uams.edu/web/kb/location-regions/' target='_blank'>https://communications.uams.edu/web/kb/location-regions/</a>.",
 			"required": 1,
 			"conditional_logic": 0,
@@ -581,9 +581,9 @@
 		},
 		"field_location_directions_tab": {
 			"key": "field_location_directions_tab",
+			"label": "<i class=\"dashicons-car dashicons\"><\/i> Parking Information",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-car dashicons\"><\/i> Parking Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -605,9 +605,9 @@
 		},
 		"field_location_parking_map": {
 			"key": "field_location_parking_map",
+			"label": "GPS Location of the Main Parking Area",
 			"name": "location_parking_map",
 			"type": "google_map",
-			"label": "GPS Location of the Main Parking Area",
 			"instructions": "If the parking area is a parking deck, place the pin on the entrance to the parking deck from the street.</p><p class='description' style='margin-top: 0.5em;'>If the parking area is a surface-level parking lot, place the pin in the middle of the parking lot.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -623,9 +623,9 @@
 		},
 		"field_location_parking": {
 			"key": "field_location_parking",
+			"label": "Parking Instructions",
 			"name": "location_parking",
 			"type": "wysiwyg",
-			"label": "Parking Instructions",
 			"instructions": "Indicate whether patients will park in a parking deck or surface-level parking.</p><p class='description' style='margin-top: 0.5em;'>Indicate which parking lot, parking deck or other area in which patients will park when coming to this location.</p><p class='description' style='margin-top: 0.5em;'>Indicate whether or not patients will have to pay for parking.</p><p class='description' style='margin-top: 0.5em;'>If there is a parking fee for patients, indicate whether or not this location validates parking.</p><p class='description' style='margin-top: 0.5em;'>If patients will be parking in a specific parking deck, indicate the ideal area of the parking deck in which patients should park. If there is a patient drop-off area, also include details about that.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -642,9 +642,9 @@
 		},
 		"field_location_direction": {
 			"key": "field_location_direction",
+			"label": "Directions From Parking Area",
 			"name": "location_direction",
 			"type": "wysiwyg",
-			"label": "Directions From Parking Area",
 			"instructions": "Comprehensively describe the path patients should take when coming from their vehicle — whether at the patient drop-off area or in the parking area — to the entrance or check-in area for the location.</p><p class='description' style='margin-top: 0.5em;'>If the parking area is a parking deck, include instructions regarding how to locate the appropriate elevators and stairs in the parking deck, then include the parking deck level to which they should take those elevators or stairs.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -661,9 +661,9 @@
 		},
 		"field_location_details_tab": {
 			"key": "field_location_details_tab",
+			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Description of the Location",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Description of the Location",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -677,9 +677,9 @@
 		},
 		"field_location_about": {
 			"key": "field_location_about",
+			"label": "About \/ Description",
 			"name": "location_about",
 			"type": "wysiwyg",
-			"label": "About \/ Description",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -696,9 +696,9 @@
 		},
 		"field_location_short_desc": {
 			"key": "field_location_short_desc",
+			"label": "Short Description (excerpt)",
 			"name": "location_short_desc",
 			"type": "textarea",
-			"label": "Short Description (excerpt)",
 			"instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -715,9 +715,9 @@
 		},
 		"field_location_youtube_link": {
 			"key": "field_location_youtube_link",
+			"label": "Youtube Link",
 			"name": "location_youtube_link",
 			"type": "url",
-			"label": "Youtube Link",
 			"instructions": "Full URL, including https:\/\/",
 			"required": 0,
 			"conditional_logic": 0,
@@ -731,9 +731,9 @@
 		},
 		"field_location_affiliation": {
 			"key": "field_location_affiliation",
+			"label": "Affiliation",
 			"name": "location_affiliation",
 			"type": "wysiwyg",
-			"label": "Affiliation",
 			"instructions": "Affiliations with other medical centers or clinics",
 			"required": 0,
 			"conditional_logic": 0,
@@ -862,9 +862,9 @@
 		},
 		"field_location_prescription": {
 			"key": "field_location_prescription",
+			"label": "Custom Prescription Refills Information",
 			"name": "location_prescription",
 			"type": "wysiwyg",
-			"label": "Custom Prescription Refills Information",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -894,9 +894,9 @@
 		},
 		"field_location_appointment_info_tab": {
 			"key": "field_location_appointment_info_tab",
+			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Appointment Information",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Appointment Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -910,9 +910,9 @@
 		},
 		"field_location_ac_query": {
 			"key": "field_location_ac_query",
+			"label": "Is this an Arkansas Children's location?",
 			"name": "location_ac_query",
 			"type": "true_false",
-			"label": "Is this an Arkansas Children's location?",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -929,9 +929,9 @@
 		},
 		"field_location_appointments_query": {
 			"key": "field_location_appointments_query",
+			"label": "Can a patient schedule an appointment for services rendered at this location?",
 			"name": "location_appointments_query",
 			"type": "true_false",
-			"label": "Can a patient schedule an appointment for services rendered at this location?",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -948,9 +948,9 @@
 		},
 		"field_location_appointment": {
 			"key": "field_location_appointment",
+			"label": "Information on setting up an appointment",
 			"name": "location_appointment",
 			"type": "wysiwyg",
-			"label": "Information on setting up an appointment",
 			"instructions": "This section should ideally not contain headings. But if it does, use Heading 3 and down.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -967,9 +967,9 @@
 		},
 		"field_location_appointment_bring": {
 			"key": "field_location_appointment_bring",
+			"label": "What to Bring to Your Appointment",
 			"name": "location_appointment_bring",
 			"type": "wysiwyg",
-			"label": "What to Bring to Your Appointment",
 			"instructions": "This section should ideally not contain headings. But if it does ...<br />If \"Information on setting up an appointment\" or \"What to Expect at Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -986,9 +986,9 @@
 		},
 		"field_location_appointment_expect": {
 			"key": "field_location_appointment_expect",
+			"label": "What to Expect at Your Appointment",
 			"name": "location_appointment_expect",
 			"type": "wysiwyg",
-			"label": "What to Expect at Your Appointment",
 			"instructions": "This section should ideally not contain headings. But if it does ...<br />If \"Information on setting up an appointment\" or \"What to Bring to Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1005,9 +1005,9 @@
 		},
 		"field_location_contact_tab": {
 			"key": "field_location_contact_tab",
+			"label": "<i class=\"dashicons-phone dashicons\"><\/i> Contact Information",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-phone dashicons\"><\/i> Contact Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1021,9 +1021,9 @@
 		},
 		"field_location_phone": {
 			"key": "field_location_phone",
+			"label": "General Information Phone Number",
 			"name": "location_phone",
 			"type": "maskfield",
-			"label": "General Information Phone Number",
 			"instructions": "The phone number that patients can call for general information related to this location",
 			"required": 1,
 			"conditional_logic": 0,
@@ -1100,9 +1100,9 @@
 		},
 		"field_location_new_appointments_phone": {
 			"key": "field_location_new_appointments_phone",
+			"label": "Appointments Phone Number",
 			"name": "location_new_appointments_phone",
 			"type": "maskfield",
-			"label": "Appointments Phone Number",
 			"instructions": "For new patients, if separate numbers for new and returning patients",
 			"required": 1,
 			"conditional_logic": [
@@ -1135,9 +1135,9 @@
 		},
 		"field_location_ac_appointments_primary": {
 			"key": "field_location_ac_appointments_primary",
+			"label": "Arkansas Children's Primary Care Appointments Phone Number",
 			"name": "location_ac_appointments_primary",
 			"type": "maskfield",
-			"label": "Arkansas Children's Primary Care Appointments Phone Number",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -1158,9 +1158,9 @@
 		},
 		"field_location_ac_appointments_specialty": {
 			"key": "field_location_ac_appointments_specialty",
+			"label": "Arkansas Children's Specialty Care Appointments Phone Number",
 			"name": "location_ac_appointments_specialty",
 			"type": "maskfield",
-			"label": "Arkansas Children's Specialty Care Appointments Phone Number",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -1208,9 +1208,9 @@
 		},
 		"field_location_return_appointments_phone": {
 			"key": "field_location_return_appointments_phone",
+			"label": "Appointments Phone Number for Returning Patients",
 			"name": "location_return_appointments_phone",
 			"type": "maskfield",
-			"label": "Appointments Phone Number for Returning Patients",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -1231,9 +1231,9 @@
 		},
 		"field_location_fax": {
 			"key": "field_location_fax",
+			"label": "Clinic Fax Number",
 			"name": "location_fax",
 			"type": "maskfield",
-			"label": "Clinic Fax Number",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -1254,9 +1254,9 @@
 		},
 		"field_location_phone_numbers": {
 			"key": "field_location_phone_numbers",
+			"label": "Additional Phone Numbers",
 			"name": "location_phone_numbers",
 			"type": "repeater",
-			"label": "Additional Phone Numbers",
 			"instructions": "Add any additional phone numbers for this location (e.g., after hours nurse line).",
 			"required": 0,
 			"conditional_logic": [
@@ -1336,9 +1336,9 @@
 		},
 		"field_link_message": {
 			"key": "field_link_message",
+			"label": "",
 			"name": "",
 			"type": "message",
-			"label": "",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1353,9 +1353,9 @@
 		},
 		"field_location_web_name": {
 			"key": "field_location_web_name",
+			"label": "Website Name",
 			"name": "location_web_name",
 			"type": "text",
-			"label": "Website Name",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1372,9 +1372,9 @@
 		},
 		"field_location_url": {
 			"key": "field_location_url",
+			"label": "URL",
 			"name": "location_url",
 			"type": "link",
-			"label": "URL",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1388,9 +1388,9 @@
 		},
 		"field_location_photos_tab": {
 			"key": "field_location_photos_tab",
+			"label": "<i class=\"dashicons-format-gallery dashicons\"><\/i> Photos",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-format-gallery dashicons\"><\/i> Photos",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1409,9 +1409,9 @@
 		},
 		"field_location_image_override_parent": {
 			"key": "field_location_image_override_parent",
+			"label": "Override Parent Images?",
 			"name": "location_image_override_parent",
 			"type": "true_false",
-			"label": "Override Parent Images?",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -1436,9 +1436,9 @@
 		},
 		"field_location_image_override_parent_featured": {
 			"key": "field_location_image_override_parent_featured",
+			"label": "Override Parent Featured Image?",
 			"name": "location_image_override_parent_featured",
 			"type": "true_false",
-			"label": "Override Parent Featured Image?",
 			"instructions": "To remove the parent featured image, select Yes and leave image blank",
 			"required": 0,
 			"conditional_logic": [
@@ -1516,9 +1516,9 @@
 		},
 		"field_location_image_override_parent_wayfinding": {
 			"key": "field_location_image_override_parent_wayfinding",
+			"label": "Override Parent Wayfinding Photo?",
 			"name": "location_image_override_parent_wayfinding",
 			"type": "true_false",
-			"label": "Override Parent Wayfinding Photo?",
 			"instructions": "To remove the parent wayfinding photo, select Yes and leave photo blank",
 			"required": 0,
 			"conditional_logic": [
@@ -1596,9 +1596,9 @@
 		},
 		"field_location_image_override_parent_gallery": {
 			"key": "field_location_image_override_parent_gallery",
+			"label": "Override Parent Photo Gallery?",
 			"name": "location_image_override_parent_gallery",
 			"type": "true_false",
-			"label": "Override Parent Photo Gallery?",
 			"instructions": "To remove the parent gallery, select Yes and leave gallery empty",
 			"required": 0,
 			"conditional_logic": [
@@ -1678,9 +1678,9 @@
 		},
 		"field_location_hours_tab": {
 			"key": "field_location_hours_tab",
+			"label": "<i class=\"dashicons-clock dashicons\"><\/i> Hours of Operation",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-clock dashicons\"><\/i> Hours of Operation",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1729,9 +1729,9 @@
 				},
 				{
 					"key": "field_hours_message",
+					"label": "Hours of Operation",
 					"name": "",
 					"type": "message",
-					"label": "Hours of Operation",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": 0,
@@ -1746,9 +1746,9 @@
 				},
 				{
 					"key": "field_location_hours_variable",
+					"label": "Do the location's hours vary?",
 					"name": "location_hours_variable",
 					"type": "true_false",
-					"label": "Do the location's hours vary?",
 					"instructions": "For example, does this location operate only periodically or as needed?",
 					"required": 0,
 					"conditional_logic": 0,
@@ -1765,9 +1765,9 @@
 				},
 				{
 					"key": "field_location_hours_variable_info",
+					"label": "Variable Hours Information",
 					"name": "location_hours_variable_info",
 					"type": "wysiwyg",
-					"label": "Variable Hours Information",
 					"instructions": "Describe how the hours work for this location.",
 					"required": 1,
 					"conditional_logic": [
@@ -1792,9 +1792,9 @@
 				},
 				{
 					"key": "field_location_24_7",
+					"label": "Is the location typically available 24/7?",
 					"name": "location_24_7",
 					"type": "true_false",
-					"label": "Is the location typically available 24/7?",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": [
@@ -1819,9 +1819,9 @@
 				},
 				{
 					"key": "field_location_hours",
+					"label": "Typical Hours",
 					"name": "location_hours",
 					"type": "repeater",
-					"label": "Typical Hours",
 					"instructions": "Set the time for all seven days.",
 					"required": 0,
 					"conditional_logic": [
@@ -1978,9 +1978,9 @@
 				},
 				{
 					"key": "field_after_hours",
+					"label": "Information for When the Location Is Closed",
 					"name": "location_after_hours",
 					"type": "wysiwyg",
-					"label": "Information for When the Location Is Closed",
 					"instructions": "Describe what patients should do if they need assistance when this location is closed.",
 					"required": 0,
 					"conditional_logic": 0,
@@ -2219,9 +2219,9 @@
 						},
 						{
 							"key": "field_location_modified_hours_24_7",
+							"label": "Is this location available 24\/7 during these modified hours?",
 							"name": "location_modified_hours_24_7",
 							"type": "true_false",
-							"label": "Is this location available 24\/7 during these modified hours?",
 							"instructions": "",
 							"required": 0,
 							"conditional_logic": 0,
@@ -2398,9 +2398,9 @@
 				},
 				{
 					"key": "field_location_holiday_hours",
+					"label": "Holiday Hours",
 					"name": "location_holiday_hours",
 					"type": "repeater",
-					"label": "Holiday Hours",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": [
@@ -2567,9 +2567,9 @@
 				},
 				{
 					"key": "field_location_telemed_info_message",
+					"label": "Telemedicine Information",
 					"name": "",
 					"type": "message",
-					"label": "Telemedicine Information",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": [
@@ -2592,9 +2592,9 @@
 				},
 				{
 					"key": "field_location_telemed_patients",
+					"label": "Telemedicine Patient Type",
 					"name": "location_telemed_patients",
 					"type": "radio",
-					"label": "Telemedicine Patient Type",
 					"instructions": "Which type of patients can use the telemedicine services offered at this location?",
 					"required": 1,
 					"conditional_logic": [
@@ -2625,9 +2625,9 @@
 				},
 				{
 					"key": "field_location_telemed_24_7",
+					"label": "Is telemedicine typically available 24\/7 at this location?",
 					"name": "location_telemed_24_7",
 					"type": "true_false",
-					"label": "Is telemedicine typically available 24\/7 at this location?",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": [
@@ -2652,9 +2652,9 @@
 				},
 				{
 					"key": "field_location_telemed_hours",
+					"label": "Typical Telemedicine Hours of Operation",
 					"name": "location_telemed_hours",
 					"type": "repeater",
-					"label": "Typical Telemedicine Hours of Operation",
 					"instructions": "Set the time for all seven days.",
 					"required": 0,
 					"conditional_logic": [
@@ -2964,9 +2964,9 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_24_7",
+					"label": "Is telemedicine available 24\/7 during these modified telemedicine hours of operation?",
 					"name": "location_telemed_modified_hours_24_7",
 					"type": "true_false",
-					"label": "Is telemedicine available 24\/7 during these modified telemedicine hours of operation?",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": [
@@ -3151,9 +3151,9 @@
 		},
 		"field_location_physician_tab": {
 			"key": "field_location_physician_tab",
+			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Providers",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Providers",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3167,9 +3167,9 @@
 		},
 		"field_location_physicians": {
 			"key": "field_location_physicians",
+			"label": "Providers",
 			"name": "physician_locations",
 			"type": "relationship",
-			"label": "Providers",
 			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3195,9 +3195,9 @@
 		},
 		"field_location_medical_tab": {
 			"key": "field_location_medical_tab",
+			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Medical Info",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Medical Info",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3211,9 +3211,9 @@
 		},
 		"field_location_conditions_treatments_tab": {
 			"key": "field_location_conditions_treatments_tab",
+			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3227,9 +3227,9 @@
 		},
 		"field_location_conditions_cpt": {
 			"key": "field_location_conditions_cpt",
+			"label": "Conditions",
 			"name": "location_conditions_cpt",
 			"type": "post_object",
-			"label": "Conditions",
 			"instructions": "The conditions will display in alphabetical order.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3256,9 +3256,9 @@
 		},
 		"field_location_treatments_cpt": {
 			"key": "field_location_treatments_cpt",
+			"label": "Treatments & Procedures",
 			"name": "location_treatments_cpt",
 			"type": "post_object",
-			"label": "Treatments & Procedures",
 			"instructions": "The treatments and procedures will display in alphabetical order.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3285,9 +3285,9 @@
 		},
 		"field_location_clinical_resources_tab": {
 			"key": "field_location_clinical_resources_tab",
+			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3301,9 +3301,9 @@
 		},
 		"field_location_expertise": {
 			"key": "field_location_expertise",
+			"label": "Areas of Expertise",
 			"name": "location_expertise",
 			"type": "relationship",
-			"label": "Areas of Expertise",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3332,9 +3332,9 @@
 		},
 		"field_location_clinical_resources": {
 			"key": "field_location_clinical_resources",
+			"label": "Clinical Resources",
 			"name": "location_clinical_resources",
 			"type": "relationship",
-			"label": "Clinical Resources",
 			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3363,9 +3363,9 @@
 		},
 		"field_location_scheduling_tab": {
 			"key": "field_location_scheduling_tab",
+			"label": "<i class=\"dashicons-calendar-alt dashicons\"><\/i> MyChart Scheduling",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-calendar-alt dashicons\"><\/i> MyChart Scheduling",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3379,9 +3379,9 @@
 		},
 		"field_location_scheduling_query": {
 			"key": "field_location_scheduling_query",
+			"label": "Enable MyChart Scheduling?",
 			"name": "location_scheduling_query",
 			"type": "true_false",
-			"label": "Enable MyChart Scheduling?",
 			"instructions": "Check with the MyChart team before doing anything here.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3398,9 +3398,9 @@
 		},
 		"field_location_scheduling_title_general": {
 			"key": "field_location_scheduling_title_general",
+			"label": "Appointment Section Title (Optional Override)",
 			"name": "location_scheduling_title_general",
 			"type": "text",
-			"label": "Appointment Section Title (Optional Override)",
 			"instructions": "If there are multiple scheduling widgets, this will define the text used in the main section heading. If you do not define a value here, \"Schedule an Appointment Online\" will be used. <br />If you define a value here, use a very short phrase that makes the purpose of the online scheduling section clear to the user. Do not just use the name of a condition or treatment. <br />If there is only one scheduling widget, the heading will be defined by a value from within the <em>MyChart Open Scheduling Widget(s)</em> repeater instead.",
 			"required": 0,
 			"conditional_logic": [
@@ -3425,9 +3425,9 @@
 		},
 		"field_location_scheduling_intro_general": {
 			"key": "field_location_scheduling_intro_general",
+			"label": "Appointment Section Introduction (Optional Override)",
 			"name": "location_scheduling_intro_general",
 			"type": "textarea",
-			"label": "Appointment Section Introduction (Optional Override)",
 			"instructions": "This paragraph introduces the online scheduling section. If you do not define a value here, it will display \"Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.\" <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3444,9 +3444,9 @@
 		},
 		"field_location_scheduling_options": {
 			"key": "field_location_scheduling_options",
+			"label": "MyChart Open Scheduling Widget Option(s)",
 			"name": "location_scheduling_options",
 			"type": "repeater",
-			"label": "MyChart Open Scheduling Widget Option(s)",
 			"instructions": "Define the information for each specific open scheduling widget. One or more must be defined.",
 			"required": 1,
 			"conditional_logic": [
@@ -3471,9 +3471,9 @@
 			"sub_fields": [
 				{
 					"key": "field_location_scheduling_title",
+					"label": "Standalone Heading Text",
 					"name": "location_scheduling_title",
 					"type": "text",
-					"label": "Standalone Heading Text",
 					"instructions": "If this is the only scheduling widget, this value will replace the main section heading (defined by <em>Appointment Section Title</em>). <br />Use a very short phrase that makes the purpose of this specific scheduling widget clear to the user. Do not just use the name of a condition or treatment.",
 					"required": 1,
 					"conditional_logic": 0,
@@ -3490,9 +3490,9 @@
 				},
 				{
 					"key": "field_location_scheduling_intro",
+					"label": "Standalone Appointment Section Introduction (Optional Override)",
 					"name": "location_scheduling_intro",
 					"type": "textarea",
-					"label": "Standalone Appointment Section Introduction (Optional Override)",
 					"instructions": "If this is the only scheduling widget, you can define a value here to replace the main section introduction (defined by <em>Appointment Section Introduction</em>) if that general introduction does not adequately introduce this specific widget. <br />If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this specific scheduling widget. There is a 221 character limit.",
 					"required": 0,
 					"conditional_logic": 0,
@@ -3509,9 +3509,9 @@
 				},
 				{
 					"key": "field_location_scheduling_item_title_nested",
+					"label": "Nested Heading Text",
 					"name": "location_scheduling_item_title_nested",
 					"type": "text",
-					"label": "Nested Heading Text",
 					"instructions": "If this is one of multiple scheduling widgets, this field defines the text of the heading immediately preceding this specific scheduling widget. This heading will be nested below the main section heading (defined by <em>Appointment Section Title</em>) in the heading outline. This will also set the label of the multiple choice option the user can select to display this specific scheduling widget. <br />Use a very short phrase, visit type name or treatment name that makes the purpose of this specific scheduling widget clear to the user.",
 					"required": 1,
 					"conditional_logic": 0,
@@ -3528,9 +3528,9 @@
 				},
 				{
 					"key": "field_location_scheduling_item_intro_nested",
+					"label": "Nested Appointment Section Introduction (Optional)",
 					"name": "location_scheduling_item_intro_nested",
 					"type": "textarea",
-					"label": "Nested Appointment Section Introduction (Optional)",
 					"instructions": "If this is one of multiple scheduling widgets, this field defines the paragraph introducing this specific scheduling widget. If used, this paragraph will not need to cover information addressed in the <em>Appointment Section Introduction</em> field, but should provide a brief overview of any information necessary for users to know about this specific scheduling widget. There is a 221 character limit.",
 					"required": 0,
 					"conditional_logic": 0,
@@ -3547,9 +3547,9 @@
 				},
 				{
 					"key": "field_location_scheduling_vt",
+					"label": "Visit Type (PRC) ID from Epic",
 					"name": "location_scheduling_vt",
 					"type": "text",
-					"label": "Visit Type (PRC) ID from Epic",
 					"instructions": "A single visit type available for scheduling in this specific widget.",
 					"required": 1,
 					"conditional_logic": 0,
@@ -3566,9 +3566,9 @@
 				},
 				{
 					"key": "field_location_scheduling_ser",
+					"label": "Provider (SER) ID from Epic",
 					"name": "location_scheduling_ser",
 					"type": "text",
-					"label": "Provider (SER) ID from Epic",
 					"instructions": "ID for one or more providers available for scheduling in this specific widget. Separate multiple values with a comma (\",\"). <br />If you specify a department, you <em>can</em> omit the list of provider IDs so all providers who are enabled for open scheduling in that department with that visit type are automatically included in the widget. <br /><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
 					"required": 0,
 					"conditional_logic": 0,
@@ -3585,9 +3585,9 @@
 				},
 				{
 					"key": "field_location_scheduling_dep",
+					"label": "Department (DEP) ID from Epic",
 					"name": "location_scheduling_dep",
 					"type": "text",
-					"label": "Department (DEP) ID from Epic",
 					"instructions": "ID for one or more departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). <br />If you specify a provider, you can omit the list of department IDs so all departments who are enabled for open scheduling with that provider and visit type are automatically included in the widget. <br /><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
 					"required": 0,
 					"conditional_logic": 0,
@@ -3626,9 +3626,9 @@
 		},
 		"field_location_external_website_tab": {
 			"key": "field_location_external_website_tab",
+			"label": "<i class=\"dashicons-admin-links dashicons\"><\/i> External Website",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-admin-links dashicons\"><\/i> External Website",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -3650,9 +3650,9 @@
 		},
 		"field_location_schema_tab": {
 			"key": "field_location_schema_tab",
+			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3666,9 +3666,9 @@
 		},
 		"field_location_alert_tab": {
 			"key": "field_location_alert_tab",
+			"label": "<i class=\"dashicons-warning dashicons\"><\/i> Alert",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-warning dashicons\"><\/i> Alert",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3725,9 +3725,9 @@
 		},
 		"field_location_alert_body_override_tip": {
 			"key": "field_location_alert_body_override_tip",
+			"label": "Overriding the alert from Find-a-Doc Settings",
 			"name": "",
 			"type": "message",
-			"label": "Overriding the alert from Find-a-Doc Settings",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -3750,9 +3750,9 @@
 		},
 		"field_location_alert_body_prepend_tip": {
 			"key": "field_location_alert_body_prepend_tip",
+			"label": "Inserting an alert before the alert from Find-a-Doc Settings",
 			"name": "",
 			"type": "message",
-			"label": "Inserting an alert before the alert from Find-a-Doc Settings",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -3775,9 +3775,9 @@
 		},
 		"field_location_alert_body_append_tip": {
 			"key": "field_location_alert_body_append_tip",
+			"label": "Inserting an alert after the alert from Find-a-Doc Settings",
 			"name": "",
 			"type": "message",
-			"label": "Inserting an alert after the alert from Find-a-Doc Settings",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -3800,9 +3800,9 @@
 		},
 		"field_location_alert_heading": {
 			"key": "field_location_alert_heading",
+			"label": "Alert Heading",
 			"name": "location_alert_heading",
 			"type": "text",
-			"label": "Alert Heading",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -3827,9 +3827,9 @@
 		},
 		"field_location_alert_body": {
 			"key": "field_location_alert_body",
+			"label": "Alert Body",
 			"name": "location_alert_body",
 			"type": "wysiwyg",
-			"label": "Alert Body",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -3871,9 +3871,9 @@
 		},
 		"field_location_alert_color": {
 			"key": "field_location_alert_color",
+			"label": "Alert Color",
 			"name": "location_alert_color",
 			"type": "select",
-			"label": "Alert Color",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -3906,9 +3906,9 @@
 		},
 		"field_location_closing_tab": {
 			"key": "field_location_closing_tab",
+			"label": "<i class=\"dashicons-dismiss dashicons\"><\/i> Closing",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-dismiss dashicons\"><\/i> Closing",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4117,9 +4117,9 @@
 		},
 		"field_location_gmb_tab": {
 			"key": "field_location_gmb_tab",
+			"label": "<i class=\"dashicons-google dashicons\"><\/i> Google My Business Details",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-google dashicons\"><\/i> Google My Business Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4528,9 +4528,9 @@
 		},
 		"field_location_deprecated_tab": {
 			"key": "field_location_deprecated_tab",
+			"label": "Deprecated Fields",
 			"name": "",
 			"type": "tab",
-			"label": "Deprecated Fields",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -4552,9 +4552,9 @@
 		},
 		"field_location_address_2": {
 			"key": "field_location_address_2",
+			"label": "Address (2) (Deprecated)",
 			"name": "location_address_2",
 			"type": "text",
-			"label": "Address (2) (Deprecated)",
 			"instructions": "Move information to Building, Building Floor, Suite fields.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4571,9 +4571,9 @@
 		},
 		"field_location_abbreviation": {
 			"key": "field_location_abbreviation",
+			"label": "Abbreviation (Deprecated)",
 			"name": "location_abbreviation",
 			"type": "text",
-			"label": "Abbreviation (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4590,9 +4590,9 @@
 		},
 		"field_location_description": {
 			"key": "field_location_description",
+			"label": "Location Description (Deprecated)",
 			"name": "location_description",
 			"type": "text",
-			"label": "Location Description (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4609,9 +4609,9 @@
 		},
 		"field_location_email": {
 			"key": "field_location_email",
+			"label": "Email (Deprecated)",
 			"name": "location_email",
 			"type": "maskfield",
-			"label": "Email (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4642,9 +4642,9 @@
 		},
 		"field_location_medical_specialties": {
 			"key": "field_location_medical_specialties",
+			"label": "Medical Specialties Offered (Deprecated)",
 			"name": "location_medical_specialties",
 			"type": "taxonomy",
-			"label": "Medical Specialties Offered (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4667,9 +4667,9 @@
 		},
 		"field_location_medical_terms": {
 			"key": "field_location_medical_terms",
+			"label": "Medical Terms (Deprecated)",
 			"name": "location_medical_terms",
 			"type": "taxonomy",
-			"label": "Medical Terms (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4692,9 +4692,9 @@
 		},
 		"field_location_clinic": {
 			"key": "field_location_clinic",
+			"label": "Clinic (Deprecated)",
 			"name": "location_clinic",
 			"type": "true_false",
-			"label": "Clinic (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4711,9 +4711,9 @@
 		},
 		"field_location_facility": {
 			"key": "field_location_facility",
+			"label": "Facility (Deprecated)",
 			"name": "location_facility",
 			"type": "true_false",
-			"label": "Facility (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4890,9 +4890,9 @@
 		},
 		"field_details_other_message": {
 			"key": "field_details_other_message",
+			"label": "(Deprecated)",
 			"name": "",
 			"type": "message",
-			"label": "(Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4907,9 +4907,9 @@
 		},
 		"field_info_depreciated_open": {
 			"key": "field_info_depreciated_open",
+			"label": "(Deprecated)",
 			"name": "",
 			"type": "accordion",
-			"label": "(Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4924,9 +4924,9 @@
 		},
 		"field_info_depreciated_end": {
 			"key": "field_info_depreciated_end",
+			"label": "(Deprecated)",
 			"name": "",
 			"type": "accordion",
-			"label": "(Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4941,9 +4941,9 @@
 		},
 		"field_details_deprecated_open": {
 			"key": "field_details_deprecated_open",
+			"label": "(Deprecated)",
 			"name": "",
 			"type": "accordion",
-			"label": "(Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4958,9 +4958,9 @@
 		},
 		"field_details_deprecated_end": {
 			"key": "field_details_deprecated_end",
+			"label": "(Deprecated)",
 			"name": "",
 			"type": "accordion",
-			"label": "(Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
