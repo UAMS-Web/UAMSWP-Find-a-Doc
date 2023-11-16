@@ -4,10 +4,10 @@
 	"fields": [
 		{
 			"key": "field_clinical_resource_excerpt",
-			"label": "Excerpt",
+			"label": "Short Description",
 			"name": "clinical_resource_excerpt",
 			"type": "textarea",
-			"instructions": "What is the resource about? <br />Limit of 160 characters. Preferred length is at least 110 characters.",
+			"instructions": "This will be the description included for this page when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -259,7 +259,7 @@
 			"label": "Infographic Introduction \/ Description",
 			"name": "clinical_resource_infographic_descr",
 			"type": "wysiwyg",
-			"instructions": "Describe the purpose of the infographic and entice users to look at it.",
+			"instructions": "This will precede the infographic on the page.</p><p class='description' style='margin-top: 0.5em;'>Describe the purpose of the infographic and entice users to look at it.",
 			"required": 1,
 			"conditional_logic": [
 				[
@@ -337,7 +337,7 @@
 			"label": "Video Introduction \/ Description",
 			"name": "clinical_resource_video_descr",
 			"type": "wysiwyg",
-			"instructions": "Describe the purpose of the video and entice users to watch it.",
+			"instructions": "This will precede the video on the page.</p><p class='description' style='margin-top: 0.5em;'>Describe the purpose of the video and entice users to watch it.",
 			"required": 1,
 			"conditional_logic": [
 				[
@@ -391,7 +391,7 @@
 			"label": "Document Introduction \/ Description",
 			"name": "clinical_resource_document_descr",
 			"type": "wysiwyg",
-			"instructions": "Summarize the key points and critical information from the attached document(s).",
+			"instructions": "This will precede the links to the documents on the page.</p><p class='description' style='margin-top: 0.5em;'>Summarize the key points and critical information from the attached document(s).",
 			"required": 1,
 			"conditional_logic": [
 				[

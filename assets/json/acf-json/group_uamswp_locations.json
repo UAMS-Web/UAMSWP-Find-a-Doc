@@ -1,6 +1,6 @@
 {
 	"key": "group_uamswp_locations",
-	"title": "Location Information",
+	"title": "Location Item Configuration",
 	"location": [
 		[
 			{
@@ -34,7 +34,7 @@
 			"key": "field_location_parent",
 			"name": "location_parent",
 			"type": "true_false",
-			"label": "Does it have a parent?",
+			"label": "Does this location have a parent location?",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -107,8 +107,8 @@
 			"key": "field_location_address_1",
 			"name": "location_address_1",
 			"type": "text",
-			"label": "Address",
-			"instructions": "",
+			"label": "Street Address",
+			"instructions": "Spell out numbered streets nine and under; use figures for <em>10</em> and above (e.g., <em>5 Sixth Ave.</em>, <em>3012 50th St.</em>, <em>No. 10 Downing St.</em>).</p><p class='description' style='margin-top: 0.5em;'>Use the abbreviations <em>Ave.</em>, <em>Blvd.</em> and <em>St.</em> Otherwise, spell out similar words (e.g., <em>Alley</em>, <em>Drive</em>, <em>Road</em>, <em>Terrace</em>).</p><p class='description' style='margin-top: 0.5em;'>Always use figures for an address number (e.g., <em>9 Morningside Circle</em>).</p><p class='description' style='margin-top: 0.5em;'>Spell out and capitalize <em>First</em> through <em>Ninth</em> when used as street names; use figures for <em>10th</em> and above (e.g., <em>7 Fifth Ave.</em>, <em>100 21st St.</em>).</p><p class='description' style='margin-top: 0.5em;'>Abbreviate compass points used to indicate directional ends of a street or quadrants of a city in a numbered address (e.g., <em>222 E. 42nd St.</em>, <em>562 W. 43rd St.</em>, <em>600 K St. NW</em>). Do not use periods in quadrant abbreviations (e.g., <em>NW</em>, <em>SE</em>).</p><p class='description' style='margin-top: 0.5em;'>Use these forms, as appropriate in the context, for highways identified by number: <em>U.S. Highway 67</em>, <em>Arkansas Highway 10</em>, <em>Interstate 630</em>.</p><p class='description' style='margin-top: 0.5em;'>When a letter is appended to a number, capitalize it but do not use a hyphen (e.g., <em>U.S. Highway 71B</em>).",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -143,10 +143,10 @@
 		},
 		"field_location_building": {
 			"key": "field_location_building",
-			"label": "Building (if any)",
+			"label": "Facility",
 			"name": "location_building",
 			"type": "taxonomy",
-			"instructions": "Select the building this location is inside. If this is not in building with a name, or if it is not a part of a larger building, select None.",
+			"instructions": "Select the most specific building or building complex this location is contained within. If it is not a part of a larger facility, select None.",
 			"required": "1",
 			"conditional_logic": "0",
 			"wrapper": {
@@ -181,7 +181,7 @@
 			},
 			"choices": {
 				"": "(Select an option)",
-				"0": "Single-Story Building",
+				"0": "Single-Story Building / The Location Is the Building",
 				"B": "Level B",
 				"G": "Ground Floor",
 				"1": "First Floor",
@@ -218,7 +218,7 @@
 			"label": "Suite or other unit",
 			"name": "location_suite",
 			"type": "text",
-			"instructions": "Indicate the area where the patient would first check in.<br />Do not just include the number (Example: enter \"Suite 1A\" not just \"1A.\").<br />Do not include landmarks (don't say \"Next to this other thing\").<br />If you are putting the name of another clinic here, this location should instead be set as a child of that location.",
+			"instructions": "Indicate the area where the patient would first check in.</p><p class='description' style='margin-top: 0.5em;'>Do not just include the number (Example: enter \"Suite 1A\" not just \"1A.\").</p><p class='description' style='margin-top: 0.5em;'>Do not include landmarks (don't say \"Next to this other thing\").</p><p class='description' style='margin-top: 0.5em;'>If you are putting the name of another clinic here, this location should instead be set as a child of that location.",
 			"required": "0",
 			"conditional_logic": "0",
 			"wrapper": {
@@ -332,7 +332,7 @@
 			"name": "location_zip",
 			"type": "maskfield",
 			"label": "ZIP Code",
-			"instructions": "",
+			"instructions": "Find the ZIP+4 Code for an address at <a href='https://tools.usps.com/zip-code-lookup.htm?byaddress' target='_blank'>https://tools.usps.com/zip-code-lookup.htm?byaddress</a>.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -351,7 +351,7 @@
 			"key": "field_location_map",
 			"name": "location_map",
 			"type": "google_map",
-			"label": "Map",
+			"label": "GPS Location of the Relevant Building Entrance",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -369,8 +369,8 @@
 			"key": "field_location_region",
 			"name": "location_region",
 			"type": "taxonomy",
-			"label": "Region",
-			"instructions": "",
+			"label": "Arkansas Region",
+			"instructions": "For information on how the Arkansas regions are defined, visit <a href='https://communications.uams.edu/web/kb/location-regions/' target='_blank'>https://communications.uams.edu/web/kb/location-regions/</a>.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -423,7 +423,7 @@
 			"key": "field_location_directions_tab",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-randomize dashicons\"><\/i> Parking &amp; Directions",
+			"label": "<i class=\"dashicons-car dashicons\"><\/i> Parking Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -447,8 +447,8 @@
 			"key": "field_location_parking_map",
 			"name": "location_parking_map",
 			"type": "google_map",
-			"label": "Parking Map",
-			"instructions": "Place pin on the parking location (if different than building)",
+			"label": "GPS Location of the Main Parking Area",
+			"instructions": "If the parking area is a parking deck, place the pin on the entrance to the parking deck from the street.</p><p class='description' style='margin-top: 0.5em;'>If the parking area is a surface-level parking lot, place the pin in the middle of the parking lot.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -466,7 +466,7 @@
 			"name": "location_parking",
 			"type": "wysiwyg",
 			"label": "Parking Instructions",
-			"instructions": "",
+			"instructions": "Indicate whether patients will park in a parking deck or surface-level parking.</p><p class='description' style='margin-top: 0.5em;'>Indicate which parking lot, parking deck or other area in which patients will park when coming to this location.</p><p class='description' style='margin-top: 0.5em;'>Indicate whether or not patients will have to pay for parking.</p><p class='description' style='margin-top: 0.5em;'>If there is a parking fee for patients, indicate whether or not this location validates parking.</p><p class='description' style='margin-top: 0.5em;'>If patients will be parking in a specific parking deck, indicate the ideal area of the parking deck in which patients should park. If there is a patient drop-off area, also include details about that.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -485,7 +485,7 @@
 			"name": "location_direction",
 			"type": "wysiwyg",
 			"label": "Directions From Parking Area",
-			"instructions": "",
+			"instructions": "Comprehensively describe the path patients should take when coming from their vehicle — whether at the patient drop-off area or in the parking area — to the entrance or check-in area for the location.</p><p class='description' style='margin-top: 0.5em;'>If the parking area is a parking deck, include instructions regarding how to locate the appropriate elevators and stairs in the parking deck, then include the parking deck level to which they should take those elevators or stairs.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -897,8 +897,8 @@
 			"key": "field_location_phone_numbers",
 			"name": "location_phone_numbers",
 			"type": "repeater",
-			"label": "Additional Phone Numbers (if needed):",
-			"instructions": "Example: <br\/>After Hours: ###-###-####",
+			"label": "Additional Phone Numbers",
+			"instructions": "Add any additional phone numbers for this location (e.g., after hours nurse line).",
 			"required": 0,
 			"conditional_logic": [
 				[
@@ -922,7 +922,7 @@
 			"sub_fields": [
 				{
 					"key": "field_location_appointments_text",
-					"label": "Text",
+					"label": "Label for Phone Number",
 					"name": "location_appointments_text",
 					"type": "text",
 					"instructions": "",
@@ -941,7 +941,7 @@
 				},
 				{
 					"key": "field_location_appointments_phone",
-					"label": "Phone #",
+					"label": "Phone Number",
 					"name": "location_appointments_phone",
 					"type": "maskfield",
 					"instructions": "",
@@ -956,7 +956,7 @@
 				},
 				{
 					"key": "field_location_appointments_additional_text",
-					"label": "Additional Text",
+					"label": "Additional Description of Phone Number",
 					"name": "location_appointments_additional_text",
 					"type": "text",
 					"instructions": "",
@@ -2168,8 +2168,8 @@
 					"key": "field_after_hours",
 					"name": "location_after_hours",
 					"type": "wysiwyg",
-					"label": "After Hours Information",
-					"instructions": "",
+					"label": "Information for When the Location Is Closed",
+					"instructions": "Describe what patients should do if they need assistance when this location is closed.",
 					"required": 0,
 					"conditional_logic": 0,
 					"wrapper": {
@@ -2185,7 +2185,7 @@
 				},
 				{
 					"key": "field_location_modified_hours_tab",
-					"label": "Modified Hours",
+					"label": "Modified In-Person Hours",
 					"name": "",
 					"type": "tab",
 					"instructions": "",
@@ -2210,7 +2210,7 @@
 				},
 				{
 					"key": "field_location_modified_hours",
-					"label": "Upcoming Modified Hours",
+					"label": "Are there any upcoming modified in-person hours of operation?",
 					"name": "location_modified_hours",
 					"type": "true_false",
 					"instructions": "",
@@ -2230,10 +2230,10 @@
 				},
 				{
 					"key": "field_location_modified_hours_reason",
-					"label": "Reason for Modified Hours",
+					"label": "Reason for Modified In-Person Hours of Operation",
 					"name": "location_modified_hours_reason",
 					"type": "wysiwyg",
-					"instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.<br /><br />The date range will be displayed automatically, so that does not have to be included in this field.",
+					"instructions": "Describe the overall reason the in-person hours of operation are being modified. This might be because of a holiday or public health emergency.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>The date range will be displayed automatically, so that does not have to be included in this field.",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -2258,10 +2258,10 @@
 				},
 				{
 					"key": "field_location_modified_hours_start_date",
-					"label": "Modified Hours Start Date",
+					"label": "Start Date For the Modified In-Person Hours of Operation",
 					"name": "location_modified_hours_start_date",
 					"type": "date_picker",
-					"instructions": "",
+					"instructions": "The date when the modified in-person hours of operation begin.",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -2284,7 +2284,7 @@
 				},
 				{
 					"key": "field_location_modified_hours_end",
-					"label": "Is there a Modified Hours End Date?",
+					"label": "Is there an end date for the modified in-person hours of operation?",
 					"name": "location_modified_hours_end",
 					"type": "true_false",
 					"instructions": "",
@@ -2312,10 +2312,10 @@
 				},
 				{
 					"key": "field_location_modified_hours_end_date",
-					"label": "Modified Hours End Date",
+					"label": "End Date For the Modified In-Person Hours of Operation",
 					"name": "location_modified_hours_end_date",
 					"type": "date_picker",
-					"instructions": "",
+					"instructions": "The date after which the modified in-person hours of operation end.",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -2338,7 +2338,7 @@
 				},
 				{
 					"key": "field_location_modified_hours_group",
-					"label": "Modified Hours",
+					"label": "Individual Modified In-Person Hours of Operation",
 					"name": "location_modified_hours_group",
 					"type": "repeater",
 					"instructions": "",
@@ -2370,7 +2370,7 @@
 							"label": "Title",
 							"name": "location_modified_hours_title",
 							"type": "text",
-							"instructions": "",
+							"instructions": "Define the text to be used in the heading for this set of modified hours (e.g., \"Thanksgiving Holiday Hours\").",
 							"required": 0,
 							"conditional_logic": 0,
 							"wrapper": {
@@ -2390,7 +2390,7 @@
 							"label": "Information",
 							"name": "location_modified_hours_information",
 							"type": "wysiwyg",
-							"instructions": "This field can include a description of the modification if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.<br /><br />Or you can add information in addition to the structured days and hours.",
+							"instructions": "This field can include a description of the modification if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>Or you can add information in addition to the structured days and hours.",
 							"required": 0,
 							"conditional_logic": 0,
 							"wrapper": {
@@ -2426,7 +2426,7 @@
 						},
 						{
 							"key": "field_location_modified_hours_times",
-							"label": "Hours",
+							"label": "Modified In-Person Hours of Operation",
 							"name": "location_modified_hours_times",
 							"type": "repeater",
 							"instructions": "Set the time for all seven days.",
@@ -2473,13 +2473,13 @@
 									},
 									"acfe_permissions": "",
 									"choices": {
+										"Sunday": "Sunday",
 										"Monday": "Monday",
 										"Tuesday": "Tuesday",
 										"Wednesday": "Wednesday",
 										"Thursday": "Thursday",
 										"Friday": "Friday",
 										"Saturday": "Saturday",
-										"Sunday": "Sunday",
 										"Mon - Fri": "Mon - Fri"
 									},
 									"default_value": [],
@@ -2512,7 +2512,7 @@
 								},
 								{
 									"key": "field_location_modified_hours_open",
-									"label": "Open",
+									"label": "Opens",
 									"name": "location_modified_hours_open",
 									"type": "time_picker",
 									"instructions": "",
@@ -2537,7 +2537,7 @@
 								},
 								{
 									"key": "field_location_modified_hours_close",
-									"label": "Close",
+									"label": "Closes",
 									"name": "location_modified_hours_close",
 									"type": "time_picker",
 									"instructions": "",
@@ -2668,7 +2668,7 @@
 						},
 						{
 							"key": "field_holiday_open",
-							"label": "Open",
+							"label": "Opens",
 							"name": "open",
 							"type": "time_picker",
 							"instructions": "",
@@ -2692,7 +2692,7 @@
 						},
 						{
 							"key": "field_holiday_close",
-							"label": "Close",
+							"label": "Closes",
 							"name": "close",
 							"type": "time_picker",
 							"instructions": "",
@@ -2782,7 +2782,7 @@
 					"key": "field_location_telemed_patients",
 					"name": "location_telemed_patients",
 					"type": "radio",
-					"label": "Patient Type",
+					"label": "Telemedicine Patient Type",
 					"instructions": "Which type of patients can use the telemedicine services offered at this location?",
 					"required": 1,
 					"conditional_logic": [
@@ -2815,7 +2815,7 @@
 					"key": "field_location_telemed_24_7",
 					"name": "location_telemed_24_7",
 					"type": "true_false",
-					"label": "Is telemedicine typically available 24\/7?",
+					"label": "Is telemedicine typically available 24\/7 at this location?",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": [
@@ -2842,7 +2842,7 @@
 					"key": "field_location_telemed_hours",
 					"name": "location_telemed_hours",
 					"type": "repeater",
-					"label": "Typical Telemedicine Hours",
+					"label": "Typical Telemedicine Hours of Operation",
 					"instructions": "Set the time for all seven days.",
 					"required": 0,
 					"conditional_logic": [
@@ -2884,13 +2884,13 @@
 								"id": ""
 							},
 							"choices": {
+								"Sunday": "Sunday",
 								"Monday": "Monday",
 								"Tuesday": "Tuesday",
 								"Wednesday": "Wednesday",
 								"Thursday": "Thursday",
 								"Friday": "Friday",
 								"Saturday": "Saturday",
-								"Sunday": "Sunday",
 								"Mon - Fri": "Mon - Fri"
 							},
 							"default_value": [],
@@ -2922,7 +2922,7 @@
 						},
 						{
 							"key": "field_telemed_hours_open",
-							"label": "Open Time",
+							"label": "Opens",
 							"name": "open",
 							"type": "time_picker",
 							"instructions": "",
@@ -2946,7 +2946,7 @@
 						},
 						{
 							"key": "field_telemed_hours_close",
-							"label": "Close Time",
+							"label": "Closes",
 							"name": "close",
 							"type": "time_picker",
 							"instructions": "",
@@ -3016,7 +3016,7 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_query",
-					"label": "Upcoming Modified Telemedicine Hours",
+					"label": "Are there any upcoming modified telemedicine hours of operation?",
 					"name": "location_telemed_modified_hours_query",
 					"type": "true_false",
 					"instructions": "",
@@ -3044,10 +3044,10 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_reason",
-					"label": "Reason for Modified Telemedicine Hours",
+					"label": "Reason for Modified Telemedicine Hours of Operation",
 					"name": "location_telemed_modified_hours_reason",
 					"type": "wysiwyg",
-					"instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.<br /><br />This field can also include a description of the modification, if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.<br /><br />The date range will be displayed automatically, so that does not have to be included in this field..",
+					"instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>This field can also include a description of the modification, if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>The date range will be displayed automatically, so that does not have to be included in this field..",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -3072,10 +3072,10 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_start_date",
-					"label": "Modified Telemedicine Hours Start Date",
+					"label": "Start Date For the Modified Telemedicine Hours of Operation",
 					"name": "location_telemed_modified_hours_start_date",
 					"type": "date_picker",
-					"instructions": "",
+					"instructions": "The date when the modified telemedicine hours of operation begin.",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -3098,7 +3098,7 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_end",
-					"label": "Is there a Modified Telemedicine Hours End Date?",
+					"label": "Is there an end date for the modified telemedicine hours of operation?",
 					"name": "location_telemed_modified_hours_end",
 					"type": "true_false",
 					"instructions": "",
@@ -3126,10 +3126,10 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_end_date",
-					"label": "Modified Telemedicine Hours End Date",
+					"label": "End Date For the Modified Telemedicine Hours of Operation",
 					"name": "location_telemed_modified_hours_end_date",
 					"type": "date_picker",
-					"instructions": "",
+					"instructions": "The date after which the modified telemedicine hours of operation end.",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -3154,7 +3154,7 @@
 					"key": "field_location_telemed_modified_hours_24_7",
 					"name": "location_telemed_modified_hours_24_7",
 					"type": "true_false",
-					"label": "Is telemedicine available 24\/7 during these modified hours?",
+					"label": "Is telemedicine available 24\/7 during these modified telemedicine hours of operation?",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": [
@@ -3179,7 +3179,7 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_times",
-					"label": "Hours",
+					"label": "Modified Telemedicine Hours of Operation",
 					"name": "location_telemed_modified_hours_times",
 					"type": "repeater",
 					"instructions": "Set the time for all seven days.",
@@ -3226,13 +3226,13 @@
 							},
 							"acfe_permissions": "",
 							"choices": {
+								"Sunday": "Sunday",
 								"Monday": "Monday",
 								"Tuesday": "Tuesday",
 								"Wednesday": "Wednesday",
 								"Thursday": "Thursday",
 								"Friday": "Friday",
 								"Saturday": "Saturday",
-								"Sunday": "Sunday",
 								"Mon - Fri": "Mon - Fri"
 							},
 							"default_value": [],
@@ -3265,7 +3265,7 @@
 						},
 						{
 							"key": "field_location_telemed_modified_hours_open",
-							"label": "Open",
+							"label": "Opens",
 							"name": "location_telemed_modified_hours_open",
 							"type": "time_picker",
 							"instructions": "",
@@ -3290,7 +3290,7 @@
 						},
 						{
 							"key": "field_location_telemed_modified_hours_close",
-							"label": "Close",
+							"label": "Closes",
 							"name": "location_telemed_modified_hours_close",
 							"type": "time_picker",
 							"instructions": "",
@@ -4410,7 +4410,7 @@
 			"key": "field_location_gmb_tab",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-location dashicons\"><\/i> Google My Business",
+			"label": "<i class=\"dashicons-google dashicons\"><\/i> Google My Business Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -4424,7 +4424,7 @@
 		},
 		"field_location_gmb_exclude": {
 			"key": "field_location_gmb_exclude",
-			"label": "Exclude Listing in Google My Business",
+			"label": "Should this location be excluded from any bulk imports and updates in Google My Business?",
 			"name": "location_gmb_exclude",
 			"type": "button_group",
 			"instructions": "",
@@ -4446,7 +4446,7 @@
 		},
 		"field_location_gmb_prefix": {
 			"key": "field_location_gmb_prefix",
-			"label": "Include \"UAMS Health - \" prefix in listing name",
+			"label": "Should \"UAMS Health\" be prepended to the location name on the Google My Business listing?",
 			"name": "location_gmb_prefix",
 			"type": "button_group",
 			"instructions": "",
@@ -4476,10 +4476,10 @@
 		},
 	"field_location_gmb_cat": {
 			"key": "field_location_gmb_cat",
-			"label": "Category",
+			"label": "Google My Business Category",
 			"name": "location_gmb_cat",
 			"type": "taxonomy",
-			"instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Medical Clinic\" is a good standard choice, if you cannot find a better option.<br />For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",
+			"instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Medical Clinic\" is a good standard choice, if you cannot find a better option.</p><p class='description' style='margin-top: 0.5em;'>For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",
 			"required": "1",
 			"conditional_logic": [
 				[
@@ -4513,7 +4513,7 @@
 			"name": "has_wheelchair_accessible_elevator",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4544,7 +4544,7 @@
 			"name": "has_wheelchair_accessible_entrance",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4575,7 +4575,7 @@
 			"name": "has_wheelchair_accessible_restroom",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4606,7 +4606,7 @@
 			"name": "has_restroom",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4637,7 +4637,7 @@
 			"name": "requires_appointments",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4668,7 +4668,7 @@
 			"name": "requires_temperature_check_customers",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4699,7 +4699,7 @@
 			"name": "requires_masks_customers",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4730,7 +4730,7 @@
 			"name": "requires_temperature_check_staff",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4761,7 +4761,7 @@
 			"name": "requires_masks_staff",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4792,7 +4792,7 @@
 			"name": "is_sanitizing_between_customers",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{

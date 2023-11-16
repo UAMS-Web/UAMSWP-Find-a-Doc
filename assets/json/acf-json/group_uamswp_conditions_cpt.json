@@ -1,13 +1,13 @@
 {
 	"key": "group_conditions_cpt",
-	"title": "Conditions",
+	"title": "Condition Item Configuration",
 	"fields": [
 		{
 			"key": "field_condition_alternate",
-			"label": "Alternate names",
+			"label": "Alternate Name(s) for This Condition",
 			"name": "condition_alternate",
 			"type": "repeater",
-			"instructions": "Insert additional names \/ phrases",
+			"instructions": "Insert any other names, phrases or acronyms that this condition may be known by. Separate each alternate name into its own item.</p><p class='description' style='margin-top: 0.5em;'>These alternate names will be used to help this page appear in search results for those terms.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -173,8 +173,8 @@
 			"key": "field_condition_youtube_link",
 			"name": "condition_youtube_link",
 			"type": "url",
-			"label": "Featured Youtube video",
-			"instructions": "Full URL, including https:\/\/",
+			"label": "Featured Video",
+			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this condition and that supports the content of this page. Include the full URL, including https:\/\/",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -189,8 +189,8 @@
 			"key": "field_condition_short_desc",
 			"name": "condition_short_desc",
 			"type": "textarea",
-			"label": "Short Description (excerpt)",
-			"instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
+			"label": "Short Description",
+			"instructions": "This will be the description included for this page when it appears in search results.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -693,7 +693,7 @@
 			"name": "condition_podcast_name",
 			"type": "text",
 			"label": "UAMS Health Talk Podcast Topic Name",
-			"instructions": "Topic name as listed in the dropdown",
+			"instructions": "Include a single topic name as listed in the \"Topics\" dropdown of the embedded player on <a href=\"https://uamshealth.com/podcast/\" title=\"UAMS Health Talk Podcast\" target=\"_blank\">https://uamshealth.com/podcast/</a>.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
