@@ -357,6 +357,38 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_physician_brandorg": {
+			"key": "field_physician_brandorg",
+			"label": "Third-Party Brand Organization",
+			"name": "physician_brandorg",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_brand_tab",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_brandorg_multiple"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
 		"field_physician_portrait_tab": {
 			"key": "field_physician_portrait_tab",
 			"name": "",
