@@ -1991,8 +1991,8 @@
 						[
 							{
 								"field": "field_location_hours_variable",
-								"operator": "!=",
-								"value": "1"
+								"operator": "==",
+								"value": "0"
 							}
 						]
 					],
@@ -2022,13 +2022,13 @@
 						[
 							{
 								"field": "field_location_hours_variable",
-								"operator": "!=",
-								"value": "1"
+								"operator": "==",
+								"value": "0"
 							},
 							{
 								"field": "field_location_24_7",
-								"operator": "!=",
-								"value": "1"
+								"operator": "==",
+								"value": "0"
 							}
 						]
 					],
@@ -2108,8 +2108,8 @@
 								[
 									{
 										"field": "field_hours_closed",
-										"operator": "!=",
-										"value": "1"
+										"operator": "==",
+										"value": "0"
 									}
 								]
 							],
@@ -2132,8 +2132,8 @@
 								[
 									{
 										"field": "field_hours_closed",
-										"operator": "!=",
-										"value": "1"
+										"operator": "==",
+										"value": "0"
 									}
 								]
 							],
