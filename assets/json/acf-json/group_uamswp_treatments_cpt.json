@@ -19,6 +19,29 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_treatment_procedure_searchable",
+			"label": "Make this treatment searchable?",
+			"name": "treatment_procedure_searchable",
+			"type": "button_group",
+			"instructions": "Should this treatment be used to help return results for associated items like providers, locations, etc.?",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_treatment_procedure_alternate",
 			"label": "Alternate Name(s) for This Treatment or Procedure",
 			"name": "treatment_procedure_alternate",
