@@ -42,8 +42,8 @@
 		},
 		"field_expertise_type": {
 			"key": "field_expertise_type",
-			"name": "expertise_type",
 			"label": "What Type of Content Is This Page?",
+			"name": "expertise_type",
 			"type": "true_false",
 			"instructions": "",
 			"required": 0,
@@ -61,8 +61,8 @@
 		},
 		"field_expertise_short_desc_query": {
 			"key": "field_expertise_short_desc_query",
-			"name": "expertise_short_desc_query",
 			"label": "Use This Page's Intro Text As the Short Description for This Page?",
+			"name": "expertise_short_desc_query",
 			"type": "true_false",
 			"instructions": "Decide which text to use as the short description. The short description is what is included for this area of expertise page when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>The Intro Text is defined in under the Page Header Details tab. Choosing the \"Hero\" header style will force the Short Description to be used.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
 			"required": 0,
@@ -88,9 +88,9 @@
 		},
 		"field_expertise_short_desc": {
 			"key": "field_expertise_short_desc",
+			"label": "Short Description for This Page",
 			"name": "post_excerpt",
 			"type": "textarea",
-			"label": "Short Description for This Page",
 			"instructions": "This will be the description included for this page when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
 			"required": 1,
 			"conditional_logic": [
@@ -122,8 +122,8 @@
 		},
 		"field_expertise_selected_post_excerpt": {
 			"key": "field_expertise_selected_post_excerpt",
-			"name": "expertise_selected_post_excerpt",
 			"label": "Selected Post Excerpt",
+			"name": "expertise_selected_post_excerpt",
 			"type": "textarea",
 			"instructions": "Dynamically populated by an 'acf/save_post' action",
 			"required": 0,
@@ -337,9 +337,9 @@
 		},
 		"field_expertise_brand_tab": {
 			"key": "field_expertise_brand_tab",
+			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -512,9 +512,9 @@
 		},
 		"field_expertise_youtube_link": {
 			"key": "field_expertise_youtube_link",
+			"label": "Featured Video (Deprecated)",
 			"name": "expertise_youtube_link",
 			"type": "url",
-			"label": "Featured Video (Deprecated)",
 			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this area of expertise and that supports the content of this page. Include the full URL, including https:\/\/",
 			"required": 0,
 			"conditional_logic": 0,
@@ -528,9 +528,9 @@
 		},
 		"field_expertise_podcast_name": {
 			"key": "field_expertise_podcast_name",
+			"label": "UAMS Health Talk Podcast Topic Name",
 			"name": "expertise_podcast_name",
 			"type": "text",
-			"label": "UAMS Health Talk Podcast Topic Name",
 			"instructions": "Include a single topic name as listed in the \"Topics\" dropdown of the embedded player on <a href=\"https://uamshealth.com/podcast/\" title=\"UAMS Health Talk Podcast\" target=\"_blank\">https://uamshealth.com/podcast/</a>.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -571,9 +571,9 @@
 		},
 		"field_expertise_physicians": {
 			"key": "field_expertise_physicians",
+			"label": "Related Providers",
 			"name": "physician_expertise",
 			"type": "relationship",
-			"label": "Related Providers",
 			"instructions": "Include all providers who have this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>The providers will be displayed on a subpage, arranged in alphabetical order by their last name.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -622,8 +622,8 @@
 		},
 		"field_expertise_providers_fpage_short_desc_query": {
 			"key": "field_expertise_providers_fpage_short_desc_query",
-			"name": "expertise_providers_fpage_short_desc_query",
 			"label": "Use Intro Text as the Short Description for Related Providers Subpage?",
+			"name": "expertise_providers_fpage_short_desc_query",
 			"type": "true_false",
 			"instructions": "Decide which text to use as the short description. The short description is what is included for the related providers subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
 			"required": 0,
@@ -641,9 +641,9 @@
 		},
 		"field_expertise_providers_fpage_short_desc": {
 			"key": "field_expertise_providers_fpage_short_desc",
+			"label": "Short Description for Related Providers Subpage",
 			"name": "expertise_providers_fpage_short_desc",
 			"type": "textarea",
-			"label": "Short Description for Related Providers Subpage",
 			"instructions": "This will be the description included for the related providers subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
 			"required": 1,
 			"conditional_logic": [
@@ -724,9 +724,9 @@
 		},
 		"field_expertise_locations": {
 			"key": "field_expertise_locations",
+			"label": "Related Locations",
 			"name": "location_expertise",
 			"type": "relationship",
-			"label": "Related Locations",
 			"instructions": "Include all locations where this area of expertise is represented.</p><p class='description' style='margin-top: 0.5em;'>The locations will be displayed on a subpage, arranged in alphabetical order.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -775,8 +775,8 @@
 		},
 		"field_expertise_locations_fpage_short_desc_query": {
 			"key": "field_expertise_locations_fpage_short_desc_query",
-			"name": "expertise_locations_fpage_short_desc_query",
 			"label": "Use Intro Text as the Short Description for Related Locations Subpage?",
+			"name": "expertise_locations_fpage_short_desc_query",
 			"type": "true_false",
 			"instructions": "Decide which text to use as the short description. The short description is what is included for the related locations subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
 			"required": 0,
@@ -794,9 +794,9 @@
 		},
 		"field_expertise_locations_fpage_short_desc": {
 			"key": "field_expertise_locations_fpage_short_desc",
+			"label": "Short Description for Related Locations Subpage",
 			"name": "expertise_locations_fpage_short_desc",
 			"type": "textarea",
-			"label": "Short Description for Related Locations Subpage",
 			"instructions": "This will be the description included for the related locations subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
 			"required": 1,
 			"conditional_logic": [
@@ -853,9 +853,9 @@
 		},
 		"field_expertise_region": {
 			"key": "field_expertise_region",
+			"label": "Region",
 			"name": "expertise_region",
 			"type": "taxonomy",
-			"label": "Region",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -930,8 +930,8 @@
 		},
 		"field_expertise_descendant_fpage_short_desc_query": {
 			"key": "field_expertise_descendant_fpage_short_desc_query",
-			"name": "expertise_descendant_fpage_short_desc_query",
 			"label": "Use Intro Text as the Short Description for Descendant Areas of Expertise Subpage?",
+			"name": "expertise_descendant_fpage_short_desc_query",
 			"type": "true_false",
 			"instructions": "Decide which text to use as the short description. The short description is what is included for the descendant areas of expertise subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
 			"required": 0,
@@ -949,9 +949,9 @@
 		},
 		"field_expertise_descendant_fpage_short_desc": {
 			"key": "field_expertise_descendant_fpage_short_desc",
+			"label": "Short Description for Descendant Areas of Expertise Subpage",
 			"name": "expertise_descendant_fpage_short_desc",
 			"type": "textarea",
-			"label": "Short Description for Descendant Areas of Expertise Subpage",
 			"instructions": "This will be the description included for the descendant areas of expertise subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
 			"required": 1,
 			"conditional_logic": [
@@ -1032,9 +1032,9 @@
 		},
 		"field_expertise_associated": {
 			"key": "field_expertise_associated",
+			"label": "Related Areas of Expertise",
 			"name": "expertise_associated",
 			"type": "relationship",
-			"label": "Related Areas of Expertise",
 			"instructions": "Include all areas of expertise that are related to this area of expertise. An example of a related area of expertise would be one that is also represented in treatment plans associated with this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>Areas of expertise that are nested under this area of expertise are excluded from this list.</p><p class='description' style='margin-top: 0.5em;'>The related areas of expertise will be displayed on a subpage, arranged in alphabetical order.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1077,8 +1077,8 @@
 		},
 		"field_expertise_associated_fpage_short_desc_query": {
 			"key": "field_expertise_associated_fpage_short_desc_query",
-			"name": "expertise_associated_fpage_short_desc_query",
 			"label": "Use Intro Text as the Short Description for Related Areas of Expertise Subpage?",
+			"name": "expertise_associated_fpage_short_desc_query",
 			"type": "true_false",
 			"instructions": "Decide which text to use as the short description. The short description is what is included for the related areas of expertise subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
 			"required": 0,
@@ -1096,9 +1096,9 @@
 		},
 		"field_expertise_associated_fpage_short_desc": {
 			"key": "field_expertise_associated_fpage_short_desc",
+			"label": "Short Description for Related Areas of Expertise Subpage",
 			"name": "expertise_associated_fpage_short_desc",
 			"type": "textarea",
-			"label": "Short Description for Related Areas of Expertise Subpage",
 			"instructions": "This will be the description included for the related areas of expertise subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
 			"required": 1,
 			"conditional_logic": [
@@ -1179,9 +1179,9 @@
 		},
 		"field_expertise_clinical_resources": {
 			"key": "field_expertise_clinical_resources",
+			"label": "Related Clinical Resources",
 			"name": "expertise_clinical_resources",
 			"type": "relationship",
-			"label": "Related Clinical Resources",
 			"instructions": "Include all clinical resources that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These clinical resources will be displayed on a subpage, arranged in the order in which they were published, with the most recently published resources being listed first.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1230,8 +1230,8 @@
 		},
 		"field_expertise_clinical_resources_fpage_short_desc_query": {
 			"key": "field_expertise_clinical_resources_fpage_short_desc_query",
-			"name": "expertise_clinical_resources_fpage_short_desc_query",
 			"label": "Use Intro Text as the Short Description for Related Clinical Resources Subpage?",
+			"name": "expertise_clinical_resources_fpage_short_desc_query",
 			"type": "true_false",
 			"instructions": "Decide which text to use as the short description. The short description is what is included for the related clinical resources subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
 			"required": 0,
@@ -1249,9 +1249,9 @@
 		},
 		"field_expertise_clinical_resources_fpage_short_desc": {
 			"key": "field_expertise_clinical_resources_fpage_short_desc",
+			"label": "Short Description for Related Clinical Resources Subpage",
 			"name": "expertise_clinical_resources_fpage_short_desc",
 			"type": "textarea",
-			"label": "Short Description for Related Clinical Resources Subpage",
 			"instructions": "This will be the description included for the related clinical resources subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
 			"required": 1,
 			"conditional_logic": [
@@ -1405,9 +1405,9 @@
 		},
 		"field_expertise_treatments_cpt": {
 			"key": "field_expertise_treatments_cpt",
+			"label": "Related Treatments and Procedures",
 			"name": "expertise_treatments_cpt",
 			"type": "relationship",
-			"label": "Related Treatments and Procedures",
 			"instructions": "Include all treatments and procedures that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These treatments and procedures will be displayed in a block on the main page for this area of expertise, arranged in the alphabetical order.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1482,8 +1482,8 @@
 		},
 		"field_expertise_schema_medicalspecialty": {
 			"key": "field_expertise_schema_medicalspecialty",
-			"name": "expertise_schema_medicalspecialty",
 			"label": "Relevant Specialty (relevantSpecialty > MedicalSpecialty)",
+			"name": "expertise_schema_medicalspecialty",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
@@ -1506,8 +1506,8 @@
 		},
 		"field_expertise_schema_code_nucc": {
 			"key": "field_expertise_schema_code_nucc",
-			"name": "expertise_schema_code_nucc",
 			"label": "Matching Classification(s) and/or Specialization(s) From the Health Care Provider Taxonomy Code Set (code > MedicalCode)",
+			"name": "expertise_schema_code_nucc",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
@@ -1531,8 +1531,8 @@
 		},
 		"field_expertise_schema_medicalcode": {
 			"key": "field_expertise_schema_medicalcode",
-			"name": "expertise_schema_medicalcode",
 			"label": "Medical Code(s) for This Entity (code > MedicalCode)",
+			"name": "expertise_schema_medicalcode",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
@@ -1556,8 +1556,8 @@
 		},
 		"field_expertise_schema_sameas": {
 			"key": "field_expertise_schema_sameas",
-			"name": "expertise_schema_sameas",
 			"label": "Reference Webpage(s) About This Area of Expertise (sameAs > URL)",
+			"name": "expertise_schema_sameas",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
@@ -1580,8 +1580,8 @@
 		},
 		"field_expertise_schema_medicinesystem": {
 			"key": "field_expertise_schema_medicinesystem",
-			"name": "expertise_schema_medicinesystem",
 			"label": "Related System(s) of Medical Practice (medicineSystem > MedicineSystem)",
+			"name": "expertise_schema_medicinesystem",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
@@ -1936,9 +1936,9 @@
 		},
 		"field_medical_terms": {
 			"key": "field_expertise_medical_terms",
+			"label": "Medical Terms (Tags)",
 			"name": "expertise_medical_terms",
 			"type": "taxonomy",
-			"label": "Medical Terms (Tags)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [

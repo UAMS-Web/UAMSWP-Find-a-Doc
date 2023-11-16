@@ -28,8 +28,8 @@
 	"fields": {
 		"field_degree_name": {
 			"key": "field_degree_name",
-			"name": "degree_name",
 			"label": "Full Name of the Clinical Degree or Credential",
+			"name": "degree_name",
 			"type": "text",
 			"instructions": "",
 			"required": 1,
@@ -47,8 +47,8 @@
 		},
 		"field_degree_ctdl": {
 			"key": "field_degree_ctdl",
-			"name": "degree_ctdl",
 			"label": "Credential Transparency Description Language Schema Term",
+			"name": "degree_ctdl",
 			"type": "select",
 			"instructions": "Find information about each term in this schema at <a href='https://credreg.net/ctdl/terms/' target='_blank'>https://credreg.net/ctdl/terms/</a>.",
 			"required": 1,
@@ -106,8 +106,8 @@
 		},
 		"field_degree_alternatename": {
 			"key": "field_degree_alternatename",
-			"name": "degree_alternatename",
 			"label": "Alternate Names for the Clinical Degree or Credential",
+			"name": "degree_alternatename",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
@@ -130,8 +130,8 @@
 		},
 		"field_degree_sameas": {
 			"key": "field_degree_sameas",
-			"name": "degree_sameas",
 			"label": "Reference Webpages for the Clinical Degree or Credential",
+			"name": "degree_sameas",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,

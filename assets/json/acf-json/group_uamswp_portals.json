@@ -28,9 +28,9 @@
 	"fields": {
 		"field_specialty_url": {
 			"key": "field_portal_url",
+			"label": "Link to Portal",
 			"name": "portal_url",
 			"type": "link",
-			"label": "Link to Portal",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,

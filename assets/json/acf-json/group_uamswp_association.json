@@ -28,8 +28,8 @@
 	"fields": {
 		"field_association_url": {
 			"key": "field_association_url",
-			"name": "association_url",
 			"label": "Association Website URL",
+			"name": "association_url",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
@@ -52,8 +52,8 @@
 		},
 		"field_association_sameas": {
 			"key": "field_association_sameas",
-			"name": "association_sameas",
 			"label": "Association Reference Webpages",
+			"name": "association_sameas",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
@@ -76,8 +76,8 @@
 		},
 		"field_association_alternatename": {
 			"key": "field_association_alternatename",
-			"name": "association_alternatename",
 			"label": "Alternate Names for the Association",
+			"name": "association_alternatename",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,

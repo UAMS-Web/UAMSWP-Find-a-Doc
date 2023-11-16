@@ -45,8 +45,8 @@
 		},
 		"field_certifying_body_url_query": {
 			"key": "field_certifying_body_url_query",
-			"name": "certifying_body_url_query",
 			"label": "Does this certifying body have a website?",
+			"name": "certifying_body_url_query",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -69,8 +69,8 @@
 		},
 		"field_certifying_body_url": {
 			"key": "field_certifying_body_url",
-			"name": "certifying_body_url",
 			"label": "Certifying Body Website URL",
+			"name": "certifying_body_url",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
@@ -101,8 +101,8 @@
 		},
 		"field_certifying_body_alternatename": {
 			"key": "field_certifying_body_alternatename",
-			"name": "certifying_body_alternatename",
 			"label": "Alternate Names for the Certifying Body",
+			"name": "certifying_body_alternatename",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
@@ -125,8 +125,8 @@
 		},
 		"field_certifying_body_sameas": {
 			"key": "field_certifying_body_sameas",
-			"name": "certifying_body_sameas",
 			"label": "Reference Webpages for the Certifying Body",
+			"name": "certifying_body_sameas",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,

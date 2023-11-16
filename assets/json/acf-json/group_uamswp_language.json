@@ -28,9 +28,9 @@
 	"fields": {
 		"field_language_name_native_query": {
 			"key": "field_language_name_native_query",
+			"label": "Is the English name for this language (exonym / xenonym) different from the native name (endonym / autonym)?",
 			"name": "language_name_native_query",
 			"type": "button_group",
-			"label": "Is the English name for this language (exonym / xenonym) different from the native name (endonym / autonym)?",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -50,8 +50,8 @@
 		},
 		"field_language_name_native": {
 			"key": "field_language_name_native",
-			"name": "language_name_native",
 			"label": "Native Name of Language (Endonym / Autonym)",
+			"name": "language_name_native",
 			"type": "text",
 			"instructions": "Example: \"Persian\" is the English name (exonym / xenonym), while \"Farsi\" is the native name (endonym / autonym)",
 			"required": 1,
@@ -77,8 +77,8 @@
 		},
 		"field_language_bcp47": {
 			"key": "field_language_bcp47",
-			"name": "language_bcp47",
 			"label": "Internet Engineering Task Force Best Current Practice 47 (IETF BCP 47) Language Tag",
+			"name": "language_bcp47",
 			"type": "text",
 			"instructions": "Look up the two- or three-letter IETF BCP 47 language tag at <a href='https://r12a.github.io/app-subtags/' target='_blank'>https://r12a.github.io/app-subtags/</a>.",
 			"required": 1,
@@ -96,8 +96,8 @@
 		},
 		"field_language_schema_sameas": {
 			"key": "field_language_schema_sameas",
-			"name": "language_schema_sameas",
 			"label": "Reference Webpage(s) About This Language (sameAs > URL)",
+			"name": "language_schema_sameas",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,

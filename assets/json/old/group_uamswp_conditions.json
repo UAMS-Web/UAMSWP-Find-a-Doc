@@ -70,9 +70,9 @@
 		},
 		{
 			"key": "field_condition_clinical_trials",
+			"label": "Display clinical trials",
 			"name": "condition_clinical_trials",
 			"type": "true_false",
-			"label": "Display clinical trials",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -111,9 +111,9 @@
 		},
 		{
 			"key": "field_condition_short_desc",
+			"label": "Short Description",
 			"name": "condition_short_desc",
 			"type": "textarea",
-			"label": "Short Description",
 			"instructions": "This will be the description included for this page when it appears in search results.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -212,9 +212,9 @@
 		},
 		{
 			"key": "field_condition_embed_codes",
+			"label": "Embed / Syndication Code",
 			"name": "condition_embed_codes",
 			"type": "textarea",
-			"label": "Embed / Syndication Code",
 			"instructions": "Example: Syndication Code from HHS Syndication Storefront",
 			"required": 0,
 			"conditional_logic": 0,
@@ -231,9 +231,9 @@
 		},
 		{
 			"key": "field_condition_youtube_link",
+			"label": "Featured Video",
 			"name": "condition_youtube_link",
 			"type": "url",
-			"label": "Featured Video",
 			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this condition and that supports the content of this page. Include the full URL, including https:\/\/",
 			"required": 0,
 			"conditional_logic": 0,

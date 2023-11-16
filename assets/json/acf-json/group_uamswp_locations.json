@@ -32,9 +32,9 @@
 	"fields": {
 		"field_location_parent_tab": {
 			"key": "field_location_parent_tab",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -48,9 +48,9 @@
 		},
 		"field_location_parent": {
 			"key": "field_location_parent",
+			"label": "Does this location have a parent location?",
 			"name": "location_parent",
 			"type": "button_group",
-			"label": "Does this location have a parent location?",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -71,9 +71,9 @@
 		},
 		"field_location_parent_id": {
 			"key": "field_location_parent_id",
+			"label": "Parent Location",
 			"name": "location_parent_id",
 			"type": "post_object",
-			"label": "Parent Location",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -101,9 +101,9 @@
 		},
 		"field_location_type": {
 			"key": "field_location_type",
+			"label": "Location Type",
 			"name": "location_type",
 			"type": "taxonomy",
-			"label": "Location Type",
 			"instructions": "Used for filtering only",
 			"required": 0,
 			"conditional_logic": 0,
@@ -128,9 +128,9 @@
 		},
 		"field_location_portal": {
 			"key": "field_location_portal",
+			"label": "Patient Portal",
 			"name": "location_portal",
 			"type": "taxonomy",
-			"label": "Patient Portal",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -155,9 +155,9 @@
 		},
 		"field_location_prepend_the": {
 			"key": "field_location_prepend_the",
+			"label": "Automatically prepend location name with \"the\" in phrases?",
 			"name": "location_prepend_the",
 			"type": "button_group",
-			"label": "Automatically prepend location name with \"the\" in phrases?",
 			"instructions": "Setting this to \"Yes\" will add the word \"the\" before the location name in headings such as \"About [Location Name]\".",
 			"required": 1,
 			"conditional_logic": 0,
@@ -178,9 +178,9 @@
 		},
 		"field_location_hidden": {
 			"key": "field_location_hidden",
+			"label": "Exclude from Primary Location List?",
 			"name": "location_hidden",
 			"type": "button_group",
-			"label": "Exclude from Primary Location List?",
 			"instructions": "Setting this to \"Yes\" will remove this location from the Location archive. This input will not affect whether the location will be displayed on profiles and search results.",
 			"required": 1,
 			"conditional_logic": 0,
@@ -201,9 +201,9 @@
 		},
 		"field_location_service_line": {
 			"key": "field_location_service_line",
+			"label": "Service Line(s)",
 			"name": "location_service_line",
 			"type": "taxonomy",
-			"label": "Service Line(s)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -227,9 +227,9 @@
 		},
 		"field_location_brand_tab": {
 			"key": "field_location_brand_tab",
+			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -308,9 +308,9 @@
 		},
 		"field_location_ac_query": {
 			"key": "field_location_ac_query",
+			"label": "Is this an Arkansas Children's location?",
 			"name": "location_ac_query",
 			"type": "button_group",
-			"label": "Is this an Arkansas Children's location?",
 			"instructions": "This field is being deprecated. Make the appropriate selections in the brand organization fields.",
 			"required": 1,
 			"conditional_logic": 0,
@@ -331,9 +331,9 @@
 		},
 		"field_location_address_tab": {
 			"key": "field_location_address_tab",
+			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Address",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Address",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -355,9 +355,9 @@
 		},
 		"field_location_address_1": {
 			"key": "field_location_address_1",
+			"label": "Street Address",
 			"name": "location_address_1",
 			"type": "text",
-			"label": "Street Address",
 			"instructions": "Spell out numbered streets nine and under; use figures for <em>10</em> and above (e.g., <em>5 Sixth Ave.</em>, <em>3012 50th St.</em>, <em>No. 10 Downing St.</em>).</p><p class='description' style='margin-top: 0.5em;'>Use the abbreviations <em>Ave.</em>, <em>Blvd.</em> and <em>St.</em> Otherwise, spell out similar words (e.g., <em>Alley</em>, <em>Drive</em>, <em>Road</em>, <em>Terrace</em>).</p><p class='description' style='margin-top: 0.5em;'>Always use figures for an address number (e.g., <em>9 Morningside Circle</em>).</p><p class='description' style='margin-top: 0.5em;'>Spell out and capitalize <em>First</em> through <em>Ninth</em> when used as street names; use figures for <em>10th</em> and above (e.g., <em>7 Fifth Ave.</em>, <em>100 21st St.</em>).</p><p class='description' style='margin-top: 0.5em;'>Abbreviate compass points used to indicate directional ends of a street or quadrants of a city in a numbered address (e.g., <em>222 E. 42nd St.</em>, <em>562 W. 43rd St.</em>, <em>600 K St. NW</em>). Do not use periods in quadrant abbreviations (e.g., <em>NW</em>, <em>SE</em>).</p><p class='description' style='margin-top: 0.5em;'>Use these forms, as appropriate in the context, for highways identified by number: <em>U.S. Highway 67</em>, <em>Arkansas Highway 10</em>, <em>Interstate 630</em>.</p><p class='description' style='margin-top: 0.5em;'>When a letter is appended to a number, capitalize it but do not use a hyphen (e.g., <em>U.S. Highway 71B</em>).",
 			"required": 1,
 			"conditional_logic": 0,
@@ -374,8 +374,8 @@
 		},
 		"field_location_building_query": {
 			"key": "field_location_building_query",
-			"name": "location_building_query",
 			"label": "Is this location contained within a larger facility rather than being its own standalone facility?",
+			"name": "location_building_query",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -397,8 +397,8 @@
 		},
 		"field_location_building": {
 			"key": "field_location_building",
-			"name": "location_building",
 			"label": "Facility",
+			"name": "location_building",
 			"type": "taxonomy",
 			"instructions": "Select the most specific building or building complex this location is contained within.",
 			"required": "1",
@@ -430,8 +430,8 @@
 		},
 		"field_location_building_floor": {
 			"key": "field_location_building_floor",
-			"name": "location_building_floor",
 			"label": "Building Floor",
+			"name": "location_building_floor",
 			"type": "select",
 			"instructions": "Select the floor of the building where the patient would first check in.",
 			"required": "1",
@@ -485,8 +485,8 @@
 		},
 		"field_location_suite": {
 			"key": "field_location_suite",
-			"name": "location_suite",
 			"label": "Suite or other unit",
+			"name": "location_suite",
 			"type": "text",
 			"instructions": "Indicate the area where the patient would first check in.</p><p class='description' style='margin-top: 0.5em;'>Do not just include the number (Example: enter \"Suite 1A\" not just \"1A.\").</p><p class='description' style='margin-top: 0.5em;'>Do not include landmarks (don't say \"Next to this other thing\").</p><p class='description' style='margin-top: 0.5em;'>If you are putting the name of another clinic here, this location should instead be set as a child of that location.",
 			"required": "0",
@@ -504,9 +504,9 @@
 		},
 		"field_location_city": {
 			"key": "field_location_city",
+			"label": "City",
 			"name": "location_city",
 			"type": "text",
-			"label": "City",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -523,9 +523,9 @@
 		},
 		"field_location_state": {
 			"key": "field_location_state",
+			"label": "State",
 			"name": "location_state",
 			"type": "select",
-			"label": "State",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -599,9 +599,9 @@
 		},
 		"field_location_zip": {
 			"key": "field_location_zip",
+			"label": "ZIP Code",
 			"name": "location_zip",
 			"type": "maskfield",
-			"label": "ZIP Code",
 			"instructions": "Find the ZIP+4 Code for an address at <a href='https://tools.usps.com/zip-code-lookup.htm?byaddress' target='_blank'>https://tools.usps.com/zip-code-lookup.htm?byaddress</a>.",
 			"required": 1,
 			"conditional_logic": 0,
@@ -619,9 +619,9 @@
 		},
 		"field_location_map": {
 			"key": "field_location_map",
+			"label": "GPS Location of the Relevant Building Entrance",
 			"name": "location_map",
 			"type": "google_map",
-			"label": "GPS Location of the Relevant Building Entrance",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -637,9 +637,9 @@
 		},
 		"field_location_region": {
 			"key": "field_location_region",
+			"label": "Arkansas Region",
 			"name": "location_region",
 			"type": "taxonomy",
-			"label": "Arkansas Region",
 			"instructions": "For information on how the Arkansas regions are defined, visit <a href='https://communications.uams.edu/web/kb/location-regions/' target='_blank'>https://communications.uams.edu/web/kb/location-regions/</a>.",
 			"required": 1,
 			"conditional_logic": 0,
@@ -664,9 +664,9 @@
 		},
 		"field_location_directions_tab": {
 			"key": "field_location_directions_tab",
+			"label": "<i class=\"dashicons-car dashicons\"><\/i> Parking Information",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-car dashicons\"><\/i> Parking Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -688,9 +688,9 @@
 		},
 		"field_location_parking_map": {
 			"key": "field_location_parking_map",
+			"label": "GPS Location of the Main Parking Area",
 			"name": "location_parking_map",
 			"type": "google_map",
-			"label": "GPS Location of the Main Parking Area",
 			"instructions": "If the parking area is a parking deck, place the pin on the entrance to the parking deck from the street.</p><p class='description' style='margin-top: 0.5em;'>If the parking area is a surface-level parking lot, place the pin in the middle of the parking lot.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -706,9 +706,9 @@
 		},
 		"field_location_parking": {
 			"key": "field_location_parking",
+			"label": "Parking Instructions",
 			"name": "location_parking",
 			"type": "wysiwyg",
-			"label": "Parking Instructions",
 			"instructions": "Indicate whether patients will park in a parking deck or surface-level parking.</p><p class='description' style='margin-top: 0.5em;'>Indicate which parking lot, parking deck or other area in which patients will park when coming to this location.</p><p class='description' style='margin-top: 0.5em;'>Indicate whether or not patients will have to pay for parking.</p><p class='description' style='margin-top: 0.5em;'>If there is a parking fee for patients, indicate whether or not this location validates parking.</p><p class='description' style='margin-top: 0.5em;'>If patients will be parking in a specific parking deck, indicate the ideal area of the parking deck in which patients should park. If there is a patient drop-off area, also include details about that.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -725,9 +725,9 @@
 		},
 		"field_location_direction": {
 			"key": "field_location_direction",
+			"label": "Directions From Parking Area",
 			"name": "location_direction",
 			"type": "wysiwyg",
-			"label": "Directions From Parking Area",
 			"instructions": "Comprehensively describe the path patients should take when coming from their vehicle — whether at the patient drop-off area or in the parking area — to the entrance or check-in area for the location.</p><p class='description' style='margin-top: 0.5em;'>If the parking area is a parking deck, include instructions regarding how to locate the appropriate elevators and stairs in the parking deck, then include the parking deck level to which they should take those elevators or stairs.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -744,9 +744,9 @@
 		},
 		"field_location_details_tab": {
 			"key": "field_location_details_tab",
+			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Description of the Location",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Description of the Location",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -760,9 +760,9 @@
 		},
 		"field_location_about": {
 			"key": "field_location_about",
+			"label": "About \/ Description",
 			"name": "location_about",
 			"type": "wysiwyg",
-			"label": "About \/ Description",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -779,9 +779,9 @@
 		},
 		"field_location_short_desc": {
 			"key": "field_location_short_desc",
+			"label": "Short Description",
 			"name": "location_short_desc",
 			"type": "textarea",
-			"label": "Short Description",
 			"instructions": "This will be the description included for this page when it appears in search results.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -798,9 +798,9 @@
 		},
 		"field_location_youtube_link": {
 			"key": "field_location_youtube_link",
+			"label": "Featured Video",
 			"name": "location_youtube_link",
 			"type": "url",
-			"label": "Featured Video",
 			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this location and that supports the content of this page. Include the full URL, including https:\/\/",
 			"required": 0,
 			"conditional_logic": 0,
@@ -814,9 +814,9 @@
 		},
 		"field_location_affiliation": {
 			"key": "field_location_affiliation",
+			"label": "Affiliation",
 			"name": "location_affiliation",
 			"type": "wysiwyg",
-			"label": "Affiliation",
 			"instructions": "Affiliations with other medical centers or clinics",
 			"required": 0,
 			"conditional_logic": 0,
@@ -833,8 +833,8 @@
 		},
 		"field_location_prescription_query": {
 			"key": "field_location_prescription_query",
-			"name": "location_prescription_query",
 			"label": "Include information about prescription refills?",
+			"name": "location_prescription_query",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -856,8 +856,8 @@
 		},
 		"field_location_prescription_type": {
 			"key": "field_location_prescription_type",
-			"name": "location_prescription_type",
 			"label": "Which prescription information would you like to include?",
+			"name": "location_prescription_type",
 			"type": "radio",
 			"instructions": "Administrators can change the preset text in Find-a-Doc Settings > Clinical Locations.",
 			"required": 0,
@@ -889,8 +889,8 @@
 		},
 		"field_location_current_prescription_clinic": {
 			"key": "field_location_current_prescription_clinic",
-			"name": "location_current_prescription_clinic",
 			"label": "Current prescription information instructing patients to call the clinic",
+			"name": "location_current_prescription_clinic",
 			"type": "acfe_dynamic_message",
 			"instructions": "",
 			"required": 0,
@@ -917,8 +917,8 @@
 		},
 		"field_location_current_prescription_pharm": {
 			"key": "field_location_current_prescription_pharm",
-			"name": "location_current_prescription_pharm",
 			"label": "Current prescription information instructing patients to call their pharmacy",
+			"name": "location_current_prescription_pharm",
 			"type": "acfe_dynamic_message",
 			"instructions": "",
 			"required": 0,
@@ -945,9 +945,9 @@
 		},
 		"field_location_prescription": {
 			"key": "field_location_prescription",
+			"label": "Custom Prescription Refills Information",
 			"name": "location_prescription",
 			"type": "wysiwyg",
-			"label": "Custom Prescription Refills Information",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -977,9 +977,9 @@
 		},
 		"field_location_appointment_info_tab": {
 			"key": "field_location_appointment_info_tab",
+			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Appointment Information",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Appointment Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -993,9 +993,9 @@
 		},
 		"field_location_appointments_query": {
 			"key": "field_location_appointments_query",
+			"label": "Can a patient schedule an appointment for services rendered at this location?",
 			"name": "location_appointments_query",
 			"type": "button_group",
-			"label": "Can a patient schedule an appointment for services rendered at this location?",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -1016,9 +1016,9 @@
 		},
 		"field_location_appointment": {
 			"key": "field_location_appointment",
+			"label": "Information on setting up an appointment",
 			"name": "location_appointment",
 			"type": "wysiwyg",
-			"label": "Information on setting up an appointment",
 			"instructions": "This section should ideally not contain headings. But if it does, use Heading 3 and down.",
 			"required": 0,
 			"conditional_logic": [
@@ -1043,9 +1043,9 @@
 		},
 		"field_location_appointment_bring": {
 			"key": "field_location_appointment_bring",
+			"label": "What to Bring to Your Appointment",
 			"name": "location_appointment_bring",
 			"type": "wysiwyg",
-			"label": "What to Bring to Your Appointment",
 			"instructions": "This section should ideally not contain headings. But if it does ...</p><p class='description' style='margin-top: 0.5em;'>If \"Information on setting up an appointment\" or \"What to Expect at Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
 			"required": 0,
 			"conditional_logic": [
@@ -1070,9 +1070,9 @@
 		},
 		"field_location_appointment_expect": {
 			"key": "field_location_appointment_expect",
+			"label": "What to Expect at Your Appointment",
 			"name": "location_appointment_expect",
 			"type": "wysiwyg",
-			"label": "What to Expect at Your Appointment",
 			"instructions": "This section should ideally not contain headings. But if it does ...</p><p class='description' style='margin-top: 0.5em;'>If \"Information on setting up an appointment\" or \"What to Bring to Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
 			"required": 0,
 			"conditional_logic": [
@@ -1097,9 +1097,9 @@
 		},
 		"field_location_contact_tab": {
 			"key": "field_location_contact_tab",
+			"label": "<i class=\"dashicons-phone dashicons\"><\/i> Contact Information",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-phone dashicons\"><\/i> Contact Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1113,9 +1113,9 @@
 		},
 		"field_location_phone": {
 			"key": "field_location_phone",
+			"label": "General Information Phone Number",
 			"name": "location_phone",
 			"type": "maskfield",
-			"label": "General Information Phone Number",
 			"instructions": "The phone number that patients can call for general information related to this location",
 			"required": 1,
 			"conditional_logic": 0,
@@ -1128,9 +1128,9 @@
 		},
 		"field_location_conditional_phone_message": {
 			"key": "field_location_conditional_phone_message",
+			"label": "Conditional Logic is Hiding Additional Contact Information Fields",
 			"name": "",
 			"type": "message",
-			"label": "Conditional Logic is Hiding Additional Contact Information Fields",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -1158,9 +1158,9 @@
 		},
 		"field_location_ac_appointments_query": {
 			"key": "field_location_ac_appointments_query",
+			"label": "Does this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments?",
 			"name": "location_ac_appointments_query",
 			"type": "button_group",
-			"label": "Does this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments?",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -1211,9 +1211,9 @@
 		},
 		"field_location_ac_appointments_primary": {
 			"key": "field_location_ac_appointments_primary",
+			"label": "Arkansas Children's Primary Care Appointments Phone Number",
 			"name": "location_ac_appointments_primary",
 			"type": "maskfield",
-			"label": "Arkansas Children's Primary Care Appointments Phone Number",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -1234,9 +1234,9 @@
 		},
 		"field_location_ac_appointments_specialty": {
 			"key": "field_location_ac_appointments_specialty",
+			"label": "Arkansas Children's Specialty Care Appointments Phone Number",
 			"name": "location_ac_appointments_specialty",
 			"type": "maskfield",
-			"label": "Arkansas Children's Specialty Care Appointments Phone Number",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -1257,9 +1257,9 @@
 		},
 		"field_location_clinic_phone_query": {
 			"key": "field_location_clinic_phone_query",
+			"label": "Is there a separate appointment number for patients?",
 			"name": "location_clinic_phone_query",
 			"type": "button_group",
-			"label": "Is there a separate appointment number for patients?",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -1319,9 +1319,9 @@
 		},
 		"field_location_new_appointments_phone": {
 			"key": "field_location_new_appointments_phone",
+			"label": "Appointments Phone Number",
 			"name": "location_new_appointments_phone",
 			"type": "maskfield",
-			"label": "Appointments Phone Number",
 			"instructions": "For new patients, if separate numbers for new and returning patients",
 			"required": 1,
 			"conditional_logic": [
@@ -1386,9 +1386,9 @@
 		},
 		"field_location_appointment_phone_query": {
 			"key": "field_location_appointment_phone_query",
+			"label": "Is there a separate number for returning patients?",
 			"name": "location_appointment_phone_query",
 			"type": "button_group",
-			"label": "Is there a separate number for returning patients?",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -1417,9 +1417,9 @@
 		},
 		"field_location_return_appointments_phone": {
 			"key": "field_location_return_appointments_phone",
+			"label": "Appointments Phone Number for Returning Patients",
 			"name": "location_return_appointments_phone",
 			"type": "maskfield",
-			"label": "Appointments Phone Number for Returning Patients",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -1440,9 +1440,9 @@
 		},
 		"field_location_fax": {
 			"key": "field_location_fax",
+			"label": "Clinic Fax Number",
 			"name": "location_fax",
 			"type": "maskfield",
-			"label": "Clinic Fax Number",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1455,9 +1455,9 @@
 		},
 		"field_location_phone_numbers": {
 			"key": "field_location_phone_numbers",
+			"label": "Additional Phone Numbers",
 			"name": "location_phone_numbers",
 			"type": "repeater",
-			"label": "Additional Phone Numbers",
 			"instructions": "Add any additional phone numbers for this location (e.g., after hours nurse line).",
 			"required": 0,
 			"conditional_logic": [
@@ -1503,8 +1503,8 @@
 			"sub_fields": [
 				{
 					"key": "field_location_appointments_text",
-					"name": "location_appointments_text",
 					"label": "Label for Phone Number",
+					"name": "location_appointments_text",
 					"type": "text",
 					"instructions": "",
 					"required": 1,
@@ -1522,8 +1522,8 @@
 				},
 				{
 					"key": "field_location_appointments_phone",
-					"name": "location_appointments_phone",
 					"label": "Phone Number",
+					"name": "location_appointments_phone",
 					"type": "maskfield",
 					"instructions": "",
 					"required": 1,
@@ -1537,8 +1537,8 @@
 				},
 				{
 					"key": "field_location_appointments_additional_text",
-					"name": "location_appointments_additional_text",
 					"label": "Additional Description of Phone Number",
+					"name": "location_appointments_additional_text",
 					"type": "text",
 					"instructions": "",
 					"required": 0,
@@ -1558,9 +1558,9 @@
 		},
 		"field_location_photos_tab": {
 			"key": "field_location_photos_tab",
+			"label": "<i class=\"dashicons-format-gallery dashicons\"><\/i> Photos",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-format-gallery dashicons\"><\/i> Photos",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1579,9 +1579,9 @@
 		},
 		"field_location_image_override_parent": {
 			"key": "field_location_image_override_parent",
+			"label": "Override Parent Images?",
 			"name": "location_image_override_parent",
 			"type": "button_group",
-			"label": "Override Parent Images?",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -1610,9 +1610,9 @@
 		},
 		"field_location_image_override_parent_featured": {
 			"key": "field_location_image_override_parent_featured",
+			"label": "Override Parent Featured Image?",
 			"name": "location_image_override_parent_featured",
 			"type": "button_group",
-			"label": "Override Parent Featured Image?",
 			"instructions": "To remove the parent featured image, select Yes and leave image blank",
 			"required": 1,
 			"conditional_logic": [
@@ -1646,8 +1646,8 @@
 		},
 		"field_location_featured_image": {
 			"key": "field_location_featured_image",
-			"name": "_thumbnail_id",
 			"label": "Featured Image",
+			"name": "_thumbnail_id",
 			"type": "image",
 			"instructions": "Select an image that will be used on card layouts, schema data, social sharing, etc.</p><p class='description' style='margin-top: 0.5em;'>You can select an image that is also used as the Wayfinding Photo or in the Photo Gallery.</p><p class='description' style='margin-top: 0.5em;'>The photo orientation must be landscape / horizontal.</p><p class='description' style='margin-top: 0.5em;'>Minimum dimensions: 1200x675.",
 			"required": 0,
@@ -1694,9 +1694,9 @@
 		},
 		"field_location_image_override_parent_wayfinding": {
 			"key": "field_location_image_override_parent_wayfinding",
+			"label": "Override Parent Wayfinding Photo?",
 			"name": "location_image_override_parent_wayfinding",
 			"type": "button_group",
-			"label": "Override Parent Wayfinding Photo?",
 			"instructions": "To remove the parent wayfinding photo, select Yes and leave photo blank",
 			"required": 1,
 			"conditional_logic": [
@@ -1730,8 +1730,8 @@
 		},
 		"field_location_wayfinding_photo": {
 			"key": "field_location_wayfinding_photo",
-			"name": "location_wayfinding_photo",
 			"label": "Wayfinding Photo",
+			"name": "location_wayfinding_photo",
 			"type": "image",
 			"instructions": "Select an image that will help the patient find the appropriate building from the road.</p><p class='description' style='margin-top: 0.5em;'>The photo orientation must be landscape / horizontal.</p><p class='description' style='margin-top: 0.5em;'>Minimum dimensions: 1200x675",
 			"required": 0,
@@ -1778,9 +1778,9 @@
 		},
 		"field_location_image_override_parent_gallery": {
 			"key": "field_location_image_override_parent_gallery",
+			"label": "Override Parent Photo Gallery?",
 			"name": "location_image_override_parent_gallery",
 			"type": "button_group",
-			"label": "Override Parent Photo Gallery?",
 			"instructions": "To remove the parent gallery, select Yes and leave gallery empty",
 			"required": 1,
 			"conditional_logic": [
@@ -1814,8 +1814,8 @@
 		},
 		"field_location_photo_gallery": {
 			"key": "field_location_photo_gallery",
-			"name": "location_photo_gallery",
 			"label": "Photo Gallery",
+			"name": "location_photo_gallery",
 			"type": "gallery",
 			"instructions": "You may select up to four images.</p><p class='description' style='margin-top: 0.5em;'>These could include a photo of the interior entrance to the clinic or photos of the clinic in use.</p><p class='description' style='margin-top: 0.5em;'>The photo orientation must be landscape / horizontal.</p><p class='description' style='margin-top: 0.5em;'>Minimum dimensions: 1200x675",
 			"required": 0,
@@ -1864,9 +1864,9 @@
 		},
 		"field_location_hours_tab": {
 			"key": "field_location_hours_tab",
+			"label": "<i class=\"dashicons-clock dashicons\"><\/i> Hours of Operation",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-clock dashicons\"><\/i> Hours of Operation",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1915,9 +1915,9 @@
 				},
 				{
 					"key": "field_hours_message",
+					"label": "In-Person Hours of Operation (Deprecated)",
 					"name": "",
 					"type": "message",
-					"label": "In-Person Hours of Operation (Deprecated)",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": [
@@ -1940,9 +1940,9 @@
 				},
 				{
 					"key": "field_location_hours_variable",
+					"label": "Do the location's typical in-person hours of operation vary?",
 					"name": "location_hours_variable",
 					"type": "button_group",
-					"label": "Do the location's typical in-person hours of operation vary?",
 					"instructions": "For example, does this location operate only periodically or as needed?",
 					"required": 1,
 					"conditional_logic": 0,
@@ -1963,9 +1963,9 @@
 				},
 				{
 					"key": "field_location_hours_variable_info",
+					"label": "Information about the Location's Variable Hours of Operation",
 					"name": "location_hours_variable_info",
 					"type": "wysiwyg",
-					"label": "Information about the Location's Variable Hours of Operation",
 					"instructions": "Describe how the hours of operation work for this location.",
 					"required": 1,
 					"conditional_logic": [
@@ -1990,9 +1990,9 @@
 				},
 				{
 					"key": "field_location_24_7",
+					"label": "Is the location typically open 24/7?",
 					"name": "location_24_7",
 					"type": "button_group",
-					"label": "Is the location typically open 24/7?",
 					"instructions": "",
 					"required": 1,
 					"conditional_logic": [
@@ -2021,9 +2021,9 @@
 				},
 				{
 					"key": "field_location_hours",
+					"label": "Typical Days and Hours for In-Person Operation",
 					"name": "location_hours",
 					"type": "repeater",
-					"label": "Typical Days and Hours for In-Person Operation",
 					"instructions": "Set the time for all seven days, beginning with Sunday.</p><p class='description' style='margin-top: 0.5em;'>If there are multiple separate time spans on a single day (e.g., Monday, 8-11:30 a.m. and 12:30-4:30 p.m.), add additional rows for each time span, setting the day dropdown as the same value. Keep the rows in chronological order.",
 					"required": 0,
 					"conditional_logic": [
@@ -2053,8 +2053,8 @@
 					"sub_fields": [
 						{
 							"key": "field_hours_day",
-							"name": "day",
 							"label": "Day",
+							"name": "day",
 							"type": "select",
 							"instructions": "",
 							"required": 1,
@@ -2106,8 +2106,8 @@
 						},
 						{
 							"key": "field_hours_open",
-							"name": "open",
 							"label": "Opens",
+							"name": "open",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -2130,8 +2130,8 @@
 						},
 						{
 							"key": "field_hours_close",
-							"name": "close",
 							"label": "Closes",
+							"name": "close",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -2154,8 +2154,8 @@
 						},
 						{
 							"key": "field_hours_comment",
-							"name": "comment",
 							"label": "Comment",
+							"name": "comment",
 							"type": "text",
 							"instructions": "",
 							"required": 0,
@@ -2302,9 +2302,9 @@
 						},
 						{
 							"key": "field_location_hours_monday_24_query",
+							"label": "Is this location open 24 hours on Mondays?",
 							"name": "monday_24_query",
 							"type": "button_group",
-							"label": "Is this location open 24 hours on Mondays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -2333,8 +2333,8 @@
 						},
 						{
 							"key": "field_location_hours_monday_time_span",
-							"name": "monday_time_span",
 							"label": "Time Span",
+							"name": "monday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during Mondays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -2367,8 +2367,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_hours_monday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -2384,8 +2384,8 @@
 								},
 								{
 									"key": "field_location_hours_monday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -2401,8 +2401,8 @@
 								},
 								{
 									"key": "field_location_hours_monday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -2472,9 +2472,9 @@
 						},
 						{
 							"key": "field_location_hours_tuesday_24_query",
+							"label": "Is this location open 24 hours on Tuesdays?",
 							"name": "tuesday_24_query",
 							"type": "button_group",
-							"label": "Is this location open 24 hours on Tuesdays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -2503,8 +2503,8 @@
 						},
 						{
 							"key": "field_location_hours_tuesday_time_span",
-							"name": "tuesday_time_span",
 							"label": "Time Span",
+							"name": "tuesday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during Tuesdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -2537,8 +2537,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_hours_tuesday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -2554,8 +2554,8 @@
 								},
 								{
 									"key": "field_location_hours_tuesday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -2571,8 +2571,8 @@
 								},
 								{
 									"key": "field_location_hours_tuesday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -2642,9 +2642,9 @@
 						},
 						{
 							"key": "field_location_hours_wednesday_24_query",
+							"label": "Is this location open 24 hours on Wednesdays?",
 							"name": "wednesday_24_query",
 							"type": "button_group",
-							"label": "Is this location open 24 hours on Wednesdays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -2673,8 +2673,8 @@
 						},
 						{
 							"key": "field_location_hours_wednesday_time_span",
-							"name": "wednesday_time_span",
 							"label": "Time Span",
+							"name": "wednesday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during Wednesdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -2707,8 +2707,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_hours_wednesday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -2724,8 +2724,8 @@
 								},
 								{
 									"key": "field_location_hours_wednesday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -2741,8 +2741,8 @@
 								},
 								{
 									"key": "field_location_hours_wednesday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -2812,9 +2812,9 @@
 						},
 						{
 							"key": "field_location_hours_thursday_24_query",
+							"label": "Is this location open 24 hours on Thursdays?",
 							"name": "thursday_24_query",
 							"type": "button_group",
-							"label": "Is this location open 24 hours on Thursdays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -2843,8 +2843,8 @@
 						},
 						{
 							"key": "field_location_hours_thursday_time_span",
-							"name": "thursday_time_span",
 							"label": "Time Span",
+							"name": "thursday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during Thursdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -2877,8 +2877,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_hours_thursday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -2894,8 +2894,8 @@
 								},
 								{
 									"key": "field_location_hours_thursday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -2911,8 +2911,8 @@
 								},
 								{
 									"key": "field_location_hours_thursday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -2982,9 +2982,9 @@
 						},
 						{
 							"key": "field_location_hours_friday_24_query",
+							"label": "Is this location open 24 hours on Fridays?",
 							"name": "friday_24_query",
 							"type": "button_group",
-							"label": "Is this location open 24 hours on Fridays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -3013,8 +3013,8 @@
 						},
 						{
 							"key": "field_location_hours_friday_time_span",
-							"name": "friday_time_span",
 							"label": "Time Span",
+							"name": "friday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during Fridays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -3047,8 +3047,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_hours_friday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -3064,8 +3064,8 @@
 								},
 								{
 									"key": "field_location_hours_friday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -3081,8 +3081,8 @@
 								},
 								{
 									"key": "field_location_hours_friday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -3152,9 +3152,9 @@
 						},
 						{
 							"key": "field_location_hours_weekday_24_query",
+							"label": "Is this location open 24 hours on weekdays?",
 							"name": "weekday_24_query",
 							"type": "button_group",
-							"label": "Is this location open 24 hours on weekdays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -3183,8 +3183,8 @@
 						},
 						{
 							"key": "field_location_hours_weekday_time_span",
-							"name": "weekday_time_span",
 							"label": "Time Span",
+							"name": "weekday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during weekdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -3217,8 +3217,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_hours_weekday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -3234,8 +3234,8 @@
 								},
 								{
 									"key": "field_location_hours_weekday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -3251,8 +3251,8 @@
 								},
 								{
 									"key": "field_location_hours_weekday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -3322,9 +3322,9 @@
 						},
 						{
 							"key": "field_location_hours_saturday_24_query",
+							"label": "Is this location open 24 hours on Saturdays?",
 							"name": "saturday_24_query",
 							"type": "button_group",
-							"label": "Is this location open 24 hours on Saturdays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -3353,8 +3353,8 @@
 						},
 						{
 							"key": "field_location_hours_saturday_time_span",
-							"name": "saturday_time_span",
 							"label": "Time Span",
+							"name": "saturday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during Saturdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -3387,8 +3387,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_hours_saturday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -3404,8 +3404,8 @@
 								},
 								{
 									"key": "field_location_hours_saturday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -3421,8 +3421,8 @@
 								},
 								{
 									"key": "field_location_hours_saturday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -3492,9 +3492,9 @@
 						},
 						{
 							"key": "field_location_hours_sunday_24_query",
+							"label": "Is this location open 24 hours on Sundays?",
 							"name": "sunday_24_query",
 							"type": "button_group",
-							"label": "Is this location open 24 hours on Sundays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -3523,8 +3523,8 @@
 						},
 						{
 							"key": "field_location_hours_sunday_time_span",
-							"name": "sunday_time_span",
 							"label": "Time Span",
+							"name": "sunday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during Sundays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -3557,8 +3557,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_hours_sunday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -3574,8 +3574,8 @@
 								},
 								{
 									"key": "field_location_hours_sunday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -3591,8 +3591,8 @@
 								},
 								{
 									"key": "field_location_hours_sunday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -3662,9 +3662,9 @@
 						},
 						{
 							"key": "field_location_hours_weekend_24_query",
+							"label": "Is this location open 24 hours on weekends?",
 							"name": "weekend_24_query",
 							"type": "button_group",
-							"label": "Is this location open 24 hours on weekends?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -3693,8 +3693,8 @@
 						},
 						{
 							"key": "field_location_hours_weekend_time_span",
-							"name": "weekend_time_span",
 							"label": "Time Span",
+							"name": "weekend_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during weekends (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -3727,8 +3727,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_hours_weekend_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -3744,8 +3744,8 @@
 								},
 								{
 									"key": "field_location_hours_weekend_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -3761,8 +3761,8 @@
 								},
 								{
 									"key": "field_location_hours_weekend_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -3803,9 +3803,9 @@
 				},
 				{
 					"key": "field_after_hours",
+					"label": "Information for When the Location Is Closed",
 					"name": "location_after_hours",
 					"type": "wysiwyg",
-					"label": "Information for When the Location Is Closed",
 					"instructions": "Describe what patients should do if they need assistance when this location is closed.",
 					"required": 0,
 					"conditional_logic": [
@@ -3855,8 +3855,8 @@
 				},
 				{
 					"key": "field_location_modified_hours",
-					"name": "location_modified_hours",
 					"label": "Are there any upcoming modified in-person hours of operation?",
+					"name": "location_modified_hours",
 					"type": "button_group",
 					"instructions": "",
 					"required": 1,
@@ -3878,8 +3878,8 @@
 				},
 				{
 					"key": "field_location_modified_hours_reason",
-					"name": "location_modified_hours_reason",
 					"label": "Reason for Modified In-Person Hours of Operation",
+					"name": "location_modified_hours_reason",
 					"type": "wysiwyg",
 					"instructions": "Describe the overall reason the in-person hours of operation are being modified. This might be because of a holiday or public health emergency.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>The date range will be displayed automatically, so that does not have to be included in this field.",
 					"required": 1,
@@ -3906,8 +3906,8 @@
 				},
 				{
 					"key": "field_location_modified_hours_start_date",
-					"name": "location_modified_hours_start_date",
 					"label": "Start Date For the Modified In-Person Hours of Operation",
+					"name": "location_modified_hours_start_date",
 					"type": "date_picker",
 					"instructions": "The date when the modified in-person hours of operation begin.",
 					"required": 1,
@@ -3932,8 +3932,8 @@
 				},
 				{
 					"key": "field_location_modified_hours_end",
-					"name": "location_modified_hours_end",
 					"label": "Is there an end date for the modified in-person hours of operation?",
+					"name": "location_modified_hours_end",
 					"type": "button_group",
 					"instructions": "",
 					"required": 1,
@@ -3963,8 +3963,8 @@
 				},
 				{
 					"key": "field_location_modified_hours_end_date",
-					"name": "location_modified_hours_end_date",
 					"label": "End Date For the Modified In-Person Hours of Operation",
+					"name": "location_modified_hours_end_date",
 					"type": "date_picker",
 					"instructions": "The date after which the modified in-person hours of operation end.",
 					"required": 1,
@@ -3989,8 +3989,8 @@
 				},
 				{
 					"key": "field_location_modified_hours_group",
-					"name": "location_modified_hours_group",
 					"label": "Individual Modified In-Person Hours of Operation",
+					"name": "location_modified_hours_group",
 					"type": "repeater",
 					"instructions": "",
 					"required": 0,
@@ -4018,8 +4018,8 @@
 					"sub_fields": [
 						{
 							"key": "field_location_modified_hours_title",
-							"name": "location_modified_hours_title",
 							"label": "Title",
+							"name": "location_modified_hours_title",
 							"type": "text",
 							"instructions": "Define the text to be used in the heading for this set of modified hours (e.g., \"Thanksgiving Holiday Hours\").",
 							"required": 0,
@@ -4038,8 +4038,8 @@
 						},
 						{
 							"key": "field_location_modified_hours_information",
-							"name": "location_modified_hours_information",
 							"label": "Information",
+							"name": "location_modified_hours_information",
 							"type": "wysiwyg",
 							"instructions": "This field can include a description of the modification if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>Or you can add information in addition to the structured days and hours.",
 							"required": 0,
@@ -4058,9 +4058,9 @@
 						},
 						{
 							"key": "field_location_modified_hours_24_7",
+							"label": "Is this location available 24\/7 during these modified hours?",
 							"name": "location_modified_hours_24_7",
 							"type": "button_group",
-							"label": "Is this location available 24\/7 during these modified hours?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": 0,
@@ -4081,8 +4081,8 @@
 						},
 						{
 							"key": "field_location_modified_hours_times",
-							"name": "location_modified_hours_times",
 							"label": "Modified In-Person Hours of Operation",
+							"name": "location_modified_hours_times",
 							"type": "repeater",
 							"instructions": "Set the time for all seven days.",
 							"required": 0,
@@ -4115,8 +4115,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_modified_hours_day",
-									"name": "location_modified_hours_day",
 									"label": "Day",
+									"name": "location_modified_hours_day",
 									"type": "select",
 									"instructions": "",
 									"required": 1,
@@ -4169,8 +4169,8 @@
 								},
 								{
 									"key": "field_location_modified_hours_open",
-									"name": "location_modified_hours_open",
 									"label": "Opens",
+									"name": "location_modified_hours_open",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -4194,8 +4194,8 @@
 								},
 								{
 									"key": "field_location_modified_hours_close",
-									"name": "location_modified_hours_close",
 									"label": "Closes",
+									"name": "location_modified_hours_close",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -4219,8 +4219,8 @@
 								},
 								{
 									"key": "field_location_modified_hours_comment",
-									"name": "location_modified_hours_comment",
 									"label": "Comment",
+									"name": "location_modified_hours_comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -4243,9 +4243,9 @@
 				},
 				{
 					"key": "field_location_holiday_hours",
+					"label": "Holiday Hours",
 					"name": "location_holiday_hours",
 					"type": "repeater",
-					"label": "Holiday Hours",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": [
@@ -4270,8 +4270,8 @@
 					"sub_fields": [
 						{
 							"key": "field_holiday_date",
-							"name": "date",
 							"label": "Date",
+							"name": "date",
 							"type": "date_picker",
 							"instructions": "",
 							"required": 1,
@@ -4287,8 +4287,8 @@
 						},
 						{
 							"key": "field_holiday_label",
-							"name": "label",
 							"label": "Holiday Text",
+							"name": "label",
 							"type": "text",
 							"instructions": "",
 							"required": 1,
@@ -4329,8 +4329,8 @@
 						},
 						{
 							"key": "field_holiday_open",
-							"name": "open",
 							"label": "Opens",
+							"name": "open",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -4353,8 +4353,8 @@
 						},
 						{
 							"key": "field_holiday_close",
-							"name": "close",
 							"label": "Closes",
+							"name": "close",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -4409,8 +4409,8 @@
 				},
 				{
 					"key": "field_location_modified_hours_group_v2",
-					"name": "location_modified_hours_group_v2",
 					"label": "Individual Modification to the In-Person Hours of Operation",
+					"name": "location_modified_hours_group_v2",
 					"type": "repeater",
 					"instructions": "Begin entering the data into this new field group so that it can replace the previous version soon.",
 					"required": 0,
@@ -4438,8 +4438,8 @@
 					"sub_fields": [
 						{
 							"key": "field_location_modified_hours_title_v2",
-							"name": "title",
 							"label": "Title",
+							"name": "title",
 							"type": "text",
 							"instructions": "Define the text to be used in the heading for this set of modified hours (e.g., \"Thanksgiving Holiday Hours\").",
 							"required": 1,
@@ -4458,8 +4458,8 @@
 						},
 						{
 							"key": "field_location_modified_hours_information_v2",
-							"name": "information",
 							"label": "Overview",
+							"name": "information",
 							"type": "wysiwyg",
 							"instructions": "An overview of the modification to the in-person hours of operation (e.g., \"The clinic will be closed over the Thanksgiving holiday.\").",
 							"required": 0,
@@ -4478,8 +4478,8 @@
 						},
 						{
 							"key": "field_location_modified_hours_dates",
-							"name": "dates",
 							"label": "Dates of the Modified In-Person Hours of Operation",
+							"name": "dates",
 							"type": "repeater",
 							"instructions": "Add a row for each sequential calendar day during the span of this modification to the in-person hours of operation (including days when the location is typically closed).",
 							"required": 1,
@@ -4499,8 +4499,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_modified_hours_date",
-									"name": "date",
 									"label": "Individual Date For the Modified In-Person Hours of Operation",
+									"name": "date",
 									"type": "date_picker",
 									"instructions": "",
 									"required": 1,
@@ -4548,9 +4548,9 @@
 								},
 								{
 									"key": "field_location_modified_hours_24_query",
+									"label": "Will this location be open 24 hours on this date?",
 									"name": "24_query",
 									"type": "button_group",
-									"label": "Will this location be open 24 hours on this date?",
 									"instructions": "",
 									"required": 1,
 									"conditional_logic": [
@@ -4579,8 +4579,8 @@
 								},
 								{
 									"key": "field_location_modified_hours_time_span",
-									"name": "time_span",
 									"label": "Time Span",
+									"name": "time_span",
 									"type": "repeater",
 									"instructions": "Add a row for each time span during the given day (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 									"required": 1,
@@ -4613,8 +4613,8 @@
 									"sub_fields": [
 										{
 											"key": "field_location_modified_hours_time_span_opens",
-											"name": "opens",
 											"label": "Opens",
+											"name": "opens",
 											"type": "time_picker",
 											"instructions": "",
 											"required": 1,
@@ -4630,8 +4630,8 @@
 										},
 										{
 											"key": "field_location_modified_hours_time_span_closes",
-											"name": "closes",
 											"label": "Closes",
+											"name": "closes",
 											"type": "time_picker",
 											"instructions": "",
 											"required": 1,
@@ -4647,8 +4647,8 @@
 										},
 										{
 											"key": "field_location_modified_hours_time_span_comment",
-											"name": "comment",
 											"label": "Comment",
+											"name": "comment",
 											"type": "text",
 											"instructions": "",
 											"required": 0,
@@ -4690,8 +4690,8 @@
 				},
 				{
 					"key": "field_location_telemed_query",
-					"name": "location_telemed_query",
 					"label": "Does this location offer a telemedicine option?",
+					"name": "location_telemed_query",
 					"type": "button_group",
 					"instructions": "",
 					"required": 1,
@@ -4713,9 +4713,9 @@
 				},
 				{
 					"key": "field_location_telemed_info_message",
+					"label": "Telemedicine Information",
 					"name": "",
 					"type": "message",
-					"label": "Telemedicine Information",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": [
@@ -4738,9 +4738,9 @@
 				},
 				{
 					"key": "field_location_telemed_patients",
+					"label": "Telemedicine Patient Type",
 					"name": "location_telemed_patients",
 					"type": "radio",
-					"label": "Telemedicine Patient Type",
 					"instructions": "Which type of patients can use the telemedicine services offered at this location?",
 					"required": 1,
 					"conditional_logic": [
@@ -4802,9 +4802,9 @@
 				},
 				{
 					"key": "field_location_telemed_24_7",
+					"label": "Is telemedicine typically available 24\/7 at this location?",
 					"name": "location_telemed_24_7",
 					"type": "button_group",
-					"label": "Is telemedicine typically available 24\/7 at this location?",
 					"instructions": "",
 					"required": 1,
 					"conditional_logic": [
@@ -4833,9 +4833,9 @@
 				},
 				{
 					"key": "field_location_telemed_hours",
+					"label": "Typical Telemedicine Hours of Operation",
 					"name": "location_telemed_hours",
 					"type": "repeater",
-					"label": "Typical Telemedicine Hours of Operation",
 					"instructions": "Set the time for all seven days.",
 					"required": 0,
 					"conditional_logic": [
@@ -4865,8 +4865,8 @@
 					"sub_fields": [
 						{
 							"key": "field_telemed_hours_day",
-							"name": "day",
 							"label": "Day",
+							"name": "day",
 							"type": "select",
 							"instructions": "",
 							"required": 1,
@@ -4918,8 +4918,8 @@
 						},
 						{
 							"key": "field_telemed_hours_open",
-							"name": "open",
 							"label": "Opens",
+							"name": "open",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -4942,8 +4942,8 @@
 						},
 						{
 							"key": "field_telemed_hours_close",
-							"name": "close",
 							"label": "Closes",
+							"name": "close",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -4966,8 +4966,8 @@
 						},
 						{
 							"key": "field_telemed_hours_comment",
-							"name": "comment",
 							"label": "Comment",
+							"name": "comment",
 							"type": "text",
 							"instructions": "",
 							"required": 0,
@@ -5119,9 +5119,9 @@
 						},
 						{
 							"key": "field_location_telemed_hours_monday_24_query",
+							"label": "Is telemedicine at this location be available 24 hours on Mondays?",
 							"name": "monday_24_query",
 							"type": "button_group",
-							"label": "Is telemedicine at this location be available 24 hours on Mondays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -5150,8 +5150,8 @@
 						},
 						{
 							"key": "field_location_telemed_hours_monday_time_span",
-							"name": "monday_time_span",
 							"label": "Time Span",
+							"name": "monday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during Mondays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -5184,8 +5184,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_telemed_hours_monday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -5201,8 +5201,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_monday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -5218,8 +5218,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_monday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -5289,9 +5289,9 @@
 						},
 						{
 							"key": "field_location_telemed_hours_tuesday_24_query",
+							"label": "Is telemedicine at this location be available 24 hours on Tuesdays?",
 							"name": "tuesday_24_query",
 							"type": "button_group",
-							"label": "Is telemedicine at this location be available 24 hours on Tuesdays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -5320,8 +5320,8 @@
 						},
 						{
 							"key": "field_location_telemed_hours_tuesday_time_span",
-							"name": "tuesday_time_span",
 							"label": "Time Span",
+							"name": "tuesday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during Tuesdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -5354,8 +5354,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_telemed_hours_tuesday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -5371,8 +5371,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_tuesday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -5388,8 +5388,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_tuesday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -5459,9 +5459,9 @@
 						},
 						{
 							"key": "field_location_telemed_hours_wednesday_24_query",
+							"label": "Is telemedicine at this location be available 24 hours on Wednesdays?",
 							"name": "wednesday_24_query",
 							"type": "button_group",
-							"label": "Is telemedicine at this location be available 24 hours on Wednesdays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -5490,8 +5490,8 @@
 						},
 						{
 							"key": "field_location_telemed_hours_wednesday_time_span",
-							"name": "wednesday_time_span",
 							"label": "Time Span",
+							"name": "wednesday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during Wednesdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -5524,8 +5524,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_telemed_hours_wednesday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -5541,8 +5541,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_wednesday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -5558,8 +5558,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_wednesday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -5629,9 +5629,9 @@
 						},
 						{
 							"key": "field_location_telemed_hours_thursday_24_query",
+							"label": "Is telemedicine at this location be available 24 hours on Thursdays?",
 							"name": "thursday_24_query",
 							"type": "button_group",
-							"label": "Is telemedicine at this location be available 24 hours on Thursdays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -5660,8 +5660,8 @@
 						},
 						{
 							"key": "field_location_telemed_hours_thursday_time_span",
-							"name": "thursday_time_span",
 							"label": "Time Span",
+							"name": "thursday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during Thursdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -5694,8 +5694,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_telemed_hours_thursday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -5711,8 +5711,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_thursday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -5728,8 +5728,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_thursday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -5799,9 +5799,9 @@
 						},
 						{
 							"key": "field_location_telemed_hours_friday_24_query",
+							"label": "Is telemedicine at this location be available 24 hours on Fridays?",
 							"name": "friday_24_query",
 							"type": "button_group",
-							"label": "Is telemedicine at this location be available 24 hours on Fridays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -5830,8 +5830,8 @@
 						},
 						{
 							"key": "field_location_telemed_hours_friday_time_span",
-							"name": "friday_time_span",
 							"label": "Time Span",
+							"name": "friday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during Fridays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -5864,8 +5864,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_telemed_hours_friday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -5881,8 +5881,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_friday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -5898,8 +5898,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_friday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -5969,9 +5969,9 @@
 						},
 						{
 							"key": "field_location_telemed_hours_weekday_24_query",
+							"label": "Is telemedicine at this location be available 24 hours on weekdays?",
 							"name": "weekday_24_query",
 							"type": "button_group",
-							"label": "Is telemedicine at this location be available 24 hours on weekdays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -6000,8 +6000,8 @@
 						},
 						{
 							"key": "field_location_telemed_hours_weekday_time_span",
-							"name": "weekday_time_span",
 							"label": "Time Span",
+							"name": "weekday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during weekdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -6034,8 +6034,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_telemed_hours_weekday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -6051,8 +6051,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_weekday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -6068,8 +6068,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_weekday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -6139,9 +6139,9 @@
 						},
 						{
 							"key": "field_location_telemed_hours_saturday_24_query",
+							"label": "Is telemedicine at this location be available 24 hours on Saturdays?",
 							"name": "saturday_24_query",
 							"type": "button_group",
-							"label": "Is telemedicine at this location be available 24 hours on Saturdays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -6170,8 +6170,8 @@
 						},
 						{
 							"key": "field_location_telemed_hours_saturday_time_span",
-							"name": "saturday_time_span",
 							"label": "Time Span",
+							"name": "saturday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during Saturdays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -6204,8 +6204,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_telemed_hours_saturday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -6221,8 +6221,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_saturday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -6238,8 +6238,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_saturday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -6309,9 +6309,9 @@
 						},
 						{
 							"key": "field_location_telemed_hours_sunday_24_query",
+							"label": "Is telemedicine at this location be available 24 hours on Sundays?",
 							"name": "sunday_24_query",
 							"type": "button_group",
-							"label": "Is telemedicine at this location be available 24 hours on Sundays?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -6340,8 +6340,8 @@
 						},
 						{
 							"key": "field_location_telemed_hours_sunday_time_span",
-							"name": "sunday_time_span",
 							"label": "Time Span",
+							"name": "sunday_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during Sundays (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -6374,8 +6374,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_telemed_hours_sunday_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -6391,8 +6391,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_sunday_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -6408,8 +6408,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_sunday_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -6479,9 +6479,9 @@
 						},
 						{
 							"key": "field_location_telemed_hours_weekend_24_query",
+							"label": "Is telemedicine at this location be available 24 hours on weekends?",
 							"name": "weekend_24_query",
 							"type": "button_group",
-							"label": "Is telemedicine at this location be available 24 hours on weekends?",
 							"instructions": "",
 							"required": 1,
 							"conditional_logic": [
@@ -6510,8 +6510,8 @@
 						},
 						{
 							"key": "field_location_telemed_hours_weekend_time_span",
-							"name": "weekend_time_span",
 							"label": "Time Span",
+							"name": "weekend_time_span",
 							"type": "repeater",
 							"instructions": "Add a row for each time span during weekends (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 							"required": 1,
@@ -6544,8 +6544,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_telemed_hours_weekend_times_opens",
-									"name": "opens",
 									"label": "Opens",
+									"name": "opens",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -6561,8 +6561,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_weekend_times_closes",
-									"name": "closes",
 									"label": "Closes",
+									"name": "closes",
 									"type": "time_picker",
 									"instructions": "",
 									"required": 1,
@@ -6578,8 +6578,8 @@
 								},
 								{
 									"key": "field_location_telemed_hours_weekend_times_comment",
-									"name": "comment",
 									"label": "Comment",
+									"name": "comment",
 									"type": "text",
 									"instructions": "",
 									"required": 0,
@@ -6645,8 +6645,8 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_query",
-					"name": "location_telemed_modified_hours_query",
 					"label": "Are there any upcoming modified telemedicine hours of operation?",
+					"name": "location_telemed_modified_hours_query",
 					"type": "button_group",
 					"instructions": "",
 					"required": 1,
@@ -6712,8 +6712,8 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_reason",
-					"name": "location_telemed_modified_hours_reason",
 					"label": "Reason for Modified Telemedicine Hours of Operation",
+					"name": "location_telemed_modified_hours_reason",
 					"type": "wysiwyg",
 					"instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>This field can also include a description of the modification, if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>The date range will be displayed automatically, so that does not have to be included in this field..",
 					"required": 1,
@@ -6740,8 +6740,8 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_start_date",
-					"name": "location_telemed_modified_hours_start_date",
 					"label": "Start Date For the Modified Telemedicine Hours of Operation",
+					"name": "location_telemed_modified_hours_start_date",
 					"type": "date_picker",
 					"instructions": "The date when the modified telemedicine hours of operation begin.",
 					"required": 1,
@@ -6766,8 +6766,8 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_end",
-					"name": "location_telemed_modified_hours_end",
 					"label": "Is there an end date for the modified telemedicine hours of operation?",
+					"name": "location_telemed_modified_hours_end",
 					"type": "button_group",
 					"instructions": "",
 					"required": 1,
@@ -6797,8 +6797,8 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_end_date",
-					"name": "location_telemed_modified_hours_end_date",
 					"label": "End Date For the Modified Telemedicine Hours of Operation",
+					"name": "location_telemed_modified_hours_end_date",
 					"type": "date_picker",
 					"instructions": "The date after which the modified telemedicine hours of operation end.",
 					"required": 1,
@@ -6823,9 +6823,9 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_24_7",
+					"label": "Is telemedicine available 24\/7 during these modified telemedicine hours of operation?",
 					"name": "location_telemed_modified_hours_24_7",
 					"type": "button_group",
-					"label": "Is telemedicine available 24\/7 during these modified telemedicine hours of operation?",
 					"instructions": "",
 					"required": 1,
 					"conditional_logic": [
@@ -6854,8 +6854,8 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_times",
-					"name": "location_telemed_modified_hours_times",
 					"label": "Modified Telemedicine Hours of Operation",
+					"name": "location_telemed_modified_hours_times",
 					"type": "repeater",
 					"instructions": "Set the time for all seven days.",
 					"required": 0,
@@ -6888,8 +6888,8 @@
 					"sub_fields": [
 						{
 							"key": "field_location_telemed_modified_hours_day",
-							"name": "location_telemed_modified_hours_day",
 							"label": "Day",
+							"name": "location_telemed_modified_hours_day",
 							"type": "select",
 							"instructions": "",
 							"required": 1,
@@ -6942,8 +6942,8 @@
 						},
 						{
 							"key": "field_location_telemed_modified_hours_open",
-							"name": "location_telemed_modified_hours_open",
 							"label": "Opens",
+							"name": "location_telemed_modified_hours_open",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -6967,8 +6967,8 @@
 						},
 						{
 							"key": "field_location_telemed_modified_hours_close",
-							"name": "location_telemed_modified_hours_close",
 							"label": "Closes",
+							"name": "location_telemed_modified_hours_close",
 							"type": "time_picker",
 							"instructions": "",
 							"required": 1,
@@ -6992,8 +6992,8 @@
 						},
 						{
 							"key": "field_location_telemed_modified_hours_comment",
-							"name": "location_telemed_modified_hours_comment",
 							"label": "Comment",
+							"name": "location_telemed_modified_hours_comment",
 							"type": "text",
 							"instructions": "",
 							"required": 0,
@@ -7048,8 +7048,8 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_group_v2",
-					"name": "location_telemed_modified_hours_group_v2",
 					"label": "Individual Modification to the Telemedicine Hours of Operation",
+					"name": "location_telemed_modified_hours_group_v2",
 					"type": "repeater",
 					"instructions": "Begin entering the data into this new field group so that it can replace the previous version soon.",
 					"required": 0,
@@ -7077,8 +7077,8 @@
 					"sub_fields": [
 						{
 							"key": "field_location_telemed_modified_hours_title_v2",
-							"name": "title",
 							"label": "Title",
+							"name": "title",
 							"type": "text",
 							"instructions": "Define the text to be used in the heading for this set of modified hours (e.g., \"Thanksgiving Holiday Hours\").",
 							"required": 1,
@@ -7097,8 +7097,8 @@
 						},
 						{
 							"key": "field_location_telemed_modified_hours_information_v2",
-							"name": "information",
 							"label": "Overview",
+							"name": "information",
 							"type": "wysiwyg",
 							"instructions": "An overview of the modification to the telemedicine hours of operation (e.g., \"Telemedicine at this clinic will be unavailable over the Thanksgiving holiday.\").",
 							"required": 0,
@@ -7117,8 +7117,8 @@
 						},
 						{
 							"key": "field_location_telemed_modified_hours_dates",
-							"name": "dates",
 							"label": "Dates of the Modified Telemedicine Hours of Operation",
+							"name": "dates",
 							"type": "repeater",
 							"instructions": "Add a row for each sequential calendar day during the span of this modification to the telemedicine hours of operation (including days when the location is typically closed).",
 							"required": 1,
@@ -7138,8 +7138,8 @@
 							"sub_fields": [
 								{
 									"key": "field_location_telemed_modified_hours_date",
-									"name": "date",
 									"label": "Individual Date For the Modified Telemedicine Hours of Operation",
+									"name": "date",
 									"type": "date_picker",
 									"instructions": "",
 									"required": 1,
@@ -7187,9 +7187,9 @@
 								},
 								{
 									"key": "field_location_telemed_modified_hours_24_query",
+									"label": "Will this location be open 24 hours on this date?",
 									"name": "24_query",
 									"type": "button_group",
-									"label": "Will this location be open 24 hours on this date?",
 									"instructions": "",
 									"required": 1,
 									"conditional_logic": [
@@ -7218,8 +7218,8 @@
 								},
 								{
 									"key": "field_location_telemed_modified_hours_time_span",
-									"name": "time_span",
 									"label": "Time Span",
+									"name": "time_span",
 									"type": "repeater",
 									"instructions": "Add a row for each time span during the given day (e.g., 8-11:30 a.m., 12:30-4:30 p.m.).",
 									"required": 1,
@@ -7252,8 +7252,8 @@
 									"sub_fields": [
 										{
 											"key": "field_location_telemed_modified_hours_time_span_opens",
-											"name": "opens",
 											"label": "Opens",
+											"name": "opens",
 											"type": "time_picker",
 											"instructions": "",
 											"required": 1,
@@ -7269,8 +7269,8 @@
 										},
 										{
 											"key": "field_location_telemed_modified_hours_time_span_closes",
-											"name": "closes",
 											"label": "Closes",
+											"name": "closes",
 											"type": "time_picker",
 											"instructions": "",
 											"required": 1,
@@ -7286,8 +7286,8 @@
 										},
 										{
 											"key": "field_location_telemed_modified_hours_time_span_comment",
-											"name": "comment",
 											"label": "Comment",
+											"name": "comment",
 											"type": "text",
 											"instructions": "",
 											"required": 0,
@@ -7314,9 +7314,9 @@
 		},
 		"field_location_physician_tab": {
 			"key": "field_location_physician_tab",
+			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Related Providers",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Related Providers",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7330,9 +7330,9 @@
 		},
 		"field_location_physicians": {
 			"key": "field_location_physicians",
+			"label": "Providers",
 			"name": "physician_locations",
 			"type": "relationship",
-			"label": "Providers",
 			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7358,9 +7358,9 @@
 		},
 		"field_location_medical_tab": {
 			"key": "field_location_medical_tab",
+			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7374,9 +7374,9 @@
 		},
 		"field_location_expertise": {
 			"key": "field_location_expertise",
+			"label": "Areas of Expertise",
 			"name": "location_expertise",
 			"type": "relationship",
-			"label": "Areas of Expertise",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7405,9 +7405,9 @@
 		},
 		"field_location_conditions_treatments_tab": {
 			"key": "field_location_conditions_treatments_tab",
+			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7421,9 +7421,9 @@
 		},
 		"field_location_conditions_cpt": {
 			"key": "field_location_conditions_cpt",
+			"label": "Conditions",
 			"name": "location_conditions_cpt",
 			"type": "post_object",
-			"label": "Conditions",
 			"instructions": "The conditions will display in alphabetical order.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7450,9 +7450,9 @@
 		},
 		"field_location_treatments_cpt": {
 			"key": "field_location_treatments_cpt",
+			"label": "Treatments & Procedures",
 			"name": "location_treatments_cpt",
 			"type": "post_object",
-			"label": "Treatments & Procedures",
 			"instructions": "The treatments and procedures will display in alphabetical order.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7479,9 +7479,9 @@
 		},
 		"field_location_clinical_resources_tab": {
 			"key": "field_location_clinical_resources_tab",
+			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7495,9 +7495,9 @@
 		},
 		"field_location_clinical_resources": {
 			"key": "field_location_clinical_resources",
+			"label": "Clinical Resources",
 			"name": "location_clinical_resources",
 			"type": "relationship",
-			"label": "Clinical Resources",
 			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7526,9 +7526,9 @@
 		},
 		"field_location_scheduling_tab": {
 			"key": "field_location_scheduling_tab",
+			"label": "<i class=\"dashicons-calendar-alt dashicons\"><\/i> MyChart Scheduling",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-calendar-alt dashicons\"><\/i> MyChart Scheduling",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7542,9 +7542,9 @@
 		},
 		"field_location_scheduling_query": {
 			"key": "field_location_scheduling_query",
+			"label": "Enable MyChart Scheduling?",
 			"name": "location_scheduling_query",
 			"type": "true_false",
-			"label": "Enable MyChart Scheduling?",
 			"instructions": "Check with the MyChart team before doing anything here.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7561,9 +7561,9 @@
 		},
 		"field_location_scheduling_title_general": {
 			"key": "field_location_scheduling_title_general",
+			"label": "Appointment Section Title (Optional Override)",
 			"name": "location_scheduling_title_general",
 			"type": "text",
-			"label": "Appointment Section Title (Optional Override)",
 			"instructions": "If there are multiple scheduling widgets, this will define the text used in the main section heading. If you do not define a value here, \"Schedule an Appointment Online\" will be used. </p><p class='description' style='margin-top: 0.5em;'>If you define a value here, use a very short phrase that makes the purpose of the online scheduling section clear to the user. Do not just use the name of a condition or treatment. </p><p class='description' style='margin-top: 0.5em;'>If there is only one scheduling widget, the heading will be defined by a value from within the <em>MyChart Open Scheduling Widget(s)</em> repeater instead.",
 			"required": 0,
 			"conditional_logic": [
@@ -7588,9 +7588,9 @@
 		},
 		"field_location_scheduling_intro_general": {
 			"key": "field_location_scheduling_intro_general",
+			"label": "Appointment Section Introduction (Optional Override)",
 			"name": "location_scheduling_intro_general",
 			"type": "textarea",
-			"label": "Appointment Section Introduction (Optional Override)",
 			"instructions": "This paragraph introduces the online scheduling section. If you do not define a value here, it will display \"Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.\" </p><p class='description' style='margin-top: 0.5em;'>The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7607,9 +7607,9 @@
 		},
 		"field_location_scheduling_options": {
 			"key": "field_location_scheduling_options",
+			"label": "MyChart Open Scheduling Widget Option(s)",
 			"name": "location_scheduling_options",
 			"type": "repeater",
-			"label": "MyChart Open Scheduling Widget Option(s)",
 			"instructions": "Define the information for each specific open scheduling widget. One or more must be defined.",
 			"required": 1,
 			"conditional_logic": [
@@ -7634,9 +7634,9 @@
 			"sub_fields": [
 				{
 					"key": "field_location_scheduling_title",
+					"label": "Standalone Heading Text",
 					"name": "location_scheduling_title",
 					"type": "text",
-					"label": "Standalone Heading Text",
 					"instructions": "If this is the only scheduling widget, this value will replace the main section heading (defined by <em>Appointment Section Title</em>). </p><p class='description' style='margin-top: 0.5em;'>Use a very short phrase that makes the purpose of this specific scheduling widget clear to the user. Do not just use the name of a condition or treatment.",
 					"required": 1,
 					"conditional_logic": 0,
@@ -7653,9 +7653,9 @@
 				},
 				{
 					"key": "field_location_scheduling_intro",
+					"label": "Standalone Appointment Section Introduction (Optional Override)",
 					"name": "location_scheduling_intro",
 					"type": "textarea",
-					"label": "Standalone Appointment Section Introduction (Optional Override)",
 					"instructions": "If this is the only scheduling widget, you can define a value here to replace the main section introduction (defined by <em>Appointment Section Introduction</em>) if that general introduction does not adequately introduce this specific widget. </p><p class='description' style='margin-top: 0.5em;'>If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this specific scheduling widget. There is a 221 character limit.",
 					"required": 0,
 					"conditional_logic": 0,
@@ -7672,9 +7672,9 @@
 				},
 				{
 					"key": "field_location_scheduling_item_title_nested",
+					"label": "Nested Heading Text",
 					"name": "location_scheduling_item_title_nested",
 					"type": "text",
-					"label": "Nested Heading Text",
 					"instructions": "If this is one of multiple scheduling widgets, this field defines the text of the heading immediately preceding this specific scheduling widget. This heading will be nested below the main section heading (defined by <em>Appointment Section Title</em>) in the heading outline. This will also set the label of the multiple choice option the user can select to display this specific scheduling widget. </p><p class='description' style='margin-top: 0.5em;'>Use a very short phrase, visit type name or treatment name that makes the purpose of this specific scheduling widget clear to the user.",
 					"required": 1,
 					"conditional_logic": 0,
@@ -7691,9 +7691,9 @@
 				},
 				{
 					"key": "field_location_scheduling_item_intro_nested",
+					"label": "Nested Appointment Section Introduction (Optional)",
 					"name": "location_scheduling_item_intro_nested",
 					"type": "textarea",
-					"label": "Nested Appointment Section Introduction (Optional)",
 					"instructions": "If this is one of multiple scheduling widgets, this field defines the paragraph introducing this specific scheduling widget. If used, this paragraph will not need to cover information addressed in the <em>Appointment Section Introduction</em> field, but should provide a brief overview of any information necessary for users to know about this specific scheduling widget. There is a 221 character limit.",
 					"required": 0,
 					"conditional_logic": 0,
@@ -7710,9 +7710,9 @@
 				},
 				{
 					"key": "field_location_scheduling_vt",
+					"label": "Visit Type (PRC) ID from Epic",
 					"name": "location_scheduling_vt",
 					"type": "text",
-					"label": "Visit Type (PRC) ID from Epic",
 					"instructions": "A single visit type available for scheduling in this specific widget.",
 					"required": 1,
 					"conditional_logic": 0,
@@ -7729,9 +7729,9 @@
 				},
 				{
 					"key": "field_location_scheduling_ser",
+					"label": "Provider (SER) ID from Epic",
 					"name": "location_scheduling_ser",
 					"type": "text",
-					"label": "Provider (SER) ID from Epic",
 					"instructions": "ID for one or more providers available for scheduling in this specific widget. Separate multiple values with a comma (\",\"). </p><p class='description' style='margin-top: 0.5em;'>If you specify a department, you <em>can</em> omit the list of provider IDs so all providers who are enabled for open scheduling in that department with that visit type are automatically included in the widget. </p><p class='description' style='margin-top: 0.5em;'><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
 					"required": 0,
 					"conditional_logic": 0,
@@ -7748,9 +7748,9 @@
 				},
 				{
 					"key": "field_location_scheduling_dep",
+					"label": "Department (DEP) ID from Epic",
 					"name": "location_scheduling_dep",
 					"type": "text",
-					"label": "Department (DEP) ID from Epic",
 					"instructions": "ID for one or more departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). </p><p class='description' style='margin-top: 0.5em;'>If you specify a provider, you can omit the list of department IDs so all departments who are enabled for open scheduling with that provider and visit type are automatically included in the widget. </p><p class='description' style='margin-top: 0.5em;'><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
 					"required": 0,
 					"conditional_logic": 0,
@@ -7767,8 +7767,8 @@
 				},
 				{
 					"key": "field_location_scheduling_fallback",
-					"name": "location_scheduling_fallback",
 					"label": "Fallback Information",
+					"name": "location_scheduling_fallback",
 					"type": "wysiwyg",
 					"instructions": "This is an optional paragraph that appears after this specific scheduling widget where you can present users an alternative scheduling options. Keep it as brief as possible, limiting it to one to three sentences in a single paragraph. Add tel links to any phone numbers (href=\"tel:501-555-6162\"). </p><p class='description' style='margin-top: 0.5em;'> Example Paragraph: \"If you are unable to register for your appointment using the method above, call 501-555-6162 to schedule an appointment. This line is staffed Monday thru Friday from 10 a.m. – 5:30 p.m. If the lines are busy, you will be prompted to leave a voicemail.\"",
 					"required": 0,
@@ -7789,9 +7789,9 @@
 		},
 		"field_location_external_website_tab": {
 			"key": "field_location_external_website_tab",
+			"label": "<i class=\"dashicons-admin-links dashicons\"><\/i> External Website",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-admin-links dashicons\"><\/i> External Website",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -7813,9 +7813,9 @@
 		},
 		"field_link_message": {
 			"key": "field_link_message",
+			"label": "",
 			"name": "",
 			"type": "message",
-			"label": "",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7830,9 +7830,9 @@
 		},
 		"field_location_url": {
 			"key": "field_location_url",
+			"label": "Non-UAMS URL",
 			"name": "location_url",
 			"type": "link",
-			"label": "Non-UAMS URL",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7846,9 +7846,9 @@
 		},
 		"field_location_web_name": {
 			"key": "field_location_web_name",
+			"label": "Non-UAMS Website Name",
 			"name": "location_web_name",
 			"type": "text",
-			"label": "Non-UAMS Website Name",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -7872,9 +7872,9 @@
 		},
 		"field_location_alert_tab": {
 			"key": "field_location_alert_tab",
+			"label": "<i class=\"dashicons-warning dashicons\"><\/i> Alert",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-warning dashicons\"><\/i> Alert",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -7888,8 +7888,8 @@
 		},
 		"field_location_current_alert": {
 			"key": "field_location_current_alert",
-			"name": "location_current_alert",
 			"label": "Current Alert",
+			"name": "location_current_alert",
 			"type": "acfe_dynamic_message",
 			"instructions": "",
 			"required": 0,
@@ -7903,8 +7903,8 @@
 		},
 		"field_location_alert_modification": {
 			"key": "field_location_alert_modification",
-			"name": "location_alert_modification",
 			"label": "Alert Modification",
+			"name": "location_alert_modification",
 			"type": "radio",
 			"instructions": "How do you want to modify the alert from Find-a-Doc Settings?",
 			"required": 1,
@@ -7931,9 +7931,9 @@
 		},
 		"field_location_alert_body_override_tip": {
 			"key": "field_location_alert_body_override_tip",
+			"label": "Overriding the alert from Find-a-Doc Settings",
 			"name": "",
 			"type": "message",
-			"label": "Overriding the alert from Find-a-Doc Settings",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -7956,9 +7956,9 @@
 		},
 		"field_location_alert_body_prepend_tip": {
 			"key": "field_location_alert_body_prepend_tip",
+			"label": "Inserting an alert before the alert from Find-a-Doc Settings",
 			"name": "",
 			"type": "message",
-			"label": "Inserting an alert before the alert from Find-a-Doc Settings",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -7981,9 +7981,9 @@
 		},
 		"field_location_alert_body_append_tip": {
 			"key": "field_location_alert_body_append_tip",
+			"label": "Inserting an alert after the alert from Find-a-Doc Settings",
 			"name": "",
 			"type": "message",
-			"label": "Inserting an alert after the alert from Find-a-Doc Settings",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -8006,9 +8006,9 @@
 		},
 		"field_location_alert_heading": {
 			"key": "field_location_alert_heading",
+			"label": "Alert Heading",
 			"name": "location_alert_heading",
 			"type": "text",
-			"label": "Alert Heading",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -8033,9 +8033,9 @@
 		},
 		"field_location_alert_body": {
 			"key": "field_location_alert_body",
+			"label": "Alert Body",
 			"name": "location_alert_body",
 			"type": "wysiwyg",
-			"label": "Alert Body",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -8077,9 +8077,9 @@
 		},
 		"field_location_alert_color": {
 			"key": "field_location_alert_color",
+			"label": "Alert Color",
 			"name": "location_alert_color",
 			"type": "select",
-			"label": "Alert Color",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -8112,9 +8112,9 @@
 		},
 		"field_location_closing_tab": {
 			"key": "field_location_closing_tab",
+			"label": "<i class=\"dashicons-dismiss dashicons\"><\/i> Closing",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-dismiss dashicons\"><\/i> Closing",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -8128,8 +8128,8 @@
 		},
 		"field_location_closing": {
 			"key": "field_location_closing",
-			"name": "location_closing",
 			"label": "Is this location closing?",
+			"name": "location_closing",
 			"type": "true_false",
 			"instructions": "",
 			"required": 0,
@@ -8148,8 +8148,8 @@
 		},
 		"field_location_closing_date": {
 			"key": "field_location_closing_date",
-			"name": "location_closing_date",
 			"label": "Closing Date",
+			"name": "location_closing_date",
 			"type": "date_picker",
 			"instructions": "",
 			"required": 1,
@@ -8174,8 +8174,8 @@
 		},
 		"field_location_closing_length": {
 			"key": "field_location_closing_length",
-			"name": "location_closing_length",
 			"label": "Temporary or permanent?",
+			"name": "location_closing_length",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8205,8 +8205,8 @@
 		},
 		"field_location_reopen_known": {
 			"key": "field_location_reopen_known",
-			"name": "location_reopen_known",
 			"label": "Reopening date known?",
+			"name": "location_reopen_known",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8236,8 +8236,8 @@
 		},
 		"field_location_reopen_date": {
 			"key": "field_location_reopen_date",
-			"name": "location_reopen_date",
 			"label": "Reopening date",
+			"name": "location_reopen_date",
 			"type": "date_picker",
 			"instructions": "",
 			"required": 1,
@@ -8262,8 +8262,8 @@
 		},
 		"field_location_closing_info": {
 			"key": "field_location_closing_info",
-			"name": "location_closing_info",
 			"label": "Closure Information",
+			"name": "location_closing_info",
 			"type": "wysiwyg",
 			"instructions": "",
 			"required": 0,
@@ -8290,8 +8290,8 @@
 		},
 		"field_location_closing_telemed": {
 			"key": "field_location_closing_telemed",
-			"name": "location_closing_telemed",
 			"label": "Will telemedicine still be available?",
+			"name": "location_closing_telemed",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8326,9 +8326,9 @@
 		},
 		"field_location_gmb_tab": {
 			"key": "field_location_gmb_tab",
+			"label": "<i class=\"dashicons-google dashicons\"><\/i> Google My Business Details",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-google dashicons\"><\/i> Google My Business Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -8342,8 +8342,8 @@
 		},
 		"field_location_schema_gmb_query": {
 			"key": "field_location_schema_gmb_query",
-			"name": "location_schema_gmb_query",
 			"label": "Does this location have a listing on Google My Business?",
+			"name": "location_schema_gmb_query",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8365,8 +8365,8 @@
 		},
 		"field_location_schema_google_cid": {
 			"key": "field_location_schema_google_cid",
-			"name": "location_schema_google_cid",
 			"label": "Google CID Number (hasMap, identifier)",
+			"name": "location_schema_google_cid",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
@@ -8397,8 +8397,8 @@
 		},
 		"field_location_gmb_exclude": {
 			"key": "field_location_gmb_exclude",
-			"name": "location_gmb_exclude",
 			"label": "Should this location be excluded from any bulk imports and updates in Google My Business?",
+			"name": "location_gmb_exclude",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8419,8 +8419,8 @@
 		},
 		"field_location_gmb_prefix": {
 			"key": "field_location_gmb_prefix",
-			"name": "location_gmb_prefix",
 			"label": "Should \"UAMS Health\" be prepended to the location name on the Google My Business listing?",
+			"name": "location_gmb_prefix",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8449,8 +8449,8 @@
 		},
 		"field_location_gmb_cat": {
 			"key": "field_location_gmb_cat",
-			"name": "location_gmb_cat",
 			"label": "Google My Business Category",
+			"name": "location_gmb_cat",
 			"type": "taxonomy",
 			"instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Medical Clinic\" is a good standard choice, if you cannot find a better option.</p><p class='description' style='margin-top: 0.5em;'>For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",
 			"required": "1",
@@ -8482,8 +8482,8 @@
 		},
 		"field_location_gmb_has_wheelchair_accessible_elevator": {
 			"key": "field_location_gmb_has_wheelchair_accessible_elevator",
-			"name": "has_wheelchair_accessible_elevator",
 			"label": "Accessibility: Wheelchair accessible elevator (for patients)",
+			"name": "has_wheelchair_accessible_elevator",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8513,8 +8513,8 @@
 		},
 		"field_location_gmb_has_wheelchair_accessible_entrance": {
 			"key": "field_location_gmb_has_wheelchair_accessible_entrance",
-			"name": "has_wheelchair_accessible_entrance",
 			"label": "Accessibility: Wheelchair accessible entrance (for patients)",
+			"name": "has_wheelchair_accessible_entrance",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8544,8 +8544,8 @@
 		},
 		"field_location_gmb_has_wheelchair_accessible_restroom": {
 			"key": "field_location_gmb_has_wheelchair_accessible_restroom",
-			"name": "has_wheelchair_accessible_restroom",
 			"label": "Accessibility: Wheelchair accessible restroom (for patients)",
+			"name": "has_wheelchair_accessible_restroom",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8575,8 +8575,8 @@
 		},
 		"field_location_gmb_has_restroom": {
 			"key": "field_location_gmb_has_restroom",
-			"name": "has_restroom",
 			"label": "Amenities: Restroom (for patients)",
+			"name": "has_restroom",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8606,8 +8606,8 @@
 		},
 		"field_location_gmb_requires_appointments": {
 			"key": "field_location_gmb_requires_appointments",
-			"name": "requires_appointments",
 			"label": "Health and safety: Appointment required",
+			"name": "requires_appointments",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8637,8 +8637,8 @@
 		},
 		"field_location_gmb_requires_temperature_check_customers": {
 			"key": "field_location_gmb_requires_temperature_check_customers",
-			"name": "requires_temperature_check_customers",
 			"label": "Health and safety: Temperature check required (for patients)",
+			"name": "requires_temperature_check_customers",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8668,8 +8668,8 @@
 		},
 		"field_location_gmb_requires_masks_customers": {
 			"key": "field_location_gmb_requires_masks_customers",
-			"name": "requires_masks_customers",
 			"label": "Health and safety: Mask required (for patients)",
+			"name": "requires_masks_customers",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8699,8 +8699,8 @@
 		},
 		"field_location_gmb_requires_temperature_check_staff": {
 			"key": "field_location_gmb_requires_temperature_check_staff",
-			"name": "requires_temperature_check_staff",
 			"label": "Health and safety: Staff get temperature checks",
+			"name": "requires_temperature_check_staff",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8730,8 +8730,8 @@
 		},
 		"field_location_gmb_requires_masks_staff": {
 			"key": "field_location_gmb_requires_masks_staff",
-			"name": "requires_masks_staff",
 			"label": "Health and safety: Staff wear masks",
+			"name": "requires_masks_staff",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8761,8 +8761,8 @@
 		},
 		"field_location_gmb_is_sanitizing_between_customers": {
 			"key": "field_location_gmb_is_sanitizing_between_customers",
-			"name": "is_sanitizing_between_customers",
 			"label": "Health and safety: Staff required to disinfect surfaces between visits",
+			"name": "is_sanitizing_between_customers",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8792,9 +8792,9 @@
 		},
 		"field_location_schema_tab": {
 			"key": "field_location_schema_tab",
+			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -8808,8 +8808,8 @@
 		},
 		"field_location_schema_localbusiness": {
 			"key": "field_location_schema_localbusiness",
-			"name": "location_schema_localbusiness",
 			"label": "LocalBusiness Subtype (@type)",
+			"name": "location_schema_localbusiness",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
@@ -8833,8 +8833,8 @@
 		},
 		"field_location_npi_query": {
 			"key": "field_location_npi_query",
-			"name": "location_npi_query",
 			"label": "Does this location have a National Provider Identifier (NPI)?",
+			"name": "location_npi_query",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -8907,9 +8907,9 @@
 		},
 		"field_location_va_station_id": {
 			"key": "field_location_va_station_id",
+			"label": "United States Department of Veterans Affairs Substation Identifier (STA6A)",
 			"name": "location_va_station_id",
 			"type": "text",
-			"label": "United States Department of Veterans Affairs Substation Identifier (STA6A)",
 			"instructions": "This three- to six-character value can be found by searching for the location at <a href='https://www.va.gov/directory/guide/allstate.asp' target='_blank'>https://www.va.gov/directory/guide/allstate.asp</a>. Click the link for the appropriate state and then click the link for \"View Addresses.\" The STA6A will be listed in the \"Station ID\" column.",
 			"required": 1,
 			"conditional_logic": [
@@ -9059,8 +9059,8 @@
 		},
 		"field_location_schema_additionalType": {
 			"key": "field_location_schema_additionalType",
-			"name": "location_schema_additionalType",
 			"label": "More Specific Type(s) for This Location From External Vocabularies in Microdata Syntax (additionalType > Text or URL)",
+			"name": "location_schema_additionalType",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
@@ -9083,8 +9083,8 @@
 		},
 		"field_location_schema_medicalspecialty": {
 			"key": "field_location_schema_medicalspecialty",
-			"name": "location_schema_medicalspecialty",
 			"label": "Relevant Medical Specialties (medicalSpecialty > MedicalSpecialty)",
+			"name": "location_schema_medicalspecialty",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
@@ -9107,8 +9107,8 @@
 		},
 		"field_location_schema_alternatename": {
 			"key": "field_location_schema_alternatename",
-			"name": "location_schema_alternatename",
 			"label": "Alternate Name(s) for the Location (alternateName > Text)",
+			"name": "location_schema_alternatename",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
@@ -9131,8 +9131,8 @@
 		},
 		"field_location_schema_sameas": {
 			"key": "field_location_schema_sameas",
-			"name": "location_schema_sameas",
 			"label": "Reference Webpage(s) Specifically About This Location (sameAs > URL)",
+			"name": "location_schema_sameas",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
@@ -9155,9 +9155,9 @@
 		},
 		"field_location_deprecated_tab": {
 			"key": "field_location_deprecated_tab",
+			"label": "Deprecated Fields",
 			"name": "",
 			"type": "tab",
-			"label": "Deprecated Fields",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -9179,9 +9179,9 @@
 		},
 		"field_location_address_2": {
 			"key": "field_location_address_2",
+			"label": "Address (2) (Deprecated)",
 			"name": "location_address_2",
 			"type": "text",
-			"label": "Address (2) (Deprecated)",
 			"instructions": "Move information to Building, Building Floor, Suite fields.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -9198,9 +9198,9 @@
 		},
 		"field_location_abbreviation": {
 			"key": "field_location_abbreviation",
+			"label": "Abbreviation (Deprecated)",
 			"name": "location_abbreviation",
 			"type": "text",
-			"label": "Abbreviation (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -9217,9 +9217,9 @@
 		},
 		"field_location_description": {
 			"key": "field_location_description",
+			"label": "Location Description (Deprecated)",
 			"name": "location_description",
 			"type": "text",
-			"label": "Location Description (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -9236,9 +9236,9 @@
 		},
 		"field_location_email": {
 			"key": "field_location_email",
+			"label": "Email (Deprecated)",
 			"name": "location_email",
 			"type": "maskfield",
-			"label": "Email (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -9269,9 +9269,9 @@
 		},
 		"field_location_medical_specialties": {
 			"key": "field_location_medical_specialties",
+			"label": "Medical Specialties Offered (Deprecated)",
 			"name": "location_medical_specialties",
 			"type": "taxonomy",
-			"label": "Medical Specialties Offered (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -9294,9 +9294,9 @@
 		},
 		"field_location_medical_terms": {
 			"key": "field_location_medical_terms",
+			"label": "Medical Terms (Deprecated)",
 			"name": "location_medical_terms",
 			"type": "taxonomy",
-			"label": "Medical Terms (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -9319,9 +9319,9 @@
 		},
 		"field_location_clinic": {
 			"key": "field_location_clinic",
+			"label": "Clinic (Deprecated)",
 			"name": "location_clinic",
 			"type": "true_false",
-			"label": "Clinic (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -9338,9 +9338,9 @@
 		},
 		"field_location_facility": {
 			"key": "field_location_facility",
+			"label": "Facility (Deprecated)",
 			"name": "location_facility",
 			"type": "true_false",
-			"label": "Facility (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -9357,8 +9357,8 @@
 		},
 		"field_location_alert_suppress": {
 			"key": "field_location_alert_suppress",
-			"name": "location_alert_suppress",
 			"label": "Suppress alert from Find-a-Doc Settings? (Deprecated)",
+			"name": "location_alert_suppress",
 			"type": "true_false",
 			"instructions": "Move this value to the Alert Modification field. This field will be removed soon.",
 			"required": 0,
@@ -9517,9 +9517,9 @@
 		},
 		"field_details_other_message": {
 			"key": "field_details_other_message",
+			"label": "",
 			"name": "(Deprecated)",
 			"type": "message",
-			"label": "",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,

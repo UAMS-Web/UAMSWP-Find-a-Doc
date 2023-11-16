@@ -1225,8 +1225,8 @@
 				},
 				{
 					"key": "field_brandorg_identifier_alternatename",
-					"name": "brandorg_identifier_alternatename",
 					"label": "Identifier Property Alternate Name (alternateName > Text)",
+					"name": "brandorg_identifier_alternatename",
 					"type": "clone",
 					"instructions": "",
 					"required": 1,

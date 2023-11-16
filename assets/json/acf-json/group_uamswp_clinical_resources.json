@@ -4,9 +4,9 @@
 	"fields": [
 		{
 			"key": "field_clinical_resource_tab_general",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -100,9 +100,9 @@
 		},
 		{
 			"key": "field_clinical_resource_asp_filter",
+			"label": "Ajax Search Filter",
 			"name": "clinical_resource_asp_filter",
 			"type": "acfe_hidden",
-			"label": "Ajax Search Filter",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -115,9 +115,9 @@
 		},
 		{
 			"key": "field_clinical_resource_tab_content",
+			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Content",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Content",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -223,9 +223,9 @@
 		},
 		{
 			"key": "field_clinical_resource_nci_embed",
+			"label": "National Cancer Institute (NCI) Syndication Embed / Syndication Code",
 			"name": "clinical_resource_nci_embed",
 			"type": "textarea",
-			"label": "National Cancer Institute (NCI) Syndication Embed / Syndication Code",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -610,8 +610,8 @@
 		},
 		{
 			"key": "field_clinical_resource_tab_provider",
-			"name": "",
 			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Related Providers",
+			"name": "",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -655,8 +655,8 @@
 		},
 		{
 			"key": "field_clinical_resource_tab_location",
-			"name": "",
 			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Related Locations",
+			"name": "",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -700,8 +700,8 @@
 		},
 		{
 			"key": "field_clinical_resource_tab_expertise",
-			"name": "",
 			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
+			"name": "",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -745,8 +745,8 @@
 		},
 		{
 			"key": "field_clinical_resource_tab_condition_treatment",
-			"name": "",
 			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
+			"name": "",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -819,8 +819,8 @@
 		},
 		{
 			"key": "field_clinical_resource_tab_clinical_resource",
-			"name": "",
 			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
+			"name": "",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -866,8 +866,8 @@
 		},
 		{
 			"key": "field_clinical_resource_tab_deprecated",
-			"name": "",
 			"label": "Deprecated Fields",
+			"name": "",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
