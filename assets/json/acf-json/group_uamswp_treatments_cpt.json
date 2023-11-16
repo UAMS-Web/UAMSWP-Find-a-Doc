@@ -3,6 +3,22 @@
 	"title": "Treatment Item Configuration",
 	"fields": [
 		{
+			"key": "field_treatment_tab_general",
+			"name": "",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
 			"key": "field_treatment_procedure_alternate",
 			"label": "Alternate Name(s) for This Treatment or Procedure",
 			"name": "treatment_procedure_alternate",
@@ -706,6 +722,126 @@
 			"prepend": "",
 			"append": "",
 			"maxlength": ""
+		},
+		{
+			"key": "field_treatment_procedure_tab_schema",
+			"name": "",
+			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_treatment_procedure_tab_conditions",
+			"name": "",
+			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_treatment_procedure_tab_expertise",
+			"name": "",
+			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_treatment_procedure_tab_locations",
+			"name": "",
+			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Related Locations",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_treatment_procedure_tab_providers",
+			"name": "",
+			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Related Providers",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_treatment_procedure_tab_clinical_resources",
+			"name": "",
+			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_treatment_procedure_tab_deprecated",
+			"name": "",
+			"label": "Deprecated Fields",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_treatment_procedure_tab_deprecated",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		}
 	],
 	"location": [
