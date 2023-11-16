@@ -179,21 +179,25 @@
 		"field_location_hidden": {
 			"key": "field_location_hidden",
 			"name": "location_hidden",
-			"type": "true_false",
+			"type": "button_group",
 			"label": "Exclude from Primary Location List?",
 			"instructions": "Setting this to \"Yes\" will remove this location from the Location archive. This input will not affect whether the location will be displayed on profiles and search results.",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		"field_location_service_line": {
 			"key": "field_location_service_line",
