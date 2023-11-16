@@ -406,8 +406,8 @@
 				[
 					{
 						"field": "field_location_building_query",
-						"operator": "!=",
-						"value": "0"
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -439,8 +439,8 @@
 				[
 					{
 						"field": "field_location_building_query",
-						"operator": "!=",
-						"value": "0"
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
