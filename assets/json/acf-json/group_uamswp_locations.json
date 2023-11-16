@@ -2702,8 +2702,8 @@
 								[
 									{
 										"field": "field_holiday_closed",
-										"operator": "!=",
-										"value": "1"
+										"operator": "==",
+										"value": "0"
 									}
 								]
 							],
@@ -2726,8 +2726,8 @@
 								[
 									{
 										"field": "field_holiday_closed",
-										"operator": "!=",
-										"value": "1"
+										"operator": "==",
+										"value": "0"
 									}
 								]
 							],
