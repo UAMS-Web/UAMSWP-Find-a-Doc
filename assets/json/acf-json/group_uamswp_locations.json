@@ -289,6 +289,29 @@
 			"append": "",
 			"maxlength": ""
 		},
+		"field_location_building_query": {
+			"key": "field_location_building_query",
+			"name": "location_building_query",
+			"label": "Is this location contained within a larger facility rather than being its own standalone facility?",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
 		"field_location_building": {
 			"key": "field_location_building",
 			"label": "Facility",
@@ -296,7 +319,15 @@
 			"type": "taxonomy",
 			"instructions": "Select the most specific building or building complex this location is contained within. If it is not a part of a larger facility, select None.",
 			"required": "1",
-			"conditional_logic": "0",
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_building_query",
+						"operator": "!=",
+						"value": "0"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
