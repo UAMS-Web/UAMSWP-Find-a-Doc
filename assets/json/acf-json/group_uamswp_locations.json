@@ -289,25 +289,6 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_location_address_2": {
-			"key": "field_location_address_2",
-			"name": "location_address_2",
-			"type": "text",
-			"label": "Address (2)",
-			"instructions": "<strong>Deprecated</strong>. Move information to Building, Building Floor, Suite fields.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
 		"field_location_building": {
 			"key": "field_location_building",
 			"label": "Facility",
@@ -4871,6 +4852,25 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_location_address_2": {
+			"key": "field_location_address_2",
+			"name": "location_address_2",
+			"type": "text",
+			"label": "Address (2) (Deprecated)",
+			"instructions": "Move information to Building, Building Floor, Suite fields.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
 		},
 		"field_location_medical_specialties": {
 			"key": "field_location_medical_specialties",
