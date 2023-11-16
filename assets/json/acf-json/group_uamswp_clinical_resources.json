@@ -197,6 +197,11 @@
 						"field": "field_clinical_resource_type",
 						"operator": "==",
 						"value": "text"
+					},
+					{
+						"field": "field_clinical_resource_syndicated",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
