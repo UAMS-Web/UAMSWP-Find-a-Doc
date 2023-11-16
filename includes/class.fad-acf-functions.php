@@ -1781,3 +1781,76 @@
 	 */
 
 	add_filter('acf/prepare_field/key=field_location_scheduling_tab', 'uamswp_mychart_scheduling_query', 20);
+
+// Populate ACF field choices with terms from custom taxonomies
+
+	// UAMS Brand Organizations
+
+		add_filter( 'acf/load_field/key=field_fad_default_brandorg_clinical', 'uamswp_fad_acf_load_brandorg_uams' ); // Default Clinical UAMS Brand Organization
+		add_filter( 'acf/load_field/key=field_fad_default_brandorg_affiliation', 'uamswp_fad_acf_load_brandorg_uams' ); // Default UAMS Brand Organizations as Affiliations
+		add_filter( 'acf/load_field/key=field_fad_default_brandorg_credit', 'uamswp_fad_acf_load_brandorg_uams' ); // Default UAMS Brand Organizations to Credit
+		add_filter( 'acf/load_field/key=field_fad_default_brandorg_locationcreated', 'uamswp_fad_acf_load_brandorg_uams' ); // Default UAMS Brand Organizations as Location Created
+		add_filter( 'acf/load_field/key=field_fad_default_brandorg_copyright', 'uamswp_fad_acf_load_brandorg_uams' ); // Default UAMS Brand Organizations as Copyright Holder
+
+		function uamswp_fad_acf_load_brandorg_uams ( $field ) {
+
+			// Get all taxonomy terms
+
+				$brand_organizations = get_terms(
+					array(
+						'taxonomy' => 'brand_organization_uams',
+						'hide_empty' => false
+					)
+				);
+
+			// Add each term to the choices array.
+
+				/*
+
+					Example: $field['choices']['review'] = Review
+
+				*/
+
+				foreach ( $brand_organizations as $item ) {
+
+					$field['choices'][$item->slug] = $item->name;
+
+				}
+
+			return $field;
+
+		}
+
+	// Third-Party Brand Organizations
+
+		add_filter( 'acf/load_field/key=field_schema_brandorg', 'uamswp_fad_acf_load_brandorg_3p' );
+		add_filter( 'acf/load_field/key=field_schema_brandorg_multiple', 'uamswp_fad_acf_load_brandorg_3p' );
+
+		function uamswp_fad_acf_load_brandorg_3p ( $field ) {
+
+			// Get all taxonomy terms
+
+				$brand_organizations = get_terms(
+					array(
+						'taxonomy' => 'brand_organization',
+						'hide_empty' => false
+					)
+				);
+
+			// Add each term to the choices array.
+
+				/*
+
+					Example: $field['choices']['review'] = Review
+
+				*/
+
+				foreach ( $brand_organizations as $item ) {
+
+					$field['choices'][$item->slug] = $item->name;
+
+				}
+
+			return $field;
+
+		}
