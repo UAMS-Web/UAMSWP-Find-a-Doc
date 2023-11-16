@@ -84,25 +84,6 @@
 			"default_value": "",
 			"placeholder": ""
 		},
-		"field_expertise_short_desc": {
-			"key": "field_expertise_short_desc",
-			"label": "Short Description (excerpt)",
-			"name": "post_excerpt",
-			"type": "textarea",
-			"instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "50",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"maxlength": 160,
-			"rows": 3,
-			"new_lines": ""
-		},
 		"field_expertise_cta": {
 			"key": "field_expertise_cta",
 			"label": "Call-to-Action (CTA) Bar(s)",
@@ -644,6 +625,25 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_expertise_short_desc": {
+			"key": "field_expertise_short_desc",
+			"label": "Short Description (excerpt)",
+			"name": "post_excerpt",
+			"type": "textarea",
+			"instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "50",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 3,
+			"new_lines": ""
 		},
 		"field_expertise_brand_tab": {
 			"key": "field_expertise_brand_tab",
