@@ -215,7 +215,7 @@
 			"allow_null": 1,
 			"other_choice": 0,
 			"default_value": "",
-			"layout": "horizontal",
+			"layout": "vertical",
 			"return_format": "value",
 			"save_other_choice": 0
 		},
