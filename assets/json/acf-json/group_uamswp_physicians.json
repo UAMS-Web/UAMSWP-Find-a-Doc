@@ -328,6 +328,35 @@
 			},
 			"multiple": 0
 		},
+		"field_physician_brand_tab": {
+			"key": "field_physician_brand_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_brand_tab",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": [
+				"super_admin",
+				"administrator",
+				"editor"
+			],
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_physician_portrait_tab": {
 			"key": "field_physician_portrait_tab",
 			"name": "",
@@ -2344,35 +2373,6 @@
 					"new_lines": ""
 				}
 			]
-		},
-		"field_physician_brand_tab": {
-			"key": "field_physician_brand_tab",
-			"name": "",
-			"type": "tab",
-			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_brand_tab",
-						"operator": "==",
-						"value": "false"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": [
-				"super_admin",
-				"administrator",
-				"editor"
-			],
-			"placement": "left",
-			"endpoint": 0
 		},
 		"field_physician_location_tab": {
 			"key": "field_physician_location_tab",
