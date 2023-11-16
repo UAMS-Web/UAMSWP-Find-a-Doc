@@ -161,6 +161,30 @@
 			"acfe_validate": ""
 		},
 		{
+			"key": "field_clinical_resource_syndicated",
+			"label": "Is this syndicated from another source?",
+			"name": "clinical_resource_syndicated",
+			"type": "radio",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"1": "Yes",
+				"0": "No"
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
 			"key": "field_clinical_resource_text_nci_query",
 			"label": "Is this this National Cancer Institute (NCI) syndicated content?",
 			"name": "clinical_resource_text_nci_query",
@@ -812,30 +836,6 @@
 			"message": "",
 			"new_lines": "",
 			"esc_html": 0
-		},
-		{
-			"key": "field_clinical_resource_syndicated",
-			"label": "Is this syndicated from another source?",
-			"name": "clinical_resource_syndicated",
-			"type": "radio",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"choices": {
-				"1": "Yes",
-				"0": "No"
-			},
-			"allow_null": 1,
-			"other_choice": 0,
-			"default_value": "",
-			"layout": "horizontal",
-			"return_format": "value",
-			"save_other_choice": 0
 		},
 		{
 			"key": "field_clinical_resource_syndication_url",
