@@ -589,10 +589,10 @@
 		},
 		"field_expertise_physicians": {
 			"key": "field_expertise_physicians",
-			"label": "Providers",
+			"label": "Related Providers",
 			"name": "physician_expertise",
 			"type": "relationship",
-			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
+			"instructions": "Include all providers who have this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>The providers will be displayed on a subpage, arranged in alphabetical order by their last name.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -636,10 +636,10 @@
 		},
 		"field_expertise_locations": {
 			"key": "field_expertise_locations",
-			"label": "Locations",
+			"label": "Related Locations",
 			"name": "location_expertise",
 			"type": "relationship",
-			"instructions": "",
+			"instructions": "Include all locations where this area of expertise is represented.</p><p class='description' style='margin-top: 0.5em;'>The locations will be displayed on a subpage, arranged in alphabetical order.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -699,10 +699,10 @@
 		},
 		"field_expertise_associated": {
 			"key": "field_expertise_associated",
-			"label": "Associated Areas of Expertise",
+			"label": "Related Areas of Expertise",
 			"name": "expertise_associated",
 			"type": "relationship",
-			"instructions": "",
+			"instructions": "Include all areas of expertise that are related to this area of expertise. An example of a related area of expertise would be one that is also represented in treatment plans associated with this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>Areas of expertise that are nested under this area of expertise are excluded from this list.</p><p class='description' style='margin-top: 0.5em;'>The related areas of expertise will be displayed on a subpage, arranged in alphabetical order.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -740,10 +740,10 @@
 		},
 		"field_expertise_clinical_resources": {
 			"key": "field_expertise_clinical_resources",
-			"label": "Clinical Resources",
+			"label": "Related Clinical Resources",
 			"name": "expertise_clinical_resources",
 			"type": "relationship",
-			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
+			"instructions": "Include all clinical resources that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These clinical resources will be displayed on a subpage, arranged in the order in which they were published, with the most recently published resources being listed first.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -787,10 +787,10 @@
 		},
 		"field_expertise_conditions_cpt": {
 			"key": "field_expertise_conditions_cpt",
-			"label": "Conditions",
+			"label": "Related Conditions",
 			"name": "expertise_conditions_cpt",
 			"type": "post_object",
-			"instructions": "The conditions will display in alphabetical order.",
+			"instructions": "Include all conditions that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These conditions will be displayed in a block on the main page for this area of expertise, arranged in the alphabetical order.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -815,10 +815,10 @@
 		},
 		"field_expertise_treatments_cpt": {
 			"key": "field_expertise_treatments_cpt",
-			"label": "Treatments & Procedures",
+			"label": "Related Treatments and Procedures",
 			"name": "expertise_treatments_cpt",
 			"type": "post_object",
-			"instructions": "The treatments and procedures will display in alphabetical order.",
+			"instructions": "Include all treatments and procedures that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These treatments and procedures will be displayed in a block on the main page for this area of expertise, arranged in the alphabetical order.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
