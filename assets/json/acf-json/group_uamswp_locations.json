@@ -49,21 +49,25 @@
 		"field_location_parent": {
 			"key": "field_location_parent",
 			"name": "location_parent",
-			"type": "true_false",
+			"type": "button_group",
 			"label": "Does this location have a parent location?",
 			"instructions": "",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		"field_location_parent_id": {
 			"key": "field_location_parent_id",
