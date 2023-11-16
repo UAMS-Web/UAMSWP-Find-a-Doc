@@ -188,9 +188,9 @@
 			"key": "field_clinical_resource_text_nci_query",
 			"label": "Is this this National Cancer Institute (NCI) syndicated content?",
 			"name": "clinical_resource_text_nci_query",
-			"type": "true_false",
+			"type": "button_group",
 			"instructions": "",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -205,11 +205,16 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value",
+			"save_other_choice": 0
 		},
 		{
 			"key": "field_clinical_resource_text",
