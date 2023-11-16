@@ -1456,58 +1456,6 @@
 				}
 			]
 		},
-		"field_link_message": {
-			"key": "field_link_message",
-			"label": "",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "<h3>External Website<\/h3><p>Include a title and URL for a link to an external non-UAMS website. This is intended for use when the location is a non-UAMS location where our providers practice.<\/p><p>This link should only be used when it is critical to the patient experience (e.g. for becoming a patient, making an appointment, receiving follow-up information). This is not to be used as a link to secondary things like a social media account.<\/p>",
-			"new_lines": "",
-			"esc_html": 0
-		},
-		"field_location_web_name": {
-			"key": "field_location_web_name",
-			"label": "Website Name",
-			"name": "location_web_name",
-			"type": "text",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
-		"field_location_url": {
-			"key": "field_location_url",
-			"label": "URL",
-			"name": "location_url",
-			"type": "link",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"return_format": "array",
-			"endpoint": 0
-		},
 		"field_location_photos_tab": {
 			"key": "field_location_photos_tab",
 			"label": "<i class=\"dashicons-format-gallery dashicons\"><\/i> Photos",
@@ -3769,6 +3717,58 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_link_message": {
+			"key": "field_link_message",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>External Website<\/h3><p>Include a title and URL for a link to an external non-UAMS website. This is intended for use when the location is a non-UAMS location where our providers practice.<\/p><p>This link should only be used when it is critical to the patient experience (e.g. for becoming a patient, making an appointment, receiving follow-up information). This is not to be used as a link to secondary things like a social media account.<\/p>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_location_url": {
+			"key": "field_location_url",
+			"label": "URL",
+			"name": "location_url",
+			"type": "link",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"return_format": "array",
+			"endpoint": 0
+		},
+		"field_location_web_name": {
+			"key": "field_location_web_name",
+			"label": "Website Name",
+			"name": "location_web_name",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
 		},
 		"field_location_schema_tab": {
 			"key": "field_location_schema_tab",
