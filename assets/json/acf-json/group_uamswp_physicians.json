@@ -947,39 +947,6 @@
 			},
 			"multiple": 0
 		},
-		"field_medical_terms": {
-			"key": "field_medical_terms",
-			"name": "physician_medical_terms",
-			"type": "taxonomy",
-			"label": "Medical Terms (Tags)",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_clinical_tab",
-						"operator": "==",
-						"value": "false"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "medical_term",
-			"field_type": "multi_select",
-			"allow_null": 1,
-			"add_term": 0,
-			"save_terms": 1,
-			"load_terms": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 0
-		},
 		"field_physician_region": {
 			"key": "field_physician_region",
 			"name": "physician_region",
@@ -2554,6 +2521,39 @@
 			"acfe_validate": "",
 			"acfe_update": "",
 			"ui": 1
+		},
+		"field_medical_terms": {
+			"key": "field_medical_terms",
+			"name": "physician_medical_terms",
+			"type": "taxonomy",
+			"label": "Medical Terms (Tags)",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_condition_treatment_tab",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "medical_term",
+			"field_type": "multi_select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
 		},
 		"field_physician_clinical_resource_tab": {
 			"key": "field_physician_clinical_resource_tab",
