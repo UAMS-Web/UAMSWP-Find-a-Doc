@@ -4655,6 +4655,353 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_location_schema_localbusiness": {
+			"key": "field_location_schema_localbusiness",
+			"label": "LocalBusiness Subtype (@type)",
+			"name": "location_schema_localbusiness",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_localbusiness_single"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		"field_location_npi_query": {
+			"key": "field_location_npi_query",
+			"label": "Does this location have a National Provider Identifier (NPI)?",
+			"name": "location_npi_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_location_npi": {
+			"key": "field_location_npi",
+			"label": "National Provider Identifier (NPI)",
+			"name": "location_npi",
+			"type": "repeater",
+			"instructions": "This value can be found by searching for the location in the <a href='https://npiregistry.cms.hhs.gov/search' target='_blank'>NPPES NPI Registry</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_npi_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "field_location_npi_item",
+			"min": 1,
+			"max": 0,
+			"layout": "block",
+			"button_label": "Add National Provider Identifier",
+			"sub_fields": [
+				{
+					"key": "field_location_npi_item",
+					"label": "Individual National Provider Identifier",
+					"name": "location_npi_item",
+					"type": "number",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"min": 0,
+					"max": 9999999999,
+					"step": 1
+				}
+			]
+		},
+		"field_location_va_station_id": {
+			"key": "field_location_va_station_id",
+			"label": "United States Department of Veterans Affairs Substation Identifier (STA6A)",
+			"name": "location_va_station_id",
+			"type": "text",
+			"instructions": "This three- to six-character value can be found by searching for the location at <a href='https://www.va.gov/directory/guide/allstate.asp' target='_blank'>https://www.va.gov/directory/guide/allstate.asp</a>. Click the link for the appropriate state and then click the link for \"View Addresses.\" The STA6A will be listed in the \"Station ID\" column.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_schema_brandorg",
+						"operator": "==",
+						"value": "va"
+					}
+				],
+				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_schema_brandorg",
+						"operator": "==contains",
+						"value": "_va_"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_location_hospital_aha_id": {
+			"key": "field_location_hospital_aha_id",
+			"label": "American Hospital Association Hospital Identifier (AHAID) for the Hospital",
+			"name": "location_hospital_aha_id",
+			"type": "text",
+			"instructions": "This information can be found in the hospital profile at <a href='https://www.aha.org/aha-hospital-lookup' target='_blank'>https://www.aha.org/aha-hospital-lookup</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_localbusiness_single",
+						"operator": "==",
+						"value": "Hospital"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_location_hospital_aha_name": {
+			"key": "field_location_hospital_aha_name",
+			"label": "Name of the Hospital on the American Hospital Association Hospital Identifier (AHAID) Record",
+			"name": "location_hospital_aha_name",
+			"type": "text",
+			"instructions": "This information can be found in the hospital profile at <a href='https://www.aha.org/aha-hospital-lookup' target='_blank'>https://www.aha.org/aha-hospital-lookup</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_localbusiness_single",
+						"operator": "==",
+						"value": "Hospital"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_location_hospital_ccn_id": {
+			"key": "field_location_hospital_ccn_id",
+			"label": "Centers for Medicare &amp; Medicaid Services Certification Number (CCN) for the Hospital",
+			"name": "location_hospital_ccn_id",
+			"type": "text",
+			"instructions": "This information can be found in the Centers for Medicare &amp; Medicaid Services \"Hospital General Information\" dataset at <a href='https://data.cms.gov/provider-data/dataset/xubh-q36u' target='_blank'>https://data.cms.gov/provider-data/dataset/xubh-q36u</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_localbusiness_single",
+						"operator": "==",
+						"value": "Hospital"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_location_hospital_ccn_name": {
+			"key": "field_location_hospital_ccn_name",
+			"label": "Name of the Hospital on the Centers for Medicare &amp; Medicaid Services Certification Number (CRN) Record",
+			"name": "location_hospital_ccn_name",
+			"type": "text",
+			"instructions": "This information can be found in the Centers for Medicare &amp; Medicaid Services \"Hospital General Information\" dataset at <a href='https://data.cms.gov/provider-data/dataset/xubh-q36u' target='_blank'>https://data.cms.gov/provider-data/dataset/xubh-q36u</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_localbusiness_single",
+						"operator": "==",
+						"value": "Hospital"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_location_schema_additionalType": {
+			"key": "field_location_schema_additionalType",
+			"label": "More Specific Type(s) for This Location From External Vocabularies in Microdata Syntax (additionalType > Text or URL)",
+			"name": "location_schema_additionalType",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_additionalType"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_location_schema_medicalspecialty": {
+			"key": "field_location_schema_medicalspecialty",
+			"label": "Relevant Medical Specialties (medicalSpecialty > MedicalSpecialty)",
+			"name": "location_schema_medicalspecialty",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalspecialty_multiple"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_location_schema_alternatename": {
+			"key": "field_location_schema_alternatename",
+			"label": "Alternate Name(s) for the Location (alternateName > Text)",
+			"name": "location_schema_alternatename",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_alternatename"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_location_schema_sameas": {
+			"key": "field_location_schema_sameas",
+			"label": "Reference Webpage(s) Specifically About This Location (sameAs > URL)",
+			"name": "location_schema_sameas",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
 		"field_location_deprecated_tab": {
 			"key": "field_location_deprecated_tab",
 			"label": "Deprecated Fields",
