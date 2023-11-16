@@ -1124,7 +1124,7 @@
 				"class": "",
 				"id": ""
 			},
-			"input_mask": "(999) 999-9999 [x 99999]"
+			"input_mask": "999-999-9999 [x 99999]"
 		},
 		"field_location_clinic_phone_query": {
 			"key": "field_location_clinic_phone_query",
@@ -1223,7 +1223,7 @@
 				"class": "",
 				"id": ""
 			},
-			"input_mask": "(999) 999-9999 [x 99999]"
+			"input_mask": "999-999-9999 [x 99999]"
 		},
 		"field_location_ac_appointments_primary": {
 			"key": "field_location_ac_appointments_primary",
@@ -1246,7 +1246,7 @@
 				"class": "",
 				"id": ""
 			},
-			"input_mask": "(999) 999-9999 [x 99999]"
+			"input_mask": "999-999-9999 [x 99999]"
 		},
 		"field_location_ac_appointments_specialty": {
 			"key": "field_location_ac_appointments_specialty",
@@ -1269,7 +1269,7 @@
 				"class": "",
 				"id": ""
 			},
-			"input_mask": "(999) 999-9999 [x 99999]"
+			"input_mask": "999-999-9999 [x 99999]"
 		},
 		"field_location_appointment_phone_query": {
 			"key": "field_location_appointment_phone_query",
@@ -1319,7 +1319,7 @@
 				"class": "",
 				"id": ""
 			},
-			"input_mask": "(999) 999-9999 [x 99999]"
+			"input_mask": "999-999-9999 [x 99999]"
 		},
 		"field_location_fax": {
 			"key": "field_location_fax",
@@ -1342,7 +1342,7 @@
 				"class": "",
 				"id": ""
 			},
-			"input_mask": "(999) 999-9999 [x 99999]"
+			"input_mask": "999-999-9999 [x 99999]"
 		},
 		"field_location_phone_numbers": {
 			"key": "field_location_phone_numbers",
@@ -1403,7 +1403,7 @@
 						"class": "",
 						"id": ""
 					},
-					"input_mask": "(999) 999-9999 [x 99999]"
+					"input_mask": "999-999-9999 [x 99999]"
 				},
 				{
 					"key": "field_location_appointments_additional_text",
