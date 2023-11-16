@@ -246,12 +246,72 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_location_brandorg_query": {
+			"key": "field_location_brandorg_query",
+			"label": "Primary Brand Organization for This Location",
+			"name": "location_brandorg_query",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_brandorg_query"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_location_brandorg": {
+			"key": "field_location_brandorg",
+			"label": "Third-Party Brand Organization",
+			"name": "location_brandorg",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "!=empty"
+					},
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "!=",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_brandorg"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
 		"field_location_ac_query": {
 			"key": "field_location_ac_query",
 			"label": "Is this an Arkansas Children's location?",
 			"name": "location_ac_query",
 			"type": "button_group",
-			"instructions": "",
+			"instructions": "This field is being deprecated. Make the appropriate selections in the brand organization fields.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
