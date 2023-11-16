@@ -1649,7 +1649,7 @@
 			"label": "Featured Image",
 			"name": "_thumbnail_id",
 			"type": "image",
-			"instructions": "Select an image that will be used on card layouts, schema data, social sharing, etc.<br />You can select an image that is also used as the Wayfinding Photo or in the Photo Gallery.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x675.",
+			"instructions": "Select an image that will be used on card layouts, schema data, social sharing, etc.</p><p class='description' style='margin-top: 0.5em;'>You can select an image that is also used as the Wayfinding Photo or in the Photo Gallery.</p><p class='description' style='margin-top: 0.5em;'>The photo orientation must be landscape / horizontal.</p><p class='description' style='margin-top: 0.5em;'>Minimum dimensions: 1200x675.",
 			"required": 0,
 			"conditional_logic": [
 				[
@@ -1733,7 +1733,7 @@
 			"label": "Wayfinding Photo",
 			"name": "location_wayfinding_photo",
 			"type": "image",
-			"instructions": "Select an image that will help the patient find the appropriate building from the road.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x675",
+			"instructions": "Select an image that will help the patient find the appropriate building from the road.</p><p class='description' style='margin-top: 0.5em;'>The photo orientation must be landscape / horizontal.</p><p class='description' style='margin-top: 0.5em;'>Minimum dimensions: 1200x675",
 			"required": 0,
 			"conditional_logic": [
 				[
@@ -1817,7 +1817,7 @@
 			"label": "Photo Gallery",
 			"name": "location_photo_gallery",
 			"type": "gallery",
-			"instructions": "You may select up to four images.<br />These could include a photo of the interior entrance to the clinic or photos of the clinic in use.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x675",
+			"instructions": "You may select up to four images.</p><p class='description' style='margin-top: 0.5em;'>These could include a photo of the interior entrance to the clinic or photos of the clinic in use.</p><p class='description' style='margin-top: 0.5em;'>The photo orientation must be landscape / horizontal.</p><p class='description' style='margin-top: 0.5em;'>Minimum dimensions: 1200x675",
 			"required": 0,
 			"conditional_logic": [
 				[
@@ -3640,7 +3640,7 @@
 			"label": "Appointment Section Title (Optional Override)",
 			"name": "location_scheduling_title_general",
 			"type": "text",
-			"instructions": "If there are multiple scheduling widgets, this will define the text used in the main section heading. If you do not define a value here, \"Schedule an Appointment Online\" will be used. <br />If you define a value here, use a very short phrase that makes the purpose of the online scheduling section clear to the user. Do not just use the name of a condition or treatment. <br />If there is only one scheduling widget, the heading will be defined by a value from within the <em>MyChart Open Scheduling Widget(s)</em> repeater instead.",
+			"instructions": "If there are multiple scheduling widgets, this will define the text used in the main section heading. If you do not define a value here, \"Schedule an Appointment Online\" will be used. </p><p class='description' style='margin-top: 0.5em;'>If you define a value here, use a very short phrase that makes the purpose of the online scheduling section clear to the user. Do not just use the name of a condition or treatment. </p><p class='description' style='margin-top: 0.5em;'>If there is only one scheduling widget, the heading will be defined by a value from within the <em>MyChart Open Scheduling Widget(s)</em> repeater instead.",
 			"required": 0,
 			"conditional_logic": [
 				[
@@ -3667,7 +3667,7 @@
 			"label": "Appointment Section Introduction (Optional Override)",
 			"name": "location_scheduling_intro_general",
 			"type": "textarea",
-			"instructions": "This paragraph introduces the online scheduling section. If you do not define a value here, it will display \"Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.\" <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
+			"instructions": "This paragraph introduces the online scheduling section. If you do not define a value here, it will display \"Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.\" </p><p class='description' style='margin-top: 0.5em;'>The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -3713,7 +3713,7 @@
 					"label": "Standalone Heading Text",
 					"name": "location_scheduling_title",
 					"type": "text",
-					"instructions": "If this is the only scheduling widget, this value will replace the main section heading (defined by <em>Appointment Section Title</em>). <br />Use a very short phrase that makes the purpose of this specific scheduling widget clear to the user. Do not just use the name of a condition or treatment.",
+					"instructions": "If this is the only scheduling widget, this value will replace the main section heading (defined by <em>Appointment Section Title</em>). </p><p class='description' style='margin-top: 0.5em;'>Use a very short phrase that makes the purpose of this specific scheduling widget clear to the user. Do not just use the name of a condition or treatment.",
 					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
@@ -3732,7 +3732,7 @@
 					"label": "Standalone Appointment Section Introduction (Optional Override)",
 					"name": "location_scheduling_intro",
 					"type": "textarea",
-					"instructions": "If this is the only scheduling widget, you can define a value here to replace the main section introduction (defined by <em>Appointment Section Introduction</em>) if that general introduction does not adequately introduce this specific widget. <br />If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this specific scheduling widget. There is a 221 character limit.",
+					"instructions": "If this is the only scheduling widget, you can define a value here to replace the main section introduction (defined by <em>Appointment Section Introduction</em>) if that general introduction does not adequately introduce this specific widget. </p><p class='description' style='margin-top: 0.5em;'>If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this specific scheduling widget. There is a 221 character limit.",
 					"required": 0,
 					"conditional_logic": 0,
 					"wrapper": {
@@ -3751,7 +3751,7 @@
 					"label": "Nested Heading Text",
 					"name": "location_scheduling_item_title_nested",
 					"type": "text",
-					"instructions": "If this is one of multiple scheduling widgets, this field defines the text of the heading immediately preceding this specific scheduling widget. This heading will be nested below the main section heading (defined by <em>Appointment Section Title</em>) in the heading outline. This will also set the label of the multiple choice option the user can select to display this specific scheduling widget. <br />Use a very short phrase, visit type name or treatment name that makes the purpose of this specific scheduling widget clear to the user.",
+					"instructions": "If this is one of multiple scheduling widgets, this field defines the text of the heading immediately preceding this specific scheduling widget. This heading will be nested below the main section heading (defined by <em>Appointment Section Title</em>) in the heading outline. This will also set the label of the multiple choice option the user can select to display this specific scheduling widget. </p><p class='description' style='margin-top: 0.5em;'>Use a very short phrase, visit type name or treatment name that makes the purpose of this specific scheduling widget clear to the user.",
 					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
@@ -3808,7 +3808,7 @@
 					"label": "Provider (SER) ID from Epic",
 					"name": "location_scheduling_ser",
 					"type": "text",
-					"instructions": "ID for one or more providers available for scheduling in this specific widget. Separate multiple values with a comma (\",\"). <br />If you specify a department, you <em>can</em> omit the list of provider IDs so all providers who are enabled for open scheduling in that department with that visit type are automatically included in the widget. <br /><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
+					"instructions": "ID for one or more providers available for scheduling in this specific widget. Separate multiple values with a comma (\",\"). </p><p class='description' style='margin-top: 0.5em;'>If you specify a department, you <em>can</em> omit the list of provider IDs so all providers who are enabled for open scheduling in that department with that visit type are automatically included in the widget. </p><p class='description' style='margin-top: 0.5em;'><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
 					"required": 0,
 					"conditional_logic": 0,
 					"wrapper": {
@@ -3827,7 +3827,7 @@
 					"label": "Department (DEP) ID from Epic",
 					"name": "location_scheduling_dep",
 					"type": "text",
-					"instructions": "ID for one or more departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). <br />If you specify a provider, you can omit the list of department IDs so all departments who are enabled for open scheduling with that provider and visit type are automatically included in the widget. <br /><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
+					"instructions": "ID for one or more departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). </p><p class='description' style='margin-top: 0.5em;'>If you specify a provider, you can omit the list of department IDs so all departments who are enabled for open scheduling with that provider and visit type are automatically included in the widget. </p><p class='description' style='margin-top: 0.5em;'><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
 					"required": 0,
 					"conditional_logic": 0,
 					"wrapper": {
@@ -3846,7 +3846,7 @@
 					"label": "Fallback Information",
 					"name": "location_scheduling_fallback",
 					"type": "wysiwyg",
-					"instructions": "This is an optional paragraph that appears after this specific scheduling widget where you can present users an alternative scheduling options. Keep it as brief as possible, limiting it to one to three sentences in a single paragraph. Add tel links to any phone numbers (href=\"tel:501-555-6162\"). <br /> Example Paragraph: \"If you are unable to register for your appointment using the method above, call 501-555-6162 to schedule an appointment. This line is staffed Monday thru Friday from 10 a.m. – 5:30 p.m. If the lines are busy, you will be prompted to leave a voicemail.\"",
+					"instructions": "This is an optional paragraph that appears after this specific scheduling widget where you can present users an alternative scheduling options. Keep it as brief as possible, limiting it to one to three sentences in a single paragraph. Add tel links to any phone numbers (href=\"tel:501-555-6162\"). </p><p class='description' style='margin-top: 0.5em;'> Example Paragraph: \"If you are unable to register for your appointment using the method above, call 501-555-6162 to schedule an appointment. This line is staffed Monday thru Friday from 10 a.m. – 5:30 p.m. If the lines are busy, you will be prompted to leave a voicemail.\"",
 					"required": 0,
 					"conditional_logic": 0,
 					"wrapper": {
