@@ -4,7 +4,7 @@
 	"fields": [
 		{
 			"key": "field_clinical_resource_archive_headline",
-			"label": "Archive Headline",
+			"label": "Title of Clinical Resource Archive",
 			"name": "clinical_resource_archive_headline",
 			"type": "text",
 			"instructions": "Your theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
@@ -17,7 +17,7 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"placeholder": "",
+			"placeholder": "Clinical Resources",
 			"prepend": "",
 			"append": "",
 			"maxlength": "",
