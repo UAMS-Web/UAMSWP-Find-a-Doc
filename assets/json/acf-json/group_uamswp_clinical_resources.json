@@ -27,7 +27,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "75",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -47,7 +47,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "75",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -77,7 +77,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "75",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -482,7 +482,7 @@
 					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
-						"width": "60",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -501,7 +501,7 @@
 					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
-						"width": "40",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
