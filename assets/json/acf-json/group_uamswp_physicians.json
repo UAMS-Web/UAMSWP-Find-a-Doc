@@ -2779,6 +2779,30 @@
 			"toolbar": "full",
 			"media_upload": 1,
 			"delay": 0
+		},
+		"field_physician_deprecated_tab": {
+			"key": "field_physician_deprecated_tab",
+			"name": "",
+			"type": "tab",
+			"label": "Deprecated Fields",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_deprecated_tab",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		}
 	},
 	"modified": false
