@@ -1,6 +1,6 @@
 {
 	"key": "group_clinical_resources",
-	"title": "Resources",
+	"title": "Clinical Resource Item Configuration",
 	"fields": [
 		{
 			"key": "field_clinical_resource_excerpt",
@@ -736,7 +736,7 @@
 	"menu_order": 0,
 	"position": "acf_after_title",
 	"style": "default",
-	"label_placement": "left",
+	"label_placement": "top",
 	"instruction_placement": "label",
 	"hide_on_screen": "",
 	"active": true,
