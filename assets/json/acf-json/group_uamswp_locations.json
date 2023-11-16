@@ -4893,7 +4893,7 @@
 			"name": "location_schema_localbusiness",
 			"type": "clone",
 			"instructions": "",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -4918,7 +4918,7 @@
 			"name": "location_npi_query",
 			"type": "button_group",
 			"instructions": "",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -5168,7 +5168,7 @@
 			"name": "location_schema_medicalspecialty",
 			"type": "clone",
 			"instructions": "",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",

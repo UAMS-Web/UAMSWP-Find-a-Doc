@@ -597,7 +597,7 @@
 			"label": "MedicalCondition Subtype",
 			"type": "clone",
 			"instructions": "",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -621,7 +621,7 @@
 			"label": "Infectious Agent (infectiousAgent > Text)",
 			"type": "clone",
 			"instructions": "",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": [
 				[
 					{
@@ -654,7 +654,7 @@
 			"label": "Infectious Agent Class (infectiousAgentClass > InfectiousAgentClass)",
 			"type": "clone",
 			"instructions": "",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": [
 				[
 					{
