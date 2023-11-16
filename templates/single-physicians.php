@@ -22,6 +22,7 @@
 
 		}
 
+	$degree_count = $degrees ? count($degrees) : 0;
 	$degree_list = '';
 	$i = 1;
 
@@ -36,7 +37,7 @@
 				$degree_name = $degree_term->name;
 				$degree_list .= $degree_name;
 
-				if ( count($degrees) > $i ) {
+				if ( $degree_count > $i ) {
 
 					$degree_list .= ", ";
 
