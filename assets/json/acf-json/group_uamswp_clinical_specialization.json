@@ -196,6 +196,47 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
+		"field_clinical_specialization_extension_certificate": {
+			"key": "field_clinical_specialization_extension_certificate",
+			"name": "clinical_specialization_extension_certificate",
+			"label": "Specialty Certificate or Subspecialty Certificate",
+			"type": "taxonomy",
+			"instructions": "Select the specialty certificate or subspecialty certificate from the relevant certifying board or examination committee recognizing the area of specialty.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "board-certification-abms"
+					}
+				],
+				[
+					{
+						"field": "field_clinical_specialization_extension_authority",
+						"operator": "==",
+						"value": "board-certification-aoa"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"taxonomy": "board",
+			"field_type": "select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
 		"field_clinical_specialization_extension_board": {
 			"key": "field_clinical_specialization_extension_board",
 			"name": "clinical_specialization_extension_board",
