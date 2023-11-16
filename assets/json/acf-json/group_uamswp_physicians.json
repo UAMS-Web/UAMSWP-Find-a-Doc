@@ -918,64 +918,6 @@
 			},
 			"multiple": 0
 		},
-		"field_physician_conditions_cpt": {
-			"key": "field_physician_conditions_cpt",
-			"name": "physician_conditions_cpt",
-			"type": "post_object",
-			"label": "Conditions Treated",
-			"instructions": "Select any conditions this provider treats or diagnoses. These items will be displayed in the order they are entered. You may click and drag to rearrange.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"post_type": [
-				"condition"
-			],
-			"taxonomy": "",
-			"allow_null": 1,
-			"multiple": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_condition_physicians"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"ui": 1
-		},
-		"field_physician_treatments_cpt": {
-			"key": "field_physician_treatments_cpt",
-			"name": "physician_treatments_cpt",
-			"type": "post_object",
-			"label": "Treatments & Procedures",
-			"instructions": "Select any treatments or procedures this provider performs or prescribes. These items will be displayed in the order they are entered. You may click and drag to rearrange.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"post_type": [
-				"treatment"
-			],
-			"taxonomy": "",
-			"allow_null": 1,
-			"multiple": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_treatment_procedure_physicians"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"ui": 1
-		},
 		"field_medical_terms": {
 			"key": "field_medical_terms",
 			"name": "physician_medical_terms",
@@ -1008,34 +950,6 @@
 				"acfe_bidirectional_enabled": "0"
 			},
 			"multiple": 0
-		},
-		"field_physician_locations": {
-			"key": "field_physician_locations",
-			"name": "physician_locations",
-			"type": "relationship",
-			"label": "Locations",
-			"instructions": "These items will be displayed in the order they are entered. You may click and drag to rearrange. Put the provider's primary location first.",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"location"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": 1,
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": 0,
-			"acfe_validate": "",
-			"acfe_update": ""
 		},
 		"field_physician_region": {
 			"key": "field_physician_region",
@@ -1170,84 +1084,6 @@
 			"acfe_validate": "",
 			"acfe_update": "",
 			"multiple": 0
-		},
-		"field_physician_expertise": {
-			"key": "field_physician_expertise",
-			"name": "physician_expertise",
-			"type": "relationship",
-			"label": "Areas of Expertise",
-			"instructions": "Areas of Expertise are hierarchical. If a child area is included here (e.g., Lung Cancer Care), please also select the parent area (e.g., Cancer Care).",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_resident",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"expertise"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_expertise_physicians"
-			},
-			"acfe_validate": "",
-			"acfe_update": ""
-		},
-		"field_physician_clinical_resources": {
-			"key": "field_physician_clinical_resources",
-			"name": "physician_clinical_resources",
-			"type": "relationship",
-			"label": "Clinical Resources",
-			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_resident",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"clinical-resource"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_clinical_resource_providers"
-			},
-			"acfe_validate": "",
-			"acfe_update": ""
 		},
 		"field_physician_recognitions": {
 			"key": "field_physician_recognitions",
@@ -2554,6 +2390,34 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_physician_locations": {
+			"key": "field_physician_locations",
+			"name": "physician_locations",
+			"type": "relationship",
+			"label": "Locations",
+			"instructions": "These items will be displayed in the order they are entered. You may click and drag to rearrange. Put the provider's primary location first.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"location"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": 1,
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": 0,
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
 		"field_physician_expertise_tab": {
 			"key": "field_physician_expertise_tab",
 			"name": "",
@@ -2578,6 +2442,45 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_physician_expertise": {
+			"key": "field_physician_expertise",
+			"name": "physician_expertise",
+			"type": "relationship",
+			"label": "Areas of Expertise",
+			"instructions": "Areas of Expertise are hierarchical. If a child area is included here (e.g., Lung Cancer Care), please also select the parent area (e.g., Cancer Care).",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_resident",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"expertise"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_expertise_physicians"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
 		"field_physician_condition_treatment_tab": {
 			"key": "field_physician_condition_treatment_tab",
 			"name": "",
@@ -2593,6 +2496,64 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_physician_conditions_cpt": {
+			"key": "field_physician_conditions_cpt",
+			"name": "physician_conditions_cpt",
+			"type": "post_object",
+			"label": "Conditions Treated",
+			"instructions": "Select any conditions this provider treats or diagnoses. These items will be displayed in the order they are entered. You may click and drag to rearrange.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"allow_null": 1,
+			"multiple": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_physicians"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		"field_physician_treatments_cpt": {
+			"key": "field_physician_treatments_cpt",
+			"name": "physician_treatments_cpt",
+			"type": "post_object",
+			"label": "Treatments & Procedures",
+			"instructions": "Select any treatments or procedures this provider performs or prescribes. These items will be displayed in the order they are entered. You may click and drag to rearrange.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"allow_null": 1,
+			"multiple": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_physicians"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
 		},
 		"field_physician_clinical_resource_tab": {
 			"key": "field_physician_clinical_resource_tab",
@@ -2617,6 +2578,45 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_physician_clinical_resources": {
+			"key": "field_physician_clinical_resources",
+			"name": "physician_clinical_resources",
+			"type": "relationship",
+			"label": "Clinical Resources",
+			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_resident",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"clinical-resource"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_clinical_resource_providers"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
 		},
 		"field_physician_recognition_tab": {
 			"key": "field_physician_recognition_tab",
