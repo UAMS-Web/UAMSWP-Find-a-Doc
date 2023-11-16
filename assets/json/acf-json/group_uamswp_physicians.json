@@ -273,6 +273,33 @@
 			"append": "",
 			"maxlength": ""
 		},
+		"field_physician_medium_name": {
+			"key": "field_physician_medium_name",
+			"name": "physician_medium_name",
+			"type": "text",
+			"label": "Medium Name",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_details_tab",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
 		"field_physician_featured_image": {
 			"key": "field_physician_featured_image",
 			"label": "Headshot",
