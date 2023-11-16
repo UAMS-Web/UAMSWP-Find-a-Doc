@@ -196,12 +196,12 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_clinical_specialization_extension_board": {
-			"key": "field_clinical_specialization_extension_board",
-			"name": "clinical_specialization_extension_board",
-			"label": "Name of the Member Board, Certifying Board or Conjoint Examination Committee",
-			"type": "text",
-			"instructions": "Member board of the American Board of Medical Specialties, American Osteopathic Association certifying board or American Osteopathic Association conjoint examination committee recognizing the area of specialty.</p><p class='description' style='margin-top: 0.5em;'>The names of member boards, specialty certificates and subspecialty certificates can be found at <a href='https://www.abms.org/member-boards/specialty-subspecialty-certificates/' target='_blank'>https://www.abms.org/member-boards/specialty-subspecialty-certificates/</a>.</p><p class='description' style='margin-top: 0.5em;'>Information on the certifying boards, conjoint examination committees, specialty certificates and subspecialty certificates can be found at <a href='https://certification.osteopathic.org/' target='_blank'>https://certification.osteopathic.org/</a>.",
+		"field_clinical_specialization_extension_certificate": {
+			"key": "field_clinical_specialization_extension_certificate",
+			"name": "clinical_specialization_extension_certificate",
+			"label": "Specialty Certificate or Subspecialty Certificate",
+			"type": "taxonomy",
+			"instructions": "Select the specialty certificate or subspecialty certificate from the relevant certifying board or examination committee recognizing the area of specialty.",
 			"required": 1,
 			"conditional_logic": [
 				[
@@ -224,107 +224,18 @@
 				"class": "",
 				"id": ""
 			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
-		"field_clinical_specialization_extension_board_url": {
-			"key": "field_clinical_specialization_extension_board_url",
-			"name": "clinical_specialization_extension_board_url",
-			"label": "Official Webpage Concerning the Member Board, Certifying Board or Conjoint Examination Committee Certificate",
-			"type": "url",
-			"instructions": "Webpage with information on the member board of the American Board of Medical Specialties, American Osteopathic Association certifying board or American Osteopathic Association conjoint examination committee recognizing the area of specialty.</p><p class='description' style='margin-top: 0.5em;'>The names of member boards, specialty certificates and subspecialty certificates can be found at <a href='https://www.abms.org/member-boards/specialty-subspecialty-certificates/' target='_blank'>https://www.abms.org/member-boards/specialty-subspecialty-certificates/</a>.</p><p class='description' style='margin-top: 0.5em;'>Information on the certifying boards, conjoint examination committees, specialty certificates and subspecialty certificates can be found at <a href='https://certification.osteopathic.org/' target='_blank'>https://certification.osteopathic.org/</a>.",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_clinical_specialization_extension_authority",
-						"operator": "==",
-						"value": "board-certification-abms"
-					}
-				],
-				[
-					{
-						"field": "field_clinical_specialization_extension_authority",
-						"operator": "==",
-						"value": "board-certification-aoa"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "50",
-				"class": "",
-				"id": ""
+			"acfe_permissions": "",
+			"taxonomy": "board",
+			"field_type": "select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
 			},
-			"default_value": "",
-			"placeholder": ""
-		},
-		"field_clinical_specialization_extension_board_certificate": {
-			"key": "field_clinical_specialization_extension_board_certificate",
-			"name": "clinical_specialization_extension_board_certificate",
-			"label": "Name of Specialty Certificate or Subspecialty Certificate",
-			"type": "text",
-			"instructions": "Name of the specialty certificate or subspecialty certificate from the member board of the American Board of Medical Specialties, American Osteopathic Association certifying board or American Osteopathic Association conjoint examination committee recognizing the area of specialty..</p><p class='description' style='margin-top: 0.5em;'>Information on the member boards, specialty certificates and subspecialty certificates can be found at <a href='https://www.abms.org/member-boards/specialty-subspecialty-certificates/' target='_blank'>https://www.abms.org/member-boards/specialty-subspecialty-certificates/</a>.</p><p class='description' style='margin-top: 0.5em;'>The names of certifying boards, conjoint examination committees, specialty certificates and subspecialty certificates can be found at <a href='https://certification.osteopathic.org/' target='_blank'>https://certification.osteopathic.org/</a>.",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_clinical_specialization_extension_authority",
-						"operator": "==",
-						"value": "board-certification-abms"
-					}
-				],
-				[
-					{
-						"field": "field_clinical_specialization_extension_authority",
-						"operator": "==",
-						"value": "board-certification-aoa"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
-		"field_clinical_specialization_extension_board_certificate_url": {
-			"key": "field_clinical_specialization_extension_board_certificate_url",
-			"name": "clinical_specialization_extension_board_certificate_url",
-			"label": "Official Webpage Concerning the Specialty Certificate or Subspecialty Certificate",
-			"type": "url",
-			"instructions": "Webpage with information on the specialty certificate or subspecialty certificate from the member board of the American Board of Medical Specialties, American Osteopathic Association certifying board or American Osteopathic Association conjoint examination committee recognizing the area of specialty..</p><p class='description' style='margin-top: 0.5em;'>Information on the member boards, specialty certificates and subspecialty certificates can be found at <a href='https://www.abms.org/member-boards/specialty-subspecialty-certificates/' target='_blank'>https://www.abms.org/member-boards/specialty-subspecialty-certificates/</a>.</p><p class='description' style='margin-top: 0.5em;'>The names of certifying boards, conjoint examination committees, specialty certificates and subspecialty certificates can be found at <a href='https://certification.osteopathic.org/' target='_blank'>https://certification.osteopathic.org/</a>.",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_clinical_specialization_extension_authority",
-						"operator": "==",
-						"value": "board-certification-abms"
-					}
-				],
-				[
-					{
-						"field": "field_clinical_specialization_extension_authority",
-						"operator": "==",
-						"value": "board-certification-aoa"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "50",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": ""
+			"multiple": 0
 		},
 		"field_clinical_specialization_extension_training_type": {
 			"key": "field_clinical_specialization_extension_training_type",
