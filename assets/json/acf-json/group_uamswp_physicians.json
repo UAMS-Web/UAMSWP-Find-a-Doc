@@ -328,6 +328,27 @@
 			},
 			"multiple": 0
 		},
+		"field_physician_portrait_tab": {
+			"key": "field_physician_portrait_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons dashicons-images-alt2\"><\/i> Portraits",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": [
+				"super_admin",
+				"administrator",
+				"editor"
+			],
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_physician_featured_image": {
 			"key": "field_physician_featured_image",
 			"label": "Headshot",
@@ -394,6 +415,22 @@
 			"acfe_thumbnail": 0,
 			"acfe_validate": "",
 			"acfe_update": ""
+		},
+		"field_physician_media_tab": {
+			"key": "field_physician_media_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons dashicons-embed-video\"><\/i> Associated Media",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_physician_clinical_tab": {
 			"key": "field_physician_clinical_tab",
