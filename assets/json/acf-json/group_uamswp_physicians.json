@@ -755,85 +755,6 @@
 			"multiple": 0,
 			"allow_null": 1
 		},
-		"field_physician_clinical_admin_title": {
-			"key": "field_physician_clinical_admin_title",
-			"name": "physician_clinical_admin_title",
-			"type": "repeater",
-			"label": "Clinical Administrative Title",
-			"instructions": "Both fields are required if you add a row. This is not displayed on the front end at this time.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_resident",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"collapsed": "",
-			"min": 0,
-			"max": 0,
-			"layout": "table",
-			"button_label": "",
-			"sub_fields": [
-				{
-					"key": "field_physician_clinical_admin_title_tax",
-					"label": "Clinical Administrative Title",
-					"name": "clinical_admin_title_tax",
-					"type": "taxonomy",
-					"instructions": "Service line director, medical director, nursing director or administrator.",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"taxonomy": "clinical_admin_title",
-					"field_type": "select",
-					"add_term": 0,
-					"save_terms": 0,
-					"load_terms": 0,
-					"return_format": "id",
-					"acfe_bidirectional": {
-						"acfe_bidirectional_enabled": "0"
-					},
-					"multiple": 0,
-					"allow_null": 0
-				},
-				{
-					"key": "field_physician_clinical_admin_area",
-					"label": "Service Line",
-					"name": "physician_clinical_admin_area",
-					"type": "taxonomy",
-					"instructions": "",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"taxonomy": "service_line",
-					"field_type": "select",
-					"add_term": 0,
-					"save_terms": 0,
-					"load_terms": 0,
-					"return_format": "id",
-					"acfe_bidirectional": {
-						"acfe_bidirectional_enabled": "0"
-					},
-					"multiple": 0,
-					"allow_null": 0
-				}
-			]
-		},
 		"field_physician_npi": {
 			"key": "field_physician_npi",
 			"name": "physician_npi",
@@ -2803,6 +2724,85 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_physician_clinical_admin_title": {
+			"key": "field_physician_clinical_admin_title",
+			"name": "physician_clinical_admin_title",
+			"type": "repeater",
+			"label": "Clinical Administrative Title",
+			"instructions": "Both fields are required if you add a row. This is not displayed on the front end at this time.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_resident",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"collapsed": "",
+			"min": 0,
+			"max": 0,
+			"layout": "table",
+			"button_label": "",
+			"sub_fields": [
+				{
+					"key": "field_physician_clinical_admin_title_tax",
+					"label": "Clinical Administrative Title",
+					"name": "clinical_admin_title_tax",
+					"type": "taxonomy",
+					"instructions": "Service line director, medical director, nursing director or administrator.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"taxonomy": "clinical_admin_title",
+					"field_type": "select",
+					"add_term": 0,
+					"save_terms": 0,
+					"load_terms": 0,
+					"return_format": "id",
+					"acfe_bidirectional": {
+						"acfe_bidirectional_enabled": "0"
+					},
+					"multiple": 0,
+					"allow_null": 0
+				},
+				{
+					"key": "field_physician_clinical_admin_area",
+					"label": "Service Line",
+					"name": "physician_clinical_admin_area",
+					"type": "taxonomy",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"taxonomy": "service_line",
+					"field_type": "select",
+					"add_term": 0,
+					"save_terms": 0,
+					"load_terms": 0,
+					"return_format": "id",
+					"acfe_bidirectional": {
+						"acfe_bidirectional_enabled": "0"
+					},
+					"multiple": 0,
+					"allow_null": 0
+				}
+			]
 		}
 	},
 	"modified": false
