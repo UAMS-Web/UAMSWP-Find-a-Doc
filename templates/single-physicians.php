@@ -41,7 +41,7 @@
 
 				if ( $degree_count > $i ) {
 
-					$degree_list .= ", ";
+					$degree_list .= ', ';
 
 				}
 
