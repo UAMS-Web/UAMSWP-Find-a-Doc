@@ -60,6 +60,18 @@
 
 	}
 
+	// Remove empty rows
+
+		$degree_attr_array = array_filter($degree_attr_array);
+
+	// Remove duplicate rows
+
+		$degree_attr_array = array_unique( $degree_attr_array, SORT_REGULAR );
+
+	// Reindex array
+
+		$degree_attr_array = array_values($degree_attr_array);
+
 	$languages = get_field( 'physician_languages', $post->ID );
 	$language_count = 0;
 
