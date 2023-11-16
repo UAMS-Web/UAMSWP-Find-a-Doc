@@ -1156,10 +1156,10 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_location_clinic_phone_query": {
-			"key": "field_location_clinic_phone_query",
-			"label": "Is there a separate appointment number for patients?",
-			"name": "location_clinic_phone_query",
+		"field_location_ac_appointments_query": {
+			"key": "field_location_ac_appointments_query",
+			"label": "Does this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments?",
+			"name": "location_ac_appointments_query",
 			"type": "true_false",
 			"instructions": "",
 			"required": 0,
@@ -1168,7 +1168,7 @@
 					{
 						"field": "field_location_ac_query",
 						"operator": "==",
-						"value": "0"
+						"value": "1"
 					},
 					{
 						"field": "field_location_appointments_query",
@@ -1188,10 +1188,56 @@
 			"ui_on_text": "",
 			"ui_off_text": ""
 		},
-		"field_location_ac_appointments_query": {
-			"key": "field_location_ac_appointments_query",
-			"label": "Does this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments?",
-			"name": "location_ac_appointments_query",
+		"field_location_ac_appointments_primary": {
+			"key": "field_location_ac_appointments_primary",
+			"label": "Arkansas Children's Primary Care Appointments Phone Number",
+			"name": "location_ac_appointments_primary",
+			"type": "maskfield",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_ac_appointments_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"input_mask": "999-999-9999 [x 99999]"
+		},
+		"field_location_ac_appointments_specialty": {
+			"key": "field_location_ac_appointments_specialty",
+			"label": "Arkansas Children's Specialty Care Appointments Phone Number",
+			"name": "location_ac_appointments_specialty",
+			"type": "maskfield",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_ac_appointments_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"input_mask": "999-999-9999 [x 99999]"
+		},
+		"field_location_clinic_phone_query": {
+			"key": "field_location_clinic_phone_query",
+			"label": "Is there a separate appointment number for patients?",
+			"name": "location_clinic_phone_query",
 			"type": "true_false",
 			"instructions": "",
 			"required": 0,
@@ -1200,7 +1246,7 @@
 					{
 						"field": "field_location_ac_query",
 						"operator": "==",
-						"value": "1"
+						"value": "0"
 					},
 					{
 						"field": "field_location_appointments_query",
@@ -1245,52 +1291,6 @@
 						"field": "field_location_ac_appointments_query",
 						"operator": "==",
 						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"input_mask": "999-999-9999 [x 99999]"
-		},
-		"field_location_ac_appointments_primary": {
-			"key": "field_location_ac_appointments_primary",
-			"label": "Arkansas Children's Primary Care Appointments Phone Number",
-			"name": "location_ac_appointments_primary",
-			"type": "maskfield",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_ac_appointments_query",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"input_mask": "999-999-9999 [x 99999]"
-		},
-		"field_location_ac_appointments_specialty": {
-			"key": "field_location_ac_appointments_specialty",
-			"label": "Arkansas Children's Specialty Care Appointments Phone Number",
-			"name": "location_ac_appointments_specialty",
-			"type": "maskfield",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_ac_appointments_query",
-						"operator": "==",
-						"value": "1"
 					}
 				]
 			],
