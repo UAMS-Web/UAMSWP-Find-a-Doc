@@ -1021,7 +1021,15 @@
 			"type": "wysiwyg",
 			"instructions": "This section should ideally not contain headings. But if it does, use Heading 3 and down.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_appointments_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -1040,7 +1048,15 @@
 			"type": "wysiwyg",
 			"instructions": "This section should ideally not contain headings. But if it does ...<br />If \"Information on setting up an appointment\" or \"What to Expect at Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_appointments_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -1059,7 +1075,15 @@
 			"type": "wysiwyg",
 			"instructions": "This section should ideally not contain headings. But if it does ...<br />If \"Information on setting up an appointment\" or \"What to Bring to Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_appointments_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
