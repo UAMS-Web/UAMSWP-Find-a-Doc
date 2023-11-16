@@ -2927,6 +2927,14 @@
 				border-color: transparent;
 			}
 
+			.acf-field.hide-acf-border .acf-taxonomy-field .categorychecklist-holder {
+				border: none;
+			}
+
+			.acf-field.hide-acf-border .acf-taxonomy-field .acf-checkbox-list {
+				padding: 0;
+			}
+
 			.hide-acf-title .acf-label {
 				display: none;
 			}
