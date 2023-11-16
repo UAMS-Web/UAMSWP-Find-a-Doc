@@ -3,6 +3,22 @@
 	"title": "Clinical Resource Item Configuration",
 	"fields": [
 		{
+			"key": "field_clinical_resource_tab_general",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
 			"key": "field_clinical_resource_excerpt",
 			"label": "Short Description",
 			"name": "clinical_resource_excerpt",
@@ -96,6 +112,22 @@
 				"id": ""
 			},
 			"default_value": ""
+		},
+		{
+			"key": "field_clinical_resource_tab_content",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Content",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		{
 			"key": "field_clinical_resource_type",
@@ -483,6 +515,22 @@
 			]
 		},
 		{
+			"key": "field_clinical_resource_tab_provider",
+			"name": "",
+			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Related Providers",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
 			"key": "field_clinical_resource_relationships",
 			"label": "Relationships",
 			"name": "",
@@ -529,6 +577,22 @@
 			}
 		},
 		{
+			"key": "field_clinical_resource_tab_location",
+			"name": "",
+			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Related Locations",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
 			"key": "field_clinical_resource_locations",
 			"label": "Location(s)",
 			"name": "clinical_resource_locations",
@@ -558,6 +622,22 @@
 			}
 		},
 		{
+			"key": "field_clinical_resource_tab_expertise",
+			"name": "",
+			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
 			"key": "field_clinical_resource_aoe",
 			"label": "Areas of Expertise",
 			"name": "clinical_resource_aoe",
@@ -585,6 +665,22 @@
 				"acfe_bidirectional_enabled": "1",
 				"acfe_bidirectional_related": "field_expertise_clinical_resources"
 			}
+		},
+		{
+			"key": "field_clinical_resource_tab_condition_treatment",
+			"name": "",
+			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		{
 			"key": "field_clinical_resource_conditions",
@@ -645,6 +741,22 @@
 			}
 		},
 		{
+			"key": "field_clinical_resource_tab_clinical_resource",
+			"name": "",
+			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
 			"key": "field_clinical_resource_related",
 			"label": "Related Clinical Resources",
 			"name": "clinical_resource_related",
@@ -674,6 +786,30 @@
 					"field_clinical_resource_related"
 				]
 			}
+		},
+		{
+			"key": "field_clinical_resource_tab_deprecated",
+			"name": "",
+			"label": "Deprecated Fields",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_tab_deprecated",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		{
 			"key": "field_clinical_resource_syndicated",
