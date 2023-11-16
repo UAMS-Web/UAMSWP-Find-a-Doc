@@ -72,6 +72,8 @@
 
 		$degree_attr_array = array_values($degree_attr_array);
 
+// Languages
+
 	$languages = get_field( 'physician_languages', $post->ID );
 	$language_count = 0;
 
