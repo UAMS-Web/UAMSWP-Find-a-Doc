@@ -24,6 +24,89 @@
 	"acfe_note": "",
 	"acfe_meta": "",
 	"fields": {
+		"field_expertise_tab_general": {
+			"key": "field_expertise_tab_general",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_short_desc": {
+			"key": "field_expertise_short_desc",
+			"label": "Short Description (excerpt)",
+			"name": "post_excerpt",
+			"type": "textarea",
+			"instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "50",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 3,
+			"new_lines": ""
+		},
+		"field_expertise_featured_image": {
+			"key": "field_expertise_featured_image",
+			"label": "Featured Image for This Page",
+			"name": "_thumbnail_id",
+			"type": "image",
+			"instructions": "Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1280,
+			"min_height": 720,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg,jpeg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
+		"field_expertise_tab_deprecated_soon": {
+			"key": "field_expertise_tab_deprecated_soon",
+			"label": "<i class=\"dashicons-warning dashicons\"><\/i> Fields Being Deprecated Soon",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_expertise_cta": {
 			"key": "field_expertise_cta",
 			"label": "Call-to-Action (CTA) Bar(s)",
@@ -323,73 +406,6 @@
 					"endpoint": 1
 				}
 			]
-		},
-		"field_expertise_tab_general": {
-			"key": "field_expertise_tab_general",
-			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
-			"name": "",
-			"type": "tab",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"placement": "left",
-			"endpoint": 0
-		},
-		"field_expertise_short_desc": {
-			"key": "field_expertise_short_desc",
-			"label": "Short Description (excerpt)",
-			"name": "post_excerpt",
-			"type": "textarea",
-			"instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "50",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"maxlength": 160,
-			"rows": 3,
-			"new_lines": ""
-		},
-		"field_expertise_featured_image": {
-			"key": "field_expertise_featured_image",
-			"label": "Featured Image for This Page",
-			"name": "_thumbnail_id",
-			"type": "image",
-			"instructions": "Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"uploader": "",
-			"acfe_thumbnail": 0,
-			"return_format": "id",
-			"preview_size": "medium",
-			"min_width": 1280,
-			"min_height": 720,
-			"min_size": "",
-			"max_width": "",
-			"max_height": "",
-			"max_size": "",
-			"mime_types": "jpg,jpeg",
-			"ratio_width": 16,
-			"ratio_height": 9,
-			"ratio_margin": 19,
-			"acfe_settings": "",
-			"acfe_validate": "",
-			"library": "all"
 		},
 		"field_expertise_brand_tab": {
 			"key": "field_expertise_brand_tab",
