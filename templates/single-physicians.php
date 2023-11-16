@@ -24,6 +24,7 @@
 
 	$degree_count = $degrees ? count($degrees) : 0;
 	$degree_list = '';
+	$degree_list_attr = '';
 	$degree_attr_array = array();
 	$i = 1;
 
@@ -52,6 +53,12 @@
 		} // endforeach
 
 	} // endif ( $degrees )
+
+	if ( $degree_list ) {
+
+		$degree_list_attr = uamswp_attr_conversion($degree_list);
+
+	}
 
 	$languages = get_field( 'physician_languages', $post->ID );
 	$language_count = 0;
