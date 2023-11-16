@@ -86,6 +86,22 @@
 			]
 		},
 		{
+			"key": "field_condition_tab_deprecated_soon",
+			"label": "<i class=\"dashicons-warning dashicons\"><\/i> Fields Being Deprecated Soon",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
 			"key": "field_medline_code_type",
 			"label": "Code Type for Medline Plus",
 			"name": "medline_code_type",
