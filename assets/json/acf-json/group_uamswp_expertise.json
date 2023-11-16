@@ -645,6 +645,38 @@
 			"rows": 3,
 			"new_lines": ""
 		},
+		"field_expertise_featured_image": {
+			"key": "field_expertise_featured_image",
+			"label": "Featured Image for This Page",
+			"name": "_thumbnail_id",
+			"type": "image",
+			"instructions": "Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1280,
+			"min_height": 720,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg,jpeg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
 		"field_expertise_brand_tab": {
 			"key": "field_expertise_brand_tab",
 			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
