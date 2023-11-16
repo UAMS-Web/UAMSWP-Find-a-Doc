@@ -2523,12 +2523,12 @@
 			/**
 			 * The taxonomy is intended to define values for organizations like UAMS and
 			 * UAMS Health.
-			 * 
+			 *
 			 * It should be limited to UAMS, UAMS Health, and any other clinical organizations
 			 * within UAMS.
-			 * 
+			 *
 			 * Expected taxonomy items:
-			 * 
+			 *
 			 *      * "University of Arkansas for Medical Sciences" (Slug: "uams")
 			 *             * "UAMS Health" (Slug: "uamshealth")
 			 */
@@ -2590,16 +2590,16 @@
 			 * The taxonomy is intended to define values for primary third-party clinical
 			 * organizations (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare
 			 * System).
-			 * 
+			 *
 			 * It should be limited to third-party organizations at which we have clinical
 			 * oversight — or within which there are clinical locations at which we have
 			 * clinical oversight.
-			 * 
+			 *
 			 * Prefix slugs for any nested third-party brand organization terms with the
 			 * top-level term's slug preceded and followed by an underscore.
-			 * 
+			 *
 			 * Expected taxonomy items:
-			 * 
+			 *
 			 *      * "Arkansas Children's" (Slug: "arkansas-childrens")
 			 *      * "Baptist Health" (Slug: "baptist-health")
 			 *      * "United States Department of Veterans Affairs" (Slug: "va")
@@ -3490,7 +3490,7 @@
 				$override_parent_photo_featured = get_field( 'location_image_override_parent_featured', $postId );
 				$override_parent_photo_wayfinding = get_field( 'location_image_override_parent_wayfinding', $postId );
 				$override_parent_photo_gallery = get_field( 'location_image_override_parent_gallery', $postId );
-				
+
 				// if ($override_parent_photo && $parent_location) { // If child location & override is true
 
 				if (
@@ -3572,7 +3572,7 @@
 			// Map / GPS
 
 				$map = get_field( 'location_map', $postId );
-				
+
 				$data['location_lat'] = $map['lat'];
 				$data['location_lng'] = $map['lng'];
 
@@ -3879,7 +3879,7 @@
 					$location_alert_text = '';
 
 				}
-				
+
 				$data['location_alert_title'] = $location_alert_title ? $location_alert_title : '';
 				$data['location_alert_text'] = $location_alert_text ? $location_alert_text : '';
 				$data['location_alert_color'] = $location_alert_color ? $location_alert_color : 'alert-warning';
@@ -4073,13 +4073,13 @@
 				}
 
 				$data['location_treatments_list'] = $treatment_list;
-			
+
 			// Parking information
 
 				$data['location_parking'] = get_field( 'location_parking', $postId );
 				$parking_map = get_field( 'location_parking_map', $postId );
 				$data['location_parking_link'] = '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'. $parking_map['lat'] .','. $parking_map['lng'] .'" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>';
-			
+
 			// Directions to location
 
 				$data['location_directions_link'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title($postId) .'">Get Directions</a>';
@@ -4833,7 +4833,7 @@
 				$data['clinical_resource_document'][$i]['title'] = $document_title;
 				$data['clinical_resource_document'][$i]['url'] = $document_url;
 				$i++;
-				
+
 			} // endwhile
 
 			if (
