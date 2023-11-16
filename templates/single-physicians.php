@@ -8,6 +8,20 @@
 
 	$degrees = get_field( 'physician_degree', $post->ID );
 
+	// Clean up degrees value
+
+		if (
+			$degrees
+			&&
+			is_array($degrees)
+		) {
+
+			$degrees = array_filter($degrees);
+			$degrees = array_unique($degrees);
+			$degrees = array_values($degrees);
+
+		}
+
 	$degree_list = '';
 	$i = 1;
 
