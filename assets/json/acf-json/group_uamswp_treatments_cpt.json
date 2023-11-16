@@ -86,28 +86,6 @@
 			]
 		},
 		{
-			"key": "field_treatment_procedure_content",
-			"label": "Content",
-			"name": "treatment_procedure_content",
-			"type": "wysiwyg",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "full",
-			"media_upload": 1,
-			"delay": 0,
-			"acfe_validate": "",
-			"acfe_update": ""
-		},
-		{
 			"key": "field_medline_code_type",
 			"label": "Code Type for Medline Plus",
 			"name": "medline_code_type",
@@ -865,6 +843,28 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		{
+			"key": "field_treatment_procedure_content",
+			"label": "Content",
+			"name": "treatment_procedure_content",
+			"type": "wysiwyg",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0,
+			"acfe_validate": "",
+			"acfe_update": ""
 		}
 	],
 	"location": [
