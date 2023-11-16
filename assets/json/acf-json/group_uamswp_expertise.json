@@ -1,634 +1,634 @@
 {
-    "key": "group_uamswp_expertise",
-    "title": "Clinical Area of Expertise",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "expertise"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_note": "",
-    "acfe_meta": "",
-    "fields": {
-        "field_expertise_alternate_names": {
-            "key": "field_expertise_alternate_names",
-            "label": "Alternate Names",
-            "name": "expertise_alternate_names",
-            "type": "repeater",
-            "instructions": "Insert additional names \/ phrases",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "collapsed": "field_alternate_text",
-            "min": 0,
-            "max": 10,
-            "layout": "table",
-            "button_label": "Add Keyword",
-            "sub_fields": [
-                {
-                    "key": "field_alternate_text",
-                    "label": "Alternate name \/ text",
-                    "name": "text",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": "",
-                    "acfe_validate": "",
-                    "acfe_update": ""
-                }
-            ]
-        },
-        "field_expertise_youtube_link": {
-            "key": "field_expertise_youtube_link",
-            "name": "expertise_youtube_link",
-            "type": "url",
-            "label": "Featured Youtube video",
-            "instructions": "Full URL, including https:\/\/",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": ""
-        },
-        "field_expertise_short_desc": {
-            "key": "field_expertise_short_desc",
-            "name": "post_excerpt",
-            "type": "textarea",
-            "label": "Short Description (excerpt)",
-            "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": 160,
-            "rows": 3,
-            "new_lines": ""
-        },
-        "field_expertise_cta": {
-            "key": "field_expertise_cta",
-            "label": "Call-to-Action (CTA) Bar(s)",
-            "name": "expertise_cta",
-            "type": "repeater",
-            "instructions": "Define up to two CTA Bar blocks",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "collapsed": "field_expertise_cta_bar_heading",
-            "min": 0,
-            "max": 2,
-            "layout": "block",
-            "button_label": "Add CTA Bar",
-            "sub_fields": [
-                {
-                    "key": "field_expertise_cta_bar_heading",
-                    "label": "Heading",
-                    "name": "cta_bar_heading",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_expertise_cta_bar_body",
-                    "label": "Body",
-                    "name": "cta_bar_body",
-                    "type": "wysiwyg",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "tabs": "all",
-                    "toolbar": "basic",
-                    "media_upload": 0,
-                    "delay": 0
-                },
-                {
-                    "key": "field_expertise_cta_bar_action_type",
-                    "label": "Action Type",
-                    "name": "cta_bar_action_type",
-                    "type": "button_group",
-                    "instructions": "Only choose None if your action is contained within your body text.",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "url": "URL",
-                        "phone": "Phone Number",
-                        "none": "None"
-                    },
-                    "allow_null": 0,
-                    "default_value": "url",
-                    "layout": "vertical",
-                    "return_format": "value"
-                },
-                {
-                    "key": "field_expertise_cta_bar_action_url_open",
-                    "label": "URL Action",
-                    "name": "",
-                    "type": "accordion",
-                    "instructions": "All fields must be populated or your link will not display.",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_expertise_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "url"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "open": 1,
-                    "multi_expand": 0,
-                    "endpoint": 0
-                },
-                {
-                    "key": "field_expertise_cta_bar_button_text",
-                    "label": "Button Text",
-                    "name": "cta_bar_button_text",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_expertise_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "url"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_expertise_cta_bar_button_url",
-                    "label": "Button URL",
-                    "name": "cta_bar_button_url",
-                    "type": "link",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_expertise_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "url"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "array"
-                },
-                {
-                    "key": "field_expertise_cta_bar_button_description",
-                    "label": "Button Link Description",
-                    "name": "cta_bar_button_description",
-                    "type": "text",
-                    "instructions": "This is needed for accessibility. It helps differentiate between multiple links that use the same text like \"Learn more\". Describe the intent of the link, like \"Learn more about the ABC Department\".",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_expertise_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "url"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_expertise_cta_bar_action_url_close",
-                    "label": "URL Action Close",
-                    "name": "",
-                    "type": "accordion",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "open": 1,
-                    "multi_expand": 0,
-                    "endpoint": 1
-                },
-                {
-                    "key": "field_expertise_cta_bar_action_phone_open",
-                    "label": "Phone Action",
-                    "name": "",
-                    "type": "accordion",
-                    "instructions": "All fields must be populated or your telephone number will not display.",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_expertise_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "phone"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "open": 1,
-                    "multi_expand": 0,
-                    "endpoint": 0
-                },
-                {
-                    "key": "field_expertise_cta_bar_phone_prepend",
-                    "label": "Text before phone number",
-                    "name": "cta_bar_phone_prepend",
-                    "type": "text",
-                    "instructions": "This, combined with the phone number will generate a short action phrase. Keep this text very short. Do not include the phone number here. Examples: \"Call\", \"Fax Referrals to\".",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_expertise_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "phone"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "Call",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_expertise_cta_bar_phone",
-                    "label": "Phone Number",
-                    "name": "cta_bar_phone",
-                    "type": "text",
-                    "instructions": "Format your phone number using dashes. Include the area code. Example: 999-999-9999",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_expertise_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "phone"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_expertise_cta_bar_action_URL_close",
-                    "label": "Accordion Close",
-                    "name": "",
-                    "type": "accordion",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "open": 1,
-                    "multi_expand": 0,
-                    "endpoint": 1
-                }
-            ]
-        },
-        "field_expertise_conditions_cpt": {
-            "key": "field_expertise_conditions_cpt",
-            "name": "expertise_conditions_cpt",
-            "type": "post_object",
-            "label": "Conditions",
-            "instructions": "The conditions will display in alphabetical order.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "condition"
-            ],
-            "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 1,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_condition_expertise"
-            },
-            "acfe_validate": "",
-            "acfe_update": "",
-            "ui": 1
-        },
-        "field_expertise_treatments_cpt": {
-            "key": "field_expertise_treatments_cpt",
-            "name": "expertise_treatments_cpt",
-            "type": "post_object",
-            "label": "Treatments & Procedures",
-            "instructions": "The treatments and procedures will display in alphabetical order.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "treatment"
-            ],
-            "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 1,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_treatment_procedure_expertise"
-            },
-            "acfe_validate": "",
-            "acfe_update": "",
-            "ui": 1
-        },
-        "field_medical_terms": {
-            "key": "field_expertise_medical_terms",
-            "name": "expertise_medical_terms",
-            "type": "taxonomy",
-            "label": "Medical Terms (Tags)",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_expertise_conditions",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "medical_term",
-            "field_type": "multi_select",
-            "allow_null": 1,
-            "add_term": 0,
-            "save_terms": 1,
-            "load_terms": 1,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
-            },
-            "multiple": 0
-        },
-        "field_expertise_physicians": {
-            "key": "field_expertise_physicians",
-            "name": "physician_expertise",
-            "type": "relationship",
-            "label": "Providers",
-            "instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "provider"
-            ],
-            "taxonomy": [],
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_physician_expertise"
-            },
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        "field_expertise_locations": {
-            "key": "field_expertise_locations",
-            "name": "location_expertise",
-            "type": "relationship",
-            "label": "Locations",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "location"
-            ],
-            "taxonomy": [],
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_location_expertise"
-            },
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        "field_expertise_associated": {
-            "key": "field_expertise_associated",
-            "name": "expertise_associated",
-            "type": "relationship",
-            "label": "Associated Areas of Expertise",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "expertise"
-            ],
-            "taxonomy": [],
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id"
-        },
-        "field_expertise_clinical_resources": {
-            "key": "field_expertise_clinical_resources",
-            "name": "expertise_clinical_resources",
-            "type": "relationship",
-            "label": "Clinical Resources",
-            "instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "clinical-resource"
-            ],
-            "taxonomy": [],
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_clinical_resource_aoe"
-            },
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        "field_physician_podcast_name": {
-            "key": "field_expertise_podcast_name",
-            "name": "expertise_podcast_name",
-            "type": "text",
-            "label": "UAMS Health Talk Podcast Topic Name",
-            "instructions": "Topic name as listed in the dropdown",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        }
-    },
-    "modified": false
+	"key": "group_uamswp_expertise",
+	"title": "Clinical Area of Expertise",
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "expertise"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": "",
+	"fields": {
+		"field_expertise_alternate_names": {
+			"key": "field_expertise_alternate_names",
+			"label": "Alternate Names",
+			"name": "expertise_alternate_names",
+			"type": "repeater",
+			"instructions": "Insert additional names \/ phrases",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "field_alternate_text",
+			"min": 0,
+			"max": 10,
+			"layout": "table",
+			"button_label": "Add Keyword",
+			"sub_fields": [
+				{
+					"key": "field_alternate_text",
+					"label": "Alternate name \/ text",
+					"name": "text",
+					"type": "text",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": "",
+					"acfe_validate": "",
+					"acfe_update": ""
+				}
+			]
+		},
+		"field_expertise_youtube_link": {
+			"key": "field_expertise_youtube_link",
+			"name": "expertise_youtube_link",
+			"type": "url",
+			"label": "Featured Youtube video",
+			"instructions": "Full URL, including https:\/\/",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "50",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		"field_expertise_short_desc": {
+			"key": "field_expertise_short_desc",
+			"name": "post_excerpt",
+			"type": "textarea",
+			"label": "Short Description (excerpt)",
+			"instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "50",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 3,
+			"new_lines": ""
+		},
+		"field_expertise_cta": {
+			"key": "field_expertise_cta",
+			"label": "Call-to-Action (CTA) Bar(s)",
+			"name": "expertise_cta",
+			"type": "repeater",
+			"instructions": "Define up to two CTA Bar blocks",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "field_expertise_cta_bar_heading",
+			"min": 0,
+			"max": 2,
+			"layout": "block",
+			"button_label": "Add CTA Bar",
+			"sub_fields": [
+				{
+					"key": "field_expertise_cta_bar_heading",
+					"label": "Heading",
+					"name": "cta_bar_heading",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_body",
+					"label": "Body",
+					"name": "cta_bar_body",
+					"type": "wysiwyg",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"tabs": "all",
+					"toolbar": "basic",
+					"media_upload": 0,
+					"delay": 0
+				},
+				{
+					"key": "field_expertise_cta_bar_action_type",
+					"label": "Action Type",
+					"name": "cta_bar_action_type",
+					"type": "button_group",
+					"instructions": "Only choose None if your action is contained within your body text.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"choices": {
+						"url": "URL",
+						"phone": "Phone Number",
+						"none": "None"
+					},
+					"allow_null": 0,
+					"default_value": "url",
+					"layout": "vertical",
+					"return_format": "value"
+				},
+				{
+					"key": "field_expertise_cta_bar_action_url_open",
+					"label": "URL Action",
+					"name": "",
+					"type": "accordion",
+					"instructions": "All fields must be populated or your link will not display.",
+					"required": 0,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 0
+				},
+				{
+					"key": "field_expertise_cta_bar_button_text",
+					"label": "Button Text",
+					"name": "cta_bar_button_text",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_button_url",
+					"label": "Button URL",
+					"name": "cta_bar_button_url",
+					"type": "link",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"return_format": "array"
+				},
+				{
+					"key": "field_expertise_cta_bar_button_description",
+					"label": "Button Link Description",
+					"name": "cta_bar_button_description",
+					"type": "text",
+					"instructions": "This is needed for accessibility. It helps differentiate between multiple links that use the same text like \"Learn more\". Describe the intent of the link, like \"Learn more about the ABC Department\".",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_action_url_close",
+					"label": "URL Action Close",
+					"name": "",
+					"type": "accordion",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 1
+				},
+				{
+					"key": "field_expertise_cta_bar_action_phone_open",
+					"label": "Phone Action",
+					"name": "",
+					"type": "accordion",
+					"instructions": "All fields must be populated or your telephone number will not display.",
+					"required": 0,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 0
+				},
+				{
+					"key": "field_expertise_cta_bar_phone_prepend",
+					"label": "Text before phone number",
+					"name": "cta_bar_phone_prepend",
+					"type": "text",
+					"instructions": "This, combined with the phone number will generate a short action phrase. Keep this text very short. Do not include the phone number here. Examples: \"Call\", \"Fax Referrals to\".",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "Call",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_phone",
+					"label": "Phone Number",
+					"name": "cta_bar_phone",
+					"type": "text",
+					"instructions": "Format your phone number using dashes. Include the area code. Example: 999-999-9999",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_action_URL_close",
+					"label": "Accordion Close",
+					"name": "",
+					"type": "accordion",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 1
+				}
+			]
+		},
+		"field_expertise_conditions_cpt": {
+			"key": "field_expertise_conditions_cpt",
+			"name": "expertise_conditions_cpt",
+			"type": "post_object",
+			"label": "Conditions",
+			"instructions": "The conditions will display in alphabetical order.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"allow_null": 1,
+			"multiple": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		"field_expertise_treatments_cpt": {
+			"key": "field_expertise_treatments_cpt",
+			"name": "expertise_treatments_cpt",
+			"type": "post_object",
+			"label": "Treatments & Procedures",
+			"instructions": "The treatments and procedures will display in alphabetical order.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"allow_null": 1,
+			"multiple": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		"field_medical_terms": {
+			"key": "field_expertise_medical_terms",
+			"name": "expertise_medical_terms",
+			"type": "taxonomy",
+			"label": "Medical Terms (Tags)",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_conditions",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "medical_term",
+			"field_type": "multi_select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
+		"field_expertise_physicians": {
+			"key": "field_expertise_physicians",
+			"name": "physician_expertise",
+			"type": "relationship",
+			"label": "Providers",
+			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"provider"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_physician_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		"field_expertise_locations": {
+			"key": "field_expertise_locations",
+			"name": "location_expertise",
+			"type": "relationship",
+			"label": "Locations",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"location"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_location_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		"field_expertise_associated": {
+			"key": "field_expertise_associated",
+			"name": "expertise_associated",
+			"type": "relationship",
+			"label": "Associated Areas of Expertise",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"expertise"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id"
+		},
+		"field_expertise_clinical_resources": {
+			"key": "field_expertise_clinical_resources",
+			"name": "expertise_clinical_resources",
+			"type": "relationship",
+			"label": "Clinical Resources",
+			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"clinical-resource"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_clinical_resource_aoe"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		"field_physician_podcast_name": {
+			"key": "field_expertise_podcast_name",
+			"name": "expertise_podcast_name",
+			"type": "text",
+			"label": "UAMS Health Talk Podcast Topic Name",
+			"instructions": "Topic name as listed in the dropdown",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		}
+	},
+	"modified": false
 }

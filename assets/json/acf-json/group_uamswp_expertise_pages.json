@@ -1,95 +1,95 @@
 
 {
-    "key": "group_expertise_archive_page",
-    "title": "Areas of Expertise Archive Page",
-    "fields": [
-        {
-            "key": "field_expertise_archive_headline",
-            "label": "Archive Headline",
-            "name": "expertise_archive_headline",
-            "type": "text",
-            "instructions": "Your theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "placeholder": "Areas of Expertise",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        {
-            "key": "field_expertise_single_name",
-            "label": "Single Item Name",
-            "name": "expertise_single_name",
-            "type": "text",
-            "instructions": "If you leave this blank, the default name for a single item will be used.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "placeholder": "Area of Expertise",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        {
-            "key": "field_expertise_archive_intro_text",
-            "label": "Archive Intro Text",
-            "name": "expertise_archive_intro_text",
-            "type": "wysiwyg",
-            "instructions": "Leave empty if you do not want to display any intro text.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0,
-            "acfe_validate": "",
-            "acfe_update": ""
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "options_page",
-                "operator": "==",
-                "value": "uamswp-fad-expertise"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "left",
-    "instruction_placement": "field",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_note": "",
-    "acfe_meta": ""
+	"key": "group_expertise_archive_page",
+	"title": "Areas of Expertise Archive Page",
+	"fields": [
+		{
+			"key": "field_expertise_archive_headline",
+			"label": "Archive Headline",
+			"name": "expertise_archive_headline",
+			"type": "text",
+			"instructions": "Your theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Areas of Expertise",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_expertise_single_name",
+			"label": "Single Item Name",
+			"name": "expertise_single_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default name for a single item will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Area of Expertise",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_expertise_archive_intro_text",
+			"label": "Archive Intro Text",
+			"name": "expertise_archive_intro_text",
+			"type": "wysiwyg",
+			"instructions": "Leave empty if you do not want to display any intro text.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0,
+			"acfe_validate": "",
+			"acfe_update": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-expertise"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "left",
+	"instruction_placement": "field",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
 }

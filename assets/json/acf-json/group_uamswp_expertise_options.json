@@ -1,65 +1,65 @@
 {
-    "key": "group_expertise_page_options",
-    "title": "Expertise Page Attributes",
-    "fields": [
-        {
-            "key": "field_hide_sub_areas_of_expertise",
-            "label": "Hide Sub Areas of Expertise",
-            "name": "hide_sub_areas_of_expertise",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "hide-acf-title",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "Hide Sub Areas of Expertise",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "acfe_form": true
-        },
-        {
-            "key": "field_hide_from_sub_menu",
-            "label": "Hide from Sub Menu",
-            "name": "hide_from_sub_menu",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "hide-acf-title",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "Hide from Sub Menu",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "acfe_form": true
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "expertise"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "side",
-    "style": "seamless",
-    "label_placement": "left",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": true,
-    "description": ""
+	"key": "group_expertise_page_options",
+	"title": "Expertise Page Attributes",
+	"fields": [
+		{
+			"key": "field_hide_sub_areas_of_expertise",
+			"label": "Hide Sub Areas of Expertise",
+			"name": "hide_sub_areas_of_expertise",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-title",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "Hide Sub Areas of Expertise",
+			"default_value": 0,
+			"ui": 0,
+			"ui_on_text": "",
+			"ui_off_text": "",
+			"acfe_form": true
+		},
+		{
+			"key": "field_hide_from_sub_menu",
+			"label": "Hide from Sub Menu",
+			"name": "hide_from_sub_menu",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-title",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "Hide from Sub Menu",
+			"default_value": 0,
+			"ui": 0,
+			"ui_on_text": "",
+			"ui_off_text": "",
+			"acfe_form": true
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "expertise"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "side",
+	"style": "seamless",
+	"label_placement": "left",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": ""
 }

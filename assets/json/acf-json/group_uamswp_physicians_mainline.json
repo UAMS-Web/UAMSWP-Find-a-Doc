@@ -1,49 +1,49 @@
 
 {
-    "key": "group_provider_mainline",
-    "title": "Include Main Appointment Line",
-    "fields": [
-        {
-            "key": "field_provider_mainline",
-            "label": "Include references to main appointment line?",
-            "name": "provider_mainline",
-            "type": "true_false",
-            "instructions": "On provider profiles, we present a list of methods a patient can use to make an appointment. Set whether or not the main appointment line will be included in that list.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "",
-            "default_value": 1,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "options_page",
-                "operator": "==",
-                "value": "uamswp-fad-providers"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "left",
-    "instruction_placement": "field",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_note": "",
-    "acfe_meta": ""
+	"key": "group_provider_mainline",
+	"title": "Include Main Appointment Line",
+	"fields": [
+		{
+			"key": "field_provider_mainline",
+			"label": "Include references to main appointment line?",
+			"name": "provider_mainline",
+			"type": "true_false",
+			"instructions": "On provider profiles, we present a list of methods a patient can use to make an appointment. Set whether or not the main appointment line will be included in that list.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "",
+			"default_value": 1,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-providers"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "left",
+	"instruction_placement": "field",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
 }

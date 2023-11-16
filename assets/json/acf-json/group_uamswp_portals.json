@@ -1,71 +1,71 @@
 {
-    "key": "group_uamswp_portal",
-    "title": "Additional Information",
-    "location": [
-        [
-            {
-                "param": "taxonomy",
-                "operator": "==",
-                "value": "portal"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "acf_after_title",
-    "style": "seamless",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": [
-        "description"
-    ],
-    "active": 1,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_note": "",
-    "acfe_meta": "",
-    "fields": {
-        "field_specialty_url": {
-            "key": "field_portal_url",
-            "name": "portal_url",
-            "type": "link",
-            "label": "Link to Portal",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "return_format": "array",
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        "field_portal_content": {
-            "key": "field_portal_content",
-            "label": "Content",
-            "name": "portal_content",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0,
-            "acfe_validate": "",
-            "acfe_update": ""
-        }
-    },
-    "modified": false
+	"key": "group_uamswp_portal",
+	"title": "Additional Information",
+	"location": [
+		[
+			{
+				"param": "taxonomy",
+				"operator": "==",
+				"value": "portal"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "acf_after_title",
+	"style": "seamless",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": [
+		"description"
+	],
+	"active": 1,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": "",
+	"fields": {
+		"field_specialty_url": {
+			"key": "field_portal_url",
+			"name": "portal_url",
+			"type": "link",
+			"label": "Link to Portal",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"return_format": "array",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		"field_portal_content": {
+			"key": "field_portal_content",
+			"label": "Content",
+			"name": "portal_content",
+			"type": "wysiwyg",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0,
+			"acfe_validate": "",
+			"acfe_update": ""
+		}
+	},
+	"modified": false
 }

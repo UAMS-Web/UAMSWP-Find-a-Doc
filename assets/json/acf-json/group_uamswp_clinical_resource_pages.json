@@ -1,72 +1,72 @@
 {
-    "key": "group_clinical_resource_archive_page",
-    "title": "Clinical Resources Archive Page",
-    "fields": [
-        {
-            "key": "field_clinical_resource_archive_headline",
-            "label": "Archive Headline",
-            "name": "clinical_resource_archive_headline",
-            "type": "text",
-            "instructions": "Your theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        {
-            "key": "field_clinical_resource_archive_intro_text",
-            "label": "Archive Intro Text",
-            "name": "clinical_resource_archive_intro_text",
-            "type": "wysiwyg",
-            "instructions": "Leave empty if you do not want to display any intro text.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0,
-            "acfe_validate": "",
-            "acfe_update": ""
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "options_page",
-                "operator": "==",
-                "value": "uamswp-fad-resources"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "left",
-    "instruction_placement": "field",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_note": "",
-    "acfe_meta": ""
+	"key": "group_clinical_resource_archive_page",
+	"title": "Clinical Resources Archive Page",
+	"fields": [
+		{
+			"key": "field_clinical_resource_archive_headline",
+			"label": "Archive Headline",
+			"name": "clinical_resource_archive_headline",
+			"type": "text",
+			"instructions": "Your theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_archive_intro_text",
+			"label": "Archive Intro Text",
+			"name": "clinical_resource_archive_intro_text",
+			"type": "wysiwyg",
+			"instructions": "Leave empty if you do not want to display any intro text.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0,
+			"acfe_validate": "",
+			"acfe_update": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-resources"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "left",
+	"instruction_placement": "field",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
 }
