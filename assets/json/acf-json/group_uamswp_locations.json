@@ -779,10 +779,10 @@
 		},
 		"field_location_short_desc": {
 			"key": "field_location_short_desc",
-			"label": "Short Description (excerpt)",
+			"label": "Short Description",
 			"name": "location_short_desc",
 			"type": "textarea",
-			"instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
+			"instructions": "This will be the description included for this page when it appears in search results.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -798,10 +798,10 @@
 		},
 		"field_location_youtube_link": {
 			"key": "field_location_youtube_link",
-			"label": "Youtube Link",
+			"label": "Featured Video",
 			"name": "location_youtube_link",
 			"type": "url",
-			"instructions": "Full URL, including https:\/\/",
+			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this location and that supports the content of this page. Include the full URL, including https:\/\/",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
