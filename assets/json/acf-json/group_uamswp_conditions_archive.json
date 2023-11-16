@@ -1,0 +1,70 @@
+{
+	"key": "group_conditions_archive",
+	"title": "Conditions Archive Page",
+	"fields": [
+		{
+			"key": "field_conditions_archive_headline",
+			"label": "Title of Condition Archive",
+			"name": "conditions_archive_headline",
+			"type": "text",
+			"instructions": "Your child theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Conditions",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_conditions_archive_intro_text",
+			"label": "Intro Text of Condition Archive",
+			"name": "conditions_archive_intro_text",
+			"type": "textarea",
+			"instructions": "Leave empty if you do not want to display any intro text.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 500,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-tax"
+			}
+		]
+	],
+	"menu_order": 40,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
+}
