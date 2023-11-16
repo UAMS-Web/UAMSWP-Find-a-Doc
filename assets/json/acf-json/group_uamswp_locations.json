@@ -3406,6 +3406,50 @@
 				}
 			]
 		},
+		"field_location_physician_tab": {
+			"key": "field_location_physician_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Providers",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_location_physicians": {
+			"key": "field_location_physicians",
+			"name": "physician_locations",
+			"type": "relationship",
+			"label": "Providers",
+			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"provider"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": 0,
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
 		"field_location_conditions_treatments_tab": {
 			"key": "field_location_conditions_treatments_tab",
 			"name": "",
@@ -3902,50 +3946,6 @@
 				"acfe_bidirectional_enabled": "0"
 			},
 			"multiple": 0
-		},
-		"field_location_physician_tab": {
-			"key": "field_location_physician_tab",
-			"name": "",
-			"type": "tab",
-			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Providers",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"placement": "left",
-			"endpoint": 0
-		},
-		"field_location_physicians": {
-			"key": "field_location_physicians",
-			"name": "physician_locations",
-			"type": "relationship",
-			"label": "Providers",
-			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"provider"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": 0,
-			"acfe_validate": "",
-			"acfe_update": ""
 		},
 		"field_location_alert_tab": {
 			"key": "field_location_alert_tab",
