@@ -2122,15 +2122,7 @@
 			"label": "Areas of Expertise",
 			"instructions": "Areas of Expertise are hierarchical. If a child area is included here (e.g., Lung Cancer Care), please also select the parent area (e.g., Cancer Care).",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_resident",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
