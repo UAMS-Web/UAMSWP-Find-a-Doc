@@ -1867,7 +1867,7 @@
 						"acfe_bidirectional_enabled": "0"
 					},
 					"multiple": 0,
-					"allow_null": 0
+					"allow_null": 1
 				},
 				{
 					"key": "field_physician_appointment_school",
@@ -1892,7 +1892,7 @@
 						"acfe_bidirectional_enabled": "0"
 					},
 					"multiple": 0,
-					"allow_null": 0
+					"allow_null": 1
 				},
 				{
 					"key": "field_physician_appointment_description",
