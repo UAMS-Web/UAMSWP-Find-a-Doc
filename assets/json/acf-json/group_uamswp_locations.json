@@ -1166,6 +1166,23 @@
 			"conditional_logic": [
 				[
 					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_schema_brandorg",
+						"operator": "==",
+						"value": "arkansas-childrens"
+					},
+					{
+						"field": "field_location_appointments_query",
+						"operator": "==",
+						"value": "1"
+					}
+				],
+				[
+					{
 						"field": "field_location_ac_query",
 						"operator": "==",
 						"value": "1"
@@ -1248,7 +1265,33 @@
 			"conditional_logic": [
 				[
 					{
-						"field": "field_location_ac_query",
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
+						"field": "field_location_appointments_query",
+						"operator": "==",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_schema_brandorg",
+						"operator": "!=empty"
+					},
+					{
+						"field": "field_schema_brandorg",
+						"operator": "!=",
+						"value": "arkansas-childrens"
+					},
+					{
+						"field": "field_location_ac_appointments_query",
 						"operator": "==",
 						"value": "0"
 					},
@@ -1284,6 +1327,33 @@
 			"conditional_logic": [
 				[
 					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
+						"field": "field_location_clinic_phone_query",
+						"operator": "==",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_schema_brandorg",
+						"operator": "==",
+						"value": "arkansas-childrens"
+					},
+					{
+						"field": "field_location_ac_appointments_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
 						"field": "field_location_clinic_phone_query",
 						"operator": "==",
 						"value": "1"
@@ -1299,6 +1369,11 @@
 						"field": "field_location_ac_appointments_query",
 						"operator": "==",
 						"value": "0"
+					},
+					{
+						"field": "field_location_clinic_phone_query",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -1370,15 +1445,7 @@
 			"type": "maskfield",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_ac_query",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -1396,9 +1463,30 @@
 			"conditional_logic": [
 				[
 					{
-						"field": "field_location_ac_query",
+						"field": "field_schema_brandorg_query",
 						"operator": "==",
 						"value": "0"
+					}
+				],
+				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_schema_brandorg",
+						"operator": "!=empty"
+					},
+					{
+						"field": "field_schema_brandorg",
+						"operator": "!=",
+						"value": "arkansas-childrens"
+					},
+					{
+						"field": "field_location_ac_query",
+						"operator": "!=",
+						"value": "1"
 					}
 				]
 			],
