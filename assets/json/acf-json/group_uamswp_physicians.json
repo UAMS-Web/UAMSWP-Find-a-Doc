@@ -37,7 +37,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_first_name": {
@@ -353,7 +353,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_resident": {
@@ -1356,7 +1356,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_resident_profile_group": {
@@ -1384,7 +1384,7 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"placement": "left",
+					"placement": "top",
 					"endpoint": 0
 				},
 				{
@@ -1575,7 +1575,7 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"placement": "left",
+					"placement": "top",
 					"endpoint": 0
 				},
 				{
@@ -1678,7 +1678,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_profile_message": {
@@ -2148,7 +2148,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_appointment_education": {
@@ -2320,7 +2320,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_research_bio": {
@@ -2545,7 +2545,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_gmb_exclude": {
@@ -2616,7 +2616,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_awards": {
