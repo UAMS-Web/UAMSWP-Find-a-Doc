@@ -525,7 +525,6 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-
 		"field_physician_appointment_link": {
 			"key": "field_physician_appointment_link",
 			"name": "physician_appointment_link",
