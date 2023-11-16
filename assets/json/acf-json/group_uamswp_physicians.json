@@ -2808,7 +2808,7 @@
 			"key": "field_physician_extra_tab",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons dashicons-awards\"><\/i> Extra",
+			"label": "<i class=\"dashicons dashicons-info\"><\/i> Additional Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
