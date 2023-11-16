@@ -557,7 +557,7 @@
 			"label": "UAMS Health Talk Podcast Topic Name",
 			"name": "expertise_podcast_name",
 			"type": "text",
-			"instructions": "Topic name as listed in the dropdown",
+			"instructions": "Include a single topic name as listed in the \"Topics\" dropdown of the embedded player on <a href=\"https://uamshealth.com/podcast/\" title=\"UAMS Health Talk Podcast\" target=\"_blank\">https://uamshealth.com/podcast/</a>.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
