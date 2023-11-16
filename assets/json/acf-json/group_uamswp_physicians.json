@@ -717,7 +717,6 @@
 			"placeholder": "",
 			"prepend": "",
 			"append": "",
-			"maxlength": "",
 			"min": 0,
 			"max": 9999999999,
 			"step": 1
