@@ -1592,178 +1592,6 @@
 			"media_upload": 1,
 			"delay": 0
 		},
-		"field_physician_education_tab": {
-			"key": "field_physician_education_tab",
-			"name": "",
-			"type": "tab",
-			"label": "<i class=\"dashicons-bank dashicons\"><\/i> Education, Training, Certifications and Memberships",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"placement": "left",
-			"endpoint": 0
-		},
-		"field_physician_appointment_education": {
-			"key": "field_physician_appointment_education",
-			"name": "physician_education",
-			"type": "repeater",
-			"label": "Education and Training",
-			"instructions": "Arrange the rows in reverse chronological order, with the most recent item at the top and the oldest item at the bottom.</p><p class='description' style='margin-top: 0.5em;'>\"Education Type\" and \"Organization\" are both required if you add a row.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"collapsed": "",
-			"min": 0,
-			"max": 0,
-			"layout": "table",
-			"button_label": "",
-			"sub_fields": [
-				{
-					"key": "field_physician_appointment_education_type",
-					"label": "Education or Training Type",
-					"name": "education_type",
-					"type": "taxonomy",
-					"instructions": "",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"taxonomy": "educationtype",
-					"field_type": "select",
-					"add_term": 0,
-					"save_terms": 0,
-					"load_terms": 0,
-					"return_format": "id",
-					"acfe_bidirectional": {
-						"acfe_bidirectional_enabled": "0"
-					},
-					"multiple": 0,
-					"allow_null": 0
-				},
-				{
-					"key": "field_physician_appointment_school",
-					"label": "Organization",
-					"name": "school",
-					"type": "taxonomy",
-					"instructions": "The organization that provided the education or training to the provider. If for something like an internship, residency or fellowship, select the sponsoring institution.",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"taxonomy": "school",
-					"field_type": "select",
-					"add_term": 0,
-					"save_terms": 0,
-					"load_terms": 0,
-					"return_format": "id",
-					"acfe_bidirectional": {
-						"acfe_bidirectional_enabled": "0"
-					},
-					"multiple": 0,
-					"allow_null": 0
-				},
-				{
-					"key": "field_physician_appointment_description",
-					"label": "Description",
-					"name": "description",
-					"type": "text",
-					"instructions": "Include information like the specific degrees (non-abbreviated) and/or areas of focus or specialization (e.g., Bachelor of Science in Biology).</p><p class='description' style='margin-top: 0.5em;'>Do not repeat the name of the Education or Training Type (e.g., Fellowship). Do not include \"Doctor of Medicine\" as the description for the \"Medical School\" Education or Training Type",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				}
-			]
-		},
-		"field_physician_boards": {
-			"key": "field_physician_boards",
-			"name": "physician_boards",
-			"type": "taxonomy",
-			"label": "Specialty and Subspecialty Certifications",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_resident",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "board",
-			"field_type": "multi_select",
-			"allow_null": 0,
-			"add_term": 0,
-			"save_terms": 1,
-			"load_terms": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 0
-		},
-		"field_physician_associations": {
-			"key": "field_physician_associations",
-			"name": "physician_associations",
-			"type": "taxonomy",
-			"label": "Health Care Professional Memberships",
-			"instructions": "Examples: Fellow of the American College of Obstetricians and Gynecologists, American Society of Breast Surgeons, American Burn Association, etc.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_resident",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "association",
-			"field_type": "multi_select",
-			"allow_null": 0,
-			"add_term": 0,
-			"save_terms": 1,
-			"load_terms": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 0
-		},
 		"field_physician_research_tab": {
 			"key": "field_physician_research_tab",
 			"name": "",
@@ -1980,6 +1808,178 @@
 					"new_lines": ""
 				}
 			]
+		},
+		"field_physician_education_tab": {
+			"key": "field_physician_education_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-bank dashicons\"><\/i> Education, Training, Certifications and Memberships",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_physician_appointment_education": {
+			"key": "field_physician_appointment_education",
+			"name": "physician_education",
+			"type": "repeater",
+			"label": "Education and Training",
+			"instructions": "Arrange the rows in reverse chronological order, with the most recent item at the top and the oldest item at the bottom.</p><p class='description' style='margin-top: 0.5em;'>\"Education Type\" and \"Organization\" are both required if you add a row.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"collapsed": "",
+			"min": 0,
+			"max": 0,
+			"layout": "table",
+			"button_label": "",
+			"sub_fields": [
+				{
+					"key": "field_physician_appointment_education_type",
+					"label": "Education or Training Type",
+					"name": "education_type",
+					"type": "taxonomy",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"taxonomy": "educationtype",
+					"field_type": "select",
+					"add_term": 0,
+					"save_terms": 0,
+					"load_terms": 0,
+					"return_format": "id",
+					"acfe_bidirectional": {
+						"acfe_bidirectional_enabled": "0"
+					},
+					"multiple": 0,
+					"allow_null": 0
+				},
+				{
+					"key": "field_physician_appointment_school",
+					"label": "Organization",
+					"name": "school",
+					"type": "taxonomy",
+					"instructions": "The organization that provided the education or training to the provider. If for something like an internship, residency or fellowship, select the sponsoring institution.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"taxonomy": "school",
+					"field_type": "select",
+					"add_term": 0,
+					"save_terms": 0,
+					"load_terms": 0,
+					"return_format": "id",
+					"acfe_bidirectional": {
+						"acfe_bidirectional_enabled": "0"
+					},
+					"multiple": 0,
+					"allow_null": 0
+				},
+				{
+					"key": "field_physician_appointment_description",
+					"label": "Description",
+					"name": "description",
+					"type": "text",
+					"instructions": "Include information like the specific degrees (non-abbreviated) and/or areas of focus or specialization (e.g., Bachelor of Science in Biology).</p><p class='description' style='margin-top: 0.5em;'>Do not repeat the name of the Education or Training Type (e.g., Fellowship). Do not include \"Doctor of Medicine\" as the description for the \"Medical School\" Education or Training Type",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				}
+			]
+		},
+		"field_physician_boards": {
+			"key": "field_physician_boards",
+			"name": "physician_boards",
+			"type": "taxonomy",
+			"label": "Specialty and Subspecialty Certifications",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_resident",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "board",
+			"field_type": "multi_select",
+			"allow_null": 0,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
+		"field_physician_associations": {
+			"key": "field_physician_associations",
+			"name": "physician_associations",
+			"type": "taxonomy",
+			"label": "Health Care Professional Memberships",
+			"instructions": "Examples: Fellow of the American College of Obstetricians and Gynecologists, American Society of Breast Surgeons, American Burn Association, etc.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_resident",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "association",
+			"field_type": "multi_select",
+			"allow_null": 0,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
 		},
 		"field_physician_location_tab": {
 			"key": "field_physician_location_tab",
