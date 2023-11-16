@@ -706,6 +706,30 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_expertise_brandorg": {
+			"key": "field_expertise_brandorg",
+			"label": "Third-Party Brand Organization",
+			"name": "expertise_brandorg",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_brandorg_multiple"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
 		"field_expertise_tab_details": {
 			"key": "field_expertise_tab_details",
 			"label": "<i class=\"dashicons-info dashicons\"><\/i> Area of Expertise Details",
