@@ -541,171 +541,6 @@
 			"ui_off_text": ""
 		},
 		{
-			"key": "field_condition_treatments",
-			"label": "Treatments",
-			"name": "condition_treatments",
-			"type": "relationship",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"post_type": [
-				"treatment"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_treatment_conditions"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"ui": 1
-		},
-		{
-			"key": "field_condition_expertise",
-			"label": "Related Areas of Expertise",
-			"name": "condition_expertise",
-			"type": "relationship",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"post_type": [
-				"expertise"
-			],
-			"taxonomy": "",
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_expertise_conditions_cpt"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"ui": 1
-		},
-		{
-			"key": "field_condition_locations",
-			"label": "Locations treating this condition",
-			"name": "condition_locations",
-			"type": "relationship",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"post_type": [
-				"location"
-			],
-			"taxonomy": "",
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_location_conditions_cpt"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"ui": 1
-		},
-		{
-			"key": "field_condition_physicians",
-			"label": "Providers diagnosing or treating this condition",
-			"name": "condition_physicians",
-			"type": "relationship",
-			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"post_type": [
-				"provider"
-			],
-			"taxonomy": "",
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_physician_conditions_cpt"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"ui": 1
-		},
-		{
-			"key": "field_condition_clinical_resources",
-			"label": "Clinical Resources",
-			"name": "condition_clinical_resources",
-			"type": "relationship",
-			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"post_type": [
-				"clinical-resource"
-			],
-			"taxonomy": "",
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_clinical_resource_conditions"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"ui": 1
-		},
-		{
 			"key": "field_condition_podcast_name",
 			"name": "condition_podcast_name",
 			"type": "text",
@@ -757,6 +592,39 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_condition_treatments",
+			"label": "Treatments",
+			"name": "condition_treatments",
+			"type": "relationship",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_conditions"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		{
 			"key": "field_condition_tab_expertise",
 			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
 			"name": "",
@@ -771,6 +639,39 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		{
+			"key": "field_condition_expertise",
+			"label": "Related Areas of Expertise",
+			"name": "condition_expertise",
+			"type": "relationship",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"post_type": [
+				"expertise"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_expertise_conditions_cpt"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
 		},
 		{
 			"key": "field_condition_tab_locations",
@@ -789,6 +690,39 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_condition_locations",
+			"label": "Locations treating this condition",
+			"name": "condition_locations",
+			"type": "relationship",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"post_type": [
+				"location"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_location_conditions_cpt"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		{
 			"key": "field_condition_tab_providers",
 			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Related Providers",
 			"name": "",
@@ -805,6 +739,39 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_condition_physicians",
+			"label": "Providers diagnosing or treating this condition",
+			"name": "condition_physicians",
+			"type": "relationship",
+			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"post_type": [
+				"provider"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_physician_conditions_cpt"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		{
 			"key": "field_condition_tab_clinical_resources",
 			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
 			"name": "",
@@ -819,6 +786,39 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		{
+			"key": "field_condition_clinical_resources",
+			"label": "Clinical Resources",
+			"name": "condition_clinical_resources",
+			"type": "relationship",
+			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"post_type": [
+				"clinical-resource"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_clinical_resource_conditions"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
 		},
 		{
 			"key": "field_condition_tab_deprecated",
