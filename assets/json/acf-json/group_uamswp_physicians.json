@@ -2509,6 +2509,131 @@
 				}
 			]
 		},
+		"field_physician_brand_tab": {
+			"key": "field_physician_brand_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_brand_tab",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": [
+				"super_admin",
+				"administrator",
+				"editor"
+			],
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_physician_location_tab": {
+			"key": "field_physician_location_tab",
+			"name": "",
+			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Related Locations",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_physician_expertise_tab": {
+			"key": "field_physician_expertise_tab",
+			"name": "",
+			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_resident",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_physician_condition_treatment_tab": {
+			"key": "field_physician_condition_treatment_tab",
+			"name": "",
+			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_physician_clinical_resource_tab": {
+			"key": "field_physician_clinical_resource_tab",
+			"name": "",
+			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_resident",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_physician_recognition_tab": {
+			"key": "field_physician_recognition_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons dashicons-awards\"><\/i> Recognition and Awards",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_physician_gmb_tab": {
 			"key": "field_physician_gmb_tab",
 			"name": "",
@@ -2587,6 +2712,27 @@
 			},
 			"multiple": "0",
 			"allow_null": "0"
+		},
+		"field_physician_schema_tab": {
+			"key": "field_physician_schema_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": [
+				"super_admin",
+				"administrator",
+				"editor"
+			],
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_physician_extra_tab": {
 			"key": "field_physician_extra_tab",
