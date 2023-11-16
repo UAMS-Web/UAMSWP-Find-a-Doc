@@ -45,8 +45,8 @@
 		));
 
 		acf_add_options_sub_page(array(
-			'page_title' => 'Taxonomy Options',
-			'menu_title' => 'Taxonomy Options',
+			'page_title' => 'Conditions and Treatments Options',
+			'menu_title' => 'Conditions and Treatments',
 			'menu_slug' => 'uamswp-fad-tax',
 			'parent_slug' => 'fad-settings',
 			'redirect' => false
