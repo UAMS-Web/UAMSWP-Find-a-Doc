@@ -2811,7 +2811,15 @@
 			"label": "<i class=\"dashicons dashicons-info\"><\/i> Additional Information",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_extra_tab",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
