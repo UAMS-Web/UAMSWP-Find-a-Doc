@@ -540,7 +540,7 @@
 			"key": "field_location_details_tab",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-location dashicons\"><\/i> Location Details",
+			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Description of the Location",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1969,7 +1969,7 @@
 			"sub_fields": [
 				{
 					"key": "field_location_typical_hours_tab",
-					"label": "Normal\/Typical Hours",
+					"label": "Typical In-Person Hours",
 					"name": "",
 					"type": "tab",
 					"instructions": "",
@@ -3060,7 +3060,7 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_tab",
-					"label": "Telemedicine Modified Hours",
+					"label": "Modified Telemedicine Hours",
 					"name": "",
 					"type": "tab",
 					"instructions": "",
