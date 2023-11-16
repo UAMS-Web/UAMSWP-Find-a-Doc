@@ -432,6 +432,49 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_physician_youtube_link": {
+			"key": "field_physician_youtube_link",
+			"name": "physician_youtube_link",
+			"type": "url",
+			"label": "Featured Video",
+			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this provider and that supports the Patient-focused Clinical Biography. Include the full URL, including https:\/\/.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_resident",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		"field_physician_podcast_name": {
+			"key": "field_physician_podcast_name",
+			"name": "physician_podcast_name",
+			"type": "text",
+			"label": "UAMS Health Talk Podcast Doctor Name",
+			"instructions": "Doctor name as listed in the dropdown",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
 		"field_physician_clinical_tab": {
 			"key": "field_physician_clinical_tab",
 			"name": "",
@@ -894,30 +937,6 @@
 			"rows": 4,
 			"new_lines": ""
 		},
-		"field_physician_youtube_link": {
-			"key": "field_physician_youtube_link",
-			"name": "physician_youtube_link",
-			"type": "url",
-			"label": "Featured Video",
-			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this provider and that supports the Patient-focused Clinical Biography. Include the full URL, including https:\/\/.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_resident",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": ""
-		},
 		"field_physician_clinical_focus": {
 			"key": "field_physician_clinical_focus",
 			"name": "physician_clinical_focus",
@@ -1352,25 +1371,6 @@
 			"ui": 0,
 			"ui_on_text": "",
 			"ui_off_text": ""
-		},
-		"field_physician_podcast_name": {
-			"key": "field_physician_podcast_name",
-			"name": "physician_podcast_name",
-			"type": "text",
-			"label": "UAMS Health Talk Podcast Doctor Name",
-			"instructions": "Doctor name as listed in the dropdown",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
 		},
 		"field_physician_asp_filter": {
 			"key": "field_physician_asp_filter",
