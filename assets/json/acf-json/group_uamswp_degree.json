@@ -1,0 +1,157 @@
+{
+	"key": "group_uamswp_degree",
+	"title": "Clinical Degrees and Credentials",
+	"location": [
+		[
+			{
+				"param": "taxonomy",
+				"operator": "==",
+				"value": "degree"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "acf_after_title",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": [
+		"description"
+	],
+	"active": 1,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": "",
+	"fields": {
+		"field_degree_name": {
+			"key": "field_degree_name",
+			"name": "degree_name",
+			"label": "Full Name of the Clinical Degree or Credential",
+			"type": "text",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., Doctor of Medicine",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_degree_ctdl": {
+			"key": "field_degree_ctdl",
+			"name": "degree_ctdl",
+			"label": "Credential Transparency Description Language Schema Term",
+			"type": "select",
+			"instructions": "Find information about each term in this schema at <a href='https://credreg.net/ctdl/terms/' target='_blank'>https://credreg.net/ctdl/terms/</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"ApprenticeshipCertificate": "ApprenticeshipCertificate",
+				"Assessment": "Assessment",
+				"AssociateDegree": "AssociateDegree",
+				"AssociateOfAppliedArtsDegree": "AssociateOfAppliedArtsDegree",
+				"AssociateOfAppliedScienceDegree": "AssociateOfAppliedScienceDegree",
+				"AssociateOfArtsDegree": "AssociateOfArtsDegree",
+				"AssociateOfScienceDegree": "AssociateOfScienceDegree",
+				"BachelorDegree": "BachelorDegree",
+				"BachelorOfArtsDegree": "BachelorOfArtsDegree",
+				"BachelorOfScienceDegree": "BachelorOfScienceDegree",
+				"Badge": "Badge",
+				"Certificate": "Certificate",
+				"CertificateOfCompletion": "CertificateOfCompletion",
+				"Certification": "Certification",
+				"Course": "Course",
+				"Credential": "Credential",
+				"Degree": "Degree",
+				"DigitalBadge": "DigitalBadge",
+				"Diploma": "Diploma",
+				"DoctoralDegree": "DoctoralDegree",
+				"GeneralEducationDevelopment": "GeneralEducationDevelopment",
+				"JourneymanCertificate": "JourneymanCertificate",
+				"LearningProgram": "LearningProgram",
+				"License": "License",
+				"MasterCertificate": "MasterCertificate",
+				"MasterDegree": "MasterDegree",
+				"MasterOfArtsDegree": "MasterOfArtsDegree",
+				"MasterOfScienceDegree": "MasterOfScienceDegree",
+				"MicroCredential": "MicroCredential",
+				"ProfessionalDoctorate": "ProfessionalDoctorate",
+				"QualityAssuranceCredential": "QualityAssuranceCredential",
+				"ResearchDoctorate": "ResearchDoctorate",
+				"SecondarySchoolDiploma": "SecondarySchoolDiploma",
+				"SpecialistDegree": "SpecialistDegree"
+			},
+			"default_value": false,
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"allow_custom": 0,
+			"search_placeholder": "Select one",
+			"placeholder": ""
+		},
+		"field_degree_alternatename": {
+			"key": "field_degree_alternatename",
+			"name": "degree_alternatename",
+			"label": "Alternate Names for the Clinical Degree or Credential",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_alternatename"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_degree_sameas": {
+			"key": "field_degree_sameas",
+			"name": "degree_sameas",
+			"label": "Reference Webpages for the Clinical Degree or Credential",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		}
+	},
+	"modified": false
+}
