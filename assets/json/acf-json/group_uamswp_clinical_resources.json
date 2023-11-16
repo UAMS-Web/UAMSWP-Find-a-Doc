@@ -133,7 +133,7 @@
 			"key": "field_clinical_resource_type",
 			"label": "Resource Type",
 			"name": "clinical_resource_type",
-			"type": "select",
+			"type": "radio",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -142,21 +142,23 @@
 				"class": "",
 				"id": ""
 			},
+			"acfe_permissions": "",
 			"choices": {
 				"text": "Article",
 				"infographic": "Infographic",
 				"video": "Video",
 				"doc": "Document"
 			},
-			"default_value": false,
-			"allow_null": 0,
+			"allow_custom": 0,
+			"default_value": [],
+			"allow_null": 1,
 			"multiple": 0,
 			"ui": 1,
 			"ajax": 0,
 			"return_format": "array",
-			"allow_custom": 0,
-			"search_placeholder": "Select one",
-			"placeholder": ""
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
 		},
 		{
 			"key": "field_clinical_resource_text_nci_query",
