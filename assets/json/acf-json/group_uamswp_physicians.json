@@ -300,6 +300,34 @@
 			"append": "",
 			"maxlength": ""
 		},
+		"field_physician_languages": {
+			"key": "field_physician_languages",
+			"name": "physician_languages",
+			"type": "taxonomy",
+			"label": "Language(s)",
+			"instructions": "This is displayed on the provider's profile if any languages are included other than English. This also enables users to filter the main list of providers by each language.</p><p class='description' style='margin-top: 0.5em;'>Be sure to also include English (presuming that is applicable for this provider). Select multiple languages if necessary.</p><p class='description' style='margin-top: 0.5em;'>The display order of the selected languages on the provider's profile is based on the order of the selected languages here. You may click and drag to rearrange the selected languages in this field.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": [
+				"English"
+			],
+			"taxonomy": "language",
+			"field_type": "multi_select",
+			"allow_null": 0,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
 		"field_physician_featured_image": {
 			"key": "field_physician_featured_image",
 			"label": "Headshot",
@@ -790,34 +818,6 @@
 			},
 			"multiple": 0,
 			"allow_null": 0
-		},
-		"field_physician_languages": {
-			"key": "field_physician_languages",
-			"name": "physician_languages",
-			"type": "taxonomy",
-			"label": "Language(s)",
-			"instructions": "This is displayed on the provider's profile if any languages are included other than English. This also enables users to filter the main list of providers by each language.</p><p class='description' style='margin-top: 0.5em;'>Be sure to also include English (presuming that is applicable for this provider). Select multiple languages if necessary.</p><p class='description' style='margin-top: 0.5em;'>The display order of the selected languages on the provider's profile is based on the order of the selected languages here. You may click and drag to rearrange the selected languages in this field.",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": [
-				"English"
-			],
-			"taxonomy": "language",
-			"field_type": "multi_select",
-			"allow_null": 0,
-			"add_term": 0,
-			"save_terms": 0,
-			"load_terms": 0,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 0
 		},
 		"field_physician_clinical_bio": {
 			"key": "field_physician_clinical_bio",
