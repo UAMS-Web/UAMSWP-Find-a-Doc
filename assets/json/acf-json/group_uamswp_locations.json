@@ -1160,9 +1160,9 @@
 			"key": "field_location_ac_appointments_query",
 			"label": "Does this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments?",
 			"name": "location_ac_appointments_query",
-			"type": "true_false",
+			"type": "button_group",
 			"instructions": "",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -1182,11 +1182,15 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		"field_location_ac_appointments_primary": {
 			"key": "field_location_ac_appointments_primary",
@@ -1238,9 +1242,9 @@
 			"key": "field_location_clinic_phone_query",
 			"label": "Is there a separate appointment number for patients?",
 			"name": "location_clinic_phone_query",
-			"type": "true_false",
+			"type": "button_group",
 			"instructions": "",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -1260,11 +1264,15 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		"field_location_new_appointments_phone": {
 			"key": "field_location_new_appointments_phone",
@@ -1305,9 +1313,9 @@
 			"key": "field_location_appointment_phone_query",
 			"label": "Is there a separate number for returning patients?",
 			"name": "location_appointment_phone_query",
-			"type": "true_false",
+			"type": "button_group",
 			"instructions": "",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -1322,11 +1330,15 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		"field_location_return_appointments_phone": {
 			"key": "field_location_return_appointments_phone",
@@ -1481,9 +1493,9 @@
 			"key": "field_location_image_override_parent",
 			"label": "Override Parent Images?",
 			"name": "location_image_override_parent",
-			"type": "true_false",
+			"type": "button_group",
 			"instructions": "",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -1498,19 +1510,23 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		"field_location_image_override_parent_featured": {
 			"key": "field_location_image_override_parent_featured",
 			"label": "Override Parent Featured Image?",
 			"name": "location_image_override_parent_featured",
-			"type": "true_false",
+			"type": "button_group",
 			"instructions": "To remove the parent featured image, select Yes and leave image blank",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -1530,11 +1546,15 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		"field_location_featured_image": {
 			"key": "field_location_featured_image",
@@ -1588,9 +1608,9 @@
 			"key": "field_location_image_override_parent_wayfinding",
 			"label": "Override Parent Wayfinding Photo?",
 			"name": "location_image_override_parent_wayfinding",
-			"type": "true_false",
+			"type": "button_group",
 			"instructions": "To remove the parent wayfinding photo, select Yes and leave photo blank",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -1610,11 +1630,15 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		"field_location_wayfinding_photo": {
 			"key": "field_location_wayfinding_photo",
@@ -1668,9 +1692,9 @@
 			"key": "field_location_image_override_parent_gallery",
 			"label": "Override Parent Photo Gallery?",
 			"name": "location_image_override_parent_gallery",
-			"type": "true_false",
+			"type": "button_group",
 			"instructions": "To remove the parent gallery, select Yes and leave gallery empty",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -1690,11 +1714,15 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		"field_location_photo_gallery": {
 			"key": "field_location_photo_gallery",
@@ -1818,20 +1846,24 @@
 					"key": "field_location_hours_variable",
 					"label": "Do the location's hours vary?",
 					"name": "location_hours_variable",
-					"type": "true_false",
+					"type": "button_group",
 					"instructions": "For example, does this location operate only periodically or as needed?",
-					"required": 0,
+					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
 						"width": "",
 						"class": "",
 						"id": ""
 					},
-					"message": "",
-					"default_value": 0,
-					"ui": 1,
-					"ui_on_text": "",
-					"ui_off_text": ""
+					"acfe_permissions": "",
+					"choices": {
+						"0": "No",
+						"1": "Yes"
+					},
+					"allow_null": 1,
+					"default_value": "",
+					"layout": "horizontal",
+					"return_format": "value"
 				},
 				{
 					"key": "field_location_hours_variable_info",
@@ -1864,9 +1896,9 @@
 					"key": "field_location_24_7",
 					"label": "Is the location typically available 24/7?",
 					"name": "location_24_7",
-					"type": "true_false",
+					"type": "button_group",
 					"instructions": "",
-					"required": 0,
+					"required": 1,
 					"conditional_logic": [
 						[
 							{
@@ -1881,11 +1913,15 @@
 						"class": "",
 						"id": ""
 					},
-					"message": "",
-					"default_value": 0,
-					"ui": 1,
-					"ui_on_text": "",
-					"ui_off_text": ""
+					"acfe_permissions": "",
+					"choices": {
+						"0": "No",
+						"1": "Yes"
+					},
+					"allow_null": 1,
+					"default_value": "",
+					"layout": "horizontal",
+					"return_format": "value"
 				},
 				{
 					"key": "field_location_hours",
@@ -1952,22 +1988,26 @@
 						},
 						{
 							"key": "field_hours_closed",
-							"label": "Closed",
+							"label": "Status",
 							"name": "closed",
-							"type": "true_false",
+							"type": "button_group",
 							"instructions": "",
-							"required": 0,
+							"required": 1,
 							"conditional_logic": 0,
 							"wrapper": {
 								"width": "",
 								"class": "",
 								"id": ""
 							},
-							"message": "Closed",
-							"default_value": 0,
-							"ui": 0,
-							"ui_on_text": "",
-							"ui_off_text": ""
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
 						},
 						{
 							"key": "field_hours_open",
@@ -2094,9 +2134,9 @@
 					"key": "field_location_modified_hours",
 					"label": "Are there any upcoming modified in-person hours of operation?",
 					"name": "location_modified_hours",
-					"type": "true_false",
+					"type": "button_group",
 					"instructions": "",
-					"required": 0,
+					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
 						"width": "",
@@ -2104,11 +2144,14 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"message": "",
-					"default_value": 0,
-					"ui": 1,
-					"ui_on_text": "",
-					"ui_off_text": ""
+					"choices": {
+						"0": "No",
+						"1": "Yes"
+					},
+					"allow_null": 1,
+					"default_value": "",
+					"layout": "horizontal",
+					"return_format": "value"
 				},
 				{
 					"key": "field_location_modified_hours_reason",
@@ -2168,9 +2211,9 @@
 					"key": "field_location_modified_hours_end",
 					"label": "Is there an end date for the modified in-person hours of operation?",
 					"name": "location_modified_hours_end",
-					"type": "true_false",
+					"type": "button_group",
 					"instructions": "",
-					"required": 0,
+					"required": 1,
 					"conditional_logic": [
 						[
 							{
@@ -2186,11 +2229,14 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"message": "",
-					"default_value": 0,
-					"ui": 1,
-					"ui_on_text": "Yes",
-					"ui_off_text": "None"
+					"choices": {
+						"0": "No",
+						"1": "Yes"
+					},
+					"allow_null": 1,
+					"default_value": "",
+					"layout": "horizontal",
+					"return_format": "value"
 				},
 				{
 					"key": "field_location_modified_hours_end_date",
@@ -2291,20 +2337,24 @@
 							"key": "field_location_modified_hours_24_7",
 							"label": "Is this location available 24\/7 during these modified hours?",
 							"name": "location_modified_hours_24_7",
-							"type": "true_false",
+							"type": "button_group",
 							"instructions": "",
-							"required": 0,
+							"required": 1,
 							"conditional_logic": 0,
 							"wrapper": {
 								"width": "",
 								"class": "",
 								"id": ""
 							},
-							"message": "",
-							"default_value": 0,
-							"ui": 1,
-							"ui_on_text": "",
-							"ui_off_text": ""
+							"acfe_permissions": "",
+							"choices": {
+								"0": "No",
+								"1": "Yes"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
 						},
 						{
 							"key": "field_location_modified_hours_times",
@@ -2374,11 +2424,11 @@
 								},
 								{
 									"key": "field_location_modified_hours_closed",
-									"label": "Closed",
+									"label": "Status",
 									"name": "location_modified_hours_closed",
-									"type": "true_false",
+									"type": "button_group",
 									"instructions": "",
-									"required": 0,
+									"required": 1,
 									"conditional_logic": 0,
 									"wrapper": {
 										"width": "",
@@ -2386,11 +2436,14 @@
 										"id": ""
 									},
 									"acfe_permissions": "",
-									"message": "",
-									"default_value": 0,
-									"ui": 0,
-									"ui_on_text": "",
-									"ui_off_text": ""
+									"choices": {
+										"0": "Open",
+										"1": "Closed"
+									},
+									"allow_null": 1,
+									"default_value": "",
+									"layout": "horizontal",
+									"return_format": "value"
 								},
 								{
 									"key": "field_location_modified_hours_open",
@@ -2531,22 +2584,26 @@
 						},
 						{
 							"key": "field_holiday_closed",
-							"label": "Closed",
+							"label": "Status",
 							"name": "closed",
-							"type": "true_false",
+							"type": "button_group",
 							"instructions": "",
-							"required": 0,
+							"required": 1,
 							"conditional_logic": 0,
 							"wrapper": {
 								"width": "",
 								"class": "",
 								"id": ""
 							},
-							"message": "Closed",
-							"default_value": 0,
-							"ui": 0,
-							"ui_on_text": "",
-							"ui_off_text": ""
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
 						},
 						{
 							"key": "field_holiday_open",
@@ -2619,9 +2676,9 @@
 					"key": "field_location_telemed_query",
 					"label": "Does this location offer a telemedicine option?",
 					"name": "location_telemed_query",
-					"type": "true_false",
+					"type": "button_group",
 					"instructions": "",
-					"required": 0,
+					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
 						"width": "",
@@ -2629,11 +2686,14 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"message": "",
-					"default_value": 0,
-					"ui": 1,
-					"ui_on_text": "",
-					"ui_off_text": ""
+					"choices": {
+						"0": "No",
+						"1": "Yes"
+					},
+					"allow_null": 1,
+					"default_value": "",
+					"layout": "horizontal",
+					"return_format": "value"
 				},
 				{
 					"key": "field_location_telemed_info_message",
@@ -2697,9 +2757,9 @@
 					"key": "field_location_telemed_24_7",
 					"label": "Is telemedicine typically available 24\/7 at this location?",
 					"name": "location_telemed_24_7",
-					"type": "true_false",
+					"type": "button_group",
 					"instructions": "",
-					"required": 0,
+					"required": 1,
 					"conditional_logic": [
 						[
 							{
@@ -2714,11 +2774,15 @@
 						"class": "",
 						"id": ""
 					},
-					"message": "",
-					"default_value": 0,
-					"ui": 1,
-					"ui_on_text": "",
-					"ui_off_text": ""
+					"acfe_permissions": "",
+					"choices": {
+						"0": "No",
+						"1": "Yes"
+					},
+					"allow_null": 1,
+					"default_value": "",
+					"layout": "horizontal",
+					"return_format": "value"
 				},
 				{
 					"key": "field_location_telemed_hours",
@@ -2785,22 +2849,26 @@
 						},
 						{
 							"key": "field_telemed_hours_closed",
-							"label": "Closed",
+							"label": "Status",
 							"name": "closed",
-							"type": "true_false",
+							"type": "button_group",
 							"instructions": "",
-							"required": 0,
+							"required": 1,
 							"conditional_logic": 0,
 							"wrapper": {
 								"width": "",
 								"class": "",
 								"id": ""
 							},
-							"message": "Closed",
-							"default_value": 0,
-							"ui": 0,
-							"ui_on_text": "",
-							"ui_off_text": ""
+							"acfe_permissions": "",
+							"choices": {
+								"0": "Open",
+								"1": "Closed"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
 						},
 						{
 							"key": "field_telemed_hours_open",
@@ -2900,9 +2968,9 @@
 					"key": "field_location_telemed_modified_hours_query",
 					"label": "Are there any upcoming modified telemedicine hours of operation?",
 					"name": "location_telemed_modified_hours_query",
-					"type": "true_false",
+					"type": "button_group",
 					"instructions": "",
-					"required": 0,
+					"required": 1,
 					"conditional_logic": [
 						[
 							{
@@ -2918,11 +2986,14 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"message": "",
-					"default_value": 0,
-					"ui": 1,
-					"ui_on_text": "",
-					"ui_off_text": ""
+					"choices": {
+						"0": "No",
+						"1": "Yes"
+					},
+					"allow_null": 1,
+					"default_value": "",
+					"layout": "horizontal",
+					"return_format": "value"
 				},
 				{
 					"key": "field_location_telemed_modified_hours_reason",
@@ -2982,9 +3053,9 @@
 					"key": "field_location_telemed_modified_hours_end",
 					"label": "Is there an end date for the modified telemedicine hours of operation?",
 					"name": "location_telemed_modified_hours_end",
-					"type": "true_false",
+					"type": "button_group",
 					"instructions": "",
-					"required": 0,
+					"required": 1,
 					"conditional_logic": [
 						[
 							{
@@ -3000,11 +3071,14 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"message": "",
-					"default_value": 0,
-					"ui": 1,
-					"ui_on_text": "Yes",
-					"ui_off_text": "None"
+					"choices": {
+						"0": "No",
+						"1": "Yes"
+					},
+					"allow_null": 1,
+					"default_value": "",
+					"layout": "horizontal",
+					"return_format": "value"
 				},
 				{
 					"key": "field_location_telemed_modified_hours_end_date",
@@ -3036,9 +3110,9 @@
 					"key": "field_location_telemed_modified_hours_24_7",
 					"label": "Is telemedicine available 24\/7 during these modified telemedicine hours of operation?",
 					"name": "location_telemed_modified_hours_24_7",
-					"type": "true_false",
+					"type": "button_group",
 					"instructions": "",
-					"required": 0,
+					"required": 1,
 					"conditional_logic": [
 						[
 							{
@@ -3053,11 +3127,15 @@
 						"class": "",
 						"id": ""
 					},
-					"message": "",
-					"default_value": 0,
-					"ui": 1,
-					"ui_on_text": "",
-					"ui_off_text": ""
+					"acfe_permissions": "",
+					"choices": {
+						"0": "No",
+						"1": "Yes"
+					},
+					"allow_null": 1,
+					"default_value": "",
+					"layout": "horizontal",
+					"return_format": "value"
 				},
 				{
 					"key": "field_location_telemed_modified_hours_times",
@@ -3127,11 +3205,11 @@
 						},
 						{
 							"key": "field_location_telemed_modified_hours_closed",
-							"label": "Closed",
+							"label": "Status",
 							"name": "location_telemed_modified_hours_closed",
-							"type": "true_false",
+							"type": "button_group",
 							"instructions": "",
-							"required": 0,
+							"required": 1,
 							"conditional_logic": 0,
 							"wrapper": {
 								"width": "",
@@ -3139,11 +3217,14 @@
 								"id": ""
 							},
 							"acfe_permissions": "",
-							"message": "",
-							"default_value": 0,
-							"ui": 0,
-							"ui_on_text": "",
-							"ui_off_text": ""
+							"choices": {
+								"0": "Available",
+								"1": "Unavailable"
+							},
+							"allow_null": 1,
+							"default_value": "",
+							"layout": "horizontal",
+							"return_format": "value"
 						},
 						{
 							"key": "field_location_telemed_modified_hours_open",
@@ -4199,9 +4280,9 @@
 			"key": "field_location_closing_telemed",
 			"label": "Will telemedicine still be available?",
 			"name": "location_closing_telemed",
-			"type": "true_false",
+			"type": "button_group",
 			"instructions": "",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4222,11 +4303,14 @@
 				"id": ""
 			},
 			"acfe_permissions": "",
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		"field_location_gmb_tab": {
 			"key": "field_location_gmb_tab",
@@ -4250,7 +4334,7 @@
 			"name": "location_gmb_exclude",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": "0",
 			"wrapper": {
 				"width": "",
@@ -4272,7 +4356,7 @@
 			"name": "location_gmb_prefix",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
