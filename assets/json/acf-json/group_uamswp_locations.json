@@ -246,6 +246,25 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_location_ac_query": {
+			"key": "field_location_ac_query",
+			"label": "Is this an Arkansas Children's location?",
+			"name": "location_ac_query",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
 		"field_location_address_tab": {
 			"key": "field_location_address_tab",
 			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Address",
@@ -907,25 +926,6 @@
 			},
 			"placement": "left",
 			"endpoint": 0
-		},
-		"field_location_ac_query": {
-			"key": "field_location_ac_query",
-			"label": "Is this an Arkansas Children's location?",
-			"name": "location_ac_query",
-			"type": "true_false",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
 		},
 		"field_location_appointments_query": {
 			"key": "field_location_appointments_query",
