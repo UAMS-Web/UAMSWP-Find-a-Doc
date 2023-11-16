@@ -741,6 +741,722 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_treatment_procedure_schema_medicalentity_subtype",
+			"name": "treatment_procedure_schema_medicalentity_subtype",
+			"label": "MedicalEntity Subtype (availableService)",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalentity_subtype_availableservice"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_medicaltest_subtype",
+			"name": "treatment_procedure_schema_medicaltest_subtype",
+			"label": "MedicalTest Subtype (availableService)",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalTest"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicaltest_subtype"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_medicalprocedure_subtype",
+			"name": "treatment_procedure_schema_medicalprocedure_subtype",
+			"label": "MedicalProcedure Subtype (availableService)",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalprocedure_subtype"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_therapeuticprocedure_subtype",
+			"name": "treatment_procedure_schema_therapeuticprocedure_subtype",
+			"label": "TherapeuticProcedure Subtype (availableService)",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "TherapeuticProcedure"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_therapeuticprocedure_subtype"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_medicaltherapy_subtype",
+			"name": "treatment_procedure_schema_medicaltherapy_subtype",
+			"label": "MedicalTherapy Subtype (availableService)",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_therapeuticprocedure_subtype",
+						"operator": "==",
+						"value": "MedicalTherapy"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicaltherapy_subtype"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_additionalType",
+			"name": "treatment_procedure_schema_additionalType",
+			"label": "More Specific Type(s) for This Entity From External Vocabularies in Microdata Syntax (additionalType > Text or URL)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_additionalType"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_imagingtechnique",
+			"name": "treatment_procedure_schema_imagingtechnique",
+			"label": "Imaging Technique Used (imagingTechnique > MedicalImagingTechnique)",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalTest"
+					},
+					{
+						"field": "field_schema_medicaltest_subtype",
+						"operator": "==",
+						"value": "ImagingTest"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalimagingtechnique"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_subtest",
+			"name": "treatment_procedure_schema_subtest",
+			"label": "Component Test(s) of This Test Panel (subTest > MedicalTest)",
+			"type": "clone",
+			"instructions": "For information on the subTest Schema.org property, visit <a href='https://schema.org/subTest' target='_blank'>https://schema.org/subTest</a>.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalTest"
+					},
+					{
+						"field": "field_schema_medicaltest_subtype",
+						"operator": "==",
+						"value": "MedicalTestPanel"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicaltest"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_tissuesample",
+			"name": "treatment_procedure_schema_tissuesample",
+			"label": "Tissue Sample Type(s) (tissueSample > Text)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalTest"
+					},
+					{
+						"field": "field_schema_medicaltest_subtype",
+						"operator": "==",
+						"value": "PathologyTest"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_tissuesample"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_usesdevice",
+			"name": "treatment_procedure_schema_usesdevice",
+			"label": "Medical Device(s) Used to Perform the Test (usesDevice > MedicalDevice)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalTest"
+					},
+					{
+						"field": "field_schema_medicaltest_subtype",
+						"operator": "!=",
+						"value": ""
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicaldevice"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_primaryprevention",
+			"name": "treatment_procedure_schema_primaryprevention",
+			"label": "Medical Condition(s) for Which This is a Primary Prevention Therapy",
+			"type": "relationship",
+			"instructions": "Select any medical conditions for which this therapy is used to prevent the initial occurrence of the condition.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "TherapeuticProcedure"
+					},
+					{
+						"field": "field_schema_therapeuticprocedure_subtype",
+						"operator": "==",
+						"value": "MedicalTherapy"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_schema_primaryprevention"
+			}
+		},
+		{
+			"key": "field_treatment_procedure_schema_secondaryprevention",
+			"name": "treatment_procedure_schema_secondaryprevention",
+			"label": "Medical Condition(s) for Which This is a Secondary Prevention Therapy",
+			"type": "relationship",
+			"instructions": "Select any medical conditions for which this therapy is used to prevent reoccurrence after an initial episode of the condition.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "TherapeuticProcedure"
+					},
+					{
+						"field": "field_schema_therapeuticprocedure_subtype",
+						"operator": "==",
+						"value": "MedicalTherapy"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_schema_secondaryprevention"
+			}
+		},
+		{
+			"key": "field_treatment_procedure_schema_treatedmedicalcondition",
+			"name": "treatment_procedure_schema_treatedmedicalcondition",
+			"label": "Conditions Possibly Treated by This Therapy",
+			"type": "relationship",
+			"instructions": "Select any medical conditions that can possibly be addressed with this therapy.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "TherapeuticProcedure"
+					},
+					{
+						"field": "field_schema_therapeuticprocedure_subtype",
+						"operator": "==",
+						"value": "MedicalTherapy"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_schema_possibletreatment"
+			}
+		},
+		{
+			"key": "field_treatment_procedure_schema_usedtodiagnose",
+			"name": "treatment_procedure_schema_usedtodiagnose",
+			"label": "Condition(s) Diagnosed by This Test (usedToDiagnose > MedicalCondition)",
+			"type": "relationship",
+			"instructions": "Select any medical conditions that this test can be used to diagnose.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalTest"
+					},
+					{
+						"field": "field_schema_medicaltest_subtype",
+						"operator": "!=",
+						"value": ""
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_schema_typicaltest"
+			}
+		},
+		{
+			"key": "field_treatment_procedure_schema_proceduretype",
+			"name": "treatment_procedure_schema_proceduretype",
+			"label": "Type of Procedure (procedureType > MedicalProcedureType)",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "!=",
+						"value": "SurgicalProcedure"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalproceduretype"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_drug",
+			"name": "treatment_procedure_schema_drug",
+			"label": "Drug(s) or Medicine(s) Used (drug > Drug)",
+			"type": "clone",
+			"instructions": "If this is a medication procedure, add the drug(s) or medicine(s) used.</p><p class='description' style='margin-top: 0.5em;'>For information on the Drug Schema.org type, visit <a href='https://schema.org/Drug' target='_blank'>https://schema.org/Drug</a>.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "TherapeuticProcedure"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_drug"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_duplicatetherapy",
+			"name": "treatment_procedure_schema_duplicatetherapy",
+			"label": "Duplicate Therapies (duplicateTherapy > MedicalTherapy)",
+			"type": "clone",
+			"instructions": "Select any other therapies that duplicate or overlap this one.</p><p class='description' style='margin-top: 0.5em;'>For information on the duplicateTherapy Schema.org property, visit <a href='https://schema.org/duplicateTherapy' target='_blank'>https://schema.org/duplicateTherapy</a>.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "TherapeuticProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "MedicalTherapy"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicaltherapy"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_code",
+			"name": "treatment_procedure_schema_code",
+			"label": "Medical Code(s) for This Entity (code > MedicalCode)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalcode"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_relevantspecialty",
+			"name": "treatment_procedure_schema_relevantspecialty",
+			"label": "Relevant Medical Specialties (relevantSpecialty > MedicalSpecialty)",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalspecialty_multiple"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_sameas",
+			"name": "treatment_procedure_schema_sameas",
+			"label": "Reference Webpage(s) About This Entity (sameAs > URL)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
 			"key": "field_treatment_procedure_tab_conditions",
 			"name": "",
 			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions",
