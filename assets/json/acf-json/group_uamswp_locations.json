@@ -3434,7 +3434,7 @@
 		},
 		"field_location_medical_tab": {
 			"key": "field_location_medical_tab",
-			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Medical Info",
+			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
@@ -3447,6 +3447,37 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_location_expertise": {
+			"key": "field_location_expertise",
+			"label": "Areas of Expertise",
+			"name": "location_expertise",
+			"type": "relationship",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"expertise"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_expertise_locations"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
 		},
 		"field_location_conditions_treatments_tab": {
 			"key": "field_location_conditions_treatments_tab",
@@ -3537,37 +3568,6 @@
 			},
 			"placement": "left",
 			"endpoint": 0
-		},
-		"field_location_expertise": {
-			"key": "field_location_expertise",
-			"label": "Areas of Expertise",
-			"name": "location_expertise",
-			"type": "relationship",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"expertise"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_expertise_locations"
-			},
-			"acfe_validate": "",
-			"acfe_update": ""
 		},
 		"field_location_clinical_resources": {
 			"key": "field_location_clinical_resources",
