@@ -777,155 +777,155 @@
 			 add_action( 'acf/save_post', 'clinical_title_save_post', 5 );
 
 			 function clinical_title_save_post( $post_id ) {
- 
+
 				 // Taxonomy slug
- 
+
 					 $taxonomy = 'clinical_title';
- 
+
 				 // Format the $post_id value to get the integer term ID
- 
+
 					 /**
 					  * ACF assigns the $post_id parameter by using term ID prefixed with "term_".
 					  */
- 
+
 					 $term_id = str_replace('term_', '', $post_id);
- 
+
 				 // Bail early if no data sent
- 
+
 					 if ( empty( $_POST['acf'] ) ) {
- 
+
 						 return;
- 
+
 					 }
- 
+
 				 // Get term from ID
- 
+
 					 $term = get_term_by( 'id', $term_id, $taxonomy ) ?? null;
- 
+
 				 // Bail early if the term is not a valid object
- 
+
 					 if (
 						 !$term
 						 ||
 						 !is_object($term)
 					 ) {
- 
+
 						 return;
- 
+
 					 }
- 
+
 				 // Inherit certain field values from the parent term
- 
+
 					 // Get the term's parent
- 
+
 						 $parent_term_id = $term->parent;
 						 $parent_term = $parent_term_id ? ( get_term_by( 'id', $parent_term_id, $taxonomy ) ?? null ) : null;
 						 $parent_term = ( !$parent_term || !is_object($parent_term) ) ? null : $parent_term;
- 
+
 					 // If parent term exists, modify term's fields
- 
+
 						 if ( $parent_term ) {
- 
+
 							 // CMS Specialty Code
- 
+
 								 // Get the inheritance query and the parent's field value
- 
+
 									 $cms_code_inherit_query = $_POST['acf']['field_clinical_specialization_cms_code_inherit_query'];
- 
+
 								 // Conditionally set the field value using the parent term's field value
- 
+
 									 if ( $cms_code_inherit_query ) {
- 
+
 										 $cms_code_parent = get_field( 'clinical_specialization_cms_code', $parent_term) ?? null;
 										 $_POST['acf']['field_clinical_specialization_cms_code'] = $cms_code_parent;
- 
+
 										 $cms_code_parent = get_field( 'clinical_specialization_cms_code_type', $parent_term) ?? null;
 										 $_POST['acf']['field_clinical_specialization_cms_code_type'] = $cms_code_parent;
- 
+
 									 }
- 
+
 							 // MedicalSpecialty Enumeration Member
- 
+
 								 // Get the inheritance query and the parent's field value
- 
+
 									 $medicalspecialty_member_inherit_query = $_POST['acf']['field_clinical_specialization_medicalspecialty_member_inherit_query'];
- 
+
 								 // Conditionally set the field value using the parent term's field value
- 
+
 									 if ( $medicalspecialty_member_inherit_query ) {
- 
+
 										 $medicalspecialty_member_parent = get_field( 'clinical_specialization_medicalspecialty_member', $parent_term) ?? null;
 										 $_POST['acf']['field_clinical_specialization_medicalspecialty_member'] = $medicalspecialty_member_parent;
- 
+
 									 }
- 
+
 							 // O*Net-SOC Occupation Code
- 
+
 								 // Get the inheritance query and the parent's field value
- 
+
 									 $onetsoc_code_inherit_query = $_POST['acf']['field_clinical_specialization_onetsoc_code_inherit_query'];
- 
+
 								 // Conditionally set the field value using the parent term's field value
- 
+
 									 if ( $onetsoc_code_inherit_query ) {
- 
+
 										 $onetsoc_code_parent = get_field( 'clinical_specialization_onetsoc_code', $parent_term) ?? null;
 										 $_POST['acf']['field_clinical_specialization_onetsoc_code'] = $onetsoc_code_parent;
- 
+
 										 $onetsoc_code_parent = get_field( 'clinical_specialization_onetsoc_code_name', $parent_term) ?? null;
 										 $_POST['acf']['field_clinical_specialization_onetsoc_code_name'] = $onetsoc_code_parent;
- 
+
 									 }
- 
+
 							 // ISCO-08 Code
- 
+
 								 // Get the inheritance query and the parent's field value
- 
+
 									 $isco08_code_inherit_query = $_POST['acf']['field_clinical_specialization_isco08_code_inherit_query'];
- 
+
 								 // Conditionally set the field value using the parent term's field value
- 
+
 									 if ( $isco08_code_inherit_query ) {
- 
+
 										 $isco08_code_parent = get_field( 'clinical_specialization_isco08_code', $parent_term) ?? null;
 										 $_POST['acf']['field_clinical_specialization_isco08_code'] = $isco08_code_parent;
- 
+
 									 }
- 
+
 							 // Reference Webpages About the Occupation
- 
+
 								 // Get the inheritance query and the parent's field value
- 
+
 									 $sameas_occupation_inherit_query = $_POST['acf']['field_clinical_specialization_sameas_occupation_inherit_query'];
- 
+
 								 // Conditionally set the field value using the parent term's field value
- 
+
 									 if ( $sameas_occupation_inherit_query ) {
- 
+
 										 $sameas_occupation_parent = get_field( 'clinical_specialization_sameas_occupation', $parent_term) ?? null;
 										 $_POST['acf']['field_clinical_specialization_sameas_occupation'] = $sameas_occupation_parent;
- 
+
 									 }
- 
+
 							 // Reference Webpages About the Specialty / Field
- 
+
 								 // Get the inheritance query and the parent's field value
- 
+
 									 $sameas_field_inherit_query = $_POST['acf']['field_clinical_specialization_sameas_field_inherit_query'];
- 
+
 								 // Conditionally set the field value using the parent term's field value
- 
+
 									 if ( $sameas_field_inherit_query ) {
- 
+
 										 $sameas_field_parent = get_field( 'clinical_specialization_sameas_field', $parent_term) ?? null;
 										 $_POST['acf']['field_clinical_specialization_sameas_field'] = $sameas_field_parent;
- 
+
 									 }
- 
+
 						 }
- 
+
 			 }
- 
+
 // Bidirectionally update ACF data
 
 	// Fire before saving data to post (by using a priority less than 10)
