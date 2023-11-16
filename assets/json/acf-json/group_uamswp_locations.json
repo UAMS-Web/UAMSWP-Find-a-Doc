@@ -1126,6 +1126,36 @@
 			},
 			"input_mask": "999-999-9999 [x 99999]"
 		},
+		"field_location_conditional_phone_message": {
+			"key": "__field_location_conditional_phone_message",
+			"label": "Conditional Logic is Hiding Additional Contact Information Fields",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==empty"
+					}
+				],
+				[
+					{
+						"field": "field_location_appointments_query",
+						"operator": "==empty"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<p>Set the field values in the \"Brand\" tab and in the \"Appointment Information\" tab to reveal the relevant contact information fields.<\/p>",
+			"new_lines": "",
+			"esc_html": 0
+		},
 		"field_location_clinic_phone_query": {
 			"key": "field_location_clinic_phone_query",
 			"label": "Is there a separate appointment number for patients?",
