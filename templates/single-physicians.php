@@ -43,7 +43,7 @@
 
 					$degree_list .= ', ';
 
-				}
+				} // endif ( count($degrees) > $i )
 
 				$i++;
 
@@ -51,7 +51,7 @@
 
 		} // endforeach
 
-	}
+	} // endif ( $degrees )
 
 	$languages = get_field( 'physician_languages', $post->ID );
 	$language_count = 0;
