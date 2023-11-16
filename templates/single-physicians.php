@@ -29,16 +29,22 @@
 
 		foreach ( $degrees as $degree ) {
 
-			$degree_name = get_term( $degree, 'degree' );
-			$degree_list .= $degree_name->name;
+			$degree_term = get_term( $degree, 'degree');
 
-			if ( count($degrees) > $i ) {
+			if ( is_object($degree_term) ) {
 
-				$degree_list .= ", ";
+				$degree_name = $degree_term->name;
+				$degree_list .= $degree_name;
+
+				if ( count($degrees) > $i ) {
+
+					$degree_list .= ", ";
+
+				}
+
+				$i++;
 
 			}
-
-			$i++;
 
 		} // endforeach
 
