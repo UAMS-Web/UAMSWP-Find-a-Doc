@@ -1,8 +1,8 @@
 {
 	"key": "group_uamswp_header_graphic",
 	"title": "Graphic Header Style Options",
-	"fields": {
-		"field_page_header_graphic": {
+	"fields": [
+		{
 			"key": "field_fad_page_header_graphic",
 			"label": "",
 			"name": "page_header_graphic",
@@ -78,7 +78,7 @@
 			],
 			"acfe_group_modal": 0
 		}
-	},
+	],
 	"location": "",
 	"menu_order": 0,
 	"position": "normal",

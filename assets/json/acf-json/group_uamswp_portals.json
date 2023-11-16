@@ -25,8 +25,8 @@
 	"acfe_permissions": "",
 	"acfe_note": "",
 	"acfe_meta": "",
-	"fields": {
-		"field_specialty_url": {
+	"fields": [
+		{
 			"key": "field_portal_url",
 			"name": "portal_url",
 			"type": "link",
@@ -44,7 +44,7 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
-		"field_portal_content": {
+		{
 			"key": "field_portal_content",
 			"label": "Content",
 			"name": "portal_content",
@@ -66,6 +66,6 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		}
-	},
+	],
 	"modified": false
 }

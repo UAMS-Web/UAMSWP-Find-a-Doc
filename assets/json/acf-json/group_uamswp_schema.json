@@ -1,8 +1,8 @@
 {
 	"key": "group_uamswp_schema",
 	"title": "Schema.org Values",
-	"fields": {
-		"field_schema_medicalspecialty_single": {
+	"fields": [
+		{
 			"key": "field_schema_medicalspecialty_single",
 			"name": "schema_medicalspecialty_single",
 			"label": "Medical Specialty, Single (MedicalSpecialty)",
@@ -66,7 +66,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_medicalspecialty_multiple": {
+		{
 			"key": "field_schema_medicalspecialty_multiple",
 			"name": "schema_medicalspecialty_multiple",
 			"label": "MedicalSpecialty, Multiple (MedicalSpecialty)",
@@ -134,7 +134,7 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_schema_sameas": {
+		{
 			"key": "field_schema_sameas",
 			"name": "schema_sameas",
 			"label": "Reference Webpage(s) About This Entity (sameAs > URL)",
@@ -172,7 +172,7 @@
 				}
 			]
 		},
-		"field_schema_additionalType": {
+		{
 			"key": "field_schema_additionalType",
 			"name": "schema_additionalType",
 			"label": "More Specific Type(s) for This Entity From External Vocabularies in Microdata Syntax (additionalType > Text or URL)",
@@ -210,7 +210,7 @@
 				}
 			]
 		},
-		"field_schema_alternatename": {
+		{
 			"key": "field_schema_alternatename",
 			"name": "schema_alternatename",
 			"label": "Alternate Name(s) (alternateName > Text)",
@@ -251,7 +251,7 @@
 				}
 			]
 		},
-		"field_schema_url": {
+		{
 			"key": "field_schema_url",
 			"name": "schema_url",
 			"label": "Official Website URL (URL)",
@@ -267,7 +267,7 @@
 			"default_value": "",
 			"placeholder": "e.g., https://www.asahq.org/"
 		},
-		"field_schema_medicalcode": {
+		{
 			"key": "field_schema_medicalcode",
 			"name": "schema_medicalcode",
 			"label": "Medical Code(s) for This Entity (MedicalCode)",
@@ -384,7 +384,7 @@
 				}
 			]
 		},
-		"field_schema_medicalentity_subtype": {
+		{
 			"key": "field_schema_medicalentity_subtype",
 			"name": "schema_medicalentity_subtype",
 			"label": "MedicalEntity Subtype",
@@ -425,7 +425,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_medicalentity_subtype_availableservice": {
+		{
 			"key": "field_schema_medicalentity_subtype_availableservice",
 			"name": "schema_medicalentity_subtype_availableservice",
 			"label": "MedicalEntity Subtype (availableService)",
@@ -449,7 +449,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_medicaltest_subtype": {
+		{
 			"key": "field_schema_medicaltest_subtype",
 			"name": "schema_medicaltest_subtype",
 			"label": "MedicalTest Subtype",
@@ -476,7 +476,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_medicalprocedure_subtype": {
+		{
 			"key": "field_schema_medicalprocedure_subtype",
 			"name": "schema_medicalprocedure_subtype",
 			"label": "MedicalProcedure Subtype",
@@ -504,7 +504,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_therapeuticprocedure_subtype": {
+		{
 			"key": "field_schema_therapeuticprocedure_subtype",
 			"name": "schema_therapeuticprocedure_subtype",
 			"label": "TherapeuticProcedure Subtype",
@@ -529,7 +529,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_medicaltherapy_subtype": {
+		{
 			"key": "field_schema_medicaltherapy_subtype",
 			"name": "schema_medicaltherapy_subtype",
 			"label": "MedicalTherapy Subtype",
@@ -557,7 +557,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_medicalimagingtechnique": {
+		{
 			"key": "field_schema_medicalimagingtechnique",
 			"name": "schema_medicalimagingtechnique",
 			"label": "Imaging Technique Used (MedicalImagingTechnique)",
@@ -586,7 +586,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_medicaltest": {
+		{
 			"key": "field_schema_medicaltest",
 			"name": "schema_medicaltest",
 			"label": "Medical Test(s) (MedicalTest)",
@@ -614,7 +614,7 @@
 				"acfe_bidirectional_enabled": "0"
 			}
 		},
-		"field_schema_tissuesample": {
+		{
 			"key": "field_schema_tissuesample",
 			"name": "schema_tissuesample",
 			"label": "Tissue Sample Type(s) (tissueSample > Text)",
@@ -658,7 +658,7 @@
 				}
 			]
 		},
-		"field_schema_medicalcondition": {
+		{
 			"key": "field_schema_medicalcondition",
 			"name": "schema_medicalcondition",
 			"label": "Medical Condition(s) (MedicalCondition)",
@@ -686,7 +686,7 @@
 				"acfe_bidirectional_enabled": "0"
 			}
 		},
-		"field_schema_medicaldevice": {
+		{
 			"key": "field_schema_medicaldevice",
 			"name": "schema_medicaldevice",
 			"label": "Object(s) Used in a Medical Capacity, Such As to Diagnose or Treat a Patient (MedicalDevice)",
@@ -778,7 +778,7 @@
 				}
 			]
 		},
-		"field_schema_medicalproceduretype": {
+		{
 			"key": "field_schema_medicalproceduretype",
 			"name": "schema_medicalproceduretype",
 			"label": "Type of Procedure (MedicalProcedureType)",
@@ -803,7 +803,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_drugprescriptionstatus": {
+		{
 			"key": "field_schema_drugprescriptionstatus",
 			"name": "schema_drugprescriptionstatus",
 			"label": "Drug Prescription Status (DrugPrescriptionStatus)",
@@ -832,7 +832,7 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_schema_drug": {
+		{
 			"key": "field_schema_drug",
 			"name": "schema_drug",
 			"label": "Chemical or Biologic Substance(s), Used As a Medical Therapy, That Has a Physiological Effect on an Organism (Drug)",
@@ -1018,7 +1018,7 @@
 				}
 			]
 		},
-		"field_schema_medicaltherapy": {
+		{
 			"key": "field_schema_medicaltherapy",
 			"name": "schema_medicaltherapy",
 			"label": "Medical Intervention(s) Designed to Prevent, Treat, and Cure Human Diseases and Medical Conditions, Including Both Curative and Palliative Therapies (MedicalTherapy)",
@@ -1046,7 +1046,7 @@
 				"acfe_bidirectional_enabled": "0"
 			}
 		},
-		"field_schema_medicalcondition_subtype": {
+		{
 			"key": "field_schema_medicalcondition_subtype",
 			"name": "schema_medicalcondition_subtype",
 			"label": "MedicalCondition Subtype",
@@ -1071,7 +1071,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_infectiousagent": {
+		{
 			"key": "field_schema_infectiousagent",
 			"name": "schema_infectiousagent",
 			"label": "Infectious Agent (infectiousAgent > Text)",
@@ -1091,7 +1091,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_schema_infectiousagentclass": {
+		{
 			"key": "field_schema_infectiousagentclass",
 			"name": "schema_infectiousagentclass",
 			"label": "Infectious Agent Class (InfectiousAgentClass)",
@@ -1120,7 +1120,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_nucc_single": {
+		{
 			"key": "field_schema_nucc_single",
 			"name": "schema_nucc_single",
 			"label": "Classifications and Specializations From the Health Care Provider Taxonomy Code Set (MedicalCode)",
@@ -1146,7 +1146,7 @@
 			},
 			"multiple": 0
 		},
-		"field_schema_nucc_multiple": {
+		{
 			"key": "field_schema_nucc_multiple",
 			"name": "schema_nucc_multiple",
 			"label": "Matching Classification(s) and/or Specialization(s) From the Health Care Provider Taxonomy Code Set, Multiple (MedicalCode)",
@@ -1172,7 +1172,7 @@
 			},
 			"multiple": 0
 		},
-		"field_schema_medicinesystem": {
+		{
 			"key": "field_schema_medicinesystem",
 			"name": "schema_medicinesystem",
 			"label": "Related System(s) of Medical Practice (MedicineSystem)",
@@ -1205,7 +1205,7 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_schema_localbusiness_single": {
+		{
 			"key": "field_schema_localbusiness_single",
 			"name": "schema_localbusiness_single",
 			"label": "LocalBusiness Subtype",
@@ -1231,7 +1231,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_google_cid": {
+		{
 			"key": "field_schema_google_cid",
 			"name": "schema_google_cid",
 			"label": "Google CID Number",
@@ -1251,7 +1251,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_schema_google_cid_multiple": {
+		{
 			"key": "field_schema_google_cid_multiple",
 			"name": "schema_google_cid_multiple",
 			"label": "Google CID Numbers",
@@ -1292,7 +1292,7 @@
 				}
 			]
 		},
-		"field_schema_brandorg_query": {
+		{
 			"key": "field_schema_brandorg_query",
 			"label": "Primary Brand Organization for This Entity",
 			"name": "schema_brandorg_query",
@@ -1317,7 +1317,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_brandorg": {
+		{
 			"key": "field_schema_brandorg",
 			"label": "Third-Party Brand Organization (Single)",
 			"name": "schema_brandorg",
@@ -1338,7 +1338,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_brandorg_multiple": {
+		{
 			"key": "field_schema_brandorg_multiple",
 			"label": "Third-Party Brand Organizations (Multiple)",
 			"name": "schema_brandorg_multiple",
@@ -1359,7 +1359,7 @@
 			"return_format": "value",
 			"save_custom": 0
 		},
-		"field_schema_nonprofitstatus": {
+		{
 			"key": "field_schema_nonprofitstatus",
 			"label": "Nonprofit Status (nonprofitStatus > USNonprofitType)",
 			"name": "schema_nonprofitstatus",
@@ -1418,7 +1418,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_schema_globallocationnumber": {
+		{
 			"key": "field_schema_globallocationnumber",
 			"label": "Global Location Number (globalLocationNumber > Text)",
 			"name": "schema_globallocationnumber",
@@ -1452,7 +1452,7 @@
 				}
 			}
 		}
-	},
+	],
 	"location": "",
 	"menu_order": 0,
 	"position": "normal",

@@ -1,8 +1,8 @@
 {
 	"key": "group_uamswp_header_hero",
 	"title": "Hero Header Style Options",
-	"fields": {
-		"field_hero_repeater": {
+	"fields": [
+		{
 			"key": "field_fad_hero_repeater",
 			"label": "Hero Slide(s)",
 			"name": "page_header_hero",
@@ -345,7 +345,7 @@
 			"max": 4,
 			"button_label": "Add Slide"
 		}
-	},
+	],
 	"location": "",
 	"menu_order": 0,
 	"position": "normal",

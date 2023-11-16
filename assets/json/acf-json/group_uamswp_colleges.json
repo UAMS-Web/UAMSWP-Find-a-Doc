@@ -23,8 +23,8 @@
 	"acfe_permissions": "",
 	"acfe_note": "",
 	"acfe_meta": "",
-	"fields": {
-		"field_college_url": {
+	"fields": [
+		{
 			"key": "field_college_url",
 			"name": "college_url",
 			"type": "link",
@@ -42,6 +42,6 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		}
-	},
+	],
 	"modified": false
 }

@@ -1,8 +1,8 @@
 {
 	"key": "group_uamswp_header_landingpage",
 	"title": "Marketing Landing Page Header Style Options",
-	"fields": {
-		"field_page_header_landingpage": {
+	"fields": [
+		{
 			"key": "field_fad_page_header_landingpage",
 			"label": "",
 			"name": "page_header_landingpage",
@@ -130,7 +130,7 @@
 			],
 			"acfe_group_modal": 0
 		}
-	},
+	],
 	"location": "",
 	"menu_order": 0,
 	"position": "normal",

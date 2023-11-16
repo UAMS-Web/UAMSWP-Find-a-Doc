@@ -25,8 +25,8 @@
 	"acfe_permissions": "",
 	"acfe_note": "",
 	"acfe_meta": "",
-	"fields": {
-		"field_affiliation_location": {
+	"fields": [
+		{
 			"key": "field_affiliation_location",
 			"label": "Associated Location Profile",
 			"name": "affiliation_location",
@@ -54,6 +54,6 @@
 				"acfe_bidirectional_enabled": "0"
 			}
 		}
-	},
+	],
 	"modified": false
 }

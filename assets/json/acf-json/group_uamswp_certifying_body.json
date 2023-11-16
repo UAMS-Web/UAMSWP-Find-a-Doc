@@ -25,8 +25,8 @@
 	"acfe_permissions": "",
 	"acfe_note": "",
 	"acfe_meta": "",
-	"fields": {
-		"field_certifying_body_intro": {
+	"fields": [
+		{
 			"key": "field_certifying_body_intro",
 			"label": "Naming the Taxonomy Item",
 			"name": "",
@@ -43,7 +43,7 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_certifying_body_url_query": {
+		{
 			"key": "field_certifying_body_url_query",
 			"name": "certifying_body_url_query",
 			"label": "Does this certifying body have a website?",
@@ -67,7 +67,7 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_certifying_body_url": {
+		{
 			"key": "field_certifying_body_url",
 			"name": "certifying_body_url",
 			"label": "Certifying Body Website URL",
@@ -99,7 +99,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_certifying_body_alternatename": {
+		{
 			"key": "field_certifying_body_alternatename",
 			"name": "certifying_body_alternatename",
 			"label": "Alternate Names for the Certifying Body",
@@ -123,7 +123,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_certifying_body_sameas": {
+		{
 			"key": "field_certifying_body_sameas",
 			"name": "certifying_body_sameas",
 			"label": "Reference Webpages for the Certifying Body",
@@ -147,6 +147,6 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		}
-	},
+	],
 	"modified": false
 }

@@ -25,8 +25,8 @@
 	"acfe_permissions": "",
 	"acfe_note": "",
 	"acfe_meta": "",
-	"fields": {
-		"field_degree_name": {
+	"fields": [
+		{
 			"key": "field_degree_name",
 			"name": "degree_name",
 			"label": "Full Name of the Clinical Degree or Credential",
@@ -45,7 +45,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_degree_ctdl": {
+		{
 			"key": "field_degree_ctdl",
 			"name": "degree_ctdl",
 			"label": "Credential Transparency Description Language Schema Term",
@@ -104,7 +104,7 @@
 			"search_placeholder": "Select one",
 			"placeholder": ""
 		},
-		"field_degree_alternatename": {
+		{
 			"key": "field_degree_alternatename",
 			"name": "degree_alternatename",
 			"label": "Alternate Names for the Clinical Degree or Credential",
@@ -128,7 +128,7 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_degree_sameas": {
+		{
 			"key": "field_degree_sameas",
 			"name": "degree_sameas",
 			"label": "Reference Webpages for the Clinical Degree or Credential",
@@ -152,6 +152,6 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		}
-	},
+	],
 	"modified": false
 }
