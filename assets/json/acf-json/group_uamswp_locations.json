@@ -3757,8 +3757,15 @@
 			"name": "location_web_name",
 			"type": "text",
 			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_url",
+						"operator": "!=empty"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
