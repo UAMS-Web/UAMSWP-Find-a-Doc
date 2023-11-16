@@ -1,0 +1,47 @@
+{
+	"key": "group_uams_fad_settings",
+	"title": "General Settings",
+	"fields": [
+		{
+			"key": "field_fad_google_key",
+			"label": "Google Maps API Key",
+			"name": "fad_google_key",
+			"type": "text",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "fad-settings"
+			}
+		]
+	],
+	"menu_order": 5,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_form": 0,
+	"acfe_meta": "",
+	"acfe_note": ""
+}

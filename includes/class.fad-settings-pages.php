@@ -70,53 +70,6 @@
 
 	}
 
-// Add metaboxes for Settings page
-
-	if ( function_exists('acf_add_local_field_group') ) {
-
-		acf_add_local_field_group(array(
-			'key' => 'group_uams_fad_settings',
-			'title' => 'Theme Settings',
-			'fields' => array(
-				array(
-					'key' => 'field_fad_google_key',
-					'label' => 'Google Maps API Key',
-					'name' => 'fad_google_key',
-					'type' => 'text',
-					'instructions' => '',
-					'required' => 1,
-					'conditional_logic' => 0,
-					'wrapper' => array(
-						'width' => '50',
-						'class' => '',
-						'id' => '',
-					),
-					'default_value' => '',
-					'placeholder' => '',
-					'prepend' => '',
-					'append' => '',
-					'maxlength' => '',
-				),
-			),
-			'location' => array(
-				array(
-					array(
-						'param' => 'options_page',
-						'operator' => '==',
-						'value' => 'fad-settings',
-					),
-				),
-			),
-			'menu_order' => 5,
-			'position' => 'normal',
-			'style' => 'seamless',
-			'label_placement' => 'left',
-			'instruction_placement' => 'label',
-			'active' => true,
-		));
-
-	}
-
 // Specify a Google Maps API authentication key in ACF
 
 	function my_acf_google_key() {
