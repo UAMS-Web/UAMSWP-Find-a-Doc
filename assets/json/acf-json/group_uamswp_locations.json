@@ -3450,6 +3450,22 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
+		"field_location_medical_tab": {
+			"key": "field_location_medical_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Medical Info",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_location_conditions_treatments_tab": {
 			"key": "field_location_conditions_treatments_tab",
 			"name": "",
@@ -3466,6 +3482,64 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_location_conditions_cpt": {
+			"key": "field_location_conditions_cpt",
+			"name": "location_conditions_cpt",
+			"type": "post_object",
+			"label": "Conditions",
+			"instructions": "The conditions will display in alphabetical order.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"allow_null": 1,
+			"multiple": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_locations"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		"field_location_treatments_cpt": {
+			"key": "field_location_treatments_cpt",
+			"name": "location_treatments_cpt",
+			"type": "post_object",
+			"label": "Treatments & Procedures",
+			"instructions": "The treatments and procedures will display in alphabetical order.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"allow_null": 1,
+			"multiple": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_locations"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
 		"field_location_clinical_resources_tab": {
 			"key": "field_location_clinical_resources_tab",
 			"name": "",
@@ -3481,6 +3555,94 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_location_expertise": {
+			"key": "field_location_expertise",
+			"name": "location_expertise",
+			"type": "relationship",
+			"label": "Areas of Expertise",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"expertise"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_expertise_locations"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		"field_location_clinical_resources": {
+			"key": "field_location_clinical_resources",
+			"name": "location_clinical_resources",
+			"type": "relationship",
+			"label": "Clinical Resources",
+			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"clinical-resource"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_clinical_resource_locations"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		"field_location_service_line": {
+			"key": "field_location_service_line",
+			"name": "location_service_line",
+			"type": "taxonomy",
+			"label": "Service Line(s)",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"taxonomy": "service_line",
+			"field_type": "multi_select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
 		},
 		"field_location_scheduling_tab": {
 			"key": "field_location_scheduling_tab",
@@ -3784,168 +3946,6 @@
 			},
 			"placement": "left",
 			"endpoint": 0
-		},
-		"field_location_medical_tab": {
-			"key": "field_location_medical_tab",
-			"name": "",
-			"type": "tab",
-			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Medical Info",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"placement": "left",
-			"endpoint": 0
-		},
-		"field_location_conditions_cpt": {
-			"key": "field_location_conditions_cpt",
-			"name": "location_conditions_cpt",
-			"type": "post_object",
-			"label": "Conditions",
-			"instructions": "The conditions will display in alphabetical order.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"post_type": [
-				"condition"
-			],
-			"taxonomy": "",
-			"allow_null": 1,
-			"multiple": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_condition_locations"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"ui": 1
-		},
-		"field_location_treatments_cpt": {
-			"key": "field_location_treatments_cpt",
-			"name": "location_treatments_cpt",
-			"type": "post_object",
-			"label": "Treatments & Procedures",
-			"instructions": "The treatments and procedures will display in alphabetical order.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"post_type": [
-				"treatment"
-			],
-			"taxonomy": "",
-			"allow_null": 1,
-			"multiple": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_treatment_procedure_locations"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"ui": 1
-		},
-		"field_location_expertise": {
-			"key": "field_location_expertise",
-			"name": "location_expertise",
-			"type": "relationship",
-			"label": "Areas of Expertise",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"expertise"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_expertise_locations"
-			},
-			"acfe_validate": "",
-			"acfe_update": ""
-		},
-		"field_location_clinical_resources": {
-			"key": "field_location_clinical_resources",
-			"name": "location_clinical_resources",
-			"type": "relationship",
-			"label": "Clinical Resources",
-			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"clinical-resource"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_clinical_resource_locations"
-			},
-			"acfe_validate": "",
-			"acfe_update": ""
-		},
-		"field_location_service_line": {
-			"key": "field_location_service_line",
-			"name": "location_service_line",
-			"type": "taxonomy",
-			"label": "Service Line(s)",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"taxonomy": "service_line",
-			"field_type": "multi_select",
-			"allow_null": 1,
-			"add_term": 0,
-			"save_terms": 0,
-			"load_terms": 0,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 0
 		},
 		"field_location_alert_tab": {
 			"key": "field_location_alert_tab",
