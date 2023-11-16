@@ -1915,12 +1915,20 @@
 				},
 				{
 					"key": "field_hours_message",
-					"label": "Hours of Operation",
-					"name": "",
+					"label": "Hours of Operation (Deprecated)",
+					"name": ")",
 					"type": "message",
 					"instructions": "",
 					"required": 0,
-					"conditional_logic": 0,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_location_typical_hours_tab",
+								"operator": "==",
+								"value": "false"
+							}
+						]
+					],
 					"wrapper": {
 						"width": "",
 						"class": "",
