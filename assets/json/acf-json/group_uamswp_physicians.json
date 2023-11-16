@@ -1013,39 +1013,6 @@
 			"multiple": 0,
 			"allow_null": 0
 		},
-		"field_physician_institute_affiliation": {
-			"key": "field_physician_institute_affiliation",
-			"name": "physician_institute_affiliation",
-			"type": "taxonomy",
-			"label": "Institute Affiliations",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_resident",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "institute_affiliation",
-			"field_type": "checkbox",
-			"add_term": 0,
-			"save_terms": 0,
-			"load_terms": 0,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 0,
-			"allow_null": 0
-		},
 		"field_location_portal": {
 			"key": "field_physician_portal",
 			"name": "physician_portal",
@@ -1473,23 +1440,6 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_profile_message": {
-			"key": "field_profile_message",
-			"name": "",
-			"type": "message",
-			"label": "Profile Information",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "This information is designed for department and public websites.",
-			"new_lines": "wpautop",
-			"esc_html": 0
-		},
 		"field_physician_academic_title": {
 			"key": "field_physician_academic_title",
 			"name": "physician_academic_title",
@@ -1519,56 +1469,6 @@
 			"prepend": "",
 			"append": "",
 			"maxlength": ""
-		},
-		"field_physician_academic_college": {
-			"key": "field_physician_academic_college",
-			"name": "physician_academic_college",
-			"type": "taxonomy",
-			"label": "College Affiliation",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "academic_college",
-			"field_type": "checkbox",
-			"add_term": 0,
-			"save_terms": 0,
-			"load_terms": 0,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 0,
-			"allow_null": 0
-		},
-		"field_physician_academic_position": {
-			"key": "field_physician_academic_position",
-			"name": "physician_academic_position",
-			"type": "taxonomy",
-			"label": "Academic Position Type",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "academic_position",
-			"field_type": "checkbox",
-			"add_term": 0,
-			"save_terms": 0,
-			"load_terms": 0,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 0,
-			"allow_null": 0
 		},
 		"field_physician_academic_appointment": {
 			"key": "field_physician_academic_appointment",
@@ -1757,175 +1657,6 @@
 			"toolbar": "full",
 			"media_upload": 1,
 			"delay": 0
-		},
-		"field_physician_academic_short_bio": {
-			"key": "field_physician_academic_short_bio",
-			"name": "physician_academic_short_bio",
-			"type": "text",
-			"label": "Short Academic Biography",
-			"instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": 160
-		},
-		"field_physician_academic_office": {
-			"key": "field_physician_academic_office",
-			"name": "physician_academic_office",
-			"type": "text",
-			"label": "Office Location",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
-		"field_physician_academic_map": {
-			"key": "field_physician_academic_map",
-			"name": "physician_academic_map",
-			"type": "select",
-			"label": "Building \/ Map",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"choices": {
-				"127": "12th St. Clinic",
-				"116": "Administration West (ADMINW)",
-				"117": "Barton Research (BART)",
-				"118": "Biomedical Research Center I (BMR1)",
-				"119": "Biomedical Research Center II (BMR2)",
-				"120": "Bioventures (BVENT)",
-				"121": "Boiler House (BH)",
-				"122": "Central Building (CENT)",
-				"123": "College of Public Health (COPH)",
-				"124": "Computer Building (COMP)",
-				"125": "Cottage 3 (C3)",
-				"128": "Distribution Center (DIST)",
-				"129": "Donald W. Reynolds Institute on Aging (RIOA)",
-				"126": "Ear Nose Throat (ENT)",
-				"131": "Education Building South (EDS)",
-				"130": "Education II (EDII)",
-				"132": "Family Medical Center (FMC)",
-				"133": "Freeway Medical Tower (FWAY)",
-				"134": "Harvey and Bernice Jones Eye Institute (JEI)",
-				"135": "Hospital (HOSP)",
-				"136": "I. Dodd Wilson Education Building (IDW)",
-				"137": "Jackson T. Stephens Spine Institute (JTSSI)",
-				"138": "Magnetic Resonance Imaging (MRI)",
-				"139": "Mediplex Apartments (1 unit) (MEDPX)",
-				"140": "Northwest Campus (NWA)",
-				"141": "Outpatient Center (OPC)",
-				"142": "Outpatient Diagnostic Center (OPDC)",
-				"143": "Paint Shop & Flammable Storage (PAINT)",
-				"144": "PET (PET)",
-				"145": "Physical Plant (PP)",
-				"146": "Psychiatric Research Institute (PRI)",
-				"147": "Radiation Oncology [ROC] (RADONC)",
-				"148": "Residence Hall Complex (RHC)",
-				"149": "Ricks Armory",
-				"150": "Walker Annex (ANNEX)",
-				"151": "Ward Tower (WARD)",
-				"152": "West Central Energy Plant (WCEP)",
-				"153": "Westmark (WESTM)",
-				"154": "Winston K. Shorey Building (SHOR)",
-				"155": "Winthrop P. Rockefeller Cancer Institute (WPRCI)"
-			},
-			"default_value": [],
-			"allow_null": 1,
-			"multiple": 0,
-			"ui": 0,
-			"return_format": "value",
-			"ajax": 0,
-			"placeholder": ""
-		},
-		"field_physician_contact_information": {
-			"key": "field_physician_contact_information",
-			"name": "physician_contact_information",
-			"type": "repeater",
-			"label": "Contact Information",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"collapsed": "field_physician_contact_type",
-			"min": 0,
-			"max": 0,
-			"layout": "table",
-			"button_label": "Add More",
-			"sub_fields": [
-				{
-					"key": "field_5d4098e905571",
-					"label": "Type",
-					"name": "type",
-					"type": "select",
-					"instructions": "",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"choices": {
-						"phone": "Phone",
-						"fax": "Fax",
-						"mobile": "Mobile",
-						"email": "Email",
-						"sms": "Text/SMS"
-					},
-					"default_value": [],
-					"allow_null": 0,
-					"multiple": 0,
-					"ui": 0,
-					"return_format": "value",
-					"ajax": 0,
-					"placeholder": ""
-				},
-				{
-					"key": "field_physician_contact_info",
-					"label": "Information",
-					"name": "information",
-					"type": "text",
-					"instructions": "",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				}
-			]
 		},
 		"field_physician_education_tab": {
 			"key": "field_physician_education_tab",
@@ -2871,6 +2602,192 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_profile_message": {
+			"key": "field_profile_message",
+			"name": "",
+			"type": "message",
+			"label": "Profile Information",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "This information is designed for department and public websites.",
+			"new_lines": "wpautop",
+			"esc_html": 0
+		},
+		"field_physician_academic_short_bio": {
+			"key": "field_physician_academic_short_bio",
+			"name": "physician_academic_short_bio",
+			"type": "text",
+			"label": "Short Academic Biography",
+			"instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": 160
+		},
+		"field_physician_academic_office": {
+			"key": "field_physician_academic_office",
+			"name": "physician_academic_office",
+			"type": "text",
+			"label": "Office Location",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_physician_academic_map": {
+			"key": "field_physician_academic_map",
+			"name": "physician_academic_map",
+			"type": "select",
+			"label": "Building \/ Map",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"127": "12th St. Clinic",
+				"116": "Administration West (ADMINW)",
+				"117": "Barton Research (BART)",
+				"118": "Biomedical Research Center I (BMR1)",
+				"119": "Biomedical Research Center II (BMR2)",
+				"120": "Bioventures (BVENT)",
+				"121": "Boiler House (BH)",
+				"122": "Central Building (CENT)",
+				"123": "College of Public Health (COPH)",
+				"124": "Computer Building (COMP)",
+				"125": "Cottage 3 (C3)",
+				"128": "Distribution Center (DIST)",
+				"129": "Donald W. Reynolds Institute on Aging (RIOA)",
+				"126": "Ear Nose Throat (ENT)",
+				"131": "Education Building South (EDS)",
+				"130": "Education II (EDII)",
+				"132": "Family Medical Center (FMC)",
+				"133": "Freeway Medical Tower (FWAY)",
+				"134": "Harvey and Bernice Jones Eye Institute (JEI)",
+				"135": "Hospital (HOSP)",
+				"136": "I. Dodd Wilson Education Building (IDW)",
+				"137": "Jackson T. Stephens Spine Institute (JTSSI)",
+				"138": "Magnetic Resonance Imaging (MRI)",
+				"139": "Mediplex Apartments (1 unit) (MEDPX)",
+				"140": "Northwest Campus (NWA)",
+				"141": "Outpatient Center (OPC)",
+				"142": "Outpatient Diagnostic Center (OPDC)",
+				"143": "Paint Shop & Flammable Storage (PAINT)",
+				"144": "PET (PET)",
+				"145": "Physical Plant (PP)",
+				"146": "Psychiatric Research Institute (PRI)",
+				"147": "Radiation Oncology [ROC] (RADONC)",
+				"148": "Residence Hall Complex (RHC)",
+				"149": "Ricks Armory",
+				"150": "Walker Annex (ANNEX)",
+				"151": "Ward Tower (WARD)",
+				"152": "West Central Energy Plant (WCEP)",
+				"153": "Westmark (WESTM)",
+				"154": "Winston K. Shorey Building (SHOR)",
+				"155": "Winthrop P. Rockefeller Cancer Institute (WPRCI)"
+			},
+			"default_value": [],
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 0,
+			"return_format": "value",
+			"ajax": 0,
+			"placeholder": ""
+		},
+		"field_physician_contact_information": {
+			"key": "field_physician_contact_information",
+			"name": "physician_contact_information",
+			"type": "repeater",
+			"label": "Contact Information",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"collapsed": "field_physician_contact_type",
+			"min": 0,
+			"max": 0,
+			"layout": "table",
+			"button_label": "Add More",
+			"sub_fields": [
+				{
+					"key": "field_5d4098e905571",
+					"label": "Type",
+					"name": "type",
+					"type": "select",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"choices": {
+						"phone": "Phone",
+						"fax": "Fax",
+						"mobile": "Mobile",
+						"email": "Email",
+						"sms": "Text/SMS"
+					},
+					"default_value": [],
+					"allow_null": 0,
+					"multiple": 0,
+					"ui": 0,
+					"return_format": "value",
+					"ajax": 0,
+					"placeholder": ""
+				},
+				{
+					"key": "field_physician_contact_info",
+					"label": "Information",
+					"name": "information",
+					"type": "text",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				}
+			]
+		},
 		"field_physician_clinical_admin_title": {
 			"key": "field_physician_clinical_admin_title",
 			"name": "physician_clinical_admin_title",
@@ -2949,6 +2866,89 @@
 					"allow_null": 0
 				}
 			]
+		},
+		"field_physician_institute_affiliation": {
+			"key": "field_physician_institute_affiliation",
+			"name": "physician_institute_affiliation",
+			"type": "taxonomy",
+			"label": "Institute Affiliations",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_resident",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "institute_affiliation",
+			"field_type": "checkbox",
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0,
+			"allow_null": 0
+		},
+		"field_physician_academic_college": {
+			"key": "field_physician_academic_college",
+			"name": "physician_academic_college",
+			"type": "taxonomy",
+			"label": "College Affiliation",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "academic_college",
+			"field_type": "checkbox",
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0,
+			"allow_null": 0
+		},
+		"field_physician_academic_position": {
+			"key": "field_physician_academic_position",
+			"name": "physician_academic_position",
+			"type": "taxonomy",
+			"label": "Academic Position Type",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "academic_position",
+			"field_type": "checkbox",
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0,
+			"allow_null": 0
 		}
 	},
 	"modified": false
