@@ -1127,7 +1127,7 @@
 			"input_mask": "999-999-9999 [x 99999]"
 		},
 		"field_location_conditional_phone_message": {
-			"key": "__field_location_conditional_phone_message",
+			"key": "field_location_conditional_phone_message",
 			"label": "Conditional Logic is Hiding Additional Contact Information Fields",
 			"name": "",
 			"type": "message",
