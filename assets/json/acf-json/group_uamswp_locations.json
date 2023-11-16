@@ -3903,128 +3903,6 @@
 			},
 			"multiple": 0
 		},
-		"field_info_depreciated_open": {
-			"key": "field_info_depreciated_open",
-			"name": "",
-			"type": "accordion",
-			"label": "Deprecated",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"open": 0,
-			"multi_expand": 0,
-			"endpoint": 0
-		},
-		"field_location_medical_specialties": {
-			"key": "field_location_medical_specialties",
-			"name": "location_medical_specialties",
-			"type": "taxonomy",
-			"label": "Medical Specialties Offered",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "specialty",
-			"field_type": "multi_select",
-			"allow_null": 1,
-			"add_term": 0,
-			"save_terms": 1,
-			"load_terms": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 0
-		},
-		"field_location_medical_terms": {
-			"key": "field_location_medical_terms",
-			"name": "location_medical_terms",
-			"type": "taxonomy",
-			"label": "Medical Terms",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "medical_term",
-			"field_type": "multi_select",
-			"allow_null": 1,
-			"add_term": 0,
-			"save_terms": 1,
-			"load_terms": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 0
-		},
-		"field_location_clinic": {
-			"key": "field_location_clinic",
-			"name": "location_clinic",
-			"type": "true_false",
-			"label": "Clinic",
-			"instructions": "[Deprecated]",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
-		},
-		"field_location_facility": {
-			"key": "field_location_facility",
-			"name": "location_facility",
-			"type": "true_false",
-			"label": "Facility",
-			"instructions": "[Deprecated]",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
-		},
-		"field_info_depreciated_end": {
-			"key": "field_info_depreciated_end",
-			"name": "",
-			"type": "accordion",
-			"label": "Deprecated End",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"open": 0,
-			"multi_expand": 0,
-			"endpoint": 1
-		},
 		"field_location_physician_tab": {
 			"key": "field_location_physician_tab",
 			"name": "",
@@ -4981,6 +4859,128 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_location_medical_specialties": {
+			"key": "field_location_medical_specialties",
+			"name": "location_medical_specialties",
+			"type": "taxonomy",
+			"label": "Medical Specialties Offered",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "specialty",
+			"field_type": "multi_select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
+		"field_location_medical_terms": {
+			"key": "field_location_medical_terms",
+			"name": "location_medical_terms",
+			"type": "taxonomy",
+			"label": "Medical Terms",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "medical_term",
+			"field_type": "multi_select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
+		"field_location_clinic": {
+			"key": "field_location_clinic",
+			"name": "location_clinic",
+			"type": "true_false",
+			"label": "Clinic",
+			"instructions": "[Deprecated]",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		"field_location_facility": {
+			"key": "field_location_facility",
+			"name": "location_facility",
+			"type": "true_false",
+			"label": "Facility",
+			"instructions": "[Deprecated]",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		"field_info_depreciated_open": {
+			"key": "field_info_depreciated_open",
+			"name": "",
+			"type": "accordion",
+			"label": "Deprecated",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"open": 0,
+			"multi_expand": 0,
+			"endpoint": 0
+		},
+		"field_info_depreciated_end": {
+			"key": "field_info_depreciated_end",
+			"name": "",
+			"type": "accordion",
+			"label": "Deprecated End",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"open": 0,
+			"multi_expand": 0,
+			"endpoint": 1
 		}
 	},
 	"modified": false
