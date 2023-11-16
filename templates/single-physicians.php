@@ -991,19 +991,54 @@ while ( have_posts() ) : the_post();
                             <?php } // endif
                             if ( $physician_clinical_bio ) { ?>
                                 <h3 class="sr-only">Clinical Biography</h3>
-                                <?php echo $physician_clinical_bio; ?>
-                            <?php } // endif
-                            if($video) { ?>
-                                <?php if(function_exists('lyte_preparse')) {
-                                    echo '<div class="alignwide">';
-                                    echo lyte_parse( str_replace(['https:', 'http:'], 'httpv:', $video ) );
-                                    echo '</div>';
-                                } else {
-                                    echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-                                    echo wp_oembed_get( $video );
-                                    echo '</div>';
-                                } ?>
-                            <?php } // endif
+                                <?php echo $physician_clinical_bio;
+
+							} // endif
+
+							if ( $video ) {
+
+								// Check video source
+
+									if (
+										strpos( $video, 'youtube' ) !== false
+										||
+										strpos( $video, 'youtu.be' ) !== false
+									) {
+
+										$video_source = 'youtube';
+
+									} else {
+
+										$video_source = '';
+
+									}
+
+								// Display video player
+
+									if (
+										function_exists('lyte_preparse')
+										&&
+										$video_source == 'youtube'
+									) {
+
+										?>
+										<div class="alignwide">
+											<?php echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) ); ?>
+										</div>
+										<?php
+
+									} else {
+
+										?>
+										<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
+											<?php echo wp_oembed_get( $video ); ?>
+										</div>
+										<?php
+
+									}
+
+							} // endif
+
                             if ( $physician_clinical_split ) { ?>
                                 </div>
                                 </div>
