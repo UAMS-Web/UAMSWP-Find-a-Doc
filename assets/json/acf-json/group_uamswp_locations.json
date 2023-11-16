@@ -3731,13 +3731,13 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "<h3>External Website<\/h3><p>Include a title and URL for a link to an external non-UAMS website. This is intended for use when the location is a non-UAMS location where our providers practice.<\/p><p>This link should only be used when it is critical to the patient experience (e.g. for becoming a patient, making an appointment, receiving follow-up information). This is not to be used as a link to secondary things like a social media account.<\/p>",
+			"message": "<p>Include a title and URL for a link to an external non-UAMS website if the location is a non-UAMS location where our providers practice.<\/p><p>This link should only be used when it is critical to the patient experience (e.g., for becoming a patient, making an appointment, receiving follow-up information). This must not be used as a link to secondary things like a social media account.<\/p>",
 			"new_lines": "",
 			"esc_html": 0
 		},
 		"field_location_url": {
 			"key": "field_location_url",
-			"label": "URL",
+			"label": "Non-UAMS URL",
 			"name": "location_url",
 			"type": "link",
 			"instructions": "",
@@ -3753,7 +3753,7 @@
 		},
 		"field_location_web_name": {
 			"key": "field_location_web_name",
-			"label": "Website Name",
+			"label": "Non-UAMS Website Name",
 			"name": "location_web_name",
 			"type": "text",
 			"instructions": "",
