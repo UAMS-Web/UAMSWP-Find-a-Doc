@@ -100,7 +100,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_address_1": {
@@ -440,7 +440,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_parking_map": {
@@ -512,7 +512,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_ac_query": {
@@ -1587,7 +1587,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"acfe_permissions": [
 				"super_admin",
 				"administrator",
@@ -1877,7 +1877,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_hours_group": {
@@ -1912,7 +1912,7 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"placement": "left",
+					"placement": "top",
 					"endpoint": 0
 				},
 				{
@@ -2205,7 +2205,7 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"placement": "left",
+					"placement": "top",
 					"endpoint": 0
 				},
 				{
@@ -2730,7 +2730,7 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"placement": "left",
+					"placement": "top",
 					"endpoint": 0
 				},
 				{
@@ -3011,7 +3011,7 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"placement": "left",
+					"placement": "top",
 					"endpoint": 0
 				},
 				{
@@ -3350,7 +3350,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_scheduling_query": {
@@ -3613,7 +3613,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_conditions_cpt": {
@@ -3897,7 +3897,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_physicians": {
@@ -3941,7 +3941,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_current_alert": {
@@ -4208,7 +4208,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_closing": {
@@ -4419,7 +4419,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_gmb_exclude": {
