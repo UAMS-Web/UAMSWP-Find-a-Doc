@@ -30,6 +30,22 @@
 	"active": true,
 	"description": "",
 	"fields": {
+		"field_location_parent_tab": {
+			"key": "field_location_parent_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_location_parent": {
 			"key": "field_location_parent",
 			"name": "location_parent",
@@ -78,6 +94,27 @@
 			"multiple": 0,
 			"return_format": "id",
 			"ui": 1
+		},
+		"field_location_brand_tab": {
+			"key": "field_location_brand_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": [
+				"super_admin",
+				"administrator",
+				"editor"
+			],
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_location_address_tab": {
 			"key": "field_location_address_tab",
@@ -1573,6 +1610,38 @@
 			"open": 0,
 			"multi_expand": 0,
 			"endpoint": 1
+		},
+		"field_location_appointment_info_tab": {
+			"key": "field_location_appointment_info_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Appointment Information",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_location_contact_tab": {
+			"key": "field_location_contact_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-phone dashicons\"><\/i> Contact Information",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_location_photos_tab": {
 			"key": "field_location_photos_tab",
@@ -3337,6 +3406,38 @@
 				}
 			]
 		},
+		"field_location_conditions_treatments_tab": {
+			"key": "field_location_conditions_treatments_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_location_clinical_resources_tab": {
+			"key": "field_location_clinical_resources_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_location_scheduling_tab": {
 			"key": "field_location_scheduling_tab",
 			"name": "",
@@ -3599,6 +3700,46 @@
 					"delay": 0
 				}
 			]
+		},
+		"field_location_external_website_tab": {
+			"key": "field_location_external_website_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-admin-links dashicons\"><\/i> External Website",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_location_schema_tab": {
+			"key": "field_location_schema_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_location_medical_tab": {
 			"key": "field_location_medical_tab",
@@ -4816,6 +4957,30 @@
 			"default_value": "",
 			"layout": "horizontal",
 			"return_format": "label"
+		},
+		"field_location_deprecated_tab": {
+			"key": "field_location_deprecated_tab",
+			"name": "",
+			"type": "tab",
+			"label": "Deprecated Fields",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_deprecated_tab",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		}
 	},
 	"modified": false
