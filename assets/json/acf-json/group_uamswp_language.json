@@ -1,0 +1,123 @@
+{
+	"key": "group_uamswp_language",
+	"title": "Languages",
+	"location": [
+		[
+			{
+				"param": "taxonomy",
+				"operator": "==",
+				"value": "language"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "acf_after_title",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": [
+		"description"
+	],
+	"active": 1,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": "",
+	"fields": {
+		"field_language_name_native_query": {
+			"key": "field_language_name_native_query",
+			"name": "language_name_native_query",
+			"type": "button_group",
+			"label": "Is the English name for this language (exonym / xenonym) different from the native name (endonym / autonym)?",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_language_name_native": {
+			"key": "field_language_name_native",
+			"name": "language_name_native",
+			"label": "Native Name of Language (Endonym / Autonym)",
+			"type": "text",
+			"instructions": "Example: \"Persian\" is the English name (exonym / xenonym), while \"Farsi\" is the native name (endonym / autonym)",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_language_name_native_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., Farsi",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_language_bcp47": {
+			"key": "field_language_bcp47",
+			"name": "language_bcp47",
+			"label": "Internet Engineering Task Force Best Current Practice 47 (IETF BCP 47) Language Tag",
+			"type": "text",
+			"instructions": "Look up the two- or three-letter IETF BCP 47 language tag at <a href='https://r12a.github.io/app-subtags/' target='_blank'>https://r12a.github.io/app-subtags/</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., fa",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_language_schema_sameas": {
+			"key": "field_language_schema_sameas",
+			"name": "language_schema_sameas",
+			"label": "Reference Webpage(s) About This Language (sameAs > URL)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		}
+	},
+	"modified": false
+}
