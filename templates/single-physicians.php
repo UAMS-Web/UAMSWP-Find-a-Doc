@@ -218,37 +218,40 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 	$resident = get_field('physician_resident',$post->ID);
 	$resident_title_name = 'Resident Physician';
 
-$phys_title = get_field('physician_title',$post->ID);
-$phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
-$phys_title_name_attr = $phys_title_name;
-$phys_title_name_attr = str_replace('"', '\'', $phys_title_name_attr); // Replace double quotes with single quote
-$phys_title_name_attr = htmlentities($phys_title_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$phys_title_name_attr = str_replace('&nbsp;', ' ', $phys_title_name_attr); // Convert non-breaking space with normal space
-$phys_title_name_attr = html_entity_decode($phys_title_name_attr); // Convert HTML entities to their corresponding characters
-$vowels = array('a','e','i','o','u'); // Define a list of variables for use in determining which indefinite article to use (a vs. an)
-if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
-    $phys_title_indef_article = 'an'; // If the clinical title starts with a vowel, use "an"
-} else {
-    $phys_title_indef_article = 'a'; // If the clinical title does not start with a vowel, use "a"
-}
-// Define a list of exceptions to the vowel-based determination of which indefinite article to use.
-// Use "a" before consonant sounds: a historic event, a one-year term.
-// Use "an" before vowel sounds: an honor, an NBA record.
-// Write the key as the characters at the beginning of the exception. It can be a complete or incomplete title.
-// Write the value as the indefinite article to use in that case ('a' or 'an').
-$phys_title_indef_article_exceptions = array(
-    'SNF' => 'an',
-    'Urolog' => 'a',
-    'Uveitis' => 'a'
-);
-if ( !empty($phys_title_indef_article_exceptions) ) {
-    foreach( $phys_title_indef_article_exceptions as $exception => $indef_article ) {
-        $exception_length = strlen($exception); // Get the charactter length of the exception key
-        if (substr(strtolower($phys_title_name), 0, $exception_length) == strtolower($exception)) { // If the clinical title begins with the exception key...
-            $phys_title_indef_article = $indef_article; // Use the key's value as the indefinite article
-        }
-    }
-}
+// Get clinical specialty and occupation title values
+
+	$phys_title = get_field('physician_title',$post->ID);
+	$phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
+	$phys_title_name_attr = $phys_title_name;
+	$phys_title_name_attr = str_replace('"', '\'', $phys_title_name_attr); // Replace double quotes with single quote
+	$phys_title_name_attr = htmlentities($phys_title_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+	$phys_title_name_attr = str_replace('&nbsp;', ' ', $phys_title_name_attr); // Convert non-breaking space with normal space
+	$phys_title_name_attr = html_entity_decode($phys_title_name_attr); // Convert HTML entities to their corresponding characters
+	$vowels = array('a','e','i','o','u'); // Define a list of variables for use in determining which indefinite article to use (a vs. an)
+	if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
+		$phys_title_indef_article = 'an'; // If the clinical title starts with a vowel, use "an"
+	} else {
+		$phys_title_indef_article = 'a'; // If the clinical title does not start with a vowel, use "a"
+	}
+	// Define a list of exceptions to the vowel-based determination of which indefinite article to use.
+	// Use "a" before consonant sounds: a historic event, a one-year term.
+	// Use "an" before vowel sounds: an honor, an NBA record.
+	// Write the key as the characters at the beginning of the exception. It can be a complete or incomplete title.
+	// Write the value as the indefinite article to use in that case ('a' or 'an').
+	$phys_title_indef_article_exceptions = array(
+		'SNF' => 'an',
+		'Urolog' => 'a',
+		'Uveitis' => 'a'
+	);
+	if ( !empty($phys_title_indef_article_exceptions) ) {
+		foreach( $phys_title_indef_article_exceptions as $exception => $indef_article ) {
+			$exception_length = strlen($exception); // Get the charactter length of the exception key
+			if (substr(strtolower($phys_title_name), 0, $exception_length) == strtolower($exception)) { // If the clinical title begins with the exception key...
+				$phys_title_indef_article = $indef_article; // Use the key's value as the indefinite article
+			}
+		}
+	}
+
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
 // Check for valid locations
