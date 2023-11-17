@@ -208,9 +208,12 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 
 // Get clinical specialty and occupation title values
 
+	// Eliminate PHP errors
+
+		$provider_specialty = '';
+
 	if ( $resident ) {
 
-		$provider_specialty = $resident;
 		$provider_occupation_title = $resident;
 		$provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conversion($provider_occupation_title) : '';
 
