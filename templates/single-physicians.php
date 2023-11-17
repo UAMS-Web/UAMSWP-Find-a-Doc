@@ -409,10 +409,12 @@
 
 				} else {
 
-					// Clinical Occupation Title
+					// Clinical Specialty
 
 						$provider_specialty = get_field( 'physician_title', $post->ID );
 						$provider_schema_fields[$page_id]['provider_clinical_specialization'] = $provider_specialty; // Pass value to schema function
+
+					// Clinical Occupation Title
 
 						if ( $provider_specialty ) {
 
@@ -420,10 +422,21 @@
 
 							if ( is_object($provider_specialty_term) ) {
 
-								$provider_specialty_name = $provider_specialty_term->name;
-								$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term);
-								$provider_occupation_title = $provider_occupation_title ?: $provider_specialty_name;
-								$provider_occupation_title_attr = uamswp_attr_conversion($provider_occupation_title);
+								// Get term name
+
+									$provider_specialty_name = $provider_specialty_term->name;
+
+								// Get occupational title field from term
+
+									$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+
+								// Set occupational title from term name as a fallback
+
+									if ( !$provider_occupation_title ) {
+
+										$provider_occupation_title = $provider_specialty_name;
+
+									}
 
 							}
 
@@ -458,7 +471,7 @@
 
 				// Define a list of exceptions to the vowel-based determination of which indefinite article to use.
 
-					/*
+					/**
 					 * - Use "a" before consonant sounds: a historic event, a one-year term.
 					 * - Use "an" before vowel sounds: an honor, an NBA record.
 					 * - Write the key as the characters at the beginning of the exception. It can be a complete or incomplete title.
