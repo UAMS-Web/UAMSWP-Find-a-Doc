@@ -10993,10 +10993,11 @@
 
 											if ( str_starts_with( $Place_subtype, 'SchemaOrg_' ) ) {
 
-												$Place_subtype_SchemaOrg = str_replace(
-													'SchemaOrg_', // needle
-													'', // replacement value
-													$Place_subtype // haystack
+												$Place_subtype_SchemaOrg = substr(
+													strrchr(
+														$Place_subtype, // haystack
+														'_' // needle
+													), 1
 												);
 
 											}
@@ -11022,10 +11023,11 @@
 
 											if ( str_starts_with( $Place_subtype, 'Wikidata_' ) ) {
 
-												$Place_subtype_Wikidata = 'https://www.wikidata.org/wiki/' . str_replace(
-													'Wikidata_', // needle
-													'', // replacement value
-													$Place_subtype // haystack
+												$Place_subtype_Wikidata = 'https://www.wikidata.org/wiki/' . substr(
+													strrchr(
+														$Place_subtype, // haystack
+														'_' // needle
+													), 1
 												);
 
 											}
