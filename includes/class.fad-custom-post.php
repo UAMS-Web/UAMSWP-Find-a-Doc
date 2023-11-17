@@ -2856,9 +2856,11 @@
 			$slugs = array(
 				'condition',
 				'treatment',
-				'specialty',
+				'specialties',
+					'specialty', // key
 				'department',
-				'service_line',
+				'service-line',
+					'service_line', // key
 				'degree',
 				'patient_type',
 				'clinical_title',
@@ -2867,9 +2869,12 @@
 				'institute_affiliation',
 				'language',
 				'medical_terms',
-				'medical_term',
-				'academic_position',
-				'academic_college',
+				'medical-term',
+					'medical_term', // key
+				'academic-position',
+					'academic_position', // key
+				'college',
+					'academic_college', // key
 				'school',
 				'residency_year',
 				'academic_department',
