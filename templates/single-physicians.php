@@ -4,73 +4,174 @@
  *  Add description from provider short description or full description *
  */
 
-// Degrees and credentials (e.g., M.D., Ph.D.)
+// Get the page title and other name values
 
-	$degrees = get_field( 'physician_degree', $post->ID );
+	// Get the elements of the provider's name
 
-	// Clean up degrees value
+		// First name
 
-		if (
-			$degrees
-			&&
-			is_array($degrees)
-		) {
+			$first_name = get_field('physician_first_name',$post->ID);
 
-			$degrees = array_filter($degrees);
-			$degrees = array_unique($degrees);
-			$degrees = array_values($degrees);
+		// Middle name
 
-		}
+			$middle_name = get_field('physician_middle_name',$post->ID);
 
-	$degree_count = $degrees ? count($degrees) : 0;
-	$degree_list = '';
-	$degree_list_attr = '';
-	$degree_attr_array = array();
-	$i = 1;
+		// Last name
 
-	if ( $degrees ) {
+			$last_name = get_field('physician_last_name',$post->ID);
 
-		foreach ( $degrees as $degree ) {
+		// Generational suffix (e.g., Jr.)
 
-			$degree_term = get_term( $degree, 'degree');
+			$pedigree = get_field('physician_pedigree',$post->ID);
 
-			if ( is_object($degree_term) ) {
+		// Degrees and credentials (e.g., M.D., Ph.D.)
 
-				$degree_name = $degree_term->name;
-				$degree_list .= $degree_name;
-				$degree_attr_array[] = uamswp_attr_conversion($degree_name);
+			$degrees = get_field( 'physician_degree', $post->ID );
 
-				if ( $degree_count > $i ) {
+			// Clean up degrees value
 
-					$degree_list .= ', ';
+				if (
+					$degrees
+					&&
+					is_array($degrees)
+				) {
 
-				} // endif ( count($degrees) > $i )
+					$degrees = array_filter($degrees);
+					$degrees = array_unique($degrees);
+					$degrees = array_values($degrees);
 
-				$i++;
+				}
+
+			$degree_count = $degrees ? count($degrees) : 0;
+			$degree_list = '';
+			$degree_list_attr = '';
+			$degree_attr_array = array();
+			$i = 1;
+
+			if ( $degrees ) {
+
+				foreach ( $degrees as $degree ) {
+
+					$degree_term = get_term( $degree, 'degree');
+
+					if ( is_object($degree_term) ) {
+
+						$degree_name = $degree_term->name;
+						$degree_list .= $degree_name;
+						$degree_attr_array[] = uamswp_attr_conversion($degree_name);
+
+						if ( $degree_count > $i ) {
+
+							$degree_list .= ', ';
+
+						} // endif ( count($degrees) > $i )
+
+						$i++;
+
+					}
+
+				} // endforeach
+
+			} // endif ( $degrees )
+
+			if ( $degree_list ) {
+
+				$degree_list_attr = uamswp_attr_conversion($degree_list);
 
 			}
 
-		} // endforeach
+			// Remove empty rows
 
-	} // endif ( $degrees )
+				$degree_attr_array = array_filter($degree_attr_array);
 
-	if ( $degree_list ) {
+			// Remove duplicate rows
 
-		$degree_list_attr = uamswp_attr_conversion($degree_list);
+				$degree_attr_array = array_unique( $degree_attr_array, SORT_REGULAR );
 
-	}
+			// Reindex array
 
-	// Remove empty rows
+				$degree_attr_array = array_values($degree_attr_array);
 
-		$degree_attr_array = array_filter($degree_attr_array);
+		// Dr. Prefix
 
-	// Remove duplicate rows
+			// Define list of degrees or credentials need for "Dr." prefix (per UAMS Health clinical administration)
 
-		$degree_attr_array = array_unique( $degree_attr_array, SORT_REGULAR );
+				$prefix_degrees = array(
+					'M.D.',
+					'D.O.'
+				);
 
-	// Reindex array
+			// Set the "Dr." prefix
 
-		$degree_attr_array = array_values($degree_attr_array);
+				// Eliminate PHP errors
+
+					$prefix = '';
+					$prefix_attr = '';
+
+				if (
+					array_intersect(
+						$prefix_degrees, // The array with master values to check.
+						$degree_attr_array // Arrays to compare values against.
+					)
+				) {
+
+					$prefix = 'Dr.';
+					$prefix_attr = uamswp_attr_conversion($prefix);
+
+				}
+
+	// Construct the variants of the provider's name
+
+		// Full name (e.g., "Leonard H. McCoy, M.D.")
+
+			$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+			$full_name_attr = $full_name;
+			$full_name_attr = str_replace('"', '\'', $full_name_attr); // Replace double quotes with single quote
+			$full_name_attr = htmlentities($full_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+			$full_name_attr = str_replace('&nbsp;', ' ', $full_name_attr); // Convert non-breaking space with normal space
+			$full_name_attr = html_entity_decode($full_name_attr); // Convert HTML entities to their corresponding characters
+
+		// Medium name (e.g., "Dr. Leonard H. McCoy")
+
+			$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
+			$medium_name_attr = $medium_name;
+			$medium_name_attr = str_replace('"', '\'', $medium_name_attr); // Replace double quotes with single quote
+			$medium_name_attr = htmlentities($medium_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+			$medium_name_attr = str_replace('&nbsp;', ' ', $medium_name_attr); // Convert non-breaking space with normal space
+			$medium_name_attr = html_entity_decode($medium_name_attr); // Convert HTML entities to their corresponding characters
+
+		// Short name (e.g., "Dr. McCoy")
+
+			$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
+			$short_name_attr = $short_name;
+			$short_name_attr = str_replace('"', '\'', $short_name_attr); // Replace double quotes with single quote
+			$short_name_attr = htmlentities($short_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+			$short_name_attr = str_replace('&nbsp;', ' ', $short_name_attr); // Convert non-breaking space with normal space
+			$short_name_attr = html_entity_decode($short_name_attr); // Convert HTML entities to their corresponding characters
+
+		// Short name possessive (e.g., "Dr. McCoy's")
+
+			if ( substr($short_name, -1) == 's' ) {
+
+				// If the provider's name ends in "s"...
+
+				// Use an apostrophe with no "s" when indicating the possessive form
+				$short_name_possessive = $short_name . '\'';
+
+			} else {
+
+				// Use an apostrophe with an "s" when indicating the possessive form
+				$short_name_possessive = $short_name . '\'s';
+
+			}
+
+		// Sort name (e.g., "McCoy, Leonard H.")
+
+			$sort_name = $last_name . ', ' . $first_name . ' ' . $middle_name;
+
+		// Sort name parameter (e.g., "mccoy-leonard-h")
+
+			$sort_name_param_value = sanitize_title_with_dashes($sort_name);
 
 // Languages
 
@@ -110,58 +211,6 @@
 
 	}
 
-// Dr. Prefix
-
-	// Define list of degrees or credentials need for "Dr." prefix (per UAMS Health clinical administration)
-
-		$prefix_degrees = array(
-			'M.D.',
-			'D.O.'
-		);
-
-	// Set the "Dr." prefix
-
-		// Eliminate PHP errors
-
-			$prefix = '';
-			$prefix_attr = '';
-
-		if (
-			array_intersect(
-				$prefix_degrees, // The array with master values to check.
-				$degree_attr_array // Arrays to compare values against.
-			)
-		) {
-
-			$prefix = 'Dr.';
-			$prefix_attr = uamswp_attr_conversion($prefix);
-
-		}
-
-$first_name = get_field('physician_first_name',$post->ID);
-$middle_name = get_field('physician_middle_name',$post->ID);
-$last_name = get_field('physician_last_name',$post->ID);
-$pedigree = get_field('physician_pedigree',$post->ID);
-$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
-$full_name_attr = $full_name;
-$full_name_attr = str_replace('"', '\'', $full_name_attr); // Replace double quotes with single quote
-$full_name_attr = htmlentities($full_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$full_name_attr = str_replace('&nbsp;', ' ', $full_name_attr); // Convert non-breaking space with normal space
-$full_name_attr = html_entity_decode($full_name_attr); // Convert HTML entities to their corresponding characters
-$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
-$medium_name_attr = $medium_name;
-$medium_name_attr = str_replace('"', '\'', $medium_name_attr); // Replace double quotes with single quote
-$medium_name_attr = htmlentities($medium_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$medium_name_attr = str_replace('&nbsp;', ' ', $medium_name_attr); // Convert non-breaking space with normal space
-$medium_name_attr = html_entity_decode($medium_name_attr); // Convert HTML entities to their corresponding characters
-$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
-$short_name_attr = $short_name;
-$short_name_attr = str_replace('"', '\'', $short_name_attr); // Replace double quotes with single quote
-$short_name_attr = htmlentities($short_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$short_name_attr = str_replace('&nbsp;', ' ', $short_name_attr); // Convert non-breaking space with normal space
-$short_name_attr = html_entity_decode($short_name_attr); // Convert HTML entities to their corresponding characters
-$sort_name = $last_name . ', ' . $first_name . ' ' . $middle_name;
-$sort_name_param_value = sanitize_title_with_dashes($sort_name);
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 $resident = get_field('physician_resident',$post->ID);
 $resident_title_name = 'Resident Physician';
@@ -195,11 +244,6 @@ if ( !empty($phys_title_indef_article_exceptions) ) {
             $phys_title_indef_article = $indef_article; // Use the key's value as the indefinite article
         }
     }
-}
-if ( substr($short_name, -1) == 's' ) { // If the provider's name ends in "s"...
-    $short_name_possessive = $short_name . '\''; // Use an apostrophe with no "s" when indicating the possessive form
-} else {
-    $short_name_possessive = $short_name . '\'s'; // Use an apostrophe with an "s" when indicating the possessive form
 }
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
