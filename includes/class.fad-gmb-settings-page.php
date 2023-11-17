@@ -370,7 +370,7 @@ function gmb_provider_csv_export() {
         $table_head[4]    =  'Address line 3';
         $table_head[5]    =  'Address line 4';
         $table_head[6]    =  'Address line 5';
-        // $table_head[7]    =  'Sub-locality'; // Intentionally left blank
+        // $table_head[]    =  'Sub-locality'; // Intentionally left blank
         $table_head[7]    =  'Locality';
         $table_head[8]    =  'Administrative area';
         $table_head[9]   =  'Country / Region';
@@ -378,64 +378,284 @@ function gmb_provider_csv_export() {
         $table_head[11]   =  'Latitude';
         $table_head[12]   =  'Longitude';
         $table_head[13]   =  'Primary phone';
-        // $table_head[15]   =  'Additional phones'; // Intentionally left blank
+        // $table_head[]   =  'Additional phones'; // Intentionally left blank
         $table_head[14]   =  'Website';
         $table_head[15]   =  'Primary category';
         $table_head[16]   =  'Additional categories';
-        // $table_head[19]   =  'Sunday hours'; // Intentionally left blank
-        // $table_head[20]   =  'Monday hours'; // Intentionally left blank
-        // $table_head[21]   =  'Tuesday hours'; // Intentionally left blank
-        // $table_head[22]   =  'Wednesday hours'; // Intentionally left blank
-        // $table_head[23]   =  'Thursday hours'; // Intentionally left blank
-        // $table_head[24]   =  'Friday hours'; // Intentionally left blank
-        // $table_head[25]   =  'Saturday hours'; // Intentionally left blank
-        // $table_head[26]   =  'Special hours'; // Intentionally left blank
+        // $table_head[]   =  'Sunday hours'; // Intentionally left blank
+        // $table_head[]   =  'Monday hours'; // Intentionally left blank
+        // $table_head[]   =  'Tuesday hours'; // Intentionally left blank
+        // $table_head[]   =  'Wednesday hours'; // Intentionally left blank
+        // $table_head[]   =  'Thursday hours'; // Intentionally left blank
+        // $table_head[]   =  'Friday hours'; // Intentionally left blank
+        // $table_head[]   =  'Saturday hours'; // Intentionally left blank
+        // $table_head[]   =  'Special hours'; // Intentionally left blank
         $table_head[17]   =  'From the business';
-        // $table_head[28]   =  'Opening date'; // Intentionally left blank
+        // $table_head[]   =  'Opening date'; // Intentionally left blank
         $table_head[18]   =  'Logo photo';
         $table_head[19]   =  'Cover photo';
-        // $table_head[31]   =  'Other photos'; // Intentionally left blank
+        // $table_head[]   =  'Other photos'; // Intentionally left blank
         $table_head[20]   =  'Labels';
-        // $table_head[33]   =  'AdWords location extensions phone';
+        // $table_head[]   =  'AdWords location extensions phone'; // Intentionally left blank
+        // $table_head[]   =  'Accessibility: Assisted listening devices (has_assisted_listening_devices)';
+        // $table_head[]   =  'Accessibility: Assistive hearing loop (has_hearing_loop)';
+        // $table_head[]   =  'Accessibility: Passenger loading area (has_passenger_loading_area)';
         $table_head[21]   =  'Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)';
         $table_head[22]   =  'Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)';
+        // $table_head[]   =  'Accessibility: Wheelchair accessible parking lot (has_wheelchair_accessible_parking)';
         $table_head[23]   =  'Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)';
+        // $table_head[]   =  'Accessibility: Wheelchair accessible seating (has_wheelchair_accessible_seating)';
+        // $table_head[]   =  'Accessibility: Wheelchair rental (wheelchair_rental_offerings): Motorized (motorized_wheelchairs)';
+        // $table_head[]   =  'Accessibility: Wheelchair rental (wheelchair_rental_offerings): Non-motorized (non_motorized_wheelchairs)';
+        // $table_head[]   =  'Activities: Accepting food donations (accepts_non_monetary_donations)';
+        // $table_head[]   =  'Activities: Accepting monetary donations (accepts_monetary_donations)';
+        // $table_head[]   =  'Activities: Accepting new volunteers (accepts_new_volunteers)';
+        // $table_head[]   =  'Activities: Bicycle rental (has_bicycles_for_rent)';
+        // $table_head[]   =  'Amenities: Air conditioning (has_air_conditioning)
+        // $table_head[]   =  'Amenities: Airport shuttle (has_airport_shuttle)';
+        // $table_head[]   =  'Amenities: All-inclusive (has_all_inclusive)';
+        // $table_head[]   =  'Amenities: Baggage storage (has_baggage_storage)';
+        // $table_head[]   =  'Amenities: Bar onsite (has_bar_onsite)';
+        // $table_head[]   =  'Amenities: Beach access (has_beach_access)';
+        // $table_head[]   =  'Amenities: Business center (has_business_center)';
+        // $table_head[]   =  'Amenities: Cellular service (has_cellular_service)';
+        // $table_head[]   =  'Amenities: Child care (has_child_care)';
+        // $table_head[]   =  'Amenities: Concierge (has_concierge)';
+        // $table_head[]   =  'Amenities: Convenience store (has_onsite_convenience_store)';
+        // $table_head[]   =  'Amenities: Currency exchange (has_currency_exchange)';
+        // $table_head[]   =  'Amenities: Dogs allowed (welcomes_dogs)';
+        // $table_head[]   =  'Amenities: Fitness center (has_fitness_center)';
+        // $table_head[]   =  'Amenities: Free breakfast (has_free_breakfast)';
+        // $table_head[]   =  'Amenities: Gender-neutral restroom (has_restroom_unisex)';
+        // $table_head[]   =  'Amenities: Golf course (has_golf_course)';
+        // $table_head[]   =  'Amenities: Good for kids (welcomes_children)';
+        // $table_head[]   =  'Amenities: High chairs (has_high_chairs)';
+        // $table_head[]   =  'Amenities: Hot tub (has_hot_tub)';
+        // $table_head[]   =  'Amenities: Laundry service (has_laundry_service)';
+        // $table_head[]   =  'Amenities: Mechanic (has_mechanic)';
+        // $table_head[]   =  'Amenities: Parking (parking_offerings): Free (free_parking)';
+        // $table_head[]   =  'Amenities: Parking (parking_offerings): Paid (paid_parking)';
+        // $table_head[]   =  'Amenities: Pets welcome (welcomes_pets)';
+        // $table_head[]   =  'Amenities: Picnic tables (has_picnic_tables)';
+        // $table_head[]   =  'Amenities: Public restroom (has_restroom_public)';
+        // $table_head[]   =  'Amenities: Restaurant (has_restaurant)';
         $table_head[24]   =  'Amenities: Restroom (has_restroom)';
-        // $table_head[38]   =  'From the business: Identifies as Black-owned (is_black_owned)';
-        // $table_head[39]   =  'From the business: Identifies as veteran-led (is_owned_by_veterans)';
-        // $table_head[40]   =  'From the business: Identifies as women-led (is_owned_by_women)';
-        $table_head[25]   =  'Health & safety: Appointment required (requires_appointments)';
-        $table_head[26]   =  'Health & safety: Mask required (requires_masks_customers)';
-        // $table_head[43]   =  'Health & safety: Safety dividers at checkout (has_plexiglass_at_checkout)';
-        $table_head[27]   =  'Health & safety: Staff get temperature checks (requires_temperature_check_staff)';
-        $table_head[28]   =  'Health & safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)';
-        $table_head[29]   =  'Health & safety: Staff wear masks (requires_masks_staff)';
-        $table_head[30]   =  'Health & safety: Temperature check required (requires_temperature_check_customers)';
-        $table_head[31]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
-        $table_head[32]   =  'Payments: Cash-only (requires_cash_only)';
-        $table_head[33]   =  'Payments: Checks (pay_check)';
-        $table_head[34]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
-        $table_head[35]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
-        $table_head[36]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
-        $table_head[37]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
-        $table_head[38]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
-        $table_head[39]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
-        $table_head[40]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
-        $table_head[41]   =  'Payments: Debit cards (pay_debit_card)';
-        $table_head[42]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
-        // $table_head[60]   =  'Place page URLs: Appointment links (url_appointment)';
-        $table_head[43]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
-        $table_head[44]   =  'Place page URLs: Menu link (url_menu)';
-        $table_head[45]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
-        // $table_head[64]   =  'Planning: LGBTQ friendly (welcomes_lgbtq)';
-        // $table_head[65]   =  'Planning: Transgender safespace (is_transgender_safespace)';
-        $table_head[46]   =  'Service options: Curbside pickup (has_curbside_pickup)';
-        $table_head[47]   =  'Service options: Delivery (has_delivery)';
-        $table_head[48]   =  'Service options: Drive-through (has_drive_through)';
-        $table_head[49]   =  'Service options: In-store pickup (has_in_store_pickup)';
-        $table_head[50]   =  'Service options: In-store shopping (has_in_store_shopping)';
-        $table_head[51]   =  'Service options: Online care (has_video_visits)';
-        $table_head[52]   =  'Service options: Same-day delivery (has_delivery_same_day)';
+        // $table_head[]   =  'Amenities: Room service (has_room_service)';
+        // $table_head[]   =  'Amenities: Sauna (has_sauna)';
+        // $table_head[]   =  'Amenities: Slides (has_playground_slides)';
+        // $table_head[]   =  'Amenities: Smoke-free place (is_smoke_free_property)';
+        // $table_head[]   =  'Amenities: Spa (has_spa)';
+        // $table_head[]   =  'Amenities: Stadium seating (has_stadium_seating)';
+        // $table_head[]   =  'Amenities: Swimming pool (swimming_pool_offerings): Indoor (indoor_pool)';
+        // $table_head[]   =  'Amenities: Swimming pool (swimming_pool_offerings): Outdoor (outdoor_pool)';
+        // $table_head[]   =  'Amenities: Swings (has_playground_swings)';
+        // $table_head[]   =  'Crowd: Family-friendly (welcomes_families)';
+        // $table_head[]   =  'Crowd: LGBTQ+ friendly (welcomes_lgbtq)';
+        // $table_head[]   =  'Crowd: Transgender safespace (is_transgender_safespace)';
+        // $table_head[]   =  'Deities Represented: Brahma (has_deity_brahma_represented)';
+        // $table_head[]   =  'Deities Represented: Durga (has_deity_durga_represented)';
+        // $table_head[]   =  'Deities Represented: Hanuman (has_deity_hanuman_represented)';
+        // $table_head[]   =  'Deities Represented: Krishna (has_deity_krishna_represented)';
+        // $table_head[]   =  'Deities Represented: Lakshmi (has_deity_lakshmi_represented)';
+        // $table_head[]   =  'Deities Represented: Mahavira (has_deity_mahavira_represented)';
+        // $table_head[]   =  'Deities Represented: Neminatha (has_deity_neminatha_represented)';
+        // $table_head[]   =  'Deities Represented: Parshvanatha (has_deity_parshvanatha_represented)';
+        // $table_head[]   =  'Deities Represented: Rama (has_deity_rama_represented)';
+        // $table_head[]   =  'Deities Represented: Rishabhanatha (has_deity_rishabhanatha_represented)';
+        // $table_head[]   =  'Deities Represented: Sai Baba (has_deity_sai_baba_represented)';
+        // $table_head[]   =  'Deities Represented: Shiva (has_deity_shiva_represented)';
+        // $table_head[]   =  'Deities Represented: Vishnu (has_deity_vishnu_represented)';
+        // $table_head[]   =  'Dining options: Breakfast (serves_breakfast)';
+        // $table_head[]   =  'Dining options: Brunch (serves_brunch)';
+        // $table_head[]   =  'Dining options: Catering (has_catering)';
+        // $table_head[]   =  'Dining options: Counter service (has_counter_service)';
+        // $table_head[]   =  'Dining options: Dessert (serves_dessert)';
+        // $table_head[]   =  'Dining options: Dinner (serves_dinner)';
+        // $table_head[]   =  'Dining options: Lunch (serves_lunch)';
+        // $table_head[]   =  'Dining options: Outside food allowed (allows_outside_food)';
+        // $table_head[]   =  'Dining options: Pay ahead (has_order_and_pay_ahead)';
+        // $table_head[]   =  'Dining options: Seating (has_seating)';
+        // $table_head[]   =  'Emergency help: Accepts donations (accepts_donations_during_crisis)';
+        // $table_head[]   =  'Emergency help: Employs refugees (offers_employment_during_crisis)';
+        // $table_head[]   =  'Emergency help: Needs volunteers (needs_volunteers_during_crisis)';
+        // $table_head[]   =  'Emergency help: Offers accommodation for refugees (offers_refuge_during_crisis)';
+        // $table_head[]   =  'Emergency help: Offers free legal help (offers_free_legal_help_during_crisis)';
+        // $table_head[]   =  'Emergency help: Offers free products or services (offers_free_products_services_during_crisis)';
+        // $table_head[]   =  'Emergency help: Offers transportation of goods or people (offers_transportation_during_crisis)';
+        // $table_head[]   =  'Exams: CAT (offers_cat_exam_prep)';
+        // $table_head[]   =  'Exams: CBSE Board (offers_cbse_board_exam_prep)';
+        // $table_head[]   =  'Exams: CTET (offers_ctet_exam_prep)';
+        // $table_head[]   =  'Exams: Civil Services (offers_civil_services_exam_prep)';
+        // $table_head[]   =  'Exams: GATE (offers_gate_exam_prep)';
+        // $table_head[]   =  'Exams: IBPS Clerk (offers_ibps_clerk_exam_prep)';
+        // $table_head[]   =  'Exams: IBPS RBB (offers_ibps_rrb_exam_prep)';
+        // $table_head[]   =  'Exams: ICSE Board (offers_icse_board_exam_prep)';
+        // $table_head[]   =  'Exams: JEE (offers_jee_exam_prep)';
+        // $table_head[]   =  'Exams: JNVST (offers_jnvst_exam_prep)';
+        // $table_head[]   =  'Exams: LIC AAO (offers_lic_aao_exam_prep)';
+        // $table_head[]   =  'Exams: NEET (offers_neet_exam_prep)';
+        // $table_head[]   =  'Exams: SBI Clerk (offers_sbi_clerk_exam_prep)';
+        // $table_head[]   =  'Exams: SSC CGL (offers_ssc_cgl_exam_prep)';
+        // $table_head[]   =  'Exams: SSC Government (offers_ssc_government_exam_prep)';
+        // $table_head[]   =  'Exams: UGC Net (offers_ugc_net_exam_prep)';
+        // $table_head[]   =  'Exams: UPSC Government (offers_upsc_government_exam_prep)';
+        // $table_head[]   =  'From the business: Identifies as Asian-owned (is_owned_by_asian)';
+        // $table_head[]   =  'From the business: Identifies as Black-owned (is_black_owned)'; // Intentionally left blank
+        // $table_head[]   =  'From the business: Identifies as LGBTQ+ owned (is_owned_by_lgbtq)';
+        // $table_head[]   =  'From the business: Identifies as Latino-owned (is_owned_by_latinx)';
+        // $table_head[]   =  'From the business: Identifies as veteran-led (is_owned_by_veterans)'; // Intentionally left blank
+        // $table_head[]   =  'From the business: Identifies as women-led (is_owned_by_women)'; // Intentionally left blank
+        // $table_head[]   =  'Getting here: 24-hour transit available (has_transit_24_hours)';
+        // $table_head[]   =  'Highlights: 3D movies (has_movies_3D)';
+        // $table_head[]   =  'Highlights: Active military discounts (has_discounts_for_active_military)';
+        // $table_head[]   =  'Highlights: All you can drink (has_all_you_can_drink)';
+        // $table_head[]   =  'Highlights: Bar games (has_bar_games)';
+        // $table_head[]   =  'Highlights: COVID-19 testing center (is_covid_19_bool_1)';
+        // $table_head[]   =  'Highlights: Cabaret (has_cabaret)';
+        // $table_head[]   =  'Highlights: Fireplace (has_fireplace)';
+        // $table_head[]   =  'Highlights: Karaoke (has_karaoke_nights)';
+        // $table_head[]   =  'Highlights: Live music (has_live_music)';
+        // $table_head[]   =  'Highlights: Live performances (has_live_performances)';
+        // $table_head[]   =  'Highlights: Play area (has_area_play)';
+        // $table_head[]   =  'Highlights: Rooftop seating (has_seating_rooftop)';
+        // $table_head[]   =  'Highlights: Serves local specialty (local_specialty)';
+        // $table_head[]   =  'Highlights: Showing the World Cup (offers_fifa_world_cup_broadcast)';
+        // $table_head[]   =  'Highlights: Sports (suitable_for_watching_sports)';
+        // $table_head[]   =  'Highlights: Trivia night (has_trivia_night)';
+        // $table_head[]   =  'Lodging options: Family rooms (has_family_rooms)';
+        // $table_head[]   =  'Offerings: Alcohol (serves_alcohol)';
+        // $table_head[]   =  'Offerings: All you can eat (has_all_you_can_eat_always)';
+        // $table_head[]   =  'Offerings: Assembly service (has_service_assembly)';
+        // $table_head[]   =  'Offerings: Beer (serves_beer)';
+        // $table_head[]   =  'Offerings: Bike storage (has_secure_bicycle_storage)';
+        // $table_head[]   =  'Offerings: Braille menu (has_braille_menu)';
+        // $table_head[]   =  'Offerings: Buys used goods (buys_goods_used)';
+        // $table_head[]   =  'Offerings: Car rental (has_car_rental)';
+        // $table_head[]   =  'Offerings: Car wash (has_car_wash)';
+        // $table_head[]   =  'Offerings: Cash advance (has_cash_advance)';
+        // $table_head[]   =  'Offerings: Check cashing (has_check_cashing)';
+        // $table_head[]   =  'Offerings: Cocktails (serves_cocktails)';
+        // $table_head[]   =  'Offerings: Coffee (serves_coffee)';
+        // $table_head[]   =  'Offerings: Comfort food (serves_comfort_food)';
+        // $table_head[]   =  'Offerings: Dancing (has_dancing)';
+        // $table_head[]   =  'Offerings: Diesel gas (sells_gas_diesel)';
+        // $table_head[]   =  'Offerings: Drive-through (has_drive_through_covid_19_testing)';
+        // $table_head[]   =  'Offerings: Ethanol-free gas (sells_gas_ethanol_free)';
+        // $table_head[]   =  'Offerings: Food (serves_food)';
+        // $table_head[]   =  'Offerings: Food at bar (serves_food_at_bar)';
+        // $table_head[]   =  'Offerings: Free air (has_free_air)';
+        // $table_head[]   =  'Offerings: Free water refills (has_free_water_refills)';
+        // $table_head[]   =  'Offerings: Full service gas (has_full_service_gas)';
+        // $table_head[]   =  'Offerings: Grilling (allows_grilling)';
+        // $table_head[]   =  'Offerings: Halal food (serves_halal_food)';
+        // $table_head[]   =  'Offerings: Happy hour drinks (serves_happy_hour_drinks)';
+        // $table_head[]   =  'Offerings: Happy hour food (serves_happy_hour_food)';
+        // $table_head[]   =  'Offerings: Hard liquor (serves_liquor)';
+        // $table_head[]   =  'Offerings: Kids' menu (has_childrens_menu)';
+        // $table_head[]   =  'Offerings: Kids' shoes (sells_shoes_for_children)';
+        // $table_head[]   =  'Offerings: Kids' tours (has_tours_for_children)';
+        // $table_head[]   =  'Offerings: Kids' toys (sells_toys_for_children)';
+        // $table_head[]   =  'Offerings: Late-night food (serves_late_night_food)';
+        // $table_head[]   =  'Offerings: Matinees (has_matinees)';
+        // $table_head[]   =  'Offerings: Men's clothing (sells_clothing_for_men)';
+        // $table_head[]   =  'Offerings: Men's shoes (sells_shoes_for_men)';
+        // $table_head[]   =  'Offerings: Oil change (has_oil_change)';
+        // $table_head[]   =  'Offerings: Organic dishes (serves_organic)';
+        // $table_head[]   =  'Offerings: Organic products (sells_organic_products)';
+        // $table_head[]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
+        // $table_head[]   =  'Offerings: Prepared foods (sells_food_prepared)';
+        // $table_head[]   =  'Offerings: Repair services (has_service_repair)';
+        // $table_head[]   =  'Offerings: Salad bar (has_salad_bar)';
+        // $table_head[]   =  'Offerings: Service guarantee (has_service_guarantee)';
+        // $table_head[]   =  'Offerings: Sing-along screenings (has_sing_alongs)';
+        // $table_head[]   =  'Offerings: Small plates (serves_small_plates)';
+        // $table_head[]   =  'Offerings: Tent camping (allows_camping_tent)';
+        // $table_head[]   =  'Offerings: Used goods (sells_goods_used)';
+        // $table_head[]   =  'Offerings: Vegan options (serves_vegan)';
+        // $table_head[]   =  'Offerings: Vegetarian options (serves_vegetarian)';
+        // $table_head[]   =  'Offerings: Wine (serves_wine)';
+        // $table_head[]   =  'Offerings: Women's clothing (sells_clothing_for_women)';
+        // $table_head[]   =  'Offerings: Women's shoes (sells_shoes_for_women)';
+        // $table_head[]   =  'Payments: Cash-only (requires_cash_only)';
+        // $table_head[]   =  'Payments: Checks (pay_check)';
+        // $table_head[]   =  'Payments: Cheque Apetiz (accepts_cheque_apetiz_meal_voucher)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
+        // $table_head[]   =  'Payments: Debit cards (pay_debit_card)';
+        // $table_head[]   =  'Payments: Google Pay (pay_mobile_tez)';
+        // $table_head[]   =  'Payments: Meal coupons (accepts_meal_coupons)';
+        // $table_head[]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
+        // $table_head[]   =  'Payments: Ticket Restaurant (accepts_ticket_restaurant_meal_voucher)';
+        // $table_head[]   =  'Payments: VR (accepts_vr_meal_voucher)';
+        // $table_head[]   =  'Planning: Accepts new patients (accepts_new_patients)';
+        // $table_head[]   =  'Planning: Accepts reservations (accepts_reservations)';
+        $table_head[25]   =  'Planning: Appointment required (requires_appointments)';
+        // $table_head[]   =  'Planning: Appointment required for Covid Test (is_appointment_required_covid_19_testing)';
+        // $table_head[]   =  'Planning: Eligibility requirement (requires_eligibility_verification)';
+        // $table_head[]   =  'Planning: Membership required (requires_membership)';
+        // $table_head[]   =  'Planning: Referral required (is_prescription_required_covid_19_testing)';
+        // $table_head[]   =  'Planning: Reservations required (requires_reservations)';
+        // $table_head[]   =  'Planning: Tests limited to certain patients (has_covid_19_testing_patient_restrictions)';
+        // $table_head[]   =  'Popular for: Good for working on laptop (suitable_for_working_on_laptop)';
+        // $table_head[]   =  'Recycling: Batteries (has_recycling_batteries)';
+        // $table_head[]   =  'Recycling: Clothing (has_recycling_clothing)';
+        // $table_head[]   =  'Recycling: Electronics (has_recycling_electronics)';
+        // $table_head[]   =  'Recycling: Glass bottles (has_recycling_glass_bottles)';
+        // $table_head[]   =  'Recycling: Hazardous household materials (has_recycling_household_hazardous_waste)';
+        // $table_head[]   =  'Recycling: Ink cartridges (has_recycling_ink_cartridges)';
+        // $table_head[]   =  'Recycling: Light bulbs (has_recycling_light_bulbs)';
+        // $table_head[]   =  'Recycling: Metal cans (has_recycling_metal_cans)';
+        // $table_head[]   =  'Recycling: Plastic bags (has_recycling_plastic_bags)';
+        // $table_head[]   =  'Recycling: Plastic bottles (has_recycling_plastic_bottles)';
+        // $table_head[]   =  'Recycling: Plastic foam (has_recycling_plastic_foam)';
+        // $table_head[]   =  'Service options: Curbside pickup (has_curbside_pickup)';
+        // $table_head[]   =  'Service options: Delivery (has_delivery)';
+        // $table_head[]   =  'Service options: Dine-in (serves_dine_in)';
+        // $table_head[]   =  'Service options: Drive-through (has_drive_through)';
+        // $table_head[]   =  'Service options: Grocery pickup (has_grocery_pickup)';
+        // $table_head[]   =  'Service options: In-store pickup (has_in_store_pickup)';
+        // $table_head[]   =  'Service options: In-store shopping (has_in_store_shopping)';
+        $table_head[50]   =  'Service options: Has online care (has_video_visits)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): American Sign Language (american_sign_language_used)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Arabic (arabic_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Cantonese (cantonese_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Filipino (filipino_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): French (french_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): German (german_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Haitian Creole (haitian_creole_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Hindi (hindi_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Italian (italian_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Korean (korean_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Mandarin (mandarin_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Portuguese (portuguese_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Russian (russian_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Spanish (spanish_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Vietnamese (vietnamese_spoken)';
+        // $table_head[]   =  'Service options: Meal service (has_meal_service)';
+        // $table_head[]   =  'Service options: No-contact delivery (has_no_contact_delivery)';
+        // $table_head[]   =  'Service options: Online appointments (offers_online_appointments)';
+        // $table_head[]   =  'Service options: Online classes (offers_online_classes)';
+        // $table_head[]   =  'Service options: Online estimates (offers_online_estimates)';
+        // $table_head[]   =  'Service options: Onsite services (has_onsite_services)';
+        // $table_head[]   =  'Service options: Outdoor seating (has_seating_outdoors)';
+        // $table_head[]   =  'Service options: Outdoor services (has_outdoor_services)';
+        // $table_head[]   =  'Service options: Same-day delivery (has_delivery_same_day)';
+        // $table_head[]   =  'Service options: Takeout (has_takeout)';
+        // $table_head[]   =  'Place page URLs: Appointment links (url_appointment)';
+        $table_head[42]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
+        // $table_head[]   =  'Place page URLs: Inventory search URL (url_inventory_search)';
+        // $table_head[]   =  'Place page URLs: Menu link (url_menu)';
+        // $table_head[]   =  'Place page URLs: Order ahead links (url_order_ahead)';
+        // $table_head[]   =  'Place page URLs: Reservations links (url_reservations)';
+        $table_head[44]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
+        // $table_head[]   =  'Amenities: In-room kitchens (kitchen_in_room)';
+        // $table_head[]   =  'Amenities: Wi-Fi (wi_fi)';
 
         $table_body = array();
         while( $wp_query->have_posts() ) : $wp_query->the_post();
@@ -835,20 +1055,8 @@ function gmb_provider_csv_export() {
                                 } else {
                                     $row[24] = 'Yes';
                                 }
-                            
-                            // From the business: Identifies as Black-owned (is_black_owned)
-                            // Intentionally left blank
-                                // $row[38] = '';
 
-                            // From the business: Identifies as veteran-led (is_owned_by_veterans)
-                            // Intentionally left blank
-                                // $row[39] = '';
-
-                            // From the business: Identifies as women-led (is_owned_by_women)
-                            // Intentionally left blank
-                                // $row[40] = '';
-
-                            // Health &amp; safety: Appointment required (requires_appointments)
+                            // Planning: Appointment required (requires_appointments)
                                 if ( $covid19 ) {
                                     if (!empty($location_gmb_appointments)) {
                                         $row[25] =  $location_gmb_appointments;
@@ -859,140 +1067,15 @@ function gmb_provider_csv_export() {
                                     $row[25] =  '';
                                 }
 
-                            // Health &amp; safety: Mask required (requires_masks_customers)
-                                if ( $covid19 ) {
-                                    if (!empty($location_gmb_masks_customers)) {
-                                        $row[26] =  $location_gmb_masks_customers;
-                                    } else {
-                                        $row[26] =  'Yes';
-                                    }
-                                } else {
-                                    $row[26] = 'No';
-                                }
-
-                            // Health &amp; safety: Safety dividers at checkout (has_plexiglass_at_checkout)
-                                // $row[43] = '';
-
-                            // Health &amp; safety: Staff get temperature checks (requires_temperature_check_staff)
-                                if ( $covid19 ) {
-                                    if (!empty($location_gmb_temp_staff)) {
-                                        $row[27] = $location_gmb_temp_staff;
-                                    } else {
-                                        $row[27] = 'Yes';
-                                    }
-                                } else {
-                                    $row[27] = 'No';
-                                }
-
-                            // Health &amp; safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)
-                                if ( $covid19 ) {
-                                    if (!empty($location_gmb_sanitizing)) {
-                                        $row[28] = $location_gmb_sanitizing;
-                                    } else {
-                                        $row[28] = 'Yes';
-                                    }
-                                } else {
-                                    $row[28] = 'No';
-                                }
-
-                            // Health &amp; safety: Staff wear masks (requires_masks_staff)
-                                if ( $covid19 ) {
-                                    if (!empty($location_gmb_masks_staff)) {
-                                        $row[29] = $location_gmb_masks_staff;
-                                    } else {
-                                        $row[29] = 'Yes';
-                                    }
-                                } else {
-                                    $row[29] = 'No';
-                                }
-
-                            // Health &amp; safety: Temperature check required (requires_temperature_check_customers)
-                                if ( $covid19 ) {
-                                    if (!empty($location_gmb_temp_customers)) {
-                                        $row[30] = $location_gmb_temp_customers;
-                                    } else {
-                                        $row[30] = 'Yes';
-                                    }
-                                } else {
-                                    $row[30] = 'No';
-                                }
-
-                            // Offerings: Passport photos (has_onsite_passport_photos)
-                                $row[31] = '[NOT APPLICABLE]';
-
-                            // Payments: Cash-only (requires_cash_only)
-                                $row[32] = '[NOT APPLICABLE]';
-
-                            // Payments: Checks (pay_check)
-                                $row[33] = '[NOT APPLICABLE]';
-
-                            // Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)
-                                $row[34] = '[NOT APPLICABLE]';
-
-                            // Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)
-                                $row[35] = '[NOT APPLICABLE]';
-
-                            // Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)
-                                $row[36] = '[NOT APPLICABLE]';
-
-                            // Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)
-                                $row[37] = '[NOT APPLICABLE]';
-
-                            // Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)
-                                $row[38] = '[NOT APPLICABLE]';
-
-                            // Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)
-                                $row[39] = '[NOT APPLICABLE]';
-
-                            // Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)
-                                $row[40] = '[NOT APPLICABLE]';
-
-                            // Payments: Debit cards (pay_debit_card)
-                                $row[41] = '[NOT APPLICABLE]';
-
-                            // Payments: NFC mobile payments (pay_mobile_nfc)
-                                $row[42] = '[NOT APPLICABLE]';
-
-                            // Place page URLs: Appointment links (url_appointment)
-                            // Intentionally left blank
-                                // $row[60] = '';
+                            // Service options: Has online care (has_video_visits)
+                            // Value based on the relevant location profile
+                                $row[50] = $location_telemed_query ? 'Yes' : '';
 
                             // Place page URLs: COVID-19 info link (url_covid_19_info_page)
-                                $row[43] = 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=covid-19-info-link&utm_specs=' . $store_code;
-
-                            // Place page URLs: Menu link (url_menu)
-                                $row[44] = '[NOT APPLICABLE]';
+                                $row[42] = 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=covid-19-info-link&utm_specs=' . $store_code;
 
                             // Place page URLs: Virtual care link (url_facility_telemedicine_page)
-                                $row[45] = $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
-
-                            // Planning: LGBTQ friendly (welcomes_lgbtq)
-                                // $row[64] = '';
-
-                            // Planning: Transgender safespace (is_transgender_safespace)
-                                // $row[65] = '';
-
-                            // Service options: Curbside pickup (has_curbside_pickup)
-                                $row[46] = '[NOT APPLICABLE]';
-
-                            // Service options: Delivery (has_delivery)
-                                $row[47] = '[NOT APPLICABLE]';
-
-                            // Service options: Drive-through (has_drive_through)
-                                $row[48] = '[NOT APPLICABLE]';
-
-                            // Service options: In-store pickup (has_in_store_pickup)
-                                $row[49] = '[NOT APPLICABLE]';
-
-                            // Service options: In-store shopping (has_in_store_shopping)
-                                $row[50] = '[NOT APPLICABLE]';
-
-                            // Service options: Online care (has_video_visits)
-                            // Value based on the relevant location profile
-                                $row[51] = $location_telemed_query ? 'Yes' : '';
-
-                            // Service options: Same-day delivery (has_delivery_same_day)
-                                $row[52] = '[NOT APPLICABLE]';
+                                $row[44] = $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
 
                         $l++;
                     } else {
@@ -1087,45 +1170,265 @@ function gmb_location_csv_export() {
         $table_head[20]   =  'Other photos';
         $table_head[21]   =  'Labels';
         // $table_head[33]   =  'AdWords location extensions phone'; // Intentionally left blank
+        // $table_head[]   =  'Accessibility: Assisted listening devices (has_assisted_listening_devices)';
+        // $table_head[]   =  'Accessibility: Assistive hearing loop (has_hearing_loop)';
+        // $table_head[]   =  'Accessibility: Passenger loading area (has_passenger_loading_area)';
         $table_head[22]   =  'Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)';
         $table_head[23]   =  'Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)';
+        // $table_head[]   =  'Accessibility: Wheelchair accessible parking lot (has_wheelchair_accessible_parking)';
         $table_head[24]   =  'Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)';
+        // $table_head[]   =  'Accessibility: Wheelchair accessible seating (has_wheelchair_accessible_seating)';
+        // $table_head[]   =  'Accessibility: Wheelchair rental (wheelchair_rental_offerings): Motorized (motorized_wheelchairs)';
+        // $table_head[]   =  'Accessibility: Wheelchair rental (wheelchair_rental_offerings): Non-motorized (non_motorized_wheelchairs)';
+        // $table_head[]   =  'Activities: Accepting food donations (accepts_non_monetary_donations)';
+        // $table_head[]   =  'Activities: Accepting monetary donations (accepts_monetary_donations)';
+        // $table_head[]   =  'Activities: Accepting new volunteers (accepts_new_volunteers)';
+        // $table_head[]   =  'Activities: Bicycle rental (has_bicycles_for_rent)';
+        // $table_head[]   =  'Amenities: Air conditioning (has_air_conditioning)
+        // $table_head[]   =  'Amenities: Airport shuttle (has_airport_shuttle)';
+        // $table_head[]   =  'Amenities: All-inclusive (has_all_inclusive)';
+        // $table_head[]   =  'Amenities: Baggage storage (has_baggage_storage)';
+        // $table_head[]   =  'Amenities: Bar onsite (has_bar_onsite)';
+        // $table_head[]   =  'Amenities: Beach access (has_beach_access)';
+        // $table_head[]   =  'Amenities: Business center (has_business_center)';
+        // $table_head[]   =  'Amenities: Cellular service (has_cellular_service)';
+        // $table_head[]   =  'Amenities: Child care (has_child_care)';
+        // $table_head[]   =  'Amenities: Concierge (has_concierge)';
+        // $table_head[]   =  'Amenities: Convenience store (has_onsite_convenience_store)';
+        // $table_head[]   =  'Amenities: Currency exchange (has_currency_exchange)';
+        // $table_head[]   =  'Amenities: Dogs allowed (welcomes_dogs)';
+        // $table_head[]   =  'Amenities: Fitness center (has_fitness_center)';
+        // $table_head[]   =  'Amenities: Free breakfast (has_free_breakfast)';
+        // $table_head[]   =  'Amenities: Gender-neutral restroom (has_restroom_unisex)';
+        // $table_head[]   =  'Amenities: Golf course (has_golf_course)';
+        // $table_head[]   =  'Amenities: Good for kids (welcomes_children)';
+        // $table_head[]   =  'Amenities: High chairs (has_high_chairs)';
+        // $table_head[]   =  'Amenities: Hot tub (has_hot_tub)';
+        // $table_head[]   =  'Amenities: Laundry service (has_laundry_service)';
+        // $table_head[]   =  'Amenities: Mechanic (has_mechanic)';
+        // $table_head[]   =  'Amenities: Parking (parking_offerings): Free (free_parking)';
+        // $table_head[]   =  'Amenities: Parking (parking_offerings): Paid (paid_parking)';
+        // $table_head[]   =  'Amenities: Pets welcome (welcomes_pets)';
+        // $table_head[]   =  'Amenities: Picnic tables (has_picnic_tables)';
+        // $table_head[]   =  'Amenities: Public restroom (has_restroom_public)';
+        // $table_head[]   =  'Amenities: Restaurant (has_restaurant)';
         $table_head[25]   =  'Amenities: Restroom (has_restroom)';
-        // $table_head[38]   =  'From the business: Identifies as Black-owned (is_black_owned)'; // Intentionally left blank
-        // $table_head[39]   =  'From the business: Identifies as veteran-led (is_owned_by_veterans)'; // Intentionally left blank
-        // $table_head[40]   =  'From the business: Identifies as women-led (is_owned_by_women)'; // Intentionally left blank
-        $table_head[26]   =  'Health & safety: Appointment required (requires_appointments)';
-        $table_head[27]   =  'Health & safety: Mask required (requires_masks_customers)';
-        $table_head[28]   =  'Health & safety: Safety dividers at checkout (has_plexiglass_at_checkout)';
-        $table_head[29]   =  'Health & safety: Staff get temperature checks (requires_temperature_check_staff)';
-        $table_head[30]   =  'Health & safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)';
-        $table_head[31]   =  'Health & safety: Staff wear masks (requires_masks_staff)';
-        $table_head[32]   =  'Health & safety: Temperature check required (requires_temperature_check_customers)';
-        $table_head[33]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
-        $table_head[34]   =  'Payments: Cash-only (requires_cash_only)';
-        $table_head[35]   =  'Payments: Checks (pay_check)';
-        $table_head[36]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
-        $table_head[37]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
-        $table_head[38]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
-        $table_head[39]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
-        $table_head[40]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
-        $table_head[41]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
-        $table_head[42]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
-        $table_head[43]   =  'Payments: Debit cards (pay_debit_card)';
-        $table_head[44]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
-        // $table_head[60]   =  'Place page URLs: Appointment links (url_appointment)'; // Intentionally left blank
-        $table_head[45]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
-        $table_head[46]   =  'Place page URLs: Menu link (url_menu)';
-        $table_head[47]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
-        // $table_head[64]   =  'Planning: LGBTQ friendly (welcomes_lgbtq)'; // Intentionally left blank
-        // $table_head[65]   =  'Planning: Transgender safespace (is_transgender_safespace)'; // Intentionally left blank
-        $table_head[48]   =  'Service options: Curbside pickup (has_curbside_pickup)';
-        $table_head[49]   =  'Service options: Delivery (has_delivery)';
-        $table_head[50]   =  'Service options: Drive-through (has_drive_through)';
-        $table_head[51]   =  'Service options: In-store pickup (has_in_store_pickup)';
-        $table_head[52]   =  'Service options: In-store shopping (has_in_store_shopping)';
-        $table_head[53]   =  'Service options: Online care (has_video_visits)';
-        $table_head[54]   =  'Service options: Same-day delivery (has_delivery_same_day)';
+        // $table_head[]   =  'Amenities: Room service (has_room_service)';
+        // $table_head[]   =  'Amenities: Sauna (has_sauna)';
+        // $table_head[]   =  'Amenities: Slides (has_playground_slides)';
+        // $table_head[]   =  'Amenities: Smoke-free place (is_smoke_free_property)';
+        // $table_head[]   =  'Amenities: Spa (has_spa)';
+        // $table_head[]   =  'Amenities: Stadium seating (has_stadium_seating)';
+        // $table_head[]   =  'Amenities: Swimming pool (swimming_pool_offerings): Indoor (indoor_pool)';
+        // $table_head[]   =  'Amenities: Swimming pool (swimming_pool_offerings): Outdoor (outdoor_pool)';
+        // $table_head[]   =  'Amenities: Swings (has_playground_swings)';
+        // $table_head[]   =  'Crowd: Family-friendly (welcomes_families)';
+        // $table_head[]   =  'Crowd: LGBTQ+ friendly (welcomes_lgbtq)';
+        // $table_head[]   =  'Crowd: Transgender safespace (is_transgender_safespace)';
+        // $table_head[]   =  'Deities Represented: Brahma (has_deity_brahma_represented)';
+        // $table_head[]   =  'Deities Represented: Durga (has_deity_durga_represented)';
+        // $table_head[]   =  'Deities Represented: Hanuman (has_deity_hanuman_represented)';
+        // $table_head[]   =  'Deities Represented: Krishna (has_deity_krishna_represented)';
+        // $table_head[]   =  'Deities Represented: Lakshmi (has_deity_lakshmi_represented)';
+        // $table_head[]   =  'Deities Represented: Mahavira (has_deity_mahavira_represented)';
+        // $table_head[]   =  'Deities Represented: Neminatha (has_deity_neminatha_represented)';
+        // $table_head[]   =  'Deities Represented: Parshvanatha (has_deity_parshvanatha_represented)';
+        // $table_head[]   =  'Deities Represented: Rama (has_deity_rama_represented)';
+        // $table_head[]   =  'Deities Represented: Rishabhanatha (has_deity_rishabhanatha_represented)';
+        // $table_head[]   =  'Deities Represented: Sai Baba (has_deity_sai_baba_represented)';
+        // $table_head[]   =  'Deities Represented: Shiva (has_deity_shiva_represented)';
+        // $table_head[]   =  'Deities Represented: Vishnu (has_deity_vishnu_represented)';
+        // $table_head[]   =  'Dining options: Breakfast (serves_breakfast)';
+        // $table_head[]   =  'Dining options: Brunch (serves_brunch)';
+        // $table_head[]   =  'Dining options: Catering (has_catering)';
+        // $table_head[]   =  'Dining options: Counter service (has_counter_service)';
+        // $table_head[]   =  'Dining options: Dessert (serves_dessert)';
+        // $table_head[]   =  'Dining options: Dinner (serves_dinner)';
+        // $table_head[]   =  'Dining options: Lunch (serves_lunch)';
+        // $table_head[]   =  'Dining options: Outside food allowed (allows_outside_food)';
+        // $table_head[]   =  'Dining options: Pay ahead (has_order_and_pay_ahead)';
+        // $table_head[]   =  'Dining options: Seating (has_seating)';
+        // $table_head[]   =  'Emergency help: Accepts donations (accepts_donations_during_crisis)';
+        // $table_head[]   =  'Emergency help: Employs refugees (offers_employment_during_crisis)';
+        // $table_head[]   =  'Emergency help: Needs volunteers (needs_volunteers_during_crisis)';
+        // $table_head[]   =  'Emergency help: Offers accommodation for refugees (offers_refuge_during_crisis)';
+        // $table_head[]   =  'Emergency help: Offers free legal help (offers_free_legal_help_during_crisis)';
+        // $table_head[]   =  'Emergency help: Offers free products or services (offers_free_products_services_during_crisis)';
+        // $table_head[]   =  'Emergency help: Offers transportation of goods or people (offers_transportation_during_crisis)';
+        // $table_head[]   =  'Exams: CAT (offers_cat_exam_prep)';
+        // $table_head[]   =  'Exams: CBSE Board (offers_cbse_board_exam_prep)';
+        // $table_head[]   =  'Exams: CTET (offers_ctet_exam_prep)';
+        // $table_head[]   =  'Exams: Civil Services (offers_civil_services_exam_prep)';
+        // $table_head[]   =  'Exams: GATE (offers_gate_exam_prep)';
+        // $table_head[]   =  'Exams: IBPS Clerk (offers_ibps_clerk_exam_prep)';
+        // $table_head[]   =  'Exams: IBPS RBB (offers_ibps_rrb_exam_prep)';
+        // $table_head[]   =  'Exams: ICSE Board (offers_icse_board_exam_prep)';
+        // $table_head[]   =  'Exams: JEE (offers_jee_exam_prep)';
+        // $table_head[]   =  'Exams: JNVST (offers_jnvst_exam_prep)';
+        // $table_head[]   =  'Exams: LIC AAO (offers_lic_aao_exam_prep)';
+        // $table_head[]   =  'Exams: NEET (offers_neet_exam_prep)';
+        // $table_head[]   =  'Exams: SBI Clerk (offers_sbi_clerk_exam_prep)';
+        // $table_head[]   =  'Exams: SSC CGL (offers_ssc_cgl_exam_prep)';
+        // $table_head[]   =  'Exams: SSC Government (offers_ssc_government_exam_prep)';
+        // $table_head[]   =  'Exams: UGC Net (offers_ugc_net_exam_prep)';
+        // $table_head[]   =  'Exams: UPSC Government (offers_upsc_government_exam_prep)';
+        // $table_head[]   =  'From the business: Identifies as Asian-owned (is_owned_by_asian)';
+        // $table_head[]   =  'From the business: Identifies as Black-owned (is_black_owned)'; // Intentionally left blank
+        // $table_head[]   =  'From the business: Identifies as LGBTQ+ owned (is_owned_by_lgbtq)';
+        // $table_head[]   =  'From the business: Identifies as Latino-owned (is_owned_by_latinx)';
+        // $table_head[]   =  'From the business: Identifies as veteran-led (is_owned_by_veterans)'; // Intentionally left blank
+        // $table_head[]   =  'From the business: Identifies as women-led (is_owned_by_women)'; // Intentionally left blank
+        // $table_head[]   =  'Getting here: 24-hour transit available (has_transit_24_hours)';
+        // $table_head[]   =  'Highlights: 3D movies (has_movies_3D)';
+        // $table_head[]   =  'Highlights: Active military discounts (has_discounts_for_active_military)';
+        // $table_head[]   =  'Highlights: All you can drink (has_all_you_can_drink)';
+        // $table_head[]   =  'Highlights: Bar games (has_bar_games)';
+        // $table_head[]   =  'Highlights: COVID-19 testing center (is_covid_19_bool_1)';
+        // $table_head[]   =  'Highlights: Cabaret (has_cabaret)';
+        // $table_head[]   =  'Highlights: Fireplace (has_fireplace)';
+        // $table_head[]   =  'Highlights: Karaoke (has_karaoke_nights)';
+        // $table_head[]   =  'Highlights: Live music (has_live_music)';
+        // $table_head[]   =  'Highlights: Live performances (has_live_performances)';
+        // $table_head[]   =  'Highlights: Play area (has_area_play)';
+        // $table_head[]   =  'Highlights: Rooftop seating (has_seating_rooftop)';
+        // $table_head[]   =  'Highlights: Serves local specialty (local_specialty)';
+        // $table_head[]   =  'Highlights: Showing the World Cup (offers_fifa_world_cup_broadcast)';
+        // $table_head[]   =  'Highlights: Sports (suitable_for_watching_sports)';
+        // $table_head[]   =  'Highlights: Trivia night (has_trivia_night)';
+        // $table_head[]   =  'Lodging options: Family rooms (has_family_rooms)';
+        // $table_head[]   =  'Offerings: Alcohol (serves_alcohol)';
+        // $table_head[]   =  'Offerings: All you can eat (has_all_you_can_eat_always)';
+        // $table_head[]   =  'Offerings: Assembly service (has_service_assembly)';
+        // $table_head[]   =  'Offerings: Beer (serves_beer)';
+        // $table_head[]   =  'Offerings: Bike storage (has_secure_bicycle_storage)';
+        // $table_head[]   =  'Offerings: Braille menu (has_braille_menu)';
+        // $table_head[]   =  'Offerings: Buys used goods (buys_goods_used)';
+        // $table_head[]   =  'Offerings: Car rental (has_car_rental)';
+        // $table_head[]   =  'Offerings: Car wash (has_car_wash)';
+        // $table_head[]   =  'Offerings: Cash advance (has_cash_advance)';
+        // $table_head[]   =  'Offerings: Check cashing (has_check_cashing)';
+        // $table_head[]   =  'Offerings: Cocktails (serves_cocktails)';
+        // $table_head[]   =  'Offerings: Coffee (serves_coffee)';
+        // $table_head[]   =  'Offerings: Comfort food (serves_comfort_food)';
+        // $table_head[]   =  'Offerings: Dancing (has_dancing)';
+        // $table_head[]   =  'Offerings: Diesel gas (sells_gas_diesel)';
+        // $table_head[]   =  'Offerings: Drive-through (has_drive_through_covid_19_testing)';
+        // $table_head[]   =  'Offerings: Ethanol-free gas (sells_gas_ethanol_free)';
+        // $table_head[]   =  'Offerings: Food (serves_food)';
+        // $table_head[]   =  'Offerings: Food at bar (serves_food_at_bar)';
+        // $table_head[]   =  'Offerings: Free air (has_free_air)';
+        // $table_head[]   =  'Offerings: Free water refills (has_free_water_refills)';
+        // $table_head[]   =  'Offerings: Full service gas (has_full_service_gas)';
+        // $table_head[]   =  'Offerings: Grilling (allows_grilling)';
+        // $table_head[]   =  'Offerings: Halal food (serves_halal_food)';
+        // $table_head[]   =  'Offerings: Happy hour drinks (serves_happy_hour_drinks)';
+        // $table_head[]   =  'Offerings: Happy hour food (serves_happy_hour_food)';
+        // $table_head[]   =  'Offerings: Hard liquor (serves_liquor)';
+        // $table_head[]   =  'Offerings: Kids' menu (has_childrens_menu)';
+        // $table_head[]   =  'Offerings: Kids' shoes (sells_shoes_for_children)';
+        // $table_head[]   =  'Offerings: Kids' tours (has_tours_for_children)';
+        // $table_head[]   =  'Offerings: Kids' toys (sells_toys_for_children)';
+        // $table_head[]   =  'Offerings: Late-night food (serves_late_night_food)';
+        // $table_head[]   =  'Offerings: Matinees (has_matinees)';
+        // $table_head[]   =  'Offerings: Men's clothing (sells_clothing_for_men)';
+        // $table_head[]   =  'Offerings: Men's shoes (sells_shoes_for_men)';
+        // $table_head[]   =  'Offerings: Oil change (has_oil_change)';
+        // $table_head[]   =  'Offerings: Organic dishes (serves_organic)';
+        // $table_head[]   =  'Offerings: Organic products (sells_organic_products)';
+        // $table_head[]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
+        // $table_head[]   =  'Offerings: Prepared foods (sells_food_prepared)';
+        // $table_head[]   =  'Offerings: Repair services (has_service_repair)';
+        // $table_head[]   =  'Offerings: Salad bar (has_salad_bar)';
+        // $table_head[]   =  'Offerings: Service guarantee (has_service_guarantee)';
+        // $table_head[]   =  'Offerings: Sing-along screenings (has_sing_alongs)';
+        // $table_head[]   =  'Offerings: Small plates (serves_small_plates)';
+        // $table_head[]   =  'Offerings: Tent camping (allows_camping_tent)';
+        // $table_head[]   =  'Offerings: Used goods (sells_goods_used)';
+        // $table_head[]   =  'Offerings: Vegan options (serves_vegan)';
+        // $table_head[]   =  'Offerings: Vegetarian options (serves_vegetarian)';
+        // $table_head[]   =  'Offerings: Wine (serves_wine)';
+        // $table_head[]   =  'Offerings: Women's clothing (sells_clothing_for_women)';
+        // $table_head[]   =  'Offerings: Women's shoes (sells_shoes_for_women)';
+        // $table_head[]   =  'Payments: Cash-only (requires_cash_only)';
+        // $table_head[]   =  'Payments: Checks (pay_check)';
+        // $table_head[]   =  'Payments: Cheque Apetiz (accepts_cheque_apetiz_meal_voucher)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
+        // $table_head[]   =  'Payments: Debit cards (pay_debit_card)';
+        // $table_head[]   =  'Payments: Google Pay (pay_mobile_tez)';
+        // $table_head[]   =  'Payments: Meal coupons (accepts_meal_coupons)';
+        // $table_head[]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
+        // $table_head[]   =  'Payments: Ticket Restaurant (accepts_ticket_restaurant_meal_voucher)';
+        // $table_head[]   =  'Payments: VR (accepts_vr_meal_voucher)';
+        // $table_head[]   =  'Planning: Accepts new patients (accepts_new_patients)';
+        // $table_head[]   =  'Planning: Accepts reservations (accepts_reservations)';
+        $table_head[26]   =  'Planning: Appointment required (requires_appointments)';
+        // $table_head[]   =  'Planning: Appointment required for Covid Test (is_appointment_required_covid_19_testing)';
+        // $table_head[]   =  'Planning: Eligibility requirement (requires_eligibility_verification)';
+        // $table_head[]   =  'Planning: Membership required (requires_membership)';
+        // $table_head[]   =  'Planning: Referral required (is_prescription_required_covid_19_testing)';
+        // $table_head[]   =  'Planning: Reservations required (requires_reservations)';
+        // $table_head[]   =  'Planning: Tests limited to certain patients (has_covid_19_testing_patient_restrictions)';
+        // $table_head[]   =  'Popular for: Good for working on laptop (suitable_for_working_on_laptop)';
+        // $table_head[]   =  'Recycling: Batteries (has_recycling_batteries)';
+        // $table_head[]   =  'Recycling: Clothing (has_recycling_clothing)';
+        // $table_head[]   =  'Recycling: Electronics (has_recycling_electronics)';
+        // $table_head[]   =  'Recycling: Glass bottles (has_recycling_glass_bottles)';
+        // $table_head[]   =  'Recycling: Hazardous household materials (has_recycling_household_hazardous_waste)';
+        // $table_head[]   =  'Recycling: Ink cartridges (has_recycling_ink_cartridges)';
+        // $table_head[]   =  'Recycling: Light bulbs (has_recycling_light_bulbs)';
+        // $table_head[]   =  'Recycling: Metal cans (has_recycling_metal_cans)';
+        // $table_head[]   =  'Recycling: Plastic bags (has_recycling_plastic_bags)';
+        // $table_head[]   =  'Recycling: Plastic bottles (has_recycling_plastic_bottles)';
+        // $table_head[]   =  'Recycling: Plastic foam (has_recycling_plastic_foam)';
+        // $table_head[]   =  'Service options: Curbside pickup (has_curbside_pickup)';
+        // $table_head[]   =  'Service options: Delivery (has_delivery)';
+        // $table_head[]   =  'Service options: Dine-in (serves_dine_in)';
+        // $table_head[]   =  'Service options: Drive-through (has_drive_through)';
+        // $table_head[]   =  'Service options: Grocery pickup (has_grocery_pickup)';
+        // $table_head[]   =  'Service options: In-store pickup (has_in_store_pickup)';
+        // $table_head[]   =  'Service options: In-store shopping (has_in_store_shopping)';
+        $table_head[52]   =  'Service options: Has online care (has_video_visits)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): American Sign Language (american_sign_language_used)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Arabic (arabic_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Cantonese (cantonese_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Filipino (filipino_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): French (french_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): German (german_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Haitian Creole (haitian_creole_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Hindi (hindi_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Italian (italian_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Korean (korean_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Mandarin (mandarin_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Portuguese (portuguese_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Russian (russian_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Spanish (spanish_spoken)';
+        // $table_head[]   =  'Service options: Language assistance (languages_spoken): Vietnamese (vietnamese_spoken)';
+        // $table_head[]   =  'Service options: Meal service (has_meal_service)';
+        // $table_head[]   =  'Service options: No-contact delivery (has_no_contact_delivery)';
+        // $table_head[]   =  'Service options: Online appointments (offers_online_appointments)';
+        // $table_head[]   =  'Service options: Online classes (offers_online_classes)';
+        // $table_head[]   =  'Service options: Online estimates (offers_online_estimates)';
+        // $table_head[]   =  'Service options: Onsite services (has_onsite_services)';
+        // $table_head[]   =  'Service options: Outdoor seating (has_seating_outdoors)';
+        // $table_head[]   =  'Service options: Outdoor services (has_outdoor_services)';
+        // $table_head[]   =  'Service options: Same-day delivery (has_delivery_same_day)';
+        // $table_head[]   =  'Service options: Takeout (has_takeout)';
+        // $table_head[]   =  'Place page URLs: Appointment links (url_appointment)';
+        $table_head[44]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
+        // $table_head[]   =  'Place page URLs: Inventory search URL (url_inventory_search)';
+        // $table_head[]   =  'Place page URLs: Menu link (url_menu)';
+        // $table_head[]   =  'Place page URLs: Order ahead links (url_order_ahead)';
+        // $table_head[]   =  'Place page URLs: Reservations links (url_reservations)';
+        $table_head[46]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
+        // $table_head[]   =  'Amenities: In-room kitchens (kitchen_in_room)';
+        // $table_head[]   =  'Amenities: Wi-Fi (wi_fi)';
 
         $table_body = array();
         while( $query->have_posts() ) : $query->the_post();
@@ -1518,19 +1821,7 @@ function gmb_location_csv_export() {
                         $row[25] =  'Yes';
                     }
 
-                // From the business: Identifies as Black-owned (is_black_owned)
-                // Intentionally left blank
-                    // $row[38] =  '';
-
-                // From the business: Identifies as veteran-led (is_owned_by_veterans)
-                // Intentionally left blank
-                    // $row[39] =  '';
-
-                // From the business: Identifies as women-led (is_owned_by_women)
-                // Intentionally left blank
-                    // $row[40] =  '';
-
-                // Health &amp; safety: Appointment required (requires_appointments)
+                // Planning: Appointment required (requires_appointments)
                     if ( $covid19 ) {
                         if (!empty($location_gmb_appointments)) {
                             $row[26] =  $location_gmb_appointments;
@@ -1541,140 +1832,15 @@ function gmb_location_csv_export() {
                         $row[26] =  '';
                     }
 
-                // Health &amp; safety: Mask required (requires_masks_customers)
-                    if ( $covid19 ) {
-                        if (!empty($location_gmb_masks_customers)) {
-                            $row[27] =  $location_gmb_masks_customers;
-                        } else {
-                            $row[27] =  'Yes';
-                        }
-                    } else {
-                        $row[27] =  'No';
-                    }
-
-                // Health &amp; safety: Safety dividers at checkout (has_plexiglass_at_checkout)
-                    $row[28] =  '[NOT APPLICABLE]';
-
-                // Health &amp; safety: Staff get temperature checks (requires_temperature_check_staff)
-                    if ( $covid19 ) {
-                        if (!empty($location_gmb_temp_staff)) {
-                            $row[29] =  $location_gmb_temp_staff;
-                        } else {
-                            $row[29] =  'Yes';
-                        }
-                    } else {
-                        $row[29] =  'No';
-                    }
-
-                // Health &amp; safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)
-                    if ( $covid19 ) {
-                        if (!empty($location_gmb_sanitizing)) {
-                            $row[30] =  $location_gmb_sanitizing;
-                        } else {
-                            $row[30] =  'Yes';
-                        }
-                    } else {
-                        $row[30] =  'No';
-                    }
-
-                // Health &amp; safety: Staff wear masks (requires_masks_staff)
-                    if ( $covid19 ) {
-                        if (!empty($location_gmb_masks_staff)) {
-                            $row[31] =  $location_gmb_masks_staff;
-                        } else {
-                            $row[31] =  'Yes';
-                        }
-                    } else {
-                        $row[31] =  'No';
-                    }
-
-                // Health &amp; safety: Temperature check required (requires_temperature_check_customers)
-                    if ( $covid19 ) {
-                        if (!empty($location_gmb_temp_customers)) {
-                            $row[32] =  $location_gmb_temp_customers;
-                        } else {
-                            $row[32] =  'Yes';
-                        }
-                    } else {
-                        $row[32] =  'No';
-                    }
-
-                // Offerings: Passport photos (has_onsite_passport_photos)
-                    $row[33] = '[NOT APPLICABLE]';
-
-                // Payments: Cash-only (requires_cash_only)
-                    $row[34] = '[NOT APPLICABLE]';
-
-                // Payments: Checks (pay_check)
-                    $row[35] = '[NOT APPLICABLE]';
-
-                // Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)
-                    $row[36] = '[NOT APPLICABLE]';
-
-                // Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)
-                    $row[37] = '[NOT APPLICABLE]';
-
-                // Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)
-                    $row[38] = '[NOT APPLICABLE]';
-
-                // Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)
-                    $row[39] = '[NOT APPLICABLE]';
-
-                // Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)
-                    $row[40] = '[NOT APPLICABLE]';
-
-                // Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)
-                    $row[41] = '[NOT APPLICABLE]';
-
-                // Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)
-                    $row[42] = '[NOT APPLICABLE]';
-
-                // Payments: Debit cards (pay_debit_card)
-                    $row[43] = '[NOT APPLICABLE]';
-
-                // Payments: NFC mobile payments (pay_mobile_nfc)
-                    $row[44] = '[NOT APPLICABLE]';
-
-                // Place page URLs: Appointment links (url_appointment)
-                // Intentionally left blank
-                    // $row[60] =  '';
+                // Service options: Has online care (has_video_visits)
+                // Value based on the relevant location profile
+                    $row[52] = $location_telemed_query ? 'Yes' : '';
 
                 // Place page URLs: COVID-19 info link (url_covid_19_info_page)
-                    $row[45] =  'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link&utm_specs=' . $store_code;
-
-                // Place page URLs: Menu link (url_menu)
-                    $row[46] = '[NOT APPLICABLE]';
+                    $row[44] =  'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link&utm_specs=' . $store_code;
 
                 // Place page URLs: Virtual care link (url_facility_telemedicine_page)
-                    $row[47] =  $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
-
-                // Planning: LGBTQ friendly (welcomes_lgbtq)
-                    // $row[64] = '';
-
-                // Planning: Transgender safespace (is_transgender_safespace)
-                    // $row[65] = '';
-
-                // Service options: Curbside pickup (has_curbside_pickup)
-                    $row[48] = '[NOT APPLICABLE]';
-
-                // Service options: Delivery (has_delivery)
-                    $row[49] = '[NOT APPLICABLE]';
-
-                // Service options: Drive-through (has_drive_through)
-                    $row[50] = '[NOT APPLICABLE]';
-
-                // Service options: In-store pickup (has_in_store_pickup)
-                    $row[51] = '[NOT APPLICABLE]';
-
-                // Service options: In-store shopping (has_in_store_shopping)
-                    $row[52] = '[NOT APPLICABLE]';
-
-                // Service options: Online care (has_video_visits)
-                // Value based on the relevant location profile
-                    $row[53] = $location_telemed_query ? 'Yes' : '';
-
-                // Service options: Same-day delivery (has_delivery_same_day)
-                    $row[54] = '[NOT APPLICABLE]';
+                    $row[46] =  $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
                 
             } // endif
             $table_body[] = $row; 

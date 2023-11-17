@@ -306,7 +306,7 @@
         },
         {
             "key": "field_condition_physicians",
-            "label": "Providers treating this condition",
+            "label": "Providers diagnosing or treating this condition",
             "name": "condition_physicians",
             "type": "post_object",
             "instructions": "",

@@ -253,7 +253,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-						<h2 class="module-title"><span class="title">Providers Performing <?php echo single_cat_title( '', false ); ?></span></h2>
+						<h2 class="module-title"><span class="title">Providers Performing or Prescribing <?php echo single_cat_title( '', false ); ?></span></h2>
 						<p class="note">Note that every condition listed above may not be treated by each provider listed below. Review each provider for availability.</p>	
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">

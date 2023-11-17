@@ -26,8 +26,12 @@
 	?>
 	<?php
 		$full_name = get_field('physician_first_name', $id) .' ' .(get_field('physician_middle_name', $id) ? get_field('physician_middle_name', $id) . ' ' : '') . get_field('physician_last_name', $id) . (get_field('physician_pedigree', $id) ? '&nbsp;' . get_field('physician_pedigree', $id) : '') .  ( $degree_list ? ', ' . $degree_list : '' ); 
-		$full_name_attr = str_replace('"', '\'', $full_name);
-		$full_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($full_name_attr, null, 'utf-8')));
+		$full_name_attr = $full_name;
+		$full_name_attr = str_replace('"', '\'', $full_name_attr); // Replace double quotes with single quote
+		$full_name_attr = str_replace('&#8217;', '\'', $full_name_attr); // Replace right single quote with single quote
+		$full_name_attr = htmlentities($full_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+		$full_name_attr = str_replace('&nbsp;', ' ', $full_name_attr); // Convert non-breaking space with normal space
+		$full_name_attr = html_entity_decode($full_name_attr); // Convert HTML entities to their corresponding characters
 		$physician_resident = get_field('physician_resident', $id);
 		$physician_resident_name = 'Resident Physician';
 		$physician_title = get_field('physician_title', $id);

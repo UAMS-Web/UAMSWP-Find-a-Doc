@@ -13,8 +13,12 @@
     $resource_page = ( isset($resource_page) && !empty($resource_page) ) ? $resource_page : 'single';
 
     $resource_title = get_the_title($id);
-    $resource_title_attr = str_replace('"', '\'', $resource_title);
-    $resource_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($resource_title_attr, null, 'utf-8')));
+    $resource_title_attr = $resource_title;
+    $resource_title_attr = str_replace('"', '\'', $resource_title_attr); // Replace double quotes with single quote
+    $resource_title_attr = str_replace('&#8217;', '\'', $resource_title_attr); // Replace right single quote with single quote
+    $resource_title_attr = htmlentities($resource_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+    $resource_title_attr = str_replace('&nbsp;', ' ', $resource_title_attr); // Convert non-breaking space with normal space
+    $resource_title_attr = html_entity_decode($resource_title_attr); // Convert HTML entities to their corresponding characters
 
     $resource_type = get_field('clinical_resource_type', $id);
     $resource_type_value = $resource_type['value'];
@@ -33,8 +37,12 @@
         // AND IF the resource type value is in $resource_button_text_arr...
         $resource_button_text = $resource_button_text_arr[$resource_type_value]; // Set the button text from the corresponding value from the array
     }
-    $resource_button_text_attr = str_replace('"', '\'', $resource_button_text);
-    $resource_button_text_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($resource_button_text_attr, null, 'utf-8')));
+    $resource_button_text_attr = $resource_button_text;
+    $resource_button_text_attr = str_replace('"', '\'', $resource_button_text_attr); // Replace double quotes with single quote
+    $resource_button_text_attr = str_replace('&#8217;', '\'', $resource_button_text_attr); // Replace right single quote with single quote
+    $resource_button_text_attr = htmlentities($resource_button_text_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+    $resource_button_text_attr = str_replace('&nbsp;', ' ', $resource_button_text_attr); // Convert non-breaking space with normal space
+    $resource_button_text_attr = html_entity_decode($resource_button_text_attr); // Convert HTML entities to their corresponding characters
     $resource_label = $resource_button_text_attr . ', ' . $resource_title_attr;
     
     $resource_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags( get_the_content($id) );
@@ -226,8 +234,12 @@
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
                                                         $associate_title = $resource_provider_medium_name;
-                                                        $associate_title_attr = str_replace('"', '\'', $associate_title);
-                                                        $associate_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($associate_title_attr, null, 'utf-8')));
+                                                        $associate_title_attr = $associate_title;
+                                                        $associate_title_attr = str_replace('"', '\'', $associate_title_attr); // Replace double quotes with single quote
+                                                        $associate_title_attr = str_replace('&#8217;', '\'', $associate_title_attr); // Replace right single quote with single quote
+                                                        $associate_title_attr = htmlentities($associate_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+                                                        $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
+                                                        $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
         
                                                         echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;
@@ -265,8 +277,12 @@
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
                                                         $associate_title = get_the_title( $associate );
-                                                        $associate_title_attr = str_replace('"', '\'', $associate_title);
-                                                        $associate_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($associate_title_attr, null, 'utf-8')));
+                                                        $associate_title_attr = $associate_title;
+                                                        $associate_title_attr = str_replace('"', '\'', $associate_title_attr); // Replace double quotes with single quote
+                                                        $associate_title_attr = str_replace('&#8217;', '\'', $associate_title_attr); // Replace right single quote with single quote
+                                                        $associate_title_attr = htmlentities($associate_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+                                                        $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
+                                                        $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
         
                                                         echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;
@@ -304,8 +320,12 @@
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
                                                         $associate_title = get_the_title( $associate );
-                                                        $associate_title_attr = str_replace('"', '\'', $associate_title);
-                                                        $associate_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($associate_title_attr, null, 'utf-8')));
+                                                        $associate_title_attr = $associate_title;
+                                                        $associate_title_attr = str_replace('"', '\'', $associate_title_attr); // Replace double quotes with single quote
+                                                        $associate_title_attr = str_replace('&#8217;', '\'', $associate_title_attr); // Replace right single quote with single quote
+                                                        $associate_title_attr = htmlentities($associate_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+                                                        $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
+                                                        $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
         
                                                         echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;
@@ -343,8 +363,12 @@
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
                                                         $associate_title = get_the_title( $associate );
-                                                        $associate_title_attr = str_replace('"', '\'', $associate_title);
-                                                        $associate_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($associate_title_attr, null, 'utf-8')));
+                                                        $associate_title_attr = $associate_title;
+                                                        $associate_title_attr = str_replace('"', '\'', $associate_title_attr); // Replace double quotes with single quote
+                                                        $associate_title_attr = str_replace('&#8217;', '\'', $associate_title_attr); // Replace right single quote with single quote
+                                                        $associate_title_attr = htmlentities($associate_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+                                                        $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
+                                                        $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
         
                                                         echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;
@@ -382,8 +406,12 @@
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
                                                         $associate_title = get_the_title( $associate );
-                                                        $associate_title_attr = str_replace('"', '\'', $associate_title);
-                                                        $associate_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($associate_title_attr, null, 'utf-8')));
+                                                        $associate_title_attr = $associate_title;
+                                                        $associate_title_attr = str_replace('"', '\'', $associate_title_attr); // Replace double quotes with single quote
+                                                        $associate_title_attr = str_replace('&#8217;', '\'', $associate_title_attr); // Replace right single quote with single quote
+                                                        $associate_title_attr = htmlentities($associate_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+                                                        $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
+                                                        $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
         
                                                         echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;

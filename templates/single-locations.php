@@ -11,6 +11,12 @@ if (empty($excerpt)){
     }
 }
 $page_title = get_the_title( );
+$page_title_attr = $page_title;
+$page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
+$page_title_attr = str_replace('&#8217;', '\'', $page_title_attr); // Replace right single quote with single quote
+$page_title_attr = htmlentities($page_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
+$page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
 
 
 // Parent Location 
@@ -254,6 +260,7 @@ $args = (array(
 ));
 $resource_query = new WP_Query( $args );
 
+// Override theme's method of defining the meta description
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -262,12 +269,25 @@ function sp_titles_desc($html) {
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
+$location_city = get_field('location_city', $post_id); // Get the location's city
 function uamswp_fad_title($html) { 
-	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = get_the_title() . ' | ' . get_bloginfo( "name" );
-	return $html;
+    global $page_title_attr;
+	global $location_city;
+    //you can add here all your conditions as if is_page(), is_category() etc.. 
+    $meta_title_chars_max = 60; // Set the maximum number of characters to be used in the <title /> value.
+    $meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" ); // Define the base <title /> value: "[location name] | [site name]"
+    $meta_title_base_chars = strlen( $meta_title_base ); // Count the number of characters in the base <title /> value
+    $meta_title_enhanced_addition = ' | ' . $location_city; // Define a string with the location's city that may be injected into the <title /> value
+    $meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" ); // Define the enhanced <title /> value: "[location name] | [city] | [site name]"
+    $meta_title_enhanced_chars = strlen( $meta_title_enhanced ); // Count the number of characters in the enhanced <title /> value
+    if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) { // If the enhanced <title /> value is less than or equal to the maximum number of characters to be used in the <title /> value...
+        $html = $meta_title_enhanced; // ... use the enhanced <title /> value
+    } else { // Otherwise...
+        $html = $meta_title_base; // ... use the base <title /> value
+    }
+    return $html;
 }
-// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 get_header();
 
@@ -452,8 +472,12 @@ while ( have_posts() ) : the_post(); ?>
 			$portal = get_term($location_portal, "portal");
 			$portal_slug = $portal->slug;
 			$portal_name = $portal->name;
-			$portal_name_attr = str_replace('"', '\'', $portal_name);
-			$portal_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($portal_name_attr, null, 'utf-8')));
+			$portal_name_attr = $portal_name;
+			$portal_name_attr = str_replace('"', '\'', $portal_name_attr); // Replace double quotes with single quote
+			$portal_name_attr = str_replace('&#8217;', '\'', $portal_name_attr); // Replace right single quote with single quote
+			$portal_name_attr = htmlentities($portal_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+			$portal_name_attr = str_replace('&nbsp;', ' ', $portal_name_attr); // Convert non-breaking space with normal space
+			$portal_name_attr = html_entity_decode($portal_name_attr); // Convert HTML entities to their corresponding characters
 			$portal_content = get_field('portal_content', $portal);
 			$portal_link = get_field('portal_url', $portal);
 			if ($portal_link) {

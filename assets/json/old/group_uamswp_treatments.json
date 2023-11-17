@@ -306,7 +306,7 @@
         },
         {
             "key": "field_treatment_procedure_physicians",
-            "label": "Providers for this Treatment or Procedure",
+            "label": "Providers performing or prescribing this treatment or procedure",
             "name": "treatment_procedure_physicians",
             "type": "post_object",
             "instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",

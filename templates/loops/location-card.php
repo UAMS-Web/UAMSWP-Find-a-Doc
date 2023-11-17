@@ -39,8 +39,12 @@
     if ($parent_location) {
         $parent_id = $parent_location->ID;
         $parent_title = $parent_location->post_title;
-        $parent_title_attr = str_replace('"', '\'', $parent_title);
-        $parent_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($parent_title_attr, null, 'utf-8')));
+        $parent_title_attr = $parent_title;
+        $parent_title_attr = str_replace('"', '\'', $parent_title_attr); // Replace double quotes with single quote
+        $parent_title_attr = str_replace('&#8217;', '\'', $parent_title_attr); // Replace right single quote with single quote
+        $parent_title_attr = htmlentities($parent_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+        $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space with normal space
+        $parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters
         $parent_url = get_permalink( $parent_id );
         $featured_image = get_the_post_thumbnail($parent_id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr , 'loading' => 'lazy' ]);
         $address_id = $parent_id;
@@ -204,8 +208,12 @@
             } elseif ($location_modified_hours_display) {
                 $alert_label = 'Learn more about the modified hours.';
             }
-            $alert_label_attr = str_replace('"', '\'', $alert_label);
-            $alert_label_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($alert_label_attr, null, 'utf-8')));
+            $alert_label_attr = $alert_label;
+            $alert_label_attr = str_replace('"', '\'', $alert_label_attr); // Replace double quotes with single quote
+            $alert_label_attr = str_replace('&#8217;', '\'', $alert_label_attr); // Replace right single quote with single quote
+            $alert_label_attr = htmlentities($alert_label_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+            $alert_label_attr = str_replace('&nbsp;', ' ', $alert_label_attr); // Convert non-breaking space with normal space
+            $alert_label_attr = html_entity_decode($alert_label_attr); // Convert HTML entities to their corresponding characters
             ?>
             <div class="alert alert-warning" role="alert">
                 <?php if ($location_closing_display) {

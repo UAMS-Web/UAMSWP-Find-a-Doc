@@ -1,0 +1,73 @@
+
+{
+	"key": "group_clinical_resource_labels",
+	"title": "Clinical Resources Labels",
+	"fields": [
+		{
+			"key": "field_clinical_resource_single_name",
+			"label": "Single Item Name",
+			"name": "clinical_resource_single_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default single item name will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Clinical Resource",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_plural_name",
+			"label": "Plural Item Name",
+			"name": "clinical_resource_plural_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default plural item name will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Clinical Resources",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-resources"
+			}
+		]
+	],
+	"menu_order": 10,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
+}

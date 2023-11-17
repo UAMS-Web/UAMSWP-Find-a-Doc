@@ -251,8 +251,8 @@
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-12">
-									<h2 class="module-title"><span class="title">Providers Treating <?php echo single_cat_title( '', false ); ?></span></h2>
-									<p class="note">Note that every treatment or procedure listed above may not be provided by each provider listed below. Review each provider for availability.</p>
+									<h2 class="module-title"><span class="title">Providers Diagnosing or Treating <?php echo single_cat_title( '', false ); ?></span></h2>
+									<p class="note">Note that every provider listed below may not perform or prescribe all treatments or procedures related to  <?php echo single_cat_title( '', false ); ?>. Review each provider for availability.</p>
 									<div class="card-list-container">
 										<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 											<?php

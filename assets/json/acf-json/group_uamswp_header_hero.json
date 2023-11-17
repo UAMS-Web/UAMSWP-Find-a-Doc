@@ -1,0 +1,363 @@
+{
+	"key": "group_uamswp_header_hero",
+	"title": "Hero Header Style Options",
+	"fields": [
+		{
+			"key": "field_fad_hero_repeater",
+			"label": "Hero Slide(s)",
+			"name": "page_header_hero",
+			"type": "repeater",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"layout": "block",
+			"acfe_seamless_style": 0,
+			"acfe_settings": "",
+			"sub_fields": [
+				{
+					"key": "field_hero_text_info",
+					"label": "Text Information",
+					"name": "",
+					"type": "accordion",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 0
+				},
+				{
+					"key": "field_hero_heading",
+					"label": "Heading",
+					"name": "hero_heading",
+					"type": "text",
+					"instructions": "49 character limit.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": 49
+				},
+				{
+					"key": "field_hero_body",
+					"label": "Body",
+					"name": "hero_body",
+					"type": "textarea",
+					"instructions": "177 character limit.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"maxlength": 177,
+					"rows": 4,
+					"new_lines": ""
+				},
+				{
+					"key": "field_hero_button_text",
+					"label": "Button Text",
+					"name": "hero_button_text",
+					"type": "text",
+					"instructions": "29 character limit.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": "29"
+				},
+				{
+					"key": "field_hero_button_url",
+					"label": "Button Link",
+					"name": "hero_button_url",
+					"type": "link",
+					"instructions": "Include http:// or https://",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_hero_button_text",
+								"operator": "!=empty"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"return_format": "array"
+				},
+				{
+					"key": "field_hero_button_description",
+					"label": "Button Link Description",
+					"name": "hero_button_description",
+					"type": "text",
+					"instructions": "This is needed for accessibility. It helps differentiate between multiple links that use the same text like \"Learn more\". Describe the intent of the link, like \"Learn more about the ABC Department\".",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_hero_button_text",
+								"operator": "!=empty"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_hero_image_info",
+					"label": "Image Information",
+					"name": "",
+					"type": "accordion",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"open": 0,
+					"multi_expand": 0,
+					"endpoint": 0
+				},
+				{
+					"key": "field_hero_image_intro",
+					"label": "",
+					"name": "",
+					"type": "message",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"message": "<p>If you do not provide images for Tablet and Mobile image, the image you provide for Desktop will be automatically cropped for the other two views. This has a possibility of yielding undesirable results.</p>",
+					"new_lines": "wpautop",
+					"esc_html": 0
+				},
+				{
+					"key": "field_hero_image_desktop",
+					"label": "Image Desktop",
+					"name": "hero_image_desktop",
+					"type": "image",
+					"instructions": "Recommended dimensions: 2870x1536 or larger. Minimum dimensions: 1435x768. The image will be automatically cropped to a 1.8685:1 aspect ratio.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"uploader": "",
+					"acfe_thumbnail": 0,
+					"return_format": "id",
+					"preview_size": "thumbnail",
+					"min_width": "1435",
+					"min_height": "768",
+					"min_size": "",
+					"max_width": "",
+					"max_height": "",
+					"max_size": "",
+					"mime_types": "jpg,jpeg",
+					"ratio_width": 1.8685,
+					"ratio_height": 1,
+					"ratio_margin": 25,
+					"acfe_settings": "",
+					"acfe_validate": "",
+					"library": "all"
+				},
+				{
+					"key": "field_hero_image_tablet",
+					"label": "Image Tablet",
+					"name": "hero_image_tablet",
+					"type": "image",
+					"instructions": "Recommended dimensions: 1156x818 or larger. Minimum dimensions: 578x409. The image will be automatically cropped to a 1.4132:1 aspect ratio.",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"uploader": "",
+					"acfe_thumbnail": 0,
+					"return_format": "id",
+					"preview_size": "thumbnail",
+					"min_width": "578",
+					"min_height": "409",
+					"min_size": "",
+					"max_width": "",
+					"max_height": "",
+					"max_size": "",
+					"mime_types": "jpg,jpeg",
+					"ratio_width": 1.8685,
+					"ratio_height": 1,
+					"ratio_margin": 95,
+					"acfe_settings": "",
+					"acfe_validate": "",
+					"library": "all"
+				},
+				{
+					"key": "field_hero_image_mobile",
+					"label": "Image Mobile",
+					"name": "hero_image_mobile",
+					"type": "image",
+					"instructions": "Recommended dimensions: 1536x864 or larger. Minimum dimensions: 768x432. The image will be automatically cropped to a 16:9 aspect ratio.",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"uploader": "",
+					"acfe_thumbnail": 0,
+					"return_format": "id",
+					"preview_size": "thumbnail",
+					"min_width": "768",
+					"min_height": "432",
+					"min_size": "",
+					"max_width": "",
+					"max_height": "",
+					"max_size": "",
+					"mime_types": "jpg,jpeg",
+					"ratio_width": 1.8685,
+					"ratio_height": 1,
+					"ratio_margin": 19,
+					"acfe_settings": "",
+					"acfe_validate": "",
+					"library": "all"
+				},
+				{
+					"key": "field_hero_image_alt_text",
+					"label": "Image Alt Text Override",
+					"name": "hero_image_alt_text",
+					"type": "text",
+					"instructions": "Alt text (alternative text} refers to invisible description of images which are read aloud to blind users on a screen reader. If you want to define alt text that is different from the alt text defined for this image in the media library, you can do so here.",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": 125
+				},
+				{
+					"key": "field_hero_color_info",
+					"label": "Color Option",
+					"name": "",
+					"type": "accordion",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"open": 0,
+					"multi_expand": 0,
+					"endpoint": 0
+				},
+				{
+					"key": "field_hero_background_color",
+					"label": "Background Color",
+					"name": "hero_background_color",
+					"type": "select",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"choices": {
+						"auto": "Auto",
+						"blue": "Blue",
+						"green": "Green",
+						"teal-blue": "Teal Blue",
+						"eggplant": "Eggplant",
+						"maroon": "Maroon",
+						"orange": "Orange"
+					},
+					"default_value": "auto",
+					"allow_null": 0,
+					"multiple": 0,
+					"ui": 0,
+					"return_format": "value",
+					"ajax": 0,
+					"placeholder": ""
+				}
+			],
+			"collapsed": "field_hero_heading",
+			"min": 1,
+			"max": 4,
+			"button_label": "Add Slide"
+		}
+	],
+	"location": "",
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "above_field",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_meta": "",
+	"acfe_note": ""
+}

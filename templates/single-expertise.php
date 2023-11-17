@@ -8,10 +8,23 @@
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
-$page_title_attr = str_replace('"', '\'', $page_title);
-$page_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($page_title_attr, null, 'utf-8')));
+$page_title_attr = $page_title;
+$page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
+$page_title_attr = htmlentities($page_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
+$page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
+$expertise_archive_title_attr = $expertise_archive_title;
+$expertise_archive_title_attr = str_replace('"', '\'', $expertise_archive_title_attr); // Replace double quotes with single quote
+$expertise_archive_title_attr = htmlentities($expertise_archive_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$expertise_archive_title_attr = str_replace('&nbsp;', ' ', $expertise_archive_title_attr); // Convert non-breaking space with normal space
+$expertise_archive_title_attr = html_entity_decode($expertise_archive_title_attr); // Convert HTML entities to their corresponding characters
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
+$expertise_single_name_attr = $expertise_single_name;
+$expertise_single_name_attr = str_replace('"', '\'', $expertise_single_name_attr); // Replace double quotes with single quote
+$expertise_single_name_attr = htmlentities($expertise_single_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$expertise_single_name_attr = str_replace('&nbsp;', ' ', $expertise_single_name_attr); // Convert non-breaking space with normal space
+$expertise_single_name_attr = html_entity_decode($expertise_single_name_attr); // Convert HTML entities to their corresponding characters
 
 // Parent Area of Expertise 
 $expertise_parent_id = wp_get_post_parent_id($page_id);
@@ -28,19 +41,35 @@ if ($expertise_has_parent && $expertise_parent_id) {
 if ($parent_expertise) {
     $parent_id = $parent_expertise->ID;
     $parent_title = $parent_expertise->post_title;
-    $parent_title_attr = str_replace('"', '\'', $parent_title);
-    $parent_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($parent_title_attr, null, 'utf-8')));
+    $parent_title_attr = $parent_title;
+    $parent_title_attr = str_replace('"', '\'', $parent_title_attr); // Replace double quotes with single quote
+    $parent_title_attr = str_replace('&#8217;', '\'', $parent_title_attr); // Replace right single quote with single quote
+    $parent_title_attr = htmlentities($parent_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+    $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space with normal space
+    $parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters
+
     $parent_url = get_permalink( $parent_id );
 }
 
 // Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
-    global $page_title;
-	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = $page_title . ' | ' . get_bloginfo( "name" );
-	return $html;
+    global $page_title_attr;
+    global $expertise_single_name_attr;
+    //you can add here all your conditions as if is_page(), is_category() etc.. 
+    $meta_title_chars_max = 60;
+    $meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
+    $meta_title_base_chars = strlen( $meta_title_base );
+    $meta_title_enhanced_addition = ' | ' . $expertise_single_name_attr;
+    $meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
+    $meta_title_enhanced_chars = strlen( $meta_title_enhanced );
+    if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
+        $html = $meta_title_enhanced;
+    } else {
+        $html = $meta_title_base;
+    }
+    return $html;
 }
-// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
@@ -650,7 +679,7 @@ function uamswp_expertise_podcast() {
                     <div class="content-width mt-8" id="radiomd-embedded-filtered-tag"></div>
                 </div>
                 <div class="col-12 more">
-                    <p class="lead">Find other great episodes on other topics and from other UAMS providers.</p>
+                    <p class="lead">Find other great episodes on other topics and from other UAMS Health providers.</p>
                     <div class="cta-container">
                         <a href="/podcast/" class="btn btn-primary" aria-label="Listen to more episodes of the UAMS Health Talk podcast">Listen to More Episodes</a>
                     </div>
