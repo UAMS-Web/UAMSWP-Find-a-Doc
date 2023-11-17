@@ -40,19 +40,32 @@ function asp_custom_link_meta_results( $results ) {
 	  return $results;
 	// }
 }
-// Enqueue for Admin
-function uamswp_admin_scripts ( $hook ) {
 
-    if( $hook == 'post.php' ) {
-		wp_enqueue_script( 'acf-admin-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-admin.js', array('jquery'), null, true );
-		wp_enqueue_script( 'medline-acf-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-medline.js', array('jquery'), null, true );
-        // wp_enqueue_stylesheet( 'plugin-main-style', plugins_url( 'css/plugin-main.css', dirname( __FILE__) ) );
+// Enqueue for Admin
+
+	function uamswp_admin_scripts ( $hook ) {
+
+		if ( $hook == 'post.php' ) {
+
+			wp_enqueue_script( 'acf-admin-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-admin.js', array('jquery'), null, true );
+			wp_enqueue_script( 'medline-acf-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-medline.js', array('jquery'), null, true );
+			// wp_enqueue_stylesheet( 'plugin-main-style', plugins_url( 'css/plugin-main.css', dirname( __FILE__) ) );
+
+		}
+
+		// if (
+		// 	$hook == 'term.php'
+		// 	||
+		// 	$hook == 'edit-tags.php'
+		// ) {
+		//
+		// 	wp_enqueue_script( 'medline-acf-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-medline.js', array('jquery'), null, true );
+		//
+		// }
+
 	}
-	// if( $hook == 'term.php' || $hook == 'edit-tags.php') {
-	// 	wp_enqueue_script( 'medline-acf-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-medline.js', array('jquery'), null, true );
-	// }
-}
-add_action('admin_enqueue_scripts', 'uamswp_admin_scripts');
+
+	add_action('admin_enqueue_scripts', 'uamswp_admin_scripts');
 
 // pubmed finder
 new pubmed_field_on_change();
