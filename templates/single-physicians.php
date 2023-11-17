@@ -220,13 +220,28 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 
 // Get clinical specialty and occupation title values
 
-	$phys_title = get_field('physician_title',$post->ID);
-	$phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
-	$phys_title_name_attr = $phys_title_name;
-	$phys_title_name_attr = str_replace('"', '\'', $phys_title_name_attr); // Replace double quotes with single quote
-	$phys_title_name_attr = htmlentities($phys_title_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-	$phys_title_name_attr = str_replace('&nbsp;', ' ', $phys_title_name_attr); // Convert non-breaking space with normal space
-	$phys_title_name_attr = html_entity_decode($phys_title_name_attr); // Convert HTML entities to their corresponding characters
+	if ( $resident ) {
+
+		$phys_title = $resident;
+		$phys_title_name = $resident;
+		$phys_title_name_attr = $phys_title_name;
+		$phys_title_name_attr = str_replace('"', '\'', $phys_title_name_attr); // Replace double quotes with single quote
+		$phys_title_name_attr = htmlentities($phys_title_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+		$phys_title_name_attr = str_replace('&nbsp;', ' ', $phys_title_name_attr); // Convert non-breaking space with normal space
+		$phys_title_name_attr = html_entity_decode($phys_title_name_attr); // Convert HTML entities to their corresponding characters
+
+	} else {
+
+		$phys_title = get_field('physician_title',$post->ID);
+		$phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
+		$phys_title_name_attr = $phys_title_name;
+		$phys_title_name_attr = str_replace('"', '\'', $phys_title_name_attr); // Replace double quotes with single quote
+		$phys_title_name_attr = htmlentities($phys_title_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+		$phys_title_name_attr = str_replace('&nbsp;', ' ', $phys_title_name_attr); // Convert non-breaking space with normal space
+		$phys_title_name_attr = html_entity_decode($phys_title_name_attr); // Convert HTML entities to their corresponding characters
+
+	}
+
 	$vowels = array('a','e','i','o','u'); // Define a list of variables for use in determining which indefinite article to use (a vs. an)
 	if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
 		$phys_title_indef_article = 'an'; // If the clinical title starts with a vowel, use "an"
