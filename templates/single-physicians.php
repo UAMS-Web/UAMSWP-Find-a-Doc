@@ -211,14 +211,14 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 	if ( $resident ) {
 
 		$provider_specialty = $resident;
-		$provider_occupation_title_name = $resident;
-		$provider_occupation_title_name_attr = $provider_occupation_title_name ? uamswp_attr_conversion($provider_occupation_title_name) : '';
+		$provider_occupation_title = $resident;
+		$provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conversion($provider_occupation_title) : '';
 
 	} else {
 
 		$provider_specialty = get_field('physician_title',$post->ID);
-		$provider_occupation_title_name = $resident ? $resident_title_name : get_term( $provider_specialty, 'clinical_title' )->name;
-		$provider_occupation_title_name_attr = $provider_occupation_title_name ? uamswp_attr_conversion($provider_occupation_title_name) : '';
+		$provider_occupation_title = $resident ? $resident_title_name : get_term( $provider_specialty, 'clinical_title' )->name;
+		$provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conversion($provider_occupation_title) : '';
 
 	}
 
@@ -226,7 +226,7 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 
 		if (
 			in_array(
-				strtolower($provider_occupation_title_name)[0],
+				strtolower($provider_occupation_title)[0],
 				array( 'a', 'e', 'i', 'o', 'u' )
 			)
 		) {
@@ -262,7 +262,7 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 
 				if (
 					substr(
-						strtolower($provider_occupation_title_name),
+						strtolower($provider_occupation_title),
 						0,
 						strlen($exception)
 					) == strtolower($exception)
@@ -356,7 +356,7 @@ if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
     } else {
-        $fallback_desc = $medium_name_attr . ' is ' . ($provider_occupation_title_name ? $provider_occupation_title_indef_article . ' ' . strtolower($provider_occupation_title_name) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') .  ' employed by UAMS Health.';
+        $fallback_desc = $medium_name_attr . ' is ' . ($provider_occupation_title ? $provider_occupation_title_indef_article . ' ' . strtolower($provider_occupation_title) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') .  ' employed by UAMS Health.';
         $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
     }
 }
@@ -373,7 +373,7 @@ add_filter('seopress_titles_desc', 'sp_titles_desc');
 // Override theme's method of defining the page title
 function uamswp_fad_title($html) {
     global $full_name_attr;
-    global $provider_occupation_title_name_attr;
+    global $provider_occupation_title_attr;
     global $primary_appointment_city_attr;
     global $expertise_primary_name;
 
@@ -385,15 +385,15 @@ function uamswp_fad_title($html) {
     $meta_title_base_chars = strlen( $meta_title_base ); // Count the characters in the meta title
 
     // Base meta title ("{Full display name} | {Clinical title} | UAMS Health")
-    $meta_title_enhanced = $full_name_attr . $meta_title_separator . $provider_occupation_title_name_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+    $meta_title_enhanced = $full_name_attr . $meta_title_separator . $provider_occupation_title_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
     $meta_title_enhanced_chars = strlen( $meta_title_enhanced ); // Count the characters in the meta title
 
     // Enhanced meta title level 1 ("{Full display name} | {Clinical title} | {City of primary location} | UAMS Health")
-    $meta_title_enhanced_x2 = $full_name_attr . $meta_title_separator . $provider_occupation_title_name_attr . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+    $meta_title_enhanced_x2 = $full_name_attr . $meta_title_separator . $provider_occupation_title_attr . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
     $meta_title_enhanced_x2_chars = strlen( $meta_title_enhanced_x2 ); // Count the characters in the meta title
 
     // Enhanced meta title level 2 ("{Full display name} | {Clinical title} | {Primary area of expertise} | {City of primary location} | UAMS Health")
-    $meta_title_enhanced_x3 = $full_name_attr . $meta_title_separator . $provider_occupation_title_name_attr . $meta_title_separator . $expertise_primary_name . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+    $meta_title_enhanced_x3 = $full_name_attr . $meta_title_separator . $provider_occupation_title_attr . $meta_title_separator . $expertise_primary_name . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
     $meta_title_enhanced_x3_chars = strlen( $meta_title_enhanced_x3 ); // Count the characters in the meta title
 
     if ( $expertise_primary_name && ( $meta_title_enhanced_x3_chars <= $meta_title_chars_max ) ) {
@@ -716,8 +716,8 @@ while ( have_posts() ) : the_post();
                         <span class="name"><?php echo $full_name; ?></span>
                         <?php
 
-                        if ($provider_occupation_title_name && !empty($provider_occupation_title_name)) { ?>
-                            <span class="subtitle"><?php echo ($provider_occupation_title_name ? $provider_occupation_title_name : ''); ?></span>
+                        if ($provider_occupation_title && !empty($provider_occupation_title)) { ?>
+                            <span class="subtitle"><?php echo ($provider_occupation_title ? $provider_occupation_title : ''); ?></span>
                         <?php } ?>
                     </h1>
                     <?php
