@@ -305,26 +305,27 @@ if ( $expertises ) {
     }
 }
 
-// Hide Sections
-$hide_medical_ontology = false;
-$provider_region = get_field('physician_region',$post->ID);
-$provider_service_line = get_field('physician_service_line',$post->ID);
-if( have_rows('remove_ontology_criteria', 'option') ):
-    while( have_rows('remove_ontology_criteria', 'option') ): the_row();
-        $remove_region = get_sub_field('remove_regions', 'option');
-        $remove_service_line = get_sub_field('remove_service_lines', 'option');
-        if ( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && empty($remove_service_line) ) {
-            $hide_medical_ontology = true;
-            break;
-        } elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
-            $hide_medical_ontology = true;
-            break;
-        } elseif( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
-            $hide_medical_ontology = true;
-            break;
-        }
-    endwhile;
-endif;
+// Query for whether to conditionally suppress ontology sections based on based on region and service line
+
+	$hide_medical_ontology = false;
+	$provider_region = get_field('physician_region',$post->ID);
+	$provider_service_line = get_field('physician_service_line',$post->ID);
+	if( have_rows('remove_ontology_criteria', 'option') ):
+		while( have_rows('remove_ontology_criteria', 'option') ): the_row();
+			$remove_region = get_sub_field('remove_regions', 'option');
+			$remove_service_line = get_sub_field('remove_service_lines', 'option');
+			if ( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && empty($remove_service_line) ) {
+				$hide_medical_ontology = true;
+				break;
+			} elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
+				$hide_medical_ontology = true;
+				break;
+			} elseif( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
+				$hide_medical_ontology = true;
+				break;
+			}
+		endwhile;
+	endif;
 
 // Set meta description
 if (empty($excerpt)){
