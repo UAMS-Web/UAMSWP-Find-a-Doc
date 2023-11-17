@@ -213,6 +213,7 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 		$provider_specialty = '';
 		$provider_specialty_term = '';
 		$provider_specialty_name = '';
+		$provider_occupation_title = '';
 
 	if ( $resident ) {
 
