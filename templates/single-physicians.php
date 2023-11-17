@@ -125,29 +125,17 @@
 		// Full name (e.g., "Leonard H. McCoy, M.D.")
 
 			$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
-			$full_name_attr = $full_name;
-			$full_name_attr = str_replace('"', '\'', $full_name_attr); // Replace double quotes with single quote
-			$full_name_attr = htmlentities($full_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-			$full_name_attr = str_replace('&nbsp;', ' ', $full_name_attr); // Convert non-breaking space with normal space
-			$full_name_attr = html_entity_decode($full_name_attr); // Convert HTML entities to their corresponding characters
+			$full_name_attr = $full_name ? uamswp_attr_conversion($full_name) : '';
 
 		// Medium name (e.g., "Dr. Leonard H. McCoy")
 
 			$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
-			$medium_name_attr = $medium_name;
-			$medium_name_attr = str_replace('"', '\'', $medium_name_attr); // Replace double quotes with single quote
-			$medium_name_attr = htmlentities($medium_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-			$medium_name_attr = str_replace('&nbsp;', ' ', $medium_name_attr); // Convert non-breaking space with normal space
-			$medium_name_attr = html_entity_decode($medium_name_attr); // Convert HTML entities to their corresponding characters
+			$medium_name_attr = $medium_name ? uamswp_attr_conversion($medium_name) : '';
 
 		// Short name (e.g., "Dr. McCoy")
 
 			$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
-			$short_name_attr = $short_name;
-			$short_name_attr = str_replace('"', '\'', $short_name_attr); // Replace double quotes with single quote
-			$short_name_attr = htmlentities($short_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-			$short_name_attr = str_replace('&nbsp;', ' ', $short_name_attr); // Convert non-breaking space with normal space
-			$short_name_attr = html_entity_decode($short_name_attr); // Convert HTML entities to their corresponding characters
+			$short_name_attr = $short_name ? uamswp_attr_conversion($short_name) : '';
 
 		// Short name possessive (e.g., "Dr. McCoy's")
 
@@ -224,21 +212,13 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 
 		$phys_title = $resident;
 		$phys_title_name = $resident;
-		$phys_title_name_attr = $phys_title_name;
-		$phys_title_name_attr = str_replace('"', '\'', $phys_title_name_attr); // Replace double quotes with single quote
-		$phys_title_name_attr = htmlentities($phys_title_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-		$phys_title_name_attr = str_replace('&nbsp;', ' ', $phys_title_name_attr); // Convert non-breaking space with normal space
-		$phys_title_name_attr = html_entity_decode($phys_title_name_attr); // Convert HTML entities to their corresponding characters
+		$phys_title_name_attr = $phys_title_name ? uamswp_attr_conversion($phys_title_name) : '';
 
 	} else {
 
 		$phys_title = get_field('physician_title',$post->ID);
 		$phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
-		$phys_title_name_attr = $phys_title_name;
-		$phys_title_name_attr = str_replace('"', '\'', $phys_title_name_attr); // Replace double quotes with single quote
-		$phys_title_name_attr = htmlentities($phys_title_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-		$phys_title_name_attr = str_replace('&nbsp;', ' ', $phys_title_name_attr); // Convert non-breaking space with normal space
-		$phys_title_name_attr = html_entity_decode($phys_title_name_attr); // Convert HTML entities to their corresponding characters
+		$phys_title_name_attr = $phys_title_name ? uamswp_attr_conversion($phys_title_name) : '';
 
 	}
 
@@ -301,20 +281,10 @@ if( $locations && $location_valid ) {
         if ( 2 > $l ){
             if ( get_post_status ( $location ) == 'publish' ) {
                 $primary_appointment_title = get_the_title( $location );
-                $primary_appointment_title_attr = $primary_appointment_title;
-                $primary_appointment_title_attr = str_replace('"', '\'', $primary_appointment_title_attr); // Replace double quotes with single quote
-                $primary_appointment_title_attr = str_replace('&#8217;', '\'', $primary_appointment_title_attr); // Replace right single quote with single quote
-                $primary_appointment_title_attr = htmlentities($primary_appointment_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-                $primary_appointment_title_attr = str_replace('&nbsp;', ' ', $primary_appointment_title_attr); // Convert non-breaking space with normal space
-                $primary_appointment_title_attr = html_entity_decode($primary_appointment_title_attr); // Convert HTML entities to their corresponding characters
+                $primary_appointment_title_attr = $primary_appointment_title ? uamswp_attr_conversion($primary_appointment_title) : '';
                 $primary_appointment_url = get_the_permalink( $location );
                 $primary_appointment_city = get_field('location_city', $location);
-                $primary_appointment_city_attr = $primary_appointment_city;
-                $primary_appointment_city_attr = str_replace('"', '\'', $primary_appointment_city_attr); // Replace double quotes with single quote
-                $primary_appointment_city_attr = str_replace('&#8217;', '\'', $primary_appointment_city_attr); // Replace right single quote with single quote
-                $primary_appointment_city_attr = htmlentities($primary_appointment_city_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-                $primary_appointment_city_attr = str_replace('&nbsp;', ' ', $primary_appointment_city_attr); // Convert non-breaking space with normal space
-                $primary_appointment_city_attr = html_entity_decode($primary_appointment_city_attr); // Convert HTML entities to their corresponding characters
+                $primary_appointment_city_attr = $primary_appointment_city ? uamswp_attr_conversion($primary_appointment_city) : '';
 
                 $l++;
             }
