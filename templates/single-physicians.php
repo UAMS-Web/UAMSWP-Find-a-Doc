@@ -219,7 +219,6 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 		// Clinical Occupation Title
 
 			$provider_occupation_title = $resident;
-			$provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conversion($provider_occupation_title) : '';
 
 	} else {
 
@@ -251,13 +250,13 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 
 						}
 
-					$provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conversion($provider_occupation_title) : '';
-
 				}
 
 			}
 
 	}
+
+	$provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conversion($provider_occupation_title) : '';
 
 	// Defines the indefinite article to precede the clinical occupation title (a or an, based on whether clinical occupation title starts with vowel)
 
