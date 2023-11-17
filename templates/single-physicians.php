@@ -214,14 +214,21 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 
 	if ( $resident ) {
 
-		$provider_occupation_title = $resident;
-		$provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conversion($provider_occupation_title) : '';
+		// Clinical Occupation Title
+
+			$provider_occupation_title = $resident;
+			$provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conversion($provider_occupation_title) : '';
 
 	} else {
 
-		$provider_specialty = get_field('physician_title',$post->ID);
-		$provider_occupation_title = $resident ? $resident_title_name : get_term( $provider_specialty, 'clinical_title' )->name;
-		$provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conversion($provider_occupation_title) : '';
+		// Clinical Specialty
+
+			$provider_specialty = get_field('physician_title',$post->ID);
+
+		// Clinical Occupation Title
+
+			$provider_occupation_title = $resident ? $resident_title_name : get_term( $provider_specialty, 'clinical_title' )->name;
+			$provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conversion($provider_occupation_title) : '';
 
 	}
 
