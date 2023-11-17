@@ -472,19 +472,44 @@ while ( have_posts() ) : the_post();
     $video = get_field('physician_youtube_link');
     $affiliation = get_field('physician_affiliation');
     $hidden = get_field('physician_hidden');
-    $resident_profile_group = get_field('physician_resident_profile_group');
-    // $resident_hometown_international = $resident_profile_group['physician_resident_hometown_international'];
-    // $resident_hometown_city = $resident_profile_group['physician_resident_hometown_city'];
-    // $resident_hometown_state = $resident_profile_group['physician_resident_hometown_state'];
-    // $resident_hometown_country = $resident_profile_group['physician_resident_hometown_country'];
-    // $resident_medical_school = $resident_profile_group['physician_resident_hometown_country'];
-    $resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
-    $resident_academic_department_name = $resident_academic_department ? get_term( $resident_academic_department, 'academic_department' )->name : '';
-    $resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
-    $resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
-    $resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
-    $resident_academic_year_name = $resident_academic_year ? get_term( $resident_academic_year, 'residency_year' )->name : '';
-    $resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
+
+	$resident_profile_group = '';
+	// $resident_hometown_international = '';
+	// $resident_hometown_city = '';
+	// $resident_hometown_state = '';
+	// $resident_hometown_country = '';
+	// $resident_medical_school = '';
+	$resident_academic_department = '';
+	$resident_academic_department_name = '';
+	$resident_academic_chief = '';
+	$resident_academic_chief_name = '';
+	$resident_academic_year = '';
+	$resident_academic_year_name = '';
+	$resident_academic_name = '';
+
+	if ( $resident ) {
+
+		$resident_profile_group = get_field('physician_resident_profile_group');
+
+		if ( $resident_profile_group ) {
+
+			// $resident_hometown_international = $resident_profile_group['physician_resident_hometown_international'];
+			// $resident_hometown_city = $resident_profile_group['physician_resident_hometown_city'];
+			// $resident_hometown_state = $resident_profile_group['physician_resident_hometown_state'];
+			// $resident_hometown_country = $resident_profile_group['physician_resident_hometown_country'];
+			// $resident_medical_school = $resident_profile_group['physician_resident_hometown_country'];
+			$resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
+			$resident_academic_department_name = $resident_academic_department ? get_term( $resident_academic_department, 'academic_department' )->name : '';
+			$resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
+			$resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
+			$resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
+			$resident_academic_year_name = $resident_academic_year ? get_term( $resident_academic_year, 'residency_year' )->name : '';
+			$resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
+
+		}
+
+	}
+
     $college_affiliation = get_field('physician_academic_college');
     $position = get_field('physician_academic_position');
     $bio_academic = get_field('physician_academic_bio');
