@@ -11153,48 +11153,180 @@
 
 											$additionalProperty_parking = array();
 
+										// Get Parking Facility
+
+											// Get the term ID
+
+												$parking_id = get_field( 'facility_parking', $term ) ?? null;
+
+												echo '<p>$parking_id = ' . ( is_array($parking_id) ? 'Array' : ( is_object($parking_id) ? 'Object' : ( is_null($parking_id) ? 'Null' : ( $parking_id ) ) ) ) . '</p>'; // test
+												if ( is_array($parking_id) || is_object($parking_id) ) { echo '<pre>'; print_r($parking_id); echo '</pre>'; } // test
+
+											// Get the term
+
+												$parking_term = null;
+
+												if ( $parking_id ) {
+
+													$parking_term = get_term( $parking_id, 'parking' ) ?? null;
+
+												}
+
+												echo '<p>$parking_term = ' . ( is_array($parking_term) ? 'Array' : ( is_object($parking_term) ? 'Object' : ( is_null($parking_term) ? 'Null' : ( $parking_term ) ) ) ) . '</p>'; // test
+												if ( is_array($parking_term) || is_object($parking_term) ) { echo '<pre>'; print_r($parking_term); echo '</pre>'; } // test
+
+												// Check the term
+
+													if ( !is_object($parking_term) ) {
+
+														$parking_term = null;
+
+													}
+
 										// Geo value
 
-											// Get Google Map field value
+											$parking_geo_value = null;
+											$parking_geo = null;
 
-												$parking_geo_value = get_field( 'facility_parking_map', $term ) ?? null;
+											if ( $parking_term ) {
 
-											// Check Google Map field value
+												// Get the Google Map field value
 
-												if ( $parking_geo_value ) {
+													$parking_geo_value = get_field( 'parking_map', $parking_term ) ?? null;
 
-													$parking_geo_value = ( array_key_exists( 'lat', $parking_geo_value ) && array_key_exists( 'lng', $parking_geo_value ) ) ? $parking_geo_value : null;
+												// Check Google Map field value
+
+													if ( $parking_geo_value ) {
+
+														$parking_geo_value = ( array_key_exists( 'lat', $parking_geo_value ) && array_key_exists( 'lng', $parking_geo_value ) ) ? $parking_geo_value : null;
+
+													}
+
+												// Format Google Map field value as GeoCoordinates
+
+													$parking_geo = null;
+
+													if ( $parking_geo_value ) {
+
+														$parking_geo = uamswp_schema_geo_coordinates(
+															$parking_geo_value['lat'], // string|int // Required // The latitude of a location. For example 37.42242 (WGS 84). // The precision must be at least 5 decimal places.
+															$parking_geo_value['lng'] // string|int // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+														);
+
+													}
+
+											}
+
+										// additionalType
+
+											$parking_additionalType = 'https://schema.org/ParkingFacility';
+											$parking_subtype = $parking_additionalType;
+											$parking_subtype_value = null;
+											$parking_subtype_SchemaOrg = null;
+											$parking_subtype_Wikidata = null;
+
+											if ( $parking_term ) {
+
+												// Get the parking facility subtype
+
+													$parking_subtype_value = get_field( 'parking_place_subtype', $parking_term ) ?? null;
+
+												if ( $parking_subtype_value ) {
+
+													// Schema.org subtype
+
+														/**
+														 * Extract the Schema.org type value from the field value and use it to construct
+														 * the Schema.org type URL.
+														 */
+
+														if ( str_starts_with( $parking_subtype_value, 'SchemaOrg_' ) ) {
+
+															$parking_subtype_SchemaOrg = 'https://schema.org/' . substr(
+																strrchr(
+																	$parking_subtype_value, // haystack
+																	'_' // needle
+																), 1
+															);
+
+														}
+
+													// Wikidata additionalType
+
+														/**
+														 * Extract the Wikidata entry entity ID value from the field value and use it to
+														* construct the Wikidata.org entry URL.
+														*/
+
+														if ( str_starts_with( $parking_subtype_value, 'Wikidata_' ) ) {
+
+															$parking_subtype_Wikidata = 'https://www.wikidata.org/wiki/' . substr(
+																strrchr(
+																	$parking_subtype_value, // haystack
+																	'_' // needle
+																), 1
+															);
+
+														}
+
+													// Select the value
+
+														if ( $parking_subtype_SchemaOrg ) {
+
+															$parking_subtype = $parking_subtype_SchemaOrg;
+
+														} elseif ( $parking_subtype_Wikidata ) {
+
+															$parking_subtype = $parking_subtype_Wikidata;
+
+														}
 
 												}
 
-											// Format Google Map field value as GeoCoordinates
 
-												$parking_geo = null;
+											}
 
-												if ( $parking_geo_value ) {
-
-													$parking_geo = uamswp_schema_geo_coordinates(
-														$parking_geo_value['lat'], // string|int // Required // The latitude of a location. For example 37.42242 (WGS 84). // The precision must be at least 5 decimal places.
-														$parking_geo_value['lng'] // string|int // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-													);
-
-												}
 
 										// Construct PropertyValue
 
 											if ( $parking_geo ) {
 
-												$additionalProperty_parking['additionalType'] = 'https://schema.org/ParkingFacility';
-												$additionalProperty_parking['alternateName'] = array(
-													'parking deck',
-													'parking garage',
-													'parking lot',
-													'parking structure'
-												);
-												$additionalProperty_parking['description'] = 'A parking lot or other parking facility.';
-												$additionalProperty_parking['name'] = 'Parking Facility';
-												$additionalProperty_parking['propertyID'] = 'https://www.wikidata.org/wiki/Q55697304'; // Wikidata entry for 'parking facility'
-												$additionalProperty_parking['value'] = $parking_geo;
+												// additionalType
+
+													$additionalProperty_parking['additionalType'] = $parking_additionalType;
+
+												// alternateName
+
+													$additionalProperty_parking['alternateName'] = array(
+														'parking deck',
+														'parking garage',
+														'parking lot',
+														'parking structure'
+													);
+
+												// description
+
+													$additionalProperty_parking['description'] = 'A parking lot or other parking facility.';
+
+												// name
+
+													$additionalProperty_parking['name'] = 'Parking Facility';
+
+												// propertyID
+
+													if ( $parking_subtype == $parking_additionalType ) {
+
+														$additionalProperty_parking['propertyID'] = 'https://www.wikidata.org/wiki/Q55697304'; // Wikidata entry for 'parking facility'
+
+													} else {
+
+														$additionalProperty_parking['propertyID'] = $parking_subtype;
+
+													}
+
+												// value
+
+													$additionalProperty_parking['value'] = $parking_geo;
 
 											}
 
@@ -24399,8 +24531,8 @@
 
 																	$location_hours_openingHours = uamswp_fad_schema_openinghours(
 																		'Mo-Su', // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-																		null, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																		null, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																		'', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																		'', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 																		( $location_hours_openingHours ?? array() ) // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
 																	);
 
