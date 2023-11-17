@@ -212,8 +212,12 @@
 	}
 
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
-$resident = get_field('physician_resident',$post->ID);
-$resident_title_name = 'Resident Physician';
+
+// Get resident values
+
+	$resident = get_field('physician_resident',$post->ID);
+	$resident_title_name = 'Resident Physician';
+
 $phys_title = get_field('physician_title',$post->ID);
 $phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
 $phys_title_name_attr = $phys_title_name;
