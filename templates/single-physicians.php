@@ -210,14 +210,14 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 
 	if ( $resident ) {
 
-		$provider_occupation_title = $resident;
+		$provider_specialty = $resident;
 		$provider_occupation_title_name = $resident;
 		$provider_occupation_title_name_attr = $provider_occupation_title_name ? uamswp_attr_conversion($provider_occupation_title_name) : '';
 
 	} else {
 
-		$provider_occupation_title = get_field('physician_title',$post->ID);
-		$provider_occupation_title_name = $resident ? $resident_title_name : get_term( $provider_occupation_title, 'clinical_title' )->name;
+		$provider_specialty = get_field('physician_title',$post->ID);
+		$provider_occupation_title_name = $resident ? $resident_title_name : get_term( $provider_specialty, 'clinical_title' )->name;
 		$provider_occupation_title_name_attr = $provider_occupation_title_name ? uamswp_attr_conversion($provider_occupation_title_name) : '';
 
 	}
@@ -356,7 +356,7 @@ if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
     } else {
-        $fallback_desc = $medium_name_attr . ' is ' . ($provider_occupation_title ? $provider_occupation_title_indef_article . ' ' . strtolower($provider_occupation_title_name) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') .  ' employed by UAMS Health.';
+        $fallback_desc = $medium_name_attr . ' is ' . ($provider_specialty ? $provider_occupation_title_indef_article . ' ' . strtolower($provider_occupation_title_name) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') .  ' employed by UAMS Health.';
         $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
     }
 }
