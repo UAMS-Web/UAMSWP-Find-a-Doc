@@ -212,6 +212,7 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 
 		$provider_specialty = '';
 		$provider_specialty_term = '';
+		$provider_specialty_name = '';
 
 	if ( $resident ) {
 
@@ -234,7 +235,22 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 
 				if ( is_object($provider_specialty_term) ) {
 
-					$provider_occupation_title = $provider_specialty_term->name;
+					// Get term name
+
+						$provider_specialty_name = $provider_specialty_term->name;
+
+					// Get occupational title field from term
+
+						$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+
+					// Set occupational title from term name as a fallback
+
+						if ( !$provider_occupation_title ) {
+
+							$provider_occupation_title = $provider_specialty_name;
+
+						}
+
 					$provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conversion($provider_occupation_title) : '';
 
 				}
