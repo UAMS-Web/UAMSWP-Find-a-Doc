@@ -648,7 +648,7 @@
 					'show_tagcloud' => false,
 					// 'show_in_quick_edit' => '',
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -711,7 +711,7 @@
 					'show_tagcloud' => false,
 					// 'show_in_quick_edit' => '',
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -774,7 +774,7 @@
 			// 		'show_tagcloud' => false,
 			// 		// 'show_in_quick_edit' => '',
 			// 		'show_admin_column' => false,
-			// 		'meta_box_cb' => false,
+			// 		'meta_box_cb' => false, // Set as false to hide meta box in the back end
 			// 		// 'meta_box_sanitize_cb' => '',
 			// 		'capabilities' => $capabilities,
 			// 		'rewrite' => $rewrite,
@@ -837,7 +837,7 @@
 			// 		'show_tagcloud' => false,
 			// 		'show_in_quick_edit' => false,
 			// 		'show_admin_column' => false,
-			// 		'meta_box_cb' => false,
+			// 		'meta_box_cb' => false, // Set as false to hide meta box in the back end
 			// 		// 'meta_box_sanitize_cb' => '',
 			// 		'capabilities' => $capabilities,
 			// 		'rewrite' => $rewrite,
@@ -900,7 +900,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -972,7 +972,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -1044,7 +1044,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -1114,7 +1114,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -1188,7 +1188,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -1265,7 +1265,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -1323,7 +1323,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -1389,7 +1389,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -1451,7 +1451,7 @@
 			// 		'show_tagcloud' => false,
 			// 		// 'show_in_quick_edit' => '',
 			// 		'show_admin_column' => false,
-			// 		// 'meta_box_cb' => '',
+			// 		'meta_box_cb' => false, // Set as false to hide meta box in the back end
 			// 		// 'meta_box_sanitize_cb' => '',
 			// 		'capabilities' => $capabilities,
 			// 		'rewrite' => $rewrite,
@@ -1524,7 +1524,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -1599,7 +1599,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -1661,7 +1661,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -1723,7 +1723,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -1783,7 +1783,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -1841,7 +1841,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -1899,7 +1899,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -1957,7 +1957,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -2035,7 +2035,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -2111,7 +2111,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -2189,7 +2189,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -2278,7 +2278,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -2351,7 +2351,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					// 'meta_box_cb' => '',
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -2425,7 +2425,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					// 'meta_box_cb' => '',
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -2506,7 +2506,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => true,
 					'show_admin_column' => false,
-					// 'meta_box_cb' => '',
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -2568,7 +2568,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => true,
 					'show_admin_column' => false,
-					// 'meta_box_cb' => '',
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -2630,7 +2630,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => true,
 					'show_admin_column' => false,
-					// 'meta_box_cb' => '',
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -2702,7 +2702,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					// 'meta_box_cb' => '',
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -2764,7 +2764,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					// 'meta_box_cb' => '',
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -2842,7 +2842,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					// 'meta_box_cb' => '',
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
@@ -2926,7 +2926,7 @@
 					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
 					'show_admin_column' => false,
-					// 'meta_box_cb' => '',
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
 					// 'meta_box_sanitize_cb' => '',
 					'capabilities' => $capabilities,
 					'rewrite' => $rewrite,
