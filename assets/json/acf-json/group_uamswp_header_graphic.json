@@ -1,0 +1,96 @@
+{
+	"key": "group_uamswp_header_graphic",
+	"title": "Graphic Header Style Options",
+	"fields": [
+		{
+			"key": "field_fad_page_header_graphic",
+			"label": "",
+			"name": "page_header_graphic",
+			"type": "group",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"layout": "block",
+			"acfe_seamless_style": 1,
+			"acfe_settings": "",
+			"sub_fields": [
+				{
+					"key": "field_page_header_graphic_intro",
+					"label": "Graphic Header Intro Text",
+					"name": "page_header_graphic_intro",
+					"type": "textarea",
+					"instructions": "Appears below the page title. Basic description of the page. 500 character limit.",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"default_value": "",
+					"placeholder": "",
+					"maxlength": 500,
+					"rows": "",
+					"new_lines": "",
+					"acfe_textarea_code": 0,
+					"acfe_settings": "",
+					"acfe_validate": ""
+				},
+				{
+					"key": "field_page_header_graphic_image",
+					"label": "Graphic Header Background Image",
+					"name": "page_header_graphic_image",
+					"type": "image",
+					"instructions": "Recommended dimensions: 5120x1920 or larger. Minimum dimensions: 1920x720. The image will be automatically cropped to a 8:3 aspect ratio.",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"uploader": "",
+					"acfe_thumbnail": 0,
+					"return_format": "id",
+					"preview_size": "medium",
+					"min_width": 1920,
+					"min_height": 720,
+					"min_size": "",
+					"max_width": "",
+					"max_height": "",
+					"max_size": "",
+					"mime_types": "jpg,jpeg",
+					"ratio_width": 8,
+					"ratio_height": 3,
+					"ratio_margin": 78,
+					"acfe_settings": "",
+					"acfe_validate": "",
+					"library": "all"
+				}
+			],
+			"acfe_group_modal": 0
+		}
+	],
+	"location": "",
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "above_field",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_meta": "",
+	"acfe_note": ""
+}

@@ -1,0 +1,73 @@
+
+{
+	"key": "group_condition_treatment_labels",
+	"title": "Combined Conditions and Treatments Labels",
+	"fields": [
+		{
+			"key": "field_condition_treatment_single_name",
+			"label": "Single Item Name",
+			"name": "condition_treatment_single_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default single item name will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Condition\/Treatment",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_condition_treatment_plural_name",
+			"label": "Plural Item Name",
+			"name": "condition_treatment_plural_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default plural item name will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Conditions and Treatments",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-tax"
+			}
+		]
+	],
+	"menu_order": 10,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
+}

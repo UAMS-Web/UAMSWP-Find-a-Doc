@@ -1,69 +1,59 @@
 {
-    "key": "group_uamswp_affiliation",
-    "title": "Additional Information",
-    "location": [
-        [
-            {
-                "param": "taxonomy",
-                "operator": "==",
-                "value": "affiliation"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "acf_after_title",
-    "style": "seamless",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": [
-        "description"
-    ],
-    "active": 1,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_note": "",
-    "acfe_meta": "",
-    "fields": {
-        "field_affiliation_name": {
-            "key": "field_affiliation_name",
-            "label": "Name of Hospital in American Hospital Association (AHA) Records",
-            "name": "affiliation_name",
-            "type": "text",
-            "instructions": "This information can be found in the hospital profile at <a href='https://www.ahadata.com/' target='_blank'>https://www.ahadata.com/.</a>",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        "field_affiliation_id": {
-            "key": "field_affiliation_id",
-            "label": "ID of Hospital in American Hospital Association Records (AHA ID)",
-            "name": "affiliation_id",
-            "type": "text",
-            "instructions": "This information can be found in the hospital profile at <a href='https://www.ahadata.com/' target='_blank'>https://www.ahadata.com/.</a>",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        }
-    },
-    "modified": false
+	"key": "group_uamswp_affiliation",
+	"title": "Additional Information",
+	"location": [
+		[
+			{
+				"param": "taxonomy",
+				"operator": "==",
+				"value": "affiliation"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "acf_after_title",
+	"style": "seamless",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": [
+		"description"
+	],
+	"active": 1,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": "",
+	"fields": [
+		{
+			"key": "field_affiliation_location",
+			"label": "Associated Location Profile",
+			"name": "affiliation_location",
+			"type": "relationship",
+			"instructions": "Select the location profile that matches this affiliated hospital.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"location"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			}
+		}
+	],
+	"modified": false
 }
