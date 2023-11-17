@@ -224,11 +224,21 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 
 	// Defines the indefinite article to precede the clinical occupation title (a or an, based on whether clinical occupation title starts with vowel)
 
-		$vowels = array('a','e','i','o','u'); // Define a list of variables for use in determining which indefinite article to use (a vs. an)
-		if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
-			$phys_title_indef_article = 'an'; // If the clinical title starts with a vowel, use "an"
+		if (
+			in_array(
+				strtolower($phys_title_name)[0],
+				array( 'a', 'e', 'i', 'o', 'u' )
+			)
+		) {
+
+			// If the clinical title starts with a vowel, use "an"
+			$phys_title_indef_article = 'an';
+
 		} else {
-			$phys_title_indef_article = 'a'; // If the clinical title does not start with a vowel, use "a"
+
+			// If the clinical title does not start with a vowel, use "a"
+			$phys_title_indef_article = 'a';
+
 		}
 
 	// Define a list of exceptions to the vowel-based determination of which indefinite article to use.
