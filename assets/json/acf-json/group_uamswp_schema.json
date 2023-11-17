@@ -8,7 +8,7 @@
 			"name": "schema_medicalspecialty_single",
 			"type": "radio",
 			"instructions": "Select one Schema.org MedicalSpecialty enumeration member that is relevant to this entity. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalSpecialty Schema.org enumeration type, visit <a href='https://schema.org/MedicalSpecialty' target='_blank'>https://schema.org/MedicalSpecialty</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each of the MedicalSpecialty Schema.org enumeration members, visit the relevant page linked at <a href='https://schema.org/MedicalSpecialty#subtypes' target='_blank'>https://schema.org/MedicalSpecialty#subtypes</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -72,7 +72,7 @@
 			"name": "schema_medicalspecialty_multiple",
 			"type": "select",
 			"instructions": "Select one or more Schema.org MedicalSpecialty enumeration members that are relevant to this entity. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalSpecialty Schema.org enumeration type, visit <a href='https://schema.org/MedicalSpecialty' target='_blank'>https://schema.org/MedicalSpecialty</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each of the MedicalSpecialty Schema.org enumeration members, visit the relevant page linked at <a href='https://schema.org/MedicalSpecialty#subtypes' target='_blank'>https://schema.org/MedicalSpecialty#subtypes</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -390,7 +390,7 @@
 			"name": "schema_medicalentity_subtype",
 			"type": "radio",
 			"instructions": "Select the most appropriate subtype of MedicalEntity.</p><p class='description' style='margin-top: 0.5em;'>For information on each subtype, visit the relevant page linked at <a href='https://schema.org/MedicalEntity#subtypes' target='_blank'>https://schema.org/MedicalEntity#subtypes</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -431,7 +431,7 @@
 			"name": "schema_medicalentity_subtype_availableservice",
 			"type": "radio",
 			"instructions": "Select the most appropriate subtype of MedicalEntity.</p><p class='description' style='margin-top: 0.5em;'>For information on each subtype, visit the relevant page linked at <a href='https://schema.org/MedicalEntity#subtypes' target='_blank'>https://schema.org/MedicalEntity#subtypes</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -455,7 +455,7 @@
 			"name": "schema_medicaltest_subtype",
 			"type": "radio",
 			"instructions": "Select the most appropriate subtype of MedicalTest.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/MedicalTest#subtypes' target='_blank'>https://schema.org/MedicalTest#subtypes</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -482,7 +482,7 @@
 			"name": "schema_medicalprocedure_subtype",
 			"type": "radio",
 			"instructions": "Select the most appropriate subtype of MedicalProcedure.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/MedicalProcedure#subtypes' target='_blank'>https://schema.org/MedicalProcedure#subtypes</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -510,7 +510,7 @@
 			"name": "schema_therapeuticprocedure_subtype",
 			"type": "radio",
 			"instructions": "Select the most appropriate subtype of TherapeuticProcedure.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/TherapeuticProcedure#subtypes' target='_blank'>https://schema.org/TherapeuticProcedure#subtypes</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -535,7 +535,7 @@
 			"name": "schema_medicaltherapy_subtype",
 			"type": "radio",
 			"instructions": "Select the most appropriate subtype of MedicalTherapy.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/MedicalTherapy#subtypes' target='_blank'>https://schema.org/MedicalTherapy#subtypes</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -563,7 +563,7 @@
 			"name": "schema_medicalimagingtechnique",
 			"type": "radio",
 			"instructions": "Select the most appropriate MedicalImagingTechnique enumeration member.</p><p class='description' style='margin-top: 0.5em;'>For information on the imagingTechnique Schema.org property, visit <a href='https://schema.org/imagingTechnique' target='_blank'>https://schema.org/imagingTechnique</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalImagingTechnique Schema.org enumeration type, visit <a href='https://schema.org/MedicalImagingTechnique' target='_blank'>https://schema.org/MedicalImagingTechnique</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -784,7 +784,7 @@
 			"name": "schema_medicalproceduretype",
 			"type": "radio",
 			"instructions": "Select the most appropriate MedicalProcedureType.</p><p class='description' style='margin-top: 0.5em;'>For information on the medicalProcedureType Schema.org property, visit <a href='https://schema.org/procedureType' target='_blank'>https://schema.org/procedureType</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalProcedureType Schema.org enumeration type, visit <a href='https://schema.org/MedicalProcedureType' target='_blank'>https://schema.org/MedicalProcedureType</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -809,7 +809,7 @@
 			"name": "schema_drugprescriptionstatus",
 			"type": "select",
 			"instructions": "Indicate whether this drug is available by prescription or over-the-counter.</p><p class='description' style='margin-top: 0.5em;'>For information on the DrugPrescriptionStatus Schema.org enumeration type, visit <a href='https://schema.org/DrugPrescriptionStatus' target='_blank'>https://schema.org/DrugPrescriptionStatus</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the enumeration members of the DrugPrescriptionStatus Schema.org enumeration type, visit the links at <a href='https://schema.org/DrugPrescriptionStatus#subtypes' target='_blank'>https://schema.org/DrugPrescriptionStatus#subtypes</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -1052,7 +1052,7 @@
 			"name": "schema_medicalcondition_subtype",
 			"type": "radio",
 			"instructions": "Select the most appropriate subtype of MedicalCondition.</p><p class='description' style='margin-top: 0.5em;'>For information on the Schema.org MedicalCondition type, visit <a href='https://schema.org/MedicalCondition' target='_blank'>https://schema.org/MedicalCondition</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each subtype, visit the relevant page linked at <a href='https://schema.org/MedicalCondition#Subtypes' target='_blank'>https://schema.org/MedicalCondition#Subtypes</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -1077,7 +1077,7 @@
 			"name": "schema_infectiousagent",
 			"type": "text",
 			"instructions": "Indicate the name of the actual infectious agent, such as a specific bacterium.</p><p class='description' style='margin-top: 0.5em;'>For information on the Schema.org infectiousAgent property, visit <a href='https://schema.org/infectiousAgent' target='_blank'>https://schema.org/infectiousAgent</a>",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -1097,7 +1097,7 @@
 			"name": "schema_infectiousagentclass",
 			"type": "radio",
 			"instructions": "Select the class of agents or pathogens that transmits this infectious disease.</p><p class='description' style='margin-top: 0.5em;'>For information on the Schema.org InfectiousAgentClass enumeration type, visit <a href='https://schema.org/InfectiousAgentClass' target='_blank'>https://schema.org/InfectiousAgentClass</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each enumeration member, visit the relevant page linked at <a href='https://schema.org/InfectiousAgentClass#subtypes' target='_blank'>https://schema.org/InfectiousAgentClass#subtypes</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -1126,7 +1126,7 @@
 			"name": "schema_nucc_single",
 			"type": "taxonomy",
 			"instructions": "Select one or more provider classifications and/or specializations from the Health Care Provider Taxonomy Code Set that are relevant to this entity. This will be used in the MedicalCode Schema.org type.</p><p class='description' style='margin-top: 0.5em;'>For information on the Health Care Provider Taxonomy Code Set, visit <a href='https://taxonomy.nucc.org/' target='_blank'>https://taxonomy.nucc.org/</a>.</p><p class='description' style='margin-top: 0.5em;'>To easily select the proper item, copy the 10-character code for the desired taxonomy item, paste it into this input, and select the item that is returned.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCode Schema.org type, visit <a href='https://schema.org/MedicalCode' target='_blank'>https://schema.org/MedicalCode</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -1152,7 +1152,7 @@
 			"name": "schema_nucc_multiple",
 			"type": "taxonomy",
 			"instructions": "Select one or more provider classifications and/or specializations from the Health Care Provider Taxonomy Code Set that match / are relevant this entity. This will be used in the MedicalCode Schema.org type.</p><p class='description' style='margin-top: 0.5em;'>For information on the Health Care Provider Taxonomy Code Set, visit <a href='https://taxonomy.nucc.org/' target='_blank'>https://taxonomy.nucc.org/</a>.</p><p class='description' style='margin-top: 0.5em;'>To easily select the proper item, copy the 10-character code for the desired taxonomy item, paste it into this input, and select the item that is returned.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCode Schema.org type, visit <a href='https://schema.org/MedicalCode' target='_blank'>https://schema.org/MedicalCode</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -1178,7 +1178,7 @@
 			"name": "schema_medicinesystem",
 			"type": "select",
 			"instructions": "Select one or more Schema.org MedicineSystem enumeration members that identify the system(s) of medical practice relevant to this entity. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicineSystem Schema.org enumeration type, visit <a href='https://schema.org/MedicineSystem' target='_blank'>https://schema.org/MedicineSystem</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each of the MedicineSystem Schema.org enumeration members, visit the relevant page linked at <a href='https://schema.org/MedicineSystem#subtypes' target='_blank'>https://schema.org/MedicineSystem#subtypes</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -1211,7 +1211,7 @@
 			"name": "schema_localbusiness_single",
 			"type": "radio",
 			"instructions": "Select the LocalBusiness type that most closely matches this location. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on each type, visit <a href='https://schema.org/' target='_blank'>https://schema.org/</a>.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -1298,7 +1298,7 @@
 			"name": "schema_brandorg_query",
 			"type": "radio",
 			"instructions": "",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -1365,7 +1365,7 @@
 			"name": "schema_nonprofitstatus",
 			"type": "radio",
 			"instructions": "nonprofitStatus indicates the legal status of a nonprofit organization in its primary place of business.",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
