@@ -2338,7 +2338,7 @@
 				$args = array(
 					'labels' => $labels,
 					// 'description' => '',
-					'public' => false,
+					'public' => true,
 					// 'publicly_queryable' => '',
 					'hierarchical' => false,
 					'show_ui' => true, // Set as true to add and edit terms in the back end
@@ -2412,7 +2412,7 @@
 				$args = array(
 					'labels' => $labels,
 					// 'description' => '',
-					'public' => false,
+					'public' => true,
 					// 'publicly_queryable' => '',
 					'hierarchical' => true,
 					'show_ui' => true, // Set as true to add and edit terms in the back end
@@ -2493,7 +2493,7 @@
 				$args = array(
 					'labels' => $labels,
 					// 'description' => '',
-					'public' => false,
+					'public' => true,
 					// 'publicly_queryable' => '',
 					'hierarchical' => true,
 					'show_ui' => true, // Set as true to add and edit terms in the back end
@@ -2555,7 +2555,7 @@
 				$args = array(
 					'labels' => $labels,
 					// 'description' => '',
-					'public' => false,
+					'public' => true,
 					// 'publicly_queryable' => '',
 					'hierarchical' => true,
 					'show_ui' => true, // Set as true to add and edit terms in the back end
@@ -2617,7 +2617,7 @@
 				$args = array(
 					'labels' => $labels,
 					// 'description' => '',
-					'public' => false,
+					'public' => true,
 					// 'publicly_queryable' => '',
 					'hierarchical' => true,
 					'show_ui' => true, // Set as true to add and edit terms in the back end
@@ -2689,7 +2689,7 @@
 				$args = array(
 					'labels' => $labels,
 					// 'description' => '',
-					'public' => false,
+					'public' => true,
 					// 'publicly_queryable' => '',
 					'hierarchical' => true,
 					'show_ui' => true, // Set as true to add and edit terms in the back end
@@ -2751,7 +2751,7 @@
 				$args = array(
 					'labels' => $labels,
 					// 'description' => '',
-					'public' => false,
+					'public' => true,
 					// 'publicly_queryable' => '',
 					'hierarchical' => false,
 					'show_ui' => true, // Set as true to add and edit terms in the back end
@@ -2829,7 +2829,7 @@
 				$args = array(
 					'labels' => $labels,
 					// 'description' => '',
-					'public' => false,
+					'public' => true,
 					// 'publicly_queryable' => '',
 					'hierarchical' => true,
 					'show_ui' => true, // Set as true to add and edit terms in the back end
@@ -2913,7 +2913,7 @@
 				$args = array(
 					'labels' => $labels,
 					// 'description' => '',
-					'public' => false,
+					'public' => true,
 					// 'publicly_queryable' => '',
 					'hierarchical' => true,
 					'show_ui' => true, // Set as true to add and edit terms in the back end
