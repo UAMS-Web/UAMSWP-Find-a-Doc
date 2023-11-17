@@ -632,18 +632,24 @@
 				$args = array(
 					'label' => __( 'Conditions' ),
 					'labels' => $labels,
-					'hierarchical' => false,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true,
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
-					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_rest' => true,
 					'rest_base' => 'condition',
+					// 'rest_namespace' => '',
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
+					'show_tagcloud' => false,
+					// 'show_in_quick_edit' => '',
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'condition', array( 'provider' ), $args );
 
@@ -689,18 +695,24 @@
 				$args = array(
 					'label' => __( 'Treatments' ),
 					'labels' => $labels,
-					'hierarchical' => false,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true,
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
-					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_rest' => true,
 					'rest_base' => 'treatment',
+					// 'rest_namespace' => '',
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
+					'show_tagcloud' => false,
+					// 'show_in_quick_edit' => '',
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'treatment', array( 'provider' ), $args );
 
@@ -746,18 +758,24 @@
 			// 	$args = array(
 			// 		'label' => __( 'Medical Specialties' ),
 			// 		'labels' => $labels,
-			// 		'hierarchical' => true,
+			// 		// 'description' => '',
 			// 		'public' => true,
-			// 		'show_ui' => true,
-			// 		'meta_box_cb' => false,
-			// 		'show_admin_column' => false,
+			// 		// 'publicly_queryable' => '',
+			// 		'hierarchical' => true,
+			// 		'show_ui' => true, // Set as true to add and edit terms in the back end
+			// 		// 'show_in_menu' => '',
 			// 		'show_in_nav_menus' => false,
-			// 		'show_tagcloud' => false,
-			// 		'rewrite' => $rewrite,
-			// 		'capabilities' => $capabilities,
 			// 		'show_in_rest' => true,
-			// 			'rest_base' => 'specialties',
-			// 			'rest_controller_class' => 'WP_REST_Terms_Controller',
+			// 		'rest_base' => 'specialties',
+			// 		// 'rest_namespace' => '',
+			// 		'rest_controller_class' => 'WP_REST_Terms_Controller',
+			// 		'show_tagcloud' => false,
+			// 		// 'show_in_quick_edit' => '',
+			// 		'show_admin_column' => false,
+			// 		'meta_box_cb' => false, // Set as false to hide meta box in the back end
+			// 		// 'meta_box_sanitize_cb' => '',
+			// 		'capabilities' => $capabilities,
+			// 		'rewrite' => $rewrite,
 			// 	);
 			// 	register_taxonomy( 'specialty', array( 'provider' ), $args );
 			//
@@ -803,19 +821,24 @@
 			// 	$args = array(
 			// 		'label' => __( 'Medical Departments' ),
 			// 		'labels' => $labels,
-			// 		'hierarchical' => true,
+			// 		// 'description' => '',
 			// 		'public' => true,
-			// 		'show_ui' => true,
-			// 		'meta_box_cb' => false,
-			// 		'show_admin_column' => false,
+			// 		// 'publicly_queryable' => '',
+			// 		'hierarchical' => true,
+			// 		'show_ui' => true, // Set as true to add and edit terms in the back end
+			// 		// 'show_in_menu' => '',
 			// 		'show_in_nav_menus' => false,
-			// 		'show_tagcloud' => false,
-			// 		'rewrite' => $rewrite,
-			// 		'capabilities' => $capabilities,
 			// 		'show_in_rest' => true,
 			// 		'rest_base' => 'medical_department',
+			// 		// 'rest_namespace' => '',
 			// 		'rest_controller_class' => 'WP_REST_Terms_Controller',
+			// 		'show_tagcloud' => false,
 			// 		'show_in_quick_edit' => false,
+			// 		'show_admin_column' => false,
+			// 		'meta_box_cb' => false, // Set as false to hide meta box in the back end
+			// 		// 'meta_box_sanitize_cb' => '',
+			// 		'capabilities' => $capabilities,
+			// 		'rewrite' => $rewrite,
 			// 	);
 			// 	register_taxonomy( 'department', array( 'provider' ), $args );
 			//
@@ -861,19 +884,24 @@
 				$args = array(
 					'label' => __( 'Service Lines' ),
 					'labels' => $labels,
-					'hierarchical' => true,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true,
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => true,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
-					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_rest' => true,
 					'rest_base' => 'service_line',
+					// 'rest_namespace' => '',
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
+					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'service_line', array( 'location', 'provider' ), $args );
 
@@ -926,19 +954,24 @@
 				$args = array(
 					'label' => __( 'Medical Degrees' ),
 					'labels' => $labels,
-					'hierarchical' => false,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true,
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
-					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_rest' => true,
 					'rest_base' => 'medical_degree',
+					// 'rest_namespace' => '',
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
+					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'degree', array( 'provider' ), $args );
 
@@ -991,19 +1024,24 @@
 				$args = array(
 					'label' => __( 'Patient Types' ),
 					'labels' => $labels,
-					'hierarchical' => true,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true,
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => true,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
-					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_rest' => true,
 					'rest_base' => 'patient_type',
+					// 'rest_namespace' => '',
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
+					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'patient_type', array( 'location', 'provider' ), $args );
 
@@ -1054,19 +1092,24 @@
 				$args = array(
 					'label' => __( 'Clinical Titles' ),
 					'labels' => $labels,
-					'hierarchical' => true,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true,
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => true,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
-					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_rest' => true,
 					'rest_base' => 'clinical_title',
+					// 'rest_namespace' => '',
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
+					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'clinical_title', array( 'provider' ), $args );
 
@@ -1121,19 +1164,24 @@
 				$args = array(
 					'label' => __( 'Clinical Administrative Titles' ),
 					'labels' => $labels,
-					'hierarchical' => true,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true,
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => true,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
-					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_rest' => true,
 					'rest_base' => 'clinical_admin_title',
+					// 'rest_namespace' => '',
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
+					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'clinical_admin_title', array( 'provider' ), $args );
 
@@ -1191,19 +1239,24 @@
 				$args = array(
 					'label' => __( 'Hospital Affiliations' ),
 					'labels' => $labels,
-					'hierarchical' => false,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true, //make true to add another
-					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
-					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_rest' => true,
 					'rest_base' => 'affiliation',
+					// 'rest_namespace' => '',
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
+					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'affiliation', array( 'provider' ), $args );
 
@@ -1244,19 +1297,24 @@
 				$args = array(
 					'label' => __( 'Institute Affiliations' ),
 					'labels' => $labels,
-					'hierarchical' => false,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true, //make true to add another
-					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
-					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_rest' => true,
 					'rest_base' => 'institute_affiliation',
+					// 'rest_namespace' => '',
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
+					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'institute_affiliation', array( 'provider' ), $args );
 
@@ -1303,19 +1361,24 @@
 				$args = array(
 					'label' => __( 'Languages' ),
 					'labels' => $labels,
-					'hierarchical' => false,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true, //make true to add another
-					'show_admin_column' => false,
-					'meta_box_cb' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
-					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_rest' => true,
 					'rest_base' => 'language',
+					// 'rest_namespace' => '',
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
+					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'language', array( 'location', 'provider' ), $args );
 
@@ -1360,14 +1423,24 @@
 			// 	);
 			// 	$args = array(
 			// 		'labels' => $labels,
-			// 		'hierarchical' => true,
+			// 		// 'description' => '',
 			// 		'public' => true,
-			// 		'show_ui' => true,
-			// 		'show_admin_column' => false,
+			// 		// 'publicly_queryable' => '',
+			// 		'hierarchical' => true,
+			// 		'show_ui' => true, // Set as true to add and edit terms in the back end
+			// 		// 'show_in_menu' => '',
 			// 		'show_in_nav_menus' => false,
+			// 		// 'show_in_rest' => '',
+			// 		// 'rest_base' => '',
+			// 		// 'rest_namespace' => '',
+			// 		// 'rest_controller_class' => '',
 			// 		'show_tagcloud' => false,
-			// 		'rewrite' => $rewrite,
+			// 		// 'show_in_quick_edit' => '',
+			// 		'show_admin_column' => false,
+			// 		'meta_box_cb' => false, // Set as false to hide meta box in the back end
+			// 		// 'meta_box_sanitize_cb' => '',
 			// 		'capabilities' => $capabilities,
+			// 		'rewrite' => $rewrite,
 			// 	);
 			// 	register_taxonomy( 'medical_term', array( 'provider' ), $args );
 			//
@@ -1421,16 +1494,24 @@
 				);
 				$args = array(
 					'labels' => $labels,
-					'hierarchical' => true,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true,	//Made true to add / edit
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => true,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'academic_position', array( 'provider' ), $args );
 
@@ -1486,16 +1567,24 @@
 				);
 				$args = array(
 					'labels' => $labels,
-					'hierarchical' => true,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true, //Made true to add / edit
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => true,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'academic_college', array( 'provider' ), $args );
 
@@ -1540,16 +1629,24 @@
 				);
 				$args = array(
 					'labels' => $labels,
-					'hierarchical' => false,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true, //Made true to add / edit
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'school', array( 'provider' ), $args );
 
@@ -1594,16 +1691,24 @@
 				);
 				$args = array(
 					'labels' => $labels,
-					'hierarchical' => false,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true, //Made true to add / edit
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'residency_year', array( 'provider' ), $args );
 
@@ -1646,16 +1751,24 @@
 				$args = array(
 					'label' => __( 'Academic Departments' ),
 					'labels' => $labels,
-					'hierarchical' => true,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true, //Made true to add / edit
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => true,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'academic_department', array( 'provider' ), $args );
 
@@ -1696,16 +1809,24 @@
 				$args = array(
 					'label' => __( 'Specialty and Subspecialty Certificates' ),
 					'labels' => $labels,
-					'hierarchical' => false,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true, //Made true to add / edit
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'board', array( 'provider' ), $args );
 
@@ -1746,16 +1867,24 @@
 			$args = array(
 				'label' => __( 'Certifying Bodies' ),
 				'labels' => $labels,
-				'hierarchical' => false,
+				// 'description' => '',
 				'public' => true,
-				'show_ui' => true, //Made true to add / edit
-				'meta_box_cb' => false,
-				'show_admin_column' => false,
+				// 'publicly_queryable' => '',
+				'hierarchical' => false,
+				'show_ui' => true, // Set as true to add and edit terms in the back end
+				// 'show_in_menu' => '',
 				'show_in_nav_menus' => false,
+				// 'show_in_rest' => '',
+				// 'rest_base' => '',
+				// 'rest_namespace' => '',
+				// 'rest_controller_class' => '',
 				'show_tagcloud' => false,
-				'rewrite' => $rewrite,
-				'capabilities' => $capabilities,
 				'show_in_quick_edit' => false,
+				'show_admin_column' => false,
+				'meta_box_cb' => false, // Set as false to hide meta box in the back end
+				// 'meta_box_sanitize_cb' => '',
+				'capabilities' => $capabilities,
+				'rewrite' => $rewrite,
 			);
 			register_taxonomy( 'certifying_body', array( 'provider' ), $args );
 
@@ -1796,16 +1925,24 @@
 				$args = array(
 					'label' => __( 'Health Care Professional Associations' ),
 					'labels' => $labels,
-					'hierarchical' => false,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true, //Made true to add / edit
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'association', array( 'provider' ), $args );
 
@@ -1864,16 +2001,24 @@
 				);
 				$args = array(
 					'labels' => $labels,
-					'hierarchical' => false,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true, //Made true to add / edit
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'educationtype', array( 'provider' ), $args );
 
@@ -1930,19 +2075,24 @@
 				$args = array(
 					'label' => __( 'Portals' ),
 					'labels' => $labels,
-					'hierarchical' => false,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true,
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
-					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_rest' => true,
 					'rest_base' => 'portal',
+					// 'rest_namespace' => '',
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
+					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'portal', array( 'location', 'provider' ), $args );
 
@@ -2001,19 +2151,24 @@
 				$args = array(
 					'label' => __( 'Faculty Titles' ),
 					'labels' => $labels,
-					'hierarchical' => true,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true,
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => true,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
-					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_rest' => true,
 					'rest_base' => 'academic_title',
+					// 'rest_namespace' => '',
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
+					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'academic_title', array( 'provider' ), $args );
 
@@ -2083,19 +2238,24 @@
 				$args = array(
 					'label' => __( 'Academic Administrative Titles' ),
 					'labels' => $labels,
-					'hierarchical' => true,
+					// 'description' => '',
 					'public' => true,
-					'show_ui' => true,
-					'meta_box_cb' => false,
-					'show_admin_column' => false,
+					// 'publicly_queryable' => '',
+					'hierarchical' => true,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
-					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_rest' => true,
-						'rest_base' => 'academic_admin_title',
-						'rest_controller_class' => 'WP_REST_Terms_Controller',
+					'rest_base' => 'academic_admin_title',
+					// 'rest_namespace' => '',
+					'rest_controller_class' => 'WP_REST_Terms_Controller',
+					'show_tagcloud' => false,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'academic_admin_title', array( 'provider' ), $args );
 
@@ -2149,15 +2309,24 @@
 				);
 				$args = array(
 					'labels' => $labels,
+					// 'description' => '',
+					'public' => true,
+					// 'publicly_queryable' => '',
 					'hierarchical' => false,
-					'public' => false,
-					'show_ui' => true,
-					'show_admin_column' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'recognition', array( 'provider' ), $args );
 
@@ -2212,15 +2381,24 @@
 				);
 				$args = array(
 					'labels' => $labels,
+					// 'description' => '',
+					'public' => true,
+					// 'publicly_queryable' => '',
 					'hierarchical' => true,
-					'public' => false,
-					'show_ui' => true,
-					'show_admin_column' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'region', array( 'location' ), $args );
 
@@ -2282,15 +2460,24 @@
 				);
 				$args = array(
 					'labels' => $labels,
+					// 'description' => '',
+					'public' => true,
+					// 'publicly_queryable' => '',
 					'hierarchical' => true,
-					'public' => false,
-					'show_ui' => true,
-					'show_admin_column' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => true,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'location_type', array( 'location' ), $args );
 
@@ -2335,15 +2522,24 @@
 				);
 				$args = array(
 					'labels' => $labels,
+					// 'description' => '',
+					'public' => true,
+					// 'publicly_queryable' => '',
 					'hierarchical' => true,
-					'public' => false,
-					'show_ui' => true,
-					'show_admin_column' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => true,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'gmb_cat_provider', array( 'provider' ), $args );
 
@@ -2388,15 +2584,24 @@
 				);
 				$args = array(
 					'labels' => $labels,
+					// 'description' => '',
+					'public' => true,
+					// 'publicly_queryable' => '',
 					'hierarchical' => true,
-					'public' => false,
-					'show_ui' => true,
-					'show_admin_column' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => true,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'gmb_cat_location', array( 'location' ), $args );
 
@@ -2451,15 +2656,24 @@
 				);
 				$args = array(
 					'labels' => $labels,
+					// 'description' => '',
+					'public' => true,
+					// 'publicly_queryable' => '',
 					'hierarchical' => true,
-					'public' => false,
-					'show_ui' => true,
-					'show_admin_column' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'building', array( 'location' ), $args );
 
@@ -2504,15 +2718,24 @@
 			);
 			$args = array(
 				'labels' => $labels,
+				// 'description' => '',
+				'public' => true,
+				// 'publicly_queryable' => '',
 				'hierarchical' => false,
-				'public' => false,
-				'show_ui' => true,
-				'show_admin_column' => false,
+				'show_ui' => true, // Set as true to add and edit terms in the back end
+				// 'show_in_menu' => '',
 				'show_in_nav_menus' => false,
+				// 'show_in_rest' => '',
+				// 'rest_base' => '',
+				// 'rest_namespace' => '',
+				// 'rest_controller_class' => '',
 				'show_tagcloud' => false,
-				'rewrite' => $rewrite,
-				'capabilities' => $capabilities,
 				'show_in_quick_edit' => false,
+				'show_admin_column' => false,
+				'meta_box_cb' => false, // Set as false to hide meta box in the back end
+				// 'meta_box_sanitize_cb' => '',
+				'capabilities' => $capabilities,
+				'rewrite' => $rewrite,
 			);
 			register_taxonomy( 'parking', array( 'location' ), $args );
 
@@ -2570,15 +2793,24 @@
 				);
 				$args = array(
 					'labels' => $labels,
+					// 'description' => '',
+					'public' => true,
+					// 'publicly_queryable' => '',
 					'hierarchical' => true,
-					'public' => false,
-					'show_ui' => true,
-					'show_admin_column' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'brand_organization_uams', array( 'location', 'provider' ), $args );
 
@@ -2643,15 +2875,24 @@
 				);
 				$args = array(
 					'labels' => $labels,
+					// 'description' => '',
+					'public' => true,
+					// 'publicly_queryable' => '',
 					'hierarchical' => true,
-					'public' => false,
-					'show_ui' => true,
-					'show_admin_column' => false,
+					'show_ui' => true, // Set as true to add and edit terms in the back end
+					// 'show_in_menu' => '',
 					'show_in_nav_menus' => false,
+					// 'show_in_rest' => '',
+					// 'rest_base' => '',
+					// 'rest_namespace' => '',
+					// 'rest_controller_class' => '',
 					'show_tagcloud' => false,
-					'rewrite' => $rewrite,
-					'capabilities' => $capabilities,
 					'show_in_quick_edit' => false,
+					'show_admin_column' => false,
+					'meta_box_cb' => false, // Set as false to hide meta box in the back end
+					// 'meta_box_sanitize_cb' => '',
+					'capabilities' => $capabilities,
+					'rewrite' => $rewrite,
 				);
 				register_taxonomy( 'brand_organization', array( 'location', 'provider' ), $args );
 
