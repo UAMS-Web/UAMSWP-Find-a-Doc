@@ -549,11 +549,11 @@
 			"acfe_validate": ""
 		},
 		{
-			"key": "field_facility_parking_map",
-			"label": "GPS Location of the Main Parking Area for the facility",
-			"name": "facility_parking_map",
-			"type": "google_map",
-			"instructions": "If the parking area is a parking deck, place the pin on the entrance to the parking deck from the street.</p><p class='description' style='margin-top: 0.5em;'>If the parking area is a surface-level parking lot, place the pin in the middle of the parking lot.",
+			"key": "field_facility_parking",
+			"label": "Main Parking Area for the Facility",
+			"name": "facility_parking",
+			"type": "taxonomy",
+			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -562,34 +562,17 @@
 				"id": ""
 			},
 			"acfe_permissions": "",
-			"center_lat": "34.7492719",
-			"center_lng": "-92.3198281",
-			"zoom": "",
-			"height": "",
-			"acfe_settings": "",
-			"acfe_validate": ""
-		},
-		{
-			"key": "field_facility_parking_instructions",
-			"label": "General Parking Instructions for the facility",
-			"name": "facility_parking_instructions",
-			"type": "wysiwyg",
-			"instructions": "Indicate whether patients will park in a parking deck or surface-level parking.</p><p class='description' style='margin-top: 0.5em;'>Indicate which parking lot, parking deck or other area in which patients will park when coming to this location.</p><p class='description' style='margin-top: 0.5em;'>Indicate whether or not patients will have to pay for parking.</p><p class='description' style='margin-top: 0.5em;'>If there is a parking fee for patients, indicate whether locations in this facility typically validate parking.</p><p class='description' style='margin-top: 0.5em;'>If patients will be parking in a specific parking deck, indicate the ideal area of the parking deck in which patients should park for most locations within this facility. If there is a patient drop-off area, also include details about that.",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
+			"taxonomy": "parking",
+			"field_type": "select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
 			},
-			"acfe_permissions": "",
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "very_simple",
-			"media_upload": 0,
-			"delay": 0,
-			"acfe_settings": "",
-			"acfe_validate": ""
+			"multiple": 0
 		},
 		{
 			"key": "field_facility_photo",
