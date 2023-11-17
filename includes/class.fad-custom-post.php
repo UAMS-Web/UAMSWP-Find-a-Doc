@@ -2886,6 +2886,7 @@
 				'gmb_cat_provider',
 				'gmb_cat_location',
 				'building',
+				'parking',
 				'brand_organization',
 				'brand_organization_uams'
 			);
