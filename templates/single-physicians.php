@@ -252,23 +252,25 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 		}
 
 	// Define a list of exceptions to the vowel-based determination of which indefinite article to use.
-	// Use "a" before consonant sounds: a historic event, a one-year term.
-	// Use "an" before vowel sounds: an honor, an NBA record.
-	// Write the key as the characters at the beginning of the exception. It can be a complete or incomplete title.
-	// Write the value as the indefinite article to use in that case ('a' or 'an').
-	$phys_title_indef_article_exceptions = array(
-		'SNF' => 'an',
-		'Urolog' => 'a',
-		'Uveitis' => 'a'
-	);
-	if ( !empty($phys_title_indef_article_exceptions) ) {
-		foreach( $phys_title_indef_article_exceptions as $exception => $indef_article ) {
-			$exception_length = strlen($exception); // Get the charactter length of the exception key
-			if (substr(strtolower($phys_title_name), 0, $exception_length) == strtolower($exception)) { // If the clinical title begins with the exception key...
-				$phys_title_indef_article = $indef_article; // Use the key's value as the indefinite article
+
+		// Use "a" before consonant sounds: a historic event, a one-year term.
+		// Use "an" before vowel sounds: an honor, an NBA record.
+		// Write the key as the characters at the beginning of the exception. It can be a complete or incomplete title.
+		// Write the value as the indefinite article to use in that case ('a' or 'an').
+
+		$phys_title_indef_article_exceptions = array(
+			'SNF' => 'an',
+			'Urolog' => 'a',
+			'Uveitis' => 'a'
+		);
+		if ( !empty($phys_title_indef_article_exceptions) ) {
+			foreach( $phys_title_indef_article_exceptions as $exception => $indef_article ) {
+				$exception_length = strlen($exception); // Get the charactter length of the exception key
+				if (substr(strtolower($phys_title_name), 0, $exception_length) == strtolower($exception)) { // If the clinical title begins with the exception key...
+					$phys_title_indef_article = $indef_article; // Use the key's value as the indefinite article
+				}
 			}
 		}
-	}
 
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
