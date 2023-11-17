@@ -211,6 +211,7 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 	// Eliminate PHP errors
 
 		$provider_specialty = '';
+		$provider_specialty_term = '';
 
 	if ( $resident ) {
 
@@ -227,8 +228,18 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 
 		// Clinical Occupation Title
 
-			$provider_occupation_title = get_term( $provider_specialty, 'clinical_title' )->name;
-			$provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conversion($provider_occupation_title) : '';
+			if ( $provider_specialty ) {
+
+				$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+
+				if ( is_object($provider_specialty_term) ) {
+
+					$provider_occupation_title = $provider_specialty_term->name;
+					$provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conversion($provider_occupation_title) : '';
+
+				}
+
+			}
 
 	}
 
