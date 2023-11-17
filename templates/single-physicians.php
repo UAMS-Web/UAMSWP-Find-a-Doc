@@ -569,10 +569,13 @@ while ( have_posts() ) : the_post();
                                             // Parent Location 
                                             $location_has_parent = get_field('location_parent', $location);
                                             $location_parent_id = get_field('location_parent_id', $location);
-                                            $parent_location = '';
-                                            $parent_id = '';
-                                            $parent_title = '';
-                                            $parent_url = '';
+                                            $parent_location = ''; // Eliminate PHP errors
+                                            $parent_id = ''; // Eliminate PHP errors
+                                            $parent_title = ''; // Eliminate PHP errors
+                                            $parent_url = ''; // Eliminate PHP errors
+                                            $parent_location_prepend_the = ''; // Eliminate PHP errors
+                                            $parent_title_prepend = ''; // Eliminate PHP errors
+                                            $parent_title_phrase = ''; // Eliminate PHP errors
                                         
                                             if ($location_has_parent && $location_parent_id) { 
                                                 $parent_location = get_post( $location_parent_id );
@@ -583,6 +586,9 @@ while ( have_posts() ) : the_post();
                                                 $parent_title = $parent_location->post_title;
                                                 $parent_url = get_permalink( $parent_id );
                                                 $address_id = $parent_id;
+                                                $parent_location_prepend_the = get_field('location_prepend_the', $parent_id);
+                                                $parent_title_prepend = $parent_location_prepend_the ? 'the ' : '';
+                                                $parent_title_phrase = $parent_title_prepend . $parent_title;
                                             }
                                             
                                             $location_address_1 = get_field('location_address_1', $address_id );
@@ -622,7 +628,7 @@ while ( have_posts() ) : the_post();
                                     ?>
                                 <p><strong><?php echo $primary_appointment_title; ?></strong><br />
                                 <?php if ( $parent_location ) { ?>
-                                    (Part of <a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name"><?php echo $parent_title; ?></a>)<br />
+                                    (Part of <?php echo $parent_title_prepend; ?><a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name"><?php echo $parent_title; ?></a>)<br />
                                 <?php } // endif ?>
                                 <?php echo $location_address_1; ?><br/>
                                 <?php echo $location_address_2 ? $location_address_2 . '<br/>' : ''; ?>
