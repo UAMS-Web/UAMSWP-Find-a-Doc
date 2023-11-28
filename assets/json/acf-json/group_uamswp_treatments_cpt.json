@@ -24,7 +24,7 @@
 			"name": "treatment_procedure_searchable",
 			"type": "button_group",
 			"instructions": "Should this treatment be used to help return results for associated items like providers, locations, etc.?",
-			"required": 1,
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
