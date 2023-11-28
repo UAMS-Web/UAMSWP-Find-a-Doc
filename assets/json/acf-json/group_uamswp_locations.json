@@ -497,7 +497,15 @@
 			"type": "text",
 			"instructions": "Indicate the area where the patient would first check in.</p><p class='description' style='margin-top: 0.5em;'>Do not just include the number (Example: enter \"Suite 1A\" not just \"1A.\").</p><p class='description' style='margin-top: 0.5em;'>Do not include landmarks (don't say \"Next to this other thing\").</p><p class='description' style='margin-top: 0.5em;'>If you are putting the name of another clinic here, this location should instead be set as a child of that location.",
 			"required": "0",
-			"conditional_logic": "0",
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_building_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
