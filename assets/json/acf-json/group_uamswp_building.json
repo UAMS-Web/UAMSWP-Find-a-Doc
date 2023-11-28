@@ -244,7 +244,7 @@
 		},
 		{
 			"key": "field_facility_google_cid_query",
-			"label": "Does this organization have a listing on Google My Business?",
+			"label": "Does this facility have a listing on Google My Business?",
 			"name": "facility_google_cid_query",
 			"type": "button_group",
 			"instructions": "",
