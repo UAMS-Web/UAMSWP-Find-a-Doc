@@ -2869,6 +2869,7 @@
 				Expected taxonomy items:
 
 					 * "Arkansas Children's" (Slug: "arkansas-childrens")
+					 * "Arkansas Department of Human Services" (Slug: "dhs")
 					 * "Baptist Health" (Slug: "baptist-health")
 					 * "United States Department of Veterans Affairs" (Slug: "va")
 						 * "Central Arkansas Veterans Healthcare System" (Slug: "_va_cavhs")
