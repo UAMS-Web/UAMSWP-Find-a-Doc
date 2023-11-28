@@ -1,105 +1,321 @@
-<?php 
+<?php
 /*
  *  Get ACF fields to use for meta data
- *  Add description from provider short description or full description * 
+ *  Add description from provider short description or full description *
  */
-$degrees = get_field('physician_degree',$post->ID);
-$degree_list = '';
-$i = 1;
-if ( $degrees ) {
-    foreach( $degrees as $degree ):
-        $degree_name = get_term( $degree, 'degree');
-        $degree_list .= $degree_name->name;
-        if( count($degrees) > $i ) {
-            $degree_list .= ", ";
-        }
-        $i++;
-    endforeach;
-} 
-$languages = get_field('physician_languages',$post->ID);
-$language_count = 0;
-if ($languages) {
-    $language_count = count($languages);
-}
-$language_list = '';
-$i = 1;
-if ( $languages ) {
-    foreach( $languages as $language ):
-        $language_name = get_term_by( 'id', $language, 'language');
-        if( is_object($language_name) ) {
-            $language_list .= $language_name->name;
-            if( $language_count > $i ) {
-                $language_list .= ", ";
-            }
-        }
-        $i++;
-    endforeach;
-}
 
-$prefix = get_field('physician_prefix',$post->ID);
-$first_name = get_field('physician_first_name',$post->ID);
-$middle_name = get_field('physician_middle_name',$post->ID);
-$last_name = get_field('physician_last_name',$post->ID);
-$pedigree = get_field('physician_pedigree',$post->ID);
-$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
-$full_name_attr = $full_name;
-$full_name_attr = str_replace('"', '\'', $full_name_attr); // Replace double quotes with single quote
-$full_name_attr = htmlentities($full_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$full_name_attr = str_replace('&nbsp;', ' ', $full_name_attr); // Convert non-breaking space with normal space
-$full_name_attr = html_entity_decode($full_name_attr); // Convert HTML entities to their corresponding characters
-$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
-$medium_name_attr = $medium_name;
-$medium_name_attr = str_replace('"', '\'', $medium_name_attr); // Replace double quotes with single quote
-$medium_name_attr = htmlentities($medium_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$medium_name_attr = str_replace('&nbsp;', ' ', $medium_name_attr); // Convert non-breaking space with normal space
-$medium_name_attr = html_entity_decode($medium_name_attr); // Convert HTML entities to their corresponding characters
-$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
-$short_name_attr = $short_name;
-$short_name_attr = str_replace('"', '\'', $short_name_attr); // Replace double quotes with single quote
-$short_name_attr = htmlentities($short_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$short_name_attr = str_replace('&nbsp;', ' ', $short_name_attr); // Convert non-breaking space with normal space
-$short_name_attr = html_entity_decode($short_name_attr); // Convert HTML entities to their corresponding characters
-$sort_name = $last_name . ', ' . $first_name . ' ' . $middle_name;
-$sort_name_param_value = sanitize_title_with_dashes($sort_name);
+// Get the page title and other name values
+
+	// Get the elements of the provider's name
+
+		// First name
+
+			$first_name = get_field('physician_first_name',$post->ID);
+
+		// Middle name
+
+			$middle_name = get_field('physician_middle_name',$post->ID);
+
+		// Last name
+
+			$last_name = get_field('physician_last_name',$post->ID);
+
+		// Generational suffix (e.g., Jr.)
+
+			$pedigree = get_field('physician_pedigree',$post->ID);
+
+		// Degrees and credentials (e.g., M.D., Ph.D.)
+
+			$degrees = get_field( 'physician_degree', $post->ID );
+
+			// Clean up degrees value
+
+				if (
+					$degrees
+					&&
+					is_array($degrees)
+				) {
+
+					$degrees = array_filter($degrees);
+					$degrees = array_unique($degrees);
+					$degrees = array_values($degrees);
+
+				}
+
+			$degree_count = $degrees ? count($degrees) : 0;
+			$degree_list = '';
+			$degree_list_attr = '';
+			$degree_attr_array = array();
+			$i = 1;
+
+			if ( $degrees ) {
+
+				foreach ( $degrees as $degree ) {
+
+					$degree_term = get_term( $degree, 'degree');
+
+					if ( is_object($degree_term) ) {
+
+						$degree_name = $degree_term->name;
+						$degree_list .= $degree_name;
+						$degree_attr_array[] = uamswp_attr_conversion($degree_name);
+
+						if ( $degree_count > $i ) {
+
+							$degree_list .= ', ';
+
+						} // endif ( count($degrees) > $i )
+
+						$i++;
+
+					}
+
+				} // endforeach
+
+			} // endif ( $degrees )
+
+			if ( $degree_list ) {
+
+				$degree_list_attr = uamswp_attr_conversion($degree_list);
+
+			}
+
+			// Remove empty rows
+
+				$degree_attr_array = array_filter($degree_attr_array);
+
+			// Remove duplicate rows
+
+				$degree_attr_array = array_unique( $degree_attr_array, SORT_REGULAR );
+
+			// Reindex array
+
+				$degree_attr_array = array_values($degree_attr_array);
+
+		// Dr. Prefix
+
+			// Define list of degrees or credentials need for "Dr." prefix (per UAMS Health clinical administration)
+
+				$prefix_degrees = array(
+					'M.D.',
+					'D.O.'
+				);
+
+			// Set the "Dr." prefix
+
+				// Eliminate PHP errors
+
+					$prefix = '';
+					$prefix_attr = '';
+
+				if (
+					array_intersect(
+						$prefix_degrees, // The array with master values to check.
+						$degree_attr_array // Arrays to compare values against.
+					)
+				) {
+
+					$prefix = 'Dr.';
+					$prefix_attr = uamswp_attr_conversion($prefix);
+
+				}
+
+	// Construct the variants of the provider's name
+
+		// Full name (e.g., "Leonard H. McCoy, M.D.")
+
+			$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+			$full_name_attr = $full_name ? uamswp_attr_conversion($full_name) : '';
+
+		// Medium name (e.g., "Dr. Leonard H. McCoy")
+
+			$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
+			$medium_name_attr = $medium_name ? uamswp_attr_conversion($medium_name) : '';
+
+		// Short name (e.g., "Dr. McCoy")
+
+			$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
+			$short_name_attr = $short_name ? uamswp_attr_conversion($short_name) : '';
+
+		// Short name possessive (e.g., "Dr. McCoy's")
+
+			if ( substr($short_name, -1) == 's' ) {
+
+				// If the provider's name ends in "s"...
+
+				// Use an apostrophe with no "s" when indicating the possessive form
+				$short_name_possessive = $short_name . '\'';
+
+			} else {
+
+				// Use an apostrophe with an "s" when indicating the possessive form
+				$short_name_possessive = $short_name . '\'s';
+
+			}
+
+		// Sort name (e.g., "McCoy, Leonard H.")
+
+			$sort_name = $last_name . ', ' . $first_name . ' ' . $middle_name;
+
+		// Sort name parameter (e.g., "mccoy-leonard-h")
+
+			$sort_name_param_value = sanitize_title_with_dashes($sort_name);
+
+// Languages
+
+	$languages = get_field( 'physician_languages', $post->ID );
+	$language_count = 0;
+
+	if ($languages) {
+
+		$language_count = count($languages);
+
+	}
+
+	$language_list = '';
+	$i = 1;
+
+	if ( $languages ) {
+
+		foreach ( $languages as $language ) {
+
+			$language_name = get_term_by( 'id', $language, 'language' );
+
+			if ( is_object($language_name) ) {
+
+				$language_list .= $language_name->name;
+
+				if ( $language_count > $i ) {
+
+					$language_list .= ", ";
+
+				}
+
+			}
+
+			$i++;
+
+		} // endforeach
+
+	}
+
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
-$resident = get_field('physician_resident',$post->ID);
-$resident_title_name = 'Resident Physician';
-$phys_title = get_field('physician_title',$post->ID);
-$phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
-$phys_title_name_attr = $phys_title_name;
-$phys_title_name_attr = str_replace('"', '\'', $phys_title_name_attr); // Replace double quotes with single quote
-$phys_title_name_attr = htmlentities($phys_title_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$phys_title_name_attr = str_replace('&nbsp;', ' ', $phys_title_name_attr); // Convert non-breaking space with normal space
-$phys_title_name_attr = html_entity_decode($phys_title_name_attr); // Convert HTML entities to their corresponding characters
-$vowels = array('a','e','i','o','u'); // Define a list of variables for use in determining which indefinite article to use (a vs. an)
-if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
-    $phys_title_indef_article = 'an'; // If the clinical title starts with a vowel, use "an"
-} else {
-    $phys_title_indef_article = 'a'; // If the clinical title does not start with a vowel, use "a"
-}
-// Define a list of exceptions to the vowel-based determination of which indefinite article to use.
-// Use "a" before consonant sounds: a historic event, a one-year term.
-// Use "an" before vowel sounds: an honor, an NBA record.
-// Write the key as the characters at the beginning of the exception. It can be a complete or incomplete title.
-// Write the value as the indefinite article to use in that case ('a' or 'an').
-$phys_title_indef_article_exceptions = array(
-    'SNF' => 'an',
-    'Urolog' => 'a',
-    'Uveitis' => 'a'
-);
-if ( !empty($phys_title_indef_article_exceptions) ) {
-    foreach( $phys_title_indef_article_exceptions as $exception => $indef_article ) {
-        $exception_length = strlen($exception); // Get the charactter length of the exception key
-        if (substr(strtolower($phys_title_name), 0, $exception_length) == strtolower($exception)) { // If the clinical title begins with the exception key...
-            $phys_title_indef_article = $indef_article; // Use the key's value as the indefinite article
-        }
-    }
-}
-if ( substr($short_name, -1) == 's' ) { // If the provider's name ends in "s"...
-    $short_name_possessive = $short_name . '\''; // Use an apostrophe with no "s" when indicating the possessive form
-} else {
-    $short_name_possessive = $short_name . '\'s'; // Use an apostrophe with an "s" when indicating the possessive form
-}
+
+// Get resident values
+
+	$resident = get_field('physician_resident',$post->ID);
+	$resident_title_name = 'Resident Physician';
+
+// Get clinical specialty and occupation title values
+
+	// Eliminate PHP errors
+
+		$provider_specialty = '';
+		$provider_specialty_term = '';
+		$provider_specialty_name = '';
+		$provider_occupation_title = '';
+
+	if ( $resident ) {
+
+		// Clinical Occupation Title
+
+			$provider_occupation_title = $resident;
+
+	} else {
+
+		// Clinical Specialty
+
+			$provider_specialty = get_field('physician_title',$post->ID);
+
+		// Clinical Occupation Title
+
+			if ( $provider_specialty ) {
+
+				$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+
+				if ( is_object($provider_specialty_term) ) {
+
+					// Get term name
+
+						$provider_specialty_name = $provider_specialty_term->name;
+
+					// Get occupational title field from term
+
+						$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+
+					// Set occupational title from term name as a fallback
+
+						if ( !$provider_occupation_title ) {
+
+							$provider_occupation_title = $provider_specialty_name;
+
+						}
+
+				}
+
+			}
+
+	}
+
+	$provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conversion($provider_occupation_title) : '';
+
+	// Defines the indefinite article to precede the clinical occupation title (a or an, based on whether clinical occupation title starts with vowel)
+
+		if (
+			in_array(
+				strtolower($provider_occupation_title)[0],
+				array( 'a', 'e', 'i', 'o', 'u' )
+			)
+		) {
+
+			// If the clinical title starts with a vowel, use "an"
+			$provider_occupation_title_indef_article = 'an';
+
+		} else {
+
+			// If the clinical title does not start with a vowel, use "a"
+			$provider_occupation_title_indef_article = 'a';
+
+		}
+
+	// Define a list of exceptions to the vowel-based determination of which indefinite article to use.
+
+		/**
+		 * - Use "a" before consonant sounds: a historic event, a one-year term.
+		 * - Use "an" before vowel sounds: an honor, an NBA record.
+		 * - Write the key as the characters at the beginning of the exception. It can be a complete or incomplete title.
+		 * - Write the value as the indefinite article to use in that case ('a' or 'an').
+		 */
+
+		$provider_occupation_title_indef_article_exceptions = array(
+			'SNF' => 'an',
+			'Urolog' => 'a',
+			'Uveitis' => 'a'
+		);
+
+		if ( !empty($provider_occupation_title_indef_article_exceptions) ) {
+
+			foreach( $provider_occupation_title_indef_article_exceptions as $exception => $indef_article ) {
+
+				if (
+					substr(
+						strtolower($provider_occupation_title),
+						0,
+						strlen($exception)
+					) == strtolower($exception)
+				) {
+
+					// If the clinical title begins with the exception key...
+
+					// Use the key's value as the indefinite article
+					$provider_occupation_title_indef_article = $indef_article;
+
+				}
+
+			}
+
+		}
+
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
 // Check for valid locations
@@ -129,20 +345,10 @@ if( $locations && $location_valid ) {
         if ( 2 > $l ){
             if ( get_post_status ( $location ) == 'publish' ) {
                 $primary_appointment_title = get_the_title( $location );
-                $primary_appointment_title_attr = $primary_appointment_title;
-                $primary_appointment_title_attr = str_replace('"', '\'', $primary_appointment_title_attr); // Replace double quotes with single quote
-                $primary_appointment_title_attr = str_replace('&#8217;', '\'', $primary_appointment_title_attr); // Replace right single quote with single quote
-                $primary_appointment_title_attr = htmlentities($primary_appointment_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-                $primary_appointment_title_attr = str_replace('&nbsp;', ' ', $primary_appointment_title_attr); // Convert non-breaking space with normal space
-                $primary_appointment_title_attr = html_entity_decode($primary_appointment_title_attr); // Convert HTML entities to their corresponding characters
+                $primary_appointment_title_attr = $primary_appointment_title ? uamswp_attr_conversion($primary_appointment_title) : '';
                 $primary_appointment_url = get_the_permalink( $location );
                 $primary_appointment_city = get_field('location_city', $location);
-                $primary_appointment_city_attr = $primary_appointment_city;
-                $primary_appointment_city_attr = str_replace('"', '\'', $primary_appointment_city_attr); // Replace double quotes with single quote
-                $primary_appointment_city_attr = str_replace('&#8217;', '\'', $primary_appointment_city_attr); // Replace right single quote with single quote
-                $primary_appointment_city_attr = htmlentities($primary_appointment_city_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-                $primary_appointment_city_attr = str_replace('&nbsp;', ' ', $primary_appointment_city_attr); // Convert non-breaking space with normal space
-                $primary_appointment_city_attr = html_entity_decode($primary_appointment_city_attr); // Convert HTML entities to their corresponding characters
+                $primary_appointment_city_attr = $primary_appointment_city ? uamswp_attr_conversion($primary_appointment_city) : '';
 
                 $l++;
             }
@@ -160,33 +366,34 @@ if ( $expertises ) {
     }
 }
 
-// Hide Sections
-$hide_medical_ontology = false;
-$provider_region = get_field('physician_region',$post->ID);
-$provider_service_line = get_field('physician_service_line',$post->ID);
-if( have_rows('remove_ontology_criteria', 'option') ):
-    while( have_rows('remove_ontology_criteria', 'option') ): the_row();
-        $remove_region = get_sub_field('remove_regions', 'option');
-        $remove_service_line = get_sub_field('remove_service_lines', 'option');
-        if ( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && empty($remove_service_line) ) { 
-            $hide_medical_ontology = true;
-            break;
-        } elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
-            $hide_medical_ontology = true;
-            break;
-        } elseif( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
-            $hide_medical_ontology = true;
-            break;
-        }
-    endwhile;
-endif;
+// Query for whether to conditionally suppress ontology sections based on based on region and service line
+
+	$hide_medical_ontology = false;
+	$provider_region = get_field('physician_region',$post->ID);
+	$provider_service_line = get_field('physician_service_line',$post->ID);
+	if( have_rows('remove_ontology_criteria', 'option') ):
+		while( have_rows('remove_ontology_criteria', 'option') ): the_row();
+			$remove_region = get_sub_field('remove_regions', 'option');
+			$remove_service_line = get_sub_field('remove_service_lines', 'option');
+			if ( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && empty($remove_service_line) ) {
+				$hide_medical_ontology = true;
+				break;
+			} elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
+				$hide_medical_ontology = true;
+				break;
+			} elseif( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
+				$hide_medical_ontology = true;
+				break;
+			}
+		endwhile;
+	endif;
 
 // Set meta description
 if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
     } else {
-        $fallback_desc = $medium_name_attr . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') .  ' employed by UAMS Health.';
+        $fallback_desc = $medium_name_attr . ' is ' . ($provider_occupation_title ? $provider_occupation_title_indef_article . ' ' . strtolower($provider_occupation_title) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') .  ' employed by UAMS Health.';
         $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
     }
 }
@@ -195,15 +402,15 @@ $schema_description = $excerpt;  // Used for Schema Data. Should ALWAYS have a v
 // Override theme's method of defining the meta description
 function sp_titles_desc($html) {
     global $excerpt;
-	$html = $excerpt; 
+	$html = $excerpt;
 	return $html;
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html) { 
+function uamswp_fad_title($html) {
     global $full_name_attr;
-    global $phys_title_name_attr;
+    global $provider_occupation_title_attr;
     global $primary_appointment_city_attr;
     global $expertise_primary_name;
 
@@ -215,15 +422,15 @@ function uamswp_fad_title($html) {
     $meta_title_base_chars = strlen( $meta_title_base ); // Count the characters in the meta title
 
     // Base meta title ("{Full display name} | {Clinical title} | UAMS Health")
-    $meta_title_enhanced = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+    $meta_title_enhanced = $full_name_attr . $meta_title_separator . $provider_occupation_title_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
     $meta_title_enhanced_chars = strlen( $meta_title_enhanced ); // Count the characters in the meta title
 
     // Enhanced meta title level 1 ("{Full display name} | {Clinical title} | {City of primary location} | UAMS Health")
-    $meta_title_enhanced_x2 = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+    $meta_title_enhanced_x2 = $full_name_attr . $meta_title_separator . $provider_occupation_title_attr . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
     $meta_title_enhanced_x2_chars = strlen( $meta_title_enhanced_x2 ); // Count the characters in the meta title
 
     // Enhanced meta title level 2 ("{Full display name} | {Clinical title} | {Primary area of expertise} | {City of primary location} | UAMS Health")
-    $meta_title_enhanced_x3 = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $expertise_primary_name . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+    $meta_title_enhanced_x3 = $full_name_attr . $meta_title_separator . $provider_occupation_title_attr . $meta_title_separator . $expertise_primary_name . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
     $meta_title_enhanced_x3_chars = strlen( $meta_title_enhanced_x3 ); // Count the characters in the meta title
 
     if ( $expertise_primary_name && ( $meta_title_enhanced_x3_chars <= $meta_title_chars_max ) ) {
@@ -258,7 +465,7 @@ add_filter('seopress_pro_breadcrumbs_crumbs', 'sp_change_title_from_provider_cru
 
 get_header();
 
-while ( have_posts() ) : the_post(); 
+while ( have_posts() ) : the_post();
     // ACF Fields - get_fields
     $service_line = get_field('physician_service_line');
     $npi =  get_field('physician_npi');
@@ -266,19 +473,44 @@ while ( have_posts() ) : the_post();
     $video = get_field('physician_youtube_link');
     $affiliation = get_field('physician_affiliation');
     $hidden = get_field('physician_hidden');
-    $resident_profile_group = get_field('physician_resident_profile_group');
-    // $resident_hometown_international = $resident_profile_group['physician_resident_hometown_international'];
-    // $resident_hometown_city = $resident_profile_group['physician_resident_hometown_city'];
-    // $resident_hometown_state = $resident_profile_group['physician_resident_hometown_state'];
-    // $resident_hometown_country = $resident_profile_group['physician_resident_hometown_country'];
-    // $resident_medical_school = $resident_profile_group['physician_resident_hometown_country'];
-    $resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
-    $resident_academic_department_name = $resident_academic_department ? get_term( $resident_academic_department, 'academic_department' )->name : '';
-    $resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
-    $resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
-    $resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
-    $resident_academic_year_name = $resident_academic_year ? get_term( $resident_academic_year, 'residency_year' )->name : '';
-    $resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
+
+	$resident_profile_group = '';
+	// $resident_hometown_international = '';
+	// $resident_hometown_city = '';
+	// $resident_hometown_state = '';
+	// $resident_hometown_country = '';
+	// $resident_medical_school = '';
+	$resident_academic_department = '';
+	$resident_academic_department_name = '';
+	$resident_academic_chief = '';
+	$resident_academic_chief_name = '';
+	$resident_academic_year = '';
+	$resident_academic_year_name = '';
+	$resident_academic_name = '';
+
+	if ( $resident ) {
+
+		$resident_profile_group = get_field('physician_resident_profile_group');
+
+		if ( $resident_profile_group ) {
+
+			// $resident_hometown_international = $resident_profile_group['physician_resident_hometown_international'];
+			// $resident_hometown_city = $resident_profile_group['physician_resident_hometown_city'];
+			// $resident_hometown_state = $resident_profile_group['physician_resident_hometown_state'];
+			// $resident_hometown_country = $resident_profile_group['physician_resident_hometown_country'];
+			// $resident_medical_school = $resident_profile_group['physician_resident_hometown_country'];
+			$resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
+			$resident_academic_department_name = $resident_academic_department ? get_term( $resident_academic_department, 'academic_department' )->name : '';
+			$resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
+			$resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
+			$resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
+			$resident_academic_year_name = $resident_academic_year ? get_term( $resident_academic_year, 'residency_year' )->name : '';
+			$resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
+
+		}
+
+	}
+
     $college_affiliation = get_field('physician_academic_college');
     $position = get_field('physician_academic_position');
     $bio_academic = get_field('physician_academic_bio');
@@ -375,7 +607,7 @@ while ( have_posts() ) : the_post();
     if ($resident && !empty($resident)) { $provider_field_classes = $provider_field_classes . ' is-resident'; }
 
     $title_append = ' by ' . $short_name;
-            
+
     // Set Conditions variables
     $args = (array(
         'post_type' => "condition",
@@ -544,13 +776,13 @@ while ( have_posts() ) : the_post();
                 <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
                     <h1 class="page-title">
                         <span class="name"><?php echo $full_name; ?></span>
-                        <?php 
-                        
-                        if ($phys_title_name && !empty($phys_title_name)) { ?>
-                            <span class="subtitle"><?php echo ($phys_title_name ? $phys_title_name : ''); ?></span>
+                        <?php
+
+                        if ($provider_occupation_title && !empty($provider_occupation_title)) { ?>
+                            <span class="subtitle"><?php echo ($provider_occupation_title ? $provider_occupation_title : ''); ?></span>
                         <?php } ?>
                     </h1>
-                    <?php 
+                    <?php
                         $l = 1;
                         if( $locations && $location_valid ): ?>
                         <div data-sectiontitle="Primary Location">
@@ -565,8 +797,8 @@ while ( have_posts() ) : the_post();
 
                                             // Reset variables
                                             $address_id = $location;
-                                        
-                                            // Parent Location 
+
+                                            // Parent Location
                                             $location_has_parent = get_field('location_parent', $location);
                                             $location_parent_id = get_field('location_parent_id', $location);
                                             $parent_location = ''; // Eliminate PHP errors
@@ -576,8 +808,8 @@ while ( have_posts() ) : the_post();
                                             $parent_location_prepend_the = ''; // Eliminate PHP errors
                                             $parent_title_prepend = ''; // Eliminate PHP errors
                                             $parent_title_phrase = ''; // Eliminate PHP errors
-                                        
-                                            if ($location_has_parent && $location_parent_id) { 
+
+                                            if ($location_has_parent && $location_parent_id) {
                                                 $parent_location = get_post( $location_parent_id );
                                             }
                                             // Get Post ID for Address & Image fields
@@ -590,7 +822,7 @@ while ( have_posts() ) : the_post();
                                                 $parent_title_prepend = $parent_location_prepend_the ? 'the ' : '';
                                                 $parent_title_phrase = $parent_title_prepend . $parent_title;
                                             }
-                                            
+
                                             $location_address_1 = get_field('location_address_1', $address_id );
                                             $location_building = get_field('location_building', $address_id );
                                             if ($location_building) {
@@ -658,12 +890,12 @@ while ( have_posts() ) : the_post();
                             <?php endforeach;
 								// wp_reset_postdata(); ?>
                         </div>
-						<?php endif; ?> 
+						<?php endif; ?>
                     <h2 class="h3">Overview</h2>
                     <dl data-sectiontitle="Overview">
                     <?php // Display area(s) of expertise
                     $expertise_valid = false;
-                    if ($expertises && !empty($expertises) && !$hide_medical_ontology) { 
+                    if ($expertises && !empty($expertises) && !$hide_medical_ontology) {
                         foreach( $expertises as $expertise ) {
                             if ( get_post_status ( $expertise ) == 'publish' ) {
                                $expertise_valid = true;
@@ -683,7 +915,7 @@ while ( have_posts() ) : the_post();
                     <?php // Display if they accept new patients
                     if ( $eligible_appt ) { ?>
                         <dt>Accepting New Patients</dt>
-                        <?php 
+                        <?php
                         if ($accept_new) {
                             // Display if they require referrals for new patients
                             if ( $refer_req ) { ?>
@@ -695,13 +927,13 @@ while ( have_posts() ) : the_post();
                             <dd>No</dd>
                         <?php } // endif
                     } // endif ?>
-                    <?php  // Display if they will provide second opinions    
+                    <?php  // Display if they will provide second opinions
                     if ($second_opinion) { ?>
                         <dt>Provides Second Opinion</dt>
                         <dd>Yes</dd>
                     <?php } ?>
                     <?php // Display all patient types
-                        if( $patients ) { 
+                        if( $patients ) {
                         ?>
                             <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
                             <?php foreach( $patients as $patient ): ?>
@@ -711,7 +943,7 @@ while ( have_posts() ) : the_post();
                             <?php endforeach; ?>
                     <?php } // endif ?>
                     <?php // Display all languages
-                        if( $languages && $language_list == 'English') { 
+                        if( $languages && $language_list == 'English') {
                         ?>
                         <dt class="sr-only">Language</dt>
                         <?php echo '<dd class="sr-only">' . $language_list . '</dd>';?>
@@ -735,7 +967,7 @@ while ( have_posts() ) : the_post();
                             echo '<div class="ratings-comments-lg" aria-hidden="true">'.  $comment_count .' comments</div>';
                             echo '</a>';
                         } else { ?>
-                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider" data-sectiontitle="Overview"><span aria-hidden="true">Why not?</span></a></em></p> 
+                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider" data-sectiontitle="Overview"><span aria-hidden="true">Why not?</span></a></em></p>
                         <?php
                         }
                         echo '</div>';
@@ -766,7 +998,7 @@ while ( have_posts() ) : the_post();
                         </div>
                     <?php } ?>
                 </div>
-                <?php 
+                <?php
                 $docphoto = '/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg';
                 if ( has_post_thumbnail() ) { ?>
                 <div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
@@ -866,8 +1098,8 @@ while ( have_posts() ) : the_post();
             $appointment_block_instance = 1;
 			include( UAMS_FAD_PATH . '/templates/blocks/appointment-provider.php' );
 		} ?>
-        
-        <?php 
+
+        <?php
             $physician_clinical_split = false;
             if (
                 ( $show_clinical_bio_section ) // column A stuff
@@ -876,7 +1108,7 @@ while ( have_posts() ) : the_post();
                 ) {
                 $physician_clinical_split = true; // If there is stuff for column A and column B, split the section into two columns
             }
-        
+
             // Display section for Clinical Bio, Clinical Video, Clinical Administrative Title(s), Clinical Focus ... only if there is a bio or video.
             if ( $show_clinical_bio_section ) { ?>
             <section class="uams-module clinical-info bg-auto" id="clinical-info">
@@ -896,19 +1128,54 @@ while ( have_posts() ) : the_post();
                             <?php } // endif
                             if ( $physician_clinical_bio ) { ?>
                                 <h3 class="sr-only">Clinical Biography</h3>
-                                <?php echo $physician_clinical_bio; ?>
-                            <?php } // endif
-                            if($video) { ?>
-                                <?php if(function_exists('lyte_preparse')) {
-                                    echo '<div class="alignwide">';
-                                    echo lyte_parse( str_replace(['https:', 'http:'], 'httpv:', $video ) ); 
-                                    echo '</div>';
-                                } else {
-                                    echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-                                    echo wp_oembed_get( $video ); 
-                                    echo '</div>';
-                                } ?>
-                            <?php } // endif
+                                <?php echo $physician_clinical_bio;
+
+							} // endif
+
+							if ( $video ) {
+
+								// Check video source
+
+									if (
+										strpos( $video, 'youtube' ) !== false
+										||
+										strpos( $video, 'youtu.be' ) !== false
+									) {
+
+										$video_source = 'youtube';
+
+									} else {
+
+										$video_source = '';
+
+									}
+
+								// Display video player
+
+									if (
+										function_exists('lyte_preparse')
+										&&
+										$video_source == 'youtube'
+									) {
+
+										?>
+										<div class="alignwide">
+											<?php echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) ); ?>
+										</div>
+										<?php
+
+									} else {
+
+										?>
+										<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
+											<?php echo wp_oembed_get( $video ); ?>
+										</div>
+										<?php
+
+									}
+
+							} // endif
+
                             if ( $physician_clinical_split ) { ?>
                                 </div>
                                 </div>
@@ -921,14 +1188,14 @@ while ( have_posts() ) : the_post();
                                     <h3 class="h4">Administrative Roles</h3>
                                     <dl>
                                     <?php while( have_rows('physician_clinical_admin_title') ): the_row();
-                                        $department = get_term( get_sub_field('physician_clinical_admin_area'), 'service_line' ); 
+                                        $department = get_term( get_sub_field('physician_clinical_admin_area'), 'service_line' );
                                         $clinical_admin_title_tax = get_term( get_sub_field('clinical_admin_title_tax'), 'clinical_admin_title' );
                                     ?>
                                         <dt><?php echo $department->name; ?></dt>
                                         <dd><?php echo $clinical_admin_title_tax->name; ?></dd>
                                     <?php endwhile; ?>
                                     </dl>
-                                <?php endif; 
+                                <?php endif;
                             } // endif ?>
                             <?php if($physician_clinical_focus) { ?>
                                 <h3 class="h4">Clinical Focus</h3>
@@ -981,7 +1248,7 @@ while ( have_posts() ) : the_post();
             </section>
         <?php }
         // End UAMS Health Talk Podcast
-        
+
         // Begin Clinical Resources Section
         $resource_heading_related_pre = false; // "Related Resources"
         $resource_heading_related_post = true; // "Resources Related to __"
@@ -993,13 +1260,13 @@ while ( have_posts() ) : the_post();
             include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
         }
         // End Clinical Resources Section
-        
+
         // Begin Academic Bio Section
         $physician_academic_split = false;
             if ( $academic_bio && ( $academic_appointment || $academic_admin_title || $education || $boards ) ) {
                 $physician_academic_split = true;
             }
-        
+
             if( $show_academic_section ): ?>
         <section class="uams-module academic-info bg-auto" id="academic-info">
             <div class="container-fluid">
@@ -1029,8 +1296,8 @@ while ( have_posts() ) : the_post();
                                     <h3 class="h4">Administrative Roles</h3>
                                     <dl>
                                     <?php while( have_rows('physician_academic_admin_title') ): the_row(); ?>
-                                    <?php 
-                                        $department = get_term( get_sub_field('department'), 'academic_department' ); 
+                                    <?php
+                                        $department = get_term( get_sub_field('department'), 'academic_department' );
                                         $academic_admin_title_tax = get_term( get_sub_field('academic_admin_title_tax'), 'academic_admin_title' );
                                     ?>
                                         <dt><?php echo $department->name; ?></dt>
@@ -1044,8 +1311,8 @@ while ( have_posts() ) : the_post();
                                     <h3 class="h4">Faculty Appointments</h3>
                                     <dl>
                                     <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
-                                    <?php 
-                                        $department = get_term( get_sub_field('department'), 'academic_department' ); 
+                                    <?php
+                                        $department = get_term( get_sub_field('department'), 'academic_department' );
                                         $academic_title_tax = get_term( get_sub_field('academic_title_tax'), 'academic_title' );
                                         if ($academic_title_tax->name) {
                                             $academic_title = $academic_title_tax->name;
@@ -1079,7 +1346,7 @@ while ( have_posts() ) : the_post();
                                     <?php endwhile; ?>
                                     </dl>
                             <?php endif;
-                                
+
                                 if( ! empty( $boards ) ): ?>
                             <h3 class="h4">Professional Certifications</h3>
                             <ul>
@@ -1090,7 +1357,7 @@ while ( have_posts() ) : the_post();
                             <?php endforeach; ?>
                             </ul>
                             <?php endif;
-                                
+
                                 if( ! empty( $associations ) ): ?>
                             <h3 class="h4">Associations</h3>
                             <ul>
@@ -1170,7 +1437,7 @@ while ( have_posts() ) : the_post();
 
         // Begin Conditions Section
         // load all 'conditions' terms for the post
-             
+
             // Conditions CPT
             // we will use the first term to load ACF data from
             if( $show_conditions_section ) {
@@ -1193,7 +1460,7 @@ while ( have_posts() ) : the_post();
                     $i++;
                 } // endforeach;
                 // $condition_schema .= '"" ]';
-            } // endif; 
+            } // endif;
 
             // Treatments CPT
             if( $show_treatments_section ) {
@@ -1216,7 +1483,7 @@ while ( have_posts() ) : the_post();
                 } // endforeach
                 // $treatment_schema .= ']';
             } // endif
-        
+
         if ( $show_aoe_section && !empty($expertises) ) { ?>
             <section class="uams-module expertise-list bg-auto" id="expertise">
                 <div class="container-fluid">
@@ -1238,7 +1505,7 @@ while ( have_posts() ) : the_post();
                 </div>
             </section>
         <?php } // endif ?>
-        <?php 
+        <?php
         if( $show_locations_section && !empty($locations) ): ?>
         <section class="uams-module location-list bg-auto" id="locations">
             <div class="container-fluid">
@@ -1251,10 +1518,10 @@ while ( have_posts() ) : the_post();
                                 $location_schema = ',
     "address": [';
                             ?>
-                            <?php foreach( $locations as $location ): 
-                                if ( get_post_status ( $location ) == 'publish' ) { 
+                            <?php foreach( $locations as $location ):
+                                if ( get_post_status ( $location ) == 'publish' ) {
 
-                                    $id = $location; 
+                                    $id = $location;
                                     include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
                                         // Schema data
                                         if ($l > 1){
@@ -1274,7 +1541,7 @@ while ( have_posts() ) : the_post();
 
                                     <?php $l++; ?>
                                 <?php } ?>
-                            <?php endforeach; 
+                            <?php endforeach;
                                 $location_schema .= ']
                                 ';
                             ?>
@@ -1284,7 +1551,7 @@ while ( have_posts() ) : the_post();
                 </div>
             </div>
         </section>
-        <?php endif; ?> 
+        <?php endif; ?>
         <?php if ( $show_ratings_section ) : ?>
         <section class="uams-module ratings-and-reviews bg-auto" id="ratings">
             <div class="container-fluid">
@@ -1297,7 +1564,7 @@ while ( have_posts() ) : the_post();
                                 <dl>
                                     <?php
                                     $questionRatings = $rating_data->profile->questionRatings;
-                                    foreach( $questionRatings as $questionRating ): 
+                                    foreach( $questionRatings as $questionRating ):
                                         if ($questionRating->questionCount > 0){ ?>
                                     <dt><?php echo $questionRating->question; ?></dt>
                                     <dd>
@@ -1315,7 +1582,7 @@ while ( have_posts() ) : the_post();
                                 <p>(<?php echo $rating_data->profile->reviewBodyCountStr; ?>)</p>
                             </div>
                         </div>
-                        <?php 
+                        <?php
                         $reviews = $rating_data->reviews;
                         // if ( $reviews ) : ?>
                         <?php //print_r($rating_data); ?>
@@ -1375,10 +1642,10 @@ while ( have_posts() ) : the_post();
                                         // grab the profile data
                                         var review = data.reviewMeta;
                                         if(review){
-                                            // setup the variables that the template will need	
+                                            // setup the variables that the template will need
                                             var templateData = {
                                                 moreUrl:    review.moreUrl
-                                            }; 
+                                            };
                                             // build the HTML markup using {{var-name}} for the template variables
                                             var template = [
                                                 '<div class="ds-comments-more ds-comments-more-placeholder">',
@@ -1389,12 +1656,12 @@ while ( have_posts() ) : the_post();
                                             // apply the variables to the template
                                             x = ctx.tmpl(template, templateData);
                                         }
-                                    }      
+                                    }
                                     return x;
                                 }
                             };
                         </script>
-                        <script src="https://transparency.nrchealth.com/widget/v3/uams/npi/<?php echo $npi; ?>/lotw.js" async></script>                           
+                        <script src="https://transparency.nrchealth.com/widget/v3/uams/npi/<?php echo $npi; ?>/lotw.js" async></script>
                         <?php // endif; ?>
                     </div>
                 </div>
@@ -1445,8 +1712,8 @@ while ( have_posts() ) : the_post();
             </div>
         </section> -->
         <?php if (
-            $show_appointment_section && 
-            ( 
+            $show_appointment_section &&
+            (
                 $show_clinical_bio_section
                 || $show_academic_section
                 || $show_podcast_section
@@ -1474,7 +1741,7 @@ while ( have_posts() ) : the_post();
   "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>",
   "image": "<?php echo $docphoto; ?>",
   "description": "<?php echo $schema_description; ?>"
-  <?php 
+  <?php
         if ($condition_schema || $treatment_schema) {
             echo ',';
             echo '"medicalSpecialty": [';

@@ -1,0 +1,404 @@
+
+{
+	"key": "group_treatments_fpage_labels",
+	"title": "Fake Subpage (or Section) for Treatments in an Ontology Subsection (or Profile)",
+	"fields": [
+		{
+			"key": "field_treatments_fpage_tab_general",
+			"label": "General Placement",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_treatments_fpage_title_message_general",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>General Information for a Fake Subpage (or Section) for Treatments<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
+			"key": "field_treatments_fpage_title_general",
+			"label": "General Title of a Fake Subpage (or Section) for Treatments",
+			"name": "treatments_fpage_title_general",
+			"type": "text",
+			"instructions": "If you leave this blank, the default title structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., title of a fake subpage (or section) for treatments in an area of expertise subsection [or profile]).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Related [Treatments]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_treatments_fpage_intro_general",
+			"label": "General Intro Text of a Fake Subpage (or Section) for Treatments",
+			"name": "treatments_fpage_intro_general",
+			"type": "textarea",
+			"instructions": "If you leave this blank, the default intro text structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., intro text of a fake subpage (or section) for treatments in an area of expertise subsection [or profile]).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "UAMS Health [providers] perform and prescribe a broad range of [treatments], some of which may not be listed below.",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_treatments_fpage_tab_provider",
+			"label": "Provider Subsection",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_treatments_fpage_title_message_provider",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>General Information for a Fake Subpage (or Section) for Treatments in a Provider Subsection (or Profile)<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
+			"key": "field_treatments_fpage_title_provider",
+			"label": "Title of a Fake Subpage (or Section) for Treatments in a Provider Subsection (or Profile)",
+			"name": "treatments_fpage_title_provider",
+			"type": "text",
+			"instructions": "If you leave this blank, the default title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "[Treatments] Performed or Prescribed by [Provider Short Name]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_treatments_fpage_intro_provider",
+			"label": "Intro Text of a Fake Subpage (or Section) for Treatments in a Provider Subsection (or Profile)",
+			"name": "treatments_fpage_intro_provider",
+			"type": "textarea",
+			"instructions": "If you leave this blank, the default intro text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_treatments_fpage_tab_location",
+			"label": "Location Subsection",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_treatments_fpage_title_message_location",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>General Information for a Fake Subpage (or Section) for Treatments in a Location Subsection (or Profile)<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
+			"key": "field_treatments_fpage_title_location",
+			"label": "Title of a Fake Subpage (or Section) for Treatments in a Location Subsection (or Profile)",
+			"name": "treatments_fpage_title_location",
+			"type": "text",
+			"instructions": "If you leave this blank, the default title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "[Treatments] Performed or Prescribed at [the Location Title]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_treatments_fpage_intro_location",
+			"label": "Intro Text of a Fake Subpage (or Section) for Treatments in a Location Subsection (or Profile)",
+			"name": "treatments_fpage_intro_location",
+			"type": "textarea",
+			"instructions": "If you leave this blank, the default intro text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_treatments_fpage_tab_expertise",
+			"label": "Area of Expertise Subsection",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_treatments_fpage_title_message_expertise",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>General Information for a Fake Subpage (or Section) for Treatments in an Area of Expertise Subsection (or Profile)<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
+			"key": "field_treatments_fpage_title_expertise",
+			"label": "Title of a Fake Subpage (or Section) for Treatments in an Area of Expertise Subsection (or Profile)",
+			"name": "treatments_fpage_title_expertise",
+			"type": "text",
+			"instructions": "If you leave this blank, the default title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "[Treatments] Related to [Area of Expertise Title]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_treatments_fpage_intro_expertise",
+			"label": "Intro Text of a Fake Subpage (or Section) for Treatments in an Area of Expertise Subsection (or Profile)",
+			"name": "treatments_fpage_intro_expertise",
+			"type": "textarea",
+			"instructions": "If you leave this blank, the default intro text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_treatments_fpage_tab_clinical_resource",
+			"label": "Clinical Resource Profile",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_treatments_fpage_title_message_clinical_resource",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>General Information for a Fake Subpage (or Section) for Treatments in a Clinical Resource Subsection (or Profile)<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
+			"key": "field_treatments_fpage_title_clinical_resource",
+			"label": "Title of a Fake Subpage (or Section) for Treatments in a Clinical Resource Subsection (or Profile)",
+			"name": "treatments_fpage_title_clinical_resource",
+			"type": "text",
+			"instructions": "If you leave this blank, the default title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_treatments_fpage_intro_clinical_resource",
+			"label": "Intro Text of a Fake Subpage (or Section) for Treatments in a Clinical Resource Subsection (or Profile)",
+			"name": "treatments_fpage_intro_clinical_resource",
+			"type": "textarea",
+			"instructions": "If you leave this blank, the default intro text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-tax"
+			}
+		]
+	],
+	"menu_order": 80,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
+}

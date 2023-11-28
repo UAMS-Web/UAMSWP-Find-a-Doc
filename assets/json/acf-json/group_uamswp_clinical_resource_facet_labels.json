@@ -1,0 +1,73 @@
+
+{
+	"key": "group_clinical_resource_facet_labels",
+	"title": "Clinical Resources Facet Labels",
+	"fields": [
+		{
+			"key": "field_clinical_resource_type_single_name",
+			"label": "Resource Type Single Item Name",
+			"name": "clinical_resource_type_single_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default single item name will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Resource Type",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_type_plural_name",
+			"label": "Resource Type Plural Item Name",
+			"name": "clinical_resource_type_plural_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default plural item name will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Resource Types",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-resources"
+			}
+		]
+	],
+	"menu_order": 30,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
+}

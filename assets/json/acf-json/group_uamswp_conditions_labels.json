@@ -1,0 +1,73 @@
+
+{
+	"key": "group_conditions_labels",
+	"title": "Conditions Labels",
+	"fields": [
+		{
+			"key": "field_conditions_single_name",
+			"label": "Single Item Name",
+			"name": "conditions_single_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default name for a single item will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Condition",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_conditions_plural_name",
+			"label": "Plural Item Name",
+			"name": "conditions_plural_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default plural item name will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Conditions",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-tax"
+			}
+		]
+	],
+	"menu_order": 30,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
+}
