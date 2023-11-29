@@ -1,634 +1,1616 @@
 {
-    "key": "group_uamswp_expertise",
-    "title": "Clinical Area of Expertise",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "expertise"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_note": "",
-    "acfe_meta": "",
-    "fields": {
-        "field_expertise_alternate_names": {
-            "key": "field_expertise_alternate_names",
-            "label": "Alternate Names",
-            "name": "expertise_alternate_names",
-            "type": "repeater",
-            "instructions": "Insert additional names \/ phrases",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "collapsed": "field_alternate_text",
-            "min": 0,
-            "max": 10,
-            "layout": "table",
-            "button_label": "Add Keyword",
-            "sub_fields": [
-                {
-                    "key": "field_alternate_text",
-                    "label": "Alternate name \/ text",
-                    "name": "text",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": "",
-                    "acfe_validate": "",
-                    "acfe_update": ""
-                }
-            ]
-        },
-        "field_expertise_youtube_link": {
-            "key": "field_expertise_youtube_link",
-            "name": "expertise_youtube_link",
-            "type": "url",
-            "label": "Featured Youtube video",
-            "instructions": "Full URL, including https:\/\/",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": ""
-        },
-        "field_expertise_short_desc": {
-            "key": "field_expertise_short_desc",
-            "name": "post_excerpt",
-            "type": "textarea",
-            "label": "Short Description (excerpt)",
-            "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": 160,
-            "rows": 3,
-            "new_lines": ""
-        },
-        "field_expertise_cta": {
-            "key": "field_expertise_cta",
-            "label": "Call-to-Action (CTA) Bar(s)",
-            "name": "expertise_cta",
-            "type": "repeater",
-            "instructions": "Define up to two CTA Bar blocks",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "collapsed": "field_expertise_cta_bar_heading",
-            "min": 0,
-            "max": 2,
-            "layout": "block",
-            "button_label": "Add CTA Bar",
-            "sub_fields": [
-                {
-                    "key": "field_expertise_cta_bar_heading",
-                    "label": "Heading",
-                    "name": "cta_bar_heading",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_expertise_cta_bar_body",
-                    "label": "Body",
-                    "name": "cta_bar_body",
-                    "type": "wysiwyg",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "tabs": "all",
-                    "toolbar": "basic",
-                    "media_upload": 0,
-                    "delay": 0
-                },
-                {
-                    "key": "field_expertise_cta_bar_action_type",
-                    "label": "Action Type",
-                    "name": "cta_bar_action_type",
-                    "type": "button_group",
-                    "instructions": "Only choose None if your action is contained within your body text.",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "url": "URL",
-                        "phone": "Phone Number",
-                        "none": "None"
-                    },
-                    "allow_null": 0,
-                    "default_value": "url",
-                    "layout": "vertical",
-                    "return_format": "value"
-                },
-                {
-                    "key": "field_expertise_cta_bar_action_url_open",
-                    "label": "URL Action",
-                    "name": "",
-                    "type": "accordion",
-                    "instructions": "All fields must be populated or your link will not display.",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_expertise_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "url"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "open": 1,
-                    "multi_expand": 0,
-                    "endpoint": 0
-                },
-                {
-                    "key": "field_expertise_cta_bar_button_text",
-                    "label": "Button Text",
-                    "name": "cta_bar_button_text",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_expertise_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "url"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_expertise_cta_bar_button_url",
-                    "label": "Button URL",
-                    "name": "cta_bar_button_url",
-                    "type": "link",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_expertise_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "url"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "array"
-                },
-                {
-                    "key": "field_expertise_cta_bar_button_description",
-                    "label": "Button Link Description",
-                    "name": "cta_bar_button_description",
-                    "type": "text",
-                    "instructions": "This is needed for accessibility. It helps differentiate between multiple links that use the same text like \"Learn more\". Describe the intent of the link, like \"Learn more about the ABC Department\".",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_expertise_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "url"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_expertise_cta_bar_action_url_close",
-                    "label": "URL Action Close",
-                    "name": "",
-                    "type": "accordion",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "open": 1,
-                    "multi_expand": 0,
-                    "endpoint": 1
-                },
-                {
-                    "key": "field_expertise_cta_bar_action_phone_open",
-                    "label": "Phone Action",
-                    "name": "",
-                    "type": "accordion",
-                    "instructions": "All fields must be populated or your telephone number will not display.",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_expertise_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "phone"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "open": 1,
-                    "multi_expand": 0,
-                    "endpoint": 0
-                },
-                {
-                    "key": "field_expertise_cta_bar_phone_prepend",
-                    "label": "Text before phone number",
-                    "name": "cta_bar_phone_prepend",
-                    "type": "text",
-                    "instructions": "This, combined with the phone number will generate a short action phrase. Keep this text very short. Do not include the phone number here. Examples: \"Call\", \"Fax Referrals to\".",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_expertise_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "phone"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "Call",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_expertise_cta_bar_phone",
-                    "label": "Phone Number",
-                    "name": "cta_bar_phone",
-                    "type": "text",
-                    "instructions": "Format your phone number using dashes. Include the area code. Example: 999-999-9999",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_expertise_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "phone"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_expertise_cta_bar_action_URL_close",
-                    "label": "Accordion Close",
-                    "name": "",
-                    "type": "accordion",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "open": 1,
-                    "multi_expand": 0,
-                    "endpoint": 1
-                }
-            ]
-        },
-        "field_expertise_conditions_cpt": {
-            "key": "field_expertise_conditions_cpt",
-            "name": "expertise_conditions_cpt",
-            "type": "post_object",
-            "label": "Conditions",
-            "instructions": "The conditions will display in alphabetical order.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "condition"
-            ],
-            "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 1,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_condition_expertise"
-            },
-            "acfe_validate": "",
-            "acfe_update": "",
-            "ui": 1
-        },
-        "field_expertise_treatments_cpt": {
-            "key": "field_expertise_treatments_cpt",
-            "name": "expertise_treatments_cpt",
-            "type": "post_object",
-            "label": "Treatments & Procedures",
-            "instructions": "The treatments and procedures will display in alphabetical order.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "treatment"
-            ],
-            "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 1,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_treatment_procedure_expertise"
-            },
-            "acfe_validate": "",
-            "acfe_update": "",
-            "ui": 1
-        },
-        "field_medical_terms": {
-            "key": "field_expertise_medical_terms",
-            "name": "expertise_medical_terms",
-            "type": "taxonomy",
-            "label": "Medical Terms (Tags)",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_expertise_conditions",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "medical_term",
-            "field_type": "multi_select",
-            "allow_null": 1,
-            "add_term": 0,
-            "save_terms": 1,
-            "load_terms": 1,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
-            },
-            "multiple": 0
-        },
-        "field_expertise_physicians": {
-            "key": "field_expertise_physicians",
-            "name": "physician_expertise",
-            "type": "relationship",
-            "label": "Providers",
-            "instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "provider"
-            ],
-            "taxonomy": [],
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_physician_expertise"
-            },
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        "field_expertise_locations": {
-            "key": "field_expertise_locations",
-            "name": "location_expertise",
-            "type": "relationship",
-            "label": "Locations",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "location"
-            ],
-            "taxonomy": [],
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_location_expertise"
-            },
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        "field_expertise_associated": {
-            "key": "field_expertise_associated",
-            "name": "expertise_associated",
-            "type": "relationship",
-            "label": "Associated Areas of Expertise",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "expertise"
-            ],
-            "taxonomy": [],
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id"
-        },
-        "field_expertise_clinical_resources": {
-            "key": "field_expertise_clinical_resources",
-            "name": "expertise_clinical_resources",
-            "type": "relationship",
-            "label": "Clinical Resources",
-            "instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "clinical-resource"
-            ],
-            "taxonomy": [],
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_clinical_resource_aoe"
-            },
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        "field_physician_podcast_name": {
-            "key": "field_expertise_podcast_name",
-            "name": "expertise_podcast_name",
-            "type": "text",
-            "label": "UAMS Health Talk Podcast Topic Name",
-            "instructions": "Topic name as listed in the dropdown",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        }
-    },
-    "modified": false
+	"key": "group_uamswp_expertise",
+	"title": "Area of Expertise Item Configuration",
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "expertise"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": "",
+	"fields": [
+		{
+			"key": "field_expertise_tab_general",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_expertise_short_desc",
+			"label": "Short Description for This Page",
+			"name": "post_excerpt",
+			"type": "textarea",
+			"instructions": "This will be the description included for this page when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 4,
+			"new_lines": ""
+		},
+		{
+			"key": "field_expertise_featured_image",
+			"label": "Featured Image for This Page",
+			"name": "_thumbnail_id",
+			"type": "image",
+			"instructions": "Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1280,
+			"min_height": 720,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg,jpeg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
+		{
+			"key": "field_expertise_tab_deprecated_soon",
+			"label": "<i class=\"dashicons-warning dashicons\"><\/i> Fields Being Deprecated Soon",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_expertise_cta",
+			"label": "Call-to-Action (CTA) Bar(s)",
+			"name": "expertise_cta",
+			"type": "repeater",
+			"instructions": "Define up to two CTA Bar blocks",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "field_expertise_cta_bar_heading",
+			"min": 0,
+			"max": 2,
+			"layout": "block",
+			"button_label": "Add CTA Bar",
+			"sub_fields": [
+				{
+					"key": "field_expertise_cta_bar_heading",
+					"label": "Heading",
+					"name": "cta_bar_heading",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_body",
+					"label": "Body",
+					"name": "cta_bar_body",
+					"type": "wysiwyg",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"tabs": "all",
+					"toolbar": "basic",
+					"media_upload": 0,
+					"delay": 0
+				},
+				{
+					"key": "field_expertise_cta_bar_action_type",
+					"label": "Action Type",
+					"name": "cta_bar_action_type",
+					"type": "button_group",
+					"instructions": "Only choose None if your action is contained within your body text.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"choices": {
+						"url": "URL",
+						"phone": "Phone Number",
+						"none": "None"
+					},
+					"allow_null": 0,
+					"default_value": "url",
+					"layout": "vertical",
+					"return_format": "value"
+				},
+				{
+					"key": "field_expertise_cta_bar_action_url_open",
+					"label": "URL Action",
+					"name": "",
+					"type": "accordion",
+					"instructions": "All fields must be populated or your link will not display.",
+					"required": 0,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 0
+				},
+				{
+					"key": "field_expertise_cta_bar_button_text",
+					"label": "Button Text",
+					"name": "cta_bar_button_text",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_button_url",
+					"label": "Button URL",
+					"name": "cta_bar_button_url",
+					"type": "link",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"return_format": "array"
+				},
+				{
+					"key": "field_expertise_cta_bar_button_description",
+					"label": "Button Link Description",
+					"name": "cta_bar_button_description",
+					"type": "text",
+					"instructions": "This is needed for accessibility. It helps differentiate between multiple links that use the same text like \"Learn more\". Describe the intent of the link, like \"Learn more about the ABC Department\".",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_action_url_close",
+					"label": "URL Action Close",
+					"name": "",
+					"type": "accordion",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 1
+				},
+				{
+					"key": "field_expertise_cta_bar_action_phone_open",
+					"label": "Phone Action",
+					"name": "",
+					"type": "accordion",
+					"instructions": "All fields must be populated or your telephone number will not display.",
+					"required": 0,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 0
+				},
+				{
+					"key": "field_expertise_cta_bar_phone_prepend",
+					"label": "Text before phone number",
+					"name": "cta_bar_phone_prepend",
+					"type": "text",
+					"instructions": "This, combined with the phone number will generate a short action phrase. Keep this text very short. Do not include the phone number here. Examples: \"Call\", \"Fax Referrals to\".",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "Call",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_phone",
+					"label": "Phone Number",
+					"name": "cta_bar_phone",
+					"type": "text",
+					"instructions": "Format your phone number using dashes. Include the area code. Example: 999-999-9999",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_action_URL_close",
+					"label": "Accordion Close",
+					"name": "",
+					"type": "accordion",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 1
+				}
+			]
+		},
+		{
+			"key": "field_expertise_brand_tab",
+			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_brand_tab",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": [
+				"super_admin",
+				"administrator",
+				"editor"
+			],
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_expertise_brandorg",
+			"label": "Third-Party Brand Organization",
+			"name": "expertise_brandorg",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_brandorg_multiple"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_expertise_tab_details",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> Area of Expertise Details",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_expertise_alternate_names",
+			"label": "Alternate Name(s) for This Area of Expertise",
+			"name": "expertise_alternate_names",
+			"type": "repeater",
+			"instructions": "Insert any other names, phrases or acronyms that this area of expertise may be known by. Separate each alternate name into its own item.</p><p class='description' style='margin-top: 0.5em;'>These alternate names will be used to help this page appear in search results for those terms.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "field_alternate_text",
+			"min": 0,
+			"max": 10,
+			"layout": "table",
+			"button_label": "Add Alternate Name",
+			"sub_fields": [
+				{
+					"key": "field_alternate_text",
+					"label": "Alternate Name",
+					"name": "text",
+					"type": "text",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": "",
+					"acfe_validate": "",
+					"acfe_update": ""
+				}
+			]
+		},
+		{
+			"key": "field_expertise_tab_podcast",
+			"label": "<i class=\"dashicons dashicons-embed-video\"><\/i> Associated Media",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_expertise_youtube_link",
+			"label": "Featured Video",
+			"name": "expertise_youtube_link",
+			"type": "url",
+			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this area of expertise and that supports the content of this page. Include the full URL, including https:\/\/",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_expertise_podcast_name",
+			"label": "UAMS Health Talk Podcast Topic Name",
+			"name": "expertise_podcast_name",
+			"type": "text",
+			"instructions": "Include a single topic name as listed in the \"Topics\" dropdown of the embedded player on <a href=\"https://uamshealth.com/podcast/\" title=\"UAMS Health Talk Podcast\" target=\"_blank\">https://uamshealth.com/podcast/</a>.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_expertise_tab_providers",
+			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Related Providers",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_expertise_physicians",
+			"label": "Related Providers",
+			"name": "physician_expertise",
+			"type": "relationship",
+			"instructions": "Include all providers who have this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>The providers will be displayed on a subpage, arranged in alphabetical order by their last name.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"provider"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_physician_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_expertise_providers_fpage_intro",
+			"label": "Override Intro Text for Related Providers Subpage",
+			"name": "expertise_providers_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related providers subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_expertise_providers_fpage_short_desc_query",
+			"label": "Use Intro Text as the Short Description for Related Providers Subpage?",
+			"name": "expertise_providers_fpage_short_desc_query",
+			"type": "true_false",
+			"instructions": "Decide which text to use as the short description. The short description is what is included for the related providers subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No",
+			"ui": 1
+		},
+		{
+			"key": "field_expertise_providers_fpage_short_desc",
+			"label": "Short Description for Related Providers Subpage",
+			"name": "expertise_providers_fpage_short_desc",
+			"type": "textarea",
+			"instructions": "This will be the description included for the related providers subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_providers_fpage_short_desc_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 4,
+			"new_lines": ""
+		},
+		{
+			"key": "field_expertise_providers_fpage_featured_image",
+			"label": "Override Featured Image for Related Providers Subpage",
+			"name": "expertise_providers_fpage_featured_image",
+			"type": "image",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1280,
+			"min_height": 720,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg,jpeg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
+		{
+			"key": "field_expertise_tab_locations",
+			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Related Locations",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_expertise_locations",
+			"label": "Related Locations",
+			"name": "location_expertise",
+			"type": "relationship",
+			"instructions": "Include all locations where this area of expertise is represented.</p><p class='description' style='margin-top: 0.5em;'>The locations will be displayed on a subpage, arranged in alphabetical order.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"location"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_location_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_expertise_locations_fpage_intro",
+			"label": "Override Intro Text for Related Locations Subpage",
+			"name": "expertise_locations_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related locations subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_expertise_locations_fpage_short_desc_query",
+			"label": "Use Intro Text as the Short Description for Related Locations Subpage?",
+			"name": "expertise_locations_fpage_short_desc_query",
+			"type": "true_false",
+			"instructions": "Decide which text to use as the short description. The short description is what is included for the related locations subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No",
+			"ui": 1
+		},
+		{
+			"key": "field_expertise_locations_fpage_short_desc",
+			"label": "Short Description for Related Locations Subpage",
+			"name": "expertise_locations_fpage_short_desc",
+			"type": "textarea",
+			"instructions": "This will be the description included for the related locations subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_locations_fpage_short_desc_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 4,
+			"new_lines": ""
+		},
+		{
+			"key": "field_expertise_locations_fpage_featured_image",
+			"label": "Override Featured Image for Related Locations Subpage",
+			"name": "expertise_locations_fpage_featured_image",
+			"type": "image",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1280,
+			"min_height": 720,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg,jpeg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
+		{
+			"key": "field_expertise_region",
+			"label": "Region",
+			"name": "expertise_region",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_tab_locations",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "region",
+			"field_type": "multi_select",
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0,
+			"allow_null": 0
+		},
+		{
+			"key": "field_expertise_tab_expertise_descendant",
+			"label": "<i class=\"dashicons-open-folder dashicons\"><\/i> Descendant Areas of Expertise",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_expertise_descendant_fpage_intro",
+			"label": "Override Intro Text for Descendant Areas of Expertise Subpage",
+			"name": "expertise_descendant_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the descendant areas of expertise subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_expertise_descendant_fpage_short_desc_query",
+			"label": "Use Intro Text as the Short Description for Descendant Areas of Expertise Subpage?",
+			"name": "expertise_descendant_fpage_short_desc_query",
+			"type": "true_false",
+			"instructions": "Decide which text to use as the short description. The short description is what is included for the descendant areas of expertise subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No",
+			"ui": 1
+		},
+		{
+			"key": "field_expertise_descendant_fpage_short_desc",
+			"label": "Short Description for Descendant Areas of Expertise Subpage",
+			"name": "expertise_descendant_fpage_short_desc",
+			"type": "textarea",
+			"instructions": "This will be the description included for the descendant areas of expertise subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_descendant_fpage_short_desc_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 4,
+			"new_lines": ""
+		},
+		{
+			"key": "field_expertise_descendant_fpage_featured_image",
+			"label": "Override Featured Image for Descendant Areas of Expertise Subpage",
+			"name": "expertise_descendant_fpage_featured_image",
+			"type": "image",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1280,
+			"min_height": 720,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg,jpeg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
+		{
+			"key": "field_expertise_tab_expertise",
+			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_expertise_associated",
+			"label": "Related Areas of Expertise",
+			"name": "expertise_associated",
+			"type": "relationship",
+			"instructions": "Include all areas of expertise that are related to this area of expertise. An example of a related area of expertise would be one that is also represented in treatment plans associated with this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>Areas of expertise that are nested under this area of expertise are excluded from this list.</p><p class='description' style='margin-top: 0.5em;'>The related areas of expertise will be displayed on a subpage, arranged in alphabetical order.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"expertise"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id"
+		},
+		{
+			"key": "field_expertise_associated_fpage_intro",
+			"label": "Override Intro Text for Related Areas of Expertise Subpage",
+			"name": "expertise_associated_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related areas of expertise subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_expertise_associated_fpage_short_desc_query",
+			"label": "Use Intro Text as the Short Description for Related Areas of Expertise Subpage?",
+			"name": "expertise_associated_fpage_short_desc_query",
+			"type": "true_false",
+			"instructions": "Decide which text to use as the short description. The short description is what is included for the related areas of expertise subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No",
+			"ui": 1
+		},
+		{
+			"key": "field_expertise_associated_fpage_short_desc",
+			"label": "Short Description for Related Areas of Expertise Subpage",
+			"name": "expertise_associated_fpage_short_desc",
+			"type": "textarea",
+			"instructions": "This will be the description included for the related areas of expertise subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_associated_fpage_short_desc_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 4,
+			"new_lines": ""
+		},
+		{
+			"key": "field_expertise_associated_fpage_featured_image",
+			"label": "Override Featured Image for Related Areas of Expertise Subpage",
+			"name": "expertise_associated_fpage_featured_image",
+			"type": "image",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1280,
+			"min_height": 720,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg,jpeg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
+		{
+			"key": "field_expertise_tab_clinical_resources",
+			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_expertise_clinical_resources",
+			"label": "Related Clinical Resources",
+			"name": "expertise_clinical_resources",
+			"type": "relationship",
+			"instructions": "Include all clinical resources that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These clinical resources will be displayed on a subpage, arranged in the order in which they were published, with the most recently published resources being listed first.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"clinical-resource"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_clinical_resource_aoe"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_expertise_clinical_resources_fpage_intro",
+			"label": "Override Intro Text for Related Clinical Resources Subpage",
+			"name": "expertise_clinical_resources_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the related clinical resources subpage in a paragraph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_expertise_clinical_resources_fpage_short_desc_query",
+			"label": "Use Intro Text as the Short Description for Related Clinical Resources Subpage?",
+			"name": "expertise_clinical_resources_fpage_short_desc_query",
+			"type": "true_false",
+			"instructions": "Decide which text to use as the short description. The short description is what is included for the related clinical resources subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No",
+			"ui": 1
+		},
+		{
+			"key": "field_expertise_clinical_resources_fpage_short_desc",
+			"label": "Short Description for Related Clinical Resources Subpage",
+			"name": "expertise_clinical_resources_fpage_short_desc",
+			"type": "textarea",
+			"instructions": "This will be the description included for the related clinical resources subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_clinical_resources_fpage_short_desc_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 4,
+			"new_lines": ""
+		},
+		{
+			"key": "field_expertise_clinical_resources_fpage_featured_image",
+			"label": "Override Featured Image for Related Clinical Resources Subpage",
+			"name": "expertise_clinical_resources_fpage_featured_image",
+			"type": "image",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1280,
+			"min_height": 720,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg,jpeg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
+		{
+			"key": "field_expertise_tab_condition_treatment",
+			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_expertise_condition_treatment_fpage_intro",
+			"label": "Override Intro Text for Combined Related Conditions and Treatments Block",
+			"name": "expertise_condition_treatment_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all blocks of this type on any area of expertise page(s). If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display in a related conditions and treatments block on the main page for this area of expertise in a paragraph underneath the block title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_expertise_conditions_cpt",
+			"label": "Related Conditions",
+			"name": "expertise_conditions_cpt",
+			"type": "post_object",
+			"instructions": "Include all conditions that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These conditions will be displayed in a block on the main page for this area of expertise, arranged in the alphabetical order.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"allow_null": 1,
+			"multiple": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		{
+			"key": "field_expertise_conditions_fpage_intro",
+			"label": "Override Intro Text for Related Conditions Block",
+			"name": "expertise_conditions_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all blocks of this type on any area of expertise page(s). If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display in a related conditions block on the main page for this area of expertise in a paragraph underneath the block title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_expertise_treatments_cpt",
+			"label": "Related Treatments and Procedures",
+			"name": "expertise_treatments_cpt",
+			"type": "post_object",
+			"instructions": "Include all treatments and procedures that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These treatments and procedures will be displayed in a block on the main page for this area of expertise, arranged in the alphabetical order.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"allow_null": 1,
+			"multiple": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		{
+			"key": "field_expertise_treatments_fpage_intro",
+			"label": "Override Intro Text for Related Treatments and Procedures Block",
+			"name": "expertise_treatments_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all blocks of this type on any area of expertise page(s). If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display in a related treatments and procedures block on the main page for this area of expertise in a paragraph underneath the block title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_expertise_tab_schema",
+			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_expertise_schema_medicalspecialty",
+			"label": "Relevant Specialty (relevantSpecialty > MedicalSpecialty)",
+			"name": "expertise_schema_medicalspecialty",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalspecialty_multiple"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_expertise_schema_code_nucc",
+			"label": "Matching Classification(s) and/or Specialization(s) From the Health Care Provider Taxonomy Code Set (code > MedicalCode)",
+			"name": "expertise_schema_code_nucc",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_nucc_multiple"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_expertise_schema_medicalcode",
+			"label": "Medical Code(s) for This Entity (code > MedicalCode)",
+			"name": "expertise_schema_medicalcode",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalcode"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_expertise_schema_sameas",
+			"label": "Reference Webpage(s) About This Area of Expertise (sameAs > URL)",
+			"name": "expertise_schema_sameas",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_expertise_schema_medicinesystem",
+			"label": "Related System(s) of Medical Practice (medicineSystem > MedicineSystem)",
+			"name": "expertise_schema_medicinesystem",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicinesystem"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_expertise_tab_deprecated",
+			"label": "Deprecated Fields",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_tab_deprecated",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_expertise_medical_terms",
+			"label": "Medical Terms (Tags) (Deprecated)",
+			"name": "expertise_medical_terms",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "medical_term",
+			"field_type": "multi_select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		}
+	],
+	"modified": false
 }

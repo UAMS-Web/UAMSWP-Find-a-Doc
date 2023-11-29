@@ -1,47 +1,47 @@
 {
-    "key": "group_uamswp_colleges",
-    "title": "Additional Information",
-    "location": [
-        [
-            {
-                "param": "taxonomy",
-                "operator": "==",
-                "value": "academic_college"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "left",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_note": "",
-    "acfe_meta": "",
-    "fields": {
-        "field_college_url": {
-            "key": "field_college_url",
-            "name": "college_url",
-            "type": "link",
-            "label": "Website URL",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "return_format": "array",
-            "acfe_validate": "",
-            "acfe_update": ""
-        }
-    },
-    "modified": false
+	"key": "group_uamswp_colleges",
+	"title": "Additional Information",
+	"location": [
+		[
+			{
+				"param": "taxonomy",
+				"operator": "==",
+				"value": "academic_college"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "left",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": "",
+	"fields": [
+		{
+			"key": "field_college_url",
+			"label": "Website URL",
+			"name": "college_url",
+			"type": "link",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"return_format": "array",
+			"acfe_validate": "",
+			"acfe_update": ""
+		}
+	],
+	"modified": false
 }

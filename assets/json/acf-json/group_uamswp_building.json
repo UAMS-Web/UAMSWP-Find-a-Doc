@@ -1,0 +1,657 @@
+{
+	"key": "group_uamswp_facility",
+	"title": "Facility Item Configuration",
+	"fields": [
+		{
+			"key": "field_facility_name",
+			"label": "Name of the facility for Schema",
+			"name": "facility_name",
+			"type": "text",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_facility_alternatename",
+			"label": "Alternate Names for the Facility (alternateName > Text)",
+			"name": "facility_alternatename",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_alternatename"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_facility_place_subtype",
+			"label": "Specific Type of Facility (@type; additionalType)",
+			"name": "facility_place_subtype",
+			"type": "radio",
+			"instructions": "Select the most type of place that matches this facility.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"building": "<strong>Building</strong> &mdash; structure, typically with a roof and walls, standing more or less permanently in one place (<a href='https://www.wikidata.org/wiki/Q41176' target='_blank'>https://www.wikidata.org/wiki/Q41176</a>)",
+				"complex": "<strong>Building Complex</strong> &mdash; set of related buildings (<a href='https://www.wikidata.org/wiki/Q1497364' target='_blank'>https://www.wikidata.org/wiki/Q1497364</a>)"
+			},
+			"default_value": "",
+			"allow_null": 1,
+			"other_choice": 0,
+			"save_other_choice": 0,
+			"layout": "vertical",
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_facility_place_subtype_building",
+			"label": "Specific Type of Building (@type; additionalType)",
+			"name": "facility_place_subtype_building",
+			"type": "radio",
+			"instructions": "Select the most specific type of place that matches this building. If there is no match, then select \"None.\"",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_facility_place_subtype",
+						"operator": "==",
+						"value": "building"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"Wikidata_Building_Q41176": "<strong>None</strong> &mdash; No available option is relevant to this building",
+				"Wikidata_AdministrativeBuilding_Q2519340": "<strong>Administrative Building (specific Office Building)</strong> &mdash; building for administrative usage (<a href='https://www.wikidata.org/wiki/Q2519340' target='_blank'>https://www.wikidata.org/wiki/Q2519340</a>)",
+				"Wikidata_Arena_Q641226": "<strong>Arena (specific Event Venue)</strong> &mdash; an enclosed area designed to host theater, musical performances and sporting events (<a href='https://schema.org/StadiumOrArena' target='_blank'>https://schema.org/StadiumOrArena</a>; <a href='https://www.wikidata.org/wiki/Q641226' target='_blank'>https://www.wikidata.org/wiki/Q641226</a>)",
+				"SchemaOrg_CityHall": "<strong>City Hall (specific Government Building)</strong> &mdash; A city hall (<a href='https://schema.org/CityHall' target='_blank'>https://schema.org/CityHall</a>; <a href='https://www.wikidata.org/wiki/Q25550691' target='_blank'>https://www.wikidata.org/wiki/Q25550691</a>)",
+				"Wikidata_CommercialBuilding": "<strong>Commercial Building</strong> &mdash; buildings associated with any aspect of the various activities and business relationships of industry and trade (<a href='https://www.wikidata.org/wiki/Q655686' target='_blank'>https://www.wikidata.org/wiki/Q655686</a>)",
+				"SchemaOrg_Courthouse": "<strong>Courthouse (specific Public Building; specific Government Building)</strong> &mdash; A courthouse (<a href='https://schema.org/Courthouse' target='_blank'>https://schema.org/Courthouse</a>; <a href='https://www.wikidata.org/wiki/Q1137809' target='_blank'>https://www.wikidata.org/wiki/Q1137809</a>)",
+				"SchemaOrg_EventVenue": "<strong>Event Venue (specific Civic Structure)</strong> &mdash; An event venue (<a href='https://schema.org/EventVenue' target='_blank'>https://schema.org/EventVenue</a>; <a href='https://www.wikidata.org/wiki/Q18674739' target='_blank'>https://www.wikidata.org/wiki/Q18674739</a>)",
+				"SchemaOrg_GovernmentBuilding": "<strong>Government Building (specific Public Building; specific Administrative Building)</strong> &mdash; A government building (<a href='https://schema.org/GovernmentBuilding' target='_blank'>https://schema.org/GovernmentBuilding</a>; <a href='https://www.wikidata.org/wiki/Q16831714' target='_blank'>https://www.wikidata.org/wiki/Q16831714</a>)",
+				"SchemaOrg_Hospital": "<strong>Hospital (specific Medical Facility)</strong> &mdash; A hospital (<a href='https://schema.org/Hospital' target='_blank'>https://schema.org/Hospital</a>; <a href='https://www.wikidata.org/wiki/Q16917' target='_blank'>https://www.wikidata.org/wiki/Q16917</a>)",
+				"SchemaOrg_LegislativeBuilding": "<strong>Legislative Building (specific Government Building)</strong> &mdash; A legislative building (e.g., the state capitol) (<a href='https://schema.org/LegislativeBuilding' target='_blank'>https://schema.org/LegislativeBuilding</a>; <a href='https://www.wikidata.org/wiki/Q30124446' target='_blank'>https://www.wikidata.org/wiki/Q30124446</a>)",
+				"Wikidata_MedicalFacility_Q4260475": "<strong>Medical Facility</strong> &mdash; any location at which medicine is practiced regularly (<a href='https://www.wikidata.org/wiki/Q4260475' target='_blank'>https://www.wikidata.org/wiki/Q4260475</a>)",
+				"Wikidata_OfficeBuilding_Q1021645": "<strong>Office Building</strong> &mdash; building which contains spaces mainly designed to be used for offices (<a href='https://www.wikidata.org/wiki/Q1021645' target='_blank'>https://www.wikidata.org/wiki/Q1021645</a>)",
+				"Wikidata_PublicBuilding_Q294422": "<strong>Public Building</strong> &mdash; buildings or groups of buildings owned and operated by a governing body and often occupied by a governmental agency (<a href='https://schema.org/CivicStructure' target='_blank'>https://schema.org/CivicStructure</a>; <a href='https://www.wikidata.org/wiki/Q294422' target='_blank'>https://www.wikidata.org/wiki/Q294422</a>)",
+				"Wikidata_RetailBuilding_Q18760388": "<strong>Retail Building (specific Commercial Building)</strong> &mdash; building housing businesses engaged in the sale of consumer goods or services (<a href='https://www.wikidata.org/wiki/Q18760388' target='_blank'>https://www.wikidata.org/wiki/Q18760388</a>)",
+				"Wikidata_SchoolBuilding_Q1244442": "<strong>School Building</strong> &mdash; individual buildings or groups of buildings designed or used as places of instruction (<a href='https://www.wikidata.org/wiki/Q1244442' target='_blank'>https://www.wikidata.org/wiki/Q1244442</a>)",
+				"Wikidata_ShoppingCenter_Q11315": "<strong>Shopping Center (specific Retail Building)</strong> &mdash; complex of shops (<a href='https://www.wikidata.org/wiki/Q11315' target='_blank'>https://www.wikidata.org/wiki/Q11315</a>)",
+				"Wikidata_Stadium_Q483110": "<strong>Stadium (specific Event Venue)</strong> &mdash; a place or venue for (mostly) outdoor sports, concerts, or other events (<a href='https://schema.org/StadiumOrArena' target='_blank'>https://schema.org/StadiumOrArena</a>; <a href='https://www.wikidata.org/wiki/Q483110' target='_blank'>https://www.wikidata.org/wiki/Q483110</a>)",
+				"Wikidata_UniversityBuilding_Q19844914": "<strong>University Building (specific School Building)</strong> &mdash; building used by a higher education institution (<a href='https://www.wikidata.org/wiki/Q19844914' target='_blank'>https://www.wikidata.org/wiki/Q19844914</a>)"
+			},
+			"default_value": "",
+			"allow_null": 1,
+			"other_choice": 0,
+			"save_other_choice": 0,
+			"layout": "vertical",
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_facility_place_subtype_complex",
+			"label": "Specific Type of Complex (@type; additionalType)",
+			"name": "facility_place_subtype_complex",
+			"type": "radio",
+			"instructions": "Select the most specific type of place that matches this building complex. If there is no match, then select \"None.\"",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_facility_place_subtype",
+						"operator": "==",
+						"value": "complex"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"Wikidata_BuildingComplex_Q1497364": "<strong>None</strong> &mdash; No available option is relevant to this building complex",
+				"Wikidata_EducationalComplex_Q20860083": "<strong>Educational Complex (specific Institutional Complex)</strong> &mdash; group of educational buildings (<a href='https://www.wikidata.org/wiki/Q20860083' target='_blank'>https://www.wikidata.org/wiki/Q20860083</a>)",
+				"SchemaOrg_Hospital": "<strong>Hospital (specific Medical Facility)</strong> &mdash; A hospital (<a href='https://schema.org/Hospital' target='_blank'>https://schema.org/Hospital</a>; <a href='https://www.wikidata.org/wiki/Q16917' target='_blank'>https://www.wikidata.org/wiki/Q16917</a>)",
+				"Wikidata_InstitutionalComplex_Q19691007": "<strong>Institutional Complex</strong> &mdash; group of many institutional buildings (<a href='https://www.wikidata.org/wiki/Q19691007' target='_blank'>https://www.wikidata.org/wiki/Q19691007</a>)",
+				"Wikidata_MedicalFacility_Q4260475": "<strong>Medical Facility</strong> &mdash; any location at which medicine is practiced regularly (<a href='https://www.wikidata.org/wiki/Q4260475' target='_blank'>https://www.wikidata.org/wiki/Q4260475</a>)",
+				"Wikidata_ShoppingCenter_Q11315": "<strong>Shopping Center</strong> &mdash; complex of shops (<a href='https://www.wikidata.org/wiki/Q11315' target='_blank'>https://www.wikidata.org/wiki/Q11315</a>)",
+				"Wikidata_UniversityCampus_Q30785519": "<strong>University Campus (specific Educational Complex)</strong> &mdash; ensemble of university buildings and adjacent open spaces (<a href='https://www.wikidata.org/wiki/Q30785519' target='_blank'>https://www.wikidata.org/wiki/Q30785519</a>)"
+			},
+			"default_value": "",
+			"allow_null": 1,
+			"other_choice": 0,
+			"save_other_choice": 0,
+			"layout": "vertical",
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_facility_additionaltype",
+			"label": "More Specific Type(s) for This Facility From External Vocabularies in Microdata Syntax (additionalType > URL)",
+			"name": "facility_additionaltype",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_facility_place_subtype",
+						"operator": "==",
+						"value": "building"
+					},
+					{
+						"field": "field_facility_place_subtype_building",
+						"operator": "==",
+						"value": "Wikidata_Building_Q41176"
+					}
+				],
+				[
+					{
+						"field": "field_facility_place_subtype",
+						"operator": "==",
+						"value": "complex"
+					},
+					{
+						"field": "field_facility_place_subtype_complex",
+						"operator": "==",
+						"value": "Wikidata_BuildingComplex_Q1497364"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_additionalType"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_facility_sameas",
+			"label": "Reference Webpage(s) About This facility (sameAs > URL)",
+			"name": "facility_sameas",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_facility_google_cid_query",
+			"label": "Does this facility have a listing on Google My Business?",
+			"name": "facility_google_cid_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": [
+				"No",
+				"Yes"
+			],
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_facility_google_cid",
+			"label": "Google CID Number (identifier > PropertyValue)",
+			"name": "facility_google_cid",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_facility_google_cid_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_google_cid"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_facility_brandorg_query",
+			"label": "Primary Brand Organization for This Location",
+			"name": "facility_brandorg_query",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_brandorg_query"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_facility_brandorg",
+			"label": "Third-Party Brand Organization",
+			"name": "facility_brandorg",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "!=empty"
+					},
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "!=",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_brandorg"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_facility_streetaddress",
+			"label": "Street Address",
+			"name": "facility_streetaddress",
+			"type": "text",
+			"instructions": "Spell out numbered streets nine and under; use figures for <em>10</em> and above (e.g., <em>5 Sixth Ave.</em>, <em>3012 50th St.</em>, <em>No. 10 Downing St.</em>).</p><p class='description' style='margin-top: 0.5em;'>Use the abbreviations <em>Ave.</em>, <em>Blvd.</em> and <em>St.</em> Otherwise, spell out similar words (e.g., <em>Alley</em>, <em>Drive</em>, <em>Road</em>, <em>Terrace</em>).</p><p class='description' style='margin-top: 0.5em;'>Always use figures for an address number (e.g., <em>9 Morningside Circle</em>).</p><p class='description' style='margin-top: 0.5em;'>Spell out and capitalize <em>First</em> through <em>Ninth</em> when used as street names; use figures for <em>10th</em> and above (e.g., <em>7 Fifth Ave.</em>, <em>100 21st St.</em>).</p><p class='description' style='margin-top: 0.5em;'>Abbreviate compass points used to indicate directional ends of a street or quadrants of a city in a numbered address (e.g., <em>222 E. 42nd St.</em>, <em>562 W. 43rd St.</em>, <em>600 K St. NW</em>). Do not use periods in quadrant abbreviations (e.g., <em>NW</em>, <em>SE</em>).</p><p class='description' style='margin-top: 0.5em;'>Use these forms, as appropriate in the context, for highways identified by number: <em>U.S. Highway 67</em>, <em>Arkansas Highway 10</em>, <em>Interstate 630</em>.</p><p class='description' style='margin-top: 0.5em;'>When a letter is appended to a number, capitalize it but do not use a hyphen (e.g., <em>U.S. Highway 71B</em>).",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_facility_city",
+			"label": "City",
+			"name": "facility_city",
+			"type": "text",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_facility_state",
+			"label": "State",
+			"name": "facility_state",
+			"type": "select",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"AL": "Alabama",
+				"AK": "Alaska",
+				"AZ": "Arizona",
+				"AR": "Arkansas",
+				"CA": "California",
+				"CO": "Colorado",
+				"CT": "Connecticut",
+				"DE": "Delaware",
+				"DC": "District Of Columbia",
+				"FL": "Florida",
+				"GA": "Georgia",
+				"HI": "Hawaii",
+				"ID": "Idaho",
+				"IL": "Illinois",
+				"IN": "Indiana",
+				"IA": "Iowa",
+				"KS": "Kansas",
+				"KY": "Kentucky",
+				"LA": "Louisiana",
+				"ME": "Maine",
+				"MD": "Maryland",
+				"MA": "Massachusetts",
+				"MI": "Michigan",
+				"MN": "Minnesota",
+				"MS": "Mississippi",
+				"MO": "Missouri",
+				"MT": "Montana",
+				"NE": "Nebraska",
+				"NV": "Nevada",
+				"NH": "New Hampshire",
+				"NJ": "New Jersey",
+				"NM": "New Mexico",
+				"NY": "New York",
+				"NC": "North Carolina",
+				"ND": "North Dakota",
+				"OH": "Ohio",
+				"OK": "Oklahoma",
+				"OR": "Oregon",
+				"PA": "Pennsylvania",
+				"RI": "Rhode Island",
+				"SC": "South Carolina",
+				"SD": "South Dakota",
+				"TN": "Tennessee",
+				"TX": "Texas",
+				"UT": "Utah",
+				"VT": "Vermont",
+				"VA": "Virginia",
+				"WA": "Washington",
+				"WV": "West Virginia",
+				"WI": "Wisconsin",
+				"WY": "Wyoming"
+			},
+			"default_value": false,
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 0,
+			"return_format": "value",
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"ajax": 0
+		},
+		{
+			"key": "field_facility_zip",
+			"label": "ZIP Code",
+			"name": "facility_zip",
+			"type": "maskfield",
+			"instructions": "Find the ZIP+4 Code for an address at <a href='https://tools.usps.com/zip-code-lookup.htm?byaddress' target='_blank'>https://tools.usps.com/zip-code-lookup.htm?byaddress</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"input_mask": "99999[-9999]",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_facility_region",
+			"label": "Arkansas Region",
+			"name": "facility_region",
+			"type": "taxonomy",
+			"instructions": "For information on how the Arkansas regions are defined, visit <a href='https://communications.uams.edu/web/kb/location-regions/' target='_blank'>https://communications.uams.edu/web/kb/location-regions/</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"taxonomy": "region",
+			"field_type": "radio",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"multiple": 0
+		},
+		{
+			"key": "field_facility_map",
+			"label": "GPS Location of the Main facility Entrance",
+			"name": "facility_map",
+			"type": "google_map",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"center_lat": "34.7492719",
+			"center_lng": "-92.3198281",
+			"zoom": 14,
+			"height": 400,
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
+			"key": "field_facility_parking",
+			"label": "Main Parking Area for the Facility",
+			"name": "facility_parking",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"taxonomy": "parking",
+			"field_type": "select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
+		{
+			"key": "field_facility_photo",
+			"label": "Photo of the facility Exterior",
+			"name": "facility_photo",
+			"type": "image",
+			"instructions": "Select an image that will help the patient find the appropriate facility from the road.</p><p class='description' style='margin-top: 0.5em;'>The photo orientation must be landscape / horizontal.</p><p class='description' style='margin-top: 0.5em;'>It is restricted to a 16:9 aspect ratio (or close to it) and has a minimum dimension of 1200x675.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1200,
+			"min_height": 675,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg,jpeg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
+		{
+			"key": "field_facility_globallocationnumber",
+			"label": "Global Location Number (globalLocationNumber > Text)",
+			"name": "facility_globallocationnumber",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_globallocationnumber"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "taxonomy",
+				"operator": "==",
+				"value": "building"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "acf_after_title",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_form": 1,
+	"acfe_meta": "",
+	"acfe_note": ""
+}

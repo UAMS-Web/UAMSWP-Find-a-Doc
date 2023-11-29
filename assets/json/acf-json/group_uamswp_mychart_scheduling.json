@@ -1,130 +1,130 @@
 
 {
-    "key": "group_mychart_scheduling",
-    "title": "MyChart Scheduling",
-    "fields": [
-        {
-            "key": "field_mychart_scheduling_query_system",
-            "label": "Allow optional MyChart scheduling?",
-            "name": "mychart_scheduling_query_system",
-            "type": "true_false",
-            "instructions": "Grant the ability at the page level to enable MyChart scheduling.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_mychart_scheduling_domain",
-            "label": "Domain",
-            "name": "mychart_scheduling_domain",
-            "type": "text",
-            "instructions": "Example: \"scheduling.uamshealth.com\" in https://scheduling.uamshealth.com/MyChart/",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_mychart_scheduling_query_system",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_mychart_scheduling_instance",
-            "label": "Instance",
-            "name": "mychart_scheduling_instance",
-            "type": "text",
-            "instructions": "Example: \"MyChart\" in https://scheduling.uamshealth.com/MyChart/",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_mychart_scheduling_query_system",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_mychart_scheduling_linksource",
-            "label": "Link Source",
-            "name": "mychart_scheduling_linksource",
-            "type": "text",
-            "instructions": "Defaults to \"uamshealth.com\"",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_mychart_scheduling_query_system",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "options_page",
-                "operator": "==",
-                "value": "uamswp-fad-mychart"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "left",
-    "instruction_placement": "field",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_note": "",
-    "acfe_meta": ""
+	"key": "group_mychart_scheduling",
+	"title": "MyChart Open Scheduling Widget Configuration",
+	"fields": [
+		{
+			"key": "field_mychart_scheduling_query_system",
+			"label": "Allow optional MyChart open scheduling?",
+			"name": "mychart_scheduling_query_system",
+			"type": "true_false",
+			"instructions": "Grant the ability at the page level to enable MyChart open scheduling.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		{
+			"key": "field_mychart_scheduling_domain",
+			"label": "Domain",
+			"name": "mychart_scheduling_domain",
+			"type": "text",
+			"instructions": "Example: \"scheduling.uamshealth.com\" in https://scheduling.uamshealth.com/MyChart/",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_mychart_scheduling_query_system",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_mychart_scheduling_instance",
+			"label": "Instance",
+			"name": "mychart_scheduling_instance",
+			"type": "text",
+			"instructions": "Example: \"MyChart\" in https://scheduling.uamshealth.com/MyChart/",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_mychart_scheduling_query_system",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_mychart_scheduling_linksource",
+			"label": "Link Source",
+			"name": "mychart_scheduling_linksource",
+			"type": "text",
+			"instructions": "Defaults to \"uamshealth.com\"",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_mychart_scheduling_query_system",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-mychart"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "left",
+	"instruction_placement": "field",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
 }

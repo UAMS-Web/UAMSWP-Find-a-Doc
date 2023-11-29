@@ -1,736 +1,1189 @@
 {
-    "key": "group_conditions_cpt",
-    "title": "Conditions",
-    "fields": [
-        {
-            "key": "field_condition_alternate",
-            "label": "Alternate names",
-            "name": "condition_alternate",
-            "type": "repeater",
-            "instructions": "Insert additional names \/ phrases",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "collapsed": "field_alternate_text",
-            "min": 0,
-            "max": 10,
-            "layout": "table",
-            "button_label": "Add Keyword",
-            "sub_fields": [
-                {
-                    "key": "field_alternate_text",
-                    "label": "Alternate name \/ text",
-                    "name": "text",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": "",
-                    "acfe_validate": "",
-                    "acfe_update": ""
-                }
-            ]
-        },
-        {
-            "key": "field_condition_content",
-            "label": "Content",
-            "name": "condition_content",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0,
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        {
-            "key": "field_medline_code_type",
-            "label": "Code Type for Medline Plus",
-            "name": "medline_code_type",
-            "type": "button_group",
-            "instructions": "Pick which code type to choose",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "choices": {
-                "none": "None",
-                "icd": "ICD-10-CM (Conditions)",
-                "ndc": "NDC (Drug Codes)",
-                "lonic": "LONIC (Lab tests)"
-            },
-            "allow_null": 0,
-            "default_value": "none",
-            "layout": "horizontal",
-            "return_format": "value",
-            "acfe_settings": "",
-            "acfe_validate": "",
-            "acfe_form": true
-        },
-        {
-            "key": "field_medline_code_id",
-            "label": "Medline Code ID #",
-            "name": "medline_code_id",
-            "type": "text",
-            "instructions": "Find Codes: <a href=\"https://icd10cmtool.cdc.gov/\" target=\"_blank\">ICD-10</a> | <a href=\"https://ndclist.com/\" target=\"_blank\">NDC</a> | <a href=\"https://search.loinc.org/searchLOINC/\" target=\"_blank\">LONIC</a>",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_medline_code_type",
-                        "operator": "!=",
-                        "value": "none"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_medline_view_data",
-            "label": "Medline Data Verification",
-            "name": "",
-            "type": "message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_medline_code_type",
-                        "operator": "!=",
-                        "value": "none"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "<div id=\"view-button-container\">\r\n<a href=\"#\" class=\"button button-secondary\" id=\"view-medline-data\" target=\"_blank\">View Medline Data<\/a>\r\n<\/div>",
-            "new_lines": "",
-            "esc_html": 0
-        },
-        {
-            "key": "field_condition_embed_codes",
-            "name": "condition_embed_codes",
-            "type": "textarea",
-            "label": "Embed / Syndication Code",
-            "instructions": "Example: Syndication Code from HHS Syndication Storefront",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": 4,
-            "new_lines": ""
-        },
-        {
-            "key": "field_condition_youtube_link",
-            "name": "condition_youtube_link",
-            "type": "url",
-            "label": "Featured Youtube video",
-            "instructions": "Full URL, including https:\/\/",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": ""
-        },
-        {
-            "key": "field_condition_short_desc",
-            "name": "condition_short_desc",
-            "type": "textarea",
-            "label": "Short Description (excerpt)",
-            "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": 160,
-            "rows": 2,
-            "new_lines": ""
-        },
-        {
-            "key": "field_condition_cta",
-            "label": "Call-to-Action (CTA) Bar(s)",
-            "name": "condition_cta",
-            "type": "repeater",
-            "instructions": "Define up to two CTA Bar blocks",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "collapsed": "field_condition_cta_bar_heading",
-            "min": 0,
-            "max": 2,
-            "layout": "block",
-            "button_label": "Add CTA Bar",
-            "sub_fields": [
-                {
-                    "key": "field_condition_cta_bar_heading",
-                    "label": "Heading",
-                    "name": "cta_bar_heading",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_condition_cta_bar_body",
-                    "label": "Body",
-                    "name": "cta_bar_body",
-                    "type": "wysiwyg",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "tabs": "all",
-                    "toolbar": "basic",
-                    "media_upload": 0,
-                    "delay": 0
-                },
-                {
-                    "key": "field_condition_cta_bar_action_type",
-                    "label": "Action Type",
-                    "name": "cta_bar_action_type",
-                    "type": "button_group",
-                    "instructions": "Only choose None if your action is contained within your body text.",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "url": "URL",
-                        "phone": "Phone Number",
-                        "none": "None"
-                    },
-                    "allow_null": 0,
-                    "default_value": "url",
-                    "layout": "vertical",
-                    "return_format": "value"
-                },
-                {
-                    "key": "field_condition_cta_bar_action_url_open",
-                    "label": "URL Action",
-                    "name": "",
-                    "type": "accordion",
-                    "instructions": "All fields must be populated or your link will not display.",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_condition_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "url"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "open": 1,
-                    "multi_expand": 0,
-                    "endpoint": 0
-                },
-                {
-                    "key": "field_condition_cta_bar_button_text",
-                    "label": "Button Text",
-                    "name": "cta_bar_button_text",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_condition_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "url"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_condition_cta_bar_button_url",
-                    "label": "Button URL",
-                    "name": "cta_bar_button_url",
-                    "type": "link",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_condition_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "url"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "array"
-                },
-                {
-                    "key": "field_condition_cta_bar_button_description",
-                    "label": "Button Link Description",
-                    "name": "cta_bar_button_description",
-                    "type": "text",
-                    "instructions": "This is needed for accessibility. It helps differentiate between multiple links that use the same text like \"Learn more\". Describe the intent of the link, like \"Learn more about the ABC Department\".",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_condition_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "url"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_condition_cta_bar_action_url_close",
-                    "label": "URL Action Close",
-                    "name": "",
-                    "type": "accordion",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "open": 1,
-                    "multi_expand": 0,
-                    "endpoint": 1
-                },
-                {
-                    "key": "field_condition_cta_bar_action_phone_open",
-                    "label": "Phone Action",
-                    "name": "",
-                    "type": "accordion",
-                    "instructions": "All fields must be populated or your telephone number will not display.",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_condition_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "phone"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "open": 1,
-                    "multi_expand": 0,
-                    "endpoint": 0
-                },
-                {
-                    "key": "field_condition_cta_bar_phone_prepend",
-                    "label": "Text before phone number",
-                    "name": "cta_bar_phone_prepend",
-                    "type": "text",
-                    "instructions": "This, combined with the phone number will generate a short action phrase. Keep this text very short. Do not include the phone number here. Examples: \"Call\", \"Fax Referrals to\".",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_condition_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "phone"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "Call",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_condition_cta_bar_phone",
-                    "label": "Phone Number",
-                    "name": "cta_bar_phone",
-                    "type": "text",
-                    "instructions": "Format your phone number using dashes. Include the area code. Example: 999-999-9999",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_condition_cta_bar_action_type",
-                                "operator": "==",
-                                "value": "phone"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_condition_cta_bar_action_URL_close",
-                    "label": "Accordion Close",
-                    "name": "",
-                    "type": "accordion",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "open": 1,
-                    "multi_expand": 0,
-                    "endpoint": 1
-                }
-            ]
-        },
-        {
-            "key": "field_condition_clinical_trials",
-            "name": "condition_clinical_trials",
-            "type": "true_false",
-            "label": "Display clinical trials",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "Display clinical trials block",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_condition_treatments",
-            "label": "Treatments",
-            "name": "condition_treatments",
-            "type": "relationship",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "post_type": [
-                "treatment"
-            ],
-            "taxonomy": [],
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_treatment_conditions"
-            },
-            "acfe_validate": "",
-            "acfe_update": "",
-            "ui": 1
-        },
-        {
-            "key": "field_condition_expertise",
-            "label": "Related Areas of Expertise",
-            "name": "condition_expertise",
-            "type": "relationship",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "post_type": [
-                "expertise"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_expertise_conditions_cpt"
-            },
-            "acfe_validate": "",
-            "acfe_update": "",
-            "ui": 1
-        },
-        {
-            "key": "field_condition_locations",
-            "label": "Locations treating this condition",
-            "name": "condition_locations",
-            "type": "relationship",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "post_type": [
-                "location"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_location_conditions_cpt"
-            },
-            "acfe_validate": "",
-            "acfe_update": "",
-            "ui": 1
-        },
-        {
-            "key": "field_condition_physicians",
-            "label": "Providers diagnosing or treating this condition",
-            "name": "condition_physicians",
-            "type": "relationship",
-            "instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "post_type": [
-                "provider"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_physician_conditions_cpt"
-            },
-            "acfe_validate": "",
-            "acfe_update": "",
-            "ui": 1
-        },
-        {
-            "key": "field_condition_clinical_resources",
-            "label": "Clinical Resources",
-            "name": "condition_clinical_resources",
-            "type": "relationship",
-            "instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "post_type": [
-                "clinical-resource"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_clinical_resource_conditions"
-            },
-            "acfe_validate": "",
-            "acfe_update": "",
-            "ui": 1
-        },
-        {
-            "key": "field_condition_podcast_name",
-            "name": "condition_podcast_name",
-            "type": "text",
-            "label": "UAMS Health Talk Podcast Topic Name",
-            "instructions": "Topic name as listed in the dropdown",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "condition"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "acf_after_title",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": [
-        "json"
-    ],
-    "acfe_permissions": "",
-    "acfe_note": "",
-    "acfe_meta": "",
-    "modified": 1567717088
+	"key": "group_conditions_cpt",
+	"title": "Condition Item Configuration",
+	"fields": [
+		{
+			"key": "field_condition_tab_general",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_condition_searchable",
+			"label": "Make this condition searchable?",
+			"name": "condition_searchable",
+			"type": "button_group",
+			"instructions": "Should this condition be used to help return results for associated items like providers, locations, etc.?",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
+			"key": "field_condition_alternate",
+			"label": "Alternate Name(s) for This Condition",
+			"name": "condition_alternate",
+			"type": "repeater",
+			"instructions": "Insert any other names, phrases or acronyms that this condition may be known by. Separate each alternate name into its own item.</p><p class='description' style='margin-top: 0.5em;'>These alternate names will be used to help this page appear in search results for those terms.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "field_alternate_text",
+			"min": 0,
+			"max": 10,
+			"layout": "table",
+			"button_label": "Add Keyword",
+			"sub_fields": [
+				{
+					"key": "field_alternate_text",
+					"label": "Alternate name \/ text",
+					"name": "text",
+					"type": "text",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": "",
+					"acfe_validate": "",
+					"acfe_update": ""
+				}
+			]
+		},
+		{
+			"key": "field_condition_tab_deprecated_soon",
+			"label": "<i class=\"dashicons-warning dashicons\"><\/i> Fields Being Deprecated Soon",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_medline_code_type",
+			"label": "Code Type for Medline Plus",
+			"name": "medline_code_type",
+			"type": "button_group",
+			"instructions": "Pick which code type to choose",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"none": "None",
+				"icd": "ICD-10-CM (Conditions)",
+				"ndc": "NDC (Drug Codes)",
+				"lonic": "LONIC (Lab tests)"
+			},
+			"allow_null": 0,
+			"default_value": "none",
+			"layout": "horizontal",
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"acfe_form": true
+		},
+		{
+			"key": "field_medline_code_id",
+			"label": "Medline Code ID #",
+			"name": "medline_code_id",
+			"type": "text",
+			"instructions": "Find Codes: <a href=\"https://icd10cmtool.cdc.gov/\" target=\"_blank\">ICD-10</a> | <a href=\"https://ndclist.com/\" target=\"_blank\">NDC</a> | <a href=\"https://search.loinc.org/searchLOINC/\" target=\"_blank\">LONIC</a>",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_medline_code_type",
+						"operator": "!=",
+						"value": "none"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_medline_view_data",
+			"label": "Medline Data Verification",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_medline_code_type",
+						"operator": "!=",
+						"value": "none"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "<div id=\"view-button-container\">\r\n<a href=\"#\" class=\"button button-secondary\" id=\"view-medline-data\" target=\"_blank\">View Medline Data<\/a>\r\n<\/div>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
+			"key": "field_condition_embed_codes",
+			"label": "Embed / Syndication Code",
+			"name": "condition_embed_codes",
+			"type": "textarea",
+			"instructions": "Example: Syndication Code from HHS Syndication Storefront",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": "",
+			"rows": 4,
+			"new_lines": ""
+		},
+		{
+			"key": "field_condition_youtube_link",
+			"label": "Featured Video",
+			"name": "condition_youtube_link",
+			"type": "url",
+			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this condition and that supports the content of this page. Include the full URL, including https:\/\/",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_condition_short_desc",
+			"label": "Short Description",
+			"name": "condition_short_desc",
+			"type": "textarea",
+			"instructions": "This will be the description included for this page when it appears in search results.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 2,
+			"new_lines": ""
+		},
+		{
+			"key": "field_condition_cta",
+			"label": "Call-to-Action (CTA) Bar(s)",
+			"name": "condition_cta",
+			"type": "repeater",
+			"instructions": "Define up to two CTA Bar blocks",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "field_condition_cta_bar_heading",
+			"min": 0,
+			"max": 2,
+			"layout": "block",
+			"button_label": "Add CTA Bar",
+			"sub_fields": [
+				{
+					"key": "field_condition_cta_bar_heading",
+					"label": "Heading",
+					"name": "cta_bar_heading",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_condition_cta_bar_body",
+					"label": "Body",
+					"name": "cta_bar_body",
+					"type": "wysiwyg",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"tabs": "all",
+					"toolbar": "basic",
+					"media_upload": 0,
+					"delay": 0
+				},
+				{
+					"key": "field_condition_cta_bar_action_type",
+					"label": "Action Type",
+					"name": "cta_bar_action_type",
+					"type": "button_group",
+					"instructions": "Only choose None if your action is contained within your body text.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"choices": {
+						"url": "URL",
+						"phone": "Phone Number",
+						"none": "None"
+					},
+					"allow_null": 0,
+					"default_value": "url",
+					"layout": "vertical",
+					"return_format": "value"
+				},
+				{
+					"key": "field_condition_cta_bar_action_url_open",
+					"label": "URL Action",
+					"name": "",
+					"type": "accordion",
+					"instructions": "All fields must be populated or your link will not display.",
+					"required": 0,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_condition_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 0
+				},
+				{
+					"key": "field_condition_cta_bar_button_text",
+					"label": "Button Text",
+					"name": "cta_bar_button_text",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_condition_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_condition_cta_bar_button_url",
+					"label": "Button URL",
+					"name": "cta_bar_button_url",
+					"type": "link",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_condition_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"return_format": "array"
+				},
+				{
+					"key": "field_condition_cta_bar_button_description",
+					"label": "Button Link Description",
+					"name": "cta_bar_button_description",
+					"type": "text",
+					"instructions": "This is needed for accessibility. It helps differentiate between multiple links that use the same text like \"Learn more\". Describe the intent of the link, like \"Learn more about the ABC Department\".",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_condition_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_condition_cta_bar_action_url_close",
+					"label": "URL Action Close",
+					"name": "",
+					"type": "accordion",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 1
+				},
+				{
+					"key": "field_condition_cta_bar_action_phone_open",
+					"label": "Phone Action",
+					"name": "",
+					"type": "accordion",
+					"instructions": "All fields must be populated or your telephone number will not display.",
+					"required": 0,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_condition_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 0
+				},
+				{
+					"key": "field_condition_cta_bar_phone_prepend",
+					"label": "Text before phone number",
+					"name": "cta_bar_phone_prepend",
+					"type": "text",
+					"instructions": "This, combined with the phone number will generate a short action phrase. Keep this text very short. Do not include the phone number here. Examples: \"Call\", \"Fax Referrals to\".",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_condition_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "Call",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_condition_cta_bar_phone",
+					"label": "Phone Number",
+					"name": "cta_bar_phone",
+					"type": "text",
+					"instructions": "Format your phone number using dashes. Include the area code. Example: 999-999-9999",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_condition_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_condition_cta_bar_action_URL_close",
+					"label": "Accordion Close",
+					"name": "",
+					"type": "accordion",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 1
+				}
+			]
+		},
+		{
+			"key": "field_condition_clinical_trials",
+			"label": "Display clinical trials",
+			"name": "condition_clinical_trials",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "Display clinical trials block",
+			"default_value": 0,
+			"ui": 0,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		{
+			"key": "field_condition_podcast_name",
+			"label": "UAMS Health Talk Podcast Topic Name",
+			"name": "condition_podcast_name",
+			"type": "text",
+			"instructions": "Include a single topic name as listed in the \"Topics\" dropdown of the embedded player on <a href=\"https://uamshealth.com/podcast/\" title=\"UAMS Health Talk Podcast\" target=\"_blank\">https://uamshealth.com/podcast/</a>.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_condition_tab_schema",
+			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_condition_schema_subtype",
+			"label": "MedicalCondition Subtype",
+			"name": "condition_schema_subtype",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalcondition_subtype"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_condition_schema_infectiousagent",
+			"label": "Infectious Agent (infectiousAgent > Text)",
+			"name": "condition_schema_infectiousagent",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalcondition_subtype",
+						"operator": "==",
+						"value": "InfectiousDisease"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_infectiousagent"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_condition_schema_infectiousagentclass",
+			"label": "Infectious Agent Class (infectiousAgentClass > InfectiousAgentClass)",
+			"name": "condition_schema_infectiousagentclass",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalcondition_subtype",
+						"operator": "==",
+						"value": "InfectiousDisease"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_infectiousagentclass"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_condition_schema_primaryprevention",
+			"label": "Primary Prevention Therapies (primaryPrevention > MedicalTherapy)",
+			"name": "condition_schema_primaryprevention",
+			"type": "relationship",
+			"instructions": "Select any therapies used to prevent an initial occurrence of the medical condition, such as vaccination.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_schema_primaryprevention"
+			}
+		},
+		{
+			"key": "field_condition_schema_secondaryprevention",
+			"label": "Secondary Prevention Therapies (secondaryPrevention > MedicalTherapy)",
+			"name": "condition_schema_secondaryprevention",
+			"type": "relationship",
+			"instructions": "Select any therapies used to prevent reoccurrence of the medical condition after an initial episode of the condition",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_schema_secondaryprevention"
+			}
+		},
+		{
+			"key": "field_condition_schema_possibletreatment",
+			"label": "Possible Treatment(s) (possibleTreatment > MedicalTherapy)",
+			"name": "condition_schema_possibletreatment",
+			"type": "relationship",
+			"instructions": "Select any possible therapies used to address this condition.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_schema_treatedmedicalcondition"
+			}
+		},
+		{
+			"key": "field_condition_schema_typicaltest",
+			"label": "Typical Test(s) (typicalTest > MedicalTest)",
+			"name": "condition_schema_typicaltest",
+			"type": "relationship",
+			"instructions": "Select any medical tests typically performed to diagnose this condition.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_schema_usedtodiagnose"
+			}
+		},
+		{
+			"key": "field_condition_schema_code",
+			"label": "Medical Code(s) for This Condition (code > MedicalCode)",
+			"name": "condition_schema_code",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalcode"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_condition_schema_sameas",
+			"label": "Reference Webpage(s) About This Condition (sameAs > URL)",
+			"name": "condition_schema_sameas",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_condition_schema_additionalType",
+			"label": "More Specific Type(s) for This Condition From External Vocabularies in Microdata Syntax (additionalType > Text or URL)",
+			"name": "condition_schema_additionalType",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_additionalType"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_condition_tab_treatments",
+			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Treatments",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_condition_treatments",
+			"label": "Treatments",
+			"name": "condition_treatments",
+			"type": "relationship",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_conditions"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		{
+			"key": "field_condition_tab_expertise",
+			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_condition_expertise",
+			"label": "Related Areas of Expertise",
+			"name": "condition_expertise",
+			"type": "relationship",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"post_type": [
+				"expertise"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_expertise_conditions_cpt"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		{
+			"key": "field_condition_tab_locations",
+			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Related Locations",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_condition_locations",
+			"label": "Locations treating this condition",
+			"name": "condition_locations",
+			"type": "relationship",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"post_type": [
+				"location"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_location_conditions_cpt"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		{
+			"key": "field_condition_tab_providers",
+			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Related Providers",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_condition_physicians",
+			"label": "Providers diagnosing or treating this condition",
+			"name": "condition_physicians",
+			"type": "relationship",
+			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"post_type": [
+				"provider"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_physician_conditions_cpt"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		{
+			"key": "field_condition_tab_clinical_resources",
+			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_condition_clinical_resources",
+			"label": "Clinical Resources",
+			"name": "condition_clinical_resources",
+			"type": "relationship",
+			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"post_type": [
+				"clinical-resource"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_clinical_resource_conditions"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		{
+			"key": "field_condition_tab_deprecated",
+			"label": "Deprecated Fields",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_condition_tab_deprecated",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_condition_content",
+			"label": "Content",
+			"name": "condition_content",
+			"type": "wysiwyg",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0,
+			"acfe_validate": "",
+			"acfe_update": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "condition"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "acf_after_title",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": 1,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": [
+		"json"
+	],
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": "",
+	"modified": 1567717088
 }

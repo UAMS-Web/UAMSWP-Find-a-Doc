@@ -1,0 +1,152 @@
+{
+	"key": "group_uamswp_certifying_body",
+	"title": "Certifying Body Details",
+	"location": [
+		[
+			{
+				"param": "taxonomy",
+				"operator": "==",
+				"value": "certifying_body"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "acf_after_title",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": [
+		"description"
+	],
+	"active": 1,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": "",
+	"fields": [
+		{
+			"key": "field_certifying_body_intro",
+			"label": "Naming the Taxonomy Item",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<p class='description' style='margin-top: 0.5em;'>Name the taxonomy item using only the full official name of the certifying body (e.g., \"American Board of Pediatrics\").</p><p class='description' style='margin-top: 0.5em;'>Do not include the word \"The\" at the beginning of the name.</p><p class='description' style='margin-top: 0.5em;'>Do not follow the full name of the certifying body with an abbreviation or acronym in parentheses or set off by dashes.</p>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
+			"key": "field_certifying_body_url_query",
+			"label": "Does this certifying body have a website?",
+			"name": "certifying_body_url_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": 1,
+			"layout": "horizontal",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_certifying_body_url",
+			"label": "Certifying Body Website URL",
+			"name": "certifying_body_url",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_certifying_body_url_query",
+						"operator": "==",
+						"value": 1
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_url"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_certifying_body_alternatename",
+			"label": "Alternate Names for the Certifying Body",
+			"name": "certifying_body_alternatename",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_alternatename"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_certifying_body_sameas",
+			"label": "Reference Webpages for the Certifying Body",
+			"name": "certifying_body_sameas",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		}
+	],
+	"modified": false
+}

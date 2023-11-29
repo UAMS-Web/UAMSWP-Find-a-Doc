@@ -1,103 +1,103 @@
 {
-    "key": "group_remove_ontology_options",
-    "title": "Removal Conditions",
-    "fields": [
-        {
-            "key": "field_remove_ontology_criteria",
-            "label": "Removals",
-            "name": "remove_ontology_criteria",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "acfe_repeater_stylised_button": 0,
-            "collapsed": "",
-            "min": 0,
-            "max": 0,
-            "layout": "row",
-            "button_label": "",
-            "sub_fields": [
-                {
-                    "key": "field_remove_service_lines",
-                    "label": "Service Lines",
-                    "name": "remove_service_lines",
-                    "type": "taxonomy",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "taxonomy": "service_line",
-                    "field_type": "checkbox",
-                    "add_term": 0,
-                    "save_terms": 0,
-                    "load_terms": 0,
-                    "return_format": "id",
-                    "acfe_bidirectional": {
-                        "acfe_bidirectional_enabled": "0"
-                    },
-                    "multiple": 0,
-                    "allow_null": 0
-                },
-                {
-                    "key": "field_remove_regions",
-                    "label": "Regions",
-                    "name": "remove_regions",
-                    "type": "taxonomy",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "taxonomy": "region",
-                    "field_type": "checkbox",
-                    "add_term": 0,
-                    "save_terms": 0,
-                    "load_terms": 0,
-                    "return_format": "id",
-                    "acfe_bidirectional": {
-                        "acfe_bidirectional_enabled": "0"
-                    },
-                    "multiple": 0,
-                    "allow_null": 0
-                }
-            ]
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "options_page",
-                "operator": "==",
-                "value": "uamswp-fad-remove-ontology"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "left",
-    "instruction_placement": "field",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_note": "",
-    "acfe_meta": ""
+	"key": "group_remove_ontology_options",
+	"title": "Removal Conditions",
+	"fields": [
+		{
+			"key": "field_remove_ontology_criteria",
+			"label": "Removals",
+			"name": "remove_ontology_criteria",
+			"type": "repeater",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"acfe_repeater_stylised_button": 0,
+			"collapsed": "",
+			"min": 0,
+			"max": 0,
+			"layout": "row",
+			"button_label": "",
+			"sub_fields": [
+				{
+					"key": "field_remove_service_lines",
+					"label": "Service Lines",
+					"name": "remove_service_lines",
+					"type": "taxonomy",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"taxonomy": "service_line",
+					"field_type": "checkbox",
+					"add_term": 0,
+					"save_terms": 0,
+					"load_terms": 0,
+					"return_format": "id",
+					"acfe_bidirectional": {
+						"acfe_bidirectional_enabled": "0"
+					},
+					"multiple": 0,
+					"allow_null": 0
+				},
+				{
+					"key": "field_remove_regions",
+					"label": "Regions",
+					"name": "remove_regions",
+					"type": "taxonomy",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"taxonomy": "region",
+					"field_type": "checkbox",
+					"add_term": 0,
+					"save_terms": 0,
+					"load_terms": 0,
+					"return_format": "id",
+					"acfe_bidirectional": {
+						"acfe_bidirectional_enabled": "0"
+					},
+					"multiple": 0,
+					"allow_null": 0
+				}
+			]
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-remove-ontology"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
 }

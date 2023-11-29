@@ -1,101 +1,101 @@
 
 {
-    "key": "group_location_alert",
-    "title": "Clinical Locations Alert",
-    "fields": [
-        {
-            "key": "field_location_alert_heading_system",
-            "label": "Alert Heading",
-            "name": "location_alert_heading_system",
-            "type": "text",
-            "instructions": "If no value is set, the heading will be 'Alert' but will be hidden.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        {
-            "key": "field_location_alert_body_system",
-            "label": "Alert Body",
-            "name": "location_alert_body_system",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0,
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        {
-            "key": "field_location_alert_color_system",
-            "label": "Alert Color",
-            "name": "location_alert_color_system",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "alert-success": "Success",
-                "alert-danger": "Danger",
-                "alert-warning": "Warning",
-                "alert-info": "Info"
-            },
-            "default_value": [
-                "alert-warning"
-            ],
-            "acfe_permissions": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "options_page",
-                "operator": "==",
-                "value": "uamswp-fad-locations"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "left",
-    "instruction_placement": "field",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_note": "",
-    "acfe_meta": ""
+	"key": "group_location_alert",
+	"title": "Clinical Locations Alert",
+	"fields": [
+		{
+			"key": "field_location_alert_heading_system",
+			"label": "Alert Heading",
+			"name": "location_alert_heading_system",
+			"type": "text",
+			"instructions": "If no value is set, the heading will be 'Alert' but will be hidden.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_location_alert_body_system",
+			"label": "Alert Body",
+			"name": "location_alert_body_system",
+			"type": "wysiwyg",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0,
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_location_alert_color_system",
+			"label": "Alert Color",
+			"name": "location_alert_color_system",
+			"type": "select",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"alert-success": "Success",
+				"alert-danger": "Danger",
+				"alert-warning": "Warning",
+				"alert-info": "Info"
+			},
+			"default_value": [
+				"alert-warning"
+			],
+			"acfe_permissions": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-locations"
+			}
+		]
+	],
+	"menu_order": 80,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
 }
