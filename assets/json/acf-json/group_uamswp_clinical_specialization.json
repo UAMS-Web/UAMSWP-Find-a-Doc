@@ -915,6 +915,79 @@
 			"acfe_settings": ""
 		},
 		{
+			"key": "field_clinical_specialization_name_patient_query",
+			"label": "Use the value of the \"Specialization Name in the Health Care Provider Taxonomy Code Set\" field as the patient-friendly name for the clinical specialization?",
+			"name": "clinical_specialization_name_patient_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
+			"key": "field_clinical_specialization_name_patient",
+			"label": "Patient-Friendly Name for the Clinical Specialization",
+			"name": "clinical_specialization_name_patient",
+			"type": "text",
+			"instructions": "Determine the patient-friendly name to be used for this specialization based on its name, context and description in the Health Care Provider Taxonomy Code Set; the word choices used by the certifying organization; standard nomenclature; and <a href='https://trends.google.com/trends/' target='_blank'>trends.google.com</a>.</p><p class='description' style='margin-top: 0.5em;'>Example: \"Addiction Medicine Anesthesiology\" for taxonomy code 207LA0401X.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_name_patient_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., Addiction Medicine Anesthesiology",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_clinical_specialization_name_patient_alt",
+			"label": "Alternate Names for the Clinical Specialty/Subspecialty",
+			"name": "clinical_specialization_name_patient_alt",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_alternatename"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
 			"key": "field_clinical_specialization_tab_medicare",
 			"label": "Related CMS Specialty Code",
 			"name": "",
