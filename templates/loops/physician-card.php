@@ -1,8 +1,8 @@
-<?php 
+<?php
     /**
      *  Template Name: Provider Loop - Card layout
      *  Designed for UAMS Find-a-Doc
-     * 
+     *
      *  Must be used inside a loop
      *  Required var: $id
      */
@@ -21,11 +21,11 @@
 				}
 			}
 			$i++;
-		endforeach; 
-	} 
+		endforeach;
+	}
 	?>
 	<?php
-		$full_name = get_field('physician_first_name', $id) .' ' .(get_field('physician_middle_name', $id) ? get_field('physician_middle_name', $id) . ' ' : '') . get_field('physician_last_name', $id) . (get_field('physician_pedigree', $id) ? '&nbsp;' . get_field('physician_pedigree', $id) : '') .  ( $degree_list ? ', ' . $degree_list : '' ); 
+		$full_name = get_field('physician_first_name', $id) .' ' .(get_field('physician_middle_name', $id) ? get_field('physician_middle_name', $id) . ' ' : '') . get_field('physician_last_name', $id) . (get_field('physician_pedigree', $id) ? '&nbsp;' . get_field('physician_pedigree', $id) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
 		$full_name_attr = $full_name;
 		$full_name_attr = str_replace('"', '\'', $full_name_attr); // Replace double quotes with single quote
 		$full_name_attr = str_replace('&#8217;', '\'', $full_name_attr); // Replace right single quote with single quote
@@ -37,7 +37,7 @@
 		$physician_title = get_field('physician_title', $id);
 		$physician_title_name = $physician_resident ? $physician_resident_name : get_term( $physician_title, 'clinical_title' )->name;
 		$physician_service_line = get_field('physician_service_line', $id);
-	
+
 	?>
 	<div class="card">
 		<picture>
@@ -55,7 +55,7 @@
 		<div class="card-body">
 				<h3 class="card-title h6">
 					<span class="name"><?php echo $full_name; ?></span>
-					<?php 
+					<?php
 					if(! empty( $physician_title_name ) || ! empty( $physician_service_line ) ){
 						echo '<span class="subtitle">';
 						echo ($physician_title_name ? $physician_title_name : '');
