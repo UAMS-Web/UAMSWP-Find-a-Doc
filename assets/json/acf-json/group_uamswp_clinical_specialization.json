@@ -960,6 +960,36 @@
 			"return_format": "value"
 		},
 		{
+			"key": "field_clinical_specialization_cms_code_query",
+			"label": "Does a CMS Specialty Code exist for this clinical specialization?",
+			"name": "clinical_specialization_cms_code_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_cms_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_clinical_specialization_cms_code",
 			"label": "Related CMS Specialty Code",
 			"name": "clinical_specialization_cms_code",
@@ -972,6 +1002,11 @@
 						"field": "field_clinical_specialization_cms_code_inherit_query",
 						"operator": "==",
 						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_cms_code_query",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -999,6 +1034,11 @@
 						"field": "field_clinical_specialization_cms_code_inherit_query",
 						"operator": "==",
 						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_cms_code_query",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -1207,6 +1247,36 @@
 			"return_format": "value"
 		},
 		{
+			"key": "field_clinical_specialization_onetsoc_code_query",
+			"label": "Does an O*Net-SOC Occupation Code exist for this clinical specialization?",
+			"name": "clinical_specialization_onetsoc_code_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_onetsoc_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_clinical_specialization_onetsoc_code",
 			"label": "Related O*Net-SOC Occupation Code",
 			"name": "clinical_specialization_onetsoc_code",
@@ -1219,6 +1289,11 @@
 						"field": "field_clinical_specialization_onetsoc_code_inherit_query",
 						"operator": "==",
 						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_onetsoc_code_query",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -1246,6 +1321,11 @@
 						"field": "field_clinical_specialization_onetsoc_code_inherit_query",
 						"operator": "==",
 						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_onetsoc_code_query",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -1353,6 +1433,36 @@
 			"return_format": "value"
 		},
 		{
+			"key": "field_clinical_specialization_isco08_code_query",
+			"label": "Does an ISCO-08 Code exist for this clinical specialization?",
+			"name": "clinical_specialization_isco08_code_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_isco08_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_clinical_specialization_isco08_code",
 			"label": "ISCO-08 Code",
 			"name": "clinical_specialization_isco08_code",
@@ -1363,6 +1473,11 @@
 				[
 					{
 						"field": "field_clinical_specialization_isco08_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_isco08_code_query",
 						"operator": "==",
 						"value": "0"
 					}
