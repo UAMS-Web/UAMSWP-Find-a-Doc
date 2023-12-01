@@ -785,6 +785,28 @@
 			"return_format": "value"
 		},
 		{
+			"key": "field_clinical_specialization_definition_query",
+			"label": "Does this specialization have a definition in the Health Care Provider Taxonomy Code Set?",
+			"name": "clinical_specialization_definition_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_clinical_specialization_definition",
 			"label": "Specialization Definition in the Health Care Provider Taxonomy Code Set",
 			"name": "clinical_specialization_definition",
@@ -794,14 +816,7 @@
 			"conditional_logic": [
 				[
 					{
-						"field": "field_clinical_specialization_extension_query",
-						"operator": "==",
-						"value": "1"
-					}
-				],
-				[
-					{
-						"field": "field_clinical_specialization_valid",
+						"field": "field_clinical_specialization_definition_query",
 						"operator": "==",
 						"value": "1"
 					}
@@ -820,6 +835,41 @@
 			"acfe_textarea_code": 0
 		},
 		{
+			"key": "field_clinical_specialization_definition_source_query",
+			"label": "Does this specialization's definition have a source in the Health Care Provider Taxonomy Code Set?",
+			"name": "clinical_specialization_definition_source_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_definition_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_clinical_specialization_definition_source",
 			"label": "Source of Specialization Definition in the Health Care Provider Taxonomy Code Set",
 			"name": "clinical_specialization_definition_source",
@@ -829,7 +879,12 @@
 			"conditional_logic": [
 				[
 					{
-						"field": "field_clinical_specialization_valid",
+						"field": "field_clinical_specialization_definition_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_clinical_specialization_definition_source_query",
 						"operator": "==",
 						"value": "1"
 					}
