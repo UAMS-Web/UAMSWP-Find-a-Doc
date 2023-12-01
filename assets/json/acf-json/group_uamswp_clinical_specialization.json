@@ -848,8 +848,8 @@
 			"acfe_textarea_code": 0
 		},
 		{
-			"key": "field_clinical_specialization_tab_title",
-			"label": "Patient-Facing Terms",
+			"key": "field_clinical_specialization_tab_patient",
+			"label": "Patient-Friendly Terms",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
