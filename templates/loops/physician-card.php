@@ -89,13 +89,6 @@
 
 			}
 
-		$physician_resident = get_field('physician_resident', $id);
-		$physician_resident_title_name = 'Resident Physician';
-		$physician_title = get_field('physician_title', $id);
-		$physician_title_name = $physician_resident ? $physician_resident_title_name : get_term( $physician_title, 'clinical_title' )->name;
-
-		$physician_service_line = get_field('physician_service_line', $id);
-
 	?>
 	<div class="card">
 		<picture>
