@@ -5,7 +5,7 @@
 	 */
 ?>
 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-	<?php 
+	<?php
 	$degrees = get_field('physician_degree');
 	$degree_list = '';
 	$i = 1;
@@ -19,7 +19,7 @@
 			$i++;
 		endforeach;
  	} ?>
-	<?php 
+	<?php
 		$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') . ( $degree_list ? ', ' . $degree_list : '' );
 		$full_name_attr = $full_name;
 		$full_name_attr = str_replace('"', '\'', $full_name_attr); // Replace double quotes with single quote
@@ -96,13 +96,13 @@
 							} else { ?>
 								<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></em></p>
 							<?php
-							} 
+							}
 							?>
-						
+
 							<p><?php echo ( get_field('physician_short_clinical_bio') ? get_field( 'physician_short_clinical_bio') : wp_trim_words( get_field( 'physician_clinical_bio' ), 30, ' &hellip;' ) ); ?></p>
 						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="View Full Profile" data-itemtitle="<?php echo $full_name_attr; ?>">Full Profile</a>
 						</div>
-						<?php 
+						<?php
 						// Check for valid locations
 						$locations = get_field('physician_locations');
 						$location_valid = false;
@@ -136,7 +136,7 @@
 									</ul>
 								<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="View Full Profile" data-itemtitle="<?php echo $full_name_attr; ?>">Full Profile</a>
 							</div>
-						<?php } // endif ?> 
+						<?php } // endif ?>
 					</div>
 				</div>
 			</div>
