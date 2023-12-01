@@ -1631,7 +1631,7 @@
 					{
 						"field": "field_clinical_specialization_isco08_code_query",
 						"operator": "==",
-						"value": "0"
+						"value": "1"
 					}
 				]
 			],
