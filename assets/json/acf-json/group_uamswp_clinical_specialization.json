@@ -1618,8 +1618,8 @@
 			"key": "field_clinical_specialization_isco08_code",
 			"label": "ISCO-08 Code",
 			"name": "clinical_specialization_isco08_code",
-			"type": "select",
-			"instructions": "",
+			"type": "radio",
+			"instructions": "If adding a custom/other choice, enter only the number value of the ISCO-08 code (e.g., 3251).",
 			"required": 1,
 			"conditional_logic": [
 				[
@@ -1640,6 +1640,7 @@
 				"class": "",
 				"id": ""
 			},
+			"acfe_permissions": 0,
 			"choices": {
 				"2211": "Medical Doctors, Generalist Medical Practitioners (2211)",
 				"2212": "Medical Doctors, Specialist Medical Practitioners (2212)",
@@ -1657,15 +1658,14 @@
 				"2267": "Optometrists and Ophthalmic Opticians (2267)",
 				"2269": "Health Professionals Not Elsewhere Classified (2269)"
 			},
-			"default_value": false,
 			"allow_null": 1,
-			"multiple": 0,
-			"ui": 1,
-			"ajax": 0,
+			"other_choice": 1,
+			"save_other_choice": 0,
+			"default_value": false,
+			"layout": "vertical",
 			"return_format": "value",
-			"allow_custom": 0,
-			"search_placeholder": "Select one",
-			"placeholder": ""
+			"acfe_settings": "",
+			"acfe_validate": ""
 		},
 		{
 			"key": "field_clinical_specialization_tab_sameas",
