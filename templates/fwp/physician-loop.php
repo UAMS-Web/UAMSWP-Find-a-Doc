@@ -27,11 +27,63 @@
 		$full_name_attr = htmlentities($full_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
 		$full_name_attr = str_replace('&nbsp;', ' ', $full_name_attr); // Convert non-breaking space with normal space
 		$full_name_attr = html_entity_decode($full_name_attr); // Convert HTML entities to their corresponding characters
-		$physician_resident = get_field('physician_resident');
-		$physician_resident_name = 'Resident Physician';
-		$physician_title = get_field('physician_title');
-		$physician_title_name = $physician_resident ? $physician_resident_name : get_term( $physician_title, 'clinical_title' )->name;
-		$physician_service_line = get_field('physician_service_line');
+
+		// Get resident values
+
+			$physician_resident = get_field('physician_resident',$post->ID);
+			$physician_resident_title_name = 'Resident Physician';
+
+		// Get clinical specialty and occupation title values
+
+			// Eliminate PHP errors
+
+				$provider_specialty = '';
+				$provider_specialty_term = '';
+				$provider_specialty_name = '';
+				$provider_occupation_title = '';
+
+			if ( $physician_resident ) {
+
+				// Clinical Occupation Title
+
+					$provider_occupation_title = $resident_title_name;
+
+			} else {
+
+				// Clinical Specialty
+
+					$provider_specialty = get_field('physician_title',$post->ID);
+
+				// Clinical Occupation Title
+
+					if ( $provider_specialty ) {
+
+						$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+
+						if ( is_object($provider_specialty_term) ) {
+
+							// Get term name
+
+								$provider_specialty_name = $provider_specialty_term->name;
+
+							// Get occupational title field from term
+
+								$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+
+							// Set occupational title from term name as a fallback
+
+								if ( !$provider_occupation_title ) {
+
+									$provider_occupation_title = $provider_specialty_name;
+
+								}
+
+						}
+
+					}
+
+			}
+
 	?>
 	<div class="col item-container">
 		<div class="item">
@@ -67,9 +119,20 @@
 						<div class="col-12 primary">
 						<h3 class="h4">
 							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $full_name_attr; ?>"><span class="name"><?php echo $full_name; ?></span></a>
-							<?php if ( $physician_title_name ) { ?>
-							<span class="subtitle"><?php echo $physician_title_name; ?></span>
-							<?php } // endif ?>
+							<?php
+
+							if (
+								$provider_occupation_title
+								&&
+								!empty($provider_occupation_title)
+							) {
+								?>
+								<span class="subtitle"><?php echo $provider_occupation_title; ?></span>
+								<?php
+
+							}
+
+							?>
 						</h3>
 						<?php
 							if(get_field('physician_npi')) {
