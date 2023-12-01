@@ -873,7 +873,7 @@
 		},
 		{
 			"key": "field_clinical_specialization_title",
-			"label": "Clinical Occupation Title Based on the Health Care Provider Taxonomy Code Set",
+			"label": "Patient-Facing Clinical Occupation Title",
 			"name": "clinical_specialization_title",
 			"type": "text",
 			"instructions": "Determine the patient-facing clinical occupation title to be used for this specialization based on its name, context and description in the Health Care Provider Taxonomy Code Set; the word choices used by the certifying organization; and standard nomenclature.</p><p class='description' style='margin-top: 0.5em;'>Example: \"Addiction Medicine Anesthesiologist\" for taxonomy code 207LA0401X.",
