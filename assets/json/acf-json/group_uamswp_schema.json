@@ -124,11 +124,11 @@
 				"Toxicologic": "<strong>Toxicologic</strong> &mdash; A specific branch of medical science that is concerned with poisons, their nature, effects and detection and involved in the treatment of poisoning.",
 				"Urologic": "<strong>Urologic</strong> &mdash; A specific branch of medical science that is concerned with the diagnosis and treatment of diseases pertaining to the urinary tract and the urogenital system."
 			},
+			"allow_custom": 0,
 			"default_value": [],
 			"layout": "vertical",
 			"toggle": 0,
 			"return_format": "value",
-			"allow_custom": 0,
 			"acfe_settings": "",
 			"acfe_validate": "",
 			"save_custom": 0
