@@ -436,7 +436,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -672,7 +672,7 @@
 				"1": "Yes"
 			},
 			"allow_null": 0,
-			"default_value": "1",
+			"default_value": "",
 			"layout": "horizontal",
 			"return_format": "value"
 		},
@@ -785,11 +785,153 @@
 			"return_format": "value"
 		},
 		{
+			"key": "field_clinical_specialization_definition_query",
+			"label": "Does this specialization have a definition in the Health Care Provider Taxonomy Code Set?",
+			"name": "clinical_specialization_definition_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
+			"key": "field_clinical_specialization_definition",
+			"label": "Specialization Definition in the Health Care Provider Taxonomy Code Set",
+			"name": "clinical_specialization_definition",
+			"type": "textarea",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_definition_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., An anesthesiologist who specializes in the diagnosis and treatment of addictions.",
+			"maxlength": "",
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_clinical_specialization_definition_source_query",
+			"label": "Does this specialization's definition have a source in the Health Care Provider Taxonomy Code Set?",
+			"name": "clinical_specialization_definition_source_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_definition_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
+			"key": "field_clinical_specialization_definition_source",
+			"label": "Source of Specialization Definition in the Health Care Provider Taxonomy Code Set",
+			"name": "clinical_specialization_definition_source",
+			"type": "textarea",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_definition_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_clinical_specialization_definition_source_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., National Uniform Claim Committee, 2009",
+			"maxlength": "",
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_clinical_specialization_tab_patient",
+			"label": "Patient-Friendly Terms",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "!=",
+						"value": ""
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
 			"key": "field_clinical_specialization_title",
-			"label": "Clinical Occupation Title Based on the Health Care Provider Taxonomy Code Set",
+			"label": "Patient-Friendly Clinical Occupation Title",
 			"name": "clinical_specialization_title",
 			"type": "text",
-			"instructions": "Determine the patient-facing clinical occupation title to be used for this specialization based on its name, context and description in the Health Care Provider Taxonomy Code Set; the word choices used by the certifying organization; and standard nomenclature.</p><p class='description' style='margin-top: 0.5em;'>Example: \"Addiction Medicine Anesthesiologist\" for taxonomy code 207LA0401X.",
+			"instructions": "Determine the patient-friendly clinical occupation title to be used for this specialization based on its name, context and description in the Health Care Provider Taxonomy Code Set; the word choices used by the certifying organization; standard nomenclature; and <a href='https://trends.google.com/trends/' target='_blank'>trends.google.com</a>.</p><p class='description' style='margin-top: 0.5em;'>Example: \"Addiction Medicine Anesthesiologist\" for taxonomy code 207LA0401X.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -828,53 +970,40 @@
 			"acfe_settings": ""
 		},
 		{
-			"key": "field_clinical_specialization_definition",
-			"label": "Specialization Definition in the Health Care Provider Taxonomy Code Set",
-			"name": "clinical_specialization_definition",
-			"type": "textarea",
+			"key": "field_clinical_specialization_name_patient_query",
+			"label": "Use the value of the \"Specialization Name in the Health Care Provider Taxonomy Code Set\" field as the patient-friendly name for the clinical specialization?",
+			"name": "clinical_specialization_name_patient_query",
+			"type": "button_group",
 			"instructions": "",
 			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_clinical_specialization_extension_query",
-						"operator": "==",
-						"value": "1"
-					}
-				],
-				[
-					{
-						"field": "field_clinical_specialization_valid",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
 				"id": ""
 			},
-			"default_value": "",
-			"placeholder": "e.g., An anesthesiologist who specializes in the diagnosis and treatment of addictions.",
-			"maxlength": "",
-			"rows": "",
-			"new_lines": "",
-			"acfe_textarea_code": 0
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		{
-			"key": "field_clinical_specialization_definition_source",
-			"label": "Source of Specialization Definition in the Health Care Provider Taxonomy Code Set",
-			"name": "clinical_specialization_definition_source",
-			"type": "textarea",
-			"instructions": "",
+			"key": "field_clinical_specialization_name_patient",
+			"label": "Patient-Friendly Name for the Clinical Specialization",
+			"name": "clinical_specialization_name_patient",
+			"type": "text",
+			"instructions": "Determine the patient-friendly name to be used for this specialization based on its name, context and description in the Health Care Provider Taxonomy Code Set; the word choices used by the certifying organization; standard nomenclature; and <a href='https://trends.google.com/trends/' target='_blank'>trends.google.com</a>.</p><p class='description' style='margin-top: 0.5em;'>Example: \"Addiction Medicine Anesthesiology\" for taxonomy code 207LA0401X.",
 			"required": 1,
 			"conditional_logic": [
 				[
 					{
-						"field": "field_clinical_specialization_valid",
+						"field": "field_clinical_specialization_name_patient_query",
 						"operator": "==",
-						"value": "1"
+						"value": "0"
 					}
 				]
 			],
@@ -884,11 +1013,34 @@
 				"id": ""
 			},
 			"default_value": "",
-			"placeholder": "e.g., National Uniform Claim Committee, 2009",
-			"maxlength": "",
-			"rows": "",
-			"new_lines": "",
-			"acfe_textarea_code": 0
+			"placeholder": "e.g., Addiction Medicine Anesthesiology",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_clinical_specialization_name_patient_alt",
+			"label": "Alternate Names for the Clinical Specialty/Subspecialty",
+			"name": "clinical_specialization_name_patient_alt",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_alternatename"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
 		},
 		{
 			"key": "field_clinical_specialization_tab_medicare",
@@ -960,6 +1112,36 @@
 			"return_format": "value"
 		},
 		{
+			"key": "field_clinical_specialization_cms_code_query",
+			"label": "Does a CMS Specialty Code exist for this clinical specialization?",
+			"name": "clinical_specialization_cms_code_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_cms_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_clinical_specialization_cms_code",
 			"label": "Related CMS Specialty Code",
 			"name": "clinical_specialization_cms_code",
@@ -972,6 +1154,11 @@
 						"field": "field_clinical_specialization_cms_code_inherit_query",
 						"operator": "==",
 						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_cms_code_query",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -999,6 +1186,11 @@
 						"field": "field_clinical_specialization_cms_code_inherit_query",
 						"operator": "==",
 						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_cms_code_query",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -1207,6 +1399,36 @@
 			"return_format": "value"
 		},
 		{
+			"key": "field_clinical_specialization_onetsoc_code_query",
+			"label": "Does an O*Net-SOC Occupation Code exist for this clinical specialization?",
+			"name": "clinical_specialization_onetsoc_code_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_onetsoc_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_clinical_specialization_onetsoc_code",
 			"label": "Related O*Net-SOC Occupation Code",
 			"name": "clinical_specialization_onetsoc_code",
@@ -1219,6 +1441,11 @@
 						"field": "field_clinical_specialization_onetsoc_code_inherit_query",
 						"operator": "==",
 						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_onetsoc_code_query",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -1246,6 +1473,11 @@
 						"field": "field_clinical_specialization_onetsoc_code_inherit_query",
 						"operator": "==",
 						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_onetsoc_code_query",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -1353,10 +1585,10 @@
 			"return_format": "value"
 		},
 		{
-			"key": "field_clinical_specialization_isco08_code",
-			"label": "ISCO-08 Code",
-			"name": "clinical_specialization_isco08_code",
-			"type": "select",
+			"key": "field_clinical_specialization_isco08_code_query",
+			"label": "Does an ISCO-08 Code exist for this clinical specialization?",
+			"name": "clinical_specialization_isco08_code_query",
+			"type": "button_group",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -1374,6 +1606,42 @@
 				"id": ""
 			},
 			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
+			"key": "field_clinical_specialization_isco08_code",
+			"label": "ISCO-08 Code",
+			"name": "clinical_specialization_isco08_code",
+			"type": "radio",
+			"instructions": "If adding a custom/other choice, enter only the number value of the ISCO-08 code (e.g., 3251).",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_isco08_code_inherit_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_isco08_code_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": 0,
+			"choices": {
 				"2211": "Medical Doctors, Generalist Medical Practitioners (2211)",
 				"2212": "Medical Doctors, Specialist Medical Practitioners (2212)",
 				"2221": "Nursing Professionals (2221)",
@@ -1390,15 +1658,14 @@
 				"2267": "Optometrists and Ophthalmic Opticians (2267)",
 				"2269": "Health Professionals Not Elsewhere Classified (2269)"
 			},
-			"default_value": false,
 			"allow_null": 1,
-			"multiple": 0,
-			"ui": 1,
-			"ajax": 0,
+			"other_choice": 1,
+			"save_other_choice": 0,
+			"default_value": false,
+			"layout": "vertical",
 			"return_format": "value",
-			"allow_custom": 0,
-			"search_placeholder": "Select one",
-			"placeholder": ""
+			"acfe_settings": "",
+			"acfe_validate": ""
 		},
 		{
 			"key": "field_clinical_specialization_tab_sameas",

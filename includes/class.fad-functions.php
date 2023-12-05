@@ -473,10 +473,77 @@ function provider_recognition_function( $atts ) {
 				$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') .  ( $degree_list ? ', ' . $degree_list : '' );
 				$recognition_list .= '<tr>';
 				$recognition_list .= '<td><a href="'.get_permalink().'" title="'. $full_name .'">'. $full_name .'</a></td>';
-				$phys_title = get_field('physician_title');
-				if ($phys_title && !empty($phys_title)) {
-					$recognition_list .= '<td>'. ($phys_title ? get_term( $phys_title, 'clinical_title' )->name : '&nbsp;') .'</td>';
+
+				// Get resident values
+
+					$resident = get_field('physician_resident',$post->ID);
+					$resident_title_name = 'Resident Physician';
+
+				// Get clinical specialty and occupation title values
+
+					// Eliminate PHP errors
+
+						$provider_specialty = '';
+						$provider_specialty_term = '';
+						$provider_specialty_name = '';
+						$provider_occupation_title = '';
+
+					if ( $resident ) {
+
+						// Clinical Occupation Title
+
+							$provider_occupation_title = $resident_title_name;
+
+					} else {
+
+						// Clinical Specialty
+
+							$provider_specialty = get_field('physician_title',$post->ID);
+
+						// Clinical Occupation Title
+
+							if ( $provider_specialty ) {
+
+								$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+
+								if ( is_object($provider_specialty_term) ) {
+
+									// Get term name
+
+										$provider_specialty_name = $provider_specialty_term->name;
+
+									// Get occupational title field from term
+
+										$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+
+									// Set occupational title from term name as a fallback
+
+										if ( !$provider_occupation_title ) {
+
+											$provider_occupation_title = $provider_specialty_name;
+
+										}
+
+								}
+
+							}
+
+					}
+
+				if (
+					$provider_occupation_title
+					&&
+					!empty($provider_occupation_title)
+				) {
+
+					$recognition_list .= '<td>'. $provider_occupation_title .'</td>';
+
+				} else {
+
+					$recognition_list .= '<td>&nbsp;</td>';
+
 				}
+
 				$recognition_list .= '</tr>';
 
 			endwhile;

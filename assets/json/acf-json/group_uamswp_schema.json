@@ -70,7 +70,7 @@
 			"key": "field_schema_medicalspecialty_multiple",
 			"label": "MedicalSpecialty, Multiple (MedicalSpecialty)",
 			"name": "schema_medicalspecialty_multiple",
-			"type": "select",
+			"type": "checkbox",
 			"instructions": "Select one or more Schema.org MedicalSpecialty enumeration members that are relevant to this entity. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalSpecialty Schema.org enumeration type, visit <a href='https://schema.org/MedicalSpecialty' target='_blank'>https://schema.org/MedicalSpecialty</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each of the MedicalSpecialty Schema.org enumeration members, visit the relevant page linked at <a href='https://schema.org/MedicalSpecialty#subtypes' target='_blank'>https://schema.org/MedicalSpecialty#subtypes</a>.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -79,6 +79,7 @@
 				"class": "",
 				"id": ""
 			},
+			"acfe_permissions": "",
 			"choices": {
 				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
 				"Anesthesia": "<strong>Anesthesia</strong> &mdash; A specific branch of medical science that pertains to study of anesthetics and their application.",
@@ -123,16 +124,14 @@
 				"Toxicologic": "<strong>Toxicologic</strong> &mdash; A specific branch of medical science that is concerned with poisons, their nature, effects and detection and involved in the treatment of poisoning.",
 				"Urologic": "<strong>Urologic</strong> &mdash; A specific branch of medical science that is concerned with the diagnosis and treatment of diseases pertaining to the urinary tract and the urogenital system."
 			},
-			"default_value": [],
-			"allow_null": 1,
-			"multiple": 1,
-			"ui": 1,
-			"ajax": 0,
-			"return_format": "value",
 			"allow_custom": 0,
-			"placeholder": "",
+			"default_value": [],
+			"layout": "vertical",
+			"toggle": 0,
+			"return_format": "value",
 			"acfe_settings": "",
-			"acfe_validate": ""
+			"acfe_validate": "",
+			"save_custom": 0
 		},
 		{
 			"key": "field_schema_sameas",
