@@ -5,7 +5,7 @@
 	 */
 ?>
 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-	<?php 
+	<?php
 	$degrees = get_field('physician_degree');
 	$degree_list = '';
 	$i = 1;
@@ -19,7 +19,7 @@
 			$i++;
 		endforeach;
  	} ?>
-	<?php 
+	<?php
 		$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') . ( $degree_list ? ', ' . $degree_list : '' );
 		$full_name_attr = $full_name;
 		$full_name_attr = str_replace('"', '\'', $full_name_attr); // Replace double quotes with single quote
@@ -27,11 +27,63 @@
 		$full_name_attr = htmlentities($full_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
 		$full_name_attr = str_replace('&nbsp;', ' ', $full_name_attr); // Convert non-breaking space with normal space
 		$full_name_attr = html_entity_decode($full_name_attr); // Convert HTML entities to their corresponding characters
-		$physician_resident = get_field('physician_resident');
-		$physician_resident_name = 'Resident Physician';
-		$physician_title = get_field('physician_title');
-		$physician_title_name = $physician_resident ? $physician_resident_name : get_term( $physician_title, 'clinical_title' )->name;
-		$physician_service_line = get_field('physician_service_line');
+
+		// Get resident values
+
+			$physician_resident = get_field('physician_resident',$post->ID);
+			$physician_resident_title_name = 'Resident Physician';
+
+		// Get clinical specialty and occupation title values
+
+			// Eliminate PHP errors
+
+				$provider_specialty = '';
+				$provider_specialty_term = '';
+				$provider_specialty_name = '';
+				$provider_occupation_title = '';
+
+			if ( $physician_resident ) {
+
+				// Clinical Occupation Title
+
+					$provider_occupation_title = $resident_title_name;
+
+			} else {
+
+				// Clinical Specialty
+
+					$provider_specialty = get_field('physician_title',$post->ID);
+
+				// Clinical Occupation Title
+
+					if ( $provider_specialty ) {
+
+						$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+
+						if ( is_object($provider_specialty_term) ) {
+
+							// Get term name
+
+								$provider_specialty_name = $provider_specialty_term->name;
+
+							// Get occupational title field from term
+
+								$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+
+							// Set occupational title from term name as a fallback
+
+								if ( !$provider_occupation_title ) {
+
+									$provider_occupation_title = $provider_specialty_name;
+
+								}
+
+						}
+
+					}
+
+			}
+
 	?>
 	<div class="col item-container">
 		<div class="item">
@@ -67,9 +119,20 @@
 						<div class="col-12 primary">
 						<h3 class="h4">
 							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $full_name_attr; ?>"><span class="name"><?php echo $full_name; ?></span></a>
-							<?php if ( $physician_title_name ) { ?>
-							<span class="subtitle"><?php echo $physician_title_name; ?></span>
-							<?php } // endif ?>
+							<?php
+
+							if (
+								$provider_occupation_title
+								&&
+								!empty($provider_occupation_title)
+							) {
+								?>
+								<span class="subtitle"><?php echo $provider_occupation_title; ?></span>
+								<?php
+
+							}
+
+							?>
 						</h3>
 						<?php
 							if(get_field('physician_npi')) {
@@ -96,13 +159,13 @@
 							} else { ?>
 								<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></em></p>
 							<?php
-							} 
+							}
 							?>
-						
+
 							<p><?php echo ( get_field('physician_short_clinical_bio') ? get_field( 'physician_short_clinical_bio') : wp_trim_words( get_field( 'physician_clinical_bio' ), 30, ' &hellip;' ) ); ?></p>
 						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="View Full Profile" data-itemtitle="<?php echo $full_name_attr; ?>">Full Profile</a>
 						</div>
-						<?php 
+						<?php
 						// Check for valid locations
 						$locations = get_field('physician_locations');
 						$location_valid = false;
@@ -136,7 +199,7 @@
 									</ul>
 								<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="View Full Profile" data-itemtitle="<?php echo $full_name_attr; ?>">Full Profile</a>
 							</div>
-						<?php } // endif ?> 
+						<?php } // endif ?>
 					</div>
 				</div>
 			</div>
