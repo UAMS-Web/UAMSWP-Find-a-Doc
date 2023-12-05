@@ -672,7 +672,7 @@
 				"1": "Yes"
 			},
 			"allow_null": 0,
-			"default_value": "1",
+			"default_value": "",
 			"layout": "horizontal",
 			"return_format": "value"
 		},
