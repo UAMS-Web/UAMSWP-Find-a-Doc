@@ -293,7 +293,7 @@
 	add_filter('manage_provider_posts_columns', 'posts_provider_columns', 10);
 	add_action('manage_provider_posts_custom_column', 'posts_provider_custom_columns', 10, 2);
 
-	function posts_provider_columns($columns){
+	function posts_provider_columns($columns) {
 
 		$custom_columns = array();
 		$title = 'title';
@@ -314,7 +314,7 @@
 
 	}
 
-	function posts_provider_custom_columns($column_name, $id){
+	function posts_provider_custom_columns($column_name, $id) {
 
 		if ($column_name === 'provider_post_thumbs') {
 
@@ -506,7 +506,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 	add_action('wp_ajax_load_posts_by_ajax', 'uamswp_load_by_ajax_callback');
 	add_action('wp_ajax_nopriv_load_posts_by_ajax', 'uamswp_load_by_ajax_callback');
 
-	function uamswp_load_by_ajax_callback(){
+	function uamswp_load_by_ajax_callback() {
 
 		// $ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 6; // Set this default value
 		$page = $_POST['page'];
@@ -733,7 +733,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 	}
 
-	function register_recognition_shortcodes(){
+	function register_recognition_shortcodes() {
 
 		add_shortcode('recognition-list', 'provider_recognition_function');
 
@@ -1048,7 +1048,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 					$provider_title = $_COOKIE['_provider_title'] ;
 
-				} elseif (isset($_POST['provider_title'])){
+				} elseif (isset($_POST['provider_title'])) {
 
 					$provider_title = sanitize_text_field( $_POST['provider_title'] );
 
@@ -1066,7 +1066,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 					$provider_region = $_COOKIE['wp_filter_region'];
 
-				} elseif (isset($_POST['provider_region'])){
+				} elseif (isset($_POST['provider_region'])) {
 
 					$provider_region = sanitize_text_field( $_POST['provider_region'] );
 
@@ -1517,7 +1517,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 					$location_region = $_COOKIE['wp_filter_region'];
 
-				} elseif (isset($_POST['location_region'])){
+				} elseif (isset($_POST['location_region'])) {
 
 					$location_region = sanitize_text_field( $_POST['location_region'] );
 
@@ -1615,7 +1615,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 // The Trench (Pre-filtering provider and location lists based on user geolocation and/or user intent)
 
-	function uamswp_add_trench(){
+	function uamswp_add_trench() {
 
 		if (is_page( )) {
 
@@ -14394,7 +14394,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 	function uamswp_fad_youtube_info(
 		string $url // YouTube video URL
-	){
+	) {
 
 		/*
 		 * Requires YouTube Lyte plugin
