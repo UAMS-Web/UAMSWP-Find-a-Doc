@@ -1,5 +1,5 @@
 {
-    "cSpell.words": [
+	"cSpell.words": [
 		"3DModel",
 		"Abdomen",
 		"about",
@@ -2891,8 +2891,8 @@
 		"Zoo",
 		"Zung"
 	],
-    "files.trimTrailingWhitespace": true,
-    "cSpell.ignoreWords": [
+	"files.trimTrailingWhitespace": true,
+	"cSpell.ignoreWords": [
 		"ADMINW",
 		"Aenean",
 		"BCP",
