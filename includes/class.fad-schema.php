@@ -15599,7 +15599,7 @@
 
 														if ( !isset($provider_additionalType_clinical_specialization_repeater) ) {
 
-															$provider_additionalType_clinical_specialization_repeater = get_field( 'clinical_specialization_sameas_occupation_schema_sameas', $term ) ?? null;
+															$provider_additionalType_clinical_specialization_repeater = get_field( 'clinical_specialization_sameas_occupation_schema_sameas', $entity ) ?? null;
 
 														}
 
