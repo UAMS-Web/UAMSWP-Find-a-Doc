@@ -2088,23 +2088,37 @@
 
 															$questionRatings = $rating_data->profile->questionRatings;
 
-															foreach ( $questionRatings as $questionRating ) {
+															if ( $questionRatings ) {
 
-																if ( $questionRating->questionCount > 0 ) {
+																foreach ( $questionRatings as $questionRating ) {
 
-																	?>
-																	<dt><?php echo $questionRating->question; ?></dt>
-																	<dd>
-																		<div class="rating" aria-label="Patient Rating">
-																			<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->averageRatingStr)/5 * 100; ?>%;"></div></div>
-																			<div class="ratings-score-lg"><?php echo $questionRating->averageRatingStr; ?><span class="sr-only"> out of 5</span></div>
-																		</div>
-																	</dd>
-																	<?php
+																	if (
+																		$questionRating
+																		&&
+																		isset($questionRating->questionCount)
+																		&&
+																		$questionRating->questionCount > 0
+																		&&
+																		isset($questionRating->question)
+																		&&
+																		isset($questionRating->averageRatingStr)
+																	) {
 
-																}
+																		?>
+																		<dt><?php echo $questionRating->question; ?></dt>
+																		<dd>
+																			<div class="rating" aria-label="Patient Rating">
+																				<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->averageRatingStr)/5 * 100; ?>%;"></div></div>
+																				<div class="ratings-score-lg"><?php echo $questionRating->averageRatingStr; ?><span class="sr-only"> out of 5</span></div>
+																			</div>
+																		</dd>
+																		<?php
 
-															} // endforeach
+																	}
+
+																} // endforeach
+
+															}
 
 															?>
 														</dl>
