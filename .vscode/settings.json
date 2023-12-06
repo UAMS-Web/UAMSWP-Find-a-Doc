@@ -3072,5 +3072,6 @@
 		"yeardiv"
 	],
 	"editor.inlineSuggest.enabled": false,
-	"editor.foldingMaximumRegions": 9000
+	"editor.foldingMaximumRegions": 9000,
+	"editor.insertSpaces": false
 }
