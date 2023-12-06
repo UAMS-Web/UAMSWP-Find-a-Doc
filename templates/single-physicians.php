@@ -2085,18 +2085,28 @@
 														<h3 class="sr-only">Average Ratings</h3>
 														<dl>
 															<?php
+
 															$questionRatings = $rating_data->profile->questionRatings;
-															foreach( $questionRatings as $questionRating ):
-																if ($questionRating->questionCount > 0){ ?>
-															<dt><?php echo $questionRating->question; ?></dt>
-															<dd>
-																<div class="rating" aria-label="Patient Rating">
-																	<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->averageRatingStr)/5 * 100; ?>%;"></div></div>
-																	<div class="ratings-score-lg"><?php echo $questionRating->averageRatingStr; ?><span class="sr-only"> out of 5</span></div>
-																</div>
-															</dd>
-															<?php }
-															endforeach; ?>
+
+															foreach ( $questionRatings as $questionRating ) {
+
+																if ( $questionRating->questionCount > 0 ) {
+
+																	?>
+																	<dt><?php echo $questionRating->question; ?></dt>
+																	<dd>
+																		<div class="rating" aria-label="Patient Rating">
+																			<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->averageRatingStr)/5 * 100; ?>%;"></div></div>
+																			<div class="ratings-score-lg"><?php echo $questionRating->averageRatingStr; ?><span class="sr-only"> out of 5</span></div>
+																		</div>
+																	</dd>
+																	<?php
+
+																}
+
+															} // endforeach
+
+															?>
 														</dl>
 													</div>
 													<div class="card-footer bg-transparent text-muted small">
