@@ -49,7 +49,7 @@
 
 			// Change only, if the meta is specified
 			// if ( !empty($new_url) )
-		// 			$results[$k]->link = $new_url;
+			// 		$results[$k]->link = $new_url;
 
 			if ( !empty($full_name) )
 					$results[$k]->title = $full_name;
