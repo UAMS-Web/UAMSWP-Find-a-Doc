@@ -22,7 +22,7 @@
 			"key": "field_treatment_procedure_searchable",
 			"label": "Make this treatment searchable?",
 			"name": "treatment_procedure_searchable",
-			"type": "true_false",
+			"type": "button_group",
 			"instructions": "Should this treatment be used to help return results for associated items like providers, locations, etc.?",
 			"required": 0,
 			"conditional_logic": 0,
@@ -31,11 +31,15 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"default_value": 1,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		{
 			"key": "field_treatment_procedure_alternate",
@@ -102,6 +106,496 @@
 					"acfe_update": ""
 				}
 			]
+		},
+		{
+			"key": "field_treatment_procedure_tab_deprecated_soon",
+			"label": "<i class=\"dashicons-warning dashicons\"><\/i> Fields Being Deprecated Soon",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_medline_code_type",
+			"label": "Code Type for Medline Plus",
+			"name": "medline_code_type",
+			"type": "button_group",
+			"instructions": "Pick which code type to choose",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"none": "None",
+				"icd": "ICD-10-CM (Conditions)",
+				"ndc": "NDC (Drug Codes)",
+				"lonic": "LONIC (Lab tests)"
+			},
+			"allow_null": 0,
+			"default_value": "none",
+			"layout": "horizontal",
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"acfe_form": true
+		},
+		{
+			"key": "field_medline_code_id",
+			"label": "Medline Code ID #",
+			"name": "medline_code_id",
+			"type": "text",
+			"instructions": "Find Codes: <a href=\"https://icd10cmtool.cdc.gov/\" target=\"_blank\">ICD-10</a> | <a href=\"https://ndclist.com/\" target=\"_blank\">NDC</a> | <a href=\"https://search.loinc.org/searchLOINC/\" target=\"_blank\">LONIC</a>",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_medline_code_type",
+						"operator": "!=",
+						"value": "none"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_medline_view_data",
+			"label": "Medline Data Verification",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_medline_code_type",
+						"operator": "!=",
+						"value": "none"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "<div id=\"view-button-container\">\r\n<a href=\"#\" class=\"button button-secondary\" id=\"view-medline-data\" target=\"_blank\">View Medline Data<\/a>\r\n<\/div>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
+			"key": "field_treatment_procedure_embed_codes",
+			"label": "Embed / Syndication Code",
+			"name": "treatment_procedure_embed_codes",
+			"type": "textarea",
+			"instructions": "Example: Syndication Code from HHS Syndication Storefront",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": "",
+			"rows": 4,
+			"new_lines": ""
+		},
+		{
+			"key": "field_treatment_procedure_youtube_link",
+			"label": "Featured Video",
+			"name": "treatment_procedure_youtube_link",
+			"type": "url",
+			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this treatment or procedure and that supports the content of this page. Include the full URL, including https:\/\/",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_treatment_procedure_short_desc",
+			"label": "Short Description",
+			"name": "treatment_procedure_short_desc",
+			"type": "textarea",
+			"instructions": "This will be the description included for this page when it appears in search results.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 2,
+			"new_lines": ""
+		},
+		{
+			"key": "field_treatment_procedure_cta",
+			"label": "Call-to-Action (CTA) Bar(s)",
+			"name": "treatment_procedure_cta",
+			"type": "repeater",
+			"instructions": "Define up to two CTA Bar blocks",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "field_treatment_procedure_cta_bar_heading",
+			"min": 0,
+			"max": 2,
+			"layout": "block",
+			"button_label": "Add CTA Bar",
+			"sub_fields": [
+				{
+					"key": "field_treatment_procedure_cta_bar_heading",
+					"label": "Heading",
+					"name": "cta_bar_heading",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_treatment_procedure_cta_bar_body",
+					"label": "Body",
+					"name": "cta_bar_body",
+					"type": "wysiwyg",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"tabs": "all",
+					"toolbar": "basic",
+					"media_upload": 0,
+					"delay": 0
+				},
+				{
+					"key": "field_treatment_procedure_cta_bar_action_type",
+					"label": "Action Type",
+					"name": "cta_bar_action_type",
+					"type": "button_group",
+					"instructions": "Only choose None if your action is contained within your body text.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"choices": {
+						"url": "URL",
+						"phone": "Phone Number",
+						"none": "None"
+					},
+					"allow_null": 0,
+					"default_value": "url",
+					"layout": "vertical",
+					"return_format": "value"
+				},
+				{
+					"key": "field_treatment_procedure_cta_bar_action_url_open",
+					"label": "URL Action",
+					"name": "",
+					"type": "accordion",
+					"instructions": "All fields must be populated or your link will not display.",
+					"required": 0,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_treatment_procedure_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 0
+				},
+				{
+					"key": "field_treatment_procedure_cta_bar_button_text",
+					"label": "Button Text",
+					"name": "cta_bar_button_text",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_treatment_procedure_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_treatment_procedure_cta_bar_button_url",
+					"label": "Button URL",
+					"name": "cta_bar_button_url",
+					"type": "link",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_treatment_procedure_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"return_format": "array"
+				},
+				{
+					"key": "field_treatment_procedure_cta_bar_button_description",
+					"label": "Button Link Description",
+					"name": "cta_bar_button_description",
+					"type": "text",
+					"instructions": "This is needed for accessibility. It helps differentiate between multiple links that use the same text like \"Learn more\". Describe the intent of the link, like \"Learn more about the ABC Department\".",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_treatment_procedure_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_treatment_procedure_cta_bar_action_url_close",
+					"label": "URL Action Close",
+					"name": "",
+					"type": "accordion",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 1
+				},
+				{
+					"key": "field_treatment_procedure_cta_bar_action_phone_open",
+					"label": "Phone Action",
+					"name": "",
+					"type": "accordion",
+					"instructions": "All fields must be populated or your telephone number will not display.",
+					"required": 0,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_treatment_procedure_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 0
+				},
+				{
+					"key": "field_treatment_procedure_cta_bar_phone_prepend",
+					"label": "Text before phone number",
+					"name": "cta_bar_phone_prepend",
+					"type": "text",
+					"instructions": "This, combined with the phone number will generate a short action phrase. Keep this text very short. Do not include the phone number here. Examples: \"Call\", \"Fax Referrals to\".",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_treatment_procedure_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "Call",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_treatment_procedure_cta_bar_phone",
+					"label": "Phone Number",
+					"name": "cta_bar_phone",
+					"type": "text",
+					"instructions": "Format your phone number using dashes. Include the area code. Example: 999-999-9999",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_treatment_procedure_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_treatment_procedure_cta_bar_action_URL_close",
+					"label": "Accordion Close",
+					"name": "",
+					"type": "accordion",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 1
+				}
+			]
+		},
+		{
+			"key": "field_treatment_procedure_clinical_trials",
+			"label": "Display clinical trials",
+			"name": "treatment_procedure_clinical_trials",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "Display clinical trials block",
+			"default_value": 0,
+			"ui": 0,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		{
+			"key": "field_treatment_procedure_podcast_name",
+			"label": "UAMS Health Talk Podcast Topic Name",
+			"name": "treatment_procedure_podcast_name",
+			"type": "text",
+			"instructions": "Include a single topic name as listed in the \"Topics\" dropdown of the embedded player on <a href=\"https://uamshealth.com/podcast/\" title=\"UAMS Health Talk Podcast\" target=\"_blank\">https://uamshealth.com/podcast/</a>.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
 		},
 		{
 			"key": "field_treatment_procedure_tab_schema",
@@ -1125,480 +1619,6 @@
 			"delay": 0,
 			"acfe_validate": "",
 			"acfe_update": ""
-		},
-		{
-			"key": "field_medline_code_type",
-			"label": "Code Type for Medline Plus",
-			"name": "medline_code_type",
-			"type": "button_group",
-			"instructions": "Pick which code type to choose",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"choices": {
-				"none": "None",
-				"icd": "ICD-10-CM (Conditions)",
-				"ndc": "NDC (Drug Codes)",
-				"lonic": "LONIC (Lab tests)"
-			},
-			"allow_null": 0,
-			"default_value": "none",
-			"layout": "horizontal",
-			"return_format": "value",
-			"acfe_settings": "",
-			"acfe_validate": "",
-			"acfe_form": true
-		},
-		{
-			"key": "field_medline_code_id",
-			"label": "Medline Code ID #",
-			"name": "medline_code_id",
-			"type": "text",
-			"instructions": "Find Codes: <a href=\"https://icd10cmtool.cdc.gov/\" target=\"_blank\">ICD-10</a> | <a href=\"https://ndclist.com/\" target=\"_blank\">NDC</a> | <a href=\"https://search.loinc.org/searchLOINC/\" target=\"_blank\">LONIC</a>",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_medline_code_type",
-						"operator": "!=",
-						"value": "none"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
-		{
-			"key": "field_medline_view_data",
-			"label": "Medline Data Verification",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_medline_code_type",
-						"operator": "!=",
-						"value": "none"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"message": "<div id=\"view-button-container\">\r\n<a href=\"#\" class=\"button button-secondary\" id=\"view-medline-data\" target=\"_blank\">View Medline Data<\/a>\r\n<\/div>",
-			"new_lines": "",
-			"esc_html": 0
-		},
-		{
-			"key": "field_treatment_procedure_embed_codes",
-			"label": "Embed / Syndication Code",
-			"name": "treatment_procedure_embed_codes",
-			"type": "textarea",
-			"instructions": "Example: Syndication Code from HHS Syndication Storefront",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"maxlength": "",
-			"rows": 4,
-			"new_lines": ""
-		},
-		{
-			"key": "field_treatment_procedure_youtube_link",
-			"label": "Featured Video",
-			"name": "treatment_procedure_youtube_link",
-			"type": "url",
-			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this treatment or procedure and that supports the content of this page. Include the full URL, including https:\/\/",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "50",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": ""
-		},
-		{
-			"key": "field_treatment_procedure_short_desc",
-			"label": "Short Description",
-			"name": "treatment_procedure_short_desc",
-			"type": "textarea",
-			"instructions": "This will be the description included for this page when it appears in search results.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "50",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"maxlength": 160,
-			"rows": 2,
-			"new_lines": ""
-		},
-		{
-			"key": "field_treatment_procedure_cta",
-			"label": "Call-to-Action (CTA) Bar(s)",
-			"name": "treatment_procedure_cta",
-			"type": "repeater",
-			"instructions": "Define up to two CTA Bar blocks",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"collapsed": "field_treatment_procedure_cta_bar_heading",
-			"min": 0,
-			"max": 2,
-			"layout": "block",
-			"button_label": "Add CTA Bar",
-			"sub_fields": [
-				{
-					"key": "field_treatment_procedure_cta_bar_heading",
-					"label": "Heading",
-					"name": "cta_bar_heading",
-					"type": "text",
-					"instructions": "",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_treatment_procedure_cta_bar_body",
-					"label": "Body",
-					"name": "cta_bar_body",
-					"type": "wysiwyg",
-					"instructions": "",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"tabs": "all",
-					"toolbar": "basic",
-					"media_upload": 0,
-					"delay": 0
-				},
-				{
-					"key": "field_treatment_procedure_cta_bar_action_type",
-					"label": "Action Type",
-					"name": "cta_bar_action_type",
-					"type": "button_group",
-					"instructions": "Only choose None if your action is contained within your body text.",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"choices": {
-						"url": "URL",
-						"phone": "Phone Number",
-						"none": "None"
-					},
-					"allow_null": 0,
-					"default_value": "url",
-					"layout": "vertical",
-					"return_format": "value"
-				},
-				{
-					"key": "field_treatment_procedure_cta_bar_action_url_open",
-					"label": "URL Action",
-					"name": "",
-					"type": "accordion",
-					"instructions": "All fields must be populated or your link will not display.",
-					"required": 0,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_treatment_procedure_cta_bar_action_type",
-								"operator": "==",
-								"value": "url"
-							}
-						]
-					],
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"open": 1,
-					"multi_expand": 0,
-					"endpoint": 0
-				},
-				{
-					"key": "field_treatment_procedure_cta_bar_button_text",
-					"label": "Button Text",
-					"name": "cta_bar_button_text",
-					"type": "text",
-					"instructions": "",
-					"required": 1,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_treatment_procedure_cta_bar_action_type",
-								"operator": "==",
-								"value": "url"
-							}
-						]
-					],
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_treatment_procedure_cta_bar_button_url",
-					"label": "Button URL",
-					"name": "cta_bar_button_url",
-					"type": "link",
-					"instructions": "",
-					"required": 1,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_treatment_procedure_cta_bar_action_type",
-								"operator": "==",
-								"value": "url"
-							}
-						]
-					],
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"return_format": "array"
-				},
-				{
-					"key": "field_treatment_procedure_cta_bar_button_description",
-					"label": "Button Link Description",
-					"name": "cta_bar_button_description",
-					"type": "text",
-					"instructions": "This is needed for accessibility. It helps differentiate between multiple links that use the same text like \"Learn more\". Describe the intent of the link, like \"Learn more about the ABC Department\".",
-					"required": 1,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_treatment_procedure_cta_bar_action_type",
-								"operator": "==",
-								"value": "url"
-							}
-						]
-					],
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_treatment_procedure_cta_bar_action_url_close",
-					"label": "URL Action Close",
-					"name": "",
-					"type": "accordion",
-					"instructions": "",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"open": 1,
-					"multi_expand": 0,
-					"endpoint": 1
-				},
-				{
-					"key": "field_treatment_procedure_cta_bar_action_phone_open",
-					"label": "Phone Action",
-					"name": "",
-					"type": "accordion",
-					"instructions": "All fields must be populated or your telephone number will not display.",
-					"required": 0,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_treatment_procedure_cta_bar_action_type",
-								"operator": "==",
-								"value": "phone"
-							}
-						]
-					],
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"open": 1,
-					"multi_expand": 0,
-					"endpoint": 0
-				},
-				{
-					"key": "field_treatment_procedure_cta_bar_phone_prepend",
-					"label": "Text before phone number",
-					"name": "cta_bar_phone_prepend",
-					"type": "text",
-					"instructions": "This, combined with the phone number will generate a short action phrase. Keep this text very short. Do not include the phone number here. Examples: \"Call\", \"Fax Referrals to\".",
-					"required": 1,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_treatment_procedure_cta_bar_action_type",
-								"operator": "==",
-								"value": "phone"
-							}
-						]
-					],
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "Call",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_treatment_procedure_cta_bar_phone",
-					"label": "Phone Number",
-					"name": "cta_bar_phone",
-					"type": "text",
-					"instructions": "Format your phone number using dashes. Include the area code. Example: 999-999-9999",
-					"required": 1,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_treatment_procedure_cta_bar_action_type",
-								"operator": "==",
-								"value": "phone"
-							}
-						]
-					],
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_treatment_procedure_cta_bar_action_URL_close",
-					"label": "Accordion Close",
-					"name": "",
-					"type": "accordion",
-					"instructions": "",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"open": 1,
-					"multi_expand": 0,
-					"endpoint": 1
-				}
-			]
-		},
-		{
-			"key": "field_treatment_procedure_clinical_trials",
-			"label": "Display clinical trials",
-			"name": "treatment_procedure_clinical_trials",
-			"type": "true_false",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "Display clinical trials block",
-			"default_value": 0,
-			"ui": 0,
-			"ui_on_text": "",
-			"ui_off_text": ""
-		},
-		{
-			"key": "field_treatment_procedure_podcast_name",
-			"label": "UAMS Health Talk Podcast Topic Name",
-			"name": "treatment_procedure_podcast_name",
-			"type": "text",
-			"instructions": "Include a single topic name as listed in the \"Topics\" dropdown of the embedded player on <a href=\"https://uamshealth.com/podcast/\" title=\"UAMS Health Talk Podcast\" target=\"_blank\">https://uamshealth.com/podcast/</a>.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
 		}
 	],
 	"location": [

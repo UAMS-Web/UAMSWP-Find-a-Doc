@@ -195,7 +195,7 @@
 				"1": "Yes"
 			},
 			"allow_null": 1,
-			"default_value": 0,
+			"default_value": "0",
 			"layout": "horizontal",
 			"return_format": "value"
 		},
@@ -313,7 +313,14 @@
 			"type": "button_group",
 			"instructions": "This field is being deprecated. Make the appropriate selections in the brand organization fields.",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==empty"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -406,8 +413,8 @@
 				[
 					{
 						"field": "field_location_building_query",
-						"operator": "!=",
-						"value": "0"
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -439,8 +446,8 @@
 				[
 					{
 						"field": "field_location_building_query",
-						"operator": "!=",
-						"value": "0"
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -494,8 +501,8 @@
 				[
 					{
 						"field": "field_location_building_query",
-						"operator": "!=",
-						"value": "0"
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -653,7 +660,7 @@
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
-				"class": "",
+				"class": "hide-acf-border",
 				"id": ""
 			},
 			"taxonomy": "region",
@@ -776,7 +783,7 @@
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
-				"class": "hide-acf-border",
+				"class": "",
 				"id": ""
 			},
 			"default_value": "",
@@ -830,7 +837,7 @@
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
-				"class": "hide-acf-border",
+				"class": "",
 				"id": ""
 			},
 			"default_value": "",
@@ -1040,7 +1047,7 @@
 			],
 			"wrapper": {
 				"width": "",
-				"class": "hide-acf-border",
+				"class": "",
 				"id": ""
 			},
 			"default_value": "",
@@ -1067,7 +1074,7 @@
 			],
 			"wrapper": {
 				"width": "",
-				"class": "hide-acf-border",
+				"class": "",
 				"id": ""
 			},
 			"default_value": "",
@@ -1094,7 +1101,7 @@
 			],
 			"wrapper": {
 				"width": "",
-				"class": "hide-acf-border",
+				"class": "",
 				"id": ""
 			},
 			"default_value": "",
@@ -1150,6 +1157,17 @@
 				],
 				[
 					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_schema_brandorg",
+						"operator": "==empty"
+					}
+				],
+				[
+					{
 						"field": "field_location_appointments_query",
 						"operator": "==empty"
 					}
@@ -1182,18 +1200,6 @@
 						"field": "field_schema_brandorg",
 						"operator": "==",
 						"value": "arkansas-childrens"
-					},
-					{
-						"field": "field_location_appointments_query",
-						"operator": "==",
-						"value": "1"
-					}
-				],
-				[
-					{
-						"field": "field_location_ac_query",
-						"operator": "==",
-						"value": "1"
 					},
 					{
 						"field": "field_location_appointments_query",
@@ -1299,6 +1305,23 @@
 						"value": "arkansas-childrens"
 					},
 					{
+						"field": "field_location_appointments_query",
+						"operator": "==",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_schema_brandorg",
+						"operator": "==",
+						"value": "arkansas-childrens"
+					},
+					{
 						"field": "field_location_ac_appointments_query",
 						"operator": "==",
 						"value": "0"
@@ -1355,23 +1378,6 @@
 						"field": "field_schema_brandorg",
 						"operator": "==",
 						"value": "arkansas-childrens"
-					},
-					{
-						"field": "field_location_ac_appointments_query",
-						"operator": "==",
-						"value": "0"
-					},
-					{
-						"field": "field_location_clinic_phone_query",
-						"operator": "==",
-						"value": "1"
-					}
-				],
-				[
-					{
-						"field": "field_location_ac_query",
-						"operator": "==",
-						"value": "1"
 					},
 					{
 						"field": "field_location_ac_appointments_query",
@@ -1490,11 +1496,6 @@
 						"field": "field_schema_brandorg",
 						"operator": "!=",
 						"value": "arkansas-childrens"
-					},
-					{
-						"field": "field_location_ac_query",
-						"operator": "!=",
-						"value": "1"
 					}
 				]
 			],
@@ -4866,7 +4867,7 @@
 						"id": ""
 					},
 					"collapsed": "field_telemed_hours_day",
-					"min": 1,
+					"min": 7,
 					"max": 0,
 					"layout": "table",
 					"button_label": "Add Day \/ Time",
@@ -9368,7 +9369,7 @@
 			"label": "Suppress alert from Find-a-Doc Settings? (Deprecated)",
 			"name": "location_alert_suppress",
 			"type": "true_false",
-			"instructions": "Move this value to the Alert Modification field. This field will be removed soon.",
+			"instructions": "Move this value to the Alert Modification field.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -9472,8 +9473,8 @@
 		},
 		{
 			"key": "field_location_spacer_2",
-			"label": "hidden",
-			"name": "(Deprecated)",
+			"label": "(Deprecated)",
+			"name": "",
 			"type": "message",
 			"instructions": "",
 			"required": 0,
@@ -9490,7 +9491,7 @@
 		},
 		{
 			"key": "field_location_spacer_3",
-			"label": "hidden (Deprecated)",
+			"label": "(Deprecated)",
 			"name": "",
 			"type": "message",
 			"instructions": "",
@@ -9525,8 +9526,8 @@
 		},
 		{
 			"key": "field_details_other_message",
-			"label": "",
-			"name": "(Deprecated)",
+			"label": "(Deprecated)",
+			"name": "",
 			"type": "message",
 			"instructions": "",
 			"required": 0,
@@ -9539,6 +9540,74 @@
 			"message": "<h3>Other Details<\/h3>",
 			"new_lines": "",
 			"esc_html": 0
+		},
+		{
+			"key": "field_info_depreciated_open",
+			"label": "(Deprecated)",
+			"name": "",
+			"type": "accordion",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"open": 0,
+			"multi_expand": 0,
+			"endpoint": 0
+		},
+		{
+			"key": "field_info_depreciated_end",
+			"label": "(Deprecated)",
+			"name": "",
+			"type": "accordion",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"open": 0,
+			"multi_expand": 0,
+			"endpoint": 1
+		},
+		{
+			"key": "field_details_deprecated_open",
+			"label": "(Deprecated)",
+			"name": "",
+			"type": "accordion",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"open": 0,
+			"multi_expand": 0,
+			"endpoint": 0
+		},
+		{
+			"key": "field_details_deprecated_end",
+			"label": "(Deprecated)",
+			"name": "",
+			"type": "accordion",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"open": 0,
+			"multi_expand": 0,
+			"endpoint": 1
 		}
 	],
 	"modified": false

@@ -309,8 +309,8 @@
 					'singular_name' => 'Treatment and Procedure',
 					'menu_name' => 'Treatments and Procedures',
 					'name_admin_bar' => 'Treatment and Procedure',
-					'archives' => 'Treatments & Procedure Archives',
-					'attributes' => 'Treatments & Procedure Attributes',
+					'archives' => 'Treatments and Procedures Archives',
+					'attributes' => 'Treatments and Procedures Attributes',
 					'parent_item_colon' => 'Parent Item:',
 					'all_items' => 'All Treatments and Procedures',
 					'add_new_item' => 'Add New Treatment and Procedure',
@@ -450,11 +450,9 @@
 
 	// Actions for Taxonomy
 
-		/*
-
-			Place in order for sub-menu
-
-		*/
+		/**
+		 * Place in order for sub-menu
+		 */
 
 		// Affiliations, Hospital
 
@@ -911,14 +909,12 @@
 
 		// Degrees and Credentials
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "D.O."
-					 * "M.D."
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "D.O."
+			 *      * "M.D."
+			 */
 
 			function create_degrees_taxonomy() {
 
@@ -983,14 +979,12 @@
 
 		// Patient Types
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "Adults"
-					 * "Children and Adolescents"
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "Adults"
+			 *      * "Children and Adolescents"
+			 */
 
 			function create_patient_type_taxonomy() {
 
@@ -1055,12 +1049,10 @@
 
 		// Clinical Specializations
 
-			/*
-
-				Expected taxonomy items include the items from the Health Care Provider Taxonomy
-				code set.
-
-			*/
+			/**
+			 * Expected taxonomy items include the items from the Health Care Provider Taxonomy
+			 * code set.
+			 */
 
 			function create_clinical_title_taxonomy() {
 
@@ -1125,16 +1117,14 @@
 
 		// Clinical Administrative Title
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "Administrator"
-					 * "Director"
-					 * "Medical Director"
-					 * "Nursing Director"
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "Administrator"
+			 *      * "Director"
+			 *      * "Medical Director"
+			 *      * "Nursing Director"
+			 */
 
 			function create_clinical_admin_title_taxonomy() {
 
@@ -1199,24 +1189,22 @@
 
 		// Hospital Affiliations
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "Arkansas Children's Hospital" (Slug: "ach")
-					 * "Arkansas Children's Northwest" (Slug: "arkansas-childrens-northwest")
-					 * "Arkansas State Hospital" (Slug: "arkansas-state-hospital")
-					 * "Baptist Health Medical Center-Arkadelphia" (Slug: "baptist-health-medical-center_arkadelphia")
-					 * "Baptist Health Medical Center-Conway" (Slug: "baptist-health-medical-center_conway")
-					 * "Baptist Health Medical Center-Heber Springs" (Slug: "baptist-health-medical-center_heber-springs")
-					 * "Baptist Health Medical Center-Hot Spring County" (Slug: "baptist-health-medical-center_hot-spring-county")
-					 * "Baptist Health Medical Center-Little Rock" (Slug: "baptist-health-medical-center_little-rock")
-					 * "Baptist Health Medical Center-North Little Rock" (Slug: "baptist-health-medical-center_north-little-rock")
-					 * "Baptist Health Medical Center-Stuttgart" (Slug: "baptist-health-medical-center_stuttgart")
-					 * "John L. McClellan Memorial Veterans' Hospital" (Slug: "cavhs")
-					 * "UAMS Medical Center" (Slug: "uams")
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "Arkansas Children's Hospital" (Slug: "ach")
+			 *      * "Arkansas Children's Northwest" (Slug: "arkansas-childrens-northwest")
+			 *      * "Arkansas State Hospital" (Slug: "arkansas-state-hospital")
+			 *      * "Baptist Health Medical Center-Arkadelphia" (Slug: "baptist-health-medical-center_arkadelphia")
+			 *      * "Baptist Health Medical Center-Conway" (Slug: "baptist-health-medical-center_conway")
+			 *      * "Baptist Health Medical Center-Heber Springs" (Slug: "baptist-health-medical-center_heber-springs")
+			 *      * "Baptist Health Medical Center-Hot Spring County" (Slug: "baptist-health-medical-center_hot-spring-county")
+			 *      * "Baptist Health Medical Center-Little Rock" (Slug: "baptist-health-medical-center_little-rock")
+			 *      * "Baptist Health Medical Center-North Little Rock" (Slug: "baptist-health-medical-center_north-little-rock")
+			 *      * "Baptist Health Medical Center-Stuttgart" (Slug: "baptist-health-medical-center_stuttgart")
+			 *      * "John L. McClellan Memorial Veterans' Hospital" (Slug: "cavhs")
+			 *      * "UAMS Medical Center" (Slug: "uams")
+			 */
 
 			function create_affiliations_taxonomy() {
 
@@ -1334,13 +1322,11 @@
 
 		// Languages
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "English"
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "English"
+			 */
 
 			function create_languages_taxonomy() {
 
@@ -1462,16 +1448,14 @@
 
 		// Academic Position Types
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "Administration"
-					 * "Faculty"
-					 * "Leadership"
-					 * "Staff"
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "Administration"
+			 *      * "Faculty"
+			 *      * "Leadership"
+			 *      * "Staff"
+			 */
 
 			function create_academic_position_taxonomy() {
 
@@ -1535,18 +1519,16 @@
 
 		// UAMS Colleges
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "College of Health Professions" (slug: "health-professions")
-					 * "College of Medicine" (slug: "medicine")
-					 * "College of Nursing" (slug: "nursing")
-					 * "College of Pharmacy" (slug: "pharmacy")
-					 * "College of Public Health" (slug: "public-health")
-					 * "Graduate School" (slug: "graduate")
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "College of Health Professions" (slug: "health-professions")
+			 *      * "College of Medicine" (slug: "medicine")
+			 *      * "College of Nursing" (slug: "nursing")
+			 *      * "College of Pharmacy" (slug: "pharmacy")
+			 *      * "College of Public Health" (slug: "public-health")
+			 *      * "Graduate School" (slug: "graduate")
+			 */
 
 			function create_academic_college_taxonomy() {
 
@@ -1941,7 +1923,7 @@
 					'assign_terms' => 'edit_physicians',
 				);
 				$args = array(
-					'label' => __( 'Associations' ),
+					'label' => __( 'Health Care Professional Associations' ),
 					'labels' => $labels,
 					// 'description' => '',
 					'public' => true,
@@ -1968,21 +1950,19 @@
 
 		// Education and Training Types
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "Chief Residency"
-					 * "Externship"
-					 * "Fellowship"
-					 * "Internship"
-					 * "Medical School"
-					 * "Postdoctoral Fellowship"
-					 * "Postgraduate Education"
-					 * "Residency"
-					 * "Undergraduate Education"
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "Chief Residency"
+			 *      * "Externship"
+			 *      * "Fellowship"
+			 *      * "Internship"
+			 *      * "Medical School"
+			 *      * "Postdoctoral Fellowship"
+			 *      * "Postgraduate Education"
+			 *      * "Residency"
+			 *      * "Undergraduate Education"
+			 */
 
 			function create_education_taxonomy() {
 
@@ -2044,20 +2024,18 @@
 
 			}
 
-		// Portals
+		// Patient Portals
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "Arkansas Children's MyChart" (Slug: "ach-mychart")
-					 * "Baptist Health MyChart" (Slug: "baptist-health-mychart")
-					 * "My HealtheVet" (Slug: "my-healthevet")
-					 * "MyPortal" (Slug: "fmc-patient-portal")
-					 * "None" (Slug: "_none")
-					 * "UAMS Health MyChart" (Slug: "uams-mychart")
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "Arkansas Children's MyChart" (Slug: "ach-mychart")
+			 *      * "Baptist Health MyChart" (Slug: "baptist-health-mychart")
+			 *      * "My HealtheVet" (Slug: "my-healthevet")
+			 *      * "MyPortal" (Slug: "fmc-patient-portal")
+			 *      * "None" (Slug: "_none")
+			 *      * "UAMS Health MyChart" (Slug: "uams-mychart")
+			 */
 
 			function create_portal_taxonomy() {
 
@@ -2122,20 +2100,18 @@
 
 		// Faculty Titles
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "Professor"
-						 * "Adjunct Professor"
-					 * "Associate Professor"
-						 * "Adjunct Associate Professor"
-					 * "Assistant Professor"
-						 * "Adjunct Assistant Professor"
-					 * "Instructor"
-						 * "Adjunct Instructor"
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "Professor"
+			 *            * "Adjunct Professor"
+			 *      * "Associate Professor"
+			 *            * "Adjunct Associate Professor"
+			 *      * "Assistant Professor"
+			 *            * "Adjunct Assistant Professor"
+			 *      * "Instructor"
+			 *            * "Adjunct Instructor"
+			 */
 
 			function create_academic_title_taxonomy() {
 
@@ -2200,31 +2176,29 @@
 
 		// Academic Administrative Titles
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "Dean"
-					 * "Associate Dean"
-					 * "Assistant Dean"
-					 * "Department Chair"
-					 * "Department Vice Chair"
-					 * "Department Associate Vice Chair"
-					 * "Department Assistant Vice Chair"
-					 * "Director of Clinical Education"
-					 * "Associate Director of Clinical Education"
-					 * "Assistant Director of Clinical Education"
-					 * "Division Chief"
-					 * "Fellowship Program Director"
-					 * "Fellowship Program Associate Director"
-					 * "Fellowship Program Assistant Director"
-					 * "Residency Program Director"
-					 * "Residency Program Associate Director"
-					 * "Residency Program Assistant Director"
-					 * "Medical Student Clerkship Director"
-					 * "Medical Student Clerkship Co-Director"
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "Dean"
+			 *      * "Associate Dean"
+			 *      * "Assistant Dean"
+			 *      * "Department Chair"
+			 *      * "Department Vice Chair"
+			 *      * "Department Associate Vice Chair"
+			 *      * "Department Assistant Vice Chair"
+			 *      * "Director of Clinical Education"
+			 *      * "Associate Director of Clinical Education"
+			 *      * "Assistant Director of Clinical Education"
+			 *      * "Division Chief"
+			 *      * "Fellowship Program Director"
+			 *      * "Fellowship Program Associate Director"
+			 *      * "Fellowship Program Assistant Director"
+			 *      * "Residency Program Director"
+			 *      * "Residency Program Associate Director"
+			 *      * "Residency Program Assistant Director"
+			 *      * "Medical Student Clerkship Director"
+			 *      * "Medical Student Clerkship Co-Director"
+			 */
 
 			function create_academic_admin_title_taxonomy() {
 
@@ -2289,16 +2263,14 @@
 
 		// Recognition Lists
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "Best Doctors in America 20XX"
-					 * "AY Magazine Best Healthcare Professionals 20XX"
-					 * "Castle Connolly Top Doctors 20XX"
-					 * "Soirée Top Docs 20XX"
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "Best Doctors in America 20XX"
+			 *      * "AY Magazine Best Healthcare Professionals 20XX"
+			 *      * "Castle Connolly Top Doctors 20XX"
+			 *      * "Soirée Top Docs 20XX"
+			 */
 
 			function create_recognition_taxonomy() {
 
@@ -2362,17 +2334,15 @@
 
 		// Regions
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "Central Arkansas"
-					 * "Northeast Arkansas"
-					 * "Northwest Arkansas"
-					 * "Southeast Arkansas"
-					 * "Southwest Arkansas"
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "Central Arkansas"
+			 *      * "Northeast Arkansas"
+			 *      * "Northwest Arkansas"
+			 *      * "Southeast Arkansas"
+			 *      * "Southwest Arkansas"
+			 */
 
 			function create_region_taxonomy() {
 
@@ -2436,24 +2406,22 @@
 
 		// Types of Locations
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "COVID-19 Testing"
-					 * "COVID-19 Vaccines"
-					 * "Emergency Room"
-					 * "Hospital"
-					 * "Imaging"
-					 * "Inpatient Unit"
-					 * "Laboratory"
-					 * "Outpatient Clinic"
-					 * "Pediatric Care"
-					 * "Pharmacy"
-					 * "Primary Care"
-					 * "Specialty Care"
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "COVID-19 Testing"
+			 *      * "COVID-19 Vaccines"
+			 *      * "Emergency Room"
+			 *      * "Hospital"
+			 *      * "Imaging"
+			 *      * "Inpatient Unit"
+			 *      * "Laboratory"
+			 *      * "Outpatient Clinic"
+			 *      * "Pediatric Care"
+			 *      * "Pharmacy"
+			 *      * "Primary Care"
+			 *      * "Specialty Care"
+			 */
 
 			function create_location_type_taxonomy() {
 
@@ -2641,17 +2609,17 @@
 
 		// Facilities
 
-			/*
-
-				Expected taxonomy items:
-
-					 * "None" (Slug: "_none")
-
-			*/
+			/**
+			 * Expected taxonomy items:
+			 *
+			 *      * "None" (Slug: "_none")
+			 */
 
 			function create_building_taxonomy() {
 
-				// Plugin assumes there is a 'None' taxonomy item with slug '_none'
+				/**
+				 * Plugin assumes there is a 'None' taxonomy item with slug '_none'
+				 */
 
 				$labels = array(
 					'name' => 'Facilities',
@@ -2775,21 +2743,18 @@
 
 		// Brand Organizations — UAMS
 
-			/*
-
-				The taxonomy is intended to define values for organizations like UAMS and
-				UAMS Health.
-
-				It should be limited to UAMS, UAMS Health, and any other clinical organizations
-				within UAMS.
-
-
-				Expected taxonomy items:
-
-					 * "University of Arkansas for Medical Sciences" (Slug: "uams")
-						 * "UAMS Health" (Slug: "uamshealth")
-
-			*/
+			/**
+			 * The taxonomy is intended to define values for organizations like UAMS and
+			 * UAMS Health.
+			 *
+			 * It should be limited to UAMS, UAMS Health, and any other clinical organizations
+			 * within UAMS.
+			 *
+			 * Expected taxonomy items:
+			 *
+			 *      * "University of Arkansas for Medical Sciences" (Slug: "uams")
+			 *             * "UAMS Health" (Slug: "uamshealth")
+			 */
 
 			function create_brand_organization_uams_taxonomy() {
 
@@ -2853,28 +2818,26 @@
 
 		// Brand Organizations — Third-Party
 
-			/*
-
-				The taxonomy is intended to define values for primary third-party clinical
-				organizations (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare
-				System).
-
-				It should be limited to third-party organizations at which we have clinical
-				oversight — or within which there are clinical locations at which we have
-				clinical oversight.
-
-				Prefix slugs for any nested third-party brand organization terms with the
-				top-level term's slug preceded and followed by an underscore.
-
-				Expected taxonomy items:
-
-					 * "Arkansas Children's" (Slug: "arkansas-childrens")
-					 * "Arkansas Department of Human Services" (Slug: "dhs")
-					 * "Baptist Health" (Slug: "baptist-health")
-					 * "United States Department of Veterans Affairs" (Slug: "va")
-						 * "Central Arkansas Veterans Healthcare System" (Slug: "_va_cavhs")
-
-			*/
+			/**
+			 * The taxonomy is intended to define values for primary third-party clinical
+			 * organizations (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare
+			 * System).
+			 *
+			 * It should be limited to third-party organizations at which we have clinical
+			 * oversight — or within which there are clinical locations at which we have
+			 * clinical oversight.
+			 *
+			 * Prefix slugs for any nested third-party brand organization terms with the
+			 * top-level term's slug preceded and followed by an underscore.
+			 *
+			 * Expected taxonomy items:
+			 *
+			 *      * "Arkansas Children's" (Slug: "arkansas-childrens")
+			 *      * "Arkansas Department of Human Services" (Slug: "dhs")
+			 *      * "Baptist Health" (Slug: "baptist-health")
+			 *      * "United States Department of Veterans Affairs" (Slug: "va")
+			 *             * "Central Arkansas Veterans Healthcare System" (Slug: "_va_cavhs")
+			 */
 
 			function create_brand_organization_taxonomy() {
 
@@ -3211,6 +3174,14 @@
 				border-color: transparent;
 			}
 
+			.acf-field.hide-acf-border .acf-taxonomy-field .categorychecklist-holder {
+				border: none;
+			}
+
+			.acf-field.hide-acf-border .acf-taxonomy-field .acf-checkbox-list {
+				padding: 0;
+			}
+
 			.hide-acf-title .acf-label {
 				display: none;
 			}
@@ -3246,6 +3217,7 @@
 	 * @param	object	$labels	Current post type labels
 	 * @return	object			Modified post type labels
 	 */
+
 	function change_featured_image_labels_provider( $labels ) {
 
 		$labels->featured_image = 'Headshot';
@@ -3328,11 +3300,64 @@
 
 			}
 
-			$full_name = get_field( 'physician_first_name', $postId ) . ' ' . ( get_field( 'physician_middle_name', $postId ) ? get_field( 'physician_middle_name', $postId ) . ' ' : '') . get_field( 'physician_last_name', $postId ) . (get_field( 'physician_pedigree', $postId ) ? '&nbsp;' . get_field( 'physician_pedigree', $postId ) : '') . ( $degree_list ? ', ' . $degree_list : '' );
-			$provider_resident = get_field( 'physician_resident', $postId );
-			$provider_resident_name = 'Resident Physician';
-			$provider_title = get_field( 'physician_title', $postId );
-			$provider_title_name = $provider_resident ? $provider_resident_name : get_term( $provider_title, 'clinical_title' )->name;
+			$full_name = get_field( 'physician_first_name', $postId ) . ' ' . ( get_field( 'physician_middle_name', $postId ) ? get_field( 'physician_middle_name', $postId ) . ' ' : '' ) . get_field( 'physician_last_name', $postId ) . ( get_field( 'physician_pedigree', $postId ) ? '&nbsp;' . get_field( 'physician_pedigree', $postId ) : '') . ( $degree_list ? ', ' . $degree_list : '' );
+
+			// Get resident values
+
+				$provider_resident = get_field( 'physician_resident', $postId );
+				$provider_resident_title_name = 'Resident Physician';
+
+			// Get clinical specialty and occupation title values
+
+				// Eliminate PHP errors
+
+					$provider_specialty = '';
+					$provider_specialty_term = '';
+					$provider_specialty_name = '';
+					$provider_occupation_title = '';
+
+				if ( $provider_resident ) {
+
+					// Clinical Occupation Title
+
+						$provider_occupation_title = $provider_resident_title_name;
+
+				} else {
+
+					// Clinical Specialty
+
+						$provider_specialty = get_field( 'physician_title', $postId );
+
+					// Clinical Occupation Title
+
+						if ( $provider_specialty ) {
+
+							$provider_specialty_term = get_term( $provider_specialty, 'clinical_title' );
+
+							if ( is_object($provider_specialty_term) ) {
+
+								// Get term name
+
+									$provider_specialty_name = $provider_specialty_term->name;
+
+								// Get occupational title field from term
+
+									$provider_occupation_title = get_field( 'clinical_specialization_title', $provider_specialty_term ) ?? null;
+
+								// Set occupational title from term name as a fallback
+
+									if ( !$provider_occupation_title ) {
+
+										$provider_occupation_title = $provider_specialty_name;
+
+									}
+
+							}
+
+						}
+
+				}
+
 			$provider_service_line = get_field( 'physician_service_line', $postId );
 			$resident_profile_group = get_field( 'physician_resident_profile_group', $postId );
 			$resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
@@ -3344,7 +3369,7 @@
 			$resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
 			$data['physician_full_name'] = $full_name;
 			//Physician Data
-			$data['physician_title'] = $provider_title_name; //(get_field( 'physician_title', $postId ) ? get_term( get_field( 'physician_title', $postId ), 'clinical_title' )->name : '');
+			$data['physician_title'] = $provider_occupation_title; //(get_field( 'physician_title', $postId ) ? get_term( get_field( 'physician_title', $postId ), 'clinical_title' )->name : '');
 			$data['physician_service_line'] = $provider_service_line ? get_term( $provider_service_line, 'service_line' )->name : '';
 			$data['physician_clinical_bio'] = get_field( 'physician_clinical_bio', $postId );
 			$data['physician_short_clinical_bio'] = get_field( 'physician_short_clinical_bio', $postId ) ? get_field( 'physician_short_clinical_bio', $postId ) : wp_trim_words( get_field( 'physician_clinical_bio', $postId ), 30, ' &hellip;' );
@@ -3404,7 +3429,7 @@
 			$data['physician_photo'] = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
 			$data['physician_referral_required'] = get_field( 'physician_referral_required', $postId );
 			$provider_portal = get_field( 'physician_portal', $postId );
-			$portal = get_term($provider_portal, "portal");
+			$portal = get_term( $provider_portal, 'portal' );
 			$data['physician_portal']['name'] = $portal->name;
 			$data['physician_portal']['content'] = get_field( 'portal_content', $portal );
 			$data['physician_portal']['url'] = get_field( 'portal_url', $portal );
@@ -3829,7 +3854,7 @@
 
 					$i = 0;
 
-					foreach ($location_images as $location_images_item) {
+					foreach ( $location_images as $location_images_item ) {
 
 						$data['location_photo'][$i]['thumb'] = image_sizer($location_images_item, 60, 45, 'center', 'center');
 						$data['location_photo'][$i]['sml'] = image_sizer($location_images_item, 576, 324, 'center', 'center');
@@ -3978,7 +4003,7 @@
 
 			// Region
 
-				$data['location_region'] = get_term($location_region, "region")->slug;
+				$data['location_region'] = get_term( $location_region, 'region' )->slug;
 
 			// Location Type
 
@@ -4019,7 +4044,6 @@
 					$location_appointment_phone_query = '0';
 
 				}
-
 
 				if ( $location_appointment_phone_query ) {
 
@@ -4169,7 +4193,7 @@
 			// Portal
 
 				$location_portal = get_field( 'location_portal', $postId );
-				$portal = get_term($location_portal, "portal");
+				$portal = get_term( $location_portal, 'portal' );
 				$data['location_portal']['name'] = $portal->name;
 				$data['location_portal']['content'] = get_field( 'portal_content', $portal );
 				$data['location_portal']['url'] = get_field( 'portal_url', $portal );
@@ -4201,7 +4225,6 @@
 
 				$location_alert_color = $location_alert_color_sys;
 
-
 				if (
 					$location_alert_modification == 'override'
 					&&
@@ -4213,7 +4236,6 @@
 				}
 
 				$location_alert_text = $location_alert_text_sys;
-
 
 				if (
 					$location_alert_modification == 'override'
@@ -4232,7 +4254,6 @@
 					$location_alert_text = $location_alert_text_sys . $location_alert_text_local;
 
 				}
-
 
 				if ( $location_alert_modification == 'suppress' ) {
 
@@ -4326,7 +4347,6 @@
 							$data['location_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
 							$expertise_list .= $expertise->post_title;
 
-
 							if ( count($expertises) > $i ) {
 
 								$expertise_list .= ', ';
@@ -4374,7 +4394,6 @@
 							$data['location_conditions'][$condition->ID]['slug'] = $condition->post_name;
 							$condition_list .= $condition->post_title;
 
-
 							if ( count($conditions_cpt) > $i ) {
 
 								$condition_list .= ', ';
@@ -4421,7 +4440,6 @@
 							$data['location_treatments'][$treatment->ID]['title'] = $treatment->post_title;
 							$data['location_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
 							$treatment_list .= $treatment->post_title;
-
 
 							if ( count($treatments_cpt) > $i ) {
 
@@ -5056,7 +5074,7 @@
 			// Conditions
 			$conditions_cpt = get_field( 'clinical_resource_conditions', $postId );
 
-			if ($conditions_cpt) {
+			if ( $conditions_cpt ) {
 
 				$args = (array(
 					'post_type' => 'condition',
@@ -5073,7 +5091,7 @@
 			// Treatments
 			$treatments_cpt = get_field( 'clinical_resource_treatments', $postId );
 
-			if ($treatments_cpt) {
+			if ( $treatments_cpt ) {
 
 				$args = (array(
 					'post_type' => 'treatment',
@@ -5095,7 +5113,7 @@
 				$args = array(
 					'post_type' => 'provider',
 					'post_status' => 'publish',
-					"posts_per_page" => -1,
+					'posts_per_page' => -1,
 					'orderby' => 'title',
 					'order' => 'ASC',
 					'post__in' => $providers
@@ -5141,7 +5159,7 @@
 			// Related Resources
 			$clinical_resources = get_field( 'clinical_resource_related', $postId );
 
-			if ($clinical_resources) {
+			if ( $clinical_resources ) {
 
 				$args = (array(
 					'post_type' => 'clinical-resource',
@@ -5371,9 +5389,11 @@
 	// Add REST API query var filters
 
 		add_filter('rest_query_vars', 'provider_add_rest_query_vars');
+
 		function provider_add_rest_query_vars($query_vars) {
 
 			$query_vars = array_merge( $query_vars, array('meta_key', 'meta_value', 'meta_compare') );
+
 			return $query_vars;
 
 		}

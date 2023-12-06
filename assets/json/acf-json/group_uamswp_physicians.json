@@ -2684,6 +2684,23 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_profile_message",
+			"label": "Profile Information",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "This information is designed for department and public websites.",
+			"new_lines": "wpautop",
+			"esc_html": 0
+		},
+		{
 			"key": "field_physician_prefix",
 			"label": "Prefix",
 			"name": "physician_prefix",
@@ -2712,23 +2729,6 @@
 			"prepend": "",
 			"append": "",
 			"maxlength": ""
-		},
-		{
-			"key": "field_profile_message",
-			"label": "Profile Information",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "This information is designed for department and public websites.",
-			"new_lines": "wpautop",
-			"esc_html": 0
 		},
 		{
 			"key": "field_physician_academic_short_bio",

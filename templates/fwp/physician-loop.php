@@ -1,12 +1,12 @@
 <?php
 /**
  * Template Name: Providers Archive Page Loop for FacetWP Listing
- * 
- * Description: A template part that builds a while loop to display a list of 
+ *
+ * Description: A template part that builds a while loop to display a list of
  * provider cards on a provider archive page.
- * 
+ *
  * Designed for UAMS Health Find-a-Doc
- * 
+ *
  * FacetWP Listing Name and Slug:
  * 	Physician	('physician')
  */

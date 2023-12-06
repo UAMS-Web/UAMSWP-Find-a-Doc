@@ -182,6 +182,330 @@
 			"library": "all"
 		},
 		{
+			"key": "field_expertise_tab_deprecated_soon",
+			"label": "<i class=\"dashicons-warning dashicons\"><\/i> Fields Being Deprecated Soon",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_expertise_cta",
+			"label": "Call-to-Action (CTA) Bar(s)",
+			"name": "expertise_cta",
+			"type": "repeater",
+			"instructions": "Define up to two CTA Bar blocks",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "field_expertise_cta_bar_heading",
+			"min": 0,
+			"max": 2,
+			"layout": "block",
+			"button_label": "Add CTA Bar",
+			"sub_fields": [
+				{
+					"key": "field_expertise_cta_bar_heading",
+					"label": "Heading",
+					"name": "cta_bar_heading",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_body",
+					"label": "Body",
+					"name": "cta_bar_body",
+					"type": "wysiwyg",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"tabs": "all",
+					"toolbar": "basic",
+					"media_upload": 0,
+					"delay": 0
+				},
+				{
+					"key": "field_expertise_cta_bar_action_type",
+					"label": "Action Type",
+					"name": "cta_bar_action_type",
+					"type": "button_group",
+					"instructions": "Only choose None if your action is contained within your body text.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"choices": {
+						"url": "URL",
+						"phone": "Phone Number",
+						"none": "None"
+					},
+					"allow_null": 0,
+					"default_value": "url",
+					"layout": "vertical",
+					"return_format": "value"
+				},
+				{
+					"key": "field_expertise_cta_bar_action_url_open",
+					"label": "URL Action",
+					"name": "",
+					"type": "accordion",
+					"instructions": "All fields must be populated or your link will not display.",
+					"required": 0,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 0
+				},
+				{
+					"key": "field_expertise_cta_bar_button_text",
+					"label": "Button Text",
+					"name": "cta_bar_button_text",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_button_url",
+					"label": "Button URL",
+					"name": "cta_bar_button_url",
+					"type": "link",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"return_format": "array"
+				},
+				{
+					"key": "field_expertise_cta_bar_button_description",
+					"label": "Button Link Description",
+					"name": "cta_bar_button_description",
+					"type": "text",
+					"instructions": "This is needed for accessibility. It helps differentiate between multiple links that use the same text like \"Learn more\". Describe the intent of the link, like \"Learn more about the ABC Department\".",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "url"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_action_url_close",
+					"label": "URL Action Close",
+					"name": "",
+					"type": "accordion",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 1
+				},
+				{
+					"key": "field_expertise_cta_bar_action_phone_open",
+					"label": "Phone Action",
+					"name": "",
+					"type": "accordion",
+					"instructions": "All fields must be populated or your telephone number will not display.",
+					"required": 0,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 0
+				},
+				{
+					"key": "field_expertise_cta_bar_phone_prepend",
+					"label": "Text before phone number",
+					"name": "cta_bar_phone_prepend",
+					"type": "text",
+					"instructions": "This, combined with the phone number will generate a short action phrase. Keep this text very short. Do not include the phone number here. Examples: \"Call\", \"Fax Referrals to\".",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "Call",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_phone",
+					"label": "Phone Number",
+					"name": "cta_bar_phone",
+					"type": "text",
+					"instructions": "Format your phone number using dashes. Include the area code. Example: 999-999-9999",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_expertise_cta_bar_action_type",
+								"operator": "==",
+								"value": "phone"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_expertise_cta_bar_action_URL_close",
+					"label": "Accordion Close",
+					"name": "",
+					"type": "accordion",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"open": 1,
+					"multi_expand": 0,
+					"endpoint": 1
+				}
+			]
+		},
+		{
 			"key": "field_expertise_tab_header",
 			"label": "<i class=\"dashicons-cover-image dashicons\"><\/i> Page Header Details",
 			"name": "",
@@ -1627,336 +1951,13 @@
 			"endpoint": 0
 		},
 		{
-			"key": "field_expertise_cta",
-			"label": "Call-to-Action (CTA) Bar(s)",
-			"name": "expertise_cta",
-			"type": "repeater",
-			"instructions": "Define up to two CTA Bar blocks",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"collapsed": "field_expertise_cta_bar_heading",
-			"min": 0,
-			"max": 2,
-			"layout": "block",
-			"button_label": "Add CTA Bar",
-			"sub_fields": [
-				{
-					"key": "field_expertise_cta_bar_heading",
-					"label": "Heading",
-					"name": "cta_bar_heading",
-					"type": "text",
-					"instructions": "",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_expertise_cta_bar_body",
-					"label": "Body",
-					"name": "cta_bar_body",
-					"type": "wysiwyg",
-					"instructions": "",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"tabs": "all",
-					"toolbar": "basic",
-					"media_upload": 0,
-					"delay": 0
-				},
-				{
-					"key": "field_expertise_cta_bar_action_type",
-					"label": "Action Type",
-					"name": "cta_bar_action_type",
-					"type": "button_group",
-					"instructions": "Only choose None if your action is contained within your body text.",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"choices": {
-						"url": "URL",
-						"phone": "Phone Number",
-						"none": "None"
-					},
-					"allow_null": 0,
-					"default_value": "url",
-					"layout": "vertical",
-					"return_format": "value"
-				},
-				{
-					"key": "field_expertise_cta_bar_action_url_open",
-					"label": "URL Action",
-					"name": "",
-					"type": "accordion",
-					"instructions": "All fields must be populated or your link will not display.",
-					"required": 0,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_expertise_cta_bar_action_type",
-								"operator": "==",
-								"value": "url"
-							}
-						]
-					],
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"open": 1,
-					"multi_expand": 0,
-					"endpoint": 0
-				},
-				{
-					"key": "field_expertise_cta_bar_button_text",
-					"label": "Button Text",
-					"name": "cta_bar_button_text",
-					"type": "text",
-					"instructions": "",
-					"required": 1,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_expertise_cta_bar_action_type",
-								"operator": "==",
-								"value": "url"
-							}
-						]
-					],
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_expertise_cta_bar_button_url",
-					"label": "Button URL",
-					"name": "cta_bar_button_url",
-					"type": "link",
-					"instructions": "",
-					"required": 1,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_expertise_cta_bar_action_type",
-								"operator": "==",
-								"value": "url"
-							}
-						]
-					],
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"return_format": "array"
-				},
-				{
-					"key": "field_expertise_cta_bar_button_description",
-					"label": "Button Link Description",
-					"name": "cta_bar_button_description",
-					"type": "text",
-					"instructions": "This is needed for accessibility. It helps differentiate between multiple links that use the same text like \"Learn more\". Describe the intent of the link, like \"Learn more about the ABC Department\".",
-					"required": 1,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_expertise_cta_bar_action_type",
-								"operator": "==",
-								"value": "url"
-							}
-						]
-					],
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_expertise_cta_bar_action_url_close",
-					"label": "URL Action Close",
-					"name": "",
-					"type": "accordion",
-					"instructions": "",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"open": 1,
-					"multi_expand": 0,
-					"endpoint": 1
-				},
-				{
-					"key": "field_expertise_cta_bar_action_phone_open",
-					"label": "Phone Action",
-					"name": "",
-					"type": "accordion",
-					"instructions": "All fields must be populated or your telephone number will not display.",
-					"required": 0,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_expertise_cta_bar_action_type",
-								"operator": "==",
-								"value": "phone"
-							}
-						]
-					],
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"open": 1,
-					"multi_expand": 0,
-					"endpoint": 0
-				},
-				{
-					"key": "field_expertise_cta_bar_phone_prepend",
-					"label": "Text before phone number",
-					"name": "cta_bar_phone_prepend",
-					"type": "text",
-					"instructions": "This, combined with the phone number will generate a short action phrase. Keep this text very short. Do not include the phone number here. Examples: \"Call\", \"Fax Referrals to\".",
-					"required": 1,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_expertise_cta_bar_action_type",
-								"operator": "==",
-								"value": "phone"
-							}
-						]
-					],
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "Call",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_expertise_cta_bar_phone",
-					"label": "Phone Number",
-					"name": "cta_bar_phone",
-					"type": "text",
-					"instructions": "Format your phone number using dashes. Include the area code. Example: 999-999-9999",
-					"required": 1,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_expertise_cta_bar_action_type",
-								"operator": "==",
-								"value": "phone"
-							}
-						]
-					],
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_expertise_cta_bar_action_URL_close",
-					"label": "Accordion Close",
-					"name": "",
-					"type": "accordion",
-					"instructions": "",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"open": 1,
-					"multi_expand": 0,
-					"endpoint": 1
-				}
-			]
-		},
-		{
 			"key": "field_expertise_medical_terms",
-			"label": "Medical Terms (Tags)",
+			"label": "Medical Terms (Tags) (Deprecated)",
 			"name": "expertise_medical_terms",
 			"type": "taxonomy",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_conditions",
-						"operator": "==",
-						"value": "0"
-					}
-				],
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",

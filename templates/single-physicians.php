@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Template Name: Single Provider
  */
 
@@ -81,7 +81,7 @@
 
 		// Degrees and credentials (e.g., M.D., Ph.D.)
 
-			$degrees = get_field('physician_degree',$post->ID);
+			$degrees = get_field( 'physician_degree', $post->ID );
 
 			// Clean up degrees value
 
@@ -237,25 +237,25 @@
 
 			$sort_name_param_value = sanitize_title_with_dashes($sort_name);
 
-	// Array for page titles and section titles
+		// Array for page titles and section titles
 
-		$page_titles = array(
-			'page_title'					=> $page_title,
-			'page_title_attr'				=> $page_title_attr,
-			'full_name'						=> $full_name,
-			'full_name_attr'				=> $full_name_attr,
-			'legal_name'					=> $legal_name,
-			'legal_name_attr'				=> $legal_name_attr,
-			'medium_name'					=> $medium_name,
-			'medium_name_attr'				=> $medium_name_attr,
-			'sort_name'						=> $sort_name,
-			'sort_name_attr'				=> $sort_name_attr,
-			'sort_name_param_value'			=> $sort_name_param_value,
-			'short_name'					=> $short_name,
-			'short_name_attr'				=> $short_name_attr,
-			'short_name_possessive'			=> $short_name_possessive,
-			'short_name_possessive_attr'	=> $short_name_possessive_attr
-		);
+			$page_titles = array(
+				'page_title'					=> $page_title,
+				'page_title_attr'				=> $page_title_attr,
+				'full_name'						=> $full_name,
+				'full_name_attr'				=> $full_name_attr,
+				'legal_name'					=> $legal_name,
+				'legal_name_attr'				=> $legal_name_attr,
+				'medium_name'					=> $medium_name,
+				'medium_name_attr'				=> $medium_name_attr,
+				'sort_name'						=> $sort_name,
+				'sort_name_attr'				=> $sort_name_attr,
+				'sort_name_param_value'			=> $sort_name_param_value,
+				'short_name'					=> $short_name,
+				'short_name_attr'				=> $short_name_attr,
+				'short_name_possessive'			=> $short_name_possessive,
+				'short_name_possessive_attr'	=> $short_name_possessive_attr
+			);
 
 	// Get system settings for elements of a fake subpage (or section) in an Provider subsection (or profile)
 
@@ -277,6 +277,23 @@
 	// Fake subpage intro text
 
 		// Do nothing
+
+// Languages
+
+	/**
+	 * Construct a list of the provider's languages (e.g., "English, Spanish")
+	 */
+
+	$languages = get_field( 'physician_languages', $post->ID );
+	$provider_schema_fields[$page_id]['provider_languages'] = $languages; // Pass value to schema function
+
+	$language_count = $languages ? count($languages) : 0;
+	$language_list = '';
+	$schema_provider_languages = uamswp_fad_schema_language(
+		$languages, // mixed // Required // Language ID values
+		$language_list // string // Optional // Pre-existing string variable to populate with a comma-separated list of language names
+	);
+	$provider_schema_fields[$page_id]['provider_knowsLanguage'] = $schema_provider_languages; // Pass value to schema function
 
 // Get the page URL and slug
 
@@ -404,8 +421,10 @@
 
 				if ( $resident ) {
 
-					$provider_occupation_title = $resident_title_name;
-					$provider_occupation_title_attr = uamswp_attr_conversion($provider_occupation_title);
+					// Clinical Occupation Title
+
+						$provider_occupation_title = $resident_title_name;
+						$provider_occupation_title_attr = uamswp_attr_conversion($provider_occupation_title);
 
 				} else {
 
@@ -968,6 +987,19 @@
 			$affiliation = get_field('physician_affiliation');
 			$provider_schema_fields[$page_id]['provider_hospitalAffiliation_multiselect'] = $affiliation; // Pass value to schema function
 			$hidden = get_field('physician_hidden');
+			$resident_profile_group = '';
+			// $resident_hometown_international = '';
+			// $resident_hometown_city = '';
+			// $resident_hometown_state = '';
+			// $resident_hometown_country = '';
+			// $resident_medical_school = '';
+			$resident_academic_department = '';
+			$resident_academic_department_name = '';
+			$resident_academic_chief = '';
+			$resident_academic_chief_name = '';
+			$resident_academic_year = '';
+			$resident_academic_year_name = '';
+			$resident_academic_name = '';
 
 			if ( $resident ) {
 
@@ -991,6 +1023,7 @@
 				}
 
 			}
+
 			$college_affiliation = get_field('physician_academic_college');
 			$position = get_field('physician_academic_position');
 			$bio_academic = get_field('physician_academic_bio');

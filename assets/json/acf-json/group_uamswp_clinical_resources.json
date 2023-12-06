@@ -167,7 +167,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "!=",
+						"value": ""
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",

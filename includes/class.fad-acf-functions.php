@@ -1525,7 +1525,7 @@
 		 * @param	(int|string) $post_id The post ID this block is saved to.
 		 */
 
-		 function fad_facetwp_cards_callback(
+		function fad_facetwp_cards_callback(
 			$block, // array // Required // The block settings and attributes.
 			$content = '', // string // Optional // The block inner HTML (empty).
 			$is_preview = false, // bool // Optional // True during AJAX preview.
@@ -1962,7 +1962,6 @@
 	}
 
 	add_filter('acf/format_value/key=field_physician_select_publications_pubmed', 'pubmed_information_format_value', 10, 3);
-
 
 // Modify ACF Relationship fields
 

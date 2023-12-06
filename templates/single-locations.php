@@ -1287,7 +1287,7 @@
 
 												if ( $parent_location ) {
 
-													?><span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span><?php
+													?><span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title_phrase; ?></a><span class="sr-only">)</span></span><?php
 
 												} // endif
 
