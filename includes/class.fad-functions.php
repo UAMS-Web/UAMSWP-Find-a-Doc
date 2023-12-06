@@ -12,13 +12,17 @@
 
 		foreach ($results as $k=>$v) {
 
-			if (($v->content_type == "pagepost") && (get_post_type($v->id) == "provider")) {
+			if (
+				($v->content_type == "pagepost")
+				&&
+				(get_post_type($v->id) == "provider")
+			) {
 
 					$degrees = get_field('physician_degree', $v->id);
 					$degree_list = '';
 					$i = 1;
 
-					if ($degrees) {
+					if ( $degrees ) {
 
 						foreach ( $degrees as $degree ) :
 
@@ -118,7 +122,7 @@
 
 			// check for our other required values
 
-			if (!isset($_POST['pmid'])) {
+			if ( !isset($_POST['pmid']) ) {
 
 				//echo json_encode(false);
 				exit;
@@ -159,7 +163,7 @@
 					array_push($authors, $name);
 					$authorlist .= $name;
 
-					if (next($result->authors)===FALSE) {
+					if ( next($result->authors)===FALSE ) {
 
 						$authorlist .= '.';
 
@@ -181,7 +185,7 @@
 
 				// create full reference
 
-				if ($title != '') {
+				if ( $title != '' ) {
 
 					$full = $authorlist . ' ' . $title . ' ' . $source . '. ' . $date . '; ';
 					$full .= $volume . '('. $issue .'):' . $pages . '. ' . $doi . ' PMID: ' . $idstr . '. <br/> View in Pubmed: <a href="https://www.ncbi.nlm.nih.gov/pubmed/' . $idstr . '" target="_blank">' . $idstr . '</a>';
@@ -253,14 +257,26 @@
 
 		}
 
-		if ( (is_single() && ('location' == $post_type)) ) {
+		if (
+			is_single()
+			&&
+			( 'location' == $post_type )
+		) {
 
 			wp_enqueue_style( 'leaflet-css', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet.css', array(), '1.1', 'all');
 			wp_enqueue_script( 'leaflet-js', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet-bing.js', array(), null, false );
 
 		}
 
-		if ( (is_archive() && (('provider' == $post_type) || ('location' == $post_type))) ) {
+		if (
+			is_archive()
+			&&
+			(
+				( 'provider' == $post_type )
+				||
+				( 'location' == $post_type )
+			)
+		) {
 
 			wp_enqueue_script( 'mobile-filter-toggle', UAMS_FAD_ROOT_URL . 'assets/js/mobile-filter-toggle.js', array('jquery'), null, false );
 
@@ -300,7 +316,7 @@
 
 		foreach ($columns as $key => $value) {
 
-			if ($key==$title) {
+			if ( $key==$title ) {
 
 				$custom_columns['provider_post_thumbs'] = __('Headshot'); // Move before title column
 
@@ -316,7 +332,7 @@
 
 	function posts_provider_custom_columns($column_name, $id) {
 
-		if ($column_name === 'provider_post_thumbs') {
+		if ( $column_name === 'provider_post_thumbs' ) {
 
 			echo get_the_post_thumbnail( $id, array( 80, 80) );
 
@@ -420,9 +436,13 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 	function rlv_tax_excerpt_term_fields($content, $term) {
 
-		if (!isset($term->term_id)) return $content; // not a taxonomy term, skip
+		if ( !isset($term->term_id)) return $content; // not a taxonomy term, skip
 
-		if (isset($term->term_id) && !isset($term->taxonomy)) {
+		if (
+			isset($term->term_id)
+			&&
+			!isset($term->taxonomy)
+		) {
 
 			// this is excerpt-building, where the taxonomy is in $term->post_type
 			$term->taxonomy = $term->post_type;
@@ -431,14 +451,22 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 		$post_id = $term->taxonomy . "_" . $term->term_id;
 
-		if ( get_field('condition_alternate', $post_id) || get_field('condition_content', $post_id) ) {
+		if (
+			get_field('condition_alternate', $post_id)
+			||
+			get_field('condition_content', $post_id)
+		) {
 
 			$content .= get_field('condition_alternate', $post_id);
 			$content .= ' ' . get_field('condition_content', $post_id);
 
 		}
 
-		if ( get_field('treatment_procedure_alternate', $post_id) || get_field('treatment_procedure_content', $post_id) ) {
+		if (
+			get_field('treatment_procedure_alternate', $post_id)
+			||
+			get_field('treatment_procedure_content', $post_id)
+		) {
 
 			$content .= get_field('treatment_procedure_alternate', $post_id);
 			$content .= ' ' . get_field('treatment_procedure_content', $post_id);
@@ -514,7 +542,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 		header("Content-Type: text/html");
 
-		// if ('post' == $type) {
+		// if ( 'post' == $type ) {
 
 			$ids = (isset($_POST['postid'])) ? $_POST['postid'] : '';
 			$ids_array = explode(',', $ids);
@@ -554,7 +582,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 		$loop = new WP_Query($args);
 		$out = '';
 
-		if ($loop -> have_posts()) :
+		if ( $loop -> have_posts()) :
 
 			while ($loop -> have_posts()) :
 
@@ -599,9 +627,13 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 		$recognition_list = '';
 
-		if (have_posts()) :
+		if ( have_posts()) :
 
-			if ('table' == $layout || empty($layout)) {
+			if (
+				'table' == $layout
+				||
+				empty($layout)
+			) {
 
 				$recognition_list .= '<div class="table-responsive">
 				<table class="table table-striped">
@@ -751,7 +783,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 		// Get API data
 		$transient = get_transient( $id );
 
-		if (!empty($transient)) {
+		if ( !empty($transient) ) {
 
 			return $transient;
 
@@ -759,7 +791,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 			$url = 'https://connect.medlineplus.gov/service?';
 
-			if ('icd' == $type) {
+			if ( 'icd' == $type ) {
 
 				$arguments = array(
 					'mainSearchCriteria.v.cs' => '2.16.840.1.113883.6.90',
@@ -767,7 +799,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 					'mainSearchCriteria.v.c' => $code
 				);
 
-			} elseif ('ndc' == $type) {
+			} elseif ( 'ndc' == $type ) {
 
 				$arguments = array(
 					'mainSearchCriteria.v.cs' => '2.16.840.1.113883.6.69',
@@ -775,7 +807,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 					'mainSearchCriteria.v.c' => $code
 				);
 
-			} elseif ('lonic' == $type) {
+			} elseif ( 'lonic' == $type ) {
 
 				$arguments = array(
 					'mainSearchCriteria.v.cs' => '2.16.840.1.113883.6.1',
@@ -833,7 +865,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 		$entry = $feed->entry;
 		//echo (count($entry->title));
 
-		if (isset($entry->title)) {
+		if ( isset($entry->title) ) {
 
 			// echo ('<h2>'. $entry->title->_value .'</h2>');
 			// echo '<br>';
@@ -849,9 +881,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 			for($a=0;$a<count($entry);$a++) {
 
-				if (strpos($entry[$a]->link->href, 'medlineplus.gov') !== false) {
+				if ( strpos($entry[$a]->link->href, 'medlineplus.gov') !== false ) {
 
-					if ($a != 0) {
+					if ( $a != 0 ) {
 
 						echo ('<h2>'. $entry[$a]->title->_value .'</h2>'); // Add heading if there is more than one
 
@@ -902,7 +934,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						$provider_resident_title_name = 'Resident Physician';
 						$provider_phys_title = get_field('physician_title',$provider);
 
-						if (!empty($provider_phys_title) || $provider_resident) {
+						if (
+							!empty($provider_phys_title)
+							||
+							$provider_resident
+						) {
 
 							$provider_phys_title_name = $provider_resident ? $provider_resident_title_name : get_term( $provider_phys_title, 'clinical_title' )->name;
 							$provider_titles[$provider_phys_title] = $provider_phys_title_name;
@@ -931,7 +967,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				$provider_region = '';
 
-				if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+				if (
+					isset($_COOKIE['wp_filter_region'])
+					||
+					isset($_GET['_filter_region'])
+				) {
 
 					$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
 
@@ -974,7 +1014,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 							</div>
 							<?php
 
-							if ($display_region !== 'hide') {
+							if ( $display_region !== 'hide' ) {
 
 								?>
 								<div class="col-12 mb-4 col-sm-auto mb-sm-0">
@@ -1011,7 +1051,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 					</form>
 					<?php
 
-					if ( isset($_COOKIE['wp_filter_region']) && $display_region !== 'hide' ) {
+					if (
+						isset($_COOKIE['wp_filter_region'])
+						&&
+						$display_region !== 'hide'
+					) {
 
 						?>
 						<p class="ajax-filter-message" id="provider-ajax-filter-message">The results below are filtered by region based on your previous selections. Use the "Reset" button above to view UAMS&nbsp;Health providers in all areas of&nbsp;the&nbsp;state.</p>
@@ -1048,7 +1092,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 					$provider_title = $_COOKIE['_provider_title'] ;
 
-				} elseif (isset($_POST['provider_title'])) {
+				} elseif ( isset($_POST['provider_title']) ) {
 
 					$provider_title = sanitize_text_field( $_POST['provider_title'] );
 
@@ -1056,7 +1100,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				$provider_region = '';
 
-				if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+				if (
+					isset($_COOKIE['wp_filter_region'])
+					||
+					isset($_GET['_filter_region'])
+				) {
 
 					if ( isset($_GET['_filter_region']) ) {
 
@@ -1066,13 +1114,13 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 					$provider_region = $_COOKIE['wp_filter_region'];
 
-				} elseif (isset($_POST['provider_region'])) {
+				} elseif ( isset($_POST['provider_region']) ) {
 
 					$provider_region = sanitize_text_field( $_POST['provider_region'] );
 
 				}
 
-				if (isset($_POST['providers'])) {
+				if ( isset($_POST['providers']) ) {
 
 					$providers = sanitize_text_field( $_POST['providers'] );
 					$providers = explode(",", $providers);
@@ -1081,7 +1129,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				// Build query for regions, based on titles
 
-				if (!empty($provider_title) ) {
+				if ( !empty($provider_title) ) {
 
 					$clinical_title = $provider_title ;
 					$tax_query_title[] = array(
@@ -1128,7 +1176,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				// Build query for titles, based on regions
 
-				if (!empty($provider_region)) {
+				if ( !empty($provider_region) ) {
 
 					$region = $provider_region;
 					$tax_query_region[] = array(
@@ -1165,14 +1213,14 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				endwhile;
 
-				// if (isset($_POST['providers'])) {
+				// if ( isset($_POST['providers']) ) {
 				//
 				// 	$providers = sanitize_text_field( $_POST['providers'] );
 				// 	$providers = explode(",", $providers);
 				//
 				// }
 
-				// if (isset($_POST['ppp'])) {
+				// if ( isset($_POST['ppp']) ) {
 				//
 				// 	$ppp = sanitize_text_field( $_POST['ppp'] );
 				//
@@ -1191,7 +1239,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				$search_query = new WP_Query( $args );
 
-				if ( $search_query->have_posts() && !empty($providers) ) {
+				if (
+					$search_query->have_posts()
+					&&
+					!empty($providers)
+				) {
 
 					$provider_ids = $search_query->posts;
 					//echo $_POST['ppp'];
@@ -1244,7 +1296,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						$provider_resident_title_name = 'Resident Physician';
 						$provider_phys_title = get_field('physician_title',$provider);
 
-						if (!empty($provider_phys_title) || $provider_resident) {
+						if (
+							!empty($provider_phys_title)
+							||
+							$provider_resident
+						) {
 
 							$provider_phys_title_name = $provider_resident ? $provider_resident_title_name : get_term( $provider_phys_title, 'clinical_title' )->name;
 							$provider_titles[$provider_phys_title] = $provider_phys_title_name;
@@ -1321,13 +1377,13 @@ function limit_to_post_parent( $args, $field, $post ) {
 				// Get data variables
 				$provider_title = '';
 
-				if (isset($_POST['provider_title'])) {
+				if ( isset($_POST['provider_title']) ) {
 
 					$provider_title = sanitize_text_field( $_POST['provider_title'] );
 
 				}
 
-				if (isset($_POST['providers'])) {
+				if ( isset($_POST['providers']) ) {
 
 					$providers = sanitize_text_field( $_POST['providers'] );
 					$providers = explode(",", $providers);
@@ -1336,7 +1392,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				// Build query for regions, based on titles
 
-				if (!empty($provider_title) ) {
+				if ( !empty($provider_title) ) {
 
 					$clinical_title = $provider_title ;
 					$tax_query_title[] = array(
@@ -1362,7 +1418,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				$search_query = new WP_Query( $args );
 
-				if ( $search_query->have_posts() && !empty($providers) ) {
+				if (
+					$search_query->have_posts()
+					&&
+					!empty($providers)
+				) {
 
 					$provider_ids = $search_query->posts;
 					$title_list = array();
@@ -1427,7 +1487,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				$location_region = '';
 
-				if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+				if (
+					isset($_COOKIE['wp_filter_region'])
+					||
+					isset($_GET['_filter_region'])
+				) {
 
 					$location_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
 
@@ -1507,7 +1571,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 				// Get data variables
 				$location_region = '';
 
-				if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+				if (
+					isset($_COOKIE['wp_filter_region'])
+					||
+					isset($_GET['_filter_region'])
+				) {
 
 					if ( isset($_GET['_filter_region']) ) {
 
@@ -1517,13 +1585,13 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 					$location_region = $_COOKIE['wp_filter_region'];
 
-				} elseif (isset($_POST['location_region'])) {
+				} elseif ( isset($_POST['location_region']) ) {
 
 					$location_region = sanitize_text_field( $_POST['location_region'] );
 
 				}
 
-				if (isset($_POST['locations'])) {
+				if ( isset($_POST['locations']) ) {
 
 					$locations = sanitize_text_field( $_POST['locations'] );
 					$locations = explode(",", $locations);
@@ -1563,7 +1631,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				// Build query for titles, based on regions
 
-				if (!empty($location_region)) {
+				if ( !empty($location_region) ) {
 
 					$region = $location_region;
 					$tax_query[] = array(
@@ -1589,7 +1657,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				$search_query = new WP_Query( $args );
 
-				if ( $search_query->have_posts() && !empty($locations) ) {
+				if (
+					$search_query->have_posts()
+					&&
+					!empty($locations)
+				) {
 
 					$location_ids = $search_query->posts;
 
@@ -1617,7 +1689,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 	function uamswp_add_trench() {
 
-		if (is_page( )) {
+		if ( is_page( ) ) {
 
 			$trench = get_field('page_filter_region');
 			$trenchQS = '';
@@ -1628,7 +1700,15 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 			}
 
-			if ((isset($trench) && $trench) || $trenchQS) {
+			if (
+				(
+					isset($trench)
+					&&
+					$trench
+				)
+				||
+				$trenchQS
+			) {
 
 				$region = $trench->slug ? $trench->slug : htmlspecialchars($trenchQS);
 
@@ -1654,7 +1734,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 	function schedule_ajax_filter_callback() {
 
-		if (!isset($_POST['pid']) || !isset($_POST['schedule_options'])) {
+		if (
+			!isset($_POST['pid'])
+			||
+			!isset($_POST['schedule_options'])
+		) {
 
 			// echo json_encode(false);
 			exit;
@@ -1684,7 +1768,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 		<h3 class="sr-only module-inner-title"><?php echo $location_scheduling_item_title_nested; ?></h3>
 		<?php
 
-		if ( $location_scheduling_item_intro_nested && !empty($location_scheduling_item_intro_nested) ) {
+		if (
+			$location_scheduling_item_intro_nested
+			&&
+			!empty($location_scheduling_item_intro_nested)
+		) {
 
 			?>
 			<p class="note"><?php echo $location_scheduling_item_intro_nested; ?></p>
@@ -1721,7 +1809,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 		</script>
 		<?php
 
-		if ( $location_scheduling_fallback && !empty($location_scheduling_fallback) ) {
+		if (
+			$location_scheduling_fallback
+			&&
+			!empty($location_scheduling_fallback)
+		) {
 
 			?>
 			<div class="more">
@@ -1741,7 +1833,13 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 		// Add pages Ajax Search is used
 
-			if ( !is_post_type_archive( 'location' ) && !is_post_type_archive( 'provider' ) && !is_post_type_archive( 'clinical-resource' ) ) {
+			if (
+				!is_post_type_archive( 'location' )
+				&&
+				!is_post_type_archive( 'provider' )
+				&&
+				!is_post_type_archive( 'clinical-resource' )
+			) {
 
 				wp_dequeue_script('wd-asp-async-loader');
 				wp_dequeue_script( 'wd-asp-ajaxsearchpro' );
@@ -1972,7 +2070,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 					$ancestors_ontology_farthest_title_attr = '';
 					$ancestors_ontology_farthest_url = '';
 
-					if ( $has_ancestors_ontology && $ancestors_ontology_farthest ) {
+					if (
+						$has_ancestors_ontology
+						&&
+						$ancestors_ontology_farthest
+					) {
 
 						$ancestors_ontology_farthest_obj = get_post( $ancestors_ontology_farthest );
 
@@ -1997,7 +2099,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 					$ancestors_ontology_closest_title_attr = '';
 					$ancestors_ontology_closest_url = '';
 
-					if ( $has_ancestors_ontology && $ancestors_ontology_closest ) {
+					if (
+						$has_ancestors_ontology
+						&&
+						$ancestors_ontology_closest
+					) {
 
 						$ancestors_ontology_closest_obj = get_post( $ancestors_ontology_closest );
 
@@ -2054,7 +2160,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 					$navbar_subbrand_title_attr = $site_nav_title_attr;
 					$navbar_subbrand_title_url = $site_nav_url;
 
-					if ( $ancestors_ontology_farthest && ( $ancestors_ontology_closest !== $ancestors_ontology_farthest ) ) {
+					if (
+						$ancestors_ontology_farthest
+						&&
+						( $ancestors_ontology_closest !== $ancestors_ontology_farthest )
+					) {
 
 						// If a farthest ancestor with the ontology type exists...
 						// And if closest and farthest ancestors with the ontology type are not the same...
@@ -5522,31 +5632,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($location_fpage_title_provider) || empty($location_fpage_title_provider) ) {
+							if (
+								!isset($location_fpage_title_provider)
+								||
+								empty($location_fpage_title_provider)
+							) {
 
 								$location_fpage_title_provider = '[Locations] Where [Provider Short Name] Practices'; // Title
 
 							}
 
-							if ( !isset($location_fpage_intro_provider) || empty($location_fpage_intro_provider) ) {
+							if (
+								!isset($location_fpage_intro_provider)
+								||
+								empty($location_fpage_intro_provider)
+							) {
 
 								$location_fpage_intro_provider = ''; // Intro text
 
 							}
 
-							if ( !isset($location_fpage_ref_main_title_provider) || empty($location_fpage_ref_main_title_provider) ) {
+							if (
+								!isset($location_fpage_ref_main_title_provider)
+								||
+								empty($location_fpage_ref_main_title_provider)
+							) {
 
 								$location_fpage_ref_main_title_provider = ''; // Reference to the main location archive, title
 
 							}
 
-							if ( !isset($location_fpage_ref_main_intro_provider) || empty($location_fpage_ref_main_intro_provider) ) {
+							if (
+								!isset($location_fpage_ref_main_intro_provider)
+								||
+								empty($location_fpage_ref_main_intro_provider)
+							) {
 
 								$location_fpage_ref_main_intro_provider = ''; // Reference to the main location archive, body text
 
 							}
 
-							if ( !isset($location_fpage_ref_main_link_provider) || empty($location_fpage_ref_main_link_provider) ) {
+							if (
+								!isset($location_fpage_ref_main_link_provider)
+								||
+								empty($location_fpage_ref_main_link_provider)
+							) {
 
 								$location_fpage_ref_main_link_provider = ''; // Reference to the main location archive, link text
 
@@ -5574,31 +5704,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($location_fpage_title_provider) || empty($location_fpage_title_provider) ) {
+							if (
+								!isset($location_fpage_title_provider)
+								||
+								empty($location_fpage_title_provider)
+							) {
 
 								$location_fpage_title_provider = $location_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($location_fpage_intro_provider) || empty($location_fpage_intro_provider) ) {
+							if (
+								!isset($location_fpage_intro_provider)
+								||
+								empty($location_fpage_intro_provider)
+							) {
 
 								$location_fpage_intro_provider = $location_fpage_intro_general; // Intro text
 
 							}
 
-							if ( !isset($location_fpage_ref_main_title_provider) || empty($location_fpage_ref_main_title_provider) ) {
+							if (
+								!isset($location_fpage_ref_main_title_provider)
+								||
+								empty($location_fpage_ref_main_title_provider)
+							) {
 
 								$location_fpage_ref_main_title_provider = $location_fpage_ref_main_title_general; // Reference to the main location archive, title
 
 							}
 
-							if ( !isset($location_fpage_ref_main_intro_provider) || empty($location_fpage_ref_main_intro_provider) ) {
+							if (
+								!isset($location_fpage_ref_main_intro_provider)
+								||
+								empty($location_fpage_ref_main_intro_provider)
+							) {
 
 								$location_fpage_ref_main_intro_provider = $location_fpage_ref_main_intro_general; // Reference to the main location archive, body text
 
 							}
 
-							if ( !isset($location_fpage_ref_main_link_provider) || empty($location_fpage_ref_main_link_provider) ) {
+							if (
+								!isset($location_fpage_ref_main_link_provider)
+								||
+								empty($location_fpage_ref_main_link_provider)
+							) {
 
 								$location_fpage_ref_main_link_provider = $location_fpage_ref_main_link_general; // Reference to the main location archive, link text
 
@@ -5623,31 +5773,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($expertise_fpage_title_provider) || empty($expertise_fpage_title_provider) ) {
+							if (
+								!isset($expertise_fpage_title_provider)
+								||
+								empty($expertise_fpage_title_provider)
+							) {
 
 								$expertise_fpage_title_provider = '[Provider Short Name\'s] [Areas of Expertise]'; // Title
 
 							}
 
-							if ( !isset($expertise_fpage_intro_provider) || empty($expertise_fpage_intro_provider) ) {
+							if (
+								!isset($expertise_fpage_intro_provider)
+								||
+								empty($expertise_fpage_intro_provider)
+							) {
 
 								$expertise_fpage_intro_provider = ''; // Intro text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_title_provider) || empty($expertise_fpage_ref_main_title_provider) ) {
+							if (
+								!isset($expertise_fpage_ref_main_title_provider)
+								||
+								empty($expertise_fpage_ref_main_title_provider)
+							) {
 
 								$expertise_fpage_ref_main_title_provider = ''; // Reference to the main area of expertise archive, title
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_intro_provider) || empty($expertise_fpage_ref_main_intro_provider) ) {
+							if (
+								!isset($expertise_fpage_ref_main_intro_provider)
+								||
+								empty($expertise_fpage_ref_main_intro_provider)
+							) {
 
 								$expertise_fpage_ref_main_intro_provider = ''; // Reference to the main area of expertise archive, body text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_link_provider) || empty($expertise_fpage_ref_main_link_provider) ) {
+							if (
+								!isset($expertise_fpage_ref_main_link_provider)
+								||
+								empty($expertise_fpage_ref_main_link_provider)
+							) {
 
 								$expertise_fpage_ref_main_link_provider = ''; // Reference to the main area of expertise archive, link text
 
@@ -5675,31 +5845,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($expertise_fpage_title_provider) || empty($expertise_fpage_title_provider) ) {
+							if (
+								!isset($expertise_fpage_title_provider)
+								||
+								empty($expertise_fpage_title_provider)
+							) {
 
 								$expertise_fpage_title_provider = $expertise_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($expertise_fpage_intro_provider) || empty($expertise_fpage_intro_provider) ) {
+							if (
+								!isset($expertise_fpage_intro_provider)
+								||
+								empty($expertise_fpage_intro_provider)
+							) {
 
 								$expertise_fpage_intro_provider = $expertise_fpage_intro_general; // Intro text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_title_provider) || empty($expertise_fpage_ref_main_title_provider) ) {
+							if (
+								!isset($expertise_fpage_ref_main_title_provider)
+								||
+								empty($expertise_fpage_ref_main_title_provider)
+							) {
 
 								$expertise_fpage_ref_main_title_provider = $expertise_fpage_ref_main_title_general; // Reference to the main area of expertise archive, title
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_intro_provider) || empty($expertise_fpage_ref_main_intro_provider) ) {
+							if (
+								!isset($expertise_fpage_ref_main_intro_provider)
+								||
+								empty($expertise_fpage_ref_main_intro_provider)
+							) {
 
 								$expertise_fpage_ref_main_intro_provider = $expertise_fpage_ref_main_intro_general; // Reference to the main area of expertise archive, body text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_link_provider) || empty($expertise_fpage_ref_main_link_provider) ) {
+							if (
+								!isset($expertise_fpage_ref_main_link_provider)
+								||
+								empty($expertise_fpage_ref_main_link_provider)
+							) {
 
 								$expertise_fpage_ref_main_link_provider = $expertise_fpage_ref_main_link_general; // Reference to the main area of expertise archive, link text
 
@@ -5727,49 +5917,81 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($clinical_resource_fpage_title_provider) || empty($clinical_resource_fpage_title_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_title_provider)
+								||
+								empty($clinical_resource_fpage_title_provider)
+							) {
 
 								$clinical_resource_fpage_title_provider = '[Clinical Resources] Related to [Provider Short Name]'; // Title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_intro_provider) || empty($clinical_resource_fpage_intro_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_intro_provider)
+								||
+								empty($clinical_resource_fpage_intro_provider)
+							) {
 
 								$clinical_resource_fpage_intro_provider = ''; // Intro text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_title_provider) || empty($clinical_resource_fpage_ref_main_title_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_title_provider)
+								||
+								empty($clinical_resource_fpage_ref_main_title_provider)
+							) {
 
 								$clinical_resource_fpage_ref_main_title_provider = ''; // Reference to the main clinical resource archive, title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_intro_provider) || empty($clinical_resource_fpage_ref_main_intro_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_intro_provider)
+								||
+								empty($clinical_resource_fpage_ref_main_intro_provider)
+							) {
 
 								$clinical_resource_fpage_ref_main_intro_provider = ''; // Reference to the main clinical resource archive, body text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_link_provider) || empty($clinical_resource_fpage_ref_main_link_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_link_provider)
+								||
+								empty($clinical_resource_fpage_ref_main_link_provider)
+							) {
 
 								$clinical_resource_fpage_ref_main_link_provider = ''; // Reference to the main clinical resource archive, link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_text_provider) || empty($clinical_resource_fpage_more_text_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_more_text_provider)
+								||
+								empty($clinical_resource_fpage_more_text_provider)
+							) {
 
 								$clinical_resource_fpage_more_text_provider = 'Want to find more [clinical resources] related to [Provider Short Name]?'; // "More" intro text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_link_text_provider) || empty($clinical_resource_fpage_more_link_text_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_more_link_text_provider)
+								||
+								empty($clinical_resource_fpage_more_link_text_provider)
+							) {
 
 								$clinical_resource_fpage_more_link_text_provider = 'View the Full List'; // "More" link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_link_descr_provider) || empty($clinical_resource_fpage_more_link_descr_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_more_link_descr_provider)
+								||
+								empty($clinical_resource_fpage_more_link_descr_provider)
+							) {
 
 								$clinical_resource_fpage_more_link_descr_provider = 'View the full list of [clinical resources] related to [Provider Short Name]'; // "More" link description
 
@@ -5803,49 +6025,81 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($clinical_resource_fpage_title_provider) || empty($clinical_resource_fpage_title_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_title_provider)
+								||
+								empty($clinical_resource_fpage_title_provider)
+							) {
 
 								$clinical_resource_fpage_title_provider = $clinical_resource_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_intro_provider) || empty($clinical_resource_fpage_intro_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_intro_provider)
+								||
+								empty($clinical_resource_fpage_intro_provider)
+							) {
 
 								$clinical_resource_fpage_intro_provider = $clinical_resource_fpage_intro_general; // Intro text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_title_provider) || empty($clinical_resource_fpage_ref_main_title_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_title_provider)
+								||
+								empty($clinical_resource_fpage_ref_main_title_provider)
+							) {
 
 								$clinical_resource_fpage_ref_main_title_provider = $clinical_resource_fpage_ref_main_title_general; // Reference to the main clinical resource archive, title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_intro_provider) || empty($clinical_resource_fpage_ref_main_intro_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_intro_provider)
+								||
+								empty($clinical_resource_fpage_ref_main_intro_provider)
+							) {
 
 								$clinical_resource_fpage_ref_main_intro_provider = $clinical_resource_fpage_ref_main_intro_general; // Reference to the main clinical resource archive, body text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_link_provider) || empty($clinical_resource_fpage_ref_main_link_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_link_provider)
+								||
+								empty($clinical_resource_fpage_ref_main_link_provider)
+							) {
 
 								$clinical_resource_fpage_ref_main_link_provider = $clinical_resource_fpage_ref_main_link_general; // Reference to the main clinical resource archive, link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_text_provider) || empty($clinical_resource_fpage_more_text_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_more_text_provider)
+								||
+								empty($clinical_resource_fpage_more_text_provider)
+							) {
 
 								$clinical_resource_fpage_more_text_provider = $clinical_resource_fpage_more_text_general; // "More" intro text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_link_text_provider) || empty($clinical_resource_fpage_more_link_text_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_more_link_text_provider)
+								||
+								empty($clinical_resource_fpage_more_link_text_provider)
+							) {
 
 								$clinical_resource_fpage_more_link_text_provider = $clinical_resource_fpage_more_link_text_general; // "More" link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_link_descr_provider) || empty($clinical_resource_fpage_more_link_descr_provider) ) {
+							if (
+								!isset($clinical_resource_fpage_more_link_descr_provider)
+								||
+								empty($clinical_resource_fpage_more_link_descr_provider)
+							) {
 
 								$clinical_resource_fpage_more_link_descr_provider = $clinical_resource_fpage_more_link_descr_general; // "More" link description
 
@@ -5870,13 +6124,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($condition_fpage_title_provider) || empty($condition_fpage_title_provider) ) {
+							if (
+								!isset($condition_fpage_title_provider)
+								||
+								empty($condition_fpage_title_provider)
+							) {
 
 								$condition_fpage_title_provider = '[Conditions] Diagnosed or Treated by [Provider Short Name]'; // Title
 
 							}
 
-							if ( !isset($condition_fpage_intro_provider) || empty($condition_fpage_intro_provider) ) {
+							if (
+								!isset($condition_fpage_intro_provider)
+								||
+								empty($condition_fpage_intro_provider)
+							) {
 
 								$condition_fpage_intro_provider = ''; // Intro text
 
@@ -5896,13 +6158,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($condition_fpage_title_provider) || empty($condition_fpage_title_provider) ) {
+							if (
+								!isset($condition_fpage_title_provider)
+								||
+								empty($condition_fpage_title_provider)
+							) {
 
 								$condition_fpage_title_provider = $condition_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($condition_fpage_intro_provider) || empty($condition_fpage_intro_provider) ) {
+							if (
+								!isset($condition_fpage_intro_provider)
+								||
+								empty($condition_fpage_intro_provider)
+							) {
 
 								$condition_fpage_intro_provider = $condition_fpage_intro_general; // Intro text
 
@@ -5921,13 +6191,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($treatment_fpage_title_provider) || empty($treatment_fpage_title_provider) ) {
+							if (
+								!isset($treatment_fpage_title_provider)
+								||
+								empty($treatment_fpage_title_provider)
+							) {
 
 								$treatment_fpage_title_provider = '[Treatments] Performed or Prescribed by [Provider Short Name]'; // Title
 
 							}
 
-							if ( !isset($treatment_fpage_intro_provider) || empty($treatment_fpage_intro_provider) ) {
+							if (
+								!isset($treatment_fpage_intro_provider)
+								||
+								empty($treatment_fpage_intro_provider)
+							) {
 
 								$treatment_fpage_intro_provider = ''; // Intro text
 
@@ -5947,13 +6225,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($treatment_fpage_title_provider) || empty($treatment_fpage_title_provider) ) {
+							if (
+								!isset($treatment_fpage_title_provider)
+								||
+								empty($treatment_fpage_title_provider)
+							) {
 
 								$treatment_fpage_title_provider = $treatment_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($treatment_fpage_intro_provider) || empty($treatment_fpage_intro_provider) ) {
+							if (
+								!isset($treatment_fpage_intro_provider)
+								||
+								empty($treatment_fpage_intro_provider)
+							) {
 
 								$treatment_fpage_intro_provider = $treatment_fpage_intro_general; // Intro text
 
@@ -5972,13 +6258,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($condition_treatment_fpage_title_provider) || empty($condition_treatment_fpage_title_provider) ) {
+							if (
+								!isset($condition_treatment_fpage_title_provider)
+								||
+								empty($condition_treatment_fpage_title_provider)
+							) {
 
 								$condition_treatment_fpage_title_provider = '[Conditions and Treatments] Related to [Provider Short Name]'; // Title
 
 							}
 
-							if ( !isset($condition_treatment_fpage_intro_provider) || empty($condition_treatment_fpage_intro_provider) ) {
+							if (
+								!isset($condition_treatment_fpage_intro_provider)
+								||
+								empty($condition_treatment_fpage_intro_provider)
+							) {
 
 								$condition_treatment_fpage_intro_provider = ''; // Intro text
 
@@ -5999,7 +6293,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 							}
 
 							if (
-								!isset($condition_treatment_fpage_title_provider) || empty($condition_treatment_fpage_title_provider)
+								!isset($condition_treatment_fpage_title_provider)
+								||
+								empty($condition_treatment_fpage_title_provider)
 							) {
 
 								$condition_treatment_fpage_title_provider = $condition_treatment_fpage_title_general; // Title
@@ -6007,7 +6303,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 							}
 
 							if (
-								!isset($condition_treatment_fpage_intro_provider) || empty($condition_treatment_fpage_intro_provider)
+								!isset($condition_treatment_fpage_intro_provider)
+								||
+								empty($condition_treatment_fpage_intro_provider)
 							) {
 
 								$condition_treatment_fpage_intro_provider = $condition_treatment_fpage_intro_general; // Intro text
@@ -6202,31 +6500,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($location_descendant_fpage_title_location) || empty($location_descendant_fpage_title_location) ) {
+							if (
+								!isset($location_descendant_fpage_title_location)
+								||
+								empty($location_descendant_fpage_title_location)
+							) {
 
 								$location_descendant_fpage_title_location = $location_descendant_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($location_descendant_fpage_intro_location) || empty($location_descendant_fpage_intro_location) ) {
+							if (
+								!isset($location_descendant_fpage_intro_location)
+								||
+								empty($location_descendant_fpage_intro_location)
+							) {
 
 								$location_descendant_fpage_intro_location = $location_descendant_fpage_intro_general; // Intro text
 
 							}
 
-							if ( !isset($location_descendant_fpage_ref_main_title_location) || empty($location_descendant_fpage_ref_main_title_location) ) {
+							if (
+								!isset($location_descendant_fpage_ref_main_title_location)
+								||
+								empty($location_descendant_fpage_ref_main_title_location)
+							) {
 
 								$location_descendant_fpage_ref_main_title_location = $location_descendant_fpage_ref_main_title_general; // Reference to the main location archive, title
 
 							}
 
-							if ( !isset($location_descendant_fpage_ref_main_intro_location) || empty($location_descendant_fpage_ref_main_intro_location) ) {
+							if (
+								!isset($location_descendant_fpage_ref_main_intro_location)
+								||
+								empty($location_descendant_fpage_ref_main_intro_location)
+							) {
 
 								$location_descendant_fpage_ref_main_intro_location = $location_descendant_fpage_ref_main_intro_general; // Reference to the main location archive, body text
 
 							}
 
-							if ( !isset($location_descendant_fpage_ref_main_link_location) || empty($location_descendant_fpage_ref_main_link_location) ) {
+							if (
+								!isset($location_descendant_fpage_ref_main_link_location)
+								||
+								empty($location_descendant_fpage_ref_main_link_location)
+							) {
 
 								$location_descendant_fpage_ref_main_link_location = $location_descendant_fpage_ref_main_link_general; // Reference to the main location archive, link text
 
@@ -6254,49 +6572,81 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($expertise_fpage_title_location) || empty($expertise_fpage_title_location) ) {
+							if (
+								!isset($expertise_fpage_title_location)
+								||
+								empty($expertise_fpage_title_location)
+							) {
 
 								$expertise_fpage_title_location = '[Areas of Expertise] Represented at [the Location Title]'; // Title
 
 							}
 
-							if ( !isset($expertise_fpage_intro_location) || empty($expertise_fpage_intro_location) ) {
+							if (
+								!isset($expertise_fpage_intro_location)
+								||
+								empty($expertise_fpage_intro_location)
+							) {
 
 								$expertise_fpage_intro_location = ''; // Intro text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_title_location) || empty($expertise_fpage_ref_main_title_location) ) {
+							if (
+								!isset($expertise_fpage_ref_main_title_location)
+								||
+								empty($expertise_fpage_ref_main_title_location)
+							) {
 
 								$expertise_fpage_ref_main_title_location = ''; // Reference to the main area of expertise archive, title
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_intro_location) || empty($expertise_fpage_ref_main_intro_location) ) {
+							if (
+								!isset($expertise_fpage_ref_main_intro_location)
+								||
+								empty($expertise_fpage_ref_main_intro_location)
+							) {
 
 								$expertise_fpage_ref_main_intro_location = ''; // Reference to the main area of expertise archive, body text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_link_location) || empty($expertise_fpage_ref_main_link_location) ) {
+							if (
+								!isset($expertise_fpage_ref_main_link_location)
+								||
+								empty($expertise_fpage_ref_main_link_location)
+							) {
 
 								$expertise_fpage_ref_main_link_location = ''; // Reference to the main area of expertise archive, link text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_top_title_location) || empty($expertise_fpage_ref_top_title_location) ) {
+							if (
+								!isset($expertise_fpage_ref_top_title_location)
+								||
+								empty($expertise_fpage_ref_top_title_location)
+							) {
 
 								$expertise_fpage_ref_top_title_location = ''; // Reference to a Top-Level Location's Fake Subpage for Areas of Expertise, title
 
 							}
 
-							if ( !isset($expertise_fpage_ref_top_intro_location) || empty($expertise_fpage_ref_top_intro_location) ) {
+							if (
+								!isset($expertise_fpage_ref_top_intro_location)
+								||
+								empty($expertise_fpage_ref_top_intro_location)
+							) {
 
 								$expertise_fpage_ref_top_intro_location = ''; // Reference to a Top-Level Location's Fake Subpage for Areas of Expertise, body text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_top_link_location) || empty($expertise_fpage_ref_top_link_location) ) {
+							if (
+								!isset($expertise_fpage_ref_top_link_location)
+								||
+								empty($expertise_fpage_ref_top_link_location)
+							) {
 
 								$expertise_fpage_ref_top_link_location = ''; // Reference to a Top-Level Location's Fake Subpage for Areas of Expertise, link text
 
@@ -6330,49 +6680,81 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($expertise_fpage_title_location) || empty($expertise_fpage_title_location) ) {
+							if (
+								!isset($expertise_fpage_title_location)
+								||
+								empty($expertise_fpage_title_location)
+							) {
 
 								$expertise_fpage_title_location = $expertise_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($expertise_fpage_intro_location) || empty($expertise_fpage_intro_location) ) {
+							if (
+								!isset($expertise_fpage_intro_location)
+								||
+								empty($expertise_fpage_intro_location)
+							) {
 
 								$expertise_fpage_intro_location = $expertise_fpage_intro_general; // Intro text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_title_location) || empty($expertise_fpage_ref_main_title_location) ) {
+							if (
+								!isset($expertise_fpage_ref_main_title_location)
+								||
+								empty($expertise_fpage_ref_main_title_location)
+							) {
 
 								$expertise_fpage_ref_main_title_location = $expertise_fpage_ref_main_title_general; // Reference to the main area of expertise archive, title
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_intro_location) || empty($expertise_fpage_ref_main_intro_location) ) {
+							if (
+								!isset($expertise_fpage_ref_main_intro_location)
+								||
+								empty($expertise_fpage_ref_main_intro_location)
+							) {
 
 								$expertise_fpage_ref_main_intro_location = $expertise_fpage_ref_main_intro_general; // Reference to the main area of expertise archive, body text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_link_location) || empty($expertise_fpage_ref_main_link_location) ) {
+							if (
+								!isset($expertise_fpage_ref_main_link_location)
+								||
+								empty($expertise_fpage_ref_main_link_location)
+							) {
 
 								$expertise_fpage_ref_main_link_location = $expertise_fpage_ref_main_link_general; // Reference to the main area of expertise archive, link text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_top_title_location) || empty($expertise_fpage_ref_top_title_location) ) {
+							if (
+								!isset($expertise_fpage_ref_top_title_location)
+								||
+								empty($expertise_fpage_ref_top_title_location)
+							) {
 
 								$expertise_fpage_ref_top_title_location = $expertise_fpage_ref_top_title_general; // Reference to a Top-Level Location's Fake Subpage for Areas of Expertise, title
 
 							}
 
-							if ( !isset($expertise_fpage_ref_top_intro_location) || empty($expertise_fpage_ref_top_intro_location) ) {
+							if (
+								!isset($expertise_fpage_ref_top_intro_location)
+								||
+								empty($expertise_fpage_ref_top_intro_location)
+							) {
 
 								$expertise_fpage_ref_top_intro_location = $expertise_fpage_ref_top_intro_general; // Reference to a Top-Level Location's Fake Subpage for Areas of Expertise, body text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_top_link_location) || empty($expertise_fpage_ref_top_link_location) ) {
+							if (
+								!isset($expertise_fpage_ref_top_link_location)
+								||
+								empty($expertise_fpage_ref_top_link_location)
+							) {
 
 								$expertise_fpage_ref_top_link_location = $expertise_fpage_ref_top_link_general; // Reference to a Top-Level Location's Fake Subpage for Areas of Expertise, link text
 
@@ -6406,67 +6788,111 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($clinical_resource_fpage_title_location) || empty($clinical_resource_fpage_title_location) ) {
+							if (
+								!isset($clinical_resource_fpage_title_location)
+								||
+								empty($clinical_resource_fpage_title_location)
+							) {
 
 								$clinical_resource_fpage_title_location = '[Clinical Resources] Related to [the Location Title]'; // Title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_intro_location) || empty($clinical_resource_fpage_intro_location) ) {
+							if (
+								!isset($clinical_resource_fpage_intro_location)
+								||
+								empty($clinical_resource_fpage_intro_location)
+							) {
 
 								$clinical_resource_fpage_intro_location = ''; // Intro text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_title_location) || empty($clinical_resource_fpage_ref_main_title_location) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_title_location)
+								||
+								empty($clinical_resource_fpage_ref_main_title_location)
+							) {
 
 								$clinical_resource_fpage_ref_main_title_location = ''; // Reference to the main clinical resource archive, title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_intro_location) || empty($clinical_resource_fpage_ref_main_intro_location) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_intro_location)
+								||
+								empty($clinical_resource_fpage_ref_main_intro_location)
+							) {
 
 								$clinical_resource_fpage_ref_main_intro_location = ''; // Reference to the main clinical resource archive, body text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_link_location) || empty($clinical_resource_fpage_ref_main_link_location) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_link_location)
+								||
+								empty($clinical_resource_fpage_ref_main_link_location)
+							) {
 
 								$clinical_resource_fpage_ref_main_link_location = ''; // Reference to the main clinical resource archive, link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_top_title_location) || empty($clinical_resource_fpage_ref_top_title_location) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_top_title_location)
+								||
+								empty($clinical_resource_fpage_ref_top_title_location)
+							) {
 
 								$clinical_resource_fpage_ref_top_title_location = ''; // Reference to a Top-Level Location's Fake Subpage for Clinical Resources, title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_top_intro_location) || empty($clinical_resource_fpage_ref_top_intro_location) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_top_intro_location)
+								||
+								empty($clinical_resource_fpage_ref_top_intro_location)
+							) {
 
 								$clinical_resource_fpage_ref_top_intro_location = ''; // Reference to a Top-Level Location's Fake Subpage for Clinical Resources, body text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_top_link_location) || empty($clinical_resource_fpage_ref_top_link_location) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_top_link_location)
+								||
+								empty($clinical_resource_fpage_ref_top_link_location)
+							) {
 
 								$clinical_resource_fpage_ref_top_link_location = ''; // Reference to a Top-Level Location's Fake Subpage for Clinical Resources, link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_text_location) || empty($clinical_resource_fpage_more_text_location) ) {
+							if (
+								!isset($clinical_resource_fpage_more_text_location)
+								||
+								empty($clinical_resource_fpage_more_text_location)
+							) {
 
 								$clinical_resource_fpage_more_text_location = 'Want to find more [clinical resources] related to [the Location Title]?'; // "More" intro text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_link_text_location) || empty($clinical_resource_fpage_more_link_text_location) ) {
+							if (
+								!isset($clinical_resource_fpage_more_link_text_location)
+								||
+								empty($clinical_resource_fpage_more_link_text_location)
+							) {
 
 								$clinical_resource_fpage_more_link_text_location = 'View the Full List'; // "More" link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_link_descr_location) || empty($clinical_resource_fpage_more_link_descr_location) ) {
+							if (
+								!isset($clinical_resource_fpage_more_link_descr_location)
+								||
+								empty($clinical_resource_fpage_more_link_descr_location)
+							) {
 
 								$clinical_resource_fpage_more_link_descr_location = 'View the full list of [clinical resources] related to [the Location Title]'; // "More" link description
 
@@ -6506,67 +6932,111 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 								}
 
-							if ( !isset($clinical_resource_fpage_title_location) || empty($clinical_resource_fpage_title_location) ) {
+							if (
+								!isset($clinical_resource_fpage_title_location)
+								||
+								empty($clinical_resource_fpage_title_location)
+							) {
 
 								$clinical_resource_fpage_title_location = $clinical_resource_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_intro_location) || empty($clinical_resource_fpage_intro_location) ) {
+							if (
+								!isset($clinical_resource_fpage_intro_location)
+								||
+								empty($clinical_resource_fpage_intro_location)
+							) {
 
 								$clinical_resource_fpage_intro_location = $clinical_resource_fpage_intro_general; // Intro text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_title_location) || empty($clinical_resource_fpage_ref_main_title_location) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_title_location)
+								||
+								empty($clinical_resource_fpage_ref_main_title_location)
+							) {
 
 								$clinical_resource_fpage_ref_main_title_location = $clinical_resource_fpage_ref_main_title_general; // Reference to the main clinical resource archive, title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_intro_location) || empty($clinical_resource_fpage_ref_main_intro_location) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_intro_location)
+								||
+								empty($clinical_resource_fpage_ref_main_intro_location)
+							) {
 
 								$clinical_resource_fpage_ref_main_intro_location = $clinical_resource_fpage_ref_main_intro_general; // Reference to the main clinical resource archive, body text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_link_location) || empty($clinical_resource_fpage_ref_main_link_location) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_link_location)
+								||
+								empty($clinical_resource_fpage_ref_main_link_location)
+							) {
 
 								$clinical_resource_fpage_ref_main_link_location = $clinical_resource_fpage_ref_main_link_general; // Reference to the main clinical resource archive, link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_top_title_location) || empty($clinical_resource_fpage_ref_top_title_location) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_top_title_location)
+								||
+								empty($clinical_resource_fpage_ref_top_title_location)
+							) {
 
 								$clinical_resource_fpage_ref_top_title_location = $clinical_resource_fpage_ref_top_title_general; // Reference to a Top-Level Location's Fake Subpage for Clinical Resources, title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_top_intro_location) || empty($clinical_resource_fpage_ref_top_intro_location) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_top_intro_location)
+								||
+								empty($clinical_resource_fpage_ref_top_intro_location)
+							) {
 
 								$clinical_resource_fpage_ref_top_intro_location = $clinical_resource_fpage_ref_top_intro_general; // Reference to a Top-Level Location's Fake Subpage for Clinical Resources, body text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_top_link_location) || empty($clinical_resource_fpage_ref_top_link_location) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_top_link_location)
+								||
+								empty($clinical_resource_fpage_ref_top_link_location)
+							) {
 
 								$clinical_resource_fpage_ref_top_link_location = $clinical_resource_fpage_ref_top_link_general; // Reference to a Top-Level Location's Fake Subpage for Clinical Resources, link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_text_location) || empty($clinical_resource_fpage_more_text_location) ) {
+							if (
+								!isset($clinical_resource_fpage_more_text_location)
+								||
+								empty($clinical_resource_fpage_more_text_location)
+							) {
 
 								$clinical_resource_fpage_more_text_location = $clinical_resource_fpage_more_text_general; // "More" intro text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_link_text_location) || empty($clinical_resource_fpage_more_link_text_location) ) {
+							if (
+								!isset($clinical_resource_fpage_more_link_text_location)
+								||
+								empty($clinical_resource_fpage_more_link_text_location)
+							) {
 
 								$clinical_resource_fpage_more_link_text_location = $clinical_resource_fpage_more_link_text_general; // "More" link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_link_descr_location) || empty($clinical_resource_fpage_more_link_descr_location) ) {
+							if (
+								!isset($clinical_resource_fpage_more_link_descr_location)
+								||
+								empty($clinical_resource_fpage_more_link_descr_location)
+							) {
 
 								$clinical_resource_fpage_more_link_descr_location = $clinical_resource_fpage_more_link_descr_general; // "More" link description
 
@@ -6594,13 +7064,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($condition_fpage_title_location) || empty($condition_fpage_title_location) ) {
+							if (
+								!isset($condition_fpage_title_location)
+								||
+								empty($condition_fpage_title_location)
+							) {
 
 								$condition_fpage_title_location = '[Conditions] Diagnosed or Treated at [the Location Title]'; // Title
 
 							}
 
-							if ( !isset($condition_fpage_intro_location) || empty($condition_fpage_intro_location) ) {
+							if (
+								!isset($condition_fpage_intro_location)
+								||
+								empty($condition_fpage_intro_location)
+							) {
 
 								$condition_fpage_intro_location = ''; // Intro text
 
@@ -6620,13 +7098,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($condition_fpage_title_location) || empty($condition_fpage_title_location) ) {
+							if (
+								!isset($condition_fpage_title_location)
+								||
+								empty($condition_fpage_title_location)
+							) {
 
 								$condition_fpage_title_location = $condition_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($condition_fpage_intro_location) || empty($condition_fpage_intro_location) ) {
+							if (
+								!isset($condition_fpage_intro_location)
+								||
+								empty($condition_fpage_intro_location)
+							) {
 
 								$condition_fpage_intro_location = $condition_fpage_intro_general; // Intro text
 
@@ -6645,13 +7131,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($treatment_fpage_title_location) || empty($treatment_fpage_title_location) ) {
+							if (
+								!isset($treatment_fpage_title_location)
+								||
+								empty($treatment_fpage_title_location)
+							) {
 
 								$treatment_fpage_title_location = '[Treatments] Performed or Prescribed at [the Location Title]'; // Title
 
 							}
 
-							if ( !isset($treatment_fpage_intro_location) || empty($treatment_fpage_intro_location) ) {
+							if (
+								!isset($treatment_fpage_intro_location)
+								||
+								empty($treatment_fpage_intro_location)
+							) {
 
 								$treatment_fpage_intro_location = ''; // Intro text
 
@@ -6671,13 +7165,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($treatment_fpage_title_location) || empty($treatment_fpage_title_location) ) {
+							if (
+								!isset($treatment_fpage_title_location)
+								||
+								empty($treatment_fpage_title_location)
+							) {
 
 								$treatment_fpage_title_location = $treatment_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($treatment_fpage_intro_location) || empty($treatment_fpage_intro_location) ) {
+							if (
+								!isset($treatment_fpage_intro_location)
+								||
+								empty($treatment_fpage_intro_location)
+							) {
 
 								$treatment_fpage_intro_location = $treatment_fpage_intro_general; // Intro text
 
@@ -6696,13 +7198,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($condition_treatment_fpage_title_location) || empty($condition_treatment_fpage_title_location) ) {
+							if (
+								!isset($condition_treatment_fpage_title_location)
+								||
+								empty($condition_treatment_fpage_title_location)
+							) {
 
 								$condition_treatment_fpage_title_location = '[Conditions and Treatments] Related to [the Location Title]'; // Title
 
 							}
 
-							if ( !isset($condition_treatment_fpage_intro_location) || empty($condition_treatment_fpage_intro_location) ) {
+							if (
+								!isset($condition_treatment_fpage_intro_location)
+								||
+								empty($condition_treatment_fpage_intro_location)
+							) {
 
 								$condition_treatment_fpage_intro_location = ''; // Intro text
 
@@ -6723,7 +7233,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 							}
 
 							if (
-								!isset($condition_treatment_fpage_title_location) || empty($condition_treatment_fpage_title_location)
+								!isset($condition_treatment_fpage_title_location)
+								||
+								empty($condition_treatment_fpage_title_location)
 							) {
 
 								$condition_treatment_fpage_title_location = $condition_treatment_fpage_title_general; // Title
@@ -6731,7 +7243,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 							}
 
 							if (
-								!isset($condition_treatment_fpage_intro_location) || empty($condition_treatment_fpage_intro_location)
+								!isset($condition_treatment_fpage_intro_location)
+								||
+								empty($condition_treatment_fpage_intro_location)
 							) {
 
 								$condition_treatment_fpage_intro_location = $condition_treatment_fpage_intro_general; // Intro text
@@ -6994,13 +7508,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// If the variable is not set or is empty...
 							// Get the Find-a-Doc Settings value for a provider subpage/section in an area of expertise subsection
 
-								if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
+								if (
+									!isset($provider_fpage_title_expertise)
+									||
+									empty($provider_fpage_title_expertise)
+								) {
 
 									$provider_fpage_title_expertise = get_field('provider_fpage_title_expertise', 'option'); // Title
 
 								}
 
-								if ( !isset($provider_fpage_intro_expertise) || empty($provider_fpage_intro_expertise) ) {
+								if (
+									!isset($provider_fpage_intro_expertise)
+									||
+									empty($provider_fpage_intro_expertise)
+								) {
 
 									$provider_fpage_intro_expertise = get_field('provider_fpage_intro_expertise', 'option'); // Intro text
 
@@ -7016,49 +7538,81 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// If the variable is not set or is empty...
 							// Set a hardcoded fallback value
 
-								if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
+								if (
+									!isset($provider_fpage_title_expertise)
+									||
+									empty($provider_fpage_title_expertise)
+								) {
 
 									$provider_fpage_title_expertise = '[Area of Expertise Title] [Providers]'; // Title
 
 								}
 
-								if ( !isset($provider_fpage_intro_expertise) || empty($provider_fpage_intro_expertise) ) {
+								if (
+									!isset($provider_fpage_intro_expertise)
+									||
+									empty($provider_fpage_intro_expertise)
+								) {
 
 									$provider_fpage_intro_expertise = ''; // Intro text
 
 								}
 
-								if ( !isset($provider_fpage_ref_main_title_expertise) || empty($provider_fpage_ref_main_title_expertise) ) {
+								if (
+									!isset($provider_fpage_ref_main_title_expertise)
+									||
+									empty($provider_fpage_ref_main_title_expertise)
+								) {
 
 									$provider_fpage_ref_main_title_expertise = ''; // Reference to the main provider archive, title
 
 								}
 
-								if ( !isset($provider_fpage_ref_main_intro_expertise) || empty($provider_fpage_ref_main_intro_expertise) ) {
+								if (
+									!isset($provider_fpage_ref_main_intro_expertise)
+									||
+									empty($provider_fpage_ref_main_intro_expertise)
+								) {
 
 									$provider_fpage_ref_main_intro_expertise = ''; // Reference to the main provider archive, body text
 
 								}
 
-								if ( !isset($provider_fpage_ref_main_link_expertise) || empty($provider_fpage_ref_main_link_expertise) ) {
+								if (
+									!isset($provider_fpage_ref_main_link_expertise)
+									||
+									empty($provider_fpage_ref_main_link_expertise)
+								) {
 
 									$provider_fpage_ref_main_link_expertise = ''; // Reference to the main provider archive, link text
 
 								}
 
-								if ( !isset($provider_fpage_ref_top_title_expertise) || empty($provider_fpage_ref_top_title_expertise) ) {
+								if (
+									!isset($provider_fpage_ref_top_title_expertise)
+									||
+									empty($provider_fpage_ref_top_title_expertise)
+								) {
 
 									$provider_fpage_ref_top_title_expertise = $provider_fpage_title_expertise; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, title
 
 								}
 
-								if ( !isset($provider_fpage_ref_top_intro_expertise) || empty($provider_fpage_ref_top_intro_expertise) ) {
+								if (
+									!isset($provider_fpage_ref_top_intro_expertise)
+									||
+									empty($provider_fpage_ref_top_intro_expertise)
+								) {
 
 									$provider_fpage_ref_top_intro_expertise = 'Discover our esteemed team of [providers] within the vast field of [Area of Expertise Title], delivering comprehensive care for UAMS Health patients. Explore our diverse roster of experts of various [descendant areas of expertise] within [Area of Expertise Title].'; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, body text
 
 								}
 
-								if ( !isset($provider_fpage_ref_top_link_expertise) || empty($provider_fpage_ref_top_link_expertise) ) {
+								if (
+									!isset($provider_fpage_ref_top_link_expertise)
+									||
+									empty($provider_fpage_ref_top_link_expertise)
+								) {
 
 									$provider_fpage_ref_top_link_expertise = 'View [Providers]'; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, link text
 
@@ -7092,49 +7646,81 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 								}
 
-								if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
+								if (
+									!isset($provider_fpage_title_expertise)
+									||
+									empty($provider_fpage_title_expertise)
+								) {
 
 									$provider_fpage_title_expertise = $provider_fpage_title_general; // Title
 
 								}
 
-								if ( !isset($provider_fpage_intro_expertise) || empty($provider_fpage_intro_expertise) ) {
+								if (
+									!isset($provider_fpage_intro_expertise)
+									||
+									empty($provider_fpage_intro_expertise)
+								) {
 
 									$provider_fpage_intro_expertise = $provider_fpage_intro_general; // Intro text
 
 								}
 
-								if ( !isset($provider_fpage_ref_main_title_expertise) || empty($provider_fpage_ref_main_title_expertise) ) {
+								if (
+									!isset($provider_fpage_ref_main_title_expertise)
+									||
+									empty($provider_fpage_ref_main_title_expertise)
+								) {
 
 									$provider_fpage_ref_main_title_expertise = $provider_fpage_ref_main_title_general; // Reference to the main provider archive, title
 
 								}
 
-								if ( !isset($provider_fpage_ref_main_intro_expertise) || empty($provider_fpage_ref_main_intro_expertise) ) {
+								if (
+									!isset($provider_fpage_ref_main_intro_expertise)
+									||
+									empty($provider_fpage_ref_main_intro_expertise)
+								) {
 
 									$provider_fpage_ref_main_intro_expertise = $provider_fpage_ref_main_intro_general; // Reference to the main provider archive, body text
 
 								}
 
-								if ( !isset($provider_fpage_ref_main_link_expertise) || empty($provider_fpage_ref_main_link_expertise) ) {
+								if (
+									!isset($provider_fpage_ref_main_link_expertise)
+									||
+									empty($provider_fpage_ref_main_link_expertise)
+								) {
 
 									$provider_fpage_ref_main_link_expertise = $provider_fpage_ref_main_link_general; // Reference to the main provider archive, link text
 
 								}
 
-								if ( !isset($provider_fpage_ref_top_title_expertise) || empty($provider_fpage_ref_top_title_expertise) ) {
+								if (
+									!isset($provider_fpage_ref_top_title_expertise)
+									||
+									empty($provider_fpage_ref_top_title_expertise)
+								) {
 
 									$provider_fpage_ref_top_title_expertise = $provider_fpage_ref_top_title_general; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, title
 
 								}
 
-								if ( !isset($provider_fpage_ref_top_intro_expertise) || empty($provider_fpage_ref_top_intro_expertise) ) {
+								if (
+									!isset($provider_fpage_ref_top_intro_expertise)
+									||
+									empty($provider_fpage_ref_top_intro_expertise)
+								) {
 
 									$provider_fpage_ref_top_intro_expertise = $provider_fpage_ref_top_intro_general; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, body text
 
 								}
 
-								if ( !isset($provider_fpage_ref_top_link_expertise) || empty($provider_fpage_ref_top_link_expertise) ) {
+								if (
+									!isset($provider_fpage_ref_top_link_expertise)
+									||
+									empty($provider_fpage_ref_top_link_expertise)
+								) {
 
 									$provider_fpage_ref_top_link_expertise = $provider_fpage_ref_top_link_general; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, link text
 
@@ -7180,13 +7766,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// If the variable is not set or is empty...
 							// Get the Find-a-Doc Settings value for a location subpage/section in an area of expertise subsection
 
-								if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
+								if (
+									!isset($location_fpage_title_expertise)
+									||
+									empty($location_fpage_title_expertise)
+								) {
 
 									$location_fpage_title_expertise = get_field('location_fpage_title_expertise', 'option'); // Title
 
 								}
 
-								if ( !isset($location_fpage_intro_expertise) || empty($location_fpage_intro_expertise) ) {
+								if (
+									!isset($location_fpage_intro_expertise)
+									||
+									empty($location_fpage_intro_expertise)
+								) {
 
 									$location_fpage_intro_expertise = get_field('location_fpage_intro_expertise', 'option'); // Intro text
 
@@ -7202,49 +7796,81 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// If the variable is not set or is empty...
 							// Set a hardcoded fallback value
 
-								if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
+								if (
+									!isset($location_fpage_title_expertise)
+									||
+									empty($location_fpage_title_expertise)
+								) {
 
 									$location_fpage_title_expertise = '[Area of Expertise Title] [Locations]'; // Title
 
 								}
 
-								if ( !isset($location_fpage_intro_expertise) || empty($location_fpage_intro_expertise) ) {
+								if (
+									!isset($location_fpage_intro_expertise)
+									||
+									empty($location_fpage_intro_expertise)
+								) {
 
 									$location_fpage_intro_expertise = ''; // Intro text
 
 								}
 
-								if ( !isset($location_fpage_ref_main_title_expertise) || empty($location_fpage_ref_main_title_expertise) ) {
+								if (
+									!isset($location_fpage_ref_main_title_expertise)
+									||
+									empty($location_fpage_ref_main_title_expertise)
+								) {
 
 									$location_fpage_ref_main_title_expertise = ''; // Reference to the main location archive, title
 
 								}
 
-								if ( !isset($location_fpage_ref_main_intro_expertise) || empty($location_fpage_ref_main_intro_expertise) ) {
+								if (
+									!isset($location_fpage_ref_main_intro_expertise)
+									||
+									empty($location_fpage_ref_main_intro_expertise)
+								) {
 
 									$location_fpage_ref_main_intro_expertise = ''; // Reference to the main location archive, body text
 
 								}
 
-								if ( !isset($location_fpage_ref_main_link_expertise) || empty($location_fpage_ref_main_link_expertise) ) {
+								if (
+									!isset($location_fpage_ref_main_link_expertise)
+									||
+									empty($location_fpage_ref_main_link_expertise)
+								) {
 
 									$location_fpage_ref_main_link_expertise = ''; // Reference to the main location archive, link text
 
 								}
 
-								if ( !isset($location_fpage_ref_top_title_expertise) || empty($location_fpage_ref_top_title_expertise) ) {
+								if (
+									!isset($location_fpage_ref_top_title_expertise)
+									||
+									empty($location_fpage_ref_top_title_expertise)
+								) {
 
 									$location_fpage_ref_top_title_expertise = $location_fpage_title_expertise; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, title
 
 								}
 
-								if ( !isset($location_fpage_ref_top_intro_expertise) || empty($location_fpage_ref_top_intro_expertise) ) {
+								if (
+									!isset($location_fpage_ref_top_intro_expertise)
+									||
+									empty($location_fpage_ref_top_intro_expertise)
+								) {
 
 									$location_fpage_ref_top_intro_expertise = 'Explore our extensive network of [locations] dedicated to providing exceptional care within the realm of [Area of Expertise Title]. Discover a range of specialized services and comprehensive care options across multiple [descendant areas of expertise].'; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, body text
 
 								}
 
-								if ( !isset($location_fpage_ref_top_link_expertise) || empty($location_fpage_ref_top_link_expertise) ) {
+								if (
+									!isset($location_fpage_ref_top_link_expertise)
+									||
+									empty($location_fpage_ref_top_link_expertise)
+								) {
 
 									$location_fpage_ref_top_link_expertise = 'View [Locations]'; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, link text
 
@@ -7278,49 +7904,81 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 								}
 
-								if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
+								if (
+									!isset($location_fpage_title_expertise)
+									||
+									empty($location_fpage_title_expertise)
+								) {
 
 									$location_fpage_title_expertise = $location_fpage_title_general; // Title
 
 								}
 
-								if ( !isset($location_fpage_intro_expertise) || empty($location_fpage_intro_expertise) ) {
+								if (
+									!isset($location_fpage_intro_expertise)
+									||
+									empty($location_fpage_intro_expertise)
+								) {
 
 									$location_fpage_intro_expertise = $location_fpage_intro_general; // Intro text
 
 								}
 
-								if ( !isset($location_fpage_ref_main_title_expertise) || empty($location_fpage_ref_main_title_expertise) ) {
+								if (
+									!isset($location_fpage_ref_main_title_expertise)
+									||
+									empty($location_fpage_ref_main_title_expertise)
+								) {
 
 									$location_fpage_ref_main_title_expertise = $location_fpage_ref_main_title_general; // Reference to the main location archive, title
 
 								}
 
-								if ( !isset($location_fpage_ref_main_intro_expertise) || empty($location_fpage_ref_main_intro_expertise) ) {
+								if (
+									!isset($location_fpage_ref_main_intro_expertise)
+									||
+									empty($location_fpage_ref_main_intro_expertise)
+								) {
 
 									$location_fpage_ref_main_intro_expertise = $location_fpage_ref_main_intro_general; // Reference to the main location archive, body text
 
 								}
 
-								if ( !isset($location_fpage_ref_main_link_expertise) || empty($location_fpage_ref_main_link_expertise) ) {
+								if (
+									!isset($location_fpage_ref_main_link_expertise)
+									||
+									empty($location_fpage_ref_main_link_expertise)
+								) {
 
 									$location_fpage_ref_main_link_expertise = $location_fpage_ref_main_link_general; // Reference to the main location archive, link text
 
 								}
 
-								if ( !isset($location_fpage_ref_top_title_expertise) || empty($location_fpage_ref_top_title_expertise) ) {
+								if (
+									!isset($location_fpage_ref_top_title_expertise)
+									||
+									empty($location_fpage_ref_top_title_expertise)
+								) {
 
 									$location_fpage_ref_top_title_expertise = $location_fpage_ref_top_title_general; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, title
 
 								}
 
-								if ( !isset($location_fpage_ref_top_intro_expertise) || empty($location_fpage_ref_top_intro_expertise) ) {
+								if (
+									!isset($location_fpage_ref_top_intro_expertise)
+									||
+									empty($location_fpage_ref_top_intro_expertise)
+								) {
 
 									$location_fpage_ref_top_intro_expertise = $location_fpage_ref_top_intro_general; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, body text
 
 								}
 
-								if ( !isset($location_fpage_ref_top_link_expertise) || empty($location_fpage_ref_top_link_expertise) ) {
+								if (
+									!isset($location_fpage_ref_top_link_expertise)
+									||
+									empty($location_fpage_ref_top_link_expertise)
+								) {
 
 									$location_fpage_ref_top_link_expertise = $location_fpage_ref_top_link_general; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, link text
 
@@ -7366,13 +8024,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// If the variable is not set or is empty...
 							// Get the Find-a-Doc Settings value for a descendant areas of expertise subpage/section in an area of expertise subsection
 
-								if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
+								if (
+									!isset($expertise_descendant_fpage_title_expertise)
+									||
+									empty($expertise_descendant_fpage_title_expertise)
+								) {
 
 									$expertise_descendant_fpage_title_expertise = get_field('expertise_descendant_fpage_title_expertise', 'option'); // Title
 
 								}
 
-								if ( !isset($expertise_descendant_fpage_intro_expertise) || empty($expertise_descendant_fpage_intro_expertise) ) {
+								if (
+									!isset($expertise_descendant_fpage_intro_expertise)
+									||
+									empty($expertise_descendant_fpage_intro_expertise)
+								) {
 
 									$expertise_descendant_fpage_intro_expertise = get_field('expertise_descendant_fpage_intro_expertise', 'option'); // Intro text
 
@@ -7385,31 +8051,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// If the variable is not set or is empty...
 							// Set a hardcoded fallback value
 
-								if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
+								if (
+									!isset($expertise_descendant_fpage_title_expertise)
+									||
+									empty($expertise_descendant_fpage_title_expertise)
+								) {
 
 									$expertise_descendant_fpage_title_expertise = '[Descendant Areas of Expertise] Within [Area of Expertise Title]'; // Title
 
 								}
 
-								if ( !isset($expertise_descendant_fpage_intro_expertise) || empty($expertise_descendant_fpage_intro_expertise) ) {
+								if (
+									!isset($expertise_descendant_fpage_intro_expertise)
+									||
+									empty($expertise_descendant_fpage_intro_expertise)
+								) {
 
 									$expertise_descendant_fpage_intro_expertise = ''; // Intro text
 
 								}
 
-								if ( !isset($expertise_descendant_fpage_ref_main_title_expertise) || empty($expertise_descendant_fpage_ref_main_title_expertise) ) {
+								if (
+									!isset($expertise_descendant_fpage_ref_main_title_expertise)
+									||
+									empty($expertise_descendant_fpage_ref_main_title_expertise)
+								) {
 
 									$expertise_descendant_fpage_ref_main_title_expertise = ''; // Reference to the main area of expertise archive, title
 
 								}
 
-								if ( !isset($expertise_descendant_fpage_ref_main_intro_expertise) || empty($expertise_descendant_fpage_ref_main_intro_expertise) ) {
+								if (
+									!isset($expertise_descendant_fpage_ref_main_intro_expertise)
+									||
+									empty($expertise_descendant_fpage_ref_main_intro_expertise)
+								) {
 
 									$expertise_descendant_fpage_ref_main_intro_expertise = ''; // Reference to the main area of expertise archive, body text
 
 								}
 
-								if ( !isset($expertise_descendant_fpage_ref_main_link_expertise) || empty($expertise_descendant_fpage_ref_main_link_expertise) ) {
+								if (
+									!isset($expertise_descendant_fpage_ref_main_link_expertise)
+									||
+									empty($expertise_descendant_fpage_ref_main_link_expertise)
+								) {
 
 									$expertise_descendant_fpage_ref_main_link_expertise = ''; // Reference to the main area of expertise archive, link text
 
@@ -7437,31 +8123,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 								}
 
-								if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
+								if (
+									!isset($expertise_descendant_fpage_title_expertise)
+									||
+									empty($expertise_descendant_fpage_title_expertise)
+								) {
 
 									$expertise_descendant_fpage_title_expertise = $expertise_descendant_fpage_title_general; // Title
 
 								}
 
-								if ( !isset($expertise_descendant_fpage_intro_expertise) || empty($expertise_descendant_fpage_intro_expertise) ) {
+								if (
+									!isset($expertise_descendant_fpage_intro_expertise)
+									||
+									empty($expertise_descendant_fpage_intro_expertise)
+								) {
 
 									$expertise_descendant_fpage_intro_expertise = $expertise_descendant_fpage_intro_general; // Intro text
 
 								}
 
-								if ( !isset($expertise_descendant_fpage_ref_main_title_expertise) || empty($expertise_descendant_fpage_ref_main_title_expertise) ) {
+								if (
+									!isset($expertise_descendant_fpage_ref_main_title_expertise)
+									||
+									empty($expertise_descendant_fpage_ref_main_title_expertise)
+								) {
 
 									$expertise_descendant_fpage_ref_main_title_expertise = $expertise_descendant_fpage_ref_main_title_general; // Reference to the main area of expertise archive, title
 
 								}
 
-								if ( !isset($expertise_descendant_fpage_ref_main_intro_expertise) || empty($expertise_descendant_fpage_ref_main_intro_expertise) ) {
+								if (
+									!isset($expertise_descendant_fpage_ref_main_intro_expertise)
+									||
+									empty($expertise_descendant_fpage_ref_main_intro_expertise)
+								) {
 
 									$expertise_descendant_fpage_ref_main_intro_expertise = $expertise_descendant_fpage_ref_main_intro_general; // Reference to the main area of expertise archive, body text
 
 								}
 
-								if ( !isset($expertise_descendant_fpage_ref_main_link_expertise) || empty($expertise_descendant_fpage_ref_main_link_expertise) ) {
+								if (
+									!isset($expertise_descendant_fpage_ref_main_link_expertise)
+									||
+									empty($expertise_descendant_fpage_ref_main_link_expertise)
+								) {
 
 									$expertise_descendant_fpage_ref_main_link_expertise = $expertise_descendant_fpage_ref_main_link_general; // Reference to the main area of expertise archive, link text
 
@@ -7504,13 +8210,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// If the variable is not set or is empty...
 							// Get the Find-a-Doc Settings value for a related areas of expertise subpage/section in an area of expertise subsection
 
-								if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
+								if (
+									!isset($expertise_fpage_title_expertise)
+									||
+									empty($expertise_fpage_title_expertise)
+								) {
 
 									$expertise_fpage_title_expertise = get_field('expertise_fpage_title_expertise', 'option'); // Title
 
 								}
 
-								if ( !isset($expertise_fpage_intro_expertise) || empty($expertise_fpage_intro_expertise) ) {
+								if (
+									!isset($expertise_fpage_intro_expertise)
+									||
+									empty($expertise_fpage_intro_expertise)
+								) {
 
 									$expertise_fpage_intro_expertise = get_field('expertise_fpage_intro_expertise', 'option'); // Intro text
 
@@ -7523,31 +8237,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// If the variable is not set or is empty...
 							// Set a hardcoded fallback value
 
-								if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
+								if (
+									!isset($expertise_fpage_title_expertise)
+									||
+									empty($expertise_fpage_title_expertise)
+								) {
 
 									$expertise_fpage_title_expertise = '[Areas of Expertise] Related to [Area of Expertise Title]'; // Title
 
 								}
 
-								if ( !isset($expertise_fpage_intro_expertise) || empty($expertise_fpage_intro_expertise) ) {
+								if (
+									!isset($expertise_fpage_intro_expertise)
+									||
+									empty($expertise_fpage_intro_expertise)
+								) {
 
 									$expertise_fpage_intro_expertise = ''; // Intro text
 
 								}
 
-								if ( !isset($expertise_fpage_ref_main_title_expertise) || empty($expertise_fpage_ref_main_title_expertise) ) {
+								if (
+									!isset($expertise_fpage_ref_main_title_expertise)
+									||
+									empty($expertise_fpage_ref_main_title_expertise)
+								) {
 
 									$expertise_fpage_ref_main_title_expertise = ''; // Reference to the main area of expertise archive, title
 
 								}
 
-								if ( !isset($expertise_fpage_ref_main_intro_expertise) || empty($expertise_fpage_ref_main_intro_expertise) ) {
+								if (
+									!isset($expertise_fpage_ref_main_intro_expertise)
+									||
+									empty($expertise_fpage_ref_main_intro_expertise)
+								) {
 
 									$expertise_fpage_ref_main_intro_expertise = ''; // Reference to the main area of expertise archive, body text
 
 								}
 
-								if ( !isset($expertise_fpage_ref_main_link_expertise) || empty($expertise_fpage_ref_main_link_expertise) ) {
+								if (
+									!isset($expertise_fpage_ref_main_link_expertise)
+									||
+									empty($expertise_fpage_ref_main_link_expertise)
+								) {
 
 									$expertise_fpage_ref_main_link_expertise = ''; // Reference to the main area of expertise archive, link text
 
@@ -7575,31 +8309,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 								}
 
-								if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
+								if (
+									!isset($expertise_fpage_title_expertise)
+									||
+									empty($expertise_fpage_title_expertise)
+								) {
 
 									$expertise_fpage_title_expertise = $expertise_fpage_title_general; // Title
 
 								}
 
-								if ( !isset($expertise_fpage_intro_expertise) || empty($expertise_fpage_intro_expertise) ) {
+								if (
+									!isset($expertise_fpage_intro_expertise)
+									||
+									empty($expertise_fpage_intro_expertise)
+								) {
 
 									$expertise_fpage_intro_expertise = $expertise_fpage_intro_general; // Intro text
 
 								}
 
-								if ( !isset($expertise_fpage_ref_main_title_expertise) || empty($expertise_fpage_ref_main_title_expertise) ) {
+								if (
+									!isset($expertise_fpage_ref_main_title_expertise)
+									||
+									empty($expertise_fpage_ref_main_title_expertise)
+								) {
 
 									$expertise_fpage_ref_main_title_expertise = $expertise_fpage_ref_main_title_general; // Reference to the main area of expertise archive, title
 
 								}
 
-								if ( !isset($expertise_fpage_ref_main_intro_expertise) || empty($expertise_fpage_ref_main_intro_expertise) ) {
+								if (
+									!isset($expertise_fpage_ref_main_intro_expertise)
+									||
+									empty($expertise_fpage_ref_main_intro_expertise)
+								) {
 
 									$expertise_fpage_ref_main_intro_expertise = $expertise_fpage_ref_main_intro_general; // Reference to the main area of expertise archive, body text
 
 								}
 
-								if ( !isset($expertise_fpage_ref_main_link_expertise) || empty($expertise_fpage_ref_main_link_expertise) ) {
+								if (
+									!isset($expertise_fpage_ref_main_link_expertise)
+									||
+									empty($expertise_fpage_ref_main_link_expertise)
+								) {
 
 									$expertise_fpage_ref_main_link_expertise = $expertise_fpage_ref_main_link_general; // Reference to the main area of expertise archive, link text
 
@@ -7642,13 +8396,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// If the variable is not set or is empty...
 							// Get the Find-a-Doc Settings value for a related areas of expertise subpage/section in an area of expertise subsection
 
-								if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
+								if (
+									!isset($clinical_resource_fpage_title_expertise)
+									||
+									empty($clinical_resource_fpage_title_expertise)
+								) {
 
 									$clinical_resource_fpage_title_expertise = get_field('clinical_resource_fpage_title_expertise', 'option'); // Title
 
 								}
 
-								if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
+								if (
+									!isset($clinical_resource_fpage_intro_expertise)
+									||
+									empty($clinical_resource_fpage_intro_expertise)
+								) {
 
 									$clinical_resource_fpage_intro_expertise = get_field('clinical_resource_fpage_intro_expertise', 'option'); // Intro text
 
@@ -7667,67 +8429,111 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// If the variable is not set or is empty...
 							// Set a hardcoded fallback value
 
-								if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
+								if (
+									!isset($clinical_resource_fpage_title_expertise)
+									||
+									empty($clinical_resource_fpage_title_expertise)
+								) {
 
 									$clinical_resource_fpage_title_expertise = '[Clinical Resources] Related to [Area of Expertise Title]'; // Title
 
 								}
 
-								if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
+								if (
+									!isset($clinical_resource_fpage_intro_expertise)
+									||
+									empty($clinical_resource_fpage_intro_expertise)
+								) {
 
 									$clinical_resource_fpage_intro_expertise = ''; // Intro text
 
 								}
 
-								if ( !isset($clinical_resource_fpage_ref_main_title_expertise) || empty($clinical_resource_fpage_ref_main_title_expertise) ) {
+								if (
+									!isset($clinical_resource_fpage_ref_main_title_expertise)
+									||
+									empty($clinical_resource_fpage_ref_main_title_expertise)
+								) {
 
 									$clinical_resource_fpage_ref_main_title_expertise = ''; // Reference to the main clinical resource archive, title
 
 								}
 
-								if ( !isset($clinical_resource_fpage_ref_main_intro_expertise) || empty($clinical_resource_fpage_ref_main_intro_expertise) ) {
+								if (
+									!isset($clinical_resource_fpage_ref_main_intro_expertise)
+									||
+									empty($clinical_resource_fpage_ref_main_intro_expertise)
+								) {
 
 									$clinical_resource_fpage_ref_main_intro_expertise = ''; // Reference to the main clinical resource archive, body text
 
 								}
 
-								if ( !isset($clinical_resource_fpage_ref_main_link_expertise) || empty($clinical_resource_fpage_ref_main_link_expertise) ) {
+								if (
+									!isset($clinical_resource_fpage_ref_main_link_expertise)
+									||
+									empty($clinical_resource_fpage_ref_main_link_expertise)
+								) {
 
 									$clinical_resource_fpage_ref_main_link_expertise = ''; // Reference to the main clinical resource archive, link text
 
 								}
 
-								if ( !isset($clinical_resource_fpage_ref_top_title_expertise) || empty($clinical_resource_fpage_ref_top_title_expertise) ) {
+								if (
+									!isset($clinical_resource_fpage_ref_top_title_expertise)
+									||
+									empty($clinical_resource_fpage_ref_top_title_expertise)
+								) {
 
 									$clinical_resource_fpage_ref_top_title_expertise = $clinical_resource_fpage_title_expertise; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, title
 
 								}
 
-								if ( !isset($clinical_resource_fpage_ref_top_intro_expertise) || empty($clinical_resource_fpage_ref_top_intro_expertise) ) {
+								if (
+									!isset($clinical_resource_fpage_ref_top_intro_expertise)
+									||
+									empty($clinical_resource_fpage_ref_top_intro_expertise)
+								) {
 
 									$clinical_resource_fpage_ref_top_intro_expertise = 'Unlock a treasure trove of [clinical resources] covering diverse specialties within [Area of Expertise Title]. Access a wealth of articles, videos, infographics, and documents to enhance your knowledge and understanding.'; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, body text
 
 								}
 
-								if ( !isset($clinical_resource_fpage_ref_top_link_expertise) || empty($clinical_resource_fpage_ref_top_link_expertise) ) {
+								if (
+									!isset($clinical_resource_fpage_ref_top_link_expertise)
+									||
+									empty($clinical_resource_fpage_ref_top_link_expertise)
+								) {
 
 									$clinical_resource_fpage_ref_top_link_expertise = 'View [Clinical Resources]'; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, link text
 
 								}
 
-								if ( !isset($clinical_resource_fpage_more_text_expertise) || empty($clinical_resource_fpage_more_text_expertise) ) {
+								if (
+									!isset($clinical_resource_fpage_more_text_expertise)
+									||
+									empty($clinical_resource_fpage_more_text_expertise)
+								) {
 
 									$clinical_resource_fpage_more_text_expertise = 'Want to find more [clinical resources] related to [Area of Expertise Title]?'; // "More" intro text
 
 								}
 
-								if ( !isset($clinical_resource_fpage_more_link_text_expertise) || empty($clinical_resource_fpage_more_link_text_expertise) ) {
+								if (
+									!isset($clinical_resource_fpage_more_link_text_expertise)
+									||
+									empty($clinical_resource_fpage_more_link_text_expertise)
+								) {
 
 									$clinical_resource_fpage_more_link_text_expertise = 'View the Full List'; // "More" link text
 
 								}
 
-								if ( !isset($clinical_resource_fpage_more_link_descr_expertise) || empty($clinical_resource_fpage_more_link_descr_expertise) ) {
+								if (
+									!isset($clinical_resource_fpage_more_link_descr_expertise)
+									||
+									empty($clinical_resource_fpage_more_link_descr_expertise)
+								) {
 
 									$clinical_resource_fpage_more_link_descr_expertise = 'View the full list of [clinical resources] related to [Area of Expertise Title]'; // "More" link description
 
@@ -7767,67 +8573,111 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
+							if (
+								!isset($clinical_resource_fpage_title_expertise)
+								||
+								empty($clinical_resource_fpage_title_expertise)
+							) {
 
 								$clinical_resource_fpage_title_expertise = $clinical_resource_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
+							if (
+								!isset($clinical_resource_fpage_intro_expertise)
+								||
+								empty($clinical_resource_fpage_intro_expertise)
+							) {
 
 								$clinical_resource_fpage_intro_expertise = $clinical_resource_fpage_intro_general; // Intro text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_title_expertise) || empty($clinical_resource_fpage_ref_main_title_expertise) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_title_expertise)
+								||
+								empty($clinical_resource_fpage_ref_main_title_expertise)
+							) {
 
 								$clinical_resource_fpage_ref_main_title_expertise = $clinical_resource_fpage_ref_main_title_general; // Reference to the main clinical resource archive, title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_intro_expertise) || empty($clinical_resource_fpage_ref_main_intro_expertise) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_intro_expertise)
+								||
+								empty($clinical_resource_fpage_ref_main_intro_expertise)
+							) {
 
 								$clinical_resource_fpage_ref_main_intro_expertise = $clinical_resource_fpage_ref_main_intro_general; // Reference to the main clinical resource archive, body text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_link_expertise) || empty($clinical_resource_fpage_ref_main_link_expertise) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_link_expertise)
+								||
+								empty($clinical_resource_fpage_ref_main_link_expertise)
+							) {
 
 								$clinical_resource_fpage_ref_main_link_expertise = $clinical_resource_fpage_ref_main_link_general; // Reference to the main clinical resource archive, link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_top_title_expertise) || empty($clinical_resource_fpage_ref_top_title_expertise) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_top_title_expertise)
+								||
+								empty($clinical_resource_fpage_ref_top_title_expertise)
+							) {
 
 								$clinical_resource_fpage_ref_top_title_expertise = $clinical_resource_fpage_ref_top_title_general; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_top_intro_expertise) || empty($clinical_resource_fpage_ref_top_intro_expertise) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_top_intro_expertise)
+								||
+								empty($clinical_resource_fpage_ref_top_intro_expertise)
+							) {
 
 								$clinical_resource_fpage_ref_top_intro_expertise = $clinical_resource_fpage_ref_top_intro_general; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, body text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_top_link_expertise) || empty($clinical_resource_fpage_ref_top_link_expertise) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_top_link_expertise)
+								||
+								empty($clinical_resource_fpage_ref_top_link_expertise)
+							) {
 
 								$clinical_resource_fpage_ref_top_link_expertise = $clinical_resource_fpage_ref_top_link_general; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_text_expertise) || empty($clinical_resource_fpage_more_text_expertise) ) {
+							if (
+								!isset($clinical_resource_fpage_more_text_expertise)
+								||
+								empty($clinical_resource_fpage_more_text_expertise)
+							) {
 
 								$clinical_resource_fpage_more_text_expertise = $clinical_resource_fpage_more_text_general; // "More" intro text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_link_text_expertise) || empty($clinical_resource_fpage_more_link_text_expertise) ) {
+							if (
+								!isset($clinical_resource_fpage_more_link_text_expertise)
+								||
+								empty($clinical_resource_fpage_more_link_text_expertise)
+							) {
 
 								$clinical_resource_fpage_more_link_text_expertise = $clinical_resource_fpage_more_link_text_general; // "More" link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_link_descr_expertise) || empty($clinical_resource_fpage_more_link_descr_expertise) ) {
+							if (
+								!isset($clinical_resource_fpage_more_link_descr_expertise)
+								||
+								empty($clinical_resource_fpage_more_link_descr_expertise)
+							) {
 
 								$clinical_resource_fpage_more_link_descr_expertise = $clinical_resource_fpage_more_link_descr_general; // "More" link description
 
@@ -7876,13 +8726,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// If the variable is not set or is empty...
 							// Get the Find-a-Doc Settings value for a conditions subpage/section in an area of expertise subsection
 
-								if ( !isset($condition_fpage_title_expertise) || empty($condition_fpage_title_expertise) ) {
+								if (
+									!isset($condition_fpage_title_expertise)
+									||
+									empty($condition_fpage_title_expertise)
+								) {
 
 									$condition_fpage_title_expertise = get_field('conditions_fpage_title_expertise', 'option'); // Title
 
 								}
 
-								if ( !isset($condition_fpage_intro_expertise) || empty($condition_fpage_intro_expertise) ) {
+								if (
+									!isset($condition_fpage_intro_expertise)
+									||
+									empty($condition_fpage_intro_expertise)
+								) {
 
 									$condition_fpage_intro_expertise = get_field('conditions_fpage_intro_expertise', 'option'); // Intro text
 
@@ -7891,13 +8749,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// If the variable is not set or is empty...
 							// Set a hardcoded fallback value
 
-								if ( !isset($condition_fpage_title_expertise) || empty($condition_fpage_title_expertise) ) {
+								if (
+									!isset($condition_fpage_title_expertise)
+									||
+									empty($condition_fpage_title_expertise)
+								) {
 
 									$condition_fpage_title_expertise = '[Conditions] Related to [Area of Expertise Title]'; // Title
 
 								}
 
-								if ( !isset($condition_fpage_intro_expertise) || empty($condition_fpage_intro_expertise) ) {
+								if (
+									!isset($condition_fpage_intro_expertise)
+									||
+									empty($condition_fpage_intro_expertise)
+								) {
 
 									$condition_fpage_intro_expertise = ''; // Intro text
 
@@ -7917,13 +8783,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 								}
 
-								if ( !isset($condition_fpage_title_expertise) || empty($condition_fpage_title_expertise) ) {
+								if (
+									!isset($condition_fpage_title_expertise)
+									||
+									empty($condition_fpage_title_expertise)
+								) {
 
 									$condition_fpage_title_expertise = $condition_fpage_title_general; // Title
 
 								}
 
-								if ( !isset($condition_fpage_intro_expertise) || empty($condition_fpage_intro_expertise) ) {
+								if (
+									!isset($condition_fpage_intro_expertise)
+									||
+									empty($condition_fpage_intro_expertise)
+								) {
 
 									$condition_fpage_intro_expertise = $condition_fpage_intro_general; // Intro text
 
@@ -7946,13 +8820,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// If the variable is not set or is empty...
 							// Get the Find-a-Doc Settings value for a treatments subpage/section in an area of expertise subsection
 
-								if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
+								if (
+									!isset($treatment_fpage_title_expertise)
+									||
+									empty($treatment_fpage_title_expertise)
+								) {
 
 									$treatment_fpage_title_expertise = get_field('treatments_fpage_title_expertise', 'option'); // Title
 
 								}
 
-								if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
+								if (
+									!isset($treatment_fpage_intro_expertise)
+									||
+									empty($treatment_fpage_intro_expertise)
+								) {
 
 									$treatment_fpage_intro_expertise = get_field('treatments_fpage_intro_expertise', 'option'); // Intro text
 
@@ -7961,13 +8843,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// If the variable is not set or is empty...
 							// Set a hardcoded fallback value
 
-								if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
+								if (
+									!isset($treatment_fpage_title_expertise)
+									||
+									empty($treatment_fpage_title_expertise)
+								) {
 
 									$treatment_fpage_title_expertise = '[Treatments] Related to [Area of Expertise Title]'; // Title
 
 								}
 
-								if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
+								if (
+									!isset($treatment_fpage_intro_expertise)
+									||
+									empty($treatment_fpage_intro_expertise)
+								) {
 
 									$treatment_fpage_intro_expertise = ''; // Intro text
 
@@ -7987,13 +8877,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 								}
 
-								if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
+								if (
+									!isset($treatment_fpage_title_expertise)
+									||
+									empty($treatment_fpage_title_expertise)
+								) {
 
 									$treatment_fpage_title_expertise = $treatment_fpage_title_general; // Title
 
 								}
 
-								if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
+								if (
+									!isset($treatment_fpage_intro_expertise)
+									||
+									empty($treatment_fpage_intro_expertise)
+								) {
 
 									$treatment_fpage_intro_expertise = $treatment_fpage_intro_general; // Intro text
 
@@ -8016,13 +8914,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for a combined conditions and treatments subpage/section in an area of expertise subsection
 
-							if ( !isset($condition_treatment_fpage_title_expertise) || empty($condition_treatment_fpage_title_expertise) ) {
+							if (
+								!isset($condition_treatment_fpage_title_expertise)
+								||
+								empty($condition_treatment_fpage_title_expertise)
+							) {
 
 								$condition_treatment_fpage_title_expertise = get_field('condition_treatment_fpage_title_expertise', 'option'); // Title
 
 							}
 
-							if ( !isset($condition_treatment_fpage_intro_expertise) || empty($condition_treatment_fpage_intro_expertise) ) {
+							if (
+								!isset($condition_treatment_fpage_intro_expertise)
+								||
+								empty($condition_treatment_fpage_intro_expertise)
+							) {
 
 								$condition_treatment_fpage_intro_expertise = get_field('condition_treatment_fpage_intro_expertise', 'option'); // Intro text
 
@@ -8031,13 +8937,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($condition_treatment_fpage_title_expertise) || empty($condition_treatment_fpage_title_expertise) ) {
+							if (
+								!isset($condition_treatment_fpage_title_expertise)
+								||
+								empty($condition_treatment_fpage_title_expertise)
+							) {
 
 								$condition_treatment_fpage_title_expertise = '[Conditions and Treatments] Related to [Area of Expertise Title]'; // Title
 
 							}
 
-							if ( !isset($condition_treatment_fpage_intro_expertise) || empty($condition_treatment_fpage_intro_expertise) ) {
+							if (
+								!isset($condition_treatment_fpage_intro_expertise)
+								||
+								empty($condition_treatment_fpage_intro_expertise)
+							) {
 
 								$condition_treatment_fpage_intro_expertise = ''; // Intro text
 
@@ -8058,7 +8972,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 							}
 
 							if (
-								!isset($condition_treatment_fpage_title_expertise) || empty($condition_treatment_fpage_title_expertise)
+								!isset($condition_treatment_fpage_title_expertise)
+								||
+								empty($condition_treatment_fpage_title_expertise)
 							) {
 
 								$condition_treatment_fpage_title_expertise = $condition_treatment_fpage_title_general; // Title
@@ -8066,7 +8982,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 							}
 
 							if (
-								!isset($condition_treatment_fpage_intro_expertise) || empty($condition_treatment_fpage_intro_expertise)
+								!isset($condition_treatment_fpage_intro_expertise)
+								||
+								empty($condition_treatment_fpage_intro_expertise)
 							) {
 
 								$condition_treatment_fpage_intro_expertise = $condition_treatment_fpage_intro_general; // Intro text
@@ -8192,31 +9110,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($provider_fpage_title_clinical_resource) || empty($provider_fpage_title_clinical_resource) ) {
+							if (
+								!isset($provider_fpage_title_clinical_resource)
+								||
+								empty($provider_fpage_title_clinical_resource)
+							) {
 
 								$provider_fpage_title_clinical_resource = ''; // Title
 
 							}
 
-							if ( !isset($provider_fpage_intro_clinical_resource) || empty($provider_fpage_intro_clinical_resource) ) {
+							if (
+								!isset($provider_fpage_intro_clinical_resource)
+								||
+								empty($provider_fpage_intro_clinical_resource)
+							) {
 
 								$provider_fpage_intro_clinical_resource = ''; // Intro text
 
 							}
 
-							if ( !isset($provider_fpage_ref_main_title_clinical_resource) || empty($provider_fpage_ref_main_title_clinical_resource) ) {
+							if (
+								!isset($provider_fpage_ref_main_title_clinical_resource)
+								||
+								empty($provider_fpage_ref_main_title_clinical_resource)
+							) {
 
 								$provider_fpage_ref_main_title_clinical_resource = ''; // Reference to the main provider archive, title
 
 							}
 
-							if ( !isset($provider_fpage_ref_main_intro_clinical_resource) || empty($provider_fpage_ref_main_intro_clinical_resource) ) {
+							if (
+								!isset($provider_fpage_ref_main_intro_clinical_resource)
+								||
+								empty($provider_fpage_ref_main_intro_clinical_resource)
+							) {
 
 								$provider_fpage_ref_main_intro_clinical_resource = ''; // Reference to the main provider archive, body text
 
 							}
 
-							if ( !isset($provider_fpage_ref_main_link_clinical_resource) || empty($provider_fpage_ref_main_link_clinical_resource) ) {
+							if (
+								!isset($provider_fpage_ref_main_link_clinical_resource)
+								||
+								empty($provider_fpage_ref_main_link_clinical_resource)
+							) {
 
 								$provider_fpage_ref_main_link_clinical_resource = ''; // Reference to the main provider archive, link text
 
@@ -8244,31 +9182,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($provider_fpage_title_clinical_resource) || empty($provider_fpage_title_clinical_resource) ) {
+							if (
+								!isset($provider_fpage_title_clinical_resource)
+								||
+								empty($provider_fpage_title_clinical_resource)
+							) {
 
 								$provider_fpage_title_clinical_resource = $provider_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($provider_fpage_intro_clinical_resource) || empty($provider_fpage_intro_clinical_resource) ) {
+							if (
+								!isset($provider_fpage_intro_clinical_resource)
+								||
+								empty($provider_fpage_intro_clinical_resource)
+							) {
 
 								$provider_fpage_intro_clinical_resource = $provider_fpage_intro_general; // Intro text
 
 							}
 
-							if ( !isset($provider_fpage_ref_main_title_clinical_resource) || empty($provider_fpage_ref_main_title_clinical_resource) ) {
+							if (
+								!isset($provider_fpage_ref_main_title_clinical_resource)
+								||
+								empty($provider_fpage_ref_main_title_clinical_resource)
+							) {
 
 								$provider_fpage_ref_main_title_clinical_resource = $provider_fpage_ref_main_title_general; // Reference to the main provider archive, title
 
 							}
 
-							if ( !isset($provider_fpage_ref_main_intro_clinical_resource) || empty($provider_fpage_ref_main_intro_clinical_resource) ) {
+							if (
+								!isset($provider_fpage_ref_main_intro_clinical_resource)
+								||
+								empty($provider_fpage_ref_main_intro_clinical_resource)
+							) {
 
 								$provider_fpage_ref_main_intro_clinical_resource = $provider_fpage_ref_main_intro_general; // Reference to the main provider archive, body text
 
 							}
 
-							if ( !isset($provider_fpage_ref_main_link_clinical_resource) || empty($provider_fpage_ref_main_link_clinical_resource) ) {
+							if (
+								!isset($provider_fpage_ref_main_link_clinical_resource)
+								||
+								empty($provider_fpage_ref_main_link_clinical_resource)
+							) {
 
 								$provider_fpage_ref_main_link_clinical_resource = $provider_fpage_ref_main_link_general; // Reference to the main provider archive, link text
 
@@ -8293,31 +9251,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($location_fpage_title_clinical_resource) || empty($location_fpage_title_clinical_resource) ) {
+							if (
+								!isset($location_fpage_title_clinical_resource)
+								||
+								empty($location_fpage_title_clinical_resource)
+							) {
 
 								$location_fpage_title_clinical_resource = ''; // Title
 
 							}
 
-							if ( !isset($location_fpage_intro_clinical_resource) || empty($location_fpage_intro_clinical_resource) ) {
+							if (
+								!isset($location_fpage_intro_clinical_resource)
+								||
+								empty($location_fpage_intro_clinical_resource)
+							) {
 
 								$location_fpage_intro_clinical_resource = ''; // Intro text
 
 							}
 
-							if ( !isset($location_fpage_ref_main_title_clinical_resource) || empty($location_fpage_ref_main_title_clinical_resource) ) {
+							if (
+								!isset($location_fpage_ref_main_title_clinical_resource)
+								||
+								empty($location_fpage_ref_main_title_clinical_resource)
+							) {
 
 								$location_fpage_ref_main_title_clinical_resource = ''; // Reference to the main location archive, title
 
 							}
 
-							if ( !isset($location_fpage_ref_main_intro_clinical_resource) || empty($location_fpage_ref_main_intro_clinical_resource) ) {
+							if (
+								!isset($location_fpage_ref_main_intro_clinical_resource)
+								||
+								empty($location_fpage_ref_main_intro_clinical_resource)
+							) {
 
 								$location_fpage_ref_main_intro_clinical_resource = ''; // Reference to the main location archive, body text
 
 							}
 
-							if ( !isset($location_fpage_ref_main_link_clinical_resource) || empty($location_fpage_ref_main_link_clinical_resource) ) {
+							if (
+								!isset($location_fpage_ref_main_link_clinical_resource)
+								||
+								empty($location_fpage_ref_main_link_clinical_resource)
+							) {
 
 								$location_fpage_ref_main_link_clinical_resource = ''; // Reference to the main location archive, link text
 
@@ -8345,31 +9323,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($location_fpage_title_clinical_resource) || empty($location_fpage_title_clinical_resource) ) {
+							if (
+								!isset($location_fpage_title_clinical_resource)
+								||
+								empty($location_fpage_title_clinical_resource)
+							) {
 
 								$location_fpage_title_clinical_resource = $location_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($location_fpage_intro_clinical_resource) || empty($location_fpage_intro_clinical_resource) ) {
+							if (
+								!isset($location_fpage_intro_clinical_resource)
+								||
+								empty($location_fpage_intro_clinical_resource)
+							) {
 
 								$location_fpage_intro_clinical_resource = $location_fpage_intro_general; // Intro text
 
 							}
 
-							if ( !isset($location_fpage_ref_main_title_clinical_resource) || empty($location_fpage_ref_main_title_clinical_resource) ) {
+							if (
+								!isset($location_fpage_ref_main_title_clinical_resource)
+								||
+								empty($location_fpage_ref_main_title_clinical_resource)
+							) {
 
 								$location_fpage_ref_main_title_clinical_resource = $location_fpage_ref_main_title_general; // Reference to the main location archive, title
 
 							}
 
-							if ( !isset($location_fpage_ref_main_intro_clinical_resource) || empty($location_fpage_ref_main_intro_clinical_resource) ) {
+							if (
+								!isset($location_fpage_ref_main_intro_clinical_resource)
+								||
+								empty($location_fpage_ref_main_intro_clinical_resource)
+							) {
 
 								$location_fpage_ref_main_intro_clinical_resource = $location_fpage_ref_main_intro_general; // Reference to the main location archive, body text
 
 							}
 
-							if ( !isset($location_fpage_ref_main_link_clinical_resource) || empty($location_fpage_ref_main_link_clinical_resource) ) {
+							if (
+								!isset($location_fpage_ref_main_link_clinical_resource)
+								||
+								empty($location_fpage_ref_main_link_clinical_resource)
+							) {
 
 								$location_fpage_ref_main_link_clinical_resource = $location_fpage_ref_main_link_general; // Reference to the main location archive, link text
 
@@ -8394,31 +9392,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($expertise_fpage_title_clinical_resource) || empty($expertise_fpage_title_clinical_resource) ) {
+							if (
+								!isset($expertise_fpage_title_clinical_resource)
+								||
+								empty($expertise_fpage_title_clinical_resource)
+							) {
 
 								$expertise_fpage_title_clinical_resource = ''; // Title
 
 							}
 
-							if ( !isset($expertise_fpage_intro_clinical_resource) || empty($expertise_fpage_intro_clinical_resource) ) {
+							if (
+								!isset($expertise_fpage_intro_clinical_resource)
+								||
+								empty($expertise_fpage_intro_clinical_resource)
+							) {
 
 								$expertise_fpage_intro_clinical_resource = ''; // Intro text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_title_clinical_resource) || empty($expertise_fpage_ref_main_title_clinical_resource) ) {
+							if (
+								!isset($expertise_fpage_ref_main_title_clinical_resource)
+								||
+								empty($expertise_fpage_ref_main_title_clinical_resource)
+							) {
 
 								$expertise_fpage_ref_main_title_clinical_resource = ''; // Reference to the main area of expertise archive, title
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_intro_clinical_resource) || empty($expertise_fpage_ref_main_intro_clinical_resource) ) {
+							if (
+								!isset($expertise_fpage_ref_main_intro_clinical_resource)
+								||
+								empty($expertise_fpage_ref_main_intro_clinical_resource)
+							) {
 
 								$expertise_fpage_ref_main_intro_clinical_resource = ''; // Reference to the main area of expertise archive, body text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_link_clinical_resource) || empty($expertise_fpage_ref_main_link_clinical_resource) ) {
+							if (
+								!isset($expertise_fpage_ref_main_link_clinical_resource)
+								||
+								empty($expertise_fpage_ref_main_link_clinical_resource)
+							) {
 
 								$expertise_fpage_ref_main_link_clinical_resource = ''; // Reference to the main area of expertise archive, link text
 
@@ -8446,31 +9464,51 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($expertise_fpage_title_clinical_resource) || empty($expertise_fpage_title_clinical_resource) ) {
+							if (
+								!isset($expertise_fpage_title_clinical_resource)
+								||
+								empty($expertise_fpage_title_clinical_resource)
+							) {
 
 								$expertise_fpage_title_clinical_resource = $expertise_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($expertise_fpage_intro_clinical_resource) || empty($expertise_fpage_intro_clinical_resource) ) {
+							if (
+								!isset($expertise_fpage_intro_clinical_resource)
+								||
+								empty($expertise_fpage_intro_clinical_resource)
+							) {
 
 								$expertise_fpage_intro_clinical_resource = $expertise_fpage_intro_general; // Intro text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_title_clinical_resource) || empty($expertise_fpage_ref_main_title_clinical_resource) ) {
+							if (
+								!isset($expertise_fpage_ref_main_title_clinical_resource)
+								||
+								empty($expertise_fpage_ref_main_title_clinical_resource)
+							) {
 
 								$expertise_fpage_ref_main_title_clinical_resource = $expertise_fpage_ref_main_title_general; // Reference to the main area of expertise archive, title
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_intro_clinical_resource) || empty($expertise_fpage_ref_main_intro_clinical_resource) ) {
+							if (
+								!isset($expertise_fpage_ref_main_intro_clinical_resource)
+								||
+								empty($expertise_fpage_ref_main_intro_clinical_resource)
+							) {
 
 								$expertise_fpage_ref_main_intro_clinical_resource = $expertise_fpage_ref_main_intro_general; // Reference to the main area of expertise archive, body text
 
 							}
 
-							if ( !isset($expertise_fpage_ref_main_link_clinical_resource) || empty($expertise_fpage_ref_main_link_clinical_resource) ) {
+							if (
+								!isset($expertise_fpage_ref_main_link_clinical_resource)
+								||
+								empty($expertise_fpage_ref_main_link_clinical_resource)
+							) {
 
 								$expertise_fpage_ref_main_link_clinical_resource = $expertise_fpage_ref_main_link_general; // Reference to the main area of expertise archive, link text
 
@@ -8498,49 +9536,81 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($clinical_resource_fpage_title_clinical_resource) || empty($clinical_resource_fpage_title_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_title_clinical_resource)
+								||
+								empty($clinical_resource_fpage_title_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_title_clinical_resource = ''; // Title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_intro_clinical_resource) || empty($clinical_resource_fpage_intro_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_intro_clinical_resource)
+								||
+								empty($clinical_resource_fpage_intro_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_intro_clinical_resource = ''; // Intro text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_title_clinical_resource) || empty($clinical_resource_fpage_ref_main_title_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_title_clinical_resource)
+								||
+								empty($clinical_resource_fpage_ref_main_title_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_ref_main_title_clinical_resource = ''; // Reference to the main clinical resource archive, title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_intro_clinical_resource) || empty($clinical_resource_fpage_ref_main_intro_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_intro_clinical_resource)
+								||
+								empty($clinical_resource_fpage_ref_main_intro_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_ref_main_intro_clinical_resource = ''; // Reference to the main clinical resource archive, body text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_link_clinical_resource) || empty($clinical_resource_fpage_ref_main_link_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_link_clinical_resource)
+								||
+								empty($clinical_resource_fpage_ref_main_link_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_ref_main_link_clinical_resource = ''; // Reference to the main clinical resource archive, link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_text_clinical_resource) || empty($clinical_resource_fpage_more_text_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_more_text_clinical_resource)
+								||
+								empty($clinical_resource_fpage_more_text_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_more_text_clinical_resource = ''; // "More" intro text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_link_text_clinical_resource) || empty($clinical_resource_fpage_more_link_text_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_more_link_text_clinical_resource)
+								||
+								empty($clinical_resource_fpage_more_link_text_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_more_link_text_clinical_resource = ''; // "More" link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_link_descr_clinical_resource) || empty($clinical_resource_fpage_more_link_descr_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_more_link_descr_clinical_resource)
+								||
+								empty($clinical_resource_fpage_more_link_descr_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_more_link_descr_clinical_resource = ''; // "More" link description
 
@@ -8574,49 +9644,81 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($clinical_resource_fpage_title_clinical_resource) || empty($clinical_resource_fpage_title_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_title_clinical_resource)
+								||
+								empty($clinical_resource_fpage_title_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_title_clinical_resource = $clinical_resource_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_intro_clinical_resource) || empty($clinical_resource_fpage_intro_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_intro_clinical_resource)
+								||
+								empty($clinical_resource_fpage_intro_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_intro_clinical_resource = $clinical_resource_fpage_intro_general; // Intro text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_title_clinical_resource) || empty($clinical_resource_fpage_ref_main_title_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_title_clinical_resource)
+								||
+								empty($clinical_resource_fpage_ref_main_title_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_ref_main_title_clinical_resource = $clinical_resource_fpage_ref_main_title_general; // Reference to the main clinical resource archive, title
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_intro_clinical_resource) || empty($clinical_resource_fpage_ref_main_intro_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_intro_clinical_resource)
+								||
+								empty($clinical_resource_fpage_ref_main_intro_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_ref_main_intro_clinical_resource = $clinical_resource_fpage_ref_main_intro_general; // Reference to the main clinical resource archive, body text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_ref_main_link_clinical_resource) || empty($clinical_resource_fpage_ref_main_link_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_ref_main_link_clinical_resource)
+								||
+								empty($clinical_resource_fpage_ref_main_link_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_ref_main_link_clinical_resource = $clinical_resource_fpage_ref_main_link_general; // Reference to the main clinical resource archive, link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_text_clinical_resource) || empty($clinical_resource_fpage_more_text_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_more_text_clinical_resource)
+								||
+								empty($clinical_resource_fpage_more_text_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_more_text_clinical_resource = $clinical_resource_fpage_more_text_general; // "More" intro text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_link_text_clinical_resource) || empty($clinical_resource_fpage_more_link_text_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_more_link_text_clinical_resource)
+								||
+								empty($clinical_resource_fpage_more_link_text_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_more_link_text_clinical_resource = $clinical_resource_fpage_more_link_text_general; // "More" link text
 
 							}
 
-							if ( !isset($clinical_resource_fpage_more_link_descr_clinical_resource) || empty($clinical_resource_fpage_more_link_descr_clinical_resource) ) {
+							if (
+								!isset($clinical_resource_fpage_more_link_descr_clinical_resource)
+								||
+								empty($clinical_resource_fpage_more_link_descr_clinical_resource)
+							) {
 
 								$clinical_resource_fpage_more_link_descr_clinical_resource = $clinical_resource_fpage_more_link_descr_general; // "More" link description
 
@@ -8641,13 +9743,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($condition_fpage_title_clinical_resource) || empty($condition_fpage_title_clinical_resource) ) {
+							if (
+								!isset($condition_fpage_title_clinical_resource)
+								||
+								empty($condition_fpage_title_clinical_resource)
+							) {
 
 								$condition_fpage_title_clinical_resource = ''; // Title
 
 							}
 
-							if ( !isset($condition_fpage_intro_clinical_resource) || empty($condition_fpage_intro_clinical_resource) ) {
+							if (
+								!isset($condition_fpage_intro_clinical_resource)
+								||
+								empty($condition_fpage_intro_clinical_resource)
+							) {
 
 								$condition_fpage_intro_clinical_resource = ''; // Intro text
 
@@ -8667,13 +9777,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($condition_fpage_title_clinical_resource) || empty($condition_fpage_title_clinical_resource) ) {
+							if (
+								!isset($condition_fpage_title_clinical_resource)
+								||
+								empty($condition_fpage_title_clinical_resource)
+							) {
 
 								$condition_fpage_title_clinical_resource = $condition_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($condition_fpage_intro_clinical_resource) || empty($condition_fpage_intro_clinical_resource) ) {
+							if (
+								!isset($condition_fpage_intro_clinical_resource)
+								||
+								empty($condition_fpage_intro_clinical_resource)
+							) {
 
 								$condition_fpage_intro_clinical_resource = $condition_fpage_intro_general; // Intro text
 
@@ -8692,13 +9810,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($treatment_fpage_title_clinical_resource) || empty($treatment_fpage_title_clinical_resource) ) {
+							if (
+								!isset($treatment_fpage_title_clinical_resource)
+								||
+								empty($treatment_fpage_title_clinical_resource)
+							) {
 
 								$treatment_fpage_title_clinical_resource = ''; // Title
 
 							}
 
-							if ( !isset($treatment_fpage_intro_clinical_resource) || empty($treatment_fpage_intro_clinical_resource) ) {
+							if (
+								!isset($treatment_fpage_intro_clinical_resource)
+								||
+								empty($treatment_fpage_intro_clinical_resource)
+							) {
 
 								$treatment_fpage_intro_clinical_resource = ''; // Intro text
 
@@ -8718,13 +9844,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
-							if ( !isset($treatment_fpage_title_clinical_resource) || empty($treatment_fpage_title_clinical_resource) ) {
+							if (
+								!isset($treatment_fpage_title_clinical_resource)
+								||
+								empty($treatment_fpage_title_clinical_resource)
+							) {
 
 								$treatment_fpage_title_clinical_resource = $treatment_fpage_title_general; // Title
 
 							}
 
-							if ( !isset($treatment_fpage_intro_clinical_resource) || empty($treatment_fpage_intro_clinical_resource) ) {
+							if (
+								!isset($treatment_fpage_intro_clinical_resource)
+								||
+								empty($treatment_fpage_intro_clinical_resource)
+							) {
 
 								$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_general; // Intro text
 
@@ -8743,13 +9877,21 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Set a hardcoded fallback value
 
-							if ( !isset($condition_treatment_fpage_title_clinical_resource) || empty($condition_treatment_fpage_title_clinical_resource) ) {
+							if (
+								!isset($condition_treatment_fpage_title_clinical_resource)
+								||
+								empty($condition_treatment_fpage_title_clinical_resource)
+							) {
 
 								$condition_treatment_fpage_title_clinical_resource = ''; // Title
 
 							}
 
-							if ( !isset($condition_treatment_fpage_intro_clinical_resource) || empty($condition_treatment_fpage_intro_clinical_resource) ) {
+							if (
+								!isset($condition_treatment_fpage_intro_clinical_resource)
+								||
+								empty($condition_treatment_fpage_intro_clinical_resource)
+							) {
 
 								$condition_treatment_fpage_intro_clinical_resource = ''; // Intro text
 
@@ -8770,7 +9912,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 							}
 
 							if (
-								!isset($condition_treatment_fpage_title_clinical_resource) || empty($condition_treatment_fpage_title_clinical_resource)
+								!isset($condition_treatment_fpage_title_clinical_resource)
+								||
+								empty($condition_treatment_fpage_title_clinical_resource)
 							) {
 
 								$condition_treatment_fpage_title_clinical_resource = $condition_treatment_fpage_title_general; // Title
@@ -8778,7 +9922,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 							}
 
 							if (
-								!isset($condition_treatment_fpage_intro_clinical_resource) || empty($condition_treatment_fpage_intro_clinical_resource)
+								!isset($condition_treatment_fpage_intro_clinical_resource)
+								||
+								empty($condition_treatment_fpage_intro_clinical_resource)
 							) {
 
 								$condition_treatment_fpage_intro_clinical_resource = $condition_treatment_fpage_intro_general; // Intro text
@@ -9340,7 +10486,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($location_fpage_image_provider) || empty($location_fpage_image_provider) ) {
+						if (
+							!isset($location_fpage_image_provider)
+							||
+							empty($location_fpage_image_provider)
+						) {
 
 							// System settings for image elements in general placements of location fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/location.php' );
@@ -9357,7 +10507,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($expertise_fpage_image_provider) || empty($expertise_fpage_image_provider) ) {
+						if (
+							!isset($expertise_fpage_image_provider)
+							||
+							empty($expertise_fpage_image_provider)
+						) {
 
 							// System settings for image elements in general placements of area of expertise fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/expertise.php' );
@@ -9374,7 +10528,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($clinical_resource_fpage_image_provider) || empty($clinical_resource_fpage_image_provider) ) {
+						if (
+							!isset($clinical_resource_fpage_image_provider)
+							||
+							empty($clinical_resource_fpage_image_provider)
+						) {
 
 							// System settings for image elements in general placements of clinical resource fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/clinical-resource.php' );
@@ -9440,7 +10598,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($provider_fpage_image_location) || empty($provider_fpage_image_location) ) {
+						if (
+							!isset($provider_fpage_image_location)
+							||
+							empty($provider_fpage_image_location)
+						) {
 
 							// System settings for image elements in general placements of provider fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/provider.php' );
@@ -9457,7 +10619,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($location_descendant_fpage_image_location) || empty($location_descendant_fpage_image_location) ) {
+						if (
+							!isset($location_descendant_fpage_image_location)
+							||
+							empty($location_descendant_fpage_image_location)
+						) {
 
 							// System settings for image elements in general placements of location fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/location.php' );
@@ -9474,7 +10640,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($expertise_fpage_image_location) || empty($expertise_fpage_image_location) ) {
+						if (
+							!isset($expertise_fpage_image_location)
+							||
+							empty($expertise_fpage_image_location)
+						) {
 
 							// System settings for image elements in general placements of area of expertise fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/expertise.php' );
@@ -9491,7 +10661,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($clinical_resource_fpage_image_location) || empty($clinical_resource_fpage_image_location) ) {
+						if (
+							!isset($clinical_resource_fpage_image_location)
+							||
+							empty($clinical_resource_fpage_image_location)
+						) {
 
 							// System settings for image elements in general placements of clinical resource fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/clinical-resource.php' );
@@ -9557,7 +10731,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Crop/resize the image
 
-						if ( $expertise_featured_image && function_exists( 'fly_add_image_size' ) ) {
+						if (
+							$expertise_featured_image
+							&&
+							function_exists( 'fly_add_image_size' )
+						) {
 
 							$expertise_featured_image_url = image_sizer($expertise_featured_image, 1600, 900, 'center', 'center');
 
@@ -9579,7 +10757,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile in an Area of Expertise subsection (or profile)
 
-						if ( !isset($provider_fpage_featured_image_expertise) || empty($provider_fpage_featured_image_expertise) ) {
+						if (
+							!isset($provider_fpage_featured_image_expertise)
+							||
+							empty($provider_fpage_featured_image_expertise)
+						) {
 
 							$provider_fpage_featured_image_expertise = get_field('provider_fpage_featured_image_expertise', 'option');
 
@@ -9588,7 +10770,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($provider_fpage_featured_image_expertise) || empty($provider_fpage_featured_image_expertise) ) {
+						if (
+							!isset($provider_fpage_featured_image_expertise)
+							||
+							empty($provider_fpage_featured_image_expertise)
+						) {
 
 							// System settings for image elements in general placements of provider fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/provider.php' );
@@ -9599,7 +10785,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Crop/resize the image
 
-						if ( $provider_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+						if (
+							$provider_fpage_featured_image_expertise
+							&&
+							function_exists( 'fly_add_image_size' )
+						) {
 
 							$provider_fpage_featured_image_expertise_url = image_sizer($provider_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
 
@@ -9621,7 +10811,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile in an Area of Expertise subsection (or profile)
 
-						if ( !isset($location_fpage_featured_image_expertise) || empty($location_fpage_featured_image_expertise) ) {
+						if (
+							!isset($location_fpage_featured_image_expertise)
+							||
+							empty($location_fpage_featured_image_expertise)
+						) {
 
 							$location_fpage_featured_image_expertise = get_field('location_fpage_featured_image_expertise', 'option');
 
@@ -9630,7 +10824,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($location_fpage_featured_image_expertise) || empty($location_fpage_featured_image_expertise) ) {
+						if (
+							!isset($location_fpage_featured_image_expertise)
+							||
+							empty($location_fpage_featured_image_expertise)
+						) {
 
 							// System settings for image elements in general placements of location fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/location.php' );
@@ -9641,7 +10839,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Crop/resize the image
 
-						if ( $location_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+						if (
+							$location_fpage_featured_image_expertise
+							&&
+							function_exists( 'fly_add_image_size' )
+						) {
 
 							$location_fpage_featured_image_expertise_url = image_sizer($location_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
 
@@ -9663,7 +10865,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Area of Expertise subsection (or profile)
 
-						if ( !isset($expertise_fpage_featured_image_expertise) || empty($expertise_fpage_featured_image_expertise) ) {
+						if (
+							!isset($expertise_fpage_featured_image_expertise)
+							||
+							empty($expertise_fpage_featured_image_expertise)
+						) {
 
 							$expertise_fpage_featured_image_expertise = get_field('expertise_fpage_featured_image_expertise', 'option');
 
@@ -9672,7 +10878,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($expertise_fpage_featured_image_expertise) || empty($expertise_fpage_featured_image_expertise) ) {
+						if (
+							!isset($expertise_fpage_featured_image_expertise)
+							||
+							empty($expertise_fpage_featured_image_expertise)
+						) {
 
 							// System settings for image elements in general placements of area of expertise fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/expertise.php' );
@@ -9683,7 +10893,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Crop/resize the image
 
-						if ( $expertise_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+						if (
+							$expertise_fpage_featured_image_expertise
+							&&
+							function_exists( 'fly_add_image_size' )
+						) {
 
 							$expertise_fpage_featured_image_expertise_url = image_sizer($expertise_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
 
@@ -9705,7 +10919,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Area of Expertise subsection (or profile)
 
-						if ( !isset($expertise_descendant_fpage_featured_image_expertise) || empty($expertise_descendant_fpage_featured_image_expertise) ) {
+						if (
+							!isset($expertise_descendant_fpage_featured_image_expertise)
+							||
+							empty($expertise_descendant_fpage_featured_image_expertise)
+						) {
 
 							$expertise_descendant_fpage_featured_image_expertise = get_field('expertise_descendant_fpage_featured_image_expertise', 'option');
 
@@ -9714,7 +10932,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($expertise_descendant_fpage_featured_image_expertise) || empty($expertise_descendant_fpage_featured_image_expertise) ) {
+						if (
+							!isset($expertise_descendant_fpage_featured_image_expertise)
+							||
+							empty($expertise_descendant_fpage_featured_image_expertise)
+						) {
 
 							// System settings for image elements in general placements of area of expertise fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/expertise.php' );
@@ -9725,7 +10947,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Crop/resize the image
 
-						if ( $expertise_descendant_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+						if (
+							$expertise_descendant_fpage_featured_image_expertise
+							&&
+							function_exists( 'fly_add_image_size' )
+						) {
 
 							$expertise_descendant_fpage_featured_image_expertise_url = image_sizer($expertise_descendant_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
 
@@ -9747,7 +10973,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Area of Expertise subsection (or profile)
 
-						if ( !isset($clinical_resource_fpage_featured_image_expertise) || empty($clinical_resource_fpage_featured_image_expertise) ) {
+						if (
+							!isset($clinical_resource_fpage_featured_image_expertise)
+							||
+							empty($clinical_resource_fpage_featured_image_expertise)
+						) {
 
 							$expertise_descendant_fpage_featured_image_expertise = get_field('clinical_resource_fpage_featured_image_expertise', 'option');
 
@@ -9756,7 +10986,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($clinical_resource_fpage_featured_image_expertise) || empty($clinical_resource_fpage_featured_image_expertise) ) {
+						if (
+							!isset($clinical_resource_fpage_featured_image_expertise)
+							||
+							empty($clinical_resource_fpage_featured_image_expertise)
+						) {
 
 							// System settings for image elements in general placements of clinical resource fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/clinical-resource.php' );
@@ -9767,7 +11001,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Crop/resize the image
 
-						if ( $clinical_resource_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+						if (
+							$clinical_resource_fpage_featured_image_expertise
+							&&
+							function_exists( 'fly_add_image_size' )
+						) {
 
 							$clinical_resource_fpage_featured_image_expertise_url = image_sizer($clinical_resource_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
 
@@ -9847,7 +11085,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($provider_fpage_image_clinical_resource) || empty($provider_fpage_image_clinical_resource) ) {
+						if (
+							!isset($provider_fpage_image_clinical_resource)
+							||
+							empty($provider_fpage_image_clinical_resource)
+						) {
 
 							// System settings for image elements in general placements of provider fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/provider.php' );
@@ -9864,7 +11106,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($location_fpage_image_clinical_resource) || empty($location_fpage_image_clinical_resource) ) {
+						if (
+							!isset($location_fpage_image_clinical_resource)
+							||
+							empty($location_fpage_image_clinical_resource)
+						) {
 
 							// System settings for image elements in general placements of location fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/location.php' );
@@ -9881,7 +11127,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($expertise_fpage_image_clinical_resource) || empty($expertise_fpage_image_clinical_resource) ) {
+						if (
+							!isset($expertise_fpage_image_clinical_resource)
+							||
+							empty($expertise_fpage_image_clinical_resource)
+						) {
 
 							// System settings for image elements in general placements of area of expertise fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/expertise.php' );
@@ -9898,7 +11148,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 
-						if ( !isset($clinical_resource_fpage_image_clinical_resource) || empty($clinical_resource_fpage_image_clinical_resource) ) {
+						if (
+							!isset($clinical_resource_fpage_image_clinical_resource)
+							||
+							empty($clinical_resource_fpage_image_clinical_resource)
+						) {
 
 							// System settings for image elements in general placements of clinical resource fake subpages (or sections)
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/clinical-resource.php' );
@@ -10317,7 +11571,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 			// https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image
 			$image_size['twitter'] = array( 'width' => 1600, 'height' => 838 );
 
-			if ( $featured_image && function_exists( 'fly_add_image_size' ) ) {
+			if (
+				$featured_image
+				&&
+				function_exists( 'fly_add_image_size' )
+			) {
 
 				$meta_og_image = image_sizer($featured_image, $image_size['opengraph']['width'], $image_size['opengraph']['height'], 'center', 'center');
 				$meta_og_image_width = $image_size['opengraph']['width'];
@@ -10386,7 +11644,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 			function array_is_list(array $array): bool {
 
-				if (empty($array)) {
+				if ( empty($array) ) {
 
 					return true;
 
@@ -10396,7 +11654,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				foreach ($array as $key => $noop) {
 
-					if ($key !== $current_key) {
+					if ( $key !== $current_key ) {
 
 						return false;
 
@@ -10708,7 +11966,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 					$text_image_overlay_row_1 = $main_archive; // Values for the second item
 
 				} elseif (
-					isset($main_archive) && !empty($main_archive)
+					isset($main_archive)
+					&&
+					!empty($main_archive)
 				) {
 
 					$text_image_overlay_row_0 = $main_archive; // Values for the first item
@@ -10786,7 +12046,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				$function = isset($function) ? $function : '';
 
-				if (substr($function, 0, strlen(UAMS_FAD_TRANSIENT_PREFIX)) == UAMS_FAD_TRANSIENT_PREFIX) {
+				if ( substr($function, 0, strlen(UAMS_FAD_TRANSIENT_PREFIX)) == UAMS_FAD_TRANSIENT_PREFIX ) {
 
 					$function = substr( $function, strlen(UAMS_FAD_TRANSIENT_PREFIX) );
 
