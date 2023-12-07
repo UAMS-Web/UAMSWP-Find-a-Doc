@@ -78,8 +78,8 @@ $location_hours_modified_active_end = '';
 if ( $location_hours_variable_query ) {
 
 	/**
-		* If the location's hours vary...
-		*/
+	 * If the location's hours vary...
+	 */
 
 	echo '<h2>Hours Vary</h2>';
 	echo $location_hours_variable_info;
@@ -87,16 +87,16 @@ if ( $location_hours_variable_query ) {
 } else {
 
 	/**
-		* If the location's hours do not vary...
-		*/
+	 * If the location's hours do not vary...
+	 */
 
 	// Begin Modified Hours Logic
 
 		if ( $location_hours_modified_query ) {
 
 			/**
-				* If there are upcoming modified hours...
-				*/
+			 * If there are upcoming modified hours...
+			 */
 
 			$item_day = ''; // Previous Day
 			$item_comment = ''; // Comment on previous day
@@ -136,8 +136,8 @@ if ( $location_hours_variable_query ) {
 					if ( $location_hours_modified ) {
 
 						/**
-							* If the Modified Hours repeater has at least one row...
-							*/
+						 * If the Modified Hours repeater has at least one row...
+						 */
 
 						// Loop through the Modified Hours repeater rows
 
@@ -186,16 +186,16 @@ if ( $location_hours_variable_query ) {
 										if ( !$location_hours_modified_end_query ) {
 
 											/**
-												* If the current loop has no modified hours end date...
-												*/
+											 * If the current loop has no modified hours end date...
+											 */
 
 											$location_hours_modified_active_end = 'TBD';
 
 										} else {
 
 											/**
-												* Else if the current loop has a modified hours end date...
-												*/
+											 * Else if the current loop has a modified hours end date...
+											 */
 
 											$location_hours_modified_active_end = strtotime($location_hours_modified_end_date);
 
@@ -206,8 +206,8 @@ if ( $location_hours_variable_query ) {
 									if ( $item_24_7_query ) {
 
 										/**
-											* If the modified hours are 24/7...
-											*/
+										 * If the modified hours are 24/7...
+										 */
 
 										$location_hours_modified_text .= '<strong>Open 24/7</strong>';
 
@@ -245,8 +245,8 @@ if ( $location_hours_variable_query ) {
 											// Google method: Loop through all the days defined in the current Hours repeater row separately
 
 												/**
-													* As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-													*/
+												 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+												 */
 
 												foreach ( $schema_dayOfWeek as $day ) {
 
@@ -264,8 +264,8 @@ if ( $location_hours_variable_query ) {
 								} else {
 
 									/**
-										* If the modified hours are not 24/7...
-										*/
+									 * If the modified hours are not 24/7...
+									 */
 
 									if (
 										is_array($item_times)
@@ -369,8 +369,8 @@ if ( $location_hours_variable_query ) {
 														// Google method: Loop through all the days defined in the current Hours repeater row separately
 
 															/**
-																* As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-																*/
+															 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+															 */
 
 															foreach ( $schema_dayOfWeek as $day) {
 
@@ -422,18 +422,18 @@ if ( $location_hours_variable_query ) {
 		) {
 
 			/**
-				* If the modified hours are the current hours for at least the next 30 days...
-				*
-				* Do not display the typical hours
-				*/
+			 * If the modified hours are the current hours for at least the next 30 days...
+			 *
+			 * Do not display the typical hours
+			 */
 
 		} else {
 
 			/**
-				* If the modified hours end within 30 days or if they haven't started yet...
-				*
-				* Display the typical hours
-				*/
+			 * If the modified hours end within 30 days or if they haven't started yet...
+			 *
+			 * Display the typical hours
+			 */
 
 			// Schema Data
 
@@ -453,8 +453,8 @@ if ( $location_hours_variable_query ) {
 				// Google method: OpeningHoursSpecification Schema Data
 
 					/**
-						* As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-						*/
+					 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+					 */
 
 					// Check/define/reset schema data variables
 
@@ -470,9 +470,9 @@ if ( $location_hours_variable_query ) {
 			) {
 
 				/**
-					* If the location is typically available 24/7
-					* or if typical daily hours have been set...
-					*/
+				 * If the location is typically available 24/7
+				 * or if typical daily hours have been set...
+				 */
 
 				?>
 				<h2><?php echo $location_hours_modified_text ? 'Typical ' : ''; ?>Hours</h2>
@@ -481,8 +481,8 @@ if ( $location_hours_variable_query ) {
 				if ( $location_hours_24_7_query ) {
 
 					/**
-						* If the location is typically available 24/7...
-						*/
+					 * If the location is typically available 24/7...
+					 */
 
 					echo '<strong>Open 24/7</strong>';
 
@@ -512,8 +512,8 @@ if ( $location_hours_variable_query ) {
 						// Google method: OpeningHoursSpecification Schema Data
 
 							/**
-								* As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-								*/
+							 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+							 */
 
 							// Define schema data variables
 
@@ -539,16 +539,16 @@ if ( $location_hours_variable_query ) {
 				} else {
 
 					/**
-						* If typical daily hours have been set...
-						*/
+					 * If typical daily hours have been set...
+					 */
 
 					echo '<dl class="hours">';
 
 					if ( $location_hours_repeater ) {
 
 						/**
-							* If the Typical Hours repeater has at least one row...
-							*/
+						 * If the Typical Hours repeater has at least one row...
+						 */
 
 						$hours_text = ''; // Definition term and definition description tag set
 						$day = ''; // Previous Day
@@ -560,8 +560,8 @@ if ( $location_hours_variable_query ) {
 							foreach ( $location_hours_repeater as $hour ) {
 
 								/**
-									* openingHours Schema Data for Typical Hours That Are 24/7
-									*/
+								 * openingHours Schema Data for Typical Hours That Are 24/7
+								 */
 
 								// Schema Data
 
@@ -580,8 +580,8 @@ if ( $location_hours_variable_query ) {
 									// Google method: OpeningHoursSpecification Schema Data
 
 										/**
-											* As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-											*/
+										 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+										 */
 
 										// Define/reset schema data variables
 
@@ -592,14 +592,14 @@ if ( $location_hours_variable_query ) {
 								if ( $day !== $hour['day'] ) {
 
 									/**
-										* If the current repeater row's day does not match the previous repeater row's day...
-										*/
+									 * If the current repeater row's day does not match the previous repeater row's day...
+									 */
 
 									// Definition term and definition description tag set
 
 										/**
-											* Write a new definition term element with the current repeater row's day
-											*/
+										 * Write a new definition term element with the current repeater row's day
+										 */
 
 										$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
 
@@ -608,8 +608,8 @@ if ( $location_hours_variable_query ) {
 								// Definition term and definition description tag set
 
 									/**
-										* Open a definition description tag
-										*/
+									 * Open a definition description tag
+									 */
 
 									$hours_text .= '<dd>';
 
@@ -632,8 +632,8 @@ if ( $location_hours_variable_query ) {
 										// Google method: OpeningHoursSpecification Schema Data
 
 											/**
-												* As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-												*/
+											 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+											 */
 
 											// Define schema data variables
 
@@ -659,8 +659,8 @@ if ( $location_hours_variable_query ) {
 										// Google method: OpeningHoursSpecification Schema Data
 
 											/**
-												* As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-												*/
+											 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+											 */
 
 											// Define schema data variables
 
@@ -684,8 +684,8 @@ if ( $location_hours_variable_query ) {
 										// Google method: OpeningHoursSpecification Schema Data
 
 											/**
-												* As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-												*/
+											 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+											 */
 
 											// Define schema data variables
 
@@ -696,9 +696,9 @@ if ( $location_hours_variable_query ) {
 									} else {
 
 										/**
-											* If the current repeater row's day is not set as 'Mon - Fri'
-											*  And the current repeater row is not marked as closed
-											*/
+										 * If the current repeater row's day is not set as 'Mon - Fri'
+										 *  And the current repeater row is not marked as closed
+										 */
 
 										// // Schema.org method: openingHours Schema Data
 										//
@@ -715,8 +715,8 @@ if ( $location_hours_variable_query ) {
 										// Google method: OpeningHoursSpecification Schema Data
 
 											/**
-												* As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-												*/
+											 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+											 */
 
 											// Define schema data variables
 
@@ -744,8 +744,8 @@ if ( $location_hours_variable_query ) {
 									// Google method: OpeningHoursSpecification Schema Data
 
 										/**
-											* As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-											*/
+										 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+										 */
 
 										// Loop through all the days in the array separately
 
@@ -767,28 +767,28 @@ if ( $location_hours_variable_query ) {
 									if ( $hour['closed'] ) {
 
 										/**
-											* If the location is closed on this day or time span...
-											*/
+										 * If the location is closed on this day or time span...
+										 */
 
 										// Definition term and definition description tag set
 
 											/**
-												* Set the text for the day or time span (closed)
-												*/
+											 * Set the text for the day or time span (closed)
+											 */
 
 											$hours_text .= 'Closed ';
 
 									} else {
 
 										/**
-											* Else if the location is open on this day or time span...
-											*/
+										 * Else if the location is open on this day or time span...
+										 */
 
 										// Definition term and definition description tag set
 
 											/**
-												*  Set the text for the day or time span (hours open)
-												*/
+											 *  Set the text for the day or time span (hours open)
+											 */
 
 											$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] ) ? '' . ap_time_span( strtotime($hour['open']), strtotime($hour['close']) ) . '' : '' );
 
@@ -799,8 +799,8 @@ if ( $location_hours_variable_query ) {
 									if ( $hour['comment'] ) {
 
 										/**
-											* If a comment exists for this day or time span...
-											*/
+										 * If a comment exists for this day or time span...
+										 */
 
 										// Definition term and definition description tag set
 
@@ -813,8 +813,8 @@ if ( $location_hours_variable_query ) {
 									} else {
 
 										/**
-											* Else if no comment exists for this day or time span...
-											*/
+										 * Else if no comment exists for this day or time span...
+										 */
 
 										$comment = '';
 
@@ -823,8 +823,8 @@ if ( $location_hours_variable_query ) {
 								// Definition term and definition description tag set
 
 									/**
-										* Close the definition description tag
-										*/
+									 * Close the definition description tag
+									 */
 
 									$hours_text .= '</dd>';
 
