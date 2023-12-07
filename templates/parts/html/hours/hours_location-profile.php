@@ -31,6 +31,10 @@
 
 			$location_hours_24_7_query = !$location_hours_variable_query ? $location_hours_group['location_24_7'] : null;
 
+		// Typical Days and Hours for In-Person Operation (repeater)
+
+			$location_hours_repeater = ( !$location_hours_variable_query && !$location_hours_24_7_query ) ? $location_hours_group['location_hours'] : null;
+
 	// Modified In-Person Hours
 
 		// Are there any upcoming modified in-person hours of operation? (bool)
@@ -430,8 +434,6 @@ if ( $location_hours_variable_query ) {
 				*
 				* Display the typical hours
 				*/
-
-			$location_hours_repeater = $location_hours_group['location_hours']; // Typical Hours // repeater
 
 			// Schema Data
 
