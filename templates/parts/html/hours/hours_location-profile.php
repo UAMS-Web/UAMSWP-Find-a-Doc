@@ -11,65 +11,67 @@
  * 	__
  */
 
-// Get Hours Group
+// Get Values
 
-	$location_hours_group = $location_hours_group ?? get_field('location_hours_group');
+	// Get Hours Group
 
-// Get In-Person Hours Values
+		$location_hours_group = $location_hours_group ?? get_field('location_hours_group');
 
-	// Typical In-Person Hours
+	// Get In-Person Hours Values
 
-		// Do the location's typical in-person hours of operation vary? (bool)
+		// Typical In-Person Hours
 
-			$location_hours_variable_query = $location_hours_group['location_hours_variable'];
+			// Do the location's typical in-person hours of operation vary? (bool)
 
-		// Information about the Location's Variable Hours of Operation (string [WYSIWYG])
+				$location_hours_variable_query = $location_hours_group['location_hours_variable'];
 
-			$location_hours_variable_info = $location_hours_variable_query ? $location_hours_group['location_hours_variable_info'] : null;
+			// Information about the Location's Variable Hours of Operation (string [WYSIWYG])
 
-		// Is the location typically open 24/7? (bool)
+				$location_hours_variable_info = $location_hours_variable_query ? $location_hours_group['location_hours_variable_info'] : null;
 
-			$location_hours_24_7_query = !$location_hours_variable_query ? $location_hours_group['location_24_7'] : null;
+			// Is the location typically open 24/7? (bool)
 
-		// Typical Days and Hours for In-Person Operation (repeater)
+				$location_hours_24_7_query = !$location_hours_variable_query ? $location_hours_group['location_24_7'] : null;
 
-			$location_hours_repeater = ( !$location_hours_variable_query && !$location_hours_24_7_query ) ? $location_hours_group['location_hours'] : null;
+			// Typical Days and Hours for In-Person Operation (repeater)
 
-	// Modified In-Person Hours
+				$location_hours_repeater = ( !$location_hours_variable_query && !$location_hours_24_7_query ) ? $location_hours_group['location_hours'] : null;
 
-		// Are there any upcoming modified in-person hours of operation? (bool)
+		// Modified In-Person Hours
 
-			$location_hours_modified_query = $location_hours_group['location_modified_hours'];
+			// Are there any upcoming modified in-person hours of operation? (bool)
 
-		$location_hours_modified_reason = null;
-		$location_hours_modified_start_date = null;
-		$location_hours_modified_end_query = null;
-		$location_hours_modified_end_date = null;
-		$location_hours_modified = null;
+				$location_hours_modified_query = $location_hours_group['location_modified_hours'];
 
-		if ( $location_hours_modified_query ) {
+			$location_hours_modified_reason = null;
+			$location_hours_modified_start_date = null;
+			$location_hours_modified_end_query = null;
+			$location_hours_modified_end_date = null;
+			$location_hours_modified = null;
 
-			// Reason for Modified In-Person Hours of Operation (string [WYSIWYG])
+			if ( $location_hours_modified_query ) {
 
-				$location_hours_modified_reason = $location_hours_group['location_modified_hours_reason'];
+				// Reason for Modified In-Person Hours of Operation (string [WYSIWYG])
 
-			// Start Date For the Modified In-Person Hours of Operation (string [F j, Y])
+					$location_hours_modified_reason = $location_hours_group['location_modified_hours_reason'];
 
-				$location_hours_modified_start_date = $location_hours_group['location_modified_hours_start_date'];
+				// Start Date For the Modified In-Person Hours of Operation (string [F j, Y])
 
-			// Is there an end date for the modified in-person hours of operation? (bool)
+					$location_hours_modified_start_date = $location_hours_group['location_modified_hours_start_date'];
 
-				$location_hours_modified_end_query = $location_hours_group['location_modified_hours_end'];
+				// Is there an end date for the modified in-person hours of operation? (bool)
 
-			// End Date For the Modified In-Person Hours of Operation (string [F j, Y])
+					$location_hours_modified_end_query = $location_hours_group['location_modified_hours_end'];
 
-				$location_hours_modified_end_date = $location_hours_modified_end_query ? $location_hours_group['location_modified_hours_end_date'] : null;
+				// End Date For the Modified In-Person Hours of Operation (string [F j, Y])
 
-			// Individual Modified In-Person Hours of Operation (repeater)
+					$location_hours_modified_end_date = $location_hours_modified_end_query ? $location_hours_group['location_modified_hours_end_date'] : null;
 
-				$location_hours_modified = $location_hours_group['location_modified_hours_group'];
+				// Individual Modified In-Person Hours of Operation (repeater)
 
-		}
+					$location_hours_modified = $location_hours_group['location_modified_hours_group'];
+
+			}
 
 // Display Variable Hours Information
 
