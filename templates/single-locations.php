@@ -1021,11 +1021,6 @@
 
 		// Get remaining details about this item
 
-			// After hours information
-
-				$afterhours_system = get_field('location_afterhours_descr_system', 'option'); // System-wide information about telemedicine at locations
-				$afterhours_system = ( isset($afterhours_system) && !empty($afterhours_system) ) ? $afterhours_system : '<p>If you are in need of urgent or emergency care, call 911 or go to your nearest emergency department at your local hospital.</p>'; // System-wide information about telemedicine at locations
-
 			// Address and physical location information
 
 				$map = get_field('location_map', $post_id );

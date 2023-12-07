@@ -73,6 +73,34 @@
 
 			}
 
+	// Get After Hours Information Values
+
+		$location_after_hours = null;
+
+		if ( !$location_hours_24_7_query ) {
+
+			// Get value from the location profile
+
+				$location_after_hours = $location_hours_group['location_after_hours'] ?? null;
+
+			// Get fallback value from the system
+
+				if ( !$location_after_hours ) {
+
+					$location_after_hours = get_field('location_afterhours_descr_system', 'option') ?? null;
+
+				}
+
+			// Set fallback value with static string
+
+				if ( !$location_after_hours ) {
+
+					$location_after_hours = '<p>If you are in need of urgent or emergency care, call 911 or go to your nearest emergency department at your local hospital.</p>';
+
+				}
+
+		}
+
 // Display Variable Hours Information
 
 	if ( $location_hours_variable_query ) {
@@ -936,24 +964,12 @@
 
 // Display After Hours Information
 
-	if (
-		$location_hours_group['location_after_hours']
-		&&
-		!$location_hours_24_7_query
-	) {
+	if ( $location_after_hours ) {
 
 		?>
 		<h2>After Hours</h2>
 		<?php
 
-		echo $location_hours_group['location_after_hours'];
+		echo $location_after_hours;
 
-	} elseif ( !$location_hours_24_7_query ) {
-
-		?>
-		<h2>After Hours</h2>
-		<?php
-
-		echo $afterhours_system;
-
-	} // endif ( $location_hours_group['location_after_hours'] && !$location_hours_24_7_query) elseif ( !$location_hours_24_7_query )
+	} // endif ( $location_after_hours )
