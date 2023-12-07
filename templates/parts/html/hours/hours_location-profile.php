@@ -109,7 +109,10 @@
 		 * If the location's hours vary...
 		 */
 
-		echo '<h2>Hours Vary</h2>';
+		?>
+		<h2>Hours Vary</h2>
+		<?php
+
 		echo $location_hours_variable_info;
 
 	}
