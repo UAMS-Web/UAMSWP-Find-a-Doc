@@ -939,7 +939,7 @@
 	if (
 		$location_hours_group['location_after_hours']
 		&&
-		!$location_hours_group['location_24_7']
+		!$location_hours_24_7_query
 	) {
 
 		?>
@@ -948,7 +948,7 @@
 
 		echo $location_hours_group['location_after_hours'];
 
-	} elseif ( !$location_hours_group['location_24_7'] ) {
+	} elseif ( !$location_hours_24_7_query ) {
 
 		?>
 		<h2>After Hours</h2>
@@ -956,4 +956,4 @@
 
 		echo $afterhours_system;
 
-	} // endif ( $location_hours_group['location_after_hours'] && !$location_hours_group['location_24_7']) elseif ( !$location_hours_group['location_24_7'] )
+	} // endif ( $location_hours_group['location_after_hours'] && !$location_hours_24_7_query) elseif ( !$location_hours_24_7_query )
