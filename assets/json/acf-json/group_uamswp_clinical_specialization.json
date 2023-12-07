@@ -903,6 +903,34 @@
 			"acfe_textarea_code": 0
 		},
 		{
+			"key": "field_clinical_specialization_hierarchy_justification",
+			"label": "Justification for the Current Positioning in the Hierarchy of the Health Care Provider Taxonomy Code Set",
+			"name": "clinical_specialization_hierarchy_justification",
+			"type": "textarea",
+			"instructions": "Explain the justification for the current positioning of this clinical specialization within the hierarchy of the Health Care Provider Taxonomy code set.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": "",
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
 			"key": "field_clinical_specialization_tab_patient",
 			"label": "Patient-Friendly Terms",
 			"name": "",
