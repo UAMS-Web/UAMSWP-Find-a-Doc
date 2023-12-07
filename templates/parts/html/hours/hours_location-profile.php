@@ -71,879 +71,887 @@
 
 		}
 
-$location_hours_modified_text = '';
-$location_hours_modified_active_start = '';
-$location_hours_modified_active_end = '';
+// Display Variable Hours Information
 
-if ( $location_hours_variable_query ) {
+	if ( $location_hours_variable_query ) {
 
-	/**
-	 * If the location's hours vary...
-	 */
+		/**
+		 * If the location's hours vary...
+		 */
 
-	echo '<h2>Hours Vary</h2>';
-	echo $location_hours_variable_info;
+		echo '<h2>Hours Vary</h2>';
+		echo $location_hours_variable_info;
 
-} else {
+	}
 
-	/**
-	 * If the location's hours do not vary...
-	 */
+// Display Static Hours Information
 
-	// Begin Modified Hours Logic
+	$location_hours_modified_text = '';
+	$location_hours_modified_active_start = '';
+	$location_hours_modified_active_end = '';
 
-		if ( $location_hours_modified_query ) {
+	if ( !$location_hours_variable_query ) {
 
-			/**
-			 * If there are upcoming modified hours...
-			 */
+		/**
+		 * If the location's hours do not vary...
+		 */
 
-			$item_day = ''; // Previous Day
-			$item_comment = ''; // Comment on previous day
-			$i = 1;
+		// Begin Modified Hours Logic
 
-			$today = strtotime("today");
-			$today_30 = strtotime("+30 days");
+			if ( $location_hours_modified_query ) {
 
-			// OpeningHoursSpecification Schema Data
+				/**
+				 * If there are upcoming modified hours...
+				 */
 
-				// Check/define schema data variables
+				$item_day = ''; // Previous Day
+				$item_comment = ''; // Comment on previous day
+				$i = 1;
 
-					$schema_openingHoursSpecification = ( isset($schema_openingHoursSpecification) && is_array($schema_openingHoursSpecification) && !empty($schema_openingHoursSpecification) ) ? $schema_openingHoursSpecification : array(); // Main OpeningHoursSpecification schema array
-					$schema_dayOfWeek = array(); // The day of the week for which these opening hours are valid.
-					$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-					$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-					$schema_validFrom = $location_hours_modified_start_date; // The date when the item becomes valid.
-					$schema_validThrough = ( $location_hours_modified_end_query && $location_hours_modified_end_date) ? $location_hours_modified_end_date : null; // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+				$today = strtotime("today");
+				$today_30 = strtotime("+30 days");
 
-			// Display the modified hours if they have started or if they start within 30 days
+				// OpeningHoursSpecification Schema Data
 
-				if (
-					strtotime($location_hours_modified_start_date) <= $today_30 // If the modified hours start date is less or equal to 30 days in the future...
-					&&
-					(
-						strtotime($location_hours_modified_end_date) >= $today // If the modified hours end date is greater than or equal to today
-						||
-						!$location_hours_modified_end_query // If there is no end date for the modified hours
-					)
-				) {
+					// Check/define schema data variables
 
-					$location_hours_modified_text .= $location_hours_modified_reason;
-					$location_hours_modified_text .= '<p class="small font-italic">These modified hours start on ' . $location_hours_modified_start_date . ', ';
-					$location_hours_modified_text .= $location_hours_modified_end_query && $location_hours_modified_end_date ? 'and are scheduled to end after ' . $location_hours_modified_end_date . '.' : 'and will remain in effect until further notice.';
-					$location_hours_modified_text .= '</p>';
+						$schema_openingHoursSpecification = ( isset($schema_openingHoursSpecification) && is_array($schema_openingHoursSpecification) && !empty($schema_openingHoursSpecification) ) ? $schema_openingHoursSpecification : array(); // Main OpeningHoursSpecification schema array
+						$schema_dayOfWeek = array(); // The day of the week for which these opening hours are valid.
+						$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+						$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+						$schema_validFrom = $location_hours_modified_start_date; // The date when the item becomes valid.
+						$schema_validThrough = ( $location_hours_modified_end_query && $location_hours_modified_end_date) ? $location_hours_modified_end_date : null; // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 
-					if ( $location_hours_modified ) {
+				// Display the modified hours if they have started or if they start within 30 days
 
-						/**
-						 * If the Modified Hours repeater has at least one row...
-						 */
+					if (
+						strtotime($location_hours_modified_start_date) <= $today_30 // If the modified hours start date is less or equal to 30 days in the future...
+						&&
+						(
+							strtotime($location_hours_modified_end_date) >= $today // If the modified hours end date is greater than or equal to today
+							||
+							!$location_hours_modified_end_query // If there is no end date for the modified hours
+						)
+					) {
 
-						// Loop through the Modified Hours repeater rows
+						$location_hours_modified_text .= $location_hours_modified_reason;
+						$location_hours_modified_text .= '<p class="small font-italic">These modified hours start on ' . $location_hours_modified_start_date . ', ';
+						$location_hours_modified_text .= $location_hours_modified_end_query && $location_hours_modified_end_date ? 'and are scheduled to end after ' . $location_hours_modified_end_date . '.' : 'and will remain in effect until further notice.';
+						$location_hours_modified_text .= '</p>';
 
-							foreach ( $location_hours_modified as $item ) {
+						if ( $location_hours_modified ) {
 
-								// Get data from fields in the Modified Hours repeater
+							/**
+							 * If the Modified Hours repeater has at least one row...
+							 */
 
-									$item_title = $item['location_modified_hours_title']; // Title (in Modified Hours repeater; in Modified Hours tab) // string
-									$item_info = $item['location_modified_hours_information']; // Information (in Modified Hours repeater; in Modified Hours tab) // string (wysiwyg)
-									$item_times = $item['location_modified_hours_times']; // Hours (in Modified Hours repeater; in Modified Hours tab) // repeater
-									$item_24_7_query = $item['location_modified_hours_24_7']; // Is this location available 24/7 during these modified hours? (in Modified Hours repeater; in Modified Hours tab) // bool
+							// Loop through the Modified Hours repeater rows
 
-								$location_hours_modified_text .= $item_title ? '<h3 class="h4">'. $item_title . '</h3>' : '';
-								$location_hours_modified_text .= $item_info ? $item_info : '';
+								foreach ( $location_hours_modified as $item ) {
 
-								// OpeningHoursSpecification Schema Data
+									// Get data from fields in the Modified Hours repeater
 
-									// Reset schema data variables
+										$item_title = $item['location_modified_hours_title']; // Title (in Modified Hours repeater; in Modified Hours tab) // string
+										$item_info = $item['location_modified_hours_information']; // Information (in Modified Hours repeater; in Modified Hours tab) // string (wysiwyg)
+										$item_times = $item['location_modified_hours_times']; // Hours (in Modified Hours repeater; in Modified Hours tab) // repeater
+										$item_24_7_query = $item['location_modified_hours_24_7']; // Is this location available 24/7 during these modified hours? (in Modified Hours repeater; in Modified Hours tab) // bool
 
-										$schema_dayOfWeek = array(); // The day of the week for which these opening hours are valid.
-										$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-										$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+									$location_hours_modified_text .= $item_title ? '<h3 class="h4">'. $item_title . '</h3>' : '';
+									$location_hours_modified_text .= $item_info ? $item_info : '';
 
-								// Get the earliest (most past) modified hours start date from all the rows in the Modified hours repeater
+									// OpeningHoursSpecification Schema Data
 
-									if (
-										$location_hours_modified_active_start > strtotime($location_hours_modified_start_date) // If previous loop's modified hours start date is greater than the current loop's modified hours start date
-										||
-										'' == $location_hours_modified_active_start // Or if there is no modified hours start date from a previous loop
-									) {
+										// Reset schema data variables
 
-										$location_hours_modified_active_start = strtotime($location_hours_modified_start_date); // Store the modified hours start date for comparison in future loops
+											$schema_dayOfWeek = array(); // The day of the week for which these opening hours are valid.
+											$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+											$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
-									} // endif ( $location_hours_modified_active_start > strtotime($location_hours_modified_start_date) || '' == $location_hours_modified_active_start )
+									// Get the earliest (most past) modified hours start date from all the rows in the Modified hours repeater
 
-								// Get the latest (most future) modified hours end date from all the rows in the Modified hours repeater
+										if (
+											$location_hours_modified_active_start > strtotime($location_hours_modified_start_date) // If previous loop's modified hours start date is greater than the current loop's modified hours start date
+											||
+											'' == $location_hours_modified_active_start // Or if there is no modified hours start date from a previous loop
+										) {
 
-									if (
-										$location_hours_modified_active_end <= strtotime($location_hours_modified_end_date) // If previous loop's modified hours end date is less than or equal to the current loop's modified hours end date
-										||
-										'' == $location_hours_modified_active_start // Or if there is no modified hours end date from a previous loop
-										||
-										!$location_hours_modified_end_query // Or if the current loop has no modified hours end date
-									) {
+											$location_hours_modified_active_start = strtotime($location_hours_modified_start_date); // Store the modified hours start date for comparison in future loops
 
-										if ( !$location_hours_modified_end_query ) {
+										} // endif ( $location_hours_modified_active_start > strtotime($location_hours_modified_start_date) || '' == $location_hours_modified_active_start )
+
+									// Get the latest (most future) modified hours end date from all the rows in the Modified hours repeater
+
+										if (
+											$location_hours_modified_active_end <= strtotime($location_hours_modified_end_date) // If previous loop's modified hours end date is less than or equal to the current loop's modified hours end date
+											||
+											'' == $location_hours_modified_active_start // Or if there is no modified hours end date from a previous loop
+											||
+											!$location_hours_modified_end_query // Or if the current loop has no modified hours end date
+										) {
+
+											if ( !$location_hours_modified_end_query ) {
+
+												/**
+												 * If the current loop has no modified hours end date...
+												 */
+
+												$location_hours_modified_active_end = 'TBD';
+
+											} else {
+
+												/**
+												 * Else if the current loop has a modified hours end date...
+												 */
+
+												$location_hours_modified_active_end = strtotime($location_hours_modified_end_date);
+
+											} // endif ( !$location_hours_modified_end_query ) else
+
+										} // endif ( $location_hours_modified_active_end <= strtotime($location_hours_modified_end_date) || !$location_hours_modified_end_query )
+
+										if ( $item_24_7_query ) {
 
 											/**
-											 * If the current loop has no modified hours end date...
+											 * If the modified hours are 24/7...
 											 */
 
-											$location_hours_modified_active_end = 'TBD';
+											$location_hours_modified_text .= '<strong>Open 24/7</strong>';
 
-										} else {
+										// OpeningHoursSpecification Schema Data for Modified Hours That Are 24/7
 
-											/**
-											 * Else if the current loop has a modified hours end date...
-											 */
+											$schema_dayOfWeek = array(
+												'Monday',
+												'Tuesday',
+												'Wednesday',
+												'Thursday',
+												'Friday',
+												'Saturday',
+												'Sunday'
+											); // The day of the week for which these opening hours are valid.
+											$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+											$schema_closes = '23:59'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
-											$location_hours_modified_active_end = strtotime($location_hours_modified_end_date);
+											// Add this location's details to the main OpeningHoursSpecification schema array
 
-										} // endif ( !$location_hours_modified_end_query ) else
+												// // Schema.org method: Add all days as an array under the dayOfWeek property
+												//
+												// 	/**
+												// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+												// 	 */
+												//
+												// 	$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
+												// 		$schema_dayOfWeek, // array|string // Optional // The day of the week for which these opening hours are valid.
+												// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+												// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+												// 		$schema_validFrom, // string // Optional // The date when the item becomes valid.
+												// 		$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+												// 		$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+												// 	);
 
-									} // endif ( $location_hours_modified_active_end <= strtotime($location_hours_modified_end_date) || !$location_hours_modified_end_query )
+												// Google method: Loop through all the days defined in the current Hours repeater row separately
 
-									if ( $item_24_7_query ) {
+													/**
+													 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+													 */
+
+													foreach ( $schema_dayOfWeek as $day ) {
+
+														$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
+															$day, // array|string // Optional // The day of the week for which these opening hours are valid.
+															$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+															$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+															$schema_validFrom, // string // Optional // The date when the item becomes valid.
+															$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+															$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+														);
+
+													}
+
+									} else {
 
 										/**
-										 * If the modified hours are 24/7...
+										 * If the modified hours are not 24/7...
 										 */
 
-										$location_hours_modified_text .= '<strong>Open 24/7</strong>';
+										if (
+											is_array($item_times)
+											||
+											is_object($item_times)
+										) {
 
-									// OpeningHoursSpecification Schema Data for Modified Hours That Are 24/7
+											$location_hours_modified_text .= '<dl class="hours">';
 
-										$schema_dayOfWeek = array(
-											'Monday',
-											'Tuesday',
-											'Wednesday',
-											'Thursday',
-											'Friday',
-											'Saturday',
-											'Sunday'
-										); // The day of the week for which these opening hours are valid.
-										$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-										$schema_closes = '23:59'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+											// Loop through all the Hours repeater rows (in Modified Hours repeater; in Modified Hours tab)
 
-										// Add this location's details to the main OpeningHoursSpecification schema array
+												foreach ( $item_times as $item_time ) {
 
-											// // Schema.org method: Add all days as an array under the dayOfWeek property
+													$location_hours_modified_text .= $item_day !== $item_time['location_modified_hours_day'] ? '<dt>'. $item_time['location_modified_hours_day'] .'</dt> ' : '';
+													$location_hours_modified_text .= '<dd>';
+
+													// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+
+														// Reset/define variables
+
+															$schema_dayOfWeek = array();
+
+													if (
+														'Mon - Fri' == $item_time['location_modified_hours_day']
+														&&
+														!$item_time['location_modified_hours_closed']
+													) {
+
+														// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+
+															$schema_dayOfWeek = array_merge(
+																$schema_dayOfWeek,
+																array(
+																	'Monday',
+																	'Tuesday',
+																	'Wednesday',
+																	'Thursday',
+																	'Friday'
+																)
+															); // The day of the week for which these opening hours are valid.
+
+													} else {
+
+														// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+
+															$schema_dayOfWeek[] = $item_time['location_modified_hours_day']; // The day of the week for which these opening hours are valid.
+
+													} // endif ( 'Mon - Fri' == $item_time['location_modified_hours_day'] && !$item_time['location_modified_hours_closed'] ) else
+
+													if ( $item_time['location_modified_hours_closed'] ) {
+
+														// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+
+															$schema_opens = '00:00'; // string // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+															$schema_closes = '00:00'; // string // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+														$location_hours_modified_text .= 'Closed ';
+
+													} else {
+
+														$location_hours_modified_text .= ( ( $item_time['location_modified_hours_open'] && '00:00:00' != $item_time['location_modified_hours_open'] ) ? '' . ap_time_span( strtotime($item_time['location_modified_hours_open']), strtotime($item_time['location_modified_hours_close']) ). '' : '' );
+
+														$schema_opens = $item_time['location_modified_hours_open']; // string // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+														$schema_closes = $item_time['location_modified_hours_close']; // string // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+													} // endif ( $item_time['location_modified_hours_closed'] ) else
+
+													if ( $item_time['location_modified_hours_comment'] ) {
+
+														$location_hours_modified_text .= ' <br /><span class="subtitle">' .$item_time['location_modified_hours_comment'] . '</span>';
+														$item_comment = $item_time['location_modified_hours_comment'];
+
+													} else {
+
+														$item_comment = '';
+
+													} // endif ( $item_time['location_modified_hours_comment'] ) else
+
+													$location_hours_modified_text .= '</dd>';
+													$item_day = $item_time['location_modified_hours_day']; // Reset the day
+
+													// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+
+														// Add this location's details to the main OpeningHoursSpecification schema array
+
+															// // Schema.org method: Add all days as an array under the dayOfWeek property
+															//
+															// 	/**
+															// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+															// 	 */
+															//
+															// 	$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
+															// 		$schema_dayOfWeek, // array|string // Optional // The day of the week for which these opening hours are valid.
+															// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+															// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+															// 		$schema_validFrom, // string // Optional // The date when the item becomes valid.
+															// 		$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+															// 		$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+															// 	);
+
+															// Google method: Loop through all the days defined in the current Hours repeater row separately
+
+																/**
+																 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+																 */
+
+																foreach ( $schema_dayOfWeek as $day) {
+
+																	$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
+																		$day, // array|string // Optional // The day of the week for which these opening hours are valid.
+																		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+																		$schema_validFrom, // string // Optional // The date when the item becomes valid.
+																		$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+																		$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+																	);
+
+																}
+
+													$i++;
+
+												} // endforeach ( $item_times as $item_time )
+
+											$location_hours_modified_text .= '</dl>';
+
+										} // endif ( is_array($item_times) || is_object($item_times) )
+
+									} // endif ( $item_24_7_query ) else
+
+								} // endforeach ( $location_hours_modified as $item )
+
+						} // endif ( $location_hours_modified )
+
+					} // endif ( strtotime($location_hours_modified_start_date) <= $today_30 && ( strtotime($location_hours_modified_end_date) >= $today || !$location_hours_modified_end_query ) )
+
+					echo $location_hours_modified_text ? '<h2>Modified Hours</h2>' . $location_hours_modified_text: '';
+
+			} // endif ( $location_hours_modified_query )
+
+		// Begin Typical Hours Logic
+
+			if (
+				(
+					$location_hours_modified_active_start != '' // If there is a modified hours start date
+					&&
+					$location_hours_modified_active_start <= $today // And if that modified hours start date is today or earlier
+				)
+				&&
+				(
+					$location_hours_modified_active_end > $today_30 // If the modified hours end date is after 30 days in the future
+					||
+					$location_hours_modified_active_end == 'TBD' // Or if there is no modified hours end date
+				)
+			) {
+
+				/**
+				 * If the modified hours are the current hours for at least the next 30 days...
+				 *
+				 * Do not display the typical hours
+				 */
+
+			} else {
+
+				/**
+				 * If the modified hours end within 30 days or if they haven't started yet...
+				 *
+				 * Display the typical hours
+				 */
+
+				// Schema Data
+
+					// // Schema.org method: openingHours Schema Data
+					//
+					// 	/**
+					// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+					// 	 */
+					//
+					// 	// Check/define/reset schema data variables
+					//
+					// 		$schema_openingHours = ( isset($schema_openingHours) && is_array($schema_openingHours) && !empty($schema_openingHours) ) ? $schema_openingHours : array(); // Main openingHours schema array
+					// 		$schema_dayOfWeek = ''; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+					// 		$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+					// 		$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+					// Google method: OpeningHoursSpecification Schema Data
+
+						/**
+						 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+						 */
+
+						// Check/define/reset schema data variables
+
+							$schema_openingHoursSpecification = ( isset($schema_openingHoursSpecification) && is_array($schema_openingHoursSpecification) && !empty($schema_openingHoursSpecification) ) ? $schema_openingHoursSpecification : array(); // Main OpeningHoursSpecification schema array
+							$schema_dayOfWeek = ''; // The day of the week for which these opening hours are valid. // Days are specified using their full name (e.g., Sunday)
+							$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+							$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+				if (
+					$location_hours_24_7_query // The location is typically available 24/7
+					||
+					$location_hours_repeater[0]['day'] // Typical daily hours have been set
+				) {
+
+					/**
+					 * If the location is typically available 24/7
+					 * or if typical daily hours have been set...
+					 */
+
+					?>
+					<h2><?php echo $location_hours_modified_text ? 'Typical ' : ''; ?>Hours</h2>
+					<?php
+
+					if ( $location_hours_24_7_query ) {
+
+						/**
+						 * If the location is typically available 24/7...
+						 */
+
+						echo '<strong>Open 24/7</strong>';
+
+						// Schema Data
+
+							// // Schema.org method: openingHours Schema Data
+							//
+							// 	/**
+							// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+							// 	 */
+							//
+							// 	// Define schema data variables
+							//
+							// 		$schema_dayOfWeek = 'Mo-Su'; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+							// 		$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+							// 		$schema_closes = '23:59'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+							//
+							// 	// Add this location's details to the main openingHours schema array
+							//
+							// 		$schema_openingHours = uamswp_fad_schema_openinghours(
+							// 			$schema_dayOfWeek, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+							// 			$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+							// 			$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+							// 			$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
+							// 		);
+
+							// Google method: OpeningHoursSpecification Schema Data
+
+								/**
+								 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+								 */
+
+								// Define schema data variables
+
+									$schema_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ); // The day of the week for which these opening hours are valid.
+									$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+									$schema_closes = '23:59'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+								// Loop through all the days in the array separately
+
+									foreach ( $schema_dayOfWeek as $day) {
+
+										$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
+											$day, // array|string // Optional // The day of the week for which these opening hours are valid.
+											$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+											$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+											'', // string // Optional // The date when the item becomes valid.
+											'', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+											$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+										);
+
+									}
+
+					} else {
+
+						/**
+						 * If typical daily hours have been set...
+						 */
+
+						echo '<dl class="hours">';
+
+						if ( $location_hours_repeater ) {
+
+							/**
+							 * If the Typical Hours repeater has at least one row...
+							 */
+
+							$hours_text = ''; // Definition term and definition description tag set
+							$day = ''; // Previous Day
+							$comment = ''; // Comment on previous day
+							$i = 1;
+
+							// Loop through the Typical Hours repeater
+
+								foreach ( $location_hours_repeater as $hour ) {
+
+									/**
+									 * openingHours Schema Data for Typical Hours That Are 24/7
+									 */
+
+									// Schema Data
+
+										// // Schema.org method: openingHours Schema Data
+										//
+										// 	/**
+										// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+										// 	 */
+										//
+										// 	// Define/reset schema data variables
+										//
+										// 		$schema_dayOfWeek = ''; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+										// 		$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+										// 		$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+										// Google method: OpeningHoursSpecification Schema Data
+
+											/**
+											 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+											 */
+
+											// Define/reset schema data variables
+
+											$schema_dayOfWeek = array(); // The day of the week for which these opening hours are valid.
+											$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+											$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+									if ( $day !== $hour['day'] ) {
+
+										/**
+										 * If the current repeater row's day does not match the previous repeater row's day...
+										 */
+
+										// Definition term and definition description tag set
+
+											/**
+											 * Write a new definition term element with the current repeater row's day
+											 */
+
+											$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
+
+									}
+
+									// Definition term and definition description tag set
+
+										/**
+										 * Open a definition description tag
+										 */
+
+										$hours_text .= '<dd>';
+
+									// Schema Data
+
+										if (
+											'Mon - Fri' == $hour['day'] // The current repeater row's day is set as 'Mon - Fri'
+											&&
+											$hour['closed'] // And the current repeater row is marked as closed
+										) {
+
+											// // Schema.org method: openingHours Schema Data
 											//
 											// 	/**
 											// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+											// 	 *
+											// 	 * Do nothing
 											// 	 */
-											//
-											// 	$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-											// 		$schema_dayOfWeek, // array|string // Optional // The day of the week for which these opening hours are valid.
-											// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-											// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-											// 		$schema_validFrom, // string // Optional // The date when the item becomes valid.
-											// 		$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-											// 		$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-											// 	);
 
-											// Google method: Loop through all the days defined in the current Hours repeater row separately
+											// Google method: OpeningHoursSpecification Schema Data
 
 												/**
 												 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
 												 */
 
-												foreach ( $schema_dayOfWeek as $day ) {
+												// Define schema data variables
+
+													$schema_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ); // The day of the week for which these opening hours are valid.
+													$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+													$schema_closes = '00:00'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+										} elseif (
+											'Mon - Fri' == $hour['day'] // The current repeater row's day is set as 'Mon - Fri'
+											// And the current repeater row is not marked as closed
+										) {
+
+											// // Schema.org method: openingHours Schema Data
+											//
+											// 	/**
+											// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+											// 	 */
+											//
+											// 	// Define schema data variables
+											//
+											// 		$schema_dayOfWeek = 'Mo-Fr'; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+
+											// Google method: OpeningHoursSpecification Schema Data
+
+												/**
+												 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+												 */
+
+												// Define schema data variables
+
+													$schema_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ); // The day of the week for which these opening hours are valid.
+													$schema_opens = $hour['open']; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+													$schema_closes = $hour['close']; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+										} elseif (
+											// The current repeater row's day is not set as 'Mon - Fri'
+											$hour['closed'] // And the current repeater row is marked as closed
+										) {
+
+											// // Schema.org method: openingHours Schema Data
+											//
+											// 	/**
+											// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+											// 	 *
+											// 	 * Do nothing
+											// 	 */
+
+											// Google method: OpeningHoursSpecification Schema Data
+
+												/**
+												 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+												 */
+
+												// Define schema data variables
+
+													$schema_dayOfWeek[] = $hour['day']; // The day of the week for which these opening hours are valid.
+													$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+													$schema_closes = '00:00'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+										} else {
+
+											/**
+											 * If the current repeater row's day is not set as 'Mon - Fri'
+											 *  And the current repeater row is not marked as closed
+											 */
+
+											// // Schema.org method: openingHours Schema Data
+											//
+											// 	/**
+											// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+											// 	 */
+											//
+											// 	// Define schema data variables
+											//
+											// 		$schema_dayOfWeek = substr( $hour['day'], 0, 2 ); // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+											// 		$schema_opens = $hour['open']; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+											// 		$schema_closes = $hour['close']; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+											// Google method: OpeningHoursSpecification Schema Data
+
+												/**
+												 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+												 */
+
+												// Define schema data variables
+
+													$schema_dayOfWeek[] = $hour['day']; // The day of the week for which these opening hours are valid.
+													$schema_opens = $hour['open']; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+													$schema_closes = $hour['close']; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+
+										}
+
+										// // Schema.org method: openingHours Schema Data
+										//
+										// 	/**
+										// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+										// 	 */
+										//
+										// 	// Add this location's details to the main openingHours schema array
+										//
+										// 		$schema_openingHours = uamswp_fad_schema_opening_hours(
+										// 			$schema_dayOfWeek, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+										// 			$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+										// 			$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+										// 			$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
+										// 		);
+
+										// Google method: OpeningHoursSpecification Schema Data
+
+											/**
+											 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+											 */
+
+											// Loop through all the days in the array separately
+
+												foreach ( $schema_dayOfWeek as $day) {
 
 													$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
 														$day, // array|string // Optional // The day of the week for which these opening hours are valid.
 														$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 														$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-														$schema_validFrom, // string // Optional // The date when the item becomes valid.
-														$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+														'', // string // Optional // The date when the item becomes valid.
+														'', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 														$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 													);
 
 												}
 
-								} else {
+									// Set the text for the day or time span (closed or hours open)
 
-									/**
-									 * If the modified hours are not 24/7...
-									 */
+										if ( $hour['closed'] ) {
 
-									if (
-										is_array($item_times)
-										||
-										is_object($item_times)
-									) {
+											/**
+											 * If the location is closed on this day or time span...
+											 */
 
-										$location_hours_modified_text .= '<dl class="hours">';
+											// Definition term and definition description tag set
 
-										// Loop through all the Hours repeater rows (in Modified Hours repeater; in Modified Hours tab)
+												/**
+												 * Set the text for the day or time span (closed)
+												 */
 
-											foreach ( $item_times as $item_time ) {
+												$hours_text .= 'Closed ';
 
-												$location_hours_modified_text .= $item_day !== $item_time['location_modified_hours_day'] ? '<dt>'. $item_time['location_modified_hours_day'] .'</dt> ' : '';
-												$location_hours_modified_text .= '<dd>';
+										} else {
 
-												// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+											/**
+											 * Else if the location is open on this day or time span...
+											 */
 
-													// Reset/define variables
+											// Definition term and definition description tag set
 
-														$schema_dayOfWeek = array();
+												/**
+												 *  Set the text for the day or time span (hours open)
+												 */
 
-												if (
-													'Mon - Fri' == $item_time['location_modified_hours_day']
-													&&
-													!$item_time['location_modified_hours_closed']
-												) {
+												$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] ) ? '' . ap_time_span( strtotime($hour['open']), strtotime($hour['close']) ) . '' : '' );
 
-													// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+										}
 
-														$schema_dayOfWeek = array_merge(
-															$schema_dayOfWeek,
-															array(
-																'Monday',
-																'Tuesday',
-																'Wednesday',
-																'Thursday',
-																'Friday'
-															)
-														); // The day of the week for which these opening hours are valid.
+									// Set the comment for the day or time span
 
-												} else {
+										if ( $hour['comment'] ) {
 
-													// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+											/**
+											 * If a comment exists for this day or time span...
+											 */
 
-														$schema_dayOfWeek[] = $item_time['location_modified_hours_day']; // The day of the week for which these opening hours are valid.
+											// Definition term and definition description tag set
 
-												} // endif ( 'Mon - Fri' == $item_time['location_modified_hours_day'] && !$item_time['location_modified_hours_closed'] ) else
+												$hours_text .= ' <br /><span class="subtitle">' .$hour['comment'] . '</span>';
 
-												if ( $item_time['location_modified_hours_closed'] ) {
+											// Store comment for comparison on next repeater row
 
-													// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+												$comment = $hour['comment'];
 
-														$schema_opens = '00:00'; // string // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-														$schema_closes = '00:00'; // string // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+										} else {
 
-													$location_hours_modified_text .= 'Closed ';
+											/**
+											 * Else if no comment exists for this day or time span...
+											 */
 
-												} else {
+											$comment = '';
 
-													$location_hours_modified_text .= ( ( $item_time['location_modified_hours_open'] && '00:00:00' != $item_time['location_modified_hours_open'] ) ? '' . ap_time_span( strtotime($item_time['location_modified_hours_open']), strtotime($item_time['location_modified_hours_close']) ). '' : '' );
-
-													$schema_opens = $item_time['location_modified_hours_open']; // string // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-													$schema_closes = $item_time['location_modified_hours_close']; // string // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-												} // endif ( $item_time['location_modified_hours_closed'] ) else
-
-												if ( $item_time['location_modified_hours_comment'] ) {
-
-													$location_hours_modified_text .= ' <br /><span class="subtitle">' .$item_time['location_modified_hours_comment'] . '</span>';
-													$item_comment = $item_time['location_modified_hours_comment'];
-
-												} else {
-
-													$item_comment = '';
-
-												} // endif ( $item_time['location_modified_hours_comment'] ) else
-
-												$location_hours_modified_text .= '</dd>';
-												$item_day = $item_time['location_modified_hours_day']; // Reset the day
-
-												// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
-
-													// Add this location's details to the main OpeningHoursSpecification schema array
-
-														// // Schema.org method: Add all days as an array under the dayOfWeek property
-														//
-														// 	/**
-														// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-														// 	 */
-														//
-														// 	$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-														// 		$schema_dayOfWeek, // array|string // Optional // The day of the week for which these opening hours are valid.
-														// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-														// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-														// 		$schema_validFrom, // string // Optional // The date when the item becomes valid.
-														// 		$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-														// 		$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-														// 	);
-
-														// Google method: Loop through all the days defined in the current Hours repeater row separately
-
-															/**
-															 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-															 */
-
-															foreach ( $schema_dayOfWeek as $day) {
-
-																$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-																	$day, // array|string // Optional // The day of the week for which these opening hours are valid.
-																	$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																	$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																	$schema_validFrom, // string // Optional // The date when the item becomes valid.
-																	$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-																	$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-																);
-
-															}
-
-												$i++;
-
-											} // endforeach ( $item_times as $item_time )
-
-										$location_hours_modified_text .= '</dl>';
-
-									} // endif ( is_array($item_times) || is_object($item_times) )
-
-								} // endif ( $item_24_7_query ) else
-
-							} // endforeach ( $location_hours_modified as $item )
-
-					} // endif ( $location_hours_modified )
-
-				} // endif ( strtotime($location_hours_modified_start_date) <= $today_30 && ( strtotime($location_hours_modified_end_date) >= $today || !$location_hours_modified_end_query ) )
-
-				echo $location_hours_modified_text ? '<h2>Modified Hours</h2>' . $location_hours_modified_text: '';
-
-		} // endif ( $location_hours_modified_query )
-
-	// Begin Typical Hours Logic
-
-		if (
-			(
-				$location_hours_modified_active_start != '' // If there is a modified hours start date
-				&&
-				$location_hours_modified_active_start <= $today // And if that modified hours start date is today or earlier
-			)
-			&&
-			(
-				$location_hours_modified_active_end > $today_30 // If the modified hours end date is after 30 days in the future
-				||
-				$location_hours_modified_active_end == 'TBD' // Or if there is no modified hours end date
-			)
-		) {
-
-			/**
-			 * If the modified hours are the current hours for at least the next 30 days...
-			 *
-			 * Do not display the typical hours
-			 */
-
-		} else {
-
-			/**
-			 * If the modified hours end within 30 days or if they haven't started yet...
-			 *
-			 * Display the typical hours
-			 */
-
-			// Schema Data
-
-				// // Schema.org method: openingHours Schema Data
-				//
-				// 	/**
-				// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-				// 	 */
-				//
-				// 	// Check/define/reset schema data variables
-				//
-				// 		$schema_openingHours = ( isset($schema_openingHours) && is_array($schema_openingHours) && !empty($schema_openingHours) ) ? $schema_openingHours : array(); // Main openingHours schema array
-				// 		$schema_dayOfWeek = ''; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-				// 		$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-				// 		$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-				// Google method: OpeningHoursSpecification Schema Data
-
-					/**
-					 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-					 */
-
-					// Check/define/reset schema data variables
-
-						$schema_openingHoursSpecification = ( isset($schema_openingHoursSpecification) && is_array($schema_openingHoursSpecification) && !empty($schema_openingHoursSpecification) ) ? $schema_openingHoursSpecification : array(); // Main OpeningHoursSpecification schema array
-						$schema_dayOfWeek = ''; // The day of the week for which these opening hours are valid. // Days are specified using their full name (e.g., Sunday)
-						$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-						$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-			if (
-				$location_hours_24_7_query // The location is typically available 24/7
-				||
-				$location_hours_repeater[0]['day'] // Typical daily hours have been set
-			) {
-
-				/**
-				 * If the location is typically available 24/7
-				 * or if typical daily hours have been set...
-				 */
-
-				?>
-				<h2><?php echo $location_hours_modified_text ? 'Typical ' : ''; ?>Hours</h2>
-				<?php
-
-				if ( $location_hours_24_7_query ) {
-
-					/**
-					 * If the location is typically available 24/7...
-					 */
-
-					echo '<strong>Open 24/7</strong>';
-
-					// Schema Data
-
-						// // Schema.org method: openingHours Schema Data
-						//
-						// 	/**
-						// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-						// 	 */
-						//
-						// 	// Define schema data variables
-						//
-						// 		$schema_dayOfWeek = 'Mo-Su'; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-						// 		$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-						// 		$schema_closes = '23:59'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-						//
-						// 	// Add this location's details to the main openingHours schema array
-						//
-						// 		$schema_openingHours = uamswp_fad_schema_openinghours(
-						// 			$schema_dayOfWeek, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-						// 			$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-						// 			$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-						// 			$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
-						// 		);
-
-						// Google method: OpeningHoursSpecification Schema Data
-
-							/**
-							 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-							 */
-
-							// Define schema data variables
-
-								$schema_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ); // The day of the week for which these opening hours are valid.
-								$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-								$schema_closes = '23:59'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-							// Loop through all the days in the array separately
-
-								foreach ( $schema_dayOfWeek as $day) {
-
-									$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-										$day, // array|string // Optional // The day of the week for which these opening hours are valid.
-										$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-										$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-										'', // string // Optional // The date when the item becomes valid.
-										'', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-										$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-									);
-
-								}
-
-				} else {
-
-					/**
-					 * If typical daily hours have been set...
-					 */
-
-					echo '<dl class="hours">';
-
-					if ( $location_hours_repeater ) {
-
-						/**
-						 * If the Typical Hours repeater has at least one row...
-						 */
-
-						$hours_text = ''; // Definition term and definition description tag set
-						$day = ''; // Previous Day
-						$comment = ''; // Comment on previous day
-						$i = 1;
-
-						// Loop through the Typical Hours repeater
-
-							foreach ( $location_hours_repeater as $hour ) {
-
-								/**
-								 * openingHours Schema Data for Typical Hours That Are 24/7
-								 */
-
-								// Schema Data
-
-									// // Schema.org method: openingHours Schema Data
-									//
-									// 	/**
-									// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-									// 	 */
-									//
-									// 	// Define/reset schema data variables
-									//
-									// 		$schema_dayOfWeek = ''; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-									// 		$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-									// 		$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-									// Google method: OpeningHoursSpecification Schema Data
-
-										/**
-										 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-										 */
-
-										// Define/reset schema data variables
-
-										$schema_dayOfWeek = array(); // The day of the week for which these opening hours are valid.
-										$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-										$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-								if ( $day !== $hour['day'] ) {
-
-									/**
-									 * If the current repeater row's day does not match the previous repeater row's day...
-									 */
+										} // if ( $hour['comment'] ) else
 
 									// Definition term and definition description tag set
 
 										/**
-										 * Write a new definition term element with the current repeater row's day
+										 * Close the definition description tag
 										 */
 
-										$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
+										$hours_text .= '</dd>';
+
+									// Store day for comparison on next repeater row
+
+										$day = $hour['day'];
+
+								} // endforeach ( $location_hours_repeater as $hour )
+
+							// Definition term and definition description tag set
+
+								echo $hours_text;
+
+						} else {
+
+							// Write a definition term tag
+
+								echo '<dt>No information</dt>';
+
+						} // endif ( $location_hours_repeater ) else
+
+						// Close the definition list tag
+
+							echo '</dl>';
+
+					} // endif ( $location_hours_24_7_query ) else
+
+					// $holidayhours = get_field('location_holiday_hours'); // Holiday Hours // repeater
+					//
+					// if ( $holidayhours ) {
+					//
+					// 	// If the Holiday Hours repeater has at least one row
+					//
+					// 	/**
+					// 	 * Sort by date
+					// 	 * if current date is before date & within 30 days
+					// 	 * Display results
+					// 	 */
+					//
+					// 	$order = array();
+					//
+					// 	// populate order
+					// 	foreach ( $holidayhours as $i => $row ) {
+					//
+					// 		$order[ $i ] = $row['date'];
+					//
+					// 	} // endforeach ( $holidayhours as $i => $row )
+					//
+					// 	// multisort
+					// 	array_multisort( $order, SORT_ASC, $holidayhours );
+					//
+					// 	$i = 0;
+					//
+					// 	foreach ( $holidayhours as $row ) {
+					//
+					// 		$holidayDate = $row['date']; // Text
+					// 		$holidayDateTime = DateTime::createFromFormat('m/d/Y', $holidayDate); // Date for evaluation
+					// 		$dateNow = new DateTime("now", new DateTimeZone('America/Chicago') );
+					//
+					//		if (
+					//			( $dateNow < $holidayDateTime )
+					//			&&
+					//			( $holidayDateTime->diff($dateNow)->days < 30 )
+					//		) {
+					//
+					// 			if ( 0 == $i ) {
+					// 				echo '<h3>Upcoming Holiday Hours</h3>';
+					// 				echo '<dl class="hours">';
+					// 				$i++;
+					// 			}
+					//
+					// 			echo '<dt>'. $row['label'] . '<br />' . $holidayDate . '<br/>';
+					// 			echo '</dt>' . '<dd>';
+					//
+					// 			if ( $row['closed'] ) {
+					//
+					// 				echo $row['closed'] ? 'Closed</dd>': '';
+					//
+					// 			} else {
+					//
+					// 				echo ( ( $hour['open'] && '00:00:00' != $row['open'] ) ? '' . ap_time_span( strtotime($row['open']), strtotime($row['close']) ) . ' ' : '' );
+					//
+					// 			}
+					// 		}
+					//
+					// 	} // endforeach ( $holidayhours as $row )
+					//
+					// 	if ( 0 < $i ) {
+					//
+					// 		echo '</dl>';
+					//
+					// 	} // endif ( 0 < $i )
+					//
+					// } // endif ( $holidayhours )
+
+				} // endif ( $location_hours_24_7_query || $location_hours_repeater[0]['day'] )
+
+			} // endif ( ( $location_hours_modified_active_start != '' && $location_hours_modified_active_start <= $today) && ( $location_hours_modified_active_end > $today_30 || $location_hours_modified_active_end == 'TBD' ) ) else
+
+	} // endif ( $location_hours_variable_query )
+
+// Display After Hours Information
 
-								}
+	if (
+		$location_hours_group['location_after_hours']
+		&&
+		!$location_hours_group['location_24_7']
+	) {
 
-								// Definition term and definition description tag set
-
-									/**
-									 * Open a definition description tag
-									 */
-
-									$hours_text .= '<dd>';
-
-								// Schema Data
-
-									if (
-										'Mon - Fri' == $hour['day'] // The current repeater row's day is set as 'Mon - Fri'
-										&&
-										$hour['closed'] // And the current repeater row is marked as closed
-									) {
+		?>
+		<h2>After Hours</h2>
+		<?php
 
-										// // Schema.org method: openingHours Schema Data
-										//
-										// 	/**
-										// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-										// 	 *
-										// 	 * Do nothing
-										// 	 */
+		echo $location_hours_group['location_after_hours'];
 
-										// Google method: OpeningHoursSpecification Schema Data
-
-											/**
-											 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-											 */
-
-											// Define schema data variables
-
-												$schema_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ); // The day of the week for which these opening hours are valid.
-												$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-												$schema_closes = '00:00'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-									} elseif (
-										'Mon - Fri' == $hour['day'] // The current repeater row's day is set as 'Mon - Fri'
-										// And the current repeater row is not marked as closed
-									) {
-
-										// // Schema.org method: openingHours Schema Data
-										//
-										// 	/**
-										// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-										// 	 */
-										//
-										// 	// Define schema data variables
-										//
-										// 		$schema_dayOfWeek = 'Mo-Fr'; // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-
-										// Google method: OpeningHoursSpecification Schema Data
-
-											/**
-											 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-											 */
-
-											// Define schema data variables
-
-												$schema_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ); // The day of the week for which these opening hours are valid.
-												$schema_opens = $hour['open']; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-												$schema_closes = $hour['close']; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-									} elseif (
-										// The current repeater row's day is not set as 'Mon - Fri'
-										$hour['closed'] // And the current repeater row is marked as closed
-									) {
+	} elseif ( !$location_hours_group['location_24_7'] ) {
 
-										// // Schema.org method: openingHours Schema Data
-										//
-										// 	/**
-										// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-										// 	 *
-										// 	 * Do nothing
-										// 	 */
+		?>
+		<h2>After Hours</h2>
+		<?php
 
-										// Google method: OpeningHoursSpecification Schema Data
+		echo $afterhours_system;
 
-											/**
-											 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-											 */
-
-											// Define schema data variables
-
-												$schema_dayOfWeek[] = $hour['day']; // The day of the week for which these opening hours are valid.
-												$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-												$schema_closes = '00:00'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-									} else {
-
-										/**
-										 * If the current repeater row's day is not set as 'Mon - Fri'
-										 *  And the current repeater row is not marked as closed
-										 */
-
-										// // Schema.org method: openingHours Schema Data
-										//
-										// 	/**
-										// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-										// 	 */
-										//
-										// 	// Define schema data variables
-										//
-										// 		$schema_dayOfWeek = substr( $hour['day'], 0, 2 ); // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-										// 		$schema_opens = $hour['open']; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-										// 		$schema_closes = $hour['close']; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-										// Google method: OpeningHoursSpecification Schema Data
-
-											/**
-											 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-											 */
-
-											// Define schema data variables
-
-												$schema_dayOfWeek[] = $hour['day']; // The day of the week for which these opening hours are valid.
-												$schema_opens = $hour['open']; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-												$schema_closes = $hour['close']; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-									}
-
-									// // Schema.org method: openingHours Schema Data
-									//
-									// 	/**
-									// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-									// 	 */
-									//
-									// 	// Add this location's details to the main openingHours schema array
-									//
-									// 		$schema_openingHours = uamswp_fad_schema_opening_hours(
-									// 			$schema_dayOfWeek, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-									// 			$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-									// 			$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-									// 			$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
-									// 		);
-
-									// Google method: OpeningHoursSpecification Schema Data
-
-										/**
-										 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-										 */
-
-										// Loop through all the days in the array separately
-
-											foreach ( $schema_dayOfWeek as $day) {
-
-												$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-													$day, // array|string // Optional // The day of the week for which these opening hours are valid.
-													$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-													$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-													'', // string // Optional // The date when the item becomes valid.
-													'', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-													$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-												);
-
-											}
-
-								// Set the text for the day or time span (closed or hours open)
-
-									if ( $hour['closed'] ) {
-
-										/**
-										 * If the location is closed on this day or time span...
-										 */
-
-										// Definition term and definition description tag set
-
-											/**
-											 * Set the text for the day or time span (closed)
-											 */
-
-											$hours_text .= 'Closed ';
-
-									} else {
-
-										/**
-										 * Else if the location is open on this day or time span...
-										 */
-
-										// Definition term and definition description tag set
-
-											/**
-											 *  Set the text for the day or time span (hours open)
-											 */
-
-											$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] ) ? '' . ap_time_span( strtotime($hour['open']), strtotime($hour['close']) ) . '' : '' );
-
-									}
-
-								// Set the comment for the day or time span
-
-									if ( $hour['comment'] ) {
-
-										/**
-										 * If a comment exists for this day or time span...
-										 */
-
-										// Definition term and definition description tag set
-
-											$hours_text .= ' <br /><span class="subtitle">' .$hour['comment'] . '</span>';
-
-										// Store comment for comparison on next repeater row
-
-											$comment = $hour['comment'];
-
-									} else {
-
-										/**
-										 * Else if no comment exists for this day or time span...
-										 */
-
-										$comment = '';
-
-									} // if ( $hour['comment'] ) else
-
-								// Definition term and definition description tag set
-
-									/**
-									 * Close the definition description tag
-									 */
-
-									$hours_text .= '</dd>';
-
-								// Store day for comparison on next repeater row
-
-									$day = $hour['day'];
-
-							} // endforeach ( $location_hours_repeater as $hour )
-
-						// Definition term and definition description tag set
-
-							echo $hours_text;
-
-					} else {
-
-						// Write a definition term tag
-
-							echo '<dt>No information</dt>';
-
-					} // endif ( $location_hours_repeater ) else
-
-					// Close the definition list tag
-
-						echo '</dl>';
-
-				} // endif ( $location_hours_24_7_query ) else
-
-				// $holidayhours = get_field('location_holiday_hours'); // Holiday Hours // repeater
-				//
-				// if ( $holidayhours ) {
-				//
-				// 	// If the Holiday Hours repeater has at least one row
-				//
-				// 	/**
-				// 	 * Sort by date
-				// 	 * if current date is before date & within 30 days
-				// 	 * Display results
-				// 	 */
-				//
-				// 	$order = array();
-				//
-				// 	// populate order
-				// 	foreach ( $holidayhours as $i => $row ) {
-				//
-				// 		$order[ $i ] = $row['date'];
-				//
-				// 	} // endforeach ( $holidayhours as $i => $row )
-				//
-				// 	// multisort
-				// 	array_multisort( $order, SORT_ASC, $holidayhours );
-				//
-				// 	$i = 0;
-				//
-				// 	foreach ( $holidayhours as $row ) {
-				//
-				// 		$holidayDate = $row['date']; // Text
-				// 		$holidayDateTime = DateTime::createFromFormat('m/d/Y', $holidayDate); // Date for evaluation
-				// 		$dateNow = new DateTime("now", new DateTimeZone('America/Chicago') );
-				//
-				//		if (
-				//			( $dateNow < $holidayDateTime )
-				//			&&
-				//			( $holidayDateTime->diff($dateNow)->days < 30 )
-				//		) {
-				//
-				// 			if ( 0 == $i ) {
-				// 				echo '<h3>Upcoming Holiday Hours</h3>';
-				// 				echo '<dl class="hours">';
-				// 				$i++;
-				// 			}
-				//
-				// 			echo '<dt>'. $row['label'] . '<br />' . $holidayDate . '<br/>';
-				// 			echo '</dt>' . '<dd>';
-				//
-				// 			if ( $row['closed'] ) {
-				//
-				// 				echo $row['closed'] ? 'Closed</dd>': '';
-				//
-				// 			} else {
-				//
-				// 				echo ( ( $hour['open'] && '00:00:00' != $row['open'] ) ? '' . ap_time_span( strtotime($row['open']), strtotime($row['close']) ) . ' ' : '' );
-				//
-				// 			}
-				// 		}
-				//
-				// 	} // endforeach ( $holidayhours as $row )
-				//
-				// 	if ( 0 < $i ) {
-				//
-				// 		echo '</dl>';
-				//
-				// 	} // endif ( 0 < $i )
-				//
-				// } // endif ( $holidayhours )
-
-			} // endif ( $location_hours_24_7_query || $location_hours_repeater[0]['day'] )
-
-		} // endif ( ( $location_hours_modified_active_start != '' && $location_hours_modified_active_start <= $today) && ( $location_hours_modified_active_end > $today_30 || $location_hours_modified_active_end == 'TBD' ) ) else
-
-} // endif ( $location_hours_variable_query )
-
-if (
-	$location_hours_group['location_after_hours']
-	&&
-	!$location_hours_group['location_24_7']
-) {
-
-	?>
-	<h2>After Hours</h2>
-	<?php
-
-	echo $location_hours_group['location_after_hours'];
-
-} elseif ( !$location_hours_group['location_24_7'] ) {
-
-	?>
-	<h2>After Hours</h2>
-	<?php
-
-	echo $afterhours_system;
-
-} // endif ( $location_hours_group['location_after_hours'] && !$location_hours_group['location_24_7']) elseif ( !$location_hours_group['location_24_7'] )
+	} // endif ( $location_hours_group['location_after_hours'] && !$location_hours_group['location_24_7']) elseif ( !$location_hours_group['location_24_7'] )
