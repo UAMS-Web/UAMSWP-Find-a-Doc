@@ -31,6 +31,12 @@
 
 		// Static Hours
 
+			$location_hours_modified_reason = null;
+			$location_hours_modified_start_date = null;
+			$location_hours_modified_end_query = null;
+			$location_hours_modified_end_date = null;
+			$location_hours_modified = null;
+
 			// Typical In-Person Hours
 
 				// Is the location typically open 24/7? (bool)
@@ -46,12 +52,6 @@
 				// Are there any upcoming modified in-person hours of operation? (bool)
 
 					$location_hours_modified_query = $location_hours_group['location_modified_hours'];
-
-				$location_hours_modified_reason = null;
-				$location_hours_modified_start_date = null;
-				$location_hours_modified_end_query = null;
-				$location_hours_modified_end_date = null;
-				$location_hours_modified = null;
 
 				if ( $location_hours_modified_query ) {
 
