@@ -37,8 +37,10 @@
 			$location_hours_modified_query = null;
 			$location_hours_modified_reason = null;
 			$location_hours_modified_start_date = null;
+			$location_hours_modified_start_date_unix = null;
 			$location_hours_modified_end_query = null;
 			$location_hours_modified_end_date = null;
+			$location_hours_modified_end_date_unix = null;
 			$location_hours_modified = null;
 			$location_hours_modified_active = null;
 
@@ -82,6 +84,10 @@
 
 							$location_hours_modified_start_date = $location_hours_group['location_modified_hours_start_date'];
 
+							// Convert value into a Unix timestamp
+
+								$location_hours_modified_start_date_unix = strtotime($location_hours_modified_start_date);
+
 						// Is there an end date for the modified in-person hours of operation? (bool)
 
 							$location_hours_modified_end_query = $location_hours_group['location_modified_hours_end'];
@@ -89,6 +95,10 @@
 						// End Date For the Modified In-Person Hours of Operation (string [F j, Y])
 
 							$location_hours_modified_end_date = $location_hours_modified_end_query ? $location_hours_group['location_modified_hours_end_date'] : null;
+
+							// Convert value into a Unix timestamp
+
+								$location_hours_modified_end_date_unix = strtotime($location_hours_modified_end_date);
 
 						// Check if time span for modified hours is active now or in the near future
 
