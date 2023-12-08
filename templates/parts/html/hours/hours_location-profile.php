@@ -103,9 +103,9 @@
 						// Check if time span for modified hours is active now or in the near future
 
 							if (
-								$location_hours_modified_start_date
+								$location_hours_modified_start_date_unix
 								&&
-								$location_hours_modified_start_date <= $today_30
+								$location_hours_modified_start_date_unix <= $today_30
 							) {
 
 								/**
@@ -121,9 +121,9 @@
 									$location_hours_modified_active = true;
 
 								} elseif (
-									$location_hours_modified_end_date
+									$location_hours_modified_end_date_unix
 									&&
-									$location_hours_modified_end_date >= $today
+									$location_hours_modified_end_date_unix >= $today
 								) {
 
 									/**
@@ -139,9 +139,9 @@
 						// Check if time span for typical hours is inactive now or in the near future
 
 							if (
-								$location_hours_modified_start_date
+								$location_hours_modified_start_date_unix
 								&&
-								$location_hours_modified_start_date <= $today
+								$location_hours_modified_start_date_unix <= $today
 							) {
 
 								/**
@@ -157,9 +157,9 @@
 									$location_hours_typical_active = false;
 
 								} elseif (
-									$location_hours_modified_end_date
+									$location_hours_modified_end_date_unix
 									&&
-									$location_hours_modified_end_date >= $today_30
+									$location_hours_modified_end_date_unix >= $today_30
 								) {
 
 									/**
