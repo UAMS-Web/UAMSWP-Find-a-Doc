@@ -66,8 +66,13 @@
 
 					if ( $location_hours_modified_query ) {
 
-						$today = strtotime("today");
-						$today_30 = strtotime("+30 days");
+						// Get today's date as a Unix timestamp
+
+							$today = strtotime("today");
+
+						// Get a near-future date as a Unix timestamp
+
+							$today_30 = strtotime("+30 days");
 
 						// Reason for Modified In-Person Hours of Operation (string [WYSIWYG])
 
