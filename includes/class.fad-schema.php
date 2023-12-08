@@ -1009,8 +1009,8 @@
 				 *
 				 * 			// 	$schema_OpeningHoursSpecification = uamswp_fad_schema_openinghoursspecification(
 				 * 			// 		$schema_day_of_week, // array|string // Optional // The day of the week for which these opening hours are valid.
-				 * 			// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-				 * 			// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+				 * 			// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+				 * 			// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
 				 * 			// 		$schema_valid_from, // string // Optional // The date when the item becomes valid.
 				 * 			// 		$schema_valid_through, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 				 * 			// 		$schema_OpeningHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
@@ -1022,8 +1022,8 @@
 				 * 				foreach ( $schema_day_of_week as $day) {
 				 * 					$schema_OpeningHoursSpecification = uamswp_fad_schema_openinghoursspecification(
 				 * 						$day, // array|string // Optional // The day of the week for which these opening hours are valid.
-				 * 						$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-				 * 						$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+				 * 						$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+				 * 						$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
 				 * 						$schema_valid_from, // string // Optional // The date when the item becomes valid.
 				 * 						$schema_valid_through // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours., // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 				 * 						$schema_OpeningHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
