@@ -31,6 +31,9 @@
 
 		// Static Hours
 
+			$location_hours_24_7_query = null;
+			$location_hours_repeater = null;
+			$location_hours_modified_query = null;
 			$location_hours_modified_reason = null;
 			$location_hours_modified_start_date = null;
 			$location_hours_modified_end_query = null;
