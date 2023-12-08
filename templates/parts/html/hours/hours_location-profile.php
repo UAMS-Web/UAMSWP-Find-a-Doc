@@ -138,7 +138,7 @@
 
 								$location_hours_modified_end_date_unix = strtotime($location_hours_modified_end_date);
 
-						// Check if time span for modified hours is active now or in the near future
+						// Check if time span for special hours is active now or in the near future
 
 							if (
 								$location_hours_modified_start_date_unix
@@ -183,7 +183,7 @@
 							) {
 
 								/**
-								 * If start date for modified hours is today or earlier
+								 * If start date for special hours is today or earlier
 								 */
 
 								if ( !$location_hours_modified_end_query ) {
@@ -291,7 +291,7 @@
 			)
 		);
 
-	// Modified Hours
+	// Special Hours
 
 		$location_hours_modified_text = '';
 		$location_hours_modified_active_start = '';
@@ -312,28 +312,28 @@
 				$schema_validThrough = $location_hours_modified_end_date; // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 
 			$location_hours_modified_text .= $location_hours_modified_reason;
-			$location_hours_modified_text .= '<p class="small font-italic">These modified hours start on ' . $location_hours_modified_start_date . ', ';
+			$location_hours_modified_text .= '<p class="small font-italic">These special hours start on ' . $location_hours_modified_start_date . ', ';
 			$location_hours_modified_text .= $location_hours_modified_end_query && $location_hours_modified_end_date ? 'and are scheduled to end after ' . $location_hours_modified_end_date . '.' : 'and will remain in effect until further notice.';
 			$location_hours_modified_text .= '</p>';
 
-			// Construct information from modified hours repeater
+			// Construct information from special hours repeater
 
 				if ( $location_hours_modified ) {
 
 					/**
-					 * If the Modified Hours repeater has at least one row...
+					 * If the Special Hours repeater has at least one row...
 					 */
 
-					// Loop through the Modified Hours repeater rows
+					// Loop through the Special Hours repeater rows
 
 						foreach ( $location_hours_modified as $item ) {
 
-							// Get data from fields in the Modified Hours repeater
+							// Get data from fields in the Special Hours repeater
 
-								$item_title = $item['location_modified_hours_title']; // Title (in Modified Hours repeater; in Modified Hours tab) // string
-								$item_info = $item['location_modified_hours_information']; // Information (in Modified Hours repeater; in Modified Hours tab) // string (wysiwyg)
-								$item_times = $item['location_modified_hours_times']; // Hours (in Modified Hours repeater; in Modified Hours tab) // repeater
-								$item_24_7_query = $item['location_modified_hours_24_7']; // Is this location available 24/7 during these modified hours? (in Modified Hours repeater; in Modified Hours tab) // bool
+								$item_title = $item['location_modified_hours_title']; // Title (in Special Hours repeater; in Special Hours tab) // string
+								$item_info = $item['location_modified_hours_information']; // Information (in Special Hours repeater; in Special Hours tab) // string (wysiwyg)
+								$item_times = $item['location_modified_hours_times']; // Hours (in Special Hours repeater; in Special Hours tab) // repeater
+								$item_24_7_query = $item['location_modified_hours_24_7']; // Is this location available 24/7 during these special hours? (in Special Hours repeater; in Special Hours tab) // bool
 
 							$location_hours_modified_text .= $item_title ? '<h3 class="h4">'. $item_title . '</h3>' : '';
 							$location_hours_modified_text .= $item_info ? $item_info : '';
@@ -346,32 +346,32 @@
 									$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 									$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 
-							// Get the earliest (most past) modified hours start date from all the rows in the Modified hours repeater
+							// Get the earliest (most past) special hours start date from all the rows in the Modified hours repeater
 
 								if (
-									$location_hours_modified_active_start > strtotime($location_hours_modified_start_date) // If previous loop's modified hours start date is greater than the current loop's modified hours start date
+									$location_hours_modified_active_start > strtotime($location_hours_modified_start_date) // If previous loop's special hours start date is greater than the current loop's special hours start date
 									||
-									'' == $location_hours_modified_active_start // Or if there is no modified hours start date from a previous loop
+									'' == $location_hours_modified_active_start // Or if there is no special hours start date from a previous loop
 								) {
 
-									$location_hours_modified_active_start = strtotime($location_hours_modified_start_date); // Store the modified hours start date for comparison in future loops
+									$location_hours_modified_active_start = strtotime($location_hours_modified_start_date); // Store the special hours start date for comparison in future loops
 
 								} // endif ( $location_hours_modified_active_start > strtotime($location_hours_modified_start_date) || '' == $location_hours_modified_active_start )
 
-							// Get the latest (most future) modified hours end date from all the rows in the Modified hours repeater
+							// Get the latest (most future) special hours end date from all the rows in the Modified hours repeater
 
 								if (
-									$location_hours_modified_active_end <= strtotime($location_hours_modified_end_date) // If previous loop's modified hours end date is less than or equal to the current loop's modified hours end date
+									$location_hours_modified_active_end <= strtotime($location_hours_modified_end_date) // If previous loop's special hours end date is less than or equal to the current loop's special hours end date
 									||
-									'' == $location_hours_modified_active_start // Or if there is no modified hours end date from a previous loop
+									'' == $location_hours_modified_active_start // Or if there is no special hours end date from a previous loop
 									||
-									!$location_hours_modified_end_query // Or if the current loop has no modified hours end date
+									!$location_hours_modified_end_query // Or if the current loop has no special hours end date
 								) {
 
 									if ( !$location_hours_modified_end_query ) {
 
 										/**
-										 * If the current loop has no modified hours end date...
+										 * If the current loop has no special hours end date...
 										 */
 
 										$location_hours_modified_active_end = 'TBD';
@@ -379,7 +379,7 @@
 									} else {
 
 										/**
-										 * Else if the current loop has a modified hours end date...
+										 * Else if the current loop has a special hours end date...
 										 */
 
 										$location_hours_modified_active_end = strtotime($location_hours_modified_end_date);
@@ -391,12 +391,12 @@
 								if ( $item_24_7_query ) {
 
 									/**
-									 * If the modified hours are 24/7...
+									 * If the special hours are 24/7...
 									 */
 
 									$location_hours_modified_text .= '<strong>Open 24/7</strong>';
 
-								// OpeningHoursSpecification Schema Data for Modified Hours That Are 24/7
+								// OpeningHoursSpecification Schema Data for Special Hours That Are 24/7
 
 									$schema_dayOfWeek = array(
 										'Monday',
@@ -449,7 +449,7 @@
 							} else {
 
 								/**
-								 * If the modified hours are not 24/7...
+								 * If the special hours are not 24/7...
 								 */
 
 								if (
@@ -460,14 +460,14 @@
 
 									$location_hours_modified_text .= '<dl class="hours">';
 
-									// Loop through all the Hours repeater rows (in Modified Hours repeater; in Modified Hours tab)
+									// Loop through all the Hours repeater rows (in Special Hours repeater; in Special Hours tab)
 
 										foreach ( $item_times as $item_time ) {
 
 											$location_hours_modified_text .= $item_day !== $item_time['location_modified_hours_day'] ? '<dt>'. $item_time['location_modified_hours_day'] .'</dt> ' : '';
 											$location_hours_modified_text .= '<dd>';
 
-											// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+											// OpeningHoursSpecification Schema Data for Special Hours That Are Not 24/7
 
 												// Reset/define variables
 
@@ -479,7 +479,7 @@
 												!$item_time['location_modified_hours_closed']
 											) {
 
-												// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+												// OpeningHoursSpecification Schema Data for Special Hours That Are Not 24/7
 
 													$schema_dayOfWeek = array_merge(
 														$schema_dayOfWeek,
@@ -494,7 +494,7 @@
 
 											} else {
 
-												// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+												// OpeningHoursSpecification Schema Data for Special Hours That Are Not 24/7
 
 													$schema_dayOfWeek[] = $item_time['location_modified_hours_day']; // The day of the week for which these opening hours are valid.
 
@@ -502,7 +502,7 @@
 
 											if ( $item_time['location_modified_hours_closed'] ) {
 
-												// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+												// OpeningHoursSpecification Schema Data for Special Hours That Are Not 24/7
 
 													$schema_opens = '00:00'; // string // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 													$schema_closes = '00:00'; // string // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -532,7 +532,7 @@
 											$location_hours_modified_text .= '</dd>';
 											$item_day = $item_time['location_modified_hours_day']; // Reset the day
 
-											// OpeningHoursSpecification Schema Data for Modified Hours That Are Not 24/7
+											// OpeningHoursSpecification Schema Data for Special Hours That Are Not 24/7
 
 												// Add this location's details to the main OpeningHoursSpecification schema array
 
@@ -584,7 +584,7 @@
 
 				} // endif ( $location_hours_modified )
 
-			echo $location_hours_modified_text ? '<h2>Modified Hours</h2>' . $location_hours_modified_text: '';
+			echo $location_hours_modified_text ? '<h2>Special Hours</h2>' . $location_hours_modified_text: '';
 
 		}
 
