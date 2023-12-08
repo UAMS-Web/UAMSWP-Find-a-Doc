@@ -33,12 +33,14 @@
 
 			$location_hours_24_7_query = null;
 			$location_hours_repeater = null;
+			$location_hours_typical_active = null;
 			$location_hours_modified_query = null;
 			$location_hours_modified_reason = null;
 			$location_hours_modified_start_date = null;
 			$location_hours_modified_end_query = null;
 			$location_hours_modified_end_date = null;
 			$location_hours_modified = null;
+			$location_hours_modified_active = null;
 
 			if ( !$location_hours_variable_query ) {
 
@@ -51,6 +53,10 @@
 					// Typical Days and Hours for In-Person Operation (repeater)
 
 						$location_hours_repeater = ( !$location_hours_variable_query && !$location_hours_24_7_query ) ? $location_hours_group['location_hours'] : null;
+
+					// Set default value for whether typical hours are active now or in the near future
+
+						$location_hours_typical_active = true;
 
 				// Modified In-Person Hours
 
@@ -79,9 +85,81 @@
 
 							$location_hours_modified_end_date = $location_hours_modified_end_query ? $location_hours_group['location_modified_hours_end_date'] : null;
 
+						// Check if time span for modified hours is active now or in the near future
+
+							if (
+								$location_hours_modified_start_date
+								&&
+								$location_hours_modified_start_date <= $today_30
+							) {
+
+								/**
+								 * If start date is in the past or is in the near future
+								 */
+
+								if ( !$location_hours_modified_end_query ) {
+
+									/**
+									 * If there is no end date
+									 */
+
+									$location_hours_modified_active = true;
+
+								} elseif (
+									$location_hours_modified_end_date
+									&&
+									$location_hours_modified_end_date >= $today
+								) {
+
+									/**
+									 * If the end date is not in the past
+									 */
+
+									$location_hours_modified_active = true;
+
+								}
+
+							}
+
+						// Check if time span for typical hours is inactive now or in the near future
+
+							if (
+								$location_hours_modified_start_date
+								&&
+								$location_hours_modified_start_date <= $today
+							) {
+
+								/**
+								 * If start date for modified hours is today or earlier
+								 */
+
+								if ( !$location_hours_modified_end_query ) {
+
+									/**
+									 * If there is no end date
+									 */
+
+									$location_hours_typical_active = false;
+
+								} elseif (
+									$location_hours_modified_end_date
+									&&
+									$location_hours_modified_end_date >= $today_30
+								) {
+
+									/**
+									 * If the end date is in the distant future
+									 */
+
+									$location_hours_typical_active = false;
+
+								}
+
+							}
+
 						// Individual Modified In-Person Hours of Operation (repeater)
 
-							$location_hours_modified = $location_hours_group['location_modified_hours_group'];
+							$location_hours_modified = $location_hours_modified_active ? $location_hours_group['location_modified_hours_group'] : null;
 
 					}
 
