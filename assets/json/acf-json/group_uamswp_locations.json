@@ -3839,7 +3839,7 @@
 				},
 				{
 					"key": "field_location_modified_hours_tab",
-					"label": "Modified In-Person Hours",
+					"label": "Special In-Person Hours",
 					"name": "",
 					"type": "tab",
 					"instructions": "",
@@ -3864,7 +3864,7 @@
 				},
 				{
 					"key": "field_location_modified_hours",
-					"label": "Are there any upcoming modified in-person hours of operation?",
+					"label": "Are there any upcoming special in-person hours of operation?",
 					"name": "location_modified_hours",
 					"type": "button_group",
 					"instructions": "",
@@ -3887,7 +3887,7 @@
 				},
 				{
 					"key": "field_location_modified_hours_reason",
-					"label": "Reason for Modified In-Person Hours of Operation",
+					"label": "Reason for Special In-Person Hours of Operation",
 					"name": "location_modified_hours_reason",
 					"type": "wysiwyg",
 					"instructions": "Describe the overall reason the in-person hours of operation are being modified. This might be because of a holiday or public health emergency.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>The date range will be displayed automatically, so that does not have to be included in this field.",
@@ -3915,10 +3915,10 @@
 				},
 				{
 					"key": "field_location_modified_hours_start_date",
-					"label": "Start Date For the Modified In-Person Hours of Operation",
+					"label": "Start Date For the Special In-Person Hours of Operation",
 					"name": "location_modified_hours_start_date",
 					"type": "date_picker",
-					"instructions": "The date when the modified in-person hours of operation begin.",
+					"instructions": "The date when the special in-person hours of operation begin.",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -3941,7 +3941,7 @@
 				},
 				{
 					"key": "field_location_modified_hours_end",
-					"label": "Is there an end date for the modified in-person hours of operation?",
+					"label": "Is there an end date for the special in-person hours of operation?",
 					"name": "location_modified_hours_end",
 					"type": "button_group",
 					"instructions": "",
@@ -3972,10 +3972,10 @@
 				},
 				{
 					"key": "field_location_modified_hours_end_date",
-					"label": "End Date For the Modified In-Person Hours of Operation",
+					"label": "End Date For the Special In-Person Hours of Operation",
 					"name": "location_modified_hours_end_date",
 					"type": "date_picker",
-					"instructions": "The date after which the modified in-person hours of operation end.",
+					"instructions": "The date after which the special in-person hours of operation end.",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -3998,7 +3998,7 @@
 				},
 				{
 					"key": "field_location_modified_hours_group",
-					"label": "Individual Modified In-Person Hours of Operation",
+					"label": "Individual Special In-Person Hours of Operation",
 					"name": "location_modified_hours_group",
 					"type": "repeater",
 					"instructions": "",
@@ -4090,7 +4090,7 @@
 						},
 						{
 							"key": "field_location_modified_hours_times",
-							"label": "Modified In-Person Hours of Operation",
+							"label": "Special In-Person Hours of Operation",
 							"name": "location_modified_hours_times",
 							"type": "repeater",
 							"instructions": "Set the time for all seven days.",
@@ -4388,7 +4388,7 @@
 				},
 				{
 					"key": "field_location_modified_hours_tab_v2",
-					"label": "Modified In-Person Hours (v2)",
+					"label": "Special In-Person Hours (v2)",
 					"name": "",
 					"type": "tab",
 					"instructions": "",
@@ -4487,7 +4487,7 @@
 						},
 						{
 							"key": "field_location_modified_hours_dates",
-							"label": "Dates of the Modified In-Person Hours of Operation",
+							"label": "Dates of the Special In-Person Hours of Operation",
 							"name": "dates",
 							"type": "repeater",
 							"instructions": "Add a row for each sequential calendar day during the span of this modification to the in-person hours of operation (including days when the location is typically closed).",
@@ -4508,7 +4508,7 @@
 							"sub_fields": [
 								{
 									"key": "field_location_modified_hours_date",
-									"label": "Individual Date For the Modified In-Person Hours of Operation",
+									"label": "Individual Date For the Special In-Person Hours of Operation",
 									"name": "date",
 									"type": "date_picker",
 									"instructions": "",
@@ -6685,7 +6685,7 @@
 				},
 				{
 					"key": "field_location_telemed_modified_hours_parity_query",
-					"label": "Are the modified hours for telemedicine the same as the modified in-person hours of operation?",
+					"label": "Are the modified hours for telemedicine the same as the special in-person hours of operation?",
 					"name": "location_telemed_modified_hours_parity_query",
 					"type": "button_group",
 					"instructions": "",
