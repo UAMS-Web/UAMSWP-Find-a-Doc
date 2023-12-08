@@ -60,6 +60,9 @@
 
 					if ( $location_hours_modified_query ) {
 
+						$today = strtotime("today");
+						$today_30 = strtotime("+30 days");
+
 						// Reason for Modified In-Person Hours of Operation (string [WYSIWYG])
 
 							$location_hours_modified_reason = $location_hours_group['location_modified_hours_reason'];
