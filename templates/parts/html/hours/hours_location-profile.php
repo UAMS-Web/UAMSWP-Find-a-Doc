@@ -48,6 +48,10 @@
 
 				// Typical In-Person Hours
 
+					// Set default value for whether typical hours are active now or in the near future
+
+						$location_hours_typical_active = true;
+
 					// Is the location typically open 24/7? (bool)
 
 						$location_hours_24_7_query = !$location_hours_variable_query ? $location_hours_group['location_24_7'] : null;
@@ -56,9 +60,39 @@
 
 						$location_hours_repeater = ( !$location_hours_variable_query && !$location_hours_24_7_query ) ? $location_hours_group['location_hours'] : null;
 
-					// Set default value for whether typical hours are active now or in the near future
+					// Check repeater for values
 
-						$location_hours_typical_active = true;
+						if ( !$location_hours_repeater ) {
+
+							$location_hours_typical_active = false;
+
+						}
+
+						// Check repeater for row
+
+							if (
+								!isset($location_hours_repeater[0])
+								||
+								empty($location_hours_repeater[0])
+							) {
+
+								$location_hours_typical_active = false;
+
+							}
+
+						// Check repeater for day value
+
+							if (
+								!$location_hours_repeater
+								||
+								!isset($location_hours_repeater[0]['day'])
+								||
+								empty($location_hours_repeater[0]['day'])
+							) {
+
+								$location_hours_typical_active = false;
+
+							}
 
 				// Modified In-Person Hours
 
