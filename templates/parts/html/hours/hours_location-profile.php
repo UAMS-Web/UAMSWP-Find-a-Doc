@@ -62,37 +62,41 @@
 
 					// Check repeater for values
 
-						if ( !$location_hours_repeater ) {
+						if ( !$location_hours_24_7_query ) {
 
-							$location_hours_typical_active = false;
+							if ( !$location_hours_repeater ) {
+
+								$location_hours_typical_active = false;
+
+							}
+
+							// Check repeater for row
+
+								if (
+									!isset($location_hours_repeater[0])
+									||
+									empty($location_hours_repeater[0])
+								) {
+
+									$location_hours_typical_active = false;
+
+								}
+
+							// Check repeater for day value
+
+								if (
+									!$location_hours_repeater
+									||
+									!isset($location_hours_repeater[0]['day'])
+									||
+									empty($location_hours_repeater[0]['day'])
+								) {
+
+									$location_hours_typical_active = false;
+
+								}
 
 						}
-
-						// Check repeater for row
-
-							if (
-								!isset($location_hours_repeater[0])
-								||
-								empty($location_hours_repeater[0])
-							) {
-
-								$location_hours_typical_active = false;
-
-							}
-
-						// Check repeater for day value
-
-							if (
-								!$location_hours_repeater
-								||
-								!isset($location_hours_repeater[0]['day'])
-								||
-								empty($location_hours_repeater[0]['day'])
-							) {
-
-								$location_hours_typical_active = false;
-
-							}
 
 				// Modified In-Person Hours
 
