@@ -299,6 +299,10 @@
 
 			foreach ( $location_hours_modified_v2 as $item ) {
 
+				// Base output array
+
+					$item_output = $location_hours_list_item_array;
+
 				// Base item date list array
 
 					$item_date_list = array();
@@ -342,6 +346,20 @@
 								}
 
 						}
+
+					}
+
+				// Check if time span for this set of special hours of operation is active now or in the near future
+
+					if (
+						$item_date_list
+						&&
+						min($item_date_list) <= $today_30
+						&&
+						max($item_date_list) >= $today
+					) {
+
+						$location_hours_modified_active = true;
 
 					}
 
