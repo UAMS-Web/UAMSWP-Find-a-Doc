@@ -295,21 +295,45 @@
 
 	// Special Hours
 
+		// Base typical hours list array
+
+			$location_hours_modified_list = array();
+
 		if ( $location_hours_modified_v2 ) {
 
 			foreach ( $location_hours_modified_v2 as $item ) {
 
 				// Base output array
 
-					$item_output = $location_hours_list_item_array;
+					$item_output = array(
+						'title' => null,
+						'information' => null,
+						'dates' => null
+					);
+
+				// Base individual time span output array
+
+					$item_time_span_output = $location_hours_list_item_array;
 
 				// Base item date list array
 
+					/**
+					 * Use this to collect all dates from this set of special hours of operation.
+					 * Format each date as a Unix timestamp.
+					 */
+
 					$item_date_list = array();
 
-				$item_title = $item['title'] ?? null; // Title / heading for this set of special hours // string (text)
-				$item_information = $item['information'] ?? null; // Overview of this set of special in-person hours of operation // string (wysiwyg)
-				$item_dates = $item['dates'] ?? null; // Dates of the special in-person hours of operation // repeater
+				// Get the common values for this set of special hours of operation
+
+					$item_title = $item['title'] ?? null; // Title / heading for this set of special hours // string (text)
+					$item_information = $item['information'] ?? null; // Overview of this set of special in-person hours of operation // string (wysiwyg)
+					$item_dates = $item['dates'] ?? null; // Dates of the special in-person hours of operation // repeater
+
+				// Add the common values for this set of special hours of operation to the output array
+
+					$item_output['title'] = $item_title;
+					$item_output['information'] = $item_information;
 
 				// Loop through the dates of the special in-person hours of operation repeater
 
@@ -317,7 +341,28 @@
 
 						foreach ( $item_dates as $item_date_row ) {
 
-							$item_date = $item_date_row['date'] ?? null; // Individual date for the special in-person hours of operation // string ('F j, Y')
+							// Base individual date output array
+
+								$item_date_output = array(
+									'date' => null,
+									'closed_query' => null,
+									'24_query' => null,
+									'time_spans' => null
+								);
+
+							// Get the common values for this time span
+
+								$item_date = $item_date_row['date'] ?? null; // Individual date for the special in-person hours of operation // string ('F j, Y')
+								$item_date_closed_query = $item_date_row['closed_query'] ?? null; //  Will this location be closed on this date? // bool
+								$item_date_24_query = $item_date_row['24_query'] ?? null; // Will this location be open 24 hours on this date? // bool
+								$item_date_time_spans = $item_date_row['time_span'] ?? null; // Time span // repeater
+
+							// Add the common values for this set of special hours of operation to the output array
+
+								$item_date_output['date'] = $item_date;
+								$item_date_output['closed_query'] = $item_date_closed_query;
+								$item_date_output['24_query'] = $item_date_24_query;
+								$item_date_output['time_spans'] = $item_date_time_spans;
 
 							// Add the date to the item date list array as a Unix timestamp
 
@@ -326,10 +371,6 @@
 									$item_date_list[] = strtotime($item_date);
 
 								}
-
-							$item_date_closed_query = $item_date_row['closed_query'] ?? null; //  Will this location be closed on this date? // bool
-							$item_date_24_query = $item_date_row['24_query'] ?? null; // Will this location be open 24 hours on this date? // bool
-							$item_date_time_spans = $item_date_row['time_span'] ?? null; // Time span // repeater
 
 							// Loop through the time span repeater
 
