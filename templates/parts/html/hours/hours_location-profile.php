@@ -299,6 +299,10 @@
 
 			foreach ( $location_hours_modified_v2 as $item ) {
 
+				// Base item date list array
+
+					$item_date_list = array();
+
 				$item_title = $item['title'] ?? null; // Title / heading for this set of special hours // string (text)
 				$item_information = $item['information'] ?? null; // Overview of this set of special in-person hours of operation // string (wysiwyg)
 				$item_dates = $item['dates'] ?? null; // Dates of the special in-person hours of operation // repeater
@@ -310,6 +314,15 @@
 						foreach ( $item_dates as $item_date_row ) {
 
 							$item_date = $item_date_row['date'] ?? null; // Individual date for the special in-person hours of operation // string ('F j, Y')
+
+							// Add the date to the item date list array as a Unix timestamp
+
+								if ( $item_date ) {
+
+									$item_date_list[] = strtotime($item_date);
+
+								}
+
 							$item_date_closed_query = $item_date_row['closed_query'] ?? null; //  Will this location be closed on this date? // bool
 							$item_date_24_query = $item_date_row['24_query'] ?? null; // Will this location be open 24 hours on this date? // bool
 							$item_date_time_spans = $item_date_row['time_span'] ?? null; // Time span // repeater
@@ -329,6 +342,26 @@
 								}
 
 						}
+
+					}
+
+				// Check if time span for typical hours is inactive now or in the near future
+
+					/**
+					 * Set the typical hours as inactive...
+					 * if the start date for this set of special hours of operation is today or earlier...
+					 * and if the end date is in the distant future
+					 */
+
+					if (
+						$item_date_list
+						&&
+						min($item_date_list) <= $today
+						&&
+						max($item_date_list) >= $today_30
+					) {
+
+						$location_hours_typical_active = false;
 
 					}
 
