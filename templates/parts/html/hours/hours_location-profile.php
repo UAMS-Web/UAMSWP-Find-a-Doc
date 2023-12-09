@@ -42,6 +42,7 @@
 			$location_hours_modified_end_date = null;
 			$location_hours_modified_end_date_unix = null;
 			$location_hours_modified = null;
+			$location_hours_modified_v2 = null;
 			$location_hours_modified_active = null;
 
 			if ( !$location_hours_variable_query ) {
@@ -213,6 +214,7 @@
 						// Individual Modified In-Person Hours of Operation (repeater)
 
 							$location_hours_modified = $location_hours_modified_active ? $location_hours_group['location_modified_hours_group'] : null;
+							$location_hours_modified_v2 = $location_hours_modified_active ? $location_hours_group['location_modified_hours_group_v2'] : null;
 
 					}
 
@@ -292,6 +294,47 @@
 		);
 
 	// Special Hours
+
+		if ( $location_hours_modified_v2 ) {
+
+			foreach ( $location_hours_modified_v2 as $item ) {
+
+				$item_title = $item['title'] ?? null; // Title / heading for this set of special hours // string (text)
+				$item_information = $item['information'] ?? null; // Overview of this set of special in-person hours of operation // string (wysiwyg)
+				$item_dates = $item['dates'] ?? null; // Dates of the special in-person hours of operation // repeater
+
+				// Loop through the dates of the special in-person hours of operation repeater
+
+					if ( $item_dates ) {
+
+						foreach ( $item_dates as $item_date_row ) {
+
+							$item_date = $item_date_row['date'] ?? null; // Individual date for the special in-person hours of operation // string ('F j, Y')
+							$item_date_closed_query = $item_date_row['closed_query'] ?? null; //  Will this location be closed on this date? // bool
+							$item_date_24_query = $item_date_row['24_query'] ?? null; // Will this location be open 24 hours on this date? // bool
+							$item_date_time_spans = $item_date_row['time_span'] ?? null; // Time span // repeater
+
+							// Loop through the time span repeater
+
+								if ( $item_date_time_spans ) {
+
+									foreach ( $item_date_time_spans as $item_date_time_span ) {
+
+										$item_date_time_span_opens = $item_date_time_span['opens'] ?? null; // Opens // string ('g:i a')
+										$item_date_time_span_closes = $item_date_time_span['closes'] ?? null; // Closes // string ('g:i a')
+										$item_date_time_span_comment = $item_date_time_span['comment'] ?? null; // Comment // string (text)
+
+									}
+
+								}
+
+						}
+
+					}
+
+			}
+
+		}
 
 		$location_hours_modified_text = '';
 		$location_hours_modified_active_start = '';
