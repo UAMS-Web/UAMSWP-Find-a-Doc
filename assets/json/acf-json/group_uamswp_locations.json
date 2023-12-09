@@ -3970,7 +3970,7 @@
 							"label": "Overview",
 							"name": "information",
 							"type": "wysiwyg",
-							"instructions": "An overview of the modification to the in-person hours of operation (e.g., \"The clinic will be closed over the Thanksgiving holiday.\").",
+							"instructions": "An overview of this set of special in-person hours of operation (e.g., \"The clinic will be closed over the Thanksgiving holiday.\").",
 							"required": 0,
 							"conditional_logic": 0,
 							"wrapper": {
@@ -3990,7 +3990,7 @@
 							"label": "Dates of the Special In-Person Hours of Operation",
 							"name": "dates",
 							"type": "repeater",
-							"instructions": "Add a row for each sequential calendar day during the span of this modification to the in-person hours of operation (including days when the location is typically closed).",
+							"instructions": "Add a row for each sequential calendar day during this set of special in-person hours of operation (including days when the location is typically closed).",
 							"required": 1,
 							"conditional_logic": 0,
 							"wrapper": {
@@ -6839,7 +6839,7 @@
 							"label": "Overview",
 							"name": "information",
 							"type": "wysiwyg",
-							"instructions": "An overview of the modification to the telemedicine hours of operation (e.g., \"Telemedicine at this clinic will be unavailable over the Thanksgiving holiday.\").",
+							"instructions": "An overview of this set of special telemedicine hours of operation (e.g., \"Telemedicine at this clinic will be unavailable over the Thanksgiving holiday.\").",
 							"required": 0,
 							"conditional_logic": 0,
 							"wrapper": {
@@ -6859,7 +6859,7 @@
 							"label": "Dates of the Special Telemedicine Hours of Operation",
 							"name": "dates",
 							"type": "repeater",
-							"instructions": "Add a row for each sequential calendar day during the span of this modification to the telemedicine hours of operation (including days when the location is typically closed).",
+							"instructions": "Add a row for each sequential calendar day during this set of special telemedicine hours of operation (including days when the location is typically closed).",
 							"required": 1,
 							"conditional_logic": 0,
 							"wrapper": {
