@@ -61,7 +61,7 @@
 			 * This was modified from http://www.rockmycar.net/ap-style-dates-and-times-plugin/
 			 *
 			 * @param int	$time		the datetime as a timestamp.
-			 * @param bool	$capnoon	Should we capatalize the wood Noon?
+			 * @param bool	$capnoon	Should we capitalize the word Noon?
 			 *
 			 * @return	string
 			 */
@@ -232,7 +232,7 @@
 			 *
 			 * @param int		$date				The date as a datetime.
 			 * @param boolean	$today				Should Today be inserted if it is today?
-			 * @param boolean	$captoday			Catapatlize Today?
+			 * @param boolean	$captoday			Capitalize Today?
 			 * @param boolean	$useyear			include the year?
 			 * @param boolean	$useweekdaynames	include weekday names?
 			 *
@@ -558,7 +558,7 @@
 
 
 		// Use $wpdb's prepare() method to replace the placeholders with our actual data. Doing it this way protects against
-		// injection hacks as the prepare() method santizes the data accordingly. The output is a prepared, sanitized SQL
+		// injection hacks as the prepare() method sanitizes the data accordingly. The output is a prepared, sanitized SQL
 		// statement ready to be executed.
 		// $SQL = $wpdb->prepare( $SQL );
 
