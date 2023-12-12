@@ -4,6 +4,10 @@
 
 	/**
 	 * This was modified from https://stackoverflow.com/a/49796755
+	 *
+	 * @param string	$value	Date/time in format accepted by DateTimeImmutable::__construct().
+	 *
+	 * @return	bool
 	 */
 
 	 if ( !function_exists('isDate') ) {
@@ -40,6 +44,12 @@
 
 		// Format a single time for AP Style (v1)
 
+			/**
+			 * @param string	$date	The time value as a string
+			 *
+			 * @return	string
+			 */
+
 			if ( !function_exists('apStyleDate') ) {
 
 				function apStyleDate( $date ){
@@ -60,8 +70,8 @@
 			/**
 			 * This was modified from http://www.rockmycar.net/ap-style-dates-and-times-plugin/
 			 *
-			 * @param int	$time		the datetime as a timestamp.
-			 * @param bool	$capnoon	Should the words 'noon' or 'midnight' be capitalized?
+			 * @param int		$time		The time value as a Unix timestamp
+			 * @param boolean	$capnoon	Should the words 'noon' or 'midnight' be capitalized?
 			 *
 			 * @return	string
 			 */
@@ -129,6 +139,13 @@
 
 		// Format a single time for AP Style (v3)
 
+			/**
+			 * @param string	$time		The time value as a Unix timestamp.
+			 * @param boolean	$capnoon	Should the words 'noon' or 'midnight' be capitalized?
+			 *
+			 * @return	string
+			 */
+
 			if ( !function_exists('apStyleTime') ) {
 
 				function apStyleTime( $time, $capnoon = true ) {
@@ -194,10 +211,10 @@
 		// Format a time range for AP Style
 
 			/**
-			 * Takes two datetimes and converts them to an ap style time range string.
+			 * Takes two DateTime values and converts them to an AP Style time range string.
 			 *
-			 * @param int	$start	The start date as a timestamp.
-			 * @param int	$end	The end date as a timestamp.
+			 * @param int	$start	The start date as a Unix timestamp
+			 * @param int	$end	The end date as a Unix timestamp
 			 *
 			 * @return	string
 			 */
@@ -230,11 +247,11 @@
 			/**
 			 * This was modified from https://gist.github.com/tryonegg/d2e07e1d8f4ff8f1219ca639583f97ee
 			 *
-			 * @param int		$date				The date as a datetime.
-			 * @param boolean	$today				Should Today be inserted if it is today?
-			 * @param boolean	$captoday			Capitalize Today?
-			 * @param boolean	$useyear			include the year?
-			 * @param boolean	$useweekdaynames	include weekday names?
+			 * @param int		$date				The date as a Unix timestamp
+			 * @param boolean	$today				Should 'today' be inserted if it is today?
+			 * @param boolean	$captoday			Capitalize 'today'?
+			 * @param boolean	$useyear			Include the year?
+			 * @param boolean	$useweekdaynames	Include weekday names?
 			 *
 			 * @return	string
 			 */
