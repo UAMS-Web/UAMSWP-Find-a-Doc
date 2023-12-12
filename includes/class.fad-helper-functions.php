@@ -1,5 +1,39 @@
 <?php
 
+// Check if a string is a date
+
+	/**
+	 * This was modified from https://stackoverflow.com/a/49796755
+	 */
+
+	 if ( !function_exists('isDate') ) {
+
+		function isDate( $value ) {
+
+			if ( !$value ) {
+
+				return false;
+
+			} else {
+
+				$date = date_parse($value);
+
+				if ( $date['error_count'] == 0 && $date['warning_count'] == 0 ) {
+
+					return checkdate( $date['month'], $date['day'], $date['year'] );
+
+				} else {
+
+					return false;
+
+				}
+
+			}
+
+		}
+
+	}
+
 // AP Style for Dates
 
 	if ( !function_exists('apStyleDate') ) {
@@ -232,40 +266,6 @@
 			} else {
 
 				return ap_time( $start ) . ' &ndash; ' . ap_time( $end );
-
-			}
-
-		}
-
-	}
-
-// Check if a string is a date
-
-	/**
-	 * This was modified from https://stackoverflow.com/a/49796755
-	 */
-
-	if ( !function_exists('isDate') ) {
-
-		function isDate( $value ) {
-
-			if ( !$value ) {
-
-				return false;
-
-			} else {
-
-				$date = date_parse($value);
-
-				if ( $date['error_count'] == 0 && $date['warning_count'] == 0 ) {
-
-					return checkdate( $date['month'], $date['day'], $date['year'] );
-
-				} else {
-
-					return false;
-
-				}
 
 			}
 
