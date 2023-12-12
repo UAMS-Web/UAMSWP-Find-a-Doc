@@ -13,11 +13,11 @@
 
 // Get Values
 
-	// Get Hours Group
+	// Get Hours of Operation Group
 
 		$location_hours_group = $location_hours_group ?? get_field('location_hours_group');
 
-	// Get In-Person Hours Values
+	// Get In-Person Hours of Operation Values
 
 		// Variable Hours
 
@@ -49,7 +49,7 @@
 
 				// Typical In-Person Hours
 
-					// Set default value for whether typical hours are active now or in the near future
+					// Set default value for whether typical hours of operation are active now or in the near future
 
 						$location_hours_typical_active = true;
 
@@ -57,7 +57,7 @@
 
 						$location_hours_24_7_query = !$location_hours_variable_query ? $location_hours_group['location_24_7'] : null;
 
-					// Typical Days and Hours for In-Person Operation (repeater)
+					// Typical Days and Hours of Operation for In-Person Operation (repeater)
 
 						$location_hours_repeater = ( !$location_hours_variable_query && !$location_hours_24_7_query ) ? $location_hours_group['location_hours'] : null;
 
@@ -99,7 +99,7 @@
 
 						}
 
-				// Modified In-Person Hours
+				// Special In-Person Hours
 
 					// Are there any upcoming modified in-person hours of operation? (bool)
 
@@ -107,19 +107,25 @@
 
 					if ( $location_hours_modified_query ) {
 
-						// Get today's date as a Unix timestamp
+						// Get common date values
 
-							$today = strtotime("today");
+							// Get today's date as a Unix timestamp
 
-						// Get a near-future date as a Unix timestamp
+								$today = strtotime("today");
 
-							$today_30 = strtotime("+30 days");
+							// Get a near-future date as a Unix timestamp
 
-						// Reason for Modified In-Person Hours of Operation (string [WYSIWYG])
+								$today_30 = strtotime("+30 days");
+
+							// Get the current year
+
+								$current_year = date( 'Y', $today );
+
+						// Reason for Special In-Person Hours of Operation (string [WYSIWYG])
 
 							$location_hours_modified_reason = $location_hours_group['location_modified_hours_reason'];
 
-						// Start Date For the Modified In-Person Hours of Operation (string [F j, Y])
+						// Start Date For the Special In-Person Hours of Operation (string [F j, Y])
 
 							$location_hours_modified_start_date = $location_hours_group['location_modified_hours_start_date'];
 
@@ -131,7 +137,7 @@
 
 							$location_hours_modified_end_query = $location_hours_group['location_modified_hours_end'];
 
-						// End Date For the Modified In-Person Hours of Operation (string [F j, Y])
+						// End Date For the Special In-Person Hours of Operation (string [F j, Y])
 
 							$location_hours_modified_end_date = $location_hours_modified_end_query ? $location_hours_group['location_modified_hours_end_date'] : null;
 
@@ -139,7 +145,7 @@
 
 								$location_hours_modified_end_date_unix = strtotime($location_hours_modified_end_date);
 
-						// Check if time span for special hours is active now or in the near future
+						// Check if time span for special hours of operation is active now or in the near future
 
 							if (
 								$location_hours_modified_start_date_unix
@@ -175,7 +181,7 @@
 
 							}
 
-						// Check if time span for typical hours is inactive now or in the near future
+						// Check if time span for typical hours of operation is inactive now or in the near future
 
 							if (
 								$location_hours_modified_start_date_unix
@@ -184,7 +190,7 @@
 							) {
 
 								/**
-								 * If start date for special hours is today or earlier
+								 * If start date for special hours of operation is today or earlier
 								 */
 
 								if ( !$location_hours_modified_end_query ) {
@@ -211,7 +217,7 @@
 
 							}
 
-						// Individual Modified In-Person Hours of Operation (repeater)
+						// Individual Special In-Person Hours of Operation (repeater)
 
 							$location_hours_modified = $location_hours_modified_active ? $location_hours_group['location_modified_hours_group'] : null;
 							$location_hours_modified_v2 = $location_hours_modified_active ? $location_hours_group['location_modified_hours_group_v2'] : null;
@@ -248,12 +254,12 @@
 
 		}
 
-// Display Variable Hours Information
+// Display Variable Hours of Operation Information
 
 	if ( $location_hours_variable_query ) {
 
 		/**
-		 * If the location's hours vary...
+		 * If the location's hours of operation vary...
 		 */
 
 		?>
@@ -264,125 +270,795 @@
 
 	}
 
-// Display Static Hours Information
+// Display Static Hours of Operation Information
 
 	// Set the timezone from the server
 
 		date_default_timezone_set( wp_timezone_string() );
 
-	// Base item array for adding to the hours list arrays
+	// Base / standard values
 
-		$location_hours_list_item_array = array(
-			'times' => array(
-				'opens' => array(
-					'unix' => null, // Unix timestamp
-					'24_hour' => null, // 24:00 format ('H:i')
-					'iso_8601' => null // ISO 8601 ('H:i:sP')
+		// Base item array for adding to the hours of operation list arrays
+
+			$location_hours_list_item_array = array(
+				'times' => array(
+					'opens' => array(
+						'acf' => null, // Value from ACF field ('g:i a')
+						'unix' => null, // Unix timestamp
+						'24_hour' => null, // 24:00 format ('H:i')
+						'iso_8601' => null // ISO 8601 format for time only ('H:i:sP')
+					),
+					'closes' => array(
+						'acf' => null, // Value from ACF field ('g:i a')
+						'unix' => null, // Unix timestamp
+						'24_hour' => null, // 24:00 format ('H:i')
+						'iso_8601' => null // ISO 8601 format for time only ('H:i:sP')
+					)
 				),
-				'closes' => array(
-					'unix' => null, // Unix timestamp
-					'24_hour' => null, // 24:00 format ('H:i')
-					'iso_8601' => null // ISO 8601 ('H:i:sP')
+				'time_span' => null, // Time span to display, formatted for AP Style
+				'description' => null, // Description of the time span to display
+				'valid' => array(
+					'from' => array(
+						'acf' => null, // Value from ACF field ('F j, Y')
+						'unix' => null, // Unix timestamp
+						'iso_8601' => null // ISO 8601 format for date only ('Y-m-d')
+					), // The date when the item becomes valid
+					'through' => array(
+						'acf' => null, // Value from ACF field ('F j, Y')
+						'unix' => null, // Unix timestamp
+						'iso_8601' => null // ISO 8601 format for date only ('Y-m-d')
+					) // The date after when the item is not valid
 				)
-			),
-			'time_span' => null, // Time span to display, formatted for AP Style
-			'description' => null, // Description of the time span to display
-			'valid' => array(
-				'from' => null, // The date when the item becomes valid
-				'to' => null // The date after when the item is not valid
-			)
-		);
+			);
+
+		// Base string values
+
+				/**
+				 * Format the value using AP Style.
+				 */
+
+			// Section headings
+
+				$location_hours_text_heading_common = 'Hours';
+				$location_hours_text_heading_special = 'Special Hours';
+				$location_hours_text_heading_typical = 'Typical Hours';
+
+			// Time span text for display
+
+				$location_hours_text_24_hours = 'Open 24 hours';
+				$location_hours_text_closed = 'Closed';
 
 	// Special Hours
 
-		// Base typical hours list array
+		// Get the values
 
-			$location_hours_modified_list = array();
+			// Base special hours of operation list array
 
-		if ( $location_hours_modified_v2 ) {
+				$location_hours_modified_list = array();
 
-			foreach ( $location_hours_modified_v2 as $item ) {
+			// Loop through the Individual Special In-Person Hours of Operation repeater
 
-				// Base output array
+				if ( $location_hours_modified_v2 ) {
 
-					$item_output = array(
-						'title' => null,
-						'information' => null,
-						'dates' => null
-					);
+					foreach ( $location_hours_modified_v2 as $item ) {
 
-				// Base individual time span output array
+						if ( $item ) {
 
-					$item_time_span_output = $location_hours_list_item_array;
+							// Define/reset the base special hours of operation set output array
 
-				// Base item date list array
-
-					/**
-					 * Use this to collect all dates from this set of special hours of operation.
-					 * Format each date as a Unix timestamp.
-					 */
-
-					$item_date_list = array();
-
-				// Get the common values for this set of special hours of operation
-
-					$item_title = $item['title'] ?? null; // Title / heading for this set of special hours // string (text)
-					$item_information = $item['information'] ?? null; // Overview of this set of special in-person hours of operation // string (wysiwyg)
-					$item_dates = $item['dates'] ?? null; // Dates of the special in-person hours of operation // repeater
-
-				// Add the common values for this set of special hours of operation to the output array
-
-					$item_output['title'] = $item_title;
-					$item_output['information'] = $item_information;
-
-				// Loop through the dates of the special in-person hours of operation repeater
-
-					if ( $item_dates ) {
-
-						foreach ( $item_dates as $item_date_row ) {
-
-							// Base individual date output array
-
-								$item_date_output = array(
-									'date' => null,
-									'closed_query' => null,
-									'24_query' => null,
-									'time_spans' => null
+								$item_output = array(
+									'title' => null, // string
+									'information' => null, // string
+									'date_range_text' => null, // string
+									'dates' => null // array populated by individual date output arrays
 								);
 
-							// Get the common values for this time span
+							// Define/reset the base item date list array
 
-								$item_date = $item_date_row['date'] ?? null; // Individual date for the special in-person hours of operation // string ('F j, Y')
-								$item_date_closed_query = $item_date_row['closed_query'] ?? null; //  Will this location be closed on this date? // bool
-								$item_date_24_query = $item_date_row['24_query'] ?? null; // Will this location be open 24 hours on this date? // bool
-								$item_date_time_spans = $item_date_row['time_span'] ?? null; // Time span // repeater
+								/**
+								 * Use this to collect all dates from this set of special hours of operation.
+								 * Format each date as a Unix timestamp.
+								 */
 
-							// Add the common values for this set of special hours of operation to the output array
+								$item_date_list = array();
 
-								$item_date_output['date'] = $item_date;
-								$item_date_output['closed_query'] = $item_date_closed_query;
-								$item_date_output['24_query'] = $item_date_24_query;
-								$item_date_output['time_spans'] = $item_date_time_spans;
+							// Get the common values for this set of special hours of operation
 
-							// Add the date to the item date list array as a Unix timestamp
+								$item_output['title'] = $item['title'] ?? null; // Title / heading for this set of special hours of operation // string (text)
+								$item_output['information'] = $item['information'] ?? null; // Overview of this set of special in-person hours of operation // string (wysiwyg)
 
-								if ( $item_date ) {
+							// Loop through the dates of the special in-person hours of operation repeater
 
-									$item_date_list[] = strtotime($item_date);
+								/**
+								 * Each row in the special in-person hours of operation repeater is a specific
+								 * date. If the values were entered correctly, the dates for each row should be an
+								 * uninterrupted series of dates (e.g., January 1, January 2, January 3).
+								 */
+
+								if ( $item['dates'] ) {
+
+									foreach ( $item['dates'] as $item_date_row ) {
+
+										/**
+										 * Expected structure of $item_date_row:
+										 *
+										 *     $item_date_row = array(
+										 *         'date' => 'January 1, 1970', // Individual Date For the Special In-Person Hours of Operation // string ('F j, Y')
+										 *         'closed_query' => 0, // Status // bool
+										 *         '24_query' => 0, // Will this location be open 24 hours on this date? // bool
+										 *         'time_span' => array(
+										 *             array(
+										 *                 'opens' => '8:00 am', // Opens time // string ('g:i a')
+										 *                 'closes' => '5:00 pm', // Closes time // string ('g:i a')
+										 *                 'comment' => '', // Comment // string
+										 *             ),
+										 *             array( ... )
+										 *         )
+										 *     );
+										 */
+
+										// Define/reset the individual date output array
+
+											$item_date_output = array(
+												'date' => array(
+													'acf' => null, // Value from ACF field ('F j, Y')
+													'unix' => null, // Unix timestamp
+													'iso_8601' => null, // ISO 8601 format for date only ('Y-m-d')
+													'long' => null // Long-form date value (e.g., 'Thursday, January 1, 1970') ('l, F j, Y')
+												),
+												'date_after' => array(
+													'acf' => null, // Value from ACF field ('F j, Y')
+													'unix' => null, // Unix timestamp
+													'iso_8601' => null, // ISO 8601 format for date only ('Y-m-d')
+													'long' => null // Long-form date value (e.g., 'Thursday, January 1, 1970') ('l, F j, Y')
+												),
+												'closed_query' => null, // bool
+												'24_query' => null, // bool
+												'time_spans' => null // array populated by individual time span output arrays
+											);
+
+										// Get the relevant dates
+
+											/**
+											 * $item_date_output['date'] and $item_date_output['date_after']
+											 */
+
+											// Individual date for the special in-person hours of operation
+
+												/**
+												 * $item_date_output['date']
+												 */
+
+												// Date value from ACF field // string ('F j, Y')
+
+													$item_date_output['date']['acf'] = $item_date_row['date'] ?? null;
+
+												// Convert the Date value to other formats
+
+													// Get the Unix timestamp
+
+														$item_date_output['date']['unix'] = strtotime( $item_date_output['date']['acf'] . ', midnight' ) ?? null;
+
+													// Convert the Unix timestamp to other formats
+
+														// ISO 8601 format for date only ('Y-m-d')
+
+															$item_date_output['date']['iso_8601'] = date( 'Y-m-d', $item_date_output['date']['unix'] ) ?? null;
+
+														// Long-form date value (e.g., 'Thursday, January 1, 1970') ('l, F j, Y')
+
+															$item_date_output['date']['long'] = date( 'l, F j, Y', $item_date_output['date']['unix'] ) ?? null;
+
+														// Long-form date value, formatted for AP Style
+
+															// If the year falls in the current year, exclude the year from the string
+
+																$item_date_output['date']['long_ap_style'] = str_replace(
+																	', ' . $current_year, // needle
+																	'', // replacement value
+																	$item_date_output['date']['long'] // haystack
+																);
+
+															// Abbreviate the months according to AP Style
+
+																$item_date_output['date']['long_ap_style'] = str_replace(
+																	array(
+																		'January',
+																		'February',
+																		'August',
+																		'September',
+																		'October',
+																		'November',
+																		'December'
+																	), // needle
+																	array(
+																		'Jan.',
+																		'Feb.',
+																		'Aug.',
+																		'Sept.',
+																		'Oct.',
+																		'Nov.',
+																		'Dec.'
+																	), // replacement value
+																	$item_date_output['date']['long_ap_style'] // haystack
+																);
+
+															// Replace all spaces after the first occurrence with non-breaking spaces
+
+																if ( substr_count( $item_date_output['date']['long_ap_style'], ' ' ) > 1 ) {
+
+																	$item_date_output['date']['long_ap_style'] = implode(
+																		' ', // separator string
+																		array(
+																			explode(' ', $item_date_output['date']['long_ap_style'], 2)[0],
+																				str_replace(
+																				' ', // needle
+																				'&nbsp;', // replacement value
+																				explode(' ', $item_date_output['date']['long_ap_style'], 2)[1] // haystack
+																			)
+																		) // The array of strings to implode
+																	);
+
+																}
+
+											// Day after the individual date for the special in-person hours of operation
+
+												/**
+												 * $item_date_output['date_after']
+												 */
+
+												// Get the Unix timestamp
+
+													$item_date_output['date_after']['unix'] = strtotime( $item_date_output['date']['acf'] . ' + 1 day, midnight' ) ?? null;
+
+												// Convert the Unix timestamp to other formats
+
+													// Date value as if from ACF field // string ('F j, Y')
+
+														$item_date_output['date_after']['acf'] = date( 'F j, Y', $item_date_output['date_after']['unix'] ) ?? null;
+
+													// ISO 8601 format for date only ('Y-m-d')
+
+														$item_date_output['date_after']['iso_8601'] = date( 'Y-m-d', $item_date_output['date_after']['unix'] ) ?? null;
+
+										// Will this location be closed on this date?
+
+											/**
+											 * $item_date_output['closed_query']
+											 */
+
+											if (
+												!isset($item_date_output['closed_query'])
+												||
+												$item_date_output['closed_query'] == false
+											) {
+
+												$item_date_output['closed_query'] = ( $item_date_row['closed_query'] ? 1 : 0 ) ?? 0;
+
+											}
+
+										// Will this location be open 24 hours on this date?
+
+											/**
+											 * $item_date_output['24_query']
+											 */
+
+											if (
+												!isset($item_date_output['24_query'])
+												||
+												$item_date_output['24_query'] == false
+											) {
+
+												$item_date_output['24_query'] = ( $item_date_row['24_query'] ? 1 : 0 ) ?? 0;
+
+											}
+
+										// Get the valid date(s)
+
+											/**
+											 * Store them in a variable to be added to the output array later.
+											 */
+
+											$item_date_valid = $location_hours_list_item_array['valid'];
+
+											// Valid From
+
+												/**
+												 * Mirror the date values from the individual date for the special in-person hours of operation
+												 */
+
+												$item_date_valid['from'] = $item_date_output['date'];
+
+											// Valid Through
+
+												/**
+												 * Mirror the date values from Valid From array
+												 */
+
+												$item_date_valid['through'] = $item_date_valid['from'];
+
+										// Add the date to the item date list array as a Unix timestamp
+
+											if ( $item_date_output['date']['unix'] ) {
+
+												$item_date_list[] = $item_date_output['date']['unix'];
+
+											}
+
+										// Set the time spans
+
+											// Closed Status
+
+												if ( $item_date_output['closed_query'] ) {
+
+													/**
+													 * If the location is closed on this date...
+													 */
+
+													// Get the values
+
+														// Define/reset the base individual time span output array
+
+															$item_time_span_output = $location_hours_list_item_array;
+
+														// 'times' // Set the time values
+
+															/**
+															 * Set the opening and closing times both as midnight (12:00:00 a.m.) on the set date
+															 */
+
+															// 'opens' // Opening time
+
+																/**
+																 * Set the opening time as midnight (12:00:00 a.m.) on the set date
+																 */
+
+																// 'unix' // Get the Unix timestamp for the relevant date and time
+
+																	$item_time_span_output['times']['opens']['unix'] = $item_date_output['date']['unix'] ?? null; // Get the Unix timestamp 12:00:00 a.m. on the set date // string
+
+																// 'acf' // Convert the Unix timestamp value to the ACF field value format ('g:i a')
+
+																	$item_time_span_output['times']['opens']['acf'] = date( 'g:i a', $item_time_span_output['times']['opens']['unix'] ) ?? null;
+
+																// '24_hour' // Convert the Unix timestamp value to the 24-hour format ('H:i')
+
+																	$item_time_span_output['times']['opens']['24_hour'] = date( 'H:i', $item_time_span_output['times']['opens']['unix'] ) ?? null;
+
+																// 'iso_8601' // Convert the Unix timestamp value to the ISO 8601 format for time only ('H:i:sP')
+
+																	$item_time_span_output['times']['opens']['iso_8601'] = date( 'H:i:sP', $item_time_span_output['times']['opens']['unix'] ) ?? null;
+
+															// 'closes' // Closing time
+
+																/**
+																 * Mirror the time values from the opening time array
+																 */
+
+																$item_time_span_output['times']['closes'] = $item_time_span_output['times']['opens'];
+
+														// 'time_span' // Set/construct the time span text for display
+
+															/**
+															 * Format the value using AP Style.
+															 */
+
+															$item_time_span_output['time_span'] = $location_hours_text_closed;
+
+														// 'description' // Description of the time span to display
+
+															$item_time_span_output['description'] = '';
+
+														// 'valid' // The dates these hours are valid
+
+															$item_time_span_output['valid'] = $item_date_valid;
+
+													// echo '<p>$item_time_span_output (closed) = ' . ( is_array($item_time_span_output) ? 'Array' : ( is_object($item_time_span_output) ? 'Object' : ( is_null($item_time_span_output) ? 'Null' : ( $item_time_span_output ) ) ) ) . '</p>'; // test
+													// if ( is_array($item_time_span_output) || is_object($item_time_span_output) ) { echo '<pre>'; print_r($item_time_span_output); echo '</pre>'; } // test
+
+													// Clean up the individual time span output array
+
+														/**
+														 * Empty the individual time span output array if certain key values are not set
+														 */
+
+															if (
+															!isset($item_time_span_output['times']['opens']['unix']) // If there is no opens time value
+															||
+															!isset($item_time_span_output['times']['closes']['unix']) // If there is no closes time value
+															||
+															!isset($item_time_span_output['time_span']) // If there is time span text
+															||
+															!isset($item_time_span_output['valid']['from']['unix']) // If there is no valid from date value
+															||
+															!isset($item_time_span_output['valid']['through']['unix']) // If there is no valid through date value
+														) {
+
+															$item_time_span_output = null;
+
+														}
+
+													// Add the values to the output array
+
+														if ( $item_time_span_output ) {
+
+															$item_date_output['time_spans'][] = $item_time_span_output;
+
+														}
+
+												}
+
+											// Open Status
+
+												if ( !$item_date_output['closed_query'] ) {
+
+													/**
+													 * If the location is open on this date...
+													 */
+
+													// Open 24 hours
+
+														if ( $item_date_output['24_query'] ) {
+
+															/**
+															 * If the location is open 24 hours on this date or time span...
+															 */
+
+															// Get the values
+
+																// Define/reset the base individual time span output array
+
+																	$item_time_span_output = $location_hours_list_item_array;
+
+																// 'times' // Set the time values
+
+																	// 'opens' // Opening time
+
+																		/**
+																		 * Set the opening time as midnight (12:00:00 a.m.) on the set date
+																		 */
+
+																		// 'unix' // Get the Unix timestamp for the relevant date and time
+
+																			$item_time_span_output['times']['opens']['unix'] = $item_date_output['date']['unix'] ?? null;
+
+																		// 'acf' // Convert the Unix timestamp to the ACF field value format ('g:i a')
+
+																			$item_time_span_output['times']['opens']['acf'] = date( 'g:i a', $item_time_span_output['times']['opens']['unix'] ) ?? null;
+
+																		// '24_hour' // Convert the Unix timestamp to the 24-hour format ('H:i')
+
+																			$item_time_span_output['times']['opens']['24_hour'] = date( 'H:i', $item_time_span_output['times']['opens']['unix'] ) ?? null;
+
+																		// 'iso_8601' // Convert the Unix timestamp to the ISO 8601 format for time only ('H:i:sP')
+
+																			$item_time_span_output['times']['opens']['iso_8601'] = date( 'H:i:sP', $item_time_span_output['times']['opens']['unix'] ) ?? null;
+
+																	// 'closes' // Closing time
+
+																		/**
+																		 * Set the closing time as 11:59:59 p.m. on the set date
+																		 */
+
+																		// 'unix' // Get the Unix timestamp for the relevant date and time
+
+																			$item_time_span_output['times']['closes']['unix'] = strtotime( $item_date_output['date']['acf'] . ', 11:59:59 pm' ) ?? null; // Get the Unix timestamp for 11:59:59 p.m. on the set date
+
+																		// 'acf' // Convert the Unix timestamp to the ACF field value format ('g:i a')
+
+																			$item_time_span_output['times']['closes']['acf'] = date( 'g:i a', $item_time_span_output['times']['closes']['unix'] ) ?? null; // Unix timestamp converted to match ACF field value format ('g:i a')
+
+																		// '24_hour' // Convert the Unix timestamp to the 24-hour format ('H:i')
+
+																			$item_time_span_output['times']['closes']['24_hour'] = date( 'H:i', $item_time_span_output['times']['closes']['unix'] ) ?? null; // Unix timestamp converted to match 24-hour format ('H:i')
+
+																		// 'iso_8601' // Convert the Unix timestamp to the ISO 8601 format for time only ('H:i:sP')
+
+																			$item_time_span_output['times']['closes']['iso_8601'] = date( 'H:i:sP', $item_time_span_output['times']['opens']['unix'] ) ?? null;
+
+																// 'time_span' // Set/construct the time span text for display
+
+																	/**
+																	 * Format the value using AP Style.
+																	 */
+
+																	$item_time_span_output['time_span'] = $location_hours_text_24_hours;
+
+																// 'description' // Set the description value for the time span
+
+																	$item_time_span_output['description'] = '';
+
+																// 'valid' // The dates these hours are valid
+
+																	$item_time_span_output['valid'] = $item_date_valid;
+
+															// Clean up the individual time span output array
+
+																/**
+																 * Empty the individual time span output array if certain key values are not set
+																 */
+
+																	if (
+																	!isset($item_time_span_output['times']['opens']['unix']) // If there is no opens time value
+																	||
+																	!isset($item_time_span_output['times']['closes']['unix']) // If there is no closes time value
+																	||
+																	!isset($item_time_span_output['time_span']) // If there is time span text
+																	||
+																	!isset($item_time_span_output['valid']['from']['unix']) // If there is no valid from date value
+																	||
+																	!isset($item_time_span_output['valid']['through']['unix']) // If there is no valid through date value
+																) {
+
+																	$item_time_span_output = null;
+
+																}
+
+															// Add the values to the output array
+
+																if ( $item_time_span_output ) {
+
+																	$item_date_output['time_spans'][] = $item_time_span_output;
+
+																}
+
+															// echo '<p>$item_time_span_output (open 24 hours) = ' . ( is_array($item_time_span_output) ? 'Array' : ( is_object($item_time_span_output) ? 'Object' : ( is_null($item_time_span_output) ? 'Null' : ( $item_time_span_output ) ) ) ) . '</p>'; // test
+															// if ( is_array($item_time_span_output) || is_object($item_time_span_output) ) { echo '<pre>'; print_r($item_time_span_output); echo '</pre>'; } // test
+
+														}
+
+													// Not open 24 hours
+
+														if ( !$item_date_output['24_query'] ) {
+
+															// Loop through the time span repeater
+
+																if ( $item_date_row['time_span'] ) {
+
+																	foreach ( $item_date_row['time_span'] as $item_date_time_span ) {
+
+																		if ( $item_date_time_span ) {
+
+																			// Get the values
+
+																				// Define/reset the base individual time span output array
+
+																					$item_time_span_output = $location_hours_list_item_array;
+
+																				// 'times' // Set the time values
+
+																					// 'opens' // Opening time
+
+																						// 'acf' // Get the ACF DateTime value ('g:i a')
+
+																							$item_time_span_output['times']['opens']['acf'] = $item_date_time_span['opens'] ?? null;
+
+																						// 'unix' // Use the ACF value to get the Unix timestamp for the relevant time on the set date
+
+																							$item_time_span_output['times']['opens']['unix'] = strtotime( $item_date_output['date']['acf'] . ', ' . $item_time_span_output['times']['opens']['acf'] ) ?? null;
+
+																						// '24_hour' // Convert the Unix timestamp value to the 24-hour format ('H:i')
+
+																								$item_time_span_output['times']['opens']['24_hour'] = date( 'H:i', $item_time_span_output['times']['opens']['unix'] ) ?? null;
+
+																						// 'iso_8601' // Convert the Unix timestamp value to the ISO 8601 format for time only ('H:i:sP')
+
+																							$item_time_span_output['times']['opens']['iso_8601'] = date( 'H:i:sP', $item_time_span_output['times']['opens']['unix'] ) ?? null;
+
+																					// 'closes' // Closing time
+
+																						// 'acf' // Get the ACF DateTime value ('g:i a')
+
+																							$item_time_span_output['times']['closes']['acf'] = $item_date_time_span['closes'] ?? null; // string
+
+																						// 'unix' // Use the ACF value to get the Unix timestamp for the relevant time on the set date
+
+																							/**
+																							 * Check if the closing time crosses into the next day
+																							 */
+
+																							if ( strtotime($item_time_span_output['times']['opens']['acf']) >= strtotime($item_time_span_output['times']['closes']['acf']) ) {
+
+																								/**
+																								 * If the closing time is later than the opening time, then continue normally
+																								 */
+
+																								$item_time_span_output['times']['closes']['unix'] = strtotime( $item_date_output['date']['acf'] . ', ' . $item_time_span_output['times']['closes']['acf'] ) ?? null;
+
+																							} else {
+
+																								/**
+																								 * If the closing time is earlier than the opening time, then the time span must
+																								 * cross over into the next day, so use the date after that day instead
+																								 */
+
+																								$item_time_span_output['times']['closes']['unix'] = strtotime( $item_date_output['date_after']['acf'] . ', ' . $item_time_span_output['times']['closes']['acf'] ) ?? null;
+
+																							}
+
+																						// '24_hour' // Convert the Unix timestamp value to the 24-hour format ('H:i')
+
+																							$item_time_span_output['times']['closes']['24_hour'] = date( 'H:i', $item_time_span_output['times']['closes']['unix'] ) ?? null;
+
+																						// 'iso_8601' // Convert the Unix timestamp value to the ISO 8601 format for time only ('H:i:sP')
+
+																							$item_time_span_output['times']['closes']['iso_8601'] = date( 'H:i:sP', $item_time_span_output['times']['closes']['unix'] ) ?? null;
+
+																				// 'time_span' // Set/construct the time span text for display
+
+																					/**
+																					 * Format the value using AP Style.
+																					 */
+
+																					$item_time_span_output['time_span'] = ap_time_span(
+																						$item_time_span_output['times']['opens']['unix'],
+																						$item_time_span_output['times']['closes']['unix']
+																					) ?? null;
+
+																				// 'description' // Set the description value for the time span
+
+																					$item_time_span_output['description'] = ( isset($item_date_time_span['comment']) && !empty($item_date_time_span['comment']) ) ? $item_date_time_span['comment'] : null;
+
+																				// 'valid' // The dates these hours are valid
+
+																					$item_time_span_output['valid'] = $item_date_valid;
+
+																			// Clean up the individual time span output array
+
+																				/**
+																				 * Empty the individual time span output array if certain key values are not set
+																				 */
+
+																				if (
+																					!isset($item_time_span_output['times']['opens']['unix']) // If there is no opens time value
+																					||
+																					!isset($item_time_span_output['times']['closes']['unix']) // If there is no closes time value
+																					||
+																					!isset($item_time_span_output['time_span']) // If there is time span text
+																					||
+																					!isset($item_time_span_output['valid']['from']['unix']) // If there is no valid from date value
+																					||
+																					!isset($item_time_span_output['valid']['through']['unix']) // If there is no valid through date value
+																				) {
+
+																					$item_time_span_output = null;
+
+																				}
+
+																			// Add the values to the output array
+
+																				if ( $item_time_span_output ) {
+
+																					$item_date_output['time_spans'][] = $item_time_span_output;
+
+																				}
+
+																			// echo '<p>$item_time_span_output (open) = ' . ( is_array($item_time_span_output) ? 'Array' : ( is_object($item_time_span_output) ? 'Object' : ( is_null($item_time_span_output) ? 'Null' : ( $item_time_span_output ) ) ) ) . '</p>'; // test
+																			// if ( is_array($item_time_span_output) || is_object($item_time_span_output) ) { echo '<pre>'; print_r($item_time_span_output); echo '</pre>'; } // test
+
+																		} // endif ( !$item_date_output['closed_query'] )
+
+																	} // endforeach ( $item_date_row['time_span'] as $item_date_time_span )
+
+																} // endif ( $item_date_row['time_span'] )
+
+														}
+
+												} // endif ( !$item_date_output['closed_query'] )
+
+										// echo '<p>$item_date_output = ' . ( is_array($item_date_output) ? 'Array' : ( is_object($item_date_output) ? 'Object' : ( is_null($item_date_output) ? 'Null' : ( $item_date_output ) ) ) ) . '</p>'; // test
+										// if ( is_array($item_date_output) || is_object($item_date_output) ) { echo '<pre>'; print_r($item_date_output); echo '</pre>'; } // test
+
+										// Clean up the individual date output array
+
+											/**
+											 * Empty the individual date output array if certain key values are not set
+											 */
+
+											if (
+												!isset($item_date_output['date']['unix']) // If there is no date value
+												||
+												!isset($item_date_output['time_spans']) // If there is no time spans value
+											) {
+
+												$item_date_output = null;
+
+											}
+
+										// Add the individual date output array to the individual special hours of operation set output array
+
+											if ( $item_date_output ) {
+
+												$item_output['dates'][$item_date_output['date']['long_ap_style']] = $item_date_output;
+
+											}
+
+									} // endforeach ( $item['dates'] as $item_date_row )
+
+								} // endif ( $item['dates'] )
+
+							// Set the date range text
+
+								$item_output['date_range_text'] = 'These special hours start on ' . date( 'F j, Y', min($item_date_list) ) . ', and are scheduled to end after ' . date( 'F j, Y', max($item_date_list) ) . '.';
+
+							// Clean up the individual special hours of operation set output array
+
+								/**
+								 * Empty certain arrays if certain key values are not set.
+								 */
+
+								if (
+									!isset($item_output['title']) // If there is no title value
+									// ||
+									// !isset($item_output['information']) // If there is no information value
+									||
+									!isset($item_output['dates']) // If there is dates value
+								) {
+
+									// Empty the individual special hours of operation set output array
+
+										$item_output = null;
+
+									// Empty the special hours of operation set date list array
+
+										$item_date_list = null;
 
 								}
 
-							// Loop through the time span repeater
+							// Check if this set of special hours of operation should be active
 
-								if ( $item_date_time_spans ) {
+								/**
+								 * Take action if the following criteria are true:
+								 *
+								 *     * If the start date for this set of special hours of operation is before today, is today, or is within the next 30 days
+								 *     * If the end date for this set of special hours of operation is today or is after today
+								 */
 
-									foreach ( $item_date_time_spans as $item_date_time_span ) {
+								if (
+									$item_date_list
+									&&
+									min($item_date_list) <= $today_30
+									&&
+									max($item_date_list) >= $today
+								) {
 
-										$item_date_time_span_opens = $item_date_time_span['opens'] ?? null; // Opens // string ('g:i a')
-										$item_date_time_span_closes = $item_date_time_span['closes'] ?? null; // Closes // string ('g:i a')
-										$item_date_time_span_comment = $item_date_time_span['comment'] ?? null; // Comment // string (text)
+									// Add the individual special hours of operation set output array to the special hours of operation list array
 
-									}
+										if ( $item_output ) {
+
+											$location_hours_modified_list[] = $item_output;
+
+										}
+
+									// Set modified hours of operation as active
+
+										$location_hours_modified_active = true;
+
+								}
+
+							// echo '<p>$location_hours_modified_list = ' . ( is_array($location_hours_modified_list) ? 'Array' : ( is_object($location_hours_modified_list) ? 'Object' : ( is_null($location_hours_modified_list) ? 'Null' : ( $location_hours_modified_list ) ) ) ) . '</p>'; // test
+							// if ( is_array($location_hours_modified_list) || is_object($location_hours_modified_list) ) { echo '<pre>'; print_r($location_hours_modified_list); echo '</pre>'; } // test
+
+							// Check if typical hours of operation should be inactive
+
+								/**
+								 * Take action if the following criteria are true:
+								 *
+								 *     * If the start date for this set of special hours of operation is today or earlier
+								 *     * If the end date for this set of special hours of operation beyond the next 30 days
+								 */
+
+								if (
+									$item_date_list
+									&&
+									min($item_date_list) <= $today
+									&&
+									max($item_date_list) >= $today_30
+								) {
+
+									// Set typical hours of operation as inactive
+
+										$location_hours_typical_active = false;
 
 								}
 
@@ -390,490 +1066,52 @@
 
 					}
 
-				// Check if time span for this set of special hours of operation is active now or in the near future
-
-					if (
-						$item_date_list
-						&&
-						min($item_date_list) <= $today_30
-						&&
-						max($item_date_list) >= $today
-					) {
-
-						$location_hours_modified_active = true;
-
-					}
-
-				// Check if time span for typical hours is inactive now or in the near future
-
-					/**
-					 * Set the typical hours as inactive...
-					 * if the start date for this set of special hours of operation is today or earlier...
-					 * and if the end date is in the distant future
-					 */
-
-					if (
-						$item_date_list
-						&&
-						min($item_date_list) <= $today
-						&&
-						max($item_date_list) >= $today_30
-					) {
-
-						$location_hours_typical_active = false;
-
-					}
-
-			}
-
-		}
-
-		$location_hours_modified_text = '';
-		$location_hours_modified_active_start = '';
-		$location_hours_modified_active_end = '';
-		$item_day = ''; // Previous Day
-		$item_comment = ''; // Comment on previous day
-		$i = 1;
-
-		if ( $location_hours_modified_active ) {
-
-			// Check/define OpeningHoursSpecification Schema Data variables
-
-				$schema_openingHoursSpecification = ( isset($schema_openingHoursSpecification) && is_array($schema_openingHoursSpecification) && !empty($schema_openingHoursSpecification) ) ? $schema_openingHoursSpecification : array(); // Main OpeningHoursSpecification schema array
-				$schema_dayOfWeek = array(); // The day of the week for which these opening hours are valid.
-				$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-				$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-				$schema_validFrom = $location_hours_modified_start_date; // The date when the item becomes valid.
-				$schema_validThrough = $location_hours_modified_end_date; // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-
-			$location_hours_modified_text .= $location_hours_modified_reason;
-			$location_hours_modified_text .= '<p class="small font-italic">These special hours start on ' . $location_hours_modified_start_date . ', ';
-			$location_hours_modified_text .= $location_hours_modified_end_query && $location_hours_modified_end_date ? 'and are scheduled to end after ' . $location_hours_modified_end_date . '.' : 'and will remain in effect until further notice.';
-			$location_hours_modified_text .= '</p>';
-
-			// Construct information from special hours repeater
-
-				if ( $location_hours_modified ) {
-
-					/**
-					 * If the Special Hours repeater has at least one row...
-					 */
-
-					// Loop through the Special Hours repeater rows
-
-						foreach ( $location_hours_modified as $item ) {
-
-							// Get data from fields in the Special Hours repeater
-
-								$item_title = $item['location_modified_hours_title']; // Title (in Special Hours repeater; in Special Hours tab) // string
-								$item_info = $item['location_modified_hours_information']; // Information (in Special Hours repeater; in Special Hours tab) // string (wysiwyg)
-								$item_times = $item['location_modified_hours_times']; // Hours (in Special Hours repeater; in Special Hours tab) // repeater
-								$item_24_7_query = $item['location_modified_hours_24_7']; // Is this location available 24/7 during these special hours? (in Special Hours repeater; in Special Hours tab) // bool
-
-							$location_hours_modified_text .= $item_title ? '<h3 class="h4">'. $item_title . '</h3>' : '';
-							$location_hours_modified_text .= $item_info ? $item_info : '';
-
-							// OpeningHoursSpecification Schema Data
-
-								// Reset schema data variables
-
-									$schema_dayOfWeek = array(); // The day of the week for which these opening hours are valid.
-									$schema_opens = ''; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-									$schema_closes = ''; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-							// Get the earliest (most past) special hours start date from all the rows in the Modified hours repeater
-
-								if (
-									$location_hours_modified_active_start > strtotime($location_hours_modified_start_date) // If previous loop's special hours start date is greater than the current loop's special hours start date
-									||
-									'' == $location_hours_modified_active_start // Or if there is no special hours start date from a previous loop
-								) {
-
-									$location_hours_modified_active_start = strtotime($location_hours_modified_start_date); // Store the special hours start date for comparison in future loops
-
-								} // endif ( $location_hours_modified_active_start > strtotime($location_hours_modified_start_date) || '' == $location_hours_modified_active_start )
-
-							// Get the latest (most future) special hours end date from all the rows in the Modified hours repeater
-
-								if (
-									$location_hours_modified_active_end <= strtotime($location_hours_modified_end_date) // If previous loop's special hours end date is less than or equal to the current loop's special hours end date
-									||
-									'' == $location_hours_modified_active_start // Or if there is no special hours end date from a previous loop
-									||
-									!$location_hours_modified_end_query // Or if the current loop has no special hours end date
-								) {
-
-									if ( !$location_hours_modified_end_query ) {
-
-										/**
-										 * If the current loop has no special hours end date...
-										 */
-
-										$location_hours_modified_active_end = 'TBD';
-
-									} else {
-
-										/**
-										 * Else if the current loop has a special hours end date...
-										 */
-
-										$location_hours_modified_active_end = strtotime($location_hours_modified_end_date);
-
-									} // endif ( !$location_hours_modified_end_query ) else
-
-								} // endif ( $location_hours_modified_active_end <= strtotime($location_hours_modified_end_date) || !$location_hours_modified_end_query )
-
-								if ( $item_24_7_query ) {
-
-									/**
-									 * If the special hours are 24/7...
-									 */
-
-									$location_hours_modified_text .= '<strong>Open 24/7</strong>';
-
-								// OpeningHoursSpecification Schema Data for Special Hours That Are 24/7
-
-									$schema_dayOfWeek = array(
-										'Monday',
-										'Tuesday',
-										'Wednesday',
-										'Thursday',
-										'Friday',
-										'Saturday',
-										'Sunday'
-									); // The day of the week for which these opening hours are valid.
-									$schema_opens = '00:00'; // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-									$schema_closes = '23:59'; // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-									// Add this location's details to the main OpeningHoursSpecification schema array
-
-										// // Schema.org method: Add all days as an array under the dayOfWeek property
-										//
-										// 	/**
-										// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-										// 	 */
-										//
-										// 	$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-										// 		$schema_dayOfWeek, // array|string // Optional // The day of the week for which these opening hours are valid.
-										// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-										// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-										// 		$schema_validFrom, // string // Optional // The date when the item becomes valid.
-										// 		$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-										// 		$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-										// 	);
-
-										// Google method: Loop through all the days defined in the current Hours repeater row separately
-
-											/**
-											 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-											 */
-
-											foreach ( $schema_dayOfWeek as $day ) {
-
-												$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-													$day, // array|string // Optional // The day of the week for which these opening hours are valid.
-													$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-													$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-													$schema_validFrom, // string // Optional // The date when the item becomes valid.
-													$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-													$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-												);
-
-											}
-
-							} else {
-
-								/**
-								 * If the special hours are not 24/7...
-								 */
-
-								if (
-									is_array($item_times)
-									||
-									is_object($item_times)
-								) {
-
-									$location_hours_modified_text .= '<dl class="hours">';
-
-									// Loop through all the Hours repeater rows (in Special Hours repeater; in Special Hours tab)
-
-										foreach ( $item_times as $item_time ) {
-
-											$location_hours_modified_text .= $item_day !== $item_time['location_modified_hours_day'] ? '<dt>'. $item_time['location_modified_hours_day'] .'</dt> ' : '';
-											$location_hours_modified_text .= '<dd>';
-
-											// OpeningHoursSpecification Schema Data for Special Hours That Are Not 24/7
-
-												// Reset/define variables
-
-													$schema_dayOfWeek = array();
-
-											if (
-												'Mon - Fri' == $item_time['location_modified_hours_day']
-												&&
-												!$item_time['location_modified_hours_closed']
-											) {
-
-												// OpeningHoursSpecification Schema Data for Special Hours That Are Not 24/7
-
-													$schema_dayOfWeek = array_merge(
-														$schema_dayOfWeek,
-														array(
-															'Monday',
-															'Tuesday',
-															'Wednesday',
-															'Thursday',
-															'Friday'
-														)
-													); // The day of the week for which these opening hours are valid.
-
-											} else {
-
-												// OpeningHoursSpecification Schema Data for Special Hours That Are Not 24/7
-
-													$schema_dayOfWeek[] = $item_time['location_modified_hours_day']; // The day of the week for which these opening hours are valid.
-
-											} // endif ( 'Mon - Fri' == $item_time['location_modified_hours_day'] && !$item_time['location_modified_hours_closed'] ) else
-
-											if ( $item_time['location_modified_hours_closed'] ) {
-
-												// OpeningHoursSpecification Schema Data for Special Hours That Are Not 24/7
-
-													$schema_opens = '00:00'; // string // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-													$schema_closes = '00:00'; // string // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-												$location_hours_modified_text .= 'Closed ';
-
-											} else {
-
-												$location_hours_modified_text .= ( ( $item_time['location_modified_hours_open'] && '00:00:00' != $item_time['location_modified_hours_open'] ) ? '' . ap_time_span( strtotime($item_time['location_modified_hours_open']), strtotime($item_time['location_modified_hours_close']) ). '' : '' );
-
-												$schema_opens = $item_time['location_modified_hours_open']; // string // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-												$schema_closes = $item_time['location_modified_hours_close']; // string // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-
-											} // endif ( $item_time['location_modified_hours_closed'] ) else
-
-											if ( $item_time['location_modified_hours_comment'] ) {
-
-												$location_hours_modified_text .= ' <br /><span class="subtitle">' .$item_time['location_modified_hours_comment'] . '</span>';
-												$item_comment = $item_time['location_modified_hours_comment'];
-
-											} else {
-
-												$item_comment = '';
-
-											} // endif ( $item_time['location_modified_hours_comment'] ) else
-
-											$location_hours_modified_text .= '</dd>';
-											$item_day = $item_time['location_modified_hours_day']; // Reset the day
-
-											// OpeningHoursSpecification Schema Data for Special Hours That Are Not 24/7
-
-												// Add this location's details to the main OpeningHoursSpecification schema array
-
-													// // Schema.org method: Add all days as an array under the dayOfWeek property
-													//
-													// 	/**
-													// 	 * As documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-													// 	 */
-													//
-													// 	$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-													// 		$schema_dayOfWeek, // array|string // Optional // The day of the week for which these opening hours are valid.
-													// 		$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-													// 		$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-													// 		$schema_validFrom, // string // Optional // The date when the item becomes valid.
-													// 		$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-													// 		$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-													// 	);
-
-													// Google method: Loop through all the days defined in the current Hours repeater row separately
-
-														/**
-														 * As documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-														 */
-
-														foreach ( $schema_dayOfWeek as $day) {
-
-															$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-																$day, // array|string // Optional // The day of the week for which these opening hours are valid.
-																$schema_opens, // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-																$schema_closes, // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-																$schema_validFrom, // string // Optional // The date when the item becomes valid.
-																$schema_validThrough, // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-																$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-															);
-
-														}
-
-											$i++;
-
-										} // endforeach ( $item_times as $item_time )
-
-									$location_hours_modified_text .= '</dl>';
-
-								} // endif ( is_array($item_times) || is_object($item_times) )
-
-							} // endif ( $item_24_7_query ) else
-
-						} // endforeach ( $location_hours_modified as $item )
-
-				} // endif ( $location_hours_modified )
-
-			echo $location_hours_modified_text ? '<h2>Special Hours</h2>' . $location_hours_modified_text: '';
-
-		}
+				}
 
 	// Typical Hours
 
 		if ( $location_hours_typical_active ) {
 
-			// Base typical hours list array
+			// Get the values
 
-				$location_hours_typical_list = array();
+				// Base typical hours of operation list array
 
-			// Get yesterday's date as DateTime class
+					$location_hours_typical_list = array();
 
-				/**
-				 * This will be used in the upcoming foreach loop when defining the timestamp
-				 */
-
-				$DateTime_yesterday_class = new DateTime();
-				$DateTime_yesterday_class->modify( 'yesterday' );
-
-			// The location is typically available 24/7
-
-				if ( $location_hours_24_7_query ) {
+				// Get yesterday's date as DateTime class
 
 					/**
-					 * If the location is typically available 24/7
+					 * This will be used in the upcoming foreach loop when defining the timestamp
 					 */
 
-					// Loop through all seven days of the week, adding values to the typical hours list array for each
+					$DateTime_yesterday_class = new DateTime();
+					$DateTime_yesterday_class->modify( 'yesterday' );
 
-						foreach ( array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ) as $item_day_row ) {
+				// The location is typically available 24/7
 
-							// Base output array
+					if ( $location_hours_24_7_query ) {
 
-								$item_output = $location_hours_list_item_array;
+						/**
+						 * If the location is typically available 24/7
+						 */
 
-							// Get the date of the next instance of the day of the week (including today)
+						// Loop through all seven days of the week, adding values to the typical hours of operation list array for each
 
-								$item_day_row_DateTime_class = $DateTime_yesterday_class; // Yesterday
-								$item_day_row_DateTime_class->modify( 'next ' . $item_day_row ); // Next [day] from yesterday
-								$item_day_row_DateTime_string = $item_day_row_DateTime_class->format('F j, Y');
+							foreach ( array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ) as $item_day_row ) {
 
-								// Get the date of the day after that
+								// Base output array
 
-									$item_day_row_DateTime_next_class = $item_day_row_DateTime_class;
-									$item_day_row_DateTime_next_class->modify( 'tomorrow' ); // Tomorrow
-									$item_day_row_DateTime_next_string = $item_day_row_DateTime_next_class->format('F j, Y');
+									$item_output = $location_hours_list_item_array;
 
-							// Set the time values
+								// Get the common values for this day to the output array
 
-								/**
-								 * Set both the opening and closing times using the date of the next occurrence of
-								 * the relevant day of the week (including today)
-								 */
+									// Get the relevant dates
 
-								// Opening time
-
-									$item_day_row_time_opens_DateTime_string = $item_day_row_DateTime_string . ', midnight'; // string
-									$item_day_row_time_opens_DateTime_unix = strtotime( $item_day_row_time_opens_DateTime_string ); // Unix timestamp
-
-								// Closing time
-
-									$item_day_row_time_closes_DateTime_string = $item_day_row_DateTime_string . ', 11:59:59 pm'; // string
-									$item_day_row_time_closes_DateTime_unix = strtotime( $item_day_row_time_closes_DateTime_string ); // Unix timestamp
-
-							// Set the time span text
-
-								$item_day_row_time_span_text = 'Open 24 Hours';
-
-							// Add the time values to the output array
-
-								// Opening time
-
-									$item_output['times']['opens']['unix'] = $item_day_row_time_opens_DateTime_unix;
-									$item_output['times']['opens']['24_hour'] = date ('H:i', $item_day_row_time_opens_DateTime_unix );
-									$item_output['times']['opens']['iso_8601'] = date ('H:i:sP', $item_day_row_time_opens_DateTime_unix );
-
-								// Closing time
-
-									$item_output['times']['closes']['unix'] = $item_day_row_time_closes_DateTime_unix;
-									$item_output['times']['closes']['24_hour'] = date ('H:i', $item_day_row_time_closes_DateTime_unix );
-									$item_output['times']['closes']['iso_8601'] = date ('H:i:sP', $item_day_row_time_closes_DateTime_unix );
-
-							// Add the text value to the output array
-
-								$item_output['time_span'] = $item_day_row_time_span_text;
-
-							// Set the description value and add it to the output array
-
-								if (
-									isset($item['comment'])
-									&&
-									!empty($item['comment'])
-								) {
-
-									/**
-									 * If a comment exists for this day or time span...
-									 */
-
-									$item_output['description'] = $item['comment'];
-
-								}
-
-							// Add the output array to the typical hours list array
-
-								/**
-								 * Add the output array as a row nested within the row for the day of the week
-								 */
-
-								$location_hours_typical_list[$item_day_row][] = $item_output;
-
-						}
-
-				}
-
-			// The location is not typically available 24/7
-
-				if ( !$location_hours_24_7_query ) {
-
-					/**
-					 * If the location is not typically available 24/7
-					 */
-
-					// Construct the the description terms and description details elements
-
-						if ( $location_hours_repeater ) {
-
-							/**
-							 * If the Typical Hours repeater has at least one row...
-							 */
-
-							// Loop through the Typical Hours repeater, adding values to the typical hours list array
-
-								foreach ( $location_hours_repeater as $item ) {
-
-									// Base output array
-
-										$item_output = $location_hours_list_item_array;
-
-									// Define an array to list the day value(s)
-
-										if ( 'Mon - Fri' == $item['day'] ) {
-
-											$item_day = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' );
-
-										} else {
-
-											$item_day = array( $item['day'] );
-
-										}
-
-									// Loop through the day value array
-
-										foreach ( $item_day as $item_day_row ) {
+										if (
+											!isset($location_hours_typical_list[$item_day_row]['date']['unix'])
+											||
+											!isset($location_hours_typical_list[$item_day_row]['date_after']['unix'])
+										) {
 
 											// Get the date of the next instance of the day of the week (including today)
 
@@ -881,225 +1119,587 @@
 												$item_day_row_DateTime_class->modify( 'next ' . $item_day_row ); // Next [day] from yesterday
 												$item_day_row_DateTime_string = $item_day_row_DateTime_class->format('F j, Y');
 
-												// Get the date of the day after that
+												// Add that date value to the typical hours of operation list array
 
-													$item_day_row_DateTime_next_class = $item_day_row_DateTime_class;
-													$item_day_row_DateTime_next_class->modify( 'tomorrow' ); // Tomorrow
-													$item_day_row_DateTime_next_string = $item_day_row_DateTime_next_class->format('F j, Y');
+													// Value as if from ACF field ('F j, Y')
 
-											// Closed Status
+														$location_hours_typical_list[$item_day_row]['date']['acf'] = $item_day_row_DateTime_string;
 
-												if ( $item['closed'] ) {
+													// Get the Unix timestamp
 
-													/**
-													 * If the location is closed on this day or time span...
-													 */
+														$location_hours_typical_list[$item_day_row]['date']['unix'] = strtotime( $location_hours_typical_list[$item_day_row]['date']['acf'] . ', midnight' ) ?? null;
 
-													// Set the time values
+													// Convert the Unix timestamp to ISO 8601 format for date only ('Y-m-d')
 
-														// Opening time
+														$location_hours_typical_list[$item_day_row]['date']['iso_8601'] = date( 'Y-m-d', $location_hours_typical_list[$item_day_row]['date']['unix'] ) ?? null;
 
-															$item_day_row_time_opens_DateTime_string = $item_day_row_DateTime_string . ', midnight';
-															$item_day_row_time_opens_DateTime_unix = strtotime( $item_day_row_time_opens_DateTime_string );
+													// Convert the Unix timestamp to a long-form date value (e.g., 'Thursday, January 1, 1970') ('l, F j, Y')
 
-														// Closing time
+														$location_hours_typical_list[$item_day_row]['date']['long'] = date( 'l, F j, Y', $location_hours_typical_list[$item_day_row]['date']['unix'] ) ?? null;
 
-															$item_day_row_time_closes_DateTime_string = $item_day_row_time_opens_DateTime_string;
-															$item_day_row_time_closes_DateTime_unix = $item_day_row_time_opens_DateTime_unix;
+											// Get the date of the day after that
 
-													// Set the time span text
+												$item_day_row_DateTime_next_class = $item_day_row_DateTime_class;
+												$item_day_row_DateTime_next_class->modify( 'tomorrow' ); // Tomorrow
+												$item_day_row_DateTime_next_string = $item_day_row_DateTime_next_class->format('F j, Y');
 
-														$item_day_row_time_span_text = 'Closed';
+												// Add that date value to the typical hours of operation list array
 
-												}
+													// Value as if from ACF field ('F j, Y')
 
-											// Open Status
+														$location_hours_typical_list[$item_day_row]['date_after']['acf'] = $item_day_row_DateTime_next_string;
 
-												if ( !$item['closed'] ) {
+													// Get the Unix timestamp
 
-													/**
-													 * If the location is not closed on this day or time span...
-													 */
+														$location_hours_typical_list[$item_day_row]['date_after']['unix'] = strtotime( $location_hours_typical_list[$item_day_row]['date_after']['acf'] . ', midnight' ) ?? null;
 
-													// Set the time values
+													// Convert the Unix timestamp to ISO 8601 format for date only ('Y-m-d')
 
-														/**
-														 * Set both the opening and closing times using the date of the next occurrence of
-														 * the relevant day of the week (including today)
-														 */
-
-														// Opening time
-
-															$item_day_row_time_opens_DateTime_string = $item_day_row_DateTime_string . ',' . $item['open']; // string
-															$item_day_row_time_opens_DateTime_unix = strtotime( $item_day_row_time_opens_DateTime_string ); // Unix timestamp
-
-														// Closing time
-
-															if ( strtotime($item['open']) >= strtotime($item['close']) ) {
-
-																/**
-																 * If the closing time is later than the opening time, then continue normally
-																 */
-
-																$item_day_row_time_closes_DateTime_string = $item_day_row_DateTime_string . ',' . $item['close']; // string
-
-															} else {
-
-																/**
-																 * If the closing time is earlier than the opening time, then the time span must
-																 * cross over into the next day, so use the date after that day instead
-																 */
-
-																$item_day_row_time_closes_DateTime_string = $item_day_row_DateTime_next_string . ',' . $item['close']; // string
-
-															}
-
-															$item_day_row_time_closes_DateTime_unix = strtotime( $item_day_row_time_closes_DateTime_string ); // Unix timestamp
-
-													// Set the time span text
-
-														$item_day_row_time_span_text = ap_time_span( strtotime($item['open']), strtotime($item['close']) );
-
-												}
-
-											// Add the time values to the output array
-
-												// Opening time
-
-													$item_output['times']['opens']['unix'] = $item_day_row_time_opens_DateTime_unix;
-													$item_output['times']['opens']['24_hour'] = date ('H:i', $item_day_row_time_opens_DateTime_unix );
-													$item_output['times']['opens']['iso_8601'] = date ('H:i:sP', $item_day_row_time_opens_DateTime_unix );
-
-												// Closing time
-
-													$item_output['times']['closes']['unix'] = $item_day_row_time_closes_DateTime_unix;
-													$item_output['times']['closes']['24_hour'] = date ('H:i', $item_day_row_time_closes_DateTime_unix );
-													$item_output['times']['closes']['iso_8601'] = date ('H:i:sP', $item_day_row_time_closes_DateTime_unix );
-
-											// Add the text value to the output array
-
-												$item_output['time_span'] = $item_day_row_time_span_text;
-
-											// Set the description value and add it to the output array
-
-												if (
-													isset($item['comment'])
-													&&
-													!empty($item['comment'])
-												) {
-
-													/**
-													 * If a comment exists for this day or time span...
-													 */
-
-													$item_output['description'] = $item['comment'];
-
-												}
-
-											// Add the output array to the typical hours list array
-
-												/**
-												 * Add the output array as a row nested within the row for the day of the week
-												 */
-
-												$location_hours_typical_list[$item_day_row][] = $item_output;
+														$location_hours_typical_list[$item_day_row]['date_after']['iso_8601'] = date( 'Y-m-d', $location_hours_typical_list[$item_day_row]['date_after']['unix'] ) ?? null;
 
 										}
 
-								} // endforeach ( $location_hours_repeater as $item )
+									// Will this location be closed on this date? // bool
+
+										if (
+											!isset($location_hours_typical_list[$item_day_row]['closed_query'])
+											||
+											$location_hours_typical_list[$item_day_row]['closed_query'] == false
+										) {
+
+											$location_hours_typical_list[$item_day_row]['closed_query'] = ( $item['closed_query'] ? 1 : 0 ) ?? 0;
+
+										}
+
+									// Will this location be open 24 hours on this date? // bool
+
+									if (
+										!isset($location_hours_typical_list[$item_day_row]['24_query'])
+										||
+										$location_hours_typical_list[$item_day_row]['24_query'] == false
+									) {
+
+											$location_hours_typical_list[$item_day_row]['24_query'] = ( $item['24_query'] ? 1 : 0 ) ?? 0;
+
+										}
+
+								// Set the time values
+
+									/**
+									 * Set both the opening and closing times using the date of the next occurrence of
+									 * the relevant day of the week (including today)
+									 */
+
+									// Opening time
+
+										/**
+										 * Set the opening time as midnight (12:00:00 a.m.) on the next instance of the set day of the week (including today)
+										 */
+
+										// Get the Unix timestamp for the relevant date and time
+
+											$item_output['times']['opens']['unix'] = $location_hours_typical_list[$item_day_row]['date']['unix'];
+
+										// Convert the Unix timestamp value to other formats
+
+											// ACF field value format ('g:i a')
+
+												$item_output['times']['opens']['acf'] = date( 'g:i a', $item_output['times']['opens']['unix'] ) ?? null;
+
+											// 24-hour format ('H:i')
+
+												$item_output['times']['opens']['24_hour'] = date( 'H:i', $item_output['times']['opens']['unix'] ) ?? null;
+
+											// ISO 8601 format for time only ('H:i:sP')
+
+												$item_output['times']['opens']['iso_8601'] = date( 'H:i:sP', $item_output['times']['opens']['unix'] ) ?? null;
+
+									// Closing time
+
+										/**
+										 * Set the closing time as midnight (12:00:00 a.m.) on the next instance of the set day of the week (including today)
+										 */
+
+										// Get the Unix timestamp for the relevant date and time
+
+											$item_output['times']['closes']['unix'] = strtotime( $location_hours_typical_list[$item_day_row]['date']['acf'] . ', 11:59:59 pm' ) ?? null;
+
+										// Convert the Unix timestamp value to other formats
+
+											// ACF field value format ('g:i a')
+
+												$item_output['times']['closes']['acf'] = date( 'g:i a', $item_output['times']['closes']['unix'] ) ?? null;
+
+											// 24-hour format ('H:i')
+
+												$item_output['times']['closes']['24_hour'] = date( 'H:i', $item_output['times']['closes']['unix'] ) ?? null;
+
+											// ISO 8601 format for time only ('H:i:sP')
+
+												$item_output['times']['closes']['iso_8601'] = date( 'H:i:sP', $item_output['times']['closes']['unix'] ) ?? null;
+
+								// Set/construct the time span text for display
+
+									/**
+									 * Format the value using AP Style.
+									 */
+
+									$item_output['time_span'] = $location_hours_text_24_hours;
+
+								// Set the description value for the time span
+
+									$item_output['description'] = ( isset($item['comment']) && !empty($item['comment']) ) ? $item['comment'] : null;
+
+								// Clean up the individual special hours of operation set output array
+
+									/**
+									 * Empty the output array if certain key values are not set.
+									 */
+
+									if (
+										!isset($item_output['times']['opens']['unix']) // If there is no opens time value
+										||
+										!isset($item_output['times']['closes']['unix']) // If there is no closes time value
+										||
+										!isset($item_output['time_span']) // If there is no time span value
+									) {
+
+										$item_output = null;
+
+									} // endif
+
+								// Add the output array to the typical hours of operation list array
+
+									if ( $item_output ) {
+
+										/**
+										 * Add the output array as a row nested within the row for the day of the week
+										 */
+
+										$location_hours_typical_list[$item_day_row]['time_spans'][] = $item_output;
+
+									} // endif ( $item_output )
+
+							} // endforeach
+
+					}
+
+				// The location is not typically available 24/7
+
+					if ( !$location_hours_24_7_query ) {
+
+						/**
+						 * If the location is not typically available 24/7
+						 */
+
+						// Construct the the description terms and description details elements
+
+							if ( $location_hours_repeater ) {
+
+								/**
+								 * If the Typical Hours of Operation repeater has at least one row...
+								 */
+
+								// Loop through the Typical Hours of Operation repeater, adding values to the typical hours of operation list array
+
+									foreach ( $location_hours_repeater as $item ) {
+
+										// Base output array
+
+											$item_output = $location_hours_list_item_array;
+
+										// Define an array to list the day value(s)
+
+											if ( 'Mon - Fri' == $item['day'] ) {
+
+												$item_day = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' );
+
+											} else {
+
+												$item_day = array( $item['day'] );
+
+											}
+
+										// Loop through the day value array
+
+											foreach ( $item_day as $item_day_row ) {
+
+												// Get the relevant dates
+
+													if (
+														!isset($location_hours_typical_list[$item_day_row]['date']['unix'])
+														||
+														!isset($location_hours_typical_list[$item_day_row]['date_after']['unix'])
+													) {
+
+														// Get the date of the next instance of the day of the week (including today)
+
+															$item_day_row_DateTime_class = $DateTime_yesterday_class; // Yesterday
+															$item_day_row_DateTime_class->modify( 'next ' . $item_day_row ); // Next [day] from yesterday
+															$item_day_row_DateTime_string = $item_day_row_DateTime_class->format('F j, Y');
+
+															// Add that date value to the typical hours of operation list array
+
+																// Value as if from ACF field ('F j, Y')
+
+																	$location_hours_typical_list[$item_day_row]['date']['acf'] = $item_day_row_DateTime_string;
+
+																// Get the Unix timestamp
+
+																	$location_hours_typical_list[$item_day_row]['date']['unix'] = strtotime( $location_hours_typical_list[$item_day_row]['date']['acf'] . ', midnight' ) ?? null;
+
+																// Convert the Unix timestamp to ISO 8601 format for date only ('Y-m-d')
+
+																	$location_hours_typical_list[$item_day_row]['date']['iso_8601'] = date( 'Y-m-d', $location_hours_typical_list[$item_day_row]['date']['unix'] ) ?? null;
+
+																// Convert the Unix timestamp to a long-form date value (e.g., 'Thursday, January 1, 1970') ('l, F j, Y')
+
+																	$location_hours_typical_list[$item_day_row]['date']['long'] = date( 'l, F j, Y', $location_hours_typical_list[$item_day_row]['date']['unix'] ) ?? null;
+
+														// Get the date of the day after that
+
+															$item_day_row_DateTime_next_class = $item_day_row_DateTime_class;
+															$item_day_row_DateTime_next_class->modify( 'tomorrow' ); // Tomorrow
+															$item_day_row_DateTime_next_string = $item_day_row_DateTime_next_class->format('F j, Y');
+
+															// Add that date value to the typical hours of operation list array
+
+																// Value as if from ACF field ('F j, Y')
+
+																	$location_hours_typical_list[$item_day_row]['date_after']['acf'] = $item_day_row_DateTime_next_string;
+
+																// Get the Unix timestamp
+
+																	$location_hours_typical_list[$item_day_row]['date_after']['unix'] = strtotime( $location_hours_typical_list[$item_day_row]['date_after']['acf'] . ', midnight' ) ?? null;
+
+																// Convert the Unix timestamp to ISO 8601 format for date only ('Y-m-d')
+
+																	$location_hours_typical_list[$item_day_row]['date_after']['iso_8601'] = date( 'Y-m-d', $location_hours_typical_list[$item_day_row]['date_after']['unix'] ) ?? null;
+
+													}
+
+												// Closed Status
+
+													if ( $item['closed'] ) {
+
+														/**
+														 * If the location is closed on this day or time span...
+														 */
+
+														// Set the time values
+
+															// Opening time
+
+																/**
+																 * Set the opening time as midnight (12:00:00 a.m.) on the next instance of the set day of the week (including today)
+																 */
+
+																// Get the Unix timestamp for the relevant date and time
+
+																	$item_output['times']['opens']['unix'] = $location_hours_typical_list[$item_day_row]['date']['unix'] ?? null;
+
+																// Convert the Unix timestamp value to other formats
+
+																	// ACF field value format ('g:i a')
+
+																		$item_output['times']['opens']['acf'] = date( 'g:i a', $item_output['times']['opens']['unix'] ) ?? null;
+
+																	// 24-hour format ('H:i')
+
+																		$item_output['times']['opens']['24_hour'] = date( 'H:i', $item_output['times']['opens']['unix'] ) ?? null;
+
+																	// ISO 8601 format for time only ('H:i:sP')
+
+																		$item_output['times']['opens']['iso_8601'] = date( 'H:i:sP', $item_output['times']['opens']['unix'] ) ?? null;
+
+															// Closing time
+
+																/**
+																 * Mirror the time values from the opening time array
+																 */
+
+																$item_output['times']['closes'] = $item_output['times']['opens'];
+
+														// Set/construct the time span text for display
+
+															/**
+															 * Format the value using AP Style.
+															 */
+
+															// $item_day_row_time_span_text = $location_hours_text_closed;
+															$item_output['time_span'] = $location_hours_text_closed;
+
+													}
+
+												// Open Status
+
+													if ( !$item['closed'] ) {
+
+														/**
+														 * If the location is not closed on this day or time span...
+														 */
+
+														// Set the time values
+
+															/**
+															 * Set both the opening and closing times using the date of the next occurrence of
+															 * the relevant day of the week (including today)
+															 */
+
+															// Opening time
+
+																/**
+																 * Set the opening time using the date of the next instance of the set day of the week (including today)
+																 */
+
+																// Get the Unix timestamp for the relevant date and time
+
+																	$item_output['times']['opens']['unix'] = strtotime( $location_hours_typical_list[$item_day_row]['date']['acf'] . ', ' . $item['open'] ) ?? null;
+
+																// Convert the Unix timestamp value to other formats
+
+																	// ACF field value format ('g:i a')
+
+																		$item_output['times']['opens']['acf'] = date( 'g:i a', $item_output['times']['opens']['unix'] ) ?? null;
+
+																	// 24-hour format ('H:i')
+
+																		$item_output['times']['opens']['24_hour'] = date( 'H:i', $item_output['times']['opens']['unix'] ) ?? null;
+
+																	// ISO 8601 format for time only ('H:i:sP')
+
+																		$item_output['times']['opens']['iso_8601'] = date( 'H:i:sP', $item_output['times']['opens']['unix'] ) ?? null;
+
+															// Closing time
+
+																/**
+																 * If the closing time is later than the opening time, then set the closing time using the date of the next instance of the set day of the week (including today).
+																 *
+																 * However, if the closing time is earlier than the opening time (meaning the time span must cross over into the next day), then set the closing time using the date after the next instance of the set day of the week.
+																 */
+
+																// Get the Unix timestamp for the relevant date and time
+
+																	if ( strtotime($item['open']) >= strtotime($item['close']) ) {
+
+																		/**
+																		 * If the closing time is later than the opening time, then continue normally
+																		 */
+
+																		$item_output['times']['closes']['unix'] = strtotime( $location_hours_typical_list[$item_day_row]['date']['acf'] . ', ' . $item['close'] ) ?? null;
+
+																	} else {
+
+																		/**
+																		 * If the closing time is earlier than the opening time (meaning the time span must cross over into the next day), then set the closing time using the date after the next instance of the set day of the week
+																		 */
+
+																		$item_output['times']['closes']['unix'] = strtotime( $location_hours_typical_list[$item_day_row]['date_after']['acf'] . ', ' . $item['close'] ) ?? null;
+
+																	}
+
+																	// $item_day_row_time_closes_DateTime_unix = strtotime( $item_day_row_time_closes_DateTime_string ); // Unix timestamp
+
+																// Convert the Unix timestamp value to other formats
+
+																	// ACF field value format ('g:i a')
+
+																		$item_output['times']['closes']['acf'] = date( 'g:i a', $item_output['times']['closes']['unix'] ) ?? null;
+
+																	// 24-hour format ('H:i')
+
+																		$item_output['times']['closes']['24_hour'] = date( 'H:i', $item_output['times']['closes']['unix'] ) ?? null;
+
+																	// ISO 8601 format for time only ('H:i:sP')
+
+																		$item_output['times']['closes']['iso_8601'] = date( 'H:i:sP', $item_output['times']['closes']['unix'] ) ?? null;
+
+														// Set/construct the time span text for display
+
+															/**
+															 * Format the value using AP Style.
+															 */
+
+															$item_output['time_span'] = ap_time_span(
+																strtotime($item['open']),
+																strtotime($item['close'])
+															) ?? null;
+
+													}
+
+												// Convert the Unix timestamp values to other formats
+
+													// Opening time
+
+														// ACF field value format ('g:i a')
+
+															$item_output['times']['opens']['acf'] = date( 'g:i a', $item_output['times']['opens']['unix'] ) ?? null;
+
+														// 24-hour format ('H:i')
+
+															$item_output['times']['opens']['24_hour'] = date( 'H:i', $item_output['times']['opens']['unix'] ) ?? null;
+
+														// ISO 8601 format for time only ('H:i:sP')
+
+															$item_output['times']['opens']['iso_8601'] = date( 'H:i:sP', $item_output['times']['opens']['unix'] ) ?? null;
+
+													// Closing time
+
+														// ACF field value format ('g:i a')
+
+															$item_output['times']['closes']['acf'] = date( 'g:i a', $item_output['times']['closes']['unix'] ) ?? null;
+
+														// 24-hour format ('H:i')
+
+															$item_output['times']['closes']['24_hour'] = date( 'H:i', $item_output['times']['closes']['unix'] ) ?? null;
+
+														// ISO 8601 format for time only ('H:i:sP')
+
+															$item_output['times']['closes']['iso_8601'] = date( 'H:i:sP', $item_output['times']['closes']['unix'] ) ?? null;
+
+												// Set the description value for the time span
+
+													$item_output['description'] = ( isset($item['comment']) && !empty($item['comment']) ) ? $item['comment'] : null;
+
+												// Clean up the individual special hours of operation set output array
+
+													/**
+													 * Empty the output array if certain key values are not set.
+													 */
+
+													if (
+														!isset($item_output['times']['opens']['unix']) // If there is no opens time value
+														||
+														!isset($item_output['times']['closes']['unix']) // If there is no closes time value
+														||
+														!isset($item_output['time_span']) // If there is no time span value
+													) {
+
+														$item_output = null;
+
+													}
+
+												// Add the output array to the typical hours of operation list array
+
+													if ( $item_output ) {
+
+														/**
+														 * Add the output array as a row nested within the row for the day of the week
+														 */
+
+														$location_hours_typical_list[$item_day_row]['time_spans'][] = $item_output;
+
+													}
+
+											}
+
+									} // endforeach ( $location_hours_repeater as $item )
+
+							}
+
+					}
+
+		}
+
+	// Display the static hours of operation
+
+		if (
+			(
+				$location_hours_modified_active
+				&&
+				$location_hours_modified_list
+			)
+			||
+			(
+				$location_hours_typical_active
+				&&
+				$location_hours_typical_list
+			)
+		) {
+
+			// Check/define schema value arrays
+
+				$schema_openingHours = $schema_openingHours ?? array();
+				$schema_openingHoursSpecification = $schema_openingHoursSpecification ?? array();
+				$schema_specialOpeningHoursSpecification = $schema_specialOpeningHoursSpecification ?? array();
+
+			// Common section heading
+
+				echo '<h2>' . $location_hours_text_heading_common . '</h2>';
+
+			// Modified Hours
+
+				if ( $location_hours_modified_active ) {
+
+					// Display special hours of operation section heading if typical hours of operation are also active
+
+						if ( $location_hours_typical_active ) {
+
+							echo '<h3 class="sr-only">' .  $location_hours_text_heading_special . '</h3>';
+
+						}
+
+					// Loop through the sets of special hours of operation
+
+						foreach ( $location_hours_modified_list as $item ) {
+
+							// Display the section heading for the set of special hours of operation
+
+								if ( $location_hours_modified_active ) {
+
+									echo '<h4 class="h4">' .  $item['title'] . '</h4>';
+
+								}
+
+							// Display the information paragraph for the set of special hours of operation
+
+								if ( $location_hours_modified_active ) {
+
+									echo '<p>' .  $item['information'] . '</p>';
+
+								}
+
+							// Display the small date range explanation paragraph for the set of special hours of operation
+
+								if ( $location_hours_modified_active ) {
+
+									echo '<p class="small">' . $item['date_range_text'] . '</p>';
+
+								}
+
+							// Display the time information and construct the schema data
+
+								uamswp_hours_description_list(
+									$item['dates'], // array // Required // Associative array of the hours of operation for each day in a series
+									$schema_openingHours, // array // Required // Pre-existing list array for openingHours to which to add additional items
+									$schema_openingHoursSpecification, // array // Required // Pre-existing list array for openingHoursSpecification to which to add additional items
+									$schema_specialOpeningHoursSpecification // array // Required // Pre-existing list array for specialOpeningHoursSpecification to which to add additional items
+								);
 
 						}
 
 				}
 
-			// Construct the typical hours description list
+			// Typical Hours
 
-				if ( $location_hours_typical_list ) {
+				if ( $location_hours_typical_active ) {
 
-					// Define the section heading
+					// Display typical hours of operation section heading if special hours of operation are also active
 
-						$location_hours_typical_heading_text = $location_hours_modified_active ? 'Typical Hours' : 'Hours';
-						$location_hours_typical_heading = '<h2>' . $location_hours_typical_heading_text . '</h2>';
+						if ( $location_hours_modified_active ) {
 
-					// Display the section heading
+							echo '<h3 class="h4">' .  $location_hours_text_heading_typical . '</h3>';
 
-						echo $location_hours_typical_heading;
+						}
 
-					// Display the time information
+					// Display the time information and construct the schema data
 
-						// Open the description list element
-
-							echo '<dl class="hours">';
-
-						// Add a set of description term/details for each day row
-
-							foreach ( $location_hours_typical_list as $day_name => $day_rows ) {
-
-								if ( $day_name ) {
-
-									// Construct the description term element
-
-										echo '<dt>' . $day_name . '</dt>';
-
-									// Construct the description details element(s)
-
-										foreach ( $day_rows as $day_row ) {
-
-											// Open the description details element
-
-												echo '<dd>';
-
-											// Add the time span
-
-												echo $day_row['time_span'];
-
-											// Add the time span description
-
-												if ( $day_row['description'] ) {
-
-													echo '<br /><span class="subtitle">' . $day_row['description'] . '</span>';
-
-												}
-
-											// Close the description details element
-
-												echo '</dd>';
-
-											// Add the the values to the schema data
-
-												// openingHours
-
-													$schema_openingHours = $schema_openingHours ?? array();
-
-													$schema_openingHours = uamswp_fad_schema_openinghours(
-														$day_name, // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-														$day_row['times']['opens']['iso_8601'], // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-														$day_row['times']['closes']['iso_8601'], // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-														$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
-													);
-
-												// openingHoursSpecification
-
-													$schema_openingHoursSpecification = $schema_openingHoursSpecification ?? array();
-
-													$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-														$day_name, // array|string // Optional // The day of the week for which these opening hours are valid.
-														$day_row['times']['opens']['iso_8601'], // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-														$day_row['times']['closes']['iso_8601'], // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
-														'', // string // Optional // The date when the item becomes valid.
-														'', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-														$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
-													);
-
-										}
-
-								}
-
-							}
-
-						// Close the description list element
-
-							echo '</dl>';
+						uamswp_hours_description_list(
+							$location_hours_typical_list, // array // Required // Associative array of the hours of operation for each day in a series
+							$schema_openingHours, // array // Required // Pre-existing list array for openingHours to which to add additional items
+							$schema_openingHoursSpecification, // array // Required // Pre-existing list array for openingHoursSpecification to which to add additional items
+							$schema_specialOpeningHoursSpecification // array // Required // Pre-existing list array for specialOpeningHoursSpecification to which to add additional items
+						);
 
 				}
 

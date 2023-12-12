@@ -15861,3 +15861,192 @@ function limit_to_post_parent( $args, $field, $post ) {
 		return $result;
 
 	}
+
+// Construct description list for hours of operation
+
+	function uamswp_hours_description_list(
+		array $hours_list, // array // Required // Associative array of the hours of operation for each day in a series
+		array $schema_openingHours, // array // Required // Pre-existing list array for openingHours to which to add additional items
+		array $schema_openingHoursSpecification, // array // Required // Pre-existing list array for openingHoursSpecification to which to add additional items
+		array $schema_specialOpeningHoursSpecification // array // Required // Pre-existing list array for specialOpeningHoursSpecification to which to add additional items
+	) {
+
+		/**
+		 * This function outputs the HTML of the description list (<dl>).
+		 *
+		 * This function also constructs and outputs the schema data for the openingHours, openingHoursSpecification and specialOpeningHoursSpecification schema.org properties.
+		 *
+		 * Expected format for $hours_list:
+		 *
+		 *     $hours_list = array(
+		 *         'Sunday' => array(
+		 *             'date' => array(
+		 *                 'acf' => 'foo', // Value from ACF field ('F j, Y')
+		 *                 'unix' => 'foo', // Unix timestamp
+		 *                 'iso_8601' => 'foo', // ISO 8601 format for date only ('Y-m-d')
+		 *                 'long' => 'foo', // Long-form date value (e.g., 'Thursday, January 1, 1970') ('l, F j, Y')
+		 *                 'long_ap_style' => 'foo' // Long-form date value formatted for AP Style
+		 *             ),
+		 *             'date_after' => array(
+		 *                 'acf' => 'foo', // Value from ACF field ('F j, Y')
+		 *                 'unix' => 'foo', // Unix timestamp
+		 *                 'iso_8601' => 'foo', // ISO 8601 format for date only ('Y-m-d')
+		 *                 'long' => 'foo', // Long-form date value (e.g., 'Thursday, January 1, 1970') ('l, F j, Y')
+		 *                 'long_ap_style' => 'foo' // Long-form date value formatted for AP Style
+		 *             ),
+		 *             'closed_query' => 'foo', // bool
+		 *             '24_query' => 'foo', // bool
+		 *             'time_spans' => array(
+		 *                 'times' => array(
+		 *                     'opens' => array(
+		 *                         'acf' => 'foo', // Value from ACF field ('g:i a')
+		 *                         'unix' => 'foo', // Unix timestamp
+		 *                         '24_hour' => 'foo', // 24:00 format ('H:i')
+		 *                         'iso_8601' => 'foo' // ISO 8601 format for time only ('H:i:sP')
+		 *                     ),
+		 *                     'closes' => array(
+		 *                         'acf' => 'foo', // Value from ACF field ('g:i a')
+		 *                         'unix' => 'foo', // Unix timestamp
+		 *                         '24_hour' => 'foo', // 24:00 format ('H:i')
+		 *                         'iso_8601' => 'foo' // ISO 8601 format for time only ('H:i:sP')
+		 *                     )
+		 *                 ),
+		 *                 'time_span' => 'foo', // Time span to display, formatted for AP Style
+		 *                 'description' => 'foo', // Description of the time span to display
+		 *                 'valid' => array(
+		 *                     'from' => array(
+		 *                         'acf' => 'foo', // Value from ACF field ('F j, Y')
+		 *                         'unix' => 'foo', // Unix timestamp
+		 *                         'iso_8601' => 'foo', // ISO 8601 format for date only ('Y-m-d')
+		 *                         'long' => 'foo' // Long-form date value (e.g., 'Thursday, January 1, 1970') ('l, F j, Y')
+		 *                     ), // The date when the item becomes valid
+		 *                     'through' => array(
+		 *                         'acf' => 'foo', // Value from ACF field ('F j, Y')
+		 *                         'unix' => 'foo', // Unix timestamp
+		 *                         'iso_8601' => 'foo', // ISO 8601 format for date only ('Y-m-d')
+		 *                         'long' => 'foo' // Long-form date value (e.g., 'Thursday, January 1, 1970') ('l, F j, Y')
+		 *                     ) // The date after when the item is not valid
+		 *                 )
+		 *             )
+		 *         ),
+		 *         'Monday' => array(
+		 *             ...
+		 *         ),
+		 *         'Tuesday' => array(
+		 *             ...
+		 *         ),
+		 *         'Wednesday' => array(
+		 *             ...
+		 *         ),
+		 *         'Thursday' => array(
+		 *             ...
+		 *         ),
+		 *         'Friday' => array(
+		 *             ...
+		 *         ),
+		 *         'Saturday' => array(
+		 *             ...
+		 *         )
+		 *     );
+		 *
+		 *
+		 */
+
+		if ( $hours_list ) {
+
+			// Open the description list element
+
+				echo '<dl class="hours">';
+
+			// Add a set of description term/details for each day row
+
+				foreach ( $hours_list as $day_name => $day_rows ) {
+
+					if ( $day_name ) {
+
+						// Construct the description term element
+
+							echo '<dt>' . $day_name . '</dt>';
+
+						// Loop through each of the time span rows for this day
+
+							foreach ( $day_rows['time_spans'] as $time_span ) {
+
+								if ( $time_span ) {
+
+									// Construct the description details element(s)
+
+										// Open the description details element
+
+											echo '<dd>';
+
+										// Add the time span
+
+											echo $time_span['time_span'];
+
+										// Add the time span description
+
+											if ( $time_span['description'] ) {
+
+												echo '<br /><span class="subtitle">' . $time_span['description'] . '</span>';
+
+											}
+
+										// Close the description details element
+
+											echo '</dd>';
+
+										// Add the the values to the schema data
+
+											// openingHours
+
+												$schema_openingHours = uamswp_fad_schema_openinghours(
+													$day_name ?? '', // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+													$time_span['times']['opens']['24_hour'] ?? '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+													$time_span['times']['closes']['24_hour'] ?? '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+													$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
+												);
+
+											// openingHoursSpecification
+
+												$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
+													$day_name ?? '', // array|string // Optional // The day of the week for which these opening hours are valid.
+													$time_span['times']['opens']['iso_8601'] ?? '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+													$time_span['times']['closes']['iso_8601'] ?? '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
+													$time_span['valid']['from']['iso_8601'] ?? '', // string // Optional // The date when the item becomes valid.
+													$time_span['valid']['through']['iso_8601'] ?? '', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+													$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
+												);
+
+											// specialOpeningHoursSpecification
+
+												if (
+													// isset($time_span['valid'])
+													// &&
+													// isset($time_span['valid']['from'])
+													// &&
+													isset($time_span['valid']['from']['iso_8601'])
+													&&
+													!empty($time_span['valid']['from']['iso_8601'])
+												) {
+
+													$schema_specialOpeningHoursSpecification = $schema_openingHoursSpecification;
+
+												}
+
+								}
+
+							}
+
+					}
+
+
+				}
+
+			// Close the description list element
+
+				echo '</dl>';
+
+		}
+
+	}
