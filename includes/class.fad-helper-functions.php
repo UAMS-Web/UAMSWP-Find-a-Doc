@@ -60,10 +60,10 @@
 			/**
 			 * This was modified from http://www.rockmycar.net/ap-style-dates-and-times-plugin/
 			 *
-			 * @param int	$time the datetime as a timestamp.
-			 * @param bool	$capnoon Should we capatalize the wood Noon?
+			 * @param int	$time		the datetime as a timestamp.
+			 * @param bool	$capnoon	Should we capatalize the wood Noon?
 			 *
-			 * @return string
+			 * @return	string
 			 */
 
 			if ( !function_exists('ap_time') ) {
@@ -196,10 +196,10 @@
 			/**
 			 * Takes two datetimes and converts them to an ap style time range string.
 			 *
-			 * @param int	$start The start date as a timestamp.
-			 * @param int	$end The end date as a timestamp.
+			 * @param int	$start	The start date as a timestamp.
+			 * @param int	$end	The end date as a timestamp.
 			 *
-			 * @return string
+			 * @return	string
 			 */
 
 			if ( !function_exists('ap_time_span') ) {
@@ -230,13 +230,13 @@
 			/**
 			 * This was modified from https://gist.github.com/tryonegg/d2e07e1d8f4ff8f1219ca639583f97ee
 			 *
-			 * @param int		$date The date as a datetime.
-			 * @param boolean	$today Should Today be inserted if it is today?
-			 * @param boolean	$captoday Catapatlize Today?
-			 * @param boolean	$useyear include the year?
-			 * @param boolean	$useweekdaynames include weekday names?
+			 * @param int		$date				The date as a datetime.
+			 * @param boolean	$today				Should Today be inserted if it is today?
+			 * @param boolean	$captoday			Catapatlize Today?
+			 * @param boolean	$useyear			include the year?
+			 * @param boolean	$useweekdaynames	include weekday names?
 			 *
-			 * @return string
+			 * @return	string
 			 */
 
 			if ( !function_exists('ap_date') ) {
@@ -375,7 +375,7 @@
 	 * @param string		$content	Linked content.
 	 * @param bool|string	$sep		Optional. Separator. Default is empty string.
 	 *
-	 * @return string HTML markup for anchor link and optional separator.
+	 * @return	string	HTML markup for anchor link and optional separator.
 	 */
 
 	// function uamswp_get_breadcrumb_link( $url, $content, $sep = '' ) {
@@ -416,7 +416,7 @@
 	 * @since 2.5.0
 	 *
 	 * @param string	$crumb	HTML markup for the CPT breadcrumb.
-	 * @param array	$args	Arguments used to generate the breadcrumbs. Documented in Genesis_Breadcrumbs::get_output().
+	 * @param array		$args	Arguments used to generate the breadcrumbs. Documented in Genesis_Breadcrumbs::get_output().
 	 */
 
 	// function uamswp_cpt_breadcrumb( $crumb, $args ) {
@@ -480,8 +480,10 @@
 	/**
 	 * Pass in a taxonomy value that is supported by WP's `get_taxonomy`
 	 * and you will get back the url to the archive view.
-	 * @param $taxonomy string|int
-	 * @return string
+	 *
+	 * @param	string|int	$taxonomy
+	 *
+	 * @return	string
 	 */
 
 	function get_taxonomy_archive_link( $taxonomy ) {
