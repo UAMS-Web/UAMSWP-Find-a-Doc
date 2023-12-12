@@ -979,7 +979,27 @@
 
 							// Set the date range text
 
-								$item_output['date_range_text'] = 'These special hours start on ' . date( 'F j, Y', min($item_date_list) ) . ', and are scheduled to end after ' . date( 'F j, Y', max($item_date_list) ) . '.';
+								$item_output['date_range_text'] = 'These special hours start on ';
+								$item_output['date_range_text'] .= ap_date(
+									min($item_date_list), // int // Required // The date as a Unix timestamp
+									false, // bool // Optional // Query for whether or not to output 'today' if the date is today
+									false, // bool // Optional // Query for whether or not to capitalize 'today'
+									false, // bool // Optional // Query for whether or not to include the year when the date is within the current year
+									true, // bool // Optional // Query for whether or not to include weekday names
+									true, // bool // Optional // Query for whether or not to include a trailing comma
+									true // bool // Optional // Query for whether or not to include non-breaking spaces within the date
+								);
+								$item_output['date_range_text'] .= ' and are scheduled to end after ';
+								$item_output['date_range_text'] .= ap_date(
+									max($item_date_list), // int // Required // The date as a Unix timestamp
+									false, // bool // Optional // Query for whether or not to output 'today' if the date is today
+									false, // bool // Optional // Query for whether or not to capitalize 'today'
+									false, // bool // Optional // Query for whether or not to include the year when the date is within the current year
+									true, // bool // Optional // Query for whether or not to include weekday names
+									false, // bool // Optional // Query for whether or not to include a trailing comma
+									true // bool // Optional // Query for whether or not to include non-breaking spaces within the date
+								);
+								$item_output['date_range_text'] .= '.';
 
 							// Clean up the individual special hours of operation set output array
 
