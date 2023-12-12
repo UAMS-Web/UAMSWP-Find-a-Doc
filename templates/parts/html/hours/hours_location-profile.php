@@ -321,7 +321,7 @@
 
 				$location_hours_text_heading_common = 'Hours';
 				$location_hours_text_heading_special = 'Special Hours';
-				$location_hours_text_heading_typical = 'Typical Hours';
+				$location_hours_text_heading_typical = 'Regular Hours';
 
 			// Time span text for display
 
