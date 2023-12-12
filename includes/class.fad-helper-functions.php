@@ -61,7 +61,7 @@
 			 * This was modified from http://www.rockmycar.net/ap-style-dates-and-times-plugin/
 			 *
 			 * @param int	$time		the datetime as a timestamp.
-			 * @param bool	$capnoon	Should we capitalize the word Noon?
+			 * @param bool	$capnoon	Should the words 'noon' or 'midnight' be capitalized?
 			 *
 			 * @return	string
 			 */
