@@ -252,18 +252,28 @@
 			/**
 			 * This was modified from https://gist.github.com/tryonegg/d2e07e1d8f4ff8f1219ca639583f97ee
 			 *
-			 * @param int		$date				The date as a Unix timestamp
-			 * @param boolean	$today				Should 'today' be inserted if it is today?
-			 * @param boolean	$captoday			Capitalize 'today'?
-			 * @param boolean	$useyear			Include the year?
-			 * @param boolean	$useweekdaynames	Include weekday names?
+			 * @param int		$date					The date as a Unix timestamp
+			 * @param boolean	$use_today				Query for whether or not to output 'today' if the date is today
+			 * @param boolean	$cap_today				Query for whether or not to capitalize 'today'
+			 * @param boolean	$include_current_year	Query for whether or not to include the year when the date is within the current year
+			 * @param boolean	$include_weekday		Query for whether or not to include weekday names
+			 * @param boolean	$trailing_comma			Query for whether or not to include a trailing comma
+			 * @param boolean	$nonbreaking_spaces		Query for whether or not to include non-breaking spaces within the date
 			 *
 			 * @return	string
 			 */
 
 			if ( !function_exists('ap_date') ) {
 
-				function ap_date( $date, $today = true, $captoday = true, $useyear = true, $useweekdaynames = true ) {
+				function ap_date(
+					int $date,
+					bool $use_today = true,
+					bool $cap_today = true,
+					bool $include_current_year = true,
+					bool $include_weekday = true,
+					bool $trailing_comma = false,
+					bool $nonbreaking_spaces = true
+				) {
 
 					// if (false == isDate($date) ){
 					//
@@ -271,95 +281,164 @@
 					//
 					// }
 
-					// Format the weekday name.
+					// Base output value
 
-						if ( true == $useweekdaynames ) {
+						$output = '';
 
-							$weekdayname = date( 'l,', $date );
+					// Date is Today
 
-						} else {
+						/**
+						 * If the date matches the current date, set the output as 'today'.
+						 * Otherwise, construct the full date string.
+						 */
 
-							$weekdayname = '';
+						 if (
+							$use_today
+							&&
+							date( 'F j Y', $date ) == date( 'F j Y' )
+						) {
 
-						}
-
-					// Determine the month and set the AP Style abbreviation.
-
-						if ( date( 'm', $date ) == '01' ) {
-
-							$apmonth = 'Jan. ';
-
-						} elseif ( date( 'm', $date ) == '02' ) {
-
-							$apmonth = 'Feb. ';
-
-						} elseif ( date( 'm', $date ) == '08' ) {
-
-							$apmonth = 'Aug. ';
-
-						} elseif ( date( 'm', $date ) == '09' ) {
-
-							$apmonth = 'Sept. ';
-
-						} elseif ( date( 'm', $date ) == '10' ) {
-
-							$apmonth = 'Oct. ';
-
-						} elseif ( date( 'm', $date ) == '11' ) {
-
-							$apmonth = 'Nov. ';
-
-						} elseif ( date( 'm', $date ) == '12' ) {
-
-							$apmonth = 'Dec. ';
+							$date_is_today = true;
+							$output = $cap_today ? 'Today' : 'today';
 
 						} else {
 
-							$apmonth = ( date( 'F', $date ) );
+							$date_is_today = false;
 
 						}
 
-					// Determine whether the date is within the current year and set it.
+					// Dates Other Than Today
 
-						if ( date( 'Y', $date ) != date( 'Y' ) ) {
+						/**
+						 * If the date does not match the current date, construct the full date string.
+						 */
 
-							$apyear = ', ' . date( 'Y', $date );
+						if ( !$date_is_today ) {
 
-						} else {
+							// Weekday Name
 
-							if ( true == $useyear ) {
+								/**
+								 * Include the weekday name at the beginning of the string when the
+								 * $include_weekday argument is set to true.
+								 *
+								 * e.g., 'Thursday, ' in 'Thursday, Jan. 1, 1970'
+								 */
 
-								$apyear = ', ' . date( 'Y', $date );
+								if ( $include_weekday ) {
 
-							} else {
+									// Get the value
 
-								$apyear = '';
+										$weekdayname = date( 'l', $date );
 
-							}
+									// Add the value to the output
+
+										$output .= $weekdayname . ', ';
+
+								}
+
+							// Month Name and Abbreviation
+
+								/**
+								 * Determine the month and abbreviate it according to AP Style.
+								 *
+								 *     * January as 'Jan.'
+								 *     * February as 'Feb.'
+								 *     * August as 'Aug.'
+								 *     * September as 'Sept.'
+								 *     * October as 'Oct.'
+								 *     * November as 'Nov.'
+								 *     * December as 'Dec.'
+								 */
+
+								// Get the value
+
+									if ( date( 'm', $date ) == '01' ) {
+
+										$ap_month = 'Jan.';
+
+									} elseif ( date( 'm', $date ) == '02' ) {
+
+										$ap_month = 'Feb.';
+
+									} elseif ( date( 'm', $date ) == '08' ) {
+
+										$ap_month = 'Aug.';
+
+									} elseif ( date( 'm', $date ) == '09' ) {
+
+										$ap_month = 'Sept.';
+
+									} elseif ( date( 'm', $date ) == '10' ) {
+
+										$ap_month = 'Oct.';
+
+									} elseif ( date( 'm', $date ) == '11' ) {
+
+										$ap_month = 'Nov.';
+
+									} elseif ( date( 'm', $date ) == '12' ) {
+
+										$ap_month = 'Dec.';
+
+									} else {
+
+										$ap_month = ( date( 'F', $date ) );
+
+									}
+
+								// Add the value to the output
+
+									$output .= $ap_month . ( $nonbreaking_spaces ? '&nbsp;' : ' ' );
+
+							// Day
+
+								// Get the value
+
+									$ap_day = date( 'j', $date );
+
+								// Add the value to the output
+
+									$output .= $ap_day;
+
+							// Year
+
+								/**
+								 * Include the year if the date is not within the current year.
+								 *
+								 * If the $include_current_year argument is set as true, then include the year when the date is
+								 * within the current year.
+								 */
+
+								if (
+									date( 'Y', $date ) != date( 'Y' )
+									||
+									$include_current_year
+								) {
+
+									// Get the value
+
+										$ap_year = date( 'Y', $date );
+
+									// Add the value to the output
+
+										$output .= ',' . ( $nonbreaking_spaces ? '&nbsp;' : ' ' ) . $ap_year;
+										$output .= $trailing_comma ? ',' : ''; // Include a trailing comma if the $trailing_comma argument is set as true
+
+								}
+
+							// Trailing Comma
+
+								if ( $trailing_comma ) {
+
+									// Add the value to the output
+
+										$output .= ',';
+
+								}
 
 						}
 
-					// Determine whether the date is the current date and set the final output.
-
-						if ( true == $today && date( 'F j Y', $date ) == date( 'F j Y' ) ) {
-
-							if ( true == $captoday ) {
-
-								$apdate = 'Today';
-
-							} else {
-
-								$apdate = 'today';
-
-							}
-
-						} else {
-
-							$apdate = $weekdayname . ' ' . $apmonth . ' ' . date( 'j', $date ) . '' . $apyear;
-
-						}
-
-					return $apdate;
+					return $output;
 
 				}
 
