@@ -451,55 +451,15 @@
 
 														// Long-form date value, formatted for AP Style
 
-															// If the year falls in the current year, exclude the year from the string
-
-																$item_date_output['date']['long_ap_style'] = str_replace(
-																	', ' . $current_year, // needle
-																	'', // replacement value
-																	$item_date_output['date']['long'] // haystack
-																);
-
-															// Abbreviate the months according to AP Style
-
-																$item_date_output['date']['long_ap_style'] = str_replace(
-																	array(
-																		'January',
-																		'February',
-																		'August',
-																		'September',
-																		'October',
-																		'November',
-																		'December'
-																	), // needle
-																	array(
-																		'Jan.',
-																		'Feb.',
-																		'Aug.',
-																		'Sept.',
-																		'Oct.',
-																		'Nov.',
-																		'Dec.'
-																	), // replacement value
-																	$item_date_output['date']['long_ap_style'] // haystack
-																);
-
-															// Replace all spaces after the first occurrence with non-breaking spaces
-
-																if ( substr_count( $item_date_output['date']['long_ap_style'], ' ' ) > 1 ) {
-
-																	$item_date_output['date']['long_ap_style'] = implode(
-																		' ', // separator string
-																		array(
-																			explode(' ', $item_date_output['date']['long_ap_style'], 2)[0],
-																				str_replace(
-																				' ', // needle
-																				'&nbsp;', // replacement value
-																				explode(' ', $item_date_output['date']['long_ap_style'], 2)[1] // haystack
-																			)
-																		) // The array of strings to implode
-																	);
-
-																}
+															$item_date_output['date']['long_ap_style'] = ap_date(
+																$item_date_output['date']['unix'], // int // Required // The date as a Unix timestamp
+																false, // bool // Optional // Query for whether or not to output 'today' if the date is today
+																false, // bool // Optional // Query for whether or not to capitalize 'today'
+																false, // bool // Optional // Query for whether or not to include the year when the date is within the current year
+																true, // bool // Optional // Query for whether or not to include weekday names
+																false, // bool // Optional // Query for whether or not to include a trailing comma
+																true, // bool // Optional // Query for whether or not to include non-breaking spaces within the date
+															);
 
 											// Day after the individual date for the special in-person hours of operation
 
