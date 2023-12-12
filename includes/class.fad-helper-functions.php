@@ -36,7 +36,7 @@
 
 // Format values for AP Style
 
-	// AP Style for Dates
+	// Format a single time for AP Style
 
 		if ( !function_exists('apStyleDate') ) {
 
@@ -53,7 +53,7 @@
 
 		}
 
-	// Format a date as AP style
+	// Format a single date for AP Style
 
 		/**
 		 * This was modified from https://gist.github.com/tryonegg/d2e07e1d8f4ff8f1219ca639583f97ee
@@ -171,7 +171,7 @@
 
 		}
 
-	// Format time for AP style
+	// Format a single time for AP Style
 
 		/**
 		 * This was modified from http://www.rockmycar.net/ap-style-dates-and-times-plugin/
@@ -243,7 +243,7 @@
 
 		}
 
-	// Format time range for AP Style
+	// Format a time range for AP Style
 
 		/**
 		 * Takes two datetimes and converts them to an ap style time range string.
@@ -275,7 +275,7 @@
 
 		}
 
-	// apStyleTime
+	// Format a single time for AP Style
 
 		if ( !function_exists('apStyleTime') ) {
 
