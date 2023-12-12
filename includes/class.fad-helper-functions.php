@@ -87,10 +87,15 @@
 					// }
 
 					// Format am and pm to AP Style abbreviations.
+
 						if ( date( 'a', $time ) == 'am' ) {
+
 							$meridian = 'a.m.';
+
 						} elseif ( date( 'a', $time ) == 'pm' ) {
+
 							$meridian = 'p.m.';
+
 						}
 
 					// Reformat 12:00 and 00:00 to noon and midnight.
