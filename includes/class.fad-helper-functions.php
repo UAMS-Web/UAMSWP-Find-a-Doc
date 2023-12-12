@@ -36,308 +36,312 @@
 
 // Format values for AP Style
 
-	// Format a single time for AP Style
+	// Format time values for AP Style
 
-		if ( !function_exists('apStyleDate') ) {
+		// Format a single time for AP Style (v1)
 
-			function apStyleDate( $date ){
+			if ( !function_exists('apStyleDate') ) {
 
-				$date = strftime("%l:%M %p", strtotime($date));
+				function apStyleDate( $date ){
 
-				$date = str_replace(":00", "", $date);
-				$date = str_replace("m", ".m.", $date);
+					$date = strftime("%l:%M %p", strtotime($date));
 
-				return $date;
+					$date = str_replace(":00", "", $date);
+					$date = str_replace("m", ".m.", $date);
 
-			}
-
-		}
-
-	// Format a single date for AP Style
-
-		/**
-		 * This was modified from https://gist.github.com/tryonegg/d2e07e1d8f4ff8f1219ca639583f97ee
-		 *
-		 * @param int		$date The date as a datetime.
-		 * @param boolean	$today Should Today be inserted if it is today?
-		 * @param boolean	$captoday Catapatlize Today?
-		 * @param boolean	$useyear include the year?
-		 * @param boolean	$useweekdaynames include weekday names?
-		 *
-		 * @return string
-		 */
-
-		if ( !function_exists('ap_date') ) {
-
-			function ap_date( $date, $today = true, $captoday = true, $useyear = true, $useweekdaynames = true ) {
-
-				// if (false == isDate($date) ){
-				//
-				// 	$date = strtotime($date);
-				//
-				// }
-
-				// Format the weekday name.
-
-					if ( true == $useweekdaynames ) {
-
-						$weekdayname = date( 'l,', $date );
-
-					} else {
-
-						$weekdayname = '';
-
-					}
-
-				// Determine the month and set the AP Style abbreviation.
-
-					if ( date( 'm', $date ) == '01' ) {
-
-						$apmonth = 'Jan. ';
-
-					} elseif ( date( 'm', $date ) == '02' ) {
-
-						$apmonth = 'Feb. ';
-
-					} elseif ( date( 'm', $date ) == '08' ) {
-
-						$apmonth = 'Aug. ';
-
-					} elseif ( date( 'm', $date ) == '09' ) {
-
-						$apmonth = 'Sept. ';
-
-					} elseif ( date( 'm', $date ) == '10' ) {
-
-						$apmonth = 'Oct. ';
-
-					} elseif ( date( 'm', $date ) == '11' ) {
-
-						$apmonth = 'Nov. ';
-
-					} elseif ( date( 'm', $date ) == '12' ) {
-
-						$apmonth = 'Dec. ';
-
-					} else {
-
-						$apmonth = ( date( 'F', $date ) );
-
-					}
-
-				// Determine whether the date is within the current year and set it.
-
-					if ( date( 'Y', $date ) != date( 'Y' ) ) {
-
-						$apyear = ', ' . date( 'Y', $date );
-
-					} else {
-
-						if ( true == $useyear ) {
-
-							$apyear = ', ' . date( 'Y', $date );
-
-						} else {
-
-							$apyear = '';
-
-						}
-
-					}
-
-				// Determine whether the date is the current date and set the final output.
-
-					if ( true == $today && date( 'F j Y', $date ) == date( 'F j Y' ) ) {
-
-						if ( true == $captoday ) {
-
-							$apdate = 'Today';
-
-						} else {
-
-							$apdate = 'today';
-
-						}
-
-					} else {
-
-						$apdate = $weekdayname . ' ' . $apmonth . ' ' . date( 'j', $date ) . '' . $apyear;
-
-					}
-
-				return $apdate;
-
-			}
-
-		}
-
-	// Format a single time for AP Style
-
-		/**
-		 * This was modified from http://www.rockmycar.net/ap-style-dates-and-times-plugin/
-		 *
-		 * @param int	$time the datetime as a timestamp.
-		 * @param bool	$capnoon Should we capatalize the wood Noon?
-		 *
-		 * @return string
-		 */
-
-		if ( !function_exists('ap_time') ) {
-
-			function ap_time( $time, $capnoon = true ){
-
-				// if(false == isDate($time)){
-				//
-				// 	$time = strtotime($time);
-				//
-				// }
-
-				// Format am and pm to AP Style abbreviations.
-					if ( date( 'a', $time ) == 'am' ) {
-						$meridian = 'a.m.';
-					} elseif ( date( 'a', $time ) == 'pm' ) {
-						$meridian = 'p.m.';
-					}
-
-				// Reformat 12:00 and 00:00 to noon and midnight.
-
-					if ( date( 'H:i', $time ) == '00:00' ) {
-
-						if ( true == $capnoon ) {
-
-							$aptime = 'Midnight';
-
-						} else {
-
-							$aptime = 'midnight';
-
-						}
-
-					} elseif ( date( 'H:i', $time ) == '12:00' ) {
-
-						if ( true == $capnoon ) {
-
-							$aptime = 'Noon';
-
-						} else {
-
-							$aptime = 'noon';
-
-						}
-
-						// Eliminate trailing zeroes from times at the top of the hour and set final output.
-
-					} elseif ( date( 'i', $time ) == '00' ) {
-
-						$aptime = date( 'g', $time ) . ' ' . $meridian;
-
-					} else {
-
-						$aptime = date( 'g:i', $time ) . ' ' . $meridian;
-
-					}
-
-				return $aptime;
-
-			}
-
-		}
-
-	// Format a time range for AP Style
-
-		/**
-		 * Takes two datetimes and converts them to an ap style time range string.
-		 *
-		 * @param int	$start The start date as a timestamp.
-		 * @param int	$end The end date as a timestamp.
-		 *
-		 * @return string
-		 */
-
-		if ( !function_exists('ap_time_span') ) {
-
-			function ap_time_span( $start, $end ) {
-
-				if ( date( 'a', $start ) == date( 'a', $end ) ) {
-
-					$starttime = str_replace( 'p.m.', '', ap_time( $start ) );
-					$starttime = str_replace( 'a.m.', '', $starttime );
-
-					return trim( $starttime ) . ' &ndash; ' . ap_time( $end );
-
-				} else {
-
-					return ap_time( $start ) . ' &ndash; ' . ap_time( $end );
+					return $date;
 
 				}
 
 			}
 
-		}
+		// Format a single time for AP Style (v2)
 
-	// Format a single time for AP Style
+			/**
+			 * This was modified from http://www.rockmycar.net/ap-style-dates-and-times-plugin/
+			 *
+			 * @param int	$time the datetime as a timestamp.
+			 * @param bool	$capnoon Should we capatalize the wood Noon?
+			 *
+			 * @return string
+			 */
 
-		if ( !function_exists('apStyleTime') ) {
+			if ( !function_exists('ap_time') ) {
 
-			function apStyleTime( $time, $capnoon = true ) {
+				function ap_time( $time, $capnoon = true ){
 
-				$time = strtotime($time);
+					// if(false == isDate($time)){
+					//
+					// 	$time = strtotime($time);
+					//
+					// }
 
-				// Format am and pm to AP Style abbreviations.
+					// Format am and pm to AP Style abbreviations.
+						if ( date( 'a', $time ) == 'am' ) {
+							$meridian = 'a.m.';
+						} elseif ( date( 'a', $time ) == 'pm' ) {
+							$meridian = 'p.m.';
+						}
 
-					if ( date( 'a', $time ) == 'am' ) {
+					// Reformat 12:00 and 00:00 to noon and midnight.
 
-						$meridian = 'a.m.';
+						if ( date( 'H:i', $time ) == '00:00' ) {
 
-					} elseif ( date( 'a', $time ) == 'pm' ) {
+							if ( true == $capnoon ) {
 
-						$meridian = 'p.m.';
+								$aptime = 'Midnight';
 
-					}
+							} else {
 
-				// Reformat 12:00 and 00:00 to noon and midnight.
+								$aptime = 'midnight';
 
-					if ( date( 'H:i', $time ) == '00:00' ) {
+							}
 
-						if ( true == $capnoon ) {
+						} elseif ( date( 'H:i', $time ) == '12:00' ) {
 
-							$aptime = 'Midnight';
+							if ( true == $capnoon ) {
+
+								$aptime = 'Noon';
+
+							} else {
+
+								$aptime = 'noon';
+
+							}
+
+							// Eliminate trailing zeroes from times at the top of the hour and set final output.
+
+						} elseif ( date( 'i', $time ) == '00' ) {
+
+							$aptime = date( 'g', $time ) . ' ' . $meridian;
 
 						} else {
 
-							$aptime = 'midnight';
+							$aptime = date( 'g:i', $time ) . ' ' . $meridian;
 
 						}
 
-					} elseif ( date( 'H:i', $time ) == '12:00' ) {
+					return $aptime;
 
-						if ( true == $capnoon ) {
-
-							$aptime = 'Noon';
-
-						} else {
-
-							$aptime = 'noon';
-
-						}
-
-						// Eliminate trailing zeroes from times at the top of the hour and set final output.
-
-					} elseif ( date( 'i', $time ) == '00' ) {
-
-						$aptime = date( 'g', $time ) . ' ' . $meridian;
-
-					} else {
-
-						$aptime = date( 'g:i', $time ) . ' ' . $meridian;
-
-					}
-
-				return $aptime;
+				}
 
 			}
 
-		}
+		// Format a single time for AP Style (v3)
+
+			if ( !function_exists('apStyleTime') ) {
+
+				function apStyleTime( $time, $capnoon = true ) {
+
+					$time = strtotime($time);
+
+					// Format am and pm to AP Style abbreviations.
+
+						if ( date( 'a', $time ) == 'am' ) {
+
+							$meridian = 'a.m.';
+
+						} elseif ( date( 'a', $time ) == 'pm' ) {
+
+							$meridian = 'p.m.';
+
+						}
+
+					// Reformat 12:00 and 00:00 to noon and midnight.
+
+						if ( date( 'H:i', $time ) == '00:00' ) {
+
+							if ( true == $capnoon ) {
+
+								$aptime = 'Midnight';
+
+							} else {
+
+								$aptime = 'midnight';
+
+							}
+
+						} elseif ( date( 'H:i', $time ) == '12:00' ) {
+
+							if ( true == $capnoon ) {
+
+								$aptime = 'Noon';
+
+							} else {
+
+								$aptime = 'noon';
+
+							}
+
+							// Eliminate trailing zeroes from times at the top of the hour and set final output.
+
+						} elseif ( date( 'i', $time ) == '00' ) {
+
+							$aptime = date( 'g', $time ) . ' ' . $meridian;
+
+						} else {
+
+							$aptime = date( 'g:i', $time ) . ' ' . $meridian;
+
+						}
+
+					return $aptime;
+
+				}
+
+			}
+
+		// Format a time range for AP Style
+
+			/**
+			 * Takes two datetimes and converts them to an ap style time range string.
+			 *
+			 * @param int	$start The start date as a timestamp.
+			 * @param int	$end The end date as a timestamp.
+			 *
+			 * @return string
+			 */
+
+			if ( !function_exists('ap_time_span') ) {
+
+				function ap_time_span( $start, $end ) {
+
+					if ( date( 'a', $start ) == date( 'a', $end ) ) {
+
+						$starttime = str_replace( 'p.m.', '', ap_time( $start ) );
+						$starttime = str_replace( 'a.m.', '', $starttime );
+
+						return trim( $starttime ) . ' &ndash; ' . ap_time( $end );
+
+					} else {
+
+						return ap_time( $start ) . ' &ndash; ' . ap_time( $end );
+
+					}
+
+				}
+
+			}
+
+	// Format date values for AP Style
+
+		// Format a single date for AP Style
+
+			/**
+			 * This was modified from https://gist.github.com/tryonegg/d2e07e1d8f4ff8f1219ca639583f97ee
+			 *
+			 * @param int		$date The date as a datetime.
+			 * @param boolean	$today Should Today be inserted if it is today?
+			 * @param boolean	$captoday Catapatlize Today?
+			 * @param boolean	$useyear include the year?
+			 * @param boolean	$useweekdaynames include weekday names?
+			 *
+			 * @return string
+			 */
+
+			if ( !function_exists('ap_date') ) {
+
+				function ap_date( $date, $today = true, $captoday = true, $useyear = true, $useweekdaynames = true ) {
+
+					// if (false == isDate($date) ){
+					//
+					// 	$date = strtotime($date);
+					//
+					// }
+
+					// Format the weekday name.
+
+						if ( true == $useweekdaynames ) {
+
+							$weekdayname = date( 'l,', $date );
+
+						} else {
+
+							$weekdayname = '';
+
+						}
+
+					// Determine the month and set the AP Style abbreviation.
+
+						if ( date( 'm', $date ) == '01' ) {
+
+							$apmonth = 'Jan. ';
+
+						} elseif ( date( 'm', $date ) == '02' ) {
+
+							$apmonth = 'Feb. ';
+
+						} elseif ( date( 'm', $date ) == '08' ) {
+
+							$apmonth = 'Aug. ';
+
+						} elseif ( date( 'm', $date ) == '09' ) {
+
+							$apmonth = 'Sept. ';
+
+						} elseif ( date( 'm', $date ) == '10' ) {
+
+							$apmonth = 'Oct. ';
+
+						} elseif ( date( 'm', $date ) == '11' ) {
+
+							$apmonth = 'Nov. ';
+
+						} elseif ( date( 'm', $date ) == '12' ) {
+
+							$apmonth = 'Dec. ';
+
+						} else {
+
+							$apmonth = ( date( 'F', $date ) );
+
+						}
+
+					// Determine whether the date is within the current year and set it.
+
+						if ( date( 'Y', $date ) != date( 'Y' ) ) {
+
+							$apyear = ', ' . date( 'Y', $date );
+
+						} else {
+
+							if ( true == $useyear ) {
+
+								$apyear = ', ' . date( 'Y', $date );
+
+							} else {
+
+								$apyear = '';
+
+							}
+
+						}
+
+					// Determine whether the date is the current date and set the final output.
+
+						if ( true == $today && date( 'F j Y', $date ) == date( 'F j Y' ) ) {
+
+							if ( true == $captoday ) {
+
+								$apdate = 'Today';
+
+							} else {
+
+								$apdate = 'today';
+
+							}
+
+						} else {
+
+							$apdate = $weekdayname . ' ' . $apmonth . ' ' . date( 'j', $date ) . '' . $apyear;
+
+						}
+
+					return $apdate;
+
+				}
+
+			}
 
 // Partition / Split Col function
 
