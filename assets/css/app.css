@@ -864,6 +864,10 @@
   font-size: .5em;
 }
 
+.single-location p.small+dl.hours {
+  margin-top: 1em;
+}
+
 .location-info>.row {
   justify-content: center;
 }
