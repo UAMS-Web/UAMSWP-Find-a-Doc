@@ -1127,8 +1127,8 @@
 
 				// Convert $opens and $closes to the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
 
-					$opens = $opens ? date( 'H:i:s', strtotime($opens) ) : null;
-					$closes = $closes ? date( 'H:i:s', strtotime($closes) ) : null;
+					$opens = $opens ? date( 'H:i:sP', strtotime($opens) ) : null;
+					$closes = $closes ? date( 'H:i:sP', strtotime($closes) ) : null;
 
 				// Convert $validFrom to the ISO 8601 date and time format ([-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm])
 
