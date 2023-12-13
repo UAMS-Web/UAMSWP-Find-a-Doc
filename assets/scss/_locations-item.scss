@@ -6,37 +6,22 @@
 	}
 	dl.hours {
 		@include media-breakpoint-up(xs) {
-			overflow: hidden;
+			display: grid;
+			grid-template-columns: 5.8125em auto;
+			row-gap: 1em;
+			column-gap: $grid-gutter-width;
 		}
 
 		dt, dd {
 			@include media-breakpoint-up(xs) {
-				margin-top: 1em;
+				margin:0;
+				padding:0;
 			}
 		}
 
-		dt {
-			@include media-breakpoint-up(xs) {
-				width: 7.5em;
-				padding-right: $grid-gutter-width;
-				clear: both;
-				float: left;
-			}
-
-			&:first-child,
-			&:first-child + dd {
-				@include media-breakpoint-up(xs) {
-					margin-top: 0;
-				}
-			}
-		}
 		dd {
 			@include media-breakpoint-up(xs) {
-				margin-left: 7.5em;
-			}
-
-			+ dd {
-				margin-top: 0.5em;
+				grid-column-start: 2;
 			}
 		}
 	}
