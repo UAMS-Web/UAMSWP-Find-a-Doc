@@ -400,6 +400,7 @@
 										// Define/reset the individual date output array
 
 											$item_date_output = array(
+												'day' => null, // A full textual representation of the day of the week ('l')
 												'date' => array(
 													'acf' => null, // Value from ACF field ('F j, Y')
 													'unix' => null, // Unix timestamp
@@ -480,6 +481,10 @@
 													// ISO 8601 format for date only ('Y-m-d')
 
 														$item_date_output['date_after']['iso_8601'] = date( 'Y-m-d', $item_date_output['date_after']['unix'] ) ?? null;
+
+										// 'date' // Convert the Date value's Unix timestamp to a full textual representation of the day of the week ('l')
+
+											$item_date_output['day'] = date( 'l', $item_date_output['date']['unix'] ) ?? null;
 
 										// Will this location be closed on this date?
 
