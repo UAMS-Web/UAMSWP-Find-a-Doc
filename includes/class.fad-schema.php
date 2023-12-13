@@ -1125,6 +1125,10 @@
 
 						}
 
+				// Set the timezone from the server
+
+					date_default_timezone_set( wp_timezone_string() );
+
 				// Convert $opens and $closes to the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
 
 					$opens = $opens ? date( 'H:i:sP', strtotime($opens) ) : null;
