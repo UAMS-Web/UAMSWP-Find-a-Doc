@@ -16012,7 +16012,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 												) {
 
 													$schema_openingHours = uamswp_fad_schema_openinghours(
-														$day_name ?? '', // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+														$day_rows['day'] ?? ( $day_name ?? '' ), // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 														$time_span['times']['opens']['24_hour'] ?? '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 														$time_span['times']['closes']['24_hour'] ?? '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 														$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
@@ -16023,7 +16023,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 											// openingHoursSpecification
 
 												$schema_openingHoursSpecification = uamswp_fad_schema_openinghoursspecification(
-													$day_name ?? '', // array|string // Optional // The day of the week for which these opening hours are valid.
+													$day_rows['day'] ?? ( $day_name ?? '' ), // array|string // Optional // The day of the week for which these opening hours are valid.
 													$time_span['times']['opens']['iso_8601'] ?? '', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
 													$time_span['times']['closes']['iso_8601'] ?? '', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using the ISO 8601 time format (hh:mm:ss[Z|(+|-)hh:mm]).
 													$time_span['valid']['from']['iso_8601'] ?? '', // string // Optional // The date when the item becomes valid.
