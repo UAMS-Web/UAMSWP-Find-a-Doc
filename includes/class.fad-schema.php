@@ -1130,20 +1130,13 @@
 					$opens = $opens ? date( 'H:i:sP', strtotime($opens) ) : null;
 					$closes = $closes ? date( 'H:i:sP', strtotime($closes) ) : null;
 
-				// Convert $validFrom to the ISO 8601 date and time format ([-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm])
+				// Add time value to $validFrom as midnight, then convert $validFrom to the ISO 8601 date and time format ([-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm])
 
-					$validFrom = $validFrom ? date( 'c', strtotime($validFrom) ) : null;
+					$validFrom = $validFrom ? date( 'c', strtotime( $validFrom . ', midnight' ) ) : null;
 
 				// Add time value to $validThrough Date as the last second of the day, then convert $validThrough to the ISO 8601 date and time format ([-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm])
 
-					$validThrough = $validThrough ?? null;
-
-					if ( $validThrough ) {
-
-						$validThrough .= ' 23:59:59';
-						$validFrom = date( 'c', strtotime($validThrough) );
-
-					}
+					$validThrough = $validThrough ? date( 'c', strtotime( $validThrough . ', 23:59:59' ) ) : null;
 
 				// Base item array
 
