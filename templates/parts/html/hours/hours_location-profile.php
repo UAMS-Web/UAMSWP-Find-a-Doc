@@ -618,9 +618,6 @@
 
 															$item_time_span_output['valid'] = $item_date_valid;
 
-													// echo '<p>$item_time_span_output (closed) = ' . ( is_array($item_time_span_output) ? 'Array' : ( is_object($item_time_span_output) ? 'Object' : ( is_null($item_time_span_output) ? 'Null' : ( $item_time_span_output ) ) ) ) . '</p>'; // test
-													// if ( is_array($item_time_span_output) || is_object($item_time_span_output) ) { echo '<pre>'; print_r($item_time_span_output); echo '</pre>'; } // test
-
 													// Clean up the individual time span output array
 
 														/**
@@ -767,9 +764,6 @@
 
 																}
 
-															// echo '<p>$item_time_span_output (open 24 hours) = ' . ( is_array($item_time_span_output) ? 'Array' : ( is_object($item_time_span_output) ? 'Object' : ( is_null($item_time_span_output) ? 'Null' : ( $item_time_span_output ) ) ) ) . '</p>'; // test
-															// if ( is_array($item_time_span_output) || is_object($item_time_span_output) ) { echo '<pre>'; print_r($item_time_span_output); echo '</pre>'; } // test
-
 														}
 
 													// Not open 24 hours
@@ -898,9 +892,6 @@
 
 																				}
 
-																			// echo '<p>$item_time_span_output (open) = ' . ( is_array($item_time_span_output) ? 'Array' : ( is_object($item_time_span_output) ? 'Object' : ( is_null($item_time_span_output) ? 'Null' : ( $item_time_span_output ) ) ) ) . '</p>'; // test
-																			// if ( is_array($item_time_span_output) || is_object($item_time_span_output) ) { echo '<pre>'; print_r($item_time_span_output); echo '</pre>'; } // test
-
 																		} // endif ( !$item_date_output['closed_query'] )
 
 																	} // endforeach ( $item_date_row['time_span'] as $item_date_time_span )
@@ -910,9 +901,6 @@
 														}
 
 												} // endif ( !$item_date_output['closed_query'] )
-
-										// echo '<p>$item_date_output = ' . ( is_array($item_date_output) ? 'Array' : ( is_object($item_date_output) ? 'Object' : ( is_null($item_date_output) ? 'Null' : ( $item_date_output ) ) ) ) . '</p>'; // test
-										// if ( is_array($item_date_output) || is_object($item_date_output) ) { echo '<pre>'; print_r($item_date_output); echo '</pre>'; } // test
 
 										// Clean up the individual date output array
 
@@ -1020,9 +1008,6 @@
 										$location_hours_modified_active = true;
 
 								}
-
-							// echo '<p>$location_hours_modified_list = ' . ( is_array($location_hours_modified_list) ? 'Array' : ( is_object($location_hours_modified_list) ? 'Object' : ( is_null($location_hours_modified_list) ? 'Null' : ( $location_hours_modified_list ) ) ) ) . '</p>'; // test
-							// if ( is_array($location_hours_modified_list) || is_object($location_hours_modified_list) ) { echo '<pre>'; print_r($location_hours_modified_list); echo '</pre>'; } // test
 
 							// Check if typical hours of operation should be inactive
 

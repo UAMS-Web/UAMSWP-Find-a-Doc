@@ -11158,9 +11158,6 @@
 
 												$parking_id = get_field( 'facility_parking', $term ) ?? null;
 
-												echo '<p>$parking_id = ' . ( is_array($parking_id) ? 'Array' : ( is_object($parking_id) ? 'Object' : ( is_null($parking_id) ? 'Null' : ( $parking_id ) ) ) ) . '</p>'; // test
-												if ( is_array($parking_id) || is_object($parking_id) ) { echo '<pre>'; print_r($parking_id); echo '</pre>'; } // test
-
 											// Get the term
 
 												$parking_term = null;
@@ -11170,9 +11167,6 @@
 													$parking_term = get_term( $parking_id, 'parking' ) ?? null;
 
 												}
-
-												echo '<p>$parking_term = ' . ( is_array($parking_term) ? 'Array' : ( is_object($parking_term) ? 'Object' : ( is_null($parking_term) ? 'Null' : ( $parking_term ) ) ) ) . '</p>'; // test
-												if ( is_array($parking_term) || is_object($parking_term) ) { echo '<pre>'; print_r($parking_term); echo '</pre>'; } // test
 
 												// Check the term
 
