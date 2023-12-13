@@ -15866,9 +15866,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 	function uamswp_hours_description_list(
 		array $hours_list, // array // Required // Associative array of the hours of operation for each day in a series
-		array $schema_openingHours, // array // Required // Pre-existing list array for openingHours to which to add additional items
-		array $schema_openingHoursSpecification, // array // Required // Pre-existing list array for openingHoursSpecification to which to add additional items
-		array $schema_specialOpeningHoursSpecification // array // Required // Pre-existing list array for specialOpeningHoursSpecification to which to add additional items
+		array &$schema_openingHours, // array // Required // Pre-existing list array for openingHours to which to add additional items
+		array &$schema_openingHoursSpecification, // array // Required // Pre-existing list array for openingHoursSpecification to which to add additional items
+		array &$schema_specialOpeningHoursSpecification // array // Required // Pre-existing list array for specialOpeningHoursSpecification to which to add additional items
 	) {
 
 		/**
