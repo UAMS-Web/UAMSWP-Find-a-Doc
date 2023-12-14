@@ -1643,7 +1643,8 @@
 									$item['dates'], // array // Required // Associative array of the hours of operation for each day in a series
 									$schema_openingHours, // array // Required // Pre-existing list array for openingHours to which to add additional items
 									$schema_openingHoursSpecification, // array // Required // Pre-existing list array for openingHoursSpecification to which to add additional items
-									$schema_specialOpeningHoursSpecification // array // Required // Pre-existing list array for specialOpeningHoursSpecification to which to add additional items
+									$schema_specialOpeningHoursSpecification, // array // Required // Pre-existing list array for specialOpeningHoursSpecification to which to add additional items
+									$location_schema_fields[$page_id] //array // Required // Pre-existing field values array so duplicate calls can be avoided
 								);
 
 						}
@@ -1668,7 +1669,8 @@
 							$location_hours_typical_list, // array // Required // Associative array of the hours of operation for each day in a series
 							$schema_openingHours, // array // Required // Pre-existing list array for openingHours to which to add additional items
 							$schema_openingHoursSpecification, // array // Required // Pre-existing list array for openingHoursSpecification to which to add additional items
-							$schema_specialOpeningHoursSpecification // array // Required // Pre-existing list array for specialOpeningHoursSpecification to which to add additional items
+							$schema_specialOpeningHoursSpecification, // array // Required // Pre-existing list array for specialOpeningHoursSpecification to which to add additional items
+							$location_schema_fields[$page_id] //array // Required // Pre-existing field values array so duplicate calls can be avoided
 						);
 
 				}
