@@ -1137,7 +1137,7 @@
 											$location_hours_typical_list[$item_day_row]['closed_query'] == false
 										) {
 
-											$location_hours_typical_list[$item_day_row]['closed_query'] = ( $item['closed_query'] ? 1 : 0 ) ?? 0;
+											$location_hours_typical_list[$item_day_row]['closed_query'] = 0;
 
 										}
 
@@ -1149,7 +1149,7 @@
 										$location_hours_typical_list[$item_day_row]['24_query'] == false
 									) {
 
-											$location_hours_typical_list[$item_day_row]['24_query'] = ( $item['24_query'] ? 1 : 0 ) ?? 0;
+											$location_hours_typical_list[$item_day_row]['24_query'] = 1;
 
 										}
 
