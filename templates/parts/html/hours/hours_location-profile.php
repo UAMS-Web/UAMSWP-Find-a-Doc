@@ -1131,6 +1131,10 @@
 
 									// Will this location be closed on this date? // bool
 
+										/**
+										 * Define this with a static value (false).
+										 */
+
 										if (
 											!isset($location_hours_typical_list[$item_day_row]['closed_query'])
 											||
@@ -1142,6 +1146,10 @@
 										}
 
 									// Will this location be open 24 hours on this date? // bool
+
+										/**
+										 * Define this with a static value (true).
+										 */
 
 										if (
 											!isset($location_hours_typical_list[$item_day_row]['24_query'])
