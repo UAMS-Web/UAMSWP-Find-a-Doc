@@ -1159,7 +1159,7 @@
 
 												$location_hours_typical_list[$item_day_row]['24_query'] = 1;
 
-											}
+										}
 
 								// Set the time values
 
