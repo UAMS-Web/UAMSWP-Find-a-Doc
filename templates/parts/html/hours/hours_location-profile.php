@@ -1143,15 +1143,15 @@
 
 									// Will this location be open 24 hours on this date? // bool
 
-									if (
-										!isset($location_hours_typical_list[$item_day_row]['24_query'])
-										||
-										$location_hours_typical_list[$item_day_row]['24_query'] == false
-									) {
+										if (
+											!isset($location_hours_typical_list[$item_day_row]['24_query'])
+											||
+											$location_hours_typical_list[$item_day_row]['24_query'] == false
+										) {
 
-											$location_hours_typical_list[$item_day_row]['24_query'] = 1;
+												$location_hours_typical_list[$item_day_row]['24_query'] = 1;
 
-										}
+											}
 
 								// Set the time values
 
