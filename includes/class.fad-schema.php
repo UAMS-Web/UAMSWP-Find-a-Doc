@@ -24452,355 +24452,6 @@
 
 									}
 
-								// Hours of operation (common use)
-
-									// List of properties that reference hours of operation
-
-										$location_hours_common = array(
-											'businessDays',
-											'hoursAvailable',
-											'openingHours',
-											'openingHoursSpecification',
-											'specialOpeningHoursSpecification'
-										);
-
-									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_hours_common
-										)
-										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_hours_common
-										)
-									) {
-
-										// Get and format values
-
-											// Hours group
-
-												$location_hours_group = $location_hours_group ?? ( get_field( 'location_hours_group', $entity ) ?? null );
-
-											// In-person hours
-
-												// Typical in-person hours tab fields
-
-													if ( $location_hours_group ) {
-
-														// Query: Do the location's typical hours of operation vary? (button_group)
-
-															$location_hours_variable_query = $location_hours_group['location_hours_variable'] ?? null;
-
-														if ( $location_hours_variable_query ) {
-
-															// Information about the Location's Variable Hours of Operation (wysiwyg)
-
-																$location_hours_variable_info = $location_hours_group['location_hours_variable_info'] ?? null;
-
-														} else {
-
-															// Query: Is the location typically open 24/7? (button_group)
-
-																$location_hours_24_7_query = $location_hours_group['location_24_7'] ?? null;
-
-															if ( $location_hours_24_7_query ) {
-
-																/**
-																 * If the location is typically open 24/7...
-																 */
-
-																$location_hours_input = array(
-																	array(
-																		'dayOfWeek' => array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ),
-																		'opens' => '00:00',
-																		'closes' => '23:59',
-																		'validThrough' => null,
-																		'dayOfWeek' => null
-																	)
-																);
-
-																// Define the openingHours property schema
-
-																	$location_hours_openingHours = uamswp_fad_schema_openinghours(
-																		'Mo-Su', // string|array // Required // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-																		'', // string // Optional // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																		'', // string // Optional // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-																		( $location_hours_openingHours ?? array() ) // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
-																	);
-
-																// Define the openingHoursSpecification property schema
-
-																	// Define array for openingHoursSpecification function input argument
-
-																		$location_hours_loop_input = array();
-
-																		foreach ( array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ) as $item ) {
-
-																			$location_hours_loop_input[] = array(
-																				'dayOfWeek' => $item,
-																				'opens' => '00:00',
-																				'closes' => '23:59',
-																				'validThrough' => null,
-																				'dayOfWeek' => null
-																			);
-
-																		}
-
-																	$location_hours_openingHoursSpecification = uamswp_fad_schema_hours_loop(
-																		$location_hours_loop_input, // array // Required // Array containing the argument values for the openingHours and openingHoursSpecification functions
-																		'openingHoursSpecification', // string enum('openingHours', 'openingHoursSpecification', 'specialOpeningHoursSpecification') // string // Required // Which property to define
-																		( $location_hours_openingHoursSpecification ?? array() ) // array // Optional // Pre-existing list array for openingHours, openingHoursSpecification or specialOpeningHoursSpecification to which to add additional items
-																	);
-
-															} else {
-
-																/**
-																 * If the location is not typically open 24/7...
-																 */
-
-																// Typical In-Person Hours of Operation (repeater)
-
-																	$location_hours_repeater = $location_hours_group['location_hours'] ?? null;
-
-																	// Loop through the Typical In-Person Hours of Operation repeater to create the hours of operation loop function input argument
-
-																		$location_hours_loop_input = $location_hours_loop_input ?? array();
-
-																		if ( $location_hours_repeater ) {
-
-																			foreach ( $location_hours_repeater as $item ) {
-
-																				if ( $item ) {
-
-																					// Reset item variables
-
-																						$item_dayOfWeek = $item['day'] ?? null;
-
-																						if ( $item_dayOfWeek == 'Mon - Fri') {
-
-																							$item_dayOfWeek = array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' );
-
-																						}
-
-																						$item_closed = $item['closed'] ?? null;
-
-																						if ( $item_closed ) {
-
-																							$item_opens = '00:00';
-																							$item_closes = '00:00';
-
-																						} else {
-
-																							$item_opens = $item['open'] ?? null;
-																							$item_closes = $item['close'] ?? null;
-
-																						}
-
-																						$item_comment = $item['comment'] ?? null;
-
-																					// Construct item schema array
-
-																						$item_schema = array(
-																							'dayOfWeek' => $item_dayOfWeek,
-																							'opens' => $item_opens,
-																							'closes' => $item_closes,
-																							'validFrom' => null,
-																							'validThrough' => null,
-																						);
-
-																					// Remove empty rows from item schema array
-
-																						$item_schema = array_filter($item_schema);
-
-																					// Add item schema array to function input argument value
-
-																						if ( $item_schema ) {
-
-																							$location_hours_loop_input[] = $item_schema;
-
-																						}
-
-																				}
-
-																			}
-
-																		}
-
-																	// Add values to schema properties
-
-																		if ( $location_hours_loop_input ) {
-
-																			// openingHours
-
-																				$location_hours_openingHoursSpecification = uamswp_fad_schema_hours_loop(
-																					$location_hours_loop_input, // array // Required // Array containing the argument values for the openingHours and openingHoursSpecification functions
-																					'openingHours', // string enum('openingHours', 'openingHoursSpecification', 'specialOpeningHoursSpecification') // string // Required // Which property to define
-																					( $location_hours_openingHours ?? array() ) // array // Optional // Pre-existing list array for openingHours, openingHoursSpecification or specialOpeningHoursSpecification to which to add additional items
-																				);
-
-																			// openingHoursSpecification
-
-																				$location_hours_openingHoursSpecification = uamswp_fad_schema_hours_loop(
-																					$location_hours_loop_input, // array // Required // Array containing the argument values for the openingHours and openingHoursSpecification functions
-																					'openingHoursSpecification', // string enum('openingHours', 'openingHoursSpecification', 'specialOpeningHoursSpecification') // string // Required // Which property to define
-																					( $location_hours_openingHoursSpecification ?? array() ) // array // Optional // Pre-existing list array for openingHours, openingHoursSpecification or specialOpeningHoursSpecification to which to add additional items
-																				);
-
-																		}
-
-																// Information for When the Location Is Closed (wysiwyg)
-
-																	$location_after_hours = $location_hours_group['location_after_hours'] ?? null;
-
-															}
-
-														}
-
-													}
-
-												// Modified in-person hours tab fields
-
-													if ( $location_hours_group ) {
-
-														// Query: Are there any upcoming modified in-person hours of operation? (button_group)
-
-															$location_hours_modified_query = $location_hours_group['location_modified_hours'] ?? null;
-
-														if ( $location_hours_modified_query ) {
-
-															// Reason for Modified In-Person Hours of Operation (wysiwyg)
-
-																$location_hours_modified_reason = $location_hours_group['location_modified_hours_reason'] ?? null;
-
-															// Start Date For the Modified In-Person Hours of Operation (date_picker)
-
-																$location_hours_modified_start_date = $location_hours_group['location_modified_hours_start_date'] ?? null;
-
-															// End Date For the Modified In-Person Hours of Operation (date_picker)
-
-																// Query: Is there an end date for the modified in-person hours of operation? (button_group)
-
-																	$location_hours_modified_end_query = $location_hours_group['location_modified_hours_end'] ?? null;
-
-																if ( $location_hours_modified_end_query ) {
-
-																	$location_hours_modified_end_date = $location_hours_group['location_modified_hours_end_date'] ?? null;
-
-																}
-
-															// Modified In-Person Hours of Operation (repeater)
-
-																$location_hours_modified = $location_hours_group['location_modified_hours_group'] ?? null;
-
-														}
-
-													}
-
-											// Telemedicine hours
-
-												// Typical telemedicine hours tab fields
-
-													if ( $location_hours_group ) {
-
-														// Query: Does this location offer a telemedicine option? (button_group)
-
-															$location_telemed_query = $location_hours_group['location_telemed_query'] ?? null;
-
-														if ( $location_telemed_query ) {
-
-															// Telemedicine Patient Type (radio)
-
-																$location_telemed_patients = $location_hours_group['location_telemed_patients'] ?? null;
-
-															// Query: Is telemedicine typically available 24/7? (button_group)
-
-																$location_telemed_24_7 = $location_hours_group['location_telemed_24_7'] ?? null;
-
-															if ( $location_telemed_24_7 ) {
-
-																/**
-																 * If the location's telemedicine is typically available 24/7...
-																 */
-
-															} else {
-
-																/**
-																 * If the location's telemedicine is not typically available 24/7...
-																 */
-
-																// Typical Telemedicine Hours of Operation (repeater)
-
-																	$location_telemed_hours = $location_hours_group['location_telemed_hours'] ?? null;
-
-															}
-
-														}
-
-													}
-
-												// Modified telemedicine hours tab fields
-
-													if (
-														$location_hours_group
-														&&
-														$location_telemed_query
-													) {
-
-														// Query: Are there any upcoming modified telemedicine hours of operation? (button_group)
-
-															$location_telemed_modified_hours_query = $location_hours_group['location_telemed_modified_hours_query'] ?? null;
-
-														if ( $location_telemed_modified_hours_query ) {
-
-															// Reason for Modified Telemedicine Hours of Operation (wysiwyg)
-
-																$location_telemed_modified_hours_reason = $location_hours_group['location_telemed_modified_hours_reason'] ?? null;
-
-															// Modified Telemedicine Hours Start Date (date_picker)
-
-																$location_telemed_modified_hours_start_date = $location_hours_group['location_telemed_modified_hours_start_date'] ?? null;
-
-															// End Date For the Modified Telemedicine Hours of Operation (date_picker)
-
-																// Query: Is there an end date for the modified telemedicine hours of operation? (button_group)
-
-																	$location_telemed_modified_hours_end = $location_hours_group['location_telemed_modified_hours_end'] ?? null;
-
-																if ( $location_telemed_modified_hours_end ) {
-
-																	$location_telemed_modified_hours_end_date = $location_hours_group['location_telemed_modified_hours_end_date'] ?? null;
-
-																}
-
-															// Query: Is telemedicine available 24/7 during these modified telemedicine hours of operation? (button_group)
-
-																$location_telemed_modified_hours_24_7 = $location_hours_group['flocation_telemed_modified_hours_24_7oo'] ?? null;
-
-															// Modified Telemedicine Hours of Operation (repeater)
-
-																if ( $location_telemed_modified_hours_24_7 ) {
-
-																	/**
-																	 * If the location's telemedicine is available 24/7 during the modified hours...
-																	 */
-
-																} else {
-
-																	/**
-																	 * If the location's telemedicine is not available 24/7 during the modified hours...
-																	 */
-
-																	$location_telemed_modified_hours_times = $location_hours_group['location_telemed_modified_hours_times'] ?? null;
-
-																}
-
-														}
-
-													}
-
-									}
-
 								// name
 
 									/**
@@ -27371,7 +27022,7 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'openingHours', // string // Required // Name of schema property
-													$location_hours_openingHours, // mixed // Required // Variable to add as the property value
+													$location_openingHours, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27383,7 +27034,7 @@
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'openingHours', // string // Required // Name of schema property
-													$location_hours_openingHours, // mixed // Required // Variable to add as the property value
+													$location_openingHours, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27425,7 +27076,7 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'openingHoursSpecification', // string // Required // Name of schema property
-													$location_hours_openingHoursSpecification, // mixed // Required // Variable to add as the property value
+													$location_openingHoursSpecification, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27436,8 +27087,8 @@
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'openingHours', // string // Required // Name of schema property
-													$location_hours_openingHoursSpecification, // mixed // Required // Variable to add as the property value
+													'openingHoursSpecification', // string // Required // Name of schema property
+													$location_openingHoursSpecification, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27882,7 +27533,7 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'specialOpeningHoursSpecification', // string // Required // Name of schema property
-													$location_hours_specialOpeningHoursSpecification, // mixed // Required // Variable to add as the property value
+													$location_specialOpeningHoursSpecification, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27894,7 +27545,7 @@
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'specialOpeningHoursSpecification', // string // Required // Name of schema property
-													$location_hours_specialOpeningHoursSpecification, // mixed // Required // Variable to add as the property value
+													$location_specialOpeningHoursSpecification, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
