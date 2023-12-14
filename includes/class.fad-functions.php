@@ -16019,6 +16019,10 @@ function limit_to_post_parent( $args, $field, $post ) {
 														$schema_openingHours // mixed // Optional // Pre-existing list array for openingHours to which to add additional items
 													);
 
+													// Pass value to schema function
+
+														$schema_fields['location_openingHours'] = $schema_openingHours ?? null;
+
 												}
 
 											// openingHoursSpecification
@@ -16031,6 +16035,10 @@ function limit_to_post_parent( $args, $field, $post ) {
 													$time_span['valid']['through']['iso_8601'] ?? '', // string // Optional // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 													$schema_openingHoursSpecification // array // Optional // Pre-existing list array for OpeningHoursSpecification to which to add additional items
 												);
+
+												// Pass value to schema function
+
+													$schema_fields['location_openingHoursSpecification'] = $schema_openingHoursSpecification ?? null;
 
 											// specialOpeningHoursSpecification
 
@@ -16045,6 +16053,10 @@ function limit_to_post_parent( $args, $field, $post ) {
 												) {
 
 													$schema_specialOpeningHoursSpecification = $schema_openingHoursSpecification;
+
+													// Pass value to schema function
+
+														$schema_fields['location_specialOpeningHoursSpecification'] = $schema_specialOpeningHoursSpecification ?? null;
 
 												}
 
