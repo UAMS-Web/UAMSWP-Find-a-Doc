@@ -30,7 +30,7 @@
 
 		// Get resident values
 
-			$physician_resident = get_field('physician_resident',$post->ID);
+			$physician_resident = get_field('physician_resident');
 			$physician_resident_title_name = 'Resident Physician';
 
 		// Get clinical specialty and occupation title values
@@ -52,7 +52,7 @@
 
 				// Clinical Specialty
 
-					$provider_specialty = get_field('physician_title',$post->ID);
+					$provider_specialty = get_field('physician_title');
 
 				// Clinical Occupation Title
 
