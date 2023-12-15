@@ -747,6 +747,10 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 
 				// Add the value to the Clinical Title dropdown options list
 
+					/**
+					 * Use the clinical_title term ID as the key
+					 */
+
 					if ( $provider_occupation_title ) {
 
 						$provider_titles[$provider_specialty] = $provider_occupation_title;
