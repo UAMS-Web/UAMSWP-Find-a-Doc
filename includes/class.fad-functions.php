@@ -701,6 +701,10 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 
 				if ( $provider_resident ) {
 
+					// Clinical Specialty
+
+						$provider_specialty = 0;
+
 					// Clinical Occupation Title
 
 						$provider_occupation_title = $provider_resident_title_name;
@@ -1001,6 +1005,10 @@ function uamswp_provider_title_ajax_filter_shortcode( $atts ) {
 						$provider_occupation_title = '';
 
 				if ( $provider_resident ) {
+
+					// Clinical Specialty
+
+						$provider_specialty = 0;
 
 					// Clinical Occupation Title
 
