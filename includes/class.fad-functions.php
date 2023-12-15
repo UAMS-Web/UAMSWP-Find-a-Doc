@@ -682,14 +682,73 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 	$regions = array();
 	foreach($providers as $provider) {
 		if ( get_post_status ( $provider ) == 'publish' ) {
+
 			// Clinical Title
-			$provider_resident = get_field('physician_resident',$provider);
-			$provider_resident_title_name = 'Resident Physician';
-			$provider_phys_title = get_field('physician_title',$provider);
-			if(!empty($provider_phys_title) || $provider_resident){
-				$provider_phys_title_name = $provider_resident ? $provider_resident_title_name : get_term( $provider_phys_title, 'clinical_title' )->name;
-				$provider_titles[$provider_phys_title] = $provider_phys_title_name;
-			}
+
+				// Get resident values
+
+					$provider_resident = get_field( 'physician_resident', $provider );
+					$provider_resident_title_name = 'Resident Physician';
+
+				// Get clinical specialty and occupation title values
+
+					// Eliminate PHP errors
+
+						$provider_specialty = '';
+						$provider_specialty_term = '';
+						$provider_specialty_name = '';
+						$provider_occupation_title = '';
+
+				if ( $provider_resident ) {
+
+					// Clinical Occupation Title
+
+						$provider_occupation_title = $provider_resident_title_name;
+
+				} else {
+
+					// Clinical Specialty
+
+						$provider_specialty = get_field( 'physician_title', $provider );
+
+					// Clinical Occupation Title
+
+						if ( $provider_specialty ) {
+
+							$provider_specialty_term = get_term( $provider_specialty, 'clinical_title' );
+
+							if ( is_object($provider_specialty_term) ) {
+
+								// Get term name
+
+									$provider_specialty_name = $provider_specialty_term->name;
+
+								// Get occupational title field from term
+
+									$provider_occupation_title = get_field( 'clinical_specialization_title', $provider_specialty_term ) ?? null;
+
+								// Set occupational title from term name as a fallback
+
+									if ( !$provider_occupation_title ) {
+
+										$provider_occupation_title = $provider_specialty_name;
+
+									}
+
+							}
+
+						}
+
+				}
+
+				// Add the value to the Clinical Title dropdown options list
+
+					if ( $provider_occupation_title ) {
+
+						$provider_titles[$provider_specialty] = $provider_occupation_title;
+
+					}
+
 			// Region
 			$provider_region = get_field('physician_region', $provider);
 			foreach($provider_region as $region){
@@ -918,14 +977,73 @@ function uamswp_provider_title_ajax_filter_shortcode( $atts ) {
 	$provider_titles_list = array();
 	foreach($providers as $provider) {
 		if ( get_post_status ( $provider ) == 'publish' ) {
+
 			// Clinical Title
-			$provider_resident = get_field('physician_resident',$provider);
-			$provider_resident_title_name = 'Resident Physician';
-			$provider_phys_title = get_field('physician_title',$provider);
-			if(!empty($provider_phys_title) || $provider_resident){
-				$provider_phys_title_name = $provider_resident ? $provider_resident_title_name : get_term( $provider_phys_title, 'clinical_title' )->name;
-				$provider_titles[$provider_phys_title] = $provider_phys_title_name;
-			}
+
+				// Get resident values
+
+					$provider_resident = get_field( 'physician_resident', $provider );
+					$provider_resident_title_name = 'Resident Physician';
+
+				// Get clinical specialty and occupation title values
+
+					// Eliminate PHP errors
+
+						$provider_specialty = '';
+						$provider_specialty_term = '';
+						$provider_specialty_name = '';
+						$provider_occupation_title = '';
+
+				if ( $provider_resident ) {
+
+					// Clinical Occupation Title
+
+						$provider_occupation_title = $provider_resident_title_name;
+
+				} else {
+
+					// Clinical Specialty
+
+						$provider_specialty = get_field( 'physician_title', $provider );
+
+					// Clinical Occupation Title
+
+						if ( $provider_specialty ) {
+
+							$provider_specialty_term = get_term( $provider_specialty, 'clinical_title' );
+
+							if ( is_object($provider_specialty_term) ) {
+
+								// Get term name
+
+									$provider_specialty_name = $provider_specialty_term->name;
+
+								// Get occupational title field from term
+
+									$provider_occupation_title = get_field( 'clinical_specialization_title', $provider_specialty_term ) ?? null;
+
+								// Set occupational title from term name as a fallback
+
+									if ( !$provider_occupation_title ) {
+
+										$provider_occupation_title = $provider_specialty_name;
+
+									}
+
+							}
+
+						}
+
+				}
+
+				// Add the value to the Clinical Title dropdown options list
+
+					if ( $provider_occupation_title ) {
+
+						$provider_titles[$provider_specialty] = $provider_occupation_title;
+
+					}
+
 		}
 	}
 	$provider_titles_list = array_unique($provider_titles);
