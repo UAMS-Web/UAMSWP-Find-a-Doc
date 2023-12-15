@@ -750,11 +750,17 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 					}
 
 			// Region
-			$provider_region = get_field('physician_region', $provider);
-			foreach($provider_region as $region){
-				$provider_regions[] = $region;
-			}
-			//$provider_regions[] = $provider_region;
+
+				$provider_region = get_field( 'physician_region', $provider );
+
+				foreach ( $provider_region as $region ) {
+
+					$provider_regions[] = $region;
+
+				}
+
+				//$provider_regions[] = $provider_region;
+
 		}
 	}
 	$provider_titles_list = array_unique($provider_titles);
