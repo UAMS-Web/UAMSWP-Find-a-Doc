@@ -798,7 +798,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
                     <select name="provider_title" id="provider_title" class="form-control">
                         <option value="">Any Clinical Title</option>
 						<?php foreach($provider_titles_list as $key => $title) : ?>
-							<option value="<?= $key; ?>"<?php echo ($key == $provider_title) ? ' selected' : ''; ?>><?= $title; ?></option>
+							<option value="<?= $key; ?>"<?php echo ( !empty($provider_title) && $key == $provider_title ) ? ' selected' : ''; ?>><?= $title; ?></option>
 						<?php endforeach; ?>
                     </select>
                 </div>
@@ -1083,7 +1083,7 @@ function uamswp_provider_title_ajax_filter_shortcode( $atts ) {
                     <select name="provider_title" id="provider_title" class="form-control">
                         <option value="">Any Clinical Title</option>
 						<?php foreach($provider_titles_list as $key => $title) : ?>
-							<option value="<?= $key; ?>"<?php echo ($key == $provider_title) ? ' selected' : ''; ?>><?= $title; ?></option>
+							<option value="<?= $key; ?>"<?php echo ( !empty($provider_title) && $key == $provider_title ) ? ' selected' : ''; ?>><?= $title; ?></option>
 						<?php endforeach; ?>
                     </select>
                 </div>
