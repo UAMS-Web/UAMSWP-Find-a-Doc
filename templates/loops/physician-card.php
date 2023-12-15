@@ -51,7 +51,7 @@
 
 				// Clinical Occupation Title
 
-					$provider_occupation_title = $resident_title_name;
+					$provider_occupation_title = $physician_resident_title_name;
 
 			} else {
 
