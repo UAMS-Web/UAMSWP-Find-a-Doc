@@ -930,32 +930,36 @@ function limit_to_post_parent( $args, $field, $post ) {
 					if ( get_post_status ( $provider ) == 'publish' ) {
 
 						// Clinical Title
-						// Get resident values
-						$provider_resident = get_field('physician_resident',$provider);
-						$provider_resident_title_name = 'Resident Physician';
-						$provider_phys_title = get_field('physician_title',$provider);
 
-						if (
-							!empty($provider_phys_title)
-							||
-							$provider_resident
-						) {
+							// Get resident values
 
-							$provider_phys_title_name = $provider_resident ? $provider_resident_title_name : get_term( $provider_phys_title, 'clinical_title' )->name;
-							$provider_titles[$provider_phys_title] = $provider_phys_title_name;
+								$provider_resident = get_field('physician_resident',$provider);
+								$provider_resident_title_name = 'Resident Physician';
 
-						}
+							$provider_phys_title = get_field('physician_title',$provider);
+
+							if (
+								!empty($provider_phys_title)
+								||
+								$provider_resident
+							) {
+
+								$provider_phys_title_name = $provider_resident ? $provider_resident_title_name : get_term( $provider_phys_title, 'clinical_title' )->name;
+								$provider_titles[$provider_phys_title] = $provider_phys_title_name;
+
+							}
 
 						// Region
-						$provider_region = get_field('physician_region', $provider);
 
-						foreach ($provider_region as $region) {
+							$provider_region = get_field('physician_region', $provider);
 
-							$provider_regions[] = $region;
+							foreach ($provider_region as $region) {
 
-						}
+								$provider_regions[] = $region;
 
-						//$provider_regions[] = $provider_region;
+							}
+
+							//$provider_regions[] = $provider_region;
 
 					}
 
