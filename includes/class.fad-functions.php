@@ -1004,7 +1004,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 									foreach ($provider_titles_list as $key => $title) :
 
 										?>
-										<option value="<?= $key; ?>"<?php echo ($key == $provider_title) ? ' selected' : ''; ?>><?= $title; ?></option>
+										<option value="<?= $key; ?>"<?php echo ( !empty($provider_title) && $key == $provider_title ) ? ' selected' : ''; ?>><?= $title; ?></option>
 										<?php
 
 									endforeach;
@@ -1338,7 +1338,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 									foreach ($provider_titles_list as $key => $title) :
 
 										?>
-										<option value="<?= $key; ?>"<?php echo ($key == $provider_title) ? ' selected' : ''; ?>><?= $title; ?></option>
+										<option value="<?= $key; ?>"<?php echo ( !empty($provider_title) && $key == $provider_title ) ? ' selected' : ''; ?>><?= $title; ?></option>
 										<?php
 
 									endforeach;
