@@ -1292,9 +1292,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 					if ( get_post_status ( $provider ) == 'publish' ) {
 
 						// Clinical Occupation Title
-						$provider_resident = get_field('physician_resident',$provider);
+						$provider_resident = get_field( 'physician_resident', $provider );
 						$provider_resident_title_name = 'Resident Physician';
-						$provider_phys_title = get_field('physician_title',$provider);
+						$provider_phys_title = get_field( 'physician_title', $provider );
 
 						if (
 							!empty($provider_phys_title)
