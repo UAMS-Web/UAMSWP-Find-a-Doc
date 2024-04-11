@@ -12387,6 +12387,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// Is the Provider a Resident?
 
 							$provider_resident = get_field( 'physician_resident', $page_id ); // bool
+							$provider_resident_title_name = 'Resident Physician'; // string
 
 							$provider_profile_fields_vars['provider_resident'] = isset($provider_resident) ? $provider_resident : ''; // Add to the variables array
 
@@ -13051,12 +13052,14 @@ function limit_to_post_parent( $args, $field, $post ) {
 						// Clinical Job Title (taxonomy select)
 
 							// Is the Provider a Resident?
-							$provider_resident = get_field( 'physician_resident', $page_id ) ?: false; // bool
+
+								$provider_resident = get_field( 'physician_resident', $page_id ) ?: false; // bool
+								$provider_resident_title_name = 'Resident Physician'; // string
 
 							if ( $provider_resident ) {
 
 								$provider_title = '';
-								$provider_title_list = 'Resident Physician';
+								$provider_title_list = $provider_resident_title_name;
 
 							} else {
 
