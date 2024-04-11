@@ -12310,6 +12310,12 @@ function limit_to_post_parent( $args, $field, $post ) {
 						$provider_profile_fields_vars['provider_degree'] = isset($provider_degree) ? $provider_degree : ''; // Add to the variables array
 						$provider_profile_fields_vars['provider_degree_array'] = isset($provider_degree_array) ? $provider_degree_array : ''; // Add to the variables array
 
+					// Full Name
+
+						$provider_full_name = get_field( 'physician_full_name', $page_id ); // string
+
+						$provider_profile_fields_vars['provider_full_name'] = isset($provider_full_name) ? $provider_full_name : ''; // Add to the variables array
+
 					// Prefix
 
 						$provider_prefix = get_field( 'physician_prefix', $page_id ); // string
@@ -12327,12 +12333,6 @@ function limit_to_post_parent( $args, $field, $post ) {
 						$provider_searchable = get_field( 'physician_searchable', $page_id ); // bool
 
 						$provider_profile_fields_vars['provider_searchable'] = isset($provider_searchable) ? $provider_searchable : ''; // Add to the variables array
-
-					// Full Name
-
-						$provider_full_name = get_field( 'physician_full_name', $page_id ); // string
-
-						$provider_profile_fields_vars['provider_full_name'] = isset($provider_full_name) ? $provider_full_name : ''; // Add to the variables array
 
 					// Headshot
 
