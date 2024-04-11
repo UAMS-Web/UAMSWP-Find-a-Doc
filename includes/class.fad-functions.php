@@ -12346,12 +12346,6 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						$provider_profile_fields_vars['provider_image_wide'] = isset($provider_image_wide) ? $provider_image_wide : ''; // Add to the variables array
 
-					// Is the Provider a Resident?
-
-						$provider_resident = get_field( 'physician_resident', $page_id ); // bool
-
-						$provider_profile_fields_vars['provider_resident'] = isset($provider_resident) ? $provider_resident : ''; // Add to the variables array
-
 					// Does the Provider See Patients Via Appointments?
 
 						$provider_eligible_appointments = get_field( 'physician_eligible_appointments', $page_id ); // bool
@@ -12389,6 +12383,12 @@ function limit_to_post_parent( $args, $field, $post ) {
 						$provider_profile_fields_vars['provider_appointment_link'] = isset($provider_appointment_link) ? $provider_appointment_link : ''; // Add to the variables array
 
 					// Clinical Job Title (taxonomy select)
+
+						// Is the Provider a Resident?
+
+							$provider_resident = get_field( 'physician_resident', $page_id ); // bool
+
+							$provider_profile_fields_vars['provider_resident'] = isset($provider_resident) ? $provider_resident : ''; // Add to the variables array
 
 						$provider_title = get_field( 'physician_title', $page_id ); // string|int[] // Term ID(s)
 						$provider_title = is_array($provider_title) ? $provider_title : array($provider_title); // int[] // Term ID(s)
