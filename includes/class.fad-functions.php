@@ -925,7 +925,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 				$provider_titles_list = array();
 				$regions = array();
 
-				foreach ($providers as $provider) {
+				foreach ( $providers as $provider ) {
 
 					if ( get_post_status ( $provider ) == 'publish' ) {
 
@@ -933,10 +933,10 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							// Get resident values
 
-								$provider_resident = get_field('physician_resident',$provider);
+								$provider_resident = get_field( 'physician_resident', $provider );
 								$provider_resident_title_name = 'Resident Physician';
 
-							$provider_phys_title = get_field('physician_title',$provider);
+							$provider_phys_title = get_field( 'physician_title', $provider );
 
 							if (
 								!empty($provider_phys_title)
@@ -951,9 +951,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Region
 
-							$provider_region = get_field('physician_region', $provider);
+							$provider_region = get_field( 'physician_region', $provider );
 
-							foreach ($provider_region as $region) {
+							foreach ( $provider_region as $region ) {
 
 								$provider_regions[] = $region;
 
@@ -1292,7 +1292,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 				$provider_titles = array();
 				$provider_titles_list = array();
 
-				foreach ($providers as $provider) {
+				foreach ( $providers as $provider ) {
 
 					if ( get_post_status ( $provider ) == 'publish' ) {
 
