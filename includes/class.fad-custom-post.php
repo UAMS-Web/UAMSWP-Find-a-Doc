@@ -3302,61 +3302,16 @@
 
 			$full_name = get_field( 'physician_first_name', $postId ) . ' ' . ( get_field( 'physician_middle_name', $postId ) ? get_field( 'physician_middle_name', $postId ) . ' ' : '' ) . get_field( 'physician_last_name', $postId ) . ( get_field( 'physician_pedigree', $postId ) ? '&nbsp;' . get_field( 'physician_pedigree', $postId ) : '') . ( $degree_list ? ', ' . $degree_list : '' );
 
-			// Get resident values
-
-				$provider_resident = get_field( 'physician_resident', $postId );
-				$provider_resident_title_name = 'Resident Physician';
-
 			// Get clinical specialty and occupation title values
 
-				// Eliminate PHP errors
+				$provider_occupation_title_fn = uamswp_fad_provider_clinical_occupation_title(
+					$postId // int // ID of the provider profile
+				);
+				$provider_occupation_title = $provider_occupation_title_fn['title_string']; // string // Clinical Occupation Titles string
 
-					$provider_specialty = '';
-					$provider_specialty_term = '';
-					$provider_specialty_name = '';
-					$provider_occupation_title = '';
+				// Query for whether the provider is a resident
 
-				if ( $provider_resident ) {
-
-					// Clinical Occupation Title
-
-						$provider_occupation_title = $provider_resident_title_name;
-
-				} else {
-
-					// Clinical Specialty
-
-						$provider_specialty = get_field( 'physician_title', $postId );
-
-					// Clinical Occupation Title
-
-						if ( $provider_specialty ) {
-
-							$provider_specialty_term = get_term( $provider_specialty, 'clinical_title' );
-
-							if ( is_object($provider_specialty_term) ) {
-
-								// Get term name
-
-									$provider_specialty_name = $provider_specialty_term->name;
-
-								// Get occupational title field from term
-
-									$provider_occupation_title = get_field( 'clinical_specialization_title', $provider_specialty_term ) ?? null;
-
-								// Set occupational title from term name as a fallback
-
-									if ( !$provider_occupation_title ) {
-
-										$provider_occupation_title = $provider_specialty_name;
-
-									}
-
-							}
-
-						}
-
-				}
+					$provider_resident = $provider_occupation_title_fn['resident_query']; // bool // Query for whether the provider is a resident
 
 			$provider_service_line = get_field( 'physician_service_line', $postId );
 			$resident_profile_group = get_field( 'physician_resident_profile_group', $postId );
@@ -3369,7 +3324,7 @@
 			$resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
 			$data['physician_full_name'] = $full_name;
 			//Physician Data
-			$data['physician_title'] = $provider_occupation_title; //(get_field( 'physician_title', $postId ) ? get_term( get_field( 'physician_title', $postId ), 'clinical_title' )->name : '');
+			$data['physician_title'] = $provider_occupation_title;
 			$data['physician_service_line'] = $provider_service_line ? get_term( $provider_service_line, 'service_line' )->name : '';
 			$data['physician_clinical_bio'] = get_field( 'physician_clinical_bio', $postId );
 			$data['physician_short_clinical_bio'] = get_field( 'physician_short_clinical_bio', $postId ) ? get_field( 'physician_short_clinical_bio', $postId ) : wp_trim_words( get_field( 'physician_clinical_bio', $postId ), 30, ' &hellip;' );

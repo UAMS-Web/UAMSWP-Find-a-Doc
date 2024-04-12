@@ -411,63 +411,23 @@
 
 				// Eliminate PHP errors
 
-					$provider_specialty = '';
-					$provider_specialty_term = '';
-					$provider_specialty_name = '';
-					$provider_occupation_title = '';
 					$provider_schema_fields[$page_id]['provider_clinical_specialization'] = ''; // Pass value to schema function
 					$provider_schema_fields[$page_id]['provider_clinical_specialization_term'] = ''; // Pass value to schema function
 					$provider_schema_fields[$page_id]['provider_jobTitle'] = ''; // Pass value to schema function
 
-				if ( $resident ) {
+				$provider_title_fn = uamswp_fad_provider_clinical_occupation_title(
+					$post->ID // int // ID of the provider profile
+				);
 
-					// Clinical Occupation Title
+				// Is the Provider a Resident?
 
-						$provider_occupation_title = $resident_title_name;
-						$provider_occupation_title_attr = uamswp_attr_conversion($provider_occupation_title);
+					$resident = $provider_title_fn['resident_query']; // bool
 
-				} else {
+				// Clinical Occupation Title
 
-					// Clinical Specialty
-
-						$provider_specialty = get_field( 'physician_title', $post->ID );
-						$provider_schema_fields[$page_id]['provider_clinical_specialization'] = $provider_specialty; // Pass value to schema function
-
-					// Clinical Occupation Title
-
-						if ( $provider_specialty ) {
-
-							$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
-
-							if ( is_object($provider_specialty_term) ) {
-
-								// Get term name
-
-									$provider_specialty_name = $provider_specialty_term->name;
-
-								// Get occupational title field from term
-
-									$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
-
-								// Set occupational title from term name as a fallback
-
-									if ( !$provider_occupation_title ) {
-
-										$provider_occupation_title = $provider_specialty_name;
-
-									}
-
-							}
-
-						}
-
-				}
-
-				$provider_specialty_name_attr = uamswp_attr_conversion($provider_specialty_name);
-				$provider_occupation_title_attr = uamswp_attr_conversion($provider_occupation_title);
-				$provider_schema_fields[$page_id]['provider_clinical_specialization'] = $provider_specialty; // Pass value to schema function
-				$provider_schema_fields[$page_id]['provider_clinical_specialization_term'] = $provider_specialty_term; // Pass value to schema function
-				$provider_schema_fields[$page_id]['provider_jobTitle'] = $provider_occupation_title_attr; // Pass value to schema function
+					$provider_occupation_title = $provider_title_fn['title_string']; // string // Clinical Occupation Titles string
+					$provider_occupation_title_attr = uamswp_attr_conversion($provider_occupation_title);
+					$provider_schema_fields[$page_id]['provider_jobTitle'] = $provider_occupation_title_attr; // Pass value to schema function
 
 				// Defines the indefinite article to precede the clinical occupation title (a or an, based on whether clinical occupation title starts with vowel)
 

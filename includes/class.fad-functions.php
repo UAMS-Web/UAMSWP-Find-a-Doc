@@ -676,61 +676,11 @@ function limit_to_post_parent( $args, $field, $post ) {
 					$recognition_list .= '<tr>';
 					$recognition_list .= '<td><a href="'.get_permalink().'" title="'. $full_name .'">'. $full_name .'</a></td>';
 
-					// Get resident values
-
-						$resident = get_field('physician_resident',$post->ID);
-						$resident_title_name = 'Resident Physician';
-
 					// Get clinical specialty and occupation title values
 
-						// Eliminate PHP errors
-
-							$provider_specialty = '';
-							$provider_specialty_term = '';
-							$provider_specialty_name = '';
-							$provider_occupation_title = '';
-
-						if ( $resident ) {
-
-							// Clinical Occupation Title
-
-								$provider_occupation_title = $resident_title_name;
-
-						} else {
-
-							// Clinical Specialty
-
-								$provider_specialty = get_field('physician_title',$post->ID);
-
-							// Clinical Occupation Title
-
-								if ( $provider_specialty ) {
-
-									$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
-
-									if ( is_object($provider_specialty_term) ) {
-
-										// Get term name
-
-											$provider_specialty_name = $provider_specialty_term->name;
-
-										// Get occupational title field from term
-
-											$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
-
-										// Set occupational title from term name as a fallback
-
-											if ( !$provider_occupation_title ) {
-
-												$provider_occupation_title = $provider_specialty_name;
-
-											}
-
-									}
-
-								}
-
-						}
+						$provider_occupation_title = uamswp_fad_provider_clinical_occupation_title(
+							get_the_id() // int // ID of the provider profile
+						)['title_string'];
 
 					if (
 						$provider_occupation_title
@@ -931,65 +881,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Clinical Title
 
-							// Get resident values
-
-								$provider_resident = get_field( 'physician_resident', $provider );
-								$provider_resident_title_name = 'Resident Physician';
-
-							// Get clinical specialty and occupation title values
-
-								// Eliminate PHP errors
-
-									$provider_specialty = '';
-									$provider_specialty_term = '';
-									$provider_specialty_name = '';
-									$provider_occupation_title = '';
-
-								if ( $provider_resident ) {
-
-									// Clinical Specialty
-
-										$provider_specialty = 0;
-
-									// Clinical Occupation Title
-
-										$provider_occupation_title = $provider_resident_title_name;
-
-								} else {
-
-									// Clinical Specialty
-
-										$provider_specialty = get_field( 'physician_title', $provider );
-
-									// Clinical Occupation Title
-
-										if ( $provider_specialty ) {
-
-											$provider_specialty_term = get_term( $provider_specialty, 'clinical_title' );
-
-											if ( is_object($provider_specialty_term) ) {
-
-												// Get term name
-
-													$provider_specialty_name = $provider_specialty_term->name;
-
-												// Get occupational title field from term
-
-													$provider_occupation_title = get_field( 'clinical_specialization_title', $provider_specialty_term ) ?? null;
-
-												// Set occupational title from term name as a fallback
-
-													if ( !$provider_occupation_title ) {
-
-														$provider_occupation_title = $provider_specialty_name;
-
-													}
-
-											}
-
-										}
-
-								}
+							$provider_occupation_title = uamswp_fad_provider_clinical_occupation_title(
+								$provider // int // ID of the provider profile
+							)['title_array'];
 
 							// Add the value to the Clinical Title dropdown options list
 
@@ -999,7 +893,15 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 								if ( $provider_occupation_title ) {
 
-									$provider_titles[$provider_specialty] = $provider_occupation_title;
+									foreach ( $provider_occupation_title as $key => $value ) {
+
+										if ( $value ) {
+
+											$provider_titles[$key] = $value;
+
+										}
+
+									}
 
 								}
 
@@ -1352,65 +1254,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Clinical Title
 
-							// Get resident values
-
-								$provider_resident = get_field( 'physician_resident', $provider );
-								$provider_resident_title_name = 'Resident Physician';
-
-							// Get clinical specialty and occupation title values
-
-								// Eliminate PHP errors
-
-									$provider_specialty = '';
-									$provider_specialty_term = '';
-									$provider_specialty_name = '';
-									$provider_occupation_title = '';
-
-								if ( $provider_resident ) {
-
-									// Clinical Specialty
-
-										$provider_specialty = 0;
-
-									// Clinical Occupation Title
-
-										$provider_occupation_title = $provider_resident_title_name;
-
-								} else {
-
-									// Clinical Specialty
-
-										$provider_specialty = get_field( 'physician_title', $provider );
-
-									// Clinical Occupation Title
-
-										if ( $provider_specialty ) {
-
-											$provider_specialty_term = get_term( $provider_specialty, 'clinical_title' );
-
-											if ( is_object($provider_specialty_term) ) {
-
-												// Get term name
-
-													$provider_specialty_name = $provider_specialty_term->name;
-
-												// Get occupational title field from term
-
-													$provider_occupation_title = get_field( 'clinical_specialization_title', $provider_specialty_term ) ?? null;
-
-												// Set occupational title from term name as a fallback
-
-													if ( !$provider_occupation_title ) {
-
-														$provider_occupation_title = $provider_specialty_name;
-
-													}
-
-											}
-
-										}
-
-								}
+							$provider_occupation_title = uamswp_fad_provider_clinical_occupation_title(
+								$provider // int // ID of the provider profile
+							)['title_array'];
 
 							// Add the value to the Clinical Title dropdown options list
 
@@ -1420,7 +1266,15 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 								if ( $provider_occupation_title ) {
 
-									$provider_titles[$provider_specialty] = $provider_occupation_title;
+									foreach ( $provider_occupation_title as $key => $value ) {
+
+										if ( $value ) {
+
+											$provider_titles[$key] = $value;
+
+										}
+
+									}
 
 								}
 
@@ -12492,21 +12346,29 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 					// Clinical Job Title (taxonomy select)
 
+						$provider_title_fn = uamswp_fad_provider_clinical_occupation_title(
+							$page_id // int // ID of the provider profile
+						);
+
 						// Is the Provider a Resident?
 
-							$provider_resident = get_field( 'physician_resident', $page_id ); // bool
-							$provider_resident_title_name = 'Resident Physician'; // string
+							$provider_resident = $provider_title_fn['resident_query']; // bool
 
-							$provider_profile_fields_vars['provider_resident'] = isset($provider_resident) ? $provider_resident : ''; // Add to the variables array
+							// Add to the variables array
 
-						$provider_title = get_field( 'physician_title', $page_id ); // string|int[] // Term ID(s)
-						$provider_title = is_array($provider_title) ? $provider_title : array($provider_title); // int[] // Term ID(s)
+								$provider_profile_fields_vars['provider_resident'] = isset($provider_resident) ? $provider_resident : '';
 
-						foreach ( $provider_title as $item ) {
+						$provider_title = $provider_title_fn['title_array']; // int[] // Term ID(s)
 
-							$provider_title_array[$item] = array(
-								'name' => get_term( $item, 'clinical_title')->name // string // Term name
-							);
+						foreach ( $provider_title as $key => $value ) {
+
+							if ( $value ) {
+
+								$provider_title_array[$key] = array(
+									'name' => $value // string // Clinical Occupation Title
+								);
+
+							}
 
 						}
 
@@ -13159,57 +13021,12 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Clinical Job Title (taxonomy select)
 
-							// Is the Provider a Resident?
+							$provider_title = uamswp_fad_provider_clinical_occupation_title(
+								$page_id // int // ID of the provider profile
+							);
 
-								$provider_resident = get_field( 'physician_resident', $page_id ) ?: false; // bool
-								$provider_resident_title_name = 'Resident Physician'; // string
-
-							if ( $provider_resident ) {
-
-								$provider_title = '';
-								$provider_title_list = $provider_resident_title_name;
-
-							} else {
-
-								$provider_title = get_field( 'physician_title', $page_id ); // string|int[] // Term ID(s)
-								$provider_title = is_array($provider_title) ? $provider_title : array($provider_title); // int[] // Term ID(s)
-
-								// List Clinical Job Title term names
-
-								if ( $provider_title ) {
-
-									foreach ( $provider_title as $key => $value ) {
-
-										$provider_title_term = get_term( $value, 'clinical_title' );
-
-										if ( is_object( $provider_title_term ) ) {
-
-											$provider_title[$key] = $provider_title_term->name;
-
-										} else {
-
-											unset($provider_title[$key]);
-											$provider_title = array_values($provider_title);
-
-										}
-
-									} // endforeach
-
-									$provider_title_list = $provider_title ? implode(", ", $provider_title) : ''; // string
-
-								} else {
-
-									// Eliminate PHP errors
-									$provider_title_list = '';
-
-								} // endif
-
-							} // endif ( $provider_resident )
-
-							// Add to the variables array
-
-								$provider_card_fields_vars['provider_title'] = isset($provider_title) ? $provider_title : '';
-								$provider_card_fields_vars['provider_title_list'] = isset($provider_title_list) ? $provider_title_list : '';
+							$provider_card_fields_vars['provider_title'] = $provider_title['title_array'] ?: ''; // array // Clinical Occupation Titles array
+							$provider_card_fields_vars['provider_title_list'] = $provider_title['title_string'] ?: ''; // string // Clinical Occupation Titles string
 
 						// Profile URL
 
