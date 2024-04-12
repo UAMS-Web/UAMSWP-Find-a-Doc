@@ -1,8 +1,8 @@
-<?php 
+<?php
     /**
      *  Template Name: Provider Loop - Card layout
      *  Designed for UAMS Find-a-Doc
-     * 
+     *
      *  Must be used inside a loop
      *  Required var: $id
      */
@@ -21,23 +21,74 @@
 				}
 			}
 			$i++;
-		endforeach; 
-	} 
+		endforeach;
+	}
 	?>
 	<?php
-		$full_name = get_field('physician_first_name', $id) .' ' .(get_field('physician_middle_name', $id) ? get_field('physician_middle_name', $id) . ' ' : '') . get_field('physician_last_name', $id) . (get_field('physician_pedigree', $id) ? '&nbsp;' . get_field('physician_pedigree', $id) : '') .  ( $degree_list ? ', ' . $degree_list : '' ); 
+		$full_name = get_field('physician_first_name', $id) .' ' .(get_field('physician_middle_name', $id) ? get_field('physician_middle_name', $id) . ' ' : '') . get_field('physician_last_name', $id) . (get_field('physician_pedigree', $id) ? '&nbsp;' . get_field('physician_pedigree', $id) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
 		$full_name_attr = $full_name;
 		$full_name_attr = str_replace('"', '\'', $full_name_attr); // Replace double quotes with single quote
 		$full_name_attr = str_replace('&#8217;', '\'', $full_name_attr); // Replace right single quote with single quote
 		$full_name_attr = htmlentities($full_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
 		$full_name_attr = str_replace('&nbsp;', ' ', $full_name_attr); // Convert non-breaking space with normal space
 		$full_name_attr = html_entity_decode($full_name_attr); // Convert HTML entities to their corresponding characters
-		$physician_resident = get_field('physician_resident', $id);
-		$physician_resident_name = 'Resident Physician';
-		$physician_title = get_field('physician_title', $id);
-		$physician_title_name = $physician_resident ? $physician_resident_name : get_term( $physician_title, 'clinical_title' )->name;
-		$physician_service_line = get_field('physician_service_line', $id);
-	
+
+		// Get resident values
+
+			$physician_resident = get_field('physician_resident',$id);
+			$physician_resident_title_name = 'Resident Physician';
+
+		// Get clinical specialty and occupation title values
+
+			// Eliminate PHP errors
+
+				$provider_specialty = '';
+				$provider_specialty_term = '';
+				$provider_specialty_name = '';
+				$provider_occupation_title = '';
+
+			if ( $physician_resident ) {
+
+				// Clinical Occupation Title
+
+					$provider_occupation_title = $physician_resident_title_name;
+
+			} else {
+
+				// Clinical Specialty
+
+					$provider_specialty = get_field('physician_title',$id);
+
+				// Clinical Occupation Title
+
+					if ( $provider_specialty ) {
+
+						$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+
+						if ( is_object($provider_specialty_term) ) {
+
+							// Get term name
+
+								$provider_specialty_name = $provider_specialty_term->name;
+
+							// Get occupational title field from term
+
+								$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+
+							// Set occupational title from term name as a fallback
+
+								if ( !$provider_occupation_title ) {
+
+									$provider_occupation_title = $provider_specialty_name;
+
+								}
+
+						}
+
+					}
+
+			}
+
 	?>
 	<div class="card">
 		<picture>
@@ -55,12 +106,19 @@
 		<div class="card-body">
 				<h3 class="card-title h6">
 					<span class="name"><?php echo $full_name; ?></span>
-					<?php 
-					if(! empty( $physician_title_name ) || ! empty( $physician_service_line ) ){
-						echo '<span class="subtitle">';
-						echo ($physician_title_name ? $physician_title_name : '');
-						echo '</span>';
+					<?php
+
+					if (
+						$provider_occupation_title
+						&&
+						!empty($provider_occupation_title)
+					) {
+						?>
+						<span class="subtitle"><?php echo $provider_occupation_title; ?></span>
+						<?php
+
 					}
+
 					?>
 				</h3>
 		</div>

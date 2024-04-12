@@ -50,7 +50,7 @@
 		},
 		{
 			"key": "field_language_name_native",
-			"label": "Native Name of Language (Endonym / Autonym)",
+			"label": "Romanized Native Name of Language (Endonym / Autonym)",
 			"name": "language_name_native",
 			"type": "text",
 			"instructions": "Example: \"Persian\" is the English name (exonym / xenonym), while \"Farsi\" is the native name (endonym / autonym)",

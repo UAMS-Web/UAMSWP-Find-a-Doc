@@ -219,7 +219,7 @@ $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 
 		// Clinical Occupation Title
 
-			$provider_occupation_title = $resident;
+			$provider_occupation_title = $resident_title_name;
 
 	} else {
 

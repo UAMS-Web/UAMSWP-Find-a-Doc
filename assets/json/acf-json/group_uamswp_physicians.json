@@ -165,36 +165,6 @@
 			"allow_null": 0
 		},
 		{
-			"key": "field_physician_prefix",
-			"label": "Prefix",
-			"name": "physician_prefix",
-			"type": "select",
-			"instructions": "Only select \"Dr.\" if the provider has any of the following degrees: M.D., D.D.S., D.O., DPM or O.D.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"choices": {
-				"Dr.": "Dr.",
-				"Mr.": "Mr.",
-				"Mrs.": "Mrs.",
-				"Ms.": "Ms."
-			},
-			"default_value": [],
-			"allow_null": 1,
-			"multiple": 0,
-			"ui": 1,
-			"ajax": 0,
-			"return_format": "value",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
-		{
 			"key": "field_physician_gender",
 			"label": "Gender",
 			"name": "physician_gender",
@@ -2729,6 +2699,36 @@
 			"message": "This information is designed for department and public websites.",
 			"new_lines": "wpautop",
 			"esc_html": 0
+		},
+		{
+			"key": "field_physician_prefix",
+			"label": "Prefix",
+			"name": "physician_prefix",
+			"type": "select",
+			"instructions": "Only select \"Dr.\" if the provider has any of the following degrees: M.D., D.D.S., D.O., DPM or O.D.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"Dr.": "Dr.",
+				"Mr.": "Mr.",
+				"Mrs.": "Mrs.",
+				"Ms.": "Ms."
+			},
+			"default_value": [],
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
 		},
 		{
 			"key": "field_physician_academic_short_bio",
