@@ -12237,6 +12237,114 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 // Profile and card field values
 
+	// Provider Clinical Occupation Title
+
+		function uamswp_fad_provider_clinical_occupation_title(
+			int $provider // int // ID of the provider profile
+		) {
+
+			// Eliminate PHP errors
+
+				$provider_specialty_id = array(); // int[] // Term ID(s)
+				$output = array(
+					'term_array' => array(), // array // Clinical Specialty terms array
+					'title_array' => array(), // array // Clinical Occupation Titles array
+					'title_string' => '', // string // Clinical Occupation Titles string
+					'resident_query' => false // bool // Query for whether the provider is a resident
+				);
+
+			// Query for whether the provider is a resident
+
+				$output['resident_query'] = get_field( 'physician_resident', $provider ) ?: false;
+
+			// Get Clinical Specialty and Clinical Occupation Title values
+
+				if ( $output['resident_query'] ) {
+
+					// Manually define a Clinical Occupation Title and add it to the Clinical Occupation Titles array
+
+						$output['title_array'][0] = 'Resident Physician';
+
+				} else {
+
+					// Get the Clinical Specialty values
+
+						// Get field value
+
+							$provider_specialty_id = get_field( 'physician_title', $provider ) ?: array(); // int|int[] // Term ID(s)
+
+						// Convert field value into an array
+
+							$provider_specialty_id = is_array($provider_specialty_id) ? $provider_specialty_id : array($provider_specialty_id); // int[] // Term ID(s)
+
+					// Get the Clinical Occupation Title values
+
+						// Loop through the array of Clinical Specialty values
+
+							if ( $provider_specialty_id ) {
+
+								foreach ( $provider_specialty_id as $term_id ) {
+
+									// Eliminate PHP errors
+
+										$provider_specialty_term = null;
+										$provider_occupation_title = null;
+
+									// Get the term
+
+										$provider_specialty_term = get_term( $term_id, 'clinical_title' );
+
+									// Get the Clinical Occupation Title
+
+										if ( is_object($provider_specialty_term) ) {
+
+											// Add the individual term to the term array
+
+												$output['term_array'][] = $provider_specialty_term;
+
+											// Get the Clinical Occupation Title field from the term
+
+												$provider_occupation_title = get_field( 'clinical_specialization_title', $provider_specialty_term ) ?? null;
+
+											// Fallback: Set the Clinical Occupation Title from the term name
+
+												if ( !$provider_occupation_title ) {
+
+													$provider_occupation_title = $provider_specialty_term->name;
+
+												}
+
+										}
+
+									// Add the individual Clinical Occupation Title to the Clinical Occupation Titles array
+
+										if ( $provider_occupation_title ) {
+
+											$output['title_array'][$term_id] = $provider_occupation_title;
+
+										}
+
+								}
+
+							}
+
+				}
+
+			// Construct the Clinical Occupation Titles string
+
+				if ( $output['title_array'] ) {
+
+					$output['title_string'] = implode(
+						', ', // separator
+						$output['title_array'] // array
+					);
+
+				}
+
+			return $output;
+
+		}
+
 	// Provider profile field values
 
 		function uamswp_fad_provider_profile_fields(
