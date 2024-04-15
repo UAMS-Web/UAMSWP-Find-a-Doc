@@ -1,19 +1,19 @@
 <?php
 /*
  * Template Name: Location List Section
- * 
- * Description: A template part that displays a list of locations associated with 
+ *
+ * Description: A template part that displays a list of locations associated with
  * the current page.
- * 
+ *
  * Designed for UAMS Health Find-a-Doc
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the current page
  * 	$locations // int[] // Value of the related locations input (or $location_descendants, List of this location item's descendant items)
  * 	$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 	$location_section_show // bool // Query for whether to show the location section (or $location_descendant_section_show, Query for whether to show the descendant location section)
  * 	$ontology_type // bool // Query for whether item is ontology type vs. content type
- * 
+ *
  * Optional vars:
  * 	$location_section_schema_query // bool // Query for whether to add locations to schema
  * 	$location_descendant_list // bool // Query for whether this is a list of child locations within a location
@@ -34,7 +34,7 @@
  * 	$location_query // WP_Post[]
  * 	$location_ids // int[]
  * 	$location_count // int
- * 
+ *
  * Return:
  * 	html <section />
  */
@@ -359,7 +359,7 @@ if ( $location_section_show ) {
 
 		?>
 	</section>
-	<?php 
+	<?php
 
 } // endif ( $location_section_show )
 
