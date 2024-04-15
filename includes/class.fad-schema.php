@@ -12555,6 +12555,7 @@
 								$provider_clinical_resource_MedicalWebPage = null;
 								$provider_clinical_resource_MedicalWebPage_significantLink = null;
 								$provider_clinical_specialization = null;
+								$provider_clinical_specialization_ancestors = null;
 								$provider_clinical_specialization_keywords = null;
 								$provider_clinical_specialization_knowsAbout = null;
 								$provider_clinical_specialization_name = null;
