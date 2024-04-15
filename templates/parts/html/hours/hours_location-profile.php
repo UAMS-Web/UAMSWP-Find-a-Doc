@@ -224,7 +224,7 @@
 
 					}
 
-			}
+			} // endif ( !$location_hours_variable_query )
 
 	// Get After Hours Information Values
 
@@ -242,7 +242,7 @@
 
 					$location_after_hours = get_field('location_afterhours_descr_system', 'option') ?? null;
 
-				}
+				} // endif ( !$location_after_hours )
 
 			// Set fallback value with static string
 
@@ -250,9 +250,9 @@
 
 					$location_after_hours = '<p>If you are in need of urgent or emergency care, call 911 or go to your nearest emergency department at your local hospital.</p>';
 
-				}
+				} // endif ( !$location_after_hours )
 
-		}
+		} // endif ( !$location_hours_24_7_query )
 
 // Display Variable Hours of Operation Information
 
@@ -268,7 +268,7 @@
 
 		echo $location_hours_variable_info;
 
-	}
+	} // endif ( $location_hours_variable_query )
 
 // Display Static Hours of Operation Information
 
@@ -516,7 +516,7 @@
 
 												$item_date_output['24_query'] = ( $item_date_row['24_query'] ? 1 : 0 ) ?? 0;
 
-											}
+											} // endif ( !isset($item_date_output['24_query']) || $item_date_output['24_query'] == false )
 
 										// Get the valid date(s)
 
@@ -548,7 +548,7 @@
 
 												$item_date_list[] = $item_date_output['date']['unix'];
 
-											}
+											} // endif ( $item_date_output['date']['unix'] )
 
 										// Set the time spans
 
@@ -638,7 +638,7 @@
 
 															$item_time_span_output = null;
 
-														}
+														} // endif
 
 													// Add the values to the output array
 
@@ -646,9 +646,9 @@
 
 															$item_date_output['time_spans'][] = $item_time_span_output;
 
-														}
+														} // endif ( $item_time_span_output )
 
-												}
+												} // endif ( $item_date_output['closed_query'] )
 
 											// Open Status
 
@@ -754,7 +754,7 @@
 
 																	$item_time_span_output = null;
 
-																}
+																} // endif
 
 															// Add the values to the output array
 
@@ -762,9 +762,9 @@
 
 																	$item_date_output['time_spans'][] = $item_time_span_output;
 
-																}
+																} // endif ( $item_time_span_output )
 
-														}
+														} // endif ( $item_date_output['24_query'] )
 
 													// Not open 24 hours
 
@@ -833,7 +833,7 @@
 
 																								$item_time_span_output['times']['closes']['unix'] = strtotime( $item_date_output['date_after']['acf'] . ', ' . $item_time_span_output['times']['closes']['acf'] ) ?? null;
 
-																							}
+																							} // endif ( strtotime($item_time_span_output['times']['opens']['acf']) >= strtotime($item_time_span_output['times']['closes']['acf']) ) else
 
 																						// '24_hour' // Convert the Unix timestamp value to the 24-hour format ('H:i')
 
@@ -882,7 +882,7 @@
 
 																					$item_time_span_output = null;
 
-																				}
+																				} // endif
 
 																			// Add the values to the output array
 
@@ -890,7 +890,7 @@
 
 																					$item_date_output['time_spans'][] = $item_time_span_output;
 
-																				}
+																				} // endif ( $item_time_span_output )
 
 																		} // endif ( !$item_date_output['closed_query'] )
 
@@ -898,7 +898,7 @@
 
 																} // endif ( $item_date_row['time_span'] )
 
-														}
+														} // endif ( !$item_date_output['24_query'] )
 
 												} // endif ( !$item_date_output['closed_query'] )
 
@@ -916,7 +916,7 @@
 
 												$item_date_output = null;
 
-											}
+											} // endif ( !isset($item_date_output['date']['unix']) || !isset($item_date_output['time_spans']) )
 
 										// Add the individual date output array to the individual special hours of operation set output array
 
@@ -924,7 +924,7 @@
 
 												$item_output['dates'][$item_date_output['date']['long_ap_style']] = $item_date_output;
 
-											}
+											} // endif ( $item_date_output )
 
 									} // endforeach ( $item['dates'] as $item_date_row )
 
@@ -976,7 +976,7 @@
 
 										$item_date_list = null;
 
-								}
+								} // endif
 
 							// Check if this set of special hours of operation should be active
 
@@ -1007,7 +1007,7 @@
 
 										$location_hours_modified_active = true;
 
-								}
+								} // endif
 
 							// Check if typical hours of operation should be inactive
 
@@ -1030,13 +1030,13 @@
 
 										$location_hours_typical_active = false;
 
-								}
+								} // endif
 
-						}
+						} // endif ( $item )
 
-					}
+					} // endforeach ( $location_hours_modified_v2 as $item )
 
-				}
+				} // endif ( $location_hours_modified_v2 )
 
 	// Typical Hours
 
@@ -1127,7 +1127,7 @@
 
 														$location_hours_typical_list[$item_day_row]['date_after']['iso_8601'] = date( 'Y-m-d', $location_hours_typical_list[$item_day_row]['date_after']['unix'] ) ?? null;
 
-										}
+										} // endif
 
 									// Will this location be closed on this date? // bool
 
@@ -1143,7 +1143,7 @@
 
 											$location_hours_typical_list[$item_day_row]['closed_query'] = 0;
 
-										}
+										} // endif
 
 									// Will this location be open 24 hours on this date? // bool
 
@@ -1159,7 +1159,7 @@
 
 												$location_hours_typical_list[$item_day_row]['24_query'] = 1;
 
-										}
+										} // endif
 
 								// Set the time values
 
@@ -1260,7 +1260,7 @@
 
 							} // endforeach
 
-					}
+					} // endif ( $location_hours_24_7_query )
 
 				// The location is not typically available 24/7
 
@@ -1296,7 +1296,7 @@
 
 												$item_day = array( $item['day'] );
 
-											}
+											} // endif ( 'Mon - Fri' == $item['day'] ) else
 
 										// Loop through the day value array
 
@@ -1354,7 +1354,7 @@
 
 																	$location_hours_typical_list[$item_day_row]['date_after']['iso_8601'] = date( 'Y-m-d', $location_hours_typical_list[$item_day_row]['date_after']['unix'] ) ?? null;
 
-													}
+													} // endif
 
 												// Closed Status
 
@@ -1407,7 +1407,7 @@
 															// $item_day_row_time_span_text = $location_hours_text_closed;
 															$item_output['time_span'] = $location_hours_text_closed;
 
-													}
+													} // endif ( $item['closed'] )
 
 												// Open Status
 
@@ -1474,7 +1474,7 @@
 
 																		$item_output['times']['closes']['unix'] = strtotime( $location_hours_typical_list[$item_day_row]['date_after']['acf'] . ', ' . $item['close'] ) ?? null;
 
-																	}
+																	} // endif ( strtotime($item['open']) >= strtotime($item['close']) ) else
 
 																	// $item_day_row_time_closes_DateTime_unix = strtotime( $item_day_row_time_closes_DateTime_string ); // Unix timestamp
 
@@ -1503,7 +1503,7 @@
 																strtotime($item['close'])
 															) ?? null;
 
-													}
+													} // endif ( !$item['closed'] )
 
 												// Convert the Unix timestamp values to other formats
 
@@ -1555,7 +1555,7 @@
 
 														$item_output = null;
 
-													}
+													} // endif
 
 												// Add the output array to the typical hours of operation list array
 
@@ -1567,17 +1567,17 @@
 
 														$location_hours_typical_list[$item_day_row]['time_spans'][] = $item_output;
 
-													}
+													} // endif ( $item_output )
 
-											}
+											} // endforeach ( $item_day as $item_day_row )
 
 									} // endforeach ( $location_hours_repeater as $item )
 
-							}
+							} // endif ( $location_hours_repeater )
 
-					}
+					} // endif ( !$location_hours_24_7_query )
 
-		}
+		} // endif ( $location_hours_typical_active )
 
 	// Display the static hours of operation
 
@@ -1615,7 +1615,7 @@
 
 							echo '<h3 class="sr-only">' .  $location_hours_text_heading_special . '</h3>';
 
-						}
+						} // endif ( $location_hours_typical_active )
 
 					// Loop through the sets of special hours of operation
 
@@ -1627,7 +1627,7 @@
 
 									echo '<h4 class="h4">' .  $item['title'] . '</h4>';
 
-								}
+								} // endif ( $location_hours_modified_active )
 
 							// Display the information paragraph for the set of special hours of operation
 
@@ -1635,7 +1635,7 @@
 
 									echo '<p>' .  $item['information'] . '</p>';
 
-								}
+								} // endif ( $location_hours_modified_active )
 
 							// Display the small date range explanation paragraph for the set of special hours of operation
 
@@ -1643,7 +1643,7 @@
 
 									echo '<p class="small">' . $item['date_range_text'] . '</p>';
 
-								}
+								} // endif ( $location_hours_modified_active )
 
 							// Display the time information and construct the schema data
 
@@ -1655,9 +1655,9 @@
 									$location_schema_fields[$page_id] //array // Required // Pre-existing field values array so duplicate calls can be avoided
 								);
 
-						}
+						} // endforeach ( $location_hours_modified_list as $item )
 
-				}
+				} // endif ( $location_hours_modified_active )
 
 			// Typical Hours
 
@@ -1669,7 +1669,7 @@
 
 							echo '<h3 class="h4">' .  $location_hours_text_heading_typical . '</h3>';
 
-						}
+						} // endif ( $location_hours_modified_active )
 
 					// Display the time information and construct the schema data
 
@@ -1681,9 +1681,9 @@
 							$location_schema_fields[$page_id] //array // Required // Pre-existing field values array so duplicate calls can be avoided
 						);
 
-				}
+				} // endif ( $location_hours_typical_active )
 
-		}
+		} // endif ( ( $location_hours_modified_active && $location_hours_modified_list ) || ( $location_hours_typical_active && $location_hours_typical_list ) )
 
 // Display After Hours Information
 
