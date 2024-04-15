@@ -9976,6 +9976,11 @@
 
 				// List of valid types
 
+					/**
+					 * Define the list of high-level types that are considered valid. The list may be
+					 * expanded later to include the subtypes of these high-level types.
+					 */
+
 					$uamshealth_website_valid_types = array(
 						'WebSite'
 					);
@@ -10700,6 +10705,11 @@
 					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/base_function.php' );
 
 				// List of valid types
+
+					/**
+					 * Define the list of high-level types that are considered valid. The list may be
+					 * expanded later to include the subtypes of these high-level types.
+					 */
 
 					$facility_valid_types = array(
 						'Place'
@@ -12309,6 +12319,11 @@
 					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/base_function.php' );
 
 				// List of valid types
+
+					/**
+					 * Define the list of high-level types that are considered valid. The list may be
+					 * expanded later to include the subtypes of these high-level types.
+					 */
 
 					$provider_valid_types = array(
 						'MedicalBusiness',
@@ -21546,6 +21561,11 @@
 
 				// List of valid types
 
+					/**
+					 * Define the list of high-level types that are considered valid. The list may be
+					 * expanded later to include the subtypes of these high-level types.
+					 */
+
 					$location_valid_types = array(
 						'MedicalBusiness',
 						'MedicalWebPage',
@@ -28683,6 +28703,11 @@
 
 				// List of valid types
 
+					/**
+					 * Define the list of high-level types that are considered valid. The list may be
+					 * expanded later to include the subtypes of these high-level types.
+					 */
+
 					$expertise_valid_types = array(
 						'MedicalEntity',
 						'MedicalWebPage'
@@ -30565,6 +30590,11 @@
 					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/base_function.php' );
 
 				// List of valid types
+
+					/**
+					 * Define the list of high-level types that are considered valid. The list may be
+					 * expanded later to include the subtypes of these high-level types.
+					 */
 
 					$clinical_resource_valid_types = array(
 						'Article',
@@ -34805,6 +34835,11 @@
 
 				// List of valid types
 
+					/**
+					 * Define the list of high-level types that are considered valid. The list may be
+					 * expanded later to include the subtypes of these high-level types.
+					 */
+
 					$condition_valid_types = array(
 						'MedicalCondition'
 					);
@@ -36152,6 +36187,11 @@
 					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/base_function.php' );
 
 				// List of valid types
+
+					/**
+					 * Define the list of high-level types that are considered valid. The list may be
+					 * expanded later to include the subtypes of these high-level types.
+					 */
 
 					$treatment_valid_types = array(
 						'MedicalTest',
