@@ -624,7 +624,7 @@
 														 * Empty the individual time span output array if certain key values are not set
 														 */
 
-															if (
+														if (
 															!isset($item_time_span_output['times']['opens']['unix']) // If there is no opens time value
 															||
 															!isset($item_time_span_output['times']['closes']['unix']) // If there is no closes time value
@@ -740,7 +740,7 @@
 																 * Empty the individual time span output array if certain key values are not set
 																 */
 
-																	if (
+																if (
 																	!isset($item_time_span_output['times']['opens']['unix']) // If there is no opens time value
 																	||
 																	!isset($item_time_span_output['times']['closes']['unix']) // If there is no closes time value
