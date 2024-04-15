@@ -27023,7 +27023,7 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'openingHours', // string // Required // Name of schema property
-													$location_openingHours, // mixed // Required // Variable to add as the property value
+													$location_hours_openingHours, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27035,7 +27035,7 @@
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'openingHours', // string // Required // Name of schema property
-													$location_openingHours, // mixed // Required // Variable to add as the property value
+													$location_hours_openingHours, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27077,7 +27077,7 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'openingHoursSpecification', // string // Required // Name of schema property
-													$location_openingHoursSpecification, // mixed // Required // Variable to add as the property value
+													$location_hours_openingHoursSpecification, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27089,7 +27089,7 @@
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'openingHoursSpecification', // string // Required // Name of schema property
-													$location_openingHoursSpecification, // mixed // Required // Variable to add as the property value
+													$location_hours_openingHoursSpecification, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27534,7 +27534,7 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'specialOpeningHoursSpecification', // string // Required // Name of schema property
-													$location_specialOpeningHoursSpecification, // mixed // Required // Variable to add as the property value
+													$location_hours_specialOpeningHoursSpecification, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -27546,7 +27546,7 @@
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'specialOpeningHoursSpecification', // string // Required // Name of schema property
-													$location_specialOpeningHoursSpecification, // mixed // Required // Variable to add as the property value
+													$location_hours_specialOpeningHoursSpecification, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
