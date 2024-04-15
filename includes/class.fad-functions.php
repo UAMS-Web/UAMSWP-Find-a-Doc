@@ -16066,7 +16066,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 													// Pass value to schema function
 
-														$schema_fields['location_openingHours'] = $schema_openingHours ?? null;
+														$schema_fields['location_hours_openingHours'] = $schema_openingHours ?? null;
 
 												}
 
@@ -16083,7 +16083,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 												// Pass value to schema function
 
-													$schema_fields['location_openingHoursSpecification'] = $schema_openingHoursSpecification ?? null;
+													$schema_fields['location_hours_openingHoursSpecification'] = $schema_openingHoursSpecification ?? null;
 
 											// specialOpeningHoursSpecification
 
@@ -16101,7 +16101,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 													// Pass value to schema function
 
-														$schema_fields['location_specialOpeningHoursSpecification'] = $schema_specialOpeningHoursSpecification ?? null;
+														$schema_fields['location_hours_specialOpeningHoursSpecification'] = $schema_specialOpeningHoursSpecification ?? null;
 
 												}
 
