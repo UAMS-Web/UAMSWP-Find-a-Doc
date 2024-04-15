@@ -43,6 +43,7 @@
 			$location_hours_modified_end_date_unix = null;
 			$location_hours_modified = null;
 			$location_hours_modified_v2 = null;
+			$location_hours_modified_v2_dates = array();
 			$location_hours_modified_active = null;
 
 			if ( !$location_hours_variable_query ) {
@@ -121,105 +122,56 @@
 
 								$current_year = date( 'Y', $today );
 
-						// Reason for Special In-Person Hours of Operation (string [WYSIWYG])
+						// Loop through the 'Individual Modification to the In-Person Hours of Operation' repeater
 
-							$location_hours_modified_reason = $location_hours_group['location_modified_hours_reason'];
+							/**
+							 * Building an array of the individual dates of the individual modifications
+							 */
 
-						// Start Date For the Special In-Person Hours of Operation (string [F j, Y])
+							// Individual Modification to the In-Person Hours of Operation
 
-							$location_hours_modified_start_date = $location_hours_group['location_modified_hours_start_date'];
+								$location_hours_modified_v2 = $location_hours_group['location_modified_hours_group_v2'];
 
-							// Convert value into a Unix timestamp
+							foreach ( $location_hours_modified_v2 as $item ) {
 
-								$location_hours_modified_start_date_unix = strtotime($location_hours_modified_start_date);
+								// Loop through the 'Dates of the Special In-Person Hours of Operation' repeater
 
-						// Is there an end date for the modified in-person hours of operation? (bool)
+									// Dates of the Special In-Person Hours of Operation
 
-							$location_hours_modified_end_query = $location_hours_group['location_modified_hours_end'];
+										$item_date_groups = $item['dates'];
 
-						// End Date For the Special In-Person Hours of Operation (string [F j, Y])
+									foreach ( $item_date_groups as $item_date_group ) {
 
-							$location_hours_modified_end_date = $location_hours_modified_end_query ? $location_hours_group['location_modified_hours_end_date'] : null;
+										// Individual Date For the Special In-Person Hours of Operation
 
-							// Convert value into a Unix timestamp
+											$item_date = $item_date_group['date'] ?: null; // F j, Y
 
-								$location_hours_modified_end_date_unix = strtotime($location_hours_modified_end_date);
+											// Convert value to Unix timestamp
 
-						// Check if time span for special hours of operation is active now or in the near future
+												$item_date_unix = $item_date ? strtotime($item_date) : null;
 
-							if (
-								$location_hours_modified_start_date_unix
-								&&
-								$location_hours_modified_start_date_unix <= $today_30
-							) {
+											// Set active modified hours query to true if the date is today or within the next 30 days
 
-								/**
-								 * If start date is in the past or is in the near future
-								 */
+												if (
+													$item_date_unix
+													&&
+													(
+														$item_date_unix >= $today
+														&&
+														$item_date_unix <= $today_30
+													)
+												) {
 
-								if ( !$location_hours_modified_end_query ) {
+													$location_hours_modified_active = true;
 
-									/**
-									 * If there is no end date
-									 */
+												}
 
-									$location_hours_modified_active = true;
-
-								} elseif (
-									$location_hours_modified_end_date_unix
-									&&
-									$location_hours_modified_end_date_unix >= $today
-								) {
-
-									/**
-									 * If the end date is not in the past
-									 */
-
-									$location_hours_modified_active = true;
-
-								}
-
-							}
-
-						// Check if time span for typical hours of operation is inactive now or in the near future
-
-							if (
-								$location_hours_modified_start_date_unix
-								&&
-								$location_hours_modified_start_date_unix <= $today
-							) {
-
-								/**
-								 * If start date for special hours of operation is today or earlier
-								 */
-
-								if ( !$location_hours_modified_end_query ) {
-
-									/**
-									 * If there is no end date
-									 */
-
-									$location_hours_typical_active = false;
-
-								} elseif (
-									$location_hours_modified_end_date_unix
-									&&
-									$location_hours_modified_end_date_unix >= $today_30
-								) {
-
-									/**
-									 * If the end date is in the distant future
-									 */
-
-									$location_hours_typical_active = false;
-
-								}
+									}
 
 							}
 
 						// Individual Special In-Person Hours of Operation (repeater)
 
-							$location_hours_modified = $location_hours_modified_active ? $location_hours_group['location_modified_hours_group'] : null;
 							$location_hours_modified_v2 = $location_hours_modified_active ? $location_hours_group['location_modified_hours_group_v2'] : null;
 
 					}
