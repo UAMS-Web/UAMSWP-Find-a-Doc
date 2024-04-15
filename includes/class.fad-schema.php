@@ -34772,6 +34772,10 @@
 
 							$clinical_resource_list['CreativeWork'] = $CreativeWork_list;
 
+						} else {
+
+							$clinical_resource_list['CreativeWork'] = null;
+
 						}
 
 			} // endif ( !empty($repeater) )
