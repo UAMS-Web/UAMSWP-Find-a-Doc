@@ -12806,6 +12806,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - URL
+									 *
+									 * Used on these types:
+									 *
+									 *     - Thing
 									 */
 
 									// Get values
@@ -13618,6 +13622,10 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Person
 											 */
 
 											// Add to item values
@@ -13678,6 +13686,10 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Person
 											 */
 
 											// Add to item values
@@ -13738,6 +13750,10 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Person
 											 */
 
 											// Add to item values
@@ -13798,6 +13814,10 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Organization
 											 */
 
 											// Get values [WIP]
@@ -13866,6 +13886,10 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Person
 											 */
 
 											// Add to item values
@@ -13926,6 +13950,10 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Person
 											 */
 
 											// Get values
@@ -13994,6 +14022,10 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Thing
 											 */
 
 											// Get values
@@ -14103,6 +14135,10 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Thing
 											 */
 
 												// Get values
@@ -15117,6 +15153,161 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Thing
+									 *
+									 * Used on these types:
+									 *
+									 *     - Certification
+									 *     - CommunicateAction
+									 *     - CreativeWork
+									 *     - Event
+									 */
+
+								// actionableFeedbackPolicy [not in scope]
+
+									/**
+									 * For a NewsMediaOrganization or other news-related Organization, a statement
+									 * about public engagement activities (for news media, the newsroom’s), including
+									 * involving the public - digitally or otherwise -- in coverage decisions,
+									 * reporting and activities after publication.
+									 *
+									 * Subproperty of:
+									 *
+									 *     - publishingPrinciples
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - CreativeWork
+									 *     - URL
+									 *
+									 * Used on these types:
+									 *
+									 *     - NewsMediaOrganization
+									 *     - Organization
+									 */
+
+								// additionalProperty [WIP]
+
+									/**
+									 * A property-value pair representing an additional characteristic of the entity
+									 * (e.g., a product feature or another characteristic for which there is no
+									 * matching property in schema.org).
+									 *
+									 * Note: Publishers should be aware that applications designed to use specific
+									 * schema.org properties (e.g., https://schema.org/width,
+									 * https://schema.org/color, https://schema.org/gtin13, ...) will typically expect
+									 * such data to be provided using those properties, rather than using the generic
+									 * property/value mechanism.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - PropertyValue
+									 *
+									 * Used on these types:
+									 *
+									 *     - MerchantReturnPolicy
+									 *     - Offer
+									 *     - Place
+									 *     - Product
+									 *     - QualitativeValue
+									 *     - QuantitativeValue
+									 */
+
+								// address [WIP]
+
+									/**
+									 * Physical address of the item.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - PostalAddress
+									 *     - Text
+									 *
+									 * Used on these types:
+									 *
+									 *     - GeoCoordinates
+									 *     - GeoShape
+									 *     - Organization
+									 *     - Person
+									 *     - Place
+									 */
+
+								// agentInteractionStatistic [WIP]
+
+									/**
+									 * The number of completed interactions for this entity, in a particular role
+									 * (the 'agent'), in a particular action (indicated in the statistic), and in a
+									 * particular context (i.e., https://schema.org/interactionService).
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - InteractionCounter
+									 *
+									 * Used on these types:
+									 *
+									 *     - Organization
+									 *     - Person
+									 */
+
+								// alumni [WIP]
+
+									/**
+									 * Alumni of an organization.
+									 *
+									 * Inverse-property:
+									 *
+									 *     - alumniOf
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - EducationalOrganization
+									 *     - Organization
+									 *
+									 * Used on these types:
+									 *
+									 *     - EducationalOrganization
+									 *     - Organization
+									 */
+
+								// amenityFeature [WIP]
+
+									/**
+									 * An amenity feature (e.g., a characteristic or service) of the Accommodation.
+									 * This generic property does not make a statement about whether the feature is
+									 * included in an offer for the main accommodation or available at extra costs.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - LocationFeatureSpecification
+									 *
+									 * Used on these types:
+									 *
+									 *     - Accommodation
+									 *     - FloorPlan
+									 *     - LodgingBusiness
+									 *     - Place
+									 */
+
+								// areaServed [WIP]
+
+									/**
+									 * The geographic area where a service or offered item is provided.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - ContactPoint
+									 *     - DeliveryChargeSpecification
+									 *     - Demand
+									 *     - Offer
+									 *     - Organization
+									 *
+									 * Used on these types:
+									 *
+									 *     - ContactPoint
+									 *     - DeliveryChargeSpecification
+									 *     - Demand
+									 *     - Offer
+									 *     - Organization
+									 *     - Service
 									 */
 
 								// availableService
@@ -15128,6 +15319,12 @@
 									 *
 									 *     - MedicalProcedure
 									 *     - MedicalTest
+									 *
+									 * Used on these types:
+									 *
+									 *     - Hospital
+									 *     - MedicalClinic
+									 *     - Physician
 									 */
 
 									if (
@@ -15326,6 +15523,13 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - MedicalSpecialty
+											 *
+											 * Used on these types:
+											 *
+											 *     - Hospital
+											 *     - MedicalClinic
+											 *     - MedicalOrganization
+											 *     - Physician
 											 */
 
 											// Add to item values
@@ -15386,6 +15590,10 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Specialty
+											 *
+											 * Used on these types:
+											 *
+											 *     - WebPage
 											 */
 
 											// Add to item values
@@ -15452,12 +15660,17 @@
 									 * case of text values, the class label should follow the schema.org style guide.
 									 *
 									 * Subproperty of:
+									 *
 									 *     - rdf:type
 									 *
 									 * Values expected to be one of these types:
 									 *
 									 *     - Text
 									 *     - URL
+									 *
+									 * Used on these types:
+									 *
+									 *     - Thing
 									 */
 
 									// additionalType (MedicalWebPage)
@@ -15529,6 +15742,10 @@
 										 *
 										 *     - Text
 										 *     - URL
+										 *
+										 * Used on these types:
+										 *
+										 *     - Thing
 										 */
 
 										if (
@@ -15699,6 +15916,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Organization
+									 *
+									 * Used on these types:
+									 *
+									 *     - Person
 									 */
 
 									if (
@@ -15867,6 +16088,17 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - AggregateRating
+									 *
+									 * Used on these types:
+									 *
+									 *     - Brand
+									 *     - CreativeWork
+									 *     - Event
+									 *     - Offer
+									 *     - Organization
+									 *     - Place
+									 *     - Product
+									 *     - Service
 									 */
 
 									if (
@@ -16083,6 +16315,10 @@
 									 *
 									 *     - EducationalOrganization
 									 *     - Organization
+									 *
+									 * Used on these types:
+									 *
+									 *     - Person
 									 */
 
 								// award [WIP]
@@ -16093,6 +16329,46 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Text
+									 *
+									 * Used on these types:
+									 *
+									 *     - CreativeWork
+									 *     - Organization
+									 *     - Person
+									 *     - Product
+									 *     - Service
+									 */
+
+								// awards [superseded]
+
+									/**
+									 * Note: This term has been superseded by https://schema.org/award.
+									 */
+
+								// branchCode [WIP]
+
+									/**
+									 * A short textual code (also called "store code") that uniquely identifies a
+									 * place of business. The code is typically assigned by the parentOrganization and
+									 * used in structured URLs.
+									 *
+									 * For example, in the URL
+									 * http://www.starbucks.co.uk/store-locator/etc/detail/3047 the code "3047" is a
+									 * branchCode for a particular branch.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - Text
+									 *
+									 * Used on these types:
+									 *
+									 *     - Place
+									 */
+
+								// branchOf [superseded]
+
+									/**
+									 * Note: This term has been superseded by https://schema.org/parentOrganization.
 									 */
 
 								// brand
@@ -16105,6 +16381,13 @@
 									 *
 									 *     - Brand
 									 *     - Organization
+									 *
+									 * Used on these types:
+									 *
+									 *     - Organization
+									 *     - Person
+									 *     - Product
+									 *     - Service
 									 */
 
 									// Get names for keywords property
@@ -16178,6 +16461,35 @@
 												);
 
 											}
+
+								// contactPoint [WIP]
+
+									/**
+									 * A contact point for a person or organization.
+									 *
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - ContactPoint
+									 *
+									 * Used on these types:
+									 *
+									 *     - HealthInsurancePlan
+									 *     - Organization
+									 *     - Person
+									 */
+
+								// contactPoints [superseded]
+
+									/**
+									 * Note: This term has been superseded by https://schema.org/contactPoint.
+									 */
+
+								// containedIn [superseded]
+
+									/**
+									 * Note: This term has been superseded by https://schema.org/containedInPlace.
+									 */
 
 								// containedInPlace
 
@@ -16299,6 +16611,49 @@
 
 									}
 
+								// containsPlace [WIP]
+
+									/**
+									 * The basic containment relation between a place and another that it contains.
+									 *
+									 * Inverse-property:
+									 *
+									 *     - containedInPlace
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - Place
+									 *
+									 * Used on these types:
+									 *
+									 *     - Place
+									 */
+
+								// correctionsPolicy [WIP]
+
+									/**
+									 * For an Organization (e.g., NewsMediaOrganization), a statement describing (in
+									 * news media, the newsroom’s) disclosure and correction policy for errors.
+									 *
+									 * Subproperty of:
+									 *
+									 *     - publishingPrinciples
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - CreativeWork
+									 *     - URL
+									 *
+									 * Used on these types:
+									 *
+									 *     - NewsMediaOrganization
+									 *     - Organization
+									 *
+									 * As of 16 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
+									 * definitions.
+									 */
+
 								// currenciesAccepted [WIP]
 
 									/**
@@ -16313,6 +16668,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Text
+									 *
+									 * Used on these types:
+									 *
+									 *     - LocalBusiness
 									 */
 
 									if (
@@ -16414,6 +16773,138 @@
 
 									}
 
+								// department [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// disambiguatingDescription [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// dissolutionDate [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// diversityPolicy [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// diversityStaffingReport [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// email [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
 								// employee [WIP]
 
 									/**
@@ -16422,6 +16913,252 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Person
+									 *
+									 * Used on these types:
+									 *
+									 *     - Organization
+									 */
+
+								// employees [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// ethicsPolicy [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// event [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// events [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// faxNumber [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// founder [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// founders [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// foundingDate [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// foundingLocation [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// funder [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// funding [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
 									 */
 
 								// gender
@@ -16439,6 +17176,11 @@
 									 *
 									 *     - GenderType
 									 *     - Text
+									 *
+									 * Used on these types:
+									 *
+									 *     - Person
+									 *     - SportsTeam
 									 */
 
 									if (
@@ -16593,6 +17335,270 @@
 
 									}
 
+								// geo [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// geoContains [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// geoCoveredBy [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// geoCovers [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// geoCrosses [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// geoDisjoint [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// geoEquals [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// geoIntersects [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// geoOverlaps [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// geoTouches [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// geoWithin [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// hasCertification [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
 								// hasCredential
 
 									/**
@@ -16602,7 +17608,12 @@
 									 *
 									 *     - EducationalOccupationalCredential
 									 *
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * Used on these types:
+									 *
+									 *     - Organization
+									 *     - Person
+									 *
+									 * As of 16 Apr 2024, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
@@ -16750,6 +17761,28 @@
 
 									}
 
+								// hasDriveThroughService [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
 								// hasOccupation
 
 									/**
@@ -16758,6 +17791,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Occupation
+									 *
+									 * Used on these types:
+									 *
+									 *     - Person
 									 */
 
 									if (
@@ -16899,6 +17936,10 @@
 									 *     - Map
 									 *     - URL
 									 *
+									 * Used on these types:
+									 *
+									 *     - Place
+									 *
 									 * The examples on Schema.org indicate that a URL to the location on Google Maps
 									 * is acceptable.
 									 */
@@ -17005,6 +18046,50 @@
 
 									}
 
+								// hasMerchantReturnPolicy [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// hasOfferCatalog [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
 								// hasPart [excluded]
 
 									/**
@@ -17017,8 +18102,78 @@
 									 *
 									 *     - CreativeWork
 									 *
+									 * Used on these types:
+									 *
+									 *     - CreativeWork
+									 *
 									 * This schema property is not relevant to providers or their webpages and will
 									 * not be included.
+									 */
+
+								// hasPOS [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// hasProductReturnPolicy [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// healthPlanNetworkId [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
 									 */
 
 								// hospitalAffiliation
@@ -17029,6 +18184,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Hospital
+									 *
+									 * Used on these types:
+									 *
+									 *     - Physician
 									 */
 
 									if (
@@ -17179,6 +18338,11 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Organization
+											 *     - Person
 											 */
 
 											if (
@@ -17265,6 +18429,12 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Organization
+											 *     - Person
+											 *     - Place
 											 */
 
 											if (
@@ -17351,6 +18521,12 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Organization
+											 *     - Person
+											 *     - Place
 											 */
 
 											if (
@@ -17436,6 +18612,10 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Organization
 											 */
 
 											if (
@@ -17521,6 +18701,11 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Organization
+											 *     - Person
 											 */
 
 											if (
@@ -17606,6 +18791,11 @@
 											 * Values expected to be one of these types:
 											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Organization
+											 *     - Person
 											 */
 
 											if (
@@ -17725,7 +18915,14 @@
 											/**
 											 * The Value-added Tax ID of the organization or person.
 											 *
+											 * Values expected to be one of these types:
+											 *
 											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Organization
+											 *     - Person
 											 */
 
 											if (
@@ -17814,7 +19011,11 @@
 											 *
 											 *     - Text
 											 *
-											 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+											 * Used on these types:
+											 *
+											 *     - Organization
+											 *
+											 * As of 16 Apr 2024, this term is in the "new" area of Schema.org. Implementation
 											 * feedback and adoption from applications and websites can help improve their
 											 * definitions.
 											 */
@@ -17932,6 +19133,10 @@
 												 *     - PropertyValue
 												 *     - Text
 												 *     - URL
+												 *
+												 * Used on these types:
+												 *
+												 *     - Thing
 												 */
 
 												// Base 'identifier' property value array
@@ -18308,6 +19513,10 @@
 									 *
 									 *     - ImageObject
 									 *     - URL
+									 *
+									 * Used on these types:
+									 *
+									 *     - Thing
 									 */
 
 									if (
@@ -18395,6 +19604,28 @@
 
 									}
 
+								// interactionStatistic [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
 								// isAcceptingNewPatients
 
 									/**
@@ -18404,7 +19635,11 @@
 									 *
 									 *     - Boolean
 									 *
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * Used on these types:
+									 *
+									 *     - MedicalOrganization
+									 *
+									 * As of 16 Apr 2024, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
@@ -18514,6 +19749,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Boolean
+									 *
+									 * Used on these types:
+									 *
+									 *     - Product
 									 */
 
 									// MedicalWebPage
@@ -18571,6 +19810,10 @@
 									 *
 									 *     - DefinedTerm
 									 *     - Text
+									 *
+									 * Used on these types:
+									 *
+									 *     - Person
 									 */
 
 									if (
@@ -18797,6 +20040,11 @@
 									 *
 									 *     - Language
 									 *     - Text
+									 *
+									 * Used on these types:
+									 *
+									 *     - Organization
+									 *     - Person
 									 */
 
 									if (
@@ -18926,6 +20174,28 @@
 
 									}
 
+								// latitude [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
 								// location (specific property)
 
 									/**
@@ -18938,6 +20208,13 @@
 									 *     - PostalAddress
 									 *     - Text
 									 *     - VirtualLocation
+									 *
+									 * Used on these types:
+									 *
+									 *     - Action
+									 *     - Event
+									 *     - InteractionCounter
+									 *     - Organization
 									 */
 
 									if (
@@ -19051,14 +20328,62 @@
 
 									}
 
+								// logo [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// longitude [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
 								// mainContentOfPage
 
 									/**
-									* Indicates if this web page element is the main subject of the page.
-									*
-									* Values expected to be one of these types:
-									*
-									*     - WebPageElement
+									 * Indicates if this web page element is the main subject of the page.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - WebPageElement
+									 *
+									 * Used on these types:
+									 *
+									 *     - WebPage
 									*/
 
 									if (
@@ -19163,6 +20488,32 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Thing
+									 *
+									 * Used on these types:
+									 *
+									 *     - CreativeWork
+									 */
+
+								// mainEntityOfPage [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
 									 */
 
 								// makesOffer [WIP]
@@ -19175,6 +20526,99 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Offer
+									 *
+									 * Used on these types:
+									 *
+									 *     - Organization
+									 *     - Person
+									 */
+
+								// map [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// maps [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// maximumAttendeeCapacity [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// member [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
 									 */
 
 								// memberOf
@@ -19189,6 +20633,11 @@
 									 *
 									 *     - Organization
 									 *     - ProgramMembership
+									 *
+									 * Used on these types:
+									 *
+									 *     - Organization
+									 *     - Person
 									 */
 
 									if (
@@ -19335,6 +20784,94 @@
 
 									}
 
+								// members [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// nonprofitStatus [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// numberOfEmployees [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// occupationalCategory [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
 								// offers [WIP]
 
 									/**
@@ -19356,6 +20893,105 @@
 									 *
 									 *     - Demand
 									 *     - Offer
+									 *
+									 * Used on these types:
+									 *
+									 *     - AggregateOffer
+									 *     - CreativeWork
+									 *     - EducationalOccupationalProgram
+									 *     - Event
+									 *     - MenuItem
+									 *     - Product
+									 *     - Service
+									 *     - Trip
+									 */
+
+								// openingHours [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// openingHoursSpecification [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// ownershipFundingInfo [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// owns [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
 									 */
 
 								// parentOrganization
@@ -19364,6 +21000,10 @@
 									 * The larger organization that this organization is a subOrganization of, if any.
 									 *
 									 * Values expected to be one of these types:
+									 *
+									 *     - Organization
+									 *
+									 * Used on these types:
 									 *
 									 *     - Organization
 									 */
@@ -19448,6 +21088,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Text
+									 *
+									 * Used on these types:
+									 *
+									 *     - LocalBusiness
 									 */
 
 									if (
@@ -19557,6 +21201,10 @@
 									 *
 									 *     - ImageObject
 									 *     - Photograph
+									 *
+									 * Used on these types:
+									 *
+									 *     - Place
 									 */
 
 									if (
@@ -19644,6 +21292,28 @@
 
 									}
 
+								// photos [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
 								// potentialAction [WIP]
 
 									/**
@@ -19653,6 +21323,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Action
+									 *
+									 * Used on these types:
+									 *
+									 *     - Thing
 									 */
 
 									/*
@@ -19719,6 +21393,50 @@
 
 									*/
 
+								// practicesAt [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// priceRange [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
 								// primaryImageOfPage [WIP]
 
 									/**
@@ -19727,6 +21445,54 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - ImageObject
+									 *
+									 * Used on these types:
+									 *
+									 *     - WebPage
+									 */
+
+								// publicAccess [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// publishingPrinciples [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
 									 */
 
 								// review [WIP]
@@ -19737,6 +21503,39 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Review
+									 *
+									 * Used on these types:
+									 *
+									 *     - Brand
+									 *     - CreativeWork
+									 *     - Event
+									 *     - Offer
+									 *     - Organization
+									 *     - Place
+									 *     - Product
+									 *     - Service
+									 */
+
+								// reviews [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
 									 */
 
 								// sameAs
@@ -19749,6 +21548,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - URL
+									 *
+									 * Used on these types:
+									 *
+									 *     - Thing
 									 */
 
 									if (
@@ -19826,6 +21629,94 @@
 
 									}
 
+								// seeks [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// serviceArea [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// slogan [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// smokingAllowed [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
 								// speakable [WIP]
 
 									/**
@@ -19858,6 +21749,121 @@
 									 *
 									 *     - SpeakableSpecification
 									 *     - URL
+									 *
+									 * Used on these types:
+									 *
+									 *     - Article
+									 *     - WebPage
+									 */
+
+								// specialOpeningHoursSpecification [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// sponsor [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// subOrganization [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// subjectOf [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// telephone [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
 									 */
 
 								// timeRequired [WIP]
@@ -19869,6 +21875,76 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Duration (use ISO 8601 duration format).
+									 *
+									 * Used on these types:
+									 *
+									 *     - CreativeWork
+									 */
+
+								// tourBookingPage [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// unnamedSourcesPolicy [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
+									 */
+
+								// usNPI [WIP]
+
+									/**
+									 * foo
+									 *
+									 * Inverse property:
+									 *
+									 *     - foo
+									 *
+									 * Subproperty of:
+									 *
+									 *     - foo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - foo
+									 *
+									 * Used on these types:
+									 *
+									 *     - foo
 									 */
 
 								// video
@@ -19880,6 +21956,10 @@
 									 *
 									 *     - Clip
 									 *     - VideoObject
+									 *
+									 * Used on these types:
+									 *
+									 *     - CreativeWork
 									 */
 
 									if (
@@ -20190,6 +22270,10 @@
 									 *
 									 *     - ContactPoint
 									 *     - Place
+									 *
+									 * Used on these types:
+									 *
+									 *     - Person
 									 */
 
 									if (
@@ -20311,6 +22395,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Organization
+									 *
+									 * Used on these types:
+									 *
+									 *     - Person
 									 */
 
 									if (
@@ -20472,7 +22560,12 @@
 									 *     - Thing
 									 *     - URL
 									 *
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * Used on these types:
+									 *
+									 *     - Organization
+									 *     - Person
+									 *
+									 * As of 16 Apr 2024, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
@@ -20789,6 +22882,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - Thing
+									 *
+									 * Used on these types:
+									 *
+									 *     - CreativeWork
 									 */
 
 									if (
@@ -21072,6 +23169,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - URL
+									 *
+									 * Used on these types:
+									 *
+									 *     - WebPage
 									 */
 
 									if (
@@ -21168,6 +23269,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *     - URL
+									 *
+									 * Used on these types:
+									 *
+									 *     - WebPage
 									 */
 
 									if (
@@ -21266,6 +23371,14 @@
 									 *     - DefinedTerm
 									 *     - Text
 									 *     - URL
+									 *
+									 * Used on these types:
+									 *
+									 *     - CreativeWork
+									 *     - Event
+									 *     - Organization
+									 *     - Place
+									 *     - Product
 									 */
 
 									if (
