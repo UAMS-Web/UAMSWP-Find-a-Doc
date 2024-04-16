@@ -12733,7 +12733,9 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => 'SoftwareSourceCode'
+			'supersededBy' => array(
+				'SoftwareSourceCode'
+			)
 		),
 		'CohortStudy' => array(
 			'subTypeOf' => array(
@@ -18241,7 +18243,9 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => 'MonetaryAmount'
+			'supersededBy' => array(
+				'MonetaryAmount'
+			)
 		),
 		'DayOfWeek' => array(
 			'subTypeOf' => array(
@@ -19357,7 +19361,9 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => 'Dermatology'
+			'supersededBy' => array(
+				'Dermatology'
+			)
 		),
 		'Dermatology' => array(
 			'subTypeOf' => array(
@@ -63227,7 +63233,9 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => 'CreativeWorkSeason'
+			'supersededBy' => array(
+				'CreativeWorkSeason'
+			)
 		),
 		'Seat' => array(
 			'subTypeOf' => array(
@@ -68767,7 +68775,9 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => 'TaxiService'
+			'supersededBy' => array(
+				'TaxiService'
+			)
 		),
 		'TaxiReservation' => array(
 			'subTypeOf' => array(
@@ -71873,7 +71883,9 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => 'InteractionCounter'
+			'supersededBy' => array(
+				'InteractionCounter'
+			)
 		),
 		'UserCheckins' => array(
 			'subTypeOf' => array(
@@ -71938,7 +71950,9 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => 'InteractionCounter'
+			'supersededBy' => array(
+				'InteractionCounter'
+			)
 		),
 		'UserComments' => array(
 			'subTypeOf' => array(
@@ -72008,7 +72022,9 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => 'InteractionCounter'
+			'supersededBy' => array(
+				'InteractionCounter'
+			)
 		),
 		'UserDownloads' => array(
 			'subTypeOf' => array(
@@ -72073,7 +72089,9 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => 'InteractionCounter'
+			'supersededBy' => array(
+				'InteractionCounter'
+			)
 		),
 		'UserInteraction' => array(
 			'subTypeOf' => array(
@@ -72148,7 +72166,9 @@
 				'UserTweets'
 			),
 			'supersedes' => '',
-			'supersededBy' => 'InteractionCounter'
+			'supersededBy' => array(
+				'InteractionCounter'
+			)
 		),
 		'UserLikes' => array(
 			'subTypeOf' => array(
@@ -72213,7 +72233,9 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => 'InteractionCounter'
+			'supersededBy' => array(
+				'InteractionCounter'
+			)
 		),
 		'UserPageVisits' => array(
 			'subTypeOf' => array(
@@ -72278,7 +72300,9 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => 'InteractionCounter'
+			'supersededBy' => array(
+				'InteractionCounter'
+			)
 		),
 		'UserPlays' => array(
 			'subTypeOf' => array(
@@ -72343,7 +72367,9 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => 'InteractionCounter'
+			'supersededBy' => array(
+				'InteractionCounter'
+			)
 		),
 		'UserPlusOnes' => array(
 			'subTypeOf' => array(
@@ -72408,7 +72434,9 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => 'InteractionCounter'
+			'supersededBy' => array(
+				'InteractionCounter'
+			)
 		),
 		'UserReview' => array(
 			'subTypeOf' => array(
@@ -72619,7 +72647,9 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => 'InteractionCounter'
+			'supersededBy' => array(
+				'InteractionCounter'
+			)
 		),
 		'VacationRental' => array(
 			'subTypeOf' => array(
@@ -77401,7 +77431,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://bib.schema.org'
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'abstract' => array(
 			'subPropertyOf' => '',
@@ -77416,7 +77448,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'accelerationTime' => array(
 			'subPropertyOf' => '',
@@ -77431,7 +77465,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'acceptedAnswer' => array(
 			'subPropertyOf' => array(
@@ -77635,7 +77671,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'accommodationFloorPlan' => array(
 			'subPropertyOf' => '',
@@ -77651,7 +77689,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'accountId' => array(
 			'subPropertyOf' => array(
@@ -77683,7 +77723,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'accountOverdraftLimit' => array(
 			'subPropertyOf' => '',
@@ -77698,7 +77740,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'accountablePerson' => array(
 			'subPropertyOf' => '',
@@ -77731,7 +77775,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'acquiredFrom' => array(
 			'subPropertyOf' => '',
@@ -77763,7 +77809,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'actionAccessibilityRequirement' => array(
 			'subPropertyOf' => '',
@@ -77866,7 +77914,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'activeIngredient' => array(
 			'subPropertyOf' => '',
@@ -78462,7 +78512,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'alumni' => array(
 			'subPropertyOf' => '',
@@ -78569,7 +78621,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'annualPercentageRate' => array(
 			'subPropertyOf' => '',
@@ -78616,7 +78670,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'antagonist' => array(
 			'subPropertyOf' => '',
@@ -78648,7 +78704,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'applicableCountry' => array(
 			'subPropertyOf' => '',
@@ -78664,7 +78722,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'applicableLocation' => array(
 			'subPropertyOf' => '',
@@ -78695,7 +78755,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'application' => array(
 			'subPropertyOf' => '',
@@ -78743,7 +78805,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'applicationDeadline' => array(
 			'subPropertyOf' => '',
@@ -78758,7 +78822,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'applicationStartDate' => array(
 			'subPropertyOf' => '',
@@ -78773,7 +78839,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'applicationSubCategory' => array(
 			'subPropertyOf' => '',
@@ -78852,7 +78920,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'archivedAt' => array(
 			'subPropertyOf' => '',
@@ -78868,7 +78938,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'area' => array(
 			'subPropertyOf' => '',
@@ -78943,7 +79015,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'arrivalBusStop' => array(
 			'subPropertyOf' => '',
@@ -79149,7 +79223,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://bib.schema.org'
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'artworkSurface' => array(
 			'subPropertyOf' => '',
@@ -79187,7 +79263,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'aspect' => array(
 			'subPropertyOf' => '',
@@ -79254,7 +79332,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'associatedAnatomy' => array(
 			'subPropertyOf' => '',
@@ -79304,7 +79384,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'associatedDisease' => array(
 			'subPropertyOf' => '',
@@ -79321,7 +79403,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'associatedMedia' => array(
 			'subPropertyOf' => '',
@@ -79355,7 +79439,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'associatedPathophysiology' => array(
 			'subPropertyOf' => '',
@@ -79390,7 +79476,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'athlete' => array(
 			'subPropertyOf' => '',
@@ -79836,7 +79924,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'bankAccountType' => array(
 			'subPropertyOf' => '',
@@ -79852,7 +79942,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'baseSalary' => array(
 			'subPropertyOf' => '',
@@ -79940,7 +80032,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'benefits' => array(
 			'subPropertyOf' => '',
@@ -79972,7 +80066,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'bestRating' => array(
 			'subPropertyOf' => '',
@@ -80020,7 +80116,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'billingIncrement' => array(
 			'subPropertyOf' => '',
@@ -80065,7 +80163,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'bioChemInteraction' => array(
 			'subPropertyOf' => '',
@@ -80080,7 +80180,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'bioChemSimilarity' => array(
 			'subPropertyOf' => '',
@@ -80095,7 +80197,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'biologicalRole' => array(
 			'subPropertyOf' => '',
@@ -80110,7 +80214,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'biomechnicalClass' => array(
 			'subPropertyOf' => '',
@@ -80283,7 +80389,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'bookEdition' => array(
 			'subPropertyOf' => '',
@@ -80601,7 +80709,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'broadcastSubChannel' => array(
 			'subPropertyOf' => '',
@@ -80616,7 +80726,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'broadcastTimezone' => array(
 			'subPropertyOf' => '',
@@ -80727,7 +80839,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'businessFunction' => array(
 			'subPropertyOf' => '',
@@ -80795,7 +80909,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'byMonth' => array(
 			'subPropertyOf' => '',
@@ -80810,7 +80926,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'byMonthDay' => array(
 			'subPropertyOf' => '',
@@ -80825,7 +80943,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'byMonthWeek' => array(
 			'subPropertyOf' => '',
@@ -80840,7 +80960,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'callSign' => array(
 			'subPropertyOf' => array(
@@ -80859,7 +80981,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'calories' => array(
 			'subPropertyOf' => '',
@@ -80990,7 +81114,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'catalog' => array(
 			'subPropertyOf' => '',
@@ -81178,7 +81304,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'checkoutTime' => array(
 			'subPropertyOf' => '',
@@ -81210,7 +81338,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'chemicalRole' => array(
 			'subPropertyOf' => '',
@@ -81226,7 +81356,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'childMaxAge' => array(
 			'subPropertyOf' => '',
@@ -81275,7 +81407,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'children' => array(
 			'subPropertyOf' => '',
@@ -81352,7 +81486,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'claimReviewed' => array(
 			'subPropertyOf' => '',
@@ -81514,7 +81650,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'codingSystem' => array(
 			'subPropertyOf' => '',
@@ -81598,7 +81736,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'color' => array(
 			'subPropertyOf' => '',
@@ -81630,7 +81770,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://bib.schema.org'
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'comment' => array(
 			'subPropertyOf' => '',
@@ -81710,7 +81852,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'competitor' => array(
 			'subPropertyOf' => '',
@@ -81777,7 +81921,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'confirmationNumber' => array(
 			'subPropertyOf' => array(
@@ -81826,7 +81972,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'contactOption' => array(
 			'subPropertyOf' => '',
@@ -81908,7 +82056,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'containedIn' => array(
 			'subPropertyOf' => '',
@@ -82030,7 +82180,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'contentSize' => array(
 			'subPropertyOf' => '',
@@ -82172,7 +82324,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'copyrightYear' => array(
 			'subPropertyOf' => '',
@@ -82204,7 +82358,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'correctionsPolicy' => array(
 			'subPropertyOf' => array(
@@ -82223,7 +82379,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'costCategory' => array(
 			'subPropertyOf' => '',
@@ -82330,7 +82488,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'countryOfLastProcessing' => array(
 			'subPropertyOf' => '',
@@ -82345,7 +82505,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'countryOfOrigin' => array(
 			'subPropertyOf' => '',
@@ -82447,7 +82609,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'courseWorkload' => array(
 			'subPropertyOf' => '',
@@ -82462,7 +82626,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'coverageEndTime' => array(
 			'subPropertyOf' => '',
@@ -82508,7 +82674,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'creator' => array(
 			'subPropertyOf' => '',
@@ -82544,7 +82712,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'creditText' => array(
 			'subPropertyOf' => '',
@@ -82559,7 +82729,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'creditedTo' => array(
 			'subPropertyOf' => '',
@@ -82640,7 +82812,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'customer' => array(
 			'subPropertyOf' => '',
@@ -82672,7 +82846,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'customerRemorseReturnLabelSource' => array(
 			'subPropertyOf' => '',
@@ -82687,7 +82863,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'customerRemorseReturnShippingFeesAmount' => array(
 			'subPropertyOf' => '',
@@ -82702,7 +82880,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cutoffTime' => array(
 			'subPropertyOf' => '',
@@ -82717,7 +82897,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdCollectionDate' => array(
 			'subPropertyOf' => '',
@@ -82733,7 +82915,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdFacilityCounty' => array(
 			'subPropertyOf' => '',
@@ -82748,7 +82932,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdFacilityId' => array(
 			'subPropertyOf' => '',
@@ -82763,7 +82949,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdNumBeds' => array(
 			'subPropertyOf' => '',
@@ -82778,7 +82966,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdNumBedsOcc' => array(
 			'subPropertyOf' => '',
@@ -82793,7 +82983,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdNumC19Died' => array(
 			'subPropertyOf' => '',
@@ -82808,7 +83000,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdNumC19HOPats' => array(
 			'subPropertyOf' => '',
@@ -82823,7 +83017,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdNumC19HospPats' => array(
 			'subPropertyOf' => '',
@@ -82838,7 +83034,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdNumC19MechVentPats' => array(
 			'subPropertyOf' => '',
@@ -82853,7 +83051,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdNumC19OFMechVentPats' => array(
 			'subPropertyOf' => '',
@@ -82868,7 +83068,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdNumC19OverflowPats' => array(
 			'subPropertyOf' => '',
@@ -82883,7 +83085,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdNumICUBeds' => array(
 			'subPropertyOf' => '',
@@ -82898,7 +83102,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdNumICUBedsOcc' => array(
 			'subPropertyOf' => '',
@@ -82913,7 +83119,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdNumTotBeds' => array(
 			'subPropertyOf' => '',
@@ -82928,7 +83136,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdNumVent' => array(
 			'subPropertyOf' => '',
@@ -82943,7 +83153,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'cvdNumVentUse' => array(
 			'subPropertyOf' => '',
@@ -82958,7 +83170,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'dataFeedElement' => array(
 			'subPropertyOf' => '',
@@ -83332,7 +83546,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'department' => array(
 			'subPropertyOf' => '',
@@ -83377,7 +83593,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'departureBusStop' => array(
 			'subPropertyOf' => '',
@@ -83635,7 +83853,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'director' => array(
 			'subPropertyOf' => '',
@@ -83796,7 +84016,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'diseaseSpreadStatistics' => array(
 			'subPropertyOf' => '',
@@ -83814,7 +84036,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'dissolutionDate' => array(
 			'subPropertyOf' => '',
@@ -83892,7 +84116,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'diversityStaffingReport' => array(
 			'subPropertyOf' => array(
@@ -83911,7 +84137,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'documentation' => array(
 			'subPropertyOf' => '',
@@ -83927,7 +84155,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'doesNotShip' => array(
 			'subPropertyOf' => '',
@@ -83943,7 +84173,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'domainIncludes' => array(
 			'subPropertyOf' => '',
@@ -83958,7 +84190,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://meta.schema.org'
+			'isPartOf' => array(
+				'https://meta.schema.org'
+			)
 		),
 		'domiciledMortgage' => array(
 			'subPropertyOf' => '',
@@ -83973,7 +84207,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'doorTime' => array(
 			'subPropertyOf' => '',
@@ -84067,7 +84303,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'downloadUrl' => array(
 			'subPropertyOf' => '',
@@ -84311,7 +84549,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'editEIDR' => array(
 			'subPropertyOf' => array(
@@ -84329,7 +84569,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'editor' => array(
 			'subPropertyOf' => '',
@@ -84360,7 +84602,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'educationRequirements' => array(
 			'subPropertyOf' => '',
@@ -84377,7 +84621,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'educationalAlignment' => array(
 			'subPropertyOf' => '',
@@ -84446,7 +84692,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'educationalProgramMode' => array(
 			'subPropertyOf' => '',
@@ -84462,7 +84710,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'educationalRole' => array(
 			'subPropertyOf' => '',
@@ -84526,7 +84776,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'eligibleCustomerType' => array(
 			'subPropertyOf' => '',
@@ -84665,7 +84917,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'emissionsCO2' => array(
 			'subPropertyOf' => '',
@@ -84680,7 +84934,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'employee' => array(
 			'subPropertyOf' => '',
@@ -84729,7 +84985,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'employmentType' => array(
 			'subPropertyOf' => '',
@@ -84759,7 +85017,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'encodesBioChemEntity' => array(
 			'subPropertyOf' => '',
@@ -84776,7 +85036,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'encodesCreativeWork' => array(
 			'subPropertyOf' => '',
@@ -84902,7 +85164,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'endTime' => array(
 			'subPropertyOf' => '',
@@ -84971,7 +85235,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'energyEfficiencyScaleMin' => array(
 			'subPropertyOf' => '',
@@ -84986,7 +85252,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'engineDisplacement' => array(
 			'subPropertyOf' => '',
@@ -85001,7 +85269,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'enginePower' => array(
 			'subPropertyOf' => '',
@@ -85016,7 +85286,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'engineType' => array(
 			'subPropertyOf' => '',
@@ -85033,7 +85305,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'entertainmentBusiness' => array(
 			'subPropertyOf' => array(
@@ -85239,7 +85513,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'event' => array(
 			'subPropertyOf' => '',
@@ -85277,7 +85553,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'eventSchedule' => array(
 			'subPropertyOf' => '',
@@ -85292,7 +85570,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'eventStatus' => array(
 			'subPropertyOf' => '',
@@ -85388,7 +85668,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'exchangeRateSpread' => array(
 			'subPropertyOf' => '',
@@ -85404,7 +85686,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'executableLibraryName' => array(
 			'subPropertyOf' => '',
@@ -85585,7 +85869,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'experienceRequirements' => array(
 			'subPropertyOf' => '',
@@ -85651,7 +85937,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'familyName' => array(
 			'subPropertyOf' => '',
@@ -85797,7 +86085,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'firstAppearance' => array(
 			'subPropertyOf' => array(
@@ -85814,7 +86104,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'firstPerformance' => array(
 			'subPropertyOf' => '',
@@ -85877,7 +86169,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'floorLimit' => array(
 			'subPropertyOf' => '',
@@ -85892,7 +86186,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'floorSize' => array(
 			'subPropertyOf' => '',
@@ -86103,7 +86399,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'frequency' => array(
 			'subPropertyOf' => '',
@@ -86154,7 +86452,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'fuelConsumption' => array(
 			'subPropertyOf' => '',
@@ -86241,7 +86541,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'funder' => array(
 			'subPropertyOf' => array(
@@ -86287,7 +86589,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'game' => array(
 			'subPropertyOf' => '',
@@ -86320,7 +86624,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'gameEdition' => array(
 			'subPropertyOf' => '',
@@ -86436,7 +86742,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'genre' => array(
 			'subPropertyOf' => '',
@@ -86705,7 +87013,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'givenName' => array(
 			'subPropertyOf' => '',
@@ -86754,7 +87064,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'gracePeriod' => array(
 			'subPropertyOf' => '',
@@ -86769,7 +87081,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'grantee' => array(
 			'subPropertyOf' => '',
@@ -86842,7 +87156,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'gtin12' => array(
 			'subPropertyOf' => array(
@@ -86982,7 +87298,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasAdultConsideration' => array(
 			'subPropertyOf' => '',
@@ -86998,7 +87316,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasBioChemEntityPart' => array(
 			'subPropertyOf' => '',
@@ -87015,7 +87335,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasBioPolymerSequence' => array(
 			'subPropertyOf' => array(
@@ -87033,7 +87355,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasBroadcastChannel' => array(
 			'subPropertyOf' => '',
@@ -87067,7 +87391,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasCourse' => array(
 			'subPropertyOf' => '',
@@ -87082,7 +87408,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasCourseInstance' => array(
 			'subPropertyOf' => '',
@@ -87113,7 +87441,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasDefinedTerm' => array(
 			'subPropertyOf' => '',
@@ -87131,7 +87461,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasDeliveryMethod' => array(
 			'subPropertyOf' => '',
@@ -87177,7 +87509,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasEnergyConsumptionDetails' => array(
 			'subPropertyOf' => '',
@@ -87192,7 +87526,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasEnergyEfficiencyCategory' => array(
 			'subPropertyOf' => '',
@@ -87207,7 +87543,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasHealthAspect' => array(
 			'subPropertyOf' => '',
@@ -87222,7 +87560,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasMap' => array(
 			'subPropertyOf' => '',
@@ -87258,7 +87598,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasMenu' => array(
 			'subPropertyOf' => '',
@@ -87328,7 +87670,9 @@
 				'hasProductReturnPolicy'
 			),
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasMolecularFunction' => array(
 			'subPropertyOf' => '',
@@ -87345,7 +87689,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasOccupation' => array(
 			'subPropertyOf' => '',
@@ -87437,7 +87783,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'hasVariant' => array(
 			'subPropertyOf' => '',
@@ -87454,7 +87802,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'headline' => array(
 			'subPropertyOf' => '',
@@ -87501,7 +87851,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'healthPlanCoinsuranceRate' => array(
 			'subPropertyOf' => '',
@@ -87516,7 +87868,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'healthPlanCopay' => array(
 			'subPropertyOf' => '',
@@ -87531,7 +87885,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'healthPlanCopayOption' => array(
 			'subPropertyOf' => '',
@@ -87546,7 +87902,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'healthPlanCostSharing' => array(
 			'subPropertyOf' => '',
@@ -87562,7 +87920,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'healthPlanDrugOption' => array(
 			'subPropertyOf' => '',
@@ -87577,7 +87937,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'healthPlanDrugTier' => array(
 			'subPropertyOf' => '',
@@ -87593,7 +87955,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'healthPlanId' => array(
 			'subPropertyOf' => '',
@@ -87608,7 +87972,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'healthPlanMarketingUrl' => array(
 			'subPropertyOf' => '',
@@ -87623,7 +87989,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'healthPlanNetworkId' => array(
 			'subPropertyOf' => '',
@@ -87639,7 +88007,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'healthPlanNetworkTier' => array(
 			'subPropertyOf' => '',
@@ -87654,7 +88024,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'healthPlanPharmacyCategory' => array(
 			'subPropertyOf' => '',
@@ -87669,7 +88041,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'healthcareReportingData' => array(
 			'subPropertyOf' => '',
@@ -87685,7 +88059,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'height' => array(
 			'subPropertyOf' => '',
@@ -87754,7 +88130,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'homeLocation' => array(
 			'subPropertyOf' => array(
@@ -88099,7 +88477,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'inChIKey' => array(
 			'subPropertyOf' => array(
@@ -88116,7 +88496,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'inCodeSet' => array(
 			'subPropertyOf' => array(
@@ -88134,7 +88516,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'inDefinedTermSet' => array(
 			'subPropertyOf' => array(
@@ -88154,7 +88538,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'inLanguage' => array(
 			'subPropertyOf' => '',
@@ -88208,7 +88594,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'inStoreReturnsOffered' => array(
 			'subPropertyOf' => '',
@@ -88223,7 +88611,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'inSupportOf' => array(
 			'subPropertyOf' => '',
@@ -88238,7 +88628,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://bib.schema.org'
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'incentiveCompensation' => array(
 			'subPropertyOf' => '',
@@ -88339,7 +88731,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'includedRiskFactor' => array(
 			'subPropertyOf' => '',
@@ -88369,7 +88763,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'includesHealthPlanFormulary' => array(
 			'subPropertyOf' => '',
@@ -88384,7 +88780,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'includesHealthPlanNetwork' => array(
 			'subPropertyOf' => '',
@@ -88399,7 +88797,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'includesObject' => array(
 			'subPropertyOf' => '',
@@ -88468,7 +88868,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'infectiousAgent' => array(
 			'subPropertyOf' => '',
@@ -88534,7 +88936,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://bib.schema.org'
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'insertion' => array(
 			'subPropertyOf' => '',
@@ -88747,7 +89151,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'inventoryLevel' => array(
 			'subPropertyOf' => '',
@@ -88779,7 +89185,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://meta.schema.org'
+			'isPartOf' => array(
+				'https://meta.schema.org'
+			)
 		),
 		'isAcceptingNewPatients' => array(
 			'subPropertyOf' => '',
@@ -88794,7 +89202,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'isAccessibleForFree' => array(
 			'subPropertyOf' => '',
@@ -88913,7 +89323,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'isFamilyFriendly' => array(
 			'subPropertyOf' => '',
@@ -88962,7 +89374,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'isLiveBroadcast' => array(
 			'subPropertyOf' => '',
@@ -88994,7 +89408,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'isPartOf' => array(
 			'subPropertyOf' => '',
@@ -89035,7 +89451,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'isPlanForApartment' => array(
 			'subPropertyOf' => '',
@@ -89050,7 +89468,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'isProprietary' => array(
 			'subPropertyOf' => '',
@@ -89098,7 +89518,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'isSimilarTo' => array(
 			'subPropertyOf' => '',
@@ -89131,7 +89553,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'isVariantOf' => array(
 			'subPropertyOf' => '',
@@ -89201,7 +89625,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'isrcCode' => array(
 			'subPropertyOf' => '',
@@ -89353,7 +89779,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'itemDefectReturnLabelSource' => array(
 			'subPropertyOf' => '',
@@ -89368,7 +89796,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'itemDefectReturnShippingFeesAmount' => array(
 			'subPropertyOf' => '',
@@ -89383,7 +89813,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'itemListElement' => array(
 			'subPropertyOf' => '',
@@ -89435,7 +89867,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'itemOffered' => array(
 			'subPropertyOf' => '',
@@ -89506,7 +89940,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'iupacName' => array(
 			'subPropertyOf' => '',
@@ -89521,7 +89957,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'jobBenefits' => array(
 			'subPropertyOf' => '',
@@ -89553,7 +89991,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'jobLocation' => array(
 			'subPropertyOf' => '',
@@ -89583,7 +90023,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'jobStartDate' => array(
 			'subPropertyOf' => '',
@@ -89599,7 +90041,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'jobTitle' => array(
 			'subPropertyOf' => '',
@@ -89615,7 +90059,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'jurisdiction' => array(
 			'subPropertyOf' => '',
@@ -89634,7 +90080,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'keywords' => array(
 			'subPropertyOf' => '',
@@ -89703,7 +90151,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'knowsLanguage' => array(
 			'subPropertyOf' => '',
@@ -89720,7 +90170,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'labelDetails' => array(
 			'subPropertyOf' => '',
@@ -89823,7 +90275,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'learningResourceType' => array(
 			'subPropertyOf' => '',
@@ -89858,7 +90312,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'legalName' => array(
 			'subPropertyOf' => '',
@@ -89911,7 +90367,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'legislationChanges' => array(
 			'subPropertyOf' => '',
@@ -89928,7 +90386,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'legislationConsolidates' => array(
 			'subPropertyOf' => '',
@@ -89945,7 +90405,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'legislationDate' => array(
 			'subPropertyOf' => array(
@@ -89964,7 +90426,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'legislationDateVersion' => array(
 			'subPropertyOf' => '',
@@ -89981,7 +90445,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'legislationIdentifier' => array(
 			'subPropertyOf' => array(
@@ -89999,7 +90465,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'legislationJurisdiction' => array(
 			'subPropertyOf' => array(
@@ -90020,7 +90488,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'legislationLegalForce' => array(
 			'subPropertyOf' => '',
@@ -90037,7 +90507,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'legislationLegalValue' => array(
 			'subPropertyOf' => '',
@@ -90054,7 +90526,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'legislationPassedBy' => array(
 			'subPropertyOf' => array(
@@ -90074,7 +90548,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'legislationResponsible' => array(
 			'subPropertyOf' => '',
@@ -90092,7 +90568,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'legislationTransposes' => array(
 			'subPropertyOf' => array(
@@ -90111,7 +90589,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'legislationType' => array(
 			'subPropertyOf' => array(
@@ -90131,7 +90611,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'leiCode' => array(
 			'subPropertyOf' => array(
@@ -90213,7 +90695,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://bib.schema.org'
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'license' => array(
 			'subPropertyOf' => '',
@@ -90259,7 +90743,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'liveBlogUpdate' => array(
 			'subPropertyOf' => '',
@@ -90289,7 +90775,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'loanPaymentAmount' => array(
 			'subPropertyOf' => '',
@@ -90304,7 +90792,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'loanPaymentFrequency' => array(
 			'subPropertyOf' => '',
@@ -90319,7 +90809,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'loanRepaymentForm' => array(
 			'subPropertyOf' => '',
@@ -90334,7 +90826,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'loanTerm' => array(
 			'subPropertyOf' => array(
@@ -90367,7 +90861,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'location' => array(
 			'subPropertyOf' => '',
@@ -90619,7 +91115,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'makesOffer' => array(
 			'subPropertyOf' => '',
@@ -90716,7 +91214,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'masthead' => array(
 			'subPropertyOf' => array(
@@ -90734,7 +91234,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'material' => array(
 			'subPropertyOf' => '',
@@ -90771,7 +91273,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'mathExpression' => array(
 			'subPropertyOf' => '',
@@ -90787,7 +91291,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'maxPrice' => array(
 			'subPropertyOf' => '',
@@ -90851,7 +91357,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'maximumIntake' => array(
 			'subPropertyOf' => '',
@@ -90884,7 +91392,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'maximumVirtualAttendeeCapacity' => array(
 			'subPropertyOf' => '',
@@ -90899,7 +91409,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'mealService' => array(
 			'subPropertyOf' => '',
@@ -90930,7 +91442,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'measurementDenominator' => array(
 			'subPropertyOf' => '',
@@ -90946,7 +91460,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'measurementMethod' => array(
 			'subPropertyOf' => array(
@@ -90971,7 +91487,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'measurementQualifier' => array(
 			'subPropertyOf' => '',
@@ -90987,7 +91505,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'measurementTechnique' => array(
 			'subPropertyOf' => '',
@@ -91012,7 +91532,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'mechanismOfAction' => array(
 			'subPropertyOf' => '',
@@ -91043,7 +91565,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'mediaItemAppearance' => array(
 			'subPropertyOf' => '',
@@ -91058,7 +91582,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'median' => array(
 			'subPropertyOf' => '',
@@ -91139,7 +91665,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'member' => array(
 			'subPropertyOf' => '',
@@ -91232,7 +91760,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'memoryRequirements' => array(
 			'subPropertyOf' => '',
@@ -91336,7 +91866,9 @@
 				'productReturnDays'
 			),
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'merchantReturnLink' => array(
 			'subPropertyOf' => '',
@@ -91353,7 +91885,9 @@
 				'productReturnLink'
 			),
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'messageAttachment' => array(
 			'subPropertyOf' => '',
@@ -91450,7 +91984,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'mobileUrl' => array(
 			'subPropertyOf' => '',
@@ -91466,7 +92002,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'model' => array(
 			'subPropertyOf' => '',
@@ -91497,7 +92035,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'modifiedTime' => array(
 			'subPropertyOf' => '',
@@ -91527,7 +92067,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'molecularWeight' => array(
 			'subPropertyOf' => '',
@@ -91543,7 +92085,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'monoisotopicMolecularWeight' => array(
 			'subPropertyOf' => '',
@@ -91559,7 +92103,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'monthlyMinimumRepaymentAmount' => array(
 			'subPropertyOf' => '',
@@ -91575,7 +92121,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'monthsOfExperience' => array(
 			'subPropertyOf' => '',
@@ -91590,7 +92138,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'mpn' => array(
 			'subPropertyOf' => '',
@@ -91840,7 +92390,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'nerve' => array(
 			'subPropertyOf' => '',
@@ -91902,7 +92454,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'nextItem' => array(
 			'subPropertyOf' => '',
@@ -91935,7 +92489,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'nonEqual' => array(
 			'subPropertyOf' => '',
@@ -91981,7 +92537,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'normalRange' => array(
 			'subPropertyOf' => '',
@@ -92014,7 +92572,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'numAdults' => array(
 			'subPropertyOf' => '',
@@ -92061,7 +92621,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'numTracks' => array(
 			'subPropertyOf' => '',
@@ -92092,7 +92654,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'numberOfAirbags' => array(
 			'subPropertyOf' => '',
@@ -92124,7 +92688,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'numberOfAxles' => array(
 			'subPropertyOf' => '',
@@ -92156,7 +92722,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'numberOfBedrooms' => array(
 			'subPropertyOf' => '',
@@ -92174,7 +92742,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'numberOfBeds' => array(
 			'subPropertyOf' => '',
@@ -92206,7 +92776,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'numberOfDoors' => array(
 			'subPropertyOf' => '',
@@ -92288,7 +92860,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'numberOfItems' => array(
 			'subPropertyOf' => '',
@@ -92318,7 +92892,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'numberOfPages' => array(
 			'subPropertyOf' => '',
@@ -92349,7 +92925,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'numberOfPlayers' => array(
 			'subPropertyOf' => '',
@@ -92492,7 +93070,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'observationDate' => array(
 			'subPropertyOf' => '',
@@ -92507,7 +93087,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'observationPeriod' => array(
 			'subPropertyOf' => '',
@@ -92522,7 +93104,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'occupancy' => array(
 			'subPropertyOf' => '',
@@ -92575,7 +93159,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'occupationalCredentialAwarded' => array(
 			'subPropertyOf' => '',
@@ -92593,7 +93179,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'offerCount' => array(
 			'subPropertyOf' => '',
@@ -92666,7 +93254,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'openingHours' => array(
 			'subPropertyOf' => '',
@@ -92939,7 +93529,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'originalMediaLink' => array(
 			'subPropertyOf' => '',
@@ -92956,7 +93548,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'originatesFrom' => array(
 			'subPropertyOf' => '',
@@ -93037,7 +93631,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'owns' => array(
 			'subPropertyOf' => '',
@@ -93201,7 +93797,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'parents' => array(
 			'subPropertyOf' => '',
@@ -93357,7 +93955,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'participant' => array(
 			'subPropertyOf' => '',
@@ -93469,7 +94069,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'payload' => array(
 			'subPropertyOf' => '',
@@ -93484,7 +94086,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'paymentAccepted' => array(
 			'subPropertyOf' => '',
@@ -93616,7 +94220,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://bib.schema.org'
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'percentile10' => array(
 			'subPropertyOf' => '',
@@ -93839,7 +94445,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'photo' => array(
 			'subPropertyOf' => array(
@@ -93894,7 +94502,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'physiologicalBenefits' => array(
 			'subPropertyOf' => '',
@@ -94018,7 +94628,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'position' => array(
 			'subPropertyOf' => '',
@@ -94060,7 +94672,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'possibleComplication' => array(
 			'subPropertyOf' => '',
@@ -94154,7 +94768,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'postalCodeEnd' => array(
 			'subPropertyOf' => '',
@@ -94169,7 +94785,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'postalCodePrefix' => array(
 			'subPropertyOf' => '',
@@ -94184,7 +94802,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'postalCodeRange' => array(
 			'subPropertyOf' => '',
@@ -94199,7 +94819,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'potentialAction' => array(
 			'subPropertyOf' => '',
@@ -94230,7 +94852,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'preOp' => array(
 			'subPropertyOf' => '',
@@ -94431,7 +95055,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'priceCurrency' => array(
 			'subPropertyOf' => '',
@@ -94712,7 +95338,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'productID' => array(
 			'subPropertyOf' => array(
@@ -94846,7 +95474,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'programType' => array(
 			'subPropertyOf' => '',
@@ -94862,7 +95492,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'programmingLanguage' => array(
 			'subPropertyOf' => '',
@@ -94965,7 +95597,9 @@
 				'carrier'
 			),
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'providerMobility' => array(
 			'subPropertyOf' => '',
@@ -95043,7 +95677,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'publication' => array(
 			'subPropertyOf' => '',
@@ -95089,7 +95725,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://bib.schema.org'
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'publishedOn' => array(
 			'subPropertyOf' => '',
@@ -95135,7 +95773,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://bib.schema.org'
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'publishingPrinciples' => array(
 			'subPropertyOf' => '',
@@ -95196,7 +95836,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'quarantineGuidelines' => array(
 			'subPropertyOf' => '',
@@ -95212,7 +95854,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'query' => array(
 			'subPropertyOf' => array(
@@ -95277,7 +95921,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://meta.schema.org'
+			'isPartOf' => array(
+				'https://meta.schema.org'
+			)
 		),
 		'ratingCount' => array(
 			'subPropertyOf' => '',
@@ -95307,7 +95953,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ratingValue' => array(
 			'subPropertyOf' => '',
@@ -95340,7 +95988,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://bib.schema.org'
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'readonlyValue' => array(
 			'subPropertyOf' => '',
@@ -95522,7 +96172,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'recognizingAuthority' => array(
 			'subPropertyOf' => '',
@@ -95667,7 +96319,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'referenceQuantity' => array(
 			'subPropertyOf' => '',
@@ -95712,7 +96366,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'regionDrained' => array(
 			'subPropertyOf' => '',
@@ -95977,7 +96633,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'repeatCount' => array(
 			'subPropertyOf' => '',
@@ -95992,7 +96650,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'repeatFrequency' => array(
 			'subPropertyOf' => array(
@@ -96010,7 +96670,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'repetitions' => array(
 			'subPropertyOf' => '',
@@ -96326,7 +96988,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'result' => array(
 			'subPropertyOf' => '',
@@ -96394,7 +97058,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'returnLabelSource' => array(
 			'subPropertyOf' => '',
@@ -96409,7 +97075,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'returnMethod' => array(
 			'subPropertyOf' => '',
@@ -96424,7 +97092,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'returnPolicyCategory' => array(
 			'subPropertyOf' => '',
@@ -96440,7 +97110,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'returnPolicyCountry' => array(
 			'subPropertyOf' => '',
@@ -96456,7 +97128,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'returnPolicySeasonalOverride' => array(
 			'subPropertyOf' => '',
@@ -96471,7 +97145,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'returnShippingFeesAmount' => array(
 			'subPropertyOf' => '',
@@ -96486,7 +97162,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'review' => array(
 			'subPropertyOf' => '',
@@ -96673,7 +97351,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'rsvpResponse' => array(
 			'subPropertyOf' => '',
@@ -96752,7 +97432,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'safetyConsideration' => array(
 			'subPropertyOf' => '',
@@ -96798,7 +97480,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'sameAs' => array(
 			'subPropertyOf' => '',
@@ -96860,7 +97544,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'scheduledPaymentDate' => array(
 			'subPropertyOf' => '',
@@ -96923,7 +97609,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'screenCount' => array(
 			'subPropertyOf' => '',
@@ -96969,7 +97657,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'sdLicense' => array(
 			'subPropertyOf' => '',
@@ -96985,7 +97675,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'sdPublisher' => array(
 			'subPropertyOf' => '',
@@ -97001,7 +97693,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'season' => array(
 			'subPropertyOf' => array(
@@ -97123,7 +97817,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'seatingType' => array(
 			'subPropertyOf' => '',
@@ -97170,7 +97866,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'securityScreening' => array(
 			'subPropertyOf' => '',
@@ -97263,7 +97961,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'sensoryUnit' => array(
 			'subPropertyOf' => '',
@@ -97541,7 +98241,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'sharedContent' => array(
 			'subPropertyOf' => '',
@@ -97573,7 +98275,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'shippingDetails' => array(
 			'subPropertyOf' => '',
@@ -97588,7 +98292,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'shippingLabel' => array(
 			'subPropertyOf' => '',
@@ -97604,7 +98310,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'shippingOrigin' => array(
 			'subPropertyOf' => '',
@@ -97619,7 +98327,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'shippingRate' => array(
 			'subPropertyOf' => '',
@@ -97635,7 +98345,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'shippingSettingsLink' => array(
 			'subPropertyOf' => '',
@@ -97650,7 +98362,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'sibling' => array(
 			'subPropertyOf' => '',
@@ -97782,7 +98496,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'sizeGroup' => array(
 			'subPropertyOf' => '',
@@ -97798,7 +98514,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'sizeSystem' => array(
 			'subPropertyOf' => '',
@@ -97814,7 +98532,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'skills' => array(
 			'subPropertyOf' => '',
@@ -97886,7 +98606,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'smokingAllowed' => array(
 			'subPropertyOf' => '',
@@ -98125,7 +98847,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'speed' => array(
 			'subPropertyOf' => '',
@@ -98140,7 +98864,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'spokenByCharacter' => array(
 			'subPropertyOf' => '',
@@ -98156,7 +98882,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'sponsor' => array(
 			'subPropertyOf' => '',
@@ -98196,7 +98924,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'sportsActivityLocation' => array(
 			'subPropertyOf' => array(
@@ -98348,7 +99078,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'startTime' => array(
 			'subPropertyOf' => '',
@@ -98385,7 +99117,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'status' => array(
 			'subPropertyOf' => '',
@@ -98742,7 +99476,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'subjectOf' => array(
 			'subPropertyOf' => '',
@@ -98779,7 +99515,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'successorOf' => array(
 			'subPropertyOf' => '',
@@ -98825,7 +99563,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'suggestedAnswer' => array(
 			'subPropertyOf' => '',
@@ -98891,7 +99631,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'suggestedMinAge' => array(
 			'subPropertyOf' => '',
@@ -98958,7 +99700,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://meta.schema.org'
+			'isPartOf' => array(
+				'https://meta.schema.org'
+			)
 		),
 		'supply' => array(
 			'subPropertyOf' => array(
@@ -99045,7 +99789,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'target' => array(
 			'subPropertyOf' => '',
@@ -99206,7 +99952,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'taxonomicRange' => array(
 			'subPropertyOf' => '',
@@ -99224,7 +99972,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'teaches' => array(
 			'subPropertyOf' => '',
@@ -99242,7 +99992,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'telephone' => array(
 			'subPropertyOf' => '',
@@ -99314,7 +100066,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'termDuration' => array(
 			'subPropertyOf' => '',
@@ -99329,7 +100083,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'termsOfService' => array(
 			'subPropertyOf' => '',
@@ -99345,7 +100101,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'termsPerYear' => array(
 			'subPropertyOf' => '',
@@ -99360,7 +100118,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'text' => array(
 			'subPropertyOf' => '',
@@ -99390,7 +100150,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'thumbnail' => array(
 			'subPropertyOf' => '',
@@ -99496,7 +100258,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'timeRequired' => array(
 			'subPropertyOf' => '',
@@ -99526,7 +100290,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'tissueSample' => array(
 			'subPropertyOf' => '',
@@ -99577,7 +100343,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'toLocation' => array(
 			'subPropertyOf' => array(
@@ -99632,7 +100400,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'tocEntry' => array(
 			'subPropertyOf' => array(
@@ -99649,7 +100419,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'tongueWeight' => array(
 			'subPropertyOf' => '',
@@ -99664,7 +100436,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'tool' => array(
 			'subPropertyOf' => array(
@@ -99698,7 +100472,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'totalHistoricalEnrollment' => array(
 			'subPropertyOf' => '',
@@ -99713,7 +100489,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'totalJobOpenings' => array(
 			'subPropertyOf' => '',
@@ -99728,7 +100506,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'totalPaymentDue' => array(
 			'subPropertyOf' => '',
@@ -99795,7 +100575,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'touristType' => array(
 			'subPropertyOf' => '',
@@ -99917,7 +100699,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'trainName' => array(
 			'subPropertyOf' => '',
@@ -99963,7 +100747,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'transFatContent' => array(
 			'subPropertyOf' => '',
@@ -100009,7 +100795,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'transitTimeLabel' => array(
 			'subPropertyOf' => '',
@@ -100025,7 +100813,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'translationOfWork' => array(
 			'subPropertyOf' => '',
@@ -100042,7 +100832,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://bib.schema.org'
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'translator' => array(
 			'subPropertyOf' => '',
@@ -100090,7 +100882,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'trialDesign' => array(
 			'subPropertyOf' => '',
@@ -100200,7 +100994,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'typicalTest' => array(
 			'subPropertyOf' => '',
@@ -100288,7 +101084,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'unsaturatedFatContent' => array(
 			'subPropertyOf' => '',
@@ -100381,7 +101179,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'usedToDiagnose' => array(
 			'subPropertyOf' => '',
@@ -100442,7 +101242,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'utterances' => array(
 			'subPropertyOf' => '',
@@ -100457,7 +101259,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'validFor' => array(
 			'subPropertyOf' => '',
@@ -100701,7 +101505,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'variantCover' => array(
 			'subPropertyOf' => '',
@@ -100716,7 +101522,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://bib.schema.org'
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'variesBy' => array(
 			'subPropertyOf' => '',
@@ -100732,7 +101540,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'vatID' => array(
 			'subPropertyOf' => '',
@@ -100872,7 +101682,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'vehicleTransmission' => array(
 			'subPropertyOf' => '',
@@ -100927,7 +101739,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'version' => array(
 			'subPropertyOf' => '',
@@ -101125,7 +101939,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'weight' => array(
 			'subPropertyOf' => '',
@@ -101157,7 +101973,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'wheelbase' => array(
 			'subPropertyOf' => '',
@@ -101172,7 +101990,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://auto.schema.org'
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'width' => array(
 			'subPropertyOf' => '',
@@ -101345,7 +102165,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://bib.schema.org'
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'workload' => array(
 			'subPropertyOf' => '',
@@ -101423,7 +102245,9 @@
 			'inverseOf' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => 'https://pending.schema.org'
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'yearlyRevenue' => array(
 			'subPropertyOf' => '',
