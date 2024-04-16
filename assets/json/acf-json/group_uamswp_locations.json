@@ -4207,7 +4207,7 @@
 				},
 				{
 					"key": "field_location_modified_hours_reason",
-					"label": "Reason for Special In-Person Hours of Operation",
+					"label": "(Deprecated) Reason for Special In-Person Hours of Operation",
 					"name": "location_modified_hours_reason",
 					"type": "wysiwyg",
 					"instructions": "Describe the overall reason the in-person hours of operation are being modified. This might be because of a holiday or public health emergency.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>The date range will be displayed automatically, so that does not have to be included in this field.",
@@ -4235,7 +4235,7 @@
 				},
 				{
 					"key": "field_location_modified_hours_start_date",
-					"label": "Start Date For the Special In-Person Hours of Operation",
+					"label": "(Deprecated) Start Date For the Special In-Person Hours of Operation",
 					"name": "location_modified_hours_start_date",
 					"type": "date_picker",
 					"instructions": "The date when the special in-person hours of operation begin.",
@@ -4261,7 +4261,7 @@
 				},
 				{
 					"key": "field_location_modified_hours_end",
-					"label": "Is there an end date for the special in-person hours of operation?",
+					"label": "(Deprecated) Is there an end date for the special in-person hours of operation?",
 					"name": "location_modified_hours_end",
 					"type": "button_group",
 					"instructions": "",
@@ -4292,7 +4292,7 @@
 				},
 				{
 					"key": "field_location_modified_hours_end_date",
-					"label": "End Date For the Special In-Person Hours of Operation",
+					"label": "(Deprecated) End Date For the Special In-Person Hours of Operation",
 					"name": "location_modified_hours_end_date",
 					"type": "date_picker",
 					"instructions": "The date after which the special in-person hours of operation end.",
@@ -4318,7 +4318,7 @@
 				},
 				{
 					"key": "field_location_modified_hours_group",
-					"label": "Individual Special In-Person Hours of Operation",
+					"label": "(Deprecated) Individual Special In-Person Hours of Operation",
 					"name": "location_modified_hours_group",
 					"type": "repeater",
 					"instructions": "",
@@ -4347,7 +4347,7 @@
 					"sub_fields": [
 						{
 							"key": "field_location_modified_hours_title",
-							"label": "Title",
+							"label": "(Deprecated) Title",
 							"name": "location_modified_hours_title",
 							"type": "text",
 							"instructions": "Define the text to be used in the heading for this set of special hours (e.g., \"Thanksgiving Holiday Hours\").",
@@ -4367,7 +4367,7 @@
 						},
 						{
 							"key": "field_location_modified_hours_information",
-							"label": "Information",
+							"label": "(Deprecated) Information",
 							"name": "location_modified_hours_information",
 							"type": "wysiwyg",
 							"instructions": "This field can include a description of the modification if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>Or you can add information in addition to the structured days and hours.",
@@ -4387,7 +4387,7 @@
 						},
 						{
 							"key": "field_location_modified_hours_24_7",
-							"label": "Is this location available 24\/7 during these special hours?",
+							"label": "(Deprecated) Is this location available 24\/7 during these special hours?",
 							"name": "location_modified_hours_24_7",
 							"type": "button_group",
 							"instructions": "",
@@ -4410,7 +4410,7 @@
 						},
 						{
 							"key": "field_location_modified_hours_times",
-							"label": "Special In-Person Hours of Operation",
+							"label": "(Deprecated) Special In-Person Hours of Operation",
 							"name": "location_modified_hours_times",
 							"type": "repeater",
 							"instructions": "Set the time for all seven days.",
@@ -4444,7 +4444,7 @@
 							"sub_fields": [
 								{
 									"key": "field_location_modified_hours_day",
-									"label": "Day",
+									"label": "(Deprecated) Day",
 									"name": "location_modified_hours_day",
 									"type": "select",
 									"instructions": "",
@@ -4475,7 +4475,7 @@
 								},
 								{
 									"key": "field_location_modified_hours_closed",
-									"label": "Status",
+									"label": "(Deprecated) Status",
 									"name": "location_modified_hours_closed",
 									"type": "button_group",
 									"instructions": "",
@@ -4498,7 +4498,7 @@
 								},
 								{
 									"key": "field_location_modified_hours_open",
-									"label": "Opens",
+									"label": "(Deprecated) Opens",
 									"name": "location_modified_hours_open",
 									"type": "time_picker",
 									"instructions": "",
@@ -4523,7 +4523,7 @@
 								},
 								{
 									"key": "field_location_modified_hours_close",
-									"label": "Closes",
+									"label": "(Deprecated) Closes",
 									"name": "location_modified_hours_close",
 									"type": "time_picker",
 									"instructions": "",
@@ -4548,7 +4548,7 @@
 								},
 								{
 									"key": "field_location_modified_hours_comment",
-									"label": "Comment",
+									"label": "(Deprecated) Comment",
 									"name": "location_modified_hours_comment",
 									"type": "text",
 									"instructions": "",
@@ -4572,7 +4572,7 @@
 				},
 				{
 					"key": "field_location_holiday_hours",
-					"label": "Holiday Hours",
+					"label": "(Deprecated) Holiday Hours",
 					"name": "location_holiday_hours",
 					"type": "repeater",
 					"instructions": "",
@@ -4599,7 +4599,7 @@
 					"sub_fields": [
 						{
 							"key": "field_holiday_date",
-							"label": "Date",
+							"label": "(Deprecated) Date",
 							"name": "date",
 							"type": "date_picker",
 							"instructions": "",
@@ -4616,7 +4616,7 @@
 						},
 						{
 							"key": "field_holiday_label",
-							"label": "Holiday Text",
+							"label": "(Deprecated) Holiday Text",
 							"name": "label",
 							"type": "text",
 							"instructions": "",
@@ -4635,7 +4635,7 @@
 						},
 						{
 							"key": "field_holiday_closed",
-							"label": "Status",
+							"label": "(Deprecated) Status",
 							"name": "closed",
 							"type": "button_group",
 							"instructions": "",
@@ -4658,7 +4658,7 @@
 						},
 						{
 							"key": "field_holiday_open",
-							"label": "Opens",
+							"label": "(Deprecated) Opens",
 							"name": "open",
 							"type": "time_picker",
 							"instructions": "",
@@ -4682,7 +4682,7 @@
 						},
 						{
 							"key": "field_holiday_close",
-							"label": "Closes",
+							"label": "(Deprecated) Closes",
 							"name": "close",
 							"type": "time_picker",
 							"instructions": "",
