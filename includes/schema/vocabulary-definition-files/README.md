@@ -10,3 +10,5 @@ Download the CSV files for Types and for Properties at https://schema.org/docs/d
 6. Click **Download**.
 7. Create a subfolder within **includes/schema/vocabulary-definition-files** for the current Schema.org version.
 8. Move the downloaded CSV files into that new subfolder.
+
+An alternative method is to download the files directly from the schemaorg Github repository at https://github.com/schemaorg/schemaorg/tree/main/data/releases.
