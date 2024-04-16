@@ -26994,7 +26994,7 @@
 									 *     - Offer
 									 */
 
-								// openingHours [WIP]
+								// openingHours
 
 									/**
 									 * The general opening hours for a business. Opening hours can be specified as a
@@ -27063,7 +27063,7 @@
 
 									}
 
-								// openingHoursSpecification [WIP]
+								// openingHoursSpecification
 
 									/**
 									 * The opening hours of a certain place.
