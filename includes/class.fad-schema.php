@@ -12404,11 +12404,11 @@
 
 						}
 
-					// Physician
+					// IndividualPhysician
 
-						if ( isset($provider_properties_map['Physician']) ) {
+						if ( isset($provider_properties_map['IndividualPhysician']) ) {
 
-							$provider_properties_map['Physician']['degrees'] = array(
+							$provider_properties_map['IndividualPhysician']['degrees'] = array(
 								'M.D.',
 								'D.O.'
 							);
@@ -12521,7 +12521,7 @@
 								$MedicalWebPage_type = null;
 								$Optician_degree_query = null;
 								$Person_type = null;
-								$Physician_degree_query = null;
+								$IndividualPhysician_degree_query = null;
 								$provider_about = null;
 								$provider_abstract = null;
 								$provider_accessibilityAPI = null;
@@ -12934,22 +12934,22 @@
 
 													}
 
-												// Check the list of degrees against the Physician degrees
+												// Check the list of degrees against the IndividualPhysician degrees
 
 													if (
-														$provider_properties_map['Physician']['degrees']
+														$provider_properties_map['IndividualPhysician']['degrees']
 														&&
 														$provider_degree_array
 													) {
 
-														$Physician_degree_query = !empty(
+														$IndividualPhysician_degree_query = !empty(
 															array_intersect(
-																$provider_properties_map['Physician']['degrees'],
+																$provider_properties_map['IndividualPhysician']['degrees'],
 																$provider_degree_array
 															)
 														);
 
-														$MedicalBusiness_type = $Physician_degree_query ? 'Physician' : $MedicalBusiness_type;
+														$MedicalBusiness_type = $IndividualPhysician_degree_query ? 'IndividualPhysician' : $MedicalBusiness_type;
 
 													}
 

@@ -53,7 +53,7 @@ $page_id = get_the_ID();
 
 	// Related ontology items as schema arrays
 
-		// Related Locations (MedicalWebPage[mentions], Physician[location], Person[workLocation])
+		// Related Locations (MedicalWebPage[mentions], IndividualPhysician[location], Person[workLocation])
 
 			// Base array
 
@@ -204,11 +204,11 @@ $page_id = get_the_ID();
 
 					$treatments_cpt = get_field( 'physician_treatments_cpt', $page_id );
 
-				// Define the schema for nesting in 'Physician'['availableService']
+				// Define the schema for nesting in 'IndividualPhysician'['availableService']
 
 					/*
-						Nesting level 0 = 'Physician'
-						Nesting level 1 = 'Physician'['availableService']
+						Nesting level 0 = 'IndividualPhysician'
+						Nesting level 1 = 'IndividualPhysician'['availableService']
 					*/
 
 					$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
@@ -885,33 +885,33 @@ $page_id = get_the_ID();
 
 			$schema_provider_MedicalWebPage['breadcrumb'] = $schema_provider_BreadcrumbList_ref ?: '';
 
-	// Provider as Physician
+	// Provider as IndividualPhysician
 
 		// Base array
 
-			$schema_provider_Physician = array(
-				'@type' => 'Physician'
+			$schema_provider_IndividualPhysician = array(
+				'@type' => 'IndividualPhysician'
 			);
 
 		// @id
 
-			$schema_provider_Physician['@id'] = $schema_provider_url . '#' . $schema_provider_Physician['@type'];
+			$schema_provider_IndividualPhysician['@id'] = $schema_provider_url . '#' . $schema_provider_IndividualPhysician['@type'];
 
-			// Define reference to this 'Physician' item
+			// Define reference to this 'IndividualPhysician' item
 
-				$schema_provider_Physician_ref['@id'] = $schema_provider_Physician['@id'] ?: '';
+				$schema_provider_IndividualPhysician_ref['@id'] = $schema_provider_IndividualPhysician['@id'] ?: '';
 
-			// Define a value of 'about' of 'MedicalWebPage' with this 'Physician' reference
+			// Define a value of 'about' of 'MedicalWebPage' with this 'IndividualPhysician' reference
 
-				$schema_provider_MedicalWebPage['about'][] = $schema_provider_Physician_ref;
+				$schema_provider_MedicalWebPage['about'][] = $schema_provider_IndividualPhysician_ref;
 
-			// Define a value of 'mentions' of 'MedicalWebPage' with this 'Physician' reference
+			// Define a value of 'mentions' of 'MedicalWebPage' with this 'IndividualPhysician' reference
 
-				$schema_provider_MedicalWebPage['mentions'][] = $schema_provider_Physician_ref;
+				$schema_provider_MedicalWebPage['mentions'][] = $schema_provider_IndividualPhysician_ref;
 
-			// Define the value of 'mainEntity' of 'MedicalWebPage' with this 'Physician' reference
+			// Define the value of 'mainEntity' of 'MedicalWebPage' with this 'IndividualPhysician' reference
 
-				$schema_provider_MedicalWebPage['mainEntity'] = $schema_provider_Physician_ref;
+				$schema_provider_MedicalWebPage['mainEntity'] = $schema_provider_IndividualPhysician_ref;
 
 		// name
 
@@ -927,17 +927,17 @@ $page_id = get_the_ID();
 			 *     - Text
 			 */
 
-			$schema_provider_Physician['name'] = array(); // Defined later
+			$schema_provider_IndividualPhysician['name'] = array(); // Defined later
 
 		// aggregateRating
 
 			if ($rating_valid) {
 
-				$schema_provider_Physician['aggregateRating'] = array_filter(
+				$schema_provider_IndividualPhysician['aggregateRating'] = array_filter(
 					array(
 						'@type' => 'AggregateRating',
 						'description' => '', // Get description of the rating/review concept from Patient Experience.
-						'itemReviewed' => $schema_provider_Physician_ref,
+						'itemReviewed' => $schema_provider_IndividualPhysician_ref,
 						'ratingCount' => $review_count,
 						'ratingValue' => $avg_rating,
 						'reviewAspect' => '', // Get info from Patient Experience about which facets of the provider is rated/reviewed.
@@ -949,7 +949,7 @@ $page_id = get_the_ID();
 
 		// availableService
 
-			$schema_provider_Physician['availableService'] = $provider_related_treatment;
+			$schema_provider_IndividualPhysician['availableService'] = $provider_related_treatment;
 
 		// brand
 
@@ -969,29 +969,29 @@ $page_id = get_the_ID();
 
 				if ( $schema_provider_brand ) {
 
-					$schema_provider_Physician['brand'] = $schema_provider_brand;
+					$schema_provider_IndividualPhysician['brand'] = $schema_provider_brand;
 
 					// If there is only one item, flatten the multi-dimensional array by one step
 
-						uamswp_fad_flatten_multidimensional_array($schema_provider_Physician['brand']);
+						uamswp_fad_flatten_multidimensional_array($schema_provider_IndividualPhysician['brand']);
 
 				}
 
 		// containedInPlace
 
-			$schema_provider_Physician['containedInPlace'] = $provider_related_location;
+			$schema_provider_IndividualPhysician['containedInPlace'] = $provider_related_location;
 
 		// description
 
-			$schema_provider_Physician['description'] = array(); // Defined later
+			$schema_provider_IndividualPhysician['description'] = array(); // Defined later
 
 		// hospitalAffiliation
 
-			$schema_provider_Physician['hospitalAffiliation'] = $provider_hospitalAffiliation;
+			$schema_provider_IndividualPhysician['hospitalAffiliation'] = $provider_hospitalAffiliation;
 
 		// isAcceptingNewPatients
 
-			$schema_provider_Physician['isAcceptingNewPatients'] = $accept_new ? 'True' : 'False';
+			$schema_provider_IndividualPhysician['isAcceptingNewPatients'] = $accept_new ? 'True' : 'False';
 
 		// location
 
@@ -1001,7 +1001,7 @@ $page_id = get_the_ID();
 				!empty($schema_provider_location_ref)
 			) {
 
-				$schema_provider_Physician['location'] = $schema_provider_location_ref;
+				$schema_provider_IndividualPhysician['location'] = $schema_provider_location_ref;
 
 			}
 
@@ -1020,27 +1020,27 @@ $page_id = get_the_ID();
 			 *     - URL
 			 */
 
-			$schema_provider_Physician['mainEntityOfPage'] = $schema_provider_MedicalWebPage_ref;
+			$schema_provider_IndividualPhysician['mainEntityOfPage'] = $schema_provider_MedicalWebPage_ref;
 
 		// medicalSpecialty
 
-			$schema_provider_Physician['medicalSpecialty'] = $schema_provider_medicalSpecialty;
+			$schema_provider_IndividualPhysician['medicalSpecialty'] = $schema_provider_medicalSpecialty;
 
 		// parentOrganization
 
 			if ( $schema_provider_brand ) {
 
-				$schema_provider_Physician['parentOrganization'] = $schema_provider_brand;
+				$schema_provider_IndividualPhysician['parentOrganization'] = $schema_provider_brand;
 
 				// If there is only one item, flatten the multi-dimensional array by one step
 
-					uamswp_fad_flatten_multidimensional_array($schema_provider_Physician['parentOrganization']);
+					uamswp_fad_flatten_multidimensional_array($schema_provider_IndividualPhysician['parentOrganization']);
 
 			}
 
 		// subjectOf
 
-			$schema_provider_Physician['subjectOf'] = $schema_provider_MedicalWebPage_ref;
+			$schema_provider_IndividualPhysician['subjectOf'] = $schema_provider_MedicalWebPage_ref;
 
 		// url
 
@@ -1052,7 +1052,7 @@ $page_id = get_the_ID();
 			 *     - URL
 			 */
 
-			$schema_provider_Physician['url'] = $schema_provider_MedicalWebPage_url_ref;
+			$schema_provider_IndividualPhysician['url'] = $schema_provider_MedicalWebPage_url_ref;
 
 	// Provider as Person
 
@@ -1144,9 +1144,9 @@ $page_id = get_the_ID();
 
 					$schema_provider_MedicalWebPage['name'] = $schema_provider_Person_name_ref;
 
-				// Physician
+				// IndividualPhysician
 
-					$schema_provider_Physician['name'] = $schema_provider_Person_name_ref;
+					$schema_provider_IndividualPhysician['name'] = $schema_provider_Person_name_ref;
 
 			// Define value of 'headline' of 'MedicalWebPage' with this 'name' reference
 
@@ -1303,9 +1303,9 @@ $page_id = get_the_ID();
 
 				$schema_provider_Person_description_ref['@id'] = $schema_provider_Person['description']['@id'] ?: '';
 
-			// Define value of 'description' of 'Physician' with this 'description' reference
+			// Define value of 'description' of 'IndividualPhysician' with this 'description' reference
 
-				$schema_provider_Physician['description'] = $schema_provider_Person_description_ref;
+				$schema_provider_IndividualPhysician['description'] = $schema_provider_Person_description_ref;
 
 			// Define value of 'description' of 'MedicalWebPage' with this 'description' reference
 
@@ -1676,8 +1676,8 @@ $page_id = get_the_ID();
 	// BreadcrumbList
 	$schema_provider['@graph'][] = $schema_provider_BreadcrumbList;
 
-	// Provider as Physician
-	$schema_provider['@graph'][] = $schema_provider_Physician;
+	// Provider as IndividualPhysician
+	$schema_provider['@graph'][] = $schema_provider_IndividualPhysician;
 
 	// Provider as Person
 	$schema_provider['@graph'][] = $schema_provider_Person;
