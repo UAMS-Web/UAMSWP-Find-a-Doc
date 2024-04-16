@@ -1,5 +1,7 @@
 <?php
 
+// Schema.org Version 22.0 (2023-06-29)
+
 function uamswp_fad_schema_org (
 	array $schema, // Main schema array
 	array $input, // Array of properties and values for a type and its parent types
