@@ -5,7 +5,6 @@
  * as of 27 Sep 2023
  */
 
-
 // Full list of types from Schema.org
 
 	$schema_org_types = array(
