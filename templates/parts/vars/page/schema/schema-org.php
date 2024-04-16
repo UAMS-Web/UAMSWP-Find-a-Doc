@@ -164,7 +164,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'AMRadioChannel' => array(
 			'subTypeOf' => array(
@@ -958,7 +960,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ActiveActionStatus' => array(
 			'subTypeOf' => array(
@@ -1243,7 +1247,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'AdvertiserContentArticle' => array(
 			'subTypeOf' => array(
@@ -1389,7 +1395,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'AerobicActivity' => array(
 			'subTypeOf' => array(
@@ -1751,7 +1759,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'AlignmentObject' => array(
 			'subTypeOf' => array(
@@ -1809,7 +1819,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'AllocateAction' => array(
 			'subTypeOf' => array(
@@ -2008,7 +2020,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'AmusementPark' => array(
 			'subTypeOf' => array(
@@ -2302,7 +2316,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'AnatomicalStructure' => array(
 			'subTypeOf' => array(
@@ -2403,7 +2419,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Anesthesia' => array(
 			'subTypeOf' => array(
@@ -3183,7 +3201,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ArchiveOrganization' => array(
 			'subTypeOf' => array(
@@ -3313,7 +3333,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ArriveAction' => array(
 			'subTypeOf' => array(
@@ -3873,7 +3895,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'AssessAction' => array(
 			'subTypeOf' => array(
@@ -4090,7 +4114,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'Attorney' => array(
 			'subTypeOf' => array(
@@ -4573,7 +4599,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Audiobook' => array(
 			'subTypeOf' => array(
@@ -4740,7 +4768,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'AudiobookFormat' => array(
 			'subTypeOf' => array(
@@ -4768,7 +4798,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'AuthorizeAction' => array(
 			'subTypeOf' => array(
@@ -6029,7 +6061,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Bacteria' => array(
 			'subTypeOf' => array(
@@ -6686,7 +6720,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Beach' => array(
 			'subTypeOf' => array(
@@ -7121,7 +7157,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BikeStore' => array(
 			'subTypeOf' => array(
@@ -7293,7 +7331,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Blog' => array(
 			'subTypeOf' => array(
@@ -7671,7 +7711,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BoatTerminal' => array(
 			'subTypeOf' => array(
@@ -7742,7 +7784,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BoatTrip' => array(
 			'subTypeOf' => array(
@@ -7777,7 +7821,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyMeasurementArm' => array(
 			'subTypeOf' => array(
@@ -7791,7 +7837,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyMeasurementBust' => array(
 			'subTypeOf' => array(
@@ -7805,7 +7853,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyMeasurementChest' => array(
 			'subTypeOf' => array(
@@ -7819,7 +7869,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyMeasurementFoot' => array(
 			'subTypeOf' => array(
@@ -7833,7 +7885,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyMeasurementHand' => array(
 			'subTypeOf' => array(
@@ -7847,7 +7901,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyMeasurementHead' => array(
 			'subTypeOf' => array(
@@ -7861,7 +7917,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyMeasurementHeight' => array(
 			'subTypeOf' => array(
@@ -7875,7 +7933,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyMeasurementHips' => array(
 			'subTypeOf' => array(
@@ -7889,7 +7949,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyMeasurementInsideLeg' => array(
 			'subTypeOf' => array(
@@ -7903,7 +7965,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyMeasurementNeck' => array(
 			'subTypeOf' => array(
@@ -7917,7 +7981,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyMeasurementTypeEnumeration' => array(
 			'subTypeOf' => array(
@@ -7929,7 +7995,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyMeasurementUnderbust' => array(
 			'subTypeOf' => array(
@@ -7943,7 +8011,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyMeasurementWaist' => array(
 			'subTypeOf' => array(
@@ -7957,7 +8027,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyMeasurementWeight' => array(
 			'subTypeOf' => array(
@@ -7971,7 +8043,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BodyOfWater' => array(
 			'subTypeOf' => array(
@@ -9305,7 +9379,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BuddhistTemple' => array(
 			'subTypeOf' => array(
@@ -9497,7 +9573,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'BusReservation' => array(
 			'subTypeOf' => array(
@@ -9848,7 +9926,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'BuyAction' => array(
 			'subTypeOf' => array(
@@ -9933,7 +10013,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'CDFormat' => array(
 			'subTypeOf' => array(
@@ -10607,7 +10689,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'Cardiovascular' => array(
 			'subTypeOf' => array(
@@ -10823,7 +10907,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'CategoryCodeSet' => array(
 			'subTypeOf' => array(
@@ -10963,7 +11049,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'CatholicChurch' => array(
 			'subTypeOf' => array(
@@ -11048,7 +11136,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Cemetery' => array(
 			'subTypeOf' => array(
@@ -11260,7 +11350,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'CharitableIncorporatedOrganization' => array(
 			'subTypeOf' => array(
@@ -11274,7 +11366,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'CheckAction' => array(
 			'subTypeOf' => array(
@@ -11582,7 +11676,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ChildCare' => array(
 			'subTypeOf' => array(
@@ -12290,7 +12386,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ClaimReview' => array(
 			'subTypeOf' => array(
@@ -12466,7 +12564,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://meta.schema.org'
+			)
 		),
 		'CleaningFee' => array(
 			'subTypeOf' => array(
@@ -12480,7 +12580,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Clinician' => array(
 			'subTypeOf' => array(
@@ -13086,7 +13188,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'CollectionPage' => array(
 			'subTypeOf' => array(
@@ -13708,7 +13812,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'ComicIssue' => array(
 			'subTypeOf' => array(
@@ -13856,7 +13962,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'ComicSeries' => array(
 			'subTypeOf' => array(
@@ -13997,7 +14105,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'ComicStory' => array(
 			'subTypeOf' => array(
@@ -14142,7 +14252,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'Comment' => array(
 			'subTypeOf' => array(
@@ -14688,7 +14800,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Completed' => array(
 			'subTypeOf' => array(
@@ -15040,7 +15154,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ConstraintNode' => array(
 			'subTypeOf' => array(
@@ -15069,7 +15185,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ConsumeAction' => array(
 			'subTypeOf' => array(
@@ -15329,7 +15447,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Continent' => array(
 			'subTypeOf' => array(
@@ -15982,7 +16102,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Country' => array(
 			'subTypeOf' => array(
@@ -16496,7 +16618,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'CovidTestingFacility' => array(
 			'subTypeOf' => array(
@@ -16629,7 +16753,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'CreateAction' => array(
 			'subTypeOf' => array(
@@ -17476,7 +17602,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'CrossSectional' => array(
 			'subTypeOf' => array(
@@ -17502,7 +17630,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'CurrencyConversionService' => array(
 			'subTypeOf' => array(
@@ -17803,7 +17933,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'DataCatalog' => array(
 			'subTypeOf' => array(
@@ -18702,7 +18834,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'DefenceEstablishment' => array(
 			'subTypeOf' => array(
@@ -18803,7 +18937,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'DefinedTerm' => array(
 			'subTypeOf' => array(
@@ -18832,7 +18968,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'DefinedTermSet' => array(
 			'subTypeOf' => array(
@@ -18973,7 +19111,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'DefinitiveLegalValue' => array(
 			'subTypeOf' => array(
@@ -18987,7 +19127,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'DeleteAction' => array(
 			'subTypeOf' => array(
@@ -19175,7 +19317,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Demand' => array(
 			'subTypeOf' => array(
@@ -19262,7 +19406,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Dentist' => array(
 			'subTypeOf' => array(
@@ -19799,7 +19945,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'DiabeticDiet' => array(
 			'subTypeOf' => array(
@@ -20566,7 +20714,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'DisabilitySupport' => array(
 			'subTypeOf' => array(
@@ -20580,7 +20730,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'DisagreeAction' => array(
 			'subTypeOf' => array(
@@ -20891,7 +21043,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Distillery' => array(
 			'subTypeOf' => array(
@@ -21174,7 +21328,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'DrawAction' => array(
 			'subTypeOf' => array(
@@ -21349,7 +21505,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'DrinkAction' => array(
 			'subTypeOf' => array(
@@ -21423,7 +21581,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'Drug' => array(
 			'subTypeOf' => array(
@@ -21920,7 +22080,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EUEnergyEfficiencyCategoryA1Plus' => array(
 			'subTypeOf' => array(
@@ -21934,7 +22096,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EUEnergyEfficiencyCategoryA2Plus' => array(
 			'subTypeOf' => array(
@@ -21948,7 +22112,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EUEnergyEfficiencyCategoryA3Plus' => array(
 			'subTypeOf' => array(
@@ -21962,7 +22128,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EUEnergyEfficiencyCategoryB' => array(
 			'subTypeOf' => array(
@@ -21976,7 +22144,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EUEnergyEfficiencyCategoryC' => array(
 			'subTypeOf' => array(
@@ -21990,7 +22160,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EUEnergyEfficiencyCategoryD' => array(
 			'subTypeOf' => array(
@@ -22004,7 +22176,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EUEnergyEfficiencyCategoryE' => array(
 			'subTypeOf' => array(
@@ -22018,7 +22192,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EUEnergyEfficiencyCategoryF' => array(
 			'subTypeOf' => array(
@@ -22032,7 +22208,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EUEnergyEfficiencyCategoryG' => array(
 			'subTypeOf' => array(
@@ -22046,7 +22224,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EUEnergyEfficiencyEnumeration' => array(
 			'subTypeOf' => array(
@@ -22058,7 +22238,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Ear' => array(
 			'subTypeOf' => array(
@@ -22125,7 +22307,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EducationEvent' => array(
 			'subTypeOf' => array(
@@ -22365,7 +22549,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EducationalOccupationalProgram' => array(
 			'subTypeOf' => array(
@@ -22416,7 +22602,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EducationalOrganization' => array(
 			'subTypeOf' => array(
@@ -22563,7 +22751,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Electrician' => array(
 			'subTypeOf' => array(
@@ -23642,7 +23832,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EmploymentAgency' => array(
 			'subTypeOf' => array(
@@ -23907,7 +24099,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EnergyEfficiencyEnumeration' => array(
 			'subTypeOf' => array(
@@ -23922,7 +24116,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EnergyStarCertified' => array(
 			'subTypeOf' => array(
@@ -23936,7 +24132,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EnergyStarEnergyEfficiencyEnumeration' => array(
 			'subTypeOf' => array(
@@ -23948,7 +24146,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EngineSpecification' => array(
 			'subTypeOf' => array(
@@ -24493,7 +24693,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EventCancelled' => array(
 			'subTypeOf' => array(
@@ -24668,7 +24870,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'EventStatusType' => array(
 			'subTypeOf' => array(
@@ -24807,7 +25011,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ExchangeRateSpecification' => array(
 			'subTypeOf' => array(
@@ -24835,7 +25041,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ExchangeRefund' => array(
 			'subTypeOf' => array(
@@ -24849,7 +25057,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ExerciseAction' => array(
 			'subTypeOf' => array(
@@ -26324,7 +26534,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Florist' => array(
 			'subTypeOf' => array(
@@ -26819,7 +27031,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Friday' => array(
 			'subTypeOf' => array(
@@ -26861,7 +27075,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'FullRefund' => array(
 			'subTypeOf' => array(
@@ -26875,7 +27091,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'FundingAgency' => array(
 			'subTypeOf' => array(
@@ -26967,7 +27185,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'FundingScheme' => array(
 			'subTypeOf' => array(
@@ -27059,7 +27279,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Fungus' => array(
 			'subTypeOf' => array(
@@ -27359,7 +27581,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'GamePlayMode' => array(
 			'subTypeOf' => array(
@@ -27808,7 +28032,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'GeneralContractor' => array(
 			'subTypeOf' => array(
@@ -27951,7 +28177,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Genetic' => array(
 			'subTypeOf' => array(
@@ -28115,7 +28343,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Geriatric' => array(
 			'subTypeOf' => array(
@@ -28261,7 +28491,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'GiveAction' => array(
 			'subTypeOf' => array(
@@ -28456,7 +28688,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'GovernmentBuilding' => array(
 			'subTypeOf' => array(
@@ -28869,7 +29103,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'GraphicNovel' => array(
 			'subTypeOf' => array(
@@ -28883,7 +29119,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'GroceryStore' => array(
 			'subTypeOf' => array(
@@ -29165,7 +29403,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Gynecologic' => array(
 			'subTypeOf' => array(
@@ -29492,7 +29732,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'HairSalon' => array(
 			'subTypeOf' => array(
@@ -29940,7 +30182,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'HealthCare' => array(
 			'subTypeOf' => array(
@@ -29954,7 +30198,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'HealthClub' => array(
 			'subTypeOf' => array(
@@ -30118,7 +30364,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'HealthPlanCostSharingSpecification' => array(
 			'subTypeOf' => array(
@@ -30148,7 +30396,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'HealthPlanFormulary' => array(
 			'subTypeOf' => array(
@@ -30176,7 +30426,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'HealthPlanNetwork' => array(
 			'subTypeOf' => array(
@@ -30204,7 +30456,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'HealthTopicContent' => array(
 			'subTypeOf' => array(
@@ -30343,7 +30597,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'HealthcareConsideration' => array(
 			'subTypeOf' => array(
@@ -30357,7 +30613,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'HearingImpairedSupported' => array(
 			'subTypeOf' => array(
@@ -31728,7 +31986,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'HowOrWhereHealthAspect' => array(
 			'subTypeOf' => array(
@@ -31742,7 +32002,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'HowTo' => array(
 			'subTypeOf' => array(
@@ -32709,7 +32971,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'HyperTocEntry' => array(
 			'subTypeOf' => array(
@@ -32849,7 +33113,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'IOSPlatform' => array(
 			'subTypeOf' => array(
@@ -32863,7 +33129,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'IceCreamShop' => array(
 			'subTypeOf' => array(
@@ -33507,7 +33775,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ImagingTest' => array(
 			'subTypeOf' => array(
@@ -33560,7 +33830,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'InStock' => array(
 			'subTypeOf' => array(
@@ -33807,7 +34079,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'InsertAction' => array(
 			'subTypeOf' => array(
@@ -33903,7 +34177,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'InsuranceAgency' => array(
 			'subTypeOf' => array(
@@ -34418,7 +34694,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'InvestmentOrDeposit' => array(
 			'subTypeOf' => array(
@@ -34572,7 +34850,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ItemAvailability' => array(
 			'subTypeOf' => array(
@@ -35517,7 +35797,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'LeaveAction' => array(
 			'subTypeOf' => array(
@@ -35581,7 +35863,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'LegalService' => array(
 			'subTypeOf' => array(
@@ -35725,7 +36009,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Legislation' => array(
 			'subTypeOf' => array(
@@ -35878,7 +36164,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'LegislationObject' => array(
 			'subTypeOf' => array(
@@ -36049,7 +36337,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'LegislativeBuilding' => array(
 			'subTypeOf' => array(
@@ -36395,7 +36685,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'LifestyleModification' => array(
 			'subTypeOf' => array(
@@ -36537,7 +36829,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'LinkRole' => array(
 			'subTypeOf' => array(
@@ -36568,7 +36862,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'LiquorStore' => array(
 			'subTypeOf' => array(
@@ -36746,7 +37042,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ListenAction' => array(
 			'subTypeOf' => array(
@@ -37029,7 +37327,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'LoanOrCredit' => array(
 			'subTypeOf' => array(
@@ -37816,7 +38116,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Male' => array(
 			'subTypeOf' => array(
@@ -37968,7 +38270,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Map' => array(
 			'subTypeOf' => array(
@@ -38320,7 +38624,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MaximumDoseSchedule' => array(
 			'subTypeOf' => array(
@@ -38371,7 +38677,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MeasurementMethodEnum' => array(
 			'subTypeOf' => array(
@@ -38383,7 +38691,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MeasurementTypeEnumeration' => array(
 			'subTypeOf' => array(
@@ -38398,7 +38708,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MediaGallery' => array(
 			'subTypeOf' => array(
@@ -38561,7 +38873,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MediaObject' => array(
 			'subTypeOf' => array(
@@ -38877,7 +39191,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MediaReviewItem' => array(
 			'subTypeOf' => array(
@@ -39016,7 +39332,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MediaSubscription' => array(
 			'subTypeOf' => array(
@@ -41547,7 +41865,9 @@
 				'ProductReturnEnumeration'
 			),
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MerchantReturnFiniteReturnWindow' => array(
 			'subTypeOf' => array(
@@ -41563,7 +41883,9 @@
 				'ProductReturnFiniteReturnWindow'
 			),
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MerchantReturnNotPermitted' => array(
 			'subTypeOf' => array(
@@ -41579,7 +41901,9 @@
 				'ProductReturnNotPermitted'
 			),
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MerchantReturnPolicy' => array(
 			'subTypeOf' => array(
@@ -41627,7 +41951,9 @@
 				'ProductReturnPolicy'
 			),
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MerchantReturnPolicySeasonalOverride' => array(
 			'subTypeOf' => array(
@@ -41656,7 +41982,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MerchantReturnUnlimitedWindow' => array(
 			'subTypeOf' => array(
@@ -41672,7 +42000,9 @@
 				'ProductReturnUnlimitedWindow'
 			),
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MerchantReturnUnspecified' => array(
 			'subTypeOf' => array(
@@ -41688,7 +42018,9 @@
 				'ProductReturnUnspecified'
 			),
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Message' => array(
 			'subTypeOf' => array(
@@ -42108,7 +42440,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MisconceptionsHealthAspect' => array(
 			'subTypeOf' => array(
@@ -42122,7 +42456,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MixedEventAttendanceMode' => array(
 			'subTypeOf' => array(
@@ -42136,7 +42472,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MixtapeAlbum' => array(
 			'subTypeOf' => array(
@@ -42456,7 +42794,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MolecularEntity' => array(
 			'subTypeOf' => array(
@@ -42503,7 +42843,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Monday' => array(
 			'subTypeOf' => array(
@@ -42611,7 +42953,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MoneyTransfer' => array(
 			'subTypeOf' => array(
@@ -42652,7 +42996,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'MortgageLoan' => array(
 			'subTypeOf' => array(
@@ -42715,7 +43061,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Mosque' => array(
 			'subTypeOf' => array(
@@ -43041,7 +43389,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'MotorcycleDealer' => array(
 			'subTypeOf' => array(
@@ -43418,7 +43768,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'Mountain' => array(
 			'subTypeOf' => array(
@@ -45940,7 +46292,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'NailSalon' => array(
 			'subTypeOf' => array(
@@ -46083,7 +46437,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Neck' => array(
 			'subTypeOf' => array(
@@ -46438,7 +46794,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Newspaper' => array(
 			'subTypeOf' => array(
@@ -46579,7 +46937,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'NightClub' => array(
 			'subTypeOf' => array(
@@ -46736,7 +47096,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c1' => array(
 			'subTypeOf' => array(
@@ -46750,7 +47112,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c10' => array(
 			'subTypeOf' => array(
@@ -46764,7 +47128,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c11' => array(
 			'subTypeOf' => array(
@@ -46778,7 +47144,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c12' => array(
 			'subTypeOf' => array(
@@ -46792,7 +47160,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c13' => array(
 			'subTypeOf' => array(
@@ -46806,7 +47176,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c14' => array(
 			'subTypeOf' => array(
@@ -46820,7 +47192,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c15' => array(
 			'subTypeOf' => array(
@@ -46834,7 +47208,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c16' => array(
 			'subTypeOf' => array(
@@ -46848,7 +47224,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c17' => array(
 			'subTypeOf' => array(
@@ -46862,7 +47240,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c18' => array(
 			'subTypeOf' => array(
@@ -46876,7 +47256,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c19' => array(
 			'subTypeOf' => array(
@@ -46890,7 +47272,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c2' => array(
 			'subTypeOf' => array(
@@ -46904,7 +47288,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c20' => array(
 			'subTypeOf' => array(
@@ -46918,7 +47304,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c21' => array(
 			'subTypeOf' => array(
@@ -46932,7 +47320,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c22' => array(
 			'subTypeOf' => array(
@@ -46946,7 +47336,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c23' => array(
 			'subTypeOf' => array(
@@ -46960,7 +47352,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c24' => array(
 			'subTypeOf' => array(
@@ -46974,7 +47368,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c25' => array(
 			'subTypeOf' => array(
@@ -46988,7 +47384,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c26' => array(
 			'subTypeOf' => array(
@@ -47002,7 +47400,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c27' => array(
 			'subTypeOf' => array(
@@ -47016,7 +47416,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c28' => array(
 			'subTypeOf' => array(
@@ -47030,7 +47432,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c3' => array(
 			'subTypeOf' => array(
@@ -47044,7 +47448,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c4' => array(
 			'subTypeOf' => array(
@@ -47058,7 +47464,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c5' => array(
 			'subTypeOf' => array(
@@ -47072,7 +47480,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c6' => array(
 			'subTypeOf' => array(
@@ -47086,7 +47496,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c7' => array(
 			'subTypeOf' => array(
@@ -47100,7 +47512,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c8' => array(
 			'subTypeOf' => array(
@@ -47114,7 +47528,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501c9' => array(
 			'subTypeOf' => array(
@@ -47128,7 +47544,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501d' => array(
 			'subTypeOf' => array(
@@ -47142,7 +47560,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501e' => array(
 			'subTypeOf' => array(
@@ -47156,7 +47576,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501f' => array(
 			'subTypeOf' => array(
@@ -47170,7 +47592,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501k' => array(
 			'subTypeOf' => array(
@@ -47184,7 +47608,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501n' => array(
 			'subTypeOf' => array(
@@ -47198,7 +47624,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit501q' => array(
 			'subTypeOf' => array(
@@ -47212,7 +47640,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nonprofit527' => array(
 			'subTypeOf' => array(
@@ -47226,7 +47656,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'NonprofitANBI' => array(
 			'subTypeOf' => array(
@@ -47240,7 +47672,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'NonprofitSBBI' => array(
 			'subTypeOf' => array(
@@ -47254,7 +47688,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'NonprofitType' => array(
 			'subTypeOf' => array(
@@ -47270,7 +47706,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Nose' => array(
 			'subTypeOf' => array(
@@ -47298,7 +47736,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'NotYetRecruiting' => array(
 			'subTypeOf' => array(
@@ -47819,7 +48259,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Observational' => array(
 			'subTypeOf' => array(
@@ -48038,7 +48480,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'OccupationalTherapy' => array(
 			'subTypeOf' => array(
@@ -48337,7 +48781,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'OfferForPurchase' => array(
 			'subTypeOf' => array(
@@ -48413,7 +48859,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'OfferItemCondition' => array(
 			'subTypeOf' => array(
@@ -48462,7 +48910,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'OfficeEquipmentStore' => array(
 			'subTypeOf' => array(
@@ -48605,7 +49055,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'OfflineEventAttendanceMode' => array(
 			'subTypeOf' => array(
@@ -48619,7 +49071,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'OfflinePermanently' => array(
 			'subTypeOf' => array(
@@ -48876,7 +49330,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Online' => array(
 			'subTypeOf' => array(
@@ -48984,7 +49440,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'OnlineEventAttendanceMode' => array(
 			'subTypeOf' => array(
@@ -48998,7 +49456,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'OnlineFull' => array(
 			'subTypeOf' => array(
@@ -49118,7 +49578,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'OpenTrial' => array(
 			'subTypeOf' => array(
@@ -49313,7 +49775,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Optician' => array(
 			'subTypeOf' => array(
@@ -50016,7 +50480,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'OriginalShippingFees' => array(
 			'subTypeOf' => array(
@@ -50030,7 +50496,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Osteopathic' => array(
 			'subTypeOf' => array(
@@ -50333,7 +50801,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'OwnershipInfo' => array(
 			'subTypeOf' => array(
@@ -50390,7 +50860,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'PaintAction' => array(
 			'subTypeOf' => array(
@@ -50728,7 +51200,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Park' => array(
 			'subTypeOf' => array(
@@ -50898,7 +51372,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Pathology' => array(
 			'subTypeOf' => array(
@@ -51069,7 +51545,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'PawnShop' => array(
 			'subTypeOf' => array(
@@ -53513,7 +53991,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'PlayAction' => array(
 			'subTypeOf' => array(
@@ -53595,7 +54075,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Playground' => array(
 			'subTypeOf' => array(
@@ -53944,7 +54426,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'PodcastSeason' => array(
 			'subTypeOf' => array(
@@ -54093,7 +54577,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'PodcastSeries' => array(
 			'subTypeOf' => array(
@@ -54236,7 +54722,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Podiatric' => array(
 			'subTypeOf' => array(
@@ -54857,7 +55345,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Poster' => array(
 			'subTypeOf' => array(
@@ -54995,7 +55485,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'PotentialActionStatus' => array(
 			'subTypeOf' => array(
@@ -55091,7 +55583,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'PrependAction' => array(
 			'subTypeOf' => array(
@@ -55423,7 +55917,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'PreventionIndication' => array(
 			'subTypeOf' => array(
@@ -55468,7 +55964,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'PriceSpecification' => array(
 			'subTypeOf' => array(
@@ -55519,7 +56017,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'PrimaryCare' => array(
 			'subTypeOf' => array(
@@ -55938,7 +56438,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ProductGroup' => array(
 			'subTypeOf' => array(
@@ -56022,7 +56524,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ProductModel' => array(
 			'subTypeOf' => array(
@@ -56396,7 +56900,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ProgramMembership' => array(
 			'subTypeOf' => array(
@@ -56522,7 +57028,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'PronounceableText' => array(
 			'subTypeOf' => array(
@@ -56539,7 +57047,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Property' => array(
 			'subTypeOf' => array(
@@ -56570,7 +57080,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://meta.schema.org'
+			)
 		),
 		'PropertyValue' => array(
 			'subTypeOf' => array(
@@ -56681,7 +57193,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Protozoa' => array(
 			'subTypeOf' => array(
@@ -57215,7 +57729,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'PublicationEvent' => array(
 			'subTypeOf' => array(
@@ -58144,7 +58660,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Quotation' => array(
 			'subTypeOf' => array(
@@ -58283,7 +58801,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'QuoteAction' => array(
 			'subTypeOf' => array(
@@ -58499,7 +59019,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'RadioChannel' => array(
 			'subTypeOf' => array(
@@ -59702,7 +60224,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'RearWheelDriveConfiguration' => array(
 			'subTypeOf' => array(
@@ -60062,7 +60586,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'RecommendedDoseSchedule' => array(
 			'subTypeOf' => array(
@@ -60256,7 +60782,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'RefundTypeEnumeration' => array(
 			'subTypeOf' => array(
@@ -60268,7 +60796,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'RefurbishedCondition' => array(
 			'subTypeOf' => array(
@@ -60398,7 +60928,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'RemixAlbum' => array(
 			'subTypeOf' => array(
@@ -60524,7 +61056,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'RepaymentSpecification' => array(
 			'subTypeOf' => array(
@@ -60554,7 +61088,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ReplaceAction' => array(
 			'subTypeOf' => array(
@@ -60935,7 +61471,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ReportedDoseSchedule' => array(
 			'subTypeOf' => array(
@@ -61064,7 +61602,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ResearchProject' => array(
 			'subTypeOf' => array(
@@ -61156,7 +61696,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Researcher' => array(
 			'subTypeOf' => array(
@@ -61822,7 +62364,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'RestrictedDiet' => array(
 			'subTypeOf' => array(
@@ -61967,7 +62511,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ReturnByMail' => array(
 			'subTypeOf' => array(
@@ -61981,7 +62527,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ReturnFeesCustomerResponsibility' => array(
 			'subTypeOf' => array(
@@ -61995,7 +62543,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ReturnFeesEnumeration' => array(
 			'subTypeOf' => array(
@@ -62007,7 +62557,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ReturnInStore' => array(
 			'subTypeOf' => array(
@@ -62021,7 +62573,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ReturnLabelCustomerResponsibility' => array(
 			'subTypeOf' => array(
@@ -62035,7 +62589,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ReturnLabelDownloadAndPrint' => array(
 			'subTypeOf' => array(
@@ -62049,7 +62605,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ReturnLabelInBox' => array(
 			'subTypeOf' => array(
@@ -62063,7 +62621,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ReturnLabelSourceEnumeration' => array(
 			'subTypeOf' => array(
@@ -62075,7 +62635,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ReturnMethodEnumeration' => array(
 			'subTypeOf' => array(
@@ -62087,7 +62649,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ReturnShippingFees' => array(
 			'subTypeOf' => array(
@@ -62101,7 +62665,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Review' => array(
 			'subTypeOf' => array(
@@ -62454,7 +63020,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Rheumatologic' => array(
 			'subTypeOf' => array(
@@ -62496,7 +63064,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'RiverBodyOfWater' => array(
 			'subTypeOf' => array(
@@ -62929,7 +63499,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SafetyHealthAspect' => array(
 			'subTypeOf' => array(
@@ -62943,7 +63515,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SaleEvent' => array(
 			'subTypeOf' => array(
@@ -63023,7 +63597,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SatireOrParodyContent' => array(
 			'subTypeOf' => array(
@@ -63037,7 +63613,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SatiricalArticle' => array(
 			'subTypeOf' => array(
@@ -63183,7 +63761,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Saturday' => array(
 			'subTypeOf' => array(
@@ -63235,7 +63815,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ScheduleAction' => array(
 			'subTypeOf' => array(
@@ -63616,7 +64198,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ScreeningEvent' => array(
 			'subTypeOf' => array(
@@ -63699,7 +64283,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Sculpture' => array(
 			'subTypeOf' => array(
@@ -64037,7 +64623,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SearchResultsPage' => array(
 			'subTypeOf' => array(
@@ -64382,7 +64970,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SeekToAction' => array(
 			'subTypeOf' => array(
@@ -64420,7 +65010,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SelfCareHealthAspect' => array(
 			'subTypeOf' => array(
@@ -64434,7 +65026,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SelfStorage' => array(
 			'subTypeOf' => array(
@@ -64779,7 +65373,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ShareAction' => array(
 			'subTypeOf' => array(
@@ -64958,7 +65554,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ShippingDeliveryTime' => array(
 			'subTypeOf' => array(
@@ -64987,7 +65585,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ShippingRateSettings' => array(
 			'subTypeOf' => array(
@@ -65018,7 +65618,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ShoeStore' => array(
 			'subTypeOf' => array(
@@ -65414,7 +66016,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SideEffectsHealthAspect' => array(
 			'subTypeOf' => array(
@@ -65428,7 +66032,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SingleBlindedTrial' => array(
 			'subTypeOf' => array(
@@ -65723,7 +66329,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SizeSpecification' => array(
 			'subTypeOf' => array(
@@ -65750,7 +66358,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SizeSystemEnumeration' => array(
 			'subTypeOf' => array(
@@ -65764,7 +66374,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SizeSystemImperial' => array(
 			'subTypeOf' => array(
@@ -65778,7 +66390,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SizeSystemMetric' => array(
 			'subTypeOf' => array(
@@ -65792,7 +66406,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SkiResort' => array(
 			'subTypeOf' => array(
@@ -66524,7 +67140,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SomeProducts' => array(
 			'subTypeOf' => array(
@@ -66798,7 +67416,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Specialty' => array(
 			'subTypeOf' => array(
@@ -67781,7 +68401,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'StagesHealthAspect' => array(
 			'subTypeOf' => array(
@@ -67795,7 +68417,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'State' => array(
 			'subTypeOf' => array(
@@ -68003,7 +68627,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'StatisticalPopulation' => array(
 			'subTypeOf' => array(
@@ -68029,7 +68655,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'StatisticalVariable' => array(
 			'subTypeOf' => array(
@@ -68063,7 +68691,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'StatusEnumeration' => array(
 			'subTypeOf' => array(
@@ -68278,7 +68908,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'StrengthTraining' => array(
 			'subTypeOf' => array(
@@ -68408,7 +69040,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Substance' => array(
 			'subTypeOf' => array(
@@ -68901,7 +69535,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'SymptomsHealthAspect' => array(
 			'subTypeOf' => array(
@@ -68915,7 +69551,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Synagogue' => array(
 			'subTypeOf' => array(
@@ -70133,7 +70771,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://auto.schema.org'
+			)
 		),
 		'Taxon' => array(
 			'subTypeOf' => array(
@@ -70162,7 +70802,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'TechArticle' => array(
 			'subTypeOf' => array(
@@ -71285,7 +71927,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://bib.schema.org'
+			)
 		),
 		'Thing' => array(
 			'subTypeOf' => '',
@@ -71613,7 +72257,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'TollFree' => array(
 			'subTypeOf' => array(
@@ -71771,7 +72417,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'TouristInformationCenter' => array(
 			'subTypeOf' => array(
@@ -71934,7 +72582,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Toxicologic' => array(
 			'subTypeOf' => array(
@@ -72390,7 +73040,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'TransitMap' => array(
 			'subTypeOf' => array(
@@ -72620,7 +73272,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Trip' => array(
 			'subTypeOf' => array(
@@ -72741,7 +73395,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'UKNonprofitType' => array(
 			'subTypeOf' => array(
@@ -72753,7 +73409,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'UKTrust' => array(
 			'subTypeOf' => array(
@@ -72767,7 +73425,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'URL' => array(
 			'subTypeOf' => array(
@@ -72791,7 +73451,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Ultrasound' => array(
 			'subTypeOf' => array(
@@ -72856,7 +73518,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'UnemploymentSupport' => array(
 			'subTypeOf' => array(
@@ -72870,7 +73534,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'UnincorporatedAssociationCharity' => array(
 			'subTypeOf' => array(
@@ -72884,7 +73550,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'UnitPriceSpecification' => array(
 			'subTypeOf' => array(
@@ -72940,7 +73608,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'UpdateAction' => array(
 			'subTypeOf' => array(
@@ -73011,7 +73681,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'UseAction' => array(
 			'subTypeOf' => array(
@@ -73840,7 +74512,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'UserTweets' => array(
 			'subTypeOf' => array(
@@ -75368,7 +76042,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'ViewAction' => array(
 			'subTypeOf' => array(
@@ -75435,7 +76111,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'VirtualLocation' => array(
 			'subTypeOf' => array(
@@ -75460,7 +76138,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'Virus' => array(
 			'subTypeOf' => array(
@@ -76613,7 +77293,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearAction' => array(
 			'subTypeOf' => array(
@@ -76666,7 +77348,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableMeasurementChestOrBust' => array(
 			'subTypeOf' => array(
@@ -76680,7 +77364,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableMeasurementCollar' => array(
 			'subTypeOf' => array(
@@ -76694,7 +77380,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableMeasurementCup' => array(
 			'subTypeOf' => array(
@@ -76708,7 +77396,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableMeasurementHeight' => array(
 			'subTypeOf' => array(
@@ -76722,7 +77412,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableMeasurementHips' => array(
 			'subTypeOf' => array(
@@ -76736,7 +77428,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableMeasurementInseam' => array(
 			'subTypeOf' => array(
@@ -76750,7 +77444,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableMeasurementLength' => array(
 			'subTypeOf' => array(
@@ -76764,7 +77460,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableMeasurementOutsideLeg' => array(
 			'subTypeOf' => array(
@@ -76778,7 +77476,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableMeasurementSleeve' => array(
 			'subTypeOf' => array(
@@ -76792,7 +77492,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableMeasurementTypeEnumeration' => array(
 			'subTypeOf' => array(
@@ -76804,7 +77506,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableMeasurementWaist' => array(
 			'subTypeOf' => array(
@@ -76818,7 +77522,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableMeasurementWidth' => array(
 			'subTypeOf' => array(
@@ -76832,7 +77538,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupBig' => array(
 			'subTypeOf' => array(
@@ -76846,7 +77554,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupBoys' => array(
 			'subTypeOf' => array(
@@ -76860,7 +77570,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupEnumeration' => array(
 			'subTypeOf' => array(
@@ -76872,7 +77584,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupExtraShort' => array(
 			'subTypeOf' => array(
@@ -76886,7 +77600,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupExtraTall' => array(
 			'subTypeOf' => array(
@@ -76900,7 +77616,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupGirls' => array(
 			'subTypeOf' => array(
@@ -76914,7 +77632,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupHusky' => array(
 			'subTypeOf' => array(
@@ -76928,7 +77648,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupInfants' => array(
 			'subTypeOf' => array(
@@ -76942,7 +77664,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupJuniors' => array(
 			'subTypeOf' => array(
@@ -76956,7 +77680,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupMaternity' => array(
 			'subTypeOf' => array(
@@ -76970,7 +77696,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupMens' => array(
 			'subTypeOf' => array(
@@ -76984,7 +77712,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupMisses' => array(
 			'subTypeOf' => array(
@@ -76998,7 +77728,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupPetite' => array(
 			'subTypeOf' => array(
@@ -77012,7 +77744,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupPlus' => array(
 			'subTypeOf' => array(
@@ -77026,7 +77760,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupRegular' => array(
 			'subTypeOf' => array(
@@ -77040,7 +77776,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupShort' => array(
 			'subTypeOf' => array(
@@ -77054,7 +77792,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupTall' => array(
 			'subTypeOf' => array(
@@ -77068,7 +77808,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeGroupWomens' => array(
 			'subTypeOf' => array(
@@ -77082,7 +77824,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemAU' => array(
 			'subTypeOf' => array(
@@ -77096,7 +77840,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemBR' => array(
 			'subTypeOf' => array(
@@ -77110,7 +77856,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemCN' => array(
 			'subTypeOf' => array(
@@ -77124,7 +77872,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemContinental' => array(
 			'subTypeOf' => array(
@@ -77138,7 +77888,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemDE' => array(
 			'subTypeOf' => array(
@@ -77152,7 +77904,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemEN13402' => array(
 			'subTypeOf' => array(
@@ -77166,7 +77920,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemEnumeration' => array(
 			'subTypeOf' => array(
@@ -77178,7 +77934,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemEurope' => array(
 			'subTypeOf' => array(
@@ -77192,7 +77950,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemFR' => array(
 			'subTypeOf' => array(
@@ -77206,7 +77966,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemGS1' => array(
 			'subTypeOf' => array(
@@ -77220,7 +77982,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemIT' => array(
 			'subTypeOf' => array(
@@ -77234,7 +77998,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemJP' => array(
 			'subTypeOf' => array(
@@ -77248,7 +78014,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemMX' => array(
 			'subTypeOf' => array(
@@ -77262,7 +78030,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemUK' => array(
 			'subTypeOf' => array(
@@ -77276,7 +78046,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WearableSizeSystemUS' => array(
 			'subTypeOf' => array(
@@ -77290,7 +78062,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WebAPI' => array(
 			'subTypeOf' => array(
@@ -77340,7 +78114,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WebApplication' => array(
 			'subTypeOf' => array(
@@ -77643,7 +78419,9 @@
 			),
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WebPage' => array(
 			'subTypeOf' => array(
@@ -78495,7 +79273,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'WorkersUnion' => array(
 			'subTypeOf' => array(
@@ -78652,7 +79432,9 @@
 			'subTypes' => '',
 			'supersedes' => '',
 			'supersededBy' => '',
-			'isPartOf' => ''
+			'isPartOf' => array(
+				'https://pending.schema.org'
+			)
 		),
 		'XRay' => array(
 			'subTypeOf' => array(
