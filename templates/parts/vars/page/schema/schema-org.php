@@ -163,7 +163,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AMRadioChannel' => array(
 			'subTypeOf' => array(
@@ -193,7 +194,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'APIReference' => array(
 			'subTypeOf' => array(
@@ -345,7 +347,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Abdomen' => array(
 			'subTypeOf' => array(
@@ -358,7 +361,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AboutPage' => array(
 			'subTypeOf' => array(
@@ -505,7 +509,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AcceptAction' => array(
 			'subTypeOf' => array(
@@ -541,7 +546,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Accommodation' => array(
 			'subTypeOf' => array(
@@ -631,7 +637,8 @@
 				'Suite'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AccountingService' => array(
 			'subTypeOf' => array(
@@ -760,7 +767,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AchieveAction' => array(
 			'subTypeOf' => array(
@@ -800,7 +808,8 @@
 				'WinAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Action' => array(
 			'subTypeOf' => array(
@@ -853,7 +862,8 @@
 				'UpdateAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ActionAccessSpecification' => array(
 			'subTypeOf' => array(
@@ -884,7 +894,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ActionStatusType' => array(
 			'subTypeOf' => array(
@@ -895,7 +906,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ActivateAction' => array(
 			'subTypeOf' => array(
@@ -931,7 +943,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ActivationFee' => array(
 			'subTypeOf' => array(
@@ -944,7 +957,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ActiveActionStatus' => array(
 			'subTypeOf' => array(
@@ -957,7 +971,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ActiveNotRecruiting' => array(
 			'subTypeOf' => array(
@@ -970,7 +985,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AddAction' => array(
 			'subTypeOf' => array(
@@ -1010,7 +1026,8 @@
 				'InsertAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AdministrativeArea' => array(
 			'subTypeOf' => array(
@@ -1084,7 +1101,8 @@
 				'State'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AdultEntertainment' => array(
 			'subTypeOf' => array(
@@ -1212,7 +1230,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AdultOrientedEnumeration' => array(
 			'subTypeOf' => array(
@@ -1223,7 +1242,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AdvertiserContentArticle' => array(
 			'subTypeOf' => array(
@@ -1368,7 +1388,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AerobicActivity' => array(
 			'subTypeOf' => array(
@@ -1381,7 +1402,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AggregateOffer' => array(
 			'subTypeOf' => array(
@@ -1460,7 +1482,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AggregateRating' => array(
 			'subTypeOf' => array(
@@ -1495,7 +1518,8 @@
 				'EmployerAggregateRating'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AgreeAction' => array(
 			'subTypeOf' => array(
@@ -1531,7 +1555,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Airline' => array(
 			'subTypeOf' => array(
@@ -1624,7 +1649,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Airport' => array(
 			'subTypeOf' => array(
@@ -1696,7 +1722,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AlbumRelease' => array(
 			'subTypeOf' => array(
@@ -1709,7 +1736,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AlcoholConsideration' => array(
 			'subTypeOf' => array(
@@ -1722,7 +1750,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AlignmentObject' => array(
 			'subTypeOf' => array(
@@ -1751,7 +1780,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AllWheelDriveConfiguration' => array(
 			'subTypeOf' => array(
@@ -1764,7 +1794,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AllergiesHealthAspect' => array(
 			'subTypeOf' => array(
@@ -1777,7 +1808,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AllocateAction' => array(
 			'subTypeOf' => array(
@@ -1818,7 +1850,8 @@
 				'RejectAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AmpStory' => array(
 			'subTypeOf' => array(
@@ -1974,7 +2007,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AmusementPark' => array(
 			'subTypeOf' => array(
@@ -2102,7 +2136,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AnaerobicActivity' => array(
 			'subTypeOf' => array(
@@ -2115,7 +2150,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AnalysisNewsArticle' => array(
 			'subTypeOf' => array(
@@ -2265,7 +2301,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AnatomicalStructure' => array(
 			'subTypeOf' => array(
@@ -2313,7 +2350,8 @@
 				'Vessel'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AnatomicalSystem' => array(
 			'subTypeOf' => array(
@@ -2350,7 +2388,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AndroidPlatform' => array(
 			'subTypeOf' => array(
@@ -2363,7 +2402,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Anesthesia' => array(
 			'subTypeOf' => array(
@@ -2376,7 +2416,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AnimalShelter' => array(
 			'subTypeOf' => array(
@@ -2504,7 +2545,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Answer' => array(
 			'subTypeOf' => array(
@@ -2645,7 +2687,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Apartment' => array(
 			'subTypeOf' => array(
@@ -2729,7 +2772,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ApartmentComplex' => array(
 			'subTypeOf' => array(
@@ -2803,7 +2847,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Appearance' => array(
 			'subTypeOf' => array(
@@ -2816,7 +2861,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AppendAction' => array(
 			'subTypeOf' => array(
@@ -2855,7 +2901,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ApplyAction' => array(
 			'subTypeOf' => array(
@@ -2891,7 +2938,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ApprovedIndication' => array(
 			'subTypeOf' => array(
@@ -2923,7 +2971,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Aquarium' => array(
 			'subTypeOf' => array(
@@ -2993,7 +3042,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ArchiveComponent' => array(
 			'subTypeOf' => array(
@@ -3132,7 +3182,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ArchiveOrganization' => array(
 			'subTypeOf' => array(
@@ -3261,7 +3312,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ArriveAction' => array(
 			'subTypeOf' => array(
@@ -3299,7 +3351,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ArtGallery' => array(
 			'subTypeOf' => array(
@@ -3427,7 +3480,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Artery' => array(
 			'subTypeOf' => array(
@@ -3471,7 +3525,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Article' => array(
 			'subTypeOf' => array(
@@ -3624,7 +3679,8 @@
 				'TechArticle'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AskAction' => array(
 			'subTypeOf' => array(
@@ -3665,7 +3721,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AskPublicNewsArticle' => array(
 			'subTypeOf' => array(
@@ -3815,7 +3872,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AssessAction' => array(
 			'subTypeOf' => array(
@@ -3856,7 +3914,8 @@
 				'ReviewAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AssignAction' => array(
 			'subTypeOf' => array(
@@ -3892,7 +3951,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Atlas' => array(
 			'subTypeOf' => array(
@@ -4029,7 +4089,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Attorney' => array(
 			'subTypeOf' => array(
@@ -4157,7 +4218,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Audience' => array(
 			'subTypeOf' => array(
@@ -4189,7 +4251,8 @@
 				'Researcher'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AudioObject' => array(
 			'subTypeOf' => array(
@@ -4350,7 +4413,8 @@
 				'Audiobook'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AudioObjectSnapshot' => array(
 			'subTypeOf' => array(
@@ -4508,7 +4572,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Audiobook' => array(
 			'subTypeOf' => array(
@@ -4674,7 +4739,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AudiobookFormat' => array(
 			'subTypeOf' => array(
@@ -4687,7 +4753,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AuthoritativeLegalValue' => array(
 			'subTypeOf' => array(
@@ -4700,7 +4767,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AuthorizeAction' => array(
 			'subTypeOf' => array(
@@ -4737,7 +4805,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AutoBodyShop' => array(
 			'subTypeOf' => array(
@@ -4865,7 +4934,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AutoDealer' => array(
 			'subTypeOf' => array(
@@ -4993,7 +5063,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AutoPartsStore' => array(
 			'subTypeOf' => array(
@@ -5122,7 +5193,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AutoRental' => array(
 			'subTypeOf' => array(
@@ -5250,7 +5322,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AutoRepair' => array(
 			'subTypeOf' => array(
@@ -5378,7 +5451,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AutoWash' => array(
 			'subTypeOf' => array(
@@ -5506,7 +5580,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AutomatedTeller' => array(
 			'subTypeOf' => array(
@@ -5635,7 +5710,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'AutomotiveBusiness' => array(
 			'subTypeOf' => array(
@@ -5773,7 +5849,8 @@
 				'MotorcycleRepair'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Ayurvedic' => array(
 			'subTypeOf' => array(
@@ -5786,7 +5863,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BackOrder' => array(
 			'subTypeOf' => array(
@@ -5799,7 +5877,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BackgroundNewsArticle' => array(
 			'subTypeOf' => array(
@@ -5949,7 +6028,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Bacteria' => array(
 			'subTypeOf' => array(
@@ -5962,7 +6042,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Bakery' => array(
 			'subTypeOf' => array(
@@ -6095,7 +6176,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Balance' => array(
 			'subTypeOf' => array(
@@ -6108,7 +6190,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BankAccount' => array(
 			'subTypeOf' => array(
@@ -6164,7 +6247,8 @@
 				'DepositAccount'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BankOrCreditUnion' => array(
 			'subTypeOf' => array(
@@ -6293,7 +6377,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BarOrPub' => array(
 			'subTypeOf' => array(
@@ -6426,7 +6511,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Barcode' => array(
 			'subTypeOf' => array(
@@ -6585,7 +6671,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BasicIncome' => array(
 			'subTypeOf' => array(
@@ -6598,7 +6685,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Beach' => array(
 			'subTypeOf' => array(
@@ -6668,7 +6756,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BeautySalon' => array(
 			'subTypeOf' => array(
@@ -6796,7 +6885,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BedAndBreakfast' => array(
 			'subTypeOf' => array(
@@ -6931,7 +7021,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BedDetails' => array(
 			'subTypeOf' => array(
@@ -6957,7 +7048,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BedType' => array(
 			'subTypeOf' => array(
@@ -6977,7 +7069,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BefriendAction' => array(
 			'subTypeOf' => array(
@@ -7013,7 +7106,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BenefitsHealthAspect' => array(
 			'subTypeOf' => array(
@@ -7026,7 +7120,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BikeStore' => array(
 			'subTypeOf' => array(
@@ -7154,7 +7249,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BioChemEntity' => array(
 			'subTypeOf' => array(
@@ -7196,7 +7292,8 @@
 				'Protein'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Blog' => array(
 			'subTypeOf' => array(
@@ -7336,7 +7433,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BlogPosting' => array(
 			'subTypeOf' => array(
@@ -7484,7 +7582,8 @@
 				'LiveBlogPosting'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BloodTest' => array(
 			'subTypeOf' => array(
@@ -7521,7 +7620,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BoardingPolicyType' => array(
 			'subTypeOf' => array(
@@ -7532,7 +7632,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BoatReservation' => array(
 			'subTypeOf' => array(
@@ -7569,7 +7670,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BoatTerminal' => array(
 			'subTypeOf' => array(
@@ -7639,7 +7741,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BoatTrip' => array(
 			'subTypeOf' => array(
@@ -7673,7 +7776,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyMeasurementArm' => array(
 			'subTypeOf' => array(
@@ -7686,7 +7790,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyMeasurementBust' => array(
 			'subTypeOf' => array(
@@ -7699,7 +7804,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyMeasurementChest' => array(
 			'subTypeOf' => array(
@@ -7712,7 +7818,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyMeasurementFoot' => array(
 			'subTypeOf' => array(
@@ -7725,7 +7832,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyMeasurementHand' => array(
 			'subTypeOf' => array(
@@ -7738,7 +7846,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyMeasurementHead' => array(
 			'subTypeOf' => array(
@@ -7751,7 +7860,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyMeasurementHeight' => array(
 			'subTypeOf' => array(
@@ -7764,7 +7874,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyMeasurementHips' => array(
 			'subTypeOf' => array(
@@ -7777,7 +7888,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyMeasurementInsideLeg' => array(
 			'subTypeOf' => array(
@@ -7790,7 +7902,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyMeasurementNeck' => array(
 			'subTypeOf' => array(
@@ -7803,7 +7916,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyMeasurementTypeEnumeration' => array(
 			'subTypeOf' => array(
@@ -7814,7 +7928,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyMeasurementUnderbust' => array(
 			'subTypeOf' => array(
@@ -7827,7 +7942,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyMeasurementWaist' => array(
 			'subTypeOf' => array(
@@ -7840,7 +7956,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyMeasurementWeight' => array(
 			'subTypeOf' => array(
@@ -7853,7 +7970,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BodyOfWater' => array(
 			'subTypeOf' => array(
@@ -7931,7 +8049,8 @@
 				'Waterfall'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Bone' => array(
 			'subTypeOf' => array(
@@ -7971,7 +8090,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Book' => array(
 			'subTypeOf' => array(
@@ -8116,7 +8236,8 @@
 				'Audiobook'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BookFormatType' => array(
 			'subTypeOf' => array(
@@ -8127,7 +8248,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BookSeries' => array(
 			'subTypeOf' => array(
@@ -8267,7 +8389,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BookStore' => array(
 			'subTypeOf' => array(
@@ -8395,7 +8518,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BookmarkAction' => array(
 			'subTypeOf' => array(
@@ -8431,7 +8555,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Boolean' => array(
 			'subTypeOf' => '',
@@ -8443,7 +8568,8 @@
 				'False'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BorrowAction' => array(
 			'subTypeOf' => array(
@@ -8482,7 +8608,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BowlingAlley' => array(
 			'subTypeOf' => array(
@@ -8610,7 +8737,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BrainStructure' => array(
 			'subTypeOf' => array(
@@ -8650,7 +8778,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Brand' => array(
 			'subTypeOf' => array(
@@ -8678,7 +8807,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BreadcrumbList' => array(
 			'subTypeOf' => array(
@@ -8705,7 +8835,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Brewery' => array(
 			'subTypeOf' => array(
@@ -8838,7 +8969,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Bridge' => array(
 			'subTypeOf' => array(
@@ -8908,7 +9040,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BroadcastChannel' => array(
 			'subTypeOf' => array(
@@ -8941,7 +9074,8 @@
 				'TelevisionChannel'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BroadcastEvent' => array(
 			'subTypeOf' => array(
@@ -9013,7 +9147,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BroadcastFrequencySpecification' => array(
 			'subTypeOf' => array(
@@ -9040,7 +9175,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BroadcastRelease' => array(
 			'subTypeOf' => array(
@@ -9053,7 +9189,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BroadcastService' => array(
 			'subTypeOf' => array(
@@ -9114,7 +9251,8 @@
 				'RadioBroadcastService'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BrokerageAccount' => array(
 			'subTypeOf' => array(
@@ -9166,7 +9304,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BuddhistTemple' => array(
 			'subTypeOf' => array(
@@ -9236,7 +9375,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BusOrCoach' => array(
 			'subTypeOf' => array(
@@ -9356,7 +9496,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BusReservation' => array(
 			'subTypeOf' => array(
@@ -9393,7 +9534,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BusStation' => array(
 			'subTypeOf' => array(
@@ -9463,7 +9605,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BusStop' => array(
 			'subTypeOf' => array(
@@ -9533,7 +9676,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BusTrip' => array(
 			'subTypeOf' => array(
@@ -9569,7 +9713,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BusinessAudience' => array(
 			'subTypeOf' => array(
@@ -9598,7 +9743,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BusinessEntityType' => array(
 			'subTypeOf' => array(
@@ -9609,7 +9755,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BusinessEvent' => array(
 			'subTypeOf' => array(
@@ -9674,7 +9821,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BusinessFunction' => array(
 			'subTypeOf' => array(
@@ -9685,7 +9833,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BusinessSupport' => array(
 			'subTypeOf' => array(
@@ -9698,7 +9847,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'BuyAction' => array(
 			'subTypeOf' => array(
@@ -9740,7 +9890,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CDCPMDRecord' => array(
 			'subTypeOf' => array(
@@ -9781,7 +9932,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CDFormat' => array(
 			'subTypeOf' => array(
@@ -9794,7 +9946,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CT' => array(
 			'subTypeOf' => array(
@@ -9807,7 +9960,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CableOrSatelliteService' => array(
 			'subTypeOf' => array(
@@ -9855,7 +10009,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CafeOrCoffeeShop' => array(
 			'subTypeOf' => array(
@@ -9988,7 +10143,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Campground' => array(
 			'subTypeOf' => array(
@@ -10124,7 +10280,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CampingPitch' => array(
 			'subTypeOf' => array(
@@ -10208,7 +10365,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Canal' => array(
 			'subTypeOf' => array(
@@ -10277,7 +10435,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CancelAction' => array(
 			'subTypeOf' => array(
@@ -10314,7 +10473,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Car' => array(
 			'subTypeOf' => array(
@@ -10434,7 +10594,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CarUsageType' => array(
 			'subTypeOf' => array(
@@ -10445,7 +10606,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Cardiovascular' => array(
 			'subTypeOf' => array(
@@ -10458,7 +10620,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CardiovascularExam' => array(
 			'subTypeOf' => array(
@@ -10471,7 +10634,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CaseSeries' => array(
 			'subTypeOf' => array(
@@ -10484,7 +10648,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Casino' => array(
 			'subTypeOf' => array(
@@ -10612,7 +10777,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CassetteFormat' => array(
 			'subTypeOf' => array(
@@ -10625,7 +10791,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CategoryCode' => array(
 			'subTypeOf' => array(
@@ -10655,7 +10822,8 @@
 				'MedicalCode'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CategoryCodeSet' => array(
 			'subTypeOf' => array(
@@ -10794,7 +10962,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CatholicChurch' => array(
 			'subTypeOf' => array(
@@ -10864,7 +11033,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CausesHealthAspect' => array(
 			'subTypeOf' => array(
@@ -10877,7 +11047,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Cemetery' => array(
 			'subTypeOf' => array(
@@ -10947,7 +11118,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Chapter' => array(
 			'subTypeOf' => array(
@@ -11087,7 +11259,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CharitableIncorporatedOrganization' => array(
 			'subTypeOf' => array(
@@ -11100,7 +11273,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CheckAction' => array(
 			'subTypeOf' => array(
@@ -11136,7 +11310,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CheckInAction' => array(
 			'subTypeOf' => array(
@@ -11176,7 +11351,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CheckOutAction' => array(
 			'subTypeOf' => array(
@@ -11216,7 +11392,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CheckoutPage' => array(
 			'subTypeOf' => array(
@@ -11363,7 +11540,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ChemicalSubstance' => array(
 			'subTypeOf' => array(
@@ -11403,7 +11581,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ChildCare' => array(
 			'subTypeOf' => array(
@@ -11531,7 +11710,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ChildrensEvent' => array(
 			'subTypeOf' => array(
@@ -11596,7 +11776,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Chiropractic' => array(
 			'subTypeOf' => array(
@@ -11609,7 +11790,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ChooseAction' => array(
 			'subTypeOf' => array(
@@ -11649,7 +11831,8 @@
 				'VoteAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Church' => array(
 			'subTypeOf' => array(
@@ -11721,7 +11904,8 @@
 				'CatholicChurch'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'City' => array(
 			'subTypeOf' => array(
@@ -11790,7 +11974,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CityHall' => array(
 			'subTypeOf' => array(
@@ -11860,7 +12045,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CivicStructure' => array(
 			'subTypeOf' => array(
@@ -11962,7 +12148,8 @@
 				'Zoo'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Claim' => array(
 			'subTypeOf' => array(
@@ -12102,7 +12289,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ClaimReview' => array(
 			'subTypeOf' => array(
@@ -12249,7 +12437,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Class' => array(
 			'subTypeOf' => array(
@@ -12276,7 +12465,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CleaningFee' => array(
 			'subTypeOf' => array(
@@ -12289,7 +12479,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Clinician' => array(
 			'subTypeOf' => array(
@@ -12302,7 +12493,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Clip' => array(
 			'subTypeOf' => array(
@@ -12455,7 +12647,8 @@
 				'VideoGameClip'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ClothingStore' => array(
 			'subTypeOf' => array(
@@ -12583,7 +12776,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CoOp' => array(
 			'subTypeOf' => array(
@@ -12596,7 +12790,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Code' => array(
 			'subTypeOf' => array(
@@ -12735,7 +12930,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'SoftwareSourceCode'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'CohortStudy' => array(
 			'subTypeOf' => array(
@@ -12748,7 +12944,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Collection' => array(
 			'subTypeOf' => array(
@@ -12888,7 +13085,8 @@
 				'ProductCollection'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CollectionPage' => array(
 			'subTypeOf' => array(
@@ -13037,7 +13235,8 @@
 				'MediaGallery'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CollegeOrUniversity' => array(
 			'subTypeOf' => array(
@@ -13161,7 +13360,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ComedyClub' => array(
 			'subTypeOf' => array(
@@ -13289,7 +13489,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ComedyEvent' => array(
 			'subTypeOf' => array(
@@ -13354,7 +13555,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ComicCoverArt' => array(
 			'subTypeOf' => array(
@@ -13505,7 +13707,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ComicIssue' => array(
 			'subTypeOf' => array(
@@ -13652,7 +13855,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ComicSeries' => array(
 			'subTypeOf' => array(
@@ -13792,7 +13996,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ComicStory' => array(
 			'subTypeOf' => array(
@@ -13936,7 +14141,8 @@
 				'ComicCoverArt'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Comment' => array(
 			'subTypeOf' => array(
@@ -14080,7 +14286,8 @@
 				'Question'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CommentAction' => array(
 			'subTypeOf' => array(
@@ -14121,7 +14328,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CommentPermission' => array(
 			'subTypeOf' => array(
@@ -14134,7 +14342,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CommunicateAction' => array(
 			'subTypeOf' => array(
@@ -14183,7 +14392,8 @@
 				'ShareAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CommunityHealth' => array(
 			'subTypeOf' => array(
@@ -14314,7 +14524,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CompilationAlbum' => array(
 			'subTypeOf' => array(
@@ -14327,7 +14538,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CompleteDataFeed' => array(
 			'subTypeOf' => array(
@@ -14475,7 +14687,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Completed' => array(
 			'subTypeOf' => array(
@@ -14488,7 +14701,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CompletedActionStatus' => array(
 			'subTypeOf' => array(
@@ -14501,7 +14715,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CompoundPriceSpecification' => array(
 			'subTypeOf' => array(
@@ -14536,7 +14751,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ComputerLanguage' => array(
 			'subTypeOf' => array(
@@ -14560,7 +14776,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ComputerStore' => array(
 			'subTypeOf' => array(
@@ -14688,7 +14905,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ConfirmAction' => array(
 			'subTypeOf' => array(
@@ -14729,7 +14947,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Consortium' => array(
 			'subTypeOf' => array(
@@ -14820,7 +15039,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ConstraintNode' => array(
 			'subTypeOf' => array(
@@ -14848,7 +15068,8 @@
 				'StatisticalVariable'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ConsumeAction' => array(
 			'subTypeOf' => array(
@@ -14896,7 +15117,8 @@
 				'WatchAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ContactPage' => array(
 			'subTypeOf' => array(
@@ -15043,7 +15265,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ContactPoint' => array(
 			'subTypeOf' => array(
@@ -15079,7 +15302,8 @@
 				'PostalAddress'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ContactPointOption' => array(
 			'subTypeOf' => array(
@@ -15090,7 +15314,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ContagiousnessHealthAspect' => array(
 			'subTypeOf' => array(
@@ -15103,7 +15328,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Continent' => array(
 			'subTypeOf' => array(
@@ -15172,7 +15398,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ControlAction' => array(
 			'subTypeOf' => array(
@@ -15213,7 +15440,8 @@
 				'SuspendAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ConvenienceStore' => array(
 			'subTypeOf' => array(
@@ -15341,7 +15569,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Conversation' => array(
 			'subTypeOf' => array(
@@ -15478,7 +15707,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CookAction' => array(
 			'subTypeOf' => array(
@@ -15517,7 +15747,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Corporation' => array(
 			'subTypeOf' => array(
@@ -15609,7 +15840,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CorrectionComment' => array(
 			'subTypeOf' => array(
@@ -15749,7 +15981,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Country' => array(
 			'subTypeOf' => array(
@@ -15818,7 +16051,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Course' => array(
 			'subTypeOf' => array(
@@ -15967,7 +16201,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CourseInstance' => array(
 			'subTypeOf' => array(
@@ -16036,7 +16271,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Courthouse' => array(
 			'subTypeOf' => array(
@@ -16106,7 +16342,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CoverArt' => array(
 			'subTypeOf' => array(
@@ -16258,7 +16495,8 @@
 				'ComicCoverArt'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CovidTestingFacility' => array(
 			'subTypeOf' => array(
@@ -16390,7 +16628,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CreateAction' => array(
 			'subTypeOf' => array(
@@ -16433,7 +16672,8 @@
 				'WriteAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CreativeWork' => array(
 			'subTypeOf' => array(
@@ -16644,7 +16884,8 @@
 				'WebSite'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CreativeWorkSeason' => array(
 			'subTypeOf' => array(
@@ -16798,7 +17039,8 @@
 			'supersedes' => array(
 				'Season'
 			),
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CreativeWorkSeries' => array(
 			'subTypeOf' => array(
@@ -16947,7 +17189,8 @@
 				'VideoGameSeries'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CreditCard' => array(
 			'subTypeOf' => array(
@@ -17012,7 +17255,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Crematorium' => array(
 			'subTypeOf' => array(
@@ -17082,7 +17326,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CriticReview' => array(
 			'subTypeOf' => array(
@@ -17230,7 +17475,8 @@
 				'ReviewNewsArticle'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CrossSectional' => array(
 			'subTypeOf' => array(
@@ -17243,7 +17489,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CssSelectorType' => array(
 			'subTypeOf' => array(
@@ -17254,7 +17501,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'CurrencyConversionService' => array(
 			'subTypeOf' => array(
@@ -17305,7 +17553,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DDxElement' => array(
 			'subTypeOf' => array(
@@ -17339,7 +17588,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DJMixAlbum' => array(
 			'subTypeOf' => array(
@@ -17352,7 +17602,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DVDFormat' => array(
 			'subTypeOf' => array(
@@ -17365,7 +17616,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DamagedCondition' => array(
 			'subTypeOf' => array(
@@ -17378,7 +17630,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DanceEvent' => array(
 			'subTypeOf' => array(
@@ -17443,7 +17696,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DanceGroup' => array(
 			'subTypeOf' => array(
@@ -17534,7 +17788,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DangerousGoodConsideration' => array(
 			'subTypeOf' => array(
@@ -17547,7 +17802,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DataCatalog' => array(
 			'subTypeOf' => array(
@@ -17689,7 +17945,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DataDownload' => array(
 			'subTypeOf' => array(
@@ -17848,7 +18105,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DataFeed' => array(
 			'subTypeOf' => array(
@@ -17998,7 +18256,8 @@
 				'CompleteDataFeed'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DataFeedItem' => array(
 			'subTypeOf' => array(
@@ -18026,7 +18285,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DataType' => array(
 			'subTypeOf' => array(
@@ -18044,7 +18304,8 @@
 				'DateTime'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Dataset' => array(
 			'subTypeOf' => array(
@@ -18197,7 +18458,8 @@
 				'DataFeed'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Date' => array(
 			'subTypeOf' => '',
@@ -18206,7 +18468,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DateTime' => array(
 			'subTypeOf' => '',
@@ -18215,7 +18478,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DatedMoneySpecification' => array(
 			'subTypeOf' => array(
@@ -18245,7 +18509,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'MonetaryAmount'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'DayOfWeek' => array(
 			'subTypeOf' => array(
@@ -18256,7 +18521,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DaySpa' => array(
 			'subTypeOf' => array(
@@ -18384,7 +18650,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DeactivateAction' => array(
 			'subTypeOf' => array(
@@ -18420,7 +18687,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DecontextualizedContent' => array(
 			'subTypeOf' => array(
@@ -18433,7 +18701,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DefenceEstablishment' => array(
 			'subTypeOf' => array(
@@ -18503,7 +18772,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DefinedRegion' => array(
 			'subTypeOf' => array(
@@ -18532,7 +18802,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DefinedTerm' => array(
 			'subTypeOf' => array(
@@ -18560,7 +18831,8 @@
 				'CategoryCode'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DefinedTermSet' => array(
 			'subTypeOf' => array(
@@ -18700,7 +18972,8 @@
 				'CategoryCodeSet'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DefinitiveLegalValue' => array(
 			'subTypeOf' => array(
@@ -18713,7 +18986,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DeleteAction' => array(
 			'subTypeOf' => array(
@@ -18751,7 +19025,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DeliveryChargeSpecification' => array(
 			'subTypeOf' => array(
@@ -18788,7 +19063,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DeliveryEvent' => array(
 			'subTypeOf' => array(
@@ -18857,7 +19133,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DeliveryMethod' => array(
 			'subTypeOf' => array(
@@ -18868,7 +19145,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DeliveryTimeSettings' => array(
 			'subTypeOf' => array(
@@ -18896,7 +19174,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Demand' => array(
 			'subTypeOf' => array(
@@ -18954,7 +19233,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DemoAlbum' => array(
 			'subTypeOf' => array(
@@ -18967,7 +19247,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DemoGameAvailability' => array(
 			'subTypeOf' => array(
@@ -18980,7 +19261,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Dentist' => array(
 			'subTypeOf' => array(
@@ -19113,7 +19395,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Dentistry' => array(
 			'subTypeOf' => array(
@@ -19126,7 +19409,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DepartAction' => array(
 			'subTypeOf' => array(
@@ -19164,7 +19448,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DepartmentStore' => array(
 			'subTypeOf' => array(
@@ -19292,7 +19577,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DepositAccount' => array(
 			'subTypeOf' => array(
@@ -19348,7 +19634,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Dermatologic' => array(
 			'subTypeOf' => array(
@@ -19363,7 +19650,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'Dermatology'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'Dermatology' => array(
 			'subTypeOf' => array(
@@ -19496,7 +19784,8 @@
 			'supersedes' => array(
 				'Dermatologic'
 			),
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DesktopWebPlatform' => array(
 			'subTypeOf' => array(
@@ -19509,7 +19798,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DiabeticDiet' => array(
 			'subTypeOf' => array(
@@ -19522,7 +19812,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Diagnostic' => array(
 			'subTypeOf' => array(
@@ -19535,7 +19826,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DiagnosticLab' => array(
 			'subTypeOf' => array(
@@ -19630,7 +19922,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DiagnosticProcedure' => array(
 			'subTypeOf' => array(
@@ -19668,7 +19961,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Diet' => array(
 			'subTypeOf' => array(
@@ -19818,7 +20112,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DietNutrition' => array(
 			'subTypeOf' => array(
@@ -19949,7 +20244,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DietarySupplement' => array(
 			'subTypeOf' => array(
@@ -20046,7 +20342,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DigitalAudioTapeFormat' => array(
 			'subTypeOf' => array(
@@ -20059,7 +20356,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DigitalDocument' => array(
 			'subTypeOf' => array(
@@ -20202,7 +20500,8 @@
 				'TextDigitalDocument'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DigitalDocumentPermission' => array(
 			'subTypeOf' => array(
@@ -20228,7 +20527,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DigitalDocumentPermissionType' => array(
 			'subTypeOf' => array(
@@ -20239,7 +20539,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DigitalFormat' => array(
 			'subTypeOf' => array(
@@ -20252,7 +20553,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DigitalPlatformEnumeration' => array(
 			'subTypeOf' => array(
@@ -20263,7 +20565,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DisabilitySupport' => array(
 			'subTypeOf' => array(
@@ -20276,7 +20579,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DisagreeAction' => array(
 			'subTypeOf' => array(
@@ -20312,7 +20616,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Discontinued' => array(
 			'subTypeOf' => array(
@@ -20325,7 +20630,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DiscoverAction' => array(
 			'subTypeOf' => array(
@@ -20361,7 +20667,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DiscussionForumPosting' => array(
 			'subTypeOf' => array(
@@ -20507,7 +20814,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DislikeAction' => array(
 			'subTypeOf' => array(
@@ -20543,7 +20851,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Distance' => array(
 			'subTypeOf' => array(
@@ -20567,7 +20876,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DistanceFee' => array(
 			'subTypeOf' => array(
@@ -20580,7 +20890,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Distillery' => array(
 			'subTypeOf' => array(
@@ -20713,7 +21024,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DonateAction' => array(
 			'subTypeOf' => array(
@@ -20753,7 +21065,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DoseSchedule' => array(
 			'subTypeOf' => array(
@@ -20793,7 +21106,8 @@
 				'ReportedDoseSchedule'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DoubleBlindedTrial' => array(
 			'subTypeOf' => array(
@@ -20806,7 +21120,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DownloadAction' => array(
 			'subTypeOf' => array(
@@ -20844,7 +21159,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Downpayment' => array(
 			'subTypeOf' => array(
@@ -20857,7 +21173,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DrawAction' => array(
 			'subTypeOf' => array(
@@ -20893,7 +21210,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Drawing' => array(
 			'subTypeOf' => array(
@@ -21030,7 +21348,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DrinkAction' => array(
 			'subTypeOf' => array(
@@ -21068,7 +21387,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DriveWheelConfigurationValue' => array(
 			'subTypeOf' => array(
@@ -21088,7 +21408,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DrivingSchoolVehicleUsage' => array(
 			'subTypeOf' => array(
@@ -21101,7 +21422,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Drug' => array(
 			'subTypeOf' => array(
@@ -21220,7 +21542,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DrugClass' => array(
 			'subTypeOf' => array(
@@ -21253,7 +21576,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DrugCost' => array(
 			'subTypeOf' => array(
@@ -21291,7 +21615,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DrugCostCategory' => array(
 			'subTypeOf' => array(
@@ -21302,7 +21627,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DrugLegalStatus' => array(
 			'subTypeOf' => array(
@@ -21335,7 +21661,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DrugPregnancyCategory' => array(
 			'subTypeOf' => array(
@@ -21346,7 +21673,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DrugPrescriptionStatus' => array(
 			'subTypeOf' => array(
@@ -21357,7 +21685,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DrugStrength' => array(
 			'subTypeOf' => array(
@@ -21394,7 +21723,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'DryCleaningOrLaundry' => array(
 			'subTypeOf' => array(
@@ -21522,7 +21852,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Duration' => array(
 			'subTypeOf' => array(
@@ -21546,7 +21877,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EBook' => array(
 			'subTypeOf' => array(
@@ -21559,7 +21891,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EPRelease' => array(
 			'subTypeOf' => array(
@@ -21572,7 +21905,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EUEnergyEfficiencyCategoryA' => array(
 			'subTypeOf' => array(
@@ -21585,7 +21919,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EUEnergyEfficiencyCategoryA1Plus' => array(
 			'subTypeOf' => array(
@@ -21598,7 +21933,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EUEnergyEfficiencyCategoryA2Plus' => array(
 			'subTypeOf' => array(
@@ -21611,7 +21947,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EUEnergyEfficiencyCategoryA3Plus' => array(
 			'subTypeOf' => array(
@@ -21624,7 +21961,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EUEnergyEfficiencyCategoryB' => array(
 			'subTypeOf' => array(
@@ -21637,7 +21975,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EUEnergyEfficiencyCategoryC' => array(
 			'subTypeOf' => array(
@@ -21650,7 +21989,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EUEnergyEfficiencyCategoryD' => array(
 			'subTypeOf' => array(
@@ -21663,7 +22003,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EUEnergyEfficiencyCategoryE' => array(
 			'subTypeOf' => array(
@@ -21676,7 +22017,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EUEnergyEfficiencyCategoryF' => array(
 			'subTypeOf' => array(
@@ -21689,7 +22031,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EUEnergyEfficiencyCategoryG' => array(
 			'subTypeOf' => array(
@@ -21702,7 +22045,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EUEnergyEfficiencyEnumeration' => array(
 			'subTypeOf' => array(
@@ -21713,7 +22057,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Ear' => array(
 			'subTypeOf' => array(
@@ -21726,7 +22071,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EatAction' => array(
 			'subTypeOf' => array(
@@ -21764,7 +22110,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EditedOrCroppedContent' => array(
 			'subTypeOf' => array(
@@ -21777,7 +22124,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EducationEvent' => array(
 			'subTypeOf' => array(
@@ -21845,7 +22193,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EducationalAudience' => array(
 			'subTypeOf' => array(
@@ -21872,7 +22221,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EducationalOccupationalCredential' => array(
 			'subTypeOf' => array(
@@ -22014,7 +22364,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EducationalOccupationalProgram' => array(
 			'subTypeOf' => array(
@@ -22064,7 +22415,8 @@
 				'WorkBasedProgram'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EducationalOrganization' => array(
 			'subTypeOf' => array(
@@ -22196,7 +22548,8 @@
 				'School'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EffectivenessHealthAspect' => array(
 			'subTypeOf' => array(
@@ -22209,7 +22562,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Electrician' => array(
 			'subTypeOf' => array(
@@ -22337,7 +22691,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ElectronicsStore' => array(
 			'subTypeOf' => array(
@@ -22465,7 +22820,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ElementarySchool' => array(
 			'subTypeOf' => array(
@@ -22589,7 +22945,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EmailMessage' => array(
 			'subTypeOf' => array(
@@ -22735,7 +23092,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Embassy' => array(
 			'subTypeOf' => array(
@@ -22805,7 +23163,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Emergency' => array(
 			'subTypeOf' => array(
@@ -22936,7 +23295,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EmergencyService' => array(
 			'subTypeOf' => array(
@@ -23068,7 +23428,8 @@
 				'PoliceStation'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EmployeeRole' => array(
 			'subTypeOf' => array(
@@ -23099,7 +23460,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EmployerAggregateRating' => array(
 			'subTypeOf' => array(
@@ -23132,7 +23494,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EmployerReview' => array(
 			'subTypeOf' => array(
@@ -23278,7 +23641,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EmploymentAgency' => array(
 			'subTypeOf' => array(
@@ -23406,7 +23770,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Endocrine' => array(
 			'subTypeOf' => array(
@@ -23419,7 +23784,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EndorseAction' => array(
 			'subTypeOf' => array(
@@ -23456,7 +23822,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EndorsementRating' => array(
 			'subTypeOf' => array(
@@ -23486,7 +23853,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Energy' => array(
 			'subTypeOf' => array(
@@ -23510,7 +23878,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EnergyConsumptionDetails' => array(
 			'subTypeOf' => array(
@@ -23537,7 +23906,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EnergyEfficiencyEnumeration' => array(
 			'subTypeOf' => array(
@@ -23551,7 +23921,8 @@
 				'EnergyStarEnergyEfficiencyEnumeration'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EnergyStarCertified' => array(
 			'subTypeOf' => array(
@@ -23564,7 +23935,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EnergyStarEnergyEfficiencyEnumeration' => array(
 			'subTypeOf' => array(
@@ -23575,7 +23947,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EngineSpecification' => array(
 			'subTypeOf' => array(
@@ -23604,7 +23977,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EnrollingByInvitation' => array(
 			'subTypeOf' => array(
@@ -23617,7 +23991,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EntertainmentBusiness' => array(
 			'subTypeOf' => array(
@@ -23753,7 +24128,8 @@
 				'NightClub'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EntryPoint' => array(
 			'subTypeOf' => array(
@@ -23784,7 +24160,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Enumeration' => array(
 			'subTypeOf' => array(
@@ -23859,7 +24236,8 @@
 				'WarrantyScope'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Episode' => array(
 			'subTypeOf' => array(
@@ -24011,7 +24389,8 @@
 				'TVEpisode'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Event' => array(
 			'subTypeOf' => array(
@@ -24101,7 +24480,8 @@
 				'VisualArtsEvent'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EventAttendanceModeEnumeration' => array(
 			'subTypeOf' => array(
@@ -24112,7 +24492,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EventCancelled' => array(
 			'subTypeOf' => array(
@@ -24125,7 +24506,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EventMovedOnline' => array(
 			'subTypeOf' => array(
@@ -24138,7 +24520,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EventPostponed' => array(
 			'subTypeOf' => array(
@@ -24151,7 +24534,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EventRescheduled' => array(
 			'subTypeOf' => array(
@@ -24164,7 +24548,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EventReservation' => array(
 			'subTypeOf' => array(
@@ -24201,7 +24586,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EventScheduled' => array(
 			'subTypeOf' => array(
@@ -24214,7 +24600,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EventSeries' => array(
 			'subTypeOf' => array(
@@ -24280,7 +24667,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EventStatusType' => array(
 			'subTypeOf' => array(
@@ -24291,7 +24679,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EventVenue' => array(
 			'subTypeOf' => array(
@@ -24361,7 +24750,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EvidenceLevelA' => array(
 			'subTypeOf' => array(
@@ -24374,7 +24764,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EvidenceLevelB' => array(
 			'subTypeOf' => array(
@@ -24387,7 +24778,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'EvidenceLevelC' => array(
 			'subTypeOf' => array(
@@ -24400,7 +24792,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ExampleMeasurementMethodEnum' => array(
 			'subTypeOf' => array(
@@ -24413,7 +24806,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ExchangeRateSpecification' => array(
 			'subTypeOf' => array(
@@ -24440,7 +24834,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ExchangeRefund' => array(
 			'subTypeOf' => array(
@@ -24453,7 +24848,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ExerciseAction' => array(
 			'subTypeOf' => array(
@@ -24504,7 +24900,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ExerciseGym' => array(
 			'subTypeOf' => array(
@@ -24632,7 +25029,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ExercisePlan' => array(
 			'subTypeOf' => array(
@@ -24789,7 +25187,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ExhibitionEvent' => array(
 			'subTypeOf' => array(
@@ -24854,7 +25253,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Eye' => array(
 			'subTypeOf' => array(
@@ -24867,7 +25267,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FAQPage' => array(
 			'subTypeOf' => array(
@@ -25014,7 +25415,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FDAcategoryA' => array(
 			'subTypeOf' => array(
@@ -25027,7 +25429,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FDAcategoryB' => array(
 			'subTypeOf' => array(
@@ -25040,7 +25443,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FDAcategoryC' => array(
 			'subTypeOf' => array(
@@ -25053,7 +25457,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FDAcategoryD' => array(
 			'subTypeOf' => array(
@@ -25066,7 +25471,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FDAcategoryX' => array(
 			'subTypeOf' => array(
@@ -25079,7 +25485,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FDAnotEvaluated' => array(
 			'subTypeOf' => array(
@@ -25092,7 +25499,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FMRadioChannel' => array(
 			'subTypeOf' => array(
@@ -25122,7 +25530,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FailedActionStatus' => array(
 			'subTypeOf' => array(
@@ -25135,7 +25544,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FALSE' => array(
 			'subTypeOf' => '',
@@ -25144,7 +25554,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FastFoodRestaurant' => array(
 			'subTypeOf' => array(
@@ -25277,7 +25688,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Female' => array(
 			'subTypeOf' => array(
@@ -25290,7 +25702,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Festival' => array(
 			'subTypeOf' => array(
@@ -25355,7 +25768,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FilmAction' => array(
 			'subTypeOf' => array(
@@ -25391,7 +25805,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FinancialProduct' => array(
 			'subTypeOf' => array(
@@ -25449,7 +25864,8 @@
 				'PaymentService'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FinancialService' => array(
 			'subTypeOf' => array(
@@ -25583,7 +25999,8 @@
 				'InsuranceAgency'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FindAction' => array(
 			'subTypeOf' => array(
@@ -25623,7 +26040,8 @@
 				'TrackAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FireStation' => array(
 			'subTypeOf' => array(
@@ -25752,7 +26170,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Flexibility' => array(
 			'subTypeOf' => array(
@@ -25765,7 +26184,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Flight' => array(
 			'subTypeOf' => array(
@@ -25812,7 +26232,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FlightReservation' => array(
 			'subTypeOf' => array(
@@ -25853,7 +26274,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Float' => array(
 			'subTypeOf' => array(
@@ -25864,7 +26286,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FloorPlan' => array(
 			'subTypeOf' => array(
@@ -25900,7 +26323,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Florist' => array(
 			'subTypeOf' => array(
@@ -26028,7 +26452,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FollowAction' => array(
 			'subTypeOf' => array(
@@ -26065,7 +26490,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FoodEstablishment' => array(
 			'subTypeOf' => array(
@@ -26208,7 +26634,8 @@
 				'Winery'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FoodEstablishmentReservation' => array(
 			'subTypeOf' => array(
@@ -26248,7 +26675,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FoodEvent' => array(
 			'subTypeOf' => array(
@@ -26313,7 +26741,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FoodService' => array(
 			'subTypeOf' => array(
@@ -26361,7 +26790,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FourWheelDriveConfiguration' => array(
 			'subTypeOf' => array(
@@ -26374,7 +26804,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FreeReturn' => array(
 			'subTypeOf' => array(
@@ -26387,7 +26818,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Friday' => array(
 			'subTypeOf' => array(
@@ -26400,7 +26832,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FrontWheelDriveConfiguration' => array(
 			'subTypeOf' => array(
@@ -26413,7 +26846,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FullGameAvailability' => array(
 			'subTypeOf' => array(
@@ -26426,7 +26860,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FullRefund' => array(
 			'subTypeOf' => array(
@@ -26439,7 +26874,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FundingAgency' => array(
 			'subTypeOf' => array(
@@ -26530,7 +26966,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FundingScheme' => array(
 			'subTypeOf' => array(
@@ -26621,7 +27058,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Fungus' => array(
 			'subTypeOf' => array(
@@ -26634,7 +27072,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'FurnitureStore' => array(
 			'subTypeOf' => array(
@@ -26762,7 +27201,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Game' => array(
 			'subTypeOf' => array(
@@ -26906,7 +27346,8 @@
 				'VideoGame'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GameAvailabilityEnumeration' => array(
 			'subTypeOf' => array(
@@ -26917,7 +27358,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GamePlayMode' => array(
 			'subTypeOf' => array(
@@ -26928,7 +27370,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GameServer' => array(
 			'subTypeOf' => array(
@@ -26955,7 +27398,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GameServerStatus' => array(
 			'subTypeOf' => array(
@@ -26966,7 +27410,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GardenStore' => array(
 			'subTypeOf' => array(
@@ -27094,7 +27539,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GasStation' => array(
 			'subTypeOf' => array(
@@ -27222,7 +27668,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Gastroenterologic' => array(
 			'subTypeOf' => array(
@@ -27235,7 +27682,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GatedResidenceCommunity' => array(
 			'subTypeOf' => array(
@@ -27305,7 +27753,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GenderType' => array(
 			'subTypeOf' => array(
@@ -27316,7 +27765,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Gene' => array(
 			'subTypeOf' => array(
@@ -27357,7 +27807,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GeneralContractor' => array(
 			'subTypeOf' => array(
@@ -27485,7 +27936,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GenericWebPlatform' => array(
 			'subTypeOf' => array(
@@ -27498,7 +27950,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Genetic' => array(
 			'subTypeOf' => array(
@@ -27511,7 +27964,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Genitourinary' => array(
 			'subTypeOf' => array(
@@ -27524,7 +27978,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GeoCircle' => array(
 			'subTypeOf' => array(
@@ -27558,7 +28013,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GeoCoordinates' => array(
 			'subTypeOf' => array(
@@ -27588,7 +28044,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GeoShape' => array(
 			'subTypeOf' => array(
@@ -27622,7 +28079,8 @@
 				'GeoCircle'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GeospatialGeometry' => array(
 			'subTypeOf' => array(
@@ -27656,7 +28114,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Geriatric' => array(
 			'subTypeOf' => array(
@@ -27787,7 +28246,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GettingAccessHealthAspect' => array(
 			'subTypeOf' => array(
@@ -27800,7 +28260,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GiveAction' => array(
 			'subTypeOf' => array(
@@ -27839,7 +28300,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GlutenFreeDiet' => array(
 			'subTypeOf' => array(
@@ -27852,7 +28314,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GolfCourse' => array(
 			'subTypeOf' => array(
@@ -27980,7 +28443,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GovernmentBenefitsType' => array(
 			'subTypeOf' => array(
@@ -27991,7 +28455,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GovernmentBuilding' => array(
 			'subTypeOf' => array(
@@ -28067,7 +28532,8 @@
 				'LegislativeBuilding'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GovernmentOffice' => array(
 			'subTypeOf' => array(
@@ -28197,7 +28663,8 @@
 				'PostOffice'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GovernmentOrganization' => array(
 			'subTypeOf' => array(
@@ -28288,7 +28755,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GovernmentPermit' => array(
 			'subTypeOf' => array(
@@ -28319,7 +28787,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GovernmentService' => array(
 			'subTypeOf' => array(
@@ -28369,7 +28838,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Grant' => array(
 			'subTypeOf' => array(
@@ -28398,7 +28868,8 @@
 				'MonetaryGrant'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GraphicNovel' => array(
 			'subTypeOf' => array(
@@ -28411,7 +28882,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GroceryStore' => array(
 			'subTypeOf' => array(
@@ -28539,7 +29011,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'GroupBoardingPolicy' => array(
 			'subTypeOf' => array(
@@ -28552,7 +29025,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Guide' => array(
 			'subTypeOf' => array(
@@ -28690,7 +29164,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Gynecologic' => array(
 			'subTypeOf' => array(
@@ -28821,7 +29296,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HVACBusiness' => array(
 			'subTypeOf' => array(
@@ -28949,7 +29425,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Hackathon' => array(
 			'subTypeOf' => array(
@@ -29014,7 +29491,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HairSalon' => array(
 			'subTypeOf' => array(
@@ -29142,7 +29620,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HalalDiet' => array(
 			'subTypeOf' => array(
@@ -29155,7 +29634,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Hardcover' => array(
 			'subTypeOf' => array(
@@ -29168,7 +29648,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HardwareStore' => array(
 			'subTypeOf' => array(
@@ -29296,7 +29777,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Head' => array(
 			'subTypeOf' => array(
@@ -29309,7 +29791,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HealthAndBeautyBusiness' => array(
 			'subTypeOf' => array(
@@ -29444,7 +29927,8 @@
 				'TattooParlor'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HealthAspectEnumeration' => array(
 			'subTypeOf' => array(
@@ -29455,7 +29939,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HealthCare' => array(
 			'subTypeOf' => array(
@@ -29468,7 +29953,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HealthClub' => array(
 			'subTypeOf' => array(
@@ -29597,7 +30083,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HealthInsurancePlan' => array(
 			'subTypeOf' => array(
@@ -29630,7 +30117,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HealthPlanCostSharingSpecification' => array(
 			'subTypeOf' => array(
@@ -29659,7 +30147,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HealthPlanFormulary' => array(
 			'subTypeOf' => array(
@@ -29686,7 +30175,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HealthPlanNetwork' => array(
 			'subTypeOf' => array(
@@ -29713,7 +30203,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HealthTopicContent' => array(
 			'subTypeOf' => array(
@@ -29851,7 +30342,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HealthcareConsideration' => array(
 			'subTypeOf' => array(
@@ -29864,7 +30356,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HearingImpairedSupported' => array(
 			'subTypeOf' => array(
@@ -29877,7 +30370,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Hematologic' => array(
 			'subTypeOf' => array(
@@ -29890,7 +30384,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HighSchool' => array(
 			'subTypeOf' => array(
@@ -30014,7 +30509,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HinduDiet' => array(
 			'subTypeOf' => array(
@@ -30027,7 +30523,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HinduTemple' => array(
 			'subTypeOf' => array(
@@ -30097,7 +30594,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HobbyShop' => array(
 			'subTypeOf' => array(
@@ -30225,7 +30723,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HomeAndConstructionBusiness' => array(
 			'subTypeOf' => array(
@@ -30362,7 +30861,8 @@
 				'RoofingContractor'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HomeGoodsStore' => array(
 			'subTypeOf' => array(
@@ -30490,7 +30990,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Homeopathic' => array(
 			'subTypeOf' => array(
@@ -30503,7 +31004,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Hospital' => array(
 			'subTypeOf' => array(
@@ -30638,7 +31140,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Hostel' => array(
 			'subTypeOf' => array(
@@ -30773,7 +31276,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Hotel' => array(
 			'subTypeOf' => array(
@@ -30908,7 +31412,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HotelRoom' => array(
 			'subTypeOf' => array(
@@ -30992,7 +31497,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'House' => array(
 			'subTypeOf' => array(
@@ -31078,7 +31584,8 @@
 				'SingleFamilyResidence'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HousePainter' => array(
 			'subTypeOf' => array(
@@ -31206,7 +31713,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HowItWorksHealthAspect' => array(
 			'subTypeOf' => array(
@@ -31219,7 +31727,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HowOrWhereHealthAspect' => array(
 			'subTypeOf' => array(
@@ -31232,7 +31741,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HowTo' => array(
 			'subTypeOf' => array(
@@ -31380,7 +31890,8 @@
 				'Recipe'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HowToDirection' => array(
 			'subTypeOf' => array(
@@ -31529,7 +32040,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HowToItem' => array(
 			'subTypeOf' => array(
@@ -31561,7 +32073,8 @@
 				'HowToTool'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HowToSection' => array(
 			'subTypeOf' => array(
@@ -31707,7 +32220,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HowToStep' => array(
 			'subTypeOf' => array(
@@ -31852,7 +32366,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HowToSupply' => array(
 			'subTypeOf' => array(
@@ -31882,7 +32397,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HowToTip' => array(
 			'subTypeOf' => array(
@@ -32023,7 +32539,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HowToTool' => array(
 			'subTypeOf' => array(
@@ -32052,7 +32569,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HyperToc' => array(
 			'subTypeOf' => array(
@@ -32190,7 +32708,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'HyperTocEntry' => array(
 			'subTypeOf' => array(
@@ -32329,7 +32848,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'IOSPlatform' => array(
 			'subTypeOf' => array(
@@ -32342,7 +32862,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'IceCreamShop' => array(
 			'subTypeOf' => array(
@@ -32475,7 +32996,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'IgnoreAction' => array(
 			'subTypeOf' => array(
@@ -32511,7 +33033,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ImageGallery' => array(
 			'subTypeOf' => array(
@@ -32658,7 +33181,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ImageObject' => array(
 			'subTypeOf' => array(
@@ -32822,7 +33346,8 @@
 				'ImageObjectSnapshot'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ImageObjectSnapshot' => array(
 			'subTypeOf' => array(
@@ -32981,7 +33506,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ImagingTest' => array(
 			'subTypeOf' => array(
@@ -33019,7 +33545,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InForce' => array(
 			'subTypeOf' => array(
@@ -33032,7 +33559,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InStock' => array(
 			'subTypeOf' => array(
@@ -33045,7 +33573,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InStoreOnly' => array(
 			'subTypeOf' => array(
@@ -33058,7 +33587,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'IndividualProduct' => array(
 			'subTypeOf' => array(
@@ -33139,7 +33669,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Infectious' => array(
 			'subTypeOf' => array(
@@ -33152,7 +33683,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InfectiousAgentClass' => array(
 			'subTypeOf' => array(
@@ -33163,7 +33695,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InfectiousDisease' => array(
 			'subTypeOf' => array(
@@ -33214,7 +33747,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InformAction' => array(
 			'subTypeOf' => array(
@@ -33258,7 +33792,8 @@
 				'RsvpAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'IngredientsHealthAspect' => array(
 			'subTypeOf' => array(
@@ -33271,7 +33806,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InsertAction' => array(
 			'subTypeOf' => array(
@@ -33313,7 +33849,8 @@
 				'PrependAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InstallAction' => array(
 			'subTypeOf' => array(
@@ -33351,7 +33888,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Installment' => array(
 			'subTypeOf' => array(
@@ -33364,7 +33902,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InsuranceAgency' => array(
 			'subTypeOf' => array(
@@ -33493,7 +34032,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Intangible' => array(
 			'subTypeOf' => array(
@@ -33580,7 +34120,8 @@
 				'VirtualLocation'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Integer' => array(
 			'subTypeOf' => array(
@@ -33591,7 +34132,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InteractAction' => array(
 			'subTypeOf' => array(
@@ -33637,7 +34179,8 @@
 				'UnRegisterAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InteractionCounter' => array(
 			'subTypeOf' => array(
@@ -33678,7 +34221,8 @@
 				'UserComments',
 				'UserCheckins'
 			),
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InternationalTrial' => array(
 			'subTypeOf' => array(
@@ -33691,7 +34235,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InternetCafe' => array(
 			'subTypeOf' => array(
@@ -33819,7 +34364,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InvestmentFund' => array(
 			'subTypeOf' => array(
@@ -33871,7 +34417,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InvestmentOrDeposit' => array(
 			'subTypeOf' => array(
@@ -33927,7 +34474,8 @@
 				'InvestmentFund'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InviteAction' => array(
 			'subTypeOf' => array(
@@ -33968,7 +34516,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Invoice' => array(
 			'subTypeOf' => array(
@@ -34008,7 +34557,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'InvoicePrice' => array(
 			'subTypeOf' => array(
@@ -34021,7 +34571,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ItemAvailability' => array(
 			'subTypeOf' => array(
@@ -34032,7 +34583,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ItemList' => array(
 			'subTypeOf' => array(
@@ -34064,7 +34616,8 @@
 				'OfferCatalog'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ItemListOrderAscending' => array(
 			'subTypeOf' => array(
@@ -34077,7 +34630,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ItemListOrderDescending' => array(
 			'subTypeOf' => array(
@@ -34090,7 +34644,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ItemListOrderType' => array(
 			'subTypeOf' => array(
@@ -34101,7 +34656,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ItemListUnordered' => array(
 			'subTypeOf' => array(
@@ -34114,7 +34670,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ItemPage' => array(
 			'subTypeOf' => array(
@@ -34261,7 +34818,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'JewelryStore' => array(
 			'subTypeOf' => array(
@@ -34389,7 +34947,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'JobPosting' => array(
 			'subTypeOf' => array(
@@ -34450,7 +35009,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'JoinAction' => array(
 			'subTypeOf' => array(
@@ -34487,7 +35047,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Joint' => array(
 			'subTypeOf' => array(
@@ -34530,7 +35091,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'KosherDiet' => array(
 			'subTypeOf' => array(
@@ -34543,7 +35105,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LaboratoryScience' => array(
 			'subTypeOf' => array(
@@ -34556,7 +35119,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LakeBodyOfWater' => array(
 			'subTypeOf' => array(
@@ -34625,7 +35189,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Landform' => array(
 			'subTypeOf' => array(
@@ -34699,7 +35264,8 @@
 				'Volcano'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LandmarksOrHistoricalBuildings' => array(
 			'subTypeOf' => array(
@@ -34768,7 +35334,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Language' => array(
 			'subTypeOf' => array(
@@ -34792,7 +35359,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LaserDiscFormat' => array(
 			'subTypeOf' => array(
@@ -34805,7 +35373,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LearningResource' => array(
 			'subTypeOf' => array(
@@ -34947,7 +35516,8 @@
 				'Syllabus'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LeaveAction' => array(
 			'subTypeOf' => array(
@@ -34984,7 +35554,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LeftHandDriving' => array(
 			'subTypeOf' => array(
@@ -34997,7 +35568,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LegalForceStatus' => array(
 			'subTypeOf' => array(
@@ -35008,7 +35580,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LegalService' => array(
 			'subTypeOf' => array(
@@ -35139,7 +35712,8 @@
 				'Notary'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LegalValueLevel' => array(
 			'subTypeOf' => array(
@@ -35150,7 +35724,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Legislation' => array(
 			'subTypeOf' => array(
@@ -35302,7 +35877,8 @@
 				'LegislationObject'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LegislationObject' => array(
 			'subTypeOf' => array(
@@ -35472,7 +36048,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LegislativeBuilding' => array(
 			'subTypeOf' => array(
@@ -35542,7 +36119,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LeisureTimeActivity' => array(
 			'subTypeOf' => array(
@@ -35555,7 +36133,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LendAction' => array(
 			'subTypeOf' => array(
@@ -35594,7 +36173,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Library' => array(
 			'subTypeOf' => array(
@@ -35722,7 +36302,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LibrarySystem' => array(
 			'subTypeOf' => array(
@@ -35813,7 +36394,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LifestyleModification' => array(
 			'subTypeOf' => array(
@@ -35848,7 +36430,8 @@
 				'PhysicalActivity'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Ligament' => array(
 			'subTypeOf' => array(
@@ -35888,7 +36471,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LikeAction' => array(
 			'subTypeOf' => array(
@@ -35924,7 +36508,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LimitedAvailability' => array(
 			'subTypeOf' => array(
@@ -35937,7 +36522,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LimitedByGuaranteeCharity' => array(
 			'subTypeOf' => array(
@@ -35950,7 +36536,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LinkRole' => array(
 			'subTypeOf' => array(
@@ -35980,7 +36567,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LiquorStore' => array(
 			'subTypeOf' => array(
@@ -36108,7 +36696,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ListItem' => array(
 			'subTypeOf' => array(
@@ -36142,7 +36731,8 @@
 				'HowToTip'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ListPrice' => array(
 			'subTypeOf' => array(
@@ -36155,7 +36745,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ListenAction' => array(
 			'subTypeOf' => array(
@@ -36193,7 +36784,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LiteraryEvent' => array(
 			'subTypeOf' => array(
@@ -36258,7 +36850,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LiveAlbum' => array(
 			'subTypeOf' => array(
@@ -36271,7 +36864,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LiveBlogPosting' => array(
 			'subTypeOf' => array(
@@ -36420,7 +37014,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LivingWithHealthAspect' => array(
 			'subTypeOf' => array(
@@ -36433,7 +37028,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LoanOrCredit' => array(
 			'subTypeOf' => array(
@@ -36496,7 +37092,8 @@
 				'MortgageLoan'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LocalBusiness' => array(
 			'subTypeOf' => array(
@@ -36656,7 +37253,8 @@
 				'TravelAgency'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LocationFeatureSpecification' => array(
 			'subTypeOf' => array(
@@ -36692,7 +37290,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LockerDelivery' => array(
 			'subTypeOf' => array(
@@ -36705,7 +37304,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Locksmith' => array(
 			'subTypeOf' => array(
@@ -36833,7 +37433,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LodgingBusiness' => array(
 			'subTypeOf' => array(
@@ -36976,7 +37577,8 @@
 				'VacationRental'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LodgingReservation' => array(
 			'subTypeOf' => array(
@@ -37019,7 +37621,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Longitudinal' => array(
 			'subTypeOf' => array(
@@ -37032,7 +37635,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LoseAction' => array(
 			'subTypeOf' => array(
@@ -37069,7 +37673,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LowCalorieDiet' => array(
 			'subTypeOf' => array(
@@ -37082,7 +37687,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LowFatDiet' => array(
 			'subTypeOf' => array(
@@ -37095,7 +37701,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LowLactoseDiet' => array(
 			'subTypeOf' => array(
@@ -37108,7 +37715,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LowSaltDiet' => array(
 			'subTypeOf' => array(
@@ -37121,7 +37729,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Lung' => array(
 			'subTypeOf' => array(
@@ -37134,7 +37743,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'LymphaticVessel' => array(
 			'subTypeOf' => array(
@@ -37177,7 +37787,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MRI' => array(
 			'subTypeOf' => array(
@@ -37190,7 +37801,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MSRP' => array(
 			'subTypeOf' => array(
@@ -37203,7 +37815,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Male' => array(
 			'subTypeOf' => array(
@@ -37216,7 +37829,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Manuscript' => array(
 			'subTypeOf' => array(
@@ -37353,7 +37967,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Map' => array(
 			'subTypeOf' => array(
@@ -37491,7 +38106,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MapCategoryType' => array(
 			'subTypeOf' => array(
@@ -37502,7 +38118,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MarryAction' => array(
 			'subTypeOf' => array(
@@ -37538,7 +38155,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Mass' => array(
 			'subTypeOf' => array(
@@ -37562,7 +38180,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MathSolver' => array(
 			'subTypeOf' => array(
@@ -37700,7 +38319,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MaximumDoseSchedule' => array(
 			'subTypeOf' => array(
@@ -37736,7 +38356,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MayTreatHealthAspect' => array(
 			'subTypeOf' => array(
@@ -37749,7 +38370,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MeasurementMethodEnum' => array(
 			'subTypeOf' => array(
@@ -37760,7 +38382,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MeasurementTypeEnumeration' => array(
 			'subTypeOf' => array(
@@ -37774,7 +38397,8 @@
 				'WearableMeasurementTypeEnumeration'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MediaGallery' => array(
 			'subTypeOf' => array(
@@ -37924,7 +38548,8 @@
 				'VideoGallery'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MediaManipulationRatingEnumeration' => array(
 			'subTypeOf' => array(
@@ -37935,7 +38560,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MediaObject' => array(
 			'subTypeOf' => array(
@@ -38100,7 +38726,8 @@
 				'VideoObject'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MediaReview' => array(
 			'subTypeOf' => array(
@@ -38249,7 +38876,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MediaReviewItem' => array(
 			'subTypeOf' => array(
@@ -38387,7 +39015,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MediaSubscription' => array(
 			'subTypeOf' => array(
@@ -38413,7 +39042,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalAudience' => array(
 			'subTypeOf' => array(
@@ -38451,7 +39081,8 @@
 				'Patient'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalAudienceType' => array(
 			'subTypeOf' => array(
@@ -38462,7 +39093,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalBusiness' => array(
 			'subTypeOf' => array(
@@ -38615,7 +39247,8 @@
 				'PublicHealth'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalCause' => array(
 			'subTypeOf' => array(
@@ -38648,7 +39281,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalClinic' => array(
 			'subTypeOf' => array(
@@ -38783,7 +39417,8 @@
 				'CovidTestingFacility'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalCode' => array(
 			'subTypeOf' => array(
@@ -38821,7 +39456,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalCondition' => array(
 			'subTypeOf' => array(
@@ -38872,7 +39508,8 @@
 				'MedicalSignOrSymptom'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalConditionStage' => array(
 			'subTypeOf' => array(
@@ -38906,7 +39543,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalContraindication' => array(
 			'subTypeOf' => array(
@@ -38938,7 +39576,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalDevice' => array(
 			'subTypeOf' => array(
@@ -38978,7 +39617,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalDevicePurpose' => array(
 			'subTypeOf' => array(
@@ -38989,7 +39629,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalEntity' => array(
 			'subTypeOf' => array(
@@ -39041,7 +39682,8 @@
 				'SuperficialAnatomy'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalEnumeration' => array(
 			'subTypeOf' => array(
@@ -39068,7 +39710,8 @@
 				'PhysicalExam'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalEvidenceLevel' => array(
 			'subTypeOf' => array(
@@ -39079,7 +39722,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalGuideline' => array(
 			'subTypeOf' => array(
@@ -39118,7 +39762,8 @@
 				'MedicalGuidelineRecommendation'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalGuidelineContraindication' => array(
 			'subTypeOf' => array(
@@ -39154,7 +39799,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalGuidelineRecommendation' => array(
 			'subTypeOf' => array(
@@ -39191,7 +39837,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalImagingTechnique' => array(
 			'subTypeOf' => array(
@@ -39202,7 +39849,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalIndication' => array(
 			'subTypeOf' => array(
@@ -39238,7 +39886,8 @@
 				'TreatmentIndication'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalIntangible' => array(
 			'subTypeOf' => array(
@@ -39277,7 +39926,8 @@
 				'MedicalConditionStage'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalObservationalStudy' => array(
 			'subTypeOf' => array(
@@ -39315,7 +39965,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalObservationalStudyDesign' => array(
 			'subTypeOf' => array(
@@ -39326,7 +39977,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalOrganization' => array(
 			'subTypeOf' => array(
@@ -39428,7 +40080,8 @@
 				'VeterinaryCare'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalProcedure' => array(
 			'subTypeOf' => array(
@@ -39474,7 +40127,8 @@
 				'TherapeuticProcedure'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalProcedureType' => array(
 			'subTypeOf' => array(
@@ -39485,7 +40139,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalResearcher' => array(
 			'subTypeOf' => array(
@@ -39498,7 +40153,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalRiskCalculator' => array(
 			'subTypeOf' => array(
@@ -39532,7 +40188,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalRiskEstimator' => array(
 			'subTypeOf' => array(
@@ -39569,7 +40226,8 @@
 				'MedicalRiskScore'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalRiskFactor' => array(
 			'subTypeOf' => array(
@@ -39602,7 +40260,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalRiskScore' => array(
 			'subTypeOf' => array(
@@ -39637,7 +40296,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalScholarlyArticle' => array(
 			'subTypeOf' => array(
@@ -39783,7 +40443,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalSign' => array(
 			'subTypeOf' => array(
@@ -39835,7 +40496,8 @@
 				'VitalSign'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalSignOrSymptom' => array(
 			'subTypeOf' => array(
@@ -39886,7 +40548,8 @@
 				'MedicalSymptom'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalSpecialty' => array(
 			'subTypeOf' => array(
@@ -39898,7 +40561,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalStudy' => array(
 			'subTypeOf' => array(
@@ -39938,7 +40602,8 @@
 				'MedicalTrial'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalStudyStatus' => array(
 			'subTypeOf' => array(
@@ -39949,7 +40614,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalSymptom' => array(
 			'subTypeOf' => array(
@@ -39997,7 +40663,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalTest' => array(
 			'subTypeOf' => array(
@@ -40039,7 +40706,8 @@
 				'PathologyTest'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalTestPanel' => array(
 			'subTypeOf' => array(
@@ -40077,7 +40745,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalTherapy' => array(
 			'subTypeOf' => array(
@@ -40127,7 +40796,8 @@
 				'RespiratoryTherapy'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalTrial' => array(
 			'subTypeOf' => array(
@@ -40165,7 +40835,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalTrialDesign' => array(
 			'subTypeOf' => array(
@@ -40176,7 +40847,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicalWebPage' => array(
 			'subTypeOf' => array(
@@ -40325,7 +40997,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MedicineSystem' => array(
 			'subTypeOf' => array(
@@ -40336,7 +41009,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MeetingRoom' => array(
 			'subTypeOf' => array(
@@ -40420,7 +41094,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MensClothingStore' => array(
 			'subTypeOf' => array(
@@ -40548,7 +41223,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Menu' => array(
 			'subTypeOf' => array(
@@ -40687,7 +41363,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MenuItem' => array(
 			'subTypeOf' => array(
@@ -40715,7 +41392,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MenuSection' => array(
 			'subTypeOf' => array(
@@ -40854,7 +41532,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MerchantReturnEnumeration' => array(
 			'subTypeOf' => array(
@@ -40867,7 +41546,8 @@
 			'supersedes' => array(
 				'ProductReturnEnumeration'
 			),
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MerchantReturnFiniteReturnWindow' => array(
 			'subTypeOf' => array(
@@ -40882,7 +41562,8 @@
 			'supersedes' => array(
 				'ProductReturnFiniteReturnWindow'
 			),
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MerchantReturnNotPermitted' => array(
 			'subTypeOf' => array(
@@ -40897,7 +41578,8 @@
 			'supersedes' => array(
 				'ProductReturnNotPermitted'
 			),
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MerchantReturnPolicy' => array(
 			'subTypeOf' => array(
@@ -40944,7 +41626,8 @@
 			'supersedes' => array(
 				'ProductReturnPolicy'
 			),
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MerchantReturnPolicySeasonalOverride' => array(
 			'subTypeOf' => array(
@@ -40972,7 +41655,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MerchantReturnUnlimitedWindow' => array(
 			'subTypeOf' => array(
@@ -40987,7 +41671,8 @@
 			'supersedes' => array(
 				'ProductReturnUnlimitedWindow'
 			),
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MerchantReturnUnspecified' => array(
 			'subTypeOf' => array(
@@ -41002,7 +41687,8 @@
 			'supersedes' => array(
 				'ProductReturnUnspecified'
 			),
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Message' => array(
 			'subTypeOf' => array(
@@ -41150,7 +41836,8 @@
 				'EmailMessage'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MiddleSchool' => array(
 			'subTypeOf' => array(
@@ -41274,7 +41961,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Midwifery' => array(
 			'subTypeOf' => array(
@@ -41405,7 +42093,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MinimumAdvertisedPrice' => array(
 			'subTypeOf' => array(
@@ -41418,7 +42107,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MisconceptionsHealthAspect' => array(
 			'subTypeOf' => array(
@@ -41431,7 +42121,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MixedEventAttendanceMode' => array(
 			'subTypeOf' => array(
@@ -41444,7 +42135,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MixtapeAlbum' => array(
 			'subTypeOf' => array(
@@ -41457,7 +42149,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MobileApplication' => array(
 			'subTypeOf' => array(
@@ -41619,7 +42312,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MobilePhoneStore' => array(
 			'subTypeOf' => array(
@@ -41747,7 +42441,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MobileWebPlatform' => array(
 			'subTypeOf' => array(
@@ -41760,7 +42455,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MolecularEntity' => array(
 			'subTypeOf' => array(
@@ -41806,7 +42502,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Monday' => array(
 			'subTypeOf' => array(
@@ -41819,7 +42516,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MonetaryAmount' => array(
 			'subTypeOf' => array(
@@ -41851,7 +42549,8 @@
 			'supersedes' => array(
 				'DatedMoneySpecification'
 			),
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MonetaryAmountDistribution' => array(
 			'subTypeOf' => array(
@@ -41882,7 +42581,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MonetaryGrant' => array(
 			'subTypeOf' => array(
@@ -41910,7 +42610,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MoneyTransfer' => array(
 			'subTypeOf' => array(
@@ -41950,7 +42651,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MortgageLoan' => array(
 			'subTypeOf' => array(
@@ -42012,7 +42714,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Mosque' => array(
 			'subTypeOf' => array(
@@ -42082,7 +42785,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Motel' => array(
 			'subTypeOf' => array(
@@ -42217,7 +42921,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Motorcycle' => array(
 			'subTypeOf' => array(
@@ -42335,7 +43040,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MotorcycleDealer' => array(
 			'subTypeOf' => array(
@@ -42463,7 +43169,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MotorcycleRepair' => array(
 			'subTypeOf' => array(
@@ -42591,7 +43298,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MotorizedBicycle' => array(
 			'subTypeOf' => array(
@@ -42709,7 +43417,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Mountain' => array(
 			'subTypeOf' => array(
@@ -42778,7 +43487,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MoveAction' => array(
 			'subTypeOf' => array(
@@ -42820,7 +43530,8 @@
 				'TravelAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Movie' => array(
 			'subTypeOf' => array(
@@ -42967,7 +43678,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MovieClip' => array(
 			'subTypeOf' => array(
@@ -43115,7 +43827,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MovieRentalStore' => array(
 			'subTypeOf' => array(
@@ -43243,7 +43956,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MovieSeries' => array(
 			'subTypeOf' => array(
@@ -43390,7 +44104,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MovieTheater' => array(
 			'subTypeOf' => array(
@@ -43520,7 +44235,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MovingCompany' => array(
 			'subTypeOf' => array(
@@ -43648,7 +44364,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MultiCenterTrial' => array(
 			'subTypeOf' => array(
@@ -43661,7 +44378,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MultiPlayer' => array(
 			'subTypeOf' => array(
@@ -43674,7 +44392,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MulticellularParasite' => array(
 			'subTypeOf' => array(
@@ -43687,7 +44406,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Muscle' => array(
 			'subTypeOf' => array(
@@ -43732,7 +44452,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Musculoskeletal' => array(
 			'subTypeOf' => array(
@@ -43745,7 +44466,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MusculoskeletalExam' => array(
 			'subTypeOf' => array(
@@ -43758,7 +44480,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Museum' => array(
 			'subTypeOf' => array(
@@ -43828,7 +44551,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MusicAlbum' => array(
 			'subTypeOf' => array(
@@ -43972,7 +44696,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MusicAlbumProductionType' => array(
 			'subTypeOf' => array(
@@ -43983,7 +44708,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MusicAlbumReleaseType' => array(
 			'subTypeOf' => array(
@@ -43994,7 +44720,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MusicComposition' => array(
 			'subTypeOf' => array(
@@ -44141,7 +44868,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MusicEvent' => array(
 			'subTypeOf' => array(
@@ -44206,7 +44934,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MusicGroup' => array(
 			'subTypeOf' => array(
@@ -44303,7 +45032,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MusicPlaylist' => array(
 			'subTypeOf' => array(
@@ -44446,7 +45176,8 @@
 				'MusicRelease'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MusicRecording' => array(
 			'subTypeOf' => array(
@@ -44589,7 +45320,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MusicRelease' => array(
 			'subTypeOf' => array(
@@ -44735,7 +45467,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MusicReleaseFormatType' => array(
 			'subTypeOf' => array(
@@ -44746,7 +45479,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MusicStore' => array(
 			'subTypeOf' => array(
@@ -44874,7 +45608,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MusicVenue' => array(
 			'subTypeOf' => array(
@@ -44944,7 +45679,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'MusicVideoObject' => array(
 			'subTypeOf' => array(
@@ -45099,7 +45835,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NGO' => array(
 			'subTypeOf' => array(
@@ -45190,7 +45927,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NLNonprofitType' => array(
 			'subTypeOf' => array(
@@ -45201,7 +45939,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NailSalon' => array(
 			'subTypeOf' => array(
@@ -45329,7 +46068,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NarcoticConsideration' => array(
 			'subTypeOf' => array(
@@ -45342,7 +46082,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Neck' => array(
 			'subTypeOf' => array(
@@ -45355,7 +46096,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nerve' => array(
 			'subTypeOf' => array(
@@ -45399,7 +46141,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Neuro' => array(
 			'subTypeOf' => array(
@@ -45412,7 +46155,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Neurologic' => array(
 			'subTypeOf' => array(
@@ -45425,7 +46169,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NewCondition' => array(
 			'subTypeOf' => array(
@@ -45438,7 +46183,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NewsArticle' => array(
 			'subTypeOf' => array(
@@ -45595,7 +46341,8 @@
 				'ReviewNewsArticle'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NewsMediaOrganization' => array(
 			'subTypeOf' => array(
@@ -45690,7 +46437,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Newspaper' => array(
 			'subTypeOf' => array(
@@ -45830,7 +46578,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NightClub' => array(
 			'subTypeOf' => array(
@@ -45958,7 +46707,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NoninvasiveProcedure' => array(
 			'subTypeOf' => array(
@@ -45971,7 +46721,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501a' => array(
 			'subTypeOf' => array(
@@ -45984,7 +46735,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c1' => array(
 			'subTypeOf' => array(
@@ -45997,7 +46749,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c10' => array(
 			'subTypeOf' => array(
@@ -46010,7 +46763,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c11' => array(
 			'subTypeOf' => array(
@@ -46023,7 +46777,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c12' => array(
 			'subTypeOf' => array(
@@ -46036,7 +46791,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c13' => array(
 			'subTypeOf' => array(
@@ -46049,7 +46805,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c14' => array(
 			'subTypeOf' => array(
@@ -46062,7 +46819,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c15' => array(
 			'subTypeOf' => array(
@@ -46075,7 +46833,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c16' => array(
 			'subTypeOf' => array(
@@ -46088,7 +46847,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c17' => array(
 			'subTypeOf' => array(
@@ -46101,7 +46861,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c18' => array(
 			'subTypeOf' => array(
@@ -46114,7 +46875,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c19' => array(
 			'subTypeOf' => array(
@@ -46127,7 +46889,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c2' => array(
 			'subTypeOf' => array(
@@ -46140,7 +46903,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c20' => array(
 			'subTypeOf' => array(
@@ -46153,7 +46917,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c21' => array(
 			'subTypeOf' => array(
@@ -46166,7 +46931,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c22' => array(
 			'subTypeOf' => array(
@@ -46179,7 +46945,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c23' => array(
 			'subTypeOf' => array(
@@ -46192,7 +46959,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c24' => array(
 			'subTypeOf' => array(
@@ -46205,7 +46973,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c25' => array(
 			'subTypeOf' => array(
@@ -46218,7 +46987,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c26' => array(
 			'subTypeOf' => array(
@@ -46231,7 +47001,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c27' => array(
 			'subTypeOf' => array(
@@ -46244,7 +47015,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c28' => array(
 			'subTypeOf' => array(
@@ -46257,7 +47029,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c3' => array(
 			'subTypeOf' => array(
@@ -46270,7 +47043,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c4' => array(
 			'subTypeOf' => array(
@@ -46283,7 +47057,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c5' => array(
 			'subTypeOf' => array(
@@ -46296,7 +47071,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c6' => array(
 			'subTypeOf' => array(
@@ -46309,7 +47085,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c7' => array(
 			'subTypeOf' => array(
@@ -46322,7 +47099,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c8' => array(
 			'subTypeOf' => array(
@@ -46335,7 +47113,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501c9' => array(
 			'subTypeOf' => array(
@@ -46348,7 +47127,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501d' => array(
 			'subTypeOf' => array(
@@ -46361,7 +47141,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501e' => array(
 			'subTypeOf' => array(
@@ -46374,7 +47155,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501f' => array(
 			'subTypeOf' => array(
@@ -46387,7 +47169,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501k' => array(
 			'subTypeOf' => array(
@@ -46400,7 +47183,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501n' => array(
 			'subTypeOf' => array(
@@ -46413,7 +47197,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit501q' => array(
 			'subTypeOf' => array(
@@ -46426,7 +47211,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nonprofit527' => array(
 			'subTypeOf' => array(
@@ -46439,7 +47225,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NonprofitANBI' => array(
 			'subTypeOf' => array(
@@ -46452,7 +47239,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NonprofitSBBI' => array(
 			'subTypeOf' => array(
@@ -46465,7 +47253,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NonprofitType' => array(
 			'subTypeOf' => array(
@@ -46480,7 +47269,8 @@
 				'USNonprofitType'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nose' => array(
 			'subTypeOf' => array(
@@ -46493,7 +47283,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NotInForce' => array(
 			'subTypeOf' => array(
@@ -46506,7 +47297,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NotYetRecruiting' => array(
 			'subTypeOf' => array(
@@ -46519,7 +47311,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Notary' => array(
 			'subTypeOf' => array(
@@ -46647,7 +47440,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NoteDigitalDocument' => array(
 			'subTypeOf' => array(
@@ -46785,7 +47579,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Number' => array(
 			'subTypeOf' => '',
@@ -46797,7 +47592,8 @@
 				'Integer'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Nursing' => array(
 			'subTypeOf' => array(
@@ -46928,7 +47724,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'NutritionInformation' => array(
 			'subTypeOf' => array(
@@ -46964,7 +47761,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OTC' => array(
 			'subTypeOf' => array(
@@ -46977,7 +47775,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Observation' => array(
 			'subTypeOf' => array(
@@ -47019,7 +47818,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Observational' => array(
 			'subTypeOf' => array(
@@ -47032,7 +47832,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Obstetric' => array(
 			'subTypeOf' => array(
@@ -47163,7 +47964,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Occupation' => array(
 			'subTypeOf' => array(
@@ -47195,7 +47997,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OccupationalActivity' => array(
 			'subTypeOf' => array(
@@ -47208,7 +48011,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OccupationalExperienceRequirements' => array(
 			'subTypeOf' => array(
@@ -47233,7 +48037,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OccupationalTherapy' => array(
 			'subTypeOf' => array(
@@ -47277,7 +48082,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OceanBodyOfWater' => array(
 			'subTypeOf' => array(
@@ -47346,7 +48152,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Offer' => array(
 			'subTypeOf' => array(
@@ -47425,7 +48232,8 @@
 				'OfferForPurchase'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OfferCatalog' => array(
 			'subTypeOf' => array(
@@ -47452,7 +48260,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OfferForLease' => array(
 			'subTypeOf' => array(
@@ -47527,7 +48336,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OfferForPurchase' => array(
 			'subTypeOf' => array(
@@ -47602,7 +48412,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OfferItemCondition' => array(
 			'subTypeOf' => array(
@@ -47613,7 +48424,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OfferShippingDetails' => array(
 			'subTypeOf' => array(
@@ -47649,7 +48461,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OfficeEquipmentStore' => array(
 			'subTypeOf' => array(
@@ -47777,7 +48590,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OfficialLegalValue' => array(
 			'subTypeOf' => array(
@@ -47790,7 +48604,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OfflineEventAttendanceMode' => array(
 			'subTypeOf' => array(
@@ -47803,7 +48618,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OfflinePermanently' => array(
 			'subTypeOf' => array(
@@ -47816,7 +48632,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OfflineTemporarily' => array(
 			'subTypeOf' => array(
@@ -47829,7 +48646,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OnDemandEvent' => array(
 			'subTypeOf' => array(
@@ -47897,7 +48715,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OnSitePickup' => array(
 			'subTypeOf' => array(
@@ -47910,7 +48729,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Oncologic' => array(
 			'subTypeOf' => array(
@@ -48041,7 +48861,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OneTimePayments' => array(
 			'subTypeOf' => array(
@@ -48054,7 +48875,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Online' => array(
 			'subTypeOf' => array(
@@ -48067,7 +48889,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OnlineBusiness' => array(
 			'subTypeOf' => array(
@@ -48160,7 +48983,8 @@
 				'OnlineStore'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OnlineEventAttendanceMode' => array(
 			'subTypeOf' => array(
@@ -48173,7 +48997,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OnlineFull' => array(
 			'subTypeOf' => array(
@@ -48186,7 +49011,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OnlineOnly' => array(
 			'subTypeOf' => array(
@@ -48199,7 +49025,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OnlineStore' => array(
 			'subTypeOf' => array(
@@ -48290,7 +49117,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OpenTrial' => array(
 			'subTypeOf' => array(
@@ -48303,7 +49131,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OpeningHoursSpecification' => array(
 			'subTypeOf' => array(
@@ -48332,7 +49161,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OpinionNewsArticle' => array(
 			'subTypeOf' => array(
@@ -48482,7 +49312,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Optician' => array(
 			'subTypeOf' => array(
@@ -48610,7 +49441,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Optometric' => array(
 			'subTypeOf' => array(
@@ -48741,7 +49573,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Order' => array(
 			'subTypeOf' => array(
@@ -48787,7 +49620,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OrderAction' => array(
 			'subTypeOf' => array(
@@ -48827,7 +49661,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OrderCancelled' => array(
 			'subTypeOf' => array(
@@ -48840,7 +49675,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OrderDelivered' => array(
 			'subTypeOf' => array(
@@ -48853,7 +49689,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OrderInTransit' => array(
 			'subTypeOf' => array(
@@ -48866,7 +49703,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OrderItem' => array(
 			'subTypeOf' => array(
@@ -48895,7 +49733,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OrderPaymentDue' => array(
 			'subTypeOf' => array(
@@ -48908,7 +49747,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OrderPickupAvailable' => array(
 			'subTypeOf' => array(
@@ -48921,7 +49761,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OrderProblem' => array(
 			'subTypeOf' => array(
@@ -48934,7 +49775,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OrderProcessing' => array(
 			'subTypeOf' => array(
@@ -48947,7 +49789,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OrderReturned' => array(
 			'subTypeOf' => array(
@@ -48960,7 +49803,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OrderStatus' => array(
 			'subTypeOf' => array(
@@ -48971,7 +49815,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Organization' => array(
 			'subTypeOf' => array(
@@ -49082,7 +49927,8 @@
 				'WorkersUnion'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OrganizationRole' => array(
 			'subTypeOf' => array(
@@ -49113,7 +49959,8 @@
 				'EmployeeRole'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OrganizeAction' => array(
 			'subTypeOf' => array(
@@ -49154,7 +50001,8 @@
 				'PlanAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OriginalMediaContent' => array(
 			'subTypeOf' => array(
@@ -49167,7 +50015,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OriginalShippingFees' => array(
 			'subTypeOf' => array(
@@ -49180,7 +50029,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Osteopathic' => array(
 			'subTypeOf' => array(
@@ -49193,7 +50043,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Otolaryngologic' => array(
 			'subTypeOf' => array(
@@ -49324,7 +50175,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OutOfStock' => array(
 			'subTypeOf' => array(
@@ -49337,7 +50189,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OutletStore' => array(
 			'subTypeOf' => array(
@@ -49465,7 +50318,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OverviewHealthAspect' => array(
 			'subTypeOf' => array(
@@ -49478,7 +50332,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'OwnershipInfo' => array(
 			'subTypeOf' => array(
@@ -49506,7 +50361,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PET' => array(
 			'subTypeOf' => array(
@@ -49519,7 +50375,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PaidLeave' => array(
 			'subTypeOf' => array(
@@ -49532,7 +50389,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PaintAction' => array(
 			'subTypeOf' => array(
@@ -49568,7 +50426,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Painting' => array(
 			'subTypeOf' => array(
@@ -49705,7 +50564,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PalliativeProcedure' => array(
 			'subTypeOf' => array(
@@ -49750,7 +50610,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Paperback' => array(
 			'subTypeOf' => array(
@@ -49763,7 +50624,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ParcelDelivery' => array(
 			'subTypeOf' => array(
@@ -49799,7 +50661,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ParcelService' => array(
 			'subTypeOf' => array(
@@ -49812,7 +50675,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ParentAudience' => array(
 			'subTypeOf' => array(
@@ -49849,7 +50713,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ParentalSupport' => array(
 			'subTypeOf' => array(
@@ -49862,7 +50727,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Park' => array(
 			'subTypeOf' => array(
@@ -49932,7 +50798,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ParkingFacility' => array(
 			'subTypeOf' => array(
@@ -50002,7 +50869,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ParkingMap' => array(
 			'subTypeOf' => array(
@@ -50015,7 +50883,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PartiallyInForce' => array(
 			'subTypeOf' => array(
@@ -50028,7 +50897,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Pathology' => array(
 			'subTypeOf' => array(
@@ -50041,7 +50911,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PathologyTest' => array(
 			'subTypeOf' => array(
@@ -50079,7 +50950,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Patient' => array(
 			'subTypeOf' => array(
@@ -50182,7 +51054,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PatientExperienceHealthAspect' => array(
 			'subTypeOf' => array(
@@ -50195,7 +51068,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PawnShop' => array(
 			'subTypeOf' => array(
@@ -50323,7 +51197,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PayAction' => array(
 			'subTypeOf' => array(
@@ -50363,7 +51238,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PaymentAutomaticallyApplied' => array(
 			'subTypeOf' => array(
@@ -50376,7 +51252,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PaymentCard' => array(
 			'subTypeOf' => array(
@@ -50434,7 +51311,8 @@
 				'CreditCard'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PaymentChargeSpecification' => array(
 			'subTypeOf' => array(
@@ -50469,7 +51347,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PaymentComplete' => array(
 			'subTypeOf' => array(
@@ -50482,7 +51361,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PaymentDeclined' => array(
 			'subTypeOf' => array(
@@ -50495,7 +51375,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PaymentDue' => array(
 			'subTypeOf' => array(
@@ -50508,7 +51389,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PaymentMethod' => array(
 			'subTypeOf' => array(
@@ -50521,7 +51403,8 @@
 				'PaymentCard'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PaymentPastDue' => array(
 			'subTypeOf' => array(
@@ -50534,7 +51417,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PaymentService' => array(
 			'subTypeOf' => array(
@@ -50585,7 +51469,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PaymentStatusType' => array(
 			'subTypeOf' => array(
@@ -50596,7 +51481,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Pediatric' => array(
 			'subTypeOf' => array(
@@ -50727,7 +51613,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PeopleAudience' => array(
 			'subTypeOf' => array(
@@ -50765,7 +51652,8 @@
 				'ParentAudience'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PercutaneousProcedure' => array(
 			'subTypeOf' => array(
@@ -50778,7 +51666,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PerformAction' => array(
 			'subTypeOf' => array(
@@ -50817,7 +51706,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PerformanceRole' => array(
 			'subTypeOf' => array(
@@ -50846,7 +51736,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PerformingArtsTheater' => array(
 			'subTypeOf' => array(
@@ -50916,7 +51807,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PerformingGroup' => array(
 			'subTypeOf' => array(
@@ -51011,7 +51903,8 @@
 				'TheaterGroup'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Periodical' => array(
 			'subTypeOf' => array(
@@ -51156,7 +52049,8 @@
 				'Newspaper'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Permit' => array(
 			'subTypeOf' => array(
@@ -51189,7 +52083,8 @@
 				'GovernmentPermit'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Person' => array(
 			'subTypeOf' => array(
@@ -51280,7 +52175,8 @@
 				'Patient'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PetStore' => array(
 			'subTypeOf' => array(
@@ -51408,7 +52304,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Pharmacy' => array(
 			'subTypeOf' => array(
@@ -51540,7 +52437,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PharmacySpecialty' => array(
 			'subTypeOf' => array(
@@ -51553,7 +52451,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Photograph' => array(
 			'subTypeOf' => array(
@@ -51690,7 +52589,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PhotographAction' => array(
 			'subTypeOf' => array(
@@ -51726,7 +52626,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PhysicalActivity' => array(
 			'subTypeOf' => array(
@@ -51764,7 +52665,8 @@
 				'ExercisePlan'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PhysicalActivityCategory' => array(
 			'subTypeOf' => array(
@@ -51775,7 +52677,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PhysicalExam' => array(
 			'subTypeOf' => array(
@@ -51814,7 +52717,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PhysicalTherapy' => array(
 			'subTypeOf' => array(
@@ -51858,7 +52762,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Physician' => array(
 			'subTypeOf' => array(
@@ -51992,7 +52897,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Physiotherapy' => array(
 			'subTypeOf' => array(
@@ -52123,7 +53029,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Place' => array(
 			'subTypeOf' => array(
@@ -52202,7 +53109,8 @@
 				'TouristDestination'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PlaceOfWorship' => array(
 			'subTypeOf' => array(
@@ -52278,7 +53186,8 @@
 				'Synagogue'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PlaceboControlledTrial' => array(
 			'subTypeOf' => array(
@@ -52291,7 +53200,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PlanAction' => array(
 			'subTypeOf' => array(
@@ -52332,7 +53242,8 @@
 				'ScheduleAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PlasticSurgery' => array(
 			'subTypeOf' => array(
@@ -52463,7 +53374,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Play' => array(
 			'subTypeOf' => array(
@@ -52600,7 +53512,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PlayAction' => array(
 			'subTypeOf' => array(
@@ -52641,7 +53554,8 @@
 				'PerformAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PlayGameAction' => array(
 			'subTypeOf' => array(
@@ -52680,7 +53594,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Playground' => array(
 			'subTypeOf' => array(
@@ -52750,7 +53665,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Plumber' => array(
 			'subTypeOf' => array(
@@ -52878,7 +53794,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PodcastEpisode' => array(
 			'subTypeOf' => array(
@@ -53026,7 +53943,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PodcastSeason' => array(
 			'subTypeOf' => array(
@@ -53174,7 +54092,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PodcastSeries' => array(
 			'subTypeOf' => array(
@@ -53316,7 +54235,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Podiatric' => array(
 			'subTypeOf' => array(
@@ -53447,7 +54367,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PoliceStation' => array(
 			'subTypeOf' => array(
@@ -53576,7 +54497,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PoliticalParty' => array(
 			'subTypeOf' => array(
@@ -53667,7 +54589,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Pond' => array(
 			'subTypeOf' => array(
@@ -53736,7 +54659,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PostOffice' => array(
 			'subTypeOf' => array(
@@ -53864,7 +54788,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PostalAddress' => array(
 			'subTypeOf' => array(
@@ -53904,7 +54829,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PostalCodeRangeSpecification' => array(
 			'subTypeOf' => array(
@@ -53930,7 +54856,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Poster' => array(
 			'subTypeOf' => array(
@@ -54067,7 +54994,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PotentialActionStatus' => array(
 			'subTypeOf' => array(
@@ -54080,7 +55008,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PreOrder' => array(
 			'subTypeOf' => array(
@@ -54093,7 +55022,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PreOrderAction' => array(
 			'subTypeOf' => array(
@@ -54132,7 +55062,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PreSale' => array(
 			'subTypeOf' => array(
@@ -54145,7 +55076,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PregnancyHealthAspect' => array(
 			'subTypeOf' => array(
@@ -54158,7 +55090,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PrependAction' => array(
 			'subTypeOf' => array(
@@ -54197,7 +55130,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Preschool' => array(
 			'subTypeOf' => array(
@@ -54321,7 +55255,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PrescriptionOnly' => array(
 			'subTypeOf' => array(
@@ -54334,7 +55269,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PresentationDigitalDocument' => array(
 			'subTypeOf' => array(
@@ -54472,7 +55408,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PreventionHealthAspect' => array(
 			'subTypeOf' => array(
@@ -54485,7 +55422,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PreventionIndication' => array(
 			'subTypeOf' => array(
@@ -54517,7 +55455,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PriceComponentTypeEnumeration' => array(
 			'subTypeOf' => array(
@@ -54528,7 +55467,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PriceSpecification' => array(
 			'subTypeOf' => array(
@@ -54566,7 +55506,8 @@
 				'UnitPriceSpecification'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PriceTypeEnumeration' => array(
 			'subTypeOf' => array(
@@ -54577,7 +55518,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PrimaryCare' => array(
 			'subTypeOf' => array(
@@ -54708,7 +55650,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Prion' => array(
 			'subTypeOf' => array(
@@ -54721,7 +55664,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Product' => array(
 			'subTypeOf' => array(
@@ -54810,7 +55754,8 @@
 				'Vehicle'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ProductCollection' => array(
 			'subTypeOf' => array(
@@ -54992,7 +55937,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ProductGroup' => array(
 			'subTypeOf' => array(
@@ -55075,7 +56021,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ProductModel' => array(
 			'subTypeOf' => array(
@@ -55157,7 +56104,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ProfessionalService' => array(
 			'subTypeOf' => array(
@@ -55285,7 +56233,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ProfilePage' => array(
 			'subTypeOf' => array(
@@ -55432,7 +56381,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PrognosisHealthAspect' => array(
 			'subTypeOf' => array(
@@ -55445,7 +56395,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ProgramMembership' => array(
 			'subTypeOf' => array(
@@ -55475,7 +56426,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Project' => array(
 			'subTypeOf' => array(
@@ -55569,7 +56521,8 @@
 				'ResearchProject'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PronounceableText' => array(
 			'subTypeOf' => array(
@@ -55585,7 +56538,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Property' => array(
 			'subTypeOf' => array(
@@ -55615,7 +56569,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PropertyValue' => array(
 			'subTypeOf' => array(
@@ -55650,7 +56605,8 @@
 				'LocationFeatureSpecification'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PropertyValueSpecification' => array(
 			'subTypeOf' => array(
@@ -55685,7 +56641,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Protein' => array(
 			'subTypeOf' => array(
@@ -55723,7 +56680,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Protozoa' => array(
 			'subTypeOf' => array(
@@ -55736,7 +56694,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Psychiatric' => array(
 			'subTypeOf' => array(
@@ -55867,7 +56826,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PsychologicalTreatment' => array(
 			'subTypeOf' => array(
@@ -55908,7 +56868,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PublicHealth' => array(
 			'subTypeOf' => array(
@@ -56039,7 +57000,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PublicHolidays' => array(
 			'subTypeOf' => array(
@@ -56052,7 +57014,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PublicSwimmingPool' => array(
 			'subTypeOf' => array(
@@ -56180,7 +57143,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PublicToilet' => array(
 			'subTypeOf' => array(
@@ -56250,7 +57214,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PublicationEvent' => array(
 			'subTypeOf' => array(
@@ -56321,7 +57286,8 @@
 				'OnDemandEvent'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PublicationIssue' => array(
 			'subTypeOf' => array(
@@ -56466,7 +57432,8 @@
 				'ComicIssue'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'PublicationVolume' => array(
 			'subTypeOf' => array(
@@ -56607,7 +57574,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Pulmonary' => array(
 			'subTypeOf' => array(
@@ -56620,7 +57588,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'QAPage' => array(
 			'subTypeOf' => array(
@@ -56767,7 +57736,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'QualitativeValue' => array(
 			'subTypeOf' => array(
@@ -56792,7 +57762,8 @@
 				'SteeringPositionValue'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'QuantitativeValue' => array(
 			'subTypeOf' => array(
@@ -56825,7 +57796,8 @@
 				'Observation'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'QuantitativeValueDistribution' => array(
 			'subTypeOf' => array(
@@ -56857,7 +57829,8 @@
 				'MonetaryAmountDistribution'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Quantity' => array(
 			'subTypeOf' => array(
@@ -56886,7 +57859,8 @@
 				'Mass'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Question' => array(
 			'subTypeOf' => array(
@@ -57030,7 +58004,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Quiz' => array(
 			'subTypeOf' => array(
@@ -57168,7 +58143,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Quotation' => array(
 			'subTypeOf' => array(
@@ -57306,7 +58282,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'QuoteAction' => array(
 			'subTypeOf' => array(
@@ -57345,7 +58322,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RVPark' => array(
 			'subTypeOf' => array(
@@ -57415,7 +58393,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RadiationTherapy' => array(
 			'subTypeOf' => array(
@@ -57459,7 +58438,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RadioBroadcastService' => array(
 			'subTypeOf' => array(
@@ -57518,7 +58498,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RadioChannel' => array(
 			'subTypeOf' => array(
@@ -57551,7 +58532,8 @@
 				'FMRadioChannel'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RadioClip' => array(
 			'subTypeOf' => array(
@@ -57699,7 +58681,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RadioEpisode' => array(
 			'subTypeOf' => array(
@@ -57847,7 +58830,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RadioSeason' => array(
 			'subTypeOf' => array(
@@ -57995,7 +58979,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RadioSeries' => array(
 			'subTypeOf' => array(
@@ -58149,7 +59134,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RadioStation' => array(
 			'subTypeOf' => array(
@@ -58277,7 +59263,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Radiography' => array(
 			'subTypeOf' => array(
@@ -58290,7 +59277,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RandomizedTrial' => array(
 			'subTypeOf' => array(
@@ -58303,7 +59291,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Rating' => array(
 			'subTypeOf' => array(
@@ -58336,7 +59325,8 @@
 				'EndorsementRating'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReactAction' => array(
 			'subTypeOf' => array(
@@ -58379,7 +59369,8 @@
 				'WantAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReadAction' => array(
 			'subTypeOf' => array(
@@ -58417,7 +59408,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReadPermission' => array(
 			'subTypeOf' => array(
@@ -58430,7 +59422,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RealEstateAgent' => array(
 			'subTypeOf' => array(
@@ -58558,7 +59551,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RealEstateListing' => array(
 			'subTypeOf' => array(
@@ -58707,7 +59701,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RearWheelDriveConfiguration' => array(
 			'subTypeOf' => array(
@@ -58720,7 +59715,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReceiveAction' => array(
 			'subTypeOf' => array(
@@ -58760,7 +59756,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Recipe' => array(
 			'subTypeOf' => array(
@@ -58916,7 +59913,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Recommendation' => array(
 			'subTypeOf' => array(
@@ -59063,7 +60061,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RecommendedDoseSchedule' => array(
 			'subTypeOf' => array(
@@ -59099,7 +60098,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Recruiting' => array(
 			'subTypeOf' => array(
@@ -59112,7 +60112,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RecyclingCenter' => array(
 			'subTypeOf' => array(
@@ -59240,7 +60241,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReducedRelevanceForChildrenConsideration' => array(
 			'subTypeOf' => array(
@@ -59253,7 +60255,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RefundTypeEnumeration' => array(
 			'subTypeOf' => array(
@@ -59264,7 +60267,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RefurbishedCondition' => array(
 			'subTypeOf' => array(
@@ -59277,7 +60281,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RegisterAction' => array(
 			'subTypeOf' => array(
@@ -59313,7 +60318,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Registry' => array(
 			'subTypeOf' => array(
@@ -59326,7 +60332,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReimbursementCap' => array(
 			'subTypeOf' => array(
@@ -59339,7 +60346,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RejectAction' => array(
 			'subTypeOf' => array(
@@ -59375,7 +60383,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RelatedTopicsHealthAspect' => array(
 			'subTypeOf' => array(
@@ -59388,7 +60397,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RemixAlbum' => array(
 			'subTypeOf' => array(
@@ -59401,7 +60411,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Renal' => array(
 			'subTypeOf' => array(
@@ -59414,7 +60425,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RentAction' => array(
 			'subTypeOf' => array(
@@ -59455,7 +60467,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RentalCarReservation' => array(
 			'subTypeOf' => array(
@@ -59496,7 +60509,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RentalVehicleUsage' => array(
 			'subTypeOf' => array(
@@ -59509,7 +60523,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RepaymentSpecification' => array(
 			'subTypeOf' => array(
@@ -59538,7 +60553,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReplaceAction' => array(
 			'subTypeOf' => array(
@@ -59578,7 +60594,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReplyAction' => array(
 			'subTypeOf' => array(
@@ -59619,7 +60636,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Report' => array(
 			'subTypeOf' => array(
@@ -59765,7 +60783,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReportageNewsArticle' => array(
 			'subTypeOf' => array(
@@ -59915,7 +60934,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReportedDoseSchedule' => array(
 			'subTypeOf' => array(
@@ -59951,7 +60971,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ResearchOrganization' => array(
 			'subTypeOf' => array(
@@ -60042,7 +61063,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ResearchProject' => array(
 			'subTypeOf' => array(
@@ -60133,7 +61155,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Researcher' => array(
 			'subTypeOf' => array(
@@ -60159,7 +61182,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Reservation' => array(
 			'subTypeOf' => array(
@@ -60207,7 +61231,8 @@
 				'TrainReservation'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReservationCancelled' => array(
 			'subTypeOf' => array(
@@ -60220,7 +61245,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReservationConfirmed' => array(
 			'subTypeOf' => array(
@@ -60233,7 +61259,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReservationHold' => array(
 			'subTypeOf' => array(
@@ -60246,7 +61273,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReservationPackage' => array(
 			'subTypeOf' => array(
@@ -60284,7 +61312,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReservationPending' => array(
 			'subTypeOf' => array(
@@ -60297,7 +61326,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReservationStatusType' => array(
 			'subTypeOf' => array(
@@ -60308,7 +61338,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReserveAction' => array(
 			'subTypeOf' => array(
@@ -60345,7 +61376,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Reservoir' => array(
 			'subTypeOf' => array(
@@ -60414,7 +61446,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Residence' => array(
 			'subTypeOf' => array(
@@ -60487,7 +61520,8 @@
 				'GatedResidenceCommunity'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Resort' => array(
 			'subTypeOf' => array(
@@ -60624,7 +61658,8 @@
 				'SkiResort'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RespiratoryTherapy' => array(
 			'subTypeOf' => array(
@@ -60638,7 +61673,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Restaurant' => array(
 			'subTypeOf' => array(
@@ -60771,7 +61807,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RestockingFees' => array(
 			'subTypeOf' => array(
@@ -60784,7 +61821,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RestrictedDiet' => array(
 			'subTypeOf' => array(
@@ -60795,7 +61833,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ResultsAvailable' => array(
 			'subTypeOf' => array(
@@ -60808,7 +61847,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ResultsNotAvailable' => array(
 			'subTypeOf' => array(
@@ -60821,7 +61861,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ResumeAction' => array(
 			'subTypeOf' => array(
@@ -60857,7 +61898,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Retail' => array(
 			'subTypeOf' => array(
@@ -60870,7 +61912,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReturnAction' => array(
 			'subTypeOf' => array(
@@ -60909,7 +61952,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReturnAtKiosk' => array(
 			'subTypeOf' => array(
@@ -60922,7 +61966,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReturnByMail' => array(
 			'subTypeOf' => array(
@@ -60935,7 +61980,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReturnFeesCustomerResponsibility' => array(
 			'subTypeOf' => array(
@@ -60948,7 +61994,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReturnFeesEnumeration' => array(
 			'subTypeOf' => array(
@@ -60959,7 +62006,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReturnInStore' => array(
 			'subTypeOf' => array(
@@ -60972,7 +62020,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReturnLabelCustomerResponsibility' => array(
 			'subTypeOf' => array(
@@ -60985,7 +62034,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReturnLabelDownloadAndPrint' => array(
 			'subTypeOf' => array(
@@ -60998,7 +62048,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReturnLabelInBox' => array(
 			'subTypeOf' => array(
@@ -61011,7 +62062,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReturnLabelSourceEnumeration' => array(
 			'subTypeOf' => array(
@@ -61022,7 +62074,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReturnMethodEnumeration' => array(
 			'subTypeOf' => array(
@@ -61033,7 +62086,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReturnShippingFees' => array(
 			'subTypeOf' => array(
@@ -61046,7 +62100,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Review' => array(
 			'subTypeOf' => array(
@@ -61199,7 +62254,8 @@
 				'UserReview'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReviewAction' => array(
 			'subTypeOf' => array(
@@ -61236,7 +62292,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ReviewNewsArticle' => array(
 			'subTypeOf' => array(
@@ -61396,7 +62453,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Rheumatologic' => array(
 			'subTypeOf' => array(
@@ -61409,7 +62467,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RightHandDriving' => array(
 			'subTypeOf' => array(
@@ -61422,7 +62481,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RisksOrComplicationsHealthAspect' => array(
 			'subTypeOf' => array(
@@ -61435,7 +62495,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RiverBodyOfWater' => array(
 			'subTypeOf' => array(
@@ -61504,7 +62565,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Role' => array(
 			'subTypeOf' => array(
@@ -61536,7 +62598,8 @@
 				'PerformanceRole'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RoofingContractor' => array(
 			'subTypeOf' => array(
@@ -61664,7 +62727,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Room' => array(
 			'subTypeOf' => array(
@@ -61751,7 +62815,8 @@
 				'MeetingRoom'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RsvpAction' => array(
 			'subTypeOf' => array(
@@ -61795,7 +62860,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RsvpResponseMaybe' => array(
 			'subTypeOf' => array(
@@ -61808,7 +62874,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RsvpResponseNo' => array(
 			'subTypeOf' => array(
@@ -61821,7 +62888,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RsvpResponseType' => array(
 			'subTypeOf' => array(
@@ -61832,7 +62900,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'RsvpResponseYes' => array(
 			'subTypeOf' => array(
@@ -61845,7 +62914,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SRP' => array(
 			'subTypeOf' => array(
@@ -61858,7 +62928,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SafetyHealthAspect' => array(
 			'subTypeOf' => array(
@@ -61871,7 +62942,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SaleEvent' => array(
 			'subTypeOf' => array(
@@ -61936,7 +63008,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SalePrice' => array(
 			'subTypeOf' => array(
@@ -61949,7 +63022,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SatireOrParodyContent' => array(
 			'subTypeOf' => array(
@@ -61962,7 +63036,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SatiricalArticle' => array(
 			'subTypeOf' => array(
@@ -62107,7 +63182,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Saturday' => array(
 			'subTypeOf' => array(
@@ -62120,7 +63196,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Schedule' => array(
 			'subTypeOf' => array(
@@ -62157,7 +63234,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ScheduleAction' => array(
 			'subTypeOf' => array(
@@ -62194,7 +63272,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ScholarlyArticle' => array(
 			'subTypeOf' => array(
@@ -62341,7 +63420,8 @@
 				'MedicalScholarlyArticle'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'School' => array(
 			'subTypeOf' => array(
@@ -62465,7 +63545,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SchoolDistrict' => array(
 			'subTypeOf' => array(
@@ -62534,7 +63615,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ScreeningEvent' => array(
 			'subTypeOf' => array(
@@ -62602,7 +63684,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ScreeningHealthAspect' => array(
 			'subTypeOf' => array(
@@ -62615,7 +63698,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Sculpture' => array(
 			'subTypeOf' => array(
@@ -62752,7 +63836,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SeaBodyOfWater' => array(
 			'subTypeOf' => array(
@@ -62821,7 +63906,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SearchAction' => array(
 			'subTypeOf' => array(
@@ -62858,7 +63944,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SearchRescueOrganization' => array(
 			'subTypeOf' => array(
@@ -62949,7 +64036,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SearchResultsPage' => array(
 			'subTypeOf' => array(
@@ -63096,7 +64184,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Season' => array(
 			'subTypeOf' => array(
@@ -63235,7 +64324,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'CreativeWorkSeason'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'Seat' => array(
 			'subTypeOf' => array(
@@ -63263,7 +64353,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SeatingMap' => array(
 			'subTypeOf' => array(
@@ -63276,7 +64367,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SeeDoctorHealthAspect' => array(
 			'subTypeOf' => array(
@@ -63289,7 +64381,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SeekToAction' => array(
 			'subTypeOf' => array(
@@ -63326,7 +64419,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SelfCareHealthAspect' => array(
 			'subTypeOf' => array(
@@ -63339,7 +64433,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SelfStorage' => array(
 			'subTypeOf' => array(
@@ -63467,7 +64562,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SellAction' => array(
 			'subTypeOf' => array(
@@ -63508,7 +64604,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SendAction' => array(
 			'subTypeOf' => array(
@@ -63548,7 +64645,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Series' => array(
 			'subTypeOf' => array(
@@ -63575,7 +64673,8 @@
 				'EventSeries'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Service' => array(
 			'subTypeOf' => array(
@@ -63632,7 +64731,8 @@
 				'WebAPI'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ServiceChannel' => array(
 			'subTypeOf' => array(
@@ -63664,7 +64764,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SexualContentConsideration' => array(
 			'subTypeOf' => array(
@@ -63677,7 +64778,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ShareAction' => array(
 			'subTypeOf' => array(
@@ -63717,7 +64819,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SheetMusic' => array(
 			'subTypeOf' => array(
@@ -63854,7 +64957,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ShippingDeliveryTime' => array(
 			'subTypeOf' => array(
@@ -63882,7 +64986,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ShippingRateSettings' => array(
 			'subTypeOf' => array(
@@ -63912,7 +65017,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ShoeStore' => array(
 			'subTypeOf' => array(
@@ -64040,7 +65146,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ShoppingCenter' => array(
 			'subTypeOf' => array(
@@ -64168,7 +65275,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ShortStory' => array(
 			'subTypeOf' => array(
@@ -64305,7 +65413,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SideEffectsHealthAspect' => array(
 			'subTypeOf' => array(
@@ -64318,7 +65427,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SingleBlindedTrial' => array(
 			'subTypeOf' => array(
@@ -64331,7 +65441,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SingleCenterTrial' => array(
 			'subTypeOf' => array(
@@ -64344,7 +65455,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SingleFamilyResidence' => array(
 			'subTypeOf' => array(
@@ -64428,7 +65540,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SinglePlayer' => array(
 			'subTypeOf' => array(
@@ -64441,7 +65554,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SingleRelease' => array(
 			'subTypeOf' => array(
@@ -64454,7 +65568,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SiteNavigationElement' => array(
 			'subTypeOf' => array(
@@ -64593,7 +65708,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SizeGroupEnumeration' => array(
 			'subTypeOf' => array(
@@ -64606,7 +65722,8 @@
 				'WearableSizeGroupEnumeration'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SizeSpecification' => array(
 			'subTypeOf' => array(
@@ -64632,7 +65749,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SizeSystemEnumeration' => array(
 			'subTypeOf' => array(
@@ -64645,7 +65763,8 @@
 				'WearableSizeSystemEnumeration'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SizeSystemImperial' => array(
 			'subTypeOf' => array(
@@ -64658,7 +65777,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SizeSystemMetric' => array(
 			'subTypeOf' => array(
@@ -64671,7 +65791,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SkiResort' => array(
 			'subTypeOf' => array(
@@ -64807,7 +65928,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Skin' => array(
 			'subTypeOf' => array(
@@ -64820,7 +65942,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SocialEvent' => array(
 			'subTypeOf' => array(
@@ -64885,7 +66008,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SocialMediaPosting' => array(
 			'subTypeOf' => array(
@@ -65034,7 +66158,8 @@
 				'DiscussionForumPosting'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SoftwareApplication' => array(
 			'subTypeOf' => array(
@@ -65199,7 +66324,8 @@
 				'WebApplication'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SoftwareSourceCode' => array(
 			'subTypeOf' => array(
@@ -65345,7 +66471,8 @@
 			'supersedes' => array(
 				'Code'
 			),
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SoldOut' => array(
 			'subTypeOf' => array(
@@ -65358,7 +66485,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SolveMathAction' => array(
 			'subTypeOf' => array(
@@ -65395,7 +66523,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SomeProducts' => array(
 			'subTypeOf' => array(
@@ -65476,7 +66605,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SoundtrackAlbum' => array(
 			'subTypeOf' => array(
@@ -65489,7 +66619,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SpeakableSpecification' => array(
 			'subTypeOf' => array(
@@ -65515,7 +66646,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SpecialAnnouncement' => array(
 			'subTypeOf' => array(
@@ -65665,7 +66797,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Specialty' => array(
 			'subTypeOf' => array(
@@ -65678,7 +66811,8 @@
 				'MedicalSpecialty'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SpeechPathology' => array(
 			'subTypeOf' => array(
@@ -65691,7 +66825,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SpokenWordAlbum' => array(
 			'subTypeOf' => array(
@@ -65704,7 +66839,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SportingGoodsStore' => array(
 			'subTypeOf' => array(
@@ -65832,7 +66968,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SportsActivityLocation' => array(
 			'subTypeOf' => array(
@@ -65970,7 +67107,8 @@
 				'TennisComplex'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SportsClub' => array(
 			'subTypeOf' => array(
@@ -66098,7 +67236,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SportsEvent' => array(
 			'subTypeOf' => array(
@@ -66167,7 +67306,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SportsOrganization' => array(
 			'subTypeOf' => array(
@@ -66261,7 +67401,8 @@
 				'SportsTeam'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SportsTeam' => array(
 			'subTypeOf' => array(
@@ -66356,7 +67497,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SpreadsheetDigitalDocument' => array(
 			'subTypeOf' => array(
@@ -66494,7 +67636,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'StadiumOrArena' => array(
 			'subTypeOf' => array(
@@ -66623,7 +67766,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'StagedContent' => array(
 			'subTypeOf' => array(
@@ -66636,7 +67780,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'StagesHealthAspect' => array(
 			'subTypeOf' => array(
@@ -66649,7 +67794,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'State' => array(
 			'subTypeOf' => array(
@@ -66718,7 +67864,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Statement' => array(
 			'subTypeOf' => array(
@@ -66855,7 +68002,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'StatisticalPopulation' => array(
 			'subTypeOf' => array(
@@ -66880,7 +68028,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'StatisticalVariable' => array(
 			'subTypeOf' => array(
@@ -66913,7 +68062,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'StatusEnumeration' => array(
 			'subTypeOf' => array(
@@ -66932,7 +68082,8 @@
 				'ReservationStatusType'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SteeringPositionValue' => array(
 			'subTypeOf' => array(
@@ -66952,7 +68103,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Store' => array(
 			'subTypeOf' => array(
@@ -67111,7 +68263,8 @@
 				'WholesaleStore'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'StoreCreditRefund' => array(
 			'subTypeOf' => array(
@@ -67124,7 +68277,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'StrengthTraining' => array(
 			'subTypeOf' => array(
@@ -67137,7 +68291,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'StructuredValue' => array(
 			'subTypeOf' => array(
@@ -67187,7 +68342,8 @@
 				'WarrantyPromise'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'StudioAlbum' => array(
 			'subTypeOf' => array(
@@ -67200,7 +68356,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SubscribeAction' => array(
 			'subTypeOf' => array(
@@ -67236,7 +68393,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Subscription' => array(
 			'subTypeOf' => array(
@@ -67249,7 +68407,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Substance' => array(
 			'subTypeOf' => array(
@@ -67288,7 +68447,8 @@
 				'Drug'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SubwayStation' => array(
 			'subTypeOf' => array(
@@ -67358,7 +68518,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Suite' => array(
 			'subTypeOf' => array(
@@ -67442,7 +68603,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Sunday' => array(
 			'subTypeOf' => array(
@@ -67455,7 +68617,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SuperficialAnatomy' => array(
 			'subTypeOf' => array(
@@ -67492,7 +68655,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Surgical' => array(
 			'subTypeOf' => array(
@@ -67505,7 +68669,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SurgicalProcedure' => array(
 			'subTypeOf' => array(
@@ -67545,7 +68710,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SuspendAction' => array(
 			'subTypeOf' => array(
@@ -67581,7 +68747,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Suspended' => array(
 			'subTypeOf' => array(
@@ -67594,7 +68761,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Syllabus' => array(
 			'subTypeOf' => array(
@@ -67732,7 +68900,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'SymptomsHealthAspect' => array(
 			'subTypeOf' => array(
@@ -67745,7 +68914,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Synagogue' => array(
 			'subTypeOf' => array(
@@ -67815,7 +68985,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TVClip' => array(
 			'subTypeOf' => array(
@@ -67964,7 +69135,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TVEpisode' => array(
 			'subTypeOf' => array(
@@ -68115,7 +69287,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TVSeason' => array(
 			'subTypeOf' => array(
@@ -68266,7 +69439,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TVSeries' => array(
 			'subTypeOf' => array(
@@ -68422,7 +69596,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Table' => array(
 			'subTypeOf' => array(
@@ -68561,7 +69736,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TakeAction' => array(
 			'subTypeOf' => array(
@@ -68599,7 +69775,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TattooParlor' => array(
 			'subTypeOf' => array(
@@ -68727,7 +69904,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Taxi' => array(
 			'subTypeOf' => array(
@@ -68777,7 +69955,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'TaxiService'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'TaxiReservation' => array(
 			'subTypeOf' => array(
@@ -68817,7 +69996,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TaxiService' => array(
 			'subTypeOf' => array(
@@ -68867,7 +70047,8 @@
 			'supersedes' => array(
 				'Taxi'
 			),
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TaxiStand' => array(
 			'subTypeOf' => array(
@@ -68937,7 +70118,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TaxiVehicleUsage' => array(
 			'subTypeOf' => array(
@@ -68950,7 +70132,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Taxon' => array(
 			'subTypeOf' => array(
@@ -68978,7 +70161,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TechArticle' => array(
 			'subTypeOf' => array(
@@ -69127,7 +70311,8 @@
 				'APIReference'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TelevisionChannel' => array(
 			'subTypeOf' => array(
@@ -69157,7 +70342,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TelevisionStation' => array(
 			'subTypeOf' => array(
@@ -69285,7 +70471,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TennisComplex' => array(
 			'subTypeOf' => array(
@@ -69413,7 +70600,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Terminated' => array(
 			'subTypeOf' => array(
@@ -69426,7 +70614,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Text' => array(
 			'subTypeOf' => '',
@@ -69440,7 +70629,8 @@
 				'XPathType'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TextDigitalDocument' => array(
 			'subTypeOf' => array(
@@ -69578,7 +70768,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TextObject' => array(
 			'subTypeOf' => array(
@@ -69735,7 +70926,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TheaterEvent' => array(
 			'subTypeOf' => array(
@@ -69800,7 +70992,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TheaterGroup' => array(
 			'subTypeOf' => array(
@@ -69891,7 +71084,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Therapeutic' => array(
 			'subTypeOf' => array(
@@ -69904,7 +71098,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TherapeuticProcedure' => array(
 			'subTypeOf' => array(
@@ -69950,7 +71145,8 @@
 				'PsychologicalTreatment'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Thesis' => array(
 			'subTypeOf' => array(
@@ -70088,7 +71284,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Thing' => array(
 			'subTypeOf' => '',
@@ -70123,7 +71320,8 @@
 				'Taxon'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Throat' => array(
 			'subTypeOf' => array(
@@ -70136,7 +71334,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Thursday' => array(
 			'subTypeOf' => array(
@@ -70149,7 +71348,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Ticket' => array(
 			'subTypeOf' => array(
@@ -70181,7 +71381,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TieAction' => array(
 			'subTypeOf' => array(
@@ -70217,7 +71418,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Time' => array(
 			'subTypeOf' => '',
@@ -70226,7 +71428,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TipAction' => array(
 			'subTypeOf' => array(
@@ -70266,7 +71469,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TireShop' => array(
 			'subTypeOf' => array(
@@ -70394,7 +71598,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TobaccoNicotineConsideration' => array(
 			'subTypeOf' => array(
@@ -70407,7 +71612,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TollFree' => array(
 			'subTypeOf' => array(
@@ -70420,7 +71626,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TouristAttraction' => array(
 			'subTypeOf' => array(
@@ -70491,7 +71698,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TouristDestination' => array(
 			'subTypeOf' => array(
@@ -70562,7 +71770,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TouristInformationCenter' => array(
 			'subTypeOf' => array(
@@ -70690,7 +71899,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TouristTrip' => array(
 			'subTypeOf' => array(
@@ -70723,7 +71933,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Toxicologic' => array(
 			'subTypeOf' => array(
@@ -70736,7 +71947,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ToyStore' => array(
 			'subTypeOf' => array(
@@ -70864,7 +72076,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TrackAction' => array(
 			'subTypeOf' => array(
@@ -70901,7 +72114,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TradeAction' => array(
 			'subTypeOf' => array(
@@ -70950,7 +72164,8 @@
 				'TipAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TraditionalChinese' => array(
 			'subTypeOf' => array(
@@ -70963,7 +72178,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TrainReservation' => array(
 			'subTypeOf' => array(
@@ -71000,7 +72216,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TrainStation' => array(
 			'subTypeOf' => array(
@@ -71070,7 +72287,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TrainTrip' => array(
 			'subTypeOf' => array(
@@ -71108,7 +72326,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TransferAction' => array(
 			'subTypeOf' => array(
@@ -71156,7 +72375,8 @@
 				'TakeAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TransformedContent' => array(
 			'subTypeOf' => array(
@@ -71169,7 +72389,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TransitMap' => array(
 			'subTypeOf' => array(
@@ -71182,7 +72403,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TravelAction' => array(
 			'subTypeOf' => array(
@@ -71221,7 +72443,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TravelAgency' => array(
 			'subTypeOf' => array(
@@ -71349,7 +72572,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TreatmentIndication' => array(
 			'subTypeOf' => array(
@@ -71381,7 +72605,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TreatmentsHealthAspect' => array(
 			'subTypeOf' => array(
@@ -71394,7 +72619,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Trip' => array(
 			'subTypeOf' => array(
@@ -71432,7 +72658,8 @@
 				'TrainTrip'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TripleBlindedTrial' => array(
 			'subTypeOf' => array(
@@ -71445,7 +72672,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TRUE' => array(
 			'subTypeOf' => '',
@@ -71454,7 +72682,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Tuesday' => array(
 			'subTypeOf' => array(
@@ -71467,7 +72696,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TypeAndQuantityNode' => array(
 			'subTypeOf' => array(
@@ -71496,7 +72726,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'TypesHealthAspect' => array(
 			'subTypeOf' => array(
@@ -71509,7 +72740,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'UKNonprofitType' => array(
 			'subTypeOf' => array(
@@ -71520,7 +72752,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'UKTrust' => array(
 			'subTypeOf' => array(
@@ -71533,7 +72766,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'URL' => array(
 			'subTypeOf' => array(
@@ -71544,7 +72778,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'USNonprofitType' => array(
 			'subTypeOf' => array(
@@ -71555,7 +72790,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Ultrasound' => array(
 			'subTypeOf' => array(
@@ -71568,7 +72804,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'UnRegisterAction' => array(
 			'subTypeOf' => array(
@@ -71604,7 +72841,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'UnclassifiedAdultConsideration' => array(
 			'subTypeOf' => array(
@@ -71617,7 +72855,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'UnemploymentSupport' => array(
 			'subTypeOf' => array(
@@ -71630,7 +72869,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'UnincorporatedAssociationCharity' => array(
 			'subTypeOf' => array(
@@ -71643,7 +72883,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'UnitPriceSpecification' => array(
 			'subTypeOf' => array(
@@ -71684,7 +72925,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'UnofficialLegalValue' => array(
 			'subTypeOf' => array(
@@ -71697,7 +72939,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'UpdateAction' => array(
 			'subTypeOf' => array(
@@ -71739,7 +72982,8 @@
 				'ReplaceAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Urologic' => array(
 			'subTypeOf' => array(
@@ -71752,7 +72996,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'UsageOrScheduleHealthAspect' => array(
 			'subTypeOf' => array(
@@ -71765,7 +73010,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'UseAction' => array(
 			'subTypeOf' => array(
@@ -71805,7 +73051,8 @@
 				'WearAction'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'UsedCondition' => array(
 			'subTypeOf' => array(
@@ -71818,7 +73065,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'UserBlocks' => array(
 			'subTypeOf' => array(
@@ -71885,7 +73133,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'InteractionCounter'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'UserCheckins' => array(
 			'subTypeOf' => array(
@@ -71952,7 +73201,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'InteractionCounter'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'UserComments' => array(
 			'subTypeOf' => array(
@@ -72024,7 +73274,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'InteractionCounter'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'UserDownloads' => array(
 			'subTypeOf' => array(
@@ -72091,7 +73342,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'InteractionCounter'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'UserInteraction' => array(
 			'subTypeOf' => array(
@@ -72168,7 +73420,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'InteractionCounter'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'UserLikes' => array(
 			'subTypeOf' => array(
@@ -72235,7 +73488,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'InteractionCounter'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'UserPageVisits' => array(
 			'subTypeOf' => array(
@@ -72302,7 +73556,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'InteractionCounter'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'UserPlays' => array(
 			'subTypeOf' => array(
@@ -72369,7 +73624,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'InteractionCounter'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'UserPlusOnes' => array(
 			'subTypeOf' => array(
@@ -72436,7 +73692,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'InteractionCounter'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'UserReview' => array(
 			'subTypeOf' => array(
@@ -72582,7 +73839,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'UserTweets' => array(
 			'subTypeOf' => array(
@@ -72649,7 +73907,8 @@
 			'supersedes' => '',
 			'supersededBy' => array(
 				'InteractionCounter'
-			)
+			),
+			'isPartOf' => ''
 		),
 		'VacationRental' => array(
 			'subTypeOf' => array(
@@ -72784,7 +74043,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VeganDiet' => array(
 			'subTypeOf' => array(
@@ -72797,7 +74057,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VegetarianDiet' => array(
 			'subTypeOf' => array(
@@ -72810,7 +74071,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Vehicle' => array(
 			'subTypeOf' => array(
@@ -72933,7 +74195,8 @@
 				'MotorizedBicycle'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Vein' => array(
 			'subTypeOf' => array(
@@ -72976,7 +74239,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VenueMap' => array(
 			'subTypeOf' => array(
@@ -72989,7 +74253,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Vessel' => array(
 			'subTypeOf' => array(
@@ -73033,7 +74298,8 @@
 				'Vein'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VeterinaryCare' => array(
 			'subTypeOf' => array(
@@ -73127,7 +74393,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VideoGallery' => array(
 			'subTypeOf' => array(
@@ -73274,7 +74541,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VideoGame' => array(
 			'subTypeOf' => array(
@@ -73453,7 +74721,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VideoGameClip' => array(
 			'subTypeOf' => array(
@@ -73601,7 +74870,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VideoGameSeries' => array(
 			'subTypeOf' => array(
@@ -73763,7 +75033,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VideoObject' => array(
 			'subTypeOf' => array(
@@ -73930,7 +75201,8 @@
 				'VideoObjectSnapshot'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VideoObjectSnapshot' => array(
 			'subTypeOf' => array(
@@ -74095,7 +75367,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ViewAction' => array(
 			'subTypeOf' => array(
@@ -74133,7 +75406,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VinylFormat' => array(
 			'subTypeOf' => array(
@@ -74146,7 +75420,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ViolenceConsideration' => array(
 			'subTypeOf' => array(
@@ -74159,7 +75434,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VirtualLocation' => array(
 			'subTypeOf' => array(
@@ -74183,7 +75459,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Virus' => array(
 			'subTypeOf' => array(
@@ -74196,7 +75473,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VisualArtsEvent' => array(
 			'subTypeOf' => array(
@@ -74261,7 +75539,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VisualArtwork' => array(
 			'subTypeOf' => array(
@@ -74413,7 +75692,8 @@
 				'CoverArt'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VitalSign' => array(
 			'subTypeOf' => array(
@@ -74463,7 +75743,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Volcano' => array(
 			'subTypeOf' => array(
@@ -74532,7 +75813,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'VoteAction' => array(
 			'subTypeOf' => array(
@@ -74571,7 +75853,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WPAdBlock' => array(
 			'subTypeOf' => array(
@@ -74710,7 +75993,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WPFooter' => array(
 			'subTypeOf' => array(
@@ -74849,7 +76133,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WPHeader' => array(
 			'subTypeOf' => array(
@@ -74988,7 +76273,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WPSideBar' => array(
 			'subTypeOf' => array(
@@ -75127,7 +76413,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WantAction' => array(
 			'subTypeOf' => array(
@@ -75163,7 +76450,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WarrantyPromise' => array(
 			'subTypeOf' => array(
@@ -75189,7 +76477,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WarrantyScope' => array(
 			'subTypeOf' => array(
@@ -75200,7 +76489,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WatchAction' => array(
 			'subTypeOf' => array(
@@ -75238,7 +76528,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Waterfall' => array(
 			'subTypeOf' => array(
@@ -75307,7 +76598,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WeaponConsideration' => array(
 			'subTypeOf' => array(
@@ -75320,7 +76612,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearAction' => array(
 			'subTypeOf' => array(
@@ -75358,7 +76651,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableMeasurementBack' => array(
 			'subTypeOf' => array(
@@ -75371,7 +76665,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableMeasurementChestOrBust' => array(
 			'subTypeOf' => array(
@@ -75384,7 +76679,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableMeasurementCollar' => array(
 			'subTypeOf' => array(
@@ -75397,7 +76693,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableMeasurementCup' => array(
 			'subTypeOf' => array(
@@ -75410,7 +76707,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableMeasurementHeight' => array(
 			'subTypeOf' => array(
@@ -75423,7 +76721,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableMeasurementHips' => array(
 			'subTypeOf' => array(
@@ -75436,7 +76735,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableMeasurementInseam' => array(
 			'subTypeOf' => array(
@@ -75449,7 +76749,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableMeasurementLength' => array(
 			'subTypeOf' => array(
@@ -75462,7 +76763,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableMeasurementOutsideLeg' => array(
 			'subTypeOf' => array(
@@ -75475,7 +76777,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableMeasurementSleeve' => array(
 			'subTypeOf' => array(
@@ -75488,7 +76791,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableMeasurementTypeEnumeration' => array(
 			'subTypeOf' => array(
@@ -75499,7 +76803,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableMeasurementWaist' => array(
 			'subTypeOf' => array(
@@ -75512,7 +76817,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableMeasurementWidth' => array(
 			'subTypeOf' => array(
@@ -75525,7 +76831,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupBig' => array(
 			'subTypeOf' => array(
@@ -75538,7 +76845,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupBoys' => array(
 			'subTypeOf' => array(
@@ -75551,7 +76859,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupEnumeration' => array(
 			'subTypeOf' => array(
@@ -75562,7 +76871,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupExtraShort' => array(
 			'subTypeOf' => array(
@@ -75575,7 +76885,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupExtraTall' => array(
 			'subTypeOf' => array(
@@ -75588,7 +76899,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupGirls' => array(
 			'subTypeOf' => array(
@@ -75601,7 +76913,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupHusky' => array(
 			'subTypeOf' => array(
@@ -75614,7 +76927,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupInfants' => array(
 			'subTypeOf' => array(
@@ -75627,7 +76941,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupJuniors' => array(
 			'subTypeOf' => array(
@@ -75640,7 +76955,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupMaternity' => array(
 			'subTypeOf' => array(
@@ -75653,7 +76969,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupMens' => array(
 			'subTypeOf' => array(
@@ -75666,7 +76983,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupMisses' => array(
 			'subTypeOf' => array(
@@ -75679,7 +76997,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupPetite' => array(
 			'subTypeOf' => array(
@@ -75692,7 +77011,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupPlus' => array(
 			'subTypeOf' => array(
@@ -75705,7 +77025,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupRegular' => array(
 			'subTypeOf' => array(
@@ -75718,7 +77039,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupShort' => array(
 			'subTypeOf' => array(
@@ -75731,7 +77053,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupTall' => array(
 			'subTypeOf' => array(
@@ -75744,7 +77067,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeGroupWomens' => array(
 			'subTypeOf' => array(
@@ -75757,7 +77081,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemAU' => array(
 			'subTypeOf' => array(
@@ -75770,7 +77095,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemBR' => array(
 			'subTypeOf' => array(
@@ -75783,7 +77109,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemCN' => array(
 			'subTypeOf' => array(
@@ -75796,7 +77123,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemContinental' => array(
 			'subTypeOf' => array(
@@ -75809,7 +77137,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemDE' => array(
 			'subTypeOf' => array(
@@ -75822,7 +77151,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemEN13402' => array(
 			'subTypeOf' => array(
@@ -75835,7 +77165,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemEnumeration' => array(
 			'subTypeOf' => array(
@@ -75846,7 +77177,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemEurope' => array(
 			'subTypeOf' => array(
@@ -75859,7 +77191,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemFR' => array(
 			'subTypeOf' => array(
@@ -75872,7 +77205,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemGS1' => array(
 			'subTypeOf' => array(
@@ -75885,7 +77219,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemIT' => array(
 			'subTypeOf' => array(
@@ -75898,7 +77233,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemJP' => array(
 			'subTypeOf' => array(
@@ -75911,7 +77247,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemMX' => array(
 			'subTypeOf' => array(
@@ -75924,7 +77261,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemUK' => array(
 			'subTypeOf' => array(
@@ -75937,7 +77275,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WearableSizeSystemUS' => array(
 			'subTypeOf' => array(
@@ -75950,7 +77289,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WebAPI' => array(
 			'subTypeOf' => array(
@@ -75999,7 +77339,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WebApplication' => array(
 			'subTypeOf' => array(
@@ -76161,7 +77502,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WebContent' => array(
 			'subTypeOf' => array(
@@ -76300,7 +77642,8 @@
 				'HealthTopicContent'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WebPage' => array(
 			'subTypeOf' => array(
@@ -76459,7 +77802,8 @@
 				'SearchResultsPage'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WebPageElement' => array(
 			'subTypeOf' => array(
@@ -76605,7 +77949,8 @@
 				'WPSideBar'
 			),
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WebSite' => array(
 			'subTypeOf' => array(
@@ -76743,7 +78088,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Wednesday' => array(
 			'subTypeOf' => array(
@@ -76756,7 +78102,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WesternConventional' => array(
 			'subTypeOf' => array(
@@ -76769,7 +78116,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Wholesale' => array(
 			'subTypeOf' => array(
@@ -76782,7 +78130,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WholesaleStore' => array(
 			'subTypeOf' => array(
@@ -76910,7 +78259,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WinAction' => array(
 			'subTypeOf' => array(
@@ -76947,7 +78297,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Winery' => array(
 			'subTypeOf' => array(
@@ -77080,7 +78431,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Withdrawn' => array(
 			'subTypeOf' => array(
@@ -77093,7 +78445,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WorkBasedProgram' => array(
 			'subTypeOf' => array(
@@ -77141,7 +78494,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WorkersUnion' => array(
 			'subTypeOf' => array(
@@ -77232,7 +78586,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WriteAction' => array(
 			'subTypeOf' => array(
@@ -77270,7 +78625,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'WritePermission' => array(
 			'subTypeOf' => array(
@@ -77283,7 +78639,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'XPathType' => array(
 			'subTypeOf' => array(
@@ -77294,7 +78651,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'XRay' => array(
 			'subTypeOf' => array(
@@ -77307,7 +78665,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'ZoneBoardingPolicy' => array(
 			'subTypeOf' => array(
@@ -77320,7 +78679,8 @@
 			'properties' => '',
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		),
 		'Zoo' => array(
 			'subTypeOf' => array(
@@ -77390,7 +78750,8 @@
 			),
 			'subTypes' => '',
 			'supersedes' => '',
-			'supersededBy' => ''
+			'supersededBy' => '',
+			'isPartOf' => ''
 		)
 	);
 
