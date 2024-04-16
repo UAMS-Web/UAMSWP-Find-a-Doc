@@ -12387,6 +12387,10 @@
 
 					// Dentist
 
+						/**
+						 * A dentist.
+						 */
+
 						if ( isset($provider_properties_map['Dentist']) ) {
 
 							$provider_properties_map['Dentist']['degrees'] = array(
@@ -12398,6 +12402,10 @@
 
 					// Optician
 
+						/**
+						 * A store that sells reading glasses and similar devices for improving vision.
+						 */
+
 						if ( isset($provider_properties_map['Optician']) ) {
 
 							$provider_properties_map['Optician']['degrees'] = array();
@@ -12405,6 +12413,14 @@
 						}
 
 					// IndividualPhysician
+
+						/**
+						 * An individual medical practitioner. For their official address use
+						 * https://schema.org/address, for affiliations to hospitals use
+						 * https://schema.org/hospitalAffiliation. The https://schema.org/practicesAt
+						 * property can be used to indicate https://schema.org/MedicalOrganization
+						 * hospitals, clinics, pharmacies, etc. where this physician practices.
+						 */
 
 						if ( isset($provider_properties_map['IndividualPhysician']) ) {
 
