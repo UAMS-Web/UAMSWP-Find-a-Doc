@@ -99266,12 +99266,12 @@ function uamswp_fad_schema_org (
 			$type = $schema_org_types[$type];
 
 		// // Merge relevant nodes of the Schema.org properties array into the schema type array
-		// 
+		//
 		// 	foreach ( $schema_type['properties'] as $key => $value ) {
-		// 
+		//
 		// 		$schema_type['properties'][$value] = $schema_org_properties[$value];
 		// 		unset($schema_type['properties'][$key]);
-		// 
+		//
 		// 	}
 
 		// Immediate parent(s) of this type
