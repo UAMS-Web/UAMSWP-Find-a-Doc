@@ -4682,7 +4682,7 @@
 
 																		}
 
-																// Clean up item schema
+																// Clean up recognizedBy item schema
 
 																	if ( $item_schema ) {
 
@@ -4910,9 +4910,9 @@
 
 							} // endif
 
-					}
+					} // endif ( $credential )
 
-				} // endforeach
+				} // endforeach ( $credentials as $credential )
 
 			// Clean up schema list array
 
@@ -6786,10 +6786,10 @@
 							 * organization item schema and so it will not be included.
 							 */
 
-						// awards [superseded]
+						// awards [excluded; superseded]
 
 							/**
-							 * SupersededBy: award
+							 * Note: This term has been superseded by https://schema.org/award.
 							 */
 
 						// boardingPolicy
@@ -17528,7 +17528,7 @@
 
 													if ( !isset($provider_certifications_id) ) {
 
-														$provider_certifications_id = get_field( 'physician_boards', $entity );
+														$provider_certifications_id = get_field( 'physician_boards', $entity ); // int[]
 
 														// Clean up values
 
