@@ -17238,6 +17238,16 @@
 
 														$provider_certifications = get_field( 'physician_boards', $entity );
 
+														// Clean up values
+
+															if ( $provider_certifications ) {
+
+																$provider_certifications = array_filter($provider_certifications);
+																$provider_certifications = array_unique( $provider_certifications, SORT_REGULAR );
+																$provider_certifications = array_values($provider_certifications);
+
+															}
+
 													}
 
 												// Format schema values
