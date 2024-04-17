@@ -49,8 +49,8 @@
 			"key": "field_degree_ctdl",
 			"label": "Credential Transparency Description Language Schema Term",
 			"name": "degree_ctdl",
-			"type": "select",
 			"instructions": "Find information about each term in this schema at <a href='https://credreg.net/ctdl/terms/' target='_blank'>https://credreg.net/ctdl/terms/</a>.",
+			"type": "radio",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -58,6 +58,7 @@
 				"class": "",
 				"id": ""
 			},
+			"acfe_permissions": "",
 			"choices": {
 				"ApprenticeshipCertificate": "ApprenticeshipCertificate",
 				"Assessment": "Assessment",
@@ -94,15 +95,14 @@
 				"SecondarySchoolDiploma": "SecondarySchoolDiploma",
 				"SpecialistDegree": "SpecialistDegree"
 			},
-			"default_value": false,
+			"default_value": "",
 			"allow_null": 1,
-			"multiple": 0,
-			"ui": 1,
-			"ajax": 0,
+			"other_choice": 0,
+			"save_other_choice": 0,
+			"layout": "vertical",
 			"return_format": "value",
-			"allow_custom": 0,
-			"search_placeholder": "Select one",
-			"placeholder": ""
+			"acfe_settings": "",
+			"acfe_validate": ""
 		},
 		{
 			"key": "field_degree_alternatename",
