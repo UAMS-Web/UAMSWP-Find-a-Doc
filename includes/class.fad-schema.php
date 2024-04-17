@@ -15205,214 +15205,14 @@
 									 *     - QuantitativeValue
 									 */
 
-								// address [WIP]
-
-									/**
-									 * Physical address of the item.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - PostalAddress
-									 *     - Text
-									 *
-									 * Used on these types:
-									 *
-									 *     - GeoCoordinates
-									 *     - GeoShape
-									 *     - Organization
-									 *     - Person
-									 *     - Place
-									 */
-
-								// agentInteractionStatistic [excluded; out of scope]
-
-									/**
-									 * The number of completed interactions for this entity, in a particular role
-									 * (the 'agent'), in a particular action (indicated in the statistic), and in a
-									 * particular context (i.e., https://schema.org/interactionService).
-									 *
-									 * Note: This schema property is outside the scope of what should be included in
-									 * Find-a-Doc.
-									 */
-
-								// alumni [excluded; irrelevant]
-
-									/**
-									 * Alumni of an organization.
-									 *
-									 * Inverse-property:
-									 *
-									 *     - alumniOf
-									 *
-									 * Note: This schema property is not relevant to providers or their webpages and
-									 * will not be included.
-									 */
-
-								// amenityFeature [excluded; irrelevant]
-
-									/**
-									 * An amenity feature (e.g., a characteristic or service) of the Accommodation.
-									 * This generic property does not make a statement about whether the feature is
-									 * included in an offer for the main accommodation or available at extra costs.
-									 *
-									 * Note: This schema property is not relevant to providers or their webpages and
-									 * will not be included.
-									 */
-
-								// areaServed [WIP]
-
-									/**
-									 * The geographic area where a service or offered item is provided.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - ContactPoint
-									 *     - DeliveryChargeSpecification
-									 *     - Demand
-									 *     - Offer
-									 *     - Organization
-									 *
-									 * Used on these types:
-									 *
-									 *     - ContactPoint
-									 *     - DeliveryChargeSpecification
-									 *     - Demand
-									 *     - Offer
-									 *     - Organization
-									 *     - Service
-									 */
-
-								// availableService
-
-									/**
-									 * A medical service available from this provider.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - MedicalProcedure
-									 *     - MedicalTest
-									 *
-									 * Used on these types:
-									 *
-									 *     - Hospital
-									 *     - MedicalClinic
-									 *     - Physician
-									 */
-
-									if (
-										(
-											(
-												isset($provider_item_MedicalWebPage)
-												&&
-												in_array(
-													'availableService',
-													$provider_properties_map[$MedicalWebPage_type]['properties']
-												)
-											)
-											||
-											(
-												isset($provider_item_MedicalBusiness)
-												&&
-												in_array(
-													'availableService',
-													$provider_properties_map[$MedicalBusiness_type]['properties']
-												)
-											)
-											||
-											(
-												isset($provider_item_Person)
-												&&
-												in_array(
-													'availableService',
-													$provider_properties_map[$Person_type]['properties']
-												)
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												if ( isset($provider_item_MedicalWebPage) ) {
-
-													uamswp_fad_schema_add_to_item_values(
-														$MedicalWebPage_type, // string // Required // The @type value for the schema item
-														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-														'availableService', // string // Required // Name of schema property
-														$provider_availableService, // mixed // Required // Variable to add as the property value
-														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-														($nesting_level + 1) // int // Required // Current nesting level value
-													);
-
-												}
-
-											// MedicalBusiness
-
-												if ( isset($provider_item_MedicalBusiness) ) {
-
-													uamswp_fad_schema_add_to_item_values(
-														$MedicalBusiness_type, // string // Required // The @type value for the schema item
-														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
-														'availableService', // string // Required // Name of schema property
-														$provider_availableService, // mixed // Required // Variable to add as the property value
-														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-														($nesting_level + 1) // int // Required // Current nesting level value
-													);
-
-												}
-
-											// Person
-
-												if ( isset($provider_item_Person) ) {
-
-													uamswp_fad_schema_add_to_item_values(
-														$Person_type, // string // Required // The @type value for the schema item
-														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-														'availableService', // string // Required // Name of schema property
-														$provider_availableService, // mixed // Required // Variable to add as the property value
-														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-														($nesting_level + 1) // int // Required // Current nesting level value
-													);
-
-												}
-
-										// Merge availableService significantLink value into significantLink
-
-											$provider_availableService_significantLink = $provider_availableService_significantLink ?? null;
-
-											if ( $provider_availableService_significantLink ) {
-
-												$provider_significantLink = uamswp_fad_schema_merge_values(
-													$provider_significantLink, // mixed // Required // Initial schema item property value
-													$provider_availableService_significantLink // mixed // Required // Incoming schema item property value
-												);
-
-											}
-
-										// Merge availableService keywords value into keywords
-
-											$provider_availableService_keywords = $provider_availableService_keywords ?? null;
-
-											if ( $provider_availableService_keywords ) {
-
-												$provider_keywords = uamswp_fad_schema_merge_values(
-													$provider_keywords, // mixed // Required // Initial schema item property value
-													$provider_availableService_keywords // mixed // Required // Incoming schema item property value
-												);
-
-											}
-
-									}
-
 								// medicalSpecialty and specialty
 
-									// List of properties that reference organizations (i.e., 'Organization')
+									/**
+									 * This section is included out of alphabetical order because it is needed for the
+									 * additionalType schema property value.
+									 */
+
+									// List of properties that reference medicalSpecialty and specialty
 
 										$provider_specialty_common = array(
 											'medicalSpecialty',
@@ -15879,6 +15679,25 @@
 
 										}
 
+								// address [WIP]
+
+									/**
+									 * Physical address of the item.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - PostalAddress
+									 *     - Text
+									 *
+									 * Used on these types:
+									 *
+									 *     - GeoCoordinates
+									 *     - GeoShape
+									 *     - Organization
+									 *     - Person
+									 *     - Place
+									 */
+
 								// affiliation
 
 									/**
@@ -16051,6 +15870,17 @@
 												}
 
 									}
+
+								// agentInteractionStatistic [excluded; out of scope]
+
+									/**
+									 * The number of completed interactions for this entity, in a particular role
+									 * (the 'agent'), in a particular action (indicated in the statistic), and in a
+									 * particular context (i.e., https://schema.org/interactionService).
+									 *
+									 * Note: This schema property is outside the scope of what should be included in
+									 * Find-a-Doc.
+									 */
 
 								// aggregateRating [WIP]
 
@@ -16276,6 +16106,19 @@
 
 									}
 
+								// alumni [excluded; irrelevant]
+
+									/**
+									 * Alumni of an organization.
+									 *
+									 * Inverse-property:
+									 *
+									 *     - alumniOf
+									 *
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
+									 */
+
 								// alumniOf [WIP]
 
 									/**
@@ -16292,6 +16135,168 @@
 									 *
 									 *     - Person
 									 */
+
+								// amenityFeature [excluded; irrelevant]
+
+									/**
+									 * An amenity feature (e.g., a characteristic or service) of the Accommodation.
+									 * This generic property does not make a statement about whether the feature is
+									 * included in an offer for the main accommodation or available at extra costs.
+									 *
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
+									 */
+
+								// areaServed [WIP]
+
+									/**
+									 * The geographic area where a service or offered item is provided.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - ContactPoint
+									 *     - DeliveryChargeSpecification
+									 *     - Demand
+									 *     - Offer
+									 *     - Organization
+									 *
+									 * Used on these types:
+									 *
+									 *     - ContactPoint
+									 *     - DeliveryChargeSpecification
+									 *     - Demand
+									 *     - Offer
+									 *     - Organization
+									 *     - Service
+									 */
+
+								// availableService
+
+									/**
+									 * A medical service available from this provider.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - MedicalProcedure
+									 *     - MedicalTest
+									 *
+									 * Used on these types:
+									 *
+									 *     - Hospital
+									 *     - MedicalClinic
+									 *     - Physician
+									 */
+
+									if (
+										(
+											(
+												isset($provider_item_MedicalWebPage)
+												&&
+												in_array(
+													'availableService',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
+											)
+											||
+											(
+												isset($provider_item_MedicalBusiness)
+												&&
+												in_array(
+													'availableService',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
+											)
+											||
+											(
+												isset($provider_item_Person)
+												&&
+												in_array(
+													'availableService',
+													$provider_properties_map[$Person_type]['properties']
+												)
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if ( isset($provider_item_MedicalWebPage) ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+														'availableService', // string // Required // Name of schema property
+														$provider_availableService, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
+
+											// MedicalBusiness
+
+												if ( isset($provider_item_MedicalBusiness) ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+														'availableService', // string // Required // Name of schema property
+														$provider_availableService, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
+
+											// Person
+
+												if ( isset($provider_item_Person) ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$Person_type, // string // Required // The @type value for the schema item
+														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+														'availableService', // string // Required // Name of schema property
+														$provider_availableService, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
+
+										// Merge availableService significantLink value into significantLink
+
+											$provider_availableService_significantLink = $provider_availableService_significantLink ?? null;
+
+											if ( $provider_availableService_significantLink ) {
+
+												$provider_significantLink = uamswp_fad_schema_merge_values(
+													$provider_significantLink, // mixed // Required // Initial schema item property value
+													$provider_availableService_significantLink // mixed // Required // Incoming schema item property value
+												);
+
+											}
+
+										// Merge availableService keywords value into keywords
+
+											$provider_availableService_keywords = $provider_availableService_keywords ?? null;
+
+											if ( $provider_availableService_keywords ) {
+
+												$provider_keywords = uamswp_fad_schema_merge_values(
+													$provider_keywords, // mixed // Required // Initial schema item property value
+													$provider_availableService_keywords // mixed // Required // Incoming schema item property value
+												);
+
+											}
+
+									}
 
 								// award [WIP]
 
