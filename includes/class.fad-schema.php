@@ -14355,17 +14355,37 @@
 
 																// Add degrees
 
-																	if ( $provider_degrees_name_string ) {
+																	// Add full degrees name string
 
-																		$provider_alternateName_variants[] = implode(
-																			', ',
-																			array(
-																				$item,
-																				$provider_degrees_name_string
-																			)
-																		);
+																		if ( $provider_degrees_name_string ) {
 
-																	}
+																			$provider_alternateName_variants[] = implode(
+																				', ',
+																				array(
+																					$item,
+																					$provider_degrees_name_string
+																				)
+																			);
+
+																		}
+
+																	// Add each degree name individually
+
+																		if ( $provider_degrees_name_array ) {
+
+																			foreach ( $provider_degrees_name_array as $provider_degrees_name_array_item ) {
+
+																				$provider_alternateName_variants[] = implode(
+																					', ',
+																					array(
+																						$item,
+																						$provider_degrees_name_array_item
+																					)
+																				);
+
+																			}
+
+																		}
 
 															}
 
