@@ -3535,7 +3535,7 @@
 
 		}
 
-	// Add data to an array defining schema data for hasCertification [WIP]
+	// Add data to an array defining schema data for hasCertification
 
 		function uamswp_fad_schema_hascertification(
 			$certifications, // mixed // Required // ID values for certifications
@@ -3602,6 +3602,7 @@
 
 				$certification_schema_issuedBy = array(
 					'alternateName' => '',
+					'additionalType' => '',
 					'name' => '',
 					'sameAs' => '',
 					'url' => '',
@@ -3625,129 +3626,406 @@
 
 			// Get values
 
-				// additionalType
+				// Loop through each term in the certifications array
 
-					/**
-					 * An additional type for the item, typically used for adding more specific types
-					 * from external vocabularies in microdata syntax. This is a relationship between
-					 * something and a class that the thing is in. Typically the value is a
-					 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
-					 * in RDF. Text values can be used sparingly, for cases where useful information
-					 * can be added without their being an appropriate schema to reference. In the
-					 * case of text values, the class label should follow the schema.org style guide.
-					 *
-					 * Expected Type:
-					 *
-					 *      - Text
-					 *      - URL
-					 */
+					foreach ( $certifications as $item ) {
 
-					$certification_additionalType = 'https://www.wikidata.org/wiki/Q4931289'; // Wikidata item for 'board certification'
+						// Reset individual item schema array
 
-				// alternateName [WIP]
+							$item_schema = $certification_schema;
 
-					/**
-					 * An alias for the item.
-					 *
-					 * Expected Type:
-					 *
-					 *      - Text
-					 */
+						if ( $item ) {
 
-					$certification_alternateName = null;
+							// Get the term
 
-				// alternativeHeadline [WIP]
+								$item_term = get_term( $item, 'board' ); // WP_Term|array|WP_Error|null
 
-					/**
-					 * A secondary title of the CreativeWork.
-					 *
-					 * Expected Type:
-					 *
-					 *      - Text
-					 */
+							// Get the attributes from the term
 
-					$certification_alternativeHeadline = null;
+								if ( is_object($item_term) ) {
 
-				// certificationStatus
+									// additionalType
 
-					/**
-					 * Indicates the current status of a certification: active or inactive.
-					 *
-					 * See also gs1:certificationStatus.
-					 *
-					 * Expected Type:
-					 *
-					 *      - CertificationStatusEnumeration
-					 */
+										/**
+										 * An additional type for the item, typically used for adding more specific types
+										 * from external vocabularies in microdata syntax. This is a relationship between
+										 * something and a class that the thing is in. Typically the value is a
+										 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+										 * in RDF. Text values can be used sparingly, for cases where useful information
+										 * can be added without their being an appropriate schema to reference. In the
+										 * case of text values, the class label should follow the schema.org style guide.
+										 *
+										 * Expected Type:
+										 *
+										 *      - Text
+										 *      - URL
+										 */
 
-					$certification_certificationStatus = 'https://schema.org/CertificationActive';
+										$item_additionalType = 'https://www.wikidata.org/wiki/Q4931289'; // Wikidata item for 'board certification'
+										$item_schema['additionalType'] = $item_additionalType;
 
-				// issuedBy [WIP]
+									// alternateName
 
-					/**
-					 * The organization issuing the item (e.g., a Permit, Ticket, or Certification).
-					 *
-					 * Expected Type:
-					 *
-					 *      - Organization
-					 */
+										/**
+										 * An alias for the item.
+										 *
+										 * Expected Type:
+										 *
+										 *      - Text
+										 */
 
-					$certification_issuedBy = null;
+										// Get alternateName repeater field value
 
-				// mainEntityOfPage [WIP]
+											$item_alternateName_repeater = get_field( 'schema_alternatename', $item_term ) ?? '';
 
-					/**
-					 * Indicates a page (or other CreativeWork) for which this thing is the main
-					 * entity being described.
-					 *
-					 * See background notes [https://schema.org/docs/datamodel.html#mainEntityBackground]
-					 * for details.
-					 *
-					 * Expected Type:
-					 *
-					 *      - CreativeWork
-					 *      - URL
-					 */
+										// Add each item to alternateName property values array
 
-					$certification_mainEntityOfPage = null;
+											$item_alternateName = array();
 
-				// name [WIP]
+											if ( $item_alternateName_repeater ) {
 
-					/**
-					 * The name of the item.
-					 *
-					 * Expected Type:
-					 *
-					 *      - Text
-					 */
+												$item_alternateName = uamswp_fad_schema_alternatename(
+													$item_alternateName_repeater, // array // Required // alternateName repeater field
+													'schema_alternatename_text', // string // Optional // alternateName item field name
+													$item_alternateName // mixed // Optional // Pre-existing schema array for alternateName to which to add alternateName items
+												);
 
-					$certification_name = null;
+											}
 
-				// sameAs [WIP]
+										// Add the value to the schema
 
-					/**
-					 * URL of a reference Web page that unambiguously indicates the item's identity
-					 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
-					 * website).
-					 *
-					 * Expected Type:
-					 *
-					 *      - URL
-					 */
+											$item_schema['alternateName'] = $item_alternateName;
 
-					$certification_sameAs = null;
+									// alternativeHeadline
 
-				// url [WIP]
+										/**
+										 * A secondary title of the CreativeWork.
+										 *
+										 * Expected Type:
+										 *
+										 *      - Text
+										 */
 
-					/**
-					 * URL of the item.
-					 *
-					 * Expected Type:
-					 *
-					 *      - URL
-					 */
+										$item_alternativeHeadline = $item_alternateName;
+										$item_schema['alternativeHeadline'] = $item_alternativeHeadline;
 
-					$certification_url = null;
+									// certificationStatus
+
+										/**
+										 * Indicates the current status of a certification: active or inactive.
+										 *
+										 * See also gs1:certificationStatus.
+										 *
+										 * Expected Type:
+										 *
+										 *      - CertificationStatusEnumeration
+										 */
+
+										$item_certificationStatus = 'https://schema.org/CertificationActive';
+										$item_schema['certificationStatus'] = $item_certificationStatus;
+
+									// issuedBy
+
+										/**
+										 * The organization issuing the item (e.g., a Permit, Ticket, or Certification).
+										 *
+										 * Expected Type:
+										 *
+										 *      - Organization
+										 */
+
+										// Base array
+
+											$item_issuedBy = $certification_schema_issuedBy;
+
+										// Get the organization value
+
+											$item_issuedBy_id = get_field( 'certificate_certifying_body', $item_term ) ?? 0; // int
+
+											// Get the term
+
+												if ( $item_issuedBy_id ) {
+
+													$item_issuedBy_term = get_term( $item_issuedBy_id, 'certifying_body' ); // WP_Term|array|WP_Error|null
+
+													if ( is_object($item_issuedBy_term) ) {
+
+														// Get the attributes from the organization
+
+															// alternateName
+
+																// Get alternateName repeater field value
+
+																	$item_issuedBy_alternateName_repeater = get_field( 'schema_alternatename', $item_issuedBy_term ) ?? array();
+
+																// Add each item to alternateName property values array
+
+																	$item_issuedBy_alternateName = array();
+
+																	if ( $item_issuedBy_alternateName_repeater ) {
+
+																		$item_issuedBy_alternateName = uamswp_fad_schema_alternatename(
+																			$item_issuedBy_alternateName_repeater, // array // Required // alternateName repeater field
+																			'schema_alternatename_text', // string // Optional // alternateName item field name
+																			$item_issuedBy_alternateName // mixed // Optional // Pre-existing schema array for alternateName to which to add alternateName items
+																		);
+
+																	}
+
+																// Add the value to the schema
+
+																	$item_issuedBy['alternateName'] = $item_issuedBy_alternateName;
+
+															// name
+
+																// Get the term name
+
+																	$item_issuedBy_name = $item_issuedBy_term->name ?? '';
+
+																// Add the value to the schema
+
+																	$item_issuedBy['name'] = $item_issuedBy_name ? uamswp_attr_conversion($item_issuedBy_name) : '';
+
+															// sameAs
+
+																// Get sameAs repeater field value
+
+																	$item_issuedBy_sameAs_repeater = get_field( 'schema_sameas', $item_issuedBy_term ) ?? array();
+
+																// Add each item to sameAs property values array
+
+																	$item_issuedBy_sameAs = array();
+
+																	if ( $item_issuedBy_sameAs_repeater ) {
+
+																		$item_issuedBy_sameAs = uamswp_fad_schema_sameas(
+																			$item_issuedBy_sameAs_repeater, // array // Required // sameAs repeater field
+																			'schema_sameas_url', // string // Optional // sameAs item field name
+																			$item_issuedBy_sameAs // array // Optional // Pre-existing schema array for sameAs to which to add sameAs items
+																		);
+
+																	}
+
+																// Add the value to the schema
+
+																	$item_issuedBy['sameAs'] = $item_issuedBy_sameAs;
+
+															// url
+
+																// Query: Does this specialty or subspecialty certificate have a webpage on the certifying body's official website?
+
+																	$item_issuedBy_url_query = get_field( 'certificate_url_query', $item_issuedBy_term ) ?? false; // bool
+
+																// Get Official Website URL
+
+																	$item_issuedBy_url = $item_issuedBy_url_query ? ( get_field( 'schema_url', $item_issuedBy_term ) ?? '' ) : ''; // string
+
+																// Add the value to the schema
+
+																	$item_issuedBy['url'] = $item_issuedBy_url;
+
+													}
+
+												}
+
+											// Clean up issuedBy schema
+
+												if ( $item_issuedBy ) {
+
+													$item_issuedBy = array_filter($item_issuedBy);
+
+												}
+
+											// Add final properties and their values to issuedBy schema
+
+												if ( $item_issuedBy ) {
+
+													// Add @id value
+
+														if (
+															$item_issuedBy_url
+															&&
+															$certification_schema_issuedBy_type
+														) {
+
+															$item_issuedBy['@id'] = $item_issuedBy_url . '#' . $certification_schema_issuedBy_type;
+
+														}
+
+													// Add @type value
+
+														$item_issuedBy['@type'] = $certification_schema_issuedBy_type;
+
+													// Add additionalType value
+
+														$item_issuedBy['additionalType'] = 'https://www.wikidata.org/wiki/Q87415039'; // Wikidata item for 'accrediting body'
+
+												}
+
+											// Sort issuedBy schema properties
+
+												if ( $item_issuedBy ) {
+
+													ksort($item_issuedBy);
+
+												}
+
+										// Add the value to the schema
+
+											if ( $item_issuedBy ) {
+
+												$item_schema['issuedBy'] = $item_issuedBy;
+
+											}
+
+									// mainEntityOfPage
+
+										/**
+										 * Indicates a page (or other CreativeWork) for which this thing is the main
+										 * entity being described.
+										 *
+										 * See background notes [https://schema.org/docs/datamodel.html#mainEntityBackground]
+										 * for details.
+										 *
+										 * Expected Type:
+										 *
+										 *      - CreativeWork
+										 *      - URL
+										 */
+
+										$item_mainEntityOfPage = get_field( 'schema_url', $item_term ) ?? '';
+										$item_schema['mainEntityOfPage'] = $item_mainEntityOfPage;
+
+									// name
+
+										/**
+										 * The name of the item.
+										 *
+										 * Expected Type:
+										 *
+										 *      - Text
+										 */
+
+										// Get Official Name of the Specialty or Subspecialty Certificate
+
+											$item_name = get_field( 'certificate_name', $item_term ) ?? '';
+
+										// Fallback: Get the term name
+
+											$item_name = $item_name ?: ($item_term->name ?? '');
+
+										// Add the value to the schema
+
+											$item_schema['name'] = $item_name ? uamswp_attr_conversion($item_name) : '';
+
+									// sameAs
+
+										/**
+										 * URL of a reference Web page that unambiguously indicates the item's identity
+										 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+										 * website).
+										 *
+										 * Expected Type:
+										 *
+										 *      - URL
+										 */
+
+										// Get sameAs repeater field value
+
+											$item_sameAs_repeater = get_field( 'schema_sameas', $item_term ) ?? array();
+
+										// Add each item to sameAs property values array
+
+											$item_sameAs = array();
+
+											if ( $item_sameAs_repeater ) {
+
+												$item_sameAs = uamswp_fad_schema_sameas(
+													$item_sameAs_repeater, // array // Required // sameAs repeater field
+													'schema_sameas_url', // string // Optional // sameAs item field name
+													$item_sameAs // array // Optional // Pre-existing schema array for sameAs to which to add sameAs items
+												);
+
+											}
+
+										// Add the value to the schema
+
+											$item_schema['sameAs'] = $item_sameAs;
+
+									// url
+
+										/**
+										 * URL of the item.
+										 *
+										 * Expected Type:
+										 *
+										 *      - URL
+										 */
+
+										$item_url = $item_mainEntityOfPage;
+										$item_schema['url'] = $item_url;
+
+								}
+
+							// Clean up schema item array
+
+								$item_schema = array_filter($item_schema);
+
+								if ( $item_schema ) {
+
+									ksort($item_schema);
+
+								}
+
+							// Set the schema item's @type property value
+
+								if ( $item_schema ) {
+
+									$item_schema = array( '@type' => $certification_schema_type ) + $item_schema;
+
+								}
+
+							// Set the schema item's @id property value
+
+								if (
+									$item_schema
+									&&
+									$item_url
+									&&
+									$item_schema['@type']
+								) {
+
+									$item_schema = array( '@id' => $item_url . '#' . $item_schema['@type'] ) + $item_schema;
+
+								}
+
+							// Add the schema item to the output array
+
+								if (
+									isset($item_schema['name'])
+									&&
+									!empty($item_schema['name'])
+								) {
+
+									$hasCertification_schema[] = $item_schema;
+
+								} // endif
+
+						} // endif ( $item )
+
+					} // endforeach ( $certifications as $item )
+
+			// Clean up schema list array
+
+				if ( $hasCertification_schema ) {
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($hasCertification_schema);
+
+				}
+
+			return $hasCertification_schema;
 
 		}
 
