@@ -4611,6 +4611,7 @@
 				);
 
 				$credential_schema_recognizedBy = array(
+					'additionalType' => '',
 					'alternateName' => '',
 					'name' => '',
 					'sameAs' => '',
@@ -4968,25 +4969,43 @@
 
 																	}
 
+																// Add final properties and their values to recognizedBy item schema
+
+																	if ( $item_schema ) {
+
+																		// Add @id value
+
+																			if (
+																				$item_url
+																				&&
+																				$credential_schema_recognizedBy_type
+																			) {
+
+																				$item_schema['@id'] = $item_url . '#' . $credential_schema_recognizedBy_type;
+
+																			}
+
+																		// Add @type value
+
+																			$item_schema['@type'] = $credential_schema_recognizedBy_type;
+
+																		// Add additionalType value
+
+																			// Specialty and Subspecialty Certifications only
+
+																				if ( $taxonomy == 'board' ) {
+
+																					$item_schema['additionalType'] = 'https://www.wikidata.org/wiki/Q87415039'; // Wikidata item for 'accrediting body'
+
+																				}
+
+																	}
+
+																// Sort recognizedBy item schema properties
+
 																	if ( $item_schema ) {
 
 																		ksort($item_schema);
-
-																	}
-
-																// Add @type value
-
-																	if ( $item_schema ) {
-
-																		$item_schema = array( '@type' => 'EducationalOrganization' ) + $item_schema;
-
-																	}
-
-																// Add @id value
-
-																	if ( $item_schema && $item_url && $item_schema['@type'] ) {
-
-																		$item_schema = array( '@id' => $item_url . '#' . $item_schema['@type'] ) + $item_schema;
 
 																	}
 
