@@ -17230,24 +17230,28 @@
 
 													}
 
-											// Board Certifications
+											// Specialty and Subspecialty Certifications
 
-												if ( !isset($provider_certifications) ) {
+												// Get IDs of specialty and subspecialty certifications
 
-													$provider_certifications = get_field( 'physician_boards', $entity );
+													if ( !isset($provider_certifications) ) {
 
-												}
+														$provider_certifications = get_field( 'physician_boards', $entity );
 
-												if ( $provider_certifications ) {
+													}
 
-													$provider_hasCredential = uamswp_fad_schema_hascredential(
-														$provider_certifications, // mixed // Required // Degrees and credentials ID values
-														'board', // string // Required // Slug of relevant taxonomy (enum: 'physician_degree', 'physician_boards')
-														array( 'Certification' ), // mixed // Optional // Manually-defined Credential Transparency Description Language classes
-														$provider_hasCredential // array // Optional // Pre-existing schema array for hasCredential to which to add credential items
-													);
+												// Format schema values
 
-												}
+													if ( $provider_certifications ) {
+
+														$provider_hasCredential = uamswp_fad_schema_hascredential(
+															$provider_certifications, // mixed // Required // Degrees and credentials ID values
+															'board', // string // Required // Slug of relevant taxonomy (enum: 'physician_degree', 'physician_boards')
+															array( 'Certification' ), // mixed // Optional // Manually-defined Credential Transparency Description Language classes
+															$provider_hasCredential // array // Optional // Pre-existing schema array for hasCredential to which to add credential items
+														);
+
+													}
 
 										// Add to item values
 
