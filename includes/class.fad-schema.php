@@ -12913,7 +12913,7 @@
 
 																	$item_name = $item_term->name; // string
 
-																// Add the term name to the degree names array
+																// Add the term name to the degrees name list array
 
 																	if ( $item_name ) {
 
