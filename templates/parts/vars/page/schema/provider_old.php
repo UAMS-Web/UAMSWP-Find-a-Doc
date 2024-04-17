@@ -1353,7 +1353,7 @@ $page_id = get_the_ID();
 				if ( $degrees ) {
 
 					$provider_hasCredential = uamswp_fad_schema_hascredential(
-						$degrees, // mixed // Required // Degrees and credentials ID values
+						$degrees, // mixed // Required // ID values for degrees/credentials or certifications
 						'degree' // string // Required // Slug of relevant taxonomy (enum: 'degree', 'board')
 					);
 

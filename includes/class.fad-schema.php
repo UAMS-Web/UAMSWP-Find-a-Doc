@@ -3538,7 +3538,7 @@
 	// Add data to an array defining schema data for hasCredential
 
 		function uamswp_fad_schema_hascredential(
-			$credentials, // mixed // Required // Degrees and credentials ID values
+			$credentials, // mixed // Required // ID values for degrees/credentials or certifications
 			string $taxonomy, // string // Required // Slug of relevant taxonomy (enum: 'degree', 'board')
 			$credential_ctdl = array(), // mixed // Optional // Manually-defined Credential Transparency Description Language classes
 			array $hasCredential_schema = array() // array // Optional // Pre-existing schema array for hasCredential to which to add credential items
@@ -17280,7 +17280,7 @@
 													if ( $provider_degrees_id ) {
 
 														$provider_hasCredential = uamswp_fad_schema_hascredential(
-															$provider_degrees_id, // mixed // Required // Degrees and credentials ID values
+															$provider_degrees_id, // mixed // Required // ID values for degrees/credentials or certifications
 															'degree', // string // Required // Slug of relevant taxonomy (enum: 'degree', 'board')
 															'', // mixed // Optional // Manually-defined Credential Transparency Description Language classes
 															$provider_hasCredential // array // Optional // Pre-existing schema array for hasCredential to which to add credential items
@@ -17313,7 +17313,7 @@
 													if ( $provider_certifications_id ) {
 
 														$provider_hasCredential = uamswp_fad_schema_hascredential(
-															$provider_certifications_id, // mixed // Required // Degrees and credentials ID values
+															$provider_certifications_id, // mixed // Required // ID values for degrees/credentials or certifications
 															'board', // string // Required // Slug of relevant taxonomy (enum: 'degree', 'board')
 															array( 'Certification' ), // mixed // Optional // Manually-defined Credential Transparency Description Language classes
 															$provider_hasCredential // array // Optional // Pre-existing schema array for hasCredential to which to add credential items
