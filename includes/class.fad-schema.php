@@ -5073,15 +5073,15 @@
 
 								// credentialCategory (Credential Transparency Description Language schema term of clinical degree or credential)
 
-									// Get the codeValue
+									// Get the termCode
 
 										if ( !$credential_ctdl ) {
 
 											// Get the field names for the indicated taxonomy
 
-												$credential_codeValue_field = $credential_taxonomy['codeValue'] ?? '';
+												$credential_termCode_field = $credential_taxonomy['termCode'] ?? '';
 
-											$credential_ctdl = $credential_codeValue_field ? ( get_field( $credential_codeValue_field, $credential_term ) ?? array() ) : array();
+											$credential_ctdl = $credential_termCode_field ? ( get_field( $credential_termCode_field, $credential_term ) ?? array() ) : array();
 
 										}
 
@@ -5093,7 +5093,7 @@
 
 											$credential_credentialCategory = array();
 
-										// Get values for each codeValue
+										// Get values for each termCode
 
 											if ( $credential_ctdl ) {
 
