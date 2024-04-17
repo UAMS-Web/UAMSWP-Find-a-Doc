@@ -17234,17 +17234,17 @@
 
 												// Get IDs of specialty and subspecialty certifications
 
-													if ( !isset($provider_certifications) ) {
+													if ( !isset($provider_certifications_id) ) {
 
-														$provider_certifications = get_field( 'physician_boards', $entity );
+														$provider_certifications_id = get_field( 'physician_boards', $entity );
 
 														// Clean up values
 
-															if ( $provider_certifications ) {
+															if ( $provider_certifications_id ) {
 
-																$provider_certifications = array_filter($provider_certifications);
-																$provider_certifications = array_unique( $provider_certifications, SORT_REGULAR );
-																$provider_certifications = array_values($provider_certifications);
+																$provider_certifications_id = array_filter($provider_certifications_id);
+																$provider_certifications_id = array_unique( $provider_certifications_id, SORT_REGULAR );
+																$provider_certifications_id = array_values($provider_certifications_id);
 
 															}
 
@@ -17252,10 +17252,10 @@
 
 												// Format schema values
 
-													if ( $provider_certifications ) {
+													if ( $provider_certifications_id ) {
 
 														$provider_hasCredential = uamswp_fad_schema_hascredential(
-															$provider_certifications, // mixed // Required // Degrees and credentials ID values
+															$provider_certifications_id, // mixed // Required // Degrees and credentials ID values
 															'board', // string // Required // Slug of relevant taxonomy (enum: 'degree', 'board')
 															array( 'Certification' ), // mixed // Optional // Manually-defined Credential Transparency Description Language classes
 															$provider_hasCredential // array // Optional // Pre-existing schema array for hasCredential to which to add credential items
