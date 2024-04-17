@@ -17710,7 +17710,7 @@
 									 * will not be included.
 									 */
 
-								// hasCertification [WIP]
+								// hasCertification
 
 									/**
 									 * Certification information about a product, organization, service, place, or
