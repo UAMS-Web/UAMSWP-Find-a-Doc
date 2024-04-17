@@ -5085,7 +5085,10 @@
 
 										}
 
-										$credential_ctdl = $credential_ctdl && is_array($credential_ctdl) ? $credential_ctdl : array($credential_ctdl);
+										// Convert the Credential Transparency Description Language classes value to array (if not already an array)
+
+											$credential_ctdl = $credential_ctdl ?: array();
+											$credential_ctdl = is_array($credential_ctdl) ? $credential_ctdl : array($credential_ctdl);
 
 									// Get values
 
