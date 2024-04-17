@@ -16662,7 +16662,9 @@
 								// diversityPolicy [excluded; irrelevant]
 
 									/**
-									 * Statement on diversity policy by an Organization e.g. a NewsMediaOrganization. For a NewsMediaOrganization, a statement describing the newsroom’s diversity policy on both staffing and sources, typically providing staffing data.
+									 * Statement on diversity policy by an Organization e.g. a NewsMediaOrganization.
+									 * For a NewsMediaOrganization, a statement describing the newsroom’s diversity
+									 * policy on both staffing and sources, typically providing staffing data.
 									 *
 									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
 									 * Implementation feedback and adoption from applications and websites can help
@@ -16675,7 +16677,9 @@
 								// diversityStaffingReport [excluded; irrelevant]
 
 									/**
-									 * For an Organization (often but not necessarily a NewsMediaOrganization), a report on staffing diversity issues. In a news context this might be for example ASNE or RTDNA (US) reports, or self-reported.
+									 * For an Organization (often but not necessarily a NewsMediaOrganization), a
+									 * report on staffing diversity issues. In a news context, this might be, for
+									 * example, ASNE or RTDNA (US) reports, or self-reported.
 									 *
 									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
 									 * Implementation feedback and adoption from applications and websites can help
@@ -17028,7 +17032,9 @@
 								// geoCoveredBy [excluded; irrelevant]
 
 									/**
-									 * Represents a relationship between two geometries (or the places they represent), relating a geometry to another that covers it. As defined in DE-9IM.
+									 * Represents a relationship between two geometries (or the places they
+									 * represent), relating a geometry to another that covers it. As defined in
+									 * DE-9IM.
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -17037,7 +17043,9 @@
 								// geoCovers [excluded; irrelevant]
 
 									/**
-									 * Represents a relationship between two geometries (or the places they represent), relating a covering geometry to a covered geometry. "Every point of b is a point of (the interior or boundary of) a". As defined in DE-9IM.
+									 * Represents a relationship between two geometries (or the places they
+									 * represent), relating a covering geometry to a covered geometry. "Every point
+									 * of b is a point of (the interior or boundary of) a". As defined in DE-9IM.
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -17046,7 +17054,10 @@
 								// geoCrosses [WIP]
 
 									/**
-									 * Represents a relationship between two geometries (or the places they represent), relating a geometry to another that crosses it: "a crosses b: they have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them". As defined in DE-9IM.
+									 * Represents a relationship between two geometries (or the places they
+									 * represent), relating a geometry to another that crosses it: "a crosses b: they
+									 * have some but not all interior points in common, and the dimension of the
+									 * intersection is less than that of at least one of them". As defined in DE-9IM.
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -17055,7 +17066,10 @@
 								// geoDisjoint [excluded; irrelevant]
 
 									/**
-									 * Represents spatial relations in which two geometries (or the places they represent) are topologically disjoint: "they have no point in common. They form a set of disconnected geometries." (A symmetric relationship, as defined in DE-9IM.)
+									 * Represents spatial relations in which two geometries (or the places they
+									 * represent) are topologically disjoint: "they have no point in common. They
+									 * form a set of disconnected geometries." (A symmetric relationship, as defined
+									 * in DE-9IM.)
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -17064,7 +17078,11 @@
 								// geoEquals [excluded; irrelevant]
 
 									/**
-									 * Represents spatial relations in which two geometries (or the places they represent) are topologically equal, as defined in DE-9IM. "Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other" (a symmetric relationship).
+									 * Represents spatial relations in which two geometries (or the places they
+									 * represent) are topologically equal, as defined in DE-9IM. "Two geometries are
+									 * topologically equal if their interiors intersect and no part of the interior
+									 * or boundary of one geometry intersects the exterior of the other" (a symmetric
+									 * relationship).
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -17073,7 +17091,8 @@
 								// geoIntersects [excluded; irrelevant]
 
 									/**
-									 * Represents spatial relations in which two geometries (or the places they represent) have at least one point in common. As defined in DE-9IM.
+									 * Represents spatial relations in which two geometries (or the places they
+									 * represent) have at least one point in common. As defined in DE-9IM.
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -17082,7 +17101,9 @@
 								// geoOverlaps [excluded; irrelevant]
 
 									/**
-									 * Represents a relationship between two geometries (or the places they represent), relating a geometry to another that geospatially overlaps it, i.e. they have some but not all points in common. As defined in DE-9IM.
+									 * Represents a relationship between two geometries (or the places they
+									 * represent), relating a geometry to another that geospatially overlaps it
+									 * (i.e., they have some but not all points in common). As defined in DE-9IM.
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -17091,7 +17112,9 @@
 								// geoTouches [excluded; irrelevant]
 
 									/**
-									 * Represents spatial relations in which two geometries (or the places they represent) touch: "they have at least one boundary point in common, but no interior points." (A symmetric relationship, as defined in DE-9IM.)
+									 * Represents spatial relations in which two geometries (or the places they
+									 * represent) touch: "they have at least one boundary point in common, but no
+									 * interior points." (A symmetric relationship, as defined in DE-9IM.)
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -17100,7 +17123,9 @@
 								// geoWithin [excluded; irrelevant]
 
 									/**
-									 * Represents a relationship between two geometries (or the places they represent), relating a geometry to one that contains it, i.e. it is inside (i.e. within) its interior. As defined in DE-9IM.
+									 * Represents a relationship between two geometries (or the places they
+									 * represent), relating a geometry to one that contains it
+									 * (i.e., it is inside [i.e., within] its interior). As defined in DE-9IM.
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -17109,7 +17134,8 @@
 								// hasCertification [WIP]
 
 									/**
-									 * Certification information about a product, organization, service, place, or person.
+									 * Certification information about a product, organization, service, place, or
+									 * person.
 									 *
 									 * Values expected to be one of these types:
 									 *
@@ -17123,7 +17149,8 @@
 									 *     - Product
 									 *     - Service
 									 *
-									 * Note: Consider including the specialty and subspecialty certifications in this property.
+									 * Note: Consider including the specialty and subspecialty certifications in this
+									 * property.
 									 */
 
 								// hasCredential
@@ -17291,7 +17318,10 @@
 								// hasDriveThroughService [excluded; irrelevant]
 
 									/**
-									 * Indicates whether some facility (e.g. FoodEstablishment, CovidTestingFacility) offers a service that can be used by driving through in a car. In the case of CovidTestingFacility such facilities could potentially help with social distancing from other potentially-infected users.
+									 * Indicates whether some facility (e.g., FoodEstablishment, CovidTestingFacility)
+									 * offers a service that can be used by driving through in a car. In the case of
+									 * CovidTestingFacility such facilities could potentially help with social
+									 * distancing from other potentially-infected users.
 									 *
 									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
 									 * Implementation feedback and adoption from applications and websites can help
@@ -17458,7 +17488,8 @@
 									 *
 									 *     - Place
 									 *
-									 * Note: The examples on Schema.org indicate that a URL to the location on Google Maps is acceptable.
+									 * Note: The examples on Schema.org indicate that a URL to the location on Google
+									 * Maps is acceptable.
 									 */
 
 									if (
@@ -17620,7 +17651,8 @@
 								// healthPlanNetworkId [WIP]
 
 									/**
-									 * Name or unique ID of network. (Networks are often reused across different insurance plans.)
+									 * Name or unique ID of network. (Networks are often reused across different
+									 * insurance plans.)
 									 *
 									 * Values expected to be one of these types:
 									 *
@@ -19067,7 +19099,9 @@
 								// interactionStatistic [excluded; out of scope]
 
 									/**
-									 * The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used.
+									 * The number of interactions for the CreativeWork using the WebSite or
+									 * SoftwareApplication. The most specific child type of InteractionCounter should
+									 * be used.
 									 *
 									 * Note: This schema property is outside the scope of what should be included in
 									 * Find-a-Doc.
@@ -19919,7 +19953,8 @@
 								// mainEntityOfPage [WIP]
 
 									/**
-									 * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See background notes for details.
+									 * Indicates a page (or other CreativeWork) for which this thing is the main
+									 * entity being described. See background notes for details.
 									 *
 									 * Inverse property:
 									 *
@@ -19976,7 +20011,8 @@
 								// member [excluded; irrelevant]
 
 									/**
-									 * A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals.
+									 * A member of an Organization or a ProgramMembership. Organizations can be
+									 * members of organizations; ProgramMembership is typically for individuals.
 									 *
 									 * Inverse property:
 									 *
@@ -20158,7 +20194,8 @@
 								// nonprofitStatus [excluded; irrelevant]
 
 									/**
-									 * nonprofitStatus indicates the legal status of a non-profit organization in its primary place of business.
+									 * nonprofitStatus indicates the legal status of a non-profit organization in its
+									 * primary place of business.
 									 *
 									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
 									 * Implementation feedback and adoption from applications and websites can help
@@ -20180,9 +20217,13 @@
 								// occupationalCategory [WIP]
 
 									/**
-									 * A category describing the job, preferably using a term from a taxonomy such as BLS O*NET-SOC, ISCO-08 or similar, with the property repeated for each applicable value. Ideally the taxonomy should be identified, and both the textual label and formal code for the category should be provided.
+									 * A category describing the job, preferably using a term from a taxonomy such as
+									 * BLS O*NET-SOC, ISCO-08 or similar, with the property repeated for each
+									 * applicable value. Ideally the taxonomy should be identified, and both the
+									 * textual label and formal code for the category should be provided.
 									 *
-									 * Note: for historical reasons, any textual label and formal code provided as a literal may be assumed to be from O*NET-SOC.
+									 * Note: for historical reasons, any textual label and formal code provided as a
+									 * literal may be assumed to be from O*NET-SOC.
 									 *
 									 * Values expected to be one of these types:
 									 *
@@ -20239,7 +20280,10 @@
 								// openingHours [excluded; irrelevant]
 
 									/**
-									 * The general opening hours for a business. Opening hours can be specified as a weekly time range, starting with days, then times per day. Multiple days can be listed with commas ',' separating each day. Day or time ranges are specified using a hyphen '-'.
+									 * The general opening hours for a business. Opening hours can be specified as a
+									 * weekly time range, starting with days, then times per day. Multiple days can be
+									 * listed with commas ',' separating each day. Day or time ranges are specified
+									 * using a hyphen '-'.
 									 *
 									 *     - Days are specified using the following two-letter combinations:
 									 *       Mo, Tu, We, Th, Fr, Sa, Su.
@@ -20266,7 +20310,11 @@
 								// ownershipFundingInfo [excluded; irrelevant]
 
 									/**
-									 * For an Organization (often but not necessarily a NewsMediaOrganization), a description of organizational ownership structure; funding and grants. In a news/media setting, this is with particular reference to editorial independence. Note that the funder is also available and can be used to make basic funder information machine-readable.
+									 * For an Organization (often but not necessarily a NewsMediaOrganization), a
+									 * description of organizational ownership structure; funding and grants. In a
+									 * news/media setting, this is with particular reference to editorial
+									 * independence. Note that the funder is also available and can be used to make
+									 * basic funder information machine-readable.
 									 *
 									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
 									 * Implementation feedback and adoption from applications and websites can help
@@ -20721,7 +20769,8 @@
 								// publicAccess [excluded; irrelevant]
 
 									/**
-									 * A flag to signal that the Place is open to public visitors. If this property is omitted there is no assumed default boolean value.
+									 * A flag to signal that the Place is open to public visitors. If this property is
+									 * omitted there is no assumed default boolean value.
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -20730,9 +20779,16 @@
 								// publishingPrinciples [excluded; irrelevant]
 
 									/**
-									 * The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles of an Organization (or individual, e.g. a Person writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those of the party primarily responsible for the creation of the CreativeWork.
+									 * The publishingPrinciples property indicates (typically via URL) a document
+									 * describing the editorial principles of an Organization
+									 * (or individual [e.g., a Person writing a blog]) that relate to their activities
+									 * as a publisher (e.g., ethics or diversity policies). When applied to a
+									 * CreativeWork (e.g., NewsArticle) the principles are those of the party
+									 * primarily responsible for the creation of the CreativeWork.
 									 *
-									 * While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a funder) can be expressed using schema.org terminology.
+									 * While such policies are most typically expressed in natural language, sometimes
+									 * related information (e.g., indicating a funder) can be expressed using
+									 * schema.org terminology.
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -20859,7 +20915,8 @@
 								// seeks [excluded; irrelevant]
 
 									/**
-									 * A pointer to products or services sought by the organization or person (demand).
+									 * A pointer to products or services sought by the organization or person
+									 * (demand).
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -20883,7 +20940,8 @@
 								// smokingAllowed [excluded; irrelevant]
 
 									/**
-									 * Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or hotel room.
+									 * Indicates whether it is allowed to smoke in the place
+									 * (e.g., in the restaurant, hotel or hotel room).
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -20933,7 +20991,8 @@
 									/**
 									 * The special opening hours of a certain place.
 									 *
-									 * Use this to explicitly override general opening hours brought in scope by openingHoursSpecification or openingHours.
+									 * Use this to explicitly override general opening hours brought in scope by
+									 * openingHoursSpecification or openingHours.
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -20942,7 +21001,9 @@
 								// sponsor [excluded; out of scope]
 
 									/**
-									 * A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.
+									 * A person or organization that supports a thing through a pledge, promise, or
+									 * financial contribution. E.g. a sponsor of a Medical Study or a corporate
+									 * sponsor of an event.
 									 *
 									 * Note: This schema property is outside the scope of what should be included in
 									 * Find-a-Doc.
@@ -20951,7 +21012,8 @@
 								// subOrganization [excluded; irrelevant]
 
 									/**
-									 * A relationship between two organizations where the first includes the second, e.g., as a subsidiary. See also: the more specific 'department' property.
+									 * A relationship between two organizations where the first includes the second
+									 * (e.g., as a subsidiary). See also: the more specific 'department' property.
 									 *
 									 * Inverse property:
 									 *
@@ -21015,7 +21077,9 @@
 								// tourBookingPage [excluded; irrelevant]
 
 									/**
-									 * A page providing information on how to book a tour of some Place, such as an Accommodation or ApartmentComplex in a real estate setting, as well as other kinds of tours as appropriate.
+									 * A page providing information on how to book a tour of some Place, such as an
+									 * Accommodation or ApartmentComplex in a real estate setting, as well as other
+									 * kinds of tours as appropriate.
 									 *
 									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
 									 * Implementation feedback and adoption from applications and websites can help
@@ -21028,7 +21092,8 @@
 								// unnamedSourcesPolicy [excluded; irrelevant]
 
 									/**
-									 * For an Organization (typically a NewsMediaOrganization), a statement about policy on use of unnamed sources and the decision process required.
+									 * For an Organization (typically a NewsMediaOrganization), a statement about
+									 * policy on use of unnamed sources and the decision process required.
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -21037,7 +21102,9 @@
 								// usNPI [WIP]
 
 									/**
-									 * A National Provider Identifier (NPI) is a unique 10-digit identification number issued to health care providers in the United States by the Centers for Medicare and Medicaid Services.
+									 * A National Provider Identifier (NPI) is a unique 10-digit identification number
+									 * issued to health care providers in the United States by the Centers for
+									 * Medicare and Medicaid Services.
 									 *
 									 * Values expected to be one of these types:
 									 *
@@ -33943,7 +34010,9 @@
 
 									/**
 									 * The language of the content or performance or used in an action. Please use one
-									 * of the language codes from the IETF BCP 47 standard. See also availableLanguage.
+									 * of the language codes from the IETF BCP 47 standard.
+									 *
+									 * See also availableLanguage.
 									 *
 									 * Values expected to be one of these types:
 									 *
@@ -36701,7 +36770,8 @@
 								// expectedPrognosis [excluded]
 
 									/**
-									 * The likely outcome in either the short term or long term of the medical condition.
+									 * The likely outcome in either the short term or long term of the medical
+									 * condition.
 									 *
 									 * Values expected to be one of these types:
 									 *
