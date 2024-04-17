@@ -13483,50 +13483,73 @@
 													!isset($provider_degree_list)
 												) {
 
-													$provider_degree_array = array();
-													$provider_degree_list = '';
-													$provider_degree_list_i = 1;
+													// Eliminate PHP errors
+
+														$provider_degree_array = array();
+														$provider_degree_list = '';
+														$provider_degree_list_i = 1;
 
 													if ( !isset($provider_degrees) ) {
 
-														$provider_degrees = get_field( 'physician_degree', $entity );
-														$provider_degree_count = $provider_degrees ? count($provider_degrees) : 0;
+														// Get value from 'Clinical Degrees and Credentials'
+
+															$provider_degrees = get_field( 'physician_degree', $entity ); // int[]
+
+														// Count the number of values in Clinical Degrees and Credentials
+
+															$provider_degree_count = $provider_degrees ? count($provider_degrees) : 0; // int
 
 													}
 
 													if ( $provider_degrees ) {
 
-														foreach ( $provider_degrees as $item ) {
+														// Loop through each item in the 'Clinical Degrees and Credentials' array
 
-															$item_term = get_term( $item, 'degree' );
+															foreach ( $provider_degrees as $item ) {
 
-															if ( is_object($item_term) ) {
+																// Get the individual degree term
 
-																$item_name = $item_term->name;
-																$provider_degree_list .= $item_name;
-																$provider_degree_array[] = uamswp_attr_conversion($item_name);
+																	$item_term = get_term( $item, 'degree' ); // WP_Term|array|WP_Error|null
 
-																if ( $provider_degree_count > $provider_degree_list_i ) {
+																if ( is_object($item_term) ) {
 
-																	$provider_degree_list .= ', ';
+																	// Get the term name
 
-																} // endif
+																		$item_name = $item_term->name; // string
 
-																$provider_degree_list_i++;
+																	// Append the term name to the degree list
 
-															} // endif
+																		$provider_degree_list .= $item_name;
 
-														} // endforeach
+																	// Add the attribute-friendly term name to the degree array
 
-													} // endif
+																		$provider_degree_array[] = uamswp_attr_conversion($item_name);
 
-													if ( $provider_degree_list ) {
+																	// If this is not the final term in the 'Clinical Degrees and Credentials' array, append a comma separator to the degree list
 
-														$provider_degree_list = uamswp_attr_conversion($provider_degree_list);
+																		if ( $provider_degree_count > $provider_degree_list_i ) {
 
-													} // endif
+																			$provider_degree_list .= ', ';
 
-												}
+																		} // endif ( $provider_degree_count > $provider_degree_list_i )
+
+																	$provider_degree_list_i++;
+
+																} // endif ( is_object($item_term) )
+
+															} // endforeach ( $provider_degrees as $item )
+
+													} // endif ( $provider_degrees )
+
+													// Make the degree list attribute-friendly
+
+														if ( $provider_degree_list ) {
+
+															$provider_degree_list = uamswp_attr_conversion($provider_degree_list);
+
+														} // endif ( $provider_degree_list )
+
+												} // endif
 
 											// Prefix
 
