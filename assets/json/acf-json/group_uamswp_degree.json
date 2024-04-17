@@ -49,8 +49,8 @@
 			"key": "field_degree_ctdl",
 			"label": "Credential Transparency Description Language Schema Term",
 			"name": "degree_ctdl",
-			"instructions": "Find information about each term in this schema at <a href='https://credreg.net/ctdl/terms/' target='_blank'>https://credreg.net/ctdl/terms/</a>.",
 			"type": "radio",
+			"instructions": "Find the definition and other details about each term in this list at <a href='https://credreg.net/ctdl/terms/#classes' target='_blank'>https://credreg.net/ctdl/terms/#classes</a>.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
