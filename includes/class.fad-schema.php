@@ -13169,6 +13169,7 @@
 								$provider_givenName_initial = null;
 								$provider_globalLocationNumber = null;
 								$provider_has_parent = null;
+								$provider_hasCertification = null;
 								$provider_hasCredential = null;
 								$provider_hasMap = null;
 								$provider_hasOccupation = null;
