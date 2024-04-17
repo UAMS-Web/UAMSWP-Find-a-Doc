@@ -4140,557 +4140,561 @@
 
 				foreach ( $credentials as $credential ) {
 
-					// Base array
+					if ( $credential ) {
 
-						$credential_schema = array();
+						// Base array
 
-					// Eliminate PHP errors / reset variables
+							$credential_schema = array();
 
-						$credential_title = null;
-						$credential_term = null;
-						$credential_name = null;
-						$credential_name_field = null;
-						$credential_alternateName_repeater = null;
-						$credential_alternateName = null;
-						$credential_sameAs_repeater = null;
-						$credential_sameAs = null;
-						$credential_url = null;
+						// Eliminate PHP errors / reset variables
 
-					// Get the term
+							$credential_title = null;
+							$credential_term = null;
+							$credential_name = null;
+							$credential_name_field = null;
+							$credential_alternateName_repeater = null;
+							$credential_alternateName = null;
+							$credential_sameAs_repeater = null;
+							$credential_sameAs = null;
+							$credential_url = null;
 
-						$credential_term = get_term( $credential, $taxonomy ) ?? array();
+						// Get the term
 
-					// Get the attributes from the term
+							$credential_term = get_term( $credential, $taxonomy ) ?? array();
 
-						if ( is_object($credential_term) ) {
+						// Get the attributes from the term
 
-							// name (full name of the clinical degree or credential)
+							if ( is_object($credential_term) ) {
 
-								// Get value
+								// name (full name of the clinical degree or credential)
 
-									$credential_name = '';
+									// Get value
 
-									if ( $credential_taxonomy['name'] ) {
+										$credential_name = '';
 
-										$credential_name = get_field( $credential_taxonomy['name'], $credential_term ) ?? '';
+										if ( $credential_taxonomy['name'] ) {
 
-									}
-
-								// Add to schema item's 'name' property value
-
-									if ( $credential_name ) {
-
-										$credential_schema['name'] = $credential_name;
-
-									} else {
-
-										continue;
-
-									}
-
-							// url query
-
-								$credential_url_query = true;
-
-								if ( $credential_taxonomy['url_query'] ) {
-
-									$credential_url_query = get_field( $credential_taxonomy['url_query'], $credential_term ) ?? true;
-
-								}
-
-							// url
-
-								// Get value
-
-									$credential_url = '';
-
-									if (
-										$credential_taxonomy['url']
-										&&
-										$credential_url_query
-									) {
-
-										$credential_url = get_field( $credential_taxonomy['url'], $credential_term ) ?? '';
-
-									}
-
-								// Add to schema item's 'url' property value
-
-									if ( $credential_url ) {
-
-										$credential_schema['url'] = $credential_url;
-
-									}
-
-							// alternateName (e.g., abbreviation of the clinical degree or credential)
-
-								// Get values
-
-									// Base 'alternateName' property value array
-
-										$credential_alternateName = array();
-
-									// Get the taxonomy item title
-
-										if ( $credential_taxonomy['alternateName_from_title'] ) {
-
-											// Get the value
-
-												$credential_title = $credential_term->name ?? '';
-
-											// Add the value to the 'alternateName' property value array
-
-												if ( $credential_title ) {
-
-													$credential_alternateName = $credential_title;
-
-												}
+											$credential_name = get_field( $credential_taxonomy['name'], $credential_term ) ?? '';
 
 										}
 
-									// alternateName repeater
+									// Add to schema item's 'name' property value
 
-										// Get the alternateName repeater field value
+										if ( $credential_name ) {
 
-											// Get the field names for the indicated taxonomy
+											$credential_schema['name'] = $credential_name;
 
-												$credential_alternateName_field = $credential_taxonomy['alternateName'] ?? '';
-												$credential_alternateName_arg_field = $credential_taxonomy['alternateName_arg'] ?? 'schema_alternatename_text';
+										} else {
 
-											$credential_alternateName_repeater = $credential_alternateName_field ? ( get_field( $credential_alternateName_field, $credential_term ) ?? array() ) : array();
+											continue;
 
-										// Add each repeater row to 'alternateName' property value array
+										}
 
-											if ( $credential_alternateName_repeater ) {
+								// url query
 
-												$credential_alternateName = uamswp_fad_schema_alternatename(
-													$credential_alternateName_repeater, // array // Required // alternateName repeater field
-													$credential_alternateName_arg_field, // string // Optional // alternateName item field name
-													$credential_alternateName // mixed // Optional // Pre-existing schema array for alternateName to which to add alternateName items
-												);
+									$credential_url_query = true;
 
-											}
+									if ( $credential_taxonomy['url_query'] ) {
 
-								// Set the schema item's 'alternateName' property value
-
-									if ( $credential_alternateName ) {
-
-										$credential_schema['alternateName'] = $credential_alternateName;
+										$credential_url_query = get_field( $credential_taxonomy['url_query'], $credential_term ) ?? true;
 
 									}
 
-							// recognizedBy (e.g., certifying body)
+								// url
 
-								// Get values
+									// Get value
 
-									// Base 'recognizedBy' property value array
-
-										$credential_recognizedBy = array();
-
-									// Get the list of organization IDs
-
-										// Get the field name for the indicated taxonomy
-
-											$credential_recognizedBy_field = $credential_taxonomy['recognizedBy'] ?? '';
-											$credential_recognizedBy_taxonomy = $credential_taxonomy['recognizedBy_taxonomy'] ?? array();
-											$credential_recognizedBy_slug = $credential_recognizedBy_taxonomy['slug'] ?? '';
-											$credential_recognizedBy_field_alternateName = $credential_recognizedBy_taxonomy['alternateName'] ?? '';
-											$credential_recognizedBy_field_alternateName_arg = $credential_recognizedBy_taxonomy['alternateName_arg'] ?? 'schema_alternatename_text';
-											$credential_recognizedBy_field_name = $credential_recognizedBy_taxonomy['name'] ?? '';
-											$credential_recognizedBy_field_sameAs = $credential_recognizedBy_taxonomy['sameAs'] ?? '';
-											$credential_recognizedBy_field_sameAs_arg = $credential_recognizedBy_taxonomy['sameAs_arg'] ?? 'schema_sameas_url';
-											$credential_recognizedBy_field_url = $credential_recognizedBy_taxonomy['url'] ?? '';
-											$credential_recognizedBy_field_url_query = $credential_recognizedBy_taxonomy['url_query'] ?? '';
-
-										$credential_recognizedBy_list = $credential_recognizedBy_field ? ( get_field( $credential_recognizedBy_field, $credential_term ) ?? array() ) : array();
-										$credential_recognizedBy_list = is_array($credential_recognizedBy_list) ? $credential_recognizedBy_list : array($credential_recognizedBy_list);
-
-									// Get the attributes of each organization
+										$credential_url = '';
 
 										if (
-											$credential_recognizedBy_list
+											$credential_taxonomy['url']
 											&&
-											$credential_recognizedBy_slug
+											$credential_url_query
 										) {
 
-											foreach ( $credential_recognizedBy_list as $item ) {
+											$credential_url = get_field( $credential_taxonomy['url'], $credential_term ) ?? '';
 
-												// Base item schema array
+										}
 
-													$item_schema = array();
+									// Add to schema item's 'url' property value
 
-												// Reset variables
+										if ( $credential_url ) {
 
-													$item_term = null;
-													$item_name = null;
-													$item_url_query = null;
-													$item_url = null;
-													$item_alternatename_repeater = null;
-													$item_alternatename = null;
-													$item_sameAs = null;
-													$item_sameAs_repeater = null;
+											$credential_schema['url'] = $credential_url;
 
-												// Get values
+										}
 
-													if ( $item ) {
+								// alternateName (e.g., abbreviation of the clinical degree or credential)
 
-														$item_term = get_term( $item, $credential_recognizedBy_slug ) ?? array();
+									// Get values
 
-														if ( is_object($item_term) ) {
+										// Base 'alternateName' property value array
 
-															// name
+											$credential_alternateName = array();
 
-																// Get value
+										// Get the taxonomy item title
 
-																	$item_name = '';
+											if ( $credential_taxonomy['alternateName_from_title'] ) {
 
-																	if ( $credential_recognizedBy_field_name ) {
+												// Get the value
 
-																		$item_name = get_field( $credential_recognizedBy_field_name, $item_term ) ?? '';
+													$credential_title = $credential_term->name ?? '';
 
-																	}
+												// Add the value to the 'alternateName' property value array
 
-																	$item_name = $item_name ?: ( $item_term->name ?? '' );
+													if ( $credential_title ) {
 
-																// Add to schema item's 'name' property value
+														$credential_alternateName = $credential_title;
 
-																	if ( $item_name ) {
+													}
 
-																		$item_schema['name'] = $item_name;
+											}
 
-																	} else {
+										// alternateName repeater
 
-																		continue;
+											// Get the alternateName repeater field value
 
-																	}
+												// Get the field names for the indicated taxonomy
 
-															// url query
+													$credential_alternateName_field = $credential_taxonomy['alternateName'] ?? '';
+													$credential_alternateName_arg_field = $credential_taxonomy['alternateName_arg'] ?? 'schema_alternatename_text';
 
-																$item_url_query = true;
+												$credential_alternateName_repeater = $credential_alternateName_field ? ( get_field( $credential_alternateName_field, $credential_term ) ?? array() ) : array();
 
-																if ( $credential_recognizedBy_field_url_query ) {
+											// Add each repeater row to 'alternateName' property value array
 
-																	$item_url_query = get_field( $credential_recognizedBy_field_url_query, $item_term ) ?? true;
+												if ( $credential_alternateName_repeater ) {
 
-																}
+													$credential_alternateName = uamswp_fad_schema_alternatename(
+														$credential_alternateName_repeater, // array // Required // alternateName repeater field
+														$credential_alternateName_arg_field, // string // Optional // alternateName item field name
+														$credential_alternateName // mixed // Optional // Pre-existing schema array for alternateName to which to add alternateName items
+													);
 
-															// url
+												}
 
-																// Get value
+									// Set the schema item's 'alternateName' property value
 
-																	$item_url = '';
+										if ( $credential_alternateName ) {
 
-																	if (
-																		$credential_recognizedBy_field_url
-																		&&
-																		$item_url_query
-																	) {
+											$credential_schema['alternateName'] = $credential_alternateName;
 
-																		$item_url = get_field( $credential_recognizedBy_field_url, $item_term ) ?? '';
+										}
 
-																	}
+								// recognizedBy (e.g., certifying body)
 
-																// Add to schema item's 'url' property value
+									// Get values
 
-																	if ( $item_url ) {
+										// Base 'recognizedBy' property value array
 
-																		$item_schema['url'] = $item_url;
+											$credential_recognizedBy = array();
 
-																	}
+										// Get the list of organization IDs
 
-															// alternateName
+											// Get the field name for the indicated taxonomy
 
-																// Get alternateName repeater field value
+												$credential_recognizedBy_field = $credential_taxonomy['recognizedBy'] ?? '';
+												$credential_recognizedBy_taxonomy = $credential_taxonomy['recognizedBy_taxonomy'] ?? array();
+												$credential_recognizedBy_slug = $credential_recognizedBy_taxonomy['slug'] ?? '';
+												$credential_recognizedBy_field_alternateName = $credential_recognizedBy_taxonomy['alternateName'] ?? '';
+												$credential_recognizedBy_field_alternateName_arg = $credential_recognizedBy_taxonomy['alternateName_arg'] ?? 'schema_alternatename_text';
+												$credential_recognizedBy_field_name = $credential_recognizedBy_taxonomy['name'] ?? '';
+												$credential_recognizedBy_field_sameAs = $credential_recognizedBy_taxonomy['sameAs'] ?? '';
+												$credential_recognizedBy_field_sameAs_arg = $credential_recognizedBy_taxonomy['sameAs_arg'] ?? 'schema_sameas_url';
+												$credential_recognizedBy_field_url = $credential_recognizedBy_taxonomy['url'] ?? '';
+												$credential_recognizedBy_field_url_query = $credential_recognizedBy_taxonomy['url_query'] ?? '';
 
-																	$item_alternatename_repeater = array();
+											$credential_recognizedBy_list = $credential_recognizedBy_field ? ( get_field( $credential_recognizedBy_field, $credential_term ) ?? array() ) : array();
+											$credential_recognizedBy_list = is_array($credential_recognizedBy_list) ? $credential_recognizedBy_list : array($credential_recognizedBy_list);
 
-																	if ( $credential_recognizedBy_field_alternateName ) {
+										// Get the attributes of each organization
 
-																		$item_alternatename_repeater = get_field( $credential_recognizedBy_field_alternateName, $item_term ) ?? array();
+											if (
+												$credential_recognizedBy_list
+												&&
+												$credential_recognizedBy_slug
+											) {
 
-																	}
+												foreach ( $credential_recognizedBy_list as $item ) {
 
-																	// Add each item to alternateName property values array
+													// Base item schema array
 
-																		if ( $item_alternatename_repeater ) {
+														$item_schema = array();
 
-																			$item_alternatename = uamswp_fad_schema_alternatename(
-																				$item_alternatename_repeater, // array // Required // alternateName repeater field
-																				$credential_recognizedBy_field_alternateName_arg // string // Optional // alternateName item field name
-																			);
+													// Reset variables
 
-																		}
+														$item_term = null;
+														$item_name = null;
+														$item_url_query = null;
+														$item_url = null;
+														$item_alternatename_repeater = null;
+														$item_alternatename = null;
+														$item_sameAs = null;
+														$item_sameAs_repeater = null;
 
-																// Add to schema item's 'alternateName' property value
+													// Get values
 
-																	if ( $item_alternatename ) {
+														if ( $item ) {
 
-																		$item_schema['alternateName'] = $item_alternatename;
+															$item_term = get_term( $item, $credential_recognizedBy_slug ) ?? array();
 
-																	}
+															if ( is_object($item_term) ) {
 
-															// sameAs
+																// name
 
-																// Base array
+																	// Get value
 
-																	$item_sameAs = array();
+																		$item_name = '';
 
-																// Get sameAs repeater field value
+																		if ( $credential_recognizedBy_field_name ) {
 
-																	$item_sameAs_repeater = array();
-
-																	if ( $credential_recognizedBy_field_sameAs ) {
-
-																		$item_sameAs_repeater = get_field( $credential_recognizedBy_field_sameAs, $item_term ) ?? array();
-
-																	}
-
-																	// Add each item to sameAs property values array
-
-																		if ( $item_sameAs_repeater ) {
-
-																			$item_sameAs = uamswp_fad_schema_sameas(
-																				$item_sameAs_repeater, // sameAs repeater field
-																				$credential_recognizedBy_field_sameAs_arg // sameAs item field name
-																			);
+																			$item_name = get_field( $credential_recognizedBy_field_name, $item_term ) ?? '';
 
 																		}
 
-																// Add to schema item's 'sameAs' property value
+																		$item_name = $item_name ?: ( $item_term->name ?? '' );
 
-																	if ( $item_sameAs ) {
+																	// Add to schema item's 'name' property value
 
-																		$item_schema['sameAs'] = $item_sameAs;
+																		if ( $item_name ) {
+
+																			$item_schema['name'] = $item_name;
+
+																		} else {
+
+																			continue;
+
+																		}
+
+																// url query
+
+																	$item_url_query = true;
+
+																	if ( $credential_recognizedBy_field_url_query ) {
+
+																		$item_url_query = get_field( $credential_recognizedBy_field_url_query, $item_term ) ?? true;
 
 																	}
 
-															// Clean up item schema
+																// url
 
-																if ( $item_schema ) {
+																	// Get value
 
-																	$item_schema = array_filter($item_schema);
+																		$item_url = '';
 
-																}
+																		if (
+																			$credential_recognizedBy_field_url
+																			&&
+																			$item_url_query
+																		) {
 
-																if ( $item_schema ) {
+																			$item_url = get_field( $credential_recognizedBy_field_url, $item_term ) ?? '';
 
-																	ksort($item_schema);
+																		}
 
-																}
+																	// Add to schema item's 'url' property value
 
-															// Add @type value
+																		if ( $item_url ) {
 
-																if ( $item_schema ) {
+																			$item_schema['url'] = $item_url;
 
-																	$item_schema = array( '@type' => 'EducationalOrganization' ) + $item_schema;
+																		}
 
-																}
+																// alternateName
 
-															// Add @id value
+																	// Get alternateName repeater field value
 
-																if ( $item_schema && $item_url && $item_schema['@type'] ) {
+																		$item_alternatename_repeater = array();
 
-																	$item_schema = array( '@id' => $item_url . '#' . $item_schema['@type'] ) + $item_schema;
+																		if ( $credential_recognizedBy_field_alternateName ) {
 
-																}
+																			$item_alternatename_repeater = get_field( $credential_recognizedBy_field_alternateName, $item_term ) ?? array();
+
+																		}
+
+																		// Add each item to alternateName property values array
+
+																			if ( $item_alternatename_repeater ) {
+
+																				$item_alternatename = uamswp_fad_schema_alternatename(
+																					$item_alternatename_repeater, // array // Required // alternateName repeater field
+																					$credential_recognizedBy_field_alternateName_arg // string // Optional // alternateName item field name
+																				);
+
+																			}
+
+																	// Add to schema item's 'alternateName' property value
+
+																		if ( $item_alternatename ) {
+
+																			$item_schema['alternateName'] = $item_alternatename;
+
+																		}
+
+																// sameAs
+
+																	// Base array
+
+																		$item_sameAs = array();
+
+																	// Get sameAs repeater field value
+
+																		$item_sameAs_repeater = array();
+
+																		if ( $credential_recognizedBy_field_sameAs ) {
+
+																			$item_sameAs_repeater = get_field( $credential_recognizedBy_field_sameAs, $item_term ) ?? array();
+
+																		}
+
+																		// Add each item to sameAs property values array
+
+																			if ( $item_sameAs_repeater ) {
+
+																				$item_sameAs = uamswp_fad_schema_sameas(
+																					$item_sameAs_repeater, // sameAs repeater field
+																					$credential_recognizedBy_field_sameAs_arg // sameAs item field name
+																				);
+
+																			}
+
+																	// Add to schema item's 'sameAs' property value
+
+																		if ( $item_sameAs ) {
+
+																			$item_schema['sameAs'] = $item_sameAs;
+
+																		}
+
+																// Clean up item schema
+
+																	if ( $item_schema ) {
+
+																		$item_schema = array_filter($item_schema);
+
+																	}
+
+																	if ( $item_schema ) {
+
+																		ksort($item_schema);
+
+																	}
+
+																// Add @type value
+
+																	if ( $item_schema ) {
+
+																		$item_schema = array( '@type' => 'EducationalOrganization' ) + $item_schema;
+
+																	}
+
+																// Add @id value
+
+																	if ( $item_schema && $item_url && $item_schema['@type'] ) {
+
+																		$item_schema = array( '@id' => $item_url . '#' . $item_schema['@type'] ) + $item_schema;
+
+																	}
+
+															}
 
 														}
 
-													}
+													// Add to the 'recognizedBy' property value
 
-												// Add to the 'recognizedBy' property value
+														if ( $item_schema ) {
 
-													if ( $item_schema ) {
+															$credential_schema['recognizedBy'] = $item_schema;
 
-														$credential_schema['recognizedBy'] = $item_schema;
-
-													}
-
-											}
-
-										}
-
-								// Set the schema item's 'alternateName' property value
-
-									if ( $credential_alternateName ) {
-
-										$credential_schema['alternateName'] = $credential_alternateName;
-
-									}
-
-							// sameAs
-
-								// Get values
-
-									// Base 'sameAs' property value array
-
-										$credential_sameAs = array();
-
-									// sameAs repeater
-
-										// Get the sameAs repeater field value
-
-											// Get the field names for the indicated taxonomy
-
-												$credential_sameAs_field = $credential_taxonomy['sameAs'] ?? '';
-												$credential_sameAs_arg_field = $credential_taxonomy['sameAs_arg'] ?? 'schema_sameas_url';
-
-											$credential_sameAs_repeater = $credential_sameAs_field ? ( get_field( $credential_sameAs_field, $credential_term ) ?? array() ) : array();
-
-										// Add each repeater row to 'sameAs' property value array
-
-											if ( $credential_sameAs_repeater ) {
-
-												$credential_sameAs = uamswp_fad_schema_sameas(
-													$credential_sameAs_repeater, // sameAs repeater field
-													$credential_sameAs_arg_field // sameAs item field name
-												);
-
-											}
-
-								// Set the schema item's 'sameAs' property value
-
-									if ( $credential_sameAs ) {
-
-										$credential_schema['sameAs'] = $credential_sameAs;
-
-									}
-
-							// credentialCategory (Credential Transparency Description Language schema term of clinical degree or credential)
-
-								// Get the codeValue
-
-									if ( !$credential_ctdl ) {
-
-										// Get the field names for the indicated taxonomy
-
-											$credential_codeValue_field = $credential_taxonomy['codeValue'] ?? '';
-
-										$credential_ctdl = $credential_codeValue_field ? ( get_field( $credential_codeValue_field, $credential_term ) ?? array() ) : array();
-
-									}
-
-									$credential_ctdl = $credential_ctdl && is_array($credential_ctdl) ? $credential_ctdl : array($credential_ctdl);
-
-								// Get values
-
-									// Base 'credentialCategory' property value array
-
-										$credential_credentialCategory = array();
-
-									// Get values for each codeValue
-
-										if ( $credential_ctdl ) {
-
-											foreach ( $credential_ctdl as $item ) {
-
-												// Base property value item array
-
-													$item_schema = array();
-
-												// Get values
-
-													if ( $item ) {
-
-															$item_schema = array(
-																'@id' => 'https://purl.org/ctdl/terms/' . $item . '#DefinedTerm',
-																'@type' => 'DefinedTerm',
-																'description' => $ctdl_classes_map[$item]['definition'] ?? '',
-																'inDefinedTermSet' => $credential_schema_credentialCategory_inDefinedTermSet,
-																'name' => $ctdl_classes_map[$item]['label'] ?? '',
-																'termCode' => $item,
-																'url' => 'https://purl.org/ctdl/terms/' . $item,
-															);
-
-													}
-
-												// Clean up property value item array
-
-													if ( $item_schema ) {
-
-														$item_schema = array_filter($item_schema);
-
-													}
-
-												// Add to the schema item's list array
-
-													if ( $item_schema ) {
-
-														$credential_credentialCategory[] = $item_schema;
-
-													}
-
-											}
-
-											// Clean up the schema item's list array
-
-												if ( $credential_credentialCategory ) {
-
-													$credential_credentialCategory = array_filter($credential_credentialCategory);
-													$credential_credentialCategory = array_unique( $credential_credentialCategory, SORT_REGULAR );
-													$credential_credentialCategory = array_values($credential_credentialCategory);
-
-													// If there is only one item, flatten the multi-dimensional array by one step
-
-														uamswp_fad_flatten_multidimensional_array($credential_credentialCategory);
+														}
 
 												}
 
+											}
+
+									// Set the schema item's 'alternateName' property value
+
+										if ( $credential_alternateName ) {
+
+											$credential_schema['alternateName'] = $credential_alternateName;
+
 										}
 
-								// Set the schema item's 'credentialCategory' property value
+								// sameAs
 
-									if ( $credential_credentialCategory ) {
+									// Get values
 
-										$credential_schema['credentialCategory'] = $credential_credentialCategory;
+										// Base 'sameAs' property value array
+
+											$credential_sameAs = array();
+
+										// sameAs repeater
+
+											// Get the sameAs repeater field value
+
+												// Get the field names for the indicated taxonomy
+
+													$credential_sameAs_field = $credential_taxonomy['sameAs'] ?? '';
+													$credential_sameAs_arg_field = $credential_taxonomy['sameAs_arg'] ?? 'schema_sameas_url';
+
+												$credential_sameAs_repeater = $credential_sameAs_field ? ( get_field( $credential_sameAs_field, $credential_term ) ?? array() ) : array();
+
+											// Add each repeater row to 'sameAs' property value array
+
+												if ( $credential_sameAs_repeater ) {
+
+													$credential_sameAs = uamswp_fad_schema_sameas(
+														$credential_sameAs_repeater, // sameAs repeater field
+														$credential_sameAs_arg_field // sameAs item field name
+													);
+
+												}
+
+									// Set the schema item's 'sameAs' property value
+
+										if ( $credential_sameAs ) {
+
+											$credential_schema['sameAs'] = $credential_sameAs;
+
+										}
+
+								// credentialCategory (Credential Transparency Description Language schema term of clinical degree or credential)
+
+									// Get the codeValue
+
+										if ( !$credential_ctdl ) {
+
+											// Get the field names for the indicated taxonomy
+
+												$credential_codeValue_field = $credential_taxonomy['codeValue'] ?? '';
+
+											$credential_ctdl = $credential_codeValue_field ? ( get_field( $credential_codeValue_field, $credential_term ) ?? array() ) : array();
+
+										}
+
+										$credential_ctdl = $credential_ctdl && is_array($credential_ctdl) ? $credential_ctdl : array($credential_ctdl);
+
+									// Get values
+
+										// Base 'credentialCategory' property value array
+
+											$credential_credentialCategory = array();
+
+										// Get values for each codeValue
+
+											if ( $credential_ctdl ) {
+
+												foreach ( $credential_ctdl as $item ) {
+
+													// Base property value item array
+
+														$item_schema = array();
+
+													// Get values
+
+														if ( $item ) {
+
+																$item_schema = array(
+																	'@id' => 'https://purl.org/ctdl/terms/' . $item . '#DefinedTerm',
+																	'@type' => 'DefinedTerm',
+																	'description' => $ctdl_classes_map[$item]['definition'] ?? '',
+																	'inDefinedTermSet' => $credential_schema_credentialCategory_inDefinedTermSet,
+																	'name' => $ctdl_classes_map[$item]['label'] ?? '',
+																	'termCode' => $item,
+																	'url' => 'https://purl.org/ctdl/terms/' . $item,
+																);
+
+														}
+
+													// Clean up property value item array
+
+														if ( $item_schema ) {
+
+															$item_schema = array_filter($item_schema);
+
+														}
+
+													// Add to the schema item's list array
+
+														if ( $item_schema ) {
+
+															$credential_credentialCategory[] = $item_schema;
+
+														}
+
+												}
+
+												// Clean up the schema item's list array
+
+													if ( $credential_credentialCategory ) {
+
+														$credential_credentialCategory = array_filter($credential_credentialCategory);
+														$credential_credentialCategory = array_unique( $credential_credentialCategory, SORT_REGULAR );
+														$credential_credentialCategory = array_values($credential_credentialCategory);
+
+														// If there is only one item, flatten the multi-dimensional array by one step
+
+															uamswp_fad_flatten_multidimensional_array($credential_credentialCategory);
+
+													}
+
+											}
+
+									// Set the schema item's 'credentialCategory' property value
+
+										if ( $credential_credentialCategory ) {
+
+											$credential_schema['credentialCategory'] = $credential_credentialCategory;
+
+										}
+
+								// Clean up schema item array
+
+									$credential_schema = array_filter($credential_schema);
+
+									if ( $credential_schema ) {
+
+										ksort($credential_schema);
 
 									}
 
-							// Clean up schema item array
+								// Set the schema item's @type property value
 
-								$credential_schema = array_filter($credential_schema);
+									if ( $credential_schema ) {
 
-								if ( $credential_schema ) {
+										$credential_schema = array( '@type' => $credential_schema_type ) + $credential_schema;
 
-									ksort($credential_schema);
+									}
 
-								}
+								// Set the schema item's @id property value
 
-							// Set the schema item's @type property value
+									if (
+										$credential_schema
+										&&
+										$credential_url
+										&&
+										$credential_schema['@type']
+									) {
 
-								if ( $credential_schema ) {
+										$credential_schema = array( '@id' => $credential_url . '#' . $credential_schema['@type'] ) + $credential_schema;
 
-									$credential_schema = array( '@type' => $credential_schema_type ) + $credential_schema;
+									}
 
-								}
+								// Add the schema item to the output array
 
-							// Set the schema item's @id property value
+									if (
+										isset($credential_schema['name'])
+										&&
+										!empty($credential_schema['name'])
+									) {
 
-								if (
-									$credential_schema
-									&&
-									$credential_url
-									&&
-									$credential_schema['@type']
-								) {
+										$hasCredential_schema[] = $credential_schema;
 
-									$credential_schema = array( '@id' => $credential_url . '#' . $credential_schema['@type'] ) + $credential_schema;
+									}
 
-								}
+							} // endif
 
-							// Add the schema item to the output array
-
-								if (
-									isset($credential_schema['name'])
-									&&
-									!empty($credential_schema['name'])
-								) {
-
-									$hasCredential_schema[] = $credential_schema;
-
-								}
-
-						} // endif
+					}
 
 				} // endforeach
 
