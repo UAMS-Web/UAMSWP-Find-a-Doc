@@ -20566,7 +20566,7 @@
 
 									*/
 
-								// practicesAt [WIP]
+								// practicesAt
 
 									/**
 									 * A MedicalOrganization where the IndividualPhysician practices.
@@ -20583,6 +20583,117 @@
 									 * Implementation feedback and adoption from applications and websites can help
 									 * improve their definitions.
 									 */
+
+									if (
+										(
+											(
+												isset($provider_item_MedicalWebPage)
+												&&
+												in_array(
+													'practicesAt',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
+											)
+											||
+											(
+												isset($provider_item_MedicalBusiness)
+												&&
+												in_array(
+													'practicesAt',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
+											)
+											||
+											(
+												isset($provider_item_Person)
+												&&
+												in_array(
+													'practicesAt',
+													$provider_properties_map[$Person_type]['properties']
+												)
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if ( isset($provider_item_MedicalWebPage) ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+														'practicesAt', // string // Required // Name of schema property
+														$provider_location_LocalBusiness, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
+
+											// MedicalBusiness
+
+												if ( isset($provider_item_MedicalBusiness) ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+														'practicesAt', // string // Required // Name of schema property
+														$provider_location_LocalBusiness, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
+
+											// Person
+
+												if ( isset($provider_item_Person) ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$Person_type, // string // Required // The @type value for the schema item
+														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+														'practicesAt', // string // Required // Name of schema property
+														$provider_location_LocalBusiness, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
+
+										// Merge location significantLink value into significantLink
+
+											$provider_location_MedicalWebPage_significantLink = $provider_location_MedicalWebPage_significantLink ?? null;
+
+											if ( $provider_location_MedicalWebPage_significantLink ) {
+
+												$provider_significantLink = uamswp_fad_schema_merge_values(
+													$provider_significantLink, // mixed // Required // Initial schema item property value
+													$provider_location_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
+												);
+
+											}
+
+										// Merge location keywords value into keywords
+
+											$provider_location_LocalBusiness_keywords = $provider_location_LocalBusiness_keywords ?? null;
+
+											if ( $provider_location_LocalBusiness_keywords ) {
+
+												$provider_keywords = uamswp_fad_schema_merge_values(
+													$provider_keywords, // mixed // Required // Initial schema item property value
+													$provider_location_LocalBusiness_keywords // mixed // Required // Incoming schema item property value
+												);
+
+											}
+
+									}
 
 								// priceRange [excluded; irrelevant]
 
