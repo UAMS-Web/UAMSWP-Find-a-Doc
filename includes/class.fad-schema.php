@@ -19117,6 +19117,116 @@
 
 											}
 
+										// 'usNPI' property (National Provider Identifier [NPI])
+
+											/**
+											 * A National Provider Identifier (NPI) is a unique 10-digit identification number
+											 * issued to health care providers in the United States by the Centers for
+											 * Medicare and Medicaid Services.
+											 *
+											 * Values expected to be one of these types:
+											 *
+											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - Physician
+											 */
+
+											if (
+												(
+													(
+														isset($provider_item_MedicalWebPage)
+														&&
+														in_array(
+															'usNPI',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
+													)
+													||
+													(
+														isset($provider_item_MedicalBusiness)
+														&&
+														in_array(
+															'usNPI',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+													)
+													||
+													(
+														isset($provider_item_Person)
+														&&
+														in_array(
+															'usNPI',
+															$provider_properties_map[$Person_type]['properties']
+														)
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												// Get values
+
+													if ( !isset($provider_npi) ) {
+
+														$provider_npi = get_field( 'physician_npi', $entity ) ?? '';
+														$provider_npi = $provider_npi ? str_pad($provider_npi, 10, '0', STR_PAD_LEFT) : ''; // Add enough leading zeroes to reach 10 digits
+
+													}
+
+												// Add to item values
+
+													// MedicalWebPage
+
+														if ( isset($provider_item_MedicalWebPage) ) {
+
+															uamswp_fad_schema_add_to_item_values(
+																$MedicalWebPage_type, // string // Required // The @type value for the schema item
+																$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+																'usNPI', // string // Required // Name of schema property
+																$provider_npi, // mixed // Required // Variable to add as the property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+														}
+
+													// MedicalBusiness
+
+														if ( isset($provider_item_MedicalBusiness) ) {
+
+															uamswp_fad_schema_add_to_item_values(
+																$MedicalBusiness_type, // string // Required // The @type value for the schema item
+																$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+																'usNPI', // string // Required // Name of schema property
+																$provider_npi, // mixed // Required // Variable to add as the property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+														}
+
+													// Person
+
+														if ( isset($provider_item_Person) ) {
+
+															uamswp_fad_schema_add_to_item_values(
+																$Person_type, // string // Required // The @type value for the schema item
+																$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+																'usNPI', // string // Required // Name of schema property
+																$provider_npi, // mixed // Required // Variable to add as the property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+														}
+
+											}
+
 										// vatID [WIP]
 
 											/**
@@ -21812,22 +21922,6 @@
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
-									 */
-
-								// usNPI [WIP]
-
-									/**
-									 * A National Provider Identifier (NPI) is a unique 10-digit identification number
-									 * issued to health care providers in the United States by the Centers for
-									 * Medicare and Medicaid Services.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - Text
-									 *
-									 * Used on these types:
-									 *
-									 *     - Physician
 									 */
 
 								// video
