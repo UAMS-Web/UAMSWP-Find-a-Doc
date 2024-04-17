@@ -3564,10 +3564,16 @@
 
 			// Check / define variables
 
+				$taxonomy_valid = array(
+					'degree',
+					'board'
+				);
+
 				if (
-					$taxonomy != 'degree'
-					&&
-					$taxonomy != 'board'
+					!in_array(
+						$taxonomy, // mixed // needle
+						$taxonomy_valid // array // haystack
+					)
 				) {
 
 					return $hasCredential_schema;
