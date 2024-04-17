@@ -13489,7 +13489,11 @@
 														$provider_degree_list = '';
 														$provider_degree_list_i = 1;
 
-													if ( !isset($provider_degrees) ) {
+													if (
+														!isset($provider_degrees)
+														||
+														!isset($provider_degree_count)
+													) {
 
 														// Get value from 'Clinical Degrees and Credentials'
 
