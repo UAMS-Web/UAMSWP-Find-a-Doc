@@ -13533,7 +13533,7 @@
 
 																		if ( $provider_degree_count > $provider_degree_list_i ) {
 
-																			$provider_degree_list .= ', ';
+																			$provider_degree_list .= uamswp_attr_conversion(', ');
 
 																		} // endif ( $provider_degree_count > $provider_degree_list_i )
 
@@ -13544,14 +13544,6 @@
 															} // endforeach ( $provider_degrees as $item )
 
 													} // endif ( $provider_degrees )
-
-													// Make the degree list attribute-friendly
-
-														if ( $provider_degree_list ) {
-
-															$provider_degree_list = uamswp_attr_conversion($provider_degree_list);
-
-														} // endif ( $provider_degree_list )
 
 												} // endif
 
