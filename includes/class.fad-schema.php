@@ -15162,7 +15162,7 @@
 									 *     - Event
 									 */
 
-								// actionableFeedbackPolicy [not in scope]
+								// actionableFeedbackPolicy [excluded; out of scope]
 
 									/**
 									 * For a NewsMediaOrganization or other news-related Organization, a statement
@@ -15174,15 +15174,8 @@
 									 *
 									 *     - publishingPrinciples
 									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - CreativeWork
-									 *     - URL
-									 *
-									 * Used on these types:
-									 *
-									 *     - NewsMediaOrganization
-									 *     - Organization
+									 * Note: This schema property is outside the scope of what should be included in
+									 * Find-a-Doc.
 									 */
 
 								// additionalProperty [WIP]
@@ -15231,24 +15224,18 @@
 									 *     - Place
 									 */
 
-								// agentInteractionStatistic [WIP]
+								// agentInteractionStatistic [excluded; out of scope]
 
 									/**
 									 * The number of completed interactions for this entity, in a particular role
 									 * (the 'agent'), in a particular action (indicated in the statistic), and in a
 									 * particular context (i.e., https://schema.org/interactionService).
 									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - InteractionCounter
-									 *
-									 * Used on these types:
-									 *
-									 *     - Organization
-									 *     - Person
+									 * Note: This schema property is outside the scope of what should be included in
+									 * Find-a-Doc.
 									 */
 
-								// alumni [WIP]
+								// alumni [excluded; irrelevant]
 
 									/**
 									 * Alumni of an organization.
@@ -15257,34 +15244,19 @@
 									 *
 									 *     - alumniOf
 									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - EducationalOrganization
-									 *     - Organization
-									 *
-									 * Used on these types:
-									 *
-									 *     - EducationalOrganization
-									 *     - Organization
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// amenityFeature [WIP]
+								// amenityFeature [excluded; irrelevant]
 
 									/**
 									 * An amenity feature (e.g., a characteristic or service) of the Accommodation.
 									 * This generic property does not make a statement about whether the feature is
 									 * included in an offer for the main accommodation or available at extra costs.
 									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - LocationFeatureSpecification
-									 *
-									 * Used on these types:
-									 *
-									 *     - Accommodation
-									 *     - FloorPlan
-									 *     - LodgingBusiness
-									 *     - Place
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
 								// areaServed [WIP]
@@ -16339,7 +16311,7 @@
 									 *     - Service
 									 */
 
-								// awards [superseded]
+								// awards [excluded; superseded]
 
 									/**
 									 * Note: This term has been superseded by https://schema.org/award.
@@ -16363,9 +16335,11 @@
 									 * Used on these types:
 									 *
 									 *     - Place
+									 *
+									 * Note: Consider using the UAMS Health Epic SER ID for the provider.
 									 */
 
-								// branchOf [superseded]
+								// branchOf [excluded; superseded]
 
 									/**
 									 * Note: This term has been superseded by https://schema.org/parentOrganization.
@@ -16479,13 +16453,13 @@
 									 *     - Person
 									 */
 
-								// contactPoints [superseded]
+								// contactPoints [excluded; superseded]
 
 									/**
 									 * Note: This term has been superseded by https://schema.org/contactPoint.
 									 */
 
-								// containedIn [superseded]
+								// containedIn [excluded; superseded]
 
 									/**
 									 * Note: This term has been superseded by https://schema.org/containedInPlace.
@@ -16611,7 +16585,7 @@
 
 									}
 
-								// containsPlace [WIP]
+								// containsPlace [excluded; irrelevant]
 
 									/**
 									 * The basic containment relation between a place and another that it contains.
@@ -16620,16 +16594,11 @@
 									 *
 									 *     - containedInPlace
 									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - Place
-									 *
-									 * Used on these types:
-									 *
-									 *     - Place
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// correctionsPolicy [WIP]
+								// correctionsPolicy [excluded; irrelevant]
 
 									/**
 									 * For an Organization (e.g., NewsMediaOrganization), a statement describing (in
@@ -16639,31 +16608,38 @@
 									 *
 									 *     - publishingPrinciples
 									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - CreativeWork
-									 *     - URL
-									 *
-									 * Used on these types:
-									 *
-									 *     - NewsMediaOrganization
-									 *     - Organization
-									 *
-									 * As of 16 Apr 2024, this term is in the "new" area of Schema.org. Implementation
-									 * feedback and adoption from applications and websites can help improve their
-									 * definitions.
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// currenciesAccepted [WIP]
+								// currenciesAccepted [excluded; irrelevant]
 
 									/**
 									 * The currency accepted.
 									 *
-									 * Use standard formats:
-									 *     - ISO 4217 currency format (e.g., "USD")
-									 *     - Ticker symbol for cryptocurrencies (e.g., "BTC")
-									 *     - Well-known names for Local Exchange Trading Systems (LETS) and other
-									 *       currency types (e.g., "Ithaca HOUR")
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included in the core schema for them. However, it should be
+									 * included on the schema for the associated locations.
+									 */
+
+								// department [excluded; irrelevant]
+
+									/**
+									 * A relationship between an organization and a department of that organization,
+									 * also described as an organization (allowing different urls, logos, opening
+									 * hours). For example: a store with a pharmacy, or a bakery with a cafe.
+									 *
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
+									 */
+
+								// disambiguatingDescription [WIP]
+
+									/**
+									 * A sub property of description. A short description of the item used to
+									 * disambiguate from other, similar items. Information from other properties (in
+									 * particular, name) may be necessary for the description to be useful for
+									 * disambiguation.
 									 *
 									 * Values expected to be one of these types:
 									 *
@@ -16671,216 +16647,42 @@
 									 *
 									 * Used on these types:
 									 *
-									 *     - LocalBusiness
+									 *     - Thing
 									 */
 
-									if (
-										(
-											(
-												isset($provider_item_MedicalWebPage)
-												&&
-												in_array(
-													'currenciesAccepted',
-													$provider_properties_map[$MedicalWebPage_type]['properties']
-												)
-											)
-											||
-											(
-												isset($provider_item_MedicalBusiness)
-												&&
-												in_array(
-													'currenciesAccepted',
-													$provider_properties_map[$MedicalBusiness_type]['properties']
-												)
-											)
-											||
-											(
-												isset($provider_item_Person)
-												&&
-												in_array(
-													'currenciesAccepted',
-													$provider_properties_map[$Person_type]['properties']
-												)
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values [WIP]
-
-											if ( !isset($provider_currenciesAccepted) ) {
-
-												/*
-
-													Reference properties on associated locations
-
-												*/
-
-												$provider_currenciesAccepted = array();
-
-											}
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												if ( isset($provider_item_MedicalWebPage) ) {
-
-													uamswp_fad_schema_add_to_item_values(
-														$MedicalWebPage_type, // string // Required // The @type value for the schema item
-														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-														'currenciesAccepted', // string // Required // Name of schema property
-														$provider_currenciesAccepted, // mixed // Required // Variable to add as the property value
-														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-														($nesting_level + 1) // int // Required // Current nesting level value
-													);
-
-												}
-
-											// MedicalBusiness
-
-												if ( isset($provider_item_MedicalBusiness) ) {
-
-													uamswp_fad_schema_add_to_item_values(
-														$MedicalBusiness_type, // string // Required // The @type value for the schema item
-														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
-														'currenciesAccepted', // string // Required // Name of schema property
-														$provider_currenciesAccepted, // mixed // Required // Variable to add as the property value
-														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-														($nesting_level + 1) // int // Required // Current nesting level value
-													);
-
-												}
-
-											// Person
-
-												if ( isset($provider_item_Person) ) {
-
-													uamswp_fad_schema_add_to_item_values(
-														$Person_type, // string // Required // The @type value for the schema item
-														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-														'currenciesAccepted', // string // Required // Name of schema property
-														$provider_currenciesAccepted, // mixed // Required // Variable to add as the property value
-														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-														($nesting_level + 1) // int // Required // Current nesting level value
-													);
-
-												}
-
-									}
-
-								// department [WIP]
+								// dissolutionDate [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * The date that this organization was dissolved.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// disambiguatingDescription [WIP]
+								// diversityPolicy [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * Statement on diversity policy by an Organization e.g. a NewsMediaOrganization. For a NewsMediaOrganization, a statement describing the newsroom’s diversity policy on both staffing and sources, typically providing staffing data.
 									 *
-									 * Inverse property:
+									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
+									 * Implementation feedback and adoption from applications and websites can help
+									 * improve their definitions.
 									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// dissolutionDate [WIP]
+								// diversityStaffingReport [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * For an Organization (often but not necessarily a NewsMediaOrganization), a report on staffing diversity issues. In a news context this might be for example ASNE or RTDNA (US) reports, or self-reported.
 									 *
-									 * Inverse property:
+									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
+									 * Implementation feedback and adoption from applications and websites can help
+									 * improve their definitions.
 									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
-									 */
-
-								// diversityPolicy [WIP]
-
-									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
-									 */
-
-								// diversityStaffingReport [WIP]
-
-									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
 								// email [WIP]
@@ -16905,260 +16707,121 @@
 									 *     - foo
 									 */
 
-								// employee [WIP]
+								// employee [excluded; irrelevant]
 
 									/**
 									 * Someone working for this organization.
 									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - Person
-									 *
-									 * Used on these types:
-									 *
-									 *     - Organization
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// employees [WIP]
+								// employees [excluded; superceded]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This term has been superseded by https://schema.org/employee.
 									 */
 
-								// ethicsPolicy [WIP]
+								// ethicsPolicy [excluded; out of scope]
 
 									/**
-									 * foo
+									 * Statement about ethics policy (e.g., of a NewsMediaOrganization regarding
+									 * journalistic and publishing practices, or of a Restaurant, a page describing
+									 * food source policies). In the case of a NewsMediaOrganization, an ethicsPolicy
+									 * is typically a statement describing the personal, organizational, and corporate
+									 * standards of behavior expected by the organization.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is outside the scope of what should be included in
+									 * Find-a-Doc.
 									 */
 
-								// event [WIP]
+								// event [excluded; out of scope]
 
 									/**
-									 * foo
+									 * Upcoming or past event associated with this place, organization, or action.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is outside the scope of what should be included in
+									 * Find-a-Doc.
 									 */
 
-								// events [WIP]
+								// events [excluded; superseded]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This term has been superseded by https://schema.org/event.
 									 */
 
 								// faxNumber [WIP]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
+									 * The fax number.
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - foo
+									 *     - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - foo
+									 *     - ContactPoint
+									 *     - Organization
+									 *     - Person
+									 *     - Place
 									 */
 
-								// founder [WIP]
+								// founder [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * A person who founded this organization.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// founders [WIP]
+								// founders [excluded; superseded]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This term has been superseded by https://schema.org/founder.
 									 */
 
-								// foundingDate [WIP]
+								// foundingDate [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * The date that this organization was founded.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// foundingLocation [WIP]
+								// foundingLocation [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * The place where the Organization was founded.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// funder [WIP]
+								// funder [excluded; out of scope]
 
 									/**
-									 * foo
+									 * A person or organization that supports (sponsors) something through some kind
+									 * of financial contribution.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is outside the scope of what should be included in
+									 * Find-a-Doc.
 									 */
 
-								// funding [WIP]
+								// funding [excluded; out of scope]
 
 									/**
-									 * foo
+									 * A Grant that directly or indirectly provide funding or sponsorship for this
+									 * item. See also ownershipFundingInfo.
 									 *
-									 * Inverse property:
+									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
+									 * Implementation feedback and adoption from applications and websites can help
+									 * improve their definitions.
 									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is outside the scope of what should be included in
+									 * Find-a-Doc.
 									 */
 
 								// gender
@@ -17338,265 +17001,129 @@
 								// geo [WIP]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
+									 * The geo coordinates of the place.
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - foo
+									 *     - GeoCoordinates
+									 *     - GeoShape
 									 *
 									 * Used on these types:
 									 *
-									 *     - foo
+									 *     - Place
 									 */
 
-								// geoContains [WIP]
+								// geoContains [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * Represents a relationship between two geometries (or the places they
+									 * represent), relating a containing geometry to a contained geometry.
+									 * "a contains b iff no points of b lie in the exterior of a, and at least one
+									 * point of the interior of b lies in the interior of a". As defined in DE-9IM.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// geoCoveredBy [WIP]
+								// geoCoveredBy [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * Represents a relationship between two geometries (or the places they represent), relating a geometry to another that covers it. As defined in DE-9IM.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// geoCovers [WIP]
+								// geoCovers [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * Represents a relationship between two geometries (or the places they represent), relating a covering geometry to a covered geometry. "Every point of b is a point of (the interior or boundary of) a". As defined in DE-9IM.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
 								// geoCrosses [WIP]
 
 									/**
-									 * foo
+									 * Represents a relationship between two geometries (or the places they represent), relating a geometry to another that crosses it: "a crosses b: they have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them". As defined in DE-9IM.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// geoDisjoint [WIP]
+								// geoDisjoint [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * Represents spatial relations in which two geometries (or the places they represent) are topologically disjoint: "they have no point in common. They form a set of disconnected geometries." (A symmetric relationship, as defined in DE-9IM.)
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// geoEquals [WIP]
+								// geoEquals [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * Represents spatial relations in which two geometries (or the places they represent) are topologically equal, as defined in DE-9IM. "Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other" (a symmetric relationship).
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// geoIntersects [WIP]
+								// geoIntersects [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * Represents spatial relations in which two geometries (or the places they represent) have at least one point in common. As defined in DE-9IM.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// geoOverlaps [WIP]
+								// geoOverlaps [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * Represents a relationship between two geometries (or the places they represent), relating a geometry to another that geospatially overlaps it, i.e. they have some but not all points in common. As defined in DE-9IM.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// geoTouches [WIP]
+								// geoTouches [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * Represents spatial relations in which two geometries (or the places they represent) touch: "they have at least one boundary point in common, but no interior points." (A symmetric relationship, as defined in DE-9IM.)
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// geoWithin [WIP]
+								// geoWithin [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * Represents a relationship between two geometries (or the places they represent), relating a geometry to one that contains it, i.e. it is inside (i.e. within) its interior. As defined in DE-9IM.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
 								// hasCertification [WIP]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
+									 * Certification information about a product, organization, service, place, or person.
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - foo
+									 *     - Certification
 									 *
 									 * Used on these types:
 									 *
-									 *     - foo
+									 *     - Organization
+									 *     - Person
+									 *     - Place
+									 *     - Product
+									 *     - Service
+									 *
+									 * Note: Consider including the specialty and subspecialty certifications in this property.
 									 */
 
 								// hasCredential
@@ -17761,26 +17288,17 @@
 
 									}
 
-								// hasDriveThroughService [WIP]
+								// hasDriveThroughService [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * Indicates whether some facility (e.g. FoodEstablishment, CovidTestingFacility) offers a service that can be used by driving through in a car. In the case of CovidTestingFacility such facilities could potentially help with social distancing from other potentially-infected users.
 									 *
-									 * Inverse property:
+									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
+									 * Implementation feedback and adoption from applications and websites can help
+									 * improve their definitions.
 									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
 								// hasOccupation
@@ -17940,8 +17458,7 @@
 									 *
 									 *     - Place
 									 *
-									 * The examples on Schema.org indicate that a URL to the location on Google Maps
-									 * is acceptable.
+									 * Note: The examples on Schema.org indicate that a URL to the location on Google Maps is acceptable.
 									 */
 
 									if (
@@ -18046,134 +17563,77 @@
 
 									}
 
-								// hasMerchantReturnPolicy [WIP]
+								// hasMerchantReturnPolicy [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * Specifies a MerchantReturnPolicy that may be applicable.
 									 *
-									 * Inverse property:
+									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
+									 * Implementation feedback and adoption from applications and websites can help
+									 * improve their definitions.
 									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
 								// hasOfferCatalog [WIP]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
+									 * Indicates an OfferCatalog listing for this Organization, Person, or Service.
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - foo
+									 *     - OfferCatalog
 									 *
 									 * Used on these types:
 									 *
-									 *     - foo
+									 *     - Organization
+									 *     - Person
+									 *     - Service
 									 */
 
-								// hasPart [excluded]
+								// hasPart [excluded; irrelevant]
 
 									/**
 									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork
 									 * (in some sense).
 									 *
-									 * Inverse-property: isPartOf
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - CreativeWork
-									 *
-									 * Used on these types:
-									 *
-									 *     - CreativeWork
-									 *
-									 * This schema property is not relevant to providers or their webpages and will
-									 * not be included.
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// hasPOS [WIP]
+								// hasPOS [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * Points-of-Sales operated by the organization or person.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// hasProductReturnPolicy [WIP]
+								// hasProductReturnPolicy [excluded; superseded]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This term has been superseded by https://schema.org/hasMerchantReturnPolicy.
 									 */
 
 								// healthPlanNetworkId [WIP]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
+									 * Name or unique ID of network. (Networks are often reused across different insurance plans.)
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - foo
+									 *     - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - foo
+									 *     - HealthPlanNetwork
+									 *     - MedicalOrganization
+									 *
+									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
+									 * Implementation feedback and adoption from applications and websites can help
+									 * improve their definitions.
 									 */
 
 								// hospitalAffiliation
@@ -19604,26 +19064,13 @@
 
 									}
 
-								// interactionStatistic [WIP]
+								// interactionStatistic [excluded; out of scope]
 
 									/**
-									 * foo
+									 * The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is outside the scope of what should be included in
+									 * Find-a-Doc.
 									 */
 
 								// isAcceptingNewPatients
@@ -20177,23 +19624,17 @@
 								// latitude [WIP]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
+									 * The latitude of a location. For example 37.42242 (WGS 84).
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - foo
+									 *     - Number
+									 *     - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - foo
+									 *     - GeoCoordinates
+									 *     - Place
 									 */
 
 								// location (specific property)
@@ -20328,48 +19769,29 @@
 
 									}
 
-								// logo [WIP]
+								// logo [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * An associated logo.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
 								// longitude [WIP]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
+									 * The longitude of a location. For example -122.08585 (WGS 84).
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - foo
+									 *     - Number
+									 *     - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - foo
+									 *     - GeoCoordinates
+									 *     - Place
 									 */
 
 								// mainContentOfPage
@@ -20497,23 +19919,20 @@
 								// mainEntityOfPage [WIP]
 
 									/**
-									 * foo
+									 * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See background notes for details.
 									 *
 									 * Inverse property:
 									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
+									 *     - mainEntity
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - foo
+									 *     - CreativeWork
+									 *     - URL
 									 *
 									 * Used on these types:
 									 *
-									 *     - foo
+									 *     - Thing
 									 */
 
 								// makesOffer [WIP]
@@ -20533,92 +19952,38 @@
 									 *     - Person
 									 */
 
-								// map [WIP]
+								// map [excluded; superseded]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This term has been superseded by https://schema.org/hasMap.
 									 */
 
-								// maps [WIP]
+								// maps [excluded; superseded]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This term has been superseded by https://schema.org/hasMap.
 									 */
 
-								// maximumAttendeeCapacity [WIP]
+								// maximumAttendeeCapacity [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * The total number of individuals that may attend an event or venue.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// member [WIP]
+								// member [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals.
 									 *
 									 * Inverse property:
 									 *
-									 *     - foo
+									 *     - memberOf
 									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
 								// memberOf
@@ -20784,92 +20149,57 @@
 
 									}
 
-								// members [WIP]
+								// members [excluded; superseded]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This term has been superseded by https://schema.org/member.
 									 */
 
-								// nonprofitStatus [WIP]
+								// nonprofitStatus [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * nonprofitStatus indicates the legal status of a non-profit organization in its primary place of business.
 									 *
-									 * Inverse property:
+									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
+									 * Implementation feedback and adoption from applications and websites can help
+									 * improve their definitions.
 									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// numberOfEmployees [WIP]
+								// numberOfEmployees [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * The number of employees in an organization (e.g., business).
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
 								// occupationalCategory [WIP]
 
 									/**
-									 * foo
+									 * A category describing the job, preferably using a term from a taxonomy such as BLS O*NET-SOC, ISCO-08 or similar, with the property repeated for each applicable value. Ideally the taxonomy should be identified, and both the textual label and formal code for the category should be provided.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
+									 * Note: for historical reasons, any textual label and formal code provided as a literal may be assumed to be from O*NET-SOC.
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - foo
+									 *     - CategoryCode
+									 *     - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - foo
+									 *     - EducationalOccupationalProgram
+									 *     - JobPosting
+									 *     - Occupation
+									 *     - Physician
+									 *     - WorkBasedProgram
+									 *
+									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
+									 * Implementation feedback and adoption from applications and websites can help
+									 * improve their definitions.
 									 */
 
 								// offers [WIP]
@@ -20906,92 +20236,53 @@
 									 *     - Trip
 									 */
 
-								// openingHours [WIP]
+								// openingHours [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * The general opening hours for a business. Opening hours can be specified as a weekly time range, starting with days, then times per day. Multiple days can be listed with commas ',' separating each day. Day or time ranges are specified using a hyphen '-'.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 *     - Days are specified using the following two-letter combinations:
+									 *       Mo, Tu, We, Th, Fr, Sa, Su.
+									 *     - Times are specified using 24:00 format. For example,
+									 *       3pm is specified as 15:00, 10am as 10:00.
+									 *     - Here is an example:
+									 *       <time itemprop="openingHours" datetime="Tu,Th 16:00-20:00">Tuesdays and Thursdays 4-8pm</time>.
+									 *     - If a business is open 7 days a week, then it can be specified as
+									 *       <time itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all day</time>.
+
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// openingHoursSpecification [WIP]
+								// openingHoursSpecification [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * The opening hours of a certain place.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// ownershipFundingInfo [WIP]
+								// ownershipFundingInfo [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * For an Organization (often but not necessarily a NewsMediaOrganization), a description of organizational ownership structure; funding and grants. In a news/media setting, this is with particular reference to editorial independence. Note that the funder is also available and can be used to make basic funder information machine-readable.
 									 *
-									 * Inverse property:
+									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
+									 * Implementation feedback and adoption from applications and websites can help
+									 * improve their definitions.
 									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// owns [WIP]
+								// owns [excluded; out of scope]
 
 									/**
-									 * foo
+									 * Products owned by the organization or person.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is outside the scope of what should be included in
+									 * Find-a-Doc.
 									 */
 
 								// parentOrganization
@@ -21080,117 +20371,15 @@
 
 											}
 
-								// paymentAccepted [WIP]
+								// paymentAccepted [excluded; irrelevant]
 
 									/**
 									 * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
 									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - Text
-									 *
-									 * Used on these types:
-									 *
-									 *     - LocalBusiness
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included in the core schema for them. However, it should be
+									 * included on the schema for the associated locations.
 									 */
-
-									if (
-										(
-											(
-												isset($provider_item_MedicalWebPage)
-												&&
-												in_array(
-													'paymentAccepted',
-													$provider_properties_map[$MedicalWebPage_type]['properties']
-												)
-											)
-											||
-											(
-												isset($provider_item_MedicalBusiness)
-												&&
-												in_array(
-													'paymentAccepted',
-													$provider_properties_map[$MedicalBusiness_type]['properties']
-												)
-											)
-											||
-											(
-												isset($provider_item_Person)
-												&&
-												in_array(
-													'paymentAccepted',
-													$provider_properties_map[$Person_type]['properties']
-												)
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values [WIP]
-
-											if ( !isset($provider_paymentAccepted) ) {
-
-												/*
-
-													Reference values from 'location'
-
-												*/
-												$provider_paymentAccepted = array();
-
-											}
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												if ( isset($provider_item_MedicalWebPage) ) {
-
-													uamswp_fad_schema_add_to_item_values(
-														$MedicalWebPage_type, // string // Required // The @type value for the schema item
-														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-														'paymentAccepted', // string // Required // Name of schema property
-														$provider_paymentAccepted, // mixed // Required // Variable to add as the property value
-														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-														($nesting_level + 1) // int // Required // Current nesting level value
-													);
-
-												}
-
-											// MedicalBusiness
-
-												if ( isset($provider_item_MedicalBusiness) ) {
-
-													uamswp_fad_schema_add_to_item_values(
-														$MedicalBusiness_type, // string // Required // The @type value for the schema item
-														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
-														'paymentAccepted', // string // Required // Name of schema property
-														$provider_paymentAccepted, // mixed // Required // Variable to add as the property value
-														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-														($nesting_level + 1) // int // Required // Current nesting level value
-													);
-
-												}
-
-											// Person
-
-												if ( isset($provider_item_Person) ) {
-
-													uamswp_fad_schema_add_to_item_values(
-														$Person_type, // string // Required // The @type value for the schema item
-														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-														'paymentAccepted', // string // Required // Name of schema property
-														$provider_paymentAccepted, // mixed // Required // Variable to add as the property value
-														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-														($nesting_level + 1) // int // Required // Current nesting level value
-													);
-
-												}
-
-									}
 
 								// photo
 
@@ -21292,26 +20481,10 @@
 
 									}
 
-								// photos [WIP]
+								// photos [excluded; superseded]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This term has been superseded by https://schema.org/photo.
 									 */
 
 								// potentialAction [WIP]
@@ -21396,45 +20569,28 @@
 								// practicesAt [WIP]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
+									 * A MedicalOrganization where the IndividualPhysician practices.
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - foo
+									 *     - MedicalOrganization
 									 *
 									 * Used on these types:
 									 *
-									 *     - foo
+									 *     - IndividualPhysician
+									 *
+									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
+									 * Implementation feedback and adoption from applications and websites can help
+									 * improve their definitions.
 									 */
 
-								// priceRange [WIP]
+								// priceRange [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * The price range of the business, for example $$$.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
 								// primaryImageOfPage [WIP]
@@ -21451,48 +20607,24 @@
 									 *     - WebPage
 									 */
 
-								// publicAccess [WIP]
+								// publicAccess [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * A flag to signal that the Place is open to public visitors. If this property is omitted there is no assumed default boolean value.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// publishingPrinciples [WIP]
+								// publishingPrinciples [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles of an Organization (or individual, e.g. a Person writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those of the party primarily responsible for the creation of the CreativeWork.
 									 *
-									 * Inverse property:
+									 * While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a funder) can be expressed using schema.org terminology.
 									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
 								// review [WIP]
@@ -21516,26 +20648,10 @@
 									 *     - Service
 									 */
 
-								// reviews [WIP]
+								// reviews [excluded; superseded]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This term has been superseded by https://schema.org/review.
 									 */
 
 								// sameAs
@@ -21629,92 +20745,37 @@
 
 									}
 
-								// seeks [WIP]
+								// seeks [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * A pointer to products or services sought by the organization or person (demand).
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// serviceArea [WIP]
+								// serviceArea [excluded; superseded]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This term has been superseded by https://schema.org/areaServed.
 									 */
 
-								// slogan [WIP]
+								// slogan [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * A slogan or motto associated with the item.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// smokingAllowed [WIP]
+								// smokingAllowed [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or hotel room.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
 								// speakable [WIP]
@@ -21756,114 +20817,73 @@
 									 *     - WebPage
 									 */
 
-								// specialOpeningHoursSpecification [WIP]
+								// specialOpeningHoursSpecification [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * The special opening hours of a certain place.
 									 *
-									 * Inverse property:
+									 * Use this to explicitly override general opening hours brought in scope by openingHoursSpecification or openingHours.
 									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// sponsor [WIP]
+								// sponsor [excluded; out of scope]
 
 									/**
-									 * foo
+									 * A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is outside the scope of what should be included in
+									 * Find-a-Doc.
 									 */
 
-								// subOrganization [WIP]
+								// subOrganization [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * A relationship between two organizations where the first includes the second, e.g., as a subsidiary. See also: the more specific 'department' property.
 									 *
 									 * Inverse property:
 									 *
-									 *     - foo
+									 *     - parentOrganization
 									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
 								// subjectOf [WIP]
 
 									/**
-									 * foo
+									 * A CreativeWork or Event about this Thing.
 									 *
 									 * Inverse property:
 									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
+									 *     - about
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - foo
+									 *     - CreativeWork
+									 *     - Event
 									 *
 									 * Used on these types:
 									 *
-									 *     - foo
+									 *     - Thing
 									 */
 
 								// telephone [WIP]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
+									 * The telephone number.
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - foo
+									 *     - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - foo
+									 *     - ContactPoint
+									 *     - Organization
+									 *     - Person
+									 *     - Place
 									 */
 
 								// timeRequired [WIP]
@@ -21881,70 +20901,40 @@
 									 *     - CreativeWork
 									 */
 
-								// tourBookingPage [WIP]
+								// tourBookingPage [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * A page providing information on how to book a tour of some Place, such as an Accommodation or ApartmentComplex in a real estate setting, as well as other kinds of tours as appropriate.
 									 *
-									 * Inverse property:
+									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
+									 * Implementation feedback and adoption from applications and websites can help
+									 * improve their definitions.
 									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
-								// unnamedSourcesPolicy [WIP]
+								// unnamedSourcesPolicy [excluded; irrelevant]
 
 									/**
-									 * foo
+									 * For an Organization (typically a NewsMediaOrganization), a statement about policy on use of unnamed sources and the decision process required.
 									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - foo
-									 *
-									 * Used on these types:
-									 *
-									 *     - foo
+									 * Note: This schema property is not relevant to providers or their webpages and
+									 * will not be included.
 									 */
 
 								// usNPI [WIP]
 
 									/**
-									 * foo
-									 *
-									 * Inverse property:
-									 *
-									 *     - foo
-									 *
-									 * Subproperty of:
-									 *
-									 *     - foo
+									 * A National Provider Identifier (NPI) is a unique 10-digit identification number issued to health care providers in the United States by the Centers for Medicare and Medicaid Services.
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - foo
+									 *     - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - foo
+									 *     - Physician
 									 */
 
 								// video
