@@ -13511,35 +13511,39 @@
 
 															foreach ( $provider_degrees as $item ) {
 
-																// Get the individual degree term
+																if ( $item ) {
 
-																	$item_term = get_term( $item, 'degree' ); // WP_Term|array|WP_Error|null
+																	// Get the individual degree term
 
-																if ( is_object($item_term) ) {
+																		$item_term = get_term( $item, 'degree' ); // WP_Term|array|WP_Error|null
 
-																	// Get the term name
+																	if ( is_object($item_term) ) {
 
-																		$item_name = $item_term->name; // string
+																		// Get the term name
 
-																	// Append the term name to the degree list
+																			$item_name = $item_term->name; // string
 
-																		$provider_degree_list .= $item_name;
+																		// Append the term name to the degree list
 
-																	// Add the attribute-friendly term name to the degree array
+																			$provider_degree_list .= $item_name;
 
-																		$provider_degree_array[] = uamswp_attr_conversion($item_name);
+																		// Add the attribute-friendly term name to the degree array
 
-																	// If this is not the final term in the 'Clinical Degrees and Credentials' array, append a comma separator to the degree list
+																			$provider_degree_array[] = uamswp_attr_conversion($item_name);
 
-																		if ( $provider_degree_count > $provider_degree_list_i ) {
+																		// If this is not the final term in the 'Clinical Degrees and Credentials' array, append a comma separator to the degree list
 
-																			$provider_degree_list .= uamswp_attr_conversion(', ');
+																			if ( $provider_degree_count > $provider_degree_list_i ) {
 
-																		} // endif ( $provider_degree_count > $provider_degree_list_i )
+																				$provider_degree_list .= uamswp_attr_conversion(', ');
 
-																	$provider_degree_list_i++;
+																			} // endif ( $provider_degree_count > $provider_degree_list_i )
 
-																} // endif ( is_object($item_term) )
+																		$provider_degree_list_i++;
+
+																	} // endif ( is_object($item_term) )
+
+																}
 
 															} // endforeach ( $provider_degrees as $item )
 
