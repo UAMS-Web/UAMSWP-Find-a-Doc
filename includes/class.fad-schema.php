@@ -3564,26 +3564,30 @@
 
 			// Check / define variables
 
-				$taxonomy_valid = array(
-					'degree',
-					'board'
-				);
+				// If the taxonomy is invalid, end now
 
-				if (
-					!in_array(
-						$taxonomy, // mixed // needle
-						$taxonomy_valid // array // haystack
-					)
-				) {
+					$taxonomy_valid = array(
+						'degree',
+						'board'
+					);
 
-					return $hasCredential_schema;
+					if (
+						!in_array(
+							$taxonomy, // mixed // needle
+							$taxonomy_valid // array // haystack
+						)
+					) {
 
-				}
+						return $hasCredential_schema;
 
-				$credentials = is_array($credentials) ? $credentials : array($credentials);
-				$credentials = array_is_list($credentials) ? $credentials : array($credentials);
-				$credentials = array_filter($credentials);
-				$credentials = array_values($credentials);
+					}
+
+				// Convert the credentials IDs value to array (if not already an array)
+
+					$credentials = is_array($credentials) ? $credentials : array($credentials);
+					$credentials = array_is_list($credentials) ? $credentials : array($credentials);
+					$credentials = array_filter($credentials);
+					$credentials = array_values($credentials);
 
 				// If the input is empty, end now
 
@@ -3593,10 +3597,14 @@
 
 					}
 
-				$credential_ctdl = $credential_ctdl ?: array();
-				$credential_ctdl = is_array($credential_ctdl) ? $credential_ctdl : array($credential_ctdl);
+				// Convert the Credential Transparency Description Language classes value to array (if not already an array)
 
-				$hasCredential_schema = array_is_list($hasCredential_schema) ? $hasCredential_schema : array($hasCredential_schema);
+					$credential_ctdl = $credential_ctdl ?: array();
+					$credential_ctdl = is_array($credential_ctdl) ? $credential_ctdl : array($credential_ctdl);
+
+				// Convert the pre-existing schema array for hasCredential to a list array (if not already a list array)
+
+					$hasCredential_schema = array_is_list($hasCredential_schema) ? $hasCredential_schema : array($hasCredential_schema);
 
 			// Taxonomy field map
 
