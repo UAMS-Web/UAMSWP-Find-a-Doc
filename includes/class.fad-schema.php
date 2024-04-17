@@ -12609,8 +12609,8 @@
 								$provider_dateCreated = null;
 								$provider_dateModified = null;
 								$provider_datePublished = null;
-								$provider_degree_array = null;
-								$provider_degrees = null;
+								$provider_degrees_name_array = null;
+								$provider_degrees_id = null;
 								$provider_description = null;
 								$provider_description_TextObject = null;
 								$provider_duns = null;
@@ -12863,6 +12863,81 @@
 
 											}
 
+								// Degrees/Credentials (common use)
+
+									if (
+										!isset($provider_degrees_name_array)
+										||
+										!isset($provider_degrees_name_string)
+									) {
+
+										if ( !isset($provider_degrees_id) ) {
+
+											// Get value from 'Clinical Degrees and Credentials'
+
+												$provider_degrees_id = get_field( 'physician_degree', $entity ); // int[]
+
+										}
+
+										// Clean up values
+
+											if ( $provider_degrees_id ) {
+
+												$provider_degrees_id = array_filter($provider_degrees_id);
+												$provider_degrees_id = array_unique( $provider_degrees_id, SORT_REGULAR );
+												$provider_degrees_id = array_values($provider_degrees_id);
+
+											}
+
+										// Create degrees name list array
+
+											// Eliminate PHP errors
+
+												$provider_degrees_name_array = array();
+
+											if ( $provider_degrees_id ) {
+
+												// Loop through each item in the 'Clinical Degrees and Credentials' array
+
+													foreach ( $provider_degrees_id as $item ) {
+
+														if ( $item ) {
+
+															// Get the individual degree term
+
+																$item_term = get_term( $item, 'degree' ); // WP_Term|array|WP_Error|null
+
+															if ( is_object($item_term) ) {
+
+																// Get the term name
+
+																	$item_name = $item_term->name; // string
+
+																// Add the term name to the degree names array
+
+																	if ( $item_name ) {
+
+																		$provider_degrees_name_array[] = uamswp_attr_conversion($item_name);
+
+																	}
+
+															} // endif ( is_object($item_term) )
+
+														}
+
+													} // endforeach ( $provider_degrees_id as $item )
+
+											} // endif ( $provider_degrees_id )
+
+										// Create degrees name list string from the degrees name list array
+
+											$provider_degrees_name_string = $provider_degrees_name_array ? implode(
+												uamswp_attr_conversion(', '), // string // glue
+												$provider_degrees_name_array // array // pieces
+											) : '';
+
+									} // endif
+
 								// @type
 
 									// MedicalWebPage type
@@ -12893,79 +12968,18 @@
 
 													$MedicalBusiness_type = 'MedicalBusiness';
 
-												// Get list of the provider's degrees
-
-													if (
-														!isset($provider_degree_array)
-														||
-														!isset($provider_degree_list)
-													) {
-
-														$provider_degree_array = array();
-														$provider_degree_list = '';
-														$provider_degree_list_i = 1;
-														$provider_degree_count = 0;
-
-														if ( !isset($provider_degrees) ) {
-
-															$provider_degrees = get_field( 'physician_degree', $entity );
-
-														}
-
-														if ( $provider_degrees ) {
-
-															$provider_degree_count = count($provider_degrees) ?? 0;
-
-															foreach ( $provider_degrees as $item ) {
-
-																$item_term = get_term( $item, 'degree' );
-																$item_name = '';
-
-																if ( is_object($item_term) ) {
-
-																	$item_name = $item_term->name;
-
-																	if ( $item_name ) {
-
-																		$provider_degree_list .= $item_name;
-																		$provider_degree_array[] = uamswp_attr_conversion($item_name);
-
-																		if ( $provider_degree_count > $provider_degree_list_i ) {
-
-																			$provider_degree_list .= ', ';
-
-																		} // endif
-
-																		$provider_degree_list_i++;
-
-																	}
-
-																} // endif
-
-															} // endforeach
-
-														} // endif
-
-														if ( $provider_degree_list ) {
-
-															$provider_degree_list = uamswp_attr_conversion($provider_degree_list);
-
-														} // endif
-
-													}
-
 												// Check the list of degrees against the IndividualPhysician degrees
 
 													if (
 														$provider_properties_map['IndividualPhysician']['degrees']
 														&&
-														$provider_degree_array
+														$provider_degrees_name_array
 													) {
 
 														$IndividualPhysician_degree_query = !empty(
 															array_intersect(
 																$provider_properties_map['IndividualPhysician']['degrees'],
-																$provider_degree_array
+																$provider_degrees_name_array
 															)
 														);
 
@@ -12978,13 +12992,13 @@
 													if (
 														$provider_properties_map['Dentist']['degrees']
 														&&
-														$provider_degree_array
+														$provider_degrees_name_array
 													) {
 
 														$Dentist_degree_query = !empty(
 															array_intersect(
 																$provider_properties_map['Dentist']['degrees'],
-																$provider_degree_array
+																$provider_degrees_name_array
 															)
 														);
 
@@ -12997,13 +13011,13 @@
 														if (
 															$provider_properties_map['Optician']['degrees']
 															&&
-															$provider_degree_array
+															$provider_degrees_name_array
 														) {
 
 															$Optician_degree_query = !empty(
 																array_intersect(
 																	$provider_properties_map['Optician']['degrees'],
-																	$provider_degree_array
+																	$provider_degrees_name_array
 																)
 															);
 
@@ -13475,82 +13489,6 @@
 
 										// Get values for name parts [WIP]
 
-											// Degrees
-
-												if (
-													!isset($provider_degree_array)
-													||
-													!isset($provider_degree_list)
-												) {
-
-													// Eliminate PHP errors
-
-														$provider_degree_array = array();
-														$provider_degree_list = '';
-														$provider_degree_list_i = 1;
-
-													if (
-														!isset($provider_degrees)
-														||
-														!isset($provider_degree_count)
-													) {
-
-														// Get value from 'Clinical Degrees and Credentials'
-
-															$provider_degrees = get_field( 'physician_degree', $entity ); // int[]
-
-														// Count the number of values in Clinical Degrees and Credentials
-
-															$provider_degree_count = $provider_degrees ? count($provider_degrees) : 0; // int
-
-													}
-
-													if ( $provider_degrees ) {
-
-														// Loop through each item in the 'Clinical Degrees and Credentials' array
-
-															foreach ( $provider_degrees as $item ) {
-
-																if ( $item ) {
-
-																	// Get the individual degree term
-
-																		$item_term = get_term( $item, 'degree' ); // WP_Term|array|WP_Error|null
-
-																	if ( is_object($item_term) ) {
-
-																		// Get the term name
-
-																			$item_name = $item_term->name; // string
-
-																		// Append the term name to the degree list
-
-																			$provider_degree_list .= $item_name;
-
-																		// Add the attribute-friendly term name to the degree array
-
-																			$provider_degree_array[] = uamswp_attr_conversion($item_name);
-
-																		// If this is not the final term in the 'Clinical Degrees and Credentials' array, append a comma separator to the degree list
-
-																			if ( $provider_degree_count > $provider_degree_list_i ) {
-
-																				$provider_degree_list .= uamswp_attr_conversion(', ');
-
-																			} // endif ( $provider_degree_count > $provider_degree_list_i )
-
-																		$provider_degree_list_i++;
-
-																	} // endif ( is_object($item_term) )
-
-																}
-
-															} // endforeach ( $provider_degrees as $item )
-
-													} // endif ( $provider_degrees )
-
-												} // endif
-
 											// Prefix
 
 												if ( !isset($provider_honorificPrefix) ) {
@@ -13569,7 +13507,7 @@
 														if (
 															array_intersect(
 																$provider_honorificPrefix_degree_valid, // The array with master values to check.
-																$provider_degree_array // Arrays to compare values against.
+																$provider_degrees_name_array // Arrays to compare values against.
 															)
 														) {
 
@@ -13981,7 +13919,7 @@
 
 											// Get values
 
-												$provider_honorificSuffix = $provider_degree_list;
+												$provider_honorificSuffix = $provider_degrees_name_string;
 
 											// Add to item values
 
@@ -14092,9 +14030,9 @@
 														$provider_name_parts
 													);
 
-													if ( $provider_degree_list ) {
+													if ( $provider_degrees_name_string ) {
 
-														$provider_name .= ', ' . $provider_degree_list;
+														$provider_name .= uamswp_attr_conversion(', ') . $provider_degrees_name_string;
 
 													}
 
@@ -14417,13 +14355,13 @@
 
 																// Add degrees
 
-																	if ( $provider_degree_list ) {
+																	if ( $provider_degrees_name_string ) {
 
 																		$provider_alternateName_variants[] = implode(
 																			', ',
 																			array(
 																				$item,
-																				$provider_degree_list
+																				$provider_degrees_name_string
 																			)
 																		);
 
@@ -17243,28 +17181,28 @@
 
 												// Get IDs of degrees and credentials
 
-													if ( !isset($provider_degrees) ) {
+													if ( !isset($provider_degrees_id) ) {
 
-														$provider_degrees = get_field( 'physician_degree', $entity );
+														$provider_degrees_id = get_field( 'physician_degree', $entity );
 
 													}
 
 													// Clean up values
 
-														if ( $provider_degrees ) {
+														if ( $provider_degrees_id ) {
 
-															$provider_degrees = array_filter($provider_degrees);
-															$provider_degrees = array_unique( $provider_degrees, SORT_REGULAR );
-															$provider_degrees = array_values($provider_degrees);
+															$provider_degrees_id = array_filter($provider_degrees_id);
+															$provider_degrees_id = array_unique( $provider_degrees_id, SORT_REGULAR );
+															$provider_degrees_id = array_values($provider_degrees_id);
 
 														}
 
 												// Format schema values
 
-													if ( $provider_degrees ) {
+													if ( $provider_degrees_id ) {
 
 														$provider_hasCredential = uamswp_fad_schema_hascredential(
-															$provider_degrees, // mixed // Required // Degrees and credentials ID values
+															$provider_degrees_id, // mixed // Required // Degrees and credentials ID values
 															'degree', // string // Required // Slug of relevant taxonomy (enum: 'physician_degree', 'physician_boards')
 															'', // mixed // Optional // Manually-defined Credential Transparency Description Language classes
 															$provider_hasCredential // array // Optional // Pre-existing schema array for hasCredential to which to add credential items
