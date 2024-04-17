@@ -18363,26 +18363,6 @@
 									 * Note: This term has been superseded by https://schema.org/hasMerchantReturnPolicy.
 									 */
 
-								// healthPlanNetworkId [WIP]
-
-									/**
-									 * Name or unique ID of network. (Networks are often reused across different
-									 * insurance plans.)
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - Text
-									 *
-									 * Used on these types:
-									 *
-									 *     - HealthPlanNetwork
-									 *     - MedicalOrganization
-									 *
-									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
-									 * Implementation feedback and adoption from applications and websites can help
-									 * improve their definitions.
-									 */
-
 								// hospitalAffiliation
 
 									/**
@@ -18717,6 +18697,29 @@
 														}
 
 											}
+
+										// 'healthPlanNetworkId' property [excluded; irrelevant]
+
+											/**
+											 * Name or unique ID of network. (Networks are often reused across different
+											 * insurance plans.)
+											 *
+											 * Values expected to be one of these types:
+											 *
+											 *     - Text
+											 *
+											 * Used on these types:
+											 *
+											 *     - HealthPlanNetwork
+											 *     - MedicalOrganization
+											 *
+											 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
+											 * Implementation feedback and adoption from applications and websites can help
+											 * improve their definitions.
+											 *
+											 * Note: This schema property is not relevant to providers or their webpages and
+											 * will not be included.
+											 */
 
 										// isicV4 [WIP]
 
