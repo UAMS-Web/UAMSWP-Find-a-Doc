@@ -13443,6 +13443,64 @@
 
 										}
 
+								// Certifications (common use)
+
+									// List of properties that reference certifications
+
+										$provider_certification_common = array(
+											'hasCertification',
+											'hasCredential'
+										);
+
+									if (
+										(
+											isset($provider_item_MedicalWebPage)
+											&&
+											array_intersect(
+												$provider_properties_map[$MedicalWebPage_type]['properties'],
+												$provider_certification_common
+											)
+										)
+										||
+										(
+											isset($provider_item_MedicalBusiness)
+											&&
+											array_intersect(
+												$provider_properties_map[$MedicalBusiness_type]['properties'],
+												$provider_certification_common
+											)
+										)
+										||
+										(
+											isset($provider_item_Person)
+											&&
+											array_intersect(
+												$provider_properties_map[$Person_type]['properties'],
+												$provider_certification_common
+											)
+										)
+									) {
+
+										if ( !isset($provider_certifications_id) ) {
+
+											// Get value from 'Specialty and Subspecialty Certifications'
+
+												$provider_certifications_id = get_field( 'physician_boards', $entity ); // int[]
+
+												// Clean up values
+
+													if ( $provider_certifications_id ) {
+
+														$provider_certifications_id = array_filter($provider_certifications_id);
+														$provider_certifications_id = array_unique( $provider_certifications_id, SORT_REGULAR );
+														$provider_certifications_id = array_values($provider_certifications_id);
+
+													}
+
+										}
+
+									}
+
 								// names (common use and specific properties) [WIP]
 
 									// List of properties that reference names
