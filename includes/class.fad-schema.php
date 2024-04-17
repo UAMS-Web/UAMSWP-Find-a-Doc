@@ -17223,7 +17223,7 @@
 
 														$provider_hasCredential = uamswp_fad_schema_hascredential(
 															$provider_degrees_id, // mixed // Required // Degrees and credentials ID values
-															'degree', // string // Required // Slug of relevant taxonomy (enum: 'physician_degree', 'physician_boards')
+															'degree', // string // Required // Slug of relevant taxonomy (enum: 'degree', 'board')
 															'', // mixed // Optional // Manually-defined Credential Transparency Description Language classes
 															$provider_hasCredential // array // Optional // Pre-existing schema array for hasCredential to which to add credential items
 														);
@@ -17256,7 +17256,7 @@
 
 														$provider_hasCredential = uamswp_fad_schema_hascredential(
 															$provider_certifications, // mixed // Required // Degrees and credentials ID values
-															'board', // string // Required // Slug of relevant taxonomy (enum: 'physician_degree', 'physician_boards')
+															'board', // string // Required // Slug of relevant taxonomy (enum: 'degree', 'board')
 															array( 'Certification' ), // mixed // Optional // Manually-defined Credential Transparency Description Language classes
 															$provider_hasCredential // array // Optional // Pre-existing schema array for hasCredential to which to add credential items
 														);
