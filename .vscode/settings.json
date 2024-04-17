@@ -2984,6 +2984,7 @@
 		"faxnumber",
 		"fw",
 		"gmb",
+		"hascertification",
 		"hascredential",
 		"hasoccupation",
 		"healthplannetworkid",

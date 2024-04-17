@@ -3535,6 +3535,222 @@
 
 		}
 
+	// Add data to an array defining schema data for hasCertification [WIP]
+
+		function uamswp_fad_schema_hascertification(
+			$certifications, // mixed // Required // ID values for certifications
+			array $hasCertification_schema = array() // array // Optional // Pre-existing schema array for hasCertification to which to add credential items
+		) {
+
+			/*
+
+				'hasCertification' property:
+
+					Certification information about a product, organization, service, place, or person.
+
+					Values expected to be one of these types:
+
+						 * Certification
+
+					Used on these types:
+
+						 * Organization
+						 * Person
+						 * Place
+						 * Product
+						 * Service
+
+				'Certification' type:
+
+					A Certification is an official and authoritative statement about a subject, for
+					example a product, service, person, or organization. A certification is
+					typically issued by an independent certification body, for example a
+					professional organization or government. It formally attests certain
+					characteristics about the subject, for example Organizations can be ISO
+					certified, Food products can be certified Organic or Vegan, a Person can be a
+					certified professional, a Place can be certified for food processing. There are
+					certifications for many domains: regulatory, organizational, recycling, food,
+					efficiency, educational, ecological, etc. A certification is a form of
+					credential, as are accreditations and licenses. Mapped from the
+					gs1:CertificationDetails [https://www.gs1.org/voc/CertificationDetails] class
+					in the GS1 Web Vocabulary.
+
+			*/
+
+			// Check / define variables
+
+				// Convert the certifications IDs value to array (if not already an array)
+
+					$certifications = is_array($certifications) ? $certifications : array($certifications);
+					$certifications = array_is_list($certifications) ? $certifications : array($certifications);
+					$certifications = array_filter($certifications);
+					$certifications = array_values($certifications);
+
+				// If the input is empty, end now
+
+					if ( !$certifications ) {
+
+						return $hasCertification_schema;
+
+					}
+
+				// Convert the pre-existing schema array for hasCertification to a list array (if not already a list array)
+
+					$hasCertification_schema = array_is_list($hasCertification_schema) ? $hasCertification_schema : array($hasCertification_schema);
+
+			// Base values/arrays
+
+				$certification_schema_issuedBy = array(
+					'alternateName' => '',
+					'name' => '',
+					'sameAs' => '',
+					'url' => '',
+				);
+
+				$certification_schema_issuedBy_type = 'Organization';
+
+				$certification_schema = array(
+					'additionalType' => '',
+					'alternateName' => '',
+					'alternativeHeadline' => '',
+					'certificationStatus' => '',
+					'issuedBy' => '',
+					'mainEntityOfPage' => '',
+					'name' => '',
+					'sameAs' => '',
+					'url' => ''
+				);
+
+				$certification_schema_type = 'Certification';
+
+			// Get values
+
+				// additionalType
+
+					/**
+					 * An additional type for the item, typically used for adding more specific types
+					 * from external vocabularies in microdata syntax. This is a relationship between
+					 * something and a class that the thing is in. Typically the value is a
+					 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+					 * in RDF. Text values can be used sparingly, for cases where useful information
+					 * can be added without their being an appropriate schema to reference. In the
+					 * case of text values, the class label should follow the schema.org style guide.
+					 *
+					 * Expected Type:
+					 *
+					 *      - Text
+					 *      - URL
+					 */
+
+					$certification_additionalType = 'https://www.wikidata.org/wiki/Q4931289'; // Wikidata item for 'board certification'
+
+				// alternateName [WIP]
+
+					/**
+					 * An alias for the item.
+					 *
+					 * Expected Type:
+					 *
+					 *      - Text
+					 */
+
+					$certification_alternateName = null;
+
+				// alternativeHeadline [WIP]
+
+					/**
+					 * A secondary title of the CreativeWork.
+					 *
+					 * Expected Type:
+					 *
+					 *      - Text
+					 */
+
+					$certification_alternativeHeadline = null;
+
+				// certificationStatus
+
+					/**
+					 * Indicates the current status of a certification: active or inactive.
+					 *
+					 * See also gs1:certificationStatus.
+					 *
+					 * Expected Type:
+					 *
+					 *      - CertificationStatusEnumeration
+					 */
+
+					$certification_certificationStatus = 'https://schema.org/CertificationActive';
+
+				// issuedBy [WIP]
+
+					/**
+					 * The organization issuing the item (e.g., a Permit, Ticket, or Certification).
+					 *
+					 * Expected Type:
+					 *
+					 *      - Organization
+					 */
+
+					$certification_issuedBy = null;
+
+				// mainEntityOfPage [WIP]
+
+					/**
+					 * Indicates a page (or other CreativeWork) for which this thing is the main
+					 * entity being described.
+					 *
+					 * See background notes [https://schema.org/docs/datamodel.html#mainEntityBackground]
+					 * for details.
+					 *
+					 * Expected Type:
+					 *
+					 *      - CreativeWork
+					 *      - URL
+					 */
+
+					$certification_mainEntityOfPage = null;
+
+				// name [WIP]
+
+					/**
+					 * The name of the item.
+					 *
+					 * Expected Type:
+					 *
+					 *      - Text
+					 */
+
+					$certification_name = null;
+
+				// sameAs [WIP]
+
+					/**
+					 * URL of a reference Web page that unambiguously indicates the item's identity
+					 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+					 * website).
+					 *
+					 * Expected Type:
+					 *
+					 *      - URL
+					 */
+
+					$certification_sameAs = null;
+
+				// url [WIP]
+
+					/**
+					 * URL of the item.
+					 *
+					 * Expected Type:
+					 *
+					 *      - URL
+					 */
+
+					$certification_url = null;
+
+		}
+
 	// Add data to an array defining schema data for hasCredential
 
 		function uamswp_fad_schema_hascredential(
