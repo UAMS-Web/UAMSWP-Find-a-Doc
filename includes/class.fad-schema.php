@@ -17205,17 +17205,17 @@
 
 														$provider_degrees_id = get_field( 'physician_degree', $entity );
 
+														// Clean up values
+
+															if ( $provider_degrees_id ) {
+
+																$provider_degrees_id = array_filter($provider_degrees_id);
+																$provider_degrees_id = array_unique( $provider_degrees_id, SORT_REGULAR );
+																$provider_degrees_id = array_values($provider_degrees_id);
+
+															}
+
 													}
-
-													// Clean up values
-
-														if ( $provider_degrees_id ) {
-
-															$provider_degrees_id = array_filter($provider_degrees_id);
-															$provider_degrees_id = array_unique( $provider_degrees_id, SORT_REGULAR );
-															$provider_degrees_id = array_values($provider_degrees_id);
-
-														}
 
 												// Format schema values
 
