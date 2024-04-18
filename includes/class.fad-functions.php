@@ -12093,111 +12093,113 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 	// Provider Clinical Specialization and Occupational Title
 
-		function uamswp_fad_provider_clinical_specialization(
-			int $provider // int // ID of the provider profile
-		) {
+		// Values for Specific Provider
 
-			// Eliminate PHP errors
+			function uamswp_fad_provider_clinical_specialization(
+				int $provider // int // ID of the provider profile
+			) {
 
-				$provider_specialty_id = array(); // int[] // Term ID(s)
-				$output = array(
-					'term_array' => array(), // array // Clinical Specialization terms array
-					'title_array' => array(), // array // Clinical Occupation Titles array
-					'title_string' => '', // string // Clinical Occupation Titles string
-					'resident_query' => false // bool // Query for whether the provider is a resident
-				);
+				// Eliminate PHP errors
 
-			// Query for whether the provider is a resident
+					$provider_specialty_id = array(); // int[] // Term ID(s)
+					$output = array(
+						'term_array' => array(), // array // Clinical Specialization terms array
+						'title_array' => array(), // array // Clinical Occupation Titles array
+						'title_string' => '', // string // Clinical Occupation Titles string
+						'resident_query' => false // bool // Query for whether the provider is a resident
+					);
 
-				$output['resident_query'] = get_field( 'physician_resident', $provider ) ?: false;
+				// Query for whether the provider is a resident
 
-			// Get Clinical Specialization and Clinical Occupation Title values
+					$output['resident_query'] = get_field( 'physician_resident', $provider ) ?: false;
 
-				if ( $output['resident_query'] ) {
+				// Get Clinical Specialization and Clinical Occupation Title values
 
-					// Manually define a Clinical Occupation Title and add it to the Clinical Occupation Titles array
+					if ( $output['resident_query'] ) {
 
-						$output['title_array'][0] = 'Resident Physician';
+						// Manually define a Clinical Occupation Title and add it to the Clinical Occupation Titles array
 
-				} else {
+							$output['title_array'][0] = 'Resident Physician';
 
-					// Get the Clinical Specialization values
+					} else {
 
-						// Get field value
+						// Get the Clinical Specialization values
 
-							$provider_specialty_id = get_field( 'physician_title', $provider ) ?: array(); // int|int[] // Term ID(s)
+							// Get field value
 
-						// Convert field value into an array
+								$provider_specialty_id = get_field( 'physician_title', $provider ) ?: array(); // int|int[] // Term ID(s)
 
-							$provider_specialty_id = is_array($provider_specialty_id) ? $provider_specialty_id : array($provider_specialty_id); // int[] // Term ID(s)
+							// Convert field value into an array
 
-					// Get the Clinical Occupation Title values
+								$provider_specialty_id = is_array($provider_specialty_id) ? $provider_specialty_id : array($provider_specialty_id); // int[] // Term ID(s)
 
-						// Loop through the array of Clinical Specialization values
+						// Get the Clinical Occupation Title values
 
-							if ( $provider_specialty_id ) {
+							// Loop through the array of Clinical Specialization values
 
-								foreach ( $provider_specialty_id as $term_id ) {
+								if ( $provider_specialty_id ) {
 
-									// Eliminate PHP errors
+									foreach ( $provider_specialty_id as $term_id ) {
 
-										$provider_specialty_term = null;
-										$provider_occupation_title = null;
+										// Eliminate PHP errors
 
-									// Get the term
+											$provider_specialty_term = null;
+											$provider_occupation_title = null;
 
-										$provider_specialty_term = get_term( $term_id, 'clinical_title' );
+										// Get the term
 
-									// Get the Clinical Occupation Title
+											$provider_specialty_term = get_term( $term_id, 'clinical_title' );
 
-										if ( is_object($provider_specialty_term) ) {
+										// Get the Clinical Occupation Title
 
-											// Add the individual term to the term array
+											if ( is_object($provider_specialty_term) ) {
 
-												$output['term_array'][] = $provider_specialty_term;
+												// Add the individual term to the term array
 
-											// Get the Clinical Occupation Title field from the term
+													$output['term_array'][] = $provider_specialty_term;
 
-												$provider_occupation_title = get_field( 'clinical_specialization_title', $provider_specialty_term ) ?? null;
+												// Get the Clinical Occupation Title field from the term
 
-											// Fallback: Set the Clinical Occupation Title from the term name
+													$provider_occupation_title = get_field( 'clinical_specialization_title', $provider_specialty_term ) ?? null;
 
-												if ( !$provider_occupation_title ) {
+												// Fallback: Set the Clinical Occupation Title from the term name
 
-													$provider_occupation_title = $provider_specialty_term->name;
+													if ( !$provider_occupation_title ) {
 
-												}
+														$provider_occupation_title = $provider_specialty_term->name;
 
-										}
+													}
 
-									// Add the individual Clinical Occupation Title to the Clinical Occupation Titles array
+											}
 
-										if ( $provider_occupation_title ) {
+										// Add the individual Clinical Occupation Title to the Clinical Occupation Titles array
 
-											$output['title_array'][$term_id] = $provider_occupation_title;
+											if ( $provider_occupation_title ) {
 
-										}
+												$output['title_array'][$term_id] = $provider_occupation_title;
+
+											}
+
+									}
 
 								}
 
-							}
+					}
 
-				}
+				// Construct the Clinical Occupation Titles string
 
-			// Construct the Clinical Occupation Titles string
+					if ( $output['title_array'] ) {
 
-				if ( $output['title_array'] ) {
+						$output['title_string'] = implode(
+							', ', // separator
+							$output['title_array'] // array
+						);
 
-					$output['title_string'] = implode(
-						', ', // separator
-						$output['title_array'] // array
-					);
+					}
 
-				}
+				return $output;
 
-			return $output;
-
-		}
+			}
 
 	// Provider profile field values
 
