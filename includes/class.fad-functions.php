@@ -12667,6 +12667,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 					$provider_specialty_id = array(); // int[] // Term ID(s)
 					$output = array(
+						'id_array' => array(), // array // Clinical Specialization IDs array
 						'title_array' => array(), // array // Clinical Occupation Titles array
 						'title_string' => '', // string // Clinical Occupation Titles string
 						'resident_query' => false // bool // Query for whether the provider is a resident
@@ -12686,15 +12687,28 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 					} else {
 
-						// Get the Clinical Specialization values
+						// Get the Clinical Specialization ID values
 
 							// Get field value
 
 								$provider_specialty_id = get_field( 'physician_title', $provider ) ?: array(); // int|int[] // Term ID(s)
 
-							// Convert field value into an array
+							// Convert field value into an array (if not already an array)
 
 								$provider_specialty_id = is_array($provider_specialty_id) ? $provider_specialty_id : array($provider_specialty_id); // int[] // Term ID(s)
+
+							// Clean up the array
+
+								$provider_specialty_id = $provider_specialty_id ? array_filter($provider_specialty_id) : null;
+								$provider_specialty_id = $provider_specialty_id ? array_values($provider_specialty_id) : null;
+
+							// Add the Clinical Specialization ID values to the output array
+
+								if ( $provider_specialty_id ) {
+
+									$output['id_array'] = $provider_specialty_id;
+
+								}
 
 						// Get the Clinical Occupation Title values
 
