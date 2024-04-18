@@ -12673,6 +12673,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 						'id_array' => array(), // array // Clinical Specialization IDs array
 						'title_array' => array(), // array // Clinical Occupation Titles array
 						'title_string' => '', // string // Clinical Occupation Titles string
+						'detail_array' => array(), // array // Item details array
 						'resident_query' => false // bool // Query for whether the provider is a resident
 					);
 
@@ -12721,32 +12722,25 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 									foreach ( $provider_specialty_id as $term_id ) {
 
-										// Eliminate PHP errors
+										// Get details of the term
 
-											$provider_specialty_term = null;
-											$provider_occupation_title = null;
-
-										// Get the term
-
-											$provider_specialty_term = get_term( $term_id, 'clinical_title' );
+											$term_detail = uamswp_fad_clinical_specialization(
+												$term_id // int // ID of the Clinical Specialization term
+											) ?? null; // array
 
 										// Get the Clinical Occupation Title
 
-											if ( is_object($provider_specialty_term) ) {
+										if ( $term_detail ) {
 
-												// Get the Clinical Occupation Title field from the term
+											// Add term details to the output
 
-													$provider_occupation_title = get_field( 'clinical_specialization_title', $provider_specialty_term ) ?? null;
+												$output['detail_array'][$term_id] = $term_detail;
 
-												// Fallback: Set the Clinical Occupation Title from the term name
+											// Get the Clinical Occupation Title field from the term (with the term name as the fallback)
 
-													if ( !$provider_occupation_title ) {
+												$provider_occupation_title = $term_detail['name'] ?? ( $term_detail['term_name'] ?? null );
 
-														$provider_occupation_title = $provider_specialty_term->name;
-
-													}
-
-											}
+										}
 
 										// Add the individual Clinical Occupation Title to the Clinical Occupation Titles array
 
