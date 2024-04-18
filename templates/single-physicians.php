@@ -407,7 +407,7 @@
 				$resident = get_field( 'physician_resident', $post->ID ); // bool
 				$resident_title_name = 'Resident Physician';
 
-			// Get clinical specialty and occupation title values
+			// Get clinical specialization and occupation title values
 
 				// Eliminate PHP errors
 
@@ -415,7 +415,7 @@
 					$provider_schema_fields[$page_id]['provider_clinical_specialization_term'] = ''; // Pass value to schema function
 					$provider_schema_fields[$page_id]['provider_jobTitle'] = ''; // Pass value to schema function
 
-				$provider_title_fn = uamswp_fad_provider_clinical_occupation_title(
+				$provider_title_fn = uamswp_fad_provider_clinical_specialization(
 					$post->ID // int // ID of the provider profile
 				);
 

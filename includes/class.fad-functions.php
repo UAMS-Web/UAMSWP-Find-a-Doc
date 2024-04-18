@@ -676,9 +676,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 					$recognition_list .= '<tr>';
 					$recognition_list .= '<td><a href="'.get_permalink().'" title="'. $full_name .'">'. $full_name .'</a></td>';
 
-					// Get clinical specialty and occupation title values
+					// Get clinical specialization and occupation title values
 
-						$provider_occupation_title = uamswp_fad_provider_clinical_occupation_title(
+						$provider_occupation_title = uamswp_fad_provider_clinical_specialization(
 							get_the_id() // int // ID of the provider profile
 						)['title_string'];
 
@@ -881,7 +881,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Clinical Title
 
-							$provider_occupation_title = uamswp_fad_provider_clinical_occupation_title(
+							$provider_occupation_title = uamswp_fad_provider_clinical_specialization(
 								$provider // int // ID of the provider profile
 							)['title_array'];
 
@@ -1254,7 +1254,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Clinical Title
 
-							$provider_occupation_title = uamswp_fad_provider_clinical_occupation_title(
+							$provider_occupation_title = uamswp_fad_provider_clinical_specialization(
 								$provider // int // ID of the provider profile
 							)['title_array'];
 
@@ -12091,9 +12091,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 // Profile and card field values
 
-	// Provider Clinical Occupation Title
+	// Provider Clinical Specialization and Occupational Title
 
-		function uamswp_fad_provider_clinical_occupation_title(
+		function uamswp_fad_provider_clinical_specialization(
 			int $provider // int // ID of the provider profile
 		) {
 
@@ -12101,7 +12101,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				$provider_specialty_id = array(); // int[] // Term ID(s)
 				$output = array(
-					'term_array' => array(), // array // Clinical Specialty terms array
+					'term_array' => array(), // array // Clinical Specialization terms array
 					'title_array' => array(), // array // Clinical Occupation Titles array
 					'title_string' => '', // string // Clinical Occupation Titles string
 					'resident_query' => false // bool // Query for whether the provider is a resident
@@ -12111,7 +12111,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				$output['resident_query'] = get_field( 'physician_resident', $provider ) ?: false;
 
-			// Get Clinical Specialty and Clinical Occupation Title values
+			// Get Clinical Specialization and Clinical Occupation Title values
 
 				if ( $output['resident_query'] ) {
 
@@ -12121,7 +12121,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				} else {
 
-					// Get the Clinical Specialty values
+					// Get the Clinical Specialization values
 
 						// Get field value
 
@@ -12133,7 +12133,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 					// Get the Clinical Occupation Title values
 
-						// Loop through the array of Clinical Specialty values
+						// Loop through the array of Clinical Specialization values
 
 							if ( $provider_specialty_id ) {
 
@@ -12346,7 +12346,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 					// Clinical Job Title (taxonomy select)
 
-						$provider_title_fn = uamswp_fad_provider_clinical_occupation_title(
+						$provider_title_fn = uamswp_fad_provider_clinical_specialization(
 							$page_id // int // ID of the provider profile
 						);
 
@@ -13021,7 +13021,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Clinical Job Title (taxonomy select)
 
-							$provider_title = uamswp_fad_provider_clinical_occupation_title(
+							$provider_title = uamswp_fad_provider_clinical_specialization(
 								$page_id // int // ID of the provider profile
 							);
 

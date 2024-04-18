@@ -1048,7 +1048,7 @@
 		},
 		{
 			"key": "field_clinical_specialization_name_patient_alt",
-			"label": "Alternate Names for the Clinical Specialty/Subspecialty",
+			"label": "Alternate Names for the Clinical Specialization/Subspecialization",
 			"name": "clinical_specialization_name_patient_alt",
 			"type": "clone",
 			"instructions": "",

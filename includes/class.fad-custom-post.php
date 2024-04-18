@@ -3302,9 +3302,9 @@
 
 			$full_name = get_field( 'physician_first_name', $postId ) . ' ' . ( get_field( 'physician_middle_name', $postId ) ? get_field( 'physician_middle_name', $postId ) . ' ' : '' ) . get_field( 'physician_last_name', $postId ) . ( get_field( 'physician_pedigree', $postId ) ? '&nbsp;' . get_field( 'physician_pedigree', $postId ) : '') . ( $degree_list ? ', ' . $degree_list : '' );
 
-			// Get clinical specialty and occupation title values
+			// Get clinical specialization and occupation title values
 
-				$provider_occupation_title_fn = uamswp_fad_provider_clinical_occupation_title(
+				$provider_occupation_title_fn = uamswp_fad_provider_clinical_specialization(
 					$postId // int // ID of the provider profile
 				);
 				$provider_occupation_title = $provider_occupation_title_fn['title_string']; // string // Clinical Occupation Titles string
