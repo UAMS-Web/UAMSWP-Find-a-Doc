@@ -12666,6 +12666,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 				// Eliminate PHP errors
 
 					$provider_specialty_id = array(); // int[] // Term ID(s)
+
+				// Base output array
+
 					$output = array(
 						'id_array' => array(), // array // Clinical Specialization IDs array
 						'title_array' => array(), // array // Clinical Occupation Titles array
