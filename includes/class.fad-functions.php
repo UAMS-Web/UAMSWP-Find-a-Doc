@@ -12243,6 +12243,10 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 								// Patient-Friendly Clinical Occupation Title
 
+									// Base section output array
+
+										$output_patientFriendly_occupation = array();
+
 									// Get the value
 
 										$patientFriendly_occupation_name = get_field( 'clinical_specialization_title', $term ) ?? null; // string
@@ -12294,6 +12298,10 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// Clinical Specialization
 
 								// Patient-Friendly Name for the Clinical Specialization
+
+									// Base section output array
+
+										$output_patientFriendly_specialization = array();
 
 									// Get the value
 
