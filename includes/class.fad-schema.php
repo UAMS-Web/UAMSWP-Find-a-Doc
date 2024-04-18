@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Functions for Schema.org Schema and Google Local Business structured data
+ */
+
 // Format values for common schema data properties and types
 
 	// Add data to an array defining schema data for PostalAddress
