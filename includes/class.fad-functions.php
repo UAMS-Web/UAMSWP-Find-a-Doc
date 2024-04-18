@@ -12093,6 +12093,570 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 	// Provider Clinical Specialization and Occupational Title
 
+		// Values for Specific Term
+
+			function uamswp_fad_clinical_specialization(
+				int $id // int // ID of the Clinical Specialization term
+			) {
+
+				// Base general output array
+
+					$output = array();
+
+				// Check/define values
+
+					// If ID value is invalid, stop here
+
+						if ( !$id ) {
+
+							return $output;
+
+						}
+
+				// Get the term
+
+					$term = get_term( $id, 'clinical_title' );
+
+				// If the term is invalid, stop here
+
+					if ( !is_object($term) ) {
+
+						return $output;
+
+					}
+
+				// Get the values from the term
+
+					// Term name
+
+						// Get the value
+
+							$term_name = $term->name ?? null;
+
+						// Add the value to the output array
+
+							if ( $term_name ) {
+
+								$output['term_name'] = $term->name;
+
+							}
+
+					// Query: Is this clinical specialization part of the UAMS Health extension to the Health Care Provider Taxonomy Code Set?
+
+						$output['extension_query'] = get_field( 'clinical_specialization_extension_query', $term ) ?? false;
+
+					// Health Care Provider Taxonomy Code Set values
+
+						// Base section output array
+
+							$output_codeSet = array();
+
+						// Get the values
+
+							// Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set
+
+								// Get the value
+
+									$codeSet_code = get_field( 'clinical_specialization_code', $term ) ?? null; // string
+
+								// Add the value to the output array
+
+									if ( $codeSet_code ) {
+
+										$output_codeSet['code'] = $codeSet_code;
+
+									}
+
+							// Specialization Name in the Health Care Provider Taxonomy Code Set
+
+								// Get the value
+
+									$codeSet_name = get_field( 'clinical_specialty_name', $term ) ?? null; // string
+
+								// Add the value to the output array
+
+									if ( $codeSet_name ) {
+
+										$output_codeSet['name'] = $codeSet_name;
+
+									}
+
+							// Specialization Display Name in the Health Care Provider Taxonomy Code Set
+
+								// Get the value
+
+									$codeSet_name_display = get_field( 'clinical_specialization_name_display', $term ) ?? null; // string
+
+								// Add the value to the output array
+
+									if ( $codeSet_name_display ) {
+
+										$output_codeSet['name_display'] = $codeSet_name_display;
+
+									}
+
+							// Is this clinical specialization a valid selection?
+
+								// Get the value
+
+									$codeSet_valid_query = get_field( 'clinical_specialization_valid', $term ) ?? null; // bool
+
+								// Add the value to the output array
+
+									if ( $codeSet_valid_query ) {
+
+										$output_codeSet['valid_query'] = $codeSet_valid_query;
+
+									}
+
+							// Specialization Definition in the Health Care Provider Taxonomy Code Set
+
+								// Get the value
+
+									$codeSet_definition = get_field( 'clinical_specialization_definition', $term ) ?? null; // string
+
+								// Add the value to the output array
+
+									if ( $codeSet_definition ) {
+
+										$output_codeSet['definition'] = $codeSet_definition;
+
+									}
+
+						// Add the section output array to the general output array
+
+							if ( $output_codeSet ) {
+
+								$output['codeSet'] = $output_codeSet;
+
+							}
+
+					// Patient-Friendly Terms values
+
+						// Base section output array
+
+							$output_patientFriendly = array();
+
+						// Get the values
+
+							// Clinical Occupation
+
+								// Patient-Friendly Clinical Occupation Title
+
+									// Get the value
+
+										$patientFriendly_occupation_name = get_field( 'clinical_specialization_title', $term ) ?? null; // string
+
+									// Add the value to the Clinical Occupation Title output array
+
+										if ( $patientFriendly_occupation_name ) {
+
+											$output_patientFriendly_occupation['name'] = $patientFriendly_occupation_name;
+
+										}
+
+								// Alternate Names for the Clinical Occupation Title
+
+									// Get the repeater value
+
+										$patientFriendly_occupation_alternatename_repeater = get_field( 'schema_alternatename', $term ) ?? null; // string
+
+									// Add each item to alternateName property values array
+
+										$patientFriendly_occupation_alternatename = array();
+
+										if ( $patientFriendly_occupation_alternatename_repeater ) {
+
+											$patientFriendly_occupation_alternatename = uamswp_fad_schema_alternatename(
+												$patientFriendly_occupation_alternatename_repeater, // array // Required // alternateName repeater field
+												'schema_alternatename_text', // string // Optional // alternateName item field name
+												$patientFriendly_occupation_alternatename // mixed // Optional // Pre-existing schema array for alternateName to which to add alternateName items
+											);
+
+										}
+
+									// Add the value to the Clinical Occupation Title output array
+
+										if ( $patientFriendly_occupation_alternatename ) {
+
+											$output_patientFriendly_occupation['alternateName'] = $patientFriendly_occupation_alternatename;
+
+										}
+
+								// Add the value to the Patient Friendly Terms output array
+
+									if ( $output_patientFriendly_occupation ) {
+
+										$output_patientFriendly['occupation'] = $output_patientFriendly_occupation;
+
+									}
+
+							// Clinical Specialization
+
+								// Patient-Friendly Name for the Clinical Specialization
+
+									// Get the value
+
+										$patientFriendly_specialization_name = get_field( 'clinical_specialization_name_patient', $term ) ?? null; // string
+
+									// Add the value to the Clinical Specialization output array
+
+										if ( $patientFriendly_specialization_name ) {
+
+											$output_patientFriendly_specialization['name'] = $patientFriendly_specialization_name;
+
+										}
+
+								// Alternate Names for the Clinical Specialization
+
+									// Get the repeater value
+
+										$patientFriendly_specialization_alternatename_repeater = get_field( 'clinical_specialization_name_patient_alt_schema_alternatename', $term ) ?? null; // string
+
+									// Add each item to alternateName property values array
+
+										$patientFriendly_specialization_alternatename = array();
+
+										if ( $patientFriendly_specialization_alternatename_repeater ) {
+
+											$patientFriendly_specialization_alternatename = uamswp_fad_schema_alternatename(
+												$patientFriendly_specialization_alternatename_repeater, // array // Required // alternateName repeater field
+												'schema_alternatename_text', // string // Optional // alternateName item field name
+												$patientFriendly_specialization_alternatename // mixed // Optional // Pre-existing schema array for alternateName to which to add alternateName items
+											);
+
+										}
+
+									// Add the value to the Clinical Specialization output array
+
+										if ( $patientFriendly_specialization_alternatename ) {
+
+											$output_patientFriendly_specialization['alternateName'] = $patientFriendly_specialization_alternatename;
+
+										}
+
+								// Add the value to the Patient Friendly Terms output array
+
+									if ( $output_patientFriendly_specialization ) {
+
+										$output_patientFriendly['specialization'] = $output_patientFriendly_specialization;
+
+									}
+
+						// Add the section output array to the general output array
+
+							if ( $output_patientFriendly ) {
+
+								$output['patientFriendly'] = $output_patientFriendly;
+
+							}
+
+					// CMS Specialty Code values
+
+						// Base section output array
+
+							$output_cmsSpecialty = array();
+
+						// Get the values
+
+							// Inherit the related CMS Specialty Code and Provider/Supplier Type from the parent?
+
+								$cmsSpecialty_inherit_query = get_field( 'clinical_specialization_cms_code_inherit_query', $term ) ?? false; // bool
+
+							if ( $cmsSpecialty_inherit_query ) {
+
+								// Get the ID of the parent term
+
+									$term_parent_id = isset($term_parent_id) ? $term_parent_id : $term->parent; // int
+
+								// Get the values of the parent term
+
+									$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization( $term_parent_id ); // array
+
+								// Get the CMS Specialty Code values from the parent term
+
+									$output_cmsSpecialty = $term_parent_value ? ( $term_parent_value['cmsSpecialty'] ?? null ) : null; // array
+
+							} else {
+
+								// Get the Related CMS Specialty Code value from this term
+
+									$cmsSpecialty_code = get_field( 'clinical_specialization_cms_code', $term ) ?? null; // int|string
+
+								// Get the Related CMS Provider/Supplier Type value from this term
+
+									$cmsSpecialty_name = get_field( 'clinical_specialization_cms_code_type', $term ) ?? null; // string
+
+								// Add the value to the output array
+
+									// Related CMS Specialty Code
+
+										if ( $cmsSpecialty_code ) {
+
+											$output_cmsSpecialty['code'] = $cmsSpecialty_code;
+
+										}
+
+									// Related CMS Provider/Supplier Type
+
+										if ( $cmsSpecialty_name ) {
+
+											$output_cmsSpecialty['name'] = $cmsSpecialty_name;
+
+										}
+
+							}
+
+						// Add the section output array to the general output array
+
+							if ( $output_cmsSpecialty ) {
+
+								$output['cmsSpecialty'] = $output_cmsSpecialty;
+
+							}
+
+					// Related Schema.org MedicalSpecialty values
+
+						// Get the values
+
+							// Inherit the related Schema.org MedicalSpecialty enumeration member from the parent?
+
+								$medicalSpecialty_inherit_query = get_field( 'clinical_specialization_medicalspecialty_member_inherit_query', $term ) ?? false; // bool
+
+							// MedicalSpecialty Enumeration Member
+
+								if ( $medicalSpecialty_inherit_query ) {
+
+									// Get the ID of the parent term
+
+										$term_parent_id = isset($term_parent_id) ? $term_parent_id : $term->parent; // int
+
+									// Get the values of the parent term
+
+										$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization( $term_parent_id ); // array
+
+									// Get the MedicalSpecialty Enumeration Member value from the parent term
+
+										$output_medicalSpecialty = $term_parent_value ? ( $term_parent_value['medicalSpecialty'] ?? null ) : null; // string
+
+								} else {
+
+									// Get the MedicalSpecialty Enumeration Member value from this term
+
+										$output_medicalSpecialty = get_field( 'schema_medicalspecialty_single', $term ) ?? null; // string
+
+								}
+
+						// Add the MedicalSpecialty Enumeration Member value to the general output array
+
+							if ( $output_medicalSpecialty ) {
+
+								$output['medicalSpecialty'] = $output_medicalSpecialty;
+
+							}
+
+					// Related O*Net-SOC Occupation Code values
+
+						// Base section output array
+
+							$output_oNetSOC = array();
+
+						// Get the values
+
+							// Inherit the related O*Net-SOC Occupation Code and Occupation Name from the parent?
+
+								$oNetSOC_inherit_query = get_field( 'clinical_specialization_onetsoc_code_inherit_query', $term ) ?? false; // bool
+
+							if ( $oNetSOC_inherit_query ) {
+
+								// Get the ID of the parent term
+
+									$term_parent_id = isset($term_parent_id) ? $term_parent_id : $term->parent; // int
+
+								// Get the values of the parent term
+
+									$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization( $term_parent_id ); // array
+
+								// Get the Related O*Net-SOC Occupation Code values from the parent term
+
+									$output_oNetSOC = $term_parent_value ? ( $term_parent_value['oNetSOC'] ?? null ) : null; // array
+
+							} else {
+
+								// Get the Related O*Net-SOC Occupation Code value from this term
+
+									$oNetSOC_code = get_field( 'clinical_specialization_onetsoc_code', $term ) ?? null; // string
+
+								// Get the Related O*Net-SOC Occupation Name value from this term
+
+									$oNetSOC_name = get_field( 'clinical_specialization_onetsoc_code_name', $term ) ?? null; // string
+
+								// Add the value to the output array
+
+									// Related O*Net-SOC Occupation Code
+
+										if ( $oNetSOC_code ) {
+
+											$output_oNetSOC['code'] = $oNetSOC_code;
+
+										}
+
+									// Related O*Net-SOC Occupation Name
+
+										if ( $oNetSOC_name ) {
+
+											$output_oNetSOC['name'] = $oNetSOC_name;
+
+										}
+
+							}
+
+						// Add the section output array to the general output array
+
+							if ( $output_oNetSOC ) {
+
+								$output['oNetSOC'] = $output_oNetSOC;
+
+							}
+
+					// Related ISCO-08 Code values
+
+						// Get the values
+
+							// Inherit the related ISCO-08 Code from the parent?
+
+								$isco08_inherit_query = get_field( 'clinical_specialization_isco08_code_inherit_query', $term ) ?? false; // bool
+
+							// ISCO-08 Code
+
+								if ( $isco08_inherit_query ) {
+
+									// Get the ID of the parent term
+
+										$term_parent_id = isset($term_parent_id) ? $term_parent_id : $term->parent; // int
+
+									// Get the values of the parent term
+
+										$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization( $term_parent_id ); // array
+
+									// Get the ISCO-08 Code value from the parent term
+
+										$output_isco08 = $term_parent_value ? ( $term_parent_value['isco08'] ?? null ) : null; // string
+
+								} else {
+
+									// Get the ISCO-08 Code value from this term
+
+										$output_isco08 = get_field( 'clinical_specialization_isco08_code', $term ) ?? null; // string
+
+								}
+
+						// Add the ISCO-08 Code value to the general output array
+
+							if ( $output_isco08 ) {
+
+								$output['isco08'] = $output_isco08;
+
+							}
+
+					// Reference Webpages
+
+						// Base section output array
+
+							$output_sameAs = array();
+
+						// Get the values
+
+							// Reference Webpages About the Occupation
+
+								// Inherit the related Reference Webpages About the Occupation from the parent?
+
+									$occupation_sameAs_inherit_query = get_field( 'clinical_specialization_sameas_occupation_inherit_query', $term ) ?? false; // bool
+
+								// Reference Webpages About the Occupation
+
+									if ( $occupation_sameAs_inherit_query ) {
+
+										// Get the ID of the parent term
+
+											$term_parent_id = isset($term_parent_id) ? $term_parent_id : $term->parent; // int
+
+										// Get the values of the parent term
+
+											$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization( $term_parent_id ); // array
+
+										// Get the Reference Webpages About the Occupation value from the parent term
+
+											$sameAs_occupation = $term_parent_value ? ( $term_parent_value['occupation']['sameAs'] ?? null ) : null; // string
+
+									} else {
+
+										// Get the Reference Webpages About the Occupation value from this term
+
+											$sameAs_occupation = get_field( 'clinical_specialization_sameas_occupation_schema_sameas', $term ) ?? null; // string
+
+									}
+
+								// Add the Reference Webpages About the Occupation value to the general Reference Webpages output array
+
+									if ( $sameAs_occupation ) {
+
+										$output_sameAs['occupation'] = $sameAs_occupation;
+
+									}
+
+							// Reference Webpages About the Specialization
+
+								// Inherit the reference webpages about the specialization from the parent?
+
+									$specialization_sameAs_inherit_query = get_field( 'clinical_specialization_sameas_field_inherit_query', $term ) ?? false; // bool
+
+								// Reference Webpages About the Specialization
+
+									if ( $specialization_sameAs_inherit_query ) {
+
+										// Get the ID of the parent term
+
+											$term_parent_id = isset($term_parent_id) ? $term_parent_id : $term->parent; // int
+
+										// Get the values of the parent term
+
+											$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization( $term_parent_id ); // array
+
+										// Get the Reference Webpages About the Specialization value from the parent term
+
+											$sameAs_specialization = $term_parent_value ? ( $term_parent_value['specialization']['sameAs'] ?? null ) : null; // string
+
+									} else {
+
+										// Get the Reference Webpages About the Specialization value from this term
+
+											$sameAs_specialization = get_field( 'clinical_specialization_sameas_field_schema_sameas', $term ) ?? null; // string
+
+									}
+
+								// Add the Reference Webpages About the Specialization value to the general Reference Webpages output array
+
+									if ( $sameAs_specialization ) {
+
+										$output_sameAs['specialization'] = $sameAs_specialization;
+
+									}
+
+						// Add the section output array to the general output array
+
+							if ( $output_sameAs ) {
+
+								$output['sameAs'] = $output_sameAs;
+
+							}
+
+				// Return the output array
+
+					return $output;
+
+			}
+
 		// Values for Specific Provider
 
 			function uamswp_fad_provider_clinical_specialization(
