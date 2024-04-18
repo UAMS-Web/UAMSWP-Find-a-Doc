@@ -12746,7 +12746,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 											// Get the Clinical Occupation Title field from the term (with the term name as the fallback)
 
-												$provider_occupation_title = $term_detail['name'] ?? ( $term_detail['term_name'] ?? null );
+												$provider_occupation_title = $term_detail['patientFriendly']['occupation']['name'] ?? ( $term_detail['term_name'] ?? null );
 
 										}
 
