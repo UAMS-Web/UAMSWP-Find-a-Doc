@@ -1048,7 +1048,7 @@
 		},
 		{
 			"key": "field_clinical_specialization_name_patient_alt",
-			"label": "Alternate Names for the Clinical Specialization/Subspecialization",
+			"label": "Alternate Names for the Clinical Specialization",
 			"name": "clinical_specialization_name_patient_alt",
 			"type": "clone",
 			"instructions": "",
@@ -1775,7 +1775,7 @@
 		},
 		{
 			"key": "field_clinical_specialization_sameas_field_inherit_query",
-			"label": "Inherit the reference webpages about the specialty \/ field from the parent?",
+			"label": "Inherit the reference webpages about the specialization from the parent?",
 			"name": "clinical_specialization_sameas_field_inherit_query",
 			"type": "button_group",
 			"instructions": "Note that changing the relevant value in the parent term will not automatically update this term. After any change to the relevant value in the parent term this term will need to be updated by simply opening the term and clicking \"Update.\"",
@@ -1797,7 +1797,7 @@
 		},
 		{
 			"key": "field_clinical_specialization_sameas_field",
-			"label": "Reference Webpages About the Specialty \/ Field",
+			"label": "Reference Webpages About the Specialization",
 			"name": "clinical_specialization_sameas_field",
 			"type": "clone",
 			"instructions": "The field is often linked from a section titled \"field of this occupation\" on the Wikidata item page for the occupation.",
