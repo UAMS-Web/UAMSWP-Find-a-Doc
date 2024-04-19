@@ -12214,6 +12214,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 								// Get the value
 
 									$codeSet_definition = get_field( 'clinical_specialization_definition', $term ) ?? null; // string
+									$codeSet_definition_attr = $codeSet_definition ? uamswp_attr_conversion($codeSet_definition) : null; // string
 
 								// Add the value to the output array
 
@@ -12250,6 +12251,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 									// Get the value
 
 										$patientFriendly_occupation_name = get_field( 'clinical_specialization_title', $term ) ?? null; // string
+										$patientFriendly_occupation_name_attr = $patientFriendly_occupation_name ? uamswp_attr_conversion($patientFriendly_occupation_name) : null;
 
 									// Add the value to the Clinical Occupation Title output array
 
