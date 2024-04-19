@@ -6703,7 +6703,10 @@
 														),
 														'datePublished' => '2008',
 														'name' => 'ISCO-08',
-														'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/isco08/'
+														'url' => array(
+															'https://www.ilo.org/public/english/bureau/stat/isco/isco08/',
+															'https://www.ilo.org/public/english/bureau/stat/isco/docs/publication08.pdf'
+														)
 													),
 													'name' => $isco08_values[$item]['name'] ?? '', // ISCO-08 name from Specialty item
 													'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/docs/health.pdf'
