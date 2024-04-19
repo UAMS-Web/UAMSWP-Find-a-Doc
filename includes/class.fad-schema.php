@@ -2256,7 +2256,7 @@
 
 			// Health Care Provider Taxonomy Code Set taxonomy items
 
-				$nucc_list = uamswp_fad_schema_nucc_code_set(
+				$nucc_list = uamswp_fad_schema_nucc_code_set_id(
 					$nucc, // mixed // Required // List of clinical specialization IDs
 					$code_list // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
 				);
@@ -7129,212 +7129,194 @@
 	// Add data to an array defining schema data for the Health Care Provider Taxonomy code set
 
 		function uamswp_fad_schema_nucc_code_set(
-			$specializations, // mixed // Required // List of clinical specialization IDs
-			array $nucc_schema = array() // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
+			$term_id, // mixed // Required // Clinical Specialization term id
+			array $output = array() // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
 		) {
 
 			// Check / define variables
 
-				if ( !$specializations ) {
-
-					return $nucc_schema;
-
-				}
-
-				$specializations = is_array($specializations) ? $specializations : array($specializations);
-				$specializations = array_is_list($specializations) ? $specializations : array($specializations);
-				$nucc_schema = is_array($nucc_schema) ? $nucc_schema : array($nucc_schema);
-				$nucc_schema = array_is_list($nucc_schema) ? $nucc_schema : array($nucc_schema);
-
+				$output = is_array($output) ? $output : array($output);
+				$output = array_is_list($output) ? $output : array($output);
 
 			// Loop through each Health Care Provider Taxonomy Code Set taxonomy item, adding values to the list array
 
-				foreach ( $specializations as $item ) {
+				// Eliminate PHP errors / reset variables
 
-					// Eliminate PHP errors / reset variables
+					$term = array();
+					$extension_query = '';
+					$code_query = '';
+					$code = '';
+					$name = '';
 
-						$item_term = array();
-						$item_extension_query = '';
-						$item_code_query = '';
-						$item_code = '';
-						$item_name = '';
+					// Schema values
 
-						// Schema values
+						$output_item = array(); // Base array
+						$output_item_additionalType = '';
+						$output_item_alternateName = '';
+						$output_item_codeValue = '';
+						$output_item_code = '';
+						$output_item_codeValue = '';
+						$output_item_codingSystem = 'Health Care Provider Taxonomy';
+						$output_item_description = '';
+						$output_item_disambiguatingDescription = '';
+						$output_item_funding = '';
+						$output_item_guideline = '';
+						$output_item_identifier = '';
+						$output_item_image = '';
+						$output_item_inCodeSet = array(
+							'@type' => 'CategoryCodeSet',
+							'alternateName' => array(
+								'Health Care Provider Taxonomy code set',
+								'National Uniform Claim Committee Health Care Provider Taxonomy',
+								'NUCC Health Care Provider Taxonomy',
+								'National Uniform Claim Committee code set',
+								'NUCC code set',
+								'Provider Taxonomy Code List'
+							),
+							'name' => $output_item_codingSystem,
+							'sameAs' => 'http://terminology.hl7.org/CodeSystem/v3-nuccProviderCodes',
+							'url' => array(
+								'https://nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40',
+								'https://taxonomy.nucc.org/'
+							),
+						);
+						$output_item_inDefinedTermSet = '';
+						$output_item_legalStatus = '';
+						$output_item_mainEntityOfPage = '';
+						$output_item_medicineSystem = '';
+						$output_item_name = '';
+						$output_item_potentialAction = '';
+						$output_item_recognizingAuthority = '';
+						$output_item_relevantSpecialty = '';
+						$output_item_sameAs = '';
+						$output_item_study = '';
+						$output_item_subjectOf = '';
+						$output_item_termCode = '';
+						$output_item_url = '';
 
-							$nucc_item = array(); // Base array
-							$nucc_item_additionalType = '';
-							$nucc_item_alternateName = '';
-							$nucc_item_codeValue = '';
-							$nucc_item_code = '';
-							$nucc_item_codeValue = '';
-							$nucc_item_codingSystem = 'Health Care Provider Taxonomy';
-							$nucc_item_description = '';
-							$nucc_item_disambiguatingDescription = '';
-							$nucc_item_funding = '';
-							$nucc_item_guideline = '';
-							$nucc_item_identifier = '';
-							$nucc_item_image = '';
-							$nucc_item_inCodeSet = array(
-								'@type' => 'CategoryCodeSet',
-								'alternateName' => array(
-									'Health Care Provider Taxonomy code set',
-									'National Uniform Claim Committee Health Care Provider Taxonomy',
-									'NUCC Health Care Provider Taxonomy',
-									'National Uniform Claim Committee code set',
-									'NUCC code set',
-									'Provider Taxonomy Code List'
-								),
-								'name' => $nucc_item_codingSystem,
-								'sameAs' => 'http://terminology.hl7.org/CodeSystem/v3-nuccProviderCodes',
-								'url' => array(
-									'https://nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40',
-									'https://taxonomy.nucc.org/'
-								),
-							);
-							$nucc_item_inDefinedTermSet = '';
-							$nucc_item_legalStatus = '';
-							$nucc_item_mainEntityOfPage = '';
-							$nucc_item_medicineSystem = '';
-							$nucc_item_name = '';
-							$nucc_item_potentialAction = '';
-							$nucc_item_recognizingAuthority = '';
-							$nucc_item_relevantSpecialty = '';
-							$nucc_item_sameAs = '';
-							$nucc_item_study = '';
-							$nucc_item_subjectOf = '';
-							$nucc_item_termCode = '';
-							$nucc_item_url = '';
+				// Base item array
 
-					// Base item array
+					$output_item = array();
 
-						$nucc_item = array();
+				// Get values from the term
 
-					// Get values from the item
+					$term = get_term( $term_id, 'clinical_title' ) ?? array();
 
-						$item_term = get_term( $item, 'clinical_title' ) ?? array();
+					// The term exists
 
-						// The term exists
+						if ( $term ) {
 
-							if ( $item_term ) {
+							$extension_query = get_field( 'clinical_specialization_extension_query', $term ) ?? false; // Is this clinical specialization part of the UAMS Health extension to the Health Care Provider Taxonomy Code Set?
 
-								$item_extension_query = get_field( 'clinical_specialization_extension_query', $item_term ) ?? false; // Is this clinical specialization part of the UAMS Health extension to the Health Care Provider Taxonomy Code Set?
+							// The specialization is not an extension to the Health Care Provider Taxonomy code set
 
-								// The specialization is not an extension to the Health Care Provider Taxonomy code set
+								if ( !$extension_query ) {
 
-									if ( !$item_extension_query ) {
+									$code_query = get_field( 'clinical_specialization_code_query', $term ) ?? true; // Does this specialization have a taxonomy code in the Health Care Provider Taxonomy Code Set?
 
-										$item_code_query = get_field( 'clinical_specialization_code_query', $item_term ) ?? true; // Does this specialization have a taxonomy code in the Health Care Provider Taxonomy Code Set?
+									// The specialization has a taxonomy code in the Health Care Provider Taxonomy code set
 
-										// The specialization has a taxonomy code in the Health Care Provider Taxonomy code set
+										if ( $code_query ) {
 
-											if ( $item_code_query ) {
+											$code = $code_query ? ( get_field( 'clinical_specialization_code', $term ) ?? '' ) : ''; // Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set
 
-												$item_code = $item_code_query ? ( get_field( 'clinical_specialization_code', $item_term ) ?? '' ) : ''; // Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set
+											// Set the fallback value (slug)
 
-												// Set the fallback value (slug)
+												if ( !$code ) {
 
-													if ( !$item_code ) {
+													$slug = $term->post_name ?? '';
+													$code = $slug ?? '';
 
-														$item_slug = $item_term->post_name ?? '';
-														$item_code = $item_slug ?? '';
-
-														// Check if fallback value seems like a valid code
-
-															if (
-																!(
-																	$item_code
-																	&&
-																	strlen($item_code) == 10 // 10 digits
-																	&&
-																	( preg_match('/[A-Za-z]/', $item_code) && preg_match('/[0-9]/', $item_code) ) // Only letters and integers
-																)
-															) {
-
-																$item_code = '';
-
-															}
-
-													}
-
-											}
-									}
-
-								// If code value still does not exist, get the code from the nearest valid ancestor
-
-									if ( !$item_code ) {
-
-										// Get the list of ancestors
-
-											$item_code_ancestors = get_ancestors(
-												$item, // $object_id  // int // Optional // The ID of the object // Default: 0
-												'clinical_title', // $object_type // string // Optional // The type of object for which we'll be retrieving ancestors. Accepts a post type or a taxonomy name. // Default: ''
-												'taxonomy' // $resource_type // string // Optional // Type of resource $object_type is. Accepts 'post_type' or 'taxonomy'. // Default: ''
-											);
-
-										// Loop through each of the ancestors until finding one that does have a code in the code set
-
-											if ( $item_code_ancestors ) {
-
-												foreach ( $item_code_ancestors as $item_ancestor ) {
-
-													$item_term = get_term( $item_ancestor, 'clinical_title' ) ?? array();
-
-													if (
-														$item_term // The term exists
-													) {
-
-														$item_extension_query = get_field( 'clinical_specialization_extension_query', $item_term ) ?? false; // Is this clinical specialization part of the UAMS Health extension to the Health Care Provider Taxonomy Code Set?
+													// Check if fallback value seems like a valid code
 
 														if (
-															!$item_extension_query // The specialization is not an extension to the Health Care Provider Taxonomy code set
+															!(
+																$code
+																&&
+																strlen($code) == 10 // 10 digits
+																&&
+																( preg_match('/[A-Za-z]/', $code) && preg_match('/[0-9]/', $code) ) // Only letters and integers
+															)
 														) {
 
-															$item_code_query = get_field( 'clinical_specialization_code_query', $item_term ) ?? true; // Does this specialization have a taxonomy code in the Health Care Provider Taxonomy Code Set?
+															$code = '';
 
-															if (
-																$item_code_query // The specialization has a taxonomy code in the Health Care Provider Taxonomy code set
-															) {
+														}
 
-																$item_code = $item_code_query ? ( get_field( 'clinical_specialization_code', $item_term ) ?? '' ) : ''; // Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set
+												}
 
-																if ( $item_code ) {
+										}
+								}
 
-																	// Break foreach loop
-																	break;
+							// If code value still does not exist, get the code from the nearest valid ancestor
 
-																} else {
+								if ( !$code ) {
 
-																	// Set fallback value (slug)
+									// Get the list of ancestors
 
-																		$item_slug = $item_term->post_name ?? '';
-																		$item_code = $item_slug ?? '';
+										$code_ancestors = get_ancestors(
+											$term_id, // $object_id  // int // Optional // The ID of the object // Default: 0
+											'clinical_title', // $object_type // string // Optional // The type of object for which we'll be retrieving ancestors. Accepts a post type or a taxonomy name. // Default: ''
+											'taxonomy' // $resource_type // string // Optional // Type of resource $object_type is. Accepts 'post_type' or 'taxonomy'. // Default: ''
+										);
 
-																	// Check if fallback value seems like a valid code
+									// Loop through each of the ancestors until finding one that does have a code in the code set
 
-																		if (
-																			$item_code
-																			&&
-																			strlen() == 10 // 10 digits
-																			&&
-																			( preg_match('/[A-Za-z]/', $myString) && preg_match('/[0-9]/', $myString) ) // Only letters and integers
-																		) {
+										if ( $code_ancestors ) {
 
-																			// Break foreach loop
-																			break;
+											foreach ( $code_ancestors as $ancestor ) {
 
-																		} else {
+												$term = get_term( $ancestor, 'clinical_title' ) ?? array();
 
-																			// Skip the rest of the current loop iteration
-																			continue;
+												if (
+													$term // The term exists
+												) {
 
-																		}
+													$extension_query = get_field( 'clinical_specialization_extension_query', $term ) ?? false; // Is this clinical specialization part of the UAMS Health extension to the Health Care Provider Taxonomy Code Set?
 
-																}
+													if (
+														!$extension_query // The specialization is not an extension to the Health Care Provider Taxonomy code set
+													) {
+
+														$code_query = get_field( 'clinical_specialization_code_query', $term ) ?? true; // Does this specialization have a taxonomy code in the Health Care Provider Taxonomy Code Set?
+
+														if (
+															$code_query // The specialization has a taxonomy code in the Health Care Provider Taxonomy code set
+														) {
+
+															$code = $code_query ? ( get_field( 'clinical_specialization_code', $term ) ?? '' ) : ''; // Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set
+
+															if ( $code ) {
+
+																// Break foreach loop
+																break;
 
 															} else {
 
-																// Skip the rest of the current loop iteration
-																continue;
+																// Set fallback value (slug)
+
+																	$slug = $term->post_name ?? '';
+																	$code = $slug ?? '';
+
+																// Check if fallback value seems like a valid code
+
+																	if (
+																		$code
+																		&&
+																		strlen() == 10 // 10 digits
+																		&&
+																		( preg_match('/[A-Za-z]/', $myString) && preg_match('/[0-9]/', $myString) ) // Only letters and integers
+																	) {
+
+																		// Break foreach loop
+																		break;
+
+																	} else {
+
+																		// Skip the rest of the current loop iteration
+																		continue;
+
+																	}
 
 															}
 
@@ -7352,114 +7334,155 @@
 
 													}
 
-												}
+												} else {
 
-												if (
-													!$item_extension_query // The specialization is not an extension to the Health Care Provider Taxonomy code set
-													&&
-													$item_code_query // The specialization has a taxonomy code in the Health Care Provider Taxonomy code set
-												) {
+													// Skip the rest of the current loop iteration
+													continue;
 
 												}
+
 											}
 
-									}
+											if (
+												!$extension_query // The specialization is not an extension to the Health Care Provider Taxonomy code set
+												&&
+												$code_query // The specialization has a taxonomy code in the Health Care Provider Taxonomy code set
+											) {
 
-								// codeValue
-
-									$nucc_item_codeValue = $item_code ?? '';
-
-								// name (Specialization Name in the Health Care Provider Taxonomy Code Set)
-
-									$nucc_item_name = get_field( 'clinical_specialty_name', $item_term ) ?? $item_term->name; // Use post title as fallback value
-									$nucc_item_name = $nucc_item_name ?? '';
-
-								// alternateName (Specialization Display Name in the Health Care Provider Taxonomy Code Set)
-
-									$nucc_item_alternateName = get_field( 'clinical_specialization_name_display', $item_term ) ?? '';
-
-								// description (Specialization Definition in the Health Care Provider Taxonomy Code Set)
-
-									$nucc_item_description = get_field( 'clinical_specialization_definition', $item_term ) ?? ''; // Use post title as fallback value
-
-									// Clean up value
-
-										if ( $nucc_item_description ) {
-
-											$nucc_item_description = wp_strip_all_tags($nucc_item_description);
-											$nucc_item_description = str_replace("\n", ' ', $nucc_item_description); // Strip line breaks
-											$nucc_item_description = uamswp_attr_conversion($nucc_item_description);
-
+											}
 										}
 
-								// URL to term on taxonomy.nucc.org
+								}
 
-									$nucc_item_url = $nucc_item_codeValue ? 'https://taxonomy.nucc.org/?searchTerm=' . $nucc_item_codeValue : '';
+							// codeValue
 
-								// Add values from the item to the item array
+								$output_item_codeValue = $code ?? '';
 
-									if (
-										$nucc_item_codeValue
-										&&
-										$nucc_item_codingSystem
-									) {
+							// name (Specialization Name in the Health Care Provider Taxonomy Code Set)
 
-										$nucc_item = array(
-											'@id' => $nucc_item_url,
-											'@type' => 'MedicalCode',
-											'additionalType' => $nucc_item_additionalType,
-											'alternateName' => $nucc_item_alternateName,
-											'code' => $nucc_item_code,
-											'codeValue' => $nucc_item_codeValue,
-											'codingSystem' => $nucc_item_codingSystem,
-											'description' => $nucc_item_description,
-											'disambiguatingDescription' => $nucc_item_disambiguatingDescription,
-											'funding' => $nucc_item_funding,
-											'guideline' => $nucc_item_guideline,
-											'identifier' => $nucc_item_identifier,
-											'image' => $nucc_item_image,
-											'inCodeSet' => $nucc_item_inCodeSet,
-											'inDefinedTermSet' => $nucc_item_inDefinedTermSet,
-											'legalStatus' => $nucc_item_legalStatus,
-											'mainEntityOfPage' => $nucc_item_mainEntityOfPage,
-											'medicineSystem' => $nucc_item_medicineSystem,
-											'name' => $nucc_item_name,
-											'potentialAction' => $nucc_item_potentialAction,
-											'recognizingAuthority' => $nucc_item_recognizingAuthority,
-											'relevantSpecialty' => $nucc_item_relevantSpecialty,
-											'sameAs' => $nucc_item_sameAs,
-											'study' => $nucc_item_study,
-											'subjectOf' => $nucc_item_subjectOf,
-											'termCode' => $nucc_item_termCode,
-											'url' => $nucc_item_url
-										);
+								$output_item_name = get_field( 'clinical_specialty_name', $term ) ?? $term->name; // Use post title as fallback value
+								$output_item_name = $output_item_name ?? '';
+
+							// alternateName (Specialization Display Name in the Health Care Provider Taxonomy Code Set)
+
+								$output_item_alternateName = get_field( 'clinical_specialization_name_display', $term ) ?? '';
+
+							// description (Specialization Definition in the Health Care Provider Taxonomy Code Set)
+
+								$output_item_description = get_field( 'clinical_specialization_definition', $term ) ?? ''; // Use post title as fallback value
+
+								// Clean up value
+
+									if ( $output_item_description ) {
+
+										$output_item_description = wp_strip_all_tags($output_item_description);
+										$output_item_description = str_replace("\n", ' ', $output_item_description); // Strip line breaks
+										$output_item_description = uamswp_attr_conversion($output_item_description);
 
 									}
 
-							}
+							// URL to term on taxonomy.nucc.org
 
-					// Clean up item array
+								$output_item_url = $output_item_codeValue ? 'https://taxonomy.nucc.org/?searchTerm=' . $output_item_codeValue : '';
 
-						if ( $nucc_item ) {
+							// Add values from the item to the item array
 
-							$nucc_item = array_filter($nucc_item);
-							ksort( $nucc_item, SORT_NATURAL | SORT_FLAG_CASE );
+								if (
+									$output_item_codeValue
+									&&
+									$output_item_codingSystem
+								) {
 
-						} // endif ( $nucc_item )
+									$output_item = array(
+										'@id' => $output_item_url,
+										'@type' => 'MedicalCode',
+										'additionalType' => $output_item_additionalType,
+										'alternateName' => $output_item_alternateName,
+										'code' => $output_item_code,
+										'codeValue' => $output_item_codeValue,
+										'codingSystem' => $output_item_codingSystem,
+										'description' => $output_item_description,
+										'disambiguatingDescription' => $output_item_disambiguatingDescription,
+										'funding' => $output_item_funding,
+										'guideline' => $output_item_guideline,
+										'identifier' => $output_item_identifier,
+										'image' => $output_item_image,
+										'inCodeSet' => $output_item_inCodeSet,
+										'inDefinedTermSet' => $output_item_inDefinedTermSet,
+										'legalStatus' => $output_item_legalStatus,
+										'mainEntityOfPage' => $output_item_mainEntityOfPage,
+										'medicineSystem' => $output_item_medicineSystem,
+										'name' => $output_item_name,
+										'potentialAction' => $output_item_potentialAction,
+										'recognizingAuthority' => $output_item_recognizingAuthority,
+										'relevantSpecialty' => $output_item_relevantSpecialty,
+										'sameAs' => $output_item_sameAs,
+										'study' => $output_item_study,
+										'subjectOf' => $output_item_subjectOf,
+										'termCode' => $output_item_termCode,
+										'url' => $output_item_url
+									);
 
-					// Add to code item to list of codes
+								}
 
-						if ( $nucc_item ) {
+						}
 
-							$nucc_schema[] = $nucc_item;
+				// Clean up item array
 
-						} // endif ( $code_item )
+					if ( $output_item ) {
 
-				} // endforeach ( $nucc as $code )
+						$output_item = array_filter($output_item);
+						ksort( $output_item, SORT_NATURAL | SORT_FLAG_CASE );
 
-			return $nucc_schema;
+					} // endif ( $output_item )
+
+				// Add to code item to list of codes
+
+					if ( $output_item ) {
+
+						$output[] = $output_item;
+
+					} // endif ( $code_item )
+
+			return $output;
 
 		}
+
+		// Add data to an array defining schema data for the Health Care Provider Taxonomy code set from Clinical Specialization ID values
+
+			function uamswp_fad_schema_nucc_code_set_id(
+				$specializations, // mixed // Required // List of clinical specialization IDs
+				array $output = array() // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
+			) {
+
+				// Check / define variables
+
+					if ( !$specializations ) {
+
+						return $output;
+
+					}
+
+					$specializations = is_array($specializations) ? $specializations : array($specializations);
+					$specializations = array_is_list($specializations) ? $specializations : array($specializations);
+					$output = is_array($output) ? $output : array($output);
+					$output = array_is_list($output) ? $output : array($output);
+
+
+				// Loop through each Health Care Provider Taxonomy Code Set taxonomy item, adding values to the output array
+
+					foreach ( $specializations as $term_id ) {
+
+						$output = uamswp_fad_schema_nucc_code_set(
+							$term_id, // mixed // Required // Clinical Specialization term id
+							$output // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
+						);
+
+					} // endforeach ( $specializations as $term_id )
+
+				return $output;
+
+			}
 
 	// Add data to an array defining schema data for brand organization
 
@@ -23394,7 +23417,7 @@
 
 												// Get attributes of the clinical specializations
 
-													$provider_clinical_specialization_knowsAbout = uamswp_fad_schema_nucc_code_set(
+													$provider_clinical_specialization_knowsAbout = uamswp_fad_schema_nucc_code_set_id(
 														$provider_clinical_specialization_ancestors // mixed // Required // List of clinical specialization IDs
 													);
 
