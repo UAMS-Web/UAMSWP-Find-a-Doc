@@ -12557,7 +12557,15 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 									// Get the ISCO-08 Code value from this term
 
-										$output_isco08 = get_field( 'clinical_specialization_isco08_code', $term ) ?? null; // string
+										$isco08_code = get_field( 'clinical_specialization_isco08_code', $term ) ?? null; // string
+
+									// Add the value to the output array
+
+										if ( $isco08_code ) {
+
+											$output_isco08['code'] = $isco08_code;
+
+										}
 
 								}
 
