@@ -5289,9 +5289,9 @@
 					// Base array
 
 						$specialization_schema = array(
-							'name' => '',
 							'alternateName' => '',
 							'description' => '',
+							'name' => '',
 							'occupationalCategory' => '',
 							'sameAs' => ''
 						);
