@@ -12669,6 +12669,49 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							}
 
+					// Schema values
+
+						// Base schema output array
+
+							$output_schema = array();
+
+						// jobTitle
+
+							$output_schema['jobTitle'] = $patientFriendly_occupation_name_attr ?? '';
+
+						// hasOccupation
+
+							$occupationalCategory = uamswp_fad_schema_occupationalCategory(
+								array(
+									'onetsoc' => $output_onetsoc,
+									'isco08' => $output_isco08
+								) // array // Required // Values for defining occupationalCategory
+							);
+
+							$output_schema['hasOccupation'] = uamswp_fad_schema_hasoccupation(
+								$patientFriendly_occupation_alternatename, // array // optional // alternateName (alternate clinical occupation title value from Clinical Specialization item)
+								$codeSet_definition_attr, // string // optional // description
+								$patientFriendly_occupation_name_attr, // string // optional // name (clinical occupation title value from Clinical Specialization item)
+								$occupationalCategory, // array // optional // occupationalCategory
+								$sameAs_occupation // string|array // optional // sameAs
+							) ?? '';
+
+						// occupationalCategory
+
+							$output_schema['occupationalCategory'] = $occupationalCategory;
+
+						// knowsAbout
+
+							// $output_schema['knowsAbout'] = uamswp_fad_schema_nucc_code_set();
+
+						// Add the schema output array to the general output array
+
+							if ( $output_schema ) {
+
+								$output['schema'] = $output_schema;
+
+							}
+
 				// Return the output array
 
 					return $output;
