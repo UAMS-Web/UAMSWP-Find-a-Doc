@@ -5235,8 +5235,12 @@
 	// Add data to an array defining schema data for hasOccupation
 
 		function uamswp_fad_schema_hasoccupation(
-			$specializations, // mixed // Required // Clinical Specialization ID values
-			array $hasOccupation_schema = array() // array // Optional // Pre-existing schema array for hasOccupation to which to add hasOccupation items
+			array $alternateName = array(), // array // optional // alternateName (alternate clinical occupation title value from Clinical Specialization item)
+			string $description = string, // string // optional // description
+			string $name = '', // string // optional // name (clinical occupation title value from Clinical Specialization item)
+			array $occupationalCategory = array(), // array // optional // occupationalCategory
+			$sameAs = '', // string|array // optional // sameAs
+			array $output = array() // array // Optional // Pre-existing schema array for hasOccupation to which to add hasOccupation items
 		) {
 
 			/*
@@ -5257,216 +5261,275 @@
 
 			// Check / define variables
 
-				$specializations = is_array($specializations) ? $specializations : array($specializations);
-				$specializations = array_is_list($specializations) ? $specializations : array($specializations);
-				$specializations = array_filter($specializations);
-				$specializations = array_values($specializations);
+				$output = array_is_list($output) ? $output : array($output);
 
-				// If the input is empty, end now
+			// Base array
 
-					if ( !$specializations ) {
-
-						return $hasOccupation_schema;
-
-					}
-
-				$hasOccupation_schema = array_is_list($hasOccupation_schema) ? $hasOccupation_schema : array($hasOccupation_schema);
+				$output_item = array();
 
 			// Get values
 
-				foreach ( $specializations as $specialization ) {
+				// alternateName (alternate clinical occupation title value from Clinical Specialization item)
 
-					// Eliminate PHP errors / reset variables
+					if ( $alternateName ) {
 
-						$specialization_term = null;
-						$specialization_name = null;
-						$specialization_alternateName_array = null;
-						$specialization_alternateName = null;
-						$specialization_sameAs_array = null;
-						$specialization_sameAs = null;
-						$specialization_url = null;
+						$output_item['alternateName'] = $alternateName;
 
-					// Base array
+					}
 
-						$specialization_schema = array(
-							'alternateName' => '',
-							'description' => '',
-							'name' => '',
-							'occupationalCategory' => '',
-							'sameAs' => ''
-						);
+				// description
 
-					$specialization_term = get_term( $specialization, 'clinical_title' ) ?? '';
+					if ( $description ) {
 
-					if ( is_object($specialization_term) ) {
+						$output_item['description'] = $description;
 
-						// name (clinical occupation title value from Clinical Specialization item)
+					}
 
-							$specialization_name = get_field( 'clinical_specialization_title', $specialization_term ) ?? '';
-							$specialization_schema['name'] = $specialization_name;
+				// name (clinical occupation title value from Clinical Specialization item)
 
-						// alternateName (alternate clinical occupation title value from Clinical Specialization item)
+					if ( $name ) {
 
-							// Base array
+						$output_item['name'] = $name;
 
-								$specialization_alternateName = array();
+					}
 
-							// Get alternateName repeater field value
+				// occupationalCategory
 
-								$specialization_alternateName_array = get_field( 'schema_alternatename', $specialization_term ) ?? array();
+					/*
 
-							// Add each item to alternateName property values array
+						Expected array structure:
 
-								if ( $specialization_alternateName_array ) {
+							$input = array(
+								'onetsoc' => array(
+									'code' => 'foo',
+									'title' => 'bar'
+								),
+								'isco08' => array(
+									'code' => 'baz'
+								)
+							);
 
-									$specialization_alternateName = uamswp_fad_schema_alternatename(
-										$specialization_alternateName_array, // array // Required // alternateName repeater field
-										'schema_alternatename_text', // string // Optional // alternateName item field name
-										$specialization_alternateName // mixed // Optional // Pre-existing schema array for alternateName to which to add alternateName items
-									);
+					*/
 
-								}
+					if ( $occupationalCategory ) {
 
-							// Add to schema item
+						$output_item['occupationalCategory'] = $occupationalCategory;
 
-								if ( $specialization_alternateName ) {
+					}
 
-									$specialization_schema['alternateName'] = $specialization_alternateName;
+				// sameAs
 
-								}
+					/**
+					 * URL of a reference Web page that unambiguously indicates the item's identity
+					 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+					 * website).
+					 *
+					 * Values expected to be one of these types:
+					 *
+					 *     - URL
+					 */
 
-						// description
+					if ( $sameAs ) {
 
-							$specialization_description = get_field( 'clinical_specialization_definition', $specialization_term ) ?? '';
+						$output_item['sameAs'] = $sameAs;
 
-							// Add to schema item
+					}
 
-								if ( $specialization_description ) {
+				// Add @type
 
-									$specialization_schema['description'] = $specialization_description;
+					if ( $output_item ) {
 
-								}
+						$output_item = array( '@type' => 'Occupation' ) + $output_item;
 
-						// occupationalCategory
+					}
 
-							// Base array
+				// Add to the list array
 
-								$provider_occupationalCategory = array();
+					if ( $output_item ) {
 
-							// Get field values
+						$output[] = $output_item;
 
-								// Base array
-
-									$provider_occupationalCategory_input = array();
-
-								// Bureau of Labor Statistics (BLS) O*NET-SOC (Occupational Information Network Standard Occupational Classification Taxonomy)
-
-									$provider_occupationalCategory_input['onetsoc']['code'] = get_field( 'clinical_specialization_onetsoc_code', $specialization_term ) ?? ''; // Occupation code
-									$provider_occupationalCategory_input['onetsoc']['title'] = get_field( 'clinical_specialization_onetsoc_code_name', $specialization_term ) ?? ''; // Occupation title
-
-								// ISCO-08 Code
-
-									$provider_occupationalCategory_input['isco08']['code'] = get_field( 'clinical_specialization_isco08_code', $specialization_term ) ?? ''; // ISCO-08 occupation code
-
-							// Format schema values
-
-
-								$provider_occupationalCategory = uamswp_fad_schema_occupationalCategory(
-									$provider_occupationalCategory_input, // array // Required // Values for defining occupationalCategory
-									$output = array() // array // Optional // Pre-existing schema array for occupationalCategory to which to add occupationalCategory items
-								);
-
-							// Add to schema item
-
-								if ( $provider_occupationalCategory ) {
-
-									$specialization_schema['occupationalCategory'] = $provider_occupationalCategory;
-
-								}
-
-						// sameAs
-
-							/**
-							 * URL of a reference Web page that unambiguously indicates the item's identity
-							 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
-							 * website).
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *     - URL
-							 */
-
-							// Base array
-
-								$specialization_sameAs = array();
-
-							// Get sameAs repeater field value for occupation
-
-								$specialization_sameAs_repeater = get_field( 'clinical_specialization_sameas_occupation_schema_sameas', $specialization_term ) ?? null;
-
-								// Add each item to sameAs property values array
-
-									if ( $specialization_sameAs_repeater ) {
-
-										$specialization_sameAs = uamswp_fad_schema_sameas(
-											$specialization_sameAs_repeater, // sameAs repeater field
-											'schema_sameas_url', // sameAs item field name
-											$specialization_sameAs // array // Optional // Pre-existing schema array for sameAs to which to add sameAs items
-										);
-
-									} else {
-
-									// If there is only one item, flatten the multi-dimensional array by one step
-
-										uamswp_fad_flatten_multidimensional_array($specialization_sameAs);
-
-								}
-
-							// Add to schema item
-
-								if ( $specialization_sameAs ) {
-
-									$specialization_schema['sameAs'] = $specialization_sameAs;
-
-								}
-
-						// Clean up schema item array
-
-							$specialization_schema = array_filter($specialization_schema);
-
-						// Add @type
-
-							if ( $specialization_schema ) {
-
-								$specialization_schema = array( '@type' => 'Occupation' ) + $specialization_schema;
-
-							}
-
-						// Add to the list array
-
-							if ( $specialization_schema ) {
-
-								$hasOccupation_schema[] = $specialization_schema;
-
-							}
-
-					} // endif
-
-				} // endforeach
+					}
 
 			// Clean up schema list array
 
-				if ( $hasOccupation_schema ) {
+				if ( $output ) {
 
 					// If there is only one item, flatten the multi-dimensional array by one step
 
-						uamswp_fad_flatten_multidimensional_array($hasOccupation_schema);
+						uamswp_fad_flatten_multidimensional_array($output);
 
 				}
 
-			return $hasOccupation_schema;
+			return $output;
 
 		}
+
+		// Add data to an array defining schema data for hasOccupation from Clinical Specialization ID values
+
+			function uamswp_fad_schema_hasoccupation_id(
+				$specializations, // mixed // Required // Clinical Specialization ID values
+				array $output = array() // array // Optional // Pre-existing schema array for hasOccupation to which to add hasOccupation items
+			) {
+
+				// Check / define variables
+
+					$specializations = is_array($specializations) ? $specializations : array($specializations);
+					$specializations = array_is_list($specializations) ? $specializations : array($specializations);
+					$specializations = array_filter($specializations);
+					$specializations = array_values($specializations);
+
+					// If the input is empty, end now
+
+						if ( !$specializations ) {
+
+							return $output;
+
+						}
+
+					$output = array_is_list($output) ? $output : array($output);
+
+				// Get values
+
+					foreach ( $specializations as $specialization ) {
+
+						// Eliminate PHP errors / reset variables
+
+							$output_item = array();
+							$specialization_term = null;
+
+						// Base array
+
+							$specialization_schema = array();
+
+						$specialization_term = get_term( $specialization, 'clinical_title' ) ?? '';
+
+						if ( is_object($specialization_term) ) {
+
+							// alternateName (alternate clinical occupation title value from Clinical Specialization item)
+
+								// Base array
+
+									$alternateName = array();
+
+								// Get alternateName repeater field value
+
+									$alternateName_repeater = get_field( 'schema_alternatename', $specialization_term ) ?? null;
+
+								// Add each item to alternateName property values array
+
+									if ( $alternateName_repeater ) {
+
+										$alternateName = uamswp_fad_schema_alternatename(
+											$alternateName_repeater, // array // Required // alternateName repeater field
+											'schema_alternatename_text', // string // Optional // alternateName item field name
+											$alternateName // mixed // Optional // Pre-existing schema array for alternateName to which to add alternateName items
+										);
+
+									}
+
+							// description
+
+								$description = get_field( 'clinical_specialization_definition', $specialization_term ) ?? '';
+
+							// name (clinical occupation title value from Clinical Specialization item)
+
+								$name = get_field( 'clinical_specialization_title', $specialization_term ) ?? '';
+
+							// occupationalCategory
+
+								// Base array
+
+									$occupationalCategory = array();
+
+								// Get field values
+
+									// Base array
+
+										$occupationalCategory_input = array();
+
+									// Bureau of Labor Statistics (BLS) O*NET-SOC (Occupational Information Network Standard Occupational Classification Taxonomy)
+
+										$occupationalCategory_input['onetsoc']['code'] = get_field( 'clinical_specialization_onetsoc_code', $specialization_term ) ?? ''; // Occupation code
+										$occupationalCategory_input['onetsoc']['title'] = get_field( 'clinical_specialization_onetsoc_code_name', $specialization_term ) ?? ''; // Occupation title
+
+									// ISCO-08 Code
+
+										$occupationalCategory_input['isco08']['code'] = get_field( 'clinical_specialization_isco08_code', $specialization_term ) ?? ''; // ISCO-08 occupation code
+
+								// Format schema values
+
+									$occupationalCategory = uamswp_fad_schema_occupationalCategory(
+										$occupationalCategory_input, // array // Required // Values for defining occupationalCategory
+										$output = array() // array // Optional // Pre-existing schema array for occupationalCategory to which to add occupationalCategory items
+									);
+
+							// sameAs
+
+								/**
+								 * URL of a reference Web page that unambiguously indicates the item's identity
+								 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+								 * website).
+								 *
+								 * Values expected to be one of these types:
+								 *
+								 *     - URL
+								 */
+
+								// Base array
+
+									$sameAs = array();
+
+								// Get sameAs repeater field value for occupation
+
+									$sameAs_repeater = get_field( 'clinical_specialization_sameas_occupation_schema_sameas', $specialization_term ) ?? null;
+
+									// Add each item to sameAs property values array
+
+										if ( $sameAs_repeater ) {
+
+											$sameAs = uamswp_fad_schema_sameas(
+												$sameAs_repeater, // sameAs repeater field
+												'schema_sameas_url', // sameAs item field name
+												$sameAs // array // Optional // Pre-existing schema array for sameAs to which to add sameAs items
+											);
+
+										} else {
+
+										// If there is only one item, flatten the multi-dimensional array by one step
+
+											uamswp_fad_flatten_multidimensional_array($sameAs);
+
+									}
+
+							// Add to the schema output array
+
+								$output = uamswp_fad_schema_hasoccupation(
+									$alternateName, // array // optional // alternateName (alternate clinical occupation title value from Clinical Specialization item)
+									$description, // string // optional // description
+									$name, // string // optional // name (clinical occupation title value from Clinical Specialization item)
+									$occupationalCategory, // array // optional // occupationalCategory
+									$sameAs, // string|array // optional // sameAs
+									$output // array // Optional // Pre-existing schema array for hasOccupation to which to add hasOccupation items
+								);
+
+						} // endif
+
+					} // endforeach
+
+				// Clean up schema list array
+
+					if ( $output ) {
+
+						// If there is only one item, flatten the multi-dimensional array by one step
+
+							uamswp_fad_flatten_multidimensional_array($output);
+
+					}
+
+				return $output;
+
+			}
 
 	// Add data to an array defining schema data for occupationalCategory
 
@@ -18953,7 +19016,7 @@
 
 											if ( $provider_clinical_specialization ) {
 
-												$provider_hasOccupation = uamswp_fad_schema_hasoccupation(
+												$provider_hasOccupation = uamswp_fad_schema_hasoccupation_id(
 													$provider_clinical_specialization // mixed // Required // Clinical Specialization ID values
 												);
 
