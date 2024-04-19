@@ -5376,6 +5376,31 @@
 											'codeValue' => $provider_specialization_onetsoc_code, // O*Net-SOC code value from Specialty item
 											'inCodeSet' => array(
 												'@type' => 'CategoryCodeSet',
+												'alternateName' => array(
+													'BLS O*NET Standard Occupational Classification',
+													'BLS O*NET Standard Occupational Classification Taxonomy',
+													'BLS O*NET-SOC',
+													'BLS O*NET-SOC Taxonomy',
+													'BLS Occupational Information Network SOC',
+													'BLS Occupational Information Network SOC Taxonomy',
+													'BLS Occupational Information Network Standard Occupational Classification',
+													'BLS Occupational Information Network Standard Occupational Classification Taxonomy',
+													'Bureau of Labor Statistics O*NET Standard Occupational Classification',
+													'Bureau of Labor Statistics O*NET Standard Occupational Classification Taxonomy',
+													'Bureau of Labor Statistics O*NET-SOC',
+													'Bureau of Labor Statistics O*NET-SOC Taxonomy',
+													'Bureau of Labor Statistics Occupational Information Network SOC',
+													'Bureau of Labor Statistics Occupational Information Network SOC Taxonomy',
+													'Bureau of Labor Statistics Occupational Information Network Standard Occupational Classification',
+													'Bureau of Labor Statistics Occupational Information Network Standard Occupational Classification Taxonomy',
+													'O*NET Standard Occupational Classification',
+													'O*NET Standard Occupational Classification Taxonomy',
+													'O*NET-SOC Taxonomy',
+													'Occupational Information Network SOC',
+													'Occupational Information Network SOC Taxonomy',
+													'Occupational Information Network Standard Occupational Classification',
+													'Occupational Information Network Standard Occupational Classification Taxonomy'
+												),
 												'dateModified' => '2019',
 												'name' => 'O*Net-SOC',
 												'url' => 'https://www.onetonline.org/'
