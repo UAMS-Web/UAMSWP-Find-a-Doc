@@ -5929,6 +5929,301 @@
 												'26',
 												'265'
 											)
+										),
+										'3' => array(
+											'isco08_level' => '1',
+											'name' => 'Technicians and Associate Professionals',
+											'description' => 'Technicians and associate professionals perform technical and related tasks connected with research and the application of scientific or artistic concepts and operational methods, and government or business regulations. Competent performance in most occupations in this major group requires skills at the third ISCO skill level.',
+											'sameAs' => array()
+										),
+										'32' => array(
+											'isco08_level' => '2',
+											'name' => 'Health Associate Professionals',
+											'description' => 'Health associate professionals perform technical and practical tasks to support diagnosis and treatment of illness, disease, injuries and impairments in humans and animals, and to support implementation of health care, treatment and referral plans usually established by medical, veterinary, nursing and other health professionals. Competent performance in most occupations in this sub-major group requires skills at the third ISCO skill level.',
+											'sameAs' => array(
+												'3'
+											)
+										),
+										'321' => array(
+											'isco08_level' => '3',
+											'name' => 'Medical and Pharmaceutical Technicians',
+											'description' => 'Medical and pharmaceutical technicians perform technical tasks to assist in diagnosis and treatment of illness, disease, injuries and impairments.',
+											'sameAs' => array(
+												'3',
+												'32'
+											)
+										),
+										'3211' => array(
+											'isco08_level' => '4',
+											'name' => 'Medical Imaging and Therapeutic Equipment Technicians',
+											'description' => 'Medical imaging and therapeutic equipment technicians test and operate radiographic, ultrasound and other medical imaging equipment to produce images of body structures for the diagnosis and treatment of injury, disease and other impairments. They may administer radiation treatments to patients under the supervision of a radiologist or other health professional.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'321'
+											)
+										),
+										'3212' => array(
+											'isco08_level' => '4',
+											'name' => 'Medical and Pathology Laboratory Technicians',
+											'description' => 'Medical and pathology laboratory technicians perform clinical tests on specimens of bodily fluids and tissues in order to obtain information about the health of a patient or cause of death.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'321'
+											)
+										),
+										'3213' => array(
+											'isco08_level' => '4',
+											'name' => 'Pharmaceutical Technicians and Assistants',
+											'description' => 'Pharmaceutical technicians and assistants perform a variety of tasks associated with dispensing  medicinal products under the guidance of a pharmacist or other health professional.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'321'
+											)
+										),
+										'3214' => array(
+											'isco08_level' => '4',
+											'name' => 'Medical and Dental Prosthetic Technicians',
+											'description' => 'Medical and dental prosthetic technicians design, fit, service and repair medical and dental devices and appliances following prescriptions or instructions established by a health professional. They may service a wide range of support instruments to correct physical medical or dental problems such as neck braces, orthopaedic splints, artificial limbs, hearing aids, arch supports, dentures, and dental crowns and bridges.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'321'
+											)
+										),
+										'322' => array(
+											'isco08_level' => '3',
+											'name' => 'Nursing and Midwifery Associate Professionals',
+											'description' => 'Nursing and midwifery associate professionals provide basic nursing and personal care for people who are physically or mentally ill, disabled or infirm, and others in need of care due to potential risks to health including before, during and after childbirth. They generally work under the supervision of, and in support of implementation of health care, treatment and referrals plans established by, medical, nursing, midwifery and other health professionals.',
+											'sameAs' => array(
+												'3',
+												'32'
+											)
+										),
+										'3221' => array(
+											'isco08_level' => '4',
+											'name' => 'Nursing Associate Professionals',
+											'description' => 'Nursing associate professionals provide basic nursing and personal care for people in need of such care due to effects of ageing, illness, injury or other physical or mental impairment. They generally work under the supervision of, and in support of implementation of health care, treatment and referrals plans established by, medical, nursing and other health professionals.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'322'
+											)
+										),
+										'3222' => array(
+											'isco08_level' => '4',
+											'name' => 'Midwifery Associate Professionals',
+											'description' => 'Midwifery associate professionals provide basic health care and advice before, during and after pregnancy and childbirth. They implement care, treatment and referral plans usually established by medical, midwifery and other health professionals.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'322'
+											)
+										),
+										'323' => array(
+											'isco08_level' => '3',
+											'name' => 'Traditional and Complementary Medicine Associate Professionals',
+											'description' => 'Traditional and complementary medicine associate professionals prevent, care for and treat human physical and mental illnesses, disorders and injuries using herbal and other therapies based on theories, beliefs and experiences originating in specific cultures. They administer treatments using traditional techniques and medicaments, either acting independently or according to therapeutic care plans established by a traditional medicine or other health professional.',
+											'sameAs' => array(
+												'3',
+												'32'
+											)
+										),
+										'3230' => array(
+											'isco08_level' => '4',
+											'name' => 'Traditional and Complementary Medicine Associate Professionals',
+											'description' => 'Traditional and complementary medicine associate professionals prevent, care for and treat human physical and mental illnesses, disorders and injuries using herbal and other therapies based on theories, beliefs and experiences originating in specific cultures. They administer treatments using traditional techniques and medicaments, either acting independently or according to therapeutic care plans established by a traditional medicine or other health professional.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'323'
+											)
+										),
+										'324' => array(
+											'isco08_level' => '3',
+											'name' => 'Veterinary Technicians and Assistants',
+											'description' => 'Veterinary technicians and assistants carry out advisory, diagnostic, preventive and curative veterinary tasks, more limited in scope and complexity than those carried out by veterinarians. They care for animals under treatment and in temporary residence at veterinary facilities and assist veterinarians to perform procedures and operations.',
+											'sameAs' => array(
+												'3',
+												'32'
+											)
+										),
+										'3240' => array(
+											'isco08_level' => '4',
+											'name' => 'Veterinary Technicians and Assistants',
+											'description' => 'Veterinary technicians and assistants carry out advisory, diagnostic, preventive and curative veterinary tasks more limited in scope and complexity than those carried out by, and with the guidance of, veterinarians. They care for animals under treatment and in temporary residence at veterinary facilities, perform routine procedures and assist veterinarians to perform procedures and operations.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'324'
+											)
+										),
+										'325' => array(
+											'isco08_level' => '3',
+											'name' => 'Other Health Associate Professionals',
+											'description' => 'Other health associate professionals perform technical tasks and provide support services in dentistry, medical records administration, community health, the correction of reduced visual acuity, physiotherapy, environmental health, emergency medical treatment and other activities to support and promote human health.',
+											'sameAs' => array(
+												'3',
+												'32'
+											)
+										),
+										'3251' => array(
+											'isco08_level' => '4',
+											'name' => 'Dental Assistants and Therapists',
+											'description' => 'Dental assistants and therapists provide basic dental care services for the prevention and treatment of diseases and disorders of the teeth and mouth, according to care plans and procedures established by a dentist or other oral health professional.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'325'
+											)
+										),
+										'3252' => array(
+											'isco08_level' => '4',
+											'name' => 'Medical Records and Health Information Technicians',
+											'description' => 'Medical records and health information technicians develop, maintain and implement health records processing, storage and retrieval systems in medical facilities and other health care settings to meet the legal professional, ethical and administrative records-keeping requirements of health services delivery.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'325'
+											)
+										),
+										'3253' => array(
+											'isco08_level' => '4',
+											'name' => 'Community Health Workers',
+											'description' => 'Community health workers provide health education, referral and follow up, case management, basic preventive health care and home visiting services to specific communities. They provide support and assistance to individuals and families in navigating the health and social services system.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'325'
+											)
+										),
+										'3254' => array(
+											'isco08_level' => '4',
+											'name' => 'Dispensing Opticians',
+											'description' => 'Dispensing opticians design, fit and dispense optical lenses based on a prescription from an ophthalmologist or optometrist for the correction of reduced visual acuity. They service corrective eyeglasses, contact lenses, low-vision aids and other optical devices.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'325'
+											)
+										),
+										'3255' => array(
+											'isco08_level' => '4',
+											'name' => 'Physiotherapy Technicians and Assistants',
+											'description' => 'Physiotherapy technicians and assistants provide physical therapeutic treatments to patients in circumstances where functional movement is threatened by injury, disease or impairment. Therapies are usually provided as per rehabilitative plans established by a physiotherapist or other health professional.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'325'
+											)
+										),
+										'3256' => array(
+											'isco08_level' => '4',
+											'name' => 'Medical Assistants',
+											'description' => 'Medical assistants perform basic clinical and administrative tasks to support patient care under the direct supervision of a medical practitioner or other health professional.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'325'
+											)
+										),
+										'3257' => array(
+											'isco08_level' => '4',
+											'name' => 'Environmental and Occupational Health Inspectors and Associates',
+											'description' => 'Environmental and occupational health inspectors and associates investigate the implementation of rules and regulations relating to environmental factors that may affect human health, safety in the workplace, and safety of processes for the production of goods and services. They may implement and evaluate programmes to restore or improve safety and sanitary conditions under the supervision of a health professional.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'325'
+											)
+										),
+										'3258' => array(
+											'isco08_level' => '4',
+											'name' => 'Ambulance Workers',
+											'description' => 'Ambulance workers provide emergency health care to patients who are injured, sick, infirm, or otherwise physically or mentally impaired prior to and during transport to medical facilities.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'325'
+											)
+										),
+										'3259' => array(
+											'isco08_level' => '4',
+											'name' => 'Health Associate Professionals Not Elsewhere Classified',
+											'description' => 'This unit group covers health associate professionals not classified elsewhere in Sub-major Group 32: Health Associate Professionals. For instance, the group includes occupations such as HIV counsellor, family planning counsellor and other health associate professionals.',
+											'sameAs' => array(
+												'3',
+												'32',
+												'325'
+											)
+										),
+										'34' => array(
+											'isco08_level' => '2',
+											'name' => 'Legal, Social, Cultural and Related Associate Professionals',
+											'description' => 'Legal, social, cultural and related associate professionals perform technical tasks connected with the practical application of knowledge relating to legal services, social work, culture, food preparation, sport and religion. Competent performance in most occupations in this sub-major group requires skills at the third ISCO skill level.',
+											'sameAs' => array(
+												'3'
+											)
+										),
+										'341' => array(
+											'isco08_level' => '3',
+											'name' => 'Legal, Social and Religious Associate Professionals',
+											'description' => 'Legal, social and religious associate professionals provide technical and practical services and support functions in legal processes and investigations, social and community assistance programmes and religious activities.',
+											'sameAs' => array(
+												'3',
+												'34'
+											)
+										),
+										'3412' => array(
+											'isco08_level' => '4',
+											'name' => 'Social Work Associate Professionals',
+											'description' => 'Social work associate professionals administer and implement social assistance programmes and community services and assist clients to deal with personal and social problems.',
+											'sameAs' => array(
+												'3',
+												'34',
+												'341'
+											)
+										),
+										'3413' => array(
+											'isco08_level' => '4',
+											'name' => 'Religious Associate Professionals',
+											'description' => 'Religious associate professionals provide support to ministers of religion or to a religious community, undertake religious works, preach and propagate the teachings of a particular religion and endeavour to improve well-being through the power of faith and spiritual advice.',
+											'sameAs' => array(
+												'3',
+												'34',
+												'341'
+											)
+										),
+										'342' => array(
+											'isco08_level' => '3',
+											'name' => 'Sports and Fitness Workers',
+											'description' => 'Sports and fitness workers prepare for and compete in sporting events for financial gain, train amateur and professional sportsmen and women to enhance performance; promote participation and standards in sport; organize and officiate sporting events; and provide instruction, training and supervision for various forms of exercise and other recreational activities.',
+											'sameAs' => array(
+												'3',
+												'34'
+											)
+										),
+										'3422' => array(
+											'isco08_level' => '4',
+											'name' => 'Sports Coaches, Instructors and Officials',
+											'description' => 'Sports coaches, instructors and officials work with amateur and professional sportspersons to enhance performance, encourage greater participation in sport, and organize and officiate in sporting events according to established rules.',
+											'sameAs' => array(
+												'3',
+												'34',
+												'342'
+											)
+										),
+										'3423' => array(
+											'isco08_level' => '4',
+											'name' => 'Fitness and Recreation Instructors and Programme Leaders',
+											'description' => 'Fitness and recreation instructors and programme leaders lead, guide and instruct groups and individuals in recreational, fitness or outdoor adventure activities.',
+											'sameAs' => array(
+												'3',
+												'34',
+												'342'
+											)
 										)
 									);
 
