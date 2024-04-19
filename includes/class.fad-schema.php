@@ -5450,28 +5450,334 @@
 
 									$isco08_values = array(
 										'2' => array(
+											'isco08_level' => '1',
 											'name' => 'Professionals',
 											'description' => 'Professionals increase the existing stock of knowledge; apply scientific or artistic concepts and theories; teach about the foregoing in a systematic manner; or engage in any combination of these activities. Competent performance in most occupations in this major group requires skills at the fourth ISCO skill level.',
 											'sameAs' => array()
 										),
+										'21' => array(
+											'isco08_level' => '2',
+											'name' => 'Science and Engineering Professionals',
+											'description' => 'Science and engineering professionals conduct research, improve or develop concepts, theories and operational methods, or apply scientific knowledge relating to fields such as physics, astronomy, meteorology, chemistry, geophysics, geology, biology, ecology, pharmacology, medicine, mathematics, statistics, architecture, engineering, design and technology. Competent performance in most occupations in this sub-major group requires skills at the fourth ISCO skill level.',
+											'sameAs' => array(
+												'2'
+											)
+										),
+										'211' => array(
+											'isco08_level' => '3',
+											'name' => 'Physical and Earth Science Professionals',
+											'description' => 'Physical and earth science professionals conduct research; improve or develop concepts, theories and operational methods, or apply scientific knowledge relating to physics, astronomy, meteorology, chemistry, geology and geophysics.',
+											'sameAs' => array(
+												'2',
+												'21'
+											)
+										),
+										'2111' => array(
+											'isco08_level' => '4',
+											'name' => 'Physicists and Astronomers',
+											'description' => 'Physicists and astronomers conduct research and improve or develop concepts, theories and operational methods concerning matter, space, time, energy, forces and fields and the interrelationship between these physical phenomena. They apply scientific knowledge relating to physics and astronomy in industrial, medical, military or other fields.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'211'
+											)
+										),
+										'2112' => array(
+											'isco08_level' => '4',
+											'name' => 'Meteorologists',
+											'description' => 'Meteorologists prepare short-term or long-term weather forecasts used in aviation, shipping, agriculture and other areas and for the information of the general public. They conduct research related to the composition, structure and dynamics of the atmosphere.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'211'
+											)
+										),
+										'2113' => array(
+											'isco08_level' => '4',
+											'name' => 'Chemists',
+											'description' => 'Chemists conduct research, improve or develop concepts, theories and operational methods, or apply scientific knowledge relating to chemistry, to develop new knowledge or products and for quality and process control.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'211'
+											)
+										),
+										'2114' => array(
+											'isco08_level' => '4',
+											'name' => 'Geologists and geophysicists',
+											'description' => 'Geologists and geophysicists conduct research; improve or develop concepts, theories and operational methods, or apply scientific knowledge relating to geology and geophysics in such fields as oil, gas and mineral exploration and extraction, water conservation, civil engineering, telecommunications and navigation, and assessment and mitigation of the effects of development and waste disposal projects on the environment.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'211'
+											)
+										),
+										'212' => array(
+											'isco08_level' => '3',
+											'name' => 'Mathematicians, Actuaries and Statisticians',
+											'description' => 'Mathematicians, actuaries and statisticians conduct research, improve or develop mathematical, actuarial and statistical concepts, theories and operational models and techniques; and apply this knowledge to a wide range of tasks in such fields as engineering, business and social and other sciences.',
+											'sameAs' => array(
+												'2',
+												'21'
+											)
+										),
+										'2120' => array(
+											'isco08_level' => '4',
+											'name' => 'Mathematicians, Actuaries and Statisticians',
+											'description' => 'Mathematicians, actuaries and statisticians conduct research and improve or develop mathematical, actuarial and statistical concepts, theories and operational methods and techniques and advise on or engage in their practical application in such fields as engineering, business and social and other sciences.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'212'
+											)
+										),
+										'213' => array(
+											'isco08_level' => '3',
+											'name' => 'Life Science Professionals',
+											'description' => 'Life science professionals apply knowledge gained from research into human, animal and plant life and their interactions with each other and the environment to develop new knowledge, improve agricultural and forestry production, and solve human health and environmental problems.',
+											'sameAs' => array(
+												'2',
+												'21'
+											)
+										),
+										'2131' => array(
+											'isco08_level' => '4',
+											'name' => 'Biologists, Botanists, Zoologists and Related Professionals',
+											'description' => 'Biologists, botanists, zoologists and related professionals study living organisms and their interactions with each other and with the environment, and apply this knowledge to solve human health and environmental problems. They work in diverse fields such as botany, zoology, ecology, marine biology, genetics, immunology, pharmacology, toxicology, physiology, bacteriology and virology.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'213'
+											)
+										),
+										'2132' => array(
+											'isco08_level' => '4',
+											'name' => 'Farming, Forestry and Fisheries Advisers',
+											'description' => 'Farming, forestry and fisheries advisers study and provide assistance and advice on farm, forestry and fisheries management, including cultivation, fertilization, harvesting, soil erosion and composition, disease prevention, nutrition, crop rotation and marketing. They develop techniques for increasing productivity, and study and develop plans and policies for land and fisheries management.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'213'
+											)
+										),
+										'2133' => array(
+											'isco08_level' => '4',
+											'name' => 'Environmental Protection Professionals',
+											'description' => 'Environmental protection professionals study and assess the effects on the environment of human activity such as air, water and noise pollution, soil contamination, climate change, toxic waste and depletion and degradation of natural resources. They develop plans and solutions to protect, conserve, restore, minimize and prevent further damage to the environment.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'213'
+											)
+										),
+										'214' => array(
+											'isco08_level' => '3',
+											'name' => 'Engineering Professionals (excluding Electrotechnology)',
+											'description' => 'Engineering professionals (excluding electrotechnology) design, plan and organize the testing, construction, installation and maintenance of structures, machines and their components, and production systems and plants; and plan production schedules and work procedures to ensure engineering projects are undertaken safely, efficiently and in a cost effective manner.',
+											'sameAs' => array(
+												'2',
+												'21'
+											)
+										),
+										'2141' => array(
+											'isco08_level' => '4',
+											'name' => 'Industrial and Production Engineers',
+											'description' => 'Industrial and production engineers conduct research and design, organize and oversee the construction, operation and maintenance of industrial production processes and installations. They establish programmes for the coordination of manufacturing activities and assess cost effectiveness and safety.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'214'
+											)
+										),
+										'2142' => array(
+											'isco08_level' => '4',
+											'name' => 'Civil Engineers',
+											'description' => 'Civil engineers conduct research, advise on, design, and direct construction; manage the operation and maintenance of civil engineering structures; or study and advise on technological aspects of particular materials.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'214'
+											)
+										),
+										'2143' => array(
+											'isco08_level' => '4',
+											'name' => 'Environmental Engineers',
+											'description' => 'Environmental engineers conduct research, advise on, design and direct implementation of solutions to prevent, control or remedy negative impacts of human activity on the environment utilizing a variety of engineering disciplines. They conduct environmental assessments of construction and civil engineering projects and apply engineering principles to pollution control, recycling and waste disposal.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'214'
+											)
+										),
+										'2144' => array(
+											'isco08_level' => '4',
+											'name' => 'Mechanical Engineers',
+											'description' => 'Mechanical engineers conduct research; advise on, design and direct production of machines, aircraft, ships, machinery and industrial plant, equipment and systems; advise on and direct their functioning, maintenance and repair; or study and advise on mechanical aspects of particular materials, products or processes.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'214'
+											)
+										),
+										'2145' => array(
+											'isco08_level' => '4',
+											'name' => 'Chemical Engineers',
+											'description' => 'Chemical engineers conduct research and develop, advise on and direct commercial-scale chemical processes and production of various substances and items such as crude oil, petroleum derivatives, food and drink products, medicines, or synthetic materials. They direct maintenance and repair of chemical plant and equipment and study and advise on chemical aspects of particular materials, products or processes.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'214'
+											)
+										),
+										'2146' => array(
+											'isco08_level' => '4',
+											'name' => 'Mining Engineers, Metallurgists and Related Professionals',
+											'description' => 'Mining engineers, metallurgists and related professionals conduct research on, design, develop and maintain commercial-scale methods of extracting metals from their ores, or minerals, water, oil or gas from the earth, and of developing new alloys, ceramic and other materials, or study and advise on mining or metallurgical aspects of particular materials, products or processes.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'214'
+											)
+										),
+										'2149' => array(
+											'isco08_level' => '4',
+											'name' => 'Engineering Professionals Not Elsewhere Classified',
+											'description' => 'This unit group covers engineering professionals not classified elsewhere in Minor Group 214: Engineering Professionals (excluding Electrotechnology) or in Minor Group 215: Electrotechnology Engineers. For instance, the group includes those who conduct research and advise on or develop engineering procedures and solutions concerning workplace safety, biomedical engineering, optics, materials, nuclear power generation and explosives.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'214'
+											)
+										),
+										'215' => array(
+											'isco08_level' => '3',
+											'name' => 'Electrotechnology Engineers',
+											'description' => 'Electrotechnology engineers conduct research on and design, advise, plan and direct the construction and operation of electronic, electrical and telecommunications systems, components, motors and equipment. They organize and establish control systems to monitor the performance and safety of electrical and electronic assemblies and systems.',
+											'sameAs' => array(
+												'2',
+												'21'
+											)
+										),
+										'2151' => array(
+											'isco08_level' => '4',
+											'name' => 'Electrical Engineers',
+											'description' => 'Electrical engineers conduct research and advise on, design and direct the construction and operation of electrical systems, components, motors and equipment, and advise on and direct their functioning, maintenance and repair, or study and advise on technological aspects of electrical engineering materials, products and processes.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'215'
+											)
+										),
+										'2152' => array(
+											'isco08_level' => '4',
+											'name' => 'Electronics Engineers',
+											'description' => 'Electronics engineers conduct research on, design and direct the construction functioning, maintenance and repair of electronic systems, and study and advise on technological aspects of electronic engineering materials, products or processes.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'215'
+											)
+										),
+										'2153' => array(
+											'isco08_level' => '4',
+											'name' => 'Telecommunications Engineers',
+											'description' => 'Telecommunications engineers conduct research and advise on, design and direct the construction, functioning, maintenance and repair of telecommunication systems and equipment. They study and advise on technological aspects of telecommunication engineering materials, products or processes.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'215'
+											)
+										),
+										'216' => array(
+											'isco08_level' => '3',
+											'name' => 'Architects, Planners, Surveyors and Designers',
+											'description' => 'Architects, planners, surveyors and designers plan and design landscapes, building exteriors and interiors, products for manufacture, and visual and audio-visual content for the communication of information. They conduct survey work to precisely position geographical features; design, prepare and revise maps; and develop and implement plans and policies for controlling the use of land.',
+											'sameAs' => array(
+												'2',
+												'21'
+											)
+										),
+										'2161' => array(
+											'isco08_level' => '4',
+											'name' => 'Building Architects',
+											'description' => 'Building architects design commercial, industrial, institutional, residential and recreational buildings and plan and monitor their construction, maintenance and rehabilitation.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'216'
+											)
+										),
+										'2162' => array(
+											'isco08_level' => '4',
+											'name' => 'Landscape Architects',
+											'description' => 'Landscape architects plan and design landscapes and open spaces for projects such as, parks, schools, institutions, roads, external areas for commercial, industrial and residential sites, and plan and monitor their construction, maintenance and rehabilitation.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'216'
+											)
+										),
+										'2163' => array(
+											'isco08_level' => '4',
+											'name' => 'Product and Garment Designers',
+											'description' => 'Product and garment designers design and develop products for manufacture and prepare designs and specifications of products for mass, batch and one-off production.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'216'
+											)
+										),
+										'2164' => array(
+											'isco08_level' => '4',
+											'name' => 'Town and Traffic Planners',
+											'description' => 'Town and traffic planners develop and implement plans and policies for the controlled use of urban and rural land and for traffic systems. They conduct research and provide advice on economic, environmental and social factors affecting land use and traffic flows.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'216'
+											)
+										),
+										'2165' => array(
+											'isco08_level' => '4',
+											'name' => 'Cartographers and Surveyors',
+											'description' => 'Cartographers and surveyors determine the exact position of, or prepare and revise digital, graphic and pictorial maps, charts or other visual representation of, natural and constructed features and boundaries of land, seas, underground areas and celestial bodies, applying scientific and mathematical principles.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'216'
+											)
+										),
+										'2166' => array(
+											'isco08_level' => '4',
+											'name' => 'Graphic and Multimedia Designers',
+											'description' => 'Graphic and multimedia designers design visual and audio-visual content for the communication of information using print, film, electronic, digital and other forms of visual and audio media. They create graphics, special effects, animation or other visual images for use in computer games, movies, music videos, print media and advertisements.',
+											'sameAs' => array(
+												'2',
+												'21',
+												'216'
+											)
+										),
 										'22' => array(
+											'isco08_level' => '2',
 											'name' => 'Health Professionals',
-											'description' => 'Health professionals conduct research; improve or develop concepts, theories and operational methods; and apply scientific knowledge relating to medicine, nursing, dentistry, veterinary medicine, pharmacy, and promotion of health.  Competent performance in most occupations in this sub-major group requires skills at the fourth ISCO skill level.',
+											'description' => 'Health professionals conduct research; improve or develop concepts, theories and operational methods; and apply scientific  knowledge relating to medicine, nursing, dentistry, veterinary medicine, pharmacy, and  promotion of health. Competent performance in most occupations in this sub-major group requires skills at the fourth ISCO skill level.',
 											'sameAs' => array(
 												'2'
 											)
 										),
 										'221' => array(
+											'isco08_level' => '3',
 											'name' => 'Medical Doctors',
-											'description' => 'Medical doctors (physicians) study, diagnose, treat and prevent illness, disease, injury and other physical and mental impairments in humans through the application of the principles and procedures of modern medicine. They plan, supervise and evaluate the implementation of care and treatment plans by other health care providers, and conduct medical education and research activities.',
+											'description' => 'Medical doctors (physicians) study, diagnose, treat and prevent illness, disease, injury, and other physical and mental impairments in humans through the application of the principles and procedures of modern medicine. They plan, supervise and evaluate the implementation of care and treatment plans by other health care providers, and conduct medical education and research activities.',
 											'sameAs' => array(
 												'2',
 												'22'
 											)
 										),
 										'2211' => array(
+											'isco08_level' => '4',
 											'name' => 'Generalist Medical Practitioners',
-											'description' => 'Generalist medical practitioners (including family and primary care doctors) diagnose, treat and prevent illness, disease, injury and other physical and mental impairments and maintain general health in humans through application of the principles and procedures of modern medicine.  They do not limit their practice to certain disease categories or methods of treatment, and may assume responsibility for the provision of continuing and comprehensive medical care to individuals, families and communities.',
+											'description' => 'Generalist medical practitioners (including family and primary care doctors) diagnose, treat and prevent illness, disease, injury and other physical and mental impairments and maintain general health in humans through application of the principles and procedures of modern medicine. They do not limit their practice to certain disease categories or methods of treatment, and may assume responsibility for the provision of continuing and comprehensive medical care to individuals, families and communities.',
 											'sameAs' => array(
 												'2',
 												'22',
@@ -5479,8 +5785,9 @@
 											)
 										),
 										'2212' => array(
+											'isco08_level' => '4',
 											'name' => 'Specialist Medical Practitioners',
-											'description' => 'Specialist medical practitioners (medical doctors) diagnose, treat and prevent illness, disease, injury and other physical and mental impairments in humans, using specialized testing, diagnostic, medical, surgical, physical and psychiatric techniques through application of the principles and procedures of modern medicine. They specialize in certain disease categories, types of patient or methods of treatment and may conduct medical education and research in their chosen areas of specialization.',
+											'description' => 'Specialist medical practitioners (medical doctors) diagnose, treat and prevent illness, disease, injury, and other physical and mental impairments in humans, using specialized testing, diagnostic, medical, surgical, physical and psychiatric techniques, through application of the principles and procedures of modern medicine. They specialize in certain disease categories, types of patient or methods of treatment and may conduct medical education and research in their chosen areas of specialization.',
 											'sameAs' => array(
 												'2',
 												'22',
@@ -5488,14 +5795,16 @@
 											)
 										),
 										'222' => array(
+											'isco08_level' => '3',
 											'name' => 'Nursing and Midwifery Professionals',
-											'description' => 'Nursing and midwifery professionals provide treatment and care services for people who are physically or mentally ill, disabled or infirm, and others in need of care due to potential risks to health including before, during and after childbirth. They assume responsibility for the planning, management and evaluation of the care of patients, including the supervision of other health care workers, working autonomously or in teams with medical doctors and others in the practical application of preventive and curative measures. ',
+											'description' => 'Nursing and midwifery professionals provide treatment and care services for people who are physically or mentally ill, disabled or infirm, and others in need of care due to potential risks to health including before, during and after childbirth. They assume responsibility for the planning, management and evaluation of the care of patients, including the supervision of other health care workers, working autonomously or in teams with medical doctors and others in the practical application of preventive and curative measures.',
 											'sameAs' => array(
 												'2',
 												'22'
 											)
 										),
 										'2221' => array(
+											'isco08_level' => '4',
 											'name' => 'Nursing Professionals',
 											'description' => 'Nursing professionals provide treatment, support and care services for people who are in need of nursing care due to the effects of ageing, injury, illness or other physical or mental impairment, or potential risks to health. They assume responsibility for the planning and management of the care of patients, including the supervision of other health care workers, working autonomously or in teams with medical doctors and others in the practical application of preventive and curative measures.',
 											'sameAs' => array(
@@ -5505,6 +5814,7 @@
 											)
 										),
 										'2222' => array(
+											'isco08_level' => '4',
 											'name' => 'Midwifery Professionals',
 											'description' => 'Midwifery professionals plan, manage, provide and evaluate midwifery care services before, during and after pregnancy and childbirth. They provide delivery care for reducing health risks to women and newborn children, working autonomously or in teams with other health care providers.',
 											'sameAs' => array(
@@ -5514,16 +5824,18 @@
 											)
 										),
 										'223' => array(
+											'isco08_level' => '3',
 											'name' => 'Traditional and Complementary Medicine Professionals',
-											'description' => 'Traditional and complementary medicine professionals examine patients; prevent and treat illness, disease, injury and other physical and mental impairments; and maintain general health in humans by applying knowledge, skills and practices acquired through extensive study of  the theories, beliefs and experiences originating in specific cultures.',
+											'description' => 'Traditional and complementary medicine professionals examine patients, prevent and treat illness, disease, injury, and other physical and mental impairments and maintain general health in humans by applying knowledge, skills and practices acquired through extensive study of  the theories, beliefs and experiences, originating in specific cultures.',
 											'sameAs' => array(
 												'2',
 												'22'
 											)
 										),
 										'2230' => array(
+											'isco08_level' => '4',
 											'name' => 'Traditional and Complementary Medicine Professionals',
-											'description' => 'Traditional and complementary medicine professionals examine patients, prevent and treat illness, disease, injury and other physical and mental impairments and maintain general health in humans by applying knowledge, skills and practices acquired through extensive study of  the theories, beliefs and experiences, originating in specific cultures.',
+											'description' => 'Traditional and complementary medicine professionals examine patients, prevent and treat illness, disease, injury, and other physical and mental impairments and maintain general health in humans by applying knowledge, skills and practices acquired through extensive study of the theories, beliefs and experiences, originating in specific cultures',
 											'sameAs' => array(
 												'2',
 												'22',
@@ -5531,14 +5843,16 @@
 											)
 										),
 										'224' => array(
+											'isco08_level' => '3',
 											'name' => 'Paramedical Practitioners',
-											'description' => 'Paramedical practitioners provide advisory, diagnostic, curative and preventive medical services more limited in scope and complexity than those carried out by medical doctors. They work autonomously or with limited supervision of medical doctors, and apply advanced clinical procedures for treating and preventing diseases, injuries and other physical or mental impairments common to specific communities.',
+											'description' => 'Paramedical practitioners provide advisory, diagnostic, curative and preventive medical services for humans more limited in scope and complexity than those carried out by medical doctors. They work autonomously or with limited supervision of medical doctors, and apply advanced clinical procedures for treating and preventing diseases, injuries and other physical or mental impairments common to specific communities.',
 											'sameAs' => array(
 												'2',
 												'22'
 											)
 										),
 										'2240' => array(
+											'isco08_level' => '4',
 											'name' => 'Paramedical Practitioners',
 											'description' => 'Paramedical practitioners provide advisory, diagnostic, curative and preventive medical services more limited in scope and complexity than those carried out by medical doctors. They work autonomously, or with limited supervision of medical doctors, and apply advanced clinical procedures for treating and preventing diseases, injuries and other physical or mental impairments common to specific communities.',
 											'sameAs' => array(
@@ -5548,14 +5862,16 @@
 											)
 										),
 										'225' => array(
+											'isco08_level' => '3',
 											'name' => 'Veterinarians',
-											'description' => 'Veterinarians diagnose, prevent and treat diseases, injuries and dysfunctions of animals. They may provide care to a wide range of animals; specialize in the treatment of a particular animal group or in a particular area of specialization; or provide professional services to commercial firms producing biological and pharmaceutical products.',
+											'description' => 'Veterinarians diagnose, prevent and treat diseases, injuries and dysfunctions of animals. They may provide care to a wide range of animals or specialize in the treatment of a particular animal group or in a particular area of specialization, or provide professional services to commercial firms producing biological and pharmaceutical products.',
 											'sameAs' => array(
 												'2',
 												'22'
 											)
 										),
 										'2250' => array(
+											'isco08_level' => '4',
 											'name' => 'Veterinarians',
 											'description' => 'Veterinarians diagnose, prevent and treat diseases, injuries and dysfunctions of animals. They may provide care to a wide range of animals or specialize in the treatment of a particular animal group or in a particular specialty area, or provide professional services to commercial firms producing biological and pharmaceutical products.',
 											'sameAs' => array(
@@ -5565,12 +5881,16 @@
 											)
 										),
 										'226' => array(
+											'isco08_level' => '3',
 											'name' => 'Other Health Professionals',
-											'description' => 'Other health professionals provide health services related to dentistry, pharmacy, environmental health and hygiene, occupational health and safety, physiotherapy, nutrition, hearing, speech, vision and rehabilitation therapies.  This minor group includes all human health professionals except doctors, traditional and complementary medicine practitioners, nurses, midwives and paramedical professionals.',
+											'description' => 'Other health professionals provide health services related to dentistry, pharmacy, environmental health and hygiene, occupational health and safety, physiotherapy, nutrition, hearing, speech, vision and rehabilitation therapies.  This minor group includes all human health professionals, except doctors, traditional and complementary medicine practitioners, nurses, midwives and paramedical professionals.',
 											'sameAs' => array(
-												'2',)
+												'2',
+												'22'
+											)
 										),
 										'2261' => array(
+											'isco08_level' => '4',
 											'name' => 'Dentists',
 											'description' => 'Dentists diagnose, treat and prevent diseases, injuries and abnormalities of the teeth, mouth, jaws and associated tissues by applying the principles and procedures of modern dentistry. They use a broad range of specialized diagnostic, surgical and other techniques to promote and restore oral health.',
 											'sameAs' => array(
@@ -5580,8 +5900,9 @@
 											)
 										),
 										'2262' => array(
+											'isco08_level' => '4',
 											'name' => 'Pharmacists',
-											'description' => 'Pharmacists store, preserve, compound and dispense medicinal products and counsel on the proper use and adverse effects of drugs and medicines following prescriptions issued by medical doctors and other health professionals. They contribute to researching, testing, preparing, prescribing and monitoring medicinal therapies for optimizing human health.',
+											'description' => 'Pharmacists store, preserve, compound, and dispense medicinal products and counsel on the proper use and adverse effects of drugs and medicines following prescriptions issued by medical doctors and other health professionals. They contribute to researching, testing, preparing, prescribing and monitoring medicinal therapies for optimizing human health.',
 											'sameAs' => array(
 												'2',
 												'22',
@@ -5589,6 +5910,7 @@
 											)
 										),
 										'2263' => array(
+											'isco08_level' => '4',
 											'name' => 'Environmental and Occupational Health and Hygiene Professionals',
 											'description' => 'Environmental and occupational health and hygiene professionals assess, plan and implement programmes to recognize, monitor and control environmental factors that can potentially affect human health, to ensure safe and healthy working conditions and to prevent disease or injury caused by chemical, physical, radiological and biological agents or ergonomic factors.',
 											'sameAs' => array(
@@ -5598,8 +5920,9 @@
 											)
 										),
 										'2264' => array(
+											'isco08_level' => '4',
 											'name' => 'Physiotherapists',
-											'description' => 'Physiotherapists assess, plan and implement rehabilitative programmes that improve or restore human motor functions, maximize movement ability, relieve pain syndromes, and treat or prevent physical challenges associated with injuries, diseases and other impairments. They apply a broad range of physical therapies and techniques such as movement, ultrasound, heating, laser and other techniques. ',
+											'description' => 'Physiotherapists assess, plan and implement rehabilitative programmes that improve or restore human motor functions, maximize movement ability, relieve pain syndromes, and treat or prevent physical challenges associated with injuries, diseases and other impairments. They apply a broad range of physical therapies and techniques such as movement, ultrasound, heating, laser and other techniques.',
 											'sameAs' => array(
 												'2',
 												'22',
@@ -5607,6 +5930,7 @@
 											)
 										),
 										'2265' => array(
+											'isco08_level' => '4',
 											'name' => 'Dieticians and Nutritionists',
 											'description' => 'Dieticians and nutritionists assess, plan and implement programmes to enhance the impact of food and nutrition on human health.',
 											'sameAs' => array(
@@ -5616,8 +5940,9 @@
 											)
 										),
 										'2266' => array(
+											'isco08_level' => '4',
 											'name' => 'Audiologists and Speech Therapists',
-											'description' => 'Audiologists and speech therapists evaluate, manage and treat physical disorders affecting human hearing, speech, communication and swallowing. They prescribe corrective devices or rehabilitative therapies for hearing loss, speech disorders and related sensory and neural problems, and provide counselling on hearing safety and communication performance.',
+											'description' => 'Audiologists and speech therapists evaluate, manage and treat physical disorders affecting human hearing, speech, communication and swallowing. They prescribe corrective devices or rehabilitative therapies for hearing loss, speech disorders, and related sensory and neural problems and provide counselling on hearing safety and communication performance.',
 											'sameAs' => array(
 												'2',
 												'22',
@@ -5625,8 +5950,9 @@
 											)
 										),
 										'2267' => array(
+											'isco08_level' => '4',
 											'name' => 'Optometrists and Ophthalmic Opticians',
-											'description' => 'Optometrists and ophthalmic opticians provide diagnosis, management and treatment services for disorders of the eyes and visual system. They counsel on eye care and prescribe optical aids or other therapies for visual disturbance.',
+											'description' => 'Optometrists and ophthalmic opticians provide diagnosis,  management and treatment services for disorders of the eyes and visual system. They counsel on eye care and prescribe optical aids or other therapies for visual disturbance.',
 											'sameAs' => array(
 												'2',
 												'22',
@@ -5634,12 +5960,710 @@
 											)
 										),
 										'2269' => array(
-											'name' => 'Health Professionals Not Elsewhere Classified ',
+											'isco08_level' => '4',
+											'name' => 'Health Professionals Not Elsewhere Classified',
 											'description' => 'This unit group covers health professionals not classified elsewhere in Sub-major Group 22: Health Professionals. For instance, the group includes occupations such as podiatrist, occupational therapist, recreational therapist, chiropractor, osteopath and other professionals providing diagnostic, preventive, curative and rehabilitative health services.',
 											'sameAs' => array(
 												'2',
 												'22',
 												'226'
+											)
+										),
+										'23' => array(
+											'isco08_level' => '2',
+											'name' => 'Teaching Professionals',
+											'description' => 'Teaching professionals teach the theory and practice of one or more  disciplines at different educational levels; conduct research; improve or develop concepts, theories and operational methods pertaining to their  particular discipline; and prepare scholarly papers and books. Competent performance in most occupations in this sub-major group requires skills at the fourth ISCO skill level.',
+											'sameAs' => array(
+												'2'
+											)
+										),
+										'231' => array(
+											'isco08_level' => '3',
+											'name' => 'University and Higher Education Teachers',
+											'description' => 'University and higher education teachers prepare and deliver lectures and conduct tutorials in one or more subjects within a prescribed course of study at a university or other higher educational institution.  They conduct research, and prepare scholarly papers and books.',
+											'sameAs' => array(
+												'2',
+												'23'
+											)
+										),
+										'2310' => array(
+											'isco08_level' => '4',
+											'name' => 'University and Higher Education Teachers',
+											'description' => 'University and higher education teachers prepare and deliver lectures and conduct tutorials in one or more subjects within a prescribed course of study at a university or other higher educational institution. They conduct research, and prepare scholarly papers and books.',
+											'sameAs' => array(
+												'2',
+												'23',
+												'231'
+											)
+										),
+										'232' => array(
+											'isco08_level' => '3',
+											'name' => 'Vocational education teachers',
+											'description' => 'Vocational education teachers teach or instruct vocational or occupational subjects in adult and further education institutions and to senior students in secondary schools and colleges. They prepare students for employment in specific occupations or occupational areas for which university or higher education is not normally required.',
+											'sameAs' => array(
+												'2',
+												'23'
+											)
+										),
+										'2320' => array(
+											'isco08_level' => '4',
+											'name' => 'Vocational Education Teachers',
+											'description' => 'Vocational education teachers teach or instruct vocational or occupational subjects in adult and further education institutions and to senior students in secondary schools and colleges. They prepare students for employment in specific occupations or occupational areas for which university or higher education is not normally required.',
+											'sameAs' => array(
+												'2',
+												'23',
+												'232'
+											)
+										),
+										'233' => array(
+											'isco08_level' => '3',
+											'name' => 'Secondary Education Teachers',
+											'description' => 'Secondary education teachers teach one or more subjects at secondary education level, excluding subjects intended to prepare students for employment in specific occupational areas.',
+											'sameAs' => array(
+												'2',
+												'23'
+											)
+										),
+										'2330' => array(
+											'isco08_level' => '4',
+											'name' => 'Secondary Education Teachers',
+											'description' => 'Secondary education teachers teach one or more subjects at secondary education level, excluding subjects intended to prepare students for employment in specific occupational areas.',
+											'sameAs' => array(
+												'2',
+												'23',
+												'233'
+											)
+										),
+										'234' => array(
+											'isco08_level' => '3',
+											'name' => 'Primary School and Early Childhood Teachers',
+											'description' => 'Primary school and early childhood teachers teach a range of subjects at the primary level of education and organize educational activities for children below primary school age.',
+											'sameAs' => array(
+												'2',
+												'23'
+											)
+										),
+										'2341' => array(
+											'isco08_level' => '4',
+											'name' => 'Primary School Teachers',
+											'description' => 'Primary school teachers teach a range of subjects at the primary education level.',
+											'sameAs' => array(
+												'2',
+												'23',
+												'234'
+											)
+										),
+										'2342' => array(
+											'isco08_level' => '4',
+											'name' => 'Early Childhood Educators',
+											'description' => 'Early childhood educators promote the social, physical, and intellectual development of children below primary school age through the provision of educational and play activities',
+											'sameAs' => array(
+												'2',
+												'23',
+												'234'
+											)
+										),
+										'235' => array(
+											'isco08_level' => '3',
+											'name' => 'Other Teaching Professionals',
+											'description' => 'Other teaching professionals conduct research and advise on teaching methods, teach people with learning difficulties or special needs; teach non-native languages for migration and related purposes; give private tuition; teach arts, information technology and other subjects outside the mainstream primary, secondary and higher education systems; and provide other teaching services not classified elsewhere in Sub-major Group 23: Teaching Professionals..',
+											'sameAs' => array(
+												'2',
+												'23'
+											)
+										),
+										'2351' => array(
+											'isco08_level' => '4',
+											'name' => 'Education Methods Specialists',
+											'description' => 'Education methods specialists conduct research and develop or advise on teaching methods, courses and aids. They review and examine teachers\' work, the functioning of educational institutions and the results achieved and recommend changes and improvements.',
+											'sameAs' => array(
+												'2',
+												'23',
+												'235'
+											)
+										),
+										'2352' => array(
+											'isco08_level' => '4',
+											'name' => 'Special Needs Teachers',
+											'description' => 'Special needs teachers teach physically or mentally handicapped children, young persons, or adults, or those with learning difficulties or other special needs. They promote the social, emotional, intellectual and physical development of their students.',
+											'sameAs' => array(
+												'2',
+												'23',
+												'235'
+											)
+										),
+										'2353' => array(
+											'isco08_level' => '4',
+											'name' => 'Other Language Teachers',
+											'description' => 'Other language teachers teach non-native languages to adults and children who are learning a language for reasons of migration, to fulfil employment requirements or opportunities, to facilitate participation in educational programmes delivered in a foreign language, or for personal enrichment. They work outside the mainstream primary, secondary and higher education systems, or in support of students and teachers within those systems.',
+											'sameAs' => array(
+												'2',
+												'23',
+												'235'
+											)
+										),
+										'2354' => array(
+											'isco08_level' => '4',
+											'name' => 'Other Music Teachers',
+											'description' => 'Other music teachers teach students in the practice, theory and performance of music outside the mainstream primary, secondary and higher education systems, but may provide private or small group tuition as an extra curricular activity in association with mainstream educational institutions.',
+											'sameAs' => array(
+												'2',
+												'23',
+												'235'
+											)
+										),
+										'2355' => array(
+											'isco08_level' => '4',
+											'name' => 'Other Arts Teachers',
+											'description' => 'Other arts teachers teach students in the practice, theory and performance of dance, drama, visual and other arts (excluding music) outside the mainstream primary, secondary and higher education systems, but may provide private or small group tuition as an extracurricular activity in association with mainstream educational institutions.',
+											'sameAs' => array(
+												'2',
+												'23',
+												'235'
+											)
+										),
+										'2356' => array(
+											'isco08_level' => '4',
+											'name' => 'Information Technology Trainers',
+											'description' => 'Information technology trainers develop, schedule and conduct training programmes and courses for computer and other information technology users outside the mainstream primary, secondary and higher education systems.',
+											'sameAs' => array(
+												'2',
+												'23',
+												'235'
+											)
+										),
+										'2359' => array(
+											'isco08_level' => '4',
+											'name' => 'Teaching Professionals Not Elsewhere Classified',
+											'description' => 'This unit group covers teaching professionals not classified elsewhere in Sub-major Group 23: Teaching Professionals. For instance, the group includes those who provide private tuition in subjects other than foreign languages and the arts, and those who provide educational counselling to students.',
+											'sameAs' => array(
+												'2',
+												'23',
+												'235'
+											)
+										),
+										'24' => array(
+											'isco08_level' => '2',
+											'name' => 'Business and Administration Professionals',
+											'description' => 'Business and administration professionals perform analytical, conceptual and practical tasks to provide services in financial matters, human resource development, public relations, marketing and sales in the technical, medical, information and communication technology areas; and conduct, reviews of organizational structures, methods and systems as well as quantitative analyses of information affecting investment programmes. Competent performance in most occupations in this sub-major group requires skills at the fourth ISCO skill level.',
+											'sameAs' => array(
+												'2'
+											)
+										),
+										'241' => array(
+											'isco08_level' => '3',
+											'name' => 'Finance Professionals',
+											'description' => 'Finance professionals plan, develop, organize, administer, invest, manage and conduct quantitative analyses of either financial accounting systems or funds for individuals, establishments and public or private institutions.',
+											'sameAs' => array(
+												'2',
+												'24'
+											)
+										),
+										'2411' => array(
+											'isco08_level' => '4',
+											'name' => 'Accountants',
+											'description' => 'Accountants plan, organize and administer accounting systems for individuals and establishments. Some occupations classified here examine and analyse the accounting and financial records of individuals and establishments to ensure accuracy and compliance with established accounting standards and procedures.',
+											'sameAs' => array(
+												'2',
+												'24',
+												'241'
+											)
+										),
+										'2412' => array(
+											'isco08_level' => '4',
+											'name' => 'Financial and Investment Advisers',
+											'description' => 'Financial and investment advisers develop financial plans for individuals and organizations, and invest and manage funds on their behalf.',
+											'sameAs' => array(
+												'2',
+												'24',
+												'241'
+											)
+										),
+										'2413' => array(
+											'isco08_level' => '4',
+											'name' => 'Financial Analysts',
+											'description' => 'Financial analysts conduct quantitative analyses of information affecting investment programmes of public or private institutions.',
+											'sameAs' => array(
+												'2',
+												'24',
+												'241'
+											)
+										),
+										'242' => array(
+											'isco08_level' => '3',
+											'name' => 'Administration Professionals',
+											'description' => 'Administration professionals apply various concepts and theories related to improving the effectiveness of organizations and the individuals within the organization.',
+											'sameAs' => array(
+												'2',
+												'24'
+											)
+										),
+										'2421' => array(
+											'isco08_level' => '4',
+											'name' => 'Management and Organization Analysts',
+											'description' => 'Management and organization analysts assist organizations to achieve greater efficiency and solve organizational problems. They study organizational structures, methods, systems and procedures.',
+											'sameAs' => array(
+												'2',
+												'24',
+												'242'
+											)
+										),
+										'2422' => array(
+											'isco08_level' => '4',
+											'name' => 'Policy Administration Professionals',
+											'description' => 'Policy administration professionals develop and analyse policies guiding the design, implementation and modification of government and commercial operations and programmes.',
+											'sameAs' => array(
+												'2',
+												'24',
+												'242'
+											)
+										),
+										'2423' => array(
+											'isco08_level' => '4',
+											'name' => 'Personnel and Careers Professionals',
+											'description' => 'Personnel and careers professionals provide professional business services related to personnel policies such as employee recruitment or development, occupational analysis and vocational guidance.',
+											'sameAs' => array(
+												'2',
+												'24',
+												'242'
+											)
+										),
+										'2424' => array(
+											'isco08_level' => '4',
+											'name' => 'Training and Staff Development Professionals',
+											'description' => 'Training and staff development professionals plan, develop, implement and evaluate training and development programmes to ensure management and staff acquire the skills and develop the competencies required by organizations to meet organizational objectives.',
+											'sameAs' => array(
+												'2',
+												'24',
+												'242'
+											)
+										),
+										'243' => array(
+											'isco08_level' => '3',
+											'name' => 'Sales, Marketing and Public Relations Professionals',
+											'description' => 'Sales, marketing and public relations professionals plan, develop, coordinate and implement programmes of information dissemination to promote organizations, goods and services; and represent companies in selling a range of technical, industrial, medical, pharmaceutical and ICT goods and services.',
+											'sameAs' => array(
+												'2',
+												'24'
+											)
+										),
+										'2431' => array(
+											'isco08_level' => '4',
+											'name' => 'Advertising and Marketing Professionals',
+											'description' => 'Advertising and marketing professionals develop and coordinate advertising strategies and campaigns, determine the market for new goods and services, and identify and develop market opportunities for new and existing goods and services.',
+											'sameAs' => array(
+												'2',
+												'24',
+												'243'
+											)
+										),
+										'2432' => array(
+											'isco08_level' => '4',
+											'name' => 'Public Relations Professionals',
+											'description' => 'Public relations professionals plan, develop, implement and evaluate information and communication 	strategies that create an understanding and a favourable view of businesses and other organizations, their goods and services, and their role in the community.',
+											'sameAs' => array(
+												'2',
+												'24',
+												'243'
+											)
+										),
+										'2433' => array(
+											'isco08_level' => '4',
+											'name' => 'Technical and Medical Sales Professionals (excluding ICT)',
+											'description' => 'Technical and medical sales professionals (excluding ICT) represent companies in selling a range of industrial, medical and pharmaceutical goods and services to industrial, business, professional and other establishments.',
+											'sameAs' => array(
+												'2',
+												'24',
+												'243'
+											)
+										),
+										'2434' => array(
+											'isco08_level' => '4',
+											'name' => 'Information and Communications Technology Sales Professionals',
+											'description' => 'Information and communications technology (ICT) sales professionals sell, at the wholesale level, a range of computer hardware, software and other information and communications technology goods and services including installations and provide specialized information as required.',
+											'sameAs' => array(
+												'2',
+												'24',
+												'243'
+											)
+										),
+										'25' => array(
+											'isco08_level' => '2',
+											'name' => 'Information and Communications Technology Professionals',
+											'description' => 'Information and communications technology professionals conduct research, plan, design, write, test, provide advice and improve information technology systems, hardware, software and related concepts for specific applications; develop associated documentation including principles, policies and procedures; and design, develop, control, maintain and support databases and other information systems to ensure optimal performance and data integrity and security.',
+											'sameAs' => array(
+												'2'
+											)
+										),
+										'251' => array(
+											'isco08_level' => '3',
+											'name' => 'Software and Applications Developers and Analysts',
+											'description' => 'Software and applications developers and analysts conduct research, plan, design, write, test, provide advice on and improve information technology systems such as hardware, software and other applications to meet specific requirements. Competent performance in most occupations in this sub-major group requires skills at the fourth ISCO skill level.',
+											'sameAs' => array(
+												'2',
+												'25'
+											)
+										),
+										'2511' => array(
+											'isco08_level' => '4',
+											'name' => 'Systems Analysts',
+											'description' => 'Systems analysts conduct research, analyse and evaluate client information technology requirements, procedures or problems, and develop and implement proposals, recommendations and plans to improve current or future information systems.',
+											'sameAs' => array(
+												'2',
+												'25',
+												'251'
+											)
+										),
+										'2512' => array(
+											'isco08_level' => '4',
+											'name' => 'Software Developers',
+											'description' => 'Software developers research, analyse and evaluate requirements for existing or new software applications and operating systems, and design, develop, test and maintain software solutions to meet these requirements.',
+											'sameAs' => array(
+												'2',
+												'25',
+												'251'
+											)
+										),
+										'2513' => array(
+											'isco08_level' => '4',
+											'name' => 'Web and Multimedia Developers',
+											'description' => 'Web and multimedia development professionals combine design and technical knowledge to research, analyse, evaluate, design, programme and modify websites and applications that draw together text, graphics, animations, imaging, audio and video displays and other interactive media.',
+											'sameAs' => array(
+												'2',
+												'25',
+												'251'
+											)
+										),
+										'2514' => array(
+											'isco08_level' => '4',
+											'name' => 'Applications Programmers',
+											'description' => 'Applications programmers write and maintain programmable code outlined in technical instructions and specifications for software applications and operating systems.',
+											'sameAs' => array(
+												'2',
+												'25',
+												'251'
+											)
+										),
+										'2519' => array(
+											'isco08_level' => '4',
+											'name' => 'Software and Applications Developers and Analysts Not Elsewhere Classified',
+											'description' => 'This unit group covers software and applications developers and analysts not classified elsewhere in Minor Group 251: Software and Applications Developers and Analysts. For instance, the group includes those professionals specializing in quality assurance including software testing.',
+											'sameAs' => array(
+												'2',
+												'25',
+												'251'
+											)
+										),
+										'252' => array(
+											'isco08_level' => '3',
+											'name' => 'Database and Network Professionals',
+											'description' => 'Database and network professionals design, develop, control, maintain and support the optimal performance and security of information technology systems and infrastructure, including databases, hardware and software, networks and operating systems.',
+											'sameAs' => array(
+												'2',
+												'25'
+											)
+										),
+										'2521' => array(
+											'isco08_level' => '4',
+											'name' => 'Database Designers and Administrators',
+											'description' => 'Database designers and administrators design, develop, control, maintain and support the optimal performance and security of databases.',
+											'sameAs' => array(
+												'2',
+												'25',
+												'252'
+											)
+										),
+										'2522' => array(
+											'isco08_level' => '4',
+											'name' => 'Systems Aministrators',
+											'description' => 'Systems administrators develop, control, maintain and support the optimal performance and security of information technology systems.',
+											'sameAs' => array(
+												'2',
+												'25',
+												'252'
+											)
+										),
+										'2523' => array(
+											'isco08_level' => '4',
+											'name' => 'Computer Network Professionals',
+											'description' => 'Computer network professionals research, analyse, design, test and recommend strategies for network architecture and development. They implement, manage, maintain and configure network hardware and software, and monitor, troubleshoot and optimize performance.',
+											'sameAs' => array(
+												'2',
+												'25',
+												'252'
+											)
+										),
+										'2529' => array(
+											'isco08_level' => '4',
+											'name' => 'Database and Network Professionals Not Elsewhere Classified',
+											'description' => 'This unit group includes database and network professionals not classified elsewhere in Minor Group 252: Database and Network Professionals.  	For instance, the group includes information and communications technology security specialists.',
+											'sameAs' => array(
+												'2',
+												'25',
+												'252'
+											)
+										),
+										'26' => array(
+											'isco08_level' => '2',
+											'name' => 'Legal, Social and Cultural Professionals',
+											'description' => 'Legal, social and cultural professionals conduct research, improve or develop concepts, theories and operational methods; or apply knowledge relating to the law,  storage and retrieval of information and artefacts, psychology, social welfare, politics, economics, history, religion, languages, sociology, other social sciences, and arts and entertainment. Competent performance in most occupations in this sub-major group requires skills at the fourth ISCO skill level.',
+											'sameAs' => array(
+												'2'
+											)
+										),
+										'261' => array(
+											'isco08_level' => '3',
+											'name' => 'Legal Professionals',
+											'description' => 'Legal professionals conduct research on legal problems, advise clients on legal aspects of problems, plead cases or conduct prosecutions in courts of law, preside over judicial proceedings in courts of law and draft laws and regulations',
+											'sameAs' => array(
+												'2',
+												'26'
+											)
+										),
+										'2611' => array(
+											'isco08_level' => '4',
+											'name' => 'Lawyers',
+											'description' => 'Lawyers give clients legal advice on a wide variety of subjects, draw up legal documents, represent clients before administrative boards or tribunals and plead  cases or conduct prosecutions in courts of justice, or instruct barristers to plead in higher courts of justice.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'261'
+											)
+										),
+										'2612' => array(
+											'isco08_level' => '4',
+											'name' => 'Judges',
+											'description' => 'Judges preside over civil and criminal proceedings in courts of law.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'261'
+											)
+										),
+										'2619' => array(
+											'isco08_level' => '4',
+											'name' => 'Legal Professionals Not Elsewhere Classified',
+											'description' => 'This unit group covers legal professionals not classified elsewhere in Minor Group 261: Legal professionals. 	For instance, the group includes those who perform legal functions other than pleading or prosecuting cases or presiding over judicial  proceedings.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'261'
+											)
+										),
+										'262' => array(
+											'isco08_level' => '3',
+											'name' => 'Librarians, Archivists and Curators',
+											'description' => 'Librarians, archivists and curators develop and maintain the collections of archives, libraries, museums, art galleries, and similar establishments.',
+											'sameAs' => array(
+												'2',
+												'26'
+											)
+										),
+										'2621' => array(
+											'isco08_level' => '4',
+											'name' => 'Archivists and Curators',
+											'description' => 'Archivists and curators collect, appraise and ensure the safekeeping and preservation of the contents of archives, artefacts and records of historical, cultural, administrative and artistic interest, and of art and other objects. They plan, devise and implement systems for the safekeeping of records and historically valuable documents.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'262'
+											)
+										),
+										'2622' => array(
+											'isco08_level' => '4',
+											'name' => 'Librarians and Related Information Professionals',
+											'description' => 'Librarians and related information professionals collect, select, develop, organize and maintain library collections and other information repositories, organize and control other library services and provide information for users.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'262'
+											)
+										),
+										'263' => array(
+											'isco08_level' => '3',
+											'name' => 'Social and Religious Professionals',
+											'description' => 'Social and religious professionals conduct research, improve or develop concepts, theories and operational methods; apply knowledge relating to philosophy, politics, economics, sociology, anthropology, history, psychology, and other social sciences; or provide social services to meet the needs of individuals and families in a community.',
+											'sameAs' => array(
+												'2',
+												'26'
+											)
+										),
+										'2631' => array(
+											'isco08_level' => '4',
+											'name' => 'Economists',
+											'description' => 'Economists conduct research, monitor data, analyse information and prepare reports and plans to resolve economic and business problems and develop models to analyse, explain and forecast economic behaviour and patterns. They provide advice to business, interest groups and governments to formulate solutions to present or projected economic and business problems.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'263'
+											)
+										),
+										'2632' => array(
+											'isco08_level' => '4',
+											'name' => 'Sociologists, Anthropologists and Related Professionals',
+											'description' => 'Sociologists, anthropologists and related professionals investigate and describe the structure, origin and evolution of societies and the interdependence between environmental conditions and human activities. They provide advice on the practical application of their findings in the formulation of economic and social policies.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'263'
+											)
+										),
+										'2633' => array(
+											'isco08_level' => '4',
+											'name' => 'Philosophers, Historians and Political Scientists',
+											'description' => 'Philosophers, historians and political scientists conduct research into the nature of human experience and existence, phases or aspects of human history, and political structures, movements and behaviour. They document and report on findings to inform and guide political and individual actions',
+											'sameAs' => array(
+												'2',
+												'26',
+												'263'
+											)
+										),
+										'2634' => array(
+											'isco08_level' => '4',
+											'name' => 'Psychologists',
+											'description' => 'Psychologists research into and study the mental processes and behaviour of human beings as individuals or in groups, and apply this knowledge to promote personal, social, educational or occupational adjustment and development.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'263'
+											)
+										),
+										'2635' => array(
+											'isco08_level' => '4',
+											'name' => 'Social Work and Counselling Professionals',
+											'description' => 'Social work and counselling professionals provide advice and guidance to individuals, families, groups, communities and organizations in response to social and personal difficulties.  They assist clients to develop skills and access resources and support services needed to respond to issues arising from unemployment, poverty, disability, addiction, criminal and delinquent behaviour, and marital and other problems.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'263'
+											)
+										),
+										'2636' => array(
+											'isco08_level' => '4',
+											'name' => 'Religious Professionals',
+											'description' => 'Religious professionals function as perpetuators of sacred traditions, practices and beliefs.  They conduct religious services, celebrate or administer the rites of a religious faith or denomination, provide spiritual and moral guidance and perform other functions associated with the practice of a religion.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'263'
+											)
+										),
+										'264' => array(
+											'isco08_level' => '3',
+											'name' => 'Authors, Journalists and Linguists',
+											'description' => 'Authors, journalists and linguists conceive and create literary works, interpret and communicate news and public affairs through the media; and translate or interpret from one language into another.',
+											'sameAs' => array(
+												'2',
+												'26'
+											)
+										),
+										'2641' => array(
+											'isco08_level' => '4',
+											'name' => 'Authors and Related Writers',
+											'description' => 'Authors and related writers plan, research and write books, scripts, storyboards, plays, essays, speeches, manuals, specifications and other non-journalistic articles (excluding material for newspapers, magazines and other periodicals) for publication or presentation.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'264'
+											)
+										),
+										'2642' => array(
+											'isco08_level' => '4',
+											'name' => 'Journalists',
+											'description' => 'Journalists research, investigate, interpret and communicate news and public affairs through newspapers, television, radio and other media.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'264'
+											)
+										),
+										'2643' => array(
+											'isco08_level' => '4',
+											'name' => 'Translators, Interpreters and Other Linguists',
+											'description' => 'Translators, interpreters and other linguists translate or interpret from one language into another and study the origin, development and structure of languages.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'264'
+											)
+										),
+										'265' => array(
+											'isco08_level' => '3',
+											'name' => 'Creative and Performing Artists',
+											'description' => 'Creative and performing artists communicate ideas, impressions and facts in a wide range of media to achieve particular effects; interpret a composition such as a musical score or a script to perform or direct the performance; and host the presentation of such performance and other media events.',
+											'sameAs' => array(
+												'2',
+												'26'
+											)
+										),
+										'2651' => array(
+											'isco08_level' => '4',
+											'name' => 'Visual Artists',
+											'description' => 'Visual artists create and execute works of art by sculpting, painting, drawing, creating cartoons, engraving or using other techniques.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'265'
+											)
+										),
+										'2652' => array(
+											'isco08_level' => '4',
+											'name' => 'Musicians, Singers and Composers',
+											'description' => 'Musicians, singers and composers write, arrange, conduct and perform musical compositions.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'265'
+											)
+										),
+										'2653' => array(
+											'isco08_level' => '4',
+											'name' => 'Dancers and Choreographers',
+											'description' => 'Dancers and choreographers conceive and create or perform dances.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'265'
+											)
+										),
+										'2654' => array(
+											'isco08_level' => '4',
+											'name' => 'Film, Stage and Related Directors and Producers',
+											'description' => 'Film, stage and related directors and producers oversee and control the technical and artistic aspects of motion pictures, television or radio productions and stage shows.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'265'
+											)
+										),
+										'2655' => array(
+											'isco08_level' => '4',
+											'name' => 'Actors',
+											'description' => 'Actors portray roles in motion pictures, television or radio productions and stage shows.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'265'
+											)
+										),
+										'2656' => array(
+											'isco08_level' => '4',
+											'name' => 'Announcers on Radio, Television and Other Media',
+											'description' => 'Announcers on radio, television and other media read news bulletins, conduct interviews, and make other announcements or introductions on radio, television, and in theatres and other establishments or media',
+											'sameAs' => array(
+												'2',
+												'26',
+												'265'
+											)
+										),
+										'2659' => array(
+											'isco08_level' => '4',
+											'name' => 'Creative and Performing Artists Not Elsewhere Classified',
+											'description' => 'This unit group covers all creative and performing artists not classified elsewhere in Minor Group 265: Creative and Performing Artists. For instance, the group includes clowns, magicians, acrobats and other performing artists.',
+											'sameAs' => array(
+												'2',
+												'26',
+												'265'
 											)
 										)
 									);
