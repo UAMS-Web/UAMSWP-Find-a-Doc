@@ -5353,7 +5353,7 @@
 
 								$provider_occupationalCategory = array();
 
-							// O*Net-SOC
+							// Bureau of Labor Statistics (BLS) O*NET-SOC (Occupational Information Network Standard Occupational Classification Taxonomy)
 
 								// Occupation Code
 
@@ -5373,7 +5373,7 @@
 
 										$provider_specialization_onetsoc = array(
 											'@type' => 'CategoryCode',
-											'codeValue' => $provider_specialization_onetsoc_code, // O*Net-SOC code value from Specialty item
+											'codeValue' => $provider_specialization_onetsoc_code, // O*NET-SOC code value from Specialty item
 											'inCodeSet' => array(
 												'@type' => 'CategoryCodeSet',
 												'alternateName' => array(
@@ -5405,8 +5405,8 @@
 												'name' => 'O*NET-SOC',
 												'url' => 'https://www.onetonline.org/'
 											),
-											'name' => $provider_specialization_onetsoc_code_name ?? '', // O*Net-SOC name from Specialty item
-											'url' => 'https://www.onetonline.org/link/summary/' . $provider_specialization_onetsoc_code // O*Net-SOC URL from Specialty item
+											'name' => $provider_specialization_onetsoc_code_name ?? '', // O*NET-SOC name from Specialty item
+											'url' => 'https://www.onetonline.org/link/summary/' . $provider_specialization_onetsoc_code // O*NET-SOC URL from Specialty item
 										);
 
 										// Clean up array
