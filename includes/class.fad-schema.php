@@ -13894,6 +13894,7 @@
 								$provider_worksFor_keywords = null;
 								$MedicalCondition_i = 1;
 								$Service_i = 1;
+								$uamswp_fad_provider_clinical_specialization = null;
 
 							// Load variables from pre-existing field values array
 
@@ -20774,103 +20775,31 @@
 
 										// Get values
 
-											$provider_jobTitle = array();
+											// Get Provider Clinical Specialization and Occupational Title
 
-											// Get ID of clinical specialization
+												if ( !isset($uamswp_fad_provider_clinical_specialization) ) {
 
-												if ( !isset($provider_clinical_specialization) ) {
+													// Get ID of clinical specialization
 
-													$provider_clinical_specialization = get_field( 'physician_title', $entity ) ?? array();
+														if ( !isset($provider_clinical_specialization) ) {
 
-												}
-
-											// Add ancestors to the list of ID values
-
-												if ( !isset($provider_clinical_specialization_ancestors) ) {
-
-													if ( $provider_clinical_specialization ) {
-
-														$provider_clinical_specialization = is_array($provider_clinical_specialization) ? $provider_clinical_specialization : array($provider_clinical_specialization);
-														$provider_clinical_specialization_ancestors = $provider_clinical_specialization;
-
-														foreach ( $provider_clinical_specialization as $item ) {
-
-															if ( $item ) {
-
-																$provider_clinical_specialization_ancestors = array_merge(
-																	$provider_clinical_specialization_ancestors,
-																	get_ancestors(
-																		$item, // $object_id  // int // Optional // The ID of the object // Default: 0
-																		'clinical_title', // $object_type // string // Optional // The type of object for which we'll be retrieving ancestors. Accepts a post type or a taxonomy name. // Default: ''
-																		'taxonomy' // $resource_type // string // Optional // Type of resource $object_type is. Accepts 'post_type' or 'taxonomy'. // Default: ''
-																	)
-																);
-
-															}
-
-														} // endforeach
-
-													}
-
-												}
-
-												// Clean up list of ID values
-
-													if ( $provider_clinical_specialization_ancestors ) {
-
-														$provider_clinical_specialization_ancestors = array_filter($provider_clinical_specialization_ancestors);
-														$provider_clinical_specialization_ancestors = array_unique( $provider_clinical_specialization_ancestors, SORT_REGULAR );
-														$provider_clinical_specialization_ancestors = array_values($provider_clinical_specialization_ancestors);
-
-													}
-
-											// Get attributes of the clinical specializations
-
-												if ( $provider_clinical_specialization_ancestors ) {
-
-													foreach ( $provider_clinical_specialization_ancestors as $item ) {
-
-														if ( $item ) {
-
-															$item_term = get_term( $item, 'clinical_title' ) ?? array();
-
-															$item_name = '';
-															$item_occupation_title = '';
-															$item_occupation_title_attr = '';
-
-															if ( is_object($item_term) ) {
-
-																$item_name = $item_term->name ?? '';
-																$item_occupation_title = get_field('clinical_specialization_title', $item_term) ?? $item_name;
-																$item_occupation_title_attr = $item_occupation_title ? uamswp_attr_conversion($item_occupation_title) : '';
-
-															}
-
-															if ( $item_occupation_title_attr ) {
-
-																$provider_jobTitle[] = $item_occupation_title_attr;
-
-															}
+															$provider_clinical_specialization = get_field( 'physician_title', $entity ) ?? null;
 
 														}
 
-													}
+													$uamswp_fad_provider_clinical_specialization = uamswp_fad_provider_clinical_specialization(
+														$provider_clinical_specialization // int // ID of the provider profile
+													);
 
 												}
 
-										// Clean up the array
+											// Get Provider Clinical Occupational Title
 
-											if ( $provider_jobTitle ) {
+												$provider_jobTitle = $uamswp_fad_provider_clinical_specialization['title_array'] ?? array();
 
-												$provider_jobTitle = array_filter($provider_jobTitle);
-												$provider_jobTitle = array_unique( $provider_jobTitle, SORT_REGULAR );
-												$provider_jobTitle = array_values($provider_jobTitle);
+												// Reindex the array
 
-												// If there is only one item, flatten the multi-dimensional array by one step
-
-													uamswp_fad_flatten_multidimensional_array($provider_jobTitle);
-
-											}
+													$provider_jobTitle = array_values($provider_jobTitle);
 
 										// Add to item values
 
