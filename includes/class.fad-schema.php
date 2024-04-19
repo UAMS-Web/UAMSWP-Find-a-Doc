@@ -6693,8 +6693,8 @@
 
 												$provider_specialization_isco08_schema = array(
 													'@type' => 'CategoryCode',
-													'codeValue' => $item, // ISCO-08 code value from Specialty item
-													'description' => $isco08_values[$item]['description'] ?? '', // ISCO-08 description from Specialty item (called "Lead Statement" in "Draft ISCO-08 Group Definitions: Occupations in Health")
+													'codeValue' => $item, // ISCO-08 group code value from Specialty item
+													'description' => $isco08_values[$item]['description'] ?? '', // ISCO-08 group description from Specialty item (called "Lead Statement" in "Draft ISCO-08 Group Definitions: Occupations in Health")
 													'inCodeSet' => array(
 														'@type' => 'CategoryCodeSet',
 														'alternateName' => array(
@@ -6708,7 +6708,7 @@
 															'https://www.ilo.org/public/english/bureau/stat/isco/docs/publication08.pdf'
 														)
 													),
-													'name' => $isco08_values[$item]['name'] ?? '', // ISCO-08 name from Specialty item
+													'name' => $isco08_values[$item]['name'] ?? '' // ISCO-08 group title from Specialty item
 												);
 
 												// Clean up the array
