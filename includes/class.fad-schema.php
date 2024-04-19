@@ -5402,7 +5402,7 @@
 													'Occupational Information Network Standard Occupational Classification Taxonomy'
 												),
 												'dateModified' => '2019',
-												'name' => 'O*Net-SOC',
+												'name' => 'O*NET-SOC',
 												'url' => 'https://www.onetonline.org/'
 											),
 											'name' => $provider_specialization_onetsoc_code_name ?? '', // O*Net-SOC name from Specialty item
