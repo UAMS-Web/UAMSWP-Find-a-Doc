@@ -12469,15 +12469,15 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Base section output array
 
-							$output_oNetSOC = array();
+							$output_onetsoc = array();
 
 						// Get the values
 
 							// Inherit the related O*Net-SOC Occupation Code and Occupation Name from the parent?
 
-								$oNetSOC_inherit_query = get_field( 'clinical_specialization_onetsoc_code_inherit_query', $term ) ?? false; // bool
+								$onetsoc_inherit_query = get_field( 'clinical_specialization_onetsoc_code_inherit_query', $term ) ?? false; // bool
 
-							if ( $oNetSOC_inherit_query ) {
+							if ( $onetsoc_inherit_query ) {
 
 								// Get the ID of the parent term
 
@@ -12489,33 +12489,33 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 								// Get the Related O*Net-SOC Occupation Code values from the parent term
 
-									$output_oNetSOC = $term_parent_value ? ( $term_parent_value['oNetSOC'] ?? null ) : null; // array
+									$output_onetsoc = $term_parent_value ? ( $term_parent_value['onetsoc'] ?? null ) : null; // array
 
 							} else {
 
 								// Get the Related O*Net-SOC Occupation Code value from this term
 
-									$oNetSOC_code = get_field( 'clinical_specialization_onetsoc_code', $term ) ?? null; // string
+									$onetsoc_code = get_field( 'clinical_specialization_onetsoc_code', $term ) ?? null; // string
 
 								// Get the Related O*Net-SOC Occupation Name value from this term
 
-									$oNetSOC_name = get_field( 'clinical_specialization_onetsoc_code_name', $term ) ?? null; // string
+									$onetsoc_name = get_field( 'clinical_specialization_onetsoc_code_name', $term ) ?? null; // string
 
 								// Add the value to the output array
 
 									// Related O*Net-SOC Occupation Code
 
-										if ( $oNetSOC_code ) {
+										if ( $onetsoc_code ) {
 
-											$output_oNetSOC['code'] = $oNetSOC_code;
+											$output_onetsoc['code'] = $onetsoc_code;
 
 										}
 
 									// Related O*Net-SOC Occupation Name
 
-										if ( $oNetSOC_name ) {
+										if ( $onetsoc_name ) {
 
-											$output_oNetSOC['name'] = $oNetSOC_name;
+											$output_onetsoc['name'] = $onetsoc_name;
 
 										}
 
@@ -12523,9 +12523,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Add the section output array to the general output array
 
-							if ( $output_oNetSOC ) {
+							if ( $output_onetsoc ) {
 
-								$output['oNetSOC'] = $output_oNetSOC;
+								$output['onetsoc'] = $output_onetsoc;
 
 							}
 
