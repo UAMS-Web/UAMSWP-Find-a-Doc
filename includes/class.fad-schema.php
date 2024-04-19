@@ -6697,7 +6697,6 @@
 													'description' => $isco08_values[$item]['description'] ?? '', // ISCO-08 description from Specialty item (called "Lead Statement" in "Draft ISCO-08 Group Definitions: Occupations in Health")
 													'inCodeSet' => array(
 														'@type' => 'CategoryCodeSet',
-														'dateModified' => '2016',
 														'name' => 'ISCO-08',
 														'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/isco08/'
 													),
