@@ -6709,7 +6709,6 @@
 														)
 													),
 													'name' => $isco08_values[$item]['name'] ?? '', // ISCO-08 name from Specialty item
-													'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/docs/health.pdf'
 												);
 
 												// Clean up the array
