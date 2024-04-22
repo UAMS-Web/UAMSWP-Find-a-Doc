@@ -33890,16 +33890,6 @@
 									 *      - Organization
 									 */
 
-								// relatedLink [WIP]
-
-									/**
-									 * A link related to this web page, for example to other related web pages.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - URL
-									 */
-
 								// relevantSpecialty
 
 									/**
@@ -34147,6 +34137,16 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Thing
+									 */
+
+								// relatedLink [WIP]
+
+									/**
+									 * A link related to this web page, for example to other related web pages.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - URL
 									 */
 
 								// significantLink [WIP]
