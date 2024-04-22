@@ -12096,7 +12096,8 @@ function limit_to_post_parent( $args, $field, $post ) {
 		// Values for Specific Term
 
 			function uamswp_fad_clinical_specialization_term(
-				int $id // int // ID of the Clinical Specialization term
+				int $id, // int // ID of the Clinical Specialization term
+				bool $get_ancestors = true // bool // Optional // Query for whether to get the values for the term's ancestors
 			) {
 
 				// Base general output array
@@ -12738,6 +12739,55 @@ function limit_to_post_parent( $args, $field, $post ) {
 								$output['schema'] = $output_schema;
 
 							}
+
+					// Ancestor values
+
+						// Base array
+
+							$output_ancestors = array();
+
+						// Get values
+
+							if ( $get_ancestors ) {
+
+								// Get an array of ancestor IDs for the term
+
+									$ancestors = get_ancestors(
+										$id, // int // Optional // The ID of the object (Default: 0)
+										'clinical_title', // string // Optional // The type of object for which we'll be retrieving ancestors; Accepts a post type or a taxonomy name. (Default: '')
+										'taxonomy' // string // Optional // Type of resource $object_type is; Accepts 'post_type' or 'taxonomy' (Default: '')
+									); // int[]
+
+								// Loop through the array of ancestor IDs and get the details
+
+									if ( $ancestors ) {
+
+										foreach ( $ancestors as $ancestor ) {
+
+											$ancestor_item = uamswp_fad_clinical_specialization_term(
+												$ancestor, // int // ID of the Clinical Specialization term
+												false // bool // Optional // Query for whether to get the values for the term's ancestors
+											) ?? null;
+
+											if ( $ancestor_item ) {
+
+												$output_ancestors[$ancestor] = $ancestor_item;
+
+											} // endif ( $ancestor_item )
+
+										} // endforeach ( $ancestors as $ancestor )
+
+									} // endif ( $ancestors )
+
+							} // endif ( $get_ancestors )
+
+						// Add the ancestors output array to the general output array
+
+							if ( $output_ancestors ) {
+
+								$output['ancestors'] = $output_ancestors;
+
+							} // endif ( $output_ancestors )
 
 				// Return the output array
 
