@@ -14898,6 +14898,12 @@
 
 					foreach ( $repeater as $entity ) {
 
+						if ( !$entity ) {
+
+							continue;
+
+						}
+
 						// Retrieve the value of the item transient
 
 							uamswp_fad_get_transient(
@@ -25196,6 +25202,12 @@
 
 					foreach ( $repeater as $entity ) {
 
+						if ( !$entity ) {
+
+							continue;
+
+						}
+
 						// Retrieve the value of the item transient
 
 							uamswp_fad_get_transient(
@@ -32330,6 +32342,12 @@
 
 					foreach ( $repeater as $entity ) {
 
+						if ( !$entity ) {
+
+							continue;
+
+						}
+
 						// Retrieve the value of the item transient
 
 							uamswp_fad_get_transient(
@@ -35539,6 +35557,12 @@
 				// Loop through each clinical resource to add values
 
 					foreach ( $repeater as $entity ) {
+
+						if ( !$entity ) {
+
+							continue;
+
+						}
 
 						// Retrieve the value of the item transient
 
@@ -39833,6 +39857,12 @@
 
 					foreach ( $repeater as $entity ) {
 
+						if ( !$entity ) {
+
+							continue;
+
+						}
+
 						// Retrieve the value of the item transient
 
 							uamswp_fad_get_transient(
@@ -41196,6 +41226,12 @@
 				// Loop through each treatment to add values
 
 					foreach ( $repeater as $entity ) {
+
+						if ( !$entity ) {
+
+							continue;
+
+						}
 
 						// Retrieve the value of the item transient
 
