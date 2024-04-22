@@ -7817,7 +7817,7 @@
 
 										}
 
-									// additionalType
+									// additionalType [excluded]
 
 										/**
 										 * An additional type for the item, typically used for adding more specific types
@@ -7840,12 +7840,6 @@
 										 *
 										 *      - Thing
 										 */
-
-										if ( $output_item_additionalType ) {
-
-											$output_item['additionalType'] = $output_item_additionalType;
-
-										}
 
 									// alternateName
 
@@ -7981,7 +7975,7 @@
 
 										}
 
-									// disambiguatingDescription
+									// disambiguatingDescription [excluded]
 
 										/**
 										 * A sub property of description. A short description of the item used to
@@ -7998,13 +7992,7 @@
 										 *      - Thing
 										 */
 
-										if ( $output_item_disambiguatingDescription ) {
-
-											$output_item['disambiguatingDescription'] = $output_item_disambiguatingDescription;
-
-										}
-
-									// funding
+									// funding [excluded]
 
 										/**
 										 * A Grant that directly or indirectly provide funding or sponsorship for this
@@ -8024,13 +8012,7 @@
 										 * definitions.
 										 */
 
-										if ( $output_item_funding ) {
-
-											$output_item['funding'] = $output_item_funding;
-
-										}
-
-									// guideline
+									// guideline [excluded]
 
 										/**
 										 * A medical guideline related to this entity.
@@ -8040,13 +8022,7 @@
 										 *      - MedicalGuideline
 										 */
 
-										if ( $output_item_guideline ) {
-
-											$output_item['guideline'] = $output_item_guideline;
-
-										}
-
-									// identifier
+									// identifier [excluded]
 
 										/**
 										 * The identifier property represents any kind of identifier for any kind of
@@ -8063,13 +8039,7 @@
 										 *      - URL
 										 */
 
-										if ( $output_item_identifier ) {
-
-											$output_item['identifier'] = $output_item_identifier;
-
-										}
-
-									// image
+									// image [excluded]
 
 										/**
 										 * An image of the item. This can be a URL or a fully described ImageObject.
@@ -8079,12 +8049,6 @@
 										 *      - ImageObject
 										 *      - URL
 										 */
-
-										if ( $output_item_image ) {
-
-											$output_item['image'] = $output_item_image;
-
-										}
 
 									// inCodeSet
 
@@ -8142,7 +8106,7 @@
 
 										}
 
-									// legalStatus
+									// legalStatus [excluded]
 
 										/**
 										 * The drug or supplement's legal status, including any controlled substance
@@ -8155,13 +8119,7 @@
 										 *      - Text
 										 */
 
-										if ( $output_item_legalStatus ) {
-
-											$output_item['legalStatus'] = $output_item_legalStatus;
-
-										}
-
-									// mainEntityOfPage
+									// mainEntityOfPage [excluded]
 
 										/**
 										 * Indicates a page (or other CreativeWork) for which this thing is the main
@@ -8181,13 +8139,7 @@
 										 *      - Thing
 										 */
 
-										if ( $output_item_mainEntityOfPage ) {
-
-											$output_item['mainEntityOfPage'] = $output_item_mainEntityOfPage;
-
-										}
-
-									// medicineSystem
+									// medicineSystem [excluded]
 
 										/**
 										 * The system of medicine that includes this MedicalEntity
@@ -8197,12 +8149,6 @@
 										 *
 										 *      - MedicineSystem
 										 */
-
-										if ( $output_item_medicineSystem ) {
-
-											$output_item['medicineSystem'] = $output_item_medicineSystem;
-
-										}
 
 									// name
 
@@ -8226,7 +8172,7 @@
 
 										}
 
-									// potentialAction
+									// potentialAction [excluded]
 
 										/**
 										 * Indicates a potential Action, which describes an idealized action in which this
@@ -8241,13 +8187,7 @@
 										 *      - Thing
 										 */
 
-										if ( $output_item_potentialAction ) {
-
-											$output_item['potentialAction'] = $output_item_potentialAction;
-
-										}
-
-									// recognizingAuthority
+									// recognizingAuthority [excluded]
 
 										/**
 										 * If applicable, the organization that officially recognizes this entity as part
@@ -8258,13 +8198,7 @@
 										 *      - Organization
 										 */
 
-										if ( $output_item_recognizingAuthority ) {
-
-											$output_item['recognizingAuthority'] = $output_item_recognizingAuthority;
-
-										}
-
-									// relevantSpecialty
+									// relevantSpecialty [excluded]
 
 										/**
 										 * If applicable, a medical specialty in which this entity is relevant.
@@ -8274,13 +8208,7 @@
 										 *      - MedicalSpecialty (enumeration type)
 										 */
 
-										if ( $output_item_relevantSpecialty ) {
-
-											$output_item['relevantSpecialty'] = $output_item_relevantSpecialty;
-
-										}
-
-									// sameAs
+									// sameAs [excluded]
 
 										/**
 										 * URL of a reference Web page that unambiguously indicates the item's identity
@@ -8296,13 +8224,7 @@
 										 *      - Thing
 										 */
 
-										if ( $output_item_sameAs ) {
-
-											$output_item['sameAs'] = $output_item_sameAs;
-
-										}
-
-									// study
+									// study [excluded]
 
 										/**
 										 * A medical study or trial related to this entity.
@@ -8312,13 +8234,7 @@
 										 *      - MedicalStudy
 										 */
 
-										if ( $output_item_study ) {
-
-											$output_item['study'] = $output_item_study;
-
-										}
-
-									// subjectOf
+									// subjectOf [excluded]
 
 										/**
 										 * A CreativeWork or Event about this Thing.
@@ -8334,12 +8250,6 @@
 										 *
 										 *      - Thing
 										 */
-
-										if ( $output_item_subjectOf ) {
-
-											$output_item['subjectOf'] = $output_item_subjectOf;
-
-										}
 
 									// termCode
 
