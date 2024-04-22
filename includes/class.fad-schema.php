@@ -24476,83 +24476,73 @@
 
 												$provider_knowsAbout = array();
 
-											// Get clinical specializations
+											// Get MedicalCode from clinical specializations
 
-												// Get ID of clinical specialization
+												// Get Provider Clinical Specialization and Occupational Title
 
-													if ( !isset($provider_clinical_specialization) ) {
+													if ( !isset($uamswp_fad_clinical_specialization_provider) ) {
 
-														$provider_clinical_specialization = get_field( 'physician_title', $entity ) ?? array();
+														// Get ID of clinical specialization
+
+															if ( !isset($provider_clinical_specialization) ) {
+
+																$provider_clinical_specialization = get_field( 'physician_title', $entity ) ?? null;
+
+															}
+
+														$uamswp_fad_clinical_specialization_provider = uamswp_fad_clinical_specialization_provider(
+															$entity // int // ID of the provider profile
+														);
 
 													}
 
-												// Add ancestors to the list of ID values
+												// Loop through the clinical specializations details to get the MedicalCode values
 
-													if ( !isset($provider_clinical_specialization_ancestors) ) {
+													$provider_clinical_specialization_MedicalCode = array();
 
-														if ( $provider_clinical_specialization ) {
+													if (
+														isset($uamswp_fad_clinical_specialization_provider['detail_array'])
+														&&
+														$uamswp_fad_clinical_specialization_provider['detail_array']
+													) {
 
-															$provider_clinical_specialization = is_array($provider_clinical_specialization) ? $provider_clinical_specialization : array($provider_clinical_specialization);
-															$provider_clinical_specialization_ancestors = $provider_clinical_specialization;
+														foreach ( $uamswp_fad_clinical_specialization_provider['detail_array'] as $item ) {
 
-															foreach ( $provider_clinical_specialization as $item ) {
+															if (
+																isset($item['schema']['MedicalCode'])
+																&&
+																$item['schema']['MedicalCode']
+															) {
 
-																if ( $item ) {
+																$provider_clinical_specialization_MedicalCode[] = $item['schema']['MedicalCode'];
 
-																	$provider_clinical_specialization_ancestors = array_merge(
-																		$provider_clinical_specialization_ancestors,
-																		get_ancestors(
-																			$item, // $object_id  // int // Optional // The ID of the object // Default: 0
-																			'clinical_title', // $object_type // string // Optional // The type of object for which we'll be retrieving ancestors. Accepts a post type or a taxonomy name. // Default: ''
-																			'taxonomy' // $resource_type // string // Optional // Type of resource $object_type is. Accepts 'post_type' or 'taxonomy'. // Default: ''
-																		)
-																	);
-
-																}
-
-															} // endforeach
+															}
 
 														}
 
 													}
-
-													// Clean up list of ID values
-
-														if ( $provider_clinical_specialization_ancestors ) {
-
-															$provider_clinical_specialization_ancestors = array_filter($provider_clinical_specialization_ancestors);
-															$provider_clinical_specialization_ancestors = array_unique( $provider_clinical_specialization_ancestors, SORT_REGULAR );
-															$provider_clinical_specialization_ancestors = array_values($provider_clinical_specialization_ancestors);
-
-														}
-
-												// Get attributes of the clinical specializations
-
-													$provider_clinical_specialization_knowsAbout = uamswp_fad_schema_nucc_code_set_id(
-														$provider_clinical_specialization_ancestors // mixed // Required // List of Clinical Specialization term IDs
-													);
 
 												// Add to knowsAbout list array
 
-													$provider_clinical_specialization_knowsAbout = $provider_clinical_specialization_knowsAbout ?? null;
+													$provider_clinical_specialization_MedicalCode = $provider_clinical_specialization_MedicalCode ?? null;
 
-													if ( $provider_clinical_specialization_knowsAbout ) {
+													if ( $provider_clinical_specialization_MedicalCode ) {
 
 														$provider_knowsAbout = uamswp_fad_schema_merge_values(
 															$provider_knowsAbout, // mixed // Required // Initial schema item property value
-															$provider_clinical_specialization_knowsAbout // mixed // Required // Incoming schema item property value
+															$provider_clinical_specialization_MedicalCode // mixed // Required // Incoming schema item property value
 														);
 
 													}
 
 												// Get values for keywords property
 
-													$provider_clinical_specialization_knowsAbout = $provider_clinical_specialization_knowsAbout ?? null;
+													$provider_clinical_specialization_MedicalCode = $provider_clinical_specialization_MedicalCode ?? null;
 
-													if ( $provider_clinical_specialization_knowsAbout ) {
+													if ( $provider_clinical_specialization_MedicalCode ) {
 
-														$provider_clinical_specialization_keywords = uamswp_fad_schema_property_values(
-															$provider_clinical_specialization_knowsAbout, // array // Required // Property values from which to extract specific values
+														$provider_clinical_specialization_MedicalCode_keywords = uamswp_fad_schema_property_values(
+															$provider_clinical_specialization_MedicalCode, // array // Required // Property values from which to extract specific values
 															array( 'name', 'alternateName', 'codeValue' ) // mixed // Required // List of properties from which to collect values
 														);
 
@@ -24560,13 +24550,13 @@
 
 													// Merge clinical specializations keywords value into keywords
 
-														$provider_clinical_specialization_keywords = $provider_clinical_specialization_keywords ?? null;
+														$provider_clinical_specialization_MedicalCode_keywords = $provider_clinical_specialization_MedicalCode_keywords ?? null;
 
-														if ( $provider_clinical_specialization_keywords ) {
+														if ( $provider_clinical_specialization_MedicalCode_keywords ) {
 
 															$provider_keywords = uamswp_fad_schema_merge_values(
 																$provider_keywords, // mixed // Required // Initial schema item property value
-																$provider_clinical_specialization_keywords // mixed // Required // Incoming schema item property value
+																$provider_clinical_specialization_MedicalCode_keywords // mixed // Required // Incoming schema item property value
 															);
 
 														}
