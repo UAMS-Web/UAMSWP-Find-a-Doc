@@ -2274,7 +2274,7 @@
 			// Health Care Provider Taxonomy Code Set taxonomy items
 
 				$nucc_list = uamswp_fad_schema_nucc_code_set_id(
-					$nucc, // mixed // Required // List of clinical specialization IDs
+					$nucc, // mixed // Required // List of Clinical Specialization term IDs
 					$code_list // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
 				);
 
@@ -8334,23 +8334,29 @@
 		// Add data to an array defining schema data for the Health Care Provider Taxonomy code set from Clinical Specialization ID values
 
 			function uamswp_fad_schema_nucc_code_set_id(
-				$specializations, // mixed // Required // List of clinical specialization IDs
+				$specializations, // mixed // Required // List of Clinical Specialization term IDs
 				array $output = array() // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
 			) {
 
 				// Check / define variables
 
-					if ( !$specializations ) {
+					// Convert term ID argument into a list array (if not already a list array)
 
-						return $output;
+						if ( !$specializations ) {
 
-					}
+							return $output;
 
-					$specializations = is_array($specializations) ? $specializations : array($specializations);
-					$specializations = array_is_list($specializations) ? $specializations : array($specializations);
-					$output = is_array($output) ? $output : array($output);
-					$output = array_is_list($output) ? $output : array($output);
+						}
 
+					// Convert Clinical Specialization term ID value into a list array (if not already a list array)
+
+						$specializations = is_array($specializations) ? $specializations : array($specializations);
+						$specializations = array_is_list($specializations) ? $specializations : array($specializations);
+
+					// Convert output array into a list array (if not already a list array)
+
+						$output = is_array($output) ? $output : array($output);
+						$output = array_is_list($output) ? $output : array($output);
 
 				// Loop through each Health Care Provider Taxonomy Code Set taxonomy item, adding values to the output array
 
@@ -24468,7 +24474,7 @@
 												// Get attributes of the clinical specializations
 
 													$provider_clinical_specialization_knowsAbout = uamswp_fad_schema_nucc_code_set_id(
-														$provider_clinical_specialization_ancestors // mixed // Required // List of clinical specialization IDs
+														$provider_clinical_specialization_ancestors // mixed // Required // List of Clinical Specialization term IDs
 													);
 
 												// Add to knowsAbout list array
