@@ -12702,9 +12702,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 								$output_schema['occupationalCategory'] = $occupationalCategory;
 
-						// knowsAbout
+						// MedicalCode (Health Care Provider Taxonomy Code Set)
 
-							$output_schema['knowsAbout'] = uamswp_fad_schema_nucc_code_set(
+							$output_schema['MedicalCode'] = uamswp_fad_schema_nucc_code_set(
 								$codeSet_code, // string // Required // Health Care Provider Taxonomy code
 								$codeSet_name_display, // string|array // Optional // alternateName
 								$codeSet_definition, // string // Optional // description
