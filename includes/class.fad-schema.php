@@ -42500,7 +42500,7 @@
 
 		function uamswp_fad_schema_add_to_item_values(
 			string $schema_type, // string // Required // The @type value for the schema item
-			array &$schema_type_list, // array // Required // The list array for the schema item to which to add the property value
+			&$schema_type_list, // array // Required // The list array for the schema item to which to add the property value
 			string $property_name, // string // Required // Name of schema property
 			$property_value, // mixed // Required // Variable to add as the property value
 			array &$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -42516,6 +42516,8 @@
 				!$schema_type
 				||
 				!$schema_type_list
+				||
+				!is_array($schema_type_list)
 				||
 				!$property_name
 				||
