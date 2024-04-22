@@ -32540,7 +32540,11 @@
 
 										// MedicalWebPage
 
-											if ( $expertise_url ) {
+											if (
+												isset($expertise_item_MedicalWebPage)
+												&&
+												$expertise_url
+											) {
 
 												$expertise_item_MedicalWebPage['url'] = $expertise_url;
 
@@ -32548,7 +32552,11 @@
 
 										// MedicalEntity
 
-											if ( $expertise_url ) {
+											if (
+												isset($expertise_item_MedicalEntity)
+												&&
+												$expertise_url
+											) {
 
 												$expertise_item_MedicalEntity['url'] = $expertise_url;
 
@@ -32564,7 +32572,11 @@
 
 										// Add to item values
 
-											if ( $MedicalWebPage_type ) {
+											if (
+												isset($expertise_item_MedicalWebPage)
+												&&
+												$MedicalWebPage_type
+											) {
 
 												$expertise_item_MedicalWebPage['@type'] = $MedicalWebPage_type;
 
@@ -32578,7 +32590,11 @@
 
 										// Add to item values
 
-											if ( $MedicalEntity_type ) {
+											if (
+												isset($expertise_item_MedicalEntity)
+												&&
+												$MedicalEntity_type
+											) {
 
 												$expertise_item_MedicalEntity['@type'] = $MedicalEntity_type;
 
@@ -32596,7 +32612,11 @@
 
 										// Add to item values
 
-											if ( $MedicalWebPage_id ) {
+											if (
+												isset($expertise_item_MedicalWebPage)
+												&&
+												$MedicalWebPage_id
+											) {
 
 												$expertise_item_MedicalWebPage['@id'] = $MedicalWebPage_id;
 												$node_identifier_list[] = $expertise_item_MedicalWebPage['@id']; // Add to the list of existing node identifiers
@@ -32613,7 +32633,11 @@
 
 										// Add to item values
 
-											if ( $MedicalEntity_id ) {
+											if (
+												isset($expertise_item_MedicalEntity)
+												&&
+												$MedicalEntity_id
+											) {
 
 												$expertise_item_MedicalEntity['@id'] = $MedicalEntity_id;
 												$node_identifier_list[] = $expertise_item_MedicalEntity['@id']; // Add to the list of existing node identifiers
@@ -32640,15 +32664,27 @@
 										);
 
 									if (
-										array_intersect(
-											$expertise_properties_map[$MedicalWebPage_type]['properties'],
-											$expertise_organization_common
+										(
+											(
+												isset($expertise_item_MedicalWebPage)
+												&&
+												array_intersect(
+													$expertise_properties_map[$MedicalWebPage_type]['properties'],
+													$expertise_organization_common
+												)
+											)
+											||
+											(
+												isset($expertise_item_MedicalEntity)
+												&&
+												array_intersect(
+													$expertise_properties_map[$MedicalEntity_type]['properties'],
+													$expertise_organization_common
+												)
+											)
 										)
-										||
-										array_intersect(
-											$expertise_properties_map[$MedicalEntity_type]['properties'],
-											$expertise_organization_common
-										)
+										&&
+										$nesting_level == 0
 									) {
 
 										// Get values
@@ -32903,14 +32939,22 @@
 									 */
 
 									if (
-										in_array(
-											'name',
-											$expertise_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($expertise_item_MedicalWebPage)
+											&&
+											in_array(
+												'name',
+												$expertise_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'name',
-											$expertise_properties_map[$MedicalEntity_type]['properties']
+										(
+											isset($expertise_item_MedicalEntity)
+											&&
+											in_array(
+												'name',
+												$expertise_properties_map[$MedicalEntity_type]['properties']
+											)
 										)
 									) {
 
@@ -32963,9 +33007,13 @@
 									 */
 
 									if (
-										in_array(
-											'about',
-											$expertise_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($expertise_item_MedicalWebPage)
+											&&
+											in_array(
+												'about',
+												$expertise_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -33031,14 +33079,22 @@
 									 */
 
 									if (
-										in_array(
-											'additionalType',
-											$expertise_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($expertise_item_MedicalWebPage)
+											&&
+											in_array(
+												'additionalType',
+												$expertise_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'additionalType',
-											$expertise_properties_map[$MedicalEntity_type]['properties']
+										(
+											isset($expertise_item_MedicalEntity)
+											&&
+											in_array(
+												'additionalType',
+												$expertise_properties_map[$MedicalEntity_type]['properties']
+											)
 										)
 									) {
 
@@ -33127,14 +33183,22 @@
 
 									if (
 										(
-											in_array(
-												'alternateName',
-												$expertise_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($expertise_item_MedicalWebPage)
+												&&
+												in_array(
+													'alternateName',
+													$expertise_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'alternateName',
-												$expertise_properties_map[$MedicalEntity_type]['properties']
+											(
+												isset($expertise_item_MedicalEntity)
+												&&
+												in_array(
+													'alternateName',
+													$expertise_properties_map[$MedicalEntity_type]['properties']
+												)
 											)
 										)
 										&&
@@ -33222,14 +33286,22 @@
 									 */
 
 									if (
-										in_array(
-											'code',
-											$expertise_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($expertise_item_MedicalWebPage)
+											&&
+											in_array(
+												'code',
+												$expertise_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'code',
-											$expertise_properties_map[$MedicalEntity_type]['properties']
+										(
+											isset($expertise_item_MedicalEntity)
+											&&
+											in_array(
+												'code',
+												$expertise_properties_map[$MedicalEntity_type]['properties']
+											)
 										)
 									) {
 
@@ -33398,14 +33470,22 @@
 									 */
 
 									if (
-										in_array(
-											'image',
-											$expertise_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($expertise_item_MedicalWebPage)
+											&&
+											in_array(
+												'image',
+												$expertise_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'image',
-											$expertise_properties_map[$MedicalEntity_type]['properties']
+										(
+											isset($expertise_item_MedicalEntity)
+											&&
+											in_array(
+												'image',
+												$expertise_properties_map[$MedicalEntity_type]['properties']
+											)
 										)
 									) {
 
@@ -33547,14 +33627,22 @@
 
 									if (
 										(
-											in_array(
-												'mainContentOfPage',
-												$expertise_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($expertise_item_MedicalWebPage)
+												&&
+												in_array(
+													'mainContentOfPage',
+													$expertise_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'mainContentOfPage',
-												$expertise_properties_map[$MedicalEntity_type]['properties']
+											(
+												isset($expertise_item_MedicalEntity)
+												&&
+												in_array(
+													'mainContentOfPage',
+													$expertise_properties_map[$MedicalEntity_type]['properties']
+												)
 											)
 										)
 										&&
@@ -33621,14 +33709,22 @@
 
 									if (
 										(
-											in_array(
-												'medicineSystem',
-												$expertise_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($expertise_item_MedicalWebPage)
+												&&
+												in_array(
+													'medicineSystem',
+													$expertise_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'medicineSystem',
-												$expertise_properties_map[$MedicalEntity_type]['properties']
+											(
+												isset($expertise_item_MedicalEntity)
+												&&
+												in_array(
+													'medicineSystem',
+													$expertise_properties_map[$MedicalEntity_type]['properties']
+												)
 											)
 										)
 										&&
@@ -33816,14 +33912,22 @@
 
 									if (
 										(
-											in_array(
-												'relevantSpecialty',
-												$expertise_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($expertise_item_MedicalWebPage)
+												&&
+												in_array(
+													'relevantSpecialty',
+													$expertise_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'relevantSpecialty',
-												$expertise_properties_map[$MedicalEntity_type]['properties']
+											(
+												isset($expertise_item_MedicalEntity)
+												&&
+												in_array(
+													'relevantSpecialty',
+													$expertise_properties_map[$MedicalEntity_type]['properties']
+												)
 											)
 										)
 										&&
@@ -33884,14 +33988,22 @@
 									 */
 
 									if (
-										in_array(
-											'sameAs',
-											$expertise_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($expertise_item_MedicalWebPage)
+											&&
+											in_array(
+												'sameAs',
+												$expertise_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'sameAs',
-											$expertise_properties_map[$MedicalEntity_type]['properties']
+										(
+											isset($expertise_item_MedicalEntity)
+											&&
+											in_array(
+												'sameAs',
+												$expertise_properties_map[$MedicalEntity_type]['properties']
+											)
 										)
 									) {
 
