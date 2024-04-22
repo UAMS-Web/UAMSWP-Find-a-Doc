@@ -22128,7 +22128,7 @@
 														}
 
 													$uamswp_fad_clinical_specialization_provider = uamswp_fad_clinical_specialization_provider(
-														$provider_clinical_specialization // int // ID of the provider profile
+														$entity // int // ID of the provider profile
 													);
 
 												}
