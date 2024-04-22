@@ -12531,6 +12531,10 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 					// Related ISCO-08 Code values
 
+						// Base section output array
+
+							$output_isco08 = array();
+
 						// Get the values
 
 							// Inherit the related ISCO-08 Code from the parent?
