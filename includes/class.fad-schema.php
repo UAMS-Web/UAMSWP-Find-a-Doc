@@ -2207,6 +2207,23 @@
 
 									// inCodeSet
 
+										/**
+										 * A CategoryCodeSet that contains this category code.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - CategoryCodeSet
+										 *      - URL
+										 *
+										 * Used on these types:
+										 *
+										 *      - CategoryCode
+										 *
+										 * As of 22 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+										 * feedback and adoption from applications and websites can help improve their
+										 * definitions.
+										 */
+
 										$inCodeSet = $MedicalCode_values[$codingSystem] ?? array();
 
 										if ( $inCodeSet ) {
@@ -2353,7 +2370,7 @@
 			 *
 			 * Values expected to be one of these types:
 			 *
-			 *     - MedicineSystem
+			 *      - MedicineSystem
 			 */
 
 			// Base list array
@@ -2405,7 +2422,7 @@
 			 *
 			 * Values expected to be one of these types:
 			 *
-			 *     - URL
+			 *      - URL
 			 */
 
 			// Check / define variables
@@ -2496,12 +2513,16 @@
 			 * case of text values, the class label should follow the schema.org style guide.
 			 *
 			 * Subproperty of:
-			 *     - rdf:type
+			 *      - rdf:type
 			 *
 			 * Values expected to be one of these types:
 			 *
-			 *     - Text
-			 *     - URL
+			 *      - Text
+			 *      - URL
+			 *
+			 * Used on these types:
+			 *
+			 *      - Thing
 			 */
 
 			// Check / define variables
@@ -3222,6 +3243,18 @@
 
 							// alternateName
 
+								/**
+								 * An alias for the item.
+								 *
+								 * Expected Type:
+								 *
+								 *      - Text
+								 *
+								 * Used on these types:
+								 *
+								 *      - Thing
+								 */
+
 								// Language native name
 
 									$item_name_native = get_field( 'language_name_native', $item_term ) ?? '';
@@ -3257,6 +3290,16 @@
 										}
 
 							// sameAs
+
+								/**
+								 * URL of a reference Web page that unambiguously indicates the item's identity
+								 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+								 * website).
+								 *
+								 * Expected Type:
+								 *
+								 *      - URL
+								 */
 
 								// Get sameAs repeater field value
 
@@ -3421,6 +3464,14 @@
 
 						// name
 
+							/**
+							 * The name of the item.
+							 *
+							 * Expected Type:
+							 *
+							 *      - Text
+							 */
+
 							$association_name = $association_term->name;
 
 							// Add name to list of association names
@@ -3440,6 +3491,18 @@
 								}
 
 						// alternateName
+
+							/**
+							 * An alias for the item.
+							 *
+							 * Expected Type:
+							 *
+							 *      - Text
+							 *
+							 * Used on these types:
+							 *
+							 *      - Thing
+							 */
 
 							// Get alternateName repeater field value
 
@@ -3466,6 +3529,16 @@
 
 						// sameAs
 
+							/**
+							 * URL of a reference Web page that unambiguously indicates the item's identity
+							 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+							 * website).
+							 *
+							 * Expected Type:
+							 *
+							 *      - URL
+							 */
+
 							// Get sameAs repeater field value
 
 								$association_sameAs_array = get_field( 'schema_sameas', $association_term ) ?? array();
@@ -3490,6 +3563,14 @@
 								}
 
 						// url (Official Website)
+
+							/**
+							 * URL of the item.
+							 *
+							 * Expected Type:
+							 *
+							 *      - URL
+							 */
 
 							$association_url = get_field( 'schema_url', $association_term ) ?? '';
 
@@ -3659,10 +3740,17 @@
 										 * can be added without their being an appropriate schema to reference. In the
 										 * case of text values, the class label should follow the schema.org style guide.
 										 *
-										 * Expected Type:
+										 * Subproperty of:
+										 *      - rdf:type
+										 *
+										 * Values expected to be one of these types:
 										 *
 										 *      - Text
 										 *      - URL
+										 *
+										 * Used on these types:
+										 *
+										 *      - Thing
 										 */
 
 										$item_additionalType = 'https://www.wikidata.org/wiki/Q4931289'; // Wikidata item for 'board certification'
@@ -3676,6 +3764,10 @@
 										 * Expected Type:
 										 *
 										 *      - Text
+										 *
+										 * Used on these types:
+										 *
+										 *      - Thing
 										 */
 
 										// Get alternateName repeater field value
@@ -3758,6 +3850,18 @@
 
 															// alternateName
 
+																/**
+																 * An alias for the item.
+																 *
+																 * Expected Type:
+																 *
+																 *      - Text
+																 *
+																 * Used on these types:
+																 *
+																 *      - Thing
+																 */
+
 																// Get alternateName repeater field value
 
 																	$item_issuedBy_alternateName_repeater = get_field( 'schema_alternatename', $item_issuedBy_term ) ?? array();
@@ -3782,6 +3886,14 @@
 
 															// name
 
+																/**
+																 * The name of the item.
+																 *
+																 * Expected Type:
+																 *
+																 *      - Text
+																 */
+
 																// Get the term name
 
 																	$item_issuedBy_name = $item_issuedBy_term->name ?? '';
@@ -3791,6 +3903,16 @@
 																	$item_issuedBy['name'] = $item_issuedBy_name ? uamswp_attr_conversion($item_issuedBy_name) : '';
 
 															// sameAs
+
+																/**
+																 * URL of a reference Web page that unambiguously indicates the item's identity
+																 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+																 * website).
+																 *
+																 * Expected Type:
+																 *
+																 *      - URL
+																 */
 
 																// Get sameAs repeater field value
 
@@ -3815,6 +3937,14 @@
 																	$item_issuedBy['sameAs'] = $item_issuedBy_sameAs;
 
 															// url
+
+																/**
+																 * URL of the item.
+																 *
+																 * Expected Type:
+																 *
+																 *      - URL
+																 */
 
 																// Query: Does this specialty or subspecialty certificate have a webpage on the certifying body's official website?
 
@@ -3886,15 +4016,20 @@
 
 										/**
 										 * Indicates a page (or other CreativeWork) for which this thing is the main
-										 * entity being described.
+										 * entity being described. See background notes for details.
 										 *
-										 * See background notes [https://schema.org/docs/datamodel.html#mainEntityBackground]
-										 * for details.
+										 * Inverse property:
 										 *
-										 * Expected Type:
+										 *      - mainEntity
+										 *
+										 * Values expected to be one of these types:
 										 *
 										 *      - CreativeWork
 										 *      - URL
+										 *
+										 * Used on these types:
+										 *
+										 *      - Thing
 										 */
 
 										$item_mainEntityOfPage = get_field( 'schema_url', $item_term ) ?? '';
@@ -4667,6 +4802,14 @@
 
 								// name (full name of the clinical degree or credential)
 
+									/**
+									 * The name of the item.
+									 *
+									 * Expected Type:
+									 *
+									 *      - Text
+									 */
+
 									// Get value
 
 										$credential_name = '';
@@ -4701,6 +4844,14 @@
 
 								// url
 
+									/**
+									 * URL of the item.
+									 *
+									 * Expected Type:
+									 *
+									 *      - URL
+									 */
+
 									// Get value
 
 										$credential_url = '';
@@ -4724,6 +4875,18 @@
 										}
 
 								// alternateName (e.g., abbreviation of the clinical degree or credential)
+
+									/**
+									 * An alias for the item.
+									 *
+									 * Expected Type:
+									 *
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
+									 */
 
 									// Get values
 
@@ -4841,6 +5004,14 @@
 
 																// name
 
+																	/**
+																	 * The name of the item.
+																	 *
+																	 * Expected Type:
+																	 *
+																	 *      - Text
+																	 */
+
 																	// Get value
 
 																		$item_name = '';
@@ -4877,6 +5048,14 @@
 
 																// url
 
+																	/**
+																	 * URL of the item.
+																	 *
+																	 * Expected Type:
+																	 *
+																	 *      - URL
+																	 */
+
 																	// Get value
 
 																		$item_url = '';
@@ -4900,6 +5079,18 @@
 																		}
 
 																// alternateName
+
+																	/**
+																	 * An alias for the item.
+																	 *
+																	 * Expected Type:
+																	 *
+																	 *      - Text
+																	 *
+																	 * Used on these types:
+																	 *
+																	 *      - Thing
+																	 */
 
 																	// Get alternateName repeater field value
 
@@ -4931,6 +5122,16 @@
 																		}
 
 																// sameAs
+
+																	/**
+																	 * URL of a reference Web page that unambiguously indicates the item's identity
+																	 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+																	 * website).
+																	 *
+																	 * Expected Type:
+																	 *
+																	 *      - URL
+																	 */
 
 																	// Base array
 
@@ -5038,6 +5239,16 @@
 										}
 
 								// sameAs
+
+									/**
+									 * URL of a reference Web page that unambiguously indicates the item's identity
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+									 * website).
+									 *
+									 * Expected Type:
+									 *
+									 *      - URL
+									 */
 
 									// Get values
 
@@ -5271,6 +5482,18 @@
 
 				// alternateName (alternate clinical occupation title value from Clinical Specialization item)
 
+					/**
+					 * An alias for the item.
+					 *
+					 * Expected Type:
+					 *
+					 *      - Text
+					 *
+					 * Used on these types:
+					 *
+					 *      - Thing
+					 */
+
 					if ( $alternateName ) {
 
 						$output_item['alternateName'] = $alternateName;
@@ -5279,6 +5502,26 @@
 
 				// description
 
+					/**
+					 * A description of the item.
+					 *
+					 * Values expected to be one of these types:
+					 *
+					 *      - Text
+					 *      - TextObject
+					 *
+					 * Used on these types:
+					 *
+					 *      - Thing
+					 *
+					 * Sub-properties:
+					 *
+					 *      - disambiguatingDescription
+					 *      - interpretedAsClaim
+					 *      - originalMediaContextDescription
+					 *      - sha256
+					 */
+
 					if ( $description ) {
 
 						$output_item['description'] = $description;
@@ -5286,6 +5529,14 @@
 					}
 
 				// name (clinical occupation title value from Clinical Specialization item)
+
+					/**
+					 * The name of the item.
+					 *
+					 * Expected Type:
+					 *
+					 *      - Text
+					 */
 
 					if ( $name ) {
 
@@ -5326,7 +5577,7 @@
 					 *
 					 * Values expected to be one of these types:
 					 *
-					 *     - URL
+					 *      - URL
 					 */
 
 					if ( $sameAs ) {
@@ -5408,6 +5659,18 @@
 
 							// alternateName (alternate clinical occupation title value from Clinical Specialization item)
 
+								/**
+								 * An alias for the item.
+								 *
+								 * Expected Type:
+								 *
+								 *      - Text
+								 *
+								 * Used on these types:
+								 *
+								 *      - Thing
+								 */
+
 								// Base array
 
 									$alternateName = array();
@@ -5430,9 +5693,37 @@
 
 							// description
 
+								/**
+								 * A description of the item.
+								 *
+								 * Values expected to be one of these types:
+								 *
+								 *      - Text
+								 *      - TextObject
+								 *
+								 * Used on these types:
+								 *
+								 *      - Thing
+								 *
+								 * Sub-properties:
+								 *
+								 *      - disambiguatingDescription
+								 *      - interpretedAsClaim
+								 *      - originalMediaContextDescription
+								 *      - sha256
+								 */
+
 								$description = get_field( 'clinical_specialization_definition', $specialization_term ) ?? '';
 
 							// name (clinical occupation title value from Clinical Specialization item)
+
+								/**
+								 * The name of the item.
+								 *
+								 * Expected Type:
+								 *
+								 *      - Text
+								 */
 
 								$name = get_field( 'clinical_specialization_title', $specialization_term ) ?? '';
 
@@ -5473,7 +5764,7 @@
 								 *
 								 * Values expected to be one of these types:
 								 *
-								 *     - URL
+								 *      - URL
 								 */
 
 								// Base array
@@ -6582,6 +6873,23 @@
 
 					// codeValue
 
+						/**
+						 * A short textual code that uniquely identifies the value.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *      - Text
+						 *
+						 * Used on these types:
+						 *
+						 *      - CategoryCode
+						 *      - MedicalCode
+						 *
+						 * As of 22 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+						 * feedback and adoption from applications and websites can help improve their
+						 * definitions.
+						 */
+
 						if ( $code ) {
 
 							$output_item['codeValue'] = $code; // ISCO-08 group code
@@ -6589,6 +6897,26 @@
 						}
 
 					// description
+
+						/**
+						 * A description of the item.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *      - Text
+						 *      - TextObject
+						 *
+						 * Used on these types:
+						 *
+						 *      - Thing
+						 *
+						 * Sub-properties:
+						 *
+						 *      - disambiguatingDescription
+						 *      - interpretedAsClaim
+						 *      - originalMediaContextDescription
+						 *      - sha256
+						 */
 
 						$description = $isco08_values[$code]['description'] ?? null; // ISCO-08 group definition/description
 
@@ -6599,6 +6927,23 @@
 						}
 
 					// inCodeSet
+
+						/**
+						 * A CategoryCodeSet that contains this category code.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *      - CategoryCodeSet
+						 *      - URL
+						 *
+						 * Used on these types:
+						 *
+						 *      - CategoryCode
+						 *
+						 * As of 22 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+						 * feedback and adoption from applications and websites can help improve their
+						 * definitions.
+						 */
 
 						$output_item['inCodeSet'] = array(
 							'@type' => 'CategoryCodeSet',
@@ -6615,6 +6960,14 @@
 						);
 
 					// name
+
+						/**
+						 * The name of the item.
+						 *
+						 * Expected Type:
+						 *
+						 *      - Text
+						 */
 
 						$name = $isco08_values[$code]['name'] ?? null; // ISCO-08 group title
 
