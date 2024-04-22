@@ -32934,23 +32934,23 @@
 								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
 
-							if (
-								!empty( $expertise_item )
-								&&
+						if (
+							!empty( $expertise_item )
+							&&
+							(
 								(
-									(
-										isset($expertise_item['MedicalWebPage'])
-										&&
-										!empty($expertise_item['MedicalWebPage'])
-									)
-									||
-									(
-										isset($expertise_item['MedicalEntity'])
-										&&
-										!empty($expertise_item['MedicalEntity'])
-									)
+									isset($expertise_item['MedicalWebPage'])
+									&&
+									!empty($expertise_item['MedicalWebPage'])
 								)
-							) {
+								||
+								(
+									isset($expertise_item['MedicalEntity'])
+									&&
+									!empty($expertise_item['MedicalEntity'])
+								)
+							)
+						) {
 
 							/**
 							 * The transient exists.
