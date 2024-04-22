@@ -7957,7 +7957,7 @@
 										 *      - sha256
 										 */
 
-										$output_item_description = get_field( 'clinical_specialization_definition', $term ) ?? ''; // Use post title as fallback value
+										$output_item_description = get_field( 'clinical_specialization_definition', $term ) ?? '';
 
 										// Clean up value
 
