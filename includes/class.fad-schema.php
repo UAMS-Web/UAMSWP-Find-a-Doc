@@ -22119,14 +22119,6 @@
 
 												if ( !isset($uamswp_fad_clinical_specialization_provider) ) {
 
-													// Get ID of clinical specialization
-
-														if ( !isset($provider_clinical_specialization) ) {
-
-															$provider_clinical_specialization = get_field( 'physician_title', $entity ) ?? null;
-
-														}
-
 													$uamswp_fad_clinical_specialization_provider = uamswp_fad_clinical_specialization_provider(
 														$entity // int // ID of the provider profile
 													);
@@ -24481,14 +24473,6 @@
 												// Get Provider Clinical Specialization and Occupational Title
 
 													if ( !isset($uamswp_fad_clinical_specialization_provider) ) {
-
-														// Get ID of clinical specialization
-
-															if ( !isset($provider_clinical_specialization) ) {
-
-																$provider_clinical_specialization = get_field( 'physician_title', $entity ) ?? null;
-
-															}
 
 														$uamswp_fad_clinical_specialization_provider = uamswp_fad_clinical_specialization_provider(
 															$entity // int // ID of the provider profile
