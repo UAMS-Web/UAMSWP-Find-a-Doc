@@ -5854,7 +5854,7 @@
 					$onetsoc_code, // string // Required // O*Net-SOC occupation code
 					$onetsoc_title, // string // Required // O*Net-SOC occupation title
 					$output // array // Optional // Pre-existing schema array for occupationalCategory to which to add occupationalCategory items
-				) : null;
+				) : array();
 
 			// ISCO-08 (International Standard Classification of Occupations)
 
@@ -5864,7 +5864,7 @@
 					$isco08_code, // string // Required // ISCO-08 occupation code
 					false, // bool // Optional // Query for whether to add a occupationalCategory value for each of the code's ancestors
 					$output // array // Optional // Pre-existing schema array for occupationalCategory to which to add occupationalCategory items
-				) : null;
+				) : array();
 
 			return $output;
 
