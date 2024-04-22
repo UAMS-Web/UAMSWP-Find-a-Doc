@@ -35163,15 +35163,6 @@
 											)
 											||
 											(
-												isset($expertise_item_MedicalBusiness)
-												&&
-												in_array(
-													'relatedLink',
-													$expertise_properties_map[$MedicalBusiness_type]['properties']
-												)
-											)
-											||
-											(
 												isset($expertise_item_MedicalEntity)
 												&&
 												in_array(
