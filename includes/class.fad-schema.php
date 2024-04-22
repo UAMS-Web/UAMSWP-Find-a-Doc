@@ -8100,6 +8100,8 @@
 										 * definitions.
 										 */
 
+										$output_item_inDefinedTermSet = $inCodeSet;
+
 										if ( $output_item_inDefinedTermSet ) {
 
 											$output_item['inDefinedTermSet'] = $output_item_inDefinedTermSet;
@@ -8272,6 +8274,8 @@
 										 * feedback and adoption from applications and websites can help improve their
 										 * definitions.
 										 */
+
+										$output_item_termCode = $code ?? '';
 
 										if ( $output_item_termCode ) {
 
