@@ -8167,6 +8167,7 @@
 										 */
 
 										$output_item_name = get_field( 'clinical_specialty_name', $term ) ?? ( $term->name ?? ''); // Use the term's name  as fallback value
+										$output_item_name = $output_item_name ? uamswp_attr_conversion($output_item_name) : '';
 
 										if ( $output_item_name ) {
 
