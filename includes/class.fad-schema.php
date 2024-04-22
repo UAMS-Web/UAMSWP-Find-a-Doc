@@ -8031,11 +8031,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 */
 
 							$actionableFeedbackPolicy = get_field( 'brandorg_actionablefeedbackpolicy', $term ) ?? null;
@@ -8061,7 +8061,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - PropertyValue
+							 *      - PropertyValue
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8079,12 +8079,16 @@
 							 * case of text values, the class label should follow the schema.org style guide.
 							 *
 							 * Subproperty of:
-							 *     - rdf:type
+							 *      - rdf:type
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
-							 *     - URL
+							 *      - Text
+							 *      - URL
+							 *
+							 * Used on these types:
+							 *
+							 *      - Thing
 							 */
 
 							// Get additionalType repeater field value
@@ -8117,7 +8121,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - AggregateRating
+							 *      - AggregateRating
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8130,11 +8134,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8147,11 +8151,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8164,7 +8168,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
+							 *      - Text
 							 */
 
 							// Get alternateName repeater field value
@@ -8197,11 +8201,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8214,11 +8218,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8231,11 +8235,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8248,10 +8252,10 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - AdministrativeArea
-							 *     - GeoShape
-							 *     - Place
-							 *     - Text
+							 *      - AdministrativeArea
+							 *      - GeoShape
+							 *      - Place
+							 *      - Text
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8264,11 +8268,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8281,7 +8285,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Audience
+							 *      - Audience
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8298,8 +8302,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Language
-							 *     - Text
+							 *      - Language
+							 *      - Text
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8312,8 +8316,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - MedicalProcedure
-							 *     - MedicalTest
+							 *      - MedicalProcedure
+							 *      - MedicalTest
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8326,11 +8330,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8343,7 +8347,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
+							 *      - Text
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8362,11 +8366,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8379,11 +8383,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8396,11 +8400,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8414,8 +8418,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Brand
-							 *     - Organization
+							 *      - Brand
+							 *      - Organization
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8428,11 +8432,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8445,11 +8449,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8462,11 +8466,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8477,7 +8481,7 @@
 							/**
 							 * A contact point for a person or organization.
 							 *
-							 *     - ContactPoint
+							 *      - ContactPoint
 							 */
 
 							// Base list array
@@ -8805,8 +8809,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - PostalAddress
-							 *     - Text
+							 *      - PostalAddress
+							 *      - Text
 							 */
 
 							if ( $address ) {
@@ -8822,7 +8826,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
+							 *      - Text
 							 */
 
 							if ( $email ) {
@@ -8838,7 +8842,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
+							 *      - Text
 							 */
 
 							if ( $faxNumber ) {
@@ -8854,7 +8858,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
+							 *      - Text
 							 */
 
 							if ( $telephone ) {
@@ -8876,11 +8880,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8892,7 +8896,7 @@
 							 * The basic containment relation between a place and one that contains it.
 							 * expected to be one of these types:
 							 *
-							 *     - Place
+							 *      - Place
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8907,7 +8911,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Place
+							 *      - Place
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8920,11 +8924,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 */
 
 							$correctionsPolicy = get_field( 'brandorg_correctionspolicy', $term ) ?? null;
@@ -8941,14 +8945,14 @@
 							 * The currency accepted.
 							 *
 							 * Use standard formats:
-							 *     - ISO 4217 currency format (e.g., "USD")
-							 *     - Ticker symbol for cryptocurrencies (e.g., "BTC")
-							 *     - Well-known names for Local Exchange Trading Systems (LETS) and other
+							 *      - ISO 4217 currency format (e.g., "USD")
+							 *      - Ticker symbol for cryptocurrencies (e.g., "BTC")
+							 *      - Well-known names for Local Exchange Trading Systems (LETS) and other
 							 *       currency types (e.g., "Ithaca HOUR")
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
+							 *      - Text
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8963,7 +8967,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Organization
+							 *      - Organization
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -8976,8 +8980,19 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
-							 *     - TextObject
+							 *      - Text
+							 *      - TextObject
+							 *
+							 * Used on these types:
+							 *
+							 *      - Thing
+							 *
+							 * Sub-properties:
+							 *
+							 *      - disambiguatingDescription
+							 *      - interpretedAsClaim
+							 *      - originalMediaContextDescription
+							 *      - sha256
 							 */
 
 							$description = get_field( 'brandorg_description', $term ) ?? null;
@@ -8998,7 +9013,11 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
+							 *      - Text
+							 *
+							 * Used on these types:
+							 *
+							 *      - Thing
 							 */
 
 							$disambiguatingDescription = get_field( 'brandorg_disambiguatingdescription', $term ) ?? null;
@@ -9016,11 +9035,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9037,8 +9056,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - CreativeWork
-							 *     - URL
+							 *      - CreativeWork
+							 *      - URL
 							 *
 							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 							 * feedback and adoption from applications and websites can help improve their
@@ -9062,8 +9081,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Article
-							 *     - URL
+							 *      - Article
+							 *      - URL
 							 *
 							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 							 * feedback and adoption from applications and websites can help improve their
@@ -9085,7 +9104,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Person
+							 *      - Person
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9098,11 +9117,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9120,8 +9139,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - CreativeWork
-							 *     - URL
+							 *      - CreativeWork
+							 *      - URL
 							 *
 							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 							 * feedback and adoption from applications and websites can help improve their
@@ -9143,7 +9162,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Event
+							 *      - Event
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9156,11 +9175,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9173,11 +9192,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9190,11 +9209,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9207,11 +9226,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9224,7 +9243,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Date
+							 *      - Date
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9237,11 +9256,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9255,8 +9274,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Organization
-							 *     - Person
+							 *      - Organization
+							 *      - Person
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9275,7 +9294,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Grant
+							 *      - Grant
 							 *
 							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 							 * feedback and adoption from applications and websites can help improve their
@@ -9298,8 +9317,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - GenderType
-							 *     - Text
+							 *      - GenderType
+							 *      - Text
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9312,8 +9331,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
-							 *     - URL
+							 *      - Text
+							 *      - URL
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9328,8 +9347,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - GeoCoordinates
-							 *     - GeoShape
+							 *      - GeoCoordinates
+							 *      - GeoShape
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9342,11 +9361,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9359,11 +9378,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9376,11 +9395,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9393,11 +9412,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9410,11 +9429,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9427,11 +9446,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9444,11 +9463,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9461,11 +9480,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9478,11 +9497,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9495,11 +9514,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9512,7 +9531,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - EducationalOccupationalCredential
+							 *      - EducationalOccupationalCredential
 							 *
 							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 							 * feedback and adoption from applications and websites can help improve their
@@ -9533,7 +9552,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Boolean
+							 *      - Boolean
 							 *
 							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 							 * feedback and adoption from applications and websites can help improve their
@@ -9550,11 +9569,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9635,11 +9654,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 */
 
 							$healthPlanNetworkId = get_field( 'brandorg_healthplannetworkid', $term ) ?? null;
@@ -9674,7 +9693,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Hospital
+							 *      - Hospital
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -9707,7 +9726,7 @@
 								 *
 								 * Values expected to be one of these types:
 								 *
-								 *     - Text
+								 *      - Text
 								 */
 
 								$duns = get_field( 'brandorg_duns', $term ) ?? null;
@@ -9727,7 +9746,7 @@
 								 *
 								 * Values expected to be one of these types:
 								 *
-								 *     - Text
+								 *      - Text
 								 */
 
 								$globalLocationNumber = get_field( 'schema_globallocationnumber', $term ) ?? null;
@@ -9747,7 +9766,7 @@
 								 *
 								 * Values expected to be one of these types:
 								 *
-								 *     - Text
+								 *      - Text
 								 */
 
 								$isicV4 = get_field( 'brandorg_isicv4', $term ) ?? null;
@@ -9768,7 +9787,7 @@
 								 *
 								 * Values expected to be one of these types:
 								 *
-								 *     - Text
+								 *      - Text
 								 *
 								 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 								 * feedback and adoption from applications and websites can help improve their
@@ -9791,7 +9810,7 @@
 								 *
 								 * Values expected to be one of these types:
 								 *
-								 *     - Text
+								 *      - Text
 								 */
 
 								$leiCode = get_field( 'brandorg_leicode', $term ) ?? null;
@@ -9810,7 +9829,7 @@
 								 *
 								 * Values expected to be one of these types:
 								 *
-								 *     - Text
+								 *      - Text
 								 */
 
 								$naics = get_field( 'brandorg_naics', $term ) ?? null;
@@ -9829,7 +9848,7 @@
 								 *
 								 * Values expected to be one of these types:
 								 *
-								 *     - Text
+								 *      - Text
 								 */
 
 								$taxID = get_field( 'brandorg_taxid', $term ) ?? null;
@@ -9845,7 +9864,7 @@
 								/**
 								 * The Value-added Tax ID of the organization or person.
 								 *
-								 *     - Text
+								 *      - Text
 								 */
 
 								$vatID = get_field( 'brandorg_vatid', $term ) ?? null;
@@ -9868,9 +9887,9 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - PropertyValue
-							 *     - Text
-							 *     - URL
+							 *      - PropertyValue
+							 *      - Text
+							 *      - URL
 							 */
 
 							// Base list array
@@ -9905,6 +9924,18 @@
 
 											// alternateName
 
+												/**
+												 * An alias for the item.
+												 *
+												 * Expected Type:
+												 *
+												 *      - Text
+												 *
+												 * Used on these types:
+												 *
+												 *      - Thing
+												 */
+
 												// Get alternateName repeater field value
 
 													$identifier_item_alternateName_repeater = $item['schema_alternatename'] ?? null;
@@ -9932,6 +9963,14 @@
 
 											// name
 
+												/**
+												 * The name of the item.
+												 *
+												 * Expected Type:
+												 *
+												 *      - Text
+												 */
+
 												$identifier_item['name'] = $item['brandorg_identifier_name'] ?? '';
 
 											// propertyID
@@ -9947,6 +9986,14 @@
 												$identifier_item['unitText'] = $item['brandorg_identifier_unittext'] ?? '';
 
 											// url
+
+												/**
+												 * URL of the item.
+												 *
+												 * Expected Type:
+												 *
+												 *      - URL
+												 */
 
 												$identifier_item['url'] = $item['brandorg_identifier_url'] ?? '';
 
@@ -10221,8 +10268,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Map
-							 *     - URL
+							 *      - Map
+							 *      - URL
 							 *
 							 * The examples on Schema.org indicate that a URL to the location on Google Maps
 							 * is acceptable.
@@ -10249,8 +10296,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - ImageObject
-							 *     - URL
+							 *      - ImageObject
+							 *      - URL
 							 */
 
 							$image = get_field( 'brandorg_image', $term ) ?? null;
@@ -10270,7 +10317,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - InteractionCounter
+							 *      - InteractionCounter
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10283,7 +10330,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Boolean
+							 *      - Boolean
 							 *
 							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 							 * feedback and adoption from applications and websites can help improve their
@@ -10323,9 +10370,9 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - DefinedTerm
-							 *     - Text
-							 *     - URL
+							 *      - DefinedTerm
+							 *      - Text
+							 *      - URL
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10341,9 +10388,9 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
-							 *     - Thing
-							 *     - URL
+							 *      - Text
+							 *      - Thing
+							 *      - URL
 							 *
 							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 							 * feedback and adoption from applications and websites can help improve their
@@ -10362,8 +10409,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Language
-							 *     - Text
+							 *      - Language
+							 *      - Text
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10376,8 +10423,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Number
-							 *     - Text
+							 *      - Number
+							 *      - Text
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10390,7 +10437,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
+							 *      - Text
 							 */
 
 							$legalName = get_field( 'brandorg_legalname', $term ) ?? null;
@@ -10409,10 +10456,10 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Place
-							 *     - PostalAddress
-							 *     - Text
-							 *     - VirtualLocation
+							 *      - Place
+							 *      - PostalAddress
+							 *      - Text
+							 *      - VirtualLocation
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10425,8 +10472,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - ImageObject
-							 *     - URL
+							 *      - ImageObject
+							 *      - URL
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10447,8 +10494,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Number
-							 *     - Text
+							 *      - Number
+							 *      - Text
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10458,15 +10505,20 @@
 
 							/**
 							 * Indicates a page (or other CreativeWork) for which this thing is the main
-							 * entity being described. See background notes at
-							 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+							 * entity being described. See background notes for details.
 							 *
-							 * Inverse-property: mainEntity
+							 * Inverse property:
+							 *
+							 *      - mainEntity
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - CreativeWork
-							 *     - URL
+							 *      - CreativeWork
+							 *      - URL
+							 *
+							 * Used on these types:
+							 *
+							 *      - Thing
 							 */
 
 							if ( $mainEntityOfPage ) {
@@ -10484,7 +10536,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Offer
+							 *      - Offer
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10497,11 +10549,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10514,11 +10566,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10531,11 +10583,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10548,7 +10600,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Integer
+							 *      - Integer
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10561,7 +10613,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - MedicalSpecialty
+							 *      - MedicalSpecialty
 							 */
 
 							// Get values
@@ -10600,11 +10652,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10620,8 +10672,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Organization
-							 *     - ProgramMembership
+							 *      - Organization
+							 *      - ProgramMembership
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10634,11 +10686,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10651,11 +10703,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10668,11 +10720,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10702,11 +10754,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - rdfs:label
+							 *      - rdfs:label
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
+							 *      - Text
 							 */
 
 							$name = get_field( 'brandorg_name', $term ) ?? null;
@@ -10742,7 +10794,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - NonprofitType
+							 *      - NonprofitType
 							 *
 							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 							 * feedback and adoption from applications and websites can help improve their
@@ -10764,7 +10816,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - QuantitativeValue
+							 *      - QuantitativeValue
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10777,11 +10829,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10809,7 +10861,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
+							 *      - Text
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10835,11 +10887,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 */
 
 							$ownershipFundingInfo = get_field( 'brandorg_ownershipfundinginfo', $term ) ?? null;
@@ -10857,11 +10909,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10874,7 +10926,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Organization
+							 *      - Organization
 							 */
 
 							// Get the term ID
@@ -10941,7 +10993,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
+							 *      - Text
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10954,11 +11006,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10971,8 +11023,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - ImageObject
-							 *     - Photograph
+							 *      - ImageObject
+							 *      - Photograph
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10985,11 +11037,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11003,7 +11055,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Action
+							 *      - Action
 							 *
 							 * This schema property is beyond the scope of what is being included for
 							 * condition schema and so it will not be included.
@@ -11016,11 +11068,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11034,7 +11086,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Boolean
+							 *      - Boolean
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11056,8 +11108,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - CreativeWork
-							 *     - URL
+							 *      - CreativeWork
+							 *      - URL
 							 */
 
 							$publishingPrinciples = get_field( 'brandorg_publishingprinciples', $term ) ?? null;
@@ -11075,7 +11127,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Review
+							 *      - Review
 							 *
 							 * This schema property is not relevant to clinical resources or their webpages,
 							 * and so it will not be included.
@@ -11099,7 +11151,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - URL
+							 *      - URL
 							 */
 
 							// Get sameAs repeater field value
@@ -11132,11 +11184,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11149,11 +11201,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11166,11 +11218,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11183,11 +11235,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11223,7 +11275,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Boolean
+							 *      - Boolean
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11239,7 +11291,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - OpeningHoursSpecification
+							 *      - OpeningHoursSpecification
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11268,11 +11320,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11285,11 +11337,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11358,11 +11410,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11375,11 +11427,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11392,11 +11444,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11449,11 +11501,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -18196,15 +18248,15 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Brand
-									 *     - Organization
+									 *      - Brand
+									 *      - Organization
 									 *
 									 * Used on these types:
 									 *
-									 *     - Organization
-									 *     - Person
-									 *     - Product
-									 *     - Service
+									 *      - Organization
+									 *      - Person
+									 *      - Product
+									 *      - Service
 									 */
 
 									// Get names for keywords property
@@ -18287,13 +18339,13 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ContactPoint
+									 *      - ContactPoint
 									 *
 									 * Used on these types:
 									 *
-									 *     - HealthInsurancePlan
-									 *     - Organization
-									 *     - Person
+									 *      - HealthInsurancePlan
+									 *      - Organization
+									 *      - Person
 									 */
 
 								// contactPoints [excluded; superseded]
@@ -18314,7 +18366,7 @@
 									 * The basic containment relation between a place and one that contains it.
 									 * expected to be one of these types:
 									 *
-									 *     - Place
+									 *      - Place
 									 */
 
 									if (
@@ -18435,7 +18487,7 @@
 									 *
 									 * Inverse-property:
 									 *
-									 *     - containedInPlace
+									 *      - containedInPlace
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -18449,7 +18501,7 @@
 									 *
 									 * Subproperty of:
 									 *
-									 *     - publishingPrinciples
+									 *      - publishingPrinciples
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -18486,11 +18538,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 								// dissolutionDate [excluded; irrelevant]
@@ -18539,19 +18591,19 @@
 									 *
 									 * Inverse property:
 									 *
-									 *     - foo
+									 *      - foo
 									 *
 									 * Subproperty of:
 									 *
-									 *     - foo
+									 *      - foo
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - foo
+									 *      - foo
 									 *
 									 * Used on these types:
 									 *
-									 *     - foo
+									 *      - foo
 									 */
 
 								// employee [excluded; irrelevant]
@@ -18604,14 +18656,14 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - ContactPoint
-									 *     - Organization
-									 *     - Person
-									 *     - Place
+									 *      - ContactPoint
+									 *      - Organization
+									 *      - Person
+									 *      - Place
 									 */
 
 								// founder [excluded; irrelevant]
@@ -18663,9 +18715,18 @@
 									 * A Grant that directly or indirectly provide funding or sponsorship for this
 									 * item. See also ownershipFundingInfo.
 									 *
-									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
-									 * Implementation feedback and adoption from applications and websites can help
-									 * improve their definitions.
+									 * Inverse-property: fundedItem
+									 *
+									 * Grant: https://schema.org/Grant
+									 * ownershipFundingInfo: https://schema.org/ownershipFundingInfo
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Grant
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
+									 * definitions.
 									 *
 									 * Note: This schema property is outside the scope of what should be included in
 									 * Find-a-Doc.
@@ -18684,13 +18745,13 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - GenderType
-									 *     - Text
+									 *      - GenderType
+									 *      - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - Person
-									 *     - SportsTeam
+									 *      - Person
+									 *      - SportsTeam
 									 */
 
 									if (
@@ -18852,12 +18913,12 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - GeoCoordinates
-									 *     - GeoShape
+									 *      - GeoCoordinates
+									 *      - GeoShape
 									 *
 									 * Used on these types:
 									 *
-									 *     - Place
+									 *      - Place
 									 */
 
 								// geoContains [excluded; irrelevant]
@@ -18982,15 +19043,15 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Certification
+									 *      - Certification
 									 *
 									 * Used on these types:
 									 *
-									 *     - Organization
-									 *     - Person
-									 *     - Place
-									 *     - Product
-									 *     - Service
+									 *      - Organization
+									 *      - Person
+									 *      - Place
+									 *      - Product
+									 *      - Service
 									 *
 									 * Note: Consider including the specialty and subspecialty certifications in this
 									 * property.
@@ -19125,12 +19186,12 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - EducationalOccupationalCredential
+									 *      - EducationalOccupationalCredential
 									 *
 									 * Used on these types:
 									 *
-									 *     - Organization
-									 *     - Person
+									 *      - Organization
+									 *      - Person
 									 *
 									 * As of 16 Apr 2024, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -19317,11 +19378,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Occupation
+									 *      - Occupation
 									 *
 									 * Used on these types:
 									 *
-									 *     - Person
+									 *      - Person
 									 */
 
 									if (
@@ -19460,12 +19521,12 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Map
-									 *     - URL
+									 *      - Map
+									 *      - URL
 									 *
 									 * Used on these types:
 									 *
-									 *     - Place
+									 *      - Place
 									 *
 									 * Note: The examples on Schema.org indicate that a URL to the location on Google
 									 * Maps is acceptable.
@@ -19593,13 +19654,13 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - OfferCatalog
+									 *      - OfferCatalog
 									 *
 									 * Used on these types:
 									 *
-									 *     - Organization
-									 *     - Person
-									 *     - Service
+									 *      - Organization
+									 *      - Person
+									 *      - Service
 									 */
 
 								// hasPart [excluded; irrelevant]
@@ -19634,11 +19695,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Hospital
+									 *      - Hospital
 									 *
 									 * Used on these types:
 									 *
-									 *     - Physician
+									 *      - Physician
 									 */
 
 									if (
@@ -19879,13 +19940,13 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Organization
-											 *     - Person
-											 *     - Place
+											 *      - Organization
+											 *      - Person
+											 *      - Place
 											 */
 
 											if (
@@ -19970,12 +20031,12 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - HealthPlanNetwork
-											 *     - MedicalOrganization
+											 *      - HealthPlanNetwork
+											 *      - MedicalOrganization
 											 *
 											 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
 											 * Implementation feedback and adoption from applications and websites can help
@@ -19994,13 +20055,13 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Organization
-											 *     - Person
-											 *     - Place
+											 *      - Organization
+											 *      - Person
+											 *      - Place
 											 */
 
 											if (
@@ -20085,11 +20146,11 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Organization
+											 *      - Organization
 											 */
 
 											if (
@@ -20174,12 +20235,12 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Organization
-											 *     - Person
+											 *      - Organization
+											 *      - Person
 											 */
 
 											if (
@@ -20264,12 +20325,12 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Organization
-											 *     - Person
+											 *      - Organization
+											 *      - Person
 											 */
 
 											if (
@@ -20501,12 +20562,12 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Organization
-											 *     - Person
+											 *      - Organization
+											 *      - Person
 											 */
 
 											if (
@@ -22850,11 +22911,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 *
 									 * Used on these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 									if (
@@ -22997,13 +23058,13 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - SpeakableSpecification
-									 *     - URL
+									 *      - SpeakableSpecification
+									 *      - URL
 									 *
 									 * Used on these types:
 									 *
-									 *     - Article
-									 *     - WebPage
+									 *      - Article
+									 *      - WebPage
 									 */
 
 								// specialOpeningHoursSpecification [excluded; irrelevant]
@@ -33744,9 +33805,9 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - DefinedTerm
-									 *     - Text
-									 *     - URL
+									 *      - DefinedTerm
+									 *      - Text
+									 *      - URL
 									 */
 
 							// Sort arrays
@@ -34161,7 +34222,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 									// Get values
@@ -34818,11 +34879,11 @@
 									 *
 									 * Subproperty of:
 									 *
-									 *     - rdfs:label
+									 *      - rdfs:label
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -34878,7 +34939,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 									if (
@@ -35584,7 +35645,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -38648,7 +38709,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalCode
+									 *      - MedicalCode
+									 *
+									 * Used on these types:
+									 *
+									 *      - MedicalEntity
 									 */
 
 									if (
@@ -38697,8 +38762,19 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
-									 *     - TextObject
+									 *      - Text
+									 *      - TextObject
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
+									 *
+									 * Sub-properties:
+									 *
+									 *      - disambiguatingDescription
+									 *      - interpretedAsClaim
+									 *      - originalMediaContextDescription
+									 *      - sha256
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -38723,7 +38799,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - DDxElement
+									 *      - DDxElement
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -38739,7 +38815,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -38752,7 +38828,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Drug
+									 *      - Drug
 									 *
 									 * This schema property is not relevant to conditions and so it will not be
 									 * included.
@@ -38765,7 +38841,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -38779,7 +38855,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -38792,7 +38868,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalGuideline
+									 *      - MedicalGuideline
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -38808,9 +38884,9 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - PropertyValue
-									 *     - Text
-									 *     - URL
+									 *      - PropertyValue
+									 *      - Text
+									 *      - URL
 									 */
 
 								// identifyingExam [WIP]
@@ -38820,7 +38896,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - PhysicalExam
+									 *      - PhysicalExam
 									 */
 
 								// identifyingTest [WIP]
@@ -38830,7 +38906,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalTest
+									 *      - MedicalTest
 									 */
 
 								// image [excluded]
@@ -38840,8 +38916,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ImageObject
-									 *     - URL
+									 *      - ImageObject
+									 *      - URL
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -38854,7 +38930,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -38891,7 +38967,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - InfectiousAgentClass
+									 *      - InfectiousAgentClass
 									 */
 
 									if (
@@ -38929,9 +39005,9 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - DrugLegalStatus
-									 *     - MedicalEnumeration
-									 *     - Text
+									 *      - DrugLegalStatus
+									 *      - MedicalEnumeration
+									 *      - Text
 									 *
 									 * This schema property is not relevant to conditions and so it will not be
 									 * included.
@@ -38941,18 +39017,20 @@
 
 									/**
 									 * Indicates a page (or other CreativeWork) for which this thing is the main
-									 * entity being described. See background notes at
-									 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+									 * entity being described. See background notes for details.
 									 *
-									 * Inverse-property: mainEntity
+									 * Inverse property:
+									 *
+									 *      - mainEntity
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
-									 *     - URL
+									 *      - CreativeWork
+									 *      - URL
 									 *
-									 * The condition post type does not have a published page and so this schema
-									 * property will not be included.
+									 * Used on these types:
+									 *
+									 *      - Thing
 									 */
 
 								// medicineSystem [excluded]
@@ -38963,7 +39041,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicineSystem
+									 *      - MedicineSystem
 									 *
 									 * This schema property is not relevant to conditions and so it will not be
 									 * included.
@@ -38977,7 +39055,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -38991,7 +39069,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -39006,7 +39084,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -39020,7 +39098,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Action
+									 *      - Action
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -39034,7 +39112,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Organization
+									 *      - Organization
 									 *
 									 * This schema property is not relevant to conditions and so it will not be
 									 * included.
@@ -39047,7 +39125,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalSpecialty
+									 *      - MedicalSpecialty (enumeration type)
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -39061,7 +39139,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalRiskFactor
+									 *      - MedicalRiskFactor
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -39076,7 +39154,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 									if (
@@ -39128,7 +39206,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalSignOrSymptom
+									 *      - MedicalSignOrSymptom
 									 */
 
 								// stage [excluded]
@@ -39138,7 +39216,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalConditionStage
+									 *      - MedicalConditionStage
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -39151,9 +39229,9 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - EventStatusType
-									 *     - MedicalStudyStatus
-									 *     - Text
+									 *      - EventStatusType
+									 *      - MedicalStudyStatus
+									 *      - Text
 									 *
 									 * This schema property is not relevant to conditions and so it will not be
 									 * included.
@@ -39166,7 +39244,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalStudy
+									 *      - MedicalStudy
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -39181,8 +39259,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
-									 *     - Event
+									 *      - CreativeWork
+									 *      - Event
 									 *
 									 * The condition post type does not have a published page and so this schema
 									 * property will not be included.
@@ -39195,7 +39273,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalTherapy
+									 *      - MedicalTherapy
 									 */
 
 									if (
@@ -39254,7 +39332,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalTherapy
+									 *      - MedicalTherapy
 									 */
 
 									if (
@@ -39313,7 +39391,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalTherapy
+									 *      - MedicalTherapy
 									 */
 
 									if (
@@ -39372,7 +39450,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -39385,7 +39467,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalTest
+									 *      - MedicalTest
 									 */
 
 									if (
@@ -39667,7 +39749,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 *
 									 * The treatment custom post type does not have a published URL and so this schema
 									 * property will not be included.
@@ -39887,11 +39969,11 @@
 									 *
 									 * Subproperty of:
 									 *
-									 *     - rdfs:label
+									 *      - rdfs:label
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -39933,12 +40015,16 @@
 									 * case of text values, the class label should follow the schema.org style guide.
 									 *
 									 * Subproperty of:
-									 *     - rdf:type
+									 *      - rdf:type
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
-									 *     - URL
+									 *      - Text
+									 *      - URL
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
 									 */
 
 									if (
@@ -39991,7 +40077,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalEntity
+									 *      - MedicalEntity
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -40004,7 +40090,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Drug
+									 *      - Drug
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -40017,7 +40103,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -40068,7 +40154,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalCode
+									 *      - MedicalCode
+									 *
+									 * Used on these types:
+									 *
+									 *      - MedicalEntity
 									 */
 
 									if (
@@ -40117,7 +40207,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * This schema property is not relevant to treatments and so it will not be
 									 * included.
@@ -40130,8 +40220,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalContraindication
-									 *     - Text
+									 *      - MedicalContraindication
+									 *      - Text
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -40144,8 +40234,19 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
-									 *     - TextObject
+									 *      - Text
+									 *      - TextObject
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
+									 *
+									 * Sub-properties:
+									 *
+									 *      - disambiguatingDescription
+									 *      - interpretedAsClaim
+									 *      - originalMediaContextDescription
+									 *      - sha256
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -40169,7 +40270,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -40183,7 +40284,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - DoseSchedule
+									 *      - DoseSchedule
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -40196,7 +40297,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Drug
+									 *      - Drug
 									 */
 
 									if (
@@ -40368,7 +40469,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalTherapy
+									 *      - MedicalTherapy
 									 */
 
 									if (
@@ -40426,7 +40527,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -40439,7 +40544,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalGuideline
+									 *      - MedicalGuideline
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -40452,7 +40557,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -40468,9 +40573,9 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - PropertyValue
-									 *     - Text
-									 *     - URL
+									 *      - PropertyValue
+									 *      - Text
+									 *      - URL
 									 */
 
 								// image [excluded]
@@ -40480,8 +40585,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ImageObject
-									 *     - URL
+									 *      - ImageObject
+									 *      - URL
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -40494,7 +40599,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalImagingTechnique
+									 *      - MedicalImagingTechnique
 									 */
 
 									if (
@@ -40532,27 +40637,29 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - DrugLegalStatus
-									 *     - MedicalEnumeration
-									 *     - Text
+									 *      - DrugLegalStatus
+									 *      - MedicalEnumeration
+									 *      - Text
 									 */
 
 								// mainEntityOfPage [excluded]
 
 									/**
 									 * Indicates a page (or other CreativeWork) for which this thing is the main
-									 * entity being described. See background notes at
-									 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+									 * entity being described. See background notes for details.
 									 *
-									 * Inverse-property: mainEntity
+									 * Inverse property:
+									 *
+									 *      - mainEntity
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
-									 *     - URL
+									 *      - CreativeWork
+									 *      - URL
 									 *
-									 * The treatment post type does not have a published page and so this schema
-									 * property will not be included.
+									 * Used on these types:
+									 *
+									 *      - Thing
 									 */
 
 								// medicineSystem [WIP]
@@ -40563,7 +40670,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicineSystem
+									 *      - MedicineSystem
 									 */
 
 								// normalRange [excluded]
@@ -40573,8 +40680,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalEnumeration
-									 *     - Text
+									 *      - MedicalEnumeration
+									 *      - Text
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -40588,7 +40695,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Action
+									 *      - Action
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -40602,8 +40709,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalEntity
-									 *     - Text
+									 *      - MedicalEntity
+									 *      - Text
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -40616,7 +40723,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalProcedureType (enumeration type)
+									 *      - MedicalProcedureType (enumeration type)
 									 *           - NoninvasiveProcedure
 									 *           - PercutaneousProcedure
 									 */
@@ -40656,7 +40763,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Organization
+									 *      - Organization
 									 */
 
 								// relevantSpecialty
@@ -40666,7 +40773,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalSpecialty (enumeration type)
+									 *      - MedicalSpecialty (enumeration type)
 									 */
 
 									if (
@@ -40723,7 +40830,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 									if (
@@ -40778,7 +40885,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalEntity
+									 *      - MedicalEntity
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -40791,7 +40898,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalSign
+									 *      - MedicalSign
 									 */
 
 								// status [excluded]
@@ -40801,9 +40908,9 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - EventStatusType
-									 *     - MedicalStudyStatus
-									 *     - Text
+									 *      - EventStatusType
+									 *      - MedicalStudyStatus
+									 *      - Text
 									 *
 									 * This schema property is not relevant to treatments and so it will not be
 									 * included.
@@ -40812,16 +40919,14 @@
 								// study [excluded]
 
 									/**
-									 * The status of the study (enumerated).
+									 * A medical study or trial related to this entity.
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - EventStatusType
-									 *     - MedicalStudyStatus
-									 *     - Text
+									 *      - MedicalStudy
 									 *
-									 * This schema property is not relevant to treatments and so it will not be
-									 * included.
+									 * This schema property is beyond the scope of what is being included for
+									 * condition schema and so it will not be included.
 									 */
 
 								// subjectOf [excluded]
@@ -40833,8 +40938,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
-									 *     - Event
+									 *      - CreativeWork
+									 *      - Event
 									 *
 									 * The treatment post type does not have a published page and so this schema
 									 * property will not be included.
@@ -40847,7 +40952,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalTest
+									 *      - MedicalTest
 									 */
 
 									if (
@@ -40905,7 +41010,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -40960,7 +41065,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalCondition
+									 *      - MedicalCondition
 									 */
 
 									if (
@@ -41018,7 +41123,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalDevice
+									 *      - MedicalDevice
 									 */
 
 									if (
@@ -41059,11 +41164,11 @@
 															 *
 															 * Subproperty of:
 															 *
-															 *     - rdfs:label
+															 *      - rdfs:label
 															 *
 															 * Values expected to be one of these types:
 															 *
-															 *     - Text
+															 *      - Text
 															 */
 
 															$treatment_usesDevice_item['name'] = $item['schema_medicaldevice_name'];
@@ -41075,7 +41180,7 @@
 															 *
 															 * Values expected to be one of these types:
 															 *
-															 *     - Text
+															 *      - Text
 															 */
 
 															// Get alternateName repeater field value
@@ -41109,7 +41214,11 @@
 															 *
 															 * Values expected to be one of these types:
 															 *
-															 *     - MedicalCode
+															 *      - MedicalCode
+															 *
+															 * Used on these types:
+															 *
+															 *      - MedicalEntity
 															 */
 
 															// Get code repeater field value
