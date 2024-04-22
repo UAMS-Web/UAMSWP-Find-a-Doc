@@ -12702,7 +12702,12 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// knowsAbout
 
-							// $output_schema['knowsAbout'] = uamswp_fad_schema_nucc_code_set();
+							$output_schema['knowsAbout'] = uamswp_fad_schema_nucc_code_set(
+								$codeSet_code, // string // Required // Health Care Provider Taxonomy code
+								$codeSet_name_display, // string|array // Optional // alternateName
+								$codeSet_definition, // string // Optional // description
+								$codeSet_name // string // Optional // name
+							);
 
 						// Add the schema output array to the general output array
 
