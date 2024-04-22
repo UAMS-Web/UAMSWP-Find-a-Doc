@@ -409,24 +409,24 @@
 
 			// Get clinical specialization and occupation title values
 
-				$uamswp_fad_provider_clinical_specialization = uamswp_fad_clinical_specialization_provider(
+				$uamswp_fad_clinical_specialization_provider = uamswp_fad_clinical_specialization_provider(
 					$post->ID // int // ID of the provider profile
 				);
 
 				// Is the Provider a Resident?
 
-					$resident = $uamswp_fad_provider_clinical_specialization['resident_query']; // bool
+					$resident = $uamswp_fad_clinical_specialization_provider['resident_query']; // bool
 
 				// Clinical Occupation Title
 
-					$provider_occupation_title = $uamswp_fad_provider_clinical_specialization['title_string']; // string // Clinical Occupation Titles string
+					$provider_occupation_title = $uamswp_fad_clinical_specialization_provider['title_string']; // string // Clinical Occupation Titles string
 					$provider_occupation_title_attr = uamswp_attr_conversion($provider_occupation_title);
 
 				// Pass values to schema function
 
-					if ( $uamswp_fad_provider_clinical_specialization ) {
+					if ( $uamswp_fad_clinical_specialization_provider ) {
 
-						$provider_schema_fields[$page_id]['uamswp_fad_provider_clinical_specialization'] = $uamswp_fad_provider_clinical_specialization;
+						$provider_schema_fields[$page_id]['uamswp_fad_provider_clinical_specialization'] = $uamswp_fad_clinical_specialization_provider;
 
 					}
 

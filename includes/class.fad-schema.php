@@ -15205,7 +15205,7 @@
 								$provider_worksFor_keywords = null;
 								$MedicalCondition_i = 1;
 								$Service_i = 1;
-								$uamswp_fad_provider_clinical_specialization = null;
+								$uamswp_fad_clinical_specialization_provider = null;
 
 							// Load variables from pre-existing field values array
 
@@ -22117,7 +22117,7 @@
 
 											// Get Provider Clinical Specialization and Occupational Title
 
-												if ( !isset($uamswp_fad_provider_clinical_specialization) ) {
+												if ( !isset($uamswp_fad_clinical_specialization_provider) ) {
 
 													// Get ID of clinical specialization
 
@@ -22127,7 +22127,7 @@
 
 														}
 
-													$uamswp_fad_provider_clinical_specialization = uamswp_fad_clinical_specialization_provider(
+													$uamswp_fad_clinical_specialization_provider = uamswp_fad_clinical_specialization_provider(
 														$provider_clinical_specialization // int // ID of the provider profile
 													);
 
@@ -22135,7 +22135,7 @@
 
 											// Get Provider Clinical Occupational Title
 
-												$provider_jobTitle = $uamswp_fad_provider_clinical_specialization['title_array'] ?? array();
+												$provider_jobTitle = $uamswp_fad_clinical_specialization_provider['title_array'] ?? array();
 
 												// Reindex the array
 
