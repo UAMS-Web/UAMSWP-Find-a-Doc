@@ -678,7 +678,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 					// Get clinical specialization and occupation title values
 
-						$provider_occupation_title = uamswp_fad_provider_clinical_specialization(
+						$provider_occupation_title = uamswp_fad_clinical_specialization_provider(
 							get_the_id() // int // ID of the provider profile
 						)['title_string'];
 
@@ -881,7 +881,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Clinical Title
 
-							$provider_occupation_title = uamswp_fad_provider_clinical_specialization(
+							$provider_occupation_title = uamswp_fad_clinical_specialization_provider(
 								$provider // int // ID of the provider profile
 							)['title_array'];
 
@@ -1254,7 +1254,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Clinical Title
 
-							$provider_occupation_title = uamswp_fad_provider_clinical_specialization(
+							$provider_occupation_title = uamswp_fad_clinical_specialization_provider(
 								$provider // int // ID of the provider profile
 							)['title_array'];
 
@@ -12720,7 +12720,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 		// Values for Specific Provider
 
-			function uamswp_fad_provider_clinical_specialization(
+			function uamswp_fad_clinical_specialization_provider(
 				int $provider // int // ID of the provider profile
 			) {
 
@@ -12979,7 +12979,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 					// Clinical Job Title (taxonomy select)
 
-						$provider_title_fn = uamswp_fad_provider_clinical_specialization(
+						$provider_title_fn = uamswp_fad_clinical_specialization_provider(
 							$page_id // int // ID of the provider profile
 						);
 
@@ -13654,7 +13654,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 						// Clinical Job Title (taxonomy select)
 
-							$provider_title = uamswp_fad_provider_clinical_specialization(
+							$provider_title = uamswp_fad_clinical_specialization_provider(
 								$page_id // int // ID of the provider profile
 							);
 

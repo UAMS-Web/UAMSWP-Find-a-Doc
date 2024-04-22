@@ -409,7 +409,7 @@
 
 			// Get clinical specialization and occupation title values
 
-				$uamswp_fad_provider_clinical_specialization = uamswp_fad_provider_clinical_specialization(
+				$uamswp_fad_provider_clinical_specialization = uamswp_fad_clinical_specialization_provider(
 					$post->ID // int // ID of the provider profile
 				);
 

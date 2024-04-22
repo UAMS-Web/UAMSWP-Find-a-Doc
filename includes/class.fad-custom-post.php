@@ -3304,7 +3304,7 @@
 
 			// Get clinical specialization and occupation title values
 
-				$provider_occupation_title_fn = uamswp_fad_provider_clinical_specialization(
+				$provider_occupation_title_fn = uamswp_fad_clinical_specialization_provider(
 					$postId // int // ID of the provider profile
 				);
 				$provider_occupation_title = $provider_occupation_title_fn['title_string']; // string // Clinical Occupation Titles string
