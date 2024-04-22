@@ -34149,6 +34149,67 @@
 									 *      - URL
 									 */
 
+									if (
+										(
+											(
+												isset($expertise_item_MedicalWebPage)
+												&&
+												in_array(
+													'relatedLink',
+													$expertise_properties_map[$MedicalWebPage_type]['properties']
+												)
+											)
+											||
+											(
+												isset($expertise_item_MedicalBusiness)
+												&&
+												in_array(
+													'relatedLink',
+													$expertise_properties_map[$MedicalBusiness_type]['properties']
+												)
+											)
+											||
+											(
+												isset($expertise_item_MedicalEntity)
+												&&
+												in_array(
+													'relatedLink',
+													$expertise_properties_map[$MedicalEntity_type]['properties']
+												)
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'relatedLink', // string // Required // Name of schema property
+													$expertise_significantLink, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalEntity
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalEntity_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													'relatedLink', // string // Required // Name of schema property
+													$expertise_significantLink, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
 								// significantLink [WIP]
 
 									/**
@@ -34159,6 +34220,58 @@
 									 *
 									 *      - URL
 									 */
+
+									if (
+										(
+											(
+												isset($expertise_item_MedicalWebPage)
+												&&
+												in_array(
+													'significantLink',
+													$expertise_properties_map[$MedicalWebPage_type]['properties']
+												)
+											)
+											||
+											(
+												isset($expertise_item_MedicalEntity)
+												&&
+												in_array(
+													'significantLink',
+													$expertise_properties_map[$MedicalEntity_type]['properties']
+												)
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'significantLink', // string // Required // Name of schema property
+													$expertise_significantLink, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalEntity
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalEntity_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													'significantLink', // string // Required // Name of schema property
+													$expertise_significantLink, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
 
 								// keywords [WIP]
 
