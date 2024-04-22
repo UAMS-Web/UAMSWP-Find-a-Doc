@@ -7564,52 +7564,6 @@
 					$code = '';
 					$name = '';
 
-					// Schema values
-
-						$output_item = array(); // Base array
-						$output_item_additionalType = '';
-						$output_item_alternateName = '';
-						$output_item_codeValue = '';
-						$output_item_code = '';
-						$output_item_codeValue = '';
-						$output_item_codingSystem = 'Health Care Provider Taxonomy';
-						$output_item_description = '';
-						$output_item_disambiguatingDescription = '';
-						$output_item_funding = '';
-						$output_item_guideline = '';
-						$output_item_identifier = '';
-						$output_item_image = '';
-						$output_item_inCodeSet = array(
-							'@type' => 'CategoryCodeSet',
-							'alternateName' => array(
-								'Health Care Provider Taxonomy code set',
-								'National Uniform Claim Committee Health Care Provider Taxonomy',
-								'NUCC Health Care Provider Taxonomy',
-								'National Uniform Claim Committee code set',
-								'NUCC code set',
-								'Provider Taxonomy Code List'
-							),
-							'name' => $output_item_codingSystem,
-							'sameAs' => 'http://terminology.hl7.org/CodeSystem/v3-nuccProviderCodes',
-							'url' => array(
-								'https://nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40',
-								'https://taxonomy.nucc.org/'
-							),
-						);
-						$output_item_inDefinedTermSet = '';
-						$output_item_legalStatus = '';
-						$output_item_mainEntityOfPage = '';
-						$output_item_medicineSystem = '';
-						$output_item_name = '';
-						$output_item_potentialAction = '';
-						$output_item_recognizingAuthority = '';
-						$output_item_relevantSpecialty = '';
-						$output_item_sameAs = '';
-						$output_item_study = '';
-						$output_item_subjectOf = '';
-						$output_item_termCode = '';
-						$output_item_url = '';
-
 				// Base item array
 
 					$output_item = array();
@@ -7624,115 +7578,137 @@
 
 							$extension_query = get_field( 'clinical_specialization_extension_query', $term ) ?? false; // Is this clinical specialization part of the UAMS Health extension to the Health Care Provider Taxonomy Code Set?
 
-							// The specialization is not an extension to the Health Care Provider Taxonomy code set
+							// Define mandatory values
 
-								if ( !$extension_query ) {
+								// Type
 
-									$code_query = get_field( 'clinical_specialization_code_query', $term ) ?? true; // Does this specialization have a taxonomy code in the Health Care Provider Taxonomy Code Set?
+									$type = 'MedicalCode';
 
-									// The specialization has a taxonomy code in the Health Care Provider Taxonomy code set
+								// Health Care Provider Taxonomy code
 
-										if ( $code_query ) {
+									// The specialization is not an extension to the Health Care Provider Taxonomy code set
 
-											$code = $code_query ? ( get_field( 'clinical_specialization_code', $term ) ?? '' ) : ''; // Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set
+										if ( !$extension_query ) {
 
-											// Set the fallback value (slug)
+											$code_query = get_field( 'clinical_specialization_code_query', $term ) ?? true; // Does this specialization have a taxonomy code in the Health Care Provider Taxonomy Code Set?
 
-												if ( !$code ) {
+											// The specialization has a taxonomy code in the Health Care Provider Taxonomy code set
 
-													$slug = $term->post_name ?? '';
-													$code = $slug ?? '';
+												if ( $code_query ) {
 
-													// Check if fallback value seems like a valid code
+													$code = $code_query ? ( get_field( 'clinical_specialization_code', $term ) ?? '' ) : ''; // Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set
 
-														if (
-															!(
-																$code
-																&&
-																strlen($code) == 10 // 10 digits
-																&&
-																( preg_match('/[A-Za-z]/', $code) && preg_match('/[0-9]/', $code) ) // Only letters and integers
-															)
-														) {
+													// Set the fallback value (slug)
 
-															$code = '';
+														if ( !$code ) {
+
+															$slug = $term->post_name ?? '';
+															$code = $slug ?? '';
+
+															// Check if fallback value seems like a valid code
+
+																if (
+																	!(
+																		$code
+																		&&
+																		strlen($code) == 10 // 10 digits
+																		&&
+																		( preg_match('/[A-Za-z]/', $code) && preg_match('/[0-9]/', $code) ) // Only letters and integers
+																	)
+																) {
+
+																	$code = '';
+
+																}
 
 														}
 
 												}
-
 										}
-								}
 
-							// If code value still does not exist, get the code from the nearest valid ancestor
+									// If code value still does not exist, get the code from the nearest valid ancestor
 
-								if ( !$code ) {
+										if ( !$code ) {
 
-									// Get the list of ancestors
+											// Get the list of ancestors
 
-										$code_ancestors = get_ancestors(
-											$term_id, // $object_id  // int // Optional // The ID of the object // Default: 0
-											'clinical_title', // $object_type // string // Optional // The type of object for which we'll be retrieving ancestors. Accepts a post type or a taxonomy name. // Default: ''
-											'taxonomy' // $resource_type // string // Optional // Type of resource $object_type is. Accepts 'post_type' or 'taxonomy'. // Default: ''
-										);
+												$code_ancestors = get_ancestors(
+													$term_id, // $object_id  // int // Optional // The ID of the object // Default: 0
+													'clinical_title', // $object_type // string // Optional // The type of object for which we'll be retrieving ancestors. Accepts a post type or a taxonomy name. // Default: ''
+													'taxonomy' // $resource_type // string // Optional // Type of resource $object_type is. Accepts 'post_type' or 'taxonomy'. // Default: ''
+												);
 
-									// Loop through each of the ancestors until finding one that does have a code in the code set
+											// Loop through each of the ancestors until finding one that does have a code in the code set
 
-										if ( $code_ancestors ) {
+												if ( $code_ancestors ) {
 
-											foreach ( $code_ancestors as $ancestor ) {
+													foreach ( $code_ancestors as $ancestor ) {
 
-												$term = get_term( $ancestor, 'clinical_title' ) ?? array();
-
-												if (
-													$term // The term exists
-												) {
-
-													$extension_query = get_field( 'clinical_specialization_extension_query', $term ) ?? false; // Is this clinical specialization part of the UAMS Health extension to the Health Care Provider Taxonomy Code Set?
-
-													if (
-														!$extension_query // The specialization is not an extension to the Health Care Provider Taxonomy code set
-													) {
-
-														$code_query = get_field( 'clinical_specialization_code_query', $term ) ?? true; // Does this specialization have a taxonomy code in the Health Care Provider Taxonomy Code Set?
+														$term = get_term( $ancestor, 'clinical_title' ) ?? array();
 
 														if (
-															$code_query // The specialization has a taxonomy code in the Health Care Provider Taxonomy code set
+															$term // The term exists
 														) {
 
-															$code = $code_query ? ( get_field( 'clinical_specialization_code', $term ) ?? '' ) : ''; // Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set
+															$extension_query = get_field( 'clinical_specialization_extension_query', $term ) ?? false; // Is this clinical specialization part of the UAMS Health extension to the Health Care Provider Taxonomy Code Set?
 
-															if ( $code ) {
+															if (
+																!$extension_query // The specialization is not an extension to the Health Care Provider Taxonomy code set
+															) {
 
-																// Break foreach loop
-																break;
+																$code_query = get_field( 'clinical_specialization_code_query', $term ) ?? true; // Does this specialization have a taxonomy code in the Health Care Provider Taxonomy Code Set?
 
-															} else {
+																if (
+																	$code_query // The specialization has a taxonomy code in the Health Care Provider Taxonomy code set
+																) {
 
-																// Set fallback value (slug)
+																	$code = $code_query ? ( get_field( 'clinical_specialization_code', $term ) ?? '' ) : ''; // Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set
 
-																	$slug = $term->post_name ?? '';
-																	$code = $slug ?? '';
-
-																// Check if fallback value seems like a valid code
-
-																	if (
-																		$code
-																		&&
-																		strlen() == 10 // 10 digits
-																		&&
-																		( preg_match('/[A-Za-z]/', $myString) && preg_match('/[0-9]/', $myString) ) // Only letters and integers
-																	) {
+																	if ( $code ) {
 
 																		// Break foreach loop
 																		break;
 
 																	} else {
 
-																		// Skip the rest of the current loop iteration
-																		continue;
+																		// Set fallback value (slug)
+
+																			$slug = $term->post_name ?? '';
+																			$code = $slug ?? '';
+
+																		// Check if fallback value seems like a valid code
+
+																			if (
+																				$code
+																				&&
+																				strlen() == 10 // 10 digits
+																				&&
+																				( preg_match('/[A-Za-z]/', $myString) && preg_match('/[0-9]/', $myString) ) // Only letters and integers
+																			) {
+
+																				// Break foreach loop
+																				break;
+
+																			} else {
+
+																				// Skip the rest of the current loop iteration
+																				continue;
+
+																			}
 
 																	}
+
+																} else {
+
+																	// Skip the rest of the current loop iteration
+																	continue;
+
+																}
+
+															} else {
+
+																// Skip the rest of the current loop iteration
+																continue;
 
 															}
 
@@ -7743,101 +7719,677 @@
 
 														}
 
-													} else {
-
-														// Skip the rest of the current loop iteration
-														continue;
-
 													}
 
-												} else {
+													if (
+														!$extension_query // The specialization is not an extension to the Health Care Provider Taxonomy code set
+														&&
+														$code_query // The specialization has a taxonomy code in the Health Care Provider Taxonomy code set
+													) {
 
-													// Skip the rest of the current loop iteration
-													continue;
-
+													}
 												}
 
-											}
-
-											if (
-												!$extension_query // The specialization is not an extension to the Health Care Provider Taxonomy code set
-												&&
-												$code_query // The specialization has a taxonomy code in the Health Care Provider Taxonomy code set
-											) {
-
-											}
 										}
 
-								}
+								// codingSystem
 
-							// codeValue
+									/**
+									 * The coding system, e.g. 'ICD-10'.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - MedicalCode
+									 */
 
-								$output_item_codeValue = $code ?? '';
+									$codingSystem = 'Health Care Provider Taxonomy';
 
-							// name (Specialization Name in the Health Care Provider Taxonomy Code Set)
+								// inCodeSet
 
-								$output_item_name = get_field( 'clinical_specialty_name', $term ) ?? $term->name; // Use post title as fallback value
-								$output_item_name = $output_item_name ?? '';
+									/**
+									 * A CategoryCodeSet that contains this category code.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - CategoryCodeSet
+									 *      - URL
+									 *
+									 * Used on these types:
+									 *
+									 *      - CategoryCode
+									 *
+									 * As of 22 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
+									 * definitions.
+									 */
 
-							// alternateName (Specialization Display Name in the Health Care Provider Taxonomy Code Set)
+									$inCodeSet = array(
+										'@type' => 'CategoryCodeSet',
+										'alternateName' => array(
+											'Health Care Provider Taxonomy code set',
+											'National Uniform Claim Committee Health Care Provider Taxonomy',
+											'NUCC Health Care Provider Taxonomy',
+											'National Uniform Claim Committee code set',
+											'NUCC code set',
+											'Provider Taxonomy Code List'
+										),
+										'name' => $codingSystem,
+										'sameAs' => 'http://terminology.hl7.org/CodeSystem/v3-nuccProviderCodes',
+										'url' => array(
+											'https://nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40',
+											'https://taxonomy.nucc.org/'
+										),
+									);
 
-								$output_item_alternateName = get_field( 'clinical_specialization_name_display', $term ) ?? '';
+								// URL to term on taxonomy.nucc.org
 
-							// description (Specialization Definition in the Health Care Provider Taxonomy Code Set)
+									$url = $code ? 'https://taxonomy.nucc.org/?searchTerm=' . $code : '';
 
-								$output_item_description = get_field( 'clinical_specialization_definition', $term ) ?? ''; // Use post title as fallback value
-
-								// Clean up value
-
-									if ( $output_item_description ) {
-
-										$output_item_description = wp_strip_all_tags($output_item_description);
-										$output_item_description = str_replace("\n", ' ', $output_item_description); // Strip line breaks
-										$output_item_description = uamswp_attr_conversion($output_item_description);
-
-									}
-
-							// URL to term on taxonomy.nucc.org
-
-								$output_item_url = $output_item_codeValue ? 'https://taxonomy.nucc.org/?searchTerm=' . $output_item_codeValue : '';
-
-							// Add values from the item to the item array
+							// Get and set schema property values
 
 								if (
-									$output_item_codeValue
+									$code
 									&&
-									$output_item_codingSystem
+									$codingSystem
 								) {
 
-									$output_item = array(
-										'@id' => $output_item_url,
-										'@type' => 'MedicalCode',
-										'additionalType' => $output_item_additionalType,
-										'alternateName' => $output_item_alternateName,
-										'code' => $output_item_code,
-										'codeValue' => $output_item_codeValue,
-										'codingSystem' => $output_item_codingSystem,
-										'description' => $output_item_description,
-										'disambiguatingDescription' => $output_item_disambiguatingDescription,
-										'funding' => $output_item_funding,
-										'guideline' => $output_item_guideline,
-										'identifier' => $output_item_identifier,
-										'image' => $output_item_image,
-										'inCodeSet' => $output_item_inCodeSet,
-										'inDefinedTermSet' => $output_item_inDefinedTermSet,
-										'legalStatus' => $output_item_legalStatus,
-										'mainEntityOfPage' => $output_item_mainEntityOfPage,
-										'medicineSystem' => $output_item_medicineSystem,
-										'name' => $output_item_name,
-										'potentialAction' => $output_item_potentialAction,
-										'recognizingAuthority' => $output_item_recognizingAuthority,
-										'relevantSpecialty' => $output_item_relevantSpecialty,
-										'sameAs' => $output_item_sameAs,
-										'study' => $output_item_study,
-										'subjectOf' => $output_item_subjectOf,
-										'termCode' => $output_item_termCode,
-										'url' => $output_item_url
-									);
+									// @id
+
+										$output_item_id = ( $url && $type ) ? $url . '#' . $type : '';
+
+										if ( $output_item_id ) {
+
+											$output_item['@id'] = $output_item_id;
+
+										}
+
+									// @type
+
+										$output_item_type = $type;
+
+										if ( $output_item_type ) {
+
+											$output_item['@type'] = $output_item_type;
+
+										}
+
+									// additionalType
+
+										/**
+										 * An additional type for the item, typically used for adding more specific types
+										 * from external vocabularies in microdata syntax. This is a relationship between
+										 * something and a class that the thing is in. Typically the value is a
+										 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+										 * in RDF. Text values can be used sparingly, for cases where useful information
+										 * can be added without their being an appropriate schema to reference. In the
+										 * case of text values, the class label should follow the schema.org style guide.
+										 *
+										 * Subproperty of:
+										 *      - rdf:type
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - Text
+										 *      - URL
+										 *
+										 * Used on these types:
+										 *
+										 *      - Thing
+										 */
+
+										if ( $output_item_additionalType ) {
+
+											$output_item['additionalType'] = $output_item_additionalType;
+
+										}
+
+									// alternateName
+
+										/**
+										 * An alias for the item.
+										 *
+										 * Expected Type:
+										 *
+										 *      - Text
+										 *
+										 * Used on these types:
+										 *
+										 *      - Thing
+										 */
+
+										$output_item_alternateName = get_field( 'clinical_specialization_name_display', $term ) ?? '';
+
+										if ( $output_item_alternateName ) {
+
+											$output_item['alternateName'] = $output_item_alternateName;
+
+										}
+
+									// code
+
+										/**
+										 * A medical code for the entity, taken from a controlled vocabulary or ontology
+										 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - MedicalCode
+										 *
+										 * Used on these types:
+										 *
+										 *      - MedicalEntity
+										 */
+
+										$output_item_code = $code ?? '';
+
+										if ( $output_item_code ) {
+
+											$output_item['code'] = $output_item_code;
+
+										}
+
+									// codeValue
+
+										/**
+										 * A short textual code that uniquely identifies the value.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - Text
+										 *
+										 * Used on these types:
+										 *
+										 *      - CategoryCode
+										 *      - MedicalCode
+										 *
+										 * As of 22 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+										 * feedback and adoption from applications and websites can help improve their
+										 * definitions.
+										 */
+
+										$output_item_codeValue = $code ?? '';
+
+										if ( $output_item_codeValue ) {
+
+											$output_item['codeValue'] = $output_item_codeValue;
+
+										}
+
+									// codingSystem
+
+										/**
+										 * The coding system, e.g. 'ICD-10'.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - Text
+										 *
+										 * Used on these types:
+										 *
+										 *      - MedicalCode
+										 */
+
+										$output_item_codingSystem = $codingSystem;
+
+										if ( $output_item_codingSystem ) {
+
+											$output_item['codingSystem'] = $output_item_codingSystem;
+
+										}
+
+									// description
+
+										/**
+										 * A description of the item.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - Text
+										 *      - TextObject
+										 *
+										 * Used on these types:
+										 *
+										 *      - Thing
+										 *
+										 * Sub-properties:
+										 *
+										 *      - disambiguatingDescription
+										 *      - interpretedAsClaim
+										 *      - originalMediaContextDescription
+										 *      - sha256
+										 */
+
+										$output_item_description = get_field( 'clinical_specialization_definition', $term ) ?? ''; // Use post title as fallback value
+
+										// Clean up value
+
+											if ( $output_item_description ) {
+
+												$output_item_description = wp_strip_all_tags($output_item_description);
+												$output_item_description = str_replace("\n", ' ', $output_item_description); // Strip line breaks
+												$output_item_description = uamswp_attr_conversion($output_item_description);
+
+											}
+
+										if ( $output_item_description ) {
+
+											$output_item['description'] = $output_item_description;
+
+										}
+
+									// disambiguatingDescription
+
+										/**
+										 * A sub property of description. A short description of the item used to
+										 * disambiguate from other, similar items. Information from other properties (in
+										 * particular, name) may be necessary for the description to be useful for
+										 * disambiguation.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - Text
+										 *
+										 * Used on these types:
+										 *
+										 *      - Thing
+										 */
+
+										if ( $output_item_disambiguatingDescription ) {
+
+											$output_item['disambiguatingDescription'] = $output_item_disambiguatingDescription;
+
+										}
+
+									// funding
+
+										/**
+										 * A Grant that directly or indirectly provide funding or sponsorship for this
+										 * item. See also ownershipFundingInfo.
+										 *
+										 * Inverse-property: fundedItem
+										 *
+										 * Grant: https://schema.org/Grant
+										 * ownershipFundingInfo: https://schema.org/ownershipFundingInfo
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - Grant
+										 *
+										 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+										 * feedback and adoption from applications and websites can help improve their
+										 * definitions.
+										 */
+
+										if ( $output_item_funding ) {
+
+											$output_item['funding'] = $output_item_funding;
+
+										}
+
+									// guideline
+
+										/**
+										 * A medical guideline related to this entity.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - MedicalGuideline
+										 */
+
+										if ( $output_item_guideline ) {
+
+											$output_item['guideline'] = $output_item_guideline;
+
+										}
+
+									// identifier
+
+										/**
+										 * The identifier property represents any kind of identifier for any kind of
+										 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
+										 * properties for representing many of these, either as textual strings or as
+										 * URL (URI) links.
+										 *
+										 * See https://schema.org/docs/datamodel.html#identifierBg for more details.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - PropertyValue
+										 *      - Text
+										 *      - URL
+										 */
+
+										if ( $output_item_identifier ) {
+
+											$output_item['identifier'] = $output_item_identifier;
+
+										}
+
+									// image
+
+										/**
+										 * An image of the item. This can be a URL or a fully described ImageObject.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - ImageObject
+										 *      - URL
+										 */
+
+										if ( $output_item_image ) {
+
+											$output_item['image'] = $output_item_image;
+
+										}
+
+									// inCodeSet
+
+										/**
+										 * A CategoryCodeSet that contains this category code.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - CategoryCodeSet
+										 *      - URL
+										 *
+										 * Used on these types:
+										 *
+										 *      - CategoryCode
+										 *
+										 * As of 22 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+										 * feedback and adoption from applications and websites can help improve their
+										 * definitions.
+										 */
+
+										$output_item_inCodeSet = $inCodeSet;
+
+										if ( $output_item_inCodeSet ) {
+
+											$output_item['inCodeSet'] = $output_item_inCodeSet;
+
+										}
+
+									// inDefinedTermSet
+
+										/**
+										 * A DefinedTermSet that contains this term.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - DefinedTermSet
+										 *      - URL
+										 *
+										 * Used on these types:
+										 *
+										 *      - DefinedTerm
+										 *
+										 * Sub-properties:
+										 *
+										 *      - inCodeSet
+										 *
+										 * As of 22 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+										 * feedback and adoption from applications and websites can help improve their
+										 * definitions.
+										 */
+
+										if ( $output_item_inDefinedTermSet ) {
+
+											$output_item['inDefinedTermSet'] = $output_item_inDefinedTermSet;
+
+										}
+
+									// legalStatus
+
+										/**
+										 * The drug or supplement's legal status, including any controlled substance
+										 * schedules that apply.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - DrugLegalStatus
+										 *      - MedicalEnumeration
+										 *      - Text
+										 */
+
+										if ( $output_item_legalStatus ) {
+
+											$output_item['legalStatus'] = $output_item_legalStatus;
+
+										}
+
+									// mainEntityOfPage
+
+										/**
+										 * Indicates a page (or other CreativeWork) for which this thing is the main
+										 * entity being described. See background notes for details.
+										 *
+										 * Inverse property:
+										 *
+										 *      - mainEntity
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - CreativeWork
+										 *      - URL
+										 *
+										 * Used on these types:
+										 *
+										 *      - Thing
+										 */
+
+										if ( $output_item_mainEntityOfPage ) {
+
+											$output_item['mainEntityOfPage'] = $output_item_mainEntityOfPage;
+
+										}
+
+									// medicineSystem
+
+										/**
+										 * The system of medicine that includes this MedicalEntity
+										 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - MedicineSystem
+										 */
+
+										if ( $output_item_medicineSystem ) {
+
+											$output_item['medicineSystem'] = $output_item_medicineSystem;
+
+										}
+
+									// name
+
+										/**
+										 * The name of the item.
+										 *
+										 * Subproperty of:
+										 *
+										 *      - rdfs:label
+										 *
+										 * Expected Type:
+										 *
+										 *      - Text
+										 */
+
+										$output_item_name = get_field( 'clinical_specialty_name', $term ) ?? ( $term->name ?? ''); // Use the term's name  as fallback value
+
+										if ( $output_item_name ) {
+
+											$output_item['name'] = $output_item_name;
+
+										}
+
+									// potentialAction
+
+										/**
+										 * Indicates a potential Action, which describes an idealized action in which this
+										 * thing would play an 'object' role.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - Action
+										 *
+										 * Used on these types:
+										 *
+										 *      - Thing
+										 */
+
+										if ( $output_item_potentialAction ) {
+
+											$output_item['potentialAction'] = $output_item_potentialAction;
+
+										}
+
+									// recognizingAuthority
+
+										/**
+										 * If applicable, the organization that officially recognizes this entity as part
+										 * of its endorsed system of medicine.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - Organization
+										 */
+
+										if ( $output_item_recognizingAuthority ) {
+
+											$output_item['recognizingAuthority'] = $output_item_recognizingAuthority;
+
+										}
+
+									// relevantSpecialty
+
+										/**
+										 * If applicable, a medical specialty in which this entity is relevant.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - MedicalSpecialty (enumeration type)
+										 */
+
+										if ( $output_item_relevantSpecialty ) {
+
+											$output_item['relevantSpecialty'] = $output_item_relevantSpecialty;
+
+										}
+
+									// sameAs
+
+										/**
+										 * URL of a reference Web page that unambiguously indicates the item's identity
+										 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+										 * website).
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - URL
+										 *
+										 * Used on these types:
+										 *
+										 *      - Thing
+										 */
+
+										if ( $output_item_sameAs ) {
+
+											$output_item['sameAs'] = $output_item_sameAs;
+
+										}
+
+									// study
+
+										/**
+										 * A medical study or trial related to this entity.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - MedicalStudy
+										 */
+
+										if ( $output_item_study ) {
+
+											$output_item['study'] = $output_item_study;
+
+										}
+
+									// subjectOf
+
+										/**
+										 * A CreativeWork or Event about this Thing.
+										 *
+										 * Inverse-property: about
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - CreativeWork
+										 *      - Event
+										 *
+										 * Used on these types:
+										 *
+										 *      - Thing
+										 */
+
+										if ( $output_item_subjectOf ) {
+
+											$output_item['subjectOf'] = $output_item_subjectOf;
+
+										}
+
+									// termCode
+
+										/**
+										 * A code that identifies this DefinedTerm within a DefinedTermSet.
+										 *
+										 * Values expected to be one of these types:
+										 *
+										 *      - Text
+										 *
+										 * Used on these types:
+										 *
+										 *      - DefinedTerm
+										 *
+										 * Sub-properties:
+										 *
+										 *      - codeValue
+										 *
+										 * As of 22 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+										 * feedback and adoption from applications and websites can help improve their
+										 * definitions.
+										 */
+
+										if ( $output_item_termCode ) {
+
+											$output_item['termCode'] = $output_item_termCode;
+
+										}
+
+									// url
+
+										/**
+										 * URL of the item.
+										 *
+										 * Expected Type:
+										 *
+										 *      - URL
+										 *
+										 * Used on these types:
+										 *
+										 *      - Thing
+										 */
+
+										$output_item_url = $url ?? '';
+
+										if ( $output_item_url ) {
+
+											$output_item['url'] = $output_item_url;
+
+										}
 
 								}
 
