@@ -12095,7 +12095,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 		// Values for Specific Term
 
-			function uamswp_fad_clinical_specialization(
+			function uamswp_fad_clinical_specialization_term(
 				int $id // int // ID of the Clinical Specialization term
 			) {
 
@@ -12381,7 +12381,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 								// Get the values of the parent term
 
-									$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization( $term_parent_id ); // array
+									$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization_term( $term_parent_id ); // array
 
 								// Get the CMS Specialty Code values from the parent term
 
@@ -12443,7 +12443,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 									// Get the values of the parent term
 
-										$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization( $term_parent_id ); // array
+										$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization_term( $term_parent_id ); // array
 
 									// Get the MedicalSpecialty Enumeration Member value from the parent term
 
@@ -12485,7 +12485,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 								// Get the values of the parent term
 
-									$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization( $term_parent_id ); // array
+									$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization_term( $term_parent_id ); // array
 
 								// Get the Related O*Net-SOC Occupation Code values from the parent term
 
@@ -12547,7 +12547,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 									// Get the values of the parent term
 
-										$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization( $term_parent_id ); // array
+										$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization_term( $term_parent_id ); // array
 
 									// Get the ISCO-08 Code value from the parent term
 
@@ -12601,7 +12601,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 										// Get the values of the parent term
 
-											$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization( $term_parent_id ); // array
+											$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization_term( $term_parent_id ); // array
 
 										// Get the Reference Webpages About the Occupation value from the parent term
 
@@ -12639,7 +12639,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 										// Get the values of the parent term
 
-											$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization( $term_parent_id ); // array
+											$term_parent_value = isset($term_parent_value) ? $term_parent_value : uamswp_fad_clinical_specialization_term( $term_parent_id ); // array
 
 										// Get the Reference Webpages About the Specialization value from the parent term
 
@@ -12785,7 +12785,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 										// Get details of the term
 
-											$term_detail = uamswp_fad_clinical_specialization(
+											$term_detail = uamswp_fad_clinical_specialization_term(
 												$term_id // int // ID of the Clinical Specialization term
 											) ?? null; // array
 
