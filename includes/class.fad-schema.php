@@ -34139,6 +34139,285 @@
 									 *      - Thing
 									 */
 
+									if (
+										(
+											(
+												isset($expertise_item_MedicalWebPage)
+												&&
+												in_array(
+													'mentions',
+													$expertise_properties_map[$MedicalWebPage_type]['properties']
+												)
+											)
+											||
+											(
+												isset($expertise_item_MedicalEntity)
+												&&
+												in_array(
+													'mentions',
+													$expertise_properties_map[$MedicalEntity_type]['properties']
+												)
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Base array
+
+												$expertise_mentions = array();
+
+											// Merge in related locations value
+
+												$expertise_location_LocalBusiness = $expertise_location_LocalBusiness ?? null;
+
+												if ( $expertise_location_LocalBusiness ) {
+
+													$expertise_mentions = uamswp_fad_schema_merge_values(
+														$expertise_mentions, // mixed // Required // Initial schema item property value
+														$expertise_location_LocalBusiness // mixed // Required // Incoming schema item property value
+													);
+
+												}
+
+												// Merge location significantLink value into significantLink
+
+													$expertise_location_MedicalWebPage_significantLink = $expertise_location_MedicalWebPage_significantLink ?? null;
+
+													if ( $expertise_location_MedicalWebPage_significantLink ) {
+
+														$expertise_significantLink = uamswp_fad_schema_merge_values(
+															$expertise_significantLink, // mixed // Required // Initial schema item property value
+															$expertise_location_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+												// Merge location keywords value into keywords
+
+													$expertise_location_LocalBusiness_keywords = $expertise_location_LocalBusiness_keywords ?? null;
+
+													if ( $expertise_location_LocalBusiness_keywords ) {
+
+														$expertise_keywords = uamswp_fad_schema_merge_values(
+															$expertise_keywords, // mixed // Required // Initial schema item property value
+															$expertise_location_LocalBusiness_keywords // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+											// Merge in descendant areas of expertise value
+
+												$expertise_descendant_MedicalEntity = $expertise_descendant_MedicalEntity ?? null;
+
+												if ( $expertise_descendant_MedicalEntity ) {
+
+													$expertise_mentions = uamswp_fad_schema_merge_values(
+														$expertise_mentions, // mixed // Required // Initial schema item property value
+														$expertise_descendant_MedicalEntity // mixed // Required // Incoming schema item property value
+													);
+
+												}
+
+												// Merge areas of expertise significantLink value into significantLink
+
+													$expertise_descendant_MedicalWebPage_significantLink = $expertise_descendant_MedicalWebPage_significantLink ?? null;
+
+													if ( $expertise_descendant_MedicalWebPage_significantLink ) {
+
+														$expertise_significantLink = uamswp_fad_schema_merge_values(
+															$expertise_significantLink, // mixed // Required // Initial schema item property value
+															$expertise_descendant_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+												// Merge areas of expertise keywords value into keywords
+
+													$expertise_descendant_MedicalEntity_keywords = $expertise_descendant_MedicalEntity_keywords ?? null;
+
+													if ( $expertise_descendant_MedicalEntity_keywords ) {
+
+														$expertise_keywords = uamswp_fad_schema_merge_values(
+															$expertise_keywords, // mixed // Required // Initial schema item property value
+															$expertise_descendant_MedicalEntity_keywords // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+											// Merge in related areas of expertise value
+
+												$expertise_related_MedicalEntity = $expertise_related_MedicalEntity ?? null;
+
+												if ( $expertise_related_MedicalEntity ) {
+
+													$expertise_mentions = uamswp_fad_schema_merge_values(
+														$expertise_mentions, // mixed // Required // Initial schema item property value
+														$expertise_related_MedicalEntity // mixed // Required // Incoming schema item property value
+													);
+
+												}
+
+												// Merge areas of expertise significantLink value into significantLink
+
+													$expertise_related_MedicalWebPage_significantLink = $expertise_related_MedicalWebPage_significantLink ?? null;
+
+													if ( $expertise_related_MedicalWebPage_significantLink ) {
+
+														$expertise_significantLink = uamswp_fad_schema_merge_values(
+															$expertise_significantLink, // mixed // Required // Initial schema item property value
+															$expertise_related_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+												// Merge areas of expertise keywords value into keywords
+
+													$expertise_related_MedicalEntity_keywords = $expertise_related_MedicalEntity_keywords ?? null;
+
+													if ( $expertise_related_MedicalEntity_keywords ) {
+
+														$expertise_keywords = uamswp_fad_schema_merge_values(
+															$expertise_keywords, // mixed // Required // Initial schema item property value
+															$expertise_related_MedicalEntity_keywords // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+											// Merge in related clinical resources value
+
+												$expertise_clinical_resource_CreativeWork = $expertise_clinical_resource_CreativeWork ?? null;
+
+												if ( $expertise_clinical_resource_CreativeWork ) {
+
+													$expertise_mentions = uamswp_fad_schema_merge_values(
+														$expertise_mentions, // mixed // Required // Initial schema item property value
+														$expertise_clinical_resource_CreativeWork // mixed // Required // Incoming schema item property value
+													);
+
+												}
+
+												// Merge clinical resources significantLink value into significantLink
+
+													$expertise_clinical_resource_MedicalWebPage_significantLink = $expertise_clinical_resource_MedicalWebPage_significantLink ?? null;
+
+													if ( $expertise_clinical_resource_MedicalWebPage_significantLink ) {
+
+														$expertise_significantLink = uamswp_fad_schema_merge_values(
+															$expertise_significantLink, // mixed // Required // Initial schema item property value
+															$expertise_clinical_resource_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+											// Merge in related conditions value
+
+												$expertise_condition = $expertise_condition ?? null;
+
+												if ( $expertise_condition ) {
+
+													$expertise_mentions = uamswp_fad_schema_merge_values(
+														$expertise_mentions, // mixed // Required // Initial schema item property value
+														$expertise_condition // mixed // Required // Incoming schema item property value
+													);
+
+												}
+
+												// Merge conditions significantLink value into significantLink
+
+													$expertise_condition_significantLink = $expertise_condition_significantLink ?? null;
+
+													if ( $expertise_condition_significantLink ) {
+
+														$expertise_significantLink = uamswp_fad_schema_merge_values(
+															$expertise_significantLink, // mixed // Required // Initial schema item property value
+															$expertise_condition_significantLink // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+												// Merge conditions keywords value into keywords
+
+													$expertise_condition_keywords = $expertise_condition_keywords ?? null;
+
+													if ( $expertise_condition_keywords ) {
+
+														$expertise_keywords = uamswp_fad_schema_merge_values(
+															$expertise_keywords, // mixed // Required // Initial schema item property value
+															$expertise_condition_keywords // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+											// Merge in related treatments value
+
+												$expertise_availableService = $expertise_availableService ?? null;
+
+												if ( $expertise_availableService ) {
+
+													$expertise_mentions = uamswp_fad_schema_merge_values(
+														$expertise_mentions, // mixed // Required // Initial schema item property value
+														$expertise_availableService // mixed // Required // Incoming schema item property value
+													);
+
+												}
+
+												// Merge availableService significantLink value into significantLink
+
+													$expertise_availableService_significantLink = $expertise_availableService_significantLink ?? null;
+
+													if ( $expertise_availableService_significantLink ) {
+
+														$expertise_significantLink = uamswp_fad_schema_merge_values(
+															$expertise_significantLink, // mixed // Required // Initial schema item property value
+															$expertise_availableService_significantLink // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+												// Merge availableService keywords value into keywords
+
+													$expertise_availableService_keywords = $expertise_availableService_keywords ?? null;
+
+													if ( $expertise_availableService_keywords ) {
+
+														$expertise_keywords = uamswp_fad_schema_merge_values(
+															$expertise_keywords, // mixed // Required // Initial schema item property value
+															$expertise_availableService_keywords // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'mentions', // string // Required // Name of schema property
+													$expertise_mentions, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalEntity
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalEntity_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													'mentions', // string // Required // Name of schema property
+													$expertise_mentions, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
 								// relatedLink [WIP]
 
 									/**
