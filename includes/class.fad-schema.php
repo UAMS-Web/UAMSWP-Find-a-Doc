@@ -33964,7 +33964,7 @@
 									 * and will not be included.
 									 */
 
-								// identifier [WIP]
+								// identifier [excluded; irrelevant]
 
 									/**
 									 * The identifier property represents any kind of identifier for any kind of
@@ -33977,6 +33977,9 @@
 									 *      - PropertyValue
 									 *      - Text
 									 *      - URL
+									 *
+									 * Note: This schema property is not relevant to areas of expertise or their
+									 * webpages and will not be included.
 									 */
 
 								// image
