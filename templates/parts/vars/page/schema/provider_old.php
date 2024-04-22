@@ -712,13 +712,24 @@ $page_id = get_the_ID();
 
 		// description
 
-			/*
+			/**
 			 * A description of the item.
 			 *
 			 * Values expected to be one of these types:
 			 *
-			 *     - Text
-			 *     - TextObject
+			 *      - Text
+			 *      - TextObject
+			 *
+			 * Used on these types:
+			 *
+			 *     - Thing
+			 *
+			 * Sub-properties:
+			 *
+			 *     - disambiguatingDescription
+			 *     - interpretedAsClaim
+			 *     - originalMediaContextDescription
+			 *     - sha256
 			 */
 
 			$schema_provider_MedicalWebPage['description'] = array(); // Defined later
@@ -983,6 +994,26 @@ $page_id = get_the_ID();
 
 		// description
 
+			/**
+			 * A description of the item.
+			 *
+			 * Values expected to be one of these types:
+			 *
+			 *      - Text
+			 *      - TextObject
+			 *
+			 * Used on these types:
+			 *
+			 *     - Thing
+			 *
+			 * Sub-properties:
+			 *
+			 *     - disambiguatingDescription
+			 *     - interpretedAsClaim
+			 *     - originalMediaContextDescription
+			 *     - sha256
+			 */
+
 			$schema_provider_IndividualPhysician['description'] = array(); // Defined later
 
 		// hospitalAffiliation
@@ -1007,17 +1038,22 @@ $page_id = get_the_ID();
 
 		// mainEntityOfPage
 
-			/*
+			/**
 			 * Indicates a page (or other CreativeWork) for which this thing is the main
-			 * entity being described. See background notes at
-			 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+			 * entity being described. See background notes for details.
 			 *
-			 * Inverse-property: mainEntity
+			 * Inverse property:
+			 *
+			 *      - mainEntity
 			 *
 			 * Values expected to be one of these types:
 			 *
-			 *     - CreativeWork
-			 *     - URL
+			 *      - CreativeWork
+			 *      - URL
+			 *
+			 * Used on these types:
+			 *
+			 *      - Thing
 			 */
 
 			$schema_provider_IndividualPhysician['mainEntityOfPage'] = $schema_provider_MedicalWebPage_ref;
@@ -1039,6 +1075,21 @@ $page_id = get_the_ID();
 			}
 
 		// subjectOf
+
+			/**
+			 * A CreativeWork or Event about this Thing.
+			 *
+			 * Inverse-property: about
+			 *
+			 * Values expected to be one of these types:
+			 *
+			 *      - CreativeWork
+			 *      - Event
+			 *
+			 * Used on these types:
+			 *
+			 *      - Thing
+			 */
 
 			$schema_provider_IndividualPhysician['subjectOf'] = $schema_provider_MedicalWebPage_ref;
 
@@ -1080,6 +1131,10 @@ $page_id = get_the_ID();
 			 *
 			 *     - Text
 			 *     - URL
+			 *
+			 * Used on these types:
+			 *
+			 *     - Thing
 			 */
 
 			$schema_provider_Person_additionalType_fallback = 'https://www.wikidata.org/wiki/Q11974939'; // Wikidata item URL for health professional (Q11974939)
@@ -1292,6 +1347,26 @@ $page_id = get_the_ID();
 			}
 
 		// description
+
+			/**
+			 * A description of the item.
+			 *
+			 * Values expected to be one of these types:
+			 *
+			 *      - Text
+			 *      - TextObject
+			 *
+			 * Used on these types:
+			 *
+			 *     - Thing
+			 *
+			 * Sub-properties:
+			 *
+			 *     - disambiguatingDescription
+			 *     - interpretedAsClaim
+			 *     - originalMediaContextDescription
+			 *     - sha256
+			 */
 
 			$schema_provider_Person['description'] = array(
 				'@id' => $schema_provider_url . '#Description',

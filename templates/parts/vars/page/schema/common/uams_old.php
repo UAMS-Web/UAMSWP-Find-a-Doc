@@ -37,10 +37,34 @@
 
 	// name
 
+		/**
+		 * The name of the item.
+		 *
+		 * Subproperty of:
+		 *
+		 *      - rdfs:label
+		 *
+		 * Expected Type:
+		 *
+		 *      - Text
+		 */
+
 		$schema_base_org_uams['name'] = 'University of Arkansas for Medical Sciences';
 		$schema_base_org_uams_name = $schema_base_org_uams['name'] ?? '';
 
 	// alternateName
+
+	/**
+	 * An alias for the item.
+	 *
+	 * Expected Type:
+	 *
+	 *      - Text
+	 *
+	 * Used on these types:
+	 *
+	 *     - Thing
+	 */
 
 		$schema_base_org_uams['alternateName'] = 'UAMS';
 
@@ -73,6 +97,26 @@
 			}
 
 	// description
+
+		/**
+		 * A description of the item.
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *      - Text
+		 *      - TextObject
+		 *
+		 * Used on these types:
+		 *
+		 *     - Thing
+		 *
+		 * Sub-properties:
+		 *
+		 *     - disambiguatingDescription
+		 *     - interpretedAsClaim
+		 *     - originalMediaContextDescription
+		 *     - sha256
+		 */
 
 		$schema_base_org_uams['description'] = 'The University of Arkansas for Medical Sciences is the state\'s only health sciences university, with colleges of Medicine, Nursing, Pharmacy, Health Professions and Public Health; a graduate school; a hospital; a main campus in Little Rock; a Northwest Arkansas regional campus in Fayetteville; a statewide network of regional campuses; and seven institutes: the Winthrop P. Rockefeller Cancer Institute, Jackson T. Stephens Spine & Neurosciences Institute, Harvey & Bernice Jones Eye Institute, Psychiatric Research Institute, Donald W. Reynolds Institute on Aging, Translational Research Institute and Institute for Digital Health & Innovation. UAMS includes UAMS Health, a statewide health system that encompasses all of UAMS\' clinical enterprise. UAMS is the only adult Level 1 trauma center in the state. UAMS has 3,240 students, 913 medical residents and fellows, and five dental residents. It is the state\'s largest public employer with more than 11,000 employees, including 1,200 physicians who provide care to patients at UAMS, its regional campuses, Arkansas Children\'s, the VA Medical Center and Baptist Health.';
 
@@ -247,6 +291,20 @@
 
 	// sameAs
 
+		/**
+		 * URL of a reference Web page that unambiguously indicates the item's identity
+		 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+		 * website).
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *      - URL
+		 *
+		 * Used on these types:
+		 *
+		 *      - Thing
+		 */
+
 		// Wikipedia: https://en.wikipedia.org/
 
 			$schema_base_org_uams['sameAs'][] = 'https://en.wikipedia.org/wiki/University_of_Arkansas_for_Medical_Sciences'; // Wikipedia entry for 'University of Arkansas for Medical Sciences'
@@ -287,6 +345,18 @@
 
 	// URL
 
+		/**
+		 * URL of the item.
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *      - URL
+		 *
+		 * Used on these types:
+		 *
+		 *      - Thing
+		 */
+
 		$schema_base_org_uams_health_url = user_trailingslashit( get_site_url() );
 		$schema_base_org_uams_health_url_trailingslashit = trailingslashit( get_site_url() );
 
@@ -319,6 +389,18 @@
 
 	// name
 
+		/**
+		 * The name of the item.
+		 *
+		 * Subproperty of:
+		 *
+		 *      - rdfs:label
+		 *
+		 * Expected Type:
+		 *
+		 *      - Text
+		 */
+
 		$schema_base_org_uams_health['name'] = 'UAMS Health';
 		$schema_base_org_uams_health_name = $schema_base_org_uams_health['name'] ?? '';
 
@@ -327,6 +409,26 @@
 		$schema_base_org_uams_health['contactPoint'] = $schema_base_org_uams_contactPoint_ref;
 
 	// description
+
+		/**
+		 * A description of the item.
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *      - Text
+		 *      - TextObject
+		 *
+		 * Used on these types:
+		 *
+		 *     - Thing
+		 *
+		 * Sub-properties:
+		 *
+		 *     - disambiguatingDescription
+		 *     - interpretedAsClaim
+		 *     - originalMediaContextDescription
+		 *     - sha256
+		 */
 
 		$schema_base_org_uams_health['description'] = 'foo'; // Replace foo with __
 
@@ -360,6 +462,18 @@
 
 	// url
 
+		/**
+		 * URL of the item.
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *      - URL
+		 *
+		 * Used on these types:
+		 *
+		 *      - Thing
+		 */
+
 		$schema_base_org_uams_health['url'] = ''; // Defined after UAMSHealth.com 'WebSite' 'url' property is defined
 
 // UAMSHealth.com
@@ -388,6 +502,18 @@
 			}
 
 	// name
+
+		/**
+		 * The name of the item.
+		 *
+		 * Subproperty of:
+		 *
+		 *      - rdfs:label
+		 *
+		 * Expected Type:
+		 *
+		 *      - Text
+		 */
 
 		$schema_base_website_uams_health['name'] = 'UAMS Health';
 
@@ -429,6 +555,18 @@
 		$schema_base_website_uams_health['sourceOrganization'] = $schema_base_org_uams_health_ref;
 
 	// url
+
+		/**
+		 * URL of the item.
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *      - URL
+		 *
+		 * Used on these types:
+		 *
+		 *      - Thing
+		 */
 
 		$schema_base_website_uams_health['url'] = $schema_base_org_uams_health_url;
 

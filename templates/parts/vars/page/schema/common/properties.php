@@ -1201,8 +1201,19 @@
 		 *
 		 * Values expected to be one of these types:
 		 *
-		 *     - Text
-		 *     - TextObject
+		 *      - Text
+		 *      - TextObject
+		 *
+		 * Used on these types:
+		 *
+		 *     - Thing
+		 *
+		 * Sub-properties:
+		 *
+		 *     - disambiguatingDescription
+		 *     - interpretedAsClaim
+		 *     - originalMediaContextDescription
+		 *     - sha256
 		 *
 		 * Get the excerpt. Let the specific entity's schema function handle the fallback
 		 * value.
@@ -1850,15 +1861,20 @@
 
 		/**
 		 * Indicates a page (or other CreativeWork) for which this thing is the main
-		 * entity being described. See background notes at
-		 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+		 * entity being described. See background notes for details.
 		 *
-		 * Inverse-property: mainEntity
+		 * Inverse property:
+		 *
+		 *      - mainEntity
 		 *
 		 * Values expected to be one of these types:
 		 *
-		 *     - CreativeWork
-		 *     - URL
+		 *      - CreativeWork
+		 *      - URL
+		 *
+		 * Used on these types:
+		 *
+		 *      - Thing
 		 */
 
 		// Get values
