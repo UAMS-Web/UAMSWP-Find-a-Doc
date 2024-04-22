@@ -24716,7 +24716,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'significantLink', // string // Required // Name of schema property
+													'relatedLink', // string // Required // Name of schema property
 													$provider_significantLink, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
@@ -24728,7 +24728,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'significantLink', // string // Required // Name of schema property
+													'relatedLink', // string // Required // Name of schema property
 													$provider_significantLink, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
@@ -24740,7 +24740,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-													'significantLink', // string // Required // Name of schema property
+													'relatedLink', // string // Required // Name of schema property
 													$provider_significantLink, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
