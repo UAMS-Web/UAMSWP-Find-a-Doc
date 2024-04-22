@@ -22921,7 +22921,7 @@
 									 * will not be included.
 									 */
 
-								// occupationalCategory [WIP]
+								// occupationalCategory
 
 									/**
 									 * A category describing the job, preferably using a term from a taxonomy such as
@@ -22949,6 +22949,200 @@
 									 * Implementation feedback and adoption from applications and websites can help
 									 * improve their definitions.
 									 */
+
+									if (
+										(
+											(
+												isset($provider_item_MedicalWebPage)
+												&&
+												in_array(
+													'occupationalCategory',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
+											)
+											||
+											(
+												isset($provider_item_MedicalBusiness)
+												&&
+												in_array(
+													'occupationalCategory',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
+											)
+											||
+											(
+												isset($provider_item_Person)
+												&&
+												in_array(
+													'occupationalCategory',
+													$provider_properties_map[$Person_type]['properties']
+												)
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Base array
+
+												$provider_occupationalCategory = array();
+
+											// Get occupationalCategory from clinical specializations
+
+												// Get Provider Clinical Specialization and Occupational Title
+
+													if ( !isset($uamswp_fad_clinical_specialization_provider) ) {
+
+														$uamswp_fad_clinical_specialization_provider = uamswp_fad_clinical_specialization_provider(
+															$entity // int // ID of the provider profile
+														);
+
+													}
+
+												// Loop through the clinical specializations details to get the occupationalCategory values
+
+													$provider_clinical_specialization_occupationalCategory = array();
+
+													if (
+														isset($uamswp_fad_clinical_specialization_provider['detail_array'])
+														&&
+														$uamswp_fad_clinical_specialization_provider['detail_array']
+													) {
+
+														foreach ( $uamswp_fad_clinical_specialization_provider['detail_array'] as $item ) {
+
+															// Term
+
+																if (
+																	isset($item['schema']['occupationalCategory'])
+																	&&
+																	$item['schema']['occupationalCategory']
+																) {
+
+																		$provider_clinical_specialization_occupationalCategory[] = $item['schema']['occupationalCategory'];
+
+																}
+
+															// Term's Ancestors
+
+																if (
+																	isset($item['ancestors'])
+																	&&
+																	$item['ancestors']
+																) {
+
+																	foreach ( $item['ancestors'] as $ancestor_item ) {
+
+																		if (
+																			isset($ancestor_item['schema']['occupationalCategory'])
+																			&&
+																			$ancestor_item['schema']['occupationalCategory']
+																		) {
+
+																			$provider_clinical_specialization_occupationalCategory[] = $ancestor_item['schema']['occupationalCategory'];
+
+																		}
+
+																	}
+
+																}
+
+														}
+
+													}
+
+												// Add to occupationalCategory list array
+
+													$provider_clinical_specialization_occupationalCategory = $provider_clinical_specialization_occupationalCategory ?? null;
+
+													if ( $provider_clinical_specialization_occupationalCategory ) {
+
+														$provider_occupationalCategory = uamswp_fad_schema_merge_values(
+															$provider_occupationalCategory, // mixed // Required // Initial schema item property value
+															$provider_clinical_specialization_occupationalCategory // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+												// Get values for keywords property
+
+													$provider_clinical_specialization_occupationalCategory = $provider_clinical_specialization_occupationalCategory ?? null;
+
+													if ( $provider_clinical_specialization_occupationalCategory ) {
+
+														$provider_clinical_specialization_occupationalCategory_keywords = uamswp_fad_schema_property_values(
+															$provider_clinical_specialization_occupationalCategory, // array // Required // Property values from which to extract specific values
+															array( 'name', 'codeValue' ) // mixed // Required // List of properties from which to collect values
+														);
+
+													}
+
+													// Merge clinical specializations keywords value into keywords
+
+														$provider_clinical_specialization_occupationalCategory_keywords = $provider_clinical_specialization_occupationalCategory_keywords ?? null;
+
+														if ( $provider_clinical_specialization_occupationalCategory_keywords ) {
+
+															$provider_keywords = uamswp_fad_schema_merge_values(
+																$provider_keywords, // mixed // Required // Initial schema item property value
+																$provider_clinical_specialization_occupationalCategory_keywords // mixed // Required // Incoming schema item property value
+															);
+
+														}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if ( isset($provider_item_MedicalWebPage) ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+														'occupationalCategory', // string // Required // Name of schema property
+														$provider_occupationalCategory, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
+
+											// MedicalBusiness
+
+												if ( isset($provider_item_MedicalBusiness) ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+														'occupationalCategory', // string // Required // Name of schema property
+														$provider_occupationalCategory, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
+
+											// Person
+
+												if ( isset($provider_item_Person) ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$Person_type, // string // Required // The @type value for the schema item
+														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+														'occupationalCategory', // string // Required // Name of schema property
+														$provider_occupationalCategory, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
+
+									}
 
 								// offers [WIP]
 
