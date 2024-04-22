@@ -8566,11 +8566,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10138,11 +10138,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10155,11 +10155,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10172,11 +10172,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10189,11 +10189,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10228,11 +10228,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10258,11 +10258,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -10908,7 +10908,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Boolean
+							 *      - Boolean
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11289,11 +11289,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11328,11 +11328,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11426,7 +11426,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - OpeningHoursSpecification
+							 *      - OpeningHoursSpecification
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11804,11 +11804,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 */
 
 							$slogan = get_field( 'brandorg_slogan', $term ) ?? null;
@@ -11858,8 +11858,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Organization
-							 *     - Person
+							 *      - Organization
+							 *      - Person
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11911,7 +11911,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Organization
+							 *      - Organization
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11926,8 +11926,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - CreativeWork
-							 *     - Event
+							 *      - CreativeWork
+							 *      - Event
 							 *
 							 * This property is beyond the scope of what is being included in the brand
 							 * organization item schema and so it will not be included.
@@ -11940,11 +11940,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 */
 
 							$tickerSymbol = get_field( 'brandorg_tickersymbol', $term ) ?? null;
@@ -12013,11 +12013,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - [Insert property name here]
+							 *      - [Insert property name here]
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - [Insert type name here]
+							 *      - [Insert type name here]
 							 */
 
 							$unnamedSourcesPolicy = get_field( 'brandorg_unnamedsourcespolicy', $term ) ?? null;
@@ -12035,7 +12035,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - URL
+							 *      - URL
 							 */
 
 							$url = get_field( 'brandorg_url', $term ) ?? null;
@@ -12419,6 +12419,14 @@
 
 					// url
 
+						/**
+						 * URL of the item.
+						 *
+						 * Expected Type:
+						 *
+						 *      - URL
+						 */
+
 						$url = $schema_common_website_url;
 
 						if ( $url ) {
@@ -12559,6 +12567,14 @@
 
 					// name
 
+						/**
+						 * The name of the item.
+						 *
+						 * Expected Type:
+						 *
+						 *      - Text
+						 */
+
 						// Get values
 
 							$name = 'UAMS Health';
@@ -12584,7 +12600,7 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Thing
+						 *      - Thing
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12599,7 +12615,7 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Text
+						 *      - Text
 						 *
 						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 						 * feedback and adoption from applications and websites can help improve their
@@ -12623,12 +12639,16 @@
 						 * case of text values, the class label should follow the schema.org style guide.
 						 *
 						 * Subproperty of:
-						 *     - rdf:type
+						 *      - rdf:type
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Text
-						 *     - URL
+						 *      - Text
+						 *      - URL
+						 *
+						 * Used on these types:
+						 *
+						 *      - Thing
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12643,7 +12663,7 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - AggregateRating
+						 *      - AggregateRating
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12658,7 +12678,7 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Text
+						 *      - Text
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12674,8 +12694,8 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - CreativeWork
-						 *     - Text
+						 *      - CreativeWork
+						 *      - Text
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12691,7 +12711,7 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Place
+						 *      - Place
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12707,8 +12727,8 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Date
-						 *     - DateTime
+						 *      - Date
+						 *      - DateTime
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12723,8 +12743,8 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Date
-						 *     - DateTime
+						 *      - Date
+						 *      - DateTime
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12739,8 +12759,19 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Text
-						 *     - TextObject
+						 *      - Text
+						 *      - TextObject
+						 *
+						 * Used on these types:
+						 *
+						 *      - Thing
+						 *
+						 * Sub-properties:
+						 *
+						 *      - disambiguatingDescription
+						 *      - interpretedAsClaim
+						 *      - originalMediaContextDescription
+						 *      - sha256
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12758,7 +12789,11 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Text
+						 *      - Text
+						 *
+						 * Used on these types:
+						 *
+						 *      - Thing
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12783,8 +12818,8 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Text
-						 *     - URL
+						 *      - Text
+						 *      - URL
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12802,7 +12837,7 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - CreativeWork
+						 *      - CreativeWork
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12822,9 +12857,9 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - PropertyValue
-						 *     - Text
-						 *     - URL
+						 *      - PropertyValue
+						 *      - Text
+						 *      - URL
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12835,6 +12870,13 @@
 					// image
 
 						/**
+						 * An image of the item. This can be a URL or a fully described ImageObject.
+						 *
+						 * Values expected to be one of these types:
+						 *
+						 *      - ImageObject
+						 *      - URL
+						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
 						 */
@@ -12851,8 +12893,8 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - CreativeWork
-						 *     - URL
+						 *      - CreativeWork
+						 *      - URL
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12877,9 +12919,9 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - DefinedTerm
-						 *     - Text
-						 *     - URL
+						 *      - DefinedTerm
+						 *      - Text
+						 *      - URL
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12896,7 +12938,7 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Thing
+						 *      - Thing
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12912,7 +12954,7 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Thing
+						 *      - Thing
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12937,7 +12979,7 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Action
+						 *      - Action
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12954,7 +12996,7 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - URL
+						 *      - URL
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12971,8 +13013,8 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - CreativeWork
-						 *     - Event
+						 *      - CreativeWork
+						 *      - Event
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -12987,7 +13029,7 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Text
+						 *      - Text
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -13002,7 +13044,7 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - URL
+						 *      - URL
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -13018,7 +13060,7 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Duration (use ISO 8601 duration format).
+						 *      - Duration (use ISO 8601 duration format).
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -13033,8 +13075,8 @@
 						 *
 						 * Values expected to be one of these types:
 						 *
-						 *     - Clip
-						 *     - VideoObject
+						 *      - Clip
+						 *      - VideoObject
 						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
@@ -13540,7 +13582,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - PropertyValue
+							 *      - PropertyValue
 							 */
 
 							if (
@@ -13701,6 +13743,18 @@
 
 												// alternateName
 
+													/**
+													 * An alias for the item.
+													 *
+													 * Expected Type:
+													 *
+													 *      - Text
+													 *
+													 * Used on these types:
+													 *
+													 *      - Thing
+													 */
+
 													$additionalProperty_parking['alternateName'] = array(
 														'parking deck',
 														'parking garage',
@@ -13710,9 +13764,37 @@
 
 												// description
 
+													/**
+													 * A description of the item.
+													 *
+													 * Values expected to be one of these types:
+													 *
+													 *      - Text
+													 *      - TextObject
+													 *
+													 * Used on these types:
+													 *
+													 *      - Thing
+													 *
+													 * Sub-properties:
+													 *
+													 *      - disambiguatingDescription
+													 *      - interpretedAsClaim
+													 *      - originalMediaContextDescription
+													 *      - sha256
+													*/
+
 													$additionalProperty_parking['description'] = 'A parking lot or other parking facility.';
 
 												// name
+
+													/**
+													 * The name of the item.
+													 *
+													 * Expected Type:
+													 *
+													 *      - Text
+													 */
 
 													$additionalProperty_parking['name'] = 'Parking Facility';
 
@@ -13756,12 +13838,16 @@
 							 * case of text values, the class label should follow the schema.org style guide.
 							 *
 							 * Subproperty of:
-							 *     - rdf:type
+							 *      - rdf:type
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
-							 *     - URL
+							 *      - Text
+							 *      - URL
+							 *
+							 * Used on these types:
+							 *
+							 *      - Thing
 							 */
 
 							if (
@@ -13820,8 +13906,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - PostalAddress
-							 *     - Text
+							 *      - PostalAddress
+							 *      - Text
 							 */
 
 							if (
@@ -13884,7 +13970,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
+							 *      - Text
 							 */
 
 							if (
@@ -13936,8 +14022,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Brand
-							 *     - Organization
+							 *      - Brand
+							 *      - Organization
 							 */
 
 							if (
@@ -13972,7 +14058,7 @@
 							 * The basic containment relation between a place and one that contains it.
 							 * expected to be one of these types:
 							 *
-							 *     - Place
+							 *      - Place
 							 *
 							 * Create a taxonomy (or other solution) to define a campus in which this facility
 							 * is contained.
@@ -14013,8 +14099,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - GeoCoordinates
-							 *     - GeoShape
+							 *      - GeoCoordinates
+							 *      - GeoShape
 							 */
 
 							if (
@@ -14062,7 +14148,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
+							 *      - Text
 							 */
 
 							if (
@@ -14098,8 +14184,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Map
-							 *     - URL
+							 *      - Map
+							 *      - URL
 							 *
 							 * The examples on Schema.org indicate that a URL to the location on Google Maps
 							 * is acceptable.
@@ -14150,9 +14236,9 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - PropertyValue
-							 *     - Text
-							 *     - URL
+							 *      - PropertyValue
+							 *      - Text
+							 *      - URL
 							 */
 
 							if (
@@ -14203,8 +14289,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - ImageObject
-							 *     - URL
+							 *      - ImageObject
+							 *      - URL
 							 */
 
 							if (
@@ -14241,7 +14327,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Boolean
+							 *      - Boolean
 							 */
 
 							if (
@@ -14277,8 +14363,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Number
-							 *     - Text
+							 *      - Number
+							 *      - Text
 							 */
 
 							if (
@@ -14327,10 +14413,10 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Place
-							 *     - PostalAddress
-							 *     - Text
-							 *     - VirtualLocation
+							 *      - Place
+							 *      - PostalAddress
+							 *      - Text
+							 *      - VirtualLocation
 							 */
 
 							if (
@@ -14367,8 +14453,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Number
-							 *     - Text
+							 *      - Number
+							 *      - Text
 							 */
 
 							if (
@@ -14416,11 +14502,11 @@
 							 *
 							 * Subproperty of:
 							 *
-							 *     - rdfs:label
+							 *      - rdfs:label
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Text
+							 *      - Text
 							 */
 
 							if (
@@ -14456,7 +14542,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Organization
+							 *      - Organization
 							 */
 
 							if (
@@ -14492,8 +14578,8 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - ImageObject
-							 *     - Photograph
+							 *      - ImageObject
+							 *      - Photograph
 							 */
 
 							if (
@@ -14531,7 +14617,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Boolean
+							 *      - Boolean
 							 */
 
 							if (
@@ -14569,7 +14655,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - URL
+							 *      - URL
 							 */
 
 							if (
@@ -14621,7 +14707,7 @@
 							 *
 							 * Values expected to be one of these types:
 							 *
-							 *     - Boolean
+							 *      - Boolean
 							 */
 
 							if (
@@ -15208,11 +15294,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 *
 									 * Used on these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 									// Get values
@@ -16043,11 +16129,11 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Person
+											 *      - Person
 											 */
 
 											// Add to item values
@@ -16107,11 +16193,11 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Person
+											 *      - Person
 											 */
 
 											// Add to item values
@@ -16171,11 +16257,11 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Person
+											 *      - Person
 											 */
 
 											// Add to item values
@@ -16235,11 +16321,11 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Organization
+											 *      - Organization
 											 */
 
 											// Get values [WIP]
@@ -16307,11 +16393,11 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Person
+											 *      - Person
 											 */
 
 											// Add to item values
@@ -16371,11 +16457,11 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Person
+											 *      - Person
 											 */
 
 											// Get values
@@ -16439,15 +16525,15 @@
 											 *
 											 * Subproperty of:
 											 *
-											 *     - rdfs:label
+											 *      - rdfs:label
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Thing
+											 *      - Thing
 											 */
 
 											// Get values
@@ -16556,11 +16642,11 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Thing
+											 *      - Thing
 											 */
 
 												// Get values
@@ -17594,14 +17680,14 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 *
 									 * Used on these types:
 									 *
-									 *     - Certification
-									 *     - CommunicateAction
-									 *     - CreativeWork
-									 *     - Event
+									 *      - Certification
+									 *      - CommunicateAction
+									 *      - CreativeWork
+									 *      - Event
 									 */
 
 								// actionableFeedbackPolicy [excluded; out of scope]
@@ -17614,7 +17700,7 @@
 									 *
 									 * Subproperty of:
 									 *
-									 *     - publishingPrinciples
+									 *      - publishingPrinciples
 									 *
 									 * Note: This schema property is outside the scope of what should be included in
 									 * Find-a-Doc.
@@ -17635,16 +17721,16 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - PropertyValue
+									 *      - PropertyValue
 									 *
 									 * Used on these types:
 									 *
-									 *     - MerchantReturnPolicy
-									 *     - Offer
-									 *     - Place
-									 *     - Product
-									 *     - QualitativeValue
-									 *     - QuantitativeValue
+									 *      - MerchantReturnPolicy
+									 *      - Offer
+									 *      - Place
+									 *      - Product
+									 *      - QualitativeValue
+									 *      - QuantitativeValue
 									 */
 
 								// medicalSpecialty and specialty
@@ -17736,14 +17822,14 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - MedicalSpecialty
+											 *      - MedicalSpecialty
 											 *
 											 * Used on these types:
 											 *
-											 *     - Hospital
-											 *     - MedicalClinic
-											 *     - MedicalOrganization
-											 *     - Physician
+											 *      - Hospital
+											 *      - MedicalClinic
+											 *      - MedicalOrganization
+											 *      - Physician
 											 */
 
 											// Add to item values
@@ -17803,11 +17889,11 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Specialty
+											 *      - Specialty
 											 *
 											 * Used on these types:
 											 *
-											 *     - WebPage
+											 *      - WebPage
 											 */
 
 											// Add to item values
@@ -17875,16 +17961,16 @@
 									 *
 									 * Subproperty of:
 									 *
-									 *     - rdf:type
+									 *      - rdf:type
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
-									 *     - URL
+									 *      - Text
+									 *      - URL
 									 *
 									 * Used on these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 									// additionalType (MedicalWebPage)
@@ -17950,16 +18036,16 @@
 										 * case of text values, the class label should follow the schema.org style guide.
 										 *
 										 * Subproperty of:
-										 *     - rdf:type
+										 *      - rdf:type
 										 *
 										 * Values expected to be one of these types:
 										 *
-										 *     - Text
-										 *     - URL
+										 *      - Text
+										 *      - URL
 										 *
 										 * Used on these types:
 										 *
-										 *     - Thing
+										 *      - Thing
 										 */
 
 										if (
@@ -18128,16 +18214,16 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - PostalAddress
-									 *     - Text
+									 *      - PostalAddress
+									 *      - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - GeoCoordinates
-									 *     - GeoShape
-									 *     - Organization
-									 *     - Person
-									 *     - Place
+									 *      - GeoCoordinates
+									 *      - GeoShape
+									 *      - Organization
+									 *      - Person
+									 *      - Place
 									 */
 
 								// affiliation
@@ -18148,11 +18234,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Organization
+									 *      - Organization
 									 *
 									 * Used on these types:
 									 *
-									 *     - Person
+									 *      - Person
 									 */
 
 									if (
@@ -18331,18 +18417,18 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - AggregateRating
+									 *      - AggregateRating
 									 *
 									 * Used on these types:
 									 *
-									 *     - Brand
-									 *     - CreativeWork
-									 *     - Event
-									 *     - Offer
-									 *     - Organization
-									 *     - Place
-									 *     - Product
-									 *     - Service
+									 *      - Brand
+									 *      - CreativeWork
+									 *      - Event
+									 *      - Offer
+									 *      - Organization
+									 *      - Place
+									 *      - Product
+									 *      - Service
 									 */
 
 									if (
@@ -18446,6 +18532,26 @@
 												}
 
 											// description [WIP]
+
+												/**
+												 * A description of the item.
+												 *
+												 * Values expected to be one of these types:
+												 *
+												 *      - Text
+												 *      - TextObject
+												 *
+												 * Used on these types:
+												 *
+												 *      - Thing
+												 *
+												 * Sub-properties:
+												 *
+												 *      - disambiguatingDescription
+												 *      - interpretedAsClaim
+												 *      - originalMediaContextDescription
+												 *      - sha256
+												 */
 
 												/*
 
@@ -18555,7 +18661,7 @@
 									 *
 									 * Inverse-property:
 									 *
-									 *     - alumniOf
+									 *      - alumniOf
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -18570,12 +18676,12 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - EducationalOrganization
-									 *     - Organization
+									 *      - EducationalOrganization
+									 *      - Organization
 									 *
 									 * Used on these types:
 									 *
-									 *     - Person
+									 *      - Person
 									 */
 
 								// amenityFeature [excluded; irrelevant]
@@ -18596,20 +18702,20 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ContactPoint
-									 *     - DeliveryChargeSpecification
-									 *     - Demand
-									 *     - Offer
-									 *     - Organization
+									 *      - ContactPoint
+									 *      - DeliveryChargeSpecification
+									 *      - Demand
+									 *      - Offer
+									 *      - Organization
 									 *
 									 * Used on these types:
 									 *
-									 *     - ContactPoint
-									 *     - DeliveryChargeSpecification
-									 *     - Demand
-									 *     - Offer
-									 *     - Organization
-									 *     - Service
+									 *      - ContactPoint
+									 *      - DeliveryChargeSpecification
+									 *      - Demand
+									 *      - Offer
+									 *      - Organization
+									 *      - Service
 									 */
 
 								// availableService
@@ -18619,14 +18725,14 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalProcedure
-									 *     - MedicalTest
+									 *      - MedicalProcedure
+									 *      - MedicalTest
 									 *
 									 * Used on these types:
 									 *
-									 *     - Hospital
-									 *     - MedicalClinic
-									 *     - Physician
+									 *      - Hospital
+									 *      - MedicalClinic
+									 *      - Physician
 									 */
 
 									if (
@@ -18747,15 +18853,15 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - CreativeWork
-									 *     - Organization
-									 *     - Person
-									 *     - Product
-									 *     - Service
+									 *      - CreativeWork
+									 *      - Organization
+									 *      - Person
+									 *      - Product
+									 *      - Service
 									 */
 
 								// awards [excluded; superseded]
@@ -18777,11 +18883,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - Place
+									 *      - Place
 									 *
 									 * Note: Consider using the UAMS Health Epic SER ID for the provider.
 									 */
@@ -20401,12 +20507,12 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Organization
-											 *     - Person
+											 *      - Organization
+											 *      - Person
 											 */
 
 											if (
@@ -21006,11 +21112,11 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Physician
+											 *      - Physician
 											 */
 
 											if (
@@ -21206,11 +21312,11 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * Used on these types:
 											 *
-											 *     - Organization
+											 *      - Organization
 											 *
 											 * As of 16 Apr 2024, this term is in the "new" area of Schema.org. Implementation
 											 * feedback and adoption from applications and websites can help improve their
@@ -21327,13 +21433,13 @@
 												 *
 												 * Values expected to be one of these types:
 												 *
-												 *     - PropertyValue
-												 *     - Text
-												 *     - URL
+												 *      - PropertyValue
+												 *      - Text
+												 *      - URL
 												 *
 												 * Used on these types:
 												 *
-												 *     - Thing
+												 *      - Thing
 												 */
 
 												// Base 'identifier' property value array
@@ -21708,12 +21814,12 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ImageObject
-									 *     - URL
+									 *      - ImageObject
+									 *      - URL
 									 *
 									 * Used on these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 									if (
@@ -21819,11 +21925,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Boolean
+									 *      - Boolean
 									 *
 									 * Used on these types:
 									 *
-									 *     - MedicalOrganization
+									 *      - MedicalOrganization
 									 *
 									 * As of 16 Apr 2024, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -21934,11 +22040,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Boolean
+									 *      - Boolean
 									 *
 									 * Used on these types:
 									 *
-									 *     - Product
+									 *      - Product
 									 */
 
 									// MedicalWebPage
@@ -21994,12 +22100,12 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - DefinedTerm
-									 *     - Text
+									 *      - DefinedTerm
+									 *      - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - Person
+									 *      - Person
 									 */
 
 									if (
@@ -22152,13 +22258,13 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Language
-									 *     - Text
+									 *      - Language
+									 *      - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - Organization
-									 *     - Person
+									 *      - Organization
+									 *      - Person
 									 */
 
 									if (
@@ -22295,13 +22401,13 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Number
-									 *     - Text
+									 *      - Number
+									 *      - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - GeoCoordinates
-									 *     - Place
+									 *      - GeoCoordinates
+									 *      - Place
 									 */
 
 								// location (specific property)
@@ -22312,17 +22418,17 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Place
-									 *     - PostalAddress
-									 *     - Text
-									 *     - VirtualLocation
+									 *      - Place
+									 *      - PostalAddress
+									 *      - Text
+									 *      - VirtualLocation
 									 *
 									 * Used on these types:
 									 *
-									 *     - Action
-									 *     - Event
-									 *     - InteractionCounter
-									 *     - Organization
+									 *      - Action
+									 *      - Event
+									 *      - InteractionCounter
+									 *      - Organization
 									 */
 
 									if (
@@ -22452,13 +22558,13 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Number
-									 *     - Text
+									 *      - Number
+									 *      - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - GeoCoordinates
-									 *     - Place
+									 *      - GeoCoordinates
+									 *      - Place
 									 */
 
 								// mainContentOfPage
@@ -22468,11 +22574,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - WebPageElement
+									 *      - WebPageElement
 									 *
 									 * Used on these types:
 									 *
-									 *     - WebPage
+									 *      - WebPage
 									*/
 
 									if (
@@ -22576,11 +22682,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 *
 									 * Used on these types:
 									 *
-									 *     - CreativeWork
+									 *      - CreativeWork
 									 */
 
 								// mainEntityOfPage [WIP]
@@ -22591,16 +22697,16 @@
 									 *
 									 * Inverse property:
 									 *
-									 *     - mainEntity
+									 *      - mainEntity
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
-									 *     - URL
+									 *      - CreativeWork
+									 *      - URL
 									 *
 									 * Used on these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 								// makesOffer [WIP]
@@ -22612,12 +22718,12 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Offer
+									 *      - Offer
 									 *
 									 * Used on these types:
 									 *
-									 *     - Organization
-									 *     - Person
+									 *      - Organization
+									 *      - Person
 									 */
 
 								// map [excluded; superseded]
@@ -22649,7 +22755,7 @@
 									 *
 									 * Inverse property:
 									 *
-									 *     - memberOf
+									 *      - memberOf
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -22665,13 +22771,13 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Organization
-									 *     - ProgramMembership
+									 *      - Organization
+									 *      - ProgramMembership
 									 *
 									 * Used on these types:
 									 *
-									 *     - Organization
-									 *     - Person
+									 *      - Organization
+									 *      - Person
 									 */
 
 									if (
@@ -22860,16 +22966,16 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CategoryCode
-									 *     - Text
+									 *      - CategoryCode
+									 *      - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - EducationalOccupationalProgram
-									 *     - JobPosting
-									 *     - Occupation
-									 *     - Physician
-									 *     - WorkBasedProgram
+									 *      - EducationalOccupationalProgram
+									 *      - JobPosting
+									 *      - Occupation
+									 *      - Physician
+									 *      - WorkBasedProgram
 									 *
 									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
 									 * Implementation feedback and adoption from applications and websites can help
@@ -22895,19 +23001,19 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Demand
-									 *     - Offer
+									 *      - Demand
+									 *      - Offer
 									 *
 									 * Used on these types:
 									 *
-									 *     - AggregateOffer
-									 *     - CreativeWork
-									 *     - EducationalOccupationalProgram
-									 *     - Event
-									 *     - MenuItem
-									 *     - Product
-									 *     - Service
-									 *     - Trip
+									 *      - AggregateOffer
+									 *      - CreativeWork
+									 *      - EducationalOccupationalProgram
+									 *      - Event
+									 *      - MenuItem
+									 *      - Product
+									 *      - Service
+									 *      - Trip
 									 */
 
 								// openingHours [excluded; irrelevant]
@@ -22918,13 +23024,13 @@
 									 * listed with commas ',' separating each day. Day or time ranges are specified
 									 * using a hyphen '-'.
 									 *
-									 *     - Days are specified using the following two-letter combinations:
+									 *      - Days are specified using the following two-letter combinations:
 									 *       Mo, Tu, We, Th, Fr, Sa, Su.
-									 *     - Times are specified using 24:00 format. For example,
+									 *      - Times are specified using 24:00 format. For example,
 									 *       3pm is specified as 15:00, 10am as 10:00.
-									 *     - Here is an example:
+									 *      - Here is an example:
 									 *       <time itemprop="openingHours" datetime="Tu,Th 16:00-20:00">Tuesdays and Thursdays 4-8pm</time>.
-									 *     - If a business is open 7 days a week, then it can be specified as
+									 *      - If a business is open 7 days a week, then it can be specified as
 									 *       <time itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all day</time>.
 
 									 * Note: This schema property is not relevant to providers or their webpages and
@@ -22973,11 +23079,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Organization
+									 *      - Organization
 									 *
 									 * Used on these types:
 									 *
-									 *     - Organization
+									 *      - Organization
 									 */
 
 									// Get names for keywords property
@@ -23069,12 +23175,12 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ImageObject
-									 *     - Photograph
+									 *      - ImageObject
+									 *      - Photograph
 									 *
 									 * Used on these types:
 									 *
-									 *     - Place
+									 *      - Place
 									 */
 
 									if (
@@ -23176,11 +23282,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Action
+									 *      - Action
 									 *
 									 * Used on these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 									/*
@@ -23254,11 +23360,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalOrganization
+									 *      - MedicalOrganization
 									 *
 									 * Used on these types:
 									 *
-									 *     - IndividualPhysician
+									 *      - IndividualPhysician
 									 *
 									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
 									 * Implementation feedback and adoption from applications and websites can help
@@ -23392,11 +23498,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ImageObject
+									 *      - ImageObject
 									 *
 									 * Used on these types:
 									 *
-									 *     - WebPage
+									 *      - WebPage
 									 */
 
 								// publicAccess [excluded; irrelevant]
@@ -23434,18 +23540,18 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Review
+									 *      - Review
 									 *
 									 * Used on these types:
 									 *
-									 *     - Brand
-									 *     - CreativeWork
-									 *     - Event
-									 *     - Offer
-									 *     - Organization
-									 *     - Place
-									 *     - Product
-									 *     - Service
+									 *      - Brand
+									 *      - CreativeWork
+									 *      - Event
+									 *      - Offer
+									 *      - Organization
+									 *      - Place
+									 *      - Product
+									 *      - Service
 									 */
 
 								// reviews [excluded; superseded]
@@ -23650,7 +23756,7 @@
 									 *
 									 * Inverse property:
 									 *
-									 *     - parentOrganization
+									 *      - parentOrganization
 									 *
 									 * Note: This schema property is not relevant to providers or their webpages and
 									 * will not be included.
@@ -23663,16 +23769,16 @@
 									 *
 									 * Inverse property:
 									 *
-									 *     - about
+									 *      - about
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
-									 *     - Event
+									 *      - CreativeWork
+									 *      - Event
 									 *
 									 * Used on these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 								// telephone [WIP]
@@ -23682,14 +23788,14 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * Used on these types:
 									 *
-									 *     - ContactPoint
-									 *     - Organization
-									 *     - Person
-									 *     - Place
+									 *      - ContactPoint
+									 *      - Organization
+									 *      - Person
+									 *      - Place
 									 */
 
 								// timeRequired [WIP]
@@ -23700,11 +23806,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Duration (use ISO 8601 duration format).
+									 *      - Duration (use ISO 8601 duration format).
 									 *
 									 * Used on these types:
 									 *
-									 *     - CreativeWork
+									 *      - CreativeWork
 									 */
 
 								// tourBookingPage [excluded; irrelevant]
@@ -23739,12 +23845,12 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Clip
-									 *     - VideoObject
+									 *      - Clip
+									 *      - VideoObject
 									 *
 									 * Used on these types:
 									 *
-									 *     - CreativeWork
+									 *      - CreativeWork
 									 */
 
 									if (
@@ -24053,12 +24159,12 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ContactPoint
-									 *     - Place
+									 *      - ContactPoint
+									 *      - Place
 									 *
 									 * Used on these types:
 									 *
-									 *     - Person
+									 *      - Person
 									 */
 
 									if (
@@ -24179,11 +24285,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Organization
+									 *      - Organization
 									 *
 									 * Used on these types:
 									 *
-									 *     - Person
+									 *      - Person
 									 */
 
 									if (
@@ -24341,14 +24447,14 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
-									 *     - Thing
-									 *     - URL
+									 *      - Text
+									 *      - Thing
+									 *      - URL
 									 *
 									 * Used on these types:
 									 *
-									 *     - Organization
-									 *     - Person
+									 *      - Organization
+									 *      - Person
 									 *
 									 * As of 16 Apr 2024, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -24666,11 +24772,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 *
 									 * Used on these types:
 									 *
-									 *     - CreativeWork
+									 *      - CreativeWork
 									 */
 
 									if (
@@ -24953,11 +25059,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 *
 									 * Used on these types:
 									 *
-									 *     - WebPage
+									 *      - WebPage
 									 */
 
 									if (
@@ -25053,11 +25159,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 *
 									 * Used on these types:
 									 *
-									 *     - WebPage
+									 *      - WebPage
 									 */
 
 									if (
@@ -25153,17 +25259,17 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - DefinedTerm
-									 *     - Text
-									 *     - URL
+									 *      - DefinedTerm
+									 *      - Text
+									 *      - URL
 									 *
 									 * Used on these types:
 									 *
-									 *     - CreativeWork
-									 *     - Event
-									 *     - Organization
-									 *     - Place
-									 *     - Product
+									 *      - CreativeWork
+									 *      - Event
+									 *      - Organization
+									 *      - Place
+									 *      - Product
 									 */
 
 									if (
@@ -25862,7 +25968,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 									// Get values
@@ -28394,11 +28500,11 @@
 									 *
 									 * Subproperty of:
 									 *
-									 *     - rdfs:label
+									 *      - rdfs:label
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -28458,7 +28564,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 									if (
@@ -28517,12 +28623,16 @@
 									 * case of text values, the class label should follow the schema.org style guide.
 									 *
 									 * Subproperty of:
-									 *     - rdf:type
+									 *      - rdf:type
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
-									 *     - URL
+									 *      - Text
+									 *      - URL
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
 									 */
 
 									// additionalType (MedicalWebPage)
@@ -28668,8 +28778,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - PostalAddress
-									 *     - Text
+									 *      - PostalAddress
+									 *      - Text
 									 */
 
 									if (
@@ -28719,7 +28829,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - AggregateRating
+									 *      - AggregateRating
 									 */
 
 								// alternateName
@@ -28729,7 +28839,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -28850,8 +28960,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalProcedure
-									 *     - MedicalTest
+									 *      - MedicalProcedure
+									 *      - MedicalTest
 									 */
 
 									if (
@@ -28931,7 +29041,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 								// brand
@@ -28942,8 +29052,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Brand
-									 *     - Organization
+									 *      - Brand
+									 *      - Organization
 									 */
 
 									// Get names for keywords property
@@ -29008,7 +29118,7 @@
 									/**
 									 * A contact point for a person or organization.
 									 *
-									 *     - ContactPoint
+									 *      - ContactPoint
 									 */
 
 									if (
@@ -29057,7 +29167,7 @@
 									 * The basic containment relation between a place and one that contains it.
 									 * expected to be one of these types:
 									 *
-									 *     - Place
+									 *      - Place
 									 */
 
 									if (
@@ -29141,7 +29251,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Place
+									 *      - Place
 									 */
 
 									if (
@@ -29278,14 +29388,14 @@
 									 * The currency accepted.
 									 *
 									 * Use standard formats:
-									 *     - ISO 4217 currency format (e.g., "USD")
-									 *     - Ticker symbol for cryptocurrencies (e.g., "BTC")
-									 *     - Well-known names for Local Exchange Trading Systems (LETS) and other
+									 *      - ISO 4217 currency format (e.g., "USD")
+									 *      - Ticker symbol for cryptocurrencies (e.g., "BTC")
+									 *      - Well-known names for Local Exchange Trading Systems (LETS) and other
 									 *       currency types (e.g., "Ithaca HOUR")
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 								// department
@@ -29297,7 +29407,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Organization
+									 *      - Organization
 									 */
 
 									if (
@@ -29439,8 +29549,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
-									 *     - URL
+									 *      - CreativeWork
+									 *      - URL
 									 *
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -29456,8 +29566,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Article
-									 *     - URL
+									 *      - Article
+									 *      - URL
 									 *
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -29476,8 +29586,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
-									 *     - URL
+									 *      - CreativeWork
+									 *      - URL
 									 *
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -29491,7 +29601,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Person
+									 *      - Person
 									 */
 
 									if (
@@ -29590,7 +29700,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Event
+									 *      - Event
 									 */
 
 								// faxNumber
@@ -29600,7 +29710,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									 if (
@@ -29650,7 +29760,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Date
+									 *      - Date
 									 */
 
 								// geo (specific property)
@@ -29662,8 +29772,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - GeoCoordinates
-									 *     - GeoShape
+									 *      - GeoCoordinates
+									 *      - GeoShape
 									 */
 
 									if (
@@ -29724,7 +29834,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - EducationalOccupationalCredential
+									 *      - EducationalOccupationalCredential
 									 *
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -29742,7 +29852,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Boolean
+									 *      - Boolean
 									 *
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -29756,8 +29866,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Map
-									 *     - URL
+									 *      - Map
+									 *      - URL
 									 *
 									 * The examples on Schema.org indicate that a URL to the location on Google Maps
 									 * is acceptable.
@@ -29821,7 +29931,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
+									 *      - CreativeWork
 									 *
 									 * This schema property is not relevant to locations or their webpages and will
 									 * not be included.
@@ -29839,7 +29949,7 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 */
 
 										// globalLocationNumber [WIP]
@@ -29851,7 +29961,7 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 */
 
 										// isicV4 [WIP]
@@ -29863,7 +29973,7 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 */
 
 										// leiCode [WIP]
@@ -29874,7 +29984,7 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 */
 
 										// naics [WIP]
@@ -29885,7 +29995,7 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 */
 
 										// taxID [WIP]
@@ -29896,7 +30006,7 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 */
 
 										// vatID [WIP]
@@ -29904,7 +30014,7 @@
 											/**
 											 * The Value-added Tax ID of the organization or person.
 											 *
-											 *     - Text
+											 *      - Text
 											 */
 
 										// iso6523Code [WIP]
@@ -29917,7 +30027,7 @@
 											 *
 											 * Values expected to be one of these types:
 											 *
-											 *     - Text
+											 *      - Text
 											 *
 											 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 											 * feedback and adoption from applications and websites can help improve their
@@ -29948,9 +30058,9 @@
 												 *
 												 * Values expected to be one of these types:
 												 *
-												 *     - PropertyValue
-												 *     - Text
-												 *     - URL
+												 *      - PropertyValue
+												 *      - Text
+												 *      - URL
 												 */
 
 												if ( !isset($location_identifier) ) {
@@ -30431,8 +30541,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ImageObject
-									 *     - URL
+									 *      - ImageObject
+									 *      - URL
 									 */
 
 									if (
@@ -30482,7 +30592,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Boolean
+									 *      - Boolean
 									 *
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -30496,7 +30606,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Boolean
+									 *      - Boolean
 									 */
 
 									/*
@@ -30518,8 +30628,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Language
-									 *     - Text
+									 *      - Language
+									 *      - Text
 									 */
 
 									if (
@@ -30575,7 +30685,7 @@
 									/**
 									 * The official name of the organization (e.g., the registered company name).
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 								// logo [WIP]
@@ -30585,8 +30695,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ImageObject
-									 *     - URL
+									 *      - ImageObject
+									 *      - URL
 									 */
 
 								// mainContentOfPage
@@ -30659,7 +30769,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 								// makesOffer [WIP]
@@ -30671,7 +30781,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Offer
+									 *      - Offer
 									 */
 
 								// maximumAttendeeCapacity [WIP]
@@ -30681,7 +30791,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Integer
+									 *      - Integer
 									 */
 
 								// medicalSpecialty (specific property)
@@ -30691,7 +30801,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalSpecialty
+									 *      - MedicalSpecialty
 									 */
 
 									if (
@@ -30748,12 +30858,12 @@
 									 *
 									 * Subproperty of:
 									 *
-									 *     - foo
+									 *      - foo
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Organization
-									 *     - ProgramMembership
+									 *      - Organization
+									 *      - ProgramMembership
 									 */
 
 									if (
@@ -30868,7 +30978,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - NonprofitType
+									 *      - NonprofitType
 									 *
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -30882,7 +30992,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - QuantitativeValue
+									 *      - QuantitativeValue
 									 */
 
 								// offers [WIP]
@@ -30904,8 +31014,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Demand
-									 *     - Offer
+									 *      - Demand
+									 *      - Offer
 									 */
 
 								// openingHours
@@ -30930,7 +31040,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -30984,7 +31094,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - OpeningHoursSpecification
+									 *      - OpeningHoursSpecification
 									 */
 
 									if (
@@ -31038,7 +31148,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Organization
+									 *      - Organization
 									 */
 
 									// WebSite and MedicalWebPage only
@@ -31160,7 +31270,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 								// photo
@@ -31170,8 +31280,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ImageObject
-									 *     - Photograph
+									 *      - ImageObject
+									 *      - Photograph
 									 */
 
 									if (
@@ -31222,7 +31332,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Action
+									 *      - Action
 									 */
 
 									/*
@@ -31296,7 +31406,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ImageObject
+									 *      - ImageObject
 									 */
 
 								// publicAccess [WIP]
@@ -31307,7 +31417,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Boolean
+									 *      - Boolean
 									 */
 
 								// review [WIP]
@@ -31317,7 +31427,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Review
+									 *      - Review
 									 */
 
 								// sameAs
@@ -31329,7 +31439,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 									if (
@@ -31427,8 +31537,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - SpeakableSpecification
-									 *     - URL
+									 *      - SpeakableSpecification
+									 *      - URL
 									 */
 
 								// specialOpeningHoursSpecification
@@ -31441,7 +31551,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - OpeningHoursSpecification
+									 *      - OpeningHoursSpecification
 									 */
 
 									if (
@@ -31495,7 +31605,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Specialty
+									 *      - Specialty
 									 */
 
 									if (
@@ -31554,7 +31664,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Organization
+									 *      - Organization
 									 */
 
 									if (
@@ -31692,7 +31802,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -31743,7 +31853,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Duration (use ISO 8601 duration format).
+									 *      - Duration (use ISO 8601 duration format).
 									 */
 
 								// knowsAbout
@@ -31756,9 +31866,9 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
-									 *     - Thing
-									 *     - URL
+									 *      - Text
+									 *      - Thing
+									 *      - URL
 									 *
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -31940,7 +32050,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 									if (
@@ -32260,7 +32370,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 									if (
@@ -32315,7 +32425,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 									if (
@@ -32370,9 +32480,9 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - DefinedTerm
-									 *     - Text
-									 *     - URL
+									 *      - DefinedTerm
+									 *      - Text
+									 *      - URL
 									 */
 
 									if (
@@ -32820,7 +32930,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 									// Get values
@@ -33211,11 +33321,11 @@
 									 *
 									 * Subproperty of:
 									 *
-									 *     - rdfs:label
+									 *      - rdfs:label
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -33275,7 +33385,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 									if (
@@ -33334,12 +33444,16 @@
 									 * case of text values, the class label should follow the schema.org style guide.
 									 *
 									 * Subproperty of:
-									 *     - rdf:type
+									 *      - rdf:type
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
-									 *     - URL
+									 *      - Text
+									 *      - URL
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
 									 */
 
 									if (
@@ -33421,7 +33535,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - AggregateRating
+									 *      - AggregateRating
 									 *
 									 * This schema property is not relevant to areas of expertise and will not be
 									 * included.
@@ -33434,7 +33548,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -33514,8 +33628,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
-									 *     - Text
+									 *      - CreativeWork
+									 *      - Text
 									 */
 
 								// code
@@ -33526,7 +33640,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalCode
+									 *      - MedicalCode
+									 *
+									 * Used on these types:
+									 *
+									 *      - MedicalEntity
 									 */
 
 									if (
@@ -33606,7 +33724,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Place
+									 *      - Place
 									 *
 									 * This schema property is not relevant to areas of expertise webpages and will
 									 * not be included for the MedicalWebPage schema type.
@@ -33622,7 +33740,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
 									 */
 
 								// encodingFormat [WIP]
@@ -33642,8 +33764,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
-									 *     - URL
+									 *      - Text
+									 *      - URL
 									 */
 
 								// guideline [WIP]
@@ -33653,7 +33775,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalGuideline
+									 *      - MedicalGuideline
 									 */
 
 								// hasPart [excluded]
@@ -33666,7 +33788,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
+									 *      - CreativeWork
 									 *
 									 * This schema property is not relevant to areas of expertise or their webpages
 									 * and will not be included.
@@ -33682,9 +33804,9 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - PropertyValue
-									 *     - Text
-									 *     - URL
+									 *      - PropertyValue
+									 *      - Text
+									 *      - URL
 									 */
 
 								// image
@@ -33694,8 +33816,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ImageObject
-									 *     - URL
+									 *      - ImageObject
+									 *      - URL
 									 */
 
 									if (
@@ -33828,9 +33950,9 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - DrugLegalStatus
-									 *     - MedicalEnumeration
-									 *     - Text
+									 *      - DrugLegalStatus
+									 *      - MedicalEnumeration
+									 *      - Text
 									 *
 									 * This schema property is not relevant to areas of expertise and will not be
 									 * included.
@@ -33906,7 +34028,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 								// medicineSystem
@@ -33917,7 +34039,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicineSystem
+									 *      - MedicineSystem
 									 */
 
 									if (
@@ -33995,8 +34117,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Demand
-									 *     - Offer
+									 *      - Demand
+									 *      - Offer
 									 */
 
 								// potentialAction [WIP]
@@ -34007,7 +34129,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Action
+									 *      - Action
 									 */
 
 									/*
@@ -34081,7 +34203,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ImageObject
+									 *      - ImageObject
 									 */
 
 								// recognizingAuthority [WIP]
@@ -34092,7 +34214,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Organization
+									 *      - Organization
 									 */
 
 								// relatedLink [WIP]
@@ -34102,7 +34224,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 								// relevantSpecialty
@@ -34112,7 +34234,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalSpecialty
+									 *      - MedicalSpecialty (enumeration type)
 									 */
 
 									if (
@@ -34181,7 +34303,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 									if (
@@ -34271,8 +34393,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - SpeakableSpecification
-									 *     - URL
+									 *      - SpeakableSpecification
+									 *      - URL
 									 */
 
 								// specialty [WIP]
@@ -34282,7 +34404,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Specialty
+									 *      - Specialty
 									 */
 
 								// study [WIP]
@@ -34292,7 +34414,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MedicalStudy
+									 *      - MedicalStudy
 									 */
 
 								// text [WIP]
@@ -34302,7 +34424,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 								// timeRequired [WIP]
@@ -34313,7 +34435,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Duration (use ISO 8601 duration format).
+									 *      - Duration (use ISO 8601 duration format).
 									 */
 
 								// video [WIP]
@@ -34323,8 +34445,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Clip
-									 *     - VideoObject
+									 *      - Clip
+									 *      - VideoObject
 									 */
 
 								// mentions [WIP]
@@ -34335,7 +34457,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 								// significantLink [WIP]
@@ -34346,7 +34468,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 								// keywords [WIP]
@@ -35575,7 +35697,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -35641,12 +35763,16 @@
 									 * case of text values, the class label should follow the schema.org style guide.
 									 *
 									 * Subproperty of:
-									 *     - rdf:type
+									 *      - rdf:type
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
-									 *     - URL
+									 *      - Text
+									 *      - URL
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
 									 */
 
 									if (
@@ -35710,7 +35836,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - AggregateRating
+									 *      - AggregateRating
 									 *
 									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
@@ -35723,7 +35849,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -35795,7 +35921,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -35878,9 +36004,9 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - AudioObject
-									 *     - Clip
-									 *     - MusicRecording
+									 *      - AudioObject
+									 *      - Clip
+									 *      - MusicRecording
 									 *
 									 * This schema property is not relevant to UAMSHealth.com webpages and will not be
 									 * included for the MedicalWebPage schema type.
@@ -35896,7 +36022,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 *
 									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
@@ -35909,7 +36035,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 								// caption (CreativeWork only) [WIP]
@@ -35920,8 +36046,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - MediaObject
-									 *     - Text
+									 *      - MediaObject
+									 *      - Text
 									 */
 
 								// citation [excluded]
@@ -35932,8 +36058,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
-									 *     - Text
+									 *      - CreativeWork
+									 *      - Text
 									 *
 									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
@@ -35947,7 +36073,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Place
+									 *      - Place
 									 *
 									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
@@ -35960,7 +36086,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -36014,7 +36140,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 									if (
@@ -36068,8 +36194,19 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
-									 *     - TextObject
+									 *      - Text
+									 *      - TextObject
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
+									 *
+									 * Sub-properties:
+									 *
+									 *      - disambiguatingDescription
+									 *      - interpretedAsClaim
+									 *      - originalMediaContextDescription
+									 *      - sha256
 									 *
 									 * If there is an introduction, use that to override the excerpt value as the
 									 * value of this property.
@@ -36129,7 +36266,11 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
 									 *
 									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
@@ -36143,7 +36284,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Duration
+									 *      - Duration
 									 */
 
 									if (
@@ -36271,7 +36412,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 									if (
@@ -36335,8 +36476,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
-									 *     - URL
+									 *      - Text
+									 *      - URL
 									 */
 
 									if (
@@ -36396,7 +36537,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - DigitalDocumentPermission
+									 *      - DigitalDocumentPermission
 									 */
 
 									if (
@@ -36464,7 +36605,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
+									 *      - CreativeWork
 									 *
 									 * This schema property is not relevant to UAMSHealth.com webpages and will not be
 									 * included for the MedicalWebPage schema type.
@@ -36483,7 +36624,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									/*
@@ -36499,8 +36640,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Distance
-									 *     - QuantitativeValue
+									 *      - Distance
+									 *      - QuantitativeValue
 									 */
 
 									if (
@@ -36562,9 +36703,9 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - PropertyValue
-									 *     - Text
-									 *     - URL
+									 *      - PropertyValue
+									 *      - Text
+									 *      - URL
 									 *
 									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
@@ -36577,8 +36718,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ImageObject
-									 *     - URL
+									 *      - ImageObject
+									 *      - URL
 									 */
 
 									if (
@@ -36633,8 +36774,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Language
-									 *     - Text
+									 *      - Language
+									 *      - Text
 									 */
 
 									/*
@@ -36653,7 +36794,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Boolean
+									 *      - Boolean
 									 */
 
 									if (
@@ -36693,9 +36834,9 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
-									 *     - Product
-									 *     - URL
+									 *      - CreativeWork
+									 *      - Product
+									 *      - URL
 									 */
 
 									/*
@@ -36717,8 +36858,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - CreativeWork
-									 *     - URL
+									 *      - CreativeWork
+									 *      - URL
 									 */
 
 									if (
@@ -36773,9 +36914,9 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - DefinedTerm
-									 *     - Text
-									 *     - URL
+									 *      - DefinedTerm
+									 *      - Text
+									 *      - URL
 									 */
 
 								// mainContentOfPage
@@ -36848,7 +36989,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 								// mentions [WIP]
@@ -36859,7 +37000,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Thing
+									 *      - Thing
 									 */
 
 								// offers [WIP]
@@ -36881,8 +37022,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Demand
-									 *     - Offer
+									 *      - Demand
+									 *      - Offer
 									 */
 
 								// potentialAction [WIP]
@@ -36893,7 +37034,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Action
+									 *      - Action
 									 */
 
 									/*
@@ -36967,7 +37108,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ImageObject
+									 *      - ImageObject
 									 */
 
 								// relatedLink [WIP]
@@ -36977,7 +37118,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 								// representativeOfPage (CreativeWork only)
@@ -36987,7 +37128,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Boolean
+									 *      - Boolean
 									 */
 
 									if (
@@ -37024,7 +37165,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Review
+									 *      - Review
 									 *
 									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
@@ -37039,7 +37180,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 									if (
@@ -37113,7 +37254,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 								// size [excluded]
@@ -37126,7 +37267,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - [insert type(s) here]
+									 *      - [insert type(s) here]
 									 *
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -37166,8 +37307,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - SpeakableSpecification
-									 *     - URL
+									 *      - SpeakableSpecification
+									 *      - URL
 									 */
 
 									if (
@@ -37270,7 +37411,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Specialty
+									 *      - Specialty
 									 */
 
 								// text [WIP]
@@ -37280,7 +37421,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 								// thumbnail
@@ -37290,7 +37431,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - ImageObject
+									 *      - ImageObject
 									 */
 
 									if (
@@ -37344,7 +37485,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 */
 
 									/*
@@ -37362,7 +37503,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Duration (use ISO 8601 duration format).
+									 *      - Duration (use ISO 8601 duration format).
 									 */
 
 									if (
@@ -37457,7 +37598,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -37527,8 +37668,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Organization
-									 *     - Person
+									 *      - Organization
+									 *      - Person
 									 *
 									 * We will not be identifying either the organization or the person who translates
 									 * the clinical resources into different languages and so this schema property
@@ -37542,7 +37683,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Date
+									 *      - Date
 									 */
 
 									/*
@@ -37559,8 +37700,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Clip
-									 *     - VideoObject
+									 *      - Clip
+									 *      - VideoObject
 									 */
 
 									/*
@@ -37577,7 +37718,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -37631,7 +37772,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -37687,8 +37828,8 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Distance
-									 *     - QuantitativeValue
+									 *      - Distance
+									 *      - QuantitativeValue
 									 */
 
 									if (
@@ -37746,7 +37887,7 @@
 									 * The number of words in the text of the Article.
 									 *
 									 * Values expected to be one of these types:
-									 *     - Integer
+									 *      - Integer
 									 */
 
 									if (
@@ -38222,6 +38363,24 @@
 
 											// funding (CreativeWork, syndicated only)
 
+												/**
+												 * A Grant that directly or indirectly provide funding or sponsorship for this
+												 * item. See also ownershipFundingInfo.
+												 *
+												 * Inverse-property: fundedItem
+												 *
+												 * Grant: https://schema.org/Grant
+												 * ownershipFundingInfo: https://schema.org/ownershipFundingInfo
+												 *
+												 * Values expected to be one of these types:
+												 *
+												 *      - Grant
+												 *
+												 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+												 * feedback and adoption from applications and websites can help improve their
+												 * definitions.
+												 */
+
 												if (
 													in_array(
 														'funding',
@@ -38358,8 +38517,8 @@
 											 	 *
 												 * Values expected to be one of these types:
 												 *
-												 *     - Organization
-												 *     - Person
+												 *      - Organization
+												 *      - Person
 												 */
 
 												if (
@@ -38486,6 +38645,20 @@
 												}
 
 											// sameAs (CreativeWork, syndicated only)
+
+												/**
+												 * URL of a reference Web page that unambiguously indicates the item's identity
+												 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+												 * website).
+												 *
+												 * Values expected to be one of these types:
+												 *
+												 *      - URL
+												 *
+												 * Used on these types:
+												 *
+												 *      - Thing
+												 */
 
 												if (
 													in_array(
@@ -38908,7 +39081,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - URL
+									 *      - URL
 									 *
 									 * The condition custom post type does not have a published URL and so this schema
 									 * property will not be included.
@@ -39073,11 +39246,11 @@
 									 *
 									 * Subproperty of:
 									 *
-									 *     - rdfs:label
+									 *      - rdfs:label
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
+									 *      - Text
 									 */
 
 									if (
@@ -39221,6 +39394,22 @@
 
 									}
 
+								// associatedAnatomy [excluded]
+
+									/**
+									 * The anatomy of the underlying organ system or structures associated with this
+									 * entity.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - AnatomicalStructure
+									 *      - AnatomicalSystem
+									 *      - SuperficialAnatomy
+									 *
+									 * This schema property is beyond the scope of what is being included for
+									 * condition schema and so it will not be included.
+									 */
+
 								// code
 
 									/**
@@ -39336,6 +39525,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -39971,10 +40164,6 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Text
-									 *
-									 * Used on these types:
-									 *
-									 *      - Thing
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
@@ -40666,22 +40855,6 @@
 
 									}
 
-								// associatedAnatomy [excluded]
-
-									/**
-									 * The anatomy of the underlying organ system or structures associated with this
-									 * entity.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - AnatomicalStructure
-									 *      - AnatomicalSystem
-									 *      - SuperficialAnatomy
-									 *
-									 * This schema property is beyond the scope of what is being included for
-									 * condition schema and so it will not be included.
-									 */
-
 								// code
 
 									/**
@@ -40807,6 +40980,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
@@ -41064,10 +41241,6 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Text
-									 *
-									 * Used on these types:
-									 *
-									 *      - Thing
 									 *
 									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
