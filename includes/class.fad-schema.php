@@ -33000,9 +33000,9 @@
 
 							// Eliminate PHP errors / reset variables
 
+								$expertise_item = array(); // Base array
 								$expertise_item_MedicalWebPage = array(); // Base array
 								$expertise_item_MedicalEntity = array(); // Base array
-								$MedicalEntity_item = array(); // Base array
 								$current_fpage = null;
 								$expertise_additionalType = null;
 								$expertise_alternateName = null;
