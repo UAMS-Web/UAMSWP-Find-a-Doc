@@ -24508,15 +24508,41 @@
 
 														foreach ( $uamswp_fad_clinical_specialization_provider['detail_array'] as $item ) {
 
-															if (
-																isset($item['schema']['MedicalCode'])
-																&&
-																$item['schema']['MedicalCode']
-															) {
+															// Term
 
-																$provider_clinical_specialization_MedicalCode[] = $item['schema']['MedicalCode'];
+																if (
+																	isset($item['schema']['MedicalCode'])
+																	&&
+																	$item['schema']['MedicalCode']
+																) {
 
-															}
+																		$provider_clinical_specialization_MedicalCode[] = $item['schema']['MedicalCode'];
+
+																}
+
+															// Term's Ancestors
+
+																if (
+																	isset($item['ancestors'])
+																	&&
+																	$item['ancestors']
+																) {
+
+																	foreach ( $item['ancestors'] as $ancestor_item ) {
+
+																		if (
+																			isset($ancestor_item['schema']['MedicalCode'])
+																			&&
+																			$ancestor_item['schema']['MedicalCode']
+																		) {
+
+																			$provider_clinical_specialization_MedicalCode[] = $ancestor_item['schema']['MedicalCode'];
+
+																		}
+
+																	}
+
+																}
 
 														}
 
