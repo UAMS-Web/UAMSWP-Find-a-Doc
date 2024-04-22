@@ -12694,7 +12694,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							// hasOccupation
 
-								$output_schema['hasOccupation'] = uamswp_fad_schema_hasoccupation(
+								$hasOccupation = uamswp_fad_schema_hasoccupation(
 									$patientFriendly_occupation_alternatename, // array // optional // alternateName (alternate clinical occupation title value from Clinical Specialization item)
 									$codeSet_definition_attr, // string // optional // description
 									$patientFriendly_occupation_name_attr, // string // optional // name (clinical occupation title value from Clinical Specialization item)
@@ -12702,18 +12702,34 @@ function limit_to_post_parent( $args, $field, $post ) {
 									$sameAs_occupation // string|array // optional // sameAs
 								) ?? '';
 
+								if ( $hasOccupation ) {
+
+									$output_schema['hasOccupation'] = $hasOccupation;
+
+								}
+
 							// occupationalCategory
 
-								$output_schema['occupationalCategory'] = $occupationalCategory;
+								if ( $occupationalCategory ) {
+
+									$output_schema['occupationalCategory'] = $occupationalCategory;
+
+								}
 
 						// MedicalCode (Health Care Provider Taxonomy Code Set)
 
-							$output_schema['MedicalCode'] = uamswp_fad_schema_nucc_code_set(
+							$MedicalCode = uamswp_fad_schema_nucc_code_set(
 								$codeSet_code, // string // Required // Health Care Provider Taxonomy code
 								$codeSet_name_display, // string|array // Optional // alternateName
 								$codeSet_definition, // string // Optional // description
 								$codeSet_name // string // Optional // name
 							);
+
+							if ( $MedicalCode ) {
+
+								$output_schema['MedicalCode'] = $MedicalCode;
+
+							}
 
 						// Add the schema output array to the general output array
 
