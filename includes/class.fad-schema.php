@@ -32375,7 +32375,7 @@
 
 									}
 
-								// Add to list of MedicalBusiness items
+								// Add to list of MedicalEntity items
 
 									if (
 										isset($expertise_item['MedicalEntity'])
@@ -32436,10 +32436,12 @@
 								$expertise_subjectOf = null;
 								$expertise_url = null;
 								$fpage_query = null;
+								$MedicalCondition_i = 1;
 								$MedicalEntity_type = null;
 								$MedicalWebPage_id = null;
 								$MedicalWebPage_type = null;
 								$ontology_type = null;
+								$Service_i = 1;
 
 							// Load variables from pre-existing field values array
 
@@ -32912,17 +32914,741 @@
 
 									// Associated providers
 
-									// Associated locations
+										// List of properties that reference associated providers
+
+											$expertise_provider_common = array(
+												'mentions',
+												'relatedLink',
+												'significantLink'
+											);
+
+										if (
+											(
+												array_intersect(
+													$expertise_properties_map[$MedicalWebPage_type]['properties'],
+													$expertise_provider_common
+												)
+												||
+												array_intersect(
+													$expertise_properties_map[$MedicalEntity_type]['properties'],
+													$expertise_provider_common
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get values
+
+												// Get list of associated providers
+
+													if ( !isset($expertise_provider_ids) ) {
+
+														$expertise_provider_ids = array();
+
+														$providers = get_field( 'physician_expertise', $entity );
+														$page_id_temp = $page_id ?? null;
+														$page_id = $entity;
+														include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
+														$expertise_provider_ids = $provider_ids;
+
+														// Reset variables from Related Providers Section Query template part
+
+															$page_id = $page_id_temp;
+															$providers = null;
+															$provider_query = null;
+															$provider_section_show = null;
+															$provider_ids = null;
+															$provider_count = null;
+															$jump_link_count = null;
+
+													}
+
+												// Format values
+
+													if ( $expertise_provider_ids ) {
+
+														$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+														$expertise_provider = uamswp_fad_schema_provider(
+															$expertise_provider_ids, // array // Required // List of IDs of the provider items
+															$expertise_url, // string // Required // Page URL
+															$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+															($nesting_level + 1), // int // Optional // Nesting level within the main schema
+															array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
+														);
+
+														// MedicalBusiness and subtypes
+
+															$expertise_provider_MedicalBusiness = $expertise_provider['MedicalBusiness'];
+
+															// Get URLs for significantLink property
+
+																$expertise_provider_MedicalBusiness = $expertise_provider_MedicalBusiness ?? null;
+
+																if ( $expertise_provider_MedicalBusiness ) {
+
+																	$expertise_provider_MedicalBusiness_significantLink = uamswp_fad_schema_property_values(
+																		$expertise_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
+																		array( 'url' ) // mixed // Required // List of properties from which to collect values
+																	);
+
+																}
+
+															// Get names for keywords property
+
+																$expertise_provider_MedicalBusiness = $expertise_provider_MedicalBusiness ?? null;
+
+																if ( $expertise_provider_MedicalBusiness ) {
+
+																	$expertise_provider_MedicalBusiness_keywords = uamswp_fad_schema_property_values(
+																		$expertise_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
+																		array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																	);
+
+																}
+
+														// Person
+
+															$expertise_provider_Person = $expertise_provider['Person'];
+
+															// Get URLs for significantLink property
+
+																$expertise_provider_Person = $expertise_provider_Person ?? null;
+
+																if ( $expertise_provider_Person ) {
+
+																	$expertise_provider_Person_significantLink = uamswp_fad_schema_property_values(
+																		$expertise_provider_Person, // array // Required // Property values from which to extract specific values
+																		array( 'url' ) // mixed // Required // List of properties from which to collect values
+																	);
+
+																}
+
+															// Get names for keywords property
+
+																$expertise_provider_Person = $expertise_provider_Person ?? null;
+
+																if ( $expertise_provider_Person ) {
+
+																	$expertise_provider_Person_keywords = uamswp_fad_schema_property_values(
+																		$expertise_provider_Person, // array // Required // Property values from which to extract specific values
+																		array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																	);
+
+																}
+
+													}
+
+										}
+
+									// Associated Locations
+
+										// List of properties that reference locations
+
+											$expertise_location_common = array(
+												'mentions',
+												'relatedLink',
+												'significantLink'
+											);
+
+										if (
+											(
+												(
+													isset($expertise_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$expertise_properties_map[$MedicalWebPage_type]['properties'],
+														$expertise_location_common
+													)
+												)
+												||
+												(
+													isset($expertise_item_MedicalEntity)
+													&&
+													array_intersect(
+														$expertise_properties_map[$MedicalEntity_type]['properties'],
+														$expertise_location_common
+													)
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get values
+
+												if ( !isset($expertise_location_array) ) {
+
+													$expertise_location_array = get_field( 'location_expertise', $entity ) ?? array(); // array
+
+													// Clean up the array
+
+														$expertise_location_array = $expertise_location_array ? array_filter($expertise_location_array) : array();
+														$expertise_location_array = $expertise_location_array ? array_values($expertise_location_array) : array();
+
+												}
+
+											// Format values
+
+												if ( $expertise_location_array ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$expertise_location = uamswp_fad_schema_location(
+														$expertise_location_array, // List of IDs of the location items
+														$expertise_url, // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ) // Nesting level within the main schema
+													);
+
+												}
+
+												// MedicalWebPage
+
+													$expertise_location_MedicalWebPage = $expertise_location['MedicalWebPage'];
+
+													// Get URLs for significantLink property
+
+														$expertise_location_MedicalWebPage = $expertise_location_MedicalWebPage ?? null;
+
+														if ( $expertise_location_MedicalWebPage ) {
+
+															$expertise_location_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																$expertise_location_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																array( 'url' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+												// LocalBusiness and subtypes
+
+													$expertise_location_LocalBusiness = $expertise_location['LocalBusiness'];
+
+													// Get names for keywords property
+
+														$expertise_location_LocalBusiness = $expertise_location_LocalBusiness ?? null;
+
+														if ( $expertise_location_LocalBusiness ) {
+
+															$expertise_location_LocalBusiness_keywords = uamswp_fad_schema_property_values(
+																$expertise_location_LocalBusiness, // array // Required // Property values from which to extract specific values
+																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+										}
 
 									// Descendant areas of expertise
 
-									// Associated areas of expertise
+										// List of properties that reference areas of expertise
+
+											$expertise_descendant_expertise_common = array(
+												'mentions',
+												'relatedLink',
+												'significantLink'
+											);
+
+										if (
+											(
+												(
+													isset($expertise_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$expertise_properties_map[$MedicalWebPage_type]['properties'],
+														$expertise_descendant_expertise_common
+													)
+												)
+												||
+												(
+													isset($expertise_item_MedicalEntity)
+													&&
+													array_intersect(
+														$expertise_properties_map[$MedicalEntity_type]['properties'],
+														$expertise_descendant_expertise_common
+													)
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get descendant areas of expertise
+
+												if ( !isset($expertise_descendant_expertise_list) ) {
+
+													$expertise_descendant_expertise_list = get_children(
+														array(
+															'post_parent' => $entity,
+															'post_type'=> 'expertise',
+															'posts_per_page' => -1,
+															'post_status' => 'publish'
+														), // mixed // Optional // User defined arguments for replacing the defaults (Default: '')
+														ARRAY_A // string // Optional // The required return type. One of OBJECT, ARRAY_A, or ARRAY_N, which correspond to a WP_Post object, an associative array, or a numeric array, respectively. (Default: '')
+													);
+
+													if ( $expertise_descendant_expertise_list ) {
+
+														$expertise_descendant_expertise_list_temp = array();
+
+														foreach ( $expertise_descendant_expertise_list as $item ) {
+
+															if (
+																isset($item['ID'])
+																&&
+																$item['ID']
+															) {
+
+																$expertise_descendant_expertise_list_temp[] = $item['ID'];
+
+															}
+
+														}
+
+														$expertise_descendant_expertise_list = $expertise_descendant_expertise_list_temp;
+
+													} // endif ( $expertise_descendant_expertise_list )
+
+												} // endif ( !isset($expertise_descendant_expertise_list) )
+
+												echo '<p>$expertise_descendant_expertise_list = </p>'; // test
+												echo '<pre>';
+												print_r($expertise_descendant_expertise_list);
+												echo '</pre>'; // test
+
+											// Format values
+
+												if ( $expertise_descendant_expertise_list ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$expertise_descendant_expertise = uamswp_fad_schema_expertise(
+														$expertise_descendant_expertise_list, // List of IDs of the area of expertise items
+														'', // string // Required // Page or fake subpage URL
+														true, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
+														'', // string // Required // Fake subpage slug
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ) // Nesting level within the main schema
+													);
+
+												}
+
+												// MedicalWebPage
+
+													$expertise_descendant_expertise_MedicalWebPage = $expertise_descendant_expertise['MedicalWebPage'];
+
+													// Get URLs for significantLink property
+
+														$expertise_descendant_expertise_MedicalWebPage = $expertise_descendant_expertise_MedicalWebPage ?? null;
+
+														if ( $expertise_descendant_expertise_MedicalWebPage ) {
+
+															$expertise_descendant_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																$expertise_descendant_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																array( 'url' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+												// MedicalEntity and subtypes
+
+													$expertise_descendant_expertise_MedicalEntity = $expertise_descendant_expertise['MedicalEntity'];
+
+													// Get names for keywords property
+
+														$expertise_descendant_expertise_MedicalEntity = $expertise_descendant_expertise_MedicalEntity ?? null;
+
+														if ( $expertise_descendant_expertise_MedicalEntity ) {
+
+															$expertise_descendant_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
+																$expertise_descendant_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
+																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+										}
+
+									// Related areas of expertise
+
+										// List of properties that reference areas of expertise
+
+											$expertise_related_expertise_common = array(
+												'mentions',
+												'relatedLink',
+												'significantLink'
+											);
+
+										if (
+											(
+												(
+													isset($expertise_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$expertise_properties_map[$MedicalWebPage_type]['properties'],
+														$expertise_related_expertise_common
+													)
+												)
+												||
+												(
+													isset($expertise_item_MedicalEntity)
+													&&
+													array_intersect(
+														$expertise_properties_map[$MedicalEntity_type]['properties'],
+														$expertise_related_expertise_common
+													)
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get related areas of expertise
+
+												if ( !isset($expertise_related_expertise_list) ) {
+
+													$expertise_related_expertise_list = get_field( 'expertise_associated', $entity ) ?? array();
+
+													// Clean up the array
+
+														$expertise_related_expertise_list = $expertise_related_expertise_list ? array_filter($expertise_related_expertise_list) : array();
+														$expertise_related_expertise_list = $expertise_related_expertise_list ? array_values($expertise_related_expertise_list) : array();
+
+												}
+
+											// Format values
+
+												if ( $expertise_related_expertise_list ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$expertise_related_expertise = uamswp_fad_schema_expertise(
+														$expertise_related_expertise_list, // List of IDs of the area of expertise items
+														'', // string // Required // Page or fake subpage URL
+														true, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
+														'', // string // Required // Fake subpage slug
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ) // Nesting level within the main schema
+													);
+
+												}
+
+												// MedicalWebPage
+
+													$expertise_related_expertise_MedicalWebPage = $expertise_related_expertise['MedicalWebPage'];
+
+													// Get URLs for significantLink property
+
+														$expertise_related_expertise_MedicalWebPage = $expertise_related_expertise_MedicalWebPage ?? null;
+
+														if ( $expertise_related_expertise_MedicalWebPage ) {
+
+															$expertise_related_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																$expertise_related_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																array( 'url' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+												// MedicalEntity and subtypes
+
+													$expertise_related_expertise_MedicalEntity = $expertise_related_expertise['MedicalEntity'];
+
+													// Get names for keywords property
+
+														$expertise_related_expertise_MedicalEntity = $expertise_related_expertise_MedicalEntity ?? null;
+
+														if ( $expertise_related_expertise_MedicalEntity ) {
+
+															$expertise_related_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
+																$expertise_related_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
+																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+										}
 
 									// Associated clinical resources
 
+										// List of properties that reference clinical resources
+
+											$expertise_clinical_resource_common = array(
+												'mentions',
+												'relatedLink',
+												'significantLink'
+											);
+
+										if (
+											(
+												(
+													isset($expertise_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$expertise_properties_map[$MedicalWebPage_type]['properties'],
+														$expertise_clinical_resource_common
+													)
+												)
+												||
+												(
+													isset($expertise_item_MedicalEntity)
+													&&
+													array_intersect(
+														$expertise_properties_map[$MedicalEntity_type]['properties'],
+														$expertise_clinical_resource_common
+													)
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get related clinical resources
+
+												if ( !isset($expertise_clinical_resource_list) ) {
+
+													$expertise_clinical_resource_list = get_field( 'expertise_clinical_resources', $entity ) ?? array();
+
+												}
+
+												if ( !isset($expertise_clinical_resource_list_max) ) {
+
+													include( UAMS_FAD_PATH . '/templates/parts/vars/sys/posts-per-page/clinical-resource.php' ); // General maximum number of clinical resource items to display on a fake subpage (or section)
+													$expertise_clinical_resource_list_max = $clinical_resource_posts_per_page_section;
+
+												}
+
+											// Format values
+
+												if ( $expertise_clinical_resource_list ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$expertise_clinical_resource = uamswp_fad_schema_clinical_resource(
+														$expertise_clinical_resource_list, // List of IDs of the clinical resource items
+														$expertise_url, // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ) // Nesting level within the main schema
+													);
+
+												}
+
+												// MedicalWebPage
+
+													$expertise_clinical_resource_MedicalWebPage = $expertise_clinical_resource['MedicalWebPage'];
+
+													// Get URLs for significantLink property
+
+														$expertise_clinical_resource_MedicalWebPage = $expertise_clinical_resource_MedicalWebPage ?? null;
+
+														if ( $expertise_clinical_resource_MedicalWebPage ) {
+
+															$expertise_clinical_resource_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																$expertise_clinical_resource_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																array( 'url' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+												// CreativeWork and subtypes
+
+													$expertise_clinical_resource_CreativeWork = $expertise_clinical_resource['CreativeWork'];
+
+													// Get names for keywords property
+
+														$expertise_clinical_resource_CreativeWork = $expertise_clinical_resource_CreativeWork ?? null;
+
+														if ( $expertise_clinical_resource_CreativeWork ) {
+
+															$expertise_clinical_resource_CreativeWork_keywords = uamswp_fad_schema_property_values(
+																$expertise_clinical_resource_CreativeWork, // array // Required // Property values from which to extract specific values
+																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+										}
+
 									// Associated conditions
 
+										// List of properties that reference conditions
+
+											$expertise_condition_common = array(
+												'mentions'
+											);
+
+										if (
+											(
+												(
+													isset($expertise_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$expertise_properties_map[$MedicalWebPage_type]['properties'],
+														$expertise_condition_common
+													)
+												)
+												||
+												(
+													isset($expertise_item_MedicalEntity)
+													&&
+													array_intersect(
+														$expertise_properties_map[$MedicalEntity_type]['properties'],
+														$expertise_condition_common
+													)
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get related conditions
+
+												if ( !isset($expertise_condition_list) ) {
+
+													$expertise_condition_list = get_field( 'expertise_conditions_cpt', $entity ) ?? array();
+
+													// Clean up the array
+
+														$expertise_condition_list = $expertise_condition_list ? array_filter($expertise_condition_list) : array();
+														$expertise_condition_list = $expertise_condition_list ? array_values($expertise_condition_list) : array();
+
+												}
+
+											// Format values
+
+												if ( $expertise_condition_list ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$expertise_condition = uamswp_fad_schema_condition(
+														$expertise_condition_list, // array // Required // List of IDs of the MedicalCondition items
+														$expertise_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
+														$Service_i // int // Optional // Iteration counter for treatment-as-Service
+													);
+
+												}
+
+											// Get URLs for significantLink property
+
+												$expertise_condition = $expertise_condition ?? null;
+
+												if ( $expertise_condition ) {
+
+													$expertise_condition_significantLink = uamswp_fad_schema_property_values(
+														$expertise_condition, // array // Required // Property values from which to extract specific values
+														array( 'url' ) // mixed // Required // List of properties from which to collect values
+													);
+
+												}
+
+											// Get names for keywords property
+
+												$expertise_condition = $expertise_condition ?? null;
+
+												if ( $expertise_condition ) {
+
+													$expertise_condition_keywords = uamswp_fad_schema_property_values(
+														$expertise_condition, // array // Required // Property values from which to extract specific values
+														array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+													);
+
+												}
+
+										}
+
 									// Associated treatments and procedures
+
+										// List of properties that reference treatments and procedures
+
+											$expertise_treatment_common = array(
+												'mentions'
+											);
+
+										if (
+											(
+												(
+													isset($expertise_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$expertise_properties_map[$MedicalWebPage_type]['properties'],
+														$expertise_treatment_common
+													)
+												)
+												||
+												(
+													isset($expertise_item_MedicalEntity)
+													&&
+													array_intersect(
+														$expertise_properties_map[$MedicalEntity_type]['properties'],
+														$expertise_treatment_common
+													)
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get related treatments
+
+												if ( !isset($expertise_treatment) ) {
+
+													$expertise_treatment = get_field( 'expertise_treatments_cpt', $entity ) ?? array();
+
+													// Clean up the array
+
+														$expertise_treatment = $expertise_treatment ? array_filter($expertise_treatment) : array();
+														$expertise_treatment = $expertise_treatment ? array_values($expertise_treatment) : array();
+
+												}
+
+											// Format values
+
+												if ( $expertise_treatment ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$expertise_availableService = uamswp_fad_schema_treatment(
+														$expertise_treatment, // array // Required // List of IDs of the service items
+														$expertise_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+													);
+
+												}
+
+											// Get URLs for significantLink property
+
+												$expertise_availableService = $expertise_availableService ?? null;
+
+												if ( $expertise_availableService ) {
+
+													$expertise_availableService_significantLink = uamswp_fad_schema_property_values(
+														$expertise_availableService, // array // Required // Property values from which to extract specific values
+														array( 'url' ) // mixed // Required // List of properties from which to collect values
+													);
+
+												}
+
+											// Get names for keywords property
+
+												$expertise_availableService = $expertise_availableService ?? null;
+
+												if ( $expertise_availableService ) {
+
+													$expertise_availableService_keywords = uamswp_fad_schema_property_values(
+														$expertise_availableService, // array // Required // Property values from which to extract specific values
+														array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+													);
+
+												}
+
+										}
 
 								// name
 
@@ -33424,7 +34150,7 @@
 									 *      - MedicalGuideline
 									 */
 
-								// hasPart [excluded]
+								// hasPart [WIP]
 
 									/**
 									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork
@@ -33435,9 +34161,6 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - CreativeWork
-									 *
-									 * This schema property is not relevant to areas of expertise or their webpages
-									 * and will not be included.
 									 */
 
 								// identifier [excluded; irrelevant]
@@ -34210,78 +34933,78 @@
 
 											// Merge in descendant areas of expertise value
 
-												$expertise_descendant_MedicalEntity = $expertise_descendant_MedicalEntity ?? null;
+												$expertise_descendant_expertise_MedicalEntity = $expertise_descendant_expertise_MedicalEntity ?? null;
 
-												if ( $expertise_descendant_MedicalEntity ) {
+												if ( $expertise_descendant_expertise_MedicalEntity ) {
 
 													$expertise_mentions = uamswp_fad_schema_merge_values(
 														$expertise_mentions, // mixed // Required // Initial schema item property value
-														$expertise_descendant_MedicalEntity // mixed // Required // Incoming schema item property value
+														$expertise_descendant_expertise_MedicalEntity // mixed // Required // Incoming schema item property value
 													);
 
 												}
 
 												// Merge areas of expertise significantLink value into significantLink
 
-													$expertise_descendant_MedicalWebPage_significantLink = $expertise_descendant_MedicalWebPage_significantLink ?? null;
+													$expertise_descendant_expertise_MedicalWebPage_significantLink = $expertise_descendant_expertise_MedicalWebPage_significantLink ?? null;
 
-													if ( $expertise_descendant_MedicalWebPage_significantLink ) {
+													if ( $expertise_descendant_expertise_MedicalWebPage_significantLink ) {
 
 														$expertise_significantLink = uamswp_fad_schema_merge_values(
 															$expertise_significantLink, // mixed // Required // Initial schema item property value
-															$expertise_descendant_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
+															$expertise_descendant_expertise_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
 														);
 
 													}
 
 												// Merge areas of expertise keywords value into keywords
 
-													$expertise_descendant_MedicalEntity_keywords = $expertise_descendant_MedicalEntity_keywords ?? null;
+													$expertise_descendant_expertise_MedicalEntity_keywords = $expertise_descendant_expertise_MedicalEntity_keywords ?? null;
 
-													if ( $expertise_descendant_MedicalEntity_keywords ) {
+													if ( $expertise_descendant_expertise_MedicalEntity_keywords ) {
 
 														$expertise_keywords = uamswp_fad_schema_merge_values(
 															$expertise_keywords, // mixed // Required // Initial schema item property value
-															$expertise_descendant_MedicalEntity_keywords // mixed // Required // Incoming schema item property value
+															$expertise_descendant_expertise_MedicalEntity_keywords // mixed // Required // Incoming schema item property value
 														);
 
 													}
 
 											// Merge in related areas of expertise value
 
-												$expertise_related_MedicalEntity = $expertise_related_MedicalEntity ?? null;
+												$expertise_related_expertise_MedicalEntity = $expertise_related_expertise_MedicalEntity ?? null;
 
-												if ( $expertise_related_MedicalEntity ) {
+												if ( $expertise_related_expertise_MedicalEntity ) {
 
 													$expertise_mentions = uamswp_fad_schema_merge_values(
 														$expertise_mentions, // mixed // Required // Initial schema item property value
-														$expertise_related_MedicalEntity // mixed // Required // Incoming schema item property value
+														$expertise_related_expertise_MedicalEntity // mixed // Required // Incoming schema item property value
 													);
 
 												}
 
 												// Merge areas of expertise significantLink value into significantLink
 
-													$expertise_related_MedicalWebPage_significantLink = $expertise_related_MedicalWebPage_significantLink ?? null;
+													$expertise_related_expertise_MedicalWebPage_significantLink = $expertise_related_expertise_MedicalWebPage_significantLink ?? null;
 
-													if ( $expertise_related_MedicalWebPage_significantLink ) {
+													if ( $expertise_related_expertise_MedicalWebPage_significantLink ) {
 
 														$expertise_significantLink = uamswp_fad_schema_merge_values(
 															$expertise_significantLink, // mixed // Required // Initial schema item property value
-															$expertise_related_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
+															$expertise_related_expertise_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
 														);
 
 													}
 
 												// Merge areas of expertise keywords value into keywords
 
-													$expertise_related_MedicalEntity_keywords = $expertise_related_MedicalEntity_keywords ?? null;
+													$expertise_related_expertise_MedicalEntity_keywords = $expertise_related_expertise_MedicalEntity_keywords ?? null;
 
-													if ( $expertise_related_MedicalEntity_keywords ) {
+													if ( $expertise_related_expertise_MedicalEntity_keywords ) {
 
 														$expertise_keywords = uamswp_fad_schema_merge_values(
 															$expertise_keywords, // mixed // Required // Initial schema item property value
-															$expertise_related_MedicalEntity_keywords // mixed // Required // Incoming schema item property value
+															$expertise_related_expertise_MedicalEntity_keywords // mixed // Required // Incoming schema item property value
 														);
 
 													}
