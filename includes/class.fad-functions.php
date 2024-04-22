@@ -12679,7 +12679,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 							$output_schema['jobTitle'] = $patientFriendly_occupation_name_attr ?? '';
 
-						// hasOccupation
+						// hasOccupation and occupationalCategory
 
 							$occupationalCategory = uamswp_fad_schema_occupationalCategory(
 								array(
@@ -12688,17 +12688,19 @@ function limit_to_post_parent( $args, $field, $post ) {
 								) // array // Required // Values for defining occupationalCategory
 							);
 
-							$output_schema['hasOccupation'] = uamswp_fad_schema_hasoccupation(
-								$patientFriendly_occupation_alternatename, // array // optional // alternateName (alternate clinical occupation title value from Clinical Specialization item)
-								$codeSet_definition_attr, // string // optional // description
-								$patientFriendly_occupation_name_attr, // string // optional // name (clinical occupation title value from Clinical Specialization item)
-								$occupationalCategory, // array // optional // occupationalCategory
-								$sameAs_occupation // string|array // optional // sameAs
-							) ?? '';
+							// hasOccupation
 
-						// occupationalCategory
+								$output_schema['hasOccupation'] = uamswp_fad_schema_hasoccupation(
+									$patientFriendly_occupation_alternatename, // array // optional // alternateName (alternate clinical occupation title value from Clinical Specialization item)
+									$codeSet_definition_attr, // string // optional // description
+									$patientFriendly_occupation_name_attr, // string // optional // name (clinical occupation title value from Clinical Specialization item)
+									$occupationalCategory, // array // optional // occupationalCategory
+									$sameAs_occupation // string|array // optional // sameAs
+								) ?? '';
 
-							$output_schema['occupationalCategory'] = $occupationalCategory;
+							// occupationalCategory
+
+								$output_schema['occupationalCategory'] = $occupationalCategory;
 
 						// knowsAbout
 
