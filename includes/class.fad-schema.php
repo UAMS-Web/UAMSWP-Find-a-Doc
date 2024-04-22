@@ -7545,16 +7545,589 @@
 	// Add data to an array defining schema data for the Health Care Provider Taxonomy code set
 
 		function uamswp_fad_schema_nucc_code_set(
-			$term_id, // mixed // Required // Clinical Specialization term id
+			string $code, // string // Required // Health Care Provider Taxonomy code
+			$alternateName = '', // string|array // Optional // alternateName
+			string $description = '', // string // Optional // description
+			string $name = '', // string // Optional // name
 			array $output = array() // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
 		) {
 
-			// Check / define variables
+			/**
+			 * Make all input values attribute-friendly before adding them as arguments for
+			 * this function.
+			 */
 
-				// Convert output array into a list array (if not already a list array)
+			// If $code input is invalid, stop here
 
-					$output = is_array($output) ? $output : array($output);
-					$output = array_is_list($output) ? $output : array($output);
+				if ( !$code ) {
+
+					return $output;
+
+				}
+
+			// Base item array
+
+				$output_item = array();
+
+			// Define static values
+
+				// Type
+
+					$type = 'MedicalCode';
+
+				// codingSystem
+
+					$codingSystem = 'Health Care Provider Taxonomy';
+
+				// inCodeSet
+
+					$inCodeSet = array(
+						'@type' => 'CategoryCodeSet',
+						'alternateName' => array(
+							'Health Care Provider Taxonomy code set',
+							'National Uniform Claim Committee Health Care Provider Taxonomy',
+							'NUCC Health Care Provider Taxonomy',
+							'National Uniform Claim Committee code set',
+							'NUCC code set',
+							'Provider Taxonomy Code List'
+						),
+						'name' => $codingSystem,
+						'sameAs' => 'http://terminology.hl7.org/CodeSystem/v3-nuccProviderCodes',
+						'url' => array(
+							'https://nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40',
+							'https://taxonomy.nucc.org/'
+						),
+					);
+
+				// url
+
+					$url = $code ? 'https://taxonomy.nucc.org/?searchTerm=' . $code : ''; // URL to term on taxonomy.nucc.org
+
+			// Add schema property values to the item array
+
+			// @id
+
+					$schema_item_id = ( $url && $type ) ? $url . '#' . $type : '';
+
+					if ( $schema_item_id ) {
+
+						$output_item['@id'] = $schema_item_id;
+
+					}
+
+				// @type
+
+					if ( $type ) {
+
+						$output_item['@type'] = $type;
+
+					}
+
+				// additionalType [excluded]
+
+					/**
+						* An additional type for the item, typically used for adding more specific types
+						* from external vocabularies in microdata syntax. This is a relationship between
+						* something and a class that the thing is in. Typically the value is a
+						* URI-identified RDF class, and in this case corresponds to the use of rdf:type
+						* in RDF. Text values can be used sparingly, for cases where useful information
+						* can be added without their being an appropriate schema to reference. In the
+						* case of text values, the class label should follow the schema.org style guide.
+						*
+						* Subproperty of:
+						*      - rdf:type
+						*
+						* Values expected to be one of these types:
+						*
+						*      - Text
+						*      - URL
+						*
+						* Used on these types:
+						*
+						*      - Thing
+						*/
+
+				// alternateName
+
+					/**
+						* An alias for the item.
+						*
+						* Expected Type:
+						*
+						*      - Text
+						*
+						* Used on these types:
+						*
+						*      - Thing
+						*/
+
+					if ( $alternateName ) {
+
+						$output_item['alternateName'] = $alternateName;
+
+					}
+
+				// code
+
+					/**
+						* A medical code for the entity, taken from a controlled vocabulary or ontology
+						* such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - MedicalCode
+						*
+						* Used on these types:
+						*
+						*      - MedicalEntity
+						*/
+
+					if ( $code ) {
+
+						$output_item['code'] = $code;
+
+					}
+
+				// codeValue
+
+					/**
+						* A short textual code that uniquely identifies the value.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - Text
+						*
+						* Used on these types:
+						*
+						*      - CategoryCode
+						*      - MedicalCode
+						*
+						* As of 22 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+						* feedback and adoption from applications and websites can help improve their
+						* definitions.
+						*/
+
+					if ( $code ) {
+
+						$output_item['codeValue'] = $code;
+
+					}
+
+				// codingSystem
+
+					/**
+						* The coding system, e.g. 'ICD-10'.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - Text
+						*
+						* Used on these types:
+						*
+						*      - MedicalCode
+						*/
+
+					if ( $codingSystem ) {
+
+						$output_item['codingSystem'] = $codingSystem;
+
+					}
+
+				// description
+
+					/**
+						* A description of the item.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - Text
+						*      - TextObject
+						*
+						* Used on these types:
+						*
+						*      - Thing
+						*
+						* Sub-properties:
+						*
+						*      - disambiguatingDescription
+						*      - interpretedAsClaim
+						*      - originalMediaContextDescription
+						*      - sha256
+						*/
+
+					// Clean up value
+
+						if ( $description ) {
+
+							$description = wp_strip_all_tags($description);
+							$description = str_replace("\n", ' ', $description); // Strip line breaks
+							$description = uamswp_attr_conversion($description);
+
+						}
+
+					if ( $description ) {
+
+						$output_item['description'] = $description;
+
+					}
+
+				// disambiguatingDescription [excluded]
+
+					/**
+						* A sub property of description. A short description of the item used to
+						* disambiguate from other, similar items. Information from other properties (in
+						* particular, name) may be necessary for the description to be useful for
+						* disambiguation.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - Text
+						*
+						* Used on these types:
+						*
+						*      - Thing
+						*/
+
+				// funding [excluded]
+
+					/**
+						* A Grant that directly or indirectly provide funding or sponsorship for this
+						* item. See also ownershipFundingInfo.
+						*
+						* Inverse-property: fundedItem
+						*
+						* Grant: https://schema.org/Grant
+						* ownershipFundingInfo: https://schema.org/ownershipFundingInfo
+						*
+						* Values expected to be one of these types:
+						*
+						*      - Grant
+						*
+						* As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+						* feedback and adoption from applications and websites can help improve their
+						* definitions.
+						*/
+
+				// guideline [excluded]
+
+					/**
+						* A medical guideline related to this entity.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - MedicalGuideline
+						*/
+
+				// identifier [excluded]
+
+					/**
+						* The identifier property represents any kind of identifier for any kind of
+						* Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
+						* properties for representing many of these, either as textual strings or as
+						* URL (URI) links.
+						*
+						* See https://schema.org/docs/datamodel.html#identifierBg for more details.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - PropertyValue
+						*      - Text
+						*      - URL
+						*/
+
+				// image [excluded]
+
+					/**
+						* An image of the item. This can be a URL or a fully described ImageObject.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - ImageObject
+						*      - URL
+						*/
+
+				// inCodeSet
+
+					/**
+						* A CategoryCodeSet that contains this category code.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - CategoryCodeSet
+						*      - URL
+						*
+						* Used on these types:
+						*
+						*      - CategoryCode
+						*
+						* As of 22 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+						* feedback and adoption from applications and websites can help improve their
+						* definitions.
+						*/
+
+					if ( $inCodeSet ) {
+
+						$output_item['inCodeSet'] = $inCodeSet;
+
+					}
+
+				// inDefinedTermSet
+
+					/**
+						* A DefinedTermSet that contains this term.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - DefinedTermSet
+						*      - URL
+						*
+						* Used on these types:
+						*
+						*      - DefinedTerm
+						*
+						* Sub-properties:
+						*
+						*      - inCodeSet
+						*
+						* As of 22 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+						* feedback and adoption from applications and websites can help improve their
+						* definitions.
+						*/
+
+					if ( $inCodeSet ) {
+
+						$output_item['inDefinedTermSet'] = $inCodeSet;
+
+					}
+
+				// legalStatus [excluded]
+
+					/**
+						* The drug or supplement's legal status, including any controlled substance
+						* schedules that apply.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - DrugLegalStatus
+						*      - MedicalEnumeration
+						*      - Text
+						*/
+
+				// mainEntityOfPage [excluded]
+
+					/**
+						* Indicates a page (or other CreativeWork) for which this thing is the main
+						* entity being described. See background notes for details.
+						*
+						* Inverse property:
+						*
+						*      - mainEntity
+						*
+						* Values expected to be one of these types:
+						*
+						*      - CreativeWork
+						*      - URL
+						*
+						* Used on these types:
+						*
+						*      - Thing
+						*/
+
+				// medicineSystem [excluded]
+
+					/**
+						* The system of medicine that includes this MedicalEntity
+						* (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
+						*
+						* Values expected to be one of these types:
+						*
+						*      - MedicineSystem
+						*/
+
+				// name
+
+					/**
+						* The name of the item.
+						*
+						* Subproperty of:
+						*
+						*      - rdfs:label
+						*
+						* Expected Type:
+						*
+						*      - Text
+						*/
+
+					if ( $name ) {
+
+						$output_item['name'] = $name;
+
+					}
+
+				// potentialAction [excluded]
+
+					/**
+						* Indicates a potential Action, which describes an idealized action in which this
+						* thing would play an 'object' role.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - Action
+						*
+						* Used on these types:
+						*
+						*      - Thing
+						*/
+
+				// recognizingAuthority [excluded]
+
+					/**
+						* If applicable, the organization that officially recognizes this entity as part
+						* of its endorsed system of medicine.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - Organization
+						*/
+
+				// relevantSpecialty [excluded]
+
+					/**
+						* If applicable, a medical specialty in which this entity is relevant.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - MedicalSpecialty (enumeration type)
+						*/
+
+				// sameAs [excluded]
+
+					/**
+						* URL of a reference Web page that unambiguously indicates the item's identity
+						* (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+						* website).
+						*
+						* Values expected to be one of these types:
+						*
+						*      - URL
+						*
+						* Used on these types:
+						*
+						*      - Thing
+						*/
+
+				// study [excluded]
+
+					/**
+						* A medical study or trial related to this entity.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - MedicalStudy
+						*/
+
+				// subjectOf [excluded]
+
+					/**
+						* A CreativeWork or Event about this Thing.
+						*
+						* Inverse-property: about
+						*
+						* Values expected to be one of these types:
+						*
+						*      - CreativeWork
+						*      - Event
+						*
+						* Used on these types:
+						*
+						*      - Thing
+						*/
+
+				// termCode
+
+					/**
+						* A code that identifies this DefinedTerm within a DefinedTermSet.
+						*
+						* Values expected to be one of these types:
+						*
+						*      - Text
+						*
+						* Used on these types:
+						*
+						*      - DefinedTerm
+						*
+						* Sub-properties:
+						*
+						*      - codeValue
+						*
+						* As of 22 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+						* feedback and adoption from applications and websites can help improve their
+						* definitions.
+						*/
+
+					$output_item_termCode = $code ?? '';
+
+					if ( $output_item_termCode ) {
+
+						$output_item['termCode'] = $output_item_termCode;
+
+					}
+
+				// url
+
+					/**
+						* URL of the item.
+						*
+						* Expected Type:
+						*
+						*      - URL
+						*
+						* Used on these types:
+						*
+						*      - Thing
+						*/
+
+					$output_item_url = $url ?? '';
+
+					if ( $output_item_url ) {
+
+						$output_item['url'] = $output_item_url;
+
+					}
+
+			// Add the item to the output array
+
+				if ( !$output ) {
+
+					/**
+					 * If the pre-existing output array is empty, then set the output value using the
+					 * item value.
+					 */
+
+					$output = $output_item;
+
+				} elseif ( !array_is_list($output) ) {
+
+					/**
+					 * If the pre-existing output array is an associative array, then add both the
+					 * pre-existing output array value and the item value to the output array as items
+					 * in a list array.
+					 */
+
+					$output = array_merge(
+						array($output),
+						array($output_item)
+					);
+
+				} else {
+
+					/**
+					 * Otherwise, add the item value to the output array as an additional item.
+					 */
+
+					$output[] = $output_item;
+
+				}
 
 			return $output;
 
