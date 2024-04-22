@@ -38555,92 +38555,6 @@
 
 									}
 
-								// additionalType [WIP]
-
-									/**
-									 * An additional type for the item, typically used for adding more specific types
-									 * from external vocabularies in microdata syntax. This is a relationship between
-									 * something and a class that the thing is in. Typically the value is a
-									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
-									 * in RDF. Text values can be used sparingly, for cases where useful information
-									 * can be added without their being an appropriate schema to reference. In the
-									 * case of text values, the class label should follow the schema.org style guide.
-									 *
-									 * Subproperty of:
-									 *     - rdf:type
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - Text
-									 *     - URL
-									 */
-
-								// alternateName
-
-									/**
-									 * An alias for the item.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - Text
-									 */
-
-									if (
-										in_array(
-											'alternateName',
-											$condition_properties_map[$MedicalCondition_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											// Get alternateName repeater field value
-
-												$condition_alternateName_repeater = get_field( 'condition_alternate', $entity ) ?? array();
-
-											// Add each item to alternateName property values array
-
-												if ( $condition_alternateName_repeater ) {
-
-													$condition_alternateName = uamswp_fad_schema_alternatename(
-														$condition_alternateName_repeater, // array // Required // alternateName repeater field
-														'alternate_text' // string // Optional // alternateName item field name
-													);
-
-												}
-
-										// Add to item values
-
-											// MedicalCondition
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalCondition_type, // string // Required // The @type value for the schema item
-													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
-													'alternateName', // string // Required // Name of schema property
-													$condition_alternateName, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
-								// associatedAnatomy [excluded]
-
-									/**
-									 * The anatomy of the underlying organ system or structures associated with this
-									 * entity.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - AnatomicalStructure
-									 *     - AnatomicalSystem
-									 *     - SuperficialAnatomy
-									 *
-									 * This schema property is beyond the scope of what is being included for
-									 * condition schema and so it will not be included.
-									 */
-
 								// additionalType
 
 									/**
@@ -38653,12 +38567,16 @@
 									 * case of text values, the class label should follow the schema.org style guide.
 									 *
 									 * Subproperty of:
-									 *     - rdf:type
+									 *      - rdf:type
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *     - Text
-									 *     - URL
+									 *      - Text
+									 *      - URL
+									 *
+									 * Used on these types:
+									 *
+									 *      - Thing
 									 */
 
 									if (
@@ -38694,6 +38612,56 @@
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
 													$condition_additionalType, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// alternateName
+
+									/**
+									 * An alias for the item.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Text
+									 */
+
+									if (
+										in_array(
+											'alternateName',
+											$condition_properties_map[$MedicalCondition_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											// Get alternateName repeater field value
+
+												$condition_alternateName_repeater = get_field( 'condition_alternate', $entity ) ?? array();
+
+											// Add each item to alternateName property values array
+
+												if ( $condition_alternateName_repeater ) {
+
+													$condition_alternateName = uamswp_fad_schema_alternatename(
+														$condition_alternateName_repeater, // array // Required // alternateName repeater field
+														'alternate_text' // string // Optional // alternateName item field name
+													);
+
+												}
+
+										// Add to item values
+
+											// MedicalCondition
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalCondition_type, // string // Required // The @type value for the schema item
+													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+													'alternateName', // string // Required // Name of schema property
+													$condition_alternateName, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -40145,6 +40113,22 @@
 												);
 
 									}
+
+								// associatedAnatomy [excluded]
+
+									/**
+									 * The anatomy of the underlying organ system or structures associated with this
+									 * entity.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - AnatomicalStructure
+									 *      - AnatomicalSystem
+									 *      - SuperficialAnatomy
+									 *
+									 * This schema property is beyond the scope of what is being included for
+									 * condition schema and so it will not be included.
+									 */
 
 								// code
 
