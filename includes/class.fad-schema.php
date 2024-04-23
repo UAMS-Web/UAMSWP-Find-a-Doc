@@ -34071,8 +34071,8 @@
 												) {
 
 													$expertise_code = uamswp_fad_schema_code(
-														$expertise_code_repeater, // array // Optional // code repeater field
-														$expertise_nucc_array // array // Optional // Health Care Provider Taxonomy Code Set taxonomy field
+														( $expertise_code_repeater ?: array() ), // array // Optional // code repeater field
+														( $expertise_nucc_array ?: array() ) // array // Optional // Health Care Provider Taxonomy Code Set taxonomy field
 													);
 
 												}
