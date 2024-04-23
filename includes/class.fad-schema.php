@@ -34422,13 +34422,6 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// abstract [excluded; common properties]
-
-									/**
-									 * Note: The value for this property is already being defined in the common schema
-									 * properties (templates/parts/vars/page/schema/common/properties.php)
-									 */
-
 								// accessMode [excluded; common properties]
 
 									/**
@@ -39146,6 +39139,83 @@
 
 									}
 
+								// accessMode [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// accessModeSufficient [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// accessibilityAPI [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// accessibilityControl [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// accessibilityFeature [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// accessibilityHazard [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// accessibilitySummary [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// accountablePerson [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// acquireLicensePage [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// actor [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// actors [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
 								// additionalType
 
 									/**
@@ -39325,6 +39395,20 @@
 
 									}
 
+								// alternativeHeadline [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// archivedAt [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
 								// articleBody
 
 									/**
@@ -39416,6 +39500,83 @@
 
 									}
 
+								// articleSection [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// aspect [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// assembly [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// assemblyVersion [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// assesses [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// associatedArticle [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// associatedClaimReview [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// associatedMedia [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// associatedMediaReview [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// associatedReview [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// audience [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
 								// audio [excluded]
 
 									/**
@@ -39434,6 +39595,13 @@
 									 * not be included for the MedicalWebPage schema type.
 									 */
 
+								// author [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
 								// award [excluded]
 
 									/**
@@ -39447,7 +39615,21 @@
 									 * and so it will not be included.
 									 */
 
-								// bitrate (CreativeWork only) [WIP]
+								// awards [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// backstory [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// bitrate [WIP]
 
 									/**
 									 * The bitrate of the media object.
@@ -39455,6 +39637,17 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *     - MediaObject
+									 */
+
+								// breadcrumb [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// caption (CreativeWork only) [WIP]
@@ -39467,6 +39660,19 @@
 									 *
 									 *      - MediaObject
 									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *     - AudioObject
+									 *     - ImageObject
+									 *     - VideoObject
+									 */
+
+								// character [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// citation [excluded]
@@ -39484,6 +39690,27 @@
 									 * and so it will not be included.
 									 */
 
+								// comment [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// commentCount [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// conditionsOfAccess [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
 								// contentLocation [excluded]
 
 									/**
@@ -39496,6 +39723,20 @@
 									 *
 									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
+									 */
+
+								// contentRating [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// contentReferenceTime [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// contentSize
@@ -39622,6 +39863,176 @@
 
 									}
 
+								// contributor [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// copyrightHolder [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// copyrightNotice [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// copyrightYear [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// correction [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// countryOfOrigin [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// coverageEndTime [excluded; irrelevant]
+
+									/**
+									 * The time when the live blog will stop covering the Event. Note that coverage
+									 * may continue after the Event concludes.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - DateTime
+									 *
+									 * Used on these types:
+									 *
+									 *     - LiveBlogPosting
+									 *
+									 * This schema property is not relevant to clinical resources or their webpages,
+									 * and so it will not be included.
+									 */
+
+								// coverageStartTime [excluded; irrelevant]
+
+									/**
+									 * The time when the live blog will begin covering the Event. Note that coverage
+									 * may begin before the Event's start time. The LiveBlogPosting may also be
+									 * created before coverage begins.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - DateTime
+									 *
+									 * Used on these types:
+									 *
+									 *     - LiveBlogPosting
+									 *
+									 * This schema property is not relevant to clinical resources or their webpages,
+									 * and so it will not be included.
+									 */
+
+								// creativeWorkStatus [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// creator [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// creditText [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// dateCreated [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// dateModified [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// datePublished [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// dateline [excluded; irrelevant]
+
+									/**
+									 * A dateline is a brief piece of text included in news articles that describes
+									 * where and when the story was written or filed though the date is often omitted.
+									 * Sometimes only a placename is provided.
+									 *
+									 * Structured representations of dateline-related information can also be
+									 * expressed more explicitly using locationCreated (which represents where a work
+									 * was created, e.g. where a news report was written). For location depicted or
+									 * described in the content, use contentLocation.
+									 *
+									 * Dateline summaries are oriented more towards human readers than towards
+									 * automated processing, and can vary substantially.
+									 *
+									 * Some examples:
+									 *
+									 *      - "BEIRUT, Lebanon, June 2."
+									 *      - "Paris, France"
+									 *      - "December 19, 2017 11:43AM Reporting from Washington"
+									 *      - "Beijing/Moscow"
+									 *      - "QUEZON CITY, Philippines"
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - Text
+									 *
+									 * Used on these types:
+									 *
+									 *     - NewsArticle
+									 *
+									 * This schema property is not relevant to clinical resources or their webpages,
+									 * and so it will not be included.
+									 */
+
+								// dependencies [excluded; irrelevant]
+
+									/**
+									 * Prerequisites needed to fulfill steps in article.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - Text
+									 *
+									 * Used on these types:
+									 *
+									 *     - TechArticle
+									 */
+
 								// description
 
 									/**
@@ -39699,6 +40110,39 @@
 
 									}
 
+								// digitalSourceType [WIP]
+
+									/**
+									 * Indicates an IPTCDigitalSourceEnumeration code indicating the nature of the
+									 * digital source(s) for some CreativeWork.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - IPTCDigitalSourceEnumeration
+									 *
+									 * Used on these types:
+									 *
+									 *      - CreativeWork
+									 *
+									 * As of 23 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
+									 * definitions.
+									 */
+
+								// director [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// directors [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
 								// disambiguatingDescription [excluded]
 
 									/**
@@ -39717,6 +40161,13 @@
 									 *
 									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
+									 */
+
+								// discussionUrl [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// duration
@@ -39775,6 +40226,105 @@
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'duration', // string // Required // Name of schema property
 													$clinical_resource_asset_duration, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// editEIDR [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// editor [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// educationalAlignment [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// educationalLevel [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// educationalUse [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// embedUrl
+
+									/**
+									 * A URL pointing to a player for a specific video. In general, this is the
+									 * information in the src element of an embed tag and should not be the same as
+									 * the content of the loc tag.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - URL
+									 */
+
+									if (
+										(
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'embedUrl',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
+											)
+											||
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'embedUrl',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'embedUrl', // string // Required // Name of schema property
+													$clinical_resource_asset_embedUrl, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// CreativeWork
+
+												uamswp_fad_schema_add_to_item_values(
+													$CreativeWork_type, // string // Required // The @type value for the schema item
+													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+													'embedUrl', // string // Required // Name of schema property
+													$clinical_resource_asset_embedUrl, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -39862,69 +40412,19 @@
 
 									}
 
-								// embedUrl
+								// encodesCreativeWork [excluded; common properties]
 
 									/**
-									 * A URL pointing to a player for a specific video. In general, this is the
-									 * information in the src element of an embed tag and should not be the same as
-									 * the content of the loc tag.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - URL
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-									if (
-										(
-											(
-												isset($clinical_resource_item_MedicalWebPage)
-												&&
-												in_array(
-													'embedUrl',
-													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
-												)
-											)
-											||
-											(
-												isset($clinical_resource_item_CreativeWork)
-												&&
-												in_array(
-													'embedUrl',
-													$clinical_resource_properties_map[$CreativeWork_type]['properties']
-												)
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
+								// encoding [excluded; common properties]
 
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'embedUrl', // string // Required // Name of schema property
-													$clinical_resource_asset_embedUrl, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// CreativeWork
-
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'embedUrl', // string // Required // Name of schema property
-													$clinical_resource_asset_embedUrl, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
 
 								// encodingFormat
 
@@ -40002,6 +40502,74 @@
 												);
 
 									}
+
+								// encodings [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// endTime [WIP]
+
+									/**
+									 *
+									 */
+
+								// exampleOfWork [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// executableLibraryName [WIP]
+
+									/**
+									 *
+									 */
+
+								// exifData [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// expires [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// fileFormat [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// funder [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// funding [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// genre [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
 
 								// hasDigitalDocumentPermission
 
@@ -40263,6 +40831,13 @@
 
 									}
 
+								// ineligibleRegion [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
 								// inLanguage (CreativeWork only) [WIP]
 
 									/**
@@ -40285,6 +40860,27 @@
 										schema property value for the CreativeWork item.
 
 									*/
+
+								// interactionStatistic [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// interactivityType [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// interpretedAsClaim [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
 
 								// isAccessibleForFree (CreativeWork only)
 
@@ -40351,7 +40947,21 @@
 
 									*/
 
-								// isPartOf (CreativeWork only)
+								// isBasedOnUrl [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// isFamilyFriendly [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// isPartOf (CreativeWork only) [WIP]
 
 									/**
 									 * Indicates an item or CreativeWork that this item, or CreativeWork (in some
@@ -40413,6 +41023,12 @@
 
 									}
 
+								// itemReviewed [WIP]
+
+									/**
+									 *
+									 */
+
 								// keywords [WIP]
 
 									/**
@@ -40424,6 +41040,40 @@
 									 *      - DefinedTerm
 									 *      - Text
 									 *      - URL
+									 */
+
+								// lastReviewed [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// learningResourceType [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// license [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// liveBlogUpdate [WIP]
+
+									/**
+									 *
+									 */
+
+								// locationCreated [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// mainContentOfPage
@@ -40536,6 +41186,41 @@
 
 									}
 
+								// mainEntityOfPage [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// maintainer [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// material [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// materialExtent [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// medicalAudience [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
 								// mentions [WIP]
 
 									/**
@@ -40545,6 +41230,19 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Thing
+									 */
+
+								// musicBy [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// negativeNotes [WIP]
+
+									/**
+									 *
 									 */
 
 								// offers [WIP]
@@ -40568,6 +41266,54 @@
 									 *
 									 *      - Demand
 									 *      - Offer
+									 */
+
+								// pageEnd [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// pageStart [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// pagination [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// pattern [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// playerType [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// position [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// positiveNotes [WIP]
+
+									/**
+									 *
 									 */
 
 								// potentialAction [WIP]
@@ -40655,6 +41401,124 @@
 									 *      - ImageObject
 									 */
 
+								// printColumn [WIP]
+
+									/**
+									 *
+									 */
+
+								// printEdition [WIP]
+
+									/**
+									 *
+									 */
+
+								// printPage [WIP]
+
+									/**
+									 *
+									 */
+
+								// printSection [WIP]
+
+									/**
+									 *
+									 */
+
+								// producer [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// productionCompany [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// proficiencyLevel [WIP]
+
+									/**
+									 *
+									 */
+
+								// programmingModel [WIP]
+
+									/**
+									 *
+									 */
+
+								// provider [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// publication [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// publicationType [WIP]
+
+									/**
+									 *
+									 */
+
+								// publisher [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// publisherImprint [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// publishingPrinciples [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// recordedAt [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// regionsAllowed [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// releasedEvent [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// reportNumber [WIP]
+
+									/**
+									 *
+									 */
+
 								// relatedLink [WIP]
 
 									/**
@@ -40706,6 +41570,13 @@
 
 									}
 
+								// requiresSubscription [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
 								// review [excluded]
 
 									/**
@@ -40717,6 +41588,38 @@
 									 *
 									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
+									 */
+
+								// reviewAspect [WIP]
+
+									/**
+									 *
+									 */
+
+								// reviewBody [WIP]
+
+									/**
+									 *
+									 */
+
+								// reviewRating [WIP]
+
+									/**
+									 *
+									 */
+
+								// reviewedBy [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// reviews [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// sameAs
@@ -40802,6 +41705,47 @@
 
 									}
 
+								// schemaVersion [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// sdDatePublished [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// sdLicense [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// sdPublisher [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// sha256 [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// sharedContent [WIP]
+
+									/**
+									 *
+									 */
+
 								// significantLink [WIP]
 
 									/**
@@ -40811,6 +41755,13 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - URL
+									 */
+
+								// significantLinks [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// size [excluded]
@@ -40831,6 +41782,27 @@
 									 *
 									 * Standardized sizes are not relevant to clinical resources or their webpages and
 									 * so this schema property will not be included.
+									 */
+
+								// sourceOrganization [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// spatial [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// spatialCoverage [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// speakable
@@ -40976,6 +41948,53 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Specialty
+									 */
+
+								// sponsor [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// startTime [WIP]
+
+									/**
+									 *
+									 */
+
+								// subjectOf [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// targetPlatform [WIP]
+
+									/**
+									 *
+									 */
+
+								// teaches [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// temporal [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// temporalCoverage [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// text [WIP]
@@ -41247,6 +42266,13 @@
 
 									}
 
+								// translationOfWork [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
 								// translator [excluded]
 
 									/**
@@ -41262,6 +42288,13 @@
 									 * We will not be identifying either the organization or the person who translates
 									 * the clinical resources into different languages and so this schema property
 									 * will not be included.
+									 */
+
+								// typicalAgeRange [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// uploadDate (CreativeWork only) [WIP]
@@ -41280,6 +42313,20 @@
 										resource's media asset (i.e., infographic image, digital document file).
 
 									*/
+
+								// usageInfo [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// version [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
 
 								// video (MedicalWebPage only) [WIP]
 
@@ -41565,6 +42612,20 @@
 												);
 
 									}
+
+								// workExample [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
+
+								// workTranslation [excluded; common properties]
+
+									/**
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 */
 
 								// Value overrides for syndicated clinical resource content as CreativeWork (or its subtypes)
 

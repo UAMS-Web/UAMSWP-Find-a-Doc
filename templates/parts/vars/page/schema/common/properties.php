@@ -547,6 +547,29 @@
 		 * SupersededBy: mainContentOfPage
 		 */
 
+	// assembly [superseded]
+
+		/**
+		 * SupersededBy: executableLibraryName
+		 */
+
+	// assemblyVersion [excluded]
+
+		/**
+		 * Associated product/technology version. E.g., .NET Framework 4.5.
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *     - Text
+		 *
+		 * Used on these types:
+		 *
+		 *     - APIReference
+		 *
+		 * This schema property is not relevant to UAMSHealth.com webpages or their
+		 * content and will not be included.
+		 */
+
 	// assesses [excluded]
 
 		/**
@@ -576,6 +599,27 @@
 		 * content and will not be included.
 		 */
 
+	// associatedClaimReview [excluded]
+
+		/**
+		 * An associated ClaimReview, related by specific common content, topic or claim.
+		 * The expectation is that this property would be most typically used in cases
+		 * where a single activity is conducting both claim reviews and media reviews, in
+		 * which case relatedMediaReview would commonly be used on a ClaimReview, while
+		 * relatedClaimReview would be used on MediaReview.
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *     - Review
+		 *
+		 * Used on these types:
+		 *
+		 *     - Review
+		 *
+		 * This schema property is not relevant to UAMSHealth.com webpages or their
+		 * content and will not be included.
+		 */
+
 	// associatedMedia [excluded]
 
 		/**
@@ -585,6 +629,49 @@
 		 * Values expected to be one of these types:
 		 *
 		 *     - MediaObject
+		 *
+		 * This schema property is not relevant to UAMSHealth.com webpages or their
+		 * content and will not be included.
+		 */
+
+	// associatedMediaReview [excluded]
+
+		/**
+		 * An associated MediaReview, related by specific common content, topic or claim.
+		 * The expectation is that this property would be most typically used in cases
+		 * where a single activity is conducting both claim reviews and media reviews, in
+		 * which case relatedMediaReview would commonly be used on a ClaimReview, while
+		 * relatedClaimReview would be used on MediaReview.
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *     - Review
+		 *
+		 * Used on these types:
+		 *
+		 *     - Review
+		 *
+		 * This schema property is not relevant to UAMSHealth.com webpages or their
+		 * content and will not be included.
+		 */
+
+	// associatedReview [excluded]
+
+		/**
+		 * An associated Review.
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *     - Review
+		 *
+		 * Used on these types:
+		 *
+		 *     - Review
+		 *
+		 * Sub-properties:
+		 *
+		 *     - associatedClaimReview
+		 *     - associatedMediaReview
 		 *
 		 * This schema property is not relevant to UAMSHealth.com webpages or their
 		 * content and will not be included.
