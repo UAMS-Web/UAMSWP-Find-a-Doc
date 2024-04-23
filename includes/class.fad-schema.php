@@ -2283,8 +2283,13 @@
 				if ( $code_list ) {
 
 					$code_list = array_filter($code_list);
-					$code_list = array_unique( $code_list, SORT_REGULAR );
-					$code_list = array_values($code_list);
+
+					if ( array_is_list($code_list) ) {
+
+						$code_list = array_unique( $code_list, SORT_REGULAR );
+						$code_list = array_values($code_list);
+
+					}
 
 					// If there is only one item, flatten the multi-dimensional array by one step
 
