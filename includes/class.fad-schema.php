@@ -37522,6 +37522,8 @@
 								$clinical_resource_word_count = 0;
 								$clinical_resource_wordCount = '';
 								$clinical_resource_featured_image_1_1_height = '';
+								$MedicalCondition_i = 1;
+								$Service_i = 1;
 
 								// Reused variables
 
