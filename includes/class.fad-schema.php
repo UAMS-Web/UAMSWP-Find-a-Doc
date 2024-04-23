@@ -34948,6 +34948,84 @@
 
 												$expertise_mentions = array();
 
+											// Merge in related providers value
+											// Merge in related providers (MedicalBusiness) value
+
+												$expertise_provider_MedicalBusiness = $expertise_provider_MedicalBusiness ?? null;
+
+												if ( $expertise_provider_MedicalBusiness ) {
+
+													$expertise_mentions = uamswp_fad_schema_merge_values(
+														$expertise_mentions, // mixed // Required // Initial schema item property value
+														$expertise_provider_MedicalBusiness // mixed // Required // Incoming schema item property value
+													);
+
+												}
+
+												// Merge related providers (MedicalBusiness) significantLink value into significantLink
+
+													$expertise_provider_MedicalBusiness_significantLink = $expertise_provider_MedicalBusiness_significantLink ?? null;
+
+													if ( $expertise_provider_MedicalBusiness_significantLink ) {
+
+														$expertise_significantLink = uamswp_fad_schema_merge_values(
+															$expertise_significantLink, // mixed // Required // Initial schema item property value
+															$expertise_provider_MedicalBusiness_significantLink // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+												// Merge related providers (MedicalBusiness) keywords value into keywords
+
+													$expertise_provider_MedicalBusiness_keywords = $expertise_provider_MedicalBusiness_keywords ?? null;
+
+													if ( $expertise_provider_MedicalBusiness_keywords ) {
+
+														$expertise_keywords = uamswp_fad_schema_merge_values(
+															$expertise_keywords, // mixed // Required // Initial schema item property value
+															$expertise_provider_MedicalBusiness_keywords // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+
+												$expertise_provider_Person = $expertise_provider_Person ?? null;
+
+												if ( $expertise_provider_Person ) {
+
+													$expertise_mentions = uamswp_fad_schema_merge_values(
+														$expertise_mentions, // mixed // Required // Initial schema item property value
+														$expertise_provider_Person // mixed // Required // Incoming schema item property value
+													);
+
+												}
+
+												// Merge provider significantLink value into significantLink
+
+													$expertise_provider_MedicalWebPage_significantLink = $expertise_provider_MedicalWebPage_significantLink ?? null;
+
+													if ( $expertise_provider_MedicalWebPage_significantLink ) {
+
+														$expertise_significantLink = uamswp_fad_schema_merge_values(
+															$expertise_significantLink, // mixed // Required // Initial schema item property value
+															$expertise_provider_MedicalWebPage_significantLink // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
+												// Merge provider keywords value into keywords
+
+													$expertise_provider_Person_keywords = $expertise_provider_Person_keywords ?? null;
+
+													if ( $expertise_provider_Person_keywords ) {
+
+														$expertise_keywords = uamswp_fad_schema_merge_values(
+															$expertise_keywords, // mixed // Required // Initial schema item property value
+															$expertise_provider_Person_keywords // mixed // Required // Incoming schema item property value
+														);
+
+													}
+
 											// Merge in related locations value
 
 												$expertise_location_LocalBusiness = $expertise_location_LocalBusiness ?? null;
