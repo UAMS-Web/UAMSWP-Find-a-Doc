@@ -18066,31 +18066,35 @@
 
 									if (
 										(
-											isset($provider_item_MedicalWebPage)
-											&&
-											in_array(
-												'affiliation',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($provider_item_MedicalWebPage)
+												&&
+												in_array(
+													'affiliation',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
+											)
+											||
+											(
+												isset($provider_item_MedicalBusiness)
+												&&
+												in_array(
+													'affiliation',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
+											)
+											||
+											(
+												isset($provider_item_Person)
+												&&
+												in_array(
+													'affiliation',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
-										||
-										(
-											isset($provider_item_MedicalBusiness)
-											&&
-											in_array(
-												'affiliation',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-										)
-										||
-										(
-											isset($provider_item_Person)
-											&&
-											in_array(
-												'affiliation',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
+										&&
+										$nesting_level == 0
 									) {
 
 										// Get values
@@ -19217,7 +19221,7 @@
 											)
 										)
 										&&
-										$nesting_level <= 1
+										$nesting_level == 0
 									) {
 
 										// Get values
@@ -20077,31 +20081,35 @@
 
 									if (
 										(
-											isset($provider_item_MedicalWebPage)
-											&&
-											in_array(
-												'hospitalAffiliation',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($provider_item_MedicalWebPage)
+												&&
+												in_array(
+													'hospitalAffiliation',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
+											)
+											||
+											(
+												isset($provider_item_MedicalBusiness)
+												&&
+												in_array(
+													'hospitalAffiliation',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
+											)
+											||
+											(
+												isset($provider_item_Person)
+												&&
+												in_array(
+													'hospitalAffiliation',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
-										||
-										(
-											isset($provider_item_MedicalBusiness)
-											&&
-											in_array(
-												'hospitalAffiliation',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-										)
-										||
-										(
-											isset($provider_item_Person)
-											&&
-											in_array(
-												'hospitalAffiliation',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
+										&&
+										$nesting_level == 0
 									) {
 
 										// Get values

@@ -188,7 +188,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -216,7 +216,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -245,7 +245,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -273,7 +273,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -303,7 +303,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -331,7 +331,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -359,7 +359,7 @@
 		 *     - ItemList
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -436,26 +436,30 @@
 		 *     - Organization
 		 */
 
-		// Get values
+		if ( $nesting_level == 0 ) {
 
-			// Base array
+			// Get values
 
-				$schema_common_affiliation = array();
+				// Base array
 
-			// Merge in common affiliation organizations values
+					$schema_common_affiliation = array();
 
-				$schema_common_affiliation = uamswp_fad_schema_merge_values(
-					$schema_common_affiliation, // mixed // Required // Initial schema item property value
-					$schema_common_affiliation_organization // mixed // Required // Incoming schema item property value
-				);
+				// Merge in common affiliation organizations values
 
-		// Add to common schema properties array
+					$schema_common_affiliation = uamswp_fad_schema_merge_values(
+						$schema_common_affiliation, // mixed // Required // Initial schema item property value
+						$schema_common_affiliation_organization // mixed // Required // Incoming schema item property value
+					);
 
-			if ( $schema_common_affiliation ) {
+			// Add to common schema properties array
 
-				$schema_common_properties['affiliation'] = $schema_common_affiliation;
+				if ( $schema_common_affiliation ) {
 
-			}
+					$schema_common_properties['affiliation'] = $schema_common_affiliation;
+
+				}
+
+		}
 
 	// alternativeHeadline [excluded]
 
@@ -505,7 +509,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -594,7 +598,7 @@
 		 *     - Audience
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Add to common schema properties array
 
@@ -634,7 +638,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -847,7 +851,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -883,7 +887,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -923,7 +927,7 @@
 		 * definitions.
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -950,7 +954,7 @@
 		 *     - Number
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -1006,7 +1010,7 @@
 		 *     - Country
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -1039,7 +1043,7 @@
 		 * definitions.
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -1067,7 +1071,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -1103,7 +1107,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -1147,7 +1151,7 @@
 		 *     - DateTime
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -1178,7 +1182,7 @@
 		 *     - DateTime
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -1577,7 +1581,7 @@
 		 *     - Text
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -1652,18 +1656,22 @@
 		 *     - Boolean
 		 */
 
-		// Get values
+		if ( $nesting_level == 0 ) {
 
-			$schema_common_isAccessibleForFree_MedicalWebPage = 'True';
+			// Get values
 
-		// Add to common schema properties array for WebSite and MedicalWebPage only
+				$schema_common_isAccessibleForFree_MedicalWebPage = 'True';
 
-			if ( $schema_common_isAccessibleForFree_MedicalWebPage ) {
+			// Add to common schema properties array for WebSite and MedicalWebPage only
 
-				$schema_common_properties_MedicalWebPage['isAccessibleForFree'] = $schema_common_isAccessibleForFree_MedicalWebPage;
-				$schema_common_properties_WebSite['isAccessibleForFree'] = $schema_common_isAccessibleForFree_MedicalWebPage;
+				if ( $schema_common_isAccessibleForFree_MedicalWebPage ) {
 
-			}
+					$schema_common_properties_MedicalWebPage['isAccessibleForFree'] = $schema_common_isAccessibleForFree_MedicalWebPage;
+					$schema_common_properties_WebSite['isAccessibleForFree'] = $schema_common_isAccessibleForFree_MedicalWebPage;
+
+				}
+
+		}
 
 	// isBasedOn [excluded for WebSite and MedicalWebPage]
 
@@ -1697,17 +1705,21 @@
 		 *     - Boolean
 		 */
 
-		// Get values
+		if ( $nesting_level == 0 ) {
 
-			$schema_common_isFamilyFriendly = 'True';
+			// Get values
 
-		// Add to common schema properties array
+				$schema_common_isFamilyFriendly = 'True';
 
-			if ( $schema_common_isFamilyFriendly ) {
+			// Add to common schema properties array
 
-				$schema_common_properties['isFamilyFriendly'] = $schema_common_isFamilyFriendly;
+				if ( $schema_common_isFamilyFriendly ) {
 
-			}
+					$schema_common_properties['isFamilyFriendly'] = $schema_common_isFamilyFriendly;
+
+				}
+
+		}
 
 	// isPartOf (MedicalWebPage only)
 
@@ -1772,7 +1784,7 @@
 		 *     - Date
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -1832,7 +1844,7 @@
 		 *     - Place
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -1877,17 +1889,21 @@
 		 *      - Thing
 		 */
 
-		// Get values
+		if ( $nesting_level == 0 ) {
 
-			$schema_common_mainEntityOfPage = $schema_common_url;
+			// Get values
 
-		// Add to common schema properties for types other than MedicalWebPage array
+				$schema_common_mainEntityOfPage = $schema_common_url;
 
-			if ( $schema_common_mainEntityOfPage ) {
+			// Add to common schema properties for types other than MedicalWebPage array
 
-				$schema_common_properties_exclude_MedicalWebPage['mainEntityOfPage'] = $schema_common_mainEntityOfPage;
+				if ( $schema_common_mainEntityOfPage ) {
 
-			}
+					$schema_common_properties_exclude_MedicalWebPage['mainEntityOfPage'] = $schema_common_mainEntityOfPage;
+
+				}
+
+		}
 
 	// maintainer
 
@@ -1918,7 +1934,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -1988,13 +2004,17 @@
 		 *     - MedicalAudienceType (Enumeration Type)
 		 */
 
-		// Add to common schema properties array
+		if ( $nesting_level == 0 ) {
 
-			if ( $schema_common_medicalAudience ) {
+			// Add to common schema properties array
 
-				$schema_common_properties['medicalAudience'] = $schema_common_medicalAudience;
+				if ( $schema_common_medicalAudience ) {
 
-			}
+					$schema_common_properties['medicalAudience'] = $schema_common_medicalAudience;
+
+				}
+
+		}
 
 	// memberOf
 
@@ -2010,26 +2030,30 @@
 		 *     - ProgramMembership
 		 */
 
-		// Get values
+		if ( $nesting_level == 0 ) {
 
-			// Base array
+			// Get values
 
-				$schema_common_memberOf = array();
+				// Base array
 
-			// Merge in common affiliation organizations values
+					$schema_common_memberOf = array();
 
-				$schema_common_memberOf = uamswp_fad_schema_merge_values(
-					$schema_common_memberOf, // mixed // Required // Initial schema item property value
-					$schema_common_affiliation_organization // mixed // Required // Incoming schema item property value
-				);
+				// Merge in common affiliation organizations values
 
-		// Add to common schema properties array
+					$schema_common_memberOf = uamswp_fad_schema_merge_values(
+						$schema_common_memberOf, // mixed // Required // Initial schema item property value
+						$schema_common_affiliation_organization // mixed // Required // Incoming schema item property value
+					);
 
-			if ( $schema_common_memberOf ) {
+			// Add to common schema properties array
 
-				$schema_common_properties['memberOf'] = $schema_common_memberOf;
+				if ( $schema_common_memberOf ) {
 
-			}
+					$schema_common_properties['memberOf'] = $schema_common_memberOf;
+
+				}
+
+		}
 
 	// musicBy [excluded]
 
@@ -2185,7 +2209,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -2298,7 +2322,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -2411,7 +2435,7 @@
 		 *     - MediaSubscription
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -2452,7 +2476,7 @@
 		 *     - Person
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -2500,7 +2524,7 @@
 		 *     - URL
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -2533,7 +2557,7 @@
 		 * definitions.
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get current date
 
@@ -2588,7 +2612,7 @@
 		 * definitions.
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -2669,7 +2693,7 @@
 		 *     - Boolean
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Define value
 
@@ -2695,7 +2719,7 @@
 		 *     - Organization
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
@@ -2803,7 +2827,7 @@
 		 *     - Event
 		 */
 
-		if ( $nesting_level <= 1 ) {
+		if ( $nesting_level == 0 ) {
 
 			// Get values
 
