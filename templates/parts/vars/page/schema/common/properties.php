@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Common Schema Properties
+ *
  * Required vars:
  *     $entity ($id of current post)
  *     $nesting_level
@@ -743,6 +745,21 @@
 					$schema_common_properties_exclude_MedicalWebPage['brand'] = $schema_common_brand_exclude_MedicalWebPage;
 
 				}
+
+	// breadcrumb [WIP]
+
+		/**
+		 * A set of links that can help a user understand and navigate a website hierarchy.
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *     - BreadcrumbList
+		 *     - Text
+		 *
+		 * Used on these types:
+		 *
+		 *      - WebPage
+		 */
 
 	// character [excluded]
 
