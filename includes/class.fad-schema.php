@@ -33230,11 +33230,6 @@
 
 												} // endif ( !isset($expertise_descendant_expertise_list) )
 
-												echo '<p>$expertise_descendant_expertise_list = </p>'; // test
-												echo '<pre>';
-												print_r($expertise_descendant_expertise_list);
-												echo '</pre>'; // test
-
 											// Format values
 
 												if ( $expertise_descendant_expertise_list ) {
