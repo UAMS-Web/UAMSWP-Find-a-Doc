@@ -33840,6 +33840,51 @@
 
 									}
 
+								// MedicalSpecialty (common use)
+
+									// List of properties that reference the MedicalSpecialty enumeration
+
+										$expertise_MedicalSpecialty_common = array(
+											'relevantSpecialty',
+											'specialty'
+										);
+
+									if (
+										(
+											isset($expertise_item_MedicalWebPage)
+											&&
+											array_intersect(
+												$expertise_properties_map[$MedicalWebPage_type]['properties'],
+												$expertise_MedicalSpecialty_common
+											)
+										)
+										||
+										(
+											isset($expertise_item_MedicalEntity)
+											&&
+											array_intersect(
+												$expertise_properties_map[$MedicalEntity_type]['properties'],
+												$expertise_MedicalSpecialty_common
+											)
+										)
+									) {
+
+										// Get multi-select field value
+
+											$expertise_MedicalSpecialty = get_field( 'schema_medicalspecialty_multiple', $entity ) ?? array();
+
+										// Clean up multi-select field value array
+
+											$expertise_MedicalSpecialty = array_filter($expertise_MedicalSpecialty);
+											sort($expertise_MedicalSpecialty);
+											$expertise_MedicalSpecialty = array_values($expertise_MedicalSpecialty);
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array($expertise_MedicalSpecialty);
+
+									}
+
 								// about (MedicalWebPage only)
 
 									/**
@@ -35534,18 +35579,7 @@
 										$nesting_level == 0
 									) {
 
-										// Get multi-select field value
-
-											$expertise_relevantSpecialty = get_field( 'schema_medicalspecialty_multiple', $entity ) ?? array();
-
-										// Clean up multi-select field value array
-
-											$expertise_relevantSpecialty = array_filter($expertise_relevantSpecialty);
-											$expertise_relevantSpecialty = array_values($expertise_relevantSpecialty);
-
-											// If there is only one item, flatten the multi-dimensional array by one step
-
-												uamswp_fad_flatten_multidimensional_array($expertise_relevantSpecialty);
+										$expertise_MedicalSpecialty = $expertise_MedicalSpecialty ?? null;
 
 										// Add to item values
 
@@ -35555,7 +35589,7 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'relevantSpecialty', // string // Required // Name of schema property
-													$expertise_relevantSpecialty, // mixed // Required // Variable to add as the property value
+													$expertise_MedicalSpecialty, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -35567,7 +35601,7 @@
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													'relevantSpecialty', // string // Required // Name of schema property
-													$expertise_relevantSpecialty, // mixed // Required // Variable to add as the property value
+													$expertise_MedicalSpecialty, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -35848,19 +35882,74 @@
 
 									*/
 
-								// specialty [WIP]
+								// specialty
 
 									/**
 									 * One of the domain specialities to which this web page's content applies.
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *      - Specialty
+									 *      - Specialty (enumeration type with no enumeration members)
+									 *             - MedicalSpecialty (enumeration type)
 									 *
 									 * Used on these types:
 									 *
 									 *      - WebPage
 									 */
+
+									if (
+										(
+											(
+												isset($expertise_item_MedicalWebPage)
+												&&
+												in_array(
+													'specialty',
+													$expertise_properties_map[$MedicalWebPage_type]['properties']
+												)
+											)
+											||
+											(
+												isset($expertise_item_MedicalEntity)
+												&&
+												in_array(
+													'specialty',
+													$expertise_properties_map[$MedicalEntity_type]['properties']
+												)
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										$expertise_MedicalSpecialty = $expertise_MedicalSpecialty ?? null;
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'specialty', // string // Required // Name of schema property
+													$expertise_MedicalSpecialty, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalEntity
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalEntity_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													'specialty', // string // Required // Name of schema property
+													$expertise_MedicalSpecialty, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
 
 								// sponsor [excluded; common properties]
 
