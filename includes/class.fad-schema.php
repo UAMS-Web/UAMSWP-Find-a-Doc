@@ -22216,7 +22216,7 @@
 
 									}
 
-								// mainEntity (MedicalWebPage only) [WIP]
+								// mainEntity (MedicalWebPage only)
 
 									/**
 									 * Indicates the primary entity described in some page or other CreativeWork.
@@ -22231,6 +22231,35 @@
 									 *
 									 *      - CreativeWork
 									 */
+
+									if (
+										(
+											isset($provider_item_MedicalWebPage)
+											&&
+											in_array(
+												'mainEntity',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'mainEntity', // string // Required // Name of schema property
+													$provider_item_Person, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
 
 								// mainEntityOfPage [WIP]
 
@@ -30359,7 +30388,7 @@
 
 									}
 
-								// mainEntity (MedicalWebPage only) [WIP]
+								// mainEntity (MedicalWebPage only)
 
 									/**
 									 * Indicates the primary entity described in some page or other CreativeWork.
@@ -30370,6 +30399,35 @@
 									 *
 									 *      - Thing
 									 */
+
+									if (
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											in_array(
+												'mainEntity',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'mainEntity', // string // Required // Name of schema property
+													$location_item_MedicalWebPage, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
 
 								// makesOffer [WIP]
 
@@ -34463,7 +34521,7 @@
 
 									}
 
-								// mainEntity (MedicalWebPage only) [WIP]
+								// mainEntity (MedicalWebPage only)
 
 									/**
 									 * Indicates the primary entity described in some page or other CreativeWork.
@@ -34474,6 +34532,35 @@
 									 *
 									 *      - Thing
 									 */
+
+									if (
+										(
+											isset($expertise_item_MedicalWebPage)
+											&&
+											in_array(
+												'mainEntity',
+												$expertise_properties_map[$MedicalWebPage_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'mainEntity', // string // Required // Name of schema property
+													$expertise_item_MedicalEntity, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
 
 								// medicineSystem
 
@@ -37997,7 +38084,7 @@
 
 									}
 
-								// mainEntity (MedicalWebPage only) [WIP]
+								// mainEntity (MedicalWebPage only)
 
 									/**
 									 * Indicates the primary entity described in some page or other CreativeWork.
@@ -38008,6 +38095,35 @@
 									 *
 									 *      - Thing
 									 */
+
+									if (
+										(
+											isset($clinical_resource_item_MedicalWebPage)
+											&&
+											in_array(
+												'mainEntity',
+												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'mainEntity', // string // Required // Name of schema property
+													$clinical_resource_item_CreativeWork, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
 
 								// mentions [WIP]
 
