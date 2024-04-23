@@ -40530,7 +40530,7 @@
 													'mainEntity', // string // Required // Name of schema property
 													$clinical_resource_item_CreativeWork, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
