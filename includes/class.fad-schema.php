@@ -34064,7 +34064,11 @@
 
 											// Get item values
 
-												if ( $expertise_code_repeater ) {
+												if (
+													$expertise_code_repeater
+													||
+													$expertise_nucc_array
+												) {
 
 													$expertise_code = uamswp_fad_schema_code(
 														$expertise_code_repeater, // array // Optional // code repeater field
