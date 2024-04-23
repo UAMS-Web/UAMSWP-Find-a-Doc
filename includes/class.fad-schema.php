@@ -31674,7 +31674,7 @@
 
 												$location_mentions = array();
 
-											// Merge in related provider (MedicalBusiness) value
+											// Merge in related providers (MedicalBusiness) value
 
 												$location_provider_MedicalBusiness = $location_provider_MedicalBusiness ?? null;
 
@@ -31687,7 +31687,7 @@
 
 												}
 
-												// Merge related provider (MedicalBusiness) significantLink value into significantLink
+												// Merge related providers (MedicalBusiness) significantLink value into significantLink
 
 													$location_provider_MedicalBusiness_significantLink = $location_provider_MedicalBusiness_significantLink ?? null;
 
@@ -31700,7 +31700,7 @@
 
 													}
 
-												// Merge related provider (MedicalBusiness) keywords value into keywords
+												// Merge related providers (MedicalBusiness) keywords value into keywords
 
 													$location_provider_MedicalBusiness_keywords = $location_provider_MedicalBusiness_keywords ?? null;
 
@@ -31713,7 +31713,7 @@
 
 													}
 
-											// Merge in related provider (Person) value
+											// Merge in related providers (Person) value
 
 												$location_provider_Person = $location_provider_Person ?? null;
 
@@ -31726,7 +31726,7 @@
 
 												}
 
-												// Merge related provider (Person) significantLink value into significantLink
+												// Merge related providers (Person) significantLink value into significantLink
 
 													$location_provider_Person_significantLink = $location_provider_Person_significantLink ?? null;
 
@@ -31739,7 +31739,7 @@
 
 													}
 
-												// Merge related provider (Person) keywords value into keywords
+												// Merge related providers (Person) keywords value into keywords
 
 													$location_provider_Person_keywords = $location_provider_Person_keywords ?? null;
 
@@ -34907,7 +34907,7 @@
 									 *      - VideoObject
 									 */
 
-								// mentions [WIP]
+								// mentions
 
 									/**
 									 * Indicates that the CreativeWork contains a reference to, but is not necessarily
@@ -34948,7 +34948,6 @@
 
 												$expertise_mentions = array();
 
-											// Merge in related providers value
 											// Merge in related providers (MedicalBusiness) value
 
 												$expertise_provider_MedicalBusiness = $expertise_provider_MedicalBusiness ?? null;
@@ -34988,6 +34987,7 @@
 
 													}
 
+											// Merge in related providers (Person) value
 
 												$expertise_provider_Person = $expertise_provider_Person ?? null;
 
@@ -35000,7 +35000,7 @@
 
 												}
 
-												// Merge provider significantLink value into significantLink
+												// Merge providers (Person) significantLink value into significantLink
 
 													$expertise_provider_MedicalWebPage_significantLink = $expertise_provider_MedicalWebPage_significantLink ?? null;
 
@@ -35013,7 +35013,7 @@
 
 													}
 
-												// Merge provider keywords value into keywords
+												// Merge providers (Person) keywords value into keywords
 
 													$expertise_provider_Person_keywords = $expertise_provider_Person_keywords ?? null;
 
