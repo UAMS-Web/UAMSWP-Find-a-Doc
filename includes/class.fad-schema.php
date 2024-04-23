@@ -12367,6 +12367,17 @@
 						'WebSite'
 					);
 
+					// Base array for schema.org type URLs
+
+						$uamshealth_website_valid_types_url = array();
+
+					// Get subtypes
+
+						uamswp_fad_schema_subtypes(
+							$uamshealth_website_valid_types, // array // Required // List of Schema.org types
+							$uamshealth_website_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
+						);
+
 				// List of valid properties for each type
 
 					// Base array
@@ -13139,9 +13150,16 @@
 						'Place'
 					);
 
+					// Base array for schema.org type URLs
+
+						$facility_valid_types_url = array();
+
 					// Get subtypes
 
-						uamswp_fad_schema_subtypes($facility_valid_types);
+						uamswp_fad_schema_subtypes(
+							$facility_valid_types, // array // Required // List of Schema.org types
+							$facility_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
+						);
 
 				// List of valid properties for each type
 
@@ -32394,6 +32412,17 @@
 						'MedicalWebPage'
 					);
 
+					// Base array for schema.org type URLs
+
+						$expertise_valid_types_url = array();
+
+					// Get subtypes
+
+						uamswp_fad_schema_subtypes(
+							$expertise_valid_types, // array // Required // List of Schema.org types
+							$expertise_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
+						);
+
 				// List of valid properties for each type
 
 					// Base array
@@ -35738,9 +35767,16 @@
 						'VideoObject'
 					);
 
+					// Base array for schema.org type URLs
+
+						$clinical_resource_valid_types_url = array();
+
 					// Get subtypes
 
-						uamswp_fad_schema_subtypes($clinical_resource_valid_types);
+						uamswp_fad_schema_subtypes(
+							$clinical_resource_valid_types, // array // Required // List of Schema.org types
+							$clinical_resource_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
+						);
 
 				// List of valid properties for each type
 
@@ -40066,9 +40102,21 @@
 						'MedicalCondition'
 					);
 
+					// Base array for schema.org type URLs
+
+						$condition_valid_types_url = array();
+
 					// Get subtypes
 
-						uamswp_fad_schema_subtypes($condition_valid_types);
+						uamswp_fad_schema_subtypes(
+							$condition_valid_types, // array // Required // List of Schema.org types
+							$condition_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
+						);
+
+					// Add fallback type to the list
+
+						$condition_valid_types[] = 'MedicalEntity';
+						$condition_valid_types_url[] = 'https://schema.org/MedicalEntity';
 
 				// List of valid properties for each type
 
@@ -41432,13 +41480,21 @@
 						'MedicalProcedure'
 					);
 
+					// Base array for schema.org type URLs
+
+						$treatment_valid_types_url = array();
+
 					// Get subtypes
 
-						uamswp_fad_schema_subtypes($treatment_valid_types);
+						uamswp_fad_schema_subtypes(
+							$treatment_valid_types, // array // Required // List of Schema.org types
+							$treatment_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
+						);
 
 					// Add fallback type to the list
 
 						$treatment_valid_types[] = 'MedicalEntity';
+						$treatment_valid_types_url[] = 'https://schema.org/MedicalEntity';
 
 				// List of valid properties for each type
 
