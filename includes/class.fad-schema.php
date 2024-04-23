@@ -25632,93 +25632,127 @@
 
 									// Add to schema
 
-										if ( $location_url ) {
+										// MedicalWebPage
 
-											$location_item_MedicalWebPage['url'] = $location_url;
-											$location_item_LocalBusiness['url'] = $location_url;
-										}
+											if (
+												isset($location_item_MedicalWebPage)
+												&&
+												$location_url
+											) {
+
+												$location_item_MedicalWebPage['url'] = $location_url;
+
+											}
+
+										// LocalBusiness
+
+											if (
+												isset($provider_item_LocalBusiness)
+												&&
+												$location_url
+											) {
+
+												$provider_item_LocalBusiness['url'] = $location_url;
+
+											}
 
 								// @type
 
 									// MedicalWebPage type
 
-										// Get values
+										if ( isset($location_item_MedicalWebPage) ) {
 
-											$MedicalWebPage_type = 'MedicalWebPage';
+											// Get values
 
-											// Add to item values
+												$MedicalWebPage_type = 'MedicalWebPage';
 
-												if ( $MedicalWebPage_type ) {
+												// Add to item values
 
-													$location_item_MedicalWebPage['@type'] = $MedicalWebPage_type;
+													if ( $MedicalWebPage_type ) {
 
-												}
-
-									// LocalBusiness Subtype
-
-										// Get values
-
-											// LocalBusiness Subtype
-
-												if ( !isset($LocalBusiness_type) ) {
-
-													$LocalBusiness_type = get_field( 'schema_localbusiness_single', $entity ) ?? '';
-
-												}
-
-												$LocalBusiness_type = is_array($LocalBusiness_type) ? reset($LocalBusiness_type) : $LocalBusiness_type;
-
-												// Fallback value
-
-													if (
-														!$LocalBusiness_type
-														||
-														!array_key_exists( $LocalBusiness_type, $location_properties_map )
-													) {
-
-														$LocalBusiness_type = 'MedicalBusiness';
+														$location_item_MedicalWebPage['@type'] = $MedicalWebPage_type;
 
 													}
 
-										// Add to item values
+										}
 
-											$location_item_LocalBusiness['@type'] = $LocalBusiness_type;
+									// LocalBusiness Subtype
+
+										if ( isset($location_item_LocalBusiness) ) {
+
+											// Get values
+
+												// LocalBusiness Subtype
+
+													if ( !isset($LocalBusiness_type) ) {
+
+														$LocalBusiness_type = get_field( 'schema_localbusiness_single', $entity ) ?? '';
+
+													}
+
+													$LocalBusiness_type = is_array($LocalBusiness_type) ? reset($LocalBusiness_type) : $LocalBusiness_type;
+
+													// Fallback value
+
+														if (
+															!$LocalBusiness_type
+															||
+															!array_key_exists( $LocalBusiness_type, $location_properties_map )
+														) {
+
+															$LocalBusiness_type = 'MedicalBusiness';
+
+														}
+
+											// Add to item values
+
+												$location_item_LocalBusiness['@type'] = $LocalBusiness_type;
+
+										}
 
 								// @id
 
 									// MedicalWebPage
 
-										// Get values
+										if ( isset($location_item_MedicalWebPage) ) {
 
-											$MedicalWebPage_id = $location_url . '#' . $MedicalWebPage_type;
-											// $MedicalWebPage_id .= $MedicalWebPage_i;
-											// $MedicalWebPage_i++;
+											// Get values
 
-										// Add to item values
+												$MedicalWebPage_id = $location_url . '#' . $MedicalWebPage_type;
+												// $MedicalWebPage_id .= $MedicalWebPage_i;
+												// $MedicalWebPage_i++;
 
-											if ( $MedicalWebPage_id ) {
+											// Add to item values
 
-												$location_item_MedicalWebPage['@id'] = $MedicalWebPage_id;
-												$node_identifier_list[] = $location_item_MedicalWebPage['@id']; // Add to the list of existing node identifiers
+												if ( $MedicalWebPage_id ) {
 
-											}
+													$location_item_MedicalWebPage['@id'] = $MedicalWebPage_id;
+													$node_identifier_list[] = $location_item_MedicalWebPage['@id']; // Add to the list of existing node identifiers
+
+												}
+
+										}
 
 									// LocalBusiness
 
-										// Get values
+										if ( isset($location_item_LocalBusiness) ) {
 
-											$LocalBusiness_id = $location_url . '#' . $LocalBusiness_type;
-											// $LocalBusiness_id .= $LocalBusiness_i;
-											// $LocalBusiness_i++;
+											// Get values
 
-										// Add to item values
+												$LocalBusiness_id = $location_url . '#' . $LocalBusiness_type;
+												// $LocalBusiness_id .= $LocalBusiness_i;
+												// $LocalBusiness_i++;
 
-											if ( $LocalBusiness_id ) {
+											// Add to item values
 
-												$location_item_LocalBusiness['@id'] = $LocalBusiness_id;
-												$node_identifier_list[] = $location_item_LocalBusiness['@id']; // Add to the list of existing node identifiers
+												if ( $LocalBusiness_id ) {
 
-											}
+													$location_item_LocalBusiness['@id'] = $LocalBusiness_id;
+													$node_identifier_list[] = $location_item_LocalBusiness['@id']; // Add to the list of existing node identifiers
+
+												}
+
+										}
 
 								// Specific Clinical Organizations (common use) [WIP]
 
@@ -25741,14 +25775,22 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_organization_common
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_organization_common
+											)
 										)
 										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_organization_common
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_organization_common
+											)
 										)
 									) {
 
@@ -26032,14 +26074,22 @@
 
 										if (
 											(
-												array_intersect(
-													$location_properties_map[$MedicalWebPage_type]['properties'],
-													$location_provider_common
+												(
+													isset($location_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$location_properties_map[$MedicalWebPage_type]['properties'],
+														$location_provider_common
+													)
 												)
 												||
-												array_intersect(
-													$location_properties_map[$LocalBusiness_type]['properties'],
-													$location_provider_common
+												(
+													isset($location_item_LocalBusiness)
+													&&
+													array_intersect(
+														$location_properties_map[$LocalBusiness_type]['properties'],
+														$location_provider_common
+													)
 												)
 											)
 											&&
@@ -26163,14 +26213,22 @@
 
 										if (
 											(
-												array_intersect(
-													$location_properties_map[$MedicalWebPage_type]['properties'],
-													$location_descendant_location_common
+												(
+													isset($location_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$location_properties_map[$MedicalWebPage_type]['properties'],
+														$location_descendant_location_common
+													)
 												)
 												||
-												array_intersect(
-													$location_properties_map[$LocalBusiness_type]['properties'],
-													$location_descendant_location_common
+												(
+													isset($location_item_LocalBusiness)
+													&&
+													array_intersect(
+														$location_properties_map[$LocalBusiness_type]['properties'],
+														$location_descendant_location_common
+													)
 												)
 											)
 											&&
@@ -26262,14 +26320,22 @@
 
 										if (
 											(
-												array_intersect(
-													$location_properties_map[$MedicalWebPage_type]['properties'],
-													$location_expertise_common
+												(
+													isset($location_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$location_properties_map[$MedicalWebPage_type]['properties'],
+														$location_expertise_common
+													)
 												)
 												||
-												array_intersect(
-													$location_properties_map[$MedicalWebPage_type]['properties'],
-													$location_expertise_common
+												(
+													isset($location_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$location_properties_map[$MedicalWebPage_type]['properties'],
+														$location_expertise_common
+													)
 												)
 											)
 											&&
@@ -26349,14 +26415,22 @@
 
 										if (
 											(
-												array_intersect(
-													$location_properties_map[$MedicalWebPage_type]['properties'],
-													$location_clinical_resource_common
+												(
+													isset($location_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$location_properties_map[$MedicalWebPage_type]['properties'],
+														$location_clinical_resource_common
+													)
 												)
 												||
-												array_intersect(
-													$location_properties_map[$MedicalWebPage_type]['properties'],
-													$location_clinical_resource_common
+												(
+													isset($location_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$location_properties_map[$MedicalWebPage_type]['properties'],
+														$location_clinical_resource_common
+													)
 												)
 											)
 											&&
@@ -26440,14 +26514,22 @@
 
 										if (
 											(
-												array_intersect(
-													$location_properties_map[$MedicalWebPage_type]['properties'],
-													$location_condition_common
+												(
+													isset($location_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$location_properties_map[$MedicalWebPage_type]['properties'],
+														$location_condition_common
+													)
 												)
 												||
-												array_intersect(
-													$location_properties_map[$MedicalWebPage_type]['properties'],
-													$location_condition_common
+												(
+													isset($location_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$location_properties_map[$MedicalWebPage_type]['properties'],
+														$location_condition_common
+													)
 												)
 											)
 											&&
@@ -26520,14 +26602,22 @@
 
 										if (
 											(
-												array_intersect(
-													$location_properties_map[$MedicalWebPage_type]['properties'],
-													$location_treatment_common
+												(
+													isset($location_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$location_properties_map[$MedicalWebPage_type]['properties'],
+														$location_treatment_common
+													)
 												)
 												||
-												array_intersect(
-													$location_properties_map[$MedicalWebPage_type]['properties'],
-													$location_treatment_common
+												(
+													isset($location_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$location_properties_map[$MedicalWebPage_type]['properties'],
+														$location_treatment_common
+													)
 												)
 											)
 											&&
@@ -26599,14 +26689,22 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_parent_attributes_common
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_parent_attributes_common
+											)
 										)
 										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_parent_attributes_common
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_parent_attributes_common
+											)
 										)
 									) {
 
@@ -26640,14 +26738,22 @@
 
 									if (
 										(
-											array_intersect(
-												$location_properties_map[$MedicalWebPage_type]['properties'],
-												$location_parent_entity_common
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_parent_entity_common
+												)
 											)
 											||
-											array_intersect(
-												$location_properties_map[$LocalBusiness_type]['properties'],
-												$location_parent_entity_common
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												array_intersect(
+													$location_properties_map[$LocalBusiness_type]['properties'],
+													$location_parent_entity_common
+												)
 											)
 										)
 										&&
@@ -26723,14 +26829,22 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_MedicalSpecialty_common
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_MedicalSpecialty_common
+											)
 										)
 										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_MedicalSpecialty_common
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_MedicalSpecialty_common
+											)
 										)
 									) {
 
@@ -26774,14 +26888,22 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_geo_common
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_geo_common
+											)
 										)
 										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_geo_common
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_geo_common
+											)
 										)
 									) {
 
@@ -26813,14 +26935,22 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_image_common
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_image_common
+											)
 										)
 										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_image_common
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_image_common
+											)
 										)
 									) {
 
@@ -27072,14 +27202,22 @@
 											);
 
 										if (
-											array_intersect(
-												$location_properties_map[$MedicalWebPage_type]['properties'],
-												$location_google_cid_common
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_google_cid_common
+												)
 											)
 											||
-											array_intersect(
-												$location_properties_map[$LocalBusiness_type]['properties'],
-												$location_google_cid_common
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												array_intersect(
+													$location_properties_map[$LocalBusiness_type]['properties'],
+													$location_google_cid_common
+												)
 											)
 										) {
 
@@ -27102,14 +27240,22 @@
 											);
 
 										if (
-											array_intersect(
-												$location_properties_map[$MedicalWebPage_type]['properties'],
-												$location_npi_common
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_npi_common
+												)
 											)
 											||
-											array_intersect(
-												$location_properties_map[$LocalBusiness_type]['properties'],
-												$location_npi_common
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												array_intersect(
+													$location_properties_map[$LocalBusiness_type]['properties'],
+													$location_npi_common
+												)
 											)
 										) {
 
@@ -27201,14 +27347,22 @@
 											);
 
 										if (
-											array_intersect(
-												$location_properties_map[$MedicalWebPage_type]['properties'],
-												$location_va_station_id_common
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_va_station_id_common
+												)
 											)
 											||
-											array_intersect(
-												$location_properties_map[$LocalBusiness_type]['properties'],
-												$location_va_station_id_common
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												array_intersect(
+													$location_properties_map[$LocalBusiness_type]['properties'],
+													$location_va_station_id_common
+												)
 											)
 										) {
 
@@ -27231,14 +27385,22 @@
 											);
 
 										if (
-											array_intersect(
-												$location_properties_map[$MedicalWebPage_type]['properties'],
-												$location_ahaid_common
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_ahaid_common
+												)
 											)
 											||
-											array_intersect(
-												$location_properties_map[$LocalBusiness_type]['properties'],
-												$location_ahaid_common
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												array_intersect(
+													$location_properties_map[$LocalBusiness_type]['properties'],
+													$location_ahaid_common
+												)
 											)
 										) {
 
@@ -27261,14 +27423,22 @@
 											);
 
 										if (
-											array_intersect(
-												$location_properties_map[$MedicalWebPage_type]['properties'],
-												$location_cms_ccn_common
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_cms_ccn_common
+												)
 											)
 											||
-											array_intersect(
-												$location_properties_map[$LocalBusiness_type]['properties'],
-												$location_cms_ccn_common
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												array_intersect(
+													$location_properties_map[$LocalBusiness_type]['properties'],
+													$location_cms_ccn_common
+												)
 											)
 										) {
 
@@ -27292,14 +27462,22 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_address_common
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_address_common
+											)
 										)
 										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_address_common
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_address_common
+											)
 										)
 									) {
 
@@ -27636,14 +27814,22 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_appointments_query_common
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_appointments_query_common
+											)
 										)
 										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_appointments_query_common
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_appointments_query_common
+											)
 										)
 									) {
 
@@ -27665,14 +27851,22 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_telephone_common
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_telephone_common
+											)
 										)
 										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_telephone_common
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_telephone_common
+											)
 										)
 									) {
 
@@ -28072,14 +28266,22 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_faxNumber_common
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_faxNumber_common
+											)
 										)
 										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_faxNumber_common
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_faxNumber_common
+											)
 										)
 									) {
 
@@ -28154,14 +28356,22 @@
 									 */
 
 									if (
-										in_array(
-											'name',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											in_array(
+												'name',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'name',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											in_array(
+												'name',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -28214,9 +28424,13 @@
 									 */
 
 									if (
-										in_array(
-											'about',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											in_array(
+												'about',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -28284,9 +28498,13 @@
 									// additionalType (MedicalWebPage)
 
 										if (
-											in_array(
-												'additionalType',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'additionalType',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 										) {
 
@@ -28327,9 +28545,13 @@
 									// additionalType (LocalBusiness)
 
 										if (
-											in_array(
-												'additionalType',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'additionalType',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										) {
 
@@ -28429,14 +28651,22 @@
 									 */
 
 									if (
-										in_array(
-											'address',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											in_array(
+												'address',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'address',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											in_array(
+												'address',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -28490,14 +28720,22 @@
 
 									if (
 										(
-											in_array(
-												'alternateName',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'alternateName',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'alternateName',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'alternateName',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -28612,14 +28850,22 @@
 
 									if (
 										(
-											in_array(
-												'availableService',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'availableService',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'availableService',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'availableService',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -28768,14 +29014,22 @@
 									 */
 
 									if (
-										in_array(
-											'contactPoint',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											in_array(
+												'contactPoint',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'contactPoint',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											in_array(
+												'contactPoint',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -28817,14 +29071,22 @@
 									 */
 
 									if (
-										in_array(
-											'containedInPlace',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											in_array(
+												'containedInPlace',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'containedInPlace',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											in_array(
+												'containedInPlace',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -28902,14 +29164,22 @@
 
 									if (
 										(
-											in_array(
-												'containsPlace',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'containsPlace',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'containsPlace',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'containsPlace',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -29058,14 +29328,22 @@
 
 									if (
 										(
-											in_array(
-												'department',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'department',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'department',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'department',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -29252,14 +29530,22 @@
 
 									if (
 										(
-											in_array(
-												'employee',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'employee',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'employee',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'employee',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -29360,14 +29646,22 @@
 									 */
 
 									 if (
-										in_array(
-											'faxNumber',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											in_array(
+												'faxNumber',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'faxNumber',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											in_array(
+												'faxNumber',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -29423,14 +29717,22 @@
 									 */
 
 									if (
-										in_array(
-											'geo',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											in_array(
+												'geo',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'geo',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											in_array(
+												'geo',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -29520,14 +29822,22 @@
 									 */
 
 									if (
-										in_array(
-											'hasMap',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											in_array(
+												'hasMap',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'hasMap',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											in_array(
+												'hasMap',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -29683,14 +29993,22 @@
 										// 'identifier' property [WIP]
 
 											if (
-												in_array(
-													'identifier',
-													$location_properties_map[$MedicalWebPage_type]['properties']
+												(
+													isset($location_item_MedicalWebPage)
+													&&
+													in_array(
+														'identifier',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'identifier',
-													$location_properties_map[$LocalBusiness_type]['properties']
+												(
+													isset($location_item_LocalBusiness)
+													&&
+													in_array(
+														'identifier',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
 												)
 											) {
 
@@ -30192,14 +30510,22 @@
 									 */
 
 									if (
-										in_array(
-											'image',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											in_array(
+												'image',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'image',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											in_array(
+												'image',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -30280,14 +30606,22 @@
 
 									if (
 										(
-											in_array(
-												'knowsLanguage',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'knowsLanguage',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'knowsLanguage',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'knowsLanguage',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -30357,14 +30691,22 @@
 
 									if (
 										(
-											in_array(
-												'mainContentOfPage',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'mainContentOfPage',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'mainContentOfPage',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'mainContentOfPage',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -30481,14 +30823,22 @@
 
 									if (
 										(
-											in_array(
-												'medicalSpecialty',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'medicalSpecialty',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'medicalSpecialty',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'medicalSpecialty',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -30542,14 +30892,22 @@
 									 */
 
 									if (
-										in_array(
-											'memberOf',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											in_array(
+												'memberOf',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'memberOf',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											in_array(
+												'memberOf',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -30720,14 +31078,22 @@
 
 									if (
 										(
-											in_array(
-												'openingHours',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'openingHours',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'openingHours',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'openingHours',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -30774,14 +31140,22 @@
 
 									if (
 										(
-											in_array(
-												'openingHoursSpecification',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'openingHoursSpecification',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'openingHoursSpecification',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'openingHoursSpecification',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -30960,14 +31334,22 @@
 									 */
 
 									if (
-										in_array(
-											'photo',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											in_array(
+												'photo',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'photo',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											in_array(
+												'photo',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -31118,14 +31500,22 @@
 									 */
 
 									if (
-										in_array(
-											'sameAs',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											in_array(
+												'sameAs',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'sameAs',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											in_array(
+												'sameAs',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -31231,14 +31621,22 @@
 
 									if (
 										(
-											in_array(
-												'specialOpeningHoursSpecification',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'specialOpeningHoursSpecification',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'specialOpeningHoursSpecification',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'specialOpeningHoursSpecification',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -31285,14 +31683,22 @@
 
 									if (
 										(
-											in_array(
-												'specialty',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'specialty',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'specialty',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'specialty',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -31344,14 +31750,22 @@
 
 									if (
 										(
-											in_array(
-												'subOrganization',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'subOrganization',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'subOrganization',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'subOrganization',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -31481,14 +31895,22 @@
 									 */
 
 									if (
-										in_array(
-											'telephone',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($location_item_MedicalWebPage)
+											&&
+											in_array(
+												'telephone',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'telephone',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											isset($location_item_LocalBusiness)
+											&&
+											in_array(
+												'telephone',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -31552,14 +31974,22 @@
 
 									if (
 										(
-											in_array(
-												'knowsAbout',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'knowsAbout',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'knowsAbout',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'knowsAbout',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -31730,14 +32160,22 @@
 
 									if (
 										(
-											in_array(
-												'mentions',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'mentions',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'mentions',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'mentions',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -32050,14 +32488,22 @@
 
 									if (
 										(
-											in_array(
-												'relatedLink',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'relatedLink',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'relatedLink',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'relatedLink',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -32105,14 +32551,22 @@
 
 									if (
 										(
-											in_array(
-												'significantLink',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'significantLink',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'significantLink',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'significantLink',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -32162,14 +32616,22 @@
 
 									if (
 										(
-											in_array(
-												'keywords',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'keywords',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'keywords',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'keywords',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -33049,14 +33511,22 @@
 
 										if (
 											(
-												array_intersect(
-													$expertise_properties_map[$MedicalWebPage_type]['properties'],
-													$expertise_provider_common
+												(
+													isset($expertise_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$expertise_properties_map[$MedicalWebPage_type]['properties'],
+														$expertise_provider_common
+													)
 												)
 												||
-												array_intersect(
-													$expertise_properties_map[$MedicalEntity_type]['properties'],
-													$expertise_provider_common
+												(
+													isset($expertise_item_MedicalEntity)
+													&&
+													array_intersect(
+														$expertise_properties_map[$MedicalEntity_type]['properties'],
+														$expertise_provider_common
+													)
 												)
 											)
 											&&
@@ -37140,7 +37610,11 @@
 
 										// MedicalWebPage
 
-											if ( $clinical_resource_url ) {
+											if (
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												$clinical_resource_url
+											) {
 
 												$clinical_resource_item_MedicalWebPage['url'] = $clinical_resource_url;
 
@@ -37148,7 +37622,11 @@
 
 										// CreativeWork
 
-											if ( $clinical_resource_url ) {
+											if (
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												$clinical_resource_url
+											) {
 
 												$clinical_resource_item_CreativeWork['url'] = $clinical_resource_url;
 
@@ -37158,88 +37636,104 @@
 
 									// MedicalWebPage type
 
-										// Get values
+										if ( isset($clinical_resource_item_MedicalWebPage) ) {
 
-											$MedicalWebPage_type = 'MedicalWebPage';
+											// Get values
 
-											// Add to item values
+												$MedicalWebPage_type = 'MedicalWebPage';
 
-												if ( $MedicalWebPage_type ) {
+												// Add to item values
 
-													$clinical_resource_item_MedicalWebPage['@type'] = $MedicalWebPage_type;
+													if ( $MedicalWebPage_type ) {
 
-												}
+														$clinical_resource_item_MedicalWebPage['@type'] = $MedicalWebPage_type;
+
+													}
+
+										}
 
 									// CreativeWork type
 
-										// Get values
+										if ( isset($clinical_resource_item_CreativeWork) ) {
 
-											// Base value
+											// Get values
 
-												$CreativeWork_type = 'CreativeWork';
+												// Base value
 
-											// Get resource type
+													$CreativeWork_type = 'CreativeWork';
 
-												$clinical_resource_resource_type = get_field( 'clinical_resource_type', $entity )['value'] ?? '';
+												// Get resource type
 
-											// Get relevant schema type based on resource type
+													$clinical_resource_resource_type = get_field( 'clinical_resource_type', $entity )['value'] ?? '';
 
-												$clinical_resource_resource_type_map = array(
-													'text' => 'Article',
-													'infographic' => 'ImageObject',
-													'video' => 'VideoObject',
-													'doc' => 'DigitalDocument'
-												);
+												// Get relevant schema type based on resource type
 
-												if ( $clinical_resource_resource_type ) {
+													$clinical_resource_resource_type_map = array(
+														'text' => 'Article',
+														'infographic' => 'ImageObject',
+														'video' => 'VideoObject',
+														'doc' => 'DigitalDocument'
+													);
 
-													$CreativeWork_type = $clinical_resource_resource_type_map[$clinical_resource_resource_type] ?? 'CreativeWork';
+													if ( $clinical_resource_resource_type ) {
 
-												}
+														$CreativeWork_type = $clinical_resource_resource_type_map[$clinical_resource_resource_type] ?? 'CreativeWork';
 
-											// Add to item values
+													}
 
-												if ( $CreativeWork_type ) {
+												// Add to item values
 
-													$clinical_resource_item_CreativeWork['@type'] = $CreativeWork_type;
+													if ( $CreativeWork_type ) {
 
-												}
+														$clinical_resource_item_CreativeWork['@type'] = $CreativeWork_type;
+
+													}
+
+										}
 
 								// @id
 
 									// MedicalWebPage
 
-										// Get values
+										if ( isset($clinical_resource_item_MedicalWebPage) ) {
 
-											$MedicalWebPage_id = $clinical_resource_url . '#' . $MedicalWebPage_type;
-											// $MedicalWebPage_id .= $MedicalWebPage_i;
-											// $MedicalWebPage_i++;
+											// Get values
 
-										// Add to item values
+												$MedicalWebPage_id = $clinical_resource_url . '#' . $MedicalWebPage_type;
+												// $MedicalWebPage_id .= $MedicalWebPage_i;
+												// $MedicalWebPage_i++;
 
-											if ( $MedicalWebPage_id ) {
+											// Add to item values
 
-												$clinical_resource_item_MedicalWebPage['@id'] = $MedicalWebPage_id;
-												$node_identifier_list[] = $clinical_resource_item_MedicalWebPage['@id']; // Add to the list of existing node identifiers
+												if ( $MedicalWebPage_id ) {
 
-											}
+													$clinical_resource_item_MedicalWebPage['@id'] = $MedicalWebPage_id;
+													$node_identifier_list[] = $clinical_resource_item_MedicalWebPage['@id']; // Add to the list of existing node identifiers
+
+												}
+
+										}
 
 									// CreativeWork
 
-										// Get values
+										if ( isset($clinical_resource_item_MedicalWebPage) ) {
 
-											$CreativeWork_id = $clinical_resource_url . '#' . $CreativeWork_type;
-											// $CreativeWork_id .= $CreativeWork_i;
-											// $CreativeWork_i++;
+											// Get values
 
-										// Add to item values
+												$CreativeWork_id = $clinical_resource_url . '#' . $CreativeWork_type;
+												// $CreativeWork_id .= $CreativeWork_i;
+												// $CreativeWork_i++;
 
-											if ( $CreativeWork_id ) {
+											// Add to item values
 
-												$clinical_resource_item_CreativeWork['@id'] = $CreativeWork_id;
-												$node_identifier_list[] = $clinical_resource_item_CreativeWork['@id']; // Add to the list of existing node identifiers
+												if ( $CreativeWork_id ) {
 
-											}
+													$clinical_resource_item_CreativeWork['@id'] = $CreativeWork_id;
+													$node_identifier_list[] = $clinical_resource_item_CreativeWork['@id']; // Add to the list of existing node identifiers
+
+												}
+
+										}
 
 								// Add common properties
 
@@ -37438,7 +37932,7 @@
 
 										}
 
-								// Associated ontology items (e.g., providers, areas of expertise, clinical resources, conditions, treatments)
+								// Associated ontology items (e.g., providers, areas of expertise, clinical resources, conditions, treatments) [WIP]
 
 									// Associated providers
 
@@ -37465,14 +37959,22 @@
 
 									if (
 										(
-											array_intersect(
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
-												$clinical_resource_main_image_common
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												array_intersect(
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
+													$clinical_resource_main_image_common
+												)
 											)
 											||
-											array_intersect(
-												$clinical_resource_properties_map[$CreativeWork_type]['properties'],
-												$clinical_resource_main_image_common
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												array_intersect(
+													$clinical_resource_properties_map[$CreativeWork_type]['properties'],
+													$clinical_resource_main_image_common
+												)
 											)
 										)
 										&&
@@ -37533,14 +38035,22 @@
 										);
 
 									if (
-										array_intersect(
-											$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
-											$clinical_resource_featured_image_common
+										(
+											isset($clinical_resource_item_MedicalWebPage)
+											&&
+											array_intersect(
+												$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
+												$clinical_resource_featured_image_common
+											)
 										)
 										||
-										array_intersect(
-											$clinical_resource_properties_map[$CreativeWork_type]['properties'],
-											$clinical_resource_featured_image_common
+										(
+											isset($clinical_resource_item_CreativeWork)
+											&&
+											array_intersect(
+												$clinical_resource_properties_map[$CreativeWork_type]['properties'],
+												$clinical_resource_featured_image_common
+											)
 										)
 									) {
 
@@ -37591,14 +38101,22 @@
 
 									if (
 										(
-											array_intersect(
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
-												$clinical_resource_video_common
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												array_intersect(
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
+													$clinical_resource_video_common
+												)
 											)
 											||
-											array_intersect(
-												$clinical_resource_properties_map[$CreativeWork_type]['properties'],
-												$clinical_resource_video_common
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												array_intersect(
+													$clinical_resource_properties_map[$CreativeWork_type]['properties'],
+													$clinical_resource_video_common
+												)
 											)
 										)
 										&&
@@ -37718,14 +38236,22 @@
 									);
 
 									if (
-										array_intersect(
-											$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
-											$clinical_resource_introduction_common
+										(
+											isset($clinical_resource_item_MedicalWebPage)
+											&&
+											array_intersect(
+												$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
+												$clinical_resource_introduction_common
+											)
 										)
 										||
-										array_intersect(
-											$clinical_resource_properties_map[$CreativeWork_type]['properties'],
-											$clinical_resource_introduction_common
+										(
+											isset($clinical_resource_item_CreativeWork)
+											&&
+											array_intersect(
+												$clinical_resource_properties_map[$CreativeWork_type]['properties'],
+												$clinical_resource_introduction_common
+											)
 										)
 									) {
 
@@ -37785,14 +38311,22 @@
 									 */
 
 									if (
-										in_array(
-											'name',
-											$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($clinical_resource_item_MedicalWebPage)
+											&&
+											in_array(
+												'name',
+												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'name',
-											$clinical_resource_properties_map[$CreativeWork_type]['properties']
+										(
+											isset($clinical_resource_item_CreativeWork)
+											&&
+											in_array(
+												'name',
+												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											)
 										)
 									) {
 
@@ -37841,14 +38375,22 @@
 									 */
 
 									if (
-										in_array(
-											'name',
-											$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($clinical_resource_item_MedicalWebPage)
+											&&
+											in_array(
+												'name',
+												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'name',
-											$clinical_resource_properties_map[$CreativeWork_type]['properties']
+										(
+											isset($clinical_resource_item_CreativeWork)
+											&&
+											in_array(
+												'name',
+												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											)
 										)
 									) {
 
@@ -37935,14 +38477,22 @@
 										$clinical_resource_introduction
 										&&
 										(
-											in_array(
-												'abstract',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'abstract',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'abstract',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'abstract',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 									) {
@@ -38000,14 +38550,22 @@
 									 */
 
 									if (
-										in_array(
-											'additionalType',
-											$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($clinical_resource_item_MedicalWebPage)
+											&&
+											in_array(
+												'additionalType',
+												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'additionalType',
-											$clinical_resource_properties_map[$CreativeWork_type]['properties']
+										(
+											isset($clinical_resource_item_CreativeWork)
+											&&
+											in_array(
+												'additionalType',
+												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											)
 										)
 									) {
 
@@ -38078,14 +38636,22 @@
 
 									if (
 										(
-											in_array(
-												'alternateName',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'alternateName',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'alternateName',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'alternateName',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -38150,14 +38716,22 @@
 
 									if (
 										(
-											in_array(
-												'articleBody',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'articleBody',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'articleBody',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'articleBody',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -38315,14 +38889,22 @@
 
 									if (
 										(
-											in_array(
-												'contentSize',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'contentSize',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'contentSize',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'contentSize',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -38369,14 +38951,22 @@
 
 									if (
 										(
-											in_array(
-												'contentUrl',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'contentUrl',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'contentUrl',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'contentUrl',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -38440,14 +39030,22 @@
 										$clinical_resource_introduction
 										&&
 										(
-											in_array(
-												'description',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'description',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'description',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'description',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 									) {
@@ -38513,14 +39111,22 @@
 
 									if (
 										(
-											in_array(
-												'duration',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'duration',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'duration',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'duration',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -38571,14 +39177,22 @@
 
 									if (
 										(
-											in_array(
-												'embeddedTextCaption',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'embeddedTextCaption',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'embeddedTextCaption',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'embeddedTextCaption',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -38641,14 +39255,22 @@
 
 									if (
 										(
-											in_array(
-												'embedUrl',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'embedUrl',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'embedUrl',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'embedUrl',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -38706,14 +39328,22 @@
 
 									if (
 										(
-											in_array(
-												'encodingFormat',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'encodingFormat',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'encodingFormat',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'encodingFormat',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -38766,14 +39396,22 @@
 
 									if (
 										(
-											in_array(
-												'hasDigitalDocumentPermission',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'hasDigitalDocumentPermission',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'hasDigitalDocumentPermission',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'hasDigitalDocumentPermission',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -38870,14 +39508,22 @@
 
 									if (
 										(
-											in_array(
-												'height',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'height',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'height',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'height',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -38947,14 +39593,22 @@
 									 */
 
 									if (
-										in_array(
-											'image',
-											$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($clinical_resource_item_MedicalWebPage)
+											&&
+											in_array(
+												'image',
+												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'image',
-											$clinical_resource_properties_map[$CreativeWork_type]['properties']
+										(
+											isset($clinical_resource_item_CreativeWork)
+											&&
+											in_array(
+												'image',
+												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											)
 										)
 									) {
 
@@ -39022,9 +39676,13 @@
 									 */
 
 									if (
-										in_array(
-											'isAccessibleForFree',
-											$clinical_resource_properties_map[$CreativeWork_type]['properties']
+										(
+											isset($clinical_resource_item_CreativeWork)
+											&&
+											in_array(
+												'isAccessibleForFree',
+												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -39087,9 +39745,13 @@
 									 */
 
 									if (
-										in_array(
-											'isPartOf',
-											$clinical_resource_properties_map[$CreativeWork_type]['properties']
+										(
+											isset($clinical_resource_item_CreativeWork)
+											&&
+											in_array(
+												'isPartOf',
+												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -39155,14 +39817,22 @@
 
 									if (
 										(
-											in_array(
-												'mainContentOfPage',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'mainContentOfPage',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'mainContentOfPage',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'mainContentOfPage',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -39385,9 +40055,13 @@
 									 */
 
 									if (
-										in_array(
-											'representativeOfPage',
-											$clinical_resource_properties_map[$CreativeWork_type]['properties']
+										(
+											isset($clinical_resource_item_CreativeWork)
+											&&
+											in_array(
+												'representativeOfPage',
+												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											)
 										)
 									) {
 
@@ -39438,14 +40112,22 @@
 
 									if (
 										(
-											in_array(
-												'sameAs',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'sameAs',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'sameAs',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'sameAs',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -39566,14 +40248,22 @@
 
 									if (
 										(
-											in_array(
-												'speakable',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'speakable',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'speakable',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'speakable',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -39688,14 +40378,22 @@
 									 */
 
 									if (
-										in_array(
-											'thumbnail',
-											$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+										(
+											isset($clinical_resource_item_MedicalWebPage)
+											&&
+											in_array(
+												'thumbnail',
+												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'thumbnail',
-											$clinical_resource_properties_map[$CreativeWork_type]['properties']
+										(
+											isset($clinical_resource_item_CreativeWork)
+											&&
+											in_array(
+												'thumbnail',
+												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											)
 										)
 									) {
 
@@ -39761,14 +40459,22 @@
 
 									if (
 										(
-											in_array(
-												'timeRequired',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'timeRequired',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'timeRequired',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'timeRequired',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -39856,14 +40562,22 @@
 
 									if (
 										(
-											in_array(
-												'transcript',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'transcript',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'transcript',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'transcript',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -39976,14 +40690,22 @@
 
 									if (
 										(
-											in_array(
-												'videoFrameSize',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'videoFrameSize',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'videoFrameSize',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'videoFrameSize',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -40030,14 +40752,22 @@
 
 									if (
 										(
-											in_array(
-												'videoQuality',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'videoQuality',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'videoQuality',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'videoQuality',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -40087,14 +40817,22 @@
 
 									if (
 										(
-											in_array(
-												'foo',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'foo',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'foo',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'foo',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -40145,14 +40883,22 @@
 
 									if (
 										(
-											in_array(
-												'wordCount',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'wordCount',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'wordCount',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'wordCount',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
 										)
 										&&
@@ -40292,9 +41038,13 @@
 											// author (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'author',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'author',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40317,9 +41067,13 @@
 											// contributor (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'contributor',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'contributor',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40342,9 +41096,13 @@
 											// copyrightHolder (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'copyrightHolder',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'copyrightHolder',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40367,9 +41125,13 @@
 											// copyrightNotice (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'copyrightNotice',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'copyrightNotice',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40392,9 +41154,13 @@
 											// copyrightYear (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'copyrightYear',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'copyrightYear',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40417,9 +41183,13 @@
 											// countryOfOrigin (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'countryOfOrigin',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'countryOfOrigin',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40442,9 +41212,13 @@
 											// creator (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'creator',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'creator',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40467,9 +41241,13 @@
 											// creditText (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'creditText',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'creditText',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40492,9 +41270,13 @@
 											// dateModified (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'dateModified',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'dateModified',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40517,9 +41299,13 @@
 											// datePublished (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'datePublished',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'datePublished',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40542,9 +41328,13 @@
 											// director (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'director',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'director',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40567,9 +41357,13 @@
 											// editor (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'editor',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'editor',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40592,9 +41386,13 @@
 											// funder (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'funder',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'funder',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40635,9 +41433,13 @@
 												 */
 
 												if (
-													in_array(
-														'funding',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'funding',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40660,9 +41462,13 @@
 											// maintainer (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'maintainer',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'maintainer',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40685,9 +41491,13 @@
 											// musicBy (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'musicBy',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'musicBy',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40710,9 +41520,13 @@
 											// producer (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'producer',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'producer',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40735,9 +41549,13 @@
 											// productionCompany (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'productionCompany',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'productionCompany',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40775,9 +41593,13 @@
 												 */
 
 												if (
-													in_array(
-														'provider',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'provider',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40800,9 +41622,13 @@
 											// publisher (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'publisher',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'publisher',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40825,9 +41651,13 @@
 											// publisherImprint (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'publisherImprint',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'publisherImprint',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40850,9 +41680,13 @@
 											// publishingPrinciples (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'publishingPrinciples',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'publishingPrinciples',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40875,9 +41709,13 @@
 											// recordedAt (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'recordedAt',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'recordedAt',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40914,9 +41752,13 @@
 												 */
 
 												if (
-													in_array(
-														'sameAs',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'sameAs',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40958,9 +41800,13 @@
 											// sourceOrganization (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'sourceOrganization',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'sourceOrganization',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -40983,9 +41829,13 @@
 											// sponsor (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'sponsor',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'sponsor',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -41008,9 +41858,13 @@
 											// translator (CreativeWork, syndicated only)
 
 												if (
-													in_array(
-														'translator',
-														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													(
+														isset($clinical_resource_item_CreativeWork)
+														&&
+														in_array(
+															'translator',
+															$clinical_resource_properties_map[$CreativeWork_type]['properties']
+														)
 													)
 												) {
 
@@ -41372,7 +42226,11 @@
 
 									// Add to item values
 
-										if ( $MedicalCondition_type ) {
+										if (
+											isset($condition_item_MedicalCondition)
+											&&
+											$MedicalCondition_type
+										) {
 
 											$condition_item_MedicalCondition['@type'] = $MedicalCondition_type;
 
@@ -41388,7 +42246,11 @@
 
 									// Add to item values
 
-										if ( $condition_id ) {
+										if (
+											isset($condition_item_MedicalCondition)
+											&&
+											$condition_id
+										) {
 
 											$condition_item_MedicalCondition['@id'] = $condition_id;
 											$node_identifier_list[] = $condition_item_MedicalCondition['@id']; // Add to the list of existing node identifiers
@@ -41525,9 +42387,13 @@
 									 */
 
 									if (
-										in_array(
-											'name',
-											$condition_properties_map[$MedicalCondition_type]['properties']
+										(
+											isset($condition_item_MedicalCondition)
+											&&
+											in_array(
+												'name',
+												$condition_properties_map[$MedicalCondition_type]['properties']
+											)
 										)
 									) {
 
@@ -41576,9 +42442,13 @@
 									 */
 
 									if (
-										in_array(
-											'additionalType',
-											$condition_properties_map[$MedicalCondition_type]['properties']
+										(
+											isset($condition_item_MedicalCondition)
+											&&
+											in_array(
+												'additionalType',
+												$condition_properties_map[$MedicalCondition_type]['properties']
+											)
 										)
 									) {
 
@@ -41626,9 +42496,13 @@
 									 */
 
 									if (
-										in_array(
-											'alternateName',
-											$condition_properties_map[$MedicalCondition_type]['properties']
+										(
+											isset($condition_item_MedicalCondition)
+											&&
+											in_array(
+												'alternateName',
+												$condition_properties_map[$MedicalCondition_type]['properties']
+											)
 										)
 									) {
 
@@ -41697,9 +42571,13 @@
 									 */
 
 									if (
-										in_array(
-											'code',
-											$condition_properties_map[$MedicalCondition_type]['properties']
+										(
+											isset($condition_item_MedicalCondition)
+											&&
+											in_array(
+												'code',
+												$condition_properties_map[$MedicalCondition_type]['properties']
+											)
 										)
 									) {
 
@@ -41918,9 +42796,13 @@
 									 */
 
 									if (
-										in_array(
-											'infectiousAgent',
-											$condition_properties_map[$MedicalCondition_type]['properties']
+										(
+											isset($condition_item_MedicalCondition)
+											&&
+											in_array(
+												'infectiousAgent',
+												$condition_properties_map[$MedicalCondition_type]['properties']
+											)
 										)
 									) {
 
@@ -41955,9 +42837,13 @@
 									 */
 
 									if (
-										in_array(
-											'infectiousAgentClass',
-											$condition_properties_map[$MedicalCondition_type]['properties']
+										(
+											isset($condition_item_MedicalCondition)
+											&&
+											in_array(
+												'infectiousAgentClass',
+												$condition_properties_map[$MedicalCondition_type]['properties']
+											)
 										)
 									) {
 
@@ -42142,9 +43028,13 @@
 									 */
 
 									if (
-										in_array(
-											'sameAs',
-											$condition_properties_map[$MedicalCondition_type]['properties']
+										(
+											isset($condition_item_MedicalCondition)
+											&&
+											in_array(
+												'sameAs',
+												$condition_properties_map[$MedicalCondition_type]['properties']
+											)
 										)
 									) {
 
@@ -42261,9 +43151,13 @@
 									 */
 
 									if (
-										in_array(
-											'possibleTreatment',
-											$condition_properties_map[$MedicalCondition_type]['properties']
+										(
+											isset($condition_item_MedicalCondition)
+											&&
+											in_array(
+												'possibleTreatment',
+												$condition_properties_map[$MedicalCondition_type]['properties']
+											)
 										)
 										&&
 										$nesting_level <= 1
@@ -42320,9 +43214,13 @@
 									 */
 
 									if (
-										in_array(
-											'primaryPrevention',
-											$condition_properties_map[$MedicalCondition_type]['properties']
+										(
+											isset($condition_item_MedicalCondition)
+											&&
+											in_array(
+												'primaryPrevention',
+												$condition_properties_map[$MedicalCondition_type]['properties']
+											)
 										)
 										&&
 										$nesting_level <= 1
@@ -42379,9 +43277,13 @@
 									 */
 
 									if (
-										in_array(
-											'secondaryPrevention',
-											$condition_properties_map[$MedicalCondition_type]['properties']
+										(
+											isset($condition_item_MedicalCondition)
+											&&
+											in_array(
+												'secondaryPrevention',
+												$condition_properties_map[$MedicalCondition_type]['properties']
+											)
 										)
 										&&
 										$nesting_level <= 1
@@ -42451,9 +43353,13 @@
 									 */
 
 									if (
-										in_array(
-											'typicalTest',
-											$condition_properties_map[$MedicalCondition_type]['properties']
+										(
+											isset($condition_item_MedicalCondition)
+											&&
+											in_array(
+												'typicalTest',
+												$condition_properties_map[$MedicalCondition_type]['properties']
+											)
 										)
 										&&
 										$nesting_level <= 1
@@ -42820,7 +43726,15 @@
 
 									// Add to schema
 
-										$treatment_item_Service['@type'] = $Service_type;
+										if (
+											isset($treatment_item_Service)
+											&&
+											$Service_type
+										) {
+
+											$treatment_item_Service['@type'] = $Service_type;
+
+										}
 
 								// @id
 
@@ -42834,7 +43748,11 @@
 
 									// Add to item values
 
-										if ( $treatment_id ) {
+										if (
+											isset($treatment_item_Service)
+											&&
+											$treatment_id
+										) {
 
 											$treatment_item_Service['@id'] = $treatment_id;
 											$node_identifier_list[] = $treatment_item_Service['@id']; // Add to the list of existing node identifiers
@@ -42971,9 +43889,13 @@
 									 */
 
 									if (
-										in_array(
-											'name',
-											$treatment_properties_map[$Service_type]['properties']
+										(
+											isset($treatment_item_Service)
+											&&
+											in_array(
+												'name',
+												$treatment_properties_map[$Service_type]['properties']
+											)
 										)
 									) {
 
@@ -43022,9 +43944,13 @@
 									 */
 
 									if (
-										in_array(
-											'additionalType',
-											$treatment_properties_map[$Service_type]['properties']
+										(
+											isset($treatment_item_Service)
+											&&
+											in_array(
+												'additionalType',
+												$treatment_properties_map[$Service_type]['properties']
+											)
 										)
 									) {
 
@@ -43101,9 +44027,13 @@
 									 */
 
 									if (
-										in_array(
-											'alternateName',
-											$treatment_properties_map[$Service_type]['properties']
+										(
+											isset($treatment_item_Service)
+											&&
+											in_array(
+												'alternateName',
+												$treatment_properties_map[$Service_type]['properties']
+											)
 										)
 									) {
 
@@ -43156,9 +44086,13 @@
 									 */
 
 									if (
-										in_array(
-											'code',
-											$treatment_properties_map[$Service_type]['properties']
+										(
+											isset($treatment_item_Service)
+											&&
+											in_array(
+												'code',
+												$treatment_properties_map[$Service_type]['properties']
+											)
 										)
 									) {
 
@@ -43299,9 +44233,13 @@
 									 */
 
 									if (
-										in_array(
-											'drug',
-											$treatment_properties_map[$Service_type]['properties']
+										(
+											isset($treatment_item_Service)
+											&&
+											in_array(
+												'drug',
+												$treatment_properties_map[$Service_type]['properties']
+											)
 										)
 									) {
 
@@ -43471,9 +44409,13 @@
 									 */
 
 									if (
-										in_array(
-											'duplicateTherapy',
-											$treatment_properties_map[$Service_type]['properties']
+										(
+											isset($treatment_item_Service)
+											&&
+											in_array(
+												'duplicateTherapy',
+												$treatment_properties_map[$Service_type]['properties']
+											)
 										)
 										&&
 										$nesting_level <= 1
@@ -43597,9 +44539,13 @@
 									 */
 
 									if (
-										in_array(
-											'imagingTechnique',
-											$treatment_properties_map[$Service_type]['properties']
+										(
+											isset($treatment_item_Service)
+											&&
+											in_array(
+												'imagingTechnique',
+												$treatment_properties_map[$Service_type]['properties']
+											)
 										)
 									) {
 
@@ -43723,9 +44669,13 @@
 									 */
 
 									if (
-										in_array(
-											'procedureType',
-											$treatment_properties_map[$Service_type]['properties']
+										(
+											isset($treatment_item_Service)
+											&&
+											in_array(
+												'procedureType',
+												$treatment_properties_map[$Service_type]['properties']
+											)
 										)
 									) {
 
@@ -43771,9 +44721,13 @@
 									 */
 
 									if (
-										in_array(
-											'relevantSpecialty',
-											$treatment_properties_map[$Service_type]['properties']
+										(
+											isset($treatment_item_Service)
+											&&
+											in_array(
+												'relevantSpecialty',
+												$treatment_properties_map[$Service_type]['properties']
+											)
 										)
 									) {
 
@@ -43828,9 +44782,13 @@
 									 */
 
 									if (
-										in_array(
-											'sameAs',
-											$treatment_properties_map[$Service_type]['properties']
+										(
+											isset($treatment_item_Service)
+											&&
+											in_array(
+												'sameAs',
+												$treatment_properties_map[$Service_type]['properties']
+											)
 										)
 									) {
 
@@ -43950,9 +44908,13 @@
 									 */
 
 									if (
-										in_array(
-											'subTest',
-											$treatment_properties_map[$Service_type]['properties']
+										(
+											isset($treatment_item_Service)
+											&&
+											in_array(
+												'subTest',
+												$treatment_properties_map[$Service_type]['properties']
+											)
 										)
 										&&
 										$nesting_level <= 1
@@ -44008,9 +44970,13 @@
 									 */
 
 									if (
-										in_array(
-											'tissueSample',
-											$treatment_properties_map[$Service_type]['properties']
+										(
+											isset($treatment_item_Service)
+											&&
+											in_array(
+												'tissueSample',
+												$treatment_properties_map[$Service_type]['properties']
+											)
 										)
 									) {
 
@@ -44063,9 +45029,13 @@
 									 */
 
 									if (
-										in_array(
-											'usedToDiagnose',
-											$treatment_properties_map[$Service_type]['properties']
+										(
+											isset($treatment_item_Service)
+											&&
+											in_array(
+												'usedToDiagnose',
+												$treatment_properties_map[$Service_type]['properties']
+											)
 										)
 										&&
 										$nesting_level <= 1
@@ -44121,9 +45091,13 @@
 									 */
 
 									if (
-										in_array(
-											'usesDevice',
-											$treatment_properties_map[$Service_type]['properties']
+										(
+											isset($treatment_item_Service)
+											&&
+											in_array(
+												'usesDevice',
+												$treatment_properties_map[$Service_type]['properties']
+											)
 										)
 									) {
 
