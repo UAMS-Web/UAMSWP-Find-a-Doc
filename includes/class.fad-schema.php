@@ -14912,7 +14912,7 @@
 						// Retrieve the value of the item transient
 
 							uamswp_fad_get_transient(
-								'item_' . $entity . '_' . implode( '_', $output_types), // Required // String added to transient name for disambiguation.
+								'item_' . $entity . '_' . implode( '_', $output_types ) . ( $nesting_level ? '_nested-level-' . $nesting_level : '_root' ), // Required // String added to transient name for disambiguation.
 								$provider_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
@@ -25005,7 +25005,7 @@
 							// Set/update the value of the item transient
 
 								uamswp_fad_set_transient(
-									'item_' . $entity . '_' . implode( '_', $output_types), // Required // String added to transient name for disambiguation.
+									'item_' . $entity . '_' . implode( '_', $output_types ) . ( $nesting_level ? '_nested-level-' . $nesting_level : '_root' ), // Required // String added to transient name for disambiguation.
 									$provider_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 									__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 								);
@@ -25224,7 +25224,7 @@
 						// Retrieve the value of the item transient
 
 							uamswp_fad_get_transient(
-								'item_' . $entity, // Required // String added to transient name for disambiguation.
+								'item_' . $entity . ( $nesting_level ? '_nested-level-' . $nesting_level : '_root' ), // Required // String added to transient name for disambiguation.
 								$location_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
@@ -32196,7 +32196,7 @@
 							// Set/update the value of the item transient
 
 								uamswp_fad_set_transient(
-									'item_' . $entity, // Required // String added to transient name for disambiguation.
+									'item_' . $entity . ( $nesting_level ? '_nested-level-' . $nesting_level : '_root' ), // Required // String added to transient name for disambiguation.
 									$location_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 									__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 								);
@@ -32364,7 +32364,7 @@
 						// Retrieve the value of the item transient
 
 							uamswp_fad_get_transient(
-								'item_' . $entity . ( $current_fpage ? '_' . $current_fpage : ''), // Required // String added to transient name for disambiguation.
+								'item_' . $entity . ( $current_fpage ? '_' . $current_fpage : '' ) . ( $nesting_level ? '_nested-level-' . $nesting_level : '_root' ), // Required // String added to transient name for disambiguation.
 								$expertise_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
@@ -35510,7 +35510,7 @@
 							// Set/update the value of the item transient
 
 								uamswp_fad_set_transient(
-									'item_' . $entity . ( $current_fpage ? '_' . $current_fpage : ''), // Required // String added to transient name for disambiguation.
+									'item_' . $entity . ( $current_fpage ? '_' . $current_fpage : '' ) . ( $nesting_level ? '_nested-level-' . $nesting_level : '_root' ), // Required // String added to transient name for disambiguation.
 									$expertise_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 									__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 								);
@@ -35683,7 +35683,7 @@
 						// Retrieve the value of the item transient
 
 							uamswp_fad_get_transient(
-								'item_' . $entity, // Required // String added to transient name for disambiguation.
+								'item_' . $entity . ( $nesting_level ? '_nested-level-' . $nesting_level : '_root' ), // Required // String added to transient name for disambiguation.
 								$clinical_resource_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
@@ -39811,7 +39811,7 @@
 							// Set/update the value of the item transient
 
 								uamswp_fad_set_transient(
-									'item_' . $entity, // Required // String added to transient name for disambiguation.
+									'item_' . $entity . ( $nesting_level ? '_nested-level-' . $nesting_level : '_root' ), // Required // String added to transient name for disambiguation.
 									$clinical_resource_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 									__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 								);
