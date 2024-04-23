@@ -32405,10 +32405,12 @@
 					/**
 					 * Define the list of high-level types that are considered valid. The list may be
 					 * expanded later to include the subtypes of these high-level types.
+					 *
+					 * Exclude 'MedicalEntity' from the initial list so that its subtypes are not
+					 * added to the list of valid types.
 					 */
 
 					$expertise_valid_types = array(
-						'MedicalEntity',
 						'MedicalWebPage'
 					);
 
@@ -32422,6 +32424,11 @@
 							$expertise_valid_types, // array // Required // List of Schema.org types
 							$expertise_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
 						);
+
+					// Add 'MedicalEntity' to the list of valid types
+
+						$expertise_valid_types[] = 'MedicalEntity';
+						$expertise_valid_types_url[] = 'https://schema.org/MedicalEntity';
 
 				// List of valid properties for each type
 
