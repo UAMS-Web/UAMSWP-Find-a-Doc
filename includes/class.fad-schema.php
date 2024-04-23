@@ -37932,19 +37932,638 @@
 
 										}
 
-								// Associated ontology items (e.g., providers, areas of expertise, clinical resources, conditions, treatments) [WIP]
+								// Associated ontology items (e.g., providers, areas of expertise, clinical resources, conditions, treatments)
 
 									// Associated providers
 
+										// List of properties that reference associated providers
+
+											$clinical_resource_provider_common = array(
+												'about',
+												'keywords',
+												'mentions',
+												'relatedLink',
+												'significantLink'
+											);
+
+										if (
+											(
+												(
+													isset($clinical_resource_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
+														$clinical_resource_provider_common
+													)
+												)
+												||
+												(
+													isset($clinical_resource_item_MedicalEntity)
+													&&
+													array_intersect(
+														$clinical_resource_properties_map[$MedicalEntity_type]['properties'],
+														$clinical_resource_provider_common
+													)
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get values
+
+												// Get list of associated providers
+
+													if ( !isset($clinical_resource_provider_ids) ) {
+
+														$clinical_resource_provider_ids = array();
+
+														$providers = get_field( 'clinical_resource_providers', $entity );
+														$page_id_temp = $page_id ?? null;
+														$page_id = $entity;
+														include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
+														$clinical_resource_provider_ids = $provider_ids;
+
+														// Reset variables from Related Providers Section Query template part
+
+															$page_id = $page_id_temp;
+															$providers = null;
+															$provider_query = null;
+															$provider_section_show = null;
+															$provider_ids = null;
+															$provider_count = null;
+															$jump_link_count = null;
+
+													}
+
+												// Format values
+
+													if ( $clinical_resource_provider_ids ) {
+
+														$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+														$clinical_resource_provider = uamswp_fad_schema_provider(
+															$clinical_resource_provider_ids, // array // Required // List of IDs of the provider items
+															$clinical_resource_url, // string // Required // Page URL
+															$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+															($nesting_level + 1), // int // Optional // Nesting level within the main schema
+															array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
+														);
+
+														// MedicalBusiness and subtypes
+
+															$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider['MedicalBusiness'];
+
+															// Get URLs for significantLink property
+
+																$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider_MedicalBusiness ?? null;
+
+																if ( $clinical_resource_provider_MedicalBusiness ) {
+
+																	$clinical_resource_provider_MedicalBusiness_significantLink = uamswp_fad_schema_property_values(
+																		$clinical_resource_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
+																		array( 'url' ) // mixed // Required // List of properties from which to collect values
+																	);
+
+																}
+
+															// Get names for keywords property
+
+																$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider_MedicalBusiness ?? null;
+
+																if ( $clinical_resource_provider_MedicalBusiness ) {
+
+																	$clinical_resource_provider_MedicalBusiness_keywords = uamswp_fad_schema_property_values(
+																		$clinical_resource_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
+																		array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																	);
+
+																}
+
+														// Person
+
+															$clinical_resource_provider_Person = $clinical_resource_provider['Person'];
+
+															// Get URLs for significantLink property
+
+																$clinical_resource_provider_Person = $clinical_resource_provider_Person ?? null;
+
+																if ( $clinical_resource_provider_Person ) {
+
+																	$clinical_resource_provider_Person_significantLink = uamswp_fad_schema_property_values(
+																		$clinical_resource_provider_Person, // array // Required // Property values from which to extract specific values
+																		array( 'url' ) // mixed // Required // List of properties from which to collect values
+																	);
+
+																}
+
+															// Get names for keywords property
+
+																$clinical_resource_provider_Person = $clinical_resource_provider_Person ?? null;
+
+																if ( $clinical_resource_provider_Person ) {
+
+																	$clinical_resource_provider_Person_keywords = uamswp_fad_schema_property_values(
+																		$clinical_resource_provider_Person, // array // Required // Property values from which to extract specific values
+																		array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																	);
+
+																}
+
+													}
+
+										}
+
 									// Associated locations
+
+										// List of properties that reference locations
+
+											$clinical_resource_location_common = array(
+												'about',
+												'keywords',
+												'mentions',
+												'relatedLink',
+												'significantLink'
+											);
+
+										if (
+											(
+												(
+													isset($clinical_resource_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
+														$clinical_resource_location_common
+													)
+												)
+												||
+												(
+													isset($clinical_resource_item_MedicalEntity)
+													&&
+													array_intersect(
+														$clinical_resource_properties_map[$MedicalEntity_type]['properties'],
+														$clinical_resource_location_common
+													)
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get values
+
+												if ( !isset($clinical_resource_location_array) ) {
+
+													$clinical_resource_location_array = get_field( 'clinical_resource_locations', $entity ) ?? array(); // array
+
+													// Clean up the array
+
+														$clinical_resource_location_array = $clinical_resource_location_array ? array_filter($clinical_resource_location_array) : array();
+														$clinical_resource_location_array = $clinical_resource_location_array ? array_values($clinical_resource_location_array) : array();
+
+												}
+
+											// Format values
+
+												if ( $clinical_resource_location_array ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$clinical_resource_location = uamswp_fad_schema_location(
+														$clinical_resource_location_array, // List of IDs of the location items
+														$clinical_resource_url, // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ) // Nesting level within the main schema
+													);
+
+												}
+
+												// MedicalWebPage
+
+													$clinical_resource_location_MedicalWebPage = $clinical_resource_location['MedicalWebPage'];
+
+													// Get URLs for significantLink property
+
+														$clinical_resource_location_MedicalWebPage = $clinical_resource_location_MedicalWebPage ?? null;
+
+														if ( $clinical_resource_location_MedicalWebPage ) {
+
+															$clinical_resource_location_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																$clinical_resource_location_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																array( 'url' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+												// LocalBusiness and subtypes
+
+													$clinical_resource_location_LocalBusiness = $clinical_resource_location['LocalBusiness'];
+
+													// Get names for keywords property
+
+														$clinical_resource_location_LocalBusiness = $clinical_resource_location_LocalBusiness ?? null;
+
+														if ( $clinical_resource_location_LocalBusiness ) {
+
+															$clinical_resource_location_LocalBusiness_keywords = uamswp_fad_schema_property_values(
+																$clinical_resource_location_LocalBusiness, // array // Required // Property values from which to extract specific values
+																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+										}
 
 									// Associated areas of expertise
 
+										// List of properties that reference areas of expertise
+
+											$clinical_resource_related_expertise_common = array(
+												'about',
+												'keywords',
+												'mentions',
+												'relatedLink',
+												'significantLink'
+											);
+
+										if (
+											(
+												(
+													isset($clinical_resource_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
+														$clinical_resource_related_expertise_common
+													)
+												)
+												||
+												(
+													isset($clinical_resource_item_MedicalEntity)
+													&&
+													array_intersect(
+														$clinical_resource_properties_map[$MedicalEntity_type]['properties'],
+														$clinical_resource_related_expertise_common
+													)
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get related areas of expertise
+
+												if ( !isset($clinical_resource_related_expertise_list) ) {
+
+													$clinical_resource_related_expertise_list = get_field( 'clinical_resource_aoe', $entity ) ?? array();
+
+													// Clean up the array
+
+														$clinical_resource_related_expertise_list = $clinical_resource_related_expertise_list ? array_filter($clinical_resource_related_expertise_list) : array();
+														$clinical_resource_related_expertise_list = $clinical_resource_related_expertise_list ? array_values($clinical_resource_related_expertise_list) : array();
+
+												}
+
+											// Format values
+
+												if ( $clinical_resource_related_expertise_list ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$clinical_resource_related_expertise = uamswp_fad_schema_expertise(
+														$clinical_resource_related_expertise_list, // List of IDs of the area of expertise items
+														'', // string // Required // Page or fake subpage URL
+														true, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
+														'', // string // Required // Fake subpage slug
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ) // Nesting level within the main schema
+													);
+
+												}
+
+												// MedicalWebPage
+
+													$clinical_resource_related_expertise_MedicalWebPage = $clinical_resource_related_expertise['MedicalWebPage'];
+
+													// Get URLs for significantLink property
+
+														$clinical_resource_related_expertise_MedicalWebPage = $clinical_resource_related_expertise_MedicalWebPage ?? null;
+
+														if ( $clinical_resource_related_expertise_MedicalWebPage ) {
+
+															$clinical_resource_related_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																$clinical_resource_related_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																array( 'url' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+												// MedicalEntity and subtypes
+
+													$clinical_resource_related_expertise_MedicalEntity = $clinical_resource_related_expertise['MedicalEntity'];
+
+													// Get names for keywords property
+
+														$clinical_resource_related_expertise_MedicalEntity = $clinical_resource_related_expertise_MedicalEntity ?? null;
+
+														if ( $clinical_resource_related_expertise_MedicalEntity ) {
+
+															$clinical_resource_related_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
+																$clinical_resource_related_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
+																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+										}
+
 									// Associated clinical resources
+
+										// List of properties that reference clinical resources
+
+											$clinical_resource_clinical_resource_common = array(
+												'about',
+												'mentions',
+												'relatedLink',
+												'significantLink'
+											);
+
+										if (
+											(
+												(
+													isset($clinical_resource_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
+														$clinical_resource_clinical_resource_common
+													)
+												)
+												||
+												(
+													isset($clinical_resource_item_MedicalEntity)
+													&&
+													array_intersect(
+														$clinical_resource_properties_map[$MedicalEntity_type]['properties'],
+														$clinical_resource_clinical_resource_common
+													)
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get related clinical resources
+
+												if ( !isset($clinical_resource_clinical_resource_list) ) {
+
+													$clinical_resource_clinical_resource_list = get_field( 'clinical_resource_related', $entity ) ?? array();
+
+												}
+
+												if ( !isset($clinical_resource_clinical_resource_list_max) ) {
+
+													include( UAMS_FAD_PATH . '/templates/parts/vars/sys/posts-per-page/clinical-resource.php' ); // General maximum number of clinical resource items to display on a fake subpage (or section)
+													$clinical_resource_clinical_resource_list_max = $clinical_resource_posts_per_page_section;
+
+												}
+
+											// Format values
+
+												if ( $clinical_resource_clinical_resource_list ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$clinical_resource_clinical_resource = uamswp_fad_schema_clinical_resource(
+														$clinical_resource_clinical_resource_list, // List of IDs of the clinical resource items
+														$clinical_resource_url, // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ) // Nesting level within the main schema
+													);
+
+												}
+
+												// MedicalWebPage
+
+													$clinical_resource_clinical_resource_MedicalWebPage = $clinical_resource_clinical_resource['MedicalWebPage'];
+
+													// Get URLs for significantLink property
+
+														$clinical_resource_clinical_resource_MedicalWebPage = $clinical_resource_clinical_resource_MedicalWebPage ?? null;
+
+														if ( $clinical_resource_clinical_resource_MedicalWebPage ) {
+
+															$clinical_resource_clinical_resource_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																$clinical_resource_clinical_resource_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																array( 'url' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+												// CreativeWork and subtypes
+
+													$clinical_resource_clinical_resource_CreativeWork = $clinical_resource_clinical_resource['CreativeWork'];
+
+													// Get names for keywords property
+
+														$clinical_resource_clinical_resource_CreativeWork = $clinical_resource_clinical_resource_CreativeWork ?? null;
+
+														if ( $clinical_resource_clinical_resource_CreativeWork ) {
+
+															$clinical_resource_clinical_resource_CreativeWork_keywords = uamswp_fad_schema_property_values(
+																$clinical_resource_clinical_resource_CreativeWork, // array // Required // Property values from which to extract specific values
+																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+															);
+
+														}
+
+										}
 
 									// Associated conditions
 
+										// List of properties that reference conditions
+
+											$clinical_resource_condition_common = array(
+												'about',
+												'keywords',
+												'mentions',
+												'relatedLink',
+												'significantLink'
+											);
+
+										if (
+											(
+												(
+													isset($clinical_resource_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
+														$clinical_resource_condition_common
+													)
+												)
+												||
+												(
+													isset($clinical_resource_item_MedicalEntity)
+													&&
+													array_intersect(
+														$clinical_resource_properties_map[$MedicalEntity_type]['properties'],
+														$clinical_resource_condition_common
+													)
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get related conditions
+
+												if ( !isset($clinical_resource_condition_list) ) {
+
+													$clinical_resource_condition_list = get_field( 'clinical_resource_conditions', $entity ) ?? array();
+
+													// Clean up the array
+
+														$clinical_resource_condition_list = $clinical_resource_condition_list ? array_filter($clinical_resource_condition_list) : array();
+														$clinical_resource_condition_list = $clinical_resource_condition_list ? array_values($clinical_resource_condition_list) : array();
+
+												}
+
+											// Format values
+
+												if ( $clinical_resource_condition_list ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$clinical_resource_condition = uamswp_fad_schema_condition(
+														$clinical_resource_condition_list, // array // Required // List of IDs of the MedicalCondition items
+														$clinical_resource_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
+														$Service_i // int // Optional // Iteration counter for treatment-as-Service
+													);
+
+												}
+
+											// Get URLs for significantLink property
+
+												$clinical_resource_condition = $clinical_resource_condition ?? null;
+
+												if ( $clinical_resource_condition ) {
+
+													$clinical_resource_condition_significantLink = uamswp_fad_schema_property_values(
+														$clinical_resource_condition, // array // Required // Property values from which to extract specific values
+														array( 'url' ) // mixed // Required // List of properties from which to collect values
+													);
+
+												}
+
+											// Get names for keywords property
+
+												$clinical_resource_condition = $clinical_resource_condition ?? null;
+
+												if ( $clinical_resource_condition ) {
+
+													$clinical_resource_condition_keywords = uamswp_fad_schema_property_values(
+														$clinical_resource_condition, // array // Required // Property values from which to extract specific values
+														array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+													);
+
+												}
+
+										}
+
 									// Associated treatments and procedures
+
+										// List of properties that reference treatments and procedures
+
+											$clinical_resource_treatment_common = array(
+												'about',
+												'keywords',
+												'mentions',
+												'relatedLink',
+												'significantLink'
+											);
+
+										if (
+											(
+												(
+													isset($clinical_resource_item_MedicalWebPage)
+													&&
+													array_intersect(
+														$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
+														$clinical_resource_treatment_common
+													)
+												)
+												||
+												(
+													isset($clinical_resource_item_MedicalEntity)
+													&&
+													array_intersect(
+														$clinical_resource_properties_map[$MedicalEntity_type]['properties'],
+														$clinical_resource_treatment_common
+													)
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get related treatments
+
+												if ( !isset($clinical_resource_treatment) ) {
+
+													$clinical_resource_treatment = get_field( 'clinical_resource_treatments', $entity ) ?? array();
+
+													// Clean up the array
+
+														$clinical_resource_treatment = $clinical_resource_treatment ? array_filter($clinical_resource_treatment) : array();
+														$clinical_resource_treatment = $clinical_resource_treatment ? array_values($clinical_resource_treatment) : array();
+
+												}
+
+											// Format values
+
+												if ( $clinical_resource_treatment ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$clinical_resource_availableService = uamswp_fad_schema_treatment(
+														$clinical_resource_treatment, // array // Required // List of IDs of the service items
+														$clinical_resource_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+													);
+
+												}
+
+											// Get URLs for significantLink property
+
+												$clinical_resource_availableService = $clinical_resource_availableService ?? null;
+
+												if ( $clinical_resource_availableService ) {
+
+													$clinical_resource_availableService_significantLink = uamswp_fad_schema_property_values(
+														$clinical_resource_availableService, // array // Required // Property values from which to extract specific values
+														array( 'url' ) // mixed // Required // List of properties from which to collect values
+													);
+
+												}
+
+											// Get names for keywords property
+
+												$clinical_resource_availableService = $clinical_resource_availableService ?? null;
+
+												if ( $clinical_resource_availableService ) {
+
+													$clinical_resource_availableService_keywords = uamswp_fad_schema_property_values(
+														$clinical_resource_availableService, // array // Required // Property values from which to extract specific values
+														array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+													);
+
+												}
+
+										}
 
 								// Main image asset info (common)
 
