@@ -2273,7 +2273,7 @@
 
 			// Health Care Provider Taxonomy Code Set taxonomy items
 
-				$nucc_list = uamswp_fad_schema_nucc_code_set_id(
+				$code_list = uamswp_fad_schema_nucc_code_set_id(
 					$nucc, // mixed // Required // List of Clinical Specialization term IDs
 					$code_list // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
 				);
