@@ -34108,6 +34108,32 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
+										// Get names for keywords property
+
+											$expertise_code = $expertise_code ?? null;
+
+											if ( $expertise_code ) {
+
+												$expertise_code_keywords = uamswp_fad_schema_property_values(
+													$expertise_code, // array // Required // Property values from which to extract specific values
+													array( 'name', 'alternateName', 'codeValue' ) // mixed // Required // List of properties from which to collect values
+												);
+
+											}
+
+											// Merge gender keywords value into keywords
+
+												$expertise_code_keywords = $expertise_code_keywords ?? null;
+
+												if ( $expertise_code_keywords ) {
+
+													$expertise_keywords = uamswp_fad_schema_merge_values(
+														$expertise_keywords, // mixed // Required // Initial schema item property value
+														$expertise_code_keywords // mixed // Required // Incoming schema item property value
+													);
+
+												}
+
 									}
 
 								// contentLocation [excluded]
