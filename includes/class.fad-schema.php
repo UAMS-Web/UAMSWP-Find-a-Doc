@@ -15731,7 +15731,7 @@
 
 									// Pass variables to template part [WIP]
 
-										$schema_common_item_MedicalWebPage = null;
+										$schema_common_item_MedicalWebPage = null; // MedicalWebPage item array
 
 									include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/properties.php' );
 
@@ -25917,7 +25917,7 @@
 
 									// Pass variables to template part
 
-										$schema_common_item_MedicalWebPage = $location_item_MedicalWebPage;
+										$schema_common_item_MedicalWebPage = $location_item_MedicalWebPage; // MedicalWebPage item array
 
 									include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/properties.php' );
 
@@ -33382,7 +33382,7 @@
 
 									// Pass variables to template part
 
-										$schema_common_item_MedicalWebPage = $expertise_item_MedicalWebPage;
+										$schema_common_item_MedicalWebPage = $expertise_item_MedicalWebPage; // MedicalWebPage item array
 
 									include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/properties.php' );
 
@@ -37843,7 +37843,7 @@
 
 									// Pass variables to template part
 
-										$schema_common_item_MedicalWebPage = $clinical_resource_item_MedicalWebPage;
+										$schema_common_item_MedicalWebPage = $clinical_resource_item_MedicalWebPage; // MedicalWebPage item array
 
 									include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/properties.php' );
 
@@ -39095,6 +39095,17 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Thing
+									 *
+									 * Used on these types:
+									 *
+									 *      - Certification
+									 *      - CommunicateAction
+									 *      - CreativeWork
+									 *      - Event
+									 *
+									 * Sub-properties:
+									 *
+									 *      - mainEntity
 									 */
 
 									if (

@@ -9,7 +9,7 @@
  *     $node_identifier_list // List of node identifiers (@id) already defined in the schema
  *     $schema_common_state
  *     $schema_common_usa
- *     $schema_common_item_MedicalWebPage
+ *     $schema_common_item_MedicalWebPage // MedicalWebPage item array
  *     $schema_common_specific_brand_organization // Clinical organization(s) specific to the current entity
  *     $schema_common_specific_brand_organization_override // bool // Query for whether to override common clinical organization(s) with those specific to the current entity
  *     $schema_common_url // URL of the current entity
@@ -26,7 +26,7 @@
 	$entity = $entity ?? null;
 	$schema_common_state = $schema_common_state ?? null;
 	$schema_common_usa = $schema_common_usa ?? null;
-	$schema_common_item_MedicalWebPage = $schema_common_item_MedicalWebPage ?? null;
+	$schema_common_item_MedicalWebPage = $schema_common_item_MedicalWebPage ?? null; // MedicalWebPage item array
 	$schema_common_specific_brand_organization = $schema_common_specific_brand_organization ?? null;
 	$schema_common_specific_brand_organization_override = $schema_common_specific_brand_organization_override ?? false;
 	$schema_common_url = $schema_common_url ?? null;
