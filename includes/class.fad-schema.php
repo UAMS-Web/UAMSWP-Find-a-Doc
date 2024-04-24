@@ -37392,6 +37392,7 @@
 
 						$clinical_resource_valid_types = array(
 							'Article',
+							'CreativeWork',
 							'ImageObject',
 							'VideoObject'
 						);
