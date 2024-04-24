@@ -48069,7 +48069,7 @@
 	// Get a list of schema.org subtypes and URLs
 
 		function uamswp_fad_schema_subtypes_and_urls(
-			array $types_no_subtypes, // array // Required // List of Schema.org types for which to not get the subtypes
+			array &$types_no_subtypes, // array // Required // List of Schema.org types for which to not get the subtypes
 			array &$types_for_subtypes = array(), // array // Optional // List of Schema.org types for which to get the subtypes
 			&$urls = array() // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
 		) {
