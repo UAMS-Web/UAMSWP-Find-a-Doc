@@ -17034,11 +17034,11 @@
 														$provider_url, // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ) // Nesting level within the main schema
-													);
+													) ?? null;
 
-													// MedicalWebPage
+													if ( isset($provider_location) ) {
 
-														if ( isset($provider_location) ) {
+														// MedicalWebPage
 
 															$provider_location_MedicalWebPage = $provider_location['MedicalWebPage'];
 
@@ -17055,11 +17055,7 @@
 
 																}
 
-														}
-
-													// LocalBusiness and subtypes
-
-														if ( isset($provider_location) ) {
+														// LocalBusiness and subtypes
 
 															$provider_location_LocalBusiness = $provider_location['LocalBusiness'];
 
@@ -17076,7 +17072,7 @@
 
 																}
 
-														}
+													}
 
 												}
 
@@ -17147,11 +17143,11 @@
 														'', // string // Required // Fake subpage slug
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ) // Nesting level within the main schema
-													);
+													) ?? null;
 
-													// MedicalWebPage
+													if ( isset($provider_expertise) ) {
 
-														if ( isset($provider_expertise) ) {
+														// MedicalWebPage
 
 															$provider_expertise_MedicalWebPage = $provider_expertise['MedicalWebPage'];
 
@@ -17168,11 +17164,7 @@
 
 																}
 
-														}
-
-													// MedicalEntity and subtypes
-
-														if ( isset($provider_expertise) ) {
+														// MedicalEntity and subtypes
 
 															$provider_expertise_MedicalEntity = $provider_expertise['MedicalEntity'];
 
@@ -17189,7 +17181,7 @@
 
 																}
 
-														}
+													}
 
 												}
 
@@ -17264,11 +17256,11 @@
 														$provider_url, // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ) // Nesting level within the main schema
-													);
+													) ?? null;
 
-													// MedicalWebPage
+													if ( isset($provider_clinical_resource) ) {
 
-														if ( isset($provider_clinical_resource) ) {
+														// MedicalWebPage
 
 															$provider_clinical_resource_MedicalWebPage = $provider_clinical_resource['MedicalWebPage'];
 
@@ -17285,11 +17277,7 @@
 
 																}
 
-														}
-
-													// CreativeWork and subtypes
-
-														if ( isset($provider_clinical_resource) ) {
+														// CreativeWork and subtypes
 
 															$provider_clinical_resource_CreativeWork = $provider_clinical_resource['CreativeWork'];
 
@@ -17306,7 +17294,7 @@
 
 																}
 
-														}
+													}
 
 												}
 
@@ -17375,33 +17363,29 @@
 														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
 														$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
 														$Service_i // int // Optional // Iteration counter for treatment-as-Service
-													);
+													) ?? null;
 
-													// Get URLs for significantLink property
+													if (
+														isset($provider_condition)
+														&&
+														$provider_condition
+													) {
 
-														$provider_condition = $provider_condition ?? null;
-
-														if ( $provider_condition ) {
+														// Get URLs for significantLink property
 
 															$provider_condition_significantLink = uamswp_fad_schema_property_values(
 																$provider_condition, // array // Required // Property values from which to extract specific values
 																array( 'url' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
-
-													// Get names for keywords property
-
-														$provider_condition = $provider_condition ?? null;
-
-														if ( $provider_condition ) {
+														// Get names for keywords property
 
 															$provider_condition_keywords = uamswp_fad_schema_property_values(
 																$provider_condition, // array // Required // Property values from which to extract specific values
 																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
+													}
 
 												}
 
@@ -17471,33 +17455,29 @@
 														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
 														$Service_i, // int // Optional // Iteration counter for treatment-as-Service
 														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-													);
+													) ?? null;
 
-													// Get URLs for significantLink property
+													if (
+														isset($provider_availableService)
+														&&
+														$provider_availableService
+													) {
 
-														$provider_availableService = $provider_availableService ?? null;
-
-														if ( $provider_availableService ) {
+														// Get URLs for significantLink property
 
 															$provider_availableService_significantLink = uamswp_fad_schema_property_values(
 																$provider_availableService, // array // Required // Property values from which to extract specific values
 																array( 'url' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
-
-													// Get names for keywords property
-
-														$provider_availableService = $provider_availableService ?? null;
-
-														if ( $provider_availableService ) {
+														// Get names for keywords property
 
 															$provider_availableService_keywords = uamswp_fad_schema_property_values(
 																$provider_availableService, // array // Required // Property values from which to extract specific values
 																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
+													}
 
 												}
 
@@ -26163,11 +26143,11 @@
 															$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 															($nesting_level + 1), // int // Optional // Nesting level within the main schema
 															array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
-														);
+														) ?? null;
 
-														// MedicalWebPage
+														if ( isset($location_provider) ) {
 
-															if ( isset($location_provider) ) {
+															// MedicalWebPage
 
 																$location_provider_MedicalWebPage = $location_provider['MedicalWebPage'];
 
@@ -26184,11 +26164,7 @@
 
 																	}
 
-															}
-
-														// MedicalBusiness and subtypes
-
-															if ( isset($location_provider) ) {
+															// MedicalBusiness and subtypes
 
 																$location_provider_MedicalBusiness = $location_provider['MedicalBusiness'];
 
@@ -26218,11 +26194,7 @@
 
 																	}
 
-															}
-
-														// Person
-
-															if ( isset($location_provider) ) {
+															// Person
 
 																$location_provider_Person = $location_provider['Person'];
 
@@ -26252,7 +26224,7 @@
 
 																	}
 
-															}
+														}
 
 													}
 
@@ -26328,11 +26300,11 @@
 															$location_url, // Page URL
 															$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 															($nesting_level + 1) // Nesting level within the main schema
-														);
+														) ?? null;
 
-														// MedicalWebPage
+														if ( isset($location_descendant_location) ) {
 
-															if ( isset($location_descendant_location) ) {
+															// MedicalWebPage
 
 																$location_descendant_location_MedicalWebPage = $location_descendant_location['MedicalWebPage'] ?? null;
 
@@ -26349,11 +26321,7 @@
 
 																	}
 
-															}
-
-														// LocalBusiness and subtypes
-
-															if ( isset($location_descendant_location) ) {
+															// LocalBusiness and subtypes
 
 																$location_descendant_location_LocalBusiness = $location_descendant_location['LocalBusiness'] ?? null;
 
@@ -26370,7 +26338,7 @@
 
 																	}
 
-															}
+														}
 
 													}
 
@@ -26432,11 +26400,11 @@
 														'', // string // Required // Fake subpage slug
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ) // Nesting level within the main schema
-													);
+													) ?? null;
 
-													// MedicalWebPage
+													if ( isset($location_expertise) ) {
 
-														if ( isset($location_expertise) ) {
+														// MedicalWebPage
 
 															$location_expertise_MedicalWebPage = $location_expertise['MedicalWebPage'];
 
@@ -26453,11 +26421,7 @@
 
 																}
 
-														}
-
-													// MedicalEntity and subtypes
-
-														if ( isset($location_expertise) ) {
+														// MedicalEntity and subtypes
 
 															$location_expertise_MedicalEntity = $location_expertise['MedicalEntity'];
 
@@ -26474,7 +26438,7 @@
 
 																}
 
-														}
+													}
 
 												}
 
@@ -26540,11 +26504,11 @@
 														$location_url, // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ) // Nesting level within the main schema
-													);
+													) ?? null;
 
-													// MedicalWebPage
+													if ( isset($location_clinical_resource) ) {
 
-														if ( isset($location_clinical_resource) ) {
+														// MedicalWebPage
 
 															$location_clinical_resource_MedicalWebPage = $location_clinical_resource['MedicalWebPage'];
 
@@ -26561,11 +26525,7 @@
 
 																}
 
-														}
-
-													// CreativeWork and subtypes
-
-														if ( isset($location_clinical_resource) ) {
+														// CreativeWork and subtypes
 
 															$location_clinical_resource_CreativeWork = $location_clinical_resource['CreativeWork'];
 
@@ -26582,7 +26542,7 @@
 
 																}
 
-														}
+													}
 
 												}
 
@@ -26644,33 +26604,29 @@
 														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
 														$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
 														$Service_i // int // Optional // Iteration counter for treatment-as-Service
-													);
+													) ?? null;
 
-													// Get URLs for significantLink property
+													if (
+														isset($location_condition)
+														&&
+														$location_condition
+													) {
 
-														$location_condition = $location_condition ?? null;
-
-														if ( $location_condition ) {
+														// Get URLs for significantLink property
 
 															$location_condition_significantLink = uamswp_fad_schema_property_values(
 																$location_condition, // array // Required // Property values from which to extract specific values
 																array( 'url' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
-
-													// Get names for keywords property
-
-														$location_condition = $location_condition ?? null;
-
-														if ( $location_condition ) {
+														// Get names for keywords property
 
 															$location_condition_keywords = uamswp_fad_schema_property_values(
 																$location_condition, // array // Required // Property values from which to extract specific values
 																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
+													}
 
 												}
 
@@ -26730,33 +26686,29 @@
 														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
 														$Service_i, // int // Optional // Iteration counter for treatment-as-Service
 														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-													);
+													) ?? null;
 
-													// Get URLs for significantLink property
+													if (
+														isset($location_availableService)
+														&&
+														$location_availableService
+													) {
 
-														$location_availableService_significantLink = null;
-
-														if ( $location_availableService ) {
+														// Get URLs for significantLink property
 
 															$location_availableService_significantLink = uamswp_fad_schema_property_values(
 																$location_availableService, // array // Required // Property values from which to extract specific values
 																array( 'url' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
-
-													// Get names for keywords property
-
-														$location_availableService = $location_availableService ?? null;
-
-														if ( $location_availableService ) {
+														// Get names for keywords property
 
 															$location_availableService_keywords = uamswp_fad_schema_property_values(
 																$location_availableService, // array // Required // Property values from which to extract specific values
 																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
+													}
 
 												}
 
@@ -33595,11 +33547,11 @@
 															$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 															($nesting_level + 1), // int // Optional // Nesting level within the main schema
 															array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
-														);
+														) ?? null;
 
-														// MedicalWebPage
+														if ( isset($expertise_provider) ) {
 
-															if ( isset($expertise_provider) ) {
+															// MedicalWebPage
 
 																$expertise_provider_MedicalWebPage = $expertise_provider['MedicalWebPage'];
 
@@ -33616,11 +33568,7 @@
 
 																	}
 
-															}
-
-														// MedicalBusiness and subtypes
-
-															if ( isset($expertise_provider) ) {
+															// MedicalBusiness and subtypes
 
 																$expertise_provider_MedicalBusiness = $expertise_provider['MedicalBusiness'];
 
@@ -33650,11 +33598,7 @@
 
 																	}
 
-															}
-
-														// Person
-
-															if ( isset($expertise_provider) ) {
+															// Person
 
 																$expertise_provider_Person = $expertise_provider['Person'];
 
@@ -33684,7 +33628,7 @@
 
 																	}
 
-															}
+														}
 
 													}
 
@@ -33748,11 +33692,11 @@
 														$expertise_url, // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ) // Nesting level within the main schema
-													);
+													) ?? null;
 
-													// MedicalWebPage
+													if ( isset($expertise_location) ) {
 
-														if ( isset($expertise_location) ) {
+														// MedicalWebPage
 
 															$expertise_location_MedicalWebPage = $expertise_location['MedicalWebPage'];
 
@@ -33769,11 +33713,7 @@
 
 																}
 
-														}
-
-													// LocalBusiness and subtypes
-
-														if ( isset($expertise_location) ) {
+														// LocalBusiness and subtypes
 
 															$expertise_location_LocalBusiness = $expertise_location['LocalBusiness'];
 
@@ -33790,7 +33730,7 @@
 
 																}
 
-														}
+													}
 
 												}
 
@@ -33881,11 +33821,11 @@
 														'', // string // Required // Fake subpage slug
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ) // Nesting level within the main schema
-													);
+													) ?? null;
 
-													// MedicalWebPage
+													if ( isset($expertise_descendant_expertise) ) {
 
-														if ( isset($expertise_descendant_expertise) ) {
+														// MedicalWebPage
 
 															$expertise_descendant_expertise_MedicalWebPage = $expertise_descendant_expertise['MedicalWebPage'];
 
@@ -33902,11 +33842,7 @@
 
 																}
 
-														}
-
-													// MedicalEntity and subtypes
-
-														if ( isset($expertise_descendant_expertise) ) {
+														// MedicalEntity and subtypes
 
 															$expertise_descendant_expertise_MedicalEntity = $expertise_descendant_expertise['MedicalEntity'];
 
@@ -33923,7 +33859,7 @@
 
 																}
 
-														}
+													}
 
 												}
 
@@ -33989,11 +33925,11 @@
 														'', // string // Required // Fake subpage slug
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ) // Nesting level within the main schema
-													);
+													) ?? null;
 
-													// MedicalWebPage
+													if ( isset($expertise_related_expertise) ) {
 
-														if ( isset($expertise_related_expertise) ) {
+														// MedicalWebPage
 
 															$expertise_related_expertise_MedicalWebPage = $expertise_related_expertise['MedicalWebPage'];
 
@@ -34010,11 +33946,7 @@
 
 																}
 
-														}
-
-													// MedicalEntity and subtypes
-
-														if ( isset($expertise_related_expertise) ) {
+														// MedicalEntity and subtypes
 
 															$expertise_related_expertise_MedicalEntity = $expertise_related_expertise['MedicalEntity'];
 
@@ -34031,7 +33963,7 @@
 
 																}
 
-														}
+													}
 
 												}
 
@@ -34097,11 +34029,11 @@
 														$expertise_url, // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ) // Nesting level within the main schema
-													);
+													) ?? null;
 
-													// MedicalWebPage
+													if ( isset($expertise_clinical_resource) ) {
 
-														if ( isset($expertise_clinical_resource) ) {
+														// MedicalWebPage
 
 															$expertise_clinical_resource_MedicalWebPage = $expertise_clinical_resource['MedicalWebPage'];
 
@@ -34118,11 +34050,7 @@
 
 																}
 
-														}
-
-													// CreativeWork and subtypes
-
-														if ( isset($expertise_clinical_resource) ) {
+														// CreativeWork and subtypes
 
 															$expertise_clinical_resource_CreativeWork = $expertise_clinical_resource['CreativeWork'];
 
@@ -34139,7 +34067,7 @@
 
 																}
 
-														}
+													}
 
 												}
 
@@ -34203,33 +34131,29 @@
 														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
 														$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
 														$Service_i // int // Optional // Iteration counter for treatment-as-Service
-													);
+													) ?? null;
 
-													// Get URLs for significantLink property
+													if (
+														isset($expertise_condition)
+														&&
+														$expertise_condition
+													) {
 
-														$expertise_condition = $expertise_condition ?? null;
-
-														if ( $expertise_condition ) {
+														// Get URLs for significantLink property
 
 															$expertise_condition_significantLink = uamswp_fad_schema_property_values(
 																$expertise_condition, // array // Required // Property values from which to extract specific values
 																array( 'url' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
-
-													// Get names for keywords property
-
-														$expertise_condition = $expertise_condition ?? null;
-
-														if ( $expertise_condition ) {
+														// Get names for keywords property
 
 															$expertise_condition_keywords = uamswp_fad_schema_property_values(
 																$expertise_condition, // array // Required // Property values from which to extract specific values
 																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
+													}
 
 												}
 
@@ -34293,33 +34217,29 @@
 														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
 														$Service_i, // int // Optional // Iteration counter for treatment-as-Service
 														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-													);
+													) ?? null;
 
-													// Get URLs for significantLink property
+													if (
+														isset($expertise_availableService)
+														&&
+														$expertise_availableService
+													) {
 
-														$expertise_availableService = $expertise_availableService ?? null;
-
-														if ( $expertise_availableService ) {
+														// Get URLs for significantLink property
 
 															$expertise_availableService_significantLink = uamswp_fad_schema_property_values(
 																$expertise_availableService, // array // Required // Property values from which to extract specific values
 																array( 'url' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
-
-													// Get names for keywords property
-
-														$expertise_availableService = $expertise_availableService ?? null;
-
-														if ( $expertise_availableService ) {
+														// Get names for keywords property
 
 															$expertise_availableService_keywords = uamswp_fad_schema_property_values(
 																$expertise_availableService, // array // Required // Property values from which to extract specific values
 																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
+													}
 
 												}
 
@@ -38022,11 +37942,11 @@
 															$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 															($nesting_level + 1), // int // Optional // Nesting level within the main schema
 															array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
-														);
+														) ?? null;
 
-														// MedicalWebPage
+														if ( isset($clinical_resource_provider) ) {
 
-															if ( isset($clinical_resource_provider) ) {
+															// MedicalWebPage
 
 																$clinical_resource_provider_MedicalWebPage = $clinical_resource_provider['MedicalWebPage'];
 
@@ -38043,11 +37963,7 @@
 
 																	}
 
-															}
-
-														// MedicalBusiness and subtypes
-
-															if ( isset($clinical_resource_provider) ) {
+															// MedicalBusiness and subtypes
 
 																$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider['MedicalBusiness'];
 
@@ -38077,11 +37993,7 @@
 
 																	}
 
-															}
-
-														// Person
-
-															if ( isset($clinical_resource_provider) ) {
+															// Person
 
 																$clinical_resource_provider_Person = $clinical_resource_provider['Person'];
 
@@ -38111,7 +38023,7 @@
 
 																	}
 
-															}
+														}
 
 													}
 
@@ -38179,9 +38091,9 @@
 														( $nesting_level + 1 ) // Nesting level within the main schema
 													);
 
-													// MedicalWebPage
+													if ( isset($clinical_resource_location) ) {
 
-														if ( isset($clinical_resource_location) ) {
+														// MedicalWebPage
 
 															$clinical_resource_location_MedicalWebPage = $clinical_resource_location['MedicalWebPage'];
 
@@ -38198,11 +38110,7 @@
 
 																}
 
-														}
-
-													// LocalBusiness and subtypes
-
-														if ( isset($clinical_resource_location) ) {
+														// LocalBusiness and subtypes
 
 															$clinical_resource_location_LocalBusiness = $clinical_resource_location['LocalBusiness'];
 
@@ -38219,7 +38127,7 @@
 
 																}
 
-														}
+													}
 
 												}
 
@@ -38287,11 +38195,11 @@
 														'', // string // Required // Fake subpage slug
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ) // Nesting level within the main schema
-													);
+													) ?? null;
 
-													// MedicalWebPage
+													if ( isset($clinical_resource_expertise) ) {
 
-														if ( isset($clinical_resource_expertise) ) {
+														// MedicalWebPage
 
 															$clinical_resource_expertise_MedicalWebPage = $clinical_resource_expertise['MedicalWebPage'];
 
@@ -38308,11 +38216,7 @@
 
 																}
 
-														}
-
-													// MedicalEntity and subtypes
-
-														if ( isset($clinical_resource_expertise) ) {
+														// MedicalEntity and subtypes
 
 															$clinical_resource_expertise_MedicalEntity = $clinical_resource_expertise['MedicalEntity'];
 
@@ -38329,7 +38233,7 @@
 
 																}
 
-														}
+													}
 
 												}
 
@@ -38396,11 +38300,11 @@
 														$clinical_resource_url, // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ) // Nesting level within the main schema
-													);
+													) ?? null;
 
-													// MedicalWebPage
+													if ( isset($clinical_resource_related_clinical_resource) ) {
 
-														if ( isset($clinical_resource_related_clinical_resource) ) {
+														// MedicalWebPage
 
 															$clinical_resource_related_clinical_resource_MedicalWebPage = $clinical_resource_related_clinical_resource['MedicalWebPage'];
 
@@ -38417,11 +38321,7 @@
 
 																}
 
-														}
-
-													// CreativeWork and subtypes
-
-														if ( isset($clinical_resource_related_clinical_resource) ) {
+														// CreativeWork and subtypes
 
 															$clinical_resource_related_clinical_resource_CreativeWork = $clinical_resource_related_clinical_resource['CreativeWork'];
 
@@ -38438,7 +38338,7 @@
 
 																}
 
-														}
+													}
 
 												}
 
@@ -38506,33 +38406,29 @@
 														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
 														$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
 														$Service_i // int // Optional // Iteration counter for treatment-as-Service
-													);
+													) ?? null;
 
-													// Get URLs for significantLink property
+													if (
+														isset($clinical_resource_condition)
+														&&
+														$clinical_resource_condition
+													) {
 
-														$clinical_resource_condition = $clinical_resource_condition ?? null;
-
-														if ( $clinical_resource_condition ) {
+														// Get URLs for significantLink property
 
 															$clinical_resource_condition_significantLink = uamswp_fad_schema_property_values(
 																$clinical_resource_condition, // array // Required // Property values from which to extract specific values
 																array( 'url' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
-
-													// Get names for keywords property
-
-														$clinical_resource_condition = $clinical_resource_condition ?? null;
-
-														if ( $clinical_resource_condition ) {
+														// Get names for keywords property
 
 															$clinical_resource_condition_keywords = uamswp_fad_schema_property_values(
 																$clinical_resource_condition, // array // Required // Property values from which to extract specific values
 																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
+													}
 
 												}
 
@@ -38600,33 +38496,29 @@
 														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
 														$Service_i, // int // Optional // Iteration counter for treatment-as-Service
 														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-													);
+													) ?? null;
 
-													// Get URLs for significantLink property
+													if (
+														isset($clinical_resource_availableService)
+														&&
+														$clinical_resource_availableService
+													) {
 
-														$clinical_resource_availableService = $clinical_resource_availableService ?? null;
-
-														if ( $clinical_resource_availableService ) {
+														// Get URLs for significantLink property
 
 															$clinical_resource_availableService_significantLink = uamswp_fad_schema_property_values(
 																$clinical_resource_availableService, // array // Required // Property values from which to extract specific values
 																array( 'url' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
-
-													// Get names for keywords property
-
-														$clinical_resource_availableService = $clinical_resource_availableService ?? null;
-
-														if ( $clinical_resource_availableService ) {
+														// Get names for keywords property
 
 															$clinical_resource_availableService_keywords = uamswp_fad_schema_property_values(
 																$clinical_resource_availableService, // array // Required // Property values from which to extract specific values
 																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 															);
 
-														}
+													}
 
 												}
 
