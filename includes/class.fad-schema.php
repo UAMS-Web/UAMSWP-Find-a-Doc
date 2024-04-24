@@ -17380,13 +17380,6 @@
 														$provider_condition
 													) {
 
-														// Get URLs for significantLink property
-
-															$provider_condition_significantLink = uamswp_fad_schema_property_values(
-																$provider_condition, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
-
 														// Get names for keywords property
 
 															$provider_condition_keywords = uamswp_fad_schema_property_values(
@@ -17471,13 +17464,6 @@
 														&&
 														$provider_availableService
 													) {
-
-														// Get URLs for significantLink property
-
-															$provider_availableService_significantLink = uamswp_fad_schema_property_values(
-																$provider_availableService, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
 
 														// Get names for keywords property
 
@@ -26612,13 +26598,6 @@
 														$location_condition
 													) {
 
-														// Get URLs for significantLink property
-
-															$location_condition_significantLink = uamswp_fad_schema_property_values(
-																$location_condition, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
-
 														// Get names for keywords property
 
 															$location_condition_keywords = uamswp_fad_schema_property_values(
@@ -26693,13 +26672,6 @@
 														&&
 														$location_availableService
 													) {
-
-														// Get URLs for significantLink property
-
-															$location_availableService_significantLink = uamswp_fad_schema_property_values(
-																$location_availableService, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
 
 														// Get names for keywords property
 
@@ -34133,13 +34105,6 @@
 														$expertise_condition
 													) {
 
-														// Get URLs for significantLink property
-
-															$expertise_condition_significantLink = uamswp_fad_schema_property_values(
-																$expertise_condition, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
-
 														// Get names for keywords property
 
 															$expertise_condition_keywords = uamswp_fad_schema_property_values(
@@ -34218,13 +34183,6 @@
 														&&
 														$expertise_availableService
 													) {
-
-														// Get URLs for significantLink property
-
-															$expertise_availableService_significantLink = uamswp_fad_schema_property_values(
-																$expertise_availableService, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
 
 														// Get names for keywords property
 
@@ -38399,13 +38357,6 @@
 														$clinical_resource_condition
 													) {
 
-														// Get URLs for significantLink property
-
-															$clinical_resource_condition_significantLink = uamswp_fad_schema_property_values(
-																$clinical_resource_condition, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
-
 														// Get names for keywords property
 
 															$clinical_resource_condition_keywords = uamswp_fad_schema_property_values(
@@ -38488,13 +38439,6 @@
 														&&
 														$clinical_resource_availableService
 													) {
-
-														// Get URLs for significantLink property
-
-															$clinical_resource_availableService_significantLink = uamswp_fad_schema_property_values(
-																$clinical_resource_availableService, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
 
 														// Get names for keywords property
 
