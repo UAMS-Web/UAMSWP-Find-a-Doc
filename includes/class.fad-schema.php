@@ -37356,6 +37356,7 @@
 								$clinical_resource_mainEntityOfPage = '';
 								$clinical_resource_name = '';
 								$clinical_resource_nci_query = '';
+								$clinical_resource_related_clinical_resource = null;
 								$clinical_resource_representativeOfPage = '';
 								$clinical_resource_sameAs = '';
 								$clinical_resource_sourceOrganization = '';
@@ -38154,7 +38155,7 @@
 
 										// List of properties that reference clinical resources
 
-											$clinical_resource_clinical_resource_common = array(
+											$clinical_resource_related_clinical_resource_common = array(
 												'about',
 												'mentions',
 												'relatedLink',
@@ -38168,7 +38169,7 @@
 													&&
 													array_intersect(
 														$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
-														$clinical_resource_clinical_resource_common
+														$clinical_resource_related_clinical_resource_common
 													)
 												)
 												||
@@ -38177,7 +38178,7 @@
 													&&
 													array_intersect(
 														$clinical_resource_properties_map[$MedicalEntity_type]['properties'],
-														$clinical_resource_clinical_resource_common
+														$clinical_resource_related_clinical_resource_common
 													)
 												)
 											)
@@ -38187,27 +38188,27 @@
 
 											// Get related clinical resources
 
-												if ( !isset($clinical_resource_clinical_resource_list) ) {
+												if ( !isset($clinical_resource_related_clinical_resource_list) ) {
 
-													$clinical_resource_clinical_resource_list = get_field( 'clinical_resource_related', $entity ) ?? array();
+													$clinical_resource_related_clinical_resource_list = get_field( 'clinical_resource_related', $entity ) ?? array();
 
 												}
 
-												if ( !isset($clinical_resource_clinical_resource_list_max) ) {
+												if ( !isset($clinical_resource_related_clinical_resource_list_max) ) {
 
 													include( UAMS_FAD_PATH . '/templates/parts/vars/sys/posts-per-page/clinical-resource.php' ); // General maximum number of clinical resource items to display on a fake subpage (or section)
-													$clinical_resource_clinical_resource_list_max = $clinical_resource_posts_per_page_section;
+													$clinical_resource_related_clinical_resource_list_max = $clinical_resource_posts_per_page_section;
 
 												}
 
 											// Format values
 
-												if ( $clinical_resource_clinical_resource_list ) {
+												if ( $clinical_resource_related_clinical_resource_list ) {
 
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-													$clinical_resource_clinical_resource = uamswp_fad_schema_clinical_resource(
-														$clinical_resource_clinical_resource_list, // List of IDs of the clinical resource items
+													$clinical_resource_related_clinical_resource = uamswp_fad_schema_clinical_resource(
+														$clinical_resource_related_clinical_resource_list, // List of IDs of the clinical resource items
 														$clinical_resource_url, // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ) // Nesting level within the main schema
@@ -38217,16 +38218,16 @@
 
 												// MedicalWebPage
 
-													$clinical_resource_clinical_resource_MedicalWebPage = $clinical_resource_clinical_resource['MedicalWebPage'];
+													$clinical_resource_related_clinical_resource_MedicalWebPage = $clinical_resource_related_clinical_resource['MedicalWebPage'];
 
 													// Get URLs for significantLink property
 
-														$clinical_resource_clinical_resource_MedicalWebPage = $clinical_resource_clinical_resource_MedicalWebPage ?? null;
+														$clinical_resource_related_clinical_resource_MedicalWebPage = $clinical_resource_related_clinical_resource_MedicalWebPage ?? null;
 
-														if ( $clinical_resource_clinical_resource_MedicalWebPage ) {
+														if ( $clinical_resource_related_clinical_resource_MedicalWebPage ) {
 
-															$clinical_resource_clinical_resource_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																$clinical_resource_clinical_resource_MedicalWebPage, // array // Required // Property values from which to extract specific values
+															$clinical_resource_related_clinical_resource_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																$clinical_resource_related_clinical_resource_MedicalWebPage, // array // Required // Property values from which to extract specific values
 																array( 'url' ) // mixed // Required // List of properties from which to collect values
 															);
 
@@ -38234,16 +38235,16 @@
 
 												// CreativeWork and subtypes
 
-													$clinical_resource_clinical_resource_CreativeWork = $clinical_resource_clinical_resource['CreativeWork'];
+													$clinical_resource_related_clinical_resource_CreativeWork = $clinical_resource_related_clinical_resource['CreativeWork'];
 
 													// Get names for keywords property
 
-														$clinical_resource_clinical_resource_CreativeWork = $clinical_resource_clinical_resource_CreativeWork ?? null;
+														$clinical_resource_related_clinical_resource_CreativeWork = $clinical_resource_related_clinical_resource_CreativeWork ?? null;
 
-														if ( $clinical_resource_clinical_resource_CreativeWork ) {
+														if ( $clinical_resource_related_clinical_resource_CreativeWork ) {
 
-															$clinical_resource_clinical_resource_CreativeWork_keywords = uamswp_fad_schema_property_values(
-																$clinical_resource_clinical_resource_CreativeWork, // array // Required // Property values from which to extract specific values
+															$clinical_resource_related_clinical_resource_CreativeWork_keywords = uamswp_fad_schema_property_values(
+																$clinical_resource_related_clinical_resource_CreativeWork, // array // Required // Property values from which to extract specific values
 																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 															);
 
