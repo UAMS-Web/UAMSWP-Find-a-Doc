@@ -37580,6 +37580,7 @@
 								$clinical_resource_introduction = null;
 								$clinical_resource_introduction_count = null;
 								$CreativeWork_id = '';
+								$CreativeWork_subtype = null;
 								$CreativeWork_type = null;
 								$clinical_resource_image = '';
 								$clinical_resource_isAccessibleForFree = '';
@@ -37770,9 +37771,23 @@
 
 													}
 
+													// Get relevant schema type based on DigitalDocument subtype
+
+														if ( $CreativeWork_type == 'DigitalDocument' ) {
+
+															// Get the field value
+
+																$CreativeWork_subtype = get_field( 'clinical_resource_document_subtype', $entity ) ?? null;
+
+														}
+
 												// Add to item values
 
-													if ( $CreativeWork_type ) {
+													if ( $CreativeWork_subtype ) {
+
+														$clinical_resource_item_CreativeWork['@type'] = $CreativeWork_subtype;
+
+													} elseif ( $CreativeWork_type ) {
 
 														$clinical_resource_item_CreativeWork['@type'] = $CreativeWork_type;
 
