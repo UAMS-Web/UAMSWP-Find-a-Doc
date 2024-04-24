@@ -22285,24 +22285,11 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// mainEntityOfPage [WIP]
+								// mainEntityOfPage [excluded; common properties]
 
 									/**
-									 * Indicates a page (or other CreativeWork) for which this thing is the main
-									 * entity being described. See background notes for details.
-									 *
-									 * Inverse property:
-									 *
-									 *      - mainEntity
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - CreativeWork
-									 *      - URL
-									 *
-									 * Used on these types:
-									 *
-									 *      - Thing
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// makesOffer [WIP]
@@ -44899,24 +44886,11 @@
 									 * included.
 									 */
 
-								// mainEntityOfPage [excluded]
+								// mainEntityOfPage [excluded; common properties]
 
 									/**
-									 * Indicates a page (or other CreativeWork) for which this thing is the main
-									 * entity being described. See background notes for details.
-									 *
-									 * Inverse property:
-									 *
-									 *      - mainEntity
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - CreativeWork
-									 *      - URL
-									 *
-									 * Used on these types:
-									 *
-									 *      - Thing
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// medicineSystem [excluded]
@@ -46607,24 +46581,11 @@
 									 *      - Text
 									 */
 
-								// mainEntityOfPage [excluded]
+								// mainEntityOfPage [excluded; common properties]
 
 									/**
-									 * Indicates a page (or other CreativeWork) for which this thing is the main
-									 * entity being described. See background notes for details.
-									 *
-									 * Inverse property:
-									 *
-									 *      - mainEntity
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - CreativeWork
-									 *      - URL
-									 *
-									 * Used on these types:
-									 *
-									 *      - Thing
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// medicineSystem [WIP]
