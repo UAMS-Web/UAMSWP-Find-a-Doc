@@ -38985,6 +38985,81 @@
 
 												$clinical_resource_about_CreativeWork = array();
 
+											// Merge in the associated providers
+
+												if (
+													isset($clinical_resource_provider_about)
+													&&
+													$clinical_resource_provider_about
+												) {
+
+													$clinical_resource_about_CreativeWork = array_merge(
+														$clinical_resource_about_CreativeWork,
+														$clinical_resource_provider_about
+													);
+
+												}
+
+											// Merge in the associated locations
+
+												if (
+													isset($clinical_resource_location_about)
+													&&
+													$clinical_resource_location_about
+												) {
+
+													$clinical_resource_about_CreativeWork = array_merge(
+														$clinical_resource_about_CreativeWork,
+														$clinical_resource_location_about
+													);
+
+												}
+
+											// Merge in the associated areas of expertise
+
+												if (
+													isset($clinical_resource_expertise_about)
+													&&
+													$clinical_resource_expertise_about
+												) {
+
+													$clinical_resource_about_CreativeWork = array_merge(
+														$clinical_resource_about_CreativeWork,
+														$clinical_resource_expertise_about
+													);
+
+												}
+
+											// Merge in the associated conditions
+
+												if (
+													isset($clinical_resource_condition)
+													&&
+													$clinical_resource_condition
+												) {
+
+													$clinical_resource_about_CreativeWork = array_merge(
+														$clinical_resource_about_CreativeWork,
+														$clinical_resource_condition
+													);
+
+												}
+
+											// Merge in the associated treatments
+
+												if (
+													isset($clinical_resource_treatment)
+													&&
+													$clinical_resource_treatment
+												) {
+
+													$clinical_resource_about_CreativeWork = array_merge(
+														$clinical_resource_about_CreativeWork,
+														$clinical_resource_treatment
+													);
+
+												}
+
 										// Add to item values
 
 											// CreativeWork
