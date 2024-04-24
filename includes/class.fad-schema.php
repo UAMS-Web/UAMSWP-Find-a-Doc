@@ -48000,10 +48000,11 @@
 
 		}
 
-	// Get list of Schema.org subtypes
+	// Get a list of schema.org subtypes and URLs
 
-		function uamswp_fad_schema_subtypes(
-			array &$types, // array // Required // List of Schema.org types
+		function uamswp_fad_schema_subtypes_and_urls(
+			array $types_no_subtypes, // array // Required // List of Schema.org types for which to not get the subtypes
+			array &$types_for_subtypes = array(), // array // Optional // List of Schema.org types for which to get the subtypes
 			&$urls = array() // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
 		) {
 
@@ -48031,51 +48032,100 @@
 
 				}
 
-			// Schema.org types and properties
+			// Get the subtypes
 
-				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/schema-org.php' );
+				if ( $types_for_subtypes ) {
 
-			foreach ( $types as $item ) {
-
-				if ( $item ) {
-
-					$subtypes = $schema_org_types[$item]['subTypes'] ?? array();
-					$subtypes = !empty($subtypes) ? $subtypes : array();
-					$subtypes = is_array($subtypes) ? $subtypes : array($subtypes);
-
-					uamswp_fad_schema_subtypes($subtypes);
-
-					$types = array_merge(
-						$types,
-						$subtypes
+					uamswp_fad_schema_subtypes(
+						$types_for_subtypes // array // Required // List of Schema.org types for which to get the subtypes
 					);
 
-					// Add schema.org URLs to list
+					// Merge the two lists of types
 
-						$urls[] = 'https://schema.org/' . $item;
-
-						foreach ( $subtypes as $subtype ) {
-
-							if ( $subtype ) {
-
-								$urls[] = 'https://schema.org/' . $subtype;
-
-							}
-
-						}
+						$types_no_subtypes = array_merge(
+							$types_no_subtypes,
+							$types_for_subtypes
+						);
 
 				}
-			}
+
+			// Handle the remainder of the types
+
+				// Add schema.org URLs to list
+
+					foreach ( $types_no_subtypes as $item ) {
+
+						if ( $item ) {
+
+							// Add schema.org URLs to list
+
+								$urls[] = 'https://schema.org/' . $item;
+
+						}
+					}
 
 			// Clean up the arrays
 
-				$types = $types ? array_filter($types) : array();
-				$types = $types ? array_unique( $types, SORT_REGULAR ) : array();
-				$types = $types ? array_values($types) : array();
+				$types_no_subtypes = $types_no_subtypes ? array_filter($types_no_subtypes) : array();
+				$types_no_subtypes = $types_no_subtypes ? array_unique( $types_no_subtypes, SORT_REGULAR ) : array();
+				$types_no_subtypes = $types_no_subtypes ? array_values($types_no_subtypes) : array();
 
 				$urls = $urls ? array_filter($urls) : array();
 				$urls = $urls ? array_unique( $urls, SORT_REGULAR ) : array();
 				$urls = $urls ? array_values($urls) : array();
+
+		}
+
+	// Get list of Schema.org subtypes
+
+		function uamswp_fad_schema_subtypes(
+			array &$types // array // Required // List of Schema.org types for which to get the subtypes
+		) {
+
+			// If the input is invalid, stop here
+
+				if ( !$types ) {
+
+					return;
+
+				}
+
+			// Schema.org types and properties
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/schema-org.php' );
+
+			// Get the subtypes
+
+				foreach ( $types as $item ) {
+
+					if ( $item ) {
+
+						// Get the subtypes of the current item
+
+							$subtypes = $schema_org_types[$item]['subTypes'] ?? array();
+							$subtypes = !empty($subtypes) ? $subtypes : array();
+
+						if ( $subtypes ) {
+
+							$subtypes = is_array($subtypes) ? $subtypes : array($subtypes);
+
+							uamswp_fad_schema_subtypes($subtypes);
+
+							$types = array_merge(
+								$types,
+								$subtypes
+							);
+
+						}
+
+					}
+				}
+
+			// Clean up the array
+
+				$types = $types ? array_filter($types) : array();
+				$types = $types ? array_unique( $types, SORT_REGULAR ) : array();
+				$types = $types ? array_values($types) : array();
 
 		}
 
