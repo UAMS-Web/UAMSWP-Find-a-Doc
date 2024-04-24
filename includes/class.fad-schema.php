@@ -26165,6 +26165,27 @@
 															array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
 														);
 
+														// MedicalWebPage
+
+															if ( isset($location_provider) ) {
+
+																$location_provider_MedicalWebPage = $location_provider['MedicalWebPage'];
+
+																// Get URLs for significantLink property
+
+																	$location_provider_MedicalWebPage = $location_provider_MedicalWebPage ?? null;
+
+																	if ( $location_provider_MedicalWebPage ) {
+
+																		$location_provider_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																			$location_provider_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																			array( 'url' ) // mixed // Required // List of properties from which to collect values
+																		);
+
+																	}
+
+															}
+
 														// MedicalBusiness and subtypes
 
 															if ( isset($location_provider) ) {
@@ -33576,6 +33597,27 @@
 															array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
 														);
 
+														// MedicalWebPage
+
+															if ( isset($expertise_provider) ) {
+
+																$expertise_provider_MedicalWebPage = $expertise_provider['MedicalWebPage'];
+
+																// Get URLs for significantLink property
+
+																	$expertise_provider_MedicalWebPage = $expertise_provider_MedicalWebPage ?? null;
+
+																	if ( $expertise_provider_MedicalWebPage ) {
+
+																		$expertise_provider_MedicalWebPagesignificantLink = uamswp_fad_schema_property_values(
+																			$expertise_provider_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																			array( 'url' ) // mixed // Required // List of properties from which to collect values
+																		);
+
+																	}
+
+															}
+
 														// MedicalBusiness and subtypes
 
 															if ( isset($expertise_provider) ) {
@@ -37981,6 +38023,27 @@
 															($nesting_level + 1), // int // Optional // Nesting level within the main schema
 															array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
 														);
+
+														// MedicalWebPage
+
+															if ( isset($clinical_resource_provider) ) {
+
+																$clinical_resource_provider_MedicalWebPage = $clinical_resource_provider['MedicalWebPage'];
+
+																// Get URLs for significantLink property
+
+																	$clinical_resource_provider_MedicalWebPage = $clinical_resource_provider_MedicalWebPage ?? null;
+
+																	if ( $clinical_resource_provider_MedicalWebPage ) {
+
+																		$clinical_resource_provider_MedicalWebPagesignificantLink = uamswp_fad_schema_property_values(
+																			$clinical_resource_provider_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																			array( 'url' ) // mixed // Required // List of properties from which to collect values
+																		);
+
+																	}
+
+															}
 
 														// MedicalBusiness and subtypes
 
