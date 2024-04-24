@@ -12363,18 +12363,25 @@
 					 * expanded later to include the subtypes of these high-level types.
 					 */
 
-					$uamshealth_website_valid_types = array(
-						'WebSite'
-					);
+					// List of Schema.org types for which to not get the subtypes
+
+						$uamshealth_website_valid_types = array();
+
+					// List of Schema.org types for which to get the subtypes
+
+						$uamshealth_website_valid_types_plus_subtypes = array(
+							'WebSite'
+						);
 
 					// Base array for schema.org type URLs
 
 						$uamshealth_website_valid_types_url = array();
 
-					// Get subtypes
+					// Get a list of schema.org subtypes and URLs
 
-						uamswp_fad_schema_subtypes(
-							$uamshealth_website_valid_types, // array // Required // List of Schema.org types
+						uamswp_fad_schema_subtypes_and_urls(
+							$uamshealth_website_valid_types, // array // Required // List of Schema.org types for which to not get the subtypes
+							$uamshealth_website_valid_types_plus_subtypes, // array // Optional // List of Schema.org types for which to get the subtypes
 							$uamshealth_website_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
 						);
 
@@ -13146,18 +13153,34 @@
 					 * expanded later to include the subtypes of these high-level types.
 					 */
 
-					$facility_valid_types = array(
-						'Place'
-					);
+					// List of Schema.org types for which to not get the subtypes
+
+						$facility_valid_types = array(
+							'Place'
+						);
+
+					// List of Schema.org types for which to get the subtypes
+
+						$facility_valid_types_plus_subtypes = array(
+							'CityHall',
+							'CivicStructure',
+							'Courthouse',
+							'EventVenue',
+							'GovernmentBuilding',
+							'Hospital',
+							'LegislativeBuilding',
+							'StadiumOrArena'
+						);
 
 					// Base array for schema.org type URLs
 
 						$facility_valid_types_url = array();
 
-					// Get subtypes
+					// Get a list of schema.org subtypes and URLs
 
-						uamswp_fad_schema_subtypes(
-							$facility_valid_types, // array // Required // List of Schema.org types
+						uamswp_fad_schema_subtypes_and_urls(
+							$facility_valid_types, // array // Required // List of Schema.org types for which to not get the subtypes
+							$facility_valid_types_plus_subtypes, // array // Optional // List of Schema.org types for which to get the subtypes
 							$facility_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
 						);
 
@@ -14811,16 +14834,26 @@
 					 * expanded later to include the subtypes of these high-level types.
 					 */
 
-					$provider_valid_types = array(
-						'MedicalBusiness',
-						'MedicalWebPage',
-						'Person'
-					);
+					// List of Schema.org types for which to not get the subtypes
+
+						$provider_valid_types = array(
+							'Person'
+						);
+
+					// List of Schema.org types for which to get the subtypes
+
+						$provider_valid_types_plus_subtypes = array(
+							'MedicalBusiness',
+							'MedicalWebPage'
+						);
 
 					// Check the output list against the original list of valid types
 
 						$output_types = array_intersect(
-							$provider_valid_types,
+							array_merge(
+								$provider_valid_types,
+								$provider_valid_types_plus_subtypes
+							),
 							$output_types
 						);
 
@@ -14843,14 +14876,20 @@
 							$provider_valid_types
 						);
 
+						$provider_valid_types_plus_subtypes = array_intersect(
+							$output_types,
+							$provider_valid_types_plus_subtypes
+						);
+
 					// Base array for schema.org type URLs
 
 						$provider_valid_types_url = array();
 
-					// Get subtypes
+					// Get a list of schema.org subtypes and URLs
 
-						uamswp_fad_schema_subtypes(
-							$provider_valid_types, // array // Required // List of Schema.org types
+						uamswp_fad_schema_subtypes_and_urls(
+							$provider_valid_types, // array // Required // List of Schema.org types for which to not get the subtypes
+							$provider_valid_types_plus_subtypes, // array // Optional // List of Schema.org types for which to get the subtypes
 							$provider_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
 						);
 
@@ -25234,20 +25273,27 @@
 					 * expanded later to include the subtypes of these high-level types.
 					 */
 
-					$location_valid_types = array(
-						'MedicalBusiness',
-						'MedicalWebPage',
-						'Hospital'
-					);
+					// List of Schema.org types for which to not get the subtypes
+
+						$location_valid_types = array();
+
+					// List of Schema.org types for which to get the subtypes
+
+						$location_valid_types_plus_subtypes = array(
+							'MedicalBusiness',
+							'MedicalWebPage',
+							'Hospital'
+						);
 
 					// Base array for schema.org type URLs
 
 						$location_valid_types_url = array();
 
-					// Get subtypes
+					// Get a list of schema.org subtypes and URLs
 
-						uamswp_fad_schema_subtypes(
-							$location_valid_types, // array // Required // List of Schema.org types
+						uamswp_fad_schema_subtypes_and_urls(
+							$location_valid_types, // array // Required // List of Schema.org types for which to not get the subtypes
+							$location_valid_types_plus_subtypes, // array // Optional // List of Schema.org types for which to get the subtypes
 							$location_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
 						);
 
@@ -32900,25 +32946,29 @@
 					 * added to the list of valid types.
 					 */
 
-					$expertise_valid_types = array(
-						'MedicalWebPage'
-					);
+					// List of Schema.org types for which to not get the subtypes
+
+						$expertise_valid_types = array(
+							'MedicalEntity'
+						);
+
+					// List of Schema.org types for which to get the subtypes
+
+						$expertise_valid_types_plus_subtypes = array(
+							'MedicalWebPage'
+						);
 
 					// Base array for schema.org type URLs
 
 						$expertise_valid_types_url = array();
 
-					// Get subtypes
+					// Get a list of schema.org subtypes and URLs
 
-						uamswp_fad_schema_subtypes(
-							$expertise_valid_types, // array // Required // List of Schema.org types
+						uamswp_fad_schema_subtypes_and_urls(
+							$expertise_valid_types, // array // Required // List of Schema.org types for which to not get the subtypes
+							$expertise_valid_types_plus_subtypes, // array // Optional // List of Schema.org types for which to get the subtypes
 							$expertise_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
 						);
-
-					// Add 'MedicalEntity' to the list of valid types
-
-						$expertise_valid_types[] = 'MedicalEntity';
-						$expertise_valid_types_url[] = 'https://schema.org/MedicalEntity';
 
 				// List of valid properties for each type
 
@@ -37338,22 +37388,30 @@
 					 * expanded later to include the subtypes of these high-level types.
 					 */
 
-					$clinical_resource_valid_types = array(
-						'Article',
-						'DigitalDocument',
-						'ImageObject',
-						'MedicalWebPage',
-						'VideoObject'
-					);
+					// List of Schema.org types for which to not get the subtypes
+
+						$clinical_resource_valid_types = array(
+							'Article',
+							'ImageObject',
+							'VideoObject'
+						);
+
+					// List of Schema.org types for which to get the subtypes
+
+						$clinical_resource_valid_types_plus_subtypes = array(
+							'DigitalDocument',
+							'MedicalWebPage'
+						);
 
 					// Base array for schema.org type URLs
 
 						$clinical_resource_valid_types_url = array();
 
-					// Get subtypes
+					// Get a list of schema.org subtypes and URLs
 
-						uamswp_fad_schema_subtypes(
-							$clinical_resource_valid_types, // array // Required // List of Schema.org types
+						uamswp_fad_schema_subtypes_and_urls(
+							$clinical_resource_valid_types, // array // Required // List of Schema.org types for which to not get the subtypes
+							$clinical_resource_valid_types_plus_subtypes, // array // Optional // List of Schema.org types for which to get the subtypes
 							$clinical_resource_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
 						);
 
@@ -44113,25 +44171,29 @@
 					 * expanded later to include the subtypes of these high-level types.
 					 */
 
-					$condition_valid_types = array(
-						'MedicalCondition'
-					);
+					// List of Schema.org types for which to not get the subtypes
+
+						$condition_valid_types = array(
+							'MedicalEntity'
+						);
+
+					// List of Schema.org types for which to get the subtypes
+
+						$condition_valid_types_plus_subtypes = array(
+							'MedicalCondition'
+						);
 
 					// Base array for schema.org type URLs
 
 						$condition_valid_types_url = array();
 
-					// Get subtypes
+					// Get a list of schema.org subtypes and URLs
 
-						uamswp_fad_schema_subtypes(
-							$condition_valid_types, // array // Required // List of Schema.org types
+						uamswp_fad_schema_subtypes_and_urls(
+							$condition_valid_types, // array // Required // List of Schema.org types for which to not get the subtypes
+							$condition_valid_types_plus_subtypes, // array // Optional // List of Schema.org types for which to get the subtypes
 							$condition_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
 						);
-
-					// Add fallback type to the list
-
-						$condition_valid_types[] = 'MedicalEntity';
-						$condition_valid_types_url[] = 'https://schema.org/MedicalEntity';
 
 				// List of valid properties for each type
 
@@ -45547,26 +45609,30 @@
 					 * expanded later to include the subtypes of these high-level types.
 					 */
 
-					$treatment_valid_types = array(
-						'MedicalTest',
-						'MedicalProcedure'
-					);
+					// List of Schema.org types for which to not get the subtypes
+
+						$treatment_valid_types = array(
+							'MedicalEntity'
+						);
+
+					// List of Schema.org types for which to get the subtypes
+
+						$treatment_valid_types_plus_subtypes = array(
+							'MedicalTest',
+							'MedicalProcedure'
+						);
 
 					// Base array for schema.org type URLs
 
 						$treatment_valid_types_url = array();
 
-					// Get subtypes
+					// Get a list of schema.org subtypes and URLs
 
-						uamswp_fad_schema_subtypes(
-							$treatment_valid_types, // array // Required // List of Schema.org types
+						uamswp_fad_schema_subtypes_and_urls(
+							$treatment_valid_types, // array // Required // List of Schema.org types for which to not get the subtypes
+							$treatment_valid_types_plus_subtypes, // array // Optional // List of Schema.org types for which to get the subtypes
 							$treatment_valid_types_url // string|array // Optional // Pre-existing list of schema.org URLs to which to add additional items
 						);
-
-					// Add fallback type to the list
-
-						$treatment_valid_types[] = 'MedicalEntity';
-						$treatment_valid_types_url[] = 'https://schema.org/MedicalEntity';
 
 				// List of valid properties for each type
 
