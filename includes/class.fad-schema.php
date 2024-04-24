@@ -18737,9 +18737,13 @@
 											if (
 												$schema_common_brand_MedicalWebPage
 												&&
-												in_array(
-													'brand',
-													$provider_properties_map[$MedicalWebPage_type]['properties']
+												(
+													isset($provider_item_MedicalWebPage)
+													&&
+													in_array(
+														'brand',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 											) {
 
@@ -22857,9 +22861,13 @@
 											if (
 												$schema_common_parentOrganization_MedicalWebPage
 												&&
-												in_array(
-													'parentOrganization',
-													$provider_properties_map[$MedicalWebPage_type]['properties']
+												(
+													isset($provider_item_MedicalWebPage)
+													&&
+													in_array(
+														'parentOrganization',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 											) {
 
@@ -25343,8 +25351,8 @@
 							// Eliminate PHP errors / reset variables
 
 								$location_item = array(); // Base array
-								$location_item_MedicalWebPage = array(); // Base MedicalWebPage array
-								$location_item_LocalBusiness = array(); // Base LocalBusiness array
+								$location_item_MedicalWebPage = in_array( 'MedicalWebPage', $location_valid_types ) ? array() : null; // Base MedicalWebPage array
+								$location_item_LocalBusiness = in_array( 'LocalBusiness', $location_valid_types ) ? array() : null; // Base LocalBusiness array
 								$item_contactType = null;
 								$item_description = null;
 								$item_telephone = null;
@@ -28959,9 +28967,13 @@
 											if (
 												$schema_common_brand_MedicalWebPage
 												&&
-												in_array(
-													'brand',
-													$location_properties_map[$MedicalWebPage_type]['properties']
+												(
+													isset($location_item_MedicalWebPage)
+													&&
+													in_array(
+														'brand',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 											) {
 
@@ -28978,9 +28990,13 @@
 											if (
 												$schema_common_brand_exclude_MedicalWebPage
 												&&
-												in_array(
-													'brand',
-													$location_properties_map[$LocalBusiness_type]['properties']
+												(
+													isset($location_item_LocalBusiness)
+													&&
+													in_array(
+														'brand',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
 												)
 											) {
 
@@ -31205,9 +31221,13 @@
 										if (
 											$schema_common_parentOrganization_MedicalWebPage
 											&&
-											in_array(
-												'parentOrganization',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												isset($location_item_MedicalWebPage)
+												&&
+												in_array(
+													'parentOrganization',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 										) {
 
@@ -31247,9 +31267,13 @@
 												$location_parent_LocalBusiness
 											)
 											&&
-											in_array(
-												'parentOrganization',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												isset($location_item_LocalBusiness)
+												&&
+												in_array(
+													'parentOrganization',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										) {
 
@@ -32719,17 +32743,21 @@
 
 									}
 
-							// Sort arrays
+							// Sort and combine the arrays
 
-								ksort( $location_item_MedicalWebPage, SORT_NATURAL | SORT_FLAG_CASE );
-								ksort( $location_item_LocalBusiness, SORT_NATURAL | SORT_FLAG_CASE );
+								if ( isset($location_item_MedicalWebPage) ) {
 
-							// Combine the arrays
+									ksort( $location_item_MedicalWebPage, SORT_NATURAL | SORT_FLAG_CASE );
+									$location_item['MedicalWebPage'] = $location_item_MedicalWebPage;
 
-								$location_item = array(
-									'MedicalWebPage' => $location_item_MedicalWebPage,
-									'LocalBusiness' => $location_item_LocalBusiness
-								);
+								}
+
+								if ( isset($location_item_LocalBusiness) ) {
+
+									ksort( $location_item_LocalBusiness, SORT_NATURAL | SORT_FLAG_CASE );
+									$location_item['LocalBusiness'] = $location_item_LocalBusiness;
+
+								}
 
 							// Set/update the value of the item transient
 
@@ -37158,17 +37186,21 @@
 
 									}
 
-							// Sort arrays
+							// Sort and combine the arrays
 
-								ksort( $expertise_item_MedicalWebPage, SORT_NATURAL | SORT_FLAG_CASE );
-								ksort( $expertise_item_MedicalEntity, SORT_NATURAL | SORT_FLAG_CASE );
+								if ( isset($expertise_item_MedicalWebPage) ) {
 
-							// Combine the arrays
+									ksort( $expertise_item_MedicalWebPage, SORT_NATURAL | SORT_FLAG_CASE );
+									$expertise_item['MedicalWebPage'] = $expertise_item_MedicalWebPage;
 
-								$expertise_item = array(
-									'MedicalWebPage' => $expertise_item_MedicalWebPage,
-									'MedicalEntity' => $expertise_item_MedicalEntity
-								);
+								}
+
+								if ( isset($expertise_item_MedicalEntity) ) {
+
+									ksort( $expertise_item_MedicalEntity, SORT_NATURAL | SORT_FLAG_CASE );
+									$expertise_item['MedicalEntity'] = $expertise_item_MedicalEntity;
+
+								}
 
 							// Set/update the value of the item transient
 
@@ -37424,8 +37456,9 @@
 
 							// Eliminate PHP errors / reset variables
 
-								$clinical_resource_item_MedicalWebPage = array(); // Base array
-								$clinical_resource_item_CreativeWork = array(); // Base array
+								$clinical_resource_item = array(); // Base array
+								$clinical_resource_item_MedicalWebPage = in_array( 'MedicalWebPage', $clinical_resource_valid_types ) ? array() : null; // Base MedicalWebPage array
+								$clinical_resource_item_CreativeWork = in_array( 'CreativeWork', $clinical_resource_valid_types ) ? array() : null; // Base CreativeWork array
 								$clinical_resource_abstract = '';
 								$clinical_resource_additionalType = '';
 								$clinical_resource_alternateName = '';
@@ -37488,6 +37521,7 @@
 								$clinical_resource_introduction = null;
 								$clinical_resource_introduction_count = null;
 								$CreativeWork_id = '';
+								$CreativeWork_type = null;
 								$clinical_resource_image = '';
 								$clinical_resource_isAccessibleForFree = '';
 								$clinical_resource_isPartOf = '';
@@ -37516,6 +37550,7 @@
 								$clinical_resource_wordCount = '';
 								$clinical_resource_featured_image_1_1_height = '';
 								$MedicalCondition_i = 1;
+								$MedicalWebPage_type = null;
 								$Service_i = 1;
 
 								// Reused variables
@@ -43568,17 +43603,21 @@
 
 										}
 
-							// Sort arrays
+							// Sort and combine the arrays
 
-								ksort( $clinical_resource_item_MedicalWebPage, SORT_NATURAL | SORT_FLAG_CASE );
-								ksort( $clinical_resource_item_CreativeWork, SORT_NATURAL | SORT_FLAG_CASE );
+								if ( isset($clinical_resource_item_MedicalWebPage) ) {
 
-							// Combine the arrays
+									ksort( $clinical_resource_item_MedicalWebPage, SORT_NATURAL | SORT_FLAG_CASE );
+									$clinical_resource_item['MedicalWebPage'] = $clinical_resource_item_MedicalWebPage;
 
-								$clinical_resource_item = array(
-									'MedicalWebPage' => $clinical_resource_item_MedicalWebPage,
-									'CreativeWork' => $clinical_resource_item_CreativeWork
-								);
+								}
+
+								if ( isset($clinical_resource_item_CreativeWork) ) {
+
+									ksort( $clinical_resource_item_CreativeWork, SORT_NATURAL | SORT_FLAG_CASE );
+									$clinical_resource_item['CreativeWork'] = $clinical_resource_item_CreativeWork;
+
+								}
 
 							// Set/update the value of the item transient
 
@@ -43801,7 +43840,8 @@
 
 							// Eliminate PHP errors / reset variables
 
-								$condition_item_MedicalCondition = array(); // Base array
+								$condition_item = array(); // Base array
+								$condition_item_MedicalCondition = in_array( 'MedicalCondition', $condition_valid_types ) ? array() : null; // Base MedicalCondition array
 								$condition_additionalType_repeater = array();
 								$condition_additionalType = array();
 								$condition_alternateName = array();
@@ -45086,9 +45126,13 @@
 
 									}
 
-							// Sort arrays
+							// Sort and combine the arrays
 
-								ksort( $condition_item_MedicalCondition, SORT_NATURAL | SORT_FLAG_CASE );
+								if ( isset($condition_item_MedicalCondition) ) {
+
+									ksort( $condition_item_MedicalCondition, SORT_NATURAL | SORT_FLAG_CASE );
+
+								}
 
 							// Set/update the value of the item transient
 
@@ -45229,7 +45273,8 @@
 
 							// Eliminate PHP errors / reset variables
 
-								$treatment_item_Service = array(); // Base array
+								$treatment_item = array(); // Base array
+								$treatment_item_Service = in_array( 'Service', $treatment_valid_types ) ? array() : null; // Base Service array
 								$treatment_additionalType = null;
 								$treatment_additionalType_repeater = null;
 								$treatment_alternateName = null;
@@ -46917,9 +46962,13 @@
 
 									}
 
-							// Sort arrays
+							// Sort and combine the arrays
 
-								ksort( $treatment_item_Service, SORT_NATURAL | SORT_FLAG_CASE );
+								if ( isset($treatment_item_Service) ) {
+
+									ksort( $treatment_item_Service, SORT_NATURAL | SORT_FLAG_CASE );
+
+								}
 
 							// Set/update the value of the item transient
 
