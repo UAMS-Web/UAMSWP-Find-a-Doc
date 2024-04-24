@@ -10,6 +10,7 @@
  *     $schema_common_state
  *     $schema_common_usa
  *     $schema_common_item_MedicalWebPage // MedicalWebPage item array
+ *     $schema_common_item_mainEntity // item array for the main entity of the MedicalWebPage
  *     $schema_common_specific_brand_organization // Clinical organization(s) specific to the current entity
  *     $schema_common_specific_brand_organization_override // bool // Query for whether to override common clinical organization(s) with those specific to the current entity
  *     $schema_common_url // URL of the current entity
@@ -27,6 +28,7 @@
 	$schema_common_state = $schema_common_state ?? null;
 	$schema_common_usa = $schema_common_usa ?? null;
 	$schema_common_item_MedicalWebPage = $schema_common_item_MedicalWebPage ?? null; // MedicalWebPage item array
+	$schema_common_item_mainEntity = $schema_common_item_mainEntity ?? null; // item array for the main entity of the MedicalWebPage
 	$schema_common_specific_brand_organization = $schema_common_specific_brand_organization ?? null;
 	$schema_common_specific_brand_organization_override = $schema_common_specific_brand_organization_override ?? false;
 	$schema_common_url = $schema_common_url ?? null;
@@ -1968,6 +1970,30 @@
 				if ( $schema_common_locationCreated ) {
 
 					$schema_common_properties['locationCreated'] = $schema_common_locationCreated;
+
+				}
+
+		}
+
+	// mainEntity (MedicalWebPage only)
+
+		/**
+		 * Indicates the primary entity described in some page or other CreativeWork.
+		 *
+		 * Inverse-property: mainEntityOfPage
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *      - Thing
+		 */
+
+		if ( $nesting_level == 0 ) {
+
+			// Add to common schema properties array for MedicalWebPage only
+
+				if ( $schema_common_item_mainEntity ) {
+
+					$schema_common_properties_MedicalWebPage['mainEntity'] = $schema_common_item_mainEntity;
 
 				}
 
