@@ -17040,11 +17040,9 @@
 
 														// MedicalWebPage
 
-															$provider_location_MedicalWebPage = $provider_location['MedicalWebPage'];
+															$provider_location_MedicalWebPage = $provider_location['MedicalWebPage'] ?? null;
 
 															// Get URLs for significantLink property
-
-																$provider_location_MedicalWebPage = $provider_location_MedicalWebPage ?? null;
 
 																if ( $provider_location_MedicalWebPage ) {
 
@@ -17057,11 +17055,9 @@
 
 														// LocalBusiness and subtypes
 
-															$provider_location_LocalBusiness = $provider_location['LocalBusiness'];
+															$provider_location_LocalBusiness = $provider_location['LocalBusiness'] ?? null;
 
 															// Get names for keywords property
-
-																$provider_location_LocalBusiness = $provider_location_LocalBusiness ?? null;
 
 																if ( $provider_location_LocalBusiness ) {
 
@@ -17149,11 +17145,9 @@
 
 														// MedicalWebPage
 
-															$provider_expertise_MedicalWebPage = $provider_expertise['MedicalWebPage'];
+															$provider_expertise_MedicalWebPage = $provider_expertise['MedicalWebPage'] ?? null;
 
 															// Get URLs for significantLink property
-
-																$provider_expertise_MedicalWebPage = $provider_expertise_MedicalWebPage ?? null;
 
 																if ( $provider_expertise_MedicalWebPage ) {
 
@@ -17166,11 +17160,9 @@
 
 														// MedicalEntity and subtypes
 
-															$provider_expertise_MedicalEntity = $provider_expertise['MedicalEntity'];
+															$provider_expertise_MedicalEntity = $provider_expertise['MedicalEntity'] ?? null;
 
 															// Get names for keywords property
-
-																$provider_expertise_MedicalEntity = $provider_expertise_MedicalEntity ?? null;
 
 																if ( $provider_expertise_MedicalEntity ) {
 
@@ -17262,11 +17254,9 @@
 
 														// MedicalWebPage
 
-															$provider_clinical_resource_MedicalWebPage = $provider_clinical_resource['MedicalWebPage'];
+															$provider_clinical_resource_MedicalWebPage = $provider_clinical_resource['MedicalWebPage'] ?? null;
 
 															// Get URLs for significantLink property
-
-																$provider_clinical_resource_MedicalWebPage = $provider_clinical_resource_MedicalWebPage ?? null;
 
 																if ( $provider_clinical_resource_MedicalWebPage ) {
 
@@ -17279,11 +17269,9 @@
 
 														// CreativeWork and subtypes
 
-															$provider_clinical_resource_CreativeWork = $provider_clinical_resource['CreativeWork'];
+															$provider_clinical_resource_CreativeWork = $provider_clinical_resource['CreativeWork'] ?? null;
 
 															// Get names for keywords property
-
-																$provider_clinical_resource_CreativeWork = $provider_clinical_resource_CreativeWork ?? null;
 
 																if ( $provider_clinical_resource_CreativeWork ) {
 
@@ -26149,11 +26137,9 @@
 
 															// MedicalWebPage
 
-																$location_provider_MedicalWebPage = $location_provider['MedicalWebPage'];
+																$location_provider_MedicalWebPage = $location_provider['MedicalWebPage'] ?? null;
 
 																// Get URLs for significantLink property
-
-																	$location_provider_MedicalWebPage = $location_provider_MedicalWebPage ?? null;
 
 																	if ( $location_provider_MedicalWebPage ) {
 
@@ -26166,11 +26152,9 @@
 
 															// MedicalBusiness and subtypes
 
-																$location_provider_MedicalBusiness = $location_provider['MedicalBusiness'];
+																$location_provider_MedicalBusiness = $location_provider['MedicalBusiness'] ?? null;
 
 																// Get URLs for significantLink property
-
-																	$location_provider_MedicalBusiness = $location_provider_MedicalBusiness ?? null;
 
 																	if ( $location_provider_MedicalBusiness ) {
 
@@ -26183,8 +26167,6 @@
 
 																// Get names for keywords property
 
-																	$location_provider_MedicalBusiness = $location_provider_MedicalBusiness ?? null;
-
 																	if ( $location_provider_MedicalBusiness ) {
 
 																		$location_provider_MedicalBusiness_keywords = uamswp_fad_schema_property_values(
@@ -26196,11 +26178,9 @@
 
 															// Person
 
-																$location_provider_Person = $location_provider['Person'];
+																$location_provider_Person = $location_provider['Person'] ?? null;
 
 																// Get URLs for significantLink property
-
-																	$location_provider_Person = $location_provider_Person ?? null;
 
 																	if ( $location_provider_Person ) {
 
@@ -26212,8 +26192,6 @@
 																	}
 
 																// Get names for keywords property
-
-																	$location_provider_Person = $location_provider_Person ?? null;
 
 																	if ( $location_provider_Person ) {
 
@@ -26310,8 +26288,6 @@
 
 																// Get URLs for significantLink property
 
-																	$location_descendant_location_MedicalWebPage = $location_descendant_location_MedicalWebPage ?? null;
-
 																	if ( $location_descendant_location_MedicalWebPage ) {
 
 																		$location_descendant_location_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
@@ -26326,8 +26302,6 @@
 																$location_descendant_location_LocalBusiness = $location_descendant_location['LocalBusiness'] ?? null;
 
 																// Get names for keywords property
-
-																	$location_descendant_location_LocalBusiness = $location_descendant_location_LocalBusiness ?? null;
 
 																	if ( $location_descendant_location_LocalBusiness ) {
 
@@ -26406,11 +26380,9 @@
 
 														// MedicalWebPage
 
-															$location_expertise_MedicalWebPage = $location_expertise['MedicalWebPage'];
+															$location_expertise_MedicalWebPage = $location_expertise['MedicalWebPage'] ?? null;
 
 															// Get URLs for significantLink property
-
-																$location_expertise_MedicalWebPage = $location_expertise_MedicalWebPage ?? null;
 
 																if ( $location_expertise_MedicalWebPage ) {
 
@@ -26423,11 +26395,9 @@
 
 														// MedicalEntity and subtypes
 
-															$location_expertise_MedicalEntity = $location_expertise['MedicalEntity'];
+															$location_expertise_MedicalEntity = $location_expertise['MedicalEntity'] ?? null;
 
 															// Get names for keywords property
-
-																$location_expertise_MedicalEntity = $location_expertise_MedicalEntity ?? null;
 
 																if ( $location_expertise_MedicalEntity ) {
 
@@ -26510,11 +26480,9 @@
 
 														// MedicalWebPage
 
-															$location_clinical_resource_MedicalWebPage = $location_clinical_resource['MedicalWebPage'];
+															$location_clinical_resource_MedicalWebPage = $location_clinical_resource['MedicalWebPage'] ?? null;
 
 															// Get URLs for significantLink property
-
-																$location_clinical_resource_MedicalWebPage = $location_clinical_resource_MedicalWebPage ?? null;
 
 																if ( $location_clinical_resource_MedicalWebPage ) {
 
@@ -26527,11 +26495,9 @@
 
 														// CreativeWork and subtypes
 
-															$location_clinical_resource_CreativeWork = $location_clinical_resource['CreativeWork'];
+															$location_clinical_resource_CreativeWork = $location_clinical_resource['CreativeWork'] ?? null;
 
 															// Get names for keywords property
-
-																$location_clinical_resource_CreativeWork = $location_clinical_resource_CreativeWork ?? null;
 
 																if ( $location_clinical_resource_CreativeWork ) {
 
@@ -33553,11 +33519,9 @@
 
 															// MedicalWebPage
 
-																$expertise_provider_MedicalWebPage = $expertise_provider['MedicalWebPage'];
+																$expertise_provider_MedicalWebPage = $expertise_provider['MedicalWebPage'] ?? null;
 
 																// Get URLs for significantLink property
-
-																	$expertise_provider_MedicalWebPage = $expertise_provider_MedicalWebPage ?? null;
 
 																	if ( $expertise_provider_MedicalWebPage ) {
 
@@ -33570,11 +33534,9 @@
 
 															// MedicalBusiness and subtypes
 
-																$expertise_provider_MedicalBusiness = $expertise_provider['MedicalBusiness'];
+																$expertise_provider_MedicalBusiness = $expertise_provider['MedicalBusiness'] ?? null;
 
 																// Get URLs for significantLink property
-
-																	$expertise_provider_MedicalBusiness = $expertise_provider_MedicalBusiness ?? null;
 
 																	if ( $expertise_provider_MedicalBusiness ) {
 
@@ -33587,8 +33549,6 @@
 
 																// Get names for keywords property
 
-																	$expertise_provider_MedicalBusiness = $expertise_provider_MedicalBusiness ?? null;
-
 																	if ( $expertise_provider_MedicalBusiness ) {
 
 																		$expertise_provider_MedicalBusiness_keywords = uamswp_fad_schema_property_values(
@@ -33600,11 +33560,9 @@
 
 															// Person
 
-																$expertise_provider_Person = $expertise_provider['Person'];
+																$expertise_provider_Person = $expertise_provider['Person'] ?? null;
 
 																// Get URLs for significantLink property
-
-																	$expertise_provider_Person = $expertise_provider_Person ?? null;
 
 																	if ( $expertise_provider_Person ) {
 
@@ -33616,8 +33574,6 @@
 																	}
 
 																// Get names for keywords property
-
-																	$expertise_provider_Person = $expertise_provider_Person ?? null;
 
 																	if ( $expertise_provider_Person ) {
 
@@ -33698,11 +33654,9 @@
 
 														// MedicalWebPage
 
-															$expertise_location_MedicalWebPage = $expertise_location['MedicalWebPage'];
+															$expertise_location_MedicalWebPage = $expertise_location['MedicalWebPage'] ?? null;
 
 															// Get URLs for significantLink property
-
-																$expertise_location_MedicalWebPage = $expertise_location_MedicalWebPage ?? null;
 
 																if ( $expertise_location_MedicalWebPage ) {
 
@@ -33715,11 +33669,9 @@
 
 														// LocalBusiness and subtypes
 
-															$expertise_location_LocalBusiness = $expertise_location['LocalBusiness'];
+															$expertise_location_LocalBusiness = $expertise_location['LocalBusiness'] ?? null;
 
 															// Get names for keywords property
-
-																$expertise_location_LocalBusiness = $expertise_location_LocalBusiness ?? null;
 
 																if ( $expertise_location_LocalBusiness ) {
 
@@ -33827,11 +33779,9 @@
 
 														// MedicalWebPage
 
-															$expertise_descendant_expertise_MedicalWebPage = $expertise_descendant_expertise['MedicalWebPage'];
+															$expertise_descendant_expertise_MedicalWebPage = $expertise_descendant_expertise['MedicalWebPage'] ?? null;
 
 															// Get URLs for significantLink property
-
-																$expertise_descendant_expertise_MedicalWebPage = $expertise_descendant_expertise_MedicalWebPage ?? null;
 
 																if ( $expertise_descendant_expertise_MedicalWebPage ) {
 
@@ -33844,11 +33794,9 @@
 
 														// MedicalEntity and subtypes
 
-															$expertise_descendant_expertise_MedicalEntity = $expertise_descendant_expertise['MedicalEntity'];
+															$expertise_descendant_expertise_MedicalEntity = $expertise_descendant_expertise['MedicalEntity'] ?? null;
 
 															// Get names for keywords property
-
-																$expertise_descendant_expertise_MedicalEntity = $expertise_descendant_expertise_MedicalEntity ?? null;
 
 																if ( $expertise_descendant_expertise_MedicalEntity ) {
 
@@ -33931,11 +33879,9 @@
 
 														// MedicalWebPage
 
-															$expertise_related_expertise_MedicalWebPage = $expertise_related_expertise['MedicalWebPage'];
+															$expertise_related_expertise_MedicalWebPage = $expertise_related_expertise['MedicalWebPage'] ?? null;
 
 															// Get URLs for significantLink property
-
-																$expertise_related_expertise_MedicalWebPage = $expertise_related_expertise_MedicalWebPage ?? null;
 
 																if ( $expertise_related_expertise_MedicalWebPage ) {
 
@@ -33948,11 +33894,9 @@
 
 														// MedicalEntity and subtypes
 
-															$expertise_related_expertise_MedicalEntity = $expertise_related_expertise['MedicalEntity'];
+															$expertise_related_expertise_MedicalEntity = $expertise_related_expertise['MedicalEntity'] ?? null;
 
 															// Get names for keywords property
-
-																$expertise_related_expertise_MedicalEntity = $expertise_related_expertise_MedicalEntity ?? null;
 
 																if ( $expertise_related_expertise_MedicalEntity ) {
 
@@ -34035,11 +33979,9 @@
 
 														// MedicalWebPage
 
-															$expertise_clinical_resource_MedicalWebPage = $expertise_clinical_resource['MedicalWebPage'];
+															$expertise_clinical_resource_MedicalWebPage = $expertise_clinical_resource['MedicalWebPage'] ?? null;
 
 															// Get URLs for significantLink property
-
-																$expertise_clinical_resource_MedicalWebPage = $expertise_clinical_resource_MedicalWebPage ?? null;
 
 																if ( $expertise_clinical_resource_MedicalWebPage ) {
 
@@ -34052,11 +33994,9 @@
 
 														// CreativeWork and subtypes
 
-															$expertise_clinical_resource_CreativeWork = $expertise_clinical_resource['CreativeWork'];
+															$expertise_clinical_resource_CreativeWork = $expertise_clinical_resource['CreativeWork'] ?? null;
 
 															// Get names for keywords property
-
-																$expertise_clinical_resource_CreativeWork = $expertise_clinical_resource_CreativeWork ?? null;
 
 																if ( $expertise_clinical_resource_CreativeWork ) {
 
@@ -37948,11 +37888,9 @@
 
 															// MedicalWebPage
 
-																$clinical_resource_provider_MedicalWebPage = $clinical_resource_provider['MedicalWebPage'];
+																$clinical_resource_provider_MedicalWebPage = $clinical_resource_provider['MedicalWebPage'] ?? null;
 
 																// Get URLs for significantLink property
-
-																	$clinical_resource_provider_MedicalWebPage = $clinical_resource_provider_MedicalWebPage ?? null;
 
 																	if ( $clinical_resource_provider_MedicalWebPage ) {
 
@@ -37965,11 +37903,9 @@
 
 															// MedicalBusiness and subtypes
 
-																$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider['MedicalBusiness'];
+																$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider['MedicalBusiness'] ?? null;
 
 																// Get URLs for significantLink property
-
-																	$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider_MedicalBusiness ?? null;
 
 																	if ( $clinical_resource_provider_MedicalBusiness ) {
 
@@ -37982,8 +37918,6 @@
 
 																// Get names for keywords property
 
-																	$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider_MedicalBusiness ?? null;
-
 																	if ( $clinical_resource_provider_MedicalBusiness ) {
 
 																		$clinical_resource_provider_MedicalBusiness_keywords = uamswp_fad_schema_property_values(
@@ -37995,11 +37929,9 @@
 
 															// Person
 
-																$clinical_resource_provider_Person = $clinical_resource_provider['Person'];
+																$clinical_resource_provider_Person = $clinical_resource_provider['Person'] ?? null;
 
 																// Get URLs for significantLink property
-
-																	$clinical_resource_provider_Person = $clinical_resource_provider_Person ?? null;
 
 																	if ( $clinical_resource_provider_Person ) {
 
@@ -38011,8 +37943,6 @@
 																	}
 
 																// Get names for keywords property
-
-																	$clinical_resource_provider_Person = $clinical_resource_provider_Person ?? null;
 
 																	if ( $clinical_resource_provider_Person ) {
 
@@ -38095,11 +38025,9 @@
 
 														// MedicalWebPage
 
-															$clinical_resource_location_MedicalWebPage = $clinical_resource_location['MedicalWebPage'];
+															$clinical_resource_location_MedicalWebPage = $clinical_resource_location['MedicalWebPage'] ?? null;
 
 															// Get URLs for significantLink property
-
-																$clinical_resource_location_MedicalWebPage = $clinical_resource_location_MedicalWebPage ?? null;
 
 																if ( $clinical_resource_location_MedicalWebPage ) {
 
@@ -38112,11 +38040,9 @@
 
 														// LocalBusiness and subtypes
 
-															$clinical_resource_location_LocalBusiness = $clinical_resource_location['LocalBusiness'];
+															$clinical_resource_location_LocalBusiness = $clinical_resource_location['LocalBusiness'] ?? null;
 
 															// Get names for keywords property
-
-																$clinical_resource_location_LocalBusiness = $clinical_resource_location_LocalBusiness ?? null;
 
 																if ( $clinical_resource_location_LocalBusiness ) {
 
@@ -38201,11 +38127,9 @@
 
 														// MedicalWebPage
 
-															$clinical_resource_expertise_MedicalWebPage = $clinical_resource_expertise['MedicalWebPage'];
+															$clinical_resource_expertise_MedicalWebPage = $clinical_resource_expertise['MedicalWebPage'] ?? null;
 
 															// Get URLs for significantLink property
-
-																$clinical_resource_expertise_MedicalWebPage = $clinical_resource_expertise_MedicalWebPage ?? null;
 
 																if ( $clinical_resource_expertise_MedicalWebPage ) {
 
@@ -38218,11 +38142,9 @@
 
 														// MedicalEntity and subtypes
 
-															$clinical_resource_expertise_MedicalEntity = $clinical_resource_expertise['MedicalEntity'];
+															$clinical_resource_expertise_MedicalEntity = $clinical_resource_expertise['MedicalEntity'] ?? null;
 
 															// Get names for keywords property
-
-																$clinical_resource_expertise_MedicalEntity = $clinical_resource_expertise_MedicalEntity ?? null;
 
 																if ( $clinical_resource_expertise_MedicalEntity ) {
 
@@ -38306,11 +38228,9 @@
 
 														// MedicalWebPage
 
-															$clinical_resource_related_clinical_resource_MedicalWebPage = $clinical_resource_related_clinical_resource['MedicalWebPage'];
+															$clinical_resource_related_clinical_resource_MedicalWebPage = $clinical_resource_related_clinical_resource['MedicalWebPage'] ?? null;
 
 															// Get URLs for significantLink property
-
-																$clinical_resource_related_clinical_resource_MedicalWebPage = $clinical_resource_related_clinical_resource_MedicalWebPage ?? null;
 
 																if ( $clinical_resource_related_clinical_resource_MedicalWebPage ) {
 
@@ -38323,11 +38243,9 @@
 
 														// CreativeWork and subtypes
 
-															$clinical_resource_related_clinical_resource_CreativeWork = $clinical_resource_related_clinical_resource['CreativeWork'];
+															$clinical_resource_related_clinical_resource_CreativeWork = $clinical_resource_related_clinical_resource['CreativeWork'] ?? null;
 
 															// Get names for keywords property
-
-																$clinical_resource_related_clinical_resource_CreativeWork = $clinical_resource_related_clinical_resource_CreativeWork ?? null;
 
 																if ( $clinical_resource_related_clinical_resource_CreativeWork ) {
 
