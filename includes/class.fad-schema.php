@@ -17040,37 +17040,45 @@
 
 												// MedicalWebPage
 
-													$provider_location_MedicalWebPage = $provider_location['MedicalWebPage'];
+													if ( isset($provider_location) ) {
 
-													// Get URLs for significantLink property
+														$provider_location_MedicalWebPage = $provider_location['MedicalWebPage'];
 
-														$provider_location_MedicalWebPage = $provider_location_MedicalWebPage ?? null;
+														// Get URLs for significantLink property
 
-														if ( $provider_location_MedicalWebPage ) {
+															$provider_location_MedicalWebPage = $provider_location_MedicalWebPage ?? null;
 
-															$provider_location_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																$provider_location_MedicalWebPage, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $provider_location_MedicalWebPage ) {
 
-														}
+																$provider_location_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																	$provider_location_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																	array( 'url' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 												// LocalBusiness and subtypes
 
-													$provider_location_LocalBusiness = $provider_location['LocalBusiness'];
+													if ( isset($provider_location) ) {
 
-													// Get names for keywords property
+														$provider_location_LocalBusiness = $provider_location['LocalBusiness'];
 
-														$provider_location_LocalBusiness = $provider_location_LocalBusiness ?? null;
+														// Get names for keywords property
 
-														if ( $provider_location_LocalBusiness ) {
+															$provider_location_LocalBusiness = $provider_location_LocalBusiness ?? null;
 
-															$provider_location_LocalBusiness_keywords = uamswp_fad_schema_property_values(
-																$provider_location_LocalBusiness, // array // Required // Property values from which to extract specific values
-																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $provider_location_LocalBusiness ) {
 
-														}
+																$provider_location_LocalBusiness_keywords = uamswp_fad_schema_property_values(
+																	$provider_location_LocalBusiness, // array // Required // Property values from which to extract specific values
+																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 										}
 
@@ -17145,37 +17153,45 @@
 
 												// MedicalWebPage
 
-													$provider_expertise_MedicalWebPage = $provider_expertise['MedicalWebPage'];
+													if ( isset($provider_expertise) ) {
 
-													// Get URLs for significantLink property
+														$provider_expertise_MedicalWebPage = $provider_expertise['MedicalWebPage'];
 
-														$provider_expertise_MedicalWebPage = $provider_expertise_MedicalWebPage ?? null;
+														// Get URLs for significantLink property
 
-														if ( $provider_expertise_MedicalWebPage ) {
+															$provider_expertise_MedicalWebPage = $provider_expertise_MedicalWebPage ?? null;
 
-															$provider_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																$provider_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $provider_expertise_MedicalWebPage ) {
 
-														}
+																$provider_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																	$provider_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																	array( 'url' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 												// MedicalEntity and subtypes
 
-													$provider_expertise_MedicalEntity = $provider_expertise['MedicalEntity'];
+													if ( isset($provider_expertise) ) {
 
-													// Get names for keywords property
+														$provider_expertise_MedicalEntity = $provider_expertise['MedicalEntity'];
 
-														$provider_expertise_MedicalEntity = $provider_expertise_MedicalEntity ?? null;
+														// Get names for keywords property
 
-														if ( $provider_expertise_MedicalEntity ) {
+															$provider_expertise_MedicalEntity = $provider_expertise_MedicalEntity ?? null;
 
-															$provider_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
-																$provider_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
-																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $provider_expertise_MedicalEntity ) {
 
-														}
+																$provider_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
+																	$provider_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
+																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 										}
 
@@ -17254,37 +17270,45 @@
 
 												// MedicalWebPage
 
-													$provider_clinical_resource_MedicalWebPage = $provider_clinical_resource['MedicalWebPage'];
+													if ( isset($provider_clinical_resource) ) {
 
-													// Get URLs for significantLink property
+														$provider_clinical_resource_MedicalWebPage = $provider_clinical_resource['MedicalWebPage'];
 
-														$provider_clinical_resource_MedicalWebPage = $provider_clinical_resource_MedicalWebPage ?? null;
+														// Get URLs for significantLink property
 
-														if ( $provider_clinical_resource_MedicalWebPage ) {
+															$provider_clinical_resource_MedicalWebPage = $provider_clinical_resource_MedicalWebPage ?? null;
 
-															$provider_clinical_resource_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																$provider_clinical_resource_MedicalWebPage, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $provider_clinical_resource_MedicalWebPage ) {
 
-														}
+																$provider_clinical_resource_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																	$provider_clinical_resource_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																	array( 'url' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 												// CreativeWork and subtypes
 
-													$provider_clinical_resource_CreativeWork = $provider_clinical_resource['CreativeWork'];
+													if ( isset($provider_clinical_resource) ) {
 
-													// Get names for keywords property
+														$provider_clinical_resource_CreativeWork = $provider_clinical_resource['CreativeWork'];
 
-														$provider_clinical_resource_CreativeWork = $provider_clinical_resource_CreativeWork ?? null;
+														// Get names for keywords property
 
-														if ( $provider_clinical_resource_CreativeWork ) {
+															$provider_clinical_resource_CreativeWork = $provider_clinical_resource_CreativeWork ?? null;
 
-															$provider_clinical_resource_CreativeWork_keywords = uamswp_fad_schema_property_values(
-																$provider_clinical_resource_CreativeWork, // array // Required // Property values from which to extract specific values
-																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $provider_clinical_resource_CreativeWork ) {
 
-														}
+																$provider_clinical_resource_CreativeWork_keywords = uamswp_fad_schema_property_values(
+																	$provider_clinical_resource_CreativeWork, // array // Required // Property values from which to extract specific values
+																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 										}
 
@@ -26143,63 +26167,71 @@
 
 														// MedicalBusiness and subtypes
 
-															$location_provider_MedicalBusiness = $location_provider['MedicalBusiness'];
+															if ( isset($location_provider) ) {
 
-															// Get URLs for significantLink property
+																$location_provider_MedicalBusiness = $location_provider['MedicalBusiness'];
 
-																$location_provider_MedicalBusiness = $location_provider_MedicalBusiness ?? null;
+																// Get URLs for significantLink property
 
-																if ( $location_provider_MedicalBusiness ) {
+																	$location_provider_MedicalBusiness = $location_provider_MedicalBusiness ?? null;
 
-																	$location_provider_MedicalBusiness_significantLink = uamswp_fad_schema_property_values(
-																		$location_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
-																		array( 'url' ) // mixed // Required // List of properties from which to collect values
-																	);
+																	if ( $location_provider_MedicalBusiness ) {
 
-																}
+																		$location_provider_MedicalBusiness_significantLink = uamswp_fad_schema_property_values(
+																			$location_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
+																			array( 'url' ) // mixed // Required // List of properties from which to collect values
+																		);
 
-															// Get names for keywords property
+																	}
 
-																$location_provider_MedicalBusiness = $location_provider_MedicalBusiness ?? null;
+																// Get names for keywords property
 
-																if ( $location_provider_MedicalBusiness ) {
+																	$location_provider_MedicalBusiness = $location_provider_MedicalBusiness ?? null;
 
-																	$location_provider_MedicalBusiness_keywords = uamswp_fad_schema_property_values(
-																		$location_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
-																		array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-																	);
+																	if ( $location_provider_MedicalBusiness ) {
 
-																}
+																		$location_provider_MedicalBusiness_keywords = uamswp_fad_schema_property_values(
+																			$location_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
+																			array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																		);
+
+																	}
+
+															}
 
 														// Person
 
-															$location_provider_Person = $location_provider['Person'];
+															if ( isset($location_provider) ) {
 
-															// Get URLs for significantLink property
+																$location_provider_Person = $location_provider['Person'];
 
-																$location_provider_Person = $location_provider_Person ?? null;
+																// Get URLs for significantLink property
 
-																if ( $location_provider_Person ) {
+																	$location_provider_Person = $location_provider_Person ?? null;
 
-																	$location_provider_Person_significantLink = uamswp_fad_schema_property_values(
-																		$location_provider_Person, // array // Required // Property values from which to extract specific values
-																		array( 'url' ) // mixed // Required // List of properties from which to collect values
-																	);
+																	if ( $location_provider_Person ) {
 
-																}
+																		$location_provider_Person_significantLink = uamswp_fad_schema_property_values(
+																			$location_provider_Person, // array // Required // Property values from which to extract specific values
+																			array( 'url' ) // mixed // Required // List of properties from which to collect values
+																		);
 
-															// Get names for keywords property
+																	}
 
-																$location_provider_Person = $location_provider_Person ?? null;
+																// Get names for keywords property
 
-																if ( $location_provider_Person ) {
+																	$location_provider_Person = $location_provider_Person ?? null;
 
-																	$location_provider_Person_keywords = uamswp_fad_schema_property_values(
-																		$location_provider_Person, // array // Required // Property values from which to extract specific values
-																		array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-																	);
+																	if ( $location_provider_Person ) {
 
-																}
+																		$location_provider_Person_keywords = uamswp_fad_schema_property_values(
+																			$location_provider_Person, // array // Required // Property values from which to extract specific values
+																			array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																		);
+
+																	}
+
+															}
 
 													}
 
@@ -26281,37 +26313,45 @@
 
 													// MedicalWebPage
 
-														$location_descendant_location_MedicalWebPage = $location_descendant_location['MedicalWebPage'] ?? null;
+														if ( isset($location_descendant_location) ) {
 
-														// Get URLs for significantLink property
+															$location_descendant_location_MedicalWebPage = $location_descendant_location['MedicalWebPage'] ?? null;
 
-															$location_descendant_location_MedicalWebPage = $location_descendant_location_MedicalWebPage ?? null;
+															// Get URLs for significantLink property
 
-															if ( $location_descendant_location_MedicalWebPage ) {
+																$location_descendant_location_MedicalWebPage = $location_descendant_location_MedicalWebPage ?? null;
 
-																$location_descendant_location_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																	$location_descendant_location_MedicalWebPage, // array // Required // Property values from which to extract specific values
-																	array( 'url' ) // mixed // Required // List of properties from which to collect values
-																);
+																if ( $location_descendant_location_MedicalWebPage ) {
 
-															}
+																	$location_descendant_location_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																		$location_descendant_location_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																		array( 'url' ) // mixed // Required // List of properties from which to collect values
+																	);
+
+																}
+
+														}
 
 													// LocalBusiness and subtypes
 
-														$location_descendant_location_LocalBusiness = $location_descendant_location['LocalBusiness'] ?? null;
+														if ( isset($location_descendant_location) ) {
 
-														// Get names for keywords property
+															$location_descendant_location_LocalBusiness = $location_descendant_location['LocalBusiness'] ?? null;
 
-															$location_descendant_location_LocalBusiness = $location_descendant_location_LocalBusiness ?? null;
+															// Get names for keywords property
 
-															if ( $location_descendant_location_LocalBusiness ) {
+																$location_descendant_location_LocalBusiness = $location_descendant_location_LocalBusiness ?? null;
 
-																$location_descendant_location_LocalBusiness_keywords = uamswp_fad_schema_property_values(
-																	$location_descendant_location_LocalBusiness, // array // Required // Property values from which to extract specific values
-																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-																);
+																if ( $location_descendant_location_LocalBusiness ) {
 
-															}
+																	$location_descendant_location_LocalBusiness_keywords = uamswp_fad_schema_property_values(
+																		$location_descendant_location_LocalBusiness, // array // Required // Property values from which to extract specific values
+																		array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																	);
+
+																}
+
+														}
 
 										}
 
@@ -26375,37 +26415,45 @@
 
 													// MedicalWebPage
 
-														$location_expertise_MedicalWebPage = $location_expertise['MedicalWebPage'];
+														if ( isset($location_expertise) ) {
 
-														// Get URLs for significantLink property
+															$location_expertise_MedicalWebPage = $location_expertise['MedicalWebPage'];
 
-															$location_expertise_MedicalWebPage = $location_expertise_MedicalWebPage ?? null;
+															// Get URLs for significantLink property
 
-															if ( $location_expertise_MedicalWebPage ) {
+																$location_expertise_MedicalWebPage = $location_expertise_MedicalWebPage ?? null;
 
-																$location_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																	$location_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
-																	array( 'url' ) // mixed // Required // List of properties from which to collect values
-																);
+																if ( $location_expertise_MedicalWebPage ) {
 
-															}
+																	$location_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																		$location_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																		array( 'url' ) // mixed // Required // List of properties from which to collect values
+																	);
+
+																}
+
+														}
 
 													// MedicalEntity and subtypes
 
-														$location_expertise_MedicalEntity = $location_expertise['MedicalEntity'];
+														if ( isset($location_expertise) ) {
 
-														// Get names for keywords property
+															$location_expertise_MedicalEntity = $location_expertise['MedicalEntity'];
 
-															$location_expertise_MedicalEntity = $location_expertise_MedicalEntity ?? null;
+															// Get names for keywords property
 
-															if ( $location_expertise_MedicalEntity ) {
+																$location_expertise_MedicalEntity = $location_expertise_MedicalEntity ?? null;
 
-																$location_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
-																	$location_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
-																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-																);
+																if ( $location_expertise_MedicalEntity ) {
 
-															}
+																	$location_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
+																		$location_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
+																		array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																	);
+
+																}
+
+														}
 
 												}
 
@@ -26477,37 +26525,45 @@
 
 												// MedicalWebPage
 
-													$location_clinical_resource_MedicalWebPage = $location_clinical_resource['MedicalWebPage'];
+													if ( isset($location_clinical_resource) ) {
 
-													// Get URLs for significantLink property
+														$location_clinical_resource_MedicalWebPage = $location_clinical_resource['MedicalWebPage'];
 
-														$location_clinical_resource_MedicalWebPage = $location_clinical_resource_MedicalWebPage ?? null;
+														// Get URLs for significantLink property
 
-														if ( $location_clinical_resource_MedicalWebPage ) {
+															$location_clinical_resource_MedicalWebPage = $location_clinical_resource_MedicalWebPage ?? null;
 
-															$location_clinical_resource_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																$location_clinical_resource_MedicalWebPage, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $location_clinical_resource_MedicalWebPage ) {
 
-														}
+																$location_clinical_resource_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																	$location_clinical_resource_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																	array( 'url' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 												// CreativeWork and subtypes
 
-													$location_clinical_resource_CreativeWork = $location_clinical_resource['CreativeWork'];
+													if ( isset($location_clinical_resource) ) {
 
-													// Get names for keywords property
+														$location_clinical_resource_CreativeWork = $location_clinical_resource['CreativeWork'];
 
-														$location_clinical_resource_CreativeWork = $location_clinical_resource_CreativeWork ?? null;
+														// Get names for keywords property
 
-														if ( $location_clinical_resource_CreativeWork ) {
+															$location_clinical_resource_CreativeWork = $location_clinical_resource_CreativeWork ?? null;
 
-															$location_clinical_resource_CreativeWork_keywords = uamswp_fad_schema_property_values(
-																$location_clinical_resource_CreativeWork, // array // Required // Property values from which to extract specific values
-																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $location_clinical_resource_CreativeWork ) {
 
-														}
+																$location_clinical_resource_CreativeWork_keywords = uamswp_fad_schema_property_values(
+																	$location_clinical_resource_CreativeWork, // array // Required // Property values from which to extract specific values
+																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 										}
 
@@ -33522,63 +33578,71 @@
 
 														// MedicalBusiness and subtypes
 
-															$expertise_provider_MedicalBusiness = $expertise_provider['MedicalBusiness'];
+															if ( isset($expertise_provider) ) {
 
-															// Get URLs for significantLink property
+																$expertise_provider_MedicalBusiness = $expertise_provider['MedicalBusiness'];
 
-																$expertise_provider_MedicalBusiness = $expertise_provider_MedicalBusiness ?? null;
+																// Get URLs for significantLink property
 
-																if ( $expertise_provider_MedicalBusiness ) {
+																	$expertise_provider_MedicalBusiness = $expertise_provider_MedicalBusiness ?? null;
 
-																	$expertise_provider_MedicalBusiness_significantLink = uamswp_fad_schema_property_values(
-																		$expertise_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
-																		array( 'url' ) // mixed // Required // List of properties from which to collect values
-																	);
+																	if ( $expertise_provider_MedicalBusiness ) {
 
-																}
+																		$expertise_provider_MedicalBusiness_significantLink = uamswp_fad_schema_property_values(
+																			$expertise_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
+																			array( 'url' ) // mixed // Required // List of properties from which to collect values
+																		);
 
-															// Get names for keywords property
+																	}
 
-																$expertise_provider_MedicalBusiness = $expertise_provider_MedicalBusiness ?? null;
+																// Get names for keywords property
 
-																if ( $expertise_provider_MedicalBusiness ) {
+																	$expertise_provider_MedicalBusiness = $expertise_provider_MedicalBusiness ?? null;
 
-																	$expertise_provider_MedicalBusiness_keywords = uamswp_fad_schema_property_values(
-																		$expertise_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
-																		array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-																	);
+																	if ( $expertise_provider_MedicalBusiness ) {
 
-																}
+																		$expertise_provider_MedicalBusiness_keywords = uamswp_fad_schema_property_values(
+																			$expertise_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
+																			array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																		);
+
+																	}
+
+															}
 
 														// Person
 
-															$expertise_provider_Person = $expertise_provider['Person'];
+															if ( isset($expertise_provider) ) {
 
-															// Get URLs for significantLink property
+																$expertise_provider_Person = $expertise_provider['Person'];
 
-																$expertise_provider_Person = $expertise_provider_Person ?? null;
+																// Get URLs for significantLink property
 
-																if ( $expertise_provider_Person ) {
+																	$expertise_provider_Person = $expertise_provider_Person ?? null;
 
-																	$expertise_provider_Person_significantLink = uamswp_fad_schema_property_values(
-																		$expertise_provider_Person, // array // Required // Property values from which to extract specific values
-																		array( 'url' ) // mixed // Required // List of properties from which to collect values
-																	);
+																	if ( $expertise_provider_Person ) {
 
-																}
+																		$expertise_provider_Person_significantLink = uamswp_fad_schema_property_values(
+																			$expertise_provider_Person, // array // Required // Property values from which to extract specific values
+																			array( 'url' ) // mixed // Required // List of properties from which to collect values
+																		);
 
-															// Get names for keywords property
+																	}
 
-																$expertise_provider_Person = $expertise_provider_Person ?? null;
+																// Get names for keywords property
 
-																if ( $expertise_provider_Person ) {
+																	$expertise_provider_Person = $expertise_provider_Person ?? null;
 
-																	$expertise_provider_Person_keywords = uamswp_fad_schema_property_values(
-																		$expertise_provider_Person, // array // Required // Property values from which to extract specific values
-																		array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-																	);
+																	if ( $expertise_provider_Person ) {
 
-																}
+																		$expertise_provider_Person_keywords = uamswp_fad_schema_property_values(
+																			$expertise_provider_Person, // array // Required // Property values from which to extract specific values
+																			array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																		);
+
+																	}
+
+															}
 
 													}
 
@@ -33648,37 +33712,45 @@
 
 												// MedicalWebPage
 
-													$expertise_location_MedicalWebPage = $expertise_location['MedicalWebPage'];
+													if ( isset($expertise_location) ) {
 
-													// Get URLs for significantLink property
+														$expertise_location_MedicalWebPage = $expertise_location['MedicalWebPage'];
 
-														$expertise_location_MedicalWebPage = $expertise_location_MedicalWebPage ?? null;
+														// Get URLs for significantLink property
 
-														if ( $expertise_location_MedicalWebPage ) {
+															$expertise_location_MedicalWebPage = $expertise_location_MedicalWebPage ?? null;
 
-															$expertise_location_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																$expertise_location_MedicalWebPage, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $expertise_location_MedicalWebPage ) {
 
-														}
+																$expertise_location_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																	$expertise_location_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																	array( 'url' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 												// LocalBusiness and subtypes
 
-													$expertise_location_LocalBusiness = $expertise_location['LocalBusiness'];
+													if ( isset($expertise_location) ) {
 
-													// Get names for keywords property
+														$expertise_location_LocalBusiness = $expertise_location['LocalBusiness'];
 
-														$expertise_location_LocalBusiness = $expertise_location_LocalBusiness ?? null;
+														// Get names for keywords property
 
-														if ( $expertise_location_LocalBusiness ) {
+															$expertise_location_LocalBusiness = $expertise_location_LocalBusiness ?? null;
 
-															$expertise_location_LocalBusiness_keywords = uamswp_fad_schema_property_values(
-																$expertise_location_LocalBusiness, // array // Required // Property values from which to extract specific values
-																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $expertise_location_LocalBusiness ) {
 
-														}
+																$expertise_location_LocalBusiness_keywords = uamswp_fad_schema_property_values(
+																	$expertise_location_LocalBusiness, // array // Required // Property values from which to extract specific values
+																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 										}
 
@@ -33773,37 +33845,45 @@
 
 												// MedicalWebPage
 
-													$expertise_descendant_expertise_MedicalWebPage = $expertise_descendant_expertise['MedicalWebPage'];
+													if ( isset($expertise_descendant_expertise) ) {
 
-													// Get URLs for significantLink property
+														$expertise_descendant_expertise_MedicalWebPage = $expertise_descendant_expertise['MedicalWebPage'];
 
-														$expertise_descendant_expertise_MedicalWebPage = $expertise_descendant_expertise_MedicalWebPage ?? null;
+														// Get URLs for significantLink property
 
-														if ( $expertise_descendant_expertise_MedicalWebPage ) {
+															$expertise_descendant_expertise_MedicalWebPage = $expertise_descendant_expertise_MedicalWebPage ?? null;
 
-															$expertise_descendant_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																$expertise_descendant_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $expertise_descendant_expertise_MedicalWebPage ) {
 
-														}
+																$expertise_descendant_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																	$expertise_descendant_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																	array( 'url' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 												// MedicalEntity and subtypes
 
-													$expertise_descendant_expertise_MedicalEntity = $expertise_descendant_expertise['MedicalEntity'];
+													if ( isset($expertise_descendant_expertise) ) {
 
-													// Get names for keywords property
+														$expertise_descendant_expertise_MedicalEntity = $expertise_descendant_expertise['MedicalEntity'];
 
-														$expertise_descendant_expertise_MedicalEntity = $expertise_descendant_expertise_MedicalEntity ?? null;
+														// Get names for keywords property
 
-														if ( $expertise_descendant_expertise_MedicalEntity ) {
+															$expertise_descendant_expertise_MedicalEntity = $expertise_descendant_expertise_MedicalEntity ?? null;
 
-															$expertise_descendant_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
-																$expertise_descendant_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
-																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $expertise_descendant_expertise_MedicalEntity ) {
 
-														}
+																$expertise_descendant_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
+																	$expertise_descendant_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
+																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 										}
 
@@ -33873,37 +33953,45 @@
 
 												// MedicalWebPage
 
-													$expertise_related_expertise_MedicalWebPage = $expertise_related_expertise['MedicalWebPage'];
+													if ( isset($expertise_related_expertise) ) {
 
-													// Get URLs for significantLink property
+														$expertise_related_expertise_MedicalWebPage = $expertise_related_expertise['MedicalWebPage'];
 
-														$expertise_related_expertise_MedicalWebPage = $expertise_related_expertise_MedicalWebPage ?? null;
+														// Get URLs for significantLink property
 
-														if ( $expertise_related_expertise_MedicalWebPage ) {
+															$expertise_related_expertise_MedicalWebPage = $expertise_related_expertise_MedicalWebPage ?? null;
 
-															$expertise_related_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																$expertise_related_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $expertise_related_expertise_MedicalWebPage ) {
 
-														}
+																$expertise_related_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																	$expertise_related_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																	array( 'url' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 												// MedicalEntity and subtypes
 
-													$expertise_related_expertise_MedicalEntity = $expertise_related_expertise['MedicalEntity'];
+													if ( isset($expertise_related_expertise) ) {
 
-													// Get names for keywords property
+														$expertise_related_expertise_MedicalEntity = $expertise_related_expertise['MedicalEntity'];
 
-														$expertise_related_expertise_MedicalEntity = $expertise_related_expertise_MedicalEntity ?? null;
+														// Get names for keywords property
 
-														if ( $expertise_related_expertise_MedicalEntity ) {
+															$expertise_related_expertise_MedicalEntity = $expertise_related_expertise_MedicalEntity ?? null;
 
-															$expertise_related_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
-																$expertise_related_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
-																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $expertise_related_expertise_MedicalEntity ) {
 
-														}
+																$expertise_related_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
+																	$expertise_related_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
+																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 										}
 
@@ -33973,37 +34061,45 @@
 
 												// MedicalWebPage
 
-													$expertise_clinical_resource_MedicalWebPage = $expertise_clinical_resource['MedicalWebPage'];
+													if ( isset($expertise_clinical_resource) ) {
 
-													// Get URLs for significantLink property
+														$expertise_clinical_resource_MedicalWebPage = $expertise_clinical_resource['MedicalWebPage'];
 
-														$expertise_clinical_resource_MedicalWebPage = $expertise_clinical_resource_MedicalWebPage ?? null;
+														// Get URLs for significantLink property
 
-														if ( $expertise_clinical_resource_MedicalWebPage ) {
+															$expertise_clinical_resource_MedicalWebPage = $expertise_clinical_resource_MedicalWebPage ?? null;
 
-															$expertise_clinical_resource_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																$expertise_clinical_resource_MedicalWebPage, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $expertise_clinical_resource_MedicalWebPage ) {
 
-														}
+																$expertise_clinical_resource_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																	$expertise_clinical_resource_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																	array( 'url' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 												// CreativeWork and subtypes
 
-													$expertise_clinical_resource_CreativeWork = $expertise_clinical_resource['CreativeWork'];
+													if ( isset($expertise_clinical_resource) ) {
 
-													// Get names for keywords property
+														$expertise_clinical_resource_CreativeWork = $expertise_clinical_resource['CreativeWork'];
 
-														$expertise_clinical_resource_CreativeWork = $expertise_clinical_resource_CreativeWork ?? null;
+														// Get names for keywords property
 
-														if ( $expertise_clinical_resource_CreativeWork ) {
+															$expertise_clinical_resource_CreativeWork = $expertise_clinical_resource_CreativeWork ?? null;
 
-															$expertise_clinical_resource_CreativeWork_keywords = uamswp_fad_schema_property_values(
-																$expertise_clinical_resource_CreativeWork, // array // Required // Property values from which to extract specific values
-																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $expertise_clinical_resource_CreativeWork ) {
 
-														}
+																$expertise_clinical_resource_CreativeWork_keywords = uamswp_fad_schema_property_values(
+																	$expertise_clinical_resource_CreativeWork, // array // Required // Property values from which to extract specific values
+																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 										}
 
@@ -37888,63 +37984,71 @@
 
 														// MedicalBusiness and subtypes
 
-															$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider['MedicalBusiness'];
+															if ( isset($clinical_resource_provider) ) {
 
-															// Get URLs for significantLink property
+																$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider['MedicalBusiness'];
 
-																$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider_MedicalBusiness ?? null;
+																// Get URLs for significantLink property
 
-																if ( $clinical_resource_provider_MedicalBusiness ) {
+																	$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider_MedicalBusiness ?? null;
 
-																	$clinical_resource_provider_MedicalBusiness_significantLink = uamswp_fad_schema_property_values(
-																		$clinical_resource_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
-																		array( 'url' ) // mixed // Required // List of properties from which to collect values
-																	);
+																	if ( $clinical_resource_provider_MedicalBusiness ) {
 
-																}
+																		$clinical_resource_provider_MedicalBusiness_significantLink = uamswp_fad_schema_property_values(
+																			$clinical_resource_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
+																			array( 'url' ) // mixed // Required // List of properties from which to collect values
+																		);
 
-															// Get names for keywords property
+																	}
 
-																$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider_MedicalBusiness ?? null;
+																// Get names for keywords property
 
-																if ( $clinical_resource_provider_MedicalBusiness ) {
+																	$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider_MedicalBusiness ?? null;
 
-																	$clinical_resource_provider_MedicalBusiness_keywords = uamswp_fad_schema_property_values(
-																		$clinical_resource_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
-																		array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-																	);
+																	if ( $clinical_resource_provider_MedicalBusiness ) {
 
-																}
+																		$clinical_resource_provider_MedicalBusiness_keywords = uamswp_fad_schema_property_values(
+																			$clinical_resource_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
+																			array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																		);
+
+																	}
+
+															}
 
 														// Person
 
-															$clinical_resource_provider_Person = $clinical_resource_provider['Person'];
+															if ( isset($clinical_resource_provider) ) {
 
-															// Get URLs for significantLink property
+																$clinical_resource_provider_Person = $clinical_resource_provider['Person'];
 
-																$clinical_resource_provider_Person = $clinical_resource_provider_Person ?? null;
+																// Get URLs for significantLink property
 
-																if ( $clinical_resource_provider_Person ) {
+																	$clinical_resource_provider_Person = $clinical_resource_provider_Person ?? null;
 
-																	$clinical_resource_provider_Person_significantLink = uamswp_fad_schema_property_values(
-																		$clinical_resource_provider_Person, // array // Required // Property values from which to extract specific values
-																		array( 'url' ) // mixed // Required // List of properties from which to collect values
-																	);
+																	if ( $clinical_resource_provider_Person ) {
 
-																}
+																		$clinical_resource_provider_Person_significantLink = uamswp_fad_schema_property_values(
+																			$clinical_resource_provider_Person, // array // Required // Property values from which to extract specific values
+																			array( 'url' ) // mixed // Required // List of properties from which to collect values
+																		);
 
-															// Get names for keywords property
+																	}
 
-																$clinical_resource_provider_Person = $clinical_resource_provider_Person ?? null;
+																// Get names for keywords property
 
-																if ( $clinical_resource_provider_Person ) {
+																	$clinical_resource_provider_Person = $clinical_resource_provider_Person ?? null;
 
-																	$clinical_resource_provider_Person_keywords = uamswp_fad_schema_property_values(
-																		$clinical_resource_provider_Person, // array // Required // Property values from which to extract specific values
-																		array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-																	);
+																	if ( $clinical_resource_provider_Person ) {
 
-																}
+																		$clinical_resource_provider_Person_keywords = uamswp_fad_schema_property_values(
+																			$clinical_resource_provider_Person, // array // Required // Property values from which to extract specific values
+																			array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																		);
+
+																	}
+
+															}
 
 													}
 
@@ -38016,37 +38120,45 @@
 
 												// MedicalWebPage
 
-													$clinical_resource_location_MedicalWebPage = $clinical_resource_location['MedicalWebPage'];
+													if ( isset($clinical_resource_location) ) {
 
-													// Get URLs for significantLink property
+														$clinical_resource_location_MedicalWebPage = $clinical_resource_location['MedicalWebPage'];
 
-														$clinical_resource_location_MedicalWebPage = $clinical_resource_location_MedicalWebPage ?? null;
+														// Get URLs for significantLink property
 
-														if ( $clinical_resource_location_MedicalWebPage ) {
+															$clinical_resource_location_MedicalWebPage = $clinical_resource_location_MedicalWebPage ?? null;
 
-															$clinical_resource_location_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																$clinical_resource_location_MedicalWebPage, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $clinical_resource_location_MedicalWebPage ) {
 
-														}
+																$clinical_resource_location_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																	$clinical_resource_location_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																	array( 'url' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 												// LocalBusiness and subtypes
 
-													$clinical_resource_location_LocalBusiness = $clinical_resource_location['LocalBusiness'];
+													if ( isset($clinical_resource_location) ) {
 
-													// Get names for keywords property
+														$clinical_resource_location_LocalBusiness = $clinical_resource_location['LocalBusiness'];
 
-														$clinical_resource_location_LocalBusiness = $clinical_resource_location_LocalBusiness ?? null;
+														// Get names for keywords property
 
-														if ( $clinical_resource_location_LocalBusiness ) {
+															$clinical_resource_location_LocalBusiness = $clinical_resource_location_LocalBusiness ?? null;
 
-															$clinical_resource_location_LocalBusiness_keywords = uamswp_fad_schema_property_values(
-																$clinical_resource_location_LocalBusiness, // array // Required // Property values from which to extract specific values
-																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $clinical_resource_location_LocalBusiness ) {
 
-														}
+																$clinical_resource_location_LocalBusiness_keywords = uamswp_fad_schema_property_values(
+																	$clinical_resource_location_LocalBusiness, // array // Required // Property values from which to extract specific values
+																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 										}
 
@@ -38118,37 +38230,45 @@
 
 												// MedicalWebPage
 
-													$clinical_resource_expertise_MedicalWebPage = $clinical_resource_expertise['MedicalWebPage'];
+													if ( isset($clinical_resource_expertise) ) {
 
-													// Get URLs for significantLink property
+														$clinical_resource_expertise_MedicalWebPage = $clinical_resource_expertise['MedicalWebPage'];
 
-														$clinical_resource_expertise_MedicalWebPage = $clinical_resource_expertise_MedicalWebPage ?? null;
+														// Get URLs for significantLink property
 
-														if ( $clinical_resource_expertise_MedicalWebPage ) {
+															$clinical_resource_expertise_MedicalWebPage = $clinical_resource_expertise_MedicalWebPage ?? null;
 
-															$clinical_resource_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																$clinical_resource_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $clinical_resource_expertise_MedicalWebPage ) {
 
-														}
+																$clinical_resource_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																	$clinical_resource_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																	array( 'url' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 												// MedicalEntity and subtypes
 
-													$clinical_resource_expertise_MedicalEntity = $clinical_resource_expertise['MedicalEntity'];
+													if ( isset($clinical_resource_expertise) ) {
 
-													// Get names for keywords property
+														$clinical_resource_expertise_MedicalEntity = $clinical_resource_expertise['MedicalEntity'];
 
-														$clinical_resource_expertise_MedicalEntity = $clinical_resource_expertise_MedicalEntity ?? null;
+														// Get names for keywords property
 
-														if ( $clinical_resource_expertise_MedicalEntity ) {
+															$clinical_resource_expertise_MedicalEntity = $clinical_resource_expertise_MedicalEntity ?? null;
 
-															$clinical_resource_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
-																$clinical_resource_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
-																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $clinical_resource_expertise_MedicalEntity ) {
 
-														}
+																$clinical_resource_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
+																	$clinical_resource_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
+																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 										}
 
@@ -38219,37 +38339,45 @@
 
 												// MedicalWebPage
 
-													$clinical_resource_related_clinical_resource_MedicalWebPage = $clinical_resource_related_clinical_resource['MedicalWebPage'];
+													if ( isset($clinical_resource_related_clinical_resource) ) {
 
-													// Get URLs for significantLink property
+														$clinical_resource_related_clinical_resource_MedicalWebPage = $clinical_resource_related_clinical_resource['MedicalWebPage'];
 
-														$clinical_resource_related_clinical_resource_MedicalWebPage = $clinical_resource_related_clinical_resource_MedicalWebPage ?? null;
+														// Get URLs for significantLink property
 
-														if ( $clinical_resource_related_clinical_resource_MedicalWebPage ) {
+															$clinical_resource_related_clinical_resource_MedicalWebPage = $clinical_resource_related_clinical_resource_MedicalWebPage ?? null;
 
-															$clinical_resource_related_clinical_resource_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																$clinical_resource_related_clinical_resource_MedicalWebPage, // array // Required // Property values from which to extract specific values
-																array( 'url' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $clinical_resource_related_clinical_resource_MedicalWebPage ) {
 
-														}
+																$clinical_resource_related_clinical_resource_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																	$clinical_resource_related_clinical_resource_MedicalWebPage, // array // Required // Property values from which to extract specific values
+																	array( 'url' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 												// CreativeWork and subtypes
 
-													$clinical_resource_related_clinical_resource_CreativeWork = $clinical_resource_related_clinical_resource['CreativeWork'];
+													if ( isset($clinical_resource_related_clinical_resource) ) {
 
-													// Get names for keywords property
+														$clinical_resource_related_clinical_resource_CreativeWork = $clinical_resource_related_clinical_resource['CreativeWork'];
 
-														$clinical_resource_related_clinical_resource_CreativeWork = $clinical_resource_related_clinical_resource_CreativeWork ?? null;
+														// Get names for keywords property
 
-														if ( $clinical_resource_related_clinical_resource_CreativeWork ) {
+															$clinical_resource_related_clinical_resource_CreativeWork = $clinical_resource_related_clinical_resource_CreativeWork ?? null;
 
-															$clinical_resource_related_clinical_resource_CreativeWork_keywords = uamswp_fad_schema_property_values(
-																$clinical_resource_related_clinical_resource_CreativeWork, // array // Required // Property values from which to extract specific values
-																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
-															);
+															if ( $clinical_resource_related_clinical_resource_CreativeWork ) {
 
-														}
+																$clinical_resource_related_clinical_resource_CreativeWork_keywords = uamswp_fad_schema_property_values(
+																	$clinical_resource_related_clinical_resource_CreativeWork, // array // Required // Property values from which to extract specific values
+																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															}
+
+													}
 
 										}
 
