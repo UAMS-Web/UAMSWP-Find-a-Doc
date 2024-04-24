@@ -11,6 +11,7 @@
  *     $schema_common_usa
  *     $schema_common_item_MedicalWebPage // MedicalWebPage item array
  *     $schema_common_item_mainEntity // item array for the main entity of the MedicalWebPage
+ *     $schema_common_item_about // all major entities of the MedicalWebPage
  *     $schema_common_specific_brand_organization // Clinical organization(s) specific to the current entity
  *     $schema_common_specific_brand_organization_override // bool // Query for whether to override common clinical organization(s) with those specific to the current entity
  *     $schema_common_url // URL of the current entity
@@ -28,7 +29,8 @@
 	$schema_common_state = $schema_common_state ?? null;
 	$schema_common_usa = $schema_common_usa ?? null;
 	$schema_common_item_MedicalWebPage = $schema_common_item_MedicalWebPage ?? null; // MedicalWebPage item array
-	$schema_common_item_mainEntity = $schema_common_item_mainEntity ?? null; // item array for the main entity of the MedicalWebPage
+	$schema_common_item_mainEntity = $schema_common_item_mainEntity ?? null; // main entity of the MedicalWebPage
+	$schema_common_item_about = $schema_common_item_mainEntity ?? $schema_common_item_mainEntity; // all major entities of the MedicalWebPage
 	$schema_common_specific_brand_organization = $schema_common_specific_brand_organization ?? null;
 	$schema_common_specific_brand_organization_override = $schema_common_specific_brand_organization_override ?? false;
 	$schema_common_url = $schema_common_url ?? null;
@@ -179,6 +181,41 @@
 				$schema_common_properties['abstract'] = $schema_common_excerpt;
 
 			}
+
+	// about (MedicalWebPage only) [WIP]
+
+		/**
+		 * The subject matter of the content.
+		 *
+		 * Inverse-property: subjectOf
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *      - Thing
+		 *
+		 * Used on these types:
+		 *
+		 *      - Certification
+		 *      - CommunicateAction
+		 *      - CreativeWork
+		 *      - Event
+		 *
+		 * Sub-properties:
+		 *
+		 *      - mainEntity
+		 */
+
+		// Add to common schema properties array
+
+			// about (MedicalWebPage only)
+
+				// Add to common schema properties array for MedicalWebPage only
+
+					if ( $schema_common_item_about ) {
+
+						$schema_common_properties_MedicalWebPage['about'] = $schema_common_item_about;
+
+					}
 
 	// accessibilityAPI [WIP]
 

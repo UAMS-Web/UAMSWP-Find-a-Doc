@@ -15744,6 +15744,9 @@
 
 										$schema_common_item_MedicalWebPage = $provider_item_MedicalWebPage; // MedicalWebPage item array
 										$schema_common_item_mainEntity = $provider_item_Person ?? null; // item array for the main entity of the MedicalWebPage
+										$schema_common_item_about = array(); // all major entities of the MedicalWebPage
+											if ( isset($provider_item_MedicalBusiness) ) { $schema_common_item_about[] = $provider_item_MedicalBusiness; }
+											if ( isset($provider_item_Person) ) { $schema_common_item_about[] = $provider_item_Person; }
 
 									include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/properties.php' );
 
@@ -17603,23 +17606,11 @@
 
 										}
 
-								// about (MedicalWebPage only) [WIP]
+								// about [excluded; common properties]
 
 									/**
-									 * The subject matter of the content.
-									 *
-									 * Inverse-property: subjectOf
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - Thing
-									 *
-									 * Used on these types:
-									 *
-									 *      - Certification
-									 *      - CommunicateAction
-									 *      - CreativeWork
-									 *      - Event
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// actionableFeedbackPolicy [excluded; out of scope]
@@ -25880,6 +25871,7 @@
 
 										$schema_common_item_MedicalWebPage = $location_item_MedicalWebPage; // MedicalWebPage item array
 										$schema_common_item_mainEntity = $location_item_LocalBusiness ?? null; // item array for the main entity of the MedicalWebPage
+										$schema_common_item_about = $location_item_LocalBusiness ?? null; // all major entities of the MedicalWebPage
 
 									include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/properties.php' );
 
@@ -28427,65 +28419,12 @@
 
 									}
 
-								// about (MedicalWebPage only)
+								// about [excluded; common properties]
 
 									/**
-									 * The subject matter of the content.
-									 *
-									 * Inverse-property: subjectOf
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - Thing
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
-
-									if (
-										(
-											isset($location_item_MedicalWebPage)
-											&&
-											in_array(
-												'about',
-												$location_properties_map[$MedicalWebPage_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base array
-
-												$location_about = array();
-
-											// Merge in location (LocalBusiness) value
-
-												$location_item_LocalBusiness = $location_item_LocalBusiness ?? null;
-
-												if ( $location_item_LocalBusiness ) {
-
-													$location_about = uamswp_fad_schema_merge_values(
-														$location_about, // mixed // Required // Initial schema item property value
-														$location_item_LocalBusiness // mixed // Required // Incoming schema item property value
-													);
-
-												}
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'about', // string // Required // Name of schema property
-													$location_about, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
 
 								// additionalType
 
@@ -33312,6 +33251,7 @@
 
 										$schema_common_item_MedicalWebPage = $expertise_item_MedicalWebPage; // MedicalWebPage item array
 										$schema_common_item_mainEntity = $expertise_item_MedicalEntity ?? null; // item array for the main entity of the MedicalWebPage
+										$schema_common_item_about = $expertise_item_MedicalEntity ?? null; // all major entities of the MedicalWebPage
 
 									include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/properties.php' );
 
@@ -34362,65 +34302,12 @@
 
 									}
 
-								// about (MedicalWebPage only)
+								// about [excluded; common properties]
 
 									/**
-									 * The subject matter of the content.
-									 *
-									 * Inverse-property: subjectOf
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - Thing
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
-
-									if (
-										(
-											isset($expertise_item_MedicalWebPage)
-											&&
-											in_array(
-												'about',
-												$expertise_properties_map[$MedicalWebPage_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base array
-
-												$expertise_about = array();
-
-											// Merge in area of expertise MedicalEntity value
-
-												$expertise_item_MedicalEntity = $expertise_item_MedicalEntity ?? null;
-
-												if ( $expertise_item_MedicalEntity ) {
-
-													$expertise_about = uamswp_fad_schema_merge_values(
-														$expertise_about, // mixed // Required // Initial schema item property value
-														$expertise_item_MedicalEntity // mixed // Required // Incoming schema item property value
-													);
-
-												}
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'about', // string // Required // Name of schema property
-													$expertise_about, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
 
 								// abstract [excluded; common properties]
 
@@ -37725,6 +37612,7 @@
 
 										$schema_common_item_MedicalWebPage = $clinical_resource_item_MedicalWebPage; // MedicalWebPage item array
 										$schema_common_item_mainEntity = $clinical_resource_item_CreativeWork ?? null; // item array for the main entity of the MedicalWebPage
+										$schema_common_item_about = $clinical_resource_item_CreativeWork ?? null; // all major entities of the MedicalWebPage
 
 									include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/properties.php' );
 
@@ -38966,7 +38854,7 @@
 
 									}
 
-								// about [WIP]
+								// about (CreativeWork only) [WIP]
 
 									/**
 									 * The subject matter of the content.
@@ -38987,75 +38875,35 @@
 									 * Sub-properties:
 									 *
 									 *      - mainEntity
+									 *
+									 * Note: The value for this property is already being defined for the
+									 * 'MedicalWebPage' type in the common schema properties
+									 * (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 									if (
-										(
-											isset($clinical_resource_item_MedicalWebPage)
-											&&
-											in_array(
-												'name',
-												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
-											)
-										)
-										||
-										(
-											isset($clinical_resource_item_CreativeWork)
-											&&
-											in_array(
-												'name',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
-											)
+										isset($clinical_resource_item_CreativeWork)
+										&&
+										in_array(
+											'about',
+											$clinical_resource_properties_map[$CreativeWork_type]['properties']
 										)
 									) {
 
 										// Get values [WIP]
 
-											// MedicalWebPage
+											/*
 
-												// Base array
+												For CreativeWork, set the value as something like the associated areas of
+												expertise, conditions and treatments.
 
-													$clinical_resource_about_MedicalWebPage = array();
+											*/
 
-												// Merge in the CreativeWork schema item
+											// Base array
 
-													$clinical_resource_item_CreativeWork = $clinical_resource_item_CreativeWork ?? null;
-
-													if ( $clinical_resource_item_CreativeWork ) {
-
-														$clinical_resource_about_MedicalWebPage = uamswp_fad_schema_merge_values(
-															$clinical_resource_about_MedicalWebPage, // mixed // Required // Initial schema item property value
-															$clinical_resource_item_CreativeWork // mixed // Required // Incoming schema item property value
-														);
-
-													}
-
-											// CreativeWork [WIP]
-
-												/*
-
-													For CreativeWork, set the value as something like the associated areas of
-													expertise, conditions and treatments.
-
-												*/
-
-												// Base array
-
-													$clinical_resource_about_CreativeWork = array();
+												$clinical_resource_about_CreativeWork = array();
 
 										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'about', // string // Required // Name of schema property
-													$clinical_resource_about_MedicalWebPage, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
 
 											// CreativeWork
 
