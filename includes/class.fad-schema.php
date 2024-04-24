@@ -37316,6 +37316,7 @@
 								$clinical_resource_embeddedTextCaption_count = '';
 								$clinical_resource_embedUrl = '';
 								$clinical_resource_encodingFormat = '';
+								$clinical_resource_expertise = null;
 								$clinical_resource_featured_image_1_1_size = '';
 								$clinical_resource_featured_image_1_1_src = array();
 								$clinical_resource_featured_image_1_1_url = '';
@@ -38051,7 +38052,7 @@
 
 										// List of properties that reference areas of expertise
 
-											$clinical_resource_related_expertise_common = array(
+											$clinical_resource_expertise_common = array(
 												'about',
 												'keywords',
 												'mentions',
@@ -38066,7 +38067,7 @@
 													&&
 													array_intersect(
 														$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
-														$clinical_resource_related_expertise_common
+														$clinical_resource_expertise_common
 													)
 												)
 												||
@@ -38075,7 +38076,7 @@
 													&&
 													array_intersect(
 														$clinical_resource_properties_map[$MedicalEntity_type]['properties'],
-														$clinical_resource_related_expertise_common
+														$clinical_resource_expertise_common
 													)
 												)
 											)
@@ -38085,25 +38086,25 @@
 
 											// Get related areas of expertise
 
-												if ( !isset($clinical_resource_related_expertise_list) ) {
+												if ( !isset($clinical_resource_expertise_list) ) {
 
-													$clinical_resource_related_expertise_list = get_field( 'clinical_resource_aoe', $entity ) ?? array();
+													$clinical_resource_expertise_list = get_field( 'clinical_resource_aoe', $entity ) ?? array();
 
 													// Clean up the array
 
-														$clinical_resource_related_expertise_list = $clinical_resource_related_expertise_list ? array_filter($clinical_resource_related_expertise_list) : array();
-														$clinical_resource_related_expertise_list = $clinical_resource_related_expertise_list ? array_values($clinical_resource_related_expertise_list) : array();
+														$clinical_resource_expertise_list = $clinical_resource_expertise_list ? array_filter($clinical_resource_expertise_list) : array();
+														$clinical_resource_expertise_list = $clinical_resource_expertise_list ? array_values($clinical_resource_expertise_list) : array();
 
 												}
 
 											// Format values
 
-												if ( $clinical_resource_related_expertise_list ) {
+												if ( $clinical_resource_expertise_list ) {
 
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-													$clinical_resource_related_expertise = uamswp_fad_schema_expertise(
-														$clinical_resource_related_expertise_list, // List of IDs of the area of expertise items
+													$clinical_resource_expertise = uamswp_fad_schema_expertise(
+														$clinical_resource_expertise_list, // List of IDs of the area of expertise items
 														'', // string // Required // Page or fake subpage URL
 														true, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
 														'', // string // Required // Fake subpage slug
@@ -38115,16 +38116,16 @@
 
 												// MedicalWebPage
 
-													$clinical_resource_related_expertise_MedicalWebPage = $clinical_resource_related_expertise['MedicalWebPage'];
+													$clinical_resource_expertise_MedicalWebPage = $clinical_resource_expertise['MedicalWebPage'];
 
 													// Get URLs for significantLink property
 
-														$clinical_resource_related_expertise_MedicalWebPage = $clinical_resource_related_expertise_MedicalWebPage ?? null;
+														$clinical_resource_expertise_MedicalWebPage = $clinical_resource_expertise_MedicalWebPage ?? null;
 
-														if ( $clinical_resource_related_expertise_MedicalWebPage ) {
+														if ( $clinical_resource_expertise_MedicalWebPage ) {
 
-															$clinical_resource_related_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
-																$clinical_resource_related_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
+															$clinical_resource_expertise_MedicalWebPage_significantLink = uamswp_fad_schema_property_values(
+																$clinical_resource_expertise_MedicalWebPage, // array // Required // Property values from which to extract specific values
 																array( 'url' ) // mixed // Required // List of properties from which to collect values
 															);
 
@@ -38132,16 +38133,16 @@
 
 												// MedicalEntity and subtypes
 
-													$clinical_resource_related_expertise_MedicalEntity = $clinical_resource_related_expertise['MedicalEntity'];
+													$clinical_resource_expertise_MedicalEntity = $clinical_resource_expertise['MedicalEntity'];
 
 													// Get names for keywords property
 
-														$clinical_resource_related_expertise_MedicalEntity = $clinical_resource_related_expertise_MedicalEntity ?? null;
+														$clinical_resource_expertise_MedicalEntity = $clinical_resource_expertise_MedicalEntity ?? null;
 
-														if ( $clinical_resource_related_expertise_MedicalEntity ) {
+														if ( $clinical_resource_expertise_MedicalEntity ) {
 
-															$clinical_resource_related_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
-																$clinical_resource_related_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
+															$clinical_resource_expertise_MedicalEntity_keywords = uamswp_fad_schema_property_values(
+																$clinical_resource_expertise_MedicalEntity, // array // Required // Property values from which to extract specific values
 																array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 															);
 
