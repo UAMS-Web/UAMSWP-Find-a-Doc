@@ -40545,10 +40545,38 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// endTime [WIP]
+								// endTime [excluded; irrelevant]
 
 									/**
+									 * The endTime of something. For a reserved event or service
+									 * (e.g., FoodEstablishmentReservation), the time that it is expected to end.
 									 *
+									 * For actions that span a period of time, when the action was performed
+									 * (e.g., John wrote a book from January to December).
+									 *
+									 * For media, including audio  and video, it's the time offset of the end of a
+									 * clip within a larger file.
+									 *
+									 * Note that Event uses startDate/endDate instead of startTime/endTime, even when
+									 * describing dates with times. This situation may be clarified in future
+									 * revisions.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - DateTime
+									 *      - Time
+									 *
+									 * Used on these types:
+									 *
+									 *      - Action
+									 *      - FoodEstablishmentReservation
+									 *      - InteractionCounter
+									 *      - MediaObject
+									 *      - Schedule
+									 *
+									 * Note: Since this property would only be relevant to a clip within a larger
+									 * MediaObject (video or audio), it is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// exampleOfWork [excluded; common properties]
@@ -40693,8 +40721,15 @@
 									 *
 									 *      - CreativeWork
 									 *
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be
-									 * included for the MedicalWebPage schema type.
+									 * Used on these types:
+									 *
+									 *      - CreativeWork
+									 *
+									 * Sub-properties:
+									 *
+									 *      - containsSeason
+									 *      - episode
+									 *      - tocEntry
 									 */
 
 									/*
@@ -40711,11 +40746,21 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - CreativeWork
 									 */
 
 									/*
 
 										Define for the 'Article' type clinical resources by using the post title.
+
+										Define for the 'Video' type clinical resources by using the video title from
+										the video platform (e.g., the name of the video from the YouTube API).
+
+										Define for the 'Infographic' and 'Document' type clinical resources by using
+										the media asset title from within WordPress.
 
 									*/
 
@@ -40787,7 +40832,7 @@
 
 									}
 
-								// identifier [excluded]
+								// identifier [excluded; irrelevant]
 
 									/**
 									 * The identifier property represents any kind of identifier for any kind of
@@ -40801,8 +40846,8 @@
 									 *      - Text
 									 *      - URL
 									 *
-									 * This schema property is not relevant to clinical resources or their webpages,
-									 * and so it will not be included.
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// image (specific property)
@@ -40890,6 +40935,8 @@
 									/*
 
 										Add input to clinical resources to indicate the language of the content.
+
+										Add a facet to the clinical resource archive for the language of the content.
 
 										If there is a value (or if the value is not English), override the 'inLanguage'
 										schema property value for the CreativeWork item.
@@ -41058,10 +41105,22 @@
 
 									}
 
-								// itemReviewed [WIP]
+								// itemReviewed [excluded; irrelevant]
 
 									/**
+									 * The item that is being reviewed/rated.
 									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Thing
+									 *
+									 * Used on these types:
+									 *
+									 *      - AggregateRating
+									 *      - Review
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// keywords [WIP]
@@ -41098,10 +41157,21 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// liveBlogUpdate [WIP]
+								// liveBlogUpdate [excluded; irrelevant]
 
 									/**
+									 * An update to the LiveBlog.
 									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - BlogPosting
+									 *
+									 * Used on these types:
+									 *
+									 *      - LiveBlogPosting
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// locationCreated [excluded; common properties]
@@ -41274,10 +41344,40 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// negativeNotes [WIP]
+								// negativeNotes [excluded; irrelevant]
 
 									/**
+									 * Provides negative considerations regarding something, most typically in pro/con
+									 * lists for reviews (alongside positiveNotes). For symmetry
 									 *
+									 * In the case of a Review, the property describes the itemReviewed from the
+									 * perspective of the review; in the case of a Product, the product itself is
+									 * being described. Since product descriptions tend to emphasise positive claims,
+									 * it may be relatively unusual to find negativeNotes used in this way.
+									 * Nevertheless for the sake of symmetry, negativeNotes can be used on Product.
+									 *
+									 * The property values can be expressed either as unstructured text (repeated as
+									 * necessary), or if ordered, as a list (in which case the most negative is at the
+									 * beginning of the list).
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - ItemList
+									 *      - ListItem
+									 *      - Text
+									 *      - WebContent
+									 *
+									 * Used on these types:
+									 *
+									 *      - Product
+									 *      - Review
+									 *
+									 * As of 24 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
+									 * definitions.
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// offers [WIP]
@@ -41345,10 +41445,38 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// positiveNotes [WIP]
+								// positiveNotes [excluded; irrelevant]
 
 									/**
+									 * Provides positive considerations regarding something, for example product
+									 * highlights or (alongside negativeNotes) pro/con lists for reviews.
 									 *
+									 * In the case of a Review, the property describes the itemReviewed from the
+									 * perspective of the review; in the case of a Product, the product itself is
+									 * being described.
+									 *
+									 * The property values can be expressed either as unstructured text (repeated as
+									 * necessary), or if ordered, as a list (in which case the most positive is at the
+									 * beginning of the list).
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - ItemList
+									 *      - ListItem
+									 *      - Text
+									 *      - WebContent
+									 *
+									 * Used on these types:
+									 *
+									 *      - Product
+									 *      - Review
+									 *
+									 * As of 24 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
+									 * definitions.
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// potentialAction [WIP]
@@ -41434,30 +41562,87 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - ImageObject
+									 *
+									 * Used on these types:
+									 *
+									 *      - WebPage
 									 */
 
-								// printColumn [WIP]
+									/*
+
+										Define for the 'Infographic' type clinical resources by using the infographic
+										asset.
+
+									*/
+								// printColumn [excluded; irrelevant]
 
 									/**
+									 * The number of the column in which the NewsArticle appears in the print edition.
 									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - NewsArticle
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
-								// printEdition [WIP]
+								// printEdition [excluded; irrelevant]
 
 									/**
+									 * The edition of the print product in which the NewsArticle appears.
 									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - NewsArticle
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
-								// printPage [WIP]
+								// printPage [excluded; irrelevant]
 
 									/**
+									 * If this NewsArticle appears in print, this field indicates the name of the page
+									 * on which the article is found. Please note that this field is intended for the
+									 * exact page name (e.g., A5, B18).
 									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - NewsArticle
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
-								// printSection [WIP]
+								// printSection [excluded; irrelevant]
 
 									/**
+									 * If this NewsArticle appears in print, this field indicates the print section in
+									 * which the article appeared.
 									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - NewsArticle
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// producer [excluded; common properties]
@@ -41474,16 +41659,43 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// proficiencyLevel [WIP]
+								// proficiencyLevel [excluded; irrelevant]
 
 									/**
+									 * Proficiency needed for this content.
 									 *
+									 * Expected values:
+									 *
+									 *      - 'Beginner'
+									 *      - 'Expert'
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - TechArticle
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
-								// programmingModel [WIP]
+								// programmingModel [excluded; irrelevant]
 
 									/**
+									 * Indicates whether API is managed or unmanaged.
 									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - APIReference
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// provider [excluded; common properties]
@@ -41500,10 +41712,24 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// publicationType [WIP]
+								// publicationType [excluded; common properties]
 
 									/**
+									 * The type of the medical article, taken from the US NLM MeSH publication type
+									 * catalog.
 									 *
+									 * See also MeSH documentation [https://www.nlm.nih.gov/mesh/pubtypes.html].
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - MedicalScholarlyArticle
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// publisher [excluded; common properties]
@@ -41548,10 +41774,22 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// reportNumber [WIP]
+								// reportNumber [excluded; irrelevant]
 
 									/**
+									 * The number or other unique designator assigned to a Report by the publishing
+									 * organization.
 									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - Report
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// relatedLink [WIP]
@@ -41562,6 +41800,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - URL
+									 *
+									 * Used on these types:
+									 *
+									 *      - WebPage
 									 */
 
 								// representativeOfPage (CreativeWork only)
@@ -41625,22 +41867,59 @@
 									 * and so it will not be included.
 									 */
 
-								// reviewAspect [WIP]
+								// reviewAspect [excluded; irrelevant]
 
 									/**
+									 * This Review or Rating is relevant to this part or facet of the itemReviewed.
 									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - Guide
+									 *      - Rating
+									 *      - Review
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
-								// reviewBody [WIP]
+								// reviewBody [excluded; irrelevant]
 
 									/**
+									 * The actual body of the review.
 									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - Review
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
-								// reviewRating [WIP]
+								// reviewRating [excluded; irrelevant]
 
 									/**
+									 * The rating given in this review. Note that reviews can themselves be rated. The
+									 * reviewRating applies to rating given by the review. The aggregateRating
+									 * property applies to the review itself, as a creative work.
 									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Rating
+									 *
+									 * Used on these types:
+									 *
+									 *      - Review
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// reviewedBy [excluded; common properties]
@@ -41775,10 +42054,23 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// sharedContent [WIP]
+								// sharedContent [excluded; irrelevant]
 
 									/**
+									 * A CreativeWork such as an image, video, or audio clip shared as part of this
+									 * posting.
 									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - CreativeWork
+									 *
+									 * Used on these types:
+									 *
+									 *      - Comment
+									 *      - SocialMediaPosting
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// significantLink [WIP]
@@ -41790,6 +42082,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - URL
+									 *
+									 * Used on these types:
+									 *
+									 *      - WebPage
 									 */
 
 								// significantLinks [excluded; common properties]
@@ -41983,6 +42279,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Specialty
+									 *
+									 * Used on these types:
+									 *
+									 *      - WebPage
 									 */
 
 								// sponsor [excluded; common properties]
@@ -41992,10 +42292,38 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// startTime [WIP]
+								// startTime [excluded; irrelevant]
 
 									/**
+									 * The startTime of something. For a reserved event or service
+									 * (e.g., FoodEstablishmentReservation), the time that it is expected to start.
 									 *
+									 * For actions that span a period of time, when the action was performed
+									 * (e.g., John wrote a book from January to December).
+									 *
+									 * For media, including audio  and video, it's the time offset of the start of a
+									 * clip within a larger file.
+									 *
+									 * Note that Event uses startDate/endDate instead of startTime/endTime, even when
+									 * describing dates with times. This situation may be clarified in future
+									 * revisions.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - DateTime
+									 *      - Time
+									 *
+									 * Used on these types:
+									 *
+									 *      - Action
+									 *      - FoodEstablishmentReservation
+									 *      - InteractionCounter
+									 *      - MediaObject
+									 *      - Schedule
+									 *
+									 * Note: Since this property would only be relevant to a clip within a larger
+									 * MediaObject (video or audio), it is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// subjectOf [excluded; common properties]
@@ -42005,10 +42333,21 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// targetPlatform [WIP]
+								// targetPlatform [excluded; irrelevant]
 
 									/**
+									 * Type of app development: phone, Metro style, desktop, XBox, etc.
 									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - APIReference
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// teaches [excluded; common properties]
@@ -42040,6 +42379,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - CreativeWork
 									 */
 
 								// thumbnail
@@ -42112,6 +42455,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - URL
+									 *
+									 * Used on these types:
+									 *
+									 *      - CreativeWork
 									 */
 
 									/*
@@ -42340,6 +42687,11 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Date
+									 *      - DateTime
+									 *
+									 * Used on these types:
+									 *
+									 *      - MediaObject
 									 */
 
 									/*
@@ -42372,6 +42724,10 @@
 									 *
 									 *      - Clip
 									 *      - VideoObject
+									 *
+									 * Used on these types:
+									 *
+									 *      - CreativeWork
 									 */
 
 									/*
