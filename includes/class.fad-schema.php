@@ -37347,6 +37347,7 @@
 								$clinical_resource_height = '';
 								$clinical_resource_introduction = null;
 								$clinical_resource_introduction_count = null;
+								$clinical_resource_location = null;
 								$CreativeWork_id = '';
 								$CreativeWork_subtype = null;
 								$CreativeWork_type = null;
