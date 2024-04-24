@@ -17038,6 +17038,8 @@
 
 													if ( isset($provider_location) ) {
 
+														$provider_location_about = array(); // Base array for all major entities of the ontology type's MedicalWebPages
+
 														// MedicalWebPage
 
 															$provider_location_MedicalWebPage = $provider_location['MedicalWebPage'] ?? null;
@@ -17056,6 +17058,8 @@
 														// LocalBusiness and subtypes
 
 															$provider_location_LocalBusiness = $provider_location['LocalBusiness'] ?? null;
+															$provider_location_mainEntity = $provider_location_LocalBusiness; // item array for the main entity of the ontology type's MedicalWebPages
+															if ( isset($provider_location_LocalBusiness) ) { $provider_location_about[] = $provider_location_LocalBusiness; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 															if ( $provider_location_LocalBusiness ) {
 
@@ -17150,6 +17154,8 @@
 
 													if ( isset($provider_expertise) ) {
 
+														$provider_expertise_about = array(); // Base array for all major entities of the ontology type's MedicalWebPages
+
 														// MedicalWebPage
 
 															$provider_expertise_MedicalWebPage = $provider_expertise['MedicalWebPage'] ?? null;
@@ -17168,6 +17174,8 @@
 														// MedicalEntity and subtypes
 
 															$provider_expertise_MedicalEntity = $provider_expertise['MedicalEntity'] ?? null;
+															$provider_expertise_mainEntity = $provider_expertise_MedicalEntity; // item array for the main entity of the ontology type's MedicalWebPages
+															if ( isset($provider_expertise_MedicalEntity) ) { $provider_expertise_about[] = $provider_expertise_MedicalEntity; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 															if ( $provider_expertise_MedicalEntity ) {
 
@@ -17266,6 +17274,8 @@
 
 													if ( isset($provider_clinical_resource) ) {
 
+														$provider_clinical_resource_about = array(); // Base array for all major entities of the ontology type's MedicalWebPages
+
 														// MedicalWebPage
 
 															$provider_clinical_resource_MedicalWebPage = $provider_clinical_resource['MedicalWebPage'] ?? null;
@@ -17284,6 +17294,8 @@
 														// CreativeWork and subtypes
 
 															$provider_clinical_resource_CreativeWork = $provider_clinical_resource['CreativeWork'] ?? null;
+															$provider_clinical_resource_mainEntity = $provider_clinical_resource_CreativeWork; // item array for the main entity of the ontology type's MedicalWebPages
+															if ( isset($provider_clinical_resource_CreativeWork) ) { $provider_clinical_resource_about[] = $provider_clinical_resource_CreativeWork; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 															if ( $provider_clinical_resource_CreativeWork ) {
 
@@ -26142,6 +26154,8 @@
 
 														if ( isset($location_provider) ) {
 
+															$location_provider_about = array(); // all major entities of the ontology type's MedicalWebPages
+
 															// MedicalWebPage
 
 																$location_provider_MedicalWebPage = $location_provider['MedicalWebPage'] ?? null;
@@ -26160,6 +26174,7 @@
 															// MedicalBusiness and subtypes
 
 																$location_provider_MedicalBusiness = $location_provider['MedicalBusiness'] ?? null;
+																if ( isset($location_provider_MedicalBusiness) ) { $location_provider_about[] = $location_provider_MedicalBusiness; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 																if ( $location_provider_MedicalBusiness ) {
 
@@ -26182,6 +26197,8 @@
 															// Person
 
 																$location_provider_Person = $location_provider['Person'] ?? null;
+																$location_provider_mainEntity = $location_provider_Person; // item array for the main entity of the ontology type's MedicalWebPages
+																if ( isset($location_provider_Person) ) { $location_provider_about[] = $location_provider_Person; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 																if ( $location_provider_Person ) {
 
@@ -26281,6 +26298,8 @@
 
 														if ( isset($location_descendant_location) ) {
 
+															$location_descendant_location_about = array(); // Base array for all major entities of the ontology type's MedicalWebPages
+
 															// MedicalWebPage
 
 																$location_descendant_location_MedicalWebPage = $location_descendant_location['MedicalWebPage'] ?? null;
@@ -26299,6 +26318,8 @@
 															// LocalBusiness and subtypes
 
 																$location_descendant_location_LocalBusiness = $location_descendant_location['LocalBusiness'] ?? null;
+																$location_descendant_location_mainEntity = $location_descendant_location_LocalBusiness; // item array for the main entity of the ontology type's MedicalWebPages
+																if ( isset($location_descendant_location_LocalBusiness) ) { $location_descendant_location_about[] = $location_descendant_location_LocalBusiness; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 																if ( $location_descendant_location_LocalBusiness ) {
 
@@ -26384,6 +26405,8 @@
 
 													if ( isset($location_expertise) ) {
 
+														$location_expertise_about = array(); // Base array for all major entities of the ontology type's MedicalWebPages
+
 														// MedicalWebPage
 
 															$location_expertise_MedicalWebPage = $location_expertise['MedicalWebPage'] ?? null;
@@ -26402,6 +26425,8 @@
 														// MedicalEntity and subtypes
 
 															$location_expertise_MedicalEntity = $location_expertise['MedicalEntity'] ?? null;
+															$location_expertise_mainEntity = $location_expertise_MedicalEntity; // item array for the main entity of the ontology type's MedicalWebPages
+															if ( isset($location_expertise_MedicalEntity) ) { $location_expertise_about[] = $location_expertise_MedicalEntity; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 															if ( $location_expertise_MedicalEntity ) {
 
@@ -26491,6 +26516,8 @@
 
 													if ( isset($location_clinical_resource) ) {
 
+														$location_clinical_resource_about = array(); // Base array for all major entities of the ontology type's MedicalWebPages
+
 														// MedicalWebPage
 
 															$location_clinical_resource_MedicalWebPage = $location_clinical_resource['MedicalWebPage'] ?? null;
@@ -26509,6 +26536,8 @@
 														// CreativeWork and subtypes
 
 															$location_clinical_resource_CreativeWork = $location_clinical_resource['CreativeWork'] ?? null;
+															$location_clinical_resource_mainEntity = $location_clinical_resource_CreativeWork; // item array for the main entity of the ontology type's MedicalWebPages
+															if ( isset($location_clinical_resource_CreativeWork) ) { $location_clinical_resource_about[] = $location_clinical_resource_CreativeWork; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 															if ( $location_clinical_resource_CreativeWork ) {
 
@@ -33523,6 +33552,8 @@
 
 														if ( isset($expertise_provider) ) {
 
+															$expertise_provider_about = array(); // all major entities of the ontology type's MedicalWebPages
+
 															// MedicalWebPage
 
 																$expertise_provider_MedicalWebPage = $expertise_provider['MedicalWebPage'] ?? null;
@@ -33541,6 +33572,7 @@
 															// MedicalBusiness and subtypes
 
 																$expertise_provider_MedicalBusiness = $expertise_provider['MedicalBusiness'] ?? null;
+																if ( isset($expertise_provider_MedicalBusiness) ) { $expertise_provider_about[] = $expertise_provider_MedicalBusiness; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 																if ( $expertise_provider_MedicalBusiness ) {
 
@@ -33563,6 +33595,8 @@
 															// Person
 
 																$expertise_provider_Person = $expertise_provider['Person'] ?? null;
+																$expertise_provider_mainEntity = $expertise_provider_Person; // item array for the main entity of the ontology type's MedicalWebPages
+																if ( isset($expertise_provider_Person) ) { $expertise_provider_about[] = $expertise_provider_Person; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 																if ( $expertise_provider_Person ) {
 
@@ -33650,6 +33684,8 @@
 
 													if ( isset($expertise_location) ) {
 
+														$expertise_location_about = array(); // Base array for all major entities of the ontology type's MedicalWebPages
+
 														// MedicalWebPage
 
 															$expertise_location_MedicalWebPage = $expertise_location['MedicalWebPage'] ?? null;
@@ -33668,6 +33704,8 @@
 														// LocalBusiness and subtypes
 
 															$expertise_location_LocalBusiness = $expertise_location['LocalBusiness'] ?? null;
+															$expertise_location_mainEntity = $expertise_location_LocalBusiness; // item array for the main entity of the ontology type's MedicalWebPages
+															if ( isset($expertise_location_LocalBusiness) ) { $expertise_location_about[] = $expertise_location_LocalBusiness; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 															if ( $expertise_location_LocalBusiness ) {
 
@@ -33782,6 +33820,8 @@
 
 													if ( isset($expertise_descendant_expertise) ) {
 
+														$expertise_descendant_expertise_about = array(); // Base array for all major entities of the ontology type's MedicalWebPages
+
 														// MedicalWebPage
 
 															$expertise_descendant_expertise_MedicalWebPage = $expertise_descendant_expertise['MedicalWebPage'] ?? null;
@@ -33800,6 +33840,8 @@
 														// MedicalEntity and subtypes
 
 															$expertise_descendant_expertise_MedicalEntity = $expertise_descendant_expertise['MedicalEntity'] ?? null;
+															$expertise_descendant_expertise_mainEntity = $expertise_descendant_expertise_MedicalEntity; // item array for the main entity of the ontology type's MedicalWebPages
+															if ( isset($expertise_descendant_expertise_MedicalEntity) ) { $expertise_descendant_expertise_about[] = $expertise_descendant_expertise_MedicalEntity; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 															if ( $expertise_descendant_expertise_MedicalEntity ) {
 
@@ -33889,6 +33931,8 @@
 
 													if ( isset($expertise_related_expertise) ) {
 
+														$expertise_related_expertise_about = array(); // Base array for all major entities of the ontology type's MedicalWebPages
+
 														// MedicalWebPage
 
 															$expertise_related_expertise_MedicalWebPage = $expertise_related_expertise['MedicalWebPage'] ?? null;
@@ -33907,6 +33951,8 @@
 														// MedicalEntity and subtypes
 
 															$expertise_related_expertise_MedicalEntity = $expertise_related_expertise['MedicalEntity'] ?? null;
+															$expertise_related_expertise_mainEntity = $expertise_related_expertise_MedicalEntity; // item array for the main entity of the ontology type's MedicalWebPages
+															if ( isset($expertise_related_expertise_MedicalEntity) ) { $expertise_related_expertise_about[] = $expertise_related_expertise_MedicalEntity; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 															if ( $expertise_related_expertise_MedicalEntity ) {
 
@@ -33996,6 +34042,8 @@
 
 													if ( isset($expertise_clinical_resource) ) {
 
+														$expertise_clinical_resource_about = array(); // Base array for all major entities of the ontology type's MedicalWebPages
+
 														// MedicalWebPage
 
 															$expertise_clinical_resource_MedicalWebPage = $expertise_clinical_resource['MedicalWebPage'] ?? null;
@@ -34014,6 +34062,8 @@
 														// CreativeWork and subtypes
 
 															$expertise_clinical_resource_CreativeWork = $expertise_clinical_resource['CreativeWork'] ?? null;
+															$expertise_clinical_resource_mainEntity = $expertise_clinical_resource_CreativeWork; // item array for the main entity of the ontology type's MedicalWebPages
+															if ( isset($expertise_clinical_resource_CreativeWork) ) { $expertise_clinical_resource_about[] = $expertise_clinical_resource_CreativeWork; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 															if ( $expertise_clinical_resource_CreativeWork ) {
 
@@ -37898,6 +37948,8 @@
 
 														if ( isset($clinical_resource_provider) ) {
 
+															$clinical_resource_provider_about = array(); // all major entities of the ontology type's MedicalWebPages
+
 															// MedicalWebPage
 
 																$clinical_resource_provider_MedicalWebPage = $clinical_resource_provider['MedicalWebPage'] ?? null;
@@ -37916,6 +37968,7 @@
 															// MedicalBusiness and subtypes
 
 																$clinical_resource_provider_MedicalBusiness = $clinical_resource_provider['MedicalBusiness'] ?? null;
+																if ( isset($clinical_resource_provider_MedicalBusiness) ) { $clinical_resource_provider_about[] = $clinical_resource_provider_MedicalBusiness; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 																if ( $clinical_resource_provider_MedicalBusiness ) {
 
@@ -37938,6 +37991,8 @@
 															// Person
 
 																$clinical_resource_provider_Person = $clinical_resource_provider['Person'] ?? null;
+																$clinical_resource_provider_mainEntity = $clinical_resource_provider_Person; // item array for the main entity of the ontology type's MedicalWebPages
+																if ( isset($clinical_resource_provider_Person) ) { $clinical_resource_provider_about[] = $clinical_resource_provider_Person; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 																if ( $clinical_resource_provider_Person ) {
 
@@ -38027,6 +38082,8 @@
 
 													if ( isset($clinical_resource_location) ) {
 
+														$clinical_resource_location_about = array(); // Base array for all major entities of the ontology type's MedicalWebPages
+
 														// MedicalWebPage
 
 															$clinical_resource_location_MedicalWebPage = $clinical_resource_location['MedicalWebPage'] ?? null;
@@ -38045,6 +38102,8 @@
 														// LocalBusiness and subtypes
 
 															$clinical_resource_location_LocalBusiness = $clinical_resource_location['LocalBusiness'] ?? null;
+															$clinical_resource_location_mainEntity = $clinical_resource_location_LocalBusiness; // item array for the main entity of the ontology type's MedicalWebPages
+															if ( isset($clinical_resource_location_LocalBusiness) ) { $clinical_resource_location_about[] = $clinical_resource_location_LocalBusiness; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 															if ( $clinical_resource_location_LocalBusiness ) {
 
@@ -38136,6 +38195,8 @@
 
 													if ( isset($clinical_resource_expertise) ) {
 
+														$clinical_resource_expertise_about = array(); // Base array for all major entities of the ontology type's MedicalWebPages
+
 														// MedicalWebPage
 
 															$clinical_resource_expertise_MedicalWebPage = $clinical_resource_expertise['MedicalWebPage'] ?? null;
@@ -38154,6 +38215,8 @@
 														// MedicalEntity and subtypes
 
 															$clinical_resource_expertise_MedicalEntity = $clinical_resource_expertise['MedicalEntity'] ?? null;
+															$clinical_resource_expertise_mainEntity = $clinical_resource_expertise_MedicalEntity; // item array for the main entity of the ontology type's MedicalWebPages
+															if ( isset($clinical_resource_expertise_MedicalEntity) ) { $clinical_resource_expertise_about[] = $clinical_resource_expertise_MedicalEntity; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 															if ( $clinical_resource_expertise_MedicalEntity ) {
 
@@ -38244,6 +38307,8 @@
 
 													if ( isset($clinical_resource_related_clinical_resource) ) {
 
+														$clinical_resource_related_clinical_resource_about = array(); // Base array for all major entities of the ontology type's MedicalWebPages
+
 														// MedicalWebPage
 
 															$clinical_resource_related_clinical_resource_MedicalWebPage = $clinical_resource_related_clinical_resource['MedicalWebPage'] ?? null;
@@ -38262,6 +38327,8 @@
 														// CreativeWork and subtypes
 
 															$clinical_resource_related_clinical_resource_CreativeWork = $clinical_resource_related_clinical_resource['CreativeWork'] ?? null;
+															$clinical_resource_related_clinical_resource_mainEntity = $clinical_resource_related_clinical_resource_CreativeWork; // item array for the main entity of the ontology type's MedicalWebPages
+															if ( isset($clinical_resource_related_clinical_resource_CreativeWork) ) { $clinical_resource_related_clinical_resource_about[] = $clinical_resource_related_clinical_resource_CreativeWork; } // Add to the list of all major entities of the ontology type's MedicalWebPages
 
 															if ( $clinical_resource_related_clinical_resource_CreativeWork ) {
 
