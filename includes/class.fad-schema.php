@@ -12601,6 +12601,17 @@
 						 *
 						 *      - Thing
 						 *
+						 * Used on these types:
+						 *
+						 *      - Certification
+						 *      - CommunicateAction
+						 *      - CreativeWork
+						 *      - Event
+						 *
+						 * Sub-properties:
+						 *
+						 *      - mainEntity
+						 *
 						 * This property is beyond the scope of what is being included in the UAMS Health
 						 * WebSite item schema and so it will not be included.
 						 */
