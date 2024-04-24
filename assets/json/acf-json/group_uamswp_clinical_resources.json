@@ -161,6 +161,45 @@
 			"acfe_validate": ""
 		},
 		{
+			"key": "field_clinical_resource_document_subtype",
+			"label": "Document Subtype",
+			"name": "clinical_resource_document_subtype",
+			"type": "radio",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "doc"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "<strong>None</strong> — No available option is relevant to this clinical resource",
+				"PresentationDigitalDocument": "<strong>Presentation</strong> — A file containing slides or used for a presentation",
+				"SpreadsheetDigitalDocument": "<strong>Spreadsheet</strong> — A spreadsheet file",
+				"TextDigitalDocument": "<strong>Text</strong> — A file composed primarily of text"
+			},
+			"allow_custom": 0,
+			"default_value": [],
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		{
 			"key": "field_clinical_resource_syndicated",
 			"label": "Is this syndicated from another source?",
 			"name": "clinical_resource_syndicated",
