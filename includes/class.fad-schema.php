@@ -39013,7 +39013,7 @@
 
 									}
 
-								// about (CreativeWork only) [WIP]
+								// about (CreativeWork only)
 
 									/**
 									 * The subject matter of the content.
