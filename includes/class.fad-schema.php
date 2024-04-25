@@ -39466,10 +39466,6 @@
 
 										// Get values
 
-											// Base value
-
-												$clinical_resource_articleBody = array();
-
 											// Get NCI syndication query
 
 												$clinical_resource_nci_query = get_field( 'clinical_resource_text_nci_query', $entity ) ?? false;
