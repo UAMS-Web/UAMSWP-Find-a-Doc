@@ -130,43 +130,47 @@
 
 							// Individual Modification to the In-Person Hours of Operation
 
-								$location_hours_modified_v2 = $location_hours_group['location_modified_hours_group_v2'];
+								$location_hours_modified_v2 = $location_hours_group['location_modified_hours_group_v2'] ?? null;
 
-							foreach ( $location_hours_modified_v2 as $item ) {
+							if ( $location_hours_modified_v2 ) {
 
-								// Loop through the 'Dates of the Special In-Person Hours of Operation' repeater
+								foreach ( $location_hours_modified_v2 as $item ) {
 
-									// Dates of the Special In-Person Hours of Operation
+									// Loop through the 'Dates of the Special In-Person Hours of Operation' repeater
 
-										$item_date_groups = $item['dates'];
+										// Dates of the Special In-Person Hours of Operation
 
-									foreach ( $item_date_groups as $item_date_group ) {
+											$item_date_groups = $item['dates'];
 
-										// Individual Date For the Special In-Person Hours of Operation
+										foreach ( $item_date_groups as $item_date_group ) {
 
-											$item_date = $item_date_group['date'] ?: null; // F j, Y
+											// Individual Date For the Special In-Person Hours of Operation
 
-											// Convert value to Unix timestamp
+												$item_date = $item_date_group['date'] ?: null; // F j, Y
 
-												$item_date_unix = $item_date ? strtotime($item_date) : null;
+												// Convert value to Unix timestamp
 
-											// Set active modified hours query to true if the date is today or within the next 30 days
+													$item_date_unix = $item_date ? strtotime($item_date) : null;
 
-												if (
-													$item_date_unix
-													&&
-													(
-														$item_date_unix >= $today
+												// Set active modified hours query to true if the date is today or within the next 30 days
+
+													if (
+														$item_date_unix
 														&&
-														$item_date_unix <= $today_30
-													)
-												) {
+														(
+															$item_date_unix >= $today
+															&&
+															$item_date_unix <= $today_30
+														)
+													) {
 
-													$location_hours_modified_active = true;
+														$location_hours_modified_active = true;
 
-												}
+													}
 
-									}
+										}
+
+								}
 
 							}
 
