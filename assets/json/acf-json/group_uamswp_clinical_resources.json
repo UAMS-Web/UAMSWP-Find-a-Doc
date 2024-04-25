@@ -200,6 +200,45 @@
 			"acfe_validate": ""
 		},
 		{
+			"key": "field_clinical_resource_iptcdigitalsourceenumeration",
+			"label": "IPTC Digital Source Type(s) of the Entity (digitalSourceType > IPTCDigitalSourceEnumeration)",
+			"name": "clinical_resource_iptcdigitalsourceenumeration",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "infographic"
+					}
+				],
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "video"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_iptcdigitalsourceenumeration_multiple"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
 			"key": "field_clinical_resource_syndicated",
 			"label": "Is this syndicated from another source?",
 			"name": "clinical_resource_syndicated",
