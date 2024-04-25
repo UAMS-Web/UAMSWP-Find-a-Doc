@@ -453,7 +453,7 @@
 			"label": "MedicalTest Subtype",
 			"name": "schema_medicaltest_subtype",
 			"type": "radio",
-			"instructions": "Select the most appropriate subtype of MedicalTest.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/MedicalTest#subtypes' target='_blank'>https://schema.org/MedicalTest#subtypes</a>.",
+			"instructions": "Select the most appropriate subtype of MedicalTest. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/MedicalTest#subtypes' target='_blank'>https://schema.org/MedicalTest#subtypes</a>.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -480,7 +480,7 @@
 			"label": "MedicalProcedure Subtype",
 			"name": "schema_medicalprocedure_subtype",
 			"type": "radio",
-			"instructions": "Select the most appropriate subtype of MedicalProcedure.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/MedicalProcedure#subtypes' target='_blank'>https://schema.org/MedicalProcedure#subtypes</a>.",
+			"instructions": "Select the most appropriate subtype of MedicalProcedure. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/MedicalProcedure#subtypes' target='_blank'>https://schema.org/MedicalProcedure#subtypes</a>.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -508,7 +508,7 @@
 			"label": "TherapeuticProcedure Subtype",
 			"name": "schema_therapeuticprocedure_subtype",
 			"type": "radio",
-			"instructions": "Select the most appropriate subtype of TherapeuticProcedure.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/TherapeuticProcedure#subtypes' target='_blank'>https://schema.org/TherapeuticProcedure#subtypes</a>.",
+			"instructions": "Select the most appropriate subtype of TherapeuticProcedure. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/TherapeuticProcedure#subtypes' target='_blank'>https://schema.org/TherapeuticProcedure#subtypes</a>.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -533,7 +533,7 @@
 			"label": "MedicalTherapy Subtype",
 			"name": "schema_medicaltherapy_subtype",
 			"type": "radio",
-			"instructions": "Select the most appropriate subtype of MedicalTherapy.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/MedicalTherapy#subtypes' target='_blank'>https://schema.org/MedicalTherapy#subtypes</a>.",
+			"instructions": "Select the most appropriate subtype of MedicalTherapy. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/MedicalTherapy#subtypes' target='_blank'>https://schema.org/MedicalTherapy#subtypes</a>.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -561,7 +561,7 @@
 			"label": "Imaging Technique Used (MedicalImagingTechnique)",
 			"name": "schema_medicalimagingtechnique",
 			"type": "radio",
-			"instructions": "Select the most appropriate MedicalImagingTechnique enumeration member.</p><p class='description' style='margin-top: 0.5em;'>For information on the imagingTechnique Schema.org property, visit <a href='https://schema.org/imagingTechnique' target='_blank'>https://schema.org/imagingTechnique</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalImagingTechnique Schema.org enumeration type, visit <a href='https://schema.org/MedicalImagingTechnique' target='_blank'>https://schema.org/MedicalImagingTechnique</a>.",
+			"instructions": "Select the most appropriate MedicalImagingTechnique enumeration member. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the imagingTechnique Schema.org property, visit <a href='https://schema.org/imagingTechnique' target='_blank'>https://schema.org/imagingTechnique</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalImagingTechnique Schema.org enumeration type, visit <a href='https://schema.org/MedicalImagingTechnique' target='_blank'>https://schema.org/MedicalImagingTechnique</a>.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -782,7 +782,7 @@
 			"label": "Type of Procedure (MedicalProcedureType)",
 			"name": "schema_medicalproceduretype",
 			"type": "radio",
-			"instructions": "Select the most appropriate MedicalProcedureType.</p><p class='description' style='margin-top: 0.5em;'>For information on the medicalProcedureType Schema.org property, visit <a href='https://schema.org/procedureType' target='_blank'>https://schema.org/procedureType</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalProcedureType Schema.org enumeration type, visit <a href='https://schema.org/MedicalProcedureType' target='_blank'>https://schema.org/MedicalProcedureType</a>.",
+			"instructions": "Select the most appropriate MedicalProcedureType. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the medicalProcedureType Schema.org property, visit <a href='https://schema.org/procedureType' target='_blank'>https://schema.org/procedureType</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalProcedureType Schema.org enumeration type, visit <a href='https://schema.org/MedicalProcedureType' target='_blank'>https://schema.org/MedicalProcedureType</a>.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1050,7 +1050,7 @@
 			"label": "MedicalCondition Subtype",
 			"name": "schema_medicalcondition_subtype",
 			"type": "radio",
-			"instructions": "Select the most appropriate subtype of MedicalCondition.</p><p class='description' style='margin-top: 0.5em;'>For information on the Schema.org MedicalCondition type, visit <a href='https://schema.org/MedicalCondition' target='_blank'>https://schema.org/MedicalCondition</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each subtype, visit the relevant page linked at <a href='https://schema.org/MedicalCondition#Subtypes' target='_blank'>https://schema.org/MedicalCondition#Subtypes</a>.",
+			"instructions": "Select the most appropriate subtype of MedicalCondition. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the Schema.org MedicalCondition type, visit <a href='https://schema.org/MedicalCondition' target='_blank'>https://schema.org/MedicalCondition</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each subtype, visit the relevant page linked at <a href='https://schema.org/MedicalCondition#Subtypes' target='_blank'>https://schema.org/MedicalCondition#Subtypes</a>.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1095,7 +1095,7 @@
 			"label": "Infectious Agent Class (InfectiousAgentClass)",
 			"name": "schema_infectiousagentclass",
 			"type": "radio",
-			"instructions": "Select the class of agents or pathogens that transmits this infectious disease.</p><p class='description' style='margin-top: 0.5em;'>For information on the Schema.org InfectiousAgentClass enumeration type, visit <a href='https://schema.org/InfectiousAgentClass' target='_blank'>https://schema.org/InfectiousAgentClass</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each enumeration member, visit the relevant page linked at <a href='https://schema.org/InfectiousAgentClass#subtypes' target='_blank'>https://schema.org/InfectiousAgentClass#subtypes</a>.",
+			"instructions": "Select the class of agents or pathogens that transmits this infectious disease. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the Schema.org InfectiousAgentClass enumeration type, visit <a href='https://schema.org/InfectiousAgentClass' target='_blank'>https://schema.org/InfectiousAgentClass</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each enumeration member, visit the relevant page linked at <a href='https://schema.org/InfectiousAgentClass#subtypes' target='_blank'>https://schema.org/InfectiousAgentClass#subtypes</a>.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
