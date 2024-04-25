@@ -436,7 +436,8 @@
 			// add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 		// Start count for jump links
-		$jump_link_count = 0;
+
+			$jump_link_count = 0;
 
 		// Queries for whether each of the sections should be displayed
 
