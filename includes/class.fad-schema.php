@@ -37958,6 +37958,23 @@
 
 																$clinical_resource_provider_about = array(); // Base array
 
+																foreach ( $clinical_resource_provider as $key => $value ) {
+
+																	if (
+																		$value
+																		&&
+																		$key != 'MedicalWebPage'
+																	) {
+
+																		$clinical_resource_provider_about = array_merge(
+																			$clinical_resource_provider_about,
+																			$value
+																		);
+
+																	}
+
+																}
+
 															// MedicalWebPage
 
 																$clinical_resource_provider_MedicalWebPage = $clinical_resource_provider['MedicalWebPage'] ?? null;
@@ -38092,6 +38109,23 @@
 
 															$clinical_resource_location_about = array(); // Base array
 
+															foreach ( $clinical_resource_location as $key => $value ) {
+
+																if (
+																	$value
+																	&&
+																	$key != 'MedicalWebPage'
+																) {
+
+																	$clinical_resource_location_about = array_merge(
+																		$clinical_resource_location_about,
+																		$value
+																	);
+
+																}
+
+															}
+
 														// MedicalWebPage
 
 															$clinical_resource_location_MedicalWebPage = $clinical_resource_location['MedicalWebPage'] ?? null;
@@ -38206,6 +38240,23 @@
 
 															$clinical_resource_expertise_about = array(); // Base array
 
+															foreach ( $clinical_resource_expertise as $key => $value ) {
+
+																if (
+																	$value
+																	&&
+																	$key != 'MedicalWebPage'
+																) {
+
+																	$clinical_resource_expertise_about = array_merge(
+																		$clinical_resource_expertise_about,
+																		$value
+																	);
+
+																}
+
+															}
+
 														// MedicalWebPage
 
 															$clinical_resource_expertise_MedicalWebPage = $clinical_resource_expertise['MedicalWebPage'] ?? null;
@@ -38318,6 +38369,23 @@
 														// Create a list of all major entities of the ontology type's MedicalWebPages
 
 															$clinical_resource_related_clinical_resource_about = array(); // Base array
+
+															foreach ( $clinical_resource_related_clinical_resource as $key => $value ) {
+
+																if (
+																	$value
+																	&&
+																	$key != 'MedicalWebPage'
+																) {
+
+																	$clinical_resource_related_clinical_resource_about = array_merge(
+																		$clinical_resource_related_clinical_resource_about,
+																		$value
+																	);
+
+																}
+
+															}
 
 														// MedicalWebPage
 
