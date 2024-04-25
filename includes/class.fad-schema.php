@@ -40300,12 +40300,6 @@
 												$clinical_resource_digitalSourceType = array_filter($clinical_resource_digitalSourceType);
 												$clinical_resource_digitalSourceType = array_values($clinical_resource_digitalSourceType);
 
-											echo '<p>$clinical_resource_digitalSourceType = ' . ( is_array($clinical_resource_digitalSourceType) ? 'Array' : $clinical_resource_digitalSourceType ) . '</p>'; // test
-											echo '<pre>'; // test
-											echo print_r($clinical_resource_digitalSourceType); // test
-											echo '</pre>'; // test
-
-
 										// Add to item values
 
 											// MedicalWebPage
