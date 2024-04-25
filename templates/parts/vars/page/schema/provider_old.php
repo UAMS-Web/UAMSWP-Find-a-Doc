@@ -1450,7 +1450,7 @@ $page_id = get_the_ID();
 				!empty($provider_specialty)
 			) {
 
-				$schema_provider_Person['hasOccupation'] = uamswp_fad_schema_hasoccupation(
+				$schema_provider_Person['hasOccupation'] = uamswp_fad_schema_hasoccupation_id(
 					$provider_specialty // mixed // Required // Clinical Specialization ID values
 				);
 
