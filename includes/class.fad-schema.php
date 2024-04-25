@@ -40348,6 +40348,73 @@
 									 *
 									 */
 
+									if (
+										(
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'digitalSourceType',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
+											)
+											||
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'digitalSourceType',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$clinical_resource_digitalSourceType = get_field( 'schema_iptcdigitalsourceenumeration_multiple', $entity ) ?? null;
+
+											// Clean up values
+
+												$clinical_resource_digitalSourceType = array_filter($clinical_resource_digitalSourceType);
+												$clinical_resource_digitalSourceType = array_values($clinical_resource_digitalSourceType);
+
+											echo '<p>$clinical_resource_digitalSourceType = ' . ( is_array($clinical_resource_digitalSourceType) ? 'Array' : $clinical_resource_digitalSourceType ) . '</p>'; // test
+											echo '<pre>'; // test
+											echo print_r($clinical_resource_digitalSourceType); // test
+											echo '</pre>'; // test
+
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'digitalSourceType', // string // Required // Name of schema property
+													$clinical_resource_digitalSourceType, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// CreativeWork
+
+												uamswp_fad_schema_add_to_item_values(
+													$CreativeWork_type, // string // Required // The @type value for the schema item
+													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+													'digitalSourceType', // string // Required // Name of schema property
+													$clinical_resource_digitalSourceType, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
 								// director [excluded; common properties]
 
 									/**
