@@ -1450,6 +1450,83 @@
 					"acfe_validate_error": "The expected format for this value is 12 digits"
 				}
 			}
+		},
+		{
+			"key": "field_schema_iptcdigitalsourceenumeration_single",
+			"label": "IPTC Digital Source Type of the Entity (digitalSourceType > IPTCDigitalSourceEnumeration)",
+			"name": "schema_iptcdigitalsourceenumeration_single",
+			"type": "radio",
+			"instructions": "Select the most appropriate IPTC digital source type to describe the entity. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on each option, visit the relevant page linked at <a href='https://schema.org/IPTCDigitalSourceEnumeration#subtypes' target='_blank'>https://schema.org/IPTCDigitalSourceEnumeration#subtypes</a>.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"AlgorithmicMediaDigitalSource": "<strong>Pure Algorithmic Media</strong> &mdash; Media created purely by an algorithm not based on any sampled training data (e.g. an image created by software using a mathematical formula)",
+				"AlgorithmicallyEnhancedDigitalSource": "<strong>Algorithmically-Enhanced Media</strong> &mdash; Minor augmentation or correction by algorithm",
+				"CompositeCaptureDigitalSource": "<strong>Composite of Captured Elements</strong> &mdash; Mix or composite of several elements that are all captures of real life",
+				"CompositeSyntheticDigitalSource": "<strong>Composite Including Synthetic Elements</strong> &mdash; Mix or composite of several elements, at least one of which is synthetic",
+				"CompositeWithTrainedAlgorithmicMediaDigitalSource": "<strong>Composite With Trained Algorithmic Media</strong> &mdash; The compositing of trained algorithmic media with some other media, such as with inpainting or outpainting operations",
+				"DataDrivenMediaDigitalSource": "<strong>Data-Driven Media</strong> &mdash; Digital media representation of data via human programming or creativity",
+				"DigitalArtDigitalSource": "<strong>Digital Art</strong> &mdash; Media created by a human using digital tools",
+				"DigitalCaptureDigitalSource": "<strong>Original Digital Capture Sampled From Real Life</strong> &mdash; The digital media is captured from a real-life source using a digital camera or digital recording device",
+				"MinorHumanEditsDigitalSource": "<strong>Original Media With Minor Human Edits</strong> &mdash; Minor augmentation or correction by a human, such as a digitally-retouched photo used in a magazine",
+				"NegativeFilmDigitalSource": "<strong>Digitized From a Negative on Film</strong> &mdash; The digital image was digitized from a negative on film or any other transparent medium",
+				"PositiveFilmDigitalSource": "<strong>Digitized From a Positive on Film</strong> &mdash; The digital image was digitized from a positive on a transparency or any other transparent medium",
+				"PrintDigitalSource": "<strong>Digitized From a Print on Non-Transparent Medium</strong> &mdash; The digital image was digitized from an image printed on a non-transparent medium",
+				"TrainedAlgorithmicMediaDigitalSource": "<strong>Trained Algorithmic Media</strong> &mdash; Digital media created algorithmically using a model derived from sampled content",
+				"VirtualRecordingDigitalSource": "<strong>Virtual Recording</strong> &mdash; Live recording of virtual event based on synthetic and optionally captured elements"
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_schema_iptcdigitalsourceenumeration_multiple",
+			"label": "IPTC Digital Source Type(s) of the Entity (digitalSourceType > IPTCDigitalSourceEnumeration)",
+			"name": "schema_iptcdigitalsourceenumeration_multiple",
+			"type": "checkbox",
+			"instructions": "Select the most appropriate IPTC digital source types to describe the entity. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on each option, visit the relevant page linked at <a href='https://schema.org/IPTCDigitalSourceEnumeration#subtypes' target='_blank'>https://schema.org/IPTCDigitalSourceEnumeration#subtypes</a>.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"AlgorithmicMediaDigitalSource": "<strong>Pure Algorithmic Media</strong> &mdash; Media created purely by an algorithm not based on any sampled training data (e.g. an image created by software using a mathematical formula)",
+				"AlgorithmicallyEnhancedDigitalSource": "<strong>Algorithmically-Enhanced Media</strong> &mdash; Minor augmentation or correction by algorithm",
+				"CompositeCaptureDigitalSource": "<strong>Composite of Captured Elements</strong> &mdash; Mix or composite of several elements that are all captures of real life",
+				"CompositeSyntheticDigitalSource": "<strong>Composite Including Synthetic Elements</strong> &mdash; Mix or composite of several elements, at least one of which is synthetic",
+				"CompositeWithTrainedAlgorithmicMediaDigitalSource": "<strong>Composite With Trained Algorithmic Media</strong> &mdash; The compositing of trained algorithmic media with some other media, such as with inpainting or outpainting operations",
+				"DataDrivenMediaDigitalSource": "<strong>Data-Driven Media</strong> &mdash; Digital media representation of data via human programming or creativity",
+				"DigitalArtDigitalSource": "<strong>Digital Art</strong> &mdash; Media created by a human using digital tools",
+				"DigitalCaptureDigitalSource": "<strong>Original Digital Capture Sampled From Real Life</strong> &mdash; The digital media is captured from a real-life source using a digital camera or digital recording device",
+				"MinorHumanEditsDigitalSource": "<strong>Original Media With Minor Human Edits</strong> &mdash; Minor augmentation or correction by a human, such as a digitally-retouched photo used in a magazine",
+				"NegativeFilmDigitalSource": "<strong>Digitized From a Negative on Film</strong> &mdash; The digital image was digitized from a negative on film or any other transparent medium",
+				"PositiveFilmDigitalSource": "<strong>Digitized From a Positive on Film</strong> &mdash; The digital image was digitized from a positive on a transparency or any other transparent medium",
+				"PrintDigitalSource": "<strong>Digitized From a Print on Non-Transparent Medium</strong> &mdash; The digital image was digitized from an image printed on a non-transparent medium",
+				"TrainedAlgorithmicMediaDigitalSource": "<strong>Trained Algorithmic Media</strong> &mdash; Digital media created algorithmically using a model derived from sampled content",
+				"VirtualRecordingDigitalSource": "<strong>Virtual Recording</strong> &mdash; Live recording of virtual event based on synthetic and optionally captured elements"
+			},
+			"allow_custom": 0,
+			"default_value": [],
+			"layout": "vertical",
+			"toggle": 0,
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"save_custom": 0
 		}
 	],
 	"location": "",
