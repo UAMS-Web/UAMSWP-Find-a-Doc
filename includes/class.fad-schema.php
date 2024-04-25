@@ -39729,7 +39729,7 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// caption (CreativeWork only) [WIP]
+								// caption
 
 									/**
 									 * The caption for this object. For downloadable machine formats (closed caption,
@@ -39745,7 +39745,66 @@
 									 *     - AudioObject
 									 *     - ImageObject
 									 *     - VideoObject
+									 *
+									 * Note: The documentation on schema.org is not helpful for clearly distinguishing
+									 * the different intended uses of the 'name', 'caption' and 'description'
+									 * properties when defining schema for the AudioObject, ImageObject and
+									 * VideoObject types. It is likely that they are all intended to have unique
+									 * values. However, until clarity is found, the 'caption' property value will be
+									 * defined using the same value that is used for the 'description' property value.
 									 */
+
+									if (
+										$clinical_resource_introduction
+										&&
+										(
+											(
+												isset($clinical_resource_item_MedicalWebPage)
+												&&
+												in_array(
+													'caption',
+													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+												)
+											)
+											||
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'caption',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
+											)
+										)
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'caption', // string // Required // Name of schema property
+													$clinical_resource_introduction, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// CreativeWork
+
+												uamswp_fad_schema_add_to_item_values(
+													$CreativeWork_type, // string // Required // The @type value for the schema item
+													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+													'description', // string // Required // Name of schema property
+													$clinical_resource_introduction, // mixed // Required // Variable to add as the property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
 
 								// character [excluded; common properties]
 
