@@ -40297,8 +40297,8 @@
 
 											// Clean up values
 
-												$clinical_resource_digitalSourceType = array_filter($clinical_resource_digitalSourceType);
-												$clinical_resource_digitalSourceType = array_values($clinical_resource_digitalSourceType);
+												$clinical_resource_digitalSourceType = $clinical_resource_digitalSourceType ? array_filter($clinical_resource_digitalSourceType) : null;
+												$clinical_resource_digitalSourceType = $clinical_resource_digitalSourceType ? array_values($clinical_resource_digitalSourceType) : null;
 
 										// Add to item values
 
