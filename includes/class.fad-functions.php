@@ -12696,7 +12696,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 							// hasOccupation
 
 								$hasOccupation = uamswp_fad_schema_hasoccupation(
-									$patientFriendly_occupation_alternatename, // array // optional // alternateName (alternate clinical occupation title value from Clinical Specialization item)
+									$patientFriendly_occupation_alternatename, // string|array // optional // alternateName (alternate clinical occupation title value from Clinical Specialization item)
 									$codeSet_definition_attr, // string // optional // description
 									$patientFriendly_occupation_name_attr, // string // optional // name (clinical occupation title value from Clinical Specialization item)
 									$occupationalCategory, // array // optional // occupationalCategory

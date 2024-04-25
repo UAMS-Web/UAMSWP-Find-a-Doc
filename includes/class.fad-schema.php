@@ -2274,7 +2274,7 @@
 			// Health Care Provider Taxonomy Code Set taxonomy items
 
 				$code_list = uamswp_fad_schema_nucc_code_set_id(
-					$nucc, // mixed // Required // List of Clinical Specialization term IDs
+					$nucc, // int|int[] // Required // List of Clinical Specialization term IDs
 					$code_list // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
 				);
 
@@ -5451,10 +5451,10 @@
 	// Add data to an array defining schema data for hasOccupation
 
 		function uamswp_fad_schema_hasoccupation(
-			array $alternateName = array(), // array // optional // alternateName (alternate clinical occupation title value from Clinical Specialization item)
-			string $description = string, // string // optional // description
-			string $name = '', // string // optional // name (clinical occupation title value from Clinical Specialization item)
-			array $occupationalCategory = array(), // array // optional // occupationalCategory
+			$alternateName = '', // string|array // optional // alternateName (alternate clinical occupation title value from Clinical Specialization item)
+			$description = '', // string // optional // description
+			$name = '', // string // optional // name (clinical occupation title value from Clinical Specialization item)
+			$occupationalCategory = array(), // array // optional // occupationalCategory
 			$sameAs = '', // string|array // optional // sameAs
 			array $output = array() // array // Optional // Pre-existing schema array for hasOccupation to which to add hasOccupation items
 		) {
@@ -5477,6 +5477,11 @@
 
 			// Check / define variables
 
+				$alternateName = ( is_string($alternateName) || is_array($alternateName) ) ? $alternateName : '';
+				$description =  is_string($description) ? $description : '';
+				$name =  is_string($name) ? $name : '';
+				$occupationalCategory =  is_array($occupationalCategory) ? $occupationalCategory : '';
+				$sameAs = ( is_string($sameAs) || is_array($sameAs) ) ? $sameAs : '';
 				$output = array_is_list($output) ? $output : array($output);
 
 			// Base array
@@ -5801,7 +5806,7 @@
 							// Add to the schema output array
 
 								$output = uamswp_fad_schema_hasoccupation(
-									$alternateName, // array // optional // alternateName (alternate clinical occupation title value from Clinical Specialization item)
+									$alternateName, // string|array // optional // alternateName (alternate clinical occupation title value from Clinical Specialization item)
 									$description, // string // optional // description
 									$name, // string // optional // name (clinical occupation title value from Clinical Specialization item)
 									$occupationalCategory, // array // optional // occupationalCategory
@@ -7550,10 +7555,10 @@
 	// Add data to an array defining schema data for the Health Care Provider Taxonomy code set
 
 		function uamswp_fad_schema_nucc_code_set(
-			string $code, // string // Required // Health Care Provider Taxonomy code
+			$code, // string // Required // Health Care Provider Taxonomy code
 			$alternateName = '', // string|array // Optional // alternateName
-			string $description = '', // string // Optional // description
-			string $name = '', // string // Optional // name
+			$description = '', // string // Optional // description
+			$name = '', // string // Optional // name
 			array $output = array() // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
 		) {
 
@@ -7562,13 +7567,20 @@
 			 * this function.
 			 */
 
-			// If $code input is invalid, stop here
+			// Check variables
 
-				if ( !$code ) {
+				$code = is_string($code) ? $code : '';
+				$alternateName = ( is_string($alternateName) || is_array($alternateName) ) ? $alternateName : '';
+				$description = is_string($description) ? $description : '';
+				$name = is_string($name) ? $name : '';
 
-					return $output;
+				// If $code input is invalid, stop here
 
-				}
+					if ( !$code ) {
+
+						return $output;
+
+					}
 
 			// Base item array
 
@@ -8141,7 +8153,7 @@
 		// Add data to an array defining schema data for the Health Care Provider Taxonomy code set from Clinical Specialization ID values
 
 			function uamswp_fad_schema_nucc_code_set_id(
-				$id_arg, // mixed // Required // List of Clinical Specialization term IDs
+				$id_arg, // int|int[] // Required // List of Clinical Specialization term IDs
 				array $output = array() // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
 			) {
 
