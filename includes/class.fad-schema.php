@@ -25081,8 +25081,6 @@
 
 							// Add to lists of providers
 
-								$provider_list[] = $provider_item;
-
 								// Add to list of MedicalWebPage items
 
 									if (
@@ -32724,8 +32722,6 @@
 
 							// Add to lists of providers
 
-								$location_list[] = $location_item;
-
 								// Add to list of MedicalWebPage items
 
 									if (
@@ -37100,8 +37096,6 @@
 								);
 
 							// Add to lists of areas of expertise
-
-								$expertise_list[] = $expertise_item;
 
 								// Add to list of MedicalWebPage items
 
@@ -43932,8 +43926,6 @@
 								);
 
 							// Add to list of clinical resources
-
-								$clinical_resource_list[] = $clinical_resource_item;
 
 								// Add to list of MedicalWebPage items
 
