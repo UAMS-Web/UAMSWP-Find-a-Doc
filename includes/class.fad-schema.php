@@ -38597,7 +38597,7 @@
 
 										}
 
-								// Main image asset info (common)
+								// Main WordPress media asset info (common)
 
 									// List of properties that reference the main image asset
 
@@ -38632,7 +38632,7 @@
 										$nesting_level == 0
 									) {
 
-										// Get main image asset ID
+										// Get main WordPress media asset ID
 
 											if ( $clinical_resource_resource_type == 'infographic' ) {
 
@@ -38642,7 +38642,7 @@
 
 											}
 
-										// Get attributes of the main image asset
+										// Get attributes of the main WordPress media asset
 
 											if ( $clinical_resource_asset_id ) {
 
