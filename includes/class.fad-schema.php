@@ -37351,24 +37351,31 @@
 								$clinical_resource_item = array(); // Base array
 								$clinical_resource_item_MedicalWebPage = in_array( 'MedicalWebPage', $clinical_resource_valid_types ) ? array() : null; // Base MedicalWebPage array
 								$clinical_resource_item_CreativeWork = in_array( 'CreativeWork', $clinical_resource_valid_types ) ? array() : null; // Base CreativeWork array
+								$clinical_resource_item_CreativeWork_common = in_array( 'CreativeWork', $clinical_resource_valid_types ) ? array() : null; // Base array for properties common to all CreativeWork items
 								$clinical_resource_abstract = '';
 								$clinical_resource_additionalType = '';
 								$clinical_resource_alternateName = '';
 								$clinical_resource_articleBody = '';
 								$clinical_resource_articleBody_count = '';
+								$clinical_resource_asset = array();
+								$clinical_resource_asset_alternateName = '';
+								$clinical_resource_asset_bitrate = '';
 								$clinical_resource_asset_caption_query = '';
+								$clinical_resource_asset_contentSize = '';
 								$clinical_resource_asset_description = '';
 								$clinical_resource_asset_duration = '';
 								$clinical_resource_asset_embedUrl = '';
-								$clinical_resource_asset_filesize = '';
+								$clinical_resource_asset_encodingFormat = '';
 								$clinical_resource_asset_height = '';
-								$clinical_resource_asset_id = 0;
+								$clinical_resource_asset_id = array();
 								$clinical_resource_asset_info = '';
+								$clinical_resource_asset_name = '';
+								$clinical_resource_asset_nodeid = ''
 								$clinical_resource_asset_parsed = '';
 								$clinical_resource_asset_path = '';
 								$clinical_resource_asset_published = '';
+								$clinical_resource_asset_resized = null;
 								$clinical_resource_asset_thumbnail = '';
-								$clinical_resource_asset_title = '';
 								$clinical_resource_asset_url = '';
 								$clinical_resource_asset_width = '';
 								$clinical_resource_contentUrl = '';
@@ -37381,7 +37388,6 @@
 								$clinical_resource_embeddedTextCaption = '';
 								$clinical_resource_embeddedTextCaption_count = '';
 								$clinical_resource_embedUrl = '';
-								$clinical_resource_encodingFormat = '';
 								$clinical_resource_expertise = null;
 								$clinical_resource_featured_image_1_1_size = '';
 								$clinical_resource_featured_image_1_1_src = array();
@@ -37410,6 +37416,7 @@
 								$clinical_resource_featured_image_square_encodingFormat = '';
 								$clinical_resource_featured_image_square_id = '';
 								$clinical_resource_hasDigitalDocumentPermission = '';
+								$clinical_resource_headline = '';
 								$clinical_resource_height = '';
 								$clinical_resource_introduction = null;
 								$clinical_resource_introduction_count = null;
@@ -37549,12 +37556,12 @@
 										// CreativeWork
 
 											if (
-												isset($clinical_resource_item_MedicalWebPage)
+												isset($clinical_resource_item_CreativeWork_common)
 												&&
 												$clinical_resource_url
 											) {
 
-												$clinical_resource_item_CreativeWork['url'] = $clinical_resource_url;
+												$clinical_resource_item_CreativeWork_common['url'] = $clinical_resource_url;
 
 											}
 
@@ -37621,15 +37628,525 @@
 
 													if ( $CreativeWork_subtype ) {
 
-														$clinical_resource_item_CreativeWork['@type'] = $CreativeWork_subtype;
+														$clinical_resource_item_CreativeWork_common['@type'] = $CreativeWork_subtype;
 
 													} elseif ( $CreativeWork_type ) {
 
-														$clinical_resource_item_CreativeWork['@type'] = $CreativeWork_type;
+														$clinical_resource_item_CreativeWork_common['@type'] = $CreativeWork_type;
 
 													}
 
 										}
+								// name (common)
+
+									// Post title
+
+										$clinical_resource_post_title = get_the_title($entity) ?? '';
+
+								// Main media asset(s) info (common)
+
+									// List of properties that reference the main image asset
+
+										$clinical_resource_main_image_common = array(
+											'alternateName',
+											'bitrate',
+											'contentSize',
+											'contentUrl',
+											'embedUrl',
+											'encodingFormat',
+											'height',
+											'name',
+											'sameAs',
+											'thumbnail',
+											'videoFrameSize',
+											'videoQuality',
+											'width'
+										);
+
+									if (
+										(
+											isset($clinical_resource_item_CreativeWork)
+											&&
+											array_intersect(
+												$clinical_resource_properties_map[$CreativeWork_type]['properties'],
+												$clinical_resource_main_image_common
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get main WordPress asset ID(s) and external media URL
+
+											if ( $clinical_resource_resource_type == 'infographic' ) {
+
+												// Infographic image ID
+
+													$clinical_resource_asset_id = get_field( 'clinical_resource_infographic', $entity ) ?? $clinical_resource_asset_id;
+
+											} elseif ($clinical_resource_resource_type == 'video' ) {
+
+												// Video URL
+
+													$clinical_resource_video = get_field( 'clinical_resource_video', $entity ) ?? $clinical_resource_video;
+
+											} elseif ($clinical_resource_resource_type == 'doc' ) {
+
+												// Document ID(s)
+
+													$clinical_resource_asset_id = get_field( 'clinical_resource_document', $entity ) ?? $clinical_resource_asset_id;
+
+											}
+
+											// Format the WordPress asset ID value(s)
+
+												if ( $clinical_resource_asset_id ) {
+
+													if (
+														$clinical_resource_asset_id
+														&&
+														!is_array($clinical_resource_asset_id)
+													) {
+
+														// Convert the value to an array
+
+															$clinical_resource_asset_id = array($clinical_resource_asset_id);
+
+													} elseif ( $clinical_resource_asset_id )  {
+
+														// Clean up the array
+
+															$clinical_resource_asset_id = array_unique($clinical_resource_asset_id);
+															$clinical_resource_asset_id = array_filter($clinical_resource_asset_id);
+															$clinical_resource_asset_id = $clinical_resource_asset_id ? array_values($clinical_resource_asset_id) : array();
+													}
+
+												}
+
+										// Get attributes of the main media asset(s)
+
+											// Base asset info array
+
+												$clinical_resource_asset = array();
+
+											// Base asset item array
+
+												$clinical_resource_asset_item = array(
+													'i' => $clinical_resource_asset_i, // int // Instance of CreativeWork item in the list
+													'@id' => $clinical_resource_asset_nodeid, // int // Instance of CreativeWork item in the list
+													'id' => $clinical_resource_asset_id,
+													'alternateName' => $clinical_resource_asset_alternateName,
+													'bitrate' => $clinical_resource_asset_bitrate,
+													'caption_query' => $clinical_resource_asset_caption_query,
+													'contentSize' => $clinical_resource_asset_contentSize,
+													'description' => $clinical_resource_asset_description,
+													'duration' => $clinical_resource_asset_duration,
+													'embedUrl' => $clinical_resource_asset_embedUrl,
+													'height' => $clinical_resource_asset_height, // int // Media height in pixels
+													'name' => $clinical_resource_asset_name, // string // The post title or linked media title
+													'published' => $clinical_resource_asset_published,
+													'path' => $clinical_resource_asset_path, // string // The file path to where the attached file should be
+													'resized' => $clinical_resource_asset_resized, // bool // Whether the image is a resized image
+													'thumbnail' => $clinical_resource_asset_thumbnail, // string // The post title or linked media title
+													'url' => $clinical_resource_asset_url, // string // Attachment source URL
+													'videoQuality' => $clinical_resource_asset_videoQuality,
+													'videoFrameSize' => $clinical_resource_asset_videoFrameSize,
+													'width' => $clinical_resource_asset_width // int // Media width in pixels
+												);
+
+											// WordPress assets
+
+												if ( $clinical_resource_asset_id ) {
+
+													foreach ( $clinical_resource_asset_id as $asset_id ) {
+
+														if ( $asset_id ) {
+
+															// Define/reset variables
+
+																$asset_i = !isset($asset_i) ? 0 : $asset_i++;
+																$asset_nodeid = $clinical_resource_url . '#' . $CreativeWork_type . '_' . $asset_i;
+																$asset_item = $clinical_resource_asset_item; // Base asset item array
+																$asset_info = $clinical_resource_asset_info;
+																$asset_alternateName = $clinical_resource_asset_alternateName;
+																$asset_bitrate = $clinical_resource_asset_bitrate;
+																$asset_contentSize = $clinical_resource_asset_contentSize;
+																$asset_encodingFormat = $clinical_resource_asset_encodingFormat;
+																$asset_height = $clinical_resource_asset_height;
+																$asset_name = $clinical_resource_asset_name;
+																$asset_path = $clinical_resource_asset_path;
+																$asset_resized = $clinical_resource_asset_resized;
+																$asset_url = $clinical_resource_asset_url;
+																$asset_width = $clinical_resource_asset_width;
+
+															// Instance of CreativeWork item in the list
+
+																$asset_item['i'] = $asset_i; // int
+
+															// @id
+
+																$asset_item['@id'] = $asset_nodeid; // int
+
+															// ID
+
+																$asset_item['id'] = $asset_id ?? $clinical_resource_asset_id; // int // The ID of the current item
+
+															// name
+
+																$asset_name = get_the_title(
+																	$post // int|WP_Post // optional // Post ID or WP_Post object. Default is global $post.
+																) ?? $clinical_resource_post_title; // string // The post title
+																$asset_item['name'] = $asset_name;
+
+															// alternateName
+
+																$asset_item['alternateName'] = ( $asset_name != $clinical_resource_post_title) ? $clinical_resource_post_title : $clinical_resource_asset_alternateName; // string // The post title
+
+															// URL, width, height
+
+																if ( $clinical_resource_resource_type == 'infographic' ) {
+
+																	// $clinical_resource_asset_info = wp_get_attachment_image_src( $asset_id, 'full' ) ?: $clinical_resource_asset_info;
+																	$asset_info = wp_get_attachment_image_src(
+																		$asset_id, // int // Required // Image attachment ID
+																		'full' // string|int[] // optional // Image size. Accepts any registered image size name, or an array of width and height values in pixels (in that order). Default 'thumbnail'.
+																	) ?: $asset_info; // array|false // Array of image data; or boolean false if no image is available
+
+																	if ( $asset_info ) {
+
+																		// URL
+
+																			$asset_item['url'] = $asset_info[0] ?? $asset_url; // string // Image source URL
+
+																		// Width
+
+																			$asset_item['width'] = $asset_info[1] ?? $asset_width; // int // Image width in pixels
+
+																		// Height
+
+																			$asset_item['height'] = $asset_info[2] ?? $asset_height; // int // Image height in pixels
+
+																		// Resized image query
+
+																			$asset_item['resized'] = $asset_info[3] ?? $asset_resized; // bool // Whether the image is a resized image
+
+																	}
+
+																} elseif ( $clinical_resource_resource_type == 'doc' ) {
+
+																	// URL
+
+																		$asset_item['url'] = wp_get_attachment_url(
+																			$asset_id // int // optional // Attachment post ID. Defaults to global $post.
+																		) ?: $asset_url; // string|false // Attachment URL; otherwise false
+
+																}
+
+															// contentSize
+
+																/**
+																 * File size in (mega/kilo)bytes.
+																 *
+																 * Values expected to be one of these types:
+																 *
+																 *      - Text
+																 */
+
+																// Get the asset's file path
+
+																	/**
+																	 * This value is needed for the needed for the wp_filesize() function
+																	 */
+
+																	$asset_path = get_attached_file(
+																		$asset_id // int // Required // Attachment ID
+																	) ?: $asset_path; // string|false // The file path to where the attached file should be; otherwise false
+																	$asset_item['path'] = $asset_path;
+
+																// Get the asset's file size in bytes
+
+																	if ( $asset_path ) {
+
+																		$asset_contentSize = wp_filesize(
+																			$asset_path // string // required // Path to the file
+																		) ?: $asset_contentSize; // int // The size of the file in bytes, or 0 in the event of an error
+
+																	}
+
+																// Convert the file size from the number of bytes to the largest unit the bytes will fit into
+
+																	if ( $asset_contentSize ) {
+
+																		$asset_item['contentSize'] = uamswp_size_format(
+																			$clinical_resource_asset_contentSize, // int // required // Number of bytes
+																			2 // int // optional // Precision of number of decimal places (Default: 0)
+																		) ?? $asset_contentSize; // string // Number string on success
+
+																	}
+
+															// Encoding Format (mime type)
+
+																$asset_item['encodingFormat'] = get_post_mime_type( $clinical_resource_asset_id ) ?: $clinical_resource_asset_encodingFormat; // e.g., 'image/jpeg'
+
+															// bitrate [WIP]
+
+																/*
+
+																	WIP: Determine if the bitrate value can be retrieved for the infographic
+																	and/or document assets.
+
+																*/
+
+															// Add item to asset info array
+
+																$clinical_resource_asset[$asset_i] = $asset_item;
+
+															// Create an item in the base CreativeWork array
+
+																$clinical_resource_item_CreativeWork[$asset_i] = array();
+
+														}
+
+													}
+
+												}
+
+											// External assets
+
+												// Video info
+
+													if ( $clinical_resource_video ) {
+
+														$asset_item = $clinical_resource_asset_item; // Base asset item array
+														$asset_i = !isset($asset_i) ? 0 : $asset_i++;
+														$asset_nodeid = $clinical_resource_url . '#' . $CreativeWork_type . '_' . $asset_i;
+
+														// Instance of CreativeWork item in the list
+
+															$asset_item['i'] = $asset_i; // int
+
+														// @id
+
+															$asset_item['@id'] = $asset_nodeid; // int
+
+														// URL
+
+															$asset_item['url'] = $clinical_resource_video;
+
+														// Parse the URL and return its components
+
+															$clinical_resource_asset_parsed = parse_url(
+																$clinical_resource_video // string // required // The URL to parse
+															);
+
+																/*
+
+																	On seriously malformed URLs, parse_url() may return false.
+
+																	If the component parameter is omitted, an associative array is returned. At
+																	least one element will be present within the array. Potential keys within this
+																	array are:
+
+																		'scheme' (e.g. http)
+																		'host'
+																		'port'
+																		'user'
+																		'pass'
+																		'path'
+																		'query' (after the question mark ?)
+																		'fragment' (after the hashmark #)
+
+																	If the component parameter is specified, parse_url() returns a string (or an
+																	int, in the case of PHP_URL_PORT) instead of an array. If the requested
+																	component doesn't exist within the given URL, null will be returned. As of
+																	PHP 8.0.0, parse_url() distinguishes absent and empty queries and fragments:
+
+																		http://example.com/foo → query = null, fragment = null
+																		http://example.com/foo? → query = "",   fragment = null
+																		http://example.com/foo# → query = null, fragment = ""
+																		http://example.com/foo?# → query = "",   fragment = ""
+
+																	Previously all cases resulted in query and fragment being null.
+
+																	Note that control characters (cf. ctype_cntrl()) in the components are replaced
+																	with underscores (_).
+
+																*/
+
+															// Parse the query string into variables
+
+																if ( isset($clinical_resource_asset_parsed['query']) ) {
+
+																	parse_str(
+																		$clinical_resource_asset_parsed['query'], // string // required // The input string
+																		$clinical_resource_asset_parsed['query'] // array // required // If the second parameter result is present, variables are stored in this variable as array elements instead
+																	); // No value is returned
+
+																}
+
+														if (
+															isset($clinical_resource_asset_parsed['host'])
+															&&
+															(
+																str_contains( $clinical_resource_asset_parsed['host'], 'youtube' )
+																||
+																str_contains( $clinical_resource_asset_parsed['host'], 'youtu.be' )
+															)
+														) {
+
+															// If YouTube
+
+																// Embed URL
+
+																	if (
+																		isset($clinical_resource_asset_parsed['query'])
+																		&&
+																		isset($clinical_resource_asset_parsed['query']['v'])
+																		&&
+																		$clinical_resource_asset_parsed['query']['v']
+																	) {
+
+																		// $clinical_resource_asset_embedUrl = 'https://www.youtube.com/embed/' . $clinical_resource_asset_parsed['query']['v'];
+																		$asset_item['embedUrl'] = 'https://www.youtube.com/embed/' . $clinical_resource_asset_parsed['query']['v'];
+
+																	}
+
+																// Get info from video
+
+																	$clinical_resource_asset_info = uamswp_fad_youtube_info(
+																		$clinical_resource_video // string // required // YouTube video URL
+																	) ?? array();
+
+																	if ( $clinical_resource_asset_info ) {
+
+																		// Name (snippet.title)
+
+																			// $clinical_resource_asset_name = $clinical_resource_asset_info['name'] ?? $clinical_resource_post_title;
+																			$asset_name = $clinical_resource_asset_info['name'] ?? $clinical_resource_post_title;
+																			$asset_item['name'] = $asset_name;
+
+																		// Thumbnail URL
+
+																			// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
+
+																				// $clinical_resource_asset_thumbnail = $clinical_resource_asset_info['HQthumbUrl'] ?? $clinical_resource_asset_thumbnail;
+																				$asset_item['thumbnail'] = $clinical_resource_asset_info['HQthumbUrl'] ?? $clinical_resource_asset_thumbnail;
+
+																			// Fallback value: High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+
+																				if ( !$asset_item['thumbnail'] ) {
+
+																					// $clinical_resource_asset_thumbnail = $clinical_resource_asset_info['thumbUrl'] ?? $clinical_resource_asset_thumbnail; // High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+																					$asset_item['thumbnail'] = $clinical_resource_asset_info['thumbUrl'] ?? $clinical_resource_asset_thumbnail; // High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+
+																				}
+
+																		// Published date and time (snippet.publishedAt)
+
+																			// $clinical_resource_asset_published = $clinical_resource_asset_info['dateField'] ?? $clinical_resource_asset_published;
+																			$asset_item['published'] = $clinical_resource_asset_info['dateField'] ?? $clinical_resource_asset_published;
+
+																		// Duration (contentDetails.duration)
+
+																			// $clinical_resource_asset_duration = $clinical_resource_asset_info['duration'] ?? $clinical_resource_asset_duration;
+																			$asset_item['duration'] = $clinical_resource_asset_info['duration'] ?? $clinical_resource_asset_duration;
+
+																		// Description (snippet.description)
+
+																			// $clinical_resource_asset_description = $clinical_resource_asset_info['description'] ?? $clinical_resource_asset_description;
+																			$asset_item['description'] = $clinical_resource_asset_info['description'] ?? $clinical_resource_asset_description;
+
+																		// Whether captions are available for the video (contentDetails.caption)
+
+																			// $clinical_resource_asset_caption_query = $clinical_resource_asset_info['captions_data'] ?? $clinical_resource_asset_caption_query;
+																			$asset_item['caption_query'] = $clinical_resource_asset_info['captions_data'] ?? $clinical_resource_asset_caption_query;
+																			// $clinical_resource_asset_caption_query = ( $clinical_resource_asset_caption_query == 'true' ) ? true : false;
+																			$asset_item['caption_query'] = ( $asset_item['caption_query'] == 'true' ) ? true : false;
+
+																		// Video quality: high definition (hd) or standard definition (sd) (contentDetails.definition) [WIP]
+
+																			/*
+
+																				WIP: The current version of the function does not return this value.
+
+																			*/
+
+																		// Frame size [WIP]
+
+																			/*
+
+																				WIP: The current version of the function does not return this value.
+
+																			*/
+
+																		// bitrate [WIP]
+
+																			/*
+
+																				WIP: Determine if the bitrate value can be retrieved for the infographic
+																				and/or document assets.
+
+																			*/
+
+																	}
+
+																// alternateName
+
+																	$asset_item['alternateName'] = ( $asset_name != $clinical_resource_post_title) ? $clinical_resource_post_title : $clinical_resource_asset_alternateName; // string // The post title
+
+														} elseif (
+															isset($clinical_resource_asset_parsed['host'])
+															&&
+															str_contains(
+																$clinical_resource_asset_parsed['host'],
+																'vimeo'
+															)
+														) {
+
+															// If Vimeo [WIP]
+
+																/*
+
+																	WIP: Get values from the Vimeo and then set the specific property values with
+																	those.
+
+																*/
+
+																// name [WIP]
+
+																	$asset_name = $clinical_resource_post_title;
+																	$asset_item['name'] = $asset_name;
+
+																// alternateName
+
+																	$asset_item['alternateName'] = ( $asset_name != $clinical_resource_post_title) ? $clinical_resource_post_title : $clinical_resource_asset_alternateName; // string // The post title
+
+																// Embed URL
+
+																	if (
+																		isset($clinical_resource_asset_parsed['path'])
+																		&&
+																		$clinical_resource_asset_parsed['path']
+																	) {
+
+																		// $clinical_resource_asset_embedUrl = 'https://player.vimeo.com/video/' . $clinical_resource_asset_parsed['path'];
+																		$asset_item['embedUrl'] = 'https://player.vimeo.com/video/' . $clinical_resource_asset_parsed['path'];
+
+																	}
+
+														}
+
+														// Add item to asset info array
+
+															$clinical_resource_asset[$asset_i] = $asset_item;
+
+														// Create an item in the base CreativeWork array
+
+															$clinical_resource_item_CreativeWork[$asset_i] = array();
+
+													}
+
+									}
 
 								// @id
 
@@ -37656,20 +38173,34 @@
 
 									// CreativeWork
 
-										if ( isset($clinical_resource_item_CreativeWork) ) {
+										if (
+											isset($clinical_resource_item_CreativeWork)
+											&&
+											isset($clinical_resource_asset)
+											&&
+											$clinical_resource_asset
+										) {
 
-											// Get values
+											// Loop through the main media asset(s) info array to get the @id value of each asset
 
-												$CreativeWork_id = $clinical_resource_url . '#' . $CreativeWork_type;
-												// $CreativeWork_id .= $CreativeWork_i;
-												// $CreativeWork_i++;
+												foreach ( $clinical_resource_asset as $key => $value ) {
 
-											// Add to item values
+													if ( $value ) {
 
-												if ( $CreativeWork_id ) {
+														// Get @id value
 
-													$clinical_resource_item_CreativeWork['@id'] = $CreativeWork_id;
-													$node_identifier_list[] = $clinical_resource_item_CreativeWork['@id']; // Add to the list of existing node identifiers
+															$asset_nodeid = $value['@id'] ?? null;
+
+														// Add @id property/value to the asset's CreativeWork schema item
+
+															if ( $asset_nodeid ) {
+
+																$clinical_resource_item_CreativeWork[$key]['@id'] = $asset_nodeid;
+																$node_identifier_list[] = $asset_nodeid; // Add to the list of existing node identifiers
+
+															}
+
+													}
 
 												}
 
@@ -37680,8 +38211,8 @@
 									// Pass variables to template part
 
 										$schema_common_item_MedicalWebPage = $clinical_resource_item_MedicalWebPage; // MedicalWebPage item array
-										$schema_common_item_mainEntity = $clinical_resource_item_CreativeWork ?? null; // item array for the main entity of the MedicalWebPage
-										$schema_common_item_about = $clinical_resource_item_CreativeWork ?? null; // all major entities of the MedicalWebPage
+										$schema_common_item_mainEntity = $clinical_resource_item_CreativeWork_common ?? null; // item array for the main entity of the MedicalWebPage
+										$schema_common_item_about = $clinical_resource_item_CreativeWork_common ?? null; // all major entities of the MedicalWebPage
 
 									include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/properties.php' );
 
@@ -37720,15 +38251,21 @@
 
 													// CreativeWork
 
-														uamswp_fad_schema_add_to_item_values(
-															$CreativeWork_type, // string // Required // The @type value for the schema item
-															$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-															$key, // string // Required // Name of schema property
-															$value, // mixed // Required // Variable to add as the property value
-															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-															$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-															($nesting_level + 1) // int // Required // Current nesting level value
-														);
+														// Loop through the base CreativeWork array and add the properties/values to each item
+
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	$key, // string // Required // Name of schema property
+																	$value, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 											}
 
@@ -37823,15 +38360,21 @@
 
 													// CreativeWork
 
-														uamswp_fad_schema_add_to_item_values(
-															$CreativeWork_type, // string // Required // The @type value for the schema item
-															$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-															$key, // string // Required // Name of schema property
-															$value, // mixed // Required // Variable to add as the property value
-															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-															$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-															($nesting_level + 1) // int // Required // Current nesting level value
-														);
+														// Loop through the base CreativeWork array and add the properties/values to each item
+
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	$key, // string // Required // Name of schema property
+																	$value, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 											}
 
@@ -37860,15 +38403,21 @@
 
 													// CreativeWork
 
-														uamswp_fad_schema_add_to_item_values(
-															$CreativeWork_type, // string // Required // The @type value for the schema item
-															$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-															$key, // string // Required // Name of schema property
-															$value, // mixed // Required // Variable to add as the property value
-															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-															$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-															($nesting_level + 1) // int // Required // Current nesting level value
-														);
+														// Loop through the base CreativeWork array and add the properties/values to each item
+
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	$key, // string // Required // Name of schema property
+																	$value, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 											}
 
@@ -38597,85 +39146,6 @@
 
 										}
 
-								// Main WordPress media asset info (common)
-
-									// List of properties that reference the main image asset
-
-										$clinical_resource_main_image_common = array(
-											'contentSize',
-											'contentUrl',
-											'height',
-											'width'
-										);
-
-									if (
-										(
-											(
-												isset($clinical_resource_item_MedicalWebPage)
-												&&
-												array_intersect(
-													$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
-													$clinical_resource_main_image_common
-												)
-											)
-											||
-											(
-												isset($clinical_resource_item_CreativeWork)
-												&&
-												array_intersect(
-													$clinical_resource_properties_map[$CreativeWork_type]['properties'],
-													$clinical_resource_main_image_common
-												)
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get main WordPress media asset ID
-
-											if ( $clinical_resource_resource_type == 'infographic' ) {
-
-												// Infographic image id
-
-													$clinical_resource_asset_id = get_field( 'clinical_resource_infographic', $entity ) ?? $clinical_resource_asset_id;
-
-											}
-
-										// Get attributes of the main WordPress media asset
-
-											if ( $clinical_resource_asset_id ) {
-
-												// URL, width, height
-
-													$clinical_resource_asset_info = wp_get_attachment_image_src( $clinical_resource_asset_id, 'full' ) ?: $clinical_resource_asset_info;
-
-													if ( $clinical_resource_asset_info ) {
-
-														$clinical_resource_asset_url = $clinical_resource_asset_info[0] ?? $clinical_resource_asset_url;
-														$clinical_resource_asset_width = $clinical_resource_asset_info[1] ?? $clinical_resource_asset_width;
-														$clinical_resource_asset_height = $clinical_resource_asset_info[2] ?? $clinical_resource_asset_height;
-
-													}
-
-												// File size
-
-													// Asset file path
-
-														$clinical_resource_asset_path = get_attached_file( $clinical_resource_asset_id ) ?: $clinical_resource_asset_path;
-
-													// Asset file size
-
-														$clinical_resource_asset_filesize = filesize( $clinical_resource_asset_path ) ?: $clinical_resource_asset_filesize;
-
-														// Formatted asset file size
-
-															$clinical_resource_asset_filesize = size_format( $clinical_resource_asset_filesize, 2 ) ?: $clinical_resource_asset_filesize;
-
-											}
-
-									}
-
 								// Featured image asset info (common)
 
 									// List of properties that reference the featured image asset
@@ -38734,140 +39204,6 @@
 											}
 
 											$clinical_resource_thumbnail = $clinical_resource_image;
-
-									}
-
-								// Main video info (common)
-
-									// List of properties that reference the featured image asset
-
-										$clinical_resource_video_common = array(
-											'alternateName',
-											'embedUrl',
-											'sameAs',
-											'thumbnail',
-											'videoFrameSize',
-											'videoQuality'
-										);
-
-									if (
-										(
-											(
-												isset($clinical_resource_item_MedicalWebPage)
-												&&
-												array_intersect(
-													$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
-													$clinical_resource_video_common
-												)
-											)
-											||
-											(
-												isset($clinical_resource_item_CreativeWork)
-												&&
-												array_intersect(
-													$clinical_resource_properties_map[$CreativeWork_type]['properties'],
-													$clinical_resource_video_common
-												)
-											)
-										)
-										&&
-										$clinical_resource_resource_type == 'video'
-									) {
-
-										// Video URL
-
-											$clinical_resource_video = get_field( 'clinical_resource_video', $entity ) ?: '';
-
-										// Video info
-
-											if (
-												$clinical_resource_video
-												&&
-												$nesting_level == 0
-											) {
-
-													// Parse the URL and return its components
-
-														$clinical_resource_asset_parsed = parse_url($clinical_resource_video);
-
-														// Parse the query string into variables
-
-															parse_str($clinical_resource_asset_parsed['query'], $clinical_resource_asset_parsed['query']);
-
-													if (
-														str_contains( $clinical_resource_asset_parsed['host'], 'youtube' )
-														||
-														str_contains( $clinical_resource_asset_parsed['host'], 'youtu.be' )
-													) {
-
-														// If YouTube
-
-															// Embed URL
-
-																$clinical_resource_asset_embedUrl = $clinical_resource_asset_parsed['query']['v'] ? 'https://www.youtube.com/embed/' . $clinical_resource_asset_parsed['query']['v'] : '';
-
-															// Get info from video
-
-																$clinical_resource_asset_info = uamswp_fad_youtube_info( $clinical_resource_video ) ?? array();
-
-																// Title (snippet.title)
-
-																	$clinical_resource_asset_title = $clinical_resource_asset_info['title'] ?? '';
-
-																// Thumbnail URL
-
-																	// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
-
-																		$clinical_resource_asset_thumbnail = $clinical_resource_asset_info['HQthumbUrl'] ?? array();
-
-																	// Fallback value: High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
-
-																		if ( !$clinical_resource_asset_thumbnail ) {
-
-																			$clinical_resource_asset_thumbnail = $clinical_resource_asset_info['thumbUrl'] ?? array(); // High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
-
-																		}
-
-																// Published date and time (snippet.publishedAt)
-
-																	$clinical_resource_asset_published = $clinical_resource_asset_info['dateField'] ?? '';
-
-																// Duration (contentDetails.duration)
-
-																	$clinical_resource_asset_duration = $clinical_resource_asset_info['duration'] ?? '';
-
-																// Description (snippet.description)
-
-																	$clinical_resource_asset_description = $clinical_resource_asset_info['description'] ?? '';
-
-																// Whether captions are available for the video (contentDetails.caption)
-
-																	$clinical_resource_asset_caption_query = $clinical_resource_asset_info['captions_data'] ?? '';
-																	$clinical_resource_asset_caption_query = ( $clinical_resource_asset_caption_query == 'true' ) ? true : false;
-
-																// Video quality: high definition (hd) or standard definition (sd) (contentDetails.definition)
-
-																	/* No info on this returned from function */
-
-																	$clinical_resource_asset_videoQuality = '';
-
-																// Frame size
-
-																	/* No info on this returned from function */
-
-																	$clinical_resource_asset_videoFrameSize = '';
-
-													} elseif ( str_contains( $clinical_resource_asset_parsed['host'], 'vimeo' ) ) {
-
-														// If Vimeo
-
-															// Embed URL
-
-																$clinical_resource_asset_embedUrl = $clinical_resource_asset_parsed['path'] ? 'https://player.vimeo.com/video/' . $clinical_resource_asset_parsed['path']: '';
-
-													}
-
-											}
 
 									}
 
@@ -38947,7 +39283,7 @@
 
 									}
 
-								// name
+								// name (specific property)
 
 									/**
 									 * The name of the item.
@@ -38981,39 +39317,57 @@
 										)
 									) {
 
-										// Get values
+										// MedicalWebPage
 
-											$clinical_resource_name = get_the_title($entity) ?? '';
+											// Get values
 
-										// Add to item values
+												$clinical_resource_name = $clinical_resource_post_title ?? $clinical_resource_name;
 
-											// MedicalWebPage
+											// Add to item values
 
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'name', // string // Required // Name of schema property
-													$clinical_resource_name, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												// MedicalWebPage
 
-											// CreativeWork
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+														'name', // string // Required // Name of schema property
+														$clinical_resource_name, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'name', // string // Required // Name of schema property
-													$clinical_resource_name, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+										// CreativeWork (asset-specific)
+
+											// Loop through the main media asset(s) info array to get the 'name' value of each asset
+
+												foreach ( $clinical_resource_asset as $key => $value ) {
+
+													if ( $value ) {
+
+														// Get the 'name' value
+
+															$asset_name = $value['name'] ?? null;
+
+														// Add to item values (CreativeWork)
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork[$key], // array // Required // The list array for the schema item to which to add the property value
+																'name', // string // Required // Name of schema property
+																$asset_name, // mixed // Required // Variable to add as the property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+													} // endif ( $value )
+
+												} // endforeach ( $clinical_resource_asset as $key => $value )
 
 									}
 
-								// about (CreativeWork only)
+								// about
 
 									/**
 									 * The subject matter of the content.
@@ -39035,9 +39389,6 @@
 									 *
 									 *      - mainEntity
 									 *
-									 * Note: The value for this property is already being defined for the
-									 * 'MedicalWebPage' type in the common schema properties
-									 * (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 									if (
@@ -39049,107 +39400,121 @@
 										)
 									) {
 
-										// Get values [WIP]
+										// MedicalWebPage
 
 											/*
 
-												For CreativeWork, set the value as something like the associated areas of
-												expertise, conditions and treatments.
+												The value for this property is already being defined for the 'MedicalWebPage'
+												type in the common schema properties
+												(templates/parts/vars/page/schema/common/properties.php)
 
 											*/
 
-											// Base array
+										// CreativeWork (asset-agnostic)
 
-												$clinical_resource_about_CreativeWork = array();
+											// Get values [WIP]
 
-											// Merge in the associated providers
+												/*
 
-												if (
-													isset($clinical_resource_provider_about)
-													&&
-													$clinical_resource_provider_about
-												) {
+													For CreativeWork, set the value as something like the associated areas of
+													expertise, conditions and treatments.
 
-													$clinical_resource_about_CreativeWork = array_merge(
-														$clinical_resource_about_CreativeWork,
+												*/
+
+												// Base array
+
+													$clinical_resource_about_CreativeWork = array();
+
+												// Merge in the associated providers
+
+													if (
+														isset($clinical_resource_provider_about)
+														&&
 														$clinical_resource_provider_about
-													);
+													) {
 
-												}
+														$clinical_resource_about_CreativeWork = array_merge(
+															$clinical_resource_about_CreativeWork,
+															$clinical_resource_provider_about
+														);
 
-											// Merge in the associated locations
+													}
 
-												if (
-													isset($clinical_resource_location_about)
-													&&
-													$clinical_resource_location_about
-												) {
+												// Merge in the associated locations
 
-													$clinical_resource_about_CreativeWork = array_merge(
-														$clinical_resource_about_CreativeWork,
+													if (
+														isset($clinical_resource_location_about)
+														&&
 														$clinical_resource_location_about
-													);
+													) {
 
-												}
+														$clinical_resource_about_CreativeWork = array_merge(
+															$clinical_resource_about_CreativeWork,
+															$clinical_resource_location_about
+														);
 
-											// Merge in the associated areas of expertise
+													}
 
-												if (
-													isset($clinical_resource_expertise_about)
-													&&
-													$clinical_resource_expertise_about
-												) {
+												// Merge in the associated areas of expertise
 
-													$clinical_resource_about_CreativeWork = array_merge(
-														$clinical_resource_about_CreativeWork,
+													if (
+														isset($clinical_resource_expertise_about)
+														&&
 														$clinical_resource_expertise_about
-													);
+													) {
 
-												}
+														$clinical_resource_about_CreativeWork = array_merge(
+															$clinical_resource_about_CreativeWork,
+															$clinical_resource_expertise_about
+														);
 
-											// Merge in the associated conditions
+													}
 
-												if (
-													isset($clinical_resource_condition)
-													&&
-													$clinical_resource_condition
-												) {
+												// Merge in the associated conditions
 
-													$clinical_resource_about_CreativeWork = array_merge(
-														$clinical_resource_about_CreativeWork,
+													if (
+														isset($clinical_resource_condition)
+														&&
 														$clinical_resource_condition
-													);
+													) {
 
-												}
+														$clinical_resource_about_CreativeWork = array_merge(
+															$clinical_resource_about_CreativeWork,
+															$clinical_resource_condition
+														);
 
-											// Merge in the associated treatments
+													}
 
-												if (
-													isset($clinical_resource_treatment)
-													&&
-													$clinical_resource_treatment
-												) {
+												// Merge in the associated treatments
 
-													$clinical_resource_about_CreativeWork = array_merge(
-														$clinical_resource_about_CreativeWork,
+													if (
+														isset($clinical_resource_treatment)
+														&&
 														$clinical_resource_treatment
+													) {
+
+														$clinical_resource_about_CreativeWork = array_merge(
+															$clinical_resource_about_CreativeWork,
+															$clinical_resource_treatment
+														);
+
+													}
+
+											// Add to item values (CreativeWork)
+
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'about', // string // Required // Name of schema property
+														$clinical_resource_about_CreativeWork, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
 													);
 
 												}
-
-										// Add to item values
-
-											// CreativeWork
-
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'about', // string // Required // Name of schema property
-													$clinical_resource_about_CreativeWork, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
 
 									}
 
@@ -39208,17 +39573,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'abstract', // string // Required // Name of schema property
-													$clinical_resource_introduction, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'abstract', // string // Required // Name of schema property
+														$clinical_resource_introduction, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -39371,17 +39740,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'additionalType', // string // Required // Name of schema property
-													$clinical_resource_additionalType, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'additionalType', // string // Required // Name of schema property
+														$clinical_resource_additionalType, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -39432,49 +39805,81 @@
 										$nesting_level == 0
 									) {
 
-										// Get values
+										// MedicalWebPage
 
-											// Base array
+											// Get values
 
-												$clinical_resource_alternateName = array();
+												// Base array
 
-											// Add the video title
+													$clinical_resource_alternateName_MedicalWebPage = array();
 
-												if (
-													$clinical_resource_resource_type == 'video'
-													&&
-													$clinical_resource_asset_title
-												) {
+												// Add the media asset title
 
-													$clinical_resource_alternateName[] = $clinical_resource_asset_title;
+													// Loop through the main media asset(s) info array to get the name value of each asset
 
-												}
+														foreach ( $clinical_resource_asset as $asset ) {
 
-										// Add to item values
+															if ( $asset ) {
 
-											// MedicalWebPage
+																// Get 'name' value
+
+																	$asset_name = $asset['name'] ?? null;
+
+																// If name value is different than the post title, add it to the alternateName value
+
+																	if (
+																		$asset_name
+																		&&
+																		$asset_name != $clinical_resource_post_title
+																	) {
+
+																		$clinical_resource_alternateName_MedicalWebPage[] = $asset_name;
+
+																	}
+
+															}
+
+														}
+
+											// Add to item values (MedicalWebPage)
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'alternateName', // string // Required // Name of schema property
-													$clinical_resource_alternateName, // mixed // Required // Variable to add as the property value
+													$clinical_resource_alternateName_MedicalWebPage, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+										// CreativeWork (asset-specific)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'alternateName', // string // Required // Name of schema property
-													$clinical_resource_alternateName, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+											// Loop through the main media asset(s) info array to get the 'alternateName' value of each asset
+
+												foreach ( $clinical_resource_asset as $key => $value ) {
+
+													if ( $value ) {
+
+														// Get the 'alternateName' value
+
+															$asset_alternateName = $value['alternateName'] ?? null;
+
+														// Add to item values (CreativeWork)
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork[$key], // array // Required // The list array for the schema item to which to add the property value
+																'alternateName', // string // Required // Name of schema property
+																$asset_alternateName, // mixed // Required // Variable to add as the property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+													} // endif ( $value )
+
+												} // endforeach ( $clinical_resource_asset as $key => $value )
 
 									}
 
@@ -39565,17 +39970,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'articleBody', // string // Required // Name of schema property
-													$clinical_resource_articleBody, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'articleBody', // string // Required // Name of schema property
+														$clinical_resource_articleBody, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -39722,6 +40131,49 @@
 									 *     - MediaObject
 									 */
 
+									if (
+										(
+											isset($clinical_resource_item_CreativeWork)
+											&&
+											in_array(
+												'bitrate',
+												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// CreativeWork (asset-specific)
+
+											// Loop through the main media asset(s) info array to get the 'bitrate' value of each asset
+
+												foreach ( $clinical_resource_asset as $key => $value ) {
+
+													if ( $value ) {
+
+														// Get the 'bitrate' value
+
+															$asset_bitrate = $value['bitrate'] ?? null;
+
+														// Add to item values (CreativeWork)
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork[$key], // array // Required // The list array for the schema item to which to add the property value
+																'bitrate', // string // Required // Name of schema property
+																$asset_bitrate, // mixed // Required // Variable to add as the property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+													} // endif ( $value )
+
+												} // endforeach ( $clinical_resource_asset as $key => $value )
+
+									}
+
 								// breadcrumb [excluded; common properties]
 
 									/**
@@ -39778,9 +40230,9 @@
 										)
 									) {
 
-										// Add to item values
+										// MedicalWebPage
 
-											// MedicalWebPage
+											// Add to item values
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
@@ -39792,17 +40244,33 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+										// CreativeWork (asset-specific)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'description', // string // Required // Name of schema property
-													$clinical_resource_introduction, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+											// Loop through the main media asset(s) info array to get the 'caption' value of each asset
+
+												foreach ( $clinical_resource_asset as $key => $value ) {
+
+													if ( $value ) {
+
+														// Get the 'description' value
+
+															$asset_caption = $value['description'] ?? $clinical_resource_introduction;
+
+														// Add to item values (CreativeWork)
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork[$key], // array // Required // The list array for the schema item to which to add the property value
+																'caption', // string // Required // Name of schema property
+																$asset_caption, // mixed // Required // Variable to add as the property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+													} // endif ( $value )
+
+												} // endforeach ( $clinical_resource_asset as $key => $value )
 
 									}
 
@@ -39885,19 +40353,15 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - MediaObject
 									 */
 
-									if (
-										(
-											(
-												isset($clinical_resource_item_MedicalWebPage)
-												&&
-												in_array(
-													'contentSize',
-													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
-												)
-											)
-											||
+									// CreativeWork (asset-agnostic)
+
+										if (
 											(
 												isset($clinical_resource_item_CreativeWork)
 												&&
@@ -39906,38 +40370,37 @@
 													$clinical_resource_properties_map[$CreativeWork_type]['properties']
 												)
 											)
-										)
-										&&
-										$nesting_level == 0
-									) {
+											&&
+											$nesting_level == 0
+										) {
 
-										// Add to item values
+											// Loop through the main media asset(s) info array to get the 'contentSize' value of each asset
 
-											// MedicalWebPage
+												foreach ( $clinical_resource_asset as $key => $value ) {
 
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'contentSize', // string // Required // Name of schema property
-													$clinical_resource_asset_filesize, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+													if ( $value ) {
 
-											// CreativeWork
+														// Get the 'description' value
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'contentSize', // string // Required // Name of schema property
-													$clinical_resource_asset_filesize, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+															$asset_contentSize = $value['contentSize'] ?? $clinical_resource_introduction;
 
-									}
+														// Add to item values (CreativeWork)
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork[$key], // array // Required // The list array for the schema item to which to add the property value
+																'contentSize', // string // Required // Name of schema property
+																$asset_contentSize, // mixed // Required // Variable to add as the property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+													} // endif ( $value )
+
+												} // endforeach ( $clinical_resource_asset as $key => $value )
+
+										}
 
 								// contentUrl
 
@@ -39987,17 +40450,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'contentUrl', // string // Required // Name of schema property
-													$clinical_resource_asset_url, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'contentUrl', // string // Required // Name of schema property
+														$clinical_resource_asset_url, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -40234,17 +40701,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'description', // string // Required // Name of schema property
-													$clinical_resource_introduction, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'description', // string // Required // Name of schema property
+														$clinical_resource_introduction, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -40314,17 +40785,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'digitalSourceType', // string // Required // Name of schema property
-													$clinical_resource_digitalSourceType, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'digitalSourceType', // string // Required // Name of schema property
+														$clinical_resource_digitalSourceType, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -40418,17 +40893,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'duration', // string // Required // Name of schema property
-													$clinical_resource_asset_duration, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'duration', // string // Required // Name of schema property
+														$clinical_resource_asset_duration, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -40517,17 +40996,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'embedUrl', // string // Required // Name of schema property
-													$clinical_resource_asset_embedUrl, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'embedUrl', // string // Required // Name of schema property
+														$clinical_resource_asset_embedUrl, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -40597,17 +41080,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'embeddedTextCaption', // string // Required // Name of schema property
-													$clinical_resource_embeddedTextCaption, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'embeddedTextCaption', // string // Required // Name of schema property
+														$clinical_resource_embeddedTextCaption, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -40644,19 +41131,16 @@
 									 *
 									 *      - Text
 									 *      - URL
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - CreativeWork
+									 *      - MediaObject
 									 */
 
-									if (
-										(
-											(
-												isset($clinical_resource_item_MedicalWebPage)
-												&&
-												in_array(
-													'encodingFormat',
-													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
-												)
-											)
-											||
+									// CreativeWork (asset-specific)
+
+										if (
 											(
 												isset($clinical_resource_item_CreativeWork)
 												&&
@@ -40665,42 +41149,37 @@
 													$clinical_resource_properties_map[$CreativeWork_type]['properties']
 												)
 											)
-										)
-										&&
-										$nesting_level == 0
-									) {
+											&&
+											$nesting_level == 0
+										) {
 
-										// Get values
+											// Loop through the main media asset(s) info array to get the 'encodingFormat' value of each asset
 
-											$clinical_resource_encodingFormat = get_post_mime_type( $clinical_resource_asset_id ) ?: ''; // e.g., 'image/jpeg'
+												foreach ( $clinical_resource_asset as $key => $value ) {
 
-										// Add to item values
+													if ( $value ) {
 
-											// MedicalWebPage
+														// Get the 'encodingFormat' value
 
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'encodingFormat', // string // Required // Name of schema property
-													$clinical_resource_encodingFormat, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+															$asset_encodingFormat = $value['encodingFormat'] ?? null;
 
-											// CreativeWork
+														// Add to item values (CreativeWork)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'encodingFormat', // string // Required // Name of schema property
-													$clinical_resource_encodingFormat, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork[$key], // array // Required // The list array for the schema item to which to add the property value
+																'encodingFormat', // string // Required // Name of schema property
+																$asset_encodingFormat, // mixed // Required // Variable to add as the property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
 
-									}
+													} // endif ( $value )
+
+												} // endforeach ( $clinical_resource_asset as $key => $value )
+
+										}
 
 								// encodings [excluded; common properties]
 
@@ -40859,17 +41338,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'hasDigitalDocumentPermission', // string // Required // Name of schema property
-													$clinical_resource_hasDigitalDocumentPermission, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'hasDigitalDocumentPermission', // string // Required // Name of schema property
+														$clinical_resource_hasDigitalDocumentPermission, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -40913,7 +41396,7 @@
 
 											// Get values
 
-													$clinical_resource_hasPart_MedicalWebPage = $clinical_resource_item_CreativeWork ?? null;
+													$clinical_resource_hasPart_MedicalWebPage = $clinical_resource_item_CreativeWork_common ?? null;
 
 											// Add to item values
 
@@ -40931,7 +41414,7 @@
 
 										}
 
-								// headline (CreativeWork only) [WIP]
+								// headline [WIP]
 
 									/**
 									 * Headline of the article.
@@ -40947,31 +41430,108 @@
 
 									// CreativeWork
 
-										// Article type
+										if (
+											(
+												(
+													isset($clinical_resource_item_MedicalWebPage)
+													&&
+													in_array(
+														'headline',
+														$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+													)
+												)
+												||
+												(
+													isset($clinical_resource_item_CreativeWork)
+													&&
+													in_array(
+														'headline',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
 
-											/*
+											// Get values
 
-												Define for the 'Article' type clinical resources by using the post title.
+												if ( $clinical_resource_resource_type == 'text' ) {
 
-											*/
+													// Article type
 
-										// Video type
+														/**
+														 * Define for the 'Article' type clinical resources by using the post title.
+														 */
 
-											/*
+														$clinical_resource_headline = null;
 
-												Define for the 'Video' type clinical resources by using the video title from
-												the video platform (e.g., the name of the video from the YouTube API).
+												} elseif ( $clinical_resource_resource_type == 'infographic' ) {
 
-											*/
+													// Infographic type
 
-										// Infographic type
+														/**
+														 * Define for the 'Infographic' type clinical resources by using the media asset
+														 * title from within WordPress.
+														 */
 
-											/*
+														$clinical_resource_headline = null;
 
-												Define for the 'Infographic' and 'Document' type clinical resources by using
-												the media asset title from within WordPress.
+												} elseif ( $clinical_resource_resource_type == 'video' ) {
 
-											*/
+													// Video type
+
+														/**
+														 * Define for the 'Video' type clinical resources by using the video title from
+														 * the video platform (e.g., the name of the video from the YouTube API).
+														 */
+
+														$clinical_resource_headline = null;
+
+												} elseif ( $clinical_resource_resource_type == 'doc' ) {
+
+													// Document type
+
+														/**
+														 * Define for the 'Document' type clinical resources by using the media asset
+														 * title from within WordPress.
+														 */
+
+														$clinical_resource_headline = null;
+
+												}
+
+											// Add to item values
+
+												// MedicalWebPage
+
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+														'headline', // string // Required // Name of schema property
+														$clinical_resource_headline, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												// CreativeWork (asset-agnostic)
+
+													foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+														uamswp_fad_schema_add_to_item_values(
+															$CreativeWork_type, // string // Required // The @type value for the schema item
+															$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+															'headline', // string // Required // Name of schema property
+															$clinical_resource_headline, // mixed // Required // Variable to add as the property value
+															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+															$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+													}
+
+										}
 
 								// height
 
@@ -41027,17 +41587,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'height', // string // Required // Name of schema property
-													$clinical_resource_height, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'height', // string // Required // Name of schema property
+														$clinical_resource_height, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -41106,17 +41670,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'image', // string // Required // Name of schema property
-													$clinical_resource_image, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'image', // string // Required // Name of schema property
+														$clinical_resource_image, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -41202,17 +41770,21 @@
 
 										// Add to item values
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'isAccessibleForFree', // string // Required // Name of schema property
-													$clinical_resource_isAccessibleForFree, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'isAccessibleForFree', // string // Required // Name of schema property
+														$clinical_resource_isAccessibleForFree, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -41300,17 +41872,21 @@
 
 										// Add to item values
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'isPartOf', // string // Required // Name of schema property
-													$clinical_resource_isPartOf, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'isPartOf', // string // Required // Name of schema property
+														$clinical_resource_isPartOf, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -41445,17 +42021,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'mainContentOfPage', // string // Required // Name of schema property
-													$clinical_resource_mainContentOfPage, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'mainContentOfPage', // string // Required // Name of schema property
+														$clinical_resource_mainContentOfPage, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -42008,17 +42588,21 @@
 
 										// Add to item values
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'representativeOfPage', // string // Required // Name of schema property
-													$clinical_resource_representativeOfPage, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'representativeOfPage', // string // Required // Name of schema property
+														$clinical_resource_representativeOfPage, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -42180,17 +42764,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'sameAs', // string // Required // Name of schema property
-													$clinical_resource_sameAs, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'sameAs', // string // Required // Name of schema property
+														$clinical_resource_sameAs, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -42432,17 +43020,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'speakable', // string // Required // Name of schema property
-													$clinical_resource_speakable, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'speakable', // string // Required // Name of schema property
+														$clinical_resource_speakable, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -42608,17 +43200,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'thumbnail', // string // Required // Name of schema property
-													$clinical_resource_thumbnail, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'thumbnail', // string // Required // Name of schema property
+														$clinical_resource_thumbnail, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -42732,17 +43328,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'timeRequired', // string // Required // Name of schema property
-													$clinical_resource_timeRequired, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'timeRequired', // string // Required // Name of schema property
+														$clinical_resource_timeRequired, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -42809,17 +43409,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'transcript', // string // Required // Name of schema property
-													$clinical_resource_transcript, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'transcript', // string // Required // Name of schema property
+														$clinical_resource_transcript, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -42960,17 +43564,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'videoFrameSize', // string // Required // Name of schema property
-													$clinical_resource_asset_videoFrameSize, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'videoFrameSize', // string // Required // Name of schema property
+														$clinical_resource_asset_videoFrameSize, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -43024,17 +43632,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'videoQuality', // string // Required // Name of schema property
-													$clinical_resource_asset_videoQuality, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'videoQuality', // string // Required // Name of schema property
+														$clinical_resource_asset_videoQuality, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -43092,17 +43704,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'foo', // string // Required // Name of schema property
-													$clinical_resource_foo, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'foo', // string // Required // Name of schema property
+														$clinical_resource_foo, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -43165,17 +43781,21 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// CreativeWork
+											// CreativeWork (asset-agnostic)
 
-												uamswp_fad_schema_add_to_item_values(
-													$CreativeWork_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'wordCount', // string // Required // Name of schema property
-													$clinical_resource_wordCount, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+													uamswp_fad_schema_add_to_item_values(
+														$CreativeWork_type, // string // Required // The @type value for the schema item
+														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+														'wordCount', // string // Required // Name of schema property
+														$clinical_resource_wordCount, // mixed // Required // Variable to add as the property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+												}
 
 									}
 
@@ -43298,17 +43918,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'author', // string // Required // Name of schema property
-																$clinical_resource_syndication_author, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'author', // string // Required // Name of schema property
+																	$clinical_resource_syndication_author, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43327,17 +43951,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'contributor', // string // Required // Name of schema property
-																$clinical_resource_syndication_contributor, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'contributor', // string // Required // Name of schema property
+																	$clinical_resource_syndication_contributor, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43356,17 +43984,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'copyrightHolder', // string // Required // Name of schema property
-																$clinical_resource_syndication_copyrightHolder, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'copyrightHolder', // string // Required // Name of schema property
+																	$clinical_resource_syndication_copyrightHolder, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43385,17 +44017,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'copyrightNotice', // string // Required // Name of schema property
-																$clinical_resource_syndication_copyrightNotice, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'copyrightNotice', // string // Required // Name of schema property
+																	$clinical_resource_syndication_copyrightNotice, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43414,17 +44050,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'copyrightYear', // string // Required // Name of schema property
-																$clinical_resource_syndication_copyrightYear, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'copyrightYear', // string // Required // Name of schema property
+																	$clinical_resource_syndication_copyrightYear, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43443,17 +44083,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'countryOfOrigin', // string // Required // Name of schema property
-																$clinical_resource_syndication_countryOfOrigin, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'countryOfOrigin', // string // Required // Name of schema property
+																	$clinical_resource_syndication_countryOfOrigin, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43472,17 +44116,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'creator', // string // Required // Name of schema property
-																$clinical_resource_syndication_creator, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'creator', // string // Required // Name of schema property
+																	$clinical_resource_syndication_creator, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43501,17 +44149,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'creditText', // string // Required // Name of schema property
-																$clinical_resource_syndication_creditText, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'creditText', // string // Required // Name of schema property
+																	$clinical_resource_syndication_creditText, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43530,17 +44182,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'dateModified', // string // Required // Name of schema property
-																$clinical_resource_syndication_dateModified, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'dateModified', // string // Required // Name of schema property
+																	$clinical_resource_syndication_dateModified, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43559,17 +44215,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'datePublished', // string // Required // Name of schema property
-																$clinical_resource_syndication_datePublished, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'datePublished', // string // Required // Name of schema property
+																	$clinical_resource_syndication_datePublished, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43588,17 +44248,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'director', // string // Required // Name of schema property
-																$clinical_resource_syndication_director, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'director', // string // Required // Name of schema property
+																	$clinical_resource_syndication_director, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43617,17 +44281,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'editor', // string // Required // Name of schema property
-																$clinical_resource_syndication_editor, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'editor', // string // Required // Name of schema property
+																	$clinical_resource_syndication_editor, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43646,17 +44314,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'funder', // string // Required // Name of schema property
-																$clinical_resource_syndication_funder, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'funder', // string // Required // Name of schema property
+																	$clinical_resource_syndication_funder, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43693,17 +44365,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'funding', // string // Required // Name of schema property
-																$clinical_resource_syndication_funding, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'funding', // string // Required // Name of schema property
+																	$clinical_resource_syndication_funding, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43722,17 +44398,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'maintainer', // string // Required // Name of schema property
-																$clinical_resource_syndication_maintainer, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'maintainer', // string // Required // Name of schema property
+																	$clinical_resource_syndication_maintainer, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43751,17 +44431,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'musicBy', // string // Required // Name of schema property
-																$clinical_resource_syndication_musicBy, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'musicBy', // string // Required // Name of schema property
+																	$clinical_resource_syndication_musicBy, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43780,17 +44464,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'producer', // string // Required // Name of schema property
-																$clinical_resource_syndication_producer, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'producer', // string // Required // Name of schema property
+																	$clinical_resource_syndication_producer, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43809,17 +44497,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'productionCompany', // string // Required // Name of schema property
-																$clinical_resource_syndication_productionCompany, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'productionCompany', // string // Required // Name of schema property
+																	$clinical_resource_syndication_productionCompany, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43853,17 +44545,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'provider', // string // Required // Name of schema property
-																$clinical_resource_syndication_provider, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'provider', // string // Required // Name of schema property
+																	$clinical_resource_syndication_provider, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43882,17 +44578,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'publisher', // string // Required // Name of schema property
-																$clinical_resource_syndication_publisher, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'publisher', // string // Required // Name of schema property
+																	$clinical_resource_syndication_publisher, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43911,17 +44611,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'publisherImprint', // string // Required // Name of schema property
-																$clinical_resource_syndication_publisherImprint, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'publisherImprint', // string // Required // Name of schema property
+																	$clinical_resource_syndication_publisherImprint, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43940,17 +44644,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'publishingPrinciples', // string // Required // Name of schema property
-																$clinical_resource_syndication_publishingPrinciples, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'publishingPrinciples', // string // Required // Name of schema property
+																	$clinical_resource_syndication_publishingPrinciples, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -43969,17 +44677,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'recordedAt', // string // Required // Name of schema property
-																$clinical_resource_syndication_recordedAt, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'recordedAt', // string // Required // Name of schema property
+																	$clinical_resource_syndication_recordedAt, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -44031,17 +44743,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'sameAs', // string // Required // Name of schema property
-																$clinical_resource_sameAs, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'sameAs', // string // Required // Name of schema property
+																	$clinical_resource_sameAs, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -44060,17 +44776,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'sourceOrganization', // string // Required // Name of schema property
-																$clinical_resource_syndication_sourceOrganization, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'sourceOrganization', // string // Required // Name of schema property
+																	$clinical_resource_syndication_sourceOrganization, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -44089,17 +44809,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'sponsor', // string // Required // Name of schema property
-																$clinical_resource_syndication_sponsor, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'sponsor', // string // Required // Name of schema property
+																	$clinical_resource_syndication_sponsor, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
@@ -44118,17 +44842,21 @@
 
 													// Add to item values
 
-														// CreativeWork
+														// CreativeWork (asset-agnostic)
 
-															uamswp_fad_schema_add_to_item_values(
-																$CreativeWork_type, // string // Required // The @type value for the schema item
-																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'translator', // string // Required // Name of schema property
-																$clinical_resource_syndication_translator, // mixed // Required // Variable to add as the property value
-																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-																($nesting_level + 1) // int // Required // Current nesting level value
-															);
+															foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+
+																uamswp_fad_schema_add_to_item_values(
+																	$CreativeWork_type, // string // Required // The @type value for the schema item
+																	$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																	'translator', // string // Required // Name of schema property
+																	$clinical_resource_syndication_translator, // mixed // Required // Variable to add as the property value
+																	$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																	$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																	($nesting_level + 1) // int // Required // Current nesting level value
+																);
+
+															}
 
 												}
 
