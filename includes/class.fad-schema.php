@@ -40945,17 +40945,33 @@
 									 *      - CreativeWork
 									 */
 
-									/*
+									// CreativeWork
 
-										Define for the 'Article' type clinical resources by using the post title.
+										// Article type
 
-										Define for the 'Video' type clinical resources by using the video title from
-										the video platform (e.g., the name of the video from the YouTube API).
+											/*
 
-										Define for the 'Infographic' and 'Document' type clinical resources by using
-										the media asset title from within WordPress.
+												Define for the 'Article' type clinical resources by using the post title.
 
-									*/
+											*/
+
+										// Video type
+
+											/*
+
+												Define for the 'Video' type clinical resources by using the video title from
+												the video platform (e.g., the name of the video from the YouTube API).
+
+											*/
+
+										// Infographic type
+
+											/*
+
+												Define for the 'Infographic' and 'Document' type clinical resources by using
+												the media asset title from within WordPress.
+
+											*/
 
 								// height
 
