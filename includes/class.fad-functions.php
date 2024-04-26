@@ -16408,7 +16408,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 // Get the info from a YouTube video
 
 	function uamswp_fad_youtube_info(
-		string $url // YouTube video URL
+		string $url // string // required // YouTube video URL
 	) {
 
 		/*
