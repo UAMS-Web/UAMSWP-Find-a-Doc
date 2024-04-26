@@ -16831,3 +16831,48 @@ function limit_to_post_parent( $args, $field, $post ) {
 		}
 
 	}
+
+// Convert a number of bytes to the largest unit the bytes will fit into, based on powers of 10
+
+	/**
+	 * An alterative to the WordPress function size_format() to align with the
+	 * International Electrotechnical Commission, with the kilobyte equaling 1000 bytes
+	 * instead of 1024 bytes.
+	 *
+	 * Sources:
+	 *
+	 *      - https://gist.github.com/ffraenz/ec58809debb210b4567e53a9d9f413ce
+	 *      - https://developer.wordpress.org/reference/functions/size_format/
+	 */
+
+	function uamswp_size_format(
+		int $bytes, // int // required // Number of bytes
+		int $decimals = 0 // int // optional // Precision of number of decimal places (Default: 0)
+	): string {
+
+		$units = array(
+			'B',
+			'KB',
+			'MB',
+			'GB',
+			'TB',
+			'PB',
+			'EB',
+			'ZB',
+			'YB'
+		);
+
+		for(
+			$index = 0;
+			$index < count($units) - 1, $bytes > 1000;
+			$index++, $bytes /= 1000
+		);
+
+		$number = number_format(
+			$bytes,
+			$decimals
+		);
+
+		return $number . ' ' . $units[$index];
+
+	}
