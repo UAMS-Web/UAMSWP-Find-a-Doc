@@ -38668,9 +38668,9 @@
 
 														$clinical_resource_asset_filesize = filesize( $clinical_resource_asset_path ) ?: '';
 
-													// Formatted asset file size
+														// Formatted asset file size
 
-														$clinical_resource_asset_filesize = size_format( $clinical_resource_asset_filesize, 2 ) ?: '';
+															$clinical_resource_asset_filesize = size_format( $clinical_resource_asset_filesize, 2 ) ?: '';
 
 											}
 
