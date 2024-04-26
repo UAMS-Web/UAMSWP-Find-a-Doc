@@ -37362,7 +37362,7 @@
 								$clinical_resource_asset_embedUrl = '';
 								$clinical_resource_asset_filesize = '';
 								$clinical_resource_asset_height = '';
-								$clinical_resource_asset_id = '';
+								$clinical_resource_asset_id = 0;
 								$clinical_resource_asset_info = '';
 								$clinical_resource_asset_parsed = '';
 								$clinical_resource_asset_path = '';
@@ -38638,7 +38638,7 @@
 
 												// Infographic image id
 
-													$clinical_resource_asset_id = get_field( 'clinical_resource_infographic', $entity ) ?? 0;
+													$clinical_resource_asset_id = get_field( 'clinical_resource_infographic', $entity ) ?? $clinical_resource_asset_id;
 
 											}
 
@@ -38648,13 +38648,13 @@
 
 												// URL, width, height
 
-													$clinical_resource_asset_info = wp_get_attachment_image_src( $clinical_resource_asset_id, 'full' ) ?: '';
+													$clinical_resource_asset_info = wp_get_attachment_image_src( $clinical_resource_asset_id, 'full' ) ?: $clinical_resource_asset_info;
 
 													if ( $clinical_resource_asset_info ) {
 
-														$clinical_resource_asset_url = $clinical_resource_asset_info[0] ?? '';
-														$clinical_resource_asset_width = $clinical_resource_asset_info[1] ?? '';
-														$clinical_resource_asset_height = $clinical_resource_asset_info[2] ?? '';
+														$clinical_resource_asset_url = $clinical_resource_asset_info[0] ?? $clinical_resource_asset_url;
+														$clinical_resource_asset_width = $clinical_resource_asset_info[1] ?? $clinical_resource_asset_width;
+														$clinical_resource_asset_height = $clinical_resource_asset_info[2] ?? $clinical_resource_asset_height;
 
 													}
 
@@ -38662,15 +38662,15 @@
 
 													// Asset file path
 
-														$clinical_resource_asset_path = get_attached_file( $clinical_resource_asset_id ) ?: '';
+														$clinical_resource_asset_path = get_attached_file( $clinical_resource_asset_id ) ?: $clinical_resource_asset_path;
 
 													// Asset file size
 
-														$clinical_resource_asset_filesize = filesize( $clinical_resource_asset_path ) ?: '';
+														$clinical_resource_asset_filesize = filesize( $clinical_resource_asset_path ) ?: $clinical_resource_asset_filesize;
 
 														// Formatted asset file size
 
-															$clinical_resource_asset_filesize = size_format( $clinical_resource_asset_filesize, 2 ) ?: '';
+															$clinical_resource_asset_filesize = size_format( $clinical_resource_asset_filesize, 2 ) ?: $clinical_resource_asset_filesize;
 
 											}
 
