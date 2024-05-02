@@ -3043,8 +3043,6 @@
 
 	function remove_provider_meta() {
 
-		global $post_types;
-
 		$screens = array(
 			'provider',
 			'location',
@@ -3143,7 +3141,7 @@
 
 		// Other
 
-			remove_meta_box( 'custom-post-type-onomies-locations', $post_types, 'side' );
+			remove_meta_box( 'custom-post-type-onomies-locations', $screens, 'side' );
 
 	}
 
