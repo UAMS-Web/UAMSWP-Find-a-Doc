@@ -40459,17 +40459,9 @@
 									 *         contentUrl isn't available, provide embedUrl as an alternative.
 									 */
 
-									if (
-										(
-											(
-												isset($clinical_resource_item_MedicalWebPage)
-												&&
-												in_array(
-													'contentUrl',
-													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
-												)
-											)
-											||
+									// CreativeWork (asset-specific)
+
+										if (
 											(
 												isset($clinical_resource_item_CreativeWork)
 												&&
@@ -40478,42 +40470,37 @@
 													$clinical_resource_properties_map[$CreativeWork_type]['properties']
 												)
 											)
-										)
-										&&
-										$nesting_level == 0
-									) {
+											&&
+											$nesting_level == 0
+										) {
 
-										// Add to item values
+											// Loop through the main media asset(s) info array to get the 'contentUrl' value of each asset
 
-											// MedicalWebPage
+												foreach ( $clinical_resource_asset as $key => $value ) {
 
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'contentUrl', // string // Required // Name of schema property
-													$clinical_resource_asset_url, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+													if ( $value ) {
 
-											// CreativeWork (asset-agnostic)
+														// Get the 'contentUrl' value
 
-												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+															$asset_contentUrl = $value['contentUrl'] ?? null;
 
-													uamswp_fad_schema_add_to_item_values(
-														$CreativeWork_type, // string // Required // The @type value for the schema item
-														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-														'contentUrl', // string // Required // Name of schema property
-														$clinical_resource_asset_url, // mixed // Required // Variable to add as the property value
-														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-														($nesting_level + 1) // int // Required // Current nesting level value
-													);
+														// Add to item values (CreativeWork)
 
-												}
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork[$key], // array // Required // The list array for the schema item to which to add the property value
+																'contentUrl', // string // Required // Name of schema property
+																$asset_contentUrl, // mixed // Required // Variable to add as the property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
 
-									}
+													} // endif ( $value )
+
+												} // endforeach ( $clinical_resource_asset as $key => $value )
+
+										}
 
 								// contributor [excluded; common properties]
 
