@@ -1586,6 +1586,23 @@
 		 * content and will not be included.
 		 */
 
+	// executableLibraryName [excluded]
+
+		/**
+		 * Library file name (e.g., mscorlib.dll, system.web.dll).
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *     - APIReference
+		 *
+		 * Supersedes
+		 *
+		 *     - assembly
+		 *
+		 * This schema property is not relevant to UAMSHealth.com webpages or their
+		 * content and will not be included.
+		 */
+
 	// exifData [excluded]
 
 		/**

@@ -41302,10 +41302,11 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// executableLibraryName [WIP]
+								// executableLibraryName [excluded; common properties]
 
 									/**
-									 *
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// exifData [excluded; common properties]
