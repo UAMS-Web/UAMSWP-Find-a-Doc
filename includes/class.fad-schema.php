@@ -40386,9 +40386,9 @@
 
 													if ( $value ) {
 
-														// Get the 'description' value
+														// Get the 'contentSize' value
 
-															$asset_contentSize = $value['contentSize'] ?? $clinical_resource_introduction;
+															$asset_contentSize = $value['contentSize'] ?? null;
 
 														// Add to item values (CreativeWork)
 
