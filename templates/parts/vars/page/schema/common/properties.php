@@ -576,6 +576,10 @@
 		 *
 		 *     - Text
 		 *
+		 * Used on these types:
+		 *
+		 *     - Article
+		 *
 		 * This schema property is not relevant to UAMSHealth.com webpages or their
 		 * content and will not be included.
 		 */
@@ -603,7 +607,7 @@
 		 *
 		 * Used on these types:
 		 *
-		 *     - APIReference
+		 *     - APIReference (Thing > CreativeWork > Article > TechArticle > APIReference)
 		 *
 		 * This schema property is not relevant to UAMSHealth.com webpages or their
 		 * content and will not be included.
@@ -633,6 +637,10 @@
 		 * Values expected to be one of these types:
 		 *
 		 *     - NewsArticle
+		 *
+		 * Used on these types:
+		 *
+		 *     - MediaObject
 		 *
 		 * This schema property is not relevant to UAMSHealth.com webpages or their
 		 * content and will not be included.
@@ -822,6 +830,10 @@
 		 *
 		 *     - CreativeWork
 		 *     - Text
+		 *
+		 * Used on these types:
+		 *
+		 *     - Article
 		 *
 		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 		 * feedback and adoption from applications and websites can help improve their
@@ -1612,6 +1624,10 @@
 		 *
 		 *     - PropertyValue
 		 *     - Text
+		 *
+		 * Used on these types:
+		 *
+		 *     - ImageObject (Thing > CreativeWork > MediaObject > ImageObject)
 		 *
 		 * This schema property is not currently relevant to UAMSHealth.com webpages or
 		 * their content and will not be included.

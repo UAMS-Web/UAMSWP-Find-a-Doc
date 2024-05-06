@@ -39935,6 +39935,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Text
+									 *
+									 * Used on these types
+									 *
+									 *      - Article
 									 */
 
 									if (
@@ -40193,8 +40197,10 @@
 								// caption
 
 									/**
-									 * The caption for this object. For downloadable machine formats (closed caption,
-									 * subtitles etc.) use MediaObject and indicate the encodingFormat.
+									 * The caption for this object.
+									 *
+									 * For downloadable machine formats (e.g., closed caption and subtitles), use
+									 * MediaObject and indicate the encodingFormat.
 									 *
 									 * Values expected to be one of these types:
 									 *
@@ -40326,7 +40332,7 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// contentLocation [excluded]
+								// contentLocation [excluded; irrelevant]
 
 									/**
 									 * The location depicted or described in the content. For example, the location in
@@ -40336,8 +40342,16 @@
 									 *
 									 *      - Place
 									 *
-									 * This schema property is not relevant to clinical resources or their webpages,
-									 * and so it will not be included.
+									 * Used on these types:
+									 *
+									 *      - CreativeWork
+									 *
+									 * Sub-properties:
+									 *
+									 *      - spatialCoverage
+									 *
+									 * Note: This schema property is not relevant to clinical resources or their
+									 * webpages, and so it will not be included.
 									 */
 
 								// contentRating [excluded; common properties]
@@ -40535,7 +40549,7 @@
 									 *
 									 * Used on these types:
 									 *
-									 *     - LiveBlogPosting
+									 *     - LiveBlogPosting (Thing > CreativeWork > Article > SocialMediaPosting > BlogPosting > LiveBlogPosting)
 									 *
 									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
@@ -40554,7 +40568,7 @@
 									 *
 									 * Used on these types:
 									 *
-									 *     - LiveBlogPosting
+									 *     - LiveBlogPosting (Thing > CreativeWork > Article > SocialMediaPosting > BlogPosting > LiveBlogPosting)
 									 *
 									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
@@ -40631,7 +40645,7 @@
 									 *
 									 * Used on these types:
 									 *
-									 *     - NewsArticle
+									 *     - NewsArticle (Thing > CreativeWork > Article > NewsArticle)
 									 *
 									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
@@ -40648,7 +40662,7 @@
 									 *
 									 * Used on these types:
 									 *
-									 *     - TechArticle
+									 *     - TechArticle (Thing > CreativeWork > Article > TechArticle)
 									 */
 
 								// description
@@ -40886,6 +40900,22 @@
 									 *
 									 *      - Duration
 									 *
+									 * Used on these types:
+									 *
+									 *      - Audiobook (Thing > CreativeWork > MediaObject > AudioObject > Audiobook; Thing > CreativeWork > Book > Audiobook)
+									 *      - Episode
+									 *      - Event
+									 *      - MediaObject (Thing > CreativeWork > MediaObject)
+									 *      - Movie
+									 *      - MusicRecording
+									 *      - MusicRelease
+									 *      - QuantitativeValueDistribution
+									 *      - Schedule
+									 *
+									 * Sub-properties:
+									 *
+									 *      - loanTerm
+									 *
 									 * Google Search Central documentation:
 									 *
 									 *     Video (VideoObject, Clip, BroadcastEvent) structured data:
@@ -40997,6 +41027,10 @@
 									 *
 									 *      - URL
 									 *
+									 * Used on these types:
+									 *
+									 *      - MediaObject
+									 *
 									 * Google Search Central documentation:
 									 *
 									 *     Video (VideoObject, Clip, BroadcastEvent) structured data:
@@ -41074,6 +41108,12 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - AudioObject
+									 *      - ImageObject
+									 *      - VideoObject
 									 *
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 									 * feedback and adoption from applications and websites can help improve their
@@ -41295,7 +41335,7 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// expires [CreativeWork (video) only]
+								// expires (CreativeWork [video] only) [WIP]
 
 									/**
 									 * Date the content expires and is no longer useful or available. For example a
@@ -41326,11 +41366,28 @@
 									 *         [https://developers.google.com/search/docs/crawling-indexing/googlebot#timezone].
 									 */
 
-								// fileFormat [excluded; common properties]
+								// fileFormat (CreativeWork only) [WIP]
 
 									/**
-									 * Note: The value for this property is already being defined in the common schema
-									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 * Media type, typically MIME format (see IANA site
+									 * [http://www.iana.org/assignments/media-types/media-types.xhtml]) of the content
+									 * (e.g., application/zip of a SoftwareApplication binary). In cases where a
+									 * CreativeWork has several media type representations, 'encoding' can be used to
+									 * indicate each MediaObject alongside particular fileFormat information.
+									 * Unregistered or niche file formats can be indicated instead via the most
+									 * appropriate URL (e.g., defining Web page or a Wikipedia entry).
+									 *
+									 * Values expected to be one of these types
+									 *
+									 *      - Text
+									 *      - URL
+									 *
+									 * Used on these types
+									 *
+									 *      - CreativeWork
+									 *
+									 * SupersededBy
+									 *      - encodingFormat
 									 */
 
 								// funder [excluded; common properties]
@@ -41364,6 +41421,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - DigitalDocumentPermission
+									 *
+									 * Used on these types:
+									 *
+									 *      - DigitalDocument
 									 */
 
 									if (
