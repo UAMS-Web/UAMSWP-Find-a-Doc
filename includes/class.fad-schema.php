@@ -40060,28 +40060,7 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// associatedClaimReview [excluded; common properties]
-
-									/**
-									 * Note: The value for this property is already being defined in the common schema
-									 * properties (templates/parts/vars/page/schema/common/properties.php)
-									 */
-
 								// associatedMedia [excluded; common properties]
-
-									/**
-									 * Note: The value for this property is already being defined in the common schema
-									 * properties (templates/parts/vars/page/schema/common/properties.php)
-									 */
-
-								// associatedMediaReview [excluded; common properties]
-
-									/**
-									 * Note: The value for this property is already being defined in the common schema
-									 * properties (templates/parts/vars/page/schema/common/properties.php)
-									 */
-
-								// associatedReview [excluded; common properties]
 
 									/**
 									 * Note: The value for this property is already being defined in the common schema
