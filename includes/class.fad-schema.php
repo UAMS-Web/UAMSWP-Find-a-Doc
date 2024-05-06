@@ -41671,17 +41671,9 @@
 									 *      - QuantitativeValue
 									 */
 
-									if (
-										(
-											(
-												isset($clinical_resource_item_MedicalWebPage)
-												&&
-												in_array(
-													'height',
-													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
-												)
-											)
-											||
+									// CreativeWork (asset-specific)
+
+										if (
 											(
 												isset($clinical_resource_item_CreativeWork)
 												&&
@@ -41690,47 +41682,38 @@
 													$clinical_resource_properties_map[$CreativeWork_type]['properties']
 												)
 											)
-										)
-										&&
-										$nesting_level == 0
-									) {
+											&&
+											$nesting_level == 0
+										) {
 
-										// Get values
+											// Loop through the main media asset(s) info array to get the 'height' value of each asset
 
-											$clinical_resource_height = $clinical_resource_asset_height ?? '';
-											$clinical_resource_height = $clinical_resource_height ? $clinical_resource_asset_height . ' px' : '';
+												foreach ( $clinical_resource_asset as $key => $value ) {
 
-										// Add to item values
+													if ( $value ) {
 
-											// MedicalWebPage
+														// Get the 'height' value
 
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'height', // string // Required // Name of schema property
-													$clinical_resource_height, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+															$asset_height = $value['height'] ?? null;
+															$asset_height = $asset_height ? $asset_height . ' px' : '';
 
-											// CreativeWork (asset-agnostic)
+														// Add to item values (CreativeWork)
 
-												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork[$key], // array // Required // The list array for the schema item to which to add the property value
+																'height', // string // Required // Name of schema property
+																$asset_height, // mixed // Required // Variable to add as the property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
 
-													uamswp_fad_schema_add_to_item_values(
-														$CreativeWork_type, // string // Required // The @type value for the schema item
-														$CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-														'height', // string // Required // Name of schema property
-														$clinical_resource_height, // mixed // Required // Variable to add as the property value
-														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-														$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-														($nesting_level + 1) // int // Required // Current nesting level value
-													);
+													} // endif ( $value )
 
-												}
+												} // endforeach ( $clinical_resource_asset as $key => $value )
 
-									}
+										}
 
 								// identifier [excluded; irrelevant]
 
