@@ -37836,9 +37836,11 @@
 
 																	// URL
 
-																		$asset_item['url'] = wp_get_attachment_url(
+																		$asset_attachment_url = wp_get_attachment_url(
 																			$asset_id // int // optional // Attachment post ID. Defaults to global $post.
-																		) ?: $asset_url; // string|false // Attachment URL; otherwise false
+																		) ?: null; // string|false // Attachment URL; otherwise false
+
+																		$asset_item['url'] = $asset_attachment_url ?: $asset_url;
 
 																}
 
