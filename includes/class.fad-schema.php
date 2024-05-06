@@ -37362,6 +37362,7 @@
 								$clinical_resource_asset_bitrate = '';
 								$clinical_resource_asset_caption_query = '';
 								$clinical_resource_asset_contentSize = '';
+								$clinical_resource_asset_contentUrl = '';
 								$clinical_resource_asset_description = '';
 								$clinical_resource_asset_duration = '';
 								$clinical_resource_asset_embedUrl = '';
@@ -37739,6 +37740,7 @@
 													'bitrate' => $clinical_resource_asset_bitrate,
 													'caption_query' => $clinical_resource_asset_caption_query,
 													'contentSize' => $clinical_resource_asset_contentSize,
+													'contentUrl' => $clinical_resource_asset_contentUrl,
 													'description' => $clinical_resource_asset_description,
 													'duration' => $clinical_resource_asset_duration,
 													'embedUrl' => $clinical_resource_asset_embedUrl,
@@ -37771,6 +37773,7 @@
 																$asset_alternateName = $clinical_resource_asset_alternateName;
 																$asset_bitrate = $clinical_resource_asset_bitrate;
 																$asset_contentSize = $clinical_resource_asset_contentSize;
+																$asset_contentUrl = $clinical_resource_asset_contentUrl;
 																$asset_encodingFormat = $clinical_resource_asset_encodingFormat;
 																$asset_height = $clinical_resource_asset_height;
 																$asset_name = $clinical_resource_asset_name;
@@ -37898,6 +37901,18 @@
 																	and/or document assets.
 
 																*/
+
+															// contentUrl (file URL) [WIP]
+
+																if ( $clinical_resource_resource_type == 'infographic' ) {
+
+																	$asset_item['contentUrl'] = $asset_info[0] ?? null; // string // Image source URL
+
+																} elseif ( $clinical_resource_resource_type == 'doc' ) {
+
+																	$asset_item['contentUrl'] = $asset_attachment_url ?? null; // string // Document source URL
+
+																}
 
 															// Add item to asset info array
 
@@ -38082,6 +38097,14 @@
 																			*/
 
 																		// bitrate [WIP]
+
+																			/*
+
+																				WIP: The current version of the function does not return this value.
+
+																			*/
+
+																		// File URL (contentUrl) [WIP]
 
 																			/*
 
