@@ -40359,7 +40359,7 @@
 									 *      - MediaObject
 									 */
 
-									// CreativeWork (asset-agnostic)
+									// CreativeWork (asset-specific)
 
 										if (
 											(
