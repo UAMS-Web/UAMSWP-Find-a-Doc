@@ -38085,8 +38085,7 @@
 
 																			/*
 
-																				WIP: Determine if the bitrate value can be retrieved for the infographic
-																				and/or document assets.
+																				WIP: The current version of the function does not return this value.
 
 																			*/
 
