@@ -39295,6 +39295,12 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Text
+									 *
+									 * Google Search Central documentation:
+									 *
+									 *     Video (VideoObject, Clip, BroadcastEvent) structured data:
+									 *
+									 *         The title of the video
 									 */
 
 									if (
@@ -40410,6 +40416,23 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - URL
+									 *
+									 * Used on these types:
+									 *
+									 *      - MediaObject
+									 *
+									 * Google Search Central documentation:
+									 *
+									 *     Video (VideoObject, Clip, BroadcastEvent) structured data:
+									 *
+									 *         A URL pointing to the actual video media file, in one of the supported encoding
+									 *         formats [https://developers.google.com/search/docs/appearance/video#supported-video-encodings].
+									 *         Don't link to the page where the video lives; this must be the URL of the
+									 *         video media file itself.
+									 *
+									 *         We recommend that your provide the contentUrl property, if possible. This is
+									 *         the most effective way for Google to fetch your video content files. If
+									 *         contentUrl isn't available, provide embedUrl as an alternative.
 									 */
 
 									if (
@@ -40645,7 +40668,7 @@
 									 *
 									 * Values expected to be one of these types:
 									 *
-									 *      - Text
+									 *      - Text (preferred by Google)
 									 *      - TextObject
 									 *
 									 * Used on these types:
@@ -40659,8 +40682,27 @@
 									 *      - originalMediaContextDescription
 									 *      - sha256
 									 *
-									 * If there is an introduction, use that to override the excerpt value as the
-									 * value of this property.
+									 * Google Search Central documentation:
+									 *
+									 *     Video (VideoObject, Clip, BroadcastEvent) structured data:
+									 *
+									 *         Text
+									 *
+									 *         The description of the video. HTML tags are ignored.
+									 *
+									 * Notes:
+									 *
+									 *      * For CreativeWork:
+									 *             * For video:
+									 *                    * If this is a video, use the video description from the video platform
+									 *                      (e.g., YouTube).
+									 *                    * If there is no video description from the video platform, use the introduction
+									 *                      from the clinical resource.
+									 *                    * If there is no introduction from the clinical resource, use the excerpt from
+									 *                      the clinical resource.
+									 *      * For MedicalWebPage:
+									 *             * If there is an introduction, use that.
+									 *             * If there is no introduction, use the excerpt.
 									 */
 
 									if (
@@ -40853,6 +40895,14 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Duration
+									 *
+									 * Google Search Central documentation:
+									 *
+									 *     Video (VideoObject, Clip, BroadcastEvent) structured data:
+									 *
+									 *         The duration of the video in ISO 8601 format
+									 *         [https://en.wikipedia.org/wiki/ISO_8601#Durations]. For example, PT00H30M5S represents
+									 *         a duration of "thirty minutes and five seconds".
 									 */
 
 									if (
@@ -40956,6 +41006,18 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - URL
+									 *
+									 * Google Search Central documentation:
+									 *
+									 *     Video (VideoObject, Clip, BroadcastEvent) structured data:
+									 *
+									 *         A URL pointing to a player for the specific video. Don't link to the page where
+									 *         the video lives; this must be the URL of the video player itself. Usually this
+									 *         is the information in the src attribute of an <embed> tag.
+									 *
+									 *         We recommend that your provide the contentUrl property, if possible. This is
+									 *         the most effective way for Google to fetch your video content files. If
+									 *         contentUrl isn't available, provide embedUrl as an alternative.
 									 */
 
 									if (
@@ -41242,11 +41304,35 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// expires [excluded; common properties]
+								// expires [CreativeWork (video) only]
 
 									/**
-									 * Note: The value for this property is already being defined in the common schema
-									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 * Date the content expires and is no longer useful or available. For example a
+									 * VideoObject or NewsArticle whose availability or relevance is time-limited, a
+									 * ClaimReview fact check whose publisher wants to indicate that it may no longer be
+									 * relevant (or helpful to highlight) after some date, or a Certification the validity has
+									 * expired.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - Date
+									 *      - DateTime (preferred by Google)
+									 *
+									 * Used on these types:
+									 *
+									 *      - Certification
+									 *      - CreativeWork
+									 *
+									 * Google Search Central documentation:
+									 *
+									 *     Video (VideoObject, Clip, BroadcastEvent) structured data:
+									 *
+									 *         If applicable, the date and time after which the video will no longer be
+									 *         available, in ISO 8601 format [https://en.wikipedia.org/wiki/ISO_8601]. Don't
+									 *         supply this information if your video does not expire. We recommend that you
+									 *         provide timezone information; otherwise, we will default to the timezone used
+									 *         by Googlebot
+									 *         [https://developers.google.com/search/docs/crawling-indexing/googlebot#timezone].
 									 */
 
 								// fileFormat [excluded; common properties]
@@ -41377,6 +41463,18 @@
 									 *      - containsSeason
 									 *      - episode
 									 *      - tocEntry
+									 *
+									 * Google Search Central documentation:
+									 *
+									 *     Video (VideoObject, Clip, BroadcastEvent) structured data:
+									 *
+									 *         If your video has important segments, nest the required Clip properties in your
+									 *         VideoObject. For example:
+									 *
+									 *             "@type": "Clip",
+									 *             "name": "Cat jumps",
+									 *             "startOffset": 30,
+									 *             "url": "https://www.example.com/example?t=30"
 									 */
 
 									// MedicalWebPage
@@ -41725,6 +41823,20 @@
 									/**
 									 * Note: The value for this property is already being defined in the common schema
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 *
+									 * Google Search Central documentation:
+									 *
+									 *     Video (VideoObject, Clip, BroadcastEvent) structured data:
+									 *
+									 *         The number of times the video has been watched. For example:
+									 *
+									 *             "@type": "InteractionCounter",
+									 *             "interactionType": { "@type": "WatchAction" },
+									 *             "userInteractionCount": 12345
+									 *
+									 *         Starting October 2019, we changed our documentation to recommend
+									 *         interactionStatistic instead of interactionCount. While we continue to support
+									 *         interactionCount, we recommend interactionStatistic moving forward.
 									 */
 
 								// interactivityType [excluded; common properties]
@@ -42464,7 +42576,20 @@
 
 									/**
 									 * Note: The value for this property is already being defined in the common schema
-									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 * properties (templates/parts/vars/page/schema/common/properties.php).
+									 *
+									 * Google Search Central documentation:
+									 *
+									 *     Video (VideoObject, Clip, BroadcastEvent) structured data:
+									 *
+									 *         If your video is happening live and you want to be eligible for the LIVE badge,
+									 *         nest the BroadcastEvent properties in your VideoObject. For example:
+									 *
+									 *             "@type": "BroadcastEvent",
+									 *             "name": "First scheduled broadcast",
+									 *             "isLiveBroadcast": true,
+									 *             "startDate": "2018-10-27T14:00:00+00:00",
+									 *             "endDate": "2018-10-27T14:37:14+00:00"
 									 */
 
 								// publicationType [excluded; common properties]
@@ -42519,7 +42644,16 @@
 
 									/**
 									 * Note: The value for this property is already being defined in the common schema
-									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 * properties (templates/parts/vars/page/schema/common/properties.php).
+									 *
+									 * Google Search Central documentation:
+									 *
+									 *     Video (VideoObject, Clip, BroadcastEvent) structured data:
+									 *
+									 *         The regions where the video is allowed. If not specified, then Google assumes
+									 *         the video is allowed everywhere. Specify the countries in ISO 3166 format
+									 *         [https://en.wikipedia.org/wiki/ISO_3166]. For multiple values, use a space or
+									 *         comma as a delimiter.
 									 */
 
 								// releasedEvent [excluded; common properties]
@@ -43230,6 +43364,14 @@
 									 * Used on these types:
 									 *
 									 *      - CreativeWork
+									 *
+									 * Google Search Central documentation:
+									 *
+									 *     Video (VideoObject, Clip, BroadcastEvent) structured data:
+									 *
+									 *         A URL pointing to the video thumbnail image file. Follow the thumbnail image
+									 *         guidelines
+									 *         [https://developers.google.com/search/docs/appearance/video#video-thumbnail].
 									 */
 
 									/*
@@ -43466,11 +43608,22 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Date
-									 *      - DateTime
+									 *      - DateTime (preferred by Google)
 									 *
 									 * Used on these types:
 									 *
 									 *      - MediaObject
+									 *
+									 * Google Search Central documentation:
+									 *
+									 *     Video (VideoObject, Clip, BroadcastEvent) structured data:
+									 *
+									 *         DateTime
+									 *
+									 *         The date and time the video was first published, in ISO 8601 format
+									 *         [https://en.wikipedia.org/wiki/ISO_8601]. We recommend that you provide timezone
+									 *         information; otherwise, we will default to the timezone used by Googlebot
+									 *         [https://developers.google.com/search/docs/crawling-indexing/googlebot#timezone].
 									 */
 
 									/*
