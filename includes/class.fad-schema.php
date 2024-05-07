@@ -37761,8 +37761,8 @@
 													'thumbnail' => $clinical_resource_asset_thumbnail,
 													'thumbnailUrl' => $clinical_resource_asset_thumbnailUrl,
 													'url' => $clinical_resource_asset_url, // string // Attachment source URL
-													'videoQuality' => $clinical_resource_asset_videoQuality,
 													'videoFrameSize' => $clinical_resource_asset_videoFrameSize,
+													'videoQuality' => $clinical_resource_asset_videoQuality,
 													'width' => $clinical_resource_asset_width // int // Media width in pixels
 												);
 
