@@ -42649,24 +42649,24 @@
 									 *      - ImageObject
 									 */
 
-									if (
-										(
-											isset($clinical_resource_item_CreativeWork)
-											&&
-											in_array(
-												'representativeOfPage',
-												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+									// CreativeWork (asset-agnostic)
+
+										if (
+											(
+												isset($clinical_resource_item_CreativeWork)
+												&&
+												in_array(
+													'representativeOfPage',
+													$clinical_resource_properties_map[$CreativeWork_type]['properties']
+												)
 											)
-										)
-									) {
+										) {
 
-										// Get values
+											// Get values
 
-											$clinical_resource_representativeOfPage = ( $nesting_level == 0 ) ? 'True' : 'False';
+												$clinical_resource_representativeOfPage = ( $nesting_level == 0 ) ? 'True' : 'False';
 
-										// Add to item values
-
-											// CreativeWork (asset-agnostic)
+											// Add to item values
 
 												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
 
@@ -42682,7 +42682,7 @@
 
 												}
 
-									}
+										}
 
 								// requiresSubscription [excluded; common properties]
 
