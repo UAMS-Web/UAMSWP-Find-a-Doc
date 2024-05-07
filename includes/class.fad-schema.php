@@ -37363,6 +37363,7 @@
 								$clinical_resource_asset_caption_query = '';
 								$clinical_resource_asset_contentSize = '';
 								$clinical_resource_asset_contentUrl = '';
+								$clinical_resource_asset_datePublished = '';
 								$clinical_resource_asset_description = '';
 								$clinical_resource_asset_duration = '';
 								$clinical_resource_asset_embedUrl = '';
@@ -37374,7 +37375,6 @@
 								$clinical_resource_asset_nodeid = ''
 								$clinical_resource_asset_parsed = '';
 								$clinical_resource_asset_path = '';
-								$clinical_resource_asset_published = '';
 								$clinical_resource_asset_resized = null;
 								$clinical_resource_asset_thumbnail = '';
 								$clinical_resource_asset_url = '';
@@ -37741,12 +37741,12 @@
 													'caption_query' => $clinical_resource_asset_caption_query,
 													'contentSize' => $clinical_resource_asset_contentSize,
 													'contentUrl' => $clinical_resource_asset_contentUrl,
+													'datePublished' => $clinical_resource_asset_datePublished,
 													'description' => $clinical_resource_asset_description,
 													'duration' => $clinical_resource_asset_duration,
 													'embedUrl' => $clinical_resource_asset_embedUrl,
 													'height' => $clinical_resource_asset_height, // int // Media height in pixels
 													'name' => $clinical_resource_asset_name, // string // The post title or linked media title
-													'published' => $clinical_resource_asset_published,
 													'path' => $clinical_resource_asset_path, // string // The file path to where the attached file should be
 													'resized' => $clinical_resource_asset_resized, // bool // Whether the image is a resized image
 													'thumbnail' => $clinical_resource_asset_thumbnail, // string // The post title or linked media title
@@ -38060,8 +38060,8 @@
 
 																		// Published date and time (snippet.publishedAt)
 
-																			// $clinical_resource_asset_published = $clinical_resource_asset_info['dateField'] ?? $clinical_resource_asset_published;
-																			$asset_item['published'] = $clinical_resource_asset_info['dateField'] ?? $clinical_resource_asset_published;
+																			// $clinical_resource_asset_datePublished = $clinical_resource_asset_info['dateField'] ?? $clinical_resource_asset_datePublished;
+																			$asset_item['datePublished'] = $clinical_resource_asset_info['dateField'] ?? $clinical_resource_asset_datePublished;
 
 																		// Duration (contentDetails.duration)
 
