@@ -1737,6 +1737,14 @@
 		 *     - Place
 		 *     - Text
 		 *
+		 * Used on these types:
+		 *
+		 *     - ActionAccessSpecification
+		 *     - DeliveryChargeSpecification
+		 *     - Demand
+		 *     - MediaObject
+		 *     - Offer
+		 *
 		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 		 * feedback and adoption from applications and websites can help improve their
 		 * definitions.
@@ -1958,6 +1966,10 @@
 		 * Values expected to be one of these types:
 		 *
 		 *     - Date
+		 *
+		 * Used on these types:
+		 *
+		 *     - WebPage
 		 */
 
 		if ( $nesting_level == 0 ) {
@@ -2265,6 +2277,18 @@
 		 *     - MusicGroup
 		 *     - Person
 		 *
+		 * Values expected to be one of these types:
+		 *
+		 *     - Clip (Thing > CreativeWork > Clip)
+		 *     - Episode (Thing > CreativeWork > Episode)
+		 *     - Movie (Thing > CreativeWork > Movie)
+		 *     - MovieSeries (Thing > CreativeWork > CreativeWorkSeries > MovieSeries; Thing > Intangible > Series > CreativeWorkSeries > MovieSeries)
+		 *     - RadioSeries (Thing > CreativeWork > CreativeWorkSeries > RadioSeries; Thing > Intangible > Series > CreativeWorkSeries > RadioSeries)
+		 *     - TVSeries (Thing > CreativeWork > TVSeries; Thing > CreativeWork > CreativeWorkSeries > TVSeries; Thing > Intangible > Series > CreativeWorkSeries > TVSeries)
+		 *     - VideoGame (Thing > CreativeWork > Game > VideoGame; Thing > CreativeWork > SoftwareApplication > VideoGame)
+		 *     - VideoGameSeries (Thing > CreativeWork > CreativeWorkSeries > VideoGameSeries; Thing > Intangible > Series > CreativeWorkSeries > VideoGameSeries)
+		 *     - VideoObject (Thing > CreativeWork > MediaObject > VideoObject)
+		 *
 		 * This schema property is not currently relevant to UAMSHealth.com webpages or
 		 * their content and will not be included.
 		 */
@@ -2278,6 +2302,13 @@
 		 *
 		 *     - Integer
 		 *     - Text
+		 *
+		 * Used on these types:
+		 *
+		 *     - Article
+		 *     - Chapter
+		 *     - PublicationIssue
+		 *     - PublicationVolume
 		 *
 		 * This schema property is not currently relevant to UAMSHealth.com webpages or
 		 * their content and will not be included.
@@ -2293,6 +2324,13 @@
 		 *     - Integer
 		 *     - Text
 		 *
+		 * Used on these types:
+		 *
+		 *     - Article
+		 *     - Chapter
+		 *     - PublicationIssue
+		 *     - PublicationVolume
+		 *
 		 * This schema property is not currently relevant to UAMSHealth.com webpages or
 		 * their content and will not be included.
 		 */
@@ -2306,6 +2344,13 @@
 		 * Values expected to be one of these types:
 		 *
 		 *     - Text
+		 *
+		 * Used on these types:
+		 *
+		 *     - Article
+		 *     - Chapter
+		 *     - PublicationIssue
+		 *     - PublicationVolume
 		 *
 		 * This schema property is not currently relevant to UAMSHealth.com webpages or
 		 * their content and will not be included.
@@ -2379,6 +2424,10 @@
 		 *
 		 *     - Text
 		 *
+		 * Used on these types:
+		 *
+		 *     - MediaObject
+		 *
 		 * This schema property is not relevant to UAMSHealth.com webpages or their
 		 * content and will not be included.
 		 */
@@ -2444,6 +2493,17 @@
 		 *
 		 *     - Organization
 		 *
+		 * Used on these types:
+		 *
+		 *     - CreativeWorkSeason
+		 *     - Episode
+		 *     - MediaObject
+		 *     - Movie
+		 *     - MovieSeries
+		 *     - RadioSeries
+		 *     - TVSeries
+		 *     - VideoGameSeries
+		 *
 		 * This schema property is not relevant to UAMSHealth.com webpages or their
 		 * content and will not be included.
 		 */
@@ -2463,6 +2523,25 @@
 		 *
 		 *     - Organization
 		 *     - Person
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *     - Action
+		 *     - CreativeWork
+		 *     - EducationalOccupationalProgram
+		 *     - Invoice
+		 *     - ParcelDelivery
+		 *     - Reservation
+		 *     - Service
+		 *     - Trip
+		 *
+		 * Supersedes:
+		 *
+		 *     - carrier
+		 *
+		 * As of 7 May 2024, this term is in the "new" area of Schema.org. Implementation
+		 * feedback and adoption from applications and websites can help improve their
+		 * definitions.
 		 */
 
 		if ( $nesting_level <= 1 ) {
@@ -2507,6 +2586,29 @@
 		 *
 		 *     - PublicationEvent
 		 *
+		 * Used on these types:
+		 *
+		 *     - CreativeWork
+		 *
+		 * This schema property is not relevant to UAMSHealth.com webpages or their
+		 * content and will not be included.
+		 */
+
+	// publicationType [excluded]
+
+		/**
+		 * The type of the medical article, taken from the US NLM MeSH publication type
+		 * catalog. See also MeSH documentation
+		 * [http://www.nlm.nih.gov/mesh/pubtypes.html].
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *     - Text
+		 *
+		 * Used on these types:
+		 *
+		 *     - MedicalScholarlyArticle (Thing > CreativeWork > Article > ScholarlyArticle > MedicalScholarlyArticle)
+		 *
 		 * This schema property is not relevant to UAMSHealth.com webpages or their
 		 * content and will not be included.
 		 */
@@ -2520,6 +2622,10 @@
 		 *
 		 *     - Organization
 		 *     - Person
+		 *
+		 * Used on these types:
+		 *
+		 *     - CreativeWork
 		 */
 
 		if ( $nesting_level == 0 ) {
@@ -2556,6 +2662,10 @@
 		 *
 		 *     - Organization
 		 *
+		 * Used on these types:
+		 *
+		 *     - CreativeWork
+		 *
 		 * This schema property is not relevant to UAMSHealth.com webpages or their
 		 * content and will not be included.
 		 */
@@ -2578,6 +2688,12 @@
 		 *
 		 *     - CreativeWork
 		 *     - URL
+		 *
+		 * Used on these types:
+		 *
+		 *     - CreativeWork
+		 *     - Organization
+		 *     - Person
 		 */
 
 	// recordedAt [excluded]
@@ -2591,6 +2707,10 @@
 		 * Values expected to be one of these types:
 		 *
 		 *     - Event
+		 *
+		 * Used on these types:
+		 *
+		 *     - CreativeWork
 		 *
 		 * This schema property is not relevant to UAMSHealth.com webpages or their
 		 * content and will not be included.
@@ -2606,6 +2726,10 @@
 		 *
 		 *     - Place
 		 *
+		 * Used on these types:
+		 *
+		 *     - MediaObject
+		 *
 		 * This schema property is not relevant to UAMSHealth.com webpages or their
 		 * content and will not be included.
 		 */
@@ -2618,6 +2742,28 @@
 		 * Values expected to be one of these types:
 		 *
 		 *     - PublicationEvent
+		 *
+		 * Used on these types:
+		 *
+		 *     - CreativeWork
+		 *
+		 * This schema property is not relevant to UAMSHealth.com webpages or their
+		 * content and will not be included.
+		 */
+
+	// reportNumber [excluded]
+
+		/**
+		 * The number or other unique designator assigned to a Report by the publishing
+		 * organization.
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *     - Text
+		 *
+		 * Used on these types:
+		 *
+		 *     - Report (Thing > CreativeWork > Article > Report)
 		 *
 		 * This schema property is not relevant to UAMSHealth.com webpages or their
 		 * content and will not be included.
@@ -2633,6 +2779,11 @@
 		 *
 		 *     - Boolean
 		 *     - MediaSubscription
+		 *
+		 * Used on these types:
+		 *
+		 *     - ActionAccessSpecification (Thing > Intangible > ActionAccessSpecification)
+		 *     - MediaObject (Thing > CreativeWork > MediaObject)
 		 */
 
 		if ( $nesting_level == 0 ) {
@@ -2847,6 +2998,10 @@
 		 * Values expected to be one of these types:
 		 *
 		 *     - Text
+		 *
+		 * Used on these types:
+		 *
+		 *     - MediaObject
 		 *
 		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
 		 * feedback and adoption from applications and websites can help improve their

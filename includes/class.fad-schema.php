@@ -42014,24 +42014,6 @@
 
 									}
 
-								// itemReviewed [excluded; irrelevant]
-
-									/**
-									 * The item that is being reviewed/rated.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - Thing
-									 *
-									 * Used on these types:
-									 *
-									 *      - AggregateRating
-									 *      - Review
-									 *
-									 * Note: This schema property is not relevant to clinical resources or their
-									 * webpages, and so it will not be included.
-									 */
-
 								// keywords [WIP]
 
 									/**
@@ -42077,7 +42059,7 @@
 									 *
 									 * Used on these types:
 									 *
-									 *      - LiveBlogPosting
+									 *      - LiveBlogPosting (Thing > CreativeWork > Article > SocialMediaPosting > BlogPosting > LiveBlogPosting)
 									 *
 									 * Note: This schema property is not relevant to clinical resources or their
 									 * webpages, and so it will not be included.
@@ -42098,6 +42080,14 @@
 									* Values expected to be one of these types:
 									*
 									*     - WebPageElement
+									*
+									* Used on these types:
+									*
+									*     - WebPage
+									*
+									* Supersedes:
+									*
+									*     - aspect
 									*/
 
 									if (
@@ -42223,42 +42213,6 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// negativeNotes [excluded; irrelevant]
-
-									/**
-									 * Provides negative considerations regarding something, most typically in pro/con
-									 * lists for reviews (alongside positiveNotes). For symmetry
-									 *
-									 * In the case of a Review, the property describes the itemReviewed from the
-									 * perspective of the review; in the case of a Product, the product itself is
-									 * being described. Since product descriptions tend to emphasise positive claims,
-									 * it may be relatively unusual to find negativeNotes used in this way.
-									 * Nevertheless for the sake of symmetry, negativeNotes can be used on Product.
-									 *
-									 * The property values can be expressed either as unstructured text (repeated as
-									 * necessary), or if ordered, as a list (in which case the most negative is at the
-									 * beginning of the list).
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - ItemList
-									 *      - ListItem
-									 *      - Text
-									 *      - WebContent
-									 *
-									 * Used on these types:
-									 *
-									 *      - Product
-									 *      - Review
-									 *
-									 * As of 24 Apr 2024, this term is in the "new" area of Schema.org. Implementation
-									 * feedback and adoption from applications and websites can help improve their
-									 * definitions.
-									 *
-									 * Note: This schema property is not relevant to clinical resources or their
-									 * webpages, and so it will not be included.
-									 */
-
 								// offers [WIP]
 
 									/**
@@ -42280,6 +42234,17 @@
 									 *
 									 *      - Demand
 									 *      - Offer
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *      - AggregateOffer
+									 *      - CreativeWork
+									 *      - EducationalOccupationalProgram
+									 *      - Event
+									 *      - MenuItem
+									 *      - Product
+									 *      - Service
+									 *      - Trip
 									 */
 
 								// pageEnd [excluded; common properties]
@@ -42310,11 +42275,18 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// playerType [excluded; common properties]
+								// playerType (CreativeWork [video] only) [WIP]
 
 									/**
-									 * Note: The value for this property is already being defined in the common schema
-									 * properties (templates/parts/vars/page/schema/common/properties.php)
+									 * Player type required—for example, Flash or Silverlight.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - Text
+									 *
+									 * Used on these types:
+									 *
+									 *     - MediaObject
 									 */
 
 								// position [excluded; common properties]
@@ -42322,40 +42294,6 @@
 									/**
 									 * Note: The value for this property is already being defined in the common schema
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
-									 */
-
-								// positiveNotes [excluded; irrelevant]
-
-									/**
-									 * Provides positive considerations regarding something, for example product
-									 * highlights or (alongside negativeNotes) pro/con lists for reviews.
-									 *
-									 * In the case of a Review, the property describes the itemReviewed from the
-									 * perspective of the review; in the case of a Product, the product itself is
-									 * being described.
-									 *
-									 * The property values can be expressed either as unstructured text (repeated as
-									 * necessary), or if ordered, as a list (in which case the most positive is at the
-									 * beginning of the list).
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - ItemList
-									 *      - ListItem
-									 *      - Text
-									 *      - WebContent
-									 *
-									 * Used on these types:
-									 *
-									 *      - Product
-									 *      - Review
-									 *
-									 * As of 24 Apr 2024, this term is in the "new" area of Schema.org. Implementation
-									 * feedback and adoption from applications and websites can help improve their
-									 * definitions.
-									 *
-									 * Note: This schema property is not relevant to clinical resources or their
-									 * webpages, and so it will not be included.
 									 */
 
 								// potentialAction [WIP]
@@ -42449,10 +42387,11 @@
 
 									/*
 
-										Define for the 'Infographic' type clinical resources by using the infographic
-										asset.
+										Define this property in the MedicalWebPage schema for the 'Infographic' type
+										clinical resources by using the infographic asset.
 
 									*/
+
 								// printColumn [excluded; irrelevant]
 
 									/**
@@ -42571,7 +42510,7 @@
 									 *
 									 * Used on these types:
 									 *
-									 *      - APIReference
+									 *      - APIReference (Thing > CreativeWork > Article > TechArticle > APIReference)
 									 *
 									 * Note: This schema property is not relevant to clinical resources or their
 									 * webpages, and so it will not be included.
@@ -42675,22 +42614,11 @@
 									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
-								// reportNumber [excluded; irrelevant]
+								// reportNumber [excluded; common properties]
 
 									/**
-									 * The number or other unique designator assigned to a Report by the publishing
-									 * organization.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - Text
-									 *
-									 * Used on these types:
-									 *
-									 *      - Report
-									 *
-									 * Note: This schema property is not relevant to clinical resources or their
-									 * webpages, and so it will not be included.
+									 * Note: The value for this property is already being defined in the common schema
+									 * properties (templates/parts/vars/page/schema/common/properties.php)
 									 */
 
 								// relatedLink [WIP]
@@ -42715,6 +42643,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Boolean
+									 *
+									 * Used on these types:
+									 *
+									 *      - ImageObject
 									 */
 
 									if (
@@ -42770,61 +42702,6 @@
 									 *
 									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
-									 */
-
-								// reviewAspect [excluded; irrelevant]
-
-									/**
-									 * This Review or Rating is relevant to this part or facet of the itemReviewed.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - Text
-									 *
-									 * Used on these types:
-									 *
-									 *      - Guide
-									 *      - Rating
-									 *      - Review
-									 *
-									 * Note: This schema property is not relevant to clinical resources or their
-									 * webpages, and so it will not be included.
-									 */
-
-								// reviewBody [excluded; irrelevant]
-
-									/**
-									 * The actual body of the review.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - Text
-									 *
-									 * Used on these types:
-									 *
-									 *      - Review
-									 *
-									 * Note: This schema property is not relevant to clinical resources or their
-									 * webpages, and so it will not be included.
-									 */
-
-								// reviewRating [excluded; irrelevant]
-
-									/**
-									 * The rating given in this review. Note that reviews can themselves be rated. The
-									 * reviewRating applies to rating given by the review. The aggregateRating
-									 * property applies to the review itself, as a creative work.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - Rating
-									 *
-									 * Used on these types:
-									 *
-									 *      - Review
-									 *
-									 * Note: This schema property is not relevant to clinical resources or their
-									 * webpages, and so it will not be included.
 									 */
 
 								// reviewedBy [excluded; common properties]
@@ -42975,8 +42852,8 @@
 									 *
 									 * Used on these types:
 									 *
-									 *      - Comment
-									 *      - SocialMediaPosting
+									 *      - Comment (Thing > CreativeWork > Comment)
+									 *      - SocialMediaPosting (Thing > CreativeWork > Article > SocialMediaPosting)
 									 *
 									 * Note: This schema property is not relevant to clinical resources or their
 									 * webpages, and so it will not be included.
@@ -43077,6 +42954,11 @@
 									 *
 									 *      - SpeakableSpecification
 									 *      - URL
+									 *
+									 * Used on these types:
+									 *
+									 *     - Article
+									 *     - WebPage
 									 */
 
 									if (
@@ -43228,11 +43110,11 @@
 									 *
 									 * Used on these types:
 									 *
-									 *      - Action
-									 *      - FoodEstablishmentReservation
-									 *      - InteractionCounter
-									 *      - MediaObject
-									 *      - Schedule
+									 *      - Action (Thing > Action)
+									 *      - FoodEstablishmentReservation (Thing > Intangible > Reservation > FoodEstablishmentReservation)
+									 *      - InteractionCounter (Thing > Intangible > StructuredValue > InteractionCounter)
+									 *      - MediaObject (Thing > CreativeWork > MediaObject)
+									 *      - Schedule (Thing > Intangible > Schedule)
 									 *
 									 * Note: Since this property would only be relevant to a clip within a larger
 									 * MediaObject (video or audio), it is not relevant to clinical resources or their
@@ -43257,7 +43139,7 @@
 									 *
 									 * Used on these types:
 									 *
-									 *      - APIReference
+									 *      - APIReference (Thing > CreativeWork > Article > TechArticle > APIReference)
 									 *
 									 * Note: This schema property is not relevant to clinical resources or their
 									 * webpages, and so it will not be included.
@@ -43306,6 +43188,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - ImageObject
+									 *
+									 * Used on these types:
+									 *
+									 *     - CreativeWork
 									 */
 
 									if (
@@ -43402,6 +43288,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Duration (use ISO 8601 duration format).
+									 *
+									 * Used on these types:
+									 *
+									 *      - CreativeWork
 									 */
 
 									if (
@@ -43509,6 +43399,11 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - AudioObject
+									 *      - VideoObject
 									 */
 
 									if (
@@ -43689,6 +43584,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - VideoObject
 									 */
 
 									if (
@@ -43755,6 +43654,10 @@
 									 * Values expected to be one of these types:
 									 *
 									 *      - Text
+									 *
+									 * Used on these types:
+									 *
+									 *      - VideoObject
 									 */
 
 									if (
@@ -43824,6 +43727,13 @@
 									 *
 									 *      - Distance
 									 *      - QuantitativeValue
+									 *
+									 * Used on these types:
+									 *
+									 *      - MediaObject
+									 *      - OfferShippingDetails
+									 *      - Product
+									 *      - VisualArtwork
 									 */
 
 									if (
@@ -43893,7 +43803,12 @@
 									 * The number of words in the text of the Article.
 									 *
 									 * Values expected to be one of these types:
+									 *
 									 *      - Integer
+									 *
+									 * Used on these types:
+									 *
+									 *      - Article
 									 */
 
 									if (
