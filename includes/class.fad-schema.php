@@ -37788,12 +37788,21 @@
 																$asset_bitrate = $clinical_resource_asset_bitrate;
 																$asset_contentSize = $clinical_resource_asset_contentSize;
 																$asset_contentUrl = $clinical_resource_asset_contentUrl;
+																$asset_datePublished = $clinical_resource_asset_datePublished;
+																$asset_description = $clinical_resource_asset_description;
+																$asset_duration = $clinical_resource_asset_duration;
+																$asset_embedUrl = $clinical_resource_asset_embedUrl;
 																$asset_encodingFormat = $clinical_resource_asset_encodingFormat;
 																$asset_height = $clinical_resource_asset_height;
 																$asset_name = $clinical_resource_asset_name;
 																$asset_path = $clinical_resource_asset_path;
 																$asset_resized = $clinical_resource_asset_resized;
+																$asset_sameAs = $clinical_resource_asset_sameAs;
+																$asset_thumbnail = $clinical_resource_asset_thumbnail;
+																$asset_thumbnailUrl = $clinical_resource_asset_thumbnailUrl;
 																$asset_url = $clinical_resource_asset_url;
+																$asset_videoFrameSize = $clinical_resource_asset_videoFrameSize;
+																$asset_videoQuality = $clinical_resource_asset_videoQuality;
 																$asset_width = $clinical_resource_asset_width;
 
 															// Instance of CreativeWork item in the list
