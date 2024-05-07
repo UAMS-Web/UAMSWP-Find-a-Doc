@@ -43637,17 +43637,9 @@
 									 *      - VideoObject
 									 */
 
-									if (
-										(
-											(
-												isset($clinical_resource_item_MedicalWebPage)
-												&&
-												in_array(
-													'videoQuality',
-													$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
-												)
-											)
-											||
+									// CreativeWork (asset-agnostic)
+
+										if (
 											(
 												isset($clinical_resource_item_CreativeWork)
 												&&
@@ -43656,28 +43648,11 @@
 													$clinical_resource_properties_map[$CreativeWork_type]['properties']
 												)
 											)
-										)
-										&&
-										$nesting_level == 0
-									) {
+											&&
+											$nesting_level == 0
+										) {
 
-										// Get values
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'videoQuality', // string // Required // Name of schema property
-													$clinical_resource_asset_videoQuality, // mixed // Required // Variable to add as the property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// CreativeWork (asset-agnostic)
+											// Add to item values
 
 												foreach ( $clinical_resource_item_CreativeWork as $CreativeWork ) {
 
@@ -43693,7 +43668,7 @@
 
 												}
 
-									}
+										}
 
 								// width
 
