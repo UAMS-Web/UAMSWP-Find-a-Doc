@@ -37752,11 +37752,14 @@
 													'description' => $clinical_resource_asset_description,
 													'duration' => $clinical_resource_asset_duration,
 													'embedUrl' => $clinical_resource_asset_embedUrl,
+													'encodingFormat' => $clinical_resource_asset_encodingFormat,
 													'height' => $clinical_resource_asset_height, // int // Media height in pixels
 													'name' => $clinical_resource_asset_name, // string // The post title or linked media title
 													'path' => $clinical_resource_asset_path, // string // The file path to where the attached file should be
 													'resized' => $clinical_resource_asset_resized, // bool // Whether the image is a resized image
-													'thumbnail' => $clinical_resource_asset_thumbnail, // string // The post title or linked media title
+													'sameAs' => $clinical_resource_asset_sameAs,
+													'thumbnail' => $clinical_resource_asset_thumbnail,
+													'thumbnailUrl' => $clinical_resource_asset_thumbnailUrl,
 													'url' => $clinical_resource_asset_url, // string // Attachment source URL
 													'videoQuality' => $clinical_resource_asset_videoQuality,
 													'videoFrameSize' => $clinical_resource_asset_videoFrameSize,
