@@ -37376,8 +37376,12 @@
 								$clinical_resource_asset_parsed = '';
 								$clinical_resource_asset_path = '';
 								$clinical_resource_asset_resized = null;
+								$clinical_resource_asset_sameAs = '';
 								$clinical_resource_asset_thumbnail = '';
+								$clinical_resource_asset_thumbnailUrl = '';
 								$clinical_resource_asset_url = '';
+								$clinical_resource_asset_videoFrameSize = '';
+								$clinical_resource_asset_videoQuality = '';
 								$clinical_resource_asset_width = '';
 								$clinical_resource_contentUrl = '';
 								$clinical_resource_creator = '';
