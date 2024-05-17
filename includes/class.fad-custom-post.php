@@ -3043,8 +3043,6 @@
 
 	function remove_provider_meta() {
 
-		global $post_types;
-
 		$screens = array(
 			'provider',
 			'location',
@@ -3143,7 +3141,7 @@
 
 		// Other
 
-			remove_meta_box( 'custom-post-type-onomies-locations', $post_types, 'side' );
+			remove_meta_box( 'custom-post-type-onomies-locations', $screens, 'side' );
 
 	}
 
@@ -3980,9 +3978,11 @@
 				$data['location_fax'] = get_field( 'location_fax', $postId );
 				$additional_phones = get_field( 'location_phone_numbers', $postId );
 
-				if ( ! empty($additional_phones)) {
+				if ( ! empty($additional_phones) ) {
+
 					$i=0;
-					foreach ($additional_phones as $additional_phone) {
+
+					foreach ( $additional_phones as $additional_phone ) {
 
 						$data['location_additional_phone_numbers'][$i]['text'] = $additional_phone['location_appointments_text'];
 						$data['location_additional_phone_numbers'][$i]['phone'] = $additional_phone['location_appointments_phone'];
@@ -3990,6 +3990,7 @@
 						$i++;
 
 					}
+
 				}
 
 			// Hours
@@ -4005,7 +4006,8 @@
 				$data['location_modified_end_date'] = $location_hours_group['location_modified_hours_end_date'];
 				$modified_hours = $location_hours_group['location_modified_hours_group'];
 
-				if ( ! empty($modified_hours)) {
+				if ( ! empty($modified_hours) ) {
+
 					$i=0;
 
 					foreach ( $modified_hours as $modified_hour ) {
@@ -4021,7 +4023,9 @@
 				}
 
 				$hours = $location_hours_group['location_hours'];
+
 				if ( ! empty($hours) ) {
+
 					$i=0;
 
 					foreach ( $hours as $hour ) {
@@ -4034,6 +4038,7 @@
 						$i++;
 
 					} // endforeach
+
 				}
 
 				// Holiday Hours - Deprecated for Modified Hours
