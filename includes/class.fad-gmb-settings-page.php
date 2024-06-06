@@ -1,11 +1,11 @@
 <?php
 /*
  *
- * 
- * 
+ *
+ *
  */
 function uamswp_add_gmb_export_page() {
-    add_submenu_page( 'fad-settings', 'UAMSWP CSV Export', 'CSV Export', 'manage_options', 'uamswp-gmb-export', 'uamswp_fad_gmb_export_page', '', 90 );
+    add_submenu_page( 'fad-settings', 'UAMSWP CSV Export', 'CSV Export', 'manage_options', 'uamswp-gmb-export', 'uamswp_fad_gmb_export_page', 90 );
 }
 add_action( 'admin_menu', 'uamswp_add_gmb_export_page', 105 );
 
@@ -59,7 +59,7 @@ if ( isset($_GET['action'] ) && $_GET['action'] == 'download_mychart_csv' )  {
 }
 
 function doximity_csv_export() {
-    // Check for current user privileges 
+    // Check for current user privileges
     if( !current_user_can( 'manage_options' ) ){ return false; }
 
     // Check if we are in WP-Admin
@@ -70,7 +70,7 @@ function doximity_csv_export() {
     if ( ! wp_verify_nonce( $nonce, 'download_doximity_csv' ) ) {
         die( 'Security check error' );
     }
-    
+
     ob_start();
 
     // Custom WP_Query args
@@ -84,7 +84,7 @@ function doximity_csv_export() {
 
     $query = new WP_Query( $args );
 
-    if ( $query->have_posts() ) : 
+    if ( $query->have_posts() ) :
         $table_head = array();
         $table_head[0] = "NPI Number";
         $table_head[1] = "First Name";
@@ -149,7 +149,7 @@ function doximity_csv_export() {
                         $d++;
                     }
                 endforeach;
-            } 
+            }
             // Check if there is a hospital affiliation
             $affiliation_valid = false;
             $affiliations = get_field('physician_affiliation',$post_id);
@@ -212,11 +212,11 @@ function doximity_csv_export() {
                             }
                             $i++;
                         endforeach;
-                    } 
+                    }
                     $row[5] = $affiliation_list ? $affiliation_list : '';
 
                 // Office Address 1 field
-                
+
                     // Get primary appointment location information
                     $l = 1;
                     $primary_appointment_address_1 = '';
@@ -231,7 +231,7 @@ function doximity_csv_export() {
                             if ( 2 > $l ){
                                 if ( get_post_status ( $location ) == 'publish' ) {
                                     $primary_appointment_address_1 = get_field( 'location_address_1', $location ); // Get the street address
-                                    
+
                                     // Construct the value for Address 2
                                     $primary_appointment_building = get_field('location_building', $location ); // Get building taxonomy input
                                     if ($primary_appointment_building) {
@@ -306,7 +306,7 @@ function doximity_csv_export() {
                     $row[14] = '';
 
             }
-        $table_body[] = $row;        
+        $table_body[] = $row;
         endwhile;
     endif;
 
@@ -322,19 +322,19 @@ function doximity_csv_export() {
     header( 'Pragma: no-cache' ); // no cache
     header( 'Expires: 0' ); // expire date
     fputcsv( $fh, $table_head, $delimiter );
-    foreach ( $table_body as $data_row ) 
+    foreach ( $table_body as $data_row )
     {
         fputcsv( $fh, $data_row, $delimiter );
     }
 
-    
+
     exit();
 
 }
 
 function gmb_provider_csv_export() {
 
-    // Check for current user privileges 
+    // Check for current user privileges
     if( !current_user_can( 'manage_options' ) ){ return false; }
 
     // Check if we are in WP-Admin
@@ -345,9 +345,9 @@ function gmb_provider_csv_export() {
     if ( ! wp_verify_nonce( $nonce, 'download_gmb_provider_csv' ) ) {
         die( 'Security check error' );
     }
-    
+
     ob_start();
-    
+
     // Custom WP_Query args
     $args = array(
         "post_type" => "provider",
@@ -681,8 +681,8 @@ function gmb_provider_csv_export() {
                     }
                     $d++;
                 endforeach;
-            } 
-            
+            }
+
             // Check for valid locations
             $locations = get_field('physician_locations', $post_id);
             $location_valid = false;
@@ -694,7 +694,7 @@ function gmb_provider_csv_export() {
                     }
                 }
             }
-                
+
             // Create location variables
             $l = 1;
             $location_title = '';
@@ -744,7 +744,7 @@ function gmb_provider_csv_export() {
             // Create the table
             if ( $locations && $location_valid && !$resident && !$provider_gmb_exclude ) {
                 $row = array();
-                
+
                 // Create row for each valid location
                 foreach( $locations as $location ) {
                     if ( get_post_status ( $location ) == 'publish' ) {
@@ -760,7 +760,7 @@ function gmb_provider_csv_export() {
 
                         // Address line 1
 
-                            // Parent Location 
+                            // Parent Location
                             $location_post_id = $location;
                             $location_child_id = $location;
                             $location_has_parent = get_field('location_parent',$location_post_id);
@@ -768,7 +768,7 @@ function gmb_provider_csv_export() {
                             $location_parent_title = ''; // Eliminate PHP errors
                             $location_parent_url = ''; // Eliminate PHP errors
                             $location_parent_location = ''; // Eliminate PHP errors
-                            if ($location_has_parent && $location_parent_id) { 
+                            if ($location_has_parent && $location_parent_id) {
                                 $location_parent_location = get_post( $location_parent_id );
                             }
                             // Get Post ID for Address & Image fields
@@ -795,8 +795,8 @@ function gmb_provider_csv_export() {
                                     $location_floor_label = $location_floor['choices'][ $location_floor_value ];
                                 }
                             $location_suite = get_field('location_suite', $location_post_id );
-        
-                                // Option 1: 
+
+                                // Option 1:
                                 // Address Line 1 = Street address (covered above)
                                 // Address Line 2+ = Cascading options based on presence of values...
                                 //   Building Name
@@ -821,14 +821,14 @@ function gmb_provider_csv_export() {
                                 // if (!$location_address_2) {
                                 //     $location_address_2 = $location_address_2_deprecated;
                                 // }
-        
-                                // Option 2: 
+
+                                // Option 2:
                                 // Address Line 1 = Street address (covered above)
                                 // Address Line 2+ = Cascading options based on presence of values...
                                 //   Building Name
                                 //   Top-Level Location Name
                                 //   Child Location Name
-        
+
                                 $location_addresses = [];
                                 if ( $location_building && $building_slug != '_none' ) {
                                     array_push($location_addresses, $building_name);
@@ -838,12 +838,12 @@ function gmb_provider_csv_export() {
                                 } else {
                                     array_push($location_addresses, $location_parent_title, $location_title);
                                 }
-                                
+
                                 $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
                                 $location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
                                 $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
                                 $location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
-                            
+
 	                            $location_city = get_field( 'location_city', $location_post_id );
 	                            $location_state = get_field( 'location_state', $location_post_id );
 	                            $location_zip = get_field( 'location_zip', $location_post_id );
@@ -851,7 +851,7 @@ function gmb_provider_csv_export() {
 	                            $location_fax = get_field( 'location_fax', $location_child_id );
 	                            $location_hours_group = get_field('location_hours_group', $location_child_id );
 	                            $location_telemed_query = $location_hours_group['location_telemed_query'];
-	                            
+
 	                            $location_gmb_wheelchair_elevator = get_field( 'has_wheelchair_accessible_elevator', $location_post_id );
 	                            $location_gmb_wheelchair_elevator = ( $location_gmb_wheelchair_elevator == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
 	                            $location_gmb_wheelchair_entrance = get_field( 'has_wheelchair_accessible_entrance', $location_post_id );
@@ -885,13 +885,13 @@ function gmb_provider_csv_export() {
 
                             // Address line 2
                                 $row[3] = ( $location_address_2 && !empty($location_address_2) ) ? html_entity_decode($location_address_2) : '';
-    
+
                             // Address line 3
                                 $row[4] = ( $location_address_3 && !empty($location_address_3) ) ? html_entity_decode($location_address_3) : '';
-    
+
                             // Address line 4
                                 $row[5] = ( $location_address_4 && !empty($location_address_4) ) ? html_entity_decode($location_address_4) : '';
-    
+
                             // Address line 5
                                 $row[6] = ( $location_address_5 && !empty($location_address_5) ) ? html_entity_decode($location_address_5) : '';
 
@@ -929,7 +929,7 @@ function gmb_provider_csv_export() {
 
                             // Primary category
                                 $row[15] = $provider_gmb_cat_primary_name;
-    
+
                             // Additional categories
                                 $row[16] = $provider_gmb_cat_additional_names;
 
@@ -1084,7 +1084,7 @@ function gmb_provider_csv_export() {
                     $table_body[] = $row;
                 } // endforeach
             }
-//             $table_body[] = $row;       
+//             $table_body[] = $row;
         endwhile;
     endif;
     ob_end_clean ();
@@ -1099,17 +1099,17 @@ function gmb_provider_csv_export() {
     header( 'Pragma: no-cache' ); // no cache
     header( 'Expires: 0' ); // expire date
     fputcsv( $fh, $table_head, $delimiter );
-    foreach ( $table_body as $data_row ) 
+    foreach ( $table_body as $data_row )
     {
         fputcsv( $fh, $data_row, $delimiter );
     }
 
-    
+
     exit();
 }
 
 function gmb_location_csv_export() {
-    // Check for current user privileges 
+    // Check for current user privileges
     if( !current_user_can( 'manage_options' ) ){ return false; }
 
     // Check if we are in WP-Admin
@@ -1120,7 +1120,7 @@ function gmb_location_csv_export() {
     if ( ! wp_verify_nonce( $nonce, 'download_gmb_location_csv' ) ) {
         die( 'Security check error' );
     }
-    
+
     ob_start();
 
     // Custom WP_Query args
@@ -1134,7 +1134,7 @@ function gmb_location_csv_export() {
 
     $query = new WP_Query( $args );
 
-    if ( $query->have_posts() ) : 
+    if ( $query->have_posts() ) :
         $table_head = array();
         $table_head[0]    =  'Store code';
         $table_head[1]    =  'Business name';
@@ -1432,7 +1432,7 @@ function gmb_location_csv_export() {
 
         $table_body = array();
         while( $query->have_posts() ) : $query->the_post();
-            // Parent Location 
+            // Parent Location
             $location_post_id = get_the_ID();
             $location_child_id = get_the_ID();
             $location_has_parent = get_field('location_parent',$location_post_id);
@@ -1440,7 +1440,7 @@ function gmb_location_csv_export() {
             $location_parent_title = ''; // Eliminate PHP errors
             $location_parent_url = ''; // Eliminate PHP errors
             $location_parent_location = ''; // Eliminate PHP errors
-            if ($location_has_parent && $location_parent_id) { 
+            if ($location_has_parent && $location_parent_id) {
                 $location_parent_location = get_post( $location_parent_id );
             }
             // Get Post ID for Address & Image fields
@@ -1457,7 +1457,7 @@ function gmb_location_csv_export() {
             // Get slug
             $store_code = ( $location_parent_location ? get_post_field( 'post_name', $location_post_id ) . '_' : '' ) . get_post_field( 'post_name', $location_child_id );
             $location_slug = ( $location_parent_location ? get_post_field( 'post_name', $location_post_id ) . '/' : '' ) . get_post_field( 'post_name', $location_child_id );
-                
+
             // Create location variables
             $location_title = get_the_title( $location_child_id );
             $location_address_1 = get_field( 'location_address_1', $location_post_id );
@@ -1476,7 +1476,7 @@ function gmb_location_csv_export() {
                 }
             $location_suite = get_field('location_suite', $location_post_id );
 
-                // Option 1: 
+                // Option 1:
                 // Address Line 1 = Street address (covered above)
                 // Address Line 2+ = Cascading options based on presence of values...
                 //   Building Name
@@ -1502,7 +1502,7 @@ function gmb_location_csv_export() {
                     $location_address_2 = $location_address_2_deprecated;
                 }
 
-                // Option 2: 
+                // Option 2:
                 // Address Line 1 = Street address (covered above)
                 // Address Line 2+ = Cascading options based on presence of values...
                 //   Building Name
@@ -1522,7 +1522,7 @@ function gmb_location_csv_export() {
                 // $location_address_3 = $location_addresses[1];
                 // $location_address_4 = $location_addresses[2];
                 // $location_address_5 = $location_addresses[3];
-            
+
             $location_city = get_field( 'location_city', $location_post_id );
             $location_state = get_field( 'location_state', $location_post_id );
             $location_zip = get_field( 'location_zip', $location_post_id );
@@ -1548,7 +1548,7 @@ function gmb_location_csv_export() {
                     $c++;
                 } // endforeach
             }
-            
+
             $location_gmb_wheelchair_elevator = get_field( 'has_wheelchair_accessible_elevator', $location_post_id );
             $location_gmb_wheelchair_elevator = ( $location_gmb_wheelchair_elevator == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
             $location_gmb_wheelchair_entrance = get_field( 'has_wheelchair_accessible_entrance', $location_post_id );
@@ -1715,7 +1715,7 @@ function gmb_location_csv_export() {
                     $row[18] = $location_gmb_logo_photo;
 
                 // Cover photo
-                
+
                     // Image values
                     $featured_image = get_post_thumbnail_id($location_post_id); // Get the ID of location's featured image
                     $featured_img_url = get_the_post_thumbnail_url($location_post_id,'full'); // Get the URL of location's featured image
@@ -1841,12 +1841,12 @@ function gmb_location_csv_export() {
 
                 // Place page URLs: Virtual care link (url_facility_telemedicine_page)
                     $row[46] =  $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
-                
+
             } // endif
-            $table_body[] = $row; 
-               
+            $table_body[] = $row;
+
         endwhile;
-            
+
     endif;
 
     ob_end_clean ();
@@ -1861,17 +1861,17 @@ function gmb_location_csv_export() {
     header( 'Pragma: no-cache' ); // no cache
     header( 'Expires: 0' ); // expire date
     fputcsv( $fh, $table_head, $delimiter );
-    foreach ( $table_body as $data_row ) 
+    foreach ( $table_body as $data_row )
     {
         fputcsv( $fh, $data_row, $delimiter );
     }
-    
+
     exit();
 
 }
 
 function mychart_csv_export() {
-    // Check for current user privileges 
+    // Check for current user privileges
     if( !current_user_can( 'manage_options' ) ){ return false; }
 
     // Check if we are in WP-Admin
@@ -1882,7 +1882,7 @@ function mychart_csv_export() {
     if ( ! wp_verify_nonce( $nonce, 'download_mychart_csv' ) ) {
         die( 'Security check error' );
     }
-    
+
     ob_start();
 
     // Custom WP_Query args
@@ -1924,9 +1924,9 @@ function mychart_csv_export() {
             // The details window for a provider displays the full image, restricted only by the max-width of the window and Epic's 1000px maximum on image size.
             // Defining hot spots within the media library, placing them between the provider's front teeth, yields the best result.
             $provider_mychart_photo = wp_get_attachment_image_url(get_post_thumbnail_id($post_id), 'thumbnail'); // 150x150
-            
+
             $resident = get_field('physician_resident',$post_id);
-            
+
             // Create the table
             if ( !$resident ) {
 
@@ -1946,9 +1946,9 @@ function mychart_csv_export() {
 
             } // endif !$resident
 
-            $table_body[] = $row;       
+            $table_body[] = $row;
         endwhile;
-                
+
     endif;
 
     ob_end_clean ();
@@ -1963,12 +1963,12 @@ function mychart_csv_export() {
     header( 'Pragma: no-cache' ); // no cache
     header( 'Expires: 0' ); // expire date
     fputcsv( $fh, $table_head, $delimiter );
-    foreach ( $table_body as $data_row ) 
+    foreach ( $table_body as $data_row )
     {
         fputcsv( $fh, $data_row, $delimiter );
     }
 
-    
+
     exit();
 
 }

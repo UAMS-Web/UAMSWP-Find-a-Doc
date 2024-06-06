@@ -3141,7 +3141,7 @@
 
 		// Other
 
-			remove_meta_box( 'custom-post-type-onomies-locations', $post_types, 'side' );
+			remove_meta_box( 'custom-post-type-onomies-locations', $screens, 'side' );
 
 	}
 
@@ -3978,14 +3978,18 @@
 				$data['location_fax'] = get_field( 'location_fax', $postId );
 				$additional_phones = get_field( 'location_phone_numbers', $postId );
 
-				$i=0;
+				if ( ! empty($additional_phones) ) {
 
-				foreach ($additional_phones as $additional_phone) {
+					$i=0;
 
-					$data['location_additional_phone_numbers'][$i]['text'] = $additional_phone['location_appointments_text'];
-					$data['location_additional_phone_numbers'][$i]['phone'] = $additional_phone['location_appointments_phone'];
-					$data['location_additional_phone_numbers'][$i]['additional_text'] = $additional_phone['location_appointments_additional_text'];
-					$i++;
+					foreach ( $additional_phones as $additional_phone ) {
+
+						$data['location_additional_phone_numbers'][$i]['text'] = $additional_phone['location_appointments_text'];
+						$data['location_additional_phone_numbers'][$i]['phone'] = $additional_phone['location_appointments_phone'];
+						$data['location_additional_phone_numbers'][$i]['additional_text'] = $additional_phone['location_appointments_additional_text'];
+						$i++;
+
+					}
 
 				}
 
@@ -4001,31 +4005,41 @@
 				$data['location_modified_end'] = $location_hours_group['location_modified_hours_end'];
 				$data['location_modified_end_date'] = $location_hours_group['location_modified_hours_end_date'];
 				$modified_hours = $location_hours_group['location_modified_hours_group'];
-				$i=0;
 
-				foreach ( $modified_hours as $modified_hour ) {
+				if ( ! empty($modified_hours) ) {
 
-					$data['location_modified_hours'][$i]['title'] = $modified_hour['location_modified_hours_title'];
-					$data['location_modified_hours'][$i]['information'] = $modified_hour['location_modified_hours_information'];
-					$data['location_modified_hours'][$i]['times'] = $modified_hour['location_modified_hours_times'];
-					$data['location_modified_hours'][$i]['24_7'] = $modified_hour['location_modified_hours_24_7'];
-					$i++;
+					$i=0;
+
+					foreach ( $modified_hours as $modified_hour ) {
+
+						$data['location_modified_hours'][$i]['title'] = $modified_hour['location_modified_hours_title'];
+						$data['location_modified_hours'][$i]['information'] = $modified_hour['location_modified_hours_information'];
+						$data['location_modified_hours'][$i]['times'] = $modified_hour['location_modified_hours_times'];
+						$data['location_modified_hours'][$i]['24_7'] = $modified_hour['location_modified_hours_24_7'];
+						$i++;
+
+					}
 
 				}
 
 				$hours = $location_hours_group['location_hours'];
-				$i=0;
 
-				foreach ( $hours as $hour ) {
+				if ( ! empty($hours) ) {
 
-					$data['location_hours'][$i]['day'] = $hour['day'];
-					$data['location_hours'][$i]['closed'] = $hour['closed'];
-					$data['location_hours'][$i]['open'] = $hour['open'];
-					$data['location_hours'][$i]['close'] = $hour['close'];
-					$data['location_hours'][$i]['comment'] = $hour['comment'];
-					$i++;
+					$i=0;
 
-				} // endforeach
+					foreach ( $hours as $hour ) {
+
+						$data['location_hours'][$i]['day'] = $hour['day'];
+						$data['location_hours'][$i]['closed'] = $hour['closed'];
+						$data['location_hours'][$i]['open'] = $hour['open'];
+						$data['location_hours'][$i]['close'] = $hour['close'];
+						$data['location_hours'][$i]['comment'] = $hour['comment'];
+						$i++;
+
+					} // endforeach
+
+				}
 
 				// Holiday Hours - Deprecated for Modified Hours
 
