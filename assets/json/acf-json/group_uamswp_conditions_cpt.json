@@ -704,6 +704,72 @@
 			"acfe_settings": ""
 		},
 		{
+			"key": "field_condition_schema_signorsymptom",
+			"label": "Signs or Symptoms of this Condition (signOrSymptom > MedicalSignOrSymptom)",
+			"name": "condition_schema_signorsymptom",
+			"type": "relationship",
+			"instructions": "Select any conditions that are signs or symptoms of this condition.</p><p class='description' style='margin-top: 0.5em;'>For more information on this Schema.org property, visit <a href='https://schema.org/signOrSymptom' target='_blank'>https://schema.org/signOrSymptom</a>.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_schema_medicalsignorsymptom"
+			}
+		},
+		{
+			"key": "field_condition_schema_medicalsignorsymptom",
+			"label": "Conditions for Which This Is a Sign or Symptom (MedicalSignOrSymptom)",
+			"name": "condition_schema_medicalsignorsymptom",
+			"type": "relationship",
+			"instructions": "Select any conditions for which this condition is a sign or symptom.</p><p class='description' style='margin-top: 0.5em;'>For more information on this Schema.org type, visit <a href='https://schema.org/MedicalSignOrSymptom' target='_blank'>https://schema.org/MedicalSignOrSymptom</a>.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalcondition_subtype",
+						"operator": "==",
+						"value": "MedicalSignOrSymptom"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_schema_signorsymptom"
+			}
+		},
+		{
 			"key": "field_condition_schema_primaryprevention",
 			"label": "Primary Prevention Therapies (primaryPrevention > MedicalTherapy)",
 			"name": "condition_schema_primaryprevention",
