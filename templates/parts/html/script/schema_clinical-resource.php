@@ -19,15 +19,23 @@ $page_id = get_the_ID();
 	$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
 	$clinical_resource_schema_fields = $clinical_resource_schema_fields ?? array();
 
-	$schema_clinical_resource_combined = uamswp_fad_schema_clinical_resource(
-		array($page_id), // List of IDs of the clinical resource items
-		$page_url, // Page URL
-		$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
-		0, // Nesting level within the main schema
-		1, // Iteration counter for clinical resource-as-MedicalWebPage
-		1, // Iteration counter for clinical resource-as-CreativeWork
-		$clinical_resource_schema_fields // Pre-existing field values array so duplicate calls can be avoided
-	);
+	if ( function_exists('uamswp_fad_schema_clinical_resource') ) {
+
+		$schema_clinical_resource_combined = uamswp_fad_schema_clinical_resource(
+			array($page_id), // List of IDs of the clinical resource items
+			$page_url, // Page URL
+			$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
+			0, // Nesting level within the main schema
+			1, // Iteration counter for clinical resource-as-MedicalWebPage
+			1, // Iteration counter for clinical resource-as-CreativeWork
+			$clinical_resource_schema_fields // Pre-existing field values array so duplicate calls can be avoided
+		);
+
+	} else {
+
+		$schema_clinical_resource_combined = null;
+
+	}
 
 // Add clinical resource schema arrays to the base schema array
 
