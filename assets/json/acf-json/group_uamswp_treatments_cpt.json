@@ -638,39 +638,6 @@
 			"acfe_settings": ""
 		},
 		{
-			"key": "field_treatment_procedure_schema_medicaltest_subtype",
-			"label": "MedicalTest Subtype (availableService)",
-			"name": "treatment_procedure_schema_medicaltest_subtype",
-			"type": "clone",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_schema_medicalentity_subtype_availableservice",
-						"operator": "==",
-						"value": "MedicalTest"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "uamswp-hide-clone-label",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"clone": [
-				"field_schema_medicaltest_subtype"
-			],
-			"display": "group",
-			"layout": "block",
-			"prefix_label": 0,
-			"prefix_name": 0,
-			"acfe_seamless_style": 1,
-			"acfe_clone_modal": 0,
-			"acfe_settings": ""
-		},
-		{
 			"key": "field_treatment_procedure_schema_medicalprocedure_subtype",
 			"label": "MedicalProcedure Subtype (availableService)",
 			"name": "treatment_procedure_schema_medicalprocedure_subtype",
@@ -770,6 +737,180 @@
 			"acfe_permissions": "",
 			"clone": [
 				"field_schema_medicaltherapy_subtype"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_primaryprevention",
+			"label": "Medical Condition(s) for Which This is a Primary Prevention Therapy",
+			"name": "treatment_procedure_schema_primaryprevention",
+			"type": "relationship",
+			"instructions": "Select any medical conditions for which this therapy is used to prevent the initial occurrence of the condition.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "TherapeuticProcedure"
+					},
+					{
+						"field": "field_schema_therapeuticprocedure_subtype",
+						"operator": "==",
+						"value": "MedicalTherapy"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_schema_primaryprevention"
+			}
+		},
+		{
+			"key": "field_treatment_procedure_schema_secondaryprevention",
+			"label": "Medical Condition(s) for Which This is a Secondary Prevention Therapy",
+			"name": "treatment_procedure_schema_secondaryprevention",
+			"type": "relationship",
+			"instructions": "Select any medical conditions for which this therapy is used to prevent reoccurrence after an initial episode of the condition.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "TherapeuticProcedure"
+					},
+					{
+						"field": "field_schema_therapeuticprocedure_subtype",
+						"operator": "==",
+						"value": "MedicalTherapy"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_schema_secondaryprevention"
+			}
+		},
+		{
+			"key": "field_treatment_procedure_schema_treatedmedicalcondition",
+			"label": "Conditions Possibly Treated by This Therapy",
+			"name": "treatment_procedure_schema_treatedmedicalcondition",
+			"type": "relationship",
+			"instructions": "Select any medical conditions that can possibly be addressed with this therapy.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "TherapeuticProcedure"
+					},
+					{
+						"field": "field_schema_therapeuticprocedure_subtype",
+						"operator": "==",
+						"value": "MedicalTherapy"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_schema_possibletreatment"
+			}
+		},
+		{
+			"key": "field_treatment_procedure_schema_medicaltest_subtype",
+			"label": "MedicalTest Subtype (availableService)",
+			"name": "treatment_procedure_schema_medicaltest_subtype",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalTest"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicaltest_subtype"
 			],
 			"display": "group",
 			"layout": "block",
@@ -930,147 +1071,6 @@
 			"acfe_seamless_style": 1,
 			"acfe_clone_modal": 0,
 			"acfe_settings": ""
-		},
-		{
-			"key": "field_treatment_procedure_schema_primaryprevention",
-			"label": "Medical Condition(s) for Which This is a Primary Prevention Therapy",
-			"name": "treatment_procedure_schema_primaryprevention",
-			"type": "relationship",
-			"instructions": "Select any medical conditions for which this therapy is used to prevent the initial occurrence of the condition.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_schema_medicalentity_subtype_availableservice",
-						"operator": "==",
-						"value": "MedicalProcedure"
-					},
-					{
-						"field": "field_schema_medicalprocedure_subtype",
-						"operator": "==",
-						"value": "TherapeuticProcedure"
-					},
-					{
-						"field": "field_schema_therapeuticprocedure_subtype",
-						"operator": "==",
-						"value": "MedicalTherapy"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"condition"
-			],
-			"taxonomy": "",
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_condition_schema_primaryprevention"
-			}
-		},
-		{
-			"key": "field_treatment_procedure_schema_secondaryprevention",
-			"label": "Medical Condition(s) for Which This is a Secondary Prevention Therapy",
-			"name": "treatment_procedure_schema_secondaryprevention",
-			"type": "relationship",
-			"instructions": "Select any medical conditions for which this therapy is used to prevent reoccurrence after an initial episode of the condition.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_schema_medicalentity_subtype_availableservice",
-						"operator": "==",
-						"value": "MedicalProcedure"
-					},
-					{
-						"field": "field_schema_medicalprocedure_subtype",
-						"operator": "==",
-						"value": "TherapeuticProcedure"
-					},
-					{
-						"field": "field_schema_therapeuticprocedure_subtype",
-						"operator": "==",
-						"value": "MedicalTherapy"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"condition"
-			],
-			"taxonomy": "",
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_condition_schema_secondaryprevention"
-			}
-		},
-		{
-			"key": "field_treatment_procedure_schema_treatedmedicalcondition",
-			"label": "Conditions Possibly Treated by This Therapy",
-			"name": "treatment_procedure_schema_treatedmedicalcondition",
-			"type": "relationship",
-			"instructions": "Select any medical conditions that can possibly be addressed with this therapy.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_schema_medicalentity_subtype_availableservice",
-						"operator": "==",
-						"value": "MedicalProcedure"
-					},
-					{
-						"field": "field_schema_medicalprocedure_subtype",
-						"operator": "==",
-						"value": "TherapeuticProcedure"
-					},
-					{
-						"field": "field_schema_therapeuticprocedure_subtype",
-						"operator": "==",
-						"value": "MedicalTherapy"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"condition"
-			],
-			"taxonomy": "",
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_condition_schema_possibletreatment"
-			}
 		},
 		{
 			"key": "field_treatment_procedure_schema_usedtodiagnose",
