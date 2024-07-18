@@ -27,7 +27,7 @@ function bootstrap() {
 	include_once (__DIR__ . '/class.fad-schema-array-provider.php' ); // Schema functions: Generate schema array of Provider ontology page type
 	include_once (__DIR__ . '/class.fad-schema-array-location.php' ); // Schema functions: Generate schema array of Location ontology page type
 	include_once (__DIR__ . '/class.fad-schema-array-expertise.php' ); // Schema functions: Generate schema array of Area of Expertise ontology page type
-	include_once (__DIR__ . '/class.fad-schema-array-clinical-resource.php' ); // Schema functions: Generate schema array of Clinical Resource ontology page type
+	// include_once (__DIR__ . '/class.fad-schema-array-clinical-resource.php' ); // Schema functions: Generate schema array of Clinical Resource ontology page type
 	include_once (__DIR__ . '/class.fad-schema-array-condition.php' ); // Schema functions: Generate schema array of Condition ontology page type
 	include_once (__DIR__ . '/class.fad-schema-array-treatment.php' ); // Schema functions: Generate schema array of Treatment ontology page type
 	include_once (__DIR__ . '/class.fad-schema-utility.php' ); // Schema functions: Schema utility functions
