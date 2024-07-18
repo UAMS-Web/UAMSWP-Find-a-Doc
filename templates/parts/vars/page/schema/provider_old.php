@@ -126,12 +126,20 @@ $page_id = get_the_ID();
 
 				$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
 
-				$provider_related_expertise = uamswp_fad_schema_expertise(
-					$expertises, // List of IDs of the clinical resource items
-					$page_url, // Page URL
-					$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
-					1 // Nesting level within the main schema
-				);
+				if ( function_exists('uamswp_fad_schema_expertise') ) {
+
+					$provider_related_expertise = uamswp_fad_schema_expertise(
+						$expertises, // List of IDs of the clinical resource items
+						$page_url, // Page URL
+						$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
+						1 // Nesting level within the main schema
+					);
+
+				} else {
+
+					$provider_related_expertise = null;
+
+				}
 
 			// Define reference to each value/row in this property
 

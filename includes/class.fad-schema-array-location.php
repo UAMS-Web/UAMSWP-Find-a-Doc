@@ -1198,14 +1198,22 @@ function uamswp_fad_schema_location(
 
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-											$location_expertise = uamswp_fad_schema_expertise(
-												$location_expertise_list, // List of IDs of the area of expertise items
-												'', // string // Required // Page or fake subpage URL
-												true, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
-												'', // string // Required // Fake subpage slug
-												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ) // Nesting level within the main schema
-											) ?? null;
+											if ( function_exists('uamswp_fad_schema_expertise') ) {
+
+												$location_expertise = uamswp_fad_schema_expertise(
+													$location_expertise_list, // List of IDs of the area of expertise items
+													'', // string // Required // Page or fake subpage URL
+													true, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
+													'', // string // Required // Fake subpage slug
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ) // Nesting level within the main schema
+												) ?? null;
+
+											} else {
+
+												$location_expertise = null;
+
+											}
 
 											if ( isset($location_expertise) ) {
 
