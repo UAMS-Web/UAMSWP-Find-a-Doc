@@ -857,6 +857,64 @@
 			}
 		},
 		{
+			"key": "field_condition_schema_identifyingexam",
+			"label": "Physical Examination(s) That Can Identify This Sign (identifyingExam > PhysicalExam)",
+			"name": "condition_schema_identifyingexam",
+			"type": "relationship",
+			"instructions": "Select any physical examinations that can identify this sign.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_schema_signdetected_physicalexam"
+			}
+		},
+		{
+			"key": "field_condition_schema_identifyingtest",
+			"label": "Medical Test(s) That Can Identify This Sign (identifyingTest > MedicalTest)",
+			"name": "condition_schema_identifyingtest",
+			"type": "relationship",
+			"instructions": "Select any medical tests that can identify this sign.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_schema_signdetected_medicaltest"
+			}
+		},
+		{
 			"key": "field_condition_schema_typicaltest",
 			"label": "Typical Test(s) (typicalTest > MedicalTest)",
 			"name": "condition_schema_typicaltest",

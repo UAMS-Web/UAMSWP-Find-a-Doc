@@ -935,6 +935,48 @@
 			}
 		},
 		{
+			"key": "field_treatment_procedure_schema_signdetected_physicalexam",
+			"label": "Medical Sign(s) Identified or Detected by This Physical Exam (signDetected > MedicalSign)",
+			"name": "treatment_procedure_schema_signdetected_physicalexam",
+			"type": "relationship",
+			"instructions": "Select any medical signs that this physical exam can be used to identify or detect.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "PhysicalExam"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_schema_typicaltest"
+			}
+		},
+		{
 			"key": "field_treatment_procedure_schema_medicaltest_subtype",
 			"label": "MedicalTest Subtype (availableService)",
 			"name": "treatment_procedure_schema_medicaltest_subtype",
@@ -1118,6 +1160,48 @@
 			"acfe_seamless_style": 1,
 			"acfe_clone_modal": 0,
 			"acfe_settings": ""
+		},
+		{
+			"key": "field_treatment_procedure_schema_signdetected_medicaltest",
+			"label": "Medical Sign(s) Identified or Detected by This Service (signDetected > MedicalSign)",
+			"name": "treatment_procedure_schema_signdetected_medicaltest",
+			"type": "relationship",
+			"instructions": "Select any medical signs that this medical test can be used to identify or detect.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalTest"
+					},
+					{
+						"field": "field_schema_medicaltest_subtype",
+						"operator": "!=",
+						"value": ""
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_schema_typicaltest"
+			}
 		},
 		{
 			"key": "field_treatment_procedure_schema_usedtodiagnose",
