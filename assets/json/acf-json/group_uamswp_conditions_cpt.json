@@ -704,6 +704,38 @@
 			"acfe_settings": ""
 		},
 		{
+			"key": "field_condition_schema_medicalsignorsymptom_subtype",
+			"label": "MedicalSignOrSymptom Subtype",
+			"name": "condition_schema_medicalsignorsymptom_subtype",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalcondition_subtype",
+						"operator": "==",
+						"value": "MedicalSignOrSymptom"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalsignorsymptom_subtype"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
 			"key": "field_condition_schema_signorsymptom",
 			"label": "Signs or Symptoms of this Condition (signOrSymptom > MedicalSignOrSymptom)",
 			"name": "condition_schema_signorsymptom",

@@ -1071,6 +1071,30 @@
 			"save_other_choice": 0
 		},
 		{
+			"key": "field_schema_medicalsignorsymptom_subtype",
+			"label": "MedicalSignOrSymptom Subtype",
+			"name": "schema_medicalsignorsymptom_subtype",
+			"type": "radio",
+			"instructions": "Select the most appropriate subtype of MedicalSignOrSymptom.</p><p class='description' style='margin-top: 0.5em;'>For information on the Schema.org MedicalSignOrSymptom type, visit <a href='https://schema.org/MedicalSignOrSymptom' target='_blank'>https://schema.org/MedicalSignOrSymptom</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each subtype, visit the relevant page linked at <a href='https://schema.org/MedicalSignOrSymptom#Subtypes' target='_blank'>https://schema.org/MedicalSignOrSymptom#Subtypes</a>.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"MedicalSign": "<strong>MedicalSign</strong> &mdash; Any physical manifestation of a person's medical condition discoverable by objective diagnostic tests or physical examination.",
+				"MedicalSymptom": "<strong>MedicalSymptom</strong> &mdash; Any complaint sensed and expressed by the patient (therefore defined as subjective) like stomachache, lower-back pain, or fatigue."
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
 			"key": "field_schema_infectiousagent",
 			"label": "Infectious Agent (infectiousAgent > Text)",
 			"name": "schema_infectiousagent",
