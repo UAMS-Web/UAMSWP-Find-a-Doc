@@ -1917,14 +1917,22 @@ function uamswp_fad_schema_clinical_resource(
 
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-											$clinical_resource_condition = uamswp_fad_schema_condition(
-												$clinical_resource_condition_list, // array // Required // List of IDs of the MedicalCondition items
-												$clinical_resource_url, // string // Required // Page URL
-												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
-												$Service_i // int // Optional // Iteration counter for treatment-as-Service
-											) ?? null;
+											if ( function_exists('uamswp_fad_schema_condition') ) {
+
+												$clinical_resource_condition = uamswp_fad_schema_condition(
+													$clinical_resource_condition_list, // array // Required // List of IDs of the MedicalCondition items
+													$clinical_resource_url, // string // Required // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
+													$Service_i // int // Optional // Iteration counter for treatment-as-Service
+												) ?? null;
+
+											} else {
+
+												$clinical_resource_condition = null;
+
+											}
 
 											if (
 												isset($clinical_resource_condition)
