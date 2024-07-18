@@ -1161,14 +1161,22 @@ function uamswp_fad_schema_condition(
 
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-											$condition_possibleTreatment = uamswp_fad_schema_treatment(
-												$condition_possibleTreatment_relationship, // array // Required // List of IDs of the service items
-												$page_url, // string // Required // Page URL
-												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-											);
+											if ( function_exists('uamswp_fad_schema_treatment') ) {
+
+												$condition_possibleTreatment = uamswp_fad_schema_treatment(
+													$condition_possibleTreatment_relationship, // array // Required // List of IDs of the service items
+													$page_url, // string // Required // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+												);
+
+											} else {
+
+												$condition_possibleTreatment = null;
+
+											}
 
 										}
 
@@ -1224,14 +1232,22 @@ function uamswp_fad_schema_condition(
 
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-											$condition_primaryPrevention = uamswp_fad_schema_treatment(
-												$condition_primaryPrevention_relationship, // array // Required // List of IDs of the service items
-												$page_url, // string // Required // Page URL
-												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-											);
+											if ( function_exists('uamswp_fad_schema_treatment') ) {
+
+												$condition_primaryPrevention = uamswp_fad_schema_treatment(
+													$condition_primaryPrevention_relationship, // array // Required // List of IDs of the service items
+													$page_url, // string // Required // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+												);
+
+											} else {
+
+												$condition_primaryPrevention = null;
+
+											}
 
 										}
 
@@ -1287,14 +1303,22 @@ function uamswp_fad_schema_condition(
 
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-											$condition_secondaryPrevention = uamswp_fad_schema_treatment(
-												$condition_secondaryPrevention_relationship, // array // Required // List of IDs of the service items
-												$page_url, // string // Required // Page URL
-												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-											);
+											if ( function_exists('uamswp_fad_schema_treatment') ) {
+
+												$condition_secondaryPrevention = uamswp_fad_schema_treatment(
+													$condition_secondaryPrevention_relationship, // array // Required // List of IDs of the service items
+													$page_url, // string // Required // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+												);
+
+											} else {
+
+												$condition_secondaryPrevention = null;
+
+											}
 
 										}
 
@@ -1363,14 +1387,22 @@ function uamswp_fad_schema_condition(
 
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-											$condition_typicalTest = uamswp_fad_schema_treatment(
-												$condition_typicalTest_relationship, // array // Required // List of IDs of the service items
-												$page_url, // string // Required // Page URL
-												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-											);
+											if ( function_exists('uamswp_fad_schema_treatment') ) {
+
+												$condition_typicalTest = uamswp_fad_schema_treatment(
+													$condition_typicalTest_relationship, // array // Required // List of IDs of the service items
+													$page_url, // string // Required // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+												);
+
+											} else {
+
+												$condition_typicalTest = null;
+
+											}
 
 										}
 

@@ -1413,14 +1413,22 @@ function uamswp_fad_schema_expertise(
 
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-											$expertise_availableService = uamswp_fad_schema_treatment(
-												$expertise_treatment, // array // Required // List of IDs of the service items
-												$expertise_url, // string // Required // Page URL
-												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-											) ?? null;
+											if ( function_exists('uamswp_fad_schema_treatment') ) {
+
+												$expertise_availableService = uamswp_fad_schema_treatment(
+													$expertise_treatment, // array // Required // List of IDs of the service items
+													$expertise_url, // string // Required // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+												) ?? null;
+
+											} else {
+
+												$expertise_availableService = null;
+
+											}
 
 											if (
 												isset($expertise_availableService)

@@ -213,11 +213,19 @@ $page_id = get_the_ID();
 
 					$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
 
-					$provider_related_treatment = uamswp_fad_schema_treatment(
-						$treatments_cpt, // array // Required // List of IDs of the service items
-						$schema_provider_url, // string // Required // Page URL
-						$node_identifier_list // array // Optional // List of node identifiers (@id) already defined in the schema
-					);
+					if ( function_exists('uamswp_fad_schema_treatment') ) {
+
+						$provider_related_treatment = uamswp_fad_schema_treatment(
+							$treatments_cpt, // array // Required // List of IDs of the service items
+							$schema_provider_url, // string // Required // Page URL
+							$node_identifier_list // array // Optional // List of node identifiers (@id) already defined in the schema
+						);
+
+					} else {
+
+						$provider_related_treatment = null;
+
+					}
 
 				// Define reference to each value/row in this property
 
