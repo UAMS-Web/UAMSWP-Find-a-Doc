@@ -748,7 +748,7 @@
 		},
 		{
 			"key": "field_treatment_procedure_schema_primaryprevention",
-			"label": "Medical Condition(s) for Which This is a Primary Prevention Therapy",
+			"label": "Medical Condition(s) for Which This is a Primary Prevention Therapy (primaryPrevention > MedicalCondition)",
 			"name": "treatment_procedure_schema_primaryprevention",
 			"type": "relationship",
 			"instructions": "Select any medical conditions for which this therapy is used to prevent the initial occurrence of the condition.",
@@ -795,7 +795,7 @@
 		},
 		{
 			"key": "field_treatment_procedure_schema_secondaryprevention",
-			"label": "Medical Condition(s) for Which This is a Secondary Prevention Therapy",
+			"label": "Medical Condition(s) for Which This is a Secondary Prevention Therapy (secondaryPrevention > MedicalCondition)",
 			"name": "treatment_procedure_schema_secondaryprevention",
 			"type": "relationship",
 			"instructions": "Select any medical conditions for which this therapy is used to prevent reoccurrence after an initial episode of the condition.",
@@ -842,7 +842,7 @@
 		},
 		{
 			"key": "field_treatment_procedure_schema_treatedmedicalcondition",
-			"label": "Conditions Possibly Treated by This Therapy",
+			"label": "Conditions Possibly Treated by This Therapy (possibleTreatment > MedicalCondition)",
 			"name": "treatment_procedure_schema_treatedmedicalcondition",
 			"type": "relationship",
 			"instructions": "Select any medical conditions that can possibly be addressed with this therapy.",
