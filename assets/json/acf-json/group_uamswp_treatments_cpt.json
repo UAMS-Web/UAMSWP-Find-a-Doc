@@ -1168,7 +1168,7 @@
 		},
 		{
 			"key": "field_treatment_procedure_schema_signdetected_medicaltest",
-			"label": "Medical Sign(s) Identified or Detected by This Service (signDetected > MedicalSign)",
+			"label": "Medical Sign(s) Identified or Detected by This Medical Test (signDetected > MedicalSign)",
 			"name": "treatment_procedure_schema_signdetected_medicaltest",
 			"type": "relationship",
 			"instructions": "Select any medical signs that this medical test can be used to identify or detect.",
