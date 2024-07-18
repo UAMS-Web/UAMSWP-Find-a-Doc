@@ -895,7 +895,20 @@
 			"type": "relationship",
 			"instructions": "Select any physical examinations that can identify this sign.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalcondition_subtype",
+						"operator": "==",
+						"value": "MedicalSignOrSymptom"
+					},
+					{
+						"field": "field_schema_medicalsignorsymptom_subtype",
+						"operator": "==",
+						"value": "MedicalSign"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -924,7 +937,20 @@
 			"type": "relationship",
 			"instructions": "Select any medical tests that can identify this sign.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalcondition_subtype",
+						"operator": "==",
+						"value": "MedicalSignOrSymptom"
+					},
+					{
+						"field": "field_schema_medicalsignorsymptom_subtype",
+						"operator": "==",
+						"value": "MedicalSign"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
