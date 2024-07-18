@@ -907,7 +907,7 @@
 						"value": "TherapeuticProcedure"
 					},
 					{
-						"field": "field_schema_medicalprocedure_subtype",
+						"field": "field_schema_therapeuticprocedure_subtype",
 						"operator": "==",
 						"value": "MedicalTherapy"
 					}
