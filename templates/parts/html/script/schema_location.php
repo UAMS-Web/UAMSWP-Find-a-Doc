@@ -18,15 +18,23 @@ $page_id = get_the_ID();
 
 	$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
 
-	$schema_location_combined = uamswp_fad_schema_location(
-		array($page_id), // List of IDs of the location items
-		$page_url, // Page URL
-		$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
-		0, // Nesting level within the main schema
-		1, // Iteration counter for location-as-MedicalWebPage
-		1, // Iteration counter for location-as-LocalBusiness
-		$location_schema_fields // Pre-existing field values array so duplicate calls can be avoided
-	);
+	if ( function_exists('uamswp_fad_schema_location') ) {
+
+		$schema_location_combined = uamswp_fad_schema_location(
+			array($page_id), // List of IDs of the location items
+			$page_url, // Page URL
+			$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
+			0, // Nesting level within the main schema
+			1, // Iteration counter for location-as-MedicalWebPage
+			1, // Iteration counter for location-as-LocalBusiness
+			$location_schema_fields // Pre-existing field values array so duplicate calls can be avoided
+		);
+
+	} else {
+
+		$schema_location_combined = null;
+
+	}
 
 // Add location schema arrays to the base schema array
 

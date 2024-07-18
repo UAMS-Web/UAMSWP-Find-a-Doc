@@ -73,16 +73,24 @@
 
 		$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-		$LocalBusiness_list = $LocalBusiness_list + uamswp_fad_schema_location(
-			array($page_id), // List of IDs of the location items
-			$location_url, // Page URL
-			$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-			1, // Nesting level within the main schema
-			1, // Iteration counter for location-as-MedicalWebPage
-			1, // Iteration counter for location-as-LocalBusiness
-			$LocalBusiness_fields, // Pre-existing field values array so duplicate calls can be avoided
-			$LocalBusiness_list // Pre-existing list array to which to add additional items
-		);
+		if ( function_exists('uamswp_fad_schema_location') ) {
+
+			$LocalBusiness_list = $LocalBusiness_list + uamswp_fad_schema_location(
+				array($page_id), // List of IDs of the location items
+				$location_url, // Page URL
+				$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+				1, // Nesting level within the main schema
+				1, // Iteration counter for location-as-MedicalWebPage
+				1, // Iteration counter for location-as-LocalBusiness
+				$LocalBusiness_fields, // Pre-existing field values array so duplicate calls can be avoided
+				$LocalBusiness_list // Pre-existing list array to which to add additional items
+			);
+
+		} else {
+
+			$LocalBusiness_list = null;
+
+		}
 
 // Construct the card
 

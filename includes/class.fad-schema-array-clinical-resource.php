@@ -1511,12 +1511,20 @@ function uamswp_fad_schema_clinical_resource(
 
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-											$clinical_resource_location = uamswp_fad_schema_location(
-												$clinical_resource_location_array, // List of IDs of the location items
-												$clinical_resource_url, // Page URL
-												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ) // Nesting level within the main schema
-											);
+											if ( function_exists('uamswp_fad_schema_location') ) {
+
+												$clinical_resource_location = uamswp_fad_schema_location(
+													$clinical_resource_location_array, // List of IDs of the location items
+													$clinical_resource_url, // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ) // Nesting level within the main schema
+												);
+
+											} else {
+
+												$clinical_resource_location = null;
+
+											}
 
 											if ( isset($clinical_resource_location) ) {
 

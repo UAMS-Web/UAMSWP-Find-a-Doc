@@ -2219,12 +2219,20 @@ function uamswp_fad_schema_provider(
 
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-											$provider_location = uamswp_fad_schema_location(
-												$provider_location_array, // List of IDs of the location items
-												$provider_url, // Page URL
-												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ) // Nesting level within the main schema
-											) ?? null;
+											if ( function_exists('uamswp_fad_schema_location') ) {
+
+												$provider_location = uamswp_fad_schema_location(
+													$provider_location_array, // List of IDs of the location items
+													$provider_url, // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ) // Nesting level within the main schema
+												) ?? null;
+
+											} else {
+
+												$provider_location = null;
+
+											}
 
 											if ( isset($provider_location) ) {
 

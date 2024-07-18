@@ -79,11 +79,19 @@ $page_id = get_the_ID();
 
 					$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
 
-					$provider_related_location = uamswp_fad_schema_location(
-						$locations, // List of IDs of the location items
-						$schema_provider_url, // Page URL
-						$node_identifier_list // array // Optional // List of node identifiers (@id) already defined in the schema
-					);
+					if ( function_exists('uamswp_fad_schema_location') ) {
+
+						$provider_related_location = uamswp_fad_schema_location(
+							$locations, // List of IDs of the location items
+							$schema_provider_url, // Page URL
+							$node_identifier_list // array // Optional // List of node identifiers (@id) already defined in the schema
+						);
+
+					} else {
+
+						$provider_related_location = null;
+
+					}
 
 				}
 

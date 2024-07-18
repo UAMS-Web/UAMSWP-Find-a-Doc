@@ -1805,16 +1805,24 @@
 
 							$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-							$schema = uamswp_fad_schema_location(
-								array($hospital_location), // List of IDs of the location items
-								'', // Page URL
-								$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-								$nesting_level, // Nesting level within the main schema
-								1, // Iteration counter for location-as-MedicalWebPage
-								$schema_hospital_affiliation_i, // Iteration counter for location-as-LocalBusiness
-								array(), // Pre-existing field values array so duplicate calls can be avoided
-								$schema_hospital_affiliation // Pre-existing list array to which to add additional items
-							)['LocalBusiness'] ?? array();
+							if ( function_exists('uamswp_fad_schema_location') ) {
+
+								$schema = uamswp_fad_schema_location(
+									array($hospital_location), // List of IDs of the location items
+									'', // Page URL
+									$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+									$nesting_level, // Nesting level within the main schema
+									1, // Iteration counter for location-as-MedicalWebPage
+									$schema_hospital_affiliation_i, // Iteration counter for location-as-LocalBusiness
+									array(), // Pre-existing field values array so duplicate calls can be avoided
+									$schema_hospital_affiliation // Pre-existing list array to which to add additional items
+								)['LocalBusiness'] ?? array();
+
+							} else {
+
+								$schema = null;
+
+							}
 
 						}
 
