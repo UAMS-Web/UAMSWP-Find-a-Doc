@@ -890,10 +890,10 @@
 		},
 		{
 			"key": "field_condition_schema_identifyingexam",
-			"label": "Physical Examination(s) That Can Identify This Sign (identifyingExam > PhysicalExam)",
+			"label": "Physical Examination(s) That Can Identify or Detect This Sign (identifyingExam > PhysicalExam)",
 			"name": "condition_schema_identifyingexam",
 			"type": "relationship",
-			"instructions": "Select any physical examinations that can identify this sign.",
+			"instructions": "Select any physical examinations that can identify or detect this sign.",
 			"required": 0,
 			"conditional_logic": [
 				[
@@ -932,10 +932,10 @@
 		},
 		{
 			"key": "field_condition_schema_identifyingtest",
-			"label": "Medical Test(s) That Can Identify This Sign (identifyingTest > MedicalTest)",
+			"label": "Medical Test(s) That Can Identify or Detect This Sign (identifyingTest > MedicalTest)",
 			"name": "condition_schema_identifyingtest",
 			"type": "relationship",
-			"instructions": "Select any medical tests that can identify this sign.",
+			"instructions": "Select any medical tests that can identify or detect this sign.",
 			"required": 0,
 			"conditional_logic": [
 				[
