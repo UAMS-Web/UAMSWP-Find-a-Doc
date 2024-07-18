@@ -736,13 +736,21 @@ function uamswp_fad_schema_expertise(
 
 												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-												$expertise_provider = uamswp_fad_schema_provider(
-													$expertise_provider_ids, // array // Required // List of IDs of the provider items
-													$expertise_url, // string // Required // Page URL
-													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													($nesting_level + 1), // int // Optional // Nesting level within the main schema
-													array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
-												) ?? null;
+												if ( function_exists('uamswp_fad_schema_provider') ) {
+
+													$expertise_provider = uamswp_fad_schema_provider(
+														$expertise_provider_ids, // array // Required // List of IDs of the provider items
+														$expertise_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														($nesting_level + 1), // int // Optional // Nesting level within the main schema
+														array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
+													) ?? null;
+
+												} else {
+
+													$expertise_provider = null;
+
+												}
 
 												if ( isset($expertise_provider) ) {
 

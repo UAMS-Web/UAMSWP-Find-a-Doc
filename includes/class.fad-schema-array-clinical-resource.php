@@ -1351,13 +1351,21 @@ function uamswp_fad_schema_clinical_resource(
 
 												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-												$clinical_resource_provider = uamswp_fad_schema_provider(
-													$clinical_resource_provider_ids, // array // Required // List of IDs of the provider items
-													$clinical_resource_url, // string // Required // Page URL
-													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													($nesting_level + 1), // int // Optional // Nesting level within the main schema
-													array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
-												) ?? null;
+												if ( function_exists('uamswp_fad_schema_provider') ) {
+
+													$clinical_resource_provider = uamswp_fad_schema_provider(
+														$clinical_resource_provider_ids, // array // Required // List of IDs of the provider items
+														$clinical_resource_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														($nesting_level + 1), // int // Optional // Nesting level within the main schema
+														array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
+													) ?? null;
+
+												} else {
+
+													$clinical_resource_provider = null;
+
+												}
 
 												if ( isset($clinical_resource_provider) ) {
 

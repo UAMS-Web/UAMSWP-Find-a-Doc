@@ -940,13 +940,21 @@ function uamswp_fad_schema_location(
 
 												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-												$location_provider = uamswp_fad_schema_provider(
-													$location_provider_ids, // array // Required // List of IDs of the provider items
-													$location_url, // string // Required // Page URL
-													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													($nesting_level + 1), // int // Optional // Nesting level within the main schema
-													array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
-												) ?? null;
+												if ( function_exists('uamswp_fad_schema_provider') ) {
+
+													$location_provider = uamswp_fad_schema_provider(
+														$location_provider_ids, // array // Required // List of IDs of the provider items
+														$location_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														($nesting_level + 1), // int // Optional // Nesting level within the main schema
+														array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
+													) ?? null;
+
+												} else {
+
+													$location_provider = null;
+
+												}
 
 												if ( isset($location_provider) ) {
 

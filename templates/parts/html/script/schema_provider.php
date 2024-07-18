@@ -18,17 +18,25 @@ $page_id = get_the_ID();
 
 	$node_identifier_list = $node_identifier_list ?? array();
 
-	$schema_provider_combined = uamswp_fad_schema_provider(
-		array($page_id), // array // Required // List of IDs of the provider items
-		$page_url, // string // Required // Page URL
-		$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
-		0, // int // Optional // Nesting level within the main schema
-		array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ), // array // Optional // List of the schema types to output
-		1, // int // Optional // Iteration counter for provider-as-MedicalWebPage
-		1, // int // Optional // Iteration counter for provider-as-MedicalBusiness
-		1, // int // Optional // Iteration counter for provider-as-Person
-		$provider_schema_fields // array // Optional // Pre-existing field values array so duplicate calls can be avoided
-	);
+	if ( function_exists('uamswp_fad_schema_provider') ) {
+
+		$schema_provider_combined = uamswp_fad_schema_provider(
+			array($page_id), // array // Required // List of IDs of the provider items
+			$page_url, // string // Required // Page URL
+			$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
+			0, // int // Optional // Nesting level within the main schema
+			array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ), // array // Optional // List of the schema types to output
+			1, // int // Optional // Iteration counter for provider-as-MedicalWebPage
+			1, // int // Optional // Iteration counter for provider-as-MedicalBusiness
+			1, // int // Optional // Iteration counter for provider-as-Person
+			$provider_schema_fields // array // Optional // Pre-existing field values array so duplicate calls can be avoided
+		);
+
+	} else {
+
+		$schema_provider_combined = null;
+
+	}
 
 // Add provider schema arrays to the base schema array
 
