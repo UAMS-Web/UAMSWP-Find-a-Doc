@@ -974,7 +974,7 @@
 		},
 		{
 			"key": "field_condition_schema_typicaltest",
-			"label": "Typical Test(s) (typicalTest > MedicalTest)",
+			"label": "Medical Test(s) That Can Diagnose This Condition (typicalTest > MedicalTest)",
 			"name": "condition_schema_typicaltest",
 			"type": "relationship",
 			"instructions": "Select any medical tests typically performed to diagnose this condition.",
