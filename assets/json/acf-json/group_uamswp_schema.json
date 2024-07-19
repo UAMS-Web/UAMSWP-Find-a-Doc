@@ -1199,7 +1199,7 @@
 			"key": "field_schema_medicinesystem",
 			"label": "Related System(s) of Medical Practice (MedicineSystem)",
 			"name": "schema_medicinesystem",
-			"type": "select",
+			"type": "checkbox",
 			"instructions": "Select one or more Schema.org MedicineSystem enumeration members that identify the system(s) of medical practice relevant to this entity. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicineSystem Schema.org enumeration type, visit <a href='https://schema.org/MedicineSystem' target='_blank'>https://schema.org/MedicineSystem</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each of the MedicineSystem Schema.org enumeration members, visit the relevant page linked at <a href='https://schema.org/MedicineSystem#subtypes' target='_blank'>https://schema.org/MedicineSystem#subtypes</a>.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1208,6 +1208,7 @@
 				"class": "",
 				"id": ""
 			},
+			"acfe_permissions": "",
 			"choices": {
 				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
 				"Ayurvedic": "<strong>Ayurvedic</strong> &mdash; A system of medicine that originated in India over thousands of years and that focuses on integrating and balancing the body, mind, and spirit.",
@@ -1217,16 +1218,14 @@
 				"TraditionalChinese": "<strong>TraditionalChinese</strong> &mdash; A system of medicine based on common theoretical concepts that originated in China and evolved over thousands of years, that uses herbs, acupuncture, exercise, massage, dietary therapy, and other methods to treat a wide range of conditions.",
 				"WesternConventional": "<strong>WesternConventional</strong> &mdash; The conventional Western system of medicine, that aims to apply the best available evidence gained from the scientific method to clinical decision making. Also known as conventional or Western medicine."
 			},
-			"default_value": [],
-			"allow_null": 1,
-			"multiple": 1,
-			"ui": 1,
-			"ajax": 0,
-			"return_format": "value",
 			"allow_custom": 0,
-			"placeholder": "",
+			"default_value": [],
+			"layout": "vertical",
+			"toggle": 0,
+			"return_format": "value",
 			"acfe_settings": "",
-			"acfe_validate": ""
+			"acfe_validate": "",
+			"save_custom": 0
 		},
 		{
 			"key": "field_schema_localbusiness_single",
