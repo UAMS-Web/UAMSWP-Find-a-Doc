@@ -736,6 +736,30 @@
 			"acfe_settings": ""
 		},
 		{
+			"key": "field_condition_schema_additionalType",
+			"label": "More Specific Type(s) for This Condition From External Vocabularies in Microdata Syntax (additionalType > Text or URL)",
+			"name": "condition_schema_additionalType",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_additionalType"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
 			"key": "field_condition_schema_signorsymptom",
 			"label": "Signs or Symptoms of this Condition (signOrSymptom > MedicalSignOrSymptom)",
 			"name": "condition_schema_signorsymptom",
@@ -1041,30 +1065,6 @@
 			"acfe_permissions": "",
 			"clone": [
 				"field_schema_sameas"
-			],
-			"display": "group",
-			"layout": "block",
-			"prefix_label": 0,
-			"prefix_name": 0,
-			"acfe_seamless_style": 1,
-			"acfe_settings": ""
-		},
-		{
-			"key": "field_condition_schema_additionalType",
-			"label": "More Specific Type(s) for This Condition From External Vocabularies in Microdata Syntax (additionalType > Text or URL)",
-			"name": "condition_schema_additionalType",
-			"type": "clone",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "uamswp-hide-clone-label",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"clone": [
-				"field_schema_additionalType"
 			],
 			"display": "group",
 			"layout": "block",
