@@ -1423,6 +1423,30 @@
 			"acfe_settings": ""
 		},
 		{
+			"key": "field_treatment_procedure_schema_medicinesystem",
+			"label": "Related System(s) of Medical Practice (medicineSystem > MedicineSystem)",
+			"name": "treatment_procedure_schema_medicinesystem",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicinesystem"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
 			"key": "field_treatment_procedure_tab_conditions",
 			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions",
 			"name": "",
