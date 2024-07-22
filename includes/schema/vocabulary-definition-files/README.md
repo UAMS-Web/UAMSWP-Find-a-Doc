@@ -10,7 +10,7 @@ Download the CSV files for Types and for Properties at https://schema.org/docs/d
 4. Click **Download**.
 5. Set the **For** dropdown to **Properties**.
 6. Click **Download**.
-7. Create a subfolder within **includes/schema/vocabulary-definition-files** for the current Schema.org version.
+7. Create a subfolder within **includes/schema/vocabulary-definition-files** for the current Schema.org version. Find the release number at https://schema.org/docs/releases.html.
 8. Move the downloaded CSV files into that new subfolder.
 
 An alternative method is to download the files directly from the schemaorg Github repository at https://github.com/schemaorg/schemaorg/tree/main/data/releases.
@@ -37,11 +37,13 @@ For each CSV file:
 
 ## Prepare Properties for PHP Comparison
 
-### Round 1
+### Find and Replace, Round 1 — Move columns into arrays
 
 #### Find
 
-<pre><code>^(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+"))</code></pre>
+```
+^(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+"))
+```
 
 1. id
 4. label
@@ -57,7 +59,8 @@ For each CSV file:
 
 #### Replace All
 
-<pre><code>				'$4' => array(
+```
+				'$4' => array(
 					'subPropertyOf' => array(
 						'$7'
 					),
@@ -85,62 +88,104 @@ For each CSV file:
 					'isPartOf' => array(
 						'$31'
 					)
-				),</code></pre>
+				),
+```
 
-### Round 2
+### Find and Replace, Round 2
 
 #### Find
 
 Adjust the number of tabs in the positive lookbehind as needed. If adjusting the number, adjust the number of tabs in the Replace All value to match it.
 
-<pre><code>(?<=^				'".+), </code></pre>
+```
+(?<=^				'".+),
+```
 
 #### Replace All
 
-<pre><code>'
-				'</code></pre>
+```
+'
+				'
+```
 
-### Round 3
+### Find and Replace, Round 3
 
 #### Find
 
 Adjust the number of tabs value as needed. If adjusting the number, adjust the number of tabs in the Replace All value to match it.
 
-<pre><code>^						'"?([^'"]+)"?'</code></pre>
+```
+^						'"?([^'"]+)"?'
+```
 
 #### Replace All
 
-<pre><code>						'$1'</code></pre>
+```
+						'$1'
+```
 
-### Round 4
+### Find and Replace, Round 4
 
 #### Find
 
-<pre><code>'https://schema.org/</code></pre>
+```
+'https://schema.org/
+```
 
 #### Replace All
 
-<pre><code>'</code></pre>
+```
+'
+```
 
-### Round 5
+### Find and Replace, Round 5
 
 #### Find
 
-<pre><code>(^\t+'.*' => )array\(
-				''
-			\)</code></pre>
+```
+(^\t+'.*' => )array\(
+\t+''
+\t+\)
+```
 
 #### Replace All
 
-<pre><code>$1''</code></pre>
+```
+$1''
+```
+
+### Reduce Tabs
+
+Reduce the base number of tabs to two tabs.
+
+### Prepend and Append Code
+
+Prepend the following code to the properties file:
+
+```php
+
+// Full list of properties from Schema.org
+
+	$schema_org_properties = array(
+
+```
+
+Remove any trailing comma and append the following code to the properties file, replacing the version number and date with the relevant value:
+
+```php
+
+	);
+```
 
 ## Prepare Types for PHP Comparison
 
-### Round 1
+### Find and Replace, Round 1 — Move columns into arrays
 
 #### Find
 
-<pre><code>^(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+"))$</code></pre>
+```
+^(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+")),(([^,"]*)|("[^"]+"))$
+```
 
 1. id
 4. label
@@ -155,7 +200,8 @@ Adjust the number of tabs value as needed. If adjusting the number, adjust the n
 
 #### Replace All
 
-<pre><code>				'$4' => array(
+```
+				'$4' => array(
 					'subTypeOf' => array(
 						'$7'
 					),
@@ -180,51 +226,138 @@ Adjust the number of tabs value as needed. If adjusting the number, adjust the n
 					'isPartOf' => array(
 						'$28'
 					)
-				),</code></pre>
+				),
+```
 
-### Round 2
+### Find and Replace, Round 2
 
 #### Find
 
 Adjust the number of tabs in the positive lookbehind as needed. If adjusting the number, adjust the number of tabs in the Replace All value to match it.
 
-<pre><code>(?<=^				'".+), </code></pre>
+```
+(?<=^				'".+),
+```
 
 #### Replace All
 
-<pre><code>'
-				'</code></pre>
+```
+'
+				'
+```
 
-### Round 3
+### Find and Replace, Round 3
 
 #### Find
 
 Adjust the number of tabs value as needed. If adjusting the number, adjust the number of tabs in the Replace All value to match it.
 
-<pre><code>^						'"?([^'"]+)"?'</code></pre>
+```
+^						'"?([^'"]+)"?'
+```
 
 #### Replace All
 
-<pre><code>						'$1'</code></pre>
+```
+						'$1'
+```
 
-### Round 4
+### Find and Replace, Round 4
 
 #### Find
 
-<pre><code>'https://schema.org/</code></pre>
+```
+'https://schema.org/
+```
 
 #### Replace All
 
-<pre><code>'</code></pre>
+```
+'
+```
 
-### Round 5
+### Find and Replace, Round 5
 
 #### Find
 
-<pre><code>(^\t+'.*' => )array\(
-				''
-			\)</code></pre>
+```
+(^\t+'.*' => )array\(
+\t+''
+\t+\)
+```
 
 #### Replace All
 
-<pre><code>$1''</code></pre>
+```
+$1''
+```
+
+### Find and Replace, Round 6
+
+#### Find
+
+```
+(?<=^\t{6}'.*), https:\/\/schema.org\/
+```
+
+#### Replace All
+
+```
+',\n\t\t\t\t\t\t'
+```
+
+### Reduce Tabs
+
+Reduce the base number of tabs to two tabs.
+
+### Prepend and Append Code
+
+Prepend the following code to the types file, replacing the version number and date with the relevant value:
+
+```php
+
+// Full list of types from Schema.org
+
+	$schema_org_types = array(
+
+```
+
+Remove any trailing comma and append the following code to the types file:
+
+```php
+
+	);
+
+```
+
+## Create a Combined PHP File for Comparison
+
+Create a new PHP file in the version subfolder. Name it ```schema-org_v27-02.php```, replacing the version number with the relevant value.
+
+Add the following code to the file:
+
+```php
+<?php
+
+/*
+ * Schema.org Version 27.02 (2024-07-01)
+ * Types and Properties
+ */
+
+```
+
+Append the code from the types file.
+
+Append the code from the properties file.
+
+## Compare the New File Against the Current File
+
+1. In the Explorer tab of Visual Studio Code, select ```templates/parts/vars/page/schema/schema-org.php``` _then_ the combined PHP file.
+2. Right-click either file and click **Compare Selected**.
+3. Verify that the changes in the new file match the syntax found in the ```templates/parts/vars/page/schema/schema-org.php```.
+4. Make any necessary corrections to the new file.
+
+## Update Existing File
+
+1. Replace the code in ```templates/parts/vars/page/schema/schema-org.php``` with the code from the new file.
+2. Delete the PHP files created for this process.
