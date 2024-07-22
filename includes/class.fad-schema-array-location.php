@@ -420,6 +420,183 @@ function uamswp_fad_schema_location(
 
 					// Add property values
 
+						/**
+						 * The following properties are either beyond the scope of what is being included
+						 * in the facility item schema; irrelevant to the facility item schema; are
+						 * superseded by another property; or are already being defined in the common
+						 * schema properties (templates/parts/vars/page/schema/common/properties.php) and
+						 * so they will not be included here:
+						 *
+						 *      * about
+						 *      * abstract
+						 *      * acceptedPaymentMethod
+						 *      * accessibilityAPI
+						 *      * accessibilityControl
+						 *      * accessibilityFeature
+						 *      * accessibilityHazard
+						 *      * accessibilitySummary
+						 *      * accessMode
+						 *      * accessModeSufficient
+						 *      * accountablePerson
+						 *      * acquireLicensePage
+						 *      * actionableFeedbackPolicy
+						 *      * additionalProperty
+						 *      * agentInteractionStatistic
+						 *      * alternativeHeadline
+						 *      * alumni
+						 *      * amenityFeature
+						 *      * archivedAt
+						 *      * areaServed
+						 *      * aspect
+						 *      * assesses
+						 *      * associatedMedia
+						 *      * audience
+						 *      * audio
+						 *      * author
+						 *      * awards
+						 *      * branchCode
+						 *      * branchOf
+						 *      * breadcrumb
+						 *      * character
+						 *      * citation
+						 *      * comment
+						 *      * commentCount
+						 *      * conditionsOfAccess
+						 *      * contactPoints
+						 *      * containedIn
+						 *      * contentLocation
+						 *      * contentRating
+						 *      * contentReferenceTime
+						 *      * contributor
+						 *      * copyrightHolder
+						 *      * copyrightNotice
+						 *      * copyrightYear
+						 *      * correction
+						 *      * correctionsPolicy
+						 *      * countryOfOrigin
+						 *      * creativeWorkStatus
+						 *      * creator
+						 *      * creditText
+						 *      * dateCreated
+						 *      * dateModified
+						 *      * datePublished
+						 *      * description
+						 *      * digitalSourceType
+						 *      * disambiguatingDescription
+						 *      * discussionUrl
+						 *      * dissolutionDate
+						 *      * editEIDR
+						 *      * editor
+						 *      * educationalAlignment
+						 *      * educationalLevel
+						 *      * educationalUse
+						 *      * email
+						 *      * employees
+						 *      * encoding
+						 *      * encodingFormat
+						 *      * encodings
+						 *      * events
+						 *      * exampleOfWork
+						 *      * expires
+						 *      * fileFormat
+						 *      * founder
+						 *      * founders
+						 *      * foundingLocation
+						 *      * funder
+						 *      * funding
+						 *      * genre
+						 *      * geoContains
+						 *      * geoCoveredBy
+						 *      * geoCovers
+						 *      * geoCrosses
+						 *      * geoDisjoint
+						 *      * geoEquals
+						 *      * geoIntersects
+						 *      * geoOverlaps
+						 *      * geoTouches
+						 *      * geoWithin
+						 *      * hasCertification
+						 *      * hasGS1DigitalLink
+						 *      * hasMerchantReturnPolicy
+						 *      * hasOfferCatalog
+						 *      * hasPart
+						 *      * hasPOS
+						 *      * hasProductReturnPolicy
+						 *      * headline
+						 *      * healthcareReportingData
+						 *      * healthPlanNetworkId
+						 *      * inLanguage
+						 *      * interactionStatistic
+						 *      * interactivityType
+						 *      * interpretedAsClaim
+						 *      * isBasedOn
+						 *      * isBasedOnUrl
+						 *      * isFamilyFriendly
+						 *      * isPartOf
+						 *      * lastReviewed
+						 *      * learningResourceType
+						 *      * license
+						 *      * location
+						 *      * locationCreated
+						 *      * mainEntity
+						 *      * mainEntityOfPage
+						 *      * maintainer
+						 *      * map
+						 *      * maps
+						 *      * material
+						 *      * materialExtent
+						 *      * medicalAudience
+						 *      * member
+						 *      * members
+						 *      * ownershipFundingInfo
+						 *      * owns
+						 *      * pattern
+						 *      * photos
+						 *      * position
+						 *      * priceRange
+						 *      * producer
+						 *      * provider
+						 *      * publication
+						 *      * publisher
+						 *      * publisherImprint
+						 *      * publishingPrinciples
+						 *      * recordedAt
+						 *      * releasedEvent
+						 *      * reviewedBy
+						 *      * reviews
+						 *      * schemaVersion
+						 *      * sdDatePublished
+						 *      * sdLicense
+						 *      * sdPublisher
+						 *      * seeks
+						 *      * serviceArea
+						 *      * significantLinks
+						 *      * size
+						 *      * slogan
+						 *      * smokingAllowed
+						 *      * sourceOrganization
+						 *      * spatial
+						 *      * spatialCoverage
+						 *      * sponsor
+						 *      * subjectOf
+						 *      * teaches
+						 *      * temporal
+						 *      * temporalCoverage
+						 *      * text
+						 *      * thumbnail
+						 *      * thumbnailUrl
+						 *      * tourBookingPage
+						 *      * translationOfWork
+						 *      * translator
+						 *      * typicalAgeRange
+						 *      * unnamedSourcesPolicy
+						 *      * usageInfo
+						 *      * version
+						 *      * video
+						 *      * workExample
+						 *      * workTranslation
+						 */
+
 						// url
 
 							/**
@@ -3285,13 +3462,6 @@ function uamswp_fad_schema_location(
 
 							}
 
-						// about [excluded; common properties]
-
-							/**
-								* Note: The value for this property is already being defined in the common schema
-								* properties (templates/parts/vars/page/schema/common/properties.php)
-								*/
-
 						// additionalType
 
 							/**
@@ -4706,22 +4876,6 @@ function uamswp_fad_schema_location(
 
 							}
 
-						// hasPart [excluded]
-
-							/**
-								* Indicates an item or CreativeWork that is part of this item, or CreativeWork
-								* (in some sense).
-								*
-								* Inverse-property: isPartOf
-								*
-								* Values expected to be one of these types:
-								*
-								*      - CreativeWork
-								*
-								* This schema property is not relevant to locations or their webpages and will
-								* not be included.
-								*/
-
 						// identifiers (multiple properties) [WIP]
 
 							if ( $nesting_level == 0 ) {
@@ -5576,13 +5730,6 @@ function uamswp_fad_schema_location(
 										);
 
 							}
-
-						// mainEntity [excluded; common properties]
-
-							/**
-								* Note: The value for this property is already being defined in the common schema
-								* properties (templates/parts/vars/page/schema/common/properties.php)
-								*/
 
 						// makesOffer [WIP]
 

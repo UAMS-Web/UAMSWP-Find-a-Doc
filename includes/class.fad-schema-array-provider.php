@@ -532,6 +532,215 @@ function uamswp_fad_schema_provider(
 
 					// Add property values
 
+						/**
+						 * The following properties are either beyond the scope of what is being included
+						 * in the facility item schema; irrelevant to the facility item schema; are
+						 * superseded by another property; or are already being defined in the common
+						 * schema properties (templates/parts/vars/page/schema/common/properties.php) and
+						 * so they will not be included here:
+						 *
+						 *      * about
+						 *      * abstract
+						 *      * acceptedPaymentMethod
+						 *      * accessibilityAPI
+						 *      * accessibilityControl
+						 *      * accessibilityFeature
+						 *      * accessibilityHazard
+						 *      * accessibilitySummary
+						 *      * accessMode
+						 *      * accessModeSufficient
+						 *      * accountablePerson
+						 *      * acquireLicensePage
+						 *      * actionableFeedbackPolicy
+						 *      * agentInteractionStatistic
+						 *      * alternativeHeadline
+						 *      * alumni
+						 *      * amenityFeature
+						 *      * archivedAt
+						 *      * aspect
+						 *      * assesses
+						 *      * associatedMedia
+						 *      * audience
+						 *      * audio
+						 *      * author
+						 *      * awards
+						 *      * birthDate
+						 *      * birthPlace
+						 *      * branchOf
+						 *      * breadcrumb
+						 *      * callSign
+						 *      * character
+						 *      * children
+						 *      * citation
+						 *      * colleague
+						 *      * colleagues
+						 *      * comment
+						 *      * commentCount
+						 *      * conditionsOfAccess
+						 *      * contactPoints
+						 *      * containedIn
+						 *      * containsPlace
+						 *      * contentLocation
+						 *      * contentRating
+						 *      * contentReferenceTime
+						 *      * contributor
+						 *      * copyrightHolder
+						 *      * copyrightNotice
+						 *      * copyrightYear
+						 *      * correction
+						 *      * correctionsPolicy
+						 *      * countryOfOrigin
+						 *      * creativeWorkStatus
+						 *      * creator
+						 *      * creditText
+						 *      * currenciesAccepted
+						 *      * dateCreated
+						 *      * dateModified
+						 *      * datePublished
+						 *      * deathDate
+						 *      * deathPlace
+						 *      * department
+						 *      * description
+						 *      * digitalSourceType
+						 *      * discussionUrl
+						 *      * dissolutionDate
+						 *      * diversityPolicy
+						 *      * diversityStaffingReport
+						 *      * editEIDR
+						 *      * editor
+						 *      * educationalAlignment
+						 *      * educationalLevel
+						 *      * educationalUse
+						 *      * employee
+						 *      * employees
+						 *      * encoding
+						 *      * encodingFormat
+						 *      * encodings
+						 *      * ethicsPolicy
+						 *      * event
+						 *      * events
+						 *      * exampleOfWork
+						 *      * expires
+						 *      * fileFormat
+						 *      * follows
+						 *      * founder
+						 *      * founders
+						 *      * foundingDate
+						 *      * foundingLocation
+						 *      * funder
+						 *      * funding
+						 *      * genre
+						 *      * geoContains
+						 *      * geoCoveredBy
+						 *      * geoCovers
+						 *      * geoCrosses
+						 *      * geoDisjoint
+						 *      * geoEquals
+						 *      * geoIntersects
+						 *      * geoOverlaps
+						 *      * geoTouches
+						 *      * geoWithin
+						 *      * hasDriveThroughService
+						 *      * hasGS1DigitalLink
+						 *      * hasMerchantReturnPolicy
+						 *      * hasPart
+						 *      * hasPOS
+						 *      * hasProductReturnPolicy
+						 *      * headline
+						 *      * healthPlanNetworkId
+						 *      * height
+						 *      * homeLocation
+						 *      * inLanguage
+						 *      * interactionStatistic
+						 *      * interactivityType
+						 *      * interpretedAsClaim
+						 *      * isBasedOn
+						 *      * isBasedOnUrl
+						 *      * isFamilyFriendly
+						 *      * isPartOf
+						 *      * knows
+						 *      * lastReviewed
+						 *      * learningResourceType
+						 *      * license
+						 *      * locationCreated
+						 *      * logo
+						 *      * mainEntity
+						 *      * mainEntityOfPage
+						 *      * maintainer
+						 *      * map
+						 *      * maps
+						 *      * material
+						 *      * materialExtent
+						 *      * maximumAttendeeCapacity
+						 *      * medicalAudience
+						 *      * member
+						 *      * members
+						 *      * nationality
+						 *      * netWorth
+						 *      * nonprofitStatus
+						 *      * numberOfEmployees
+						 *      * openingHours
+						 *      * openingHoursSpecification
+						 *      * ownershipFundingInfo
+						 *      * owns
+						 *      * parent
+						 *      * parents
+						 *      * pattern
+						 *      * paymentAccepted
+						 *      * performerIn
+						 *      * photos
+						 *      * position
+						 *      * priceRange
+						 *      * producer
+						 *      * provider
+						 *      * publicAccess
+						 *      * publication
+						 *      * publisher
+						 *      * publisherImprint
+						 *      * publishingPrinciples
+						 *      * recordedAt
+						 *      * relatedTo
+						 *      * releasedEvent
+						 *      * reviewedBy
+						 *      * reviews
+						 *      * schemaVersion
+						 *      * sdDatePublished
+						 *      * sdLicense
+						 *      * sdPublisher
+						 *      * seeks
+						 *      * serviceArea
+						 *      * sibling
+						 *      * siblings
+						 *      * significantLinks
+						 *      * size
+						 *      * slogan
+						 *      * smokingAllowed
+						 *      * sourceOrganization
+						 *      * spatial
+						 *      * spatialCoverage
+						 *      * specialOpeningHoursSpecification
+						 *      * sponsor
+						 *      * spouse
+						 *      * subOrganization
+						 *      * teaches
+						 *      * temporal
+						 *      * temporalCoverage
+						 *      * text
+						 *      * thumbnail
+						 *      * thumbnailUrl
+						 *      * timeRequired
+						 *      * tourBookingPage
+						 *      * translationOfWork
+						 *      * translator
+						 *      * typicalAgeRange
+						 *      * unnamedSourcesPolicy
+						 *      * usageInfo
+						 *      * version
+						 *      * weight
+						 *      * workExample
+						 *      * workTranslation
+						 */
+
 						// url
 
 							/**
@@ -2804,7 +3013,8 @@ function uamswp_fad_schema_provider(
 
 									$provider_npi_common = array(
 										'aggregateRating',
-										'identifier'
+										'identifier',
+										'usNPI'
 									);
 
 								if (
@@ -2846,29 +3056,6 @@ function uamswp_fad_schema_provider(
 										}
 
 								}
-
-						// about [excluded; common properties]
-
-							/**
-							 * Note: The value for this property is already being defined in the common schema
-							 * properties (templates/parts/vars/page/schema/common/properties.php)
-							 */
-
-						// actionableFeedbackPolicy [excluded; out of scope]
-
-							/**
-							 * For a NewsMediaOrganization or other news-related Organization, a statement
-							 * about public engagement activities (for news media, the newsroom’s), including
-							 * involving the public - digitally or otherwise -- in coverage decisions,
-							 * reporting and activities after publication.
-							 *
-							 * Subproperty of:
-							 *
-							 *      - publishingPrinciples
-							 *
-							 * Note: This schema property is outside the scope of what should be included in
-							 * Find-a-Doc.
-							 */
 
 						// additionalProperty [WIP]
 
@@ -3515,17 +3702,6 @@ function uamswp_fad_schema_provider(
 
 							}
 
-						// agentInteractionStatistic [excluded; out of scope]
-
-							/**
-							 * The number of completed interactions for this entity, in a particular role
-							 * (the 'agent'), in a particular action (indicated in the statistic), and in a
-							 * particular context (i.e., https://schema.org/interactionService).
-							 *
-							 * Note: This schema property is outside the scope of what should be included in
-							 * Find-a-Doc.
-							 */
-
 						// aggregateRating [WIP]
 
 							/**
@@ -3758,19 +3934,6 @@ function uamswp_fad_schema_provider(
 
 							}
 
-						// alumni [excluded; irrelevant]
-
-							/**
-							 * Alumni of an organization.
-							 *
-							 * Inverse-property:
-							 *
-							 *      - alumniOf
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
 						// alumniOf [WIP]
 
 							/**
@@ -3786,17 +3949,6 @@ function uamswp_fad_schema_provider(
 							 * Used on these types:
 							 *
 							 *      - Person
-							 */
-
-						// amenityFeature [excluded; irrelevant]
-
-							/**
-							 * An amenity feature (e.g., a characteristic or service) of the Accommodation.
-							 * This generic property does not make a statement about whether the feature is
-							 * included in an offer for the main accommodation or available at extra costs.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
 							 */
 
 						// areaServed [WIP]
@@ -3956,12 +4108,6 @@ function uamswp_fad_schema_provider(
 							 *      - Service
 							 */
 
-						// awards [excluded; superseded]
-
-							/**
-							 * Note: This term has been superseded by https://schema.org/award.
-							 */
-
 						// branchCode [WIP]
 
 							/**
@@ -3982,12 +4128,6 @@ function uamswp_fad_schema_provider(
 							 *      - Place
 							 *
 							 * Note: Consider using the UAMS Health Epic SER ID for the provider.
-							 */
-
-						// branchOf [excluded; superseded]
-
-							/**
-							 * Note: This term has been superseded by https://schema.org/parentOrganization.
 							 */
 
 						// brand
@@ -4102,18 +4242,6 @@ function uamswp_fad_schema_provider(
 							 *      - Person
 							 */
 
-						// contactPoints [excluded; superseded]
-
-							/**
-							 * Note: This term has been superseded by https://schema.org/contactPoint.
-							 */
-
-						// containedIn [excluded; superseded]
-
-							/**
-							 * Note: This term has been superseded by https://schema.org/containedInPlace.
-							 */
-
 						// containedInPlace
 
 							/**
@@ -4222,54 +4350,6 @@ function uamswp_fad_schema_provider(
 
 							}
 
-						// containsPlace [excluded; irrelevant]
-
-							/**
-							 * The basic containment relation between a place and another that it contains.
-							 *
-							 * Inverse-property:
-							 *
-							 *      - containedInPlace
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// correctionsPolicy [excluded; irrelevant]
-
-							/**
-							 * For an Organization (e.g., NewsMediaOrganization), a statement describing (in
-							 * news media, the newsroom’s) disclosure and correction policy for errors.
-							 *
-							 * Subproperty of:
-							 *
-							 *      - publishingPrinciples
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// currenciesAccepted [excluded; irrelevant]
-
-							/**
-							 * The currency accepted.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included in the core schema for them. However, it should be
-							 * included on the schema for the associated locations.
-							 */
-
-						// department [excluded; irrelevant]
-
-							/**
-							 * A relationship between an organization and a department of that organization,
-							 * also described as an organization (allowing different urls, logos, opening
-							 * hours). For example: a store with a pharmacy, or a bakery with a cafe.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
 						// disambiguatingDescription [WIP]
 
 							/**
@@ -4285,45 +4365,6 @@ function uamswp_fad_schema_provider(
 							 * Used on these types:
 							 *
 							 *      - Thing
-							 */
-
-						// dissolutionDate [excluded; irrelevant]
-
-							/**
-							 * The date that this organization was dissolved.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// diversityPolicy [excluded; irrelevant]
-
-							/**
-							 * Statement on diversity policy by an Organization e.g. a NewsMediaOrganization.
-							 * For a NewsMediaOrganization, a statement describing the newsroom’s diversity
-							 * policy on both staffing and sources, typically providing staffing data.
-							 *
-							 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
-							 * Implementation feedback and adoption from applications and websites can help
-							 * improve their definitions.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// diversityStaffingReport [excluded; irrelevant]
-
-							/**
-							 * For an Organization (often but not necessarily a NewsMediaOrganization), a
-							 * report on staffing diversity issues. In a news context, this might be, for
-							 * example, ASNE or RTDNA (US) reports, or self-reported.
-							 *
-							 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
-							 * Implementation feedback and adoption from applications and websites can help
-							 * improve their definitions.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
 							 */
 
 						// email [WIP]
@@ -4348,49 +4389,6 @@ function uamswp_fad_schema_provider(
 							 *      - foo
 							 */
 
-						// employee [excluded; irrelevant]
-
-							/**
-							 * Someone working for this organization.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// employees [excluded; superceded]
-
-							/**
-							 * Note: This term has been superseded by https://schema.org/employee.
-							 */
-
-						// ethicsPolicy [excluded; out of scope]
-
-							/**
-							 * Statement about ethics policy (e.g., of a NewsMediaOrganization regarding
-							 * journalistic and publishing practices, or of a Restaurant, a page describing
-							 * food source policies). In the case of a NewsMediaOrganization, an ethicsPolicy
-							 * is typically a statement describing the personal, organizational, and corporate
-							 * standards of behavior expected by the organization.
-							 *
-							 * Note: This schema property is outside the scope of what should be included in
-							 * Find-a-Doc.
-							 */
-
-						// event [excluded; out of scope]
-
-							/**
-							 * Upcoming or past event associated with this place, organization, or action.
-							 *
-							 * Note: This schema property is outside the scope of what should be included in
-							 * Find-a-Doc.
-							 */
-
-						// events [excluded; superseded]
-
-							/**
-							 * Note: This term has been superseded by https://schema.org/event.
-							 */
-
 						// faxNumber [WIP]
 
 							/**
@@ -4406,72 +4404,6 @@ function uamswp_fad_schema_provider(
 							 *      - Organization
 							 *      - Person
 							 *      - Place
-							 */
-
-						// founder [excluded; irrelevant]
-
-							/**
-							 * A person who founded this organization.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// founders [excluded; superseded]
-
-							/**
-							 * Note: This term has been superseded by https://schema.org/founder.
-							 */
-
-						// foundingDate [excluded; irrelevant]
-
-							/**
-							 * The date that this organization was founded.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// foundingLocation [excluded; irrelevant]
-
-							/**
-							 * The place where the Organization was founded.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// funder [excluded; out of scope]
-
-							/**
-							 * A person or organization that supports (sponsors) something through some kind
-							 * of financial contribution.
-							 *
-							 * Note: This schema property is outside the scope of what should be included in
-							 * Find-a-Doc.
-							 */
-
-						// funding [excluded; out of scope]
-
-							/**
-							 * A Grant that directly or indirectly provide funding or sponsorship for this
-							 * item. See also ownershipFundingInfo.
-							 *
-							 * Inverse-property: fundedItem
-							 *
-							 * Grant: https://schema.org/Grant
-							 * ownershipFundingInfo: https://schema.org/ownershipFundingInfo
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Grant
-							 *
-							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
-							 * feedback and adoption from applications and websites can help improve their
-							 * definitions.
-							 *
-							 * Note: This schema property is outside the scope of what should be included in
-							 * Find-a-Doc.
 							 */
 
 						// gender
@@ -4649,120 +4581,6 @@ function uamswp_fad_schema_provider(
 							 * Used on these types:
 							 *
 							 *      - Place
-							 */
-
-						// geoContains [excluded; irrelevant]
-
-							/**
-							 * Represents a relationship between two geometries (or the places they
-							 * represent), relating a containing geometry to a contained geometry.
-							 * "a contains b iff no points of b lie in the exterior of a, and at least one
-							 * point of the interior of b lies in the interior of a". As defined in DE-9IM.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// geoCoveredBy [excluded; irrelevant]
-
-							/**
-							 * Represents a relationship between two geometries (or the places they
-							 * represent), relating a geometry to another that covers it. As defined in
-							 * DE-9IM.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// geoCovers [excluded; irrelevant]
-
-							/**
-							 * Represents a relationship between two geometries (or the places they
-							 * represent), relating a covering geometry to a covered geometry. "Every point
-							 * of b is a point of (the interior or boundary of) a". As defined in DE-9IM.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// geoCrosses [WIP]
-
-							/**
-							 * Represents a relationship between two geometries (or the places they
-							 * represent), relating a geometry to another that crosses it: "a crosses b: they
-							 * have some but not all interior points in common, and the dimension of the
-							 * intersection is less than that of at least one of them". As defined in DE-9IM.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// geoDisjoint [excluded; irrelevant]
-
-							/**
-							 * Represents spatial relations in which two geometries (or the places they
-							 * represent) are topologically disjoint: "they have no point in common. They
-							 * form a set of disconnected geometries." (A symmetric relationship, as defined
-							 * in DE-9IM.)
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// geoEquals [excluded; irrelevant]
-
-							/**
-							 * Represents spatial relations in which two geometries (or the places they
-							 * represent) are topologically equal, as defined in DE-9IM. "Two geometries are
-							 * topologically equal if their interiors intersect and no part of the interior
-							 * or boundary of one geometry intersects the exterior of the other" (a symmetric
-							 * relationship).
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// geoIntersects [excluded; irrelevant]
-
-							/**
-							 * Represents spatial relations in which two geometries (or the places they
-							 * represent) have at least one point in common. As defined in DE-9IM.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// geoOverlaps [excluded; irrelevant]
-
-							/**
-							 * Represents a relationship between two geometries (or the places they
-							 * represent), relating a geometry to another that geospatially overlaps it
-							 * (i.e., they have some but not all points in common). As defined in DE-9IM.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// geoTouches [excluded; irrelevant]
-
-							/**
-							 * Represents spatial relations in which two geometries (or the places they
-							 * represent) touch: "they have at least one boundary point in common, but no
-							 * interior points." (A symmetric relationship, as defined in DE-9IM.)
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// geoWithin [excluded; irrelevant]
-
-							/**
-							 * Represents a relationship between two geometries (or the places they
-							 * represent), relating a geometry to one that contains it
-							 * (i.e., it is inside [i.e., within] its interior). As defined in DE-9IM.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
 							 */
 
 						// hasCertification
@@ -5061,22 +4879,6 @@ function uamswp_fad_schema_provider(
 
 							}
 
-						// hasDriveThroughService [excluded; irrelevant]
-
-							/**
-							 * Indicates whether some facility (e.g., FoodEstablishment, CovidTestingFacility)
-							 * offers a service that can be used by driving through in a car. In the case of
-							 * CovidTestingFacility such facilities could potentially help with social
-							 * distancing from other potentially-infected users.
-							 *
-							 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
-							 * Implementation feedback and adoption from applications and websites can help
-							 * improve their definitions.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
 						// hasOccupation
 
 							/**
@@ -5316,19 +5118,6 @@ function uamswp_fad_schema_provider(
 
 							}
 
-						// hasMerchantReturnPolicy [excluded; irrelevant]
-
-							/**
-							 * Specifies a MerchantReturnPolicy that may be applicable.
-							 *
-							 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
-							 * Implementation feedback and adoption from applications and websites can help
-							 * improve their definitions.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
 						// hasOfferCatalog [WIP]
 
 							/**
@@ -5343,31 +5132,6 @@ function uamswp_fad_schema_provider(
 							 *      - Organization
 							 *      - Person
 							 *      - Service
-							 */
-
-						// hasPart [excluded; irrelevant]
-
-							/**
-							 * Indicates an item or CreativeWork that is part of this item, or CreativeWork
-							 * (in some sense).
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// hasPOS [excluded; irrelevant]
-
-							/**
-							 * Points-of-Sales operated by the organization or person.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// hasProductReturnPolicy [excluded; superseded]
-
-							/**
-							 * Note: This term has been superseded by https://schema.org/hasMerchantReturnPolicy.
 							 */
 
 						// hospitalAffiliation
@@ -5680,29 +5444,6 @@ function uamswp_fad_schema_provider(
 												);
 
 									}
-
-								// 'healthPlanNetworkId' property [excluded; irrelevant]
-
-									/**
-									 * Name or unique ID of network. (Networks are often reused across different
-									 * insurance plans.)
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *      - Text
-									 *
-									 * Used on these types:
-									 *
-									 *      - HealthPlanNetwork
-									 *      - MedicalOrganization
-									 *
-									 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
-									 * Implementation feedback and adoption from applications and websites can help
-									 * improve their definitions.
-									 *
-									 * Note: This schema property is not relevant to providers or their webpages and
-									 * will not be included.
-									 */
 
 								// isicV4 [WIP]
 
@@ -6827,17 +6568,6 @@ function uamswp_fad_schema_provider(
 
 							}
 
-						// interactionStatistic [excluded; out of scope]
-
-							/**
-							 * The number of interactions for the CreativeWork using the WebSite or
-							 * SoftwareApplication. The most specific child type of InteractionCounter should
-							 * be used.
-							 *
-							 * Note: This schema property is outside the scope of what should be included in
-							 * Find-a-Doc.
-							 */
-
 						// isAcceptingNewPatients
 
 							/**
@@ -7402,15 +7132,6 @@ function uamswp_fad_schema_provider(
 
 							}
 
-						// logo [excluded; irrelevant]
-
-							/**
-							 * An associated logo.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
 						// longitude [WIP]
 
 							/**
@@ -7521,20 +7242,6 @@ function uamswp_fad_schema_provider(
 
 							}
 
-						// mainEntity [excluded; common properties]
-
-							/**
-							 * Note: The value for this property is already being defined in the common schema
-							 * properties (templates/parts/vars/page/schema/common/properties.php)
-							 */
-
-						// mainEntityOfPage [excluded; common properties]
-
-							/**
-							 * Note: The value for this property is already being defined in the common schema
-							 * properties (templates/parts/vars/page/schema/common/properties.php)
-							 */
-
 						// makesOffer [WIP]
 
 							/**
@@ -7550,41 +7257,6 @@ function uamswp_fad_schema_provider(
 							 *
 							 *      - Organization
 							 *      - Person
-							 */
-
-						// map [excluded; superseded]
-
-							/**
-							 * Note: This term has been superseded by https://schema.org/hasMap.
-							 */
-
-						// maps [excluded; superseded]
-
-							/**
-							 * Note: This term has been superseded by https://schema.org/hasMap.
-							 */
-
-						// maximumAttendeeCapacity [excluded; irrelevant]
-
-							/**
-							 * The total number of individuals that may attend an event or venue.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// member [excluded; irrelevant]
-
-							/**
-							 * A member of an Organization or a ProgramMembership. Organizations can be
-							 * members of organizations; ProgramMembership is typically for individuals.
-							 *
-							 * Inverse property:
-							 *
-							 *      - memberOf
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
 							 */
 
 						// memberOf
@@ -7737,35 +7409,6 @@ function uamswp_fad_schema_provider(
 										);
 
 							}
-
-						// members [excluded; superseded]
-
-							/**
-							 * Note: This term has been superseded by https://schema.org/member.
-							 */
-
-						// nonprofitStatus [excluded; irrelevant]
-
-							/**
-							 * nonprofitStatus indicates the legal status of a non-profit organization in its
-							 * primary place of business.
-							 *
-							 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
-							 * Implementation feedback and adoption from applications and websites can help
-							 * improve their definitions.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// numberOfEmployees [excluded; irrelevant]
-
-							/**
-							 * The number of employees in an organization (e.g., business).
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
 
 						// occupationalCategory
 
@@ -8012,62 +7655,6 @@ function uamswp_fad_schema_provider(
 							 *      - Trip
 							 */
 
-						// openingHours [excluded; irrelevant]
-
-							/**
-							 * The general opening hours for a business. Opening hours can be specified as a
-							 * weekly time range, starting with days, then times per day. Multiple days can be
-							 * listed with commas ',' separating each day. Day or time ranges are specified
-							 * using a hyphen '-'.
-							 *
-							 *      - Days are specified using the following two-letter combinations:
-							 *       Mo, Tu, We, Th, Fr, Sa, Su.
-							 *      - Times are specified using 24:00 format. For example,
-							 *       3pm is specified as 15:00, 10am as 10:00.
-							 *      - Here is an example:
-							 *       <time itemprop="openingHours" datetime="Tu,Th 16:00-20:00">Tuesdays and Thursdays 4-8pm</time>.
-							 *      - If a business is open 7 days a week, then it can be specified as
-							 *       <time itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all day</time>.
-
-								* Note: This schema property is not relevant to providers or their webpages and
-								* will not be included.
-								*/
-
-						// openingHoursSpecification [excluded; irrelevant]
-
-							/**
-							 * The opening hours of a certain place.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// ownershipFundingInfo [excluded; irrelevant]
-
-							/**
-							 * For an Organization (often but not necessarily a NewsMediaOrganization), a
-							 * description of organizational ownership structure; funding and grants. In a
-							 * news/media setting, this is with particular reference to editorial
-							 * independence. Note that the funder is also available and can be used to make
-							 * basic funder information machine-readable.
-							 *
-							 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
-							 * Implementation feedback and adoption from applications and websites can help
-							 * improve their definitions.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// owns [excluded; out of scope]
-
-							/**
-							 * Products owned by the organization or person.
-							 *
-							 * Note: This schema property is outside the scope of what should be included in
-							 * Find-a-Doc.
-							 */
-
 						// parentOrganization
 
 							/**
@@ -8158,16 +7745,6 @@ function uamswp_fad_schema_provider(
 
 									}
 
-						// paymentAccepted [excluded; irrelevant]
-
-							/**
-							 * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included in the core schema for them. However, it should be
-							 * included on the schema for the associated locations.
-							 */
-
 						// photo
 
 							/**
@@ -8255,12 +7832,6 @@ function uamswp_fad_schema_provider(
 										);
 
 							}
-
-						// photos [excluded; superseded]
-
-							/**
-							 * Note: This term has been superseded by https://schema.org/photo.
-							 */
 
 						// potentialAction [WIP]
 
@@ -8458,15 +8029,6 @@ function uamswp_fad_schema_provider(
 
 							}
 
-						// priceRange [excluded; irrelevant]
-
-							/**
-							 * The price range of the business, for example $$$.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
 						// primaryImageOfPage [WIP]
 
 							/**
@@ -8479,34 +8041,6 @@ function uamswp_fad_schema_provider(
 							 * Used on these types:
 							 *
 							 *      - WebPage
-							 */
-
-						// publicAccess [excluded; irrelevant]
-
-							/**
-							 * A flag to signal that the Place is open to public visitors. If this property is
-							 * omitted there is no assumed default boolean value.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// publishingPrinciples [excluded; irrelevant]
-
-							/**
-							 * The publishingPrinciples property indicates (typically via URL) a document
-							 * describing the editorial principles of an Organization
-							 * (or individual [e.g., a Person writing a blog]) that relate to their activities
-							 * as a publisher (e.g., ethics or diversity policies). When applied to a
-							 * CreativeWork (e.g., NewsArticle) the principles are those of the party
-							 * primarily responsible for the creation of the CreativeWork.
-							 *
-							 * While such policies are most typically expressed in natural language, sometimes
-							 * related information (e.g., indicating a funder) can be expressed using
-							 * schema.org terminology.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
 							 */
 
 						// review [WIP]
@@ -8528,12 +8062,6 @@ function uamswp_fad_schema_provider(
 							 *      - Place
 							 *      - Product
 							 *      - Service
-							 */
-
-						// reviews [excluded; superseded]
-
-							/**
-							 * Note: This term has been superseded by https://schema.org/review.
 							 */
 
 						// sameAs
@@ -8619,41 +8147,6 @@ function uamswp_fad_schema_provider(
 
 							}
 
-						// seeks [excluded; irrelevant]
-
-							/**
-							 * A pointer to products or services sought by the organization or person
-							 * (demand).
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// serviceArea [excluded; superseded]
-
-							/**
-							 * Note: This term has been superseded by https://schema.org/areaServed.
-							 */
-
-						// slogan [excluded; irrelevant]
-
-							/**
-							 * A slogan or motto associated with the item.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// smokingAllowed [excluded; irrelevant]
-
-							/**
-							 * Indicates whether it is allowed to smoke in the place
-							 * (e.g., in the restaurant, hotel or hotel room).
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
 						// speakable [WIP]
 
 							/**
@@ -8693,43 +8186,6 @@ function uamswp_fad_schema_provider(
 							 *      - WebPage
 							 */
 
-						// specialOpeningHoursSpecification [excluded; irrelevant]
-
-							/**
-							 * The special opening hours of a certain place.
-							 *
-							 * Use this to explicitly override general opening hours brought in scope by
-							 * openingHoursSpecification or openingHours.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// sponsor [excluded; out of scope]
-
-							/**
-							 * A person or organization that supports a thing through a pledge, promise, or
-							 * financial contribution. E.g. a sponsor of a Medical Study or a corporate
-							 * sponsor of an event.
-							 *
-							 * Note: This schema property is outside the scope of what should be included in
-							 * Find-a-Doc.
-							 */
-
-						// subOrganization [excluded; irrelevant]
-
-							/**
-							 * A relationship between two organizations where the first includes the second
-							 * (e.g., as a subsidiary). See also: the more specific 'department' property.
-							 *
-							 * Inverse property:
-							 *
-							 *      - parentOrganization
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
 						// subjectOf [WIP]
 
 							/**
@@ -8764,46 +8220,6 @@ function uamswp_fad_schema_provider(
 							 *      - Organization
 							 *      - Person
 							 *      - Place
-							 */
-
-						// timeRequired [WIP]
-
-							/**
-							 * Approximate or typical time it usually takes to work with or through the
-							 * content of this work for the typical or target audience.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Duration (use ISO 8601 duration format).
-							 *
-							 * Used on these types:
-							 *
-							 *      - CreativeWork
-							 */
-
-						// tourBookingPage [excluded; irrelevant]
-
-							/**
-							 * A page providing information on how to book a tour of some Place, such as an
-							 * Accommodation or ApartmentComplex in a real estate setting, as well as other
-							 * kinds of tours as appropriate.
-							 *
-							 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
-							 * Implementation feedback and adoption from applications and websites can help
-							 * improve their definitions.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
-							 */
-
-						// unnamedSourcesPolicy [excluded; irrelevant]
-
-							/**
-							 * For an Organization (typically a NewsMediaOrganization), a statement about
-							 * policy on use of unnamed sources and the decision process required.
-							 *
-							 * Note: This schema property is not relevant to providers or their webpages and
-							 * will not be included.
 							 */
 
 						// video

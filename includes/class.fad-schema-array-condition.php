@@ -198,6 +198,42 @@ function uamswp_fad_schema_condition(
 
 					// Add property values
 
+						/**
+						 * The following properties are either beyond the scope of what is being included
+						 * in the facility item schema; irrelevant to the facility item schema; are
+						 * superseded by another property; or are already being defined in the common
+						 * schema properties (templates/parts/vars/page/schema/common/properties.php) and
+						 * so they will not be included here:
+						 *
+						 *      * associatedAnatomy
+						 *      * description
+						 *      * differentialDiagnosis
+						 *      * disambiguatingDescription
+						 *      * drug
+						 *      * epidemiology
+						 *      * expectedPrognosis
+						 *      * funding
+						 *      * guideline
+						 *      * identifyingExam
+						 *      * identifyingTest
+						 *      * image
+						 *      * legalStatus
+						 *      * mainEntityOfPage
+						 *      * medicineSystem
+						 *      * naturalProgression
+						 *      * pathophysiology
+						 *      * possibleComplication
+						 *      * potentialAction
+						 *      * recognizingAuthority
+						 *      * relevantSpecialty
+						 *      * riskFactor
+						 *      * stage
+						 *      * status
+						 *      * study
+						 *      * subjectOf
+						 *      * transmissionMethod
+						 */
+
 						// url
 
 							/**
@@ -538,22 +574,6 @@ function uamswp_fad_schema_condition(
 
 							}
 
-						// associatedAnatomy [excluded]
-
-							/**
-							 * The anatomy of the underlying organ system or structures associated with this
-							 * entity.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - AnatomicalStructure
-							 *      - AnatomicalSystem
-							 *      - SuperficialAnatomy
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
 						// code
 
 							/**
@@ -612,129 +632,6 @@ function uamswp_fad_schema_condition(
 
 							}
 
-						// description [excluded]
-
-							/**
-							 * A description of the item.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Text
-							 *      - TextObject
-							 *
-							 * Used on these types:
-							 *
-							 *      - Thing
-							 *
-							 * Sub-properties:
-							 *
-							 *      - disambiguatingDescription
-							 *      - interpretedAsClaim
-							 *      - originalMediaContextDescription
-							 *      - sha256
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
-							// Unset value defined in common properties
-
-							if ( isset($condition_item_MedicalCondition['description']) ) {
-
-								unset($condition_item_MedicalCondition['description']);
-
-							}
-
-						// differentialDiagnosis [excluded]
-
-							/**
-							 * One of a set of differential diagnoses for the condition. Specifically, a
-							 * closely-related or competing diagnosis typically considered later in the
-							 * cognitive process whereby this medical condition is distinguished from others
-							 * most likely responsible for a similar collection of signs and symptoms to reach
-							 * the most parsimonious diagnosis or diagnoses in a patient.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - DDxElement
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
-						// disambiguatingDescription [excluded]
-
-							/**
-							 * A sub property of description. A short description of the item used to
-							 * disambiguate from other, similar items. Information from other properties (in
-							 * particular, name) may be necessary for the description to be useful for
-							 * disambiguation.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Text
-							 *
-							 * Used on these types:
-							 *
-							 *      - Thing
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
-						// drug [excluded]
-
-							/**
-							 * Specifying a drug or medicine used in a medication procedure.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Drug
-							 *
-							 * This schema property is not relevant to conditions and so it will not be
-							 * included.
-							 */
-
-						// epidemiology [excluded]
-
-							/**
-							 * The characteristics of associated patients, such as age, gender, race etc.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Text
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
-						// expectedPrognosis [excluded]
-
-							/**
-							 * The likely outcome in either the short term or long term of the medical
-							 * condition.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Text
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
-						// guideline [excluded]
-
-							/**
-							 * A medical guideline related to this entity.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - MedicalGuideline
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
 						// identifier [WIP]
 
 							/**
@@ -768,20 +665,6 @@ function uamswp_fad_schema_condition(
 							 * Values expected to be one of these types:
 							 *
 							 *      - MedicalTest
-							 */
-
-						// image [excluded]
-
-							/**
-							 * An image of the item. This can be a URL or a fully described ImageObject.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - ImageObject
-							 *      - URL
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
 							 */
 
 						// infectiousAgent
@@ -866,141 +749,6 @@ function uamswp_fad_schema_condition(
 
 							}
 
-						// legalStatus [excluded]
-
-							/**
-							 * The drug or supplement's legal status, including any controlled substance
-							 * schedules that apply.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - DrugLegalStatus
-							 *      - MedicalEnumeration
-							 *      - Text
-							 *
-							 * This schema property is not relevant to conditions and so it will not be
-							 * included.
-							 */
-
-						// mainEntityOfPage [excluded; common properties]
-
-							/**
-							 * Note: The value for this property is already being defined in the common schema
-							 * properties (templates/parts/vars/page/schema/common/properties.php)
-							 */
-
-						// medicineSystem [excluded]
-
-							/**
-							 * The system of medicine that includes this MedicalEntity
-							 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - MedicineSystem
-							 *
-							 * This schema property is not relevant to conditions and so it will not be
-							 * included.
-							 */
-
-						// naturalProgression [excluded]
-
-							/**
-							 * The expected progression of the condition if it is not treated and allowed to
-							 * progress naturally.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Text
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
-						// pathophysiology [excluded]
-
-							/**
-							 * Changes in the normal mechanical, physical, and biochemical functions that are
-							 * associated with this activity or condition.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Text
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
-						// possibleComplication [excluded]
-
-							/**
-							 * A possible unexpected and unfavorable evolution of a medical condition.
-							 * Complications may include worsening of the signs or symptoms of the disease,
-							 * extension of the condition to other organ systems, etc.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Text
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
-						// potentialAction [excluded]
-
-							/**
-							 * Indicates a potential Action, which describes an idealized action in which this
-							 * thing would play an 'object' role.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Action
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
-						// recognizingAuthority [excluded]
-
-							/**
-							 * If applicable, the organization that officially recognizes this entity as part
-							 * of its endorsed system of medicine.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Organization
-							 *
-							 * This schema property is not relevant to conditions and so it will not be
-							 * included.
-							 */
-
-						// relevantSpecialty [excluded]
-
-							/**
-							 * If applicable, a medical specialty in which this entity is relevant.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - MedicalSpecialty (enumeration type)
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
-						// riskFactor [excluded]
-
-							/**
-							 * A modifiable or non-modifiable factor that increases the risk of a patient
-							 * contracting this condition (e.g., age, coexisting condition).
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - MedicalRiskFactor
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
 						// sameAs
 
 							/**
@@ -1067,63 +815,6 @@ function uamswp_fad_schema_condition(
 							 * Values expected to be one of these types:
 							 *
 							 *      - MedicalSignOrSymptom
-							 */
-
-						// stage [excluded]
-
-							/**
-							 * The stage of the condition, if applicable.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - MedicalConditionStage
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
-						// status [excluded]
-
-							/**
-							 * The status of the study (enumerated).
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - EventStatusType
-							 *      - MedicalStudyStatus
-							 *      - Text
-							 *
-							 * This schema property is not relevant to conditions and so it will not be
-							 * included.
-							 */
-
-						// study [excluded]
-
-							/**
-							 * A medical study or trial related to this entity.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - MedicalStudy
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
-						// subjectOf [excluded]
-
-							/**
-							 * A CreativeWork or Event about this Thing.
-							 *
-							 * Inverse-property: about
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - CreativeWork
-							 *      - Event
-							 *
-							 * The condition post type does not have a published page and so this schema
-							 * property will not be included.
 							 */
 
 						// possibleTreatment
@@ -1338,21 +1029,7 @@ function uamswp_fad_schema_condition(
 
 							}
 
-						// transmissionMethod [excluded]
-
-							/**
-							 * How the disease spreads, either as a route or vector, for example
-							 * 'direct contact', 'Aedes aegypti', etc.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Text
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
-							// typicalTest
+						// typicalTest
 
 							/**
 							 * A medical test typically performed given this condition.

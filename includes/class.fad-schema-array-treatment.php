@@ -212,18 +212,35 @@ function uamswp_fad_schema_treatment(
 
 					// Add property values
 
-						// url
-
-							/**
-							 * URL of the item.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - URL
-							 *
-							 * The treatment custom post type does not have a published URL and so this schema
-							 * property will not be included.
-							 */
+						/**
+						 * The following properties are either beyond the scope of what is being included
+						 * in the facility item schema; irrelevant to the facility item schema; are
+						 * superseded by another property; or are already being defined in the common
+						 * schema properties (templates/parts/vars/page/schema/common/properties.php) and
+						 * so they will not be included here:
+						 *
+						 *      * adverseOutcome
+						 *      * affectedBy
+						 *      * bodyLocation
+						 *      * contraindication
+						 *      * description
+						 *      * disambiguatingDescription
+						 *      * doseSchedule
+						 *      * followup
+						 *      * funding
+						 *      * guideline
+						 *      * howPerformed
+						 *      * image
+						 *      * mainEntityOfPage
+						 *      * normalRange
+						 *      * potentialAction
+						 *      * preparation
+						 *      * seriousAdverseOutcome
+						 *      * status
+						 *      * study
+						 *      * subjectOf
+						 *      * url
+						 */
 
 						// @type
 
@@ -557,35 +574,6 @@ function uamswp_fad_schema_treatment(
 
 							}
 
-						// adverseOutcome [excluded]
-
-							/**
-							 * A possible complication and/or side effect of this therapy. If it is known that
-							 * an adverse outcome is serious (resulting in death, disability, or permanent
-							 * damage; requiring hospitalization; or otherwise life-threatening or requiring
-							 * immediate medical attention), tag it as a seriousAdverseOutcome instead.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - MedicalEntity
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * treatment schema and so it will not be included.
-							 */
-
-						// affectedBy [excluded]
-
-							/**
-							 * Drugs that affect the test's results.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Drug
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * treatment schema and so it will not be included.
-							 */
-
 						// alternateName
 
 							/**
@@ -698,34 +686,7 @@ function uamswp_fad_schema_treatment(
 
 							}
 
-						// bodyLocation [excluded]
-
-							/**
-							 * Location in the body of the anatomical structure.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Text
-							 *
-							 * This schema property is not relevant to treatments and so it will not be
-							 * included.
-							 */
-
-						// contraindication [excluded]
-
-							/**
-							 * A contraindication for this therapy.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - MedicalContraindication
-							 *      - Text
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * treatment schema and so it will not be included.
-							 */
-
-						// description [excluded]
+						// description [excluded; unset]
 
 							/**
 							 * A description of the item.
@@ -757,40 +718,6 @@ function uamswp_fad_schema_treatment(
 									unset($treatment_item_Service['description']);
 
 								}
-
-						// disambiguatingDescription [excluded]
-
-							/**
-							 * A sub property of description. A short description of the item used to
-							 * disambiguate from other, similar items. Information from other properties (in
-							 * particular, name) may be necessary for the description to be useful for
-							 * disambiguation.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Text
-							 *
-							 * Used on these types:
-							 *
-							 *      - Thing
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * treatment schema and so it will not be included.
-							 */
-
-						// doseSchedule [excluded]
-
-							/**
-							 * A dosing schedule for the drug for a given population, either observed,
-							 * recommended, or maximum dose based on the type used.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - DoseSchedule
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * treatment schema and so it will not be included.
-							 */
 
 						// drug
 
@@ -1030,45 +957,6 @@ function uamswp_fad_schema_treatment(
 
 							}
 
-						// followup [excluded]
-
-							/**
-							 * Typical or recommended followup care after the procedure is performed.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Text
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * treatment schema and so it will not be included.
-							 */
-
-						// guideline [excluded]
-
-							/**
-							 * A medical guideline related to this entity.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - MedicalGuideline
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * treatment schema and so it will not be included.
-							 */
-
-						// howPerformed [excluded]
-
-							/**
-							 * How the procedure is performed.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Text
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * treatment schema and so it will not be included.
-							 */
-
 						// identifier [WIP]
 
 							/**
@@ -1082,20 +970,6 @@ function uamswp_fad_schema_treatment(
 							 *      - PropertyValue
 							 *      - Text
 							 *      - URL
-							 */
-
-						// image [excluded]
-
-							/**
-							 * An image of the item. This can be a URL or a fully described ImageObject.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - ImageObject
-							 *      - URL
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * treatment schema and so it will not be included.
 							 */
 
 						// imagingTechnique
@@ -1152,12 +1026,20 @@ function uamswp_fad_schema_treatment(
 							 *      - Text
 							 */
 
-						// mainEntityOfPage [excluded; common properties]
+						// mainEntityOfPage [excluded; unset]
 
 							/**
 							 * Note: The value for this property is already being defined in the common schema
 							 * properties (templates/parts/vars/page/schema/common/properties.php)
 							 */
+
+							// Unset value defined in common properties
+
+								if ( isset($treatment_item_Service['mainEntityOfPage']) ) {
+
+									unset($treatment_item_Service['mainEntityOfPage']);
+
+								}
 
 						// medicineSystem [WIP]
 
@@ -1168,49 +1050,6 @@ function uamswp_fad_schema_treatment(
 							 * Values expected to be one of these types:
 							 *
 							 *      - MedicineSystem
-							 */
-
-						// normalRange [excluded]
-
-							/**
-							 * Range of acceptable values for a typical patient, when applicable.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - MedicalEnumeration
-							 *      - Text
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * treatment schema and so it will not be included.
-							 */
-
-						// potentialAction [excluded]
-
-							/**
-							 * Indicates a potential Action, which describes an idealized action in which this
-							 * thing would play an 'object' role.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Action
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * treatment schema and so it will not be included.
-							 */
-
-						// preparation [excluded]
-
-							/**
-							 * Typical preparation that a patient must undergo before having the procedure
-							 * performed.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - MedicalEntity
-							 *      - Text
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * treatment schema and so it will not be included.
 							 */
 
 						// procedureType
@@ -1382,24 +1221,6 @@ function uamswp_fad_schema_treatment(
 
 							}
 
-						// seriousAdverseOutcome [excluded]
-
-							/**
-							 * A possible serious complication and/or serious side effect of this therapy.
-							 * Serious adverse outcomes include those that are life-threatening; result in
-							 * death, disability, or permanent damage; require hospitalization or prolong
-							 * existing hospitalization; cause congenital anomalies or birth defects; or
-							 * jeopardize the patient and may require medical or surgical intervention to
-							 * prevent one of the outcomes in this definition.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - MedicalEntity
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * treatment schema and so it will not be included.
-							 */
-
 						// signDetected [WIP]
 
 							/**
@@ -1408,50 +1229,6 @@ function uamswp_fad_schema_treatment(
 							 * Values expected to be one of these types:
 							 *
 							 *      - MedicalSign
-							 */
-
-						// status [excluded]
-
-							/**
-							 * The status of the study (enumerated).
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - EventStatusType
-							 *      - MedicalStudyStatus
-							 *      - Text
-							 *
-							 * This schema property is not relevant to treatments and so it will not be
-							 * included.
-							 */
-
-						// study [excluded]
-
-							/**
-							 * A medical study or trial related to this entity.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - MedicalStudy
-							 *
-							 * This schema property is beyond the scope of what is being included for
-							 * condition schema and so it will not be included.
-							 */
-
-						// subjectOf [excluded]
-
-							/**
-							 * A CreativeWork or Event about this Thing.
-							 *
-							 * Inverse-property: about
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - CreativeWork
-							 *      - Event
-							 *
-							 * The treatment post type does not have a published page and so this schema
-							 * property will not be included.
 							 */
 
 						// subTest

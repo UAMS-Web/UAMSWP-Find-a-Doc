@@ -3475,6 +3475,92 @@
 
 				if ( is_object($association_term) ) {
 
+					/**
+					 * The following properties are either beyond the scope of what is being included
+					 * in this item schema, irrelevant to this item schema, or are superseded by
+					 * another property, and so they will not be included:
+					 *
+					 *      * acceptedPaymentMethod
+					 *      * actionableFeedbackPolicy
+					 *      * additionalType
+					 *      * address
+					 *      * agentInteractionStatistic
+					 *      * aggregateRating
+					 *      * alumni
+					 *      * areaServed
+					 *      * award
+					 *      * awards
+					 *      * brand
+					 *      * contactPoint
+					 *      * contactPoints
+					 *      * correctionsPolicy
+					 *      * department
+					 *      * description
+					 *      * disambiguatingDescription
+					 *      * dissolutionDate
+					 *      * diversityPolicy
+					 *      * diversityStaffingReport
+					 *      * duns
+					 *      * email
+					 *      * employee
+					 *      * employees
+					 *      * ethicsPolicy
+					 *      * event
+					 *      * events
+					 *      * faxNumber
+					 *      * founder
+					 *      * founders
+					 *      * foundingDate
+					 *      * foundingLocation
+					 *      * funder
+					 *      * funding
+					 *      * globalLocationNumber
+					 *      * hasCertification
+					 *      * hasCredential
+					 *      * hasGS1DigitalLink
+					 *      * hasMerchantReturnPolicy
+					 *      * hasOfferCatalog
+					 *      * hasPOS
+					 *      * hasProductReturnPolicy
+					 *      * identifier
+					 *      * image
+					 *      * interactionStatistic
+					 *      * isicV4
+					 *      * iso6523Code
+					 *      * keywords
+					 *      * knowsAbout
+					 *      * knowsLanguage
+					 *      * legalName
+					 *      * leiCode
+					 *      * location
+					 *      * logo
+					 *      * mainEntityOfPage
+					 *      * makesOffer
+					 *      * member
+					 *      * memberOf
+					 *      * members
+					 *      * naics
+					 *      * nonprofitStatus
+					 *      * numberOfEmployees
+					 *      * ownershipFundingInfo
+					 *      * owns
+					 *      * parentOrganization
+					 *      * potentialAction
+					 *      * publishingPrinciples
+					 *      * review
+					 *      * reviews
+					 *      * seeks
+					 *      * serviceArea
+					 *      * slogan
+					 *      * sponsor
+					 *      * subjectOf
+					 *      * subOrganization
+					 *      * taxID
+					 *      * telephone
+					 *      * unnamedSourcesPolicy
+					 *      * vatID
+					 */
+
 					// name
 
 						/**
@@ -3741,6 +3827,140 @@
 						// Get the attributes from the term
 
 							if ( is_object($item_term) ) {
+
+								/**
+								 * The following properties are either beyond the scope of what is being included
+								 * in this item schema, irrelevant to this item schema, or are superseded by
+								 * another property, and so they will not be included:
+								 *
+								 *      * about
+								 *      * abstract
+								 *      * accessMode
+								 *      * accessModeSufficient
+								 *      * accessibilityAPI
+								 *      * accessibilityControl
+								 *      * accessibilityFeature
+								 *      * accessibilityHazard
+								 *      * accessibilitySummary
+								 *      * accountablePerson
+								 *      * acquireLicensePage
+								 *      * aggregateRating
+								 *      * archivedAt
+								 *      * assesses
+								 *      * associatedMedia
+								 *      * audience
+								 *      * audio
+								 *      * auditDate
+								 *      * author
+								 *      * award
+								 *      * awards
+								 *      * certificationIdentification
+								 *      * certificationRating
+								 *      * certificationStatus
+								 *      * character
+								 *      * citation
+								 *      * comment
+								 *      * commentCount
+								 *      * conditionsOfAccess
+								 *      * contentLocation
+								 *      * contentRating
+								 *      * contentReferenceTime
+								 *      * contributor
+								 *      * copyrightHolder
+								 *      * copyrightNotice
+								 *      * copyrightYear
+								 *      * correction
+								 *      * countryOfOrigin
+								 *      * creativeWorkStatus
+								 *      * creator
+								 *      * creditText
+								 *      * dateCreated
+								 *      * dateModified
+								 *      * datePublished
+								 *      * description
+								 *      * digitalSourceType
+								 *      * disambiguatingDescription
+								 *      * discussionUrl
+								 *      * editEIDR
+								 *      * editor
+								 *      * educationalAlignment
+								 *      * educationalLevel
+								 *      * educationalUse
+								 *      * encoding
+								 *      * encodingFormat
+								 *      * encodings
+								 *      * exampleOfWork
+								 *      * expires
+								 *      * fileFormat
+								 *      * funder
+								 *      * funding
+								 *      * genre
+								 *      * hasMeasurement
+								 *      * hasPart
+								 *      * headline
+								 *      * identifier
+								 *      * image
+								 *      * inLanguage
+								 *      * interactionStatistic
+								 *      * interactivityType
+								 *      * interpretedAsClaim
+								 *      * isAccessibleForFree
+								 *      * isBasedOn
+								 *      * isBasedOnUrl
+								 *      * isFamilyFriendly
+								 *      * isPartOf
+								 *      * keywords
+								 *      * learningResourceType
+								 *      * license
+								 *      * locationCreated
+								 *      * logo
+								 *      * mainEntity
+								 *      * maintainer
+								 *      * material
+								 *      * materialExtent
+								 *      * mentions
+								 *      * offers
+								 *      * pattern
+								 *      * position
+								 *      * potentialAction
+								 *      * producer
+								 *      * provider
+								 *      * publication
+								 *      * publisher
+								 *      * publisherImprint
+								 *      * publishingPrinciples
+								 *      * recordedAt
+								 *      * releasedEvent
+								 *      * review
+								 *      * reviews
+								 *      * schemaVersion
+								 *      * sdDatePublished
+								 *      * sdLicense
+								 *      * sdPublisher
+								 *      * size
+								 *      * sourceOrganization
+								 *      * spatial
+								 *      * spatialCoverage
+								 *      * sponsor
+								 *      * subjectOf
+								 *      * teaches
+								 *      * temporal
+								 *      * temporalCoverage
+								 *      * text
+								 *      * thumbnail
+								 *      * thumbnailUrl
+								 *      * timeRequired
+								 *      * translationOfWork
+								 *      * translator
+								 *      * typicalAgeRange
+								 *      * usageInfo
+								 *      * validFrom
+								 *      * validIn
+								 *      * version
+								 *      * video
+								 *      * workExample
+								 *      * workTranslation
+								 */
 
 								// additionalType
 
@@ -4813,6 +5033,138 @@
 
 						if ( is_object($credential_term) ) {
 
+							/**
+							 * The following properties are either beyond the scope of what is being included
+							 * in this item schema, irrelevant to this item schema, or are superseded by
+							 * another property, and so they will not be included:
+							 *
+							 *      * about
+							 *      * abstract
+							 *      * accessMode
+							 *      * accessModeSufficient
+							 *      * accessibilityAPI
+							 *      * accessibilityControl
+							 *      * accessibilityFeature
+							 *      * accessibilityHazard
+							 *      * accessibilitySummary
+							 *      * accountablePerson
+							 *      * acquireLicensePage
+							 *      * additionalType
+							 *      * aggregateRating
+							 *      * alternativeHeadline
+							 *      * archivedAt
+							 *      * assesses
+							 *      * associatedMedia
+							 *      * audience
+							 *      * audio
+							 *      * author
+							 *      * award
+							 *      * awards
+							 *      * character
+							 *      * citation
+							 *      * comment
+							 *      * commentCount
+							 *      * competencyRequired
+							 *      * conditionsOfAccess
+							 *      * contentLocation
+							 *      * contentRating
+							 *      * contentReferenceTime
+							 *      * contributor
+							 *      * copyrightHolder
+							 *      * copyrightNotice
+							 *      * copyrightYear
+							 *      * correction
+							 *      * countryOfOrigin
+							 *      * creativeWorkStatus
+							 *      * creator
+							 *      * creditText
+							 *      * dateCreated
+							 *      * dateModified
+							 *      * datePublished
+							 *      * description
+							 *      * digitalSourceType
+							 *      * disambiguatingDescription
+							 *      * discussionUrl
+							 *      * editEIDR
+							 *      * editor
+							 *      * educationalAlignment
+							 *      * educationalLevel
+							 *      * educationalUse
+							 *      * encoding
+							 *      * encodingFormat
+							 *      * encodings
+							 *      * exampleOfWork
+							 *      * expires
+							 *      * fileFormat
+							 *      * funder
+							 *      * funding
+							 *      * genre
+							 *      * hasPart
+							 *      * headline
+							 *      * identifier
+							 *      * image
+							 *      * inLanguage
+							 *      * interactionStatistic
+							 *      * interactivityType
+							 *      * interpretedAsClaim
+							 *      * isAccessibleForFree
+							 *      * isBasedOn
+							 *      * isBasedOnUrl
+							 *      * isFamilyFriendly
+							 *      * isPartOf
+							 *      * keywords
+							 *      * learningResourceType
+							 *      * license
+							 *      * locationCreated
+							 *      * mainEntity
+							 *      * mainEntityOfPage
+							 *      * maintainer
+							 *      * material
+							 *      * materialExtent
+							 *      * mentions
+							 *      * offers
+							 *      * pattern
+							 *      * position
+							 *      * potentialAction
+							 *      * producer
+							 *      * provider
+							 *      * publication
+							 *      * publisher
+							 *      * publisherImprint
+							 *      * publishingPrinciples
+							 *      * recordedAt
+							 *      * releasedEvent
+							 *      * review
+							 *      * reviews
+							 *      * schemaVersion
+							 *      * sdDatePublished
+							 *      * sdLicense
+							 *      * sdPublisher
+							 *      * size
+							 *      * sourceOrganization
+							 *      * spatial
+							 *      * spatialCoverage
+							 *      * sponsor
+							 *      * subjectOf
+							 *      * teaches
+							 *      * temporal
+							 *      * temporalCoverage
+							 *      * text
+							 *      * thumbnail
+							 *      * thumbnailUrl
+							 *      * timeRequired
+							 *      * translationOfWork
+							 *      * translator
+							 *      * typicalAgeRange
+							 *      * usageInfo
+							 *      * validFor
+							 *      * validIn
+							 *      * version
+							 *      * video
+							 *      * workExample
+							 *      * workTranslation
+							 */
+
 							// name (full name of the clinical degree or credential)
 
 								/**
@@ -5498,6 +5850,28 @@
 
 		// Get values
 
+			/**
+			 * The following properties are either beyond the scope of what is being included
+			 * in this item schema, irrelevant to this item schema, or are superseded by
+			 * another property, and so they will not be included:
+			 *
+			 *      * additionalType
+			 *      * disambiguatingDescription
+			 *      * educationRequirements
+			 *      * estimatedSalary
+			 *      * experienceRequirements
+			 *      * identifier
+			 *      * image
+			 *      * mainEntityOfPage
+			 *      * occupationLocation
+			 *      * potentialAction
+			 *      * qualifications
+			 *      * responsibilities
+			 *      * skills
+			 *      * subjectOf
+			 *      * url
+			 */
+
 			// alternateName (alternate clinical occupation title value from Clinical Specialization item)
 
 				/**
@@ -5847,6 +6221,33 @@
 		array $output = array() // array // Optional // Pre-existing schema array for occupationalCategory to which to add occupationalCategory items
 	) {
 
+		/**
+		 * A category describing the job, preferably using a term from a taxonomy such as
+		 * BLS O*NET-SOC, ISCO-08 or similar, with the property repeated for each
+		 * applicable value. Ideally the taxonomy should be identified, and both the
+		 * textual label and formal code for the category should be provided.
+		 *
+		 * Note: for historical reasons, any textual label and formal code provided as a
+		 * literal may be assumed to be from O*NET-SOC.
+		 *
+		 * Values expected to be one of these types:
+		 *
+		 *      - CategoryCode
+		 *      - Text
+		 *
+		 * Used on these types:
+		 *
+		 *      - EducationalOccupationalProgram
+		 *      - JobPosting
+		 *      - Occupation
+		 *      - Physician
+		 *      - WorkBasedProgram
+		 *
+		 * Note: As of 16 Apr 2024, this term is in the "new" area of Schema.org.
+		 * Implementation feedback and adoption from applications and websites can help
+		 * improve their definitions.
+		 */
+
 		/*
 
 			Expected array structure:
@@ -5931,6 +6332,25 @@
 					$title = uamswp_attr_conversion($title);
 
 			// Base item output array
+
+				/**
+				 * The following properties are either beyond the scope of what is being included
+				 * in this item schema, irrelevant to this item schema, or are superseded by
+				 * another property, and so they will not be included:
+				 *
+				 *      * additionalType
+				 *      * alternateName
+				 *      * description
+				 *      * disambiguatingDescription
+				 *      * identifier
+				 *      * image
+				 *      * inDefinedTermSet
+				 *      * mainEntityOfPage
+				 *      * potentialAction
+				 *      * sameAs
+				 *      * subjectOf
+				 *      * termCode
+				 */
 
 				$output_item = array(
 					'@type' => 'CategoryCode',
@@ -6881,6 +7301,25 @@
 
 			// Construct item
 
+				/**
+				 * The following properties are either beyond the scope of what is being included
+				 * in this item schema, irrelevant to this item schema, or are superseded by
+				 * another property, and so they will not be included:
+				 *
+				 *      * additionalType
+				 *      * alternateName
+				 *      * disambiguatingDescription
+				 *      * identifier
+				 *      * image
+				 *      * inDefinedTermSet
+				 *      * mainEntityOfPage
+				 *      * potentialAction
+				 *      * sameAs
+				 *      * subjectOf
+				 *      * termCode
+				 *      * url
+				 */
+
 				// Base array
 
 					$output_item = array();
@@ -7074,6 +7513,154 @@
 			$image_ImageObject = array();
 
 		// Image attributes
+
+			/**
+			 * The following properties are either beyond the scope of what is being included
+			 * in this item schema, irrelevant to this item schema, or are superseded by
+			 * another property, and so they will not be included:
+			 *
+			 *      * about
+			 *      * abstract
+			 *      * accessMode
+			 *      * accessModeSufficient
+			 *      * accessibilityAPI
+			 *      * accessibilityControl
+			 *      * accessibilityFeature
+			 *      * accessibilityHazard
+			 *      * accessibilitySummary
+			 *      * accountablePerson
+			 *      * acquireLicensePage
+			 *      * additionalType
+			 *      * aggregateRating
+			 *      * alternateName
+			 *      * alternativeHeadline
+			 *      * archivedAt
+			 *      * assesses
+			 *      * associatedArticle
+			 *      * associatedMedia
+			 *      * audience
+			 *      * audio
+			 *      * author
+			 *      * award
+			 *      * awards
+			 *      * bitrate
+			 *      * character
+			 *      * citation
+			 *      * comment
+			 *      * commentCount
+			 *      * conditionsOfAccess
+			 *      * contentLocation
+			 *      * contentRating
+			 *      * contentReferenceTime
+			 *      * contributor
+			 *      * copyrightHolder
+			 *      * copyrightNotice
+			 *      * copyrightYear
+			 *      * correction
+			 *      * countryOfOrigin
+			 *      * creativeWorkStatus
+			 *      * creator
+			 *      * creditText
+			 *      * dateCreated
+			 *      * dateModified
+			 *      * datePublished
+			 *      * description
+			 *      * digitalSourceType
+			 *      * disambiguatingDescription
+			 *      * discussionUrl
+			 *      * duration
+			 *      * editEIDR
+			 *      * editor
+			 *      * educationalAlignment
+			 *      * educationalLevel
+			 *      * educationalUse
+			 *      * embedUrl
+			 *      * embeddedTextCaption
+			 *      * encodesCreativeWork
+			 *      * encoding
+			 *      * encodings
+			 *      * endTime
+			 *      * exampleOfWork
+			 *      * exifData
+			 *      * expires
+			 *      * fileFormat
+			 *      * funder
+			 *      * funding
+			 *      * genre
+			 *      * hasPart
+			 *      * headline
+			 *      * identifier
+			 *      * image
+			 *      * inLanguage
+			 *      * ineligibleRegion
+			 *      * interactionStatistic
+			 *      * interactivityType
+			 *      * interpretedAsClaim
+			 *      * isAccessibleForFree
+			 *      * isBasedOn
+			 *      * isBasedOnUrl
+			 *      * isFamilyFriendly
+			 *      * isPartOf
+			 *      * keywords
+			 *      * learningResourceType
+			 *      * license
+			 *      * locationCreated
+			 *      * mainEntity
+			 *      * mainEntityOfPage
+			 *      * maintainer
+			 *      * material
+			 *      * materialExtent
+			 *      * mentions
+			 *      * name
+			 *      * offers
+			 *      * pattern
+			 *      * playerType
+			 *      * position
+			 *      * potentialAction
+			 *      * producer
+			 *      * productionCompany
+			 *      * provider
+			 *      * publication
+			 *      * publisher
+			 *      * publisherImprint
+			 *      * publishingPrinciples
+			 *      * recordedAt
+			 *      * regionsAllowed
+			 *      * releasedEvent
+			 *      * requiresSubscription
+			 *      * review
+			 *      * reviews
+			 *      * sameAs
+			 *      * schemaVersion
+			 *      * sdDatePublished
+			 *      * sdLicense
+			 *      * sdPublisher
+			 *      * sha256
+			 *      * size
+			 *      * sourceOrganization
+			 *      * spatial
+			 *      * spatialCoverage
+			 *      * sponsor
+			 *      * startTime
+			 *      * subjectOf
+			 *      * teaches
+			 *      * temporal
+			 *      * temporalCoverage
+			 *      * text
+			 *      * thumbnail
+			 *      * thumbnailUrl
+			 *      * timeRequired
+			 *      * translationOfWork
+			 *      * translator
+			 *      * typicalAgeRange
+			 *      * uploadDate
+			 *      * url
+			 *      * usageInfo
+			 *      * version
+			 *      * video
+			 *      * workExample
+			 *      * workTranslation
+			 */
 
 			// Base ImageObject
 
@@ -7606,6 +8193,137 @@
 
 			// inCodeSet
 
+				/**
+				 * The following properties are either beyond the scope of what is being included
+				 * in this item schema, irrelevant to this item schema, or are superseded by
+				 * another property, and so they will not be included:
+				 *
+				 *      * about
+				 *      * abstract
+				 *      * accessMode
+				 *      * accessModeSufficient
+				 *      * accessibilityAPI
+				 *      * accessibilityControl
+				 *      * accessibilityFeature
+				 *      * accessibilityHazard
+				 *      * accessibilitySummary
+				 *      * accountablePerson
+				 *      * acquireLicensePage
+				 *      * additionalType
+				 *      * aggregateRating
+				 *      * alternativeHeadline
+				 *      * archivedAt
+				 *      * assesses
+				 *      * associatedMedia
+				 *      * audience
+				 *      * audio
+				 *      * author
+				 *      * award
+				 *      * awards
+				 *      * character
+				 *      * citation
+				 *      * comment
+				 *      * commentCount
+				 *      * conditionsOfAccess
+				 *      * contentLocation
+				 *      * contentRating
+				 *      * contentReferenceTime
+				 *      * contributor
+				 *      * copyrightHolder
+				 *      * copyrightNotice
+				 *      * copyrightYear
+				 *      * correction
+				 *      * countryOfOrigin
+				 *      * creativeWorkStatus
+				 *      * creator
+				 *      * creditText
+				 *      * dateCreated
+				 *      * dateModified
+				 *      * datePublished
+				 *      * description
+				 *      * digitalSourceType
+				 *      * disambiguatingDescription
+				 *      * discussionUrl
+				 *      * editEIDR
+				 *      * editor
+				 *      * educationalAlignment
+				 *      * educationalLevel
+				 *      * educationalUse
+				 *      * encoding
+				 *      * encodingFormat
+				 *      * encodings
+				 *      * exampleOfWork
+				 *      * expires
+				 *      * fileFormat
+				 *      * funder
+				 *      * funding
+				 *      * genre
+				 *      * hasCategoryCode
+				 *      * hasDefinedTerm
+				 *      * hasPart
+				 *      * headline
+				 *      * identifier
+				 *      * image
+				 *      * inLanguage
+				 *      * interactionStatistic
+				 *      * interactivityType
+				 *      * interpretedAsClaim
+				 *      * isAccessibleForFree
+				 *      * isBasedOn
+				 *      * isBasedOnUrl
+				 *      * isFamilyFriendly
+				 *      * isPartOf
+				 *      * keywords
+				 *      * learningResourceType
+				 *      * license
+				 *      * locationCreated
+				 *      * mainEntity
+				 *      * mainEntityOfPage
+				 *      * maintainer
+				 *      * material
+				 *      * materialExtent
+				 *      * mentions
+				 *      * offers
+				 *      * pattern
+				 *      * position
+				 *      * potentialAction
+				 *      * producer
+				 *      * provider
+				 *      * publication
+				 *      * publisher
+				 *      * publisherImprint
+				 *      * publishingPrinciples
+				 *      * recordedAt
+				 *      * releasedEvent
+				 *      * review
+				 *      * reviews
+				 *      * schemaVersion
+				 *      * sdDatePublished
+				 *      * sdLicense
+				 *      * sdPublisher
+				 *      * size
+				 *      * sourceOrganization
+				 *      * spatial
+				 *      * spatialCoverage
+				 *      * sponsor
+				 *      * subjectOf
+				 *      * teaches
+				 *      * temporal
+				 *      * temporalCoverage
+				 *      * text
+				 *      * thumbnail
+				 *      * thumbnailUrl
+				 *      * timeRequired
+				 *      * translationOfWork
+				 *      * translator
+				 *      * typicalAgeRange
+				 *      * usageInfo
+				 *      * version
+				 *      * video
+				 *      * workExample
+				 *      * workTranslation
+				 */
+
 				$inCodeSet = array(
 					'@type' => 'CategoryCodeSet',
 					'alternateName' => array(
@@ -7630,7 +8348,29 @@
 
 		// Add schema property values to the item array
 
-		// @id
+			/**
+			 * The following properties are either beyond the scope of what is being included
+			 * in this item schema, irrelevant to this item schema, or are superseded by
+			 * another property, and so they will not be included:
+			 *
+			 *      * additionalType
+			 *      * disambiguatingDescription
+			 *      * funding
+			 *      * guideline
+			 *      * identifier
+			 *      * image
+			 *      * legalStatus
+			 *      * mainEntityOfPage
+			 *      * medicineSystem
+			 *      * potentialAction
+			 *      * recognizingAuthority
+			 *      * relevantSpecialty
+			 *      * sameAs
+			 *      * study
+			 *      * subjectOf
+			 */
+
+			// @id
 
 				$schema_item_id = ( $url && $type ) ? $url . '#' . $type : '';
 
@@ -7647,30 +8387,6 @@
 					$output_item['@type'] = $type;
 
 				}
-
-			// additionalType [excluded]
-
-				/**
-					* An additional type for the item, typically used for adding more specific types
-					* from external vocabularies in microdata syntax. This is a relationship between
-					* something and a class that the thing is in. Typically the value is a
-					* URI-identified RDF class, and in this case corresponds to the use of rdf:type
-					* in RDF. Text values can be used sparingly, for cases where useful information
-					* can be added without their being an appropriate schema to reference. In the
-					* case of text values, the class label should follow the schema.org style guide.
-					*
-					* Subproperty of:
-					*      - rdf:type
-					*
-					* Values expected to be one of these types:
-					*
-					*      - Text
-					*      - URL
-					*
-					* Used on these types:
-					*
-					*      - Thing
-					*/
 
 			// alternateName
 
@@ -7796,81 +8512,6 @@
 
 				}
 
-			// disambiguatingDescription [excluded]
-
-				/**
-					* A sub property of description. A short description of the item used to
-					* disambiguate from other, similar items. Information from other properties (in
-					* particular, name) may be necessary for the description to be useful for
-					* disambiguation.
-					*
-					* Values expected to be one of these types:
-					*
-					*      - Text
-					*
-					* Used on these types:
-					*
-					*      - Thing
-					*/
-
-			// funding [excluded]
-
-				/**
-					* A Grant that directly or indirectly provide funding or sponsorship for this
-					* item. See also ownershipFundingInfo.
-					*
-					* Inverse-property: fundedItem
-					*
-					* Grant: https://schema.org/Grant
-					* ownershipFundingInfo: https://schema.org/ownershipFundingInfo
-					*
-					* Values expected to be one of these types:
-					*
-					*      - Grant
-					*
-					* As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
-					* feedback and adoption from applications and websites can help improve their
-					* definitions.
-					*/
-
-			// guideline [excluded]
-
-				/**
-					* A medical guideline related to this entity.
-					*
-					* Values expected to be one of these types:
-					*
-					*      - MedicalGuideline
-					*/
-
-			// identifier [excluded]
-
-				/**
-					* The identifier property represents any kind of identifier for any kind of
-					* Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
-					* properties for representing many of these, either as textual strings or as
-					* URL (URI) links.
-					*
-					* See https://schema.org/docs/datamodel.html#identifierBg for more details.
-					*
-					* Values expected to be one of these types:
-					*
-					*      - PropertyValue
-					*      - Text
-					*      - URL
-					*/
-
-			// image [excluded]
-
-				/**
-					* An image of the item. This can be a URL or a fully described ImageObject.
-					*
-					* Values expected to be one of these types:
-					*
-					*      - ImageObject
-					*      - URL
-					*/
-
 			// inCodeSet
 
 				/**
@@ -7925,50 +8566,6 @@
 
 				}
 
-			// legalStatus [excluded]
-
-				/**
-					* The drug or supplement's legal status, including any controlled substance
-					* schedules that apply.
-					*
-					* Values expected to be one of these types:
-					*
-					*      - DrugLegalStatus
-					*      - MedicalEnumeration
-					*      - Text
-					*/
-
-			// mainEntityOfPage [excluded]
-
-				/**
-					* Indicates a page (or other CreativeWork) for which this thing is the main
-					* entity being described. See background notes for details.
-					*
-					* Inverse property:
-					*
-					*      - mainEntity
-					*
-					* Values expected to be one of these types:
-					*
-					*      - CreativeWork
-					*      - URL
-					*
-					* Used on these types:
-					*
-					*      - Thing
-					*/
-
-			// medicineSystem [excluded]
-
-				/**
-					* The system of medicine that includes this MedicalEntity
-					* (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
-					*
-					* Values expected to be one of these types:
-					*
-					*      - MedicineSystem
-					*/
-
 			// name
 
 				/**
@@ -7988,85 +8585,6 @@
 					$output_item['name'] = $name;
 
 				}
-
-			// potentialAction [excluded]
-
-				/**
-					* Indicates a potential Action, which describes an idealized action in which this
-					* thing would play an 'object' role.
-					*
-					* Values expected to be one of these types:
-					*
-					*      - Action
-					*
-					* Used on these types:
-					*
-					*      - Thing
-					*/
-
-			// recognizingAuthority [excluded]
-
-				/**
-					* If applicable, the organization that officially recognizes this entity as part
-					* of its endorsed system of medicine.
-					*
-					* Values expected to be one of these types:
-					*
-					*      - Organization
-					*/
-
-			// relevantSpecialty [excluded]
-
-				/**
-					* If applicable, a medical specialty in which this entity is relevant.
-					*
-					* Values expected to be one of these types:
-					*
-					*      - MedicalSpecialty (enumeration type)
-					*/
-
-			// sameAs [excluded]
-
-				/**
-					* URL of a reference Web page that unambiguously indicates the item's identity
-					* (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
-					* website).
-					*
-					* Values expected to be one of these types:
-					*
-					*      - URL
-					*
-					* Used on these types:
-					*
-					*      - Thing
-					*/
-
-			// study [excluded]
-
-				/**
-					* A medical study or trial related to this entity.
-					*
-					* Values expected to be one of these types:
-					*
-					*      - MedicalStudy
-					*/
-
-			// subjectOf [excluded]
-
-				/**
-					* A CreativeWork or Event about this Thing.
-					*
-					* Inverse-property: about
-					*
-					* Values expected to be one of these types:
-					*
-					*      - CreativeWork
-					*      - Event
-					*
-					* Used on these types:
-					*
-					*      - Thing
-					*/
 
 			// termCode
 
@@ -8208,6 +8726,34 @@
 						// Get and set schema property values from the term
 
 							if ( is_object($term) ) {
+
+								/**
+								 * The following properties are either beyond the scope of what is being included
+								 * in this item schema, irrelevant to this item schema, or are superseded by
+								 * another property, and so they will not be included:
+								 *
+								 *      * additionalType
+								 *      * codeValue
+								 *      * codingSystem
+								 *      * disambiguatingDescription
+								 *      * funding
+								 *      * guideline
+								 *      * identifier
+								 *      * image
+								 *      * inCodeSet
+								 *      * inDefinedTermSet
+								 *      * legalStatus
+								 *      * mainEntityOfPage
+								 *      * medicineSystem
+								 *      * potentialAction
+								 *      * recognizingAuthority
+								 *      * relevantSpecialty
+								 *      * sameAs
+								 *      * study
+								 *      * subjectOf
+								 *      * termCode
+								 *      * url
+								 */
 
 								// Get the Health Care Provider Taxonomy code
 
@@ -8526,6 +9072,103 @@
 
 				// Construct schema item
 
+					/**
+					 * The following properties are either beyond the scope of what is being included
+					 * in this item schema, irrelevant to this item schema, or are superseded by
+					 * another property, and so they will not be included:
+					 *
+					 *      * acceptedPaymentMethod
+					 *      * additionalProperty
+					 *      * agentInteractionStatistic
+					 *      * aggregateRating
+					 *      * alumni
+					 *      * amenityFeature
+					 *      * areaServed
+					 *      * award
+					 *      * awards
+					 *      * branchCode
+					 *      * branchOf
+					 *      * brand
+					 *      * contactPoints
+					 *      * containedIn
+					 *      * containedInPlace
+					 *      * containsPlace
+					 *      * currenciesAccepted
+					 *      * department
+					 *      * dissolutionDate
+					 *      * employee
+					 *      * employees
+					 *      * event
+					 *      * events
+					 *      * founder
+					 *      * founders
+					 *      * foundingDate
+					 *      * foundingLocation
+					 *      * funder
+					 *      * funding
+					 *      * geo
+					 *      * geoContains
+					 *      * geoCoveredBy
+					 *      * geoCovers
+					 *      * geoCrosses
+					 *      * geoDisjoint
+					 *      * geoEquals
+					 *      * geoIntersects
+					 *      * geoOverlaps
+					 *      * geoTouches
+					 *      * geoWithin
+					 *      * hasCertification
+					 *      * hasCredential
+					 *      * hasDriveThroughService
+					 *      * hasGS1DigitalLink
+					 *      * hasMerchantReturnPolicy
+					 *      * hasOfferCatalog
+					 *      * hasPOS
+					 *      * hasProductReturnPolicy
+					 *      * interactionStatistic
+					 *      * isAccessibleForFree
+					 *      * keywords
+					 *      * knowsAbout
+					 *      * knowsLanguage
+					 *      * latitude
+					 *      * location
+					 *      * logo
+					 *      * longitude
+					 *      * makesOffer
+					 *      * map
+					 *      * maps
+					 *      * masthead
+					 *      * maximumAttendeeCapacity
+					 *      * member
+					 *      * memberOf
+					 *      * members
+					 *      * missionCoveragePrioritiesPolicy
+					 *      * noBylinesPolicy
+					 *      * numberOfEmployees
+					 *      * openingHours
+					 *      * openingHoursSpecification
+					 *      * owns
+					 *      * paymentAccepted
+					 *      * photo
+					 *      * photos
+					 *      * potentialAction
+					 *      * priceRange
+					 *      * publicAccess
+					 *      * review
+					 *      * reviews
+					 *      * seeks
+					 *      * serviceArea
+					 *      * smokingAllowed
+					 *      * specialOpeningHoursSpecification
+					 *      * sponsor
+					 *      * sport
+					 *      * subjectOf
+					 *      * subOrganization
+					 *      * tourBookingPage
+					 *      * url
+					 *      * verificationFactCheckingPolicy
+					 */
+
 					// mainEntityOfPage (common use)
 
 						$mainEntityOfPage = get_field( 'brandorg_mainentityofpage', $term ) ?? null;
@@ -8560,23 +9203,6 @@
 
 						}
 
-					// acceptsReservations
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// actionableFeedbackPolicy
 
 						/**
@@ -8598,27 +9224,6 @@
 							$output['actionableFeedbackPolicy'] = $actionableFeedbackPolicy;
 
 						}
-
-					// additionalProperty
-
-						/**
-						 * A property-value pair representing an additional characteristic of the entity
-						 * (e.g., a product feature or another characteristic for which there is no
-						 * matching property in schema.org).
-						 *
-						 * Note: Publishers should be aware that applications designed to use specific
-						 * schema.org properties (e.g., https://schema.org/width,
-						 * https://schema.org/color, https://schema.org/gtin13) will typically expect such
-						 * data to be provided using those properties, rather than using the generic
-						 * property/value mechanism.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - PropertyValue
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
 
 					// additionalType
 
@@ -8667,53 +9272,6 @@
 
 						}
 
-					// aggregateRating
-
-						/**
-						 * The overall rating, based on a collection of reviews or ratings, of the item.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - AggregateRating
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// album
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// albums
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// alternateName
 
 						/**
@@ -8746,288 +9304,6 @@
 							$output['alternateName'] = $alternateName;
 
 						}
-
-					// alumni
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// amenityFeature
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// archiveHeld
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// areaServed
-
-						/**
-						 * The geographic area where a service or offered item is provided.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - AdministrativeArea
-						 *      - GeoShape
-						 *      - Place
-						 *      - Text
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// athlete
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// audience
-
-						/**
-						 * An intended audience, i.e. a group for whom something was created.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Audience
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// availableLanguage
-
-						/**
-						 * A language someone may use with or at the item, service or place.
-						 *
-						 * Please use one of the language codes from the IETF BCP 47 standard.
-						 *
-						 * See also inLanguage.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Language
-						 *      - Text
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// availableService
-
-						/**
-						 * A medical service available from this provider.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - MedicalProcedure
-						 *      - MedicalTest
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// availableTest
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// award
-
-						/**
-						 * An award won by or for this item.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Text
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// awards [excluded; superseded]
-
-						/**
-						 * Note: This term has been superseded by https://schema.org/award.
-						 */
-
-					// boardingPolicy
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// branchCode
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// branchOf
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// brand
-
-						/**
-						 * The brand(s) associated with a product or service, or the brand(s) maintained
-						 * by an organization or business person.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Brand
-						 *      - Organization
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// checkinTime
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// checkoutTime
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// coach
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
 
 					// contactPoint
 
@@ -9420,56 +9696,6 @@
 
 						}
 
-					// contactPoints [superseded]
-
-						/**
-						 * SupersededBy: contactPoint
-						 */
-
-					// containedIn
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// containedInPlace
-
-						/**
-						 * The basic containment relation between a place and one that contains it.
-						 * expected to be one of these types:
-						 *
-						 *      - Place
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// containsPlace
-
-						/**
-						 * The basic containment relation between a place and another that it contains.
-						 *
-						 * Inverse property: 'containedInPlace'
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Place
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// correctionsPolicy
 
 						/**
@@ -9491,40 +9717,6 @@
 							$output['correctionsPolicy'] = $correctionsPolicy;
 
 						}
-
-					// currenciesAccepted
-
-						/**
-						 * The currency accepted.
-						 *
-						 * Use standard formats:
-						 *      - ISO 4217 currency format (e.g., "USD")
-						 *      - Ticker symbol for cryptocurrencies (e.g., "BTC")
-						 *      - Well-known names for Local Exchange Trading Systems (LETS) and other
-						 *       currency types (e.g., "Ithaca HOUR")
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Text
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// department
-
-						/**
-						 * A relationship between an organization and a department of that organization,
-						 * also described as an organization (allowing different urls, logos, opening
-						 * hours). For example: a store with a pharmacy, or a bakery with a cafe.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Organization
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
 
 					// description
 
@@ -9581,23 +9773,6 @@
 
 						}
 
-					// dissolutionDate
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// diversityPolicy
 
 						/**
@@ -9650,36 +9825,6 @@
 
 						}
 
-					// employee
-
-						/**
-						 * Someone working for this organization.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Person
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// employees
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// ethicsPolicy
 
 						/**
@@ -9708,498 +9853,6 @@
 
 						}
 
-					// event
-
-						/**
-						 * Upcoming or past event associated with this place, organization, or action.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Event
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// events
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// feesAndCommissionsSpecification
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// founder
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// founders
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// foundingDate
-
-						/**
-						 * The date that this organization was founded.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Date
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// foundingLocation
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// funder
-
-						/**
-						 * A person or organization that supports (sponsors) something through some kind
-						 * of financial contribution.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Organization
-						 *      - Person
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// funding
-
-						/**
-						 * A Grant that directly or indirectly provide funding or sponsorship for this
-						 * item. See also ownershipFundingInfo.
-						 *
-						 * Inverse-property: fundedItem
-						 *
-						 * Grant: https://schema.org/Grant
-						 * ownershipFundingInfo: https://schema.org/ownershipFundingInfo
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Grant
-						 *
-						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
-						 * feedback and adoption from applications and websites can help improve their
-						 * definitions.
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// gender
-
-						/**
-						 * Gender of something, typically a Person, but possibly also fictional
-						 * characters, animals, etc. While https://schema.org/Male and
-						 * https://schema.org/Female may be used, text strings are also acceptable for
-						 * people who do not identify as a binary gender. The gender property can also be
-						 * used in an extended sense to cover (e.g., the gender of sports teams). As with
-						 * the gender of individuals, we do not try to enumerate all possibilities. A
-						 * mixed-gender SportsTeam can be indicated with a text value of "Mixed".
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - GenderType
-						 *      - Text
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// genre
-
-						/**
-						 * Genre of the creative work, broadcast channel or group.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Text
-						 *      - URL
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// geo
-
-						/**
-						 * The geo coordinates of the place.
-						 *
-						 * The precision must be at least 5 decimal places.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - GeoCoordinates
-						 *      - GeoShape
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// geoContains
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// geoCoveredBy
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// geoCovers
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// geoCrosses
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// geoDisjoint
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// geoEquals
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// geoIntersects
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// geoOverlaps
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// geoTouches
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// geoWithin
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// hasCredential
-
-						/**
-						 * A credential awarded to the Person or Organization.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - EducationalOccupationalCredential
-						 *
-						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
-						 * feedback and adoption from applications and websites can help improve their
-						 * definitions.
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// hasDriveThroughService
-
-						/**
-						 * Indicates whether some facility (e.g., FoodEstablishment, CovidTestingFacility)
-						 * offers a service that can be used by driving through in a car.
-						 *
-						 * In the case of CovidTestingFacility such facilities could potentially help with
-						 * social distancing from other potentially-infected users.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Boolean
-						 *
-						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
-						 * feedback and adoption from applications and websites can help improve their
-						 * definitions.
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// hasMenu
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// hasMerchantReturnPolicy
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// hasOfferCatalog
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// hasPOS
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// hasProductReturnPolicy
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// healthPlanNetworkId
 
 						/**
@@ -10221,53 +9874,6 @@
 							$output['healthPlanNetworkId'] = $healthPlanNetworkId;
 
 						}
-
-					// healthcareReportingData
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// hospitalAffiliation
-
-						/**
-						 * A hospital with which the physician or office is affiliated.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Hospital
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// iataCode
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
 
 					// identifiers (multiple properties)
 
@@ -10861,21 +10467,6 @@
 
 						}
 
-					// interactionStatistic
-
-						/**
-						 * The number of interactions for the CreativeWork using the WebSite or
-						 * SoftwareApplication. The most specific child type of InteractionCounter should
-						 * be used.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - InteractionCounter
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// isAcceptingNewPatients
 
 						/**
@@ -10902,87 +10493,6 @@
 
 						}
 
-					// isAccessibleForFree
-
-						/**
-						 * A flag to signal that the item, event, or place is accessible for free.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Boolean
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// keywords
-
-						/**
-						 * Keywords or tags used to describe some item. Multiple textual entries in a
-						 * keywords list are typically delimited by commas, or by repeating the property.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - DefinedTerm
-						 *      - Text
-						 *      - URL
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// knowsAbout
-
-						/**
-						 * Of a Person, and less typically of an Organization, to indicate a topic that is
-						 * known about — suggesting possible expertise but not implying it. We do not
-						 * distinguish skill levels here, or relate this to educational content, events,
-						 * objectives or JobPosting descriptions.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Text
-						 *      - Thing
-						 *      - URL
-						 *
-						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
-						 * feedback and adoption from applications and websites can help improve their
-						 * definitions.
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// knowsLanguage
-
-						/**
-						 * Of a Person, and less typically of an Organization, to indicate a known
-						 * language. We do not distinguish skill levels or reading / writing / speaking /
-						 * signing here. Use language codes from the IETF BCP 47 standard.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Language
-						 *      - Text
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// latitude
-
-						/**
-						 * The latitude of a location. For example 37.42242 (WGS 84).
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Number
-						 *      - Text
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// legalName
 
 						/**
@@ -11000,59 +10510,6 @@
 							$output['legalName'] = $legalName;
 
 						}
-
-					// location
-
-						/**
-						 * The location of, for example, where an event is happening, where an
-						 * organization is located, or where an action takes place.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Place
-						 *      - PostalAddress
-						 *      - Text
-						 *      - VirtualLocation
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// logo
-
-						/**
-						 * An associated logo.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - ImageObject
-						 *      - URL
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-						$logo = get_field( 'brandorg_logo', $term ) ?? null;
-
-						if ( $logo ) {
-
-							$output['logo'] = $logo;
-
-						}
-
-					// longitude
-
-						/**
-						 * The longitude of a location. For example -122.08585 (WGS 84).
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Number
-						 *      - Text
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
 
 					// mainEntityOfPage (specific property)
 
@@ -11079,85 +10536,6 @@
 							$output['mainEntityOfPage'] = $mainEntityOfPage;
 
 						}
-
-					// makesOffer
-
-						/**
-						 * A pointer to products or services offered by the organization or person.
-						 *
-						 * Inverse-property: offeredBy
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Offer
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// map
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// maps
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// masthead
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// maximumAttendeeCapacity
-
-						/**
-						 * The total number of individuals that may attend an event or venue.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Integer
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
 
 					// medicalSpecialty
 
@@ -11198,108 +10576,6 @@
 
 						}
 
-					// member
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// memberOf
-
-						/**
-						 * An Organization (or ProgramMembership) to which this Person or Organization
-						 * belongs.
-						 *
-						 * Inverse-property: member
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Organization
-						 *      - ProgramMembership
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// members
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// menu
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// missionCoveragePrioritiesPolicy
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// musicGroupMember
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// name
 
 						/**
@@ -11321,23 +10597,6 @@
 							$output['name'] = $name;
 
 						}
-
-					// noBylinesPolicy
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
 
 					// nonprofitStatus
 
@@ -11362,77 +10621,6 @@
 
 						}
 
-					// numberOfEmployees
-
-						/**
-						 * The number of employees in an organization (e.g., business).
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - QuantitativeValue
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// numberOfRooms
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// openingHours
-
-						/**
-						 * The general opening hours for a business. Opening hours can be specified as a
-						 * weekly time range, starting with days, then times per day. Multiple days can be
-						 * listed with commas ',' separating each day. Day or time ranges are specified
-						 * using a hyphen '-'.
-						 *
-						 * Days are specified using the following two-letter combinations:
-						 * Mo, Tu, We, Th, Fr, Sa, Su.
-						 *
-						 * Times are specified using 24:00 format. For example, 3 p.m. is specified as
-						 * 15:00, 10 a.m. as 10:00.
-						 *
-						 * Here is an example:
-						 * <time itemprop="openingHours" datetime="Tu,Th 16:00-20:00">Tuesdays and Thursdays 4-8pm</time>.
-						 *
-						 * If a business is open 7 days a week, then it can be specified as
-						 * <time itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all day</time>.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Text
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// openingHoursSpecification
-
-						/**
-						 * The opening hours of a certain place.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - OpeningHoursSpecification
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// ownershipFundingInfo
 
 						/**
@@ -11454,23 +10642,6 @@
 							$output['ownershipFundingInfo'] = $ownershipFundingInfo;
 
 						}
-
-					// owns
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
 
 					// parentOrganization
 
@@ -11539,112 +10710,6 @@
 
 						}
 
-					// paymentAccepted
-
-						/**
-						 * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Text
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// petsAllowed
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// photo
-
-						/**
-						 * A photograph of this place.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - ImageObject
-						 *      - Photograph
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// photos
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// potentialAction
-
-						/**
-						 * Indicates a potential Action, which describes an idealized action in which this
-						 * thing would play an 'object' role.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Action
-						 *
-						 * This schema property is beyond the scope of what is being included for
-						 * condition schema and so it will not be included.
-						 */
-
-					// priceRange
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// publicAccess
-
-						/**
-						 * A flag to signal that the Place is open to public visitors. If this property is
-						 * omitted there is no assumed default boolean value.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Boolean
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// publishingPrinciples
 
 						/**
@@ -11672,28 +10737,6 @@
 							$output['publishingPrinciples'] = $publishingPrinciples;
 
 						}
-
-					// review
-
-						/**
-						 * A review of the item.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Review
-						 *
-						 * This schema property is not relevant to clinical resources or their webpages,
-						 * and so it will not be included.
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// reviews
-
-						/**
-						 * SupersededBy: review
-						 */
 
 					// sameAs
 
@@ -11730,74 +10773,6 @@
 
 						}
 
-					// screenCount
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// seeks
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// servesCuisine
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// serviceArea
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// slogan
 
 						/**
@@ -11820,120 +10795,6 @@
 
 						}
 
-					// smokingAllowed
-
-						/**
-						 * Indicates whether it is allowed to smoke in the place (e.g., in the restaurant,
-						 * hotel or hotel room).
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Boolean
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// specialOpeningHoursSpecification
-
-						/**
-						 * The special opening hours of a certain place.
-						 *
-						 * Use this to explicitly override general opening hours brought in scope by
-						 * openingHoursSpecification or openingHours.
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - OpeningHoursSpecification
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// sponsor
-
-						/**
-						 * A person or organization that supports a thing through a pledge, promise, or
-						 * financial contribution (e.g., a sponsor of a Medical Study or a corporate
-						 * sponsor of an event).
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Organization
-						 *      - Person
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// sport
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// starRating
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// subOrganization
-
-						/**
-						 * A relationship between two organizations where the first includes the second
-						 * (e.g., as a subsidiary).
-						 *
-						 * See also: the more specific 'department' property.
-						 *
-						 * Inverse-property: parentOrganization
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - Organization
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// subjectOf
-
-						/**
-						 * A CreativeWork or Event about this Thing.
-						 *
-						 * Inverse-property: about
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - CreativeWork
-						 *      - Event
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
 					// tickerSymbol
 
 						/**
@@ -11955,57 +10816,6 @@
 							$output['tickerSymbol'] = $tickerSymbol;
 
 						}
-
-					// tourBookingPage
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// track
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
-
-					// tracks
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
 
 					// unnamedSourcesPolicy
 
@@ -12046,23 +10856,6 @@
 							$output['url'] = $url;
 
 						}
-
-					// verificationFactCheckingPolicy
-
-						/**
-						 * [Insert definition here]
-						 *
-						 * Subproperty of:
-						 *
-						 *      - [Insert property name here]
-						 *
-						 * Values expected to be one of these types:
-						 *
-						 *      - [Insert type name here]
-						 *
-						 * This property is beyond the scope of what is being included in the brand
-						 * organization item schema and so it will not be included.
-						 */
 
 				// Clean up the output array
 
@@ -12610,53 +11403,6 @@
 							($nesting_level + 1) // int // Required // Current nesting level value
 						);
 
-				// about
-
-					/**
-					 * The subject matter of the content.
-					 *
-					 * Inverse-property: subjectOf
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Thing
-					 *
-					 * Used on these types:
-					 *
-					 *      - Certification
-					 *      - CommunicateAction
-					 *      - CreativeWork
-					 *      - Event
-					 *
-					 * Sub-properties:
-					 *
-					 *      - mainEntity
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['about'] = '';
-
-				// abstract
-
-					/**
-					 * An abstract is a short description that summarizes a CreativeWork.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Text
-					 *
-					 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
-					 * feedback and adoption from applications and websites can help improve their
-					 * definitions.
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['abstract'] = '';
-
 				// additionalType
 
 					/**
@@ -12685,434 +11431,6 @@
 					 */
 
 					$schema['additionalType'] = '';
-
-				// aggregateRating
-
-					/**
-					 * The overall rating, based on a collection of reviews or ratings, of the item.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - AggregateRating
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['aggregateRating'] = '';
-
-				// alternateName
-
-					/**
-					 * An alias for the item.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Text
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['alternateName'] = '';
-
-				// citation
-
-					/**
-					 * A citation or reference to another creative work, such as another publication,
-					 * web page, scholarly article, etc.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - CreativeWork
-					 *      - Text
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['citation'] = '';
-
-				// contentLocation
-
-					/**
-					 * The location depicted or described in the content. For example, the location in
-					 * a photograph or painting.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Place
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['contentLocation'] = '';
-
-				// dateModified
-
-					/**
-					 * The date on which the CreativeWork was most recently modified or when the
-					 * item's entry was modified within a DataFeed.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Date
-					 *      - DateTime
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['dateModified'] = '';
-
-				// datePublished
-
-					/**
-					 * Date of first broadcast/publication.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Date
-					 *      - DateTime
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['datePublished'] = '';
-
-				// description
-
-					/**
-					 * A description of the item.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Text
-					 *      - TextObject
-					 *
-					 * Used on these types:
-					 *
-					 *      - Thing
-					 *
-					 * Sub-properties:
-					 *
-					 *      - disambiguatingDescription
-					 *      - interpretedAsClaim
-					 *      - originalMediaContextDescription
-					 *      - sha256
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['description'] = '';
-
-				// disambiguatingDescription
-
-					/**
-					 * A sub property of description. A short description of the item used to
-					 * disambiguate from other, similar items. Information from other properties (in
-					 * particular, name) may be necessary for the description to be useful for
-					 * disambiguation.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Text
-					 *
-					 * Used on these types:
-					 *
-					 *      - Thing
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['disambiguatingDescription'] = '';
-
-				// encodingFormat
-
-					/**
-					 * Media type typically expressed using a MIME format (see IANA site and MDN
-					 * reference), (e.g., application/zip for a SoftwareApplication binary,
-					 * audio/mpeg for .mp3).
-					 *
-					 * In cases where a CreativeWork has several media type representations, encoding
-					 * can be used to indicate each MediaObject alongside particular encodingFormat
-					 * information.
-					 *
-					 * Unregistered or niche encoding and file formats can be indicated instead via
-					 * the most appropriate URL (e.g., defining Web page, a Wikipedia/Wikidata
-					 * entry).
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Text
-					 *      - URL
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['encodingFormat'] = '';
-
-				// hasPart
-
-					/**
-					 * Indicates an item or CreativeWork that is part of this item, or CreativeWork
-					 * (in some sense).
-					 *
-					 * Inverse-property: isPartOf
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - CreativeWork
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['hasPart'] = '';
-
-				// identifier
-
-					/**
-					 * The identifier property represents any kind of identifier for any kind of
-					 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
-					 * properties for representing many of these, either as textual strings or as
-					 * URL (URI) links.
-					 *
-					 * See https://schema.org/docs/datamodel.html#identifierBg for more details.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - PropertyValue
-					 *      - Text
-					 *      - URL
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['identifier'] = '';
-
-				// image
-
-					/**
-					 * An image of the item. This can be a URL or a fully described ImageObject.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - ImageObject
-					 *      - URL
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['image'] = '';
-
-				// isPartOf
-
-					/**
-					 * Indicates an item or CreativeWork that this item, or CreativeWork (in some
-					 * sense), is part of.
-					 *
-					 * Inverse-property: hasPart
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - CreativeWork
-					 *      - URL
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['isPartOf'] = '';
-
-				// issn
-
-					/**
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['issn'] = '';
-
-				// keywords
-
-					/**
-					 * Keywords or tags used to describe some item. Multiple textual entries in a
-					 * keywords list are typically delimited by commas, or by repeating the property.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - DefinedTerm
-					 *      - Text
-					 *      - URL
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['keywords'] = '';
-
-				// mainEntity
-
-					/**
-					 * Indicates the primary entity described in some page or other CreativeWork.
-					 *
-					 * Inverse-property: mainEntityOfPage
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Thing
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['mainEntity'] = '';
-
-				// mentions
-
-					/**
-					 * Indicates that the CreativeWork contains a reference to, but is not necessarily
-					 * about a concept.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Thing
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['mentions'] = '';
-
-				// offers
-
-					/**
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['offers'] = '';
-
-				// potentialAction
-
-					/**
-					 * Indicates a potential Action, which describes an idealized action in which this
-					 * thing would play an 'object' role.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Action
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['potentialAction'] = '';
-
-				// sameAs
-
-					/**
-					 * URL of a reference Web page that unambiguously indicates the item's identity
-					 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
-					 * website).
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - URL
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['sameAs'] = '';
-
-				// subjectOf
-
-					/**
-					 * A CreativeWork or Event about this Thing.
-					 *
-					 * Inverse-property: about
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - CreativeWork
-					 *      - Event
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['subjectOf'] = '';
-
-				// text
-
-					/**
-					 * The textual content of this CreativeWork.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Text
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['text'] = '';
-
-				// thumbnailUrl
-
-					/**
-					 * A thumbnail image relevant to the Thing.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - URL
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['thumbnailUrl'] = '';
-
-				// timeRequired
-
-					/**
-					 * Approximate or typical time it usually takes to work with or through the
-					 * content of this work for the typical or target audience.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Duration (use ISO 8601 duration format).
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['timeRequired'] = '';
-
-				// video
-
-					/**
-					 * An embedded video object.
-					 *
-					 * Values expected to be one of these types:
-					 *
-					 *      - Clip
-					 *      - VideoObject
-					 *
-					 * This property is beyond the scope of what is being included in the UAMS Health
-					 * WebSite item schema and so it will not be included.
-					 */
-
-					$schema['video'] = '';
 
 			// Clean up the schema array
 
@@ -13352,6 +11670,7 @@
 					 * geoWithin
 					 * hasCredential
 					 * hasDriveThroughService
+					 * hasGS1DigitalLink
 					 * hasMenu
 					 * hasMerchantReturnPolicy
 					 * hasOfferCatalog
