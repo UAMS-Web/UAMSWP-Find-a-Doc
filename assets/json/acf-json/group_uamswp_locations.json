@@ -1872,6 +1872,637 @@
 			"acfe_update": ""
 		},
 		{
+			"key": "field_location_payment_tab",
+			"label": "<i class=\"dashicons-money-alt dashicons\"><\/i> Accepted Payment",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_location_payment_query",
+			"label": "Does this location require payment for services?",
+			"name": "location_payment_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
+			"key": "field_location_payment_method",
+			"label": "Payment Method",
+			"name": "location_payment_method",
+			"type": "checkbox",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"advance": "<strong>Payment in Advance</strong> &mdash; The offering business entity will deliver the goods upon receipt of the due amount",
+				"delivery": "<strong>Payment on Delivery</strong> &mdash; The recipient of goods pays at the time of delivery",
+				"invoice": "<strong>Payment by Invoice</strong> &mdash; The offering business entity will deliver first, inform the buying party about the due amount and expect payment shortly after delivery"
+			},
+			"allow_custom": 0,
+			"default_value": [],
+			"layout": "vertical",
+			"toggle": 0,
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"save_custom": 0
+		},
+		{
+			"key": "field_location_payment_advance_type_cash_only_query",
+			"label": "Payment in Advance: Does this location only accept cash as payment?",
+			"name": "location_payment_advance_type_cash_only_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "advance"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
+			"key": "field_location_payment_advance_type_cash_only",
+			"label": "Payment in Advance: Payment Type",
+			"name": "location_payment_advance_type_cash_only",
+			"type": "radio",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "advance"
+					},
+					{
+						"field": "field_location_payment_advance_type_cash_only_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"cash": "<strong>Cash</strong> &mdash; Physical money"
+			},
+			"allow_null": 0,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_location_payment_advance_type",
+			"label": "Payment in Advance: Payment Type",
+			"name": "location_payment_advance_type",
+			"type": "checkbox",
+			"instructions": "Select one or payment types accepted by this entity. If there is no match, then select \"None.\"",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "advance"
+					},
+					{
+						"field": "field_location_payment_advance_type_cash_only_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"bankTransfer": "<strong>Bank Transfer</strong> &mdash; Electronic funds transfer from the customer's bank account to the entity, carried out by the customer",
+				"cash": "<strong>Cash</strong> &mdash; Physical money",
+				"check": "<strong>Check</strong> &mdash; A written order directing a bank to pay money as instructed",
+				"creditCard": "<strong>Credit Card</strong> &mdash; A card authorizing purchases on credit",
+				"debitCard": "<strong>Debit Card</strong> &mdash; A card like a credit card by which money may be withdrawn or the cost of purchases paid directly from the holder's bank account without the payment of interest",
+				"directDebit": "<strong>Direct Debit</strong> &mdash; Electronic funds transfer from the customer's bank account to the entity, carried out by the business entity on a particular day",
+				"googlePay": "<strong>Google Pay</strong> &mdash; An online payments system",
+				"paypal": "<strong>PayPal</strong> &mdash; An online payments system",
+				"mobileNFC": "<strong>NFC Mobile Payments</strong> &mdash; Any of various payment processing services performed by the customer waving their mobile device using near a near-field communication reader module"
+			},
+			"allow_custom": 0,
+			"default_value": [],
+			"layout": "vertical",
+			"toggle": 0,
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"save_custom": 0
+		},
+		{
+			"key": "field_location_payment_delivery_type_cash_only_query",
+			"label": "Payment on Delivery: Does this location only accept cash as payment?",
+			"name": "location_payment_delivery_type_cash_only_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "delivery"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
+			"key": "field_location_payment_delivery_type_cash_only",
+			"label": "Payment on Delivery: Payment Type",
+			"name": "location_payment_delivery_type_cash_only",
+			"type": "radio",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "delivery"
+					},
+					{
+						"field": "field_location_payment_delivery_type_cash_only_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"cash": "<strong>Cash</strong> &mdash; Physical money"
+			},
+			"allow_null": 0,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_location_payment_delivery_type",
+			"label": "Payment on Delivery: Payment Type",
+			"name": "location_payment_delivery_type",
+			"type": "checkbox",
+			"instructions": "Select one or payment types accepted by this entity. If there is no match, then select \"None.\"",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "delivery"
+					},
+					{
+						"field": "field_location_payment_delivery_type_cash_only_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"bankTransfer": "<strong>Bank Transfer</strong> &mdash; Electronic funds transfer from the customer's bank account to the entity, carried out by the customer",
+				"cash": "<strong>Cash</strong> &mdash; Physical money",
+				"check": "<strong>Check</strong> &mdash; A written order directing a bank to pay money as instructed",
+				"creditCard": "<strong>Credit Card</strong> &mdash; A card authorizing purchases on credit",
+				"debitCard": "<strong>Debit Card</strong> &mdash; A card like a credit card by which money may be withdrawn or the cost of purchases paid directly from the holder's bank account without the payment of interest",
+				"directDebit": "<strong>Direct Debit</strong> &mdash; Electronic funds transfer from the customer's bank account to the entity, carried out by the business entity on a particular day",
+				"googlePay": "<strong>Google Pay</strong> &mdash; An online payments system",
+				"paypal": "<strong>PayPal</strong> &mdash; An online payments system",
+				"mobileNFC": "<strong>NFC Mobile Payments</strong> &mdash; Any of various payment processing services performed by the customer waving their mobile device using near a near-field communication reader module"
+			},
+			"allow_custom": 0,
+			"default_value": [],
+			"layout": "vertical",
+			"toggle": 0,
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"save_custom": 0
+		},
+		{
+			"key": "field_location_payment_invoice_type_cash_only_query",
+			"label": "Payment by Invoice: Does this location only accept cash as payment?",
+			"name": "location_payment_invoice_type_cash_only_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "invoice"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
+			"key": "field_location_payment_invoice_type_cash_only",
+			"label": "Payment by Invoice: Payment Type",
+			"name": "location_payment_invoice_type_cash_only",
+			"type": "radio",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "invoice"
+					},
+					{
+						"field": "field_location_payment_invoice_type_cash_only_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"cash": "<strong>Cash</strong> &mdash; Physical money"
+			},
+			"allow_null": 0,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_location_payment_invoice_type",
+			"label": "Payment by Invoice: Payment Type",
+			"name": "location_payment_invoice_type",
+			"type": "checkbox",
+			"instructions": "Select one or payment types accepted by this entity. If there is no match, then select \"None.\"",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "invoice"
+					},
+					{
+						"field": "field_location_payment_invoice_type_cash_only_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"bankTransfer": "<strong>Bank Transfer</strong> &mdash; Electronic funds transfer from the customer's bank account to the entity, carried out by the customer",
+				"cash": "<strong>Cash</strong> &mdash; Physical money",
+				"check": "<strong>Check</strong> &mdash; A written order directing a bank to pay money as instructed",
+				"creditCard": "<strong>Credit Card</strong> &mdash; A card authorizing purchases on credit",
+				"debitCard": "<strong>Debit Card</strong> &mdash; A card like a credit card by which money may be withdrawn or the cost of purchases paid directly from the holder's bank account without the payment of interest",
+				"directDebit": "<strong>Direct Debit</strong> &mdash; Electronic funds transfer from the customer's bank account to the entity, carried out by the business entity on a particular day",
+				"googlePay": "<strong>Google Pay</strong> &mdash; An online payments system",
+				"paypal": "<strong>PayPal</strong> &mdash; An online payments system",
+				"mobileNFC": "<strong>NFC Mobile Payments</strong> &mdash; Any of various payment processing services performed by the customer waving their mobile device using near a near-field communication reader module"
+			},
+			"allow_custom": 0,
+			"default_value": [],
+			"layout": "vertical",
+			"toggle": 0,
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"save_custom": 0
+		},
+		{
+			"key": "field_location_payment_type_credit_card",
+			"label": "Accepted Credit Cards and\/or Debit Cards",
+			"name": "location_payment_type_credit_card",
+			"type": "checkbox",
+			"instructions": "Select one or types of credit card and debit card accepted by this entity. If there is no match, then select \"None.\"",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "advance"
+					},
+					{
+						"field": "field_location_payment_advance_type_cash_only_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
+						"field": "field_location_payment_advance_type",
+						"operator": "==",
+						"value": "creditCard"
+					}
+				],
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "advance"
+					},
+					{
+						"field": "field_location_payment_advance_type_cash_only_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
+						"field": "field_location_payment_advance_type",
+						"operator": "==",
+						"value": "debitCard"
+					}
+				],
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "delivery"
+					},
+					{
+						"field": "field_location_payment_delivery_type_cash_only_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
+						"field": "field_location_payment_delivery_type",
+						"operator": "==",
+						"value": "creditCard"
+					}
+				],
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "delivery"
+					},
+					{
+						"field": "field_location_payment_delivery_type_cash_only_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
+						"field": "field_location_payment_delivery_type",
+						"operator": "==",
+						"value": "debitCard"
+					}
+				],
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "invoice"
+					},
+					{
+						"field": "field_location_payment_invoice_type_cash_only_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
+						"field": "field_location_payment_invoice_type",
+						"operator": "==",
+						"value": "creditCard"
+					}
+				],
+				[
+					{
+						"field": "field_location_payment_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_payment_method",
+						"operator": "==",
+						"value": "invoice"
+					},
+					{
+						"field": "field_location_payment_invoice_type_cash_only_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
+						"field": "field_location_payment_invoice_type",
+						"operator": "==",
+						"value": "debitCard"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"americanExpress": "<strong>American Express</strong>",
+				"chinaUnionPay": "<strong>China Union Pay</strong>",
+				"dinersClub": "<strong>Diners Club</strong>",
+				"discover": "<strong>Discover</strong>",
+				"jcb": "<strong>JCB</strong>",
+				"mastercard": "<strong>MasterCard</strong>",
+				"visa": "<strong>VISA</strong>"
+			},
+			"allow_custom": 0,
+			"default_value": [],
+			"layout": "vertical",
+			"toggle": 0,
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"save_custom": 0
+		},
+		{
 			"key": "field_location_hours_tab",
 			"label": "<i class=\"dashicons-clock dashicons\"><\/i> Hours of Operation",
 			"name": "",
