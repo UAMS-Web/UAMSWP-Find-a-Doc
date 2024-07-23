@@ -9303,7 +9303,7 @@
 		},
 		{
 			"key": "field_location_gmb_requires_appointments",
-			"label": "Health and safety: Appointment required",
+			"label": "Planning: Appointment required",
 			"name": "requires_appointments",
 			"type": "button_group",
 			"instructions": "",
