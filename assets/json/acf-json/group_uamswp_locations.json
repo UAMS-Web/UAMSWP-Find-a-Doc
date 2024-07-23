@@ -725,6 +725,45 @@
 			"return_format": "value"
 		},
 		{
+			"key": "field_location_parking_options",
+			"label": "Available Parking Options",
+			"name": "location_parking_options",
+			"type": "checkbox",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parking_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"parkingGarageFree": "Parking Garage, Free",
+				"parkingGaragePaid": "Parking Garage, Paid",
+				"parkingLotFree": "Parking Lot, Free",
+				"parkingLotPaid": "Parking Lot, Paid",
+				"streetParkingFree": "Street Parking, Free",
+				"streetParkingPaid": "Street Parking, Paid"
+			},
+			"allow_custom": 0,
+			"default_value": [],
+			"layout": "vertical",
+			"toggle": 0,
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"save_custom": 0
+		},
+		{
 			"key": "field_location_parking_map",
 			"label": "GPS Location of the Main Parking Area",
 			"name": "location_parking_map",
