@@ -1325,7 +1325,29 @@
 			/**
 			 * Expected taxonomy items:
 			 *
-			 *      * "English"
+			 *      - "English" (slug: "english")
+			 *
+			 * Other languages added to this taxonomy should include the following languages
+			 * based on Google Business Profiles documentation:
+			 *
+			 *      - American Sign Language
+			 *      - Arabic
+			 *      - Cantonese
+			 *      - Filipino
+			 *      - French
+			 *      - German
+			 *      - Haitian Creole
+			 *      - Hindi
+			 *      - Italian
+			 *      - Korean
+			 *      - Mandarin
+			 *      - Polish
+			 *      - Portuguese
+			 *      - Romanian
+			 *      - Russian
+			 *      - Spanish
+			 *      - Ukrainian
+			 *      - Vietnamese
 			 */
 
 			function create_languages_taxonomy() {
