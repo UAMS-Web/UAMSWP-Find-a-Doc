@@ -1007,13 +1007,44 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_location_appointments_required_query",
+			"label": "Is an appointment required for services rendered at this location?",
+			"name": "location_appointments_required_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_location_appointments_query",
 			"label": "Can a patient schedule an appointment for services rendered at this location?",
 			"name": "location_appointments_query",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_appointments_required_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
