@@ -9178,6 +9178,68 @@
 			"allow_null": "0"
 		},
 		{
+			"key": "field_location_gmb_has_hearing_loop",
+			"label": "Accessibility: Assistive hearing loop",
+			"name": "location_gmb_has_hearing_loop",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
+			"key": "field_location_gmb_has_auracast_broadcast_audio",
+			"label": "Accessibility: Auracast broadcast audio",
+			"name": "location_gmb_has_auracast_broadcast_audio",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
 			"key": "field_location_gmb_has_wheelchair_accessible_elevator",
 			"label": "[Deprecated] Accessibility: Wheelchair accessible elevator (for patients)",
 			"name": "has_wheelchair_accessible_elevator",
@@ -9240,9 +9302,102 @@
 			"return_format": "label"
 		},
 		{
+			"key": "field_location_gmb_has_wheelchair_accessible_parking",
+			"label": "Accessibility: Wheelchair accessible parking lot (for patients)",
+			"name": "location_gmb_has_wheelchair_accessible_parking",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
 			"key": "field_location_gmb_has_wheelchair_accessible_restroom",
 			"label": "Accessibility: Wheelchair accessible restroom (for patients)",
 			"name": "has_wheelchair_accessible_restroom",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
+			"key": "field_location_gmb_has_wheelchair_accessible_seating",
+			"label": "Accessibility: Wheelchair accessible seating (for patients)",
+			"name": "location_gmb_has_wheelchair_accessible_seating",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
+			"key": "field_location_gmb_has_restroom_unisex",
+			"label": "Amenities: Gender-neutral restroom (for patients)",
+			"name": "location_gmb_has_restroom_unisex",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -9302,9 +9457,350 @@
 			"return_format": "label"
 		},
 		{
+			"key": "field_location_gmb_wi_fi",
+			"label": "Amenities: Wi-Fi (for patients)",
+			"name": "location_gmb_wi_fi",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"free_wi_fi": "Free",
+				"paid_wi_fi": "Paid"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
+			"key": "field_location_gmb_has_lactation_space",
+			"label": "Children: Nursing room (for patients)",
+			"name": "location_gmb_has_lactation_space",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
+			"key": "field_location_gmb_welcomes_lgbtq",
+			"label": "Crowd: LGBTQ+ friendly",
+			"name": "location_gmb_welcomes_lgbtq",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
+			"key": "field_location_gmb_is_transgender_safespace",
+			"label": "Crowd: Transgender safespace",
+			"name": "location_gmb_is_transgender_safespace",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
+			"key": "field_location_gmb_allows_dogs_inside",
+			"label": "Pets: Dogs allowed inside",
+			"name": "location_gmb_allows_dogs_inside",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
+			"key": "field_location_gmb_allows_dogs_offleash",
+			"label": "Pets: Dogs allowed off leash",
+			"name": "location_gmb_allows_dogs_offleash",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
+			"key": "field_location_gmb_allows_dogs_outside",
+			"label": "Pets: Dogs allowed outside",
+			"name": "location_gmb_allows_dogs_outside",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
 			"key": "field_location_gmb_requires_appointments",
 			"label": "Planning: Appointment required",
 			"name": "requires_appointments",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
+			"key": "field_location_gmb_offers_online_classes",
+			"label": "Service options: Online classes",
+			"name": "location_gmb_offers_online_classes",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
+			"key": "field_location_gmb_has_onsite_services",
+			"label": "Service options: Onsite services",
+			"name": "location_gmb_has_onsite_services",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
+			"key": "field_location_gmb_has_outdoor_services",
+			"label": "Service options: Outdoor services",
+			"name": "location_gmb_has_outdoor_services",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"notapplicable" : "Not Applicable",
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+		{
+			"key": "field_location_gmb_offers_home_visits",
+			"label": "Service options: Visits patients",
+			"name": "location_gmb_offers_home_visits",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
