@@ -768,7 +768,7 @@
 			"label": "GPS Location of the Main Parking Area",
 			"name": "location_parking_map",
 			"type": "google_map",
-			"instructions": "If the parking area is a parking deck, place the pin on the entrance to the parking deck from the street.</p><p class='description' style='margin-top: 0.5em;'>If the parking area is a surface-level parking lot, place the pin in the middle of the parking lot.",
+			"instructions": "If the main parking area is a parking deck, place the pin on the entrance to the parking deck from the street.</p><p class='description' style='margin-top: 0.5em;'>If the main parking area is a surface-level parking lot, place the pin in the middle of the parking lot.",
 			"required": 0,
 			"conditional_logic": [
 				[
@@ -791,7 +791,7 @@
 		},
 		{
 			"key": "field_location_parking",
-			"label": "Parking Instructions",
+			"label": "Instructions for Parking in the Main Parking Area",
 			"name": "location_parking",
 			"type": "wysiwyg",
 			"instructions": "Indicate whether patients will park in a parking deck or surface-level parking.</p><p class='description' style='margin-top: 0.5em;'>Indicate which parking lot, parking deck or other area in which patients will park when coming to this location.</p><p class='description' style='margin-top: 0.5em;'>Indicate whether or not patients will have to pay for parking.</p><p class='description' style='margin-top: 0.5em;'>If there is a parking fee for patients, indicate whether or not this location validates parking.</p><p class='description' style='margin-top: 0.5em;'>If patients will be parking in a specific parking deck, indicate the ideal area of the parking deck in which patients should park. If there is a patient drop-off area, also include details about that.",
@@ -818,10 +818,10 @@
 		},
 		{
 			"key": "field_location_direction",
-			"label": "Directions From Parking Area",
+			"label": "Directions From the Main Parking Area",
 			"name": "location_direction",
 			"type": "wysiwyg",
-			"instructions": "Comprehensively describe the path patients should take when coming from their vehicle — whether at the patient drop-off area or in the parking area — to the entrance or check-in area for the location.</p><p class='description' style='margin-top: 0.5em;'>If the parking area is a parking deck, include instructions regarding how to locate the appropriate elevators and stairs in the parking deck, then include the parking deck level to which they should take those elevators or stairs.",
+			"instructions": "Comprehensively describe the path patients should take when coming from their vehicle — whether at the patient drop-off area or in the main parking area — to the entrance or check-in area for the location.</p><p class='description' style='margin-top: 0.5em;'>If the main parking area is a parking deck, include instructions regarding how to locate the appropriate elevators and stairs in the parking deck, then include the parking deck level to which they should take those elevators or stairs.",
 			"required": 0,
 			"conditional_logic": [
 				[
