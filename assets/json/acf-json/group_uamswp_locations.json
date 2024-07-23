@@ -1077,6 +1077,79 @@
 			"delay": 0
 		},
 		{
+			"key": "field_location_interpreter_tab",
+			"label": "<i class=\"dashicons-translation dashicons\"><\/i> Language Interpreter Assistance",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_location_interpreter_query",
+			"label": "Does this location offer language interpreter assistance?",
+			"name": "location_interpreter_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
+			"key": "field_location_interpreter_languages",
+			"label": "Language Interpreter Assistance Available at This Location",
+			"name": "location_interpreter_languages",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_interpreter_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"taxonomy": "language",
+			"field_type": "checkbox",
+			"allow_null": 0,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
+		{
 			"key": "field_location_appointment_info_tab",
 			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Appointment Information",
 			"name": "",
