@@ -9179,7 +9179,7 @@
 		},
 		{
 			"key": "field_location_gmb_has_wheelchair_accessible_elevator",
-			"label": "Accessibility: Wheelchair accessible elevator (for patients)",
+			"label": "[Deprecated] Accessibility: Wheelchair accessible elevator (for patients)",
 			"name": "has_wheelchair_accessible_elevator",
 			"type": "button_group",
 			"instructions": "",
@@ -9187,7 +9187,7 @@
 			"conditional_logic": [
 				[
 					{
-						"field": "field_location_gmb_exclude",
+						"field": "field_location_gmb_tab",
 						"operator": "==",
 						"value": "0"
 					}
@@ -9334,7 +9334,7 @@
 		},
 		{
 			"key": "field_location_gmb_requires_temperature_check_customers",
-			"label": "Health and safety: Temperature check required (for patients)",
+			"label": "[Deprecated] Health and safety: Temperature check required (for patients)",
 			"name": "requires_temperature_check_customers",
 			"type": "button_group",
 			"instructions": "",
@@ -9342,7 +9342,7 @@
 			"conditional_logic": [
 				[
 					{
-						"field": "field_location_gmb_exclude",
+						"field": "field_location_gmb_tab",
 						"operator": "==",
 						"value": "0"
 					}
@@ -9365,7 +9365,7 @@
 		},
 		{
 			"key": "field_location_gmb_requires_masks_customers",
-			"label": "Health and safety: Mask required (for patients)",
+			"label": "[Deprecated] Health and safety: Mask required (for patients)",
 			"name": "requires_masks_customers",
 			"type": "button_group",
 			"instructions": "",
@@ -9373,7 +9373,7 @@
 			"conditional_logic": [
 				[
 					{
-						"field": "field_location_gmb_exclude",
+						"field": "field_location_gmb_tab",
 						"operator": "==",
 						"value": "0"
 					}
@@ -9396,7 +9396,7 @@
 		},
 		{
 			"key": "field_location_gmb_requires_temperature_check_staff",
-			"label": "Health and safety: Staff get temperature checks",
+			"label": "[Deprecated] Health and safety: Staff get temperature checks",
 			"name": "requires_temperature_check_staff",
 			"type": "button_group",
 			"instructions": "",
@@ -9404,7 +9404,7 @@
 			"conditional_logic": [
 				[
 					{
-						"field": "field_location_gmb_exclude",
+						"field": "field_location_gmb_tab",
 						"operator": "==",
 						"value": "0"
 					}
@@ -9427,7 +9427,7 @@
 		},
 		{
 			"key": "field_location_gmb_requires_masks_staff",
-			"label": "Health and safety: Staff wear masks",
+			"label": "[Deprecated] Health and safety: Staff wear masks",
 			"name": "requires_masks_staff",
 			"type": "button_group",
 			"instructions": "",
@@ -9435,7 +9435,7 @@
 			"conditional_logic": [
 				[
 					{
-						"field": "field_location_gmb_exclude",
+						"field": "field_location_gmb_tab",
 						"operator": "==",
 						"value": "0"
 					}
@@ -9458,7 +9458,7 @@
 		},
 		{
 			"key": "field_location_gmb_is_sanitizing_between_customers",
-			"label": "Health and safety: Staff required to disinfect surfaces between visits",
+			"label": "[Deprecated] Health and safety: Staff required to disinfect surfaces between visits",
 			"name": "is_sanitizing_between_customers",
 			"type": "button_group",
 			"instructions": "",
@@ -9466,7 +9466,7 @@
 			"conditional_logic": [
 				[
 					{
-						"field": "field_location_gmb_exclude",
+						"field": "field_location_gmb_tab",
 						"operator": "==",
 						"value": "0"
 					}
