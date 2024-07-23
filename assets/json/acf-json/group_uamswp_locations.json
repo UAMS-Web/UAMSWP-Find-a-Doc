@@ -1031,7 +1031,7 @@
 		},
 		{
 			"key": "field_location_appointment",
-			"label": "Information on setting up an appointment",
+			"label": "Information on Setting up an Appointment",
 			"name": "location_appointment",
 			"type": "wysiwyg",
 			"instructions": "This section should ideally not contain headings. But if it does, use Heading 3 and down.",
@@ -1058,10 +1058,10 @@
 		},
 		{
 			"key": "field_location_appointment_bring",
-			"label": "What to Bring to Your Appointment",
+			"label": "What to Bring to Your Visit",
 			"name": "location_appointment_bring",
 			"type": "wysiwyg",
-			"instructions": "This section should ideally not contain headings. But if it does ...</p><p class='description' style='margin-top: 0.5em;'>If \"Information on setting up an appointment\" or \"What to Expect at Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
+			"instructions": "This section should ideally not contain headings. But if it does ...</p><p class='description' style='margin-top: 0.5em;'>If \"Information on Setting up an Appointment\" or \"What to Expect at Your Visit\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1077,10 +1077,10 @@
 		},
 		{
 			"key": "field_location_appointment_expect",
-			"label": "What to Expect at Your Appointment",
+			"label": "What to Expect at Your Visit",
 			"name": "location_appointment_expect",
 			"type": "wysiwyg",
-			"instructions": "This section should ideally not contain headings. But if it does ...</p><p class='description' style='margin-top: 0.5em;'>If \"Information on setting up an appointment\" or \"What to Bring to Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
+			"instructions": "This section should ideally not contain headings. But if it does ...</p><p class='description' style='margin-top: 0.5em;'>If \"Information on Setting up an Appointment\" or \"What to Bring to Your Visit\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
