@@ -6,6 +6,280 @@
  * Format values for common schema data properties and types
  */
 
+// Add data to an array defining schema data for LoanOrCredit
+
+	function uamswp_fad_schema_loanorcredit(
+		$input = array(), // array // Optional // LoanOrCredit value(s)
+		array $output = array() // Optional // Pre-existing list array to which to add additional items
+	) {
+
+		/**
+		 * A financial product for the loaning of an amount of money, or line of credit,
+		 * under agreed terms and charges.
+		 */
+
+		// Check variables
+
+			// If LoanOrCredit is invalid, stop here
+
+				if (
+					!$LoanOrCredit
+					||
+					!is_array($occupationalCategory)
+				) {
+
+					return $output;
+
+				}
+
+			$output = array_is_list($output) ? $output : array($output);
+
+		// Add input variable to output array
+
+			if ( $LoanOrCredit ) {
+
+				if ( array_is_list($LoanOrCredit) ) {
+
+					array_merge(
+						$output,
+						$LoanOrCredit
+					);
+
+				} else {
+
+					$output[] = $LoanOrCredit;
+
+				}
+
+			}
+
+		// Clean up schema list array
+
+			if ( $output ) {
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($output);
+
+			}
+
+		return $output;
+
+	}
+
+// Add data to an array defining schema data for PaymentMethod
+
+	function uamswp_fad_schema_paymentmethod(
+		$input = array(), // array|string // Optional // PaymentMethod value(s)
+		array $output = array() // Optional // Pre-existing list array to which to add additional items
+	) {
+
+		/**
+		 * A payment method is a standardized procedure for transferring the monetary
+		 * amount for a purchase. Payment methods are characterized by the legal and
+		 * technical structures used, and by the organization or group carrying out the
+		 * transaction.
+		 *
+		 * Commonly used values:
+		 *
+		 *      - http://purl.org/goodrelations/v1#ByBankTransferInAdvance
+		 *      - http://purl.org/goodrelations/v1#ByInvoice
+		 *      - http://purl.org/goodrelations/v1#Cash
+		 *      - http://purl.org/goodrelations/v1#CheckInAdvance
+		 *      - http://purl.org/goodrelations/v1#COD
+		 *      - http://purl.org/goodrelations/v1#DirectDebit
+		 *      - http://purl.org/goodrelations/v1#GoogleCheckout
+		 *      - http://purl.org/goodrelations/v1#PayPal
+		 *      - http://purl.org/goodrelations/v1#PaySwarm
+		 *
+		 * Enumeration Subtypes:
+		 *
+		 *      - PaymentCard
+		 */
+
+		// Check variables
+
+			// If PaymentMethod is invalid, stop here
+
+				if ( !$PaymentMethod ) {
+
+					return $output;
+
+				}
+
+			$output = array_is_list($output) ? $output : array($output);
+
+		// PaymentMethod
+
+			// Check input variable
+
+				// Check type
+
+					$input = ( $input && ( is_string($input) || is_array($input) ) ) ? $input : '';
+
+				// Check values against Schema.org's commonly used values
+
+					$PaymentMethod_valid = array(
+						'http://purl.org/goodrelations/v1#ByBankTransferInAdvance',
+						'http://purl.org/goodrelations/v1#ByInvoice',
+						'http://purl.org/goodrelations/v1#Cash',
+						'http://purl.org/goodrelations/v1#CheckInAdvance',
+						'http://purl.org/goodrelations/v1#COD',
+						'http://purl.org/goodrelations/v1#DirectDebit',
+						'http://purl.org/goodrelations/v1#GoogleCheckout',
+						'http://purl.org/goodrelations/v1#PayPal',
+						'http://purl.org/goodrelations/v1#PaySwarm'
+					);
+
+					if (
+						$input
+						&&
+						is_array($input)
+						&&
+						array_is_list($PaymentMethod)
+					) {
+
+						$input = array_intersect(
+							$input, // The array with master values to check
+							$PaymentMethod_valid // Arrays to compare values against
+						);
+
+					} elseif (
+						$input
+						&&
+						is_string($input)
+					) {
+
+						$input = in_array(
+							$input, // needle
+							$PaymentMethod_valid // haystack
+						) ? $input : '';
+
+					}
+
+			// Add input variable to output array
+
+				if ( $input ) {
+
+					if (
+						is_array($input)
+						&&
+						array_is_list($input)
+					) {
+
+						array_merge(
+							$output,
+							$input
+						);
+
+					} else {
+
+						$output[] = $input;
+
+					}
+
+				}
+
+		// Clean up schema list array
+
+			if ( $output ) {
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($output);
+
+			}
+
+		return $output;
+
+	}
+
+// Add data to an array defining schema data for acceptedPaymentMethod
+
+	function uamswp_fad_schema_acceptedpaymentmethod(
+		$LoanOrCredit = array(), // array // Optional // LoanOrCredit value(s)
+		$PaymentMethod = array(), // array|string // Optional // PaymentMethod value(s)
+		array $output = array() // Optional // Pre-existing list array to which to add additional items
+	) {
+
+		// Check variables
+
+			// If LoanOrCredit and PaymentMethod are invalid, stop here
+
+				if (
+					!$LoanOrCredit
+					||
+					!$PaymentMethod
+				) {
+
+					return $output;
+
+				}
+
+			$output = array_is_list($output) ? $output : array($output);
+			$LoanOrCredit =  is_array($occupationalCategory) ? $occupationalCategory : '';
+			$PaymentMethod = ( $PaymentMethod && ( is_string($alternateName) || is_array($alternateName) ) ) ? $alternateName : '';
+
+		// LoanOrCredit
+
+			// Add input variable to output array
+
+				if ( $LoanOrCredit ) {
+
+					if ( array_is_list($LoanOrCredit) ) {
+
+						array_merge(
+							$output,
+							$LoanOrCredit
+						);
+
+					} else {
+
+						$output[] = $LoanOrCredit;
+
+					}
+
+				}
+
+		// PaymentMethod
+
+			// Add input variable to output array
+
+				if ( $PaymentMethod ) {
+
+					if (
+						is_array($PaymentMethod)
+						&&
+						array_is_list($PaymentMethod)
+					) {
+
+						array_merge(
+							$output,
+							$PaymentMethod
+						);
+
+					} else {
+
+						$output[] = $PaymentMethod;
+
+					}
+
+				}
+
+		// Clean up schema list array
+
+			if ( $output ) {
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($output);
+
+			}
+
+		return $output;
+
+	}
+
 // Add data to an array defining schema data for PostalAddress
 
 	function uamswp_fad_schema_postaladdress(
