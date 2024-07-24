@@ -6262,15 +6262,35 @@ function uamswp_fad_schema_location(
 
 								}
 
-						// paymentAccepted [WIP]
+						// payment (common) [WIP]
 
-							/**
-								* Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
-								*
-								* Values expected to be one of these types:
-								*
-								*      - Text
-								*/
+							// acceptedPaymentMethod [WIP]
+
+								/**
+								 * The payment method(s) that are accepted in general by an organization, or for
+								 * some specific demand or offer.
+								 *
+								 * Values expected to be one of these types:
+								 *
+								 *      - LoanOrCredit
+								 *      - PaymentMethod
+								 *
+								 * Used on these types:
+								 *
+								 *      - Demand
+								 *      - Offer
+								 *      - Organization
+								 */
+
+							// paymentAccepted [WIP]
+
+								/**
+								 * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
+								 *
+								 * Values expected to be one of these types:
+								 *
+								 *      - Text
+								 */
 
 						// photo
 
