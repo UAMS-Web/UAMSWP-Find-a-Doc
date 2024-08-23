@@ -301,14 +301,15 @@
 					},
 					"choices": {
 						"DiseasesDB": "DiseasesDB",
-						"ICD-10-CM": "ICD-10-CM",
-						"ICD-10-PCS": "ICD-10-PCS",
-						"ICD-11": "ICD-11",
-						"ICHI": "ICHI",
-						"ICPC-3": "ICPC-3",
-						"MeSH": "MeSH",
-						"SNOMED-CT": "SNOMED-CT",
-						"RxNorm": "RxNorm"
+						"ICD-10-CM-code": "ICD-10-CM code",
+						"ICD-10-PCS-code": "ICD-10-PCS code",
+						"ICD-11-code": "ICD-11 code",
+						"ICHI-procedure-code": "ICHI procedure code",
+						"ICPC-2-ID": "ICPC 2 ID",
+						"ICPC-3-ID": "ICPC 3 ID",
+						"MeSH-descriptor-ID": "MeSH descriptor ID",
+						"SNOMED-CT-ID": "SNOMED-CT ID",
+						"RxNorm-ID": "RxNorm ID"
 					},
 					"default_value": [],
 					"allow_null": 1,

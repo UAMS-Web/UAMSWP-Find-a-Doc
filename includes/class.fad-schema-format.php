@@ -2331,7 +2331,7 @@
 							'sameAs' => 'https://www.wikidata.org/wiki/Q213103', // Wikidata entry for 'Diseases Database'
 							'url' => 'http://www.diseasesdatabase.com/'
 						),
-						'ICD-9' => array(
+						'ICD-9-code' => array(
 							'alternateName' => array(
 								'International Statistical Classification of Diseases, Ninth Revision',
 								'ICD-9',
@@ -2341,7 +2341,7 @@
 							'sameAs' => 'https://www.wikidata.org/wiki/Q14067712', // Wikidata entry for 'International Classification of Diseases, Ninth Revision (ICD-9)'
 							'url' => 'https://www.cdc.gov/nchs/icd/icd9.htm'
 						),
-						'ICD-9-CM' => array(
+						'ICD-9-CM-code' => array(
 							'alternateName' => array(
 								'International Statistical Classification of Diseases, Ninth Revision, Clinical Modification',
 								'ICD-9 Clinical Modification',
@@ -2355,7 +2355,7 @@
 							),
 							'url' => 'https://www.cdc.gov/nchs/icd/icd9cm.htm'
 						),
-						'ICD-10' => array(
+						'ICD-10-code' => array(
 							'alternateName' => array(
 								'International Statistical Classification of Diseases, Tenth Revision',
 								'ICD-10',
@@ -2368,7 +2368,7 @@
 							),
 							'url' => 'https://icd.who.int/browse10/'
 						),
-						'ICD-10-CM' => array(
+						'ICD-10-CM-code' => array(
 							'alternateName' => array(
 								'International Statistical Classification of Diseases, Tenth Revision, Clinical Modification',
 								'ICD-10 Clinical Modification',
@@ -2382,7 +2382,7 @@
 							),
 							'url' => 'https://www.cms.gov/medicare/coding/icd10'
 						),
-						'ICD-10-PCS' => array(
+						'ICD-10-PCS-code' => array(
 							'alternateName' => array(
 								'International Statistical Classification of Diseases, Tenth Revision, Procedure Coding System',
 								'ICD-10 Procedure Coding System',
@@ -2396,7 +2396,7 @@
 							),
 							'url' => 'https://www.cms.gov/medicare/coding/icd10'
 						),
-						'ICD-11' => array(
+						'ICD-11-code' => array(
 							'alternateName' => array(
 								'International Statistical Classification of Diseases, Eleventh Revision',
 								'ICD-11',
@@ -2409,44 +2409,44 @@
 							),
 							'url' => 'https://icd.who.int/en'
 						),
-						'ICHI' => array(
 							'alternateName' => 'ICHI',
 							'name' => 'International Classification of Health Interventions',
 							'sameAs' => 'https://www.wikidata.org/wiki/Q3505045', // Wikidata entry for 'International Classification of Health Interventions'
+						'ICHI-procedure-code' => array(
 							'url' => 'https://www.who.int/standards/classifications/international-classification-of-health-interventions'
 						),
-						'ICPC-2' => array(
 							'alternateName' => 'ICPC-2',
 							'name' => 'International Classification of Primary Care, Second Revision',
+						'ICPC-2-ID' => array(
 						),
-						'ICPC-3' => array(
 							'alternateName' => 'ICPC-3',
 							'name' => 'International Classification of Primary Care, Third Revision',
+						'ICPC-3-ID' => array(
 							'url' => 'https://www.icpc-3.info/'
 						),
-						'MeSH' => array(
 							'alternateName' => 'MeSH',
 							'name' => 'Medical Subject Headings',
+						'MeSH-descriptor-ID' => array(
 							'sameAs' => array(
 								'http://id.loc.gov/authorities/names/n2013188677', // Library of Congress Name Authority File entry for 'National Library of Medicine (U.S.). Medical subject headings'
 								'https://www.wikidata.org/wiki/Q199897' // Wikidata entry for 'Medical Subject Headings'
 							),
 							'url' => 'https://www.nlm.nih.gov/mesh/meshhome.html'
 						),
-						'RxNorm' => array(
 							'name' => 'RxNorm',
 							'sameAs' => array(
 								'https://www.wikidata.org/wiki/Q7383767', // Wikidata entry for 'RxNorm'
 								'https://id.nlm.nih.gov/mesh/D062245.html'
+						'RxNorm-ID' => array(
 							),
 							'url' => 'https://www.nlm.nih.gov/research/umls/rxnorm/'
 						),
-						'SNOMED-CT' => array(
 							'alternateName' => 'SNOMED Clinical Terms',
 							'name' => 'SNOMED CT',
 							'sameAs' => array(
 								'http://id.loc.gov/authorities/names/n2005182509', // Library of Congress Name Authority File entry for 'SNOMED CT'
 								'https://www.wikidata.org/wiki/Q1753883' // Wikidata entry for 'SNOMED CT'
+						'SNOMED-CT-ID' => array(
 							),
 							'url' => 'https://www.snomed.org/'
 						)
