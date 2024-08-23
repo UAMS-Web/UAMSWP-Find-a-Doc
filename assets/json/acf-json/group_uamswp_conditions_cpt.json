@@ -760,6 +760,38 @@
 			"acfe_settings": ""
 		},
 		{
+			"key": "field_condition_schema_medicalsign_subtype",
+			"label": "MedicalSign Subtype",
+			"name": "condition_schema_medicalsign_subtype",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalsignorsymptom_subtype",
+						"operator": "==",
+						"value": "MedicalSign"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalsign_subtype"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
 			"key": "field_condition_schema_additionalType",
 			"label": "More Specific Type(s) for This Condition From External Vocabularies in Microdata Syntax (additionalType > Text or URL)",
 			"name": "condition_schema_additionalType",

@@ -1094,6 +1094,30 @@
 			"save_other_choice": 0
 		},
 		{
+			"key": "field_schema_medicalsign_subtype",
+			"label": "MedicalSign Subtype",
+			"name": "schema_medicalsign_subtype",
+			"type": "radio",
+			"instructions": "Select the most appropriate subtype of MedicalSign.</p><p class='description' style='margin-top: 0.5em;'>For information on the Schema.org MedicalSign type, visit <a href='https://schema.org/MedicalSign' target='_blank'>https://schema.org/MedicalSign</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each subtype, visit the relevant page linked at <a href='https://schema.org/MedicalSign#Subtypes' target='_blank'>https://schema.org/MedicalSign#Subtypes</a>.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"VitalSign": "<strong>VitalSign</strong> &mdash; Vital signs are measures of various physiological functions in order to assess the most basic body functions."
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
 			"key": "field_schema_infectiousagent",
 			"label": "Infectious Agent (infectiousAgent > Text)",
 			"name": "schema_infectiousagent",
