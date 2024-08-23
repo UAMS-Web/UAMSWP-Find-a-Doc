@@ -429,7 +429,6 @@ function uamswp_fad_schema_location(
 						 *
 						 *      * about
 						 *      * abstract
-						 *      * acceptedPaymentMethod
 						 *      * accessibilityAPI
 						 *      * accessibilityControl
 						 *      * accessibilityFeature
