@@ -574,7 +574,6 @@
 				"CT": "<strong>CT</strong> &mdash; X-ray computed tomography imaging.",
 				"MRI": "<strong>MRI</strong> &mdash; Magnetic resonance imaging.",
 				"PET": "<strong>PET</strong> &mdash; Positron emission tomography imaging.",
-				"Radiography": "<strong>Radiography</strong> &mdash; Radiography is an imaging technique that uses electromagnetic radiation other than visible light, especially X-rays, to view the internal structure of a non-uniformly composed and opaque object such as the human body.",
 				"Ultrasound": "<strong>Ultrasound</strong> &mdash; Ultrasound imaging.",
 				"XRay": "<strong>XRay</strong> &mdash; X-ray imaging."
 			},
