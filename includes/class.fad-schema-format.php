@@ -2611,6 +2611,14 @@
 										)
 									);
 
+									$identifier_item = array_filter(
+										array(
+											'@type' => 'PropertyValue',
+											'value' => $codeValue, // The value of a QuantitativeValue (including Observation) or property value node.
+											'url' => $url // URL of the item.
+										)
+									);
+
 								// inCodeSet
 
 									/**
@@ -2635,7 +2643,9 @@
 									if ( $inCodeSet ) {
 
 										$inCodeSet_alternateName = $inCodeSet['alternateName'] ?? array();
+										$inCodeSet_description = $inCodeSet['description'] ?? '';
 										$inCodeSet_name = $inCodeSet['name'] ?? '';
+										$inCodeSet_propertyID = $inCodeSet['propertyID'] ?? '';
 										$code_item['codingSystem'] = $inCodeSet_name ?? $code_item['codingSystem']; // Update base code 'codingSystem' value with 'name' value from 'inCodeSet' property
 										$inCodeSet_sameAs = $inCodeSet['sameAs'] ?? array();
 										$inCodeSet_url = $inCodeSet['url'] ?? '';
@@ -2652,6 +2662,16 @@
 
 										} // endif ( $inCodeSet_name )
 
+										if ( $inCodeSet_name || $inCodeSet_propertyID ) {
+
+											$identifier_item['alternateName'] = $inCodeSet_alternateName;
+											$identifier_item['description'] = $inCodeSet_description;
+											$identifier_item['name'] = $inCodeSet_name;
+											$identifier_item['propertyID'] = $inCodeSet_propertyID;
+											$identifier_item['sameAs'] = $inCodeSet_sameAs;
+
+										} // endif ( $inCodeSet_name )
+
 									} // endif ( $inCodeSet )
 
 							} // endif ( $codeValue && $codingSystem )
@@ -2664,6 +2684,13 @@
 								ksort( $code_item, SORT_NATURAL | SORT_FLAG_CASE );
 
 							} // endif ( $code_item )
+
+							if ( $identifier_item ) {
+
+								$identifier_item = array_filter($identifier_item);
+								ksort( $identifier_item, SORT_NATURAL | SORT_FLAG_CASE );
+
+							} // endif ( $identifier_item )
 
 						// Add to code item to list of codes
 
