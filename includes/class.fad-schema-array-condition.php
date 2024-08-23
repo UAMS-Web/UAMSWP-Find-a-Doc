@@ -251,13 +251,52 @@ function uamswp_fad_schema_condition(
 
 							// Base value
 
-								$MedicalCondition_type = 'MedicalCondition';
+								$MedicalCondition_type_base = 'MedicalCondition';
+								$MedicalCondition_type = $MedicalCondition_type_base;
 								$page_fragment = $MedicalCondition_type;
 
 							// Get the MedicalCondition subtype
 
 								$MedicalCondition_type = get_field( 'schema_medicalcondition_subtype', $entity ) ?: $MedicalCondition_type;
-								$MedicalCondition_type_parent = $MedicalCondition_type != 'MedicalCondition' ? array( 'MedicalCondition' ) : array();
+
+								if ( $MedicalCondition_type != $MedicalCondition_type_base ) {
+
+									/* If the current type does not equal the base type */
+
+									$MedicalCondition_type_parent[] = $MedicalCondition_type_base; // Add the base type value to the parent type array
+									$MedicalCondition_type_base = $MedicalCondition_type; // Update the base type value with the current type value
+
+								}
+
+								// Get the MedicalSignOrSymptom subtype
+
+									if ( $MedicalCondition_type == 'MedicalSignOrSymptom' ) {
+
+										$MedicalCondition_type = get_field( 'schema_medicalsignorsymptom_subtype', $entity ) ?: $MedicalCondition_type;
+
+										if ( $MedicalCondition_type != $MedicalCondition_type_base ) {
+
+											/* If the current type does not equal the base type */
+
+											$MedicalCondition_type_parent[] = $MedicalCondition_type_base; // Add the base type value to the parent type array
+											$MedicalCondition_type_base = $MedicalCondition_type; // Update the base type value with the current type value
+
+										}
+
+										// Get the MedicalSign subtype
+
+											$MedicalCondition_type = get_field( 'schema_medicalsign_subtype', $entity ) ?: $MedicalCondition_type;
+
+											if ( $MedicalCondition_type != $MedicalCondition_type_base ) {
+
+												/* If the current type does not equal the base type */
+
+												$MedicalCondition_type_parent[] = $MedicalCondition_type_base; // Add the base type value to the parent type array
+												$MedicalCondition_type_base = $MedicalCondition_type; // Update the base type value with the current type value
+
+											}
+
+									}
 
 							// Add to item values
 
