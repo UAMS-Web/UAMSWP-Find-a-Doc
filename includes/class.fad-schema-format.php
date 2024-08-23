@@ -2324,130 +2324,254 @@
 					$MedicalCode_values = array(
 						'DiseasesDB' => array(
 							'alternateName' => array(
-								'DiseasesDB',
+								'Diseases Database',
 								'diseasesdatabase.com'
 							),
-							'name' => 'Diseases Database',
-							'sameAs' => 'https://www.wikidata.org/wiki/Q213103', // Wikidata entry for 'Diseases Database'
+							'description' => 'identifier sourced on the Diseases Database',
+							'name' => 'DiseasesDB',
+							'propertyID' => 'https://www.wikidata.org/wiki/Property:P557', // Wikidata property entry for 'DiseasesDB'
+							'sameAs' => 'https://bioregistry.io/registry/diseasesdb',
 							'url' => 'http://www.diseasesdatabase.com/'
 						),
 						'ICD-9-code' => array(
 							'alternateName' => array(
-								'International Statistical Classification of Diseases, Ninth Revision',
+								'ICD-9 ID',
 								'ICD-9',
+								'ICD9 code',
+								'ICD9 ID',
 								'ICD9',
+								'International Statistical Classification of Diseases, Ninth Revision',
+								'International Statistical Classification of Diseases and Related Health Problems, Ninth Revision'
 							),
-							'name' => 'International Statistical Classification of Diseases and Related Health Problems, Ninth Revision',
-							'sameAs' => 'https://www.wikidata.org/wiki/Q14067712', // Wikidata entry for 'International Classification of Diseases, Ninth Revision (ICD-9)'
+							'description' => 'identifier in the ICD-9',
+							'name' => 'ICD-9 code',
+							'propertyID' => 'https://www.wikidata.org/wiki/Property:P493', // Wikidata property entry for 'ICD-9 ID'
+							'sameAs' => 'https://bioregistry.io/registry/icd9',
 							'url' => 'https://www.cdc.gov/nchs/icd/icd9.htm'
 						),
 						'ICD-9-CM-code' => array(
 							'alternateName' => array(
-								'International Statistical Classification of Diseases, Ninth Revision, Clinical Modification',
-								'ICD-9 Clinical Modification',
+								'ICD-9-CM ID',
 								'ICD-9-CM',
+								'ICD9CM code',
+								'ICD9CM ID',
 								'ICD9CM',
+								'ICD-9 Clinical Modification code',
+								'ICD-9 Clinical Modification ID',
+								'ICD-9 Clinical Modification',
+								'International Statistical Classification of Diseases, Ninth Revision, Clinical Modification',
+								'International Statistical Classification of Diseases and Related Health Problems, Ninth Revision, Clinical Modification'
 							),
-							'dateModified' => 'International Statistical Classification of Diseases and Related Health Problems, Ninth Revision, Clinical Modification',
-							'sameAs' => array(
-								'http://id.loc.gov/authorities/names/n2009185485', // Library of Congress Name Authority File entry for 'International classification of diseases. 9th revision. Clinical modification'
-								'https://www.wikidata.org/wiki/Q5737131' // Wikidata entry for 'ICD-9-CM'
-							),
+							'description' => 'identifier in the ICD-9 Clinical Modification',
+							'name' => 'ICD-9-CM code',
+							'propertyID' => 'https://www.wikidata.org/wiki/Property:P1692', // Wikidata property entry for 'ICD-9-CM'
+							'sameAs' => 'https://bioregistry.io/registry/icd9cm',
 							'url' => 'https://www.cdc.gov/nchs/icd/icd9cm.htm'
 						),
 						'ICD-10-code' => array(
 							'alternateName' => array(
-								'International Statistical Classification of Diseases, Tenth Revision',
+								'ICD-10 code',
+								'ICD-10 ID',
 								'ICD-10',
+								'ICD10 code',
+								'ICD10 ID',
 								'ICD10',
+								'International Statistical Classification of Diseases, Tenth Revision',
+								'International Statistical Classification of Diseases and Related Health Problems, Tenth Revision'
 							),
-							'name' => 'International Statistical Classification of Diseases and Related Health Problems, Tenth Revision',
-							'sameAs' => array(
-								'http://id.loc.gov/authorities/names/n2009019647', // Library of Congress Name Authority File entry for 'International statistical classification of diseases and related health problems. 10th revision'
-								'https://www.wikidata.org/wiki/Q45127' // Wikidata entry for 'International Classification of Diseases, Tenth Revision (ICD-10)'
-							),
+							'description' => 'identifier in the ICD-10',
+							'name' => 'ICD-10 code',
+							'propertyID' => 'https://www.wikidata.org/wiki/Property:P494', // Wikidata property entry for 'ICD-10 ID'
+							'sameAs' => 'https://bioregistry.io/registry/icd10',
 							'url' => 'https://icd.who.int/browse10/'
 						),
 						'ICD-10-CM-code' => array(
 							'alternateName' => array(
-								'International Statistical Classification of Diseases, Tenth Revision, Clinical Modification',
-								'ICD-10 Clinical Modification',
+								'ICD-10 CM code',
+								'ICD-10 CM ID',
+								'ICD-10 CM',
+								'ICD-10-CM code',
+								'ICD-10-CM ID',
 								'ICD-10-CM',
+								'ICD10CM code',
+								'ICD10CM ID',
 								'ICD10CM',
+								'ICD-10 Clinical Modification code',
+								'ICD-10 Clinical Modification ID',
+								'ICD-10 Clinical Modification',
+								'International Statistical Classification of Diseases, Tenth Revision, Clinical Modification',
+								'International Statistical Classification of Diseases and Related Health Problems, Tenth Revision, Clinical Modification'
 							),
-							'name' => 'International Statistical Classification of Diseases and Related Health Problems, Tenth Revision, Clinical Modification',
-							'sameAs' => array(
-								'http://id.loc.gov/authorities/names/n2009185486', // Library of Congress Name Authority File entry for 'International statistical classification of diseases and related health problems. 10th revision. Clinical modification'
-								'https://www.wikidata.org/wiki/Q5969475' // Wikidata entry for 'ICD-10 Clinical Modification'
-							),
+							'description' => 'identifier in the ICD-10 Clinical Modification',
+							'name' => 'ICD-10-CM code',
+							'propertyID' => 'https://www.wikidata.org/wiki/Property:P4229', // Wikidata property entry for 'ICD-10-CM'
+							'sameAs' => 'https://bioregistry.io/registry/icd10cm',
 							'url' => 'https://www.cms.gov/medicare/coding/icd10'
 						),
 						'ICD-10-PCS-code' => array(
 							'alternateName' => array(
-								'International Statistical Classification of Diseases, Tenth Revision, Procedure Coding System',
-								'ICD-10 Procedure Coding System',
+								'ICD-10 PCS code',
+								'ICD-10 PCS ID',
+								'ICD-10 PCS',
+								'ICD-10-PCS code',
+								'ICD-10-PCS ID',
 								'ICD-10-PCS',
+								'ICD10PCS code',
+								'ICD10PCS ID',
 								'ICD10PCS',
+								'ICD-10 Procedure Coding System code',
+								'ICD-10 Procedure Coding System ID',
+								'ICD-10 Procedure Coding System',
+								'International Statistical Classification of Diseases, Tenth Revision, Procedure Coding System',
+								'International Statistical Classification of Diseases and Related Health Problems, Tenth Revision, Procedure Coding System'
 							),
-							'name' => 'International Statistical Classification of Diseases and Related Health Problems, Tenth Revision, Procedure Coding System',
-							'sameAs' => array(
-								'http://id.loc.gov/authorities/names/n2009185487', // Library of Congress Name Authority File entry for 'International statistical classification of diseases and related health problems. 10th revision. Procedure coding system'
-								'https://www.wikidata.org/wiki/Q9006342' // Wikidata entry for 'ICD-10 Procedure Coding System'
-							),
+							'description' => 'identifier in the ICD-10 Procedure Coding System',
+							'name' => 'ICD-10-PCS code',
+							'propertyID' => 'https://www.wikidata.org/wiki/Property:P1690', // Wikidata property entry for 'ICD-10-PCS'
+							'sameAs' => 'https://bioregistry.io/registry/icd10pcs',
 							'url' => 'https://www.cms.gov/medicare/coding/icd10'
 						),
 						'ICD-11-code' => array(
 							'alternateName' => array(
-								'International Statistical Classification of Diseases, Eleventh Revision',
+								'ICD code',
+								'ICD ID',
+								'ICD-11 MMS code',
+								'ICD-11 MMS ID',
+								'ICD-11 MMS',
 								'ICD-11',
+								'ICD11 MMS code',
+								'ICD11 MMS ID',
+								'ICD11 MMS',
+								'ICD11 code',
+								'ICD11 ID',
 								'ICD11',
+								'International Statistical Classification of Diseases, Eleventh Revision',
+								'International Classification of Diseases 11th Revision'
 							),
-							'name' => 'International Statistical Classification of Diseases and Related Health Problems, Eleventh Revision',
-							'sameAs' => array(
-								'http://id.loc.gov/authorities/names/n2010022952', // Library of Congress Name Authority File entry for 'International statistical classification of diseases and related health problems. 11th revision'
-								'https://www.wikidata.org/wiki/Q55695727' // Wikidata entry for 'International Classification of Diseases, Eleventh Revision (ICD-11)'
-							),
+							'description' => 'identifier in the ICD-11',
+							'name' => 'ICD-11 code',
+							'propertyID' => 'https://registry.identifiers.org/registry/icd',
+							'sameAs' => 'https://bioregistry.io/registry/icd11',
 							'url' => 'https://icd.who.int/en'
 						),
-							'alternateName' => 'ICHI',
-							'name' => 'International Classification of Health Interventions',
-							'sameAs' => 'https://www.wikidata.org/wiki/Q3505045', // Wikidata entry for 'International Classification of Health Interventions'
 						'ICHI-procedure-code' => array(
+							'alternateName' => array(
+								'ICHI code',
+								'International Classification of Health Interventions procedure code',
+								'International Classification of Health Interventions code'
+							),
+							'description' => 'classification system for reporting and statistical analysis of medical interventions',
+							'name' => 'ICHI procedure code',
+							'propertyID' => 'https://www.who.int/standards/classifications/international-classification-of-health-interventions',
+							'sameAs' => 'https://www.wikidata.org/wiki/Q3505045', // Wikidata item entry for 'International Classification of Health Interventions'
 							'url' => 'https://www.who.int/standards/classifications/international-classification-of-health-interventions'
 						),
-							'alternateName' => 'ICPC-2',
-							'name' => 'International Classification of Primary Care, Second Revision',
 						'ICPC-2-ID' => array(
+							'alternateName' => array(
+								'ICPC-2',
+								'ICPC 2 ID',
+								'ICPC 2 code',
+								'ICPC 2',
+								'ICPC2 ID',
+								'ICPC2 code',
+								'ICPC2e',
+								'ICPC-2e',
+								'ICPC 2e ID',
+								'ICPC 2e code',
+								'ICPC 2e',
+								'ICPC2e ID',
+								'ICPC2e code',
+								'ICPC2e',
+								'ICPC-2-E',
+								'ICPC 2-E ID',
+								'ICPC 2-E code',
+								'ICPC 2-E',
+								'ICPC2-E ID',
+								'ICPC2-E code',
+								'ICPC2-E',
+								'International Classification of Primary Care, Second Revision ID',
+								'International Classification of Primary Care, Third Revision ID'
+							),
+							'description' => 'classification method for primary care encounters',
+							'name' => 'ICPC-2 ID',
+							'propertyID' => 'https://www.wikidata.org/wiki/Property:P667', // Wikidata property entry for 'ICPC 2 ID'
+							'url' => 'https://icpc2.icpc-3.info/'
 						),
-							'alternateName' => 'ICPC-3',
-							'name' => 'International Classification of Primary Care, Third Revision',
 						'ICPC-3-ID' => array(
+							'alternateName' => array(
+								'ICPC-3',
+								'ICPC-3-EN',
+								'ICPC-3-EN ID',
+								'ICPC-3-EN code',
+								'ICPC 3 ID',
+								'ICPC 3 code',
+								'ICPC 3',
+								'ICPC3 ID',
+								'ICPC3 code',
+								'ICPC3e',
+								'ICPC-3e',
+								'ICPC 3e ID',
+								'ICPC 3e code',
+								'ICPC 3e',
+								'ICPC3e ID',
+								'ICPC3e code',
+								'ICPC3e',
+								'ICPC-3-E',
+								'ICPC 3-E ID',
+								'ICPC 3-E code',
+								'ICPC 3-E',
+								'ICPC3-E ID',
+								'ICPC3-E code',
+								'ICPC3-E',
+								'International Classification of Primary Care, Third Revision ID',
+								'International Classification of Primary Care, Third Revision code'
+							),
+							'description' => 'classification method for primary care encounters',
+							'name' => 'ICPC-3 ID',
+							'propertyID' => 'ICPC-3 ID',
 							'url' => 'https://www.icpc-3.info/'
 						),
-							'alternateName' => 'MeSH',
-							'name' => 'Medical Subject Headings',
 						'MeSH-descriptor-ID' => array(
+							'alternateName' => array(
+								'MeSH unique ID',
+								'MeSH ID',
+								'Medical Subject Headings descriptor ID',
+								'Medical Subject Headings unique ID',
+								'Medical Subject Headings ID'
+							),
+							'description' => 'identifier for Descriptor or Supplementary concept in the Medical Subject Headings controlled vocabulary',
+							'name' => 'MeSH descriptor ID',
+							'propertyID' => 'https://registry.identifiers.org/registry/mesh',
 							'sameAs' => array(
-								'http://id.loc.gov/authorities/names/n2013188677', // Library of Congress Name Authority File entry for 'National Library of Medicine (U.S.). Medical subject headings'
-								'https://www.wikidata.org/wiki/Q199897' // Wikidata entry for 'Medical Subject Headings'
+								'https://www.wikidata.org/wiki/Property:P486', // Wikidata property entry for 'MeSH descriptor ID'
+								'https://bioregistry.io/registry/mesh'
 							),
 							'url' => 'https://www.nlm.nih.gov/mesh/meshhome.html'
 						),
-							'name' => 'RxNorm',
-							'sameAs' => array(
-								'https://www.wikidata.org/wiki/Q7383767', // Wikidata entry for 'RxNorm'
-								'https://id.nlm.nih.gov/mesh/D062245.html'
 						'RxNorm-ID' => array(
+							'alternateName' => array(
+								'RxCui',
+								'RxNorm CUI',
+								'RXCUI'
 							),
+							'description' => 'identifier for the normalized clinical drug dictionary of the Unified Medical Language System',
+							'name' => 'RxNorm ID',
+							'propertyID' => 'https://www.wikidata.org/wiki/Property:P3345', // Wikidata property entry for 'RxNorm ID'
+							'sameAs' => 'https://bioregistry.io/registry/rxnorm',
 							'url' => 'https://www.nlm.nih.gov/research/umls/rxnorm/'
 						),
-							'alternateName' => 'SNOMED Clinical Terms',
-							'name' => 'SNOMED CT',
-							'sameAs' => array(
-								'http://id.loc.gov/authorities/names/n2005182509', // Library of Congress Name Authority File entry for 'SNOMED CT'
-								'https://www.wikidata.org/wiki/Q1753883' // Wikidata entry for 'SNOMED CT'
 						'SNOMED-CT-ID' => array(
+							'alternateName' => array(
+								'SCTID',
+								'SNOMED CT identifier',
+								'SNOMED Clinical Terms identifier',
+								'Systematized Nomenclature of Medicine CT identifier',
+								'Systematized Nomenclature of Medicine Clinical Terms identifier'
 							),
+							'description' => 'identifier in the SNOMED CT catalogue codes for diseases, symptoms and procedures',
+							'name' => 'SNOMED CT ID',
+							'propertyID' => 'https://registry.identifiers.org/registry/snomedct',
+							'sameAs' => 'https://www.wikidata.org/wiki/Property:P5806', // Wikidata property entry for 'SNOMED CT ID'
 							'url' => 'https://www.snomed.org/'
 						)
 					);
