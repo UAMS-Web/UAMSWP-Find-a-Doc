@@ -117,7 +117,7 @@ function uamswp_fad_schema_treatment(
 					// Eliminate PHP errors / reset variables
 
 						$treatment_item = array(); // Base array
-						$treatment_item_MedicalEntity = in_array( 'Service', $treatment_valid_types ) ? array() : null; // Base Service array
+						$treatment_item_MedicalEntity = in_array( 'MedicalEntity', $treatment_valid_types ) ? array() : null; // Base Service array
 						$treatment_additionalType = null;
 						$treatment_additionalType_repeater = null;
 						$treatment_alternateName = null;
