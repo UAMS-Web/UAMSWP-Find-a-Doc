@@ -132,6 +132,7 @@ function uamswp_fad_schema_treatment(
 						$treatment_duplicateTherapy = null;
 						$treatment_duplicateTherapy_relationship = null;
 						$treatment_id = null;
+						$treatment_identifier = null;
 						$treatment_imagingTechnique = null;
 						$treatment_name = null;
 						$treatment_procedureType = null;
@@ -658,7 +659,11 @@ function uamswp_fad_schema_treatment(
 
 									// Get code repeater field value
 
-										$treatment_code_repeater = get_field( 'schema_medicalcode', $entity ) ?? array();
+										if ( !isset($treatment_code_repeater) ) {
+
+											$treatment_code_repeater = get_field( 'schema_medicalcode', $entity ) ?? null;
+
+										}
 
 									// Add each item to code property values array
 
@@ -958,7 +963,7 @@ function uamswp_fad_schema_treatment(
 
 							}
 
-						// identifier [WIP]
+						// identifier
 
 							/**
 							 * The identifier property represents any kind of identifier for any kind of
@@ -972,6 +977,54 @@ function uamswp_fad_schema_treatment(
 							 *      - Text
 							 *      - URL
 							 */
+
+							if (
+								(
+									isset($treatment_item_Service)
+									&&
+									in_array(
+										'identifier',
+										$treatment_properties_map[$Service_type]['properties']
+									)
+								)
+							) {
+
+								// Get values
+
+									// Get code repeater field value
+
+										if ( !isset($treatment_code_repeater) ) {
+
+											$treatment_code_repeater = get_field( 'schema_medicalcode', $entity ) ?? null;
+
+										}
+
+									// Add each item to code property values array
+
+										if ( $treatment_code_repeater ) {
+
+											$treatment_identifier = uamswp_fad_schema_code(
+												'identifier', // enum('code', 'identifier') // Required // Schema property format to output
+												$treatment_code_repeater // array // Optional // code repeater field
+											);
+
+										}
+
+								// Add to item values
+
+									// Service
+
+										uamswp_fad_schema_add_to_item_values(
+											$Service_type, // string // Required // The @type value for the schema item
+											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											'identifier', // string // Required // Name of schema property
+											$treatment_identifier, // mixed // Required // Variable to add as the property value
+											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+											$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
+											($nesting_level + 1) // int // Required // Current nesting level value
+										);
+
+							}
 
 						// imagingTechnique
 
@@ -1532,9 +1585,15 @@ function uamswp_fad_schema_treatment(
 													 *      - MedicalEntity
 													 */
 
-													// Get code repeater field value
+													// Get values
 
-														$treatment_usesDevice_item_code_repeater = $item['schema_medicaldevice_code']['schema_medicalcode'] ?: array();
+														// Get code repeater field value
+
+															if ( !isset($treatment_usesDevice_item_code_repeater) ) {
+
+																$treatment_usesDevice_item_code_repeater = $item['schema_medicaldevice_code']['schema_medicalcode'] ?: null;
+
+															}
 
 														// Add each item to code property value array
 
@@ -1552,6 +1611,50 @@ function uamswp_fad_schema_treatment(
 														if ( $treatment_usesDevice_item_code ) {
 
 															$treatment_usesDevice_item['code'] = $treatment_usesDevice_item_code;
+
+														}
+
+												// identifier
+
+													/**
+													 * The identifier property represents any kind of identifier for any kind of
+													 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
+													 * properties for representing many of these, either as textual strings or as URL
+													 * (URI) links. See background notes for more details.
+													 *
+													 * Values expected to be one of these types:
+													 *
+													 *      - PropertyValue
+													 *      - Text
+													 *      - URL
+													 */
+
+													// Get values
+
+														// Get code repeater field value
+
+															if ( !isset($treatment_usesDevice_item_code_repeater) ) {
+
+																$treatment_usesDevice_item_code_repeater = $item['schema_medicaldevice_code']['schema_medicalcode'] ?: null;
+
+															}
+
+														// Add each item to identifier property value array
+
+															if ( $treatment_usesDevice_item_code_repeater ) {
+
+																$treatment_usesDevice_item_identifier = uamswp_fad_schema_code(
+																	'identifier', // enum('code', 'identifier') // Required // Schema property format to output
+																	$treatment_usesDevice_item_code_repeater // array // Optional // code repeater field
+																);
+
+															}
+
+													// Add to usesDevice property value item array
+
+														if ( $treatment_usesDevice_item_identifier ) {
+
+															$treatment_usesDevice_item['identifier'] = $treatment_usesDevice_item_identifier;
 
 														}
 
