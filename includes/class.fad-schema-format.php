@@ -2654,10 +2654,6 @@
 
 									if ( $inCodeSet ) {
 
-										// Update base code 'codingSystem' value with 'name' value from 'inCodeSet' property
-
-											$code_item['codingSystem'] = $inCodeSet_name ?? $code_item['codingSystem'];
-
 										// Define values for the 'inCodeSet' property
 
 											/**
@@ -2859,6 +2855,10 @@
 												 */
 
 												$inCodeSet_name = $inCodeSet['name'] ?? '';
+
+												// Update base code 'codingSystem' value with 'name' value from 'inCodeSet' property
+
+													$code_item['codingSystem'] = $inCodeSet_name ?? $code_item['codingSystem'];
 
 											// propertyID
 
