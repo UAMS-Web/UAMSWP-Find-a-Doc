@@ -215,8 +215,6 @@ function uamswp_fad_schema_condition(
 						 *      * expectedPrognosis
 						 *      * funding
 						 *      * guideline
-						 *      * identifyingExam
-						 *      * identifyingTest
 						 *      * image
 						 *      * legalStatus
 						 *      * mainEntityOfPage
