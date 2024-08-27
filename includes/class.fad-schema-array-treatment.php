@@ -84,11 +84,11 @@ function uamswp_fad_schema_treatment(
 
 					uamswp_fad_get_transient(
 						'item_' . $entity, // Required // String added to transient name for disambiguation.
-						$treatment_item_Service, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+						$treatment_item_MedicalEntity, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 						__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 					);
 
-				if ( !empty( $treatment_item_Service ) ) {
+				if ( !empty( $treatment_item_MedicalEntity ) ) {
 
 					/**
 					 * The transient exists.
@@ -97,7 +97,7 @@ function uamswp_fad_schema_treatment(
 
 					// Add to list of treatments and procedures
 
-						$treatment_list[] = $treatment_item_Service;
+						$treatment_list[] = $treatment_item_MedicalEntity;
 
 				} else {
 
@@ -117,7 +117,7 @@ function uamswp_fad_schema_treatment(
 					// Eliminate PHP errors / reset variables
 
 						$treatment_item = array(); // Base array
-						$treatment_item_Service = in_array( 'Service', $treatment_valid_types ) ? array() : null; // Base Service array
+						$treatment_item_MedicalEntity = in_array( 'Service', $treatment_valid_types ) ? array() : null; // Base Service array
 						$treatment_additionalType = null;
 						$treatment_additionalType_repeater = null;
 						$treatment_alternateName = null;
@@ -315,12 +315,12 @@ function uamswp_fad_schema_treatment(
 							// Add to schema
 
 								if (
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									$Service_type
 								) {
 
-									$treatment_item_Service['@type'] = $Service_type;
+									$treatment_item_MedicalEntity['@type'] = $Service_type;
 
 								}
 
@@ -337,13 +337,13 @@ function uamswp_fad_schema_treatment(
 							// Add to item values
 
 								if (
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									$treatment_id
 								) {
 
-									$treatment_item_Service['@id'] = $treatment_id;
-									$node_identifier_list[] = $treatment_item_Service['@id']; // Add to the list of existing node identifiers
+									$treatment_item_MedicalEntity['@id'] = $treatment_id;
+									$node_identifier_list[] = $treatment_item_MedicalEntity['@id']; // Add to the list of existing node identifiers
 
 								}
 
@@ -376,7 +376,7 @@ function uamswp_fad_schema_treatment(
 
 												uamswp_fad_schema_add_to_item_values(
 													$Service_type, // string // Required // The @type value for the schema item
-													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+													$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													$key, // string // Required // Name of schema property
 													$value, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -413,7 +413,7 @@ function uamswp_fad_schema_treatment(
 
 												uamswp_fad_schema_add_to_item_values(
 													$Service_type, // string // Required // The @type value for the schema item
-													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+													$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													$key, // string // Required // Name of schema property
 													$value, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -450,7 +450,7 @@ function uamswp_fad_schema_treatment(
 
 												uamswp_fad_schema_add_to_item_values(
 													$Service_type, // string // Required // The @type value for the schema item
-													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+													$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													$key, // string // Required // Name of schema property
 													$value, // mixed // Required // Variable to add as the property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -478,7 +478,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'name',
@@ -497,7 +497,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'name', // string // Required // Name of schema property
 											$treatment_name, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -533,7 +533,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'additionalType',
@@ -565,7 +565,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'additionalType', // string // Required // Name of schema property
 											$treatment_additionalType, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -587,7 +587,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'alternateName',
@@ -619,7 +619,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'alternateName', // string // Required // Name of schema property
 											$treatment_alternateName, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -646,7 +646,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'code',
@@ -682,7 +682,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'code', // string // Required // Name of schema property
 											$treatment_code, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -719,9 +719,9 @@ function uamswp_fad_schema_treatment(
 
 							// Unset value defined in common properties
 
-								if ( isset($treatment_item_Service['description']) ) {
+								if ( isset($treatment_item_MedicalEntity['description']) ) {
 
-									unset($treatment_item_Service['description']);
+									unset($treatment_item_MedicalEntity['description']);
 
 								}
 
@@ -737,7 +737,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'drug',
@@ -891,7 +891,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'drug', // string // Required // Name of schema property
 											$treatment_drug, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -913,7 +913,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'duplicateTherapy',
@@ -953,7 +953,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'duplicateTherapy', // string // Required // Name of schema property
 											$treatment_duplicateTherapy, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -980,7 +980,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'identifier',
@@ -1016,7 +1016,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'identifier', // string // Required // Name of schema property
 											$treatment_identifier, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -1038,7 +1038,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'imagingTechnique',
@@ -1057,7 +1057,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'imagingTechnique', // string // Required // Name of schema property
 											$treatment_imagingTechnique, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -1089,9 +1089,9 @@ function uamswp_fad_schema_treatment(
 
 							// Unset value defined in common properties
 
-								if ( isset($treatment_item_Service['mainEntityOfPage']) ) {
+								if ( isset($treatment_item_MedicalEntity['mainEntityOfPage']) ) {
 
-									unset($treatment_item_Service['mainEntityOfPage']);
+									unset($treatment_item_MedicalEntity['mainEntityOfPage']);
 
 								}
 
@@ -1120,7 +1120,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'procedureType',
@@ -1139,7 +1139,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'procedureType', // string // Required // Name of schema property
 											$treatment_procedureType, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -1172,7 +1172,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'relevantSpecialty',
@@ -1209,7 +1209,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'relevantSpecialty', // string // Required // Name of schema property
 											$treatment_relevantSpecialty, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -1233,7 +1233,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'sameAs',
@@ -1265,7 +1265,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'sameAs', // string // Required // Name of schema property
 											$treatment_sameAs, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -1297,7 +1297,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'subTest',
@@ -1337,7 +1337,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'subTest', // string // Required // Name of schema property
 											$treatment_subTest, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -1359,7 +1359,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'tissueSample',
@@ -1396,7 +1396,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'tissueSample', // string // Required // Name of schema property
 											$treatment_tissueSample, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -1418,7 +1418,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'usedToDiagnose',
@@ -1466,7 +1466,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'usedToDiagnose', // string // Required // Name of schema property
 											$treatment_usedToDiagnose, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -1488,7 +1488,7 @@ function uamswp_fad_schema_treatment(
 
 							if (
 								(
-									isset($treatment_item_Service)
+									isset($treatment_item_MedicalEntity)
 									&&
 									in_array(
 										'usesDevice',
@@ -1672,7 +1672,7 @@ function uamswp_fad_schema_treatment(
 
 										uamswp_fad_schema_add_to_item_values(
 											$Service_type, // string // Required // The @type value for the schema item
-											$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 											'usesDevice', // string // Required // Name of schema property
 											$treatment_usesDevice, // mixed // Required // Variable to add as the property value
 											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -1684,9 +1684,9 @@ function uamswp_fad_schema_treatment(
 
 					// Sort and combine the arrays
 
-						if ( isset($treatment_item_Service) ) {
+						if ( isset($treatment_item_MedicalEntity) ) {
 
-							ksort( $treatment_item_Service, SORT_NATURAL | SORT_FLAG_CASE );
+							ksort( $treatment_item_MedicalEntity, SORT_NATURAL | SORT_FLAG_CASE );
 
 						}
 
@@ -1694,13 +1694,13 @@ function uamswp_fad_schema_treatment(
 
 						uamswp_fad_set_transient(
 							'item_' . $entity, // Required // String added to transient name for disambiguation.
-							$treatment_item_Service, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+							$treatment_item_MedicalEntity, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 							__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 						);
 
 					// Add to list of treatments
 
-						$treatment_list[] = $treatment_item_Service;
+						$treatment_list[] = $treatment_item_MedicalEntity;
 
 				}
 

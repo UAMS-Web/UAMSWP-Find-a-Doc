@@ -931,6 +931,8 @@ function uamswp_fad_schema_condition(
 								$nesting_level <= 1
 							) {
 
+								echo '<p>possibleTreatment test</p>'; // testing
+
 								// Get values
 
 									// Get possibleTreatment relationship field value
