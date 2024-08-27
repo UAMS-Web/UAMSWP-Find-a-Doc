@@ -2342,7 +2342,8 @@
 							'name' => 'DiseasesDB',
 							'propertyID' => 'https://www.wikidata.org/wiki/Property:P557', // Wikidata property entry for 'DiseasesDB'
 							'sameAs' => 'https://bioregistry.io/registry/diseasesdb',
-							'url' => 'http://www.diseasesdatabase.com/'
+							'url' => 'http://www.diseasesdatabase.com/',
+							'code_url_pattern' => 'http://www.diseasesdatabase.com/ddb$1.htm'
 						),
 						'ICD-9-code' => array(
 							'alternateName' => array(
@@ -2358,7 +2359,8 @@
 							'name' => 'ICD-9 code',
 							'propertyID' => 'https://www.wikidata.org/wiki/Property:P493', // Wikidata property entry for 'ICD-9 ID'
 							'sameAs' => 'https://bioregistry.io/registry/icd9',
-							'url' => 'https://www.cdc.gov/nchs/icd/icd9.htm'
+							'url' => 'https://www.cdc.gov/nchs/icd/icd9.htm',
+							'code_url_pattern' => 'http://www.icd9data.com/getICD9Code.ashx?icd9=$1'
 						),
 						'ICD-9-CM-code' => array(
 							'alternateName' => array(
@@ -2377,7 +2379,8 @@
 							'name' => 'ICD-9-CM code',
 							'propertyID' => 'https://www.wikidata.org/wiki/Property:P1692', // Wikidata property entry for 'ICD-9-CM'
 							'sameAs' => 'https://bioregistry.io/registry/icd9cm',
-							'url' => 'https://www.cdc.gov/nchs/icd/icd9cm.htm'
+							'url' => 'https://www.cdc.gov/nchs/icd/icd9cm.htm',
+							'code_url_pattern' => 'http://icd9cm.chrisendres.com/index.php?action=search&srchtext=$1'
 						),
 						'ICD-10-code' => array(
 							'alternateName' => array(
@@ -2394,7 +2397,8 @@
 							'name' => 'ICD-10 code',
 							'propertyID' => 'https://www.wikidata.org/wiki/Property:P494', // Wikidata property entry for 'ICD-10 ID'
 							'sameAs' => 'https://bioregistry.io/registry/icd10',
-							'url' => 'https://icd.who.int/browse10/'
+							'url' => 'https://icd.who.int/browse10/',
+							'code_url_pattern' => 'https://icd.who.int/browse10/2019/en#/$1'
 						),
 						'ICD-10-CM-code' => array(
 							'alternateName' => array(
@@ -2417,7 +2421,8 @@
 							'name' => 'ICD-10-CM code',
 							'propertyID' => 'https://www.wikidata.org/wiki/Property:P4229', // Wikidata property entry for 'ICD-10-CM'
 							'sameAs' => 'https://bioregistry.io/registry/icd10cm',
-							'url' => 'https://www.cms.gov/medicare/coding/icd10'
+							'url' => 'https://www.cms.gov/medicare/coding/icd10',
+							'code_url_pattern' => 'https://icdcodelookup.com/icd-10/codes/$1'
 						),
 						'ICD-10-PCS-code' => array(
 							'alternateName' => array(
@@ -2440,7 +2445,8 @@
 							'name' => 'ICD-10-PCS code',
 							'propertyID' => 'https://www.wikidata.org/wiki/Property:P1690', // Wikidata property entry for 'ICD-10-PCS'
 							'sameAs' => 'https://bioregistry.io/registry/icd10pcs',
-							'url' => 'https://www.cms.gov/medicare/coding/icd10'
+							'url' => 'https://www.cms.gov/medicare/coding/icd10',
+							'code_url_pattern' => 'https://www.findacode.com/code.php?set=ICD10PCS&c=$1'
 						),
 						'ICD-11-code' => array(
 							'alternateName' => array(
@@ -2463,7 +2469,8 @@
 							'name' => 'ICD-11 code',
 							'propertyID' => 'https://registry.identifiers.org/registry/icd',
 							'sameAs' => 'https://bioregistry.io/registry/icd11',
-							'url' => 'https://icd.who.int/en'
+							'url' => 'https://icd.who.int/en',
+							'code_url_pattern' => ''
 						),
 						'ICHI-procedure-code' => array(
 							'alternateName' => array(
@@ -2475,7 +2482,8 @@
 							'name' => 'ICHI procedure code',
 							'propertyID' => 'https://www.who.int/standards/classifications/international-classification-of-health-interventions',
 							'sameAs' => 'https://www.wikidata.org/wiki/Q3505045', // Wikidata item entry for 'International Classification of Health Interventions'
-							'url' => 'https://www.who.int/standards/classifications/international-classification-of-health-interventions'
+							'url' => 'https://www.who.int/standards/classifications/international-classification-of-health-interventions',
+							'code_url_pattern' => ''
 						),
 						'ICPC-2-ID' => array(
 							'alternateName' => array(
@@ -2506,7 +2514,8 @@
 							'description' => 'classification method for primary care encounters',
 							'name' => 'ICPC-2 ID',
 							'propertyID' => 'https://www.wikidata.org/wiki/Property:P667', // Wikidata property entry for 'ICPC 2 ID'
-							'url' => 'https://icpc2.icpc-3.info/'
+							'url' => 'https://icpc2.icpc-3.info/',
+							'code_url_pattern' => 'https://www.hetop.eu/hetop/3CGP/en/?rr=CIP_D_$1'
 						),
 						'ICPC-3-ID' => array(
 							'alternateName' => array(
@@ -2540,7 +2549,8 @@
 							'description' => 'classification method for primary care encounters',
 							'name' => 'ICPC-3 ID',
 							'propertyID' => 'ICPC-3 ID',
-							'url' => 'https://www.icpc-3.info/'
+							'url' => 'https://www.icpc-3.info/',
+							'code_url_pattern' => ''
 						),
 						'MeSH-descriptor-ID' => array(
 							'alternateName' => array(
@@ -2557,7 +2567,8 @@
 								'https://www.wikidata.org/wiki/Property:P486', // Wikidata property entry for 'MeSH descriptor ID'
 								'https://bioregistry.io/registry/mesh'
 							),
-							'url' => 'https://www.nlm.nih.gov/mesh/meshhome.html'
+							'url' => 'https://www.nlm.nih.gov/mesh/meshhome.html',
+							'code_url_pattern' => 'https://meshb.nlm.nih.gov/record/ui?ui=$1',
 						),
 						'RxNorm-ID' => array(
 							'alternateName' => array(
@@ -2569,7 +2580,8 @@
 							'name' => 'RxNorm ID',
 							'propertyID' => 'https://www.wikidata.org/wiki/Property:P3345', // Wikidata property entry for 'RxNorm ID'
 							'sameAs' => 'https://bioregistry.io/registry/rxnorm',
-							'url' => 'https://www.nlm.nih.gov/research/umls/rxnorm/'
+							'url' => 'https://www.nlm.nih.gov/research/umls/rxnorm/',
+							'code_url_pattern' => 'https://mor.nlm.nih.gov/RxNav/search?searchBy=RXCUI&searchTerm=$1'
 						),
 						'SNOMED-CT-ID' => array(
 							'alternateName' => array(
@@ -2583,7 +2595,8 @@
 							'name' => 'SNOMED CT ID',
 							'propertyID' => 'https://registry.identifiers.org/registry/snomedct',
 							'sameAs' => 'https://www.wikidata.org/wiki/Property:P5806', // Wikidata property entry for 'SNOMED CT ID'
-							'url' => 'https://www.snomed.org/'
+							'url' => 'https://www.snomed.org/',
+							'code_url_pattern' => 'http://snomed.info/id/$1'
 						)
 					);
 
