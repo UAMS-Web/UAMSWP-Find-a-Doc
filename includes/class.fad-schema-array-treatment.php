@@ -665,6 +665,7 @@ function uamswp_fad_schema_treatment(
 										if ( $treatment_code_repeater ) {
 
 											$treatment_code = uamswp_fad_schema_code(
+												'code', // enum('code', 'identifier') // Required // Schema property format to output
 												$treatment_code_repeater // array // Optional // code repeater field
 											);
 
@@ -1540,6 +1541,7 @@ function uamswp_fad_schema_treatment(
 															if ( $treatment_usesDevice_item_code_repeater ) {
 
 																$treatment_usesDevice_item_code = uamswp_fad_schema_code(
+																	'code', // enum('code', 'identifier') // Required // Schema property format to output
 																	$treatment_usesDevice_item_code_repeater // array // Optional // code repeater field
 																);
 

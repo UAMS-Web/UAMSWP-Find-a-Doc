@@ -1991,6 +1991,7 @@ function uamswp_fad_schema_expertise(
 										) {
 
 											$expertise_code = uamswp_fad_schema_code(
+												'code', // enum('code', 'identifier') // Required // Schema property format to output
 												( $expertise_code_repeater ?: array() ), // array // Optional // code repeater field
 												( $expertise_nucc_array ?: array() ) // array // Optional // Health Care Provider Taxonomy Code Set taxonomy field
 											);

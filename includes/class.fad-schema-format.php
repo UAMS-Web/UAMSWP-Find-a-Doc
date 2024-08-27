@@ -2295,24 +2295,34 @@
 // Add data to an array defining schema data for code (MedicalCode) and identifier (PropertyValue)
 
 	function uamswp_fad_schema_code(
+		string $format, // enum('code', 'identifier') // Required // Schema property format to output
 		array $code_repeater = array(), // array // Optional // code repeater field
 		array $nucc = array() // array // Optional // Health Care Provider Taxonomy Code Set taxonomy field
 	) {
 
-		// Base list array
+		// Base arrays
 
+			$output = array();
 			$code_list = array();
 			$identifier_list = array();
 
-		// If neither argument has values, stop here
+		// If function arguments are empty or invalid, stop here
 
 			if (
-				empty($code_repeater)
-				&&
-				empty($nucc)
+				(
+					empty($code_repeater)
+					&&
+					empty($nucc)
+				)
+				||
+				(
+					$format != 'code'
+					&&
+					$format != 'identifier'
+				)
 			) {
 
-				return $code_list;
+				return $output;
 
 			}
 
@@ -3035,7 +3045,19 @@
 
 				} // endif ( $identifier_list )
 
-		return $code_list;
+		// Determine output format
+
+			if ( $format == 'code' ) {
+
+				$output = $code_list;
+
+			} elseif ( $format == 'identifier' ) {
+
+				$output = $identifier_list;
+
+			}
+
+		return $output;
 
 	}
 

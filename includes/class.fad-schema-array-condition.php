@@ -650,6 +650,7 @@ function uamswp_fad_schema_condition(
 										if ( $condition_code_repeater ) {
 
 											$condition_code = uamswp_fad_schema_code(
+												'code', // enum('code', 'identifier') // Required // Schema property format to output
 												$condition_code_repeater // array // Optional // code repeater field
 											);
 
