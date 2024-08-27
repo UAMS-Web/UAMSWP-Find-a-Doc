@@ -2642,35 +2642,301 @@
 
 									if ( $inCodeSet ) {
 
-										$inCodeSet_alternateName = $inCodeSet['alternateName'] ?? array();
-										$inCodeSet_description = $inCodeSet['description'] ?? '';
-										$inCodeSet_name = $inCodeSet['name'] ?? '';
-										$inCodeSet_propertyID = $inCodeSet['propertyID'] ?? '';
-										$code_item['codingSystem'] = $inCodeSet_name ?? $code_item['codingSystem']; // Update base code 'codingSystem' value with 'name' value from 'inCodeSet' property
-										$inCodeSet_sameAs = $inCodeSet['sameAs'] ?? array();
-										$inCodeSet_url = $inCodeSet['url'] ?? '';
+										// Update base code 'codingSystem' value with 'name' value from 'inCodeSet' property
 
-										if ( $inCodeSet_name ) {
+											$code_item['codingSystem'] = $inCodeSet_name ?? $code_item['codingSystem'];
 
-											$code_item['inCodeSet'] = array(
-												'@type' => 'CategoryCodeSet',
-												'alternateName' => $inCodeSet_alternateName,
-												'name' => $inCodeSet_name,
-												'sameAs' => $inCodeSet_sameAs,
-												'url' => $inCodeSet_url
-											);
+										// Define values for the 'inCodeSet' property
 
-										} // endif ( $inCodeSet_name )
+											/**
+											 * The following properties are either beyond the scope of what is being included
+											 * in the inCodeSet / CategoryCodeSet schema (or the information in the identifier
+											 * schema specific to the code set); irrelevant to that schema; or are superseded
+											 * by another property and so they will not be included here:
+											 *
+											 *      * about
+											 *      * abstract
+											 *      * accessMode
+											 *      * accessModeSufficient
+											 *      * accessibilityAPI
+											 *      * accessibilityControl
+											 *      * accessibilityFeature
+											 *      * accessibilityHazard
+											 *      * accessibilitySummary
+											 *      * accountablePerson
+											 *      * acquireLicensePage
+											 *      * additionalType
+											 *      * aggregateRating
+											 *      * alternativeHeadline
+											 *      * archivedAt
+											 *      * assesses
+											 *      * associatedMedia
+											 *      * audience
+											 *      * audio
+											 *      * author
+											 *      * award
+											 *      * awards
+											 *      * character
+											 *      * citation
+											 *      * comment
+											 *      * commentCount
+											 *      * conditionsOfAccess
+											 *      * contentLocation
+											 *      * contentRating
+											 *      * contentReferenceTime
+											 *      * contributor
+											 *      * copyrightHolder
+											 *      * copyrightNotice
+											 *      * copyrightYear
+											 *      * correction
+											 *      * countryOfOrigin
+											 *      * creativeWorkStatus
+											 *      * creator
+											 *      * creditText
+											 *      * dateCreated
+											 *      * dateModified
+											 *      * datePublished
+											 *      * digitalSourceType
+											 *      * disambiguatingDescription
+											 *      * discussionUrl
+											 *      * editEIDR
+											 *      * editor
+											 *      * educationalAlignment
+											 *      * educationalLevel
+											 *      * educationalUse
+											 *      * encoding
+											 *      * encodingFormat
+											 *      * encodings
+											 *      * exampleOfWork
+											 *      * expires
+											 *      * fileFormat
+											 *      * funder
+											 *      * funding
+											 *      * genre
+											 *      * hasCategoryCode
+											 *      * hasDefinedTerm
+											 *      * hasPart
+											 *      * headline
+											 *      * identifier
+											 *      * image
+											 *      * inLanguage
+											 *      * interactionStatistic
+											 *      * interactivityType
+											 *      * interpretedAsClaim
+											 *      * isAccessibleForFree
+											 *      * isBasedOn
+											 *      * isBasedOnUrl
+											 *      * isFamilyFriendly
+											 *      * isPartOf
+											 *      * keywords
+											 *      * learningResourceType
+											 *      * license
+											 *      * locationCreated
+											 *      * mainEntity
+											 *      * mainEntityOfPage
+											 *      * maintainer
+											 *      * material
+											 *      * materialExtent
+											 *      * maxValue
+											 *      * measurementMethod
+											 *      * measurementTechnique
+											 *      * mentions
+											 *      * minValue
+											 *      * offers
+											 *      * pattern
+											 *      * position
+											 *      * potentialAction
+											 *      * producer
+											 *      * propertyID
+											 *      * provider
+											 *      * publication
+											 *      * publisher
+											 *      * publisherImprint
+											 *      * publishingPrinciples
+											 *      * recordedAt
+											 *      * releasedEvent
+											 *      * review
+											 *      * reviews
+											 *      * schemaVersion
+											 *      * sdDatePublished
+											 *      * sdLicense
+											 *      * sdPublisher
+											 *      * size
+											 *      * sourceOrganization
+											 *      * spatial
+											 *      * spatialCoverage
+											 *      * sponsor
+											 *      * subjectOf
+											 *      * teaches
+											 *      * temporal
+											 *      * temporalCoverage
+											 *      * text
+											 *      * thumbnail
+											 *      * thumbnailUrl
+											 *      * timeRequired
+											 *      * translationOfWork
+											 *      * translator
+											 *      * typicalAgeRange
+											 *      * unitCode
+											 *      * unitText
+											 *      * usageInfo
+											 *      * value
+											 *      * valueReference
+											 *      * version
+											 *      * video
+											 *      * workExample
+											 *      * workTranslation
+											 */
 
-										if ( $inCodeSet_name || $inCodeSet_propertyID ) {
+											// alternateName
 
-											$identifier_item['alternateName'] = $inCodeSet_alternateName;
-											$identifier_item['description'] = $inCodeSet_description;
-											$identifier_item['name'] = $inCodeSet_name;
-											$identifier_item['propertyID'] = $inCodeSet_propertyID;
-											$identifier_item['sameAs'] = $inCodeSet_sameAs;
+												/**
+												 * An alias for the item.
+												 *
+												 * Values expected to be one of these types:
+												 *
+												 *      - Text
+												 *
+												 * Used on these types:
+												 *
+												 *      - Thing
+												 */
 
-										} // endif ( $inCodeSet_name )
+												$inCodeSet_alternateName = $inCodeSet['alternateName'] ?? array();
+
+											// description
+
+												/**
+												 * A description of the item.
+												 *
+												 * Values expected to be one of these types:
+												 *
+												 *      - Text
+												 *      - TextObject
+												 *
+												 * Used on these types:
+												 *
+												 *      - Thing
+												 *
+												 * Sub-properties:
+												 *
+												 *      - disambiguatingDescription
+												 *      - interpretedAsClaim
+												 *      - originalMediaContextDescription
+												 *      - sha256
+												 */
+
+												$inCodeSet_description = $inCodeSet['description'] ?? '';
+
+											// name
+
+												/**
+												 * The name of the item.
+												 *
+												 * Subproperty of:
+												 *
+												 *      - rdfs:label
+												 *
+												 * Values expected to be one of these types:
+												 *
+												 *      - Text
+												 *
+												 * Used on these types:
+												 *
+												 *      - Thing
+												 */
+
+												$inCodeSet_name = $inCodeSet['name'] ?? '';
+
+											// propertyID
+
+												/**
+												 * A commonly used identifier for the characteristic represented by the property,
+												 * e.g. a manufacturer or a standard code for a property.
+												 *
+												 * propertyID can be
+												 *
+												 *      (1) a prefixed string, mainly meant to be used with standards for product properties
+												 *      (2) a site-specific, non-prefixed string (e.g. the primary key of the property or
+												 *          the vendor-specific ID of the property)
+												 *      (3) a URL indicating the type of the property, either pointing to an external
+												 *          vocabulary, or a Web resource that describes the property (e.g. a glossary
+												 *          entry).
+												 *
+												 * Standards bodies should promote a standard prefix for the identifiers of
+												 * properties from their standards.
+												 *
+												 * Values expected to be one of these types:
+												 *
+												 *      - Text
+												 *      - URL
+												 *
+												 * Used on these types:
+												 *
+												 *      - PropertyValue
+												 */
+
+												$inCodeSet_propertyID = $inCodeSet['propertyID'] ?? '';
+
+											// sameAs
+
+												/**
+												 * URL of a reference Web page that unambiguously indicates the item's identity
+												 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
+												 * website).
+												 *
+												 * Values expected to be one of these types:
+												 *
+												 *      - URL
+												 *
+												 * Used on these types:
+												 *
+												 *      - Thing
+												 */
+
+												$inCodeSet_sameAs = $inCodeSet['sameAs'] ?? array();
+
+											// url
+
+												/**
+												 * URL of the item.
+												 *
+												 * Values expected to be one of these types:
+												 *
+												 *      - URL
+												 *
+												 * Used on these types:
+												 *
+												 *      - Thing
+												 */
+
+												$inCodeSet_url = $inCodeSet['url'] ?? '';
+
+										// Add code set values for an individual medical code in the 'inCodeSet' property of the 'MedicalCode' value
+
+											if ( $inCodeSet_name ) {
+
+												$code_item['inCodeSet'] = array(
+													'@type' => 'CategoryCodeSet',
+													'alternateName' => $inCodeSet_alternateName,
+													'name' => $inCodeSet_name,
+													'sameAs' => $inCodeSet_sameAs,
+													'url' => $inCodeSet_url
+												);
+
+											} // endif ( $inCodeSet_name )
+
+										// Add code set values for an individual medical code in the 'identifier' property
+
+											if ( $inCodeSet_name || $inCodeSet_propertyID ) {
+
+												$identifier_item['alternateName'] = $inCodeSet_alternateName;
+												$identifier_item['description'] = $inCodeSet_description;
+												$identifier_item['name'] = $inCodeSet_name;
+												$identifier_item['propertyID'] = $inCodeSet_propertyID;
+												$identifier_item['sameAs'] = $inCodeSet_sameAs;
+
+											} // endif ( $inCodeSet_name )
 
 									} // endif ( $inCodeSet )
 
