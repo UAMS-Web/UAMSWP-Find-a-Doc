@@ -224,7 +224,7 @@ function uamswp_fad_schema_treatment(
 						 *      * affectedBy
 						 *      * bodyLocation
 						 *      * contraindication
-						 *      * description
+						 *      * description (unset below)
 						 *      * disambiguatingDescription
 						 *      * doseSchedule
 						 *      * followup
@@ -232,7 +232,7 @@ function uamswp_fad_schema_treatment(
 						 *      * guideline
 						 *      * howPerformed
 						 *      * image
-						 *      * mainEntityOfPage
+						 *      * mainEntityOfPage (unset below)
 						 *      * normalRange
 						 *      * potentialAction
 						 *      * preparation
