@@ -2292,7 +2292,7 @@
 
 	}
 
-// Add data to an array defining schema data for code (MedicalCode)
+// Add data to an array defining schema data for code (MedicalCode) and identifier (PropertyValue)
 
 	function uamswp_fad_schema_code(
 		array $code_repeater = array(), // array // Optional // code repeater field
@@ -2302,6 +2302,7 @@
 		// Base list array
 
 			$code_list = array();
+			$identifier_list = array();
 
 		// If neither argument has values, stop here
 
@@ -2580,9 +2581,10 @@
 
 					foreach ( $code_repeater as $code ) {
 
-						// Base item array
+						// Base item arrays
 
 							$code_item = array();
+							$identifier_item = array();
 
 						// Get values from the row
 
@@ -2942,7 +2944,7 @@
 
 							} // endif ( $codeValue && $codingSystem )
 
-						// Clean up item array
+						// Clean up item arrays
 
 							if ( $code_item ) {
 
@@ -2958,13 +2960,23 @@
 
 							} // endif ( $identifier_item )
 
-						// Add to code item to list of codes
+						// Add items to the output lists
 
-							if ( $code_item ) {
+							// code
 
-								$code_list[] = $code_item;
+								if ( $code_item ) {
 
-							} // endif ( $code_item )
+									$code_list[] = $code_item;
+
+								} // endif ( $code_item )
+
+							// identifier
+
+								if ( $identifier_item ) {
+
+									$identifier_list[] = $identifier_item;
+
+								} // endif ( $identifier_item )
 
 					} // endforeach ( $code_repeater as $code )
 
@@ -2972,29 +2984,56 @@
 
 		// Health Care Provider Taxonomy Code Set taxonomy items
 
-			$code_list = uamswp_fad_schema_nucc_code_set_id(
-				$nucc, // int|int[] // Required // List of Clinical Specialization term IDs
-				$code_list // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
-			);
+			// code
 
-		// Clean up list array
+				$code_list = uamswp_fad_schema_nucc_code_set_id(
+					$nucc, // int|int[] // Required // List of Clinical Specialization term IDs
+					$code_list // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
+				);
 
-			if ( $code_list ) {
+			// identifier
 
-				$code_list = array_filter($code_list);
+				/* WIP */
 
-				if ( array_is_list($code_list) ) {
+		// Clean up list arrays
 
-					$code_list = array_unique( $code_list, SORT_REGULAR );
-					$code_list = array_values($code_list);
+			// code
 
-				}
+				if ( $code_list ) {
 
-				// If there is only one item, flatten the multi-dimensional array by one step
+					$code_list = array_filter($code_list);
 
-					uamswp_fad_flatten_multidimensional_array($code_list);
+					if ( array_is_list($code_list) ) {
 
-			}
+						$code_list = array_unique( $code_list, SORT_REGULAR );
+						$code_list = array_values($code_list);
+
+					}
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($code_list);
+
+				} // endif ( $code_list )
+
+			// identifier
+
+				if ( $identifier_list ) {
+
+					$identifier_list = array_filter($identifier_list);
+
+					if ( array_is_list($identifier_list) ) {
+
+						$identifier_list = array_unique( $identifier_list, SORT_REGULAR );
+						$identifier_list = array_values($identifier_list);
+
+					}
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($identifier_list);
+
+				} // endif ( $identifier_list )
 
 		return $code_list;
 
