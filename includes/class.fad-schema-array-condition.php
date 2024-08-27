@@ -124,8 +124,9 @@ function uamswp_fad_schema_condition(
 						$condition_alternateName = array();
 						$condition_alternateName_repeater = array();
 						$condition_code = array();
-						$condition_code_repeater = array();
+						$condition_code_repeater = null;
 						$condition_id = '';
+						$condition_identifier = null;
 						$condition_infectiousAgent = '';
 						$condition_infectiousAgentClass = '';
 						$condition_name = '';
@@ -643,7 +644,11 @@ function uamswp_fad_schema_condition(
 
 									// Get code repeater field value
 
-										$condition_code_repeater = get_field( 'schema_medicalcode', $entity ) ?? array();
+										if ( !isset($condition_code_repeater) ) {
+
+											$condition_code_repeater = get_field( 'schema_medicalcode', $entity ) ?? null;
+
+										}
 
 									// Add each item to code property values array
 
@@ -672,7 +677,7 @@ function uamswp_fad_schema_condition(
 
 							}
 
-						// identifier [WIP]
+						// identifier
 
 							/**
 							 * The identifier property represents any kind of identifier for any kind of
@@ -686,6 +691,54 @@ function uamswp_fad_schema_condition(
 							 *      - Text
 							 *      - URL
 							 */
+
+							if (
+								(
+									isset($condition_item_MedicalCondition)
+									&&
+									in_array(
+										'identifier',
+										$condition_properties_map[$MedicalCondition_type]['properties']
+									)
+								)
+							) {
+
+								// Get values
+
+									// Get code repeater field value
+
+										if ( !isset($condition_code_repeater) ) {
+
+											$condition_code_repeater = get_field( 'schema_medicalcode', $entity ) ?? null;
+
+										}
+
+									// Add each item to code property values array
+
+										if ( $condition_code_repeater ) {
+
+											$condition_identifier = uamswp_fad_schema_code(
+												'identifier', // enum('code', 'identifier') // Required // Schema property format to output
+												$condition_code_repeater // array // Optional // code repeater field
+											);
+
+										}
+
+								// Add to item values
+
+									// MedicalCondition
+
+										uamswp_fad_schema_add_to_item_values(
+											$MedicalCondition_type, // string // Required // The @type value for the schema item
+											$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+											'identifier', // string // Required // Name of schema property
+											$condition_identifier, // mixed // Required // Variable to add as the property value
+											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+											$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+											($nesting_level + 1) // int // Required // Current nesting level value
+										);
+
+							}
 
 						// identifyingExam [WIP]
 
