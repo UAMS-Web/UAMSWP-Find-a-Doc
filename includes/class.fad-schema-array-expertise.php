@@ -2024,7 +2024,7 @@ function uamswp_fad_schema_expertise(
 											($nesting_level + 1) // int // Required // Current nesting level value
 										);
 
-								// Get names for keywords property
+								// Get code names and values for keywords property
 
 									$expertise_code = $expertise_code ?? null;
 
@@ -2037,7 +2037,7 @@ function uamswp_fad_schema_expertise(
 
 									}
 
-									// Merge gender keywords value into keywords
+									// Merge code keywords value into keywords
 
 										$expertise_code_keywords = $expertise_code_keywords ?? null;
 
