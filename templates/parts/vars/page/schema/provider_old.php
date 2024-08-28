@@ -82,8 +82,8 @@ $page_id = get_the_ID();
 					if ( function_exists('uamswp_fad_schema_location') ) {
 
 						$provider_related_location = uamswp_fad_schema_location(
-							$locations, // List of IDs of the location items
-							$schema_provider_url, // Page URL
+							$locations, // array // Required // List of IDs of the location items
+							$schema_provider_url, // string // Required // Page URL
 							$node_identifier_list // array // Optional // List of node identifiers (@id) already defined in the schema
 						);
 
@@ -129,14 +129,14 @@ $page_id = get_the_ID();
 				if ( function_exists('uamswp_fad_schema_expertise') ) {
 
 					$provider_related_expertise = uamswp_fad_schema_expertise(
-						$expertises, // List of IDs of the clinical resource items
-						$page_url, // Page URL
+						$expertises, // array // Required // List of IDs of the area of expertise items
+						$page_url, // string // Required // Page or fake subpage URL
 						$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
-						1, // Nesting level within the main schema
-						$MedicalWebPage_i, // int // Optional //  Iteration counter for area of expertise-as-MedicalWebPage
-						$MedicalEntity_i, // int // Optional //  Iteration counter for area of expertise-as-MedicalEntity
-						$MedicalCondition_i, // int // Optional //  Iteration counter for condition
-						$Service_i, // int // Optional //  Iteration counter for treatments and procedures
+						1, // int // Optional // Nesting level within the main schema
+						$MedicalWebPage_i, // int // Optional // Iteration counter for area of expertise-as-MedicalWebPage
+						$MedicalEntity_i, // int // Optional // Iteration counter for area of expertise-as-MedicalEntity
+						$MedicalCondition_i, // int // Optional // Iteration counter for condition
+						$Service_i, // int // Optional // Iteration counter for treatments and procedures
 					);
 
 				} else {
@@ -175,10 +175,10 @@ $page_id = get_the_ID();
 				if ( function_exists('uamswp_fad_schema_clinical_resource') ) {
 
 					$provider_related_clinical_resource = uamswp_fad_schema_clinical_resource(
-						$clinical_resources, // List of IDs of the clinical resource items
-						$page_url, // Page URL
+						$clinical_resources, // array // Required // List of IDs of the clinical resource items
+						$page_url, // string // Required // Page URL
 						$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
-						1 // Nesting level within the main schema
+						1 // int // Optional // Nesting level within the main schema
 					);
 
 				} else {

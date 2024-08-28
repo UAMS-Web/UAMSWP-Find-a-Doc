@@ -16511,7 +16511,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 	function uamswp_fad_combinations(
 		array $input, // array // Required // Multi-dimensional array with choice lists nested in arrays
-		int $i = 0 // int // Option // Iteration counter
+		int $i = 0 // int // Optional // Iteration counter
 	) {
 
 		/*

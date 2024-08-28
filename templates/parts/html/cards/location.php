@@ -75,15 +75,19 @@
 
 		if ( function_exists('uamswp_fad_schema_location') ) {
 
+			$MedicalWebPage_i = $MedicalWebPage_i ?? 1, // Iteration counter for location-as-MedicalWebPage
+			$LocalBusiness_i = $LocalBusiness_i ?? 1; // Iteration counter for location-as-LocalBusiness
+
 			$LocalBusiness_list = $LocalBusiness_list + uamswp_fad_schema_location(
-				array($page_id), // List of IDs of the location items
-				$location_url, // Page URL
+				array($page_id), // array // Required // List of IDs of the location items
+				$location_url, // string // Required // Page URL
 				$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-				1, // Nesting level within the main schema
-				1, // Iteration counter for location-as-MedicalWebPage
-				1, // Iteration counter for location-as-LocalBusiness
-				$LocalBusiness_fields, // Pre-existing field values array so duplicate calls can be avoided
-				$LocalBusiness_list // Pre-existing list array to which to add additional items
+				1, // int // Optional // Nesting level within the main schema
+				$MedicalWebPage_i, // int // Optional // Iteration counter for location-as-MedicalWebPage
+				$LocalBusiness_i, // int // Optional // Iteration counter for location-as-LocalBusiness
+				$LocalBusiness_fields, // array // Optional // Pre-existing field values array so duplicate calls can be avoided
+				array(), // array // Optional // Pre-existing list array for location-as-MedicalWebPage to which to add additional items
+				$LocalBusiness_list // array // Optional // Pre-existing list array for location-as-LocalBusiness to which to add additional items
 			);
 
 		} else {

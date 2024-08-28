@@ -7,16 +7,16 @@
  */
 
 function uamswp_fad_schema_location(
-	array $repeater, // List of IDs of the location items
-	string $page_url, // Page URL
+	array $repeater, // array // Required // List of IDs of the location items
+	string $page_url, // string // Required // Page URL
 	array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
-	int $nesting_level = 1, // Nesting level within the main schema
-	int $MedicalWebPage_i = 1, // Iteration counter for location-as-MedicalWebPage
-	int $LocalBusiness_i = 1, // Iteration counter for location-as-LocalBusiness
-	array $location_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
-	array $MedicalWebPage_list = array(), // Pre-existing list array for location-as-MedicalWebPage to which to add additional items
-	array $LocalBusiness_list = array(), // Pre-existing list array for location-as-LocalBusiness to which to add additional items
-	array $location_list = array() // Pre-existing list array for combined location schema to which to add additional items
+	int $nesting_level = 1, // int // Optional // Nesting level within the main schema
+	int $MedicalWebPage_i = 1, // int // Optional // Iteration counter for location-as-MedicalWebPage
+	int $LocalBusiness_i = 1, // int // Optional // Iteration counter for location-as-LocalBusiness
+	array $location_fields = array(), // array // Optional // Pre-existing field values array so duplicate calls can be avoided
+	array $MedicalWebPage_list = array(), // array // Optional // Pre-existing list array for location-as-MedicalWebPage to which to add additional items
+	array $LocalBusiness_list = array(), // array // Optional // Pre-existing list array for location-as-LocalBusiness to which to add additional items
+	array $location_list = array() // array // Optional // Pre-existing list array for combined location schema to which to add additional items
 ) {
 
 	if ( !empty($repeater) ) {
@@ -1270,10 +1270,10 @@ function uamswp_fad_schema_location(
 												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
 												$location_descendant_location = uamswp_fad_schema_location(
-													$location_descendant_location_ids, // List of IDs of the location items
-													$location_url, // Page URL
+													$location_descendant_location_ids, // array // Required // List of IDs of the location items
+													$location_url, // string // Required // Page URL
 													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													($nesting_level + 1) // Nesting level within the main schema
+													($nesting_level + 1) // int // Optional // Nesting level within the main schema
 												) ?? null;
 
 												if ( isset($location_descendant_location) ) {
@@ -1377,16 +1377,16 @@ function uamswp_fad_schema_location(
 											if ( function_exists('uamswp_fad_schema_expertise') ) {
 
 												$location_expertise = uamswp_fad_schema_expertise(
-													$location_expertise_list, // List of IDs of the area of expertise items
+													$location_expertise_list, // array // Required // List of IDs of the area of expertise items
 													'', // string // Required // Page or fake subpage URL
 													true, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
 													'', // string // Required // Fake subpage slug
 													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													( $nesting_level + 1 ), // Nesting level within the main schema
-													$MedicalWebPage_i, // int // Optional //  Iteration counter for area of expertise-as-MedicalWebPage
-													$MedicalEntity_i, // int // Optional //  Iteration counter for area of expertise-as-MedicalEntity
-													$MedicalCondition_i, // int // Optional //  Iteration counter for condition
-													$Service_i, // int // Optional //  Iteration counter for treatments and procedures
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$MedicalWebPage_i, // int // Optional // Iteration counter for area of expertise-as-MedicalWebPage
+													$MedicalEntity_i, // int // Optional // Iteration counter for area of expertise-as-MedicalEntity
+													$MedicalCondition_i, // int // Optional // Iteration counter for condition
+													$Service_i, // int // Optional // Iteration counter for treatments and procedures
 												) ?? null;
 
 											} else {
@@ -1502,10 +1502,10 @@ function uamswp_fad_schema_location(
 											if ( function_exists('uamswp_fad_schema_clinical_resource') ) {
 
 												$location_clinical_resource = uamswp_fad_schema_clinical_resource(
-													$location_clinical_resource_list, // List of IDs of the clinical resource items
-													$location_url, // Page URL
+													$location_clinical_resource_list, // array // Required // List of IDs of the clinical resource items
+													$location_url, // string // Required // Page URL
 													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													( $nesting_level + 1 ) // Nesting level within the main schema
+													( $nesting_level + 1 ) // int // Optional // Nesting level within the main schema
 												) ?? null;
 
 											} else {
@@ -1823,10 +1823,10 @@ function uamswp_fad_schema_location(
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
 											$location_parent_LocalBusiness = uamswp_fad_schema_location(
-												array($location_parent_id), // List of IDs of the location items
-												$location_url, // Page URL
+												array($location_parent_id), // array // Required // List of IDs of the location items
+												$location_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												($nesting_level + 1) // Nesting level within the main schema
+												($nesting_level + 1) // int // Optional // Nesting level within the main schema
 											)['LocalBusiness'] ?? array();
 
 										}

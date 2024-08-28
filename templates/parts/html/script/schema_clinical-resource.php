@@ -21,14 +21,17 @@ $page_id = get_the_ID();
 
 	if ( function_exists('uamswp_fad_schema_clinical_resource') ) {
 
+		$MedicalWebPage_i = $MedicalWebPage_i ?? 1, // Iteration counter for clinical resource-as-MedicalWebPage
+		$CreativeWork_i = $CreativeWork_i ?? 1, // Iteration counter for clinical resource-as-CreativeWork
+
 		$schema_clinical_resource_combined = uamswp_fad_schema_clinical_resource(
-			array($page_id), // List of IDs of the clinical resource items
-			$page_url, // Page URL
+			array($page_id), // array // Required // List of IDs of the clinical resource items
+			$page_url, // string // Required // Page URL
 			$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
-			0, // Nesting level within the main schema
-			1, // Iteration counter for clinical resource-as-MedicalWebPage
-			1, // Iteration counter for clinical resource-as-CreativeWork
-			$clinical_resource_schema_fields // Pre-existing field values array so duplicate calls can be avoided
+			0, // int // Optional // Nesting level within the main schema
+			$MedicalWebPage_i, // int // Optional // Iteration counter for clinical resource-as-MedicalWebPage
+			$CreativeWork_i, // int // Optional // Iteration counter for clinical resource-as-CreativeWork
+			$clinical_resource_schema_fields // array // Optional // Pre-existing field values array so duplicate calls can be avoided
 		);
 
 	} else {

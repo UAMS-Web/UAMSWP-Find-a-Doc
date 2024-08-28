@@ -25,8 +25,8 @@ $page_id = get_the_ID();
 			$page_url, // Page URL
 			$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
 			0, // Nesting level within the main schema
-			1, // Iteration counter for location-as-MedicalWebPage
-			1, // Iteration counter for location-as-LocalBusiness
+			1, // int // Optional // Iteration counter for location-as-MedicalWebPage
+			1, // int // Optional // Iteration counter for location-as-LocalBusiness
 			$location_schema_fields // Pre-existing field values array so duplicate calls can be avoided
 		);
 

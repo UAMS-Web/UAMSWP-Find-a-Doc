@@ -7,16 +7,16 @@
  */
 
 function uamswp_fad_schema_clinical_resource(
-	array $repeater, // List of IDs of the clinical resource items
-	string $page_url, // Page URL
+	array $repeater, // array // Required // List of IDs of the clinical resource items
+	string $page_url, // string // Required // Page URL
 	array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
-	int $nesting_level = 1, // Nesting level within the main schema
-	int $MedicalWebPage_i = 1, // Iteration counter for clinical resource-as-MedicalWebPage
-	int $CreativeWork_i = 1, // Iteration counter for clinical resource-as-CreativeWork
-	array $clinical_resource_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
-	array $MedicalWebPage_list = array(), // Pre-existing list array for clinical resource-as-MedicalWebPage to which to add additional items
-	array $CreativeWork_list = array(), // Pre-existing list array for clinical resource-as-CreativeWork to which to add additional items
-	array $clinical_resource_list = array() // Pre-existing list array for combined clinical resource schema to which to add additional items
+	int $nesting_level = 1, // int // Optional // Nesting level within the main schema
+	int $MedicalWebPage_i = 1, // int // Optional // Iteration counter for clinical resource-as-MedicalWebPage
+	int $CreativeWork_i = 1, // int // Optional // Iteration counter for clinical resource-as-CreativeWork
+	array $clinical_resource_fields = array(), // array // Optional // Pre-existing field values array so duplicate calls can be avoided
+	array $MedicalWebPage_list = array(), // array // Optional // Pre-existing list array for clinical resource-as-MedicalWebPage to which to add additional items
+	array $CreativeWork_list = array(), // array // Optional // Pre-existing list array for clinical resource-as-CreativeWork to which to add additional items
+	array $clinical_resource_list = array() // array // Optional // Pre-existing list array for combined clinical resource schema to which to add additional items
 ) {
 
 	if ( !empty($repeater) ) {
@@ -1619,10 +1619,10 @@ function uamswp_fad_schema_clinical_resource(
 											if ( function_exists('uamswp_fad_schema_location') ) {
 
 												$clinical_resource_location = uamswp_fad_schema_location(
-													$clinical_resource_location_array, // List of IDs of the location items
-													$clinical_resource_url, // Page URL
+													$clinical_resource_location_array, // array // Required // List of IDs of the location items
+													$clinical_resource_url, // string // Required // Page URL
 													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													( $nesting_level + 1 ) // Nesting level within the main schema
+													( $nesting_level + 1 ) // int // Optional // Nesting level within the main schema
 												);
 
 											} else {
@@ -1756,16 +1756,16 @@ function uamswp_fad_schema_clinical_resource(
 											if ( function_exists('uamswp_fad_schema_expertise') ) {
 
 												$clinical_resource_expertise = uamswp_fad_schema_expertise(
-													$clinical_resource_expertise_list, // List of IDs of the area of expertise items
+													$clinical_resource_expertise_list, // array // Required // List of IDs of the area of expertise items
 													'', // string // Required // Page or fake subpage URL
 													true, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
 													'', // string // Required // Fake subpage slug
 													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-													$MedicalWebPage_i, // int // Optional //  Iteration counter for area of expertise-as-MedicalWebPage
-													$MedicalEntity_i, // int // Optional //  Iteration counter for area of expertise-as-MedicalEntity
-													$MedicalCondition_i, // int // Optional //  Iteration counter for condition
-													$Service_i, // int // Optional //  Iteration counter for treatments and procedures
+													$MedicalWebPage_i, // int // Optional // Iteration counter for area of expertise-as-MedicalWebPage
+													$MedicalEntity_i, // int // Optional // Iteration counter for area of expertise-as-MedicalEntity
+													$MedicalCondition_i, // int // Optional // Iteration counter for condition
+													$Service_i, // int // Optional // Iteration counter for treatments and procedures
 												) ?? null;
 
 											} else {
@@ -1898,10 +1898,10 @@ function uamswp_fad_schema_clinical_resource(
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
 											$clinical_resource_related_clinical_resource = uamswp_fad_schema_clinical_resource(
-												$clinical_resource_related_clinical_resource_list, // List of IDs of the clinical resource items
-												$clinical_resource_url, // Page URL
+												$clinical_resource_related_clinical_resource_list, // array // Required // List of IDs of the clinical resource items
+												$clinical_resource_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ) // Nesting level within the main schema
+												( $nesting_level + 1 ) // int // Optional // Nesting level within the main schema
 											) ?? null;
 
 											if ( isset($clinical_resource_related_clinical_resource) ) {
