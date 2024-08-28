@@ -1197,7 +1197,11 @@ function uamswp_fad_schema_treatment(
 
 											foreach ( $treatment_relevantSpecialty_multiselect as $item ) {
 
-												$treatment_relevantSpecialty[] = $item ?? '';
+												if ( $item ) {
+
+													$treatment_relevantSpecialty[] = $item ?? '';
+
+												}
 
 											}
 
