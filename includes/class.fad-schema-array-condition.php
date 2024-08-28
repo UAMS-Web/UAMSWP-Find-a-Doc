@@ -1036,7 +1036,7 @@ function uamswp_fad_schema_condition(
 
 							}
 
-						// signOrSymptom [WIP]
+						// signOrSymptom
 
 							/**
 							 * A sign or symptom of this condition. Signs are objective or physically
@@ -1051,6 +1051,66 @@ function uamswp_fad_schema_condition(
 							 *
 							 *      - MedicalCondition
 							 */
+
+							if (
+								(
+									isset($condition_item_MedicalCondition)
+									&&
+									in_array(
+										'signOrSymptom',
+										$condition_properties_map[$MedicalCondition_type]['properties']
+									)
+								)
+								&&
+								$nesting_level <= 1
+							) {
+
+								// Get values
+
+									// Get signOrSymptom relationship field value
+
+										$condition_signOrSymptom_relationship = get_field( 'condition_schema_signorsymptom', $entity ) ?? array();
+
+									// Add each item to signOrSymptom property values array
+
+										if ( $condition_signOrSymptom_relationship ) {
+
+											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+											if ( function_exists('uamswp_fad_schema_condition') ) {
+
+												$condition_signOrSymptom = uamswp_fad_schema_condition(
+													$condition_signOrSymptom_relationship, // array // Required // List of IDs of the MedicalCondition items
+													$page_url, // string // Required // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
+													$Service_i // int // Optional // Iteration counter for treatment-as-Service
+												);
+
+											} else {
+
+												$condition_signOrSymptom = null;
+
+											}
+
+										}
+
+								// Add to item values
+
+									// MedicalCondition
+
+										uamswp_fad_schema_add_to_item_values(
+											$MedicalCondition_type, // string // Required // The @type value for the schema item
+											$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+											'signOrSymptom', // string // Required // Name of schema property
+											$condition_signOrSymptom, // mixed // Required // Variable to add as the property value
+											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+											$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+											($nesting_level + 1) // int // Required // Current nesting level value
+										);
+
+							}
 
 						// possibleTreatment
 
