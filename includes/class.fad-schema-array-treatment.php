@@ -929,9 +929,9 @@ function uamswp_fad_schema_treatment(
 
 								// Get values
 
-									// Get duplicateTherapy relationship repeater value (clones 'field_schema_medicaltherapy')
+									// Get duplicateTherapy relationship repeater value
 
-										$treatment_duplicateTherapy_relationship = get_field( 'treatment_procedure_schema_duplicatetherapy_schema_medicaltherapy', $entity ) ?? array();
+										$treatment_duplicateTherapy_relationship = get_field( 'treatment_procedure_schema_duplicatetherapy', $entity ) ?? array();
 
 									// Add each item to duplicateTherapy property values array
 
