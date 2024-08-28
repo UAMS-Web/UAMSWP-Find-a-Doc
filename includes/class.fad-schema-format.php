@@ -4524,15 +4524,15 @@
 
 				Values expected to be one of these types:
 
-						* Certification
+					 * Certification
 
 				Used on these types:
 
-						* Organization
-						* Person
-						* Place
-						* Product
-						* Service
+					 * Organization
+					 * Person
+					 * Place
+					 * Product
+					 * Service
 
 			'Certification' type:
 
@@ -4548,6 +4548,10 @@
 				credential, as are accreditations and licenses. Mapped from the
 				gs1:CertificationDetails [https://www.gs1.org/voc/CertificationDetails] class
 				in the GS1 Web Vocabulary.
+
+				As of 28 Aug 2024, this Type is in the "new" area of Schema.org. Implementation
+				feedback and adoption from applications and websites can help improve their
+				definitions.
 
 		*/
 
