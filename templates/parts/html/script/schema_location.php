@@ -20,13 +20,36 @@ $page_id = get_the_ID();
 
 	if ( function_exists('uamswp_fad_schema_location') ) {
 
+		// Check argument variables
+
+			$schema_location_provider_MedicalWebPage_i = $schema_location_provider_MedicalWebPage_i ?? 1; // Iteration counter for provider-as-MedicalWebPage
+			$schema_location_provider_MedicalBusiness_i = $schema_location_provider_MedicalBusiness_i ?? 1; // Iteration counter for provider-as-MedicalBusiness
+			$schema_location_provider_Person_i = $schema_location_provider_Person_i ?? 1; // Iteration counter for provider-as-Person
+			$schema_location_location_MedicalWebPage_i = $schema_location_location_MedicalWebPage_i ?? 1; // Iteration counter for location-as-MedicalWebPage
+			$schema_location_location_LocalBusiness_i = $schema_location_location_LocalBusiness_i ?? 1; // Iteration counter for location-as-LocalBusiness
+			$schema_location_expertise_MedicalWebPage_i = $schema_location_expertise_MedicalWebPage_i ?? 1; // Iteration counter for area of expertise-as-MedicalWebPage
+			$schema_location_expertise_MedicalEntity_i = $schema_location_expertise_MedicalEntity_i ?? 1; // Iteration counter for area of expertise-as-MedicalEntity
+			$schema_location_clinical_resource_MedicalWebPage_i = $schema_location_clinical_resource_MedicalWebPage_i ?? 1; // Iteration counter for clinical resource-as-MedicalWebPage
+			$schema_location_clinical_resource_CreativeWork_i = $schema_location_clinical_resource_CreativeWork_i ?? 1; // Iteration counter for clinical resource-as-CreativeWork
+			$schema_location_condition_MedicalCondition_i = $schema_location_condition_MedicalCondition_i ?? 1; // Iteration counter for condition
+			$schema_location_treatment_Service_i = $schema_location_treatment_Service_i ?? 1; // Iteration counter for treatments and procedures
+
 		$schema_location_combined = uamswp_fad_schema_location(
 			array($page_id), // List of IDs of the location items
 			$page_url, // Page URL
 			$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
 			0, // Nesting level within the main schema
-			1, // int // Optional // Iteration counter for location-as-MedicalWebPage
-			1, // int // Optional // Iteration counter for location-as-LocalBusiness
+			$schema_location_location_MedicalWebPage_i, // int // Optional // Iteration counter for location-as-MedicalWebPage
+			$schema_location_location_LocalBusiness_i, // int // Optional // Iteration counter for location-as-LocalBusiness
+			$schema_location_provider_MedicalWebPage_i, // int // Optional // Iteration counter for provider-as-MedicalWebPage
+			$schema_location_provider_MedicalBusiness_i, // int // Optional // Iteration counter for provider-as-MedicalBusiness
+			$schema_location_provider_Person_i, // int // Optional // Iteration counter for provider-as-Person
+			$schema_location_expertise_MedicalWebPage_i, // int // Optional // Iteration counter for area of expertise-as-MedicalWebPage
+			$schema_location_expertise_MedicalEntity_i, // int // Optional // Iteration counter for area of expertise-as-MedicalEntity
+			$schema_location_clinical_resource_MedicalWebPage_i, // int // Optional // Iteration counter for clinical resource-as-MedicalWebPage
+			$schema_location_clinical_resource_CreativeWork_i, // int // Optional // Iteration counter for clinical resource-as-CreativeWork
+			$schema_location_condition_MedicalCondition_i, // int // Optional // Iteration counter for condition
+			$schema_location_treatment_Service_i, // int // Optional // Iteration counter for treatments and procedures
 			$location_schema_fields // Pre-existing field values array so duplicate calls can be avoided
 		);
 

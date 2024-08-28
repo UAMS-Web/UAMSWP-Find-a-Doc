@@ -75,16 +75,36 @@
 
 		if ( function_exists('uamswp_fad_schema_location') ) {
 
-			$MedicalWebPage_i = $MedicalWebPage_i ?? 1; // Iteration counter for location-as-MedicalWebPage
-			$LocalBusiness_i = $LocalBusiness_i ?? 1; // Iteration counter for location-as-LocalBusiness
+			// Check argument variables
+
+				$LocalBusiness_provider_MedicalWebPage_i = $LocalBusiness_provider_MedicalWebPage_i ?? 1; // Iteration counter for provider-as-MedicalWebPage
+				$LocalBusiness_provider_MedicalBusiness_i = $LocalBusiness_provider_MedicalBusiness_i ?? 1; // Iteration counter for provider-as-MedicalBusiness
+				$LocalBusiness_provider_Person_i = $LocalBusiness_provider_Person_i ?? 1; // Iteration counter for provider-as-Person
+				$LocalBusiness_location_MedicalWebPage_i = $LocalBusiness_location_MedicalWebPage_i ?? 1; // Iteration counter for location-as-MedicalWebPage
+				$LocalBusiness_location_LocalBusiness_i = $LocalBusiness_location_LocalBusiness_i ?? 1; // Iteration counter for location-as-LocalBusiness
+				$LocalBusiness_expertise_MedicalWebPage_i = $LocalBusiness_expertise_MedicalWebPage_i ?? 1; // Iteration counter for area of expertise-as-MedicalWebPage
+				$LocalBusiness_expertise_MedicalEntity_i = $LocalBusiness_expertise_MedicalEntity_i ?? 1; // Iteration counter for area of expertise-as-MedicalEntity
+				$LocalBusiness_clinical_resource_MedicalWebPage_i = $LocalBusiness_clinical_resource_MedicalWebPage_i ?? 1; // Iteration counter for clinical resource-as-MedicalWebPage
+				$LocalBusiness_clinical_resource_CreativeWork_i = $LocalBusiness_clinical_resource_CreativeWork_i ?? 1; // Iteration counter for clinical resource-as-CreativeWork
+				$LocalBusiness_condition_MedicalCondition_i = $LocalBusiness_condition_MedicalCondition_i ?? 1; // Iteration counter for condition
+				$LocalBusiness_treatment_Service_i = $LocalBusiness_treatment_Service_i ?? 1; // Iteration counter for treatments and procedures
 
 			$LocalBusiness_list = $LocalBusiness_list + uamswp_fad_schema_location(
 				array($page_id), // array // Required // List of IDs of the location items
 				$location_url, // string // Required // Page URL
 				$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 				1, // int // Optional // Nesting level within the main schema
-				$MedicalWebPage_i, // int // Optional // Iteration counter for location-as-MedicalWebPage
-				$LocalBusiness_i, // int // Optional // Iteration counter for location-as-LocalBusiness
+				$LocalBusiness_location_MedicalWebPage_i, // int // Optional // Iteration counter for location-as-MedicalWebPage
+				$LocalBusiness_location_LocalBusiness_i, // int // Optional // Iteration counter for location-as-LocalBusiness
+				$LocalBusiness_provider_MedicalWebPage_i, // int // Optional // Iteration counter for provider-as-MedicalWebPage
+				$LocalBusiness_provider_MedicalBusiness_i, // int // Optional // Iteration counter for provider-as-MedicalBusiness
+				$LocalBusiness_provider_Person_i, // int // Optional // Iteration counter for provider-as-Person
+				$LocalBusiness_expertise_MedicalWebPage_i, // int // Optional // Iteration counter for area of expertise-as-MedicalWebPage
+				$LocalBusiness_expertise_MedicalEntity_i, // int // Optional // Iteration counter for area of expertise-as-MedicalEntity
+				$LocalBusiness_clinical_resource_MedicalWebPage_i, // int // Optional // Iteration counter for clinical resource-as-MedicalWebPage
+				$LocalBusiness_clinical_resource_CreativeWork_i, // int // Optional // Iteration counter for clinical resource-as-CreativeWork
+				$LocalBusiness_condition_MedicalCondition_i, // int // Optional // Iteration counter for condition
+				$LocalBusiness_treatment_Service_i, // int // Optional // Iteration counter for treatments and procedures
 				$LocalBusiness_fields, // array // Optional // Pre-existing field values array so duplicate calls can be avoided
 				array(), // array // Optional // Pre-existing list array for location-as-MedicalWebPage to which to add additional items
 				$LocalBusiness_list // array // Optional // Pre-existing list array for location-as-LocalBusiness to which to add additional items

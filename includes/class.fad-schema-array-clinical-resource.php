@@ -11,8 +11,17 @@ function uamswp_fad_schema_clinical_resource(
 	string $page_url, // string // Required // Page URL
 	array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
 	int $nesting_level = 1, // int // Optional // Nesting level within the main schema
-	int $MedicalWebPage_i = 1, // int // Optional // Iteration counter for clinical resource-as-MedicalWebPage
-	int $CreativeWork_i = 1, // int // Optional // Iteration counter for clinical resource-as-CreativeWork
+	int &$MedicalWebPage_i = 1, // int // Optional // Iteration counter for clinical resource-as-MedicalWebPage
+	int &$CreativeWork_i = 1, // int // Optional // Iteration counter for clinical resource-as-CreativeWork
+	int &$clinical_resource_provider_MedicalWebPage_i = 1, // int // Optional // Iteration counter for provider-as-MedicalWebPage
+	int &$clinical_resource_provider_MedicalBusiness_i = 1, // int // Optional // Iteration counter for provider-as-MedicalBusiness
+	int &$clinical_resource_provider_Person_i = 1, // int // Optional // Iteration counter for provider-as-Person
+	int &$clinical_resource_location_MedicalWebPage_i = 1, // int // Optional // Iteration counter for location-as-MedicalWebPage
+	int &$clinical_resource_location_LocalBusiness_i = 1, // int // Optional // Iteration counter for location-as-LocalBusiness
+	int &$clinical_resource_expertise_MedicalWebPage_i = 1, // int // Optional // Iteration counter for area of expertise-as-MedicalWebPage
+	int &$clinical_resource_expertise_MedicalEntity_i = 1, // int // Optional // Iteration counter for area of expertise-as-MedicalEntity
+	int &$clinical_resource_condition_MedicalCondition_i = 1, // int // Optional // Iteration counter for condition
+	int &$clinical_resource_treatment_Service_i = 1, // int // Optional // Iteration counter for treatments and procedures
 	array $clinical_resource_fields = array(), // array // Optional // Pre-existing field values array so duplicate calls can be avoided
 	array $MedicalWebPage_list = array(), // array // Optional // Pre-existing list array for clinical resource-as-MedicalWebPage to which to add additional items
 	array $CreativeWork_list = array(), // array // Optional // Pre-existing list array for clinical resource-as-CreativeWork to which to add additional items
@@ -268,9 +277,7 @@ function uamswp_fad_schema_clinical_resource(
 						$clinical_resource_word_count = 0;
 						$clinical_resource_wordCount = '';
 						$clinical_resource_featured_image_1_1_height = '';
-						$MedicalCondition_i = 1;
 						$MedicalWebPage_type = null;
-						$Service_i = 1;
 
 						// Reused variables
 
@@ -1463,7 +1470,18 @@ function uamswp_fad_schema_clinical_resource(
 														$clinical_resource_url, // string // Required // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														($nesting_level + 1), // int // Optional // Nesting level within the main schema
-														array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ) // array // Optional // List of the schema types to output
+														array( 'MedicalBusiness', 'MedicalWebPage', 'Person' ), // array // Optional // List of the schema types to output
+														$clinical_resource_provider_MedicalWebPage_i, // int // Optional // Iteration counter for provider-as-MedicalWebPage
+														$clinical_resource_provider_MedicalBusiness_i, // int // Optional // Iteration counter for provider-as-MedicalBusiness
+														$clinical_resource_provider_Person_i, // int // Optional // Iteration counter for provider-as-Person
+														$clinical_resource_location_MedicalWebPage_i, // int // Optional // Iteration counter for location-as-MedicalWebPage
+														$clinical_resource_location_LocalBusiness_i, // int // Optional // Iteration counter for location-as-LocalBusiness
+														$clinical_resource_expertise_MedicalWebPage_i, // int // Optional // Iteration counter for area of expertise-as-MedicalWebPage
+														$clinical_resource_expertise_MedicalEntity_i, // int // Optional // Iteration counter for area of expertise-as-MedicalEntity
+														$MedicalWebPage_i, // int // Optional // Iteration counter for clinical resource-as-MedicalWebPage
+														$CreativeWork_i, // int // Optional // Iteration counter for clinical resource-as-CreativeWork
+														$clinical_resource_condition_MedicalCondition_i, // int // Optional // Iteration counter for condition
+														$clinical_resource_treatment_Service_i // int // Optional // Iteration counter for treatments and procedures
 													) ?? null;
 
 												} else {
@@ -1623,6 +1641,17 @@ function uamswp_fad_schema_clinical_resource(
 													$clinical_resource_url, // string // Required // Page URL
 													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 													( $nesting_level + 1 ) // int // Optional // Nesting level within the main schema
+													$clinical_resource_location_MedicalWebPage_i, // int // Optional // Iteration counter for location-as-MedicalWebPage
+													$clinical_resource_location_LocalBusiness_i, // int // Optional // Iteration counter for location-as-LocalBusiness
+													$clinical_resource_provider_MedicalWebPage_i, // int // Optional // Iteration counter for provider-as-MedicalWebPage
+													$clinical_resource_provider_MedicalBusiness_i, // int // Optional // Iteration counter for provider-as-MedicalBusiness
+													$clinical_resource_provider_Person_i, // int // Optional // Iteration counter for provider-as-Person
+													$clinical_resource_expertise_MedicalWebPage_i, // int // Optional // Iteration counter for area of expertise-as-MedicalWebPage
+													$clinical_resource_expertise_MedicalEntity_i, // int // Optional // Iteration counter for area of expertise-as-MedicalEntity
+													$MedicalWebPage_i, // int // Optional // Iteration counter for clinical resource-as-MedicalWebPage
+													$CreativeWork_i, // int // Optional // Iteration counter for clinical resource-as-CreativeWork
+													$clinical_resource_condition_MedicalCondition_i, // int // Optional // Iteration counter for condition
+													$clinical_resource_treatment_Service_i, // int // Optional // Iteration counter for treatments and procedures
 												);
 
 											} else {
@@ -1762,10 +1791,17 @@ function uamswp_fad_schema_clinical_resource(
 													'', // string // Required // Fake subpage slug
 													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-													$MedicalWebPage_i, // int // Optional // Iteration counter for area of expertise-as-MedicalWebPage
-													$MedicalEntity_i, // int // Optional // Iteration counter for area of expertise-as-MedicalEntity
-													$MedicalCondition_i, // int // Optional // Iteration counter for condition
-													$Service_i, // int // Optional // Iteration counter for treatments and procedures
+													$clinical_resource_expertise_MedicalWebPage_i, // int // Optional // Iteration counter for area of expertise-as-MedicalWebPage
+													$clinical_resource_expertise_MedicalEntity_i, // int // Optional // Iteration counter for area of expertise-as-MedicalEntity
+													$clinical_resource_provider_MedicalWebPage_i, // int // Optional // Iteration counter for provider-as-MedicalWebPage
+													$clinical_resource_provider_MedicalBusiness_i, // int // Optional // Iteration counter for provider-as-MedicalBusiness
+													$clinical_resource_provider_Person_i, // int // Optional // Iteration counter for provider-as-Person
+													$clinical_resource_location_MedicalWebPage_i, // int // Optional // Iteration counter for location-as-MedicalWebPage
+													$clinical_resource_location_LocalBusiness_i, // int // Optional // Iteration counter for location-as-LocalBusiness
+													$MedicalWebPage_i, // int // Optional // Iteration counter for clinical resource-as-MedicalWebPage
+													$CreativeWork_i, // int // Optional // Iteration counter for clinical resource-as-CreativeWork
+													$clinical_resource_condition_MedicalCondition_i, // int // Optional // Iteration counter for condition
+													$clinical_resource_treatment_Service_i // int // Optional // Iteration counter for treatments and procedures
 												) ?? null;
 
 											} else {
@@ -1901,7 +1937,18 @@ function uamswp_fad_schema_clinical_resource(
 												$clinical_resource_related_clinical_resource_list, // array // Required // List of IDs of the clinical resource items
 												$clinical_resource_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ) // int // Optional // Nesting level within the main schema
+												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+												$MedicalWebPage_i, // int // Optional // Iteration counter for clinical resource-as-MedicalWebPage
+												$CreativeWork_i, // int // Optional // Iteration counter for clinical resource-as-CreativeWork
+												$clinical_resource_provider_MedicalWebPage_i, // int // Optional // Iteration counter for provider-as-MedicalWebPage
+												$clinical_resource_provider_MedicalBusiness_i, // int // Optional // Iteration counter for provider-as-MedicalBusiness
+												$clinical_resource_provider_Person_i, // int // Optional // Iteration counter for provider-as-Person
+												$clinical_resource_location_MedicalWebPage_i, // int // Optional // Iteration counter for location-as-MedicalWebPage
+												$clinical_resource_location_LocalBusiness_i, // int // Optional // Iteration counter for location-as-LocalBusiness
+												$clinical_resource_expertise_MedicalWebPage_i, // int // Optional // Iteration counter for area of expertise-as-MedicalWebPage
+												$clinical_resource_expertise_MedicalEntity_i, // int // Optional // Iteration counter for area of expertise-as-MedicalEntity
+												$clinical_resource_condition_MedicalCondition_i, // int // Optional // Iteration counter for condition
+												$clinical_resource_treatment_Service_i, // int // Optional // Iteration counter for treatments and procedures
 											) ?? null;
 
 											if ( isset($clinical_resource_related_clinical_resource) ) {
@@ -2033,8 +2080,17 @@ function uamswp_fad_schema_clinical_resource(
 													$clinical_resource_url, // string // Required // Page URL
 													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-													$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
-													$Service_i // int // Optional // Iteration counter for treatment-as-Service
+													$clinical_resource_condition_MedicalCondition_i, // int // Optional // Iteration counter for condition
+													$clinical_resource_provider_MedicalWebPage_i, // int // Optional // Iteration counter for provider-as-MedicalWebPage
+													$clinical_resource_provider_MedicalBusiness_i, // int // Optional // Iteration counter for provider-as-MedicalBusiness
+													$clinical_resource_provider_Person_i, // int // Optional // Iteration counter for provider-as-Person
+													$clinical_resource_location_MedicalWebPage_i, // int // Optional // Iteration counter for location-as-MedicalWebPage
+													$clinical_resource_location_LocalBusiness_i, // int // Optional // Iteration counter for location-as-LocalBusiness
+													$clinical_resource_expertise_MedicalWebPage_i, // int // Optional // Iteration counter for area of expertise-as-MedicalWebPage
+													$clinical_resource_expertise_MedicalEntity_i, // int // Optional // Iteration counter for area of expertise-as-MedicalEntity
+													$MedicalWebPage_i, // int // Optional // Iteration counter for clinical resource-as-MedicalWebPage
+													$CreativeWork_i, // int // Optional // Iteration counter for clinical resource-as-CreativeWork
+													$clinical_resource_treatment_Service_i, // int // Optional // Iteration counter for treatments and procedures
 												) ?? null;
 
 											} else {
@@ -2124,8 +2180,17 @@ function uamswp_fad_schema_clinical_resource(
 													$clinical_resource_url, // string // Required // Page URL
 													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+													$clinical_resource_treatment_Service_i, // int // Optional // Iteration counter for treatments and procedures
+													$clinical_resource_provider_MedicalWebPage_i, // int // Optional // Iteration counter for provider-as-MedicalWebPage
+													$clinical_resource_provider_MedicalBusiness_i, // int // Optional // Iteration counter for provider-as-MedicalBusiness
+													$clinical_resource_provider_Person_i, // int // Optional // Iteration counter for provider-as-Person
+													$clinical_resource_location_MedicalWebPage_i, // int // Optional // Iteration counter for location-as-MedicalWebPage
+													$clinical_resource_location_LocalBusiness_i, // int // Optional // Iteration counter for location-as-LocalBusiness
+													$clinical_resource_expertise_MedicalWebPage_i, // int // Optional // Iteration counter for area of expertise-as-MedicalWebPage
+													$clinical_resource_expertise_MedicalEntity_i, // int // Optional // Iteration counter for area of expertise-as-MedicalEntity
+													$MedicalWebPage_i, // int // Optional // Iteration counter for clinical resource-as-MedicalWebPage
+													$CreativeWork_i, // int // Optional // Iteration counter for clinical resource-as-CreativeWork
+													$clinical_resource_condition_MedicalCondition_i // int // Optional // Iteration counter for condition
 												) ?? null;
 
 											} else {
