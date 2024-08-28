@@ -1382,7 +1382,11 @@ function uamswp_fad_schema_location(
 													true, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
 													'', // string // Required // Fake subpage slug
 													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													( $nesting_level + 1 ) // Nesting level within the main schema
+													( $nesting_level + 1 ), // Nesting level within the main schema
+													$MedicalWebPage_i, // int // Optional //  Iteration counter for area of expertise-as-MedicalWebPage
+													$MedicalEntity_i, // int // Optional //  Iteration counter for area of expertise-as-MedicalEntity
+													$MedicalCondition_i, // int // Optional //  Iteration counter for condition
+													$Service_i, // int // Optional //  Iteration counter for treatments and procedures
 												) ?? null;
 
 											} else {

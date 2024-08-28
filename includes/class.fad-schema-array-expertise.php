@@ -15,6 +15,8 @@ function uamswp_fad_schema_expertise(
 	int $nesting_level = 1, // int // Optional // Nesting level within the main schema
 	int &$MedicalWebPage_i = 1, // int // Optional //  Iteration counter for area of expertise-as-MedicalWebPage
 	int &$MedicalEntity_i = 1, // int // Optional //  Iteration counter for area of expertise-as-MedicalEntity
+	int &$MedicalCondition_i = 1, // int // Optional //  Iteration counter for condition
+	int &$Service_i = 1, // int // Optional //  Iteration counter for treatments and procedures
 	array $expertise_fields = array(), // array // Optional // Pre-existing field values array so duplicate calls can be avoided
 	array $MedicalWebPage_list = array(), // array // Optional // Pre-existing list array for area of expertise-as-MedicalWebPage to which to add additional items
 	array $MedicalEntity_list = array(), // array // Optional // Pre-existing list array for area of expertise-as-MedicalEntity to which to add additional items
@@ -1151,7 +1153,11 @@ function uamswp_fad_schema_expertise(
 												true, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
 												'', // string // Required // Fake subpage slug
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ) // Nesting level within the main schema
+												( $nesting_level + 1 ), // Nesting level within the main schema
+												$MedicalWebPage_i, // int // Optional //  Iteration counter for area of expertise-as-MedicalWebPage
+												$MedicalEntity_i, // int // Optional //  Iteration counter for area of expertise-as-MedicalEntity
+												$MedicalCondition_i, // int // Optional //  Iteration counter for condition
+												$Service_i, // int // Optional //  Iteration counter for treatments and procedures
 											) ?? null;
 
 											if ( isset($expertise_descendant_expertise) ) {
@@ -1262,7 +1268,11 @@ function uamswp_fad_schema_expertise(
 												true, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
 												'', // string // Required // Fake subpage slug
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ) // Nesting level within the main schema
+												( $nesting_level + 1 ), // Nesting level within the main schema
+												$MedicalWebPage_i, // int // Optional //  Iteration counter for area of expertise-as-MedicalWebPage
+												$MedicalEntity_i, // int // Optional //  Iteration counter for area of expertise-as-MedicalEntity
+												$MedicalCondition_i, // int // Optional //  Iteration counter for condition
+												$Service_i, // int // Optional //  Iteration counter for treatments and procedures
 											) ?? null;
 
 											if ( isset($expertise_related_expertise) ) {

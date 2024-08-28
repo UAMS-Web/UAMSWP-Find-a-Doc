@@ -132,7 +132,11 @@ $page_id = get_the_ID();
 						$expertises, // List of IDs of the clinical resource items
 						$page_url, // Page URL
 						$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
-						1 // Nesting level within the main schema
+						1, // Nesting level within the main schema
+						$MedicalWebPage_i, // int // Optional //  Iteration counter for area of expertise-as-MedicalWebPage
+						$MedicalEntity_i, // int // Optional //  Iteration counter for area of expertise-as-MedicalEntity
+						$MedicalCondition_i, // int // Optional //  Iteration counter for condition
+						$Service_i, // int // Optional //  Iteration counter for treatments and procedures
 					);
 
 				} else {

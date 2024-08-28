@@ -26,6 +26,8 @@ $page_id = get_the_ID();
 
 		$MedicalWebPage_i = $MedicalWebPage_i ?? 1; // Iteration counter for area of expertise-as-MedicalWebPage
 		$MedicalEntity_i = $MedicalEntity_i ?? 1; // Iteration counter for area of expertise-as-MedicalEntity
+		$MedicalCondition_i = $MedicalCondition_i ?? 1; // Iteration counter for condition
+		$Service_i = $Service_i ?? 1; //Iteration counter for treatments and procedures
 
 		$schema_expertise_combined = uamswp_fad_schema_expertise(
 			array($page_id), // array // Required // List of IDs of the area of expertise items
@@ -36,6 +38,8 @@ $page_id = get_the_ID();
 			0, // Nesting level within the main schema
 			$MedicalWebPage_i, // Iteration counter for area of expertise-as-MedicalWebPage
 			$MedicalEntity_i, // Iteration counter for area of expertise-as-MedicalEntity
+			$MedicalCondition_i, // int // Optional //  Iteration counter for condition
+			$Service_i, // int // Optional //  Iteration counter for treatments and procedures
 			$expertise_schema_fields // Pre-existing field values array so duplicate calls can be avoided
 		);
 
