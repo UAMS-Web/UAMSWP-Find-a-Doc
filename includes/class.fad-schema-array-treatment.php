@@ -231,6 +231,7 @@ function uamswp_fad_schema_treatment(
 						 *      * guideline
 						 *      * howPerformed
 						 *      * image
+						 *      * legalStatus
 						 *      * mainEntityOfPage (unset below)
 						 *      * normalRange
 						 *      * potentialAction
@@ -1073,19 +1074,6 @@ function uamswp_fad_schema_treatment(
 										);
 
 							}
-
-						// legalStatus [WIP]
-
-							/**
-							 * The drug or supplement's legal status, including any controlled substance
-							 * schedules that apply.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - DrugLegalStatus
-							 *      - MedicalEnumeration
-							 *      - Text
-							 */
 
 						// mainEntityOfPage [excluded; unset]
 
