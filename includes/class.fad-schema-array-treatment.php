@@ -1310,7 +1310,7 @@ function uamswp_fad_schema_treatment(
 
 							}
 
-						// signDetected [WIP]
+						// signDetected
 
 							/**
 							 * A sign detected by the test.
@@ -1319,6 +1319,58 @@ function uamswp_fad_schema_treatment(
 							 *
 							 *      - MedicalSign
 							 */
+
+							if (
+								(
+									isset($treatment_item_MedicalEntity)
+									&&
+									in_array(
+										'signDetected',
+										$treatment_properties_map[$Service_type]['properties']
+									)
+								)
+								&&
+								$nesting_level <= 1
+							) {
+
+								// Get values
+
+									// Get signDetected relationship repeater values
+
+										$treatment_signDetected_relationship = get_field( 'treatment_procedure_schema_signdetected_medicaltest', $entity ) ?? array();
+
+									// Add each item to signDetected property values array
+
+										if ( $treatment_signDetected_relationship ) {
+
+											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+											$treatment_signDetected = uamswp_fad_schema_treatment(
+												$treatment_signDetected_relationship, // array // Required // List of IDs of the service items
+												$page_url, // string // Required // Page URL
+												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+											);
+
+										}
+
+								// Add to item values
+
+									// Service
+
+										uamswp_fad_schema_add_to_item_values(
+											$Service_type, // string // Required // The @type value for the schema item
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+											'signDetected', // string // Required // Name of schema property
+											$treatment_signDetected, // mixed // Required // Variable to add as the property value
+											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+											$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
+											($nesting_level + 1) // int // Required // Current nesting level value
+										);
+
+							}
 
 						// subTest
 
