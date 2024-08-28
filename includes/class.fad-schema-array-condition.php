@@ -231,20 +231,8 @@ function uamswp_fad_schema_condition(
 						 *      * study
 						 *      * subjectOf
 						 *      * transmissionMethod
+						 *      * url
 						 */
-
-						// url
-
-							/**
-							 * URL of the item.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - URL
-							 *
-							 * The condition custom post type does not have a published URL and so this schema
-							 * property will not be included.
-							 */
 
 						// @type
 
