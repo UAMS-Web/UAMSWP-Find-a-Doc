@@ -236,6 +236,7 @@ function uamswp_fad_schema_treatment(
 						 *      * normalRange
 						 *      * potentialAction
 						 *      * preparation
+						 *      * recognizingAuthority
 						 *      * seriousAdverseOutcome
 						 *      * status
 						 *      * study
@@ -1187,17 +1188,6 @@ function uamswp_fad_schema_treatment(
 										);
 
 							}
-
-						// recognizingAuthority [WIP]
-
-							/**
-							 * If applicable, the organization that officially recognizes this entity as part
-							 * of its endorsed system of medicine.
-							 *
-							 * Values expected to be one of these types:
-							 *
-							 *      - Organization
-							 */
 
 						// relevantSpecialty
 
