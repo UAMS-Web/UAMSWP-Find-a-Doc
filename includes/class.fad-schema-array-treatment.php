@@ -652,6 +652,8 @@ function uamswp_fad_schema_treatment(
 										$treatment_properties_map[$Service_type]['properties']
 									)
 								)
+								&&
+								$nesting_level <= 1
 							) {
 
 								// Get values
@@ -743,6 +745,8 @@ function uamswp_fad_schema_treatment(
 										$treatment_properties_map[$Service_type]['properties']
 									)
 								)
+								&&
+								$nesting_level <= 1
 							) {
 
 								// Get values
@@ -986,6 +990,8 @@ function uamswp_fad_schema_treatment(
 										$treatment_properties_map[$Service_type]['properties']
 									)
 								)
+								&&
+								$nesting_level <= 1
 							) {
 
 								// Get values
@@ -1044,6 +1050,8 @@ function uamswp_fad_schema_treatment(
 										$treatment_properties_map[$Service_type]['properties']
 									)
 								)
+								&&
+								$nesting_level <= 1
 							) {
 
 								// Get values
@@ -1126,6 +1134,8 @@ function uamswp_fad_schema_treatment(
 										$treatment_properties_map[$Service_type]['properties']
 									)
 								)
+								&&
+								$nesting_level <= 1
 							) {
 
 								// Get values
@@ -1178,6 +1188,8 @@ function uamswp_fad_schema_treatment(
 										$treatment_properties_map[$Service_type]['properties']
 									)
 								)
+								&&
+								$nesting_level <= 1
 							) {
 
 								// Get values
@@ -1369,6 +1381,8 @@ function uamswp_fad_schema_treatment(
 										$treatment_properties_map[$Service_type]['properties']
 									)
 								)
+								&&
+								$nesting_level <= 1
 							) {
 
 								// Get values
@@ -1498,6 +1512,8 @@ function uamswp_fad_schema_treatment(
 										$treatment_properties_map[$Service_type]['properties']
 									)
 								)
+								&&
+								$nesting_level <= 1
 							) {
 
 								// Get values
