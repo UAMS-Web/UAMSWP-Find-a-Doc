@@ -812,10 +812,6 @@ function uamswp_fad_schema_condition(
 													$MedicalCondition_i // int // Optional // Iteration counter for condition
 												);
 
-											} else {
-
-												$condition_identifyingExam = null;
-
 											}
 
 										}
@@ -894,10 +890,6 @@ function uamswp_fad_schema_condition(
 													$condition_clinical_resource_CreativeWork_i, // int // Optional // Iteration counter for clinical resource-as-CreativeWork
 													$MedicalCondition_i // int // Optional // Iteration counter for condition
 												);
-
-											} else {
-
-												$condition_identifyingTest = null;
 
 											}
 
@@ -1129,10 +1121,6 @@ function uamswp_fad_schema_condition(
 													$condition_clinical_resource_CreativeWork_i, // int // Optional // Iteration counter for clinical resource-as-CreativeWork
 													$condition_treatment_Service_i // int // Optional // Iteration counter for treatments and procedures
 												);
-
-											} else {
-
-												$condition_signOrSymptom = null;
 
 											}
 
