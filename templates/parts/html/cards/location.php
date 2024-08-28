@@ -75,7 +75,7 @@
 
 		if ( function_exists('uamswp_fad_schema_location') ) {
 
-			$MedicalWebPage_i = $MedicalWebPage_i ?? 1, // Iteration counter for location-as-MedicalWebPage
+			$MedicalWebPage_i = $MedicalWebPage_i ?? 1; // Iteration counter for location-as-MedicalWebPage
 			$LocalBusiness_i = $LocalBusiness_i ?? 1; // Iteration counter for location-as-LocalBusiness
 
 			$LocalBusiness_list = $LocalBusiness_list + uamswp_fad_schema_location(
