@@ -4658,8 +4658,37 @@ function uamswp_fad_schema_provider(
 							 *      - Product
 							 *      - Service
 							 *
-							 * Note: Consider including the specialty and subspecialty certifications in this
-							 * property.
+							 * Notes:
+							 *
+							 *     As of 28 Aug 2024, the Certification type is in the "new" area of Schema.org.
+							 *     Implementation feedback and adoption from applications and websites can help
+							 *     improve their definitions.
+							 *
+							 *     The 'hasCertification' and 'hasCredential' properties are both used to indicate
+							 *     some form of recognition or validation of a person's qualifications or
+							 *     competencies.
+							 *
+							 *     The 'hasCertification' and 'hasCredential' properties properties can both be
+							 *     used to enhance the profile of a person or organization by providing additional
+							 *     information about their qualifications.
+							 *
+							 *     The 'hasCertification' property is specifically for certifications, which are
+							 *     often awarded by professional organizations or certifying bodies.
+							 *
+							 *     The 'hasCredential' property is broader and can include educational degrees,
+							 *     diplomas, licenses, and certifications.
+							 *
+							 *     A professional certification that is also considered an educational or
+							 *     occupational credential might be represented by both the 'hasCertification' and
+							 *     'hasCredential' properties (e.g., a medical board certification).
+							 *
+							 *     Only in 'hasCertification': A certification that is specifically recognized as
+							 *     a certification by a certifying body (e.g., CPR certification from the American
+							 *     Heart Association).
+							 *
+							 *     Only in 'hasCredential': An educational degree (e.g., a bachelor's or Master's
+							 *     degree), which is not typically referred to as a certification but rather as an
+							 *     educational credential.
 							 */
 
 							if (
@@ -4786,9 +4815,37 @@ function uamswp_fad_schema_provider(
 							 *      - Organization
 							 *      - Person
 							 *
-							 * As of 16 Apr 2024, this term is in the "new" area of Schema.org. Implementation
-							 * feedback and adoption from applications and websites can help improve their
-							 * definitions.
+							 * Notes:
+							 *
+							 *     As of 16 Apr 2024, this term is in the "new" area of Schema.org. Implementation
+							 *     feedback and adoption from applications and websites can help improve their
+							 *     definitions.
+							 *
+							 *     The 'hasCertification' and 'hasCredential' properties are both used to indicate
+							 *     some form of recognition or validation of a person's qualifications or
+							 *     competencies.
+							 *
+							 *     The 'hasCertification' and 'hasCredential' properties properties can both be
+							 *     used to enhance the profile of a person or organization by providing additional
+							 *     information about their qualifications.
+							 *
+							 *     The 'hasCertification' property is specifically for certifications, which are
+							 *     often awarded by professional organizations or certifying bodies.
+							 *
+							 *     The 'hasCredential' property is broader and can include educational degrees,
+							 *     diplomas, licenses, and certifications.
+							 *
+							 *     A professional certification that is also considered an educational or
+							 *     occupational credential might be represented by both the 'hasCertification' and
+							 *     'hasCredential' properties (e.g., a medical board certification).
+							 *
+							 *     Only in 'hasCertification': A certification that is specifically recognized as
+							 *     a certification by a certifying body (e.g., CPR certification from the American
+							 *     Heart Association).
+							 *
+							 *     Only in 'hasCredential': An educational degree (e.g., a bachelor's or Master's
+							 *     degree), which is not typically referred to as a certification but rather as an
+							 *     educational credential.
 							 */
 
 							if (
