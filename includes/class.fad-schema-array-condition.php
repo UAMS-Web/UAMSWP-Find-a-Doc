@@ -738,7 +738,7 @@ function uamswp_fad_schema_condition(
 
 							}
 
-						// identifyingExam [WIP]
+						// identifyingExam
 
 							/**
 							 * A physical examination that can identify this sign.
@@ -751,6 +751,66 @@ function uamswp_fad_schema_condition(
 							 *
 							 *      - MedicalSign
 							 */
+
+							if (
+								(
+									isset($condition_item_MedicalCondition)
+									&&
+									in_array(
+										'identifyingExam',
+										$condition_properties_map[$MedicalCondition_type]['properties']
+									)
+								)
+								&&
+								$nesting_level <= 1
+							) {
+
+								// Get values
+
+									// Get identifyingExam relationship field value
+
+										$condition_identifyingExam_relationship = get_field( 'condition_schema_identifyingexam', $entity ) ?? array();
+
+									// Add each item to identifyingExam property values array
+
+										if ( $condition_identifyingExam_relationship ) {
+
+											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+											if ( function_exists('uamswp_fad_schema_treatment') ) {
+
+												$condition_identifyingExam = uamswp_fad_schema_treatment(
+													$condition_identifyingExam_relationship, // array // Required // List of IDs of the service items
+													$page_url, // string // Required // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+												);
+
+											} else {
+
+												$condition_identifyingExam = null;
+
+											}
+
+										}
+
+								// Add to item values
+
+									// MedicalCondition
+
+										uamswp_fad_schema_add_to_item_values(
+											$MedicalCondition_type, // string // Required // The @type value for the schema item
+											$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+											'identifyingExam', // string // Required // Name of schema property
+											$condition_identifyingExam, // mixed // Required // Variable to add as the property value
+											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+											$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+											($nesting_level + 1) // int // Required // Current nesting level value
+										);
+
+							}
 
 						// identifyingTest [WIP]
 
