@@ -151,6 +151,7 @@ function uamswp_fad_schema_treatment(
 						$treatment_relevantSpecialty_multiselect = null;
 						$treatment_sameAs = null;
 						$treatment_sameAs_repeater = null;
+						$treatment_signDetected = null;
 						$treatment_subTest = null;
 						$treatment_subTest_relationship = null;
 						$treatment_tissueSample = null;
