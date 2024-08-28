@@ -136,6 +136,10 @@ function uamswp_fad_schema_condition(
 						$condition_code_repeater = null;
 						$condition_id = '';
 						$condition_identifier = null;
+						$condition_identifyingExam = null;
+						$condition_identifyingExam_relationship = null;
+						$condition_identifyingTest = null;
+						$condition_identifyingTest_relationship = null;
 						$condition_infectiousAgent = '';
 						$condition_infectiousAgentClass = '';
 						$condition_name = '';
@@ -147,6 +151,8 @@ function uamswp_fad_schema_condition(
 						$condition_sameAs_repeater = array();
 						$condition_secondaryPrevention = array();
 						$condition_secondaryPrevention_relationship = array();
+						$condition_signOrSymptom = null;
+						$condition_signOrSymptom_relationship = null;
 						$MedicalCondition_type = '';
 						$MedicalCondition_type_parent = array();
 						$condition_typicalTest = array();

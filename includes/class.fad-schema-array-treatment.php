@@ -143,6 +143,8 @@ function uamswp_fad_schema_treatment(
 						$treatment_id = null;
 						$treatment_identifier = null;
 						$treatment_imagingTechnique = null;
+						$treatment_medicineSystem = null;
+						$treatment_medicineSystem_select = null;
 						$treatment_name = null;
 						$treatment_procedureType = null;
 						$treatment_relevantSpecialty = null;
