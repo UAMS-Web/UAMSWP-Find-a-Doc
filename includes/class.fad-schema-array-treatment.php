@@ -1102,7 +1102,7 @@ function uamswp_fad_schema_treatment(
 
 								}
 
-						// medicineSystem [WIP]
+						// medicineSystem
 
 							/**
 							 * The system of medicine that includes this MedicalEntity
@@ -1112,6 +1112,48 @@ function uamswp_fad_schema_treatment(
 							 *
 							 *      - MedicineSystem
 							 */
+
+							if (
+								(
+									isset($treatment_item_MedicalEntity)
+									&&
+									in_array(
+										'medicineSystem',
+										$treatment_properties_map[$Service_type]['properties']
+									)
+								)
+								&&
+								$nesting_level <= 1
+							) {
+
+								// Get values
+
+									// Get select field value
+
+										$treatment_medicineSystem_select = get_field( 'schema_medicinesystem', $entity ) ?? array();
+
+									// Add each item to the list array
+
+										$treatment_medicineSystem = uamswp_fad_schema_medicinesystem(
+											$treatment_medicineSystem_select // array of MedicineSystem values
+										);
+
+								// Add to item values
+
+									// Service
+
+										uamswp_fad_schema_add_to_item_values(
+											$Service_type, // string // Required // The @type value for the schema item
+											$treatment_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+											'medicineSystem', // string // Required // Name of schema property
+											$treatment_medicineSystem, // mixed // Required // Variable to add as the property value
+											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+											$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
+											($nesting_level + 1) // int // Required // Current nesting level value
+										);
+
+
+							}
 
 						// procedureType
 
