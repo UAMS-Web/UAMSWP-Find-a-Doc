@@ -97,7 +97,7 @@
 			},
 			"default_value": "",
 			"allow_null": 1,
-			"other_choice": 0,
+			"other_choice": 1,
 			"save_other_choice": 0,
 			"layout": "vertical",
 			"return_format": "value",
