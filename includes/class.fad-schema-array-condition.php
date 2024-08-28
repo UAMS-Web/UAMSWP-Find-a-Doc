@@ -457,6 +457,10 @@ function uamswp_fad_schema_condition(
 							 * Values expected to be one of these types:
 							 *
 							 *      - Text
+							 *
+							 * Used on these types:
+							 *
+							 *      - Thing
 							 */
 
 							if (
@@ -566,6 +570,10 @@ function uamswp_fad_schema_condition(
 							 * Values expected to be one of these types:
 							 *
 							 *      - Text
+							 *
+							 * Used on these types:
+							 *
+							 *      - Thing
 							 */
 
 							if (
@@ -688,6 +696,10 @@ function uamswp_fad_schema_condition(
 							 *      - PropertyValue
 							 *      - Text
 							 *      - URL
+							 *
+							 * Used on these types:
+							 *
+							 *      - Thing
 							 */
 
 							if (
@@ -746,6 +758,10 @@ function uamswp_fad_schema_condition(
 							 * Values expected to be one of these types:
 							 *
 							 *      - PhysicalExam
+							 *
+							 * Used on these types:
+							 *
+							 *      - MedicalSign
 							 */
 
 						// identifyingTest [WIP]
@@ -756,6 +772,10 @@ function uamswp_fad_schema_condition(
 							 * Values expected to be one of these types:
 							 *
 							 *      - MedicalTest
+							 *
+							 * Used on these types:
+							 *
+							 *      - MedicalSign
 							 */
 
 						// infectiousAgent
@@ -766,6 +786,10 @@ function uamswp_fad_schema_condition(
 							 * Values expected to be one of these types:
 							 *
 							 *      - Text
+							 *
+							 * Used on these types:
+							 *
+							 *      - InfectiousDisease
 							 */
 
 							if (
@@ -807,6 +831,10 @@ function uamswp_fad_schema_condition(
 							 * Values expected to be one of these types:
 							 *
 							 *      - InfectiousAgentClass
+							 *
+							 * Used on these types:
+							 *
+							 *      - InfectiousDisease
 							 */
 
 							if (
@@ -850,6 +878,10 @@ function uamswp_fad_schema_condition(
 							 * Values expected to be one of these types:
 							 *
 							 *      - URL
+							 *
+							 * Used on these types:
+							 *
+							 *      - Thing
 							 */
 
 							if (
@@ -906,6 +938,10 @@ function uamswp_fad_schema_condition(
 							 * Values expected to be one of these types:
 							 *
 							 *      - MedicalSignOrSymptom
+							 *
+							 * Used on these types:
+							 *
+							 *      - MedicalCondition
 							 */
 
 						// possibleTreatment
@@ -916,6 +952,11 @@ function uamswp_fad_schema_condition(
 							 * Values expected to be one of these types:
 							 *
 							 *      - MedicalTherapy
+							 *
+							 * Used on these types:
+							 *
+							 *      - MedicalCondition
+							 *      - MedicalSignOrSymptom
 							 */
 
 							if (
@@ -987,6 +1028,10 @@ function uamswp_fad_schema_condition(
 							 * Values expected to be one of these types:
 							 *
 							 *      - MedicalTherapy
+							 *
+							 * Used on these types:
+							 *
+							 *      - MedicalCondition
 							 */
 
 							if (
@@ -1058,6 +1103,10 @@ function uamswp_fad_schema_condition(
 							 * Values expected to be one of these types:
 							 *
 							 *      - MedicalTherapy
+							 *
+							 * Used on these types:
+							 *
+							 *      - MedicalCondition
 							 */
 
 							if (
@@ -1128,6 +1177,10 @@ function uamswp_fad_schema_condition(
 							 * Values expected to be one of these types:
 							 *
 							 *      - MedicalTest
+							 *
+							 * Used on these types:
+							 *
+							 *      - MedicalCondition
 							 */
 
 							if (
