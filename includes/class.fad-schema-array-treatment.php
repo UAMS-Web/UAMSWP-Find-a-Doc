@@ -153,7 +153,6 @@ function uamswp_fad_schema_treatment(
 						$treatment_usesDevice_item_code = null;
 						$treatment_usesDevice_item_code_repeater = null;
 						$treatment_usesDevice_repeater = null;
-						$MedicalCondition_i = 1;
 						$Service_type = null;
 						$Service_type_parent = null;
 
