@@ -24,6 +24,9 @@ $page_id = get_the_ID();
 
 	if ( function_exists('uamswp_fad_schema_expertise') ) {
 
+		$MedicalWebPage_i = $MedicalWebPage_i ?? 1; // Iteration counter for area of expertise-as-MedicalWebPage
+		$MedicalEntity_i = $MedicalEntity_i ?? 1; // Iteration counter for area of expertise-as-MedicalEntity
+
 		$schema_expertise_combined = uamswp_fad_schema_expertise(
 			array($page_id), // array // Required // List of IDs of the area of expertise items
 			$fpage_url ?: $page_url, // string // Required // Page or fake subpage URL
@@ -31,8 +34,8 @@ $page_id = get_the_ID();
 			$current_fpage, // string // Required // Fake subpage slug
 			$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
 			0, // Nesting level within the main schema
-			1, // Iteration counter for area of expertise-as-MedicalWebPage
-			1, // Iteration counter for area of expertise-as-MedicalEntity
+			$MedicalWebPage_i, // Iteration counter for area of expertise-as-MedicalWebPage
+			$MedicalEntity_i, // Iteration counter for area of expertise-as-MedicalEntity
 			$expertise_schema_fields // Pre-existing field values array so duplicate calls can be avoided
 		);
 

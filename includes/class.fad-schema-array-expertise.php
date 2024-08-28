@@ -13,8 +13,8 @@ function uamswp_fad_schema_expertise(
 	string $current_fpage, // string // Required // Fake subpage slug
 	array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
 	int $nesting_level = 1, // int // Optional // Nesting level within the main schema
-	int $MedicalWebPage_i = 1, // int // Optional //  Iteration counter for area of expertise-as-MedicalWebPage
-	int $MedicalEntity_i = 1, // int // Optional //  Iteration counter for area of expertise-as-MedicalEntity
+	int &$MedicalWebPage_i = 1, // int // Optional //  Iteration counter for area of expertise-as-MedicalWebPage
+	int &$MedicalEntity_i = 1, // int // Optional //  Iteration counter for area of expertise-as-MedicalEntity
 	array $expertise_fields = array(), // array // Optional // Pre-existing field values array so duplicate calls can be avoided
 	array $MedicalWebPage_list = array(), // array // Optional // Pre-existing list array for area of expertise-as-MedicalWebPage to which to add additional items
 	array $MedicalEntity_list = array(), // array // Optional // Pre-existing list array for area of expertise-as-MedicalEntity to which to add additional items
