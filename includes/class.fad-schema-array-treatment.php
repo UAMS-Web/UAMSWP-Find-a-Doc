@@ -1143,9 +1143,13 @@ function uamswp_fad_schema_treatment(
 
 									// Add each item to the list array
 
-										$treatment_medicineSystem = uamswp_fad_schema_medicinesystem(
-											$treatment_medicineSystem_select // array of MedicineSystem values
-										);
+										if ( $treatment_medicineSystem_select ) {
+
+											$treatment_medicineSystem = uamswp_fad_schema_medicinesystem(
+												$treatment_medicineSystem_select // array of MedicineSystem values
+											);
+
+										}
 
 								// Add to item values
 

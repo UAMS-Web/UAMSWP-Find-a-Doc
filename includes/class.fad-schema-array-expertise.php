@@ -2566,9 +2566,13 @@ function uamswp_fad_schema_expertise(
 
 									// Add each item to the list array
 
-										$expertise_medicineSystem = uamswp_fad_schema_medicinesystem(
-											$expertise_medicineSystem_select // array of MedicineSystem values
-										);
+										if ( $expertise_medicineSystem_select ) {
+
+											$expertise_medicineSystem = uamswp_fad_schema_medicinesystem(
+												$expertise_medicineSystem_select // array of MedicineSystem values
+											);
+
+										}
 
 								// Add to item values
 
