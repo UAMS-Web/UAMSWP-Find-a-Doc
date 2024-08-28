@@ -812,7 +812,7 @@ function uamswp_fad_schema_condition(
 
 							}
 
-						// identifyingTest [WIP]
+						// identifyingTest
 
 							/**
 							 * A diagnostic test that can identify this sign.
@@ -825,6 +825,66 @@ function uamswp_fad_schema_condition(
 							 *
 							 *      - MedicalSign
 							 */
+
+							if (
+								(
+									isset($condition_item_MedicalCondition)
+									&&
+									in_array(
+										'identifyingTest',
+										$condition_properties_map[$MedicalCondition_type]['properties']
+									)
+								)
+								&&
+								$nesting_level <= 1
+							) {
+
+								// Get values
+
+									// Get identifyingTest relationship field value
+
+										$condition_identifyingTest_relationship = get_field( 'condition_schema_identifyingtest', $entity ) ?? array();
+
+									// Add each item to identifyingTest property values array
+
+										if ( $condition_identifyingTest_relationship ) {
+
+											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+											if ( function_exists('uamswp_fad_schema_treatment') ) {
+
+												$condition_identifyingTest = uamswp_fad_schema_treatment(
+													$condition_identifyingTest_relationship, // array // Required // List of IDs of the service items
+													$page_url, // string // Required // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+												);
+
+											} else {
+
+												$condition_identifyingTest = null;
+
+											}
+
+										}
+
+								// Add to item values
+
+									// MedicalCondition
+
+										uamswp_fad_schema_add_to_item_values(
+											$MedicalCondition_type, // string // Required // The @type value for the schema item
+											$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+											'identifyingTest', // string // Required // Name of schema property
+											$condition_identifyingTest, // mixed // Required // Variable to add as the property value
+											$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+											$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+											($nesting_level + 1) // int // Required // Current nesting level value
+										);
+
+							}
 
 						// infectiousAgent
 
