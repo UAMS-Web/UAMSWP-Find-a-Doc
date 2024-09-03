@@ -4650,7 +4650,6 @@
 								 *      * awards
 								 *      * certificationIdentification
 								 *      * certificationRating
-								 *      * certificationStatus
 								 *      * character
 								 *      * citation
 								 *      * comment
