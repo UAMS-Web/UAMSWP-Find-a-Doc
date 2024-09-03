@@ -4780,8 +4780,17 @@
 									 *      - Thing
 									 */
 
-									$item_additionalType = 'https://www.wikidata.org/wiki/Q4931289'; // Wikidata item for 'board certification'
-									$item_schema['additionalType'] = $item_additionalType;
+									// Get field value for whether this specialty or subspecialty certificate is considered a board certification
+
+										$item_board_query = get_field( 'certificate_board_query', $item_term ) ?? null;
+
+									// Add the value to the schema
+
+										if ( $item_board_query ) {
+
+											$item_schema['additionalType'] = 'https://www.wikidata.org/wiki/Q4931289'; // Wikidata item for 'board certification'
+
+										}
 
 								// alternateName
 
