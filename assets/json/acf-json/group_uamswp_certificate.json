@@ -90,6 +90,31 @@
 			"multiple": 0
 		},
 		{
+			"key": "field_certificate_board_query",
+			"label": "Is this specialty or subspecialty certificate considered a board certification?",
+			"name": "certificate_board_query",
+			"type": "button_group",
+			"instructions": "See the Wikipedia article for <a href='https://en.wikipedia.org/wiki/Board_certification' target='_blank'>Board certification</a> for details.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
 			"key": "field_certificate_type",
 			"label": "Certificate Type",
 			"name": "certificate_type",
