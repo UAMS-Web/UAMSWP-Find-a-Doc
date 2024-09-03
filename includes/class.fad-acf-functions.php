@@ -1159,6 +1159,166 @@
 
 			}
 
+	// Clinical Credentials custom taxonomy
+
+		// Fire before saving data to post (by using a priority less than 10)
+
+			/**
+			 * Only updates ACF data
+			 */
+
+			add_action( 'acf/save_post', 'degree_save_post', 5 );
+
+			function degree_save_post( $post_id ) {
+
+				// Taxonomy slug
+
+					$taxonomy = 'degree';
+
+				// Format the $post_id value to get the integer term ID
+
+					/**
+					 * ACF assigns the $post_id parameter by using term ID prefixed with "term_".
+					 */
+
+					$term_id = str_replace('term_', '', $post_id);
+
+				// Bail early if no data sent
+
+					if ( empty( $_POST['acf'] ) ) {
+
+						return;
+
+					}
+
+				// Get term from ID
+
+					$term = get_term_by( 'id', $term_id, $taxonomy ) ?? null;
+
+				// Bail early if the term is not a valid object
+
+					if (
+						!$term
+						||
+						!is_object($term)
+					) {
+
+						return;
+
+					}
+
+				// Set Selected Credential Transparency Description Language class field
+
+					$ctdl = 'Credential';
+
+					// Get the subtype of Credential
+
+						$ctdl_credential_subtype = $_POST['acf']['field_degree_ctdl_credential_subtype'] ?? null;
+						$ctdl = $ctdl_credential_subtype ?: $ctdl;
+
+						// Get the subtype of Badge
+
+							if ( $ctdl_credential_subtype == 'Badge' ) {
+
+								$ctdl_badge_subtype = $_POST['acf']['field_degree_ctdl_badge_subtype'] ?? null;
+								$ctdl = $ctdl_badge_subtype ?: $ctdl;
+
+							}
+
+						// Get the subtype of Certificate
+
+							if ( $ctdl_credential_subtype == 'Certificate' ) {
+
+								$ctdl_certificate_subtype = $_POST['acf']['field_degree_ctdl_certificate_subtype'] ?? null;
+								$ctdl = $ctdl_certificate_subtype ?: $ctdl;
+
+								// Get the subtype of Academic Certificate
+
+									if ( $ctdl_certificate_subtype == 'AcademicCertificate' ) {
+
+										$ctdl_academiccertificate_subtype = $_POST['acf']['field_degree_ctdl_academiccertificate_subtype'] ?? null;
+										$ctdl = $ctdl_academiccertificate_subtype ?: $ctdl;
+
+									}
+
+								// Get the subtype of Academic Certificate
+
+									if ( $ctdl_certificate_subtype == 'WorkBasedLearningCertificate' ) {
+
+										$ctdl_workbasedlearningcertificate_subtype = $_POST['acf']['field_degree_ctdl_workbasedlearningcertificate_subtype'] ?? null;
+										$ctdl = $ctdl_workbasedlearningcertificate_subtype ?: $ctdl;
+
+									}
+
+							}
+
+						// Get the subtype of Degree
+
+							if ( $ctdl_credential_subtype == 'Degree' ) {
+
+								$ctdl_degree_subtype = $_POST['acf']['field_degree_ctdl_degree_subtype'] ?? null;
+								$ctdl = $ctdl_degree_subtype ?: $ctdl;
+
+								// Get the subtype of Associate Degree
+
+									if ( $ctdl_degree_subtype == 'AssociateDegree' ) {
+
+										$ctdl_associatedegree_subtype = $_POST['acf']['field_degree_ctdl_associatedegree_subtype'] ?? null;
+										$ctdl = $ctdl_associatedegree_subtype ?: $ctdl;
+
+									}
+
+								// Get the subtype of Bachelor's Degree
+
+									if ( $ctdl_degree_subtype == 'BachelorDegree' ) {
+
+										$ctdl_bachelordegree_subtype = $_POST['acf']['field_degree_ctdl_bachelordegree_subtype'] ?? null;
+										$ctdl = $ctdl_bachelordegree_subtype ?: $ctdl;
+
+									}
+
+								// Get the subtype of Doctoral Degree
+
+									if ( $ctdl_degree_subtype == 'DoctoralDegree' ) {
+
+										$ctdl_doctoraldegree_subtype = $_POST['acf']['field_degree_ctdl_doctoraldegree_subtype'] ?? null;
+										$ctdl = $ctdl_doctoraldegree_subtype ?: $ctdl;
+
+									}
+
+								// Get the subtype of Master's Degree
+
+									if ( $ctdl_degree_subtype == 'MasterDegree' ) {
+
+										$ctdl_masterdegree_subtype = $_POST['acf']['field_degree_ctdl_masterdegree_subtype'] ?? null;
+										$ctdl = $ctdl_masterdegree_subtype ?: $ctdl;
+
+									}
+
+							}
+
+						// Get the subtype of Diploma
+
+							if ( $ctdl_credential_subtype == 'Diploma' ) {
+
+								$ctdl_diploma_subtype = $_POST['acf']['field_degree_ctdl_diploma_subtype'] ?? null;
+								$ctdl = $ctdl_diploma_subtype ?: $ctdl;
+
+							}
+
+
+
+
+					// Conditionally set the field value using the parent term's field value
+
+						if ( $ctdl ) {
+
+							$_POST['acf']['field_degree_ctdl'] = $ctdl;
+
+						}
+
+			}
+
 // Bidirectionally update ACF data
 
 	// Fire before saving data to post (by using a priority less than 10)

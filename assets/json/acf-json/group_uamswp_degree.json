@@ -72,10 +72,32 @@
 		},
 		{
 			"key": "field_degree_ctdl",
-			"label": "Credential Transparency Description Language Schema Term",
+			"label": "Selected Credential Transparency Description Language class",
 			"name": "degree_ctdl",
+			"type": "hidden",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "0",
+				"class": "hide-acf-field",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_degree_ctdl_credential_subtype",
+			"label": "What type of credential is this?",
+			"name": "degree_ctdl_credential_subtype",
 			"type": "radio",
-			"instructions": "Find the definition and other details about each term in this list at <a href='https://credreg.net/ctdl/terms/#classes' target='_blank'>https://credreg.net/ctdl/terms/#classes</a>.",
+			"instructions": "Select the subtype that most closely matches this credential. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>Find the definition and other details about each term in this list at <a href='https://credreg.net/ctdl/terms/#classes' target='_blank'>https://credreg.net/ctdl/terms/#classes</a>.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -83,51 +105,403 @@
 				"class": "",
 				"id": ""
 			},
-			"acfe_permissions": "",
 			"choices": {
-				"ApprenticeshipCertificate": "ApprenticeshipCertificate",
-				"Assessment": "Assessment",
-				"AssociateDegree": "AssociateDegree",
-				"AssociateOfAppliedArtsDegree": "AssociateOfAppliedArtsDegree",
-				"AssociateOfAppliedScienceDegree": "AssociateOfAppliedScienceDegree",
-				"AssociateOfArtsDegree": "AssociateOfArtsDegree",
-				"AssociateOfScienceDegree": "AssociateOfScienceDegree",
-				"BachelorDegree": "BachelorDegree",
-				"BachelorOfArtsDegree": "BachelorOfArtsDegree",
-				"BachelorOfScienceDegree": "BachelorOfScienceDegree",
-				"Badge": "Badge",
-				"Certificate": "Certificate",
-				"CertificateOfCompletion": "CertificateOfCompletion",
-				"Certification": "Certification",
-				"Course": "Course",
-				"Credential": "Credential",
-				"Degree": "Degree",
-				"DigitalBadge": "DigitalBadge",
-				"Diploma": "Diploma",
-				"DoctoralDegree": "DoctoralDegree",
-				"GeneralEducationDevelopment": "GeneralEducationDevelopment",
-				"JourneymanCertificate": "JourneymanCertificate",
-				"LearningProgram": "LearningProgram",
-				"License": "License",
-				"MasterCertificate": "MasterCertificate",
-				"MasterDegree": "MasterDegree",
-				"MasterOfArtsDegree": "MasterOfArtsDegree",
-				"MasterOfScienceDegree": "MasterOfScienceDegree",
-				"MicroCredential": "MicroCredential",
-				"ProfessionalDoctorate": "ProfessionalDoctorate",
-				"QualityAssuranceCredential": "QualityAssuranceCredential",
-				"ResearchDoctorate": "ResearchDoctorate",
-				"SecondarySchoolDiploma": "SecondarySchoolDiploma",
-				"SpecialistDegree": "SpecialistDegree"
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"Badge": "<strong>Badge</strong> — Recognition designed to be displayed as a marker of accomplishment, activity, achievement, skill, interest, association, or identity.",
+				"Certificate": "<strong>Certificate</strong> — Credential which designates participation in, completion of, or demonstration of requisite knowledge and skills for a formal academic or training program, an occupation, or non-formal learning.",
+				"Certification": "<strong>Certification</strong> — Time-limited, revocable, renewable credential awarded by an authoritative body for demonstrating the knowledge, skills, and abilities to perform specific tasks or an occupation.",
+				"Degree": "<strong>Degree</strong> — Academic credential conferred upon completion of a program or course of study, typically over multiple years at a college or university.",
+				"Diploma": "<strong>Diploma</strong> — Credential awarded by educational institutions for successful completion of a course of study or its equivalent.",
+				"License": "<strong>License</strong> — Credential awarded by a government agency or other authorized organization that constitutes legal authority to do a specific job and/or utilize a specific item, system or infrastructure and are typically earned through some combination of degree or certificate attainment, certifications, assessments, work experience, and/or fees, and are time-limited and must be renewed periodically.",
+				"MicroCredential": "<strong>Micro-Credential</strong> — Credential that addresses a subset of field-specific knowledge, skills, or competencies; often developmental with relationships to other micro-credentials and field credentials.",
+				"QualityAssuranceCredential": "<strong>Quality Assurance Credential</strong> — Credential assuring that an organization, program, or awarded credential meets prescribed requirements and may include development and administration of qualifying examinations."
 			},
-			"default_value": "",
 			"allow_null": 1,
-			"other_choice": 1,
-			"save_other_choice": 0,
+			"other_choice": 0,
+			"default_value": "",
 			"layout": "vertical",
 			"return_format": "value",
-			"acfe_settings": "",
-			"acfe_validate": ""
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_degree_ctdl_badge_subtype",
+			"label": "What type of badge is this?",
+			"name": "degree_ctdl_badge_subtype",
+			"type": "radio",
+			"instructions": "Select the subtype that most closely matches this badge. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>Find the definition and other details about each term in this list at <a href='https://credreg.net/ctdl/terms/#classes' target='_blank'>https://credreg.net/ctdl/terms/#classes</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_degree_ctdl_credential_subtype",
+						"operator": "==",
+						"value": "Badge"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"Digital Badge": "<strong>Digital Badge</strong> — Badge offered in digital form.",
+				"Open Badge": "<strong>Open Badge</strong> — Visual symbol containing verifiable claims in accordance with the Open Badges specification and delivered digitally."
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_degree_ctdl_certificate_subtype",
+			"label": "What type of certificate is this?",
+			"name": "degree_ctdl_certificate_subtype",
+			"type": "radio",
+			"instructions": "Select the subtype that most closely matches this certificate. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>Find the definition and other details about each term in this list at <a href='https://credreg.net/ctdl/terms/#classes' target='_blank'>https://credreg.net/ctdl/terms/#classes</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_degree_ctdl_credential_subtype",
+						"operator": "==",
+						"value": "Certificate"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"AcademicCertificate": "<strong>Academic Certificate</strong> — Credential awarded for successful completion of a formal education program, demonstrating requisite knowledge and skills.",
+				"CertificateOfCompletion": "<strong>Certificate of Completion</strong> — Credential that acknowledges completion of an assignment, training or other activity.",
+				"CertificateOfParticipation": "<strong>Certificate of Participation</strong> — Credential that acknowledges attendance and/or engagement in an activity.",
+				"ProfessionalCertificate": "<strong>Professional Certificate</strong> — Credential awarded for demonstrating competencies in a profession or particular occupational field, including job readiness.",
+				"ProficiencyCertificate": "<strong>Proficiency Certificate</strong> — Credential awarded after assessment of skills in a specific area defined by a recognized body of experts, without regard for how the skills were learned.",
+				"WorkBasedLearningCertificate": "<strong>Work-Based Learning Certificate</strong> — Credential awarded for work-based learning and earn-and-learn models that meet standards and are applicable to industry, trades, occupations, and professions."
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_degree_ctdl_academiccertificate_subtype",
+			"label": "What type of academic certificate is this?",
+			"name": "degree_ctdl_academiccertificate_subtype",
+			"type": "radio",
+			"instructions": "Select the subtype that most closely matches this academic certificate. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>Find the definition and other details about each term in this list at <a href='https://credreg.net/ctdl/terms/#classes' target='_blank'>https://credreg.net/ctdl/terms/#classes</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_degree_ctdl_credential_subtype",
+						"operator": "==",
+						"value": "Certificate"
+					},
+					{
+						"field": "field_degree_ctdl_certificate_subtype",
+						"operator": "==",
+						"value": "AcademicCertificate"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"BasicTechnicalCertificate": "<strong>Basic Technical Certificate</strong> — Credential awarded at a postsecondary level for successful completion of a formal education program that is completed within one semester, demonstrating competencies within a specific occupational area, indicating job readiness.",
+				"GeneralEducationLevel1Certificate": "<strong>General Education Level 1 Certificate</strong> — Credential award at a postsecondary level for successful completion of general education courses that cover a broad range of foundational academic skills and takes less than 1 year.",
+				"GeneralEducationLevel2Certificate": "<strong>General Education Level 2 Certificate</strong> — Credential award at a postsecondary level for successful completion of general education courses that takes at least 1 year that cover a broad range of foundational academic skills and takes less than 2 years to complete.",
+				"HigherEducationLevel1Certificate": "<strong>Higher Education Level 1 Certificate</strong> — Credential awarded at the postsecondary level for successful completion of a formal higher education program that takes about one year in a specific subject.",
+				"HigherEducationLevel2Certificate": "<strong>Higher Education Level 2 Certificate</strong> — Credential awarded at the postsecondary level for successful completion of a formal higher education program that takes about two years in a specific subject.",
+				"PostBaccalaureateCertificate": "<strong>Post-Baccalaureate Certificate</strong> — Credential award that requires completion of an organized program of study at a level beyond that of a bachelor's degree, which is designed for persons who have completed a baccalaureate degree but does not meet the requirements of a master's degree.",
+				"PostMasterCertificate": "<strong>Post-Master Certificate</strong> — Credential award that requires completion of an organized program of study beyond that of a master's degree, which is designed for persons who have completed a master's degree but does not meet the requirements of a doctor's degree.",
+				"SecondaryEducationCertificate": "<strong>Secondary Education Certificate</strong> — Credential for successful completion of a formal secondary-level education program that is less than a diploma and does not indicate completion of secondary education graduation requirements.",
+				"TechnicalLevel1Certificate": "<strong>Technical Level 1 Certificate</strong> — Credential award at a postsecondary level for successful completion of a formal education program that is more than one semester and less than 1 year, demonstrating competencies within a specific subject area or an occupational area indicating job readiness.",
+				"TechnicalLevel2Certificate": "<strong>Technical Level 2 Certificate</strong> — Credential award at a postsecondary level for successful completion of a formal education program that is at least 1 year but less than 2 years, demonstrating competencies within a specific subject area or in an occupational area indicating job readiness.",
+				"TechnicalLevel3Certificate": "<strong>Technical Level 3 Certificate</strong> — Credential award at a postsecondary level for successful completion of a formal education program that is at least 2 years but less than 4 years, demonstrating competencies within specific occupational areas indicating job readiness."
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_degree_ctdl_workbasedlearningcertificate_subtype",
+			"label": "What type of work-based learning certificate is this?",
+			"name": "degree_ctdl_workbasedlearningcertificate_subtype",
+			"type": "radio",
+			"instructions": "Select the subtype that most closely matches this work-based learning certificate. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>Find the definition and other details about each term in this list at <a href='https://credreg.net/ctdl/terms/#classes' target='_blank'>https://credreg.net/ctdl/terms/#classes</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_degree_ctdl_credential_subtype",
+						"operator": "==",
+						"value": "Certificate"
+					},
+					{
+						"field": "field_degree_ctdl_certificate_subtype",
+						"operator": "==",
+						"value": "WorkBasedLearningCertificate"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"ApprenticeshipCertificate": "<strong>Apprentice Certificate</strong> — Credential awarded at the Apprentice level for successful completion of an apprenticeship program in industry trades and professions.",
+				"JourneymanCertificate": "<strong>Journeyman Certificate</strong> — Credential awarded at the Journeyman level for successful completion of an apprenticeship program in industry trades and professions.",
+				"MasterCertificate": "<strong>Master Trade Certificate</strong> — Credential awarded at the Master level for demonstration of the highest level of skills and performance in industry trades and professions.",
+				"PreApprenticeshipCertificate": "<strong>Pre-Apprenticeship Certificate</strong> — Credential awarded to indicate readiness for an apprentice-level program."
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_degree_ctdl_degree_subtype",
+			"label": "What type of degree is this?",
+			"name": "degree_ctdl_degree_subtype",
+			"type": "radio",
+			"instructions": "Select the subtype that most closely matches this degree. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>Find the definition and other details about each term in this list at <a href='https://credreg.net/ctdl/terms/#classes' target='_blank'>https://credreg.net/ctdl/terms/#classes</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_degree_ctdl_credential_subtype",
+						"operator": "==",
+						"value": "Degree"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"AssociateDegree": "<strong>Associate Degree</strong> — College/university award for students typically completing the first two years of full-time postsecondary school education.",
+				"BachelorDegree": "<strong>Bachelor's Degree</strong> — College/university award for students typically completing three to five years of education where course work and activities advance skills beyond those of the first one to two years of college/university study.",
+				"DoctoralDegree": "<strong>Doctoral Degree</strong> — Highest credential award for students who have completed both a bachelor's degree and a master's degree or their equivalent as well as independent research and/or a significant project or paper.",
+				"MasterDegree": "<strong>Master's Degree</strong> — Credential awarded for a graduate level course of study where course work and activities advance skills beyond those of the bachelor's degree or its equivalent.",
+				"SpecialistDegree": "<strong>Specialist Degree</strong> — Credential awarded for a graduate level course of study where course work and activities advance skills beyond those of the master’s degree and less than a doctoral degree and provide specific preparation for advanced careers in a specialist field."
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_degree_ctdl_associatedegree_subtype",
+			"label": "What type of associate degree is this?",
+			"name": "degree_ctdl_associatedegree_subtype",
+			"type": "radio",
+			"instructions": "Select the subtype that most closely matches this associate degree. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>Find the definition and other details about each term in this list at <a href='https://credreg.net/ctdl/terms/#classes' target='_blank'>https://credreg.net/ctdl/terms/#classes</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_degree_ctdl_credential_subtype",
+						"operator": "==",
+						"value": "Degree"
+					},
+					{
+						"field": "field_degree_ctdl_degree_subtype",
+						"operator": "==",
+						"value": "AssociateDegree"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"AssociateOfAppliedArtsDegree": "<strong>Associate of Applied Arts Degree</strong> — College/university award for students typically completing two years of full-time postsecondary school education in a technical, professional, or vocational program with an emphasis on direct employment in the arts and social sciences fields.",
+				"AssociateOfAppliedScienceDegree": "<strong>Associate of Applied Science Degree</strong> — College/university award for students typically completing two years of full-time postsecondary school education in a technical, professional, or vocational program with an emphasis on direct employment in applied scientific and technological fields.",
+				"AssociateOfArtsDegree": "<strong>Associate of Arts Degree</strong> — College/university award for students typically completing the first two years of full-time postsecondary school education with an emphasis in the liberal arts and sciences such as the humanities and social science fields.",
+				"AssociateOfScienceDegree": "<strong>Associate of Science Degree</strong> — College/university award for students typically completing the first two years of full-time postsecondary school education with an emphasis in scientific and technical fields and professional fields of study."
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_degree_ctdl_bachelordegree_subtype",
+			"label": "What type of bachelor's degree is this?",
+			"name": "degree_ctdl_bachelordegree_subtype",
+			"type": "radio",
+			"instructions": "Select the subtype that most closely matches this bachelor's degree. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>Find the definition and other details about each term in this list at <a href='https://credreg.net/ctdl/terms/#classes' target='_blank'>https://credreg.net/ctdl/terms/#classes</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_degree_ctdl_credential_subtype",
+						"operator": "==",
+						"value": "Degree"
+					},
+					{
+						"field": "field_degree_ctdl_degree_subtype",
+						"operator": "==",
+						"value": "BachelorDegree"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"BachelorOfArtsDegree": "<strong>Bachelor of Arts Degree</strong> — College/university award for students typically completing three to five years of education where course work and activities advance skills beyond those of the first one to two years of college/university study, with an emphasis in the liberal arts and sciences such as the humanities and social science fields.",
+				"BachelorOfScienceDegree": "<strong>Bachelor of Science Degree</strong> — College/university award for students typically completing three to five years of education where course work and activities advance skills beyond those of the first one to two years of college/university study, with an emphasis in scientific and technical fields and professional fields of study."
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_degree_ctdl_doctoraldegree_subtype",
+			"label": "What type of doctoral degree is this?",
+			"name": "degree_ctdl_doctoraldegree_subtype",
+			"type": "radio",
+			"instructions": "Select the subtype that most closely matches this doctoral degree. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>Find the definition and other details about each term in this list at <a href='https://credreg.net/ctdl/terms/#classes' target='_blank'>https://credreg.net/ctdl/terms/#classes</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_degree_ctdl_credential_subtype",
+						"operator": "==",
+						"value": "Degree"
+					},
+					{
+						"field": "field_degree_ctdl_degree_subtype",
+						"operator": "==",
+						"value": "DoctoralDegree"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"ProfessionalDoctorate": "<strong>Professional Doctorate</strong> — Doctoral degree conferred upon completion of a program providing the knowledge and skills for the recognition, credential, or license required for professional practice.",
+				"ResearchDoctorate": "<strong>Research Doctorate</strong> — Doctoral degree conferred for advanced work beyond the master level, including the preparation and defense of a thesis or dissertation based on original research, or the planning and execution of an original project demonstrating substantial artistic or scholarly achievement."
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_degree_ctdl_masterdegree_subtype",
+			"label": "What type of master's degree is this?",
+			"name": "degree_ctdl_masterdegree_subtype",
+			"type": "radio",
+			"instructions": "Select the subtype that most closely matches this master's degree. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>Find the definition and other details about each term in this list at <a href='https://credreg.net/ctdl/terms/#classes' target='_blank'>https://credreg.net/ctdl/terms/#classes</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_degree_ctdl_credential_subtype",
+						"operator": "==",
+						"value": "Degree"
+					},
+					{
+						"field": "field_degree_ctdl_degree_subtype",
+						"operator": "==",
+						"value": "MasterDegree"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"MasterOfArtsDegree": "<strong>Master of Arts Degree</strong> — Credential awarded for a graduate level course of study where course work and activities advance skills beyond those of the bachelor's degree or its equivalent, with an emphasis in the liberal arts and sciences such as the humanities and social science fields.",
+				"MasterOfScienceDegree": "<strong>Master of Science Degree</strong> — Credential awarded for a graduate level course of study where course work and activities advance skills beyond those of the bachelor's degree or its equivalent, with an emphasis in scientific and technical fields and professional fields of study."
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_degree_ctdl_diploma_subtype",
+			"label": "What type of diploma is this?",
+			"name": "degree_ctdl_diploma_subtype",
+			"type": "radio",
+			"instructions": "Select the subtype that most closely matches this diploma. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>Find the definition and other details about each term in this list at <a href='https://credreg.net/ctdl/terms/#classes' target='_blank'>https://credreg.net/ctdl/terms/#classes</a>.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_degree_ctdl_credential_subtype",
+						"operator": "==",
+						"value": "Diploma"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"GeneralEducationDevelopment": "<strong>General Education Development (GED)</strong> — Credential awarded by examination that demonstrates that an individual has acquired secondary school-level academic skills.",
+				"SecondarySchoolDiploma": "<strong>Secondary School Diploma</strong> — Diploma awarded by secondary education institutions for successful completion of a secondary school program of study."
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
 		},
 		{
 			"key": "field_degree_alternatename",
