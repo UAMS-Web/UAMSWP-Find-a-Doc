@@ -5330,50 +5330,18 @@
 
 			/*
 
-				Values taken from https://credreg.net/ctdl/terms/#classes on Sept. 21, 2023
+				Values taken from https://credreg.net/ctdl/terms/#classes on Sept. 3, 2024
 
 			*/
 
 			$ctdl_classes_map = array(
-				'AccreditAction' => array(
-					'label' => 'Accredit Action',
-					'definition' => 'Action by an independent, neutral, and authoritative agent that certifies an entity as meeting a prescribed set of standards.'
-				),
-				'AdvancedStandingAction' => array(
-					'label' => 'Advanced Standing Action',
-					'definition' => 'Claim by an agent asserting that the object credential of the action provides advanced standing for a credential under the asserting agent\'s authority.'
-				),
-				'Agent' => array(
-					'label' => 'Agent',
-					'definition' => 'Organization or person that acts or has the power to act.'
-				),
-				'AggregateDataProfile' => array(
-					'label' => 'Aggregate Data Profile',
-					'definition' => 'Resource containing summary statistical data.'
-				),
-				'AlignmentMap' => array(
-					'label' => 'Alignment Map',
-					'definition' => 'An entity comprised of a set of alignment or mapping assertions between two existing entities such as mapping a certificate providing advanced standing to a degree.'
-				),
 				'ApprenticeshipCertificate' => array(
-					'label' => 'Apprenticeship Certificate',
-					'definition' => 'Credential earned through work-based learning and earn-and-learn models that meet standards and are applicable to industry trades and professions.'
+					'label' => 'Apprentice Certificate',
+					'definition' => 'Credential awarded at the Apprentice level for successful completion of an apprenticeship program in industry trades and professions.'
 				),
-				'ApproveAction' => array(
-					'label' => 'Approve Action',
-					'definition' => 'Action by an independent, neutral, and authoritative agent that pronounces a favorable judgment of a credential.'
-				),
-				'Assessment' => array(
-					'label' => 'Assessment',
-					'definition' => 'Direct, indirect, formative, and summative evaluation or estimation of the nature, ability, or quality of an entity, performance, or outcome of an action.'
-				),
-				'AssessmentComponent' => array(
-					'label' => 'Assessment Component',
-					'definition' => 'Resource that identifies a direct, indirect, formative, and summative evaluation or estimation of the nature, ability, or quality of a resource, performance, or outcome of an action.'
-				),
-				'AssessmentProfile' => array(
-					'label' => 'Assessment Profile',
-					'definition' => 'Entity that describes the key characteristics of an assessment for a credential.'
+				'AssociateDegree' => array(
+					'label' => 'Academic Certificate',
+					'definition' => 'Credential awarded for successful completion of a formal education program, demonstrating requisite knowledge and skills.'
 				),
 				'AssociateDegree' => array(
 					'label' => 'Associate Degree',
@@ -5411,9 +5379,9 @@
 					'label' => 'Badge',
 					'definition' => 'Recognition designed to be displayed as a marker of accomplishment, activity, achievement, skill, interest, association, or identity.'
 				),
-				'BasicComponent' => array(
-					'label' => 'Basic Component',
-					'definition' => 'Resource that identifies a resource not otherwise covered by the enumerated PathwayComponent subclasses.'
+				'BasicTechnicalCertificate' => array(
+					'label' => 'Basic Technical Certificate',
+					'definition' => 'Credential awarded at a postsecondary level for successful completion of a formal education program that is completed within one semester, demonstrating competencies within a specific occupational area, indicating job readiness.'
 				),
 				'Certificate' => array(
 					'label' => 'Certificate',
@@ -5423,97 +5391,17 @@
 					'label' => 'Certificate of Completion',
 					'definition' => 'Credential that acknowledges completion of an assignment, training or other activity.'
 				),
+				'CertificateOfParticipation' => array(
+					'label' => 'Certificate of Participation',
+					'definition' => 'Credential that acknowledges attendance and/or engagement in an activity.'
+				),
 				'Certification' => array(
 					'label' => 'Certification',
 					'definition' => 'Time-limited, revocable, renewable credential awarded by an authoritative body for demonstrating the knowledge, skills, and abilities to perform specific tasks or an occupation.'
 				),
-				'CocurricularComponent' => array(
-					'label' => 'Cocurricular Component',
-					'definition' => 'Resource that identifies an activity, program, or informal learning experience such as a civic or service activity that supplements and complements the curriculum.'
-				),
-				'Collection' => array(
-					'label' => 'Collection',
-					'definition' => 'Aggregation of related resources.'
-				),
-				'CollectionMember' => array(
-					'label' => 'Collection Member',
-					'definition' => 'Provides information about the membership of a resource in a Collection.'
-				),
-				'CompetencyComponent' => array(
-					'label' => 'Competency Component',
-					'definition' => 'Resource that identifies a measurable or observable knowledge, skill, or ability necessary to successful performance of a person in a given context.'
-				),
-				'ComponentCondition' => array(
-					'label' => 'Component Condition',
-					'definition' => 'Resource that describes what must be done to complete a PathwayComponent, or part thereof, as determined by the issuer of the Pathway.'
-				),
-				'ConditionManifest' => array(
-					'label' => 'Condition Manifest',
-					'definition' => 'Set of constraints, prerequisites, entry conditions, or requirements maintained at the organizational and/or sub-organizational level.'
-				),
-				'ConditionProfile' => array(
-					'label' => 'Condition Profile',
-					'definition' => 'Entity describing a constraint, prerequisite, entry condition, or requirement.'
-				),
-				'Constraint' => array(
-					'label' => 'Constraint',
-					'definition' => 'Resource that identifies the parameters defining a limitation or restriction applicable to candidate pathway components.'
-				),
-				'ConstraintRule' => array(
-					'label' => 'Constraint Rule',
-					'definition' => 'Abstract class of executable constraints.'
-				),
-				'ContactPoint' => array(
-					'label' => 'Contact Point',
-					'definition' => 'Means of contacting an organization or its representative.'
-				),
-				'CostManifest' => array(
-					'label' => 'Cost Manifest',
-					'definition' => 'Entity that describes a set of costs maintained at, and applicable across the organizational and/or sub-organizational level.'
-				),
-				'CostProfile' => array(
-					'label' => 'Cost Profile',
-					'definition' => 'Entity that describes direct costs one would incur if one were to pursue a credential, assessment, learning opportunity, or aspects thereof.'
-				),
-				'Course' => array(
-					'label' => 'Course',
-					'definition' => 'Single structured sequence of one or more educational activities that aims to develop a prescribed set of competencies of learners.'
-				),
-				'CourseComponent' => array(
-					'label' => 'Course Component',
-					'definition' => 'Resource that identifies a structured sequence of one or more learning activities that aims to develop a prescribed set of knowledge, skill, or ability of learners.'
-				),
 				'Credential' => array(
 					'label' => 'Credential',
 					'definition' => 'Qualification, achievement, personal or organizational quality, or aspect of an identity typically used to indicate suitability.'
-				),
-				'CredentialAlignmentObject' => array(
-					'label' => 'Credential Alignment Object',
-					'definition' => 'Entity describing an affiliation or association between an entity such as a credential, learning opportunity or assessment and another entity in a structured framework such as a concept scheme, enumerated list, or competency framework.'
-				),
-				'CredentialAssertion' => array(
-					'label' => 'Credential Assertion',
-					'definition' => 'Representation of a credential awarded to a person.'
-				),
-				'CredentialComponent' => array(
-					'label' => 'Credential Component',
-					'definition' => 'Resource that identifies another resource that describes qualification, achievement, personal or organizational quality, or aspect of an identity typically used to indicate suitability.'
-				),
-				'CredentialFramework' => array(
-					'label' => 'Credential Framework',
-					'definition' => 'Class of all structured sets of conceptual entities intentionally designed for use as value vocabulary terms for description and classification in the credentialing context.'
-				),
-				'CredentialingAction' => array(
-					'label' => 'Credentialing Action',
-					'definition' => 'Action taken by an agent affecting the status of an object entity.'
-				),
-				'CredentialOrganization' => array(
-					'label' => 'Credential Organization',
-					'definition' => 'Organization that plays one or more key roles in the lifecycle of a credential.'
-				),
-				'CredentialPerson' => array(
-					'label' => 'CredentialPerson',
-					'definition' => 'Person who plays a role as primary agent in a credentialing action.'
 				),
 				'Degree' => array(
 					'label' => 'Degree',
@@ -5531,81 +5419,29 @@
 					'label' => 'Doctoral Degree',
 					'definition' => 'Highest credential award for students who have completed both a bachelor\'s degree and a master\'s degree or their equivalent as well as independent research and/or a significant project or paper.'
 				),
-				'DurationProfile' => array(
-					'label' => 'Duration Profile',
-					'definition' => 'Entity describing the temporal aspects of a resource.'
-				),
-				'EarningsProfile' => array(
-					'label' => 'Earnings Profile',
-					'definition' => 'Entity that describes earning and related statistical information for a given credential.'
-				),
-				'EmploymentOutcomeProfile' => array(
-					'label' => 'Employment Outcome Profile',
-					'definition' => 'Entity that describes employment outcomes and related statistical information for a given credential.'
-				),
-				'ExtracurricularComponent' => array(
-					'label' => 'Extracurricular Component',
-					'definition' => 'Resource that identifies an activity, program, or informal learning experience that may be offered or provided by a school, college, or other organization that is not connected to a curriculum.'
-				),
-				'FinancialAssistanceProfile' => array(
-					'label' => 'Financial Assistance Profile',
-					'definition' => 'Entity that describes financial assistance that is offered or available.'
-				),
 				'GeneralEducationDevelopment' => array(
 					'label' => 'General Education Development (GED)',
 					'definition' => 'Credential awarded by examination that demonstrates that an individual has acquired secondary school-level academic skills.'
 				),
-				'GeoCoordinates' => array(
-					'label' => 'Geographic Coordinates',
-					'definition' => 'Geographic coordinates of a place or event including latitude and longitude as well as other locational information.'
+				'GeneralEducationLevel1Certificate' => array(
+					'label' => 'General Education Level 1 Certificate',
+					'definition' => 'Credential award at a postsecondary level for successful completion of general education courses that cover a broad range of foundational academic skills and takes less than 1 year.'
 				),
-				'HoldersProfile' => array(
-					'label' => 'Holders Profile',
-					'definition' => 'Entity describing the count and related statistical information of holders of a given credential.'
+				'GeneralEducationLevel2Certificate' => array(
+					'label' => 'General Education Level 2 Certificate',
+					'definition' => 'Credential award at a postsecondary level for successful completion of general education courses that takes at least 1 year that cover a broad range of foundational academic skills and takes less than 2 years to complete.'
 				),
-				'IdentifierValue' => array(
-					'label' => 'Identifier Value',
-					'definition' => 'Means of identifying a resource, typically consisting of an alphanumeric token and a context or scheme from which that token originates.'
+				'HigherEducationLevel1Certificate' => array(
+					'label' => 'Higher Education Level 1 Certificate',
+					'definition' => 'Credential awarded at the postsecondary level for successful completion of a formal higher education program that takes about one year in a specific subject.'
 				),
-				'IndustryClassification' => array(
-					'label' => 'Industry Classification',
-					'definition' => 'Class of of concept schemes defining industries such as NAICS in the U.S. and ESCO in the European Union.'
-				),
-				'InstructionalProgramClassification' => array(
-					'label' => 'Instructional Program Classification',
-					'definition' => 'Class of concept schemes defining instructional program types such as the CIP codes in the U.S.'
-				),
-				'Job' => array(
-					'label' => 'Job',
-					'definition' => 'Set of responsibilities based on work roles within an occupation as defined by an employer.'
-				),
-				'JobComponent' => array(
-					'label' => 'Job Component',
-					'definition' => 'Resource that identifies a work position, employment, or occupation.'
+				'HigherEducationLevel2Certificate' => array(
+					'label' => 'Higher Education Level 2 Certificate',
+					'definition' => 'Credential awarded at the postsecondary level for successful completion of a formal higher education program that takes about two years in a specific subject.'
 				),
 				'JourneymanCertificate' => array(
 					'label' => 'Journeyman Certificate',
 					'definition' => 'Credential awarded to skilled workers on successful completion of an apprenticeship in industry trades and professions.'
-				),
-				'JurisdictionProfile' => array(
-					'label' => 'Jurisdiction Profile',
-					'definition' => 'Geo-political information about applicable geographic areas and their exceptions.'
-				),
-				'LearningOpportunity' => array(
-					'label' => 'Learning Opportunity',
-					'definition' => 'Structured and unstructured learning and development opportunities based in direct experience, formal and informal study, observation, and involvement in discourse and practice.'
-				),
-				'LearningOpportunityProfile' => array(
-					'label' => 'Learning Opportunity Profile',
-					'definition' => 'Entity describing an educational or training opportunity.'
-				),
-				'LearningProgram' => array(
-					'label' => 'Learning Program',
-					'definition' => 'Set of learning opportunities that leads to an outcome, usually a credential like a degree or certificate.'
-				),
-				'LearningResource' => array(
-					'label' => 'Learning Resource',
-					'definition' => 'Entity that is used as part of an learning activity (e.g. a textbook) or that describes (e.g. a lesson plan) or records the educational activity (e.g. an audio- or video-recording of a lesson).'
 				),
 				'License' => array(
 					'label' => 'License',
@@ -5627,97 +5463,53 @@
 					'label' => 'Master of Science Degree',
 					'definition' => 'Credential awarded for a graduate level course of study where course work and activities advance skills beyond those of the bachelor\'s degree or its equivalent, with an emphasis in scientific and technical fields and professional fields of study.'
 				),
+				'MasterCertificate' => array(
+					'label' => 'Master Trade Certificate',
+					'definition' => 'Credential awarded at the Master level for demonstration of the highest level of skills and performance in industry trades and professions.'
+				),
 				'MicroCredential' => array(
 					'label' => 'Micro-Credential',
 					'definition' => 'Credential that addresses a subset of field-specific knowledge, skills, or competencies; often developmental with relationships to other micro-credentials and field credentials.'
-				),
-				'Occupation' => array(
-					'label' => 'Occupation',
-					'definition' => 'Profession, trade, or career field that may involve training and/or a formal qualification.'
-				),
-				'OccupationClassification' => array(
-					'label' => 'Occupation Classification',
-					'definition' => 'Class of concept schemes identifying occupations such as the Standard Occupational Classification (SOC) system in the U.S. and the European Skills/Competences, Qualifications and Occupations (ESCO).'
-				),
-				'OfferAction' => array(
-					'label' => 'Offer Action',
-					'definition' => 'Action by an authoritative agent offering access to a entity such as a credential, learning opportunity or assessment.'
 				),
 				'OpenBadge' => array(
 					'label' => 'Open Badge',
 					'definition' => 'Visual symbol containing verifiable claims in accordance with the Open Badges specification and delivered digitally.'
 				),
-				'Organization' => array(
-					'label' => 'Organization',
-					'definition' => 'An entity such as an association, company, corporation, club, co-operative, labor union etc.'
+				'PreApprenticeshipCertificate' => array(
+					'label' => 'Pre-Apprenticeship Certificate',
+					'definition' => 'Credential awarded to indicate readiness for an apprentice-level program'
 				),
-				'Pathway' => array(
-					'label' => 'Pathway',
-					'definition' => 'Resource composed of a structured set of PathwayComponents defining points along a route to fulfillment of a goal or objective.'
+				'PostBaccalaureateCertificate' => array(
+					'label' => 'Post-Baccalaureate Certificate',
+					'definition' => 'Credential award that requires completion of an organized program of study at a level beyond that of a bachelor\'s degree, which is designed for persons who have completed a baccalaureate degree but does not meet the requirements of a master\'s degree.'
 				),
-				'PathwayComponent' => array(
-					'label' => 'Pathway Component',
-					'definition' => 'Resource that serves as a defined point along the route of a Pathway which describes an objective and its completion requirements through reference to one or more instances of ComponentCondition.'
+				'PostMasterCertificate' => array(
+					'label' => 'Post-Master Certificate',
+					'definition' => 'Credential award that requires completion of an organized program of study beyond that of a master\'s degree, which is designed for persons who have completed a master\'s degree but does not meet the requirements of a doctor\'s degree.'
 				),
-				'PathwaySet' => array(
-					'label' => 'Pathway Set',
-					'definition' => 'A roadmap of multiple related pathways that lead to one or more destinations.'
-				),
-				'Place' => array(
-					'label' => 'Place',
-					'definition' => 'Entity describing a physical location or geospatial area.'
-				),
-				'PostalAddress' => array(
-					'label' => 'Postal Address',
-					'definition' => 'Entity describing a mailing address.'
-				),
-				'ProcessProfile' => array(
-					'label' => 'Process Profile',
-					'definition' => 'Entity describing the type, nature, and other relevant information about a process related to a credential.'
+				'ProfessionalCertificate' => array(
+					'label' => 'Professional Certificate',
+					'definition' => 'Credential awarded for demonstrating competencies in a profession or particular occupational field, including job readiness.'
 				),
 				'ProfessionalDoctorate' => array(
 					'label' => 'Professional Doctorate',
 					'definition' => 'Doctoral degree conferred upon completion of a program providing the knowledge and skills for the recognition, credential, or license required for professional practice.'
 				),
-				'QACredentialOrganization' => array(
-					'label' => 'QA Credential Organization',
-					'definition' => 'Quality assurance organization that plays one or more key roles in the lifecycle of a credential, learning program, or assessment.'
+				'ProficiencyCertificate' => array(
+					'label' => 'Proficiency Certificate',
+					'definition' => 'Credential awarded after assessment of skills in a specific area defined by a recognized body of experts, without regard for how the skills were learned.'
 				),
 				'QualityAssuranceCredential' => array(
 					'label' => 'Quality Assurance Credential',
 					'definition' => 'Credential assuring that an organization, program, or awarded credential meets prescribed requirements and may include development and administration of qualifying examinations.'
 				),
-				'RecognizeAction' => array(
-					'label' => 'Recognize Action',
-					'definition' => 'Action by an independent, neutral, and authoritative agent acknowledging the validity of a resource.'
-				),
-				'RegulateAction' => array(
-					'label' => 'Regulate Action',
-					'definition' => 'Action by an independent, neutral, and authoritative agent enforcing the legal requirements of a resource.'
-				),
-				'RenewAction' => array(
-					'label' => 'Renew Action',
-					'definition' => 'Action by an agent renewing an existing credential assertion.'
-				),
 				'ResearchDoctorate' => array(
 					'label' => 'Research Doctorate',
 					'definition' => 'Doctoral degree conferred for advanced work beyond the master level, including the preparation and defense of a thesis or dissertation based on original research, or the planning and execution of an original project demonstrating substantial artistic or scholarly achievement.'
 				),
-				'RevocationProfile' => array(
-					'label' => 'Revocation Profile',
-					'definition' => 'Entity describing conditions and methods by which a credential can be removed from a holder.'
-				),
-				'RevokeAction' => array(
-					'label' => 'Revoke Action',
-					'definition' => 'Action by an agent removing an awarded credential (credential assertion) from the credential holder based on violations or failure of the holder to renew.'
-				),
-				'RightsAction' => array(
-					'label' => 'Rights Action',
-					'definition' => 'Action asserting legal rights by an agent to possess, defend, transfer, license, and grant conditional access to a credential, learning opportunity, or assessment.'
-				),
-				'ScheduledOffering' => array(
-					'label' => 'Scheduled Offering',
-					'definition' => 'Offering of a Learning Opportunity or Assessment with a schedule associated with a specified location or modality.'
+				'SecondaryEducationCertificate' => array(
+					'label' => 'Secondary Education Certificate',
+					'definition' => 'Credential for successful completion of a formal secondary-level education program that is less than a diploma and does not indicate completion of secondary education graduation requirements.'
 				),
 				'SecondarySchoolDiploma' => array(
 					'label' => 'Secondary School Diploma',
@@ -5727,41 +5519,21 @@
 					'label' => 'Specialist Degree',
 					'definition' => 'Credential awarded for a graduate level course of study where course work and activities advance skills beyond those of the master\'s degree and less than a doctoral degree and provide specific preparation for advanced careers in a specialist field.'
 				),
-				'SupportService' => array(
-					'label' => 'Support Service',
-					'definition' => 'Resources and assistance that help people overcome barriers to succeed in their education and career goals.'
+				'TechnicalLevel1Certificate' => array(
+					'label' => 'Technical Level 1 Certificate',
+					'definition' => 'Credential award at a postsecondary level for successful completion of a formal education program that is more than one semester and less than 1 year, demonstrating competencies within a specific subject area or an occupational area indicating job readiness.'
 				),
-				'Task' => array(
-					'label' => 'Task',
-					'definition' => 'Specific activity, typically related to performing a function or achieving a goal.'
+				'TechnicalLevel2Certificate' => array(
+					'label' => 'Technical Level 2 Certificate',
+					'definition' => 'Credential award at a postsecondary level for successful completion of a formal education program that is at least 1 year but less than 2 years, demonstrating competencies within a specific subject area or in an occupational area indicating job readiness.'
 				),
-				'TransferIntermediary' => array(
-					'label' => 'Transfer Intermediary',
-					'definition' => 'Surrogate resource to which other resources are mapped in order to indicate their common transferability.'
+				'TechnicalLevel3Certificate' => array(
+					'label' => 'Technical Level 3 Certificate',
+					'definition' => 'Credential award at a postsecondary level for successful completion of a formal education program that is at least 2 years but less than 4 years, demonstrating competencies within specific occupational areas indicating job readiness.'
 				),
-				'TransferValueProfile' => array(
-					'label' => 'Transfer Value Profile',
-					'definition' => 'Description of transfer value of a resource.'
-				),
-				'ValueProfile' => array(
-					'label' => 'Value Profile',
-					'definition' => 'A description of value awarded for, required by, or otherwise related to the resource.'
-				),
-				'VerificationServiceProfile' => array(
-					'label' => 'Verification Service Profile',
-					'definition' => 'Entity describing the means by which someone can verify whether a credential has been attained.'
-				),
-				'WorkExperienceComponent' => array(
-					'label' => 'Work Experience Component',
-					'definition' => 'Resource describing an activity or training through which a person gains job experience.'
-				),
-				'WorkforceDemandAction' => array(
-					'label' => 'Workforce Demand Action',
-					'definition' => 'Action taken by an agent asserting that the resource being described has a workforce demand level worthy of note.'
-				),
-				'WorkRole' => array(
-					'label' => 'Work Role',
-					'definition' => 'Collection of tasks and competencies that embody a particular function in one or more jobs.'
+				'WorkBasedLearningCertificate' => array(
+					'label' => 'Work-Based Learning Certificate',
+					'definition' => 'Credential awarded for work-based learning and earn-and-learn models that meet standards and are applicable to industry, trades, occupations, and professions.'
 				)
 			);
 
