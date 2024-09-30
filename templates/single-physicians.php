@@ -656,6 +656,17 @@ while ( have_posts() ) : the_post();
     }
     if ($rating_valid) { $provider_field_classes = $provider_field_classes . ' has-ratings'; }
 
+    // $pg_rating_request = '';
+    // $pg_rating_data = '';
+    // $pg_rating_valid = '';
+    // if ( $npi ) {
+    //     $pg_rating_request = wp_pg_cached_api( $npi );
+    //     $pg_rating_data = json_decode( $pg_rating_request );
+    //     if ( !empty( $pg_rating_data ) ) {
+    //         $pg_rating_valid = $pg_rating_data->valid;
+    //     }
+    // }
+
 	// Clinical Resources
 	$resources =  get_field('physician_clinical_resources');
     $resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
@@ -1561,6 +1572,7 @@ while ( have_posts() ) : the_post();
                         <div class="card overall-ratings text-center">
                             <div class="card-body">
                                 <h3 class="sr-only">Average Ratings</h3>
+                                <!-- <p>PG Data: <?php echo($pg_rating_data->data->entities[0]->totalSurveyCount); ?></p> -->
                                 <dl>
                                     <?php
                                     $questionRatings = $rating_data->profile->questionRatings;
@@ -1585,11 +1597,17 @@ while ( have_posts() ) : the_post();
                         <?php
                         $reviews = $rating_data->reviews;
                         // if ( $reviews ) : ?>
-                        <?php //print_r($rating_data); ?>
+                        <?php //print_r($rating_data);
+                            $i=0;
+                        ?>
                         <h3 class="sr-only">Individual Reviews</h3>
                         <div class="card-list-container">
                             <div class="card-list">
-                                <?php foreach( $reviews as $review ): ?>
+                                <?php foreach( $reviews as $review ):
+                                    if( $i >= 6 ) {
+                                        break;
+                                    }
+                                    $i++; ?>
                                 <div class="card">
                                     <div class="card-header bg-transparent">
                                         <div class="rating rating-center" aria-label="Average Rating">
@@ -1623,7 +1641,29 @@ while ( have_posts() ) : the_post();
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="ds-comments" data-ds-pagesize="10"></div>
+                                    <div class="card-list">
+                                    <?php foreach( $reviews as $review ):
+                                        if( $i >= 7 ) { ?>
+                                    <div class="card">
+                                        <div class="card-header bg-transparent">
+                                            <div class="rating rating-center" aria-label="Average Rating">
+                                                <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->rating)/5 * 100; ?>%;"></div></div>
+                                                <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->rating; ?><span class="sr-only"> out of 5</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h4 class="sr-only">Comment</h4>
+                                            <p class="card-text"><?php echo $review->bodyForDisplay; ?></p>
+                                        </div>
+                                        <div class="card-footer bg-transparent text-muted small">
+                                            <h4 class="sr-only">Date</h4>
+                                            <?php echo $review->formattedReviewDate; ?>
+                                        </div>
+                                    </div>
+                                    <?php }
+                                        $i++; ?>
+                                    <?php endforeach; ?>
+                                </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -1631,7 +1671,7 @@ while ( have_posts() ) : the_post();
                                 </div>
                             </div>
                         </div>
-                        <script>
+                        <!-- <script>
                             /* Custom HTML for the paging controls for the comments list */
                             window.DS_OPT = {
                                 buildCommentsLoadMoreHTML: function(data, ctx){
@@ -1661,7 +1701,7 @@ while ( have_posts() ) : the_post();
                                 }
                             };
                         </script>
-                        <script src="https://transparency.nrchealth.com/widget/v3/uams/npi/<?php echo $npi; ?>/lotw.js" async></script>
+                        <script src="https://transparency.nrchealth.com/widget/v3/uams/npi/<?php echo $npi; ?>/lotw.js" async></script> -->
                         <?php // endif; ?>
                     </div>
                 </div>
