@@ -286,7 +286,7 @@ function wp_pg_get_token() {
 		$pg_data        = json_decode( $pg_body, true );
 		if ( 200 === $pg_status_code && $pg_data ) {
 			// Process data
-			set_transient( $pg_cache_key, $pg_data['accessToken'], HOUR_IN_SECONDS );
+			set_transient( $pg_cache_key, $pg_data['accessToken'], MINUTE_IN_SECONDS * 25 );
 			$pg_token = $pg_data['accessToken'];
 		}
 	}
