@@ -1627,6 +1627,7 @@ while ( have_posts() ) : the_post();
                                 <?php endforeach; ?>
                             </div>
                         </div>
+                        <?php if (count($reviews) > 6) { ?>
                         <div class="view-more text-center mt-8 mt-sm-10">
                             <button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="View more individual reviews">View More</button>
                         </div>
@@ -1671,6 +1672,7 @@ while ( have_posts() ) : the_post();
                                 </div>
                             </div>
                         </div>
+                        <?php } ?>
                         <!-- <script>
                             /* Custom HTML for the paging controls for the comments list */
                             window.DS_OPT = {
