@@ -294,12 +294,12 @@ function wp_pg_get_token() {
 }
 
 // PressGaney JSON API Call
-function wp_pg_cached_api( $npi ) {
+function wp_pg_cached_api( $npi, $count = 6 ) {
 	// PressGaney requires Access-Token to retrieve data
 	$token = wp_pg_get_token();
 
 	// Namespace in case of collision, since transients don't support groups like object caching.
-	$url = 'https://api1.consumerism.pressganey.com/api/bsr/comments?personId=' . $npi;
+	$url = 'https://api1.consumerism.pressganey.com/api/bsr/comments?personId=' . $npi . '&perPage=' . $count;
 	$cache_key = 'pg_' . $npi;
 	$request = get_transient( $cache_key );
 

@@ -34,21 +34,36 @@
 					if(rwmb_meta('physician_npi')) {
 
 							$npi =  rwmb_meta( 'physician_npi' );
-							$request = wp_nrc_cached_api( $npi );
+							// $request = wp_nrc_cached_api( $npi );
 
-							$data = json_decode( $request );
+							$pg_rating_request = '';
+							$pg_rating_data = '';
+							$pg_rating_valid = '';
+							if ( $npi ) {
+								$pg_rating_request = wp_pg_cached_api( $npi, 0 );
+								$pg_rating_data = json_decode( $pg_rating_request );
+								if ( !empty( $pg_rating_data ) ) {
+									$pg_rating_valid = (( $pg_rating_data->data->entities[0]->totalRatingCount) >= 30 );
+								}
+							}
 
-							if( ! empty( $data ) ) {
+							// if( ! empty( $pg_rating_data ) )
 
-								$rating_valid = $data->valid;
 
-								if ( $rating_valid ){
+							// if( ! empty( $data ) ) {
+
+							// 	$rating_valid = $data->valid;
+
+								if ( $pg_rating_valid ){
+									$avg_rating = $pg_rating_data->data->entities[0]->overallRating->value;
+									$review_count = $pg_rating_data->data->entities[0]->totalRatingCount;
+									$comment_count = $pg_rating_data->data->entities[0]->totalCommentCount;
  									echo '<div class="text-center">';
 									echo '<div class="ds-title">Patient Rating</div>';
-									echo '<div><span class="ds-stars ds-stars'. $data->profile->averageStarRatingStr .'"></span></div>';
-									echo '<div class="ds-xofy"><span class="ds-average">'. $data->profile->averageRatingStr .'</span><span class="ds-average-max">out of 5</span></div>';
-									echo '<div class="ds-ratings"><span class="ds-ratingcount">'. $data->profile->reviewcount .'</span> Ratings</div>';
-									echo '<div class="ds-comments"><span class="ds-commentcount">'. $data->profile->bodycount .'</span> Comments</div>';
+									echo '<div><span class="ds-stars ds-stars'. $avg_rating .'"></span></div>';
+									echo '<div class="ds-xofy"><span class="ds-average">'. $avg_rating .'</span><span class="ds-average-max">out of 5</span></div>';
+									echo '<div class="ds-ratings"><span class="ds-ratingcount">'. $review_count .'</span> Ratings</div>';
+									echo '<div class="ds-comments"><span class="ds-commentcount">'. $comment_count .'</span> Comments</div>';
  									echo '</div>';
 									//echo '<a href="' . esc_url( $rating->info->link ) . '">' . $product->info->title . '</a>';
 								} else { ?>
@@ -60,7 +75,7 @@
 									</div>
 								<?php
 								}
-							}
+							// }
 						} else { ?>
 							<div class="text-center">
 							<div class="ds-title">Patient Rating</div>
