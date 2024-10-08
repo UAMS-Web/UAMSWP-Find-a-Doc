@@ -138,24 +138,48 @@
 							if(get_field('physician_npi')) {
 
 								$npi =  get_field( 'physician_npi' );
-								$request = wp_nrc_cached_api( $npi );
+								// $request = wp_nrc_cached_api( $npi );
 
-								$data = json_decode( $request );
+								// $data = json_decode( $request );
 
-								if( ! empty( $data ) ) {
+								$pg_rating_request = '';
+								$pg_rating_data = '';
+								$pg_rating_valid = '';
+								if ( $npi ) {
+									$pg_rating_request = wp_pg_cached_api( $npi, 0 );
+									$pg_rating_data = json_decode( $pg_rating_request );
+									if ( !empty( $pg_rating_data ) ) {
+										$pg_rating_valid = (( $pg_rating_data->data->entities[0]->totalRatingCount) >= 30 );
+									}
+								}
 
-									$rating_valid = $data->valid;
+								if( ! empty( $pg_rating_data ) ) {
 
-									if ( $rating_valid ){
+									if ( $pg_rating_valid ){
+										$avg_rating = $pg_rating_data->data->entities[0]->overallRating->value;
+										$review_count = $pg_rating_data->data->entities[0]->totalRatingCount;
+										$comment_count = $pg_rating_data->data->entities[0]->totalCommentCount;
 										echo '<div class="rating">';
-										echo '<div class="star-ratings-sprite" title="'. $data->profile->averageRatingStr .' out of 5"><div class="star-ratings-sprite-percentage" style="width: '. (floatval($data->profile->averageRatingStr) / 5)*100  .'%;"></div></div>';
-										echo '<div class="ratings-count">'. $data->profile->reviewcount .' Ratings</div>';
+										echo '<div class="star-ratings-sprite" title="'. $avg_rating .' out of 5"><div class="star-ratings-sprite-percentage" style="width: '. (floatval($avg_rating) / 5)*100  .'%;"></div></div>';
+										echo '<div class="ratings-count">'. $review_count .' Ratings</div>';
 										echo '</div>';
 									} else { ?>
 									<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></em></p>
 									<?php
 									}
+
 								}
+								// if( ! empty( $data ) ) {
+								//
+								// 	$rating_valid = $data->valid;
+								//
+								// 	if ( $rating_valid ){
+								// 		echo '<div class="rating">';
+								// 		echo '<div>NRC Data:</div>';
+								// 		echo '<div class="ratings-count">Rating: '. $data->profile->averageRatingStr . ' - ' . $data->profile->reviewcount .' Ratings</div>';
+								// 		echo '</div>';
+								// 	}
+								// }
 							} else { ?>
 								<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></em></p>
 							<?php

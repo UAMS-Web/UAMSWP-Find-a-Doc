@@ -644,28 +644,29 @@ while ( have_posts() ) : the_post();
     }
 
     // Set Ratings variables
-    $rating_request = '';
-    $rating_data = '';
-    $rating_valid = '';
-    if ( $npi ) {
-        $rating_request = wp_nrc_cached_api( $npi );
-        $rating_data = json_decode( $rating_request );
-        if ( !empty( $rating_data ) ) {
-            $rating_valid = $rating_data->valid;
-        }
-    }
-    if ($rating_valid) { $provider_field_classes = $provider_field_classes . ' has-ratings'; }
-
-    // $pg_rating_request = '';
-    // $pg_rating_data = '';
-    // $pg_rating_valid = '';
+    // $rating_request = '';
+    // $rating_data = '';
+    // $rating_valid = '';
     // if ( $npi ) {
-    //     $pg_rating_request = wp_pg_cached_api( $npi );
-    //     $pg_rating_data = json_decode( $pg_rating_request );
-    //     if ( !empty( $pg_rating_data ) ) {
-    //         $pg_rating_valid = $pg_rating_data->valid;
+    //     $rating_request = wp_nrc_cached_api( $npi );
+    //     $rating_data = json_decode( $rating_request );
+    //     if ( !empty( $rating_data ) ) {
+    //         $rating_valid = $rating_data->valid;
     //     }
     // }
+    // if ($rating_valid) { $provider_field_classes = $provider_field_classes . ' has-ratings'; }
+
+    $pg_rating_request = '';
+    $pg_rating_data = '';
+    $pg_rating_valid = '';
+    if ( $npi ) {
+        $pg_rating_request = wp_pg_cached_api( $npi, 36 );
+        $pg_rating_data = json_decode( $pg_rating_request );
+        if ( !empty( $pg_rating_data ) ) {
+            $pg_rating_valid = ( ($pg_rating_data->data->entities[0]->totalRatingCount) >= 30 );
+        }
+    }
+    if ($pg_rating_valid) { $provider_field_classes = $provider_field_classes . ' has-ratings'; }
 
 	// Clinical Resources
 	$resources =  get_field('physician_clinical_resources');
@@ -765,7 +766,7 @@ while ( have_posts() ) : the_post();
         }
 
         // Check if Ratings section should be displayed
-        if ( $rating_valid ) {
+        if ( $pg_rating_valid ) {
             $show_ratings_section = true;
             $jump_link_count++;
         } else {
@@ -965,11 +966,11 @@ while ( have_posts() ) : the_post();
                     </dl>
                     <?php
                         echo '<div class="rating" aria-label="Patient Rating">';
-                        if ( $rating_valid ){
-                            $avg_rating = $rating_data->profile->averageRatingStr;
-                            $avg_rating_dec = $rating_data->profile->averageRating;
-                            $review_count = $rating_data->profile->reviewcount;
-                            $comment_count = $rating_data->profile->bodycount;
+                        if ( $pg_rating_valid ){
+                            $avg_rating = $pg_rating_data->data->entities[0]->overallRating->value;
+                            $avg_rating_dec = $pg_rating_data->data->entities[0]->overallRating->value;
+                            $review_count = $pg_rating_data->data->entities[0]->totalRatingCount;
+                            $comment_count = $pg_rating_data->data->entities[0]->totalCommentCount;
                             echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. $avg_rating_dec/5 * 100 .'%;"></div></div>';
                             echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
                             echo '<div class="w-100"></div>';
@@ -983,7 +984,7 @@ while ( have_posts() ) : the_post();
                         }
                         echo '</div>';
                     ?>
-                    <?php if( !$rating_valid ) { ?>
+                    <?php if( !$pg_rating_valid ) { ?>
                         <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-modal="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -1572,17 +1573,16 @@ while ( have_posts() ) : the_post();
                         <div class="card overall-ratings text-center">
                             <div class="card-body">
                                 <h3 class="sr-only">Average Ratings</h3>
-                                <!-- <p>PG Data: <?php echo($pg_rating_data->data->entities[0]->totalSurveyCount); ?></p> -->
                                 <dl>
                                     <?php
-                                    $questionRatings = $rating_data->profile->questionRatings;
+                                    $questionRatings = $pg_rating_data->data->entities[0]->overallRating->questionRatings;
                                     foreach( $questionRatings as $questionRating ):
-                                        if ($questionRating->questionCount > 0){ ?>
-                                    <dt><?php echo $questionRating->question; ?></dt>
+                                        if ($questionRating->responseCount > 0){ ?>
+                                    <dt><?php echo $questionRating->name; ?></dt>
                                     <dd>
                                         <div class="rating" aria-label="Patient Rating">
-                                            <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->averageRatingStr)/5 * 100; ?>%;"></div></div>
-                                            <div class="ratings-score-lg"><?php echo $questionRating->averageRatingStr; ?><span class="sr-only"> out of 5</span></div>
+                                            <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->value)/5 * 100; ?>%;"></div></div>
+                                            <div class="ratings-score-lg"><?php echo $questionRating->value; ?><span class="sr-only"> out of 5</span></div>
                                         </div>
                                     </dd>
                                     <?php }
@@ -1590,12 +1590,12 @@ while ( have_posts() ) : the_post();
                                 </dl>
                             </div>
                             <div class="card-footer bg-transparent text-muted small">
-                                <p class="h5">Overall: <?php echo $rating_data->profile->averageRatingStr; ?> out of 5</p>
-                                <p>(<?php echo $rating_data->profile->reviewBodyCountStr; ?>)</p>
+                                <p class="h5">Overall: <?php echo $pg_rating_data->data->entities[0]->overallRating->value; ?> out of 5</p>
+                                <p>(<?php echo ($pg_rating_data->data->entities[0]->totalRatingCount ? $pg_rating_data->data->entities[0]->totalRatingCount . ' Ratings' : '' ); ?><?php echo ($pg_rating_data->data->entities[0]->totalCommentCount ? ', ' . $pg_rating_data->data->entities[0]->totalCommentCount . ' Comments' : ''); ?>)</p>
                             </div>
                         </div>
                         <?php
-                        $reviews = $rating_data->reviews;
+                        $reviews = $pg_rating_data->data->entities[0]->comments;
                         // if ( $reviews ) : ?>
                         <?php //print_r($rating_data);
                             $i=0;
@@ -1611,17 +1611,17 @@ while ( have_posts() ) : the_post();
                                 <div class="card">
                                     <div class="card-header bg-transparent">
                                         <div class="rating rating-center" aria-label="Average Rating">
-                                            <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->rating)/5 * 100; ?>%;"></div></div>
-                                            <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->rating; ?><span class="sr-only"> out of 5</span></div>
+                                            <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->overallRating->value)/5 * 100; ?>%;"></div></div>
+                                            <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->overallRating->value; ?><span class="sr-only"> out of 5</span></div>
                                         </div>
                                     </div>
                                     <div class="card-body">
                                         <h4 class="sr-only">Comment</h4>
-                                        <p class="card-text"><?php echo $review->bodyForDisplay; ?></p>
+                                        <p class="card-text"><?php echo $review->comment; ?></p>
                                     </div>
                                     <div class="card-footer bg-transparent text-muted small">
                                         <h4 class="sr-only">Date</h4>
-                                        <?php echo $review->formattedReviewDate; ?>
+                                        <?php echo date("M d, Y", strtotime($review->mentionTime)) ?>
                                     </div>
                                 </div>
                                 <?php endforeach; ?>
@@ -1636,7 +1636,7 @@ while ( have_posts() ) : the_post();
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="more-reviews-title">More Reviews</h5>
+                                    <h5 class="modal-title" id="more-reviews-title">More Recent Reviews</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
@@ -1648,17 +1648,17 @@ while ( have_posts() ) : the_post();
                                     <div class="card">
                                         <div class="card-header bg-transparent">
                                             <div class="rating rating-center" aria-label="Average Rating">
-                                                <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->rating)/5 * 100; ?>%;"></div></div>
-                                                <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->rating; ?><span class="sr-only"> out of 5</span></div>
+                                                <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->overallRating->value)/5 * 100; ?>%;"></div></div>
+                                                <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->overallRating->value; ?><span class="sr-only"> out of 5</span></div>
                                             </div>
                                         </div>
                                         <div class="card-body">
                                             <h4 class="sr-only">Comment</h4>
-                                            <p class="card-text"><?php echo $review->bodyForDisplay; ?></p>
+                                            <p class="card-text"><?php echo $review->comment; ?></p>
                                         </div>
                                         <div class="card-footer bg-transparent text-muted small">
                                             <h4 class="sr-only">Date</h4>
-                                            <?php echo $review->formattedReviewDate; ?>
+                                            <?php echo date("M d, Y", strtotime($review->mentionTime)); ?>
                                         </div>
                                     </div>
                                     <?php }
@@ -1705,6 +1705,7 @@ while ( have_posts() ) : the_post();
                         </script>
                         <script src="https://transparency.nrchealth.com/widget/v3/uams/npi/<?php echo $npi; ?>/lotw.js" async></script> -->
                         <?php // endif; ?>
+
                     </div>
                 </div>
             </div>
@@ -1792,7 +1793,7 @@ while ( have_posts() ) : the_post();
             echo ']';
         }
     echo $location_schema; ?>
-  <?php if ( $rating_valid ){ ?>
+  <?php if ( $pg_rating_valid ){ ?>
 ,
   "aggregateRating": {
     "@type": "AggregateRating",
