@@ -32,6 +32,8 @@
 
 			$physician_resident = get_field('physician_resident');
 			$physician_resident_title_name = 'Resident Physician';
+			$physician_service_line = get_field('physician_service_line');
+
 
 		// Get clinical specialty and occupation title values
 
@@ -144,11 +146,11 @@
 
 								$pg_rating_request = '';
 								$pg_rating_data = '';
-								$pg_rating_valid = '';
+								$pg_rating_valid = false;
 								if ( $npi ) {
 									$pg_rating_request = wp_pg_cached_api( $npi, 0 );
 									$pg_rating_data = json_decode( $pg_rating_request );
-									if ( !empty( $pg_rating_data ) ) {
+									if ( !empty( $pg_rating_data ) && !empty($pg_rating_data->data->entities[0]->totalRatingCount) ) {
 										$pg_rating_valid = (( $pg_rating_data->data->entities[0]->totalRatingCount) >= 30 );
 									}
 								}
@@ -234,7 +236,7 @@
 				<?php
 					if(! empty( get_field('physician_clinical_title') ) || ! empty( $physician_service_line ) ){
 						echo '<h4>';
-						echo (get_field('physician_clinical_title') ? get_field('physician_clinical_title')->name : '');
+						echo (get_field('physician_clinical_title') && is_object(get_field('physician_clinical_title')) ? get_field('physician_clinical_title')->name : '');
 						echo ((! empty( get_field('physician_clinical_title') )) && (! empty( $physician_service_line ) ) ? ', ' : '' );
 						echo ($physician_service_line ? get_term( $physician_service_line, 'service_line' )->name : '');
 						echo '</h4>';

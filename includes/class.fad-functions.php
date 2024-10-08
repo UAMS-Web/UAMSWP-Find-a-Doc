@@ -303,7 +303,7 @@ function wp_pg_cached_api( $npi, $count = 6 ) {
 	$cache_key = 'pg_' . $npi;
 	$request = get_transient( $cache_key );
 
-	if ( false === $request || '200' !== $request['status']['code'] ) {
+	if ( false === $request || (is_array($request) && ('200' !== $request['status']['code'])) ) {
 		$request = wp_remote_retrieve_body( wp_remote_get( $url, array(
 			'headers' => array(
 				'Content-Type' => 'application/json',
