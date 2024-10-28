@@ -299,7 +299,7 @@ function wp_pg_cached_api( $npi, $count = 6 ) {
 	$token = wp_pg_get_token();
 
 	// Namespace in case of collision, since transients don't support groups like object caching.
-	$url = 'https://api1.consumerism.pressganey.com/api/bsr/comments?personId=' . $npi . '&perPage=' . $count;
+	$url = 'https://api1.consumerism.pressganey.com/api/bsr/comments?personId=' . $npi . '&perPage=' . $count . '&days=540';
 	$cache_key = 'pg_' . $npi;
 	$request = get_transient( $cache_key );
 
