@@ -253,7 +253,7 @@ function posts_provider_custom_columns($column_name, $id){
 function wp_nrc_cached_api( $npi ) {
 	// Namespace in case of collision, since transients don't support groups like object caching.
 	$url = 'https://transparency.nrchealth.com/widget/api/org-profile/uams/npi/' . $npi . '/6';
-	$cache_key = 'nrc_' . $npi;
+	$cache_key = 'nrc_backup_' . $npi;
 	$request = get_transient( $cache_key );
 
 	if ( false === $request ) {
@@ -262,6 +262,59 @@ function wp_nrc_cached_api( $npi ) {
 		if ( is_wp_error( $request ) ) {
 			// Cache failures for a short time, will speed up page rendering in the event of remote failure.
 			set_transient( $cache_key, $request, MINUTE_IN_SECONDS * 15 );
+		} else {
+			// Success, cache for a longer time.
+			set_transient( $cache_key, $request, DAY_IN_SECONDS );
+		}
+	}
+	return $request;
+}
+
+// Get PressGaney Access Token
+function wp_pg_get_token() {
+	$pg_cache_key   = 'pg_api_token';
+	$pg_token = get_transient( $pg_cache_key );
+	if ( ! $pg_token ) {
+		$pg_response    = wp_remote_post('https://api1.consumerism.pressganey.com/api/service/v1/token/create?appId=034581304013586&appSecret=68a0fd1e-22c0-49a2-8218-10f581e3cdaa', array(
+			'headers' => array(
+				'Content-Type' => 'application/json',
+				'Access-Token' => 'Content-Type'
+			),
+		));
+		$pg_status_code = (int) wp_remote_retrieve_response_code( $pg_response );
+		$pg_body        = wp_remote_retrieve_body( $pg_response );
+		$pg_data        = json_decode( $pg_body, true );
+		if ( 200 === $pg_status_code && $pg_data ) {
+			// Process data
+			set_transient( $pg_cache_key, $pg_data['accessToken'], MINUTE_IN_SECONDS * 25 );
+			$pg_token = $pg_data['accessToken'];
+		}
+	}
+	return $pg_token;
+}
+
+// PressGaney JSON API Call
+function wp_pg_cached_api( $npi, $count = 6 ) {
+	// PressGaney requires Access-Token to retrieve data
+	$token = wp_pg_get_token();
+
+	// Namespace in case of collision, since transients don't support groups like object caching.
+	$url = 'https://api1.consumerism.pressganey.com/api/bsr/comments?personId=' . $npi . '&perPage=' . $count . '&days=540';
+	$cache_key = 'pg_' . $npi;
+	$request = get_transient( $cache_key );
+
+	if ( false === $request || (is_array($request) && ('200' !== $request['status']['code'])) ) {
+		$request = wp_remote_retrieve_body( wp_remote_get( $url, array(
+			'headers' => array(
+				'Content-Type' => 'application/json',
+				'Access-Token' => $token
+				)
+		) ) );
+
+		if ( is_wp_error( $request ) ) {
+			// Cache failures for a short time, will speed up page rendering in the event of remote failure.
+			set_transient( $cache_key, $request, MINUTE_IN_SECONDS * 15 );
+
 		} else {
 			// Success, cache for a longer time.
 			set_transient( $cache_key, $request, DAY_IN_SECONDS );
