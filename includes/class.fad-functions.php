@@ -871,7 +871,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 					<input type="hidden" id="providers-ids" name="providers-ids" value="<?php echo implode(",", $providers); ?>">
 				</div>
 				<div class="col-auto">
-					<input type="button" id="provider_clear" name="provider_clear" value="Reset" class="btn btn-outline-primary">
+					<input type="button" id="provider_clear" name="provider_clear" value="Reset" class="btn btn-outline-primary" aria-label="Reset">
 				</div>
             </div>
         </form>
@@ -1144,7 +1144,7 @@ function uamswp_provider_title_ajax_filter_shortcode( $atts ) {
 					<input type="hidden" id="providers-ids" name="providers-ids" value="<?php echo implode(",", $providers); ?>">
 				</div>
 				<div class="col-auto">
-					<input type="button" id="provider_clear" name="provider_clear" value="Reset" class="btn btn-outline-primary">
+					<input type="button" id="provider_clear" name="provider_clear" value="Reset" class="btn btn-outline-primary" aria-label="Reset">
 				</div>
             </div>
         </form>
@@ -1267,7 +1267,7 @@ function uamswp_location_ajax_filter_shortcode( $atts ) {
 					<!-- <input type="submit" id="submit" name="submit" value="Search" class="btn btn-primary"> -->
 				</div>
 				<div class="col-auto">
-					<input type="button" id="location_clear" name="location_clear" value="Reset" class="btn btn-outline-primary">
+					<input type="button" id="location_clear" name="location_clear" value="Reset" class="btn btn-outline-primary" aria-label="Reset">
 				</div>
             </div>
         </form>
