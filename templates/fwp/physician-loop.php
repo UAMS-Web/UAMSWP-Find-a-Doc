@@ -91,7 +91,6 @@
 		<div class="item">
 			<div class="row">
 				<div class="col image">
-					<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" class="stretched-link" data-categorytitle="Photo" data-itemtitle="<?php echo $full_name_attr; ?>">
 						<picture>
 						<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
 							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
@@ -114,7 +113,6 @@
 							<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" role="presentation" />
 						<?php } ?>
 						</picture>
-					</a>
 				</div>
 				<div class="col text">
 					<div class="row">
