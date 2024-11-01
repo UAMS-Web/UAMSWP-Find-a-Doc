@@ -53,14 +53,14 @@
 
 ?>
 <div class="card">
-        <?php if ( has_post_thumbnail($id) ) { ?>
-        <?php echo get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top', 'loading' => 'lazy']); ?>
-        <?php } else { ?>
-        <picture>
-            <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
-            <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" loading="lazy" />
-        </picture>
-        <?php } ?>
+	<?php if ( has_post_thumbnail($id) ) { ?>
+	<?php echo get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top', 'loading' => 'lazy']); ?>
+	<?php } else { ?>
+	<picture>
+		<source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
+		<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" loading="lazy" />
+	</picture>
+	<?php } ?>
     <?php $excerpt = get_the_excerpt($id); ?>
     <div class="card-body">
         <h3 class="card-title h5">
