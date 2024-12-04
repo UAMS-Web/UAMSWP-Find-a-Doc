@@ -1,8 +1,8 @@
-<?php 
+<?php
     /**
      *  Template Name: Location Loop - Card layout
      *  Designed for UAMS Find-a-Doc
-     * 
+     *
      *  Must be used inside a loop
      *  Required var: $id
      */
@@ -17,9 +17,9 @@
 
     $location_title = get_the_title($id);
     $location_title_attr = str_replace('"', '\'', $location_title);
-    $location_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($location_title_attr, null, 'utf-8')));
+    $location_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($location_title_attr ?? '', ENT_HTML401, 'utf-8')));
 
-    // Parent Location 
+    // Parent Location
     $location_has_parent = get_field('location_parent', $id);
     $location_parent_id = get_field('location_parent_id', $id);
     $parent_location = ''; // Eliminate PHP errors
@@ -32,7 +32,7 @@
     $override_parent_photo = ''; // Eliminate PHP errors
     $override_parent_photo_featured = ''; // Eliminate PHP errors
 
-    if ($location_has_parent && $location_parent_id) { 
+    if ($location_has_parent && $location_parent_id) {
         $parent_location = get_post( $location_parent_id );
     }
     // Get Post ID for Address & Image fields
@@ -42,7 +42,7 @@
         $parent_title_attr = $parent_title;
         $parent_title_attr = str_replace('"', '\'', $parent_title_attr); // Replace double quotes with single quote
         $parent_title_attr = str_replace('&#8217;', '\'', $parent_title_attr); // Replace right single quote with single quote
-        $parent_title_attr = htmlentities($parent_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+        $parent_title_attr = htmlentities($parent_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
         $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space with normal space
         $parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters
         $parent_url = get_permalink( $parent_id );
@@ -54,7 +54,7 @@
 
         $override_parent_photo = get_field('location_image_override_parent', $id);
         $override_parent_photo_featured = get_field('location_image_override_parent_featured', $id);
-        
+
         // Set featured image
         if ( $override_parent_photo && $override_parent_photo_featured ) {
             $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr , 'loading' => 'lazy' ]);
@@ -65,7 +65,7 @@
             $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr , 'loading' => 'lazy' ]);
         }
     }
-                                            
+
     $location_address_1 = get_field('location_address_1', $address_id );
     $location_building = get_field('location_building', $address_id );
     if ($location_building) {
@@ -121,20 +121,20 @@
                 <span class="subtitle"><span class="sr-only">, </span>Primary Location</span>
             <?php } ?>
         </h3>
-        <?php 
+        <?php
         // Check for if we should display a closure alert
-        
+
         $location_closing = get_field('location_closing', $id); // true or false
         $location_closing_date = get_field('location_closing_date', $id); // F j, Y
         $location_closing_date_past = false;
-        if (new DateTime() >= new DateTime($location_closing_date)) {
+        if (new DateTime() >= new DateTime($location_closing_date ?? '')) {
             $location_closing_date_past = true;
         }
         $location_closing_length = get_field('location_closing_length', $id);
         $location_reopen_known = get_field('location_reopen_known', $id);
         $location_reopen_date = get_field('location_reopen_date', $id); // F j, Y
         $location_reopen_date_past = false;
-        if (new DateTime() >= new DateTime($location_reopen_date)) {
+        if (new DateTime() >= new DateTime($location_reopen_date ?? '')) {
             $location_reopen_date_past = true;
         }
         $location_closing_info = get_field('location_closing_info', $id);
@@ -168,7 +168,7 @@
         $telemed_today = $today;
         $telemed_today_30 = $today_30;
 
-        if ( 
+        if (
             ( $modified && strtotime($modified_start) <= $today_30 && ( strtotime($modified_end_date) >= $today || !$modified_end ) ) ||
             ( $telemed_modified && strtotime($telemed_modified_start) <= $telemed_today_30 && ( strtotime($telemed_modified_end_date) >= $telemed_today || !$telemed_modified_end ) )
         ) {
@@ -197,11 +197,11 @@
             } else {
                 $location_modified_hours_date_past = false;
             }
-        }   
+        }
 
         // Create the alert
-        
-        if ( $location_closing_display || $location_modified_hours_display ) { 
+
+        if ( $location_closing_display || $location_modified_hours_display ) {
             $alert_label = '';
             if ($location_closing_display) {
                 $alert_label = 'Learn more about the closure of ' . $location_title_attr . '.';
@@ -211,7 +211,7 @@
             $alert_label_attr = $alert_label;
             $alert_label_attr = str_replace('"', '\'', $alert_label_attr); // Replace double quotes with single quote
             $alert_label_attr = str_replace('&#8217;', '\'', $alert_label_attr); // Replace right single quote with single quote
-            $alert_label_attr = htmlentities($alert_label_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+            $alert_label_attr = htmlentities($alert_label_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
             $alert_label_attr = str_replace('&nbsp;', ' ', $alert_label_attr); // Convert non-breaking space with normal space
             $alert_label_attr = html_entity_decode($alert_label_attr); // Convert HTML entities to their corresponding characters
             ?>
@@ -237,7 +237,7 @@
             <?php echo $location_address_2 ? $location_address_2 . '<br/>' : ''; ?>
             <?php echo $location_city . ', ' . $location_state . ' ' . $location_zip; ?>
         </p>
-        <?php 
+        <?php
         // Phone values
         $phone_output_id = $id;
         $phone_output = 'associated_locations';
@@ -252,4 +252,4 @@
             <?php } ?>
         </div>
     </div>
-</div><!-- .card --> 
+</div><!-- .card -->
