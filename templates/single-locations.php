@@ -1,7 +1,7 @@
-<?php 
+<?php
 /*
  *  Get ACF fields to use for meta data
- *  Add description from location short description or full description * 
+ *  Add description from location short description or full description *
  */
 $excerpt = get_field('location_short_desc');
 $about_loc = get_field('location_about');
@@ -14,12 +14,12 @@ $page_title = get_the_title( );
 $page_title_attr = $page_title;
 $page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
 $page_title_attr = str_replace('&#8217;', '\'', $page_title_attr); // Replace right single quote with single quote
-$page_title_attr = htmlentities($page_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$page_title_attr = htmlentities($page_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
 $page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
 
 
-// Parent Location 
+// Parent Location
 
 $location_has_parent = get_field('location_parent');
 $location_parent_id = get_field('location_parent_id');
@@ -30,7 +30,7 @@ $parent_location_prepend_the = ''; // Eliminate PHP errors
 $parent_title_prepend = ''; // Eliminate PHP errors
 $parent_title_phrase = ''; // Eliminate PHP errors
 
-if ($location_has_parent && $location_parent_id) { 
+if ($location_has_parent && $location_parent_id) {
 	$parent_location = get_post( $location_parent_id );
 }
 
@@ -231,7 +231,7 @@ if( have_rows('remove_ontology_criteria', 'option') ):
         $remove_service_line = get_sub_field('remove_service_lines', 'option');
 		if ( !empty($location_service_lines) ) {
 			foreach ($location_service_lines as $location_service_line) {
-				if ( (!empty($remove_region) && in_array($location_region, $remove_region)) && empty($remove_service_line) ) { 
+				if ( (!empty($remove_region) && in_array($location_region, $remove_region)) && empty($remove_service_line) ) {
 					$hide_medical_ontology = true;
 					break 2;
 				} elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($location_service_line, $remove_service_line) ) ) {
@@ -263,17 +263,17 @@ $resource_query = new WP_Query( $args );
 // Override theme's method of defining the meta description
 function sp_titles_desc($html) {
     global $excerpt;
-	$html = $excerpt; 
+	$html = $excerpt;
 	return $html;
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
 $location_city = get_field('location_city', $post_id); // Get the location's city
-function uamswp_fad_title($html) { 
+function uamswp_fad_title($html) {
     global $page_title_attr;
 	global $location_city;
-    //you can add here all your conditions as if is_page(), is_category() etc.. 
+    //you can add here all your conditions as if is_page(), is_category() etc..
     $meta_title_chars_max = 60; // Set the maximum number of characters to be used in the <title /> value.
     $meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" ); // Define the base <title /> value: "[location name] | [site name]"
     $meta_title_base_chars = strlen( $meta_title_base ); // Count the number of characters in the base <title /> value
@@ -292,7 +292,7 @@ add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 get_header();
 
 while ( have_posts() ) : the_post(); ?>
-<?php 
+<?php
 	$map = get_field('location_map', $post_id );
 	$location_address_1 = get_field('location_address_1', $post_id );
 	$location_building = get_field('location_building', $post_id );
@@ -348,7 +348,7 @@ while ( have_posts() ) : the_post(); ?>
 				||
 				!$location_closing // If location closing is not toggled
 			)
-			&& 
+			&&
 			($location_alert_title || $location_alert_text) // If location title or description has value
 		 ) {
             $show_location_alert_section = true;
@@ -373,7 +373,7 @@ while ( have_posts() ) : the_post(); ?>
 		$about_section_title_short = '';
 		$about_section_submenu = false;
 		$about_section_label = 'Jump to the section of this page with the location description';
-		
+
 		if ( $location_about || $location_affiliation || $prescription ) {
             $show_about_section = true;
             $jump_link_count++;
@@ -401,7 +401,7 @@ while ( have_posts() ) : the_post(); ?>
 		$location_parking = get_field('location_parking', $post_id);
 		$location_direction = get_field('location_direction', $post_id);
 		$parking_map = get_field('location_parking_map', $post_id);
-		
+
 		if ( $location_parking || $location_direction || $parking_map ) {
             $show_parking_section = true;
             $jump_link_count++;
@@ -435,7 +435,7 @@ while ( have_posts() ) : the_post(); ?>
 			$location_scheduling_intro_default = 'Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
 			$location_scheduling_intro_general = get_field('location_scheduling_intro_general'); // Get input for general appointment section intro
 			$location_scheduling_intro = ( isset($location_scheduling_intro_general) && !empty($location_scheduling_intro_general) ) ? $location_scheduling_intro_general : $location_scheduling_intro_default; // Set main intro from general intro input. If general intro value is empty, set to default value.
-			
+
 			// Change main appointment scheduling section title and intro if only one scheduling widget
 			if ($location_scheduling_query && (count((array)$location_scheduling_options) < 2)) {
 				$row = $location_scheduling_options[0];
@@ -444,8 +444,8 @@ while ( have_posts() ) : the_post(); ?>
 				$location_scheduling_item_intro_main = $row['location_scheduling_intro']; // Get input for specific appointment section standalone intro
 				$location_scheduling_intro = ( isset($location_scheduling_item_intro_main) && !empty($location_scheduling_item_intro_main) ) ? $location_scheduling_item_intro_main : $location_scheduling_intro; // If input for specific appointment section intro exists, use that. Otherwise, keep original value.
 			}
-			
-			
+
+
 		$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
 		$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
 		$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
@@ -467,7 +467,7 @@ while ( have_posts() ) : the_post(); ?>
 
         // Check if Portal Information section should be displayed
 		$location_portal = get_field('location_portal');
-		
+
 		if ( $location_portal ) {
 			$portal = get_term($location_portal, "portal");
 			$portal_slug = $portal->slug;
@@ -475,7 +475,7 @@ while ( have_posts() ) : the_post(); ?>
 			$portal_name_attr = $portal_name;
 			$portal_name_attr = str_replace('"', '\'', $portal_name_attr); // Replace double quotes with single quote
 			$portal_name_attr = str_replace('&#8217;', '\'', $portal_name_attr); // Replace right single quote with single quote
-			$portal_name_attr = htmlentities($portal_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+			$portal_name_attr = htmlentities($portal_name_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 			$portal_name_attr = str_replace('&nbsp;', ' ', $portal_name_attr); // Convert non-breaking space with normal space
 			$portal_name_attr = html_entity_decode($portal_name_attr); // Convert HTML entities to their corresponding characters
 			$portal_content = get_field('portal_content', $portal);
@@ -603,7 +603,7 @@ while ( have_posts() ) : the_post(); ?>
         } else {
             $show_child_locations_section = false;
         }
-		
+
 		// Check if Clinical Resources section should be displayed
 		if( $resources && $resource_query->have_posts() ) {
 			$show_related_resource_section = true;
@@ -639,15 +639,15 @@ while ( have_posts() ) : the_post(); ?>
 								This location will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
 							<?php } // endif
 							if (
-								$location_closing_length == 'temporary' 
-								&& $location_reopen_known == 'date' 
+								$location_closing_length == 'temporary'
+								&& $location_reopen_known == 'date'
 								&& !empty($location_reopen_date)
 								&& (new DateTime($location_reopen_date) >= new DateTime($location_closing_date))
 								) { ?>
 								It is scheduled to reopen on <?php echo $location_reopen_date; ?>.
 							<?php } elseif (
-								$location_closing_length == 'temporary' 
-								&& $location_reopen_known == 'tbd' 
+								$location_closing_length == 'temporary'
+								&& $location_reopen_known == 'tbd'
 							) { ?>
 								It will remain closed until further notice.
 							<?php } // endif
@@ -670,12 +670,12 @@ while ( have_posts() ) : the_post(); ?>
 								<?php if ($show_parking_section) { ?>
 									<a class="btn btn-outline-primary" href="#parking-info" aria-label="Parking instructions for <?php echo $page_title_phrase; ?>" data-typetitle="Parking instructions for the clinic">Parking Instructions</a>
 								<?php } // endif $show_parking_section ?>
-								
+
 							</div>
 						</div>
 						<?php if( $location_web_name && $location_url ){ ?>
 							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>" target="_blank" data-categorytitle="External Link"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
-					<?php } 
+					<?php }
 						// Schema data
 						$location_schema = '"address": {
 						"@type": "PostalAddress",
@@ -688,12 +688,12 @@ while ( have_posts() ) : the_post(); ?>
 						$phone_schema = '';
 					?>
 					<h2>Contact Information</h2>
-					<?php 
+					<?php
 					// Phone values
 					$phone_output_id = $id;
 					$phone_output = 'location_profile';
 					include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
-					
+
 					// Hours values
 					$hoursvary = $location_hours_group['location_hours_variable'];
 					$hoursvary_info = $location_hours_group['location_hours_variable_info'];
@@ -713,13 +713,13 @@ while ( have_posts() ) : the_post(); ?>
 						echo '<h2>Hours Vary</h2>';
 						echo $hoursvary_info;
 					} else {
-						if ($modified) : 
+						if ($modified) :
 						?>
-						<?php 
-							
+						<?php
+
 							$modified_day = ''; // Previous Day
 							$modified_comment = ''; // Comment on previous day
-							// $modified_hours_schema .= 
+							// $modified_hours_schema .=
 							$i = 1;
 
 							$today = strtotime("today");
@@ -732,16 +732,16 @@ while ( have_posts() ) : the_post(); ?>
 								$modified_text .= '</p>';
 
 								if ( $modified_hours ) {
-									
+
 									foreach ($modified_hours as $modified_hour) {
-			
+
 										$modified_title = $modified_hour['location_modified_hours_title'];
 										$modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
 										$modified_info = $modified_hour['location_modified_hours_information'];
 										$modified_text .= $modified_info ? $modified_info : '';
 										$modified_times = $modified_hour['location_modified_hours_times'];
 										$modified_hours247 = $modified_hour['location_modified_hours_24_7'];
-			
+
 										if ($active_start > strtotime($modified_start) || '' == $active_start) {
 											$active_start = strtotime($modified_start);
 										}
@@ -764,21 +764,21 @@ while ( have_posts() ) : the_post(); ?>
 												"Sunday"
 											],
 											"opens": "00:00",
-											"closes": "23:59"	
+											"closes": "23:59"
 											';
 										else :
 											if (is_array($modified_times) || is_object($modified_times)) {
 												$modified_text .= '<dl class="hours">';
 												foreach ( $modified_times as $modified_time ) {
-													
+
 													$modified_text .= $modified_day !== $modified_time['location_modified_hours_day'] ? '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ' : '';
 													$modified_text .= '<dd>';
-			
+
 													if (1 != $i) {
 														$modified_hours_schema .= '},
 														';
 													}
-													
+
 													$modified_hours_schema .= '{
 														';
 													$modified_hours_schema .= '"@type": "OpeningHoursSpecification",
@@ -801,7 +801,7 @@ while ( have_posts() ) : the_post(); ?>
 														$modified_hours_schema .= '"dayOfWeek": "'. $modified_time['location_modified_hours_day'] .'",
 														'; //substr($modified_time['location_modified_hours_day'], 0, 2);
 													}
-				
+
 													if ( $modified_time['location_modified_hours_closed'] ) {
 														$modified_text .= 'Closed ';
 														$modified_hours_schema .= '"opens": "00:00",
@@ -823,7 +823,7 @@ while ( have_posts() ) : the_post(); ?>
 													$modified_text .= '</dd>';
 													$modified_day = $modified_time['location_modified_hours_day']; // Reset the day
 													$i++;
-													
+
 												} // endforeach
 												$modified_text .= '</dl>';
 											} // End if (array)
@@ -831,9 +831,9 @@ while ( have_posts() ) : the_post(); ?>
 									}
 								}
 							}
-						
+
 							echo $modified_text ? '<h2>Modified Hours</h2>' . $modified_text: '';
-							
+
 						endif; // End Modified Hours
 						if ('' != $modified_hours_schema) {
 							$modified_hours_schema ='"openingHoursSpecification": [
@@ -919,10 +919,10 @@ while ( have_posts() ) : the_post(); ?>
 
 								$order = array();
 								// populate order
-								foreach( $holidayhours as $i => $row ) {	
+								foreach( $holidayhours as $i => $row ) {
 									$order[ $i ] = $row['date'];
 								}
-								
+
 								// multisort
 								array_multisort( $order, SORT_ASC, $holidayhours );
 
@@ -944,13 +944,13 @@ while ( have_posts() ) : the_post(); ?>
 										} else {
 											echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . ap_time_span( strtotime($row['open']), strtotime($row['close']) ) . ' ' : '' );
 										}
-									}	
+									}
 								endforeach;
 								if ( 0 < $i ) {
 									echo '</dl>';
 								}
 							endif; ?>
-						
+
 
 						<?php endif;
 						} // endif
@@ -988,7 +988,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php } else { ?>
 						<div class="carousel slide carousel-thumbnails" id="location-info-carousel" data-interval="false" data-ride="carousel">
 							<div class="carousel-inner">
-								<?php 
+								<?php
 								$location_carousel_slide = 1;
 								foreach( $location_images as $location_images_item ) { ?>
 									<div class="carousel-item<?php echo ($location_carousel_slide == 1) ? ' active' : '' ?>">
@@ -1139,7 +1139,7 @@ while ( have_posts() ) : the_post(); ?>
 		</nav>
 	<?php } // endif
 	// End Jump Links Section
-	
+
 	// Begin Location Alert Section
 	if ( $show_location_alert_section ) { ?>
 	<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>" id="location-alert">
@@ -1171,7 +1171,7 @@ while ( have_posts() ) : the_post(); ?>
 		</section>
 	<?php } // endif
 	// End Closing Information Section
-	
+
 	// Begin About Section
 	if ( $show_about_section ) {
 	?>
@@ -1185,22 +1185,22 @@ while ( have_posts() ) : the_post(); ?>
 							<?php if($location_youtube_link) { ?>
 								<?php if(function_exists('lyte_preparse')) {
                                     echo '<div class="alignwide">';
-                                    echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $location_youtube_link ) ); 
+                                    echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $location_youtube_link ) );
                                     echo '</div>';
                                 } else {
                                     echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-                                    echo wp_oembed_get( $location_youtube_link ); 
+                                    echo wp_oembed_get( $location_youtube_link );
                                     echo '</div>';
                                 } ?>
 							<?php }
-							if ( $location_affiliation) { 
-								if ( $location_about || $prescription ) { 
+							if ( $location_affiliation) {
+								if ( $location_about || $prescription ) {
 									echo '<h3 id="affiliation">Affiliation</h3>';
 								}
 								echo $location_affiliation;
 							}
-							if ( $prescription) { 
-								if ( $location_about || $location_affiliation ) { 
+							if ( $prescription) {
+								if ( $location_about || $location_affiliation ) {
 									echo '<h3 id="prescription-info">Prescription Information</h3>';
 								}
 								echo $prescription;
@@ -1212,7 +1212,7 @@ while ( have_posts() ) : the_post(); ?>
 		</section>
 	<?php } // endif
 	// End About Section
-	
+
 	// Begin Parking and Directions Section
 	if ( $show_parking_section ) { ?>
 		<section class="uams-module bg-auto" id="parking-info">
@@ -1373,7 +1373,7 @@ while ( have_posts() ) : the_post(); ?>
 										<label for="schedule_options" class="lead">Available Services</label>
 										<select name="schedule_options" id="schedule_options" class="form-control">
 											<option value="">Select an option</option>
-											<?php foreach($location_scheduling_options as $key => $title) : 
+											<?php foreach($location_scheduling_options as $key => $title) :
 												$location_scheduling_item_title_nested = $title['location_scheduling_item_title_nested'];
 												$location_scheduling_item_title_nested = ( isset($location_scheduling_item_title_nested) && !empty($location_scheduling_item_title_nested) ) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
 												?>
@@ -1411,7 +1411,7 @@ while ( have_posts() ) : the_post(); ?>
 
 									//Show a button on top of the widget that lets the user see the slots in fullscreen.
 									'showToggleBtn':true,
-								
+
 									//The toggle button’s help text for screen reader.
 									'toggleBtnExpandHelpText': 'Expand to see the slots in fullscreen',
 									'toggleBtnCollapseHelpText': 'Exit fullscreen',
@@ -1464,7 +1464,7 @@ while ( have_posts() ) : the_post(); ?>
 											<?php } // endif
 
 											// Declare which phone number should be called.
-												
+
 												if (!$location_clinic_phone_query) { // If there is only one phone number ?>
 													Patients should call <?php echo $location_phone_link; ?> to schedule a telemedicine appointment.
 												<?php } elseif ($location_clinic_phone_query && !$location_appointment_phone_query) { // If there is only one appointment number ?>
@@ -1487,10 +1487,10 @@ while ( have_posts() ) : the_post(); ?>
 									$telemed_modified_text = '';
 									$telemed_active_start = '';
 									$telemed_active_end = '';
-									if ($telemed_modified) : 
+									if ($telemed_modified) :
 									?>
-									<?php 
-										
+									<?php
+
 										$telemed_modified_day = ''; // Previous Day
 										$telemed_modified_comment = ''; // Comment on previous day
 										$i = 1;
@@ -1518,14 +1518,14 @@ while ( have_posts() ) : the_post(); ?>
 														$telemed_active_end = strtotime($telemed_modified_end_date);
 													}
 												}
-										
+
 												if (is_array($telemed_modified_times) || is_object($telemed_modified_times)) {
 													$telemed_modified_text .= '<dl class="hours">';
 													foreach ( $telemed_modified_times as $telemed_modified_time ) {
-														
+
 														$telemed_modified_text .= $telemed_modified_day !== $telemed_modified_time['location_telemed_modified_hours_day'] ? '<dt>'. $telemed_modified_time['location_telemed_modified_hours_day'] .'</dt> ' : '';
 														$telemed_modified_text .= '<dd>';
-					
+
 														if ( $telemed_modified_time['location_telemed_modified_hours_closed'] ) {
 															$telemed_modified_text .= 'Closed ';
 														} else {
@@ -1540,16 +1540,16 @@ while ( have_posts() ) : the_post(); ?>
 														$telemed_modified_text .= '</dd>';
 														$telemed_modified_day = $telemed_modified_time['location_telemed_modified_hours_day']; // Reset the day
 														$i++;
-														
+
 													} // endforeach
 													$telemed_modified_text .= '</dl>';
-												
+
 												} // End if (array)
 											endif;
 										}
-									
+
 										echo $telemed_modified_text ? '<h3>Modified Hours</h3>' . $telemed_modified_text: '';
-										
+
 									endif; // End Modified Hours
 									if (($telemed_active_start != '' && $telemed_active_start <= $telemed_today) && ( strtotime($telemed_active_end) > $telemed_today || $telemed_active_end == 'TBD' ) ) {
 										// Do Nothing;
@@ -1593,7 +1593,7 @@ while ( have_posts() ) : the_post(); ?>
 													echo '<dt>No information</dt>';
 												}
 												echo '</dl>';
-											endif; 
+											endif;
 										endif;
 										}
 										?>
@@ -1607,7 +1607,7 @@ while ( have_posts() ) : the_post(); ?>
 		</section>
 	<?php } // endif
 	// End Telemedicine Information Section
-	
+
 	// Begin Portal Section
 	if ( $show_portal_section ) { ?>
 		<section class="uams-module cta-bar cta-bar-weighted bg-blue" aria-label="Patient Portal" id="portal-info">
@@ -1641,7 +1641,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Portal Section
 
 	// Begin Providers Section
-	if( $show_providers_section ) { 
+	if( $show_providers_section ) {
 
 		$provider_count = count($physicians_query->posts);
 		?>
@@ -1653,7 +1653,7 @@ while ( have_posts() ) : the_post(); ?>
 						<?php echo do_shortcode( '[uamswp_provider_title_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
 						<div class="card-list-container">
 							<div class="card-list card-list-doctors">
-								<?php 
+								<?php
                                     if($provider_count > 0){
                                         $title_list = array();
                                         while ($physicians_query->have_posts()) : $physicians_query->the_post();
@@ -1711,7 +1711,7 @@ while ( have_posts() ) : the_post(); ?>
 			},';
 		} // endforeach
 		$treatment_schema .= '"" ],';
-	} // endif 
+	} // endif
 	// End Treatments and Procedures Section
 
 	// Begin Areas of Expertise Section
@@ -1723,7 +1723,7 @@ while ( have_posts() ) : the_post(); ?>
 						<h2 class="module-title"><span class="title">Areas of Expertise Represented at <?php echo $page_title_phrase; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
-							<?php 
+							<?php
 							while ($expertise_query->have_posts()) : $expertise_query->the_post();
 								$id = get_the_ID();
 								include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
@@ -1737,7 +1737,7 @@ while ( have_posts() ) : the_post(); ?>
         </section>
 	<?php } // endif
 	// End Areas of Expertise Section
-	
+
 	// Begin Child Locations Section
 	if ( $show_child_locations_section ) { ?>
 		<section class="uams-module location-list bg-auto" id="sub-clinics" aria-labelledby="sub-location-title" >
@@ -1749,7 +1749,7 @@ while ( have_posts() ) : the_post(); ?>
 							<div class="card-list">
 								<?php
 									while ( $children->have_posts() ) : $children->the_post();
-										$id = get_the_ID(); 
+										$id = get_the_ID();
 										$child_location_list = true; // Indicate that this is a list of child locations within this location
 										include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
 									endwhile;

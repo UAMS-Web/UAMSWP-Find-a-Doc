@@ -1,8 +1,8 @@
-<?php 
+<?php
     /**
      *  Template Name: Areas of Expertise Loop - Card layout
      *  Designed for UAMS Find-a-Doc
-     * 
+     *
      *  Must be used inside a loop
      *  Required var: $id
      */
@@ -15,11 +15,11 @@
     $expertise_title_attr = $expertise_title;
     $expertise_title_attr = str_replace('"', '\'', $expertise_title_attr); // Replace double quotes with single quote
     $expertise_title_attr = str_replace('&#8217;', '\'', $expertise_title_attr); // Replace right single quote with single quote
-    $expertise_title_attr = htmlentities($expertise_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+    $expertise_title_attr = htmlentities($expertise_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $expertise_title_attr = str_replace('&nbsp;', ' ', $expertise_title_attr); // Convert non-breaking space with normal space
     $expertise_title_attr = html_entity_decode($expertise_title_attr); // Convert HTML entities to their corresponding characters
 
-    // Parent Area of Expertise 
+    // Parent Area of Expertise
     $expertise_parent_id = wp_get_post_parent_id($id);
     $expertise_has_parent = $expertise_parent_id ? true : false;
     $parent_expertise = '';
@@ -27,7 +27,7 @@
     $parent_title = '';
     $parent_url = '';
 
-    if ($expertise_has_parent && $expertise_parent_id) { 
+    if ($expertise_has_parent && $expertise_parent_id) {
         $parent_expertise = get_post( $expertise_parent_id );
     }
     // Get attributes of parent Area of Expertise
@@ -37,12 +37,11 @@
         $parent_title_attr = $parent_title;
         $parent_title_attr = str_replace('"', '\'', $parent_title_attr); // Replace double quotes with single quote
         $parent_title_attr = str_replace('&#8217;', '\'', $parent_title_attr); // Replace right single quote with single quote
-        $parent_title_attr = htmlentities($parent_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+        $parent_title_attr = htmlentities($parent_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
         $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space with normal space
         $parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters
         $parent_url = get_permalink( $parent_id );
     }
-
     
     $expertise_label = 'View Area of Expertise page for ' . $expertise_title_attr;
     $expertise_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags( get_the_content($id) );
@@ -76,4 +75,4 @@
             <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="<?php echo $expertise_label; ?>" data-categorytitle="View Area of Expertise" data-itemtitle="<?php echo $expertise_title_attr; ?>">View Area of Expertise</a>
         </div>
     </div>
-</div><!-- .card --> 
+</div><!-- .card -->

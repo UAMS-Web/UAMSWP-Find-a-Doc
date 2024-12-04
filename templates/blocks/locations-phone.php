@@ -2,7 +2,7 @@
     /**
      *  Template Name: Location Phone Numbers Variable Definitions
      *  Designed for UAMS Find-a-Doc
-     * 
+     *
      *  Required vars:
      *      $phone_output_id (ID of location)
      *      $phone_output
@@ -30,7 +30,7 @@ if ( $phone_output == 'associated_locations' ) {
     $location_title_attr = $location_title;
     $location_title_attr = str_replace('"', '\'', $location_title_attr); // Replace double quotes with single quote
     $location_title_attr = str_replace('&#8217;', '\'', $location_title_attr); // Replace right single quote with single quote
-    $location_title_attr = htmlentities($location_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+    $location_title_attr = htmlentities($location_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $location_title_attr = str_replace('&nbsp;', ' ', $location_title_attr); // Convert non-breaking space with normal space
     $location_title_attr = html_entity_decode($location_title_attr); // Convert HTML entities to their corresponding characters
     $location_phone_data_itemtitle = $location_title_attr;
@@ -139,7 +139,7 @@ if ( $phone_output == 'location_profile' ) {
     $location_phone_numbers = '';
 }
 
-// Display phone numbers on location profile's contact information section 
+// Display phone numbers on location profile's contact information section
 if ( $phone_output == 'location_profile' ) { ?>
     <dl <?php echo $location_phone_data_categorytitle ? 'data-categorytitle="' . $location_phone_data_categorytitle . '"' : '' ?>>
         <?php if ( !empty($location_phone) ) {
@@ -187,14 +187,14 @@ if ( $phone_output == 'location_profile' ) { ?>
         <?php } ?>
         <?php if ( $location_phone_numbers ) {
         // Additional phone numbers
-        
+
             $phone_numbers = $location_phone_numbers;
-            while( have_rows('field_location_phone_numbers') ): the_row(); 
+            while( have_rows('field_location_phone_numbers') ): the_row();
                 $title = get_sub_field('location_appointments_text');
                 $title_attr = $title;
                 $title_attr = str_replace('"', '\'', $title_attr); // Replace double quotes with single quote
                 $title_attr = str_replace('&#8217;', '\'', $title_attr); // Replace right single quote with single quote
-                $title_attr = htmlentities($title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+                $title_attr = htmlentities($title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
                 $title_attr = str_replace('&nbsp;', ' ', $title_attr); // Convert non-breaking space with normal space
                 $title_attr = html_entity_decode($title_attr); // Convert HTML entities to their corresponding characters
                 $phone = get_sub_field('location_appointments_phone');
@@ -205,9 +205,9 @@ if ( $phone_output == 'location_profile' ) { ?>
             <dd><a href="tel:<?php echo $phone_format_dash; ?>" data-typetitle="Additional Phone Number: <?php echo $title_attr; ?>"><?php echo $phone_format_dash; ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
             <?php if ('' != $phone){
                 isset($phone_schema) ? $phone_schema .= ', "'. $phone_format_dash .'"
-                ' : ''; 
+                ' : '';
                 }?>
-            <?php endwhile; 
+            <?php endwhile;
         } ?>
         <?php
             $phone_numbers = get_field('location_appointments');
