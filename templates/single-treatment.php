@@ -5,9 +5,9 @@
 	function uamswp_keyword_hook_header() {
 		global $keywords;
 		$keyword_text = '';
-		if( $keywords ): 
+		if( $keywords ):
 			$i = 1;
-			foreach( $keywords as $keyword ) { 
+			foreach( $keywords as $keyword ) {
 				if ( 1 < $i ) {
 					$keyword_text .= ', ';
 				}
@@ -23,30 +23,30 @@
 	$page_title_attr = $page_title;
 	$page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
 	$page_title_attr = str_replace('&#8217;', '\'', $page_title_attr); // Replace right single quote with single quote
-	$page_title_attr = htmlentities($page_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+	$page_title_attr = htmlentities($page_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 	$page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
 	$page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
 	$treatment_archive_title = get_field('treatments_archive_headline', 'option') ?: 'Treatments &amp; Procedures';
 	$treatment_archive_title_attr = $treatment_archive_title;
 	$treatment_archive_title_attr = str_replace('"', '\'', $treatment_archive_title_attr); // Replace double quotes with single quote
 	$treatment_archive_title_attr = str_replace('&#8217;', '\'', $treatment_archive_title_attr); // Replace right single quote with single quote
-	$treatment_archive_title_attr = htmlentities($treatment_archive_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+	$treatment_archive_title_attr = htmlentities($treatment_archive_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 	$treatment_archive_title_attr = str_replace('&nbsp;', ' ', $treatment_archive_title_attr); // Convert non-breaking space with normal space
 	$treatment_archive_title_attr = html_entity_decode($treatment_archive_title_attr); // Convert HTML entities to their corresponding characters
 	$treatment_title = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
 	$treatment_title_attr = $treatment_title;
 	$treatment_title_attr = str_replace('"', '\'', $treatment_title_attr); // Replace double quotes with single quote
 	$treatment_title_attr = str_replace('&#8217;', '\'', $treatment_title_attr); // Replace right single quote with single quote
-	$treatment_title_attr = htmlentities($treatment_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+	$treatment_title_attr = htmlentities($treatment_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 	$treatment_title_attr = str_replace('&nbsp;', ' ', $treatment_title_attr); // Convert non-breaking space with normal space
 	$treatment_title_attr = html_entity_decode($treatment_title_attr); // Convert HTML entities to their corresponding characters
 	$treatment_text = get_field('treatments_archive_intro_text', 'option');
 
 	// Override theme's method of defining the page title
-	function uamswp_fad_title($html) { 
+	function uamswp_fad_title($html) {
 		global $page_title_attr;
 		global $treatment_title_attr;
-		//you can add here all your conditions as if is_page(), is_category() etc.. 
+		//you can add here all your conditions as if is_page(), is_category() etc..
 		$meta_title_chars_max = 60;
 		$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
 		$meta_title_base_chars = strlen( $meta_title_base );
@@ -74,7 +74,7 @@
 	// Use SeoPress hook for meta description
 	function sp_titles_desc($html) {
 		global $excerpt;
-		$html = $excerpt; 
+		$html = $excerpt;
 		return $html;
 	}
 	add_filter('seopress_titles_desc', 'sp_titles_desc');
@@ -85,7 +85,7 @@
 		return $classes;
 	}
 	add_filter( 'body_class', 'uams_default_page_body_class' );
-	
+
 	get_header();
 
 	$clinical_trials = get_field('treatment_procedure_clinical_trials');
@@ -97,7 +97,7 @@
 	$medline_type = get_field('medline_code_type');
 	$medline_code = get_field('medline_code_id');
 	$embed_code = get_field('treatment_procedure_embed_codes');
-	
+
     $podcast_name = get_field('treatment_procedure_podcast_name');
 
 	// Hard coded breadcrumbs
@@ -163,13 +163,13 @@
 		}
 
 		// if cookie is set, run modified physician query
-		if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
-		
+		if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+
 			$location_region = '';
 			if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
 				$location_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
 			}
-			
+
 			$tax_query = array();
 			if(!empty($location_region)) {
 				$tax_query[] = array(
@@ -225,7 +225,7 @@
 	}
 
 	// Classes for indicating presence of content
-    $treatment_field_classes = '';	
+    $treatment_field_classes = '';
 	if ($keywords && array_filter($keywords)) { $treatment_field_classes .= ' has-keywords'; } // Alternate names
     if ($clinical_trials && !empty($clinical_trials)) { $treatment_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
     if ($content && !empty($content)) { $treatment_field_classes .= ' has-content'; } // Body content
@@ -235,7 +235,7 @@
     if ($expertise && array_filter($expertise)) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
     if ($locations && $location_valid) { $treatment_field_classes .= ' has-location'; } // Locations
     if ($physicians && array_filter($physicians)) { $treatment_field_classes .= ' has-provider'; } // Providers
-	
+
     // Set logic for displaying jump links and sections
     $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
     $jump_link_count = 0;
@@ -247,7 +247,7 @@
         } else {
             $show_podcast_section = false;
         }
-	
+
 		// Check if Clinical Resources section should be displayed
 		if( $resources && $resource_query->have_posts() ) {
 			$show_related_resource_section = true;
@@ -276,7 +276,7 @@
 			'post__in'	=> $conditions_cpt
 		));
 		$conditions_query_cpt = new WP_Query( $args );
-		
+
 		if ( $conditions_cpt && !empty($conditions_query_cpt->have_posts()) ) {
             $show_conditions_section = true;
             $jump_link_count++;
@@ -284,7 +284,7 @@
             $show_conditions_section = false;
         }
 
-        // Check if Providers section should be displayed	
+        // Check if Providers section should be displayed
 		if ( $physicians ) {
 			$args = (array(
 				'post_type' => "provider",
@@ -358,10 +358,10 @@
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php
-					if( $keywords ): 
+					if( $keywords ):
 						$i = 1;
 						$keyword_text = '';
-						foreach( $keywords as $keyword ) { 
+						foreach( $keywords as $keyword ) {
 							if ( 1 < $i ) {
 								$keyword_text .= '; ';
 							}
@@ -372,12 +372,12 @@
 					endif;
 				?>
 				<?php the_content(); ?>
-				<?php 
+				<?php
 					if ( !empty($medline_type) && 'none' != $medline_type && !empty($medline_code) ) {
 						echo display_medline_api_data( trim($medline_code), $medline_type );
 					}
 				?>
-				<?php 
+				<?php
 					if ( $embed_code ) {
 						echo $embed_code;
 					}
@@ -385,11 +385,11 @@
 				<?php if( $video ) { ?>
 					<?php if(function_exists('lyte_preparse')) {
 						echo '<div class="alignwide">';
-						echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) ); 
+						echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) );
 						echo '</div>';
 					} else {
 						echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-						echo wp_oembed_get( $video ); 
+						echo wp_oembed_get( $video );
 						echo '</div>';
 					} ?>
 				<?php } ?>
@@ -399,11 +399,11 @@
 		// Begin CTA Bar(s)
 			if( $cta_repeater ) {
 				$i = 1;
-				foreach( $cta_repeater as $cta ) { 
+				foreach( $cta_repeater as $cta ) {
 					$cta_heading = $cta['cta_bar_heading'];
 					$cta_body = $cta['cta_bar_body'];
 					$cta_action_type = $cta['cta_bar_action_type'];
-		
+
 					$cta_button_text = '';
 					$cta_button_url = '';
 					$cta_button_target = '';
@@ -416,7 +416,7 @@
 						}
 						$cta_button_desc = $cta['cta_bar_button_description'];
 					}
-		
+
 					$cta_phone_prepend = '';
 					$cta_phone = '';
 					$cta_phone_link = '';
@@ -425,15 +425,15 @@
 						$cta_phone = $cta['cta_bar_phone'];
 						$cta_phone_link = '<a href="tel:' . format_phone_dash( $cta_phone ) . '">' . format_phone_us( $cta_phone ) . '</a>';
 					}
-					
+
 					$cta_layout = 'cta-bar-centered';
 					$cta_size = 'normal';
 					$cta_use_image = false;
 					$cta_image = '';
 					$cta_background_color = 'bg-auto';
 					$cta_btn_color = 'primary';
-		
-					$cta_className = '';  
+
+					$cta_className = '';
 					$cta_className .= ' ' . $cta_layout;
 					$cta_className .= ' ' . $cta_background_color;
 					$cta_className .= $cta_use_image ? ' bg-image' : '';
@@ -445,7 +445,7 @@
 					if ( $cta_action_type == 'none' ) {
 						$cta_className .= ' no-link';
 					}
-		
+
 					echo '<section class="uams-module cta-bar' . $cta_className . '" id="cta-bar-' . $i . '" aria-label="' . $cta_heading . '">
 						<div class="container-fluid">
 							<div class="row">
@@ -475,7 +475,7 @@
 						</div>
 					</section>';
 					$i++;
-				} 
+				}
 			} // endif;
 			// End CTA Bar(s)
 
@@ -580,14 +580,14 @@
 			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 		}
 		// End Clinical Resources Section
-		
+
 		// Begin Clinical Trials Section
 		if ( $show_clinical_trials_section ) {
 			$clinical_trial_title = $page_title;
 			include( UAMS_FAD_PATH . '/templates/blocks/clinical-trials.php' );
 		} // endif
 		// End Clinical Trials Section
-		
+
 		// Begin Conditions Section
 		if ( $show_conditions_section ) { ?>
 			<section class="uams-module conditions-treatments bg-auto" id="conditions">
@@ -598,14 +598,14 @@
 							<p class="note">UAMS Health providers care for a broad range of conditions, some of which may not be listed below.</p>
 							<div class="list-container list-container-rows">
 								<ul class="list">
-								<?php while ($conditions_query_cpt->have_posts()) : $conditions_query_cpt->the_post(); 
+								<?php while ($conditions_query_cpt->have_posts()) : $conditions_query_cpt->the_post();
 									$condition_id = get_the_ID();
 									$condition_permalink = get_permalink( $condition_id );
 									$condition_title = get_the_title();
 									$condition_title_attr = $condition_title;
 									$condition_title_attr = str_replace('"', '\'', $condition_title_attr); // Replace double quotes with single quote
 									$condition_title_attr = str_replace('&#8217;', '\'', $condition_title_attr); // Replace right single quote with single quote
-									$condition_title_attr = htmlentities($condition_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+									$condition_title_attr = htmlentities($condition_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 									$condition_title_attr = str_replace('&nbsp;', ' ', $condition_title_attr); // Convert non-breaking space with normal space
 									$condition_title_attr = html_entity_decode($condition_title_attr); // Convert HTML entities to their corresponding characters
 								?>
@@ -624,7 +624,7 @@
 		// End Conditions Section
 
 		// Begin Providers Section
-		if( $show_providers_section ) { 
+		if( $show_providers_section ) {
 
 			// Get available regions - All available, since no titles set on initial load
 			$region_IDs = array();
@@ -637,15 +637,15 @@
 			foreach ($region_IDs as $region_ID){
 				$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
 			}
-			
+
 			// if cookie is set, run modified physician query
-			if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
-		
+			if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+
 				$provider_region = '';
 				if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
 					$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
 				}
-				
+
 				$tax_query = array();
 				if(!empty($provider_region)) {
 					$tax_query[] = array(
@@ -666,7 +666,7 @@
 				);
 				$physicians_query = New WP_Query( $args );
 			}
-	
+
 			$provider_count = count($physicians_query->posts);
 			?>
 			<section class="uams-module bg-auto" id="providers">
@@ -674,11 +674,11 @@
 					<div class="row">
 						<div class="col-12">
 							<h2 class="module-title"><span class="title">Providers Performing or Prescribing <?php echo $page_title; ?></span></h2>
-							<p class="note">Note that every provider listed below may not perform or prescribe <?php echo $page_title; ?> for all conditions related to it. Review each provider for availability.</p>   
+							<p class="note">Note that every provider listed below may not perform or prescribe <?php echo $page_title; ?> for all conditions related to it. Review each provider for availability.</p>
 							<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors">
-									<?php 
+									<?php
 										if($provider_count > 0){
 											$title_list = array();
 											while ($physicians_query->have_posts()) : $physicians_query->the_post();
@@ -713,13 +713,13 @@
 		<?php } // $physicians_query loop
 		// wp_reset_postdata();
 		// End Providers Section
-		
+
 		// Begin Locations Section
 		if ( $show_locations_section ) {
-			echo $location_content; 
+			echo $location_content;
 		}
 		// End Locations Section
-		
+
 		// Begin Areas of Expertise Section
 		if ( $show_aoe_section ) { ?>
 		<section class="uams-module bg-auto" id="expertise">
@@ -729,11 +729,11 @@
 						<h2 class="module-title"><span class="title">Areas of Expertise for <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
-							<?php 
+							<?php
 								while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
 									$id = get_the_ID();
 									include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-								endwhile; 
+								endwhile;
 								wp_reset_postdata();
 							?>
 							</div>
@@ -744,7 +744,7 @@
 		</section>
 		<?php } // endif
 		// End Areas of Expertise Section
-			
+
 		// Begin Appointment Information Section
 		if ( $show_appointment_section ) {
 			include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
