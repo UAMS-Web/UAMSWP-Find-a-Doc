@@ -662,7 +662,7 @@ while ( have_posts() ) : the_post();
     if ( $npi ) {
         $pg_rating_request = wp_pg_cached_api( $npi, 36 );
         $pg_rating_data = json_decode( $pg_rating_request );
-        if ( !empty( $pg_rating_data ) ) {
+        if ( !empty( $pg_rating_data ) && ('200' == $pg_rating_data->status->code ) ) {
             $pg_rating_valid = ( ($pg_rating_data->data->entities[0]->totalRatingCount) >= 30 );
         }
     }
