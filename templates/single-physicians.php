@@ -662,7 +662,7 @@ while ( have_posts() ) : the_post();
     if ( $npi ) {
         $pg_rating_request = wp_pg_cached_api( $npi, 36 );
         $pg_rating_data = json_decode( $pg_rating_request );
-        if ( !empty( $pg_rating_data ) ) {
+        if ( !empty( $pg_rating_data ) && ('200' == $pg_rating_data->status->code ) ) {
             $pg_rating_valid = ( ($pg_rating_data->data->entities[0]->totalRatingCount) >= 30 );
         }
     }
@@ -965,7 +965,7 @@ while ( have_posts() ) : the_post();
                     <?php } //endif ?>
                     </dl>
                     <?php
-                        echo '<div class="rating" aria-label="Patient Rating">';
+                        echo '<div class="rating" role="region" aria-label="Patient Rating">';
                         if ( $pg_rating_valid ){
                             $avg_rating = $pg_rating_data->data->entities[0]->overallRating->value;
                             $avg_rating_dec = $pg_rating_data->data->entities[0]->overallRating->value;
@@ -1580,7 +1580,7 @@ while ( have_posts() ) : the_post();
                                         if ($questionRating->responseCount > 0){ ?>
                                     <dt><?php echo $questionRating->name; ?></dt>
                                     <dd>
-                                        <div class="rating" aria-label="Patient Rating">
+                                        <div class="rating" role="region" aria-label="Patient Rating">
                                             <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->value)/5 * 100; ?>%;"></div></div>
                                             <div class="ratings-score-lg"><?php echo $questionRating->value; ?><span class="sr-only"> out of 5</span></div>
                                         </div>
@@ -1610,7 +1610,7 @@ while ( have_posts() ) : the_post();
                                     $i++; ?>
                                 <div class="card">
                                     <div class="card-header bg-transparent">
-                                        <div class="rating rating-center" aria-label="Average Rating">
+                                        <div class="rating rating-center" role="region" aria-label="Average Rating">
                                             <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->overallRating->value)/5 * 100; ?>%;"></div></div>
                                             <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->overallRating->value; ?><span class="sr-only"> out of 5</span></div>
                                         </div>
@@ -1647,7 +1647,7 @@ while ( have_posts() ) : the_post();
                                         if( $i >= 7 ) { ?>
                                     <div class="card">
                                         <div class="card-header bg-transparent">
-                                            <div class="rating rating-center" aria-label="Average Rating">
+                                            <div class="rating rating-center" role="region" aria-label="Average Rating">
                                                 <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->overallRating->value)/5 * 100; ?>%;"></div></div>
                                                 <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->overallRating->value; ?><span class="sr-only"> out of 5</span></div>
                                             </div>

@@ -59,14 +59,16 @@ function display_provider_image() {
     $args = array(
         "post_type" => "location",
         "post_status" => "publish",
-        "posts_per_page" => "-1", // Set for all
+        "posts_per_page" => "500", // Set for all => -1
         "orderby" => "title",
         "order" => "ASC",
+        'paged' => get_query_var( 'paged' ),
     );
 
-    $query = new WP_Query( $args );
+    global $wp_query;
+    $wp_query = new WP_Query( $args );
 
-    if ( $query->have_posts() ) : ?>
+    if ( $wp_query->have_posts() ) : ?>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -148,7 +150,7 @@ function display_provider_image() {
                 </thead>
                 <tbody>
                 <?php 
-                while( $query->have_posts() ) : $query->the_post();
+                while( $wp_query->have_posts() ) : $wp_query->the_post();
                     // Parent Location 
                     $location_post_id = get_the_ID();
                     $location_child_id = get_the_ID();
@@ -748,6 +750,7 @@ function display_provider_image() {
             </table>
         </div>
     <?php
+        genesis_posts_nav();
         else :
         echo 'No providers found';
     endif;
