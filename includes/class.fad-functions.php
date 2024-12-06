@@ -529,7 +529,7 @@ function provider_recognition_function( $atts ) {
 
 				// Get resident values
 
-					$resident = get_field('physician_resident',$post->ID);
+					$resident = get_field('physician_resident',the_ID());
 					$resident_title_name = 'Resident Physician';
 
 				// Get clinical specialty and occupation title values
@@ -551,7 +551,7 @@ function provider_recognition_function( $atts ) {
 
 						// Clinical Specialty
 
-							$provider_specialty = get_field('physician_title',$post->ID);
+							$provider_specialty = get_field('physician_title',the_ID());
 
 						// Clinical Occupation Title
 
