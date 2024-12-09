@@ -317,7 +317,7 @@ function wp_pg_cached_api( $npi, $count = 6 ) {
 
 		} else {
 			// Success, cache for a longer time.
-			set_transient( $cache_key, $request, DAY_IN_SECONDS );
+			set_transient( $cache_key, $request, HOUR_IN_SECONDS );
 		}
 	}
 	return $request;
