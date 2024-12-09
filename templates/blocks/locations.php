@@ -2,27 +2,27 @@
 /*
  *
  * UAMS Find-a-Doc Locations Block
- * 
+ *
  */
 
 // Create id attribute allowing for custom "anchor" value.
 $id = '';
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
-} 
+}
 if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
 
-$id = 'locations-' . $id;  
-    
+$id = 'locations-' . $id;
+
 $className = '';
 if( !empty($block['className']) ) {
     $className .= ' ' . $block['className'];
 }
 if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
-}  
+}
 
 // Load values.
 if ( empty($heading) )
@@ -40,14 +40,14 @@ if ( $more ) {
         $more_button_text = get_field('block_fad_locations_more_button_text');
     if ( empty($more_button_url) )
         $more_button_url = get_field('block_fad_locations_more_button_url');
-    if ( empty($more_button_target) ) 
+    if ( empty($more_button_target) )
         $more_button_target = $more_button_url['target'];
     if ( empty($more_button_description) )
         $more_button_description = get_field('block_fad_locations_more_button_description');
         $more_button_description_attr = $more_button_description;
         $more_button_description_attr = str_replace('"', '\'', $more_button_description_attr); // Replace double quotes with single quote
         $more_button_description_attr = str_replace('&#8217;', '\'', $more_button_description_attr); // Replace right single quote with single quote
-        $more_button_description_attr = htmlentities($more_button_description_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+        $more_button_description_attr = htmlentities($more_button_description_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
         $more_button_description_attr = str_replace('&nbsp;', ' ', $more_button_description_attr); // Convert non-breaking space with normal space
         $more_button_description_attr = html_entity_decode($more_button_description_attr); // Convert HTML entities to their corresponding characters
     if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) ) {
@@ -64,7 +64,7 @@ $filter_aoe = get_field('block_fad_locations_filter_aoe') ?: array();
 
 $post_ids = array();
 if (!empty($filter_aoe))
-{   
+{
     $aoe_ids = uamswp_custom_table_query('uamswp_locations', 'location_expertise', $filter_aoe);
 }
 if (!empty($aoe_ids)){
@@ -104,7 +104,7 @@ if($filter_type || $filter_region || $filter_aoe || $filter_ids) {
             'tax_query' => $tax_query,
             'fields' => 'ids',
         ));
-        $filtered_query = new WP_Query( $args ); 
+        $filtered_query = new WP_Query( $args );
         $post_ids = array_unique( array_merge( $filter_ids,  $filtered_query->posts ) );
     } else {
         $post_ids = $filter_ids;
@@ -131,9 +131,9 @@ if($filter_type || $filter_region || $filter_aoe || $filter_ids) {
                         <div class="card-list-container location-card-list-container">
                             <div class="card-list">
                             <?php while ( $location_query->have_posts() ) : $location_query->the_post();
-                                $id = get_the_ID(); 
-                                include( UAMS_FAD_PATH . '/templates/loops/location-card.php' ); 
-                            endwhile; 
+                                $id = get_the_ID();
+                                include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+                            endwhile;
                             wp_reset_postdata();?>
                         </div>
                         <?php if ( $more ) { ?>

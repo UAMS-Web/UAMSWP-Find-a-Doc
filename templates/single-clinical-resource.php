@@ -10,22 +10,22 @@ $page_id = get_the_ID();
 $page_title = get_the_title();
 $page_title_attr = $page_title;
 $page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
-$page_title_attr = htmlentities($page_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$page_title_attr = htmlentities($page_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
 $page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
 $resource_archive_title_system = get_field('clinical_resource_archive_headline', 'option');
 $resource_archive_title = $resource_archive_title_system ? $resource_archive_title_system : 'Clinical Resource';
 $resource_archive_title_attr = $resource_archive_title;
 $resource_archive_title_attr = str_replace('"', '\'', $resource_archive_title_attr); // Replace double quotes with single quote
-$resource_archive_title_attr = htmlentities($resource_archive_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$resource_archive_title_attr = htmlentities($resource_archive_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $resource_archive_title_attr = str_replace('&nbsp;', ' ', $resource_archive_title_attr); // Convert non-breaking space with normal space
 $resource_archive_title_attr = html_entity_decode($resource_archive_title_attr); // Convert HTML entities to their corresponding characters
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html) { 
+function uamswp_fad_title($html) {
     global $page_title_attr;
     global $resource_archive_title_attr;
-    //you can add here all your conditions as if is_page(), is_category() etc.. 
+    //you can add here all your conditions as if is_page(), is_category() etc..
     $meta_title_chars_max = 60;
     $meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
     $meta_title_base_chars = strlen( $meta_title_base );
@@ -47,7 +47,7 @@ function uamswp_fad_canonical($html) {
     global $syndicated;
     global $syndication_url;
 	if ( $syndicated && !empty($syndication_url) ) {
-	$html = '<link rel="canonical" href="'.htmlspecialchars(urldecode($syndication_url)).'" />'; 
+	$html = '<link rel="canonical" href="'.htmlspecialchars(urldecode($syndication_url)).'" />';
     }
 	return $html;
 }
@@ -224,7 +224,7 @@ $args = (array(
     'post__in'	=> $resources
 ));
 $resource_query = new WP_Query( $args );
-	
+
 // Check if Clinical Resources section should be displayed
 if( $resources && $resource_query->have_posts() ) {
     $show_related_resource_section = true;
@@ -329,7 +329,7 @@ function uamswp_resource_physicians() {
     global $postsPerPage;
     global $physicians;
 
-    if($show_providers_section) {   
+    if($show_providers_section) {
         ?>
         <section class="uams-module bg-auto" id="providers">
             <div class="container-fluid">
@@ -338,7 +338,7 @@ function uamswp_resource_physicians() {
                         <h2 class="module-title"><span class="title">Related Providers</span></h2>
                         <div class="card-list-container">
                             <div class="card-list card-list-doctors">
-                                <?php 
+                                <?php
                                     while ($physicians_query->have_posts()) : $physicians_query->the_post();
                                         $id = get_the_ID();
                                         include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
@@ -380,11 +380,11 @@ function uamswp_resource_video() {
         echo '<h2 class="sr-only">Video Player</h2>';
         if( function_exists('lyte_preparse') && $video_source == 'youtube' ) {
             echo '<div class="alignwide">';
-            echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) ); 
+            echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) );
             echo '</div>';
         } else {
             echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-            echo wp_oembed_get( $video ); 
+            echo wp_oembed_get( $video );
             echo '</div>';
         }
         if ( $video_transcript ) {
@@ -428,16 +428,16 @@ function uamswp_resource_locations() {
                         <div class="card-list-container location-card-list-container">
                             <div class="card-list">
                             <?php while ( $location_query->have_posts() ) : $location_query->the_post();
-                                $id = get_the_ID(); 
-                                include( UAMS_FAD_PATH . '/templates/loops/location-card.php' ); 
-                            endwhile; 
+                                $id = get_the_ID();
+                                include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+                            endwhile;
                             wp_reset_postdata();?>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    <?php 
+    <?php
     } // endif
 }
 function uamswp_resource_associated() {
@@ -468,7 +468,7 @@ function uamswp_resource_expertise() {
 						<h2 class="module-title" id="areas-of-expertise-title"><span class="title">Related Areas of Expertise</span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
-							<?php 
+							<?php
 							while ($expertise_query->have_posts()) : $expertise_query->the_post();
 								$id = get_the_ID();
 								include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
@@ -480,7 +480,7 @@ function uamswp_resource_expertise() {
 				</div>
 			</div>
         </section>
-	<?php 
+	<?php
     } // endif
 }
 function uamswp_resource_jump_links() {
@@ -493,7 +493,7 @@ function uamswp_resource_jump_links() {
     global $show_aoe_section;
     global $show_jump_links_section;
     global $show_appointment_section;
-    
+
     // Begin Jump Links Section
     if ( $show_jump_links_section ) { ?>
         <nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
@@ -545,7 +545,7 @@ function uamswp_resource_jump_links() {
 }
 function uamswp_resource_appointment() {
     global $show_appointment_section;
-    
+
     if ( $show_appointment_section ) {
         $appointment_location_url = '/location/';
         //$appointment_location_label = 'View a list of UAMS Health locations';

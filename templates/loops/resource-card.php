@@ -1,8 +1,8 @@
-<?php 
+<?php
     /**
      *  Template Name: Clinical Resource Loop - Card layout
      *  Designed for UAMS Find-a-Doc
-     * 
+     *
      *  Must be used inside a loop
      *  Required var:
      *      $id
@@ -16,7 +16,7 @@
     $resource_title_attr = $resource_title;
     $resource_title_attr = str_replace('"', '\'', $resource_title_attr); // Replace double quotes with single quote
     $resource_title_attr = str_replace('&#8217;', '\'', $resource_title_attr); // Replace right single quote with single quote
-    $resource_title_attr = htmlentities($resource_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+    $resource_title_attr = htmlentities($resource_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $resource_title_attr = str_replace('&nbsp;', ' ', $resource_title_attr); // Convert non-breaking space with normal space
     $resource_title_attr = html_entity_decode($resource_title_attr); // Convert HTML entities to their corresponding characters
 
@@ -40,11 +40,11 @@
     $resource_button_text_attr = $resource_button_text;
     $resource_button_text_attr = str_replace('"', '\'', $resource_button_text_attr); // Replace double quotes with single quote
     $resource_button_text_attr = str_replace('&#8217;', '\'', $resource_button_text_attr); // Replace right single quote with single quote
-    $resource_button_text_attr = htmlentities($resource_button_text_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+    $resource_button_text_attr = htmlentities($resource_button_text_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $resource_button_text_attr = str_replace('&nbsp;', ' ', $resource_button_text_attr); // Convert non-breaking space with normal space
     $resource_button_text_attr = html_entity_decode($resource_button_text_attr); // Convert HTML entities to their corresponding characters
     $resource_label = $resource_button_text_attr . ', ' . $resource_title_attr;
-    
+
     $resource_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags( get_the_content($id) );
     $resource_excerpt_len = strlen($resource_excerpt);
     if ( $resource_excerpt_len > 160 ) {
@@ -56,7 +56,7 @@
     $resource_image_square = ( isset($resource_image_square) && !empty($resource_image_square) ) ? $resource_image_square : $resource_image_wide;
 
     $resource_related_max = 3; // Set how many of each related item type to display
-    
+
 
     // Check for valid providers
     $resource_providers = get_field('clinical_resource_providers');
@@ -237,13 +237,13 @@
                                                         $associate_title_attr = $associate_title;
                                                         $associate_title_attr = str_replace('"', '\'', $associate_title_attr); // Replace double quotes with single quote
                                                         $associate_title_attr = str_replace('&#8217;', '\'', $associate_title_attr); // Replace right single quote with single quote
-                                                        $associate_title_attr = htmlentities($associate_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+                                                        $associate_title_attr = htmlentities($associate_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
                                                         $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                         $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
-        
+
                                                         echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;
-                                                        if ( 
+                                                        if (
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
                                                             || ( $resource_count > 1 && $resource_count <= $resource_related_max && $resource_i < ($resource_count - 1) )
                                                          ) {
@@ -265,7 +265,7 @@
                                         $resource_i = 0;
                                         $resource_count = '';
                                         $associates = '';
-                                    ?> 
+                                    ?>
                                     <?php if( $resource_locations && $resource_location_valid ) { ?>
                                         <dt><?php echo $resource_location_label; ?></dt>
                                         <dd>
@@ -280,13 +280,13 @@
                                                         $associate_title_attr = $associate_title;
                                                         $associate_title_attr = str_replace('"', '\'', $associate_title_attr); // Replace double quotes with single quote
                                                         $associate_title_attr = str_replace('&#8217;', '\'', $associate_title_attr); // Replace right single quote with single quote
-                                                        $associate_title_attr = htmlentities($associate_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+                                                        $associate_title_attr = htmlentities($associate_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
                                                         $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                         $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
-        
+
                                                         echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;
-                                                        if ( 
+                                                        if (
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
                                                             || ( $resource_count > 1 && $resource_count <= $resource_related_max && $resource_i < ($resource_count - 1) )
                                                          ) {
@@ -308,7 +308,7 @@
                                         $resource_i = 0;
                                         $resource_count = '';
                                         $associates = '';
-                                    ?> 
+                                    ?>
                                     <?php if( $resource_conditions && $resource_condition_valid ) { ?>
                                         <dt><?php echo $resource_condition_label; ?></dt>
                                         <dd>
@@ -323,13 +323,13 @@
                                                         $associate_title_attr = $associate_title;
                                                         $associate_title_attr = str_replace('"', '\'', $associate_title_attr); // Replace double quotes with single quote
                                                         $associate_title_attr = str_replace('&#8217;', '\'', $associate_title_attr); // Replace right single quote with single quote
-                                                        $associate_title_attr = htmlentities($associate_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+                                                        $associate_title_attr = htmlentities($associate_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
                                                         $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                         $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
-        
+
                                                         echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;
-                                                        if ( 
+                                                        if (
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
                                                             || ( $resource_count > 1 && $resource_count <= $resource_related_max && $resource_i < ($resource_count - 1) )
                                                          ) {
@@ -351,7 +351,7 @@
                                         $resource_i = 0;
                                         $resource_count = '';
                                         $associates = '';
-                                    ?> 
+                                    ?>
                                     <?php if( $resource_treatments && $resource_treatment_valid ) { ?>
                                         <dt><?php echo $resource_treatment_label; ?></dt>
                                         <dd>
@@ -366,13 +366,13 @@
                                                         $associate_title_attr = $associate_title;
                                                         $associate_title_attr = str_replace('"', '\'', $associate_title_attr); // Replace double quotes with single quote
                                                         $associate_title_attr = str_replace('&#8217;', '\'', $associate_title_attr); // Replace right single quote with single quote
-                                                        $associate_title_attr = htmlentities($associate_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+                                                        $associate_title_attr = htmlentities($associate_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
                                                         $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                         $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
-        
+
                                                         echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;
-                                                        if ( 
+                                                        if (
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
                                                             || ( $resource_count > 1 && $resource_count <= $resource_related_max && $resource_i < ($resource_count - 1) )
                                                          ) {
@@ -394,7 +394,7 @@
                                         $resource_i = 0;
                                         $resource_count = '';
                                         $associates = '';
-                                    ?> 
+                                    ?>
                                     <?php if( $resource_expertises && $resource_expertise_valid ) { ?>
                                         <dt><?php echo $resource_expertise_label; ?></dt>
                                         <dd>
@@ -409,13 +409,13 @@
                                                         $associate_title_attr = $associate_title;
                                                         $associate_title_attr = str_replace('"', '\'', $associate_title_attr); // Replace double quotes with single quote
                                                         $associate_title_attr = str_replace('&#8217;', '\'', $associate_title_attr); // Replace right single quote with single quote
-                                                        $associate_title_attr = htmlentities($associate_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+                                                        $associate_title_attr = htmlentities($associate_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
                                                         $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                         $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
-        
+
                                                         echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;
-                                                        if ( 
+                                                        if (
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
                                                             || ( $resource_count > 1 && $resource_count <= $resource_related_max && $resource_i < ($resource_count - 1) )
                                                          ) {
@@ -437,7 +437,7 @@
                                         $resource_i = 0;
                                         $resource_count = '';
                                         $associates = '';
-                                    ?> 
+                                    ?>
                                 </dl>
 								<a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_button_text; ?></a>
 							</div>
@@ -451,16 +451,16 @@
             <div class="card">
                 <div class="card-img-top">
                     <picture>
-                        <?php if ( has_post_thumbnail($id) && function_exists( 'fly_add_image_size' ) ) { ?>  
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" 
+                        <?php if ( has_post_thumbnail($id) && function_exists( 'fly_add_image_size' ) ) { ?>
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>"
                                 media="(min-width: 1921px)">
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center'); ?>" 
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center'); ?>"
                                 media="(min-width: 1500px)">
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" 
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>"
                                 media="(min-width: 992px)">
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center'); ?>" 
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center'); ?>"
                                 media="(min-width: 768px)">
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" 
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>"
                                 media="(min-width: 1px)">
                             <!-- Fallback -->
                             <img src="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" alt="" role="presentation" />
