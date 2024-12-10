@@ -3,7 +3,7 @@
 /*
  *
  * Custom ACF Blocks
- * 
+ *
  */
 
 add_action('acf/init', 'uams_fad_register_blocks');
@@ -32,6 +32,17 @@ function uams_fad_register_blocks() {
             'mode'              => 'auto',
             'align'             => 'full',
             'render_template'   => UAMS_FAD_PATH . 'templates/blocks/providers.php',
+        ));
+        acf_register_block_type(array(
+            'name' => 'fad-recognitions',
+            'title' => __('Provider Recognition List'),
+            'description' => __('List of providers from a Recognition List'),
+            'category' => 'common',
+            'icon' => 'awards',
+            'keywords' => array('uams', 'providers', 'doctors', 'awards'),
+            'mode' => 'auto',
+            'align' => '',
+            'render_template' => UAMS_FAD_PATH . 'templates/blocks/recognitions.php',
         ));
     }
 }
@@ -863,5 +874,76 @@ if( function_exists('acf_add_local_field_group') ):
         'active' => true,
         'description' => '',
     ));
+
+    // Add local field group for UAMS Recognition List Block
+    acf_add_local_field_group( array(
+        'key' => 'group_block_fad_recognition',
+        'title' => 'Block: UAMS FaD Recognition List',
+        'fields' => array(
+            array(
+                'key' => 'field_block_fad_locations_intro',
+                'label' => '',
+                'name' => '',
+                'aria-label' => '',
+                'type' => 'message',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'relevanssi_exclude' => 0,
+                'message' => '<h2>UAMS Recognition List</h2>',
+                'new_lines' => 'wpautop',
+                'esc_html' => 0,
+            ),
+            array(
+                'key' => 'field_select_recognition_list',
+                'label' => 'Recognition List',
+                'name' => 'select_recognition_list',
+                'aria-label' => '',
+                'type' => 'taxonomy',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'taxonomy' => 'recognition',
+                'add_term' => 0,
+                'save_terms' => 0,
+                'load_terms' => 0,
+                'return_format' => 'id',
+                'field_type' => 'select',
+                'allow_null' => 0,
+                'allow_in_bindings' => 0,
+                'bidirectional' => 0,
+                'multiple' => 0,
+                'min' => '',
+                'max' => '',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'block',
+                    'operator' => '==',
+                    'value' => 'acf/fad-recognitions',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+    ) );
 
 endif;
