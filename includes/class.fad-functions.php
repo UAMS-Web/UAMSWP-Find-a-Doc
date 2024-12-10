@@ -473,147 +473,146 @@ function uamswp_load_by_ajax_callback(){
     endif;
     wp_die();
 }
-function provider_recognition_function( $atts ) {
-	extract(shortcode_atts(array(
-		'slug' => '',
-		'layout' => 'table',
-	 ), $atts));
+// function provider_recognition_function( $atts ) {
+// 	extract(shortcode_atts(array(
+// 		'slug' => '',
+// 		'layout' => 'table',
+// 	 ), $atts));
 
-	query_posts(
-		array(
-			'post_type' => 'provider', // We only want pages
-			'post_status' => 'publish', // We only want children of a defined post ID
-			'posts_per_page' => -1, // We do not want to limit the post count
-			'order' => 'ASC',
-			'orderby' => 'title',
-			'tax_query' => array(
-				array(
-					'taxonomy' => 'recognition',
-					'field'    => 'slug',
-					'terms'    => $slug,
-				),
-			),
-		// We can define any additional arguments that we need - see Codex for the full list
-		)
-	);
-	$recognition_list = '';
-	if (have_posts()):
-		if ('table' == $layout || empty($layout)) {
-			$recognition_list .= '<div class="table-responsive">
-			<table class="table table-striped">
-			<thead>
-			<tr>
-				<th scope="col" class="col-6">Name</th>
-				<th scope="col" class="col-6">Title</th>
-			</tr>
-			</thead>
-			<tbody>';
+// 	query_posts(
+// 		array(
+// 			'post_type' => 'provider', // We only want pages
+// 			'post_status' => 'publish', // We only want children of a defined post ID
+// 			'posts_per_page' => -1, // We do not want to limit the post count
+// 			'order' => 'ASC',
+// 			'orderby' => 'title',
+// 			'tax_query' => array(
+// 				array(
+// 					'taxonomy' => 'recognition',
+// 					'field'    => 'slug',
+// 					'terms'    => $slug,
+// 				),
+// 			),
+// 		// We can define any additional arguments that we need - see Codex for the full list
+// 		)
+// 	);
+// 	$recognition_list = '';
+// 	if (have_posts()):
+// 		if ('table' == $layout || empty($layout)) {
+// 			$recognition_list .= '<div class="table-responsive">
+// 			<table class="table table-striped">
+// 			<thead>
+// 			<tr>
+// 				<th scope="col" class="col-6">Name</th>
+// 				<th scope="col" class="col-6">Title</th>
+// 			</tr>
+// 			</thead>
+// 			<tbody>';
+// 			while( have_posts() ) : the_post();
+// 				$degrees = get_field('physician_degree');
+// 				$degree_list = '';
+// 				$i = 1;
+// 				if ( $degrees ) {
+// 					foreach( $degrees as $degree ):
+// 						$degree_name = get_term( $degree, 'degree');
+// 						$degree_list .= $degree_name->name;
+// 						if( count($degrees) > $i ) {
+// 							$degree_list .= ", ";
+// 						}
+// 						$i++;
+// 					endforeach;
+// 				}
+// 				$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+// 				$recognition_list .= '<tr>';
+// 				$recognition_list .= '<td><a href="'.get_permalink().'" title="'. $full_name .'">'. $full_name .'</a></td>';
 
-			while( have_posts() ) : the_post();
-				$degrees = get_field('physician_degree');
-				$degree_list = '';
-				$i = 1;
-				if ( $degrees ) {
-					foreach( $degrees as $degree ):
-						$degree_name = get_term( $degree, 'degree');
-						$degree_list .= $degree_name->name;
-						if( count($degrees) > $i ) {
-							$degree_list .= ", ";
-						}
-						$i++;
-					endforeach;
-				}
-				$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') .  ( $degree_list ? ', ' . $degree_list : '' );
-				$recognition_list .= '<tr>';
-				$recognition_list .= '<td><a href="'.get_permalink().'" title="'. $full_name .'">'. $full_name .'</a></td>';
+// 				// Get resident values
 
-				// Get resident values
+// 					$resident = get_field('physician_resident',the_ID());
+// 					$resident_title_name = 'Resident Physician';
 
-					$resident = get_field('physician_resident',the_ID());
-					$resident_title_name = 'Resident Physician';
+// 				// Get clinical specialty and occupation title values
 
-				// Get clinical specialty and occupation title values
+// 					// Eliminate PHP errors
 
-					// Eliminate PHP errors
+// 						$provider_specialty = '';
+// 						$provider_specialty_term = '';
+// 						$provider_specialty_name = '';
+// 						$provider_occupation_title = '';
 
-						$provider_specialty = '';
-						$provider_specialty_term = '';
-						$provider_specialty_name = '';
-						$provider_occupation_title = '';
+// 					if ( $resident ) {
 
-					if ( $resident ) {
+// 						// Clinical Occupation Title
 
-						// Clinical Occupation Title
+// 							$provider_occupation_title = $resident_title_name;
 
-							$provider_occupation_title = $resident_title_name;
+// 					} else {
 
-					} else {
+// 						// Clinical Specialty
 
-						// Clinical Specialty
+// 							$provider_specialty = get_field('physician_title',the_ID());
 
-							$provider_specialty = get_field('physician_title',the_ID());
+// 						// Clinical Occupation Title
 
-						// Clinical Occupation Title
+// 							if ( $provider_specialty ) {
 
-							if ( $provider_specialty ) {
+// 								$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
 
-								$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+// 								if ( is_object($provider_specialty_term) ) {
 
-								if ( is_object($provider_specialty_term) ) {
+// 									// Get term name
 
-									// Get term name
+// 										$provider_specialty_name = $provider_specialty_term->name;
 
-										$provider_specialty_name = $provider_specialty_term->name;
+// 									// Get occupational title field from term
 
-									// Get occupational title field from term
+// 										$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
 
-										$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+// 									// Set occupational title from term name as a fallback
 
-									// Set occupational title from term name as a fallback
+// 										if ( !$provider_occupation_title ) {
 
-										if ( !$provider_occupation_title ) {
+// 											$provider_occupation_title = $provider_specialty_name;
 
-											$provider_occupation_title = $provider_specialty_name;
+// 										}
 
-										}
+// 								}
 
-								}
+// 							}
 
-							}
+// 					}
 
-					}
+// 				if (
+// 					$provider_occupation_title
+// 					&&
+// 					!empty($provider_occupation_title)
+// 				) {
 
-				if (
-					$provider_occupation_title
-					&&
-					!empty($provider_occupation_title)
-				) {
+// 					$recognition_list .= '<td>'. $provider_occupation_title .'</td>';
 
-					$recognition_list .= '<td>'. $provider_occupation_title .'</td>';
+// 				} else {
 
-				} else {
+// 					$recognition_list .= '<td>&nbsp;</td>';
 
-					$recognition_list .= '<td>&nbsp;</td>';
+// 				}
 
-				}
+// 				$recognition_list .= '</tr>';
 
-				$recognition_list .= '</tr>';
+// 			endwhile;
+// 			$recognition_list .= '</tbody>';
+// 			$recognition_list .= '</table>';
+// 			$recognition_list .= '</div>'; // responsive table
+// 		} // table layout
+// 		// Additional layouts
+// 	endif;
+// 	wp_reset_query();
+// 	return $recognition_list;
 
-			endwhile;
-			$recognition_list .= '</tbody>';
-			$recognition_list .= '</table>';
-			$recognition_list .= '</div>'; // responsive table
-		} // table layout
-		// Additional layouts
-	endif;
-	wp_reset_query();
-	return $recognition_list;
-
-}
-function register_recognition_shortcodes(){
-	add_shortcode('recognition-list', 'provider_recognition_function');
-}
-add_action( 'init', 'register_recognition_shortcodes');
+// }
+// function register_recognition_shortcodes(){
+// 	add_shortcode('recognition-list', 'provider_recognition_function');
+// }
+// add_action( 'init', 'register_recognition_shortcodes');
 
 function get_medline_api_data( $code, $type ) {
 	// if ( 'none' == $type ) {

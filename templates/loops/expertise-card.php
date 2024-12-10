@@ -42,8 +42,8 @@
         $parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters
         $parent_url = get_permalink( $parent_id );
     }
-    
-    $expertise_label = 'View Area of Expertise page for ' . $expertise_title_attr;
+
+    $expertise_label = 'View Area of Expertise page for' . $expertise_title_attr;
     $expertise_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags( get_the_content($id) );
     $expertise_excerpt_len = strlen($expertise_excerpt);
     if ( $expertise_excerpt_len > 160 ) {
