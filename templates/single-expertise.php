@@ -10,23 +10,23 @@ $page_id = get_the_ID();
 $page_title = get_the_title();
 $page_title_attr = $page_title;
 $page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
-$page_title_attr = htmlentities($page_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$page_title_attr = htmlentities($page_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
 $page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
 $expertise_archive_title_attr = $expertise_archive_title;
 $expertise_archive_title_attr = str_replace('"', '\'', $expertise_archive_title_attr); // Replace double quotes with single quote
-$expertise_archive_title_attr = htmlentities($expertise_archive_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$expertise_archive_title_attr = htmlentities($expertise_archive_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $expertise_archive_title_attr = str_replace('&nbsp;', ' ', $expertise_archive_title_attr); // Convert non-breaking space with normal space
 $expertise_archive_title_attr = html_entity_decode($expertise_archive_title_attr); // Convert HTML entities to their corresponding characters
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
 $expertise_single_name_attr = $expertise_single_name;
 $expertise_single_name_attr = str_replace('"', '\'', $expertise_single_name_attr); // Replace double quotes with single quote
-$expertise_single_name_attr = htmlentities($expertise_single_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$expertise_single_name_attr = htmlentities($expertise_single_name_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $expertise_single_name_attr = str_replace('&nbsp;', ' ', $expertise_single_name_attr); // Convert non-breaking space with normal space
 $expertise_single_name_attr = html_entity_decode($expertise_single_name_attr); // Convert HTML entities to their corresponding characters
 
-// Parent Area of Expertise 
+// Parent Area of Expertise
 $expertise_parent_id = wp_get_post_parent_id($page_id);
 $expertise_has_parent = $expertise_parent_id ? true : false;
 $parent_expertise = '';
@@ -34,7 +34,7 @@ $parent_id = '';
 $parent_title = '';
 $parent_url = '';
 
-if ($expertise_has_parent && $expertise_parent_id) { 
+if ($expertise_has_parent && $expertise_parent_id) {
     $parent_expertise = get_post( $expertise_parent_id );
 }
 // Get attributes of parent Area of Expertise
@@ -44,7 +44,7 @@ if ($parent_expertise) {
     $parent_title_attr = $parent_title;
     $parent_title_attr = str_replace('"', '\'', $parent_title_attr); // Replace double quotes with single quote
     $parent_title_attr = str_replace('&#8217;', '\'', $parent_title_attr); // Replace right single quote with single quote
-    $parent_title_attr = htmlentities($parent_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+    $parent_title_attr = htmlentities($parent_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space with normal space
     $parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters
 
@@ -52,10 +52,10 @@ if ($parent_expertise) {
 }
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html) { 
+function uamswp_fad_title($html) {
     global $page_title_attr;
     global $expertise_single_name_attr;
-    //you can add here all your conditions as if is_page(), is_category() etc.. 
+    //you can add here all your conditions as if is_page(), is_category() etc..
     $meta_title_chars_max = 60;
     $meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
     $meta_title_base_chars = strlen( $meta_title_base );
@@ -165,8 +165,8 @@ if( $resources && $resource_query->have_posts() ) {
 
 // Check if Child Areas of Expertise section should be displayed
 if (
-    !( get_post_meta( $page_id, 'hide_sub_areas_of_expertise', true) ) 
-    && ( 0 != count( get_pages( array( 'child_of' => $page_id, 'post_type' => 'expertise' ) ) ) ) 
+    !( get_post_meta( $page_id, 'hide_sub_areas_of_expertise', true) )
+    && ( 0 != count( get_pages( array( 'child_of' => $page_id, 'post_type' => 'expertise' ) ) ) )
 ) {
     $show_child_aoe_section = true;
     $jump_link_count++;
@@ -294,9 +294,9 @@ if ( $jump_link_count >= $jump_link_count_min ) {
 
 function uamswp_expertise_cta() {
     $cta_repeater = get_field('expertise_cta');
-    if( $cta_repeater ): 
+    if( $cta_repeater ):
         $i = 1;
-        foreach( $cta_repeater as $cta ) { 
+        foreach( $cta_repeater as $cta ) {
             $cta_heading = $cta['cta_bar_heading'];
             $cta_body = $cta['cta_bar_body'];
             $cta_action_type = $cta['cta_bar_action_type'];
@@ -322,7 +322,7 @@ function uamswp_expertise_cta() {
                 $cta_phone = $cta['cta_bar_phone'];
                 $cta_phone_link = '<a href="tel:' . format_phone_dash( $cta_phone ) . '">' . format_phone_us( $cta_phone ) . '</a>';
             }
-            
+
             $cta_layout = 'cta-bar-centered';
             $cta_size = 'normal';
             $cta_use_image = false;
@@ -330,7 +330,7 @@ function uamswp_expertise_cta() {
             $cta_background_color = 'bg-auto';
             $cta_btn_color = 'primary';
 
-            $cta_className = '';  
+            $cta_className = '';
             $cta_className .= ' ' . $cta_layout;
             $cta_className .= ' ' . $cta_background_color;
             $cta_className .= $cta_use_image ? ' bg-image' : '';
@@ -372,7 +372,7 @@ function uamswp_expertise_cta() {
                 </div>
             </section>';
             $i++;
-        } 
+        }
     endif;
 }
 
@@ -386,7 +386,7 @@ function uamswp_expertise_physicians() {
 
 
     if($show_providers_section) {
-    
+
         // Get available regions - All available, since no titles set on initial load
         $region_IDs = array();
         while ($physicians_query->have_posts()) : $physicians_query->the_post();
@@ -400,8 +400,8 @@ function uamswp_expertise_physicians() {
         }
 
         // if cookie is set, run modified physician query
-        if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
-            
+        if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+
             $provider_region = '';
             if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
                 $provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
@@ -427,7 +427,7 @@ function uamswp_expertise_physicians() {
             );
             $physicians_query = New WP_Query( $args );
         }
-        
+
         $provider_count = count($physicians_query->posts);
         ?>
         <section class="uams-module bg-auto" id="providers">
@@ -438,7 +438,7 @@ function uamswp_expertise_physicians() {
                         <?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
                         <div class="card-list-container">
                             <div class="card-list card-list-doctors">
-                                <?php 
+                                <?php
                                     if($provider_count > 0){
                                         $title_list = array();
                                         while ($physicians_query->have_posts()) : $physicians_query->the_post();
@@ -477,11 +477,11 @@ function uamswp_expertise_youtube() {
     if( $video ) { ?>
         <?php if(function_exists('lyte_preparse')) {
             echo '<div class="alignwide">';
-            echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) ); 
+            echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) );
             echo '</div>';
         } else {
             echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-            echo wp_oembed_get( $video ); 
+            echo wp_oembed_get( $video );
             echo '</div>';
         } ?>
     <?php }
@@ -489,15 +489,15 @@ function uamswp_expertise_youtube() {
 function uamswp_expertise_keywords() {
     $keywords = get_field('expertise_alternate_names');
     $keyword_text = '';
-    if( $keywords ): 
+    if( $keywords ):
         $i = 1;
-        foreach( $keywords as $keyword ) { 
+        foreach( $keywords as $keyword ) {
             if ( 1 < $i ) {
                 $keyword_text .= '; ';
             }
             $keyword_text .= $keyword['text'];
             $i++;
-        } 
+        }
         echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
     endif;
 }
@@ -528,7 +528,7 @@ function uamswp_expertise_locations() {
     global $location_query;
     global $locations;
 
-    if ( $show_locations_section ) { 
+    if ( $show_locations_section ) {
         $location_ids = $location_query->posts;
 
 		$location_region_IDs = array();
@@ -543,13 +543,13 @@ function uamswp_expertise_locations() {
 		}
 
 		// if cookie is set, run modified physician query
-		if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
-		
+		if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+
 			$location_region = '';
 			if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
 				$location_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
 			}
-			
+
 			$tax_query = array();
 			if(!empty($location_region)) {
 				$tax_query[] = array(
@@ -573,8 +573,8 @@ function uamswp_expertise_locations() {
 			);
 			$location_query = New WP_Query( $args );
 		}
-        
-        
+
+
         ?>
         <section class="uams-module location-list bg-auto" id="locations">
             <div class="container-fluid">
@@ -593,14 +593,14 @@ function uamswp_expertise_locations() {
                                 echo '<data id="location_ids" data-postids="'. implode(',', $location_query->posts) .'," data-regions="'. implode(',', $location_region_list) .',"></data>';
                             } else {
                                 echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
-                            } 
+                            }
                             wp_reset_postdata();?>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    <?php 
+    <?php
     } // endif
 }
 function uamswp_expertise_associated() {
@@ -632,22 +632,22 @@ function uamswp_expertise_associated() {
 				</div>
 			</div>
 		</section>
-	<?php 
+	<?php
     } // endif
 }
-function uamswp_expertise_header_metadata() { 
+function uamswp_expertise_header_metadata() {
     $keywords = get_field('expertise_alternate_names');
-    if( $keywords ): 
+    if( $keywords ):
         $i = 1;
         $keyword_text = '';
-        foreach( $keywords as $keyword ) { 
+        foreach( $keywords as $keyword ) {
             if ( 1 < $i ) {
                 $keyword_text .= ', ';
             }
             $keyword_text .= str_replace(",", "", $keyword['text']);
             $i++;
         }
-        
+
         echo '<meta name="keywords" content="'. $keyword_text .'" />';
     endif;
 }
@@ -710,7 +710,7 @@ function uamswp_list_child_expertise() {
     global $page_id;
     global $page_title;
     global $show_child_aoe_section;
-    
+
     if ( $show_child_aoe_section ) { // If it's suppressed or none available, set to false
         $args =  array(
             "post_type" => "expertise",
@@ -739,7 +739,7 @@ function uamswp_list_child_expertise() {
                                 <div class="card-list card-list-expertise">
                             <?php
                                 while ( $pages->have_posts() ) : $pages->the_post();
-                                    $id = get_the_ID(); 
+                                    $id = get_the_ID();
                                     $child_expertise_list = true; // Indicate that this is a list of child Areas of Expertise within this Area of Expertise
                                     include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
                                 endwhile;
@@ -756,7 +756,7 @@ function uamswp_list_child_expertise() {
 }
 function uamswp_expertise_appointment() {
     global $show_appointment_section;
-    
+
     if ( $show_appointment_section ) {
         if ( get_field('location_expertise') ) {
             $appointment_location_url = '#locations';
@@ -791,7 +791,7 @@ function uamswp_expertise_jump_links() {
     global $show_locations_section;
     global $show_related_aoe_section;
     global $show_jump_links_section;
-    
+
     // Begin Jump Links Section
     if ( $show_jump_links_section ) { ?>
         <nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
