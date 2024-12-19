@@ -3357,13 +3357,13 @@
 			$provider_service_line = get_field( 'physician_service_line', $postId );
 			$resident_profile_group = get_field( 'physician_resident_profile_group', $postId );
 			$resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
-			if (is_array(get_term( $resident_academic_department, 'academic_department' )))
-			$resident_academic_department_name = get_term( $resident_academic_department, 'academic_department' )->name;
+			// if (is_array(get_term( $resident_academic_department, 'academic_department' ))) {
+			$resident_academic_department_name = is_array(get_term( $resident_academic_department, 'academic_department' )) ? get_term( $resident_academic_department, 'academic_department' )->name : '';
 			$resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
 			$resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
 			$resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
 			if (is_array(get_term( $resident_academic_year, 'residency_year' )))
-			$resident_academic_year_name = get_term( $resident_academic_year, 'residency_year' )->name ? get_term( $resident_academic_year, 'residency_year' )->name : '';
+			$resident_academic_year_name = is_array(get_term( $resident_academic_year, 'residency_year' )) ? get_term( $resident_academic_year, 'residency_year' )->name : '';
 			$resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
 			$data['physician_full_name'] = $full_name;
 			//Physician Data
@@ -3428,7 +3428,7 @@
 			$data['physician_referral_required'] = get_field( 'physician_referral_required', $postId );
 			$provider_portal = get_field( 'physician_portal', $postId );
 			$portal = get_term( $provider_portal, 'portal' );
-			$data['physician_portal']['name'] = $portal->name;
+			$data['physician_portal']['name'] = is_array($portal) ? $portal->name : '';
 			$data['physician_portal']['content'] = get_field( 'portal_content', $portal );
 			$data['physician_portal']['url'] = get_field( 'portal_url', $portal );
 			//$data['physician_clinical_admin_title'] = get_field( 'physician_clinical_admin_title', $postId );
@@ -4126,7 +4126,7 @@
 
 				$location_portal = get_field( 'location_portal', $postId );
 				$portal = get_term( $location_portal, 'portal' );
-				$data['location_portal']['name'] = $portal->name;
+				$data['location_portal']['name'] = is_array($portal) ? $portal->name : '';
 				$data['location_portal']['content'] = get_field( 'portal_content', $portal );
 				$data['location_portal']['url'] = get_field( 'portal_url', $portal );
 
