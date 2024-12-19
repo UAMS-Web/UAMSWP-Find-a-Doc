@@ -3357,11 +3357,13 @@
 			$provider_service_line = get_field( 'physician_service_line', $postId );
 			$resident_profile_group = get_field( 'physician_resident_profile_group', $postId );
 			$resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
+			if (is_array(get_term( $resident_academic_department, 'academic_department' )))
 			$resident_academic_department_name = get_term( $resident_academic_department, 'academic_department' )->name;
 			$resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
 			$resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
 			$resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
-			$resident_academic_year_name = get_term( $resident_academic_year, 'residency_year' )->name;
+			if (is_array(get_term( $resident_academic_year, 'residency_year' )))
+			$resident_academic_year_name = get_term( $resident_academic_year, 'residency_year' )->name ? get_term( $resident_academic_year, 'residency_year' )->name : '';
 			$resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
 			$data['physician_full_name'] = $full_name;
 			//Physician Data
@@ -3566,10 +3568,12 @@
 				// $data['physician_locations'][$location]['location_web_name'] = get_post_meta( $location, 'location_web_name', true );
 				// $data['physician_locations'][$location]['location_url'] = get_post_meta( $location, 'location_url', true );
 				$map = get_post_meta( $location, 'location_map', true );
-				$data['physician_locations'][$location]['location_lat'] = $map['lat'];
-				$data['physician_locations'][$location]['location_lng'] = $map['lng'];
-				$data['physician_locations'][$location]['location_directions'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title( $location ) .'">Get Directions</a>';
-				// $data['physician_locations'][$location]['map_marker'] = '<div class="marker" data-lat="'. $map['lat'] .'" data-lng="'. $map['lng'] .'" data-label="'. $i .'"></div>';
+				if (is_array($map)) {
+					$data['physician_locations'][$location]['location_lat'] = $map['lat'];
+					$data['physician_locations'][$location]['location_lng'] = $map['lng'];
+					$data['physician_locations'][$location]['location_directions'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title( $location ) .'">Get Directions</a>';
+					// $data['physician_locations'][$location]['map_marker'] = '<div class="marker" data-lat="'. $map['lat'] .'" data-lng="'. $map['lng'] .'" data-label="'. $i .'"></div>';
+				}
 				$i++;
 				// $data['location_link'][$location] = get_post_permalink( $location );
 				// $data['location_title'] .= get_the_title( $location ) . ',';
@@ -3719,10 +3723,12 @@
 				$data['physician_research_profiles_link'] = get_field( 'physician_research_profiles_link', $postId );
 				$publications = get_field( 'physician_select_publications', $postId );
 
-				foreach ( $publications as $publication) {
+				if (!empty($publications)) {
+					foreach ( $publications as $publication) {
 
-					$data['physician_pubmed'][$i]['information'] = $publication['pubmed_information'];
+						$data['physician_pubmed'][$i]['information'] = $publication['pubmed_information'];
 
+					}
 				}
 
 				$data['physician_pubmed_author_id'] = get_field( 'physician_pubmed_author_id', $postId );
@@ -3875,7 +3881,7 @@
 				$location_floor_value = '';
 				$location_floor_label = '';
 
-				if ( $location_floor ) {
+				if ( is_array($location_floor) ) {
 
 					$location_floor_value = $location_floor['value'];
 					$location_floor_label = $location_floor['choices'][ $location_floor_value ];
@@ -3892,7 +3898,7 @@
 				$building_name = $building->name;
 
 			}
-			$data['location_building'] = $building_name;
+			$data['location_building'] = $building_name ? $building_name : '';
 			$data['location_building_floor'] = $location_floor_label;
 
 			// Suite
@@ -4387,6 +4393,7 @@
 
 				$data['location_parking'] = get_field( 'location_parking', $postId );
 				$parking_map = get_field( 'location_parking_map', $postId );
+				if (is_array($parking_map))
 				$data['location_parking_link'] = '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'. $parking_map['lat'] .','. $parking_map['lng'] .'" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>';
 
 			// Directions to location
