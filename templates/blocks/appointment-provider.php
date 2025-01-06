@@ -22,6 +22,7 @@
         $portal_name_attr = html_entity_decode($portal_name_attr); // Convert HTML entities to their corresponding characters
         $portal_content = get_field('portal_content', $portal);
         $portal_link = get_field('portal_url', $portal);
+        $portal_url = '';
         if ($portal_link) {
             $portal_url = $portal_link['url'];
             $portal_link_title = $portal_link['title'];
@@ -58,7 +59,7 @@
         $appointment_location_data = 'Contact the Clinic Directly | Anchor Link';
     }
     $appointment_reference_referral = 'Appointments for new patients are by referral only.';
-    $appointment_reference_portal = '<a href="' . $portal_url . '" target="_blank" data-categorytitle="Make an Appointment | Block ' . $appointment_block_instance . '" data-typetitle="Request an Appointment Online | ' . $portal_name_attr . '">requesting an appointment online</a> through ' . $portal_name;
+    $appointment_reference_portal = ! empty($portal_url) ? '<a href="' . $portal_url . '" target="_blank" data-categorytitle="Make an Appointment | Block ' . $appointment_block_instance . '" data-typetitle="Request an Appointment Online | ' . $portal_name_attr . '">requesting an appointment online</a> through ' . $portal_name : '';
     $appointment_reference_direct = 'by <a href="' . $appointment_location_url . '" data-categorytitle="Make an Appointment | Block ' . $appointment_block_instance . '" data-typetitle="' . $appointment_location_data . '">contacting the clinic&nbsp;directly</a>';
     $appointment_reference_main = 'by calling ' . $appointment_phone_name . ' at <a href="tel:' . $appointment_phone_tel . '" class="no-break" data-categorytitle="Make an Appointment | Block ' . $appointment_block_instance . '" data-typetitle="Main Appointment Line | ' . $appointment_phone_name_attr . '">' . $appointment_phone_text . '</a>';
 ?>

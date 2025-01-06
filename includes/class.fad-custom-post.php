@@ -3874,8 +3874,8 @@
 
 				$map = get_field( 'location_map', $postId );
 
-				$data['location_lat'] = $map['lat'];
-				$data['location_lng'] = $map['lng'];
+				$data['location_lat'] = is_array($map) ? $map['lat'] : '';
+				$data['location_lng'] = is_array($map) ? $map['lng'] : '';
 
 			$location_floor = get_field_object('location_building_floor', $postId );
 				$location_floor_value = '';
@@ -3921,7 +3921,7 @@
 
 			// Region
 
-				$data['location_region'] = get_term( $location_region, 'region' )->slug;
+				$data['location_region'] = is_array( get_term( $location_region, 'region' ) ) ? get_term( $location_region, 'region' )->slug : '';
 
 			// Location Type
 
@@ -4393,12 +4393,12 @@
 
 				$data['location_parking'] = get_field( 'location_parking', $postId );
 				$parking_map = get_field( 'location_parking_map', $postId );
-				if (is_array($parking_map))
-				$data['location_parking_link'] = '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'. $parking_map['lat'] .','. $parking_map['lng'] .'" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>';
+
+				$data['location_parking_link'] = is_array($parking_map) ? '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'. $parking_map['lat'] .','. $parking_map['lng'] .'" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>' : '';
 
 			// Directions to location
 
-				$data['location_directions_link'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title($postId) .'">Get Directions</a>';
+				$data['location_directions_link'] = is_array($map) ? '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title($postId) .'">Get Directions</a>' : '';
 
 			return $data;
 
@@ -5115,7 +5115,7 @@
 			$infographic_transcript = get_field( 'clinical_resource_infographic_transcript', $postId );
 
 			$document_descr = get_field( 'clinical_resource_document_descr', $postId );
-			$document = get_field( 'clinical_resource_document', $postId );
+			$documents = get_field( 'clinical_resource_document', $postId );
 
 			$video = get_field( 'clinical_resource_video', $postId );
 			$video_descr = get_field( 'clinical_resource_video_descr', $postId );
@@ -5139,18 +5139,33 @@
 			$data['clinical_resource_document_descr'] = $document_descr;
 			$i = 0;
 
-			while ( have_rows($document) ) {
+			if($documents) {
 
-				the_row();
+				foreach($documents as $document) {
+					$document_title = $document['document_title'];
+					$document_file = $document['document_file'];
+					if ( $document_title && is_array($document_file) ) {
+						$document_url = user_trailingslashit($document_file['url']);
+						$data['clinical_resource_document'][$i]['title'] = $document_title;
+						$data['clinical_resource_document'][$i]['url'] = $document_url;
+					}
+					$i++;
+				}
 
-				$document_title = get_sub_field('document_title');
-				$document_file = get_sub_field('document_file');
-				$document_url = user_trailingslashit($document_file['url']);
-				$data['clinical_resource_document'][$i]['title'] = $document_title;
-				$data['clinical_resource_document'][$i]['url'] = $document_url;
-				$i++;
+			}
 
-			} // endwhile
+			// while ( have_rows($document) ): the_row();
+
+			// 	$document_title = get_sub_field('document_title');
+			// 	$document_file = get_sub_field('document_file');
+			// 	if ( $document_title && is_array($document_file) ) {
+			// 		$document_url = user_trailingslashit($document_file['url']);
+			// 		$data['clinical_resource_document'][$i]['title'] = $document_title;
+			// 		$data['clinical_resource_document'][$i]['url'] = $document_url;
+			// 	}
+			// 	$i++;
+
+			// endwhile; // endwhile
 
 			if (
 				$clinical_resources
@@ -5184,7 +5199,7 @@
 					$data['clinical_resource_conditions'][$condition->ID]['slug'] = $condition->post_name;
 					$condition_list .= $condition->post_title;
 
-					if ( count($conditions_cpt) > $i ) {
+					if ( $condition_cpt_query->found_posts > $i ) {
 
 						$condition_list .= ', ';
 
@@ -5213,7 +5228,7 @@
 					$data['clinical_resource_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
 					$treatment_list .= $treatment->post_title;
 
-					if ( count($treatments_cpt) > $i ) {
+					if ( $treatment_cpt_query->found_posts > $i ) {
 
 						$treatment_list .= ', ';
 
@@ -5242,7 +5257,7 @@
 					$data['clinical_resource_provider'][$provider->ID]['slug'] = $provider->post_name;
 					$provider_list .= get_field( 'physician_full_name', $provider->ID );
 
-					if ( count($providers) > $i ) {
+					if ( $provider_query->found_posts > $i ) {
 
 						$provider_list .= ' | ';
 
@@ -5272,7 +5287,7 @@
 					$data['clinical_resource_location'][$location->ID]['slug'] = $location->post_name;
 					$location_list .= $location->post_title;
 
-					if ( count($locations) > $i ) {
+					if ( $location_query->found_posts > $i ) {
 
 						$location_list .= ', ';
 
@@ -5301,7 +5316,7 @@
 					$data['clinical_resource_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
 					$expertise_list .= $expertise->post_title;
 
-					if ( count($expertises) > $i ) {
+					if ( $expertise_query->found_posts > $i ) {
 
 						$expertise_list .= ', ';
 
