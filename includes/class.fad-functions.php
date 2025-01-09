@@ -313,11 +313,11 @@ function wp_pg_cached_api( $npi, $count = 6 ) {
 
 		if ( is_wp_error( $request ) ) {
 			// Cache failures for a short time, will speed up page rendering in the event of remote failure.
-			set_transient( $cache_key, $request, MINUTE_IN_SECONDS * 15 );
+			set_transient( $cache_key, $request, MINUTE_IN_SECONDS * 5 );
 
 		} else {
 			// Success, cache for a longer time.
-			set_transient( $cache_key, $request, HOUR_IN_SECONDS );
+			set_transient( $cache_key, $request, MINUTE_IN_SECONDS * 15 );
 		}
 	}
 	return $request;
