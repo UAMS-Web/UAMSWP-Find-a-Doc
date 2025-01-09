@@ -148,7 +148,7 @@
 								$pg_rating_data = '';
 								$pg_rating_valid = false;
 								if ( $npi ) {
-									$pg_rating_request = wp_pg_cached_api( $npi, 0 );
+									$pg_rating_request = wp_pg_cached_api( $npi, 36 );
 									$pg_rating_data = json_decode( $pg_rating_request );
 									if ( !empty( $pg_rating_data ) && !empty($pg_rating_data->data->entities[0]->totalRatingCount) ) {
 										$pg_rating_valid = (( $pg_rating_data->data->entities[0]->totalRatingCount) >= 30 );
