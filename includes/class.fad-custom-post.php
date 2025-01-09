@@ -3883,8 +3883,8 @@
 
 				if ( is_array($location_floor) ) {
 
-					$location_floor_value = $location_floor['value'];
-					$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+					$location_floor_value = $location_floor['value'] ?? null;
+					$location_floor_label = $location_floor['choices'][ $location_floor_value ] ?? null;
 
 				}
 			$data['location_address_1'] = get_field( 'location_address_1', $postId );
