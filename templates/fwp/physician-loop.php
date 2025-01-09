@@ -91,34 +91,36 @@
 		<div class="item">
 			<div class="row">
 				<div class="col image">
-					<picture>
-					<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
-							media="(min-width: 2054px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
-							media="(min-width: 1784px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
-							media="(min-width: 1200px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
-							media="(min-width: 768px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center'); ?>"
-							media="(min-width: 576px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
-							media="(min-width: 1px)">
-						<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>" alt="<?php echo $full_name_attr; ?>" />
-					<?php } elseif ( has_post_thumbnail() ) { ?>
-						<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
-					<?php } else { ?>
-						<source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" media="(min-width: 1px)">
-						<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" role="presentation" />
-					<?php } ?>
-					</picture>
+					<a href="<?php echo get_permalink(); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" class="stretched-link" data-categorytitle="Photo" data-itemtitle="<?php echo $full_name_attr; ?>">
+						<picture>
+						<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
+								media="(min-width: 2054px)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+								media="(min-width: 1784px)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
+								media="(min-width: 1200px)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+								media="(min-width: 768px)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center'); ?>"
+								media="(min-width: 576px)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+								media="(min-width: 1px)">
+							<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>" alt="<?php echo $full_name_attr; ?>" />
+						<?php } elseif ( has_post_thumbnail() ) { ?>
+							<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
+						<?php } else { ?>
+							<source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" media="(min-width: 1px)">
+							<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" role="presentation" />
+						<?php } ?>
+						</picture>
+					</a>
 				</div>
 				<div class="col text">
 					<div class="row">
 						<div class="col-12 primary">
 						<h3 class="h4">
-							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $full_name_attr; ?>"><span class="name"><?php echo $full_name; ?></span></a>
+							<a href="<?php echo get_permalink(); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $full_name_attr; ?>"><span class="name"><?php echo $full_name; ?></span></a>
 							<?php
 
 							if (
