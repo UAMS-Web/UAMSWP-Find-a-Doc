@@ -91,7 +91,7 @@
 		<div class="item">
 			<div class="row">
 				<div class="col image">
-					<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" class="stretched-link" data-categorytitle="Photo" data-itemtitle="<?php echo $full_name_attr; ?>">
+					<a href="<?php echo get_permalink(); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" class="stretched-link" data-categorytitle="Photo" data-itemtitle="<?php echo $full_name_attr; ?>">
 						<picture>
 						<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
 							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
@@ -120,7 +120,7 @@
 					<div class="row">
 						<div class="col-12 primary">
 						<h3 class="h4">
-							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $full_name_attr; ?>"><span class="name"><?php echo $full_name; ?></span></a>
+							<a href="<?php echo get_permalink(); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $full_name_attr; ?>"><span class="name"><?php echo $full_name; ?></span></a>
 							<?php
 
 							if (
@@ -148,7 +148,7 @@
 								$pg_rating_data = '';
 								$pg_rating_valid = false;
 								if ( $npi ) {
-									$pg_rating_request = wp_pg_cached_api( $npi, 0 );
+									$pg_rating_request = wp_pg_cached_api( $npi, 36 );
 									$pg_rating_data = json_decode( $pg_rating_request );
 									if ( !empty( $pg_rating_data ) && !empty($pg_rating_data->data->entities[0]->totalRatingCount) ) {
 										$pg_rating_valid = (( $pg_rating_data->data->entities[0]->totalRatingCount) >= 30 );

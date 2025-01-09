@@ -250,25 +250,25 @@ function posts_provider_custom_columns($column_name, $id){
 }
 
 // NRC JSON API Call
-function wp_nrc_cached_api( $npi ) {
-	// Namespace in case of collision, since transients don't support groups like object caching.
-	$url = 'https://transparency.nrchealth.com/widget/api/org-profile/uams/npi/' . $npi . '/6';
-	$cache_key = 'nrc_backup_' . $npi;
-	$request = get_transient( $cache_key );
+// function wp_nrc_cached_api( $npi ) {
+// 	// Namespace in case of collision, since transients don't support groups like object caching.
+// 	$url = 'https://transparency.nrchealth.com/widget/api/org-profile/uams/npi/' . $npi . '/6';
+// 	$cache_key = 'nrc_backup_' . $npi;
+// 	$request = get_transient( $cache_key );
 
-	if ( false === $request ) {
-		$request = wp_remote_retrieve_body( wp_remote_get( $url ) );
+// 	if ( false === $request ) {
+// 		$request = wp_remote_retrieve_body( wp_remote_get( $url ) );
 
-		if ( is_wp_error( $request ) ) {
-			// Cache failures for a short time, will speed up page rendering in the event of remote failure.
-			set_transient( $cache_key, $request, MINUTE_IN_SECONDS * 15 );
-		} else {
-			// Success, cache for a longer time.
-			set_transient( $cache_key, $request, DAY_IN_SECONDS );
-		}
-	}
-	return $request;
-}
+// 		if ( is_wp_error( $request ) ) {
+// 			// Cache failures for a short time, will speed up page rendering in the event of remote failure.
+// 			set_transient( $cache_key, $request, MINUTE_IN_SECONDS * 15 );
+// 		} else {
+// 			// Success, cache for a longer time.
+// 			set_transient( $cache_key, $request, DAY_IN_SECONDS );
+// 		}
+// 	}
+// 	return $request;
+// }
 
 // Get PressGaney Access Token
 function wp_pg_get_token() {
@@ -313,11 +313,11 @@ function wp_pg_cached_api( $npi, $count = 6 ) {
 
 		if ( is_wp_error( $request ) ) {
 			// Cache failures for a short time, will speed up page rendering in the event of remote failure.
-			set_transient( $cache_key, $request, MINUTE_IN_SECONDS * 15 );
+			set_transient( $cache_key, $request, MINUTE_IN_SECONDS * 5 );
 
 		} else {
 			// Success, cache for a longer time.
-			set_transient( $cache_key, $request, HOUR_IN_SECONDS );
+			set_transient( $cache_key, $request, MINUTE_IN_SECONDS * 15 );
 		}
 	}
 	return $request;
