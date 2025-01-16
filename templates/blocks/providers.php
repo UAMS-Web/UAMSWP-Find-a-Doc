@@ -41,7 +41,7 @@ if ( $more ) {
     if ( empty($more_button_url) )
         $more_button_url = get_field('block_fad_providers_more_button_url');
     if ( empty($more_button_target) )
-        $more_button_target = $more_button_url['target'];
+        $more_button_target = $more_button_url['target'] ?? null;
     if ( empty($more_button_description) )
         $more_button_description = get_field('block_fad_providers_more_button_description');
         $more_button_description_attr = $more_button_description;
@@ -149,7 +149,7 @@ if($filter_id || $filter_region || $filter_location || $filter_aoe) {
                             <div class="more">
                                 <p class="lead"><?php echo $more_text; ?></p>
                                 <div class="cta-container">
-                                    <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description_attr; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                                    <a href="<?php echo is_array($more_button_url) ? $more_button_url['url'] : ''; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description_attr; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
                                 </div>
                             </div>
                         <?php } // endif ?>
