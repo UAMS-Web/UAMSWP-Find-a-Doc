@@ -659,11 +659,13 @@ while ( have_posts() ) : the_post();
     $pg_rating_request = '';
     $pg_rating_data = '';
     $pg_rating_valid = '';
+    $pg_total_comment_count = '';
     if ( $npi ) {
-        $pg_rating_request = wp_pg_cached_api( $npi, 36 );
+        $pg_rating_request = wp_pg_cached_api( $npi, 10 );
         $pg_rating_data = json_decode( $pg_rating_request );
         if ( !empty( $pg_rating_data ) && ('200' == $pg_rating_data->status->code ) ) {
             $pg_rating_valid = ( ($pg_rating_data->data->entities[0]->totalRatingCount) >= 30 );
+            $pg_total_comment_count = $pg_rating_data->data->entities[0]->totalCommentCount;
         }
     }
     if ($pg_rating_valid) { $provider_field_classes = $provider_field_classes . ' has-ratings'; }
@@ -1578,13 +1580,15 @@ while ( have_posts() ) : the_post();
                                     $questionRatings = $pg_rating_data->data->entities[0]->overallRating->questionRatings;
                                     foreach( $questionRatings as $questionRating ):
                                         if ($questionRating->responseCount > 0){ ?>
-                                    <dt><?php echo $questionRating->name; ?></dt>
-                                    <dd>
-                                        <div class="rating" aria-label="Patient Rating">
-                                            <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->value)/5 * 100; ?>%;"></div></div>
-                                            <div class="ratings-score-lg"><?php echo $questionRating->value; ?><span class="sr-only"> out of 5</span></div>
-                                        </div>
-                                    </dd>
+                                        <?php if ( (false === stripos($questionRating->name, 'Would Recommend')) && (false === stripos($questionRating->name, 'Listened Carefully')) && (false === stripos($questionRating->name, 'Knew Medical History')) && (false === stripos($questionRating->name, 'Gave Enough Information')) && (false === stripos($questionRating->name, 'Trust Provider')) ) { ?>
+                                            <dt><?php echo $questionRating->name; ?></dt>
+                                            <dd>
+                                                <div class="rating" aria-label="Patient Rating">
+                                                    <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->value)/5 * 100; ?>%;"></div></div>
+                                                    <div class="ratings-score-lg"><?php echo $questionRating->value; ?><span class="sr-only"> out of 5</span></div>
+                                                </div>
+                                            </dd>
+                                    <?php } ?>
                                     <?php }
                                     endforeach; ?>
                                 </dl>
@@ -1634,37 +1638,76 @@ while ( have_posts() ) : the_post();
                         <!-- Modal -->
                         <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="more-reviews-title" aria-modal="true">
                             <div class="modal-dialog" role="document">
+                                <style>
+                                    .modal-pagination {
+                                        display: flex;
+                                        justify-content: center;
+                                        margin-top: 20px;
+                                    }
+                                    .modal-pagination button {
+                                        margin: 5px;
+                                        padding: 10px 20px;
+                                        background-color: #f4f4f4;
+                                        border: none;
+                                        cursor: pointer;
+                                    }
+                                    .modal-pagination button.active, .modal-pagination button:hover {
+                                        background-color: #ddd;
+                                    }
+
+                                    /* Loading spinner styles */
+                                    .loading-spinner {
+                                        display: none; /* Initially hidden */
+                                        margin: 20px auto;
+                                        width: 40px;
+                                        height: 40px;
+                                        border-radius: 50%;
+                                        border: 3px solid rgba(0, 0, 0, 0.1);
+                                        border-top-color: #09ad75; /* Color of the spinner */
+                                        animation: spin 1s ease-in-out infinite;
+                                    }
+
+                                    @keyframes spin {
+                                        to { transform: rotate(360deg); }
+                                    }
+                                </style>
                                 <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="more-reviews-title">More Recent Reviews</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="card-list">
-                                    <?php foreach( $reviews as $review ):
-                                        if( $i >= 7 ) { ?>
-                                    <div class="card">
-                                        <div class="card-header bg-transparent">
-                                            <div class="rating rating-center" aria-label="Average Rating">
-                                                <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->overallRating->value)/5 * 100; ?>%;"></div></div>
-                                                <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->overallRating->value; ?><span class="sr-only"> out of 5</span></div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <h4 class="sr-only">Comment</h4>
-                                            <p class="card-text"><?php echo $review->comment; ?></p>
-                                        </div>
-                                        <div class="card-footer bg-transparent text-muted small">
-                                            <h4 class="sr-only">Date</h4>
-                                            <?php echo date("M d, Y", strtotime($review->mentionTime)); ?>
-                                        </div>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="more-reviews-title">More Recent Reviews</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                    <?php }
-                                        $i++; ?>
-                                    <?php endforeach; ?>
-                                </div>
+                                    <div class="modal-body">
+                                        <div id="comment-list" class="card-list" data-npi="<?php echo $npi; ?>" data-commentcount="<?php echo $pg_total_comment_count; ?>">
+                                            <?php foreach( $reviews as $review ):
+                                            $i = 1;
+                                            if( $i < 11 ) { ?>
+                                            <div class="card">
+                                                <div class="card-header bg-transparent">
+                                                    <div class="rating rating-center" aria-label="Average Rating">
+                                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->overallRating->value)/5 * 100; ?>%;"></div></div>
+                                                        <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->overallRating->value; ?><span class="sr-only"> out of 5</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h4 class="sr-only">Comment</h4>
+                                                    <p class="card-text"><?php echo $review->comment; ?></p>
+                                                </div>
+                                                <div class="card-footer bg-transparent text-muted small">
+                                                    <h4 class="sr-only">Date</h4>
+                                                    <?php echo date("M d, Y", strtotime($review->mentionTime)); ?>
+                                                </div>
+                                            </div>
+                                            <?php  }
+                                                $i++; ?>
+                                            <?php endforeach; ?>
+                                        </div>
+                                        <div class="loading-spinner"></div> <!-- Loading spinner -->
+                                        <div class="modal-pagination" id="pagination-controls">
+                                            <!-- Pagination buttons will be inserted here -->
+                                        </div>
+                                    <!-- </div> -->
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -1705,6 +1748,77 @@ while ( have_posts() ) : the_post();
                         </script>
                         <script src="https://transparency.nrchealth.com/widget/v3/uams/npi/<?php echo $npi; ?>/lotw.js" async></script> -->
                         <?php // endif; ?>
+                        <script>
+                            // jQuery(function($) {
+                            //     var total_records = <?php echo $pg_total_comment_count; ?>;
+                            //     var perpage = 10;
+                            //     var total_pages = total_records / perpage;
+
+                            //     $(document).ready(function(){
+                            //         var pagenum = 1;
+                            //         createpagination(pagenum);
+                            //         fetch_data(perpage,pagenum);
+                            //     });
+
+
+                            //     function createpagination(pagenum){
+                            //             $("#page_container").html("");
+
+                            //             if(pagenum == 1){
+                            //                 $("#page_container").append("<li class='page-item disabled previous'><a href='javascript:void(0)' class='page-link'><</a></li>");
+                            //             }else{
+                            //                 $("#page_container").append("<li class='page-item' onclick='makecall("+(pagenum-1)+")'><a href='javascript:void(0)' class='page-link'><</a></li>");
+                            //             }
+
+                            //             var i=0;
+                            //             for(i=0; i <= 2; i++){
+                            //                 if(pagenum == (pagenum+i)){
+                            //                     $("#page_container").append("<li class='page-item disabled'><a href='javascript:void(0)' class='page-link'>"+(pagenum+i)+"</a></li>");
+                            //                 }else{
+                            //                     if((pagenum+i)<=total_pages){
+                            //                         $("#page_container").append("<li class='page-item' onclick='makecall("+(pagenum+i)+")'><a href='javascript:void(0)' class='page-link'>"+(pagenum+i)+"</a></li>");
+                            //                     }
+                            //                 }
+                            //             }
+
+                            //             if(pagenum == total_pages){
+                            //                 $("#page_container").append("<li class='page-item disabled'><a href='javascript:void(0)' class='page-link'>></a></li>");
+                            //             }else{
+                            //                 $("#page_container").append("<li class='page-item next' onclick='makecall("+(pagenum+1)+")'><a href='javascript:void(0)' class='page-link'>></a></li>");
+                            //             }
+                            //     }
+
+                            //     function fetch_data(personId, perpage, pagenum){
+
+                            //         $.ajax({
+                            //             type:'POST',
+                            //             url:'https://api1.consumerism.pressganey.com/api/bsr/comments?personId=<?php echo $npi; ?>&perPage=10&page='+pagenum,
+                            //             headers: {
+                            //                 'Content-Type': 'application/json',
+				            //                 'Access-Token': 'eyJraWQiOiIwMTkwZTY2MS1hZWJmLTcyMzctYTA4Mi0wY2RjMWM1NjYxODEiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2NsaWVudC1hdXRoLWFwaS5jb25zdW1lcmlzbS5wcmVzc2dhbmV5LmNvbS9hcGkvZXh0ZXJuYWwvIiwic3ViIjoiZXh0ZXJuYWxhcGl1c2VyQGJpbmFyeWZvdW50YWluLmNvbSIsImNsaWVudF9pZCI6InVhbXMiLCJhcHBfaWQiOiIwMzQ1ODEzMDQwMTM1ODYiLCJzY29wZSI6WyJhY2Nlc3MvZW50aXRpZXMiLCJhY2Nlc3MvYXZhdGFycyIsImJzcl9jb21tZW50cyJdLCJhbGxvd2VkLW9yaWdpbnMiOlsidWFtc2hlYWx0aC5jb20iXSwiaWF0IjoxNzM2Nzg3MTk0LCJleHAiOjE3MzY3OTA3OTR9.Wx9CFJMpWKRrRLn6ggdQ7UPWhiJe57evj-Nxl1gTPUOC6U0NyW_980AuO444Kp1bXbRegjPpiOpjn5c3tvtLDgSINgP9XdpWJNTvtEwcRBcpd4BNXoVdfQm79wfTbC1Idp91nKCB6Q_H102FRALi6TxHpB2iTk6nT7ZiKfhJRRmKeb2m2PTt3Ea_KFXZ0t6rQPhqEN8NXmsp_lzgJeE9ZQrUzTwwd084PawD212osy3D218mWfCXfqiGZjZmJe7Xo00Z5WPNWufJA7Cu4gNoq5sgi3ft-QlfxUx2sv_C9GinFRAnYS0i5-LRRNHAwFeLjWOHQLvGI3WECSzVSINpRQ',
+                            //             },
+                            //             // beforeSend: function(xhr) {
+                            //             //     xhr.setRequestHeader('Access-Token', 'eyJraWQiOiIwMTkwZTY2MS1hZWJmLTcyMzctYTA4Mi0wY2RjMWM1NjYxODEiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2NsaWVudC1hdXRoLWFwaS5jb25zdW1lcmlzbS5wcmVzc2dhbmV5LmNvbS9hcGkvZXh0ZXJuYWwvIiwic3ViIjoiZXh0ZXJuYWxhcGl1c2VyQGJpbmFyeWZvdW50YWluLmNvbSIsImNsaWVudF9pZCI6InVhbXMiLCJhcHBfaWQiOiIwMzQ1ODEzMDQwMTM1ODYiLCJzY29wZSI6WyJhY2Nlc3MvZW50aXRpZXMiLCJhY2Nlc3MvYXZhdGFycyIsImJzcl9jb21tZW50cyJdLCJhbGxvd2VkLW9yaWdpbnMiOlsidWFtc2hlYWx0aC5jb20iXSwiaWF0IjoxNzM2Nzg3MTk0LCJleHAiOjE3MzY3OTA3OTR9.Wx9CFJMpWKRrRLn6ggdQ7UPWhiJe57evj-Nxl1gTPUOC6U0NyW_980AuO444Kp1bXbRegjPpiOpjn5c3tvtLDgSINgP9XdpWJNTvtEwcRBcpd4BNXoVdfQm79wfTbC1Idp91nKCB6Q_H102FRALi6TxHpB2iTk6nT7ZiKfhJRRmKeb2m2PTt3Ea_KFXZ0t6rQPhqEN8NXmsp_lzgJeE9ZQrUzTwwd084PawD212osy3D218mWfCXfqiGZjZmJe7Xo00Z5WPNWufJA7Cu4gNoq5sgi3ft-QlfxUx2sv_C9GinFRAnYS0i5-LRRNHAwFeLjWOHQLvGI3WECSzVSINpRQ');
+                            //             // },
+                            //             dataType:'json',
+                            //             success:function(data){
+                            //                 $(".100_list_container").html("");
+                            //                 $.each( data.plugins, function( key, value ) {
+                            //                     $(".100_list_container").append("<li class='list-group-item list-item-contains'><div><h5>"+value+"</h5>"+value.comment+"</div></li>");
+                            //                 });
+                            //             },
+                            //             error:function(){
+                            //                 $(".100_list_container").html("error");
+                            //             }
+                            //         });
+                            //     }
+
+                            //     function makecall(pagenum){
+                            //         createpagination(pagenum);
+                            //         fetch_data(perpage,pagenum);
+                            //     }
+                            // });
+                        </script>
 
                     </div>
                 </div>
