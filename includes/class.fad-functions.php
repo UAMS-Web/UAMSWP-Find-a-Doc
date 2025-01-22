@@ -323,6 +323,63 @@ function wp_pg_cached_api( $npi, $count = 6 ) {
 	return $request;
 }
 
+add_action('wp_ajax_pg_ajax_api_action', 'pg_ajax_api');
+add_action('wp_ajax_nopriv_pg_ajax_api_action', 'pg_ajax_api');
+function pg_ajax_api() {
+	// if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'pg_pagination_posts') || !isset($_POST['npi'])) {
+	// 	wp_die(-1);
+	// }
+
+	$npi = $_POST['npi'];
+	$current_page = $_POST['page'] ? (int) $_POST['page'] : 1;
+
+	// PressGaney requires Access-Token to retrieve data
+	$token = wp_pg_get_token();
+
+	// Namespace in case of collision, since transients don't support groups like object caching.
+	$url = 'https://api1.consumerism.pressganey.com/api/bsr/comments?personId=' . $npi . '&perPage=10&days=540&page=' . $current_page;
+
+		$request = wp_remote_retrieve_body( wp_remote_get( $url, array(
+			'headers' => array(
+				'Content-Type' => 'application/json',
+				'Access-Token' => $token
+				)
+		) ) );
+
+		if ( is_wp_error( $request ) ) {
+			// Cache failures for a short time, will speed up page rendering in the event of remote failure.
+			echo 'error';
+		} else {
+			// if ( false === $request || (is_array($request) && ('200' !== $request['status']['code'])) ) {
+				$pg_rating_data = json_decode($request);
+				// print_r($pg_rating_data);
+				$reviews = $pg_rating_data->data->entities[0]->comments;
+				// print_r($reviews);
+				foreach( $reviews as $review ): ?>
+					<div class="card">
+						<div class="card-header bg-transparent">
+							<div class="rating rating-center" aria-label="Average Rating">
+								<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->overallRating->value)/5 * 100; ?>%;"></div></div>
+								<div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->overallRating->value; ?><span class="sr-only"> out of 5</span></div>
+							</div>
+						</div>
+						<div class="card-body">
+							<h4 class="sr-only">Comment</h4>
+							<p class="card-text"><?php echo $review->comment; ?></p>
+						</div>
+						<div class="card-footer bg-transparent text-muted small">
+							<h4 class="sr-only">Date</h4>
+							<?php echo date("M d, Y", strtotime($review->mentionTime)); ?>
+						</div>
+					</div>
+				<?php
+				endforeach;
+			// }
+		}
+
+	wp_die();
+}
+
 function limit_to_post_parent( $args, $field, $post ) {
 
     $args['post_parent'] = 0;
@@ -419,6 +476,20 @@ function uamswp_ajax_scripts() {
         // Enqueued script with localized data.
         wp_enqueue_script( 'uamswp-title-filter' );
 		wp_enqueue_script( 'uamswp-schedule-filter' );
+	}
+	if ( is_singular( 'provider' ) ) {
+		// Register the script
+		wp_register_script( 'uamswp-pg-pagination', UAMS_FAD_ROOT_URL . 'assets/js/uamswp-pg-ajax.js', array('jquery'), false, true );
+
+		// Localize the script with new data
+		$script_data_array = array(
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'security' => wp_create_nonce( 'pg_pagination_posts' )
+		);
+		wp_localize_script( 'uamswp-pg-pagination', 'uamswp_ajax_scripts', $script_data_array );
+
+		// Enqueued script with localized data.
+		wp_enqueue_script( 'uamswp-pg-pagination' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'uamswp_ajax_scripts' );
