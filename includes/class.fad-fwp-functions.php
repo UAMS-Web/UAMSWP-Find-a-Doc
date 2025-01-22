@@ -200,7 +200,7 @@ function fwp_facet_scripts() {
             //     // window.history.replaceState({}, '', `${location.pathname}?${params}`)
             //     window.location.search = `?${params}`;
             // }
-            // QS & no location set 
+            // QS & no location set
             else if ( facets && region && regiondata && region != regiondata ) {
                 document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
             }
@@ -468,23 +468,25 @@ add_filter( 'facetwp_assets', function( $assets ) {
 add_filter( 'facetwp_load_a11y', '__return_true' );
 
 add_filter( 'facetwp_index_row', function( $params, $class ) {
-    if ( 'resource_provider' == $params['facet_name'] ) {
-        if ( ! empty( $params['facet_value'] ) ) {
-            $post = get_post( (int) $params['facet_value'] );
-            $post_id = $post->ID;
-            $lastname = get_field( 'physician_last_name', $post_id );
-            $firstname = get_field( 'physician_first_name', $post_id );
-            $middlename = get_field( 'physician_middle_name', $post_id );
-            $params['facet_value'] = sanitize_title_with_dashes( $lastname . ' ' . $firstname . ' ' . $middlename ); //$post->post_name;
-            $params['facet_display_value'] = get_field( 'physician_full_name', $post_id );
-        }
-    } elseif ( 'resource_locations' == $params['facet_name'] ||
-               'resource_aoe' == $params['facet_name'] || 
-               'resource_conditions' == $params['facet_name'] || 
-               'resource_treatments' == $params['facet_name'] ) { 
-        if ( ! empty( $params['facet_value'] ) ) {
-            $post = get_post( (int) $params['facet_value'] );
-            $params['facet_value'] = $post->post_name;
+    if ($params){
+        if ( 'resource_provider' == $params['facet_name'] ) {
+            if ( ! empty( $params['facet_value'] ) ) {
+                $post = get_post( (int) $params['facet_value'] );
+                $post_id = $post->ID;
+                $lastname = get_field( 'physician_last_name', $post_id );
+                $firstname = get_field( 'physician_first_name', $post_id );
+                $middlename = get_field( 'physician_middle_name', $post_id );
+                $params['facet_value'] = sanitize_title_with_dashes( $lastname . ' ' . $firstname . ' ' . $middlename ); //$post->post_name;
+                $params['facet_display_value'] = get_field( 'physician_full_name', $post_id );
+            }
+        } elseif ( 'resource_locations' == $params['facet_name'] ||
+                'resource_aoe' == $params['facet_name'] ||
+                'resource_conditions' == $params['facet_name'] ||
+                'resource_treatments' == $params['facet_name'] ) {
+            if ( ! empty( $params['facet_value'] ) ) {
+                $post = get_post( (int) $params['facet_value'] );
+                $params['facet_value'] = $post->post_name;
+            }
         }
     }
     return $params;
