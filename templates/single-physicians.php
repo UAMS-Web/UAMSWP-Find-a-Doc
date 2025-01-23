@@ -1578,6 +1578,8 @@ while ( have_posts() ) : the_post();
                                 <dl>
                                     <?php
                                     $questionRatings = $pg_rating_data->data->entities[0]->overallRating->questionRatings;
+                                    $questionKey = array_search('Likelihood of recommending this provider', array_column($questionRatings, 'name')); // Find the key for 'Likelihood' question
+                                    $questionRatings = [$questionKey => $questionRatings[$questionKey]] + $questionRatings; // Move 'Likelihood' question to front of the array
                                     foreach( $questionRatings as $questionRating ):
                                         if ($questionRating->responseCount > 0){ ?>
                                         <?php if ( (false === stripos($questionRating->name, 'Would Recommend')) && (false === stripos($questionRating->name, 'Listened Carefully')) && (false === stripos($questionRating->name, 'Knew Medical History')) && (false === stripos($questionRating->name, 'Gave Enough Information')) && (false === stripos($questionRating->name, 'Trust Provider')) ) { ?>
