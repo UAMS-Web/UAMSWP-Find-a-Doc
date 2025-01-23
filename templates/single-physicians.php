@@ -1582,7 +1582,7 @@ while ( have_posts() ) : the_post();
                                     $questionRatings = [$questionKey => $questionRatings[$questionKey]] + $questionRatings; // Move 'Likelihood' question to front of the array
                                     foreach( $questionRatings as $questionRating ):
                                         if ($questionRating->responseCount > 0){ ?>
-                                        <?php if ( (false === stripos($questionRating->name, 'Would Recommend')) && (false === stripos($questionRating->name, 'Listened Carefully')) && (false === stripos($questionRating->name, 'Knew Medical History')) && (false === stripos($questionRating->name, 'Gave Enough Information')) && (false === stripos($questionRating->name, 'Trust Provider')) ) { ?>
+                                        <?php if ( count($questionRatings) < 6 || ((false === stripos($questionRating->name, 'Would Recommend')) && (false === stripos($questionRating->name, 'Listened Carefully')) && (false === stripos($questionRating->name, 'Knew Medical History')) && (false === stripos($questionRating->name, 'Gave Enough Information')) && (false === stripos($questionRating->name, 'Trust Provider'))) ) { ?>
                                             <dt><?php echo $questionRating->name; ?></dt>
                                             <dd>
                                                 <div class="rating" aria-label="Patient Rating">
