@@ -375,13 +375,13 @@ if ( $expertises ) {
 		while( have_rows('remove_ontology_criteria', 'option') ): the_row();
 			$remove_region = get_sub_field('remove_regions', 'option');
 			$remove_service_line = get_sub_field('remove_service_lines', 'option');
-			if ( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && empty($remove_service_line) ) {
+			if ( (!empty($remove_region) && (is_array($provider_region) && in_array(implode('',$provider_region), $remove_region))) && empty($remove_service_line) ) {
 				$hide_medical_ontology = true;
 				break;
 			} elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
 				$hide_medical_ontology = true;
 				break;
-			} elseif( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
+			} elseif( (!empty($remove_region) && (is_array($provider_region) && in_array(implode('',$provider_region), $remove_region))) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
 				$hide_medical_ontology = true;
 				break;
 			}
@@ -659,11 +659,13 @@ while ( have_posts() ) : the_post();
     $pg_rating_request = '';
     $pg_rating_data = '';
     $pg_rating_valid = '';
+    $pg_total_comment_count = '';
     if ( $npi ) {
-        $pg_rating_request = wp_pg_cached_api( $npi, 36 );
+        $pg_rating_request = wp_pg_cached_api( $npi, 10 );
         $pg_rating_data = json_decode( $pg_rating_request );
         if ( !empty( $pg_rating_data ) && ('200' == $pg_rating_data->status->code ) ) {
             $pg_rating_valid = ( ($pg_rating_data->data->entities[0]->totalRatingCount) >= 30 );
+            $pg_total_comment_count = $pg_rating_data->data->entities[0]->totalCommentCount;
         }
     }
     if ($pg_rating_valid) { $provider_field_classes = $provider_field_classes . ' has-ratings'; }
@@ -1576,15 +1578,19 @@ while ( have_posts() ) : the_post();
                                 <dl>
                                     <?php
                                     $questionRatings = $pg_rating_data->data->entities[0]->overallRating->questionRatings;
+                                    $questionKey = array_search('Likelihood of recommending this provider', array_column($questionRatings, 'name')); // Find the key for 'Likelihood' question
+                                    $questionRatings = [$questionKey => $questionRatings[$questionKey]] + $questionRatings; // Move 'Likelihood' question to front of the array
                                     foreach( $questionRatings as $questionRating ):
                                         if ($questionRating->responseCount > 0){ ?>
-                                    <dt><?php echo $questionRating->name; ?></dt>
-                                    <dd>
-                                        <div class="rating" aria-label="Patient Rating">
-                                            <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->value)/5 * 100; ?>%;"></div></div>
-                                            <div class="ratings-score-lg"><?php echo $questionRating->value; ?><span class="sr-only"> out of 5</span></div>
-                                        </div>
-                                    </dd>
+                                        <?php if ( count($questionRatings) < 6 || ((false === stripos($questionRating->name, 'Would Recommend')) && (false === stripos($questionRating->name, 'Listened Carefully')) && (false === stripos($questionRating->name, 'Knew Medical History')) && (false === stripos($questionRating->name, 'Gave Enough Information')) && (false === stripos($questionRating->name, 'Trust Provider'))) ) { ?>
+                                            <dt><?php echo $questionRating->name; ?></dt>
+                                            <dd>
+                                                <div class="rating" aria-label="Patient Rating">
+                                                    <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->value)/5 * 100; ?>%;"></div></div>
+                                                    <div class="ratings-score-lg"><?php echo $questionRating->value; ?><span class="sr-only"> out of 5</span></div>
+                                                </div>
+                                            </dd>
+                                    <?php } ?>
                                     <?php }
                                     endforeach; ?>
                                 </dl>
@@ -1634,37 +1640,76 @@ while ( have_posts() ) : the_post();
                         <!-- Modal -->
                         <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="more-reviews-title" aria-modal="true">
                             <div class="modal-dialog" role="document">
+                                <style>
+                                    .modal-pagination {
+                                        display: flex;
+                                        justify-content: center;
+                                        margin-top: 20px;
+                                    }
+                                    .modal-pagination button {
+                                        margin: 5px;
+                                        padding: 10px 20px;
+                                        background-color: #f4f4f4;
+                                        border: none;
+                                        cursor: pointer;
+                                    }
+                                    .modal-pagination button.active, .modal-pagination button:hover {
+                                        background-color: #ddd;
+                                    }
+
+                                    /* Loading spinner styles */
+                                    .loading-spinner {
+                                        display: none; /* Initially hidden */
+                                        margin: 20px auto;
+                                        width: 40px;
+                                        height: 40px;
+                                        border-radius: 50%;
+                                        border: 3px solid rgba(0, 0, 0, 0.1);
+                                        border-top-color: #09ad75; /* Color of the spinner */
+                                        animation: spin 1s ease-in-out infinite;
+                                    }
+
+                                    @keyframes spin {
+                                        to { transform: rotate(360deg); }
+                                    }
+                                </style>
                                 <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="more-reviews-title">More Recent Reviews</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="card-list">
-                                    <?php foreach( $reviews as $review ):
-                                        if( $i >= 7 ) { ?>
-                                    <div class="card">
-                                        <div class="card-header bg-transparent">
-                                            <div class="rating rating-center" aria-label="Average Rating">
-                                                <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->overallRating->value)/5 * 100; ?>%;"></div></div>
-                                                <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->overallRating->value; ?><span class="sr-only"> out of 5</span></div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <h4 class="sr-only">Comment</h4>
-                                            <p class="card-text"><?php echo $review->comment; ?></p>
-                                        </div>
-                                        <div class="card-footer bg-transparent text-muted small">
-                                            <h4 class="sr-only">Date</h4>
-                                            <?php echo date("M d, Y", strtotime($review->mentionTime)); ?>
-                                        </div>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="more-reviews-title">More Recent Reviews</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                    <?php }
-                                        $i++; ?>
-                                    <?php endforeach; ?>
-                                </div>
+                                    <div class="modal-body">
+                                        <div id="comment-list" class="card-list" data-npi="<?php echo $npi; ?>" data-commentcount="<?php echo $pg_total_comment_count; ?>">
+                                            <?php foreach( $reviews as $review ):
+                                            $i = 1;
+                                            if( $i < 11 ) { ?>
+                                            <div class="card">
+                                                <div class="card-header bg-transparent">
+                                                    <div class="rating rating-center" aria-label="Average Rating">
+                                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->overallRating->value)/5 * 100; ?>%;"></div></div>
+                                                        <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->overallRating->value; ?><span class="sr-only"> out of 5</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h4 class="sr-only">Comment</h4>
+                                                    <p class="card-text"><?php echo $review->comment; ?></p>
+                                                </div>
+                                                <div class="card-footer bg-transparent text-muted small">
+                                                    <h4 class="sr-only">Date</h4>
+                                                    <?php echo date("M d, Y", strtotime($review->mentionTime)); ?>
+                                                </div>
+                                            </div>
+                                            <?php  }
+                                                $i++; ?>
+                                            <?php endforeach; ?>
+                                        </div>
+                                        <div class="loading-spinner"></div> <!-- Loading spinner -->
+                                        <div class="modal-pagination" id="pagination-controls">
+                                            <!-- Pagination buttons will be inserted here -->
+                                        </div>
+                                    <!-- </div> -->
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -1673,37 +1718,6 @@ while ( have_posts() ) : the_post();
                             </div>
                         </div>
                         <?php } ?>
-                        <!-- <script>
-                            /* Custom HTML for the paging controls for the comments list */
-                            window.DS_OPT = {
-                                buildCommentsLoadMoreHTML: function(data, ctx){
-                                    // a variable to hold the HTML markup
-                                    var x;
-                                    // make sure we have data and it is valid
-                                    if(data && data.valid){
-                                        // grab the profile data
-                                        var review = data.reviewMeta;
-                                        if(review){
-                                            // setup the variables that the template will need
-                                            var templateData = {
-                                                moreUrl:    review.moreUrl
-                                            };
-                                            // build the HTML markup using {{var-name}} for the template variables
-                                            var template = [
-                                                '<div class="ds-comments-more ds-comments-more-placeholder">',
-                                                    '<a href="#" class="ds-comments-more-link" data-more-comments-url="{{moreUrl}}">View More</a>',
-                                                    '<span class="ds-comments-more-loading" style="display:none;">Loading...</span>',
-                                                '</div>'
-                                            ].join('');
-                                            // apply the variables to the template
-                                            x = ctx.tmpl(template, templateData);
-                                        }
-                                    }
-                                    return x;
-                                }
-                            };
-                        </script>
-                        <script src="https://transparency.nrchealth.com/widget/v3/uams/npi/<?php echo $npi; ?>/lotw.js" async></script> -->
                         <?php // endif; ?>
 
                     </div>
