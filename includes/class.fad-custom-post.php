@@ -3357,11 +3357,13 @@
 			$provider_service_line = get_field( 'physician_service_line', $postId );
 			$resident_profile_group = get_field( 'physician_resident_profile_group', $postId );
 			$resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
-			$resident_academic_department_name = get_term( $resident_academic_department, 'academic_department' )->name;
+			// if (is_array(get_term( $resident_academic_department, 'academic_department' ))) {
+			$resident_academic_department_name = is_array(get_term( $resident_academic_department, 'academic_department' )) ? get_term( $resident_academic_department, 'academic_department' )->name : '';
 			$resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
 			$resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
 			$resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
-			$resident_academic_year_name = get_term( $resident_academic_year, 'residency_year' )->name;
+			if (is_array(get_term( $resident_academic_year, 'residency_year' )))
+			$resident_academic_year_name = is_array(get_term( $resident_academic_year, 'residency_year' )) ? get_term( $resident_academic_year, 'residency_year' )->name : '';
 			$resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
 			$data['physician_full_name'] = $full_name;
 			//Physician Data
@@ -3426,7 +3428,7 @@
 			$data['physician_referral_required'] = get_field( 'physician_referral_required', $postId );
 			$provider_portal = get_field( 'physician_portal', $postId );
 			$portal = get_term( $provider_portal, 'portal' );
-			$data['physician_portal']['name'] = $portal->name;
+			$data['physician_portal']['name'] = is_array($portal) ? $portal->name : '';
 			$data['physician_portal']['content'] = get_field( 'portal_content', $portal );
 			$data['physician_portal']['url'] = get_field( 'portal_url', $portal );
 			//$data['physician_clinical_admin_title'] = get_field( 'physician_clinical_admin_title', $postId );
@@ -3566,10 +3568,12 @@
 				// $data['physician_locations'][$location]['location_web_name'] = get_post_meta( $location, 'location_web_name', true );
 				// $data['physician_locations'][$location]['location_url'] = get_post_meta( $location, 'location_url', true );
 				$map = get_post_meta( $location, 'location_map', true );
-				$data['physician_locations'][$location]['location_lat'] = $map['lat'];
-				$data['physician_locations'][$location]['location_lng'] = $map['lng'];
-				$data['physician_locations'][$location]['location_directions'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title( $location ) .'">Get Directions</a>';
-				// $data['physician_locations'][$location]['map_marker'] = '<div class="marker" data-lat="'. $map['lat'] .'" data-lng="'. $map['lng'] .'" data-label="'. $i .'"></div>';
+				if (is_array($map)) {
+					$data['physician_locations'][$location]['location_lat'] = $map['lat'];
+					$data['physician_locations'][$location]['location_lng'] = $map['lng'];
+					$data['physician_locations'][$location]['location_directions'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title( $location ) .'">Get Directions</a>';
+					// $data['physician_locations'][$location]['map_marker'] = '<div class="marker" data-lat="'. $map['lat'] .'" data-lng="'. $map['lng'] .'" data-label="'. $i .'"></div>';
+				}
 				$i++;
 				// $data['location_link'][$location] = get_post_permalink( $location );
 				// $data['location_title'] .= get_the_title( $location ) . ',';
@@ -3719,10 +3723,12 @@
 				$data['physician_research_profiles_link'] = get_field( 'physician_research_profiles_link', $postId );
 				$publications = get_field( 'physician_select_publications', $postId );
 
-				foreach ( $publications as $publication) {
+				if (!empty($publications)) {
+					foreach ( $publications as $publication) {
 
-					$data['physician_pubmed'][$i]['information'] = $publication['pubmed_information'];
+						$data['physician_pubmed'][$i]['information'] = $publication['pubmed_information'];
 
+					}
 				}
 
 				$data['physician_pubmed_author_id'] = get_field( 'physician_pubmed_author_id', $postId );
@@ -3868,17 +3874,17 @@
 
 				$map = get_field( 'location_map', $postId );
 
-				$data['location_lat'] = $map['lat'];
-				$data['location_lng'] = $map['lng'];
+				$data['location_lat'] = is_array($map) ? $map['lat'] : '';
+				$data['location_lng'] = is_array($map) ? $map['lng'] : '';
 
 			$location_floor = get_field_object('location_building_floor', $postId );
 				$location_floor_value = '';
 				$location_floor_label = '';
 
-				if ( $location_floor ) {
+				if ( is_array($location_floor) ) {
 
-					$location_floor_value = $location_floor['value'];
-					$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+					$location_floor_value = $location_floor['value'] ?? null;
+					$location_floor_label = $location_floor['choices'][ $location_floor_value ] ?? null;
 
 				}
 			$data['location_address_1'] = get_field( 'location_address_1', $postId );
@@ -3892,7 +3898,7 @@
 				$building_name = $building->name;
 
 			}
-			$data['location_building'] = $building_name;
+			$data['location_building'] = $building_name ? $building_name : '';
 			$data['location_building_floor'] = $location_floor_label;
 
 			// Suite
@@ -3915,7 +3921,7 @@
 
 			// Region
 
-				$data['location_region'] = get_term( $location_region, 'region' )->slug;
+				$data['location_region'] = is_array( get_term( $location_region, 'region' ) ) ? get_term( $location_region, 'region' )->slug : '';
 
 			// Location Type
 
@@ -4120,7 +4126,7 @@
 
 				$location_portal = get_field( 'location_portal', $postId );
 				$portal = get_term( $location_portal, 'portal' );
-				$data['location_portal']['name'] = $portal->name;
+				$data['location_portal']['name'] = is_array($portal) ? $portal->name : '';
 				$data['location_portal']['content'] = get_field( 'portal_content', $portal );
 				$data['location_portal']['url'] = get_field( 'portal_url', $portal );
 
@@ -4387,11 +4393,12 @@
 
 				$data['location_parking'] = get_field( 'location_parking', $postId );
 				$parking_map = get_field( 'location_parking_map', $postId );
-				$data['location_parking_link'] = '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'. $parking_map['lat'] .','. $parking_map['lng'] .'" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>';
+
+				$data['location_parking_link'] = is_array($parking_map) ? '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'. $parking_map['lat'] .','. $parking_map['lng'] .'" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>' : '';
 
 			// Directions to location
 
-				$data['location_directions_link'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title($postId) .'">Get Directions</a>';
+				$data['location_directions_link'] = is_array($map) ? '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title($postId) .'">Get Directions</a>' : '';
 
 			return $data;
 
@@ -5108,7 +5115,7 @@
 			$infographic_transcript = get_field( 'clinical_resource_infographic_transcript', $postId );
 
 			$document_descr = get_field( 'clinical_resource_document_descr', $postId );
-			$document = get_field( 'clinical_resource_document', $postId );
+			$documents = get_field( 'clinical_resource_document', $postId );
 
 			$video = get_field( 'clinical_resource_video', $postId );
 			$video_descr = get_field( 'clinical_resource_video_descr', $postId );
@@ -5132,18 +5139,33 @@
 			$data['clinical_resource_document_descr'] = $document_descr;
 			$i = 0;
 
-			while ( have_rows($document) ) {
+			if($documents) {
 
-				the_row();
+				foreach($documents as $document) {
+					$document_title = $document['document_title'];
+					$document_file = $document['document_file'];
+					if ( $document_title && is_array($document_file) ) {
+						$document_url = user_trailingslashit($document_file['url']);
+						$data['clinical_resource_document'][$i]['title'] = $document_title;
+						$data['clinical_resource_document'][$i]['url'] = $document_url;
+					}
+					$i++;
+				}
 
-				$document_title = get_sub_field('document_title');
-				$document_file = get_sub_field('document_file');
-				$document_url = user_trailingslashit($document_file['url']);
-				$data['clinical_resource_document'][$i]['title'] = $document_title;
-				$data['clinical_resource_document'][$i]['url'] = $document_url;
-				$i++;
+			}
 
-			} // endwhile
+			// while ( have_rows($document) ): the_row();
+
+			// 	$document_title = get_sub_field('document_title');
+			// 	$document_file = get_sub_field('document_file');
+			// 	if ( $document_title && is_array($document_file) ) {
+			// 		$document_url = user_trailingslashit($document_file['url']);
+			// 		$data['clinical_resource_document'][$i]['title'] = $document_title;
+			// 		$data['clinical_resource_document'][$i]['url'] = $document_url;
+			// 	}
+			// 	$i++;
+
+			// endwhile; // endwhile
 
 			if (
 				$clinical_resources
@@ -5177,7 +5199,7 @@
 					$data['clinical_resource_conditions'][$condition->ID]['slug'] = $condition->post_name;
 					$condition_list .= $condition->post_title;
 
-					if ( count($conditions_cpt) > $i ) {
+					if ( $condition_cpt_query->found_posts > $i ) {
 
 						$condition_list .= ', ';
 
@@ -5206,7 +5228,7 @@
 					$data['clinical_resource_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
 					$treatment_list .= $treatment->post_title;
 
-					if ( count($treatments_cpt) > $i ) {
+					if ( $treatment_cpt_query->found_posts > $i ) {
 
 						$treatment_list .= ', ';
 
@@ -5235,7 +5257,7 @@
 					$data['clinical_resource_provider'][$provider->ID]['slug'] = $provider->post_name;
 					$provider_list .= get_field( 'physician_full_name', $provider->ID );
 
-					if ( count($providers) > $i ) {
+					if ( $provider_query->found_posts > $i ) {
 
 						$provider_list .= ' | ';
 
@@ -5265,7 +5287,7 @@
 					$data['clinical_resource_location'][$location->ID]['slug'] = $location->post_name;
 					$location_list .= $location->post_title;
 
-					if ( count($locations) > $i ) {
+					if ( $location_query->found_posts > $i ) {
 
 						$location_list .= ', ';
 
@@ -5294,7 +5316,7 @@
 					$data['clinical_resource_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
 					$expertise_list .= $expertise->post_title;
 
-					if ( count($expertises) > $i ) {
+					if ( $expertise_query->found_posts > $i ) {
 
 						$expertise_list .= ', ';
 
