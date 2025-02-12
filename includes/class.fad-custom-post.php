@@ -3921,7 +3921,7 @@
 
 			// Region
 
-				$data['location_region'] = is_array( get_term( $location_region, 'region' ) ) ? get_term( $location_region, 'region' )->slug : '';
+				$data['location_region'] = is_object( get_term( $location_region, 'region' ) ) ? get_term( $location_region, 'region' )->slug : '';
 
 			// Location Type
 
