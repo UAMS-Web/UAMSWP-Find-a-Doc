@@ -202,7 +202,7 @@ function fad_script_register() {
     }
     if ( (is_single() && ('location' == $post_type)) ) {
         wp_enqueue_style( 'leaflet-css', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet.css', array(), '1.1', 'all');
-        wp_enqueue_script( 'leaflet-js', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet-bing.js', array(), null, false );
+        wp_enqueue_script( 'leaflet-js', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet.js', array(), null, false );
     }
     if ( (is_archive() && (('provider' == $post_type) || ('location' == $post_type))) ) {
         wp_enqueue_script( 'mobile-filter-toggle', UAMS_FAD_ROOT_URL . 'assets/js/mobile-filter-toggle.js', array('jquery'), null, false );
