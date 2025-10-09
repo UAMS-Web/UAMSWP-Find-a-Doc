@@ -87,8 +87,8 @@ if ($featured_image) {
 } elseif ($location_images) {
 	$schema_image = $location_images[0];
 }
-if ( function_exists( 'fly_add_image_size' ) && !empty($schema_image) ) {
-	$locationphoto = image_sizer($schema_image, 640, 480, 'center', 'center');
+if ( function_exists( 'bis_get_attachment_image' ) && !empty($schema_image) ) {
+	$locationphoto = image_sizer($schema_image, 640, 480, 'center', 'center', 'aspect-4-3');
 } else {
 	$locationphoto = wp_get_attachment_image_src($schema_image, 'large');
 }
@@ -969,18 +969,18 @@ while ( have_posts() ) : the_post(); ?>
 				<div class="content-width">
 					<?php if ( $location_images_count == 1 ) { ?>
 						<picture>
-							<?php if ( function_exists( 'fly_add_image_size' ) && !empty($location_images[0]) ) { ?>
-								<source srcset="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?>"
+							<?php if ( function_exists( 'bis_get_attachment_image' ) && !empty($location_images[0]) ) { ?>
+								<source srcset="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center', 'aspect-4-3'); ?>"
 									media="(min-width: 1350px)">
-								<source srcset="<?php echo image_sizer($location_images[0], 572, 429, 'center', 'center'); ?>"
+								<source srcset="<?php echo image_sizer($location_images[0], 572, 429, 'center', 'center', 'aspect-4-3'); ?>"
 									media="(min-width: 992px)">
-								<source srcset="<?php echo image_sizer($location_images[0], 992, 558, 'center', 'center'); ?>"
+								<source srcset="<?php echo image_sizer($location_images[0], 992, 558, 'center', 'center', 'aspect-16-9'); ?>"
 									media="(min-width: 768px)">
-								<source srcset="<?php echo image_sizer($location_images[0], 768, 432, 'center', 'center'); ?>"
+								<source srcset="<?php echo image_sizer($location_images[0], 768, 432, 'center', 'center', 'aspect-16-9'); ?>"
 									media="(min-width: 576px)">
-								<source srcset="<?php echo image_sizer($location_images[0], 576, 324, 'center', 'center'); ?>"
+								<source srcset="<?php echo image_sizer($location_images[0], 576, 324, 'center', 'center', 'aspect-16-9-small'); ?>"
 									media="(min-width: 1px)">
-								<img src="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[0], '_wp_attachment_image_alt', true ); ?>" class="single-image" />
+								<img src="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center', 'aspect-4-3'); ?>" alt="<?php echo get_post_meta( $location_images[0], '_wp_attachment_image_alt', true ); ?>" class="single-image" />
 							<?php } else {  ?>
 								<img src="<?php echo wp_get_attachment_image_url($location_images[0], 'large'); ?>" class="single-image">
 							<?php } //endif ?>
@@ -993,18 +993,18 @@ while ( have_posts() ) : the_post(); ?>
 								foreach( $location_images as $location_images_item ) { ?>
 									<div class="carousel-item<?php echo ($location_carousel_slide == 1) ? ' active' : '' ?>">
 										<picture>
-											<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-												<source srcset="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center'); ?>"
-													media="(min-width: 1350px)">
-												<source srcset="<?php echo image_sizer($location_images_item, 572, 429, 'center', 'center'); ?>"
-													media="(min-width: 992px)">
-												<source srcset="<?php echo image_sizer($location_images_item, 992, 558, 'center', 'center'); ?>"
-													media="(min-width: 768px)">
-												<source srcset="<?php echo image_sizer($location_images_item, 768, 432, 'center', 'center'); ?>"
-													media="(min-width: 576px)">
-												<source srcset="<?php echo image_sizer($location_images_item, 576, 324, 'center', 'center'); ?>"
+											<?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
+												<source srcset="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center', 'aspect-4-3'); ?>"
+													media="(min-width: 1350px)">px)">
+												<source srcset="<?php echo image_sizer($location_images_item, 572, 429, 'center', 'center', 'aspect-4-3'); ?>"
+													media="(min-width: 992px)">px)">
+												<source srcset="<?php echo image_sizer($location_images_item, 992, 558, 'center', 'center', 'aspect-16-9'); ?>"
+													media="(min-width: 768px)">px)">
+												<source srcset="<?php echo image_sizer($location_images_item, 768, 432, 'center', 'center', 'aspect-16-9'); ?>"
+													media="(min-width: 576px)">px)">
+												<source srcset="<?php echo image_sizer($location_images_item, 576, 324, 'center', 'center', 'aspect-16-9-small'); ?>"
 													media="(min-width: 1px)">
-												<img src="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images_item, '_wp_attachment_image_alt', true ); ?>" />
+												<img src="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center', 'aspect-4-3'); ?>" alt="<?php echo get_post_meta( $location_images_item, '_wp_attachment_image_alt', true ); ?>" />
 											<?php } else {  ?>
 												<img src="<?php echo wp_get_attachment_image_url($location_images_item, 'large'); ?>">
 											<?php } //endif ?>
@@ -1025,8 +1025,8 @@ while ( have_posts() ) : the_post(); ?>
 							<ol class="carousel-indicators">
 								<?php for ($i = 0; $i < $location_images_count; $i++) { ?>
 									<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo (0 == $i ? 'class="active"' : ''); ?>>
-										<?php if ( function_exists( 'fly_add_image_size' )) { ?>
-											<img src="<?php echo image_sizer($location_images[$i], 60, 45, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>" />
+										<?php if ( function_exists( 'bis_get_attachment_image' )) { ?>
+											<img src="<?php echo image_sizer($location_images[$i], 60, 45, 'center', 'center', 'thumbnail'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>" />
 										<?php } else {  ?>
 											<img src="<?php echo wp_get_attachment_image_url($location_images[$i], 'small'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>">
 										<?php } //endif ?>

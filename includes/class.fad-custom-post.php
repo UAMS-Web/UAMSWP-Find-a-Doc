@@ -3423,8 +3423,8 @@
 
 			$data['physician_languages'] = $language_list;
 			$data['physician_eligible_appointments'] = $provider_resident ? 0 : get_field( 'physician_eligible_appointments', $postId );
-			$data['physician_thumbnail'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center');
-			$data['physician_photo'] = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
+			$data['physician_thumbnail'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center', 'portrait-3-4');
+			$data['physician_photo'] = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4');
 			$data['physician_referral_required'] = get_field( 'physician_referral_required', $postId );
 			$provider_portal = get_field( 'physician_portal', $postId );
 			$portal = get_term( $provider_portal, 'portal' );
@@ -3858,10 +3858,10 @@
 
 					foreach ( $location_images as $location_images_item ) {
 
-						$data['location_photo'][$i]['thumb'] = image_sizer($location_images_item, 60, 45, 'center', 'center');
-						$data['location_photo'][$i]['sml'] = image_sizer($location_images_item, 576, 324, 'center', 'center');
-						$data['location_photo'][$i]['med'] = image_sizer($location_images_item, 630, 473, 'center', 'center');
-						$data['location_photo'][$i]['lrg'] = image_sizer($location_images_item, 992, 558, 'center', 'center');
+						$data['location_photo'][$i]['thumb'] = image_sizer($location_images_item, 60, 45, 'center', 'center', 'aspect-4-3');
+						$data['location_photo'][$i]['sml'] = image_sizer($location_images_item, 576, 324, 'center', 'center', 'aspect-4-3');
+						$data['location_photo'][$i]['med'] = image_sizer($location_images_item, 630, 473, 'center', 'center', 'aspect-4-3');
+						$data['location_photo'][$i]['lrg'] = image_sizer($location_images_item, 992, 558, 'center', 'center', 'aspect-4-3');
 						$i++;
 
 					}
