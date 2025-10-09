@@ -176,22 +176,22 @@
                     <div class="col image">
                         <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Photo" data-itemtitle="<?php echo $resource_title_attr; ?>">
                             <picture>
-                                <?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
-                                    <source srcset="<?php echo image_sizer($resource_image_square, 243, 243, 'center', 'center'); ?>"
+                                <?php if ( has_post_thumbnail() && function_exists( 'bis_get_attachment_image' ) ) { ?>
+                                    <source srcset="<?php echo image_sizer($resource_image_square, 243, 243, 'center', 'center', 'aspect-1-1'); ?>"
                                         media="(min-width: 2054px)">
-                                    <source srcset="<?php echo image_sizer($resource_image_square, 184, 184, 'center', 'center'); ?>"
+                                    <source srcset="<?php echo image_sizer($resource_image_square, 184, 184, 'center', 'center', 'thumbnail'); ?>"
                                         media="(min-width: 1784px)">
-                                    <source srcset="<?php echo image_sizer($resource_image_square, 243, 243, 'center', 'center'); ?>"
+                                    <source srcset="<?php echo image_sizer($resource_image_square, 243, 243, 'center', 'center', 'aspect-1-1'); ?>"
                                         media="(min-width: 1200px)">
-                                    <source srcset="<?php echo image_sizer($resource_image_square, 184, 184, 'center', 'center'); ?>"
+                                    <source srcset="<?php echo image_sizer($resource_image_square, 184, 184, 'center', 'center', 'aspect-1-1'); ?>"
                                         media="(min-width: 930px)">
-                                    <source srcset="<?php echo image_sizer($resource_image_wide, 580, 326, 'center', 'center'); ?>"
+                                    <source srcset="<?php echo image_sizer($resource_image_wide, 580, 326, 'center', 'center', 'aspect-16-9-small'); ?>"
                                         media="(min-width: 768px)">
-                                    <source srcset="<?php echo image_sizer($resource_image_square, 95, 95, 'center', 'center'); ?>"
+                                    <source srcset="<?php echo image_sizer($resource_image_square, 95, 95, 'center', 'center', 'thumbnail'); ?>"
                                         media="(min-width: 576px)">
-                                    <source srcset="<?php echo image_sizer($resource_image_wide, 510, 286, 'center', 'center'); ?>"
+                                    <source srcset="<?php echo image_sizer($resource_image_wide, 510, 286, 'center', 'center', 'aspect-16-9-small'); ?>"
                                         media="(min-width: 1px)">
-                                    <img src="<?php echo image_sizer($resource_image_wide, 510, 286, 'center', 'center'); ?>" alt="" role="presentation" />
+                                    <img src="<?php echo image_sizer($resource_image_wide, 510, 286, 'center', 'center', 'aspect-16-9-small'); ?>" alt="" role="presentation" />
                                 <?php } elseif ( has_post_thumbnail() ) { ?>
                                     <?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image', 'alt' => '', 'role' => 'presentation' ) ); ?>
                                 <?php } else { ?>
@@ -451,19 +451,19 @@
             <div class="card">
                 <div class="card-img-top">
                     <picture>
-                        <?php if ( has_post_thumbnail($id) && function_exists( 'fly_add_image_size' ) ) { ?>
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>"
+                        <?php if ( has_post_thumbnail($id) && function_exists( 'bis_get_attachment_image' ) ) { ?>
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>"
                                 media="(min-width: 1921px)">
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center'); ?>"
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center', 'aspect-16-9-small'); ?>"
                                 media="(min-width: 1500px)">
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>"
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>"
                                 media="(min-width: 992px)">
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center'); ?>"
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center', 'aspect-16-9-small'); ?>"
                                 media="(min-width: 768px)">
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>"
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>"
                                 media="(min-width: 1px)">
                             <!-- Fallback -->
-                            <img src="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" alt="" role="presentation" />
+                            <img src="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" alt="" role="presentation" />
                         <?php } elseif ( has_post_thumbnail($id) ) { ?>
                             <!-- Fallback -->
                             <?php the_post_thumbnail( 'aspect-16-9-small',  array( 'alt' => '', 'role' => 'presentation' ) ); ?>

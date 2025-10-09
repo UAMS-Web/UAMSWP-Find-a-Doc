@@ -1017,19 +1017,19 @@ while ( have_posts() ) : the_post();
                 if ( has_post_thumbnail() ) { ?>
                 <div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
                     <picture>
-                    <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center'); ?>"
+                    <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center', 'portrait-3-4'); ?>"
                             media="(min-width: 1200px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center', 'portrait-3-4'); ?>"
                             media="(min-width: 992px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center', 'portrait-3-4'); ?>"
                             media="(min-width: 768px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center', 'portrait-3-4'); ?>"
                             media="(min-width: 576px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center', 'portrait-3-4'); ?>"
                             media="(min-width: 1px)">
-                        <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo $full_name_attr; ?>" />
-                        <?php $docphoto = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
+                        <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4'); ?>" alt="<?php echo $full_name_attr; ?>" />
+                        <?php $docphoto = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4');
                              } else {
                                 the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) );
                                 $docphoto = get_the_post_thumbnail( 'large');
