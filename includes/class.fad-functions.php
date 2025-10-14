@@ -954,7 +954,8 @@ function provider_ajax_filter_callback() {
 	$region_IDs = array_unique($region_IDs);
 	$region_list = array();
 	foreach ($region_IDs as $region_ID){
-		$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
+		$region_slug = get_term_by( 'ID', $region_ID, 'region' );
+		$region_list[] = is_array($region_slug) ? $region_slug->slug : '';
 	}
 
 	// Build query for titles, based on regions
