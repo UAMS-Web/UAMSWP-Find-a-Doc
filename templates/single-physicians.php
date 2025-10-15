@@ -1792,7 +1792,7 @@ while ( have_posts() ) : the_post();
             echo $treatment_schema;
             echo ']';
         }
-    echo $location_schema; ?>
+    echo $location_schema ? $location_schema : ''; ?>
   <?php if ( $pg_rating_valid ){ ?>
 ,
   "aggregateRating": {
