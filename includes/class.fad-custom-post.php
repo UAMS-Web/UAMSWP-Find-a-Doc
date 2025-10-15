@@ -3891,6 +3891,7 @@
 			$data['location_address_2'] = ( get_field( 'location_address_2', $postId ) ? get_field( 'location_address_2', $postId ) . '<br/>' : '');
 			$location_building = get_field( 'location_building', $postId );
 
+			$building_name = '';
 			if ($location_building) {
 
 				$building = get_term( $location_building, 'building' );
@@ -3921,7 +3922,8 @@
 
 			// Region
 
-				$data['location_region'] = is_object( get_term( $location_region, 'region' ) ) ? get_term( $location_region, 'region' )->slug : '';
+				$region_name = is_object( get_term( $location_region, 'region' ) ) ? get_term( $location_region, 'region' ) : '';
+				$data['location_region'] = is_array( $region_name ) ? $region_name->slug : '';
 
 			// Location Type
 
