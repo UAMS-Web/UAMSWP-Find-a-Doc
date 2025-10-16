@@ -470,7 +470,7 @@
 							$providers = $_POST['acf']['field_clinical_resource_providers'];
 
 						// Loop through the providers and add each item's title to a list
-
+							$provider_list = '';
 							if ( $providers ) {
 
 								$i = 1;
@@ -498,7 +498,7 @@
 							$locations = $_POST['acf']['field_clinical_resource_locations'];
 
 						// Loop through the locations and add each item's title to a list
-
+							$location_list = '';
 							if ( $locations ) {
 
 								$i = 1;
@@ -527,7 +527,7 @@
 							$expertises = $_POST['acf']['field_clinical_resource_aoe'];
 
 						// Loop through the areas of expertise and add each item's title to a list
-
+							$expertise_list = '';
 							if ( $expertises ) {
 
 								$i = 1;
@@ -556,7 +556,7 @@
 							$conditions = $_POST['acf']['field_clinical_resource_conditions'];
 
 						// Loop through the conditions and add each item's title to a list
-
+							$condition_list = '';
 							if ( $conditions ) {
 
 								$i = 1;
@@ -585,7 +585,7 @@
 							$treatments = $_POST['acf']['field_clinical_resource_treatments'];
 
 						// Loop through the treatments and add each item's title to a list
-
+							$treatment_list = '';
 							if ( $treatments ) {
 
 								$i = 1;
@@ -614,7 +614,7 @@
 							$clinical_resources = $_POST['acf']['field_clinical_resource_related'];
 
 						// Loop through the clinical resources and add each item's title to a list
-
+							$resource_list = '';
 							if ( $clinical_resources ) {
 
 								$i = 1;
