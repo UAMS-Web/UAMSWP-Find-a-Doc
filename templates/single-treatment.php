@@ -412,7 +412,7 @@
 						$cta_button_text = $cta['cta_bar_button_text'];
 						$cta_button_url = $cta['cta_bar_button_url'];
 						if ( $cta_button_url ) {
-							$cta_button_target = $button_url['target'];
+							$cta_button_target = $cta_button_url['target'];
 						}
 						$cta_button_desc = $cta['cta_bar_button_description'];
 					}
@@ -437,7 +437,7 @@
 					$cta_className .= ' ' . $cta_layout;
 					$cta_className .= ' ' . $cta_background_color;
 					$cta_className .= $cta_use_image ? ' bg-image' : '';
-					if ( $cta_cta_size == 'small' ) {
+					if ( $cta_size == 'small' ) {
 						$cta_className .= ' cta-bar-sm';
 					} elseif ( $cta_size == 'large' ) {
 						$cta_className .= ' extra-padding cta-bar-lg';
