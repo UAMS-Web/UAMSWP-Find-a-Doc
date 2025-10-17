@@ -998,13 +998,13 @@ while ( have_posts() ) : the_post(); ?>
 										<picture>
 											<?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
 												<source srcset="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center', 'aspect-4-3'); ?>"
-													media="(min-width: 1350px)">px)">
+													media="(min-width: 1350px)">
 												<source srcset="<?php echo image_sizer($location_images_item, 572, 429, 'center', 'center', 'aspect-4-3'); ?>"
-													media="(min-width: 992px)">px)">
+													media="(min-width: 992px)">
 												<source srcset="<?php echo image_sizer($location_images_item, 992, 558, 'center', 'center', 'aspect-16-9'); ?>"
-													media="(min-width: 768px)">px)">
+													media="(min-width: 768px)">
 												<source srcset="<?php echo image_sizer($location_images_item, 768, 432, 'center', 'center', 'aspect-16-9'); ?>"
-													media="(min-width: 576px)">px)">
+													media="(min-width: 576px)">
 												<source srcset="<?php echo image_sizer($location_images_item, 576, 324, 'center', 'center', 'aspect-16-9-small'); ?>"
 													media="(min-width: 1px)">
 												<img src="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center', 'aspect-4-3'); ?>" alt="<?php echo get_post_meta( $location_images_item, '_wp_attachment_image_alt', true ); ?>" />
