@@ -91,7 +91,9 @@ if ( function_exists( 'bis_get_attachment_image' ) && !empty($schema_image) ) {
 	$locationphoto = image_sizer($schema_image, 640, 480, 'center', 'center', 'aspect-4-3');
 } else {
 	$locationphoto = wp_get_attachment_image_src($schema_image, 'large');
-	$locationphoto = $locationphoto[0];
+	if ($locationphoto && is_array($locationphoto)) {
+		$locationphoto = $locationphoto[0];
+	}
 }
 
 // Set telemedicine values
