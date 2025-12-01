@@ -3923,7 +3923,7 @@
 			// Region
 
 				$region_name = is_object( get_term( $location_region, 'region' ) ) ? get_term( $location_region, 'region' ) : '';
-				$data['location_region'] = is_array( $region_name ) ? $region_name->slug : '';
+				$data['location_region'] = is_object( $region_name ) ? $region_name->slug : '';
 
 			// Location Type
 
