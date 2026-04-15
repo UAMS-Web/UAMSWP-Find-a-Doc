@@ -309,7 +309,7 @@ while ( have_posts() ) : the_post(); ?>
 		$location_floor_label = '';
 		if ( $location_floor ) {
 			$location_floor_value = $location_floor['value'];
-			$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+			$location_floor_label = $location_floor['choices'][ $location_floor_value ] ?? '';
 		}
 	$location_suite = get_field('location_suite', $post_id );
 	$location_address_2 =
