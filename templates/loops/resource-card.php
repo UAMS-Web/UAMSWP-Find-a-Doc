@@ -52,8 +52,12 @@
     }
 
     $resource_image_wide = get_post_thumbnail_id($id);
+    $resource_image_alt = get_post_meta( $resource_image_wide, '_wp_attachment_image_alt', true );
     $resource_image_square = get_field('clinical_resource_image_square', $id);
     $resource_image_square = ( isset($resource_image_square) && !empty($resource_image_square) ) ? $resource_image_square : $resource_image_wide;
+    if ( empty($resource_image_alt) && $resource_image_square ) {
+        $resource_image_alt = get_post_meta( $resource_image_square, '_wp_attachment_image_alt', true );
+    }
 
     $resource_related_max = 3; // Set how many of each related item type to display
 
@@ -191,7 +195,7 @@
                                         media="(min-width: 576px)">
                                     <source srcset="<?php echo image_sizer($resource_image_wide, 510, 286, 'center', 'center', 'aspect-16-9-small'); ?>"
                                         media="(min-width: 1px)">
-                                    <img src="<?php echo image_sizer($resource_image_wide, 510, 286, 'center', 'center', 'aspect-16-9-small'); ?>" alt="" role="presentation" />
+                                    <img src="<?php echo image_sizer($resource_image_wide, 510, 286, 'center', 'center', 'aspect-16-9-small'); ?>" alt="<?php echo $resource_image_alt; ?>" role="presentation" />
                                 <?php } elseif ( has_post_thumbnail() ) { ?>
                                     <?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image', 'alt' => '', 'role' => 'presentation' ) ); ?>
                                 <?php } else { ?>
@@ -463,7 +467,7 @@
                             <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>"
                                 media="(min-width: 1px)">
                             <!-- Fallback -->
-                            <img src="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" alt="" role="presentation" />
+                            <img src="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" alt="<?php echo $resource_image_alt; ?>" role="presentation" />
                         <?php } elseif ( has_post_thumbnail($id) ) { ?>
                             <!-- Fallback -->
                             <?php the_post_thumbnail( 'aspect-16-9-small',  array( 'alt' => '', 'role' => 'presentation' ) ); ?>

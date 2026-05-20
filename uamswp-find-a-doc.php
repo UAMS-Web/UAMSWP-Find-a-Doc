@@ -4,7 +4,7 @@ Plugin Name: UAMSWP Find-a-doc
 Plugin URI: -
 Description: Find-a-doc plugin for uamshealth.com
 Author: uams, Todd McKee, MEd
-Author URI: http://www.uams.edu/
+Author URI: https://www.uams.edu/
 Version: 2.2.12
 */
 
