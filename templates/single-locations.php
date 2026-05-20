@@ -309,7 +309,7 @@ while ( have_posts() ) : the_post(); ?>
 		$location_floor_label = '';
 		if ( $location_floor ) {
 			$location_floor_value = $location_floor['value'];
-			$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+			$location_floor_label = $location_floor['choices'][ $location_floor_value ] ?? '';
 		}
 	$location_suite = get_field('location_suite', $post_id );
 	$location_address_2 =
@@ -1270,7 +1270,7 @@ while ( have_posts() ) : the_post(); ?>
 								// map.addLayer(bing);
 								L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 									maxZoom: 19,
-									attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+									attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 								}).addTo(map);
 								/* [lat, lon, fillColor, strokeColor, labelClass, iconText, popupText] */
 								var markers = [
@@ -1401,7 +1401,7 @@ while ( have_posts() ) : the_post(); ?>
 								$location_scheduling_fallback = $row['location_scheduling_fallback'];
 							?>
 								<div id="scheduleContainer">
-									<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+									<iframe id="openSchedulingFrame" title="MyChart Scheduling" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
 								</div>
 
 								<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
@@ -1841,7 +1841,7 @@ while ( have_posts() ) : the_post(); ?>
 <?php // Schema Data ?>
 <script type='application/ld+json'>
 {
-  "@context": "http://www.schema.org",
+  "@context": "https://schema.org",
   "@type": "MedicalClinic",
   "name": "<?php echo $page_title; ?>",
   "url": "<?php echo get_permalink(); ?>",

@@ -1791,7 +1791,7 @@ while ( have_posts() ) : the_post();
 <?php // Schema Data ?>
 <script type='application/ld+json'>
 {
-  "@context": "http://www.schema.org",
+  "@context": "https://schema.org",
   "@type": "Physician",
   "name": "<?php echo $full_name_attr; ?>",
   "url": "<?php echo get_permalink(); ?>",
