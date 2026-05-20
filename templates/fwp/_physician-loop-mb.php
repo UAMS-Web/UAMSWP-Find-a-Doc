@@ -224,7 +224,7 @@
 
 				$('.ds-average').attr('itemprop', 'ratingValue');
 				$('.ds-ratingcount').attr('itemprop', 'ratingCount');
-				$('.ds-summary').attr('itemtype', 'http://schema.org/AggregateRating');
+				$('.ds-summary').attr('itemtype', 'https://schema.org/AggregateRating');
 				$('.ds-summary').attr('itemprop', 'aggregateRating');
 				//$('.ds-comments').wrapInner('<a href="#PatientRatings"></a>');
 			});

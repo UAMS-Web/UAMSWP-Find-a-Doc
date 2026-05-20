@@ -29,12 +29,12 @@
 
 	    <div class="col-md-12 uams-content" role='main'>
 
-	      <?php // Hard coded breadcrumbs 
+	      <?php // Hard coded breadcrumbs
 	      		$tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") )
 	      ?>
 	    <nav class="uams-breadcrumbs" role="navigation" aria-label="breadcrumbs">
 	    	<ul>
-	    		<li><a href="http://www.uams.edu" title="University of Arkansas for Medical Scineces">Home</a></li>
+	    		<li><a href="https://www.uams.edu" title="University of Arkansas for Medical Scineces">Home</a></li>
 	    		<li><a href="/" title="<?php echo str_replace('   ', ' ', get_bloginfo('title')); ?>"><?php echo str_replace('   ', ' ', get_bloginfo('title')); ?></a></li>
 	    		<li><a href="<?php echo get_bloginfo('url'); ?>/physicians/" title="Physicians">Physicians</a></li>
 	    		<li class="current"><span><?php echo $tax->name; ?></span>
