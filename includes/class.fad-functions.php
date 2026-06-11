@@ -270,6 +270,106 @@ function posts_provider_custom_columns($column_name, $id){
 // 	return $request;
 // }
 
+/**
+ * 1. Safe API Fetcher with Correct JSON Parsing
+ */
+function fetch_pg_api_with_retry( $url, $max_retries = 3, $delay_seconds = 2 ) {
+    $attempts = 0;
+    $token    = wp_pg_get_token(); // PressGaney requires Access-Token
+
+    while ( $attempts < $max_retries ) {
+        $attempts++;
+
+        $response = wp_remote_get( $url, array(
+            'timeout' => 15,
+            'headers' => array(
+                'Content-Type' => 'application/json',
+                'Access-Token' => $token
+            )
+        ) );
+
+        if ( is_wp_error( $response ) ) {
+            return $response;
+        }
+
+        $response_code = wp_remote_retrieve_response_code( $response );
+        $response_body = wp_remote_retrieve_body( $response );
+
+        // FIX: Decode the body so we can safely check $data['status']['code']
+        $data = json_decode( $response_body, true );
+
+        // Check if we hit the 429 Spike Arrest
+        $is_rate_limited = ( $response_code === 429 || ( isset( $data['status']['code'] ) && $data['status']['code'] == 429 ) );
+
+        if ( $is_rate_limited ) {
+            if ( $attempts < $max_retries ) {
+                $current_delay = $delay_seconds * $attempts;
+                sleep( $current_delay );
+                continue;
+            }
+        }
+
+        // Return the raw response body string so it can be saved to post_meta
+        return $response_body;
+    }
+
+    return false;
+}
+
+/**
+ * 2. Automatic Cron Scheduler (No Activation Hook Required)
+ * This hooks into 'init' and verifies the cron event exists.
+ */
+add_action( 'init', 'uamswp_fad_check_and_schedule_cron' );
+
+function uamswp_fad_check_and_schedule_cron() {
+    // Only check in the admin dashboard to save server resources
+    if ( is_admin() ) {
+        if ( ! wp_next_scheduled( 'uamswp_provider_pg_sync_hook' ) ) {
+            wp_schedule_event( time(), 'hourly', 'uamswp_provider_pg_sync_hook' );
+        }
+    }
+}
+
+/**
+ * 3. Hook the Action and Run the Data Sync
+ */
+add_action( 'uamswp_provider_pg_sync_hook', 'sync_provider_pg_data' );
+
+function sync_provider_pg_data() {
+    $count = 10;
+
+    $providers = get_posts( array(
+        'post_type'      => 'provider',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1,
+    ) );
+
+    if ( empty( $providers ) ) {
+        return;
+    }
+
+    foreach ( $providers as $provider ) {
+        // Using get_field assumes Advanced Custom Fields (ACF) is active
+        $npi = get_field( 'physician_npi', $provider->ID );
+        if ( ! $npi ) {
+            continue;
+        }
+
+        $api_url = 'https://api1.consumerism.pressganey.com/api/bsr/comments?personId=' . $npi . '&perPage=' . $count . '&days=540';
+
+        $external_data = fetch_pg_api_with_retry( $api_url );
+
+        if ( $external_data ) {
+            // Save the raw text/JSON string to post meta
+            update_post_meta( $provider->ID, '_syndicated_api_data', $external_data );
+        }
+
+        // Standard half-second pause to prevent our own cron loop from trigger a SpikeArrest
+        usleep( 500000 );
+    }
+}
+
 // Get PressGaney Access Token
 function wp_pg_get_token() {
 	$pg_cache_key   = 'pg_api_token';
@@ -304,23 +404,33 @@ function wp_pg_cached_api( $npi, $count = 6 ) {
 	$request = get_transient( $cache_key );
 
 	if ( false === $request || (is_array($request) && ('200' !== $request['status']['code'])) ) {
-		$request = wp_remote_retrieve_body( wp_remote_get( $url, array(
+		$request = wp_remote_get( $url, array(
 			'headers' => array(
 				'Content-Type' => 'application/json',
 				'Access-Token' => $token
 				)
-		) ) );
+		) );
 
+		// Check for WordPress errors first
 		if ( is_wp_error( $request ) ) {
-			// Cache failures for a short time, will speed up page rendering in the event of remote failure.
-			set_transient( $cache_key, $request, MINUTE_IN_SECONDS * 5 );
+			return false;
+		}
 
+		$response_code = wp_remote_retrieve_response_code( $request );
+		$response_body = wp_remote_retrieve_body( $request );
+		// CRITICAL: Check if Spike Arrest or Rate Limit was hit
+		if ( $response_code === 429 || ( isset($data['status']['code']) && $data['status']['code'] == 429 ) ) {
+			// DO NOT cache this. Fail gracefully or serve the OLD cache if available.
+			return false;
+			//set_transient( $cache_key, $response_body, MINUTE_IN_SECONDS );
 		} else {
 			// Success, cache for a longer time.
-			set_transient( $cache_key, $request, MINUTE_IN_SECONDS * 15 );
+			set_transient( $cache_key, $response_body, MINUTE_IN_SECONDS * 15 );
 		}
+	} else {
+		$response_body = get_transient( $cache_key );
 	}
-	return $request;
+	return $response_body;
 }
 
 add_action('wp_ajax_pg_ajax_api_action', 'pg_ajax_api');
@@ -1492,7 +1602,7 @@ function schedule_ajax_filter_callback() {
 		</p>
 	<?php } ?>
 	<div id="scheduleContainer">
-		<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+		<iframe id="openSchedulingFrame" title="MyChart Scheduling" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
 	</div>
 
 	<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
