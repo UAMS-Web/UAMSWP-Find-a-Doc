@@ -411,7 +411,7 @@
 					if ( $cta_action_type == 'url' ) {
 						$cta_button_text = $cta['cta_bar_button_text'];
 						$cta_button_url = $cta['cta_bar_button_url'];
-						if ( $cta_button_url ) {
+						if ( $cta_button_url && is_array($cta_button_url) ) {
 							$cta_button_target = $cta_button_url['target'];
 						}
 						$cta_button_desc = $cta['cta_bar_button_description'];
