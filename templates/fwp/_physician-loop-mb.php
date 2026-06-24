@@ -40,7 +40,7 @@
 							$pg_rating_data = '';
 							$pg_rating_valid = '';
 							if ( $npi ) {
-								$pg_rating_request = wp_pg_cached_api( $npi, 0 );
+								$pg_rating_request = get_post_meta( get_the_ID(), '_syndicated_api_data', true ); //wp_pg_cached_api( $npi, 0 );
 								$pg_rating_data = json_decode( $pg_rating_request );
 								if ( !empty( $pg_rating_data ) ) {
 									$pg_rating_valid = (( $pg_rating_data->data->entities[0]->totalRatingCount) >= 30 );
