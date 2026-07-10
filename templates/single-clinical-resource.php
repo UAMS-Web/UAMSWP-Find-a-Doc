@@ -668,24 +668,32 @@ function uamswp_resource_provider_spotlight() {
     // Questions and answers
     if ( have_rows('clinical_resource_spotlight_qa') ) {
         ?>
-        <section class="uams-module provider-spotlight-qa" aria-labelledby="spotlight-qa-title">
-            <h2 id="spotlight-qa-title" class="module-title">
-                <span class="title">Getting to Know <?php echo $short_name; ?></span>
-            </h2>
-            <?php
-            while ( have_rows('clinical_resource_spotlight_qa') ) : the_row();
-                $question = get_sub_field('spotlight_qa_question');
-                $answer   = get_sub_field('spotlight_qa_answer');
+        <section class="uams-module provider-spotlight-qa alignfull" aria-labelledby="spotlight-qa-title">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 id="spotlight-qa-title" class="module-title">
+                            <span class="title">Getting to Know <?php echo $short_name; ?></span>
+                        </h2>
+                    </div>
+                    <div class="module-body">
+                        <?php
+                        while ( have_rows('clinical_resource_spotlight_qa') ) : the_row();
+                            $question = get_sub_field('spotlight_qa_question');
+                            $answer   = get_sub_field('spotlight_qa_answer');
 
-                if ( !$question ) {
-                    continue;
-                }
-                ?>
-                <h3><?php echo esc_html($question); ?></h3>
-                <div class="answer"><?php echo $answer; ?></div>
-                <?php
-            endwhile;
-            ?>
+                            if ( !$question ) {
+                                continue;
+                            }
+                            ?>
+                            <h3><?php echo esc_html($question); ?></h3>
+                            <div class="answer"><?php echo $answer; ?></div>
+                            <?php
+                        endwhile;
+                        ?>
+                    </div>
+                </div>
+            </div>
         </section>
         <?php
     }
@@ -735,11 +743,27 @@ function uamswp_resource_provider_spotlight() {
     }
 
     // This module sits inside the entry content, not in genesis_after_entry
-    // like the site-wide appointment module, so it takes no grid wrapper.
+    // like the site-wide appointment module. It is marked alignfull and wraps
+    // its content in the same grid so it breaks out to full width and holds a
+    // constrained line length, matching every other uams-module.
     $cta = sprintf(
-        '<section class="uams-module cta-bar provider-spotlight-cta" aria-labelledby="spotlight-cta-title">
-            <h2 id="spotlight-cta-title">%1$s</h2>
-            <p>%2$s</p>
+        '<section class="uams-module cta-bar provider-spotlight-cta alignfull bg-gray no-link" aria-labelledby="spotlight-cta-title">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="inner-container">
+                            <div class="cta-heading">
+                                <h2 id="spotlight-cta-title">%1$s</h2>
+                            </div>
+                            <div class="cta-body">
+                                <div class="text-container">
+                                    <p>%2$s</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>',
         $cta_heading,
         $cta_body
