@@ -370,3 +370,388 @@ function get_taxonomy_archive_link( $taxonomy ) {
     $post_ids = $wpdb->get_col( $SQL );
     return $post_ids;
  }
+
+/**
+ * Shared provider-derived strings.
+ *
+ * Extracted verbatim from templates/single-physicians.php, which is the canonical
+ * runtime construction of these values. The GMB call sites
+ * (includes/class.fad-gmb-settings-page.php, templates/gmb-list-provider.php)
+ * build superficially similar strings from different sources -- they read the
+ * physician_prefix field rather than deriving "Dr." from the degree list, they
+ * use the raw clinical_title term name rather than the term's
+ * clinical_specialization_title override, and they have no resident special case
+ * or indefinite-article exception list. Migrating them onto these helpers would
+ * change GMB output, so they are deliberately left alone.
+ */
+
+// Construct the variants of a provider's name
+if ( !function_exists('uamswp_provider_names') ) {
+
+	/**
+	 * @param int $provider_id Provider post ID.
+	 * @return array short, medium, full, short_possessive, sort, sort_param, and _attr variants.
+	 */
+	function uamswp_provider_names( $provider_id ) {
+
+		$empty = array(
+			'full'                  => '',
+			'full_attr'             => '',
+			'medium'                => '',
+			'medium_attr'           => '',
+			'short'                 => '',
+			'short_attr'            => '',
+			'short_possessive'      => '',
+			'short_possessive_attr' => '',
+			'sort'                  => '',
+			'sort_param'            => '',
+		);
+
+		if ( !$provider_id ) {
+			return $empty;
+		}
+
+		// Get the elements of the provider's name
+
+			$first_name  = get_field( 'physician_first_name', $provider_id );
+			$middle_name = get_field( 'physician_middle_name', $provider_id );
+			$last_name   = get_field( 'physician_last_name', $provider_id );
+
+			// Generational suffix (e.g., Jr.)
+			$pedigree = get_field( 'physician_pedigree', $provider_id );
+
+			// Degrees and credentials (e.g., M.D., Ph.D.)
+			$degrees = get_field( 'physician_degree', $provider_id );
+
+			// Clean up degrees value
+
+				if (
+					$degrees
+					&&
+					is_array($degrees)
+				) {
+
+					$degrees = array_filter($degrees);
+					$degrees = array_unique($degrees);
+					$degrees = array_values($degrees);
+
+				}
+
+			$degree_count      = $degrees ? count($degrees) : 0;
+			$degree_list       = '';
+			$degree_attr_array = array();
+			$i = 1;
+
+			if ( $degrees ) {
+
+				foreach ( $degrees as $degree ) {
+
+					$degree_term = get_term( $degree, 'degree' );
+
+					if ( is_object($degree_term) ) {
+
+						$degree_name = $degree_term->name;
+						$degree_list .= $degree_name;
+						$degree_attr_array[] = uamswp_attr_conversion($degree_name);
+
+						if ( $degree_count > $i ) {
+
+							$degree_list .= ', ';
+
+						}
+
+						$i++;
+
+					}
+
+				} // endforeach
+
+			} // endif ( $degrees )
+
+			// Remove empty rows, remove duplicate rows, reindex
+
+				$degree_attr_array = array_filter($degree_attr_array);
+				$degree_attr_array = array_unique( $degree_attr_array, SORT_REGULAR );
+				$degree_attr_array = array_values($degree_attr_array);
+
+		// Set the "Dr." prefix
+
+			// Define list of degrees or credentials needed for the "Dr." prefix
+			// (per UAMS Health clinical administration)
+
+				$prefix_degrees = array(
+					'M.D.',
+					'D.O.'
+				);
+
+			$prefix = '';
+
+			if (
+				array_intersect(
+					$prefix_degrees, // The array with master values to check.
+					$degree_attr_array // Arrays to compare values against.
+				)
+			) {
+
+				$prefix = 'Dr.';
+
+			}
+
+		// Construct the variants of the provider's name
+
+			// Full name (e.g., "Leonard H. McCoy, M.D.")
+
+				$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+
+			// Medium name (e.g., "Dr. Leonard H. McCoy")
+
+				$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
+
+			// Short name (e.g., "Dr. McCoy")
+
+				$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
+
+			// Short name possessive (e.g., "Dr. McCoy's")
+
+				if ( substr($short_name, -1) == 's' ) {
+
+					// If the provider's name ends in "s", use an apostrophe with no "s"
+					$short_name_possessive = $short_name . '\'';
+
+				} else {
+
+					$short_name_possessive = $short_name . '\'s';
+
+				}
+
+			// Sort name (e.g., "McCoy, Leonard H.")
+
+				$sort_name = $last_name . ', ' . $first_name . ' ' . $middle_name;
+
+			// Sort name parameter (e.g., "mccoy-leonard-h")
+
+				$sort_name_param_value = sanitize_title_with_dashes($sort_name);
+
+		return array(
+			'full'                  => $full_name,
+			'full_attr'             => $full_name ? uamswp_attr_conversion($full_name) : '',
+			'medium'                => $medium_name,
+			'medium_attr'           => $medium_name ? uamswp_attr_conversion($medium_name) : '',
+			'short'                 => $short_name,
+			'short_attr'            => $short_name ? uamswp_attr_conversion($short_name) : '',
+			'short_possessive'      => $short_name_possessive,
+			'short_possessive_attr' => $short_name_possessive ? uamswp_attr_conversion($short_name_possessive) : '',
+			'sort'                  => $sort_name,
+			'sort_param'            => $sort_name_param_value,
+		);
+
+	}
+
+}
+
+// Get a provider's clinical occupation title
+if ( !function_exists('uamswp_provider_occupation_title') ) {
+
+	/**
+	 * Residents get a fixed title. Otherwise the clinical_title term's
+	 * clinical_specialization_title field wins, falling back to the term name.
+	 *
+	 * @param int $provider_id Provider post ID.
+	 * @return string Occupation title, or '' when none can be resolved.
+	 */
+	function uamswp_provider_occupation_title( $provider_id ) {
+
+		if ( !$provider_id ) {
+			return '';
+		}
+
+		$resident            = get_field( 'physician_resident', $provider_id );
+		$resident_title_name = 'Resident Physician';
+
+		$provider_occupation_title = '';
+
+		if ( $resident ) {
+
+			$provider_occupation_title = $resident_title_name;
+
+		} else {
+
+			// Clinical Specialty
+
+				$provider_specialty = get_field( 'physician_title', $provider_id );
+
+			// Clinical Occupation Title
+
+				if ( $provider_specialty ) {
+
+					$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+
+					if ( is_object($provider_specialty_term) ) {
+
+						// Get term name
+
+							$provider_specialty_name = $provider_specialty_term->name;
+
+						// Get occupational title field from term
+
+							$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+
+						// Set occupational title from term name as a fallback
+
+							if ( !$provider_occupation_title ) {
+
+								$provider_occupation_title = $provider_specialty_name;
+
+							}
+
+					}
+
+				}
+
+		}
+
+		return $provider_occupation_title ? $provider_occupation_title : '';
+
+	}
+
+}
+
+// Get a provider's pronouns
+if ( !function_exists('uamswp_provider_pronouns') ) {
+
+	/**
+	 * Derived from the required physician_gender radio (female|male|other).
+	 * "other" -- and an unexpectedly empty value -- map to the singular they,
+	 * which takes a plural verb ("they share", not "they shares"); callers that
+	 * build prose should branch on the 'plural' key for verb agreement.
+	 *
+	 * @param int $provider_id Provider post ID.
+	 * @return array subject, object, possessive, possessive_pronoun, reflexive, plural.
+	 */
+	function uamswp_provider_pronouns( $provider_id ) {
+
+		$gender = $provider_id ? get_field( 'physician_gender', $provider_id ) : '';
+
+		switch ( $gender ) {
+
+			case 'female':
+				$pronouns = array(
+					'subject'            => 'she',
+					'object'             => 'her',
+					'possessive'         => 'her',
+					'possessive_pronoun' => 'hers',
+					'reflexive'          => 'herself',
+					'plural'             => false,
+				);
+				break;
+
+			case 'male':
+				$pronouns = array(
+					'subject'            => 'he',
+					'object'             => 'him',
+					'possessive'         => 'his',
+					'possessive_pronoun' => 'his',
+					'reflexive'          => 'himself',
+					'plural'             => false,
+				);
+				break;
+
+			// 'other', and any unexpected or empty value, use the singular they
+			default:
+				$pronouns = array(
+					'subject'            => 'they',
+					'object'             => 'them',
+					'possessive'         => 'their',
+					'possessive_pronoun' => 'theirs',
+					'reflexive'          => 'themselves',
+					'plural'             => true,
+				);
+				break;
+
+		}
+
+		return $pronouns;
+
+	}
+
+}
+
+// Define the indefinite article to precede a phrase (a or an)
+if ( !function_exists('uamswp_indefinite_article') ) {
+
+	/**
+	 * Vowel-based, with an exception list for phrases whose written first letter
+	 * disagrees with its spoken sound.
+	 *
+	 * @param string $phrase Phrase the article will precede (e.g. a clinical title).
+	 * @return string 'a' or 'an'.
+	 */
+	function uamswp_indefinite_article( $phrase ) {
+
+		// Guard the empty string: reading offset [0] of '' raises a PHP 8 warning.
+		// single-physicians.php never hits this because it always has a title.
+		if ( !$phrase ) {
+			return 'a';
+		}
+
+		if (
+			in_array(
+				strtolower($phrase)[0],
+				array( 'a', 'e', 'i', 'o', 'u' )
+			)
+		) {
+
+			// If the phrase starts with a vowel, use "an"
+			$indef_article = 'an';
+
+		} else {
+
+			// If the phrase does not start with a vowel, use "a"
+			$indef_article = 'a';
+
+		}
+
+		// Define a list of exceptions to the vowel-based determination.
+
+			/**
+			 * - Use "a" before consonant sounds: a historic event, a one-year term.
+			 * - Use "an" before vowel sounds: an honor, an NBA record.
+			 * - Write the key as the characters at the beginning of the exception. It can be a complete or incomplete title.
+			 * - Write the value as the indefinite article to use in that case ('a' or 'an').
+			 */
+
+			$indef_article_exceptions = apply_filters(
+				'uamswp_indefinite_article_exceptions',
+				array(
+					'SNF'     => 'an',
+					'Urolog'  => 'a',
+					'Uveitis' => 'a'
+				)
+			);
+
+			if ( !empty($indef_article_exceptions) ) {
+
+				foreach( $indef_article_exceptions as $exception => $article ) {
+
+					if (
+						substr(
+							strtolower($phrase),
+							0,
+							strlen($exception)
+						) == strtolower($exception)
+					) {
+
+						// If the phrase begins with the exception key, use the key's value
+						$indef_article = $article;
+
+					}
+
+				}
+
+			}
+
+		return $indef_article;
+
+	}
+
+}
