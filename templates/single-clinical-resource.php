@@ -667,8 +667,7 @@ function uamswp_resource_provider_spotlight() {
             $portrait_id = get_post_thumbnail_id( $provider_id );
 
             if ( $portrait_id ) {
-                $portrait_alt = get_post_meta( $portrait_id, '_wp_attachment_image_alt', true );
-                $portrait_alt = $portrait_alt ? $portrait_alt : $medium_name_attr;
+                $portrait_alt = $medium_name_attr;
                 ?>
                 <figure class="alignright">
                     <?php echo wp_get_attachment_image( $portrait_id, 'content-image-side', false, array( 'alt' => $portrait_alt, 'itemprop' => 'image' ) ); ?>
