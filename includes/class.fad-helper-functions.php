@@ -894,9 +894,12 @@ if ( !function_exists('uamswp_spotlight_appointment_cta') ) {
 
 		$names = uamswp_provider_names( $provider_id );
 
-		$medium_name      = $names['medium'];
 		$medium_name_attr = $names['medium_attr'];
-		$short_possessive = $names['short_possessive'];
+
+		// Escaped for HTML text context. The name variants come from plain-text
+		// ACF fields with no kses filtering, so they must not be echoed raw.
+		$medium_name      = uamswp_provider_name_html( $names['medium'] );
+		$short_possessive = uamswp_provider_name_html( $names['short_possessive'] );
 
 		$provider_url = get_permalink( $provider_id );
 
@@ -978,7 +981,7 @@ if ( !function_exists('uamswp_spotlight_appointment_cta') ) {
 					'Get to know %1$s, %2$s %3$s at UAMS Health, and %4$s to learn more.',
 					$medium_name,
 					uamswp_indefinite_article( $title ),
-					$title,
+					esc_html( $title ),
 					$profile_link
 				);
 
