@@ -619,13 +619,15 @@ function uamswp_resource_appointment() {
 /**
  * Provider Spotlight
  *
- * Introduction, the provider's portrait, the Q&A, optional closing content, and
- * a generated call to action. Renders nothing for any other resource type.
+ * The introduction followed by the Q&A block, which floats the provider's
+ * portrait as its first child. Renders nothing for any other resource type. The
+ * call to action is not rendered here; it renders in the site appointment slot
+ * via uamswp_resource_appointment() (see the note at the end of this function).
  *
  * Heading levels run h1 (post title) -> h2 (section) -> h3 (question), with no
- * level skipped. Each section is named by its own heading through
- * aria-labelledby. The portrait identifies the provider, so its alt text is the
- * provider's name rather than being marked decorative.
+ * level skipped; the intro and Q&A h2s are screen-reader-only. The portrait
+ * identifies the provider, so its alt text is the provider's name rather than
+ * being marked decorative.
  *
  * Structured data stays at parity with the other resource types: the inherited
  * Genesis entry microdata and itemprop="image" on the portrait, and nothing
