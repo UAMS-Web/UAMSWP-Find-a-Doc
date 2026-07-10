@@ -734,16 +734,12 @@ function uamswp_resource_provider_spotlight() {
 
     }
 
+    // This module sits inside the entry content, not in genesis_after_entry
+    // like the site-wide appointment module, so it takes no grid wrapper.
     $cta = sprintf(
-        '<section class="uams-module cta-bar cta-bar-1 bg-auto provider-spotlight-cta" aria-labelledby="spotlight-cta-title">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h2 id="spotlight-cta-title">%1$s</h2>
-                        <p>%2$s</p>
-                    </div>
-                </div>
-            </div>
+        '<section class="uams-module cta-bar provider-spotlight-cta" aria-labelledby="spotlight-cta-title">
+            <h2 id="spotlight-cta-title">%1$s</h2>
+            <p>%2$s</p>
         </section>',
         $cta_heading,
         $cta_body
