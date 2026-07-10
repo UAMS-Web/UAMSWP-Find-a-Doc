@@ -659,8 +659,8 @@ function uamswp_resource_provider_spotlight() {
     // and floats via the theme's .alignright.
     if ( have_rows('clinical_resource_spotlight_qa') ) {
         ?>
+        <h2 class="sr-only">Questions and Answers</h2>
         <div class="rule-top d-flow-root">
-            <h2 class="sr-only">Questions and Answers</h2>
             <?php
             // Portrait: the provider's standard 3:4 headshot, sized for a
             // right-aligned content image
