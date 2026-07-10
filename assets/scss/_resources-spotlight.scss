@@ -38,14 +38,6 @@
     .provider-spotlight-qa {
         clear: both; // clear the floated portrait
 
-        h3 {
-            margin-top: ($font-size-base * 1.5);
-
-            &:first-of-type {
-                margin-top: 0;
-            }
-        }
-
         .answer {
             margin-bottom: $font-size-base;
 
@@ -53,14 +45,5 @@
                 margin-bottom: 0;
             }
         }
-    }
-
-    .provider-spotlight-closing {
-        clear: both;
-        margin-top: $font-size-base;
-    }
-
-    .provider-spotlight-cta {
-        clear: both;
     }
 }
