@@ -5144,10 +5144,17 @@
 			// Provider Spotlight
 			$spotlight_provider = (int) get_field( 'clinical_resource_spotlight_provider', $postId );
 
+			// Require the featured provider to still be published. The
+			// post_object query filter only restricts the admin dropdown at
+			// selection time; the provider can be unpublished, made private, or
+			// trashed afterward, and its title/slug/link must not leak through
+			// this public REST field once it is no longer public.
 			if (
 				'provider_spotlight' == $resource_type_value
 				&&
 				$spotlight_provider
+				&&
+				'publish' === get_post_status( $spotlight_provider )
 			) {
 
 				$data['clinical_resource_spotlight_provider']['id'] = $spotlight_provider;

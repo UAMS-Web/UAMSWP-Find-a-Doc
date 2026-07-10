@@ -371,6 +371,31 @@ function get_taxonomy_archive_link( $taxonomy ) {
     return $post_ids;
  }
 
+// Escape a provider name variant for an HTML text context
+if ( !function_exists('uamswp_provider_name_html') ) {
+
+	/**
+	 * The name variants returned by uamswp_provider_names() are built by
+	 * concatenating plain-text ACF fields (physician_first_name, _last_name,
+	 * _pedigree, ...). Those fields receive no kses filtering on save, so a name
+	 * containing markup persists verbatim and would execute if echoed raw. Escape
+	 * it here for any text or heading context.
+	 *
+	 * The short, possessive, and full variants embed a literal non-breaking-space
+	 * entity between a prefix or pedigree and the surname; esc_html() would turn
+	 * that into a visible "&amp;nbsp;", so restore it after escaping.
+	 *
+	 * @param  string  $name  A provider name variant.
+	 * @return string Escaped for HTML text output, with &nbsp; preserved.
+	 */
+	function uamswp_provider_name_html( $name ) {
+
+		return str_replace( '&amp;nbsp;', '&nbsp;', esc_html( (string) $name ) );
+
+	}
+
+}
+
 /**
  * Shared provider-derived strings.
  *
@@ -389,7 +414,7 @@ function get_taxonomy_archive_link( $taxonomy ) {
 if ( !function_exists('uamswp_provider_names') ) {
 
 	/**
-	 * @param int $provider_id Provider post ID.
+	 * @param  int  $provider_id  Provider post ID.
 	 * @return array short, medium, full, short_possessive, sort, sort_param, and _attr variants.
 	 */
 	function uamswp_provider_names( $provider_id ) {
@@ -556,7 +581,7 @@ if ( !function_exists('uamswp_provider_occupation_title') ) {
 	 * Residents get a fixed title. Otherwise the clinical_title term's
 	 * clinical_specialization_title field wins, falling back to the term name.
 	 *
-	 * @param int $provider_id Provider post ID.
+	 * @param  int  $provider_id  Provider post ID.
 	 * @return string Occupation title, or '' when none can be resolved.
 	 */
 	function uamswp_provider_occupation_title( $provider_id ) {
@@ -625,7 +650,7 @@ if ( !function_exists('uamswp_provider_pronouns') ) {
 	 * which takes a plural verb ("they share", not "they shares"); callers that
 	 * build prose should branch on the 'plural' key for verb agreement.
 	 *
-	 * @param int $provider_id Provider post ID.
+	 * @param  int  $provider_id  Provider post ID.
 	 * @return array subject, object, possessive, possessive_pronoun, reflexive, plural.
 	 */
 	function uamswp_provider_pronouns( $provider_id ) {
@@ -688,7 +713,7 @@ if ( !function_exists('uamswp_spotlight_default_excerpt') ) {
 	 * Deliberately pronoun-free, so it is safe for any provider. Plain text,
 	 * 160 characters or fewer, matching the field's own maxlength.
 	 *
-	 * @param int $provider_id Provider post ID.
+	 * @param  int  $provider_id  Provider post ID.
 	 * @return string
 	 */
 	function uamswp_spotlight_default_excerpt( $provider_id ) {
@@ -705,7 +730,9 @@ if ( !function_exists('uamswp_spotlight_default_excerpt') ) {
 		// The name variants carry a non-breaking space; the excerpt is plain text
 		$name = $names['medium_attr'];
 
-		if ( !$name ) {
+		// Guard the trimmed value: the name is concatenated, so an all-empty
+		// provider (e.g. deleted post) yields spaces rather than an empty string.
+		if ( trim( $name ) === '' ) {
 
 			return '';
 
@@ -730,6 +757,10 @@ if ( !function_exists('uamswp_spotlight_default_excerpt') ) {
 
 		$excerpt = apply_filters( 'uamswp_spotlight_default_excerpt', $excerpt, $provider_id, $names, $title );
 
+		// Neutralize any markup a provider name might carry: the excerpt is stored
+		// in post_excerpt and echoed as plain text in resource cards.
+		$excerpt = wp_strip_all_tags( $excerpt );
+
 		// Match the truncation used by custom_excerpt_acf()
 		$excerpt = strlen($excerpt) > 160 ? mb_strimwidth($excerpt, 0, 156, '...') : $excerpt;
 
@@ -750,7 +781,7 @@ if ( !function_exists('uamswp_spotlight_default_intro') ) {
 	 * The provider's name is the subject of the second sentence, so it takes a
 	 * singular verb regardless of pronouns; only the possessive pronoun varies.
 	 *
-	 * @param int $provider_id Provider post ID.
+	 * @param  int  $provider_id  Provider post ID.
 	 * @return string HTML.
 	 */
 	function uamswp_spotlight_default_intro( $provider_id ) {
@@ -765,26 +796,34 @@ if ( !function_exists('uamswp_spotlight_default_intro') ) {
 		$title    = uamswp_provider_occupation_title( $provider_id );
 		$pronouns = uamswp_provider_pronouns( $provider_id );
 
-		if ( !$names['medium'] ) {
+		// Guard the trimmed value: the medium variant is built by concatenation,
+		// so a provider with every name part empty (e.g. deleted post) yields a
+		// string of spaces, not an empty string.
+		if ( trim( $names['medium'] ) === '' ) {
 
 			return '';
 
 		}
 
+		// Escape the name and title parts: they come from plain-text ACF fields
+		// and taxonomy term names, none kses-filtered, and land in an HTML string.
+		$medium_html = uamswp_provider_name_html( $names['medium'] );
+		$short_html  = uamswp_provider_name_html( $names['short'] );
+
 		if ( $title ) {
 
 			$opening = sprintf(
 				'Get to know %1$s, %2$s %3$s at UAMS Health.',
-				$names['medium'],
+				$medium_html,
 				uamswp_indefinite_article( $title ),
-				$title
+				esc_html( $title )
 			);
 
 		} else {
 
 			$opening = sprintf(
 				'Get to know %1$s of UAMS Health.',
-				$names['medium']
+				$medium_html
 			);
 
 		}
@@ -792,7 +831,7 @@ if ( !function_exists('uamswp_spotlight_default_intro') ) {
 		$intro = sprintf(
 			'<p>%1$s In the Q&amp;A below, %2$s shares what inspired %3$s work in healthcare, %3$s life outside of medicine, and more.</p>',
 			$opening,
-			$names['short'],
+			$short_html,
 			$pronouns['possessive']
 		);
 
@@ -837,7 +876,7 @@ if ( !function_exists('uamswp_indefinite_article') ) {
 	 * Vowel-based, with an exception list for phrases whose written first letter
 	 * disagrees with its spoken sound.
 	 *
-	 * @param string $phrase Phrase the article will precede (e.g. a clinical title).
+	 * @param  string  $phrase  Phrase the article will precede (e.g. a clinical title).
 	 * @return string 'a' or 'an'.
 	 */
 	function uamswp_indefinite_article( $phrase ) {

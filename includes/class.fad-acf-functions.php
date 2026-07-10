@@ -2239,7 +2239,9 @@
 			// so start from the database instead -- starting from an empty array
 			// would wipe the editor's providers.
 
-				if ( array_key_exists( 'field_clinical_resource_providers', $_POST['acf'] ) ) {
+				$field_submitted = array_key_exists( 'field_clinical_resource_providers', $_POST['acf'] );
+
+				if ( $field_submitted ) {
 
 					$providers = uamswp_spotlight_to_ids( $_POST['acf']['field_clinical_resource_providers'] );
 
@@ -2252,9 +2254,16 @@
 				$original = $providers;
 
 			// Drop the previously featured provider when it is being replaced,
-			// or when this resource is no longer a spotlight
+			// or when this resource is no longer a spotlight -- but only when the
+			// Related Providers field was NOT submitted. When it was, its value is
+			// the editor's explicit intent: a provider they kept there survives,
+			// even if it was the one previously featured. The bidirectional pass
+			// still subtracts any provider the editor actually removed, since it
+			// will simply be absent from the submitted set.
 
 				if (
+					!$field_submitted
+					&&
 					$old_provider
 					&&
 					(
@@ -2564,5 +2573,45 @@
 				uamswp_spotlight_release_link( (int) $post->ID, $provider_id );
 
 			}
+
+		}
+
+	// Release the provider association when a spotlight is deleted
+	//
+	// transition_post_status does not fire on a permanent delete, so a site with
+	// the trash disabled (EMPTY_TRASH_DAYS === 0), or any direct
+	// wp_delete_post( $id, true ), would leave the spotlight dangling in the
+	// provider's Related Clinical Resources. before_delete_post runs while the
+	// post and its meta still exist, so the featured provider is still readable.
+
+		add_action( 'before_delete_post', 'uamswp_spotlight_delete_sync' );
+
+		function uamswp_spotlight_delete_sync( $post_id ) {
+
+			if (
+				!is_numeric( $post_id )
+				||
+				'clinical-resource' !== get_post_type( $post_id )
+			) {
+
+				return;
+
+			}
+
+			if ( 'provider_spotlight' !== uamswp_spotlight_stored_type( $post_id ) ) {
+
+				return;
+
+			}
+
+			$provider_id = (int) get_field( 'clinical_resource_spotlight_provider', $post_id );
+
+			if ( !$provider_id ) {
+
+				return;
+
+			}
+
+			uamswp_spotlight_release_link( (int) $post_id, $provider_id );
 
 		}

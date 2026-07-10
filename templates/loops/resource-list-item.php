@@ -33,7 +33,7 @@
 ?>
 <li class="item">
     <div class="text-container">
-        <h3 class="h5"><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>"><?php echo $resource_title; ?></a> <span class="subtitle"><span class="sr-only">(</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span></h3>
+        <h3 class="h5"><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>"><?php echo esc_html($resource_title); ?></a> <span class="subtitle"><span class="sr-only">(</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span></h3>
         <p><?php echo $resource_excerpt; ?></p>
     </div>
 </li>
