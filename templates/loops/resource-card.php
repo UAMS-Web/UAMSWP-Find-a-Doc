@@ -182,7 +182,7 @@
             <div class="item">
                 <div class="row">
                     <div class="col image">
-                        <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Photo" data-itemtitle="<?php echo $resource_title_attr; ?>">
+                        <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>" data-categorytitle="Photo" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>">
                             <picture>
                                 <?php if ( has_post_thumbnail() && function_exists( 'bis_get_attachment_image' ) ) { ?>
                                     <source srcset="<?php echo image_sizer($resource_image_square, 243, 243, 'center', 'center', 'aspect-1-1'); ?>"
@@ -213,13 +213,13 @@
                         <div class="row">
                             <div class="col-12 primary">
                                 <h3 class="h4">
-                                    <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $resource_title_attr; ?>">
-                                        <span class="name"><?php echo $resource_title; ?></span>
+                                    <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>" data-categorytitle="Name" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>">
+                                        <span class="name"><?php echo esc_html($resource_title); ?></span>
                                     </a>
                                     <span class="subtitle"><span class="sr-only"> (</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span>
                                 </h3>
                                 <p><?php echo $resource_excerpt; ?></p>
-                                <a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_button_text; ?></a>
+                                <a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>"><?php echo $resource_button_text; ?></a>
                             </div>
                             <div class="col-12 secondary">
 								<h4 class="h5">Related Content</h4>
@@ -249,7 +249,7 @@
                                                         $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                         $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
 
-                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
+                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . esc_attr($resource_title_attr) . '">' . $associate_title . '</a>';
                                                         $resource_i++;
                                                         if (
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
@@ -292,7 +292,7 @@
                                                         $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                         $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
 
-                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
+                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . esc_attr($resource_title_attr) . '">' . $associate_title . '</a>';
                                                         $resource_i++;
                                                         if (
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
@@ -335,7 +335,7 @@
                                                         $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                         $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
 
-                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
+                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . esc_attr($resource_title_attr) . '">' . $associate_title . '</a>';
                                                         $resource_i++;
                                                         if (
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
@@ -378,7 +378,7 @@
                                                         $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                         $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
 
-                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
+                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . esc_attr($resource_title_attr) . '">' . $associate_title . '</a>';
                                                         $resource_i++;
                                                         if (
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
@@ -421,7 +421,7 @@
                                                         $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                         $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
 
-                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
+                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . esc_attr($resource_title_attr) . '">' . $associate_title . '</a>';
                                                         $resource_i++;
                                                         if (
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
@@ -447,7 +447,7 @@
                                         $associates = '';
                                     ?>
                                 </dl>
-								<a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_button_text; ?></a>
+								<a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>"><?php echo $resource_button_text; ?></a>
 							</div>
                         </div>
                     </div>
@@ -482,9 +482,9 @@
                     </picture>
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title h5"><?php echo $resource_title; ?> <span class="subtitle"><span class="sr-only">(</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span></h3>
+                    <h3 class="card-title h5"><?php echo esc_html($resource_title); ?> <span class="subtitle"><span class="sr-only">(</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span></h3>
                     <p class="card-text"><?php echo $resource_excerpt; ?></p>
-                    <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $resource_label; ?>" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_button_text; ?></a>
+                    <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo esc_attr($resource_label); ?>" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>"><?php echo $resource_button_text; ?></a>
                 </div>
             </div>
         </div>

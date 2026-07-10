@@ -119,6 +119,14 @@ $resource_type_label = $resource_type['label'];
 $is_provider_spotlight = ( 'provider_spotlight' == $resource_type_value );
 $spotlight_provider = $is_provider_spotlight ? (int) get_field('clinical_resource_spotlight_provider') : 0;
 
+// Require the featured provider to still be published. A provider can be
+// unpublished, trashed, or deleted after selection, which would otherwise
+// render a spotlight with a dead profile link and, when the provider is gone,
+// name-less generated prose. Suppress the spotlight body in that case.
+if ( $spotlight_provider && 'publish' !== get_post_status( $spotlight_provider ) ) {
+    $spotlight_provider = 0;
+}
+
 // Check if Conditions section should be displayed
 // load all 'conditions' terms for the post
 $conditions_cpt = get_field('clinical_resource_conditions');
@@ -636,10 +644,13 @@ function uamswp_resource_provider_spotlight() {
     // Provider-derived strings, resolved once
     $names = uamswp_provider_names( $provider_id );
 
-    $medium_name      = $names['medium'];
     $medium_name_attr = $names['medium_attr'];
-    $short_name       = $names['short'];
-    $short_possessive = $names['short_possessive'];
+
+    // Escaped for HTML text context. The name parts come from plain-text ACF
+    // fields with no kses filtering, so they must not be echoed raw.
+    $medium_name      = uamswp_provider_name_html( $names['medium'] );
+    $short_name       = uamswp_provider_name_html( $names['short'] );
+    $short_possessive = uamswp_provider_name_html( $names['short_possessive'] );
 
     // Introduction, falling back to generated prose
     $intro = get_field('clinical_resource_spotlight_intro');
