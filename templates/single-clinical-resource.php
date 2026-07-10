@@ -696,7 +696,7 @@ function uamswp_resource_provider_spotlight() {
                                 continue;
                             }
                             ?>
-                            <h3><?php echo esc_html($question); ?></h3>
+                            <h3 class="module-inner-title"><?php echo esc_html($question); ?></h3>
                             <div class="answer"><?php echo $answer; ?></div>
                             <?php
                         endwhile;
