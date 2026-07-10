@@ -80,13 +80,20 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
     function uamswp_resource_post_title() {
         global $resource_archive_title;
+        global $resource_type_label;
+        global $is_provider_spotlight;
+
+        // A Provider Spotlight names itself in the supertitle
+        $supertitle = $is_provider_spotlight ? $resource_type_label : $resource_archive_title;
+
         echo '<h1 class="entry-title" itemprop="headline">';
-        echo '<span class="supertitle">'. $resource_archive_title . '</span><span class="sr-only">:</span> ';
+        echo '<span class="supertitle">'. $supertitle . '</span><span class="sr-only">:</span> ';
         echo get_the_title();
         echo '</h1>';
     }
 
 add_action( 'genesis_entry_content', 'uamswp_resource_text', 8 );
+add_action( 'genesis_entry_content', 'uamswp_resource_provider_spotlight', 9 );
 add_action( 'genesis_entry_content', 'uamswp_resource_infographic', 10 );
 add_action( 'genesis_entry_content', 'uamswp_resource_video', 12 );
 add_action( 'genesis_entry_content', 'uamswp_resource_document', 14 );
@@ -107,6 +114,10 @@ $jump_link_count = 0;
 $resource_type = get_field('clinical_resource_type');
 $resource_type_value = $resource_type['value'];
 $resource_type_label = $resource_type['label'];
+
+// Provider Spotlight
+$is_provider_spotlight = ( 'provider_spotlight' == $resource_type_value );
+$spotlight_provider = $is_provider_spotlight ? (int) get_field('clinical_resource_spotlight_provider') : 0;
 
 // Check if Conditions section should be displayed
 // load all 'conditions' terms for the post
@@ -238,6 +249,30 @@ if( $resources && $resource_query->have_posts() ) {
 // It should always be displayed.
 $show_appointment_section = true;
 $jump_link_count++;
+
+// Suppress every "Related *" section on a Provider Spotlight
+//
+// A spotlight is a self-contained feature about one provider: its own
+// call to action carries the only outbound link, and a one-card grid of the
+// page's own subject would be redundant. This is presentation only. The
+// relationship fields stay editable, and the featured provider is still
+// mirrored into clinical_resource_providers, so Ajax Search Pro and FacetWP
+// continue to index this resource under that provider.
+//
+// The generic "Make an Appointment" module is not a "Related" section and is
+// kept. With everything else gone the jump-link count falls to one, below the
+// minimum, so the jump-link nav hides itself; each section function is also
+// guarded on its own flag.
+if ( $is_provider_spotlight ) {
+    $show_conditions_section       = false;
+    $show_treatments_section       = false;
+    $show_providers_section        = false;
+    $show_locations_section        = false;
+    $show_aoe_section              = false;
+    $show_related_resource_section = false;
+
+    $jump_link_count = 1; // the appointment module only
+}
 
 // Check if Jump Links section should be displayed
 if ( $jump_link_count >= $jump_link_count_min ) {
@@ -561,5 +596,159 @@ function uamswp_resource_appointment() {
             </div>
         </section>
     <?php }
+}
+
+/**
+ * Provider Spotlight
+ *
+ * Introduction, the provider's portrait, the Q&A, optional closing content, and
+ * a generated call to action. Renders nothing for any other resource type.
+ *
+ * Heading levels run h1 (post title) -> h2 (section) -> h3 (question), with no
+ * level skipped. Each section is named by its own heading through
+ * aria-labelledby. The portrait identifies the provider, so its alt text is the
+ * provider's name rather than being marked decorative.
+ *
+ * Structured data stays at parity with the other resource types: the inherited
+ * Genesis entry microdata and itemprop="image" on the portrait, and nothing
+ * more. No JSON-LD, and no about/mainEntity link to the provider.
+ */
+function uamswp_resource_provider_spotlight() {
+    global $is_provider_spotlight;
+    global $spotlight_provider;
+
+    if ( !$is_provider_spotlight || !$spotlight_provider ) {
+        return;
+    }
+
+    $provider_id = $spotlight_provider;
+
+    // Provider-derived strings, resolved once
+    $names = uamswp_provider_names( $provider_id );
+
+    $medium_name      = $names['medium'];
+    $medium_name_attr = $names['medium_attr'];
+    $short_name       = $names['short'];
+    $short_possessive = $names['short_possessive'];
+
+    // Introduction, falling back to generated prose
+    $intro = get_field('clinical_resource_spotlight_intro');
+
+    if ( !$intro ) {
+        $intro = uamswp_spotlight_default_intro( $provider_id );
+    }
+
+    if ( $intro ) {
+        echo '<div class="provider-spotlight-intro">' . $intro . '</div>';
+    }
+
+    // Portrait: the provider's standard 3:4 headshot, not the wide portrait
+    $portrait_id = get_post_thumbnail_id( $provider_id );
+
+    if ( $portrait_id ) {
+        $portrait_alt = get_post_meta( $portrait_id, '_wp_attachment_image_alt', true );
+        $portrait_alt = $portrait_alt ? $portrait_alt : $medium_name_attr;
+        ?>
+        <figure class="provider-spotlight-portrait">
+            <picture>
+            <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
+                <source srcset="<?php echo image_sizer($portrait_id, 389, 519, 'center', 'center', 'portrait-3-4'); ?>"
+                    media="(min-width: 768px)">
+                <source srcset="<?php echo image_sizer($portrait_id, 306, 408, 'center', 'center', 'portrait-3-4'); ?>"
+                    media="(min-width: 1px)">
+                <img src="<?php echo image_sizer($portrait_id, 778, 1038, 'center', 'center', 'portrait-3-4'); ?>" alt="<?php echo esc_attr($portrait_alt); ?>" itemprop="image" />
+            <?php } else {
+                echo wp_get_attachment_image( $portrait_id, 'large', false, array( 'alt' => $portrait_alt, 'itemprop' => 'image' ) );
+            } // endif ?>
+            </picture>
+        </figure>
+        <?php
+    }
+
+    // Questions and answers
+    if ( have_rows('clinical_resource_spotlight_qa') ) {
+        ?>
+        <section class="uams-module provider-spotlight-qa" aria-labelledby="spotlight-qa-title">
+            <h2 id="spotlight-qa-title" class="module-title">
+                <span class="title">Getting to Know <?php echo $short_name; ?></span>
+            </h2>
+            <?php
+            while ( have_rows('clinical_resource_spotlight_qa') ) : the_row();
+                $question = get_sub_field('spotlight_qa_question');
+                $answer   = get_sub_field('spotlight_qa_answer');
+
+                if ( !$question ) {
+                    continue;
+                }
+                ?>
+                <h3><?php echo esc_html($question); ?></h3>
+                <div class="answer"><?php echo $answer; ?></div>
+                <?php
+            endwhile;
+            ?>
+        </section>
+        <?php
+    }
+
+    // Closing content
+    $closing = get_field('clinical_resource_spotlight_closing');
+
+    if ( $closing ) {
+        echo '<div class="provider-spotlight-closing">' . $closing . '</div>';
+    }
+
+    // Call to action
+    //
+    // Always invites the reader to the provider's profile. When an appointment
+    // phone number is set, a call-to-schedule action is blended into the same
+    // module. The tel: link stays plain, with no itemprop, to hold the
+    // no-net-new-schema decision.
+    $provider_url = get_permalink( $provider_id );
+    $phone        = get_field('clinical_resource_spotlight_phone');
+
+    // Strip the display formatting for the href, keep it for the label
+    $phone_href = $phone ? preg_replace( '/[^0-9+]/', '', $phone ) : '';
+
+    if ( $phone && $phone_href ) {
+
+        $cta_heading = 'Schedule an Appointment';
+        $cta_body    = sprintf(
+            'Ready to schedule an appointment with <a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s</a>? Call <a href="tel:%4$s" class="no-break" data-itemtitle="Call to schedule with %2$s">%5$s</a> to make an appointment, or visit <a href="%1$s" data-itemtitle="Learn more about %2$s">%6$s profile</a> to learn more.',
+            esc_url( $provider_url ),
+            esc_attr( $medium_name_attr ),
+            $medium_name,
+            esc_attr( $phone_href ),
+            esc_html( $phone ),
+            $short_possessive
+        );
+
+    } else {
+
+        $cta_heading = 'Learn More';
+        $cta_body    = sprintf(
+            'Learn more about <a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s</a>.',
+            esc_url( $provider_url ),
+            esc_attr( $medium_name_attr ),
+            $medium_name
+        );
+
+    }
+
+    $cta = sprintf(
+        '<section class="uams-module cta-bar cta-bar-1 bg-auto provider-spotlight-cta" aria-labelledby="spotlight-cta-title">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2 id="spotlight-cta-title">%1$s</h2>
+                        <p>%2$s</p>
+                    </div>
+                </div>
+            </div>
+        </section>',
+        $cta_heading,
+        $cta_body
+    );
+
+    echo apply_filters( 'uamswp_spotlight_cta', $cta, $provider_id, $phone, $names );
 }
 genesis();

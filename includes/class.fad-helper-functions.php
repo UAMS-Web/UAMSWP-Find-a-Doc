@@ -739,6 +739,69 @@ if ( !function_exists('uamswp_spotlight_default_excerpt') ) {
 
 }
 
+// The generated introduction for a Provider Spotlight
+if ( !function_exists('uamswp_spotlight_default_intro') ) {
+
+	/**
+	 * Used when an editor leaves the Introduction blank. Built at render time
+	 * rather than persisted on save, so it always reflects the provider's
+	 * current name and clinical title.
+	 *
+	 * The provider's name is the subject of the second sentence, so it takes a
+	 * singular verb regardless of pronouns; only the possessive pronoun varies.
+	 *
+	 * @param int $provider_id Provider post ID.
+	 * @return string HTML.
+	 */
+	function uamswp_spotlight_default_intro( $provider_id ) {
+
+		if ( !$provider_id ) {
+
+			return '';
+
+		}
+
+		$names    = uamswp_provider_names( $provider_id );
+		$title    = uamswp_provider_occupation_title( $provider_id );
+		$pronouns = uamswp_provider_pronouns( $provider_id );
+
+		if ( !$names['medium'] ) {
+
+			return '';
+
+		}
+
+		if ( $title ) {
+
+			$opening = sprintf(
+				'Get to know %1$s, %2$s %3$s at UAMS Health.',
+				$names['medium'],
+				uamswp_indefinite_article( $title ),
+				$title
+			);
+
+		} else {
+
+			$opening = sprintf(
+				'Get to know %1$s of UAMS Health.',
+				$names['medium']
+			);
+
+		}
+
+		$intro = sprintf(
+			'<p>%1$s In the Q&amp;A below, %2$s shares what inspired %3$s work in healthcare, %3$s life outside of medicine, and more.</p>',
+			$opening,
+			$names['short'],
+			$pronouns['possessive']
+		);
+
+		return apply_filters( 'uamswp_spotlight_intro', $intro, $provider_id, $names, $title, $pronouns );
+
+	}
+
+}
+
 // The default set of Provider Spotlight questions
 if ( !function_exists('uamswp_spotlight_default_questions') ) {
 
