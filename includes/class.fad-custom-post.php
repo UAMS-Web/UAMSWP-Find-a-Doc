@@ -5160,7 +5160,6 @@
 				$spotlight_intro = get_field( 'clinical_resource_spotlight_intro', $postId );
 				$data['clinical_resource_spotlight_intro'] = $spotlight_intro ? $spotlight_intro : uamswp_spotlight_default_intro( $spotlight_provider );
 
-				$data['clinical_resource_spotlight_closing'] = get_field( 'clinical_resource_spotlight_closing', $postId );
 				$data['clinical_resource_spotlight_image_wide'] = get_field( 'clinical_resource_spotlight_image_wide', $postId );
 				$data['clinical_resource_spotlight_phone'] = get_field( 'clinical_resource_spotlight_phone', $postId );
 

@@ -780,33 +780,6 @@
 			]
 		},
 		{
-			"key": "field_clinical_resource_spotlight_closing",
-			"label": "Closing Content",
-			"name": "clinical_resource_spotlight_closing",
-			"type": "wysiwyg",
-			"instructions": "Optional. This will follow the questions and answers, before the call to action.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_clinical_resource_type",
-						"operator": "==",
-						"value": "provider_spotlight"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "basic",
-			"media_upload": 0,
-			"delay": 1
-		},
-		{
 			"key": "field_clinical_resource_spotlight_image_wide",
 			"label": "Featured Image Override",
 			"name": "clinical_resource_spotlight_image_wide",

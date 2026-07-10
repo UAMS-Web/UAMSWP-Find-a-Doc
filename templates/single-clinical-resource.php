@@ -708,13 +708,6 @@ function uamswp_resource_provider_spotlight() {
         <?php
     }
 
-    // Closing content
-    $closing = get_field('clinical_resource_spotlight_closing');
-
-    if ( $closing ) {
-        echo '<div class="provider-spotlight-closing">' . $closing . '</div>';
-    }
-
     // The provider-specific call to action is not rendered here. It renders in
     // the site appointment slot (#appointment-info) via
     // uamswp_resource_appointment(), replacing the generic "Make an Appointment"
