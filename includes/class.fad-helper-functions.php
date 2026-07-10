@@ -830,6 +830,83 @@ if ( !function_exists('uamswp_spotlight_default_questions') ) {
 
 }
 
+// The provider-specific appointment CTA for a Provider Spotlight
+if ( !function_exists('uamswp_spotlight_appointment_cta') ) {
+
+	/**
+	 * Builds the Provider Spotlight call-to-action band. On a spotlight clinical
+	 * resource this renders in the site appointment slot (#appointment-info) in
+	 * place of the generic "Make an Appointment" module, so it mirrors that
+	 * module's markup (cta-bar cta-bar-1 bg-auto) and carries the same
+	 * data-itemtitle attributes on its links.
+	 *
+	 * Always links to the provider's profile. When a scheduling phone number is
+	 * set on the clinical resource, a call-to-schedule action is blended in. The
+	 * tel: link stays plain (no itemprop) to hold the no-net-new-schema decision.
+	 *
+	 * @param int $provider_id Published provider post ID.
+	 * @return string Section markup, filterable via 'uamswp_spotlight_cta'.
+	 */
+	function uamswp_spotlight_appointment_cta( $provider_id ) {
+
+		$names = uamswp_provider_names( $provider_id );
+
+		$medium_name      = $names['medium'];
+		$medium_name_attr = $names['medium_attr'];
+		$short_possessive = $names['short_possessive'];
+
+		$provider_url = get_permalink( $provider_id );
+		$phone        = get_field('clinical_resource_spotlight_phone');
+
+		// Strip the display formatting for the href, keep it for the label
+		$phone_href = $phone ? preg_replace( '/[^0-9+]/', '', $phone ) : '';
+
+		if ( $phone && $phone_href ) {
+
+			$cta_heading = 'Make an Appointment';
+			$cta_body    = sprintf(
+				'Ready to schedule an appointment with <a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s</a>? Call <a href="tel:%4$s" class="no-break" data-itemtitle="Call to schedule with %2$s">%5$s</a> to request an appointment, or <a href="%1$s" data-itemtitle="Learn more about %2$s">visit %6$s provider profile</a> to learn more.',
+				esc_url( $provider_url ),
+				esc_attr( $medium_name_attr ),
+				$medium_name,
+				esc_attr( $phone_href ),
+				esc_html( $phone ),
+				$short_possessive
+			);
+
+		} else {
+
+			$cta_heading = 'Learn More';
+			$cta_body    = sprintf(
+				'Learn more about <a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s</a>.',
+				esc_url( $provider_url ),
+				esc_attr( $medium_name_attr ),
+				$medium_name
+			);
+
+		}
+
+		$cta = sprintf(
+			'<section class="uams-module cta-bar cta-bar-1 bg-auto extra-padding cta-bar-lg" id="appointment-info" aria-labelledby="spotlight-cta-title">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<h2 id="spotlight-cta-title">%1$s</h2>
+							<p>%2$s</p>
+						</div>
+					</div>
+				</div>
+			</section>',
+			$cta_heading,
+			$cta_body
+		);
+
+		return apply_filters( 'uamswp_spotlight_cta', $cta, $provider_id, $phone, $names );
+
+	}
+
+}
+
 // Define the indefinite article to precede a phrase (a or an)
 if ( !function_exists('uamswp_indefinite_article') ) {
 

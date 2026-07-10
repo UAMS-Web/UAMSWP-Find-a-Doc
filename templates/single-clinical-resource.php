@@ -580,8 +580,18 @@ function uamswp_resource_jump_links() {
 }
 function uamswp_resource_appointment() {
     global $show_appointment_section;
+    global $is_provider_spotlight;
+    global $spotlight_provider;
 
     if ( $show_appointment_section ) {
+
+        // On a Provider Spotlight, the provider-specific CTA replaces the
+        // generic "Make an Appointment" band in this same slot.
+        if ( $is_provider_spotlight && $spotlight_provider ) {
+            echo uamswp_spotlight_appointment_cta( $spotlight_provider );
+            return;
+        }
+
         $appointment_location_url = '/location/';
         //$appointment_location_label = 'View a list of UAMS Health locations';
         ?>
@@ -705,70 +715,9 @@ function uamswp_resource_provider_spotlight() {
         echo '<div class="provider-spotlight-closing">' . $closing . '</div>';
     }
 
-    // Call to action
-    //
-    // Always invites the reader to the provider's profile. When an appointment
-    // phone number is set, a call-to-schedule action is blended into the same
-    // module. The tel: link stays plain, with no itemprop, to hold the
-    // no-net-new-schema decision.
-    $provider_url = get_permalink( $provider_id );
-    $phone        = get_field('clinical_resource_spotlight_phone');
-
-    // Strip the display formatting for the href, keep it for the label
-    $phone_href = $phone ? preg_replace( '/[^0-9+]/', '', $phone ) : '';
-
-    if ( $phone && $phone_href ) {
-
-        $cta_heading = 'Make an Appointment';
-        $cta_body    = sprintf(
-            'Ready to schedule an appointment with <a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s</a>? Call <a href="tel:%4$s" class="no-break" data-itemtitle="Call to schedule with %2$s">%5$s</a> to make an appointment, or visit <a href="%1$s" data-itemtitle="Learn more about %2$s">%6$s profile</a> to learn more.',
-            esc_url( $provider_url ),
-            esc_attr( $medium_name_attr ),
-            $medium_name,
-            esc_attr( $phone_href ),
-            esc_html( $phone ),
-            $short_possessive
-        );
-
-    } else {
-
-        $cta_heading = 'Learn More';
-        $cta_body    = sprintf(
-            'Learn more about <a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s</a>.',
-            esc_url( $provider_url ),
-            esc_attr( $medium_name_attr ),
-            $medium_name
-        );
-
-    }
-
-    // This module sits inside the entry content, not in genesis_after_entry
-    // like the site-wide appointment module. It is marked alignfull and wraps
-    // its content in the same grid so it breaks out to full width and holds a
-    // constrained line length, matching every other uams-module.
-    $cta = sprintf(
-        '<section class="uams-module cta-bar provider-spotlight-cta alignfull bg-gray no-link" aria-labelledby="spotlight-cta-title">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="inner-container">
-                            <div class="cta-heading">
-                                <h2 id="spotlight-cta-title">%1$s</h2>
-                            </div>
-                            <div class="cta-body">
-                                <div class="text-container">
-                                    <p>%2$s</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>',
-        $cta_heading,
-        $cta_body
-    );
-
-    echo apply_filters( 'uamswp_spotlight_cta', $cta, $provider_id, $phone, $names );
+    // The provider-specific call to action is not rendered here. It renders in
+    // the site appointment slot (#appointment-info) via
+    // uamswp_resource_appointment(), replacing the generic "Make an Appointment"
+    // band for spotlights. See uamswp_spotlight_appointment_cta().
 }
 genesis();
