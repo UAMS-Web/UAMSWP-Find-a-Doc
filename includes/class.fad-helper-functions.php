@@ -907,7 +907,7 @@ if ( !function_exists('uamswp_spotlight_appointment_cta') ) {
 				);
 
 				$cta_body = $referral . sprintf(
-					'Ready to schedule an appointment with %1$s? Call %2$s to request an appointment, or %3$s to learn more.',
+					'Ready to schedule an appointment with %1$s? Call&nbsp;%2$s to request an appointment, or %3$s to learn more.',
 					$name_link,
 					$tel_link,
 					$profile_link

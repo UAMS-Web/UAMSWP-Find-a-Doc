@@ -660,7 +660,7 @@ function uamswp_resource_provider_spotlight() {
     if ( have_rows('clinical_resource_spotlight_qa') ) {
         ?>
         <div class="rule-top d-flow-root">
-            <h2 class="sr-only"><span class="title">Getting to Know <?php echo $short_name; ?></span></h2>
+            <h2 class="sr-only">Questions and Answers</h2>
             <?php
             // Portrait: the provider's standard 3:4 headshot, sized for a
             // right-aligned content image
