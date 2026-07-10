@@ -719,7 +719,7 @@ function uamswp_resource_provider_spotlight() {
 
     if ( $phone && $phone_href ) {
 
-        $cta_heading = 'Schedule an Appointment';
+        $cta_heading = 'Make an Appointment';
         $cta_body    = sprintf(
             'Ready to schedule an appointment with <a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s</a>? Call <a href="tel:%4$s" class="no-break" data-itemtitle="Call to schedule with %2$s">%5$s</a> to make an appointment, or visit <a href="%1$s" data-itemtitle="Learn more about %2$s">%6$s profile</a> to learn more.',
             esc_url( $provider_url ),
