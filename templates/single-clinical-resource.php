@@ -649,7 +649,8 @@ function uamswp_resource_provider_spotlight() {
     }
 
     if ( $intro ) {
-        echo '<div class="provider-spotlight-intro">' . $intro . '</div>';
+        echo '<h2 class="sr-only">Description</h2>';
+        echo $intro;
     }
 
     // Questions and answers
