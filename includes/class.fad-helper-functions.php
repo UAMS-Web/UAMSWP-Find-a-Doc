@@ -840,9 +840,13 @@ if ( !function_exists('uamswp_spotlight_appointment_cta') ) {
 	 * module's markup (cta-bar cta-bar-1 bg-auto) and carries the same
 	 * data-itemtitle attributes on its links.
 	 *
-	 * Always links to the provider's profile. When a scheduling phone number is
-	 * set on the clinical resource, a call-to-schedule action is blended in. The
-	 * tel: link stays plain (no itemprop) to hold the no-net-new-schema decision.
+	 * Scheduling prose appears only when the provider is bookable (not a
+	 * resident, sees patients via appointments, and accepting new patients); a
+	 * referral note is added when a referral is required. Otherwise the band
+	 * suppresses scheduling prose and simply invites the reader to the profile.
+	 * When bookable with a scheduling phone set on the clinical resource, a
+	 * call-to-schedule action is blended in; the tel: link stays plain (no
+	 * itemprop) to hold the no-net-new-schema decision.
 	 *
 	 * @param int $provider_id Published provider post ID.
 	 * @return string Section markup, filterable via 'uamswp_spotlight_cta'.
@@ -856,33 +860,98 @@ if ( !function_exists('uamswp_spotlight_appointment_cta') ) {
 		$short_possessive = $names['short_possessive'];
 
 		$provider_url = get_permalink( $provider_id );
-		$phone        = get_field('clinical_resource_spotlight_phone');
 
-		// Strip the display formatting for the href, keep it for the label
-		$phone_href = $phone ? preg_replace( '/[^0-9+]/', '', $phone ) : '';
+		// Appointment eligibility, mirroring the provider profile's appointment
+		// block (templates/blocks/appointment-provider.php): residents never take
+		// appointments, and scheduling prose shows only when the provider both
+		// sees patients via appointments and is accepting new patients. ACF
+		// returns "1"/"0"/"" here, so plain truthy checks match that block.
+		$resident      = get_field( 'physician_resident', $provider_id );
+		$eligible_appt = $resident ? false : get_field( 'physician_eligible_appointments', $provider_id );
+		$accept_new    = get_field( 'physician_accepting_patients', $provider_id );
+		$refer_req     = get_field( 'physician_referral_required', $provider_id );
+		$can_schedule  = $eligible_appt && $accept_new;
 
-		if ( $phone && $phone_href ) {
+		// Reusable links; both carry the same data-itemtitle as the generic band.
+		$name_link = sprintf(
+			'<a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s</a>',
+			esc_url( $provider_url ),
+			esc_attr( $medium_name_attr ),
+			$medium_name
+		);
+		$profile_link = sprintf(
+			'<a href="%1$s" data-itemtitle="Learn more about %2$s">visit %3$s provider profile</a>',
+			esc_url( $provider_url ),
+			esc_attr( $medium_name_attr ),
+			$short_possessive
+		);
+
+		if ( $can_schedule ) {
 
 			$cta_heading = 'Make an Appointment';
-			$cta_body    = sprintf(
-				'Ready to schedule an appointment with <a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s</a>? Call <a href="tel:%4$s" class="no-break" data-itemtitle="Call to schedule with %2$s">%5$s</a> to request an appointment, or <a href="%1$s" data-itemtitle="Learn more about %2$s">visit %6$s provider profile</a> to learn more.',
-				esc_url( $provider_url ),
-				esc_attr( $medium_name_attr ),
-				$medium_name,
-				esc_attr( $phone_href ),
-				esc_html( $phone ),
-				$short_possessive
-			);
+
+			// New patients need a referral: surface the same note the provider
+			// profile uses.
+			$referral = $refer_req ? 'Appointments for new patients are by referral only. ' : '';
+
+			$phone      = get_field( 'clinical_resource_spotlight_phone' );
+			$phone_href = $phone ? preg_replace( '/[^0-9+]/', '', $phone ) : '';
+
+			if ( $phone && $phone_href ) {
+
+				$tel_link = sprintf(
+					'<a href="tel:%1$s" class="no-break" data-itemtitle="Call to schedule with %2$s">%3$s</a>',
+					esc_attr( $phone_href ),
+					esc_attr( $medium_name_attr ),
+					esc_html( $phone )
+				);
+
+				$cta_body = $referral . sprintf(
+					'Ready to schedule an appointment with %1$s? Call %2$s to request an appointment, or %3$s to learn more.',
+					$name_link,
+					$tel_link,
+					$profile_link
+				);
+
+			} else {
+
+				$cta_body = $referral . sprintf(
+					'To schedule an appointment with %1$s, %2$s.',
+					$name_link,
+					$profile_link
+				);
+
+			}
 
 		} else {
 
+			// Not bookable: no scheduling prose and no appointment heading. Invite
+			// the reader to the profile with a fuller line built from the
+			// provider's occupation title (same construction as the intro).
 			$cta_heading = 'Learn More';
-			$cta_body    = sprintf(
-				'Learn more about <a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s</a>.',
-				esc_url( $provider_url ),
-				esc_attr( $medium_name_attr ),
-				$medium_name
-			);
+			$phone       = ''; // no scheduling number is surfaced when not bookable
+
+			$title = uamswp_provider_occupation_title( $provider_id );
+
+			if ( $title ) {
+
+				$cta_body = sprintf(
+					'Get to know %1$s, %2$s %3$s at UAMS Health, and %4$s to learn more.',
+					$medium_name,
+					uamswp_indefinite_article( $title ),
+					$title,
+					$profile_link
+				);
+
+			} else {
+
+				$cta_body = sprintf(
+					'Get to know %1$s and %2$s to learn more.',
+					$medium_name,
+					$profile_link
+				);
+
+			}
 
 		}
 
