@@ -676,6 +676,34 @@ if ( !function_exists('uamswp_provider_pronouns') ) {
 
 }
 
+// The default set of Provider Spotlight questions
+if ( !function_exists('uamswp_spotlight_default_questions') ) {
+
+	/**
+	 * Seeded into the Q&A repeater on new clinical resources. Editors may
+	 * reorder, edit, add, or remove rows afterwards. This list is expected to
+	 * grow, so it lives in one place and is filterable.
+	 *
+	 * @return array List of question strings.
+	 */
+	function uamswp_spotlight_default_questions() {
+
+		return apply_filters(
+			'uamswp_spotlight_default_questions',
+			array(
+				'What inspired you to work in healthcare?',
+				'What is the best part of your job?',
+				'What do you like about working at UAMS?',
+				'Who has had the biggest influence on your life, and why?',
+				'What book, podcast, TV show, or activity are you enjoying right now, and why?',
+				'What is one thing on your bucket list?',
+			)
+		);
+
+	}
+
+}
+
 // Define the indefinite article to precede a phrase (a or an)
 if ( !function_exists('uamswp_indefinite_article') ) {
 

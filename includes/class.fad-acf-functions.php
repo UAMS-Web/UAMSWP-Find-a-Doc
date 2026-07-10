@@ -1854,3 +1854,291 @@
 			return $field;
 
 		}
+
+// Provider Spotlight (clinical resource type "provider_spotlight")
+
+	// Get a value submitted with the current form, by field key
+	//
+	// Validation runs before anything is written to the database, so the type
+	// the editor just picked -- and the sibling fields they just filled in --
+	// can only be read back out of the submitted values.
+
+		function uamswp_spotlight_submitted_value( $field_key ) {
+
+			$acf = function_exists('acf_maybe_get_POST') ? acf_maybe_get_POST('acf') : ( $_POST['acf'] ?? null );
+
+			if (
+				is_array($acf)
+				&&
+				isset($acf[$field_key])
+			) {
+
+				return $acf[$field_key];
+
+			}
+
+			return null;
+
+		}
+
+	// Resolve the resource type being validated
+	//
+	// Prefer the submitted value. Fall back to the stored value for saves that
+	// do not post the whole field group (REST, programmatic updates), so those
+	// are validated against the type the post actually has.
+
+		function uamswp_spotlight_current_type() {
+
+			$submitted = uamswp_spotlight_submitted_value('field_clinical_resource_type');
+
+			if ( $submitted !== null ) {
+
+				return is_array($submitted) ? ( $submitted['value'] ?? '' ) : $submitted;
+
+			}
+
+			$post_id = function_exists('acf_maybe_get_POST') ? acf_maybe_get_POST('post_ID') : ( $_POST['post_ID'] ?? null );
+
+			if ( !$post_id || !is_numeric($post_id) ) {
+
+				return null;
+
+			}
+
+			$stored = get_field( 'clinical_resource_type', $post_id );
+
+			return is_array($stored) ? ( $stored['value'] ?? '' ) : $stored;
+
+		}
+
+		function uamswp_is_spotlight_submission() {
+
+			return 'provider_spotlight' === uamswp_spotlight_current_type();
+
+		}
+
+	// Limit the Featured Provider field to published providers
+
+		add_filter( 'acf/fields/post_object/query/key=field_clinical_resource_spotlight_provider', 'uamswp_spotlight_provider_query', 10, 3 );
+
+		function uamswp_spotlight_provider_query( $args, $field, $post_id ) {
+
+			$args['post_status'] = 'publish';
+
+			return $args;
+
+		}
+
+	// Conditional required-ness
+	//
+	// The Short Description and Featured Image fields are no longer required in
+	// the field group, because a Provider Spotlight generates both from the
+	// featured provider on save. Every other resource type must still supply
+	// them, which is enforced here rather than by ACF.
+
+		add_filter( 'acf/validate_value/key=field_clinical_resource_excerpt', 'uamswp_spotlight_validate_excerpt', 10, 4 );
+
+		function uamswp_spotlight_validate_excerpt( $valid, $value, $field, $input_name ) {
+
+			if ( $valid !== true ) {
+
+				return $valid;
+
+			}
+
+			// A spotlight generates its Short Description on save
+			if ( uamswp_is_spotlight_submission() ) {
+
+				return $valid;
+
+			}
+
+			if ( '' === trim( (string) $value ) ) {
+
+				return 'Short Description is required.';
+
+			}
+
+			return $valid;
+
+		}
+
+		add_filter( 'acf/validate_value/key=field_clinical_resource_featured_image', 'uamswp_spotlight_validate_featured_image', 10, 4 );
+
+		function uamswp_spotlight_validate_featured_image( $valid, $value, $field, $input_name ) {
+
+			if ( $valid !== true ) {
+
+				return $valid;
+
+			}
+
+			// A spotlight resolves its featured image on save, from the override
+			// image or the provider's photos. The field is hidden for that type,
+			// so ACF does not submit it and this filter should not fire at all --
+			// the guard is here in case that changes.
+			if ( uamswp_is_spotlight_submission() ) {
+
+				return $valid;
+
+			}
+
+			if ( empty($value) ) {
+
+				return 'Featured Image is required.';
+
+			}
+
+			return $valid;
+
+		}
+
+	// A spotlight must be able to resolve an image for social sharing and cards
+	//
+	// Precedence on save is: the override image, then the provider's wide
+	// portrait, then the provider's headshot. If a provider carries neither
+	// photo and no override was uploaded, there is nothing to fall back to, so
+	// the save is blocked here -- on the provider field, which is the one the
+	// editor can actually see for this type.
+
+		add_filter( 'acf/validate_value/key=field_clinical_resource_spotlight_provider', 'uamswp_spotlight_validate_provider', 10, 4 );
+
+		function uamswp_spotlight_validate_provider( $valid, $value, $field, $input_name ) {
+
+			if ( $valid !== true ) {
+
+				return $valid;
+
+			}
+
+			// An empty value is handled by the field's own required setting
+			if ( empty($value) ) {
+
+				return $valid;
+
+			}
+
+			// An override image makes the provider's photos irrelevant
+			if ( uamswp_spotlight_submitted_value('field_clinical_resource_spotlight_image_wide') ) {
+
+				return $valid;
+
+			}
+
+			$provider_id = is_array($value) ? ( $value[0] ?? 0 ) : $value;
+			$provider_id = (int) $provider_id;
+
+			if ( !$provider_id ) {
+
+				return $valid;
+
+			}
+
+			// Wide portrait, then headshot
+			if (
+				get_field( 'physician_image_wide', $provider_id )
+				||
+				get_post_thumbnail_id( $provider_id )
+			) {
+
+				return $valid;
+
+			}
+
+			return 'This provider has no wide portrait and no headshot, so there is no image to use for social sharing and cards. Add a Featured Image Override below, or add a photo to the provider.';
+
+		}
+
+	// Guard the Q&A repeater minimum server-side
+
+		add_filter( 'acf/validate_value/key=field_clinical_resource_spotlight_qa', 'uamswp_spotlight_validate_qa', 10, 4 );
+
+		function uamswp_spotlight_validate_qa( $valid, $value, $field, $input_name ) {
+
+			if ( $valid !== true ) {
+
+				return $valid;
+
+			}
+
+			if ( !uamswp_is_spotlight_submission() ) {
+
+				return $valid;
+
+			}
+
+			if (
+				empty($value)
+				||
+				(
+					is_array($value)
+					&&
+					count($value) < 1
+				)
+			) {
+
+				return 'A Provider Spotlight needs at least one question and answer.';
+
+			}
+
+			return $valid;
+
+		}
+
+	// Seed the default questions on new clinical resources
+	//
+	// Rows are keyed by sub-field key, which is how the repeater's own
+	// load_value() returns them; format_value() re-keys to names afterwards.
+	// Only auto-drafts are seeded, so an editor who deliberately removes a
+	// question does not get it back, and only in the admin, so an empty
+	// repeater never fabricates rows on the front end.
+
+		add_filter( 'acf/load_value/key=field_clinical_resource_spotlight_qa', 'uamswp_spotlight_seed_questions', 10, 3 );
+
+		function uamswp_spotlight_seed_questions( $value, $post_id, $field ) {
+
+			if ( !is_admin() ) {
+
+				return $value;
+
+			}
+
+			if ( !empty($value) ) {
+
+				return $value;
+
+			}
+
+			if ( !$post_id || !is_numeric($post_id) ) {
+
+				return $value;
+
+			}
+
+			if ( 'clinical-resource' !== get_post_type($post_id) ) {
+
+				return $value;
+
+			}
+
+			// Only a brand-new post
+			if ( 'auto-draft' !== get_post_status($post_id) ) {
+
+				return $value;
+
+			}
+
+			$rows = array();
+
+			foreach ( uamswp_spotlight_default_questions() as $question ) {
+
+				$rows[] = array(
+					'field_clinical_resource_spotlight_qa_question' => $question,
+					'field_clinical_resource_spotlight_qa_answer'   => '',
+				);
+
+			}
+
+			return $rows;
+
+		}

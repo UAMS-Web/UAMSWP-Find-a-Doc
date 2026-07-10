@@ -19,12 +19,31 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_clinical_resource_title_short",
+			"label": "Short Title",
+			"name": "clinical_resource_title_short",
+			"type": "text",
+			"instructions": "Enter a value here to set a shorter title to use where this resource appears in cards and lists. Leave it blank to use the full title.</p><p class='description' style='margin-top: 0.5em;'>The full title is always used for the page heading itself.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": 60
+		},
+		{
 			"key": "field_clinical_resource_excerpt",
 			"label": "Short Description",
 			"name": "clinical_resource_excerpt",
 			"type": "textarea",
-			"instructions": "This will be the description included for this page when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
-			"required": 1,
+			"instructions": "This will be the description included for this page when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.</p><p class='description' style='margin-top: 0.5em;'>Required for every resource type except Provider Spotlight, which generates a description automatically when this is left blank.",
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -44,8 +63,16 @@
 			"name": "_thumbnail_id",
 			"type": "image",
 			"instructions": "This image will be used for social sharing and displaying across UAMS web content. It is restricted to a 16:9 aspect ratio and has a minimum dimension of 1200x675.",
-			"required": 1,
-			"conditional_logic": 0,
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "!=",
+						"value": "provider_spotlight"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -147,7 +174,8 @@
 				"text": "Article",
 				"infographic": "Infographic",
 				"video": "Video",
-				"doc": "Document"
+				"doc": "Document",
+				"provider_spotlight": "Provider Spotlight"
 			},
 			"allow_custom": 0,
 			"default_value": [],
@@ -173,6 +201,11 @@
 						"field": "field_clinical_resource_type",
 						"operator": "!=",
 						"value": ""
+					},
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "!=",
+						"value": "provider_spotlight"
 					}
 				]
 			],
@@ -615,6 +648,229 @@
 					"mime_types": "pdf"
 				}
 			]
+		},
+		{
+			"key": "field_clinical_resource_spotlight_provider",
+			"label": "Featured Provider",
+			"name": "clinical_resource_spotlight_provider",
+			"type": "post_object",
+			"instructions": "Select the provider featured in this Provider Spotlight.</p><p class='description' style='margin-top: 0.5em;'>The provider's name, clinical title, photo, and profile link are pulled in automatically. Only published providers can be selected.</p><p class='description' style='margin-top: 0.5em;'>This provider is added to the Related Providers list automatically, so this resource can be found by searching or filtering for the provider's name.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "provider_spotlight"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"provider"
+			],
+			"taxonomy": "",
+			"allow_null": 0,
+			"multiple": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
+		{
+			"key": "field_clinical_resource_spotlight_intro",
+			"label": "Introduction",
+			"name": "clinical_resource_spotlight_intro",
+			"type": "wysiwyg",
+			"instructions": "This will precede the provider's photo and the questions and answers.</p><p class='description' style='margin-top: 0.5em;'>Leave this blank to use an introduction generated automatically from the provider's name and clinical title.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "provider_spotlight"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "basic",
+			"media_upload": 0,
+			"delay": 1
+		},
+		{
+			"key": "field_clinical_resource_spotlight_qa",
+			"label": "Questions & Answers",
+			"name": "clinical_resource_spotlight_qa",
+			"type": "repeater",
+			"instructions": "New Provider Spotlights start with a standard set of questions. Reorder, reword, add, or remove them as needed.</p><p class='description' style='margin-top: 0.5em;'>Each question is displayed as a heading. If you use headings inside an answer, start at Heading 4 so the page outline stays in order.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "provider_spotlight"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_repeater_stylised_button": 0,
+			"collapsed": "field_clinical_resource_spotlight_qa_question",
+			"min": 1,
+			"max": 0,
+			"layout": "block",
+			"button_label": "Add Question",
+			"sub_fields": [
+				{
+					"key": "field_clinical_resource_spotlight_qa_question",
+					"label": "Question",
+					"name": "spotlight_qa_question",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_clinical_resource_spotlight_qa_answer",
+					"label": "Answer",
+					"name": "spotlight_qa_answer",
+					"type": "wysiwyg",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"tabs": "all",
+					"toolbar": "basic",
+					"media_upload": 0,
+					"delay": 1
+				}
+			]
+		},
+		{
+			"key": "field_clinical_resource_spotlight_closing",
+			"label": "Closing Content",
+			"name": "clinical_resource_spotlight_closing",
+			"type": "wysiwyg",
+			"instructions": "Optional. This will follow the questions and answers, before the call to action.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "provider_spotlight"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "basic",
+			"media_upload": 0,
+			"delay": 1
+		},
+		{
+			"key": "field_clinical_resource_spotlight_image_wide",
+			"label": "Featured Image Override",
+			"name": "clinical_resource_spotlight_image_wide",
+			"type": "image",
+			"instructions": "By default, a Provider Spotlight uses the selected provider's wide portrait for its social sharing and card image. Upload a 16:9 image here only if you want to override that.</p><p class='description' style='margin-top: 0.5em;'>It is restricted to a 16:9 aspect ratio and has a minimum dimension of 1200x675.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "provider_spotlight"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"uploader": "wp",
+			"return_format": "id",
+			"preview_size": "medium",
+			"library": "all",
+			"min_width": 1200,
+			"min_height": 675,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 20,
+			"acfe_thumbnail": 0,
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_spotlight_phone",
+			"label": "Appointment Phone Number",
+			"name": "clinical_resource_spotlight_phone",
+			"type": "text",
+			"instructions": "Optional. If you enter a phone number, the call to action at the end will invite readers to call to schedule an appointment with this provider.</p><p class='description' style='margin-top: 0.5em;'>Leave it blank to show only the link to the provider's profile.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "provider_spotlight"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "(501) 686-8000",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
 		},
 		{
 			"key": "field_clinical_resource_tab_provider",
