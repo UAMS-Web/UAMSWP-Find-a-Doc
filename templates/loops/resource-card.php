@@ -12,7 +12,10 @@
 
     $resource_page = ( isset($resource_page) && !empty($resource_page) ) ? $resource_page : 'single';
 
-    $resource_title = get_the_title($id);
+    // Cards and lists prefer the optional Short Title, falling back to the full
+    // title. The full title is still used for the page's own heading.
+    $resource_title_short = get_field('clinical_resource_title_short', $id);
+    $resource_title = $resource_title_short ? $resource_title_short : get_the_title($id);
     $resource_title_attr = $resource_title;
     $resource_title_attr = str_replace('"', '\'', $resource_title_attr); // Replace double quotes with single quote
     $resource_title_attr = str_replace('&#8217;', '\'', $resource_title_attr); // Replace right single quote with single quote
@@ -29,7 +32,8 @@
         'text' => 'Read the Article',
         'infographic' => 'View the Infographic',
         'video' => 'Watch the Video',
-        'doc' => 'Read the Document'
+        'doc' => 'Read the Document',
+        'provider_spotlight' => 'Read the Q&A'
     );
     $resource_button_text = 'View the Clinical Resource'; // Set fallback button text
     if ( isset($resource_type) && isset($resource_button_text_arr[$resource_type_value]) ) {

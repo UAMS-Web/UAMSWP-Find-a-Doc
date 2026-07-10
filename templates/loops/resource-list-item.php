@@ -7,7 +7,10 @@
      *  Required var: $id
      */
 
-    $resource_title = get_the_title($id);
+    // Cards and lists prefer the optional Short Title, falling back to the full
+    // title. The full title is still used for the page's own heading.
+    $resource_title_short = get_field('clinical_resource_title_short', $id);
+    $resource_title = $resource_title_short ? $resource_title_short : get_the_title($id);
     $resource_title_attr = $resource_title;
     $resource_title_attr = str_replace('"', '\'', $resource_title_attr); // Replace double quotes with single quote
     $resource_title_attr = str_replace('&#8217;', '\'', $resource_title_attr); // Replace right single quote with single quote
@@ -30,7 +33,7 @@
 ?>
 <li class="item">
     <div class="text-container">
-        <h3 class="h5"><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo get_permalink($resource_label); ?>"><?php echo get_the_title($id); ?></a> <span class="subtitle"><span class="sr-only">(</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span></h3>
+        <h3 class="h5"><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>"><?php echo $resource_title; ?></a> <span class="subtitle"><span class="sr-only">(</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span></h3>
         <p><?php echo $resource_excerpt; ?></p>
     </div>
 </li>
