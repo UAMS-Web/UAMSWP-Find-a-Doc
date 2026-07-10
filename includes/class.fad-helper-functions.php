@@ -676,6 +676,69 @@ if ( !function_exists('uamswp_provider_pronouns') ) {
 
 }
 
+// The generated Short Description for a Provider Spotlight
+if ( !function_exists('uamswp_spotlight_default_excerpt') ) {
+
+	/**
+	 * Used when an editor leaves the Short Description blank. Written to the
+	 * clinical_resource_excerpt field on save so it flows through the existing
+	 * custom_excerpt_acf() pipeline into post_excerpt, and from there into the
+	 * social sharing description and the resource cards.
+	 *
+	 * Deliberately pronoun-free, so it is safe for any provider. Plain text,
+	 * 160 characters or fewer, matching the field's own maxlength.
+	 *
+	 * @param int $provider_id Provider post ID.
+	 * @return string
+	 */
+	function uamswp_spotlight_default_excerpt( $provider_id ) {
+
+		if ( !$provider_id ) {
+
+			return '';
+
+		}
+
+		$names = uamswp_provider_names( $provider_id );
+		$title = uamswp_provider_occupation_title( $provider_id );
+
+		// The name variants carry a non-breaking space; the excerpt is plain text
+		$name = $names['medium_attr'];
+
+		if ( !$name ) {
+
+			return '';
+
+		}
+
+		if ( $title ) {
+
+			$excerpt = sprintf(
+				'Meet %1$s, %2$s at UAMS Health, in this Provider Spotlight Q&A.',
+				$name,
+				$title
+			);
+
+		} else {
+
+			$excerpt = sprintf(
+				'Meet %1$s of UAMS Health in this Provider Spotlight Q&A.',
+				$name
+			);
+
+		}
+
+		$excerpt = apply_filters( 'uamswp_spotlight_default_excerpt', $excerpt, $provider_id, $names, $title );
+
+		// Match the truncation used by custom_excerpt_acf()
+		$excerpt = strlen($excerpt) > 160 ? mb_strimwidth($excerpt, 0, 156, '...') : $excerpt;
+
+		return $excerpt;
+
+	}
+
+}
+
 // The default set of Provider Spotlight questions
 if ( !function_exists('uamswp_spotlight_default_questions') ) {
 

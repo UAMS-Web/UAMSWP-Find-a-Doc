@@ -2142,3 +2142,427 @@
 			return $rows;
 
 		}
+
+	// Read the stored resource type of a post, flattening the array return format
+
+		function uamswp_spotlight_stored_type( $post_id ) {
+
+			$stored = get_field( 'clinical_resource_type', $post_id );
+
+			return is_array($stored) ? ( $stored['value'] ?? '' ) : (string) $stored;
+
+		}
+
+	// Normalize a relationship / post_object value to an array of post IDs
+
+		function uamswp_spotlight_to_ids( $value ) {
+
+			if ( empty($value) ) {
+
+				return array();
+
+			}
+
+			$value = is_array($value) ? $value : array( $value );
+
+			return array_values( array_unique( array_filter( array_map('intval', $value) ) ) );
+
+		}
+
+	// Reconcile the featured provider into the shared Related Providers field
+	//
+	// Runs at priority 5, which is before resources_save_post() at 6 and before
+	// ACF writes the submitted values at 10. Both of those matter:
+	//
+	//  - resources_save_post() builds the Ajax Search Pro filter string by
+	//    reading $_POST['acf']['field_clinical_resource_providers'] directly,
+	//    not the database, so the featured provider has to be injected into the
+	//    submitted values rather than written with update_field(). Otherwise the
+	//    spotlight is not findable by the provider's name.
+	//  - ACF then saves that same array at priority 10, and the field's
+	//    bidirectional partner (physician_clinical_resources) is updated as part
+	//    of that write, so the provider gains the spotlight in its own Related
+	//    Clinical Resources list with no second mechanism.
+	//
+	// The featured provider is added to the existing set, never over it: the
+	// editor's own Related Providers entries survive. The previously featured
+	// provider is dropped when the featured provider changes, or when the
+	// resource stops being a spotlight, so the stale bidirectional link is
+	// subtracted rather than left behind.
+
+		add_action( 'acf/save_post', 'uamswp_spotlight_reconcile_providers', 5 );
+
+		function uamswp_spotlight_reconcile_providers( $post_id ) {
+
+			// Bail early if no data sent or not clinical resource post type
+
+				if (
+					empty( $_POST['acf'] )
+					||
+					!is_numeric( $post_id )
+					||
+					'clinical-resource' !== get_post_type( $post_id )
+				) {
+
+					return;
+
+				}
+
+			$submitted_type = uamswp_spotlight_current_type();
+
+			// The submitted provider, and the one this resource featured before
+			// this save. At priority 5 the database still holds the old value.
+
+				$new_provider = 0;
+
+				if ( isset( $_POST['acf']['field_clinical_resource_spotlight_provider'] ) ) {
+
+					$new_provider_value = $_POST['acf']['field_clinical_resource_spotlight_provider'];
+					$new_provider_value = is_array($new_provider_value) ? reset($new_provider_value) : $new_provider_value;
+					$new_provider = (int) $new_provider_value;
+
+				}
+
+				$old_provider = (int) get_field( 'clinical_resource_spotlight_provider', $post_id );
+
+			// Nothing to reconcile if this resource has never had a featured
+			// provider and is not gaining one now
+
+				if ( !$new_provider && !$old_provider ) {
+
+					return;
+
+				}
+
+			// Start from the submitted Related Providers value. When the field
+			// was not submitted at all, ACF will leave the stored value alone,
+			// so start from the database instead -- starting from an empty array
+			// would wipe the editor's providers.
+
+				if ( array_key_exists( 'field_clinical_resource_providers', $_POST['acf'] ) ) {
+
+					$providers = uamswp_spotlight_to_ids( $_POST['acf']['field_clinical_resource_providers'] );
+
+				} else {
+
+					$providers = uamswp_spotlight_to_ids( get_field( 'clinical_resource_providers', $post_id ) );
+
+				}
+
+				$original = $providers;
+
+			// Drop the previously featured provider when it is being replaced,
+			// or when this resource is no longer a spotlight
+
+				if (
+					$old_provider
+					&&
+					(
+						'provider_spotlight' !== $submitted_type
+						||
+						$new_provider !== $old_provider
+					)
+				) {
+
+					$providers = array_values( array_diff( $providers, array( $old_provider ) ) );
+
+				}
+
+			// Add the featured provider
+
+				if (
+					'provider_spotlight' === $submitted_type
+					&&
+					$new_provider
+					&&
+					!in_array( $new_provider, $providers, true )
+				) {
+
+					$providers[] = $new_provider;
+
+				}
+
+			// Only rewrite the submitted value when it actually changed
+
+				if ( $providers !== $original ) {
+
+					$_POST['acf']['field_clinical_resource_providers'] = array_map( 'strval', $providers );
+
+				}
+
+		}
+
+	// Resolve the 16:9 image a spotlight uses for social sharing and cards
+	//
+	// Precedence: the override image, then the provider's wide portrait, then
+	// the provider's headshot. Validation (see above) refuses to save a
+	// spotlight for which all three are missing.
+
+		function uamswp_spotlight_resolve_image( $post_id, $provider_id ) {
+
+			$override = get_field( 'clinical_resource_spotlight_image_wide', $post_id );
+
+			if ( $override ) {
+
+				return (int) $override;
+
+			}
+
+			$wide = get_field( 'physician_image_wide', $provider_id );
+
+			if ( $wide ) {
+
+				return (int) $wide;
+
+			}
+
+			return (int) get_post_thumbnail_id( $provider_id );
+
+		}
+
+	// Derive a spotlight's featured image and short description on save
+	//
+	// Runs at priority 20: after ACF has written the submitted values at 10, so
+	// the override image and excerpt can be read back, and before
+	// custom_excerpt_acf() at 50, so a generated Short Description still flows
+	// through into post_excerpt.
+	//
+	// clinical_resource_image_square is deliberately left empty. resource-card.php
+	// falls back to the wide image for its 1:1 crop, so the same source image is
+	// used at both aspect ratios with no per-surface code.
+
+		add_action( 'acf/save_post', 'uamswp_spotlight_save', 20 );
+
+		function uamswp_spotlight_save( $post_id ) {
+
+			if (
+				!is_numeric( $post_id )
+				||
+				'clinical-resource' !== get_post_type( $post_id )
+				||
+				'provider_spotlight' !== uamswp_spotlight_stored_type( $post_id )
+			) {
+
+				return;
+
+			}
+
+			$provider_id = (int) get_field( 'clinical_resource_spotlight_provider', $post_id );
+
+			if ( !$provider_id ) {
+
+				return;
+
+			}
+
+			// Featured image, which SEOPress also reads for og:image
+
+				$image_id = uamswp_spotlight_resolve_image( $post_id, $provider_id );
+
+				if (
+					$image_id
+					&&
+					$image_id != get_post_thumbnail_id( $post_id )
+				) {
+
+					set_post_thumbnail( $post_id, $image_id );
+
+				}
+
+			// Short description, when the editor left it blank
+
+				$excerpt = get_field( 'clinical_resource_excerpt', $post_id );
+
+				if ( '' === trim( (string) $excerpt ) ) {
+
+					$generated = uamswp_spotlight_default_excerpt( $provider_id );
+
+					if ( $generated ) {
+
+						update_field( 'clinical_resource_excerpt', $generated, $post_id );
+
+					}
+
+				}
+
+		}
+
+	// Assert or release the link between a spotlight and its featured provider
+	//
+	// Writing either side of the bidirectional pair updates the other, so these
+	// touch one side and let ACF propagate. Both sides are checked first, so a
+	// half-broken link heals and an already-correct one costs nothing.
+
+		function uamswp_spotlight_assert_link( $post_id, $provider_id ) {
+
+			$providers = uamswp_spotlight_to_ids( get_field( 'clinical_resource_providers', $post_id ) );
+
+			if ( !in_array( $provider_id, $providers, true ) ) {
+
+				$providers[] = $provider_id;
+
+				update_field( 'clinical_resource_providers', $providers, $post_id );
+
+			}
+
+			$resources = uamswp_spotlight_to_ids( get_field( 'physician_clinical_resources', $provider_id ) );
+
+			if ( !in_array( $post_id, $resources, true ) ) {
+
+				$resources[] = $post_id;
+
+				update_field( 'physician_clinical_resources', $resources, $provider_id );
+
+			}
+
+		}
+
+		function uamswp_spotlight_release_link( $post_id, $provider_id ) {
+
+			$providers = uamswp_spotlight_to_ids( get_field( 'clinical_resource_providers', $post_id ) );
+
+			if ( in_array( $provider_id, $providers, true ) ) {
+
+				update_field( 'clinical_resource_providers', array_values( array_diff( $providers, array( $provider_id ) ) ), $post_id );
+
+			}
+
+			$resources = uamswp_spotlight_to_ids( get_field( 'physician_clinical_resources', $provider_id ) );
+
+			if ( in_array( $post_id, $resources, true ) ) {
+
+				update_field( 'physician_clinical_resources', array_values( array_diff( $resources, array( $post_id ) ) ), $provider_id );
+
+			}
+
+		}
+
+	// Re-assert the featured link when a provider is saved
+	//
+	// The bidirectional pair is symmetric and the provider's Related Clinical
+	// Resources list is editor-editable, so removing a spotlight from the
+	// provider's side would otherwise subtract the provider from the spotlight,
+	// leaving it out of step with the featured provider it still names.
+	//
+	// A spotlight owns its featured-provider link, so it wins: this runs at
+	// priority 20, after ACF has written the provider's values and applied the
+	// bidirectional pass at 10, and puts any published spotlight that names this
+	// provider back. A spotlight cannot be unlinked from the provider's generic
+	// list, by design.
+
+		add_action( 'acf/save_post', 'uamswp_spotlight_provider_guard', 20 );
+
+		function uamswp_spotlight_provider_guard( $post_id ) {
+
+			if (
+				!is_numeric( $post_id )
+				||
+				'provider' !== get_post_type( $post_id )
+			) {
+
+				return;
+
+			}
+
+			$spotlights = uamswp_spotlight_posts_for_provider( (int) $post_id );
+
+			foreach ( $spotlights as $spotlight_id ) {
+
+				uamswp_spotlight_assert_link( $spotlight_id, (int) $post_id );
+
+			}
+
+		}
+
+	// Every published spotlight that names the given provider
+	//
+	// Clinical resources are not mapped to an ACF custom database table, so
+	// their values are in post meta and can be queried directly. (Providers and
+	// locations are mapped, which is why their fields are only ever written
+	// through update_field().)
+
+		function uamswp_spotlight_posts_for_provider( $provider_id ) {
+
+			if ( !$provider_id ) {
+
+				return array();
+
+			}
+
+			return get_posts(
+				array(
+					'post_type'        => 'clinical-resource',
+					'post_status'      => 'publish',
+					'numberposts'      => -1,
+					'fields'           => 'ids',
+					'suppress_filters' => false,
+					'meta_query'       => array(
+						'relation' => 'AND',
+						array(
+							'key'   => 'clinical_resource_type',
+							'value' => 'provider_spotlight',
+						),
+						array(
+							'key'   => 'clinical_resource_spotlight_provider',
+							'value' => $provider_id,
+						),
+					),
+				)
+			);
+
+		}
+
+	// Release the provider association when a spotlight leaves publication
+	//
+	// ACF's bidirectional pass only runs when a post's fields are saved, so
+	// trashing or unpublishing a spotlight would otherwise leave it listed on
+	// the provider's profile. Re-publishing re-asserts the link, which also
+	// covers untrashing and bulk or quick edits, where no ACF values are posted
+	// and the save-time reconcile above bails out.
+
+		add_action( 'transition_post_status', 'uamswp_spotlight_status_sync', 10, 3 );
+
+		function uamswp_spotlight_status_sync( $new_status, $old_status, $post ) {
+
+			if (
+				empty( $post->ID )
+				||
+				'clinical-resource' !== $post->post_type
+				||
+				$new_status === $old_status
+				||
+				wp_is_post_revision( $post->ID )
+				||
+				wp_is_post_autosave( $post->ID )
+			) {
+
+				return;
+
+			}
+
+			if ( 'provider_spotlight' !== uamswp_spotlight_stored_type( $post->ID ) ) {
+
+				return;
+
+			}
+
+			$provider_id = (int) get_field( 'clinical_resource_spotlight_provider', $post->ID );
+
+			if ( !$provider_id ) {
+
+				return;
+
+			}
+
+			if ( 'publish' === $new_status ) {
+
+				uamswp_spotlight_assert_link( (int) $post->ID, $provider_id );
+
+			} elseif ( 'publish' === $old_status ) {
+
+				// Unpublished, trashed, or otherwise taken out of publication
+				uamswp_spotlight_release_link( (int) $post->ID, $provider_id );
+
+			}
+
+		}
