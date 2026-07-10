@@ -653,60 +653,48 @@ function uamswp_resource_provider_spotlight() {
         echo $intro;
     }
 
+    // Portrait: the provider's standard 3:4 headshot, not the wide portrait
+    $portrait_id = get_post_thumbnail_id( $provider_id );
+
+    if ( $portrait_id ) {
+        $portrait_alt = get_post_meta( $portrait_id, '_wp_attachment_image_alt', true );
+        $portrait_alt = $portrait_alt ? $portrait_alt : $medium_name_attr;
+        ?>
+        <figure class="provider-spotlight-portrait alignright">
+            <picture>
+            <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
+                <source srcset="<?php echo image_sizer($portrait_id, 389, 519, 'center', 'center', 'portrait-3-4'); ?>"
+                    media="(min-width: 768px)">
+                <source srcset="<?php echo image_sizer($portrait_id, 306, 408, 'center', 'center', 'portrait-3-4'); ?>"
+                    media="(min-width: 1px)">
+                <img src="<?php echo image_sizer($portrait_id, 778, 1038, 'center', 'center', 'portrait-3-4'); ?>" alt="<?php echo esc_attr($portrait_alt); ?>" itemprop="image" />
+            <?php } else {
+                echo wp_get_attachment_image( $portrait_id, 'large', false, array( 'alt' => $portrait_alt, 'itemprop' => 'image' ) );
+            } // endif ?>
+            </picture>
+        </figure>
+        <?php
+    }
+
     // Questions and answers
     if ( have_rows('clinical_resource_spotlight_qa') ) {
         ?>
-        <section class="uams-module provider-spotlight-qa alignfull" aria-labelledby="spotlight-qa-title">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 id="spotlight-qa-title" class="module-title">
-                            <span class="title">Getting to Know <?php echo $short_name; ?></span>
-                        </h2>
-                    </div>
-                    <div class="module-body">
-                        <?php
-                        // Portrait: the provider's standard 3:4 headshot, not the wide portrait
-                        $portrait_id = get_post_thumbnail_id( $provider_id );
-
-                        if ( $portrait_id ) {
-                            $portrait_alt = get_post_meta( $portrait_id, '_wp_attachment_image_alt', true );
-                            $portrait_alt = $portrait_alt ? $portrait_alt : $medium_name_attr;
-                            ?>
-                            <figure class="provider-spotlight-portrait">
-                                <picture>
-                                <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
-                                    <source srcset="<?php echo image_sizer($portrait_id, 389, 519, 'center', 'center', 'portrait-3-4'); ?>"
-                                        media="(min-width: 768px)">
-                                    <source srcset="<?php echo image_sizer($portrait_id, 306, 408, 'center', 'center', 'portrait-3-4'); ?>"
-                                        media="(min-width: 1px)">
-                                    <img src="<?php echo image_sizer($portrait_id, 778, 1038, 'center', 'center', 'portrait-3-4'); ?>" alt="<?php echo esc_attr($portrait_alt); ?>" itemprop="image" />
-                                <?php } else {
-                                    echo wp_get_attachment_image( $portrait_id, 'large', false, array( 'alt' => $portrait_alt, 'itemprop' => 'image' ) );
-                                } // endif ?>
-                                </picture>
-                            </figure>
-                            <?php
-                        }
-
-                        while ( have_rows('clinical_resource_spotlight_qa') ) : the_row();
-                            $question = get_sub_field('spotlight_qa_question');
-                            $answer   = get_sub_field('spotlight_qa_answer');
-
-                            if ( !$question ) {
-                                continue;
-                            }
-                            ?>
-                            <h3><?php echo esc_html($question); ?></h3>
-                            <div class="answer"><?php echo $answer; ?></div>
-                            <?php
-                        endwhile;
-                        ?>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <h2 id="spotlight-qa-title" class="module-title">
+            <span class="title">Getting to Know <?php echo $short_name; ?></span>
+        </h2>
         <?php
+        while ( have_rows('clinical_resource_spotlight_qa') ) : the_row();
+            $question = get_sub_field('spotlight_qa_question');
+            $answer   = get_sub_field('spotlight_qa_answer');
+
+            if ( !$question ) {
+                continue;
+            }
+            ?>
+            <h3><?php echo esc_html($question); ?></h3>
+            <div class="answer"><?php echo $answer; ?></div>
+            <?php
+        endwhile;
     }
 
     // The provider-specific call to action is not rendered here. It renders in

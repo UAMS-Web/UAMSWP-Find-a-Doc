@@ -1159,26 +1159,9 @@
   margin-bottom: 0;
 }
 
-.single-clinical-resource .provider-spotlight-portrait {
-  margin: 1.125rem 0;
-  text-align: center;
-}
-
 .single-clinical-resource .provider-spotlight-portrait img {
   height: auto;
   max-width: 100%;
-}
-
-.single-clinical-resource .provider-spotlight-qa {
-  clear: both;
-}
-
-.single-clinical-resource .provider-spotlight-qa .answer {
-  margin-bottom: 1.125rem;
-}
-
-.single-clinical-resource .provider-spotlight-qa .answer>:last-child {
-  margin-bottom: 0;
 }
 
 .facetwp-counts {
@@ -1541,14 +1524,6 @@ html.poppedOut {
     margin-top: 3rem;
   }
 
-  .single-clinical-resource .provider-spotlight-portrait {
-    float: right;
-    margin: 0 0 1.125rem 1.6875rem;
-    max-width: 306px;
-    text-align: left;
-    width: 40%;
-  }
-
   #providers.overflow:not(.expanded) .card-list-container {
     max-height: 37.364375rem;
   }
@@ -1711,10 +1686,6 @@ html.poppedOut {
   .research-info .content-split-lg>[class*=" col-lg-"]:last-child .content-width,
   .research-info .content-split-lg>[class^=col-lg-]:last-child .content-width {
     width: 21em;
-  }
-
-  .single-clinical-resource .provider-spotlight-portrait {
-    max-width: 389px;
   }
 }
 

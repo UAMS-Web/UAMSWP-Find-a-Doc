@@ -1,45 +1,18 @@
 // Provider Spotlight
 //
-// The Q&A layout for the "provider_spotlight" clinical resource type. Sizes are
-// relative and the portrait caps at 100% of its container, so the page reflows
-// to 320px and stays usable at 200% zoom without a horizontal scrollbar.
-// Colors come from the theme's tokens; nothing here carries meaning by color
-// alone.
+// The "provider_spotlight" clinical resource type renders flat in the entry
+// content: the introduction, the provider portrait (floated via the theme's
+// .alignright), and the Q&A. Layout, float, sizing, and spacing come from the
+// theme's general type and alignment styles; only the portrait image needs to
+// be held to its container so the page reflows to 320px and stays usable at
+// 200% zoom without a horizontal scrollbar.
 
 .single-clinical-resource {
 
     .provider-spotlight-portrait {
-        margin: $font-size-base 0;
-        text-align: center;
-
         img {
             max-width: 100%;
             height: auto;
-        }
-
-        // Once there is room, sit the portrait beside the text it introduces
-        @include media-breakpoint-up(sm) {
-            float: right;
-            width: 40%;
-            max-width: 306px;
-            margin: 0 0 $font-size-base ($font-size-base * 1.5);
-            text-align: left;
-        }
-
-        @include media-breakpoint-up(lg) {
-            max-width: 389px;
-        }
-    }
-
-    .provider-spotlight-qa {
-        clear: both; // clear the floated portrait
-
-        .answer {
-            margin-bottom: $font-size-base;
-
-            > :last-child {
-                margin-bottom: 0;
-            }
         }
     }
 }
