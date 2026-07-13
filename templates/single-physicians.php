@@ -449,7 +449,9 @@ add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 function be_remove_title_from_single_crumb( $crumb, $args ) { // Because BE is the man
     global $full_name;
-    return substr( $crumb, 0, strrpos( $crumb, $args['sep'] ) ) . $args['sep'] . $full_name;
+    // Genesis outputs the filtered crumb as raw HTML, so escape the provider
+    // name (a plain-text ACF field, not kses-filtered).
+    return substr( $crumb, 0, strrpos( $crumb, $args['sep'] ) ) . $args['sep'] . uamswp_provider_name_html( $full_name );
 }
 add_filter( 'genesis_single_crumb', 'be_remove_title_from_single_crumb', 10, 2 );
 
@@ -789,7 +791,7 @@ while ( have_posts() ) : the_post();
             <div class="row mx-0 mx-xs-n4 mx-sm-n8">
                 <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
                     <h1 class="page-title">
-                        <span class="name"><?php echo $full_name; ?></span>
+                        <span class="name"><?php echo uamswp_provider_name_html($full_name); ?></span>
                         <?php
 
                         if ($provider_occupation_title && !empty($provider_occupation_title)) { ?>
@@ -1028,7 +1030,7 @@ while ( have_posts() ) : the_post();
                             media="(min-width: 576px)">
                         <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center', 'portrait-3-4'); ?>"
                             media="(min-width: 1px)">
-                        <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4'); ?>" alt="<?php echo $full_name_attr; ?>" />
+                        <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4'); ?>" alt="<?php echo esc_attr($full_name_attr); ?>" />
                         <?php $docphoto = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4');
                              } else {
                                 the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) );
@@ -1129,7 +1131,7 @@ while ( have_posts() ) : the_post();
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-12">
-                            <h2 class="module-title"><span class="title">About <?php echo $short_name; ?></span></h2>
+                            <h2 class="module-title"><span class="title">About <?php echo uamswp_provider_name_html($short_name); ?></span></h2>
 
 
                             <?php if ( $physician_clinical_split ) {
@@ -1247,7 +1249,7 @@ while ( have_posts() ) : the_post();
                         <div class="col-12">
                             <h2 class="module-title"><span class="title">UAMS Health Talk Podcast</span></h2>
                             <div class="module-body text-center">
-                                <p class="lead">In the UAMS Health Talk podcast, experts from UAMS talk about a variety of health topics, providing tips and guidelines to help people lead healthier lives. Listen to the episode(s) featuring <?php echo $short_name; ?>.</p>
+                                <p class="lead">In the UAMS Health Talk podcast, experts from UAMS talk about a variety of health topics, providing tips and guidelines to help people lead healthier lives. Listen to the episode(s) featuring <?php echo uamswp_provider_name_html($short_name); ?>.</p>
                             </div>
                             <div class="content-width mt-8" id="radiomd-embedded-filtered-doctor"></div>
                         </div>
@@ -1266,7 +1268,7 @@ while ( have_posts() ) : the_post();
         // Begin Clinical Resources Section
         $resource_heading_related_pre = false; // "Related Resources"
         $resource_heading_related_post = true; // "Resources Related to __"
-        $resource_heading_related_name = $short_name; // To what is it related?
+        $resource_heading_related_name = uamswp_provider_name_html($short_name); // To what is it related? (escaped: the loop echoes it raw)
         $resource_more_suppress = false; // Force div.more to not display
         $resource_more_key = '_resource_provider';
         $resource_more_value = $sort_name_param_value;
@@ -1286,7 +1288,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Academic Background</span></h2>
+                        <h2 class="module-title"><span class="title"><?php echo uamswp_provider_name_html($short_name_possessive); ?> Academic Background</span></h2>
                         <?php if ( $physician_academic_split ) {
                             // If there is a bio AND at least one of the other academic things, visually split the layout ?>
                             <div class="row content-split-lg">
@@ -1402,7 +1404,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Research</span></h2>
+                        <h2 class="module-title"><span class="title"><?php echo uamswp_provider_name_html($short_name_possessive); ?> Research</span></h2>
                         <div class="module-body">
                             <?php
                                 if($research_bio)
@@ -1439,7 +1441,7 @@ while ( have_posts() ) : the_post();
                             <?php if( $research_profiles_link ): ?>
                                 <h3>UAMS Research Profile</h3>
                                 <p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
-                                <p><a class="btn btn-outline-primary" href="<?php echo $research_profiles_link; ?>" data-categorytitle="View Research Profile">View <?php echo $short_name_possessive; ?> research profile</a></p>
+                                <p><a class="btn btn-outline-primary" href="<?php echo $research_profiles_link; ?>" data-categorytitle="View Research Profile">View <?php echo uamswp_provider_name_html($short_name_possessive); ?> research profile</a></p>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -1456,7 +1458,7 @@ while ( have_posts() ) : the_post();
             // we will use the first term to load ACF data from
             if( $show_conditions_section ) {
                 $condition_context = 'single-provider';
-                $condition_heading_related_name = $short_name; // To what is it related?
+                $condition_heading_related_name = uamswp_provider_name_html($short_name); // To what is it related? (escaped: the loop echoes it raw)
 
                 include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
                 // $condition_schema .= ',"medicalSpecialty": [';
@@ -1479,7 +1481,7 @@ while ( have_posts() ) : the_post();
             // Treatments CPT
             if( $show_treatments_section ) {
                 $treatment_context = 'single-provider';
-                $treatment_heading_related_name = $short_name; // To what is it related?
+                $treatment_heading_related_name = uamswp_provider_name_html($short_name); // To what is it related? (escaped: the loop echoes it raw)
                 include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
                 // $treatment_schema .= ',"medicalSpecialty": [';
                 $i = 0;
@@ -1503,7 +1505,7 @@ while ( have_posts() ) : the_post();
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Areas of Expertise</span></h2>
+                            <h2 class="module-title"><span class="title"><?php echo uamswp_provider_name_html($short_name_possessive); ?> Areas of Expertise</span></h2>
                             <div class="card-list-container">
                                 <div class="card-list card-list-expertise">
                                     <?php foreach( $expertises as $expertise ) {
@@ -1525,7 +1527,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title"><span class="title">Locations Where <?php echo $short_name; ?> Practices</span></h2>
+                        <h2 class="module-title"><span class="title">Locations Where <?php echo uamswp_provider_name_html($short_name); ?> Practices</span></h2>
                         <div class="card-list-container location-card-list-container">
                             <div class="card-list">
                             <?php $l = 1;
@@ -1793,7 +1795,7 @@ while ( have_posts() ) : the_post();
 {
   "@context": "https://schema.org",
   "@type": "Physician",
-  "name": "<?php echo $full_name_attr; ?>",
+  "name": <?php echo wp_json_encode($full_name_attr); ?>,
   "url": "<?php echo get_permalink(); ?>",
   "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>",
   "image": "<?php echo $docphoto; ?>",
