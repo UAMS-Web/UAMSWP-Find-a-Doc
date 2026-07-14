@@ -661,7 +661,7 @@ while ( have_posts() ) : the_post();
     $pg_rating_valid = '';
     $pg_total_comment_count = '';
     if ( $npi ) {
-        $pg_rating_request = get_post_meta( get_the_ID(), '_syndicated_api_data', true ); //wp_pg_cached_api( $npi, 10 );
+        $pg_rating_request = get_post_meta( get_the_ID(), '_syndicated_api_data', true ); // wp_pg_cached_api( $npi, 10 );
         $pg_rating_data = json_decode( $pg_rating_request );
         if ( !empty( $pg_rating_data ) && ('200' == $pg_rating_data->status->code ) ) {
             $pg_rating_valid = ( ($pg_rating_data->data->entities[0]->totalRatingCount) >= 30 );
@@ -1017,19 +1017,19 @@ while ( have_posts() ) : the_post();
                 if ( has_post_thumbnail() ) { ?>
                 <div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
                     <picture>
-                    <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center'); ?>"
+                    <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center', 'portrait-3-4'); ?>"
                             media="(min-width: 1200px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center', 'portrait-3-4'); ?>"
                             media="(min-width: 992px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center', 'portrait-3-4'); ?>"
                             media="(min-width: 768px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center', 'portrait-3-4'); ?>"
                             media="(min-width: 576px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center', 'portrait-3-4'); ?>"
                             media="(min-width: 1px)">
-                        <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo $full_name_attr; ?>" />
-                        <?php $docphoto = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
+                        <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4'); ?>" alt="<?php echo $full_name_attr; ?>" />
+                        <?php $docphoto = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4');
                              } else {
                                 the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) );
                                 $docphoto = get_the_post_thumbnail( 'large');
@@ -1600,6 +1600,17 @@ while ( have_posts() ) : the_post();
                                 <p>(<?php echo ($pg_rating_data->data->entities[0]->totalRatingCount ? $pg_rating_data->data->entities[0]->totalRatingCount . ' Ratings' : '' ); ?><?php echo ($pg_rating_data->data->entities[0]->totalCommentCount ? ', ' . $pg_rating_data->data->entities[0]->totalCommentCount . ' Comments' : ''); ?>)</p>
                             </div>
                         </div>
+                        <?php if ( isset($pg_rating_data->data->entities[0]->reviewSummary) && !empty($pg_rating_data->data->entities[0]->reviewSummary) ) { ?>
+                        <div class="card review-summary text-center" aria-label="Review Summary" itemprop="reviewSummary" itemscope itemtype="https://schema.org/ReviewSummary" itemref="overall-ratings" itemid="review-summary" style="margin: 0 auto 2rem; max-width: 100%; text-align: center; width: 33em;">
+                            <div class="card-body">
+                                <h3 class="h5 card-title">Comment Summary</h3>
+                                <p class="card-text"><?php echo $pg_rating_data->data->entities[0]->reviewSummary; ?></p>
+                            </div>
+                            <div class="card-footer bg-transparent text-muted small">
+                                <p>AI Generated from the text of customer reviews</p>
+                            </div>
+                        </div>
+                        <?php } ?>
                         <?php
                         $reviews = $pg_rating_data->data->entities[0]->comments;
                         // if ( $reviews ) : ?>
@@ -1806,7 +1817,7 @@ while ( have_posts() ) : the_post();
             echo $treatment_schema;
             echo ']';
         }
-    echo $location_schema; ?>
+    echo $location_schema ? $location_schema : ''; ?>
   <?php if ( $pg_rating_valid ){ ?>
 ,
   "aggregateRating": {
