@@ -663,7 +663,7 @@ while ( have_posts() ) : the_post();
     $pg_rating_valid = '';
     $pg_total_comment_count = '';
     if ( $npi ) {
-        $pg_rating_request = get_post_meta( get_the_ID(), '_syndicated_api_data', true ); //wp_pg_cached_api( $npi, 10 );
+        $pg_rating_request = get_post_meta( get_the_ID(), '_syndicated_api_data', true ); // wp_pg_cached_api( $npi, 10 );
         $pg_rating_data = json_decode( $pg_rating_request );
         if ( !empty( $pg_rating_data ) && ('200' == $pg_rating_data->status->code ) ) {
             $pg_rating_valid = ( ($pg_rating_data->data->entities[0]->totalRatingCount) >= 30 );
@@ -1602,6 +1602,17 @@ while ( have_posts() ) : the_post();
                                 <p>(<?php echo ($pg_rating_data->data->entities[0]->totalRatingCount ? $pg_rating_data->data->entities[0]->totalRatingCount . ' Ratings' : '' ); ?><?php echo ($pg_rating_data->data->entities[0]->totalCommentCount ? ', ' . $pg_rating_data->data->entities[0]->totalCommentCount . ' Comments' : ''); ?>)</p>
                             </div>
                         </div>
+                        <?php if ( isset($pg_rating_data->data->entities[0]->reviewSummary) && !empty($pg_rating_data->data->entities[0]->reviewSummary) ) { ?>
+                        <div class="card review-summary text-center" aria-label="Review Summary" itemprop="reviewSummary" itemscope itemtype="https://schema.org/ReviewSummary" itemref="overall-ratings" itemid="review-summary" style="margin: 0 auto 2rem; max-width: 100%; text-align: center; width: 33em;">
+                            <div class="card-body">
+                                <h3 class="h5 card-title">Comment Summary</h3>
+                                <p class="card-text"><?php echo $pg_rating_data->data->entities[0]->reviewSummary; ?></p>
+                            </div>
+                            <div class="card-footer bg-transparent text-muted small">
+                                <p>AI Generated from the text of customer reviews</p>
+                            </div>
+                        </div>
+                        <?php } ?>
                         <?php
                         $reviews = $pg_rating_data->data->entities[0]->comments;
                         // if ( $reviews ) : ?>
