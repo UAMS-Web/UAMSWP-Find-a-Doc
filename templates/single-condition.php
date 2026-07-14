@@ -169,7 +169,8 @@
 		$location_region_IDs = array_unique($location_region_IDs);
 		$location_region_list = array();
 		foreach ($location_region_IDs as $location_region_ID){
-			$location_region_list[] = get_term_by( 'ID', $location_region_ID, 'region' )->slug;
+			$location_slug = get_term_by( 'ID', $location_region_ID, 'region' );
+			$location_region_list[] = is_array($location_slug) ? $location_slug->slug : '';
 		}
 
 		// if cookie is set, run modified physician query

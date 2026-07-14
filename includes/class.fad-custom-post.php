@@ -3423,8 +3423,8 @@
 
 			$data['physician_languages'] = $language_list;
 			$data['physician_eligible_appointments'] = $provider_resident ? 0 : get_field( 'physician_eligible_appointments', $postId );
-			$data['physician_thumbnail'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center');
-			$data['physician_photo'] = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
+			$data['physician_thumbnail'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center', 'portrait-3-4');
+			$data['physician_photo'] = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4');
 			$data['physician_referral_required'] = get_field( 'physician_referral_required', $postId );
 			$provider_portal = get_field( 'physician_portal', $postId );
 			$portal = get_term( $provider_portal, 'portal' );
@@ -3858,10 +3858,10 @@
 
 					foreach ( $location_images as $location_images_item ) {
 
-						$data['location_photo'][$i]['thumb'] = image_sizer($location_images_item, 60, 45, 'center', 'center');
-						$data['location_photo'][$i]['sml'] = image_sizer($location_images_item, 576, 324, 'center', 'center');
-						$data['location_photo'][$i]['med'] = image_sizer($location_images_item, 630, 473, 'center', 'center');
-						$data['location_photo'][$i]['lrg'] = image_sizer($location_images_item, 992, 558, 'center', 'center');
+						$data['location_photo'][$i]['thumb'] = image_sizer($location_images_item, 60, 45, 'center', 'center', 'aspect-4-3');
+						$data['location_photo'][$i]['sml'] = image_sizer($location_images_item, 576, 324, 'center', 'center', 'aspect-4-3');
+						$data['location_photo'][$i]['med'] = image_sizer($location_images_item, 630, 473, 'center', 'center', 'aspect-4-3');
+						$data['location_photo'][$i]['lrg'] = image_sizer($location_images_item, 992, 558, 'center', 'center', 'aspect-4-3');
 						$i++;
 
 					}
@@ -3891,6 +3891,7 @@
 			$data['location_address_2'] = ( get_field( 'location_address_2', $postId ) ? get_field( 'location_address_2', $postId ) . '<br/>' : '');
 			$location_building = get_field( 'location_building', $postId );
 
+			$building_name = '';
 			if ($location_building) {
 
 				$building = get_term( $location_building, 'building' );
@@ -3921,7 +3922,8 @@
 
 			// Region
 
-				$data['location_region'] = is_object( get_term( $location_region, 'region' ) ) ? get_term( $location_region, 'region' )->slug : '';
+				$region_name = is_object( get_term( $location_region, 'region' ) ) ? get_term( $location_region, 'region' ) : '';
+				$data['location_region'] = is_object( $region_name ) ? $region_name->slug : '';
 
 			// Location Type
 
@@ -5135,6 +5137,64 @@
 			$data['clinical_resource_video'] = $video;
 			$data['clinical_resource_video_descr'] = $video_descr;
 			$data['clinical_resource_video_transcript'] = $video_transcript;
+
+			// Short Title is a general field, present on every resource type
+			$data['clinical_resource_title_short'] = get_field( 'clinical_resource_title_short', $postId );
+
+			// Provider Spotlight
+			$spotlight_provider = (int) get_field( 'clinical_resource_spotlight_provider', $postId );
+
+			// Require the featured provider to still be published. The
+			// post_object query filter only restricts the admin dropdown at
+			// selection time; the provider can be unpublished, made private, or
+			// trashed afterward, and its title/slug/link must not leak through
+			// this public REST field once it is no longer public.
+			if (
+				'provider_spotlight' == $resource_type_value
+				&&
+				$spotlight_provider
+				&&
+				'publish' === get_post_status( $spotlight_provider )
+			) {
+
+				$data['clinical_resource_spotlight_provider']['id'] = $spotlight_provider;
+				$data['clinical_resource_spotlight_provider']['link'] = get_permalink( $spotlight_provider );
+				$data['clinical_resource_spotlight_provider']['title'] = get_field( 'physician_full_name', $spotlight_provider );
+				$data['clinical_resource_spotlight_provider']['slug'] = get_post_field( 'post_name', $spotlight_provider );
+
+				// The introduction falls back to generated prose on the front
+				// end rather than being stored, so export what a reader sees
+				$spotlight_intro = get_field( 'clinical_resource_spotlight_intro', $postId );
+				$data['clinical_resource_spotlight_intro'] = $spotlight_intro ? $spotlight_intro : uamswp_spotlight_default_intro( $spotlight_provider );
+
+				$data['clinical_resource_spotlight_image_wide'] = get_field( 'clinical_resource_spotlight_image_wide', $postId );
+				$data['clinical_resource_spotlight_phone'] = get_field( 'clinical_resource_spotlight_phone', $postId );
+
+				$spotlight_qa = get_field( 'clinical_resource_spotlight_qa', $postId );
+				$q = 0;
+
+				if ( $spotlight_qa ) {
+
+					foreach ( $spotlight_qa as $spotlight_qa_row ) {
+
+						$spotlight_qa_question = $spotlight_qa_row['spotlight_qa_question'];
+						$spotlight_qa_answer = $spotlight_qa_row['spotlight_qa_answer'];
+
+						if ( $spotlight_qa_question ) {
+
+							$data['clinical_resource_spotlight_qa'][$q]['question'] = $spotlight_qa_question;
+							$data['clinical_resource_spotlight_qa'][$q]['answer'] = $spotlight_qa_answer;
+
+						}
+
+						$q++;
+
+					}
+
+				}
+
+			}
+
 			// $data['clinical_resource_document'] = $document;
 			$data['clinical_resource_document_descr'] = $document_descr;
 			$i = 0;

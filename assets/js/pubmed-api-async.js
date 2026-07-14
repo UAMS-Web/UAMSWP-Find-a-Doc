@@ -109,7 +109,7 @@ function iterateJSON(idlist, publications, wrapper) {
 
 		/* add link to pubmed */
 		if ( summary.result[id].uid ) {
-			publication += '<span class="pubmed-pubmed-link">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/' + summary.result[id].uid + '">Pubmed</a>]</span> ';
+			publication += '<span class="pubmed-pubmed-link">[<a href="https://www.ncbi.nlm.nih.gov/pubmed/' + summary.result[id].uid + '">Pubmed</a>]</span> ';
 		}
 
 

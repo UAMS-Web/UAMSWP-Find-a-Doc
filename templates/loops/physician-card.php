@@ -92,10 +92,10 @@
 	?>
 	<div class="card">
 		<picture>
-			<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
-				<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 253, 337, 'center', 'center'); ?>"
+			<?php if ( has_post_thumbnail() && function_exists( 'bis_get_attachment_image' ) ) { ?>
+				<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 253, 337, 'center', 'center', 'portrait-3-4'); ?>"
 					media="(min-width: 1px)">
-				<img src="<?php echo image_sizer(get_post_thumbnail_id(), 253, 337, 'center', 'center'); ?>" itemprop="image" class="card-img-top" alt="<?php echo $full_name_attr; ?>" loading="lazy" />
+				<img src="<?php echo image_sizer(get_post_thumbnail_id(), 253, 337, 'center', 'center', 'portrait-3-4'); ?>" itemprop="image" class="card-img-top" alt="<?php echo $full_name_attr; ?>" loading="lazy" />
 			<?php } elseif ( has_post_thumbnail() ) { ?>
 				<?php echo get_the_post_thumbnail( $id, 'medium',  array( 'itemprop' => 'image', 'class' => 'card-img-top', 'loading' => 'lazy' ) ); ?>
 			<?php } else { ?>

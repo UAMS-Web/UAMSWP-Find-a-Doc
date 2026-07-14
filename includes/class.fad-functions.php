@@ -1176,8 +1176,10 @@ function provider_ajax_filter_callback() {
 	$region_IDs = array_unique($region_IDs);
 	$region_list = array();
 	foreach ($region_IDs as $region_ID){
-		$region_slug = get_term_by( 'ID', $region_ID, 'region' );
-		$region_list[] = is_array($region_slug) ? $region_slug->slug : '';
+		$region_term = get_term_by( 'ID', $region_ID, 'region' );
+		if ( is_object( $region_term ) && ! empty( $region_term->slug ) ) {
+			$region_list[] = $region_term->slug;
+		}
 	}
 
 	// Build query for titles, based on regions
@@ -1254,6 +1256,8 @@ function provider_ajax_filter_callback() {
     } else {
 		//var_dump($args);
         echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+		// Still output availability data so the UI can disable invalid options
+		echo '<data id="provider_ids" data-postids="" data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
     }
     wp_die();
 }

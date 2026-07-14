@@ -93,20 +93,20 @@
 				<div class="col image">
 					<a href="<?php echo get_permalink(); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" class="stretched-link" data-categorytitle="Photo" data-itemtitle="<?php echo $full_name_attr; ?>">
 						<picture>
-						<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
+						<?php if ( has_post_thumbnail() && function_exists( 'bis_get_attachment_image' ) ) { ?>
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center', 'portrait-3-4'); ?>"
 								media="(min-width: 2054px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center', 'portrait-3-4'); ?>"
 								media="(min-width: 1784px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center', 'portrait-3-4'); ?>"
 								media="(min-width: 1200px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center', 'portrait-3-4'); ?>"
 								media="(min-width: 768px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center'); ?>"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center', 'portrait-3-4'); ?>"
 								media="(min-width: 576px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center', 'portrait-3-4'); ?>"
 								media="(min-width: 1px)">
-							<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>" alt="<?php echo $full_name_attr; ?>" />
+							<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center', 'portrait-3-4'); ?>" alt="<?php echo $full_name_attr; ?>" />
 						<?php } elseif ( has_post_thumbnail() ) { ?>
 							<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
 						<?php } else { ?>
