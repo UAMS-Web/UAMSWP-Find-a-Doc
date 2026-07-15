@@ -2301,6 +2301,121 @@
 
 		}
 
+	// Keep a spotlight's title and slug in sync with its featured provider
+	//
+	// The title is derived so it never drifts from the provider profile and
+	// never collides with it in search or SEO:
+	//
+	//  - Title: "Get to Know {full name}" (e.g. "Get to Know W. Ryan Wood,
+	//    O.D."), refreshed on every save so a provider rename flows through.
+	//  - Slug: built from the prefix- and degree-free name ("W. Ryan Wood" ->
+	//    get-to-know-w-ryan-wood) and then frozen once the resource is
+	//    published, since changing a live URL breaks inbound links. While the
+	//    resource is still a draft the slug tracks the provider.
+	//
+	// Runs at priority 20, after ACF writes the submitted values at 10, so
+	// get_field() returns the values saved in this same request.
+
+		add_action( 'acf/save_post', 'uamswp_spotlight_sync_title', 20 );
+
+		function uamswp_spotlight_sync_title( $post_id ) {
+
+			// Only clinical resources that are (still) a spotlight with a
+			// featured provider
+
+				if (
+					!is_numeric( $post_id )
+					||
+					'clinical-resource' !== get_post_type( $post_id )
+					||
+					'provider_spotlight' !== uamswp_spotlight_stored_type( $post_id )
+				) {
+
+					return;
+
+				}
+
+				$provider_id = (int) get_field( 'clinical_resource_spotlight_provider', $post_id );
+
+				if ( !$provider_id ) {
+
+					return;
+
+				}
+
+			$names = uamswp_provider_names( $provider_id );
+
+			// The name variants can carry &nbsp; (for a generational suffix), so
+			// normalize it to a regular space for these plain-text fields.
+
+				$full = trim( str_replace( '&nbsp;', ' ', $names['full'] ) );
+
+				if ( '' === $full ) {
+
+					return;
+
+				}
+
+			$post = get_post( $post_id );
+
+			if ( !$post ) {
+
+				return;
+
+			}
+
+			$update = array();
+
+			// Title: always track the provider
+
+				$new_title = 'Get to Know ' . $full;
+
+				if ( $post->post_title !== $new_title ) {
+
+					$update['post_title'] = $new_title;
+
+				}
+
+			// Slug: track the provider while drafting, then freeze at publish
+
+				$published = in_array( $post->post_status, array( 'publish', 'future', 'private' ), true );
+
+				if ( !$published ) {
+
+					$slug_name = trim( str_replace( '&nbsp;', ' ', $names['medium_no_prefix'] ) );
+
+					if ( '' !== $slug_name ) {
+
+						$new_slug = sanitize_title( 'Get to Know ' . $slug_name );
+
+						if ( $new_slug && $post->post_name !== $new_slug ) {
+
+							$update['post_name'] = $new_slug;
+
+						}
+
+					}
+
+				}
+
+			if ( !$update ) {
+
+				return;
+
+			}
+
+			$update['ID'] = $post_id;
+
+			// Unhook around the nested save so this does not re-enter
+
+				remove_action( 'acf/save_post', 'uamswp_spotlight_sync_title', 20 );
+
+				wp_update_post( $update );
+
+				add_action( 'acf/save_post', 'uamswp_spotlight_sync_title', 20 );
+
+		}
+
 	// Resolve the 16:9 image a spotlight uses for social sharing and cards
 	//
 	// Precedence: the override image, then the provider's wide portrait, then
