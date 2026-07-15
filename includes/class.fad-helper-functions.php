@@ -735,7 +735,9 @@ if ( !function_exists('uamswp_spotlight_default_excerpt') ) {
 		}
 
 		$names = uamswp_provider_names( $provider_id );
-		$title = uamswp_provider_occupation_title( $provider_id );
+
+		// Lowercase the clinical title for the generated prose (e.g. "optometrist")
+		$title = mb_strtolower( uamswp_provider_occupation_title( $provider_id ) );
 
 		// The name variants carry a non-breaking space; the excerpt is plain text
 		$name = $names['medium_attr'];
@@ -803,7 +805,9 @@ if ( !function_exists('uamswp_spotlight_default_intro') ) {
 		}
 
 		$names    = uamswp_provider_names( $provider_id );
-		$title    = uamswp_provider_occupation_title( $provider_id );
+
+		// Lowercase the clinical title for the generated prose (e.g. "an optometrist")
+		$title    = mb_strtolower( uamswp_provider_occupation_title( $provider_id ) );
 		$pronouns = uamswp_provider_pronouns( $provider_id );
 
 		// Guard the trimmed value: the medium variant is built by concatenation,
