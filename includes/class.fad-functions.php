@@ -275,7 +275,7 @@ function posts_provider_custom_columns($column_name, $id){
  */
 function fetch_pg_api_with_retry( $url, $max_retries = 3, $delay_seconds = 2 ) {
     $attempts = 0;
-    $token    = wp_pg_get_token(); // PressGaney requires Access-Token
+    $token    = wp_pg_get_token();  // PressGaney requires Access-Token
 
     while ( $attempts < $max_retries ) {
         $attempts++;
@@ -284,8 +284,8 @@ function fetch_pg_api_with_retry( $url, $max_retries = 3, $delay_seconds = 2 ) {
             'timeout' => 15,
             'headers' => array(
                 'Content-Type' => 'application/json',
-                'Access-Token' => $token
-            )
+                'Access-Token' => $token,
+            ),
         ) );
 
         if ( is_wp_error( $response ) ) {
@@ -294,23 +294,30 @@ function fetch_pg_api_with_retry( $url, $max_retries = 3, $delay_seconds = 2 ) {
 
         $response_code = wp_remote_retrieve_response_code( $response );
         $response_body = wp_remote_retrieve_body( $response );
+        $data          = json_decode( $response_body );
 
-        // FIX: Decode the body so we can safely check $data['status']['code']
-        $data = json_decode( $response_body, true );
-
-        // Check if we hit the 429 Spike Arrest
-        $is_rate_limited = ( $response_code === 429 || ( isset( $data['status']['code'] ) && $data['status']['code'] == 429 ) );
+		// Check if we hit the 429 Spike Arrest
+        $is_rate_limited = ( $response_code === 429 || ( isset( $data->status->code ) && $data->status->code == 429 ) );
 
         if ( $is_rate_limited ) {
             if ( $attempts < $max_retries ) {
-                $current_delay = $delay_seconds * $attempts;
-                sleep( $current_delay );
+                sleep( $delay_seconds * $attempts );
                 continue;
             }
+            return new WP_Error( 'pg_rate_limited', 'PressGaney API rate limited after max retries.' );
         }
 
-        // Return the raw response body string so it can be saved to post_meta
-        return $response_body;
+        // Non-200 that isn't a rate limit — treat as failure, don't cache it as data
+        if ( $response_code !== 200 ) {
+            return new WP_Error( 'pg_bad_response', "Unexpected response code: {$response_code}", $response_body );
+        }
+
+        // Malformed JSON — bail rather than store garbage
+        if ( json_last_error() !== JSON_ERROR_NONE ) {
+            return new WP_Error( 'pg_json_error', 'Failed to decode PressGaney response: ' . json_last_error_msg() );
+        }
+
+        return $data; // decoded array
     }
 
     return false;
@@ -393,47 +400,6 @@ function wp_pg_get_token() {
 	return $pg_token;
 }
 
-function fetch_external_api_with_retry( $url, $max_retries = 3, $delay_seconds = 2 ) {
-    $attempts = 0;
-
-    while ( $attempts < $max_retries ) {
-        $attempts++;
-
-        // Make the API request
-        $response = wp_remote_get( $url, array( 'timeout' => 15 ) );
-
-        // If it's a structural WordPress error, stop immediately
-        if ( is_wp_error( $response ) ) {
-            return $response;
-        }
-
-        $response_code = wp_remote_retrieve_response_code( $response );
-        $body          = wp_remote_retrieve_body( $response );
-        $data          = json_decode( $body, true );
-
-        // Check if we hit the 429 Spike Arrest
-        $is_rate_limited = ( $response_code === 429 || ( isset( $data['status']['code'] ) && $data['status']['code'] == 429 ) );
-
-        if ( $is_rate_limited ) {
-            // If we haven't exhausted our retries, wait and try again
-            if ( $attempts < $max_retries ) {
-                // Exponential Backoff: multiply delay by the attempt number
-                // Attempt 1: wait 2s | Attempt 2: wait 4s
-                $current_delay = $delay_seconds * $attempts;
-
-                sleep( $current_delay );
-                continue; // Jump back to the top of the 'while' loop to try again
-            }
-        }
-
-        // If it's a successful response (or a non-429 error we can't fix by waiting), return it
-        return $data;
-    }
-
-    // If we exhausted all retries and still got blocked
-    return false;
-}
-
 // PressGaney JSON API Call
 function wp_pg_cached_api( $npi, $count = 6 ) {
 	// PressGaney requires Access-Token to retrieve data
@@ -459,8 +425,9 @@ function wp_pg_cached_api( $npi, $count = 6 ) {
 
 		$response_code = wp_remote_retrieve_response_code( $request );
 		$response_body = wp_remote_retrieve_body( $request );
+		$data          = json_decode( $response_body );
 		// CRITICAL: Check if Spike Arrest or Rate Limit was hit
-		if ( $response_code === 429 || ( isset($data['status']['code']) && $data['status']['code'] == 429 ) ) {
+		if ( $response_code === 429 || ( isset( $data->status->code ) && $data->status->code == 429 ) ) {
 			// DO NOT cache this. Fail gracefully or serve the OLD cache if available.
 			return false;
 			//set_transient( $cache_key, $response_body, MINUTE_IN_SECONDS );
@@ -1644,7 +1611,7 @@ function schedule_ajax_filter_callback() {
 		</p>
 	<?php } ?>
 	<div id="scheduleContainer">
-		<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+		<iframe id="openSchedulingFrame" title="MyChart Scheduling" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
 	</div>
 
 	<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
