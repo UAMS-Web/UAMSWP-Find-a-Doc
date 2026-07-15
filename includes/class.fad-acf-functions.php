@@ -2301,6 +2301,132 @@
 
 		}
 
+	// Keep a spotlight's title and slug in sync with its featured provider
+	//
+	// The title is derived so it never drifts from the provider profile and
+	// never collides with it in search or SEO:
+	//
+	//  - Title: "Get to Know {full name}" (e.g. "Get to Know W. Ryan Wood,
+	//    O.D."), refreshed on every save so a provider rename flows through.
+	//  - Slug: built from the prefix- and degree-free name ("W. Ryan Wood" ->
+	//    get-to-know-w-ryan-wood) and then frozen once the resource is
+	//    published, since changing a live URL breaks inbound links. While the
+	//    resource is still a draft the slug tracks the provider.
+	//
+	// Runs at priority 20, after ACF writes the submitted values at 10, so
+	// get_field() returns the values saved in this same request.
+
+		add_action( 'acf/save_post', 'uamswp_spotlight_sync_title', 20 );
+
+		function uamswp_spotlight_sync_title( $post_id ) {
+
+			// Only clinical resources that are (still) a spotlight with a
+			// featured provider
+
+				if (
+					!is_numeric( $post_id )
+					||
+					'clinical-resource' !== get_post_type( $post_id )
+					||
+					'provider_spotlight' !== uamswp_spotlight_stored_type( $post_id )
+				) {
+
+					return;
+
+				}
+
+				$provider_id = (int) get_field( 'clinical_resource_spotlight_provider', $post_id );
+
+				if ( !$provider_id ) {
+
+					return;
+
+				}
+
+			$names = uamswp_provider_names( $provider_id );
+
+			// The name variants can carry &nbsp; (for a generational suffix), so
+			// normalize it to a regular space for these plain-text fields.
+
+				$full = trim( str_replace( '&nbsp;', ' ', $names['full'] ) );
+
+				if ( '' === $full ) {
+
+					return;
+
+				}
+
+			$post = get_post( $post_id );
+
+			if ( !$post ) {
+
+				return;
+
+			}
+
+			$update = array();
+
+			// Title: always track the provider
+
+				$new_title = 'Get to Know ' . $full;
+
+				if ( $post->post_title !== $new_title ) {
+
+					$update['post_title'] = $new_title;
+
+				}
+
+			// Slug: derive it once, then freeze so a later provider change or
+			// rename never rewrites a live URL. Freezing is tracked with a meta
+			// flag set at publish -- not the publish state itself -- because a
+			// direct publish (no prior draft save) reaches this hook already
+			// published, and gating on !$published would skip derivation entirely,
+			// leaving the permalink on a placeholder slug. Drafts keep tracking the
+			// provider until the flag is set.
+
+				if ( !get_post_meta( $post_id, '_uamswp_spotlight_slug_locked', true ) ) {
+
+					$slug_name = trim( str_replace( '&nbsp;', ' ', $names['medium_no_prefix'] ) );
+
+					if ( '' !== $slug_name ) {
+
+						$new_slug = sanitize_title( 'Get to Know ' . $slug_name );
+
+						if ( $new_slug && $post->post_name !== $new_slug ) {
+
+							$update['post_name'] = $new_slug;
+
+						}
+
+						// Once published, freeze: the permalink is now live.
+						if ( in_array( $post->post_status, array( 'publish', 'future', 'private' ), true ) ) {
+
+							update_post_meta( $post_id, '_uamswp_spotlight_slug_locked', '1' );
+
+						}
+
+					}
+
+				}
+
+			if ( !$update ) {
+
+				return;
+
+			}
+
+			$update['ID'] = $post_id;
+
+			// Unhook around the nested save so this does not re-enter
+
+				remove_action( 'acf/save_post', 'uamswp_spotlight_sync_title', 20 );
+
+				wp_update_post( $update );
+
+				add_action( 'acf/save_post', 'uamswp_spotlight_sync_title', 20 );
+
+		}
+
 	// Resolve the 16:9 image a spotlight uses for social sharing and cards
 	//
 	// Precedence: the override image, then the provider's wide portrait, then
@@ -2478,6 +2604,7 @@
 			foreach ( $spotlights as $spotlight_id ) {
 
 				uamswp_spotlight_assert_link( $spotlight_id, (int) $post_id );
+				uamswp_spotlight_sync_ontology( $spotlight_id, (int) $post_id );
 
 			}
 
@@ -2566,11 +2693,13 @@
 			if ( 'publish' === $new_status ) {
 
 				uamswp_spotlight_assert_link( (int) $post->ID, $provider_id );
+				uamswp_spotlight_sync_ontology( (int) $post->ID, $provider_id );
 
 			} elseif ( 'publish' === $old_status ) {
 
 				// Unpublished, trashed, or otherwise taken out of publication
 				uamswp_spotlight_release_link( (int) $post->ID, $provider_id );
+				uamswp_spotlight_sync_ontology( (int) $post->ID, 0 );
 
 			}
 
@@ -2613,5 +2742,257 @@
 			}
 
 			uamswp_spotlight_release_link( (int) $post_id, $provider_id );
+			uamswp_spotlight_sync_ontology( (int) $post_id, 0 );
+
+		}
+
+	// --- Ontology mirroring: a spotlight inherits its provider's ontology ---
+	//
+	// Locations, Areas of Expertise, Conditions, and Treatments are copied from
+	// the featured provider onto the spotlight and kept in step continuously, so
+	// editors never curate them by hand (the fields and their tabs are hidden for
+	// spotlights). Each clinical-resource field is bidirectional with its ontology
+	// post, so the same machinery behind the provider mirror also carries the
+	// spotlight into each location/expertise/condition/treatment post's own
+	// Related Clinical Resources. The set is an exact copy of the provider's
+	// (overwrite, not union) -- unlike clinical_resource_providers, which unions
+	// the featured provider with the editor's own picks.
+
+		// clinical-resource field key => the field name, the provider source
+		// field, and the ontology post's reverse-relationship field key.
+		function uamswp_spotlight_ontology_map() {
+
+			return array(
+				'field_clinical_resource_locations'  => array( 'name' => 'clinical_resource_locations',  'provider' => 'physician_locations',      'reverse' => 'field_location_clinical_resources' ),
+				'field_clinical_resource_aoe'        => array( 'name' => 'clinical_resource_aoe',         'provider' => 'physician_expertise',      'reverse' => 'field_expertise_clinical_resources' ),
+				'field_clinical_resource_conditions' => array( 'name' => 'clinical_resource_conditions',  'provider' => 'physician_conditions_cpt', 'reverse' => 'field_condition_clinical_resources' ),
+				'field_clinical_resource_treatments' => array( 'name' => 'clinical_resource_treatments',  'provider' => 'physician_treatments_cpt', 'reverse' => 'field_treatment_procedure_clinical_resources' ),
+			);
+
+		}
+
+	// Overwrite a spotlight's ontology relationships with its provider's set, and
+	// keep each ontology post's reverse Related Clinical Resources list in step. A
+	// provider of 0 clears the mirror (used when a spotlight leaves publication or
+	// stops being a spotlight). Both sides are written through update_field, like
+	// uamswp_spotlight_assert_link(): this runs outside a spotlight's own save, so
+	// ACF's save-time bidirectional pass is not available to propagate for us.
+
+		function uamswp_spotlight_sync_ontology( $cr_id, $provider_id ) {
+
+			$cr_id = (int) $cr_id;
+
+			foreach ( uamswp_spotlight_ontology_map() as $spec ) {
+
+				$target  = $provider_id ? uamswp_spotlight_to_ids( get_field( $spec['provider'], $provider_id ) ) : array();
+				$current = uamswp_spotlight_to_ids( get_field( $spec['name'], $cr_id ) );
+
+				$added   = array_values( array_diff( $target, $current ) );
+				$removed = array_values( array_diff( $current, $target ) );
+
+				if ( !$added && !$removed ) {
+
+					continue;
+
+				}
+
+				update_field( $spec['name'], $target, $cr_id );
+
+				// Add the spotlight to each newly associated ontology post
+				foreach ( $added as $ontology_id ) {
+
+					$list = uamswp_spotlight_to_ids( get_field( $spec['reverse'], $ontology_id ) );
+
+					if ( !in_array( $cr_id, $list, true ) ) {
+
+						$list[] = $cr_id;
+						update_field( $spec['reverse'], $list, $ontology_id );
+
+					}
+
+				}
+
+				// Remove it from each ontology post it no longer belongs to
+				foreach ( $removed as $ontology_id ) {
+
+					$list = uamswp_spotlight_to_ids( get_field( $spec['reverse'], $ontology_id ) );
+
+					if ( in_array( $cr_id, $list, true ) ) {
+
+						update_field( $spec['reverse'], array_values( array_diff( $list, array( $cr_id ) ) ), $ontology_id );
+
+					}
+
+				}
+
+			}
+
+		}
+
+	// Mirror the ontology into the submitted values when a spotlight is saved
+	//
+	// Runs at priority 5, before ACF writes the values at 10, so the featured
+	// provider's locations/expertise/conditions/treatments are saved as the
+	// spotlight's own and flow through ACF's save-time bidirectional pass, FacetWP
+	// indexing, and every other consumer exactly as an editor's entries would. The
+	// fields are hidden for spotlights, so their value only ever comes from here.
+
+		add_action( 'acf/save_post', 'uamswp_spotlight_reconcile_ontology', 5 );
+
+		function uamswp_spotlight_reconcile_ontology( $post_id ) {
+
+			if (
+				empty( $_POST['acf'] )
+				||
+				!is_numeric( $post_id )
+				||
+				'clinical-resource' !== get_post_type( $post_id )
+			) {
+
+				return;
+
+			}
+
+			$submitted_type = uamswp_spotlight_current_type();
+
+			$new_provider = 0;
+
+			if ( isset( $_POST['acf']['field_clinical_resource_spotlight_provider'] ) ) {
+
+				$value        = $_POST['acf']['field_clinical_resource_spotlight_provider'];
+				$value        = is_array( $value ) ? reset( $value ) : $value;
+				$new_provider = (int) $value;
+
+			}
+
+			if ( 'provider_spotlight' === $submitted_type && $new_provider ) {
+
+				// Overwrite each ontology field with the provider's current set
+				foreach ( uamswp_spotlight_ontology_map() as $cr_field => $spec ) {
+
+					$ids = uamswp_spotlight_to_ids( get_field( $spec['provider'], $new_provider ) );
+					$_POST['acf'][ $cr_field ] = array_map( 'strval', $ids );
+
+				}
+
+			} elseif ( 'provider_spotlight' === uamswp_spotlight_stored_type( $post_id ) ) {
+
+				// The resource was a spotlight and is not one now: drop the mirror
+				// rather than leave stale associations behind -- but never clobber a
+				// value the editor actually submitted (the fields are visible again
+				// once the type changes), mirroring uamswp_spotlight_reconcile_providers.
+				foreach ( uamswp_spotlight_ontology_map() as $cr_field => $spec ) {
+
+					if ( !array_key_exists( $cr_field, $_POST['acf'] ) ) {
+
+						$_POST['acf'][ $cr_field ] = array();
+
+					}
+
+				}
+
+			}
+
+		}
+
+	// Re-sync spotlights when a Condition, Treatment, or Area of Expertise is saved
+	//
+	// Those three are bidirectional with the provider, so associating a provider
+	// from the ontology side writes the provider's own field with a direct meta
+	// update that never fires the provider's save hook. (Locations are not
+	// bidirectional, so no location hook is needed.) Only spotlights whose featured
+	// provider was added to or removed from THIS ontology post can have a changed
+	// mirror, so just those are re-synced -- not the whole population.
+
+		// Ontology post type => the field on it that lists its providers (the
+		// bidirectional partner of the matching physician_* field). Empty for any
+		// other post type.
+		function uamswp_spotlight_ontology_provider_field( $post_type ) {
+
+			$fields = array(
+				'expertise' => 'field_expertise_physicians',
+				'condition' => 'field_condition_physicians',
+				'treatment' => 'field_treatment_procedure_physicians',
+			);
+
+			return isset( $fields[ $post_type ] ) ? $fields[ $post_type ] : '';
+
+		}
+
+		// Remember an ontology post's provider list across a single save, so the
+		// guard can also re-sync a provider that was just REMOVED (and is therefore
+		// absent from the saved value).
+		function uamswp_spotlight_ontology_providers_before( $post_id, $set = null ) {
+
+			static $store = array();
+
+			$post_id = (int) $post_id;
+
+			if ( null !== $set ) {
+
+				$store[ $post_id ] = $set;
+
+			}
+
+			return isset( $store[ $post_id ] ) ? $store[ $post_id ] : array();
+
+		}
+
+		// Capture the pre-save provider list at priority 5, before ACF overwrites it
+		add_action( 'acf/save_post', 'uamswp_spotlight_capture_ontology_providers', 5 );
+
+		function uamswp_spotlight_capture_ontology_providers( $post_id ) {
+
+			if ( !is_numeric( $post_id ) ) {
+
+				return;
+
+			}
+
+			$field = uamswp_spotlight_ontology_provider_field( get_post_type( $post_id ) );
+
+			if ( !$field ) {
+
+				return;
+
+			}
+
+			uamswp_spotlight_ontology_providers_before( $post_id, uamswp_spotlight_to_ids( get_field( $field, $post_id ) ) );
+
+		}
+
+		add_action( 'acf/save_post', 'uamswp_spotlight_ontology_guard', 20 );
+
+		function uamswp_spotlight_ontology_guard( $post_id ) {
+
+			if ( !is_numeric( $post_id ) ) {
+
+				return;
+
+			}
+
+			$field = uamswp_spotlight_ontology_provider_field( get_post_type( $post_id ) );
+
+			if ( !$field ) {
+
+				return;
+
+			}
+
+			// Providers on this ontology post after the save, plus any removed
+			// since before it: every provider whose mirror could have changed.
+			$after    = uamswp_spotlight_to_ids( get_field( $field, $post_id ) );
+			$before   = uamswp_spotlight_ontology_providers_before( $post_id );
+			$affected = array_values( array_unique( array_merge( $after, $before ) ) );
+
+			foreach ( $affected as $provider_id ) {
+
+				foreach ( uamswp_spotlight_posts_for_provider( $provider_id ) as $cr_id ) {
+
+					uamswp_spotlight_sync_ontology( $cr_id, $provider_id );
+
+				}
+
+			}
 
 		}

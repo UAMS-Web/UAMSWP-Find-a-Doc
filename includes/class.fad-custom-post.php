@@ -5162,10 +5162,9 @@
 				$data['clinical_resource_spotlight_provider']['title'] = get_field( 'physician_full_name', $spotlight_provider );
 				$data['clinical_resource_spotlight_provider']['slug'] = get_post_field( 'post_name', $spotlight_provider );
 
-				// The introduction falls back to generated prose on the front
-				// end rather than being stored, so export what a reader sees
-				$spotlight_intro = get_field( 'clinical_resource_spotlight_intro', $postId );
-				$data['clinical_resource_spotlight_intro'] = $spotlight_intro ? $spotlight_intro : uamswp_spotlight_default_intro( $spotlight_provider );
+				// The introduction is always generated from the provider (the
+				// manual field was removed), so export what a reader sees.
+				$data['clinical_resource_spotlight_intro'] = uamswp_spotlight_default_intro( $spotlight_provider );
 
 				$data['clinical_resource_spotlight_image_wide'] = get_field( 'clinical_resource_spotlight_image_wide', $postId );
 				$data['clinical_resource_spotlight_phone'] = get_field( 'clinical_resource_spotlight_phone', $postId );

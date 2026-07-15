@@ -415,7 +415,7 @@ if ( !function_exists('uamswp_provider_names') ) {
 
 	/**
 	 * @param  int  $provider_id  Provider post ID.
-	 * @return array short, medium, full, short_possessive, sort, sort_param, and _attr variants.
+	 * @return array short, medium, medium_no_prefix, full, short_possessive, sort, sort_param, and _attr variants.
 	 */
 	function uamswp_provider_names( $provider_id ) {
 
@@ -424,6 +424,8 @@ if ( !function_exists('uamswp_provider_names') ) {
 			'full_attr'             => '',
 			'medium'                => '',
 			'medium_attr'           => '',
+			'medium_no_prefix'      => '',
+			'medium_no_prefix_attr' => '',
 			'short'                 => '',
 			'short_attr'            => '',
 			'short_possessive'      => '',
@@ -532,6 +534,12 @@ if ( !function_exists('uamswp_provider_names') ) {
 
 				$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
 
+			// Medium name without the "Dr." prefix or any degrees (e.g.,
+			// "Leonard H. McCoy"). Useful where the prefix and credentials get
+			// in the way -- e.g. building a clean URL slug.
+
+				$medium_no_prefix_name = trim( $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name );
+
 			// Short name (e.g., "Dr. McCoy")
 
 				$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
@@ -562,6 +570,8 @@ if ( !function_exists('uamswp_provider_names') ) {
 			'full_attr'             => $full_name ? uamswp_attr_conversion($full_name) : '',
 			'medium'                => $medium_name,
 			'medium_attr'           => $medium_name ? uamswp_attr_conversion($medium_name) : '',
+			'medium_no_prefix'      => $medium_no_prefix_name,
+			'medium_no_prefix_attr' => $medium_no_prefix_name ? uamswp_attr_conversion($medium_no_prefix_name) : '',
 			'short'                 => $short_name,
 			'short_attr'            => $short_name ? uamswp_attr_conversion($short_name) : '',
 			'short_possessive'      => $short_name_possessive,
@@ -725,7 +735,9 @@ if ( !function_exists('uamswp_spotlight_default_excerpt') ) {
 		}
 
 		$names = uamswp_provider_names( $provider_id );
-		$title = uamswp_provider_occupation_title( $provider_id );
+
+		// Lowercase the clinical title for the generated prose (e.g. "optometrist")
+		$title = mb_strtolower( uamswp_provider_occupation_title( $provider_id ) );
 
 		// The name variants carry a non-breaking space; the excerpt is plain text
 		$name = $names['medium_attr'];
@@ -793,7 +805,9 @@ if ( !function_exists('uamswp_spotlight_default_intro') ) {
 		}
 
 		$names    = uamswp_provider_names( $provider_id );
-		$title    = uamswp_provider_occupation_title( $provider_id );
+
+		// Lowercase the clinical title for the generated prose (e.g. "an optometrist")
+		$title    = mb_strtolower( uamswp_provider_occupation_title( $provider_id ) );
 		$pronouns = uamswp_provider_pronouns( $provider_id );
 
 		// Guard the trimmed value: the medium variant is built by concatenation,
@@ -937,15 +951,16 @@ if ( !function_exists('uamswp_spotlight_appointment_cta') ) {
 			$referral = $refer_req ? 'Appointments for new patients are by referral only. ' : '';
 
 			$phone      = get_field( 'clinical_resource_spotlight_phone' );
-			$phone_href = $phone ? preg_replace( '/[^0-9+]/', '', $phone ) : '';
+			// Dashed format for both the tel: href and the visible text (e.g. 501-686-8000)
+			$phone_dash = $phone ? format_phone_dash( $phone ) : '';
 
-			if ( $phone && $phone_href ) {
+			if ( $phone && $phone_dash ) {
 
 				$tel_link = sprintf(
 					'<a href="tel:%1$s" class="no-break" data-itemtitle="Call to schedule with %2$s">%3$s</a>',
-					esc_attr( $phone_href ),
+					esc_attr( $phone_dash ),
 					esc_attr( $medium_name_attr ),
-					esc_html( $phone )
+					esc_html( $phone_dash )
 				);
 
 				$cta_body = $referral . sprintf(
