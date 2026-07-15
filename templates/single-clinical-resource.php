@@ -654,12 +654,9 @@ function uamswp_resource_provider_spotlight() {
     $short_name       = uamswp_provider_name_html( $names['short'] );
     $short_possessive = uamswp_provider_name_html( $names['short_possessive'] );
 
-    // Introduction, falling back to generated prose
-    $intro = get_field('clinical_resource_spotlight_intro');
-
-    if ( !$intro ) {
-        $intro = uamswp_spotlight_default_intro( $provider_id );
-    }
+    // Introduction: always generated from the provider. The manual field was
+    // removed, so any value left in postmeta from before that is ignored.
+    $intro = uamswp_spotlight_default_intro( $provider_id );
 
     if ( $intro ) {
         echo '<h2 class="sr-only">Description</h2>';
