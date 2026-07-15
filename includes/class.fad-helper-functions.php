@@ -753,7 +753,7 @@ if ( !function_exists('uamswp_spotlight_default_excerpt') ) {
 		if ( $title ) {
 
 			$excerpt = sprintf(
-				'Meet %1$s, %2$s at UAMS Health, in this Provider Spotlight Q&A.',
+				'Meet %1$s, %2$s at UAMS Health, in this provider spotlight Q&A.',
 				$name,
 				$title
 			);
@@ -761,7 +761,7 @@ if ( !function_exists('uamswp_spotlight_default_excerpt') ) {
 		} else {
 
 			$excerpt = sprintf(
-				'Meet %1$s of UAMS Health in this Provider Spotlight Q&A.',
+				'Meet %1$s of UAMS Health in this provider spotlight Q&A.',
 				$name
 			);
 

@@ -2504,19 +2504,16 @@
 
 				}
 
-			// Short description, when the editor left it blank
+			// Short description: always regenerated from the provider. The input is
+			// hidden for spotlights, so it is fully provider-driven -- overwriting
+			// also clears any stale value and picks up changes to the generated
+			// prose. custom_excerpt_acf() copies it to post_excerpt at priority 50.
 
-				$excerpt = get_field( 'clinical_resource_excerpt', $post_id );
+				$generated = uamswp_spotlight_default_excerpt( $provider_id );
 
-				if ( '' === trim( (string) $excerpt ) ) {
+				if ( $generated ) {
 
-					$generated = uamswp_spotlight_default_excerpt( $provider_id );
-
-					if ( $generated ) {
-
-						update_field( 'clinical_resource_excerpt', $generated, $post_id );
-
-					}
+					update_field( 'clinical_resource_excerpt', $generated, $post_id );
 
 				}
 
