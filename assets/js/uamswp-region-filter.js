@@ -26,6 +26,88 @@ jQuery(function($) {
     var laf = $("#location-ajax-filter"); 
     var lafForm = laf.find("form");
 
+    function normalizeRegionValue(val) {
+        if (val === null || val === undefined) return "";
+        var s = String(val).trim();
+        if (!s) return "";
+        if (s.toLowerCase() === "any") return "";
+        return s;
+    }
+
+    /**
+     * Parse a CSV data attribute into an array.
+     * - Returns null when attribute is missing/undefined
+     * - Returns [] when attribute exists but is empty
+     */
+    function parseCsvData(val) {
+        if (val === null || val === undefined) return null;
+        var s = String(val).trim();
+        if (!s) return [];
+        // data attributes in this plugin often end with a trailing comma
+        return s.split(",").map(function(x) { return String(x).trim(); }).filter(Boolean);
+    }
+
+    function captureBaselineDisabled($select) {
+        if (!$select || !$select.length) return;
+        $select.find("option").each(function() {
+            $(this).data("baselineDisabled", $(this).prop("disabled"));
+        });
+    }
+
+    function restoreBaselineDisabled($select) {
+        if (!$select || !$select.length) return;
+        $select.find("option").each(function() {
+            var baseline = $(this).data("baselineDisabled");
+            // If baseline was never captured, do nothing.
+            if (baseline === undefined) return;
+            $(this).prop("disabled", baseline);
+        });
+    }
+
+    /**
+     * Disable options based on availability list, while respecting baseline disabled options.
+     * - If availability list is missing/empty, restore baseline disabled state.
+     * - Always keep "" and "any" enabled.
+     */
+    function applyAvailabilityDisabled($select, availableList) {
+        if (!$select || !$select.length) return;
+        // availableList meanings:
+        // - null: no availability info, restore baseline disabled state
+        // - []: explicitly none available, disable all non-any options
+        // - [..]: disable options not in list (plus any baseline disabled)
+        var hasList = Array.isArray(availableList) && availableList.length > 0;
+        var explicitNone = Array.isArray(availableList) && availableList.length === 0;
+        $select.find("option").each(function() {
+            var $opt = $(this);
+            var val = $opt.val();
+            var valLower = (val === null || val === undefined) ? "" : String(val).toLowerCase();
+
+            if (val === "" || valLower === "any") {
+                $opt.prop("disabled", false);
+                return;
+            }
+
+            var baseline = $opt.data("baselineDisabled");
+            baseline = (baseline === undefined) ? false : !!baseline;
+
+            if (availableList === null) {
+                $opt.prop("disabled", baseline);
+                return;
+            }
+            if (explicitNone) {
+                $opt.prop("disabled", true);
+                return;
+            }
+
+            $opt.prop("disabled", baseline || $.inArray(val, availableList) === -1);
+        });
+    }
+
+    // Capture baseline disabled states from PHP-rendered markup
+    captureBaselineDisabled(pafForm.find("#provider_region"));
+    captureBaselineDisabled(pafForm.find("#provider_title"));
+    captureBaselineDisabled(lafForm.find("#location_region"));
+
     pafForm.find('select').on('change', function(){
         pafForm.submit();
     });
@@ -38,6 +120,11 @@ jQuery(function($) {
         e.preventDefault(); 
         
         console.log("form cleared");
+
+        // Restore baseline option disables (regions with no providers stay disabled)
+        restoreBaselineDisabled(pafForm.find("#provider_region"));
+        restoreBaselineDisabled(pafForm.find("#provider_title"));
+        restoreBaselineDisabled(lafForm.find("#location_region"));
 
         pafForm.find("#provider_region").prop('selectedIndex', 0);
         pafForm.find("#provider_title").prop('selectedIndex', 0);
@@ -57,6 +144,11 @@ jQuery(function($) {
         
         console.log("form cleared");
 
+        // Restore baseline option disables (regions with no providers stay disabled)
+        restoreBaselineDisabled(pafForm.find("#provider_region"));
+        restoreBaselineDisabled(pafForm.find("#provider_title"));
+        restoreBaselineDisabled(lafForm.find("#location_region"));
+
         pafForm.find("#provider_region").prop('selectedIndex', 0);
 
         lafForm.find("#location_region").prop('selectedIndex', 0);
@@ -73,9 +165,7 @@ jQuery(function($) {
         
         console.log("form submitted");
     
-        if(null != pafForm.find("#provider_region").val() && pafForm.find("#provider_region").val().length !== 0) {
-            var region = pafForm.find("#provider_region").val();
-        }
+        var region = normalizeRegionValue(pafForm.find("#provider_region").val());
         if(null != pafForm.find("#provider_title").val() && pafForm.find("#provider_title").val().length !== 0) {
             var title = pafForm.find("#provider_title").val();
         }
@@ -124,29 +214,12 @@ jQuery(function($) {
                 setTimeout(function() {
                     $('.card-list-doctors').removeAttr( "style" );
                 }, 1001);
-                $("#provider_title > option").attr("disabled", function() {
-                    available_title = $('#provider_ids').data('titles').toString();
-                    titleArray = [];
-                    titleArray = available_title.split(",");
-                    // console.log(titleArray);
-                    if( $.inArray( $(this).val(), titleArray ) == -1 ) {
-                        return true; //available_title.includes( $(this).val() );
-                    } else {
-                        return false;
-                    }
-                });
-                $("#provider_region > option").attr("disabled", function() {
-                    available_regions = $('#provider_ids').data('regions');
-                    regionArray = [];
-                    regionArray = available_regions.split(",");
-                    // console.log(regionArray); 
-                    if( $.inArray( $(this).val(), regionArray ) == -1 ) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-        
-                });
+                // Always prefer explicit data-* attributes (even if empty) over baseline.
+                var $providerData = $('#provider_ids');
+                var titleArray = ($providerData.length) ? parseCsvData($providerData.attr('data-titles')) : null;
+                var regionArray = ($providerData.length) ? parseCsvData($providerData.attr('data-regions')) : null;
+                applyAvailabilityDisabled($("#provider_title"), titleArray);
+                applyAvailabilityDisabled($("#provider_region"), regionArray);
                 ajaxHideContent();
             },
         });
@@ -157,9 +230,7 @@ jQuery(function($) {
         
         console.log("form submitted");
     
-        if(null != lafForm.find("#location_region").val() && lafForm.find("#location_region").val().length !== 0) {
-            var region = lafForm.find("#location_region").val();
-        }
+        var region = normalizeRegionValue(lafForm.find("#location_region").val());
 
         if(lafForm.find("#locations").val().length !== 0) {
             var locations = lafForm.find("#locations").val();
@@ -204,64 +275,17 @@ jQuery(function($) {
                 setTimeout(function() {
                     $('.card-list-locations').removeAttr( "style" );
                 }, 1001);
-                $("#location_region > option").attr("disabled", function() {
-                    available_regions = $('#location_ids').data('regions');
-                    regionArray = [];
-                    regionArray = available_regions.split(",");
-                    // console.log(regionArray); 
-                    if( $.inArray( $(this).val(), regionArray ) == -1 ) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-        
-                });
+                var regionArray = parseCsvData($('#location_ids').data('regions'));
+                applyAvailabilityDisabled($("#location_region"), regionArray);
             },
         });
         
     });
 });
 jQuery(document).ready(function($){
-    $("#provider_title > option").attr("disabled", function() {
-        titleArray = [];
-        if ($('#provider_ids').data('titles')){
-            available_title = $('#provider_ids').data('titles').toString();
-            titleArray = available_title.split(",");
-        }
-        // console.log(titleArray);
-        if( $.inArray( $(this).val(), titleArray ) == -1 ) {
-            return true; //available_title.includes( $(this).val() );
-        } else {
-            return false;
-        }
-    });
-    $("#provider_region > option").attr("disabled", function() {
-        regionArray = [];
-        if ($('#provider_ids').data('regions')) {
-            available_regions = $('#provider_ids').data('regions');
-            regionArray = available_regions.split(","); 
-        }
-        // console.log(regionArray);
-        if( $.inArray( $(this).val(), regionArray ) == -1 ) {
-            return true;
-        } else {
-            return false;
-        }
-    });
-    $("#location_region > option").attr("disabled", function() {
-        regionArray = [];
-        if ($('#location_ids').data('regions')) {
-            available_regions = $('#location_ids').data('regions');
-            regionArray = available_regions.split(","); 
-        }
-        // console.log(regionArray);
-        if( $.inArray( $(this).val(), regionArray ) == -1 ) {
-            return true;
-        } else {
-            return false;
-        }
-
-    });
+    // Initial option disabling is handled by PHP markup (baseline) + AJAX completes.
+    // We intentionally do not override option disabled states here to avoid enabling
+    // regions that have no providers when AJAX data isn't present.
     $("#provider_region").change(function(){
         $("#location_region").val( this.value );
         $("#location-ajax-filter form").submit();
@@ -270,10 +294,20 @@ jQuery(document).ready(function($){
         $("#provider_region").val( this.value );
         $("#provider-ajax-filter form").submit();
     });
-    if(getCookie('wp_filter_region') != null) {
-        // console.log(getCookie('wp_filter_region'));
-        // set the option to selected that corresponds to what the cookie is set to
-        $('#region option[value="' + getCookie('wp_filter_region') + '"]').attr('selected', 'selected');
+    // Restore region from cookie (treat "any" as unset)
+    var cookieRegion = (function() {
+        var v = getCookie('wp_filter_region');
+        if (v === null || v === undefined) return "";
+        v = String(v).trim();
+        if (!v) return "";
+        if (v.toLowerCase() === "any") return "";
+        return v;
+    })();
+    if (cookieRegion) {
+        $("#provider_region, #location_region").val(cookieRegion);
+    } else {
+        // If the cookie is empty/"any", clear it to avoid sticky bad state
+        deleteCookie('wp_filter_region');
     }
     // -- Used in title only & region filter --//
     // Make the Load More button do things

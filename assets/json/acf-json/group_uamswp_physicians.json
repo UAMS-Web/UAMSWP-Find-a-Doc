@@ -791,7 +791,7 @@
 			"label": "National Provider Identifier (NPI)",
 			"name": "physician_npi",
 			"type": "number",
-			"instructions": "This value may be found in the provider's UAMS Health Epic SER record. It would be in the \"Related Group 9300\" item. Look for \"Provider NPI\" in the column for \"9300 - MPI ID TYPE\" and copy the value from that row under the \"9301 - MPI ID\" column.</p><p class='description' style='margin-top: 0.5em;'>It may also be found in the <a href='http://echo.uams.edu/echonet/payerportal/DrListing.asp' target='_blank'>UAMS Provider Enrollment Participation Portal</a>, which is only accessible on the UAMS network or by connecting to the UAMS virtual private network.</p><p class='description' style='margin-top: 0.5em;'>It may also be found by searching for the provider in the <a href='https://npiregistry.cms.hhs.gov/search' target='_blank'>NPPES NPI Registry</a>.",
+			"instructions": "This value may be found in the provider's UAMS Health Epic SER record. It would be in the \"Related Group 9300\" item. Look for \"Provider NPI\" in the column for \"9300 - MPI ID TYPE\" and copy the value from that row under the \"9301 - MPI ID\" column.</p><p class='description' style='margin-top: 0.5em;'>It may also be found in the <a href='https://echo.uams.edu/echonet/payerportal/DrListing.asp' target='_blank'>UAMS Provider Enrollment Participation Portal</a>, which is only accessible on the UAMS network or by connecting to the UAMS virtual private network.</p><p class='description' style='margin-top: 0.5em;'>It may also be found by searching for the provider in the <a href='https://npiregistry.cms.hhs.gov/search' target='_blank'>NPPES NPI Registry</a>.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -831,7 +831,7 @@
 			"label": "Patient Type(s)",
 			"name": "physician_patient_types",
 			"type": "taxonomy",
-			"instructions": "This is displayed on the provider's profile. This also enables users to filter the main provider list at <a href='http://uamshealth.com/provider/' target='_blank'>http://uamshealth.com/provider/</a> by each patient type.",
+			"instructions": "This is displayed on the provider's profile. This also enables users to filter the main provider list at <a href='https://uamshealth.com/provider/' target='_blank'>https://uamshealth.com/provider/</a> by each patient type.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {

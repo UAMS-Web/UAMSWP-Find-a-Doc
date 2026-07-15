@@ -1006,8 +1006,8 @@ function gmb_provider_csv_export() {
 
                             // Cover photo
                                 $provider_image_wide = get_field( 'physician_image_wide', $post_id );
-                                if ( function_exists( 'fly_add_image_size' ) && !empty($provider_image_wide) ) {
-                                    $provider_gmb_cover_photo = image_sizer($provider_image_wide, 2120, 1192, 'center', 'center'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
+                                if ( function_exists( 'bis_get_attachment_image' ) && !empty($provider_image_wide) ) {
+                                    $provider_gmb_cover_photo = image_sizer($provider_image_wide, 2120, 1192, 'center', 'center', 'aspect-16-9'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
                                 } else {
                                     $provider_gmb_cover_photo = wp_get_attachment_image_url($provider_image_wide, 'large');
                                 }
@@ -1764,14 +1764,14 @@ function gmb_location_csv_export() {
                         $location_gmb_other_photos = '';
                         foreach( $location_images as $location_images_item ) {
                             if ( $p == 1 ) {
-                                if ( function_exists( 'fly_add_image_size' ) ) {
-                                    $location_gmb_cover_photo = image_sizer($location_images_item, 2120, 1192, 'center', 'center'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
+                                if ( function_exists( 'bis_get_attachment_image' ) ) {
+                                    $location_gmb_cover_photo = image_sizer($location_images_item, 2120, 1192, 'center', 'center', 'aspect-16-9'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
                                 } else {
                                     $location_gmb_cover_photo =  wp_get_attachment_image_url($location_images_item, 'large');
                                 }
                             } else {
-                                if ( function_exists( 'fly_add_image_size' ) ) {
-                                    $location_gmb_other_photos .= image_sizer($location_images_item, 2120, 1192, 'center', 'center'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
+                                if ( function_exists( 'bis_get_attachment_image' ) ) {
+                                    $location_gmb_other_photos .= image_sizer($location_images_item, 2120, 1192, 'center', 'center', 'aspect-16-9'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
                                 } else {
                                     $location_gmb_other_photos .=  wp_get_attachment_image_url($location_images_item, 'large');
                                 }
