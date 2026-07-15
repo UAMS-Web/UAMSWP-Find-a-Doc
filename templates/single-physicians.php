@@ -662,14 +662,15 @@ while ( have_posts() ) : the_post();
     $pg_rating_data = '';
     $pg_rating_valid = '';
     $pg_total_comment_count = '';
-    if ( $npi ) {
-        $pg_rating_request = get_post_meta( get_the_ID(), '_syndicated_api_data', true ); // wp_pg_cached_api( $npi, 10 );
-        $pg_rating_data = json_decode( $pg_rating_request );
+    // if ( $npi ) {
+        // $pg_rating_request = get_post_meta( get_the_ID(), '_syndicated_api_data', true ); // wp_pg_cached_api( $npi, 10 );
+        // $pg_rating_data = json_decode( $pg_rating_request ); // Remove the redundant decode
+        $pg_rating_data = get_post_meta( get_the_ID(), '_syndicated_api_data', true );
         if ( !empty( $pg_rating_data ) && ('200' == $pg_rating_data->status->code ) ) {
             $pg_rating_valid = ( ($pg_rating_data->data->entities[0]->totalRatingCount) >= 30 );
             $pg_total_comment_count = $pg_rating_data->data->entities[0]->totalCommentCount;
         }
-    }
+    // }
     if ($pg_rating_valid) { $provider_field_classes = $provider_field_classes . ' has-ratings'; }
 
 	// Clinical Resources
