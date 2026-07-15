@@ -9,7 +9,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "!=",
+						"value": "provider_spotlight"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -25,7 +33,15 @@
 			"type": "text",
 			"instructions": "Enter a value here to set a shorter title to use where this resource appears in cards and lists. Leave it blank to use the full title.</p><p class='description' style='margin-top: 0.5em;'>The full title is always used for the page heading itself.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "!=",
+						"value": "provider_spotlight"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
