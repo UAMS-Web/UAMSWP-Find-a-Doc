@@ -2376,11 +2376,15 @@
 
 				}
 
-			// Slug: track the provider while drafting, then freeze at publish
+			// Slug: derive it once, then freeze so a later provider change or
+			// rename never rewrites a live URL. Freezing is tracked with a meta
+			// flag set at publish -- not the publish state itself -- because a
+			// direct publish (no prior draft save) reaches this hook already
+			// published, and gating on !$published would skip derivation entirely,
+			// leaving the permalink on a placeholder slug. Drafts keep tracking the
+			// provider until the flag is set.
 
-				$published = in_array( $post->post_status, array( 'publish', 'future', 'private' ), true );
-
-				if ( !$published ) {
+				if ( !get_post_meta( $post_id, '_uamswp_spotlight_slug_locked', true ) ) {
 
 					$slug_name = trim( str_replace( '&nbsp;', ' ', $names['medium_no_prefix'] ) );
 
@@ -2391,6 +2395,13 @@
 						if ( $new_slug && $post->post_name !== $new_slug ) {
 
 							$update['post_name'] = $new_slug;
+
+						}
+
+						// Once published, freeze: the permalink is now live.
+						if ( in_array( $post->post_status, array( 'publish', 'future', 'private' ), true ) ) {
+
+							update_post_meta( $post_id, '_uamswp_spotlight_slug_locked', '1' );
 
 						}
 
