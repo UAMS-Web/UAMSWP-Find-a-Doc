@@ -951,15 +951,16 @@ if ( !function_exists('uamswp_spotlight_appointment_cta') ) {
 			$referral = $refer_req ? 'Appointments for new patients are by referral only. ' : '';
 
 			$phone      = get_field( 'clinical_resource_spotlight_phone' );
-			$phone_href = $phone ? preg_replace( '/[^0-9+]/', '', $phone ) : '';
+			// Dashed format for both the tel: href and the visible text (e.g. 501-686-8000)
+			$phone_dash = $phone ? format_phone_dash( $phone ) : '';
 
-			if ( $phone && $phone_href ) {
+			if ( $phone && $phone_dash ) {
 
 				$tel_link = sprintf(
 					'<a href="tel:%1$s" class="no-break" data-itemtitle="Call to schedule with %2$s">%3$s</a>',
-					esc_attr( $phone_href ),
+					esc_attr( $phone_dash ),
 					esc_attr( $medium_name_attr ),
-					esc_html( $phone )
+					esc_html( $phone_dash )
 				);
 
 				$cta_body = $referral . sprintf(
