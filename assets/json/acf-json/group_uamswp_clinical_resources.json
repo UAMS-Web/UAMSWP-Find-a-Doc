@@ -841,7 +841,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "!=",
+						"value": "provider_spotlight"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -894,7 +902,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "!=",
+						"value": "provider_spotlight"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -910,7 +926,15 @@
 			"type": "relationship",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "!=",
+						"value": "provider_spotlight"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -939,7 +963,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "!=",
+						"value": "provider_spotlight"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -955,7 +987,15 @@
 			"type": "relationship",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "!=",
+						"value": "provider_spotlight"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -984,7 +1024,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "!=",
+						"value": "provider_spotlight"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -1000,7 +1048,15 @@
 			"type": "relationship",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "!=",
+						"value": "provider_spotlight"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -1029,7 +1085,15 @@
 			"type": "relationship",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "!=",
+						"value": "provider_spotlight"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
