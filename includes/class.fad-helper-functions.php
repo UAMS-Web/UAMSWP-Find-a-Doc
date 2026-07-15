@@ -415,7 +415,7 @@ if ( !function_exists('uamswp_provider_names') ) {
 
 	/**
 	 * @param  int  $provider_id  Provider post ID.
-	 * @return array short, medium, full, short_possessive, sort, sort_param, and _attr variants.
+	 * @return array short, medium, medium_no_prefix, full, short_possessive, sort, sort_param, and _attr variants.
 	 */
 	function uamswp_provider_names( $provider_id ) {
 
@@ -424,6 +424,8 @@ if ( !function_exists('uamswp_provider_names') ) {
 			'full_attr'             => '',
 			'medium'                => '',
 			'medium_attr'           => '',
+			'medium_no_prefix'      => '',
+			'medium_no_prefix_attr' => '',
 			'short'                 => '',
 			'short_attr'            => '',
 			'short_possessive'      => '',
@@ -532,6 +534,12 @@ if ( !function_exists('uamswp_provider_names') ) {
 
 				$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
 
+			// Medium name without the "Dr." prefix or any degrees (e.g.,
+			// "Leonard H. McCoy"). Useful where the prefix and credentials get
+			// in the way -- e.g. building a clean URL slug.
+
+				$medium_no_prefix_name = trim( $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name );
+
 			// Short name (e.g., "Dr. McCoy")
 
 				$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
@@ -562,6 +570,8 @@ if ( !function_exists('uamswp_provider_names') ) {
 			'full_attr'             => $full_name ? uamswp_attr_conversion($full_name) : '',
 			'medium'                => $medium_name,
 			'medium_attr'           => $medium_name ? uamswp_attr_conversion($medium_name) : '',
+			'medium_no_prefix'      => $medium_no_prefix_name,
+			'medium_no_prefix_attr' => $medium_no_prefix_name ? uamswp_attr_conversion($medium_no_prefix_name) : '',
 			'short'                 => $short_name,
 			'short_attr'            => $short_name ? uamswp_attr_conversion($short_name) : '',
 			'short_possessive'      => $short_name_possessive,
