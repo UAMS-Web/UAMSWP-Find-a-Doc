@@ -44,7 +44,15 @@
 			"type": "textarea",
 			"instructions": "This will be the description included for this page when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.</p><p class='description' style='margin-top: 0.5em;'>Required for every resource type except Provider Spotlight, which generates a description automatically when this is left blank.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "!=",
+						"value": "provider_spotlight"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -691,33 +699,6 @@
 			"acfe_validate": "",
 			"acfe_update": "",
 			"ui": 1
-		},
-		{
-			"key": "field_clinical_resource_spotlight_intro",
-			"label": "Introduction",
-			"name": "clinical_resource_spotlight_intro",
-			"type": "wysiwyg",
-			"instructions": "This will precede the provider's photo and the questions and answers.</p><p class='description' style='margin-top: 0.5em;'>Leave this blank to use an introduction generated automatically from the provider's name and clinical title.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_clinical_resource_type",
-						"operator": "==",
-						"value": "provider_spotlight"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "basic",
-			"media_upload": 0,
-			"delay": 1
 		},
 		{
 			"key": "field_clinical_resource_spotlight_qa",
