@@ -1603,17 +1603,18 @@ while ( have_posts() ) : the_post();
                                 <p>(<?php echo ($pg_rating_data->data->entities[0]->totalRatingCount ? $pg_rating_data->data->entities[0]->totalRatingCount . ' Ratings' : '' ); ?><?php echo ($pg_rating_data->data->entities[0]->totalCommentCount ? ', ' . $pg_rating_data->data->entities[0]->totalCommentCount . ' Comments' : ''); ?>)</p>
                             </div>
                         </div>
-                        <?php if ( isset($pg_rating_data->data->entities[0]->reviewSummary) && !empty($pg_rating_data->data->entities[0]->reviewSummary) ) { ?>
-                        <div class="card review-summary text-center" aria-label="Review Summary" itemprop="reviewSummary" itemscope itemtype="https://schema.org/ReviewSummary" itemref="overall-ratings" itemid="review-summary" style="margin: 0 auto 2rem; max-width: 100%; text-align: center; width: 33em;">
-                            <div class="card-body">
-                                <h3 class="h5 card-title">Comment Summary</h3>
-                                <p class="card-text"><?php echo $pg_rating_data->data->entities[0]->reviewSummary; ?></p>
-                            </div>
-                            <div class="card-footer bg-transparent text-muted small">
-                                <p>AI Generated from the text of customer reviews</p>
-                            </div>
-                        </div>
-                        <?php } ?>
+                        <?php  /* -- AI Review Summary --  ** Disabled until further testing **
+                        * if ( isset($pg_rating_data->data->entities[0]->reviewSummary) && !empty($pg_rating_data->data->entities[0]->reviewSummary) ) {
+                        * <div class="card review-summary text-center" aria-label="Review Summary" itemprop="reviewSummary" itemscope itemtype="https://schema.org/ReviewSummary" itemref="overall-ratings" itemid="review-summary" style="margin: 0 auto 2rem; max-width: 100%; text-align: center; width: 33em;">
+                        *    <div class="card-body">
+                        *         <h3 class="h5 card-title">Comment Summary</h3>
+                        *         <p class="card-text"><?php echo $pg_rating_data->data->entities[0]->reviewSummary; ?></p>
+                        *     </div>
+                        *     <div class="card-footer bg-transparent text-muted small">
+                        *         <p>AI Generated from the text of customer reviews</p>
+                        *     </div>
+                        * </div>
+                        * } -- */ ?>
                         <?php
                         $reviews = $pg_rating_data->data->entities[0]->comments;
                         // if ( $reviews ) : ?>
