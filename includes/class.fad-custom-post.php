@@ -5137,6 +5137,63 @@
 			$data['clinical_resource_video'] = $video;
 			$data['clinical_resource_video_descr'] = $video_descr;
 			$data['clinical_resource_video_transcript'] = $video_transcript;
+
+			// Short Title is a general field, present on every resource type
+			$data['clinical_resource_title_short'] = get_field( 'clinical_resource_title_short', $postId );
+
+			// Provider Spotlight
+			$spotlight_provider = (int) get_field( 'clinical_resource_spotlight_provider', $postId );
+
+			// Require the featured provider to still be published. The
+			// post_object query filter only restricts the admin dropdown at
+			// selection time; the provider can be unpublished, made private, or
+			// trashed afterward, and its title/slug/link must not leak through
+			// this public REST field once it is no longer public.
+			if (
+				'provider_spotlight' == $resource_type_value
+				&&
+				$spotlight_provider
+				&&
+				'publish' === get_post_status( $spotlight_provider )
+			) {
+
+				$data['clinical_resource_spotlight_provider']['id'] = $spotlight_provider;
+				$data['clinical_resource_spotlight_provider']['link'] = get_permalink( $spotlight_provider );
+				$data['clinical_resource_spotlight_provider']['title'] = get_field( 'physician_full_name', $spotlight_provider );
+				$data['clinical_resource_spotlight_provider']['slug'] = get_post_field( 'post_name', $spotlight_provider );
+
+				// The introduction is always generated from the provider (the
+				// manual field was removed), so export what a reader sees.
+				$data['clinical_resource_spotlight_intro'] = uamswp_spotlight_default_intro( $spotlight_provider );
+
+				$data['clinical_resource_spotlight_image_wide'] = get_field( 'clinical_resource_spotlight_image_wide', $postId );
+				$data['clinical_resource_spotlight_phone'] = get_field( 'clinical_resource_spotlight_phone', $postId );
+
+				$spotlight_qa = get_field( 'clinical_resource_spotlight_qa', $postId );
+				$q = 0;
+
+				if ( $spotlight_qa ) {
+
+					foreach ( $spotlight_qa as $spotlight_qa_row ) {
+
+						$spotlight_qa_question = $spotlight_qa_row['spotlight_qa_question'];
+						$spotlight_qa_answer = $spotlight_qa_row['spotlight_qa_answer'];
+
+						if ( $spotlight_qa_question ) {
+
+							$data['clinical_resource_spotlight_qa'][$q]['question'] = $spotlight_qa_question;
+							$data['clinical_resource_spotlight_qa'][$q]['answer'] = $spotlight_qa_answer;
+
+						}
+
+						$q++;
+
+					}
+
+				}
+
+			}
+
 			// $data['clinical_resource_document'] = $document;
 			$data['clinical_resource_document_descr'] = $document_descr;
 			$i = 0;

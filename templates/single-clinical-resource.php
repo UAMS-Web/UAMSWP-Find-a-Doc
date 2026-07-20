@@ -80,13 +80,20 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
     function uamswp_resource_post_title() {
         global $resource_archive_title;
+        global $resource_type_label;
+        global $is_provider_spotlight;
+
+        // A Provider Spotlight names itself in the supertitle
+        $supertitle = $is_provider_spotlight ? $resource_type_label : $resource_archive_title;
+
         echo '<h1 class="entry-title" itemprop="headline">';
-        echo '<span class="supertitle">'. $resource_archive_title . '</span><span class="sr-only">:</span> ';
+        echo '<span class="supertitle">'. $supertitle . '</span><span class="sr-only">:</span> ';
         echo get_the_title();
         echo '</h1>';
     }
 
 add_action( 'genesis_entry_content', 'uamswp_resource_text', 8 );
+add_action( 'genesis_entry_content', 'uamswp_resource_provider_spotlight', 9 );
 add_action( 'genesis_entry_content', 'uamswp_resource_infographic', 10 );
 add_action( 'genesis_entry_content', 'uamswp_resource_video', 12 );
 add_action( 'genesis_entry_content', 'uamswp_resource_document', 14 );
@@ -107,6 +114,18 @@ $jump_link_count = 0;
 $resource_type = get_field('clinical_resource_type');
 $resource_type_value = $resource_type['value'];
 $resource_type_label = $resource_type['label'];
+
+// Provider Spotlight
+$is_provider_spotlight = ( 'provider_spotlight' == $resource_type_value );
+$spotlight_provider = $is_provider_spotlight ? (int) get_field('clinical_resource_spotlight_provider') : 0;
+
+// Require the featured provider to still be published. A provider can be
+// unpublished, trashed, or deleted after selection, which would otherwise
+// render a spotlight with a dead profile link and, when the provider is gone,
+// name-less generated prose. Suppress the spotlight body in that case.
+if ( $spotlight_provider && 'publish' !== get_post_status( $spotlight_provider ) ) {
+    $spotlight_provider = 0;
+}
 
 // Check if Conditions section should be displayed
 // load all 'conditions' terms for the post
@@ -238,6 +257,30 @@ if( $resources && $resource_query->have_posts() ) {
 // It should always be displayed.
 $show_appointment_section = true;
 $jump_link_count++;
+
+// Suppress every "Related *" section on a Provider Spotlight
+//
+// A spotlight is a self-contained feature about one provider: its own
+// call to action carries the only outbound link, and a one-card grid of the
+// page's own subject would be redundant. This is presentation only. The
+// relationship fields stay editable, and the featured provider is still
+// mirrored into clinical_resource_providers, so Ajax Search Pro and FacetWP
+// continue to index this resource under that provider.
+//
+// The generic "Make an Appointment" module is not a "Related" section and is
+// kept. With everything else gone the jump-link count falls to one, below the
+// minimum, so the jump-link nav hides itself; each section function is also
+// guarded on its own flag.
+if ( $is_provider_spotlight ) {
+    $show_conditions_section       = false;
+    $show_treatments_section       = false;
+    $show_providers_section        = false;
+    $show_locations_section        = false;
+    $show_aoe_section              = false;
+    $show_related_resource_section = false;
+
+    $jump_link_count = 1; // the appointment module only
+}
 
 // Check if Jump Links section should be displayed
 if ( $jump_link_count >= $jump_link_count_min ) {
@@ -545,8 +588,18 @@ function uamswp_resource_jump_links() {
 }
 function uamswp_resource_appointment() {
     global $show_appointment_section;
+    global $is_provider_spotlight;
+    global $spotlight_provider;
 
     if ( $show_appointment_section ) {
+
+        // On a Provider Spotlight, the provider-specific CTA replaces the
+        // generic "Make an Appointment" band in this same slot.
+        if ( $is_provider_spotlight && $spotlight_provider ) {
+            echo uamswp_spotlight_appointment_cta( $spotlight_provider );
+            return;
+        }
+
         $appointment_location_url = '/location/';
         //$appointment_location_label = 'View a list of UAMS Health locations';
         ?>
@@ -561,5 +614,97 @@ function uamswp_resource_appointment() {
             </div>
         </section>
     <?php }
+}
+
+/**
+ * Provider Spotlight
+ *
+ * The introduction followed by the Q&A block, which floats the provider's
+ * portrait as its first child. Renders nothing for any other resource type. The
+ * call to action is not rendered here; it renders in the site appointment slot
+ * via uamswp_resource_appointment() (see the note at the end of this function).
+ *
+ * Heading levels run h1 (post title) -> h2 (section) -> h3 (question), with no
+ * level skipped; the intro and Q&A h2s are screen-reader-only. The portrait
+ * identifies the provider, so its alt text is the provider's name rather than
+ * being marked decorative.
+ *
+ * Structured data stays at parity with the other resource types: the inherited
+ * Genesis entry microdata and itemprop="image" on the portrait, and nothing
+ * more. No JSON-LD, and no about/mainEntity link to the provider.
+ */
+function uamswp_resource_provider_spotlight() {
+    global $is_provider_spotlight;
+    global $spotlight_provider;
+
+    if ( !$is_provider_spotlight || !$spotlight_provider ) {
+        return;
+    }
+
+    $provider_id = $spotlight_provider;
+
+    // Provider-derived strings, resolved once
+    $names = uamswp_provider_names( $provider_id );
+
+    $medium_name_attr = $names['medium_attr'];
+
+    // Escaped for HTML text context. The name parts come from plain-text ACF
+    // fields with no kses filtering, so they must not be echoed raw.
+    $medium_name      = uamswp_provider_name_html( $names['medium'] );
+    $short_name       = uamswp_provider_name_html( $names['short'] );
+    $short_possessive = uamswp_provider_name_html( $names['short_possessive'] );
+
+    // Introduction: always generated from the provider. The manual field was
+    // removed, so any value left in postmeta from before that is ignored.
+    $intro = uamswp_spotlight_default_intro( $provider_id );
+
+    if ( $intro ) {
+        echo '<h2 class="sr-only">Description</h2>';
+        echo $intro;
+    }
+
+    // Questions and answers, wrapped so the portrait float is contained and the
+    // block carries a divider above it (echoing an <hr> after the intro). The
+    // "Getting to Know" heading is screen-reader only; the portrait follows it
+    // and floats via the theme's .alignright.
+    if ( have_rows('clinical_resource_spotlight_qa') ) {
+        ?>
+        <h2 class="sr-only">Questions and Answers</h2>
+        <div class="rule-top-lg d-flow-root">
+            <?php
+            // Portrait: the provider's standard 3:4 headshot, sized for a
+            // right-aligned content image
+            $portrait_id = get_post_thumbnail_id( $provider_id );
+
+            if ( $portrait_id ) {
+                $portrait_alt = $medium_name_attr;
+                ?>
+                <figure class="alignright">
+                    <?php echo wp_get_attachment_image( $portrait_id, 'content-image-side', false, array( 'alt' => $portrait_alt, 'itemprop' => 'image' ) ); ?>
+                </figure>
+                <?php
+            }
+
+            while ( have_rows('clinical_resource_spotlight_qa') ) : the_row();
+                $question = get_sub_field('spotlight_qa_question');
+                $answer   = get_sub_field('spotlight_qa_answer');
+
+                if ( !$question ) {
+                    continue;
+                }
+                ?>
+                <h3><?php echo esc_html($question); ?></h3>
+                <div class="answer"><?php echo $answer; ?></div>
+                <?php
+            endwhile;
+            ?>
+        </div>
+        <?php
+    }
+
+    // The provider-specific call to action is not rendered here. It renders in
+    // the site appointment slot (#appointment-info) via
+    // uamswp_resource_appointment(), replacing the generic "Make an Appointment"
+    // band for spotlights. See uamswp_spotlight_appointment_cta().
 }
 genesis();
