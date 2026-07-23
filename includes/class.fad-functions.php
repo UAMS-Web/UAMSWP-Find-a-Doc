@@ -494,12 +494,12 @@ function pg_ajax_api() {
 						<div class="card-header bg-transparent">
 							<div class="rating rating-center" aria-label="Average Rating">
 								<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->overallRating->value)/5 * 100; ?>%;"></div></div>
-								<div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->overallRating->value; ?><span class="sr-only"> out of 5</span></div>
+								<div class="ratings-score-lg" itemprop="ratingValue"><?php echo esc_html($review->overallRating->value); ?><span class="sr-only"> out of 5</span></div>
 							</div>
 						</div>
 						<div class="card-body">
 							<h4 class="sr-only">Comment</h4>
-							<p class="card-text"><?php echo $review->comment; ?></p>
+							<p class="card-text"><?php echo esc_html($review->comment); ?></p>
 						</div>
 						<div class="card-footer bg-transparent text-muted small">
 							<h4 class="sr-only">Date</h4>
