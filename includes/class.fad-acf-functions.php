@@ -2785,6 +2785,25 @@
 
 			$cr_id = (int) $cr_id;
 
+			// Authorization gate for the cross-post writes below.
+			//
+			// This function writes into the clinical-resource spotlight and into
+			// each location/expertise/condition/treatment ontology post. Those are
+			// separate post types the acting user may not be entitled to edit, so a
+			// low-privilege doc_editor/doc_admin saving a provider could otherwise
+			// force writes into posts they cannot edit (CWE-862).
+			//
+			// current_user_can() is false when there is NO current user, which would
+			// wrongly block the userless WP-Cron propagations that legitimately reach
+			// here and must still run: scheduled publish (check_and_publish_future_post
+			// -> transition_post_status future->publish) and trash-empty
+			// (wp_scheduled_delete -> before_delete_post). So only enforce the
+			// capability when a user is actually acting. is_user_logged_in() is true
+			// for the logged-in doc_editor/doc_admin exploit (still gated) and false
+			// for cron/CLI (trusted system-side propagation preserved). Each write is
+			// gated on the acting user's edit_post for its own specific target.
+			$gate = is_user_logged_in();
+
 			foreach ( uamswp_spotlight_ontology_map() as $spec ) {
 
 				$target  = $provider_id ? uamswp_spotlight_to_ids( get_field( $spec['provider'], $provider_id ) ) : array();
@@ -2799,10 +2818,24 @@
 
 				}
 
-				update_field( $spec['name'], $target, $cr_id );
+				// The spotlight's own ontology field: write only for a userless
+				// context or an acting user who can edit the spotlight.
+				if ( !$gate || current_user_can( 'edit_post', $cr_id ) ) {
+
+					update_field( $spec['name'], $target, $cr_id );
+
+				}
 
 				// Add the spotlight to each newly associated ontology post
 				foreach ( $added as $ontology_id ) {
+
+					// Skip the reverse write into an ontology post an acting user
+					// cannot edit; a userless cron/CLI propagation still runs.
+					if ( $gate && !current_user_can( 'edit_post', $ontology_id ) ) {
+
+						continue;
+
+					}
 
 					$list = uamswp_spotlight_to_ids( get_field( $spec['reverse'], $ontology_id ) );
 
@@ -2817,6 +2850,14 @@
 
 				// Remove it from each ontology post it no longer belongs to
 				foreach ( $removed as $ontology_id ) {
+
+					// Skip the reverse write into an ontology post an acting user
+					// cannot edit; a userless cron/CLI propagation still runs.
+					if ( $gate && !current_user_can( 'edit_post', $ontology_id ) ) {
+
+						continue;
+
+					}
 
 					$list = uamswp_spotlight_to_ids( get_field( $spec['reverse'], $ontology_id ) );
 
