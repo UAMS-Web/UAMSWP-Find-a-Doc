@@ -3397,7 +3397,7 @@
 			$data['provider_podcast'] = '<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
 			</script>
 			<script type="text/javascript">
-				radiomd_embedded_filtered_doctor("uams","radiomd-embedded-filtered-doctor",303,1837,"' . $podcast_name . '");
+				radiomd_embedded_filtered_doctor("uams","radiomd-embedded-filtered-doctor",303,1837,"' . esc_js( $podcast_name ) . '");
 			</script>
 			<style type="text/css">
 				#radiomd-embedded-filtered-tag iframe {
