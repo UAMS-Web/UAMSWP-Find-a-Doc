@@ -1110,6 +1110,17 @@ function gmb_provider_csv_export() {
     fputcsv( $fh, $table_head, $delimiter );
     foreach ( $table_body as $data_row )
     {
+        // Neutralize CSV formula injection (CWE-1236): prefix a single quote to
+        // any cell that begins with a spreadsheet formula trigger. Numeric cells
+        // (including negative numbers such as the Arkansas longitude in row[12])
+        // are left untouched so Google Business imports still receive raw numbers.
+        $data_row = array_map( function( $cell ) {
+            if ( is_string( $cell ) && $cell !== '' && ! is_numeric( $cell )
+                && in_array( $cell[0], array( '=', '+', '-', '@', "\t", "\r" ), true ) ) {
+                return "'" . $cell;
+            }
+            return $cell;
+        }, $data_row );
         fputcsv( $fh, $data_row, $delimiter );
     }
 
