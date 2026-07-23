@@ -2350,6 +2350,12 @@
 
 				$full = trim( str_replace( '&nbsp;', ' ', $names['full'] ) );
 
+				// The provider-name ACF fields are plain-text and receive no kses
+				// filtering, so strip any markup before it is persisted into the
+				// spotlight's post_title (rendered on the public spotlight page).
+
+				$full = wp_strip_all_tags( $full );
+
 				if ( '' === $full ) {
 
 					return;
