@@ -26,6 +26,7 @@ jQuery(document).ready(function($) {
         dataType: 'html',
         data: {
             action : "pg_ajax_api_action",
+            nonce : uamswp_ajax_scripts.security,
             npi : npi,
             page : page,
         },

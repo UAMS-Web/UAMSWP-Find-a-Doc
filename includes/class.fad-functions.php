@@ -460,12 +460,12 @@ function wp_pg_cached_api( $npi, $count = 6 ) {
 add_action('wp_ajax_pg_ajax_api_action', 'pg_ajax_api');
 add_action('wp_ajax_nopriv_pg_ajax_api_action', 'pg_ajax_api');
 function pg_ajax_api() {
-	// if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'pg_pagination_posts') || !isset($_POST['npi'])) {
-	// 	wp_die(-1);
-	// }
+	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'pg_pagination_posts' ) || ! isset( $_POST['npi'] ) ) {
+		wp_die( -1 );
+	}
 
-	$npi = $_POST['npi'];
-	$current_page = $_POST['page'] ? (int) $_POST['page'] : 1;
+	$npi = urlencode( sanitize_text_field( wp_unslash( $_POST['npi'] ) ) );
+	$current_page = ! empty( $_POST['page'] ) ? (int) $_POST['page'] : 1;
 
 	// PressGaney requires Access-Token to retrieve data
 	$token = wp_pg_get_token();
