@@ -1605,8 +1605,14 @@ function schedule_ajax_filter_callback() {
 		exit;
 	}
 
-	$pid = $_POST['pid'];
+	$pid = intval($_POST['pid']);
 	$schedule_key = $_POST['schedule_options'];
+
+	// IDOR guard: only disclose scheduling data for a published Location post,
+	// so draft/private posts or posts of other types cannot be read by ID.
+	if ( $pid < 1 || get_post_status($pid) !== 'publish' || get_post_type($pid) !== 'location' ) {
+		exit;
+	}
 
 	$schedules = get_field('location_scheduling_options', $pid);
 	$row = $schedules[$schedule_key];
