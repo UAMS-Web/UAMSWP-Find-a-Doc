@@ -1997,6 +1997,15 @@ function mychart_csv_export() {
     fputcsv( $fh, $table_head, $delimiter );
     foreach ( $table_body as $data_row )
     {
+        // Neutralize CSV formula injection: prefix any cell value beginning with
+        // =, +, -, @, tab (\t), or CR (\r) with a leading single quote so it is
+        // treated as text rather than a formula by spreadsheet software.
+        foreach ( $data_row as $cell_index => $cell_value ) {
+            $cell_value = (string) $cell_value;
+            if ( $cell_value !== '' && strpbrk( $cell_value[0], "=+-@\t\r" ) !== false ) {
+                $data_row[ $cell_index ] = "'" . $cell_value;
+            }
+        }
         fputcsv( $fh, $data_row, $delimiter );
     }
 
