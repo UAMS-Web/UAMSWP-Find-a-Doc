@@ -1883,6 +1883,18 @@ function gmb_location_csv_export() {
     fputcsv( $fh, $table_head, $delimiter );
     foreach ( $table_body as $data_row )
     {
+        // Neutralize CSV formula injection: prefix a single quote to any cell
+        // that could be interpreted as a spreadsheet formula. Numeric cells
+        // (including negative numbers such as the longitude in row[12]) are
+        // never dangerous formulas, so they are left untouched to preserve the
+        // raw values Google Business import expects.
+        $data_row = array_map( function( $cell ) {
+            if ( is_string( $cell ) && $cell !== '' && ! is_numeric( $cell )
+                && strpos( "=+-@\t\r", $cell[0] ) !== false ) {
+                return "'" . $cell;
+            }
+            return $cell;
+        }, $data_row );
         fputcsv( $fh, $data_row, $delimiter );
     }
 
