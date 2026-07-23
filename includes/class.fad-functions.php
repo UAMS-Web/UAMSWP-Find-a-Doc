@@ -375,7 +375,31 @@ function wp_pg_get_token() {
 	$pg_cache_key   = 'pg_api_token';
 	$pg_token = get_transient( $pg_cache_key );
 	if ( ! $pg_token ) {
-		$pg_response    = wp_remote_post('https://api1.consumerism.pressganey.com/api/service/v1/token/create?appId=034581304013586&appSecret=68a0fd1e-22c0-49a2-8218-10f581e3cdaa', array(
+		// PressGaney API credentials are read at runtime from server-side
+		// configuration -- never hardcoded here. Define them in wp-config.php:
+		//     define( 'UAMSWP_PG_APP_ID', '...' );
+		//     define( 'UAMSWP_PG_APP_SECRET', '...' );
+		// or provide them via the UAMSWP_PG_APP_ID / UAMSWP_PG_APP_SECRET
+		// environment variables. The previously committed credential remains in
+		// git history and must be rotated by the site owner.
+		$pg_app_id     = defined( 'UAMSWP_PG_APP_ID' ) ? UAMSWP_PG_APP_ID : getenv( 'UAMSWP_PG_APP_ID' );
+		$pg_app_secret = defined( 'UAMSWP_PG_APP_SECRET' ) ? UAMSWP_PG_APP_SECRET : getenv( 'UAMSWP_PG_APP_SECRET' );
+
+		// Fail safe: without both credentials, do not call the API with empty
+		// or placeholder values. Return the (missing) token as before.
+		if ( empty( $pg_app_id ) || empty( $pg_app_secret ) ) {
+			return $pg_token;
+		}
+
+		$pg_token_url = add_query_arg(
+			array(
+				'appId'     => $pg_app_id,
+				'appSecret' => $pg_app_secret,
+			),
+			'https://api1.consumerism.pressganey.com/api/service/v1/token/create'
+		);
+
+		$pg_response    = wp_remote_post( $pg_token_url, array(
 			'headers' => array(
 				'Content-Type' => 'application/json',
 				'Access-Token' => 'Content-Type'
