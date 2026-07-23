@@ -324,6 +324,15 @@ function doximity_csv_export() {
     fputcsv( $fh, $table_head, $delimiter );
     foreach ( $table_body as $data_row )
     {
+        // Neutralize CSV formula injection: any cell whose first character is
+        // =, +, -, @, tab, or CR is prefixed with a single quote so spreadsheet
+        // applications treat it as text rather than evaluating it as a formula.
+        $data_row = array_map( function( $cell ) {
+            if ( is_string( $cell ) && $cell !== '' && in_array( $cell[0], array( '=', '+', '-', '@', "\t", "\r" ), true ) ) {
+                return "'" . $cell;
+            }
+            return $cell;
+        }, $data_row );
         fputcsv( $fh, $data_row, $delimiter );
     }
 
