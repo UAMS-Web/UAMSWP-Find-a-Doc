@@ -1238,7 +1238,7 @@ while ( have_posts() ) : the_post();
                 <script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
                 </script>
                 <script type="text/javascript">
-                    radiomd_embedded_filtered_doctor("uams","radiomd-embedded-filtered-doctor",303,1837,"<?php echo $podcast_name; ?>"); </script>
+                    radiomd_embedded_filtered_doctor("uams","radiomd-embedded-filtered-doctor",303,1837,"<?php echo esc_js( $podcast_name ); ?>"); </script>
                 <style type="text/css">
                     #radiomd-embedded-filtered-doctor iframe {
                         width: 100%;

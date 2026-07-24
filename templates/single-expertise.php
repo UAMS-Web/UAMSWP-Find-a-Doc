@@ -661,7 +661,7 @@ function uamswp_expertise_podcast() {
         <script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
         </script>
         <script type="text/javascript">
-            radiomd_embedded_filtered_tag("uams","radiomd-embedded-filtered-tag",303,"' . $podcast_name . '");
+            radiomd_embedded_filtered_tag("uams","radiomd-embedded-filtered-tag",303,"' . esc_js( $podcast_name ) . '");
         </script>
         <style type="text/css">
             #radiomd-embedded-filtered-tag iframe {

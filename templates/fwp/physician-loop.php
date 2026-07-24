@@ -297,7 +297,7 @@
 
 	                         <a class="uams-btn btn-blue btn-sm" target="_self" title="View Profile" href="<?php echo get_permalink($post->ID); ?>">View Profile</a>
 							<?php if(get_field('physician_youtube_link')) { ?>
-								<a class="uams-btn btn-red btn-play btn-sm" target="_self" title="View Physician Video" href="<?php echo get_field('physician_youtube_link'); ?>&rel=0" data-lity>View Video</a>
+								<a class="uams-btn btn-red btn-play btn-sm" target="_self" title="View Physician Video" href="<?php echo esc_url( get_field('physician_youtube_link') ); ?>&rel=0" data-lity>View Video</a>
 							<?php } ?>
 	                    </div>
 	                    <div class="col-md-6">

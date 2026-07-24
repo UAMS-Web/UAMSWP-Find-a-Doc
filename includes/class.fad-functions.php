@@ -382,7 +382,31 @@ function wp_pg_get_token() {
 	$pg_cache_key   = 'pg_api_token';
 	$pg_token = get_transient( $pg_cache_key );
 	if ( ! $pg_token ) {
-		$pg_response    = wp_remote_post('https://api1.consumerism.pressganey.com/api/service/v1/token/create?appId=034581304013586&appSecret=68a0fd1e-22c0-49a2-8218-10f581e3cdaa', array(
+		// PressGaney API credentials are read at runtime from server-side
+		// configuration -- never hardcoded here. Define them in wp-config.php:
+		//     define( 'UAMSWP_PG_APP_ID', '...' );
+		//     define( 'UAMSWP_PG_APP_SECRET', '...' );
+		// or provide them via the UAMSWP_PG_APP_ID / UAMSWP_PG_APP_SECRET
+		// environment variables. The previously committed credential remains in
+		// git history and must be rotated by the site owner.
+		$pg_app_id     = defined( 'UAMSWP_PG_APP_ID' ) ? UAMSWP_PG_APP_ID : getenv( 'UAMSWP_PG_APP_ID' );
+		$pg_app_secret = defined( 'UAMSWP_PG_APP_SECRET' ) ? UAMSWP_PG_APP_SECRET : getenv( 'UAMSWP_PG_APP_SECRET' );
+
+		// Fail safe: without both credentials, do not call the API with empty
+		// or placeholder values. Return the (missing) token as before.
+		if ( empty( $pg_app_id ) || empty( $pg_app_secret ) ) {
+			return $pg_token;
+		}
+
+		$pg_token_url = add_query_arg(
+			array(
+				'appId'     => $pg_app_id,
+				'appSecret' => $pg_app_secret,
+			),
+			'https://api1.consumerism.pressganey.com/api/service/v1/token/create'
+		);
+
+		$pg_response    = wp_remote_post( $pg_token_url, array(
 			'headers' => array(
 				'Content-Type' => 'application/json',
 				'Access-Token' => 'Content-Type'
@@ -444,12 +468,12 @@ function wp_pg_cached_api( $npi, $count = 6 ) {
 add_action('wp_ajax_pg_ajax_api_action', 'pg_ajax_api');
 add_action('wp_ajax_nopriv_pg_ajax_api_action', 'pg_ajax_api');
 function pg_ajax_api() {
-	// if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'pg_pagination_posts') || !isset($_POST['npi'])) {
-	// 	wp_die(-1);
-	// }
+	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'pg_pagination_posts' ) || ! isset( $_POST['npi'] ) ) {
+		wp_die( -1 );
+	}
 
-	$npi = $_POST['npi'];
-	$current_page = $_POST['page'] ? (int) $_POST['page'] : 1;
+	$npi = urlencode( sanitize_text_field( wp_unslash( $_POST['npi'] ) ) );
+	$current_page = ! empty( $_POST['page'] ) ? (int) $_POST['page'] : 1;
 
 	// PressGaney requires Access-Token to retrieve data
 	$token = wp_pg_get_token();
@@ -478,12 +502,12 @@ function pg_ajax_api() {
 						<div class="card-header bg-transparent">
 							<div class="rating rating-center" aria-label="Average Rating">
 								<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->overallRating->value)/5 * 100; ?>%;"></div></div>
-								<div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->overallRating->value; ?><span class="sr-only"> out of 5</span></div>
+								<div class="ratings-score-lg" itemprop="ratingValue"><?php echo esc_html($review->overallRating->value); ?><span class="sr-only"> out of 5</span></div>
 							</div>
 						</div>
 						<div class="card-body">
 							<h4 class="sr-only">Comment</h4>
-							<p class="card-text"><?php echo $review->comment; ?></p>
+							<p class="card-text"><?php echo esc_html($review->comment); ?></p>
 						</div>
 						<div class="card-footer bg-transparent text-muted small">
 							<h4 class="sr-only">Date</h4>
@@ -1589,8 +1613,14 @@ function schedule_ajax_filter_callback() {
 		exit;
 	}
 
-	$pid = $_POST['pid'];
+	$pid = intval($_POST['pid']);
 	$schedule_key = $_POST['schedule_options'];
+
+	// IDOR guard: only disclose scheduling data for a published Location post,
+	// so draft/private posts or posts of other types cannot be read by ID.
+	if ( $pid < 1 || get_post_status($pid) !== 'publish' || get_post_type($pid) !== 'location' ) {
+		exit;
+	}
 
 	$schedules = get_field('location_scheduling_options', $pid);
 	$row = $schedules[$schedule_key];

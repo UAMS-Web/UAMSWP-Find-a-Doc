@@ -324,6 +324,15 @@ function doximity_csv_export() {
     fputcsv( $fh, $table_head, $delimiter );
     foreach ( $table_body as $data_row )
     {
+        // Neutralize CSV formula injection: any cell whose first character is
+        // =, +, -, @, tab, or CR is prefixed with a single quote so spreadsheet
+        // applications treat it as text rather than evaluating it as a formula.
+        $data_row = array_map( function( $cell ) {
+            if ( is_string( $cell ) && $cell !== '' && in_array( $cell[0], array( '=', '+', '-', '@', "\t", "\r" ), true ) ) {
+                return "'" . $cell;
+            }
+            return $cell;
+        }, $data_row );
         fputcsv( $fh, $data_row, $delimiter );
     }
 
@@ -1101,6 +1110,17 @@ function gmb_provider_csv_export() {
     fputcsv( $fh, $table_head, $delimiter );
     foreach ( $table_body as $data_row )
     {
+        // Neutralize CSV formula injection (CWE-1236): prefix a single quote to
+        // any cell that begins with a spreadsheet formula trigger. Numeric cells
+        // (including negative numbers such as the Arkansas longitude in row[12])
+        // are left untouched so Google Business imports still receive raw numbers.
+        $data_row = array_map( function( $cell ) {
+            if ( is_string( $cell ) && $cell !== '' && ! is_numeric( $cell )
+                && in_array( $cell[0], array( '=', '+', '-', '@', "\t", "\r" ), true ) ) {
+                return "'" . $cell;
+            }
+            return $cell;
+        }, $data_row );
         fputcsv( $fh, $data_row, $delimiter );
     }
 
@@ -1863,6 +1883,18 @@ function gmb_location_csv_export() {
     fputcsv( $fh, $table_head, $delimiter );
     foreach ( $table_body as $data_row )
     {
+        // Neutralize CSV formula injection: prefix a single quote to any cell
+        // that could be interpreted as a spreadsheet formula. Numeric cells
+        // (including negative numbers such as the longitude in row[12]) are
+        // never dangerous formulas, so they are left untouched to preserve the
+        // raw values Google Business import expects.
+        $data_row = array_map( function( $cell ) {
+            if ( is_string( $cell ) && $cell !== '' && ! is_numeric( $cell )
+                && strpos( "=+-@\t\r", $cell[0] ) !== false ) {
+                return "'" . $cell;
+            }
+            return $cell;
+        }, $data_row );
         fputcsv( $fh, $data_row, $delimiter );
     }
 
@@ -1965,6 +1997,15 @@ function mychart_csv_export() {
     fputcsv( $fh, $table_head, $delimiter );
     foreach ( $table_body as $data_row )
     {
+        // Neutralize CSV formula injection: prefix any cell value beginning with
+        // =, +, -, @, tab (\t), or CR (\r) with a leading single quote so it is
+        // treated as text rather than a formula by spreadsheet software.
+        foreach ( $data_row as $cell_index => $cell_value ) {
+            $cell_value = (string) $cell_value;
+            if ( $cell_value !== '' && strpbrk( $cell_value[0], "=+-@\t\r" ) !== false ) {
+                $data_row[ $cell_index ] = "'" . $cell_value;
+            }
+        }
         fputcsv( $fh, $data_row, $delimiter );
     }
 
