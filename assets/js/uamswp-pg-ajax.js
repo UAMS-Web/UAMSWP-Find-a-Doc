@@ -53,7 +53,7 @@ jQuery(document).ready(function($) {
 
     function renderData(data) {
         const cardList = $('#comment-list');
-        console.log(data);
+        // console.log(data);
         cardList.empty();
         cardList.append(data);
     }
