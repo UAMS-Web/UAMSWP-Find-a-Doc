@@ -226,6 +226,46 @@
 			"multiple": 0
 		},
 		{
+			"key": "field_location_epic_dep_ids",
+			"label": "UAMS Health Epic DEP IDs",
+			"name": "location_epic_dep_ids",
+			"type": "repeater",
+			"instructions": "The UAMS Health Epic department (DEP) records that correspond to this location. Leave this empty if no Epic department record corresponds to this location. Each DEP ID must be unique within this location.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"collapsed": "field_location_epic_dep_id_item",
+			"min": 0,
+			"max": 0,
+			"layout": "block",
+			"button_label": "Add UAMS Health Epic DEP ID",
+			"sub_fields": [
+				{
+					"key": "field_location_epic_dep_id_item",
+					"label": "Individual UAMS Health Epic DEP ID",
+					"name": "location_epic_dep_id_item",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				}
+			]
+		},
+		{
 			"key": "field_location_brand_tab",
 			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
 			"name": "",

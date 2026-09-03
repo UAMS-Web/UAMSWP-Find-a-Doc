@@ -299,6 +299,82 @@
 			"multiple": 0
 		},
 		{
+			"key": "field_physician_workday_universal_id",
+			"label": "Workday Universal ID",
+			"name": "physician_workday_universal_id",
+			"type": "text",
+			"instructions": "A 32-character globally unique identifier (GUID) assigned by Workday.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_physician_workday_employee_id",
+			"label": "Workday Employee ID",
+			"name": "physician_workday_employee_id",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_physician_workday_contingent_worker_id",
+			"label": "Workday Contingent Worker ID",
+			"name": "physician_workday_contingent_worker_id",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_physician_workday_student_id",
+			"label": "Workday Student ID",
+			"name": "physician_workday_student_id",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
 			"key": "field_physician_brand_tab",
 			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
 			"name": "",
