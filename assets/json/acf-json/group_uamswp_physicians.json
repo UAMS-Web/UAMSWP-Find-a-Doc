@@ -303,7 +303,7 @@
 			"label": "Workday Universal ID",
 			"name": "physician_workday_universal_id",
 			"type": "text",
-			"instructions": "A 32-character globally unique identifier (GUID) assigned by Workday.",
+			"instructions": "A Workday Universal ID is a unique, immutable 32-character GUID (globally unique identifier) assigned to every object in Workday — including workers — at the time of creation. Unlike employee IDs, which may change during conversions, Workday Universal IDs remain consistent.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
