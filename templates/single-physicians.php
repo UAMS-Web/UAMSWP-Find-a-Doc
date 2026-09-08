@@ -1803,7 +1803,8 @@ while ( have_posts() ) : the_post();
     </main>
 </div>
 
-<?php // Schema Data ?>
+<?php // Schema Data
+    if( !function_exists('uams_physician_schema') ) { ?>
 <script type='application/ld+json'>
 {
   "@context": "https://schema.org",
@@ -1833,8 +1834,9 @@ while ( have_posts() ) : the_post();
    }
   <?php } ?>
 }
- </script>
-
-<?php endwhile; // end of the loop. ?>
+</script>
+<?php
+    } // End if for schema data
+endwhile; // end of the loop. ?>
 
 <?php get_footer(); ?>
