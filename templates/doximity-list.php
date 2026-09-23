@@ -246,8 +246,12 @@ function display_provider_image() {
                                                 $building_name = $building->name;
                                             }
                                             $primary_appointment_floor = get_field_object('location_building_floor', $location_source_ids['unit'] );
-                                                $primary_appointment_floor_value = $primary_appointment_floor['value'];
-                                                $primary_appointment_floor_label = $primary_appointment_floor['choices'][ $primary_appointment_floor_value ];
+                                                $primary_appointment_floor_value = '';
+                                                $primary_appointment_floor_label = '';
+                                                if ( $primary_appointment_floor ) {
+                                                    $primary_appointment_floor_value = $primary_appointment_floor['value'];
+                                                    $primary_appointment_floor_label = $primary_appointment_floor['choices'][ $primary_appointment_floor_value ] ?? '';
+                                                }
                                             $primary_appointment_suite = get_field('location_suite', $location_source_ids['unit'] );
                                             $primary_appointment_address_2 =
                                                 ( ( $primary_appointment_building && $building_slug != '_none' ) ? $building_name . ( ( ($primary_appointment_floor && $primary_appointment_floor_value) || $primary_appointment_suite ) ? '<br />' : '' ) : '' )
