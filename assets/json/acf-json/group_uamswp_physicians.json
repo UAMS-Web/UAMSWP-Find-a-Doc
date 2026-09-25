@@ -299,6 +299,82 @@
 			"multiple": 0
 		},
 		{
+			"key": "field_physician_workday_universal_id",
+			"label": "Workday Universal ID",
+			"name": "physician_workday_universal_id",
+			"type": "text",
+			"instructions": "A Workday Universal ID is a unique, immutable 32-character GUID (globally unique identifier) assigned to every object in Workday — including workers — at the time of creation. Unlike employee IDs, which may change during conversions, Workday Universal IDs remain consistent.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_physician_workday_employee_id",
+			"label": "Workday Employee ID",
+			"name": "physician_workday_employee_id",
+			"type": "text",
+			"instructions": "The Workday Employee ID for this person. Assigned to employees; a person hired through a contingent arrangement has a Workday Contingent Worker ID instead.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_physician_workday_contingent_worker_id",
+			"label": "Workday Contingent Worker ID",
+			"name": "physician_workday_contingent_worker_id",
+			"type": "text",
+			"instructions": "The Workday Contingent Worker ID for this person. Assigned to contractors and other non-employee workers rather than to employees.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_physician_workday_student_id",
+			"label": "Workday Student ID",
+			"name": "physician_workday_student_id",
+			"type": "text",
+			"instructions": "The Workday Student ID for this person. Assigned to students.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
 			"key": "field_physician_brand_tab",
 			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
 			"name": "",

@@ -3040,3 +3040,151 @@
 			}
 
 		}
+
+// UAMS Health Epic DEP IDs on locations
+//
+// The repeater itself is optional -- a location need not map to any Epic
+// department -- but a DEP ID may not appear twice on the same location. The
+// duplicate rows would be indistinguishable, and every downstream consumer
+// treats the rows as a set: the migration API exposes them, and the importer
+// maps them into the Statamic clinical_locations collection, whose
+// epic_dep_ids field carries its own DepInDeclaredList rule. ACF has no
+// built-in unique-value validation, so the check lives here.
+//
+// The repeater's own validate_value() passes the whole submitted rows array
+// down the filter chain -- rows keyed by row index, sub-values keyed by
+// sub-field key -- so this needs no $_POST inspection to see sibling rows. The
+// error is attached to the offending row's own input, using the same name
+// ACF's repeater builds for its sub-field errors, so it renders against that
+// row rather than against the repeater as a whole.
+//
+// Scope: uniqueness is enforced within a single location only. Uniqueness
+// across every location post is deliberately NOT implemented -- see #816.
+// Repeater sub-values are stored as one meta row per item
+// (location_epic_dep_ids_0_location_epic_dep_id_item, _1_..., and in the
+// custom-table case not in postmeta at all), so a cross-post check cannot be a
+// key-equality meta_query; it would need a LIKE scan or a maintained flat
+// mirror key, and it would add a save-time query whose cost grows with the
+// number of location posts. There is no cross-post uniqueness check anywhere
+// in this plugin today, and adding the first one is a decision of its own.
+
+	add_filter( 'acf/validate_value/key=field_location_epic_dep_ids', 'uamswp_location_validate_epic_dep_ids', 10, 4 );
+
+	function uamswp_location_validate_epic_dep_ids( $valid, $value, $field, $input_name ) {
+
+		if ( $valid !== true ) {
+
+			return $valid;
+
+		}
+
+		if ( !is_array($value) ) {
+
+			return $valid;
+
+		}
+
+		$sub_field_key = 'field_location_epic_dep_id_item';
+		$seen          = array();
+
+		foreach ( $value as $row_index => $row ) {
+
+			// The hidden template row ACF submits to clone for "add row" is not
+			// a real row, and neither is one removed from a paginated repeater.
+			if ( 'acfcloneindex' === $row_index ) {
+
+				continue;
+
+			}
+
+			if ( is_string($row_index) && false !== strpos($row_index, '_deleted') ) {
+
+				continue;
+
+			}
+
+			if ( !is_array($row) || !isset($row[$sub_field_key]) ) {
+
+				continue;
+
+			}
+
+			$dep_id = trim( (string) $row[$sub_field_key] );
+
+			// A row holding nothing but whitespace has to be rejected here.
+			// ACF's own required check does not catch it: acf_validate_value()
+			// tests empty($value) && !is_numeric($value), and empty('  ') is
+			// false, so a space passes a required text field. This is the same
+			// reason uamswp_spotlight_validate_excerpt() above tests
+			// '' === trim((string) $value) rather than relying on required.
+			if ( '' === $dep_id ) {
+
+				acf_add_validation_error(
+					$input_name . '[' . $row_index . '][' . $sub_field_key . ']',
+					'A UAMS Health Epic DEP ID is required.'
+				);
+
+				continue;
+
+			}
+
+			// Compared case-insensitively: an identifier that differs from
+			// another only by letter case is the same identifier, not a second
+			// one. Surrounding whitespace is not meaningful in an identifier
+			// either, and uamswp_location_trim_epic_dep_id() below strips it on
+			// the way to storage, so the compared value and the stored value
+			// are the same string.
+			$comparison_key = strtolower($dep_id);
+
+			if ( isset($seen[$comparison_key]) ) {
+
+				// esc_html() because ACF returns this message over AJAX and
+				// renders it into the admin DOM with .html(). ACF core escapes
+				// the submitted value the same way where it echoes one back --
+				// see acf_field_email::validate_value().
+				acf_add_validation_error(
+					$input_name . '[' . $row_index . '][' . $sub_field_key . ']',
+					sprintf(
+						'UAMS Health Epic DEP ID "%s" is listed more than once. Each DEP ID may appear only once on a location.',
+						esc_html($dep_id)
+					)
+				);
+
+				continue;
+
+			}
+
+			$seen[$comparison_key] = true;
+
+		}
+
+		return $valid;
+
+	}
+
+	// Store a DEP ID trimmed
+	//
+	// The uniqueness check above compares trimmed values, so without this the
+	// compared string and the stored string could differ: " 900 " would be
+	// checked as "900" but written to the database with its spaces intact, and
+	// the value the migration API exposes would not match the one that was
+	// validated. ACF does not trim text fields on the way to storage -- the
+	// text field has no update_value() at all -- so it is done here.
+	//
+	// Surrounding whitespace is never meaningful in an identifier, and a value
+	// that is nothing but whitespace is rejected during validation rather than
+	// silently stored as an empty string.
+
+	add_filter( 'acf/update_value/key=field_location_epic_dep_id_item', 'uamswp_location_trim_epic_dep_id', 10, 3 );
+
+	function uamswp_location_trim_epic_dep_id( $value, $post_id, $field ) {
+
+		if ( !is_string($value) ) {
+
+			return $value;
+
+		}
+
+		return trim($value);
+
+	}

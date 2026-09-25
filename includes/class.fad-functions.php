@@ -249,6 +249,16 @@ function posts_provider_custom_columns($column_name, $id){
     }
 }
 
+function uamswp_cron_every_two_hours( $schedules ) {
+    // 2 hours * 60 minutes * 60 seconds = 7200 seconds
+    $schedules['every_two_hours'] = array(
+        'interval' => 7200,
+        'display'  => esc_html__( 'Every 2 Hours' )
+    );
+    return $schedules;
+}
+add_filter( 'cron_schedules', 'uamswp_cron_every_two_hours' );
+
 // NRC JSON API Call
 // function wp_nrc_cached_api( $npi ) {
 // 	// Namespace in case of collision, since transients don't support groups like object caching.
@@ -333,7 +343,7 @@ function uamswp_fad_check_and_schedule_cron() {
     // Only check in the admin dashboard to save server resources
     if ( is_admin() ) {
         if ( ! wp_next_scheduled( 'uamswp_provider_pg_sync_hook' ) ) {
-            wp_schedule_event( time(), 'hourly', 'uamswp_provider_pg_sync_hook' );
+            wp_schedule_event( time(), 'every_two_hours', 'uamswp_provider_pg_sync_hook' );
         }
     }
 }
