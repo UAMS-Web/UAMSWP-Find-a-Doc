@@ -3785,6 +3785,20 @@
 				$data['location_parent']['title'] = $parent_title;
 				$data['location_parent']['url'] = $parent_url;
 
+			// Address and parking components, each resolved to the location that supplies it
+
+				/**
+				 * These read $postId before this change -- the location's own
+				 * ID -- while $post_id above resolved to the parent and was
+				 * used only for the two image fields. A child location's
+				 * Address and Parking tabs were suppressed in the Control
+				 * Panel, so that returned blank or stale values for every
+				 * child. The resolver returns the parent's ID for a group the
+				 * child inherits and the child's own where it overrides.
+				 */
+
+				$location_source_ids = uamswp_fad_location_source_ids( $postId );
+
 			// Image values
 
 				$override_parent_photo = get_field( 'location_image_override_parent', $postId );
@@ -3872,12 +3886,12 @@
 
 			// Map / GPS
 
-				$map = get_field( 'location_map', $postId );
+				$map = get_field( 'location_map', $location_source_ids['map'] );
 
 				$data['location_lat'] = is_array($map) ? $map['lat'] : '';
 				$data['location_lng'] = is_array($map) ? $map['lng'] : '';
 
-			$location_floor = get_field_object('location_building_floor', $postId );
+			$location_floor = get_field_object('location_building_floor', $location_source_ids['unit'] );
 				$location_floor_value = '';
 				$location_floor_label = '';
 
@@ -3887,9 +3901,9 @@
 					$location_floor_label = $location_floor['choices'][ $location_floor_value ] ?? null;
 
 				}
-			$data['location_address_1'] = get_field( 'location_address_1', $postId );
-			$data['location_address_2'] = ( get_field( 'location_address_2', $postId ) ? get_field( 'location_address_2', $postId ) . '<br/>' : '');
-			$location_building = get_field( 'location_building', $postId );
+			$data['location_address_1'] = get_field( 'location_address_1', $location_source_ids['street'] );
+			$data['location_address_2'] = ( get_field( 'location_address_2', $location_source_ids['street'] ) ? get_field( 'location_address_2', $location_source_ids['street'] ) . '<br/>' : '');
+			$location_building = get_field( 'location_building', $location_source_ids['facility'] );
 
 			$building_name = '';
 			if ($location_building) {
@@ -3904,17 +3918,17 @@
 
 			// Suite
 
-				$data['location_suite'] = get_field( 'location_suite', $postId );
+				$data['location_suite'] = get_field( 'location_suite', $location_source_ids['unit'] );
 
 			// City, State, ZIP Code
 
-				$data['location_city'] = get_field( 'location_city', $postId );
-				$data['location_state'] = get_field( 'location_state', $postId );
-				$data['location_zip'] = get_field( 'location_zip', $postId );
+				$data['location_city'] = get_field( 'location_city', $location_source_ids['street'] );
+				$data['location_state'] = get_field( 'location_state', $location_source_ids['street'] );
+				$data['location_zip'] = get_field( 'location_zip', $location_source_ids['street'] );
 
 			// Region
 
-				$location_region = get_field( 'location_region', $postId );
+				$location_region = get_field( 'location_region', $location_source_ids['street'] );
 
 			// Hidden
 
@@ -3944,7 +3958,7 @@
 
 			// Directions From Parking Area
 
-				$data['location_direction'] = get_field( 'location_direction', $postId );
+				$data['location_direction'] = get_field( 'location_direction', $location_source_ids['directions'] );
 
 			// Phone numbers
 
@@ -4393,8 +4407,8 @@
 
 			// Parking information
 
-				$data['location_parking'] = get_field( 'location_parking', $postId );
-				$parking_map = get_field( 'location_parking_map', $postId );
+				$data['location_parking'] = get_field( 'location_parking', $location_source_ids['parking'] );
+				$parking_map = get_field( 'location_parking_map', $location_source_ids['parking'] );
 
 				$data['location_parking_link'] = is_array($parking_map) ? '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'. $parking_map['lat'] .','. $parking_map['lng'] .'" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>' : '';
 

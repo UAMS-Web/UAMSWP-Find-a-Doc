@@ -228,28 +228,42 @@ function display_provider_image() {
                                     if ( 2 > $l ){
                                         if ( get_post_status ( $location ) == 'publish' ) {
                                             $primary_appointment_title = get_the_title( $location );
-                                            $primary_appointment_address_1 = get_field( 'location_address_1', $location );
-                                            $primary_appointment_building = get_field('location_building', $location );
+
+                                            /**
+                                             * Which location supplies each address component. This
+                                             * export read the location's own fields unconditionally
+                                             * before this change, so a child location -- whose
+                                             * Address tab was suppressed in the Control Panel --
+                                             * exported a blank office address.
+                                             */
+                                            $location_source_ids = uamswp_fad_location_source_ids( $location );
+
+                                            $primary_appointment_address_1 = get_field( 'location_address_1', $location_source_ids['street'] );
+                                            $primary_appointment_building = get_field('location_building', $location_source_ids['facility'] );
                                             if ($primary_appointment_building) {
                                                 $building = get_term($primary_appointment_building, "building");
                                                 $building_slug = $building->slug;
                                                 $building_name = $building->name;
                                             }
-                                            $primary_appointment_floor = get_field_object('location_building_floor', $location );
-                                                $primary_appointment_floor_value = $primary_appointment_floor['value'];
-                                                $primary_appointment_floor_label = $primary_appointment_floor['choices'][ $primary_appointment_floor_value ];
-                                            $primary_appointment_suite = get_field('location_suite', $location );
+                                            $primary_appointment_floor = get_field_object('location_building_floor', $location_source_ids['unit'] );
+                                                $primary_appointment_floor_value = '';
+                                                $primary_appointment_floor_label = '';
+                                                if ( $primary_appointment_floor ) {
+                                                    $primary_appointment_floor_value = $primary_appointment_floor['value'];
+                                                    $primary_appointment_floor_label = $primary_appointment_floor['choices'][ $primary_appointment_floor_value ] ?? '';
+                                                }
+                                            $primary_appointment_suite = get_field('location_suite', $location_source_ids['unit'] );
                                             $primary_appointment_address_2 =
                                                 ( ( $primary_appointment_building && $building_slug != '_none' ) ? $building_name . ( ( ($primary_appointment_floor && $primary_appointment_floor_value) || $primary_appointment_suite ) ? '<br />' : '' ) : '' )
                                                 . ( $primary_appointment_floor && !empty($primary_appointment_floor_value) && $primary_appointment_floor_value != "0" ? $primary_appointment_floor_label . ( ( $primary_appointment_suite ) ? '<br />' : '' ) : '' )
                                                 . ( $primary_appointment_suite ? $primary_appointment_suite : '' );
-                                            $primary_appointment_address_2_deprecated = get_field('location_address_2', $location );
+                                            $primary_appointment_address_2_deprecated = get_field('location_address_2', $location_source_ids['street'] );
                                             if (!$primary_appointment_address_2) {
                                                 $primary_appointment_address_2 = $primary_appointment_address_2_deprecated;
                                             }
-                                            $primary_appointment_city = get_field( 'location_city', $location );
-                                            $primary_appointment_state = get_field( 'location_state', $location );
-                                            $primary_appointment_zip = get_field( 'location_zip', $location );
+                                            $primary_appointment_city = get_field( 'location_city', $location_source_ids['street'] );
+                                            $primary_appointment_state = get_field( 'location_state', $location_source_ids['street'] );
+                                            $primary_appointment_zip = get_field( 'location_zip', $location_source_ids['street'] );
                                             $primary_appointment_phone = get_field( 'location_phone', $location );
                                             $primary_appointment_fax = get_field( 'location_fax', $location );
                                             $l++;
