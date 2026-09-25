@@ -383,15 +383,7 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_parent",
-						"operator": "!=",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -401,13 +393,100 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_location_address_override_parent",
+			"label": "Override the Parent Location's Address?",
+			"name": "location_address_override_parent",
+			"type": "button_group",
+			"instructions": "By default, a child location shows its parent location's address. Select Yes to override part of it.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
+			"key": "field_location_address_override_parent_street",
+			"label": "Override the Parent Location's Street Address?",
+			"name": "location_address_override_parent_street",
+			"type": "button_group",
+			"instructions": "The street address, and the city, state, ZIP code and region that go with it. Leave this as No when this location stands at its parent location's address.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_location_address_1",
 			"label": "Street Address",
 			"name": "location_address_1",
 			"type": "text",
 			"instructions": "Spell out numbered streets nine and under; use figures for <em>10</em> and above (e.g., <em>5 Sixth Ave.</em>, <em>3012 50th St.</em>, <em>No. 10 Downing St.</em>).</p><p class='description' style='margin-top: 0.5em;'>Use the abbreviations <em>Ave.</em>, <em>Blvd.</em> and <em>St.</em> Otherwise, spell out similar words (e.g., <em>Alley</em>, <em>Drive</em>, <em>Road</em>, <em>Terrace</em>).</p><p class='description' style='margin-top: 0.5em;'>Always use figures for an address number (e.g., <em>9 Morningside Circle</em>).</p><p class='description' style='margin-top: 0.5em;'>Spell out and capitalize <em>First</em> through <em>Ninth</em> when used as street names; use figures for <em>10th</em> and above (e.g., <em>7 Fifth Ave.</em>, <em>100 21st St.</em>).</p><p class='description' style='margin-top: 0.5em;'>Abbreviate compass points used to indicate directional ends of a street or quadrants of a city in a numbered address (e.g., <em>222 E. 42nd St.</em>, <em>562 W. 43rd St.</em>, <em>600 K St. NW</em>). Do not use periods in quadrant abbreviations (e.g., <em>NW</em>, <em>SE</em>).</p><p class='description' style='margin-top: 0.5em;'>Use these forms, as appropriate in the context, for highways identified by number: <em>U.S. Highway 67</em>, <em>Arkansas Highway 10</em>, <em>Interstate 630</em>.</p><p class='description' style='margin-top: 0.5em;'>When a letter is appended to a number, capitalize it but do not use a hyphen (e.g., <em>U.S. Highway 71B</em>).",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_location_address_override_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent_street",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -420,13 +499,69 @@
 			"maxlength": ""
 		},
 		{
+			"key": "field_location_address_override_parent_facility",
+			"label": "Override the Parent Location's Facility?",
+			"name": "location_address_override_parent_facility",
+			"type": "button_group",
+			"instructions": "Whether this location sits inside a larger facility, and which one. Select Yes when this location names a different facility than its parent location does, or when its parent location is itself the facility and so names none.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_location_building_query",
 			"label": "Is this location contained within a larger facility rather than being its own standalone facility?",
 			"name": "location_building_query",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_location_address_override_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent_facility",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -455,6 +590,28 @@
 						"field": "field_location_building_query",
 						"operator": "==",
 						"value": "1"
+					},
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_location_building_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent_facility",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -476,6 +633,42 @@
 			"allow_null": "0"
 		},
 		{
+			"key": "field_location_address_override_parent_unit",
+			"label": "Override the Parent Location's Floor and Suite?",
+			"name": "location_address_override_parent_unit",
+			"type": "button_group",
+			"instructions": "Select Yes when this location occupies a different floor or suite of the same building as its parent location.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_location_building_floor",
 			"label": "Building Floor",
 			"name": "location_building_floor",
@@ -486,6 +679,23 @@
 				[
 					{
 						"field": "field_location_building_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_location_address_override_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent_unit",
 						"operator": "==",
 						"value": "1"
 					}
@@ -543,6 +753,23 @@
 						"field": "field_location_building_query",
 						"operator": "==",
 						"value": "1"
+					},
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_location_address_override_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent_unit",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -564,7 +791,27 @@
 			"type": "text",
 			"instructions": "",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_location_address_override_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent_street",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -583,7 +830,27 @@
 			"type": "select",
 			"instructions": "",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_location_address_override_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent_street",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -659,7 +926,27 @@
 			"type": "maskfield",
 			"instructions": "Find the ZIP+4 Code for an address at <a href='https://tools.usps.com/zip-code-lookup.htm?byaddress' target='_blank'>https://tools.usps.com/zip-code-lookup.htm?byaddress</a>.",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_location_address_override_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent_street",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -673,13 +960,69 @@
 			"maxlength": ""
 		},
 		{
+			"key": "field_location_address_override_parent_map",
+			"label": "Override the Parent Location's Entrance Map Pin?",
+			"name": "location_address_override_parent_map",
+			"type": "button_group",
+			"instructions": "Select Yes when patients reach this location through a different building entrance than its parent location's.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_location_map",
 			"label": "GPS Location of the Relevant Building Entrance",
 			"name": "location_map",
 			"type": "google_map",
 			"instructions": "",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_location_address_override_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent_map",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -697,7 +1040,27 @@
 			"type": "taxonomy",
 			"instructions": "For information on how the Arkansas regions are defined, visit <a href='https://communications.uams.edu/web/kb/location-regions/' target='_blank'>https://communications.uams.edu/web/kb/location-regions/</a>.",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_location_address_override_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_address_override_parent_street",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "hide-acf-border",
@@ -724,15 +1087,7 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_parent",
-						"operator": "!=",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -742,13 +1097,100 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_location_parking_override_parent",
+			"label": "Override the Parent Location's Parking and Directions?",
+			"name": "location_parking_override_parent",
+			"type": "button_group",
+			"instructions": "By default, a child location shows its parent location's parking information and directions. Select Yes to override either.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
+			"key": "field_location_parking_override_parent_parking",
+			"label": "Override the Parent Location's Parking Information?",
+			"name": "location_parking_override_parent_parking",
+			"type": "button_group",
+			"instructions": "The parking area map pin and the parking instructions.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_parking_override_parent",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_location_parking_map",
 			"label": "GPS Location of the Main Parking Area",
 			"name": "location_parking_map",
 			"type": "google_map",
 			"instructions": "If the parking area is a parking deck, place the pin on the entrance to the parking deck from the street.</p><p class='description' style='margin-top: 0.5em;'>If the parking area is a surface-level parking lot, place the pin in the middle of the parking lot.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_location_parking_override_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_parking_override_parent_parking",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -766,7 +1208,27 @@
 			"type": "wysiwyg",
 			"instructions": "Indicate whether patients will park in a parking deck or surface-level parking.</p><p class='description' style='margin-top: 0.5em;'>Indicate which parking lot, parking deck or other area in which patients will park when coming to this location.</p><p class='description' style='margin-top: 0.5em;'>Indicate whether or not patients will have to pay for parking.</p><p class='description' style='margin-top: 0.5em;'>If there is a parking fee for patients, indicate whether or not this location validates parking.</p><p class='description' style='margin-top: 0.5em;'>If patients will be parking in a specific parking deck, indicate the ideal area of the parking deck in which patients should park. If there is a patient drop-off area, also include details about that.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_location_parking_override_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_parking_override_parent_parking",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -779,13 +1241,69 @@
 			"delay": 0
 		},
 		{
+			"key": "field_location_parking_override_parent_directions",
+			"label": "Override the Parent Location's Directions From the Parking Area?",
+			"name": "location_parking_override_parent_directions",
+			"type": "button_group",
+			"instructions": "The walking directions from the parking area to this location's entrance.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_parking_override_parent",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_location_direction",
 			"label": "Directions From Parking Area",
 			"name": "location_direction",
 			"type": "wysiwyg",
 			"instructions": "Comprehensively describe the path patients should take when coming from their vehicle — whether at the patient drop-off area or in the parking area — to the entrance or check-in area for the location.</p><p class='description' style='margin-top: 0.5em;'>If the parking area is a parking deck, include instructions regarding how to locate the appropriate elevators and stairs in the parking deck, then include the parking deck level to which they should take those elevators or stairs.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_location_parking_override_parent",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_parking_override_parent_directions",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",

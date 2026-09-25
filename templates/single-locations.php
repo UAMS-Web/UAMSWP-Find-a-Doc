@@ -46,6 +46,16 @@ if ($parent_location) {
 	$post_id = get_the_ID();
 }
 
+// Address and parking components, each resolved to the location that supplies it
+
+	/**
+	 * $post_id stays the parent for images and parent-title phrasing. Address
+	 * and parking read through the resolver instead, because a child may
+	 * override any one of those groups independently.
+	 */
+
+	$location_source_ids = uamswp_fad_location_source_ids( get_the_ID() );
+
 // Image values
 $override_parent_photo = get_field('location_image_override_parent');
 $override_parent_photo_featured = get_field('location_image_override_parent_featured');
@@ -272,7 +282,7 @@ function sp_titles_desc($html) {
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
-$location_city = get_field('location_city', $post_id); // Get the location's city
+$location_city = get_field('location_city', $location_source_ids['street']); // Get the location's city
 function uamswp_fad_title($html) {
     global $page_title_attr;
 	global $location_city;
@@ -296,22 +306,22 @@ get_header();
 
 while ( have_posts() ) : the_post(); ?>
 <?php
-	$map = get_field('location_map', $post_id );
-	$location_address_1 = get_field('location_address_1', $post_id );
-	$location_building = get_field('location_building', $post_id );
+	$map = get_field('location_map', $location_source_ids['map'] );
+	$location_address_1 = get_field('location_address_1', $location_source_ids['street'] );
+	$location_building = get_field('location_building', $location_source_ids['facility'] );
 	if ($location_building) {
 		$building = get_term($location_building, "building");
 		$building_slug = $building->slug;
 		$building_name = $building->name;
 	}
-	$location_floor = get_field_object('location_building_floor', $post_id );
+	$location_floor = get_field_object('location_building_floor', $location_source_ids['unit'] );
 		$location_floor_value = '';
 		$location_floor_label = '';
 		if ( $location_floor ) {
 			$location_floor_value = $location_floor['value'];
 			$location_floor_label = $location_floor['choices'][ $location_floor_value ] ?? '';
 		}
-	$location_suite = get_field('location_suite', $post_id );
+	$location_suite = get_field('location_suite', $location_source_ids['unit'] );
 	$location_address_2 =
 		( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
 		. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
@@ -321,15 +331,15 @@ while ( have_posts() ) : the_post(); ?>
 		. ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
 		. ( $location_suite ? $location_suite : '' );
 
-	$location_address_2_deprecated = get_field('location_address_2', $post_id );
+	$location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street'] );
 	if (!$location_address_2) {
         $location_address_2 = $location_address_2_deprecated;
 		$location_address_2_schema = $location_address_2_deprecated;
 	}
 
-	$location_city = get_field('location_city', $post_id);
-	$location_state = get_field('location_state', $post_id);
-	$location_zip = get_field('location_zip', $post_id);
+	$location_city = get_field('location_city', $location_source_ids['street']);
+	$location_state = get_field('location_state', $location_source_ids['street']);
+	$location_zip = get_field('location_zip', $location_source_ids['street']);
 	$location_web_name = get_field('location_web_name');
 	$location_url = get_field('location_url');
 
@@ -401,9 +411,9 @@ while ( have_posts() ) : the_post(); ?>
         }
 
         // Check if Parking and Directions section should be displayed
-		$location_parking = get_field('location_parking', $post_id);
-		$location_direction = get_field('location_direction', $post_id);
-		$parking_map = get_field('location_parking_map', $post_id);
+		$location_parking = get_field('location_parking', $location_source_ids['parking']);
+		$location_direction = get_field('location_direction', $location_source_ids['directions']);
+		$parking_map = get_field('location_parking_map', $location_source_ids['parking']);
 
 		if ( $location_parking || $location_direction || $parking_map ) {
             $show_parking_section = true;
