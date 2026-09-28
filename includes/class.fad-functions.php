@@ -1623,15 +1623,12 @@ function schedule_ajax_filter_callback() {
 	$location_scheduling_fallback          = isset( $row['location_scheduling_fallback'] ) ? (string) $row['location_scheduling_fallback'] : '';
 
 	$widget_base = 'https://' . $mychart_scheduling_domain . '/' . $mychart_scheduling_instance;
-	$widget_src  = add_query_arg(
-		array(
-			'id'         => $location_scheduling_ser,
-			'dept'       => $location_scheduling_dep,
-			'vt'         => $location_scheduling_vt,
-			'linksource' => $mychart_scheduling_linksource,
-		),
-		$widget_base . '/SignupAndSchedule/EmbeddedSchedule'
-	);
+	// Built by hand rather than add_query_arg so empty values still appear as "id=" the way the widget expects.
+	$widget_src  = $widget_base . '/SignupAndSchedule/EmbeddedSchedule'
+		. '?id=' . rawurlencode( $location_scheduling_ser )
+		. '&dept=' . rawurlencode( $location_scheduling_dep )
+		. '&vt=' . rawurlencode( $location_scheduling_vt )
+		. '&linksource=' . rawurlencode( $mychart_scheduling_linksource );
 	?>
 	<h3 class="sr-only module-inner-title"><?php echo esc_html( $location_scheduling_item_title_nested ); ?></h3>
 	<?php if ( '' !== $location_scheduling_item_intro_nested ) { ?>
