@@ -393,25 +393,47 @@ function uamswp_fad_editor_groups_from_service_line( $post_id ) {
 }
 
 /**
- * Give a post its service line's editor group when it has none. Returns true when terms were set.
+ * Keep a post's service line group in step with its service line.
+ *
+ * Groups added by hand are kept. Groups this function added earlier (remembered in
+ * _uamswp_editor_groups_derived) are replaced by whatever the service line maps to now,
+ * so a provider that moves to another service line follows its new editors on save.
+ * Returns true when the post's groups changed.
  *
  * @param int $post_id
  * @return bool
  */
 function uamswp_fad_inherit_editor_group( $post_id ) {
 
-	$existing = wp_get_object_terms( (int) $post_id, UAMSWP_FAD_EDITOR_GROUP_TAX, array( 'fields' => 'ids' ) );
-	if ( is_wp_error( $existing ) || ! empty( $existing ) ) {
+	$post_id = (int) $post_id;
+	$current = wp_get_object_terms( $post_id, UAMSWP_FAD_EDITOR_GROUP_TAX, array( 'fields' => 'ids' ) );
+	if ( is_wp_error( $current ) ) {
+		return false;
+	}
+	$current  = array_map( 'intval', $current );
+	$previous = array_map( 'intval', (array) get_post_meta( $post_id, '_uamswp_editor_groups_derived', true ) );
+	$derived  = uamswp_fad_editor_groups_from_service_line( $post_id );
+
+	$manual = array_diff( $current, $previous );
+	$wanted = array_values( array_unique( array_merge( $manual, $derived ) ) );
+
+	sort( $wanted );
+	$sorted_current = $current;
+	sort( $sorted_current );
+
+	if ( $wanted === $sorted_current ) {
+		if ( $derived !== $previous ) {
+			update_post_meta( $post_id, '_uamswp_editor_groups_derived', $derived );
+		}
 		return false;
 	}
 
-	$groups = uamswp_fad_editor_groups_from_service_line( $post_id );
-	if ( empty( $groups ) ) {
+	$result = wp_set_object_terms( $post_id, $wanted, UAMSWP_FAD_EDITOR_GROUP_TAX, false );
+	if ( is_wp_error( $result ) ) {
 		return false;
 	}
-
-	$result = wp_set_object_terms( (int) $post_id, $groups, UAMSWP_FAD_EDITOR_GROUP_TAX, false );
-	return ! is_wp_error( $result );
+	update_post_meta( $post_id, '_uamswp_editor_groups_derived', $derived );
+	return true;
 }
 
 function uamswp_fad_inherit_editor_group_on_save( $post_id, $post ) {
@@ -447,13 +469,13 @@ function uamswp_fad_editor_group_sync_notice() {
 	if ( null !== $synced ) {
 		printf(
 			'<div class="notice notice-success"><p>%s</p></div>',
-			esc_html( sprintf( '%d providers and locations were placed in their service line\'s editor group.', $synced ) )
+			esc_html( sprintf( '%d providers and locations had their service line editor group updated.', $synced ) )
 		);
 	}
 
 	printf(
 		'<div class="notice notice-info"><p>%s <a class="button" href="%s">%s</a></p></div>',
-		esc_html( 'Records that have no editor group inherit one from their service line when they are saved. To apply that mapping to everything now:' ),
+		esc_html( 'Each provider and location picks up its service line\'s editor group when it is saved; groups added by hand are kept. To apply the mapping to every record now:' ),
 		esc_url( uamswp_fad_editor_group_sync_url() ),
 		esc_html( 'Apply service line mapping' )
 	);
@@ -475,12 +497,6 @@ function uamswp_fad_sync_editor_groups() {
 				'post_status'    => 'any',
 				'posts_per_page' => -1,
 				'fields'         => 'ids',
-				'tax_query'      => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-					array(
-						'taxonomy' => UAMSWP_FAD_EDITOR_GROUP_TAX,
-						'operator' => 'NOT EXISTS',
-					),
-				),
 			)
 		);
 		foreach ( $ids as $post_id ) {
