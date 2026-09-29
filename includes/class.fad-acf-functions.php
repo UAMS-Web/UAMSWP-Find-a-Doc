@@ -704,10 +704,31 @@
 				$has_parent = $_POST['acf']['field_location_parent'];
 				$location_parent = $_POST['acf']['field_location_parent_id'];
 
+				// Does this child supply its own street address, and so its own region?
+
+					/**
+					 * Read from the submitted values rather than through
+					 * get_field(), because this fires before the save and
+					 * get_field() would still return the previous answer.
+					 *
+					 * location_region sits behind the street override, so a
+					 * child that supplies its own street address supplies its
+					 * own region with it. Copying the parent's over the top
+					 * would silently discard the editor's choice.
+					 */
+
+					$street_override = (
+						!empty( $_POST['acf']['field_location_address_override_parent'] )
+						&&
+						!empty( $_POST['acf']['field_location_address_override_parent_street'] )
+					);
+
 				if (
 					$has_parent
 					&&
 					!empty($location_parent)
+					&&
+					!$street_override
 				) {
 
 					$region = array();
