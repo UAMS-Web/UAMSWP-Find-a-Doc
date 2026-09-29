@@ -1696,7 +1696,7 @@ while ( have_posts() ) : the_post();
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <div id="comment-list" class="card-list" data-npi="<?php echo $npi; ?>" data-commentcount="<?php echo $pg_total_comment_count; ?>">
+                                        <div id="comment-list" class="card-list" data-postid="<?php echo esc_attr( get_the_ID() ); ?>" data-npi="<?php echo esc_attr( $npi ); ?>" data-commentcount="<?php echo esc_attr( $pg_total_comment_count ); ?>">
                                             <?php foreach( $reviews as $review ):
                                             $i = 1;
                                             if( $i < 11 ) { ?>
