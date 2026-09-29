@@ -1401,18 +1401,18 @@ while ( have_posts() ) : the_post(); ?>
 								$location_scheduling_fallback = $row['location_scheduling_fallback'];
 							?>
 								<div id="scheduleContainer">
-									<iframe id="openSchedulingFrame" title="MyChart Scheduling" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+									<iframe id="openSchedulingFrame" title="MyChart Scheduling" class="widgetframe" scrolling="no" src="https://<?php echo esc_attr( $mychart_scheduling_domain ); ?>/<?php echo esc_attr( $mychart_scheduling_instance ); ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
 								</div>
 
-								<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
+								<!-- <link href="https://<?php echo esc_attr( $mychart_scheduling_domain ); ?>/<?php echo esc_attr( $mychart_scheduling_instance ); ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
 
-								<script src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
+								<script src="https://<?php echo esc_attr( $mychart_scheduling_domain ); ?>/<?php echo esc_attr( $mychart_scheduling_instance ); ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
 
 								<script type="text/javascript">
 								var EWC = new EmbeddedWidgetController({
 
 									// Replace with the hostname of your Open Scheduling site
-									'hostname':'https://<?php echo $mychart_scheduling_domain; ?>',
+									'hostname': <?php echo wp_json_encode( 'https://' . $mychart_scheduling_domain ); ?>,
 
 									// Must equal media query in EpicWP.css + any left/right margin of the host page. Should also change in EmbeddedWidget.css
 									'matchMediaString':'(max-width: 991.98px)',
