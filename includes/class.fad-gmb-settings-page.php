@@ -324,6 +324,15 @@ function doximity_csv_export() {
     fputcsv( $fh, $table_head, $delimiter );
     foreach ( $table_body as $data_row )
     {
+        // Neutralize CSV formula injection: any cell whose first character is
+        // =, +, -, @, tab, or CR is prefixed with a single quote so spreadsheet
+        // applications treat it as text rather than evaluating it as a formula.
+        $data_row = array_map( function( $cell ) {
+            if ( is_string( $cell ) && $cell !== '' && in_array( $cell[0], array( '=', '+', '-', '@', "\t", "\r" ), true ) ) {
+                return "'" . $cell;
+            }
+            return $cell;
+        }, $data_row );
         fputcsv( $fh, $data_row, $delimiter );
     }
 
@@ -763,6 +772,13 @@ function gmb_provider_csv_export() {
                             // Parent Location
                             $location_post_id = $location;
                             $location_child_id = $location;
+                            /**
+                             * Which location supplies each address component. A child location
+                             * may override any one of them, so the address fields below no
+                             * longer read through the flat swap to $location_post_id, which
+                             * still carries the parent for store codes, slugs and images.
+                             */
+                            $location_source_ids = uamswp_fad_location_source_ids( $location_child_id );
                             $location_has_parent = get_field('location_parent',$location_post_id);
                             $location_parent_id = get_field('location_parent_id',$location_post_id);
                             $location_parent_title = ''; // Eliminate PHP errors
@@ -780,21 +796,21 @@ function gmb_provider_csv_export() {
 
                             // Create location variables
                             $location_title = get_the_title( $location_child_id );
-                            $location_address_1 = get_field( 'location_address_1', $location_post_id );
-                            $location_building = get_field('location_building', $location_post_id );
+                            $location_address_1 = get_field( 'location_address_1', $location_source_ids['street'] );
+                            $location_building = get_field('location_building', $location_source_ids['facility'] );
                             if ($location_building) {
                                 $building = get_term($location_building, "building");
                                 $building_slug = $building->slug;
                                 $building_name = $building->name;
                             }
-                            $location_floor = get_field_object('location_building_floor', $location_post_id );
+                            $location_floor = get_field_object('location_building_floor', $location_source_ids['unit'] );
                                 $location_floor_value = '';
                                 $location_floor_label = '';
                                 if ( $location_floor ) {
                                     $location_floor_value = $location_floor['value'];
                                     $location_floor_label = $location_floor['choices'][ $location_floor_value ];
                                 }
-                            $location_suite = get_field('location_suite', $location_post_id );
+                            $location_suite = get_field('location_suite', $location_source_ids['unit'] );
 
                                 // Option 1:
                                 // Address Line 1 = Street address (covered above)
@@ -844,9 +860,9 @@ function gmb_provider_csv_export() {
                                 $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
                                 $location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
 
-	                            $location_city = get_field( 'location_city', $location_post_id );
-	                            $location_state = get_field( 'location_state', $location_post_id );
-	                            $location_zip = get_field( 'location_zip', $location_post_id );
+	                            $location_city = get_field( 'location_city', $location_source_ids['street'] );
+	                            $location_state = get_field( 'location_state', $location_source_ids['street'] );
+	                            $location_zip = get_field( 'location_zip', $location_source_ids['street'] );
 	                            $location_phone = get_field( 'location_phone', $location_child_id );
 	                            $location_fax = get_field( 'location_fax', $location_child_id );
 	                            $location_hours_group = get_field('location_hours_group', $location_child_id );
@@ -872,7 +888,7 @@ function gmb_provider_csv_export() {
 	                            $location_gmb_masks_staff = ( $location_gmb_masks_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_staff;
 	                            $location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
 	                            $location_gmb_sanitizing = ( $location_gmb_sanitizing == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
-	                            $location_map = get_field( 'location_map', $location_post_id );
+	                            $location_map = get_field( 'location_map', $location_source_ids['map'] );
                                 $location_latitude = '';
                                 $location_longitude = '';
                                 if ( $location_map ) {
@@ -1101,6 +1117,17 @@ function gmb_provider_csv_export() {
     fputcsv( $fh, $table_head, $delimiter );
     foreach ( $table_body as $data_row )
     {
+        // Neutralize CSV formula injection (CWE-1236): prefix a single quote to
+        // any cell that begins with a spreadsheet formula trigger. Numeric cells
+        // (including negative numbers such as the Arkansas longitude in row[12])
+        // are left untouched so Google Business imports still receive raw numbers.
+        $data_row = array_map( function( $cell ) {
+            if ( is_string( $cell ) && $cell !== '' && ! is_numeric( $cell )
+                && in_array( $cell[0], array( '=', '+', '-', '@', "\t", "\r" ), true ) ) {
+                return "'" . $cell;
+            }
+            return $cell;
+        }, $data_row );
         fputcsv( $fh, $data_row, $delimiter );
     }
 
@@ -1435,6 +1462,13 @@ function gmb_location_csv_export() {
             // Parent Location
             $location_post_id = get_the_ID();
             $location_child_id = get_the_ID();
+            /**
+             * Which location supplies each address component. A child location
+             * may override any one of them, so the address fields below no
+             * longer read through the flat swap to $location_post_id, which
+             * still carries the parent for store codes, slugs and images.
+             */
+            $location_source_ids = uamswp_fad_location_source_ids( $location_child_id );
             $location_has_parent = get_field('location_parent',$location_post_id);
             $location_parent_id = get_field('location_parent_id',$location_post_id);
             $location_parent_title = ''; // Eliminate PHP errors
@@ -1460,21 +1494,21 @@ function gmb_location_csv_export() {
 
             // Create location variables
             $location_title = get_the_title( $location_child_id );
-            $location_address_1 = get_field( 'location_address_1', $location_post_id );
-            $location_building = get_field('location_building', $location_post_id );
+            $location_address_1 = get_field( 'location_address_1', $location_source_ids['street'] );
+            $location_building = get_field('location_building', $location_source_ids['facility'] );
             if ($location_building) {
                 $building = get_term($location_building, "building");
                 $building_slug = $building->slug;
                 $building_name = $building->name;
             }
-            $location_floor = get_field_object('location_building_floor', $location_post_id );
+            $location_floor = get_field_object('location_building_floor', $location_source_ids['unit'] );
                 $location_floor_value = '';
                 $location_floor_label = '';
                 if ( $location_floor ) {
                     $location_floor_value = $location_floor['value'];
                     $location_floor_label = $location_floor['choices'][ $location_floor_value ];
                 }
-            $location_suite = get_field('location_suite', $location_post_id );
+            $location_suite = get_field('location_suite', $location_source_ids['unit'] );
 
                 // Option 1:
                 // Address Line 1 = Street address (covered above)
@@ -1497,7 +1531,7 @@ function gmb_location_csv_export() {
                 $location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
                 $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
                 $location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
-                $location_address_2_deprecated = get_field('location_address_2', $location_post_id );
+                $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street'] );
                 if (!$location_address_2) {
                     $location_address_2 = $location_address_2_deprecated;
                 }
@@ -1523,9 +1557,9 @@ function gmb_location_csv_export() {
                 // $location_address_4 = $location_addresses[2];
                 // $location_address_5 = $location_addresses[3];
 
-            $location_city = get_field( 'location_city', $location_post_id );
-            $location_state = get_field( 'location_state', $location_post_id );
-            $location_zip = get_field( 'location_zip', $location_post_id );
+            $location_city = get_field( 'location_city', $location_source_ids['street'] );
+            $location_state = get_field( 'location_state', $location_source_ids['street'] );
+            $location_zip = get_field( 'location_zip', $location_source_ids['street'] );
             $location_phone = get_field( 'location_phone', $location_child_id );
             $location_fax = get_field( 'location_fax', $location_child_id );
             $location_hours_group = get_field('location_hours_group', $location_child_id );
@@ -1569,7 +1603,7 @@ function gmb_location_csv_export() {
             $location_gmb_masks_staff = ( $location_gmb_masks_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_staff;
             $location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
             $location_gmb_sanitizing = ( $location_gmb_sanitizing == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
-            $location_map = get_field( 'location_map', $location_post_id );
+            $location_map = get_field( 'location_map', $location_source_ids['map'] );
                 $location_latitude = '';
                 $location_longitude = '';
                 if ( $location_map ) {
@@ -1786,7 +1820,7 @@ function gmb_location_csv_export() {
                     $row[20] = $location_gmb_other_photos ?: '';
 
                 // Labels
-                    $region = get_term( get_field('location_region',$location_post_id), 'region' )->name;
+                    $region = get_term( get_field('location_region',$location_source_ids['street']), 'region' )->name;
                     $row[21] =  $region ? $region : '';
 
                 // AdWords location extensions phone
@@ -1863,6 +1897,18 @@ function gmb_location_csv_export() {
     fputcsv( $fh, $table_head, $delimiter );
     foreach ( $table_body as $data_row )
     {
+        // Neutralize CSV formula injection: prefix a single quote to any cell
+        // that could be interpreted as a spreadsheet formula. Numeric cells
+        // (including negative numbers such as the longitude in row[12]) are
+        // never dangerous formulas, so they are left untouched to preserve the
+        // raw values Google Business import expects.
+        $data_row = array_map( function( $cell ) {
+            if ( is_string( $cell ) && $cell !== '' && ! is_numeric( $cell )
+                && strpos( "=+-@\t\r", $cell[0] ) !== false ) {
+                return "'" . $cell;
+            }
+            return $cell;
+        }, $data_row );
         fputcsv( $fh, $data_row, $delimiter );
     }
 
@@ -1965,6 +2011,15 @@ function mychart_csv_export() {
     fputcsv( $fh, $table_head, $delimiter );
     foreach ( $table_body as $data_row )
     {
+        // Neutralize CSV formula injection: prefix any cell value beginning with
+        // =, +, -, @, tab (\t), or CR (\r) with a leading single quote so it is
+        // treated as text rather than a formula by spreadsheet software.
+        foreach ( $data_row as $cell_index => $cell_value ) {
+            $cell_value = (string) $cell_value;
+            if ( $cell_value !== '' && strpbrk( $cell_value[0], "=+-@\t\r" ) !== false ) {
+                $data_row[ $cell_index ] = "'" . $cell_value;
+            }
+        }
         fputcsv( $fh, $data_row, $delimiter );
     }
 

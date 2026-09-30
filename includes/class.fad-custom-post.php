@@ -64,6 +64,7 @@
 				'exclude_from_search' => false,
 				'publicly_queryable' => true,
 				'capabilities' => $capabilities,
+				'map_meta_cap' => true,
 				'show_in_rest' => true,
 				'rest_base' => 'provider',
 				'rest_controller_class' => 'WP_REST_Posts_Controller',
@@ -136,6 +137,7 @@
 					'exclude_from_search' => false,
 					'publicly_queryable' => true,
 					'capabilities' => $capabilities,
+					'map_meta_cap' => true,
 					'show_in_rest' => true,
 					'rest_base' => 'location',
 					'rest_controller_class' => 'WP_REST_Posts_Controller',
@@ -211,6 +213,7 @@
 					'exclude_from_search' => false,
 					'publicly_queryable' => true,
 					'capabilities' => $capabilities,
+					'map_meta_cap' => true,
 					'show_in_rest' => true,
 					'rest_base' => 'expertise',
 					'rest_controller_class' => 'WP_REST_Posts_Controller',
@@ -286,6 +289,7 @@
 					'exclude_from_search' => false,
 					'publicly_queryable' => true,
 					'capabilities' => $capabilities,
+					'map_meta_cap' => true,
 					'show_in_rest' => true,
 					'rest_base' => 'condition',
 					'rest_controller_class' => 'WP_REST_Posts_Controller',
@@ -360,6 +364,7 @@
 					'exclude_from_search' => false,
 					'publicly_queryable' => true,
 					'capabilities' => $capabilities,
+					'map_meta_cap' => true,
 					'show_in_rest' => true,
 					'rest_base' => 'treatment',
 					'rest_controller_class' => 'WP_REST_Posts_Controller',
@@ -434,6 +439,7 @@
 					'exclude_from_search' => false,
 					'publicly_queryable' => true,
 					'capabilities' => $capabilities,
+					'map_meta_cap' => true,
 					'show_in_rest' => true,
 					'rest_base' => 'clinical_resource',
 					'rest_controller_class' => 'WP_REST_Posts_Controller',
@@ -2937,18 +2943,26 @@
 							'read_physician' => true,
 							'edit_physician' => true,
 							'delete_physician' => true,
-							'delete_published_physicians' => false,
+							'delete_physicians' => true,
+							'delete_others_physicians' => true,
+							'delete_published_physicians' => true,
+							'delete_private_physicians' => true,
 							'edit_physicians' => true,
 							'edit_published_physicians' => true,
+							'edit_private_physicians' => true,
 							'edit_others_physicians' => true,
 							'publish_physicians' => false,
 							'read_private_physicians' => true,
 							'read_location' => true,
 							'edit_location' => true,
 							'delete_location' => true,
-							'delete_published_locations' => false,
+							'delete_locations' => true,
+							'delete_others_locations' => true,
+							'delete_published_locations' => true,
+							'delete_private_locations' => true,
 							'edit_locations' => true,
 							'edit_published_locations' => true,
+							'edit_private_locations' => true,
 							'edit_others_locations' => true,
 							'publish_locations' => false,
 							'read_private_locations' => true,
@@ -2961,6 +2975,44 @@
 
 		// register_activation_hook( __FILE__, 'add_roles_on_plugin_activation' );
 		add_action( 'init', 'add_roles_on_plugin_activation', 0 );
+
+	// Bring existing doc roles up to date. add_role() leaves a role alone once it exists, so
+	// capability changes above never reached sites where the roles were already created.
+
+		function uamswp_fad_sync_doc_role_caps() {
+
+			$desired = array(
+				'doc_admin' => array(
+					'delete_physicians' => true,
+					'delete_others_physicians' => true,
+					'delete_published_physicians' => true,
+					'delete_private_physicians' => true,
+					'edit_private_physicians' => true,
+					'delete_locations' => true,
+					'delete_others_locations' => true,
+					'delete_published_locations' => true,
+					'delete_private_locations' => true,
+					'edit_private_locations' => true,
+				),
+			);
+
+			foreach ( $desired as $role_name => $caps ) {
+				$role = get_role( $role_name );
+				if ( ! $role ) {
+					continue;
+				}
+				foreach ( $caps as $cap => $grant ) {
+					if ( $grant && empty( $role->capabilities[ $cap ] ) ) {
+						$role->add_cap( $cap );
+					} elseif ( ! $grant && ! empty( $role->capabilities[ $cap ] ) ) {
+						$role->remove_cap( $cap );
+					}
+				}
+			}
+
+		}
+
+		add_action( 'init', 'uamswp_fad_sync_doc_role_caps', 1 );
 
 	// Remove roles, if they need to be reset
 
@@ -3034,6 +3086,21 @@
 			$role->add_cap( 'edit_others_clinical_resources');
 			$role->add_cap( 'publish_clinical_resources');
 			$role->add_cap( 'read_private_clinical_resources');
+
+			// With map_meta_cap on, deleting or editing others' and published records also needs the
+			// delete_others_*, delete_published_*, delete_private_* and edit_private_* primitives.
+			// Grant every capability each post type declares, writing only when one is missing.
+			foreach ( array( 'provider', 'location', 'expertise', 'condition', 'treatment', 'clinical-resource' ) as $post_type ) {
+				$type_object = get_post_type_object( $post_type );
+				if ( ! $type_object ) {
+					continue;
+				}
+				foreach ( (array) $type_object->cap as $cap ) {
+					if ( empty( $role->capabilities[ $cap ] ) ) {
+						$role->add_cap( $cap );
+					}
+				}
+			}
 
 		}
 
@@ -3397,7 +3464,7 @@
 			$data['provider_podcast'] = '<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
 			</script>
 			<script type="text/javascript">
-				radiomd_embedded_filtered_doctor("uams","radiomd-embedded-filtered-doctor",303,1837,"' . $podcast_name . '");
+				radiomd_embedded_filtered_doctor("uams","radiomd-embedded-filtered-doctor",303,1837,"' . esc_js( $podcast_name ) . '");
 			</script>
 			<style type="text/css">
 				#radiomd-embedded-filtered-tag iframe {
@@ -3785,6 +3852,20 @@
 				$data['location_parent']['title'] = $parent_title;
 				$data['location_parent']['url'] = $parent_url;
 
+			// Address and parking components, each resolved to the location that supplies it
+
+				/**
+				 * These read $postId before this change -- the location's own
+				 * ID -- while $post_id above resolved to the parent and was
+				 * used only for the two image fields. A child location's
+				 * Address and Parking tabs were suppressed in the Control
+				 * Panel, so that returned blank or stale values for every
+				 * child. The resolver returns the parent's ID for a group the
+				 * child inherits and the child's own where it overrides.
+				 */
+
+				$location_source_ids = uamswp_fad_location_source_ids( $postId );
+
 			// Image values
 
 				$override_parent_photo = get_field( 'location_image_override_parent', $postId );
@@ -3872,12 +3953,12 @@
 
 			// Map / GPS
 
-				$map = get_field( 'location_map', $postId );
+				$map = get_field( 'location_map', $location_source_ids['map'] );
 
 				$data['location_lat'] = is_array($map) ? $map['lat'] : '';
 				$data['location_lng'] = is_array($map) ? $map['lng'] : '';
 
-			$location_floor = get_field_object('location_building_floor', $postId );
+			$location_floor = get_field_object('location_building_floor', $location_source_ids['unit'] );
 				$location_floor_value = '';
 				$location_floor_label = '';
 
@@ -3887,9 +3968,9 @@
 					$location_floor_label = $location_floor['choices'][ $location_floor_value ] ?? null;
 
 				}
-			$data['location_address_1'] = get_field( 'location_address_1', $postId );
-			$data['location_address_2'] = ( get_field( 'location_address_2', $postId ) ? get_field( 'location_address_2', $postId ) . '<br/>' : '');
-			$location_building = get_field( 'location_building', $postId );
+			$data['location_address_1'] = get_field( 'location_address_1', $location_source_ids['street'] );
+			$data['location_address_2'] = ( get_field( 'location_address_2', $location_source_ids['street'] ) ? get_field( 'location_address_2', $location_source_ids['street'] ) . '<br/>' : '');
+			$location_building = get_field( 'location_building', $location_source_ids['facility'] );
 
 			$building_name = '';
 			if ($location_building) {
@@ -3904,17 +3985,17 @@
 
 			// Suite
 
-				$data['location_suite'] = get_field( 'location_suite', $postId );
+				$data['location_suite'] = get_field( 'location_suite', $location_source_ids['unit'] );
 
 			// City, State, ZIP Code
 
-				$data['location_city'] = get_field( 'location_city', $postId );
-				$data['location_state'] = get_field( 'location_state', $postId );
-				$data['location_zip'] = get_field( 'location_zip', $postId );
+				$data['location_city'] = get_field( 'location_city', $location_source_ids['street'] );
+				$data['location_state'] = get_field( 'location_state', $location_source_ids['street'] );
+				$data['location_zip'] = get_field( 'location_zip', $location_source_ids['street'] );
 
 			// Region
 
-				$location_region = get_field( 'location_region', $postId );
+				$location_region = get_field( 'location_region', $location_source_ids['street'] );
 
 			// Hidden
 
@@ -3944,7 +4025,7 @@
 
 			// Directions From Parking Area
 
-				$data['location_direction'] = get_field( 'location_direction', $postId );
+				$data['location_direction'] = get_field( 'location_direction', $location_source_ids['directions'] );
 
 			// Phone numbers
 
@@ -4393,8 +4474,8 @@
 
 			// Parking information
 
-				$data['location_parking'] = get_field( 'location_parking', $postId );
-				$parking_map = get_field( 'location_parking_map', $postId );
+				$data['location_parking'] = get_field( 'location_parking', $location_source_ids['parking'] );
+				$parking_map = get_field( 'location_parking_map', $location_source_ids['parking'] );
 
 				$data['location_parking_link'] = is_array($parking_map) ? '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'. $parking_map['lat'] .','. $parking_map['lng'] .'" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>' : '';
 

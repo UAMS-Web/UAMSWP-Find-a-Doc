@@ -20,7 +20,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
+    "preinstall": "npx npm-force-resolutions@0.0.10",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "resolutions": {
