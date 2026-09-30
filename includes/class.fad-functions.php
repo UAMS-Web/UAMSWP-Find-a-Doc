@@ -1671,55 +1671,59 @@ add_action('wp_footer', 'uamswp_add_trench');
 add_action('wp_ajax_nopriv_schedule_ajax_filter', 'schedule_ajax_filter_callback');
 add_action('wp_ajax_schedule_ajax_filter', 'schedule_ajax_filter_callback');
 function schedule_ajax_filter_callback() {
-	if (!isset($_POST['pid']) || !isset($_POST['schedule_options'])) {
-		// echo json_encode(false);
-		exit;
+	check_ajax_referer( 'load_more_posts', 'security' );
+
+	$pid          = isset( $_POST['pid'] ) ? absint( wp_unslash( $_POST['pid'] ) ) : 0;
+	$schedule_key = isset( $_POST['schedule_options'] ) ? absint( wp_unslash( $_POST['schedule_options'] ) ) : 0;
+
+	// Only published locations have public scheduling options.
+	if ( ! $pid || 'location' !== get_post_type( $pid ) || 'publish' !== get_post_status( $pid ) ) {
+		wp_send_json_error( 'not found', 404 );
 	}
 
-	$pid = intval($_POST['pid']);
-	$schedule_key = $_POST['schedule_options'];
-
-	// IDOR guard: only disclose scheduling data for a published Location post,
-	// so draft/private posts or posts of other types cannot be read by ID.
-	if ( $pid < 1 || get_post_status($pid) !== 'publish' || get_post_type($pid) !== 'location' ) {
-		exit;
+	$schedules = get_field( 'location_scheduling_options', $pid );
+	if ( ! is_array( $schedules ) || ! isset( $schedules[ $schedule_key ] ) || ! is_array( $schedules[ $schedule_key ] ) ) {
+		wp_send_json_error( 'not found', 404 );
 	}
+	$row = $schedules[ $schedule_key ];
 
-	$schedules = get_field('location_scheduling_options', $pid);
-	$row = $schedules[$schedule_key];
-	$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
-	$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
-	$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
-	$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
-	$location_scheduling_options = get_field('location_scheduling_options', $pid);
+	$mychart_scheduling_domain     = (string) get_field( 'mychart_scheduling_domain', 'option' );
+	$mychart_scheduling_instance   = (string) get_field( 'mychart_scheduling_instance', 'option' );
+	$mychart_scheduling_linksource = (string) get_field( 'mychart_scheduling_linksource', 'option' );
+	$mychart_scheduling_linksource = ( '' !== $mychart_scheduling_linksource ) ? $mychart_scheduling_linksource : 'uamshealth.com';
 
-	$location_scheduling_ser = $row['location_scheduling_ser'];
-	$location_scheduling_dep = $row['location_scheduling_dep'];
-	$location_scheduling_vt = $row['location_scheduling_vt'];
-	$location_scheduling_item_title_nested = $row['location_scheduling_item_title_nested'];
-	$location_scheduling_item_title_nested = ( isset($location_scheduling_item_title_nested) && !empty($location_scheduling_item_title_nested) ) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
-	$location_scheduling_item_intro_nested = $row['location_scheduling_item_intro_nested'];
-	$location_scheduling_fallback = $row['location_scheduling_fallback'];
+	$location_scheduling_ser               = isset( $row['location_scheduling_ser'] ) ? (string) $row['location_scheduling_ser'] : '';
+	$location_scheduling_dep               = isset( $row['location_scheduling_dep'] ) ? (string) $row['location_scheduling_dep'] : '';
+	$location_scheduling_vt                = isset( $row['location_scheduling_vt'] ) ? (string) $row['location_scheduling_vt'] : '';
+	$location_scheduling_item_title_nested = ! empty( $row['location_scheduling_item_title_nested'] ) ? (string) $row['location_scheduling_item_title_nested'] : 'Schedule an Appointment Online';
+	$location_scheduling_item_intro_nested = isset( $row['location_scheduling_item_intro_nested'] ) ? (string) $row['location_scheduling_item_intro_nested'] : '';
+	$location_scheduling_fallback          = isset( $row['location_scheduling_fallback'] ) ? (string) $row['location_scheduling_fallback'] : '';
+
+	$widget_base = 'https://' . $mychart_scheduling_domain . '/' . $mychart_scheduling_instance;
+	// Built by hand rather than add_query_arg so empty values still appear as "id=" the way the widget expects.
+	$widget_src  = $widget_base . '/SignupAndSchedule/EmbeddedSchedule'
+		. '?id=' . rawurlencode( $location_scheduling_ser )
+		. '&dept=' . rawurlencode( $location_scheduling_dep )
+		. '&vt=' . rawurlencode( $location_scheduling_vt )
+		. '&linksource=' . rawurlencode( $mychart_scheduling_linksource );
 	?>
-	<h3 class="sr-only module-inner-title"><?php echo $location_scheduling_item_title_nested; ?></h3>
-	<?php if ( $location_scheduling_item_intro_nested && !empty($location_scheduling_item_intro_nested) ) { ?>
+	<h3 class="sr-only module-inner-title"><?php echo esc_html( $location_scheduling_item_title_nested ); ?></h3>
+	<?php if ( '' !== $location_scheduling_item_intro_nested ) { ?>
 		<p class="note">
-			<?php echo $location_scheduling_item_intro_nested; ?>
+			<?php echo wp_kses_post( $location_scheduling_item_intro_nested ); ?>
 		</p>
 	<?php } ?>
 	<div id="scheduleContainer">
-		<iframe id="openSchedulingFrame" title="MyChart Scheduling" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+		<iframe id="openSchedulingFrame" title="MyChart Scheduling" class="widgetframe" scrolling="no" src="<?php echo esc_url( $widget_src ); ?>"></iframe>
 	</div>
 
-	<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
-
-	<script src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
+	<script src="<?php echo esc_url( $widget_base . '/Content/EmbeddedWidgetController.js' ); ?>" type="text/javascript"></script>
 
 	<script type="text/javascript">
 	var EWC = new EmbeddedWidgetController({
 
 		// Replace with the hostname of your Open Scheduling site
-		'hostname':'https://<?php echo $mychart_scheduling_domain; ?>',
+		'hostname': <?php echo wp_json_encode( 'https://' . $mychart_scheduling_domain ); ?>,
 
 		// Must equal media query in EpicWP.css + any left/right margin of the host page. Should also change in EmbeddedWidget.css
 		'matchMediaString':'(max-width: 991.98px)',
@@ -1732,9 +1736,9 @@ function schedule_ajax_filter_callback() {
 		'toggleBtnCollapseHelpText': 'Exit fullscreen',
 	});
 	</script>
-	<?php if ( $location_scheduling_fallback && !empty($location_scheduling_fallback) ) { ?>
+	<?php if ( '' !== $location_scheduling_fallback ) { ?>
 		<div class="more">
-			<?php echo $location_scheduling_fallback; ?>
+			<?php echo wp_kses_post( $location_scheduling_fallback ); ?>
 		</div>
 	<?php } ?>
 	<?php
