@@ -1,17 +1,23 @@
 jQuery(document).ready(function($) {
 
     let npi = '';
+    let post_id = '';
     let total_records = '';
     if (null != $('#comment-list').data('npi') && $('#comment-list').data('npi').length !== 0){
         npi = $('#comment-list').data('npi');
+    }
+    if (null != $('#comment-list').data('postid') && $('#comment-list').data('postid').length !== 0){
+        post_id = $('#comment-list').data('postid');
     }
     if (null != $('#comment-list').data('commentcount') && $('#comment-list').data('commentcount').length !== 0){
         total_records = $('#comment-list').data('commentcount');
     }
     // var total_records = ;
-    if (npi.length == 0 || total_records.length == 0) {
+    if (npi.length == 0 || post_id.length == 0 || total_records.length == 0) {
         return false;
     }
+    var nonce = (typeof uamswp_ajax_scripts !== 'undefined' && uamswp_ajax_scripts.security) ? uamswp_ajax_scripts.security : '';
+    var ajax_url = (typeof uamswp_ajax_scripts !== 'undefined' && uamswp_ajax_scripts.ajaxurl) ? uamswp_ajax_scripts.ajaxurl : '/wp-admin/admin-ajax.php';
 
     var currentPage = 1;
     var perPage = 10; // Adjust as needed
@@ -21,7 +27,7 @@ jQuery(document).ready(function($) {
       showLoadingSpinner();
 
       $.ajax({
-        url: '/wp-admin/admin-ajax.php', //url: ajaxurl, // WordPress AJAX URL
+        url: ajax_url,
         type: 'POST',
         dataType: 'html',
         data: {
@@ -54,7 +60,6 @@ jQuery(document).ready(function($) {
 
     function renderData(data) {
         const cardList = $('#comment-list');
-        console.log(data);
         cardList.empty();
         cardList.append(data);
     }
