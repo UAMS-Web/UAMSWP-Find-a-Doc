@@ -94,3 +94,30 @@
 	}
 
 	add_action('acf/init', 'my_acf_google_key');
+
+// The MyChart options are written into script and iframe URLs on public location pages; accept only a hostname and a path segment.
+
+	function uamswp_fad_validate_mychart_domain( $valid, $value, $field, $input ) {
+		if ( true !== $valid ) {
+			return $valid;
+		}
+		$value = trim( (string) $value );
+		if ( '' !== $value && ! preg_match( '/^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/i', $value ) ) {
+			return 'Enter a hostname only, such as mychart.example.org, with no scheme, path, or punctuation.';
+		}
+		return $valid;
+	}
+	add_filter( 'acf/validate_value/name=mychart_scheduling_domain', 'uamswp_fad_validate_mychart_domain', 10, 4 );
+
+	function uamswp_fad_validate_mychart_instance( $valid, $value, $field, $input ) {
+		if ( true !== $valid ) {
+			return $valid;
+		}
+		$value = trim( (string) $value );
+		if ( '' !== $value && ! preg_match( '/^[A-Za-z0-9._-]+$/', $value ) ) {
+			return 'Enter a single path segment, such as MyChartPRD, using letters, numbers, dot, underscore, or dash.';
+		}
+		return $valid;
+	}
+	add_filter( 'acf/validate_value/name=mychart_scheduling_instance', 'uamswp_fad_validate_mychart_instance', 10, 4 );
+	add_filter( 'acf/validate_value/name=mychart_scheduling_linksource', 'uamswp_fad_validate_mychart_domain', 10, 4 );
