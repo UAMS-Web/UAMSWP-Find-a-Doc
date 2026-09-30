@@ -600,6 +600,7 @@ while ( have_posts() ) : the_post(); ?>
 				"post_parent" => $current_id,
 				'order' => 'ASC',
 				'orderby' => 'title',
+				'posts_per_page' => -1,
 				'meta_query' => array(
 					array(
 						'key' => 'location_hidden',
