@@ -8,7 +8,7 @@
 			'page_title' => 'Find-a-Doc Settings',
 			'menu_title' => 'Find-a-Doc Settings',
 			'menu_slug' => 'fad-settings',
-			'capability' => 'edit_posts',
+			'capability' => 'manage_options',
 			'redirect' => false
 		));
 
@@ -17,6 +17,7 @@
 			'menu_title' => 'Clinical Providers',
 			'menu_slug' => 'uamswp-fad-providers',
 			'parent_slug' => 'fad-settings',
+			'capability' => 'manage_options',
 			'redirect' => false
 		));
 
@@ -25,6 +26,7 @@
 			'menu_title' => 'Clinical Locations',
 			'menu_slug' => 'uamswp-fad-locations',
 			'parent_slug' => 'fad-settings',
+			'capability' => 'manage_options',
 			'redirect' => false
 		));
 
@@ -33,6 +35,7 @@
 			'menu_title' => 'Clinical Areas of Expertise',
 			'menu_slug' => 'uamswp-fad-expertise',
 			'parent_slug' => 'fad-settings',
+			'capability' => 'manage_options',
 			'redirect' => false
 		));
 
@@ -41,6 +44,7 @@
 			'menu_title' => 'Clinical Resources',
 			'menu_slug' => 'uamswp-fad-resources',
 			'parent_slug' => 'fad-settings',
+			'capability' => 'manage_options',
 			'redirect' => false
 		));
 
@@ -49,6 +53,7 @@
 			'menu_title' => 'Conditions and Treatments',
 			'menu_slug' => 'uamswp-fad-tax',
 			'parent_slug' => 'fad-settings',
+			'capability' => 'manage_options',
 			'redirect' => false
 		));
 
@@ -57,6 +62,7 @@
 			'menu_title' => 'MyChart Open Scheduling',
 			'menu_slug' => 'uamswp-fad-mychart',
 			'parent_slug' => 'fad-settings',
+			'capability' => 'manage_options',
 			'redirect' => false
 		));
 
@@ -65,6 +71,7 @@
 			'menu_title' => 'Remove Medical Ontology',
 			'menu_slug' => 'uamswp-fad-remove-ontology',
 			'parent_slug' => 'fad-settings',
+			'capability' => 'manage_options',
 			'redirect' => false
 		));
 

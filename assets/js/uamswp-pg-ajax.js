@@ -32,8 +32,8 @@ jQuery(document).ready(function($) {
         dataType: 'html',
         data: {
             action : "pg_ajax_api_action",
-            nonce : nonce,
-            post_id : post_id,
+            nonce : uamswp_ajax_scripts.security,
+            npi : npi,
             page : page,
         },
         success: function(response) {

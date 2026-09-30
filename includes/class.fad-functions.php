@@ -354,45 +354,101 @@ function uamswp_fad_check_and_schedule_cron() {
 add_action( 'uamswp_provider_pg_sync_hook', 'sync_provider_pg_data' );
 
 function sync_provider_pg_data() {
-    $count = 10;
+    $count    = 10;
+    $lock_key = 'uamswp_pg_sync_lock';
+
+    // A full run can outlast the schedule interval under rate limiting; never overlap two runs.
+    if ( get_transient( $lock_key ) ) {
+        return;
+    }
 
     $providers = get_posts( array(
         'post_type'      => 'provider',
         'post_status'    => 'publish',
         'posts_per_page' => -1,
+        'fields'         => 'ids',
     ) );
 
     if ( empty( $providers ) ) {
         return;
     }
 
-    foreach ( $providers as $provider ) {
+    set_transient( $lock_key, time(), 2 * HOUR_IN_SECONDS );
+
+    foreach ( $providers as $provider_id ) {
         // Using get_field assumes Advanced Custom Fields (ACF) is active
-        $npi = get_field( 'physician_npi', $provider->ID );
+        $npi = absint( get_field( 'physician_npi', $provider_id ) );
         if ( ! $npi ) {
             continue;
         }
 
-        $api_url = 'https://api1.consumerism.pressganey.com/api/bsr/comments?personId=' . $npi . '&perPage=' . $count . '&days=540&additionalFields=reviewSummary';
+        $api_url = add_query_arg(
+            array(
+                'personId'         => $npi,
+                'perPage'          => $count,
+                'days'             => 540,
+                'additionalFields' => 'reviewSummary',
+            ),
+            'https://api1.consumerism.pressganey.com/api/bsr/comments'
+        );
 
         $external_data = fetch_pg_api_with_retry( $api_url );
 
-        if ( $external_data ) {
-            // Save the raw text/JSON string to post meta
-            update_post_meta( $provider->ID, '_syndicated_api_data', $external_data );
+        if ( is_wp_error( $external_data ) ) {
+            // Keep the last good payload; a failed fetch is not review data.
+            error_log( sprintf( 'UAMSWP Find-a-Doc: Press Ganey sync skipped provider %d: %s', $provider_id, $external_data->get_error_message() ) );
+
+            if ( 'pg_rate_limited' === $external_data->get_error_code() ) {
+                // The upstream quota is exhausted; stop this run and let the next scheduled run retry.
+                break;
+            }
+        } elseif ( $external_data ) {
+            update_post_meta( $provider_id, '_syndicated_api_data', $external_data );
         }
 
         // Standard half-second pause to prevent our own cron loop from trigger a SpikeArrest
         usleep( 500000 );
     }
+
+    delete_transient( $lock_key );
 }
+
+// Clear the sync when the plugin is deactivated so the event does not keep firing.
+register_deactivation_hook( UAMS_FAD_PATH . 'uamswp-find-a-doc.php', function () {
+    wp_clear_scheduled_hook( 'uamswp_provider_pg_sync_hook' );
+    delete_transient( 'uamswp_pg_sync_lock' );
+} );
 
 // Get PressGaney Access Token
 function wp_pg_get_token() {
 	$pg_cache_key   = 'pg_api_token';
 	$pg_token = get_transient( $pg_cache_key );
 	if ( ! $pg_token ) {
-		$pg_response    = wp_remote_post('https://api1.consumerism.pressganey.com/api/service/v1/token/create?appId=034581304013586&appSecret=68a0fd1e-22c0-49a2-8218-10f581e3cdaa', array(
+		// PressGaney API credentials are read at runtime from server-side
+		// configuration -- never hardcoded here. Define them in wp-config.php:
+		//     define( 'UAMSWP_PG_APP_ID', '...' );
+		//     define( 'UAMSWP_PG_APP_SECRET', '...' );
+		// or provide them via the UAMSWP_PG_APP_ID / UAMSWP_PG_APP_SECRET
+		// environment variables. The previously committed credential remains in
+		// git history and must be rotated by the site owner.
+		$pg_app_id     = defined( 'UAMSWP_PG_APP_ID' ) ? UAMSWP_PG_APP_ID : getenv( 'UAMSWP_PG_APP_ID' );
+		$pg_app_secret = defined( 'UAMSWP_PG_APP_SECRET' ) ? UAMSWP_PG_APP_SECRET : getenv( 'UAMSWP_PG_APP_SECRET' );
+
+		// Fail safe: without both credentials, do not call the API with empty
+		// or placeholder values. Return the (missing) token as before.
+		if ( empty( $pg_app_id ) || empty( $pg_app_secret ) ) {
+			return $pg_token;
+		}
+
+		$pg_token_url = add_query_arg(
+			array(
+				'appId'     => $pg_app_id,
+				'appSecret' => $pg_app_secret,
+			),
+			'https://api1.consumerism.pressganey.com/api/service/v1/token/create'
+		);
+
+		$pg_response    = wp_remote_post( $pg_token_url, array(
 			'headers' => array(
 				'Content-Type' => 'application/json',
 				'Access-Token' => 'Content-Type'
@@ -1620,8 +1676,14 @@ function schedule_ajax_filter_callback() {
 		exit;
 	}
 
-	$pid = $_POST['pid'];
+	$pid = intval($_POST['pid']);
 	$schedule_key = $_POST['schedule_options'];
+
+	// IDOR guard: only disclose scheduling data for a published Location post,
+	// so draft/private posts or posts of other types cannot be read by ID.
+	if ( $pid < 1 || get_post_status($pid) !== 'publish' || get_post_type($pid) !== 'location' ) {
+		exit;
+	}
 
 	$schedules = get_field('location_scheduling_options', $pid);
 	$row = $schedules[$schedule_key];
@@ -1711,5 +1773,147 @@ function uamswp_attr_conversion($input) {
 	$input_attr = html_entity_decode($input_attr); // Convert HTML entities to their corresponding characters
 
 	return $input_attr;
+
+}
+
+// Resolve which post supplies each address and parking component for a location
+/**
+ * A location with a parent location inherits that parent's street address,
+ * its facility, its floor and suite within that facility, its entrance map
+ * pin, its parking and its directions. A child may override any of those six
+ * groups independently, through the toggles on its own Address and Parking
+ * Information tabs.
+ *
+ * The hierarchy is two levels deep by construction -- the Parent Location
+ * picker is filtered to top-level locations by limit_post_top_level() in
+ * class.fad-acf-functions.php -- so this resolves in a single hop rather than
+ * walking a chain.
+ *
+ * Every returned value is the post ID to read that component group from: the
+ * location's own ID where it overrides the group or has no parent, and the
+ * parent's ID where it inherits.
+ *
+ * @param int|WP_Post $post_id Location to resolve. Defaults to the current post.
+ *
+ * @return array {
+ *     @type int $self       The location's own ID.
+ *     @type int $parent     The parent location's ID, or 0 when top-level.
+ *     @type int $street     location_address_1, _city, _state, _zip, _region
+ *                           -- where the building stands.
+ *     @type int $facility   location_building_query, _building -- which
+ *                           building. Separate from the street address
+ *                           because a parent that is itself the facility
+ *                           names none, while its children must name it.
+ *     @type int $unit       location_building_floor, _suite -- where inside
+ *                           that building.
+ *     @type int $map        location_map.
+ *     @type int $parking    location_parking_map, location_parking.
+ *     @type int $directions location_direction.
+ * }
+ */
+function uamswp_fad_location_source_ids( $post_id = 0 ) {
+
+	$post_id = $post_id instanceof WP_Post ? $post_id->ID : (int) $post_id;
+
+	if ( !$post_id ) {
+		$post_id = (int) get_the_ID();
+	}
+
+	if ( !$post_id ) {
+		return array(
+			'self'       => 0,
+			'parent'     => 0,
+			'street'     => 0,
+			'facility'   => 0,
+			'unit'       => 0,
+			'map'        => 0,
+			'parking'    => 0,
+			'directions' => 0,
+		);
+	}
+
+	// Location cards loop over the same locations repeatedly, so resolve once per request
+
+		static $cache = array();
+
+		if ( isset( $cache[$post_id] ) ) {
+			return $cache[$post_id];
+		}
+
+	// Resolve the parent location
+
+		$parent_id = 0;
+
+		if ( get_field( 'location_parent', $post_id ) ) {
+
+			/**
+			 * field_location_parent_id returns an ID, but get_post() accepts
+			 * either that or a WP_Post, so a changed return format cannot
+			 * silently break this.
+			 */
+
+			$parent = get_field( 'location_parent_id', $post_id );
+			$parent = $parent instanceof WP_Post ? $parent : get_post( $parent );
+
+			if ( $parent && (int) $parent->ID !== $post_id ) {
+
+				$parent_id = (int) $parent->ID;
+
+			}
+
+		}
+
+	// A top-level location supplies every component itself
+
+		if ( !$parent_id ) {
+
+			$cache[$post_id] = array(
+				'self'       => $post_id,
+				'parent'     => 0,
+				'street'     => $post_id,
+				'facility'   => $post_id,
+				'unit'       => $post_id,
+				'map'        => $post_id,
+				'parking'    => $post_id,
+				'directions' => $post_id,
+			);
+
+			return $cache[$post_id];
+
+		}
+
+	// A child inherits each group unless both its master and its group toggle are on
+
+		/**
+		 * Unset on every location that predates these fields, which reads
+		 * falsy and so inherits -- the behaviour before the override existed.
+		 */
+
+		$address_override = get_field( 'location_address_override_parent', $post_id );
+		$parking_override = get_field( 'location_parking_override_parent', $post_id );
+
+		$overrides = array(
+			'street'     => $address_override && get_field( 'location_address_override_parent_street', $post_id ),
+			'facility'   => $address_override && get_field( 'location_address_override_parent_facility', $post_id ),
+			'unit'       => $address_override && get_field( 'location_address_override_parent_unit', $post_id ),
+			'map'        => $address_override && get_field( 'location_address_override_parent_map', $post_id ),
+			'parking'    => $parking_override && get_field( 'location_parking_override_parent_parking', $post_id ),
+			'directions' => $parking_override && get_field( 'location_parking_override_parent_directions', $post_id ),
+		);
+
+		$ids = array(
+			'self'   => $post_id,
+			'parent' => $parent_id,
+		);
+
+		foreach ( $overrides as $group => $override ) {
+
+			$ids[$group] = $override ? $post_id : $parent_id;
+
+		}
+
+		$cache[$post_id] = $ids;
+
+		return $ids;
 
 }
