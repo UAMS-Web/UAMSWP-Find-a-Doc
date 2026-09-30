@@ -1849,7 +1849,9 @@ while ( have_posts() ) : the_post(); ?>
 </main>
 </div>
 
-<?php // Schema Data ?>
+<?php // Schema Data
+// Only display if enhanced schema does not exist
+if( !function_exists('uams_physician_schema') ) { ?>
 <script type='application/ld+json'>
 {
   "@context": "https://schema.org",
@@ -1867,6 +1869,8 @@ while ( have_posts() ) : the_post(); ?>
 }
 </script>
 
-<?php endwhile; // end of the loop. ?>
+<?php
+} // End if for enhanced schema
+endwhile; // end of the loop. ?>
 
 <?php get_footer(); ?>
