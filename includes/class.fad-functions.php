@@ -354,38 +354,70 @@ function uamswp_fad_check_and_schedule_cron() {
 add_action( 'uamswp_provider_pg_sync_hook', 'sync_provider_pg_data' );
 
 function sync_provider_pg_data() {
-    $count = 10;
+    $count    = 10;
+    $lock_key = 'uamswp_pg_sync_lock';
+
+    // A full run can outlast the schedule interval under rate limiting; never overlap two runs.
+    if ( get_transient( $lock_key ) ) {
+        return;
+    }
 
     $providers = get_posts( array(
         'post_type'      => 'provider',
         'post_status'    => 'publish',
         'posts_per_page' => -1,
+        'fields'         => 'ids',
     ) );
 
     if ( empty( $providers ) ) {
         return;
     }
 
-    foreach ( $providers as $provider ) {
+    set_transient( $lock_key, time(), 2 * HOUR_IN_SECONDS );
+
+    foreach ( $providers as $provider_id ) {
         // Using get_field assumes Advanced Custom Fields (ACF) is active
-        $npi = get_field( 'physician_npi', $provider->ID );
+        $npi = absint( get_field( 'physician_npi', $provider_id ) );
         if ( ! $npi ) {
             continue;
         }
 
-        $api_url = 'https://api1.consumerism.pressganey.com/api/bsr/comments?personId=' . $npi . '&perPage=' . $count . '&days=540&additionalFields=reviewSummary';
+        $api_url = add_query_arg(
+            array(
+                'personId'         => $npi,
+                'perPage'          => $count,
+                'days'             => 540,
+                'additionalFields' => 'reviewSummary',
+            ),
+            'https://api1.consumerism.pressganey.com/api/bsr/comments'
+        );
 
         $external_data = fetch_pg_api_with_retry( $api_url );
 
-        if ( $external_data ) {
-            // Save the raw text/JSON string to post meta
-            update_post_meta( $provider->ID, '_syndicated_api_data', $external_data );
+        if ( is_wp_error( $external_data ) ) {
+            // Keep the last good payload; a failed fetch is not review data.
+            error_log( sprintf( 'UAMSWP Find-a-Doc: Press Ganey sync skipped provider %d: %s', $provider_id, $external_data->get_error_message() ) );
+
+            if ( 'pg_rate_limited' === $external_data->get_error_code() ) {
+                // The upstream quota is exhausted; stop this run and let the next scheduled run retry.
+                break;
+            }
+        } elseif ( $external_data ) {
+            update_post_meta( $provider_id, '_syndicated_api_data', $external_data );
         }
 
         // Standard half-second pause to prevent our own cron loop from trigger a SpikeArrest
         usleep( 500000 );
     }
+
+    delete_transient( $lock_key );
 }
+
+// Clear the sync when the plugin is deactivated so the event does not keep firing.
+register_deactivation_hook( UAMS_FAD_PATH . 'uamswp-find-a-doc.php', function () {
+    wp_clear_scheduled_hook( 'uamswp_provider_pg_sync_hook' );
+    delete_transient( 'uamswp_pg_sync_lock' );
+} );
 
 // Get PressGaney Access Token
 function wp_pg_get_token() {
