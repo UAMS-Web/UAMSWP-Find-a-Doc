@@ -7,7 +7,7 @@
       'relationship' => 
       array (
         'type' => 'post',
-        'post_type' => 'locations',
+        'post_type' => 'location',
       ),
       'primary_key' => 
       array (
@@ -72,6 +72,36 @@
         ),
         4 => 
         array (
+          'name' => 'location_building',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_building',
+          ),
+          'format' => '%s',
+        ),
+        5 => 
+        array (
+          'name' => 'location_building_floor',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_building_floor',
+          ),
+          'format' => '%s',
+        ),
+        6 => 
+        array (
+          'name' => 'location_suite',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_suite',
+          ),
+          'format' => '%s',
+        ),
+        7 => 
+        array (
           'name' => 'location_city',
           'map' => 
           array (
@@ -80,7 +110,7 @@
           ),
           'format' => '%s',
         ),
-        5 => 
+        8 => 
         array (
           'name' => 'location_state',
           'map' => 
@@ -90,7 +120,7 @@
           ),
           'format' => '%s',
         ),
-        6 => 
+        9 => 
         array (
           'name' => 'location_zip',
           'map' => 
@@ -100,17 +130,17 @@
           ),
           'format' => '%s',
         ),
-        7 => 
+        10 => 
         array (
-          'name' => 'location_map',
+          'name' => 'location_region',
           'map' => 
           array (
             'type' => 'acf_field_name',
-            'identifier' => 'location_map',
+            'identifier' => 'location_region',
           ),
           'format' => '%s',
         ),
-        8 => 
+        11 => 
         array (
           'name' => 'location_parking',
           'map' => 
@@ -120,7 +150,7 @@
           ),
           'format' => '%s',
         ),
-        9 => 
+        12 => 
         array (
           'name' => 'location_direction',
           'map' => 
@@ -130,7 +160,7 @@
           ),
           'format' => '%s',
         ),
-        10 => 
+        13 => 
         array (
           'name' => 'location_about',
           'map' => 
@@ -140,7 +170,17 @@
           ),
           'format' => '%s',
         ),
-        11 => 
+        14 => 
+        array (
+          'name' => 'location_youtube_link',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_youtube_link',
+          ),
+          'format' => '%s',
+        ),
+        15 => 
         array (
           'name' => 'location_short_desc',
           'map' => 
@@ -150,7 +190,27 @@
           ),
           'format' => '%s',
         ),
-        12 => 
+        16 => 
+        array (
+          'name' => 'location_affiliation',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_affiliation',
+          ),
+          'format' => '%s',
+        ),
+        17 => 
+        array (
+          'name' => 'location_clinic_phone_query',
+          'format' => '%d',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_clinic_phone_query',
+          ),
+        ),
+        18 => 
         array (
           'name' => 'location_phone',
           'map' => 
@@ -160,7 +220,37 @@
           ),
           'format' => '%s',
         ),
-        13 => 
+        19 => 
+        array (
+          'name' => 'location_appointment_phone_query',
+          'format' => '%d',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_appointment_phone_query',
+          ),
+        ),
+        20 => 
+        array (
+          'name' => 'location_new_appointments_phone',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_new_appointments_phone',
+          ),
+          'format' => '%s',
+        ),
+        21 => 
+        array (
+          'name' => 'location_return_appointments_phone',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_return_appointments_phone',
+          ),
+          'format' => '%s',
+        ),
+        22 => 
         array (
           'name' => 'location_phone_numbers',
           'map' => 
@@ -170,7 +260,7 @@
           ),
           'format' => '%s',
         ),
-        14 => 
+        23 => 
         array (
           'name' => 'location_appointment',
           'map' => 
@@ -180,7 +270,7 @@
           ),
           'format' => '%s',
         ),
-        15 => 
+        24 => 
         array (
           'name' => 'location_appointment_bring',
           'map' => 
@@ -190,7 +280,7 @@
           ),
           'format' => '%s',
         ),
-        16 => 
+        25 => 
         array (
           'name' => 'location_portal',
           'map' => 
@@ -200,7 +290,7 @@
           ),
           'format' => '%s',
         ),
-        17 => 
+        26 => 
         array (
           'name' => 'location_web_name',
           'map' => 
@@ -210,7 +300,7 @@
           ),
           'format' => '%s',
         ),
-        18 => 
+        27 => 
         array (
           'name' => 'location_url',
           'map' => 
@@ -220,7 +310,7 @@
           ),
           'format' => '%s',
         ),
-        19 => 
+        28 => 
         array (
           'name' => 'location_abbreviation',
           'map' => 
@@ -230,7 +320,7 @@
           ),
           'format' => '%s',
         ),
-        20 => 
+        29 => 
         array (
           'name' => 'location_description',
           'map' => 
@@ -240,7 +330,7 @@
           ),
           'format' => '%s',
         ),
-        21 => 
+        30 => 
         array (
           'name' => 'location_email',
           'map' => 
@@ -250,7 +340,27 @@
           ),
           'format' => '%s',
         ),
-        22 => 
+        31 => 
+        array (
+          'name' => 'location_wayfinding_photo',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_wayfinding_photo',
+          ),
+          'format' => '%s',
+        ),
+        32 => 
+        array (
+          'name' => 'location_photo_gallery',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_photo_gallery',
+          ),
+          'format' => '%s',
+        ),
+        33 => 
         array (
           'name' => 'location_24_7',
           'format' => '%d',
@@ -260,7 +370,17 @@
             'identifier' => 'location_24_7',
           ),
         ),
-        23 => 
+        34 => 
+        array (
+          'name' => 'location_hours_group',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_hours_group',
+          ),
+          'format' => '%s',
+        ),
+        35 => 
         array (
           'name' => 'location_hours',
           'map' => 
@@ -270,7 +390,7 @@
           ),
           'format' => '%s',
         ),
-        24 => 
+        36 => 
         array (
           'name' => 'location_after_hours',
           'map' => 
@@ -280,7 +400,7 @@
           ),
           'format' => '%s',
         ),
-        25 => 
+        37 => 
         array (
           'name' => 'location_holiday_hours',
           'map' => 
@@ -290,7 +410,7 @@
           ),
           'format' => '%s',
         ),
-        26 => 
+        38 => 
         array (
           'name' => 'location_conditions',
           'map' => 
@@ -300,7 +420,7 @@
           ),
           'format' => '%s',
         ),
-        27 => 
+        39 => 
         array (
           'name' => 'location_treatments',
           'map' => 
@@ -310,7 +430,7 @@
           ),
           'format' => '%s',
         ),
-        28 => 
+        40 => 
         array (
           'name' => 'location_expertise',
           'map' => 
@@ -320,7 +440,7 @@
           ),
           'format' => '%s',
         ),
-        29 => 
+        41 => 
         array (
           'name' => 'location_medical_specialties',
           'map' => 
@@ -330,7 +450,7 @@
           ),
           'format' => '%s',
         ),
-        30 => 
+        42 => 
         array (
           'name' => 'location_medical_terms',
           'map' => 
@@ -340,7 +460,7 @@
           ),
           'format' => '%s',
         ),
-        31 => 
+        43 => 
         array (
           'name' => 'location_clinic',
           'format' => '%d',
@@ -350,7 +470,7 @@
             'identifier' => 'location_clinic',
           ),
         ),
-        32 => 
+        44 => 
         array (
           'name' => 'location_facility',
           'format' => '%d',
@@ -360,13 +480,143 @@
             'identifier' => 'location_facility',
           ),
         ),
-        33 => 
+        45 => 
         array (
-          'name' => 'location_physicians',
+          'name' => 'physician_locations',
           'map' => 
           array (
             'type' => 'acf_field_name',
-            'identifier' => 'location_physicians',
+            'identifier' => 'physician_locations',
+          ),
+          'format' => '%s',
+        ),
+        46 => 
+        array (
+          'name' => 'location_gmb_exclude',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_gmb_exclude',
+          ),
+          'format' => '%s',
+        ),
+        47 => 
+        array (
+          'name' => 'location_gmb_prefix',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_gmb_prefix',
+          ),
+          'format' => '%s',
+        ),
+        48 => 
+        array (
+          'name' => 'location_gmb_cat',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'location_gmb_cat',
+          ),
+          'format' => '%s',
+        ),
+        49 => 
+        array (
+          'name' => 'has_wheelchair_accessible_elevator',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'has_wheelchair_accessible_elevator',
+          ),
+          'format' => '%s',
+        ),
+        50 => 
+        array (
+          'name' => 'has_wheelchair_accessible_entrance',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'has_wheelchair_accessible_entrance',
+          ),
+          'format' => '%s',
+        ),
+        51 => 
+        array (
+          'name' => 'has_wheelchair_accessible_restroom',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'has_wheelchair_accessible_restroom',
+          ),
+          'format' => '%s',
+        ),
+        52 => 
+        array (
+          'name' => 'has_restroom',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'has_restroom',
+          ),
+          'format' => '%s',
+        ),
+        53 => 
+        array (
+          'name' => 'requires_appointments',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'requires_appointments',
+          ),
+          'format' => '%s',
+        ),
+        54 => 
+        array (
+          'name' => 'requires_temperature_check_customers',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'requires_temperature_check_customers',
+          ),
+          'format' => '%s',
+        ),
+        55 => 
+        array (
+          'name' => 'requires_masks_customers',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'requires_masks_customers',
+          ),
+          'format' => '%s',
+        ),
+        56 => 
+        array (
+          'name' => 'requires_temperature_check_staff',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'requires_temperature_check_staff',
+          ),
+          'format' => '%s',
+        ),
+        57 => 
+        array (
+          'name' => 'requires_masks_staff',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'requires_masks_staff',
+          ),
+          'format' => '%s',
+        ),
+        58 => 
+        array (
+          'name' => 'is_sanitizing_between_customers',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'is_sanitizing_between_customers',
           ),
           'format' => '%s',
         ),
@@ -381,7 +631,7 @@
       'relationship' => 
       array (
         'type' => 'post',
-        'post_type' => 'physicians',
+        'post_type' => 'provider',
       ),
       'primary_key' => 
       array (
@@ -526,11 +776,11 @@
         ),
         12 => 
         array (
-          'name' => 'physician_department',
+          'name' => 'physician_service_line',
           'map' => 
           array (
             'type' => 'acf_field_name',
-            'identifier' => 'physician_department',
+            'identifier' => 'physician_service_line',
           ),
           'format' => '%s',
         ),
@@ -586,6 +836,16 @@
         ),
         18 => 
         array (
+          'name' => 'physician_region',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'physician_region',
+          ),
+          'format' => '%s',
+        ),
+        19 => 
+        array (
           'name' => 'physician_affiliation',
           'map' => 
           array (
@@ -594,7 +854,17 @@
           ),
           'format' => '%s',
         ),
-        19 => 
+        20 => 
+        array (
+          'name' => 'physician_portal',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'physician_portal',
+          ),
+          'format' => '%s',
+        ),
+        21 => 
         array (
           'name' => 'physician_patient_types',
           'map' => 
@@ -604,7 +874,7 @@
           ),
           'format' => '%s',
         ),
-        20 => 
+        22 => 
         array (
           'name' => 'physician_appointment_link',
           'map' => 
@@ -614,7 +884,17 @@
           ),
           'format' => '%s',
         ),
-        21 => 
+        23 => 
+        array (
+          'name' => 'physician_eligible_appointments',
+          'format' => '%d',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'physician_eligible_appointments',
+          ),
+        ),
+        24 => 
         array (
           'name' => 'physician_primary_care',
           'format' => '%d',
@@ -624,7 +904,7 @@
             'identifier' => 'physician_primary_care',
           ),
         ),
-        22 => 
+        25 => 
         array (
           'name' => 'physician_referral_required',
           'format' => '%d',
@@ -634,7 +914,7 @@
             'identifier' => 'physician_referral_required',
           ),
         ),
-        23 => 
+        26 => 
         array (
           'name' => 'physician_accepting_patients',
           'format' => '%d',
@@ -644,7 +924,7 @@
             'identifier' => 'physician_accepting_patients',
           ),
         ),
-        24 => 
+        27 => 
         array (
           'name' => 'physician_second_opinion',
           'format' => '%d',
@@ -654,7 +934,7 @@
             'identifier' => 'physician_second_opinion',
           ),
         ),
-        25 => 
+        28 => 
         array (
           'name' => 'physician_expertise',
           'map' => 
@@ -664,7 +944,7 @@
           ),
           'format' => '%s',
         ),
-        26 => 
+        29 => 
         array (
           'name' => 'physician_medical_specialties',
           'map' => 
@@ -674,7 +954,7 @@
           ),
           'format' => '%s',
         ),
-        27 => 
+        30 => 
         array (
           'name' => 'physician_conditions',
           'map' => 
@@ -684,7 +964,7 @@
           ),
           'format' => '%s',
         ),
-        28 => 
+        31 => 
         array (
           'name' => 'physician_treatments',
           'map' => 
@@ -694,7 +974,7 @@
           ),
           'format' => '%s',
         ),
-        29 => 
+        32 => 
         array (
           'name' => 'physician_medical_terms',
           'map' => 
@@ -704,7 +984,7 @@
           ),
           'format' => '%s',
         ),
-        30 => 
+        33 => 
         array (
           'name' => 'physician_pid',
           'format' => '%d',
@@ -714,7 +994,7 @@
             'identifier' => 'physician_pid',
           ),
         ),
-        31 => 
+        34 => 
         array (
           'name' => 'physician_npi',
           'format' => '%d',
@@ -724,7 +1004,7 @@
             'identifier' => 'physician_npi',
           ),
         ),
-        32 => 
+        35 => 
         array (
           'name' => 'physician_academic_title',
           'map' => 
@@ -734,7 +1014,7 @@
           ),
           'format' => '%s',
         ),
-        33 => 
+        36 => 
         array (
           'name' => 'physician_academic_appointment',
           'map' => 
@@ -744,7 +1024,7 @@
           ),
           'format' => '%s',
         ),
-        34 => 
+        37 => 
         array (
           'name' => 'physician_academic_college',
           'map' => 
@@ -754,7 +1034,7 @@
           ),
           'format' => '%s',
         ),
-        35 => 
+        38 => 
         array (
           'name' => 'physician_academic_position',
           'map' => 
@@ -764,7 +1044,7 @@
           ),
           'format' => '%s',
         ),
-        36 => 
+        39 => 
         array (
           'name' => 'physician_academic_bio',
           'map' => 
@@ -774,7 +1054,7 @@
           ),
           'format' => '%s',
         ),
-        37 => 
+        40 => 
         array (
           'name' => 'physician_academic_short_bio',
           'map' => 
@@ -784,7 +1064,7 @@
           ),
           'format' => '%s',
         ),
-        38 => 
+        41 => 
         array (
           'name' => 'physician_academic_office',
           'map' => 
@@ -794,7 +1074,7 @@
           ),
           'format' => '%s',
         ),
-        39 => 
+        42 => 
         array (
           'name' => 'physician_academic_map',
           'map' => 
@@ -804,7 +1084,7 @@
           ),
           'format' => '%s',
         ),
-        40 => 
+        43 => 
         array (
           'name' => 'physician_contact_information',
           'map' => 
@@ -814,7 +1094,7 @@
           ),
           'format' => '%s',
         ),
-        41 => 
+        44 => 
         array (
           'name' => 'physician_education',
           'map' => 
@@ -824,7 +1104,7 @@
           ),
           'format' => '%s',
         ),
-        42 => 
+        45 => 
         array (
           'name' => 'physician_boards',
           'map' => 
@@ -834,7 +1114,17 @@
           ),
           'format' => '%s',
         ),
-        43 => 
+        46 => 
+        array (
+          'name' => 'physician_associations',
+          'map' => 
+          array (
+            'type' => 'acf_field_name',
+            'identifier' => 'physician_associations',
+          ),
+          'format' => '%s',
+        ),
+        47 => 
         array (
           'name' => 'physician_research_profiles_link',
           'map' => 
@@ -844,7 +1134,7 @@
           ),
           'format' => '%s',
         ),
-        44 => 
+        48 => 
         array (
           'name' => 'physician_pubmed_author_id',
           'map' => 
@@ -854,7 +1144,7 @@
           ),
           'format' => '%s',
         ),
-        45 => 
+        49 => 
         array (
           'name' => 'physician_author_number',
           'format' => '%d',
@@ -864,7 +1154,7 @@
             'identifier' => 'physician_author_number',
           ),
         ),
-        46 => 
+        50 => 
         array (
           'name' => 'physician_select_publications',
           'map' => 
@@ -874,7 +1164,7 @@
           ),
           'format' => '%s',
         ),
-        47 => 
+        51 => 
         array (
           'name' => 'physician_researcher_bio',
           'map' => 
@@ -884,7 +1174,7 @@
           ),
           'format' => '%s',
         ),
-        48 => 
+        52 => 
         array (
           'name' => 'physician_research_interests',
           'map' => 
@@ -894,7 +1184,7 @@
           ),
           'format' => '%s',
         ),
-        49 => 
+        53 => 
         array (
           'name' => 'physician_awards',
           'map' => 
@@ -904,7 +1194,7 @@
           ),
           'format' => '%s',
         ),
-        50 => 
+        54 => 
         array (
           'name' => 'physician_additional_info',
           'map' => 
@@ -935,11 +1225,11 @@
   ),
   'post_types' => 
   array (
-    'locations' => 
+    'location' => 
     array (
       0 => 0,
     ),
-    'physicians' => 
+    'provider' => 
     array (
       0 => 1,
     ),
@@ -955,7 +1245,7 @@
   ),
   'acf_field_names' => 
   array (
-    'post:locations' => 
+    'post:location' => 
     array (
       'id' => 
       array (
@@ -973,6 +1263,18 @@
       array (
         0 => 0,
       ),
+      'location_building' => 
+      array (
+        0 => 0,
+      ),
+      'location_building_floor' => 
+      array (
+        0 => 0,
+      ),
+      'location_suite' => 
+      array (
+        0 => 0,
+      ),
       'location_city' => 
       array (
         0 => 0,
@@ -985,7 +1287,7 @@
       array (
         0 => 0,
       ),
-      'location_map' => 
+      'location_region' => 
       array (
         0 => 0,
       ),
@@ -1001,11 +1303,35 @@
       array (
         0 => 0,
       ),
+      'location_youtube_link' => 
+      array (
+        0 => 0,
+      ),
       'location_short_desc' => 
       array (
         0 => 0,
       ),
+      'location_affiliation' => 
+      array (
+        0 => 0,
+      ),
+      'location_clinic_phone_query' => 
+      array (
+        0 => 0,
+      ),
       'location_phone' => 
+      array (
+        0 => 0,
+      ),
+      'location_appointment_phone_query' => 
+      array (
+        0 => 0,
+      ),
+      'location_new_appointments_phone' => 
+      array (
+        0 => 0,
+      ),
+      'location_return_appointments_phone' => 
       array (
         0 => 0,
       ),
@@ -1045,7 +1371,19 @@
       array (
         0 => 0,
       ),
+      'location_wayfinding_photo' => 
+      array (
+        0 => 0,
+      ),
+      'location_photo_gallery' => 
+      array (
+        0 => 0,
+      ),
       'location_24_7' => 
+      array (
+        0 => 0,
+      ),
+      'location_hours_group' => 
       array (
         0 => 0,
       ),
@@ -1089,12 +1427,64 @@
       array (
         0 => 0,
       ),
-      'location_physicians' => 
+      'physician_locations' => 
+      array (
+        0 => 0,
+      ),
+      'location_gmb_exclude' => 
+      array (
+        0 => 0,
+      ),
+      'location_gmb_prefix' => 
+      array (
+        0 => 0,
+      ),
+      'location_gmb_cat' => 
+      array (
+        0 => 0,
+      ),
+      'has_wheelchair_accessible_elevator' => 
+      array (
+        0 => 0,
+      ),
+      'has_wheelchair_accessible_entrance' => 
+      array (
+        0 => 0,
+      ),
+      'has_wheelchair_accessible_restroom' => 
+      array (
+        0 => 0,
+      ),
+      'has_restroom' => 
+      array (
+        0 => 0,
+      ),
+      'requires_appointments' => 
+      array (
+        0 => 0,
+      ),
+      'requires_temperature_check_customers' => 
+      array (
+        0 => 0,
+      ),
+      'requires_masks_customers' => 
+      array (
+        0 => 0,
+      ),
+      'requires_temperature_check_staff' => 
+      array (
+        0 => 0,
+      ),
+      'requires_masks_staff' => 
+      array (
+        0 => 0,
+      ),
+      'is_sanitizing_between_customers' => 
       array (
         0 => 0,
       ),
     ),
-    'post:physicians' => 
+    'post:provider' => 
     array (
       'id' => 
       array (
@@ -1144,7 +1534,7 @@
       array (
         0 => 1,
       ),
-      'physician_department' => 
+      'physician_service_line' => 
       array (
         0 => 1,
       ),
@@ -1168,7 +1558,15 @@
       array (
         0 => 1,
       ),
+      'physician_region' => 
+      array (
+        0 => 1,
+      ),
       'physician_affiliation' => 
+      array (
+        0 => 1,
+      ),
+      'physician_portal' => 
       array (
         0 => 1,
       ),
@@ -1177,6 +1575,10 @@
         0 => 1,
       ),
       'physician_appointment_link' => 
+      array (
+        0 => 1,
+      ),
+      'physician_eligible_appointments' => 
       array (
         0 => 1,
       ),
@@ -1265,6 +1667,10 @@
         0 => 1,
       ),
       'physician_boards' => 
+      array (
+        0 => 1,
+      ),
+      'physician_associations' => 
       array (
         0 => 1,
       ),
