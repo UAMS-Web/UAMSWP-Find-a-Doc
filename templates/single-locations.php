@@ -46,6 +46,16 @@ if ($parent_location) {
 	$post_id = get_the_ID();
 }
 
+// Address and parking components, each resolved to the location that supplies it
+
+	/**
+	 * $post_id stays the parent for images and parent-title phrasing. Address
+	 * and parking read through the resolver instead, because a child may
+	 * override any one of those groups independently.
+	 */
+
+	$location_source_ids = uamswp_fad_location_source_ids( get_the_ID() );
+
 // Image values
 $override_parent_photo = get_field('location_image_override_parent');
 $override_parent_photo_featured = get_field('location_image_override_parent_featured');
@@ -272,7 +282,7 @@ function sp_titles_desc($html) {
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
-$location_city = get_field('location_city', $post_id); // Get the location's city
+$location_city = get_field('location_city', $location_source_ids['street']); // Get the location's city
 function uamswp_fad_title($html) {
     global $page_title_attr;
 	global $location_city;
@@ -296,22 +306,22 @@ get_header();
 
 while ( have_posts() ) : the_post(); ?>
 <?php
-	$map = get_field('location_map', $post_id );
-	$location_address_1 = get_field('location_address_1', $post_id );
-	$location_building = get_field('location_building', $post_id );
+	$map = get_field('location_map', $location_source_ids['map'] );
+	$location_address_1 = get_field('location_address_1', $location_source_ids['street'] );
+	$location_building = get_field('location_building', $location_source_ids['facility'] );
 	if ($location_building) {
 		$building = get_term($location_building, "building");
 		$building_slug = $building->slug;
 		$building_name = $building->name;
 	}
-	$location_floor = get_field_object('location_building_floor', $post_id );
+	$location_floor = get_field_object('location_building_floor', $location_source_ids['unit'] );
 		$location_floor_value = '';
 		$location_floor_label = '';
 		if ( $location_floor ) {
 			$location_floor_value = $location_floor['value'];
 			$location_floor_label = $location_floor['choices'][ $location_floor_value ] ?? '';
 		}
-	$location_suite = get_field('location_suite', $post_id );
+	$location_suite = get_field('location_suite', $location_source_ids['unit'] );
 	$location_address_2 =
 		( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
 		. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
@@ -321,15 +331,15 @@ while ( have_posts() ) : the_post(); ?>
 		. ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
 		. ( $location_suite ? $location_suite : '' );
 
-	$location_address_2_deprecated = get_field('location_address_2', $post_id );
+	$location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street'] );
 	if (!$location_address_2) {
         $location_address_2 = $location_address_2_deprecated;
 		$location_address_2_schema = $location_address_2_deprecated;
 	}
 
-	$location_city = get_field('location_city', $post_id);
-	$location_state = get_field('location_state', $post_id);
-	$location_zip = get_field('location_zip', $post_id);
+	$location_city = get_field('location_city', $location_source_ids['street']);
+	$location_state = get_field('location_state', $location_source_ids['street']);
+	$location_zip = get_field('location_zip', $location_source_ids['street']);
 	$location_web_name = get_field('location_web_name');
 	$location_url = get_field('location_url');
 
@@ -401,9 +411,9 @@ while ( have_posts() ) : the_post(); ?>
         }
 
         // Check if Parking and Directions section should be displayed
-		$location_parking = get_field('location_parking', $post_id);
-		$location_direction = get_field('location_direction', $post_id);
-		$parking_map = get_field('location_parking_map', $post_id);
+		$location_parking = get_field('location_parking', $location_source_ids['parking']);
+		$location_direction = get_field('location_direction', $location_source_ids['directions']);
+		$parking_map = get_field('location_parking_map', $location_source_ids['parking']);
 
 		if ( $location_parking || $location_direction || $parking_map ) {
             $show_parking_section = true;
@@ -590,6 +600,7 @@ while ( have_posts() ) : the_post(); ?>
 				"post_parent" => $current_id,
 				'order' => 'ASC',
 				'orderby' => 'title',
+				'posts_per_page' => -1,
 				'meta_query' => array(
 					array(
 						'key' => 'location_hidden',
@@ -1261,7 +1272,7 @@ while ( have_posts() ) : the_post(); ?>
 										popupAnchor: [0, -43]
 									})
 								}
-								var map = new L.Map('map', {center: new L.LatLng(<?php echo $parking_map['lat']; ?>, <?php echo $parking_map['lng'] ?>), zoom: 16 });
+								var map = new L.Map('map', {center: new L.LatLng(<?php echo floatval( $parking_map['lat'] ); ?>, <?php echo floatval( $parking_map['lng'] ); ?>), zoom: 16 });
 								map.attributionControl.setPrefix(''); // Don't show the 'Powered by Leaflet' text.
 								// for all possible values and explanations see "Template Parameters" in https://msdn.microsoft.com/en-us/library/ff701716.aspx
 								// L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, }).addTo(map);
@@ -1275,8 +1286,8 @@ while ( have_posts() ) : the_post(); ?>
 								/* [lat, lon, fillColor, strokeColor, labelClass, iconText, popupText] */
 								var markers = [
 									// example [ 34.74376029995541, -92.31828863640054, "00F","000","white","A","I am a blue icon." ],
-									[ <?php echo $map['lat']; ?>, <?php echo $map['lng'] ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title_phrase; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>' ],
-									[ <?php echo $parking_map['lat']; ?>, <?php echo $parking_map['lng'] ?>, "9d2235","222", "transparentwhite", '2', 'Parking<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>' ]
+									[ <?php echo floatval( $map['lat'] ); ?>, <?php echo floatval( $map['lng'] ); ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo esc_js($page_title_phrase); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>' ],
+									[ <?php echo floatval( $parking_map['lat'] ); ?>, <?php echo floatval( $parking_map['lng'] ); ?>, "9d2235","222", "transparentwhite", '2', 'Parking<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>' ]
 								]
 								//Loop through the markers array
 								var markerArray = [];
@@ -1302,7 +1313,7 @@ while ( have_posts() ) : the_post(); ?>
 							</script>
 							<div class="map-legend bg-info" aria-label="Legend for map">
 								<ol data-categorytitle="Directions">
-									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title_phrase; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>)</li>
+									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo esc_attr($page_title_phrase); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>)</li>
 									<li>Parking (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>)</li>
 								</ol>
 							</div>
@@ -1838,7 +1849,9 @@ while ( have_posts() ) : the_post(); ?>
 </main>
 </div>
 
-<?php // Schema Data ?>
+<?php // Schema Data
+// Only display if enhanced schema does not exist
+if( !function_exists('uams_physician_schema') ) { ?>
 <script type='application/ld+json'>
 {
   "@context": "https://schema.org",
@@ -1856,6 +1869,8 @@ while ( have_posts() ) : the_post(); ?>
 }
 </script>
 
-<?php endwhile; // end of the loop. ?>
+<?php
+} // End if for enhanced schema
+endwhile; // end of the loop. ?>
 
 <?php get_footer(); ?>

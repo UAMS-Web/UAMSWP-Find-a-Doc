@@ -123,13 +123,31 @@ class FacetWP_Facet_Alpha_Addon extends FacetWP_Facet
 
         // The "#" character is an alias for all numbers
         if ( '#' == $selected_values ) {
-            $selected_values = array( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 );
-            $selected_values = implode( "','", $selected_values );
+            $values = array( '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' );
+        }
+        else {
+            $values = array( $selected_values );
         }
 
-        $sql = "
-        SELECT DISTINCT post_id FROM {$wpdb->prefix}facetwp_index
-        WHERE facet_name = '{$facet['name']}' AND UPPER(SUBSTR(facet_display_value, 1, 1)) IN ('$selected_values')";
+        // The alpha facet only matches on the first character of the indexed
+        // value, so every legitimate selected value is a single alphanumeric
+        // character. Discard anything else so no attacker-controlled string
+        // can reach the SQL statement.
+        $values = array_values( preg_grep( '/^[A-Za-z0-9]$/', $values ) );
+
+        if ( empty( $values ) ) {
+            return array();
+        }
+
+        // Build a parameterized IN() list and let $wpdb->prepare() escape both
+        // the facet name and every selected value.
+        $placeholders = implode( ', ', array_fill( 0, count( $values ), '%s' ) );
+
+        $sql = $wpdb->prepare(
+            "SELECT DISTINCT post_id FROM {$wpdb->prefix}facetwp_index
+        WHERE facet_name = %s AND UPPER(SUBSTR(facet_display_value, 1, 1)) IN ($placeholders)",
+            array_merge( array( $facet['name'] ), $values )
+        );
         return $wpdb->get_col( $sql );
     }
 
