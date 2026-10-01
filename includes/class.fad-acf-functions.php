@@ -235,6 +235,10 @@
 
 						$i = 1;
 
+					// Initialize variable to prevent php error
+
+						$degree_list = '';
+
 						if ( $degrees ) {
 
 							foreach ( $degrees as $degree ) {
@@ -271,6 +275,10 @@
 
 							$expertises = $_POST['acf']['field_physician_expertise'];
 
+						// Initialize variable to prevent php error
+
+							$expertise_list = '';
+
 						// Loop through the areas of expertise and add each item's title to a list
 
 							if ( $expertises ) {
@@ -300,6 +308,10 @@
 
 							$conditions = $_POST['acf']['field_physician_conditions_cpt'];
 
+						// Initialize variable to prevent php error
+
+							$condition_list = '';
+
 						// Loop through the conditions and add each item's title to a list
 
 							if ( $conditions ) {
@@ -328,6 +340,10 @@
 						// Get related treatments
 
 							$treatments = $_POST['acf']['field_physician_treatments_cpt'];
+
+						// Initialize variable to prevent php error
+
+							$treatment_list = '';
 
 						// Loop through the treatments and add each item's title to a list
 
