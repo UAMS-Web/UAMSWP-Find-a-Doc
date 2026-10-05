@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  *
  * Custom ACF Blocks
@@ -7,31 +9,32 @@
  */
 
 add_action('acf/init', 'uams_fad_register_blocks');
-function uams_fad_register_blocks(): void {
+function uams_fad_register_blocks(): void
+{
 
     // check function exists.
-    if( function_exists('acf_register_block_type') ) {
+    if (function_exists('acf_register_block_type')) {
         acf_register_block_type([
-            'name'              => 'fad-locations',
-            'title'             => __('UAMS Find-a-Doc Locations'),
-            'description'       => __('Filtered Clinical Locations'),
-            'category'          => 'common',
-            'icon'              => 'location',
-            'keywords'          => ['uams', 'clinical', 'locations', 'clinics'],
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'render_template'   => UAMS_FAD_PATH . '/templates/blocks/locations.php',
+            'name' => 'fad-locations',
+            'title' => __('UAMS Find-a-Doc Locations'),
+            'description' => __('Filtered Clinical Locations'),
+            'category' => 'common',
+            'icon' => 'location',
+            'keywords' => ['uams', 'clinical', 'locations', 'clinics'],
+            'mode' => 'auto',
+            'align' => 'full',
+            'render_template' => UAMS_FAD_PATH.'/templates/blocks/locations.php',
         ]);
         acf_register_block_type([
-            'name'              => 'fad-providers',
-            'title'             => __('UAMS Find-a-Doc Providers'),
-            'description'       => __('Filtered Providers'),
-            'category'          => 'common',
-            'icon'              => 'id',
-            'keywords'          => ['uams', 'providers', 'doctors', 'physicians'],
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'render_template'   => UAMS_FAD_PATH . 'templates/blocks/providers.php',
+            'name' => 'fad-providers',
+            'title' => __('UAMS Find-a-Doc Providers'),
+            'description' => __('Filtered Providers'),
+            'category' => 'common',
+            'icon' => 'id',
+            'keywords' => ['uams', 'providers', 'doctors', 'physicians'],
+            'mode' => 'auto',
+            'align' => 'full',
+            'render_template' => UAMS_FAD_PATH.'templates/blocks/providers.php',
         ]);
         acf_register_block_type([
             'name' => 'fad-recognitions',
@@ -42,7 +45,7 @@ function uams_fad_register_blocks(): void {
             'keywords' => ['uams', 'providers', 'doctors', 'awards'],
             'mode' => 'auto',
             'align' => '',
-            'render_template' => UAMS_FAD_PATH . 'templates/blocks/recognitions.php',
+            'render_template' => UAMS_FAD_PATH.'templates/blocks/recognitions.php',
         ]);
     }
 }
@@ -873,7 +876,7 @@ if (function_exists('acf_add_local_field_group')) {
         'description' => '',
     ]);
     // Add local field group for UAMS Recognition List Block
-    acf_add_local_field_group( [
+    acf_add_local_field_group([
         'key' => 'group_block_fad_recognition',
         'title' => 'Block: UAMS FaD Recognition List',
         'fields' => [
@@ -941,5 +944,5 @@ if (function_exists('acf_add_local_field_group')) {
         'hide_on_screen' => '',
         'active' => true,
         'description' => '',
-    ] );
+    ]);
 }

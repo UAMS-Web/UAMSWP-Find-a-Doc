@@ -3,27 +3,30 @@
  * FacetWP functions
  */
 // Filter to fix facetwp hash error
-add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ): bool {
+add_filter('facetwp_is_main_query', function ($is_main_query, $query): bool {
     // if ( 'provider' == $query->get( 'post_type' ) ) {
-		$is_main_query = false;
+    $is_main_query = false;
+
     // }
     return $is_main_query;
-}, 10, 2 );
+}, 10, 2);
 
-add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
-	if ( !empty( $atts['template'] ) && ( 'physician' == $atts['template'] || 'clinical_resources' == $atts['template']) ) { // replace 'example' with name of your template
+add_filter('facetwp_shortcode_html', function ($output, $atts) {
+    if (! empty($atts['template']) && ($atts['template'] == 'physician' || $atts['template'] == 'clinical_resources')) { // replace 'example' with name of your template
         /** modify replacement as needed, make sure you keep the facetwp-template class **/
-        $output = str_replace( 'facetwp-template', 'facetwp-template row list', $output );
-	}
-	 if ( !empty( $atts['template'] ) && ('locations' == $atts['template'] || 'expertise' == $atts['template']) ) {
-        return str_replace( 'facetwp-template', 'facetwp-template card-list', $output );
+        $output = str_replace('facetwp-template', 'facetwp-template row list', $output);
     }
-	return $output;
-}, 10, 2 );
+    if (! empty($atts['template']) && ($atts['template'] == 'locations' || $atts['template'] == 'expertise')) {
+        return str_replace('facetwp-template', 'facetwp-template card-list', $output);
+    }
 
-function fwp_disable_auto_refresh(): void {
-    if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) || is_post_type_archive( 'clinical-resource' ) ) {
-	?>
+    return $output;
+}, 10, 2);
+
+function fwp_disable_auto_refresh(): void
+{
+    if (is_post_type_archive('provider') || is_post_type_archive('location') || is_post_type_archive('clinical-resource')) {
+        ?>
 	<script>
 	// (function($) {
 	// 	$(function() {
@@ -44,13 +47,14 @@ function fwp_disable_auto_refresh(): void {
 <?php
     }
 }
-add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
+add_action('wp_footer', 'fwp_disable_auto_refresh', 100);
 
 // FacetWP scripts
-function fwp_facet_scripts(): void {
+function fwp_facet_scripts(): void
+{
     get_body_class();
 
-	if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) || is_post_type_archive( 'clinical-resource' ) ) { ?>
+    if (is_post_type_archive('provider') || is_post_type_archive('location') || is_post_type_archive('clinical-resource')) { ?>
         <script>
             (function($) {
                 document.addEventListener('facetwp-loaded', function() {
@@ -76,9 +80,9 @@ function fwp_facet_scripts(): void {
         </script>
 <?php }
 
-    if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) ) {
-    $taxonomy_slug = get_queried_object()->slug ?? '';
-?>
+    if (is_post_type_archive('provider') || is_post_type_archive('location')) {
+        $taxonomy_slug = get_queried_object()->slug ?? '';
+        ?>
 <script>
 (function($) {
     document.addEventListener('facetwp-loaded', function() {
@@ -161,13 +165,13 @@ function fwp_facet_scripts(): void {
             const params = new URLSearchParams(facets);
             var region = '';
             var regionname = '';
-        <?php if (is_post_type_archive( 'location' )) { ?>
+        <?php if (is_post_type_archive('location')) { ?>
             locationregion = params.get('_location_region');
             if (null != locationregion && '' != locationregion) {
                 region = locationregion;
             }
             regionname = "_location_region";
-        <?php } elseif (is_post_type_archive( 'provider' )) { ?>
+        <?php } elseif (is_post_type_archive('provider')) { ?>
             providerregion = params.get('_provider_region');
             if (null != providerregion && '' != providerregion) {
                 region = providerregion;
@@ -239,7 +243,7 @@ function fwp_facet_scripts(): void {
 })(jQuery);
 </script>
 <?php
-    } elseif ( is_post_type_archive( 'clinical-resource' ) ) {
+    } elseif (is_post_type_archive('clinical-resource')) {
         ?>
 <script>
 (function($) {
@@ -257,255 +261,261 @@ function fwp_facet_scripts(): void {
 <?php
     }
 }
-add_action( 'wp_footer', 'fwp_facet_scripts', 100 );
+add_action('wp_footer', 'fwp_facet_scripts', 100);
 
 // fix facets for 'all'
-add_filter( 'facetwp_preload_url_vars', function( $url_vars ) {
-	// Remove provider_region if 'all'
-    if ( 'provider' == FWP()->helper->get_uri() ) {
-        if ( !empty( $url_vars['provider_region'] ) && ['all'] == $url_vars['provider_region'] ) {
+add_filter('facetwp_preload_url_vars', function ($url_vars) {
+    // Remove provider_region if 'all'
+    if (FWP()->helper->get_uri() == 'provider') {
+        if (! empty($url_vars['provider_region']) && ['all'] == $url_vars['provider_region']) {
             unset($url_vars['provider_region']);
         }
     }
     // Remove location_region if 'all'
-    if ( 'provider' == FWP()->helper->get_uri() ) {
-        if ( !empty( $url_vars['location_region'] ) && ['all'] == $url_vars['location_region'] ) {
+    if (FWP()->helper->get_uri() == 'provider') {
+        if (! empty($url_vars['location_region']) && ['all'] == $url_vars['location_region']) {
             unset($url_vars['location_region']);
         }
     }
 
     return $url_vars;
-} );
+});
 
 // FacetWP Sort
-add_filter( 'facetwp_sort_options', function( $options, $params ) {
-    unset( $options['date_desc'] );
-    unset( $options['date_asc'] );
-	if ( is_post_type_archive( 'provider' ) || is_singular( 'provider' ) ) {
-		$params = [
-		    'template_name' => 'physicians',
-		];
-        $options = [
-            'default' => [
-                'label' => __( 'Sort by', 'fwp' ),
-                'query_args' => []
-            ],
-            'title_asc' => [
-                'label' => __( 'Name (A-Z)', 'fwp' ),
-                'query_args' => [
-                    'orderby' => 'title',
-                    'order' => 'ASC',
-                ]
-            ],
-            'title_desc' => [
-                'label' => __( 'Name (Z-A)', 'fwp' ),
-                'query_args' => [
-                    'orderby' => 'title',
-                    'order' => 'DESC',
-                ]
-            ]
-        ];
-        // unset( $options['date_desc'] );
-        // unset( $options['date_asc'] );
-	} elseif ( is_post_type_archive( 'location' ) || is_singular( 'location' ) ) {
-	 	$params = [
-		    'template_name' => 'locations',
-		];
-        $options = [
-            'default' => [
-                'label' => __( 'Sort by', 'fwp' ),
-                'query_args' => []
-            ],
-            'title_asc' => [
-                'label' => __( 'Name (A-Z)', 'fwp' ),
-                'query_args' => [
-                    'orderby' => 'title',
-                    'order' => 'ASC',
-                ]
-            ],
-            'title_desc' => [
-                'label' => __( 'Name (Z-A)', 'fwp' ),
-                'query_args' => [
-                    'orderby' => 'title',
-                    'order' => 'DESC',
-                ]
-            ]
-        ];
-        // unset( $options['date_desc'] );
-        // unset( $options['date_asc'] );
-	} elseif ( is_post_type_archive( 'clinical-resource' ) || is_singular( 'clinical-resource' ) ) {
+add_filter('facetwp_sort_options', function ($options, $params) {
+    unset($options['date_desc']);
+    unset($options['date_asc']);
+    if (is_post_type_archive('provider') || is_singular('provider')) {
         $params = [
-           'template_name' => 'clinical-resources',
+            'template_name' => 'physicians',
         ];
         $options = [
             'default' => [
-                'label' => __( 'Sort by', 'fwp' ),
-                'query_args' => []
+                'label' => __('Sort by', 'fwp'),
+                'query_args' => [],
+            ],
+            'title_asc' => [
+                'label' => __('Name (A-Z)', 'fwp'),
+                'query_args' => [
+                    'orderby' => 'title',
+                    'order' => 'ASC',
+                ],
+            ],
+            'title_desc' => [
+                'label' => __('Name (Z-A)', 'fwp'),
+                'query_args' => [
+                    'orderby' => 'title',
+                    'order' => 'DESC',
+                ],
+            ],
+        ];
+        // unset( $options['date_desc'] );
+        // unset( $options['date_asc'] );
+    } elseif (is_post_type_archive('location') || is_singular('location')) {
+        $params = [
+            'template_name' => 'locations',
+        ];
+        $options = [
+            'default' => [
+                'label' => __('Sort by', 'fwp'),
+                'query_args' => [],
+            ],
+            'title_asc' => [
+                'label' => __('Name (A-Z)', 'fwp'),
+                'query_args' => [
+                    'orderby' => 'title',
+                    'order' => 'ASC',
+                ],
+            ],
+            'title_desc' => [
+                'label' => __('Name (Z-A)', 'fwp'),
+                'query_args' => [
+                    'orderby' => 'title',
+                    'order' => 'DESC',
+                ],
+            ],
+        ];
+        // unset( $options['date_desc'] );
+        // unset( $options['date_asc'] );
+    } elseif (is_post_type_archive('clinical-resource') || is_singular('clinical-resource')) {
+        $params = [
+            'template_name' => 'clinical-resources',
+        ];
+        $options = [
+            'default' => [
+                'label' => __('Sort by', 'fwp'),
+                'query_args' => [],
             ],
             'date_desc' => [
-                'label' => __( 'Date Added (Newest)', 'fwp' ),
+                'label' => __('Date Added (Newest)', 'fwp'),
                 'query_args' => [
                     'orderby' => 'date',
                     'order' => 'DESC',
-                ]
+                ],
             ],
             'date_asc' => [
-                'label' => __( 'Date Added (Oldest)', 'fwp' ),
+                'label' => __('Date Added (Oldest)', 'fwp'),
                 'query_args' => [
                     'orderby' => 'date',
                     'order' => 'ASC',
-                ]
+                ],
             ],
             'modified_desc' => [
-                'label' => __( 'Date Modified (Newest)', 'fwp' ),
+                'label' => __('Date Modified (Newest)', 'fwp'),
                 'query_args' => [
                     'orderby' => 'modified',
                     'order' => 'DESC',
-                ]
+                ],
             ],
             'modified_asc' => [
-                'label' => __( 'Date Modified (Oldest)', 'fwp' ),
+                'label' => __('Date Modified (Oldest)', 'fwp'),
                 'query_args' => [
                     'orderby' => 'modified',
                     'order' => 'ASC',
-                ]
+                ],
             ],
             'title_asc' => [
-                'label' => __( 'Title (A-Z)', 'fwp' ),
+                'label' => __('Title (A-Z)', 'fwp'),
                 'query_args' => [
                     'orderby' => 'title',
                     'order' => 'ASC',
-                ]
+                ],
             ],
             'title_desc' => [
-                'label' => __( 'Title (Z-A)', 'fwp' ),
+                'label' => __('Title (Z-A)', 'fwp'),
                 'query_args' => [
                     'orderby' => 'title',
                     'order' => 'DESC',
-                ]
-            ]
+                ],
+            ],
         ];
-   }
-    //);
-    return $options;
-}, 10, 2 );
+    }
 
-add_filter( 'facetwp_pager_html', function( $output, $params ): string {
+    // );
+    return $options;
+}, 10, 2);
+
+add_filter('facetwp_pager_html', function ($output, $params): string {
     $output = '';
     $page = $params['page'];
     $total_pages = $params['total_pages'];
 
-    if ( 1 < $total_pages ) {
+    if ($total_pages > 1) {
 
-		$output .= '<nav aria-label="list pagination"><ul class="pagination">';
+        $output .= '<nav aria-label="list pagination"><ul class="pagination">';
 
         // First Page
-        if ( 3 < $page ) {
+        if ($page > 3) {
             $output .= '<li class="page-item"><a class="facetwp-page page-link first-page" title="First Page" data-page="1"><span class="fas fa-fast-backward" aria-hidden="true"></span></a></li>';
         }
 
         // Previous page (NEW)
-        if ( $page > 1 ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Previous Page" data-page="' . ($page - 1) . '"><span class="fas fa-angle-left" aria-hidden="true"></span></a></li>';
+        if ($page > 1) {
+            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Previous Page" data-page="'.($page - 1).'"><span class="fas fa-angle-left" aria-hidden="true"></span></a></li>';
         }
 
-        if ( 1 < ( $page - 10 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page ' . ($page - 10) . '" data-page="' . ($page - 10) . '">' . ($page - 10) . '</a></li>';
+        if (1 < ($page - 10)) {
+            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page '.($page - 10).'" data-page="'.($page - 10).'">'.($page - 10).'</a></li>';
         }
-        for ( $i = 2; $i > 0; $i-- ) {
-            if ( 0 < ( $page - $i ) ) {
-                $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page ' . ($page - $i) . '" data-page="' . ($page - $i) . '">' . ($page - $i) . '</a></li>';
+        for ($i = 2; $i > 0; $i--) {
+            if (0 < ($page - $i)) {
+                $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page '.($page - $i).'" data-page="'.($page - $i).'">'.($page - $i).'</a></li>';
             }
         }
 
         // Current page
-        $output .= '<li class="page-item"><a class="facetwp-page page-link active" title="Page ' . $page . '" data-page="' . $page . '">' . $page . '</a></li>';
+        $output .= '<li class="page-item"><a class="facetwp-page page-link active" title="Page '.$page.'" data-page="'.$page.'">'.$page.'</a></li>';
 
-        for ( $i = 1; $i <= 2; $i++ ) {
-            if ( $total_pages >= ( $page + $i ) ) {
-                $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page ' . ($page + $i) . '" data-page="' . ($page + $i) . '">' . ($page + $i) . '</a></li>';
+        for ($i = 1; $i <= 2; $i++) {
+            if ($total_pages >= ($page + $i)) {
+                $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page '.($page + $i).'" data-page="'.($page + $i).'">'.($page + $i).'</a></li>';
             }
         }
-        if ( $total_pages > ( $page + 10 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page ' . ($page + 10) . '" data-page="' . ($page + 10) . '">' . ($page + 10) . '</a></li>';
+        if ($total_pages > ($page + 10)) {
+            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page '.($page + 10).'" data-page="'.($page + 10).'">'.($page + 10).'</a></li>';
         }
 
         // Next page (NEW)
-        if ( $page < $total_pages ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Next Page" data-page="' . ($page + 1) . '"><span class="fas fa-angle-right" aria-hidden="true"></span></a>';
+        if ($page < $total_pages) {
+            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Next Page" data-page="'.($page + 1).'"><span class="fas fa-angle-right" aria-hidden="true"></span></a>';
         }
 
         // Last Page
-        if ( $total_pages > ( $page + 2 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link last-page" title="Last Page" data-page="' . $total_pages . '"><span class="fas fa-fast-forward aria-hidden="true"></span></a></li>';
+        if ($total_pages > ($page + 2)) {
+            $output .= '<li class="page-item"><a class="facetwp-page page-link last-page" title="Last Page" data-page="'.$total_pages.'"><span class="fas fa-fast-forward aria-hidden="true"></span></a></li>';
         }
 
-		$output .= '</ul></nav>';
+        $output .= '</ul></nav>';
 
     }
 
     return $output;
-}, 10, 2 );
+}, 10, 2);
 
 // Show only Yes values
-add_filter( 'facetwp_index_row', function( $params, $class ) {
-    if ( 'primary_care' == $params['facet_name'] ) {
-        $included_terms = [ 'Yes' ];
-        if ( ! in_array( $params['facet_display_value'], $included_terms ) ) {
+add_filter('facetwp_index_row', function ($params, $class) {
+    if ($params['facet_name'] == 'primary_care') {
+        $included_terms = ['Yes'];
+        if (! in_array($params['facet_display_value'], $included_terms)) {
             return false;
         }
     }
+
     return $params;
-}, 10, 2 );
+}, 10, 2);
 // Turn on FWP Accessibility features
-add_filter( 'facetwp_assets', function( $assets ) {
-    $assets['accessibility.js'] = FACETWP_URL . '/assets/js/src/accessibility.js';
-    if ( !is_post_type_archive( 'provider' ) && !is_post_type_archive( 'location' ) && !is_post_type_archive( 'clinical-resource' ) ) {
-        $assets['fwp-pager-scroll.js'] = UAMS_FAD_ROOT_URL . 'assets/js/fwp-pager-scroll.js';
+add_filter('facetwp_assets', function ($assets) {
+    $assets['accessibility.js'] = FACETWP_URL.'/assets/js/src/accessibility.js';
+    if (! is_post_type_archive('provider') && ! is_post_type_archive('location') && ! is_post_type_archive('clinical-resource')) {
+        $assets['fwp-pager-scroll.js'] = UAMS_FAD_ROOT_URL.'assets/js/fwp-pager-scroll.js';
     }
+
     return $assets;
 });
-add_filter( 'facetwp_load_a11y', '__return_true' );
+add_filter('facetwp_load_a11y', '__return_true');
 
-add_filter( 'facetwp_index_row', function( $params, $class ) {
-    if ($params){
-        if ( 'resource_provider' == $params['facet_name'] ) {
-            if ( ! empty( $params['facet_value'] ) ) {
-                $post = get_post( (int) $params['facet_value'] );
+add_filter('facetwp_index_row', function ($params, $class) {
+    if ($params) {
+        if ($params['facet_name'] == 'resource_provider') {
+            if (! empty($params['facet_value'])) {
+                $post = get_post((int) $params['facet_value']);
                 $post_id = $post->ID;
-                $lastname = get_field( 'physician_last_name', $post_id );
-                $firstname = get_field( 'physician_first_name', $post_id );
-                $middlename = get_field( 'physician_middle_name', $post_id );
-                $params['facet_value'] = sanitize_title_with_dashes( $lastname . ' ' . $firstname . ' ' . $middlename ); //$post->post_name;
-                $params['facet_display_value'] = get_field( 'physician_full_name', $post_id );
+                $lastname = get_field('physician_last_name', $post_id);
+                $firstname = get_field('physician_first_name', $post_id);
+                $middlename = get_field('physician_middle_name', $post_id);
+                $params['facet_value'] = sanitize_title_with_dashes($lastname.' '.$firstname.' '.$middlename); // $post->post_name;
+                $params['facet_display_value'] = get_field('physician_full_name', $post_id);
             }
-        } elseif ( 'resource_locations' == $params['facet_name'] ||
-                'resource_aoe' == $params['facet_name'] ||
-                'resource_conditions' == $params['facet_name'] ||
-                'resource_treatments' == $params['facet_name'] ) {
-            if ( ! empty( $params['facet_value'] ) ) {
-                $post = get_post( (int) $params['facet_value'] );
+        } elseif ($params['facet_name'] == 'resource_locations' ||
+                $params['facet_name'] == 'resource_aoe' ||
+                $params['facet_name'] == 'resource_conditions' ||
+                $params['facet_name'] == 'resource_treatments') {
+            if (! empty($params['facet_value'])) {
+                $post = get_post((int) $params['facet_value']);
                 $params['facet_value'] = $post->post_name;
             }
         }
     }
+
     return $params;
-}, 10, 2 );
+}, 10, 2);
 
 /** Cron Indexer **/
-function fwp_cron_index(): void {
+function fwp_cron_index(): void
+{
     FWP()->indexer->index();
 }
-add_action( 'fwp_indexer', 'fwp_cron_index' );
+add_action('fwp_indexer', 'fwp_cron_index');
 // FacetWP Cron //
 // Add function to register event to WordPress init
-add_action( 'init', 'register_hourly_fwp_indexer');
+add_action('init', 'register_hourly_fwp_indexer');
 
 // Function which will register the event
-function register_hourly_fwp_indexer(): void {
-	// Make sure this event hasn't been scheduled
-	if( !wp_next_scheduled( 'fwp_indexer' ) ) {
-		// Schedule the event
-		wp_schedule_event( time(), 'hourly', 'fwp_indexer' );
-	}
+function register_hourly_fwp_indexer(): void
+{
+    // Make sure this event hasn't been scheduled
+    if (! wp_next_scheduled('fwp_indexer')) {
+        // Schedule the event
+        wp_schedule_event(time(), 'hourly', 'fwp_indexer');
+    }
 }

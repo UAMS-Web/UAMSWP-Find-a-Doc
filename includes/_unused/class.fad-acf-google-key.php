@@ -1,22 +1,24 @@
-<?php 
+<?php
 
-if( function_exists('acf_add_options_page') ) {
+declare(strict_types=1);
+
+if (function_exists('acf_add_options_page')) {
 
     acf_add_options_page([
-		'page_title' 	=> 'Find-a-Doc Settings',
-		'menu_title'	=> 'Find-a-Doc Settings',
-		'menu_slug' 	=> 'fad-settings',
-		'capability'	=> 'edit_posts',
-		'redirect'		=> false
+        'page_title' => 'Find-a-Doc Settings',
+        'menu_title' => 'Find-a-Doc Settings',
+        'menu_slug' => 'fad-settings',
+        'capability' => 'edit_posts',
+        'redirect' => false,
     ]);
-    
+
     acf_add_options_sub_page([
-		'page_title' 	=> 'Areas of Expertise Options',
-        'menu_title'	=> 'Clinical Areas of Expertise',
-        'menu_slug' 	=> 'uamswp-fad-expertise',
-        'parent_slug'	=> 'fad-settings',
-        'redirect'		=> false
-	]);
+        'page_title' => 'Areas of Expertise Options',
+        'menu_title' => 'Clinical Areas of Expertise',
+        'menu_slug' => 'uamswp-fad-expertise',
+        'parent_slug' => 'fad-settings',
+        'redirect' => false,
+    ]);
 
 }
 
@@ -64,14 +66,13 @@ if (function_exists('acf_add_local_field_group')) {
     ]);
 }
 
-
-
-function my_acf_google_key(): void {
+function my_acf_google_key(): void
+{
     $key = get_field('fad_google_key', 'option');
     if ($key) {
-        acf_update_setting('google_api_key', $key); 
+        acf_update_setting('google_api_key', $key);
     }
-    
+
     // echo "<script> console.log('PHP: ".$key ."');</script>";
 }
 

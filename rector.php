@@ -6,16 +6,15 @@ use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRe
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveDuplicatedReturnSelfDocblockRector;
 use Rector\DeadCode\Rector\Property\RemoveUselessVarTagRector;
+use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamFromDimFetchKeyUseRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\StrictArrayParamDimFetchRector;
-use Rector\ValueObject\PhpVersion;
-
 // WordPress repositories: uncomment the import below together with the matching
 // `ArrayToFirstClassCallableRector::class` entry in `$sweepOnlyRules`. A `use`
 // inside that array is a parse error; keep the import here with the others.
-use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
+use Rector\ValueObject\PhpVersion;
 
 // Shared starting Rector configuration (UAMS-Web/uams-claude-skills#10). Copy it
 // to the repository root as `rector.php`, together with `rector-sweep.php`, and

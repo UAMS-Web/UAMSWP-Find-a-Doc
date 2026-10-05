@@ -2,135 +2,133 @@
 
 class UAMS_Expertise_Attributes_Meta_Box
 {
+    const ID = 'pageparentdiv';
 
-  const ID = 'pageparentdiv';
-  
-  const TITLE = 'Area of Expertise Attributes';
-  
-  const POSTTYPE = 'expertise';
-  
-  const POSITION = 'side';
-  
-  const PRIORITY = 'core';
+    const TITLE = 'Area of Expertise Attributes';
 
-  public function __construct()
-  {
-    add_action( 'add_meta_boxes', [ $this, 'replace_meta_box' ] );
-    add_action( 'save_post', [ $this, 'save_postdata' ] );
-    //add_action( 'admin_head', array( $this, 'custom_style' ) );
+    const POSTTYPE = 'expertise';
 
-  }
+    const POSITION = 'side';
 
-  public function replace_meta_box(): void
-  {
-      remove_meta_box( 'pageparentdiv', 'expertise', 'side');
-	    add_meta_box( 'uamsexpertiseparentdiv', 'Area of Expertise Attributes', [ $this, 'expertise_attributes_meta_box' ], 'expertise', 'side', 'core' );
-  }
+    const PRIORITY = 'core';
 
-  public function expertise_attributes_meta_box( $post ): void
-  {
-
-    $post_type_object = get_post_type_object( $post->post_type );
-
-    if ( $post_type_object->hierarchical )
+    public function __construct()
     {
-      $dropdown_args = [
-        'post_type'        => $post->post_type,
-        'exclude_tree'     => $post->ID,
-        'selected'         => $post->post_parent,
-        'name'             => 'parent_id',
-        'show_option_none' => __('(no parent)'),
-        'sort_column'      => 'menu_order, post_title, sidebar, parent',
-        'echo'             => 0,
-      ];
+        add_action('add_meta_boxes', [$this, 'replace_meta_box']);
+        add_action('save_post', [$this, 'save_postdata']);
+        // add_action( 'admin_head', array( $this, 'custom_style' ) );
 
-          /**
-           * Filter the arguments used to generate a Pages drop-down element.
-           *
-           * @since 3.3.0
-           *
-           * @see wp_dropdown_pages()
-           *
-           * @param array   $dropdown_args Array of arguments used to generate the pages drop-down.
-           * @param WP_Post $post          The current WP_Post object.
-           */
-          $dropdown_args = apply_filters( 'page_attributes_dropdown_pages_args', $dropdown_args, $post );
+    }
 
-          $pages = wp_dropdown_pages( $dropdown_args );
+    public function replace_meta_box(): void
+    {
+        remove_meta_box('pageparentdiv', 'expertise', 'side');
+        add_meta_box('uamsexpertiseparentdiv', 'Area of Expertise Attributes', [$this, 'expertise_attributes_meta_box'], 'expertise', 'side', 'core');
+    }
 
-          if ( ! empty( $pages ) )
-          { ?>
+    public function expertise_attributes_meta_box($post): void
+    {
+
+        $post_type_object = get_post_type_object($post->post_type);
+
+        if ($post_type_object->hierarchical) {
+            $dropdown_args = [
+                'post_type' => $post->post_type,
+                'exclude_tree' => $post->ID,
+                'selected' => $post->post_parent,
+                'name' => 'parent_id',
+                'show_option_none' => __('(no parent)'),
+                'sort_column' => 'menu_order, post_title, sidebar, parent',
+                'echo' => 0,
+            ];
+
+            /**
+             * Filter the arguments used to generate a Pages drop-down element.
+             *
+             * @since 3.3.0
+             * @see wp_dropdown_pages()
+             *
+             * @param  array  $dropdown_args  Array of arguments used to generate the pages drop-down.
+             * @param  WP_Post  $post  The current WP_Post object.
+             */
+            $dropdown_args = apply_filters('page_attributes_dropdown_pages_args', $dropdown_args, $post);
+
+            $pages = wp_dropdown_pages($dropdown_args);
+
+            if (! empty($pages)) { ?>
 
             <p><strong><?php _e('Parent') ?></strong></p>
             <label class="screen-reader-text" for="parent_id"><?php _e('Parent') ?></label>
 
             <?php echo $pages;
-                  $parent = get_post_meta($post->ID, "parent", true);
-                  wp_nonce_field( 'parent_nonce' , 'parent_name' );
-            ?>
+                $parent = get_post_meta($post->ID, 'parent', true);
+                wp_nonce_field('parent_nonce', 'parent_name');
+                ?>
 
             <?php
-          } // end empty pages check
-    } // end hierarchical check.
+            } // end empty pages check
+        } // end hierarchical check.
 
-    $sidebar = get_post_meta($post->ID, "sidebar", true);
-      wp_nonce_field( 'sidebar_nonce' , 'sidebar_name' );
-    ?>
+        $sidebar = get_post_meta($post->ID, 'sidebar', true);
+        wp_nonce_field('sidebar_nonce', 'sidebar_name');
+        ?>
 
     <p><strong><?php _e('Sidebar') ?></strong></p>
 
     <label class="screen-reader-text" for="sidebar"><?php _e('Sidebar') ?></label>
 
-    <p><input type="checkbox" id="sidebar_id" name="sidebarcheck" value="on" <?php if( !empty($sidebar) ) { ?>checked="checked"<?php } ?> <?php echo ($sidebar); ?> /><?php _e('No Sidebar') ?></p>
+    <p><input type="checkbox" id="sidebar_id" name="sidebarcheck" value="on" <?php if (! empty($sidebar)) { ?>checked="checked"<?php } ?> <?php echo $sidebar; ?> /><?php _e('No Sidebar') ?></p>
 
     <p><strong><?php _e('Order') ?></strong></p>
 
     <p><label class="screen-reader-text" for="menu_order"><?php _e('Order') ?></label><input name="menu_order" type="text" size="4" id="menu_order" value="<?php echo esc_attr($post->menu_order) ?>" /></p>
 
-    <p><?php if ( 'page' == $post->post_type ) _e( 'Need help? Use the Help tab in the upper right of your screen.' ); ?></p>
+    <p><?php if ($post->post_type == 'page') {
+        _e('Need help? Use the Help tab in the upper right of your screen.');
+    } ?></p>
 
     <?php
-  }
+    }
 
-  // function custom_style() {
-  //     wp_enqueue_style( 'uamswp-fad-admin', UAMS_FAD_PATH . '/admin/css/fad-admin.css' );
-  // }
+    // function custom_style() {
+    //     wp_enqueue_style( 'uamswp-fad-admin', UAMS_FAD_PATH . '/admin/css/fad-admin.css' );
+    // }
 
-  public function save_postdata( $post_ID = 0 ): int{
-    $post_ID = (int) $post_ID;
-    $post_type = get_post_type( $post_ID );
-    get_post_status( $post_ID );
-    if (!isset($post_type) || 'expertise' != $post_type ) {
+    public function save_postdata($post_ID = 0): int
+    {
+        $post_ID = (int) $post_ID;
+        $post_type = get_post_type($post_ID);
+        get_post_status($post_ID);
+        if (! isset($post_type) || $post_type != 'expertise') {
+            return $post_ID;
+        }
+
+        if (isset($_POST['sidebar_name'])) {
+            if (check_admin_referer('sidebar_nonce', 'sidebar_name')) { // limit to only pages
+                if ($post_type) {
+                    if (isset($_POST['sidebarcheck'])) {
+                        update_post_meta($post_ID, 'sidebar', $_POST['sidebarcheck']);
+                    } else {
+                        update_post_meta($post_ID, 'sidebar', null);
+                    }
+                }
+            }
+        }
+
+        if (isset($_POST['parent_name'])) {
+            if (check_admin_referer('parent_nonce', 'parent_name')) { // limit to only pages
+                if ($post_type) {
+                    if (isset($_POST['parentcheck'])) {
+                        update_post_meta($post_ID, 'parent', $_POST['parentcheck']);
+                    } else {
+                        update_post_meta($post_ID, 'parent', null);
+                    }
+                }
+            }
+        }
+
         return $post_ID;
     }
-
-    if ( isset( $_POST['sidebar_name'] ) ) {
-      if ( check_admin_referer( 'sidebar_nonce', 'sidebar_name') ) { //limit to only pages
-        if ($post_type) {
-          if(isset($_POST["sidebarcheck"])) {
-            update_post_meta($post_ID, "sidebar", $_POST["sidebarcheck"]);
-          } else {
-            update_post_meta($post_ID, "sidebar", null);
-          }
-        }
-      }
-    }
-
-    if ( isset( $_POST['parent_name'] ) ) {
-      if ( check_admin_referer( 'parent_nonce', 'parent_name') ) { //limit to only pages
-        if ($post_type) {
-          if(isset($_POST["parentcheck"])) {
-            update_post_meta($post_ID, "parent", $_POST["parentcheck"]);
-          } else {
-            update_post_meta($post_ID, "parent", null);
-          }
-        }
-      }
-    }
-
-   return $post_ID;
-  }
-
 }
 
 new UAMS_Expertise_Attributes_Meta_Box;
