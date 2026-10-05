@@ -1,0 +1,251 @@
+---
+name: rule-an-empty-result-is-not-evidence
+description: "A result is not evidence until the instrument has been shown to tell the two answers apart."
+disable-model-invocation: true
+---
+<!--
+  Synced from UAMS-Web/uams-claude-skills: shared/.claude/rules/an-empty-result-is-not-evidence.md
+  Edit it there, not here; the next sync overwrites this copy.
+  Delivered to this repository through the profile(s): core.
+-->
+<!-- cspell:ignore metacharacter metacharacters Organizationsite PATHCONV unibyte unvalidated -->
+# Rule — a result is not evidence until the instrument has been shown to tell the two answers apart
+
+**A check that returns nothing has told you about the check, not about the world.** Before reading silence as an absence (no matching process, no duplicate issue, no leaked string, no messages in a window, no live interpreter, no failing test, no remaining occurrences), show the same instrument, unchanged, finding something it is known to be able to find, and **state that control and its non-zero result alongside the claim**. Until then, "found nothing" and "could not have found anything" are byte-identical.
+
+**And the same holds for a result that is not empty.** An instrument can return a full, well-formed, plausible answer that is wrong (right format, right range, nothing to raise an eyebrow), and that failure is not reached by any amount of proving the instrument can produce *a* result. The affirmative is the more dangerous of the two, because a zero at least invites *"is there really nothing there?"* while a number reads as its own evidence. The general form is one requirement, and it covers both halves: **do not read an instrument's output until the instrument has been shown to distinguish the two answers it is being asked to choose between.** Wherever this file says *absence* or *zero*, read it as any result the instrument produced. What is being validated is the instrument, never the answer.
+
+*The file is still named for the empty case because that is where the corpus first paid for it, and renaming it would break every cross-reference. The rule is the wider one.*
+
+This is not the same as choosing the right corpus. Which body of material was searched, and whether a zero there answers the question actually being asked, is a separate question. This rule is the prior one: **did the search work at all?** A probe can be pointed at exactly the right corpus and still be incapable of matching anything in it.
+
+## Why this is a standing order
+
+The two outcomes are indistinguishable **by construction**, so nothing in the output will ever tell you which one you have. That is what separates this from an ordinary mistake: there is no signal to notice, no error to read, and the result looks exactly like the good news it is mistaken for. It also fails in the reassuring direction: a broken check reports *clean*, so it is believed, quoted, and built on. An unvalidated absence is the most convincing form of a wrong claim, because nothing about it looks unfinished. It has a command, a result, and a conclusion. What it lacks is invisible.
+
+**The non-empty half is the more dangerous of the two, and it is worth being clear about why.** An empty result at least prompts the question this rule is built on: *did that actually run?* A number in the expected format and the expected range closes the question instead of opening it. Nothing about the output invites a second look, so the check is believed, quoted, and built on (the same failure as above, operating one step earlier and with the one prompt that would have caught it removed).
+
+### Probes that silently could not see
+
+**A regex engine without the feature the pattern relies on.** A `git grep -E '\bword\b'` matches nothing regardless of content, because git's own ERE engine has no `\b`: it is a GNU extension rather than POSIX ERE. `git grep -P` has it. Measured on git 2.39.5 (Apple Git-154), against a control proving the file was readable:
+
+```
+git grep -E '\bimporter\b' HEAD -- README.md   ->  no match
+git grep -P '\bimporter\b' HEAD -- README.md   ->  8
+git grep -E 'importer'      HEAD -- README.md   ->  8      <- control
+```
+
+**That is a property of the tool, not of the platform**, and the difference matters to anyone checking the claim: a system `grep` may well support `\b`. On the machine above it does: `grep -E '\bimporter\b'` returns 8 from ugrep 7.8.4: so **testing with `grep` tells you nothing about what `git grep -E` will do.** Validate with the tool you are actually going to cite.
+
+**The same failure in PHP, and it is the one to remember.** Verifying in `wordpress-importer` that a merged change had landed, `grep -c 'designateDepartmentOrganization($site)'` returned **0** while `grep -c 'private function designateDepartmentOrganization'` returned **1** (method present, call absent, which reads as dead code merged to `main`). The call was there, at line 1140, byte-identical to the branch it came from. **A `$` followed by an identifier is how a PHP variable is spelled and how an anchor is spelled, so the pattern you write to find a variable is the one pattern that cannot match it.**
+
+**And `$` is only the instance that bites first: the rule is general.** Measured on macOS, each row against a fixture containing the string it tests, with a bare-word control matching on every engine:
+
+| Pattern | fixture | `ugrep 7.8.4` BRE | `ugrep` ERE | BSD 2.6.0 BRE | BSD ERE |
+| --- | --- | --- | --- | --- | --- |
+| `'a$b'` | `a$b` | **0** | **0** | 1 | **0** |
+| `'a\$b'` escaped | `a$b` | 1 | 1 | 1 | 1 |
+| `'a[$]b'` bracketed | `a$b` | 1 | 1 | 1 | 1 |
+| `-F 'a$b'` | `a$b` | 1 | n/a | 1 | n/a |
+| `'Organization(site)'` | `Organization(site)` | 1 | **0** | 1 | **0** |
+| `'Organization[(]site[)]'` | `Organization(site)` | 1 | 1 | 1 | 1 |
+
+- **In ERE, `$` anchors anywhere**, so the pattern is unmatchable in *every* conforming engine. Reaching for `grep -E` does not escape this; it guarantees it (and this corpus prescribes `-E` far more often than any alternative).
+- **In BRE, POSIX makes `$` literal unless it ends the pattern.** BSD grep and `git grep` match; `ugrep` anchors it anyway. So **two greps installed side by side on one machine return different answers for the same pattern and the same file**, and which one a script invokes decides the result.
+- **Parentheses have the same shape and are easier to miss** (literal in BRE, grouping in ERE, so `Organization(site)` under `-E` is a pattern for the text `Organizationsite` and cannot match a line containing brackets). It reads as an innocent part of the name rather than as syntax.
+
+**So the remedy is not "bracket the `$`": it is `-F`, or bracket *every* metacharacter in the pattern.** Half-doing it reproduces the original defect through the fix. Against the real call site this example is drawn from:
+
+| Pattern | BRE | ERE |
+| --- | ---: | ---: |
+| `designateDepartmentOrganization([$]site)` : igil bracketed, parentheses not | 1 | **0** |
+| `designateDepartmentOrganization(\$site)` : igil escaped, parentheses not | 1 | **0** |
+| `designateDepartmentOrganization[(][$]site[)]` : very metacharacter bracketed | 1 | 1 |
+| control: the bare name | 3 | 3 |
+
+**The general statement, which is what this section is actually about: a pattern copied out of source code is made of metacharacters, and any one of them left unbracketed is a silent zero.** `$`, `(`, `)`, `.`, `[`, `*`, `+`, `?`, `|` are all ordinary characters in PHP and all special in a regex. `grep -F` treats the whole pattern as literal and is the reliable default; bracketing is for when part of the pattern must stay a real expression. Escaping (`\$`) and `-F` are also correct everywhere measured here and are fine where already written, with one caveat worth knowing: **`grep -iF` aborts on GNU grep 3.1 under Windows Git Bash when no UTF-8 locale is set**, the same defect that makes that build refuse `-P` with `-P supports only unibyte and UTF-8 locales`. That exposure does not reach macOS: sixteen cells across `LC_ALL` unset, `C`, `C.UTF-8` and `en_US.UTF-8` on both engines were clean, and **the shell they were run in carried no locale at all**, which is the triggering condition, so that is a negative result *at* the crashing locale rather than at an unstated one. GNU grep's BRE behavior has not been measured on macOS; only the Windows build was.
+
+**And a probe can be blind without any metacharacter at all.** The same verification later reported `0` for a phrase quoted from prose merged an hour earlier: the text read `eventually consistent by design`, the probe asked for `eventually-consistent index`. Nothing was wrong with the tool; the phrase had been reconstructed from memory rather than copied. **A zero from a remembered phrasing is not an absence, even when you wrote the sentence you are searching for.**
+
+### The prescribed control is the thing that breaks, on two platforms, for two unrelated reasons
+
+**Under Git Bash on Windows.** The practical form of the control is *"the same expression against a revision where the target still exists"*, and the natural way to read that revision's copy of a file is `git show <rev>:<path>`. MSYS rewrites that argument before git sees it (`:` becomes `;` and `/` becomes `\`) so git is handed `origin\main;.claude\rules\worktrees.md` and answers `fatal: ambiguous argument`. Piped, or with stderr suppressed, that is no output and a non-zero status: **indistinguishable from the file not being on that revision.** It happened twice in one session in `wordpress-importer` on 2026-09-09, and the first time the mangled path was read as the file being absent.
+
+**The remedy is `MSYS_NO_PATHCONV=1` on the invocation.** The trap is that it is not needed most of the time, and the check a reader runs to decide whether they need it is the check that says no.
+
+**Only a dot-prefixed path triggers it, which is why the obvious sanity test passes.** Measured on Windows 11, Git Bash, git 2.32.0.windows.2, 2026-09-09, each row bare and then repeated with `MSYS_NO_PATHCONV=1`:
+
+```
+origin/main:.claude/rules/worktrees.md   rc=128   ->  rc=0 with the variable
+origin/main:.github/workflows/ci.yml     rc=128   ->  rc=0
+origin/main:.gitignore                   rc=128   ->  rc=0      no slash in the path at all
+origin/main:docs/DECISIONS.md            rc=0     <- control: succeeds bare
+origin/main:scripts/local-ci.mjs         rc=0     <- control: succeeds bare
+origin/main:./docs/DECISIONS.md          rc=0     <- control: a LEADING ./ does not trigger it
+```
+
+Neither the colon nor the slash decides it: `.gitignore` carries no slash and fails, while `./docs/…` carries both a dot and slashes and succeeds. **So a reader testing `git show origin/main:README.md`, seeing it work, and concluding the platform is fine has tested the one shape that cannot fail** (and in these repositories every rule and skill lives under `).claude/`, so the shape that does fail is the one anyone auditing the corpus will use.
+
+**Every subcommand taking `<rev>:<path>` is affected, not just `show`** : easured the same way, dot-prefixed path, bare:
+
+```
+show  ·  cat-file -p  ·  cat-file -e  ·  cat-file -s  ·  rev-parse  ·  diff      all rc=128
+```
+
+`cat-file -e` is the dangerous one: it is the *existence* test, meant to be read from its exit status with output discarded, which is exactly the caller that cannot see the difference between a mangled argument and a missing file.
+
+**Not a macOS finding, and not measured there.** Path conversion is an MSYS behavior; nothing here says a POSIX shell is affected, and nothing here was run on one. **macOS has since been measured and breaks the same recipe through an entirely different mechanism: the next paragraphs. The two are not one platform note**, and reading them as one produces a remedy that works on neither.
+
+**And zsh breaks the same recipe on macOS, for an unrelated reason.** The failure above is MSYS rewriting the argument before git sees it. This one is the *shell's own parameter expansion* consuming part of it, and the two share no remedy: `MSYS_NO_PATHCONV=1` does nothing here, and braces do nothing there.
+
+zsh applies history-style modifiers to `$var:x` **without braces**, unlike bash. So when a literal path follows the colon and its first character is a modifier letter, zsh consumes the colon and that character before git is invoked. Measured on zsh 5.9, macOS (Darwin 27.0.0), git 2.54.0, in `wordpress-importer`, with the exit status taken directly rather than through a pipe:
+
+```
+$SHA:composer.lock          rc=128    ':c' eaten as a modifier; the remainder is not a path
+$SHA:scripts/local-ci.mjs   rc=128    ':s' eaten as a SUBSTITUTION; argument becomes <sha>i.mjs
+$SHA:tests/CLAUDE.md        rc=128    ':t' eaten as a modifier; the remainder is not a path
+$SHA:README.md              rc=0      <sha>:README.md        <- control
+$SHA:docs/DECISIONS.md      rc=0      <sha>:docs/DECISIONS.md <- control
+```
+
+**The remedy is to brace the expansion**: `"${SHA}:<path>"`. The closing brace ends the parameter reference, so the colon that follows is literal. Verified on the same paths, which return `rc=0`.
+
+**A re-test that puts a variable after the colon cannot reproduce this, and will report clean.** `$SHA:$path` is safe because `$` is not a modifier letter, so the colon survives: the trap needs a *literal* path. That form was written as a check during the original investigation, returned `rc=0` on every path, and was read as the trap being absent. A test that cannot produce the condition looks exactly like a test that passes.
+
+**Bounds.** zsh 5.9 on macOS, measured as above; `/bin/zsh` is that platform's default login shell. bash is unaffected: it has no such modifiers, which is why a recipe written and tested under bash carries no warning.
+
+## How to apply
+
+1. **Run the positive control before you read the result, not after.** One case the instrument must find, run through the same command, same flags, same quoting. If it comes back empty too, you have learned the instrument is blind and nothing about your question. For a source sweep the practical form is the same expression against a revision where the target still exists: `git grep -c <expr> origin/main`: which is independent of the branch under test by construction.
+
+   **Run it with the tool you are going to cite.** Regex support differs between tools far more than between platforms, so a control run through a different program validates that program rather than your probe.
+
+2. **State what the control could have failed on.** A control that exercises a different variable than the claim is decoration. "The query found eight other labels, so it works" says nothing about a *read window* that excludes the one you are asking about; "the pattern matched elsewhere, so it works" says nothing about whether it can match the *specific shape* the claim is actually about.
+
+3. **Prefer a control the instrument cannot pass by accident, and did not get from you.** Take a case out of the material being searched, confirm by reading it that it genuinely is an instance of the target, and run the probe against that. Where the corpus is the thing whose emptiness is in question, sample from a comparable one known to contain the target: a prior revision, a sibling directory, an artifact of the same kind. Two shortcuts fail in opposite directions, and both fail silently:
+
+   - **A real artifact cited from memory as a known-bad case may have been repaired since**, in which case it validates nothing and passes anyway. Read it before using it.
+   - **A hand-written control demonstrates that the expression matches what its author pictured**, which is what the expression was built from, so the two fail together, and the control's passing is what makes the wrong result publishable. The worked example met every other requirement in this file and still published a false absence: measured on Windows 11, 2026-09-05, in `wordpress-importer`, a probe for shell redirects was validated against a hand-written `cmd 2>/dev/null && echo hi` and matched; the corpus wrote its redirects as `> 1`, with the space a person naturally types, which the probe could not match. Nine files reported **0** hits and contained **9**; corrected, the full corpus held **189** across 79 files. Where no real instance exists, a synthetic fixture containing exactly the thing being hunted is the fallback, and step 7 says to say so.
+
+4. **Distinguish "found nothing" from "could not run".** A command that fails prints nothing on stdout, and a pipeline hides its status. Check the exit code deliberately, or print a count rather than only the matches, so an empty section is provably empty. **A piped instrument reporting success is a claim about the pipe, not about the thing you piped** (the mechanics are in [`reading-exit-status`](../rule-reading-exit-status/SKILL.md)).
+
+5. **Confirm a flag or pattern exists before treating its silence as evidence.** An unrecognized flag is not a filter; it is a no-op that happens to sit where a filter would be, and its "result" answers nothing.
+
+6. **Publish the control with the claim.** "0 occurrences" is not a finding. "0 here, against 9 on `origin/main` with the same expression" is. An absence stated without its control should be treated as unverified by whoever reads it, including its author an hour later.
+
+7. **Not discretionary.** A sweep whose control is optional produces its most convincing output on precisely the run where it was skipped, because that is the run with nothing to report. Where the control is genuinely impossible: no revision carries the target, no case is known to exist: say that instead of omitting it, so the reader knows the absence rests on the expression being correct rather than on it having been demonstrated.
+
+8. **The control must be independent of the thing it validates.** A control keyed on a string that the sweep's own artifacts contain is not a control. The worked example is from `wordpress-importer`: a `search/issues` control token returned **0** on first run and **1** on re-run, because that endpoint indexes comments and the comment recording the probe had been posted in between. **Writing the control down destroyed it.** That failure is reassuring rather than alarming: it makes the probe look more capable than it is: which is why it survives review.
+
+9. **Make the instrument return a DIFFERENT answer from the one under test.** Two probes that both return zero are indistinguishable whether the mechanism works or not, so a negative control is not a control for a zero; and for a positive result the control you need is a negative one, which a passing positive control does not supply. They are different guarantees. A positive control shows the instrument *can match*. A negative control shows it *does not match what it should not*. Feed the instrument an input whose answer is already known and whose answer must differ from the result being claimed (a hit when you are claiming an absence, a miss when you are claiming a hit). **An instrument that has only ever returned one value has been used, not tested.**
+
+   **Worked, because the shape is easier to recognize than to describe.** In `uams-statamic`, the question was whether a pull request's `Closes #N` had registered as a closing link. GitHub's issue timeline shows a `cross-referenced` event, which looks like the answer. Run against #702: established as a deliberate non-closing `Refs #702`: the timeline returns **15** `cross-referenced` events. So the event fires for a closing link, for a bare mention, and for the prose form that closes nothing: it cannot discriminate, and every one of its answers is well-formed. The instrument that discriminates *for that question* is `closingIssuesReferences`, and the text check is whether the keyword sits adjacent to the reference.
+
+   **Both of those instruments are narrower than that sentence reads, and this file is the wrong place to learn it the hard way: so the bounds are stated here rather than left to the reader.** Neither correction touches the #702 case above, which is same-line and is what the step illustrates.
+
+   **`closingIssuesReferences` reports what a pull request DECLARES, not what its merge does.** Measured in `uams-statamic` on 2026-09-16:
+
+   ```
+   specimen  #2446  merged=true   closingIssuesReferences = (none)
+                    its merge nevertheless acted on #2241 -- timeline names commit f12ba37e4
+   control   #2453  merged=true   closingIssuesReferences = #2452 CLOSED
+   ```
+
+   The control is what makes the specimen's empty read an **absence rather than a broken query**, which is this step's own requirement applied to itself. The two answers come from different code paths: the field parses the pull-request body as Markdown, while the push-time scan reads the squash commit message as **plain text**. Under squash-merging the body *becomes* that message (so a fenced example, invisible to the field, is live to the scan). That is not a subtlety to file away: it is how a pull request acts on an issue its own `closingIssuesReferences` does not list.
+
+   **And "adjacent" spans a newline.** GitHub's parser treats one as whitespace, so a keyword ending a line pairs with a reference beginning the next. A line-by-line check therefore answers a narrower question than the sentence implies, and reports clean on the shape it was reached for. Point a check that reads across lines at the text that will merge.
+
+   **The clearest way to get this wrong is to run the two probes you *want* and neither one you don't.** Measured on macOS (Darwin 25.6.0), 2026-09-09, verifying a change to a hard-wrapped Markdown file in `wordpress-importer`: both probes in one command, against one file:
+
+   ```
+   grep -c '<the claim just removed>'        0   <- wanted; read as "removal verified"
+   grep -c '<the sentence just added>'       0   <- the sentence is present
+   same phrase, newlines collapsed           1   <- it spans a line break
+   control: an unrelated term in the file    5
+   ```
+
+   The removal check was correct and the replacement check was broken, and they were indistinguishable at the point of reading. **`grep -c` counts matching lines**, so a phrase that crosses a line break cannot match, whatever the file contains. A removal-only verification would have been right by accident. So in a hard-wrapped corpus: **pair every removal check with a positive check for the replacement, and normalize whitespace before searching for a phrase.** A grep for a phrase is sound only where the phrase cannot cross a line break.
+
+10. **A passing control proves detection, not coverage.** It shows the instrument can see *one* thing. It does not show the instrument sees everything of that kind, and the two are commonly different by a lot. Report the bound rather than the reassurance.
+
+    **A working instrument pointed at the right thing, reading only part of it, produces the same output as one that read all of it.** The expression is sound, the corpus is the right one, and the read stopped short. Nothing in what came back says so. **A short read and a genuine absence are the same result once the records are in hand**, and the missing records are exactly the ones a reader then explains.
+
+    **So compare what you read against what the source says exists, before concluding that anything is missing.** A paginated source states its size somewhere, and the form varies: a total in a response header (the migration API's `x-wp-total`), a `total_count` beside a single page of items, a `rel="last"` link whose page number multiplies out to the count, a page count. Read it, and assert it equals the number of records actually held. **Where the source states no size at all, say so beside the claim**, because the absence then rests on the read having been complete, and that was not shown.
+
+    **Truncation has a shape, and it can be recognized without the totals.** Records missing from one end of an ordering (the highest-numbered, the newest, the last few by whatever key the source sorts on) are what a stopped read leaves behind. A filter selects on a property, so its gaps fall wherever that property does, which is rarely one unbroken run at the end. In `wordpress-importer`'s #808 the six missing forms were consecutive and highest-numbered, and the obvious property had already been ruled out, since another repeater child was being served normally ([#1098](https://github.com/UAMS-Web/wordpress-importer/issues/1098) records both). **A count that lands exactly on a page size is the same signal in numeric form**, and it was there too: the 50 returned is the endpoint's default `per_page`, which the contract documents.
+
+    **None of the controls above covers this.** Each proves the probe *can* see: that it matches a known hit, that it returns a different answer on different input. None proves it saw *everything*, and in #808 every one would have passed. The endpoint was right, the request succeeded, and a served child form showed the probe could return exactly the kind of record that went missing. Completeness is a separate assertion, and it has to be made separately. GitHub's API has three recorded instances, and they live in [`github-api-budget`](../rule-github-api-budget/SKILL.md) rather than here: `search/issues` reporting a corpus-wide `total_count` beside one page of `.items[]`, and `dependencies/blocking` and `sub_issues` each cut at one page with nothing marking the result short. They sit in a rule about API budget because that is where they were found, and a reader checking an absence claim does not look there, which is why the general statement is here.
+
+11. **A working instrument pointed at the wrong thing produces the same output as a working instrument pointed at the right one.** A broken expression is one failure; a sound expression and a wrong corpus is another, and it is the harder of the two to see because nothing about the result is malformed.
+
+    **The asymmetry is the part worth carrying, because it inverts the intuition that a failure is the worse outcome.** In the `wordpress-importer` investigation above, a second probe was run against a copy in a temporary directory. It failed, `exit 1`, no output, and was correctly refused as evidence:
+
+    ```
+    wrong environment, probe FAILED       announced itself; refused, and said so
+    wrong environment, probe SUCCEEDED    published as measured evidence
+    ```
+
+    **A broken probe that returns nothing announces itself. A broken probe that returns something does not.** So a positive result needs its provenance stated at least as explicitly as a zero needs its control: which tree, which revision, which file: because `exit 0` and plausible bytes assert none of it.
+
+    **And a proxy is a proxy only for what was actually compared.** In that instance the checkout had been validated by comparing one comment line, while the cited output was generated from a different line that was never compared. That is the positive-result form of the failure this rule's own examples describe: *the thing you searched is not the thing you concluded about.* A correct, two-sided-controlled reading of the wrong subject is [`adversarial-review`](../rule-adversarial-review/SKILL.md#how-to-apply)'s to police (*"a reading taken from one and reported as the other is a true measurement attached to the wrong subject"*) not this rule's.
+
+12. **A working instrument that read all of the right thing still returns a wrong answer when a filter the searcher added removes the target along with the noise.** Here the aim and the read were both sound, and the searcher took the answer out afterwards, deliberately, while suppressing a match they expected. In `wordpress-importer`'s #1113 a caller search excluded the file that defines the method, so the definition would not be counted as a call site; the method is called 23 times, and every call is in the file the filter removed. A well-formed `0` for it read as dead code, and a retraction of a correct finding was one step away. Re-run later, the same filtered search returned **1** (a docblock mention, not a call). Either number, taken at face value, was wrong about the same thing, and step 1 cannot catch it: the control runs against the expression, the expression is sound, and the filter is applied after the control has passed.
+
+    **The signature is co-location, which makes the trap predictable.** A filter added to drop a known, expected match (the definition, the test file, the vendor copy, the probe's own invocation) drops every match that shares the property it filters on. Definitions and their callers sharing a file is the common case. So do a fixture and its assertions in one test, or a function and its only use in one script.
+
+    **So when a filter is added to a validated expression, run it without the filter as well, and account for every line the filter removed.** Where the thing to drop is one known line, filter on that line, such as `grep -v 'function isFieldOptionNotSet'`, not on the file it sits in. **A symbol with no callers and heavy use inside its own file is implausible on its face.** Read the filtered-out region before concluding it is unused.
+
+13. **Scale the rigor to what the answer would license, not to how hard the measurement looks.** A cheap check whose result will retire a ticket, stand a colleague down, or be quoted into someone else's decision earns a control; an expensive one that only informs your next step may not. **The cost of a wrong answer is not uniform.** The sharpest instance in this corpus is a file-age comparison whose two arms were different clocks: a 32-second-old file read as five hours old: because its wrong answer asserted that other people's work had been wasted, and *was acted on by someone else before it was corrected*.
+
+14. **Read the object, not an aggregate computed over it.** Most of the wrong answers below were aggregates that agreed with the truth for the wrong reason, and in each case a direct read of the underlying object was both cheaper and correct. A count, a diff stat, a `total_count`, a boolean derived from a filter: each discards exactly the detail that would have shown the answer was wrong.
+
+## Worked instances of a well-formed wrong answer
+
+All measured in `uams-statamic`, all producing output that looked correct.
+
+| instrument | returned | what was true | how it was caught |
+| --- | --- | --- | --- |
+| a count of `catch` blocks per version, used to decide whether a fix was present | a difference in the right direction | the fix was in one function; the count would have agreed just as well had the fix been absent and the file merely refactored | another reader asked which function |
+| `stat -f %Sm` (local time) compared against a `date -u` "now" | a 32-second-old file read as 5 hours old | the two arms were different clocks | re-derived from epoch seconds |
+| a duplicate check run against issues only | no conflicting work | an open pull request on the same file, which `repos/{o}/{r}/issues` does return and `gh issue list` filters out | another reader named the pull request |
+| a one-line count of open issues versus pull requests | `prs=0` | `prs=5`, confirmed by direct membership test | a membership test run for an unrelated reason |
+| a board read with an explicit page size | exactly 400 items, and neither issue being looked for | the board holds 1,982; 400 was the limit, not the total | the two issues were known to exist, having just been created |
+
+**Note what the last one has in common with an empty result**: truncation at exactly the requested size presents as a complete answer, and the number that would reveal it (the total) is the one not printed.
+
+## A second shape: the instrument answers a narrower question than the one asked
+
+Both the question and the answer are well-formed. The answer is correct for the question the instrument actually answered, and that is not the question that was asked.
+
+| mechanism | the question asked | the question actually answered |
+| --- | --- | --- |
+| a read from a local clone | does this file exist in the repository | did it exist as of my last fetch |
+| a read of one branch | does this repository contain X | does this branch contain X |
+| a contents-API read with no `?ref=` | does this repository contain X | does the default branch contain X |
+
+* ("absent on `master` as of this fetch" rather than "absent") so a reader can see the boundary the claim actually has. **An absence is a claim about a boundary, and a boundary that goes unstated is assumed to be the widest one.**
+
+## A number asserted without ever being measured is not a weak version of this
+
+A control cannot rescue a figure that was never read from anything (it is a different failure, not a smaller one). If a timestamp, a count, or a version string appears in a finding with no command that produced it, that is not an instrument that returned an empty or misleading result; it is no instrument at all. Say so plainly rather than filing it beside a probe that at least ran.
+
+## Where this has bitten, so the fourth reader recognizes their case
+
+The applications look unrelated until they are listed together. Each is documented in full where it was discovered, and none of those passages is superseded by this one:
+
+- **Process sweeps** (an empty `ps`/`pgrep` result read as a quiet machine). See the section *Validate the sweep before you trust its silence* in [`long-running-commands`](../rule-long-running-commands/SKILL.md), which catalogues the distinct causes of a sweep that returns clean while blind, and is the fullest treatment of the failure.
+- **API queries** (a `gh` invocation printing nothing for a reason unrelated to the question). `gh api --jq` takes only the filter, so a `--jq '…' --arg s "$S"` call fails with `accepts 1 arg(s), received 4` and prints nothing to stdout, which reads exactly like a quiet result; echo an exit status or print a count so an empty section is provably empty. The pagination and phrase-matching limits are in [`github-api-budget`](../rule-github-api-budget/SKILL.md).
+- **Pipelines** (`php -v 2>&1 | head -3); echo $?` returned `0` for an interpreter that had in fact been killed. `head` succeeded; its success is what `$?` held by the time the sentence ran. [`reading-exit-status`](../rule-reading-exit-status/SKILL.md) owns the mechanics.
+- **Self-audits of published work** (an author sweeping their own output for a defect class, with an expression that cannot match it). The audit passes, and the pass is reported. [`adversarial-review`](../rule-adversarial-review/SKILL.md) covers why an author's own instrument is the wrong one to trust here.
+
+## What this does not cover
+
+- **Nothing, on the grounds of being a positive result.** An earlier version of this rule excluded "a count of things that are present", on the reasoning that such a count carries its own evidence. **It does not, whenever the instrument rather than the subject produced the number**, and that exclusion is what would have permitted several well-formed wrong answers to be published as verified.
+- **Whether the right corpus was searched.** That is a separate question, stated above.
+- **Whether a measurement is still current.** A correct result can go stale between being taken and being cited; that is a separate discipline and belongs with whatever states the figure.
+- **A true measurement attached to the wrong subject.** That is [`adversarial-review`](../rule-adversarial-review/SKILL.md)'s.
+
+## The DRY line
+
+This file states the **general form and its remedy** (prove the probe could have returned something else, before trusting that it did not (and owns nothing else). The concrete detail stays where it was discovered: the sweep causes belong to [`long-running-commands`](../rule-long-running-commands/SKILL.md), the query-specific guidance and the GitHub instances of a partial read to [`github-api-budget`](../rule-github-api-budget/SKILL.md), pipeline and command-substitution mechanics to [`reading-exit-status`](../rule-reading-exit-status/SKILL.md), the two-sided sweep control for durable-record audits to [`no-emoji-in-durable-records`](../rule-no-emoji-in-durable-records/SKILL.md), and the case for an independent checker, and reading the correct subject at all, to [`adversarial-review`](../rule-adversarial-review/SKILL.md)) step 3's failure, that an author and the author's own checks share a blind spot exactly, is that rule's general form, and step 3 is that failure at the scale of a single expression. Each of those is more useful than this file for the reader already in that situation; this one exists for the reader who is in a fourth situation and would otherwise re-derive it.
+

@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * Functions the plugin defines.
+ *
+ * Definitions only: hooks are registered in the main plugin file. Keeping the
+ * two apart is what lets the Unit suite load this file with no WordPress.
+ */
+
+declare(strict_types=1);
+
+defined('ABSPATH') || exit;
+
+/**
+ * Replace the excerpt's "more" marker with a link to the current post.
+ *
+ * Hooked to `excerpt_more`. Falls back to the marker WordPress passed when
+ * there is no post to link to.
+ */
+function example_plugin_read_more_link(string $more): string
+{
+    $url = get_permalink();
+
+    if (! is_string($url) || $url === '') {
+        return $more;
+    }
+
+    return sprintf(
+        ' <a class="example-plugin-more" href="%s">%s</a>',
+        esc_url($url),
+        esc_html__('Read more', 'example-plugin')
+    );
+}
+
+// cspell:ignore ABSPATH

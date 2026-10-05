@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+>
+    <!--
+        Laravel's own skeleton configuration (laravel/laravel, 2026-10-02), with the
+        `Test.php` suffix added so a misnamed file is never mistaken for a passing one.
+        Every variable below forces a driver that needs no service and leaves nothing behind.
+    -->
+    <testsuites>
+        <!-- Plain PHPUnit TestCase: no application booted. -->
+        <testsuite name="Unit">
+            <directory suffix="Test.php">tests/Unit</directory>
+        </testsuite>
+        <!-- Tests\TestCase: the application booted, HTTP and database available. -->
+        <testsuite name="Feature">
+            <directory suffix="Test.php">tests/Feature</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory>app</directory>
+        </include>
+    </source>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="APP_MAINTENANCE_DRIVER" value="file"/>
+        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="BROADCAST_CONNECTION" value="null"/>
+        <env name="CACHE_STORE" value="array"/>
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="DB_DATABASE" value=":memory:"/>
+        <env name="MAIL_MAILER" value="array"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="PULSE_ENABLED" value="false"/>
+        <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="NIGHTWATCH_ENABLED" value="false"/>
+        <!--
+            A Statamic site adds these two. Both turn off a lock that parallel workers
+            (paratest, Pest's parallel mode) contend for and answer with a 503: the static
+            cache's per-URL lock, and the Stache's warming lock, which lives in one
+            directory every worker shares. Both are read at boot, so they belong here
+            rather than in a test's setUp.
+
+        <env name="STATAMIC_STATIC_CACHING_STRATEGY" value="null"/>
+        <env name="STATAMIC_STACHE_LOCK_ENABLED" value="false"/>
+        -->
+    </php>
+</phpunit>

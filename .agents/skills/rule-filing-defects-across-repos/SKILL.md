@@ -1,0 +1,80 @@
+---
+name: rule-filing-defects-across-repos
+description: "File a defect in the repository that owns it, and claim it first when a race is likely."
+disable-model-invocation: true
+---
+<!--
+  Synced from UAMS-Web/uams-claude-skills: shared/.claude/rules/filing-defects-across-repos.md
+  Edit it there, not here; the next sync overwrites this copy.
+  Delivered to this repository through the profile(s): core.
+-->
+<!-- cspell:ignore inspectable -->
+# Rule — file a defect in the repository that owns it, and claim it first when a race is likely
+
+A defect found in a dependency, a sibling `UAMS-Web` repository, or the [`joshdaugherty/claude-skills`](https://github.com/joshdaugherty/claude-skills) plugin gets **an issue in that repository**. Not a note in a pull-request body, not a coordination message between sessions, not a comment on an issue that is already closed.
+
+And when several sessions could plausibly find the same thing at the same time, **announce the work and claim it before filing**, through whatever coordination tooling the sessions share.
+
+## Why this is a standing order
+
+**The routing half, because the alternatives are not tracking artifacts.** A coordination message is read once by whoever is watching and is gone. A pull-request aside is read during review and never again. A comment on a *closed* issue is the worst of the three: nothing surfaces that thread a second time, so the finding lands in the one place guaranteed not to be revisited. Each of these feels like recording the problem, and none of them is. Observed from `uams-statamic` on 2026-09-02: two unmet acceptance criteria were raised as a comment on a closed `claude-skills` issue, and needed a ticket of their own before anyone would meet them again.
+
+**The claiming half, because the race is real rather than theoretical.** Concurrent sessions work side by side, adopt the same release within minutes of each other, and run the same diagnostics against it. Without a claim they each find the same defect, each reasonably conclude nobody has filed it, and each file it. The duplicates are not the whole cost: a reviewer then has to work out whether two reports describe one problem or two. The same afternoon, six `uams-statamic` sessions announced and claimed six findings and filed eight issues between them with no duplicate.
+
+## How to apply
+
+1. **Route by ownership.** The issue goes in the repository whose code, docs, or behavior is wrong. A finding about a dependency belongs to the dependency even when it surfaced here; the local record is a link, not a copy.
+
+2. **Check before filing, and check the shipped artifact.** Search the target tracker with several phrasings and **include closed issues and pull requests**: a closed issue still means do not refile, per the duplicate check in [`writing-issues`](../writing-issues/SKILL.md), and an open pull request means the work is not merely reported but already done. Use a form that returns both kinds: `gh issue list --search` and `gh search issues` filter pull requests out, while `gh api search/issues` and `gh api repos/{o}/{r}/issues` return them. Then read the *released* copy rather than a checkout: a fix may already have shipped in a version nobody has adopted yet, and a defect reproduced against an authoring tree may not exist in what people are running. On 2026-09-02 (`uams-statamic`) three candidate findings were checked against the shipped skill and two were already covered there; only the third was worth filing.
+
+   **Both halves of that list are load-bearing, and naming only one is worse than naming neither.** An enumeration of failure modes is read as exhaustive, so a reader who carefully includes closed issues concludes they have covered the ways a search can miss, and stops looking. That converts a gap into a false assurance, which survives review in a way an obvious omission does not. The same applies to anything added here later: a list of blind spots is a claim about completeness whether or not it intends to be.
+
+   **The third blind spot is that both prescribed endpoints return one page, and the paragraph above predicted this about itself.** The two endpoints named here are the ones added to fix the first blind spot, and they are the ones that truncate, so the remedy introduced the list that now conceals the next gap. They do not truncate the same way, and the difference decides whether a caller can notice:
+
+   | Endpoint | How it truncates | Visible in the response? |
+   | --- | --- | --- |
+   | `repos/{o}/{r}/issues` | one page, 30 by default | yes: a short page implies more |
+   | `search/issues` | `total_count` is corpus-wide, `.items[]` is one page | **no**: the count is correct, so nothing disagrees |
+
+   **So the completeness check is to compare the number of items you actually read against `total_count`**, and pass an explicit `per_page`. The [`writing-issues`](../writing-issues/SKILL.md) duplicate-check function does this and prints a `shown N of M` trailer; use that form rather than writing a new one.
+
+   **"Actually read" means after your own pipeline, not after the API's.** A `head`, a `tail` or a `--limit` imposes a second cut that leaves no trace in the output at all; the endpoint's page size is at least inspectable afterwards, and a hand-imposed one is not. This is not hypothetical: the duplicate check run before filing `wordpress-importer#962` was piped through `head -4` against a nine-result query, and the matches were classified from four of nine. The endpoint did not truncate that call; the caller did.
+
+3. **Decide whether a race is plausible.** It is, whenever the finding came from something other sessions also just did: adopting a release, running a diagnostic, reading a shared announcement. It is not, for something only this session could have seen: a defect in work in progress here, or one surfaced by a fixture only this branch has.
+
+4. **When it is plausible, announce and claim before doing the work.** The mechanics belong to the coordination tooling; the sequence is:
+
+   - **Read what is already announced first.** A finished or failed report on the same finding means stop; do not claim, do not file.
+   - **Announce the work, then claim it**, and act only once the tooling confirms the claim as yours. A claim you merely requested is not one you hold.
+   - **File, then close out the claim** with the issue URL, so the record shows the outcome rather than an abandoned claim.
+
+5. **Treat a claim as an ordering convention, not a lock.** It does not exclude a concurrent claimant; it makes the winner deterministic and visible. Do not take a task from a claimant judged stale without pinging it first; staleness is inferred from silence, and a quiet session is not a dead one.
+
+6. **Cross-link adjacent issues in the issue bodies, not only in coordination messages.** The claim prevents duplicate *filings*; it does nothing about two legitimately distinct issues that edit the same lines. When you notice that overlap, say so in the issue itself: a coordination message reaches whoever is listening now, and the body reaches whoever picks the work up next month.
+
+7. **An issue or pull-request body is shared mutable state, and two sessions editing one lose updates the same way a shared file does.** The claim protocol orders *tasks*; it does nothing about *writes*. Two sessions can hold no competing claim, agree entirely, and still destroy each other's edits (observed 2026-09-05 (`wordpress-importer`), when one session replaced a section of a ticket body that another had edited inside, and the paragraph was restored only because its author noticed and said so).
+
+   **A read-modify-write on a body is last-write-wins with no notification.** Two guards, and the second is the one that matters:
+
+   - **Compare the remote body against your base immediately before writing.** This catches an edit that lands *between* your read and your write.
+   - **Delete only what you wrote, never a block you believe is yours.** The hash guard is blind to an edit that landed *before* your read: it is already in your copy, the hashes match honestly, and your write removes it while reporting success. A guard that assumes it is the only writer detects only the races that start after it does, which is worse than no guard because it licenses confidence.
+
+   No check enforces the second. It needs writing down precisely because nothing can verify it.
+
+   Where a finding belongs in someone else's ticket, **say so and let them add it** rather than editing their body. Cross-repo, this is `UAMS-Web/uams-statamic#2193`'s subject as well; read it rather than restating it.
+
+8. **Record what was measured and under what conditions, and for a dependency, the REVISION, because a version string does not identify code.** Name the version, the platform, and the surface the observation came from, and state the bounds you did not test. A finding whose conditions are not written down is generalized past its evidence by the next person to act on it, including by whoever writes the fix: a `claude-skills` line measured on one command surface was withdrawn as simply wrong, and the correction had to be amended a second time to say it had been *scoped*, not wrong.
+
+   **A version and a source reference can both match while the files differ**, so for a dependency the revision is the identifying fact and the version is not: hash the file you are calling into (`shasum -a 256 <path>`) and cite that. This matters more here than in a local measurement, because a cross-repo report is read by someone who cannot see your tree: an unqualified "present in `<package>`" is incomplete the way an absence without a search scope is incomplete, and it is the maintainer who pays for it.
+
+9. **Where there is nothing to coordinate through** (no other session running, or none this repository is set up with), steps 1, 2, 6, 7 and 8 still apply in full. Only the claim is skipped, and the issue body should say what was checked before filing so a later duplicate is easy to reconcile.
+
+## What this is not
+
+Not a reason to file upstream instead of fixing something here. If the defect is ours, fix it. This rule governs where a report lands when the fix is not ours to make, and how concurrent sessions avoid filing over each other.
+
+Nor does it apply to residue from a ticket in this repository: [`closing-a-ticket`](../rule-closing-a-ticket/SKILL.md) already requires that to become an issue rather than a mention, and this rule is the cross-repository case of the same instinct.
+
+## The DRY line
+
+This file owns **which repository a defect is reported to, and how filing is sequenced when sessions compete**. How to *write* the title and body belongs to [`writing-issues`](../writing-issues/SKILL.md); the voice those bodies are written in to [`impersonal-voice-in-github-artifacts`](../rule-impersonal-voice-in-github-artifacts/SKILL.md); which API surface to spend to [`github-api-budget`](../rule-github-api-budget/SKILL.md); and the coordination mechanics (how work is announced and claimed, liveness, what a conflict looks like, the identity a session publishes) to the coordination tooling's own documentation, which [`coordination-plumbing-stays-out-of-artifacts`](../rule-coordination-plumbing-stays-out-of-artifacts/SKILL.md) keeps out of this corpus. None of those are restated here.
