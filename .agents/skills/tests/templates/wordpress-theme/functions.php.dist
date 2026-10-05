@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * Example theme functions file. Replace with the theme's own.
+ *
+ * Like most themes', it does three things at file scope: finds its files
+ * through get_template_directory(), loads them, and registers hooks.
+ */
+
+declare(strict_types=1);
+
+defined('ABSPATH') || exit;
+
+require_once get_template_directory().'/inc/template-tags.php';
+
+/**
+ * Declare what the theme supports.
+ */
+function example_theme_setup(): void
+{
+    add_theme_support('title-tag');
+}
+
+add_action('after_setup_theme', 'example_theme_setup');
+
+// cspell:ignore ABSPATH

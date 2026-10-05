@@ -1,0 +1,106 @@
+<!--
+  Synced from UAMS-Web/uams-claude-skills: shared/.claude/rules/pre-merge-check.md
+  Edit it there, not here; the next sync overwrites this copy.
+  Delivered to this repository through the profile(s): core.
+-->
+<!-- cspell:ignore Disjointness oneline -->
+# Rule — re-verify at the merge, not only at the build
+
+**A green chain is not a merge decision, and a pull request is not ready because it was ready.** The gate answers one question: **did the jobs pass on what was run?** Merging asks a different one: **should this land on `main`, in the state it will actually land in?** Those come apart, and nothing in a green run says so. Before merging any pull request (including one built in this session and watched go green) work the check below and say what it found. "The chain passed when this was opened" is evidence about a commit, a base, and a tree that may all have moved since. Running the gate is one step of the check, not the whole of it.
+
+## Why this is a standing order
+
+**Because in every repository measured so far, nothing mechanical stands between a branch and `main`.** Measure yours against the API rather than assume it, and **state the enforcement, never the flag**: `protected: true` invites the conclusion that something gates the merge, and "unprotected" invites the conclusion that nothing is enforced; both readings have been wrong. A skipped check is not a passing check, and where remote CI is switched off, `skipped` is the normal appearance, which is precisely what makes it useless as a signal: it looks identical whether the branch is perfect or broken.
+
+So the enforcement mechanism is **this corpus, observed voluntarily**. That is an argument for writing the procedure down precisely, not for trusting it less. **The gate being re-run and read at the merge is the only gate there is.** And **the fixes a pre-merge check produces have themselves had no review**, so a pull request that changed after its check gets another one.
+
+## The check
+
+Work these in order. The early steps are cheap and can invalidate the expensive ones, so do not start at the gate.
+
+1. **State.** `mergeable_state` clean, **not a draft**, and the head is the commit you think it is.
+
+   **Draft is the author's switch.** Read `draft` from the API. The author flips a pull request from draft to ready, and announcing "ready" anywhere else is not that act: a message on a channel saying a branch is ready leaves `draft: true` on the artifact, and a draft is not a merge candidate, however green it is, so a pull request can be announced ready, be genuinely finished, and still sit indefinitely because nothing that reads the artifact can tell. `gh pr ready <n>` performs the flip; read `draft` back afterwards, because [`github-api-budget`](github-api-budget.md) records (measured in `wordpress-importer`) that `PATCH .../pulls/{n}` accepts `draft=false`, returns `200`, and ignores it.
+
+   **Read the head SHA; never derive it.** The merge call needs the full forty characters, and every surface you see before merging (the CI summary, `git log --oneline`, the runner's own `Commit:` line) prints the abbreviated form. Padding the short one out reads as formatting rather than invention, which is exactly why it does not feel like fabricating a value at the moment it happens:
+
+   ```bash
+   gh api repos/{o}/{r}/pulls/{n} --jq '.head.sha'
+   git rev-parse HEAD
+   ```
+
+   **Those two agreeing is what discharges this step**, rather than being an extra chore on top of it: "the head is the commit you think it is" is precisely the claim that comparison settles. When they disagree, the branch moved or the local ref is stale; either way, stop.
+
+   **A `409` is not the guard that catches this.** It fired in `uamswp-migration-api` on 2026-09-05 merging #101, against a SHA padded from `5ae8e1c05` to a full-length string that named no commit, refused with `409  Head branch was modified. Review and try the merge again.` That is the same refusal a genuinely moved branch produces, and its text names that other cause, so the natural response is to re-fetch and retry, possibly with the same invented SHA. What actually prevented a wrong merge was that a fabricated hash is overwhelmingly unlikely to name a real commit. That is luck with a good success rate, not a safeguard.
+
+2. **Base freshness.** `git rev-list --count origin/<branch>..origin/main`. Non-zero means the green run was against a base that no longer exists: bring the branch up to `origin/main` per [`sync-pr-branch`](sync-pr-branch.md) and re-run before merging. A branch behind an interacting merge is validated against code that will not exist after it lands. **When it is zero, say so; do not assume it.**
+
+3. **Trial-merge for real, and do not read the `mergeable` flag instead.** GitHub computes that field lazily and answers `null` while it is thinking, which is indistinguishable from "cannot merge" to any check that branches on truthiness. Measured on two open pull requests in `uams-statamic` read seconds apart:
+
+   ```
+   #2343   state=open   mergeable=true   mergeable_state=clean
+   #2238   state=open   mergeable=null   mergeable_state=unknown
+   ```
+
+   Both were open and neither was conflicted. The second had simply not been computed yet, and a reader who took `null` for a verdict would have drawn the opposite conclusion from the truth. Perform the merge locally, confirm it applies, and validate **the merged state** rather than the branch tip.
+
+   **Interactions with other open pull requests are part of this step.** Compare changed-file sets. Where they overlap, prove the combined state merges: a real trial merge you then abort, not `mergeable: true`, which speaks to one pair at a time. Two independently-green branches can merge to a state nothing has ever validated. Disjointness is assessed against the inputs the jobs read, not only the files the diff touches: [`sync-pr-branch`](sync-pr-branch.md) enumerates them.
+
+4. **Run the repository's gate on the state that will land.** Step 2 brought the branch current, so the head commit is that state unless `main` moved again in between; check before the run. **Read the summary rather than the exit code** (a pipe replaces `$?` with the last command's status) and **name the commit the runner printed.**
+
+5. **Check the acceptance criteria against the diff, one at a time.** Not against the pull-request body's claims about the diff, and item by item against the issue. A criterion that will not be met is named and explained rather than left silently unchecked, per [`closing-a-ticket`](closing-a-ticket.md); an item that cannot be verified here is reported as **deferred, never ticked**. A criterion that is already true without any work in the diff is a criterion to rewrite, not to tick.
+
+6. **Ask the forge what this merge will actually close, and do not stop at the field that answers.** A squash merge closes issues from **two** surfaces: the pull-request body, and the commit message GitHub composes when `commit_message` is omitted. Read the pull request's `closingIssuesReferences` and compare it against the set the author intends:
+
+   ```bash
+   gh api graphql -f query='{repository(owner:"<owner>",name:"<repo>"){
+     pullRequest(number:N){closingIssuesReferences(first:10){nodes{number state title}}}}}'
+   ```
+
+   **Run it against the PULL REQUEST, not the diff and not the branch commits.** A body is not in the diff, and on a squash-only repository the body is the message that reaches `main`. A `Fixes #N` written into a branch commit weeks ago is invisible in the body a reviewer reads, and the close is attributed to the merge rather than to the commit that caused it, so enumerate both surfaces. What the composed message is built from is a repository setting, and which route actually fires is open; [`github-api-budget`](github-api-budget.md) carries the command, the pattern, the control that proves the pattern can match, and the parsing details that defeat checking by eye.
+
+   **That field is necessary and NOT sufficient, which is the part this step exists for.** Two code paths decide what closes, and they disagree by construction: the pull-request linkage parses the **body as Markdown**, while the push-time scan reads the **squash commit message as plain text**. Every Markdown construct exists only in the first. Measured on this estate:
+
+   | specimen | form | the field said | what merging did |
+   | --- | --- | --- | --- |
+   | `uams-statamic#2446` | cross-line, unfenced | *(empty)* | closed a ticket its body declined to close |
+   | `uams-statamic#2482` | same-line, **inside a fence** | one ticket, correct | closed a **second**, unlisted ticket |
+   | `wordpress-importer#1036` | **inside a code span** | (none) | closed its target one second after the merge, same commit |
+
+   **So neither a code span nor a fenced block disarms a keyword, and both read as though they do.** `#2482` is the sharper specimen precisely because its field was *populated and accurate*: an empty field invites a second look, a correct-looking one closes the question. Its chain was green on all thirteen jobs.
+
+   **Rewording is the only remedy measured to hold.** Break the adjacency: put the number first (`#999999 is not closed by this pull request`), or write the status cell as something other than a bare keyword: then re-read the field *and* re-scan the joined plain text, which is what the push-time scan sees rather than the rendered Markdown. Neither instrument alone covers both paths.
+
+7. **Plumbing in the body, because the merge makes it permanent.** The composition in step 6 has a second consequence that has nothing to do with closing anything: the body's wording becomes a commit message, and `main` is not rewritten. So a body corrected after the merge fixes the page a reader visits and leaves the original text in history forever. Sweep it per [`coordination-plumbing-stays-out-of-artifacts`](coordination-plumbing-stays-out-of-artifacts.md), which owns the sweep, its two-sided control, and the worked example of a correction that did not reach the message. **Publishing is the first chance to catch this, not the last one.**
+
+8. **Account for companion work.** Content, importer, API and sibling-repository changes land in their own repositories, and a pull request that is green alone can still be half of a change. Confirm the companion exists, say what order the two land in and which side breaks if the order is ignored, and say explicitly when there is no companion rather than leaving it unmentioned.
+
+9. **Adversarially review what is actually merging**, see below.
+
+10. **Say what you found, on the pull request.** The answer is "ready" or "not yet, here is what turned up", never a bare yes. That finding is itself a published claim gating a decision, so [`adversarial-review`](adversarial-review.md)'s trigger covers it: most sharply where it reports something checked and clean. **Comment it on the pull request before any merge decision, green or red.** A verdict that exists only in a terminal or a chat window is not a record: the pull request is where the next reader looks, and scrollback is not an artifact.
+
+## What a red verdict does next
+
+On a red (a failing chain, or a finding a review caught on a green one) the gate does the following and **does not flip the pull request to draft**:
+
+1. **Comment the verdict on the pull request** (step 10), naming the failing job and the output. The comment carries the finding.
+2. **Record the validated head SHA** in that comment, so a later reader can tell whether the tip has moved since.
+3. **Dequeue it, and hold: do not re-pick an unmoved head.** Re-running an unchanged tip reproduces the same red and reports it as new work.
+
+**The pull request stays as the author set it.** `ready -> draft` is the author's own signal (it says the author pulled the work back) so a gate emitting it impersonates the author it is reporting to. And the flag is GraphQL-only: `PATCH .../pulls/{n}` ignores `draft` (step 1), so the flip would spend the quota [`github-api-budget`](github-api-budget.md) exists to protect. The verdict comment, naming the commit it validated, is the record that a finding is outstanding; the next push to the head is what asks for a re-gate.
+
+**This repository has no `handed-back` label.** Some repositories mark an outstanding finding with that label, applied by the gate and removed by a workflow on the next push to the head. A repository that adopts the label adopts that removal workflow with it, in the same change: without the workflow nothing removes the label, the author is not to remove it by hand, and the pull request drops out of a queue counted as `open AND not labelled` for good.
+
+## Adversarial review at the merge
+
+[`adversarial-review`](adversarial-review.md) already requires a skeptical pass before a change ships, and that rule owns the frame, the read-only prompting, the forbidden test execution, the lens catalogue and the mutation-testing floor: none of it is repeated here. But that pass ran against **the branch**, and what merges is **the branch combined with everything that landed since**. Those are different artifacts whenever the base has moved, which is most of the time. So the merge-time pass is narrow and specific:
+
+- **Review what is actually merging.** The diff **as it will exist on `main`**, at the head commit, including everything added *after* the build's own review (the part nobody has looked at) and ask what the build-time review could not have seen: an interaction with a since-merged change, a shared job input, a rule or convention added in the interim that the branch now violates. If the base has genuinely not moved and nothing was pushed after the build-time review, say so and this step is discharged by that review.
+- **Distrust the tally, and do not stop at fixing the arithmetic.** Two skeptics per finding is not a vote, it is a coin flip with a tie-break. So use an odd number of skeptics and keep blockers alive on a tie, but that is not sufficient: a unanimous 3-of-3 refutation has been wrong. **When a refuted claim is mechanically checkable: a return value, a regex, a branch: check it yourself rather than accept the verdict, whatever the margin.** Reserve the count-based rules for claims that are genuinely a matter of judgment.
+
+Where orchestration is available (Ultracode, or the user asked for a workflow), that is a `Workflow`; otherwise scale down to the same frame per that rule. Either way the review gates the *merge*, so it runs against the head commit and its findings are triaged before the merge, not after.
+
+## The DRY line
+
+This file owns **the decision to merge**: the order in which its neighbors are applied at the moment of merging, the measurement that explains why the order is the only thing enforcing it, and what the gate does with a red. It does not own the chain, the job list, or the shape of the verdict comment. The *build* gate (TDD, branch, PR, the chain) lives in [`AGENTS.md`](../../AGENTS.md); bringing a branch current is [`sync-pr-branch`](sync-pr-branch.md); the ship-time obligations that outlive a green build (never pushing to `main`, ticking criteria, moving the board card, giving residue a ticket) are [`closing-a-ticket`](closing-a-ticket.md); the skeptical pass itself, and its tooling, are [`adversarial-review`](adversarial-review.md); where you branch is [`worktrees`](worktrees.md); the plumbing sweep is [`coordination-plumbing-stays-out-of-artifacts`](coordination-plumbing-stays-out-of-artifacts.md). The composing behavior steps 6 and 7 rest on is measured in [`github-api-budget`](github-api-budget.md). Don't restate any of them.
+

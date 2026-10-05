@@ -1,0 +1,38 @@
+---
+description: "Finish a ticket where it is visible, not just where it builds."
+alwaysApply: true
+---
+<!--
+  Synced from UAMS-Web/uams-claude-skills: shared/.claude/rules/closing-a-ticket.md
+  Edit it there, not here; the next sync overwrites this copy.
+  Delivered to this repository through the profile(s): core.
+-->
+# Rule — finish a ticket where it is visible, not just where it builds
+
+Work is not done when the code works. It is done when the branch has merged, the acceptance criteria are ticked or their absence is explained, the board card has moved, and whatever the work surfaced but did not do has a ticket of its own. Each of those is a place where a finished change quietly stops being legible to anyone else. None of them affects whether the change is correct, which is why none of them is caught by a gate.
+
+**Why this is a standing order.** The failure is never loud. A change that ships with four criteria left unchecked looks identical to one that met them; the ticket simply sits there implying work remains, or gets closed implying work happened. A card left in `Todo` while its branch merges makes the board a lie, and the board is what planning reads. Residue that never gets a ticket is indistinguishable from residue nobody noticed. None of these break a build, which is exactly why they need a rule.
+
+## How to apply
+
+1. **Never push to `main`.** Branch, open a pull request, and let it merge. This holds for a one-line docs fix as much as a feature, and it holds when you are the only person working. A local commit with no branch is acceptable when nothing is being shipped yet; a push to `main` is not. That `main` may accept one is a consequence of how the repository is configured, not permission. Branch naming and where you branch *from* belong to [`worktrees`](worktrees.mdc); the merge gate belongs to [`pre-merge-check`](pre-merge-check.mdc) and, where the repository has one, the `local-ci` skill.
+
+2. **Tick acceptance criteria as you meet them, not in a sweep at the end.** A criterion ticked while the work is fresh records what actually satisfied it. A sweep at the end records what you remember.
+
+3. **An unmet criterion is named, never silently left.** If something in the list will not be met by this change, say so on the ticket and say why: superseded by a decision, deferred to a follow-up (with its number), or found to be wrong when the work met reality. A ticket that closes with boxes silently unchecked leaves the next reader unable to tell which of the three happened. Where the criterion was wrong, fix the criterion rather than quietly ignoring it. The acceptance criteria are the specification, and a specification that survives contact with the work unchanged is worth suspecting.
+
+4. **Move the board card in step with the branch, and it can only move if it exists.** Where there is no card, create it before moving it. **Boarding is part of filing**, which [`writing-issues`](../../.claude/skills/writing-issues/SKILL.md) owns and states; this step covers only what happens to a card afterwards. The distinction matters because the instruction, read alone, is satisfied **vacuously** by a ticket that was never boarded: there is no card, so no card is ever out of step. Check the ticket is on the board before trusting that this step has been met. The transitions, the `Status` vocabulary and its ids are in [`writing-issues`](../../.claude/skills/writing-issues/SKILL.md); this rule only insists that they happen while the work is happening. A card that moves a week late is a card nobody trusted in between.
+
+5. **Residue gets a ticket, never a mention.** Anything the work surfaced and did not resolve (a defect found in passing, an unspecified detail, a decision that turned out to be needed, a cleanup the diff made obvious) earns a GitHub issue per [`writing-issues`](../../.claude/skills/writing-issues/SKILL.md), linked from wherever it was surfaced. "Worth following up" in a pull-request body is not a ticket; it is a note that will be read once. A finding recorded in a decisions log is a decision, not a ticket; it does not discharge this. The related habits already have homes: an open question a review surfaced belongs to [`adversarial-review`](adversarial-review.mdc), a closed design fork to [`design-decision-forks`](design-decision-forks.mdc), and out-of-scope items to [`writing-pull-requests`](../../.claude/skills/writing-pull-requests/SKILL.md). This rule is the general case behind them.
+
+6. **Close the ticket, or say why it stays open.** A merged pull request with `Closes #N` does this for you, which is the reason that line is mandatory. When work merges without closing its ticket (a slice of a larger deliverable, an epic that outlives its first branch), the ticket says what remains, rather than being left for a reader to infer.
+
+## What this is not
+
+This is not a checklist to perform at the end. Steps 2 through 5 happen *during* the work, and a rule that reads as a closing ritual will be applied as one: from memory. The only genuinely terminal step is the sixth.
+
+Nor is it a merge gate. Whether the change is *correct* is [`adversarial-review`](adversarial-review.mdc), [`pre-merge-check`](pre-merge-check.mdc) and, where the repository has one, the `local-ci` skill; this rule is about whether it is *legible* once it is correct. Merge-time verification of the acceptance criteria, item by item against the diff, is [`pre-merge-check`](pre-merge-check.mdc)'s; steps 2 and 3 here are what happens to the criteria on the ticket while the work is in progress, and neither rule restates the other.
+
+## The DRY line
+
+This file owns the **ship-time obligations** that outlive a green build: never pushing to `main`, the acceptance criteria on the ticket, the board card, and residue. Where you branch and how worktrees are claimed is [`worktrees`](worktrees.mdc); how a branch is validated and merged is [`pre-merge-check`](pre-merge-check.mdc) and, where the repository has one, the `local-ci` skill; whether a substantive diff survives scrutiny is [`adversarial-review`](adversarial-review.mdc); bringing a branch current is [`sync-pr-branch`](sync-pr-branch.mdc); how a ticket, a pull request, or a commit is *written* is [`writing-issues`](../../.claude/skills/writing-issues/SKILL.md), [`writing-pull-requests`](../../.claude/skills/writing-pull-requests/SKILL.md), and [`writing-commits`](../../.claude/skills/writing-commits/SKILL.md); the board's `Status` ids and transition table live in [`writing-issues`](../../.claude/skills/writing-issues/SKILL.md). None of those are restated here.
