@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Template tags: functions the templates call to print markup.
+ */
+
+declare(strict_types=1);
+
+defined('ABSPATH') || exit;
+
+/**
+ * The current post's publication date, as a <time> element.
+ */
+function example_theme_posted_on(): string
+{
+    return sprintf(
+        '<time class="entry-date" datetime="%s">%s</time>',
+        esc_attr((string) get_the_date(DATE_W3C)),
+        esc_html((string) get_the_date())
+    );
+}
+
+// cspell:ignore ABSPATH

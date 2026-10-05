@@ -1,0 +1,183 @@
+# Shared starting PHPStan configuration for WordPress code
+# (UAMS-Web/uams-claude-skills#10): plugins, must-use plugins, themes. Copy to
+# the repository root as `phpstan.neon.dist` and fill in every PLACEHOLDER.
+#
+# Development dependencies:
+#   composer require --dev phpstan/phpstan szepeviktor/phpstan-wordpress "php-stubs/wordpress-stubs:^6.8"
+# Pin wordpress-stubs to 6.x (`^6.8`, as uamswp-migration-api does). A bare
+# `composer require php-stubs/wordpress-stubs` can resolve 7.1, which breaks
+# szepeviktor/phpstan-wordpress. The extension loads the stubs itself; requiring
+# the package pins the WordPress version the stubs describe.
+# szepeviktor/phpstan-wordpress 2.x requires PHPStan 2.x; a repository on
+# PHPStan 1.x upgrades both together.
+#
+# When the plugin or theme uses WP-CLI (`WP_CLI`, `WP_CLI::add_command()`, and
+# friends), also:
+#   composer require --dev php-stubs/wp-cli-stubs
+# and uncomment the `scanFiles` block below. wp-cli-stubs needs wordpress-stubs
+# 6.x as well, so the pin above covers both.
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+    # PHPStan's opt-in preview channel: turns on rules and stricter analysis
+    # that become default in the next major. Ships inside phpstan/phpstan (no
+    # extra Composer dependency), but it is not cost-free against WordPress
+    # stubs: bleedingEdge can break stub conditional return types (for example
+    # `get_sites()`). Keep it while the repository analyzes cleanly; if a stub
+    # return type starts failing only with this include, drop the include or
+    # pin a narrow `ignoreErrors` entry with a comment naming the stub function
+    # (see the code-quality skill).
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    # Optional, when the repository uses Mockery:
+    # - vendor/phpstan/phpstan-mockery/extension.neon
+    # When the tests run on Pest: Pest's own extension, shipped inside
+    # pestphp/pest. It registers Pest's expectation classes as universal object
+    # crates, so chained expectations analyze instead of reporting undefined
+    # properties. Uncomment together with the Pest entries under ignoreErrors.
+    # - vendor/pestphp/pest/extension.neon
+
+parameters:
+    # PLACEHOLDER: the PHP versions the code must parse and run on. `min` is the
+    # LOWEST version the plugin supports (composer.json's `php` constraint and
+    # the plugin header's `Requires PHP`); `max` is the developer's PHP, which
+    # the tools run on. Left out, PHPStan infers a version from composer.json
+    # and does not report constructs that are unavailable at the floor: in
+    # uamswp-migration-api a typed class constant (PHP 8.3+) analyzed clean and
+    # would have been a parse error on the PHP 8.2 it ships to. Integers:
+    # 7.0 = 70000, 7.4 = 70400, 8.2 = 80200, 8.4 = 80400. The range form needs
+    # PHPStan 2.0 or later.
+    phpVersion:
+        min: 80200
+        max: 80400
+
+    # PLACEHOLDER: the highest level the code passes today. Find it by running
+    # from 0 upward (see the code-quality skill), then raise it by one per
+    # change as findings are fixed, until `max`. Lowering it is a deliberate,
+    # argued change, not a quiet edit to get a red run green.
+    level: 0
+
+    # PLACEHOLDER: the directories and files holding first-party PHP, including
+    # the plugin header file at the root. Include tests: test bugs are real
+    # bugs. In a fork of a vendor plugin, only the paths that hold our
+    # modifications.
+    paths:
+        - includes
+        - my-plugin.php
+        - tests
+
+    # Indexed for symbols but not analyzed. `php-stubs/wordpress-stubs` covers
+    # core's runtime surface and stops there: `WP_UnitTestCase`, the factories
+    # and `tests_add_filter()` ship with WordPress' test suite, not with
+    # WordPress. Uncomment when the tests run on wp-phpunit, or the Integration
+    # suite analyzes as a pile of undefined classes.
+    # scanDirectories:
+    #     - vendor/wp-phpunit/wp-phpunit/includes
+
+    # WP-CLI: uncomment after `composer require --dev php-stubs/wp-cli-stubs`.
+    # Paths are relative to this neon file (repository root). wordpress-stubs
+    # is already loaded by szepeviktor/phpstan-wordpress; list only the WP-CLI
+    # stub files here.
+    # scanFiles:
+    #     - vendor/php-stubs/wp-cli-stubs/wp-cli-stubs.php
+    #     - vendor/php-stubs/wp-cli-stubs/wp-cli-commands-stubs.php
+    #     - vendor/php-stubs/wp-cli-stubs/wp-cli-i18n-stubs.php
+    #     - vendor/php-stubs/wp-cli-stubs/wp-cli-tools-stubs.php
+
+    # Constants defined from a function call (`define('MY_PLUGIN_URL',
+    # plugin_dir_url(__FILE__))`, `plugin_dir_path()`, and similar) are often
+    # invisible to PHPStan: it does not evaluate those calls when discovering
+    # constants. Two remedies (pick one per constant):
+    #
+    # 1. A small bootstrap that `define()`s the same names to plain string (or
+    #    path) stand-ins, listed under `bootstrapFiles`. Prefer this when code
+    #    concatenates the constant and needs a known string type.
+    # 2. List the constant under `dynamicConstantNames` when its value varies by
+    #    environment and you only need PHPStan to treat it as defined (and not
+    #    fold a specific value).
+    #
+    # Example (uncomment and rename to the plugin's real constants):
+    # bootstrapFiles:
+    #     - phpstan-bootstrap.php
+    # dynamicConstantNames:
+    #     - MY_PLUGIN_URL
+    #     - MY_PLUGIN_DIR
+
+    # Checkout-scoped cache. PHPStan's default tmpDir is
+    # `sys_get_temp_dir()/phpstan`: machine-global, shared by every checkout and
+    # worktree on the machine. The cache stores ABSOLUTE phar paths, so deleting
+    # the worktree that populated it leaves every stored path dangling, and the
+    # next run in a live checkout dies with internal errors of the form
+    # `"phar://.../vendor/phpstan/phpstan.phar/..." is not a file`, blaming
+    # whichever source file happened to be under analysis. That reads as a real
+    # defect in the diff.
+    #
+    # Neither obvious remedy works: `clear-result-cache` leaves most of the
+    # directory in place, and `rm -rf` races any concurrent session analyzing
+    # in it. A RELATIVE path resolves against this file's directory, so each
+    # checkout gets its own cache and a deleted one takes only its own with it.
+    # There is no `--tmp-dir` CLI flag, so this key is the only lever.
+    # Add `/.phpstan/` to .gitignore.
+    tmpDir: .phpstan
+
+    # WordPress ships a very large global function surface; the stubs cover it,
+    # but core's own docblocks are loose enough that a few dynamic returns
+    # cannot be narrowed. Add ignores here only with a comment naming the core
+    # function responsible, pinned by `identifier` and `path`. Never a blanket
+    # pattern. Unmatched entries fail the run (`reportUnmatchedIgnoredErrors`
+    # defaults to true), so a stale ignore reds rather than rots.
+    #
+    # The template ships with no active entry, so a first run at `level: 0` on
+    # clean code passes. An entry whose error does not occur fails the run as
+    # `ignore.unmatched` unless it says `reportUnmatched: false`, so uncomment
+    # each entry below only when its error appears (the Pest entries: when the
+    # tests run on Pest). The entries already sit in the list, at the list's
+    # indentation, so removing the leading `# ` from an entry's lines is all
+    # an entry needs. With every entry commented out the key is empty, which
+    # PHPStan reads as no entries.
+    ignoreErrors:
+        # The entry most plugins need once the level reaches 4, from
+        # uamswp-migration-api: the PHP version guard in the plugin header.
+        # PHPStan analyzes at the `min` above, so
+        # `version_compare(PHP_VERSION, '8.2', '<')` is always false *to the
+        # analyzer*, but the guard exists precisely for the case the analyzer
+        # cannot model: a site downgraded underneath an already-active plugin,
+        # where the alternative to this branch is a fatal error instead of an
+        # admin notice. PHPStan reports `if.alwaysFalse` from level 4, and only
+        # where the header has such a guard; below that, or without the guard,
+        # this entry is unmatched and fails the run. (The range form of
+        # `phpVersion` keeps it matching; the single-integer form does not.)
+        # -
+        #     identifier: if.alwaysFalse
+        #     path: my-plugin.php
+
+        # When the tests run on Pest (with the extension above), three entries,
+        # each pinned to `tests/`, so the same error anywhere else still fails.
+        # They carry `reportUnmatched: false` because whether they match
+        # depends on the level and on which calls a suite happens to make: the
+        # internal-class entry matches only from level 2, and a suite whose
+        # `Pest.php` never uses `$this` has nothing for the first entry to
+        # match. Measured on the `tests` skill's WordPress plugin template with
+        # PHPStan 2.2 and Pest 3.8, 2026-10-02: without them it fails at
+        # level 0 on the first two.
+        #
+        # `$this` inside a closure passed to `uses()->beforeEach()` /
+        # `afterEach()` is bound by Pest at runtime, which PHPStan cannot see.
+        # -
+        #     identifier: variable.undefined
+        #     message: '#^Undefined variable: \$this$#'
+        #     path: tests/Pest.php
+        #     reportUnmatched: false
+        # `$this` inside an `it()` closure analyzes as PHPUnit's TestCase
+        # whatever `uses(...)->in('Integration')` binds, so a WP_UnitTestCase
+        # method such as `go_to()` reads as undefined. Scoped to that suite.
+        # -
+        #     identifier: method.notFound
+        #     message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase::#'
+        #     path: tests/Integration
+        #     reportUnmatched: false
+        # Pest routes its public API through classes it tags @internal;
+        # calling them from a test is Pest's intended use.
+        # -
+        #     identifier: method.internalClass
+        #     message: '#of internal class Pest\\#'
+        #     path: tests
+        #     reportUnmatched: false

@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * Pest configuration.
+ */
+
+declare(strict_types=1);
+
+use Brain\Monkey;
+use ExamplePlugin\Tests\Support\IntegrationTestCase;
+
+require_once __DIR__.'/bootstrap.php';
+
+/*
+ * Unit: Brain Monkey around every test.
+ *
+ * setUp() defines WordPress' hook functions and arms Patchwork; tearDown()
+ * verifies every expectation the test set (a `->once()` that never happened
+ * fails here) and removes every mock, so nothing leaks into the next test.
+ *
+ * The assertion count: Brain Monkey's expectations are Mockery expectations,
+ * which PHPUnit does not count. Without adding them, a test whose only check is
+ * `Functions\expect(...)->once()` reports as risky, and failOnRisky fails it.
+ */
+uses()
+    ->beforeEach(function (): void {
+        Monkey\setUp();
+    })
+    ->afterEach(function (): void {
+        $this->addToAssertionCount(Mockery::getContainer()->mockery_getExpectationCount());
+
+        Monkey\tearDown();
+    })
+    ->in('Unit');
+
+/*
+ * Integration: WordPress' test case, and with it the database transaction that
+ * is rolled back after every test. Bound to the directory, so a test cannot
+ * forget it and leave rows behind.
+ *
+ * Guarded, because this file is also read by the Unit process, where WordPress
+ * never loads and resolving the class would be a fatal error.
+ */
+if (class_exists('WP_UnitTestCase', false)) {
+    uses(IntegrationTestCase::class)->in('Integration');
+}

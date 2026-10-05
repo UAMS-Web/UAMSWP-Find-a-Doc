@@ -1,0 +1,120 @@
+<!--
+  Synced from UAMS-Web/uams-claude-skills: shared/.claude/rules/reading-exit-status.md
+  Edit it there, not here; the next sync overwrites this copy.
+  Delivered to this repository through the profile(s): core.
+-->
+<!-- cspell:ignore mktemp PIPESTATUS pipestatus subshell -->
+# Rule — read the result, not the exit code
+
+A command's success is established by **reading what it reported**, not by reading a number beside it. For a local CI run that means the runner's summary block; for anything else it means knowing which of several statuses `$?` is holding at the moment you read it, because three ordinary shell constructions quietly make it somebody else's.
+
+**Why:** a gate has been reported green on a run where a job FAILED (twice in one session in `uamswp-migration-api`), and the status was real, correct, and about a different command.
+
+## Three ways the number stops being the command's
+
+- **A pipeline.** `$?` is the *last* element's status. `false | tail -1` reports success while `false` failed.
+- **A command substitution to the left of `$?`.** The subshell runs first and overwrites the status before `$?` is expanded.
+- **A command list.** The printed value is true; the **list's** status is the trailing `echo`'s, and a harness reports the list's. This is the one that produced both false greens, because a harness reports the list's status and the true number was two lines above it, on screen, unread.
+
+Any demonstration of these needs a control first (a bare `false; echo $?` printing `1`), or its rows cannot be attributed.
+
+## The boundary is a subshell, and it is positional
+
+Parameter and arithmetic expansion are safe; anything that spawns a subshell is not. **Backticks count**, and so does a substitution nested inside a parameter-expansion default: that one reads as the safe construction and behaves as the unsafe one. Expansion is left to right, so a substitution placed after `$?` does not reach it.
+
+A scan that looks for a leading `$(` on reporting lines misses both backticks and the nested default.
+
+## A pipeline needs the whole array, captured first (and the array is named by the shell)
+
+**The array has a different name in each of the two shells a harness here runs, and the wrong name does not error; it expands to nothing.** Which shell a harness runs is a property of the machine rather than of the repository (`bash` on some machines, `zsh` on others), so establish which one you are in before reading a number out of it:
+
+```bash
+echo "zsh=${ZSH_VERSION:-no} bash=${BASH_VERSION:-no}"
+```
+
+One of the two is a version and the other is `no`; a shell that prints `no` twice is not one this file has measured. On the machine these blocks were measured on it prints `zsh=5.9 bash=no`, so the `zsh` rows below are the harness shell itself and the `bash` rows are `bash 3.2.57` invoked explicitly.
+
+**Under `bash`, the array is `PIPESTATUS`, zero-indexed.** Run under `bash 3.2.57`:
+
+```bash
+false | true; rc=$?; ps=${PIPESTATUS[0]};  echo "capture rc first  rc=$rc ps=$ps"
+false | true; ps=${PIPESTATUS[0]}; rc=$?;  echo "capture ps first  rc=$rc ps=$ps"
+false | true; st=("${PIPESTATUS[@]}");     echo "copy the array    all=${st[*]} first=${st[0]}"
+```
+```
+capture rc first  rc=0 ps=0
+capture ps first  rc=0 ps=1
+copy the array    all=1 0 first=1
+```
+
+`$?` and `PIPESTATUS` are both reset by the next command (in `bash` an assignment counts as one), so capturing one destroys the other. Row two looks like the fix and is worse than row one: `ps` is right, and `rc` is now the status of the **assignment**, a zero that reads as a captured value and never was the pipeline's. **Copy the array in the first statement** and derive everything from the copy; `set -o pipefail` is ergonomics, not protection, since it folds the status into `$?` and inherits every hazard above.
+
+**Under `zsh`, the array is `pipestatus`, lower case, and it is ONE-indexed.** The same three rows, with only the name and the index changed, run under `zsh 5.9`:
+
+```bash
+false | true; rc=$?; ps=${pipestatus[1]};  echo "capture rc first  rc=$rc ps=$ps"
+false | true; ps=${pipestatus[1]}; rc=$?;  echo "capture ps first  rc=$rc ps=$ps"
+false | true; st=("${pipestatus[@]}");     echo "copy the array    all=${st[*]} first=${st[1]}"
+```
+```
+capture rc first  rc=0 ps=1
+capture ps first  rc=0 ps=1
+copy the array    all=1 0 first=1
+```
+
+Row one comes out right here, and that is a difference between the shells rather than a reason to prefer the form: in `zsh` an assignment leaves `pipestatus` alone, while a builtin or an external command repopulates it. The copy-first form is correct under both, and it is the one to write.
+
+**The index is a second trap, after the name.** A `zsh` array's element `0` is empty, so `${pipestatus[0]}` or `${st[0]}` translated straight from the `bash` form expands to nothing, the same nothing the wrong name produces, reached one step later.
+
+**In the wrong shell, the right-looking form expands to an empty string, and that is the whole hazard.** The `bash` block run under `zsh`, and the `zsh` block run under `bash`, each print every row with nothing after `ps=` (no error, no message, a line one character shorter than the documented one).
+
+**An empty string is not a status, and the guards that would ordinarily read one treat it as zero.** Measured under `zsh 5.9` with `ps` empty:
+
+```
+echo "exit=$ps"                    exit=              reads as nothing to report
+[ "$ps" -eq 0 ]                    rc=0, silent       a PASS
+if [ "$ps" -ne 0 ]; then FAIL      else branch        a PASS
+(( ps == 0 ))                      true               a PASS, and under bash too
+[ "${ps:-0}" = 0 ]                 true               the default manufactures the PASS
+[ "$ps" = 0 ]                      rc=1               the one that fails safe, and only by accident
+```
+
+`bash` refuses `[ "" -eq 0 ]` with `integer expression expected` and exit `2`; `zsh` returns `0` and says nothing. Under `set -u` both shells refuse the wrong name loudly (`parameter not set`, `unbound variable`), but nothing in `uamswp-migration-api`, where this was measured, sets it, and the harness measured there does not (`u` is absent from its `$-`). So this is not a real number belonging to a different command, but no number at all, in a place where a reader checks the value rather than its length.
+
+**For a durable record, depend on neither name.** The form that needs no array is a redirection with nothing after it (`cmd > out.log 2>&1`), so `$?` is the command's own. Where a pipeline is genuinely needed and the block must run as printed for whoever reads it next, run it under a named shell rather than the ambient one: `bash -c '…'` pins the shell.
+
+## A worked example in a durable record is run, not written
+
+Issue and pull-request bodies here carry commands, and [`pre-merge-check`](pre-merge-check.md) requires a written finding before every merge. Two properties:
+
+1. **Runnable as printed.** Verify by executing the block, not the commands it was assembled from. Quoting lost in transcription does not error; it prints a different number.
+2. **Side-effect free.** A block leaves no file, no shell option, and no variable behind. An annotation arrow outside quotes is a redirection: `cmd -> 1` creates a file named `1`. An unterminated `set -o pipefail` changes every later pipeline in the reader's shell and leaves nothing to count.
+
+**Check it by executing, in a clean directory, and looking at what appears:**
+
+```bash
+awk '/^[[:space:]]*```(bash|sh)$/{inb=1; next} /^[[:space:]]*```/{inb=0; next} inb{print}' BODY.md > /tmp/blocks
+D=$(mktemp -d); ( cd "$D" && bash /tmp/blocks >/dev/null 2>&1 ); ls -A "$D"
+```
+
+Like the gate invocation above, that block writes a scratch file by design; it is a procedure rather than a demonstration, and the directory it inspects is the one it just made.
+
+**It extracts only fences tagged as shell, and that is the whole correctness of it.** An extraction keyed on the bare fence executes a document's displayed output as though it were commands, and reports a leak on almost anything: a check that cries wolf is read as noise.
+
+**Keep the positive control.** Narrowing what gets executed can trade a false positive for a false negative, and the arm that would catch it is the one that plants a leak on purpose:
+
+```bash
+S=$(mktemp -d); printf '# probe\n\n```bash\necho hi -> leaked.txt\n```\n' > "$S/probe.md"
+awk '/^[[:space:]]*```(bash|sh)$/{inb=1; next} /^[[:space:]]*```/{inb=0; next} inb{print}' "$S/probe.md" > "$S/blocks"
+D=$(mktemp -d); ( cd "$D" && bash "$S/blocks" >/dev/null 2>&1 ); ls -A "$D"
+```
+
+That must print `leaked.txt`. An audit that reports nothing because it extracted nothing is indistinguishable from one that reports nothing because the document is clean. The control writes into directories it creates, never into the working directory, so it cannot be reported as a leak by the check it validates.
+
+**The audit EXECUTES what it extracts. Point it only at the block you are about to publish, never at a tree of documentation.** A `bash`-tagged block is extracted precisely because it *is* a command, and the documentation in these repositories contains commands that install things; a sweep over documentation runs whatever those commands actually do. What prevents it is scope: this audit is for a worked example in a durable record you are about to publish (one block, which you wrote, whose commands you already know). A sweep over documentation is a different activity wearing the same command. If you genuinely need to survey many documents, read the extracted blocks instead of running them; `bash -n` parses without executing, and the extraction itself is the artifact worth eyeballing.
+
+**Do not audit your own output with a pattern.** The probe and the material share an author and encode the same assumption, so a pattern reproduces the blind spot. The shell decides which rows are commands, and that is the only opinion that counts.
+
+## The DRY line
+
+This file owns **reading and reporting a command's status**. Bounding a long run and killing what it leaves behind is [`long-running-commands`](long-running-commands.md). Whether a claim survives scrutiny at all is [`adversarial-review`](adversarial-review.md); what a pull-request body must contain is [`writing-pull-requests`](../skills/writing-pull-requests/SKILL.md). The general form (prove a probe could have returned something other than what it did, before trusting that it did not) is [`an-empty-result-is-not-evidence`](an-empty-result-is-not-evidence.md).

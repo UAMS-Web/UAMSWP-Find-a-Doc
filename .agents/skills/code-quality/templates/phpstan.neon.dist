@@ -1,0 +1,64 @@
+# Shared starting PHPStan configuration for a repository that is neither Laravel
+# nor WordPress (UAMS-Web/uams-claude-skills#10). Laravel and Statamic use
+# phpstan-larastan.neon.dist; WordPress code uses phpstan-wordpress.neon.dist.
+# Copy to the repository root as `phpstan.neon.dist` and fill in every
+# PLACEHOLDER.
+includes:
+    # PHPStan's opt-in preview channel: turns on rules and stricter analysis
+    # that become default in the next major, so the eventual major upgrade
+    # carries no accumulated analysis debt. Ships inside phpstan/phpstan, so it
+    # adds no dependency.
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    # Optional, when the repository uses Mockery:
+    # - vendor/phpstan/phpstan-mockery/extension.neon
+
+parameters:
+    # PLACEHOLDER: the PHP versions the code must parse and run on. `min` is the
+    # LOWEST version the repository supports (composer.json's `php` constraint);
+    # `max` is the developer's PHP, which the tools run on. Left out, PHPStan
+    # infers a version from composer.json and does not report constructs that
+    # are unavailable at the floor: in uamswp-migration-api a typed class
+    # constant (PHP 8.3+) analyzed clean and would have been a parse error on
+    # the PHP 8.2 it ships to. Integers: 7.4 = 70400, 8.0 = 80000, 8.2 = 80200,
+    # 8.4 = 80400. The range form needs PHPStan 2.0 or later.
+    phpVersion:
+        min: 80200
+        max: 80400
+
+    # PLACEHOLDER: the highest level the code passes today. Find it by running
+    # from 0 upward (see the code-quality skill), then raise it by one per
+    # change as findings are fixed, until `max`. Lowering it is a deliberate,
+    # argued change, not a quiet edit to get a red run green.
+    level: 0
+
+    # PLACEHOLDER: the directories and files holding first-party PHP. Include
+    # tests: test bugs (broken mocks, wrong-typed fixtures, assertions calling
+    # methods that no longer exist) are real bugs. In a fork of a vendor plugin,
+    # only the paths that hold our modifications.
+    paths:
+        - src
+        - tests
+
+    # Checkout-scoped cache. PHPStan's default tmpDir is
+    # `sys_get_temp_dir()/phpstan`: machine-global, shared by every checkout and
+    # worktree on the machine. The cache stores ABSOLUTE phar paths, so deleting
+    # the worktree that populated it leaves every stored path dangling, and the
+    # next run in a live checkout dies with internal errors of the form
+    # `"phar://.../vendor/phpstan/phpstan.phar/..." is not a file`, blaming
+    # whichever source file happened to be under analysis. That reads as a real
+    # defect in the diff.
+    #
+    # Neither obvious remedy works: `clear-result-cache` leaves most of the
+    # directory in place, and `rm -rf` races any concurrent session analyzing
+    # in it. A RELATIVE path resolves against this file's directory, so each
+    # checkout gets its own cache and a deleted one takes only its own with it.
+    # There is no `--tmp-dir` CLI flag, so this key is the only lever.
+    # Add `/.phpstan/` to .gitignore.
+    tmpDir: .phpstan
+
+    # Add an entry here only for a finding you have argued against, pinned by
+    # `identifier` and `path` (and `message` when the path has more than one
+    # site), with a comment naming the cause. Never a blanket pattern.
+    # Unmatched entries fail the run (`reportUnmatchedIgnoredErrors` defaults
+    # to true), so a stale ignore reds rather than rots.
+    ignoreErrors: []

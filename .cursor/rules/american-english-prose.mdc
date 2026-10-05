@@ -1,0 +1,45 @@
+---
+description: "American English for prose, and a dictionary entry that overrides it needs a stated reason."
+alwaysApply: true
+---
+<!--
+  Synced from UAMS-Web/uams-claude-skills: shared/.claude/rules/american-english-prose.md
+  Edit it there, not here; the next sync overwrites this copy.
+  Delivered to this repository through the profile(s): core.
+-->
+<!-- cspell:ignore ISCED ISCO oneline -->
+# Rule — American English for prose, and a dictionary entry that overrides it needs a stated reason
+
+First-party prose in this repository is written in **American English**: comments, docblocks, documentation, test names, template copy and field labels, commit messages, issue and pull-request bodies. The arbiter is **Merriam-Webster's first-listed spelling**: `analyze`, `behavior`, `color`, `normalize`, `honored`.
+
+## Why this is a standing order
+
+**Because each addition is individually defensible and the aggregate is not.** A word is added because it is genuinely needed at one site, and thereafter the gate cannot enforce the convention for that word *anywhere*, including in prose nobody has written yet. The cost is paid by a later reader, not by the author. Repeated, it replaces the convention with its opposite: `wordpress-importer`'s dictionary had absorbed ten British spellings before the convention was written down, and `uams-statamic`'s review of four entries (#2318) found two that had been absorbed for reasons that looked like the carve-out and were not.
+
+**And the entry carries no trace of its reasoning.** A long sorted word list makes every line look alike: a proper noun, a package name, a British spelling somebody allowed once, and a genuine misspelling are indistinguishable. Reviewing one means reconstructing why it was added.
+
+## Two categories of legitimate override
+
+A British spelling that stands in a first-party file is not automatically wrong, and neither is a dictionary entry that admits one. Exactly two reasons qualify, and they are narrower than "standardized data". Both need the reason written down:
+
+1. **A name that cannot be reworded**: tool vocabulary a gate itself runs, or a command, a subcommand, a package, an API field, a config key, a place name. Removing or respelling it breaks a *command* or misnames a *thing* rather than changing prose. PHPStan's own subcommand is spelled the British way, and where a repository's gate invokes it by that spelling it appears as the literal argument the `phpstan` job runs; removing the entry would make the `spell` job reject the command the `phpstan` job runs.
+2. **Generated or verbatim-quoted external data**: registry names, standard labels, official body names reproduced exactly (schema.org, the ISO 6523 ICD registry, ILO ISCO-08, UNESCO ISCED-F). Americanizing one corrupts data that must mirror an external vocabulary, breaks anything keyed on the official label, and is reintroduced by the next generator run regardless. **Prefer a path exclusion, and check whether one already exists**, before adding a word.
+
+**The second category is recorded even where it does not currently bite**, deliberately. With only category 1 written down, a future sweep reads a clean prose corpus, finds an entry that guards no prose, and deletes something that only ever guarded data.
+
+## How to apply
+
+1. **Fix it in source; allow-listing is the last resort.** When the spell check flags a word, decide rather than reflexively adding it. A genuine misspelling gets corrected. A British spelling in first-party prose gets changed to the American form. A real misspelling allow-listed once stays wrong forever, and every stale entry weakens the check for everybody. Where a spelling is genuinely ambiguous, check against the gate rather than against habit.
+
+2. **Before adding a word, ask which of the two categories it is.** If it is neither, the word is a British spelling and the prose is what to change.
+
+## What this does not cover
+
+- **Third-party or vendored prose.** The convention governs what this repository writes. A dependency's own spelling is its business, and where its files reach a spell check the answer is a path exclusion, not a dictionary entry.
+- **Quoted external text.** A verbatim quotation keeps its original spelling, exactly as [`impersonal-voice-in-github-artifacts`](impersonal-voice-in-github-artifacts.mdc) keeps a quotation's original pronouns. Prefer scoping the file over admitting the word globally.
+- **Identifiers that are not free text.** A symbol whose spelling is fixed by something outside this repository (a vendor API field, a config key, a CLI subcommand) is a name, not prose, and falls under the first qualifying reason above rather than being a violation to fix.
+
+## The DRY line
+
+This file is the standing statement of **which English this repository writes, and what justifies an exception**. The pull-request-time workflow (when to run the spell check, and reconciling each flagged word before opening) stays in [`writing-pull-requests`](../../.claude/skills/writing-pull-requests/SKILL.md), which points here rather than restating the convention. It composes with [`no-emoji-in-durable-records`](no-emoji-in-durable-records.mdc) and [`impersonal-voice-in-github-artifacts`](impersonal-voice-in-github-artifacts.mdc), which constrain the same prose along different axes; how a rule or skill is worded belongs to the writing skills, and the `cspell` mechanics belong to that tool.
+
