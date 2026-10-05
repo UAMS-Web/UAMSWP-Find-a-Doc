@@ -13,7 +13,7 @@
 		 * you need to put this in a plugin or in your wp-config.php file.
 		 */
 
-		define( 'ACFCDT_JSON_DIR', WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-tables' );
+		define( 'ACFCDT_JSON_DIR', WP_PLUGIN_DIR .'/'. basename(dirname(__FILE__, 2)) . '/assets/json/acf-tables' );
 
 	// Disable storing of meta data values in core meta tables
 
@@ -52,7 +52,7 @@
 
 		// Append the new path
 
-			$paths[] = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-json';
+			$paths[] = WP_PLUGIN_DIR .'/'. basename(dirname(__FILE__, 2)) . '/assets/json/acf-json';
 
 		// Return
 
@@ -84,7 +84,7 @@
 
 				$term = get_term_by('slug', 'uams-mychart', 'portal');
 				$term_id = $term->term_id;
-				$default = array($term_id);
+				$default = [$term_id];
 
 				// Set field to default value
 
@@ -118,9 +118,8 @@
 
 			$term = get_term_by('slug', 'english', 'language');
 			$term_id = $term->term_id;
-			$value = array($term_id);
 
-			return $value;
+			return [$term_id];
 
 		}
 
@@ -146,9 +145,8 @@
 
 			$term = get_term_by('slug', 'central', 'region');
 			$term_id = $term->term_id;
-			$value = array($term_id);
 
-			return $value;
+			return [$term_id];
 
 		}
 
@@ -184,7 +182,7 @@
 
 	add_action( 'acf/save_post', 'update_facetwp_index');
 
-	function update_facetwp_index( $post_id ) {
+	function update_facetwp_index( $post_id ): void {
 
 		if ( function_exists( 'FWP' ) ) {
 
@@ -206,7 +204,7 @@
 
 			add_action('acf/save_post', 'physician_save_post', 5);
 
-			function physician_save_post( $post_id ) {
+			function physician_save_post( $post_id ): void {
 
 				$post_type = get_post_type($post_id);
 
@@ -388,8 +386,8 @@
 
 							// Base arrays
 
-								$region = array();
-								$portal = array();
+								$region = [];
+								$portal = [];
 
 							foreach ( $locations as $location ) {
 
@@ -456,7 +454,7 @@
 
 			add_action('acf/save_post', 'resources_save_post', 6);
 
-			function resources_save_post( $post_id ) {
+			function resources_save_post( $post_id ): void {
 
 				$post_type = get_post_type($post_id);
 
@@ -672,7 +670,7 @@
 
 			add_action('acf/save_post', 'location_save_post', 7);
 
-			function location_save_post( $post_id ) {
+			function location_save_post( $post_id ): void {
 
 				$post_type = get_post_type($post_id);
 
@@ -747,7 +745,7 @@
 					!$street_override
 				) {
 
-					$region = array();
+					$region = [];
 					$region[] = get_field( 'location_region', $location_parent);
 
 					$_POST['acf']['field_location_region'] = $region;
@@ -764,7 +762,7 @@
 
 			add_action('acf/save_post', 'location_save_post_after', 20);
 
-			function location_save_post_after( $post_id ) {
+			function location_save_post_after( $post_id ): void {
 
 				$post_type = get_post_type($post_id);
 
@@ -813,7 +811,7 @@
 
 			 add_action( 'acf/save_post', 'clinical_title_save_post', 5 );
 
-			 function clinical_title_save_post( $post_id ) {
+			 function clinical_title_save_post( $post_id ): void {
 
 				 // Taxonomy slug
 
@@ -969,7 +967,7 @@
 
 		add_action('acf/save_post', 'uamswp_sync_acf_save_post', 5);
 
-		function uamswp_sync_acf_save_post( $post_id ) {
+		function uamswp_sync_acf_save_post( $post_id ): void {
 
 			// Set up the variables
 
@@ -1061,7 +1059,7 @@
 			$field_key, // Required // ACF field key of field with new value
 			$value, // Required // Incoming/new value
 			$post_id // Required // ID of post being updated
-		) {
+		): void {
 
 			// Get previous values.
 
@@ -1083,7 +1081,7 @@
 
 						if ( empty($value2new) ) {
 
-							$value2new = array();
+							$value2new = [];
 
 						}
 
@@ -1127,7 +1125,7 @@
 
 					// find the position of $post_id within $value2old so we can remove it
 
-						$pos = array_search( $post_id, $value2old );
+						$pos = array_search( $post_id, $value2old, true );
 
 					// remove
 
@@ -1149,7 +1147,7 @@
 
 		add_action('acf/save_post', 'custom_excerpt_acf', 50);
 
-		function custom_excerpt_acf() {
+		function custom_excerpt_acf(): void {
 
 			// Bring in variables from outside of the function
 
@@ -1165,19 +1163,19 @@
 
 			// 1. Add post types (key) and corresponding field names (value) to be used to set the excerpt
 
-				$excerpt_field_name = array(
+				$excerpt_field_name = [
 					'provider' => 'physician_short_clinical_bio',
 					'location' => 'location_short_desc',
 					'expertise' => 'post_excerpt',
 					'clinical-resource' => 'clinical_resource_excerpt',
-				);
+				];
 
 			// 2. Add post types (key) and corresponding field names (value) to be used as a fallback to set the excerpt if the initial fields do not have a value
 
-				$excerpt_fallback_field_name = array(
+				$excerpt_fallback_field_name = [
 					'provider' => 'physician_clinical_bio',
 					'location' => 'location_about',
-				);
+				];
 
 			// Set the post excerpt value
 
@@ -1235,10 +1233,10 @@
 
 					// Define an array of elements that make up a post to update or insert.
 
-						$post_array = array(
+						$post_array = [
 							'ID' => $post_id,
 							'post_excerpt' => $post_excerpt
-						);
+						];
 
 					// Unhook this function so it doesn't loop infinitely
 
@@ -1264,16 +1262,16 @@
 
 		// Register "FacetWP Cards" block
 
-			acf_register_block_type(array(
+			acf_register_block_type([
 				'name' => 'uamswp_fad_facetwp_cards',
 				'title' => 'FacetWP Cards',
 				'description' => '',
 				'category' => 'common',
-				'keywords' => array(
+				'keywords' => [
 					0 => 'provider',
 					1 => 'location',
 					2 => 'facetwp',
-				),
+				],
 				'mode' => 'auto',
 				'align' => '',
 				'render_template' => '',
@@ -1282,24 +1280,24 @@
 				'enqueue_script' => '',
 				'enqueue_assets' => '',
 				'icon' => 'id',
-				'supports' => array(
-					'align' => array('full'),
+				'supports' => [
+					'align' => ['full'],
 					'mode' => true,
 					'multiple' => true,
-				),
-			));
+				],
+			]);
 
 		// Register "FacetWP Block" block
 
-			acf_register_block_type(array(
+			acf_register_block_type([
 				'name' => 'uamswp_fad_facetwp_blocks',
 				'title' => 'FacetWP Block',
 				'description' => '',
 				'category' => 'common',
-				'keywords' => array(
+				'keywords' => [
 					0 => 'facetwp',
 					1 => 'shortcode',
-				),
+				],
 				'mode' => 'auto',
 				'align' => '',
 				'render_template' => '',
@@ -1308,12 +1306,12 @@
 				'enqueue_script' => '',
 				'enqueue_assets' => '',
 				'icon' => 'list-view',
-				'supports' => array(
+				'supports' => [
 					'align' => true,
 					'mode' => true,
 					'multiple' => true,
-				),
-			));
+				],
+			]);
 
 	} // endif
 
@@ -1331,7 +1329,7 @@
 			$content = '', // string // Optional // The block inner HTML (empty).
 			$is_preview = false, // bool // Optional // True during AJAX preview.
 			$post_id = 0 // (int|string) // Optional // The post ID this block is saved to.
-		) {
+		): void {
 
 			// Create id attribute allowing for custom "anchor" value.
 
@@ -1394,7 +1392,7 @@
 			$content = '', // string // Optional // The block inner HTML (empty).
 			$is_preview = false, // bool // Optional // True during AJAX preview.
 			$post_id = 0 // (int|string) // Optional // The post ID this block is saved to.
-		) {
+		): void {
 
 			// Create id attribute allowing for custom "anchor" value.
 
@@ -1470,7 +1468,7 @@
 
 		add_action('acf/render_field/name=location_current_alert', 'location_current_alert_message');
 
-		function location_current_alert_message() {
+		function location_current_alert_message(): void {
 
 			$alert_title = get_field('location_alert_heading_system', 'option');
 			$alert_body = get_field('location_alert_body_system', 'option');
@@ -1505,7 +1503,7 @@
 
 			add_action('acf/render_field/name=location_current_prescription_clinic', 'location_current_prescription_clinic_message');
 
-			function location_current_prescription_clinic_message(){
+			function location_current_prescription_clinic_message(): void{
 
 				$prescription_clinic_sys = get_field('location_prescription_clinic_system', 'option');
 
@@ -1529,7 +1527,7 @@
 
 			add_action('acf/render_field/name=location_current_prescription_pharm', 'location_current_prescription_pharm_message');
 
-			function location_current_prescription_pharm_message(){
+			function location_current_prescription_pharm_message(): void{
 
 				$prescription_pharm_sys = get_field('location_prescription_pharm_system', 'option');
 
@@ -1594,7 +1592,7 @@
 
 		add_filter('acf/render_field_settings/type=image', 'acf_image_aspect_ratio_settings', 20);
 
-		function acf_image_aspect_ratio_settings($field) {
+		function acf_image_aspect_ratio_settings($field): void {
 
 			/**
 			 * The technique used for adding multiple fields to a single setting is copied
@@ -1603,7 +1601,7 @@
 			 * type can be used as a setting field for other field types.
 			 */
 
-			$args = array(
+			$args = [
 				'name' => 'ratio_width',
 				'type' => 'number',
 				'label' => __('Aspect Ratio'),
@@ -1612,11 +1610,11 @@
 				'min' => 0,
 				'step' => 1,
 				'prepend' => __('Width'),
-			);
+			];
 
 			acf_render_field_setting($field, $args);
 
-			$args = array(
+			$args = [
 				'name' => 'ratio_height',
 				'type' => 'number',
 				// notice that there's no label when appending a setting
@@ -1626,17 +1624,17 @@
 				'step' => 1,
 				'prepend' => __('Height'),
 				// this how we append a setting to the previous one
-				'wrapper' => array(
+				'wrapper' => [
 					'data-append' => 'ratio_width',
 					'width' => '',
 					'class' => '',
 					'id' => ''
-				)
-			);
+				]
+			];
 
 			acf_render_field_setting($field, $args);
 
-			$args = array(
+			$args = [
 				'name' => 'ratio_margin',
 				'type' => 'number',
 				'label' => '',
@@ -1645,13 +1643,13 @@
 				'step' => .5,
 				'prepend' => __('&plusmn;'),
 				'append' => __('%'),
-				'wrapper' => array(
+				'wrapper' => [
 					'data-append' => 'ratio_width',
 					'width' => '',
 					'class' => '',
 					'id' => ''
-				)
-			);
+				]
+			];
 
 			acf_render_field_setting($field, $args);
 
@@ -1725,7 +1723,7 @@
 
 				}
 
-				$margin = $margin/100; // convert % to decimal
+				$margin /= 100; // convert % to decimal
 				$min = round($allowed_height - ($allowed_height*$margin));
 				$max = round($allowed_height + ($allowed_height*$margin));
 
@@ -1754,7 +1752,7 @@
 
 // Render shortcode(s) in provider editor's Pubmed Information (HTML) field
 
-	function pubmed_information_format_value( $value, $post_id, $field ) {
+	function pubmed_information_format_value( $value, $post_id, $field ): string {
 
 		// Render shortcodes in all textarea values.
 
@@ -1787,7 +1785,7 @@
 
 				// 3. $post argument passed in from the query hook is the $post_id.
 
-					$args['post__not_in'] = array( $post_id );
+					$args['post__not_in'] = [ $post_id ];
 
 				return $args;
 
@@ -1804,10 +1802,6 @@
 		if ( get_field( 'mychart_scheduling_query_system', 'option' ) ) {
 
 			return $field;
-
-		} else {
-
-			return;
 
 		}
 
@@ -1834,10 +1828,10 @@
 			// Get all taxonomy terms
 
 				$brand_organizations = get_terms(
-					array(
+					[
 						'taxonomy' => 'brand_organization_uams',
 						'hide_empty' => false
-					)
+					]
 				);
 
 			// Add each term to the choices array.
@@ -1868,10 +1862,10 @@
 			// Get all taxonomy terms
 
 				$brand_organizations = get_terms(
-					array(
+					[
 						'taxonomy' => 'brand_organization',
 						'hide_empty' => false
-					)
+					]
 				);
 
 			// Add each term to the choices array.
@@ -1948,7 +1942,7 @@
 
 		}
 
-		function uamswp_is_spotlight_submission() {
+		function uamswp_is_spotlight_submission(): bool {
 
 			return 'provider_spotlight' === uamswp_spotlight_current_type();
 
@@ -2165,14 +2159,14 @@
 
 			}
 
-			$rows = array();
+			$rows = [];
 
 			foreach ( uamswp_spotlight_default_questions() as $question ) {
 
-				$rows[] = array(
+				$rows[] = [
 					'field_clinical_resource_spotlight_qa_question' => $question,
 					'field_clinical_resource_spotlight_qa_answer'   => '',
-				);
+				];
 
 			}
 
@@ -2191,16 +2185,18 @@
 		}
 
 	// Normalize a relationship / post_object value to an array of post IDs
-
-		function uamswp_spotlight_to_ids( $value ) {
+        /**
+         * @return int[]
+         */
+        function uamswp_spotlight_to_ids( $value ): array {
 
 			if ( empty($value) ) {
 
-				return array();
+				return [];
 
 			}
 
-			$value = is_array($value) ? $value : array( $value );
+			$value = is_array($value) ? $value : [ $value ];
 
 			return array_values( array_unique( array_filter( array_map('intval', $value) ) ) );
 
@@ -2229,7 +2225,7 @@
 
 		add_action( 'acf/save_post', 'uamswp_spotlight_reconcile_providers', 5 );
 
-		function uamswp_spotlight_reconcile_providers( $post_id ) {
+		function uamswp_spotlight_reconcile_providers( $post_id ): void {
 
 			// Bail early if no data sent or not clinical resource post type
 
@@ -2310,7 +2306,7 @@
 					)
 				) {
 
-					$providers = array_values( array_diff( $providers, array( $old_provider ) ) );
+					$providers = array_values( array_diff( $providers, [ $old_provider ] ) );
 
 				}
 
@@ -2355,7 +2351,7 @@
 
 		add_action( 'acf/save_post', 'uamswp_spotlight_sync_title', 20 );
 
-		function uamswp_spotlight_sync_title( $post_id ) {
+		function uamswp_spotlight_sync_title( $post_id ): void {
 
 			// Only clinical resources that are (still) a spotlight with a
 			// featured provider
@@ -2401,7 +2397,7 @@
 
 			}
 
-			$update = array();
+			$update = [];
 
 			// Title: always track the provider
 
@@ -2436,7 +2432,7 @@
 						}
 
 						// Once published, freeze: the permalink is now live.
-						if ( in_array( $post->post_status, array( 'publish', 'future', 'private' ), true ) ) {
+						if ( in_array( $post->post_status, [ 'publish', 'future', 'private' ], true ) ) {
 
 							update_post_meta( $post_id, '_uamswp_spotlight_slug_locked', '1' );
 
@@ -2446,7 +2442,7 @@
 
 				}
 
-			if ( !$update ) {
+			if ( $update === [] ) {
 
 				return;
 
@@ -2470,7 +2466,7 @@
 	// the provider's headshot. Validation (see above) refuses to save a
 	// spotlight for which all three are missing.
 
-		function uamswp_spotlight_resolve_image( $post_id, $provider_id ) {
+		function uamswp_spotlight_resolve_image( $post_id, $provider_id ): int {
 
 			$override = get_field( 'clinical_resource_spotlight_image_wide', $post_id );
 
@@ -2505,7 +2501,7 @@
 
 		add_action( 'acf/save_post', 'uamswp_spotlight_save', 20 );
 
-		function uamswp_spotlight_save( $post_id ) {
+		function uamswp_spotlight_save( $post_id ): void {
 
 			if (
 				!is_numeric( $post_id )
@@ -2562,7 +2558,7 @@
 	// touch one side and let ACF propagate. Both sides are checked first, so a
 	// half-broken link heals and an already-correct one costs nothing.
 
-		function uamswp_spotlight_assert_link( $post_id, $provider_id ) {
+		function uamswp_spotlight_assert_link( $post_id, $provider_id ): void {
 
 			$providers = uamswp_spotlight_to_ids( get_field( 'clinical_resource_providers', $post_id ) );
 
@@ -2586,13 +2582,13 @@
 
 		}
 
-		function uamswp_spotlight_release_link( $post_id, $provider_id ) {
+		function uamswp_spotlight_release_link( $post_id, $provider_id ): void {
 
 			$providers = uamswp_spotlight_to_ids( get_field( 'clinical_resource_providers', $post_id ) );
 
 			if ( in_array( $provider_id, $providers, true ) ) {
 
-				update_field( 'clinical_resource_providers', array_values( array_diff( $providers, array( $provider_id ) ) ), $post_id );
+				update_field( 'clinical_resource_providers', array_values( array_diff( $providers, [ $provider_id ] ) ), $post_id );
 
 			}
 
@@ -2600,7 +2596,7 @@
 
 			if ( in_array( $post_id, $resources, true ) ) {
 
-				update_field( 'physician_clinical_resources', array_values( array_diff( $resources, array( $post_id ) ) ), $provider_id );
+				update_field( 'physician_clinical_resources', array_values( array_diff( $resources, [ $post_id ] ) ), $provider_id );
 
 			}
 
@@ -2621,7 +2617,7 @@
 
 		add_action( 'acf/save_post', 'uamswp_spotlight_provider_guard', 20 );
 
-		function uamswp_spotlight_provider_guard( $post_id ) {
+		function uamswp_spotlight_provider_guard( $post_id ): void {
 
 			if (
 				!is_numeric( $post_id )
@@ -2655,29 +2651,29 @@
 
 			if ( !$provider_id ) {
 
-				return array();
+				return [];
 
 			}
 
 			return get_posts(
-				array(
+				[
 					'post_type'        => 'clinical-resource',
 					'post_status'      => 'publish',
 					'numberposts'      => -1,
 					'fields'           => 'ids',
 					'suppress_filters' => false,
-					'meta_query'       => array(
+					'meta_query'       => [
 						'relation' => 'AND',
-						array(
+						[
 							'key'   => 'clinical_resource_type',
 							'value' => 'provider_spotlight',
-						),
-						array(
+						],
+						[
 							'key'   => 'clinical_resource_spotlight_provider',
 							'value' => $provider_id,
-						),
-					),
-				)
+						],
+					],
+				]
 			);
 
 		}
@@ -2692,7 +2688,7 @@
 
 		add_action( 'transition_post_status', 'uamswp_spotlight_status_sync', 10, 3 );
 
-		function uamswp_spotlight_status_sync( $new_status, $old_status, $post ) {
+		function uamswp_spotlight_status_sync( $new_status, $old_status, $post ): void {
 
 			if (
 				empty( $post->ID )
@@ -2749,7 +2745,7 @@
 
 		add_action( 'before_delete_post', 'uamswp_spotlight_delete_sync' );
 
-		function uamswp_spotlight_delete_sync( $post_id ) {
+		function uamswp_spotlight_delete_sync( $post_id ): void {
 
 			if (
 				!is_numeric( $post_id )
@@ -2794,14 +2790,14 @@
 
 		// clinical-resource field key => the field name, the provider source
 		// field, and the ontology post's reverse-relationship field key.
-		function uamswp_spotlight_ontology_map() {
+		function uamswp_spotlight_ontology_map(): array {
 
-			return array(
-				'field_clinical_resource_locations'  => array( 'name' => 'clinical_resource_locations',  'provider' => 'physician_locations',      'reverse' => 'field_location_clinical_resources' ),
-				'field_clinical_resource_aoe'        => array( 'name' => 'clinical_resource_aoe',         'provider' => 'physician_expertise',      'reverse' => 'field_expertise_clinical_resources' ),
-				'field_clinical_resource_conditions' => array( 'name' => 'clinical_resource_conditions',  'provider' => 'physician_conditions_cpt', 'reverse' => 'field_condition_clinical_resources' ),
-				'field_clinical_resource_treatments' => array( 'name' => 'clinical_resource_treatments',  'provider' => 'physician_treatments_cpt', 'reverse' => 'field_treatment_procedure_clinical_resources' ),
-			);
+			return [
+				'field_clinical_resource_locations'  => [ 'name' => 'clinical_resource_locations',  'provider' => 'physician_locations',      'reverse' => 'field_location_clinical_resources' ],
+				'field_clinical_resource_aoe'        => [ 'name' => 'clinical_resource_aoe',         'provider' => 'physician_expertise',      'reverse' => 'field_expertise_clinical_resources' ],
+				'field_clinical_resource_conditions' => [ 'name' => 'clinical_resource_conditions',  'provider' => 'physician_conditions_cpt', 'reverse' => 'field_condition_clinical_resources' ],
+				'field_clinical_resource_treatments' => [ 'name' => 'clinical_resource_treatments',  'provider' => 'physician_treatments_cpt', 'reverse' => 'field_treatment_procedure_clinical_resources' ],
+			];
 
 		}
 
@@ -2812,13 +2808,13 @@
 	// uamswp_spotlight_assert_link(): this runs outside a spotlight's own save, so
 	// ACF's save-time bidirectional pass is not available to propagate for us.
 
-		function uamswp_spotlight_sync_ontology( $cr_id, $provider_id ) {
+		function uamswp_spotlight_sync_ontology( $cr_id, $provider_id ): void {
 
 			$cr_id = (int) $cr_id;
 
 			foreach ( uamswp_spotlight_ontology_map() as $spec ) {
 
-				$target  = $provider_id ? uamswp_spotlight_to_ids( get_field( $spec['provider'], $provider_id ) ) : array();
+				$target  = $provider_id ? uamswp_spotlight_to_ids( get_field( $spec['provider'], $provider_id ) ) : [];
 				$current = uamswp_spotlight_to_ids( get_field( $spec['name'], $cr_id ) );
 
 				$added   = array_values( array_diff( $target, $current ) );
@@ -2853,7 +2849,7 @@
 
 					if ( in_array( $cr_id, $list, true ) ) {
 
-						update_field( $spec['reverse'], array_values( array_diff( $list, array( $cr_id ) ) ), $ontology_id );
+						update_field( $spec['reverse'], array_values( array_diff( $list, [ $cr_id ] ) ), $ontology_id );
 
 					}
 
@@ -2873,7 +2869,7 @@
 
 		add_action( 'acf/save_post', 'uamswp_spotlight_reconcile_ontology', 5 );
 
-		function uamswp_spotlight_reconcile_ontology( $post_id ) {
+		function uamswp_spotlight_reconcile_ontology( $post_id ): void {
 
 			if (
 				empty( $_POST['acf'] )
@@ -2919,7 +2915,7 @@
 
 					if ( !array_key_exists( $cr_field, $_POST['acf'] ) ) {
 
-						$_POST['acf'][ $cr_field ] = array();
+						$_POST['acf'][ $cr_field ] = [];
 
 					}
 
@@ -2941,15 +2937,15 @@
 		// Ontology post type => the field on it that lists its providers (the
 		// bidirectional partner of the matching physician_* field). Empty for any
 		// other post type.
-		function uamswp_spotlight_ontology_provider_field( $post_type ) {
+		function uamswp_spotlight_ontology_provider_field( $post_type ): string {
 
-			$fields = array(
+			$fields = [
 				'expertise' => 'field_expertise_physicians',
 				'condition' => 'field_condition_physicians',
 				'treatment' => 'field_treatment_procedure_physicians',
-			);
+			];
 
-			return isset( $fields[ $post_type ] ) ? $fields[ $post_type ] : '';
+			return $fields[ $post_type ] ?? '';
 
 		}
 
@@ -2958,7 +2954,7 @@
 		// absent from the saved value).
 		function uamswp_spotlight_ontology_providers_before( $post_id, $set = null ) {
 
-			static $store = array();
+			static $store = [];
 
 			$post_id = (int) $post_id;
 
@@ -2968,14 +2964,14 @@
 
 			}
 
-			return isset( $store[ $post_id ] ) ? $store[ $post_id ] : array();
+			return $store[ $post_id ] ?? [];
 
 		}
 
 		// Capture the pre-save provider list at priority 5, before ACF overwrites it
 		add_action( 'acf/save_post', 'uamswp_spotlight_capture_ontology_providers', 5 );
 
-		function uamswp_spotlight_capture_ontology_providers( $post_id ) {
+		function uamswp_spotlight_capture_ontology_providers( $post_id ): void {
 
 			if ( !is_numeric( $post_id ) ) {
 
@@ -2997,7 +2993,7 @@
 
 		add_action( 'acf/save_post', 'uamswp_spotlight_ontology_guard', 20 );
 
-		function uamswp_spotlight_ontology_guard( $post_id ) {
+		function uamswp_spotlight_ontology_guard( $post_id ): void {
 
 			if ( !is_numeric( $post_id ) ) {
 
@@ -3075,7 +3071,7 @@
 		}
 
 		$sub_field_key = 'field_location_epic_dep_id_item';
-		$seen          = array();
+		$seen          = [];
 
 		foreach ( $value as $row_index => $row ) {
 

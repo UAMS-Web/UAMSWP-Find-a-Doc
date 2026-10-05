@@ -10,14 +10,15 @@ global $wpdb;
 //$table_name = $wpdb->prefix.'uams_locations';
 if($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}uams_locations'") != "{$wpdb->prefix}uams_locations") {
   add_action( 'init', 'location_create_table' );
-  function location_create_table() {
+  function location_create_table(): void {
 
       global $wpdb;
 
       if ( ! class_exists( 'MB_Custom_Table_API' ) ) {
           return;
       }
-      MB_Custom_Table_API::create( "{$wpdb->prefix}uams_locations", array(
+      
+      MB_Custom_Table_API::create( "{$wpdb->prefix}uams_locations", [
           'location_abbreviation' => 'VARCHAR(25) NOT NULL',
           'location_address_1'   => 'VARCHAR(65) NOT NULL',
           'location_address_2'   => 'VARCHAR(85) NOT NULL',
@@ -52,7 +53,7 @@ if($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}uams_locations'") != "{$wpdb
           'location_directions'   => 'TEXT NOT NULL',
           'location_clinic'  => 'TINYINT(1) NOT NULL',
           'location_facility'  => 'TINYINT(1) NOT NULL',
-      ) );
+      ] );
   }
 }
 
@@ -113,89 +114,90 @@ function uams_locations_register_meta_boxes( $meta_boxes ) {
     if ( ! $post_id ) {
         $post_id = filter_input( INPUT_POST, 'post_ID', FILTER_SANITIZE_NUMBER_INT );
     }
+    
     if ( $post_id ) {
         $location_excerpt = get_post_field( 'post_excerpt', $post_id );
     }
 
-    $meta_boxes[] = array (
+    $meta_boxes[] =  [
       'id' => 'locations',
       'title' => 'Location Information',
-      'post_types' =>   array (
+      'post_types' =>    [
          'locations',
-      ),
+      ],
        'storage_type' => 'custom_table',    // Important
        'table' => "{$wpdb->prefix}uams_locations", // Your custom table name
       'context' => 'after_title',
       'priority' => 'high',
       'autosave' => true,
-      'tabs' =>   array (
-        'tab_address' =>     array (
+      'tabs' =>    [
+        'tab_address' =>      [
           'label' => 'Address',
           'icon' => 'dashicons-location-alt',
-        ),
-        'tab_location_details' =>     array (
+        ],
+        'tab_location_details' =>      [
           'label' => 'Location Details',
           'icon' => 'dashicons-location',
-        ),
-        'tab_location_hours' =>     array (
+        ],
+        'tab_location_hours' =>      [
           'label' => 'Hours of Operation',
           'icon' => 'dashicons-clock',
-        ),
-        'tab_location_medical' =>     array (
+        ],
+        'tab_location_medical' =>      [
           'label' => 'Medical Info',
           'icon' => 'dashicons-heart',
-        ),
-      ),
-      'fields' =>   array (
+        ],
+      ],
+      'fields' =>    [
 
-        array (
+         [
           'id' => 'location_abbreviation',
           'type' => 'text',
           'name' => 'Abbreviation',
           'tab' => 'tab_address',
           'columns'    => 12,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'location_description',
           'type' => 'text',
           'name' => 'Location Description',
           'tab' => 'tab_address',
           'columns'    => 12,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'location_address_1',
           'type' => 'text',
           'name' => 'Address',
           'tab' => 'tab_address',
           'columns'    => 12,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'location_address_2',
           'type' => 'text',
           'name' => 'Address (2)',
           'tab' => 'tab_address',
           'columns'    => 12,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'location_city',
           'type' => 'text',
           'name' => 'City',
           'tab' => 'tab_address',
           'columns'    => 12,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'location_state',
           'name' => 'State',
           'tab' => 'tab_address',
           'type' => 'select',
           'columns'    => 12,
           'placeholder' => 'Select an Item',
-          'options' =>       array (
+          'options' =>        [
             'AL' => 'Alabama',
             'AK' => 'Alaska',
             'AZ' => 'Arizona',
@@ -247,13 +249,13 @@ function uams_locations_register_meta_boxes( $meta_boxes ) {
             'WV' => 'West Virginia',
             'WI' => 'Wisconsin',
             'WY' => 'Wyoming',
-          ),
-          'std' =>       array (
+          ],
+          'std' =>        [
              'AR',
-          ),
-        ),
+          ],
+        ],
 
-        array (
+         [
           'id' => 'location_zip',
           'type' => 'text',
           'name' => 'Zip',
@@ -261,9 +263,9 @@ function uams_locations_register_meta_boxes( $meta_boxes ) {
           'size' => '30',
           'columns'    => 12,
           'tab' => 'tab_address',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'location_map',
           'type' => 'osm',
           'name' => 'Map',
@@ -271,33 +273,33 @@ function uams_locations_register_meta_boxes( $meta_boxes ) {
           'address_field' => 'location_address_1,location_city,location_state,location_zip',
           'columns'    => 12,
           'tab' => 'tab_address',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'location_parking',
           'type' => 'wysiwyg',
           'name' => 'Parking Instructions',
           'tab' => 'tab_address',
           'columns'    => 12,
-          'options' => array(
+          'options' => [
             'textarea_rows' => 3,
             'media_buttons' => false,
             'teeny'         => true,
-          ),
-        ),
+          ],
+        ],
 
-        array (
+         [
           'id' => 'location_direction',
           'type' => 'wysiwyg',
           'name' => 'Directions From Parking Area',
           'tab' => 'tab_address',
           'columns'    => 12,
-          'options' => array(
+          'options' => [
             'textarea_rows' => 3,
             'media_buttons' => false,
             'teeny'         => true,
-          ),
-        ),
+          ],
+        ],
 
 /*
         array (
@@ -308,141 +310,141 @@ function uams_locations_register_meta_boxes( $meta_boxes ) {
         ),
 */
 
-        array (
+         [
           'id' => 'location_short_desc',
           'type' => 'textarea',
           'name' => 'Short Description (excerpt)',
           'label_description' => 'Limit of 30 words. Preferred length is approx 18 words.',
           'columns'    => 12,
           'tab' => 'tab_location_details',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'location_phone',
           'type' => 'text',
           'name' => 'Phone',
           'columns'    => 12,
           'tab' => 'tab_location_details',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'location_fax',
           'type' => 'text',
           'name' => 'Fax',
           'columns'    => 12,
           'tab' => 'tab_location_details',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'location_appointments',
           'type' => 'fieldset_text',
           'name' => 'Additional Phone Numbers',
           'label_description' => 'Example: <br/>New Patients: ###-###-####  ',
           'columns'    => 12,
           'tab' => 'tab_location_details',
-          'options' => array(
+          'options' => [
             'text'  => 'Text',
             'number'  => 'Phone #',
             'after'  => 'Additional Text',
-          ),
+          ],
           'clone'  => true,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'location_email',
           'name' => 'Email',
           'type' => 'email',
           'columns'    => 12,
           'tab' => 'tab_location_details',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'location_web_name',
           'type' => 'text',
           'name' => 'Website Name',
           'columns'    => 12,
           'tab' => 'tab_location_details',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'location_url',
           'type' => 'url',
           'name' => 'URL',
           'columns'    => 12,
           'tab' => 'tab_location_details',
-        ),
+        ],
 
-        array(
+        [
           'type' => 'heading',
           'name' => 'Hours of Operation',
           'desc' => 'Set the time for each day or 24/7. Leave time blank for closed.',
           'columns'    => 12,
           'tab' => 'tab_location_hours',
-        ),
+        ],
 
-        array(
+        [
           'name' => 'Open 24/7',
           'id'   => 'location_24_7',
           'type' => 'switch',
           'std'  => false, // 0 or 1
           'columns'    => 12,
           'tab' => 'tab_location_hours',
-        ),
+        ],
 
-        array(
+        [
           'type' => 'custom_html',
           // HTML content
           'std'  => '&nbsp;',
           'columns' => 3,
           'tab' => 'tab_location_hours',
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'type' => 'custom_html',
           // HTML content
           'std'  => '<h4>Open</h4>',
           'columns' => 3,
           'tab' => 'tab_location_hours',
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'type' => 'custom_html',
           // HTML content
           'std'  => '<h4>Close</h4>',
           'columns' => 6,
           'tab' => 'tab_location_hours',
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'type' => 'custom_html',
           // HTML content
           'std'  => '<h4>Sunday Hours</h4>',
           'columns' => 3,
           'tab' => 'tab_location_hours',
-          'hidden' => array( 'location_24_7', '!=', '' ),
-        ),
+          'hidden' => [ 'location_24_7', '!=', '' ],
+        ],
 
-        array(
+        [
           'name'       => ' ',
           'id'         => 'location_sun_open',
           'type'       => 'time',
           'size'       => 8,
           'columns'    => 3,
           'tab'        => 'tab_location_hours',
-          'js_options' => array(
+          'js_options' => [
               'stepMinute'      => 15,
               'timeFormat'      => 'h:mm tt',
               'showButtonPanel' => true,
               'oneLine'         => true,
-          ),
+          ],
           'inline'     => false,
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'name'       => ' ',
           'id'         => 'location_sun_close',
           'type'       => 'time',
@@ -450,275 +452,275 @@ function uams_locations_register_meta_boxes( $meta_boxes ) {
           'columns'    => 6,
           'tab'        => 'tab_location_hours',
           'class'  => 'inline',
-          'js_options' => array(
+          'js_options' => [
               'stepMinute'      => 15,
               'timeFormat'      => 'h:mm tt',
               'showButtonPanel' => true,
               'oneLine'         => true,
-          ),
+          ],
           'inline'     => false,
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'type' => 'custom_html',
           // HTML content
           'std'  => '<h4>Monday Hours</h4>',
           'columns' => 3,
           'tab' => 'tab_location_hours',
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'name'       => ' ',
           'id'         => 'location_mon_open',
           'type'       => 'time',
           'size'       => 8,
           'columns'    => 3,
           'tab'        => 'tab_location_hours',
-          'js_options' => array(
+          'js_options' => [
             'stepMinute'      => 15,
             'timeFormat'      => 'h:mm tt',
             'showButtonPanel' => true,
             'oneLine'         => true,
-          ),
+          ],
           'inline'     => false,
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'name'       => ' ',
           'id'         => 'location_mon_close',
           'type'       => 'time',
           'size'       => 8,
           'columns'    => 6,
           'tab'        => 'tab_location_hours',
-          'js_options' => array(
+          'js_options' => [
             'stepMinute'      => 15,
             'timeFormat'      => 'h:mm tt',
             'showButtonPanel' => true,
             'oneLine'         => true,
-          ),
+          ],
           'inline'     => false,
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'type' => 'custom_html',
           // HTML content
           'std'  => '<h4>Tuesday Hours</h4>',
           'columns' => 3,
           'tab' => 'tab_location_hours',
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'name'       => ' ',
           'id'         => 'location_tues_open',
           'type'       => 'time',
           'size'       => 8,
           'columns'    => 3,
           'tab'        => 'tab_location_hours',
-          'js_options' => array(
+          'js_options' => [
             'stepMinute'      => 15,
             'timeFormat'      => 'h:mm tt',
             'showButtonPanel' => true,
             'oneLine'         => true,
-          ),
+          ],
           'inline'     => false,
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'name'       => ' ',
           'id'         => 'location_tues_close',
           'type'       => 'time',
           'size'       => 8,
           'columns'    => 6,
           'tab'        => 'tab_location_hours',
-          'js_options' => array(
+          'js_options' => [
             'stepMinute'      => 15,
             'timeFormat'      => 'h:mm tt',
             'showButtonPanel' => true,
             'oneLine'         => true,
-          ),
+          ],
           'inline'     => false,
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'type' => 'custom_html',
           // HTML content
           'std'  => '<h4>Wednesday Hours</h4>',
           'columns' => 3,
           'tab' => 'tab_location_hours',
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'name'       => ' ',
           'id'         => 'location_wed_open',
           'type'       => 'time',
           'size'       => 8,
           'columns'    => 3,
           'tab'        => 'tab_location_hours',
-          'js_options' => array(
+          'js_options' => [
             'stepMinute'      => 15,
             'timeFormat'      => 'h:mm tt',
             'showButtonPanel' => true,
             'oneLine'         => true,
-          ),
+          ],
           'inline'     => false,
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'name'       => ' ',
           'id'         => 'location_wed_close',
           'type'       => 'time',
           'size'       => 8,
           'columns'    => 6,
           'tab'        => 'tab_location_hours',
-          'js_options' => array(
+          'js_options' => [
             'stepMinute'      => 15,
             'timeFormat'      => 'h:mm tt',
             'showButtonPanel' => true,
             'oneLine'         => true,
-          ),
+          ],
           'inline'     => false,
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'type' => 'custom_html',
           // HTML content
           'std'  => '<h4>Thursday Hours</h4>',
           'columns' => 3,
           'tab' => 'tab_location_hours',
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'name'       => ' ',
           'id'         => 'location_thurs_open',
           'type'       => 'time',
           'size'       => 8,
           'columns'    => 3,
           'tab'        => 'tab_location_hours',
-          'js_options' => array(
+          'js_options' => [
             'stepMinute'      => 15,
             'timeFormat'      => 'h:mm tt',
             'showButtonPanel' => true,
             'oneLine'         => true,
-          ),
+          ],
           'inline'     => false,
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'name'       => ' ',
           'id'         => 'location_thurs_close',
           'type'       => 'time',
           'size'       => 8,
           'columns'    => 6,
           'tab'        => 'tab_location_hours',
-          'js_options' => array(
+          'js_options' => [
             'stepMinute'      => 15,
             'timeFormat'      => 'h:mm tt',
             'showButtonPanel' => true,
             'oneLine'         => true,
-          ),
+          ],
           'inline'     => false,
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'type' => 'custom_html',
           // HTML content
           'std'  => '<h4>Friday Hours</h4>',
           'columns' => 3,
           'tab' => 'tab_location_hours',
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'name'       => ' ',
           'id'         => 'location_fri_open',
           'type'       => 'time',
           'size'       => 8,
           'columns'    => 3,
           'tab'        => 'tab_location_hours',
-          'js_options' => array(
+          'js_options' => [
             'stepMinute'      => 15,
             'timeFormat'      => 'h:mm tt',
             'showButtonPanel' => true,
             'oneLine'         => true,
-          ),
+          ],
           'inline'     => false,
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'name'       => ' ',
           'id'         => 'location_fri_close',
           'type'       => 'time',
           'size'       => 8,
           'columns'    => 6,
           'tab'        => 'tab_location_hours',
-          'js_options' => array(
+          'js_options' => [
             'stepMinute'      => 15,
             'timeFormat'      => 'h:mm tt',
             'showButtonPanel' => true,
             'oneLine'         => true,
-          ),
+          ],
           'inline'     => false,
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'type' => 'custom_html',
           // HTML content
           'std'  => '<h4>Saturday Hours</h4>',
           'columns' => 3,
           'tab' => 'tab_location_hours',
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'name'       => ' ',
           'id'         => 'location_sat_open',
           'type'       => 'time',
           'size'       => 8,
           'columns'    => 3,
           'tab'        => 'tab_location_hours',
-          'js_options' => array(
+          'js_options' => [
             'stepMinute'      => 15,
             'timeFormat'      => 'h:mm tt',
             'showButtonPanel' => true,
             'oneLine'         => true,
-          ),
+          ],
           'inline'     => false,
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array(
+        [
           'name'       => ' ',
           'id'         => 'location_sat_close',
           'type'       => 'time',
           'size'       => 8,
           'columns'    => 6,
           'tab'        => 'tab_location_hours',
-          'js_options' => array(
+          'js_options' => [
             'stepMinute'      => 15,
             'timeFormat'      => 'h:mm tt',
             'showButtonPanel' => true,
             'oneLine'         => true,
-          ),
+          ],
           'inline'     => false,
-          'hidden' => array( 'location_24_7', '=', '1' ),
-        ),
+          'hidden' => [ 'location_24_7', '=', '1' ],
+        ],
 
-        array (
+         [
           'id' => 'location_medical_specialties',
           'type' => 'taxonomy',
           'name' => 'Medical Specialties Offered',
@@ -728,11 +730,11 @@ function uams_locations_register_meta_boxes( $meta_boxes ) {
           'placeholder' => 'Select an Item',
           'multiple'    => true,
           'columns'    => 12,
-          'js_options'      => array(
+          'js_options'      => [
             'width' => '100%',
-          ),
-        ),
-        array (
+          ],
+        ],
+         [
           'id' => 'location_medical_terms',
           'type' => 'taxonomy',
           'name' => 'Medical Terms',
@@ -742,52 +744,52 @@ function uams_locations_register_meta_boxes( $meta_boxes ) {
           'placeholder' => 'Select an Item',
           'multiple'    => true,
           'columns'    => 12,
-          'js_options'      => array(
+          'js_options'      => [
             'width' => '100%',
-          ),
-        ),
-        array(
+          ],
+        ],
+        [
           'name' => 'Clinic',
           'id'   => 'location_clinic',
           'type' => 'switch',
           'std'  => 0, // 0 or 1
           'columns'    => 6,
           'tab' => 'tab_location_medical',
-        ),
-        array(
+        ],
+        [
           'name' => 'Facility',
           'id'   => 'location_facility',
           'type' => 'switch',
           'std'  => 0, // 0 or 1
           'columns'    => 6,
           'tab' => 'tab_location_medical',
-        ),
-      ),
-      'validation' => array(
-		    'rules'  => array(
-		        'location_address_1' => array(
+        ],
+      ],
+      'validation' => [
+		    'rules'  => [
+		        'location_address_1' => [
 		            'required'  => true,
-		        ),
-		        'location_city' => array(
+		        ],
+		        'location_city' => [
 		            'required'  => true,
-		        ),
-		        'location_state' => array(
+		        ],
+		        'location_state' => [
 		            'required'  => true,
-		        ),
-		        'location_zip' => array(
+		        ],
+		        'location_zip' => [
 		            'required'  => true,
 		            'zipcodeUS' => true,
 		            'maxlength' => 10,
           			'minlength' => 5,
-		        ),
-		        'location_map' => array(
+		        ],
+		        'location_map' => [
 		            'required'  => true,
-		        ),
-		        'location_phone' => array(
+		        ],
+		        'location_phone' => [
 		            'required'  => true,
 		            'phoneUS' => true,
-		        ),
-		    ),
+		        ],
+		    ],
 		    // Optional override of default error messages
 		    // 'messages' => array(
 		    //     'field_id' => array(
@@ -795,14 +797,14 @@ function uams_locations_register_meta_boxes( $meta_boxes ) {
 		    //         'minlength' => 'Password must be at least 7 characters',
 		    //     ),
 		    // )
-		  ),
-    );
+		  ],
+    ];
 
     return $meta_boxes;
 
 }
 
-add_action('rwmb_locations_after_save_post', function( $post_id )
+add_action('rwmb_locations_after_save_post', function( $post_id ): void
 {
 
   $short_bio = $_POST['location_short_desc'];
@@ -811,9 +813,9 @@ add_action('rwmb_locations_after_save_post', function( $post_id )
   $pid = get_the_ID();
 
   global $wpdb;
-   $wpdb->update($wpdb->prefix."posts", array(
+   $wpdb->update($wpdb->prefix."posts", [
 	   		'post_excerpt' => $short_bio,
-   		),
-   		array( 'id' => $pid )
+   		],
+   		[ 'id' => $pid ]
    	);
 } );

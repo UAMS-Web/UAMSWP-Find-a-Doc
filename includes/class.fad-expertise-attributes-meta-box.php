@@ -4,34 +4,37 @@ class UAMS_Expertise_Attributes_Meta_Box
 {
 
   const ID = 'pageparentdiv';
+  
   const TITLE = 'Area of Expertise Attributes';
+  
   const POSTTYPE = 'expertise';
+  
   const POSITION = 'side';
+  
   const PRIORITY = 'core';
 
-  function __construct()
+  public function __construct()
   {
-    $this->HIDDEN = array( 'No Sidebar' );
-    add_action( 'add_meta_boxes', array( $this, 'replace_meta_box' ) );
-    add_action( 'save_post', array( $this, 'save_postdata' ) );
+    add_action( 'add_meta_boxes', [ $this, 'replace_meta_box' ] );
+    add_action( 'save_post', [ $this, 'save_postdata' ] );
     //add_action( 'admin_head', array( $this, 'custom_style' ) );
 
   }
 
-  function replace_meta_box()
+  public function replace_meta_box(): void
   {
       remove_meta_box( 'pageparentdiv', 'expertise', 'side');
-	    add_meta_box( 'uamsexpertiseparentdiv', 'Area of Expertise Attributes', array( $this, 'expertise_attributes_meta_box' ), 'expertise', 'side', 'core' );
+	    add_meta_box( 'uamsexpertiseparentdiv', 'Area of Expertise Attributes', [ $this, 'expertise_attributes_meta_box' ], 'expertise', 'side', 'core' );
   }
 
-  function expertise_attributes_meta_box( $post )
+  public function expertise_attributes_meta_box( $post ): void
   {
 
     $post_type_object = get_post_type_object( $post->post_type );
 
     if ( $post_type_object->hierarchical )
     {
-      $dropdown_args = array(
+      $dropdown_args = [
         'post_type'        => $post->post_type,
         'exclude_tree'     => $post->ID,
         'selected'         => $post->post_parent,
@@ -39,7 +42,7 @@ class UAMS_Expertise_Attributes_Meta_Box
         'show_option_none' => __('(no parent)'),
         'sort_column'      => 'menu_order, post_title, sidebar, parent',
         'echo'             => 0,
-      );
+      ];
 
           /**
            * Filter the arguments used to generate a Pages drop-down element.
@@ -93,16 +96,16 @@ class UAMS_Expertise_Attributes_Meta_Box
   //     wp_enqueue_style( 'uamswp-fad-admin', UAMS_FAD_PATH . '/admin/css/fad-admin.css' );
   // }
 
-  function save_postdata( $post_ID = 0 ){
+  public function save_postdata( $post_ID = 0 ): int{
     $post_ID = (int) $post_ID;
     $post_type = get_post_type( $post_ID );
-    $post_status = get_post_status( $post_ID );
+    get_post_status( $post_ID );
     if (!isset($post_type) || 'expertise' != $post_type ) {
         return $post_ID;
     }
 
     if ( isset( $_POST['sidebar_name'] ) ) {
-      if ( ! empty( $_POST ) && check_admin_referer( 'sidebar_nonce', 'sidebar_name') ) { //limit to only pages
+      if ( check_admin_referer( 'sidebar_nonce', 'sidebar_name') ) { //limit to only pages
         if ($post_type) {
           if(isset($_POST["sidebarcheck"])) {
             update_post_meta($post_ID, "sidebar", $_POST["sidebarcheck"]);
@@ -114,7 +117,7 @@ class UAMS_Expertise_Attributes_Meta_Box
     }
 
     if ( isset( $_POST['parent_name'] ) ) {
-      if ( ! empty( $_POST ) && check_admin_referer( 'parent_nonce', 'parent_name') ) { //limit to only pages
+      if ( check_admin_referer( 'parent_nonce', 'parent_name') ) { //limit to only pages
         if ($post_type) {
           if(isset($_POST["parentcheck"])) {
             update_post_meta($post_ID, "parent", $_POST["parentcheck"]);

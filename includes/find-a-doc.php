@@ -9,7 +9,7 @@ add_action( 'plugins_loaded', 'UAMS\Find_a_Doc\bootstrap' );
  *
  * @since 1.0.0
  */
-function bootstrap() {
+function bootstrap(): void {
     include_once (__DIR__ . '/class.fad-physicians.php' );
     include_once (__DIR__ . '/class.fad-custom-post.php' );
     include_once (__DIR__ . '/class.fad-helper-functions.php' );

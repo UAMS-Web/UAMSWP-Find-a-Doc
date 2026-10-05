@@ -11,14 +11,15 @@ global $wpdb;
 $table_name = $wpdb->prefix.'uams_physicians';
 if($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}uams_physicians'") != "{$wpdb->prefix}uams_physicians") {
   add_action( 'init', 'physicians_create_table' );
-  function physicians_create_table() {
+  function physicians_create_table(): void {
 
       global $wpdb;
 
       if ( ! class_exists( 'MB_Custom_Table_API' ) ) {
           return;
       }
-      MB_Custom_Table_API::create( "{$wpdb->prefix}uams_physicians", array(
+      
+      MB_Custom_Table_API::create( "{$wpdb->prefix}uams_physicians", [
           'physician_first_name' => 'VARCHAR(50) NOT NULL',
           'physician_middle_name' => 'VARCHAR(50) NOT NULL',
           'physician_last_name' => 'VARCHAR(50) NOT NULL',
@@ -67,7 +68,7 @@ if($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}uams_physicians'") != "{$wpd
           'physician_research_interests' => 'TEXT NOT NULL',
           'physician_awards' => 'LONGTEXT NOT NULL',
           'physician_additional_info' => 'LONGTEXT NOT NULL',
-      ) );
+      ] );
   }
 }
 
@@ -77,12 +78,12 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
 
     global $wpdb;
 
-    $meta_boxes[] = array (
+    $meta_boxes[] =  [
       'id' => 'physicians',
       'title' => 'Physicians',
-      'post_types' =>   array (
+      'post_types' =>    [
          'physicians',
-      ),
+      ],
       'storage_type' => 'custom_table',    // Important
       'table' => "{$wpdb->prefix}uams_physicians", // Your custom table name
       'context' => 'normal',
@@ -90,105 +91,105 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
       'autosave' => true,
       'tab_style' => 'box',
       'tab_wrapper' => true,
-      'tabs' =>   array (
-	        'tab_details' =>     array (
+      'tabs' =>    [
+	        'tab_details' =>      [
 	          'label' => 'Details',
 	          'icon' => 'dashicons-admin-users',
-	        ),
-	        'tab_clin_profile' =>     array (
+	        ],
+	        'tab_clin_profile' =>      [
 	          'label' => 'Clinical Profile',
 	          'icon' => 'dashicons-id-alt',
-	        ),
-	        'tab_clin_details' =>     array (
+	        ],
+	        'tab_clin_details' =>      [
 	          'label' => 'Clinical Details',
 	          'icon' => 'dashicons-forms',
-	        ),
-	        'tab_academic' =>     array (
+	        ],
+	        'tab_academic' =>      [
 	          'label' => 'Academic Profile',
 	          'icon' => 'dashicons-edit',
-	        ),
-	        'tab_edu' =>     array (
+	        ],
+	        'tab_edu' =>      [
 	          'label' => 'Education',
 	          'icon' => 'dashicons-book-alt',
-	        ),
-	        'tab_research' =>     array (
+	        ],
+	        'tab_research' =>      [
 	          'label' => 'Research',
 	          'icon' => 'dashicons-clipboard',
-	        ),
-	        'tab_extra' =>     array (
+	        ],
+	        'tab_extra' =>      [
 	          'label' => 'Extra',
 	          'icon' => 'dashicons-awards',
-	        ),
-      ),
-      'columns' => array( // Simply define the size of the column (from 1 to 12)
+	        ],
+      ],
+      'columns' => [ // Simply define the size of the column (from 1 to 12)
           'column-1' => 6,
           'column-2' => 6,
-      ),
+      ],
 
-      'fields' =>   array (
+      'fields' =>    [
 
-        array (
+         [
           	'id' => 'physician_first_name',
           	'type' => 'text',
           	'name' => 'First Name',
           	'tab' => 'tab_details',
             'columns' => 3,
-        ),
+        ],
 
-        array (
+         [
           	'id' => 'physician_middle_name',
           	'type' => 'text',
           	'name' => 'Middle Name',
           	'tab' => 'tab_details',
             'columns' => 2,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_last_name',
           'type' => 'text',
           'name' => 'Last Name',
           'tab' => 'tab_details',
           'columns' => 3,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_pedigree',
           'type' => 'text',
           'name' => 'Pedigree',
           'tab' => 'tab_details',
           'columns' => 2,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_degree',
           'type' => 'text',
           'name' => 'Degree',
           'tab' => 'tab_details',
           'columns' => 2,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_prefix',
           'type' => 'text',
           'name' => 'Prefix',
           'tab' => 'tab_details',
           'desc' => 'Example: Dr.',
           'columns' => 3,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_gender',
           'name' => 'Gender',
           'type' => 'radio',
           'columns' => 3,
-          'options' => array(
+          'options' => [
             'Male' => 'Male',
             'Female' => 'Female',
-          ),
+          ],
           'inline' => false,
           'tab' => 'tab_details',
-        ),
-		array (
+        ],
+		 [
           'id' => 'physician_regional',
           'type' => 'checkbox',
           'name' => 'Regional Campus',
@@ -196,20 +197,20 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'label_description' => 'Excluded from main campus results',
           'std'  => 0,
           'tab' => 'tab_details',
-          'admin_columns' => array(
+          'admin_columns' => [
             'position' => 'after title',
             'title' => 'Regional',
-          ),
+          ],
           'columns' => 3,
           //'visible' => array( $post_ID, '=', 1 ),
-        ),
-        array(
+        ],
+        [
             'id'   => 'physician_full_name',
             'type' => 'hidden',
             'tab' => 'tab_details',
             // Hidden field must have predefined value
             'std'  => '',
-        ),
+        ],
 
         /* Clinical Profile Tab */
         // array (
@@ -221,7 +222,7 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
         //   'columns' => 12,
         // ),
 
-        array (
+         [
           'id' => 'physician_clinical_title',
           'name' => 'Clinical Job Title',
           'desc' => 'General Title for Patients / Public',
@@ -232,12 +233,12 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'columns' => 6,
           'tab' => 'tab_clin_profile',
           'placeholder' => 'Select Title',
-          'js_options'      => array(
+          'js_options'      => [
             'width' => '100%',
-          ),
-        ),
+          ],
+        ],
 
-        array (
+         [
           'id' => 'physician_department',
           'name' => 'Medical Department',
           //'desc' => 'General Title for Patients / Public',
@@ -249,43 +250,43 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'tab' => 'tab_clin_profile',
           // 'std' => '167', // English
           'placeholder' => 'Select Department',
-          'js_options'      => array(
+          'js_options'      => [
             'width' => '100%',
-          ),
-        ),
+          ],
+        ],
 
-        array (
+         [
           'id' => 'physician_clinical_bio',
           'name' => 'Clinical Bio',
           'type' => 'wysiwyg',
-          'options' => array(
+          'options' => [
               'textarea_rows' => 16,
               'teeny'         => false,
               'media_buttons' => false,
-          ),
+          ],
           'tab' => 'tab_clin_profile',
           'columns' => 12,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_short_clinical_bio',
           'type' => 'textarea',
           'name' => 'Short Bio',
           'tab' => 'tab_clin_profile',
           'label_description' => 'Limit of 30 words. Preferred length is approx 18 words.',
           'columns' => 6,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_youtube_link',
           'type' => 'url',
           'name' => 'Youtube Link',
           'label_description' => 'Full URL, including https://',
           'columns' => 6,
           'tab' => 'tab_clin_profile',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_languages',
           'name' => 'Language(s)',
           'type' => 'taxonomy',
@@ -296,15 +297,15 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'tab' => 'tab_clin_profile',
           'std' => '167', // English
           'placeholder' => 'Select Language(s)',
-          'query_args' => array(
+          'query_args' => [
             'orderby' => 'term_id',
-          ),
-          'js_options'      => array(
+          ],
+          'js_options'      => [
             'width' => '100%',
-          ),
-        ),
+          ],
+        ],
 
-        array (
+         [
           'id' => 'physician_affiliation',
           'name' => 'Affiliation',
           'type' => 'taxonomy',
@@ -313,23 +314,23 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'columns' => 6,
           'multiple'    => true,
           'std' => '532', // UAMS
-          'query_args' => array(
+          'query_args' => [
             'orderby' => 'term_id',
-          ),
+          ],
           'tab' => 'tab_clin_profile',
-        ),
+        ],
 
 
         /* Clinical Details Tab */
-        array (
+         [
           'id' => 'clinical_info',
           'type' => 'heading',
           'name' => 'Clinical Info',
           'tab' => 'tab_clin_details',
           'columns' => 12,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_appointment_link',
           'type' => 'url',
           'size' => 45,
@@ -337,9 +338,9 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'name' => 'Appointment Link',
           'tab' => 'tab_clin_details',
           'column' => 'column-1',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_patient_types',
           'type' => 'taxonomy',
           'name' => 'Patient Types',
@@ -348,9 +349,9 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'multiple'    => true,
           'tab' => 'tab_clin_details',
           'column' => 'column-1',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_searchable',
           'name' => 'Searchable',
           'type' => 'checkbox',
@@ -358,45 +359,45 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'std'  => 1,
           'tab' => 'tab_clin_details',
           'column' => 'column-1',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_primary_care',
           // 'name' => 'Primary Care',
           'type' => 'checkbox',
           'desc' => 'Primary Care Physician?',
           'tab' => 'tab_clin_details',
           'column' => 'column-2',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_referral_required',
           // 'name' => 'Referral Required',
           'type' => 'checkbox',
           'desc' => 'Referral required for new patients',
           'tab' => 'tab_clin_details',
           'column' => 'column-2',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_accepting_patients',
           // 'name' => 'Accepting New Patients',
           'type' => 'checkbox',
           'desc' => 'Currently accepting new patients',
           'tab' => 'tab_clin_details',
           'column' => 'column-2',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_second_opinion',
           // 'name' => 'Provides Second Opinion',
           'type' => 'checkbox',
           'desc' => 'Provides second opinion',
           'tab' => 'tab_clin_details',
           'column' => 'column-2',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'medical_specialties',
           'type' => 'taxonomy',
           'name' => 'Medical Specialties',
@@ -404,14 +405,14 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'field_type' => 'select_advanced',
           'placeholder' => 'Select an Item',
           'multiple'    => true,
-          'js_options'      => array(
+          'js_options'      => [
             'width' => '100%',
-          ),
+          ],
           'columns' => 12,
           'tab' => 'tab_clin_details',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_conditions',
           'type' => 'taxonomy',
           'name' => 'Conditions Treated',
@@ -419,12 +420,12 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'field_type' => 'select_advanced',
           'placeholder' => 'Select an Item',
           'multiple'    => true,
-          'js_options'      => array(
+          'js_options'      => [
             'width' => '100%',
-          ),
+          ],
           'columns' => 12,
           'tab' => 'tab_clin_details',
-        ),
+        ],
 
         // array (
         //   'id' => 'medical_procedures',
@@ -442,7 +443,7 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
         //   'tab' => 'tab_clin_details',
         // ),
 
-        array (
+         [
           'id' => 'medical_terms',
           'type' => 'taxonomy',
           'name' => 'Medical Terms (Tags)',
@@ -450,50 +451,50 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'field_type' => 'select_advanced',
           'placeholder' => 'Select an Item',
           'multiple'    => true,
-          'js_options'      => array(
+          'js_options'      => [
             'width' => '100%',
-          ),
+          ],
           'columns' => 12,
           'tab' => 'tab_clin_details',
 
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_pid',
           'type' => 'text',
           'name' => 'PID',
           'columns' => 6,
           'tab' => 'tab_clin_details',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_npi',
           'type' => 'text',
           'name' => 'NPI',
           'columns' => 6,
           'tab' => 'tab_clin_details',
-        ),
+        ],
 
         /* Academic Profile Tab */
-        array (
+         [
           'id' => 'profile_info',
           'type' => 'heading',
           'desc' => 'This information is designed for department and public websites.',
           'name' => 'Profile Information',
           'tab' => 'tab_academic',
           'columns' => 12,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_academic_title',
           'type' => 'text',
           'name' => 'Academic Title',
           'size' => 45,
           'tab' => 'tab_academic',
           'columns' => 12,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_academic_college',
           'type' => 'taxonomy',
           'name' => 'College Affiliation',
@@ -502,9 +503,9 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'multiple'    => true,
           'columns' => 6,
           'tab' => 'tab_academic',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_academic_position',
           'type' => 'taxonomy',
           'name' => 'Position',
@@ -514,29 +515,29 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'columns' => 6,
           //'placeholder' => 'Select an Item',
           'tab' => 'tab_academic',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_academic_bio',
           'name' => 'Academic Bio',
           'type' => 'wysiwyg',
           'columns' => 12,
-          'options' => array(
+          'options' => [
               'textarea_rows' => 16,
               //'teeny'         => false,
               'media_buttons' => false,
-          ),
+          ],
           'tab' => 'tab_academic',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_academic_short_bio',
           'type' => 'textarea',
           'name' => 'Short Academic Bio',
           'label_description' => 'Limit of 30 words. Preferred length is approx 18 words.',
           'tab' => 'tab_academic',
           'columns' => 12,
-        ),
+        ],
 
         // array(
         //     'type' => 'heading',
@@ -546,21 +547,21 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
         //     'columns' => 12,
         // ),
 
-        array (
+         [
           'id' => 'physician_academic_office',
           'type' => 'text',
           'name' => 'Office Location',
           'tab' => 'tab_academic',
           'columns' => 6,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_academic_map',
           'name' => 'Building / Map',
           'type' => 'select',
           'columns' => 6,
           'placeholder' => 'Select an Item',
-          'options' => array(
+          'options' => [
             '127' => '12th St. Clinic',
             '116' => 'Administration West (ADMINW)',
             '117' => 'Barton Research (BART)',
@@ -601,11 +602,11 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
             '153' => 'Westmark (WESTM)',
             '154' => 'Winston K. Shorey Building (SHOR)',
             '155' => 'Winthrop P. Rockefeller Cancer Institute (WPRCI)',
-          ),
+          ],
           'tab' => 'tab_academic',
-        ),
+        ],
 
-        array(
+        [
           'id'     => 'physician_contact_information',
           'group_title' => 'Contact Infomation',
           'type'   => 'group',
@@ -613,33 +614,33 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
 	      	'clone'  => true,
 	      	'sort_clone' => true,
           'collapsible' => true,
-	      	'fields' => array(
-	            array(
+	      	'fields' => [
+	            [
 	                'name' => 'Type',
 	                'id'   => 'office_contact_type',
 	                'type' => 'select',
                   'columns' => 6,
                   'placeholder' => 'Select an Item',
-	                'options' => array(
+	                'options' => [
 	                	  'phone' => 'Phone',
           						'fax' => 'Fax',
           						'mobile' => 'Mobile',
           						'email' => 'Email',
           						'sms' => 'Text/SMS',
-	                ),
-	            ),
-	            array(
+	                ],
+	            ],
+	            [
 	                'name' => 'Value',
 	                'id'   => 'office_contact_value',
 	                'type' => 'text',
                   'columns' => 6,
-	            ),
-        	),
-        ),
+	            ],
+        	],
+        ],
 
 
         /* Education Tab */
-        array(
+        [
           'id'     => 'physician_academic_appointment',
           'group_title' => 'Academic Appointment',
           'type'   => 'group',
@@ -648,15 +649,15 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
 	      	'sort_clone' => true,
           'collapsible' => true,
           'add_button' => 'Add Academic Appointment',
-	      	'fields' => array(
-	            array(
+	      	'fields' => [
+	            [
 	                'name' => 'Academic Title',
 	                'id'   => 'academic_title',
 	                'type' => 'text',
                   'columns' => 6,
                   'size' => 45,
-	            ),
-	            array(
+	            ],
+	            [
                   'id' => 'academic_department',
                   'name' => 'Department',
                   'type' => 'taxonomy',
@@ -664,14 +665,14 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
                   'columns' => 6,
                   'multiple'    => false,
                   //'std' => '532', // UAMS
-                  'query_args' => array(
+                  'query_args' => [
                     'orderby' => 'name',
-                  ),
-	            ),
-        	),
-        ),
+                  ],
+	            ],
+        	],
+        ],
 
-		    array(
+		    [
           	'id'     => 'physician_education',
             'group_title' => 'Education',
           	'type'   => 'group',
@@ -680,8 +681,8 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
 	      	  'clone'  => true,
 	      	  'sort_clone' => true,
             'add_button' => 'Add Education',
-	      	  'fields' => array(
-	            array(
+	      	  'fields' => [
+	            [
 	                'name' => 'Education Type',
                   'id'   => 'physician_education_type',
                   'type' => 'taxonomy_advanced',
@@ -689,47 +690,47 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
 	                'taxonomy' => 'educationtype',
                   'columns' => 4,
                   'multiple'    => false,
-                  'query_args' => array(
+                  'query_args' => [
                     'orderby' => 'name',
-                  ),
-              ),
-	            array(
+                  ],
+              ],
+	            [
 	                'name' => 'School',
 	                'id'   => 'physician_education_school',
                   'type' => 'taxonomy',
                   'taxonomy' => 'schools',
                   'columns' => 4,
                   'multiple'    => false,
-                  'query_args' => array(
+                  'query_args' => [
                     'orderby' => 'name',
-                  ),
-	            ),
-	            array(
+                  ],
+	            ],
+	            [
 	                'name'    => 'Desctiption',
 	                'id'      => 'physician_education_description',
 	                'type'    => 'text',
                   'desc' => 'Description of the Education (if needed)',
                   'columns' => 4,
-	            ),
-        	),
-        ),
+	            ],
+        	],
+        ],
 
-		    array(
+		    [
         	'tab' => 'tab_edu',
           'name' => 'Boards',
           'id'   => 'physician_boards',
           'type' => 'taxonomy',
           'taxonomy' => 'boards',
           'multiple'    => true,
-          'js_options'      => array(
+          'js_options'      => [
             'width' => '95%',
-          ),
-          'query_args' => array(
+          ],
+          'query_args' => [
             'orderby' => 'name',
-          ),
-        ),
+          ],
+        ],
 
-        array (
+         [
           'id' => 'physician_research_profiles_link',
           'type' => 'url',
           'name' => 'Profiles Link',
@@ -737,18 +738,18 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'label_description'  => 'Please include the full URL, including https://',
           'tab' => 'tab_edu',
           'columns' => 5,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_pubmed_author_id',
           'type' => 'text',
           'name' => 'Pubmed Author ID',
           'tab' => 'tab_edu',
           'desc' => 'Used to link to Pubmed complete list. AuthorID is found at the end of a link URL for Author.',
           'columns' => 4,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'pubmed_author_number',
           'name' => 'Number Lastest Articles',
           'type' => 'select',
@@ -756,15 +757,15 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'tab' => 'tab_edu',
           'placeholder' => __( 'Select an option', 'uams-physicians' ),
           'std' => '3',
-          'options' => array(
+          'options' => [
             '1' => '1',
             '3' => '3',
             '5' => '5',
             '10' => '10',
-          ),
-        ),
+          ],
+        ],
 
-        array(
+        [
           'id'     => 'physician_select_publications',
           'group_title' => 'Selected Publications',
           'type'   => 'group',
@@ -773,102 +774,101 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
           'clone'  => true,
           'sort_clone' => true,
           'collapsible' => true,
-          'fields' => array(
-              array(
+          'fields' => [
+              [
                   'name' => 'PubMed ID (PMID)',
                   'id'   => 'publication_pmid',
                   'type' => 'text',
                   'columns' => 3,
-              ),
-              array(
+              ],
+              [
                   'name' => 'Pubmed Information',
                   'id'   => 'publication_pubmed_info',
                   'type' => 'textarea',
                   'columns' => 9,
-              ),
-          ),
-        ),
+              ],
+          ],
+        ],
 
         /* Research Tab */
-        array (
+         [
           'id' => 'physician_research_bio',
           'name' => 'Researcher Bio',
           'type' => 'wysiwyg',
-          'options' => array(
+          'options' => [
               'textarea_rows' => 16,
               'teeny'         => false,
               'media_buttons' => false,
-          ),
+          ],
           'tab' => 'tab_research',
           'columns' => 12,
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_research_interests',
           'type' => 'textarea',
           'name' => 'Research Interests',
           'tab' => 'tab_research',
-        ),
+        ],
 
         /* Extra Tab */
-        array(
+        [
         	'id'     => 'physician_awards',
           'group_title' => 'Award(s)',
         	'type'   => 'group',
-        	'tab' => 'tab_extra',
           'collapsible' => true,
 	      	'clone'  => true,
           'add_button' => 'Add Award',
 	      	'sort_clone' => true,
-	      	'fields' => array(
-	            array(
+	      	'fields' => [
+	            [
 	                'name' => 'Year',
 	                'id'   => 'award_year',
 	                'type' => 'text',
                   'columns' => 6,
-	            ),
-	            array(
+	            ],
+	            [
 	                'name' => 'Award Title',
 	                'id'   => 'award_title',
 	                'type' => 'text',
                   'columns' => 6,
-	            ),
-	            array(
+	            ],
+	            [
 	                'name'    => 'Information',
 	                'id'      => 'award_infor',
 	                'type'    => 'wysiwyg',
                   'columns' => 12,
-                  'options' => array(
+                  'options' => [
                       'textarea_rows' => 6,
                       'teeny'         => true,
                       'media_buttons' => false,
-                  ),
-	            ),
-        	),
+                  ],
+	            ],
+        	],
           'tab' => 'tab_extra',
-        ),
+        ],
 
-        array (
+         [
           'id' => 'physician_additional_info',
           'name' => 'Additional Info',
           'type' => 'wysiwyg',
-          'options' => array(
+          'options' => [
               'textarea_rows' => 16,
               'teeny'         => false,
               'media_buttons' => false,
-          ),
+          ],
           'tab' => 'tab_extra',
-        ),
-      ),
-      'validation' => array(
-		    'rules'  => array(
-		        'physician_first_name' => array(
+        ],
+      ],
+      'validation' => [
+		    'rules'  => [
+		        'physician_first_name' => [
 		            'required'  => true,
-		        ),
-            'physician_last_name' => array(
+		        ],
+            'physician_last_name' => [
                 'required'  => true,
-            ),
-		    ),
+            ],
+		    ],
 		    // Optional override of default error messages
 		    // 'messages' => array(
 		    //     'field_id' => array(
@@ -876,15 +876,15 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
 		    //         'minlength' => 'Password must be at least 7 characters',
 		    //     ),
 		    // )
-		  ),
-    );
+		  ],
+    ];
 
     return $meta_boxes;
 
 }
 
 
-add_action( 'rwmb_enqueue_scripts', function ()
+add_action( 'rwmb_enqueue_scripts', function (): void
 {
   global $pagenow;
   global $post_type;
@@ -893,7 +893,7 @@ add_action( 'rwmb_enqueue_scripts', function ()
   }
 } );
 
-add_action('rwmb_physicians_before_save_post', function( $post_id )
+add_action('rwmb_physicians_before_save_post', function( $post_id ): void
 {
   // Create full name to store in 'physician_full_name' field
   $first_name = $_POST['physician_first_name'];
@@ -915,16 +915,16 @@ add_action('rwmb_physicians_before_save_post', function( $post_id )
   // If the ID doesn't exist, insert a new row with the ID
   if (!$ID) {
      // Insert
-     $wpdb->insert( $table_name, array(
+     $wpdb->insert( $table_name, [
        "ID" => get_the_ID()
-      ),
-      array( '%s' )
+      ],
+      [ '%s' ]
     );
   }
 
 } );
 
-add_action('rwmb_physicians_after_save_post', function( $post_id )
+add_action('rwmb_physicians_after_save_post', function( $post_id ): void
 {
   // Create full name to store in 'physician_full_name_meta' field in postmeta
   $first_name = $_POST['physician_first_name'];
@@ -945,26 +945,27 @@ add_action('rwmb_physicians_after_save_post', function( $post_id )
    // If the ID exists, update the data
    if ($ID) {
      // Update
-     $wpdb->update($table_name, array(
+     $wpdb->update($table_name, [
           'meta_key' => 'physician_full_name_meta',
           'meta_value' => $full_name
-        ),
-        array( 'meta_id' => $ID )
+        ],
+        [ 'meta_id' => $ID ]
      );
    } else {
      // Insert the data
-     $wpdb->insert( $wpdb->postmeta, array(
+     $wpdb->insert( $wpdb->postmeta, [
        "post_id" => get_the_ID(),
        'meta_key' => 'physician_full_name_meta',
        'meta_value' => $full_name
-      ),
-      array( '%d', '%s', '%s' )
+      ],
+      [ '%d', '%s', '%s' ]
     );
    }
+   
    //
-   $wpdb->update($wpdb->prefix."posts", array(
+   $wpdb->update($wpdb->prefix."posts", [
 	   		'post_excerpt' => $short_bio,
-   		),
-   		array( 'id' => $pid )
+   		],
+   		[ 'id' => $pid ]
    	);
 } );

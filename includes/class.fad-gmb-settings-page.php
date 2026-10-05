@@ -4,12 +4,12 @@
  *
  *
  */
-function uamswp_add_gmb_export_page() {
+function uamswp_add_gmb_export_page(): void {
     add_submenu_page( 'fad-settings', 'UAMSWP CSV Export', 'CSV Export', 'manage_options', 'uamswp-gmb-export', 'uamswp_fad_gmb_export_page', 90 );
 }
 add_action( 'admin_menu', 'uamswp_add_gmb_export_page', 105 );
 
-function uamswp_fad_gmb_export_page() {
+function uamswp_fad_gmb_export_page(): void {
     ?>
     <h1><?php echo $GLOBALS['title'] ?></h1>
     <p>These will take a little time to generate, please be patient.</p>
@@ -58,7 +58,7 @@ if ( isset($_GET['action'] ) && $_GET['action'] == 'download_mychart_csv' )  {
 	add_action( 'admin_init', 'mychart_csv_export' );
 }
 
-function doximity_csv_export() {
+function doximity_csv_export(): bool {
     // Check for current user privileges
     if( !current_user_can( 'manage_options' ) ){ return false; }
 
@@ -66,7 +66,7 @@ function doximity_csv_export() {
     if( !is_admin() ){ return false; }
 
     // Nonce Check
-    $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+    $nonce = $_GET['_wpnonce'] ?? '';
     if ( ! wp_verify_nonce( $nonce, 'download_doximity_csv' ) ) {
         die( 'Security check error' );
     }
@@ -74,18 +74,18 @@ function doximity_csv_export() {
     ob_start();
 
     // Custom WP_Query args
-    $args = array(
+    $args = [
         "post_type" => "provider",
         "post_status" => "publish",
         "posts_per_page" => "-1", // Set for all
         "orderby" => "title",
         "order" => "ASC",
-    );
+    ];
 
     $query = new WP_Query( $args );
 
     if ( $query->have_posts() ) :
-        $table_head = array();
+        $table_head = [];
         $table_head[0] = "NPI Number";
         $table_head[1] = "First Name";
         $table_head[2] = "Last Name";
@@ -102,25 +102,25 @@ function doximity_csv_export() {
         $table_head[13] = "Specialty";
         $table_head[14] = "Sub-Specialty";
 
-        $table_body = array();
-        $row = array();
+        $table_body = [];
+        $row = [];
         while( $query->have_posts() ) : $query->the_post();
             $post_id = get_the_ID();
 
             // First, check if provider has desired degree
-            $degree_md = array( // list valid versions of MD
+            $degree_md = [ // list valid versions of MD
                 'M.D.'
-            );
-            $degree_do = array( // list valid versions of DO
+            ];
+            $degree_do = [ // list valid versions of DO
                 'D.O.'
-            );
-            $degree_np = array( // list valid versions of NP
+            ];
+            $degree_np = [ // list valid versions of NP
                 'CNP',
                 'FNP-C'
-            );
-            $degree_pa = array( // list valid versions of PA
+            ];
+            $degree_pa = [ // list valid versions of PA
                 'PA'
-            );
+            ];
             $degrees = get_field('physician_degree',$post_id);
             $degree_valid = '';
             $d = 1;
@@ -162,7 +162,6 @@ function doximity_csv_export() {
             foreach( $locations as $location ) {
                 if ( get_post_status ( $location ) == 'publish' ) {
                     $location_valid = true;
-                    $break;
                 }
             }
             // Create the table
@@ -213,7 +212,7 @@ function doximity_csv_export() {
                             $i++;
                         endforeach;
                     }
-                    $row[5] = $affiliation_list ? $affiliation_list : '';
+                    $row[5] = $affiliation_list ?: '';
 
                 // Office Address 1 field
 
@@ -243,7 +242,7 @@ function doximity_csv_export() {
                                         $primary_appointment_floor_value = $primary_appointment_floor_object['value']; // Get the floor selection value
                                         $primary_appointment_floor_label = $primary_appointment_floor_value != "0" ? $primary_appointment_floor_object['choices'][ $primary_appointment_floor_value ] : ''; // If the floor value is not 0, get the floor selection label
                                     $primary_appointment_suite = get_field('location_suite', $location ); // Get the suite input
-                                    $primary_appointment_address_2_arr = Array(); // Create empty array for constructing Address 2 value
+                                    $primary_appointment_address_2_arr = []; // Create empty array for constructing Address 2 value
                                     if ( $primary_appointment_building && $building_slug != '_none' && isset($building_name) && !empty($building_name) ) {
                                         // If the building input has a value
                                         // and if the chosen building isn't 'None'
@@ -283,19 +282,19 @@ function doximity_csv_export() {
                     $row[7] = $primary_appointment_address_2 ? html_entity_decode($primary_appointment_address_2) : '';
 
                 // Office City field
-                    $row[8] = $primary_appointment_city ? $primary_appointment_city : '';
+                    $row[8] = $primary_appointment_city ?: '';
 
                 // Office State field
-                    $row[9] = $primary_appointment_state ? $primary_appointment_state : '';
+                    $row[9] = $primary_appointment_state ?: '';
 
                 // Office Zip field
-                    $row[10] = $primary_appointment_zip ? $primary_appointment_zip : '';
+                    $row[10] = $primary_appointment_zip ?: '';
 
                 // Phone field
-                    $row[11] = $primary_appointment_phone ? $primary_appointment_phone : '';
+                    $row[11] = $primary_appointment_phone ?: '';
 
                 // Fax field
-                    $row[12] = $primary_appointment_fax ? $primary_appointment_fax : '';
+                    $row[12] = $primary_appointment_fax ?: '';
 
                 // Specialty field
                     // Intentionally left blank
@@ -314,7 +313,7 @@ function doximity_csv_export() {
     $filename = 'Doximity_List_' . time() . '.csv';
     $delimiter=",";
     $fh = @fopen( 'php://output', 'w' );
-    fputs( $fh, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ) );
+    fwrite( $fh, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ) );
     header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
     header( 'Content-Description: File Transfer' );
     header( 'Content-type: text/csv' ); // tells browser to download
@@ -332,7 +331,7 @@ function doximity_csv_export() {
 
 }
 
-function gmb_provider_csv_export() {
+function gmb_provider_csv_export(): bool {
 
     // Check for current user privileges
     if( !current_user_can( 'manage_options' ) ){ return false; }
@@ -341,7 +340,7 @@ function gmb_provider_csv_export() {
     if( !is_admin() ){ return false; }
 
     // Nonce Check
-    $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+    $nonce = $_GET['_wpnonce'] ?? '';
     if ( ! wp_verify_nonce( $nonce, 'download_gmb_provider_csv' ) ) {
         die( 'Security check error' );
     }
@@ -349,20 +348,20 @@ function gmb_provider_csv_export() {
     ob_start();
 
     // Custom WP_Query args
-    $args = array(
+    $args = [
         "post_type" => "provider",
         "post_status" => "publish",
         "posts_per_page" => "-1", // -1 => Set for all
         "orderby" => "title",
         "order" => "ASC",
         // 'paged' => get_query_var( 'paged' ),
-    );
+    ];
 
     global $wp_query;
     $wp_query = new WP_Query( $args );
 
     if ( $wp_query->have_posts() ) :
-        $table_head = array();
+        $table_head = [];
         $table_head[0]    =  'Store code';
         $table_head[1]    =  'Business name';
         $table_head[2]    =  'Address line 1';
@@ -657,7 +656,7 @@ function gmb_provider_csv_export() {
         // $table_head[]   =  'Amenities: In-room kitchens (kitchen_in_room)';
         // $table_head[]   =  'Amenities: Wi-Fi (wi_fi)';
 
-        $table_body = array();
+        $table_body = [];
         while( $wp_query->have_posts() ) : $wp_query->the_post();
             $post_id = get_the_ID();
 
@@ -690,7 +689,6 @@ function gmb_provider_csv_export() {
                 foreach( $locations as $location ) {
                     if ( get_post_status ( $location ) == 'publish' ) {
                         $location_valid = true;
-                        $break;
                     }
                 }
             }
@@ -715,8 +713,8 @@ function gmb_provider_csv_export() {
             $resident = get_field('physician_resident',$post_id);
             $phys_title = get_field('physician_title',$post_id);
             $phys_title_name = get_term( $phys_title, 'clinical_title' )->name;
-            $vowels = array('a','e','i','o','u');
-            if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
+            $vowels = ['a','e','i','o','u'];
+            if (in_array(strtolower($phys_title_name)[0], $vowels, true)) { // Defines a or an, based on whether clinical title starts with vowel
                 $phys_title_indef_article = 'an';
             } else {
                 $phys_title_indef_article = 'a';
@@ -732,7 +730,7 @@ function gmb_provider_csv_export() {
                     $provider_gmb_cat_term = get_term($provider_gmb_cat, "gmb_cat_provider");
                     if ( 2 > $c ){
                         $provider_gmb_cat_primary_name = esc_html( $provider_gmb_cat_term->name );
-                    } elseif ( 2 == $c ) {
+                    } elseif ( 2 === $c ) {
                         $provider_gmb_cat_additional_names = esc_html( $provider_gmb_cat_term->name );
                     } elseif ( 11 > $c ) {
                         $provider_gmb_cat_additional_names .= ', ' . esc_html( $provider_gmb_cat_term->name );
@@ -743,7 +741,7 @@ function gmb_provider_csv_export() {
 
             // Create the table
             if ( $locations && $location_valid && !$resident && !$provider_gmb_exclude ) {
-                $row = array();
+                $row = [];
 
                 // Create row for each valid location
                 foreach( $locations as $location ) {
@@ -838,12 +836,13 @@ function gmb_provider_csv_export() {
 
                                 $location_addresses = [];
                                 if ( $location_building && $building_slug != '_none' ) {
-                                    array_push($location_addresses, $building_name);
+                                    $location_addresses[] = $building_name;
                                 }
                                 if ( !$location_has_parent ) {
-                                    array_push($location_addresses, $location_title);
+                                    $location_addresses[] = $location_title;
                                 } else {
-                                    array_push($location_addresses, $location_parent_title, $location_title);
+                                    $location_addresses[] = $location_parent_title;
+                                    $location_addresses[] = $location_title;
                                 }
 
                                 $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
@@ -907,25 +906,25 @@ function gmb_provider_csv_export() {
                                 // $row[7] = '';
 
                             // Locality
-                                $row[7] = $location_city ? $location_city : '';
+                                $row[7] = $location_city ?: '';
 
                             // Administrative area
-                                $row[8] = $location_state ? $location_state : '';
+                                $row[8] = $location_state ?: '';
 
                             // Country / Region
                                 $row[9] = 'US';
 
                             // Postal code
-                                $row[10] = $location_zip ? $location_zip : '';
+                                $row[10] = $location_zip ?: '';
 
                             // Latitude
-                                $row[11] = $location_latitude ? $location_latitude : '';
+                                $row[11] = $location_latitude ?: '';
 
                             // Longitude
-                                $row[12] = $location_longitude ? $location_longitude : '';
+                                $row[12] = $location_longitude ?: '';
 
                             // Primary phone
-                                $row[13] = $location_phone ? $location_phone : '';
+                                $row[13] = $location_phone ?: '';
 
                             // Additional phones
                             // Intentionally left blank
@@ -984,22 +983,20 @@ function gmb_provider_csv_export() {
                                 $excerpt = '';
                                 $bio = get_field('physician_clinical_bio',$post_id); // Get the clinical bio
                                 $bio = wp_strip_all_tags($bio); // Strip all HTML tags
-                                $bio = str_replace(array("\n", "\r"), ' ', $bio); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
+                                $bio = str_replace(["\n", "\r"], ' ', $bio); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
                                 $bio = mb_strimwidth($bio, 0, 747, '...'); // Truncate the string
                                 $bio_short = get_field('physician_short_clinical_bio',$post_id); // Strip all HTML tags
                                 $bio_short = wp_strip_all_tags($bio_short); // Get the short clinical bio
-                                $bio_short = str_replace(array("\n", "\r"), ' ', $bio_short); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
+                                $bio_short = str_replace(["\n", "\r"], ' ', $bio_short); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
                                 $bio_short = mb_strimwidth($bio_short, 0, 747, '...'); // Truncate the string
 
-                                if (empty($excerpt)){
-                                    if ($bio_short){
-                                        $excerpt = $bio_short;
-                                    } elseif ($bio) {
-                                        $excerpt = $bio;
-                                    } else {
-                                        $fallback_desc = $medium_name . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($location_title ? ' at ' . $location_title : '') .  ' employed by UAMS Health.';
-                                        $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 747, '...');
-                                    }
+                                if ($bio_short){
+                                    $excerpt = $bio_short;
+                                } elseif ($bio) {
+                                    $excerpt = $bio;
+                                } else {
+                                    $fallback_desc = $medium_name . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($location_title ? ' at ' . $location_title : '') .  ' employed by UAMS Health.';
+                                    $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 747, '...');
                                 }
                                 $row[17] = html_entity_decode($excerpt);
 
@@ -1019,13 +1016,6 @@ function gmb_provider_csv_export() {
                                     $provider_gmb_cover_photo = wp_get_attachment_image_url($provider_image_wide, 'large');
                                 }
                                 $row[19] = $provider_gmb_cover_photo ?: '';
-
-                            // Other photos
-                            // Intentionally left blank
-                                // $row[31] = '';
-
-                            // Labels
-                                $service_line = '';
                                 $service_line = get_field('physician_service_line',$post_id);
                                 $service_line_name = $service_line ? get_term( $service_line, 'service_line' )->name : '';
 
@@ -1098,7 +1088,7 @@ function gmb_provider_csv_export() {
     $filename = 'GMB_Providers_' . time() . '.csv';
     $delimiter=",";
     $fh = @fopen( 'php://output', 'w' );
-    fputs( $fh, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ) );
+    fwrite( $fh, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ) );
     header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
     header( 'Content-Description: File Transfer' );
     header( 'Content-type: text/csv' ); // tells browser to download
@@ -1115,7 +1105,7 @@ function gmb_provider_csv_export() {
     exit();
 }
 
-function gmb_location_csv_export() {
+function gmb_location_csv_export(): bool {
     // Check for current user privileges
     if( !current_user_can( 'manage_options' ) ){ return false; }
 
@@ -1123,7 +1113,7 @@ function gmb_location_csv_export() {
     if( !is_admin() ){ return false; }
 
     // Nonce Check
-    $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+    $nonce = $_GET['_wpnonce'] ?? '';
     if ( ! wp_verify_nonce( $nonce, 'download_gmb_location_csv' ) ) {
         die( 'Security check error' );
     }
@@ -1131,18 +1121,18 @@ function gmb_location_csv_export() {
     ob_start();
 
     // Custom WP_Query args
-    $args = array(
+    $args = [
         "post_type" => "location",
         "post_status" => "publish",
         "posts_per_page" => "-1", // Set for all
         "orderby" => "title",
         "order" => "ASC",
-    );
+    ];
 
     $query = new WP_Query( $args );
 
     if ( $query->have_posts() ) :
-        $table_head = array();
+        $table_head = [];
         $table_head[0]    =  'Store code';
         $table_head[1]    =  'Business name';
         $table_head[2]    =  'Address line 1';
@@ -1437,7 +1427,7 @@ function gmb_location_csv_export() {
         // $table_head[]   =  'Amenities: In-room kitchens (kitchen_in_room)';
         // $table_head[]   =  'Amenities: Wi-Fi (wi_fi)';
 
-        $table_body = array();
+        $table_body = [];
         while( $query->have_posts() ) : $query->the_post();
             // Parent Location
             $location_post_id = get_the_ID();
@@ -1499,13 +1489,13 @@ function gmb_location_csv_export() {
 
                 $location_addresses = [];
                 if ( $location_building && $building_slug != '_none' ) {
-                    array_push($location_addresses, $building_name);
+                    $location_addresses[] = $building_name;
                 }
                 if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ) {
-                    array_push($location_addresses, $location_floor_label);
+                    $location_addresses[] = $location_floor_label;
                 }
                 if ( $location_suite && !empty($location_suite) ) {
-                    array_push($location_addresses, $location_suite);
+                    $location_addresses[] = $location_suite;
                 }
                 $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
                 $location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
@@ -1554,7 +1544,7 @@ function gmb_location_csv_export() {
                     $location_gmb_cat_term = get_term($location_gmb_cat, "gmb_cat_location");
                     if ( 2 > $c ){
                         $location_gmb_cat_primary_name = esc_html( $location_gmb_cat_term->name );
-                    } elseif ( 2 == $c ) {
+                    } elseif ( 2 === $c ) {
                         $location_gmb_cat_additional_names = esc_html( $location_gmb_cat_term->name );
                     } elseif ( 11 > $c ) {
                         $location_gmb_cat_additional_names .= ', ' . esc_html( $location_gmb_cat_term->name );
@@ -1625,25 +1615,25 @@ function gmb_location_csv_export() {
                     // $row[7] =  '';
 
                 // Locality
-                    $row[7] =  $location_city ? $location_city : '';
+                    $row[7] =  $location_city ?: '';
 
                 // Administrative area
-                    $row[8] =  $location_state ? $location_state : '';
+                    $row[8] =  $location_state ?: '';
 
                 // Country / Region
                     $row[9] = 'US';
 
                 // Postal code
-                    $row[10] =  $location_zip ? $location_zip : '';
+                    $row[10] =  $location_zip ?: '';
 
                 // Latitude
-                    $row[11] =  $location_latitude ? $location_latitude : '';
+                    $row[11] =  $location_latitude ?: '';
 
                 // Longitude
-                    $row[12] =  $location_longitude ? $location_longitude : '';
+                    $row[12] =  $location_longitude ?: '';
 
                 // Primary phone
-                    $row[13] =  $location_phone ? $location_phone : '';
+                    $row[13] =  $location_phone ?: '';
 
                 // Additional phones
                 // Intentionally left blank
@@ -1702,21 +1692,19 @@ function gmb_location_csv_export() {
                     $excerpt = '';
                     $descr = get_field('location_about',$location_post_id); // Get the description
                     $descr = wp_strip_all_tags($descr); // Strip all HTML tags
-                    $descr = str_replace(array("\n", "\r"), ' ', $descr); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
+                    $descr = str_replace(["\n", "\r"], ' ', $descr); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
                     $descr = mb_strimwidth($descr, 0, 747, '...'); // Truncate the string
                     $descr_short = get_field('location_short_desc',$location_post_id); // Strip all HTML tags
                     $descr_short = wp_strip_all_tags($descr_short); // Get the short description
-                    $descr_short = str_replace(array("\n", "\r"), ' ', $descr_short); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
+                    $descr_short = str_replace(["\n", "\r"], ' ', $descr_short); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
                     $descr_short = mb_strimwidth($descr_short, 0, 747, '...'); // Truncate the string
 
-                    if (empty($excerpt)){
-                        if ($descr_short){
-                            $excerpt = $descr_short;
-                        } elseif ($descr) {
-                            $excerpt = $descr;
-                        } else {
-                            $excerpt = '';
-                        }
+                    if ($descr_short){
+                        $excerpt = $descr_short;
+                    } elseif ($descr) {
+                        $excerpt = $descr;
+                    } else {
+                        $excerpt = '';
                     }
                     $row[17] =  html_entity_decode($excerpt);
 
@@ -1756,7 +1744,7 @@ function gmb_location_csv_export() {
                         $photo_gallery = get_field('location_photo_gallery',$location_post_id);
                     }
 
-                    $location_images = array(); // Create empty array for location images
+                    $location_images = []; // Create empty array for location images
                     if ($featured_image && !empty($featured_image)) {
                         // If featured image exists...
                         $location_images[] = $featured_image; // add it to the array for location images
@@ -1777,7 +1765,7 @@ function gmb_location_csv_export() {
                         $p = 1;
                         $location_gmb_other_photos = '';
                         foreach( $location_images as $location_images_item ) {
-                            if ( $p == 1 ) {
+                            if ( $p === 1 ) {
                                 if ( function_exists( 'bis_get_attachment_image' ) ) {
                                     $location_gmb_cover_photo = image_sizer($location_images_item, 2120, 1192, 'center', 'center', 'aspect-16-9'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
                                 } else {
@@ -1801,7 +1789,7 @@ function gmb_location_csv_export() {
 
                 // Labels
                     $region = get_term( get_field('location_region',$location_source_ids['street']), 'region' )->name;
-                    $row[21] =  $region ? $region : '';
+                    $row[21] =  $region ?: '';
 
                 // AdWords location extensions phone
                 // Intentionally left blank
@@ -1867,7 +1855,7 @@ function gmb_location_csv_export() {
     $filename = 'GMB_Locations_' . time() . '.csv';
     $delimiter=",";
     $fh = @fopen( 'php://output', 'w' );
-    fputs( $fh, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ) );
+    fwrite( $fh, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ) );
     header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
     header( 'Content-Description: File Transfer' );
     header( 'Content-type: text/csv' ); // tells browser to download
@@ -1884,7 +1872,7 @@ function gmb_location_csv_export() {
 
 }
 
-function mychart_csv_export() {
+function mychart_csv_export(): bool {
     // Check for current user privileges
     if( !current_user_can( 'manage_options' ) ){ return false; }
 
@@ -1892,7 +1880,7 @@ function mychart_csv_export() {
     if( !is_admin() ){ return false; }
 
     // Nonce Check
-    $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+    $nonce = $_GET['_wpnonce'] ?? '';
     if ( ! wp_verify_nonce( $nonce, 'download_mychart_csv' ) ) {
         die( 'Security check error' );
     }
@@ -1900,25 +1888,25 @@ function mychart_csv_export() {
     ob_start();
 
     // Custom WP_Query args
-    $args = array(
+    $args = [
         "post_type" => "provider",
         "post_status" => "publish",
         "posts_per_page" => "-1", // Set for all
         "orderby" => "title",
         "order" => "ASC",
-    );
+    ];
 
     $query = new WP_Query( $args );
 
     if ( $query->have_posts() ) :
-        $table_head = array();
+        $table_head = [];
         $table_head[0] = 'SER ID';
         $table_head[1] = 'Provider Name';
         $table_head[2] = 'Provider Profile URL';
         $table_head[3] = 'Provider Photo URL';
 
-        $table_body = array();
-        $row = array();
+        $table_body = [];
+        $row = [];
         while( $query->have_posts() ) : $query->the_post();
             $post_id = get_the_ID();
 
@@ -1969,7 +1957,7 @@ function mychart_csv_export() {
     $filename = 'MyChart_List_' . time() . '.csv';
     $delimiter=",";
     $fh = @fopen( 'php://output', 'w' );
-    fputs( $fh, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ) );
+    fwrite( $fh, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ) );
     header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
     header( 'Content-Description: File Transfer' );
     header( 'Content-type: text/csv' ); // tells browser to download

@@ -1,6 +1,6 @@
 <?php 
 session_start();
-defined('ABSPATH') or die("You can't access this file directly.");
+defined('ABSPATH') || die("You can't access this file directly.");
 
 if(isset($_REQUEST['variable']) && isset($_REQUEST['value'])) {
     $variable = htmlspecialchars($_REQUEST['variable']);

@@ -2,17 +2,17 @@
 
 // AP Style for Dates
 if ( !function_exists('apStyleDate') ) {
-	function apStyleDate($date){
+	function apStyleDate($date): string{
 
 		$date = strftime("%l:%M %p", strtotime($date));
 	
 		$date = str_replace(":00", "", $date);
-		$date = str_replace("m", ".m.", $date);
 	
-		return $date;
+		return str_replace("m", ".m.", $date);
 	
 	}
 }
+
 /**
  * Format a date as AP style
  * This was modified from https://gist.github.com/tryonegg/d2e07e1d8f4ff8f1219ca639583f97ee
@@ -26,7 +26,7 @@ if ( !function_exists('apStyleDate') ) {
  * @return string
  */
 if ( !function_exists('ap_date') ) {
-  function ap_date( $date, $today = true, $captoday = true, $useyear = true, $useweekdaynames = true ) {
+  function ap_date( $date, $today = true, $captoday = true, $useyear = true, $useweekdaynames = true ): string {
 
     // if(false == isDate($date)){
     //   $date = strtotime($date);
@@ -40,26 +40,26 @@ if ( !function_exists('ap_date') ) {
     }
 
     // Determine the month and set the AP Style abbreviation.
-    if ( date( 'm', $date ) == '01' ) {
+    if ( date( 'm', $date ) === '01' ) {
       $apmonth = 'Jan. ';
-    } elseif ( date( 'm', $date ) == '02' ) {
+    } elseif ( date( 'm', $date ) === '02' ) {
       $apmonth = 'Feb. ';
-    } elseif ( date( 'm', $date ) == '08' ) {
+    } elseif ( date( 'm', $date ) === '08' ) {
       $apmonth = 'Aug. ';
-    } elseif ( date( 'm', $date ) == '09' ) {
+    } elseif ( date( 'm', $date ) === '09' ) {
       $apmonth = 'Sept. ';
-    } elseif ( date( 'm', $date ) == '10' ) {
+    } elseif ( date( 'm', $date ) === '10' ) {
       $apmonth = 'Oct. ';
-    } elseif ( date( 'm', $date ) == '11' ) {
+    } elseif ( date( 'm', $date ) === '11' ) {
       $apmonth = 'Nov. ';
-    } elseif ( date( 'm', $date ) == '12' ) {
+    } elseif ( date( 'm', $date ) === '12' ) {
       $apmonth = 'Dec. ';
     } else {
       $apmonth = ( date( 'F', $date ) );
     }
 
     // Determine whether the date is within the current year and set it.
-    if ( date( 'Y', $date ) != date( 'Y' ) ) {
+    if ( date( 'Y', $date ) !== date( 'Y' ) ) {
         $apyear = ', ' . date( 'Y', $date );
     } else {
       if ( true == $useyear ) {
@@ -70,7 +70,7 @@ if ( !function_exists('ap_date') ) {
     }
 
     // Determine whether the date is the current date and set the final output.
-    if ( true == $today && date( 'F j Y', $date ) == date( 'F j Y' ) ) {
+    if ( true == $today && date( 'F j Y', $date ) === date( 'F j Y' ) ) {
       if ( true == $captoday ) {
         $apdate = 'Today';
       } else {
@@ -94,27 +94,27 @@ if ( !function_exists('ap_date') ) {
  * @return string
  */
 if ( !function_exists('ap_time') ) {
-	function ap_time($time, $capnoon = true){
+	function ap_time($time, $capnoon = true): string{
 
       // if(false == isDate($time)){
       //   $time = strtotime($time);
       // }
 
 		// Format am and pm to AP Style abbreviations.
-    if ( date( 'a', $time ) == 'am' ) {
+    if ( date( 'a', $time ) === 'am' ) {
       $meridian = 'a.m.';
-    } elseif ( date( 'a', $time ) == 'pm' ) {
+    } elseif ( date( 'a', $time ) === 'pm' ) {
       $meridian = 'p.m.';
     }
 
     // Reformat 12:00 and 00:00 to noon and midnight.
-    if ( date( 'H:i', $time ) == '00:00' ) {
+    if ( date( 'H:i', $time ) === '00:00' ) {
       if ( true == $capnoon ) {
         $aptime = 'Midnight';
       } else {
         $aptime = 'midnight';
       }
-    } elseif ( date( 'H:i', $time ) == '12:00' ) {
+    } elseif ( date( 'H:i', $time ) === '12:00' ) {
       if ( true == $capnoon ) {
         $aptime = 'Noon';
       } else {
@@ -122,7 +122,7 @@ if ( !function_exists('ap_time') ) {
       }
 
       // Eliminate trailing zeroes from times at the top of the hour and set final output.
-    } elseif ( date( 'i', $time ) == '00' ) {
+    } elseif ( date( 'i', $time ) === '00' ) {
       $aptime = date( 'g', $time ) . ' ' . $meridian;
     } else {
       $aptime = date( 'g:i', $time ) . ' ' . $meridian;
@@ -142,15 +142,15 @@ if ( !function_exists('ap_time') ) {
  * @return string
  */
 if ( !function_exists('ap_time_span') ) {
-  function ap_time_span( $start, $end ) {
+  function ap_time_span( $start, $end ): string {
 
-    if ( date( 'a', $start ) == date( 'a', $end ) ) {
+    if ( date( 'a', $start ) === date( 'a', $end ) ) {
       $starttime = str_replace( 'p.m.', '', ap_time( $start ) );
       $starttime = str_replace( 'a.m.', '', $starttime );
       return trim( $starttime ) . ' &ndash; ' . ap_time( $end );
-    } else {
-      return ap_time( $start ) . ' &ndash; ' . ap_time( $end );
     }
+
+    return ap_time( $start ) . ' &ndash; ' . ap_time( $end );
   }
 }
 
@@ -158,37 +158,37 @@ if ( !function_exists('isDate') ) {
   function isDate($value) {
     if (!$value) {
         return false;
-    } else {
-        $date = date_parse($value);
-        if($date['error_count'] == 0 && $date['warning_count'] == 0){
-            return checkdate($date['month'], $date['day'], $date['year']);
-        } else {
-            return false;
-        }
     }
+
+    $date = date_parse($value);
+    if($date['error_count'] == 0 && $date['warning_count'] == 0){
+        return checkdate($date['month'], $date['day'], $date['year']);
+    }
+
+    return false;
   }
 }
 
 if ( !function_exists('apStyleTime') ) {
-	function apStyleTime($time, $capnoon = true){
+	function apStyleTime($time, $capnoon = true): string{
 
     $time = strtotime($time);
 
 		// Format am and pm to AP Style abbreviations.
-    if ( date( 'a', $time ) == 'am' ) {
+    if ( date( 'a', $time ) === 'am' ) {
       $meridian = 'a.m.';
-    } elseif ( date( 'a', $time ) == 'pm' ) {
+    } elseif ( date( 'a', $time ) === 'pm' ) {
       $meridian = 'p.m.';
     }
 
     // Reformat 12:00 and 00:00 to noon and midnight.
-    if ( date( 'H:i', $time ) == '00:00' ) {
+    if ( date( 'H:i', $time ) === '00:00' ) {
       if ( true == $capnoon ) {
         $aptime = 'Midnight';
       } else {
         $aptime = 'midnight';
       }
-    } elseif ( date( 'H:i', $time ) == '12:00' ) {
+    } elseif ( date( 'H:i', $time ) === '12:00' ) {
       if ( true == $capnoon ) {
         $aptime = 'Noon';
       } else {
@@ -196,7 +196,7 @@ if ( !function_exists('apStyleTime') ) {
       }
 
       // Eliminate trailing zeroes from times at the top of the hour and set final output.
-    } elseif ( date( 'i', $time ) == '00' ) {
+    } elseif ( date( 'i', $time ) === '00' ) {
       $aptime = date( 'g', $time ) . ' ' . $meridian;
     } else {
       $aptime = date( 'g:i', $time ) . ' ' . $meridian;
@@ -209,17 +209,21 @@ if ( !function_exists('apStyleTime') ) {
 
 // Partition / Split Col function
 if ( !function_exists('partition') ) {
-    function partition( $list, $p ) {
+    /**
+     * @return mixed[][]
+     */
+    function partition( $list, $p ): array {
         $listlen = count( $list );
         $partlen = floor( $listlen / $p );
         $partrem = $listlen % $p;
-        $partition = array();
+        $partition = [];
         $mark = 0;
         for ($px = 0; $px < $p; $px++) {
             $incr = ($px < $partrem) ? $partlen + 1 : $partlen;
             $partition[$px] = array_slice( $list, $mark, $incr );
             $mark += $incr;
         }
+        
         return $partition;
     }
 }
@@ -234,10 +238,8 @@ if ( !function_exists('partition') ) {
  * @return string HTML markup for anchor link and optional separator.
  */
 // function uamswp_get_breadcrumb_link( $url, $content, $sep = '' ) {
-
 //   $itemprop_item = genesis_html5() ? ' itemprop="item"' : '';
 //   $itemprop_name = genesis_html5() ? ' itemprop="name"' : '';
-
 //   $link = sprintf(
 //     '<a href="%s"%s><span%s>%s</span></a>',
 //     esc_attr( $url ),
@@ -245,22 +247,17 @@ if ( !function_exists('partition') ) {
 //     $itemprop_name,
 //     $content
 //   );
-
 //   if ( genesis_html5() ) {
 //     $link = sprintf(
 //       '<span %s>',
 //       genesis_attr( 'breadcrumb-link-wrap' )
 //     ) . $link . '</span>';
 //   }
-
 //   if ( $sep ) {
 //     $link .= $sep;
 //   }
-
 //   return $link;
-
 // }
-
 /**
  * Filter the Genesis CPT breadcrumb.
  *
@@ -271,22 +268,17 @@ if ( !function_exists('partition') ) {
  */
 // function uamswp_cpt_breadcrumb( $crumb, $args ) {
 //     global $wp_query;
-  
 //     if ( !is_singular( 'expertise' ) ) {
 //       return $crumb;
 //     }
-  
 //     $post = $wp_query->get_queried_object();
-
 //     $crumb = $crumb = '<a href="'. get_post_type_archive_link( 'expertise' ) .'">'. get_post_type_object( 'expertise' )->labels->name .'</a>' . $args['sep'];
-  
 //     // If this is a top level Page, it's simple to output the breadcrumb.
 //     if ( ! $post->post_parent ) {
 //       $crumb .= get_the_title();
 //     } else {
 //       // Get the IDs of all parents and ancestors in an array.
 //       $ancestors = get_post_ancestors( $post->ID );
-  
 //       // Add ancestor breacrumb links to $crumbs array
 //       // get_breadcrumb_link() https://gist.github.com/natenault/af861546ab8a3468d12a09e89437ed54
 //       $crumbs = array();
@@ -296,24 +288,19 @@ if ( !function_exists('partition') ) {
 //           uamswp_get_breadcrumb_link( get_permalink( $ancestor ), get_the_title( $ancestor ) )
 //         );
 //       }
-  
 //       // Add the current page title.
 //       $crumbs[] = get_the_title( $post->ID );
-        
 //       $crumb .= implode( $args['sep'], $crumbs );
 //     }
-  
 //     return $crumb;
 //   }
-  // add_filter( 'genesis_cpt_crumb', 'uamswp_cpt_breadcrumb', 10, 2 );
-
-  /**
+// add_filter( 'genesis_cpt_crumb', 'uamswp_cpt_breadcrumb', 10, 2 );
+/**
  * Pass in a taxonomy value that is supported by WP's `get_taxonomy`
  * and you will get back the url to the archive view.
  * @param $taxonomy string|int
- * @return string
  */
-function get_taxonomy_archive_link( $taxonomy ) {
+function get_taxonomy_archive_link( $taxonomy ): string {
   $tax = get_taxonomy( $taxonomy ) ;
   return '/' . $tax->rewrite['slug'];
 }
@@ -329,9 +316,10 @@ function get_taxonomy_archive_link( $taxonomy ) {
   // add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_fad_taxonomy_breadcrumbs_crumbs');
   function uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs) {
     if ( is_singular( 'condition' ) || is_singular( 'treatment' ) || is_tax( 'condition' ) || is_tax( 'treatment' ) ) {
-      $taxonomy = array(get_taxonomy( get_queried_object()->taxonomy )->labels->name, get_taxonomy_archive_link( get_queried_object()->taxonomy ));
-      array_splice($crumbs, -1, 0, array($taxonomy));
+      $taxonomy = [get_taxonomy( get_queried_object()->taxonomy )->labels->name, get_taxonomy_archive_link( get_queried_object()->taxonomy )];
+      array_splice($crumbs, -1, 0, [$taxonomy]);
     }
+    
     return $crumbs;
   }
 
@@ -348,6 +336,7 @@ function get_taxonomy_archive_link( $taxonomy ) {
         if ($i > 1) {
             $filter_where .= " OR ";
         }
+        
         $filter_where .= "`$field_name` LIKE '%" . $value . "%'";
         $i++;
     }
@@ -417,9 +406,9 @@ if ( !function_exists('uamswp_provider_names') ) {
 	 * @param  int  $provider_id  Provider post ID.
 	 * @return array short, medium, medium_no_prefix, full, short_possessive, sort, sort_param, and _attr variants.
 	 */
-	function uamswp_provider_names( $provider_id ) {
+	function uamswp_provider_names( $provider_id ): array {
 
-		$empty = array(
+		$empty = [
 			'full'                  => '',
 			'full_attr'             => '',
 			'medium'                => '',
@@ -432,7 +421,7 @@ if ( !function_exists('uamswp_provider_names') ) {
 			'short_possessive_attr' => '',
 			'sort'                  => '',
 			'sort_param'            => '',
-		);
+		];
 
 		if ( !$provider_id ) {
 			return $empty;
@@ -466,7 +455,7 @@ if ( !function_exists('uamswp_provider_names') ) {
 
 			$degree_count      = $degrees ? count($degrees) : 0;
 			$degree_list       = '';
-			$degree_attr_array = array();
+			$degree_attr_array = [];
 			$i = 1;
 
 			if ( $degrees ) {
@@ -506,10 +495,10 @@ if ( !function_exists('uamswp_provider_names') ) {
 			// Define list of degrees or credentials needed for the "Dr." prefix
 			// (per UAMS Health clinical administration)
 
-				$prefix_degrees = array(
+				$prefix_degrees = [
 					'M.D.',
 					'D.O.'
-				);
+				];
 
 			$prefix = '';
 
@@ -549,11 +538,11 @@ if ( !function_exists('uamswp_provider_names') ) {
 				if ( substr($short_name, -1) == 's' ) {
 
 					// If the provider's name ends in "s", use an apostrophe with no "s"
-					$short_name_possessive = $short_name . '\'';
+					$short_name_possessive = $short_name . "'";
 
 				} else {
 
-					$short_name_possessive = $short_name . '\'s';
+					$short_name_possessive = $short_name . "'s";
 
 				}
 
@@ -565,7 +554,7 @@ if ( !function_exists('uamswp_provider_names') ) {
 
 				$sort_name_param_value = sanitize_title_with_dashes($sort_name);
 
-		return array(
+		return [
 			'full'                  => $full_name,
 			'full_attr'             => $full_name ? uamswp_attr_conversion($full_name) : '',
 			'medium'                => $medium_name,
@@ -578,7 +567,7 @@ if ( !function_exists('uamswp_provider_names') ) {
 			'short_possessive_attr' => $short_name_possessive ? uamswp_attr_conversion($short_name_possessive) : '',
 			'sort'                  => $sort_name,
 			'sort_param'            => $sort_name_param_value,
-		);
+		];
 
 	}
 
@@ -645,7 +634,7 @@ if ( !function_exists('uamswp_provider_occupation_title') ) {
 
 		}
 
-		return $provider_occupation_title ? $provider_occupation_title : '';
+		return $provider_occupation_title ?: '';
 
 	}
 
@@ -670,37 +659,37 @@ if ( !function_exists('uamswp_provider_pronouns') ) {
 		switch ( $gender ) {
 
 			case 'female':
-				$pronouns = array(
+				$pronouns = [
 					'subject'            => 'she',
 					'object'             => 'her',
 					'possessive'         => 'her',
 					'possessive_pronoun' => 'hers',
 					'reflexive'          => 'herself',
 					'plural'             => false,
-				);
+				];
 				break;
 
 			case 'male':
-				$pronouns = array(
+				$pronouns = [
 					'subject'            => 'he',
 					'object'             => 'him',
 					'possessive'         => 'his',
 					'possessive_pronoun' => 'his',
 					'reflexive'          => 'himself',
 					'plural'             => false,
-				);
+				];
 				break;
 
 			// 'other', and any unexpected or empty value, use the singular they
 			default:
-				$pronouns = array(
+				$pronouns = [
 					'subject'            => 'they',
 					'object'             => 'them',
 					'possessive'         => 'their',
 					'possessive_pronoun' => 'theirs',
 					'reflexive'          => 'themselves',
 					'plural'             => true,
-				);
+				];
 				break;
 
 		}
@@ -869,14 +858,14 @@ if ( !function_exists('uamswp_spotlight_default_questions') ) {
 
 		return apply_filters(
 			'uamswp_spotlight_default_questions',
-			array(
+			[
 				'What inspired you to work in healthcare?',
 				'What is the best part of your job?',
 				'What do you like about working at UAMS?',
 				'Who has had the biggest influence on your life, and why?',
 				'What book, podcast, TV show, or activity are you enjoying right now, and why?',
 				'What is one thing on your bucket list?',
-			)
+			]
 		);
 
 	}
@@ -1054,7 +1043,8 @@ if ( !function_exists('uamswp_indefinite_article') ) {
 		if (
 			in_array(
 				strtolower($phrase)[0],
-				array( 'a', 'e', 'i', 'o', 'u' )
+				[ 'a', 'e', 'i', 'o', 'u' ],
+                true
 			)
 		) {
 
@@ -1079,11 +1069,11 @@ if ( !function_exists('uamswp_indefinite_article') ) {
 
 			$indef_article_exceptions = apply_filters(
 				'uamswp_indefinite_article_exceptions',
-				array(
+				[
 					'SNF'     => 'an',
 					'Urolog'  => 'a',
 					'Uveitis' => 'a'
-				)
+				]
 			);
 
 			if ( !empty($indef_article_exceptions) ) {

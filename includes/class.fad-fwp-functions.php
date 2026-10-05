@@ -3,7 +3,7 @@
  * FacetWP functions
  */
 // Filter to fix facetwp hash error
-add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ) {
+add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ): bool {
     // if ( 'provider' == $query->get( 'post_type' ) ) {
 		$is_main_query = false;
     // }
@@ -16,12 +16,12 @@ add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
         $output = str_replace( 'facetwp-template', 'facetwp-template row list', $output );
 	}
 	 if ( !empty( $atts['template'] ) && ('locations' == $atts['template'] || 'expertise' == $atts['template']) ) {
-        $output = str_replace( 'facetwp-template', 'facetwp-template card-list', $output );
+        return str_replace( 'facetwp-template', 'facetwp-template card-list', $output );
     }
 	return $output;
 }, 10, 2 );
 
-function fwp_disable_auto_refresh() {
+function fwp_disable_auto_refresh(): void {
     if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) || is_post_type_archive( 'clinical-resource' ) ) {
 	?>
 	<script>
@@ -47,8 +47,8 @@ function fwp_disable_auto_refresh() {
 add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
 
 // FacetWP scripts
-function fwp_facet_scripts() {
-    $classes = get_body_class();
+function fwp_facet_scripts(): void {
+    get_body_class();
 
 	if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) || is_post_type_archive( 'clinical-resource' ) ) { ?>
         <script>
@@ -77,7 +77,7 @@ function fwp_facet_scripts() {
 <?php }
 
     if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) ) {
-    $taxonomy_slug = isset(get_queried_object()->slug) ? get_queried_object()->slug : '';
+    $taxonomy_slug = get_queried_object()->slug ?? '';
 ?>
 <script>
 (function($) {
@@ -282,9 +282,9 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
     unset( $options['date_desc'] );
     unset( $options['date_asc'] );
 	if ( is_post_type_archive( 'provider' ) || is_singular( 'provider' ) ) {
-		$params = array(
+		$params = [
 		    'template_name' => 'physicians',
-		);
+		];
         $options = [
             'default' => [
                 'label' => __( 'Sort by', 'fwp' ),
@@ -308,9 +308,9 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
         // unset( $options['date_desc'] );
         // unset( $options['date_asc'] );
 	} elseif ( is_post_type_archive( 'location' ) || is_singular( 'location' ) ) {
-	 	$params = array(
+	 	$params = [
 		    'template_name' => 'locations',
-		);
+		];
         $options = [
             'default' => [
                 'label' => __( 'Sort by', 'fwp' ),
@@ -334,9 +334,9 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
         // unset( $options['date_desc'] );
         // unset( $options['date_asc'] );
 	} elseif ( is_post_type_archive( 'clinical-resource' ) || is_singular( 'clinical-resource' ) ) {
-        $params = array(
+        $params = [
            'template_name' => 'clinical-resources',
-        );
+        ];
         $options = [
             'default' => [
                 'label' => __( 'Sort by', 'fwp' ),
@@ -390,7 +390,7 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
     return $options;
 }, 10, 2 );
 
-add_filter( 'facetwp_pager_html', function( $output, $params ) {
+add_filter( 'facetwp_pager_html', function( $output, $params ): string {
     $output = '';
     $page = $params['page'];
     $total_pages = $params['total_pages'];
@@ -450,7 +450,7 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
 // Show only Yes values
 add_filter( 'facetwp_index_row', function( $params, $class ) {
     if ( 'primary_care' == $params['facet_name'] ) {
-        $included_terms = array( 'Yes' );
+        $included_terms = [ 'Yes' ];
         if ( ! in_array( $params['facet_display_value'], $included_terms ) ) {
             return false;
         }
@@ -493,7 +493,7 @@ add_filter( 'facetwp_index_row', function( $params, $class ) {
 }, 10, 2 );
 
 /** Cron Indexer **/
-function fwp_cron_index() {
+function fwp_cron_index(): void {
     FWP()->indexer->index();
 }
 add_action( 'fwp_indexer', 'fwp_cron_index' );
@@ -502,7 +502,7 @@ add_action( 'fwp_indexer', 'fwp_cron_index' );
 add_action( 'init', 'register_hourly_fwp_indexer');
 
 // Function which will register the event
-function register_hourly_fwp_indexer() {
+function register_hourly_fwp_indexer(): void {
 	// Make sure this event hasn't been scheduled
 	if( !wp_next_scheduled( 'fwp_indexer' ) ) {
 		// Schedule the event

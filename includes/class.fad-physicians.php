@@ -4,13 +4,14 @@
 	class UAMSPhysicians
 	{
 	  	const VERSION = 0.1;
-	  	function __construct()
+          
+	  	public function __construct()
 	  	{
-	   		add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ) );
-	   		add_action( 'wp_enqueue_scripts', array( $this, 'styles' ) );
+	   		add_action( 'wp_enqueue_scripts', [ $this, 'scripts' ] );
+	   		add_action( 'wp_enqueue_scripts', [ $this, 'styles' ] );
 	  	}
 
-	  	function styles()
+	  	public function styles(): void
 	  	{
 		  	//Custom Style Sheets go here
 		  	// wp_register_style( 'uamspeople', get_stylesheet_directory_uri() . '/uamspeople.css' );
@@ -18,7 +19,7 @@
 
 	  	}
 
-		function scripts()
+		public function scripts(): void
 		{
 		    // Custom Scripts go here
 		      // Google Maps API
@@ -32,4 +33,5 @@
 		      //wp_enqueue_script( 'UAMSPeople' );
 		}
 	}
+    
 	new UAMSPhysicians;

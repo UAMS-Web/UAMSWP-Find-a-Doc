@@ -31,7 +31,7 @@
  * Plugin:
  * require_once dirname( __FILE__ ) . '/path/to/class-tgm-plugin-activation.php';
  */
-require_once dirname( __FILE__ ) . '/tgm/class-tgm-plugin-activation.php';
+require_once __DIR__ . '/tgm/class-tgm-plugin-activation.php';
 
 add_action( 'tgmpa_register', 'uamswp_register_required_plugins' );
 
@@ -52,12 +52,12 @@ add_action( 'tgmpa_register', 'uamswp_register_required_plugins' );
  *
  * This function is hooked into `tgmpa_register`, which is fired on the WP `init` action on priority 10.
  */
-function uamswp_register_required_plugins() {
+function uamswp_register_required_plugins(): void {
 	/*
 	 * Array of plugin arrays. Required keys are name and slug.
 	 * If the source is NOT from the .org repo, then source is also required.
 	 */
-	$plugins = array(
+	$plugins = [
 
 		// This is an example of how to include a plugin from an arbitrary external source in your theme.
 		// array(
@@ -85,39 +85,39 @@ function uamswp_register_required_plugins() {
 		// ),
 
 		// ACF
-		array(
+		[
 			'name'               => 'Advanced Custom Fields PRO', // The plugin name.
 			'slug'               => 'advanced-custom-fields-pro', // The plugin slug (typically the folder name).
-			'source'             => dirname( __FILE__ ) . '/plugins/advanced-custom-fields-pro.zip', // The plugin source.
+			'source'             => __DIR__ . '/plugins/advanced-custom-fields-pro.zip', // The plugin source.
 			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		),
-		array(
+		],
+		[
 			'name'               => 'Advanced Custom Fields: Mask Field', // The plugin name.
 			'slug'               => 'acf-maskfield', // The plugin slug (typically the folder name).
-			'source'             => dirname( __FILE__ ) . '/plugins/acf-maskfield.zip', // The plugin source.
+			'source'             => __DIR__ . '/plugins/acf-maskfield.zip', // The plugin source.
 			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		),
+		],
 
-		array(
+		[
 			'name'      => 'Advanced Custom Fields: Extended',
 			'slug'      => 'acf-extended',
 			'required'  => true,
-		),
+		],
 
 		// Begin FacetWP & extensions.
-		array(
+		[
 			'name'               => 'FacetWP', // The plugin name.
 			'slug'               => 'facetwp', // The plugin slug (typically the folder name).
-			'source'             => dirname( __FILE__ ) . '/plugins/facetwp.zip', // The plugin source.
+			'source'             => __DIR__ . '/plugins/facetwp.zip', // The plugin source.
 			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		),
+		],
 
-		array(
+		[
 			'name'               => 'FacetWP - Alpha for UAMS', // The plugin name.
 			'slug'               => 'facetwp-alpha-uams', // The plugin slug (typically the folder name).
-			'source'             => dirname( __FILE__ ) . '/plugins/facetwp-alpha-uams.zip', // The plugin source.
+			'source'             => __DIR__ . '/plugins/facetwp-alpha-uams.zip', // The plugin source.
 			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		),
+		],
 
 		// array(
 		// 	'name'               => 'FacetWP - Load More', // The plugin name.
@@ -126,12 +126,12 @@ function uamswp_register_required_plugins() {
 		// 	'required'           => false, // If false, the plugin is only 'recommended' instead of required.
 		// ),
 
-		array(
+		[
 			'name'               => 'FacetWP - Cache', // The plugin name.
 			'slug'               => 'facetwp-cache', // The plugin slug (typically the folder name).
-			'source'             => dirname( __FILE__ ) . '/plugins/facetwp-cache.zip', // The plugin source.
+			'source'             => __DIR__ . '/plugins/facetwp-cache.zip', // The plugin source.
 			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
-		),
+		],
 
 		// array(
 		// 	'name'               => 'FacetWP - Conditional Logic', // The plugin name.
@@ -141,14 +141,14 @@ function uamswp_register_required_plugins() {
 		// ),
 
 		// Begin Ajax Search Pro.
-		array(
+		[
 			'name'               => 'Ajax Search Pro', // The plugin name.
 			'slug'               => 'ajax-search-pro', // The plugin slug (typically the folder name).
-			'source'             => dirname( __FILE__ ) . '/plugins/ajax-search-pro.zip', // The plugin source.
+			'source'             => __DIR__ . '/plugins/ajax-search-pro.zip', // The plugin source.
 			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
-		),
+		],
 
-	);
+	];
 
 	/*
 	 * Array of configuration settings. Amend each line as needed.
@@ -159,7 +159,7 @@ function uamswp_register_required_plugins() {
 	 *
 	 * Only uncomment the strings in the config array if you want to customize the strings.
 	 */
-	$config = array(
+	$config = [
 		'id'           => 'uamswp',                 // Unique ID for hashing notices for multiple instances of TGMPA.
 		'default_path' => '',                      // Default absolute path to bundled plugins.
 		'menu'         => 'tgmpa-install-plugins', // Menu slug.
@@ -247,7 +247,7 @@ function uamswp_register_required_plugins() {
 			'nag_type'                        => '', // Determines admin notice type - can only be one of the typical WP notice classes, such as 'updated', 'update-nag', 'notice-warning', 'notice-info' or 'error'. Some of which may not work as expected in older WP versions.
 		),
 		*/
-	);
+	];
 
 	tgmpa( $plugins, $config );
 }
