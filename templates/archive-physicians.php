@@ -1,47 +1,42 @@
 <?php
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html)
-{
-    // you can add here all your conditions as if is_page(), is_category() etc..
-    $html = 'Providers | '.get_bloginfo('name');
-
-    return $html;
+function uamswp_fad_title($html) { 
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	$html = 'Providers | ' . get_bloginfo( "name" );
+	return $html;
 }
 // add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 // Region Cookie
-if (isset($_COOKIE['wp_filter_region']) && ! isset($_GET['_provider_region'])) {
+if ( isset($_COOKIE['wp_filter_region']) && !isset($_GET['_provider_region']) ) {
     $region = $_COOKIE['wp_filter_region'];
-    $url = $_SERVER['REQUEST_URI'];
-    $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?').'_provider_region='.$region;
-    header('Location: '.$url);
+	$url = $_SERVER["REQUEST_URI"];
+    $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?').'_provider_region='. $region;
+    header("Location: ". $url);
     exit();
 }
 get_header();
 
-function custom_field_excerpt($title)
-{
-    global $post;
-    $text = get_field($title);
-    if ($text != '') {
-        $text = strip_shortcodes($text);
-        $text = apply_filters('the_content', $text);
-        $text = str_replace(']]>', ']]>', $text);
-        $excerpt_length = 35; // 35 words
-        $excerpt_more = apply_filters('excerpt_more', ' '.'[...]');
-        $text = wp_trim_words($text, $excerpt_length, $excerpt_more);
-    }
+	function custom_field_excerpt($title) {
+			global $post;
+			$text = get_field($title);
+			if ( '' != $text ) {
+				$text = strip_shortcodes( $text );
+				$text = apply_filters('the_content', $text);
+				$text = str_replace(']]>', ']]>', $text);
+				$excerpt_length = 35; // 35 words
+				$excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
+				$text = wp_trim_words( $text, $excerpt_length, $excerpt_more );
+			}
+			return apply_filters('the_excerpt', $text);
+		}
+	function wpdocs_custom_excerpt_length( $length ) {
+	    return 35; // 35 words
+	}
+	add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
 
-    return apply_filters('the_excerpt', $text);
-}
-function wpdocs_custom_excerpt_length($length)
-{
-    return 35; // 35 words
-}
-add_filter('excerpt_length', 'wpdocs_custom_excerpt_length', 999);
-
-add_filter('facetwp_template_use_archive', '__return_true');
+	add_filter( 'facetwp_template_use_archive', '__return_true' );
 
 ?>
 <div class="content-sidebar-wrap">
@@ -56,9 +51,9 @@ add_filter('facetwp_template_use_archive', '__return_true');
 				<fieldset>
 					<legend class="sr-only">Filter by...</legend>
 					<h3 class="h6">Search Providers</h3>
-					<?php echo do_shortcode('[wpdreams_ajaxsearchpro id=1]'); ?>
-					<div class="fwp-filter"><?php echo facetwp_display('facet', 'alpha'); ?></div>
-					<?php echo do_shortcode('		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
+					<?php  echo do_shortcode( '[wpdreams_ajaxsearchpro id=1]' ); ?>
+					<div class="fwp-filter"><?php  echo facetwp_display( 'facet', 'alpha' ); ?></div>
+					<?php  echo do_shortcode( '		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
 													<div class="fwp-filter">[facetwp facet="physician_areas_of_expertise"]</div>
 													<div class="fwp-filter">[facetwp facet="conditions"]</div>
 													<div class="fwp-filter">[facetwp facet="treatments_procedures"]</div>
@@ -68,8 +63,8 @@ add_filter('facetwp_template_use_archive', '__return_true');
 													<div class="fwp-filter">[facetwp facet="locations"]</div>
 													<div class="fwp-filter">[facetwp facet="provider_region"]</div>
 													<button class="btn btn-outline-primary" id="filter-reset" onclick="FWP.reset()">Reset</button>
-												');
-?>
+												' );
+					?>
 				</fieldset>
 			</div>
 			<div class="col-12 col-sm list-col">
@@ -79,21 +74,21 @@ add_filter('facetwp_template_use_archive', '__return_true');
 				</div>
 				<div class="row list-col-header">
                     <div class="col result-status">
-                        <span class="result-count"><?php echo facetwp_display('counts'); ?> Providers</span>
-                        <?php echo facetwp_display('selections'); ?>
+                        <span class="result-count"><?php echo facetwp_display( 'counts' ); ?> Providers</span>
+                        <?php echo facetwp_display( 'selections' ); ?>
                     </div>
 					<div class="col filter-toggle-container">
 						<!-- When button is active, add "active" class. -->
 						<button title="Toggle Filter Tray" class="filter-toggle"><span class="sr-only">Toggle Filter Tray</span><span class="fas fa-filter"></span></button>
 					</div>
 					<div class="col sort-select">
-						<?php echo facetwp_display('sort'); ?>
+						<?php echo facetwp_display( 'sort' ); ?>
 					</div>
 				</div>
-				<?php echo facetwp_display('template', 'physician'); ?>
+				<?php echo facetwp_display( 'template', 'physician' ); ?>
 				<div class="row list-pagination">
 					<div class="col">
-						<?php echo facetwp_display('pager'); ?>
+						<?php echo facetwp_display( 'pager' ); ?>
 					</div>
 				</div>
 				<script>

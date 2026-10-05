@@ -18,6 +18,8 @@
         "tgm",
         "plugins",
         "tests",
-        "admin"
+        "admin",
+        "templates",
+        "assets"
     ]
 }

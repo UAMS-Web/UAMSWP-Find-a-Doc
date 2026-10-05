@@ -1,30 +1,27 @@
 <?php
-get_header();
+   	get_header();
 
-function custom_field_excerpt($title)
-{
-    global $post;
-    $text = get_field($title);
-    if ($text != '') {
-        $text = strip_shortcodes($text);
-        $text = apply_filters('the_content', $text);
-        $text = str_replace(']]>', ']]>', $text);
-        $excerpt_length = 35; // 35 words
-        $excerpt_more = apply_filters('excerpt_more', ' '.'[...]');
-        $text = wp_trim_words($text, $excerpt_length, $excerpt_more);
-    }
+	function custom_field_excerpt($title) {
+			global $post;
+			$text = get_field($title);
+			if ( '' != $text ) {
+				$text = strip_shortcodes( $text );
+				$text = apply_filters('the_content', $text);
+				$text = str_replace(']]>', ']]>', $text);
+				$excerpt_length = 35; // 35 words
+				$excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
+				$text = wp_trim_words( $text, $excerpt_length, $excerpt_more );
+			}
+			return apply_filters('the_excerpt', $text);
+		}
+	function wpdocs_custom_excerpt_length( $length ) {
+	    return 35; // 35 words
+	}
+	add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
 
-    return apply_filters('the_excerpt', $text);
-}
-function wpdocs_custom_excerpt_length($length)
-{
-    return 35; // 35 words
-}
-add_filter('excerpt_length', 'wpdocs_custom_excerpt_length', 999);
+	add_filter( 'facetwp_template_use_archive', '__return_true' );
 
-add_filter('facetwp_template_use_archive', '__return_true');
-
-get_template_part('header', 'image'); ?>
+	get_template_part( 'header', 'image' ); ?>
 
 	<div class="container uams-body">
 
@@ -33,8 +30,8 @@ get_template_part('header', 'image'); ?>
 	    <div class="col-md-12 uams-content" role='main'>
 
 	      <?php // Hard coded breadcrumbs
-              $tax = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'))
-?>
+	      		$tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") )
+	      ?>
 	    <nav class="uams-breadcrumbs" role="navigation" aria-label="breadcrumbs">
 	    	<ul>
 	    		<li><a href="https://www.uams.edu" title="University of Arkansas for Medical Scineces">Home</a></li>
@@ -50,22 +47,22 @@ get_template_part('header', 'image'); ?>
 
 					<div class="col-md-8 people">
 
-						<h1>Specialty: <?php echo single_cat_title('', false); ?></h1><hr>
+						<h1>Specialty: <?php echo single_cat_title( '', false ); ?></h1><hr>
 
-					    <?php echo term_description('', false) ? '<p>'.term_description('', false).'</p>' : ''; ?>
+					    <?php echo (term_description( '', false ) ? '<p>' .term_description( '', false ) . '</p>' : '' ); ?>
 
 					    <?php
-                      $specialty_url = rwmb_meta('specialty_url', ['object_type' => 'term'], $term->term_id);
-echo $specialty_url ? '<p><a href="'.$specialty_url.'">More Information</a></p>' : ''; ?>
+					    		$specialty_url = rwmb_meta( 'specialty_url', array( 'object_type' => 'term' ), $term->term_id );
+					     		echo ($specialty_url ? '<p><a href="' . $specialty_url . '">More Information</a></p>' : '' ); ?>
 
-					     <?php echo facetwp_display('facet', 'alpha'); ?>
+					     <?php echo facetwp_display( 'facet', 'alpha' ); ?>
 
-					    <?php echo facetwp_display('template', 'physician'); ?>
+					    <?php echo facetwp_display( 'template', 'physician' ); ?>
 
 					</div><!-- .col -->
 					<div class="col-md-4">
-			        	<?php echo do_shortcode('[wpdreams_ajaxsearchpro id=1]'); // based on install?>
-			        	<?php echo do_shortcode('[accordion]
+			        	<?php echo do_shortcode( '[wpdreams_ajaxsearchpro id=1]' ); // based on install ?>
+			        	<?php echo do_shortcode( '[accordion]
 													    [section title="Advanced Filter"]
 														<div class="fwp-filter">[facetwp facet="primary_care"]</div>
 														<div class="fwp-filter">[facetwp facet="conditions"]</div>
@@ -75,7 +72,7 @@ echo $specialty_url ? '<p><a href="'.$specialty_url.'">More Information</a></p>'
 														<div class="fwp-filter specialty-filter">[facetwp facet="specialty_checkbox"]</div>
 														<button onclick="FWP.reset();">Reset</button>
 														[/section]
-													[/accordion]'); ?>
+													[/accordion]' ); ?>
 		        	</div>
 				</div><!-- .row -->
    			</div><!-- main_content -->

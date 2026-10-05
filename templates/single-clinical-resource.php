@@ -22,98 +22,90 @@ $resource_archive_title_attr = str_replace('&nbsp;', ' ', $resource_archive_titl
 $resource_archive_title_attr = html_entity_decode($resource_archive_title_attr); // Convert HTML entities to their corresponding characters
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html)
-{
+function uamswp_fad_title($html) {
     global $page_title_attr;
     global $resource_archive_title_attr;
-    // you can add here all your conditions as if is_page(), is_category() etc..
+    //you can add here all your conditions as if is_page(), is_category() etc..
     $meta_title_chars_max = 60;
-    $meta_title_base = $page_title_attr.' | '.get_bloginfo('name');
-    $meta_title_base_chars = strlen($meta_title_base);
-    $meta_title_enhanced_addition = ' | '.$resource_archive_title_attr;
-    $meta_title_enhanced = $page_title_attr.$meta_title_enhanced_addition.' | '.get_bloginfo('name');
-    $meta_title_enhanced_chars = strlen($meta_title_enhanced);
-    if ($meta_title_enhanced_chars <= $meta_title_chars_max) {
+    $meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
+    $meta_title_base_chars = strlen( $meta_title_base );
+    $meta_title_enhanced_addition = ' | ' . $resource_archive_title_attr;
+    $meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
+    $meta_title_enhanced_chars = strlen( $meta_title_enhanced );
+    if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
         $html = $meta_title_enhanced;
     } else {
         $html = $meta_title_base;
     }
-
     return $html;
 }
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 $syndicated = get_field('clinical_resource_syndicated');
 $syndication_url = get_field('clinical_resource_syndication_url');
-function uamswp_fad_canonical($html)
-{
+function uamswp_fad_canonical($html) {
     global $syndicated;
     global $syndication_url;
-    if ($syndicated && ! empty($syndication_url)) {
-        $html = '<link rel="canonical" href="'.htmlspecialchars(urldecode($syndication_url)).'" />';
+	if ( $syndicated && !empty($syndication_url) ) {
+	$html = '<link rel="canonical" href="'.htmlspecialchars(urldecode($syndication_url)).'" />';
     }
-
-    return $html;
+	return $html;
 }
-add_filter('seopress_titles_canonical', 'uamswp_fad_canonical');
-remove_action('genesis_entry_header', 'genesis_post_info', 12);
-remove_action('genesis_entry_footer', 'genesis_post_info', 9); // Added from uams-2020/page.php
+add_filter('seopress_titles_canonical','uamswp_fad_canonical');
+remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
+remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
 // Removes entry meta from entry footer incl. markup.
-remove_action('genesis_entry_footer', 'genesis_entry_footer_markup_open', 5);
-remove_action('genesis_entry_footer', 'genesis_post_meta');
-remove_action('genesis_entry_footer', 'genesis_entry_footer_markup_close', 15);
+remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
+remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
+remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
 
-function uams_default_page_body_class($classes)
-{
+function uams_default_page_body_class( $classes ) {
 
     $classes[] = 'page-template-default';
-
     return $classes;
 }
-add_filter('body_class', 'uams_default_page_body_class');
+add_filter( 'body_class', 'uams_default_page_body_class' );
 
 // Add extra class to entry
-function uamswp_add_entry_class($attributes)
-{
-    $attributes['class'] = $attributes['class'].' bg-white';
-
+function uamswp_add_entry_class( $attributes ) {
+    $attributes['class'] = $attributes['class']. ' bg-white';
     return $attributes;
 }
-add_filter('genesis_attr_entry', 'uamswp_add_entry_class');
+add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 // Modify Entry Title
 
-remove_action('genesis_entry_header', 'genesis_do_post_title');
-add_action('genesis_entry_header', 'uamswp_resource_post_title');
+    remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+    add_action( 'genesis_entry_header', 'uamswp_resource_post_title' );
 
-function uamswp_resource_post_title()
-{
-    global $resource_archive_title;
-    global $resource_type_label;
-    global $is_provider_spotlight;
+    function uamswp_resource_post_title() {
+        global $resource_archive_title;
+        global $resource_type_label;
+        global $is_provider_spotlight;
 
-    // A Provider Spotlight names itself in the supertitle
-    $supertitle = $is_provider_spotlight ? $resource_type_label : $resource_archive_title;
+        // A Provider Spotlight names itself in the supertitle
+        $supertitle = $is_provider_spotlight ? $resource_type_label : $resource_archive_title;
 
-    echo '<h1 class="entry-title" itemprop="headline">';
-    echo '<span class="supertitle">'.$supertitle.'</span><span class="sr-only">:</span> ';
-    echo get_the_title();
-    echo '</h1>';
-}
+        echo '<h1 class="entry-title" itemprop="headline">';
+        echo '<span class="supertitle">'. $supertitle . '</span><span class="sr-only">:</span> ';
+        echo get_the_title();
+        echo '</h1>';
+    }
 
-add_action('genesis_entry_content', 'uamswp_resource_text', 8);
-add_action('genesis_entry_content', 'uamswp_resource_provider_spotlight', 9);
-add_action('genesis_entry_content', 'uamswp_resource_infographic', 10);
-add_action('genesis_entry_content', 'uamswp_resource_video', 12);
-add_action('genesis_entry_content', 'uamswp_resource_document', 14);
-add_action('genesis_after_entry', 'uamswp_resource_jump_links', 8);
-add_action('genesis_after_entry', 'uamswp_resource_associated', 10);
-add_action('genesis_after_entry', 'uamswp_resource_conditions_cpt', 12);
-add_action('genesis_after_entry', 'uamswp_resource_treatments_cpt', 14);
-add_action('genesis_after_entry', 'uamswp_resource_physicians', 16);
-add_action('genesis_after_entry', 'uamswp_resource_locations', 18);
-add_action('genesis_after_entry', 'uamswp_resource_expertise', 20);
-add_action('genesis_after_entry', 'uamswp_resource_appointment', 22);
+add_action( 'genesis_entry_content', 'uamswp_resource_text', 8 );
+add_action( 'genesis_entry_content', 'uamswp_resource_provider_spotlight', 9 );
+add_action( 'genesis_entry_content', 'uamswp_resource_infographic', 10 );
+add_action( 'genesis_entry_content', 'uamswp_resource_video', 12 );
+add_action( 'genesis_entry_content', 'uamswp_resource_document', 14 );
+add_action( 'genesis_after_entry', 'uamswp_resource_jump_links', 8 );
+add_action( 'genesis_after_entry', 'uamswp_resource_associated', 10 );
+add_action( 'genesis_after_entry', 'uamswp_resource_conditions_cpt', 12 );
+add_action( 'genesis_after_entry', 'uamswp_resource_treatments_cpt', 14 );
+add_action( 'genesis_after_entry', 'uamswp_resource_physicians', 16 );
+add_action( 'genesis_after_entry', 'uamswp_resource_locations', 18 );
+add_action( 'genesis_after_entry', 'uamswp_resource_expertise', 20 );
+add_action( 'genesis_after_entry', 'uamswp_resource_appointment', 22 );
+
 
 // Set logic for displaying jump links and sections
 $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
@@ -124,14 +116,14 @@ $resource_type_value = $resource_type['value'];
 $resource_type_label = $resource_type['label'];
 
 // Provider Spotlight
-$is_provider_spotlight = ($resource_type_value == 'provider_spotlight');
+$is_provider_spotlight = ( 'provider_spotlight' == $resource_type_value );
 $spotlight_provider = $is_provider_spotlight ? (int) get_field('clinical_resource_spotlight_provider') : 0;
 
 // Require the featured provider to still be published. A provider can be
 // unpublished, trashed, or deleted after selection, which would otherwise
 // render a spotlight with a dead profile link and, when the provider is gone,
 // name-less generated prose. Suppress the spotlight body in that case.
-if ($spotlight_provider && get_post_status($spotlight_provider) !== 'publish') {
+if ( $spotlight_provider && 'publish' !== get_post_status( $spotlight_provider ) ) {
     $spotlight_provider = 0;
 }
 
@@ -139,16 +131,16 @@ if ($spotlight_provider && get_post_status($spotlight_provider) !== 'publish') {
 // load all 'conditions' terms for the post
 $conditions_cpt = get_field('clinical_resource_conditions');
 // Conditions CPT
-$args = ([
-    'post_type' => 'condition',
+$args = (array(
+    'post_type' => "condition",
     'post_status' => 'publish',
     'orderby' => 'title',
     'order' => 'ASC',
     'posts_per_page' => -1,
-    'post__in' => $conditions_cpt,
-]);
-$conditions_cpt_query = new WP_Query($args);
-if ($conditions_cpt && $conditions_cpt_query->posts) {
+    'post__in' => $conditions_cpt
+));
+$conditions_cpt_query = new WP_Query( $args );
+if( $conditions_cpt && $conditions_cpt_query->posts ) {
     $show_conditions_section = true;
     $jump_link_count++;
 } else {
@@ -158,16 +150,16 @@ if ($conditions_cpt && $conditions_cpt_query->posts) {
 // Check if Treatments and Procedures section should be displayed
 $treatments_cpt = get_field('clinical_resource_treatments');
 // Treatments CPT
-$args = ([
-    'post_type' => 'treatment',
+$args = (array(
+    'post_type' => "treatment",
     'post_status' => 'publish',
     'orderby' => 'title',
     'order' => 'ASC',
     'posts_per_page' => -1,
-    'post__in' => $treatments_cpt,
-]);
-$treatments_cpt_query = new WP_Query($args);
-if ($treatments_cpt && $treatments_cpt_query->posts) {
+    'post__in' => $treatments_cpt
+));
+$treatments_cpt_query = new WP_Query( $args );
+if( $treatments_cpt && $treatments_cpt_query->posts ) {
     $show_treatments_section = true;
     $jump_link_count++;
 } else {
@@ -175,24 +167,24 @@ if ($treatments_cpt && $treatments_cpt_query->posts) {
 }
 
 // Check if Providers section should be displayed
-$physicians = get_field('clinical_resource_providers');
-if ($physicians) {
+$physicians = get_field( "clinical_resource_providers" );
+if($physicians) {
     $postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
     $postsCutoff = 18; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
     $postsCountClass = $postsPerPage;
-    if (count($physicians) <= $postsCutoff) {
+    if(count($physicians) <= $postsCutoff ) {
         $postsPerPage = -1;
     }
-    $args = [
-        'post_type' => 'provider',
-        'post_status' => 'publish',
-        'posts_per_page' => $postsPerPage,
-        'orderby' => 'title',
-        'order' => 'ASC',
-        'post__in' => $physicians,
-    ];
-    $physicians_query = new WP_Query($args);
-    if ($physicians_query && $physicians_query->have_posts()) {
+    $args = array(
+        "post_type" => "provider",
+        "post_status" => "publish",
+        "posts_per_page" => $postsPerPage,
+        "orderby" => "title",
+        "order" => "ASC",
+        "post__in" => $physicians
+    );
+    $physicians_query = New WP_Query( $args );
+    if($physicians_query && $physicians_query->have_posts()) {
         $show_providers_section = true;
         $jump_link_count++;
     } else {
@@ -202,17 +194,17 @@ if ($physicians) {
 
 // Check if Locations section should be displayed
 $locations = get_field('clinical_resource_locations');
-if ($locations) {
-    $args = ([
-        'post_type' => 'location',
+if($locations) {
+    $args = (array(
+        'post_type' => "location",
         'order' => 'ASC',
         'orderby' => 'title',
         'posts_per_page' => -1,
         'post_status' => 'publish',
-        'post__in' => $locations,
-    ]);
-    $location_query = new WP_Query($args);
-    if ($locations && $location_query->have_posts()) {
+        'post__in'	=> $locations
+    ));
+    $location_query = new WP_Query( $args );
+    if( $locations && $location_query->have_posts() ) {
         $show_locations_section = true;
         $jump_link_count++;
     } else {
@@ -221,17 +213,17 @@ if ($locations) {
 }
 
 // Check if Expertise section should be displayed
-$expertises = get_field('clinical_resource_aoe');
-$args = ([
-    'post_type' => 'expertise',
+$expertises =  get_field('clinical_resource_aoe');
+$args = (array(
+    'post_type' => "expertise",
     'order' => 'ASC',
     'orderby' => 'title',
     'posts_per_page' => -1,
     'post_status' => 'publish',
-    'post__in' => $expertises,
-]);
-$expertise_query = new WP_Query($args);
-if ($expertises && $expertise_query->have_posts()) {
+    'post__in'	=> $expertises
+));
+$expertise_query = new WP_Query( $args );
+if( $expertises && $expertise_query->have_posts() ) {
     $show_aoe_section = true;
     $jump_link_count++;
 } else {
@@ -239,21 +231,21 @@ if ($expertises && $expertise_query->have_posts()) {
 }
 
 // Clinical Resources
-$resources = get_field('clinical_resource_related');
+$resources =  get_field('clinical_resource_related');
 $resource_postsPerPage = -1; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 $resource_more = false;
-$args = ([
-    'post_type' => 'clinical-resource',
+$args = (array(
+    'post_type' => "clinical-resource",
     'order' => 'DESC',
     'orderby' => 'post_date',
     'posts_per_page' => $resource_postsPerPage,
     'post_status' => 'publish',
-    'post__in' => $resources,
-]);
-$resource_query = new WP_Query($args);
+    'post__in'	=> $resources
+));
+$resource_query = new WP_Query( $args );
 
 // Check if Clinical Resources section should be displayed
-if ($resources && $resource_query->have_posts()) {
+if( $resources && $resource_query->have_posts() ) {
     $show_related_resource_section = true;
     $resource_count = count($resources);
     $jump_link_count++;
@@ -279,63 +271,60 @@ $jump_link_count++;
 // kept. With everything else gone the jump-link count falls to one, below the
 // minimum, so the jump-link nav hides itself; each section function is also
 // guarded on its own flag.
-if ($is_provider_spotlight) {
-    $show_conditions_section = false;
-    $show_treatments_section = false;
-    $show_providers_section = false;
-    $show_locations_section = false;
-    $show_aoe_section = false;
+if ( $is_provider_spotlight ) {
+    $show_conditions_section       = false;
+    $show_treatments_section       = false;
+    $show_providers_section        = false;
+    $show_locations_section        = false;
+    $show_aoe_section              = false;
     $show_related_resource_section = false;
 
     $jump_link_count = 1; // the appointment module only
 }
 
 // Check if Jump Links section should be displayed
-if ($jump_link_count >= $jump_link_count_min) {
+if ( $jump_link_count >= $jump_link_count_min ) {
     $show_jump_links_section = true;
 } else {
     $show_jump_links_section = false;
 }
-function uamswp_resource_text()
-{
+function uamswp_resource_text() {
     global $resource_type_value;
     $text = get_field('clinical_resource_text');
     $nci_query = get_field('clinical_resource_text_nci_query');
     $nci_embed = get_field('clinical_resource_nci_embed');
 
-    if ($resource_type_value == 'text' && $text && ! $nci_query) { // $show_text_section ) {
+    if( 'text' == $resource_type_value && $text && !$nci_query ) { // $show_text_section ) {
         echo $text;
-    } elseif ($resource_type_value == 'text' && $nci_query && $nci_embed) {
+    } elseif ( 'text' == $resource_type_value && $nci_query && $nci_embed ) {
         echo $nci_embed;
     }
 }
-function uamswp_resource_infographic()
-{
+function uamswp_resource_infographic() {
     global $resource_type_value;
     $infographic = get_field('clinical_resource_infographic');
     $infographic_descr = get_field('clinical_resource_infographic_descr');
     $infographic_transcript = get_field('clinical_resource_infographic_transcript');
     $size = 'content-image-wide';
 
-    if ($resource_type_value == 'infographic' && $infographic) {
-        if ($infographic_descr) {
+    if( 'infographic' == $resource_type_value && $infographic ) {
+        if ( $infographic_descr ) {
             echo '<h2 class="sr-only">Description</h2>';
             echo $infographic_descr;
         }
 
         echo '<h2 class="sr-only">Infographic</h2>';
         echo '<div class="alignwide">';
-        echo wp_get_attachment_image($infographic, $size);
+        echo wp_get_attachment_image( $infographic, $size );
         echo '</div>';
 
-        if ($infographic_transcript) {
+        if ( $infographic_transcript ) {
             echo '<h2>Transcript</h2>';
             echo $infographic_transcript;
         }
     }
 }
-function uamswp_resource_document()
-{
+function uamswp_resource_document() {
     global $resource_type_value;
     $document_descr = get_field('clinical_resource_document_descr');
     $document = get_field('clinical_resource_document');
@@ -347,45 +336,43 @@ function uamswp_resource_document()
     $icon_excel = 'far fa-file-excel';
     $icon_image = 'far fa-file-image';
 
-    if ($resource_type_value == 'doc' && have_rows('clinical_resource_document')) {
+    if( 'doc' == $resource_type_value && have_rows('clinical_resource_document') ):
         echo $document_descr;
         echo '<hr />';
         echo '<h2>Attachments</h2>';
         echo '<ul class="attachments">';
-        while (have_rows('clinical_resource_document')) {
-            the_row();
+        while( have_rows('clinical_resource_document') ): the_row();
             $document_title = get_sub_field('document_title');
             $document_file = get_sub_field('document_file');
             $document_url = $document_file['url'];
             $document_url_path = pathinfo($document_url);
             $document_url_extension = $document_url_path['extension'];
 
-            if ($document_url_extension == 'pdf') {
+            if ( $document_url_extension == 'pdf' ) {
                 $icon_file = $icon_pdf;
-            } elseif ($document_url_extension == 'doc' || $document_url_extension == 'docx') {
+            } elseif ( $document_url_extension == 'doc' || $document_url_extension == 'docx' ) {
                 $icon_file = $icon_word;
-            } elseif ($document_url_extension == 'ppt' || $document_url_extension == 'pptx') {
+            } elseif ( $document_url_extension == 'ppt' || $document_url_extension == 'pptx' ) {
                 $icon_file = $icon_powerpoint;
-            } elseif ($document_url_extension == 'xls' || $document_url_extension == 'xlsx') {
+            } elseif ( $document_url_extension == 'xls' || $document_url_extension == 'xlsx' ) {
                 $icon_file = $icon_excel;
-            } elseif ($document_url_extension == 'jpg' || $document_url_extension == 'jpeg' || $document_url_extension == 'gif' || $document_url_extension == 'png' || $document_url_extension == 'bmp') {
+            } elseif ( $document_url_extension == 'jpg' ||  $document_url_extension == 'jpeg' || $document_url_extension == 'gif' || $document_url_extension == 'png' || $document_url_extension == 'bmp' ) {
                 $icon_file = $icon_image;
             }
-            ?>
+        ?>
             <li><a class="attachment-link" href="<?php echo $document_url; ?>" title="<?php echo $document_title; ?>" target="_blank"><span class="<?php echo $icon_file; ?> fa-fw"></span><span class="attachment-label"><?php echo $document_title; ?></span></a></li>
-        <?php }
+        <?php endwhile;
         echo '</ul>';
-    }
+    endif;
 }
-function uamswp_resource_physicians()
-{
+function uamswp_resource_physicians() {
     global $show_providers_section;
     global $postsCountClass;
     global $physicians_query;
     global $postsPerPage;
     global $physicians;
 
-    if ($show_providers_section) {
+    if($show_providers_section) {
         ?>
         <section class="uams-module bg-auto" id="providers">
             <div class="container-fluid">
@@ -395,18 +382,17 @@ function uamswp_resource_physicians()
                         <div class="card-list-container">
                             <div class="card-list card-list-doctors">
                                 <?php
-                                    while ($physicians_query->have_posts()) {
-                                        $physicians_query->the_post();
+                                    while ($physicians_query->have_posts()) : $physicians_query->the_post();
                                         $id = get_the_ID();
-                                        include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
-                                    }
-        wp_reset_postdata();
-        ?>
+                                        include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+                                    endwhile;
+                                    wp_reset_postdata();
+                                ?>
                             </div>
                         </div>
                         <!-- <?php if ($postsPerPage !== -1) { ?>
                         <div class="more">
-                            <button class="loadmore btn btn-primary" data-posttype="post" data-postids="<?php echo implode(',', $physicians); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
+                            <button class="loadmore btn btn-primary" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
                         </div>
                         <?php } ?> -->
                         <div class="ajax-filter-load-more">
@@ -417,70 +403,66 @@ function uamswp_resource_physicians()
             </div>
         </section>
     <?php }
-    }
-function uamswp_resource_video()
-{
+}
+function uamswp_resource_video() {
     global $resource_type_value;
     $video = get_field('clinical_resource_video');
     $video_descr = get_field('clinical_resource_video_descr');
     $video_transcript = get_field('clinical_resource_video_transcript');
 
     $video_source = '';
-    if ((strpos($video, 'youtube') !== false) || (strpos($video, 'youtu.be') !== false)) {
+    if ( (strpos($video, 'youtube') !== false) || (strpos($video, 'youtu.be') !== false) ) {
         $video_source = 'youtube';
     }
 
-    if ($resource_type_value == 'video' && $video) { ?>
-        <?php if ($video_descr) {
+    if( 'video' == $resource_type_value && $video ) { ?>
+        <?php if ( $video_descr ) {
             echo '<h2 class="sr-only">Description</h2>';
             echo $video_descr;
         }
         echo '<h2 class="sr-only">Video Player</h2>';
-        if (function_exists('lyte_preparse') && $video_source == 'youtube') {
+        if( function_exists('lyte_preparse') && $video_source == 'youtube' ) {
             echo '<div class="alignwide">';
-            echo lyte_parse(str_replace(['https:', 'http:'], 'httpv:', $video));
+            echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) );
             echo '</div>';
         } else {
             echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-            echo wp_oembed_get($video);
+            echo wp_oembed_get( $video );
             echo '</div>';
         }
-        if ($video_transcript) {
+        if ( $video_transcript ) {
             echo '<h2>Transcript</h2>';
             echo $video_transcript;
         }
     }
 }
-function uamswp_resource_conditions_cpt()
-{
+function uamswp_resource_conditions_cpt() {
     global $page_title;
     global $show_conditions_section;
     global $conditions_cpt_query;
     $condition_context = 'single-resource';
     $condition_heading_related_name = $page_title; // To what is it related?
 
-    if ($show_conditions_section) {
-        include UAMS_FAD_PATH.'/templates/loops/conditions-cpt-loop.php';
+    if( $show_conditions_section ) {
+        include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
     }
 }
-function uamswp_resource_treatments_cpt()
-{
+function uamswp_resource_treatments_cpt() {
     global $page_title;
     global $show_treatments_section;
     global $treatments_cpt_query;
     $treatment_context = 'single-resource';
     $treatment_heading_related_name = $page_title; // To what is it related?
 
-    if ($show_treatments_section) {
-        include UAMS_FAD_PATH.'/templates/loops/treatments-cpt-loop.php';
+    if( $show_treatments_section ) {
+        include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
     }
 }
-function uamswp_resource_locations()
-{
+function uamswp_resource_locations() {
     global $show_locations_section;
     global $location_query;
 
-    if ($show_locations_section) { ?>
+    if ( $show_locations_section ) { ?>
         <section class="uams-module location-list bg-auto" id="locations">
             <div class="container-fluid">
                 <div class="row">
@@ -488,12 +470,11 @@ function uamswp_resource_locations()
                         <h2 class="module-title"><span class="title">Related Locations</span></h2>
                         <div class="card-list-container location-card-list-container">
                             <div class="card-list">
-                            <?php while ($location_query->have_posts()) {
-                                $location_query->the_post();
+                            <?php while ( $location_query->have_posts() ) : $location_query->the_post();
                                 $id = get_the_ID();
-                                include UAMS_FAD_PATH.'/templates/loops/location-card.php';
-                            }
-        wp_reset_postdata(); ?>
+                                include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+                            endwhile;
+                            wp_reset_postdata();?>
                         </div>
                     </div>
                 </div>
@@ -502,8 +483,7 @@ function uamswp_resource_locations()
     <?php
     } // endif
 }
-function uamswp_resource_associated()
-{
+function uamswp_resource_associated() {
     global $page_title;
     global $show_related_resource_section;
     global $resources;
@@ -515,16 +495,15 @@ function uamswp_resource_associated()
     $resource_more_suppress = false; // Force div.more to not display
     $resource_more_key = '';
     $resource_more_value = '';
-    if ($show_related_resource_section) {
-        include UAMS_FAD_PATH.'/templates/blocks/clinical-resources.php';
+    if( $show_related_resource_section ) {
+        include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
     }
 }
-function uamswp_resource_expertise()
-{
+function uamswp_resource_expertise() {
     global $show_aoe_section;
     global $expertise_query;
 
-    if ($show_aoe_section) { ?>
+    if( $show_aoe_section ) { ?>
 		<section class="uams-module expertise-list bg-auto" id="expertise" aria-labelledby="areas-of-expertise-title">
 			<div class="container-fluid">
 				<div class="row">
@@ -533,13 +512,12 @@ function uamswp_resource_expertise()
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php
-                            while ($expertise_query->have_posts()) {
-                                $expertise_query->the_post();
-                                $id = get_the_ID();
-                                include UAMS_FAD_PATH.'/templates/loops/expertise-card.php';
-                            }
-        wp_reset_postdata();
-        ?>
+							while ($expertise_query->have_posts()) : $expertise_query->the_post();
+								$id = get_the_ID();
+								include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+							endwhile;
+							wp_reset_postdata();
+							?>
 						</div>
 					</div>
 				</div>
@@ -548,8 +526,7 @@ function uamswp_resource_expertise()
 	<?php
     } // endif
 }
-function uamswp_resource_jump_links()
-{
+function uamswp_resource_jump_links() {
     global $page_title;
     global $show_related_resource_section;
     global $show_conditions_section;
@@ -561,7 +538,7 @@ function uamswp_resource_jump_links()
     global $show_appointment_section;
 
     // Begin Jump Links Section
-    if ($show_jump_links_section) { ?>
+    if ( $show_jump_links_section ) { ?>
         <nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
             <h2>Related Content</h2>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -569,22 +546,22 @@ function uamswp_resource_jump_links()
             </button>
             <div class="collapse navbar-collapse inner-container" id="jump-link-nav">
                 <ul class="nav navbar-nav">
-                    <?php if ($show_related_resource_section) { ?>
+                    <?php if ( $show_related_resource_section ) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#related-resources" title="Jump to the section of this page about Related Resources">Resources</a>
                         </li>
                     <?php } ?>
-                    <?php if ($show_conditions_section) { ?>
+                    <?php if ( $show_conditions_section ) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#conditions" title="Jump to the section of this page about Related Conditions">Conditions</a>
                         </li>
                     <?php } ?>
-                    <?php if ($show_treatments_section) { ?>
+                    <?php if ( $show_treatments_section ) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#treatments" title="Jump to the section of this page about Medical Treatments and Procedures Performed">Treatments &amp; Procedures</a>
                         </li>
                     <?php } ?>
-                    <?php if ($show_providers_section) { ?>
+                    <?php if ( $show_providers_section ) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#providers" title="Jump to the section of this page about Providers">Providers</a>
                         </li>
@@ -599,7 +576,7 @@ function uamswp_resource_jump_links()
                             <a class="nav-link" href="#expertise" title="Jump to the section of this page about Related Areas of Expertise">Areas of Expertise</a>
                         </li>
                     <?php } ?>
-                    <?php if ($show_appointment_section) { ?>
+                    <?php if ( $show_appointment_section ) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#appointment-info" title="Jump to the section of this page about making an appointment">Make an Appointment</a>
                         </li>
@@ -608,25 +585,23 @@ function uamswp_resource_jump_links()
             </div>
         </nav>
     <?php }
-    }
-function uamswp_resource_appointment()
-{
+}
+function uamswp_resource_appointment() {
     global $show_appointment_section;
     global $is_provider_spotlight;
     global $spotlight_provider;
 
-    if ($show_appointment_section) {
+    if ( $show_appointment_section ) {
 
         // On a Provider Spotlight, the provider-specific CTA replaces the
         // generic "Make an Appointment" band in this same slot.
-        if ($is_provider_spotlight && $spotlight_provider) {
-            echo uamswp_spotlight_appointment_cta($spotlight_provider);
-
+        if ( $is_provider_spotlight && $spotlight_provider ) {
+            echo uamswp_spotlight_appointment_cta( $spotlight_provider );
             return;
         }
 
         $appointment_location_url = '/location/';
-        // $appointment_location_label = 'View a list of UAMS Health locations';
+        //$appointment_location_label = 'View a list of UAMS Health locations';
         ?>
         <section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
             <div class="container-fluid">
@@ -639,7 +614,7 @@ function uamswp_resource_appointment()
             </div>
         </section>
     <?php }
-    }
+}
 
 /**
  * Provider Spotlight
@@ -658,33 +633,32 @@ function uamswp_resource_appointment()
  * Genesis entry microdata and itemprop="image" on the portrait, and nothing
  * more. No JSON-LD, and no about/mainEntity link to the provider.
  */
-function uamswp_resource_provider_spotlight()
-{
+function uamswp_resource_provider_spotlight() {
     global $is_provider_spotlight;
     global $spotlight_provider;
 
-    if (! $is_provider_spotlight || ! $spotlight_provider) {
+    if ( !$is_provider_spotlight || !$spotlight_provider ) {
         return;
     }
 
     $provider_id = $spotlight_provider;
 
     // Provider-derived strings, resolved once
-    $names = uamswp_provider_names($provider_id);
+    $names = uamswp_provider_names( $provider_id );
 
     $medium_name_attr = $names['medium_attr'];
 
     // Escaped for HTML text context. The name parts come from plain-text ACF
     // fields with no kses filtering, so they must not be echoed raw.
-    $medium_name = uamswp_provider_name_html($names['medium']);
-    $short_name = uamswp_provider_name_html($names['short']);
-    $short_possessive = uamswp_provider_name_html($names['short_possessive']);
+    $medium_name      = uamswp_provider_name_html( $names['medium'] );
+    $short_name       = uamswp_provider_name_html( $names['short'] );
+    $short_possessive = uamswp_provider_name_html( $names['short_possessive'] );
 
     // Introduction: always generated from the provider. The manual field was
     // removed, so any value left in postmeta from before that is ignored.
-    $intro = uamswp_spotlight_default_intro($provider_id);
+    $intro = uamswp_spotlight_default_intro( $provider_id );
 
-    if ($intro) {
+    if ( $intro ) {
         echo '<h2 class="sr-only">Description</h2>';
         echo $intro;
     }
@@ -693,38 +667,37 @@ function uamswp_resource_provider_spotlight()
     // block carries a divider above it (echoing an <hr> after the intro). The
     // "Getting to Know" heading is screen-reader only; the portrait follows it
     // and floats via the theme's .alignright.
-    if (have_rows('clinical_resource_spotlight_qa')) {
+    if ( have_rows('clinical_resource_spotlight_qa') ) {
         ?>
         <h2 class="sr-only">Questions and Answers</h2>
         <div class="rule-top-lg d-flow-root">
             <?php
             // Portrait: the provider's standard 3:4 headshot, sized for a
             // right-aligned content image
-            $portrait_id = get_post_thumbnail_id($provider_id);
+            $portrait_id = get_post_thumbnail_id( $provider_id );
 
-        if ($portrait_id) {
-            $portrait_alt = $medium_name_attr;
-            ?>
+            if ( $portrait_id ) {
+                $portrait_alt = $medium_name_attr;
+                ?>
                 <figure class="alignright">
-                    <?php echo wp_get_attachment_image($portrait_id, 'content-image-side', false, ['alt' => $portrait_alt, 'itemprop' => 'image']); ?>
+                    <?php echo wp_get_attachment_image( $portrait_id, 'content-image-side', false, array( 'alt' => $portrait_alt, 'itemprop' => 'image' ) ); ?>
                 </figure>
                 <?php
-        }
-
-        while (have_rows('clinical_resource_spotlight_qa')) {
-            the_row();
-            $question = get_sub_field('spotlight_qa_question');
-            $answer = get_sub_field('spotlight_qa_answer');
-
-            if (! $question) {
-                continue;
             }
-            ?>
+
+            while ( have_rows('clinical_resource_spotlight_qa') ) : the_row();
+                $question = get_sub_field('spotlight_qa_question');
+                $answer   = get_sub_field('spotlight_qa_answer');
+
+                if ( !$question ) {
+                    continue;
+                }
+                ?>
                 <h3><?php echo esc_html($question); ?></h3>
                 <div class="answer"><?php echo $answer; ?></div>
                 <?php
-        }
-        ?>
+            endwhile;
+            ?>
         </div>
         <?php
     }

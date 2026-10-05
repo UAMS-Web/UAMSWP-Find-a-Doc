@@ -1,11 +1,11 @@
 <?php
-/**
- *  Template Name: Clinical Trials loop / text block
- *  Designed for UAMS Find-a-Doc
- *
- *  Required vars:
- *      $clinical_trial_title
- */
+    /**
+     *  Template Name: Clinical Trials loop / text block
+     *  Designed for UAMS Find-a-Doc
+     * 
+     *  Required vars:
+     *      $clinical_trial_title
+     */
 ?>
 <section class="uams-module cta-bar cta-bar-1 bg-auto" id="clinical-trials">
     <div class="container-fluid">

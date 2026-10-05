@@ -1,15 +1,16 @@
 <?php
-/**
- *  Template Name: Appointments loop / text block
- *  Designed for UAMS Find-a-Doc
- */
-if ($locations && $location_valid) {
-    $appointment_location_url = '#locations';
-    // $appointment_location_label = 'Go to the list of relevant locations';
-} else {
-    $appointment_location_url = '/location/';
-    // $appointment_location_label = 'View a list of UAMS Health locations';
-}
+    /**
+     *  Template Name: Appointments loop / text block
+     *  Designed for UAMS Find-a-Doc
+     */
+
+    if ( $locations && $location_valid ) {
+        $appointment_location_url = '#locations';
+        // $appointment_location_label = 'Go to the list of relevant locations';
+    } else {
+        $appointment_location_url = '/location/';
+        // $appointment_location_label = 'View a list of UAMS Health locations';
+    }
 ?>
 <section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
     <div class="container-fluid">
