@@ -335,40 +335,59 @@ function get_taxonomy_archive_link( $taxonomy ) {
     return $crumbs;
   }
 
-  // Query custom table values
+  // Query provider/location relationship values (e.g. physician_locations, location_expertise).
+  //
+  // While ACF Custom Database Tables is active, values live in its custom tables (wp_*_uamswp_*), so the
+  // original custom-table query is used unchanged. Once the plugin is deactivated (after the postmeta
+  // backfill), the same call reads ACF's serialized arrays from postmeta instead — no template changes needed.
   function uamswp_custom_table_query($table_name, $field_name, $query_values) {
-    // Declare the global wpdb variable
     global $wpdb;
- 
-    $custom_table = $wpdb->prefix.$table_name;
- 
-    $filter_where ='';        
-    $i = 1;
-    foreach ($query_values as $value) {
-        if ($i > 1) {
-            $filter_where .= " OR ";
-        }
-        $filter_where .= "`$field_name` LIKE '%" . $value . "%'";
-        $i++;
+
+    $query_values = array_filter( (array) $query_values, function ( $v ) { return $v !== '' && $v !== null; } );
+    if ( empty( $query_values ) ) {
+      return array();
     }
- 
-    // Write our custom query. In this query, we're only selecting the post_id field of each row that matches our set of
-    // conditions. Note the %s placeholders – these are dynamic and indicate that we'll be injecting strings in their place.
-    $SQL = "SELECT `post_id` FROM `" . $custom_table . "`
-            WHERE $filter_where
-            ORDER BY `post_id` ASC;";
- 
- 
-    // Use $wpdb's prepare() method to replace the placeholders with our actual data. Doing it this way protects against
-    // injection hacks as the prepare() method santizes the data accordingly. The output is a prepared, sanitized SQL
-    // statement ready to be executed.
-    // $SQL = $wpdb->prepare( $SQL );
- 
-    // Query the database with our prepared SQL statement, fetching the first column of the matched rows. In our case, we
-    // only queried the post_id field of each row so we know that the post_id fields will be the first column. The result
-    // here is an array of post_ids (provided we have a match)
-    $post_ids = $wpdb->get_col( $SQL );
-    return $post_ids;
+
+    $custom_table = $wpdb->prefix . $table_name;
+    $use_custom_table = apply_filters(
+      'uamswp_fad_use_custom_tables',
+      function_exists( 'acf_custom_database_tables' )
+        && $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $custom_table ) ) ) === $custom_table,
+      $table_name,
+      $field_name
+    );
+
+    if ( $use_custom_table ) {
+      // Original behaviour (substring LIKE on the JSON-encoded column).
+      $filter_where = array();
+      foreach ( $query_values as $value ) {
+        $filter_where[] = $wpdb->prepare( "`" . esc_sql( $field_name ) . "` LIKE %s", '%' . $wpdb->esc_like( (string) $value ) . '%' );
+      }
+      return $wpdb->get_col( "SELECT `post_id` FROM `" . esc_sql( $custom_table ) . "` WHERE " . implode( ' OR ', $filter_where ) . " ORDER BY `post_id` ASC" );
+    }
+
+    // Postmeta: ACF stores relationship/post_object values as serialized arrays of string IDs, e.g. a:2:{i:0;s:3:"123";...}
+    $post_types = array(
+      'uamswp_physicians' => 'provider',
+      'uamswp_locations'  => 'location',
+    );
+    $post_type = isset( $post_types[ $table_name ] ) ? $post_types[ $table_name ] : '';
+
+    $or = array();
+    foreach ( $query_values as $value ) {
+      $value = (string) $value;
+      $or[]  = $wpdb->prepare( 'pm.meta_value LIKE %s', '%"' . $wpdb->esc_like( $value ) . '"%' ); // serialized array
+      $or[]  = $wpdb->prepare( 'pm.meta_value = %s', $value );                                     // single value
+    }
+
+    $sql = "SELECT DISTINCT pm.post_id FROM {$wpdb->postmeta} pm
+            INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+            WHERE pm.meta_key = %s" . ( $post_type ? " AND p.post_type = %s" : '' ) . "
+            AND (" . implode( ' OR ', $or ) . ")
+            ORDER BY pm.post_id ASC";
+    $params = $post_type ? array( $field_name, $post_type ) : array( $field_name );
+
+    return array_map( 'intval', $wpdb->get_col( $wpdb->prepare( $sql, $params ) ) );
  }
 
 // Escape a provider name variant for an HTML text context
