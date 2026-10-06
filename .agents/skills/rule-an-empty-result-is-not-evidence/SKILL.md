@@ -58,9 +58,9 @@ git grep -E 'importer'      HEAD -- README.md   ->  8      <- control
 
 | Pattern | BRE | ERE |
 | --- | ---: | ---: |
-| `designateDepartmentOrganization([$]site)` : igil bracketed, parentheses not | 1 | **0** |
-| `designateDepartmentOrganization(\$site)` : igil escaped, parentheses not | 1 | **0** |
-| `designateDepartmentOrganization[(][$]site[)]` : very metacharacter bracketed | 1 | 1 |
+| `designateDepartmentOrganization([$]site)`: sigil bracketed, parentheses not | 1 | **0** |
+| `designateDepartmentOrganization(\$site)`: sigil escaped, parentheses not | 1 | **0** |
+| `designateDepartmentOrganization[(][$]site[)]`: every metacharacter bracketed | 1 | 1 |
 | control: the bare name | 3 | 3 |
 
 **The general statement, which is what this section is actually about: a pattern copied out of source code is made of metacharacters, and any one of them left unbracketed is a silent zero.** `$`, `(`, `)`, `.`, `[`, `*`, `+`, `?`, `|` are all ordinary characters in PHP and all special in a regex. `grep -F` treats the whole pattern as literal and is the reliable default; bracketing is for when part of the pattern must stay a real expression. Escaping (`\$`) and `-F` are also correct everywhere measured here and are fine where already written, with one caveat worth knowing: **`grep -iF` aborts on GNU grep 3.1 under Windows Git Bash when no UTF-8 locale is set**, the same defect that makes that build refuse `-P` with `-P supports only unibyte and UTF-8 locales`. That exposure does not reach macOS: sixteen cells across `LC_ALL` unset, `C`, `C.UTF-8` and `en_US.UTF-8` on both engines were clean, and **the shell they were run in carried no locale at all**, which is the triggering condition, so that is a negative result *at* the crashing locale rather than at an unstated one. GNU grep's BRE behavior has not been measured on macOS; only the Windows build was.
@@ -86,7 +86,7 @@ origin/main:./docs/DECISIONS.md          rc=0     <- control: a LEADING ./ does 
 
 Neither the colon nor the slash decides it: `.gitignore` carries no slash and fails, while `./docs/…` carries both a dot and slashes and succeeds. **So a reader testing `git show origin/main:README.md`, seeing it work, and concluding the platform is fine has tested the one shape that cannot fail** (and in these repositories every rule and skill lives under `).claude/`, so the shape that does fail is the one anyone auditing the corpus will use.
 
-**Every subcommand taking `<rev>:<path>` is affected, not just `show`** : easured the same way, dot-prefixed path, bare:
+**Every subcommand taking `<rev>:<path>` is affected, not just `show`**: measured the same way, dot-prefixed path, bare:
 
 ```
 show  ·  cat-file -p  ·  cat-file -e  ·  cat-file -s  ·  rev-parse  ·  diff      all rc=128
@@ -223,7 +223,7 @@ Both the question and the answer are well-formed. The answer is correct for the 
 | a read of one branch | does this repository contain X | does this branch contain X |
 | a contents-API read with no `?ref=` | does this repository contain X | does the default branch contain X |
 
-* ("absent on `master` as of this fetch" rather than "absent") so a reader can see the boundary the claim actually has. **An absence is a claim about a boundary, and a boundary that goes unstated is assumed to be the widest one.**
+**The defense is not a different tool. It is naming the scope in the same sentence as the result** ("absent on `master` as of this fetch" rather than "absent"), so a reader can see the boundary the claim actually has. **An absence is a claim about a boundary, and a boundary that goes unstated is assumed to be the widest one.**
 
 ## A number asserted without ever being measured is not a weak version of this
 

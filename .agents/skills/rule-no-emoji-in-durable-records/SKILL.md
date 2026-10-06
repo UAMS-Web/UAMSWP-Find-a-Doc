@@ -11,7 +11,7 @@ disable-model-invocation: true
 <!-- cspell:ignore charmap -->
 # Rule — no emoji in durable records
 
-**Emoji do not appear in anything this repo keeps, and neither do pictographic glyphs used as punctuation.** That covers issue and pull-request titles, bodies and comments; commit messages; release notes; every file under `.claude/` and `docs/`; and `README.md`, `AGENTS.md` and `CLAUDE.md`.
+**Emoji do not appear in anything this repo keeps, and neither do pictographic glyphs used as punctuation.** That covers issue and pull-request titles, bodies and comments; commit messages; release notes; every file under `.claude/` and `docs/`; `README.md` and `AGENTS.md`; and `CLAUDE.md` in a repository that still has one.
 
 ## Why this is a standing order
 
@@ -49,11 +49,16 @@ Nothing here is about tone. Emphasis is welcome; **bold** carries it without a c
    printf 'x \xe2\x9a\xa0 y\n' | count    # must print 1
    printf 'plain text\n'       | count    # must print 0
 
-   find .claude docs README.md AGENTS.md CLAUDE.md -type f -print0 |
+   (
+     find .claude docs README.md AGENTS.md -type f -print0
+     find . -maxdepth 1 -name CLAUDE.md -print0
+   ) |
      xargs -0 perl -CSD -ne 'printf "%s:%d: %s\n", $ARGV, $., join " ",
          map { sprintf "U+%04X", ord } m/'"$GLYPH"'/g if m/'"$GLYPH"'/;
        close ARGV if eof;'
    ```
+
+   The first `find` lists its paths literally and on one line: a repository's own glyph check may read its scope from that line, so keep it that shape, and keep `-type f` off the second `find`, since that check counts every `find … -type f` line and refuses to run on two. Where a repository has no `docs/` or no `README.md`, `find` says so on stderr and sweeps the rest; that line means the path was skipped, nothing more. `CLAUDE.md` is looked up by name instead of listed, because the sync removes it from most repositories, and where it is absent the second `find` prints nothing.
 
    `U+FE0F` is in that class deliberately. Omit it and a body that renders clean still fails a byte comparison.
 
@@ -91,7 +96,7 @@ Nothing here is about tone. Emphasis is welcome; **bold** carries it without a c
 
 3. **Print code points, never the character.** A script that reports its findings by echoing the glyph crashes on exactly the platform the rule exists to protect, and reports the crash as a short result. An earlier draft of the audit printed the offending character. On Windows (measured in `uams-statamic`) that audit *detected* the glyph and then died printing it: `UnicodeEncodeError: 'charmap' codec can't encode characters in position 16-17: character maps to <undefined>` under a `cp1252` stdout, so the check crashed at the moment it had something to say, which is the failure this rule exists to describe, reproduced by the tool meant to prevent it. A code point written as `U+%04X` is ASCII and cannot fail that way. Naming the code point also follows the same guidance this rule gives for prose below: exact, searchable, and inert.
 
-4. **Existing prose is not yours to sweep.** Rules, skills and docs written before this rule use emoji as their own formatting. Removing them is a separate, deliberate change with its own ticket ; not something a passing edit does, and not something to do file-by-file as you touch them, which produces a corpus that is half-converted and consistent nowhere.
+4. **Existing prose is not yours to sweep.** Rules, skills and docs written before this rule use emoji as their own formatting. Removing them is a separate, deliberate change with its own ticket, not something a passing edit does, and not something to do file-by-file as you touch them, which produces a corpus that is half-converted and consistent nowhere.
 
 ## What this does not cover
 
