@@ -1,0 +1,205 @@
+parameters:
+	ignoreErrors:
+		-
+			rawMessage: Function acf_add_options_sub_page not found.
+			identifier: function.notFound
+			count: 1
+			path: includes/_unused/class.fad-acf-google-key.php
+
+		-
+			rawMessage: Function acf_update_setting not found.
+			identifier: function.notFound
+			count: 1
+			path: includes/_unused/class.fad-acf-google-key.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 1
+			path: includes/_unused/class.fad-acf-google-key.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 1
+			path: includes/_unused/class.fad-physician-acf.php
+
+		-
+			rawMessage: 'Call to internal function get_terms().'
+			identifier: function.internal
+			count: 2
+			path: includes/class.fad-acf-functions.php
+
+		-
+			rawMessage: 'Callback expects 1 parameter, $accepted_args is set to 3.'
+			identifier: arguments.count
+			count: 2
+			path: includes/class.fad-acf-functions.php
+
+		-
+			rawMessage: Filter callback return statement is missing.
+			identifier: return.missing
+			count: 1
+			path: includes/class.fad-acf-functions.php
+
+		-
+			rawMessage: Function acf_add_validation_error not found.
+			identifier: function.notFound
+			count: 2
+			path: includes/class.fad-acf-functions.php
+
+		-
+			rawMessage: Function acf_render_field_setting not found.
+			identifier: function.notFound
+			count: 3
+			path: includes/class.fad-acf-functions.php
+
+		-
+			rawMessage: Function facetwp_display not found.
+			identifier: function.notFound
+			count: 5
+			path: includes/class.fad-acf-functions.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 56
+			path: includes/class.fad-acf-functions.php
+
+		-
+			rawMessage: Function update_field not found.
+			identifier: function.notFound
+			count: 10
+			path: includes/class.fad-acf-functions.php
+
+		-
+			rawMessage: Function format_phone_dash not found.
+			identifier: function.notFound
+			count: 3
+			path: includes/class.fad-custom-post.php
+
+		-
+			rawMessage: Function format_phone_us not found.
+			identifier: function.notFound
+			count: 3
+			path: includes/class.fad-custom-post.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 163
+			path: includes/class.fad-custom-post.php
+
+		-
+			rawMessage: Function get_field_object not found.
+			identifier: function.notFound
+			count: 1
+			path: includes/class.fad-custom-post.php
+
+		-
+			rawMessage: Function image_sizer not found.
+			identifier: function.notFound
+			count: 6
+			path: includes/class.fad-custom-post.php
+
+		-
+			rawMessage: 'Undefined variable: $resident_academic_year_name'
+			identifier: variable.undefined
+			count: 1
+			path: includes/class.fad-custom-post.php
+
+		-
+			rawMessage: 'Call to internal function get_terms().'
+			identifier: function.internal
+			count: 2
+			path: includes/class.fad-functions.php
+
+		-
+			rawMessage: 'Callback expects 1 parameter, $accepted_args is set to 2.'
+			identifier: arguments.count
+			count: 1
+			path: includes/class.fad-functions.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 43
+			path: includes/class.fad-functions.php
+
+		-
+			rawMessage: Function FWP not found.
+			identifier: function.notFound
+			count: 3
+			path: includes/class.fad-fwp-functions.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 4
+			path: includes/class.fad-fwp-functions.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 106
+			path: includes/class.fad-gmb-settings-page.php
+
+		-
+			rawMessage: Function get_field_object not found.
+			identifier: function.notFound
+			count: 3
+			path: includes/class.fad-gmb-settings-page.php
+
+		-
+			rawMessage: Function get_sub_field not found.
+			identifier: function.notFound
+			count: 2
+			path: includes/class.fad-gmb-settings-page.php
+
+		-
+			rawMessage: Function have_rows not found.
+			identifier: function.notFound
+			count: 2
+			path: includes/class.fad-gmb-settings-page.php
+
+		-
+			rawMessage: Function image_sizer not found.
+			identifier: function.notFound
+			count: 3
+			path: includes/class.fad-gmb-settings-page.php
+
+		-
+			rawMessage: Function the_row not found.
+			identifier: function.notFound
+			count: 1
+			path: includes/class.fad-gmb-settings-page.php
+
+		-
+			rawMessage: Function format_phone_dash not found.
+			identifier: function.notFound
+			count: 1
+			path: includes/class.fad-helper-functions.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 14
+			path: includes/class.fad-helper-functions.php
+
+		-
+			rawMessage: Function acf_add_options_sub_page not found.
+			identifier: function.notFound
+			count: 7
+			path: includes/class.fad-settings-pages.php
+
+		-
+			rawMessage: Function acf_update_setting not found.
+			identifier: function.notFound
+			count: 1
+			path: includes/class.fad-settings-pages.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 1
+			path: includes/class.fad-settings-pages.php
