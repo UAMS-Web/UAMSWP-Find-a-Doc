@@ -1,2 +1,8 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+/vendor/ export-ignore
+/tests/ export-ignore
+/tests-legacy/ export-ignore
+/phpunit.xml export-ignore
+/composer.json export-ignore
+/composer.lock export-ignore
