@@ -5,6 +5,11 @@
  *
  */
 
+// Editor placeholder for a newly inserted, still-empty block (ACF Blocks V3).
+if ( function_exists( 'uams_fad_block_placeholder' ) && uams_fad_block_placeholder( $block ?? null, $is_preview ?? false ) ) {
+    return;
+}
+
 // Create id attribute allowing for custom "anchor" value.
 $id = '';
 if ( empty( $id ) && isset($block) ) {
@@ -40,8 +45,10 @@ if ( $more ) {
         $more_button_text = get_field('block_fad_locations_more_button_text');
     if ( empty($more_button_url) )
         $more_button_url = get_field('block_fad_locations_more_button_url');
-    if ( empty($more_button_target) )
+    if ( empty($more_button_target) && is_array($more_button_url) )
         $more_button_target = $more_button_url['target'];
+    if ( is_array($more_button_url) && isset($more_button_url['url']) )
+        $more_button_url = $more_button_url['url'];
     if ( empty($more_button_description) )
         $more_button_description = get_field('block_fad_locations_more_button_description');
         $more_button_description_attr = $more_button_description;
@@ -140,7 +147,7 @@ if($filter_type || $filter_region || $filter_aoe || $filter_ids) {
                             <div class="more">
                                 <p class="lead"><?php echo $more_text; ?></p>
                                 <div class="cta-container">
-                                    <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description_attr; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                                    <a href="<?php echo $more_button_url; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description_attr; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
                                 </div>
                             </div>
                         <?php } // endif ?>

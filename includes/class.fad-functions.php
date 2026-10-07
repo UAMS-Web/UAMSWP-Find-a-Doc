@@ -354,45 +354,101 @@ function uamswp_fad_check_and_schedule_cron() {
 add_action( 'uamswp_provider_pg_sync_hook', 'sync_provider_pg_data' );
 
 function sync_provider_pg_data() {
-    $count = 10;
+    $count    = 10;
+    $lock_key = 'uamswp_pg_sync_lock';
+
+    // A full run can outlast the schedule interval under rate limiting; never overlap two runs.
+    if ( get_transient( $lock_key ) ) {
+        return;
+    }
 
     $providers = get_posts( array(
         'post_type'      => 'provider',
         'post_status'    => 'publish',
         'posts_per_page' => -1,
+        'fields'         => 'ids',
     ) );
 
     if ( empty( $providers ) ) {
         return;
     }
 
-    foreach ( $providers as $provider ) {
+    set_transient( $lock_key, time(), 2 * HOUR_IN_SECONDS );
+
+    foreach ( $providers as $provider_id ) {
         // Using get_field assumes Advanced Custom Fields (ACF) is active
-        $npi = get_field( 'physician_npi', $provider->ID );
+        $npi = absint( get_field( 'physician_npi', $provider_id ) );
         if ( ! $npi ) {
             continue;
         }
 
-        $api_url = 'https://api1.consumerism.pressganey.com/api/bsr/comments?personId=' . $npi . '&perPage=' . $count . '&days=540&additionalFields=reviewSummary';
+        $api_url = add_query_arg(
+            array(
+                'personId'         => $npi,
+                'perPage'          => $count,
+                'days'             => 540,
+                'additionalFields' => 'reviewSummary',
+            ),
+            'https://api1.consumerism.pressganey.com/api/bsr/comments'
+        );
 
         $external_data = fetch_pg_api_with_retry( $api_url );
 
-        if ( $external_data ) {
-            // Save the raw text/JSON string to post meta
-            update_post_meta( $provider->ID, '_syndicated_api_data', $external_data );
+        if ( is_wp_error( $external_data ) ) {
+            // Keep the last good payload; a failed fetch is not review data.
+            error_log( sprintf( 'UAMSWP Find-a-Doc: Press Ganey sync skipped provider %d: %s', $provider_id, $external_data->get_error_message() ) );
+
+            if ( 'pg_rate_limited' === $external_data->get_error_code() ) {
+                // The upstream quota is exhausted; stop this run and let the next scheduled run retry.
+                break;
+            }
+        } elseif ( $external_data ) {
+            update_post_meta( $provider_id, '_syndicated_api_data', $external_data );
         }
 
         // Standard half-second pause to prevent our own cron loop from trigger a SpikeArrest
         usleep( 500000 );
     }
+
+    delete_transient( $lock_key );
 }
+
+// Clear the sync when the plugin is deactivated so the event does not keep firing.
+register_deactivation_hook( UAMS_FAD_PATH . 'uamswp-find-a-doc.php', function () {
+    wp_clear_scheduled_hook( 'uamswp_provider_pg_sync_hook' );
+    delete_transient( 'uamswp_pg_sync_lock' );
+} );
 
 // Get PressGaney Access Token
 function wp_pg_get_token() {
 	$pg_cache_key   = 'pg_api_token';
 	$pg_token = get_transient( $pg_cache_key );
 	if ( ! $pg_token ) {
-		$pg_response    = wp_remote_post('https://api1.consumerism.pressganey.com/api/service/v1/token/create?appId=034581304013586&appSecret=68a0fd1e-22c0-49a2-8218-10f581e3cdaa', array(
+		// PressGaney API credentials are read at runtime from server-side
+		// configuration -- never hardcoded here. Define them in wp-config.php:
+		//     define( 'UAMSWP_PG_APP_ID', '...' );
+		//     define( 'UAMSWP_PG_APP_SECRET', '...' );
+		// or provide them via the UAMSWP_PG_APP_ID / UAMSWP_PG_APP_SECRET
+		// environment variables. The previously committed credential remains in
+		// git history and must be rotated by the site owner.
+		$pg_app_id     = defined( 'UAMSWP_PG_APP_ID' ) ? UAMSWP_PG_APP_ID : getenv( 'UAMSWP_PG_APP_ID' );
+		$pg_app_secret = defined( 'UAMSWP_PG_APP_SECRET' ) ? UAMSWP_PG_APP_SECRET : getenv( 'UAMSWP_PG_APP_SECRET' );
+
+		// Fail safe: without both credentials, do not call the API with empty
+		// or placeholder values. Return the (missing) token as before.
+		if ( empty( $pg_app_id ) || empty( $pg_app_secret ) ) {
+			return $pg_token;
+		}
+
+		$pg_token_url = add_query_arg(
+			array(
+				'appId'     => $pg_app_id,
+				'appSecret' => $pg_app_secret,
+			),
+			'https://api1.consumerism.pressganey.com/api/service/v1/token/create'
+		);
+
+		$pg_response    = wp_remote_post( $pg_token_url, array(
 			'headers' => array(
 				'Content-Type' => 'application/json',
 				'Access-Token' => 'Content-Type'
@@ -454,56 +510,77 @@ function wp_pg_cached_api( $npi, $count = 6 ) {
 add_action('wp_ajax_pg_ajax_api_action', 'pg_ajax_api');
 add_action('wp_ajax_nopriv_pg_ajax_api_action', 'pg_ajax_api');
 function pg_ajax_api() {
-	// if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'pg_pagination_posts') || !isset($_POST['npi'])) {
-	// 	wp_die(-1);
-	// }
+	check_ajax_referer( 'pg_pagination_posts', 'nonce' );
 
-	$npi = $_POST['npi'];
-	$current_page = $_POST['page'] ? (int) $_POST['page'] : 1;
+	$post_id      = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
+	$current_page = isset( $_POST['page'] ) ? max( 1, absint( wp_unslash( $_POST['page'] ) ) ) : 1;
+
+	// Only published providers have public reviews; the NPI is read server-side so the caller cannot choose it.
+	if ( ! $post_id || 'provider' !== get_post_type( $post_id ) || 'publish' !== get_post_status( $post_id ) ) {
+		wp_send_json_error( 'invalid request', 400 );
+	}
+
+	$npi = absint( get_field( 'physician_npi', $post_id ) );
+	if ( ! $npi ) {
+		wp_send_json_error( 'invalid request', 400 );
+	}
 
 	// PressGaney requires Access-Token to retrieve data
 	$token = wp_pg_get_token();
+	if ( ! $token ) {
+		wp_send_json_error( 'upstream unavailable', 502 );
+	}
 
-	// Namespace in case of collision, since transients don't support groups like object caching.
-	$url = 'https://api1.consumerism.pressganey.com/api/bsr/comments?personId=' . $npi . '&perPage=10&days=540&page=' . $current_page;
+	$url = add_query_arg(
+		array(
+			'personId' => $npi,
+			'perPage'  => 10,
+			'days'     => 540,
+			'page'     => $current_page,
+		),
+		'https://api1.consumerism.pressganey.com/api/bsr/comments'
+	);
 
-		$request = wp_remote_retrieve_body( wp_remote_get( $url, array(
-			'headers' => array(
-				'Content-Type' => 'application/json',
-				'Access-Token' => $token
-				)
-		) ) );
+	$response = wp_remote_get( $url, array(
+		'timeout' => 15,
+		'headers' => array(
+			'Content-Type' => 'application/json',
+			'Access-Token' => $token,
+		),
+	) );
 
-		if ( is_wp_error( $request ) ) {
-			// Cache failures for a short time, will speed up page rendering in the event of remote failure.
-			echo 'error';
-		} else {
-			// if ( false === $request || (is_array($request) && ('200' !== $request['status']['code'])) ) {
-				$pg_rating_data = json_decode($request);
-				// print_r($pg_rating_data);
-				$reviews = $pg_rating_data->data->entities[0]->comments;
-				// print_r($reviews);
-				foreach( $reviews as $review ): ?>
-					<div class="card">
-						<div class="card-header bg-transparent">
-							<div class="rating rating-center" aria-label="Average Rating">
-								<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->overallRating->value)/5 * 100; ?>%;"></div></div>
-								<div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->overallRating->value; ?><span class="sr-only"> out of 5</span></div>
-							</div>
-						</div>
-						<div class="card-body">
-							<h4 class="sr-only">Comment</h4>
-							<p class="card-text"><?php echo $review->comment; ?></p>
-						</div>
-						<div class="card-footer bg-transparent text-muted small">
-							<h4 class="sr-only">Date</h4>
-							<?php echo date("M d, Y", strtotime($review->mentionTime)); ?>
-						</div>
-					</div>
-				<?php
-				endforeach;
-			// }
-		}
+	if ( is_wp_error( $response ) || 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
+		wp_send_json_error( 'upstream unavailable', 502 );
+	}
+
+	$pg_rating_data = json_decode( wp_remote_retrieve_body( $response ) );
+	$reviews        = ( isset( $pg_rating_data->data->entities[0]->comments ) && is_array( $pg_rating_data->data->entities[0]->comments ) )
+		? $pg_rating_data->data->entities[0]->comments
+		: array();
+
+	foreach ( $reviews as $review ) :
+		$rating  = isset( $review->overallRating->value ) ? floatval( $review->overallRating->value ) : 0;
+		$comment = isset( $review->comment ) ? (string) $review->comment : '';
+		$when    = isset( $review->mentionTime ) ? strtotime( (string) $review->mentionTime ) : false;
+		?>
+		<div class="card">
+			<div class="card-header bg-transparent">
+				<div class="rating rating-center" aria-label="Average Rating">
+					<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo esc_attr( $rating / 5 * 100 ); ?>%;"></div></div>
+					<div class="ratings-score-lg" itemprop="ratingValue"><?php echo esc_html( $rating ); ?><span class="sr-only"> out of 5</span></div>
+				</div>
+			</div>
+			<div class="card-body">
+				<h4 class="sr-only">Comment</h4>
+				<p class="card-text"><?php echo esc_html( $comment ); ?></p>
+			</div>
+			<div class="card-footer bg-transparent text-muted small">
+				<h4 class="sr-only">Date</h4>
+				<?php echo $when ? esc_html( date( 'M d, Y', $when ) ) : ''; ?>
+			</div>
+		</div>
+		<?php
+	endforeach;
 
 	wp_die();
 }
@@ -1148,7 +1225,10 @@ function provider_ajax_filter_callback() {
 	$region_IDs = array();
 	while ($region_prov_ids->have_posts()) : $region_prov_ids->the_post();
 		$id = get_the_ID();
-		$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
+		$region_ID = get_field('physician_region', $id);
+		if (is_array($region_ID)) {
+			$region_IDs = array_merge($region_IDs, $region_ID);
+		}
 	endwhile;
 	$region_IDs = array_unique($region_IDs);
 	$region_list = array();
@@ -1594,49 +1674,59 @@ add_action('wp_footer', 'uamswp_add_trench');
 add_action('wp_ajax_nopriv_schedule_ajax_filter', 'schedule_ajax_filter_callback');
 add_action('wp_ajax_schedule_ajax_filter', 'schedule_ajax_filter_callback');
 function schedule_ajax_filter_callback() {
-	if (!isset($_POST['pid']) || !isset($_POST['schedule_options'])) {
-		// echo json_encode(false);
-		exit;
+	check_ajax_referer( 'load_more_posts', 'security' );
+
+	$pid          = isset( $_POST['pid'] ) ? absint( wp_unslash( $_POST['pid'] ) ) : 0;
+	$schedule_key = isset( $_POST['schedule_options'] ) ? absint( wp_unslash( $_POST['schedule_options'] ) ) : 0;
+
+	// Only published locations have public scheduling options.
+	if ( ! $pid || 'location' !== get_post_type( $pid ) || 'publish' !== get_post_status( $pid ) ) {
+		wp_send_json_error( 'not found', 404 );
 	}
 
-	$pid = $_POST['pid'];
-	$schedule_key = $_POST['schedule_options'];
+	$schedules = get_field( 'location_scheduling_options', $pid );
+	if ( ! is_array( $schedules ) || ! isset( $schedules[ $schedule_key ] ) || ! is_array( $schedules[ $schedule_key ] ) ) {
+		wp_send_json_error( 'not found', 404 );
+	}
+	$row = $schedules[ $schedule_key ];
 
-	$schedules = get_field('location_scheduling_options', $pid);
-	$row = $schedules[$schedule_key];
-	$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
-	$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
-	$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
-	$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
-	$location_scheduling_options = get_field('location_scheduling_options', $pid);
+	$mychart_scheduling_domain     = (string) get_field( 'mychart_scheduling_domain', 'option' );
+	$mychart_scheduling_instance   = (string) get_field( 'mychart_scheduling_instance', 'option' );
+	$mychart_scheduling_linksource = (string) get_field( 'mychart_scheduling_linksource', 'option' );
+	$mychart_scheduling_linksource = ( '' !== $mychart_scheduling_linksource ) ? $mychart_scheduling_linksource : 'uamshealth.com';
 
-	$location_scheduling_ser = $row['location_scheduling_ser'];
-	$location_scheduling_dep = $row['location_scheduling_dep'];
-	$location_scheduling_vt = $row['location_scheduling_vt'];
-	$location_scheduling_item_title_nested = $row['location_scheduling_item_title_nested'];
-	$location_scheduling_item_title_nested = ( isset($location_scheduling_item_title_nested) && !empty($location_scheduling_item_title_nested) ) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
-	$location_scheduling_item_intro_nested = $row['location_scheduling_item_intro_nested'];
-	$location_scheduling_fallback = $row['location_scheduling_fallback'];
+	$location_scheduling_ser               = isset( $row['location_scheduling_ser'] ) ? (string) $row['location_scheduling_ser'] : '';
+	$location_scheduling_dep               = isset( $row['location_scheduling_dep'] ) ? (string) $row['location_scheduling_dep'] : '';
+	$location_scheduling_vt                = isset( $row['location_scheduling_vt'] ) ? (string) $row['location_scheduling_vt'] : '';
+	$location_scheduling_item_title_nested = ! empty( $row['location_scheduling_item_title_nested'] ) ? (string) $row['location_scheduling_item_title_nested'] : 'Schedule an Appointment Online';
+	$location_scheduling_item_intro_nested = isset( $row['location_scheduling_item_intro_nested'] ) ? (string) $row['location_scheduling_item_intro_nested'] : '';
+	$location_scheduling_fallback          = isset( $row['location_scheduling_fallback'] ) ? (string) $row['location_scheduling_fallback'] : '';
+
+	$widget_base = 'https://' . $mychart_scheduling_domain . '/' . $mychart_scheduling_instance;
+	// Built by hand rather than add_query_arg so empty values still appear as "id=" the way the widget expects.
+	$widget_src  = $widget_base . '/SignupAndSchedule/EmbeddedSchedule'
+		. '?id=' . rawurlencode( $location_scheduling_ser )
+		. '&dept=' . rawurlencode( $location_scheduling_dep )
+		. '&vt=' . rawurlencode( $location_scheduling_vt )
+		. '&linksource=' . rawurlencode( $mychart_scheduling_linksource );
 	?>
-	<h3 class="sr-only module-inner-title"><?php echo $location_scheduling_item_title_nested; ?></h3>
-	<?php if ( $location_scheduling_item_intro_nested && !empty($location_scheduling_item_intro_nested) ) { ?>
+	<h3 class="sr-only module-inner-title"><?php echo esc_html( $location_scheduling_item_title_nested ); ?></h3>
+	<?php if ( '' !== $location_scheduling_item_intro_nested ) { ?>
 		<p class="note">
-			<?php echo $location_scheduling_item_intro_nested; ?>
+			<?php echo wp_kses_post( $location_scheduling_item_intro_nested ); ?>
 		</p>
 	<?php } ?>
 	<div id="scheduleContainer">
-		<iframe id="openSchedulingFrame" title="MyChart Scheduling" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+		<iframe id="openSchedulingFrame" title="MyChart Scheduling" class="widgetframe" scrolling="no" src="<?php echo esc_url( $widget_src ); ?>"></iframe>
 	</div>
 
-	<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
-
-	<script src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
+	<script src="<?php echo esc_url( $widget_base . '/Content/EmbeddedWidgetController.js' ); ?>" type="text/javascript"></script>
 
 	<script type="text/javascript">
 	var EWC = new EmbeddedWidgetController({
 
 		// Replace with the hostname of your Open Scheduling site
-		'hostname':'https://<?php echo $mychart_scheduling_domain; ?>',
+		'hostname': <?php echo wp_json_encode( 'https://' . $mychart_scheduling_domain ); ?>,
 
 		// Must equal media query in EpicWP.css + any left/right margin of the host page. Should also change in EmbeddedWidget.css
 		'matchMediaString':'(max-width: 991.98px)',
@@ -1649,9 +1739,9 @@ function schedule_ajax_filter_callback() {
 		'toggleBtnCollapseHelpText': 'Exit fullscreen',
 	});
 	</script>
-	<?php if ( $location_scheduling_fallback && !empty($location_scheduling_fallback) ) { ?>
+	<?php if ( '' !== $location_scheduling_fallback ) { ?>
 		<div class="more">
-			<?php echo $location_scheduling_fallback; ?>
+			<?php echo wp_kses_post( $location_scheduling_fallback ); ?>
 		</div>
 	<?php } ?>
 	<?php
