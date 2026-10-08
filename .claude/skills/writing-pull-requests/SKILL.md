@@ -59,6 +59,36 @@ until a body finally trips it). Write it to a scratch file and
 `gh pr create --base main --head <branch> --title '…' --body-file pr-body.md`; the same holds
 for `gh pr edit <n> --body-file`.
 
+## Scan for private network addresses before every post
+
+A private network address in a tracker body or comment tells anyone who can read it where an
+internal host lives. **Before every `gh` call that posts or updates text** (`gh pr create`,
+`gh pr edit --body-file`, `gh pr comment`, `gh pr review --body-file`, and any `gh api` call
+that sends a body) run the body file through the check, from the repository root:
+
+```bash
+node .claude/skills/writing-issues/scripts/check-private-network-addresses.mjs path/to/body.md
+```
+
+**A pass is the printed `private-network-address check: clean` line**, not the exit status
+alone. Exit 1 means do not post: rewrite the line it names and run it again. Exit 2 means the
+check did not run (no file given, a file it could not read or that is not UTF-8, or a failed
+self-check); that is not a clean result. Write the body file as UTF-8: Windows PowerShell 5.1's
+`>` and `Out-File` write UTF-16, which the check refuses.
+
+The check flags IPv4 addresses in the RFC 1918 ranges (`10.0.0.0/8`, `172.16.0.0/12`,
+`192.168.0.0/16`) wherever they sit, including inside URLs and code, names the line and the
+range, and never prints the address. A documentation-range placeholder (RFC 5737, such as
+`192.0.2.10`) passes, and so do the three blocks written as themselves; a host or a subnet
+with a prefix is still flagged. When a body must discuss a private address, put
+`<!-- allow-private-network-address -->` on a line of its own, outside any code block; quoted
+inline or inside a code block it does not opt out. The check reads only the body file, so keep
+addresses out of the title too. Verified on Windows 11 with Node 22; macOS and Linux have not
+been run.
+
+Comments and reviews follow the same rule: write the text to a file, run the check, then
+`gh pr comment <n> --body-file <file>` (or `-F body=@<file>` with `gh api`).
+
 ## Draft state and merge order
 
 Two lifecycle rules govern *when* a PR is opened as ready and *how* its merge is sequenced.
@@ -81,7 +111,7 @@ Two lifecycle rules govern *when* a PR is opened as ready and *how* its merge is
 
 Where the repository runs cspell: a `cspell.json`, a `project-words.txt` dictionary, and a `spell` job in its CI chain: a word the checker does not recognize fails validation and forces a *separate* `project-words.txt` PR after the fact. Catch it in the PR that introduces the word instead. This applies to docs-only PRs too: the ones most likely to add new words, and the ones that open non-draft (above), so there is no draft window in which CI would otherwise catch it first.
 
-If you have added or edited any prose or identifiers: comments, docs, test names, anything cspell scans : run the spell check before opening the PR and reconcile every flagged word. For each one, decide : do **not** reflexively allow-list:
+If you have added or edited any prose or identifiers (comments, docs, test names, anything cspell scans), run the spell check before opening the PR and reconcile every flagged word. For each one, decide: do **not** reflexively allow-list:
 
 - **A genuine misspelling** → fix it in source.
 - **A British spelling in first-party prose** → fix it to American, per [`american-english-prose`](../../rules/american-english-prose.md), which owns the convention, its arbiter, and the reasons that justify overriding it in the dictionary. Keep British only where it is baked into something you do not control: a WordPress core hook name, a third-party option key.
@@ -416,7 +446,7 @@ Every PR ends with a `## Test plan` GitHub task list. Conventions:
   (e.g. "Production / staging: confirm no `.env` has `STATAMIC_PROTECT_PASSWORD=secret`
   carried over", or anything needing a second site in a multisite network or the production
   data set).
-- When the PR has a companion at all: a submodule pointer, a fixtures bump, a sibling-repo PR, or a release the consumer needs : include a `[ ]` item for the gated follow-through. Note CI is expected-red until the companion merges **when the branch depends on it**; when it does not, say so explicitly, because then nothing goes red and the item is the only thing left holding the bump. See **Companion PRs and merge order** above.
+- When the PR has a companion at all (a submodule pointer, a fixtures bump, a sibling-repo PR, or a release the consumer needs), include a `[ ]` item for the gated follow-through. Note CI is expected-red until the companion merges **when the branch depends on it**; when it does not, say so explicitly, because then nothing goes red and the item is the only thing left holding the bump. See **Companion PRs and merge order** above.
 
 ## Tone and voice
 

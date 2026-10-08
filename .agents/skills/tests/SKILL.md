@@ -17,7 +17,7 @@ description: >-
   Edit it there, not here; the next sync overwrites this copy.
   Delivered to this repository through the profile(s): tests.
 -->
-<!-- cspell:ignore absint ABSPATH autoloaded muplugins Packagist packagist wpdb yoast -->
+<!-- cspell:ignore absint ABSPATH autoloaded muplugins Packagist packagist Playwright tia wpdb yoast -->
 
 # Tests
 
@@ -167,6 +167,36 @@ Templates: [`templates/laravel/`](templates/laravel/), trimmed to what a new app
 An application created without Pest moves to it as Pest's installation guide describes: `composer remove phpunit/phpunit`, `composer require pestphp/pest pestphp/pest-plugin-laravel --dev --with-all-dependencies`, then `vendor/bin/pest --init` only if `tests/Pest.php` does not exist yet. Compare `phpunit.xml` with the template rather than replacing it; an existing application's environment variables are there for reasons.
 
 Run it with `php artisan test --compact` or `vendor/bin/pest`. Laravel's own testing guidance is in the [`laravel-best-practices`](#further-reading) skill where the repository has it.
+
+### Optional Laravel harness patterns
+
+The template binds Feature tests once, in `tests/Pest.php`: `pest()->extend(TestCase::class)->in('Feature')`. That stays the starter. Two other shapes are allowed. They are not starter steps, and a small application should not copy them from a large one.
+
+**Per-file Feature binding.** A Feature file may name its own base instead of inheriting the directory binding:
+
+```php
+uses(Tests\TestCase::class);
+```
+
+Traits go on the same call: `uses(Tests\TestCase::class, SomeTrait::class);`. A file may name a subclass of `Tests\TestCase` when that file needs a narrower case. Use the per-file form when the base class should be visible in the file, when Feature files do not all share one case, or when PHPStan or `pest-plugin-phpstan` should read the file's own `uses()` rather than a binding in `tests/Pest.php`. An application that binds per file does not also call `->in('Feature')` in `tests/Pest.php`.
+
+Keep the directory binding for a new application. One line covers every Feature file, and Unit tests stay unbound so they do not boot the framework.
+
+**A browser suite, only when the application has one.** A `tests/Browser` directory can stay out of the default `phpunit.xml` testsuites, so `php artisan test` does not run it. Bind it on its own and run it with `vendor/bin/pest tests/Browser`:
+
+```php
+uses(Tests\TestCase::class)->in('Browser');
+```
+
+Playwright timeouts and write-isolation hooks, when the application needs them, belong in that application. Do not copy one application's Control Panel helpers, `require_once` support files, or isolation classes into this template.
+
+**A checkout-local test impact cache, only when Tia is installed.** Pin the cache inside the checkout so two worktrees do not share one key:
+
+```php
+pest()->tia()->directory('tests/.pest/tia');
+```
+
+`tia()->directory()` needs Pest `^5.1.1`. Skip it when the application does not use Tia. Without the pin the cache lives under `~/.pest/tia/`, outside the checkout; the pin moves it in, so the repository must ignore it itself. Pest adds no ignore rule. Add `/tests/.pest/tia/` to `.gitignore`, or the cache shows up as untracked files and the shared local CI runner reports the tree as dirty. Ignoring all of `tests/.pest/` also hides Pest's snapshots in `tests/.pest/snapshots/`, which Pest's documentation says to commit.
 
 ### Plain PHP library
 
