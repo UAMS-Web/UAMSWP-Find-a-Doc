@@ -6,8 +6,8 @@
  * department section, a stand-alone team such as the dietitians). Each group lists the
  * Doc Profile Editor accounts that may edit its records, with one of them flagged as the
  * primary contact. A doc_editor can edit a provider or location when they are the post's
- * author or a member of one of its groups. Deleting and publishing stay with doc_admin
- * and administrators.
+ * author or a member of one of its groups. Deleting and publishing stay with administrators;
+ * a doc_admin can edit any record but can neither delete nor publish.
  *
  * Service lines can point at an editor group; providers and locations that have no group
  * of their own inherit it from their service line when they are saved.
