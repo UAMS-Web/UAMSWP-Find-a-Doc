@@ -89,7 +89,7 @@ feat: add audio-set figure_class hoisting
 ````
 
 (Subject ≤50 chars including `feat:`. Body uses `-` bullets, nested children directly under
-their parent without blank lines, inline code markup for handles and class names, and: note : 
+their parent without blank lines, inline code markup for handles and class names, and (note)
 no forced line wrapping: each bullet runs as one continuous line however long it gets.)
 
 ## Staging: name the paths, never `git add -A`

@@ -66,6 +66,36 @@ which the shell mangles or errors on as an inline argument (the failure is inter
 inline `--body` looks fine until a body finally trips it). `--body-file` sidesteps it entirely,
 and the same holds for `gh issue edit <n> --body-file`.
 
+## Scan for private network addresses before every post
+
+A private network address in a tracker body or comment tells anyone who can read it where an
+internal host lives. **Before every `gh` call that posts or updates text** (`gh issue create`,
+`gh issue edit --body-file`, `gh issue comment`, and any `gh api` call that sends a body) run
+the body file through the check, from the repository root:
+
+```bash
+node .claude/skills/writing-issues/scripts/check-private-network-addresses.mjs path/to/body.md
+```
+
+**A pass is the printed `private-network-address check: clean` line**, not the exit status
+alone. Exit 1 means do not post: rewrite the line it names and run it again. Exit 2 means the
+check did not run (no file given, a file it could not read or that is not UTF-8, or a failed
+self-check); that is not a clean result. Write the body file as UTF-8: Windows PowerShell 5.1's
+`>` and `Out-File` write UTF-16, which the check refuses.
+
+The check flags IPv4 addresses in the RFC 1918 ranges (`10.0.0.0/8`, `172.16.0.0/12`,
+`192.168.0.0/16`) wherever they sit, including inside URLs and code, names the line and the
+range, and never prints the address. A documentation-range placeholder (RFC 5737, such as
+`192.0.2.10`) passes, and so do the three blocks written as themselves; a host or a subnet
+with a prefix is still flagged. When a body must discuss a private address, put
+`<!-- allow-private-network-address -->` on a line of its own, outside any code block; quoted
+inline or inside a code block it does not opt out. The check reads only the body file, so keep
+addresses out of the title too. Verified on Windows 11 with Node 22; macOS and Linux have not
+been run.
+
+Comments follow the same rule: write the comment to a file, run the check, then
+`gh issue comment <n> --body-file <file>` (or `-F body=@<file>` with `gh api`).
+
 Creating the issue is half of filing. *Filing into the project board* below is the other half,
 done in the same pass, not a follow-on step.
 
@@ -344,7 +374,7 @@ an epic only where the container *itself* waits on a human (`uams-statamic#1777`
   label; a real-world action is `hitl`.
 
 For the **decision** flavor, the issue carries `decision-fork` alongside `hitl`. Surface the fork
-the right way: lead with a compare/contrast packet, *then* the interactive prompt : following
+the right way: lead with a compare/contrast packet, *then* the interactive prompt, following
 the [`design-decision-forks`](../rule-design-decision-forks/SKILL.md) rule, which defines that
 process and the label's lifecycle (don't restate either here).
 
@@ -433,9 +463,9 @@ sweep afterwards; [`closing-a-ticket`](../rule-closing-a-ticket/SKILL.md) owns w
 | --- | --- | --- |
 | Filed, not yet started | `Todo` | add the issue to the project (see below) |
 | Starting work | `In Progress` | add to the project if absent |
-| Merged into an integration branch, awaiting the gate | `CI` |: |
+| Merged into an integration branch, awaiting the gate | `CI` | (none) |
 | Merged to `main` | `Done` | GitHub auto-closes the issue from `Closes #N` |
-| A blocker surfaces mid-flight | `Blocked` |: |
+| A blocker surfaces mid-flight | `Blocked` | (none) |
 
 ## Check for an existing issue first
 
@@ -515,8 +545,8 @@ query string: measured in `uamswp-migration-api`, that does not error, it **hang
 output until the command is killed.
 
 **An empty result is only worth something if the query was shown to match.** Before accepting
-one, run the same form against a term you know is present and confirm it returns the known item
-: per `uamswp-migration-api#98`, an empty result from a query that cannot match is identical to
+one, run the same form against a term you know is present and confirm it returns the known item.
+Per `uamswp-migration-api#98`, an empty result from a query that cannot match is identical to
 an empty result from an empty tracker.
 
 Vary the terms across the symptom, the affected file/handle/symbol, and the class/label: one
