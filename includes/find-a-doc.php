@@ -23,4 +23,5 @@ function bootstrap() {
     include_once (__DIR__ . '/class.fad-acf-blocks.php' );
     include_once (__DIR__ . '/class.fad-gmb-settings-page.php' );
     include_once (__DIR__ . '/class.fad-editor-groups.php' ); // Editor groups: who may edit which providers and locations
+    include_once (__DIR__ . '/class.fad-edit-flow-status.php' ); // Edit Flow: status dropdown on published providers and locations
 }
