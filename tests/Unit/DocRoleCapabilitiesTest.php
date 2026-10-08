@@ -2,7 +2,8 @@
 
 /**
  * Pins what the Doc Profile Editor and Doc Profile Admin roles can do with providers and locations,
- * and the capability maps of the two post types, as they stand before #890 and #889 change them.
+ * and the capability maps of the two post types, including the capabilities that decide whether Edit Flow shows the
+ * status control on a published record (#890 removed the delete rights; #889 added the control).
  */
 
 declare(strict_types=1);
@@ -247,18 +248,5 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
 
         $this->assertNotContains($map['publish_posts'], $held, "{$role} cannot publish {$type}");
         $this->assertContains($map['edit_published_posts'], $held, "{$role} can edit a published {$type}");
-    }
-
-    public function test_the_plugin_has_no_status_control_of_its_own_yet(): void
-    {
-        foreach (glob(dirname(__DIR__, 2).'/includes/*.php') ?: [] as $file) {
-            $source = (string) file_get_contents($file);
-
-            foreach (['edit_flow-custom_status', 'current_user_can_publish_posts', 'post-status-select'] as $needle) {
-                $this->assertStringNotContainsString($needle, $source, basename($file).' handles the Edit Flow status control');
-            }
-        }
-
-        $this->assertFileDoesNotExist(dirname(__DIR__, 2).'/includes/class.fad-edit-flow-status.php');
     }
 }
