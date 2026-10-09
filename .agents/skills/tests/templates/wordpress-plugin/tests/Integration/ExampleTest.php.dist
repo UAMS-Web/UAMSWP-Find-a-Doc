@@ -3,29 +3,41 @@
 /**
  * The plugin inside a real WordPress: what the Unit suite's mocks cannot see.
  *
+ * A class-based PHPUnit 9.6 test, run from tests/Integration's own Composer
+ * setup, because WordPress' test suite supports PHPUnit 9 only.
+ *
  * @see example-plugin.php
  * @see includes/functions.php
  */
 
 declare(strict_types=1);
 
+namespace ExamplePlugin\Tests\Integration;
+
 use ExamplePlugin\Tests\Support\IntegrationTestCase;
 
-it('hooks the read-more link to excerpt_more', function (): void {
-    expect(has_filter('excerpt_more', 'example_plugin_read_more_link'))->toBe(10);
-});
-
-it('links the excerpt to the post the loop is on', function (): void {
-    $postId = IntegrationTestCase::factory()->post->create();
-
-    $this->go_to((string) get_permalink($postId));
-
-    try {
-        the_post();
-
-        expect(apply_filters('excerpt_more', ' [&hellip;]'))
-            ->toBe(' <a class="example-plugin-more" href="'.esc_url((string) get_permalink($postId)).'">Read more</a>');
-    } finally {
-        wp_reset_postdata();
+final class ExampleTest extends IntegrationTestCase
+{
+    public function test_hooks_the_read_more_link_to_excerpt_more(): void
+    {
+        $this->assertSame(10, has_filter('excerpt_more', 'example_plugin_read_more_link'));
     }
-});
+
+    public function test_links_the_excerpt_to_the_post_the_loop_is_on(): void
+    {
+        $postId = self::factory()->post->create();
+
+        $this->go_to((string) get_permalink($postId));
+
+        try {
+            the_post();
+
+            $this->assertSame(
+                ' <a class="example-plugin-more" href="'.esc_url((string) get_permalink($postId)).'">Read more</a>',
+                apply_filters('excerpt_more', ' [&hellip;]')
+            );
+        } finally {
+            wp_reset_postdata();
+        }
+    }
+}

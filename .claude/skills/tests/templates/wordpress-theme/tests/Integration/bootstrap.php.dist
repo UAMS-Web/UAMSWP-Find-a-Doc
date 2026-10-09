@@ -6,10 +6,24 @@
  * The plugin template's tests/Integration/bootstrap.php with one difference:
  * instead of requiring a plugin file on muplugins_loaded, it makes this
  * checkout the active theme, from wherever the checkout sits, without writing
- * an option. The recipe is the one `wp scaffold theme-tests` generates.
+ * an option. The recipe is the one `wp scaffold theme-tests` generates. Like
+ * the plugin's, it loads the Integration suite's own Composer setup in this
+ * directory, never the root's.
  */
 
 declare(strict_types=1);
+
+if (! is_readable(__DIR__.'/vendor/autoload.php')) {
+    fwrite(
+        STDERR,
+        PHP_EOL."Refusing to run: the Integration suite's own Composer setup is not installed.".PHP_EOL
+        .'Run `composer setup:integration` (or `composer install` in tests/Integration) first.'.PHP_EOL.PHP_EOL
+    );
+
+    exit(1);
+}
+
+require_once __DIR__.'/vendor/autoload.php';
 
 $wordpress = rtrim((string) (getenv('WP_TESTS_ABSPATH') ?: dirname(__DIR__, 5)), '/').'/';
 
@@ -66,6 +80,6 @@ tests_add_filter('muplugins_loaded', static function (): void {
 
 require $wpPhpunit.'/includes/bootstrap.php';
 
-require_once dirname(__DIR__).'/Support/IntegrationTestCase.php';
+require_once __DIR__.'/../Support/IntegrationTestCase.php';
 
 // cspell:ignore ABSPATH muplugins
