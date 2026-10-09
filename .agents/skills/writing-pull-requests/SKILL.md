@@ -12,7 +12,7 @@ description: >-
   (`[`path`](https://github.com/UAMS-Web/<repo>/blob/<branch>/path)`), and a canonical
   `Closes #N.` reference (top or bottom): one keyword per issue, with cross-repo references
   rendered as a backticked org/repo#N link, plus the closing-keyword traps that close a ticket
-  nobody meant to close. Also covers the PR lifecycle: open as a draft until the branch is ready
+  nobody meant to close. Also covers the PR lifecycle: one PR per integration branch from the issue's linked branch (a ready PR to `dev` and a draft to `staging` where both exist), each test plan scoped to its base branch's environment, open as a draft until the branch is ready
   to validate, flip draft → ready when it is, assign an owner, state the merge order of companion
   PRs in the body, and run the repository's cspell check on new prose and identifiers before
   opening. Activate whenever drafting, rewriting, or critiquing a GitHub pull-request title or
@@ -91,9 +91,17 @@ Comments and reviews follow the same rule: write the text to a file, run the che
 
 ## Draft state and merge order
 
-Two lifecycle rules govern *when* a PR is opened as ready and *how* its merge is sequenced.
-"Ready" is keyed on the repository's validation path, never on a green checks panel.
+Three lifecycle rules govern *which branches* a PR targets, *when* it is opened as ready, and
+*how* its merge is sequenced. "Ready" is keyed on the repository's validation path, never on a
+green checks panel.
 
+- **One PR per integration branch, all from the issue's linked branch.** The branch is created from the default branch and linked to the issue (`gh issue develop <n> --base <default branch> --name <n>-<slug>`, or the issue's **Create a branch** link). Which PRs it gets depends on the branches the repository has, the same plan the sync applies to its own pull requests:
+  - `dev`, `staging`, and the default branch: a ready PR to `dev`, and a draft PR to `staging` from the same branch. The `staging` draft references the `dev` PR instead of repeating its description, and stays a draft until the `dev` PR merges, whatever the next rule would otherwise say.
+  - `staging` and the default branch, no `dev`: one PR to `staging`.
+  - `dev` and the default branch, no `staging`: one PR to `dev`.
+  - Neither: one PR to the default branch.
+
+  Each PR's test plan covers its own base branch's environment; see the **`## Test plan` checklist** below.
 - **Open as draft unless it is ready to validate; flip draft → ready when it becomes ready.** A
   PR whose branch still needs work opens with `gh pr create --draft`; `gh pr ready <n>` flips it
   once the change is genuinely ready to validate. A docs-only PR: no code, test, or build
@@ -434,6 +442,7 @@ Every PR ends with a `## Test plan` GitHub task list. Conventions:
 
 - `- [x]` = author has already verified locally; `- [ ]` = unverified, deferred to
   reviewer / CI / staging.
+- **Scope the plan to the base branch's environment, and name it on the plan's first line.** Each branch a PR can target is tested somewhere: where the repository records that mapping (its `CONTRIBUTING.md`, or `## About this repository` in `AGENTS.md`), use it. A PR to the first branch a change lands on (`dev`, or the default branch in a repository with neither `dev` nor `staging`) is tested in the **local environment**: the plan opens with "Run on the local install." and its items are checked before review, apart from deferred items and a gate item a validating session runs after the flip (both below). A PR to `staging` is tested on the **staging environment** once the change is deployed there: the plan opens with "Run on the staging environment once this branch is deployed there.", naming the host where the repository's mapping gives one, and its items start unchecked. A repository with `staging` and no `dev` has one PR to `staging`, so its plan carries both: local items checked before review (with the same exceptions), then staging items unchecked under their own line. In the `dev` and `staging` pair the two lists overlap but are not copies: a check that means something on only one environment goes only on that one. Name environments by role in shared text, and leave host names to the repository's own mapping.
 - **Always include a gate item** for non-trivial PRs: **and tick it honestly.** `- [x]` asserts *the author verified this*. Write `- [x]` only for a check you actually ran and can name the result of (`- [x] \`vendor/bin/pint --test\` clean on the changed paths.`); where a validating session runs the gate after the flip, the item stays unticked. **Name the commit the runner printed, not the branch**: that is the whole point of it printing one.
 
   **Say what the gate does not cover.** A docs-only or scripts-only change may have **zero** gate coverage, and a PR that implies otherwise is claiming a green means something it does not.

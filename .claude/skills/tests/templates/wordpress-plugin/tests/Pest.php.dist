@@ -1,18 +1,19 @@
 <?php
 
 /**
- * Pest configuration.
+ * Pest configuration, for the Unit suite.
+ *
+ * The Integration suite is class-based PHPUnit 9.6 under tests/Integration, run
+ * from its own Composer setup; Pest never loads it.
  */
 
 declare(strict_types=1);
 
-use Brain\Monkey;
-use ExamplePlugin\Tests\Support\IntegrationTestCase;
-
-require_once __DIR__.'/bootstrap.php';
+use function Brain\Monkey\setUp;
+use function Brain\Monkey\tearDown;
 
 /*
- * Unit: Brain Monkey around every test.
+ * Brain Monkey around every test.
  *
  * setUp() defines WordPress' hook functions and arms Patchwork; tearDown()
  * verifies every expectation the test set (a `->once()` that never happened
@@ -24,23 +25,11 @@ require_once __DIR__.'/bootstrap.php';
  */
 uses()
     ->beforeEach(function (): void {
-        Monkey\setUp();
+        setUp();
     })
     ->afterEach(function (): void {
         $this->addToAssertionCount(Mockery::getContainer()->mockery_getExpectationCount());
 
-        Monkey\tearDown();
+        tearDown();
     })
     ->in('Unit');
-
-/*
- * Integration: WordPress' test case, and with it the database transaction that
- * is rolled back after every test. Bound to the directory, so a test cannot
- * forget it and leave rows behind.
- *
- * Guarded, because this file is also read by the Unit process, where WordPress
- * never loads and resolving the class would be a fatal error.
- */
-if (class_exists('WP_UnitTestCase', false)) {
-    uses(IntegrationTestCase::class)->in('Integration');
-}

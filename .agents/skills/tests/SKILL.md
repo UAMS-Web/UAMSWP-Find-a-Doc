@@ -32,53 +32,75 @@ Every PHP repository in UAMS-Web has tests (UAMS-Web/uams-claude-skills#9). A re
 
 Static analysis and formatting are the [`code-quality`](../code-quality/SKILL.md) skill's (UAMS-Web/uams-claude-skills#10).
 
-## Can this repository run Pest
+## Which PHP, and which Pest
 
-Answer the questions below, in order, and record the answers on the repository's harness or migration ticket. Dependency interrogation (`composer why` / `why-not`) comes **after** development dependencies exist, not before.
+A repository develops and tests on one PHP, and that is not the oldest PHP it supports (UAMS-Web/uams-claude-skills#124). The two are different numbers with different jobs, and the harness ticket records both:
 
-**1. Does the repository have a `composer.json`?** If not, add one holding development dependencies only: `name`, `description`, `type`, `license`, a `require` block holding only `php` (the supported floor, so Rector and PHPStan know it; see the [`code-quality`](../code-quality/SKILL.md) skill), `require-dev`, `config` and `scripts`. Nothing in `require` beyond `php`, so nothing new is installed into production. Ignore `vendor/` in `.gitignore`. Keep `vendor/`, `tests/` and `phpunit.xml` out of releases with `.gitattributes` `export-ignore` lines (see [Packaging](#packaging-tests-out-of-releases)); a zip or clone deploy that skips `git archive` still must not ship those paths. A repository with a hand-rolled `tests/` directory of scripts gets the same treatment; its scripts become the first Pest tests.
+- **The supported floor** is the oldest PHP the code must run on: `require.php` in `composer.json`, a plugin or theme header's `Requires PHP`, and any documented support. No test runs on it. It is guarded instead by the settings that name it and by one job that runs on it: Rector's `withPhpVersion` keeps rewrites to syntax the floor parses, PHPStan's `phpVersion.min` reports what the floor lacks (see the [`code-quality`](../code-quality/SKILL.md) skill), and the [floor lint job](#the-floor-lint-job) parses every shipped file with the floor PHP itself.
+- **The development PHP** is what Composer resolves development dependencies for and what the suite runs on: `config.platform.php` in `composer.json`, and `php` in the shared local CI runner's `local-ci.json`. It chooses the Pest major.
 
-**2. Is the oldest PHP the repository supports new enough for a maintained Pest?** The supported floor is the lowest of `composer.json`'s `require.php`, a plugin or theme header's `Requires PHP`, and any documented support. Compare it with what each Pest major requires (repo.packagist.org, 2026-10-02):
+**The floor in every WordPress repository is PHP 8.2**, the oldest PHP any UAMS WordPress site runs, with no per-repository exception (UAMS-Web/uams-claude-skills#126). A WordPress repository whose header or `composer.json` names a lower floor raises it to 8.2 when it adopts this standard.
+
+**Every WordPress repository develops on PHP 8.4.1 and runs Pest 5.** `config.platform.php` is `8.4.1`, because every PHPUnit 13 release, which Pest 5.3 requires, needs `php >=8.4.1`; the pin also keeps Composer from resolving for a newer PHP than a teammate has. `local-ci.json`'s `php` is `8.4`. Any PHP 8.4.1 or newer installs and runs the suite.
+
+Outside WordPress, the development PHP is the one the repository's servers and developers run, never below the floor; a Laravel or Statamic application usually has one PHP for both. Choose the newest Pest major that PHP allows (repo.packagist.org, 2026-10-07):
 
 | Pest | PHP | PHPUnit | Latest release |
 | --- | --- | --- | --- |
-| 5 | `^8.4` | 13 | v5.3.0, 2026-10-01 |
+| 5 | `^8.4` | 13 (`^13.3.6`, which needs PHP 8.4.1) | v5.3.0, 2026-10-01 |
 | 4 | `^8.3` | 12 | v4.7.8, 2026-08-03 |
 | 3 | `^8.2` | 11 | v3.8.7, 2026-07-06 |
 | 2 | `^8.2` (`^8.1` for the earliest 2.x) | 10 | v2.36.1, 2026-01-28 |
 | 1 | `^7.3 \|\| ^8.0` | 9 | v1.23.1, 2023-07-12; no release since |
 
-Pest 1 is not maintained, so **a floor below PHP 8.2 means Pest cannot run**. Composer would still install Pest on a developer's newer PHP, because it resolves development dependencies against the PHP running it, but the suite would then never run on the PHP the repository promises to support. Re-read the table from Packagist before quoting it: a major that stops receiving releases moves the floor.
+Re-read the table from Packagist before quoting it: a major that stops receiving releases moves the choice.
 
-Do not pin `config.platform.php` to that floor so Composer "resolves for production." Tooling installs on the developer's PHP; the floor belongs in `require.php` (and, on the PHPUnit path, in the PHPUnit major the templates name). Same rule as the [`code-quality`](../code-quality/SKILL.md) skill. Keep an existing platform pin only when the repository already needs one for another reason.
+**What the floor guard does not see.** A function that behaves differently on the floor than on the development PHP, without being missing or a change of syntax, is exercised by no test. The lint job and PHPStan catch what they can parse and look up; nothing else here does.
 
-Known pins to plan for when choosing a major (no `composer` commands yet; those run after dependencies are added):
+### Does a dependency pin PHPUnit
 
-- `yoast/phpunit-polyfills` 4.0.0, which WordPress' test suite requires, supports PHPUnit 7.5 to 9, 11 and 12, not 10 or 13. **A WordPress repository with an integration suite runs Pest 3 or Pest 4, never Pest 2 or 5.**
-- `10up/wp_mock` 1.x requires `phpunit/phpunit ^9.6`, which only Pest 1 accepts. This is one reason the unit layer here is Brain Monkey (see [The two WordPress layers](#the-two-wordpress-layers)).
+Only once `require-dev` is in `composer.json` and `composer install` has run: `composer why phpunit/phpunit` shows who constrains it, and `composer why-not pestphp/pest <constraint>` the major chosen above. A transitive pin that blocks the chosen major is upgraded, replaced, or recorded on the ticket as what keeps the repository on its current PHPUnit suite. Skip this on a greenfield harness until step 3 of [Adding a Pest harness](#adding-a-pest-harness-to-an-untested-repository) has installed dependencies.
 
-Choose the newest Pest major the floor and those known pins allow. If none does, the repository cannot run Pest yet.
+`10up/wp_mock` 1.x requires `phpunit/phpunit ^9.6`, which only Pest 1 accepts. That is one reason the unit layer here is Brain Monkey (see [The two WordPress layers](#the-two-wordpress-layers)).
 
-**3. After development dependencies exist: does a dependency pin PHPUnit where Pest cannot follow?** Only once `require-dev` is in `composer.json` and `composer install` has run: use `composer why phpunit/phpunit` to see who constrains it, and `composer why-not pestphp/pest <constraint>` for the major question 2 allows. Adjust the Pest or PHPUnit major if a transitive pin blocks the planned choice. Skip this question on a greenfield harness until step 3 of [Adding a Pest harness](#adding-a-pest-harness-to-an-untested-repository) (or the PHPUnit equivalent) has installed dependencies.
+### Why the WordPress Integration suite has its own Composer setup
 
-### A repository that cannot run Pest
+WordPress' own test suite supports PHPUnit 9 only (Yoast/PHPUnit-Polyfills#312), and `yoast/phpunit-polyfills` 4.0.0, which WordPress' test bootstrap refuses to run without, supports PHPUnit 7.5 to 9, 11 and 12, not 10 or 13. Pest 5 needs PHPUnit 13, so the two cannot share one `vendor/`. The Integration suite therefore installs on its own, from `tests/Integration/composer.json`: `phpunit/phpunit ^9.6`, `wp-phpunit/wp-phpunit` pinned to the WordPress minor the sites run, and `yoast/phpunit-polyfills ^4.0`, with the same `config.platform.php`. Its tests stay class-based PHPUnit 9 tests. Its `vendor/` is `tests/Integration/vendor/`, ignored by git and excluded from analysis by the [`code-quality`](../code-quality/SKILL.md) templates.
 
-It still gets a harness, on **PHPUnit 9** when the floor is below PHP 8.2 (`phpunit/phpunit ^9.6`: PHPUnit 10 needs PHP 8.1+, and the polyfills skip 10). Copy [`templates/wordpress-plugin-phpunit/`](templates/wordpress-plugin-phpunit/) for a WordPress plugin (same `tests/Unit` and `tests/Integration` split, PHP 7.4-safe bootstrap, Brain Monkey `UnitTestCase`, `yoast/phpunit-polyfills`). PHPUnit 9 coverage uses `<coverage><include>` in `phpunit.xml`; PHPUnit 10+ renamed that block to `<source><include>` (the Pest templates use `<source>`). When the suite later moves to PHPUnit 10+, also take the adapter in [`templates/wordpress-plugin/tests/Support/IntegrationTestCase.php.dist`](templates/wordpress-plugin/tests/Support/IntegrationTestCase.php.dist) (`expectDeprecated` without removed PHPUnit APIs, empty `checkRequirements`).
+**Not measured: a plugin that loads its own Composer autoloader at runtime.** A plugin whose main file requires the root `vendor/autoload.php` registers the root autoloader, which can resolve PHPUnit 13's classes, inside the Integration process. Composer places each autoloader it registers ahead of the earlier ones, so a PHPUnit class first loaded after the plugin could come from the wrong `vendor/`. The template's plugin has no autoloader, and the proof did not exercise this. A plugin that loads one checks that its Integration run still reports PHPUnit 9.6 in its header line and passes, and records the result on its adoption ticket.
 
-Brain Monkey supports PHP 5.6 and later and works with any PHPUnit; on the PHPUnit path its setup is the template's `UnitTestCase` (`Brain\Monkey\setUp()` / `tearDown()`, Mockery's `MockeryPHPUnitIntegration` so expectations count as assertions).
+### The floor lint job
 
-Its ticket names the constraint that blocks Pest and what would lift it: raising the PHP floor to 8.2, upgrading the dependency that pins PHPUnit, or replacing it.
+Where the repository has the shared local CI runner, one job parses every shipped PHP file with the floor PHP. A job's own `php` key names that version; the runner finds that PHP as the `local-ci` skill describes and refuses to start when it cannot, so a missing floor PHP is a failure, never a skip:
+
+```json
+{
+    "name": "lint-floor",
+    "run": "php -l",
+    "php": "8.2",
+    "each": ["**/*.php", "!vendor/**", "!tests/**"],
+    "always": true
+}
+```
+
+`tests/` is left out because the suite runs only on the development PHP and may use its syntax. A public repository that runs its checks in Actions instead runs the same `php -l` over the same files in a step on PHP 8.2. Measured on Windows 11 on 2026-10-07 with Herd's PHP 8.2.33: a typed class constant (`public const string LABEL`, PHP 8.3 syntax) in a shipped file failed `lint-floor` with a parse error while the ordinary `lint` job on PHP 8.4 passed, and removing it made both pass.
+
+### A repository still on PHPUnit
+
+With the Pest major chosen by the development PHP, the floor no longer keeps a repository off Pest. What still can is a dependency that pins PHPUnit (above). Such a repository keeps its existing PHPUnit suite, and its ticket names the pin and what would lift it. A WordPress repository's Integration suite is not this case: it is on PHPUnit 9.6 by design, in its own setup, beside Pest 5.
+
+The PHPUnit 9 plugin template that served repositories with a floor below PHP 8.2 was retired with UAMS-Web/uams-claude-skills#125: the floor is now 8.2 everywhere, and its Integration layer is the plugin template's `tests/Integration/` setup.
 
 ## Adding a Pest harness to an untested repository
 
-1. Answer questions 1 and 2 under [Can this repository run Pest](#can-this-repository-run-pest) and pick the Pest major (or stop and use the PHPUnit templates if Pest cannot run).
-2. Copy the template for the kind of repository (below), drop the `.dist` suffix from every `*.php.dist` file when copying into the repository, and fill in its placeholders.
-3. Add the development dependencies, `composer install`, run question 3 (`composer why` / `why-not`) to confirm no pin blocks the chosen major, and run the example test to see it pass. Break the code it covers and see it fail; a harness that cannot fail is not a harness.
+1. Answer the questions under [Which PHP, and which Pest](#which-php-and-which-pest) and pick the Pest major.
+2. Copy the template for the kind of repository (below), drop the `.dist` suffix from every `.dist` file when copying into the repository, and fill in its placeholders.
+3. Add the development dependencies, `composer install` (and, in a WordPress repository, `composer setup:integration`), confirm that no dependency pins PHPUnit ([Does a dependency pin PHPUnit](#does-a-dependency-pin-phpunit)), and run the example tests to see them pass. Break the code they cover and see them fail; a harness that cannot fail is not a harness.
 4. Replace the example test with a first real test of the repository's own code. Write further tests per [`pest-testing`](#further-reading).
 5. Add the `test` Composer scripts if the template merge did not already. Run the suite with `composer test` (or `composer test:unit` / `composer test:integration`) before every pull request. When the repository has the shared local CI runner, also wire the test job(s) into `local-ci.json` ([Running the suite before a pull request](#running-the-suite-before-a-pull-request)); if it does not, adopt the shared `local-ci` skill when ready, or keep running the Composer scripts directly until then.
 6. Open the repository's full-coverage ticket, blocked by the harness ticket, if it does not exist yet.
 
-Name every test file `*Test.php`. The testsuites select by that suffix, so a file named otherwise never runs, and an empty run looks like a passing one; `failOnEmptyTestSuite` in the Pest templates turns that into a failure (PHPUnit 10+; the PHPUnit 9 templates omit it and rely on the Composer scripts selecting a suite).
+Name every test file `*Test.php`. The testsuites select by that suffix, so a file named otherwise never runs, and an empty run looks like a passing one. `failOnEmptyTestSuite` in the root `phpunit.xml` templates turns that into a failure; the Integration suite's PHPUnit 9 configuration has no such setting, so read its test count.
 
 ### Packaging tests out of releases
 
@@ -96,36 +118,43 @@ Add the repository's other tooling files the same way. Pest configuration lives 
 
 ### WordPress plugin, including a must-use plugin
 
-**Pest (PHP floor 8.2+):** [`templates/wordpress-plugin/`](templates/wordpress-plugin/). Copy each `*.php.dist` to the same path without `.dist`.
-
-**PHPUnit 9 (Pest cannot run):** [`templates/wordpress-plugin-phpunit/`](templates/wordpress-plugin-phpunit/). Same layout, class-based tests, PHP 7.4-safe bootstrap (`strpos` instead of `str_contains`, no `mixed` parameter types), `<coverage><include>` in `phpunit.xml`, and a thin `IntegrationTestCase` until PHPUnit 10+ needs the Pest template's adapter.
+Template: [`templates/wordpress-plugin/`](templates/wordpress-plugin/). Two Composer setups: the root holds Pest 5 and Brain Monkey for the Unit suite; `tests/Integration/` holds PHPUnit 9.6, `wp-phpunit` and the polyfills for the Integration suite ([why](#why-the-wordpress-integration-suite-has-its-own-composer-setup)).
 
 | File (drop `.dist` when copying) | What it is |
 | --- | --- |
-| `composer.require-dev.jsonc` | The `require-dev`, `config` and `scripts` keys to merge into `composer.json`, with a note on the PHP and PHPUnit constraints. Not a `composer.json` of its own. |
-| `phpunit.xml` | Two testsuites, `Unit` and `Integration`, and the paths coverage measures (`<source>` on Pest / PHPUnit 10+; `<coverage>` on the PHPUnit 9 templates). |
-| `tests/bootstrap.php.dist` | Composer's autoloader, then either the Unit layer (Patchwork, `ABSPATH`, the plugin's definition files, no WordPress) or the Integration bootstrap, decided by the testsuite the process runs. |
-| `tests/Pest.php.dist` | Pest only: Brain Monkey around every Unit test; WordPress' test case bound to every Integration test. |
-| `tests/Support/UnitTestCase.php.dist` | PHPUnit path only: Brain Monkey base case with `MockeryPHPUnitIntegration`. |
+| `composer.require-dev.jsonc` | The `require-dev`, `config` and `scripts` keys to merge into the root `composer.json`: Pest 5 and Brain Monkey, the development PHP pin, and the `setup:integration`, `test`, `test:unit` and `test:integration` scripts. Not a `composer.json` of its own. |
+| `phpunit.xml` | The root configuration: the `Unit` testsuite only, and the paths coverage measures (`<source>`). |
+| `tests/bootstrap.php.dist` | The Unit bootstrap: Composer's autoloader, Patchwork, `ABSPATH`, the plugin's definition files. No WordPress. |
+| `tests/Pest.php.dist` | Brain Monkey around every Unit test, with its expectations added to the assertion count. |
 | `tests/Unit/ExampleTest.php.dist` | Example unit test of `example_plugin_read_more_link()` with `get_permalink()` mocked. |
-| `tests/Integration/bootstrap.php.dist` | Locates WordPress, refuses the working install's database, loads the plugin on `muplugins_loaded`, boots `wp-phpunit`. |
+| `tests/Integration/composer.json.dist` | The Integration suite's own Composer setup: `phpunit/phpunit ^9.6`, `wp-phpunit/wp-phpunit`, `yoast/phpunit-polyfills ^4.0`, the same platform pin. Shipped as `.dist` so tools that scan a repository for `composer.json` files do not pick up the template; the copy drops the suffix. |
+| `tests/Integration/phpunit.xml` | The Integration configuration, on PHPUnit 9: one testsuite over this directory excluding `./vendor`, and the paths coverage measures in PHPUnit 9's `<coverage><include>`. |
+| `tests/Integration/bootstrap.php.dist` | Refuses to run until `composer setup:integration` has installed this directory's setup, loads its autoloader, locates WordPress, refuses the working install's database, loads the plugin on `muplugins_loaded`, boots `wp-phpunit`. |
 | `tests/Integration/wp-tests-config.php.dist` | The test install's configuration, every value from a `WP_TESTS_*` environment variable with a local default. |
-| `tests/Support/IntegrationTestCase.php.dist` | Pest / PHPUnit 10+: `WP_UnitTestCase` adapted to PHPUnit 10 and later. PHPUnit 9 templates: thin subclass until that adapter is needed. |
-| `tests/Integration/ExampleTest.php.dist` | The same function inside a real WordPress: the hook is registered, and the link points at a real post. |
+| `tests/Support/IntegrationTestCase.php.dist` | A thin subclass of `WP_UnitTestCase`. On PHPUnit 9.6 WordPress' test case needs no adapter; the class is where the plugin's shared Integration helpers go. |
+| `tests/Integration/ExampleTest.php.dist` | A class-based test of the same function inside a real WordPress: the hook is registered, and the link points at a real post. |
 | `example-plugin.php.dist`, `includes/functions.php.dist` | The smallest plugin the tests exercise, so the templates run as shipped. Not copied into a real plugin. |
 
-Placeholders to replace throughout, consistently: `example-plugin.php` (the plugin's main file), `includes/functions.php` (the files that define the plugin's functions and classes), `EXAMPLE_PLUGIN_TESTS_BOOTSTRAPPED` and `example_plugin_tests_want_wordpress` (the plugin's prefix), `ExamplePlugin\Tests\Support` (the plugin's namespace), `example_plugin_tests` (the test database) and `Example Plugin Tests`. `IntegrationTestCase` is required by the Integration bootstrap rather than autoloaded, so no `autoload-dev` entry is needed.
+Placeholders to replace throughout, consistently: `example-plugin.php` (the plugin's main file), `includes/functions.php` (the files that define the plugin's functions and classes), `ExamplePlugin\Tests` (the plugin's test namespace), `example/example-plugin-integration-tests` (the Integration setup's package name), `example_plugin_tests` (the test database) and `Example Plugin Tests`. Pin `wp-phpunit/wp-phpunit` in `tests/Integration/composer.json` to the WordPress minor the sites run. `IntegrationTestCase` is required by the Integration bootstrap rather than autoloaded, so no `autoload-dev` entry is needed.
+
+Ignore both `vendor/` directories in `.gitignore`, and commit both lock files:
+
+```gitignore
+/vendor/
+/tests/Integration/vendor/
+```
 
 Run it:
 
 ```bash
 composer install
+composer setup:integration   # the Integration suite's own Composer setup, in tests/Integration
 mysql -u root -e 'CREATE DATABASE example_plugin_tests'   # once; never a database anything else uses
 
-# Unit suite: no WordPress checkout required
+# Unit suite: Pest 5, no WordPress checkout required
 composer test:unit
 
-# Integration suite: needs a WordPress core tree and the test database.
+# Integration suite: PHPUnit 9.6, needs a WordPress core tree and the test database.
 # Default: checkout lives at <wordpress>/wp-content/plugins/<plugin>/ (five levels
 # above tests/Integration/). Otherwise point WP_TESTS_ABSPATH at a core copy:
 wp core download --path=/tmp/wordpress
@@ -138,7 +167,7 @@ composer test              # test:unit, then test:integration, as two processes
 
 - Paths and URLs: `plugin_dir_path`, `plugin_dir_url`, `plugin_basename`, `trailingslashit`, `untrailingslashit`
 - Plugin metadata: `get_plugin_data`, `is_plugin_active` (when the file reads them at include time)
-- Translations already covered by `Functions\stubTranslationFunctions()` when the file translates at load time
+- Translations already covered by `stubTranslationFunctions()` when the file translates at load time
 - Hooks: Brain Monkey defines `add_action` / `add_filter` during `setUp()`; no extra stub unless the file calls something outside that set
 
 Classes autoloaded by Composer need nothing in the bootstrap.
@@ -147,16 +176,18 @@ Classes autoloaded by Composer need nothing in the bootstrap.
 
 **Must-use plugins.** WordPress loads every PHP file at the top of `wp-content/mu-plugins/` on each boot, including the test install's boot, and the test install uses the surrounding install's `wp-content`. A must-use plugin checked out there is therefore already loaded before `muplugins_loaded`: drop the `require` from the Integration bootstrap rather than load it twice, or point `WP_TESTS_ABSPATH` at a clean core copy where nothing else loads. The same applies to every other must-use plugin in the surrounding install: it runs in the test process too, so where one interferes, use a clean core copy.
 
-The Pest templates were run end to end on 2026-10-02 under Pest 3.8 (PHPUnit 11) and Pest 4.7 (PHPUnit 12), single site and multisite, against WordPress 7.1; Pest 5 does not resolve beside the polyfills.
+The plugin template was run end to end on Windows 11 on 2026-10-07, copied into an empty plugin with both setups installed on PHP 8.4.20: Pest 5.3.0 on PHPUnit 13.3.6 ran the Unit suite (3 passed, 4 assertions), and PHPUnit 9.6.38 with `wp-phpunit` 7.1.1 and the polyfills 4.0.0 ran the Integration suite against WordPress 7.1, single site and multisite (2 tests, 2 assertions each). Breaking the plugin's function failed both suites. The [`code-quality`](../code-quality/SKILL.md) templates (PHPStan 2.3.0, Rector 2.7.0, Pint 1.32.1, phpcs with WPCS 3.4.1), with their WordPress lines enabled, ran clean on that copy without reading `tests/Integration/vendor/`, as did `lint` and `lint-floor` on PHP 8.2.33.
 
 ### WordPress theme
 
-Templates: [`templates/wordpress-theme/`](templates/wordpress-theme/), which holds only what differs from the plugin. Copy the plugin template's `phpunit.xml`, `tests/Pest.php.dist` (as `tests/Pest.php`), `tests/Support/IntegrationTestCase.php.dist`, `tests/Integration/wp-tests-config.php.dist` and the `composer.require-dev.jsonc` keys, rename `ExamplePlugin` and `example_plugin` to the theme's, and in `phpunit.xml` replace `./includes` and `./example-plugin.php` with the theme's directories and `./functions.php`. Then use the theme's own (each `*.php.dist` drops `.dist` when copied):
+Templates: [`templates/wordpress-theme/`](templates/wordpress-theme/), which holds only what differs from the plugin. Copy the plugin template's `composer.require-dev.jsonc` keys, `phpunit.xml`, `tests/Pest.php.dist`, `tests/Support/IntegrationTestCase.php.dist`, and from `tests/Integration/` its `composer.json.dist`, `phpunit.xml` and `wp-tests-config.php.dist`; rename `ExamplePlugin` and `example_plugin` (and `example-plugin` in the package name) to the theme's; and in both `phpunit.xml` files replace the `includes` directory and `example-plugin.php` with the theme's directories and `functions.php`. Then use the theme's own (each `.dist` drops the suffix when copied):
 
-- `tests/bootstrap.php.dist`: a theme cannot avoid loading `functions.php`, which usually finds its files through `get_template_directory()` and registers hooks at file scope. The Unit bootstrap loads it inside one Brain Monkey session with those calls stubbed; the functions it defines outlive the session, and the hooks it registered are discarded. Add a stub for each WordPress function the theme's `functions.php` calls at load time.
+- `tests/bootstrap.php.dist`: the Unit bootstrap. A theme cannot avoid loading `functions.php`, which usually finds its files through `get_template_directory()` and registers hooks at file scope. The bootstrap loads it inside one Brain Monkey session with those calls stubbed; the functions it defines outlive the session, and the hooks it registered are discarded. Add a stub for each WordPress function the theme's `functions.php` calls at load time.
 - `tests/Unit/TemplateTagsTest.php.dist`: a template tag (`inc/template-tags.php`) tested with `get_the_date()` mocked. Template tags that return markup test as strings; one that echoes is tested with `ob_start()` and `ob_get_clean()`, or changed to return what it prints, with the echoing wrapper kept for templates.
-- `tests/Integration/bootstrap.php.dist`: instead of requiring a plugin file, makes the checkout the active theme without writing an option, the recipe `wp scaffold theme-tests` generates.
-- `tests/Integration/ExampleTest.php.dist`: the theme is active and its `after_setup_theme` callback ran.
+- `tests/Integration/bootstrap.php.dist`: the plugin's Integration bootstrap, except that instead of requiring a plugin file it makes the checkout the active theme without writing an option, the recipe `wp scaffold theme-tests` generates.
+- `tests/Integration/ExampleTest.php.dist`: a class-based test that the theme is active and its `after_setup_theme` callback ran.
+
+The theme template was run end to end the same day, assembled as above from the plugin template with the names changed: Unit 1 passed; Integration OK, 2 tests and 3 assertions, single site and multisite. Removing the `after_setup_theme` registration failed one Integration test, and changing the template tag's markup failed the Unit test.
 
 Page templates (`single.php`, `archive.php`) are tested in the Integration suite by setting up the query with `$this->go_to()` and capturing the template's output, and only where their logic warrants it; logic worth testing usually belongs in a function the template calls.
 
@@ -200,7 +231,7 @@ pest()->tia()->directory('tests/.pest/tia');
 
 ### Plain PHP library
 
-Templates: [`templates/library/`](templates/library/): `phpunit.xml` with one `Unit` testsuite over `tests/Unit` and `src/` as the coverage source, and a `tests/Pest.php.dist` (copy as `tests/Pest.php`) with nothing to bind. Adjust `src` to the package's autoloaded directory. Add `pestphp/pest` as the only development dependency, at the major [Can this repository run Pest](#can-this-repository-run-pest) chose, and the script `"test": "pest"`. A library's tests exercise its public API; a test that needs a private method is usually asking for that method to be its own class.
+Templates: [`templates/library/`](templates/library/): `phpunit.xml` with one `Unit` testsuite over `tests/Unit` and `src/` as the coverage source, and a `tests/Pest.php.dist` (copy as `tests/Pest.php`) with nothing to bind. Adjust `src` to the package's autoloaded directory. Add `pestphp/pest` as the only development dependency, at the major [Which PHP, and which Pest](#which-php-and-which-pest) chose, and the script `"test": "pest"`. A library's tests exercise its public API; a test that needs a private method is usually asking for that method to be its own class.
 
 ## The two WordPress layers
 
@@ -208,11 +239,12 @@ Templates: [`templates/library/`](templates/library/): `phpunit.xml` with one `U
 | --- | --- | --- |
 | Boots | Composer's autoloader, Patchwork, the plugin's definition files | WordPress, through `wp-phpunit`, against a real test database |
 | WordPress functions | Mocked per test with Brain Monkey | Real |
+| Runs on | Pest 5, from the root Composer setup | PHPUnit 9.6, from `tests/Integration/`'s own Composer setup |
 | Needs | PHP | PHP, MySQL, a WordPress core checkout |
 | Speed | Milliseconds per test | The install runs at every process start; then fast |
-| Base case | PHPUnit's `TestCase`, with Brain Monkey's `setUp()` and `tearDown()` around each test | `WP_UnitTestCase`, which rolls each test's database writes back |
+| Base case | PHPUnit's `TestCase`, with Brain Monkey's `setUp()` and `tearDown()` around each test | `IntegrationTestCase`, a thin `WP_UnitTestCase`, which rolls each test's database writes back |
 
-The two run as separate processes. The bootstrap boots WordPress only for the Integration suite, so a unit test that reaches an unmocked WordPress function dies with an undefined-function error instead of quietly passing against a WordPress that happened to be loaded. The repository the Integration template is modeled on calls this second process `Feature`, and the shared Pest skill uses that name; the boundary is the same.
+The two run as separate processes, from separate Composer setups and separate bootstraps. The Unit bootstrap never loads WordPress, so a unit test that reaches an unmocked WordPress function dies with an undefined-function error instead of quietly passing against a WordPress that happened to be loaded. The repository the Integration template is modeled on calls this second process `Feature`, and the shared Pest skill uses that name; the boundary is the same.
 
 ### Unit: Brain Monkey
 
@@ -249,10 +281,10 @@ Two mechanics the templates already handle: Patchwork is loaded before the plugi
 - **A database** that the test installer **drops and rebuilds on every run**. Create it once (`CREATE DATABASE <plugin>_tests`) and never point it at anything else; the template's bootstrap refuses to run when it matches the surrounding install's `DB_NAME`. Two runs against one database at the same time collide and produce failures that look like regressions, so never run two Integration processes at once.
 - **Configuration**, in `tests/Integration/wp-tests-config.php`, every value from an environment variable with a default: `WP_TESTS_DB_NAME`, `WP_TESTS_DB_USER`, `WP_TESTS_DB_PASSWORD`, `WP_TESTS_DB_HOST`, `WP_TESTS_ABSPATH`. Set `WP_MULTISITE=1` to run against a network; code that switches sites needs it, because on a single site that branch never executes.
 - **A WordPress core checkout.** By default, the install the checkout sits in (`<wordpress>/wp-content/plugins/<plugin>/`, five levels above `tests/Integration/`). Anywhere else, set `WP_TESTS_ABSPATH` to a core copy, for example one fetched with `wp core download --path=<dir>`. The test install uses that checkout's `wp-content`, so its must-use plugins load too; ordinary plugins load only if the bootstrap requires them. A plugin that depends on another requires that one first, in the same `muplugins_loaded` closure.
-- **`yoast/phpunit-polyfills`**, which the WordPress test bootstrap refuses to run without, and which sets the PHPUnit ceiling in [Can this repository run Pest](#can-this-repository-run-pest).
-- **An adapted test case.** WordPress' `expectDeprecated()`, which runs in every test's `set_up()`, still calls PHPUnit APIs removed in PHPUnit 10. `tests/Support/IntegrationTestCase.php` replaces it with the same hook wiring minus the annotation parsing, and empties `checkRequirements()`, whose docblock PHPUnit 11 and 12 misread as metadata.
+- **`yoast/phpunit-polyfills`**, which the WordPress test bootstrap refuses to run without, and which supports no PHPUnit that Pest 5 runs on. That is [why the Integration suite has its own Composer setup](#why-the-wordpress-integration-suite-has-its-own-composer-setup).
+- **PHPUnit 9.6.** WordPress' `WP_UnitTestCase` is written for it: its `expectDeprecated()` calls PHPUnit APIs removed in PHPUnit 10, and PHPUnit 11 and 12 misread its `checkRequirements()` docblock as metadata. On 9.6 it runs unadapted, so `tests/Support/IntegrationTestCase.php` is a thin subclass. An earlier template ran this suite under Pest on PHPUnit 11 and 12 with an adapter replacing both methods; it was retired with UAMS-Web/uams-claude-skills#125, because an adapter has to follow every change WordPress makes to those methods.
 
-Pin `wp-phpunit/wp-phpunit` to the WordPress minor the sites run (`wp core version`), so the test library matches the core it boots.
+Pin `wp-phpunit/wp-phpunit`, in `tests/Integration/composer.json`, to the WordPress minor the sites run (`wp core version`), so the test library matches the core it boots.
 
 ### Which layer a piece of code needs
 
@@ -319,22 +351,24 @@ When the coverage ticket closes, record on it:
 
 ### Until Pest can run
 
-Repositories still on PHPUnit (`php-floor-spike`, `tests-move`, or any target that cannot yet run Pest) use this interim bar:
+Repositories still on PHPUnit (`tests-move`, or any target a [PHPUnit pin](#does-a-dependency-pin-phpunit) keeps off Pest) use this interim bar:
 
 - Every file in the [population](#population) has characterization or production tests that pin observable behavior (the [pinning](#pinning-legacy-behavior-before-a-change) steps).
 - Gaps are measured with PHPUnit's coverage driver (`vendor/bin/phpunit --coverage-text` or the repository's coverage script) and worked down in reviewable pull requests.
 - The ticket records the population, what remains uncovered, and the constraint that blocks Pest.
 
-The **mutation-clean** bar in [Bar](#bar) applies only after Pest and a coverage driver land; until then, do not claim `--mutate` results.
+The **mutation-clean** bar in [Bar](#bar) applies only after Pest and a coverage driver land; until then, do not claim `--mutate` results. In a WordPress repository the bar is taken on the Unit suite, which is Pest; code reachable only from the Integration suite is pinned there and its coverage measured with PHPUnit 9's driver.
 
 ## Moving a PHPUnit suite to Pest
 Pest runs PHPUnit test classes unchanged, so a move is gradual and never a rewrite:
 
-1. Confirm the target major with [Can this repository run Pest](#can-this-repository-run-pest).
+1. Confirm the target major with [Which PHP, and which Pest](#which-php-and-which-pest).
 2. Add Pest (`composer require pestphp/pest --dev --with-all-dependencies`; remove an explicit `phpunit/phpunit` requirement first if it pins a major Pest cannot use) and add `tests/Pest.php`. Keep the existing `phpunit.xml`.
 3. Run `vendor/bin/pest`. Every existing class runs as before; the counts must match the last PHPUnit run. Switch the Composer `test` script, and the job that runs it before a pull request, to Pest.
 4. From then on, new tests are written in Pest, and existing classes are converted as they are touched, one at a time.
 5. Add `pest` to the repository's profiles in UAMS-Web/uams-claude-skills's `manifest.json`, so the Pest skills arrive with the next sync.
+
+**A WordPress repository moves only its Unit suite.** First move the Integration suite into its own setup, as the plugin template lays it out: `tests/Integration/composer.json` (from the template's `composer.json.dist`) taking over `phpunit/phpunit ^9.6`, `wp-phpunit/wp-phpunit` and `yoast/phpunit-polyfills`, its own `phpunit.xml`, and its bootstrap loading `tests/Integration/vendor/autoload.php`. Run it and compare its counts with the last combined run. Then take the root to the development PHP and Pest 5 as above, with the root `phpunit.xml` holding the Unit suite alone. The Integration classes stay PHPUnit 9 classes and are not converted.
 
 `pestphp/pest-plugin-drift` adds `vendor/bin/pest --drift`, which rewrites class-based tests into Pest function style as a mechanical first pass. Use the plugin major that matches Pest's (`^3.0`, `^4.1` or `^5.0` as of 2026-10-02). Its output still needs the audit a hand conversion gets.
 
