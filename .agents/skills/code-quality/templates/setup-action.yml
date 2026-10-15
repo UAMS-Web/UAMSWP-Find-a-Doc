@@ -1,0 +1,39 @@
+name: Set up PHP and Composer
+description: Install PHP (8.4 by default), restore the Composer cache, and install the locked dependencies. Run after actions/checkout.
+
+# Template: .claude/skills/code-quality/templates/setup-action.yml in
+# UAMS-Web/uams-claude-skills, copied to .github/actions/setup/action.yml. The ci.yml
+# template calls it as `./.github/actions/setup`. Change `default` below to the PHP floor the
+# repository supports.
+
+inputs:
+  php-version:
+    description: The PHP version to install.
+    required: false
+    default: '8.4'
+
+runs:
+  using: composite
+  steps:
+    - name: Set up PHP ${{ inputs.php-version }}
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ inputs.php-version }}
+        coverage: none
+        tools: composer:v2
+
+    - name: Determine Composer cache directory
+      id: composer-cache
+      shell: bash
+      run: echo "dir=$(composer config --global cache-files-dir)" >> "$GITHUB_OUTPUT"
+
+    - name: Cache Composer packages
+      uses: actions/cache@v6
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: composer-${{ runner.os }}-php${{ inputs.php-version }}-${{ hashFiles('composer.lock') }}
+        restore-keys: composer-${{ runner.os }}-
+
+    - name: Install Composer dependencies
+      shell: bash
+      run: composer install --no-interaction --no-progress --prefer-dist

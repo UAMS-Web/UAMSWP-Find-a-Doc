@@ -10,7 +10,8 @@ description: >-
   WordPressCS's security sniffs beside Pint, restricting the tools to our modifications in a fork
   of a vendor plugin, and what to do with a finding you disagree with. Activate when adding or
   running Rector, PHPStan, Larastan or Pint in a PHP repository, fixing what they report, deciding
-  or changing a static-analysis level, or writing a repository's code-quality adoption ticket.
+  or changing a static-analysis level, wiring a committed pre-commit hook into every clone from
+  Composer, or writing a repository's code-quality adoption ticket.
 ---
 <!--
   Synced from UAMS-Web/uams-claude-skills: shared/.claude/skills/code-quality/SKILL.md
@@ -49,6 +50,8 @@ The templates beside this skill are the shared starting configurations. Each rep
 | `templates/pint.json` | repository root | every repository |
 | `templates/phpcs.xml.dist` | repository root | only a repository that keeps WordPressCS |
 | `templates/.git-blame-ignore-revs` | repository root | every repository, at the reformat commit |
+| `templates/setup-git-hooks.php` | `scripts/setup-git-hooks.php` | a Composer repository that commits a `.githooks/pre-commit` |
+| `templates/pre-commit` | `.githooks/pre-commit`, executable | a Composer repository that commits a pre-commit hook |
 
 ## Adding the tools to a repository
 
@@ -67,7 +70,7 @@ Pin `php-stubs/wordpress-stubs` to 6.x (`^6.8`, as `uamswp-migration-api` does).
 
 Current majors: Rector 2 and PHPStan 2 run on PHP 7.4 or later; Larastan 3 needs PHP 8.2 and Laravel 11.15 or later; Pint needs PHP 8.3 or later; `szepeviktor/phpstan-wordpress` 2.x needs PHPStan 2.x (all from the packages' `composer.json` and READMEs, 2026-10-02). A repository on PHPStan 1.x upgrades PHPStan and the WordPress extension together.
 
-Do not pin `config.platform.php` to the supported floor to make Composer resolve for it: that stops the current Pint installing on a PHP 7.x or 8.2 plugin. The floor goes into `rector.php` (`withPhpVersion()`) and `phpstan.neon.dist` (`phpVersion`), which is what the tools read. A repository that already pins the platform for another reason, as `uamswp-migration-api` does at `8.2.30` for its test toolchain (D-019), keeps that pin; Rector and PHPStan both read it when nothing more specific is set.
+Do not pin `config.platform.php` to the supported floor to make Composer resolve for it: that stops the current Pint installing on a PHP 7.x or 8.2 plugin. The floor goes into `rector.php` (`withPhpVersion()`) and `phpstan.neon.dist` (`phpVersion`), which is what the tools read. A WordPress repository pins `config.platform.php` to the development PHP instead, `8.4.1`, which is what Pest 5 needs; that pin is the PHP the tools and tests run on, never the floor (the [`tests`](../tests/SKILL.md) skill, UAMS-Web/uams-claude-skills#124). A repository that already pins the platform for another reason, as `uamswp-migration-api` does at `8.2.30` for its test toolchain (D-019), keeps that pin until its adoption ticket moves it; Rector and PHPStan both read it when nothing more specific is set.
 
 A repository with no `composer.json` gets one holding only development dependencies:
 
@@ -96,7 +99,7 @@ A repository with no `composer.json` gets one holding only development dependenc
 
 Every line to change is marked `PLACEHOLDER` in the templates. Replace each placeholder with the real value and remove or rewrite the `PLACEHOLDER` marker itself so it does not remain as a TODO. Three things to fill in:
 
-- **Paths.** The directories and files holding first-party PHP, in `rector.php` (`withPaths()`, plus `withRootFiles()` for a plugin whose header file sits at the root), `phpstan.neon.dist` (`paths`) and, for a fork, `pint.json` (`exclude`). Include `tests/`: test bugs are real bugs, and the two repositories that analyze tests at the same level as source (uams-statamic, uamswp-migration-api) both say so in their configs. Never a vendor directory. In a WordPress repository whose tests run on Pest and wp-phpunit, uncomment what `templates/phpstan-wordpress.neon.dist` marks for that case (the Pest extension, the `scanDirectories` entry and the three Pest entries, which sit commented inside the `ignoreErrors` list, so removing each line's leading `# ` is enough): without them the `tests` skill's plugin template fails at level 0.
+- **Paths.** The directories and files holding first-party PHP, in `rector.php` (`withPaths()`, plus `withRootFiles()` for a plugin whose header file sits at the root), `phpstan.neon.dist` (`paths`) and, for a fork, `pint.json` (`exclude`). Include `tests/`: test bugs are real bugs, and the two repositories that analyze tests at the same level as source (uams-statamic, uamswp-migration-api) both say so in their configs. Never a vendor directory. In a WordPress repository on the `tests` skill's layout (Pest for the Unit suite, and the Integration suite on wp-phpunit in its own Composer setup under `tests/Integration`), uncomment what `templates/phpstan-wordpress.neon.dist` marks for that case: the Pest extension, the `excludePaths` and `scanDirectories` blocks, and the two Pest entries, which sit commented inside the `ignoreErrors` list, so removing each line's leading `# ` is enough. Uncomment the `tests/Integration/vendor` skip in `rector.php` too. Without them PHPStan and Rector analyze the Integration suite's `vendor/` as the repository's own code, and PHPStan reports WordPress' test classes as undefined. Pint and the `phpcs.xml.dist` template already leave that `vendor/` alone. Measured on the `tests` skill's plugin template, 2026-10-07, Windows 11: with them, Pint, Rector, PHPStan at level 0 and phpcs each run clean.
 - **PHP version.** `withPhpVersion(PhpVersion::PHP_xx)` in `rector.php` is the lowest supported version, and Rector skips any rule that needs a newer PHP; its order of precedence for that check is this call, then `composer.json`'s `php` require, then `config.platform.php`, then the running PHP (getrector.com/documentation/php-version-features, 2026-10-02). `withPhpSets()` with no argument, which applies every PHP upgrade set up to the floor and no further, does not read `withPhpVersion()`: it reads `composer.json`'s `require.php`, then `config.platform.php`, and fails the run when neither is set (Rector 2.6.7, `RectorConfigBuilder::withPhpSets()`, 2026-10-02). So `composer.json` carries `require.php` at the same floor, as the dev-only `composer.json` above does. `phpVersion` in `phpstan.neon.dist` is a range: `min` the same floor, `max` the developer's PHP. Left out, PHPStan infers one version from `composer.json` and does not report constructs that are unavailable at the floor; in `uamswp-migration-api` a typed class constant (PHP 8.3+) analyzed clean that way and would have been a parse error on the PHP 8.2 it ships to. The range form needs PHPStan 2.0 or later (phpstan.org/config-reference, 2026-10-02).
 - **Level.** See "Finding the starting static-analysis level" below. The template ships at `0`.
 
@@ -104,7 +107,7 @@ Add the cache directory the template names to `.gitignore` (`/.phpstan/`, or `/s
 
 The shared `templates/pint.json` turns on `declare_strict_types`. That is not only a formatting choice: after the first full Pint run, files gain `declare(strict_types=1);`, and built-in PHP functions then reject bad argument types with `TypeError` instead of coercing. PHPStan will also start reporting untyped arguments passed to those built-ins (often a large set at higher levels). Adopters must know this before the first repository-wide Pint run; budget for the runtime and analyzer fallout in the adoption ticket, or temporarily leave the rule off in that repository's `pint.json` only with a recorded reason (and expect the shared template to keep it on).
 
-For Laravel and Statamic, uncomment the `LaravelSetProvider` block in `rector.php`. For WordPress, uncomment `ArrayToFirstClassCallableRector::class` in the sweep-only list and the matching `use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;` at the top of `rector.php` (never inside the array: a `use` there is a parse error). WordPress matches hook callbacks by identity, so a first-class callable silently breaks `remove_action()` (D-016).
+For Laravel and Statamic, uncomment the `withComposerBased()` call in `rector.php` (Rector 2.6.5 or later; it no longer needs a `withSetProviders()` line, and a repository on Rector 2.6.4 or earlier keeps that line). For WordPress, uncomment `ArrayToFirstClassCallableRector::class` in the sweep-only list and the matching `use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;` at the top of `rector.php` (never inside the array: a `use` there is a parse error). WordPress matches hook callbacks by identity, so a first-class callable silently breaks `remove_action()` (D-016).
 
 WordPress PHPStan notes (see comments in `templates/phpstan-wordpress.neon.dist`):
 
@@ -131,6 +134,42 @@ Rector often needs more than one apply pass before a dry-run is clean: after `co
 
 The gating and sweep profiles share one Rector cache. A dry-run of one profile right after the other can look like a no-op unless the cache is cleared. The `:sweep` scripts above pass `--clear-cache`; when switching the other way (sweep, then gate), run the gating command with `--clear-cache` as well (for example `vendor/bin/rector --clear-cache --dry-run`), or clear once before the first run of the new profile.
 
+### Git hooks
+
+A hook that each developer has to wire by hand is not a gate, as the `worktrees` rule says of its refresh gate. The two hook templates make the commit-time gate active in every clone that runs `composer install`, and in every linked worktree of it, because `core.hooksPath` lives in the clone's shared configuration (UAMS-Web/uams-claude-skills#162).
+
+Copy `templates/setup-git-hooks.php` to `scripts/setup-git-hooks.php` and `templates/pre-commit` to `.githooks/pre-commit`, make the hook executable (`chmod +x .githooks/pre-commit`; on Windows, `git update-index --chmod=+x .githooks/pre-commit` after staging it), commit both, and add the installer to the `scripts` section of `composer.json`:
+
+```json
+"scripts": {
+    "post-install-cmd": [
+        "@php scripts/setup-git-hooks.php"
+    ],
+    "post-update-cmd": [
+        "@php scripts/setup-git-hooks.php"
+    ]
+}
+```
+
+Where a repository already has either key, add the one line to the end of its array. Both are Composer's own events, so no other script entry is needed.
+
+**What the installer does.** It runs `git config core.hooksPath .githooks` for the project the script sits in, and prints one line when it changed the setting. It is quiet when the setting is already right, and it names the old value when it replaces another one. It never fails a Composer run: the exit status is always 0, and the only output it can add besides that line is a one-line warning on stderr when git refused the write. It does nothing in four cases, each of which is a clone where the setting would be wrong or pointless:
+
+- the project is not in a git work tree (a dist or tarball install);
+- the project is a subdirectory of another repository, since the setting would land in that repository's configuration;
+- `.githooks/pre-commit` is not tracked, so there is no hook to run;
+- the run is under GitHub Actions, where nobody commits from the checkout.
+
+**It agrees with the local CI runner on the command and the path.** The `local-ci` skill's runner prints one warning line when `.githooks/pre-commit` is tracked and `core.hooksPath` does not resolve to `.githooks`, and the line names `git config core.hooksPath .githooks`. The installer runs that command, on that path, under that same condition (a tracked hook, outside GitHub Actions), so a clone that ran `composer install` is a clone the warning stays silent for. A change to either side changes the other: do not rename the directory or the hook file in one place. `composer install --no-scripts` skips the installer, and the warning is what catches that clone.
+
+**What the hook does.** The generic gate runs `composer validate --no-check-publish` when `composer.json` or `composer.lock` is staged at the repository root, and refuses the commit when it fails; a lock file that no longer matches `composer.json` is the usual cause. It warns, and lets the commit through, when `composer` is not on `PATH`. Every gate runs even after one fails, so one commit attempt reports every problem. The hook reads the working tree, as the commands it runs do.
+
+**Repository gates** go in the marked place near the end of the hook, one block each, setting `status=1` instead of exiting so the blocks after it still run. Keep a gate there only if it reads the index and is quick, since the hook runs on every commit; a gate that runs the test suite belongs in the local CI runner. A gate that only one repository needs (keeping two mirrored files changing together, for one) stays in that repository's copy of the hook and is not proposed for the template.
+
+**When the repository also uses the `local-ci` skill's pre-commit guard against secret and personal-data files,** both want `.githooks/pre-commit`. Keep this template's hook there, save the guard's hook as `.githooks/guard-deny`, make it executable, and call it from a block of its own, as the comment at the end of the template shows. The guard reads `local-ci.json` from the working tree root, which is where hooks run.
+
+`git commit --no-verify` skips every gate, and a missing `vendor/` is not a reason to: bootstrap the clone instead, as the `worktrees` rule says.
+
 ### Local CI jobs
 
 Three jobs, one per tool, run before a pull request:
@@ -142,6 +181,19 @@ Three jobs, one per tool, run before a pull request:
 | `phpstan` | `composer stan` | any `.php` in the diff, tests included, because `phpstan.neon.dist` lists `tests` |
 
 This repository is public, so Actions minutes are free: run the three commands as steps of its CI workflow, and locally before pushing. A private repository without the local-ci runner yet does the same three commands locally before every push (or as workflow steps if minutes are acceptable); adopt local-ci when that skill is available in the checkout so gating stops depending on Actions.
+
+### The CI workflow template
+
+`templates/ci.yml` is the GitHub Actions form of the gate, with `templates/setup-action.yml` as the composite action it shares. Copy them once, the first to `.github/workflows/ci.yml` and the second to `.github/actions/setup/action.yml`, set the PHP version in the action, and rename a command if the repository's Composer script differs. The sync never writes `.github/`, so an existing `ci.yml` is never overwritten: a repository that already has one keeps it, and adopts the template's properties (below) by editing its own file. Job `name:` values are what a ruleset lists as required checks, so renaming a job means changing that list in the same change.
+
+What the template sets, and what to keep when adapting it:
+
+- `composer-validate` and `synced-files` run first and cheapest; `pint` follows them, `rector` and `phpstan` follow `pint`, and `pest` follows both, so a pull request that fails a cheap check does not spend minutes on the dear ones. The `synced-files` job runs the `synced-files` skill's check, and is the workflow form of the `synced-files` job in `local-ci.json`. The `no-emoji` job stands outside that chain on purpose: it runs the `writing-comments` skill's `check-no-emoji.mjs` with Node alone, so it can be dropped or moved without touching another job.
+- `timeout-minutes` on every job, so a hung step is cut off rather than billed until the platform limit.
+- `concurrency` keyed on the workflow and ref, cancelling in-progress runs for pull requests only, so a push replaces a stale run and `main` runs are never cancelled.
+- PHP, the Composer cache and the locked install live in the composite action, which `dependabot.yml` also covers (see the `update-dependencies-ticket` skill's `templates/dependabot.yml`).
+
+A mutation job and a spell-check job are not in the template: both stay with the repository that wants them.
 
 ## Finding the starting static-analysis level
 
@@ -175,7 +227,7 @@ The first Pint run over a repository touches most files. Land it as one commit h
    The setting is per clone and not committed, so every developer runs it; put the line in the repository's README or setup script.
 6. Before the pull request, prove the result still parses on the lowest PHP the repository supports. Run `php -l` (Herd ships versioned binaries such as `php82`) over every file Pint changed and every file Rector changed in the adoption. The acceptance criterion for #10 is that no adoption makes the code fail to run on the version it supports, and only that floor's parser proves it.
 
-   Limits of this step: Herd may not ship an older binary (for example no `php74` on a machine that only has 8.x). A newer binary's `php -l` (such as `php82 -l` on a PHP 7.4 plugin) is not a substitute: it accepts syntax the floor rejects and rejects nothing the floor would accept for 7.x-only parse issues. When the floor binary is missing locally, parse-check on a Docker image or CI matrix job that runs that PHP version, or on any environment that still has the supported floor installed. Skipping the floor parse check is not an option for a repository that still claims that floor.
+   Limits of this step: Herd may not ship an older binary (for example no `php74` on a machine that only has 8.x). A newer binary's `php -l` (such as `php82 -l` on a PHP 7.4 plugin) is not a substitute: it accepts syntax the floor rejects and rejects nothing the floor would accept for 7.x-only parse issues. When the floor binary is missing locally, parse-check on a Docker image or CI matrix job that runs that PHP version, or on any environment that still has the supported floor installed. Skipping the floor parse check is not an option for a repository that still claims that floor. A WordPress repository on the shared runner has this as a standing job, `lint-floor` (the [`tests`](../tests/SKILL.md) skill), so it runs on every pull request, not only at adoption.
 
 The hash recorded in `.git-blame-ignore-revs` is the reformat commit as it exists on the default branch after merge. A merge commit (or rebase that keeps the same commit object) preserves that hash. A squash merge creates a new commit with a different hash, so the file committed on the feature branch then points at a commit that never landed; update `.git-blame-ignore-revs` on the default branch to the squash commit's full hash after the merge.
 

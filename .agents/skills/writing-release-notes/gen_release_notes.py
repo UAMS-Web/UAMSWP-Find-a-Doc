@@ -199,7 +199,7 @@ SEC_LABELS = {"security"}
 # repositories' lists. `tests` is in it because nothing under it ships; a repository whose
 # tests are product work passes `--product-path tests`.
 TOOLING_PATHS = {
-    ".github", ".githooks", ".claude", ".ai", ".cursor", "scripts", "docs", "patches", "tests",
+    ".github", ".githooks", ".claude", ".agents", ".ai", ".cursor", "scripts", "docs", "patches", "tests",
     "AGENTS.md", "CLAUDE.md", "README.md", "cspell.json", "project-words.txt",
     "composer.json", "composer.lock", "package.json", "package-lock.json", "patches.lock.json",
     "phpstan.neon.dist", "phpunit.xml", "rector.php", "rector-sweep.php", "pint.json",
@@ -217,7 +217,7 @@ MAINT_VERBS = re.compile(
 # rule in a Laravel one. A repository that wants it passes `--maintenance-word rule`.
 MAINT_WORDS = re.compile(
     r"\btests?\b|test-lint|paratest|\bcspell\b|spell check|test hygiene|test isolation|"
-    r"ci parity|local-ci|\bcoverage\b|mutation|\bmutants?\b|pcov|coverage driver|\bskill\b|worktree",
+    r"ci parity|local-ci|\bcoverage\b|mutation|\bmutants?\b|pcov|coverage driver|\bskills?\b|worktree",
     re.I)
 
 

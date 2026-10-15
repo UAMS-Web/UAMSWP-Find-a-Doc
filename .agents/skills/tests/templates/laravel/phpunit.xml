@@ -4,6 +4,7 @@
          bootstrap="vendor/autoload.php"
          colors="true"
 >
+    <!-- cspell:ignore NIGHTWATCH Stache STACHE -->
     <!--
         Laravel's own skeleton configuration (laravel/laravel, 2026-10-02), with the
         `Test.php` suffix added so a misnamed file is never mistaken for a passing one.

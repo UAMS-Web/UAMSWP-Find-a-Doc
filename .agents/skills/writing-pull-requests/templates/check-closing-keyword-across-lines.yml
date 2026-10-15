@@ -1,0 +1,54 @@
+name: Check closing keywords across lines
+
+# Fails when a pull-request body holds a closing directive formed across a line break: a
+# keyword ending one line and an issue reference beginning the next. GitHub's parser treats
+# the newline as whitespace, so the pair reads as `closed #N` and merging the text closes
+# that issue. Nobody writes it on purpose: the specimen was a status column whose cell value
+# `closed` sat above the next row's label `#N`. A squash merge makes the body the commit
+# message on the default branch, so the text checked here is the text that will act.
+#
+# Template: .claude/skills/writing-pull-requests/templates/check-closing-keyword-across-lines.yml
+# in UAMS-Web/uams-claude-skills, copied to .github/workflows/check-closing-keyword-across-lines.yml.
+# This header is the only part a repository may change. The synced-files skill's
+# check-workflow-copies.mjs fails when the rest differs from the template. The script it
+# runs ships in the same skill, so no repository file is needed beyond the synced .claude/
+# tree.
+#
+# A keyword inside a code span or a fence is reported too. The push-time scan reads the
+# squash commit message as plain text, so it is live there even where the pull request's own
+# closingIssuesReferences field does not list it.
+#
+# The body is read from the API rather than from the event payload, so an edit that lands
+# between the event and the run is still the text that is checked. All five trigger types are
+# the point: a body can take on the pair when the pull request opens and through any later
+# edit.
+#
+# Deliberately NOT gated on RUN_REMOTE_CI, for the same reason as `clear-handed-back.yml`:
+# that switch is off for months at a time. The job is one checkout, one API read and one Node
+# script with no dependencies.
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, ready_for_review, synchronize]
+
+# Nothing at the workflow level; the one job states the scopes it needs.
+permissions: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check the body for a closing directive across a line break
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh api "repos/$REPO/pulls/$NUMBER" --jq '.body // ""' > "$RUNNER_TEMP/body.md"
+          node .claude/skills/writing-pull-requests/scripts/check-closing-keyword-across-lines.mjs --file "$RUNNER_TEMP/body.md"

@@ -16,8 +16,6 @@ When an issue is `hitl` because it carries a genuine **design fork** (an unresol
 
 This is the *decision* flavor of [`hitl`](../writing-issues/SKILL.md). It composes with the `afk`/`hitl` execution-mode triage: an issue earns `hitl` when completing it needs a human **decision** (a fork) or a real-world **action**; this rule governs how you drive a fork to resolution and flip it to `afk`.
 
-This repository does not carry the `afk`, `hitl` or `decision-fork` labels. The process below applies all the same; where it applies, keeps or flips a label, record the state in the issue body instead, as the [`writing-issues`](../writing-issues/SKILL.md) skill describes.
-
 ## The core principle
 
 A human decides a fork by **weighing trade-offs across dimensions**, not from a list of one-line option labels. So your job is NOT to ask "which do you want, A or B?"; it's to do the analysis first and hand over a complete, comparable packet, *then* ask. Never let an interactive prompt be the first substantial thing the human sees, and never compress the analysis to make room for the prompt. The prompt is the last step, not the deliverable.

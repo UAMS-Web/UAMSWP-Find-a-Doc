@@ -148,7 +148,7 @@ Precedence, first match wins:
 6. **Paths confined to tooling or prose.** The paths come from git, against the commit's first
    parent, so a merge commit yields the pull request's own diff and no API call is spent. The
    built-in set is the union of the three repositories' lists: `.claude/`, `.github/`,
-   `.githooks/`, `.ai/`, `.cursor/`, `scripts/`, `docs/`, `patches/`, `tests/`, `AGENTS.md`,
+   `.githooks/`, `.agents/`, `.ai/`, `.cursor/`, `scripts/`, `docs/`, `patches/`, `tests/`, `AGENTS.md`,
    `CLAUDE.md`, `README.md`, `cspell.json`, `project-words.txt`, the Composer and npm manifests and
    lock files, `phpstan.neon.dist`, `phpunit.xml`, `rector.php`, `rector-sweep.php`, `pint.json`,
    and the dotfiles beside them. A change touching anything else is product work and is never

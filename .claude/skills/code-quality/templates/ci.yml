@@ -1,0 +1,157 @@
+name: CI
+
+# Template: .claude/skills/code-quality/templates/ci.yml in UAMS-Web/uams-claude-skills,
+# copied to .github/workflows/ci.yml. Fill the placeholders below, then delete this
+# header paragraph. The code-quality skill and the tests skill say what each job runs.
+#
+# - PHP version: `.github/actions/setup/action.yml` defaults to 8.4. Change its `default`
+#   to the floor the repository supports.
+# - Commands: the jobs call `composer test:pint`, `composer test:refactor`, `composer stan` and
+#   `composer test`. Rename
+#   a command here to match the repository's own Composer script when it differs.
+# - Jobs the repository does not need (a repository with no Pest suite yet drops `pest`) are
+#   deleted along with the `needs:` entry that names them.
+#
+# The synced-files job runs the check that fails when a rule or skill the sync manages was
+# edited by hand. It sits beside the quality gate because the two answer different questions:
+# whether the code is sound, and whether the shared guidance is intact. The local CI runner
+# runs the same check as a `synced-files` job in local-ci.json.
+#
+# The no-emoji job sweeps the prose the no-emoji-in-durable-records rule names (.claude/, docs/,
+# README.md, AGENTS.md, CLAUDE.md) with the script the writing-comments skill ships. It is
+# self-contained: it needs nothing but Node and the synced rule, so it stands outside the
+# `needs:` chain and can be dropped or moved without touching another job.
+#
+# The mutate-ignore job runs the pest-testing skill's check for `@pest-mutate-ignore`
+# annotations that suppress nothing, or suppress everything. It reads the installed
+# pest-plugin-mutate, so it needs the locked install and belongs only in a repository that
+# runs Pest's `--mutate`; a repository without it drops the job. Do not add a second copy
+# of the check as a Composer script and a job.
+#
+# Jobs are chained with `needs:`, cheapest first, so a pull request that fails a cheap check
+# does not spend minutes on the dear ones. A skipped job is not a passing job: where a
+# ruleset requires these checks by name, a chain that stops early leaves the later ones
+# pending. Job `name:` values are what a ruleset lists, so renaming a job means changing the
+# ruleset's list in the same change.
+#
+# Private repositories pay for runner minutes. A repository that gates its Actions jobs on a
+# `RUN_REMOTE_CI` variable adds `if: vars.RUN_REMOTE_CI == 'true'` to each job.
+#
+# The shared setup (PHP, the Composer cache, the locked install) lives in
+# `.github/actions/setup/action.yml`, a composite action copied from
+# `.claude/skills/code-quality/templates/setup-action.yml`. `dependabot.yml` covers that
+# directory so the actions it references are kept current.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  # Lets the workflow be run on demand against a branch.
+  workflow_dispatch:
+
+# A new push to a pull request cancels that pull request's stale run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  composer-validate:
+    name: Composer validate (composer.lock freshness)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+
+      # Fails when composer.json and composer.lock have drifted apart.
+      - run: composer validate --no-check-publish --no-check-all
+
+  synced-files:
+    name: Synced files (no hand-edited rules or skills)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Fails, naming the file, when a synced rule or skill was edited by hand.
+      - run: node .claude/skills/synced-files/scripts/check-synced-files.mjs
+
+  no-emoji:
+    name: No emoji in durable records
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Fails, naming the file, line and code point, when prose carries a banned glyph.
+      - run: node .claude/skills/writing-comments/scripts/check-no-emoji.mjs
+
+  pint:
+    name: Pint
+    needs: [composer-validate, synced-files]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: composer test:pint
+
+  rector:
+    name: Rector
+    needs: [pint]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: composer test:refactor
+
+  phpstan:
+    name: PHPStan
+    needs: [pint]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: composer stan
+
+  mutate-ignore:
+    name: Mutation annotations (none inert)
+    needs: [pint]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+
+      # Fails, naming the file and line, on a bare marker, a tail that names no mutator,
+      # prose after a mutator list, and (on a CRLF runtime) a trailing marker. Prints the
+      # plugin revision its parsing model was measured against.
+      - run: php .claude/skills/pest-testing/scripts/check-mutate-ignore.php
+
+  pest:
+    name: Pest
+    needs: [rector, phpstan]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: composer test
