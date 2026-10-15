@@ -519,6 +519,67 @@ class AcronymCasingTest(unittest.TestCase):
         self.assertEqual(GEN.noamp("Posts, terms & options"), "Posts, terms, and options")
 
 
+class SharedCorpusRoutingTest(unittest.TestCase):
+    """Shared-corpus roots, the `skills` plural and `--product-path app` (UAMS-Web/uams-claude-skills#132).
+
+    Measured over `v0.36.0..v0.37.0` in UAMS-Web/uams-statamic: a sync pull request touching
+    only `.agents/skills/...` fell through to `What's new`, a pull request naming `skills`
+    escaped the topic words, and three bug fixes with test-heavy diffs under `app/` were
+    caught by the test-dominant rule before the closing issue's `Bug` type was read.
+    """
+
+    def test_agents_is_a_tooling_root(self):
+        self.assertIn(".agents", GEN.TOOLING_PATHS)
+
+    def test_a_change_confined_to_shared_corpus_roots_is_maintenance(self):
+        paths = [".agents/skills/local-ci/SKILL.md", ".claude/rules/worktrees.md",
+                 ".cursor/rules/worktrees.mdc", "AGENTS.md"]
+
+        self.assertTrue(GEN.paths_are_tooling(paths))
+        self.assertEqual(
+            GEN.bucket("Sync shared corpus", "Sync shared corpus", [], paths),
+            "maint",
+        )
+
+    def test_a_product_root_beside_the_agents_root_is_not_tooling(self):
+        """Negative control: the `.agents` root alone is tooling, and adding `app/` defeats it."""
+        self.assertTrue(GEN.paths_are_tooling([".agents/skills/x/SKILL.md"]))
+        self.assertFalse(GEN.paths_are_tooling([".agents/skills/x/SKILL.md", "app/Foo.php"]))
+
+    def test_app_and_resources_still_defeat_the_tooling_rule(self):
+        for product in ("app/Http/Controller.php", "resources/views/page.antlers.html"):
+            with self.subTest(product=product):
+                self.assertFalse(GEN.paths_are_tooling([".agents/skills/x/SKILL.md", product]))
+
+    def test_the_topic_words_match_skill_and_skills(self):
+        for title in ("Teach the skill about retries", "Teach the skills about retries"):
+            with self.subTest(title=title):
+                self.assertTrue(GEN.MAINT_WORDS.search(title))
+
+    def test_the_topic_words_do_not_match_a_title_naming_neither(self):
+        for title in ("Teach the editor about retries", "Skillful routing of pages"):
+            with self.subTest(title=title):
+                self.assertFalse(GEN.MAINT_WORDS.search(title))
+
+    def test_a_bug_with_test_heavy_app_changes_reaches_the_issue_type_with_app_as_product(self):
+        self.assertEqual(
+            GEN.bucket("Serialize the entry id", "Serialize the entry id", [],
+                       ["app/Services/Entry.php", "tests/Feature/EntryTest.php"],
+                       issue_type="Bug", test_lines=80, other_lines=5,
+                       routing=GEN.Routing(product_paths=["app"])),
+            "fix",
+        )
+
+    def test_without_app_as_product_the_test_dominant_rule_catches_it_first(self):
+        """Negative control: the default routing is what the `--product-path app` option corrects."""
+        self.assertEqual(
+            GEN.bucket("Serialize the entry id", "Serialize the entry id", [],
+                       ["app/Services/Entry.php", "tests/Feature/EntryTest.php"],
+                       issue_type="Bug", test_lines=80, other_lines=5),
+            "maint",
+        )
+
+
 class ClosingIssueTypeTest(unittest.TestCase):
     """Fix-versus-feature routes on the closing issue's type, not a title verb list (UAMS-Web/wordpress-importer#1112).
 

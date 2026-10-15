@@ -178,7 +178,7 @@ its removal criterion instead.
 | Patch SHA-256s and the set `_hash` | `patches.lock.json` |
 | Composer's own manifest hash | `composer.lock` → `content-hash` |
 | The plugin itself | `cweagans/composer-patches ^2.0` in `require-dev` + `allow-plugins` |
-| Per-patch narrative + removal checklist | `patches/README.md` where the repository has one; otherwise the entry's description key and the decision log |
+| Per-patch narrative + removal checklist | `patches/README.md` where the repository has one; otherwise the entry's description key and the decision log (annotated on retirement, never pruned; removal step 12 expects that hit) |
 | PHPStan pins for vendor-guard tests | `internalClass` `ignoreErrors` in `phpstan.neon.dist` |
 
 ### Adding a patch
@@ -309,7 +309,22 @@ unpatched code.
     applies.
 11. Run the gate that exercises the now-unpatched tool, and **see it green**: see *Proving it
     worked* below. Assuming it is fine is how a silent regression ships.
-12. `git grep <basename>` returns nothing.
+12. Nothing outside the historical record still names the patch. A retirement annotates the
+    repository's decision log (`docs/DECISIONS.md` where it has one) rather than deleting the
+    entry, because a decision log records what was decided and deleting an entry falsifies it;
+    that annotated entry is the one place the basename should survive, and step 7 has already
+    removed the narrative everywhere else. Check both halves, so the sweep is shown to tell the
+    two apart:
+
+    ```bash
+    git grep -n <basename> -- . ':(exclude)docs/DECISIONS.md'   # must print nothing
+    git grep -n <basename> -- docs/DECISIONS.md                 # must still find the annotated entry
+    ```
+
+    The first is the criterion. The second is its control: if it also prints nothing, either the
+    decision log was pruned, which this step forbids, or the basename is spelled differently from
+    what was searched, and the first command's silence proves nothing. In a repository with no
+    decision log, the first command without its `:(exclude)` argument is the whole check.
 
 A patch can also retire without any of this, by silently ceasing to apply because upstream fixed
 it on their own. Drop it the same way and record *why*, in the narrative where the repository

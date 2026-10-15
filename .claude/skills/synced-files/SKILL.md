@@ -38,6 +38,8 @@ node .claude/skills/synced-files/scripts/check-synced-files.mjs
 
 Where the repository runs the shared `local-ci` runner, its `local-ci.json` should carry a `synced-files` job that runs this command on every run. The template the `local-ci` skill ships includes it. A `local-ci.json` copied before the job was added does not get it from a sync, because the sync never writes that file: copy the job in from the template.
 
+A repository that runs GitHub Actions carries the same check as a `synced-files` job in `.github/workflows/ci.yml`, beside the quality jobs; the `code-quality` skill's `templates/ci.yml` has it. The two are the same command, so a repository on the runner and Actions together keeps both.
+
 | Exit | Meaning |
 |------|---------|
 | 0 | Every managed file matches its hash. The output says how many were checked. |
@@ -51,3 +53,13 @@ Line endings are normalized before hashing, so a Windows checkout with `core.aut
 ## When it fails
 
 Do not fix it by regenerating anything here. Restore the named file from git to drop the edit, and carry the change to UAMS-Web/uams-claude-skills if it is still wanted. A failure naming `.claude/sync-manifest.jsonc` itself means the manifest was edited; restore it the same way.
+
+## Workflow copies
+
+The sync never writes `.github/`, so the workflows the shared skills ship as templates (`assign-author.yml`, `check-attribution-footer.yml` and `check-closing-keyword-across-lines.yml` from `writing-pull-requests`, `clear-handed-back.yml` from `handed-back-label`) are copied once and then drift unseen. This skill's second script compares each copy with its template:
+
+```sh
+node .claude/skills/synced-files/scripts/check-workflow-copies.mjs
+```
+
+A copy may rewrite its header, the comment block between the `name:` and `on:` lines; every other line must match the template, and line endings are compared as LF. A workflow the repository has not copied is skipped. `--require <file>` (repeatable, for example `--require clear-handed-back.yml`) fails on a missing copy of a workflow the repository has committed to carrying, and `--root <dir>` checks another checkout. Exit 0 means every copy present matches, 1 names each copy that differs or is missing, and 2 means the check could not run. Run it from the same place as the managed-file check: a `local-ci.json` job or a workflow step.

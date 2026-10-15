@@ -32,4 +32,4 @@ function example_plugin_read_more_link(string $more): string
     );
 }
 
-// cspell:ignore ABSPATH
+// cspell:ignore ABSPATH sprintf
