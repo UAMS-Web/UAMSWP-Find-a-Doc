@@ -52,6 +52,12 @@ repository has no templates, build the body from the section inventory below.
 here.** When the house style changes, change it here first and reconcile the template, never
 the reverse, or the two silently diverge.
 
+**The skeletons ship with this skill** in [`templates/`](templates/): `1-bug.md`, `2-feature.md`,
+`3-research-spike.md` and `4-follow-up-cleanup.md`. The sync writes no issue template under `.github/`, so a
+repository copies them once to `.github/ISSUE_TEMPLATE/` and keeps them current by comparing
+against the skill's copy. Each file opens with front matter (`name`, `about`, `type`, `labels`)
+that GitHub reads for the template chooser, followed by the sections of the inventory below.
+
 ## Output format
 
 When proposing an issue, give the **title** on its own line and present the **body as a single
@@ -340,11 +346,9 @@ by the GitHub **issue type** `Bug`, not by a label (see *Filing into the project
 
 ### Execution mode: `afk` / `hitl`
 
-This repository does not carry the `afk` / `hitl` labels, so file without them and do not create
-them. Classify the issue all the same: the classification below decides whether an agent may
-build it. Where the text below applies or flips a label, record the classification in the body
-instead: a `hitl` issue says what a human must decide or do, in its `## Decisions to resolve`
-section or its opening paragraph.
+Every open issue carries **exactly one** of `afk` / `hitl`: mutually exclusive and required,
+except on an `epic`. It tells whoever triages the tracker what *kind* of attention the issue
+needs to be *completed*: an autonomous coding agent, or a human.
 
 **The exception is `epic`.** An issue labeled `epic` is exempt from the requirement: it is a
 container whose slices each carry their own execution mode, not a unit of work anyone picks up
