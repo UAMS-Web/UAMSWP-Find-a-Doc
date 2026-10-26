@@ -1,0 +1,57 @@
+#!/bin/sh
+#
+# pre-commit: the repository's commit-time gates.
+#
+# Copy to .githooks/pre-commit and make it executable (chmod +x .githooks/pre-commit; on
+# Windows, git update-index --chmod=+x .githooks/pre-commit after staging it). Git does not
+# run a hook from inside the repository until core.hooksPath points at it. The
+# scripts/setup-git-hooks.php installer beside this template does that from Composer's
+# post-install-cmd and post-update-cmd, with the command the local CI runner's warning names:
+#
+#     git config core.hooksPath .githooks
+#
+# Every gate below runs, and the commit is refused when any of them failed, so one commit
+# attempt reports every problem. The hook reads the working tree, as the commands it runs
+# do, so a fix left unstaged still satisfies it.
+#
+# POSIX sh only. No dependency beyond git, and composer for the gate that needs it.
+#
+# `git commit --no-verify` skips the hook. Use it for neither a missing vendor/ nor a slow
+# machine: bootstrap the clone instead, as the worktrees rule says.
+
+status=0
+
+# Staged paths: added, copied, modified and renamed. Deleted ones cannot break a gate.
+# Hooks run from the top of the working tree, so these are repository-root paths.
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+
+# Gate 1 (generic): composer validate, when composer.json or composer.lock is staged.
+# It catches invalid JSON and a lock file that no longer matches composer.json before they
+# reach a pull request. --no-check-publish leaves out the checks that matter only to a
+# package published on Packagist (a name, a license), which an application never has.
+if printf '%s\n' "$staged" | grep -Eq '^composer\.(json|lock)$'; then
+    if command -v composer >/dev/null 2>&1; then
+        if ! composer validate --no-check-publish --no-interaction; then
+            echo "pre-commit: composer validate failed; fix composer.json or composer.lock." >&2
+            status=1
+        fi
+    else
+        echo "pre-commit: composer is not on PATH, so composer validate did not run." >&2
+    fi
+fi
+
+# Repository gates go here, one block each, after this line and before the final exit.
+# Keep a gate in its own block so one can be removed without touching another, and set
+# status=1 (never exit) on failure so the gates after it still run. A gate that reads only
+# the index is cheap and belongs here; one that runs the test suite does not, because this
+# hook runs on every commit. Put that in the local CI runner.
+#
+# To keep the local CI runner's guard against secret and personal-data files, save its
+# hook (the local-ci skill's templates/pre-commit) as .githooks/guard-deny, make it
+# executable, and call it from a block of its own:
+#
+#     if ! .githooks/guard-deny; then
+#         status=1
+#     fi
+
+exit "$status"

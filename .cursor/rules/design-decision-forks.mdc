@@ -15,8 +15,6 @@ When an issue is `hitl` because it carries a genuine **design fork** (an unresol
 
 This is the *decision* flavor of [`hitl`](../../.claude/skills/writing-issues/SKILL.md). It composes with the `afk`/`hitl` execution-mode triage: an issue earns `hitl` when completing it needs a human **decision** (a fork) or a real-world **action**; this rule governs how you drive a fork to resolution and flip it to `afk`.
 
-This repository does not carry the `afk`, `hitl` or `decision-fork` labels. The process below applies all the same; where it applies, keeps or flips a label, record the state in the issue body instead, as the [`writing-issues`](../../.claude/skills/writing-issues/SKILL.md) skill describes.
-
 ## The core principle
 
 A human decides a fork by **weighing trade-offs across dimensions**, not from a list of one-line option labels. So your job is NOT to ask "which do you want, A or B?"; it's to do the analysis first and hand over a complete, comparable packet, *then* ask. Never let an interactive prompt be the first substantial thing the human sees, and never compress the analysis to make room for the prompt. The prompt is the last step, not the deliverable.
@@ -54,7 +52,7 @@ After the full packet is on screen, present the interactive decision prompt (the
 
 ## Where the decision lands once made
 
-The canonical cross-ticket decision log is `docs/DECISIONS.md`; the **GitHub tracker remains the system of record for a single ticket's status**. A decision lands in three places:
+The canonical cross-ticket decision log is `docs/DECISIONS.md`; the **GitHub tracker remains the system of record for a single ticket's status**. A repository with no log starts from the skeleton in the [`decision-log`](../../.claude/skills/decision-log/SKILL.md) skill, which also ships the order check and the `.gitattributes` line the log needs. A decision lands in three places:
 
 - **What + why + rejected alternatives** → an entry in `docs/DECISIONS.md` (the terse, durable cross-ticket index) **and** a `## Decision` (or `## Chosen approach`) section of the GitHub issue body (the per-ticket detail). Keep the two consistent: the index says what was decided, the issue says how the argument ran.
 - **The full reasoning** → the relevant `docs/` companion when the decision touches a documented design area; otherwise the issue's `## Approach` section carries it. **The standing consequence** → `AGENTS.md` when the decision changes how the whole repo is built: a design rule, a hook ordering, a toolchain floor. Keep that line short; `docs/DECISIONS.md` carries the rejected alternatives and the issue carries the reasoning.

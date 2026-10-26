@@ -1,0 +1,52 @@
+name: Check attribution footer
+
+# Fails when a pull-request body carries the harness attribution footer, which
+# the no-emoji-in-durable-records rule forbids in pull-request and issue bodies.
+# The harness tells authors to add it, so it arrives on pull request after pull
+# request and gets removed by hand at the gate. No other check can see a body:
+# a tree sweep reads the filesystem, and a body is not on it. A squash merge
+# makes the body the commit message on the default branch.
+#
+# Template: .claude/skills/writing-pull-requests/templates/check-attribution-footer.yml
+# in UAMS-Web/uams-claude-skills, copied to .github/workflows/check-attribution-footer.yml.
+# This header is the only part a repository may change. The synced-files skill's
+# check-workflow-copies.mjs fails when the rest differs from the template. The
+# script it runs ships in the same skill, so no repository file is needed beyond
+# the synced .claude/ tree.
+#
+# All five trigger types are the point: a body can take on the footer when the
+# pull request opens, which is where most specimens carried it, and through any
+# later edit.
+#
+# The body is read from the API rather than from the event payload, so an edit
+# that lands between the event and the run is still the text that is checked.
+#
+# Deliberately NOT gated on RUN_REMOTE_CI, for the same reason as
+# `clear-handed-back.yml`: that switch is off for months at a time. The job is
+# one checkout, one API read and one Node script with no dependencies.
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, ready_for_review, synchronize]
+
+# Nothing at the workflow level; the one job states the scopes it needs.
+permissions: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check the body for the attribution footer
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh api "repos/$REPO/pulls/$NUMBER" --jq '.body // ""' > "$RUNNER_TEMP/body.md"
+          node .claude/skills/writing-pull-requests/scripts/check-attribution-footer.mjs "$RUNNER_TEMP/body.md"

@@ -11,6 +11,11 @@
 // Line endings are normalized (CRLF to LF) before hashing, so a Windows checkout with
 // `core.autocrlf` does not fail; a change made only of line endings is not reported.
 //
+// The sync also merges a few keys (today `attribution`) into `.claude/settings.json`, a file
+// the repository otherwise owns. The manifest records a hash of each shipped key under
+// `settings`; this check compares the key, never the file, so every other setting stays free
+// to change. A key edited, removed or made unreadable is reported.
+//
 // Usage, from the repository root:
 //     node .claude/skills/synced-files/scripts/check-synced-files.mjs [--root <dir>]
 //
@@ -28,6 +33,7 @@ import { fileURLToPath } from 'node:url'
 
 export const MANIFEST_PATH = '.claude/sync-manifest.jsonc'
 export const SOURCE_REPO = 'UAMS-Web/uams-claude-skills'
+export const SETTINGS_PATH = '.claude/settings.json'
 
 const CR = 0x0d
 const LF = 0x0a
@@ -44,6 +50,12 @@ export function hashContent(bytes) {
     return createHash('sha256').update(out.subarray(0, n)).digest('hex')
 }
 
+/** The sha256 (hex) of a JSON value in canonical form: object keys sorted at every depth, no whitespace. */
+export function hashSettingsValue(value) {
+    const canonical = (v) => (Array.isArray(v) ? v.map(canonical) : v !== null && typeof v === 'object' ? Object.fromEntries(Object.keys(v).sort().map((k) => [k, canonical(v[k])])) : v)
+    return createHash('sha256').update(JSON.stringify(canonical(value))).digest('hex')
+}
+
 /** A manifest path the check may read: relative, forward slashes, no `..` segment. */
 function isSafePath(rel) {
     return typeof rel === 'string' && rel !== '' && !isAbsolute(rel) && !rel.includes('\\') && !rel.split('/').some((part) => part === '..' || part === '')
@@ -52,7 +64,7 @@ function isSafePath(rel) {
 /**
  * Compare every file the manifest records with its hash.
  *
- * @returns {{checked: number, problems: string[]}} One problem per file, naming it.
+ * @returns {{checked: number, keysChecked: number, problems: string[]}} One problem per file or settings key, naming it.
  */
 export function checkSyncedFiles(root, manifest) {
     const problems = []
@@ -82,7 +94,31 @@ export function checkSyncedFiles(root, manifest) {
         }
         if (hashContent(readFileSync(abs)) !== expected) problems.push(`${rel} was changed.`)
     }
-    return { checked, problems }
+    let keysChecked = 0
+    const settings = manifest.settings
+    if (settings !== undefined && (settings === null || typeof settings !== 'object' || Array.isArray(settings))) {
+        problems.push(`"settings" in ${MANIFEST_PATH} is not an object; the manifest was edited by hand.`)
+    } else {
+        for (const [rel, keys] of Object.entries(settings ?? {}).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))) {
+            if (!isSafePath(rel) || keys === null || typeof keys !== 'object' || Array.isArray(keys)) {
+                problems.push(`${JSON.stringify(rel)} under "settings" in ${MANIFEST_PATH} is not a path with recorded keys; the manifest was edited by hand.`)
+                continue
+            }
+            let data
+            try {
+                data = JSON.parse(readFileSync(join(root, rel), 'utf8'))
+            } catch (failure) {
+                problems.push(`${rel} could not be read as JSON (${failure.code ?? 'not valid JSON'}), so its shared key(s) ${Object.keys(keys).join(', ')} could not be checked.`)
+                continue
+            }
+            for (const [key, expected] of Object.entries(keys).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))) {
+                keysChecked++
+                if (data === null || typeof data !== 'object' || !Object.hasOwn(data, key)) problems.push(`${rel} no longer has the "${key}" key.`)
+                else if (hashSettingsValue(data[key]) !== expected) problems.push(`${rel} has a changed "${key}" value.`)
+            }
+        }
+    }
+    return { checked, keysChecked, problems }
 }
 
 function parseArgs(argv) {
@@ -127,13 +163,14 @@ export function main(argv = [], { log = console.log, error = console.error } = {
         return 2
     }
 
-    const { checked, problems } = checkSyncedFiles(args.root, manifest)
+    const { checked, keysChecked, problems } = checkSyncedFiles(args.root, manifest)
     if (problems.length === 0) {
-        log(`synced-files check: clean (${checked} files match ${MANIFEST_PATH}).`)
+        const keys = keysChecked ? ` and ${keysChecked} shared settings key${keysChecked === 1 ? '' : 's'} in ${SETTINGS_PATH}` : ''
+        log(`synced-files check: clean (${checked} files match ${MANIFEST_PATH}${keys}).`)
         return 0
     }
     for (const problem of problems) log(`synced-files check: ${problem}`)
-    log(`These files are written by the shared sync and must not be edited here. Make the change in ${SOURCE_REPO} (under shared/), and the next sync pull request brings it to this repository. To drop a local edit, restore the file from git.`)
+    log(`These files and settings keys are written by the shared sync and must not be edited here. Make the change in ${SOURCE_REPO} (under shared/), and the next sync pull request brings it to this repository. To drop a local edit, restore the file or key from git.`)
     return 1
 }
 

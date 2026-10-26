@@ -98,6 +98,8 @@ Nothing here is about tone. Emphasis is welcome; **bold** carries it without a c
 
 4. **Existing prose is not yours to sweep.** Rules, skills and docs written before this rule use emoji as their own formatting. Removing them is a separate, deliberate change with its own ticket, not something a passing edit does, and not something to do file-by-file as you touch them, which produces a corpus that is half-converted and consistent nowhere.
 
+**A repository sweeps its tree with the shared script rather than assembling this block.** `.claude/skills/writing-comments/scripts/check-no-emoji.mjs` reads the expression out of the `GLYPH` assignment above, so this block stays the one place the class is defined, and it sweeps the path classes named at the top of this rule: `.claude/`, `docs/`, `README.md`, `AGENTS.md` and `CLAUDE.md` where present. It runs the controls itself on every invocation (every bound of the class matches, clean prose does not, and known UTF-8 bytes come back as the right code points on the right lines), prints the file count before it scans, reports code points, and exits 2 rather than 0 when it cannot see. The `no-emoji` job in the `code-quality` CI template runs it. **Keep exactly one `GLYPH='...'` line in this file**, because the script refuses to run on zero or two.
+
 ## What this does not cover
 
 - **A verbatim quotation of a string that contains one.** A quote is evidence, and altering it to satisfy this rule is a worse defect than the quote. Where the glyph is the thing being identified (a forbidden footer, a callout being deprecated) prefer naming its code point (`U+1F916`) over reproducing it, which keeps the reference exact, searchable, and inert.
@@ -139,6 +141,7 @@ Adopting this rule therefore required a decision on the release path, and the op
 - **No occurrence is permitted.** There is no single-exception carve-out, by name or by code point, in a pull-request body or anywhere else.
 - **Do not add it.** Bodies merged before the decision still carry it; the decision is forward-looking, and a retrospective sweep of them is a separate question.
 - **An audit expects ZERO.** A superseded form of this guidance told a sweep of pull-request bodies to expect exactly one hit each and to investigate only a *second* one. Once the footer was retired that guidance inverted: it made a body still carrying `U+1F916` the expected case, so a sweep run against it would report clean over the very thing the rule bans. Any occurrence is a violation.
+- **A workflow enforces it on every pull request.** The `check-attribution-footer` workflow and its script ship in the `writing-pull-requests` skill (`templates/` and `scripts/`), which a repository copies once to `.github/workflows/`. It fails a body carrying `U+1F916` or a session link.
 
 ## The DRY line
 
