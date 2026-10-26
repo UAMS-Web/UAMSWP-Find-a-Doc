@@ -10,7 +10,7 @@ disable-model-invocation: true
 -->
 # Rule — keep session-coordination plumbing out of GitHub artifacts and documentation
 
-Concurrent sessions coordinate over an out-of-band channel. **Nothing about that channel belongs in a pull request, an issue, a comment, a commit message, a rule, a skill, or anything under `docs/`.**
+Concurrent sessions coordinate over an out-of-band channel. **Nothing about that channel belongs in a pull request, an issue, a comment, a commit message, a rule, a skill, or anything under `docs/`, with one exception for operating instructions (see *What this does not cover*).**
 
 **What counts as plumbing:** the coordination channel and the tooling that drives it, named or described; machine aliases; per-session or per-lane labels; and the liveness vocabulary that tooling uses: presence, roster, heartbeat, beat, stale, active, takeover, claim threads.
 
@@ -38,6 +38,8 @@ An artifact is read by people and tools that were not present when it was writte
 
    **`claim` is deliberately absent from the expression above.** Bare `claim` matches *reclaimed*, and even `claims?` is wrong: [`adversarial-review`](../rule-adversarial-review/SKILL.md) uses *claim* as ordinary vocabulary for the thing being reviewed, so the word appears throughout legitimate bodies. Measured over two recently-published bodies in `uams-statamic`, adding it produced **5 hits, none of them plumbing**. A false-hit rate that teaches the next reader to dismiss hits, which is worse than the miss it was meant to prevent.
 
+   **A hit inside an allowed operating instruction is read, not fixed.** The exception under *What this does not cover* lets a skill or rule tell a session when and how to report to the channel. A hit there is correct when three things hold: it sits in an instruction addressed to the session running the skill (a step it performs, in the imperative), it names a call or message the session itself sends, and it is not offered as support for any claim. Anything else with the same words is a leak: a sentence that says what the roster showed, who held a claim, or what a session reported, used as evidence or provenance. The test is the sentence's job, not its vocabulary. Read each hit against it and keep the correct ones; a hit that fails any of the three is rewritten as step 1 describes. The exception does not reach an issue, a pull request, a comment, a commit message or anything under `docs/`, so a hit in those is always a leak.
+
    **Validate the expression before trusting an empty result**: run it once against a body you know carries plumbing and confirm it fires. Left as written, or substituted wrongly, the placeholder cannot match an alias and looks identical to clean. An expression that cannot match is indistinguishable from a clean draft. The general form of that check is [`an-empty-result-is-not-evidence`](../rule-an-empty-result-is-not-evidence/SKILL.md).
 
 5. **For a PULL-REQUEST body, audit again at the merge. Publishing is not the last chance, it is the first one.** Merging composes the body into a commit message, and `main` is not rewritten, so a correction after the merge fixes the page and leaves the original wording on `main` permanently. [`github-api-budget`](../rule-github-api-budget/SKILL.md) carries the measurement of that composing behavior and [`pre-merge-check`](../rule-pre-merge-check/SKILL.md) carries the merge-gate step.
@@ -45,6 +47,10 @@ An artifact is read by people and tools that were not present when it was writte
 ## What this does not cover
 
 - **Vocabulary the project owns independently.** A word is not plumbing because it also appears in the coordination tooling. The test is whether the term names coordination infrastructure in the sentence it appears in, not whether it pattern-matches.
+
+- **An operating instruction for reporting to the channel, in a skill or rule.** A skill or rule may tell the session running it when and how to report its own progress to the coordination channel (for example, that a session which posts a hand-back verdict then reports it), naming the channel's calls and messages where the instruction needs them. The reader of such an instruction is the session performing it, and that session is connected to the channel, so the reason for the ban (a reader who cannot inspect the evidence) does not apply. Without the exception the instruction lives outside every repository, in text relayed to each session, and a relayed instruction can be lost; the cost was hand-back verdicts that went unreported to the channel, leaving pull requests waiting up to 90 minutes before anyone acted on them (`UAMS-Web/uams-claude-skills#122`).
+
+  **The exception is exactly that and no wider.** The ban stands in full for channel vocabulary used as evidence or provenance: in an issue, a pull request, a comment, a commit message and anything under `docs/`, and in a skill or rule anywhere outside an operating instruction of this kind. An instruction is allowed to say what to send; it is never allowed to cite what the channel showed or said as support for a claim. The audit in step 4 says how to tell the two apart.
 
 - **The coordination channel's own traffic.** Messages on the channel are the one place these details belong, and they are not durable records. This rule governs what leaves that channel, not what happens inside it.
 

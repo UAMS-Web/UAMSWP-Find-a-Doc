@@ -178,7 +178,7 @@ its removal criterion instead.
 | Patch SHA-256s and the set `_hash` | `patches.lock.json` |
 | Composer's own manifest hash | `composer.lock` → `content-hash` |
 | The plugin itself | `cweagans/composer-patches ^2.0` in `require-dev` + `allow-plugins` |
-| Per-patch narrative + removal checklist | `patches/README.md` where the repository has one; otherwise the entry's description key and the decision log |
+| Per-patch narrative + removal checklist | `patches/README.md` where the repository has one; otherwise the entry's description key and the decision log (annotated on retirement, never pruned; removal step 12 expects that hit) |
 | PHPStan pins for vendor-guard tests | `internalClass` `ignoreErrors` in `phpstan.neon.dist` |
 
 ### Adding a patch
@@ -265,9 +265,30 @@ once carried as a patch, but both were based on `4.x`, so neither could reach th
 repository runs even if merged. The patch stayed until `pestphp/pest` `v5.2.0` shipped an
 equivalent fix on 5.x (`UAMS-Web/uams-statamic#2414`).
 
-**Nothing polls the upstream tracker automatically here**: there is no upstream watcher. The
-hook is Dependabot: it opens a pull request when the patched package has a new release, and a
-bump of the patched package is exactly what obsoletes a patch. The
+**No upstream watcher runs here until the repository adopts one.** The skill ships one in
+[`templates/`](templates/), and the sync never writes a target's `.github/`, so adoption is a
+copy, done once:
+
+| Copy this template | To |
+| --- | --- |
+| `templates/watch-upstream.yml` | `.github/workflows/watch-upstream.yml` |
+| `templates/load-upstream-watches.mjs` | `scripts/load-upstream-watches.mjs` |
+| `templates/check-upstream-release.mjs` | `scripts/check-upstream-release.mjs` |
+| `templates/upstream-watches-README.md` | `.github/upstream-watches/README.md` |
+
+Add a row file per upstream signal to `.github/upstream-watches/` when the chain reaches ticket 2
+or 3 (the README gives the format). The sentinel is **per-signal**, so one tracker can carry both
+an issue row and a PR row and each notifies once. A row naming `composer` also polls Packagist for
+a release past the pin in `composer.lock`, which is the condition that retires the patch; a `pr`
+row with `released: true` also comments once when the newest stable tag on the pull request's
+base-branch line contains the merge commit. Closing the tracking issue turns its watch off. Each
+row is its own file, so two pull requests that add rows never conflict. A directory holding only
+the README is valid and the run does nothing, while a missing directory or a malformed row fails
+the run, so a wrong path never reads as nothing to watch. To tag a person on a notification, set
+the repository variable `UPSTREAM_WATCH_NOTIFY` (for example `@example-user`).
+
+Dependabot stays the second hook: it opens a pull request when the patched package has a new
+release, and a bump of the patched package is exactly what obsoletes a patch. The
 [`update-dependencies-ticket`](../update-dependencies-ticket/SKILL.md) skill re-confirms the patch
 stack on every Dependabot pull request that changes `composer.lock`, for every patched package; check it there.
 
@@ -309,7 +330,22 @@ unpatched code.
     applies.
 11. Run the gate that exercises the now-unpatched tool, and **see it green**: see *Proving it
     worked* below. Assuming it is fine is how a silent regression ships.
-12. `git grep <basename>` returns nothing.
+12. Nothing outside the historical record still names the patch. A retirement annotates the
+    repository's decision log (`docs/DECISIONS.md` where it has one) rather than deleting the
+    entry, because a decision log records what was decided and deleting an entry falsifies it;
+    that annotated entry is the one place the basename should survive, and step 7 has already
+    removed the narrative everywhere else. Check both halves, so the sweep is shown to tell the
+    two apart:
+
+    ```bash
+    git grep -n <basename> -- . ':(exclude)docs/DECISIONS.md'   # must print nothing
+    git grep -n <basename> -- docs/DECISIONS.md                 # must still find the annotated entry
+    ```
+
+    The first is the criterion. The second is its control: if it also prints nothing, either the
+    decision log was pruned, which this step forbids, or the basename is spelled differently from
+    what was searched, and the first command's silence proves nothing. In a repository with no
+    decision log, the first command without its `:(exclude)` argument is the whole check.
 
 A patch can also retire without any of this, by silently ceasing to apply because upstream fixed
 it on their own. Drop it the same way and record *why*, in the narrative where the repository
