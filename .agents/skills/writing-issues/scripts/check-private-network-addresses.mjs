@@ -3,7 +3,7 @@
 // private network address (UAMS-Web/uams-claude-skills#29).
 //
 // A private network address once reached six tracker bodies and comments in
-// UAMS-Web/uams-statamic (removed by UAMS-Web/uams-statamic#2763), and nothing flagged
+// UAMS-Web/uams-statamic (removed by UAMS-Web/uams-statamic-archive#2763), and nothing flagged
 // it. Text posted through `gh` goes through a body file (the writing-issues and
 // writing-pull-requests skills), so a check over that file is the one place every post
 // passes through.

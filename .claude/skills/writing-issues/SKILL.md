@@ -234,7 +234,7 @@ thread may simply not be seen, so a body still arguing from a superseded premise
 actually gets acted on. The failure is silent and it compounds: each correction posted as a
 comment makes the body *more* wrong while the thread makes it *look* thoroughly investigated.
 
-Observed on `wordpress-importer#668`, where the premise moved four times across four comments: 
+Observed on `wordpress-importer-archive#668`, where the premise moved four times across four comments: 
 including a fourth option investigated and rejected: while the body still presented the
 original three-option comparison built on two facts that no longer held. A reader following the
 standing instruction to work the body would have re-proposed the rejected option.
@@ -285,9 +285,9 @@ carried a *cleared* gate as an unchecked acceptance criterion. In every case the
 and the sentence was wrong.
 
 There is a second, sharper failure the prose form invites: **a bare `#N` resolves against the
-current repository.** `wordpress-importer#432` cited `#215`/`#216` for an "empty-entry
+current repository.** `wordpress-importer-archive#432` cited `#215`/`#216` for an "empty-entry
 redirect"; in that repo those are unrelated migrate-content issues, and the real referents were
-`uams-statamic#215`/`#216`. An edge stores a repository-qualified object id and cannot make that
+`uams-statamic-archive#215`/`#216`. An edge stores a repository-qualified object id and cannot make that
 mistake.
 
 **The carve-out: context cross-references stay.** What is banned is the *dependency claim*,
@@ -296,7 +296,7 @@ fall out of sync with it:
 
 - **Provenance**: `Follow-up to #589.`, `Spun off from #489.`, `Part of #358.`
 - **Inline cross-refs**: `tracked in #N`, `tracked separately in #N`, `see #802 / #803`.
-- **Naming what something is**: "the contract this codes against is `#589`", "`uams-statamic#295`
+- **Naming what something is**: "the contract this codes against is `#589`", "`uams-statamic#12`
   decides what these fields map to".
 
 Where a body needs to explain *why* something waits, describe the **condition**: what has to be
@@ -308,8 +308,8 @@ as a substitute for the edge it is describing.
 ### Reference forms
 
 - **Cross-repo refs**: the sibling-repo form is `Org/Repo#N`, either bare
-  (`UAMS-Web/wordpress-importer#19`) or as a backticked link where it reads better
-  (`` [`wordpress-importer#10`](https://github.com/UAMS-Web/wordpress-importer/issues/10) ``).
+  (`UAMS-Web/wordpress-importer-archive#19`) or as a backticked link where it reads better
+  (`` [`wordpress-importer-archive#10`](https://github.com/UAMS-Web/wordpress-importer-archive/issues/10) ``).
   Qualify **every** cross-repo reference: a bare `#N` silently resolves against the repository
   the body lives in.
 - **In `## Out of scope` / `## References` bullets**: end the bullet with `, tracked in #N.`
@@ -353,8 +353,8 @@ needs to be *completed*: an autonomous coding agent, or a human.
 **The exception is `epic`.** An issue labeled `epic` is exempt from the requirement: it is a
 container whose slices each carry their own execution mode, not a unit of work anyone picks up
 and builds. An epic with neither label is **correctly labeled**: don't "fix" it. Apply `hitl` to
-an epic only where the container *itself* waits on a human (`uams-statamic#1777` and
-`uams-statamic#1045` both wait on a real-world action).
+an epic only where the container *itself* waits on a human (`uams-statamic#177` and
+`uams-statamic#54` both wait on a real-world action).
 
 - **`afk`** (away-from-keyboard): buildable autonomously: the design is **pinned or already
   decided**, or the fix is **fully specified**, so there is **no genuine design fork to resolve
@@ -364,7 +364,7 @@ an epic only where the container *itself* waits on a human (`uams-statamic#1777`
   anything outside the repo?* If yes → `afk`. **Posting to a third-party tracker does not, on
   its own, make an issue `hitl`**: an upstream issue, a pull request, a comment, an upvote or a
   feature request is `afk`: the agent researches, drafts and prepares it, and a human approves
-  the post before it goes out (`uams-statamic#2772`).
+  the post before it goes out (`uams-statamic-archive#2772`).
 - **`hitl`** (human-in-the-loop): completing it **requires a human in the loop**, for either
   reason: a human **decision**: an unresolved design fork (the issue carries a `## Questions to
   resolve` / `## Decisions to resolve` section), a policy / cost / go-no-go call, or a settled
@@ -515,7 +515,7 @@ once per hit reading `shown 0 of null`. Verified by running both forms.
 The count goes **after** the hits rather than before them. A header is easier to read and is the
 first thing lost when the output is piped; a trailer is the first thing lost too, but its
 absence is then conspicuous against a list that has obviously been cut. Neither placement
-survives a `head`, which is the second-order truncation `wordpress-importer#965` documents: the
+survives a `head`, which is the second-order truncation `wordpress-importer-archive#965` documents: the
 caller's own pipeline cuts what the endpoint did not. When you don't have the count line: 
 reading a transcript after the fact, say: the tell is a page of results that is *exactly*
 `per_page` long.
@@ -550,7 +550,7 @@ output until the command is killed.
 
 **An empty result is only worth something if the query was shown to match.** Before accepting
 one, run the same form against a term you know is present and confirm it returns the known item.
-Per `uamswp-migration-api#98`, an empty result from a query that cannot match is identical to
+Per `uamswp-migration-api-archive#98`, an empty result from a query that cannot match is identical to
 an empty result from an empty tracker.
 
 Vary the terms across the symptom, the affected file/handle/symbol, and the class/label: one

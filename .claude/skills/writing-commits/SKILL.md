@@ -68,7 +68,7 @@ the user can copy it cleanly.
   #999999  file the bug upstream                 retitled, action-flavor added
   ```
 
-  That is `f12ba37e4` in `uams-statamic`, whose body opens `Refs #2241. Deliberately closes nothing`. It closed `#2241`. **Neither established check sees it**: a body grep cannot match a string that only exists after the join, and `closingIssuesReferences` reads empty for that pull request. Break the adjacency: reorder so the status cell is not last, or write the cell as something other than a bare keyword (`now closed`, `done`). The mechanism, the two blind checks, and why the **pull-request body** rather than the branch commits is the load-bearing input are in [`writing-pull-requests`](../writing-pull-requests/SKILL.md).
+  That is `f12ba37e4` in `uams-statamic`, whose body opens `Refs #2241. Deliberately closes nothing`. It closed `UAMS-Web/uams-statamic-archive#2241`. **Neither established check sees it**: a body grep cannot match a string that only exists after the join, and `closingIssuesReferences` reads empty for that pull request. Break the adjacency: reorder so the status cell is not last, or write the cell as something other than a bare keyword (`now closed`, `done`). The mechanism, the two blind checks, and why the **pull-request body** rather than the branch commits is the load-bearing input are in [`writing-pull-requests`](../writing-pull-requests/SKILL.md).
 
 ## Tone and voice
 

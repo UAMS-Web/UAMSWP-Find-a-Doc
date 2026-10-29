@@ -31,8 +31,8 @@ description: >-
 
 A local Composer patch is a debt with a defined payoff schedule. This skill is that schedule: the
 four tickets that track it, and the repo-side mechanics of each installment. Every step below has
-been paid for once, in `uams-statamic`'s `pest-plugin-mutate` run (its #1728 → #1729 →
-[`pestphp/pest-plugin-mutate#38`](https://github.com/pestphp/pest-plugin-mutate/pull/38) → #1898),
+been paid for once, in `uams-statamic`'s `pest-plugin-mutate` run (UAMS-Web/uams-statamic-archive#1728 → UAMS-Web/uams-statamic-archive#1729 →
+[`pestphp/pest-plugin-mutate#38`](https://github.com/pestphp/pest-plugin-mutate/pull/38) → UAMS-Web/uams-statamic-archive#1898),
 and each was re-derived from scratch along the way. Follow the checklist instead of re-deriving
 it.
 
@@ -86,12 +86,24 @@ and testing the branch. The one step it does not take alone is the post itself, 
 appears on a third-party public tracker under a maintainer's own identity: the agent asks a human
 to approve it, and posts only after that approval. That approval is a step inside the ticket, not a
 reason to label the whole ticket `hitl`, which would leave the preparation waiting for a person
-too (`UAMS-Web/uams-statamic#2772`). There is no decision to make either, so the
+too (`UAMS-Web/uams-statamic-archive#2772`). There is no decision to make either, so the
 [`design-decision-forks`](../rule-design-decision-forks/SKILL.md) rule does not apply to them.
 Tickets 1 and 4 are ordinary in-repo builds. Ticket 4's package update often arrives as a
 Dependabot pull request: then the patch retires on that pull request's branch, per the
 [`update-dependencies-ticket`](../update-dependencies-ticket/SKILL.md) skill, and that pull
 request closes ticket 4.
+
+**Tickets 2 and 3 verify the draft before the approval is requested.** The
+[`verify-claims-before-a-third-party-post`](../rule-verify-claims-before-a-third-party-post/SKILL.md)
+rule owns the requirement: every claim in the draft is checked three ways, each by an
+independent method, and the claims and the checks are recorded on the filing ticket. This chain
+owns only the timing. The checks run **after the local patch from ticket 1 is merged and
+installed**, so they exercise the shipped fix rather than a working copy, and **after the last
+edit to the draft**. A draft written before the patch existed is re-verified at that point, not
+trusted. Two things the rule's claim list names are specific to a patch chain and are easy to
+leave stale in a draft written early: the revision of the upstream package the reproduction was
+run against, and any "no existing report" statement, which is re-searched at that point because
+the upstream tracker has moved since the draft was written.
 
 **Why the patch comes first, not the report.** Filing after the patch means the report ships a
 **tested fix** rather than a suggestion, which is more useful to the maintainer and more likely
@@ -136,7 +148,7 @@ budget it protects are the [`github-api-budget`](../rule-github-api-budget/SKILL
 ### Where to file when the upstream tracker is not where you think
 
 Check `has_issues` before drafting anything, and check **only** that field.
-`pestphp/pest-plugin-mutate` has issues **disabled**, so `uams-statamic`'s #1729 had to be
+`pestphp/pest-plugin-mutate` has issues **disabled**, so UAMS-Web/uams-statamic-archive#1729 had to be
 retargeted to Pest core mid-flight. Its `open_issues_count` is actively misleading, with issues
 off, GitHub still counts pull requests there, so the repo reads as a live tracker with a handful
 of open reports (7 when #1729 checked it, 4 on a later check, never once an issue):
@@ -263,7 +275,7 @@ A merge is not a release, and a release on the wrong major line is not a release
 Upstream PRs `pestphp/pest#1742` and `#1757` implemented a parallel-merge fix `uams-statamic`
 once carried as a patch, but both were based on `4.x`, so neither could reach the 5.x line that
 repository runs even if merged. The patch stayed until `pestphp/pest` `v5.2.0` shipped an
-equivalent fix on 5.x (`UAMS-Web/uams-statamic#2414`).
+equivalent fix on 5.x (`UAMS-Web/uams-statamic-archive#2414`).
 
 **No upstream watcher runs here until the repository adopts one.** The skill ships one in
 [`templates/`](templates/), and the sync never writes a target's `.github/`, so adoption is a
@@ -385,6 +397,45 @@ The mutation run needs a coverage driver.
   (`cweagans/composer-patches` 2.0.0, `RepatchCommand.php:57-62`), so a patch that fails to
   apply still exits 0. Remote CI installs cold, so it re-patches every time; **your warm local
   tree is the one that lies**, unless the local runner has its own safety net.
+- **`patch --dry-run` without `-N` cannot say whether a patch is applied, so its exit status
+  means nothing here.** Used to decide "is this patch already in `vendor/`?", the bare probe
+  answers on a platform-specific prompt rather than on the file. Measured on macOS
+  (Darwin 25.6.0, the BSD `patch`) against `vendor/statamic/cms`, both arms run unflagged:
+  `patch -p1 --dry-run` and `patch -p1 -R --dry-run` each exit `0`, and the forward arm prints
+  `Reversed (or previously applied) patch detected! Assume -R? [y]` and still exits `0`. Across
+  21 patches the unflagged probe reported both-arms-succeed on 20 and both-arms-fail on 1, so it
+  never separated an applied patch from an unpatched one. With `-N` (`--forward`) the forward arm
+  separates them:
+
+  | tree | `patch -p1 -N --dry-run` | output |
+  | --- | --- | --- |
+  | patch applied | exit `1` | `Ignoring previously applied (or reversed) patch.` |
+  | unpatched upstream (v6.37.0) | exit `0` | `patching file ...` |
+
+  Measured on Windows 11 under Git Bash (GNU patch 2.7.6), against a one-hunk toy file rather
+  than `vendor/`, with stdin at EOF and `-i <patch>`: on an applied tree the unflagged forward
+  probe exits `1` after printing `Assume -R? [n]` and `Apply anyway? [n]` (the prompt defaults to
+  no, where the macOS prompt defaults to yes), and `-N` exits `1` with `Skipping patch`; on an
+  unpatched tree both exit `0`. So the two platforms disagree about the unflagged probe, which is
+  the reason to rule it out rather than pick whichever reading the local machine gives. With
+  stdin on a terminal the unflagged probe also waits at the prompt. **Always pass `-N`, and read
+  both arms**: `-N` forward must exit `1` on an applied tree and `0` on an unpatched one, which
+  is a two-sided result no single exit status can stand in for. Running only the arm that
+  confirms the expected state is the shape [`an-empty-result-is-not-evidence`](../rule-an-empty-result-is-not-evidence/SKILL.md)
+  rules out. The `-R --dry-run` arm is not a substitute: on macOS it exits `0` on both trees,
+  and on the Windows toy file it exits `0` on an applied tree and `1` on an unpatched one only
+  because the prompt defaults to no (`Ignore -R? [n]`).
+
+  **To evidence that a patch is applied, probe for its added line instead of its exit status.**
+  Take a line the patch adds (a `+` line in the hunk) and search the patched file for it with a
+  fixed-string match (`grep -F`), then run the same search against a file known to be unpatched
+  as the control. **The first added line is not always unique to the patch:**
+  `patches/statamic-updates-overview-badge.patch` adds a line that already exists upstream, so
+  its first added line matches an unpatched file too. Choose an added line that the control
+  file lacks, and confirm the control count is `0` before reading the patched count. Any
+  `patch --dry-run` in a script or ticket that decides "applied or not" carries `-N` for the
+  reason above, and states the platform it was measured on.
+  The sibling trap above is the same shape: a status that reports on the wrapper, not the work.
 - **A stale `vendor/` also fakes out `composer outdated` and `composer audit`.** Verified
   2026-08-05 in `wordpress-importer`: the primary checkout had `pestphp/pest` `4.7.4` installed
   against a lock holding `v5.0.2`, and `cweagans/composer-patches` was not installed at all. Run
@@ -419,7 +470,16 @@ maintainer can satisfy: "if upstream answers X, do Y". Left in place, that crite
 ticket open indefinitely for an answer it cannot produce. Six were open in `uams-statamic` on
 2026-09-30 on that ground alone.
 
-**The rule (decided 2026-09-30, `UAMS-Web/uams-statamic#2723`):**
+**The post still carries the claim verification.** A request with no patch behind it goes to
+the same third-party tracker under a maintainer's identity, and its claims cost the same when
+they are wrong. The
+[`verify-claims-before-a-third-party-post`](../rule-verify-claims-before-a-third-party-post/SKILL.md)
+rule applies in full. There is no local patch to wait for, so the checks run immediately before
+the approval is requested, against the current upstream release named in the draft; a draft
+written earlier is re-verified at that point, and the claims and checks are recorded on the
+filing ticket first.
+
+**The rule (decided 2026-09-30, `UAMS-Web/uams-statamic-archive#2723`):**
 
 1. **The filing ticket closes once the item is posted.** Its own work, drafting and filing
    the upstream item and recording the link, is done at that point.
@@ -469,6 +529,9 @@ This skill owns the **lifecycle** and the **ticket shape**, and nothing else.
 - **Issue and PR *style*:** titles, section inventory, acceptance criteria, the `afk`/`hitl`
   labels themselves, stay in the [`writing-issues`](../writing-issues/SKILL.md) and
   [`writing-pull-requests`](../writing-pull-requests/SKILL.md) skills.
+- **What is verified before an upstream post, and how** stays in the
+  [`verify-claims-before-a-third-party-post`](../rule-verify-claims-before-a-third-party-post/SKILL.md)
+  rule; this skill keeps only when the checks run in its chain.
 - **Which API surface to spend** stays in the
   [`github-api-budget`](../rule-github-api-budget/SKILL.md) rule.
 - **The pre-ship review and the mutation/negative-control discipline** stay in the

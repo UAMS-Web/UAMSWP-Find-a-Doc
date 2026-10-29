@@ -26,6 +26,9 @@ name: Check closing keywords across lines
 # Deliberately NOT gated on RUN_REMOTE_CI, for the same reason as `clear-handed-back.yml`:
 # that switch is off for months at a time. The job is one checkout, one API read and one Node
 # script with no dependencies.
+#
+# The job name, `Closing keywords`, is a required status check context in the repository's
+# ruleset, the same in every repository. Renaming it means changing the ruleset.
 
 on:
   pull_request:
@@ -36,6 +39,7 @@ permissions: {}
 
 jobs:
   check:
+    name: Closing keywords
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:

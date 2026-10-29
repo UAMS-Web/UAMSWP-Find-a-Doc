@@ -115,7 +115,7 @@ Adopting this rule therefore required a decision on the release path, and the op
 
 **Rejected: carving the release callout out permanently.** It would have cost nothing to implement and it fails on its own terms. A rule with an unstated exception is one people learn to skip, and this exception could not have stayed unstated: it would have had to be repeated wherever the release vocabulary appears. The rule's own rationale is that the glyph is not encodable in `cp1252` and kills tooling that touches it; that argument applies to a generator writing to a redirected stdout at least as strongly as to an author typing prose, so exempting the one place the emission is automatic inverts the reason for the rule. The callout is also this rule's own worked example: the `--breaking` run that died under a Windows code page died on that glyph.
 
-**Already-published release notes keep their glyph.** This decision governs what is written from here; rewriting published artifacts is a separate act and is not licensed by it (`UAMS-Web/uams-statamic#2190`).
+**Already-published release notes keep their glyph.** This decision governs what is written from here; rewriting published artifacts is a separate act and is not licensed by it (`UAMS-Web/uams-statamic-archive#2190`).
 
 ## The second conflict: the check mark in a pull-request verification list
 
