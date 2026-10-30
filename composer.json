@@ -8,12 +8,21 @@
     },
     "require-dev": {
         "brain/monkey": "^2.7",
+        "laravel/pint": "^1.32",
+        "php-stubs/wordpress-stubs": "6.8",
+        "php-stubs/wp-cli-stubs": "^2.12",
+        "phpstan/phpstan": "^2.2",
         "phpunit/phpunit": "^9.6",
+        "rector/rector": "^2.6",
+        "szepeviktor/phpstan-wordpress": "^2.0",
         "wp-phpunit/wp-phpunit": "~7.1.0",
         "yoast/phpunit-polyfills": "^4.0"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
     },
     "scripts": {
         "test": [
@@ -21,7 +30,14 @@
             "@test:integration"
         ],
         "test:unit": "phpunit --testsuite=Unit",
-        "test:integration": "phpunit --testsuite=Integration"
+        "test:integration": "phpunit --testsuite=Integration",
+        "stan": "phpstan analyse --no-progress --memory-limit=2G",
+        "refactor": "rector",
+        "refactor:sweep": "rector --clear-cache --config=rector-sweep.php",
+        "test:refactor": "rector --dry-run",
+        "test:refactor:sweep": "rector --dry-run --clear-cache --config=rector-sweep.php",
+        "pint": "pint",
+        "test:pint": "pint --test"
     },
     "scripts-descriptions": {
         "test": "Run both suites, each in its own process, so the Unit suite never sees WordPress.",
