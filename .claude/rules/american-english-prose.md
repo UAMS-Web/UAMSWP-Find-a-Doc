@@ -10,7 +10,7 @@ First-party prose in this repository is written in **American English**: comment
 
 ## Why this is a standing order
 
-**Because each addition is individually defensible and the aggregate is not.** A word is added because it is genuinely needed at one site, and thereafter the gate cannot enforce the convention for that word *anywhere*, including in prose nobody has written yet. The cost is paid by a later reader, not by the author. Repeated, it replaces the convention with its opposite: `wordpress-importer`'s dictionary had absorbed ten British spellings before the convention was written down, and `uams-statamic`'s review of four entries (#2318) found two that had been absorbed for reasons that looked like the carve-out and were not.
+**Because each addition is individually defensible and the aggregate is not.** A word is added because it is genuinely needed at one site, and thereafter the gate cannot enforce the convention for that word *anywhere*, including in prose nobody has written yet. The cost is paid by a later reader, not by the author. Repeated, it replaces the convention with its opposite: `wordpress-importer`'s dictionary had absorbed ten British spellings before the convention was written down, and `uams-statamic`'s review of four entries (UAMS-Web/uams-statamic-archive#2318) found two that had been absorbed for reasons that looked like the carve-out and were not.
 
 **And the entry carries no trace of its reasoning.** A long sorted word list makes every line look alike: a proper noun, a package name, a British spelling somebody allowed once, and a genuine misspelling are indistinguishable. Reviewing one means reconstructing why it was added.
 

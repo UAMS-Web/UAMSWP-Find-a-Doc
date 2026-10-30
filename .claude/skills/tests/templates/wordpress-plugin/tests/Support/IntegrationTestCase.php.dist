@@ -12,59 +12,25 @@ use WP_UnitTest_Factory;
 use WP_UnitTestCase;
 
 /**
- * WordPress' test case, adapted to PHPUnit 10 and later.
+ * WordPress' test case, unchanged, on the PHPUnit 9.6 its test suite supports.
  *
  * Loaded by tests/Integration/bootstrap.php once WordPress is up; it cannot be
  * autoloaded earlier, because its parent does not exist until then.
+ *
+ * The Integration suite runs from its own Composer setup on PHPUnit 9.6, so it
+ * needs no adapter: core's expectDeprecated() and checkRequirements() work as
+ * shipped. A suite moved onto PHPUnit 10 or later would need one, and that move
+ * waits on WordPress supporting it (UAMS-Web/uams-claude-skills#124).
  */
 abstract class IntegrationTestCase extends WP_UnitTestCase
 {
     /**
-     * The fixture factory, typed and reachable from a Pest closure.
-     *
-     * Core declares it protected, so a closure would have to reach it through
-     * `$this->factory()`, which static analysis resolves against PHPUnit's
-     * TestCase, where it does not exist. Call `IntegrationTestCase::factory()`.
+     * The fixture factory, with a named return type for static analysis.
      */
-    public static function factory(): WP_UnitTest_Factory
+    protected static function factory(): WP_UnitTest_Factory
     {
         return parent::factory();
     }
-
-    /**
-     * Wire the deprecation hooks without parsing annotations.
-     *
-     * Core's version reads `expectedDeprecated` annotations through
-     * `PHPUnit\Util\Test::parseTestMethodAnnotations()` and `getName()`, both
-     * removed in PHPUnit 10, and it runs in every test's set_up(). The hook
-     * wiring is kept as core has it, because assertPostConditions() still
-     * reconciles against what these handlers record.
-     */
-    public function expectDeprecated(): void
-    {
-        add_action('deprecated_function_run', [$this, 'deprecated_function_run'], 10, 3);
-        add_action('deprecated_argument_run', [$this, 'deprecated_function_run'], 10, 3);
-        add_action('deprecated_class_run', [$this, 'deprecated_function_run'], 10, 3);
-        add_action('deprecated_file_included', [$this, 'deprecated_function_run'], 10, 4);
-        add_action('deprecated_hook_run', [$this, 'deprecated_function_run'], 10, 4);
-        add_action('doing_it_wrong_run', [$this, 'doing_it_wrong_run'], 10, 3);
-
-        add_filter('deprecated_function_trigger_error', '__return_false');
-        add_filter('deprecated_argument_trigger_error', '__return_false');
-        add_filter('deprecated_class_trigger_error', '__return_false');
-        add_filter('deprecated_file_trigger_error', '__return_false');
-        add_filter('deprecated_hook_trigger_error', '__return_false');
-        add_filter('doing_it_wrong_trigger_error', '__return_false');
-    }
-
-    /**
-     * Intentionally empty.
-     *
-     * Core's version has done nothing since PHPUnit 7, and its docblock names a
-     * group annotation in prose, which PHPUnit's metadata parser reads as real
-     * metadata: a deprecation on every run under PHPUnit 11, an error under 12.
-     */
-    protected function checkRequirements(): void {}
 }
 
 // cspell:ignore autoloaded
