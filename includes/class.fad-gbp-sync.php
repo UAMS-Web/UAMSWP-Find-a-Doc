@@ -64,7 +64,7 @@ final class UAMSWP_FAD_GBP_Sync
     /**
      * Decide and, where the silo is live, carry out one action per item.
      *
-     * @param  array<int, array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>}>  $items
+     * @param  array<int, array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>, excluded?: bool}>  $items
      * @return array<int, array<string, mixed>> The log entries, in item order.
      */
     public function run(array $items): array
@@ -81,7 +81,7 @@ final class UAMSWP_FAD_GBP_Sync
     }
 
     /**
-     * @param  array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>}  $item
+     * @param  array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>, excluded?: bool}  $item
      * @return array<string, mixed>
      */
     private function handle(array $item): array
@@ -97,6 +97,10 @@ final class UAMSWP_FAD_GBP_Sync
             'fields' => [],
             'unresolved_categories' => $item['unresolved'],
         ];
+
+        if (! empty($item['excluded'])) {
+            return ['reason' => 'Providers at this location are excluded from Google Business Profiles'] + $entry;
+        }
 
         if ($silo === null || ! isset($this->config['silos'][$silo])) {
             return ['reason' => "No silo for this location's brand"] + $entry;

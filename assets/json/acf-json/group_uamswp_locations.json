@@ -5065,6 +5065,28 @@
 			"return_format": "value"
 		},
 		{
+			"key": "field_location_gmb_exclude_providers",
+			"label": "Should providers at this location be excluded from any bulk imports and updates in Google Business Profiles?",
+			"name": "location_gmb_exclude_providers",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": "0",
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
 			"key": "field_location_gmb_prefix",
 			"label": "Should \"UAMS Health\" be prepended to the location name on the Google My Business listing?",
 			"name": "location_gmb_prefix",

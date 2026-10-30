@@ -31,4 +31,6 @@ The refresh token needs the `https://www.googleapis.com/auth/business.manage` sc
 
 **What it writes.** Business name, address, coordinates, phone, website, categories and description. It never writes hours, photos, posts, Q&A or attributes, and never deletes a listing. A listing is updated only when it is in its silo's account group. A store code that exists anywhere else, including the closed, duplicate and non-clinical groups, is logged for review and never recreated.
 
+**Exclusions.** A provider is left out when its own "excluded from bulk imports and updates" field is Yes. A location has two separate fields: one for the location's own listing, and one ("Should providers at this location be excluded...") that keeps every provider listing at that location from being created or updated. The second defaults to No, so existing locations behave as before.
+
 **Category names** come from the `gmb_cat_provider` taxonomy and are matched to Google's categories without regard to case. A name Google has no category for is left off the listing and shown in the log.
