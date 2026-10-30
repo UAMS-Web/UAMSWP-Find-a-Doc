@@ -7,8 +7,10 @@
   prefix, and no internal-process references (no `Wave N`, `Group X`, `Iteration N`, batch or
   merge-order hints). Correct acronym casing; "and", never "&".
 
-  Before opening: run the repository's spell check if you touched prose or identifiers, and
-  run its gate. Never add an attribution footer or a session link to the body.
+  Before opening: in a public repository, open this as a draft and let its remote checks run,
+  then mark it ready once every one is green. Elsewhere, run the repository's spell check if
+  you touched prose or identifiers, and run its gate. Never add an attribution footer or a
+  session link to the body.
 
   Closing multiple issues? Repeat the keyword: `Closes #1, Closes #2.` A comma-separated
   list links only the FIRST issue.

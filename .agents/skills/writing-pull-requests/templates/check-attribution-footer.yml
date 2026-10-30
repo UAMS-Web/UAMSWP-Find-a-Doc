@@ -21,9 +21,18 @@ name: Check attribution footer
 # The body is read from the API rather than from the event payload, so an edit
 # that lands between the event and the run is still the text that is checked.
 #
+# A pull request opened by `dependabot[bot]` is not checked. Its body is generated
+# from upstream release notes, which can carry emoji nobody on the repository
+# wrote and nobody can edit, so a failure would block a pull request whose author
+# cannot fix it. The skip is inside the step rather than a job-level `if`, so
+# the step can print why it skipped.
+#
 # Deliberately NOT gated on RUN_REMOTE_CI, for the same reason as
 # `clear-handed-back.yml`: that switch is off for months at a time. The job is
 # one checkout, one API read and one Node script with no dependencies.
+#
+# The job name, `Attribution footer`, is a required status check context in the repository's
+# ruleset, the same in every repository. Renaming it means changing the ruleset.
 
 on:
   pull_request:
@@ -34,6 +43,7 @@ permissions: {}
 
 jobs:
   check:
+    name: Attribution footer
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -48,5 +58,10 @@ jobs:
           REPO: ${{ github.repository }}
           NUMBER: ${{ github.event.pull_request.number }}
         run: |
+          author=$(gh api "repos/$REPO/pulls/$NUMBER" --jq '.user.login')
+          if [ "$author" = "dependabot[bot]" ]; then
+            echo "Skipped: the body of a Dependabot pull request is generated from upstream release notes."
+            exit 0
+          fi
           gh api "repos/$REPO/pulls/$NUMBER" --jq '.body // ""' > "$RUNNER_TEMP/body.md"
           node .claude/skills/writing-pull-requests/scripts/check-attribution-footer.mjs "$RUNNER_TEMP/body.md"

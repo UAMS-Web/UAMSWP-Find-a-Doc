@@ -28,7 +28,7 @@ Every PHP repository in UAMS-Web has tests (UAMS-Web/uams-claude-skills#9). A re
 - **Pest wherever it can run.** One framework keeps one skill, one set of review habits and one mutation-testing tool (`--mutate`) across every repository. Where Pest cannot run, the repository stays on PHPUnit and its ticket records why and what would let it move (see the next section).
 - **WordPress code gets unit tests first.** WordPress functions are mocked with Brain Monkey, so the suite runs on any machine in seconds with no database and no WordPress checkout. Code whose behavior depends on WordPress itself (hooks firing, the database, queries, the REST server) also gets **integration tests** against a real WordPress test install (`wp-phpunit`).
 - **Legacy code is pinned before it is changed, then brought to [full coverage](#full-coverage).** Before changing untested code, write tests that pin what it does now, so the change shows up as a difference. Coverage does not stop at the code that happened to change: each repository has its own ticket to reach full coverage.
-- **Tests run locally in private repositories.** Actions minutes are billed on private repositories, so the suite runs locally before a pull request (`composer test`, or the shared local CI runner when the repository has it). Public repositories, where Actions is not billed, may also run it in Actions.
+- **Tests run locally in private repositories.** Actions minutes are billed on private repositories, so the suite runs locally before a pull request (`composer test`, or the shared local CI runner when the repository has it). A public repository whose `ci.yml` runs the suite on every pull request uses that run instead: its draft's remote checks are the author's pre-PR check ([Running the suite before a pull request](#running-the-suite-before-a-pull-request)).
 
 Static analysis and formatting are the [`code-quality`](../code-quality/SKILL.md) skill's (UAMS-Web/uams-claude-skills#10).
 
@@ -97,7 +97,7 @@ The PHPUnit 9 plugin template that served repositories with a floor below PHP 8.
 2. Copy the template for the kind of repository (below), drop the `.dist` suffix from every `.dist` file when copying into the repository, and fill in its placeholders.
 3. Add the development dependencies, `composer install` (and, in a WordPress repository, `composer setup:integration`), confirm that no dependency pins PHPUnit ([Does a dependency pin PHPUnit](#does-a-dependency-pin-phpunit)), and run the example tests to see them pass. Break the code they cover and see them fail; a harness that cannot fail is not a harness.
 4. Replace the example test with a first real test of the repository's own code. Write further tests per [`pest-testing`](#further-reading).
-5. Add the `test` Composer scripts if the template merge did not already. Run the suite with `composer test` (or `composer test:unit` / `composer test:integration`) before every pull request. When the repository has the shared local CI runner, also wire the test job(s) into `local-ci.json` ([Running the suite before a pull request](#running-the-suite-before-a-pull-request)); if it does not, adopt the shared `local-ci` skill when ready, or keep running the Composer scripts directly until then.
+5. Add the `test` Composer scripts if the template merge did not already. Run the suite with `composer test` (or `composer test:unit` / `composer test:integration`) before every pull request, unless the repository is public and its `ci.yml` runs the suite, in which case the draft's remote run does. When the repository has the shared local CI runner, also wire the test job(s) into `local-ci.json` ([Running the suite before a pull request](#running-the-suite-before-a-pull-request)); if it does not, adopt the shared `local-ci` skill when ready, or keep running the Composer scripts directly until then.
 6. Open the repository's full-coverage ticket, blocked by the harness ticket, if it does not exist yet.
 
 Name every test file `*Test.php`. The testsuites select by that suffix, so a file named otherwise never runs, and an empty run looks like a passing one. `failOnEmptyTestSuite` in the root `phpunit.xml` templates turns that into a failure; the Integration suite's PHPUnit 9 configuration has no such setting, so read its test count.
@@ -313,7 +313,7 @@ Where untested code cannot be loaded in isolation (definitions and registrations
 
 ## Full coverage
 
-"Bring test coverage to full" means the bar below (recorded while scoping UAMS-Web/uams-statamic#2834; UAMS-Web/uams-claude-skills#9). Every repository's coverage follow-up closes against this section. A bare line-% floor or a literal `100%` mutation score is not the bar.
+"Bring test coverage to full" means the bar below (recorded while scoping UAMS-Web/uams-statamic#255; UAMS-Web/uams-claude-skills#9). Every repository's coverage follow-up closes against this section. A bare line-% floor or a literal `100%` mutation score is not the bar.
 
 ### Population
 
@@ -378,7 +378,9 @@ The per-test conversion process (time the original, convert and audit, mutation-
 
 The GitHub Actions form of the suite job is the `pest` job in the `code-quality` skill's `templates/ci.yml`, chained after the lint jobs and sharing its composite setup action; a repository that runs Pest in Actions copies that template rather than writing the job again.
 
-This repository is public, so Actions minutes are not billed and the suite may run in Actions on every pull request: a workflow that runs `composer install` and the repository's `composer test` script. A WordPress Integration suite there needs a MySQL service container and the `WP_TESTS_*` variables set in the job. Run the suite locally before opening the pull request either way.
+**In a public repository whose `ci.yml` runs the suite, run nothing locally before opening the pull request**: open it as a draft, and its remote run is the pre-PR check. Flip it to ready once every remote check on its head is green, and fix a red one by pushing to the same branch. Run a test locally while writing it, and keep a local run of the suite for the cases remote CI cannot cover: a change whose criteria name Windows or another platform it does not run, the full mutation run a coverage ticket records, and a run that needs a loaded WordPress install or the importer's host application. The [`writing-pull-requests`](../writing-pull-requests/SKILL.md) skill's *Draft state and merge order* owns this, and the pre-merge validation of a ready pull request is unchanged. The rest of this section applies where the suite has no remote run: a private repository, or a public one with no `ci.yml`.
+
+This repository is public, so Actions minutes are not billed and the suite can run in Actions on every pull request: a workflow that runs `composer install` and the repository's `composer test` script. A WordPress Integration suite there needs a MySQL service container and the `WP_TESTS_*` variables set in the job. Once that workflow exists, its run on the draft is the pre-PR check, as above; until it does, run the suite locally before opening the pull request.
 
 ## Forks of vendor plugins
 

@@ -49,7 +49,7 @@ FAIL: 3 of 5 file(s) in the download are not what the plugin runs; add a keep-li
 
 ## Wire it in
 
-**A private repository** runs the shared local CI runner. Add the job to `local-ci.json`:
+**A private repository** runs the shared local CI runner, and the `download-archive` job is already in the template it copies, `.claude/skills/local-ci/templates/local-ci.json`:
 
 ```json
 {
@@ -60,23 +60,11 @@ FAIL: 3 of 5 file(s) in the download are not what the plugin runs; add a keep-li
 }
 ```
 
-`always` because the keep-list is read from `.gitattributes` and the archive from every file: a change to either, or a new top-level folder, can break it.
+A repository whose `local-ci.json` predates the job adds the block above. `always` because the keep-list is read from `.gitattributes` and the archive from every file: a change to either, or a new top-level folder, can break it. A repository that has not written its keep-list yet fails the job until it does, which is what the adoption ticket asks for.
 
-**A public repository** runs Actions, not local CI. Add a workflow:
+**A public repository** runs Actions, not local CI. Copy `.claude/skills/download-archive-check/templates/download-archive.yml` to `.github/workflows/download-archive.yml`. It runs the same script on every pull request and on pushes to `main` or `master`. It is a copied template and not a workflow that other repositories call. The `synced-files` skill's `check-workflow-copies.mjs` fails when the copy differs from the template outside its header.
 
-```yaml
-name: Download archive
-on:
-  pull_request:
-  push:
-    branches: [main]
-jobs:
-  download-archive:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: node .claude/skills/download-archive-check/check-download-archive.mjs
-```
+Both forms are exercised end to end by `scripts/download-archive-job.test.mjs` in UAMS-Web/uams-claude-skills: it syncs a real WordPress target into a scratch checkout, runs the delivered job through the delivered runner, and runs the delivered workflow's step, each against a repository with no keep-list (exit 1) and one whose keep-list leaves only the plugin file (exit 0). The workflow's own run on Actions is not exercised there.
 
 ## When it fails
 

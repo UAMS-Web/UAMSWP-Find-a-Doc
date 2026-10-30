@@ -165,7 +165,7 @@ Where a repository already has either key, add the one line to the end of its ar
 
 **It agrees with the local CI runner on the command and the path.** The `local-ci` skill's runner prints one warning line when `.githooks/pre-commit` is tracked and `core.hooksPath` does not resolve to `.githooks`, and the line names `git config core.hooksPath .githooks`. The installer runs that command, on that path, under that same condition (a tracked hook, outside GitHub Actions), so a clone that ran `composer install` is a clone the warning stays silent for. A change to either side changes the other: do not rename the directory or the hook file in one place. `composer install --no-scripts` skips the installer, and the warning is what catches that clone.
 
-**What the hook does.** The generic gate runs `composer validate --no-check-publish` when `composer.json` or `composer.lock` is staged at the repository root, and refuses the commit when it fails; a lock file that no longer matches `composer.json` is the usual cause. It warns, and lets the commit through, when `composer` is not on `PATH`. Every gate runs even after one fails, so one commit attempt reports every problem. The hook reads the working tree, as the commands it runs do.
+**What the hook does.** The generic gate runs `composer validate --no-check-publish --no-check-all` (the chain's `validate` job runs the same flags) when `composer.json` or `composer.lock` is staged at the repository root, and refuses the commit when it fails; a lock file that no longer matches `composer.json` is the usual cause. It warns, and lets the commit through, when `composer` is not on `PATH`. Every gate runs even after one fails, so one commit attempt reports every problem. The hook reads the working tree, as the commands it runs do.
 
 **Repository gates** go in the marked place near the end of the hook, one block each, setting `status=1` instead of exiting so the blocks after it still run. Keep a gate there only if it reads the index and is quick, since the hook runs on every commit; a gate that runs the test suite belongs in the local CI runner. A gate that only one repository needs (keeping two mirrored files changing together, for one) stays in that repository's copy of the hook and is not proposed for the template.
 
@@ -175,7 +175,7 @@ Where a repository already has either key, add the one line to the end of its ar
 
 ### Local CI jobs
 
-Three jobs, one per tool, run before a pull request:
+Three jobs, one per tool, run before a pull request where remote CI does not run them (see *Before a pull request*):
 
 | Job | Command | Gated by |
 |---|---|---|
@@ -187,7 +187,7 @@ This repository is public, so Actions minutes are free: run the three commands a
 
 ### The CI workflow template
 
-`templates/ci.yml` is the GitHub Actions form of the gate, with `templates/setup-action.yml` as the composite action it shares. Copy them once, the first to `.github/workflows/ci.yml` and the second to `.github/actions/setup/action.yml`, set the PHP version in the action, and rename a command if the repository's Composer script differs. The sync never writes `.github/`, so an existing `ci.yml` is never overwritten: a repository that already has one keeps it, and adopts the template's properties (below) by editing its own file. Job `name:` values are what a ruleset lists as required checks, so renaming a job means changing that list in the same change.
+`templates/ci.yml` is the GitHub Actions form of the gate, with `templates/setup-action.yml` as the composite action it shares. Copy them once, the first to `.github/workflows/ci.yml` and the second to `.github/actions/setup/action.yml`, set the PHP version in the action, and rename a command if the repository's Composer script differs. The sync never writes `.github/`, so an existing `ci.yml` is never overwritten: a repository that already has one keeps it, and adopts the template's properties (below) by editing its own file. A ruleset requires the aggregate `CI` job rather than the individual jobs (see *Requiring the checks* below), so a job can be renamed or added without touching the ruleset, as long as it stays in the aggregate's `needs:`.
 
 What the template sets, and what to keep when adapting it:
 
@@ -195,6 +195,25 @@ What the template sets, and what to keep when adapting it:
 - `timeout-minutes` on every job, so a hung step is cut off rather than billed until the platform limit.
 - `concurrency` keyed on the workflow and ref, cancelling in-progress runs for pull requests only, so a push replaces a stale run and `main` runs are never cancelled.
 - PHP, the Composer cache and the locked install live in the composite action, which `dependabot.yml` also covers (see the `update-dependencies-ticket` skill's `templates/dependabot.yml`).
+
+#### Requiring the checks
+
+`templates/required-checks-ruleset.json` is the ruleset that makes the CI workflow a merge gate. It requires exactly three status check contexts, the same in every repository: `CI` (the aggregate job), `Attribution footer` and `Closing keywords` (the two pull-request-body workflows from the `writing-pull-requests` skill). It holds no per-repository list, so nothing in it changes when a job is renamed. It carries only the `required_status_checks` rule and applies to the default branch of the one repository it is posted to; rulesets layer, so a pull request requirement or a deletion block stays with the ruleset that already holds it.
+
+`scripts/apply-required-checks-ruleset.mjs` applies it and reads the result back:
+
+```bash
+node .claude/skills/code-quality/scripts/apply-required-checks-ruleset.mjs <owner>/<repo>            # reads the effective rules and prints the plan
+node .claude/skills/code-quality/scripts/apply-required-checks-ruleset.mjs <owner>/<repo> --apply    # posts the ruleset, then reads rules/branches/main back
+```
+
+Applying a ruleset is a settings change, so the default run only reads. With `--apply` the script POSTs the template to `repos/<owner>/<repo>/rulesets`, reads `repos/<owner>/<repo>/rules/branches/main`, and exits 1 unless `required_status_checks` now names all three contexts. It lists any other context a different ruleset also requires, because every layered ruleset must pass. Both calls are REST. Repository administration is enough; the organization form of a ruleset (one that lists repositories by id) needs the `admin:org` scope, which the operator adds with `gh auth refresh -h github.com -s admin:org`. Without it, `GET orgs/{org}/rulesets` answers 404 with a message naming the scope, which reads like a missing ruleset.
+
+Apply it only after the workflows have run green once on the default branch, so the three names exist as check runs (`gh api repos/<owner>/<repo>/commits/<sha>/check-runs --jq '.check_runs[].name'`). A required context no job reports leaves every pull request waiting. The `pre-merge-check` rule covers reading the rules before and after, and the check that a required check actually blocks: a pull request with a required check red reads `mergeable_state` `blocked`.
+
+`scripts/check-aggregate-needs.mjs` is the check that the aggregate stays complete. The `aggregate-needs` job of `templates/ci.yml` runs it on every pull request: it fails, naming the job, when a job in the workflow is missing from the `needs:` list of `CI`, when a `needs:` entry names no job, or when one of the three fixed names is reported by no job. A job that is deliberately not aggregated is listed with a reason in `.github/aggregate-needs-allow.json`. It reads workflow files only, so it needs no token able to read rules.
+
+A repository already inside a shared organization ruleset that requires per-job names keeps that ruleset until it migrates; applying this one adds three requirements on top of those names rather than replacing them. The names stop being needed once the repository leaves the shared ruleset's list, which is an organization-level edit.
 
 A spell-check job is not in the template. The `spell-check` skill (profile `spell`) ships the `cspell.json` and `project-words.txt` seeds, the `spell` script and a `spell` job snippet for a repository that wants one.
 
@@ -209,7 +228,7 @@ Each repository adopts Larastan or PHPStan at the highest level its code passes 
 
 When finding that starting level, do not count on `ignoreErrors` entries that paper over existing debt (identifier/path pins added so a higher level looks green). The starting level is the highest level the code passes with only the ignores the template already documents for harness noise. The WordPress template's Pest entries (`reportUnmatched: false`, scoped to `tests/`) are that kind of harness noise and may stay uncommented when the suite needs them; they do not invent a higher starting level. New pins for real code debt land only after the starting level is set, each with a comment naming the cause.
 
-Where the three configured repositories stand (from their `phpstan.neon.dist`, 2026-10-02): `uams-statamic` is at `level: 10`, climbing one level per commit toward `max` (its #914); `wordpress-importer` is at `max`; `uamswp-migration-api` opened at `max` with `phpVersion` 8.2 to 8.4, because it was a thousand lines old when the analyzer arrived and had no debt to pay down. PHPStan's levels run 0 to 10, and `max` is an alias for the highest, so a repository at `max` picks up the next level automatically when PHPStan adds one (phpstan.org/user-guide/rule-levels, 2026-10-02).
+Where the three configured repositories stand (from their `phpstan.neon.dist`, 2026-10-02): `uams-statamic` is at `level: 10`, climbing one level per commit toward `max` (UAMS-Web/uams-statamic-archive#914); `wordpress-importer` is at `max`; `uamswp-migration-api` opened at `max` with `phpVersion` 8.2 to 8.4, because it was a thousand lines old when the analyzer arrived and had no debt to pay down. PHPStan's levels run 0 to 10, and `max` is an alias for the highest, so a repository at `max` picks up the next level automatically when PHPStan adds one (phpstan.org/user-guide/rule-levels, 2026-10-02).
 
 A baseline file, which PHPStan offers as the other way to adopt a high level by recording every existing error and suppressing it, is not used. Issue #10 weighed it against starting low and rising and chose the latter: with a baseline the level in the configuration says nothing about the code, since the suppressed list can hold any number of errors at that level, and that list is a second backlog to drain with no step at which the whole codebase is known to pass. Starting at the level the code passes means every level the configuration has ever named is one the entire codebase passed. The other alternative, fixing every finding before adopting, delays adoption until the whole codebase is clean.
 
@@ -259,7 +278,9 @@ Never reformat vendor code, and never let the reformat commit include it: if Pin
 
 ## Before a pull request
 
-Run the three commands on the branch, and fix what they report before asking for review. The CI workflow runs them again on the pull request, and a reviewer should see that run's result for the commit under review.
+In a public repository whose CI workflow runs the three tools, that run on a draft pull request is the pre-PR check: run nothing locally first, open the pull request as a draft, fix what the workflow reports by pushing to the same branch, and flip it to ready once every remote check is green. The [`writing-pull-requests`](../writing-pull-requests/SKILL.md) skill's *Draft state and merge order* owns this and names the cases that still run locally. Where the tools have no remote run:
+
+Run the three commands on the branch, and fix what they report before asking for review.
 
 A finding you disagree with is argued in the configuration, with a reason, scoped as narrowly as the tool allows. Never a blanket suppression.
 

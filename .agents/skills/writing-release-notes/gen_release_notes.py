@@ -51,7 +51,7 @@ def force_utf8_stdout():
     mapping for U+26A0 U+FE0F, which the breaking-change callout used to be
     prefixed with a warning glyph, so a `--breaking` run died with a UnicodeEncodeError
     *after* doing all its work, leaving a traceback in the redirect where the
-    notes should be (UAMS-Web/wordpress-importer#527). The em dash the title
+    notes should be (UAMS-Web/wordpress-importer-archive#527). The em dash the title
     format mandates is in `cp1252` and always survived, which is why a run
     without the callout looked healthy.
 
@@ -116,7 +116,7 @@ _ACRO = {"wordpress": "WordPress", "composer": "Composer", "json-ld": "JSON-LD",
 # word character, `-` or `/`, or by `:` or `.` with a word character straight after. A
 # trailing `:` or `.` before a space is punctuation, so "the api." and "php: all" are
 # still cased. `\b` alone treated those joins as word boundaries
-# (UAMS-Web/uams-statamic#2589, UAMS-Web/uamswp-migration-api#318).
+# (UAMS-Web/uams-statamic-archive#2589, UAMS-Web/uamswp-migration-api-archive#318).
 _ACRO_RE = re.compile(
     r"(?<![\w@:/.-])(" + "|".join(re.escape(k) for k in _ACRO) + r")(?![\w/-]|[:.]\w)", re.I
 )
@@ -131,12 +131,12 @@ def fix_acro(s):
 
     Two guards:
 
-    - Backticked spans are skipped whole (UAMS-Web/wordpress-importer#1110). A span is an
+    - Backticked spans are skipped whole (UAMS-Web/wordpress-importer-archive#1110). A span is an
       identifier a reader copies, so changing its case corrupts it: `uams-web/wordpress-importer`
       became `uams-web/WordPress-importer` and `statamic/cms` became `Statamic/cms`, both real
       Composer package names, neither of which resolves.
     - A word joined to a larger token keeps its case even outside a span
-      (UAMS-Web/uams-statamic#2589, UAMS-Web/uamswp-migration-api#318). Without it, the
+      (UAMS-Web/uams-statamic-archive#2589, UAMS-Web/uamswp-migration-api-archive#318). Without it, the
       unquoted `wordpress-importer` in a title became `WordPress-importer`.
 
     This is a NARROWING, not a removal: the same substitution still applies to every
@@ -172,7 +172,7 @@ def clean_title(t):
 # ---- routing (which bucket) ---------------------------------------------
 
 # The security vocabulary. `secret` and `credential` are deliberately absent: documentation
-# mentions both, and UAMS-Web/uamswp-migration-api#214, a note about a shell profile, landed
+# mentions both, and UAMS-Web/uamswp-migration-api-archive#214, a note about a shell profile, landed
 # in Security until they were removed. A repository that wants them back passes
 # `--security-word`.
 SEC = re.compile(
@@ -184,7 +184,7 @@ SEC_PHRASES = ("ssl verif", "security header", "x-powered-by", "password protect
 # A Conventional-Commit prefix is STRIPPED, never routed on. The title conventions in
 # `writing-pull-requests` forbid these outright, so a prefix here is legacy litter -- and
 # routing on it meant no title the conventions produce could ever match
-# (UAMS-Web/uams-statamic#2465, UAMS-Web/wordpress-importer#1093).
+# (UAMS-Web/uams-statamic-archive#2465, UAMS-Web/wordpress-importer-archive#1093).
 CC_PREFIX = re.compile(
     r"^(?:feat|fix|docs|build|ci|test|chore|style|refactor|perf|revert)(?:\([^)]*\))?!?:\s*", re.I)
 
@@ -279,7 +279,7 @@ def bucket(subject, title, labels=(), paths=(), forced_sec=False, issue_type=Non
     low = combo.lower()
 
     # 1. An explicit `--security-item`. Nothing infers a security fix whose title carries no
-    #    keyword and whose paths are prose -- UAMS-Web/wordpress-importer#1080 was exactly
+    #    keyword and whose paths are prose -- UAMS-Web/wordpress-importer-archive#1080 was exactly
     #    that and had to be moved by hand, so the human judgement gets a supported input
     #    rather than an edit afterwards.
     if forced_sec:
@@ -323,7 +323,7 @@ def bucket(subject, title, labels=(), paths=(), forced_sec=False, issue_type=Non
         return "maint"
 
     # 8. The closing issue's TYPE, which beats the title heuristics below because it is set at
-    #    filing and says what the work IS (UAMS-Web/wordpress-importer#1112). The verb list
+    #    filing and says what the work IS (UAMS-Web/wordpress-importer-archive#1112). The verb list
     #    cannot cover every title: `writing-issues` asks for an imperative naming the outcome,
     #    so a repair is titled "Select the row" or "Normalize both representations" rather
     #    than "Fix ...".

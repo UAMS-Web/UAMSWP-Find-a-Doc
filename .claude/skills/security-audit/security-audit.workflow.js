@@ -265,7 +265,7 @@ const DOMAINS = [
       { other: 'responses, logs and error output: values written to a log or returned in an error that carry request data, credentials or personal data' },
       {
         statamic:
-          'hardcoded secrets: API keys, tokens, passwords and private keys as string literals in code, config, routes, scripts, front-end JS and tests; a real value as the default of `env(\'KEY\', \'...\')` in config; a committed `.env*` other than `.env.example`. In `wordpress-importer` the migration API key is pasted at run time and held nowhere (UAMS-Web/wordpress-importer#982), so a committed value for it is a finding. Check the value is live (a placeholder or a test fixture that authenticates nowhere is info at most)',
+          'hardcoded secrets: API keys, tokens, passwords and private keys as string literals in code, config, routes, scripts, front-end JS and tests; a real value as the default of `env(\'KEY\', \'...\')` in config; a committed `.env*` other than `.env.example`. In `wordpress-importer` the migration API key is pasted at run time and held nowhere (UAMS-Web/wordpress-importer-archive#982), so a committed value for it is a finding. Check the value is live (a placeholder or a test fixture that authenticates nowhere is info at most)',
         other:
           'hardcoded secrets: API keys, tokens, passwords and private keys as string literals in code, config, routes, scripts, front-end JS and tests; a real value as the default of `env(\'KEY\', \'...\')` in config; a committed `.env*` other than `.env.example`. Check the value is live (a placeholder or a test fixture that authenticates nowhere is info at most)',
       },
