@@ -113,6 +113,24 @@ final class GbpSyncTest extends UnitTestCase
         $this->assertSame([], $this->client->calls);
     }
 
+    public function test_an_item_at_an_excluded_location_is_skipped_even_when_a_listing_exists(): void
+    {
+        $listing = $this->listing('accounts/up', 'jane_clinic', ['title' => 'Old']);
+
+        $this->sync(['uams' => 'live'], true, [$listing])->run([$this->item(['excluded' => true])]);
+
+        $this->assertSame(['skip'], $this->actions());
+        $this->assertStringContainsString('excluded', $this->log[0]['reason']);
+        $this->assertSame([], $this->client->calls);
+    }
+
+    public function test_an_excluded_location_is_never_created_for(): void
+    {
+        $this->sync(['uams' => 'live'])->run([$this->item(['excluded' => true])]);
+
+        $this->assertSame([], $this->client->calls);
+    }
+
     public function test_an_off_silo_is_skipped_without_a_call(): void
     {
         $this->sync(['uams' => 'off'])->run([$this->item()]);

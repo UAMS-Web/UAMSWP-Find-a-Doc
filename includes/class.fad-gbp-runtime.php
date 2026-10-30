@@ -243,28 +243,39 @@ function uamswp_fad_gbp_categories(UAMSWP_FAD_GBP_Client $client): array
 }
 
 /**
- * The silo of a location, from its brand fields. Null when the brand has no silo.
+ * What the sync needs to know about a location, by slug: its silo, from its brand fields, and
+ * whether providers practicing there are excluded from Google Business Profiles.
+ *
+ * The silo is null when the brand has no silo, and the location is treated as not excluding
+ * its providers when it cannot be found.
+ *
+ * @return array{silo: ?string, providers_excluded: bool}
  */
-function uamswp_fad_gbp_silo_for_location_slug(string $slug): ?string
+function uamswp_fad_gbp_location_info(string $slug): array
 {
     $ids = get_posts(['name' => $slug, 'post_type' => 'location', 'post_status' => 'publish', 'posts_per_page' => 1, 'fields' => 'ids']);
 
     if ($ids === []) {
-        return null;
+        return ['silo' => null, 'providers_excluded' => false];
     }
 
-    return UAMSWP_FAD_GBP_Logic::resolve_silo(
-        get_post_meta((int) $ids[0], 'schema_brandorg_query', true),
-        get_post_meta((int) $ids[0], 'schema_brandorg', true),
-        uamswp_fad_gbp_silos()
-    );
+    $location_id = (int) $ids[0];
+
+    return [
+        'silo' => UAMSWP_FAD_GBP_Logic::resolve_silo(
+            get_post_meta($location_id, 'schema_brandorg_query', true),
+            get_post_meta($location_id, 'schema_brandorg', true),
+            uamswp_fad_gbp_silos()
+        ),
+        'providers_excluded' => (string) get_field('location_gmb_exclude_providers', $location_id) === '1',
+    ];
 }
 
 /**
  * The sync items for one provider: one per published location the export would list them at.
  *
  * @param  array<string, string>  $categories
- * @return array<int, array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>}>
+ * @return array<int, array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>, excluded: bool}>
  */
 function uamswp_fad_gbp_items_for_provider(int $provider_id, array $categories): array
 {
@@ -279,10 +290,13 @@ function uamswp_fad_gbp_items_for_provider(int $provider_id, array $categories):
             continue;
         }
 
+        $location = uamswp_fad_gbp_location_info($parts[1]);
+
         $items[] = [
             'store_code' => $store_code,
             'kind' => 'provider',
-            'silo' => uamswp_fad_gbp_silo_for_location_slug($parts[1]),
+            'silo' => $location['silo'],
+            'excluded' => $location['providers_excluded'],
             'fields' => UAMSWP_FAD_GBP_Logic::fields_from_row($row, $categories),
             'unresolved' => UAMSWP_FAD_GBP_Logic::unresolved_categories($row, $categories),
         ];
