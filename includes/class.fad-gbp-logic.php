@@ -320,6 +320,59 @@ class UAMSWP_FAD_GBP_Logic
     }
 
     /**
+     * The key a review or error entry is kept under: its store code, or its reason when it has none.
+     *
+     * @param  array<string, mixed>  $entry
+     */
+    public static function attention_key(array $entry): string
+    {
+        $code = (string) ($entry['store_code'] ?? '');
+
+        return $code !== '' ? $code : '~'.($entry['reason'] ?? '');
+    }
+
+    /**
+     * The list of entries that need a person, after one more log entry.
+     *
+     * A review or error entry is kept, replacing any earlier one for the same store code, so a
+     * run of routine entries cannot push it out. A later entry for that store code that settles
+     * (nothing to change, skipped, or really created or updated) removes it. A dry-run entry
+     * settles nothing, so it leaves the list alone.
+     *
+     * @param  array<string, array<string, mixed>>  $attention  Newest first, by key.
+     * @param  array<string, mixed>  $entry  A log entry, with its time.
+     * @return array<string, array<string, mixed>> Newest first, at most $cap entries.
+     */
+    public static function next_attention(array $attention, array $entry, int $cap): array
+    {
+        $key = self::attention_key($entry);
+        $action = (string) ($entry['action'] ?? '');
+
+        if (in_array($action, ['review', 'error'], true)) {
+            // The union puts the new entry first and drops the older one for the same key.
+            return array_slice([$key => $entry] + $attention, 0, $cap, true);
+        }
+
+        if (self::is_settled([$entry])) {
+            unset($attention[$key]);
+        }
+
+        return $attention;
+    }
+
+    /**
+     * Entries with the given action and silo. A null filter keeps everything.
+     *
+     * @param  array<int|string, array<string, mixed>>  $entries
+     * @return array<int, array<string, mixed>>
+     */
+    public static function filter_entries(array $entries, ?string $action, ?string $silo): array
+    {
+        return array_values(array_filter($entries, fn (array $entry): bool => ($action === null || ($entry['action'] ?? '') === $action)
+            && ($silo === null || ($entry['silo'] ?? '') === $silo)));
+    }
+
+    /**
      * Whether a run's outcome can be remembered as final for its fingerprint.
      *
      * A listing that matched, a skip decided from the items alone, and a write that succeeded

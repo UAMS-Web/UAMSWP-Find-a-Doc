@@ -380,4 +380,66 @@ final class GbpLogicTest extends UnitTestCase
             'has_video_visits',
         ], array_keys(UAMSWP_FAD_GBP_Logic::attributes_from_row($row)));
     }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function logEntry(string $code, string $action, string $reason = '', string $silo = 'uams'): array
+    {
+        return ['time' => 1, 'store_code' => $code, 'silo' => $silo, 'action' => $action, 'reason' => $reason];
+    }
+
+    public function test_a_review_or_error_entry_is_kept_and_replaces_the_earlier_one_for_its_store_code(): void
+    {
+        $first = UAMSWP_FAD_GBP_Logic::next_attention([], $this->logEntry('a', 'review', 'one'), 10);
+        $second = UAMSWP_FAD_GBP_Logic::next_attention($first, $this->logEntry('b', 'error', 'two'), 10);
+        $third = UAMSWP_FAD_GBP_Logic::next_attention($second, $this->logEntry('a', 'error', 'three'), 10);
+
+        $this->assertSame(['b', 'a'], array_keys($second));
+        $this->assertSame(['a', 'b'], array_keys($third));
+        $this->assertSame('three', $third['a']['reason']);
+    }
+
+    public function test_a_settled_entry_for_the_store_code_removes_it_and_others_stay(): void
+    {
+        $kept = UAMSWP_FAD_GBP_Logic::next_attention(UAMSWP_FAD_GBP_Logic::next_attention([], $this->logEntry('a', 'review'), 10), $this->logEntry('b', 'error'), 10);
+
+        foreach ([$this->logEntry('a', 'noop'), $this->logEntry('a', 'skip'), $this->logEntry('a', 'update', 'Updated'), $this->logEntry('a', 'create', 'Created')] as $settled) {
+            $this->assertSame(['b'], array_keys(UAMSWP_FAD_GBP_Logic::next_attention($kept, $settled, 10)));
+        }
+    }
+
+    public function test_an_entry_that_settles_nothing_leaves_the_list_alone(): void
+    {
+        $kept = UAMSWP_FAD_GBP_Logic::next_attention([], $this->logEntry('a', 'review'), 10);
+
+        $this->assertSame($kept, UAMSWP_FAD_GBP_Logic::next_attention($kept, $this->logEntry('a', 'update', 'Dry run, no write made'), 10));
+        $this->assertSame($kept, UAMSWP_FAD_GBP_Logic::next_attention($kept, $this->logEntry('other', 'noop'), 10));
+    }
+
+    public function test_the_attention_list_keeps_the_newest_entries_up_to_the_cap(): void
+    {
+        $list = [];
+        foreach (['a', 'b', 'c'] as $code) {
+            $list = UAMSWP_FAD_GBP_Logic::next_attention($list, $this->logEntry($code, 'error'), 2);
+        }
+
+        $this->assertSame(['c', 'b'], array_keys($list));
+    }
+
+    public function test_an_error_with_no_store_code_is_keyed_by_its_reason(): void
+    {
+        $this->assertSame('~Gave up', UAMSWP_FAD_GBP_Logic::attention_key($this->logEntry('', 'error', 'Gave up')));
+        $this->assertSame('a', UAMSWP_FAD_GBP_Logic::attention_key($this->logEntry('a', 'error', 'Gave up')));
+    }
+
+    public function test_entries_filter_by_action_and_silo_and_a_null_filter_keeps_all(): void
+    {
+        $entries = [$this->logEntry('a', 'review', '', 'uams'), $this->logEntry('b', 'error', '', 'baptist-health'), $this->logEntry('c', 'review', '', 'baptist-health')];
+
+        $this->assertCount(3, UAMSWP_FAD_GBP_Logic::filter_entries($entries, null, null));
+        $this->assertSame(['a', 'c'], array_column(UAMSWP_FAD_GBP_Logic::filter_entries($entries, 'review', null), 'store_code'));
+        $this->assertSame(['b', 'c'], array_column(UAMSWP_FAD_GBP_Logic::filter_entries($entries, null, 'baptist-health'), 'store_code'));
+        $this->assertSame(['c'], array_column(UAMSWP_FAD_GBP_Logic::filter_entries($entries, 'review', 'baptist-health'), 'store_code'));
+    }
 }
