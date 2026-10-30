@@ -1,0 +1,445 @@
+<?php
+
+/**
+ * Unit tests for the Business Profile sync's pure decisions.
+ */
+
+declare(strict_types=1);
+
+namespace UamswpFindADoc\Tests\Unit;
+
+use UAMSWP_FAD_GBP_Logic;
+use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+final class GbpLogicTest extends UnitTestCase
+{
+    private const SILOS = [
+        'uams' => ['brand' => null],
+        'arkansas-childrens' => ['brand' => 'arkansas-childrens'],
+        'baptist-health' => ['brand' => 'baptist-health'],
+    ];
+
+    private const CATEGORIES = [
+        'Doctor' => 'categories/gcid:physician',
+        'Dentist' => 'categories/gcid:dentist',
+    ];
+
+    /**
+     * @return array<string, array{0: mixed, 1: mixed, 2: string|null}>
+     */
+    public function silo_cases(): array
+    {
+        return [
+            'query zero is the default brand' => ['0', '', 'uams'],
+            'query never saved is the default brand' => ['', '', 'uams'],
+            'a stale org with query zero is still the default' => ['0', 'baptist-health', 'uams'],
+            'baptist' => ['1', 'baptist-health', 'baptist-health'],
+            'integer query one' => [1, 'arkansas-childrens', 'arkansas-childrens'],
+            'a third-party brand with no silo is denied' => ['1', 'dhs', null],
+            'replacement chosen but no brand picked is denied' => ['1', '', null],
+        ];
+    }
+
+    /**
+     * @dataProvider silo_cases
+     *
+     * @param  mixed  $query
+     * @param  mixed  $org
+     */
+    public function test_resolve_silo($query, $org, ?string $expected): void
+    {
+        $this->assertSame($expected, UAMSWP_FAD_GBP_Logic::resolve_silo($query, $org, self::SILOS));
+    }
+
+    /**
+     * @return array<string, array{0: string, 1: bool, 2: string}>
+     */
+    public function mode_cases(): array
+    {
+        return [
+            'live in production stays live' => ['live', true, 'live'],
+            'live off production is capped at dry-run' => ['live', false, 'dry-run'],
+            'dry-run is never raised' => ['dry-run', true, 'dry-run'],
+            'off stays off on production' => ['off', true, 'off'],
+            'off stays off elsewhere' => ['off', false, 'off'],
+            'an unknown mode is off' => ['enabled', true, 'off'],
+            'an empty mode is off' => ['', true, 'off'],
+        ];
+    }
+
+    /**
+     * @dataProvider mode_cases
+     */
+    public function test_effective_mode(string $configured, bool $production, string $expected): void
+    {
+        $this->assertSame($expected, UAMSWP_FAD_GBP_Logic::effective_mode($configured, $production));
+    }
+
+    public function test_split_provider_store_code(): void
+    {
+        $this->assertSame(['ryan-k-dare', 'infectious-diseases-clinic'], UAMSWP_FAD_GBP_Logic::split_provider_store_code('ryan-k-dare_infectious-diseases-clinic'));
+        $this->assertNull(UAMSWP_FAD_GBP_Logic::split_provider_store_code('no-separator'));
+        $this->assertNull(UAMSWP_FAD_GBP_Logic::split_provider_store_code('a_b_c'));
+        $this->assertNull(UAMSWP_FAD_GBP_Logic::split_provider_store_code('_leading'));
+        $this->assertNull(UAMSWP_FAD_GBP_Logic::split_provider_store_code(''));
+    }
+
+    /**
+     * @return array<int, mixed>
+     */
+    private function row(): array
+    {
+        return [
+            0 => 'jane-doe_clinic',
+            1 => 'UAMS Health - Jane Doe &amp; Co',
+            2 => '4301 W Markham St',
+            3 => 'Suite 100',
+            7 => 'Little Rock',
+            8 => 'AR',
+            9 => 'US',
+            10 => '72205',
+            11 => '34.7465',
+            12 => '-92.3196',
+            13 => '501-686-6067',
+            14 => 'https://uamshealth.com/provider/jane-doe/',
+            15 => 'Doctor',
+            16 => 'Dentist, Doctor, Unmapped',
+            17 => 'A short bio.',
+        ];
+    }
+
+    public function test_fields_from_row_maps_every_owned_field(): void
+    {
+        $fields = UAMSWP_FAD_GBP_Logic::fields_from_row($this->row(), self::CATEGORIES);
+
+        $this->assertSame('UAMS Health - Jane Doe & Co', $fields['title']);
+        $this->assertSame(['4301 W Markham St', 'Suite 100'], $fields['storefrontAddress']['addressLines']);
+        $this->assertSame('72205', $fields['storefrontAddress']['postalCode']);
+        $this->assertSame(['latitude' => 34.7465, 'longitude' => -92.3196], $fields['latlng']);
+        $this->assertSame(['primaryPhone' => '501-686-6067'], $fields['phoneNumbers']);
+        $this->assertSame('https://uamshealth.com/provider/jane-doe/', $fields['websiteUri']);
+        $this->assertSame(['description' => 'A short bio.'], $fields['profile']);
+        $this->assertEqualsCanonicalizing(UAMSWP_FAD_GBP_Logic::OWNED_FIELDS, array_keys($fields));
+    }
+
+    public function test_categories_exclude_the_primary_and_unmapped_names(): void
+    {
+        $fields = UAMSWP_FAD_GBP_Logic::fields_from_row($this->row(), self::CATEGORIES);
+
+        $this->assertSame('categories/gcid:physician', $fields['categories']['primaryCategory']['name']);
+        $this->assertSame([['name' => 'categories/gcid:dentist']], $fields['categories']['additionalCategories']);
+    }
+
+    public function test_an_unmapped_primary_category_leaves_categories_out(): void
+    {
+        $row = $this->row();
+        $row[15] = 'Not A Google Category';
+
+        $this->assertArrayNotHasKey('categories', UAMSWP_FAD_GBP_Logic::fields_from_row($row, self::CATEGORIES));
+    }
+
+    public function test_category_names_match_regardless_of_case(): void
+    {
+        $row = $this->row();
+        $row[15] = 'ORTHOPEDIC SURGEON';
+        $row[16] = 'surgeon, dentist';
+
+        $fields = UAMSWP_FAD_GBP_Logic::fields_from_row($row, ['Orthopedic surgeon' => 'categories/gcid:orthopedic_surgeon', 'Surgeon' => 'categories/gcid:surgeon', 'Dentist' => 'categories/gcid:dentist']);
+
+        $this->assertSame('categories/gcid:orthopedic_surgeon', $fields['categories']['primaryCategory']['name']);
+        $this->assertSame([['name' => 'categories/gcid:surgeon'], ['name' => 'categories/gcid:dentist']], $fields['categories']['additionalCategories']);
+    }
+
+    public function test_unresolved_category_names_are_reported(): void
+    {
+        $row = $this->row();
+        $row[15] = 'Not A Google Category';
+        $row[16] = 'Dentist, Also Missing, Doctor';
+
+        $this->assertSame(['Not A Google Category', 'Also Missing'], UAMSWP_FAD_GBP_Logic::unresolved_categories($row, self::CATEGORIES));
+        $this->assertSame([], UAMSWP_FAD_GBP_Logic::unresolved_categories($this->row(), self::CATEGORIES + ['Unmapped' => 'categories/gcid:x']));
+    }
+
+    public function test_an_incomplete_address_is_left_out(): void
+    {
+        $row = $this->row();
+        $row[10] = '';
+
+        $this->assertArrayNotHasKey('storefrontAddress', UAMSWP_FAD_GBP_Logic::fields_from_row($row, self::CATEGORIES));
+    }
+
+    public function test_blank_cells_are_never_written(): void
+    {
+        $fields = UAMSWP_FAD_GBP_Logic::fields_from_row([0 => 'x_y', 1 => 'Only A Name'], self::CATEGORIES);
+
+        $this->assertSame(['title'], array_keys($fields));
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function live(): array
+    {
+        return [
+            'title' => 'UAMS Health - Jane Doe & Co',
+            'storefrontAddress' => ['postalCode' => '72205', 'administrativeArea' => 'AR', 'locality' => 'Little Rock', 'addressLines' => ['4301 W Markham St', 'Suite 100']],
+            'latlng' => ['latitude' => 34.746500001, 'longitude' => -92.3196],
+            'phoneNumbers' => ['primaryPhone' => '(501) 686-6067'],
+            'websiteUri' => 'https://uamshealth.com/provider/jane-doe/',
+            'categories' => ['primaryCategory' => ['name' => 'categories/gcid:physician'], 'additionalCategories' => [['name' => 'categories/gcid:dentist']]],
+            'profile' => ['description' => 'A short bio.'],
+        ];
+    }
+
+    public function test_formatting_differences_are_not_changes(): void
+    {
+        $desired = UAMSWP_FAD_GBP_Logic::fields_from_row($this->row(), self::CATEGORIES);
+
+        $this->assertSame([], UAMSWP_FAD_GBP_Logic::changed_fields($desired, $this->live()));
+    }
+
+    public function test_only_the_differing_field_is_reported(): void
+    {
+        $live = $this->live();
+        $live['phoneNumbers'] = ['primaryPhone' => '501-555-0100'];
+        $desired = UAMSWP_FAD_GBP_Logic::fields_from_row($this->row(), self::CATEGORIES);
+
+        $changed = UAMSWP_FAD_GBP_Logic::changed_fields($desired, $live);
+
+        $this->assertSame(['phoneNumbers'], array_keys($changed));
+        $this->assertSame('phoneNumbers', UAMSWP_FAD_GBP_Logic::update_mask($changed));
+    }
+
+    public function test_a_field_missing_from_the_live_listing_is_a_change(): void
+    {
+        $live = $this->live();
+        unset($live['websiteUri'], $live['profile']);
+        $desired = UAMSWP_FAD_GBP_Logic::fields_from_row($this->row(), self::CATEGORIES);
+
+        $this->assertSame('websiteUri,profile', UAMSWP_FAD_GBP_Logic::update_mask(UAMSWP_FAD_GBP_Logic::changed_fields($desired, $live)));
+    }
+
+    public function test_additional_category_order_is_not_a_change(): void
+    {
+        $live = $this->live();
+        $live['categories']['additionalCategories'] = [['name' => 'categories/gcid:dentist']];
+        $desired = ['categories' => ['primaryCategory' => ['name' => 'categories/gcid:physician'], 'additionalCategories' => [['name' => 'categories/gcid:dentist']]]];
+
+        $this->assertSame([], UAMSWP_FAD_GBP_Logic::changed_fields($desired, $live));
+    }
+
+    public function test_a_field_the_row_does_not_carry_is_never_touched(): void
+    {
+        $live = $this->live();
+        $live['title'] = 'Something a co-owner typed';
+
+        $this->assertSame([], UAMSWP_FAD_GBP_Logic::changed_fields(['websiteUri' => $live['websiteUri']], $live));
+    }
+
+    public function test_the_mask_never_names_a_field_the_sync_does_not_own(): void
+    {
+        $this->assertSame('title,websiteUri', UAMSWP_FAD_GBP_Logic::update_mask(['websiteUri' => 'x', 'regularHours' => ['y'], 'title' => 'z']));
+    }
+
+    public function test_the_fingerprint_is_stable_and_follows_every_input(): void
+    {
+        $items = [['store_code' => 'a_b', 'fields' => ['title' => 'One']]];
+        $modes = ['uams' => 'live', 'baptist-health' => 'dry-run'];
+        $base = UAMSWP_FAD_GBP_Logic::fingerprint($items, $modes, true, '1.0');
+
+        $this->assertSame($base, UAMSWP_FAD_GBP_Logic::fingerprint($items, array_reverse($modes, true), true, '1.0'));
+        $this->assertNotSame($base, UAMSWP_FAD_GBP_Logic::fingerprint([['store_code' => 'a_b', 'fields' => ['title' => 'Two']]], $modes, true, '1.0'));
+        $this->assertNotSame($base, UAMSWP_FAD_GBP_Logic::fingerprint($items, ['uams' => 'dry-run', 'baptist-health' => 'dry-run'], true, '1.0'));
+        $this->assertNotSame($base, UAMSWP_FAD_GBP_Logic::fingerprint($items, $modes, false, '1.0'));
+        $this->assertNotSame($base, UAMSWP_FAD_GBP_Logic::fingerprint($items, $modes, true, '1.1'));
+    }
+
+    public function test_only_final_outcomes_are_settled(): void
+    {
+        $settled = [
+            ['action' => 'noop', 'reason' => 'Listing already matches'],
+            ['action' => 'skip', 'reason' => 'Silo uams is off'],
+            ['action' => 'update', 'reason' => 'Updated'],
+            ['action' => 'create', 'reason' => 'Created'],
+        ];
+        $this->assertTrue(UAMSWP_FAD_GBP_Logic::is_settled($settled));
+        $this->assertTrue(UAMSWP_FAD_GBP_Logic::is_settled([]));
+
+        foreach ([
+            ['action' => 'review', 'reason' => 'Store code is on 2 listings'],
+            ['action' => 'error', 'reason' => 'boom'],
+            ['action' => 'update', 'reason' => 'Dry run, no write made'],
+            ['action' => 'create', 'reason' => 'Dry run, no listing created'],
+        ] as $unsettled) {
+            $this->assertFalse(UAMSWP_FAD_GBP_Logic::is_settled(array_merge($settled, [$unsettled])), $unsettled['reason']);
+        }
+    }
+
+    /**
+     * @return array<string, array{0: mixed, 1: bool}>
+     */
+    public function yes_no_cases(): array
+    {
+        return [
+            'the string ACF returns for Yes' => ['1', true],
+            'integer one' => [1, true],
+            'boolean true' => [true, true],
+            'the string for No' => ['0', false],
+            'integer zero' => [0, false],
+            'boolean false' => [false, false],
+            'null for a field never saved' => [null, false],
+            'empty string' => ['', false],
+            'an unrelated string' => ['yes', false],
+        ];
+    }
+
+    /**
+     * @dataProvider yes_no_cases
+     *
+     * @param  mixed  $value
+     */
+    public function test_a_yes_no_field_is_yes_only_for_its_stored_yes($value, bool $expected): void
+    {
+        $this->assertSame($expected, UAMSWP_FAD_GBP_Logic::is_yes($value));
+    }
+
+    public function test_a_location_row_becomes_a_location_item_in_its_own_silo(): void
+    {
+        $row = ['schmieding-outpatient-therapy', 'Schmieding Outpatient Therapy', '1 Main St', '', '', '', '', 'Little Rock', 'AR', 'US', '72205', '34.7', '-92.3', '501-686-6067', 'https://uamshealth.com/location/schmieding-outpatient-therapy/', 'Medical Clinic', '', 'Therapy.'];
+
+        $item = UAMSWP_FAD_GBP_Logic::location_item($row, ['Medical Clinic' => 'categories/gcid:medical_clinic'], 'baptist-health');
+
+        $this->assertSame(['store_code', 'kind', 'silo', 'excluded', 'fields', 'unresolved', 'attributes'], array_keys($item));
+        $this->assertSame(['schmieding-outpatient-therapy', 'location', 'baptist-health', false], [$item['store_code'], $item['kind'], $item['silo'], $item['excluded']]);
+        $this->assertSame('Schmieding Outpatient Therapy', $item['fields']['title']);
+        $this->assertSame('categories/gcid:medical_clinic', $item['fields']['categories']['primaryCategory']['name']);
+        $this->assertSame([], $item['unresolved']);
+    }
+
+    public function test_a_row_with_no_store_code_is_not_an_item(): void
+    {
+        $this->assertNull(UAMSWP_FAD_GBP_Logic::location_item([], [], 'uams'));
+        $this->assertNull(UAMSWP_FAD_GBP_Logic::location_item([0 => ' ', 1 => 'Name'], [], 'uams'));
+    }
+
+    public function test_a_location_item_reports_categories_google_does_not_have(): void
+    {
+        $row = array_fill(0, 18, '');
+        $row[0] = 'x';
+        $row[15] = 'Medical Clinic';
+        $row[16] = 'Made Up Category';
+
+        $item = UAMSWP_FAD_GBP_Logic::location_item($row, ['Medical Clinic' => 'categories/gcid:medical_clinic'], null);
+
+        $this->assertSame(['Made Up Category'], $item['unresolved']);
+        $this->assertNull($item['silo']);
+    }
+
+    public function test_attributes_come_from_the_yes_and_no_cells_and_the_rest_are_left_out(): void
+    {
+        $row = array_fill(0, 53, '');
+        $row[23] = 'Yes';
+        $row[24] = 'No';
+        $row[25] = '[NOT APPLICABLE]';
+        $row[26] = '';
+        $row[52] = 'Yes';
+
+        $this->assertSame([
+            'has_wheelchair_accessible_entrance' => true,
+            'has_wheelchair_accessible_restroom' => false,
+            'has_video_visits' => true,
+        ], UAMSWP_FAD_GBP_Logic::attributes_from_row($row));
+    }
+
+    public function test_a_row_with_no_attribute_cells_has_no_attributes(): void
+    {
+        $this->assertSame([], UAMSWP_FAD_GBP_Logic::attributes_from_row([]));
+    }
+
+    public function test_changed_attributes_are_the_ones_that_differ_from_the_live_values(): void
+    {
+        $desired = ['has_restroom' => true, 'requires_appointments' => false, 'has_video_visits' => true];
+        $live = ['has_restroom' => true, 'requires_appointments' => true];
+
+        $this->assertSame(['requires_appointments' => false, 'has_video_visits' => true], UAMSWP_FAD_GBP_Logic::changed_attributes($desired, $live));
+        $this->assertSame([], UAMSWP_FAD_GBP_Logic::changed_attributes(['has_restroom' => true], ['has_restroom' => true]));
+    }
+
+    public function test_every_attribute_column_maps_to_its_own_attribute(): void
+    {
+        $row = array_fill(0, 53, '');
+        foreach ([23, 24, 25, 26, 52] as $column) {
+            $row[$column] = 'Yes';
+        }
+
+        $this->assertSame([
+            'has_wheelchair_accessible_entrance',
+            'has_wheelchair_accessible_restroom',
+            'has_restroom',
+            'requires_appointments',
+            'has_video_visits',
+        ], array_keys(UAMSWP_FAD_GBP_Logic::attributes_from_row($row)));
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function logEntry(string $code, string $action, string $reason = '', string $silo = 'uams'): array
+    {
+        return ['time' => 1, 'store_code' => $code, 'silo' => $silo, 'action' => $action, 'reason' => $reason];
+    }
+
+    public function test_a_review_or_error_entry_is_kept_and_replaces_the_earlier_one_for_its_store_code(): void
+    {
+        $first = UAMSWP_FAD_GBP_Logic::next_attention([], $this->logEntry('a', 'review', 'one'), 10);
+        $second = UAMSWP_FAD_GBP_Logic::next_attention($first, $this->logEntry('b', 'error', 'two'), 10);
+        $third = UAMSWP_FAD_GBP_Logic::next_attention($second, $this->logEntry('a', 'error', 'three'), 10);
+
+        $this->assertSame(['b', 'a'], array_keys($second));
+        $this->assertSame(['a', 'b'], array_keys($third));
+        $this->assertSame('three', $third['a']['reason']);
+    }
+
+    public function test_a_settled_entry_for_the_store_code_removes_it_and_others_stay(): void
+    {
+        $kept = UAMSWP_FAD_GBP_Logic::next_attention(UAMSWP_FAD_GBP_Logic::next_attention([], $this->logEntry('a', 'review'), 10), $this->logEntry('b', 'error'), 10);
+
+        foreach ([$this->logEntry('a', 'noop'), $this->logEntry('a', 'skip'), $this->logEntry('a', 'update', 'Updated'), $this->logEntry('a', 'create', 'Created')] as $settled) {
+            $this->assertSame(['b'], array_keys(UAMSWP_FAD_GBP_Logic::next_attention($kept, $settled, 10)));
+        }
+    }
+
+    public function test_an_entry_that_settles_nothing_leaves_the_list_alone(): void
+    {
+        $kept = UAMSWP_FAD_GBP_Logic::next_attention([], $this->logEntry('a', 'review'), 10);
+
+        $this->assertSame($kept, UAMSWP_FAD_GBP_Logic::next_attention($kept, $this->logEntry('a', 'update', 'Dry run, no write made'), 10));
+        $this->assertSame($kept, UAMSWP_FAD_GBP_Logic::next_attention($kept, $this->logEntry('other', 'noop'), 10));
+    }
+
+    public function test_the_attention_list_keeps_the_newest_entries_up_to_the_cap(): void
+    {
+        $list = [];
+        foreach (['a', 'b', 'c'] as $code) {
+            $list = UAMSWP_FAD_GBP_Logic::next_attention($list, $this->logEntry($code, 'error'), 2);
+        }
+
+        $this->assertSame(['c', 'b'], array_keys($list));
+    }
+
+    public function test_an_error_with_no_store_code_is_keyed_by_its_reason(): void
+    {
+        $this->assertSame('~Gave up', UAMSWP_FAD_GBP_Logic::attention_key($this->logEntry('', 'error', 'Gave up')));
+        $this->assertSame('a', UAMSWP_FAD_GBP_Logic::attention_key($this->logEntry('a', 'error', 'Gave up')));
+    }
+
+    public function test_entries_filter_by_action_and_silo_and_a_null_filter_keeps_all(): void
+    {
+        $entries = [$this->logEntry('a', 'review', '', 'uams'), $this->logEntry('b', 'error', '', 'baptist-health'), $this->logEntry('c', 'review', '', 'baptist-health')];
+
+        $this->assertCount(3, UAMSWP_FAD_GBP_Logic::filter_entries($entries, null, null));
+        $this->assertSame(['a', 'c'], array_column(UAMSWP_FAD_GBP_Logic::filter_entries($entries, 'review', null), 'store_code'));
+        $this->assertSame(['b', 'c'], array_column(UAMSWP_FAD_GBP_Logic::filter_entries($entries, null, 'baptist-health'), 'store_code'));
+        $this->assertSame(['c'], array_column(UAMSWP_FAD_GBP_Logic::filter_entries($entries, 'review', 'baptist-health'), 'store_code'));
+    }
+}
