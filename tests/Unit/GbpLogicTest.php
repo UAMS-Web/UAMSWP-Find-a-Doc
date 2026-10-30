@@ -302,4 +302,36 @@ final class GbpLogicTest extends UnitTestCase
     {
         $this->assertSame($expected, UAMSWP_FAD_GBP_Logic::is_yes($value));
     }
+
+    public function test_a_location_row_becomes_a_location_item_in_its_own_silo(): void
+    {
+        $row = ['schmieding-outpatient-therapy', 'Schmieding Outpatient Therapy', '1 Main St', '', '', '', '', 'Little Rock', 'AR', 'US', '72205', '34.7', '-92.3', '501-686-6067', 'https://uamshealth.com/location/schmieding-outpatient-therapy/', 'Medical Clinic', '', 'Therapy.'];
+
+        $item = UAMSWP_FAD_GBP_Logic::location_item($row, ['Medical Clinic' => 'categories/gcid:medical_clinic'], 'baptist-health');
+
+        $this->assertSame(['store_code', 'kind', 'silo', 'excluded', 'fields', 'unresolved'], array_keys($item));
+        $this->assertSame(['schmieding-outpatient-therapy', 'location', 'baptist-health', false], [$item['store_code'], $item['kind'], $item['silo'], $item['excluded']]);
+        $this->assertSame('Schmieding Outpatient Therapy', $item['fields']['title']);
+        $this->assertSame('categories/gcid:medical_clinic', $item['fields']['categories']['primaryCategory']['name']);
+        $this->assertSame([], $item['unresolved']);
+    }
+
+    public function test_a_row_with_no_store_code_is_not_an_item(): void
+    {
+        $this->assertNull(UAMSWP_FAD_GBP_Logic::location_item([], [], 'uams'));
+        $this->assertNull(UAMSWP_FAD_GBP_Logic::location_item([0 => ' ', 1 => 'Name'], [], 'uams'));
+    }
+
+    public function test_a_location_item_reports_categories_google_does_not_have(): void
+    {
+        $row = array_fill(0, 18, '');
+        $row[0] = 'x';
+        $row[15] = 'Medical Clinic';
+        $row[16] = 'Made Up Category';
+
+        $item = UAMSWP_FAD_GBP_Logic::location_item($row, ['Medical Clinic' => 'categories/gcid:medical_clinic'], null);
+
+        $this->assertSame(['Made Up Category'], $item['unresolved']);
+        $this->assertNull($item['silo']);
+    }
 }

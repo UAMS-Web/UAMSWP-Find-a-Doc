@@ -132,7 +132,8 @@ function uamswp_fad_gbp_queue_on_save($post_id, ?callable $lookup = null): void
     if ($type === 'provider') {
         $providers = [$post_id];
     } elseif ($type === 'location') {
-        $providers = uamswp_fad_gbp_provider_ids_for_locations(array_merge([$post_id], uamswp_fad_gbp_child_location_ids($post_id)));
+        $locations = array_merge([$post_id], uamswp_fad_gbp_child_location_ids($post_id));
+        $providers = array_merge($locations, uamswp_fad_gbp_provider_ids_for_locations($locations));
     } else {
         return;
     }
@@ -169,13 +170,13 @@ function uamswp_fad_gbp_queue_on_publish($new_status, $old_status, $post, ?calla
 }
 
 /**
- * Queue a sync for every published provider, one job at a time.
+ * Queue a sync for every published provider and location, one job at a time.
  *
  * For the first run of a silo, and to recheck every listing against Google. Each job is the same cron job a save queues, spaced apart so the single-run
  * lock is rarely contended. A provider with a job already waiting is not queued again.
  *
  * @param  (callable(string): string)|null  $lookup  Credential lookup; for tests.
- * @return int How many providers were queued.
+ * @return int How many providers and locations were queued.
  */
 function uamswp_fad_gbp_queue_all(?callable $lookup = null): int
 {
@@ -185,15 +186,17 @@ function uamswp_fad_gbp_queue_all(?callable $lookup = null): int
 
     $queued = 0;
 
-    foreach (array_map('intval', get_posts(['post_type' => 'provider', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids'])) as $provider_id) {
-        if (wp_next_scheduled(UAMSWP_FAD_GBP_SYNC_HOOK, [$provider_id]) !== false) {
-            continue;
-        }
+    foreach (['provider', 'location'] as $post_type) {
+        foreach (array_map('intval', get_posts(['post_type' => $post_type, 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids'])) as $post_id) {
+            if (wp_next_scheduled(UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]) !== false) {
+                continue;
+            }
 
-        // An explicit run checks every listing against Google, so it forgets what was settled.
-        delete_post_meta($provider_id, UAMSWP_FAD_GBP_HASH_META);
-        wp_schedule_single_event(time() + 30 + $queued * 15, UAMSWP_FAD_GBP_SYNC_HOOK, [$provider_id]);
-        $queued++;
+            // An explicit run checks every listing against Google, so it forgets what was settled.
+            delete_post_meta($post_id, UAMSWP_FAD_GBP_HASH_META);
+            wp_schedule_single_event(time() + 30 + $queued * 15, UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
+            $queued++;
+        }
     }
 
     return $queued;
@@ -302,6 +305,18 @@ function uamswp_fad_gbp_categories(UAMSWP_FAD_GBP_Client $client): array
 }
 
 /**
+ * A location's silo, from its own brand fields.
+ */
+function uamswp_fad_gbp_silo_for_location(int $location_id): ?string
+{
+    return UAMSWP_FAD_GBP_Logic::resolve_silo(
+        get_post_meta($location_id, 'schema_brandorg_query', true),
+        get_post_meta($location_id, 'schema_brandorg', true),
+        uamswp_fad_gbp_silos()
+    );
+}
+
+/**
  * What the sync needs to know about a location, by slug: its silo, from its brand fields, and
  * whether providers practicing there are excluded from Google Business Profiles.
  *
@@ -321,11 +336,7 @@ function uamswp_fad_gbp_location_info(string $slug): array
     $location_id = (int) $ids[0];
 
     return [
-        'silo' => UAMSWP_FAD_GBP_Logic::resolve_silo(
-            get_post_meta($location_id, 'schema_brandorg_query', true),
-            get_post_meta($location_id, 'schema_brandorg', true),
-            uamswp_fad_gbp_silos()
-        ),
+        'silo' => uamswp_fad_gbp_silo_for_location($location_id),
         'providers_excluded' => function_exists('get_field') && UAMSWP_FAD_GBP_Logic::is_yes(get_field('location_gmb_exclude_providers', $location_id)),
     ];
 }
@@ -365,6 +376,42 @@ function uamswp_fad_gbp_items_for_provider(int $provider_id, array $categories):
 }
 
 /**
+ * The sync item for one location, or none when it is excluded or has no store code.
+ *
+ * @param  array<string, string>  $categories
+ * @return array<int, array<string, mixed>>
+ */
+function uamswp_fad_gbp_items_for_location(int $location_id, array $categories): array
+{
+    $table = uamswp_fad_gmb_location_table([$location_id]);
+    $silo = uamswp_fad_gbp_silo_for_location($location_id);
+    $items = [];
+
+    foreach ($table['body'] as $row) {
+        $item = UAMSWP_FAD_GBP_Logic::location_item($row, $categories, $silo);
+
+        if ($item !== null) {
+            $items[] = $item;
+        }
+    }
+
+    return $items;
+}
+
+/**
+ * The sync items for a provider or a location post.
+ *
+ * @param  array<string, string>  $categories
+ * @return array<int, array<string, mixed>>
+ */
+function uamswp_fad_gbp_items_for_post(int $post_id, array $categories): array
+{
+    return get_post_type($post_id) === 'location'
+        ? uamswp_fad_gbp_items_for_location($post_id, $categories)
+        : uamswp_fad_gbp_items_for_provider($post_id, $categories);
+}
+
+/**
  * Keep a log entry for the settings screen. Listings already in sync are not logged.
  *
  * @param  array<string, mixed>  $entry
@@ -392,42 +439,42 @@ function uamswp_fad_gbp_retry_delay(int $attempt): int
 }
 
 /**
- * Put a rate-limited provider back in the queue with a growing delay, or give up after the limit.
+ * Put a rate-limited post back in the queue with a growing delay, or give up after the limit.
  */
-function uamswp_fad_gbp_schedule_retry(int $provider_id): void
+function uamswp_fad_gbp_schedule_retry(int $post_id): void
 {
-    $key = 'uamswp_fad_gbp_attempts_'.$provider_id;
+    $key = 'uamswp_fad_gbp_attempts_'.$post_id;
     $attempt = (int) get_transient($key) + 1;
 
     if ($attempt > UAMSWP_FAD_GBP_MAX_ATTEMPTS) {
         delete_transient($key);
-        uamswp_fad_gbp_log(['store_code' => '', 'silo' => null, 'kind' => 'provider', 'mode' => 'n/a', 'action' => 'error', 'reason' => 'Gave up on provider '.$provider_id.' after '.UAMSWP_FAD_GBP_MAX_ATTEMPTS.' rate-limited attempts', 'fields' => [], 'unresolved_categories' => []]);
+        uamswp_fad_gbp_log(['store_code' => '', 'silo' => null, 'kind' => get_post_type($post_id) === 'location' ? 'location' : 'provider', 'mode' => 'n/a', 'action' => 'error', 'reason' => 'Gave up on post '.$post_id.' after '.UAMSWP_FAD_GBP_MAX_ATTEMPTS.' rate-limited attempts', 'fields' => [], 'unresolved_categories' => []]);
 
         return;
     }
 
     set_transient($key, $attempt, DAY_IN_SECONDS);
 
-    if (wp_next_scheduled(UAMSWP_FAD_GBP_SYNC_HOOK, [$provider_id]) === false) {
-        wp_schedule_single_event(time() + uamswp_fad_gbp_retry_delay($attempt), UAMSWP_FAD_GBP_SYNC_HOOK, [$provider_id]);
+    if (wp_next_scheduled(UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]) === false) {
+        wp_schedule_single_event(time() + uamswp_fad_gbp_retry_delay($attempt), UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
     }
 }
 
 /**
- * The cron job: sync one provider's listings.
+ * The cron job: sync the listings of one provider or location.
  *
  * One run at a time, so two jobs cannot both decide a listing is missing and create it twice.
  * A job that finds another running puts itself back in the queue.
  */
-function uamswp_fad_gbp_run_post(int $provider_id): void
+function uamswp_fad_gbp_run_post(int $post_id): void
 {
     $credentials = uamswp_fad_gbp_credentials();
-    if ($credentials === null || get_post_status($provider_id) !== 'publish') {
+    if ($credentials === null || get_post_status($post_id) !== 'publish') {
         return;
     }
 
     if (get_transient('uamswp_fad_gbp_lock')) {
-        wp_schedule_single_event(time() + 60, UAMSWP_FAD_GBP_SYNC_HOOK, [$provider_id]);
+        wp_schedule_single_event(time() + 60, UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
 
         return;
     }
@@ -439,11 +486,11 @@ function uamswp_fad_gbp_run_post(int $provider_id): void
 
         $modes = uamswp_fad_gbp_modes();
         $production = uamswp_fad_gbp_is_production();
-        $items = uamswp_fad_gbp_items_for_provider($provider_id, uamswp_fad_gbp_categories($client));
+        $items = uamswp_fad_gbp_items_for_post($post_id, uamswp_fad_gbp_categories($client));
         $hash = UAMSWP_FAD_GBP_Logic::fingerprint($items, $modes, $production, defined('UAMS_FAD_VERSION') ? (string) UAMS_FAD_VERSION : '');
 
         // Nothing that decides the sync has changed since its last settled run: no Google call.
-        if (get_post_meta($provider_id, UAMSWP_FAD_GBP_HASH_META, true) === $hash) {
+        if (get_post_meta($post_id, UAMSWP_FAD_GBP_HASH_META, true) === $hash) {
             return;
         }
 
@@ -462,19 +509,19 @@ function uamswp_fad_gbp_run_post(int $provider_id): void
         }
 
         if (in_array(true, array_column($entries, 'retryable'), true)) {
-            uamswp_fad_gbp_schedule_retry($provider_id);
+            uamswp_fad_gbp_schedule_retry($post_id);
         } else {
-            delete_transient('uamswp_fad_gbp_attempts_'.$provider_id);
+            delete_transient('uamswp_fad_gbp_attempts_'.$post_id);
 
             if (UAMSWP_FAD_GBP_Logic::is_settled($entries)) {
-                update_post_meta($provider_id, UAMSWP_FAD_GBP_HASH_META, $hash);
+                update_post_meta($post_id, UAMSWP_FAD_GBP_HASH_META, $hash);
             }
         }
     } catch (UAMSWP_FAD_GBP_Rate_Limited $rateLimited) {
-        uamswp_fad_gbp_log(['store_code' => '', 'silo' => null, 'kind' => 'provider', 'mode' => 'n/a', 'action' => 'error', 'reason' => $rateLimited->getMessage(), 'fields' => [], 'unresolved_categories' => []]);
-        uamswp_fad_gbp_schedule_retry($provider_id);
+        uamswp_fad_gbp_log(['store_code' => '', 'silo' => null, 'kind' => get_post_type($post_id) === 'location' ? 'location' : 'provider', 'mode' => 'n/a', 'action' => 'error', 'reason' => $rateLimited->getMessage(), 'fields' => [], 'unresolved_categories' => []]);
+        uamswp_fad_gbp_schedule_retry($post_id);
     } catch (RuntimeException $runtimeException) {
-        uamswp_fad_gbp_log(['store_code' => '', 'silo' => null, 'kind' => 'provider', 'mode' => 'n/a', 'action' => 'error', 'reason' => $runtimeException->getMessage(), 'fields' => [], 'unresolved_categories' => []]);
+        uamswp_fad_gbp_log(['store_code' => '', 'silo' => null, 'kind' => get_post_type($post_id) === 'location' ? 'location' : 'provider', 'mode' => 'n/a', 'action' => 'error', 'reason' => $runtimeException->getMessage(), 'fields' => [], 'unresolved_categories' => []]);
     } finally {
         delete_transient('uamswp_fad_gbp_lock');
     }

@@ -358,4 +358,33 @@ class UAMSWP_FAD_GBP_Logic
     {
         return in_array($value, [true, 1, '1'], true);
     }
+
+    /**
+     * Turn one location table row into a sync item, or null when the row has no store code.
+     *
+     * A location whose own exclusion flag is Yes gets no row from the builder, so an item here
+     * is never an excluded one.
+     *
+     * @param  array<int, mixed>  $row  A row from uamswp_fad_gmb_location_table().
+     * @param  array<string, string>  $category_ids  Category display name => resource name.
+     * @param  ?string  $silo  The location's own silo, or null when its brand has none.
+     * @return ?array{store_code: string, kind: string, silo: ?string, excluded: bool, fields: array<string, mixed>, unresolved: array<int, string>}
+     */
+    public static function location_item(array $row, array $category_ids, ?string $silo): ?array
+    {
+        $store_code = isset($row[0]) ? trim((string) $row[0]) : '';
+
+        if ($store_code === '') {
+            return null;
+        }
+
+        return [
+            'store_code' => $store_code,
+            'kind' => 'location',
+            'silo' => $silo,
+            'excluded' => false,
+            'fields' => self::fields_from_row($row, $category_ids),
+            'unresolved' => self::unresolved_categories($row, $category_ids),
+        ];
+    }
 }
