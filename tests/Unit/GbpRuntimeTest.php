@@ -17,6 +17,9 @@ final class GbpRuntimeTest extends UnitTestCase
     /** @var array<int, array<int, mixed>> */
     private $scheduled = [];
 
+    /** @var array<string, array<int|string, array<string, mixed>>> */
+    private $options = [];
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -389,5 +392,51 @@ final class GbpRuntimeTest extends UnitTestCase
 
         $this->assertSame([[55], [56], [7], [8]], array_column($this->scheduled, 2));
         $this->assertLessThan($this->scheduled[1][0], $this->scheduled[0][0], 'syncs are staggered, not simultaneous');
+    }
+
+    /**
+     * @return array<string, array<int, array<string, mixed>>>
+     */
+    private function storeOptions(): array
+    {
+        $store = ['uamswp_fad_gbp_log' => [], 'uamswp_fad_gbp_attention' => []];
+        $this->options = &$store;
+        Functions\when('get_option')->alias(function (string $name, $default = false) use (&$store) {
+            return $store[$name] ?? $default;
+        });
+        Functions\when('update_option')->alias(function (string $name, $value) use (&$store): bool {
+            $store[$name] = $value;
+
+            return true;
+        });
+
+        return $store;
+    }
+
+    public function test_review_and_error_entries_survive_more_routine_entries_than_the_log_keeps(): void
+    {
+        $this->storeOptions();
+
+        uamswp_fad_gbp_log(['store_code' => 'needs_review', 'silo' => 'uams', 'action' => 'review', 'reason' => 'Store code is on 2 listings']);
+        uamswp_fad_gbp_log(['store_code' => 'broken', 'silo' => 'uams', 'action' => 'error', 'reason' => 'HTTP 500']);
+
+        for ($i = 0; $i < UAMSWP_FAD_GBP_LOG_CAP + 50; $i++) {
+            uamswp_fad_gbp_log(['store_code' => 'routine_'.$i, 'silo' => 'uams', 'action' => 'update', 'reason' => 'Updated']);
+        }
+
+        $this->assertCount(UAMSWP_FAD_GBP_LOG_CAP, $this->options['uamswp_fad_gbp_log']);
+        $this->assertNotContains('needs_review', array_column($this->options['uamswp_fad_gbp_log'], 'store_code'));
+        $this->assertSame(['broken', 'needs_review'], array_keys($this->options['uamswp_fad_gbp_attention']));
+    }
+
+    public function test_a_later_settled_run_clears_the_entry_even_when_it_is_a_noop_that_is_not_logged(): void
+    {
+        $this->storeOptions();
+
+        uamswp_fad_gbp_log(['store_code' => 'a', 'silo' => 'uams', 'action' => 'error', 'reason' => 'HTTP 500']);
+        uamswp_fad_gbp_log(['store_code' => 'a', 'silo' => 'uams', 'action' => 'noop', 'reason' => 'Listing already matches']);
+
+        $this->assertSame([], $this->options['uamswp_fad_gbp_attention']);
+        $this->assertSame(['error'], array_column($this->options['uamswp_fad_gbp_log'], 'action'));
     }
 }

@@ -85,6 +85,60 @@ function uamswp_fad_gbp_queue_all_action(bool $exit = true, ?callable $lookup = 
 }
 
 /**
+ * The activity filters from a query string: an action and a silo, each only when it is a known one.
+ *
+ * @param  array<string, mixed>  $query
+ * @return array{action: ?string, silo: ?string}
+ */
+function uamswp_fad_gbp_log_filters(array $query): array
+{
+    $action = $query['log_action'] ?? '';
+    $silo = $query['log_silo'] ?? '';
+
+    return [
+        'action' => is_string($action) && in_array($action, ['review', 'error', 'create', 'update', 'skip'], true) ? $action : null,
+        'silo' => is_string($silo) && isset(uamswp_fad_gbp_silos()[$silo]) ? $silo : null,
+    ];
+}
+
+/**
+ * Print a table of activity entries.
+ *
+ * @param  array<int, array<string, mixed>>  $entries
+ */
+function uamswp_fad_gbp_render_entries(array $entries): void
+{
+    ?>
+    <table class="widefat striped">
+        <thead><tr><th>Time</th><th>Store code</th><th>Silo</th><th>Mode</th><th>Action</th><th>Detail</th></tr></thead>
+        <tbody>
+        <?php foreach ($entries as $entry) { ?>
+            <tr>
+                <td><?php echo esc_html(wp_date('Y-m-d H:i', (int) ($entry['time'] ?? 0))); ?></td>
+                <td><code><?php echo esc_html((string) ($entry['store_code'] ?? '')); ?></code></td>
+                <td><?php echo esc_html((string) ($entry['silo'] ?? '')); ?></td>
+                <td><?php echo esc_html((string) ($entry['mode'] ?? '')); ?></td>
+                <td><?php echo esc_html((string) ($entry['action'] ?? '')); ?></td>
+                <td>
+                    <?php echo esc_html((string) ($entry['reason'] ?? '')); ?>
+                    <?php if (! empty($entry['fields'])) { ?>
+                        <br><small><?php echo esc_html(implode(', ', (array) $entry['fields'])); ?></small>
+                    <?php } ?>
+                    <?php if (! empty($entry['attributes'])) { ?>
+                        <br><small>Attributes: <?php echo esc_html(implode(', ', (array) $entry['attributes'])); ?></small>
+                    <?php } ?>
+                    <?php if (! empty($entry['unresolved_categories'])) { ?>
+                        <br><small>No Google category for: <?php echo esc_html(implode(', ', (array) $entry['unresolved_categories'])); ?></small>
+                    <?php } ?>
+                </td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+    <?php
+}
+
+/**
  * Add the screen under Find-a-Doc Settings.
  */
 function uamswp_fad_gbp_add_settings_page(): void
@@ -104,8 +158,11 @@ function uamswp_fad_gbp_render_settings_page(): void
     $labels = ['uams' => 'UAMS', 'arkansas-childrens' => "Arkansas Children's", 'baptist-health' => 'Baptist Health'];
     $modes = uamswp_fad_gbp_modes();
     $production = uamswp_fad_gbp_is_production();
+    $filters = uamswp_fad_gbp_log_filters($_GET);
     $log = get_option('uamswp_fad_gbp_log', []);
-    $log = is_array($log) ? array_slice($log, 0, 100) : [];
+    $log = is_array($log) ? array_slice(UAMSWP_FAD_GBP_Logic::filter_entries($log, $filters['action'], $filters['silo']), 0, 100) : [];
+    $attention = get_option('uamswp_fad_gbp_attention', []);
+    $attention = is_array($attention) ? UAMSWP_FAD_GBP_Logic::filter_entries($attention, $filters['action'], $filters['silo']) : [];
     ?>
     <div class="wrap">
         <h1>Business Profile Sync</h1>
@@ -166,36 +223,41 @@ function uamswp_fad_gbp_render_settings_page(): void
             <?php submit_button('Queue a sync for all providers and locations', 'secondary'); ?>
         </form>
 
-        <h2>Recent activity</h2>
+        <h2>Activity</h2>
+        <form method="get" action="<?php echo esc_url(admin_url('admin.php')); ?>">
+            <input type="hidden" name="page" value="uamswp-fad-gbp">
+            <label>Action
+                <select name="log_action">
+                    <option value="">All</option>
+                    <?php foreach (['review', 'error', 'create', 'update', 'skip'] as $action) { ?>
+                        <option value="<?php echo esc_attr($action); ?>" <?php selected($filters['action'], $action); ?>><?php echo esc_html($action); ?></option>
+                    <?php } ?>
+                </select>
+            </label>
+            <label>Silo
+                <select name="log_silo">
+                    <option value="">All</option>
+                    <?php foreach ($labels as $silo => $text) { ?>
+                        <option value="<?php echo esc_attr($silo); ?>" <?php selected($filters['silo'], $silo); ?>><?php echo esc_html($text); ?></option>
+                    <?php } ?>
+                </select>
+            </label>
+            <?php submit_button('Filter', 'secondary', '', false); ?>
+        </form>
+
+        <h3>Needs attention</h3>
+        <p>Listings the sync left for a person (review) or could not write (error). An entry stays until a later run for the same store code settles, and routine activity does not push it out.</p>
+        <?php if ($attention === []) { ?>
+            <p>Nothing needs attention.</p>
+        <?php } else { ?>
+            <?php uamswp_fad_gbp_render_entries($attention); ?>
+        <?php } ?>
+
+        <h3>Recent activity</h3>
         <?php if ($log === []) { ?>
             <p>Nothing logged yet.</p>
         <?php } else { ?>
-            <table class="widefat striped">
-                <thead><tr><th>Time</th><th>Store code</th><th>Silo</th><th>Mode</th><th>Action</th><th>Detail</th></tr></thead>
-                <tbody>
-                <?php foreach ($log as $entry) { ?>
-                    <tr>
-                        <td><?php echo esc_html(wp_date('Y-m-d H:i', (int) ($entry['time'] ?? 0))); ?></td>
-                        <td><code><?php echo esc_html((string) ($entry['store_code'] ?? '')); ?></code></td>
-                        <td><?php echo esc_html((string) ($entry['silo'] ?? '')); ?></td>
-                        <td><?php echo esc_html((string) ($entry['mode'] ?? '')); ?></td>
-                        <td><?php echo esc_html((string) ($entry['action'] ?? '')); ?></td>
-                        <td>
-                            <?php echo esc_html((string) ($entry['reason'] ?? '')); ?>
-                            <?php if (! empty($entry['fields'])) { ?>
-                                <br><small><?php echo esc_html(implode(', ', (array) $entry['fields'])); ?></small>
-                            <?php } ?>
-                            <?php if (! empty($entry['attributes'])) { ?>
-                                <br><small>Attributes: <?php echo esc_html(implode(', ', (array) $entry['attributes'])); ?></small>
-                            <?php } ?>
-                            <?php if (! empty($entry['unresolved_categories'])) { ?>
-                                <br><small>No Google category for: <?php echo esc_html(implode(', ', (array) $entry['unresolved_categories'])); ?></small>
-                            <?php } ?>
-                        </td>
-                    </tr>
-                <?php } ?>
-                </tbody>
-            </table>
+            <?php uamswp_fad_gbp_render_entries($log); ?>
         <?php } ?>
     </div>
     <?php

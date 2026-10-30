@@ -133,4 +133,11 @@ final class GbpSettingsTest extends UnitTestCase
 
         uamswp_fad_gbp_save_modes(false);
     }
+
+    public function test_log_filters_accept_only_known_actions_and_silos(): void
+    {
+        $this->assertSame(['action' => 'review', 'silo' => 'baptist-health'], uamswp_fad_gbp_log_filters(['log_action' => 'review', 'log_silo' => 'baptist-health']));
+        $this->assertSame(['action' => null, 'silo' => null], uamswp_fad_gbp_log_filters(['log_action' => 'drop table', 'log_silo' => ['uams']]));
+        $this->assertSame(['action' => null, 'silo' => null], uamswp_fad_gbp_log_filters([]));
+    }
 }
