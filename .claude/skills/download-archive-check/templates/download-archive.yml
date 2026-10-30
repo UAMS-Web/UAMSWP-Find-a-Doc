@@ -1,0 +1,42 @@
+name: Download archive
+
+# Fails when a GitHub download of this repository would carry anything but what the plugin
+# runs: the synced agent folders, AGENTS.md, docs, tests, scripts, lock files or tool
+# configuration. The check lists `git archive` of the checked-out commit with the keep-list
+# in `.gitattributes` applied, so a new top-level folder that the keep-list does not name
+# fails the pull request that adds it.
+#
+# Template: .claude/skills/download-archive-check/templates/download-archive.yml in
+# UAMS-Web/uams-claude-skills, copied to .github/workflows/download-archive.yml in a public
+# WordPress repository. A private repository runs the same check as the `download-archive`
+# job of the shared local CI runner instead (templates/local-ci.json in the local-ci skill),
+# because it does not run Actions. This header is the only part a repository may change. The
+# synced-files skill's check-workflow-copies.mjs fails when the rest differs from the
+# template. The script it runs ships in the same skill, so no repository file is needed
+# beyond the synced .claude/ tree.
+#
+# It is a copied template and not a workflow that other repositories call.
+#
+# Deliberately NOT gated on RUN_REMOTE_CI, for the same reason as `clear-handed-back.yml`:
+# that switch is off for months at a time. The job is one checkout and one Node script with
+# no dependencies, and Actions minutes on a public repository are free.
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+# Nothing at the workflow level; the one job states the scopes it needs.
+permissions: {}
+
+jobs:
+  download-archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check that the download holds only what the plugin runs
+        run: node .claude/skills/download-archive-check/check-download-archive.mjs

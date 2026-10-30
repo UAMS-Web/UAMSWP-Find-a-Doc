@@ -16,7 +16,7 @@ Work is not done when the code works. It is done when the branch has merged, the
 
 ## How to apply
 
-1. **Never push to `main`.** Branch, open a pull request, and let it merge. This holds for a one-line docs fix as much as a feature, and it holds when you are the only person working. A local commit with no branch is acceptable when nothing is being shipped yet; a push to `main` is not. That `main` may accept one is a consequence of how the repository is configured, not permission. Branch naming and where you branch *from* belong to [`worktrees`](../rule-worktrees/SKILL.md); the merge gate belongs to [`pre-merge-check`](../rule-pre-merge-check/SKILL.md) and, where the repository has one, the `local-ci` skill.
+1. **Never push to `main`.** Branch, open a pull request, and let it merge. This holds for a one-line docs fix as much as a feature, and it holds when you are the only person working. A local commit with no branch is acceptable when nothing is being shipped yet; a push to `main` is not. Where a repository is not covered by the organization rulesets, `main` may accept one; that is a consequence of how it is configured, not permission. Branch naming and where you branch *from* belong to [`worktrees`](../rule-worktrees/SKILL.md); the merge gate belongs to [`pre-merge-check`](../rule-pre-merge-check/SKILL.md) and, where the repository has one, the `local-ci` skill.
 
 2. **Tick acceptance criteria as you meet them, not in a sweep at the end.** A criterion ticked while the work is fresh records what actually satisfied it. A sweep at the end records what you remember.
 

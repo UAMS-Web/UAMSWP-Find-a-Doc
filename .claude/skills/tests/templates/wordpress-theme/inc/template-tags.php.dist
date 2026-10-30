@@ -20,4 +20,4 @@ function example_theme_posted_on(): string
     );
 }
 
-// cspell:ignore ABSPATH
+// cspell:ignore ABSPATH sprintf

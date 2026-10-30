@@ -1,0 +1,66 @@
+# Template: .claude/skills/update-dependencies-ticket/templates/dependabot.yml in
+# UAMS-Web/uams-claude-skills, copied to .github/dependabot.yml.
+#
+# Weekly version updates. Alerts and security updates are enabled for the whole organization
+# and do not depend on this file; this file adds the routine updates, which run only where a
+# repository commits it. Each pull request it opens goes through the same pre-merge check as
+# any other change, and one that changes composer.lock is re-checked against the repository's
+# patches per the update-dependencies-ticket skill.
+#
+# One entry per manifest directory. Minor and patch updates are grouped per entry, so a week
+# produces a few pull requests rather than one per package; a major update stays in a pull
+# request of its own. A package.json elsewhere in the tree needs its own npm entry, and a
+# repository with no package.json drops the npm entry.
+#
+# A repository that holds a package at a deliberate version adds an ignore list to the entry that
+# reads it, as the commented example under the composer entry shows. Hold only what the
+# repository has decided to hold, name the decision next to the entry, and list each ignore in
+# every entry that reads the package (a second composer directory needs its own copy). An
+# ignored dependency also leaves its group, so a held package cannot hold back the rest of the
+# group.
+version: 2
+updates:
+  - package-ecosystem: composer
+    directory: /
+    target-branch: main
+    schedule:
+      interval: weekly
+    groups:
+      composer-minor-and-patch:
+        update-types:
+          - minor
+          - patch
+    # Deliberate pins, if the repository has any: delete this block otherwise. Without
+    # update-types the whole dependency is held; with them only those kinds of update are.
+    # ignore:
+    #   # <decision reference>: why this package is held entirely.
+    #   - dependency-name: vendor/held-package
+    #   # <decision reference>: why only a major is held; minor and patch updates still run.
+    #   - dependency-name: vendor/tracked-package
+    #     update-types:
+    #       - version-update:semver-major
+
+  # The workflows, plus the composite action they call.
+  - package-ecosystem: github-actions
+    directories:
+      - /
+      - /.github/actions/setup
+    target-branch: main
+    schedule:
+      interval: weekly
+    groups:
+      github-actions-minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: npm
+    directory: /
+    target-branch: main
+    schedule:
+      interval: weekly
+    groups:
+      npm-minor-and-patch:
+        update-types:
+          - minor
+          - patch

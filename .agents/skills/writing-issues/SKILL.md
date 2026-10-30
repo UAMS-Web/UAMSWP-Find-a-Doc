@@ -52,6 +52,12 @@ repository has no templates, build the body from the section inventory below.
 here.** When the house style changes, change it here first and reconcile the template, never
 the reverse, or the two silently diverge.
 
+**The skeletons ship with this skill** in [`templates/`](templates/): `1-bug.md`, `2-feature.md`,
+`3-research-spike.md` and `4-follow-up-cleanup.md`. The sync writes no issue template under `.github/`, so a
+repository copies them once to `.github/ISSUE_TEMPLATE/` and keeps them current by comparing
+against the skill's copy. Each file opens with front matter (`name`, `about`, `type`, `labels`)
+that GitHub reads for the template chooser, followed by the sections of the inventory below.
+
 ## Output format
 
 When proposing an issue, give the **title** on its own line and present the **body as a single
@@ -65,6 +71,36 @@ bodies are dense with backticks, `$`, `!`, backslashes, and fenced code blocks, 
 which the shell mangles or errors on as an inline argument (the failure is intermittent, so
 inline `--body` looks fine until a body finally trips it). `--body-file` sidesteps it entirely,
 and the same holds for `gh issue edit <n> --body-file`.
+
+## Scan for private network addresses before every post
+
+A private network address in a tracker body or comment tells anyone who can read it where an
+internal host lives. **Before every `gh` call that posts or updates text** (`gh issue create`,
+`gh issue edit --body-file`, `gh issue comment`, and any `gh api` call that sends a body) run
+the body file through the check, from the repository root:
+
+```bash
+node .claude/skills/writing-issues/scripts/check-private-network-addresses.mjs path/to/body.md
+```
+
+**A pass is the printed `private-network-address check: clean` line**, not the exit status
+alone. Exit 1 means do not post: rewrite the line it names and run it again. Exit 2 means the
+check did not run (no file given, a file it could not read or that is not UTF-8, or a failed
+self-check); that is not a clean result. Write the body file as UTF-8: Windows PowerShell 5.1's
+`>` and `Out-File` write UTF-16, which the check refuses.
+
+The check flags IPv4 addresses in the RFC 1918 ranges (`10.0.0.0/8`, `172.16.0.0/12`,
+`192.168.0.0/16`) wherever they sit, including inside URLs and code, names the line and the
+range, and never prints the address. A documentation-range placeholder (RFC 5737, such as
+`192.0.2.10`) passes, and so do the three blocks written as themselves; a host or a subnet
+with a prefix is still flagged. When a body must discuss a private address, put
+`<!-- allow-private-network-address -->` on a line of its own, outside any code block; quoted
+inline or inside a code block it does not opt out. The check reads only the body file, so keep
+addresses out of the title too. Verified on Windows 11 with Node 22; macOS and Linux have not
+been run.
+
+Comments follow the same rule: write the comment to a file, run the check, then
+`gh issue comment <n> --body-file <file>` (or `-F body=@<file>` with `gh api`).
 
 Creating the issue is half of filing. *Filing into the project board* below is the other half,
 done in the same pass, not a follow-on step.
@@ -198,7 +234,7 @@ thread may simply not be seen, so a body still arguing from a superseded premise
 actually gets acted on. The failure is silent and it compounds: each correction posted as a
 comment makes the body *more* wrong while the thread makes it *look* thoroughly investigated.
 
-Observed on `wordpress-importer#668`, where the premise moved four times across four comments: 
+Observed on `wordpress-importer-archive#668`, where the premise moved four times across four comments: 
 including a fourth option investigated and rejected: while the body still presented the
 original three-option comparison built on two facts that no longer held. A reader following the
 standing instruction to work the body would have re-proposed the rejected option.
@@ -249,9 +285,9 @@ carried a *cleared* gate as an unchecked acceptance criterion. In every case the
 and the sentence was wrong.
 
 There is a second, sharper failure the prose form invites: **a bare `#N` resolves against the
-current repository.** `wordpress-importer#432` cited `#215`/`#216` for an "empty-entry
+current repository.** `wordpress-importer-archive#432` cited `#215`/`#216` for an "empty-entry
 redirect"; in that repo those are unrelated migrate-content issues, and the real referents were
-`uams-statamic#215`/`#216`. An edge stores a repository-qualified object id and cannot make that
+`uams-statamic-archive#215`/`#216`. An edge stores a repository-qualified object id and cannot make that
 mistake.
 
 **The carve-out: context cross-references stay.** What is banned is the *dependency claim*,
@@ -260,7 +296,7 @@ fall out of sync with it:
 
 - **Provenance**: `Follow-up to #589.`, `Spun off from #489.`, `Part of #358.`
 - **Inline cross-refs**: `tracked in #N`, `tracked separately in #N`, `see #802 / #803`.
-- **Naming what something is**: "the contract this codes against is `#589`", "`uams-statamic#295`
+- **Naming what something is**: "the contract this codes against is `#589`", "`uams-statamic#12`
   decides what these fields map to".
 
 Where a body needs to explain *why* something waits, describe the **condition**: what has to be
@@ -272,8 +308,8 @@ as a substitute for the edge it is describing.
 ### Reference forms
 
 - **Cross-repo refs**: the sibling-repo form is `Org/Repo#N`, either bare
-  (`UAMS-Web/wordpress-importer#19`) or as a backticked link where it reads better
-  (`` [`wordpress-importer#10`](https://github.com/UAMS-Web/wordpress-importer/issues/10) ``).
+  (`UAMS-Web/wordpress-importer-archive#19`) or as a backticked link where it reads better
+  (`` [`wordpress-importer-archive#10`](https://github.com/UAMS-Web/wordpress-importer-archive/issues/10) ``).
   Qualify **every** cross-repo reference: a bare `#N` silently resolves against the repository
   the body lives in.
 - **In `## Out of scope` / `## References` bullets**: end the bullet with `, tracked in #N.`
@@ -310,17 +346,15 @@ by the GitHub **issue type** `Bug`, not by a label (see *Filing into the project
 
 ### Execution mode: `afk` / `hitl`
 
-This repository does not carry the `afk` / `hitl` labels, so file without them and do not create
-them. Classify the issue all the same: the classification below decides whether an agent may
-build it. Where the text below applies or flips a label, record the classification in the body
-instead: a `hitl` issue says what a human must decide or do, in its `## Decisions to resolve`
-section or its opening paragraph.
+Every open issue carries **exactly one** of `afk` / `hitl`: mutually exclusive and required,
+except on an `epic`. It tells whoever triages the tracker what *kind* of attention the issue
+needs to be *completed*: an autonomous coding agent, or a human.
 
 **The exception is `epic`.** An issue labeled `epic` is exempt from the requirement: it is a
 container whose slices each carry their own execution mode, not a unit of work anyone picks up
 and builds. An epic with neither label is **correctly labeled**: don't "fix" it. Apply `hitl` to
-an epic only where the container *itself* waits on a human (`uams-statamic#1777` and
-`uams-statamic#1045` both wait on a real-world action).
+an epic only where the container *itself* waits on a human (`uams-statamic#177` and
+`uams-statamic#54` both wait on a real-world action).
 
 - **`afk`** (away-from-keyboard): buildable autonomously: the design is **pinned or already
   decided**, or the fix is **fully specified**, so there is **no genuine design fork to resolve
@@ -330,7 +364,7 @@ an epic only where the container *itself* waits on a human (`uams-statamic#1777`
   anything outside the repo?* If yes → `afk`. **Posting to a third-party tracker does not, on
   its own, make an issue `hitl`**: an upstream issue, a pull request, a comment, an upvote or a
   feature request is `afk`: the agent researches, drafts and prepares it, and a human approves
-  the post before it goes out (`uams-statamic#2772`).
+  the post before it goes out (`uams-statamic-archive#2772`).
 - **`hitl`** (human-in-the-loop): completing it **requires a human in the loop**, for either
   reason: a human **decision**: an unresolved design fork (the issue carries a `## Questions to
   resolve` / `## Decisions to resolve` section), a policy / cost / go-no-go call, or a settled
@@ -344,7 +378,7 @@ an epic only where the container *itself* waits on a human (`uams-statamic#1777`
   label; a real-world action is `hitl`.
 
 For the **decision** flavor, the issue carries `decision-fork` alongside `hitl`. Surface the fork
-the right way: lead with a compare/contrast packet, *then* the interactive prompt : following
+the right way: lead with a compare/contrast packet, *then* the interactive prompt, following
 the [`design-decision-forks`](../rule-design-decision-forks/SKILL.md) rule, which defines that
 process and the label's lifecycle (don't restate either here).
 
@@ -433,9 +467,9 @@ sweep afterwards; [`closing-a-ticket`](../rule-closing-a-ticket/SKILL.md) owns w
 | --- | --- | --- |
 | Filed, not yet started | `Todo` | add the issue to the project (see below) |
 | Starting work | `In Progress` | add to the project if absent |
-| Merged into an integration branch, awaiting the gate | `CI` |: |
+| Merged into an integration branch, awaiting the gate | `CI` | (none) |
 | Merged to `main` | `Done` | GitHub auto-closes the issue from `Closes #N` |
-| A blocker surfaces mid-flight | `Blocked` |: |
+| A blocker surfaces mid-flight | `Blocked` | (none) |
 
 ## Check for an existing issue first
 
@@ -481,7 +515,7 @@ once per hit reading `shown 0 of null`. Verified by running both forms.
 The count goes **after** the hits rather than before them. A header is easier to read and is the
 first thing lost when the output is piped; a trailer is the first thing lost too, but its
 absence is then conspicuous against a list that has obviously been cut. Neither placement
-survives a `head`, which is the second-order truncation `wordpress-importer#965` documents: the
+survives a `head`, which is the second-order truncation `wordpress-importer-archive#965` documents: the
 caller's own pipeline cuts what the endpoint did not. When you don't have the count line: 
 reading a transcript after the fact, say: the tell is a page of results that is *exactly*
 `per_page` long.
@@ -515,8 +549,8 @@ query string: measured in `uamswp-migration-api`, that does not error, it **hang
 output until the command is killed.
 
 **An empty result is only worth something if the query was shown to match.** Before accepting
-one, run the same form against a term you know is present and confirm it returns the known item
-: per `uamswp-migration-api#98`, an empty result from a query that cannot match is identical to
+one, run the same form against a term you know is present and confirm it returns the known item.
+Per `uamswp-migration-api-archive#98`, an empty result from a query that cannot match is identical to
 an empty result from an empty tracker.
 
 Vary the terms across the symptom, the affected file/handle/symbol, and the class/label: one
