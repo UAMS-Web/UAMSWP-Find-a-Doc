@@ -1,0 +1,364 @@
+<?php
+
+/**
+ * Business Profile sync: the WordPress wiring.
+ *
+ * Reads the credentials and silo modes, queues a debounced sync when a provider or location
+ * is saved, and runs the sync from cron. The decisions live in UAMSWP_FAD_GBP_Sync and
+ * UAMSWP_FAD_GBP_Logic, and the API calls in UAMSWP_FAD_GBP_Client; this file only connects
+ * them to WordPress.
+ */
+
+declare(strict_types=1);
+
+const UAMSWP_FAD_GBP_SYNC_HOOK = 'uamswp_fad_gbp_sync_post';
+
+/**
+ * The silos, each with the brand that selects it and the Google account group that owns its
+ * provider and location listings.
+ *
+ * @return array<string, array{brand: ?string, accounts: array{provider: string, location: string}}>
+ */
+function uamswp_fad_gbp_silos(): array
+{
+    return apply_filters('uamswp_fad_gbp_silos', [
+        'uams' => [
+            'brand' => null,
+            'accounts' => ['provider' => 'accounts/112667655000425532878', 'location' => 'accounts/105283038566196415769'],
+        ],
+        'arkansas-childrens' => [
+            'brand' => 'arkansas-childrens',
+            'accounts' => ['provider' => 'accounts/109394488038091564790', 'location' => 'accounts/117883475495991069009'],
+        ],
+        'baptist-health' => [
+            'brand' => 'baptist-health',
+            'accounts' => ['provider' => 'accounts/114902564947343534669', 'location' => 'accounts/107080311706776481588'],
+        ],
+    ]);
+}
+
+/**
+ * The OAuth credentials, or null when any of the three is missing.
+ *
+ * Each comes from a constant (wp-config.php) or an environment variable of the same name.
+ * They are never stored in the database.
+ *
+ * @param  (callable(string): string)|null  $lookup  Returns a credential by name; for tests.
+ * @return array{client_id: string, client_secret: string, refresh_token: string}|null
+ */
+function uamswp_fad_gbp_credentials(?callable $lookup = null): ?array
+{
+    $lookup ??= static function (string $name): string {
+        if (defined($name)) {
+            return (string) constant($name);
+        }
+
+        return (string) getenv($name);
+    };
+
+    $credentials = [
+        'client_id' => $lookup('GOOGLE_BUSINESS_PROFILE_CLIENT_ID'),
+        'client_secret' => $lookup('GOOGLE_BUSINESS_PROFILE_CLIENT_SECRET'),
+        'refresh_token' => $lookup('GOOGLE_BUSINESS_PROFILE_REFRESH_TOKEN'),
+    ];
+
+    return in_array('', $credentials, true) ? null : $credentials;
+}
+
+/**
+ * Each silo's configured mode. A silo with no valid saved mode is in dry-run.
+ *
+ * @return array<string, string>
+ */
+function uamswp_fad_gbp_modes(): array
+{
+    $saved = get_option('uamswp_fad_gbp_modes', []);
+    $saved = is_array($saved) ? $saved : [];
+
+    $modes = [];
+
+    foreach (array_keys(uamswp_fad_gbp_silos()) as $silo) {
+        $mode = $saved[$silo] ?? '';
+        $modes[$silo] = in_array($mode, UAMSWP_FAD_GBP_Logic::MODES, true) ? $mode : 'dry-run';
+    }
+
+    return $modes;
+}
+
+/**
+ * Whether this site is production, where a live silo may write.
+ */
+function uamswp_fad_gbp_is_production(): bool
+{
+    $host = (string) wp_parse_url(home_url(), PHP_URL_HOST);
+
+    return (bool) apply_filters('uamswp_fad_gbp_is_production', $host === 'uamshealth.com');
+}
+
+/**
+ * Queue a debounced sync for the providers a save affects.
+ *
+ * Saving a provider queues that provider. Saving a location queues every provider at it and at
+ * its child locations, since their listings carry the location's address and phone. A job
+ * already waiting for a provider is not queued again.
+ *
+ * @param  mixed  $post_id  The `acf/save_post` argument: a post ID, or a string for options and users.
+ * @param  (callable(string): string)|null  $lookup  Credential lookup; for tests.
+ */
+function uamswp_fad_gbp_queue_on_save($post_id, ?callable $lookup = null): void
+{
+    if (! is_numeric($post_id)) {
+        return;
+    }
+
+    $post_id = (int) $post_id;
+
+    if (uamswp_fad_gbp_credentials($lookup) === null || array_diff(array_values(uamswp_fad_gbp_modes()), ['off']) === []) {
+        return;
+    }
+
+    if (get_post_status($post_id) !== 'publish') {
+        return;
+    }
+
+    $type = get_post_type($post_id);
+
+    if ($type === 'provider') {
+        $providers = [$post_id];
+    } elseif ($type === 'location') {
+        $providers = uamswp_fad_gbp_provider_ids_for_locations(array_merge([$post_id], uamswp_fad_gbp_child_location_ids($post_id)));
+    } else {
+        return;
+    }
+
+    foreach (array_values($providers) as $position => $provider_id) {
+        if (wp_next_scheduled(UAMSWP_FAD_GBP_SYNC_HOOK, [$provider_id]) !== false) {
+            continue;
+        }
+
+        wp_schedule_single_event(time() + 120 + $position * 30, UAMSWP_FAD_GBP_SYNC_HOOK, [$provider_id]);
+    }
+}
+
+/**
+ * The published child locations of a location.
+ *
+ * @return array<int, int>
+ */
+function uamswp_fad_gbp_child_location_ids(int $location_id): array
+{
+    return array_map('intval', get_posts([
+        'post_type' => 'location',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'fields' => 'ids',
+        'meta_key' => 'location_parent_id',
+        'meta_value' => $location_id,
+    ]));
+}
+
+/**
+ * The published providers practicing at any of the given locations.
+ *
+ * @param  array<int, int>  $location_ids
+ * @return array<int, int>
+ */
+function uamswp_fad_gbp_provider_ids_for_locations(array $location_ids): array
+{
+    $clauses = ['relation' => 'OR'];
+
+    foreach ($location_ids as $location_id) {
+        // ACF stores a relationship as a serialized array of quoted ID strings.
+        $clauses[] = ['key' => 'physician_locations', 'value' => '"'.$location_id.'"', 'compare' => 'LIKE'];
+    }
+
+    return array_map('intval', get_posts([
+        'post_type' => 'provider',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'fields' => 'ids',
+        'meta_query' => $clauses,
+    ]));
+}
+
+/**
+ * The HTTP transport for the API client.
+ *
+ * @param  array<string, string>  $headers
+ * @return array{0: int, 1: string} The status and body; status 0 when the request could not be made.
+ */
+function uamswp_fad_gbp_transport(string $method, string $url, array $headers, ?string $body): array
+{
+    $response = wp_remote_request($url, ['method' => $method, 'headers' => $headers, 'body' => $body, 'timeout' => 45]);
+
+    if (is_wp_error($response)) {
+        return [0, ''];
+    }
+
+    return [(int) wp_remote_retrieve_response_code($response), (string) wp_remote_retrieve_body($response)];
+}
+
+/**
+ * Every listing the credentials can see, with the account group it is in.
+ *
+ * Kept for five minutes, so a burst of saves does not read every group each time.
+ *
+ * @return array<int, array{account: string, listing: array<string, mixed>}>
+ */
+function uamswp_fad_gbp_index(UAMSWP_FAD_GBP_Client $client): array
+{
+    $cached = get_transient('uamswp_fad_gbp_index');
+    if (is_array($cached)) {
+        return $cached;
+    }
+
+    $listings = [];
+    foreach (array_keys($client->location_groups()) as $account) {
+        foreach ($client->locations($account) as $listing) {
+            $listings[] = ['account' => $account, 'listing' => $listing];
+        }
+    }
+
+    set_transient('uamswp_fad_gbp_index', $listings, 300);
+
+    return $listings;
+}
+
+/**
+ * Google's category display names mapped to resource names, kept for a day.
+ *
+ * @return array<string, string>
+ */
+function uamswp_fad_gbp_categories(UAMSWP_FAD_GBP_Client $client): array
+{
+    $cached = get_transient('uamswp_fad_gbp_categories');
+    if (is_array($cached)) {
+        return $cached;
+    }
+
+    $categories = $client->category_ids();
+    set_transient('uamswp_fad_gbp_categories', $categories, DAY_IN_SECONDS);
+
+    return $categories;
+}
+
+/**
+ * The silo of a location, from its brand fields. Null when the brand has no silo.
+ */
+function uamswp_fad_gbp_silo_for_location_slug(string $slug): ?string
+{
+    $ids = get_posts(['name' => $slug, 'post_type' => 'location', 'post_status' => 'publish', 'posts_per_page' => 1, 'fields' => 'ids']);
+
+    if ($ids === []) {
+        return null;
+    }
+
+    return UAMSWP_FAD_GBP_Logic::resolve_silo(
+        get_post_meta((int) $ids[0], 'schema_brandorg_query', true),
+        get_post_meta((int) $ids[0], 'schema_brandorg', true),
+        uamswp_fad_gbp_silos()
+    );
+}
+
+/**
+ * The sync items for one provider: one per published location the export would list them at.
+ *
+ * @param  array<string, string>  $categories
+ * @return array<int, array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>}>
+ */
+function uamswp_fad_gbp_items_for_provider(int $provider_id, array $categories): array
+{
+    $table = uamswp_fad_gmb_provider_table([$provider_id]);
+    $items = [];
+
+    foreach ($table['body'] as $row) {
+        $store_code = (string) ($row[0] ?? '');
+        $parts = UAMSWP_FAD_GBP_Logic::split_provider_store_code($store_code);
+
+        if ($parts === null) {
+            continue;
+        }
+
+        $items[] = [
+            'store_code' => $store_code,
+            'kind' => 'provider',
+            'silo' => uamswp_fad_gbp_silo_for_location_slug($parts[1]),
+            'fields' => UAMSWP_FAD_GBP_Logic::fields_from_row($row, $categories),
+            'unresolved' => UAMSWP_FAD_GBP_Logic::unresolved_categories($row, $categories),
+        ];
+    }
+
+    return $items;
+}
+
+/**
+ * Keep a log entry for the settings screen. Listings already in sync are not logged.
+ *
+ * @param  array<string, mixed>  $entry
+ */
+function uamswp_fad_gbp_log(array $entry): void
+{
+    if (($entry['action'] ?? '') === 'noop') {
+        return;
+    }
+
+    $log = get_option('uamswp_fad_gbp_log', []);
+    $log = is_array($log) ? $log : [];
+
+    array_unshift($log, ['time' => time()] + $entry);
+
+    update_option('uamswp_fad_gbp_log', array_slice($log, 0, 300), false);
+}
+
+/**
+ * The cron job: sync one provider's listings.
+ *
+ * One run at a time, so two jobs cannot both decide a listing is missing and create it twice.
+ * A job that finds another running puts itself back in the queue.
+ */
+function uamswp_fad_gbp_run_post(int $provider_id): void
+{
+    $credentials = uamswp_fad_gbp_credentials();
+    if ($credentials === null || get_post_status($provider_id) !== 'publish') {
+        return;
+    }
+
+    if (get_transient('uamswp_fad_gbp_lock')) {
+        wp_schedule_single_event(time() + 60, UAMSWP_FAD_GBP_SYNC_HOOK, [$provider_id]);
+
+        return;
+    }
+
+    set_transient('uamswp_fad_gbp_lock', 1, 300);
+
+    try {
+        $client = new UAMSWP_FAD_GBP_Client($credentials, 'uamswp_fad_gbp_transport');
+
+        $sync = new UAMSWP_FAD_GBP_Sync(
+            $client,
+            ['silos' => uamswp_fad_gbp_silos(), 'modes' => uamswp_fad_gbp_modes(), 'is_production' => uamswp_fad_gbp_is_production()],
+            UAMSWP_FAD_GBP_Sync::build_index(uamswp_fad_gbp_index($client)),
+            'uamswp_fad_gbp_log'
+        );
+
+        $entries = $sync->run(uamswp_fad_gbp_items_for_provider($provider_id, uamswp_fad_gbp_categories($client)));
+
+        // A write changes what the next job should see.
+        if (array_intersect(array_column($entries, 'reason'), ['Created', 'Updated']) !== []) {
+            delete_transient('uamswp_fad_gbp_index');
+        }
+    } catch (RuntimeException $runtimeException) {
+        uamswp_fad_gbp_log(['store_code' => '', 'silo' => null, 'kind' => 'provider', 'mode' => 'n/a', 'action' => 'error', 'reason' => $runtimeException->getMessage(), 'fields' => [], 'unresolved_categories' => []]);
+    } finally {
+        delete_transient('uamswp_fad_gbp_lock');
+    }
+}
+
+/**
+ * Register the save hook and the cron job.
+ */
+function uamswp_fad_gbp_register_hooks(): void
+{
+    add_action('acf/save_post', 'uamswp_fad_gbp_queue_on_save', 30);
+    add_action(UAMSWP_FAD_GBP_SYNC_HOOK, 'uamswp_fad_gbp_run_post');
+}
