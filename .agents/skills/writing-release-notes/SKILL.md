@@ -119,9 +119,9 @@ generator below), and the generator emits each only when its option is passed.
 **A Conventional-Commit prefix is not consulted at all.** It cannot be: this skill and
 [`writing-pull-requests`](../writing-pull-requests/SKILL.md) both forbid those prefixes on titles,
 and a squash-merging repository's commit subject *is* the pull-request title. Measured in
-`wordpress-importer` over `v0.17.0..v0.18.0` (`wordpress-importer#1093`), **0 of 20** subjects
+`wordpress-importer` over `v0.17.0..v0.18.0` (`wordpress-importer-archive#1093`), **0 of 20** subjects
 carried one, so the branches that used to route on them never fired, and every tooling change fell
-through to *What's new*. The same was found in `uams-statamic` (`uams-statamic#2465`). Routing
+through to *What's new*. The same was found in `uams-statamic` (`uams-statamic-archive#2465`). Routing
 keys on signals the conventions actually produce.
 
 Precedence, first match wins:
@@ -134,7 +134,7 @@ Precedence, first match wins:
    `X-Powered-By`, password protection, internal-network, "auth gate", "unauthenticated", or an
    "escape" of a script/Antlers/JSON-LD/HTML sink. Kept as a fallback for anything carrying no
    label. **It deliberately omits `secret` and `credential`**: documentation mentions both, and
-   `uamswp-migration-api#214`, a note about a shell profile, landed in *Security* until they were
+   `uamswp-migration-api-archive#214`, a note about a shell profile, landed in *Security* until they were
    removed. `--security-word` adds a word for a repository that wants one.
 4. **A `build` / `documentation` / `local-ci` / `phpstan-cleanup` / `test-flake` label**, on the
    pull request or its closing issue. **This runs before the repair verb deliberately**: a label is
@@ -148,7 +148,7 @@ Precedence, first match wins:
 6. **Paths confined to tooling or prose.** The paths come from git, against the commit's first
    parent, so a merge commit yields the pull request's own diff and no API call is spent. The
    built-in set is the union of the three repositories' lists: `.claude/`, `.github/`,
-   `.githooks/`, `.ai/`, `.cursor/`, `scripts/`, `docs/`, `patches/`, `tests/`, `AGENTS.md`,
+   `.githooks/`, `.agents/`, `.ai/`, `.cursor/`, `scripts/`, `docs/`, `patches/`, `tests/`, `AGENTS.md`,
    `CLAUDE.md`, `README.md`, `cspell.json`, `project-words.txt`, the Composer and npm manifests and
    lock files, `phpstan.neon.dist`, `phpunit.xml`, `rector.php`, `rector-sweep.php`, `pint.json`,
    and the dotfiles beside them. A change touching anything else is product work and is never
@@ -161,7 +161,7 @@ Precedence, first match wins:
    rule, and only while tests count as tooling; a change touching a `--product-path` (a template
    or route directory, say) is product work however test-heavy it is.
 8. **The closing issue's type**: `Bug` routes to *What's fixed*, `Feature` to *What's new*
-   (`wordpress-importer#1112`). Over REST it is read from the `Closes #N` keyword in the
+   (`wordpress-importer-archive#1112`). Over REST it is read from the `Closes #N` keyword in the
    pull-request body, so a pull request that closes an issue only through the sidebar yields
    nothing here and falls through; over GraphQL (`--api graphql`) it comes from the link GitHub
    maintains. A type that names no section, such as `Task`, is ignored rather than guessed at.
@@ -185,7 +185,7 @@ A change with no signal at all still appears: in `What's new`: rather than being
 ### Forcing a security bullet: `--security-item`
 
 **Nothing can infer a security fix whose title carries no keyword and whose files are prose.**
-`wordpress-importer#1080` was exactly that: no label, and `README.md` plus `project-words.txt`, so
+`wordpress-importer-archive#1080` was exactly that: no label, and `README.md` plus `project-words.txt`, so
 both the keyword list and the path rule say *not security*. It had to be moved by hand when
 `v0.18.0` was cut, and there was no supported way to say so.
 
@@ -261,7 +261,7 @@ python3 .claude/skills/writing-release-notes/gen_release_notes.test.py
 
 They are offline: the script runs over an empty range, and the routing, casing, rendering and
 GitHub-reader cases drive the module directly, and they pin the output encoding
-(`wordpress-importer#527`): the script forces UTF-8 on stdout, because Windows otherwise sizes it
+(`wordpress-importer-archive#527`): the script forces UTF-8 on stdout, because Windows otherwise sizes it
 to the console code page, and any codepoint outside it dies with a `UnicodeEncodeError`: after
 doing all its work, leaving a traceback in the redirect where the notes should be. The tests
 reproduce that on any platform with `PYTHONIOENCODING=cp1252`.
@@ -285,7 +285,7 @@ exact moment a release is due while 4,900+ REST calls sit idle. Observed cutting
 remaining) while `core` still had 4,967:
 
 ```
-GraphQL: API rate limit already exceeded for user ID 15675878.
+GraphQL: API rate limit already exceeded for user ID <id>.
 ```
 
 Exit `1`, no release created. The REST equivalent published immediately, same credential, same

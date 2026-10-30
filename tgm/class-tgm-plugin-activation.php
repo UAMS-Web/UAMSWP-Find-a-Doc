@@ -635,6 +635,11 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 		 * @return null Returns early if not the TGMPA page.
 		 */
 		public function admin_init() {
+			// Make sure privileges are correct to reach the plugin-information / install path.
+			if ( ! current_user_can( 'install_plugins' ) ) {
+				return;
+			}
+
 			if ( ! $this->is_tgmpa_page() ) {
 				return;
 			}

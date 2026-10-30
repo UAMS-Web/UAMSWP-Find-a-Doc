@@ -123,6 +123,10 @@ return RectorConfig::configure()
     // plugin header file). Uncomment for those.
     // ->withRootFiles()
     ->withSkip([
+        // WordPress repositories whose Integration suite has its own Composer
+        // setup (the tests skill): its vendor/ sits inside tests/, and Rector
+        // would otherwise rewrite PHPUnit 9 and its dependencies. Uncomment.
+        // __DIR__.'/tests/Integration/vendor',
         ...$neverRules,
         ...($isSweepProfile ? [] : $sweepOnlyRules),
     ])
@@ -151,16 +155,17 @@ return RectorConfig::configure()
     // RectorConfigBuilder::withPhpSets()). So composer.json carries
     // `"require": {"php": ">=<floor>"}`, the same floor as the line above.
     ->withPhpSets()
-    // Laravel and Statamic repositories: uncomment the two calls below and the
-    // `use RectorLaravel\Set\LaravelSetProvider;` import, after
+    // Laravel and Statamic repositories: uncomment the call below after
     // `composer require --dev driftingly/rector-laravel`.
     //
-    // `withSetProviders()` registers the package's version-aware set group;
-    // `withComposerBased(laravel:, phpunit:)` then activates the sets whose
-    // composer constraints the installed packages satisfy. In uams-statamic,
-    // `laravel: true` without the provider line was a silent no-op.
+    // `withComposerBased(laravel:, phpunit:)` is the single activation step: it
+    // activates the sets whose composer constraints the installed packages
+    // satisfy. From Rector 2.6.5 the set providers load internally, and the
+    // earlier `withSetProviders()` line is deprecated
+    // and no longer applied (a notice on every run). A repository on Rector
+    // 2.6.4 or earlier keeps that line, which is still needed there: without it
+    // `laravel: true` was a silent no-op.
     //
-    // ->withSetProviders(LaravelSetProvider::class)
     // ->withComposerBased(
     //     laravel: true,
     //     phpunit: true,

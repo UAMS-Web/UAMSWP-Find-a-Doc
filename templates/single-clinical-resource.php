@@ -88,7 +88,12 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
         echo '<h1 class="entry-title" itemprop="headline">';
         echo '<span class="supertitle">'. $supertitle . '</span><span class="sr-only">:</span> ';
-        echo get_the_title();
+        // Neutralize any markup that may have been stored in the title before the
+        // save-time sanitizer existed. wp_strip_all_tags() removes tags while
+        // preserving the wptexturize entities the_title filter already produced
+        // (e.g. &#8217; for an apostrophe), so esc_html() is avoided here to
+        // prevent double-encoding legitimate titles.
+        echo wp_strip_all_tags( get_the_title() );
         echo '</h1>';
     }
 

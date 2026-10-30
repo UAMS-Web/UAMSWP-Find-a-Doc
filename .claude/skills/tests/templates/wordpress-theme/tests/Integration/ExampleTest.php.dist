@@ -3,16 +3,28 @@
 /**
  * The theme inside a real WordPress.
  *
+ * A class-based PHPUnit 9.6 test, run from tests/Integration's own Composer
+ * setup, because WordPress' test suite supports PHPUnit 9 only.
+ *
  * @see functions.php
  */
 
 declare(strict_types=1);
 
-it('is the active theme', function (): void {
-    expect(get_template())->toBe(basename(dirname(__DIR__, 2)));
-});
+namespace ExampleTheme\Tests\Integration;
 
-it('declares title-tag support once the theme is set up', function (): void {
-    expect(has_action('after_setup_theme', 'example_theme_setup'))->toBe(10)
-        ->and(current_theme_supports('title-tag'))->toBeTrue();
-});
+use ExampleTheme\Tests\Support\IntegrationTestCase;
+
+final class ExampleTest extends IntegrationTestCase
+{
+    public function test_is_the_active_theme(): void
+    {
+        $this->assertSame(basename(dirname(__DIR__, 2)), get_template());
+    }
+
+    public function test_declares_title_tag_support_once_the_theme_is_set_up(): void
+    {
+        $this->assertSame(10, has_action('after_setup_theme', 'example_theme_setup'));
+        $this->assertTrue(current_theme_supports('title-tag'));
+    }
+}

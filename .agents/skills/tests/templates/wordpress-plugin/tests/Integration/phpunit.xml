@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="bootstrap.php"
+         colors="true"
+         failOnWarning="true"
+         failOnRisky="true"
+         beStrictAboutOutputDuringTests="true">
+    <!--
+        The Integration suite, on PHPUnit 9.6 from this directory's own Composer setup,
+        because WordPress' test suite supports PHPUnit 9 only. Paths here are relative
+        to this file. Run it from the repository root with `composer test:integration`.
+
+        PHPUnit 9 names the coverage block <coverage><include>; PHPUnit 10 and later,
+        and the root's Pest, name it <source><include>.
+    -->
+    <testsuites>
+        <testsuite name="Integration">
+            <directory suffix="Test.php">.</directory>
+            <exclude>./vendor</exclude>
+        </testsuite>
+    </testsuites>
+    <coverage>
+        <include>
+            <directory suffix=".php">../../includes</directory>
+            <file>../../example-plugin.php</file>
+        </include>
+    </coverage>
+</phpunit>
