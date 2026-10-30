@@ -411,7 +411,6 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
         // $table_head[]   =  'Accessibility: Assisted listening devices (has_assisted_listening_devices)';
         // $table_head[]   =  'Accessibility: Assistive hearing loop (has_hearing_loop)';
         // $table_head[]   =  'Accessibility: Passenger loading area (has_passenger_loading_area)';
-        $table_head[21] = 'Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)';
         $table_head[22] = 'Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)';
         // $table_head[]   =  'Accessibility: Wheelchair accessible parking lot (has_wheelchair_accessible_parking)';
         $table_head[23] = 'Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)';
@@ -659,12 +658,10 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
         // $table_head[]   =  'Service options: Same-day delivery (has_delivery_same_day)';
         // $table_head[]   =  'Service options: Takeout (has_takeout)';
         // $table_head[]   =  'Place page URLs: Appointment links (url_appointment)';
-        $table_head[42] = 'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
         // $table_head[]   =  'Place page URLs: Inventory search URL (url_inventory_search)';
         // $table_head[]   =  'Place page URLs: Menu link (url_menu)';
         // $table_head[]   =  'Place page URLs: Order ahead links (url_order_ahead)';
         // $table_head[]   =  'Place page URLs: Reservations links (url_reservations)';
-        $table_head[44] = 'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
         // $table_head[]   =  'Amenities: In-room kitchens (kitchen_in_room)';
         // $table_head[]   =  'Amenities: Wi-Fi (wi_fi)';
 
@@ -672,10 +669,6 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
         while ($wp_query->have_posts()) {
             $wp_query->the_post();
             $post_id = get_the_ID();
-
-            // COVID-19 Restrictions
-            // Set to true if COVID-19 restrictions are still in place.
-            $covid19 = true;
 
             // Get slug
             $profile_slug = get_post_field('post_name', $post_id);
@@ -872,8 +865,6 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         $location_hours_group = get_field('location_hours_group', $location_child_id);
                         $location_telemed_query = $location_hours_group['location_telemed_query'];
 
-                        $location_gmb_wheelchair_elevator = get_field('has_wheelchair_accessible_elevator', $location_post_id);
-                        $location_gmb_wheelchair_elevator = ($location_gmb_wheelchair_elevator == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
                         $location_gmb_wheelchair_entrance = get_field('has_wheelchair_accessible_entrance', $location_post_id);
                         $location_gmb_wheelchair_entrance = ($location_gmb_wheelchair_entrance == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_entrance;
                         $location_gmb_wheelchair_restroom = get_field('has_wheelchair_accessible_restroom', $location_post_id);
@@ -882,16 +873,6 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         $location_gmb_restroom = ($location_gmb_restroom == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_restroom;
                         $location_gmb_appointments = get_field('requires_appointments', $location_post_id);
                         $location_gmb_appointments = ($location_gmb_appointments == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_appointments;
-                        $location_gmb_temp_customers = get_field('requires_temperature_check_customers', $location_post_id);
-                        $location_gmb_temp_customers = ($location_gmb_temp_customers == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_temp_customers;
-                        $location_gmb_masks_customers = get_field('requires_masks_customers', $location_post_id);
-                        $location_gmb_masks_customers = ($location_gmb_masks_customers == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_masks_customers;
-                        $location_gmb_temp_staff = get_field('requires_temperature_check_staff', $location_post_id);
-                        $location_gmb_temp_staff = ($location_gmb_temp_staff == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_temp_staff;
-                        $location_gmb_masks_staff = get_field('requires_masks_staff', $location_post_id);
-                        $location_gmb_masks_staff = ($location_gmb_masks_staff == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_masks_staff;
-                        $location_gmb_sanitizing = get_field('is_sanitizing_between_customers', $location_post_id);
-                        $location_gmb_sanitizing = ($location_gmb_sanitizing == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
                         $location_map = get_field('location_map', $location_source_ids['map']);
                         $location_latitude = '';
                         $location_longitude = '';
@@ -1039,13 +1020,6 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         // Intentionally left blank
                         // $row[33] = '';
 
-                        // Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)
-                        if (! empty($location_gmb_wheelchair_elevator)) {
-                            $row[21] = $location_gmb_wheelchair_elevator;
-                        } else {
-                            $row[21] = 'Yes';
-                        }
-
                         // Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)
                         if (! empty($location_gmb_wheelchair_entrance)) {
                             $row[22] = $location_gmb_wheelchair_entrance;
@@ -1068,25 +1042,11 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         }
 
                         // Planning: Appointment required (requires_appointments)
-                        if ($covid19) {
-                            if (! empty($location_gmb_appointments)) {
-                                $row[25] = $location_gmb_appointments;
-                            } else {
-                                $row[25] = '';
-                            }
-                        } else {
-                            $row[25] = '';
-                        }
+                        $row[25] = ! empty($location_gmb_appointments) ? $location_gmb_appointments : '';
 
                         // Service options: Has online care (has_video_visits)
                         // Value based on the relevant location profile
                         $row[50] = $location_telemed_query ? 'Yes' : '';
-
-                        // Place page URLs: COVID-19 info link (url_covid_19_info_page)
-                        $row[42] = 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=covid-19-info-link&utm_specs='.$store_code;
-
-                        // Place page URLs: Virtual care link (url_facility_telemedicine_page)
-                        $row[44] = $location_telemed_query ? 'https://uamshealth.com/location/'.$location_slug.'/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=virtual-care-link&utm_specs='.$store_code.'#telemedicine-info' : '';
 
                         $l++;
                     } else {
@@ -1174,7 +1134,6 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
         // $table_head[]   =  'Accessibility: Assisted listening devices (has_assisted_listening_devices)';
         // $table_head[]   =  'Accessibility: Assistive hearing loop (has_hearing_loop)';
         // $table_head[]   =  'Accessibility: Passenger loading area (has_passenger_loading_area)';
-        $table_head[22] = 'Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)';
         $table_head[23] = 'Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)';
         // $table_head[]   =  'Accessibility: Wheelchair accessible parking lot (has_wheelchair_accessible_parking)';
         $table_head[24] = 'Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)';
@@ -1422,12 +1381,10 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
         // $table_head[]   =  'Service options: Same-day delivery (has_delivery_same_day)';
         // $table_head[]   =  'Service options: Takeout (has_takeout)';
         // $table_head[]   =  'Place page URLs: Appointment links (url_appointment)';
-        $table_head[44] = 'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
         // $table_head[]   =  'Place page URLs: Inventory search URL (url_inventory_search)';
         // $table_head[]   =  'Place page URLs: Menu link (url_menu)';
         // $table_head[]   =  'Place page URLs: Order ahead links (url_order_ahead)';
         // $table_head[]   =  'Place page URLs: Reservations links (url_reservations)';
-        $table_head[46] = 'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
         // $table_head[]   =  'Amenities: In-room kitchens (kitchen_in_room)';
         // $table_head[]   =  'Amenities: Wi-Fi (wi_fi)';
 
@@ -1458,10 +1415,6 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 $location_parent_title = $location_parent_location->post_title;
                 $location_parent_url = get_permalink($location_post_id);
             }
-
-            // COVID-19 Restrictions
-            // Set to true if COVID-19 restrictions are still in place.
-            $covid19 = true;
 
             // Get slug
             $store_code = ($location_parent_location ? get_post_field('post_name', $location_post_id).'_' : '').get_post_field('post_name', $location_child_id);
@@ -1558,8 +1511,6 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 } // endforeach
             }
 
-            $location_gmb_wheelchair_elevator = get_field('has_wheelchair_accessible_elevator', $location_post_id);
-            $location_gmb_wheelchair_elevator = ($location_gmb_wheelchair_elevator == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
             $location_gmb_wheelchair_entrance = get_field('has_wheelchair_accessible_entrance', $location_post_id);
             $location_gmb_wheelchair_entrance = ($location_gmb_wheelchair_entrance == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_entrance;
             $location_gmb_wheelchair_restroom = get_field('has_wheelchair_accessible_restroom', $location_post_id);
@@ -1568,16 +1519,6 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             $location_gmb_restroom = ($location_gmb_restroom == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_restroom;
             $location_gmb_appointments = get_field('requires_appointments', $location_post_id);
             $location_gmb_appointments = ($location_gmb_appointments == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_appointments;
-            $location_gmb_temp_customers = get_field('requires_temperature_check_customers', $location_post_id);
-            $location_gmb_temp_customers = ($location_gmb_temp_customers == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_temp_customers;
-            $location_gmb_masks_customers = get_field('requires_masks_customers', $location_post_id);
-            $location_gmb_masks_customers = ($location_gmb_masks_customers == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_masks_customers;
-            $location_gmb_temp_staff = get_field('requires_temperature_check_staff', $location_post_id);
-            $location_gmb_temp_staff = ($location_gmb_temp_staff == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_temp_staff;
-            $location_gmb_masks_staff = get_field('requires_masks_staff', $location_post_id);
-            $location_gmb_masks_staff = ($location_gmb_masks_staff == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_masks_staff;
-            $location_gmb_sanitizing = get_field('is_sanitizing_between_customers', $location_post_id);
-            $location_gmb_sanitizing = ($location_gmb_sanitizing == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
             $location_map = get_field('location_map', $location_source_ids['map']);
             $location_latitude = '';
             $location_longitude = '';
@@ -1800,13 +1741,6 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 // Intentionally left blank
                 // $row[33] =  '';
 
-                // Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)
-                if (! empty($location_gmb_wheelchair_elevator)) {
-                    $row[22] = $location_gmb_wheelchair_elevator;
-                } else {
-                    $row[22] = 'Yes';
-                }
-
                 // Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)
                 if (! empty($location_gmb_wheelchair_entrance)) {
                     $row[23] = $location_gmb_wheelchair_entrance;
@@ -1829,25 +1763,11 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 }
 
                 // Planning: Appointment required (requires_appointments)
-                if ($covid19) {
-                    if (! empty($location_gmb_appointments)) {
-                        $row[26] = $location_gmb_appointments;
-                    } else {
-                        $row[26] = '';
-                    }
-                } else {
-                    $row[26] = '';
-                }
+                $row[26] = ! empty($location_gmb_appointments) ? $location_gmb_appointments : '';
 
                 // Service options: Has online care (has_video_visits)
                 // Value based on the relevant location profile
                 $row[52] = $location_telemed_query ? 'Yes' : '';
-
-                // Place page URLs: COVID-19 info link (url_covid_19_info_page)
-                $row[44] = 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link&utm_specs='.$store_code;
-
-                // Place page URLs: Virtual care link (url_facility_telemedicine_page)
-                $row[46] = $location_telemed_query ? 'https://uamshealth.com/location/'.$location_slug.'/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&utm_specs='.$store_code.'#telemedicine-info' : '';
 
             } // endif
             $table_body[] = $row;
