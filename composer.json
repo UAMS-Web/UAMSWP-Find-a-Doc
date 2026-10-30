@@ -1,0 +1,36 @@
+{
+    "name": "uams-web/uamswp-find-a-doc",
+    "description": "Development tooling for UAMSWP Find-a-Doc",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "brain/monkey": "^2.7",
+        "phpunit/phpunit": "^9.6",
+        "wp-phpunit/wp-phpunit": "~7.1.0",
+        "yoast/phpunit-polyfills": "^4.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": [
+            "@test:unit",
+            "@test:integration"
+        ],
+        "test:unit": "phpunit --testsuite=Unit",
+        "test:integration": "phpunit --testsuite=Integration"
+    },
+    "scripts-descriptions": {
+        "test": "Run both suites, each in its own process, so the Unit suite never sees WordPress.",
+        "test:unit": "Run the suite that needs no WordPress and no database.",
+        "test:integration": "Run the suite that boots WordPress through wp-phpunit against the test database."
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "UamswpFindADoc\\Tests\\": "tests/"
+        }
+    }
+}
