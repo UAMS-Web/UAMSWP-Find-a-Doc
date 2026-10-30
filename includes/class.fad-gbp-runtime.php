@@ -267,7 +267,7 @@ function uamswp_fad_gbp_location_info(string $slug): array
             get_post_meta($location_id, 'schema_brandorg', true),
             uamswp_fad_gbp_silos()
         ),
-        'providers_excluded' => (string) get_field('location_gmb_exclude_providers', $location_id) === '1',
+        'providers_excluded' => function_exists('get_field') && (string) get_field('location_gmb_exclude_providers', $location_id) === '1',
     ];
 }
 
