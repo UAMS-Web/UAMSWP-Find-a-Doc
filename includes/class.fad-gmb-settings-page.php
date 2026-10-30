@@ -1589,7 +1589,7 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             $location_gmb_prefix = get_field('location_gmb_prefix', $location_post_id);
 
             // Create the table
-            if ($location_gmb_exclude !== true) {
+            if (! UAMSWP_FAD_GBP_Logic::is_yes($location_gmb_exclude)) {
 
                 // Start table row
 

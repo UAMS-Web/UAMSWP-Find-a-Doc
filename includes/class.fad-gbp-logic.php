@@ -344,4 +344,18 @@ class UAMSWP_FAD_GBP_Logic
 
         return true;
     }
+
+    /**
+     * Whether a Yes/No field holds Yes.
+     *
+     * `get_field()` returns the stored string `'1'` for a button group's Yes, so a strict
+     * comparison with `true` never matches. Anything but a stored Yes, including a field never
+     * saved, is No.
+     *
+     * @param  mixed  $value
+     */
+    public static function is_yes($value): bool
+    {
+        return in_array($value, [true, 1, '1'], true);
+    }
 }

@@ -274,4 +274,32 @@ final class GbpLogicTest extends UnitTestCase
             $this->assertFalse(UAMSWP_FAD_GBP_Logic::is_settled(array_merge($settled, [$unsettled])), $unsettled['reason']);
         }
     }
+
+    /**
+     * @return array<string, array{0: mixed, 1: bool}>
+     */
+    public function yes_no_cases(): array
+    {
+        return [
+            'the string ACF returns for Yes' => ['1', true],
+            'integer one' => [1, true],
+            'boolean true' => [true, true],
+            'the string for No' => ['0', false],
+            'integer zero' => [0, false],
+            'boolean false' => [false, false],
+            'null for a field never saved' => [null, false],
+            'empty string' => ['', false],
+            'an unrelated string' => ['yes', false],
+        ];
+    }
+
+    /**
+     * @dataProvider yes_no_cases
+     *
+     * @param  mixed  $value
+     */
+    public function test_a_yes_no_field_is_yes_only_for_its_stored_yes($value, bool $expected): void
+    {
+        $this->assertSame($expected, UAMSWP_FAD_GBP_Logic::is_yes($value));
+    }
 }
