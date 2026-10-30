@@ -364,13 +364,6 @@
             }
         },
         {
-            "name": "has_wheelchair_accessible_elevator",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "has_wheelchair_accessible_elevator"
-            }
-        },
-        {
             "name": "has_wheelchair_accessible_entrance",
             "map": {
                 "type": "acf_field_name",
@@ -396,41 +389,6 @@
             "map": {
                 "type": "acf_field_name",
                 "identifier": "requires_appointments"
-            }
-        },
-        {
-            "name": "requires_temperature_check_customers",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "requires_temperature_check_customers"
-            }
-        },
-        {
-            "name": "requires_masks_customers",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "requires_masks_customers"
-            }
-        },
-        {
-            "name": "requires_temperature_check_staff",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "requires_temperature_check_staff"
-            }
-        },
-        {
-            "name": "requires_masks_staff",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "requires_masks_staff"
-            }
-        },
-        {
-            "name": "is_sanitizing_between_customers",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "is_sanitizing_between_customers"
             }
         }
     ],
