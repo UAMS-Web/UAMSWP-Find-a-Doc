@@ -524,11 +524,11 @@ add_action('init', 'create_education_taxonomy', 0);
 
 add_action('init', 'create_building_taxonomy', 0);
 
-// Google My Business Categories for Providers
+// Google Business Profile Categories for Providers
 
 add_action('init', 'create_gmb_cat_provider_taxonomy', 0);
 
-// Google My Business Categories for Locations
+// Google Business Profile Categories for Locations
 
 add_action('init', 'create_gmb_cat_location_taxonomy', 0);
 
@@ -2507,15 +2507,15 @@ function create_location_type_taxonomy(): void
 
 }
 
-// Google My Business Categories for Providers
+// Google Business Profile Categories for Providers
 
 function create_gmb_cat_provider_taxonomy(): void
 {
 
     $labels = [
-        'name' => 'Google My Business Categories for Providers',
-        'singular_name' => 'Google My Business Category for Providers',
-        'menu_name' => 'Google My Business Categories',
+        'name' => 'Google Business Profile Categories for Providers',
+        'singular_name' => 'Google Business Profile Category for Providers',
+        'menu_name' => 'Google Business Profile Categories',
         'all_items' => 'All Categories',
         'parent_item' => 'Parent Category',
         'parent_item_colon' => 'Parent Category:',
@@ -2570,15 +2570,15 @@ function create_gmb_cat_provider_taxonomy(): void
 
 }
 
-// Google My Business Categories for Locations
+// Google Business Profile Categories for Locations
 
 function create_gmb_cat_location_taxonomy(): void
 {
 
     $labels = [
-        'name' => 'Google My Business Categories for Locations',
-        'singular_name' => 'Google My Business Category for Locations',
-        'menu_name' => 'Google My Business Categories',
+        'name' => 'Google Business Profile Categories for Locations',
+        'singular_name' => 'Google Business Profile Category for Locations',
+        'menu_name' => 'Google Business Profile Categories',
         'all_items' => 'All Categories',
         'parent_item' => 'Parent Category',
         'parent_item_colon' => 'Parent Category:',

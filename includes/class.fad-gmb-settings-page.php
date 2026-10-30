@@ -19,8 +19,8 @@ function uamswp_fad_gmb_export_page(): void
     <p>Generate a spreadsheet for updating U.S. News Doctor Finder Profiles and Doximity Profiles.</p>
     <p>Copy the data from the generated CSV into the <a href="https://app.box.com/s/sufb1jpvhzcw1stzez0ch0t7i88teovi" title="Doximity Template" target="_blank" download>U.S. News & Doximity upload template</a>. Email that populated template file to <a href="mailto:hospitals@doximity.com">hospitals@doximity.com</a> to have the profiles updated.</p>
     <p><a aria-describedby="csv-header-doximity" class="button button-primary" href="<?php echo admin_url('admin.php?page=uamswp-gmb-export') ?>&action=download_doximity_csv&_wpnonce=<?php echo wp_create_nonce('download_doximity_csv')?>" class="page-title-action"><?php _e('Export to CSV', 'uamswp-find-a-doc'); ?></a></p>
-    <h2 id="csv-header-gmb-locations">Google My Business Profiles &mdash; UAMS Clinical Locations</h2>
-    <p>Generate a spreadsheet for importing published locations as business profiles in Google My Business, both to create new business profiles and to update existing business profiles. A unique business profile will be created for each location, whether it is a top-level location or a child location.</p>
+    <h2 id="csv-header-gmb-locations">Google Business Profiles &mdash; UAMS Clinical Locations</h2>
+    <p>Generate a spreadsheet for importing published locations as business profiles in Google Business Profiles, both to create new business profiles and to update existing business profiles. A unique business profile will be created for each location, whether it is a top-level location or a child location.</p>
     <p>Each URL in the spreadsheet is automatically tagged using a UTM structure crafted to indicate that the web traffic came from a particular link within the specific location's business profile.</p>
     <p>For help with bulk upload spreadsheets for Business Profiles, visit <a href="https://support.google.com/business/topic/4596653" title="Google Business Profile Help, Add 10 or more businesses" target="_blank">https://support.google.com/business/topic/4596653</a>.</p>
     <p><a aria-describedby="csv-header-gmb-locations" class="button button-primary" href="<?php echo admin_url('admin.php?page=uamswp-gmb-export') ?>&action=download_gmb_location_csv&_wpnonce=<?php echo wp_create_nonce('download_gmb_location_csv')?>" class="page-title-action"><?php _e('Export to CSV', 'uamswp-find-a-doc'); ?></a></p>
@@ -1025,7 +1025,7 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         // Cover photo
                         $provider_image_wide = get_field('physician_image_wide', $post_id);
                         if (function_exists('bis_get_attachment_image') && ! empty($provider_image_wide)) {
-                            $provider_gmb_cover_photo = image_sizer($provider_image_wide, 2120, 1192, 'center', 'center', 'aspect-16-9'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
+                            $provider_gmb_cover_photo = image_sizer($provider_image_wide, 2120, 1192, 'center', 'center', 'aspect-16-9'); // Google Business Profile cover photo minimum size: 480x270; maximum size: 2120x1192
                         } else {
                             $provider_gmb_cover_photo = wp_get_attachment_image_url($provider_image_wide, 'large');
                         }
@@ -1772,13 +1772,13 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                     foreach ($location_images as $location_images_item) {
                         if ($p === 1) {
                             if (function_exists('bis_get_attachment_image')) {
-                                $location_gmb_cover_photo = image_sizer($location_images_item, 2120, 1192, 'center', 'center', 'aspect-16-9'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
+                                $location_gmb_cover_photo = image_sizer($location_images_item, 2120, 1192, 'center', 'center', 'aspect-16-9'); // Google Business Profile cover photo minimum size: 480x270; maximum size: 2120x1192
                             } else {
                                 $location_gmb_cover_photo = wp_get_attachment_image_url($location_images_item, 'large');
                             }
                         } else {
                             if (function_exists('bis_get_attachment_image')) {
-                                $location_gmb_other_photos .= image_sizer($location_images_item, 2120, 1192, 'center', 'center', 'aspect-16-9'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
+                                $location_gmb_other_photos .= image_sizer($location_images_item, 2120, 1192, 'center', 'center', 'aspect-16-9'); // Google Business Profile cover photo minimum size: 480x270; maximum size: 2120x1192
                             } else {
                                 $location_gmb_other_photos .= wp_get_attachment_image_url($location_images_item, 'large');
                             }

@@ -4973,7 +4973,7 @@
 		},
 		{
 			"key": "field_location_gmb_tab",
-			"label": "<i class=\"dashicons-google dashicons\"><\/i> Google My Business Details",
+			"label": "<i class=\"dashicons-google dashicons\"><\/i> Google Business Profile Details",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
@@ -4989,7 +4989,7 @@
 		},
 		{
 			"key": "field_location_schema_gmb_query",
-			"label": "Does this location have a listing on Google My Business?",
+			"label": "Does this location have a listing on Google Business Profiles?",
 			"name": "location_schema_gmb_query",
 			"type": "button_group",
 			"instructions": "",
@@ -5044,7 +5044,7 @@
 		},
 		{
 			"key": "field_location_gmb_exclude",
-			"label": "Should this location be excluded from any bulk imports and updates in Google My Business?",
+			"label": "Should this location be excluded from any bulk imports and updates in Google Business Profiles?",
 			"name": "location_gmb_exclude",
 			"type": "button_group",
 			"instructions": "",
@@ -5088,7 +5088,7 @@
 		},
 		{
 			"key": "field_location_gmb_prefix",
-			"label": "Should \"UAMS Health\" be prepended to the location name on the Google My Business listing?",
+			"label": "Should \"UAMS Health\" be prepended to the location name on the Google Business Profile listing?",
 			"name": "location_gmb_prefix",
 			"type": "button_group",
 			"instructions": "",
@@ -5118,7 +5118,7 @@
 		},
 		{
 			"key": "field_location_gmb_cat",
-			"label": "Google My Business Category",
+			"label": "Google Business Profile Category",
 			"name": "location_gmb_cat",
 			"type": "taxonomy",
 			"instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Medical Clinic\" is a good standard choice, if you cannot find a better option.</p><p class='description' style='margin-top: 0.5em;'>For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",
