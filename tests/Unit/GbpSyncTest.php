@@ -43,6 +43,29 @@ final class GbpSyncTest extends UnitTestCase
             /** @var ?RuntimeException */
             public $fail_create;
 
+            /** @var array<string, bool> */
+            public $live_attributes = [];
+
+            /** @var ?RuntimeException */
+            public $fail_attributes;
+
+            public function attributes(string $location): array
+            {
+                $this->calls[] = ['attributes', $location];
+
+                return $this->live_attributes;
+            }
+
+            public function update_attributes(string $location, array $values): array
+            {
+                $this->calls[] = ['update_attributes', $location, $values];
+                if ($this->fail_attributes !== null) {
+                    throw $this->fail_attributes;
+                }
+
+                return [];
+            }
+
             public function patch(string $location, array $fields, string $mask, bool $validate_only = false): array
             {
                 $this->calls[] = ['patch', $location, $fields, $mask];
@@ -337,5 +360,116 @@ final class GbpSyncTest extends UnitTestCase
         $this->sync(['uams' => 'dry-run'])->run([$this->item(['unresolved' => ['Not A Category']])]);
 
         $this->assertContains('Not A Category', $this->log[0]['unresolved_categories']);
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     * @return array<string, mixed>
+     */
+    private function location_item(array $overrides = []): array
+    {
+        return $overrides + $this->item(['kind' => 'location', 'attributes' => ['has_restroom' => true, 'requires_appointments' => false]]);
+    }
+
+    private function calls_of(string $kind): array
+    {
+        return array_values(array_filter($this->client->calls, function (array $call) use ($kind): bool {
+            return $call[0] === $kind;
+        }));
+    }
+
+    public function test_only_the_attributes_that_differ_are_written_when_the_fields_already_match(): void
+    {
+        $this->client->live_attributes = ['has_restroom' => true, 'requires_appointments' => true];
+        $item = $this->location_item();
+        $listing = $this->listing('accounts/ul', 'jane_clinic', $item['fields']);
+
+        $this->sync(['uams' => 'live'], true, [$listing])->run([$item]);
+
+        $this->assertSame(['update'], $this->actions());
+        $this->assertSame(['requires_appointments'], $this->log[0]['attributes']);
+        $this->assertSame([], $this->log[0]['fields']);
+        $this->assertSame([], $this->calls_of('patch'));
+        $this->assertSame([['update_attributes', 'locations/jane_clinic', ['requires_appointments' => false]]], $this->calls_of('update_attributes'));
+    }
+
+    public function test_fields_and_attributes_are_both_written_when_both_differ(): void
+    {
+        $listing = $this->listing('accounts/ul', 'jane_clinic', ['title' => 'Old']);
+
+        $this->sync(['uams' => 'live'], true, [$listing])->run([$this->location_item()]);
+
+        $this->assertCount(1, $this->calls_of('patch'));
+        $this->assertSame([['update_attributes', 'locations/jane_clinic', ['has_restroom' => true, 'requires_appointments' => false]]], $this->calls_of('update_attributes'));
+        $this->assertSame(['has_restroom', 'requires_appointments'], $this->log[0]['attributes']);
+    }
+
+    public function test_a_listing_whose_fields_and_attributes_match_is_a_no_op(): void
+    {
+        $this->client->live_attributes = ['has_restroom' => true, 'requires_appointments' => false];
+        $item = $this->location_item();
+        $listing = $this->listing('accounts/ul', 'jane_clinic', $item['fields']);
+
+        $this->sync(['uams' => 'live'], true, [$listing])->run([$item]);
+
+        $this->assertSame(['noop'], $this->actions());
+        $this->assertSame([], $this->calls_of('update_attributes'));
+    }
+
+    public function test_dry_run_reports_the_attribute_changes_and_writes_nothing(): void
+    {
+        $item = $this->location_item();
+        $listing = $this->listing('accounts/ul', 'jane_clinic', $item['fields']);
+
+        $this->sync(['uams' => 'dry-run'], true, [$listing])->run([$item]);
+
+        $this->assertSame(['update'], $this->actions());
+        $this->assertSame(['has_restroom', 'requires_appointments'], $this->log[0]['attributes']);
+        $this->assertSame([], $this->calls_of('update_attributes'));
+        $this->assertSame([], $this->calls_of('patch'));
+    }
+
+    public function test_a_created_location_gets_its_attributes_set_on_the_new_listing(): void
+    {
+        $this->sync(['uams' => 'live'])->run([$this->location_item()]);
+
+        $created = $this->calls_of('create');
+        $this->assertSame('accounts/ul', $created[0][1]);
+        $this->assertSame([['update_attributes', 'locations/new-1', ['has_restroom' => true, 'requires_appointments' => false]]], $this->calls_of('update_attributes'));
+        $this->assertSame(['create'], $this->actions());
+        $this->assertSame('Created', $this->log[0]['reason']);
+    }
+
+    public function test_a_dry_run_create_reports_the_attributes_and_makes_no_call(): void
+    {
+        $this->sync(['uams' => 'dry-run'])->run([$this->location_item()]);
+
+        $this->assertSame(['has_restroom', 'requires_appointments'], $this->log[0]['attributes']);
+        $this->assertSame([], $this->client->calls);
+    }
+
+    public function test_a_failed_attribute_write_is_an_error_and_only_a_rate_limit_is_retryable(): void
+    {
+        $item = $this->location_item();
+        $listing = $this->listing('accounts/ul', 'jane_clinic', $item['fields']);
+
+        $this->client->fail_attributes = new RuntimeException('Google API PATCH failed (400): bad');
+        $this->sync(['uams' => 'live'], true, [$listing])->run([$item]);
+
+        $this->client->fail_attributes = new \UAMSWP_FAD_GBP_Rate_Limited('Google API PATCH failed (429): slow');
+        $this->sync(['uams' => 'live'], true, [$listing])->run([$item]);
+
+        $this->assertSame(['error', 'error'], $this->actions());
+        $this->assertSame([false, true], array_column($this->log, 'retryable'));
+    }
+
+    public function test_an_item_without_attributes_never_reads_or_writes_them(): void
+    {
+        $listing = $this->listing('accounts/up', 'jane_clinic', $this->item()['fields']);
+
+        $this->sync(['uams' => 'live'], true, [$listing])->run([$this->item()]);
+
+        $this->assertSame([], $this->calls_of('attributes'));
+        $this->assertSame([], $this->calls_of('update_attributes'));
     }
 }

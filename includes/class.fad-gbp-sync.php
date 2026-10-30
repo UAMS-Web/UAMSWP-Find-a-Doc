@@ -95,6 +95,7 @@ final class UAMSWP_FAD_GBP_Sync
             'action' => 'skip',
             'reason' => '',
             'fields' => [],
+            'attributes' => [],
             'unresolved_categories' => $item['unresolved'],
         ];
 
@@ -157,20 +158,32 @@ final class UAMSWP_FAD_GBP_Sync
     {
         $changed = UAMSWP_FAD_GBP_Logic::changed_fields($item['fields'], $listing);
 
-        if ($changed === []) {
+        try {
+            $attributes = $this->changed_attributes($item, (string) $listing['name']);
+        } catch (RuntimeException $runtimeException) {
+            return $this->failure($runtimeException) + $entry;
+        }
+
+        if ($changed === [] && $attributes === []) {
             return ['action' => 'noop', 'reason' => 'Listing already matches'] + $entry;
         }
 
-        $entry = ['action' => 'update', 'fields' => array_keys($changed)] + $entry;
+        $entry = ['action' => 'update', 'fields' => array_keys($changed), 'attributes' => array_keys($attributes)] + $entry;
 
         if ($mode !== 'live') {
             return ['reason' => 'Dry run, no write made'] + $entry;
         }
 
         try {
-            $this->client->patch((string) $listing['name'], $changed, UAMSWP_FAD_GBP_Logic::update_mask($changed));
+            if ($changed !== []) {
+                $this->client->patch((string) $listing['name'], $changed, UAMSWP_FAD_GBP_Logic::update_mask($changed));
+            }
+
+            if ($attributes !== []) {
+                $this->client->update_attributes((string) $listing['name'], $attributes);
+            }
         } catch (RuntimeException $runtimeException) {
-            return ['action' => 'error', 'reason' => $runtimeException->getMessage(), 'retryable' => $runtimeException instanceof UAMSWP_FAD_GBP_Rate_Limited] + $entry;
+            return $this->failure($runtimeException) + $entry;
         }
 
         return ['reason' => 'Updated'] + $entry;
@@ -189,7 +202,8 @@ final class UAMSWP_FAD_GBP_Sync
             return ['reason' => 'Cannot create, missing '.implode(', ', $missing)] + $entry;
         }
 
-        $entry = ['action' => 'create', 'fields' => array_keys($item['fields'])] + $entry;
+        $attributes = (array) ($item['attributes'] ?? []);
+        $entry = ['action' => 'create', 'fields' => array_keys($item['fields']), 'attributes' => array_keys($attributes)] + $entry;
 
         if ($mode !== 'live') {
             return ['reason' => 'Dry run, no listing created'] + $entry;
@@ -198,7 +212,7 @@ final class UAMSWP_FAD_GBP_Sync
         try {
             $created = $this->client->create($account, $item['fields'], $item['store_code']);
         } catch (RuntimeException $runtimeException) {
-            return ['action' => 'error', 'reason' => $runtimeException->getMessage(), 'retryable' => $runtimeException instanceof UAMSWP_FAD_GBP_Rate_Limited] + $entry;
+            return $this->failure($runtimeException) + $entry;
         }
 
         // Remember it, so the same store code later in this run is not created a second time.
@@ -207,7 +221,48 @@ final class UAMSWP_FAD_GBP_Sync
             'listing' => ['name' => (string) ($created['name'] ?? ''), 'storeCode' => $item['store_code']] + $item['fields'],
         ];
 
+        // The listing exists now. A failure setting attributes is reported, and the next run
+        // finds the listing by its store code and sets them as an update.
+        if ($attributes !== [] && ! empty($created['name'])) {
+            try {
+                $this->client->update_attributes((string) $created['name'], $attributes);
+            } catch (RuntimeException $runtimeException) {
+                return $this->failure($runtimeException) + $entry;
+            }
+        }
+
         return ['reason' => 'Created'] + $entry;
+    }
+
+    /**
+     * The desired attributes that differ from the listing's live ones.
+     *
+     * A listing is only read when the item states attributes, so provider items cost no call.
+     *
+     * @param  array<string, mixed>  $item
+     * @return array<string, bool>
+     *
+     * @throws RuntimeException When the live attributes cannot be read.
+     */
+    private function changed_attributes(array $item, string $listing_name): array
+    {
+        $desired = (array) ($item['attributes'] ?? []);
+
+        if ($desired === []) {
+            return [];
+        }
+
+        return UAMSWP_FAD_GBP_Logic::changed_attributes($desired, $this->client->attributes($listing_name));
+    }
+
+    /**
+     * The log fields for a failed call.
+     *
+     * @return array<string, mixed>
+     */
+    private function failure(RuntimeException $runtimeException): array
+    {
+        return ['action' => 'error', 'reason' => $runtimeException->getMessage(), 'retryable' => $runtimeException instanceof UAMSWP_FAD_GBP_Rate_Limited];
     }
 
     /**

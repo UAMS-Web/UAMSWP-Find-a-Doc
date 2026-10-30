@@ -309,7 +309,7 @@ final class GbpLogicTest extends UnitTestCase
 
         $item = UAMSWP_FAD_GBP_Logic::location_item($row, ['Medical Clinic' => 'categories/gcid:medical_clinic'], 'baptist-health');
 
-        $this->assertSame(['store_code', 'kind', 'silo', 'excluded', 'fields', 'unresolved'], array_keys($item));
+        $this->assertSame(['store_code', 'kind', 'silo', 'excluded', 'fields', 'unresolved', 'attributes'], array_keys($item));
         $this->assertSame(['schmieding-outpatient-therapy', 'location', 'baptist-health', false], [$item['store_code'], $item['kind'], $item['silo'], $item['excluded']]);
         $this->assertSame('Schmieding Outpatient Therapy', $item['fields']['title']);
         $this->assertSame('categories/gcid:medical_clinic', $item['fields']['categories']['primaryCategory']['name']);
@@ -333,5 +333,51 @@ final class GbpLogicTest extends UnitTestCase
 
         $this->assertSame(['Made Up Category'], $item['unresolved']);
         $this->assertNull($item['silo']);
+    }
+
+    public function test_attributes_come_from_the_yes_and_no_cells_and_the_rest_are_left_out(): void
+    {
+        $row = array_fill(0, 53, '');
+        $row[23] = 'Yes';
+        $row[24] = 'No';
+        $row[25] = '[NOT APPLICABLE]';
+        $row[26] = '';
+        $row[52] = 'Yes';
+
+        $this->assertSame([
+            'has_wheelchair_accessible_entrance' => true,
+            'has_wheelchair_accessible_restroom' => false,
+            'has_video_visits' => true,
+        ], UAMSWP_FAD_GBP_Logic::attributes_from_row($row));
+    }
+
+    public function test_a_row_with_no_attribute_cells_has_no_attributes(): void
+    {
+        $this->assertSame([], UAMSWP_FAD_GBP_Logic::attributes_from_row([]));
+    }
+
+    public function test_changed_attributes_are_the_ones_that_differ_from_the_live_values(): void
+    {
+        $desired = ['has_restroom' => true, 'requires_appointments' => false, 'has_video_visits' => true];
+        $live = ['has_restroom' => true, 'requires_appointments' => true];
+
+        $this->assertSame(['requires_appointments' => false, 'has_video_visits' => true], UAMSWP_FAD_GBP_Logic::changed_attributes($desired, $live));
+        $this->assertSame([], UAMSWP_FAD_GBP_Logic::changed_attributes(['has_restroom' => true], ['has_restroom' => true]));
+    }
+
+    public function test_every_attribute_column_maps_to_its_own_attribute(): void
+    {
+        $row = array_fill(0, 53, '');
+        foreach ([23, 24, 25, 26, 52] as $column) {
+            $row[$column] = 'Yes';
+        }
+
+        $this->assertSame([
+            'has_wheelchair_accessible_entrance',
+            'has_wheelchair_accessible_restroom',
+            'has_restroom',
+            'requires_appointments',
+            'has_video_visits',
+        ], array_keys(UAMSWP_FAD_GBP_Logic::attributes_from_row($row)));
     }
 }
