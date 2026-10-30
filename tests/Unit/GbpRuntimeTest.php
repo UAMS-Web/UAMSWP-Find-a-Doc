@@ -167,21 +167,24 @@ final class GbpRuntimeTest extends UnitTestCase
         $this->assertGreaterThan(time(), $this->scheduled[0][0]);
     }
 
-    public function test_queue_all_schedules_every_published_provider_once_and_staggered(): void
+    public function test_queue_all_schedules_every_published_provider_and_location_once_and_staggered(): void
     {
         $this->enable();
         $this->recordSchedule();
-        Functions\when('get_posts')->justReturn(['7', 8, 9]);
+        Functions\when('get_posts')->alias(function (array $args) {
+            return $args['post_type'] === 'provider' ? ['7', 8, 9] : [55];
+        });
 
-        Functions\expect('delete_post_meta')->times(3)->with(\Mockery::anyOf(7, 8, 9), UAMSWP_FAD_GBP_HASH_META);
+        Functions\expect('delete_post_meta')->times(4)->with(\Mockery::anyOf(7, 8, 9, 55), UAMSWP_FAD_GBP_HASH_META);
 
         $first = uamswp_fad_gbp_queue_all($this->creds());
         $second = uamswp_fad_gbp_queue_all($this->creds());
 
-        $this->assertSame([3, 0], [$first, $second]);
-        $this->assertSame([[7], [8], [9]], array_column($this->scheduled, 2));
+        $this->assertSame([4, 0], [$first, $second]);
+        $this->assertSame([[7], [8], [9], [55]], array_column($this->scheduled, 2));
         $this->assertSame(15, $this->scheduled[1][0] - $this->scheduled[0][0]);
         $this->assertSame(15, $this->scheduled[2][0] - $this->scheduled[1][0]);
+        $this->assertSame(15, $this->scheduled[3][0] - $this->scheduled[2][0]);
     }
 
     public function test_queue_all_does_nothing_without_credentials_or_when_every_silo_is_off(): void
@@ -248,6 +251,38 @@ final class GbpRuntimeTest extends UnitTestCase
         uamswp_fad_gbp_register_hooks();
     }
 
+    public function test_items_for_a_location_come_from_its_own_row_and_silo(): void
+    {
+        $this->enable();
+        $row = array_fill(0, 18, '');
+        $row[0] = 'parent_child';
+        $row[1] = 'Child Clinic';
+        $row[15] = 'Medical Clinic';
+        Functions\when('uamswp_fad_gmb_location_table')->alias(function (array $ids) use ($row) {
+            return ['head' => [], 'body' => $ids === [55] ? [$row, []] : []];
+        });
+        Functions\when('get_post_meta')->alias(function (int $id, string $key) {
+            return $key === 'schema_brandorg_query' ? '1' : 'baptist-health';
+        });
+
+        $items = uamswp_fad_gbp_items_for_location(55, ['Medical Clinic' => 'categories/gcid:medical_clinic']);
+
+        $this->assertCount(1, $items, 'an empty row is not an item');
+        $this->assertSame(['parent_child', 'location', 'baptist-health'], [$items[0]['store_code'], $items[0]['kind'], $items[0]['silo']]);
+    }
+
+    public function test_items_for_a_post_depend_on_its_type(): void
+    {
+        Functions\when('uamswp_fad_gbp_items_for_location')->justReturn([['kind' => 'location']]);
+        Functions\when('uamswp_fad_gbp_items_for_provider')->justReturn([['kind' => 'provider']]);
+
+        Functions\when('get_post_type')->justReturn('location');
+        $this->assertSame('location', uamswp_fad_gbp_items_for_post(1, [])[0]['kind']);
+
+        Functions\when('get_post_type')->justReturn('provider');
+        $this->assertSame('provider', uamswp_fad_gbp_items_for_post(1, [])[0]['kind']);
+    }
+
     public function test_the_retry_delay_doubles_from_a_minute_to_an_hour(): void
     {
         $this->assertSame([60, 120, 240, 480, 960, 1920, 3600, 3600], array_map('uamswp_fad_gbp_retry_delay', [1, 2, 3, 4, 5, 6, 7, 20]));
@@ -280,6 +315,7 @@ final class GbpRuntimeTest extends UnitTestCase
     {
         $logged = [];
         Functions\when('get_transient')->justReturn(UAMSWP_FAD_GBP_MAX_ATTEMPTS);
+        Functions\when('get_post_type')->justReturn('provider');
         Functions\when('delete_transient')->justReturn(true);
         Functions\when('get_option')->justReturn([]);
         Functions\when('update_option')->alias(function (string $name, $value) use (&$logged): bool {
@@ -292,7 +328,7 @@ final class GbpRuntimeTest extends UnitTestCase
         uamswp_fad_gbp_schedule_retry(7);
 
         $this->assertSame([], $this->scheduled);
-        $this->assertStringContainsString('Gave up on provider 7', $logged[0]['reason']);
+        $this->assertStringContainsString('Gave up on post 7', $logged[0]['reason']);
     }
 
     public function test_nothing_is_queued_without_credentials(): void
@@ -338,7 +374,7 @@ final class GbpRuntimeTest extends UnitTestCase
         $this->assertSame([], $this->scheduled);
     }
 
-    public function test_saving_a_location_schedules_the_providers_at_it_and_at_its_children(): void
+    public function test_saving_a_location_schedules_it_its_children_and_the_providers_at_them(): void
     {
         $this->enable();
         $this->recordSchedule();
@@ -351,7 +387,7 @@ final class GbpRuntimeTest extends UnitTestCase
 
         uamswp_fad_gbp_queue_on_save(55, $this->creds());
 
-        $this->assertSame([[7], [8]], array_column($this->scheduled, 2));
+        $this->assertSame([[55], [56], [7], [8]], array_column($this->scheduled, 2));
         $this->assertLessThan($this->scheduled[1][0], $this->scheduled[0][0], 'syncs are staggered, not simultaneous');
     }
 }

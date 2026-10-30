@@ -234,4 +234,47 @@ final class UAMSWP_FAD_GBP_Client
             'validateOnly' => $validate_only ? 'true' : '',
         ]), $fields + ['storeCode' => $store_code, 'languageCode' => 'en']);
     }
+
+    /**
+     * A listing's true/false attributes, as name (without `attributes/`) => value.
+     *
+     * Attributes of any other value type are left out.
+     *
+     * @param  string  $location  The listing's resource name, `locations/123`.
+     * @return array<string, bool>
+     */
+    public function attributes(string $location): array
+    {
+        $data = $this->request('GET', self::INFO_URL.'/'.$location.'/attributes');
+        $attributes = [];
+
+        foreach ((array) ($data['attributes'] ?? []) as $attribute) {
+            $value = $attribute['values'][0] ?? null;
+
+            if (($attribute['valueType'] ?? '') === 'BOOL' && is_bool($value)) {
+                $attributes[(string) preg_replace('#^attributes/#', '', (string) $attribute['name'])] = $value;
+            }
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * Set true/false attributes on a listing.
+     *
+     * @param  string  $location  The listing's resource name, `locations/123`.
+     * @param  array<string, bool>  $values  Attribute name (without `attributes/`) => value. The mask names exactly these.
+     * @return array<string, mixed>
+     */
+    public function update_attributes(string $location, array $values): array
+    {
+        $names = array_map(static fn (string $name): string => 'attributes/'.$name, array_keys($values));
+
+        $body = ['name' => $location.'/attributes', 'attributes' => []];
+        foreach ($values as $name => $value) {
+            $body['attributes'][] = ['name' => 'attributes/'.$name, 'values' => [$value]];
+        }
+
+        return $this->request('PATCH', self::INFO_URL.'/'.$location.'/attributes', ['attributeMask' => implode(',', $names)], $body);
+    }
 }
