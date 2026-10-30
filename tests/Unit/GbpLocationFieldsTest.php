@@ -62,4 +62,12 @@ final class GbpLocationFieldsTest extends UnitTestCase
 
         $this->assertSame($keys, array_values(array_unique($keys)));
     }
+
+    public function test_the_location_export_no_longer_compares_the_exclusion_flag_to_a_boolean(): void
+    {
+        $source = (string) file_get_contents(dirname(__DIR__, 2).'/includes/class.fad-gmb-settings-page.php');
+
+        $this->assertStringNotContainsString('$location_gmb_exclude !== true', $source);
+        $this->assertStringContainsString('UAMSWP_FAD_GBP_Logic::is_yes($location_gmb_exclude)', $source);
+    }
 }
