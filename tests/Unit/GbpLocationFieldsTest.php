@@ -70,4 +70,17 @@ final class GbpLocationFieldsTest extends UnitTestCase
         $this->assertStringNotContainsString('$location_gmb_exclude !== true', $source);
         $this->assertStringContainsString('UAMSWP_FAD_GBP_Logic::is_yes($location_gmb_exclude)', $source);
     }
+
+    public function test_an_excluded_location_adds_no_row_to_the_table(): void
+    {
+        $source = (string) file_get_contents(dirname(__DIR__, 2).'/includes/class.fad-gmb-settings-page.php');
+        $start = strpos($source, 'function uamswp_fad_gmb_location_table(');
+        $body = substr($source, (int) $start);
+        $body = substr($body, 0, (int) strpos($body, "\nfunction ", 10));
+
+        $this->assertNotFalse($start);
+        $this->assertStringContainsString('$row = [];', $body);
+        $this->assertLessThan(strpos($body, '} // endif'), strpos($body, '$table_body[] = $row;'), 'the row is added inside the branch that builds it');
+        $this->assertSame(1, substr_count($body, '$table_body[] = $row;'));
+    }
 }
