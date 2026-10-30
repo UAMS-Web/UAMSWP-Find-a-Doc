@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
+use Brain\Monkey\Actions;
 use Brain\Monkey\Functions;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
@@ -195,6 +196,54 @@ final class GbpRuntimeTest extends UnitTestCase
         $this->assertSame(0, uamswp_fad_gbp_queue_all($this->creds()));
 
         $this->assertSame([], $this->scheduled);
+    }
+
+    public function test_a_scheduled_post_going_live_is_queued(): void
+    {
+        $this->enable();
+        $this->recordSchedule();
+        Functions\when('get_post_type')->justReturn('provider');
+        Functions\when('get_post_status')->justReturn('publish');
+
+        uamswp_fad_gbp_queue_on_publish('publish', 'future', (object) ['ID' => 100], $this->creds());
+
+        $this->assertSame([[100]], array_column($this->scheduled, 2));
+    }
+
+    public function test_only_a_change_into_publish_is_queued_by_the_transition(): void
+    {
+        $this->enable();
+        $this->recordSchedule();
+        Functions\when('get_post_type')->justReturn('provider');
+        Functions\when('get_post_status')->justReturn('publish');
+
+        uamswp_fad_gbp_queue_on_publish('publish', 'publish', (object) ['ID' => 100], $this->creds());
+        uamswp_fad_gbp_queue_on_publish('draft', 'publish', (object) ['ID' => 101], $this->creds());
+        uamswp_fad_gbp_queue_on_publish('future', 'draft', (object) ['ID' => 102], $this->creds());
+
+        $this->assertSame([], $this->scheduled);
+    }
+
+    public function test_the_save_and_the_transition_together_queue_a_provider_once(): void
+    {
+        $this->enable();
+        $this->recordSchedule();
+        Functions\when('get_post_type')->justReturn('provider');
+        Functions\when('get_post_status')->justReturn('publish');
+
+        uamswp_fad_gbp_queue_on_publish('publish', 'draft', (object) ['ID' => 100], $this->creds());
+        uamswp_fad_gbp_queue_on_save(100, $this->creds());
+
+        $this->assertCount(1, $this->scheduled);
+    }
+
+    public function test_the_hooks_are_registered(): void
+    {
+        Actions\expectAdded('acf/save_post')->once()->with('uamswp_fad_gbp_queue_on_save', 30);
+        Actions\expectAdded('transition_post_status')->once()->with('uamswp_fad_gbp_queue_on_publish', 10, 3);
+        Actions\expectAdded(UAMSWP_FAD_GBP_SYNC_HOOK)->once()->with('uamswp_fad_gbp_run_post');
+
+        uamswp_fad_gbp_register_hooks();
     }
 
     public function test_nothing_is_queued_without_credentials(): void

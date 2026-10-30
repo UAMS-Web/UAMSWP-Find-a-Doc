@@ -141,6 +141,28 @@ function uamswp_fad_gbp_queue_on_save($post_id, ?callable $lookup = null): void
 }
 
 /**
+ * Queue a sync when a provider or location goes live by any route.
+ *
+ * `acf/save_post` does not fire when WordPress publishes a scheduled post, nor for a change
+ * made outside the edit screen. This catches the change of status instead. On an edit-screen
+ * publish it fires before the ACF fields are stored; the delay on the queued job covers that,
+ * and a job already waiting is not queued twice.
+ *
+ * @param  string  $new_status
+ * @param  string  $old_status
+ * @param  object  $post  The `WP_Post`.
+ * @param  (callable(string): string)|null  $lookup  Credential lookup; for tests.
+ */
+function uamswp_fad_gbp_queue_on_publish($new_status, $old_status, $post, ?callable $lookup = null): void
+{
+    if ($new_status !== 'publish' || $old_status === 'publish') {
+        return;
+    }
+
+    uamswp_fad_gbp_queue_on_save((int) $post->ID, $lookup);
+}
+
+/**
  * Queue a sync for every published provider, one job at a time.
  *
  * For the first run of a silo and for catching up after an import, which does not fire
@@ -404,5 +426,6 @@ function uamswp_fad_gbp_run_post(int $provider_id): void
 function uamswp_fad_gbp_register_hooks(): void
 {
     add_action('acf/save_post', 'uamswp_fad_gbp_queue_on_save', 30);
+    add_action('transition_post_status', 'uamswp_fad_gbp_queue_on_publish', 10, 3);
     add_action(UAMSWP_FAD_GBP_SYNC_HOOK, 'uamswp_fad_gbp_run_post');
 }
