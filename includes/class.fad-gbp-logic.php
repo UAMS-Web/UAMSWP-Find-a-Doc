@@ -138,14 +138,15 @@ class UAMSWP_FAD_GBP_Logic
             $fields['websiteUri'] = $cell(14);
         }
 
-        $primary = $category_ids[$cell(15)] ?? '';
+        $lookup = self::category_lookup($category_ids);
+        $primary = $lookup[strtolower($cell(15))] ?? '';
         if ($primary !== '') {
             $categories = ['primaryCategory' => ['name' => $primary]];
             $additional = [];
             foreach (explode(',', $cell(16)) as $name) {
-                $name = trim($name);
-                if ($name !== '' && isset($category_ids[$name]) && $category_ids[$name] !== $primary) {
-                    $additional[] = ['name' => $category_ids[$name]];
+                $resolved = $lookup[strtolower(trim($name))] ?? '';
+                if ($resolved !== '' && $resolved !== $primary) {
+                    $additional[] = ['name' => $resolved];
                 }
             }
 
@@ -162,6 +163,44 @@ class UAMSWP_FAD_GBP_Logic
 
         return $fields;
 
+    }
+
+    /**
+     * The category names in a row that Google has no category for.
+     *
+     * Matching ignores case, since the site's taxonomy and Google's catalog differ in
+     * capitalization ("Orthopedic Surgeon" against "Orthopedic surgeon"). A name that still
+     * does not match is dropped from the listing, so the sync logs it for an editor to fix.
+     *
+     * @param  array<int, mixed>  $row  A table row.
+     * @param  array<string, string>  $category_ids  Category display name => resource name.
+     * @return array<int, string> The unmatched names, in row order.
+     */
+    public static function unresolved_categories(array $row, array $category_ids): array
+    {
+        $lookup = self::category_lookup($category_ids);
+        $names = array_merge([(string) ($row[15] ?? '')], explode(',', (string) ($row[16] ?? '')));
+        $unresolved = [];
+
+        foreach ($names as $name) {
+            $name = trim(html_entity_decode($name, ENT_QUOTES, 'UTF-8'));
+            if ($name !== '' && ! isset($lookup[strtolower($name)])) {
+                $unresolved[] = $name;
+            }
+        }
+
+        return $unresolved;
+    }
+
+    /**
+     * Category display names lowercased, for case-insensitive matching.
+     *
+     * @param  array<string, string>  $category_ids
+     * @return array<string, string>
+     */
+    private static function category_lookup(array $category_ids): array
+    {
+        return array_change_key_case($category_ids, CASE_LOWER);
     }
 
     /**

@@ -138,6 +138,28 @@ final class GbpLogicTest extends UnitTestCase
         $this->assertArrayNotHasKey('categories', UAMSWP_FAD_GBP_Logic::fields_from_row($row, self::CATEGORIES));
     }
 
+    public function test_category_names_match_regardless_of_case(): void
+    {
+        $row = $this->row();
+        $row[15] = 'ORTHOPEDIC SURGEON';
+        $row[16] = 'surgeon, dentist';
+
+        $fields = UAMSWP_FAD_GBP_Logic::fields_from_row($row, ['Orthopedic surgeon' => 'categories/gcid:orthopedic_surgeon', 'Surgeon' => 'categories/gcid:surgeon', 'Dentist' => 'categories/gcid:dentist']);
+
+        $this->assertSame('categories/gcid:orthopedic_surgeon', $fields['categories']['primaryCategory']['name']);
+        $this->assertSame([['name' => 'categories/gcid:surgeon'], ['name' => 'categories/gcid:dentist']], $fields['categories']['additionalCategories']);
+    }
+
+    public function test_unresolved_category_names_are_reported(): void
+    {
+        $row = $this->row();
+        $row[15] = 'Not A Google Category';
+        $row[16] = 'Dentist, Also Missing, Doctor';
+
+        $this->assertSame(['Not A Google Category', 'Also Missing'], UAMSWP_FAD_GBP_Logic::unresolved_categories($row, self::CATEGORIES));
+        $this->assertSame([], UAMSWP_FAD_GBP_Logic::unresolved_categories($this->row(), self::CATEGORIES + ['Unmapped' => 'categories/gcid:x']));
+    }
+
     public function test_an_incomplete_address_is_left_out(): void
     {
         $row = $this->row();
