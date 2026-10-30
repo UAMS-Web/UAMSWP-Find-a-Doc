@@ -67,6 +67,54 @@ final class GbpSettingsTest extends UnitTestCase
         uamswp_fad_gbp_save_modes();
     }
 
+    public function test_queueing_all_without_the_capability_dies_and_queues_nothing(): void
+    {
+        Functions\when('current_user_can')->justReturn(false);
+        Functions\when('esc_html__')->returnArg();
+        Functions\expect('wp_die')->once()->andReturnUsing(function (): void {
+            throw new RuntimeException('died');
+        });
+        Functions\expect('get_posts')->never();
+
+        $this->expectException(RuntimeException::class);
+
+        uamswp_fad_gbp_queue_all_action();
+    }
+
+    public function test_queueing_all_checks_the_nonce_before_queueing(): void
+    {
+        Functions\when('current_user_can')->justReturn(true);
+        Functions\expect('check_admin_referer')->once()->with('uamswp_fad_gbp_queue_all')->andReturnUsing(function (): void {
+            throw new RuntimeException('bad nonce');
+        });
+        Functions\expect('get_posts')->never();
+
+        $this->expectException(RuntimeException::class);
+
+        uamswp_fad_gbp_queue_all_action();
+    }
+
+    public function test_queueing_all_reports_how_many_were_queued(): void
+    {
+        Functions\when('current_user_can')->justReturn(true);
+        Functions\when('check_admin_referer')->justReturn(1);
+        Functions\when('admin_url')->returnArg();
+        Functions\when('get_option')->alias(function (string $name, $default = false) {
+            return $name === 'uamswp_fad_gbp_modes' ? [] : $default;
+        });
+        Functions\when('get_posts')->justReturn([7, 8]);
+        Functions\when('wp_next_scheduled')->justReturn(false);
+        Functions\when('wp_schedule_single_event')->justReturn(true);
+        Functions\when('add_query_arg')->alias(function (string $key, int $value, string $url): string {
+            return $url.'&'.$key.'='.$value;
+        });
+        Functions\expect('wp_safe_redirect')->once()->with('admin.php?page=uamswp-fad-gbp&queued=2');
+
+        uamswp_fad_gbp_queue_all_action(false, function (string $name): string {
+            return 'value-of-'.$name;
+        });
+    }
+
     public function test_a_valid_save_stores_the_sanitized_modes_without_autoload(): void
     {
         $_POST['modes'] = ['uams' => 'live', 'baptist-health' => 'bogus'];

@@ -141,6 +141,36 @@ function uamswp_fad_gbp_queue_on_save($post_id, ?callable $lookup = null): void
 }
 
 /**
+ * Queue a sync for every published provider, one job at a time.
+ *
+ * For the first run of a silo and for catching up after an import, which does not fire
+ * `acf/save_post`. Each job is the same cron job a save queues, spaced apart so the single-run
+ * lock is rarely contended. A provider with a job already waiting is not queued again.
+ *
+ * @param  (callable(string): string)|null  $lookup  Credential lookup; for tests.
+ * @return int How many providers were queued.
+ */
+function uamswp_fad_gbp_queue_all(?callable $lookup = null): int
+{
+    if (uamswp_fad_gbp_credentials($lookup) === null || array_diff(array_values(uamswp_fad_gbp_modes()), ['off']) === []) {
+        return 0;
+    }
+
+    $queued = 0;
+
+    foreach (array_map('intval', get_posts(['post_type' => 'provider', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids'])) as $provider_id) {
+        if (wp_next_scheduled(UAMSWP_FAD_GBP_SYNC_HOOK, [$provider_id]) !== false) {
+            continue;
+        }
+
+        wp_schedule_single_event(time() + 30 + $queued * 15, UAMSWP_FAD_GBP_SYNC_HOOK, [$provider_id]);
+        $queued++;
+    }
+
+    return $queued;
+}
+
+/**
  * The published child locations of a location.
  *
  * @return array<int, int>
