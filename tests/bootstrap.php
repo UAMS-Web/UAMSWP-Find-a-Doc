@@ -59,4 +59,5 @@ require_once dirname(__DIR__).'/includes/class.fad-gbp-client.php';
 require_once dirname(__DIR__).'/includes/class.fad-gbp-sync.php';
 require_once dirname(__DIR__).'/includes/class.fad-gbp-runtime.php';
 require_once dirname(__DIR__).'/includes/class.fad-gbp-settings.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-cli.php';
 // cspell:ignore ABSPATH autoloaded
