@@ -103,6 +103,7 @@ final class GbpSettingsTest extends UnitTestCase
             return $name === 'uamswp_fad_gbp_modes' ? [] : $default;
         });
         Functions\when('get_posts')->justReturn([7, 8]);
+        Functions\when('delete_post_meta')->justReturn(true);
         Functions\when('wp_next_scheduled')->justReturn(false);
         Functions\when('wp_schedule_single_event')->justReturn(true);
         Functions\when('add_query_arg')->alias(function (string $key, int $value, string $url): string {

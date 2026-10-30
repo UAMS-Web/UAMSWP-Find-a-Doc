@@ -170,7 +170,7 @@ final class UAMSWP_FAD_GBP_Sync
         try {
             $this->client->patch((string) $listing['name'], $changed, UAMSWP_FAD_GBP_Logic::update_mask($changed));
         } catch (RuntimeException $runtimeException) {
-            return ['action' => 'error', 'reason' => $runtimeException->getMessage()] + $entry;
+            return ['action' => 'error', 'reason' => $runtimeException->getMessage(), 'retryable' => $runtimeException instanceof UAMSWP_FAD_GBP_Rate_Limited] + $entry;
         }
 
         return ['reason' => 'Updated'] + $entry;
@@ -198,7 +198,7 @@ final class UAMSWP_FAD_GBP_Sync
         try {
             $created = $this->client->create($account, $item['fields'], $item['store_code']);
         } catch (RuntimeException $runtimeException) {
-            return ['action' => 'error', 'reason' => $runtimeException->getMessage()] + $entry;
+            return ['action' => 'error', 'reason' => $runtimeException->getMessage(), 'retryable' => $runtimeException instanceof UAMSWP_FAD_GBP_Rate_Limited] + $entry;
         }
 
         // Remember it, so the same store code later in this run is not created a second time.

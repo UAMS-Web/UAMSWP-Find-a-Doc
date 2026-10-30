@@ -11,6 +11,14 @@
 
 declare(strict_types=1);
 
+/**
+ * Google asked the caller to slow down (HTTP 429), or is briefly unavailable (503).
+ *
+ * A subclass, so existing handlers of RuntimeException still catch it, and the job that runs
+ * the sync can tell it from a failure that retrying will not fix.
+ */
+final class UAMSWP_FAD_GBP_Rate_Limited extends RuntimeException {}
+
 final class UAMSWP_FAD_GBP_Client
 {
     private const TOKEN_URL = 'https://oauth2.googleapis.com/token';
@@ -79,7 +87,8 @@ final class UAMSWP_FAD_GBP_Client
      * @param  array<string, mixed>|null  $body
      * @return array<string, mixed>
      *
-     * @throws RuntimeException On a non-2xx response, carrying the status and Google's message.
+     * @throws UAMSWP_FAD_GBP_Rate_Limited On a 429 or 503.
+     * @throws RuntimeException On any other non-2xx response, carrying the status and Google's message.
      */
     public function request(string $method, string $url, array $query = [], ?array $body = null): array
     {
@@ -101,7 +110,9 @@ final class UAMSWP_FAD_GBP_Client
             $error = isset($data['error']) && is_array($data['error']) ? $data['error'] : [];
             $message = isset($error['message']) ? (string) $error['message'] : 'no message';
 
-            throw new RuntimeException('Google API '.$method.' failed ('.$status.'): '.$message);
+            $failure = 'Google API '.$method.' failed ('.$status.'): '.$message;
+
+            throw in_array($status, [429, 503], true) ? new UAMSWP_FAD_GBP_Rate_Limited($failure) : new RuntimeException($failure);
         }
 
         return $data;

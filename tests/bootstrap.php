@@ -153,6 +153,7 @@ Brain\Monkey\Functions\when('get_file_data')->justReturn(array());
 define('UAMS_FAD_ROOT_URL', 'https://example.test/wp-content/plugins/'.basename(dirname(__DIR__)).'/');
 define('UAMS_FAD_PATH', dirname(__DIR__).'/');
 define('UAMS_FAD_VERSION', '0.0.0-tests');
+defined('DAY_IN_SECONDS') || define('DAY_IN_SECONDS', 86400);
 
 require_once dirname(__DIR__).'/includes/class.fad-gbp-logic.php';
 require_once dirname(__DIR__).'/includes/class.fad-gbp-client.php';

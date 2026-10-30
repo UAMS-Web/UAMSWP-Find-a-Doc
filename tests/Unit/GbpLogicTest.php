@@ -240,4 +240,38 @@ final class GbpLogicTest extends UnitTestCase
     {
         $this->assertSame('title,websiteUri', UAMSWP_FAD_GBP_Logic::update_mask(['websiteUri' => 'x', 'regularHours' => ['y'], 'title' => 'z']));
     }
+
+    public function test_the_fingerprint_is_stable_and_follows_every_input(): void
+    {
+        $items = [['store_code' => 'a_b', 'fields' => ['title' => 'One']]];
+        $modes = ['uams' => 'live', 'baptist-health' => 'dry-run'];
+        $base = UAMSWP_FAD_GBP_Logic::fingerprint($items, $modes, true, '1.0');
+
+        $this->assertSame($base, UAMSWP_FAD_GBP_Logic::fingerprint($items, array_reverse($modes, true), true, '1.0'));
+        $this->assertNotSame($base, UAMSWP_FAD_GBP_Logic::fingerprint([['store_code' => 'a_b', 'fields' => ['title' => 'Two']]], $modes, true, '1.0'));
+        $this->assertNotSame($base, UAMSWP_FAD_GBP_Logic::fingerprint($items, ['uams' => 'dry-run', 'baptist-health' => 'dry-run'], true, '1.0'));
+        $this->assertNotSame($base, UAMSWP_FAD_GBP_Logic::fingerprint($items, $modes, false, '1.0'));
+        $this->assertNotSame($base, UAMSWP_FAD_GBP_Logic::fingerprint($items, $modes, true, '1.1'));
+    }
+
+    public function test_only_final_outcomes_are_settled(): void
+    {
+        $settled = [
+            ['action' => 'noop', 'reason' => 'Listing already matches'],
+            ['action' => 'skip', 'reason' => 'Silo uams is off'],
+            ['action' => 'update', 'reason' => 'Updated'],
+            ['action' => 'create', 'reason' => 'Created'],
+        ];
+        $this->assertTrue(UAMSWP_FAD_GBP_Logic::is_settled($settled));
+        $this->assertTrue(UAMSWP_FAD_GBP_Logic::is_settled([]));
+
+        foreach ([
+            ['action' => 'review', 'reason' => 'Store code is on 2 listings'],
+            ['action' => 'error', 'reason' => 'boom'],
+            ['action' => 'update', 'reason' => 'Dry run, no write made'],
+            ['action' => 'create', 'reason' => 'Dry run, no listing created'],
+        ] as $unsettled) {
+            $this->assertFalse(UAMSWP_FAD_GBP_Logic::is_settled(array_merge($settled, [$unsettled])), $unsettled['reason']);
+        }
+    }
 }

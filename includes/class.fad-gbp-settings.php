@@ -159,7 +159,7 @@ function uamswp_fad_gbp_render_settings_page(): void
         </form>
 
         <h2>Sync every provider</h2>
-        <p>Queues a sync for every published provider, one every 15 seconds, using each silo's mode above. Use it for a silo's first run and after an import, which does not trigger a sync on its own. A provider already waiting in the queue is not queued again. Results appear under Recent activity as each job runs.</p>
+        <p>Queues a sync for every published provider, one every 15 seconds, using each silo's mode above. Use it for a silo's first run, or to recheck every listing against Google. A provider already waiting in the queue is not queued again. Results appear under Recent activity as each job runs.</p>
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
             <input type="hidden" name="action" value="uamswp_fad_gbp_queue_all">
             <?php wp_nonce_field('uamswp_fad_gbp_queue_all'); ?>
