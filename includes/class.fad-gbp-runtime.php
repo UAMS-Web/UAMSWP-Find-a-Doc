@@ -102,6 +102,47 @@ function uamswp_fad_gbp_is_production(): bool
 }
 
 /**
+ * The posts whose listings a provider or location post affects, itself included.
+ *
+ * A provider covers itself. A location covers itself, its child locations and the providers at
+ * any of them, since their listings carry the location's address and phone.
+ *
+ * @return array<int, int> Empty for any other post type.
+ */
+function uamswp_fad_gbp_covered_post_ids(int $post_id): array
+{
+    $type = get_post_type($post_id);
+
+    if ($type === 'provider') {
+        return [$post_id];
+    }
+
+    if ($type !== 'location') {
+        return [];
+    }
+
+    $locations = array_merge([$post_id], uamswp_fad_gbp_child_location_ids($post_id));
+
+    return array_merge($locations, uamswp_fad_gbp_provider_ids_for_locations($locations));
+}
+
+/**
+ * Every published provider, then every published location.
+ *
+ * @return array<int, int>
+ */
+function uamswp_fad_gbp_all_post_ids(): array
+{
+    $ids = [];
+
+    foreach (['provider', 'location'] as $post_type) {
+        $ids = array_merge($ids, array_map('intval', get_posts(['post_type' => $post_type, 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids'])));
+    }
+
+    return $ids;
+}
+
+/**
  * Queue a debounced sync for the providers a save affects.
  *
  * Saving a provider queues that provider. Saving a location queues every provider at it and at
@@ -127,14 +168,9 @@ function uamswp_fad_gbp_queue_on_save($post_id, ?callable $lookup = null): void
         return;
     }
 
-    $type = get_post_type($post_id);
+    $providers = uamswp_fad_gbp_covered_post_ids($post_id);
 
-    if ($type === 'provider') {
-        $providers = [$post_id];
-    } elseif ($type === 'location') {
-        $locations = array_merge([$post_id], uamswp_fad_gbp_child_location_ids($post_id));
-        $providers = array_merge($locations, uamswp_fad_gbp_provider_ids_for_locations($locations));
-    } else {
+    if ($providers === []) {
         return;
     }
 
@@ -186,17 +222,15 @@ function uamswp_fad_gbp_queue_all(?callable $lookup = null): int
 
     $queued = 0;
 
-    foreach (['provider', 'location'] as $post_type) {
-        foreach (array_map('intval', get_posts(['post_type' => $post_type, 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids'])) as $post_id) {
-            if (wp_next_scheduled(UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]) !== false) {
-                continue;
-            }
-
-            // An explicit run checks every listing against Google, so it forgets what was settled.
-            delete_post_meta($post_id, UAMSWP_FAD_GBP_HASH_META);
-            wp_schedule_single_event(time() + 30 + $queued * 15, UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
-            $queued++;
+    foreach (uamswp_fad_gbp_all_post_ids() as $post_id) {
+        if (wp_next_scheduled(UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]) !== false) {
+            continue;
         }
+
+        // An explicit run checks every listing against Google, so it forgets what was settled.
+        delete_post_meta($post_id, UAMSWP_FAD_GBP_HASH_META);
+        wp_schedule_single_event(time() + 30 + $queued * 15, UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
+        $queued++;
     }
 
     return $queued;
