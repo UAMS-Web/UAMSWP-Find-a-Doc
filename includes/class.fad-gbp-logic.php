@@ -302,4 +302,46 @@ class UAMSWP_FAD_GBP_Logic
         }
 
     }
+
+    /**
+     * A fingerprint of everything that decides what the sync does for one provider.
+     *
+     * Equal fingerprints mean the same desired fields, silos, exclusions, modes and code, so a
+     * job whose last settled run had this fingerprint has nothing new to say to Google.
+     *
+     * @param  array<int, array<string, mixed>>  $items
+     * @param  array<string, string>  $modes
+     */
+    public static function fingerprint(array $items, array $modes, bool $production, string $version): string
+    {
+        ksort($modes);
+
+        return sha1((string) json_encode([$items, $modes, $production, $version]));
+    }
+
+    /**
+     * Whether a run's outcome can be remembered as final for its fingerprint.
+     *
+     * A listing that matched, a skip decided from the items alone, and a write that succeeded
+     * are final. A review (it depends on Google's state), an error, and a dry-run create or
+     * update (nothing was written) are not, so the next save must run again.
+     *
+     * @param  array<int, array<string, mixed>>  $entries
+     */
+    public static function is_settled(array $entries): bool
+    {
+        foreach ($entries as $entry) {
+            $action = $entry['action'] ?? '';
+            $reason = $entry['reason'] ?? '';
+
+            $settled = in_array($action, ['noop', 'skip'], true)
+                || (in_array($action, ['create', 'update'], true) && in_array($reason, ['Created', 'Updated'], true));
+
+            if (! $settled) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

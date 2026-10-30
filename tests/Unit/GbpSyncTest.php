@@ -37,11 +37,17 @@ final class GbpSyncTest extends UnitTestCase
             /** @var bool */
             public $fail = false;
 
+            /** @var bool */
+            public $limited = false;
+
+            /** @var ?RuntimeException */
+            public $fail_create;
+
             public function patch(string $location, array $fields, string $mask, bool $validate_only = false): array
             {
                 $this->calls[] = ['patch', $location, $fields, $mask];
                 if ($this->fail) {
-                    throw new RuntimeException('Google API PATCH failed (500): boom');
+                    throw $this->limited ? new \UAMSWP_FAD_GBP_Rate_Limited('Google API PATCH failed (429): slow') : new RuntimeException('Google API PATCH failed (500): boom');
                 }
 
                 return [];
@@ -50,6 +56,9 @@ final class GbpSyncTest extends UnitTestCase
             public function create(string $account, array $fields, string $store_code, bool $validate_only = false): array
             {
                 $this->calls[] = ['create', $account, $fields, $store_code];
+                if ($this->fail_create !== null) {
+                    throw $this->fail_create;
+                }
 
                 return ['name' => 'locations/new-'.count($this->calls)];
             }
@@ -297,6 +306,30 @@ final class GbpSyncTest extends UnitTestCase
 
         $this->assertSame(['error', 'create'], $this->actions());
         $this->assertStringContainsString('boom', $this->log[0]['reason']);
+    }
+
+    public function test_only_a_rate_limit_failure_is_marked_retryable(): void
+    {
+        $listing = $this->listing('accounts/up', 'jane_clinic', ['title' => 'Old']);
+
+        $this->client->fail = true;
+        $this->sync(['uams' => 'live'], true, [$listing])->run([$this->item()]);
+
+        $this->client->limited = true;
+        $this->sync(['uams' => 'live'], true, [$listing])->run([$this->item()]);
+
+        $this->assertSame([false, true], array_column($this->log, 'retryable'));
+    }
+
+    public function test_a_failed_create_is_retryable_only_when_rate_limited(): void
+    {
+        $this->client->fail_create = new RuntimeException('Google API POST failed (400): bad');
+        $this->sync(['uams' => 'live'])->run([$this->item()]);
+
+        $this->client->fail_create = new \UAMSWP_FAD_GBP_Rate_Limited('Google API POST failed (429): slow');
+        $this->sync(['uams' => 'live'])->run([$this->item()]);
+
+        $this->assertSame([false, true], array_column($this->log, 'retryable'));
     }
 
     public function test_unresolved_categories_are_logged(): void

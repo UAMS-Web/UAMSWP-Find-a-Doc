@@ -13,6 +13,12 @@ declare(strict_types=1);
 
 const UAMSWP_FAD_GBP_SYNC_HOOK = 'uamswp_fad_gbp_sync_post';
 
+/** The post meta key that remembers the fingerprint of a provider's last settled run. */
+const UAMSWP_FAD_GBP_HASH_META = '_uamswp_fad_gbp_hash';
+
+/** How many times a rate-limited provider is retried before the job gives up. */
+const UAMSWP_FAD_GBP_MAX_ATTEMPTS = 5;
+
 /**
  * The silos, each with the brand that selects it and the Google account group that owns its
  * provider and location listings.
@@ -144,7 +150,7 @@ function uamswp_fad_gbp_queue_on_save($post_id, ?callable $lookup = null): void
  * Queue a sync when a provider or location goes live by any route.
  *
  * `acf/save_post` does not fire when WordPress publishes a scheduled post, nor for a change
- * made outside the edit screen. This catches the change of status instead. On an edit-screen
+ * made outside the edit screen (quick edit, bulk edit, the REST API). This catches the change of status instead. On an edit-screen
  * publish it fires before the ACF fields are stored; the delay on the queued job covers that,
  * and a job already waiting is not queued twice.
  *
@@ -165,8 +171,7 @@ function uamswp_fad_gbp_queue_on_publish($new_status, $old_status, $post, ?calla
 /**
  * Queue a sync for every published provider, one job at a time.
  *
- * For the first run of a silo and for catching up after an import, which does not fire
- * `acf/save_post`. Each job is the same cron job a save queues, spaced apart so the single-run
+ * For the first run of a silo, and to recheck every listing against Google. Each job is the same cron job a save queues, spaced apart so the single-run
  * lock is rarely contended. A provider with a job already waiting is not queued again.
  *
  * @param  (callable(string): string)|null  $lookup  Credential lookup; for tests.
@@ -185,6 +190,8 @@ function uamswp_fad_gbp_queue_all(?callable $lookup = null): int
             continue;
         }
 
+        // An explicit run checks every listing against Google, so it forgets what was settled.
+        delete_post_meta($provider_id, UAMSWP_FAD_GBP_HASH_META);
         wp_schedule_single_event(time() + 30 + $queued * 15, UAMSWP_FAD_GBP_SYNC_HOOK, [$provider_id]);
         $queued++;
     }
@@ -377,6 +384,36 @@ function uamswp_fad_gbp_log(array $entry): void
 }
 
 /**
+ * Seconds to wait before retry number $attempt (1 is the first), doubling from a minute to an hour.
+ */
+function uamswp_fad_gbp_retry_delay(int $attempt): int
+{
+    return min(3600, 60 * 2 ** max(0, $attempt - 1));
+}
+
+/**
+ * Put a rate-limited provider back in the queue with a growing delay, or give up after the limit.
+ */
+function uamswp_fad_gbp_schedule_retry(int $provider_id): void
+{
+    $key = 'uamswp_fad_gbp_attempts_'.$provider_id;
+    $attempt = (int) get_transient($key) + 1;
+
+    if ($attempt > UAMSWP_FAD_GBP_MAX_ATTEMPTS) {
+        delete_transient($key);
+        uamswp_fad_gbp_log(['store_code' => '', 'silo' => null, 'kind' => 'provider', 'mode' => 'n/a', 'action' => 'error', 'reason' => 'Gave up on provider '.$provider_id.' after '.UAMSWP_FAD_GBP_MAX_ATTEMPTS.' rate-limited attempts', 'fields' => [], 'unresolved_categories' => []]);
+
+        return;
+    }
+
+    set_transient($key, $attempt, DAY_IN_SECONDS);
+
+    if (wp_next_scheduled(UAMSWP_FAD_GBP_SYNC_HOOK, [$provider_id]) === false) {
+        wp_schedule_single_event(time() + uamswp_fad_gbp_retry_delay($attempt), UAMSWP_FAD_GBP_SYNC_HOOK, [$provider_id]);
+    }
+}
+
+/**
  * The cron job: sync one provider's listings.
  *
  * One run at a time, so two jobs cannot both decide a listing is missing and create it twice.
@@ -400,19 +437,42 @@ function uamswp_fad_gbp_run_post(int $provider_id): void
     try {
         $client = new UAMSWP_FAD_GBP_Client($credentials, 'uamswp_fad_gbp_transport');
 
+        $modes = uamswp_fad_gbp_modes();
+        $production = uamswp_fad_gbp_is_production();
+        $items = uamswp_fad_gbp_items_for_provider($provider_id, uamswp_fad_gbp_categories($client));
+        $hash = UAMSWP_FAD_GBP_Logic::fingerprint($items, $modes, $production, defined('UAMS_FAD_VERSION') ? (string) UAMS_FAD_VERSION : '');
+
+        // Nothing that decides the sync has changed since its last settled run: no Google call.
+        if (get_post_meta($provider_id, UAMSWP_FAD_GBP_HASH_META, true) === $hash) {
+            return;
+        }
+
         $sync = new UAMSWP_FAD_GBP_Sync(
             $client,
-            ['silos' => uamswp_fad_gbp_silos(), 'modes' => uamswp_fad_gbp_modes(), 'is_production' => uamswp_fad_gbp_is_production()],
+            ['silos' => uamswp_fad_gbp_silos(), 'modes' => $modes, 'is_production' => $production],
             UAMSWP_FAD_GBP_Sync::build_index(uamswp_fad_gbp_index($client)),
             'uamswp_fad_gbp_log'
         );
 
-        $entries = $sync->run(uamswp_fad_gbp_items_for_provider($provider_id, uamswp_fad_gbp_categories($client)));
+        $entries = $sync->run($items);
 
         // A write changes what the next job should see.
         if (array_intersect(array_column($entries, 'reason'), ['Created', 'Updated']) !== []) {
             delete_transient('uamswp_fad_gbp_index');
         }
+
+        if (in_array(true, array_column($entries, 'retryable'), true)) {
+            uamswp_fad_gbp_schedule_retry($provider_id);
+        } else {
+            delete_transient('uamswp_fad_gbp_attempts_'.$provider_id);
+
+            if (UAMSWP_FAD_GBP_Logic::is_settled($entries)) {
+                update_post_meta($provider_id, UAMSWP_FAD_GBP_HASH_META, $hash);
+            }
+        }
+    } catch (UAMSWP_FAD_GBP_Rate_Limited $rateLimited) {
+        uamswp_fad_gbp_log(['store_code' => '', 'silo' => null, 'kind' => 'provider', 'mode' => 'n/a', 'action' => 'error', 'reason' => $rateLimited->getMessage(), 'fields' => [], 'unresolved_categories' => []]);
+        uamswp_fad_gbp_schedule_retry($provider_id);
     } catch (RuntimeException $runtimeException) {
         uamswp_fad_gbp_log(['store_code' => '', 'silo' => null, 'kind' => 'provider', 'mode' => 'n/a', 'action' => 'error', 'reason' => $runtimeException->getMessage(), 'fields' => [], 'unresolved_categories' => []]);
     } finally {

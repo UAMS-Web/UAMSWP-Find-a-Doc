@@ -107,6 +107,27 @@ final class GbpClientTest extends UnitTestCase
         $client->location_groups();
     }
 
+    public function test_only_429_and_503_are_rate_limited(): void
+    {
+        foreach ([429, 503] as $status) {
+            try {
+                $this->client([[$status, ['error' => ['message' => 'slow down']]]])->location_groups();
+                $this->fail('Expected a failure for '.$status);
+            } catch (\UAMSWP_FAD_GBP_Rate_Limited $e) {
+                $this->assertStringContainsString('('.$status.'): slow down', $e->getMessage());
+            }
+        }
+
+        foreach ([400, 403, 500] as $status) {
+            try {
+                $this->client([[$status, ['error' => ['message' => 'no']]]])->location_groups();
+                $this->fail('Expected a failure for '.$status);
+            } catch (RuntimeException $e) {
+                $this->assertNotInstanceOf(\UAMSWP_FAD_GBP_Rate_Limited::class, $e, (string) $status);
+            }
+        }
+    }
+
     public function test_location_groups_keeps_only_location_groups_and_follows_pages(): void
     {
         $client = $this->client([

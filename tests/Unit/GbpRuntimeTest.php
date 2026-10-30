@@ -173,6 +173,8 @@ final class GbpRuntimeTest extends UnitTestCase
         $this->recordSchedule();
         Functions\when('get_posts')->justReturn(['7', 8, 9]);
 
+        Functions\expect('delete_post_meta')->times(3)->with(\Mockery::anyOf(7, 8, 9), UAMSWP_FAD_GBP_HASH_META);
+
         $first = uamswp_fad_gbp_queue_all($this->creds());
         $second = uamswp_fad_gbp_queue_all($this->creds());
 
@@ -244,6 +246,53 @@ final class GbpRuntimeTest extends UnitTestCase
         Actions\expectAdded(UAMSWP_FAD_GBP_SYNC_HOOK)->once()->with('uamswp_fad_gbp_run_post');
 
         uamswp_fad_gbp_register_hooks();
+    }
+
+    public function test_the_retry_delay_doubles_from_a_minute_to_an_hour(): void
+    {
+        $this->assertSame([60, 120, 240, 480, 960, 1920, 3600, 3600], array_map('uamswp_fad_gbp_retry_delay', [1, 2, 3, 4, 5, 6, 7, 20]));
+    }
+
+    public function test_a_rate_limited_provider_is_retried_later_with_a_growing_delay(): void
+    {
+        $attempts = [];
+        Functions\when('get_transient')->alias(function (string $key) use (&$attempts) {
+            return $attempts[$key] ?? false;
+        });
+        Functions\when('set_transient')->alias(function (string $key, $value) use (&$attempts): bool {
+            $attempts[$key] = $value;
+
+            return true;
+        });
+        $this->recordSchedule();
+        $now = time();
+
+        uamswp_fad_gbp_schedule_retry(7);
+        $this->assertSame([[7]], array_column($this->scheduled, 2));
+        $this->assertEqualsWithDelta($now + 60, $this->scheduled[0][0], 5);
+
+        $this->scheduled = [];
+        uamswp_fad_gbp_schedule_retry(7);
+        $this->assertEqualsWithDelta($now + 120, $this->scheduled[0][0], 5);
+    }
+
+    public function test_a_provider_is_given_up_on_after_the_attempt_limit(): void
+    {
+        $logged = [];
+        Functions\when('get_transient')->justReturn(UAMSWP_FAD_GBP_MAX_ATTEMPTS);
+        Functions\when('delete_transient')->justReturn(true);
+        Functions\when('get_option')->justReturn([]);
+        Functions\when('update_option')->alias(function (string $name, $value) use (&$logged): bool {
+            $logged = $value;
+
+            return true;
+        });
+        $this->recordSchedule();
+
+        uamswp_fad_gbp_schedule_retry(7);
+
+        $this->assertSame([], $this->scheduled);
+        $this->assertStringContainsString('Gave up on provider 7', $logged[0]['reason']);
     }
 
     public function test_nothing_is_queued_without_credentials(): void
