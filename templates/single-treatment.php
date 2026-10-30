@@ -630,7 +630,10 @@
 			$region_IDs = array();
 			while ($physicians_query->have_posts()) : $physicians_query->the_post();
 				$id = get_the_ID();
-				$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
+				$region_ID = get_field('physician_region', $id);
+				if (is_array($region_ID)) {
+					$region_IDs = array_merge($region_IDs, $region_ID);
+				}
 			endwhile;
 			$region_IDs = array_unique($region_IDs);
 			$region_list = array();

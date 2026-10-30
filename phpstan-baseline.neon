@@ -112,6 +112,12 @@ parameters:
 			rawMessage: 'Call to internal function get_terms().'
 			identifier: function.internal
 			count: 2
+			path: includes/class.fad-editor-groups.php
+
+		-
+			rawMessage: 'Call to internal function get_terms().'
+			identifier: function.internal
+			count: 2
 			path: includes/class.fad-functions.php
 
 		-

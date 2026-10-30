@@ -10,8 +10,6 @@ jQuery(function($) {
     safForm.submit(function(e){
         e.preventDefault(); 
      
-        console.log("form submitted");
-    
         if(null != safForm.find("#schedule_options").val() && safForm.find("#schedule_options").val().length !== 0) {
             var schedule_options = safForm.find("#schedule_options").val();
         }
@@ -19,12 +17,16 @@ jQuery(function($) {
             var pid = safForm.find("#pid").val();
         }
     
+        var nonce = (typeof uamswp_ajax_scripts !== 'undefined' && uamswp_ajax_scripts.security) ? uamswp_ajax_scripts.security : '';
+        var ajax_url = (typeof uamswp_ajax_scripts !== 'undefined' && uamswp_ajax_scripts.ajaxurl) ? uamswp_ajax_scripts.ajaxurl : '/wp-admin/admin-ajax.php';
+
         $.ajax({
             type: 'POST',
-            url: '/wp-admin/admin-ajax.php',
+            url: ajax_url,
             dataType: 'html',
             data: {
                 action : "schedule_ajax_filter",
+                security : nonce,
                 pid : pid,
                 schedule_options : schedule_options,
             },

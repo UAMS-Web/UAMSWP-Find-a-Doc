@@ -64,13 +64,29 @@ parameters:
         - my-plugin.php
         - tests
 
+    # The Integration suite's own Composer setup (the tests skill): its vendor/
+    # sits inside `tests`, so it is excluded from analysis, under `analyse`
+    # only, so its WordPress test classes can still be scanned below. Without
+    # this, PHPStan analyzes PHPUnit 9 and its dependencies as if they were the
+    # repository's code. Uncomment when tests/Integration has its own
+    # composer.json.
+    # excludePaths:
+    #     analyse:
+    #         - tests/Integration/vendor
+
     # Indexed for symbols but not analyzed. `php-stubs/wordpress-stubs` covers
     # core's runtime surface and stops there: `WP_UnitTestCase`, the factories
     # and `tests_add_filter()` ship with WordPress' test suite, not with
-    # WordPress. Uncomment when the tests run on wp-phpunit, or the Integration
-    # suite analyzes as a pile of undefined classes.
+    # WordPress, and `WP_UnitTestCase` extends the polyfills' TestCase.
+    # Uncomment when the tests run on wp-phpunit, or the Integration suite
+    # analyzes as a pile of undefined classes. The paths are the Integration
+    # suite's own Composer setup; a repository that still installs wp-phpunit at
+    # the root names `vendor/...` instead. They must exist, so PHPStan needs
+    # `composer setup:integration` to have run: without it, PHPStan 2.3.0 stops
+    # with "Scanned directory ... does not exist." (`(?)` does not apply here).
     # scanDirectories:
-    #     - vendor/wp-phpunit/wp-phpunit/includes
+    #     - tests/Integration/vendor/wp-phpunit/wp-phpunit/includes
+    #     - tests/Integration/vendor/yoast/phpunit-polyfills/src
 
     # WP-CLI: uncomment after `composer require --dev php-stubs/wp-cli-stubs`.
     # Paths are relative to this neon file (repository root). wordpress-stubs
@@ -149,15 +165,16 @@ parameters:
         #     identifier: if.alwaysFalse
         #     path: my-plugin.php
 
-        # When the tests run on Pest (with the extension above), three entries,
-        # each pinned to `tests/`, so the same error anywhere else still fails.
-        # They carry `reportUnmatched: false` because whether they match
-        # depends on the level and on which calls a suite happens to make: the
-        # internal-class entry matches only from level 2, and a suite whose
-        # `Pest.php` never uses `$this` has nothing for the first entry to
+        # When the Unit tests run on Pest (with the extension above), two
+        # entries, each pinned to `tests/`, so the same error anywhere else
+        # still fails. They carry `reportUnmatched: false` because whether they
+        # match depends on the level and on which calls a suite happens to
+        # make: the internal-class entry matches only from level 2, and a suite
+        # whose `Pest.php` never uses `$this` has nothing for the first entry to
         # match. Measured on the `tests` skill's WordPress plugin template with
-        # PHPStan 2.2 and Pest 3.8, 2026-10-02: without them it fails at
-        # level 0 on the first two.
+        # PHPStan 2.3.0 and Pest 5.3.0, 2026-10-07: without the first it fails
+        # at level 0. The Integration suite is class-based PHPUnit 9.6 and
+        # needs no entry of its own.
         #
         # `$this` inside a closure passed to `uses()->beforeEach()` /
         # `afterEach()` is bound by Pest at runtime, which PHPStan cannot see.
@@ -165,14 +182,6 @@ parameters:
         #     identifier: variable.undefined
         #     message: '#^Undefined variable: \$this$#'
         #     path: tests/Pest.php
-        #     reportUnmatched: false
-        # `$this` inside an `it()` closure analyzes as PHPUnit's TestCase
-        # whatever `uses(...)->in('Integration')` binds, so a WP_UnitTestCase
-        # method such as `go_to()` reads as undefined. Scoped to that suite.
-        # -
-        #     identifier: method.notFound
-        #     message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase::#'
-        #     path: tests/Integration
         #     reportUnmatched: false
         # Pest routes its public API through classes it tags @internal;
         # calling them from a test is Pest's intended use.

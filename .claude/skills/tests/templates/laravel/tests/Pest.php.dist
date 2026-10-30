@@ -15,6 +15,12 @@ use Tests\TestCase;
  * time. A unit test that needs the container declares
  * `uses(Tests\TestCase::class);` in its own file.
  *
+ * Feature files may declare that same `uses()` instead of the directory
+ * binding below. That is an allowed alternative, not the default. The tests
+ * skill, "Optional Laravel harness patterns", says when it fits, and names
+ * the optional browser suite and checkout-local Tia cache. Neither is a
+ * starter step.
+ *
  * Add `->use(Illuminate\Foundation\Testing\RefreshDatabase::class)` before
  * `->in()` once Feature tests touch the database.
  */

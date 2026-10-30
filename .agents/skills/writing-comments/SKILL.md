@@ -44,6 +44,8 @@ perl -CSD -ne 'printf "%s:%d: %s\n", $ARGV, $., join " ",
 
 **It is `perl` rather than a repository's own guard script, and that is a limitation rather than a preference.** A guard that sweeps the working tree against the scope the rule names does not read a draft that is not in the tree. Until one grows a way to scan a single file, the expression above is the one that reads a draft.
 
+**The shared tree sweep has the same limit.** `scripts/check-no-emoji.mjs`, beside this file, sweeps `.claude/`, `docs/`, `README.md`, `AGENTS.md` and `CLAUDE.md` from a repository root (`--root <dir>` names another) and takes no file argument, so it checks what is committed and a draft is read by the `perl` block above. The `no-emoji` job in the `code-quality` CI template runs it.
+
 **Findings are code points, never the character** -- a script that echoes the glyph crashes on exactly the platform the ban exists to protect, and reports the crash as a short result.
 
 ## This prevents. It does not enforce.

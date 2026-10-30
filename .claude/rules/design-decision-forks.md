@@ -11,8 +11,6 @@ When an issue is `hitl` because it carries a genuine **design fork** (an unresol
 
 This is the *decision* flavor of [`hitl`](../skills/writing-issues/SKILL.md). It composes with the `afk`/`hitl` execution-mode triage: an issue earns `hitl` when completing it needs a human **decision** (a fork) or a real-world **action**; this rule governs how you drive a fork to resolution and flip it to `afk`.
 
-This repository does not carry the `afk`, `hitl` or `decision-fork` labels. The process below applies all the same; where it applies, keeps or flips a label, record the state in the issue body instead, as the [`writing-issues`](../skills/writing-issues/SKILL.md) skill describes.
-
 ## The core principle
 
 A human decides a fork by **weighing trade-offs across dimensions**, not from a list of one-line option labels. So your job is NOT to ask "which do you want, A or B?"; it's to do the analysis first and hand over a complete, comparable packet, *then* ask. Never let an interactive prompt be the first substantial thing the human sees, and never compress the analysis to make room for the prompt. The prompt is the last step, not the deliverable.
@@ -30,11 +28,11 @@ A human decides a fork by **weighing trade-offs across dimensions**, not from a 
 
 ## What a `decision-fork` ticket delivers, and what it does not
 
-**Its deliverables are the decision, recorded, and the follow-up tickets it produces, nothing else.** Build work that depends on the decision does not belong on this ticket. It goes into follow-up tickets, blocked by the fork through the native dependency edge the [`writing-issues`](../skills/writing-issues/SKILL.md) sub-issues section already uses (`gh api -X POST repos/{o}/{r}/issues/<blocked>/dependencies/blocked_by -F issue_id=$id`); never a textual relationship line in either body. `UAMS-Web/uams-statamic#2097` settled that dependencies are native edges only.
+**Its deliverables are the decision, recorded, and the follow-up tickets it produces, nothing else.** Build work that depends on the decision does not belong on this ticket. It goes into follow-up tickets, blocked by the fork through the native dependency edge the [`writing-issues`](../skills/writing-issues/SKILL.md) sub-issues section already uses (`gh api -X POST repos/{o}/{r}/issues/<blocked>/dependencies/blocked_by -F issue_id=$id`); never a textual relationship line in either body. `UAMS-Web/uams-statamic-archive#2097` settled that dependencies are native edges only.
 
 **The reason is latency rather than tidiness.** A fork ticket that also carries build work holds two deliverables at once: one nobody *can* start, because it waits on a human, and one nobody *should* start, because it sits behind the first. The decision half resolves in a conversation; the build half resolves in an afternoon. Fused, the fast one silently inherits the slow one's latency, and nothing in the tracker shows that it has.
 
-Observed on `UAMS-Web/uams-statamic#2159`, which carried a fork about how two copies of a skill stay in sync *and* the build work to update the copy that loads. The build half needed no decision, sat behind one for days, and shipped only after being split out as `UAMS-Web/uams-statamic#2171` on an operator instruction. Under this rule it would have been a follow-up from the outset.
+Observed on `UAMS-Web/uams-statamic-archive#2159`, which carried a fork about how two copies of a skill stay in sync *and* the build work to update the copy that loads. The build half needed no decision, sat behind one for days, and shipped only after being split out as `UAMS-Web/uams-statamic-archive#2171` on an operator instruction. Under this rule it would have been a follow-up from the outset.
 
 **So a fork ticket's acceptance criteria describe a decision being recorded and its follow-ups existing, never a build being done.** If you are writing a criterion that names a file to change, or an item only a working feature could satisfy, it belongs on a follow-up.
 
@@ -50,7 +48,7 @@ After the full packet is on screen, present the interactive decision prompt (the
 
 ## Where the decision lands once made
 
-The canonical cross-ticket decision log is `docs/DECISIONS.md`; the **GitHub tracker remains the system of record for a single ticket's status**. A decision lands in three places:
+The canonical cross-ticket decision log is `docs/DECISIONS.md`; the **GitHub tracker remains the system of record for a single ticket's status**. A repository with no log starts from the skeleton in the [`decision-log`](../skills/decision-log/SKILL.md) skill, which also ships the order check and the `.gitattributes` line the log needs. A decision lands in three places:
 
 - **What + why + rejected alternatives** → an entry in `docs/DECISIONS.md` (the terse, durable cross-ticket index) **and** a `## Decision` (or `## Chosen approach`) section of the GitHub issue body (the per-ticket detail). Keep the two consistent: the index says what was decided, the issue says how the argument ran.
 - **The full reasoning** → the relevant `docs/` companion when the decision touches a documented design area; otherwise the issue's `## Approach` section carries it. **The standing consequence** → `AGENTS.md` when the decision changes how the whole repo is built: a design rule, a hook ordering, a toolchain floor. Keep that line short; `docs/DECISIONS.md` carries the rejected alternatives and the issue carries the reasoning.
@@ -80,7 +78,7 @@ This is the one place the label's lifecycle is written down; the [`writing-issue
 - Not the *action* flavor of `hitl`. An issue that is `hitl` only because it needs a real-world step (a deploy, provisioning, recruiting, installing: work outside the repo) has **no fork to surface**; manufacturing "decisions" on it misleads a future agent. This rule is for the decision flavor.
 - Not a way to offload routine choices with conventional defaults onto the human; those you decide and mention in passing.
 - Not a prompt thrown up cold; the analysis packet always comes first.
-- Not a reopening of how dependencies are expressed. `UAMS-Web/uams-statamic#2097` settled that as native edges only, never a textual relationship line in a body. *What a `decision-fork` ticket may contain* is a different question from *how a dependency is recorded*, and this file only answers the first.
+- Not a reopening of how dependencies are expressed. `UAMS-Web/uams-statamic-archive#2097` settled that as native edges only, never a textual relationship line in a body. *What a `decision-fork` ticket may contain* is a different question from *how a dependency is recorded*, and this file only answers the first.
 
 ## The DRY line
 
