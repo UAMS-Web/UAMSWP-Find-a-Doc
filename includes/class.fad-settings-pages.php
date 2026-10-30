@@ -1,123 +1,134 @@
 <?php
 
+declare(strict_types=1);
+
 // Add Find-a-Doc Settings options page to the admin menu
 
-	if ( function_exists('acf_add_options_page') ) {
+if (function_exists('acf_add_options_page')) {
 
-		acf_add_options_page(array(
-			'page_title' => 'Find-a-Doc Settings',
-			'menu_title' => 'Find-a-Doc Settings',
-			'menu_slug' => 'fad-settings',
-			'capability' => 'manage_options',
-			'redirect' => false
-		));
+    acf_add_options_page([
+        'page_title' => 'Find-a-Doc Settings',
+        'menu_title' => 'Find-a-Doc Settings',
+        'menu_slug' => 'fad-settings',
+        'capability' => 'manage_options',
+        'redirect' => false,
+    ]);
 
-		acf_add_options_sub_page(array(
-			'page_title' => 'Clinical Providers Options',
-			'menu_title' => 'Clinical Providers',
-			'menu_slug' => 'uamswp-fad-providers',
-			'parent_slug' => 'fad-settings',
-			'capability' => 'manage_options',
-			'redirect' => false
-		));
+    acf_add_options_sub_page([
+        'page_title' => 'Clinical Providers Options',
+        'menu_title' => 'Clinical Providers',
+        'menu_slug' => 'uamswp-fad-providers',
+        'parent_slug' => 'fad-settings',
+        'capability' => 'manage_options',
+        'redirect' => false,
+    ]);
 
-		acf_add_options_sub_page(array(
-			'page_title' => 'Clinical Locations Options',
-			'menu_title' => 'Clinical Locations',
-			'menu_slug' => 'uamswp-fad-locations',
-			'parent_slug' => 'fad-settings',
-			'capability' => 'manage_options',
-			'redirect' => false
-		));
+    acf_add_options_sub_page([
+        'page_title' => 'Clinical Locations Options',
+        'menu_title' => 'Clinical Locations',
+        'menu_slug' => 'uamswp-fad-locations',
+        'parent_slug' => 'fad-settings',
+        'capability' => 'manage_options',
+        'redirect' => false,
+    ]);
 
-		acf_add_options_sub_page(array(
-			'page_title' => 'Areas of Expertise Options',
-			'menu_title' => 'Clinical Areas of Expertise',
-			'menu_slug' => 'uamswp-fad-expertise',
-			'parent_slug' => 'fad-settings',
-			'capability' => 'manage_options',
-			'redirect' => false
-		));
+    acf_add_options_sub_page([
+        'page_title' => 'Areas of Expertise Options',
+        'menu_title' => 'Clinical Areas of Expertise',
+        'menu_slug' => 'uamswp-fad-expertise',
+        'parent_slug' => 'fad-settings',
+        'capability' => 'manage_options',
+        'redirect' => false,
+    ]);
 
-		acf_add_options_sub_page(array(
-			'page_title' => 'Clinical Resource Options',
-			'menu_title' => 'Clinical Resources',
-			'menu_slug' => 'uamswp-fad-resources',
-			'parent_slug' => 'fad-settings',
-			'capability' => 'manage_options',
-			'redirect' => false
-		));
+    acf_add_options_sub_page([
+        'page_title' => 'Clinical Resource Options',
+        'menu_title' => 'Clinical Resources',
+        'menu_slug' => 'uamswp-fad-resources',
+        'parent_slug' => 'fad-settings',
+        'capability' => 'manage_options',
+        'redirect' => false,
+    ]);
 
-		acf_add_options_sub_page(array(
-			'page_title' => 'Conditions and Treatments Options',
-			'menu_title' => 'Conditions and Treatments',
-			'menu_slug' => 'uamswp-fad-tax',
-			'parent_slug' => 'fad-settings',
-			'capability' => 'manage_options',
-			'redirect' => false
-		));
+    acf_add_options_sub_page([
+        'page_title' => 'Conditions and Treatments Options',
+        'menu_title' => 'Conditions and Treatments',
+        'menu_slug' => 'uamswp-fad-tax',
+        'parent_slug' => 'fad-settings',
+        'capability' => 'manage_options',
+        'redirect' => false,
+    ]);
 
-		acf_add_options_sub_page(array(
-			'page_title' => 'MyChart Open Scheduling Options',
-			'menu_title' => 'MyChart Open Scheduling',
-			'menu_slug' => 'uamswp-fad-mychart',
-			'parent_slug' => 'fad-settings',
-			'capability' => 'manage_options',
-			'redirect' => false
-		));
+    acf_add_options_sub_page([
+        'page_title' => 'MyChart Open Scheduling Options',
+        'menu_title' => 'MyChart Open Scheduling',
+        'menu_slug' => 'uamswp-fad-mychart',
+        'parent_slug' => 'fad-settings',
+        'capability' => 'manage_options',
+        'redirect' => false,
+    ]);
 
-		acf_add_options_sub_page(array(
-			'page_title' => 'Remove Medical Ontology Options',
-			'menu_title' => 'Remove Medical Ontology',
-			'menu_slug' => 'uamswp-fad-remove-ontology',
-			'parent_slug' => 'fad-settings',
-			'capability' => 'manage_options',
-			'redirect' => false
-		));
+    acf_add_options_sub_page([
+        'page_title' => 'Remove Medical Ontology Options',
+        'menu_title' => 'Remove Medical Ontology',
+        'menu_slug' => 'uamswp-fad-remove-ontology',
+        'parent_slug' => 'fad-settings',
+        'capability' => 'manage_options',
+        'redirect' => false,
+    ]);
 
-	}
+}
 
 // Specify a Google Maps API authentication key in ACF
 
-	function my_acf_google_key() {
+function my_acf_google_key(): void
+{
 
-		$key = get_field('fad_google_key', 'option');
+    $key = get_field('fad_google_key', 'option');
 
-		if ($key) {
+    if ($key) {
 
-			acf_update_setting('google_api_key', $key);
+        acf_update_setting('google_api_key', $key);
 
-		}
+    }
 
-		// echo "<script> console.log('PHP: ".$key ."');</script>";
+    // echo "<script> console.log('PHP: ".$key ."');</script>";
 
-	}
+}
 
-	add_action('acf/init', 'my_acf_google_key');
+add_action('acf/init', 'my_acf_google_key');
 
 // The MyChart options are written into script and iframe URLs on public location pages; accept only a hostname and a path segment.
 
-	function uamswp_fad_validate_mychart_domain( $valid, $value, $field, $input ) {
-		if ( true !== $valid ) {
-			return $valid;
-		}
-		$value = trim( (string) $value );
-		if ( '' !== $value && ! preg_match( '/^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/i', $value ) ) {
-			return 'Enter a hostname only, such as mychart.example.org, with no scheme, path, or punctuation.';
-		}
-		return $valid;
-	}
-	add_filter( 'acf/validate_value/name=mychart_scheduling_domain', 'uamswp_fad_validate_mychart_domain', 10, 4 );
+function uamswp_fad_validate_mychart_domain($valid, $value, $field, $input)
+{
+    if ($valid !== true) {
+        return $valid;
+    }
 
-	function uamswp_fad_validate_mychart_instance( $valid, $value, $field, $input ) {
-		if ( true !== $valid ) {
-			return $valid;
-		}
-		$value = trim( (string) $value );
-		if ( '' !== $value && ! preg_match( '/^[A-Za-z0-9._-]+$/', $value ) ) {
-			return 'Enter a single path segment, such as MyChartPRD, using letters, numbers, dot, underscore, or dash.';
-		}
-		return $valid;
-	}
-	add_filter( 'acf/validate_value/name=mychart_scheduling_instance', 'uamswp_fad_validate_mychart_instance', 10, 4 );
-	add_filter( 'acf/validate_value/name=mychart_scheduling_linksource', 'uamswp_fad_validate_mychart_domain', 10, 4 );
+    $value = trim((string) $value);
+    if ($value !== '' && ! preg_match('/^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/i', $value)) {
+        return 'Enter a hostname only, such as mychart.example.org, with no scheme, path, or punctuation.';
+    }
+
+    return $valid;
+}
+
+add_filter('acf/validate_value/name=mychart_scheduling_domain', 'uamswp_fad_validate_mychart_domain', 10, 4);
+
+function uamswp_fad_validate_mychart_instance($valid, $value, $field, $input)
+{
+    if ($valid !== true) {
+        return $valid;
+    }
+
+    $value = trim((string) $value);
+    if ($value !== '' && ! preg_match('/^[A-Za-z0-9._-]+$/', $value)) {
+        return 'Enter a single path segment, such as MyChartPRD, using letters, numbers, dot, underscore, or dash.';
+    }
+
+    return $valid;
+}
+
+add_filter('acf/validate_value/name=mychart_scheduling_instance', 'uamswp_fad_validate_mychart_instance', 10, 4);
+add_filter('acf/validate_value/name=mychart_scheduling_linksource', 'uamswp_fad_validate_mychart_domain', 10, 4);

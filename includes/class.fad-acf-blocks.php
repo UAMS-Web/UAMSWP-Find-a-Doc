@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  *
  * Custom ACF Blocks
@@ -11,76 +13,82 @@
  * always render a preview). Returns true after printing the placeholder.
  * Returns false outside block previews ($block / $is_preview not set).
  */
-function uams_fad_block_placeholder( $block = null, $is_preview = false ) {
-    if ( empty( $is_preview ) || empty( $block ) || ! is_array( $block ) ) {
+function uams_fad_block_placeholder($block = null, $is_preview = false): bool
+{
+    if (empty($is_preview) || empty($block) || ! is_array($block)) {
         return false;
     }
-    $data = isset( $block['data'] ) && is_array( $block['data'] ) ? $block['data'] : array();
-    foreach ( $data as $key => $value ) {
-        if ( is_string( $key ) && 0 === strpos( $key, '_' ) ) {
+
+    $data = isset($block['data']) && is_array($block['data']) ? $block['data'] : [];
+    foreach ($data as $key => $value) {
+        if (is_string($key) && strpos($key, '_') === 0) {
             continue;
         }
-        if ( '' !== $value && null !== $value && array() !== $value && false !== $value && '0' !== $value ) {
+
+        if (! in_array($value, ['', null, [], false, '0'], true)) {
             return false;
         }
     }
+
     printf(
         '<div class="uams-block-placeholder" style="padding:1.5rem;border:1px dashed currentColor;text-align:center;"><strong>%s</strong><br>%s</div>',
-        esc_html( ! empty( $block['title'] ) ? $block['title'] : __( 'Find-a-Doc block' ) ),
-        esc_html__( 'Click the pencil icon in the block toolbar to add content.' )
+        esc_html(! empty($block['title']) ? $block['title'] : __('Find-a-Doc block')),
+        esc_html__('Click the pencil icon in the block toolbar to add content.')
     );
+
     return true;
 }
 
 add_action('acf/init', 'uams_fad_register_blocks');
-function uams_fad_register_blocks() {
+function uams_fad_register_blocks(): void
+{
 
     // check function exists.
-    if( function_exists('acf_register_block_type') ) {
-        acf_register_block_type(array(
-            'name'              => 'fad-locations',
-            'title'             => __('UAMS Find-a-Doc Locations'),
-            'description'       => __('Filtered Clinical Locations'),
-            'category'          => 'common',
-            'icon'              => 'location',
-            'keywords'          => array('uams', 'clinical', 'locations', 'clinics'),
+    if (function_exists('acf_register_block_type')) {
+        acf_register_block_type([
+            'name' => 'fad-locations',
+            'title' => __('UAMS Find-a-Doc Locations'),
+            'description' => __('Filtered Clinical Locations'),
+            'category' => 'common',
+            'icon' => 'location',
+            'keywords' => ['uams', 'clinical', 'locations', 'clinics'],
             'acf_block_version' => 3,
-            'align'             => 'full',
-            'render_template'   => UAMS_FAD_PATH . '/templates/blocks/locations.php',
-        ));
-        acf_register_block_type(array(
-            'name'              => 'fad-providers',
-            'title'             => __('UAMS Find-a-Doc Providers'),
-            'description'       => __('Filtered Providers'),
-            'category'          => 'common',
-            'icon'              => 'id',
-            'keywords'          => array('uams', 'providers', 'doctors', 'physicians'),
+            'align' => 'full',
+            'render_template' => UAMS_FAD_PATH.'/templates/blocks/locations.php',
+        ]);
+        acf_register_block_type([
+            'name' => 'fad-providers',
+            'title' => __('UAMS Find-a-Doc Providers'),
+            'description' => __('Filtered Providers'),
+            'category' => 'common',
+            'icon' => 'id',
+            'keywords' => ['uams', 'providers', 'doctors', 'physicians'],
             'acf_block_version' => 3,
-            'align'             => 'full',
-            'render_template'   => UAMS_FAD_PATH . 'templates/blocks/providers.php',
-        ));
-        acf_register_block_type(array(
+            'align' => 'full',
+            'render_template' => UAMS_FAD_PATH.'templates/blocks/providers.php',
+        ]);
+        acf_register_block_type([
             'name' => 'fad-recognitions',
             'title' => __('Provider Recognition List'),
             'description' => __('List of providers from a Recognition List'),
             'category' => 'common',
             'icon' => 'awards',
-            'keywords' => array('uams', 'providers', 'doctors', 'awards'),
+            'keywords' => ['uams', 'providers', 'doctors', 'awards'],
             'acf_block_version' => 3,
             'align' => '',
-            'render_template' => UAMS_FAD_PATH . 'templates/blocks/recognitions.php',
-        ));
+            'render_template' => UAMS_FAD_PATH.'templates/blocks/recognitions.php',
+        ]);
     }
 }
 
-if( function_exists('acf_add_local_field_group') ):
+if (function_exists('acf_add_local_field_group')) {
 
     // Add local field group for UAMS Location Block
-    acf_add_local_field_group(array(
+    acf_add_local_field_group([
         'key' => 'group_block_fad_locations',
         'title' => 'Block: UAMS FaD Locations',
-        'fields' => array(
-            array(
+        'fields' => [
+            [
                 'key' => 'field_block_fad_locations_intro',
                 'label' => '',
                 'name' => '',
@@ -88,16 +96,16 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'message' => '<h2>UAMS Clinical Locations</h2>',
                 'new_lines' => '',
                 'esc_html' => 0,
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_locations_heading',
                 'label' => 'Heading',
                 'name' => 'block_fad_locations_heading',
@@ -105,18 +113,18 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_locations_description',
                 'label' => 'Body',
                 'name' => 'block_fad_locations_description',
@@ -124,18 +132,18 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'maxlength' => '',
                 'rows' => '',
                 'new_lines' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_locations_filter_intro',
                 'label' => '',
                 'name' => '',
@@ -143,16 +151,16 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'message' => '<h3>Filtering</h3><p>You must fill in at least one filter. Otherwise the block will not be rendered.</p>',
                 'new_lines' => '',
                 'esc_html' => 0,
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_locations_filter_type',
                 'label' => 'Location Type(s)',
                 'name' => 'block_fad_locations_filter_type',
@@ -160,11 +168,11 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'taxonomy' => 'location_type',
                 'field_type' => 'multi_select',
                 'allow_null' => 0,
@@ -173,8 +181,8 @@ if( function_exists('acf_add_local_field_group') ):
                 'load_terms' => 0,
                 'return_format' => 'id',
                 'multiple' => 0,
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_locations_filter_aoe',
                 'label' => 'Areas of Expertise',
                 'name' => 'block_fad_locations_filter_aoe',
@@ -182,15 +190,15 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'taxonomy' => '',
-                'post_type' => array(
+                'post_type' => [
                     0 => 'expertise',
-                ),
+                ],
                 'field_type' => 'multi_select',
                 'allow_null' => 0,
                 'add_term' => 0,
@@ -199,8 +207,8 @@ if( function_exists('acf_add_local_field_group') ):
                 'return_format' => 'id',
                 'multiple' => 1,
                 'ui' => 1,
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_locations_filter_region',
                 'label' => 'Region(s)',
                 'name' => 'block_fad_locations_filter_region',
@@ -208,11 +216,11 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'taxonomy' => 'region',
                 'field_type' => 'multi_select',
                 'allow_null' => 0,
@@ -221,8 +229,8 @@ if( function_exists('acf_add_local_field_group') ):
                 'load_terms' => 0,
                 'return_format' => 'id',
                 'multiple' => 0,
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_locations_filter_ids',
                 'label' => 'Locations',
                 'name' => 'block_fad_locations_filter_ids',
@@ -230,24 +238,24 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => 'Will be included regardless of other filters.',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
-                'post_type' => array(
+                ],
+                'post_type' => [
                     0 => 'location',
-                ),
+                ],
                 'taxonomy' => '',
-                'filters' => array(
+                'filters' => [
                     0 => 'search',
-                ),
+                ],
                 'elements' => '',
                 'min' => '',
                 'max' => '',
                 'return_format' => 'id',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_locations_display',
                 'label' => '',
                 'name' => '',
@@ -255,16 +263,16 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'message' => '<h3>Display Settings</h3>',
                 'new_lines' => '',
                 'esc_html' => 0,
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_locations_background_color',
                 'label' => 'Background Color',
                 'name' => 'block_fad_locations_background_color',
@@ -272,26 +280,26 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
-                'choices' => array(
+                ],
+                'choices' => [
                     'bg-white' => 'White',
                     'bg-gray' => 'Gray',
-                ),
-                'default_value' => array(
+                ],
+                'default_value' => [
                     0 => 'bg-white',
-                ),
+                ],
                 'allow_null' => 0,
                 'multiple' => 0,
                 'ui' => 0,
                 'return_format' => 'value',
                 'ajax' => 0,
                 'placeholder' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_locations_more',
                 'label' => 'Include link to something?',
                 'name' => 'block_fad_locations_more',
@@ -299,133 +307,133 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'acfe_permissions' => '',
                 'message' => '',
                 'default_value' => 0,
                 'ui' => 1,
                 'ui_on_text' => '',
                 'ui_off_text' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_locations_more_text',
                 'label' => 'Heading',
                 'name' => 'block_fad_locations_more_text',
                 'type' => 'text',
                 'instructions' => '',
                 'required' => 1,
-                'conditional_logic' => array(
-                    array(
-                        array(
+                'conditional_logic' => [
+                    [
+                        [
                             'field' => 'field_block_fad_locations_more',
                             'operator' => '==',
                             'value' => '1',
-                        ),
-                    ),
-                ),
-                'wrapper' => array(
+                        ],
+                    ],
+                ],
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'acfe_permissions' => '',
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_locations_more_button_text',
                 'label' => 'Button Text',
                 'name' => 'block_fad_locations_more_button_text',
                 'type' => 'text',
                 'instructions' => '',
                 'required' => 1,
-                'conditional_logic' => array(
-                    array(
-                        array(
+                'conditional_logic' => [
+                    [
+                        [
                             'field' => 'field_block_fad_locations_more',
                             'operator' => '==',
                             'value' => '1',
-                        ),
-                    ),
-                ),
-                'wrapper' => array(
+                        ],
+                    ],
+                ],
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_locations_more_button_url',
                 'label' => 'Button URL',
                 'name' => 'block_fad_locations_more_button_url',
                 'type' => 'link',
                 'instructions' => '',
                 'required' => 1,
-                'conditional_logic' => array(
-                    array(
-                        array(
+                'conditional_logic' => [
+                    [
+                        [
                             'field' => 'field_block_fad_locations_more',
                             'operator' => '==',
                             'value' => '1',
-                        ),
-                    ),
-                ),
-                'wrapper' => array(
+                        ],
+                    ],
+                ],
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'return_format' => 'array',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_locations_more_button_description',
                 'label' => 'Button Link Description',
                 'name' => 'block_fad_locations_more_button_description',
                 'type' => 'text',
                 'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
                 'required' => 1,
-                'conditional_logic' => array(
-                    array(
-                        array(
+                'conditional_logic' => [
+                    [
+                        [
                             'field' => 'field_block_fad_locations_more',
                             'operator' => '==',
                             'value' => '1',
-                        ),
-                    ),
-                ),
-                'wrapper' => array(
+                        ],
+                    ],
+                ],
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '',
-            ),
-        ),
-        'location' => array(
-            array(
-                array(
+            ],
+        ],
+        'location' => [
+            [
+                [
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/fad-locations',
-                ),
-            ),
-        ),
+                ],
+            ],
+        ],
         'menu_order' => 0,
         'position' => 'normal',
         'style' => 'default',
@@ -434,14 +442,14 @@ if( function_exists('acf_add_local_field_group') ):
         'hide_on_screen' => '',
         'active' => true,
         'description' => '',
-    ));
+    ]);
 
     // Add local field group for UAMS Provider Block
-    acf_add_local_field_group(array(
+    acf_add_local_field_group([
         'key' => 'group_block_fad_providers',
         'title' => 'Block: UAMS FaD Providers',
-        'fields' => array(
-            array(
+        'fields' => [
+            [
                 'key' => 'field_block_fad_providers_intro',
                 'label' => '',
                 'name' => '',
@@ -449,16 +457,16 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'message' => '<h2>UAMS Clinical Providers</h2>',
                 'new_lines' => '',
                 'esc_html' => 0,
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_providers_heading',
                 'label' => 'Heading',
                 'name' => 'block_fad_providers_heading',
@@ -466,18 +474,18 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_providers_description',
                 'label' => 'Body',
                 'name' => 'block_fad_providers_description',
@@ -485,18 +493,18 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'maxlength' => '',
                 'rows' => '',
                 'new_lines' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_providers_filter_intro',
                 'label' => '',
                 'name' => '',
@@ -504,16 +512,16 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'message' => '<h3>Filtering</h3><p>You must fill in at least one filter. Otherwise the block will not be rendered.</p>',
                 'new_lines' => '',
                 'esc_html' => 0,
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_providers_filter_aoe',
                 'label' => 'Areas of Expertise',
                 'name' => 'block_fad_providers_filter_aoe',
@@ -521,15 +529,15 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'taxonomy' => '',
-                'post_type' => array(
+                'post_type' => [
                     0 => 'expertise',
-                ),
+                ],
                 'field_type' => 'multi_select',
                 'allow_null' => 0,
                 'add_term' => 0,
@@ -538,8 +546,8 @@ if( function_exists('acf_add_local_field_group') ):
                 'return_format' => 'id',
                 'multiple' => 1,
                 'ui' => 1,
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_providers_filter_location',
                 'label' => 'Location(s)',
                 'name' => 'block_fad_providers_filter_location',
@@ -547,15 +555,15 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'taxonomy' => '',
-                'post_type' => array(
+                'post_type' => [
                     0 => 'location',
-                ),
+                ],
                 'field_type' => 'multi_select',
                 'allow_null' => 0,
                 'add_term' => 0,
@@ -564,8 +572,8 @@ if( function_exists('acf_add_local_field_group') ):
                 'return_format' => 'id',
                 'multiple' => 1,
                 'ui' => 1,
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_providers_filter_region',
                 'label' => 'Region(s)',
                 'name' => 'block_fad_providers_filter_region',
@@ -573,11 +581,11 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'taxonomy' => 'region',
                 'field_type' => 'multi_select',
                 'allow_null' => 0,
@@ -586,8 +594,8 @@ if( function_exists('acf_add_local_field_group') ):
                 'load_terms' => 0,
                 'return_format' => 'id',
                 'multiple' => 0,
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_providers_filter_ids',
                 'label' => 'Providers',
                 'name' => 'block_fad_providers_filter_ids',
@@ -595,24 +603,24 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
-                'post_type' => array(
+                ],
+                'post_type' => [
                     0 => 'provider',
-                ),
+                ],
                 'taxonomy' => '',
-                'filters' => array(
+                'filters' => [
                     0 => 'search',
-                ),
+                ],
                 'elements' => '',
                 'min' => '',
                 'max' => '',
                 'return_format' => 'id',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_providers_display',
                 'label' => '',
                 'name' => '',
@@ -620,16 +628,16 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'message' => '<h3>Display Settings</h3>',
                 'new_lines' => '',
                 'esc_html' => 0,
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_providers_count',
                 'label' => 'Cards Per Row',
                 'name' => 'block_fad_providers_count',
@@ -637,28 +645,28 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => 'Set the maximum number of provider cards per row at the largest viewport size. Recommend only changing this value to prevent orphaned cards.',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
-                'choices' => array(
+                ],
+                'choices' => [
                     '4' => '4',
                     '6' => '6',
                     '8' => '8',
                     '10' => '10',
                     '12' => '12',
-                ),
-                'default_value' => array(
+                ],
+                'default_value' => [
                     0 => '12',
-                ),
+                ],
                 'allow_null' => 0,
                 'multiple' => 0,
                 'ui' => 0,
                 'return_format' => 'value',
                 'ajax' => 0,
                 'placeholder' => '',
-            ),
+            ],
             // array(
             //     'key' => 'field_block_fad_providers_filter_type',
             //     'label' => 'Provider Type(s)',
@@ -729,7 +737,7 @@ if( function_exists('acf_add_local_field_group') ):
             //     'return_format' => 'id',
             //     'multiple' => 0,
             // ),
-            array(
+            [
                 'key' => 'field_block_fad_providers_background_color',
                 'label' => 'Background Color',
                 'name' => 'block_fad_providers_background_color',
@@ -737,26 +745,26 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
-                'choices' => array(
+                ],
+                'choices' => [
                     'bg-white' => 'White',
                     'bg-gray' => 'Gray',
-                ),
-                'default_value' => array(
+                ],
+                'default_value' => [
                     0 => 'bg-white',
-                ),
+                ],
                 'allow_null' => 0,
                 'multiple' => 0,
                 'ui' => 0,
                 'return_format' => 'value',
                 'ajax' => 0,
                 'placeholder' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_providers_more',
                 'label' => 'Include link to something?',
                 'name' => 'block_fad_providers_more',
@@ -764,133 +772,133 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'acfe_permissions' => '',
                 'message' => '',
                 'default_value' => 0,
                 'ui' => 1,
                 'ui_on_text' => '',
                 'ui_off_text' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_providers_more_text',
                 'label' => 'Heading',
                 'name' => 'block_fad_providers_more_text',
                 'type' => 'text',
                 'instructions' => '',
                 'required' => 1,
-                'conditional_logic' => array(
-                    array(
-                        array(
+                'conditional_logic' => [
+                    [
+                        [
                             'field' => 'field_block_fad_providers_more',
                             'operator' => '==',
                             'value' => '1',
-                        ),
-                    ),
-                ),
-                'wrapper' => array(
+                        ],
+                    ],
+                ],
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'acfe_permissions' => '',
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_providers_more_button_text',
                 'label' => 'Button Text',
                 'name' => 'block_fad_providers_more_button_text',
                 'type' => 'text',
                 'instructions' => '',
                 'required' => 1,
-                'conditional_logic' => array(
-                    array(
-                        array(
+                'conditional_logic' => [
+                    [
+                        [
                             'field' => 'field_block_fad_providers_more',
                             'operator' => '==',
                             'value' => '1',
-                        ),
-                    ),
-                ),
-                'wrapper' => array(
+                        ],
+                    ],
+                ],
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_providers_more_button_url',
                 'label' => 'Button URL',
                 'name' => 'block_fad_providers_more_button_url',
                 'type' => 'link',
                 'instructions' => '',
                 'required' => 1,
-                'conditional_logic' => array(
-                    array(
-                        array(
+                'conditional_logic' => [
+                    [
+                        [
                             'field' => 'field_block_fad_providers_more',
                             'operator' => '==',
                             'value' => '1',
-                        ),
-                    ),
-                ),
-                'wrapper' => array(
+                        ],
+                    ],
+                ],
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'return_format' => 'array',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_block_fad_providers_more_button_description',
                 'label' => 'Button Link Description',
                 'name' => 'block_fad_providers_more_button_description',
                 'type' => 'text',
                 'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
                 'required' => 1,
-                'conditional_logic' => array(
-                    array(
-                        array(
+                'conditional_logic' => [
+                    [
+                        [
                             'field' => 'field_block_fad_providers_more',
                             'operator' => '==',
                             'value' => '1',
-                        ),
-                    ),
-                ),
-                'wrapper' => array(
+                        ],
+                    ],
+                ],
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '',
-            ),
-        ),
-        'location' => array(
-            array(
-                array(
+            ],
+        ],
+        'location' => [
+            [
+                [
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/fad-providers',
-                ),
-            ),
-        ),
+                ],
+            ],
+        ],
         'menu_order' => 0,
         'position' => 'normal',
         'style' => 'default',
@@ -899,14 +907,14 @@ if( function_exists('acf_add_local_field_group') ):
         'hide_on_screen' => '',
         'active' => true,
         'description' => '',
-    ));
+    ]);
 
     // Add local field group for UAMS Recognition List Block
-    acf_add_local_field_group( array(
+    acf_add_local_field_group([
         'key' => 'group_block_fad_recognition',
         'title' => 'Block: UAMS FaD Recognition List',
-        'fields' => array(
-            array(
+        'fields' => [
+            [
                 'key' => 'field_block_fad_locations_intro',
                 'label' => '',
                 'name' => '',
@@ -915,17 +923,17 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'relevanssi_exclude' => 0,
                 'message' => '<h2>UAMS Recognition List</h2>',
                 'new_lines' => 'wpautop',
                 'esc_html' => 0,
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_select_recognition_list',
                 'label' => 'Recognition List',
                 'name' => 'select_recognition_list',
@@ -934,11 +942,11 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'taxonomy' => 'recognition',
                 'add_term' => 0,
                 'save_terms' => 0,
@@ -951,17 +959,17 @@ if( function_exists('acf_add_local_field_group') ):
                 'multiple' => 0,
                 'min' => '',
                 'max' => '',
-            ),
-        ),
-        'location' => array(
-            array(
-                array(
+            ],
+        ],
+        'location' => [
+            [
+                [
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/fad-recognitions',
-                ),
-            ),
-        ),
+                ],
+            ],
+        ],
         'menu_order' => 0,
         'position' => 'normal',
         'style' => 'default',
@@ -970,6 +978,6 @@ if( function_exists('acf_add_local_field_group') ):
         'hide_on_screen' => '',
         'active' => true,
         'description' => '',
-    ) );
+    ]);
 
-endif;
+}
