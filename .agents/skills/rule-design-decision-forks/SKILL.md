@@ -1,0 +1,92 @@
+---
+name: rule-design-decision-forks
+description: "Presenting design-decision forks (lead with a compare/contrast)."
+disable-model-invocation: true
+---
+<!--
+  Synced from UAMS-Web/uams-claude-skills: shared/.claude/rules/design-decision-forks.md
+  Edit it there, not here; the next sync overwrites this copy.
+  Delivered to this repository through the profile(s): core.
+-->
+# Rule — presenting design-decision forks (lead with a compare/contrast)
+
+When an issue is `hitl` because it carries a genuine **design fork** (an unresolved choice a human must make), or any time live work surfaces a fork you should not decide alone, **do the analysis first and hand the human a complete, comparable packet, then ask.** Lead with the compare/contrast up front, in the same turn; don't wait to be asked.
+
+**A ticket in this state carries the `decision-fork` label**, alongside `hitl`. It marks a ticket for what it is rather than for how long it stays that way: the label stays on when the fork is decided (see *The `decision-fork` label* below).
+
+This is the *decision* flavor of [`hitl`](../writing-issues/SKILL.md). It composes with the `afk`/`hitl` execution-mode triage: an issue earns `hitl` when completing it needs a human **decision** (a fork) or a real-world **action**; this rule governs how you drive a fork to resolution and flip it to `afk`.
+
+This repository does not carry the `afk`, `hitl` or `decision-fork` labels. The process below applies all the same; where it applies, keeps or flips a label, record the state in the issue body instead, as the [`writing-issues`](../writing-issues/SKILL.md) skill describes.
+
+## The core principle
+
+A human decides a fork by **weighing trade-offs across dimensions**, not from a list of one-line option labels. So your job is NOT to ask "which do you want, A or B?"; it's to do the analysis first and hand over a complete, comparable packet, *then* ask. Never let an interactive prompt be the first substantial thing the human sees, and never compress the analysis to make room for the prompt. The prompt is the last step, not the deliverable.
+
+## The packet: message text, BEFORE any interactive prompt, in this order
+
+1. **What the issue is, and what's already pinned/settled.** State the decision at stake and explicitly name what is NOT up for grabs (the already-decided constraints, the chosen format, the settled neighbors), so nothing settled gets relitigated. Re-opening a closed decision wastes the human's time.
+2. **Any verified mechanics the tables rest on.** If your comparison depends on how something actually behaves, verify it (read the code, run it) and state it here; the analysis must stand on facts, not speculation.
+3. **Trap → reframe.** Name the naive trap (the framing that makes this look harder, binary, or unsolvable than it is), then the reframe that dissolves it. This is the move that makes the options legible.
+4. **For each genuine fork, a comparison table + a synthesis:**
+   - A **compact comparison table**: *rows are the dimensions that actually decide it* (model-fit, security, cost, complexity, failure mode, drift, reversibility, etc.), *columns are the options*. Keep cells terse (a few words). The evidence and reasoning belong in the prose below the table, not crammed into cells.
+   - Immediately after the table, a **one-paragraph synthesis that ends in a recommendation.** Don't just enumerate; take a position and say why.
+5. **What the decision produces.** State exactly where the outcome will land once decided (see *Where the decision lands* below): that the issue's label flips `hitl` → `afk`, and that any build work moves into follow-up ticket(s) this ticket then closes having only filed (see *What a `decision-fork` ticket delivers* below). Never build work completed in this same ticket.
+6. **Honest residual.** What stays open or uncertain *even after* this is decided: the empirical unknowns, the accepted gaps. Don't pretend the decision closes more than it does.
+
+## What a `decision-fork` ticket delivers, and what it does not
+
+**Its deliverables are the decision, recorded, and the follow-up tickets it produces, nothing else.** Build work that depends on the decision does not belong on this ticket. It goes into follow-up tickets, blocked by the fork through the native dependency edge the [`writing-issues`](../writing-issues/SKILL.md) sub-issues section already uses (`gh api -X POST repos/{o}/{r}/issues/<blocked>/dependencies/blocked_by -F issue_id=$id`); never a textual relationship line in either body. `UAMS-Web/uams-statamic#2097` settled that dependencies are native edges only.
+
+**The reason is latency rather than tidiness.** A fork ticket that also carries build work holds two deliverables at once: one nobody *can* start, because it waits on a human, and one nobody *should* start, because it sits behind the first. The decision half resolves in a conversation; the build half resolves in an afternoon. Fused, the fast one silently inherits the slow one's latency, and nothing in the tracker shows that it has.
+
+Observed on `UAMS-Web/uams-statamic#2159`, which carried a fork about how two copies of a skill stay in sync *and* the build work to update the copy that loads. The build half needed no decision, sat behind one for days, and shipped only after being split out as `UAMS-Web/uams-statamic#2171` on an operator instruction. Under this rule it would have been a follow-up from the outset.
+
+**So a fork ticket's acceptance criteria describe a decision being recorded and its follow-ups existing, never a build being done.** If you are writing a criterion that names a file to change, or an item only a working feature could satisfy, it belongs on a follow-up.
+
+## Only then: the interactive prompt
+
+After the full packet is on screen, present the interactive decision prompt (the `AskUserQuestion` tool):
+
+- **List the recommended option first**, and label it "(Recommended)" in the option text, consistent with the synthesis you just argued.
+- One prompt per genuine fork; if the issue has several independent forks, ask them together (multiple questions in one prompt), each recommended option first.
+- Keep option labels short; the reasoning already lives in the packet above.
+- The human can always choose "Other" and write their own answer; your options are a starting point, not a cage. Don't force a false binary; if there's a real third path, offer it.
+- Use the prompt ONLY for a decision that is genuinely the human's to make. If you can resolve it from the issue, the code, or a sensible default, just decide and proceed; don't manufacture a fork.
+
+## Where the decision lands once made
+
+The canonical cross-ticket decision log is `docs/DECISIONS.md`; the **GitHub tracker remains the system of record for a single ticket's status**. A decision lands in three places:
+
+- **What + why + rejected alternatives** → an entry in `docs/DECISIONS.md` (the terse, durable cross-ticket index) **and** a `## Decision` (or `## Chosen approach`) section of the GitHub issue body (the per-ticket detail). Keep the two consistent: the index says what was decided, the issue says how the argument ran.
+- **The full reasoning** → the relevant `docs/` companion when the decision touches a documented design area; otherwise the issue's `## Approach` section carries it. **The standing consequence** → `AGENTS.md` when the decision changes how the whole repo is built: a design rule, a hook ordering, a toolchain floor. Keep that line short; `docs/DECISIONS.md` carries the rejected alternatives and the issue carries the reasoning.
+- **Trim the open-question backlog** → the tracker plus the project board: retire the issue's `## Questions to resolve` / `## Decisions to resolve` section, tick the "decision recorded" acceptance-criteria item, and file a follow-up issue for any genuine residual (point to it; don't restate the resolution there).
+
+## After the human decides
+
+1. **Record the verdict** (*what was decided, why, and the rejected alternatives*) in `docs/DECISIONS.md` and on the issue (and in the `docs/` companion or `AGENTS.md` where one applies); trim the backlog to any genuine residual.
+2. **File the follow-up ticket(s) the decision produces**, one per independently shippable build slice, each carrying its own `afk`/`hitl` label (most will be `afk`, since the fork that would have made them `hitl` is now decided). Set each as `blocked_by` this ticket through the native dependency edge, never a relationship line in either body.
+3. **Flip this ticket's own label `hitl` → `afk` in the same change**, and reconcile its body: retire the "Questions/Decisions to resolve" section, tick the "decision recorded" acceptance-criteria item, and confirm the follow-up criterion now points at real ticket numbers. `decision-fork` stays (see the next section).
+4. **Close this ticket.** Its own deliverables (the decision and the follow-ups) are done. The build itself happens in the follow-up tickets filed in step 2, never here.
+
+Make the flip and the filing in the same change that decides the fork, the same discipline the `blocked_by` edges are held to.
+
+## The `decision-fork` label: applied at the fork, kept after the flip
+
+This is the one place the label's lifecycle is written down; the [`writing-issues`](../writing-issues/SKILL.md) skill points here.
+
+- **Applied** alongside `hitl` when an issue's completion needs a human decision between real alternatives with trade-offs, which is the decision flavor this rule governs.
+- **Kept** when the fork is decided and the issue flips `hitl` → `afk`. Only the execution-mode label changes. So `afk` plus `decision-fork` is a normal, correct state: it reads as *decided through a fork*.
+
+**Why it stays.** The label records provenance, not routing state. `hitl` is the label that marks a decision still waiting on a human. Removing `decision-fork` on the flip would only repeat what the `hitl` → `afk` change already says, and would lose the one signal that the ticket went through this process.
+
+## What this is NOT
+
+- Not for an `afk` issue: those have no fork; just build to the pinned spec.
+- Not the *action* flavor of `hitl`. An issue that is `hitl` only because it needs a real-world step (a deploy, provisioning, recruiting, installing: work outside the repo) has **no fork to surface**; manufacturing "decisions" on it misleads a future agent. This rule is for the decision flavor.
+- Not a way to offload routine choices with conventional defaults onto the human; those you decide and mention in passing.
+- Not a prompt thrown up cold; the analysis packet always comes first.
+- Not a reopening of how dependencies are expressed. `UAMS-Web/uams-statamic#2097` settled that as native edges only, never a textual relationship line in a body. *What a `decision-fork` ticket may contain* is a different question from *how a dependency is recorded*, and this file only answers the first.
+
+## The DRY line
+
+This file is the standing statement of the process, including what a `decision-fork` ticket may deliver and the label's lifecycle. The [`writing-issues`](../writing-issues/SKILL.md) skill's `hitl` execution-mode bullet and its `decision-fork` label entry **point here rather than restating this**; the `AskUserQuestion` tool description holds the prompt mechanics. Don't restate either.

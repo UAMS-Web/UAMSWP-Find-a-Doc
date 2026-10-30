@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * The theme inside a real WordPress.
+ *
+ * @see functions.php
+ */
+
+declare(strict_types=1);
+
+it('is the active theme', function (): void {
+    expect(get_template())->toBe(basename(dirname(__DIR__, 2)));
+});
+
+it('declares title-tag support once the theme is set up', function (): void {
+    expect(has_action('after_setup_theme', 'example_theme_setup'))->toBe(10)
+        ->and(current_theme_supports('title-tag'))->toBeTrue();
+});

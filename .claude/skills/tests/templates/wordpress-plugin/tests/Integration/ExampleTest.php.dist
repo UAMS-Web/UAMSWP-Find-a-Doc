@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * The plugin inside a real WordPress: what the Unit suite's mocks cannot see.
+ *
+ * @see example-plugin.php
+ * @see includes/functions.php
+ */
+
+declare(strict_types=1);
+
+use ExamplePlugin\Tests\Support\IntegrationTestCase;
+
+it('hooks the read-more link to excerpt_more', function (): void {
+    expect(has_filter('excerpt_more', 'example_plugin_read_more_link'))->toBe(10);
+});
+
+it('links the excerpt to the post the loop is on', function (): void {
+    $postId = IntegrationTestCase::factory()->post->create();
+
+    $this->go_to((string) get_permalink($postId));
+
+    try {
+        the_post();
+
+        expect(apply_filters('excerpt_more', ' [&hellip;]'))
+            ->toBe(' <a class="example-plugin-more" href="'.esc_url((string) get_permalink($postId)).'">Read more</a>');
+    } finally {
+        wp_reset_postdata();
+    }
+});

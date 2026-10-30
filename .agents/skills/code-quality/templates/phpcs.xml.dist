@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+  Shared phpcs configuration for a WordPress repository that keeps WordPressCS
+  beside Pint (UAMS-Web/uams-claude-skills#10). Only the security sniffs are
+  enabled: output escaping, nonce verification, input validation and
+  sanitization, safe redirects, prepared SQL. Pint has no equivalent of these.
+
+  Every formatting sniff is left out so phpcs and Pint do not fight: formatting
+  is Pint's, with the `laravel` preset. Do not add `WordPress`, `WordPress-Core`
+  or `WordPress-Extra` back, and do not run `phpcbf`.
+
+  Development dependencies (composer require, as development dependencies):
+  `wp-coding-standards/wpcs` and `dealerdirect/phpcodesniffer-composer-installer`,
+  with `dealerdirect/phpcodesniffer-composer-installer: true` under
+  `config.allow-plugins` in composer.json.
+
+  Copy to the repository root as `phpcs.xml.dist` and fill in every PLACEHOLDER.
+-->
+<ruleset name="UAMS-Web WordPress security sniffs">
+    <description>WordPressCS security sniffs only; formatting belongs to Pint.</description>
+
+    <!-- PLACEHOLDER: the directories and files holding first-party PHP. In a
+         fork of a vendor plugin, only the paths that hold our modifications. -->
+    <file>.</file>
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>node_modules/*</exclude-pattern>
+    <exclude-pattern>tests/*</exclude-pattern>
+
+    <arg name="extensions" value="php"/>
+    <arg value="sp"/>
+
+    <!-- The whole WordPress.Security category: EscapeOutput, NonceVerification,
+         ValidatedSanitizedInput, SafeRedirect, PluginMenuSlug. -->
+    <rule ref="WordPress.Security"/>
+
+    <!-- SQL injection: `$wpdb` queries use `prepare()` with correct placeholders. -->
+    <rule ref="WordPress.DB.PreparedSQL"/>
+    <rule ref="WordPress.DB.PreparedSQLPlaceholders"/>
+
+    <!-- Optional: capability checks name real capabilities. Keep when the
+         repository already runs it; list its custom capabilities here, as
+         uamswp-mcp does. -->
+    <!--
+    <rule ref="WordPress.WP.Capabilities">
+        <properties>
+            <property name="custom_capabilities" type="array">
+                <element value="edit_my_things"/>
+            </property>
+        </properties>
+    </rule>
+    -->
+
+    <!-- PLACEHOLDER: the lowest WordPress version the repository supports; the
+         security sniffs use it to know which core functions exist. -->
+    <config name="minimum_supported_wp_version" value="6.9"/>
+</ruleset>

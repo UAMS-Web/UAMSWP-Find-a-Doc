@@ -1,0 +1,35 @@
+{
+    "$comment": [
+        "Merge these keys into the plugin's composer.json; this file is not a composer.json of its own.",
+        "Versions are the current releases as of 2026-10-02 (repo.packagist.org).",
+        "pestphp/pest ^3.8 runs on PHP 8.2 and later (PHPUnit 11). Raise it to ^4.7 (PHP 8.3, PHPUnit 12) when the suite's PHP is 8.3 or later. Do not raise it to ^5 while the plugin has an Integration suite: Pest 5 requires PHPUnit 13, and yoast/phpunit-polyfills 4.0.0, which the WordPress test suite requires, supports PHPUnit 7.5 to 9, 11 and 12 only.",
+        "Do not pin config.platform.php to the supported floor. Tooling resolves on the developer's PHP; the floor belongs in require.php (Rector and PHPStan read it). Same rule as the code-quality skill. Keep an existing platform pin only when the repository already needs one for another reason (for example a test-toolchain pin).",
+        "wp-phpunit/wp-phpunit follows WordPress' own versions. Pin it to the minor the installs run (wp core version), so the test library matches the core it boots.",
+        "A plugin with no composer.json gets one holding these keys plus name, description, type and license, and a require block holding only php (the supported floor, which Rector and PHPStan read): development dependencies only, so nothing is installed into production."
+    ],
+    "require-dev": {
+        "brain/monkey": "^2.7",
+        "pestphp/pest": "^3.8",
+        "wp-phpunit/wp-phpunit": "~7.1.0",
+        "yoast/phpunit-polyfills": "^4.0"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "test": [
+            "@test:unit",
+            "@test:integration"
+        ],
+        "test:unit": "pest --testsuite=Unit",
+        "test:integration": "pest --testsuite=Integration"
+    },
+    "scripts-descriptions": {
+        "test": "Run both suites, each in its own process, so the Unit suite never sees WordPress.",
+        "test:unit": "Run the suite that needs no WordPress and no database.",
+        "test:integration": "Run the suite that boots WordPress through wp-phpunit against the test database."
+    }
+}

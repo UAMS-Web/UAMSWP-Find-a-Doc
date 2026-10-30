@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * example_plugin_read_more_link(), with WordPress mocked.
+ *
+ * @see includes/functions.php
+ */
+
+declare(strict_types=1);
+
+namespace ExamplePlugin\Tests\Unit;
+
+use Brain\Monkey\Functions;
+use ExamplePlugin\Tests\Support\UnitTestCase;
+
+final class ExampleTest extends UnitTestCase
+{
+    /**
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Escaping and translation stubs return their first argument (escaped a
+        // little), which is all the output assertions below need from them.
+        Functions\stubEscapeFunctions();
+        Functions\stubTranslationFunctions();
+    }
+
+    /**
+     * @return void
+     */
+    public function test_links_to_the_current_post(): void
+    {
+        Functions\expect('get_permalink')
+            ->once()
+            ->withNoArgs()
+            ->andReturn('https://example.org/hello-world/');
+
+        $this->assertSame(
+            ' <a class="example-plugin-more" href="https://example.org/hello-world/">Read more</a>',
+            example_plugin_read_more_link(' [&hellip;]')
+        );
+    }
+
+    /**
+     * @dataProvider provides_no_permalink
+     *
+     * @param  mixed  $permalink  What get_permalink() returns when there is no link.
+     * @return void
+     */
+    public function test_keeps_the_marker_when_there_is_no_post_to_link_to($permalink): void
+    {
+        Functions\when('get_permalink')->justReturn($permalink);
+
+        $this->assertSame(' [&hellip;]', example_plugin_read_more_link(' [&hellip;]'));
+    }
+
+    /**
+     * @return array<string, array{0: mixed}>
+     */
+    public function provides_no_permalink()
+    {
+        return [
+            'no post' => [false],
+            'empty permalink' => [''],
+        ];
+    }
+}

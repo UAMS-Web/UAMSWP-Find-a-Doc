@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * example_plugin_read_more_link(), with WordPress mocked.
+ *
+ * @see includes/functions.php
+ */
+
+declare(strict_types=1);
+
+use Brain\Monkey\Functions;
+
+beforeEach(function (): void {
+    // Escaping and translation stubs return their first argument (escaped a
+    // little), which is all the output assertions below need from them.
+    Functions\stubEscapeFunctions();
+    Functions\stubTranslationFunctions();
+});
+
+it('links to the current post', function (): void {
+    Functions\expect('get_permalink')
+        ->once()
+        ->withNoArgs()
+        ->andReturn('https://example.org/hello-world/');
+
+    expect(example_plugin_read_more_link(' [&hellip;]'))
+        ->toBe(' <a class="example-plugin-more" href="https://example.org/hello-world/">Read more</a>');
+});
+
+it('keeps the marker WordPress passed when there is no post to link to', function (mixed $permalink): void {
+    Functions\when('get_permalink')->justReturn($permalink);
+
+    expect(example_plugin_read_more_link(' [&hellip;]'))->toBe(' [&hellip;]');
+})->with([
+    'no post' => [false],
+    'empty permalink' => [''],
+]);

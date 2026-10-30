@@ -1,0 +1,88 @@
+# Shared starting Larastan configuration for Laravel and Statamic applications
+# (UAMS-Web/uams-claude-skills#10). Copy to the repository root as
+# `phpstan.neon.dist` and fill in every PLACEHOLDER.
+#
+# Development dependency: composer require --dev "larastan/larastan:^3.0"
+# (Larastan 3 requires PHP 8.2 and Laravel 11.15 or later.) Larastan boots the
+# application to resolve types, so the `stan` job needs the framework prepared
+# (`.env`, application key) where a bare PHPStan run would not.
+includes:
+    - vendor/larastan/larastan/extension.neon
+    # PHPStan's opt-in preview channel: turns on rules and stricter analysis
+    # that become default in the next major, so the eventual major upgrade
+    # carries no accumulated analysis debt. Ships inside phpstan/phpstan, so it
+    # adds no dependency.
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    # Optional, when the repository uses Mockery:
+    # - vendor/phpstan/phpstan-mockery/extension.neon
+    # Optional, Pest 5 only: teaches PHPStan Pest's functional API, most
+    # importantly the `$this` binding inside it()/test()/beforeEach() closures,
+    # and registers Pest-specific rules. `composer require --dev
+    # pestphp/pest-plugin-phpstan`. It accepts `property.notFound` on test
+    # cases as the price of analyzing Pest's ad-hoc `$this->foo` state.
+    # - vendor/pestphp/pest-plugin-phpstan/extension.neon
+
+parameters:
+    # Checkout-scoped cache. PHPStan's default tmpDir is
+    # `sys_get_temp_dir()/phpstan`: machine-global, so the primary checkout, the
+    # local CI runner's worktree, and every `.claude/worktrees/*` share one
+    # directory. The cache stores ABSOLUTE phar paths, so deleting the worktree
+    # that populated it leaves every stored path dangling, and the next run in a
+    # LIVE checkout dies with internal errors of the form
+    # `"phar://.../.claude/worktrees/1759/vendor/phpstan/phpstan.phar/..." is
+    # not a file`, blaming whichever source file happened to be under analysis.
+    # uams-statamic hit it validating a pull request against a worktree deleted
+    # days earlier, on a test that pull request never touched: indistinguishable
+    # from a real defect in the diff.
+    #
+    # Neither obvious remedy works. `clear-result-cache` drops resultCache.php
+    # and reports success for a directory it has substantially not cleared
+    # (measured 2026-07-31 in uams-statamic: 6,883 files / 1.3 GB left under
+    # `cache/PHPStan/**`, every one naming the dead worktree). `rm -rf` on the
+    # shared directory races whatever concurrent session is mid-analysis in it.
+    #
+    # A RELATIVE path here resolves against THIS file's directory, so each
+    # checkout gets its own cache and a deleted one takes only its own with it.
+    # There is no `--tmp-dir` CLI flag, so the config key is the only lever.
+    # Add `/storage/phpstan` to .gitignore.
+    tmpDir: storage/phpstan
+
+    # PLACEHOLDER: the PHP versions the code must parse and run on. `min` is
+    # the LOWEST version the repository supports (composer.json's `php`
+    # constraint); `max` is the developer's PHP, which the tools run on. Where
+    # the two are the same version, as in uams-statamic (`^8.4` on PHP 8.4),
+    # this block is still worth keeping so the floor is stated. Integers:
+    # 8.2 = 80200, 8.3 = 80300, 8.4 = 80400, 8.5 = 80500.
+    phpVersion:
+        min: 80400
+        max: 80400
+
+    # PLACEHOLDER: the highest level the code passes today. Find it by running
+    # from 0 upward (see the code-quality skill), then raise it by one per
+    # change as findings are fixed, until `max`. Lowering it is a deliberate,
+    # argued change, not a quiet edit to get a red run green.
+    level: 0
+
+    # PLACEHOLDER: first-party PHP. Include tests at the same level as app/:
+    # test bugs (broken mocks, wrong-typed fixtures, dead assertions calling
+    # methods that no longer exist) are real bugs. Once `tests` is in `paths`,
+    # do not also list its helper directories under `scanDirectories`; PHPStan
+    # rejects the duplicate.
+    paths:
+        - app
+        - tests
+
+    # Machine-generated files with no hand-written control flow (large
+    # reference-data enums, for example) go under `analyse` so they stay in the
+    # symbol table and their call sites remain type-checked, while PHPStan skips
+    # walking their bodies. Mirror the list in phpunit.xml's coverage excludes.
+    # excludePaths:
+    #     analyse:
+    #         - app/Enums/Generated.php
+
+    # Add an entry here only for a finding you have argued against, pinned by
+    # `identifier` and `path` (and `message` when the path has more than one
+    # site), with a comment naming the cause. Never a namespace-wide message
+    # pattern. Unmatched entries fail the run (`reportUnmatchedIgnoredErrors`
+    # defaults to true), so a stale ignore reds rather than rots.
+    ignoreErrors: []

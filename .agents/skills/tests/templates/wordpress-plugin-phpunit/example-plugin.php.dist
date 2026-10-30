@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * Plugin Name: Example Plugin
+ * Description: The smallest plugin the PHPUnit test templates can exercise. Replace with the plugin's own main file.
+ * Version:     1.0.0
+ * Requires PHP: 7.4
+ * Text Domain: example-plugin
+ */
+
+declare(strict_types=1);
+
+defined('ABSPATH') || exit;
+
+require_once __DIR__.'/includes/functions.php';
+
+add_filter('excerpt_more', 'example_plugin_read_more_link');
+
+// cspell:ignore ABSPATH

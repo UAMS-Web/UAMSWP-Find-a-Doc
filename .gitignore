@@ -7,3 +7,6 @@ node_modules/
 # macOS #
 ##########
 .DS_Store
+/vendor/
+/.phpunit.result.cache
+/.phpstan/

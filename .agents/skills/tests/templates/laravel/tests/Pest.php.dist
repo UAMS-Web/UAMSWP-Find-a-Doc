@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Pest configuration for a Laravel or Statamic application.
+ */
+
+declare(strict_types=1);
+
+use Tests\TestCase;
+
+/*
+ * Feature tests boot the application through Tests\TestCase. Unit tests do
+ * not: Pest's default base is PHPUnit's own TestCase, which is what a unit
+ * test of a plain class needs, and booting the framework for it only costs
+ * time. A unit test that needs the container declares
+ * `uses(Tests\TestCase::class);` in its own file.
+ *
+ * Add `->use(Illuminate\Foundation\Testing\RefreshDatabase::class)` before
+ * `->in()` once Feature tests touch the database.
+ */
+pest()->extend(TestCase::class)->in('Feature');

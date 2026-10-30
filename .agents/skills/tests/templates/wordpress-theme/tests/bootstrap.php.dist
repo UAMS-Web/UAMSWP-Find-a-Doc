@@ -1,0 +1,82 @@
+<?php
+
+/**
+ * Test bootstrap for a theme.
+ *
+ * The plugin template's tests/bootstrap.php with one difference: the Unit
+ * suite loads functions.php, which a theme cannot avoid, instead of an
+ * includes/ directory of definitions only.
+ */
+
+declare(strict_types=1);
+
+if (defined('EXAMPLE_THEME_TESTS_BOOTSTRAPPED')) {
+    return;
+}
+
+define('EXAMPLE_THEME_TESTS_BOOTSTRAPPED', true);
+
+require_once dirname(__DIR__).'/vendor/autoload.php';
+
+/**
+ * Whether this process runs the Integration suite.
+ *
+ * @param  array<mixed>  $argv
+ */
+function example_theme_tests_want_wordpress(array $argv): bool
+{
+    foreach ($argv as $index => $argument) {
+        if (! is_string($argument)) {
+            continue;
+        }
+
+        if ($argument === '--testsuite=Integration') {
+            return true;
+        }
+
+        if ($argument === '--testsuite' && ($argv[$index + 1] ?? null) === 'Integration') {
+            return true;
+        }
+
+        if (str_contains(str_replace('\\', '/', $argument), 'tests/Integration')) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+$argv = $_SERVER['argv'] ?? [];
+
+if (example_theme_tests_want_wordpress(is_array($argv) ? $argv : [])) {
+    require __DIR__.'/Integration/bootstrap.php';
+
+    return;
+}
+
+require_once dirname(__DIR__).'/vendor/antecedent/patchwork/Patchwork.php';
+
+if (! defined('ABSPATH')) {
+    define('ABSPATH', sys_get_temp_dir().'/example-theme-tests-no-wordpress/');
+}
+
+/*
+ * functions.php registers hooks and calls WordPress at file scope, so it is
+ * loaded inside one Brain Monkey session with what it calls at load time
+ * stubbed. The functions it defines outlive the session; the hooks it
+ * registered are discarded by tearDown(), so every test starts clean, and hook
+ * registration is asserted in the Integration suite.
+ *
+ * Add a stub here for each WordPress function the theme's functions.php calls
+ * at file scope (wp_get_theme(), get_stylesheet_directory_uri(), ...).
+ */
+Brain\Monkey\setUp();
+
+Brain\Monkey\Functions\when('get_template_directory')->justReturn(dirname(__DIR__));
+Brain\Monkey\Functions\when('get_stylesheet_directory')->justReturn(dirname(__DIR__));
+
+require_once dirname(__DIR__).'/functions.php';
+
+Brain\Monkey\tearDown();
+
+// cspell:ignore ABSPATH

@@ -1,0 +1,96 @@
+<?php
+
+/**
+ * Test bootstrap.
+ *
+ * The Unit suite runs with no WordPress: WordPress functions are mocked per
+ * test with Brain Monkey. The Integration suite boots a real WordPress through
+ * wp-phpunit (tests/Integration/bootstrap.php). Each suite runs in its own
+ * process, and this file decides which one it is in.
+ */
+
+declare(strict_types=1);
+
+/*
+ * Runs at most once. phpunit.xml's `bootstrap` loads this file, and so does
+ * tests/Pest.php, which Pest reads BEFORE PHPUnit reaches the bootstrap. The
+ * Integration suite's base class extends WP_UnitTestCase, which does not exist
+ * until WordPress is up, so Pest.php has to pull this in itself.
+ */
+if (defined('EXAMPLE_PLUGIN_TESTS_BOOTSTRAPPED')) {
+    return;
+}
+
+define('EXAMPLE_PLUGIN_TESTS_BOOTSTRAPPED', true);
+
+require_once dirname(__DIR__).'/vendor/autoload.php';
+
+/**
+ * Whether this process runs the Integration suite.
+ *
+ * True for `--testsuite=Integration` (either spelling) and for a run naming a
+ * path under tests/Integration. Anything else is the Unit suite, which is also
+ * phpunit.xml's defaultTestSuite.
+ *
+ * @param  array<mixed>  $argv
+ */
+function example_plugin_tests_want_wordpress(array $argv): bool
+{
+    foreach ($argv as $index => $argument) {
+        if (! is_string($argument)) {
+            continue;
+        }
+
+        if ($argument === '--testsuite=Integration') {
+            return true;
+        }
+
+        if ($argument === '--testsuite' && ($argv[$index + 1] ?? null) === 'Integration') {
+            return true;
+        }
+
+        if (str_contains(str_replace('\\', '/', $argument), 'tests/Integration')) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+$argv = $_SERVER['argv'] ?? [];
+
+if (example_plugin_tests_want_wordpress(is_array($argv) ? $argv : [])) {
+    require __DIR__.'/Integration/bootstrap.php';
+
+    return;
+}
+
+/*
+ * The Unit suite.
+ *
+ * Patchwork first: it can only redefine functions declared in files loaded
+ * after it, so loading it before the plugin is what lets a test mock one of the
+ * plugin's own functions, not only WordPress'.
+ */
+require_once dirname(__DIR__).'/vendor/antecedent/patchwork/Patchwork.php';
+
+/*
+ * Plugin files open with `defined('ABSPATH') || exit;`. Define it so they load,
+ * pointing at a directory that is not a WordPress install: code that requires a
+ * core file through ABSPATH fails loudly here, which is the sign it belongs in
+ * the Integration suite.
+ */
+if (! defined('ABSPATH')) {
+    define('ABSPATH', sys_get_temp_dir().'/example-plugin-tests-no-wordpress/');
+}
+
+/*
+ * Load the files that DEFINE functions and classes, never the main plugin file:
+ * it registers hooks at file scope, and Brain Monkey's add_action() and
+ * add_filter() exist only inside a test. Hook registration is tested in the
+ * Integration suite, or in a unit test that calls a registering function.
+ * Composer-autoloaded classes need no line here.
+ */
+require_once dirname(__DIR__).'/includes/functions.php';
+
+// cspell:ignore ABSPATH autoloaded

@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * Pest configuration for a plain PHP package.
+ *
+ * Nothing to bind: Pest's default base is PHPUnit's own TestCase, and a
+ * package has no application to boot. Shared helpers and custom expectations
+ * go here when the suite grows them.
+ */
+
+declare(strict_types=1);

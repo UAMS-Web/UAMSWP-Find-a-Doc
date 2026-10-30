@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * The plugin inside a real WordPress: what the Unit suite's mocks cannot see.
+ *
+ * @see example-plugin.php
+ * @see includes/functions.php
+ */
+
+declare(strict_types=1);
+
+namespace ExamplePlugin\Tests\Integration;
+
+use ExamplePlugin\Tests\Support\IntegrationTestCase;
+
+final class ExampleTest extends IntegrationTestCase
+{
+    /**
+     * @return void
+     */
+    public function test_hooks_the_read_more_link_to_excerpt_more(): void
+    {
+        $this->assertSame(10, has_filter('excerpt_more', 'example_plugin_read_more_link'));
+    }
+
+    /**
+     * @return void
+     */
+    public function test_links_the_excerpt_to_the_post_the_loop_is_on(): void
+    {
+        $postId = self::factory()->post->create();
+
+        $this->go_to((string) get_permalink($postId));
+
+        try {
+            the_post();
+
+            $this->assertSame(
+                ' <a class="example-plugin-more" href="'.esc_url((string) get_permalink($postId)).'">Read more</a>',
+                apply_filters('excerpt_more', ' [&hellip;]')
+            );
+        } finally {
+            wp_reset_postdata();
+        }
+    }
+}
