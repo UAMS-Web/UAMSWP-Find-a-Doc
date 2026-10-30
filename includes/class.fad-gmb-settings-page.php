@@ -341,22 +341,19 @@ function doximity_csv_export() {
 
 }
 
-function gmb_provider_csv_export() {
-
-    // Check for current user privileges
-    if( !current_user_can( 'manage_options' ) ){ return false; }
-
-    // Check if we are in WP-Admin
-    if( !is_admin() ){ return false; }
-
-    // Nonce Check
-    $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
-    if ( ! wp_verify_nonce( $nonce, 'download_gmb_provider_csv' ) ) {
-        die( 'Security check error' );
-    }
+/**
+ * Build the Google Business Profile provider table: the header row and one row per listing.
+ *
+ * Shared by the CSV export and the Business Profile sync so both write identical values.
+ *
+ * @param int[] $post_ids Limit to these provider post IDs. Empty for every published provider.
+ * @return array{head: array, body: array} The header row and the data rows, keyed by column number.
+ */
+function uamswp_fad_gmb_provider_table( $post_ids = array() ) {
+    $table_head = array();
+    $table_body = array();
 
     ob_start();
-
     // Custom WP_Query args
     $args = array(
         "post_type" => "provider",
@@ -367,7 +364,14 @@ function gmb_provider_csv_export() {
         // 'paged' => get_query_var( 'paged' ),
     );
 
+    // Limit to specific posts when asked (the sync builds one post at a time)
+    if ( $post_ids ) {
+        $args['post__in'] = array_map( 'absint', (array) $post_ids );
+    }
+
+    // Restored below so a caller in the middle of a request keeps its own main query
     global $wp_query;
+    $previous_wp_query = $wp_query;
     $wp_query = new WP_Query( $args );
 
     if ( $wp_query->have_posts() ) :
@@ -1103,7 +1107,31 @@ function gmb_provider_csv_export() {
 //             $table_body[] = $row;
         endwhile;
     endif;
-    ob_end_clean ();
+    $wp_query = $previous_wp_query;
+    wp_reset_postdata();
+    ob_end_clean();
+
+    return array( 'head' => $table_head, 'body' => $table_body );
+}
+
+function gmb_provider_csv_export() {
+
+    // Check for current user privileges
+    if( !current_user_can( 'manage_options' ) ){ return false; }
+
+    // Check if we are in WP-Admin
+    if( !is_admin() ){ return false; }
+
+    // Nonce Check
+    $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+    if ( ! wp_verify_nonce( $nonce, 'download_gmb_provider_csv' ) ) {
+        die( 'Security check error' );
+    }
+
+    $table = uamswp_fad_gmb_provider_table();
+    $table_head = $table['head'];
+    $table_body = $table['body'];
+
     $filename = 'GMB_Providers_' . time() . '.csv';
     $delimiter=",";
     $fh = @fopen( 'php://output', 'w' );
@@ -1135,21 +1163,19 @@ function gmb_provider_csv_export() {
     exit();
 }
 
-function gmb_location_csv_export() {
-    // Check for current user privileges
-    if( !current_user_can( 'manage_options' ) ){ return false; }
-
-    // Check if we are in WP-Admin
-    if( !is_admin() ){ return false; }
-
-    // Nonce Check
-    $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
-    if ( ! wp_verify_nonce( $nonce, 'download_gmb_location_csv' ) ) {
-        die( 'Security check error' );
-    }
+/**
+ * Build the Google Business Profile location table: the header row and one row per listing.
+ *
+ * Shared by the CSV export and the Business Profile sync so both write identical values.
+ *
+ * @param int[] $post_ids Limit to these location post IDs. Empty for every published location.
+ * @return array{head: array, body: array} The header row and the data rows, keyed by column number.
+ */
+function uamswp_fad_gmb_location_table( $post_ids = array() ) {
+    $table_head = array();
+    $table_body = array();
 
     ob_start();
-
     // Custom WP_Query args
     $args = array(
         "post_type" => "location",
@@ -1158,6 +1184,11 @@ function gmb_location_csv_export() {
         "orderby" => "title",
         "order" => "ASC",
     );
+
+    // Limit to specific posts when asked (the sync builds one post at a time)
+    if ( $post_ids ) {
+        $args['post__in'] = array_map( 'absint', (array) $post_ids );
+    }
 
     $query = new WP_Query( $args );
 
@@ -1883,7 +1914,29 @@ function gmb_location_csv_export() {
 
     endif;
 
-    ob_end_clean ();
+    wp_reset_postdata();
+    ob_end_clean();
+
+    return array( 'head' => $table_head, 'body' => $table_body );
+}
+
+function gmb_location_csv_export() {
+    // Check for current user privileges
+    if( !current_user_can( 'manage_options' ) ){ return false; }
+
+    // Check if we are in WP-Admin
+    if( !is_admin() ){ return false; }
+
+    // Nonce Check
+    $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+    if ( ! wp_verify_nonce( $nonce, 'download_gmb_location_csv' ) ) {
+        die( 'Security check error' );
+    }
+
+    $table = uamswp_fad_gmb_location_table();
+    $table_head = $table['head'];
+    $table_body = $table['body'];
+
     $filename = 'GMB_Locations_' . time() . '.csv';
     $delimiter=",";
     $fh = @fopen( 'php://output', 'w' );
