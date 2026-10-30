@@ -62,6 +62,29 @@ function uamswp_fad_gbp_save_modes(bool $exit = true): void
 }
 
 /**
+ * Queue a sync for every published provider, then return to the settings screen.
+ *
+ * @param  bool  $exit  Whether to stop after the redirect. Off only in tests.
+ * @param  (callable(string): string)|null  $lookup  Credential lookup; for tests.
+ */
+function uamswp_fad_gbp_queue_all_action(bool $exit = true, ?callable $lookup = null): void
+{
+    if (! current_user_can('manage_options')) {
+        wp_die(esc_html__('You do not have permission to run this sync.', 'uamswp-find-a-doc'), '', ['response' => 403]);
+    }
+
+    check_admin_referer('uamswp_fad_gbp_queue_all');
+
+    $queued = uamswp_fad_gbp_queue_all($lookup);
+
+    wp_safe_redirect(add_query_arg('queued', $queued, admin_url('admin.php?page=uamswp-fad-gbp')));
+
+    if ($exit) {
+        exit;
+    }
+}
+
+/**
  * Add the screen under Find-a-Doc Settings.
  */
 function uamswp_fad_gbp_add_settings_page(): void
@@ -88,6 +111,9 @@ function uamswp_fad_gbp_render_settings_page(): void
         <h1>Business Profile Sync</h1>
         <?php if (isset($_GET['saved'])) { ?>
             <div class="notice notice-success is-dismissible"><p>Settings saved.</p></div>
+        <?php } ?>
+        <?php if (isset($_GET['queued'])) { ?>
+            <div class="notice notice-success is-dismissible"><p><?php echo esc_html(sprintf('Queued a sync for %d providers.', (int) $_GET['queued'])); ?></p></div>
         <?php } ?>
         <p>Updates Google Business Profile listings for providers when a provider or one of their locations is saved, and creates a listing when none exists. Each silo is a set of listings under one account group.</p>
 
@@ -132,6 +158,14 @@ function uamswp_fad_gbp_render_settings_page(): void
             <?php submit_button('Save silo modes'); ?>
         </form>
 
+        <h2>Sync every provider</h2>
+        <p>Queues a sync for every published provider, one every 15 seconds, using each silo's mode above. Use it for a silo's first run and after an import, which does not trigger a sync on its own. A provider already waiting in the queue is not queued again. Results appear under Recent activity as each job runs.</p>
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+            <input type="hidden" name="action" value="uamswp_fad_gbp_queue_all">
+            <?php wp_nonce_field('uamswp_fad_gbp_queue_all'); ?>
+            <?php submit_button('Queue a sync for all providers', 'secondary'); ?>
+        </form>
+
         <h2>Recent activity</h2>
         <?php if ($log === []) { ?>
             <p>Nothing logged yet.</p>
@@ -171,4 +205,5 @@ function uamswp_fad_gbp_register_settings_hooks(): void
 {
     add_action('admin_menu', 'uamswp_fad_gbp_add_settings_page', 110);
     add_action('admin_post_uamswp_fad_gbp_save_modes', 'uamswp_fad_gbp_save_modes');
+    add_action('admin_post_uamswp_fad_gbp_queue_all', 'uamswp_fad_gbp_queue_all_action');
 }

@@ -166,6 +166,37 @@ final class GbpRuntimeTest extends UnitTestCase
         $this->assertGreaterThan(time(), $this->scheduled[0][0]);
     }
 
+    public function test_queue_all_schedules_every_published_provider_once_and_staggered(): void
+    {
+        $this->enable();
+        $this->recordSchedule();
+        Functions\when('get_posts')->justReturn(['7', 8, 9]);
+
+        $first = uamswp_fad_gbp_queue_all($this->creds());
+        $second = uamswp_fad_gbp_queue_all($this->creds());
+
+        $this->assertSame([3, 0], [$first, $second]);
+        $this->assertSame([[7], [8], [9]], array_column($this->scheduled, 2));
+        $this->assertSame(15, $this->scheduled[1][0] - $this->scheduled[0][0]);
+        $this->assertSame(15, $this->scheduled[2][0] - $this->scheduled[1][0]);
+    }
+
+    public function test_queue_all_does_nothing_without_credentials_or_when_every_silo_is_off(): void
+    {
+        $this->recordSchedule();
+        Functions\when('get_posts')->justReturn([7]);
+
+        $this->enable();
+        $this->assertSame(0, uamswp_fad_gbp_queue_all(function (): string {
+            return '';
+        }));
+
+        $this->enable(['uams' => 'off', 'arkansas-childrens' => 'off', 'baptist-health' => 'off']);
+        $this->assertSame(0, uamswp_fad_gbp_queue_all($this->creds()));
+
+        $this->assertSame([], $this->scheduled);
+    }
+
     public function test_nothing_is_queued_without_credentials(): void
     {
         $this->enable();
