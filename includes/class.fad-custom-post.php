@@ -67,7 +67,6 @@ function providers(): void
         'exclude_from_search' => false,
         'publicly_queryable' => true,
         'capabilities' => $capabilities,
-        'map_meta_cap' => true,
         'show_in_rest' => true,
         'rest_base' => 'provider',
         'rest_controller_class' => 'WP_REST_Posts_Controller',
@@ -141,7 +140,6 @@ if (! function_exists('locations')) {
             'exclude_from_search' => false,
             'publicly_queryable' => true,
             'capabilities' => $capabilities,
-            'map_meta_cap' => true,
             'show_in_rest' => true,
             'rest_base' => 'location',
             'rest_controller_class' => 'WP_REST_Posts_Controller',
@@ -218,7 +216,6 @@ if (! function_exists('expertise_cpt')) {
             'exclude_from_search' => false,
             'publicly_queryable' => true,
             'capabilities' => $capabilities,
-            'map_meta_cap' => true,
             'show_in_rest' => true,
             'rest_base' => 'expertise',
             'rest_controller_class' => 'WP_REST_Posts_Controller',
@@ -295,7 +292,6 @@ if (! function_exists('conditions_cpt')) {
             'exclude_from_search' => false,
             'publicly_queryable' => true,
             'capabilities' => $capabilities,
-            'map_meta_cap' => true,
             'show_in_rest' => true,
             'rest_base' => 'condition',
             'rest_controller_class' => 'WP_REST_Posts_Controller',
@@ -371,7 +367,6 @@ if (! function_exists('treatments_cpt')) {
             'exclude_from_search' => false,
             'publicly_queryable' => true,
             'capabilities' => $capabilities,
-            'map_meta_cap' => true,
             'show_in_rest' => true,
             'rest_base' => 'treatment',
             'rest_controller_class' => 'WP_REST_Posts_Controller',
@@ -447,7 +442,6 @@ if (! function_exists('clinical_resources_cpt')) {
             'exclude_from_search' => false,
             'publicly_queryable' => true,
             'capabilities' => $capabilities,
-            'map_meta_cap' => true,
             'show_in_rest' => true,
             'rest_base' => 'clinical_resource',
             'rest_controller_class' => 'WP_REST_Posts_Controller',
@@ -2968,26 +2962,18 @@ function add_roles_on_plugin_activation(): void
             'read_physician' => true,
             'edit_physician' => true,
             'delete_physician' => true,
-            'delete_physicians' => true,
-            'delete_others_physicians' => true,
-            'delete_published_physicians' => true,
-            'delete_private_physicians' => true,
+            'delete_published_physicians' => false,
             'edit_physicians' => true,
             'edit_published_physicians' => true,
-            'edit_private_physicians' => true,
             'edit_others_physicians' => true,
             'publish_physicians' => false,
             'read_private_physicians' => true,
             'read_location' => true,
             'edit_location' => true,
             'delete_location' => true,
-            'delete_locations' => true,
-            'delete_others_locations' => true,
-            'delete_published_locations' => true,
-            'delete_private_locations' => true,
+            'delete_published_locations' => false,
             'edit_locations' => true,
             'edit_published_locations' => true,
-            'edit_private_locations' => true,
             'edit_others_locations' => true,
             'publish_locations' => false,
             'read_private_locations' => true,
@@ -3000,46 +2986,6 @@ function add_roles_on_plugin_activation(): void
 
 // register_activation_hook( __FILE__, 'add_roles_on_plugin_activation' );
 add_action('init', 'add_roles_on_plugin_activation', 0);
-
-// Bring existing doc roles up to date. add_role() leaves a role alone once it exists, so
-// capability changes above never reached sites where the roles were already created.
-
-function uamswp_fad_sync_doc_role_caps(): void
-{
-
-    $desired = [
-        'doc_admin' => [
-            'delete_physicians' => true,
-            'delete_others_physicians' => true,
-            'delete_published_physicians' => true,
-            'delete_private_physicians' => true,
-            'edit_private_physicians' => true,
-            'delete_locations' => true,
-            'delete_others_locations' => true,
-            'delete_published_locations' => true,
-            'delete_private_locations' => true,
-            'edit_private_locations' => true,
-        ],
-    ];
-
-    foreach ($desired as $role_name => $caps) {
-        $role = get_role($role_name);
-        if (! $role) {
-            continue;
-        }
-
-        foreach ($caps as $cap => $grant) {
-            if (empty($role->capabilities[$cap])) {
-                $role->add_cap($cap);
-            } elseif (! $grant && ! empty($role->capabilities[$cap])) {
-                $role->remove_cap($cap);
-            }
-        }
-    }
-
-}
-
-add_action('init', 'uamswp_fad_sync_doc_role_caps', 1);
 
 // Remove roles, if they need to be reset
 
@@ -3114,22 +3060,6 @@ function add_theme_caps(): void
     $role->add_cap('edit_others_clinical_resources');
     $role->add_cap('publish_clinical_resources');
     $role->add_cap('read_private_clinical_resources');
-
-    // With map_meta_cap on, deleting or editing others' and published records also needs the
-    // delete_others_*, delete_published_*, delete_private_* and edit_private_* primitives.
-    // Grant every capability each post type declares, writing only when one is missing.
-    foreach (['provider', 'location', 'expertise', 'condition', 'treatment', 'clinical-resource'] as $post_type) {
-        $type_object = get_post_type_object($post_type);
-        if (! $type_object) {
-            continue;
-        }
-
-        foreach ((array) $type_object->cap as $cap) {
-            if (empty($role->capabilities[$cap])) {
-                $role->add_cap($cap);
-            }
-        }
-    }
 
 }
 
@@ -3516,7 +3446,7 @@ function get_provider_meta($object)
     $data['provider_podcast'] = '<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
 			</script>
 			<script type="text/javascript">
-				radiomd_embedded_filtered_doctor("uams","radiomd-embedded-filtered-doctor",303,1837,"'.esc_js($podcast_name).'");
+				radiomd_embedded_filtered_doctor("uams","radiomd-embedded-filtered-doctor",303,1837,"'.$podcast_name.'");
 			</script>
 			<style type="text/css">
 				#radiomd-embedded-filtered-tag iframe {
