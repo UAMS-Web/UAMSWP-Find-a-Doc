@@ -2,26 +2,22 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="tests/bootstrap.php"
-         defaultTestSuite="Unit"
          colors="true"
          failOnWarning="true"
          failOnRisky="true"
          failOnEmptyTestSuite="true"
          beStrictAboutOutputDuringTests="true">
     <!--
-        Two suites, run as two processes (composer test:unit, composer test:integration).
-        tests/bootstrap.php boots WordPress only for the Integration suite, so a unit test
-        that reaches an unmocked WordPress function fails instead of quietly passing.
-        defaultTestSuite keeps a bare `vendor/bin/pest` on the Unit suite.
+        The Unit suite only, on Pest 5. No WordPress, no database: WordPress functions
+        are mocked with Brain Monkey.
+
+        The Integration suite is not here. It runs in its own process from its own
+        Composer setup, tests/Integration/composer.json and tests/Integration/phpunit.xml,
+        on PHPUnit 9.6 (composer test:integration).
     -->
     <testsuites>
-        <!-- No WordPress, no database: WordPress functions are mocked with Brain Monkey. -->
         <testsuite name="Unit">
             <directory suffix="Test.php">./tests/Unit</directory>
-        </testsuite>
-        <!-- Boots WordPress through wp-phpunit against the test database. -->
-        <testsuite name="Integration">
-            <directory suffix="Test.php">./tests/Integration</directory>
         </testsuite>
     </testsuites>
     <source>

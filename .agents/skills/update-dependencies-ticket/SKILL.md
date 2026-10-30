@@ -132,6 +132,10 @@ patched package should not have to infer whether anybody looked.
 Then **release the slot** per the [`worktrees`](../rule-worktrees/SKILL.md) rule and refresh it, so
 its `vendor/` returns to `main`'s lock files.
 
+## The Dependabot configuration
+
+`templates/dependabot.yml` is the version-update configuration this skill assumes: `composer` and `github-actions` on a weekly schedule against `main`, with minor and patch updates grouped per ecosystem so a week produces a few pull requests, and a major update left in a pull request of its own. The `github-actions` entry lists both `/` and `/.github/actions/setup`, so the composite action the `code-quality` skill's `templates/ci.yml` uses is kept current as well. Copy it once to `.github/dependabot.yml`, and drop the `npm` entry in a repository with no `package.json`. A repository that holds a package at a deliberate version adds an `ignore` list to the entry that reads it, following the commented example in the template, and records the decision beside each entry; `UAMS-Web/uamswp-migration-api` does this for `wp-phpunit/wp-phpunit` (only a major held) and for the ACF fallback (held whole), and lists each pin in both of its composer entries. An ignored dependency also leaves its group. The sync never writes `.github/`, so an existing file is never overwritten.
+
 ## The DRY line
 
 This file owns one check: re-confirming the composer patch stack on a Dependabot bump. The patch

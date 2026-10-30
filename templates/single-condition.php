@@ -552,7 +552,7 @@
                 <script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
                 </script>
                 <script type="text/javascript">
-					radiomd_embedded_filtered_tag("uams","radiomd-embedded-filtered-tag",303,"<?php echo $podcast_name; ?>");
+					radiomd_embedded_filtered_tag("uams","radiomd-embedded-filtered-tag",303,"<?php echo esc_js( $podcast_name ); ?>");
 				</script>
 				<style type="text/css">
 					#radiomd-embedded-filtered-tag iframe {
@@ -640,7 +640,10 @@
 			$region_IDs = array();
 			while ($physicians_query->have_posts()) : $physicians_query->the_post();
 				$id = get_the_ID();
-				$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
+				$region_ID = get_field('physician_region', $id);
+				if (is_array($region_ID)) {
+					$region_IDs = array_merge($region_IDs, $region_ID);
+				}
 			endwhile;
 			$region_IDs = array_unique($region_IDs);
 			$region_list = array();

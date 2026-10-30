@@ -14,7 +14,7 @@ readers. The one temporary git repository built here exercises the first-parent
 diff read without reaching GitHub.
 
 The encoding cases pin a platform-specific bug with a platform-independent
-reproduction (UAMS-Web/wordpress-importer#527): Windows sizes stdout to the
+reproduction (UAMS-Web/wordpress-importer-archive#527): Windows sizes stdout to the
 console code page, and `PYTHONIOENCODING=cp1252` puts any interpreter in
 exactly that state. Against the unfixed script, any case carrying a codepoint
 outside `cp1252` dies with `UnicodeEncodeError: 'charmap' codec can't encode`.
@@ -30,7 +30,7 @@ import tempfile
 import unittest
 
 # No bytecode cache beside the imported module, so a run leaves the tree as it found it
-# (UAMS-Web/wordpress-importer#1207): an untracked `__pycache__/` is staged by a broad
+# (UAMS-Web/wordpress-importer-archive#1207): an untracked `__pycache__/` is staged by a broad
 # `git add`.
 sys.dont_write_bytecode = True
 
@@ -175,7 +175,7 @@ class ForcedUtf8OutputTest(unittest.TestCase):
 
 
 class RepoFlagTest(unittest.TestCase):
-    """`--repo` is required, and decides every link (UAMS-Web/uamswp-migration-api#309).
+    """`--repo` is required, and decides every link (UAMS-Web/uamswp-migration-api-archive#309).
 
     The generator this merges defaulted to its own repository in two of three copies, and
     run from a sibling without the flag it linked every bullet to that repository's pull
@@ -303,7 +303,7 @@ class RoutingTest(unittest.TestCase):
                 self.assertEqual(self._bucket(title, title, [], ["app/X.php"]), "fix")
 
     def test_security_item_forces_a_bullet_nothing_else_can_reach(self):
-        """UAMS-Web/wordpress-importer#1080: no label, no keyword, and paths that are prose."""
+        """UAMS-Web/wordpress-importer-archive#1080: no label, no keyword, and paths that are prose."""
         subject = "Read the key at the verification step rather than assigning it"
         paths = ["README.md", "project-words.txt"]
 
@@ -318,7 +318,7 @@ class RoutingTest(unittest.TestCase):
         )
 
     def test_secret_and_credential_no_longer_route_to_security(self):
-        """UAMS-Web/uamswp-migration-api#214: a note about a shell profile landed in Security.
+        """UAMS-Web/uamswp-migration-api-archive#214: a note about a shell profile landed in Security.
 
         Both halves asserted: the words are out of the default list, and `--security-word`
         puts one back for a repository that wants it.
@@ -434,8 +434,8 @@ class AcronymCasingTest(unittest.TestCase):
     """Acronym casing applies to prose and leaves identifiers alone.
 
     Backticked text is something a reader copies: a package name, a path, a handle: so
-    rewriting its case corrupts it (UAMS-Web/wordpress-importer#1110). So is a word joined to
-    a larger token (UAMS-Web/uams-statamic#2589, UAMS-Web/uamswp-migration-api#318). Both
+    rewriting its case corrupts it (UAMS-Web/wordpress-importer-archive#1110). So is a word joined to
+    a larger token (UAMS-Web/uams-statamic-archive#2589, UAMS-Web/uamswp-migration-api-archive#318). Both
     halves are asserted deliberately: a test that only checked identifiers survive would pass
     against a `fix_acro()` that had been deleted outright.
     """
@@ -519,8 +519,69 @@ class AcronymCasingTest(unittest.TestCase):
         self.assertEqual(GEN.noamp("Posts, terms & options"), "Posts, terms, and options")
 
 
+class SharedCorpusRoutingTest(unittest.TestCase):
+    """Shared-corpus roots, the `skills` plural and `--product-path app` (UAMS-Web/uams-claude-skills#132).
+
+    Measured over `v0.36.0..v0.37.0` in UAMS-Web/uams-statamic: a sync pull request touching
+    only `.agents/skills/...` fell through to `What's new`, a pull request naming `skills`
+    escaped the topic words, and three bug fixes with test-heavy diffs under `app/` were
+    caught by the test-dominant rule before the closing issue's `Bug` type was read.
+    """
+
+    def test_agents_is_a_tooling_root(self):
+        self.assertIn(".agents", GEN.TOOLING_PATHS)
+
+    def test_a_change_confined_to_shared_corpus_roots_is_maintenance(self):
+        paths = [".agents/skills/local-ci/SKILL.md", ".claude/rules/worktrees.md",
+                 ".cursor/rules/worktrees.mdc", "AGENTS.md"]
+
+        self.assertTrue(GEN.paths_are_tooling(paths))
+        self.assertEqual(
+            GEN.bucket("Sync shared corpus", "Sync shared corpus", [], paths),
+            "maint",
+        )
+
+    def test_a_product_root_beside_the_agents_root_is_not_tooling(self):
+        """Negative control: the `.agents` root alone is tooling, and adding `app/` defeats it."""
+        self.assertTrue(GEN.paths_are_tooling([".agents/skills/x/SKILL.md"]))
+        self.assertFalse(GEN.paths_are_tooling([".agents/skills/x/SKILL.md", "app/Foo.php"]))
+
+    def test_app_and_resources_still_defeat_the_tooling_rule(self):
+        for product in ("app/Http/Controller.php", "resources/views/page.antlers.html"):
+            with self.subTest(product=product):
+                self.assertFalse(GEN.paths_are_tooling([".agents/skills/x/SKILL.md", product]))
+
+    def test_the_topic_words_match_skill_and_skills(self):
+        for title in ("Teach the skill about retries", "Teach the skills about retries"):
+            with self.subTest(title=title):
+                self.assertTrue(GEN.MAINT_WORDS.search(title))
+
+    def test_the_topic_words_do_not_match_a_title_naming_neither(self):
+        for title in ("Teach the editor about retries", "Skillful routing of pages"):
+            with self.subTest(title=title):
+                self.assertFalse(GEN.MAINT_WORDS.search(title))
+
+    def test_a_bug_with_test_heavy_app_changes_reaches_the_issue_type_with_app_as_product(self):
+        self.assertEqual(
+            GEN.bucket("Serialize the entry id", "Serialize the entry id", [],
+                       ["app/Services/Entry.php", "tests/Feature/EntryTest.php"],
+                       issue_type="Bug", test_lines=80, other_lines=5,
+                       routing=GEN.Routing(product_paths=["app"])),
+            "fix",
+        )
+
+    def test_without_app_as_product_the_test_dominant_rule_catches_it_first(self):
+        """Negative control: the default routing is what the `--product-path app` option corrects."""
+        self.assertEqual(
+            GEN.bucket("Serialize the entry id", "Serialize the entry id", [],
+                       ["app/Services/Entry.php", "tests/Feature/EntryTest.php"],
+                       issue_type="Bug", test_lines=80, other_lines=5),
+            "maint",
+        )
+
+
 class ClosingIssueTypeTest(unittest.TestCase):
-    """Fix-versus-feature routes on the closing issue's type, not a title verb list (UAMS-Web/wordpress-importer#1112).
+    """Fix-versus-feature routes on the closing issue's type, not a title verb list (UAMS-Web/wordpress-importer-archive#1112).
 
     The verb list cannot cover every title: `writing-issues` asks for an imperative naming
     the OUTCOME, so a repair is routinely titled as the corrected behavior: "Select the
@@ -626,7 +687,7 @@ class ClosingIssueTypeTest(unittest.TestCase):
 
 
 class ClosingIssueParseTest(unittest.TestCase):
-    """The body keyword that names the closing issue (UAMS-Web/wordpress-importer#1112)."""
+    """The body keyword that names the closing issue (UAMS-Web/wordpress-importer-archive#1112)."""
 
     def test_every_github_closing_keyword_is_recognized(self):
         for body in ("Closes #1107.", "closes #1107", "Fixes #1107", "fixed #1107",

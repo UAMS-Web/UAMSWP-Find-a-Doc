@@ -8,6 +8,37 @@ declare(strict_types=1);
  *
  */
 
+/**
+ * Editor placeholder for a newly inserted, still-empty ACF block (ACF Blocks V3
+ * always render a preview). Returns true after printing the placeholder.
+ * Returns false outside block previews ($block / $is_preview not set).
+ */
+function uams_fad_block_placeholder($block = null, $is_preview = false): bool
+{
+    if (empty($is_preview) || empty($block) || ! is_array($block)) {
+        return false;
+    }
+
+    $data = isset($block['data']) && is_array($block['data']) ? $block['data'] : [];
+    foreach ($data as $key => $value) {
+        if (is_string($key) && strpos($key, '_') === 0) {
+            continue;
+        }
+
+        if (! in_array($value, ['', null, [], false, '0'], true)) {
+            return false;
+        }
+    }
+
+    printf(
+        '<div class="uams-block-placeholder" style="padding:1.5rem;border:1px dashed currentColor;text-align:center;"><strong>%s</strong><br>%s</div>',
+        esc_html(! empty($block['title']) ? $block['title'] : __('Find-a-Doc block')),
+        esc_html__('Click the pencil icon in the block toolbar to add content.')
+    );
+
+    return true;
+}
+
 add_action('acf/init', 'uams_fad_register_blocks');
 function uams_fad_register_blocks(): void
 {
@@ -21,7 +52,7 @@ function uams_fad_register_blocks(): void
             'category' => 'common',
             'icon' => 'location',
             'keywords' => ['uams', 'clinical', 'locations', 'clinics'],
-            'mode' => 'auto',
+            'acf_block_version' => 3,
             'align' => 'full',
             'render_template' => UAMS_FAD_PATH.'/templates/blocks/locations.php',
         ]);
@@ -32,7 +63,7 @@ function uams_fad_register_blocks(): void
             'category' => 'common',
             'icon' => 'id',
             'keywords' => ['uams', 'providers', 'doctors', 'physicians'],
-            'mode' => 'auto',
+            'acf_block_version' => 3,
             'align' => 'full',
             'render_template' => UAMS_FAD_PATH.'templates/blocks/providers.php',
         ]);
@@ -43,7 +74,7 @@ function uams_fad_register_blocks(): void
             'category' => 'common',
             'icon' => 'awards',
             'keywords' => ['uams', 'providers', 'doctors', 'awards'],
-            'mode' => 'auto',
+            'acf_block_version' => 3,
             'align' => '',
             'render_template' => UAMS_FAD_PATH.'templates/blocks/recognitions.php',
         ]);
@@ -51,6 +82,7 @@ function uams_fad_register_blocks(): void
 }
 
 if (function_exists('acf_add_local_field_group')) {
+
     // Add local field group for UAMS Location Block
     acf_add_local_field_group([
         'key' => 'group_block_fad_locations',
@@ -411,6 +443,7 @@ if (function_exists('acf_add_local_field_group')) {
         'active' => true,
         'description' => '',
     ]);
+
     // Add local field group for UAMS Provider Block
     acf_add_local_field_group([
         'key' => 'group_block_fad_providers',
@@ -875,6 +908,7 @@ if (function_exists('acf_add_local_field_group')) {
         'active' => true,
         'description' => '',
     ]);
+
     // Add local field group for UAMS Recognition List Block
     acf_add_local_field_group([
         'key' => 'group_block_fad_recognition',
@@ -945,4 +979,5 @@ if (function_exists('acf_add_local_field_group')) {
         'active' => true,
         'description' => '',
     ]);
+
 }
