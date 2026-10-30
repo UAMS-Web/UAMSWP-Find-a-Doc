@@ -58,7 +58,7 @@ final class GbpProviderExportRetiredTest extends UnitTestCase
     {
         $source = (string) file_get_contents($this->root().'/includes/class.fad-gmb-settings-page.php');
 
-        foreach (['doximity_csv_export', 'mychart_csv_export', 'gmb_location_csv_export', 'uamswp_fad_gmb_provider_table', 'uamswp_fad_gmb_location_table'] as $kept) {
+        foreach (['doximity_csv_export', 'mychart_csv_export', 'uamswp_fad_gmb_provider_table', 'uamswp_fad_gmb_location_table'] as $kept) {
             $this->assertStringContainsString('function '.$kept.'(', $source, $kept.' should still exist');
         }
     }

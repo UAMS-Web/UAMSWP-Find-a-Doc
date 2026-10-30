@@ -19,11 +19,6 @@ function uamswp_fad_gmb_export_page(): void
     <p>Generate a spreadsheet for updating U.S. News Doctor Finder Profiles and Doximity Profiles.</p>
     <p>Copy the data from the generated CSV into the <a href="https://app.box.com/s/sufb1jpvhzcw1stzez0ch0t7i88teovi" title="Doximity Template" target="_blank" download>U.S. News & Doximity upload template</a>. Email that populated template file to <a href="mailto:hospitals@doximity.com">hospitals@doximity.com</a> to have the profiles updated.</p>
     <p><a aria-describedby="csv-header-doximity" class="button button-primary" href="<?php echo admin_url('admin.php?page=uamswp-gmb-export') ?>&action=download_doximity_csv&_wpnonce=<?php echo wp_create_nonce('download_doximity_csv')?>" class="page-title-action"><?php _e('Export to CSV', 'uamswp-find-a-doc'); ?></a></p>
-    <h2 id="csv-header-gmb-locations">Google Business Profiles &mdash; UAMS Clinical Locations</h2>
-    <p>Generate a spreadsheet for importing published locations as business profiles in Google Business Profiles, both to create new business profiles and to update existing business profiles. A unique business profile will be created for each location, whether it is a top-level location or a child location.</p>
-    <p>Each URL in the spreadsheet is automatically tagged using a UTM structure crafted to indicate that the web traffic came from a particular link within the specific location's business profile.</p>
-    <p>For help with bulk upload spreadsheets for Business Profiles, visit <a href="https://support.google.com/business/topic/4596653" title="Google Business Profile Help, Add 10 or more businesses" target="_blank">https://support.google.com/business/topic/4596653</a>.</p>
-    <p><a aria-describedby="csv-header-gmb-locations" class="button button-primary" href="<?php echo admin_url('admin.php?page=uamswp-gmb-export') ?>&action=download_gmb_location_csv&_wpnonce=<?php echo wp_create_nonce('download_gmb_location_csv')?>" class="page-title-action"><?php _e('Export to CSV', 'uamswp-find-a-doc'); ?></a></p>
     <h2 id="csv-header-mychart">MyChart Provider List</h2>
     <p>Generate a spreadsheet for the MyChart team to use when associating provider profile URLs with the relevant providers in Epic/MyChart, so that users can click through to the provider's profile from within MyChart.</p>
     <p>Each URL is automatically tagged using a UTM structure crafted to indicate that the web traffic came from the specific provider's record within MyChart without passing through any protected health information (PHI).</p>
@@ -35,12 +30,6 @@ function uamswp_fad_gmb_export_page(): void
 if (isset($_GET['action']) && $_GET['action'] == 'download_doximity_csv') {
     // Handle CSV Export
     add_action('admin_init', 'doximity_csv_export');
-}
-
-// Add action hook only if action=download_gmb_location_csv
-if (isset($_GET['action']) && $_GET['action'] == 'download_gmb_location_csv') {
-    // Handle CSV Export
-    add_action('admin_init', 'gmb_location_csv_export');
 }
 
 // Add action hook only if action=download_mychart_csv
@@ -1781,60 +1770,6 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
     ob_end_clean();
 
     return ['head' => $table_head, 'body' => $table_body];
-}
-
-function gmb_location_csv_export(): bool
-{
-    // Check for current user privileges
-    if (! current_user_can('manage_options')) {
-        return false;
-    }
-
-    // Check if we are in WP-Admin
-    if (! is_admin()) {
-        return false;
-    }
-
-    // Nonce Check
-    $nonce = $_GET['_wpnonce'] ?? '';
-    if (! wp_verify_nonce($nonce, 'download_gmb_location_csv')) {
-        exit('Security check error');
-    }
-
-    $table = uamswp_fad_gmb_location_table();
-    $table_head = $table['head'];
-    $table_body = $table['body'];
-
-    $filename = 'GMB_Locations_'.time().'.csv';
-    $delimiter = ',';
-    $fh = @fopen('php://output', 'w');
-    fwrite($fh, $bom = (chr(0xEF).chr(0xBB).chr(0xBF)));
-    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-    header('Content-Description: File Transfer');
-    header('Content-type: text/csv'); // tells browser to download
-    header("Content-Disposition: attachment; filename={$filename}");
-    header('Pragma: no-cache'); // no cache
-    header('Expires: 0'); // expire date
-    fputcsv($fh, $table_head, $delimiter);
-    foreach ($table_body as $data_row) {
-        // Neutralize CSV formula injection: prefix a single quote to any cell
-        // that could be interpreted as a spreadsheet formula. Numeric cells
-        // (including negative numbers such as the longitude in row[12]) are
-        // never dangerous formulas, so they are left untouched to preserve the
-        // raw values Google Business import expects.
-        $data_row = array_map(function ($cell) {
-            if (is_string($cell) && $cell !== '' && ! is_numeric($cell)
-                && strpos("=+-@\t\r", $cell[0]) !== false) {
-                return "'".$cell;
-            }
-
-            return $cell;
-        }, $data_row);
-        fputcsv($fh, $data_row, $delimiter);
-    }
-
-    exit();
-
 }
 
 function mychart_csv_export(): bool
