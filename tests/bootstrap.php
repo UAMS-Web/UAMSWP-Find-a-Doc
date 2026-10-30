@@ -82,6 +82,15 @@ if (! defined('ABSPATH')) {
 }
 
 /*
+ * The main plugin file opens with `if (! defined('WPINC')) { exit; }`. Left undefined, it
+ * exits silently during the bootstrap: PHPUnit then prints nothing, runs no test and
+ * exits 0, which reads as a pass.
+ */
+if (! defined('WPINC')) {
+    define('WPINC', 'wp-includes');
+}
+
+/*
  * Load the files that DEFINE functions and classes, never the main plugin file:
  * it registers hooks at file scope, and Brain Monkey's add_action() and
  * add_filter() exist only inside a test. Hook registration is tested in the
@@ -135,9 +144,22 @@ Brain\Monkey\Functions\when('esc_html__')->returnArg();
 Brain\Monkey\Functions\when('esc_attr__')->returnArg();
 Brain\Monkey\Functions\when('get_file_data')->justReturn(array());
 
-if (is_readable(dirname(__DIR__).'/uamswp-find-a-doc.php')) {
-    require_once dirname(__DIR__).'/uamswp-find-a-doc.php';
-}
+/*
+ * The main plugin file cannot load here: it requires required-plugins.php, which pulls in
+ * WordPress admin classes through ABSPATH. Define the constants it would set, and load
+ * the definition files the Unit suite covers. Anything that needs the main file belongs
+ * in the Integration suite.
+ */
+define('UAMS_FAD_ROOT_URL', 'https://example.test/wp-content/plugins/'.basename(dirname(__DIR__)).'/');
+define('UAMS_FAD_PATH', dirname(__DIR__).'/');
+define('UAMS_FAD_VERSION', '0.0.0-tests');
+defined('DAY_IN_SECONDS') || define('DAY_IN_SECONDS', 86400);
+
+require_once dirname(__DIR__).'/includes/class.fad-gbp-logic.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-client.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-sync.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-runtime.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-settings.php';
 
 Brain\Monkey\tearDown();
 

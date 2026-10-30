@@ -493,7 +493,7 @@
 			"label": "Wide Image",
 			"name": "physician_image_wide",
 			"type": "image",
-			"instructions": "This image will be used for social sharing and Google My Business cover photo. It is restricted to a 16:9 aspect ratio and has a minimum dimension of 1200x675.",
+			"instructions": "This image will be used for social sharing and Google Business Profile cover photo. It is restricted to a 16:9 aspect ratio and has a minimum dimension of 1200x675.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -2491,7 +2491,7 @@
 		},
 		{
 			"key": "field_physician_gmb_tab",
-			"label": "<i class=\"dashicons-google dashicons\"><\/i> Google My Business Details",
+			"label": "<i class=\"dashicons-google dashicons\"><\/i> Google Business Profile Details",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
@@ -2515,7 +2515,7 @@
 		},
 		{
 			"key": "field_physician_schema_gmb_query",
-			"label": "Does this provider have one or more listings on Google My Business?",
+			"label": "Does this provider have one or more listings on Google Business Profiles?",
 			"name": "physician_schema_gmb_query",
 			"type": "button_group",
 			"instructions": "",
@@ -2570,7 +2570,7 @@
 		},
 		{
 			"key": "field_physician_gmb_exclude",
-			"label": "Should this provider be excluded from any bulk imports and updates in Google My Business?",
+			"label": "Should this provider be excluded from any bulk imports and updates in Google Business Profiles?",
 			"name": "physician_gmb_exclude",
 			"type": "button_group",
 			"instructions": "",
@@ -2592,7 +2592,7 @@
 		},
 		{
 			"key": "field_physician_gmb_cat",
-			"label": "Google My Business Category",
+			"label": "Google Business Profile Category",
 			"name": "physician_gmb_cat",
 			"type": "taxonomy",
 			"instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Doctor\" is a good standard choice, if you cannot find a better option.</p><p class='description' style='margin-top: 0.5em;'>For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",

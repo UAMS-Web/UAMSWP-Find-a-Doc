@@ -26,4 +26,11 @@ function bootstrap(): void
     include_once __DIR__.'/class.fad-acf-blocks.php';
     include_once __DIR__.'/class.fad-gmb-settings-page.php';
     include_once __DIR__.'/class.fad-editor-groups.php'; // Editor groups: who may edit which providers and locations
+    include_once __DIR__.'/class.fad-gbp-logic.php'; // Business Profile sync: field mapping, diff, silos
+    include_once __DIR__.'/class.fad-gbp-client.php'; // Business Profile sync: Google API client
+    include_once __DIR__.'/class.fad-gbp-sync.php'; // Business Profile sync: update, create and skip decisions
+    include_once __DIR__.'/class.fad-gbp-runtime.php'; // Business Profile sync: WordPress wiring
+    include_once __DIR__.'/class.fad-gbp-settings.php'; // Business Profile sync: settings screen
+    \uamswp_fad_gbp_register_hooks();
+    \uamswp_fad_gbp_register_settings_hooks();
 }
