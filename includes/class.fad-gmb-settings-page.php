@@ -1529,7 +1529,8 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             $location_gmb_exclude = get_field('location_gmb_exclude', $location_post_id);
             $location_gmb_prefix = get_field('location_gmb_prefix', $location_post_id);
 
-            // Create the table
+            // Create the table. Each location starts from an empty row, and an excluded one adds none.
+            $row = [];
             if (! UAMSWP_FAD_GBP_Logic::is_yes($location_gmb_exclude)) {
 
                 // Start table row
@@ -1769,8 +1770,8 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 // Value based on the relevant location profile
                 $row[52] = $location_telemed_query ? 'Yes' : '';
 
+                $table_body[] = $row;
             } // endif
-            $table_body[] = $row;
 
         }
 
