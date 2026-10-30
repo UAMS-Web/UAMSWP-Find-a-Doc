@@ -62,7 +62,7 @@ function uamswp_fad_gbp_save_modes(bool $exit = true): void
 }
 
 /**
- * Queue a sync for every published provider, then return to the settings screen.
+ * Queue a sync for every published provider and location, then return to the settings screen.
  *
  * @param  bool  $exit  Whether to stop after the redirect. Off only in tests.
  * @param  (callable(string): string)|null  $lookup  Credential lookup; for tests.
@@ -113,9 +113,9 @@ function uamswp_fad_gbp_render_settings_page(): void
             <div class="notice notice-success is-dismissible"><p>Settings saved.</p></div>
         <?php } ?>
         <?php if (isset($_GET['queued'])) { ?>
-            <div class="notice notice-success is-dismissible"><p><?php echo esc_html(sprintf('Queued a sync for %d providers.', (int) $_GET['queued'])); ?></p></div>
+            <div class="notice notice-success is-dismissible"><p><?php echo esc_html(sprintf('Queued a sync for %d providers and locations.', (int) $_GET['queued'])); ?></p></div>
         <?php } ?>
-        <p>Updates Google Business Profile listings for providers when a provider or one of their locations is saved, and creates a listing when none exists. Each silo is a set of listings under one account group.</p>
+        <p>Updates Google Business Profile listings for providers and locations when one is saved, and creates a listing when none exists. Each silo is a set of listings under one account group.</p>
 
         <h2>Credentials</h2>
         <p>Set in <code>wp-config.php</code> as constants, or as environment variables. Values are never shown or stored in the database.</p>
@@ -158,12 +158,12 @@ function uamswp_fad_gbp_render_settings_page(): void
             <?php submit_button('Save silo modes'); ?>
         </form>
 
-        <h2>Sync every provider</h2>
-        <p>Queues a sync for every published provider, one every 15 seconds, using each silo's mode above. Use it for a silo's first run, or to recheck every listing against Google. A provider already waiting in the queue is not queued again. Results appear under Recent activity as each job runs.</p>
+        <h2>Sync every provider and location</h2>
+        <p>Queues a sync for every published provider and location, one every 15 seconds, using each silo's mode above. Use it for a silo's first run, or to recheck every listing against Google. A provider already waiting in the queue is not queued again. Results appear under Recent activity as each job runs.</p>
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
             <input type="hidden" name="action" value="uamswp_fad_gbp_queue_all">
             <?php wp_nonce_field('uamswp_fad_gbp_queue_all'); ?>
-            <?php submit_button('Queue a sync for all providers', 'secondary'); ?>
+            <?php submit_button('Queue a sync for all providers and locations', 'secondary'); ?>
         </form>
 
         <h2>Recent activity</h2>
