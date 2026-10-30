@@ -11,7 +11,7 @@
 
 Two title forms keep a single em dash with a space on either side. Do not spread the character into the body under the title.
 
-1. **Shared rule H1s:** `# Rule — <imperative title>` (see [`shared/README.md`](../../README.md)). The sync strips the `Rule —` prefix to build the Cursor/Codex description.
+1. **Shared rule H1s:** `# Rule — <imperative title>` (documented in `shared/README.md` of the source repository, `UAMS-Web/uams-claude-skills`). The sync strips the `Rule —` prefix to build the Cursor/Codex description.
 2. **GitHub Release titles:** `vX.Y.Z — Theme` (see [`writing-release-notes`](../skills/writing-release-notes/SKILL.md)). Examples and generator output that follow that form may contain `U+2014` in the title only.
 
 A third exception is not a title: **verbatim text from an external source that is delivered unchanged** (see [`american-english-prose`](american-english-prose.md), which keeps quoted external text in its original form). Editing the prose would make the delivered file differ from the source it is checked against, so the character stays. The only such file today is the `marketplace-review` skill that Statamic publishes and the sync delivers to Statamic packages; it carries `U+2014` on three lines. A whole-tree sweep in a repository that receives it excludes `.claude/skills/marketplace-review/` and `.agents/skills/marketplace-review/`, and a new file joins the exception only by being named here.

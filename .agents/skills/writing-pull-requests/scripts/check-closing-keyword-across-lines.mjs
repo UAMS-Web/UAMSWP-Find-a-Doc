@@ -54,7 +54,13 @@ import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const KEYWORD = String.raw`\b(?:close[sd]?|fix(?:es|ed)?|resolve[sd]?)\b`
-const REFERENCE = String.raw`(?:[\w.-]+\/[\w.-]+)?#\d+`
+// A reference is `#N`, `org/repo#N` or a full issue URL (UAMS-Web/uams-claude-skills#339):
+// GitHub honors all three after a closing keyword. Only `/issues/N` counts; a link to a pull
+// request or a file is not a reference. A trailing slash, query string or anchor follows the
+// digits, so the match ends before it. The `www.` host is admitted without having been measured
+// against GitHub's parser.
+const ISSUE_URL = String.raw`https?:\/\/(?:www\.)?github\.com\/[\w.-]+\/[\w.-]+\/issues\/\d+`
+const REFERENCE = String.raw`(?:${ISSUE_URL}|(?:[\w.-]+\/[\w.-]+)?#\d+)`
 
 /** Keyword, the whitespace and colons between, reference: GitHub's parse, newline included. */
 export const directivePattern = () => new RegExp(`(${KEYWORD})([\\s:]*)(${REFERENCE})`, 'gi')

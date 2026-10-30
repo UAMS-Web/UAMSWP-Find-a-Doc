@@ -20,7 +20,7 @@ name: CI
 # The no-emoji job sweeps the prose the no-emoji-in-durable-records rule names (.claude/, docs/,
 # README.md, AGENTS.md, CLAUDE.md) with the script the writing-comments skill ships. It is
 # self-contained: it needs nothing but Node and the synced rule, so it stands outside the
-# `needs:` chain and can be dropped or moved without touching another job.
+# quality chain; the `CI` job at the end still waits for it.
 #
 # The mutate-ignore job runs the pest-testing skill's check for `@pest-mutate-ignore`
 # annotations that suppress nothing, or suppress everything. It reads the installed
@@ -51,13 +51,35 @@ name: CI
 # skill says why.
 #
 # Jobs are chained with `needs:`, cheapest first, so a pull request that fails a cheap check
-# does not spend minutes on the dear ones. A skipped job is not a passing job: where a
-# ruleset requires these checks by name, a chain that stops early leaves the later ones
-# pending. Job `name:` values are what a ruleset lists, so renaming a job means changing the
-# ruleset's list in the same change.
+# does not spend minutes on the dear ones.
+#
+# The last job, `CI`, is the one check a ruleset requires from this workflow (with the two
+# pull-request-body checks, `Attribution footer` and `Closing keywords`). It `needs:` every
+# other job in this file, runs `if: always()`, and fails unless every needed job reports
+# `success`: a `skipped` or `cancelled` job fails it. A ruleset therefore never lists a job
+# by name, and renaming or adding a job changes only the `needs:` list of `CI`. Adding a job
+# without adding it to that list leaves it running but not required; the aggregate-needs job
+# below runs the code-quality skill's check-aggregate-needs.mjs and fails the pull request when
+# that happens, and scripts/check-templates.mjs in UAMS-Web/uams-claude-skills fails the template.
+# Do not rename `CI`.
 #
 # Private repositories pay for runner minutes. A repository that gates its Actions jobs on a
-# `RUN_REMOTE_CI` variable adds `if: vars.RUN_REMOTE_CI == 'true'` to each job.
+# `RUN_REMOTE_CI` variable adds `if: vars.RUN_REMOTE_CI == 'true'` to each job, `CI` included.
+# Measured on 2026-10-22 in a private UAMS-Web repository with the variable unset, on a
+# scratch workflow of two gated jobs and two aggregates (UAMS-Web/uams-claude-skills#289):
+#
+#   a gated job                                 skipped
+#   `CI` with `if: always() && vars...`         skipped (passes a required check per GitHub docs; not measured)
+#   `CI` with `if: always()`, no gate          ran, reported failure (its needed jobs were skipped)
+#
+# The check for the run with no gate read `queued` for about eight minutes after its job had finished,
+# so read a check's conclusion from the job, not from the first poll of the check run.
+#
+# So with the switch off a gated `CI` lets a pull request merge without any job having run,
+# and a `CI` without the gate fails every pull request. Neither is a gate. Require `CI` only in a
+# repository where this workflow genuinely runs on every pull request; the pre-merge-check
+# rule says the same. In a repository that keeps the switch, gate `CI` the same way as the
+# jobs, and do not require it while the switch is off.
 #
 # The shared setup (PHP, the Composer cache, the locked install) lives in
 # `.github/actions/setup/action.yml`, a composite action copied from
@@ -123,6 +145,21 @@ jobs:
 
       # Fails, naming the file, line and code point, when prose carries a banned glyph.
       - run: node .claude/skills/writing-comments/scripts/check-no-emoji.mjs
+
+  aggregate-needs:
+    name: Aggregate needs
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Fails, naming the job, when a job is missing from the `needs:` list of `CI` or a
+      # fixed required name is reported by no job. Allow-list: .github/aggregate-needs-allow.json.
+      - run: node .claude/skills/code-quality/scripts/check-aggregate-needs.mjs
 
   pint:
     name: Pint
@@ -222,3 +259,25 @@ jobs:
       - name: Slowest class
         if: ${{ !cancelled() }}
         run: php .claude/skills/pest-testing/scripts/check-slowest-class.php --report=junit.xml --share-ceiling=25 --ceiling=900
+
+  # The one check a ruleset requires from this workflow. Keep `needs:` listing every other
+  # job in the file; scripts/check-templates.mjs in UAMS-Web/uams-claude-skills checks it.
+  ci:
+    name: CI
+    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, pint, rector, phpstan, mutate-ignore, mutate, pest]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # `skipped` and `cancelled` fail as well as `failure`: a job that did not run proved nothing.
+      - name: Every needed job succeeded
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "Needed job results: $RESULTS"
+          for result in $RESULTS; do
+            if [ "$result" != "success" ]; then
+              echo "::error::A needed job reported $result"
+              exit 1
+            fi
+          done

@@ -11,6 +11,13 @@
 # produces a few pull requests rather than one per package; a major update stays in a pull
 # request of its own. A package.json elsewhere in the tree needs its own npm entry, and a
 # repository with no package.json drops the npm entry.
+#
+# A repository that holds a package at a deliberate version adds an ignore list to the entry that
+# reads it, as the commented example under the composer entry shows. Hold only what the
+# repository has decided to hold, name the decision next to the entry, and list each ignore in
+# every entry that reads the package (a second composer directory needs its own copy). An
+# ignored dependency also leaves its group, so a held package cannot hold back the rest of the
+# group.
 version: 2
 updates:
   - package-ecosystem: composer
@@ -23,6 +30,15 @@ updates:
         update-types:
           - minor
           - patch
+    # Deliberate pins, if the repository has any: delete this block otherwise. Without
+    # update-types the whole dependency is held; with them only those kinds of update are.
+    # ignore:
+    #   # <decision reference>: why this package is held entirely.
+    #   - dependency-name: vendor/held-package
+    #   # <decision reference>: why only a major is held; minor and patch updates still run.
+    #   - dependency-name: vendor/tracked-package
+    #     update-types:
+    #       - version-update:semver-major
 
   # The workflows, plus the composite action they call.
   - package-ecosystem: github-actions

@@ -126,10 +126,27 @@ green checks panel.
   Each PR's test plan covers its own base branch's environment; see the **`## Test plan` checklist** below.
 - **Open as draft unless it is ready to validate; flip draft → ready when it becomes ready.** A
   PR whose branch still needs work opens with `gh pr create --draft`; `gh pr ready <n>` flips it
-  once the change is genuinely ready to validate. A docs-only PR: no code, test, or build
-  surface for the gate to exercise (a `.claude/` skill or rule, a `docs/` edit): is ready on
-  creation and opens non-draft. Never present a PR as ready-to-merge before its validation path
-  can actually run against it, and never flip to ready while you know the branch is unfinished.
+  once the change is genuinely ready to validate. Where remote CI does not run on every pull
+  request, a docs-only PR: no code, test, or build surface for the gate to exercise (a `.claude/`
+  skill or rule, a `docs/` edit): is ready on creation and opens non-draft. Never present a PR as
+  ready-to-merge before its validation path can actually run against it, and never flip to ready
+  while you know the branch is unfinished.
+- **In a public repository, the draft's remote checks are the pre-PR check.** Its `ci.yml` runs on
+  every pull request, drafts included (the `RUN_REMOTE_CI` switch reaches private repositories
+  only), and the local runner's jobs mirror it. So run nothing locally as a pre-PR check: push the
+  branch and open the pull request as a draft, docs-only ones included, and flip it to ready only
+  when every remote check on its head is green. When a check is red, fix it and push to the same
+  branch; the draft re-runs, and a new pull request for the same change is never the answer. Keep
+  running a test locally while writing it, and keep a local run for the four cases remote CI
+  cannot cover:
+  - a change whose acceptance criteria name Windows or another platform remote CI does not run
+    (it runs on Ubuntu only);
+  - the full mutation run a test-coverage ticket records (remote CI runs one smoke path);
+  - a run that needs a loaded WordPress install or the importer's host application;
+  - any repository with no remote CI workflow, including a private one.
+
+  The pre-merge validation of a ready pull request is unchanged: the gate still runs it
+  (UAMS-Web/uams-claude-skills#366).
 - **When a merge order is required, state it in the body: in the PR that must merge second.**
   File-disjoint PRs need no ordering, but when PRs must merge in sequence: a shared-surface
   branch before a dependent one, a submodule companion before its pointer bump, or a cross-repo
@@ -139,15 +156,15 @@ green checks panel.
 
 ## Spell-check new words before opening
 
-Where the repository runs cspell: a `cspell.json`, a `project-words.txt` dictionary, and a `spell` job in its CI chain: a word the checker does not recognize fails validation and forces a *separate* `project-words.txt` PR after the fact. Catch it in the PR that introduces the word instead. This applies to docs-only PRs too: the ones most likely to add new words, and the ones that open non-draft (above), so there is no draft window in which CI would otherwise catch it first.
+Where the repository runs cspell: a `cspell.json`, a `project-words.txt` dictionary, and a `spell` job in its CI chain: a word the checker does not recognize fails validation and forces a *separate* `project-words.txt` PR after the fact. Catch it in the PR that introduces the word instead. Where remote CI does not run on every pull request, this applies to docs-only PRs too: the ones most likely to add new words, and the ones that open non-draft (above), so there is no draft window in which CI would otherwise catch it first.
 
-If you have added or edited any prose or identifiers (comments, docs, test names, anything cspell scans), run the spell check before opening the PR and reconcile every flagged word. For each one, decide: do **not** reflexively allow-list:
+If you have added or edited any prose or identifiers (comments, docs, test names, anything cspell scans), run the spell check before opening the PR and reconcile every flagged word. **In a public repository the draft's remote `spell` job is that check**: open the draft, and reconcile every word it flags before flipping to ready. For each one, decide: do **not** reflexively allow-list:
 
 - **A genuine misspelling** → fix it in source.
 - **A British spelling in first-party prose** → fix it to American, per [`american-english-prose`](../rule-american-english-prose/SKILL.md), which owns the convention, its arbiter, and the reasons that justify overriding it in the dictionary. Keep British only where it is baked into something you do not control: a WordPress core hook name, a third-party option key.
 - **A legitimate new term**: an identifier, proper noun, or coined word cspell cannot know: → add it to `project-words.txt`.
 
-Adding to the dictionary is the last resort, not the default: a real misspelling allow-listed once stays wrong forever, and every stale entry weakens the check. **Prefer a reword to an allow-list entry.** `project-words.txt` is for identifiers, proper nouns and standardized data: `realpath` and `strstr` are in on that basis. Invented prose is not: `uncast` was rejected on [`UAMS-Web/uams-statamic#2079`](https://github.com/UAMS-Web/uams-statamic/pull/2079) and rewritten as "a value that was never cast", which cleared the gate and left the sentence better. An allow-list entry is permanent and unreviewed; a reword costs one sentence.
+Adding to the dictionary is the last resort, not the default: a real misspelling allow-listed once stays wrong forever, and every stale entry weakens the check. **Prefer a reword to an allow-list entry.** `project-words.txt` is for identifiers, proper nouns and standardized data: `realpath` and `strstr` are in on that basis. Invented prose is not: `uncast` was rejected on [`UAMS-Web/uams-statamic-archive#2079`](https://github.com/UAMS-Web/uams-statamic-archive/pull/2079) and rewritten as "a value that was never cast", which cleared the gate and left the sentence better. An allow-list entry is permanent and unreviewed; a reword costs one sentence.
 
 **When a PR body claims the spell check passed, name which command ran.** A repository can carry more than one entry point over different corpora, and a clean run over one is not evidence about the other.
 
@@ -248,7 +265,7 @@ least the issue it closes; many also link blockers, follow-ups, and design-decis
   Place it either as the very first line of the body (most common) **or** as the very last
   line. Pick one, not both.
 - **Cross-repo close:** backticked org/repo path, linked to the GitHub URL:
-  `` Closes [`UAMS-Web/wordpress-importer#9`](https://github.com/UAMS-Web/wordpress-importer/issues/9). ``
+  `` Closes [`UAMS-Web/wordpress-importer-archive#9`](https://github.com/UAMS-Web/wordpress-importer-archive/issues/9). ``
 - **Multiple closes: repeat the keyword, one per issue.** `Closes #121, closes #122.` on one
   line, or a `Closes #N.` line each. **`Closes #N1, #N2, #N3.` does not work**: GitHub binds
   the keyword to the number immediately after it and to nothing else, so a comma-separated list
@@ -292,7 +309,7 @@ Do NOT close #999999 with this.     closes it
 Superseded; does not fix #999999.   closes it
 ```
 
-Measured in `uams-statamic` on 2026-09-11: PR `#2384` merged at `00:22:37Z` and `#2113` closed at `00:22:38Z`, both the body and the squash commit opening with that exact sentence. A scan of both for a keyword adjacent to a reference returned one hit and nothing else, so there was no second candidate.
+Measured in `uams-statamic` on 2026-09-11: PR `UAMS-Web/uams-statamic-archive#2384` merged at `00:22:37Z` and `UAMS-Web/uams-statamic#206` closed at `00:22:38Z`, both the body and the squash commit opening with that exact sentence. A scan of both for a keyword adjacent to a reference returned one hit and nothing else, so there was no second candidate.
 
 **It has already cost `wordpress-importer` a ticket too.** Verified against the API 2026-09-09:
 
@@ -305,7 +322,7 @@ PR #983 updated_at   2026-09-08T14:12:33Z   <- 83s after the reopen
 
 `#702` is `hitl` / `action-flavor`: a deployment across 26 networks that no diff can satisfy, and it was closed by a sentence written to prevent exactly that. Reopening restored it; the board card had to be moved back by hand. **Which route fired is not recoverable**: the PR body was edited after the reopen, so its merge-time text is gone, and the timeline's `closed` event carries `commit_id: null` with the merger as actor, which is what a merge-triggered close looks like and does not discriminate between body and commit. What is certain is that the merge commit `821dfebe` is still in the tree and still carries the negated form.
 
-**It applies to the squash commit message as well as the body.** Both carried the sentence on `uams-statamic#2384`, and a body-only habit catches half of it. The commit message is the half nobody re-reads before merging.
+**It applies to the squash commit message as well as the body.** Both carried the sentence on `uams-statamic-archive#2384`, and a body-only habit catches half of it. The commit message is the half nobody re-reads before merging.
 
 **Use a form with no keyword in it.** Every cross-reference form listed above is already safe: `tracked in #N`, `blocked by #N`, `leaves #N open`, `#N stays open for its remaining criteria`, `refs #N`, `related to #N`. Reach for one of those rather than for a negation, or name the reason without the number:
 
@@ -321,9 +338,9 @@ does not close #999999              CLOSES IT
 
 ### Properties of the parse that have surprised people here
 
-- **Only the first number after a keyword fires.** `closed #6 and #461` closes #6 and merely *references* #461, so a sentence can look half-broken and be exactly as dangerous. That is the only reason #461 survived `wordpress-importer#537`.
-- **Commit messages compose into the squash body**, so this covers commits, not just the PR body: a squash merge builds its message from the branch's commits unless an explicit `commit_message` is supplied. `wordpress-importer#548` and `#549` each carried live keywords in commits alone.
-- **A trailing colon and a cross-repo prefix both still fire.** GitHub accepts `Closes: #10` and `CLOSES: #10`, and closes across repositories on `KEYWORD OWNER/REPOSITORY#N`, so `PR #540 closed UAMS-Web/uams-statamic#1863` is a live directive against the sibling repo. The obvious pattern, `(clos|fix|resolv)\w*\s+#\d+`, matches neither and reports a clean scan on both. It is too narrow, and the widened form below is what to actually run.
+- **Only the first number after a keyword fires.** `closed #6 and #461` closes #6 and merely *references* #461, so a sentence can look half-broken and be exactly as dangerous. That is the only reason #461 survived `wordpress-importer-archive#537`.
+- **Commit messages compose into the squash body**, so this covers commits, not just the PR body: a squash merge builds its message from the branch's commits unless an explicit `commit_message` is supplied. `wordpress-importer-archive#548` and `#549` each carried live keywords in commits alone.
+- **A trailing colon and a cross-repo prefix both still fire.** GitHub accepts `Closes: #10` and `CLOSES: #10`, and closes across repositories on `KEYWORD OWNER/REPOSITORY#N`, so `PR #540 closed UAMS-Web/uams-statamic-archive#1863` is a live directive against the sibling repo. The obvious pattern, `(clos|fix|resolv)\w*\s+#\d+`, matches neither and reports a clean scan on both. It is too narrow, and the widened form below is what to actually run.
 - **The keyword must start a word.** Without a left boundary, `prefixes #2222` matched as `fixes #2222`. The `(^|[^[:alpha:]])` at the front of the pattern below closes that. The squash-subject shape `prefixes (#1111)` never matched in the first place, because the parenthesis sits where the pattern needs `#`.
 - **The pair can form ACROSS A LINE BREAK, where no author wrote either half next to the other.** A newline is whitespace to the parser, so a line *ending* in a keyword is read together with a line *beginning* with a reference. The keyword need not be a verb anyone chose: in the one real instance it was a **cell value in a status column** and the reference was the **row label of the next row**, and column alignment put them adjacent.
 
@@ -332,7 +349,7 @@ does not close #999999              CLOSES IT
   #999999  file the bug upstream                 retitled, action-flavor added
   ```
 
-  That is `f12ba37e4`, the squash commit for `uams-statamic#2446`, whose body opens `Refs #2241. Deliberately closes nothing`. It closed `#2241` anyway, at `2026-09-15T00:45:32Z`. **This is strictly harder to see than the negated form, and the two established checks both miss it.** There is no keyword adjacent to a reference *on any line*, so the pair exists only in the joined text: inspecting either line alone shows nothing wrong, and a reader looking at the rendered table sees a tidy status column. Grepping the body for `Closes #N` cannot match, because the string is not in the source text; it is created by the join. And **`closingIssuesReferences` is EMPTY** for `#2446`, with `#2461` as a control returning `#2409 CLOSED` correctly: the pull-request-level linkage and the push-time commit scan are separate code paths, **so a pull request can close an issue its own `closingIssuesReferences` does not list.** **A blank line between the two does not help**: it is still only whitespace, and neither does indenting the reference. Run line by line, the prescribed pattern found **0** matches in that body; run on the same body with its newlines joined, it found **1**, `closed #2241`. The control is the same expression on an ordinary body such as `wordpress-importer#1180`'s, with `Closes #1095` on one line, which finds **1** either way (`wordpress-importer#1132`).
+  That is `f12ba37e4`, the squash commit for `uams-statamic-archive#2446`, whose body opens `Refs #2241. Deliberately closes nothing`. It closed `UAMS-Web/uams-statamic-archive#2241` anyway, at `2026-09-15T00:45:32Z`. **This is strictly harder to see than the negated form, and the two established checks both miss it.** There is no keyword adjacent to a reference *on any line*, so the pair exists only in the joined text: inspecting either line alone shows nothing wrong, and a reader looking at the rendered table sees a tidy status column. Grepping the body for `Closes #N` cannot match, because the string is not in the source text; it is created by the join. And **`closingIssuesReferences` is EMPTY** for `UAMS-Web/uams-statamic-archive#2446`, with `UAMS-Web/uams-statamic-archive#2461` as a control returning `#2409 CLOSED` correctly: the pull-request-level linkage and the push-time commit scan are separate code paths, **so a pull request can close an issue its own `closingIssuesReferences` does not list.** **A blank line between the two does not help**: it is still only whitespace, and neither does indenting the reference. Run line by line, the prescribed pattern found **0** matches in that body; run on the same body with its newlines joined, it found **1**, `closed #2241`. The control is the same expression on an ordinary body such as `wordpress-importer-archive#1180`'s, with `Closes #1095` on one line, which finds **1** either way (`wordpress-importer-archive#1132`).
 
 ### No Markdown construct disarms a keyword, not a code span, not a fenced block
 
@@ -342,14 +359,14 @@ This section previously said a span around the keyword did, and that reading was
 
 | pull request | shape | the field links | what merging did |
 | --- | --- | --- | --- |
-| `UAMS-Web/wordpress-importer#1036` | line 1 is the keyword inside a span | nothing | **closed its target one second later, same commit** |
-| `UAMS-Web/wordpress-importer#1039` | bare keyword | `#1028` | consistent |
-| `UAMS-Web/wordpress-importer#1009` | a span on a *different* reference, bare keyword later | `#962` and `#1005` | consistent |
-| `UAMS-Web/uamswp-migration-api#205` | 1 directive in prose, 13 in spans or a fence | only the prose one | not re-checked |
+| `UAMS-Web/wordpress-importer-archive#1036` | line 1 is the keyword inside a span | nothing | **closed its target one second later, same commit** |
+| `UAMS-Web/wordpress-importer-archive#1039` | bare keyword | `#1028` | consistent |
+| `UAMS-Web/wordpress-importer-archive#1009` | a span on a *different* reference, bare keyword later | `#962` and `#1005` | consistent |
+| `UAMS-Web/uamswp-migration-api-archive#205` | 1 directive in prose, 13 in spans or a fence | only the prose one | not re-checked |
 
 **The first row is a counter-example to the claim it was cited for, and it was the only load-bearing one.** Re-measured: `#1036`'s body carries exactly one keyword-adjacent pair, `` `Closes #1013.` `` inside a span on line 1; its squash commit message carries that line verbatim, span included; and `#1013` closed at `2026-09-09T21:19:55Z` by that same commit, one second after the merge. No other reference in the body could account for it. **`#1009` is not discriminating either**: it puts the span on a *reference* with a bare keyword elsewhere, so it never tests the keyword-span case at all.
 
-**The same holds for fences, measured in `uams-statamic`.** `#2482`'s body carried two fenced closing directives naming a ticket it did not intend to close, its `closingIssuesReferences` read one ticket and was *correct about that one*, and merging closed the unlisted second ticket anyway. A populated, accurate-looking field is more dangerous than an empty one, because it closes the question.
+**The same holds for fences, measured in `uams-statamic`.** `UAMS-Web/uams-statamic-archive#2482`'s body carried two fenced closing directives naming a ticket it did not intend to close, its `closingIssuesReferences` read one ticket and was *correct about that one*, and merging closed the unlisted second ticket anyway. A populated, accurate-looking field is more dangerous than an empty one, because it closes the question.
 
 **So rewording is the only remedy measured to hold.** Use a form with no keyword in it, or put the number first. Verify at the merge per [`pre-merge-check`](../rule-pre-merge-check/SKILL.md): read the field *and* re-scan the joined text, because neither instrument alone covers both code paths.
 
@@ -369,7 +386,7 @@ Joining costs line numbers, so `-o` prints each hit instead, and a hit can now s
 
 Every hit must be a deliberate `Closes #N` naming a ticket this branch actually finishes; read each one. Whoever merges may run the same scan again and pass an explicit `commit_message`, but that is a human-in-the-loop check that has to succeed every time, forever, on the genre most likely to carry the pattern, and it only protects the merge path that session uses. Anyone merging through the GitHub UI gets the composed body and the default behavior.
 
-**Point any check at the pull-request body, not at your branch commits, and that is measured rather than assumed.** `uams-statamic#2446`'s branch carried one substantive commit whose body holds no `#N` row at all, while the table lives in the pull-request body, so a check scanning `origin/main..HEAD` would have run clean over the only case it exists to catch. In a squash-merging repository the body *is* the commit message that lands, and a body is one API read away.
+**Point any check at the pull-request body, not at your branch commits, and that is measured rather than assumed.** `uams-statamic-archive#2446`'s branch carried one substantive commit whose body holds no `#N` row at all, while the table lives in the pull-request body, so a check scanning `origin/main..HEAD` would have run clean over the only case it exists to catch. In a squash-merging repository the body *is* the commit message that lands, and a body is one API read away.
 
 **After the merge, a check with no pattern in it catches what the scan misses.** A close that GitHub makes through the pull request's declared closing references records **no** `commit_id` on the issue's `closed` event. A close caused by keyword text in the merged commit records **that commit**. So any issue the squash body mentions whose `closed` event carries the merge SHA was closed by text, not by declaration:
 
@@ -400,7 +417,7 @@ else
 fi
 ```
 
-Measured in both directions. Against `UAMS-Web/uams-statamic` at `f12ba37e4` it prints `#2241` (and `5 referenced issue(s) checked, 0 could not be read`). Against `wordpress-importer#1173`'s merge `893fda254`, which closed #1163 through its declared `Closes #1163.`, it prints only `4 referenced issue(s) checked, 0 could not be read`, and #1163's `closed` event carries `commit_id: null`. Given a SHA that does not exist, it prints `the merge commit could not be read; nothing was checked` (bash and zsh, macOS, 2026-10-02). **That discrimination rests on those two cases**, not on documented GitHub behavior. Any `closed by the commit text` line is an issue to reopen; a `could not be read` line means that issue, or the whole commit, was not checked. The last line counts the issues fully read and, separately, those that could not be, so an empty result is told apart from a run that read nothing, and a partial read is never reported as a complete one. It is an `if` rather than an `exit`, so pasting it into an interactive shell does not close the shell. It reads only same-repository references; a cross-repository mention needs the same loop against that repository.
+Measured in both directions. Against `UAMS-Web/uams-statamic` at `f12ba37e4` it prints `#2241` (and `5 referenced issue(s) checked, 0 could not be read`). Against `wordpress-importer-archive#1173`'s merge `893fda254`, which closed #1163 through its declared `Closes #1163.`, it prints only `4 referenced issue(s) checked, 0 could not be read`, and #1163's `closed` event carries `commit_id: null`. Given a SHA that does not exist, it prints `the merge commit could not be read; nothing was checked` (bash and zsh, macOS, 2026-10-02). **That discrimination rests on those two cases**, not on documented GitHub behavior. Any `closed by the commit text` line is an issue to reopen; a `could not be read` line means that issue, or the whole commit, was not checked. The last line counts the issues fully read and, separately, those that could not be, so an empty result is told apart from a run that read nothing, and a partial read is never reported as a complete one. It is an `if` rather than an `exit`, so pasting it into an interactive shell does not close the shell. It reads only same-repository references; a cross-repository mention needs the same loop against that repository.
 
 **Four related shapes, each with its own `wordpress-importer` ticket:** a PR describing past merges (#550), grouping issues after one keyword (#648), a negated keyword still closing (#1029, #1035), and the split and boundary cases above (#1132).
 
@@ -511,8 +528,8 @@ Disable Bootstrap auto-cycling on the multi-slide hero (`data-interval="false"`)
 
 ## Files
 
-- **edit** [`resources/views/page_builder/_hero.antlers.html`](https://github.com/UAMS-Web/uams-statamic/blob/734-hero-autoplay/resources/views/page_builder/_hero.antlers.html): set `data-interval="false"`; drop the unused reading-time math.
-- **edit** [`resources/blueprints/page_builder/hero.yaml`](https://github.com/UAMS-Web/uams-statamic/blob/734-hero-autoplay/resources/blueprints/page_builder/hero.yaml): add editor-facing instructions explaining that the hero no longer auto-rotates.
+- **edit** [`resources/views/page_builder/_hero.antlers.html`](https://github.com/UAMS-Web/uams-statamic-archive/blob/734-hero-autoplay/resources/views/page_builder/_hero.antlers.html): set `data-interval="false"`; drop the unused reading-time math.
+- **edit** [`resources/blueprints/page_builder/hero.yaml`](https://github.com/UAMS-Web/uams-statamic-archive/blob/734-hero-autoplay/resources/blueprints/page_builder/hero.yaml): add editor-facing instructions explaining that the hero no longer auto-rotates.
 
 ## Test plan
 

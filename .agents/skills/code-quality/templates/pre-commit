@@ -29,9 +29,11 @@ staged=$(git diff --cached --name-only --diff-filter=ACMR)
 # It catches invalid JSON and a lock file that no longer matches composer.json before they
 # reach a pull request. --no-check-publish leaves out the checks that matter only to a
 # package published on Packagist (a name, a license), which an application never has.
+# --no-check-all leaves out the warning about exact version constraints, so this gate runs the
+# same command as the chain's validate job (ci.yml) and prints the same output.
 if printf '%s\n' "$staged" | grep -Eq '^composer\.(json|lock)$'; then
     if command -v composer >/dev/null 2>&1; then
-        if ! composer validate --no-check-publish --no-interaction; then
+        if ! composer validate --no-check-publish --no-check-all --no-interaction; then
             echo "pre-commit: composer validate failed; fix composer.json or composer.lock." >&2
             status=1
         fi
