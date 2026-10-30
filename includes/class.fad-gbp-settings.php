@@ -185,6 +185,9 @@ function uamswp_fad_gbp_render_settings_page(): void
                             <?php if (! empty($entry['fields'])) { ?>
                                 <br><small><?php echo esc_html(implode(', ', (array) $entry['fields'])); ?></small>
                             <?php } ?>
+                            <?php if (! empty($entry['attributes'])) { ?>
+                                <br><small>Attributes: <?php echo esc_html(implode(', ', (array) $entry['attributes'])); ?></small>
+                            <?php } ?>
                             <?php if (! empty($entry['unresolved_categories'])) { ?>
                                 <br><small>No Google category for: <?php echo esc_html(implode(', ', (array) $entry['unresolved_categories'])); ?></small>
                             <?php } ?>
