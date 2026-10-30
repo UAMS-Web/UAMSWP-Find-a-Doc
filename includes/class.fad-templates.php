@@ -72,7 +72,6 @@ function uamswp_taxonomy_archive_page_template($templates)
     $templates['provider-image.php'] = 'Provider Image';
 
     // $templates['doximity-list.php'] = 'Doximity List';
-    // $templates['gmb-list-provider.php'] = 'GMB Provider List';
     // $templates['gmb-list-location.php'] = 'GMB Location List';
     // $templates['mychart-list-provider.php'] = 'MyChart Provider List';
     return $templates;
@@ -98,8 +97,6 @@ function uamswp_redirect_page_template($template)
 
     // if ('doximity-list.php' == basename ($page_template ))
     //     $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/doximity-list.php';
-    // if ('gmb-list-provider.php' == basename ($page_template ))
-    //     $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/gmb-list-provider.php';
     // if ('gmb-list-location.php' == basename ($page_template ))
     //     $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/gmb-list-location.php';
     // if ('mychart-list-provider.php' == basename ($page_template ))
