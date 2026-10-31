@@ -283,9 +283,7 @@
 				"class": "",
 				"id": ""
 			},
-			"default_value": [
-				"English"
-			],
+			"default_value": [],
 			"taxonomy": "language",
 			"field_type": "multi_select",
 			"allow_null": 0,
