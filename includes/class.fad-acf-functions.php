@@ -108,19 +108,28 @@
 
 		function set_default_language($value, $post_id, $field) {
 
-			// Only add default content for new posts
+			// Only seed a brand-new post. ACF substitutes the field's default_value
+			// before this filter runs, so $value is never null here; gate on the
+			// auto-draft status instead, so an editor who removes every language
+			// from a saved provider does not get English back on the next load.
 
-				if ( $value !== null ) {
+				if ( 'auto-draft' !== get_post_status( $post_id ) || ! empty( $value ) ) {
 
 					return $value;
 
 				}
 
-			$term = get_term_by('slug', 'english', 'language');
-			$term_id = $term->term_id;
-			$value = array($term_id);
+			$term = get_term_by( 'slug', 'english', 'language' );
 
-			return $value;
+			// No 'english' term in this environment: leave the field empty.
+
+				if ( ! $term || is_wp_error( $term ) ) {
+
+					return $value;
+
+				}
+
+			return array( (int) $term->term_id );
 
 		}
 
