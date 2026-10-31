@@ -29,3 +29,25 @@ if (eval("typeof acf") != undefined) {
     };    
   });  
 }
+
+// The SER ID and NPI are identifiers, not quantities. A focused number input
+// steps its value when the mouse wheel turns over it, so scrolling the edit
+// screen could change one without anyone typing. Blur the input on wheel so the
+// page scrolls and the value stays put.
+document.addEventListener(
+  'wheel',
+  function (event) {
+    var input = event.target;
+    if (
+      input &&
+      input.matches &&
+      input.matches(
+        '.acf-field[data-name="physician_pid"] input[type="number"], .acf-field[data-name="physician_npi"] input[type="number"]'
+      ) &&
+      document.activeElement === input
+    ) {
+      input.blur();
+    }
+  },
+  { passive: true }
+);
