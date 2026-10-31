@@ -1,2 +1,16 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Keep the GitHub download to what the plugin runs. Every top-level entry is left
+# out, then each runtime path is put back. A new top-level folder stays out of
+# the download until it is listed here on purpose.
+/* export-ignore
+/.* export-ignore
+/uamswp-find-a-doc.php -export-ignore
+/required-plugins.php -export-ignore
+/includes -export-ignore
+/admin -export-ignore
+/assets -export-ignore
+/templates -export-ignore
+/plugins -export-ignore
+/tgm -export-ignore
