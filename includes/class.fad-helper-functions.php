@@ -982,33 +982,25 @@ if ( !function_exists('uamswp_spotlight_appointment_cta') ) {
 
 		} else {
 
-			// Not bookable: no scheduling prose and no appointment heading. Invite
-			// the reader to the profile with a fuller line built from the
-			// provider's occupation title (same construction as the intro).
+			// Not bookable: no scheduling prose and no appointment heading. One
+			// invitation, with the link on the profile it points to. It does not
+			// restate the page's opening "Get to know ..." line, so it needs no
+			// occupation title and reads the same with or without one.
 			$cta_heading = 'Learn More';
 			$phone       = ''; // no scheduling number is surfaced when not bookable
 
-			$title = uamswp_provider_occupation_title( $provider_id );
+			$profile_noun_link = sprintf(
+				'<a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s provider profile</a>',
+				esc_url( $provider_url ),
+				esc_attr( $medium_name_attr ),
+				$short_possessive
+			);
 
-			if ( $title ) {
-
-				$cta_body = sprintf(
-					'Get to know %1$s, %2$s %3$s at UAMS Health, and %4$s to learn more.',
-					$medium_name,
-					uamswp_indefinite_article( $title ),
-					esc_html( $title ),
-					$profile_link
-				);
-
-			} else {
-
-				$cta_body = sprintf(
-					'Get to know %1$s and %2$s to learn more.',
-					$medium_name,
-					$profile_link
-				);
-
-			}
+			$cta_body = sprintf(
+				'Learn more about %1$s, including background, specialties and locations, on %2$s.',
+				$medium_name,
+				$profile_noun_link
+			);
 
 		}
 
