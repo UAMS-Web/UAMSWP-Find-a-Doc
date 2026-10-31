@@ -1,15 +1,14 @@
 'use strict';
 
 /**
- * Pins the behavior of admin/js/acf-admin.js as it stands.
+ * Pins the behavior of admin/js/acf-admin.js.
  *
  * The script is loaded unchanged into a jsdom window that carries a stub of ACF's `acf` global,
  * so what is asserted is what the real file does when ACF runs it.
  *
- * Today the script only replaces the Google Map field's `searchPosition`. It has no handling of
- * number inputs: a wheel event over a focused or unfocused number field is left to the
- * browser. #900 changes that for the SER ID and NPI fields, and the wheel tests below are the
- * behavior it will change on purpose.
+ * The script replaces the Google Map field's `searchPosition`, and blurs a focused SER ID or NPI
+ * number input when the mouse wheel turns over it, so the wheel scrolls the page instead of
+ * stepping the identifier. Other number inputs are left to the browser.
  *
  * Run: npm test
  */
@@ -96,28 +95,54 @@ test('the stored zoom is 15 until the map has been initialized', () => {
     assert.equal(field.stored.zoom, 15);
 });
 
-for (const name of ['physician_pid', 'physician_npi']) {
-    for (const focused of [true, false]) {
-        test(`a wheel event over ${focused ? 'a focused' : 'an unfocused'} ${name} number field is left alone`, () => {
-            const { window } = load(
-                `<div class="acf-field" data-name="${name}"><input type="number" value="1234567890"></div>`
-            );
-            const input = window.document.querySelector('input');
+function wheelOver(markup, focused) {
+    const { window } = load(markup);
+    const input = window.document.querySelector('input');
 
-            if (focused) {
-                input.focus();
-            }
-
-            const event = new window.WheelEvent('wheel', { deltaY: 100, bubbles: true, cancelable: true });
-            input.dispatchEvent(event);
-
-            assert.equal(event.defaultPrevented, false, 'the wheel default action is not cancelled');
-            assert.equal(
-                window.document.activeElement === input,
-                focused,
-                'focus is not moved off the field'
-            );
-            assert.equal(input.value, '1234567890');
-        });
+    if (focused) {
+        input.focus();
     }
+
+    const event = new window.WheelEvent('wheel', { deltaY: 100, bubbles: true, cancelable: true });
+    input.dispatchEvent(event);
+
+    return { window, input, event };
 }
+
+for (const name of ['physician_pid', 'physician_npi']) {
+    const field = `<div class="acf-field" data-name="${name}"><input type="number" value="1234567890"></div>`;
+
+    test(`a wheel event over a focused ${name} number field blurs it`, () => {
+        const { window, input, event } = wheelOver(field, true);
+
+        assert.notEqual(window.document.activeElement, input, 'focus is moved off the field');
+        assert.equal(event.defaultPrevented, false, 'the page still scrolls');
+        assert.equal(input.value, '1234567890');
+    });
+
+    test(`a wheel event over an unfocused ${name} number field changes nothing`, () => {
+        const { window, input, event } = wheelOver(field, false);
+
+        assert.notEqual(window.document.activeElement, input);
+        assert.equal(event.defaultPrevented, false);
+        assert.equal(input.value, '1234567890');
+    });
+}
+
+test('a focused number field outside the SER ID and NPI fields keeps its focus', () => {
+    const { window, input } = wheelOver(
+        '<div class="acf-field" data-name="physician_rating"><input type="number" value="4"></div>',
+        true
+    );
+
+    assert.equal(window.document.activeElement, input);
+});
+
+test('a focused text input inside the NPI field keeps its focus', () => {
+    const { window, input } = wheelOver(
+        '<div class="acf-field" data-name="physician_npi"><input type="text" value="1234567890"></div>',
+        true
+    );
+
+    assert.equal(window.document.activeElement, input);
+});
