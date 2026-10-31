@@ -5531,7 +5531,7 @@
 			"sub_fields": [
 				{
 					"key": "field_location_npi_item",
-					"label": "Individual National Provider Identifier",
+					"label": "Organizational National Provider Identifier",
 					"name": "location_npi_item",
 					"type": "number",
 					"instructions": "",
