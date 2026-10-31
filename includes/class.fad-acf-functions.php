@@ -224,14 +224,14 @@
 
 				// Create provider name combinations to store in fields
 
-					$first_name = $_POST['acf']['field_physician_first_name'];
-					$middle_name = $_POST['acf']['field_physician_middle_name'];
-					$last_name = $_POST['acf']['field_physician_last_name'];
-					$pedigree = $_POST['acf']['field_physician_pedigree'];
+					$first_name = $_POST['acf']['field_physician_first_name'] ?? '';
+					$middle_name = $_POST['acf']['field_physician_middle_name'] ?? '';
+					$last_name = $_POST['acf']['field_physician_last_name'] ?? '';
+					$pedigree = $_POST['acf']['field_physician_pedigree'] ?? '';
 
 					// Create full name to store in 'physician_full_name' field (e.g., "Leonard H. McCoy, M.D.")
 
-						$degrees = $_POST['acf']['field_physician_degree'];
+						$degrees = $_POST['acf']['field_physician_degree'] ?? array();
 
 						$i = 1;
 
@@ -244,7 +244,7 @@
 							foreach ( $degrees as $degree ) {
 
 								$degree_name = get_term( $degree, 'degree');
-								$degree_list .= $degree_name->name;
+								$degree_list .= ( $degree_name && ! is_wp_error( $degree_name ) ) ? $degree_name->name : '';
 
 								if ( count($degrees) > $i ) {
 
@@ -273,7 +273,7 @@
 
 						// Get related areas of expertise
 
-							$expertises = $_POST['acf']['field_physician_expertise'];
+							$expertises = $_POST['acf']['field_physician_expertise'] ?? array();
 
 						// Initialize variable to prevent php error
 
@@ -306,7 +306,7 @@
 
 						// Get related conditions
 
-							$conditions = $_POST['acf']['field_physician_conditions_cpt'];
+							$conditions = $_POST['acf']['field_physician_conditions_cpt'] ?? array();
 
 						// Initialize variable to prevent php error
 
@@ -339,7 +339,7 @@
 
 						// Get related treatments
 
-							$treatments = $_POST['acf']['field_physician_treatments_cpt'];
+							$treatments = $_POST['acf']['field_physician_treatments_cpt'] ?? array();
 
 						// Initialize variable to prevent php error
 
@@ -380,7 +380,7 @@
 
 					// Get the list of locations associated with the provider
 
-						$locations = $_POST['acf']['field_physician_locations'];
+						$locations = $_POST['acf']['field_physician_locations'] ?? array();
 
 					// Get the desired values from each associated location
 
