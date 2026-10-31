@@ -293,7 +293,7 @@ function display_provider_image() {
                                             $location_floor_label = '';
                                             if ( $location_floor ) {
                                                 $location_floor_value = $location_floor['value'];
-                                                $location_floor_label = $location_floor['choices'][ $location_floor_value ];
+                                                $location_floor_label = $location_floor['choices'][ $location_floor_value ] ?? '';
                                             }
                                         $location_suite = get_field('location_suite', $location_source_ids['unit'] );
                     
@@ -308,7 +308,7 @@ function display_provider_image() {
                                             // if ( $location_building && $building_slug != '_none' ) {
                                             //     array_push($location_addresses, $building_name);
                                             // }
-                                            // if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ) {
+                                            // if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" && $location_floor_label !== '' ) {
                                             //     array_push($location_addresses, $location_floor_label);
                                             // }
                                             // if ( $location_suite && !empty($location_suite) ) {
