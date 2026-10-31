@@ -3225,3 +3225,85 @@
 		return trim($value);
 
 	}
+
+// Workday identifiers on the provider profile are identifiers, not free text:
+// the exact-match lookups and cross-system joins that read them fail silently on
+// a value like "Employee ID 1234567" pasted from Workday with its label.
+// Reject anything that is not digits only and the expected length. Empty values
+// stay allowed, since none of the four fields is required.
+//
+// Rejected rather than repaired: the filter cannot change what is stored, and
+// an editor who sees the message learns what the field holds.
+function uamswp_workday_id_validation_rules() {
+
+	return array(
+		'field_physician_workday_universal_id'          => array( 'digits' => 9, 'label' => 'Workday Universal ID' ),
+		'field_physician_workday_employee_id'           => array( 'digits' => 7, 'label' => 'Workday Employee ID' ),
+		'field_physician_workday_contingent_worker_id'  => array( 'digits' => 7, 'label' => 'Workday Contingent Worker ID' ),
+		'field_physician_workday_student_id'            => array( 'digits' => 7, 'label' => 'Workday Student ID' ),
+	);
+
+}
+
+function uamswp_workday_id_validate( $valid, $value, $field, $input_name ) {
+
+	if ( $valid !== true ) {
+
+		return $valid;
+
+	}
+
+	$rules = uamswp_workday_id_validation_rules();
+
+	if ( !isset($field['key'], $rules[ $field['key'] ]) || !is_string($value) ) {
+
+		return $valid;
+
+	}
+
+	$value = trim($value);
+
+	if ( '' === $value ) {
+
+		return $valid;
+
+	}
+
+	$digits = $rules[ $field['key'] ]['digits'];
+
+	if ( 1 !== preg_match( '/^[0-9]{' . $digits . '}$/', $value ) ) {
+
+		return sprintf(
+			'Enter the %1$d-digit %2$s only, e.g. %3$s.',
+			$digits,
+			$rules[ $field['key'] ]['label'],
+			substr( '123456789', 0, $digits )
+		);
+
+	}
+
+	return $valid;
+
+}
+
+foreach ( array_keys( uamswp_workday_id_validation_rules() ) as $uamswp_workday_id_key ) {
+
+	add_filter( 'acf/validate_value/key=' . $uamswp_workday_id_key, 'uamswp_workday_id_validate', 10, 4 );
+
+}
+unset( $uamswp_workday_id_key );
+
+// Validation trims before it checks, so store the trimmed value too; otherwise
+// " 1234567 " passes and is saved with its spaces.
+function uamswp_workday_id_trim( $value, $post_id, $field ) {
+
+	return is_string($value) ? trim($value) : $value;
+
+}
+
+foreach ( array_keys( uamswp_workday_id_validation_rules() ) as $uamswp_workday_id_key ) {
+
+	add_filter( 'acf/update_value/key=' . $uamswp_workday_id_key, 'uamswp_workday_id_trim', 10, 3 );
+
+}
+unset( $uamswp_workday_id_key );
