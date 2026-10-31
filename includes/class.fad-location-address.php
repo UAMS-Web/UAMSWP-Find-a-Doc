@@ -30,8 +30,6 @@ declare(strict_types=1);
  * @param  string|false  $suite  The suite text, or a falsy value when there is none.
  * @param  string  $building_separator  Text between the building and what follows it.
  * @param  string  $floor_separator  Text between the floor label and the suite.
- * @param  bool  $require_floor_value  Whether the floor label needs a non-empty floor value to print. The
- *                                     schema markup did not require one; the display did.
  */
 function uamswp_location_address_2(
     $has_building,
@@ -41,12 +39,11 @@ function uamswp_location_address_2(
     $floor_label,
     $suite,
     $building_separator = '<br />',
-    $floor_separator = ', ',
-    $require_floor_value = true
+    $floor_separator = ', '
 ): string {
-    $show_floor = $floor && $floor_value != '0' && (! $require_floor_value || ! empty($floor_value));
+    $show_floor = $floor && ! empty($floor_value) && $floor_value != '0' && $floor_label !== '';
 
-    return ($has_building ? $building_name.((($floor && $floor_value) || $suite) ? $building_separator : '') : '')
+    return ($has_building ? $building_name.((($floor && $floor_value && $floor_label !== '') || $suite) ? $building_separator : '') : '')
         .($show_floor ? $floor_label.($suite ? $floor_separator : '') : '')
         .($suite ?: '');
 }
@@ -80,7 +77,7 @@ function uamswp_location_address_parts(
         $parts[] = $building_name;
     }
 
-    if ($floor && ! empty($floor_value) && $floor_value != '0') {
+    if ($floor && ! empty($floor_value) && $floor_value != '0' && $floor_label !== '') {
         $parts[] = $floor_label;
     }
 

@@ -862,7 +862,7 @@ while ( have_posts() ) : the_post();
                                                 }
                                             $location_suite = get_field('location_suite', $location_source_ids['unit'] );
                                             $location_address_2 = uamswp_location_address_2( ( $location_building && $building_slug != '_none' ), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ', true );
-                                            $location_address_2_schema = uamswp_location_address_2( ( $location_building && $building_slug != '_none' ), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ', false );
+                                            $location_address_2_schema = uamswp_location_address_2( ( $location_building && $building_slug != '_none' ), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ' );
 
                                             $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street'] );
                                             if (!$location_address_2) {

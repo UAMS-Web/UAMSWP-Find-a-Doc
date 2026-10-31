@@ -59,8 +59,8 @@ final class LocationAddressTest extends UnitTestCase
             'floor "0" is not printed, no suite' => [true, $ground, '0', 'Ground', '', 'Bldg A'],
             'floor "0" is not printed, with suite' => [true, $ground, '0', 'Ground', 'Suite 200', 'Bldg A<br />Suite 200'],
             'floor field with no value is not printed' => [true, $blank, '', '', 'Suite 200', 'Bldg A<br />Suite 200'],
-            'floor value with no label, with suite' => [true, $floor, '3', '', 'Suite 200', 'Bldg A<br />, Suite 200'],
-            'floor value with no label, no suite' => [true, $floor, '3', '', '', 'Bldg A<br />'],
+            'floor value with no label, with suite' => [true, $floor, '3', '', 'Suite 200', 'Bldg A<br />Suite 200'],
+            'floor value with no label, no suite' => [true, $floor, '3', '', '', 'Bldg A'],
         ];
     }
 
@@ -74,12 +74,12 @@ final class LocationAddressTest extends UnitTestCase
     {
         $this->assertSame(
             $expected,
-            \uamswp_location_address_2($has_building, 'Bldg A', $floor, $floor_value, $floor_label, $suite, '<br />', ', ', true)
+            \uamswp_location_address_2($has_building, 'Bldg A', $floor, $floor_value, $floor_label, $suite, '<br />', ', ')
         );
     }
 
     /**
-     * The schema markup separates with spaces and does not require a floor value.
+     * The schema markup separates with spaces.
      *
      * @return void
      */
@@ -87,24 +87,24 @@ final class LocationAddressTest extends UnitTestCase
     {
         $floor = $this->floor();
 
-        $this->assertSame('Bldg A Second Floor Suite 200', \uamswp_location_address_2(true, 'Bldg A', $floor, '2', 'Second Floor', 'Suite 200', ' ', ' ', false));
-        $this->assertSame('Bldg A Second Floor', \uamswp_location_address_2(true, 'Bldg A', $floor, '2', 'Second Floor', '', ' ', ' ', false));
-        $this->assertSame('Suite 200', \uamswp_location_address_2(false, '', false, '', '', 'Suite 200', ' ', ' ', false));
-        $this->assertSame('', \uamswp_location_address_2(false, '', false, '', '', '', ' ', ' ', false));
+        $this->assertSame('Bldg A Second Floor Suite 200', \uamswp_location_address_2(true, 'Bldg A', $floor, '2', 'Second Floor', 'Suite 200', ' ', ' '));
+        $this->assertSame('Bldg A Second Floor', \uamswp_location_address_2(true, 'Bldg A', $floor, '2', 'Second Floor', '', ' ', ' '));
+        $this->assertSame('Suite 200', \uamswp_location_address_2(false, '', false, '', '', 'Suite 200', ' ', ' '));
+        $this->assertSame('', \uamswp_location_address_2(false, '', false, '', '', '', ' ', ' '));
     }
 
     /**
-     * Schema markup prints the floor label for a floor field whose value is
-     * empty (display does not), so a suite after it gets two spaces.
+     * Schema markup skips a floor field whose value is empty, as the display
+     * does, so a suite after the building gets one space and not two.
      *
      * @return void
      */
-    public function test_schema_line_prints_the_floor_label_without_a_floor_value(): void
+    public function test_schema_line_skips_a_floor_field_with_no_value(): void
     {
         $blank = ['value' => '', 'choices' => []];
 
-        $this->assertSame('Bldg A  Suite 200', \uamswp_location_address_2(true, 'Bldg A', $blank, '', '', 'Suite 200', ' ', ' ', false));
-        $this->assertSame('Bldg A', \uamswp_location_address_2(true, 'Bldg A', $blank, '', '', '', ' ', ' ', false));
+        $this->assertSame('Bldg A Suite 200', \uamswp_location_address_2(true, 'Bldg A', $blank, '', '', 'Suite 200', ' ', ' '));
+        $this->assertSame('Bldg A', \uamswp_location_address_2(true, 'Bldg A', $blank, '', '', '', ' ', ' '));
     }
 
     /**
@@ -116,7 +116,7 @@ final class LocationAddressTest extends UnitTestCase
     {
         $ground = ['value' => '0', 'choices' => ['0' => 'Ground']];
 
-        $this->assertSame('Bldg A Suite 200', \uamswp_location_address_2(true, 'Bldg A', $ground, '0', 'Ground', 'Suite 200', ' ', ' ', false));
+        $this->assertSame('Bldg A Suite 200', \uamswp_location_address_2(true, 'Bldg A', $ground, '0', 'Ground', 'Suite 200', ' ', ' '));
     }
 
     /**
@@ -128,12 +128,12 @@ final class LocationAddressTest extends UnitTestCase
     {
         $floor = $this->floor();
 
-        $this->assertSame('Bldg A<br />Second Floor<br />Suite 200', \uamswp_location_address_2(true, 'Bldg A', $floor, '2', 'Second Floor', 'Suite 200', '<br />', '<br />', true));
-        $this->assertSame('Second Floor', \uamswp_location_address_2(false, '', $floor, '2', 'Second Floor', '', '<br />', '<br />', true));
+        $this->assertSame('Bldg A<br />Second Floor<br />Suite 200', \uamswp_location_address_2(true, 'Bldg A', $floor, '2', 'Second Floor', 'Suite 200', '<br />', '<br />'));
+        $this->assertSame('Second Floor', \uamswp_location_address_2(false, '', $floor, '2', 'Second Floor', '', '<br />', '<br />'));
     }
 
     /**
-     * The separators and the floor-value rule default to the display values.
+     * The separators default to the display values.
      *
      * @return void
      */
@@ -172,16 +172,17 @@ final class LocationAddressTest extends UnitTestCase
     }
 
     /**
-     * A floor value with no label adds an empty entry, which is the empty
-     * line between the facility and the city.
+     * A floor value with no label adds no entry, so there is no empty line
+     * between the facility and the city.
      *
      * @return void
      */
-    public function test_parts_keep_an_empty_floor_label(): void
+    public function test_parts_skip_a_floor_with_no_label(): void
     {
         $this->assertSame(
-            ['Bldg A', '', 'Suite 200'],
+            ['Bldg A', 'Suite 200'],
             \uamswp_location_address_parts(true, 'Bldg A', $this->floor('3'), '3', '', 'Suite 200')
         );
+        $this->assertSame(['Bldg A'], \uamswp_location_address_parts(true, 'Bldg A', $this->floor('3'), '3', '', ''));
     }
 }
