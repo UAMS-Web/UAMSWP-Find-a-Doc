@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Pins the Provider Spotlight call-to-action band as it renders today, before #903 rewrites the "Learn More" line.
+ * Pins the Provider Spotlight call-to-action band as it renders today, with the #903 "Learn More" line.
  *
  * The function runs for real, with the name and occupation helpers it calls. Only the WordPress and theme
  * functions it needs are stubbed.
@@ -71,6 +71,11 @@ final class SpotlightCtaTest extends UnitTestCase
     private function name_link(): string
     {
         return '<a href="'.self::URL.'" data-itemtitle="Learn more about Dr. Jane Doe">Dr. Jane Doe</a>';
+    }
+
+    private function profile_noun_link(): string
+    {
+        return '<a href="'.self::URL.'" data-itemtitle="Learn more about Dr. Jane Doe">Dr.&nbsp;Doe&#039;s provider profile</a>';
     }
 
     private function profile_link(): string
@@ -174,77 +179,47 @@ final class SpotlightCtaTest extends UnitTestCase
         [$heading, $body] = $this->render();
 
         $this->assertSame('Learn More', $heading);
-        $this->assertStringStartsWith('Get to know Dr. Jane Doe', $body);
+        $this->assertStringStartsWith('Learn more about Dr. Jane Doe', $body);
         $this->assertStringNotContainsString('schedule', $body);
         $this->assertStringNotContainsString('tel:', $body);
     }
 
-    public function test_the_learn_more_line_with_an_occupation_title(): void
+    public function test_the_learn_more_line_is_one_invitation_with_the_link_on_the_profile(): void
     {
         $this->fields['physician_eligible_appointments'] = '0';
-        $this->fields['physician_title'] = 7;
 
         [$heading, $body] = $this->render();
 
         $this->assertSame('Learn More', $heading);
-        $this->assertSame('Get to know Dr. Jane Doe, a Cardiologist at UAMS Health, and '.$this->profile_link().' to learn more.', $body);
+        $this->assertSame('Learn more about Dr. Jane Doe, including background, specialties and locations, on '.$this->profile_noun_link().'.', $body);
     }
 
-    public function test_the_learn_more_line_uses_an_before_a_vowel_title(): void
-    {
-        $this->fields['physician_eligible_appointments'] = '0';
-        $this->fields['physician_title'] = 7;
-        $this->titles[7] = 'Anesthesiologist';
-
-        [, $body] = $this->render();
-
-        $this->assertSame('Get to know Dr. Jane Doe, an Anesthesiologist at UAMS Health, and '.$this->profile_link().' to learn more.', $body);
-    }
-
-    public function test_the_learn_more_line_follows_the_article_exception_list(): void
-    {
-        $this->fields['physician_eligible_appointments'] = '0';
-        $this->fields['physician_title'] = 7;
-        $this->titles[7] = 'Urologist';
-
-        [, $body] = $this->render();
-
-        $this->assertSame('Get to know Dr. Jane Doe, a Urologist at UAMS Health, and '.$this->profile_link().' to learn more.', $body);
-    }
-
-    public function test_the_term_override_title_wins_over_the_term_name(): void
+    public function test_the_learn_more_line_does_not_depend_on_the_occupation_title(): void
     {
         $this->fields['physician_eligible_appointments'] = '0';
         $this->fields['physician_title'] = 7;
         $this->fields['title_override'] = 'Heart Specialist';
 
-        [, $body] = $this->render();
+        [, $untitled] = (function () {
+            $this->fields['physician_title'] = null;
+            $this->fields['title_override'] = '';
 
-        $this->assertSame('Get to know Dr. Jane Doe, a Heart Specialist at UAMS Health, and '.$this->profile_link().' to learn more.', $body);
+            return $this->render();
+        })();
+
+        [, $titled] = (function () {
+            $this->fields['physician_title'] = 7;
+            $this->fields['title_override'] = 'Heart Specialist';
+
+            return $this->render();
+        })();
+
+        $this->assertSame($untitled, $titled);
+        $this->assertStringNotContainsString('Heart Specialist', $titled);
+        $this->assertStringNotContainsString('Get to know', $titled);
     }
 
-    public function test_the_learn_more_line_escapes_the_occupation_title(): void
-    {
-        $this->fields['physician_eligible_appointments'] = '0';
-        $this->fields['physician_title'] = 7;
-        $this->titles[7] = 'Ear, Nose & Throat Specialist';
-
-        [, $body] = $this->render();
-
-        $this->assertStringContainsString('an Ear, Nose &amp; Throat Specialist at UAMS Health', $body);
-    }
-
-    public function test_the_learn_more_line_with_no_occupation_title(): void
-    {
-        $this->fields['physician_eligible_appointments'] = '0';
-
-        [$heading, $body] = $this->render();
-
-        $this->assertSame('Learn More', $heading);
-        $this->assertSame('Get to know Dr. Jane Doe and '.$this->profile_link().' to learn more.', $body);
-    }
-
-    public function test_a_resident_gets_the_fixed_resident_title(): void
+    public function test_a_resident_gets_the_same_learn_more_line(): void
     {
         $this->fields['physician_resident'] = '1';
         $this->fields['physician_title'] = 7;
@@ -252,7 +227,7 @@ final class SpotlightCtaTest extends UnitTestCase
         [$heading, $body] = $this->render();
 
         $this->assertSame('Learn More', $heading);
-        $this->assertSame('Get to know Dr. Jane Doe, a Resident Physician at UAMS Health, and '.$this->profile_link().' to learn more.', $body);
+        $this->assertSame('Learn more about Dr. Jane Doe, including background, specialties and locations, on '.$this->profile_noun_link().'.', $body);
     }
 
     public function test_the_provider_name_is_escaped_in_the_line_and_in_the_link_title(): void
@@ -262,8 +237,8 @@ final class SpotlightCtaTest extends UnitTestCase
 
         [, $body] = $this->render();
 
-        $this->assertStringStartsWith('Get to know Dr. Jo &amp; Co Doe and ', $body);
-        $this->assertStringContainsString('data-itemtitle="Learn more about Dr. Jo &amp; Co Doe">visit ', $body);
+        $this->assertStringStartsWith('Learn more about Dr. Jo &amp; Co Doe, including ', $body);
+        $this->assertStringContainsString('data-itemtitle="Learn more about Dr. Jo &amp; Co Doe">', $body);
     }
 
     public function test_the_band_markup(): void
