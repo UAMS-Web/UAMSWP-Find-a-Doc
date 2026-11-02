@@ -852,12 +852,13 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         if ($location_building && $building_slug != '_none') {
                             $location_addresses[] = $building_name;
                         }
+                        // A location name drops the place it is "in" or "at" (a facility, city, neighborhood or street);
+                        // the title (the Business name) keeps the full name
                         if (! $location_has_parent) {
-                            $location_addresses[] = $location_title;
+                            $location_addresses[] = UAMSWP_FAD_GBP_Logic::location_name_without_place($location_title);
                         } else {
-                            $location_addresses[] = $location_parent_title;
-                            // The parent is already on the line above; the title (the Business name) keeps the full child name
-                            $location_addresses[] = UAMSWP_FAD_GBP_Logic::child_name_without_parent($location_title, get_the_title($location_parent_location));
+                            $location_addresses[] = UAMSWP_FAD_GBP_Logic::location_name_without_place($location_parent_title);
+                            $location_addresses[] = UAMSWP_FAD_GBP_Logic::location_name_without_place($location_title);
                         }
 
                         $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';

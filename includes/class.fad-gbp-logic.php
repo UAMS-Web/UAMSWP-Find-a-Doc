@@ -85,37 +85,27 @@ class UAMSWP_FAD_GBP_Logic
     }
 
     /**
-     * A child location's name without the parent's name it ends with, for an address line.
+     * A location name without the place it is "in" or "at", for an address line.
      *
      * The CSV export had the parent's name on one address line and the child's on the next,
-     * and whoever uploaded it removed the repeated parent from the end of the child by hand.
-     * That is ` in the <parent>`, ` in <parent>`, ` at the <parent>` or ` at <parent>`, in any
-     * letter case. A child name that does not end that way is left as it is, as is a child
-     * whose name would be empty without it. The listing title keeps the full child name.
+     * and whoever uploaded it removed the place from the end of each name by hand. The place
+     * is whatever follows the first ` in the `, ` in `, ` at the ` or ` at `, in any letter
+     * case: the parent, but also a facility, a city, a neighborhood or a street. Everything
+     * from that joiner on goes. A name with no joiner, or with nothing before or after one, is
+     * left as it is. The listing title keeps the full name.
      *
-     * @param  string  $child  The child location's name.
-     * @param  string  $parent  The parent location's name; both names must be encoded the same way.
+     * @param  string  $name  A location's name.
      */
-    public static function child_name_without_parent($child, $parent): string
+    public static function location_name_without_place($name): string
     {
 
-        $child = trim((string) $child);
-        $parent = trim((string) $parent);
+        $name = trim((string) $name);
 
-        if ($parent === '') {
-            return $child;
+        if (preg_match('/^(.*?\S)\s+(?:in|at)(?:\s+the)?\s+\S/iu', $name, $matches) === 1) {
+            return $matches[1];
         }
 
-        foreach ([' in the ', ' in ', ' at the ', ' at '] as $joiner) {
-            $suffix = $joiner.$parent;
-            $cut = mb_strlen($child) - mb_strlen($suffix);
-
-            if ($cut > 0 && mb_strtolower(mb_substr($child, $cut)) === mb_strtolower($suffix)) {
-                return rtrim(mb_substr($child, 0, $cut));
-            }
-        }
-
-        return $child;
+        return $name;
 
     }
 
