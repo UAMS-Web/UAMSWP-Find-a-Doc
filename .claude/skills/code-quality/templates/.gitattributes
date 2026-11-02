@@ -1,0 +1,12 @@
+# Pin working-tree and committed text to LF. Without this file, every
+# checkout follows the machine's `core.autocrlf`. Git for Windows defaults
+# that to `true`, so a contributor inherits a tree where every first-party
+# text file is rewritten from this repository's LF to CRLF, and the
+# corruption does not announce itself as a line-ending problem (Pint
+# `line_ending` fixers, YAML/frontmatter parsers seeing `\r`, line-based
+# tests). A committed `eol=lf` outranks `core.autocrlf`.
+#
+# `text=auto` still detects binary content and leaves it alone. Repositories
+# may add more specific lines under this (diff drivers, `export-ignore`,
+# `merge=union` for an append-only decision log); keep this line first.
+* text=auto eol=lf

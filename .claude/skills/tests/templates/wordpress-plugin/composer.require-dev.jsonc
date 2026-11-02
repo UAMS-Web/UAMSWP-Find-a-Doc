@@ -1,0 +1,38 @@
+{
+    // cspell:ignore packagist yoast
+    "$comment": [
+        "Merge these keys into the plugin's composer.json; this file is not a composer.json of its own.",
+        "Versions are the current releases as of 2026-10-07 (repo.packagist.org).",
+        "This is the Unit layer only: Pest 5 and Brain Monkey, with no WordPress. The Integration suite has its own Composer setup in tests/Integration/composer.json, on PHPUnit 9.6, because WordPress' test suite supports PHPUnit 9 only and yoast/phpunit-polyfills cannot install beside PHPUnit 13 (UAMS-Web/uams-claude-skills#124).",
+        "config.platform.php is the development PHP, 8.4.1, in every WordPress repository: every PHPUnit 13 release requires php >=8.4.1, so 8.4.0 does not resolve. It is not the supported floor. The floor goes in require.php, the plugin header's Requires PHP, rector.php and phpstan.neon.dist, and a floor lint job parses the shipped files on it (the tests skill).",
+        "A plugin with no composer.json gets one holding these keys plus name, description, type and license, and a require block holding only php (the supported floor, which Rector and PHPStan read): development dependencies only, so nothing is installed into production."
+    ],
+    "require-dev": {
+        "brain/monkey": "^2.7",
+        "pestphp/pest": "^5.3"
+    },
+    "config": {
+        "platform": {
+            "php": "8.4.1"
+        },
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "setup:integration": "@composer install --working-dir=tests/Integration",
+        "test": [
+            "@test:unit",
+            "@test:integration"
+        ],
+        "test:unit": "pest",
+        "test:integration": "@php tests/Integration/vendor/bin/phpunit --configuration tests/Integration/phpunit.xml"
+    },
+    "scripts-descriptions": {
+        "setup:integration": "Install the Integration suite's own Composer setup (PHPUnit 9.6, wp-phpunit, the polyfills).",
+        "test": "Run both suites, each in its own process, so the Unit suite never sees WordPress.",
+        "test:unit": "Run the Pest suite that needs no WordPress and no database.",
+        "test:integration": "Run the PHPUnit 9.6 suite that boots WordPress through wp-phpunit against the test database."
+    }
+}

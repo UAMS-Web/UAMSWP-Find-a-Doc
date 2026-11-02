@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="tests/bootstrap.php"
+         colors="true"
+         failOnWarning="true"
+         failOnRisky="true"
+         failOnEmptyTestSuite="true"
+         beStrictAboutOutputDuringTests="true">
+    <!--
+        The Unit suite only, on Pest 5. No WordPress, no database: WordPress functions
+        are mocked with Brain Monkey.
+
+        The Integration suite is not here. It runs in its own process from its own
+        Composer setup, tests/Integration/composer.json and tests/Integration/phpunit.xml,
+        on PHPUnit 9.6 (composer test:integration).
+    -->
+    <testsuites>
+        <testsuite name="Unit">
+            <directory suffix="Test.php">./tests/Unit</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory suffix=".php">./includes</directory>
+            <file>./example-plugin.php</file>
+        </include>
+    </source>
+</phpunit>
