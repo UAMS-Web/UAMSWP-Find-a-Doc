@@ -1528,16 +1528,7 @@ function gmb_location_csv_export(): bool
             //   Building Floor Number
             //   Suite Number
 
-            $location_addresses = [];
-            if ($location_building && $building_slug != '_none') {
-                $location_addresses[] = $building_name;
-            }
-            if ($location_floor && ! empty($location_floor_value) && $location_floor_value != '0') {
-                $location_addresses[] = $location_floor_label;
-            }
-            if ($location_suite && ! empty($location_suite)) {
-                $location_addresses[] = $location_suite;
-            }
+            $location_addresses = uamswp_location_address_parts(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite);
             $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
             $location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
             $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
