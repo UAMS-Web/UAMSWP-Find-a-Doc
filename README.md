@@ -19,4 +19,4 @@ The supported PHP floor is 7.4, so this repository uses PHPUnit 9 from the share
 
 ## Continuous integration
 
-Pull requests are gated by the GitHub Actions workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs Pint, Rector (dry-run), PHPStan, and the Unit suite on every push and pull request. A red check fails the workflow.
+Pull requests are gated by the GitHub Actions workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs Composer validation, the synced-files, emoji and aggregate-needs checks, Pint, Rector (dry-run), PHPStan and the Unit suite on every pull request and on pushes to `master`, `dev` and `staging`. The final `CI` job needs every other job, so a red or skipped job fails the workflow. The `Attribution footer` and `Closing keywords` pull-request-body checks come from their own workflows.
