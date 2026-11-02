@@ -1912,7 +1912,7 @@ function gmb_location_csv_export(): bool
         // raw values Google Business import expects.
         $data_row = array_map(function ($cell) {
             if (is_string($cell) && $cell !== '' && ! is_numeric($cell)
-                && strpos("=+-@\t\r", $cell[0]) !== false) {
+                && str_contains("=+-@\t\r", $cell[0])) {
                 return "'".$cell;
             }
 

@@ -2215,7 +2215,7 @@ function uamswp_spotlight_to_ids($value): array
 
     $value = is_array($value) ? $value : [$value];
 
-    return array_values(array_unique(array_filter(array_map('intval', $value))));
+    return array_values(array_unique(array_filter(array_map(intval(...), $value))));
 
 }
 
@@ -2346,7 +2346,7 @@ function uamswp_spotlight_reconcile_providers($post_id): void
 
     if ($providers !== $original) {
 
-        $_POST['acf']['field_clinical_resource_providers'] = array_map('strval', $providers);
+        $_POST['acf']['field_clinical_resource_providers'] = array_map(strval(...), $providers);
 
     }
 
@@ -2978,7 +2978,7 @@ function uamswp_spotlight_reconcile_ontology($post_id): void
         foreach (uamswp_spotlight_ontology_map() as $cr_field => $spec) {
 
             $ids = uamswp_spotlight_to_ids(get_field($spec['provider'], $new_provider));
-            $_POST['acf'][$cr_field] = array_map('strval', $ids);
+            $_POST['acf'][$cr_field] = array_map(strval(...), $ids);
 
         }
 
@@ -3165,7 +3165,7 @@ function uamswp_location_validate_epic_dep_ids($valid, $value, $field, $input_na
 
         }
 
-        if (is_string($row_index) && strpos($row_index, '_deleted') !== false) {
+        if (is_string($row_index) && str_contains($row_index, '_deleted')) {
 
             continue;
 

@@ -3,8 +3,8 @@ name: CI
 # Public repository: Actions minutes are free, so this workflow is the remote gate for pull
 # requests to `dev` and `staging`. It follows the shared ci.yml template in
 # UAMS-Web/uams-claude-skills (.claude/skills/code-quality/templates/ci.yml), minus the jobs
-# this repository has no counterpart for: Pest, mutation testing and the mutation-annotation
-# check. The PHPUnit suite runs as `phpunit` in place of `pest`.
+# this repository has no counterpart for: mutation testing and the mutation-annotation check.
+# The `lint-floor` job parses every shipped file on PHP 8.2, the supported floor.
 #
 # The last job, `CI`, is the one check a ruleset requires from this workflow (with the two
 # pull-request-body checks, `Attribution footer` and `Closing keywords`). It `needs:` every
@@ -14,7 +14,7 @@ name: CI
 #
 # The shared setup (PHP, the Composer cache, the locked install) lives in
 # `.github/actions/setup/action.yml`, copied from the code-quality skill's setup-action.yml.
-# Its PHP default stays 8.4: the tools run on 8.4 even though the plugin supports PHP 7.4.
+# Its PHP default stays 8.4: the tools run on 8.4 even though the plugin supports PHP 8.2.
 
 on:
   pull_request:
@@ -121,21 +121,45 @@ jobs:
       - uses: ./.github/actions/setup
       - run: composer stan
 
-  phpunit:
-    name: PHPUnit
+  lint-floor:
+    name: Lint on the PHP floor (8.2)
+    needs: [composer-validate]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      # Parses every shipped PHP file with the floor PHP itself. Fails, naming the file, on
+      # syntax 8.2 cannot parse. `tests/` is left out: the suite runs on the development PHP.
+      - name: php -l
+        run: |
+          count=$(find . -name '*.php' -not -path './vendor/*' -not -path './tests/*' -not -path './node_modules/*' | wc -l)
+          echo "Files to lint: $count"
+          if [ "$count" -lt 1 ]; then echo "::error::No PHP files found to lint"; exit 1; fi
+          find . -name '*.php' -not -path './vendor/*' -not -path './tests/*' -not -path './node_modules/*' -print0 | xargs -0 -n1 php -l > /dev/null
+
+  pest:
+    name: Pest
     needs: [rector, phpstan]
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
+
+      # `failOnEmptyTestSuite` in phpunit.xml fails a run that finds no test.
       - run: composer test:unit
 
   # The one check a ruleset requires from this workflow. Keep `needs:` listing every other
   # job in the file.
   ci:
     name: CI
-    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, pint, rector, phpstan, phpunit]
+    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, lint-floor, pint, rector, phpstan, pest]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5

@@ -141,7 +141,7 @@ return RectorConfig::configure()
     // order of precedence for that check is this call, then composer.json's
     // `php` require, then `config.platform.php`, then the running PHP.
     // Constants: PhpVersion::PHP_74, PHP_80, PHP_81, PHP_82, PHP_83, PHP_84.
-    ->withPhpVersion(PhpVersion::PHP_74)
+    ->withPhpVersion(PhpVersion::PHP_82)
     // Every PHP upgrade set up to the floor, and no further. With no argument
     // this reads the floor from composer.json's `require.php` (then
     // `config.platform.php`), NOT from withPhpVersion() above, and fails the

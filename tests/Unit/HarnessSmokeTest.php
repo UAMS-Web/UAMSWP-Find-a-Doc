@@ -6,17 +6,14 @@
 
 declare(strict_types=1);
 
-namespace UamswpFindADoc\Tests\Unit;
+use Brain\Monkey\Functions;
 
-use UamswpFindADoc\Tests\Support\UnitTestCase;
+test('the harness defines the plugin constants', function (): void {
+    expect(defined('UAMS_FAD_PATH'))->toBeTrue();
+});
 
-final class HarnessSmokeTest extends UnitTestCase
-{
-    /**
-     * @return void
-     */
-    public function test_harness_loads_plugin_surface(): void
-    {
-        $this->assertTrue(\defined('UAMS_FAD_PATH'));
-    }
-}
+test('Brain Monkey is armed around each test', function (): void {
+    Functions\when('get_option')->justReturn('stubbed');
+
+    expect(get_option('anything'))->toBe('stubbed');
+});

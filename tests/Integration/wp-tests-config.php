@@ -42,4 +42,4 @@ define('WP_PHP_BINARY', 'php');
  */
 define('WP_HTTP_BLOCK_EXTERNAL', true);
 
-// cspell:ignore ABSPATH passwordless wptests
+// cspell:ignore ABSPATH getenv passwordless rtrim wptests

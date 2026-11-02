@@ -8,6 +8,7 @@ Description: Find-a-doc plugin for uamshealth.com
 Author: uams, Todd McKee, MEd
 Author URI: https://www.uams.edu/
 Version: 2.4.0
+Requires PHP: 8.2
 */
 
 // If this file is called directly, abort.

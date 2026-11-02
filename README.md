@@ -12,11 +12,13 @@ Doc Profile Editors (`doc_editor`) can edit a provider or location only when the
 
 ```bash
 composer install
-composer test:unit
+composer setup:integration   # the Integration suite's own Composer setup, in tests/Integration
+composer test:unit           # Pest 5 with Brain Monkey: no WordPress, no database
+composer test:integration    # PHPUnit 9.6 with wp-phpunit: needs a WordPress core tree and a test database
 ```
 
-The supported PHP floor is 7.4, so this repository uses PHPUnit 9 from the shared `tests` skill templates (Pest requires PHP 8.2+).
+The supported PHP floor is 8.2 (`require.php` in `composer.json` and `Requires PHP` in the plugin header). Development and tests run on PHP 8.4 (`config.platform.php` is `8.4.27`), which Pest 5 needs. The Integration suite installs separately because WordPress' test suite supports PHPUnit 9 only; see the `tests` skill for the layout and for the environment variables it reads (`WP_TESTS_ABSPATH`, `WP_TESTS_DB_NAME`).
 
 ## Continuous integration
 
-Pull requests are gated by the GitHub Actions workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs Composer validation, the synced-files, emoji and aggregate-needs checks, Pint, Rector (dry-run), PHPStan and the Unit suite on every pull request and on pushes to `master`, `dev` and `staging`. The final `CI` job needs every other job, so a red or skipped job fails the workflow. The `Attribution footer` and `Closing keywords` pull-request-body checks come from their own workflows.
+Pull requests are gated by the GitHub Actions workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs Composer validation, the synced-files, emoji and aggregate-needs checks, a lint of every shipped file on PHP 8.2, Pint, Rector (dry-run), PHPStan and the Pest Unit suite on every pull request and on pushes to `master`, `dev` and `staging`. The final `CI` job needs every other job, so a red or skipped job fails the workflow. The `Attribution footer` and `Closing keywords` pull-request-body checks come from their own workflows.
