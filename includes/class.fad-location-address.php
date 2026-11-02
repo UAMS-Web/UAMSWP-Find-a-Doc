@@ -14,7 +14,6 @@ declare(strict_types=1);
  *
  * This file registers no hooks and calls no WordPress function.
  */
-
 /**
  * Build address line 2 as one string: building, floor label, then suite.
  *
@@ -33,7 +32,6 @@ declare(strict_types=1);
  * @param  string  $floor_separator  Text between the floor label and the suite.
  * @param  bool  $require_floor_value  Whether the floor label needs a non-empty floor value to print. The
  *                                     schema markup did not require one; the display did.
- * @return string
  */
 function uamswp_location_address_2(
     $has_building,
@@ -45,12 +43,12 @@ function uamswp_location_address_2(
     $building_separator = '<br />',
     $floor_separator = ', ',
     $require_floor_value = true
-) {
+): string {
     $show_floor = $floor && $floor_value != '0' && (! $require_floor_value || ! empty($floor_value));
 
     return ($has_building ? $building_name.((($floor && $floor_value) || $suite) ? $building_separator : '') : '')
         .($show_floor ? $floor_label.($suite ? $floor_separator : '') : '')
-        .($suite ? $suite : '');
+        .($suite ?: '');
 }
 
 /**
@@ -75,15 +73,17 @@ function uamswp_location_address_parts(
     $floor_value,
     $floor_label,
     $suite
-) {
+): array {
     $parts = [];
 
     if ($has_building) {
         $parts[] = $building_name;
     }
+
     if ($floor && ! empty($floor_value) && $floor_value != '0') {
         $parts[] = $floor_label;
     }
+
     if ($suite && ! empty($suite)) {
         $parts[] = $suite;
     }
