@@ -64,6 +64,27 @@ class UAMSWP_FAD_GBP_Logic
     }
 
     /**
+     * The title of a provider's Business Profile listing for one location.
+     *
+     * A provider at several locations has one listing per location, so the title names the
+     * location the listing is for; otherwise the listings could not be told apart in Google.
+     * A blank location name leaves the provider name alone rather than a trailing separator.
+     *
+     * @param  string  $provider_name  The provider's full name, already decoded.
+     * @param  string  $location_title  The title of the location in the listing's store code, already decoded.
+     * @return string `UAMS Health - <provider name> - <location name>`.
+     */
+    public static function provider_listing_title($provider_name, $location_title): string
+    {
+
+        $title = 'UAMS Health - '.trim((string) $provider_name);
+        $location_title = trim((string) $location_title);
+
+        return $location_title === '' ? $title : $title.' - '.$location_title;
+
+    }
+
+    /**
      * Split a store code into its provider and location slugs.
      *
      * Provider store codes are `{provider_slug}_{location_slug}`. Slugs use hyphens, so the one

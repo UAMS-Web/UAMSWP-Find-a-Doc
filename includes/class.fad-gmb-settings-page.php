@@ -767,8 +767,8 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
 
                         $row[0] = $store_code; // . '-' . implode(",",$locations) . '-' . $location;
 
-                        // Business name
-                        $row[1] = 'UAMS Health - '.html_entity_decode($full_name);
+                        // Business name: the provider and the location this listing is for (the one in the store code)
+                        $row[1] = UAMSWP_FAD_GBP_Logic::provider_listing_title(html_entity_decode($full_name), html_entity_decode(get_the_title($location)));
 
                         // Address line 1
 
