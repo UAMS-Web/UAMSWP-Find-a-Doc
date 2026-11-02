@@ -85,6 +85,41 @@ class UAMSWP_FAD_GBP_Logic
     }
 
     /**
+     * A child location's name without the parent's name it ends with, for an address line.
+     *
+     * The CSV export had the parent's name on one address line and the child's on the next,
+     * and whoever uploaded it removed the repeated parent from the end of the child by hand.
+     * That is ` in the <parent>`, ` in <parent>`, ` at the <parent>` or ` at <parent>`, in any
+     * letter case. A child name that does not end that way is left as it is, as is a child
+     * whose name would be empty without it. The listing title keeps the full child name.
+     *
+     * @param  string  $child  The child location's name.
+     * @param  string  $parent  The parent location's name; both names must be encoded the same way.
+     */
+    public static function child_name_without_parent($child, $parent): string
+    {
+
+        $child = trim((string) $child);
+        $parent = trim((string) $parent);
+
+        if ($parent === '') {
+            return $child;
+        }
+
+        foreach ([' in the ', ' in ', ' at the ', ' at '] as $joiner) {
+            $suffix = $joiner.$parent;
+            $cut = mb_strlen($child) - mb_strlen($suffix);
+
+            if ($cut > 0 && mb_strtolower(mb_substr($child, $cut)) === mb_strtolower($suffix)) {
+                return rtrim(mb_substr($child, 0, $cut));
+            }
+        }
+
+        return $child;
+
+    }
+
+    /**
      * Split a store code into its provider and location slugs.
      *
      * Provider store codes are `{provider_slug}_{location_slug}`. Slugs use hyphens, so the one

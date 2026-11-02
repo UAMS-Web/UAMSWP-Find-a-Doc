@@ -856,7 +856,8 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                             $location_addresses[] = $location_title;
                         } else {
                             $location_addresses[] = $location_parent_title;
-                            $location_addresses[] = $location_title;
+                            // The parent is already on the line above; the title (the Business name) keeps the full child name
+                            $location_addresses[] = UAMSWP_FAD_GBP_Logic::child_name_without_parent($location_title, get_the_title($location_parent_location));
                         }
 
                         $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
