@@ -1,2 +1,15 @@
 # Auto detect text files and perform LF normalization
-* text=auto
+* text=auto eol=lf
+/vendor/ export-ignore
+/tests/ export-ignore
+/tests-legacy/ export-ignore
+/phpunit.xml export-ignore
+/composer.json export-ignore
+/composer.lock export-ignore
+rector.php export-ignore
+rector-sweep.php export-ignore
+phpstan.neon.dist export-ignore
+phpstan-baseline.neon export-ignore
+pint.json export-ignore
+phpcs.xml.dist export-ignore
+.phpstan/ export-ignore

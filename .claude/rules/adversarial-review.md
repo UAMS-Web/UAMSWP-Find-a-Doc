@@ -1,0 +1,82 @@
+<!--
+  Synced from UAMS-Web/uams-claude-skills: shared/.claude/rules/adversarial-review.md
+  Edit it there, not here; the next sync overwrites this copy.
+  Delivered to this repository through the profile(s): core.
+-->
+<!-- cspell:ignore phpdbg preg -->
+# Rule — adversarially verify before it reaches anyone else
+
+A **change that ships** and a **claim that is published** (a figure, count, verification line or merge finding others will build on) are never released on your own checking alone. First run an **adversarial review**, an independent pass whose job is to *break* the thing (for a claim, the claim *and the instrument that produced it*); triage, fix the real defects, re-run the gate, then ship or post. Why: author and tests share blind spots, and a published claim is in someone else's reasoning before it is found.
+
+## How to apply
+
+1. **Trigger.** Any non-trivial, load-bearing, or correctness- or security-sensitive change before it ships, and any claim before it is published that someone could act on and that you checked with an instrument you chose: *a number, count, pass/fail or absence a reader cannot re-derive* fires it, diff or not; an absence is the sharpest case. Skip only trivial mechanical edits or work already independently verified.
+   - Discharge a claim about text you produced by **execution, not a second pattern** ([`reading-exit-status`](reading-exit-status.md)).
+   - **A claim about a dependency's code names the revision** (commit, tag or lock entry) and the tree read (installed copy or upstream default branch); a version is not a revision.
+   - **Bounded:** not description, argument or intent. Under **Ultracode** it is the default for every substantive slice; when in doubt, apply it.
+
+2. **Sequence: build → review → fix → *then* the gating run.** Start no expensive validation until findings are triaged and fixed; prepare the PR and docs meanwhile; only the review may run early.
+
+3. **Keep review agents out of the tree being validated.** Read-only means every write: running the suite writes files, caches and shared databases and corrupts a concurrent run, so forbid test execution, use `isolation: "worktree"`, or have no validation run in flight. Commit the diff first.
+
+4. **Mechanism: a multi-agent `Workflow` review** when orchestration is available (Ultracode, or the user asked for one): N independent reviewers, each with a **distinct lens for the change's risk surface** (regression-safety, spec correctness, edge cases and test rigor, a *security / attacker* lens for the high-risk surfaces).
+
+   Prompt each to **refute**, default skeptical, and pin what it must **not** relitigate. Force **structured, schema-validated findings** (severity, a worked example, wrong-vs-right verified against the code). Run it in the background, per step 2. Without orchestration: `/code-review` (correctness), `/security-review` (security-sensitive), or a focused self-review.
+
+5. **Make the review real, not theatrical.** Verify every finding against the code, ideally reproduced, with the input and the wrong vs. right behavior. Scale to risk: a few finders, one vote for "any bugs?"; more, multi-vote, for an audit or security-critical surface. A finding is **confirmed by someone other than its finder**; see *Confirm a finding before reporting it* below.
+
+6. **Triage and close the loop.** Fix every blocker and major and every cheap, high-confidence minor. For a real bug fixed, add a regression test and **mutation-verify** it (fix disabled: red; restored: green). **Revert by copying the file aside, never with the stash** (shared across worktrees, [`worktrees`](worktrees.md)) or `git checkout --`: `cp path/to/Foo.php "$SCRATCH/Foo.fixed.php"`, `git show HEAD:path/to/Foo.php > path/to/Foo.php`, run, restore. Read *why* it went red: a control failing for the wrong reason, or a one-liner that corrupted the file, proves nothing. A **pre-existing** bug the slice touches or reuses is in scope; fix it. **Document** accepted gaps and deferred residue by name. **Re-run the gate**, then ship.
+
+7. **Record the verdict.** A closed fork: on the issue per [`design-decision-forks`](design-decision-forks.md). A new open question or unspecified detail: a follow-up issue per [`writing-issues`](../skills/writing-issues/SKILL.md). Otherwise a docblock or PR-body note.
+
+## Review questions
+
+Ask the error-handling questions when a `try`, `catch`, default or fallback changed, the test-gap question when behavior changed, the comment check when a comment changed. A defect still owes step 5's worked example.
+
+### Error handling: does any failure go unnoticed?
+
+Of each catch, returned error, empty-read default, fallback and log-then-continue:
+
+- **Broad catches.** What else could it hide (a typo'd method, a type error)? If "anything", catch the specific class, or cover fewer lines.
+- **Silent fallbacks.** Does the caller know? A `null`, `false` or `[]` from a failed read looks empty; is the fallback in the contract, or hiding the error? A stub or canned value outside tests is a finding.
+- **Masking defaults.** Do `??`, `?:`, `?->`, `@`, a defaulted array read, `rescue()`, `optional()`, an unchecked `json_decode()`/`unserialize()`/`file_get_contents()`, or one value for absent and empty turn "failed" into "empty"? Can anything downstream tell?
+- **Log and continue.** Is carrying on correct, is the log seen, does it name operation, input and identifiers?
+- **Where it should be handled.** Should it propagate? Does catching here skip cleanup?
+- **What the person sees.** Does the message say what went wrong and what to do? "Something went wrong", or a warning naming no item, is a finding.
+
+### Test gaps: what regression would the missing test catch?
+
+For each uncovered behavior, name the regression a test would catch and rate it by cost:
+
+- **Must add:** data loss, a security hole, wrong content served as correct, a record dropped or repeated.
+- **Should add:** an error someone would see and act on.
+- **Consider:** a confusing edge case.
+- **Skip:** completeness only.
+
+Would each existing test fail if the behavior broke? Does each error path and rejected input have a negative case?
+
+### Comment accuracy: is every claim in a comment still true?
+
+For each comment or docblock changed, check each statement against the code it describes: signature, behavior, named things, measured claims. Remove restating comments and done TODOs. A wrong comment is a finding.
+
+### Confirm a finding before reporting it
+
+**No finding is reported until someone other than its finder has confirmed it**, given the finding, location and stated intent, by reproducing it or showing it from the code: a separate agent, or a fresh pass from the finding. **A finding that is not confirmed is dropped from the report**, never softened; one worth pursuing becomes a labeled question on the ticket. Confirmation narrows what is reported, never what is looked for: no skipped lens, pre-existing bug, or input-dependent security question.
+
+## Tooling that raises the floor (so the review can reach the ceiling)
+
+### Mutation testing
+
+No Pest here (see [`tests`](../skills/tests/SKILL.md)): for each relied-on test, name the line whose removal it would catch; one that names none cannot fail.
+
+### Property-based / round-trip tests
+
+For pure cores (parsers, mappers, serializers, pagination bounds), assert the invariant over many generated inputs with a fixed seed.
+
+Both tools raise the floor; neither invents the threat model: use both, tooling for mechanical classes, review for novel ones.
+
+## The DRY line
+
+This file owns whether a diff or claim was adversarially checked; [`long-running-commands`](long-running-commands.md) owns processes, the `Workflow` tool description orchestration mechanics (do not restate them), [`design-decision-forks`](design-decision-forks.md) forks (surfaced before building), [`AGENTS.md`](../../AGENTS.md) the ship sequence.
+
+Evidence, measurements and history: [`adversarial-review`](../skills/evidence-behind-rules/adversarial-review.md).

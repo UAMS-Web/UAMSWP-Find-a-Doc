@@ -1,0 +1,144 @@
+name: Assign author
+
+# Assigns each pull request, and every issue it closes, to the pull request's
+# author, so the tracker records who did the work. Assignees set by hand or by a
+# default were measured across three repositories: about a third of the issues
+# closed by a merged pull request had no assignee or somebody else's.
+#
+# Template: .claude/skills/writing-pull-requests/templates/assign-author.yml in
+# UAMS-Web/uams-claude-skills, copied to .github/workflows/assign-author.yml.
+# This header is the only part a repository may change. The synced-files skill's
+# check-workflow-copies.mjs fails when the rest differs from the template.
+#
+# - `opened` assigns the pull request itself.
+# - `closed` with `merged` true assigns every same-repository issue in the pull
+#   request's `closingIssuesReferences`, then the pull request again.
+# - A closed but unmerged pull request, and a bot's pull request, change nothing.
+#
+# Assignment REPLACES the assignee list rather than adding to it. The author is
+# the contributor, so a default assignee left on a ticket is exactly what this
+# exists to correct.
+#
+# Deliberately NOT gated on RUN_REMOTE_CI, like `clear-handed-back.yml`: that
+# switch is off for months at a time, and the job is a few API calls.
+#
+# Three bounds. `closingIssuesReferences` is what the pull request DECLARES: an
+# issue closed only by a keyword in a commit message is not in it, so it is not
+# reassigned. A pull request from a fork gets a read-only token whatever
+# `permissions` says, so the writes there fail, and the run fails visibly. And
+# the token reads only this repository, so a closing reference to an issue in
+# another PRIVATE repository cannot be read: the run fails visibly rather than
+# assigning part of the set. An issue in a readable repository elsewhere is
+# reported and skipped, since the token cannot write it.
+
+on:
+  pull_request:
+    types: [opened, closed]
+
+# Nothing at the workflow level; the one job states the scopes it needs.
+permissions: {}
+
+jobs:
+  assign:
+    if: >-
+      github.event.pull_request.user.type != 'Bot'
+      && (github.event.action == 'opened'
+      || (github.event.action == 'closed' && github.event.pull_request.merged == true))
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Assign the pull request and the issues it closes to its author
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.pull_request.number }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+          AUTHOR_TYPE: ${{ github.event.pull_request.user.type }}
+          ACTION: ${{ github.event.action }}
+          MERGED: ${{ github.event.pull_request.merged }}
+        # The job `if:` already applies the bot and merged guards. They are
+        # repeated here so the script is safe to run on its own, which is how
+        # its test runs it.
+        #
+        # Every write is read back from the response. GitHub drops a login it
+        # cannot assign without an error and answers 200 with the assignee
+        # list unchanged, so a status check alone would report that failure as
+        # success.
+        run: |
+          set -euo pipefail
+
+          if [ "$AUTHOR_TYPE" = Bot ]; then
+            echo "#$NUMBER is by a bot; nothing to assign."
+            exit 0
+          fi
+
+          if [ "$ACTION" = closed ] && [ "$MERGED" != true ]; then
+            echo "#$NUMBER closed without merging; nothing to assign."
+            exit 0
+          fi
+
+          if [ "$ACTION" != opened ] && [ "$ACTION" != closed ]; then
+            echo "::error::Unexpected action '$ACTION' for #$NUMBER."
+            exit 1
+          fi
+
+          tmp="${RUNNER_TEMP:-/tmp}/assign-author.$$"
+          mkdir -p "$tmp"
+
+          assign() {
+            local number=$1
+            local assignees
+
+            if ! gh api -X PATCH "repos/$REPO/issues/$number" -f "assignees[]=$AUTHOR" > "$tmp/assign.json"; then
+              echo "::error::Assigning #$number to $AUTHOR failed."
+              exit 1
+            fi
+
+            assignees=$(jq -r '[.assignees[]?.login] | join(",")' "$tmp/assign.json")
+
+            if [ "$assignees" != "$AUTHOR" ]; then
+              echo "::error::#$number is assigned to '${assignees}' after assigning it to $AUTHOR."
+              exit 1
+            fi
+
+            echo "Assigned #$number to $AUTHOR."
+          }
+
+          if [ "$ACTION" = closed ]; then
+            if ! gh api graphql \
+              -f query='query($owner: String!, $name: String!, $number: Int!) { repository(owner: $owner, name: $name) { pullRequest(number: $number) { closingIssuesReferences(first: 100) { totalCount nodes { number repository { nameWithOwner } } } } } }' \
+              -F owner="${REPO%%/*}" -F name="${REPO#*/}" -F number="$NUMBER" > "$tmp/closing.json"; then
+              echo "::error::Reading the issues #$NUMBER closes failed."
+              exit 1
+            fi
+
+            # A GraphQL error can arrive with a success status, so read the body
+            if ! jq -e '(.errors | not) and (.data.repository.pullRequest.closingIssuesReferences | type == "object")' "$tmp/closing.json" > /dev/null; then
+              echo "::error::Reading the issues #$NUMBER closes returned no closing references."
+              exit 1
+            fi
+
+            # A page shorter than the total would silently skip issues
+            if ! jq -e '.data.repository.pullRequest.closingIssuesReferences | .totalCount == (.nodes | length)' "$tmp/closing.json" > /dev/null; then
+              echo "::error::#$NUMBER closes more issues than could be read: more than one page, or one in a repository this token cannot read."
+              exit 1
+            fi
+
+            # The token can write only this repository, so another repository's issue is reported and skipped
+            jq -r --arg repo "$REPO" '.data.repository.pullRequest.closingIssuesReferences.nodes[] | select(.repository.nameWithOwner != $repo) | "\(.repository.nameWithOwner)#\(.number)"' "$tmp/closing.json" |
+              while read -r other; do
+                echo "Skipping $other: it is in another repository."
+              done
+
+            # Capture the list first, since a failure inside a for list escapes set -e
+            issues=$(jq -r --arg repo "$REPO" '.data.repository.pullRequest.closingIssuesReferences.nodes[] | select(.repository.nameWithOwner == $repo) | .number' "$tmp/closing.json")
+
+            for issue in $issues; do
+              assign "$issue"
+            done
+          fi
+
+          assign "$NUMBER"

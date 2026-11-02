@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * example_theme_posted_on(), with WordPress mocked.
+ *
+ * @see inc/template-tags.php
+ */
+
+declare(strict_types=1);
+
+use Brain\Monkey\Functions;
+
+it('prints the publication date as a machine-readable time element', function (): void {
+    Functions\stubEscapeFunctions();
+    Functions\when('get_the_date')->alias(
+        static fn (string $format = ''): string => $format === DATE_W3C ? '2026-10-02T09:00:00-05:00' : 'October 2, 2026'
+    );
+
+    expect(example_theme_posted_on())
+        ->toBe('<time class="entry-date" datetime="2026-10-02T09:00:00-05:00">October 2, 2026</time>');
+});
