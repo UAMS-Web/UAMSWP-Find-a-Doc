@@ -972,7 +972,7 @@ function get_medline_api_data($code, $type)
         // Note that we decode the body's response since it's the actual JSON feed
         $json = json_decode($response);
 
-    } catch (Exception $exception) {
+    } catch (Exception) {
         $json = null;
     }
     // end try/catch
@@ -1000,7 +1000,7 @@ function display_medline_api_data($code, $type): void
         echo '</div>';
     } else {
         for ($a = 0; $a < count($entry); $a++) {
-            if (strpos($entry[$a]->link->href, 'medlineplus.gov') !== false) {
+            if (str_contains($entry[$a]->link->href, 'medlineplus.gov')) {
                 if ($a !== 0) {
                     echo '<h2>'.$entry[$a]->title->_value.'</h2>'; // Add heading if there is more than one
                 }
@@ -1017,7 +1017,7 @@ function display_medline_api_data($code, $type): void
 }
 
 // Provider AJAX
-function uamswp_provider_ajax_filter_shortcode($atts)
+function uamswp_provider_ajax_filter_shortcode($atts): string|false
 {
     $a = shortcode_atts([
         'providers' => '',
@@ -1338,7 +1338,7 @@ function provider_ajax_filter_callback(): void
     wp_die();
 }
 // provider filter with title only
-function uamswp_provider_title_ajax_filter_shortcode($atts)
+function uamswp_provider_title_ajax_filter_shortcode($atts): string|false
 {
     $a = shortcode_atts([
         'providers' => '',
@@ -1523,7 +1523,7 @@ function provider_title_ajax_filter_callback(): void
 }
 
 // Location AJAX functions
-function uamswp_location_ajax_filter_shortcode($atts)
+function uamswp_location_ajax_filter_shortcode($atts): string|false
 {
     $a = shortcode_atts([
         'locations' => '',

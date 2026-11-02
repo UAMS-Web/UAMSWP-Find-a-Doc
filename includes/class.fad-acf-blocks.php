@@ -21,7 +21,7 @@ function uams_fad_block_placeholder($block = null, $is_preview = false): bool
 
     $data = isset($block['data']) && is_array($block['data']) ? $block['data'] : [];
     foreach ($data as $key => $value) {
-        if (is_string($key) && strpos($key, '_') === 0) {
+        if (is_string($key) && str_starts_with($key, '_')) {
             continue;
         }
 

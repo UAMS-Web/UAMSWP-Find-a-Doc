@@ -4754,7 +4754,7 @@ function get_expertise_meta($object)
 
 // Conditions API
 
-function get_condition_meta($object)
+function get_condition_meta($object): array
 {
 
     $postId = $object['id'];
@@ -4947,7 +4947,7 @@ function get_condition_meta($object)
 
 // Treatments API
 
-function get_treatment_meta($object)
+function get_treatment_meta($object): array
 {
 
     $postId = $object['id'];
