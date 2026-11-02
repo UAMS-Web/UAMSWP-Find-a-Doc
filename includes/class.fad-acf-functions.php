@@ -3352,3 +3352,12 @@ foreach (array_keys(uamswp_workday_id_validation_rules()) as $uamswp_workday_id_
 
 }
 unset($uamswp_workday_id_key);
+
+/**
+ * Keep an unanswered provider field empty in the provider custom table.
+ *
+ * Without this, a Draft, Pending Review or Inactive provider saved with nothing
+ * entered gets "No" or 0 in the integer columns. See
+ * uamswp_provider_null_empty_value() in class.fad-provider-nullable-fields.php.
+ */
+add_filter('acfcdt/filter_value_before_update', 'uamswp_provider_null_empty_value', 10, 3);
