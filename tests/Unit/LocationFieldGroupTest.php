@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class LocationFieldGroupTest extends TestCase
@@ -31,8 +32,8 @@ final class LocationFieldGroupTest extends TestCase
     }
 
     /**
-     * @dataProvider fields
      */
+    #[DataProvider('fields')]
     public function test_field_keeps_its_key_and_type(string $name, string $key, string $type): void
     {
         $found = $this->findAll($name);

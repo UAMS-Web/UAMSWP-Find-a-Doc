@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class LocationAddressCallSitesTest extends TestCase
@@ -31,8 +32,8 @@ final class LocationAddressCallSitesTest extends TestCase
     }
 
     /**
-     * @dataProvider callers
      */
+    #[DataProvider('callers')]
     public function test_file_calls_the_helper(string $file, string $call): void
     {
         $this->assertStringContainsString($call, $this->code($file));
@@ -58,8 +59,8 @@ final class LocationAddressCallSitesTest extends TestCase
      * No file outside the helper tests the floor value inline. The pattern
      * allows a space after the "!", as the settings page spells it.
      *
-     * @dataProvider allFiles
      */
+    #[DataProvider('allFiles')]
     public function test_file_has_no_inline_floor_test(string $file, string $prefix): void
     {
         $variable = '\$'.$prefix.'_floor_value';

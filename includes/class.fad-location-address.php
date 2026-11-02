@@ -13,8 +13,6 @@ declare(strict_types=1);
  * edit and a test to move with it.
  *
  * This file registers no hooks and calls no WordPress function.
- *
- * @package UAMSWP_Find_a_Doc
  */
 
 /**
@@ -25,16 +23,16 @@ declare(strict_types=1);
  * - Schema markup: ' ' after both.
  * - Doximity export: '<br />' after both.
  *
- * @param bool $has_building Whether the location has a building other than the '_none' term.
- * @param string $building_name Name of the building. Read only when $has_building is true.
- * @param array|false $floor The floor field object, or a falsy value when there is none.
- * @param mixed $floor_value The selected floor value ('' when there is none).
- * @param string $floor_label The label of the selected floor ('' when there is none).
- * @param string|false $suite The suite text, or a falsy value when there is none.
- * @param string $building_separator Text between the building and what follows it.
- * @param string $floor_separator Text between the floor label and the suite.
- * @param bool $require_floor_value Whether the floor label needs a non-empty floor value to print. The
- *     schema markup did not require one; the display did.
+ * @param  bool  $has_building  Whether the location has a building other than the '_none' term.
+ * @param  string  $building_name  Name of the building. Read only when $has_building is true.
+ * @param  array|false  $floor  The floor field object, or a falsy value when there is none.
+ * @param  mixed  $floor_value  The selected floor value ('' when there is none).
+ * @param  string  $floor_label  The label of the selected floor ('' when there is none).
+ * @param  string|false  $suite  The suite text, or a falsy value when there is none.
+ * @param  string  $building_separator  Text between the building and what follows it.
+ * @param  string  $floor_separator  Text between the floor label and the suite.
+ * @param  bool  $require_floor_value  Whether the floor label needs a non-empty floor value to print. The
+ *                                     schema markup did not require one; the display did.
  * @return string
  */
 function uamswp_location_address_2(
@@ -62,12 +60,12 @@ function uamswp_location_address_2(
  * The GMB lists and the GMB export place the entries of this list on address
  * lines 2 to 5.
  *
- * @param bool $has_building Whether the location has a building other than the '_none' term.
- * @param string $building_name Name of the building. Read only when $has_building is true.
- * @param array|false $floor The floor field object, or a falsy value when there is none.
- * @param mixed $floor_value The selected floor value ('' when there is none).
- * @param string $floor_label The label of the selected floor ('' when there is none).
- * @param string|false $suite The suite text, or a falsy value when there is none.
+ * @param  bool  $has_building  Whether the location has a building other than the '_none' term.
+ * @param  string  $building_name  Name of the building. Read only when $has_building is true.
+ * @param  array|false  $floor  The floor field object, or a falsy value when there is none.
+ * @param  mixed  $floor_value  The selected floor value ('' when there is none).
+ * @param  string  $floor_label  The label of the selected floor ('' when there is none).
+ * @param  string|false  $suite  The suite text, or a falsy value when there is none.
  * @return string[]
  */
 function uamswp_location_address_parts(

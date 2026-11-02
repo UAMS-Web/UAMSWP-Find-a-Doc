@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
 final class LocationAddressTest extends UnitTestCase
@@ -64,11 +65,11 @@ final class LocationAddressTest extends UnitTestCase
     }
 
     /**
-     * @dataProvider displayCases
      *
      * @param bool  $has_building
      * @param mixed $floor
      */
+    #[DataProvider('displayCases')]
     public function test_display_line(bool $has_building, $floor, string $floor_value, string $floor_label, string $suite, string $expected): void
     {
         $this->assertSame(
