@@ -4,29 +4,35 @@
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "require": {
-        "php": ">=7.4"
+        "php": ">=8.2"
     },
     "require-dev": {
         "brain/monkey": "^2.7",
-        "phpunit/phpunit": "^9.6",
-        "wp-phpunit/wp-phpunit": "~7.1.0",
-        "yoast/phpunit-polyfills": "^4.0"
+        "pestphp/pest": "^5.3"
     },
     "config": {
-        "sort-packages": true
+        "platform": {
+            "php": "8.4.27"
+        },
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "scripts": {
+        "setup:integration": "@composer install --working-dir=tests/Integration",
         "test": [
             "@test:unit",
             "@test:integration"
         ],
-        "test:unit": "phpunit --testsuite=Unit",
-        "test:integration": "phpunit --testsuite=Integration"
+        "test:unit": "pest",
+        "test:integration": "@php tests/Integration/vendor/bin/phpunit --configuration tests/Integration/phpunit.xml"
     },
     "scripts-descriptions": {
+        "setup:integration": "Install the Integration suite's own Composer setup (PHPUnit 9.6, wp-phpunit, the polyfills).",
         "test": "Run both suites, each in its own process, so the Unit suite never sees WordPress.",
-        "test:unit": "Run the suite that needs no WordPress and no database.",
-        "test:integration": "Run the suite that boots WordPress through wp-phpunit against the test database."
+        "test:unit": "Run the Pest suite that needs no WordPress and no database.",
+        "test:integration": "Run the PHPUnit 9.6 suite that boots WordPress through wp-phpunit against the test database."
     },
     "autoload-dev": {
         "psr-4": {
