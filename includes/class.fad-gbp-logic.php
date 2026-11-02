@@ -85,11 +85,11 @@ class UAMSWP_FAD_GBP_Logic
     }
 
     /**
-     * A location name without the place it is "in" or "at", for an address line.
+     * A location name without the place it is "in", "at" or "on", for an address line.
      *
      * The CSV export had the parent's name on one address line and the child's on the next,
      * and whoever uploaded it removed the place from the end of each name by hand. The place
-     * is whatever follows the first ` in the `, ` in `, ` at the ` or ` at `, in any letter
+     * is whatever follows the first ` in`, ` at` or ` on`, each with or without ` the`, in any letter
      * case: the parent, but also a facility, a city, a neighborhood or a street. Everything
      * from that joiner on goes. A name with no joiner, or with nothing before or after one, is
      * left as it is. The listing title keeps the full name.
@@ -101,7 +101,7 @@ class UAMSWP_FAD_GBP_Logic
 
         $name = trim((string) $name);
 
-        if (preg_match('/^(.*?\S)\s+(?:in|at)(?:\s+the)?\s+\S/iu', $name, $matches) === 1) {
+        if (preg_match('/^(.*?\S)\s+(?:in|at|on)(?:\s+the)?\s+\S/iu', $name, $matches) === 1) {
             return $matches[1];
         }
 
