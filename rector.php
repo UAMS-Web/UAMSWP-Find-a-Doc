@@ -3,8 +3,11 @@
 declare(strict_types=1);
 
 use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
+use Rector\CodingStyle\Rector\FuncCall\VersionCompareFuncCallToConstantRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveDuplicatedReturnSelfDocblockRector;
+use Rector\DeadCode\Rector\ConstFetch\RemovePhpVersionIdCheckRector;
+use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
 use Rector\DeadCode\Rector\Property\RemoveUselessVarTagRector;
 use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
@@ -108,7 +111,15 @@ $sweepOnlyRules = [
 //     RemovePhpVersionIdCheckRector::class => $guardFile,
 //     VersionCompareFuncCallToConstantRector::class => $guardFile,
 // ];
-$neverRules = [];
+// The PHP version guard in the plugin header file shows a notice on a site whose PHP is
+// downgraded underneath the active plugin; Rector, reasoning from the 8.2 floor, would
+// delete it as dead code. Pinned to that one file; the rules still apply everywhere else.
+$guardFile = [__DIR__.'/uamswp-find-a-doc.php'];
+$neverRules = [
+    UnwrapFutureCompatibleIfPhpVersionRector::class => $guardFile,
+    RemovePhpVersionIdCheckRector::class => $guardFile,
+    VersionCompareFuncCallToConstantRector::class => $guardFile,
+];
 
 return RectorConfig::configure()
     // Filled: the directories holding first-party PHP. Never a vendor
