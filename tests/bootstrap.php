@@ -135,9 +135,17 @@ Brain\Monkey\Functions\when('esc_html__')->returnArg();
 Brain\Monkey\Functions\when('esc_attr__')->returnArg();
 Brain\Monkey\Functions\when('get_file_data')->justReturn(array());
 
-if (is_readable(dirname(__DIR__).'/uamswp-find-a-doc.php')) {
-    require_once dirname(__DIR__).'/uamswp-find-a-doc.php';
-}
+/*
+ * The main plugin file opens with `if (! defined('WPINC')) { exit; }`. Left undefined, it
+ * exits silently during the bootstrap: PHPUnit then prints nothing, runs no test and
+ * exits 0, which reads as a pass. It also requires required-plugins.php, which pulls in
+ * WordPress admin classes through ABSPATH, so it cannot load here at all. Define the
+ * constants it would set; anything that needs the main file belongs in the Integration suite.
+ */
+define('WPINC', 'wp-includes');
+define('UAMS_FAD_ROOT_URL', 'https://example.test/wp-content/plugins/'.basename(dirname(__DIR__)).'/');
+define('UAMS_FAD_PATH', dirname(__DIR__).'/');
+define('UAMS_FAD_VERSION', '0.0.0-tests');
 
 Brain\Monkey\tearDown();
 
