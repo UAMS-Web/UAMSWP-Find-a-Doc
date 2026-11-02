@@ -28,6 +28,7 @@ if (version_compare(PHP_VERSION, '8.2', '<')) {
 
     return;
 }
+
 define('UAMS_FAD_ROOT_URL', plugin_dir_url(__FILE__));
 define('UAMS_FAD_PATH', plugin_dir_path(__FILE__));
 $plugin_header = get_file_data(
