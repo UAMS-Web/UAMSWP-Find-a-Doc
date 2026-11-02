@@ -35,5 +35,9 @@
   "bugs": {
     "url": "https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues"
   },
-  "homepage": "https://github.com/UAMS-Web/UAMSWP-Find-a-Doc#readme"
+  "homepage": "https://github.com/UAMS-Web/UAMSWP-Find-a-Doc#readme",
+  "overrides": {
+    "postcss-merge-rules": "9.0.2",
+    "postcss-minify-gradients": "9.0.1"
+  }
 }
