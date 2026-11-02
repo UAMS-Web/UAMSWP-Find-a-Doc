@@ -155,11 +155,45 @@ jobs:
       # `failOnEmptyTestSuite` in phpunit.xml fails a run that finds no test.
       - run: composer test:unit
 
+  style-build:
+    name: Style build (golden CSS)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      # The Sass entry imports the uams-2020 theme, so the build needs it. Pinned to the commit
+      # the golden file was recorded against; a theme change that alters the CSS is a deliberate
+      # bump of this ref together with the golden file.
+      - uses: actions/checkout@v7
+        with:
+          repository: UAMS-Web/uams-2020
+          ref: cd737498b249b60b9d456d07ddbe38ad0dff6811
+          path: uams-2020
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # `--ignore-scripts` skips the `preinstall` script, which rewrites package-lock.json.
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+
+      # The theme's Sass imports bootstrap from its own node_modules (version 4.5.2, the one
+      # its package-lock.json pins).
+      - name: Install the theme's Bootstrap
+        working-directory: uams-2020
+        run: npm install --no-save --ignore-scripts --no-audit --no-fund bootstrap@4.5.2
+
+      # Fails when the compiled CSS differs from tests/build/app.golden.css.
+      - run: npm test
+        env:
+          UAMS_2020_THEME: ${{ github.workspace }}/uams-2020
+
   # The one check a ruleset requires from this workflow. Keep `needs:` listing every other
   # job in the file.
   ci:
     name: CI
-    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, lint-floor, pint, rector, phpstan, pest]
+    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, lint-floor, style-build, pint, rector, phpstan, pest]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5

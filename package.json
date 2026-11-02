@@ -21,7 +21,7 @@
   "devDependencies": {},
   "scripts": {
     "preinstall": "npx npm-force-resolutions@0.0.10",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test tests/build/"
   },
   "resolutions": {
     "glob-parent": "^5.1.2"
