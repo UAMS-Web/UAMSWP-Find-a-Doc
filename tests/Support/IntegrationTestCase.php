@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base case for every Integration test on the PHPUnit 9 path.
+ * Base case for every Integration test.
  */
 
 declare(strict_types=1);
@@ -12,23 +12,22 @@ use WP_UnitTest_Factory;
 use WP_UnitTestCase;
 
 /**
- * Thin wrapper over WordPress' test case for PHPUnit 9.
+ * WordPress' test case, unchanged, on the PHPUnit 9.6 its test suite supports.
  *
  * Loaded by tests/Integration/bootstrap.php once WordPress is up; it cannot be
  * autoloaded earlier, because its parent does not exist until then.
  *
- * When the suite moves to PHPUnit 10 or later, replace this class with the
- * adapter in templates/wordpress-plugin/tests/Support/IntegrationTestCase.php.dist
- * (expectDeprecated without removed PHPUnit APIs, empty checkRequirements).
+ * The Integration suite runs from its own Composer setup on PHPUnit 9.6, so it
+ * needs no adapter: core's expectDeprecated() and checkRequirements() work as
+ * shipped. A suite moved onto PHPUnit 10 or later would need one, and that move
+ * waits on WordPress supporting it (UAMS-Web/uams-claude-skills#124).
  */
 abstract class IntegrationTestCase extends WP_UnitTestCase
 {
     /**
-     * The fixture factory, typed for callers that want a named return type.
-     *
-     * @return WP_UnitTest_Factory
+     * The fixture factory, with a named return type for static analysis.
      */
-    public static function factory()
+    protected static function factory(): WP_UnitTest_Factory
     {
         return parent::factory();
     }

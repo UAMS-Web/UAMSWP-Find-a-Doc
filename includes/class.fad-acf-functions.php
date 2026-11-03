@@ -105,18 +105,28 @@ add_filter('acf/load_value/key=field_physician_languages', 'set_default_language
 function set_default_language($value, $post_id, $field)
 {
 
-    // Only add default content for new posts
+    // Only seed a brand-new post. ACF substitutes the field's default_value
+    // before this filter runs, so $value is never null here; gate on the
+    // auto-draft status instead, so an editor who removes every language
+    // from a saved provider does not get English back on the next load.
 
-    if ($value !== null) {
+    if (get_post_status($post_id) !== 'auto-draft' || ! empty($value)) {
 
         return $value;
 
     }
 
     $term = get_term_by('slug', 'english', 'language');
-    $term_id = $term->term_id;
 
-    return [$term_id];
+    // No 'english' term in this environment: leave the field empty.
+
+    if (! $term || is_wp_error($term)) {
+
+        return $value;
+
+    }
+
+    return [(int) $term->term_id];
 
 }
 
@@ -219,14 +229,14 @@ function physician_save_post($post_id): void
 
     // Create provider name combinations to store in fields
 
-    $first_name = $_POST['acf']['field_physician_first_name'];
-    $middle_name = $_POST['acf']['field_physician_middle_name'];
-    $last_name = $_POST['acf']['field_physician_last_name'];
-    $pedigree = $_POST['acf']['field_physician_pedigree'];
+    $first_name = $_POST['acf']['field_physician_first_name'] ?? '';
+    $middle_name = $_POST['acf']['field_physician_middle_name'] ?? '';
+    $last_name = $_POST['acf']['field_physician_last_name'] ?? '';
+    $pedigree = $_POST['acf']['field_physician_pedigree'] ?? '';
 
     // Create full name to store in 'physician_full_name' field (e.g., "Leonard H. McCoy, M.D.")
 
-    $degrees = $_POST['acf']['field_physician_degree'];
+    $degrees = $_POST['acf']['field_physician_degree'] ?? [];
 
     $i = 1;
 
@@ -239,7 +249,7 @@ function physician_save_post($post_id): void
         foreach ($degrees as $degree) {
 
             $degree_name = get_term($degree, 'degree');
-            $degree_list .= $degree_name->name;
+            $degree_list .= ($degree_name && ! is_wp_error($degree_name)) ? $degree_name->name : '';
 
             if (count($degrees) > $i) {
 
@@ -268,7 +278,7 @@ function physician_save_post($post_id): void
 
     // Get related areas of expertise
 
-    $expertises = $_POST['acf']['field_physician_expertise'];
+    $expertises = $_POST['acf']['field_physician_expertise'] ?? [];
 
     // Initialize variable to prevent php error
 
@@ -301,7 +311,7 @@ function physician_save_post($post_id): void
 
     // Get related conditions
 
-    $conditions = $_POST['acf']['field_physician_conditions_cpt'];
+    $conditions = $_POST['acf']['field_physician_conditions_cpt'] ?? [];
 
     // Initialize variable to prevent php error
 
@@ -334,7 +344,7 @@ function physician_save_post($post_id): void
 
     // Get related treatments
 
-    $treatments = $_POST['acf']['field_physician_treatments_cpt'];
+    $treatments = $_POST['acf']['field_physician_treatments_cpt'] ?? [];
 
     // Initialize variable to prevent php error
 
@@ -375,7 +385,7 @@ function physician_save_post($post_id): void
 
     // Get the list of locations associated with the provider
 
-    $locations = $_POST['acf']['field_physician_locations'];
+    $locations = $_POST['acf']['field_physician_locations'] ?? [];
 
     // Get the desired values from each associated location
 
@@ -2215,7 +2225,7 @@ function uamswp_spotlight_to_ids($value): array
 
     $value = is_array($value) ? $value : [$value];
 
-    return array_values(array_unique(array_filter(array_map('intval', $value))));
+    return array_values(array_unique(array_filter(array_map(intval(...), $value))));
 
 }
 
@@ -2346,7 +2356,7 @@ function uamswp_spotlight_reconcile_providers($post_id): void
 
     if ($providers !== $original) {
 
-        $_POST['acf']['field_clinical_resource_providers'] = array_map('strval', $providers);
+        $_POST['acf']['field_clinical_resource_providers'] = array_map(strval(...), $providers);
 
     }
 
@@ -2978,7 +2988,7 @@ function uamswp_spotlight_reconcile_ontology($post_id): void
         foreach (uamswp_spotlight_ontology_map() as $cr_field => $spec) {
 
             $ids = uamswp_spotlight_to_ids(get_field($spec['provider'], $new_provider));
-            $_POST['acf'][$cr_field] = array_map('strval', $ids);
+            $_POST['acf'][$cr_field] = array_map(strval(...), $ids);
 
         }
 
@@ -3165,7 +3175,7 @@ function uamswp_location_validate_epic_dep_ids($valid, $value, $field, $input_na
 
         }
 
-        if (is_string($row_index) && strpos($row_index, '_deleted') !== false) {
+        if (is_string($row_index) && str_contains($row_index, '_deleted')) {
 
             continue;
 
@@ -3257,3 +3267,97 @@ function uamswp_location_trim_epic_dep_id($value, $post_id, $field)
     return trim($value);
 
 }
+
+// Workday identifiers on the provider profile are identifiers, not free text:
+// the exact-match lookups and cross-system joins that read them fail silently on
+// a value like "Employee ID 1234567" pasted from Workday with its label.
+// Reject anything that is not digits only and the expected length. Empty values
+// stay allowed, since none of the four fields is required.
+//
+// Rejected rather than repaired: the filter cannot change what is stored, and
+// an editor who sees the message learns what the field holds.
+function uamswp_workday_id_validation_rules(): array
+{
+
+    return [
+        'field_physician_workday_universal_id' => ['digits' => 9, 'label' => 'Workday Universal ID'],
+        'field_physician_workday_employee_id' => ['digits' => 7, 'label' => 'Workday Employee ID'],
+        'field_physician_workday_contingent_worker_id' => ['digits' => 7, 'label' => 'Workday Contingent Worker ID'],
+        'field_physician_workday_student_id' => ['digits' => 7, 'label' => 'Workday Student ID'],
+    ];
+
+}
+
+function uamswp_workday_id_validate($valid, $value, $field, $input_name)
+{
+
+    if ($valid !== true) {
+
+        return $valid;
+
+    }
+
+    $rules = uamswp_workday_id_validation_rules();
+
+    if (! isset($field['key'], $rules[$field['key']]) || ! is_string($value)) {
+
+        return $valid;
+
+    }
+
+    $value = trim($value);
+
+    if ($value === '') {
+
+        return $valid;
+
+    }
+
+    $digits = $rules[$field['key']]['digits'];
+
+    if (preg_match('/^[0-9]{'.$digits.'}$/', $value) !== 1) {
+
+        return sprintf(
+            'Enter the %1$d-digit %2$s only, e.g. %3$s.',
+            $digits,
+            $rules[$field['key']]['label'],
+            substr('123456789', 0, $digits)
+        );
+
+    }
+
+    return $valid;
+
+}
+
+foreach (array_keys(uamswp_workday_id_validation_rules()) as $uamswp_workday_id_key) {
+
+    add_filter('acf/validate_value/key='.$uamswp_workday_id_key, 'uamswp_workday_id_validate', 10, 4);
+
+}
+unset($uamswp_workday_id_key);
+
+// Validation trims before it checks, so store the trimmed value too; otherwise
+// " 1234567 " passes and is saved with its spaces.
+function uamswp_workday_id_trim($value, $post_id, $field)
+{
+
+    return is_string($value) ? trim($value) : $value;
+
+}
+
+foreach (array_keys(uamswp_workday_id_validation_rules()) as $uamswp_workday_id_key) {
+
+    add_filter('acf/update_value/key='.$uamswp_workday_id_key, 'uamswp_workday_id_trim', 10, 3);
+
+}
+unset($uamswp_workday_id_key);
+
+/**
+ * Keep an unanswered provider field empty in the provider custom table.
+ *
+ * Without this, a Draft, Pending Review or Inactive provider saved with nothing
+ * entered gets "No" or 0 in the integer columns. See
+ * uamswp_provider_null_empty_value() in class.fad-provider-nullable-fields.php.
+ */
+add_filter('acfcdt/filter_value_before_update', 'uamswp_provider_null_empty_value', 10, 3);

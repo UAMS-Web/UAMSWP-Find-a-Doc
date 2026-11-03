@@ -24,7 +24,7 @@ class UAMSWP_FAD_GBP_Logic
      * @param  array<string, array>  $silos  Silo definitions keyed by silo name, each with a `brand` slug or null.
      * @return string|null The silo name, or null when the brand has no silo (default-deny).
      */
-    public static function resolve_silo($brand_query, $brand_org, array $silos)
+    public static function resolve_silo($brand_query, $brand_org, array $silos): null|int|string
     {
 
         if ((string) $brand_query !== '1') {
@@ -60,6 +60,52 @@ class UAMSWP_FAD_GBP_Logic
         }
 
         return $configured;
+
+    }
+
+    /**
+     * The title of a provider's Business Profile listing for one location.
+     *
+     * A provider at several locations has one listing per location, so the title names the
+     * location the listing is for; otherwise the listings could not be told apart in Google.
+     * A blank location name leaves the provider name alone rather than a trailing separator.
+     *
+     * @param  string  $provider_name  The provider's full name, already decoded.
+     * @param  string  $location_title  The title of the location in the listing's store code, already decoded.
+     * @return string `UAMS Health - <provider name> - <location name>`.
+     */
+    public static function provider_listing_title($provider_name, $location_title): string
+    {
+
+        $title = 'UAMS Health - '.trim((string) $provider_name);
+        $location_title = trim((string) $location_title);
+
+        return $location_title === '' ? $title : $title.' - '.$location_title;
+
+    }
+
+    /**
+     * A location name without the place it is "in", "at" or "on", for an address line.
+     *
+     * The CSV export had the parent's name on one address line and the child's on the next,
+     * and whoever uploaded it removed the place from the end of each name by hand. The place
+     * is whatever follows the first ` in`, ` at` or ` on`, each with or without ` the`, in any letter
+     * case: the parent, but also a facility, a city, a neighborhood or a street. Everything
+     * from that joiner on goes. A name with no joiner, or with nothing before or after one, is
+     * left as it is. The listing title keeps the full name.
+     *
+     * @param  string  $name  A location's name.
+     */
+    public static function location_name_without_place($name): string
+    {
+
+        $name = trim((string) $name);
+
+        if (preg_match('/^(.*?\S)\s+(?:in|at|on)(?:\s+the)?\s+\S/iu', $name, $matches) === 1) {
+            return $matches[1];
+        }
+
+        return $name;
 
     }
 
@@ -278,7 +324,7 @@ class UAMSWP_FAD_GBP_Logic
                     'postalCode' => trim((string) ($value['postalCode'] ?? '')),
                     'administrativeArea' => trim((string) ($value['administrativeArea'] ?? '')),
                     'locality' => trim((string) ($value['locality'] ?? '')),
-                    'addressLines' => array_values(array_map('trim', (array) ($value['addressLines'] ?? []))),
+                    'addressLines' => array_values(array_map(trim(...), (array) ($value['addressLines'] ?? []))),
                 ];
 
             case 'categories':
