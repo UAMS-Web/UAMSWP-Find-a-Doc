@@ -302,16 +302,32 @@ final class GbpRuntimeTest extends UnitTestCase
 
             return true;
         });
+        $stored = [];
+        Functions\when('get_option')->alias(function (string $name, $default = false) use (&$stored) {
+            return $stored[$name] ?? $default;
+        });
+        Functions\when('update_option')->alias(function (string $name, $value) use (&$stored): bool {
+            $stored[$name] = $value;
+
+            return true;
+        });
         $this->recordSchedule();
         $now = time();
 
         uamswp_fad_gbp_schedule_retry(7);
         $this->assertSame([[7]], array_column($this->scheduled, 2));
         $this->assertEqualsWithDelta($now + 60, $this->scheduled[0][0], 5);
+        $this->assertSame($this->scheduled[0][0], $stored[UAMSWP_FAD_GBP_BACKOFF_OPTION], 'the dashboard shows when the backoff ends');
 
         $this->scheduled = [];
         uamswp_fad_gbp_schedule_retry(7);
         $this->assertEqualsWithDelta($now + 120, $this->scheduled[0][0], 5);
+        $this->assertSame($this->scheduled[0][0], $stored[UAMSWP_FAD_GBP_BACKOFF_OPTION]);
+
+        $stored[UAMSWP_FAD_GBP_BACKOFF_OPTION] = $now + 99999;
+        $this->scheduled = [];
+        uamswp_fad_gbp_schedule_retry(7);
+        $this->assertSame($now + 99999, $stored[UAMSWP_FAD_GBP_BACKOFF_OPTION], 'an earlier backoff does not shorten a later one');
     }
 
     public function test_a_provider_is_given_up_on_after_the_attempt_limit(): void
