@@ -331,6 +331,7 @@ function uamswp_fad_gbp_index(UAMSWP_FAD_GBP_Client $client): array
     }
 
     set_transient('uamswp_fad_gbp_index', $listings, 300);
+    set_transient('uamswp_fad_gbp_index_at', time(), 300);
 
     return $listings;
 }
@@ -501,7 +502,10 @@ function uamswp_fad_gbp_log(array $entry): void
  */
 function uamswp_fad_gbp_create_budget(): int
 {
-    return max(0, (int) apply_filters('uamswp_fad_gbp_daily_create_budget', UAMSWP_FAD_GBP_DEFAULT_CREATE_BUDGET));
+    $budget = apply_filters('uamswp_fad_gbp_daily_create_budget', UAMSWP_FAD_GBP_DEFAULT_CREATE_BUDGET);
+
+    // A filter returning anything but a number must not silently become 0 (every create held back).
+    return is_numeric($budget) ? max(0, (int) $budget) : UAMSWP_FAD_GBP_DEFAULT_CREATE_BUDGET;
 }
 
 /**
@@ -555,10 +559,22 @@ function uamswp_fad_gbp_after_run(UAMSWP_FAD_GBP_Sync $sync, array $entries, ?in
     }
 
     $cached = get_transient('uamswp_fad_gbp_index');
+    $read_at = get_transient('uamswp_fad_gbp_index_at');
 
-    if ($sync->created() !== [] && is_array($cached)) {
-        set_transient('uamswp_fad_gbp_index', array_merge($cached, $sync->created()), 300);
+    if ($sync->created() === [] || ! is_array($cached)) {
+        return;
     }
+
+    // Keep the index's original expiry: a long backlog of creates must not keep a stale read alive.
+    $remaining = is_int($read_at) ? 300 - ($now - $read_at) : 0;
+
+    if ($remaining < 1) {
+        delete_transient('uamswp_fad_gbp_index');
+
+        return;
+    }
+
+    set_transient('uamswp_fad_gbp_index', array_merge($cached, $sync->created()), $remaining);
 }
 
 /**
@@ -575,6 +591,34 @@ function uamswp_fad_gbp_schedule_deferred(int $post_id, array $entries): void
 
     if ($deferred !== [] && wp_next_scheduled(UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]) === false) {
         wp_schedule_single_event(max($deferred) + 60 + ($post_id % 600), UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
+    }
+}
+
+/**
+ * What to remember and queue after a job has run a post's items.
+ *
+ * A retryable failure queues a backed-off retry that counts an attempt. A create held back by the
+ * daily quota queues the post at the reset and counts nothing; it is queued in both cases, so a post
+ * whose retries give up still runs again after the reset. The fingerprint is written only when
+ * every entry is settled, which a held create never is.
+ *
+ * @param  array<int, array<string, mixed>>  $entries  The run's log entries.
+ */
+function uamswp_fad_gbp_finish_run(int $post_id, array $entries, string $hash): void
+{
+    if (in_array(true, array_column($entries, 'retryable'), true)) {
+        uamswp_fad_gbp_schedule_retry($post_id);
+        uamswp_fad_gbp_schedule_deferred($post_id, $entries);
+
+        return;
+    }
+
+    delete_transient('uamswp_fad_gbp_attempts_'.$post_id);
+
+    uamswp_fad_gbp_schedule_deferred($post_id, $entries);
+
+    if (UAMSWP_FAD_GBP_Logic::is_settled($entries)) {
+        update_post_meta($post_id, UAMSWP_FAD_GBP_HASH_META, $hash);
     }
 }
 
@@ -642,29 +686,25 @@ function uamswp_fad_gbp_run_post(int $post_id): void
             return;
         }
 
+        $gate = uamswp_fad_gbp_create_gate();
         $sync = new UAMSWP_FAD_GBP_Sync(
             $client,
-            ['silos' => uamswp_fad_gbp_silos(), 'modes' => $modes, 'is_production' => $production] + uamswp_fad_gbp_create_gate(),
+            ['silos' => uamswp_fad_gbp_silos(), 'modes' => $modes, 'is_production' => $production] + $gate,
             UAMSWP_FAD_GBP_Sync::build_index(uamswp_fad_gbp_index($client)),
             'uamswp_fad_gbp_log'
         );
 
-        $entries = $sync->run($items);
+        $entries = [];
 
-        // A write changes what the next job should see, and creates count against the day's quota.
-        uamswp_fad_gbp_after_run($sync, $entries);
-
-        if (in_array(true, array_column($entries, 'retryable'), true)) {
-            uamswp_fad_gbp_schedule_retry($post_id);
-        } else {
-            delete_transient('uamswp_fad_gbp_attempts_'.$post_id);
-
-            uamswp_fad_gbp_schedule_deferred($post_id, $entries);
-
-            if (UAMSWP_FAD_GBP_Logic::is_settled($entries)) {
-                update_post_meta($post_id, UAMSWP_FAD_GBP_HASH_META, $hash);
-            }
+        try {
+            $entries = $sync->run($items);
+        } finally {
+            // The creates already made count against the day's quota even if the run ended early,
+            // and a write changes what the next job should see.
+            uamswp_fad_gbp_after_run($sync, $entries, $gate['now']);
         }
+
+        uamswp_fad_gbp_finish_run($post_id, $entries, $hash);
     } catch (UAMSWP_FAD_GBP_Rate_Limited $rateLimited) {
         uamswp_fad_gbp_log(['store_code' => '', 'silo' => null, 'kind' => get_post_type($post_id) === 'location' ? 'location' : 'provider', 'mode' => 'n/a', 'action' => 'error', 'reason' => $rateLimited->getMessage(), 'fields' => [], 'unresolved_categories' => []]);
         uamswp_fad_gbp_schedule_retry($post_id);
