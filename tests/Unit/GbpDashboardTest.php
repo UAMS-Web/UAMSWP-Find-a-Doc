@@ -142,6 +142,16 @@ final class GbpDashboardTest extends UnitTestCase
         $this->assertSame(['2026-10-27', '2026-10-28', '2026-10-29', '2026-10-30', '2026-10-31', '2026-11-01', '2026-11-02'], array_column($fall, 'day'));
     }
 
+    public function test_the_last_day_is_the_pacific_day_not_the_utc_day(): void
+    {
+        // 06:00 UTC on 2026-11-04 is still the evening of 2026-11-03 in Los Angeles.
+        $days = UAMSWP_FAD_GBP_Logic::last_days(['2026-11-03' => 9], (int) strtotime('2026-11-04 06:00:00 UTC'));
+
+        $this->assertSame('2026-11-03', $days[6]['day']);
+        $this->assertSame(9, $days[6]['count']);
+        $this->assertSame('2026-10-28', $days[0]['day']);
+    }
+
     public function test_the_queue_is_sorted_into_due_waiting_and_hours(): void
     {
         $paused_until = self::NOW + 50000;
