@@ -365,6 +365,70 @@ class UAMSWP_FAD_GBP_Logic
         return sha1((string) json_encode([$items, $modes, $production, $version]));
     }
 
+    /** How many continuous days a listing stays orphaned before the sync closes it. */
+    const ORPHAN_GRACE_DAYS = 14;
+
+    /**
+     * The fields written to close a listing, and the mask naming them.
+     *
+     * The listing is marked permanently closed and its website, description, phone, labels and additional
+     * categories are cleared. The primary category, address and title stay. Nothing here deletes anything.
+     *
+     * @return array{fields: array<string, mixed>, mask: string}
+     */
+    public static function close_patch(): array
+    {
+        return [
+            'fields' => [
+                'openInfo' => ['status' => 'CLOSED_PERMANENTLY'],
+                'websiteUri' => '',
+                'profile' => ['description' => ''],
+                'phoneNumbers' => new stdClass,
+                'labels' => [],
+                'categories' => ['additionalCategories' => []],
+            ],
+            'mask' => 'openInfo.status,websiteUri,profile.description,phoneNumbers,labels,categories.additionalCategories',
+        ];
+    }
+
+    /**
+     * Whether a live listing is already marked closed.
+     *
+     * @param  array<string, mixed>  $listing
+     */
+    public static function is_closed(array $listing): bool
+    {
+        return in_array($listing['openInfo']['status'] ?? '', ['CLOSED_PERMANENTLY', 'CLOSED_TEMPORARILY'], true);
+    }
+
+    /**
+     * Put days remaining and a due flag on each orphan candidate.
+     *
+     * The period counts whole days from the date the listing was first seen orphaned and is due on the
+     * fourteenth. A candidate with no valid date is not due and shows the full period.
+     *
+     * @param  array<int, array{name: string, cause: string, since: string, label: string}>  $candidates
+     * @return array<int, array{name: string, cause: string, since: string, label: string, days_left: int, due: bool}>
+     */
+    public static function orphan_report(array $candidates, string $today): array
+    {
+        $report = [];
+        $end = strtotime($today.' 00:00:00 UTC');
+
+        foreach ($candidates as $candidate) {
+            $start = strtotime($candidate['since'].' 00:00:00 UTC');
+            $elapsed = $start === false || $end === false ? 0 : max(0, intdiv($end - $start, 86400));
+            $valid = $start !== false && $end !== false;
+
+            $report[] = $candidate + [
+                'days_left' => max(0, self::ORPHAN_GRACE_DAYS - $elapsed),
+                'due' => $valid && $elapsed >= self::ORPHAN_GRACE_DAYS,
+            ];
+        }
+
+        return $report;
+    }
+
     /**
      * Put a listing's Google name in a provider's map of listings, one entry per location post.
      *
