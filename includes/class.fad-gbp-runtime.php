@@ -646,7 +646,8 @@ function uamswp_fad_gbp_items_for_provider(int $provider_id, array $categories):
         $items[] = [
             'store_code' => $store_code,
             'kind' => 'provider',
-            'photos' => UAMSWP_FAD_GBP_Logic::photos_from_row($row, false),
+            // With no location post there is no map entry to record the photos against, so they would be re-sent every run.
+            'photos' => $location['id'] === 0 ? [] : UAMSWP_FAD_GBP_Logic::photos_from_row($row, false),
             'post_id' => $provider_id,
             'location_id' => $location['id'],
             'silo' => $location['silo'],

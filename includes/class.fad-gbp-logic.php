@@ -981,7 +981,7 @@ class UAMSWP_FAD_GBP_Logic
             $reason = $entry['reason'] ?? '';
 
             $settled = in_array($action, ['noop', 'skip'], true)
-                || (in_array($action, ['create', 'update'], true) && in_array($reason, ['Created', 'Updated'], true));
+                || (in_array($action, ['create', 'update'], true) && in_array($reason, ['Created', 'Updated', 'Photos sent'], true));
 
             if (! $settled) {
                 return false;

@@ -369,13 +369,26 @@ final class UAMSWP_FAD_GBP_Sync
      * @param  array<int, array{category: string, url: string}>  $photos
      * @param  array<int, string>  $sent  Receives the address of each photo Google accepted.
      *
-     * @throws RuntimeException On the first photo Google refuses; the ones before it are in $sent.
+     * @throws RuntimeException After every photo was tried, naming each refused one; a rate limit ends the sending at once.
      */
     private function send_photos(string $account, string $listing_name, array $photos, array &$sent): void
     {
+        $refused = null;
+
         foreach ($photos as $photo) {
-            $this->client->upload_photo($account, $listing_name, $photo['category'], $photo['url']);
-            $sent[] = $photo['url'];
+            try {
+                $this->client->upload_photo($account, $listing_name, $photo['category'], $photo['url']);
+                $sent[] = $photo['url'];
+            } catch (UAMSWP_FAD_GBP_Rate_Limited $rateLimited) {
+                throw $rateLimited;
+            } catch (RuntimeException $runtimeException) {
+                // One refused photo must not block the ones after it; the first refusal is the one reported.
+                $refused ??= new RuntimeException($photo['url'].': '.$runtimeException->getMessage(), 0, $runtimeException);
+            }
+        }
+
+        if ($refused instanceof RuntimeException) {
+            throw $refused;
         }
     }
 

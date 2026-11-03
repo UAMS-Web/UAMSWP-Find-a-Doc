@@ -463,4 +463,10 @@ final class GbpLogicTest extends UnitTestCase
         $this->assertSame(['b', 'c'], array_column(UAMSWP_FAD_GBP_Logic::filter_entries($entries, null, 'baptist-health'), 'store_code'));
         $this->assertSame(['c'], array_column(UAMSWP_FAD_GBP_Logic::filter_entries($entries, 'review', 'baptist-health'), 'store_code'));
     }
+
+    public function test_a_photo_only_update_is_settled_but_an_error_is_not(): void
+    {
+        $this->assertTrue(UAMSWP_FAD_GBP_Logic::is_settled([['action' => 'update', 'reason' => 'Photos sent']]));
+        $this->assertFalse(UAMSWP_FAD_GBP_Logic::is_settled([['action' => 'error', 'reason' => 'Photos sent']]));
+    }
 }

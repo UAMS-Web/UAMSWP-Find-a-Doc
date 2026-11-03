@@ -803,8 +803,9 @@ final class GbpSyncTest extends UnitTestCase
         $this->sync(['uams' => 'live'])->run([$this->item(['photos' => $photos])]);
 
         $this->assertSame(['error'], $this->actions());
-        $this->assertSame(['https://x/logo.png'], $this->log[0]['photos_sent_now']);
-        $this->assertCount(2, $this->calls_of('upload_photo'), 'it stops at the refusal');
+        $this->assertSame(['https://x/logo.png', 'https://x/other.jpg'], $this->log[0]['photos_sent_now'], 'a refused photo does not block the ones after it');
+        $this->assertCount(3, $this->calls_of('upload_photo'));
         $this->assertStringContainsString('403', $this->log[0]['reason']);
+        $this->assertStringContainsString('https://x/fail.jpg', $this->log[0]['reason']);
     }
 }
