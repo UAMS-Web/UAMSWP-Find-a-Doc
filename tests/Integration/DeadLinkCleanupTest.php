@@ -91,7 +91,7 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
         $this->assertSame(1, $this->rowCount($this->providers_table, $world['trashed']), 'A row whose post is in the trash stays.');
         $this->assertSame(1, $this->rowCount($this->providers_table, $world['provider']), 'A live provider keeps its row.');
 
-        $again = uamswp_dead_links_scan();
+        $again = uamswp_dead_links_scan(false);
         $this->assertSame(0, $again['counts']['links']);
         $this->assertSame([], $again['counts']['rows']);
     }
@@ -192,6 +192,182 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
         uamswp_dead_links_handle_scan();
     }
 
+    public function test_a_check_after_the_removal_keeps_the_undo(): void
+    {
+        $world = $this->world();
+        $stored = uamswp_dead_links_apply_step(uamswp_dead_links_scan());
+
+        $this->actAs('administrator');
+        $_REQUEST['_wpnonce'] = wp_create_nonce('uamswp_dead_links_scan');
+
+        $location = $this->redirectOf('uamswp_dead_links_handle_scan');
+
+        $this->assertStringContainsString('notice=checked', $location);
+        $this->assertSame('applied', uamswp_dead_links_run()['status'], 'The run is not replaced.');
+        $this->assertSame(0, get_transient('uamswp_fad_dead_links_check')['links']);
+
+        uamswp_dead_links_undo_step(uamswp_dead_links_run());
+
+        $this->assertSame([$world['provider'], self::DEAD, self::DEAD_TWO], $this->ids(get_field('condition_physicians', $world['condition'])));
+        $this->assertSame(1, $this->rowCount($this->providers_table, self::DEAD_ROW), 'The row backup survived the check.');
+    }
+
+    public function test_a_step_that_ended_after_recording_its_items_finishes_without_losing_the_undo(): void
+    {
+        $world = $this->world();
+        $run = uamswp_dead_links_apply_step(uamswp_dead_links_scan());
+
+        // As if the request died after the fields were written: the items are recorded but still pending, at the start.
+        foreach ($run['items'] as $i => $item) {
+            $run['items'][$i]['state'] = 'pending';
+        }
+        $run['cursor'] = 0;
+        $run['status'] = 'applying';
+
+        $run = uamswp_dead_links_apply_step($run);
+
+        $this->assertSame(['done'], array_values(array_unique(array_column($run['items'], 'state'))), 'Written items are recognized as done, not skipped.');
+
+        $run = uamswp_dead_links_undo_step($run);
+
+        $this->assertSame([$world['provider'], self::DEAD, self::DEAD_TWO], $this->ids(get_field('condition_physicians', $world['condition'])));
+        $this->assertSame(1, $this->rowCount($this->providers_table, self::DEAD_ROW));
+    }
+
+    public function test_a_single_post_object_field_is_listed_cleared_and_restored(): void
+    {
+        $spotlight = self::factory()->post->create(['post_type' => 'clinical-resource']);
+        update_field('clinical_resource_spotlight_provider', (string) self::DEAD, $spotlight);
+
+        $run = uamswp_dead_links_scan();
+
+        $this->assertSame(1, $run['counts']['links']);
+        $this->assertSame('single', $run['items'][0]['shape']);
+
+        $run = uamswp_dead_links_apply_step($run);
+
+        $this->assertSame([], $this->ids(get_field('clinical_resource_spotlight_provider', $spotlight)));
+
+        uamswp_dead_links_undo_step($run);
+
+        $this->assertSame([self::DEAD], $this->ids(get_field('clinical_resource_spotlight_provider', $spotlight)));
+    }
+
+    public function test_an_orphan_row_that_carries_links_is_one_row_and_no_links(): void
+    {
+        $this->insertRow($this->providers_table, self::DEAD_ROW, [self::DEAD_TWO], 'Orphan');
+
+        $run = uamswp_dead_links_scan();
+
+        $this->assertSame(0, $run['counts']['links']);
+        $this->assertSame([$this->providers_table => 1], $this->prefixed($run['counts']['rows']));
+        $this->assertSame(['row'], array_column($run['items'], 'kind'));
+    }
+
+    public function test_nothing_is_written_when_the_backup_cannot_be_saved(): void
+    {
+        $world = $this->world();
+        $run = uamswp_dead_links_scan();
+
+        // The run record is refused: the option keeps its old value, as a write that failed would.
+        add_filter('pre_update_option_'.UAMSWP_DEAD_LINKS_RUN_OPTION, static fn ($value, $old) => $old, 10, 2);
+
+        $result = uamswp_dead_links_apply_step($run);
+
+        $this->assertSame('failed', $result['status']);
+        $this->assertSame([$world['provider'], self::DEAD, self::DEAD_TWO], $this->ids(get_field('condition_physicians', $world['condition'])));
+        $this->assertSame(1, $this->rowCount($this->providers_table, self::DEAD_ROW));
+    }
+
+    public function test_a_step_is_refused_while_another_holds_the_lock(): void
+    {
+        $this->world();
+        uamswp_dead_links_scan();
+        $this->actAs('administrator');
+
+        $this->assertTrue(uamswp_dead_links_lock());
+        $this->assertFalse(uamswp_dead_links_lock(), 'A second step cannot take it.');
+
+        $_REQUEST['_wpnonce'] = wp_create_nonce('uamswp_dead_links_apply');
+        $_GET['run'] = (string) uamswp_dead_links_run()['scanned_at'];
+
+        $this->assertStringContainsString('notice=busy', $this->redirectOf('uamswp_dead_links_handle_apply'));
+        $this->assertSame('scanned', uamswp_dead_links_run()['status']);
+
+        uamswp_dead_links_unlock();
+        $this->assertTrue(uamswp_dead_links_lock());
+        uamswp_dead_links_unlock();
+    }
+
+    public function test_a_step_from_an_earlier_dry_run_is_refused(): void
+    {
+        $world = $this->world();
+        $run = uamswp_dead_links_scan();
+        $this->actAs('administrator');
+
+        $_REQUEST['_wpnonce'] = wp_create_nonce('uamswp_dead_links_apply');
+        $_GET['run'] = (string) ($run['scanned_at'] - 60);
+
+        $this->assertStringContainsString('notice=stale', $this->redirectOf('uamswp_dead_links_handle_apply'));
+        $this->assertSame([$world['provider'], self::DEAD, self::DEAD_TWO], $this->ids(get_field('condition_physicians', $world['condition'])));
+    }
+
+    public function test_the_removal_through_its_handler_continues_until_the_list_is_done(): void
+    {
+        $world = $this->world();
+        $run = uamswp_dead_links_scan();
+        $this->actAs('administrator');
+
+        $steps = 0;
+
+        do {
+            $_REQUEST['_wpnonce'] = wp_create_nonce('uamswp_dead_links_apply');
+            $_GET['run'] = (string) $run['scanned_at'];
+            $location = $this->redirectOf('uamswp_dead_links_handle_apply');
+            $steps++;
+        } while (str_contains($location, 'admin-post.php') && $steps < 50);
+
+        $this->assertStringContainsString('notice=applied', $location);
+        $this->assertSame('applied', uamswp_dead_links_run()['status']);
+        $this->assertSame([$world['provider']], $this->ids(get_field('condition_physicians', $world['condition'])));
+    }
+
+    public function test_a_stored_run_of_the_wrong_shape_is_not_used(): void
+    {
+        update_option(UAMSWP_DEAD_LINKS_RUN_OPTION, ['status' => 'scanned']);
+
+        $this->assertNull(uamswp_dead_links_run());
+
+        update_option(UAMSWP_DEAD_LINKS_RUN_OPTION, 'garbage');
+
+        $this->assertNull(uamswp_dead_links_run());
+    }
+
+    public function test_the_screen_escapes_what_the_records_contain(): void
+    {
+        $condition = self::factory()->post->create(['post_type' => 'condition', 'post_title' => '<b>Bold</b>']);
+        update_field('condition_physicians', [self::DEAD], $condition);
+        uamswp_dead_links_scan();
+        $this->actAs('administrator');
+
+        ob_start();
+        uamswp_dead_links_screen();
+        $html = (string) ob_get_clean();
+
+        $this->assertStringContainsString('&lt;b&gt;Bold&lt;/b&gt;', $html);
+        $this->assertStringNotContainsString('<b>Bold</b>', $html);
+        $this->assertStringContainsString((string) self::DEAD, $html);
+    }
+
+    public function test_the_screen_is_refused_to_a_subscriber(): void
+    {
+        wp_set_current_user(self::factory()->user->create(['role' => 'subscriber']));
+
+        $this->expectException(WPDieException::class);
+
+        uamswp_dead_links_screen();
+    }
+
     /**
      * A live provider, a condition, a treatment and a location with dead IDs, and two rows: one orphan, one whose post is in the trash.
      *
@@ -217,6 +393,33 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
         $this->insertRow($this->providers_table, self::DEAD_ROW, [], 'Orphan');
 
         return compact('provider', 'condition', 'treatment', 'location', 'trashed');
+    }
+
+    private function actAs(string $role): void
+    {
+        wp_set_current_user(self::factory()->user->create(['role' => $role]));
+    }
+
+    /**
+     * The address a handler redirects to. A filter on the redirect throws, so the handler's exit is never reached.
+     */
+    private function redirectOf(string $handler): string
+    {
+        $catch = static function (string $location): never {
+            throw new RedirectCaught($location);
+        };
+        add_filter('wp_redirect', $catch);
+
+        try {
+            $handler();
+        } catch (RedirectCaught $caught) {
+            return $caught->getMessage();
+        } finally {
+            remove_filter('wp_redirect', $catch);
+            unset($_REQUEST['_wpnonce'], $_GET['run']);
+        }
+
+        $this->fail("{$handler} did not redirect.");
     }
 
     /**
@@ -272,5 +475,10 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
         return $prefixed;
     }
 }
+
+/**
+ * Thrown by a redirect filter in place of the redirect.
+ */
+final class RedirectCaught extends \RuntimeException {}
 
 // cspell:ignore uamswp
