@@ -3031,7 +3031,7 @@ function uamswp_fad_sync_doc_role_caps(): void
         }
 
         foreach ($caps as $cap => $grant) {
-            if (empty($role->capabilities[$cap])) {
+            if ($grant && empty($role->capabilities[$cap])) {
                 $role->add_cap($cap);
             } elseif (! $grant && ! empty($role->capabilities[$cap])) {
                 $role->remove_cap($cap);

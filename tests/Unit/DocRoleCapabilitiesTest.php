@@ -132,9 +132,9 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
     {
         $this->assertSame($this->sorted([
             'read', 'level_1', 'upload_files', 'edit_files',
-            'read_physician', 'edit_physician', 'delete_physician', 'delete_physicians', 'delete_others_physicians', 'delete_published_physicians', 'delete_private_physicians',
+            'read_physician', 'edit_physician',
             'edit_physicians', 'edit_published_physicians', 'edit_private_physicians', 'edit_others_physicians', 'read_private_physicians',
-            'read_location', 'edit_location', 'delete_location', 'delete_locations', 'delete_others_locations', 'delete_published_locations', 'delete_private_locations',
+            'read_location', 'edit_location',
             'edit_locations', 'edit_published_locations', 'edit_private_locations', 'edit_others_locations', 'read_private_locations',
         ]), $this->roles_after_sync()['doc_admin']);
     }
@@ -193,8 +193,7 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
     public static function rights_cases(): array
     {
         $editor = ['read_private_posts', 'edit_posts', 'edit_published_posts'];
-        $admin = ['read_private_posts', 'edit_posts', 'edit_published_posts', 'edit_others_posts', 'edit_private_posts',
-            'delete_posts', 'delete_published_posts', 'delete_others_posts', 'delete_private_posts'];
+        $admin = ['read_private_posts', 'edit_posts', 'edit_published_posts', 'edit_others_posts', 'edit_private_posts'];
 
         return [
             'doc_editor on providers' => ['doc_editor', 'provider', $editor],
