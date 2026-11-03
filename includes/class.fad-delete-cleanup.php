@@ -134,7 +134,7 @@ function uamswp_delete_cleanup_meta_post_ids(string $post_type, string $meta_key
 
     }
 
-    return array_map('intval', (array) $wpdb->get_col($sql));
+    return array_map(intval(...), (array) $wpdb->get_col($sql));
 
 }
 
