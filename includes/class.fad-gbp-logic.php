@@ -366,6 +366,207 @@ class UAMSWP_FAD_GBP_Logic
     }
 
     /**
+     * Put a listing's Google name in a provider's map of listings, one entry per location post.
+     *
+     * Seeing the listing again clears an orphan date.
+     *
+     * @param  array<int|string, array{id: string, orphaned_since: ?string}>  $map
+     * @return array<int|string, array{id: string, orphaned_since: ?string}>
+     */
+    public static function remember_listing(array $map, int $location_id, string $name): array
+    {
+        $map[$location_id] = ['id' => $name, 'orphaned_since' => null];
+
+        return $map;
+    }
+
+    /**
+     * Date the entries of a provider's map whose location the provider no longer has.
+     *
+     * Only an entry that is not already dated gets a date, so the date stays the day it was first seen. An
+     * entry for a location the provider still has loses any date. No entry is removed.
+     *
+     * @param  array<int|string, array{id: string, orphaned_since: ?string}>  $map
+     * @param  array<int, int>  $current_location_ids  The location posts the provider is at now.
+     * @return array<int|string, array{id: string, orphaned_since: ?string}>
+     */
+    public static function mark_orphans(array $map, array $current_location_ids, string $date): array
+    {
+        foreach ($map as $location_id => $entry) {
+            if (in_array((int) $location_id, $current_location_ids, true)) {
+                $map[$location_id]['orphaned_since'] = null;
+            } elseif (($entry['orphaned_since'] ?? null) === null) {
+                $map[$location_id]['orphaned_since'] = $date;
+            }
+        }
+
+        return $map;
+    }
+
+    /**
+     * Every Google CID in a field value: the digit runs of ten or more, whatever the nesting.
+     *
+     * @return array<int, string>
+     */
+    public static function cids_from_value(mixed $value): array
+    {
+        if (is_array($value)) {
+            $found = [];
+
+            foreach ($value as $part) {
+                $found = array_merge($found, self::cids_from_value($part));
+            }
+
+            return array_values(array_unique($found));
+        }
+
+        if (! is_scalar($value)) {
+            return [];
+        }
+
+        preg_match_all('/\d{10,}/', (string) $value, $matches);
+
+        return array_values(array_unique($matches[0]));
+    }
+
+    /**
+     * The CID a listing's Maps link carries, or null.
+     */
+    public static function cid_from_maps_uri(string $uri): ?string
+    {
+        return preg_match('/[?&]cid=(\d+)/', $uri, $matches) === 1 ? $matches[1] : null;
+    }
+
+    /**
+     * Decide which stored ID each item would get, without writing anything.
+     *
+     * An item that has a stored ID still held by a listing is left alone. Otherwise its store code is tried, then
+     * the CIDs on its post: a CID counts only when exactly one listing carries it, and a provider's CID only when the
+     * provider has a single item, since a CID does not say which of several locations it is for.
+     *
+     * @param  array<int, array<string, mixed>>  $items  Items with `post_id`, `kind`, `store_code` and `stored_name`.
+     * @param  array<int, array{account: string, listing: array<string, mixed>}>  $listings
+     * @param  array<int, array<int, string>>  $cids_by_post  Post ID => the CIDs on that post.
+     * @return array{already: array<int, array<string, mixed>>, by_store_code: array<int, array{item: array<string, mixed>, name: string}>, by_cid: array<int, array{item: array<string, mixed>, name: string}>, unmatched: array<int, array<string, mixed>>}
+     */
+    public static function backfill_plan(array $items, array $listings, array $cids_by_post): array
+    {
+        $by_name = [];
+        $by_code = [];
+        $by_cid = [];
+
+        foreach ($listings as $entry) {
+            $listing = $entry['listing'];
+            $name = (string) ($listing['name'] ?? '');
+            $by_name[$name] = true;
+
+            if (($listing['storeCode'] ?? '') !== '') {
+                $by_code[(string) $listing['storeCode']][] = $name;
+            }
+
+            $cid = self::cid_from_maps_uri((string) ($listing['metadata']['mapsUri'] ?? ''));
+
+            if ($cid !== null) {
+                $by_cid[$cid][] = $name;
+            }
+        }
+
+        $per_post = [];
+
+        foreach ($items as $item) {
+            $per_post[(int) ($item['post_id'] ?? 0)] = ($per_post[(int) ($item['post_id'] ?? 0)] ?? 0) + 1;
+        }
+
+        $plan = ['already' => [], 'by_store_code' => [], 'by_cid' => [], 'unmatched' => []];
+
+        foreach ($items as $item) {
+            $stored = (string) ($item['stored_name'] ?? '');
+
+            if ($stored !== '' && isset($by_name[$stored])) {
+                $plan['already'][] = $item;
+
+                continue;
+            }
+
+            $codes = $by_code[$item['store_code']] ?? [];
+
+            if (count($codes) === 1) {
+                $plan['by_store_code'][] = ['item' => $item, 'name' => $codes[0]];
+
+                continue;
+            }
+
+            $post_id = (int) ($item['post_id'] ?? 0);
+            $eligible = $item['kind'] === 'location' || ($per_post[$post_id] ?? 0) === 1;
+            $names = [];
+
+            foreach ($eligible ? ($cids_by_post[$post_id] ?? []) : [] as $cid) {
+                $names = array_merge($names, $by_cid[$cid] ?? []);
+            }
+
+            $names = array_values(array_unique($names));
+
+            if (count($names) === 1 && $codes === []) {
+                $plan['by_cid'][] = ['item' => $item, 'name' => $names[0]];
+
+                continue;
+            }
+
+            $plan['unmatched'][] = $item;
+        }
+
+        return $plan;
+    }
+
+    /**
+     * Compare the CIDs the provider and location posts carry with the listings Google has.
+     *
+     * @param  array<int, array{id: int, label: string, cids: array<int, string>}>  $providers  Providers whose "listings on Google" field says Yes.
+     * @param  array<int, array{id: int, label: string, cids: array<int, string>}>  $posts  Every provider and location post with the CIDs it carries.
+     * @param  array<int, array{account: string, listing: array<string, mixed>}>  $listings
+     * @return array{providers_without_listing: array<int, string>, listings_without_cid: array<int, string>}
+     */
+    public static function cid_report(array $providers, array $posts, array $listings): array
+    {
+        $listing_cids = [];
+        $known = [];
+
+        foreach ($listings as $entry) {
+            $cid = self::cid_from_maps_uri((string) ($entry['listing']['metadata']['mapsUri'] ?? ''));
+
+            if ($cid !== null) {
+                $listing_cids[$cid] = true;
+            }
+        }
+
+        foreach ($posts as $post) {
+            foreach ($post['cids'] as $cid) {
+                $known[$cid] = true;
+            }
+        }
+
+        $without_listing = [];
+
+        foreach ($providers as $provider) {
+            if (array_intersect_key(array_flip($provider['cids']), $listing_cids) === []) {
+                $without_listing[] = $provider['label'];
+            }
+        }
+
+        $without_cid = [];
+
+        foreach ($listings as $entry) {
+            $cid = self::cid_from_maps_uri((string) ($entry['listing']['metadata']['mapsUri'] ?? ''));
+
+            if ($cid === null || ! isset($known[$cid])) {
+                $without_cid[] = (string) ($entry['listing']['storeCode'] ?? $entry['listing']['name'] ?? '');
+            }
+        }
+
+        return ['providers_without_listing' => $without_listing, 'listings_without_cid' => $without_cid];
+    }
+
+    /**
      * The key a review or error entry is kept under: its store code, or its reason when it has none.
      *
      * @param  array<string, mixed>  $entry

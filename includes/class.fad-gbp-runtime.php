@@ -373,25 +373,137 @@ function uamswp_fad_gbp_silo_for_location(int $location_id): ?string
 }
 
 /**
+ * Meta key on a location post: the Google location name (`locations/123`) of its listing.
+ */
+const UAMSWP_FAD_GBP_LISTING_META = 'uamswp_fad_gbp_listing_id';
+
+/**
+ * Meta key on a provider post: a map of location post ID to the Google location name and the day it was first seen orphaned.
+ */
+const UAMSWP_FAD_GBP_LISTING_MAP_META = 'uamswp_fad_gbp_listing_ids';
+
+/**
+ * Give each item the Google location name stored for it, if any.
+ *
+ * Done after the fingerprint is taken, so storing an ID does not make the next run look changed.
+ *
+ * @param  array<int, array<string, mixed>>  $items
+ * @return array<int, array<string, mixed>>
+ */
+function uamswp_fad_gbp_attach_stored_ids(array $items): array
+{
+    foreach ($items as $key => $item) {
+        $post_id = (int) ($item['post_id'] ?? 0);
+
+        if ($post_id === 0) {
+            continue;
+        }
+
+        if ($item['kind'] === 'location') {
+            $items[$key]['stored_name'] = (string) get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true);
+
+            continue;
+        }
+
+        $map = get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
+        $items[$key]['stored_name'] = is_array($map) ? (string) ($map[(int) ($item['location_id'] ?? 0)]['id'] ?? '') : '';
+    }
+
+    return $items;
+}
+
+/**
+ * Store the Google name of every listing the run matched or created, on the post it belongs to.
+ *
+ * @param  array<int, array<string, mixed>>  $items
+ * @param  array<int, array<string, mixed>>  $entries  The run's entries, in item order.
+ */
+function uamswp_fad_gbp_store_listing_ids(array $items, array $entries): void
+{
+    foreach (array_values($items) as $position => $item) {
+        $name = (string) ($entries[$position]['listing_name'] ?? '');
+        $post_id = (int) ($item['post_id'] ?? 0);
+
+        if ($name === '' || $post_id === 0 || ($entries[$position]['mode'] ?? '') !== 'live') {
+            continue;
+        }
+
+        uamswp_fad_gbp_write_listing_id($item, $name);
+    }
+}
+
+/**
+ * Write one listing's Google name on the post an item belongs to, only when it differs from what is stored.
+ *
+ * @param  array<string, mixed>  $item  With `post_id`, `kind` and, for a provider, `location_id`.
+ */
+function uamswp_fad_gbp_write_listing_id(array $item, string $name): void
+{
+    $post_id = (int) $item['post_id'];
+
+    if ($item['kind'] === 'location') {
+        if ((string) get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true) !== $name) {
+            update_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, $name);
+        }
+
+        return;
+    }
+
+    $map = get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
+    $map = is_array($map) ? $map : [];
+
+    $location_id = (int) ($item['location_id'] ?? 0);
+
+    if (($map[$location_id]['id'] ?? '') !== $name || ($map[$location_id]['orphaned_since'] ?? null) !== null) {
+        update_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, UAMSWP_FAD_GBP_Logic::remember_listing($map, $location_id, $name));
+    }
+}
+
+/**
+ * Date the map entries of a provider whose location it no longer has.
+ *
+ * @param  array<int, array<string, mixed>>  $items  All of the provider's items, unfiltered.
+ */
+function uamswp_fad_gbp_mark_orphans(int $post_id, array $items, ?int $now = null): void
+{
+    if (get_post_type($post_id) !== 'provider') {
+        return;
+    }
+
+    $map = get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
+
+    if (! is_array($map) || $map === []) {
+        return;
+    }
+
+    $marked = UAMSWP_FAD_GBP_Logic::mark_orphans($map, array_map(fn (array $item): int => (int) ($item['location_id'] ?? 0), $items), gmdate('Y-m-d', $now ?? time()));
+
+    if ($marked !== $map) {
+        update_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, $marked);
+    }
+}
+
+/**
  * What the sync needs to know about a location, by slug: its silo, from its brand fields, and
  * whether providers practicing there are excluded from Google Business Profiles.
  *
  * The silo is null when the brand has no silo, and the location is treated as not excluding
  * its providers when it cannot be found.
  *
- * @return array{silo: ?string, providers_excluded: bool}
+ * @return array{silo: ?string, providers_excluded: bool, id: int} The location's post ID, 0 when it cannot be found.
  */
 function uamswp_fad_gbp_location_info(string $slug): array
 {
     $ids = get_posts(['name' => $slug, 'post_type' => 'location', 'post_status' => 'publish', 'posts_per_page' => 1, 'fields' => 'ids']);
 
     if ($ids === []) {
-        return ['silo' => null, 'providers_excluded' => false];
+        return ['silo' => null, 'providers_excluded' => false, 'id' => 0];
     }
 
     $location_id = (int) $ids[0];
 
     return [
+        'id' => $location_id,
         'silo' => uamswp_fad_gbp_silo_for_location($location_id),
         'providers_excluded' => function_exists('get_field') && UAMSWP_FAD_GBP_Logic::is_yes(get_field('location_gmb_exclude_providers', $location_id)),
     ];
@@ -421,6 +533,8 @@ function uamswp_fad_gbp_items_for_provider(int $provider_id, array $categories):
         $items[] = [
             'store_code' => $store_code,
             'kind' => 'provider',
+            'post_id' => $provider_id,
+            'location_id' => $location['id'],
             'silo' => $location['silo'],
             'excluded' => $location['providers_excluded'],
             'fields' => UAMSWP_FAD_GBP_Logic::fields_from_row($row, $categories),
@@ -447,7 +561,7 @@ function uamswp_fad_gbp_items_for_location(int $location_id, array $categories):
         $item = UAMSWP_FAD_GBP_Logic::location_item($row, $categories, $silo);
 
         if ($item !== null) {
-            $items[] = $item;
+            $items[] = ['post_id' => $location_id, 'location_id' => $location_id] + $item;
         }
     }
 
@@ -701,6 +815,8 @@ function uamswp_fad_gbp_run_post(int $post_id): void
             return;
         }
 
+        $all_items = $items;
+        $items = uamswp_fad_gbp_attach_stored_ids($items);
         $gate = uamswp_fad_gbp_create_gate();
         $sync = new UAMSWP_FAD_GBP_Sync(
             $client,
@@ -713,6 +829,8 @@ function uamswp_fad_gbp_run_post(int $post_id): void
 
         try {
             $entries = $sync->run($items);
+            uamswp_fad_gbp_store_listing_ids($items, $entries);
+            uamswp_fad_gbp_mark_orphans($post_id, $all_items);
         } finally {
             // The creates already made count against the day's quota even if the run ended early,
             // and a write changes what the next job should see.
