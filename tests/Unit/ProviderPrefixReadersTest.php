@@ -44,7 +44,7 @@ final class ProviderPrefixReadersTest extends UnitTestCase
         $this->fields[2] = ['physician_prefix' => '', 'physician_first_name' => 'Bob', 'physician_middle_name' => '', 'physician_last_name' => 'Ray', 'physician_pedigree' => '', 'physician_degree' => [12]];
 
         Functions\when('get_field')->alias(fn (string $name, $id = 0) => $this->fields[(int) $id][$name] ?? false);
-        Functions\when('get_term')->alias(fn ($id) => (object) ['name' => [11 => 'D.D.S.', 12 => 'M.D.'][(int) $id] ?? '']);
+        Functions\when('get_term')->alias(fn ($id) => (object) ['name' => [11 => 'D.D.S.', 12 => 'M.D.', 13 => 'D.O.'][(int) $id] ?? '']);
         Functions\when('uamswp_attr_conversion')->returnArg();
         Functions\when('sanitize_title_with_dashes')->returnArg();
     }
@@ -89,28 +89,40 @@ final class ProviderPrefixReadersTest extends UnitTestCase
 
     private function provider_table_name(int $post_id): string
     {
-        $code = $this->lines($this->source('includes/class.fad-gmb-settings-page.php'), '$prefix = get_field(\'physician_prefix\', $post_id);', '$short_name = $prefix ?');
+        $code = $this->lines($this->source('includes/class.fad-gmb-settings-page.php'), '$prefix = uamswp_provider_names($post_id)[\'prefix\'];', '$short_name = $prefix ?');
 
         return $this->evaluate($code, ['post_id' => $post_id, 'degree_list' => ''], 'medium_name');
     }
 
     private function resource_card_name(int $post_id): string
     {
-        $code = $this->lines($this->source('templates/loops/resource-card.php'), '$resource_provider_prefix = get_field(\'physician_prefix\', $associate);', '$resource_provider_medium_name =');
+        $code = $this->lines($this->source('templates/loops/resource-card.php'), '$resource_provider_prefix = uamswp_provider_names($associate)[\'prefix\'];', '$resource_provider_medium_name =');
 
         return $this->evaluate($code, ['associate' => $post_id], 'resource_provider_medium_name');
     }
 
-    public function test_the_provider_table_uses_the_stored_prefix_whatever_the_degrees_are(): void
+    public function test_the_provider_table_follows_the_degrees_whatever_the_stored_prefix_is(): void
     {
-        $this->assertSame('Dr. Ann Lee', $this->provider_table_name(1), 'stored "Dr." with a D.D.S.');
-        $this->assertSame('Bob Ray', $this->provider_table_name(2), 'an M.D. with no stored prefix');
+        $this->assertSame('Ann Lee', $this->provider_table_name(1), 'stored "Dr." with a D.D.S.');
+        $this->assertSame('Dr. Bob Ray', $this->provider_table_name(2), 'an M.D. with no stored prefix');
     }
 
-    public function test_the_resource_card_uses_the_stored_prefix_whatever_the_degrees_are(): void
+    public function test_the_resource_card_follows_the_degrees_whatever_the_stored_prefix_is(): void
     {
-        $this->assertSame('Dr. Ann Lee', $this->resource_card_name(1), 'stored "Dr." with a D.D.S.');
-        $this->assertSame('Bob Ray', $this->resource_card_name(2), 'an M.D. with no stored prefix');
+        $this->assertSame('Ann Lee', $this->resource_card_name(1), 'stored "Dr." with a D.D.S.');
+        $this->assertSame('Dr. Bob Ray', $this->resource_card_name(2), 'an M.D. with no stored prefix');
+    }
+
+    public function test_an_m_d_or_d_o_among_other_degrees_gets_the_prefix_and_no_degrees_gets_none_in_both_readers(): void
+    {
+        $this->fields[3] = ['physician_prefix' => 'Mr.', 'physician_first_name' => 'Cy', 'physician_middle_name' => '', 'physician_last_name' => 'Fox', 'physician_pedigree' => '', 'physician_degree' => [11, 13]];
+        $this->fields[4] = ['physician_prefix' => 'Dr.', 'physician_first_name' => 'Di', 'physician_middle_name' => '', 'physician_last_name' => 'Hale', 'physician_pedigree' => '', 'physician_degree' => []];
+
+        $this->assertSame('Dr. Cy Fox', $this->provider_table_name(3), 'D.D.S. and D.O.');
+        $this->assertSame('Dr. Cy Fox', $this->resource_card_name(3));
+        $this->assertSame('Di Hale', $this->provider_table_name(4), 'no degrees');
+        $this->assertSame('Di Hale', $this->resource_card_name(4));
+        $this->assertSame($this->resource_card_name(3), uamswp_provider_names(3)['medium'], 'the card matches the provider page');
     }
 
     public function test_the_provider_page_derives_the_prefix_from_the_degrees(): void

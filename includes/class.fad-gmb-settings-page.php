@@ -702,7 +702,8 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
             $location_telemed_query = '';
 
             // Create the description variables
-            $prefix = get_field('physician_prefix', $post_id);
+            // "Dr." follows the degrees (M.D. or D.O.), as on the provider page, not the physician_prefix field
+            $prefix = uamswp_provider_names($post_id)['prefix'];
             $full_name = get_field('physician_first_name', $post_id).' '.(get_field('physician_middle_name', $post_id) ? get_field('physician_middle_name', $post_id).' ' : '').get_field('physician_last_name', $post_id).(get_field('physician_pedigree', $post_id) ? '&nbsp;'.get_field('physician_pedigree', $post_id) : '').($degree_list ? ', '.$degree_list : '');
             $medium_name = ($prefix ? $prefix.' ' : '').get_field('physician_first_name', $post_id).' '.(get_field('physician_middle_name', $post_id) ? get_field('physician_middle_name', $post_id).' ' : '').get_field('physician_last_name', $post_id);
             $short_name = $prefix ? $prefix.'&nbsp;'.get_field('physician_last_name', $post_id) : get_field('physician_first_name', $post_id).' '.(get_field('physician_middle_name', $post_id) ? get_field('physician_middle_name', $post_id).' ' : '').get_field('physician_last_name', $post_id).(get_field('physician_pedigree', $post_id) ? '&nbsp;'.get_field('physician_pedigree', $post_id) : '');
