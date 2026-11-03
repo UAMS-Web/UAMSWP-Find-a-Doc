@@ -499,19 +499,24 @@ class UAMSWP_FAD_GBP_Logic
     /**
      * What the sync is doing, as one status for the dashboard.
      *
-     * The first that applies wins: no silo in use is Off; a run holding the lock is Running; a pause on
+     * The first that applies wins: no silo in use is Off; missing credentials is Not configured; a run holding the lock is Running; a pause on
      * creates is Paused; a per-minute backoff is Backed off; every silo in use being a dry run is
      * Dry run; anything else is Idle.
      *
      * @param  array<string, string>  $effective_modes  Each silo's effective mode.
+     * @param  bool  $configured  Whether the Google credentials are present. Without them a queued job does nothing.
      * @return array{key: string, label: string}
      */
-    public static function dashboard_status(array $effective_modes, bool $running, int $paused_until, int $backoff_until, int $now): array
+    public static function dashboard_status(array $effective_modes, bool $running, int $paused_until, int $backoff_until, int $now, bool $configured = true): array
     {
         $in_use = array_values(array_diff(array_values($effective_modes), ['off']));
 
         if ($in_use === []) {
             return ['key' => 'off', 'label' => 'Off'];
+        }
+
+        if (! $configured) {
+            return ['key' => 'unconfigured', 'label' => 'Not configured: the Google credentials are missing, so queued syncs do nothing'];
         }
 
         if ($running) {

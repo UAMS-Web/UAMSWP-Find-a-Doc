@@ -26,9 +26,28 @@ final class GbpDashboardTest extends UnitTestCase
     /** @var array<int, array<string, array<string, mixed>>> */
     private $cron = [];
 
+    /** @var array<string, string|false> */
+    private $saved_env = [];
+
+    protected function tearDown(): void
+    {
+        foreach ($this->saved_env as $name => $value) {
+            putenv($value === false ? $name : $name.'='.$value);
+        }
+
+        parent::tearDown();
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
+
+        // Real credentials, so a request made only when they exist would be reached by these tests.
+        foreach (['GOOGLE_BUSINESS_PROFILE_CLIENT_ID', 'GOOGLE_BUSINESS_PROFILE_CLIENT_SECRET', 'GOOGLE_BUSINESS_PROFILE_REFRESH_TOKEN'] as $name) {
+            $this->saved_env[$name] = getenv($name);
+            putenv($name.'=test-value');
+        }
+
         $this->options = [];
         $this->transients = [];
         $this->cron = [];
@@ -64,6 +83,88 @@ final class GbpDashboardTest extends UnitTestCase
         $status = UAMSWP_FAD_GBP_Logic::dashboard_status(['uams' => 'off', 'baptist-health' => 'off'], false, self::NOW + 600, self::NOW + 600, self::NOW);
 
         $this->assertSame(['key' => 'off', 'label' => 'Off'], $status);
+    }
+
+    public function test_missing_credentials_is_not_configured_and_off_still_wins(): void
+    {
+        $status = UAMSWP_FAD_GBP_Logic::dashboard_status(['uams' => 'live'], true, 0, 0, self::NOW, false);
+        $off = UAMSWP_FAD_GBP_Logic::dashboard_status(['uams' => 'off'], false, 0, 0, self::NOW, false);
+
+        $this->assertSame('unconfigured', $status['key']);
+        $this->assertStringContainsString('credentials are missing', $status['label']);
+        $this->assertSame('off', $off['key']);
+    }
+
+    public function test_the_data_reports_missing_credentials(): void
+    {
+        foreach (['GOOGLE_BUSINESS_PROFILE_CLIENT_ID', 'GOOGLE_BUSINESS_PROFILE_CLIENT_SECRET', 'GOOGLE_BUSINESS_PROFILE_REFRESH_TOKEN'] as $name) {
+            putenv($name);
+        }
+
+        $this->options['uamswp_fad_gbp_modes'] = ['uams' => 'live'];
+
+        $this->assertSame('unconfigured', uamswp_fad_gbp_dashboard_data(self::NOW)['status']['key']);
+    }
+
+    public function test_a_spent_budget_with_no_stored_pause_shows_creates_paused_and_the_events_waiting_for_the_reset(): void
+    {
+        $reset = UAMSWP_FAD_GBP_Logic::next_pacific_reset(self::NOW);
+        $this->options['uamswp_fad_gbp_modes'] = ['uams' => 'live'];
+        $this->options['uamswp_fad_gbp_create_count'] = ['day' => '2026-11-03', 'count' => 80];
+        $this->schedule([$reset + 61, $reset + 300, self::NOW + 100]);
+
+        $data = uamswp_fad_gbp_dashboard_data(self::NOW);
+
+        $this->assertSame('paused', $data['status']['key']);
+        $this->assertStringContainsString('Creates paused until 2026-11-04 00:00 PST', $data['status']['label']);
+        $this->assertSame(2, $data['queue']['waiting']);
+        $this->assertSame(1, array_sum($data['queue']['hours']), 'only the event before the reset is counted by the hour');
+    }
+
+    public function test_a_budget_not_yet_spent_shows_no_pause(): void
+    {
+        $this->options['uamswp_fad_gbp_modes'] = ['uams' => 'live'];
+        $this->options['uamswp_fad_gbp_create_count'] = ['day' => '2026-11-03', 'count' => 79];
+
+        $this->assertSame('idle', uamswp_fad_gbp_dashboard_data(self::NOW)['status']['key']);
+    }
+
+    public function test_today_in_the_history_is_never_below_the_counter(): void
+    {
+        $this->options['uamswp_fad_gbp_create_count'] = ['day' => '2026-11-03', 'count' => 32];
+        $this->options['uamswp_fad_gbp_create_history'] = ['2026-11-03' => 2, '2026-11-02' => 5];
+
+        $days = uamswp_fad_gbp_dashboard_data(self::NOW)['days'];
+
+        $this->assertSame([5, 32], array_slice(array_column($days, 'count'), -2));
+    }
+
+    public function test_a_budget_of_zero_says_creates_are_disabled_and_draws_no_bar(): void
+    {
+        Functions\when('current_user_can')->justReturn(true);
+        Functions\when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? 0 : $value);
+        $this->options['uamswp_fad_gbp_modes'] = ['uams' => 'live'];
+
+        ob_start();
+        uamswp_fad_gbp_render_dashboard_widget();
+        $html = (string) ob_get_clean();
+
+        $this->assertStringContainsString('Creates are disabled (daily budget 0).', $html);
+        $this->assertStringNotContainsString('<progress', $html);
+        $this->assertStringNotContainsString('0 of 0', $html);
+    }
+
+    public function test_the_hour_chart_and_the_log_counts_say_what_they_leave_out(): void
+    {
+        Functions\when('current_user_can')->justReturn(true);
+        $this->options['uamswp_fad_gbp_modes'] = ['uams' => 'live'];
+
+        ob_start();
+        uamswp_fad_gbp_render_dashboard_widget();
+        $html = (string) ob_get_clean();
+
+        $this->assertStringContainsString('not counting those waiting for the reset', $html);
+        $this->assertStringContainsString('From the newest 300 activity log entries', $html);
     }
 
     public function test_a_run_holding_the_lock_is_running(): void
@@ -249,7 +350,7 @@ final class GbpDashboardTest extends UnitTestCase
         $this->assertStringContainsString('<progress max="80" value="20"', $html);
         $this->assertSame(2, substr_count($html, '<svg role="img" aria-label="'), 'two graphics, each named');
         $this->assertStringContainsString('Last 7 days, oldest first:', $html);
-        $this->assertStringContainsString('Next 24 hours, per hour:', $html);
+        $this->assertStringContainsString('Next 24 hours, per hour (not counting those waiting for the reset):', $html);
         $this->assertStringContainsString('log_action=error', $html);
         $this->assertStringNotContainsString('<script', $html);
         $this->assertStringNotContainsString('<link', $html);

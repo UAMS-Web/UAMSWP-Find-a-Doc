@@ -33,13 +33,25 @@ function uamswp_fad_gbp_dashboard_data(?int $now = null): array
 
     $history = get_option(UAMSWP_FAD_GBP_HISTORY_OPTION, []);
     $log = get_option('uamswp_fad_gbp_log', []);
+    $budget = uamswp_fad_gbp_create_budget();
+    $reset = UAMSWP_FAD_GBP_Logic::next_pacific_reset($now);
+
+    // A spent budget holds creates until the reset just as Google's refusal does, without writing a pause.
+    if ($used >= $budget) {
+        $paused_until = max($paused_until, $reset);
+    }
+
+    // The history starts empty when this ships, so today's figure is never lower than the counter.
+    $days = UAMSWP_FAD_GBP_Logic::last_days(is_array($history) ? $history : [], $now);
+    $today = count($days) - 1;
+    $days[$today]['count'] = max($days[$today]['count'], $used);
 
     return [
-        'status' => UAMSWP_FAD_GBP_Logic::dashboard_status($modes, (bool) get_transient('uamswp_fad_gbp_lock'), $paused_until, $backoff_until, $now),
+        'status' => UAMSWP_FAD_GBP_Logic::dashboard_status($modes, (bool) get_transient('uamswp_fad_gbp_lock'), $paused_until, $backoff_until, $now, uamswp_fad_gbp_credentials() !== null),
         'used' => $used,
-        'budget' => uamswp_fad_gbp_create_budget(),
-        'reset' => UAMSWP_FAD_GBP_Logic::next_pacific_reset($now),
-        'days' => UAMSWP_FAD_GBP_Logic::last_days(is_array($history) ? $history : [], $now),
+        'budget' => $budget,
+        'reset' => $reset,
+        'days' => $days,
         'queue' => UAMSWP_FAD_GBP_Logic::queue_summary(uamswp_fad_gbp_scheduled_times(), $now, $paused_until),
         'outcomes' => UAMSWP_FAD_GBP_Logic::outcome_counts(is_array($log) ? $log : [], $now),
     ];
@@ -103,7 +115,8 @@ function uamswp_fad_gbp_render_dashboard_widget(): void
 
     $data = uamswp_fad_gbp_dashboard_data();
     $settings = admin_url('admin.php?page=uamswp-fad-gbp');
-    $percent = $data['budget'] > 0 ? min(100, (int) round($data['used'] / $data['budget'] * 100)) : 100;
+    $disabled = $data['budget'] === 0;
+    $percent = $disabled ? 0 : min(100, (int) round($data['used'] / $data['budget'] * 100));
     $day_counts = array_column($data['days'], 'count');
     $queue = $data['queue'];
     $remaining = UAMSWP_FAD_GBP_Logic::remaining_label($data['reset'] - time());
@@ -113,10 +126,12 @@ function uamswp_fad_gbp_render_dashboard_widget(): void
 
     <h3>Creates sent today</h3>
     <p>
-        <?php echo esc_html($data['used'].' of '.$data['budget']); ?> (<?php echo esc_html((string) $percent); ?>%).
+        <?php echo esc_html($disabled ? 'Creates are disabled (daily budget 0).' : $data['used'].' of '.$data['budget'].' ('.$percent.'%).'); ?>
         Resets <?php echo esc_html(UAMSWP_FAD_GBP_Logic::reset_label($data['reset'])); ?>, in <?php echo esc_html($remaining); ?>.
     </p>
-    <progress max="<?php echo esc_attr((string) max(1, $data['budget'])); ?>" value="<?php echo esc_attr((string) min($data['used'], max(1, $data['budget']))); ?>" aria-label="Creates sent today"><?php echo esc_html($data['used'].' of '.$data['budget']); ?></progress>
+    <?php if (! $disabled) { ?>
+        <progress max="<?php echo esc_attr((string) $data['budget']); ?>" value="<?php echo esc_attr((string) min($data['used'], $data['budget'])); ?>" aria-label="Creates sent today"><?php echo esc_html($data['used'].' of '.$data['budget']); ?></progress>
+    <?php } ?>
     <p>
         <?php echo uamswp_fad_gbp_dashboard_bars($day_counts, $data['budget'], 'Creates sent on each of the last 7 Pacific days, oldest first: '.implode(', ', $day_counts)); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from integers and an escaped attribute.?>
         <br><small>Last 7 days, oldest first: <?php echo esc_html(implode(', ', $day_counts)); ?>. Counted by this site as it sends; Google's own quota figure is in the Google Cloud console.</small>
@@ -125,11 +140,12 @@ function uamswp_fad_gbp_render_dashboard_widget(): void
     <h3>Queue</h3>
     <p>
         <?php echo esc_html($queue['total'].' scheduled, '.$queue['due'].' due now, '.$queue['waiting'].' waiting for the reset.'); ?>
-        <br><?php echo uamswp_fad_gbp_dashboard_bars($queue['hours'], 1, 'Scheduled sync events in each of the next 24 hours: '.implode(', ', $queue['hours'])); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from integers and an escaped attribute.?>
-        <br><small>Next 24 hours, per hour: <?php echo esc_html(implode(', ', $queue['hours'])); ?>.</small>
+        <br><?php echo uamswp_fad_gbp_dashboard_bars($queue['hours'], 1, 'Scheduled sync events due in each of the next 24 hours, not counting those waiting for the reset: '.implode(', ', $queue['hours'])); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from integers and an escaped attribute.?>
+        <br><small>Next 24 hours, per hour (not counting those waiting for the reset): <?php echo esc_html(implode(', ', $queue['hours'])); ?>.</small>
     </p>
 
     <h3>Last 24 hours</h3>
+    <p><small>From the newest <?php echo esc_html((string) UAMSWP_FAD_GBP_LOG_CAP); ?> activity log entries, so a very busy day can show less than it did.</small></p>
     <ul>
         <?php foreach (['create' => 'created', 'update' => 'updated', 'review' => 'for review', 'error' => 'errors'] as $action => $label) { ?>
             <li><a href="<?php echo esc_url(add_query_arg('log_action', $action, $settings)); ?>"><?php echo esc_html($data['outcomes'][$action].' '.$label); ?></a></li>
