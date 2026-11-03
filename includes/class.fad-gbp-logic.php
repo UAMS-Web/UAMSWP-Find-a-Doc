@@ -419,6 +419,40 @@ class UAMSWP_FAD_GBP_Logic
     }
 
     /**
+     * The next midnight in Pacific time after a moment, as a Unix time.
+     *
+     * Google's daily quotas reset at midnight Pacific. The zone is named rather than offset, so the
+     * answer is right on either side of the daylight saving change.
+     */
+    public static function next_pacific_reset(int $now): int
+    {
+        return (new DateTimeImmutable('@'.$now))
+            ->setTimezone(new DateTimeZone('America/Los_Angeles'))
+            ->modify('tomorrow')
+            ->getTimestamp();
+    }
+
+    /**
+     * The Pacific calendar day a moment falls on, as `Y-m-d`.
+     */
+    public static function pacific_day(int $now): string
+    {
+        return (new DateTimeImmutable('@'.$now))
+            ->setTimezone(new DateTimeZone('America/Los_Angeles'))
+            ->format('Y-m-d');
+    }
+
+    /**
+     * A moment written for a person reading the log or the command line, in Pacific time.
+     */
+    public static function reset_label(int $moment): string
+    {
+        return (new DateTimeImmutable('@'.$moment))
+            ->setTimezone(new DateTimeZone('America/Los_Angeles'))
+            ->format('Y-m-d H:i T');
+    }
+
+    /**
      * Whether a run's outcome can be remembered as final for its fingerprint.
      *
      * A listing that matched, a skip decided from the items alone, and a write that succeeded
