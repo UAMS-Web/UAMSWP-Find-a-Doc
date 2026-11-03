@@ -330,7 +330,7 @@ final class GbpLogicTest extends UnitTestCase
 
         $item = UAMSWP_FAD_GBP_Logic::location_item($row, ['Medical Clinic' => 'categories/gcid:medical_clinic'], 'baptist-health');
 
-        $this->assertSame(['store_code', 'kind', 'silo', 'excluded', 'fields', 'unresolved', 'attributes'], array_keys($item));
+        $this->assertSame(['store_code', 'kind', 'silo', 'excluded', 'fields', 'unresolved', 'attributes', 'photos'], array_keys($item));
         $this->assertSame(['schmieding-outpatient-therapy', 'location', 'baptist-health', false], [$item['store_code'], $item['kind'], $item['silo'], $item['excluded']]);
         $this->assertSame('Schmieding Outpatient Therapy', $item['fields']['title']);
         $this->assertSame('categories/gcid:medical_clinic', $item['fields']['categories']['primaryCategory']['name']);
