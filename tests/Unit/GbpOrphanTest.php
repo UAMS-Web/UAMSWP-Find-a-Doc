@@ -32,6 +32,9 @@ final class GbpOrphanTest extends UnitTestCase
     /** @var array<int, array<string, mixed>> */
     private $providers = [];
 
+    /** @var array<int, array<string, mixed>> */
+    private $locations = [];
+
     /** @var array<string, string> Post ID => type. */
     private $types = [];
 
@@ -45,6 +48,7 @@ final class GbpOrphanTest extends UnitTestCase
         $this->options = [];
         $this->unpublished = [];
         $this->providers = [];
+        $this->locations = [];
         $this->types = [];
         $this->patches = [];
 
@@ -72,7 +76,11 @@ final class GbpOrphanTest extends UnitTestCase
             return true;
         });
         Functions\when('get_posts')->alias(function (array $args): array {
-            return $args['post_status'] === 'publish' ? array_keys($this->providers) : array_keys($this->unpublished);
+            if ($args['post_status'] !== 'publish') {
+                return array_keys($this->unpublished);
+            }
+
+            return $args['post_type'] === 'location' ? array_keys($this->locations) : array_keys($this->providers);
         });
     }
 
@@ -169,12 +177,12 @@ final class GbpOrphanTest extends UnitTestCase
     public function test_before_the_fourteenth_day_it_is_reported_with_the_days_left_and_nothing_is_closed(): void
     {
         $this->unpublished[3] = [];
-        $this->meta[3] = [UAMSWP_FAD_GBP_LISTING_MAP_META => [10 => ['id' => 'locations/1', 'orphaned_since' => null]], UAMSWP_FAD_GBP_UNPUBLISHED_META => '2026-11-05'];
+        $this->meta[3] = [UAMSWP_FAD_GBP_LISTING_MAP_META => [10 => ['id' => 'locations/1', 'orphaned_since' => null]], UAMSWP_FAD_GBP_UNPUBLISHED_META => '2026-11-10'];
 
         $lines = $this->scan([$this->listing('locations/1', 'a')], 'live');
 
         $this->assertSame([], $this->patches);
-        $this->assertStringContainsString('2 days left', $lines[0]);
+        $this->assertStringContainsString('7 days left', $lines[0]);
         $this->assertSame('review', $this->options['uamswp_fad_gbp_log'][0]['action']);
     }
 
@@ -183,12 +191,12 @@ final class GbpOrphanTest extends UnitTestCase
         $this->providers[3] = [];
         $this->meta[3] = [UAMSWP_FAD_GBP_LISTING_MAP_META => [10 => ['id' => 'locations/1', 'orphaned_since' => null], 11 => ['id' => 'locations/2', 'orphaned_since' => '2026-11-03']]];
 
-        $candidates = uamswp_fad_gbp_orphan_candidates(self::NOW);
+        $candidates = uamswp_fad_gbp_orphan_candidates(self::NOW, fn (int $id): array => [10]);
 
         $this->assertSame(['locations/2'], array_column($candidates, 'name'));
         $this->assertSame(['association removed'], array_column($candidates, 'cause'));
 
-        $this->scan([$this->listing('locations/1', 'a'), $this->listing('locations/2', 'b')], 'live');
+        $this->scan([$this->listing('locations/1', 'a'), $this->listing('locations/2', 'b')], 'live', $candidates);
 
         $this->assertSame(['locations/2'], array_column($this->patches, 0));
     }
@@ -300,5 +308,85 @@ final class GbpOrphanTest extends UnitTestCase
 
         $this->assertSame([], $this->patches);
         $this->assertStringContainsString('dry run', $lines[0]);
+    }
+
+    public function test_a_draft_copy_of_a_post_never_makes_the_original_s_live_listing_a_candidate(): void
+    {
+        $this->providers[3] = [];
+        $this->meta[3] = [UAMSWP_FAD_GBP_LISTING_MAP_META => [10 => ['id' => 'locations/1', 'orphaned_since' => null]]];
+        $this->unpublished[4] = [];
+        $this->meta[4] = [UAMSWP_FAD_GBP_LISTING_MAP_META => [10 => ['id' => 'locations/1', 'orphaned_since' => null]]];
+        $this->locations[7] = [];
+        $this->types[7] = 'location';
+        $this->meta[7] = [UAMSWP_FAD_GBP_LISTING_META => 'locations/5'];
+        $this->unpublished[8] = [];
+        $this->types[8] = 'location';
+        $this->meta[8] = [UAMSWP_FAD_GBP_LISTING_META => 'locations/5'];
+
+        $this->assertSame([], uamswp_fad_gbp_orphan_candidates(self::NOW, fn (int $id): array => [10]));
+    }
+
+    public function test_a_stale_association_date_is_ignored_when_the_provider_is_back_at_the_location(): void
+    {
+        $this->providers[3] = [];
+        $this->meta[3] = [UAMSWP_FAD_GBP_LISTING_MAP_META => [10 => ['id' => 'locations/1', 'orphaned_since' => '2026-11-01']]];
+
+        $this->assertSame([], uamswp_fad_gbp_orphan_candidates(self::NOW, fn (int $id): array => [10]));
+        $this->assertSame(['locations/1'], array_column(uamswp_fad_gbp_orphan_candidates(self::NOW, fn (int $id): array => [11]), 'name'));
+    }
+
+    public function test_two_unpublished_posts_naming_one_listing_keep_the_earlier_date(): void
+    {
+        $this->unpublished[3] = [];
+        $this->unpublished[4] = [];
+
+        foreach ([3 => '2026-11-10', 4 => '2026-11-02'] as $id => $since) {
+            $this->meta[$id] = [UAMSWP_FAD_GBP_LISTING_MAP_META => [10 => ['id' => 'locations/1', 'orphaned_since' => null]], UAMSWP_FAD_GBP_UNPUBLISHED_META => $since];
+        }
+
+        $this->assertSame('2026-11-02', uamswp_fad_gbp_orphan_candidates(self::NOW)[0]['since']);
+    }
+
+    public function test_a_rate_limit_stops_the_scan_after_the_first_refusal(): void
+    {
+        $this->options['uamswp_fad_gbp_modes'] = ['uams' => 'live'];
+        $client = $this->client([$this->listing('locations/1', 'a'), $this->listing('locations/2', 'b')], 429);
+
+        uamswp_fad_gbp_orphan_scan(function (string $line): void {}, $client, self::NOW, [$this->candidate('locations/1', '2026-11-01'), $this->candidate('locations/2', '2026-11-01')]);
+
+        $this->assertSame(['locations/1'], array_column($this->patches, 0));
+    }
+
+    public function test_the_locked_scan_does_nothing_while_a_sync_holds_the_lock_and_releases_it_after(): void
+    {
+        $this->options['uamswp_fad_gbp_modes'] = ['uams' => 'live'];
+        $locks = [];
+        Functions\when('get_transient')->alias(function (string $key) use (&$locks) {
+            return $key === 'uamswp_fad_gbp_lock' ? ($locks['held'] ?? false) : [];
+        });
+        Functions\when('set_transient')->alias(function (string $key) use (&$locks): bool {
+            $locks['set'] = true;
+
+            return true;
+        });
+        $lines = [];
+        $locks['held'] = true;
+
+        $this->assertSame(1, uamswp_fad_gbp_locked_orphan_scan(function (string $line) use (&$lines): void {
+            $lines[] = $line;
+        }));
+        $this->assertSame(['A sync is already running. Try again when it finishes.'], $lines);
+        $this->assertArrayNotHasKey('set', $locks);
+    }
+
+    public function test_a_listing_is_logged_when_first_seen_and_at_the_last_week_but_not_every_day(): void
+    {
+        foreach (['2026-11-17', '2026-11-12', '2026-11-10', '2026-11-08', '2026-11-04'] as $since) {
+            $this->options['uamswp_fad_gbp_log'] = [];
+            $this->scan([$this->listing('locations/1', 'a')], 'live', [$this->candidate('locations/1', $since)]);
+            $logged[$since] = count($this->options['uamswp_fad_gbp_log']);
+        }
+
+        $this->assertSame(['2026-11-17' => 1, '2026-11-12' => 0, '2026-11-10' => 1, '2026-11-08' => 0, '2026-11-04' => 1], $logged);
     }
 }

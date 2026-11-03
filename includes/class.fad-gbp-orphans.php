@@ -56,10 +56,32 @@ function uamswp_fad_gbp_track_unpublish($new_status, $old_status, $post, ?int $n
  *
  * @return array<int, array{name: string, cause: string, since: string, label: string}>
  */
-function uamswp_fad_gbp_orphan_candidates(?int $now = null): array
+function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations_for = null): array
 {
     $today = gmdate('Y-m-d', $now ?? time());
     $candidates = [];
+    $locations_for ??= static fn (int $provider_id): array => array_map(fn (array $item): int => (int) ($item['location_id'] ?? 0), uamswp_fad_gbp_items_for_provider($provider_id, []));
+
+    // A listing a published post still uses is never a candidate, whatever an unpublished copy of that post says.
+    $live = [];
+
+    foreach (get_posts(['post_type' => 'location', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids']) as $location_id) {
+        $live = array_merge($live, uamswp_fad_gbp_stored_names((int) $location_id));
+    }
+
+    $published_providers = array_map(intval(...), get_posts(['post_type' => 'provider', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids']));
+
+    foreach ($published_providers as $provider_id) {
+        $map = get_post_meta($provider_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
+
+        foreach (is_array($map) ? $map : [] as $entry) {
+            if (is_array($entry) && ($entry['orphaned_since'] ?? null) === null && ($entry['id'] ?? '') !== '') {
+                $live[] = (string) $entry['id'];
+            }
+        }
+    }
+
+    $live = array_flip($live);
 
     $unpublished = get_posts(['post_type' => ['provider', 'location'], 'post_status' => ['draft', 'pending', 'private', 'future', 'trash'], 'posts_per_page' => -1, 'fields' => 'ids']);
 
@@ -79,19 +101,36 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null): array
         }
 
         foreach ($names as $name) {
-            $candidates[$name] = ['name' => $name, 'cause' => 'unpublished', 'since' => $since, 'label' => get_the_title($post_id).' (post '.$post_id.')'];
+            if (isset($live[$name])) {
+                continue;
+            }
+
+            // Two unpublished posts naming one listing: the earlier date holds, so the clock is the same on every run.
+            if (! isset($candidates[$name]) || $since < $candidates[$name]['since']) {
+                $candidates[$name] = ['name' => $name, 'cause' => 'unpublished', 'since' => $since, 'label' => get_the_title($post_id).' (post '.$post_id.')'];
+            }
         }
     }
 
-    foreach (get_posts(['post_type' => 'provider', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids']) as $post_id) {
-        $map = get_post_meta((int) $post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
+    foreach ($published_providers as $post_id) {
+        $map = get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
+        $current = null;
 
         foreach (is_array($map) ? $map : [] as $location_id => $entry) {
             $since = (string) ($entry['orphaned_since'] ?? '');
 
-            if ($since !== '' && ($entry['id'] ?? '') !== '') {
-                $candidates[$entry['id']] ??= ['name' => $entry['id'], 'cause' => 'association removed', 'since' => $since, 'label' => get_the_title((int) $post_id).' (post '.$post_id.') at location '.$location_id];
+            if ($since === '' || ($entry['id'] ?? '') === '' || isset($live[$entry['id']]) || isset($candidates[$entry['id']])) {
+                continue;
             }
+
+            // The stored date is only as fresh as the last live run: check the provider's locations now.
+            $current ??= $locations_for($post_id);
+
+            if (in_array((int) $location_id, $current, true)) {
+                continue;
+            }
+
+            $candidates[$entry['id']] = ['name' => $entry['id'], 'cause' => 'association removed', 'since' => $since, 'label' => get_the_title($post_id).' (post '.$post_id.') at location '.$location_id];
         }
     }
 
@@ -212,7 +251,11 @@ function uamswp_fad_gbp_orphan_scan(callable $out, ?UAMSWP_FAD_GBP_Client $clien
         if (! $row['due']) {
             $entry['reason'] = sprintf('Orphaned (%s) since %s, %d days left before it is closed: %s', $row['cause'], $row['since'], $row['days_left'], $row['label']);
             $out($line.sprintf('  %d days left', $row['days_left']));
-            uamswp_fad_gbp_log($entry);
+
+            // Logged when first seen and at 7, 3 and 1 days left, so a daily scan does not fill the log.
+            if (in_array($row['days_left'], [UAMSWP_FAD_GBP_Logic::ORPHAN_GRACE_DAYS, 7, 3, 1], true)) {
+                uamswp_fad_gbp_log($entry);
+            }
 
             continue;
         }
@@ -247,6 +290,15 @@ function uamswp_fad_gbp_orphan_scan(callable $out, ?UAMSWP_FAD_GBP_Client $clien
             $entry['action'] = 'error';
             $entry['reason'] = 'Closing '.$row['name'].' failed: '.$runtimeException->getMessage();
             $out($line.'  FAILED: '.$runtimeException->getMessage());
+
+            // A rate limit ends the scan: the rest are tried on the next run, not into the same refusal.
+            if ($runtimeException instanceof UAMSWP_FAD_GBP_Rate_Limited) {
+                $entry['retryable'] = true;
+                uamswp_fad_gbp_log($entry);
+                $out('Stopped: Google is rate limiting this account. Run again later.');
+
+                break;
+            }
         }
 
         uamswp_fad_gbp_log($entry);
@@ -278,18 +330,31 @@ function uamswp_fad_gbp_silo_for_account(string $account, array $silos): ?string
  */
 function uamswp_fad_gbp_run_orphan_scan(): void
 {
-    if (get_transient('uamswp_fad_gbp_lock')) {
+    if (uamswp_fad_gbp_credentials() === null || array_diff(array_values(uamswp_fad_gbp_modes()), ['off']) === []) {
         return;
     }
 
-    if (uamswp_fad_gbp_credentials() === null || array_diff(array_values(uamswp_fad_gbp_modes()), ['off']) === []) {
-        return;
+    uamswp_fad_gbp_locked_orphan_scan(static function (string $line): void {});
+}
+
+/**
+ * The scan, holding the sync's run lock so it never overlaps a sync or another scan.
+ *
+ * @param  callable(string): void  $out
+ * @return int 0, or 1 when the lock is held or the scan failed.
+ */
+function uamswp_fad_gbp_locked_orphan_scan(callable $out, bool $dry_run = false): int
+{
+    if (get_transient('uamswp_fad_gbp_lock')) {
+        $out('A sync is already running. Try again when it finishes.');
+
+        return 1;
     }
 
     set_transient('uamswp_fad_gbp_lock', 1, 300);
 
     try {
-        uamswp_fad_gbp_orphan_scan(static function (string $line): void {});
+        return uamswp_fad_gbp_orphan_scan($out, null, null, null, $dry_run);
     } finally {
         delete_transient('uamswp_fad_gbp_lock');
     }
