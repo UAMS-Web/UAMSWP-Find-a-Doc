@@ -14,3 +14,6 @@
 /templates -export-ignore
 /plugins -export-ignore
 /tgm -export-ignore
+
+# Merge two branches that each append a decision-log entry by keeping both.
+docs/DECISIONS.md merge=union
