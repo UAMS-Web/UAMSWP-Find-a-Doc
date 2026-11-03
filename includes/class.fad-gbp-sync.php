@@ -325,7 +325,10 @@ final class UAMSWP_FAD_GBP_Sync
         }
 
         // The listing exists now. A failure setting attributes is reported, and the next run
-        // finds the listing by its store code and sets them as an update.
+        // finds the listing by its store code and sets them as an update. Its name is on the entry
+        // either way, so the caller stores the ID.
+        $entry = ['listing_name' => (string) ($created['name'] ?? '')] + $entry;
+
         if ($attributes !== [] && ! empty($created['name'])) {
             try {
                 $this->client->update_attributes((string) $created['name'], $attributes);
