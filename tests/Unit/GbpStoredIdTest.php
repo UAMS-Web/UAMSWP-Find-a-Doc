@@ -18,10 +18,15 @@ final class GbpStoredIdTest extends UnitTestCase
     /** @var array<int, array<string, mixed>> */
     private $meta = [];
 
+    /** @var array<string, array<int, int>> Listing name => other posts that store it. */
+    private $holders = [];
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->meta = [];
+        $this->holders = [];
+        Functions\when('get_posts')->alias(fn (array $args): array => $this->holders[$args['meta_query'][0]['value']] ?? []);
         Functions\when('get_post_meta')->alias(fn (int $id, string $key) => $this->meta[$id][$key] ?? '');
         Functions\when('update_post_meta')->alias(function (int $id, string $key, $value): bool {
             $this->meta[$id][$key] = $value;
@@ -124,12 +129,13 @@ final class GbpStoredIdTest extends UnitTestCase
     {
         $listings = [
             $this->listing('locations/1', 'jane_clinic'),
+            $this->listing('locations/5', 'solo'),
             $this->listing('locations/2', 'old-slug', '11111111111111111111'),
             $this->listing('locations/3', 'dup'),
             $this->listing('locations/4', 'dup'),
         ];
         $items = [
-            $this->provider_item(3, 10, 'jane_clinic'),
+            $this->provider_item(3, 10, 'solo'),
             $this->provider_item(4, 10, 'new-slug'),
             $this->provider_item(5, 10, 'dup'),
             $this->provider_item(6, 10, 'nothing'),
@@ -138,7 +144,7 @@ final class GbpStoredIdTest extends UnitTestCase
 
         $plan = UAMSWP_FAD_GBP_Logic::backfill_plan($items, $listings, [4 => ['11111111111111111111']]);
 
-        $this->assertSame([['locations/1'], ['locations/2']], [array_column($plan['by_store_code'], 'name'), array_column($plan['by_cid'], 'name')]);
+        $this->assertSame([['locations/5'], ['locations/2']], [array_column($plan['by_store_code'], 'name'), array_column($plan['by_cid'], 'name')]);
         $this->assertSame(['dup', 'nothing'], array_column($plan['unmatched'], 'store_code'));
         $this->assertCount(1, $plan['already']);
     }
@@ -189,5 +195,46 @@ final class GbpStoredIdTest extends UnitTestCase
 
         $this->assertSame('locations/1', $this->meta[3][UAMSWP_FAD_GBP_LISTING_MAP_META][10]['id']);
         $this->assertStringContainsString('1 matched by store code, 0 matched by CID, 0 unmatched', end($lines));
+    }
+
+    public function test_a_name_another_post_also_stores_is_not_trusted_and_not_written(): void
+    {
+        $item = ['store_code' => 'clone', 'kind' => 'location', 'post_id' => 8, 'location_id' => 8];
+        $this->meta[8][UAMSWP_FAD_GBP_LISTING_META] = 'locations/111';
+        $this->holders['locations/111'] = [7];
+
+        $this->assertSame('', uamswp_fad_gbp_attach_stored_ids([$item])[0]['stored_name']);
+
+        unset($this->meta[8]);
+        uamswp_fad_gbp_write_listing_id($item, 'locations/111');
+
+        $this->assertSame([], $this->meta);
+    }
+
+    public function test_an_item_without_a_resolved_post_or_location_is_never_stored_under_key_zero(): void
+    {
+        uamswp_fad_gbp_write_listing_id($this->provider_item(3, 0), 'locations/1');
+        uamswp_fad_gbp_write_listing_id(['store_code' => 'x', 'kind' => 'location'], 'locations/1');
+
+        $this->assertSame([], $this->meta);
+        $this->assertCount(1, UAMSWP_FAD_GBP_Logic::backfill_plan([$this->provider_item(3, 0, 'jane_clinic')], [$this->listing('locations/1', 'jane_clinic')], [])['unmatched']);
+    }
+
+    public function test_the_backfill_never_gives_one_listing_to_two_posts(): void
+    {
+        $listings = [$this->listing('locations/1', 'jane_clinic'), $this->listing('locations/2', 'old', '11111111111111111111')];
+        $items = [$this->provider_item(3, 10, 'jane_clinic'), $this->provider_item(4, 10, 'new-a'), $this->provider_item(5, 10, 'new-b'), $this->provider_item(6, 10, 'new-c') + ['stored_name' => 'locations/2']];
+        $cids = [4 => ['11111111111111111111'], 5 => ['11111111111111111111']];
+
+        $plan = UAMSWP_FAD_GBP_Logic::backfill_plan($items, $listings, $cids);
+
+        $this->assertSame(['locations/1'], array_column($plan['by_store_code'], 'name'));
+        $this->assertSame([], $plan['by_cid'], 'locations/2 is already stored on post 6');
+        $this->assertSame(['new-a', 'new-b'], array_column($plan['unmatched'], 'store_code'));
+    }
+
+    public function test_a_number_field_cid_is_not_read_in_scientific_notation(): void
+    {
+        $this->assertMatchesRegularExpression('/^\d{19,20}$/', UAMSWP_FAD_GBP_Logic::cids_from_value(1.2345678901234567E+19)[0]);
     }
 }
