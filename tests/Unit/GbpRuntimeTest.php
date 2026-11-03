@@ -10,6 +10,7 @@ namespace UamswpFindADoc\Tests\Unit;
 
 use Brain\Monkey\Actions;
 use Brain\Monkey\Functions;
+use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
 final class GbpRuntimeTest extends UnitTestCase
@@ -116,7 +117,7 @@ final class GbpRuntimeTest extends UnitTestCase
     /**
      * @return array<int, array{0: array<string, mixed>, 1: array{silo: ?string, providers_excluded: bool}}>
      */
-    public function location_info_cases(): array
+    public static function location_info_cases(): array
     {
         return [
             'default brand, providers not excluded' => [['query' => '0', 'org' => '', 'exclude_providers' => '0'], ['silo' => 'uams', 'providers_excluded' => false]],
@@ -128,11 +129,10 @@ final class GbpRuntimeTest extends UnitTestCase
     }
 
     /**
-     * @dataProvider location_info_cases
-     *
      * @param  array<string, string>  $stored
      * @param  array{silo: ?string, providers_excluded: bool}  $expected
      */
+    #[DataProvider('location_info_cases')]
     public function test_location_info_reads_the_silo_and_the_provider_exclusion(array $stored, array $expected): void
     {
         $this->enable();

@@ -1,64 +1,214 @@
-# Public repository: Actions minutes are free, so this workflow is the remote
-# gate. Private UAMS-Web repositories gate the same jobs behind RUN_REMOTE_CI
-# and validate with the shared local CI runner instead.
 name: CI
 
+# Public repository: Actions minutes are free, so this workflow is the remote gate for pull
+# requests to `dev` and `staging`. It follows the shared ci.yml template in
+# UAMS-Web/uams-claude-skills (.claude/skills/code-quality/templates/ci.yml), minus the jobs
+# this repository has no counterpart for: mutation testing and the mutation-annotation check.
+# The `lint-floor` job parses every shipped file on PHP 8.2, the supported floor.
+#
+# The last job, `CI`, is the one check a ruleset requires from this workflow (with the two
+# pull-request-body checks, `Attribution footer` and `Closing keywords`). It `needs:` every
+# other job in this file, runs `if: always()`, and fails unless every needed job reports
+# `success`. Add a job here and to that `needs:` list in the same change; the aggregate-needs
+# job fails the pull request when they disagree. Do not rename `CI`.
+#
+# The shared setup (PHP, the Composer cache, the locked install) lives in
+# `.github/actions/setup/action.yml`, copied from the code-quality skill's setup-action.yml.
+# Its PHP default stays 8.4: the tools run on 8.4 even though the plugin supports PHP 8.2.
+
 on:
-  push:
   pull_request:
+  push:
+    branches: [master, dev, staging]
+  # Lets the workflow be run on demand against a branch.
+  workflow_dispatch:
+
+# A new push to a pull request cancels that pull request's stale run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
 
 jobs:
-  pint:
+  composer-validate:
+    name: Composer validate (composer.lock freshness)
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
           coverage: none
-          tools: composer
-      - run: composer install --no-interaction --prefer-dist --no-progress
-      - name: pint
-        run: composer test:pint
+          tools: composer:v2
+
+      # Fails when composer.json and composer.lock have drifted apart.
+      - run: composer validate --no-check-publish --no-check-all
+
+  synced-files:
+    name: Synced files (no hand-edited rules or skills)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Fails, naming the file, when a synced rule or skill was edited by hand.
+      - run: node .claude/skills/synced-files/scripts/check-synced-files.mjs
+
+  no-emoji:
+    name: No emoji in durable records
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Fails, naming the file, line and code point, when prose carries a banned glyph.
+      - run: node .claude/skills/writing-comments/scripts/check-no-emoji.mjs
+
+  aggregate-needs:
+    name: Aggregate needs
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Fails, naming the job, when a job is missing from the `needs:` list of `CI` or a
+      # fixed required name is reported by no job. Allow-list: .github/aggregate-needs-allow.json.
+      - run: node .claude/skills/code-quality/scripts/check-aggregate-needs.mjs
+
+  pint:
+    name: Pint
+    needs: [composer-validate, synced-files]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: composer test:pint
 
   rector:
+    name: Rector
+    needs: [pint]
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          coverage: none
-          tools: composer
-      - run: composer install --no-interaction --prefer-dist --no-progress
-      - name: rector
-        run: composer test:refactor
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: composer test:refactor
 
   phpstan:
+    name: PHPStan
+    needs: [pint]
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          coverage: none
-          tools: composer
-      - run: composer install --no-interaction --prefer-dist --no-progress
-      - name: phpstan
-        run: composer stan
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: composer stan
 
-  phpunit:
+  lint-floor:
+    name: Lint on the PHP floor (8.2)
+    needs: [composer-validate]
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
+          php-version: '8.2'
           coverage: none
-          tools: composer
-      - run: composer install --no-interaction --prefer-dist --no-progress
-      - name: phpunit
-        run: composer test:unit
+
+      # Parses every shipped PHP file with the floor PHP itself. Fails, naming the file, on
+      # syntax 8.2 cannot parse. `tests/` is left out: the suite runs on the development PHP.
+      - name: php -l
+        run: |
+          count=$(find . -name '*.php' -not -path './vendor/*' -not -path './tests/*' -not -path './node_modules/*' | wc -l)
+          echo "Files to lint: $count"
+          if [ "$count" -lt 1 ]; then echo "::error::No PHP files found to lint"; exit 1; fi
+          find . -name '*.php' -not -path './vendor/*' -not -path './tests/*' -not -path './node_modules/*' -print0 | xargs -0 -n1 php -l > /dev/null
+
+  pest:
+    name: Pest
+    needs: [rector, phpstan]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+
+      # `failOnEmptyTestSuite` in phpunit.xml fails a run that finds no test.
+      - run: composer test:unit
+
+  style-build:
+    name: Style build (golden CSS)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      # The Sass entry imports the uams-2020 theme, so the build needs it. Pinned to the commit
+      # the golden file was recorded against; a theme change that alters the CSS is a deliberate
+      # bump of this ref together with the golden file.
+      - uses: actions/checkout@v7
+        with:
+          repository: UAMS-Web/uams-2020
+          ref: cd737498b249b60b9d456d07ddbe38ad0dff6811
+          path: uams-2020
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # `--ignore-scripts` skips the `preinstall` script, which rewrites package-lock.json.
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+
+      # The theme's Sass imports bootstrap from its own node_modules (version 4.5.2, the one
+      # its package-lock.json pins).
+      - name: Install the theme's Bootstrap
+        working-directory: uams-2020
+        run: npm install --no-save --ignore-scripts --no-audit --no-fund bootstrap@4.5.2
+
+      # Fails when the compiled CSS differs from tests/build/app.golden.css.
+      - run: npm test
+        env:
+          UAMS_2020_THEME: ${{ github.workspace }}/uams-2020
+
+  # The one check a ruleset requires from this workflow. Keep `needs:` listing every other
+  # job in the file.
+  ci:
+    name: CI
+    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, lint-floor, style-build, pint, rector, phpstan, pest]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # `skipped` and `cancelled` fail as well as `failure`: a job that did not run proved nothing.
+      - name: Every needed job succeeded
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "Needed job results: $RESULTS"
+          # An empty list (an emptied `needs:`, a dropped `env:`) would run no iterations and pass having read nothing.
+          if [ -z "$RESULTS" ]; then echo "::error::No needed job results to read"; exit 1; fi
+          for result in $RESULTS; do
+            if [ "$result" != "success" ]; then
+              echo "::error::A needed job reported $result"
+              exit 1
+            fi
+          done
