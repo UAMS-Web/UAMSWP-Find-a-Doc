@@ -95,27 +95,31 @@ function uamswp_fad_gbp_manual_sync(array $post_ids, ?string $silo, bool $dry_ru
 
         $sync = new UAMSWP_FAD_GBP_Sync(
             $client,
-            ['silos' => uamswp_fad_gbp_silos(), 'modes' => $modes, 'is_production' => $production],
+            ['silos' => uamswp_fad_gbp_silos(), 'modes' => $modes, 'is_production' => $production] + uamswp_fad_gbp_create_gate(),
             UAMSWP_FAD_GBP_Sync::build_index(uamswp_fad_gbp_index($client)),
             'uamswp_fad_gbp_log'
         );
 
         $counts = [];
-        $wrote = false;
+        $entries = [];
 
         // One item at a time, so a rate limit ends the run at the item that met it.
         foreach ($items as $item) {
             $entry = $sync->run([$item])[0];
+            $entries[] = $entry;
             $action = (string) $entry['action'];
             $counts[$action] = ($counts[$action] ?? 0) + 1;
             $out(sprintf('%s  %s  %s  %s  %s', $entry['store_code'], (string) $entry['silo'], $entry['mode'], $action, $entry['reason']));
 
-            if (in_array($entry['reason'], ['Created', 'Updated'], true)) {
-                $wrote = true;
-            }
-
             if (in_array($action, ['error', 'review'], true)) {
                 $failed = true;
+            }
+
+            if (! empty($entry['defer_until'])) {
+                $out('Stopped: creates resume '.UAMSWP_FAD_GBP_Logic::reset_label((int) $entry['defer_until']).'. Run again after that.');
+                $failed = true;
+
+                break;
             }
 
             if (! empty($entry['retryable'])) {
@@ -126,9 +130,7 @@ function uamswp_fad_gbp_manual_sync(array $post_ids, ?string $silo, bool $dry_ru
             }
         }
 
-        if ($wrote) {
-            delete_transient('uamswp_fad_gbp_index');
-        }
+        uamswp_fad_gbp_after_run($sync, $entries);
 
         ksort($counts);
         $out('Done: '.($counts === [] ? 'no listings' : implode(', ', array_map(fn (string $action, int $count): string => $count.' '.$action, array_keys($counts), $counts))));
