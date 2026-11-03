@@ -119,7 +119,7 @@ final class UAMSWP_FAD_GBP_Client
             $failure = 'Google API '.$method.' failed ('.$status.'): '.$message;
 
             // Only a 429 that names a per-day quota is a daily limit; a 503 never is.
-            $daily = $status === 429 && stripos($message, 'per day') !== false;
+            $daily = $status === 429 && preg_match('/per[\s-]?day|daily/i', $message) === 1;
 
             throw in_array($status, [429, 503], true) ? new UAMSWP_FAD_GBP_Rate_Limited($failure, $daily) : new RuntimeException($failure);
         }

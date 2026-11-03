@@ -258,7 +258,7 @@ final class GbpCliTest extends UnitTestCase
         $this->assertSame('Stopped: Google is rate limiting this account. Run again later.', $this->lines[1]);
     }
 
-    public function test_a_pause_on_creates_ends_the_run_and_prints_the_reset(): void
+    public function test_a_pause_on_creates_holds_them_and_still_runs_the_updates(): void
     {
         $this->wordpress(['uams' => 'live'], 'uamshealth.com');
         $until = time() + 7200;
@@ -273,9 +273,10 @@ final class GbpCliTest extends UnitTestCase
 
         $this->assertSame(1, $status);
         $this->assertStringStartsWith('new_clinic  uams  live  create  Creates paused until', $this->lines[0]);
-        $this->assertSame('Stopped: creates resume '.\UAMSWP_FAD_GBP_Logic::reset_label($until).'. Run again after that.', $this->lines[1]);
+        $this->assertStringStartsWith('a_clinic  uams  live  update', $this->lines[1]);
+        $this->assertSame('Creates were held back and resume '.\UAMSWP_FAD_GBP_Logic::reset_label($until).'. Run again after that.', $this->lines[2]);
         $this->assertSame(0, count(array_filter($this->calls, fn (array $call): bool => $call['method'] === 'POST' && strpos($call['url'], 'oauth2') === false)), 'no create reached Google');
-        $this->assertSame(0, $this->writes(), 'the run ended at the pause, before the update');
+        $this->assertSame(1, $this->writes(), 'the update after the held create still ran');
     }
 
     public function test_a_review_decision_fails_the_exit_status_and_a_create_does_not(): void

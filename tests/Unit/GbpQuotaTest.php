@@ -27,12 +27,20 @@ final class GbpQuotaTest extends UnitTestCase
     /** @var array<int, array<int, mixed>> */
     private $scheduled = [];
 
+    /** @var array<int, int> */
+    private $transientTtls = [];
+
+    /** @var array<int, array<int, mixed>> */
+    private $postMeta = [];
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->options = [];
         $this->transients = [];
         $this->scheduled = [];
+        $this->transientTtls = [];
+        $this->postMeta = [];
 
         Functions\when('apply_filters')->alias(fn (string $hook, $value) => $value);
         Functions\when('get_option')->alias(fn (string $name, $default = false) => $this->options[$name] ?? $default);
@@ -42,11 +50,21 @@ final class GbpQuotaTest extends UnitTestCase
             return true;
         });
         Functions\when('get_transient')->alias(fn (string $key) => $this->transients[$key] ?? false);
-        Functions\when('set_transient')->alias(function (string $key, $value): bool {
+        Functions\when('set_transient')->alias(function (string $key, $value, int $ttl = 0): bool {
             $this->transients[$key] = $value;
+
+            if ($key === 'uamswp_fad_gbp_index') {
+                $this->transientTtls[] = $ttl;
+            }
 
             return true;
         });
+        Functions\when('update_post_meta')->alias(function (int $post_id, string $key, $value): bool {
+            $this->postMeta[$post_id][] = $value;
+
+            return true;
+        });
+        Functions\when('get_post_type')->justReturn('provider');
         Functions\when('delete_transient')->alias(function (string $key): bool {
             unset($this->transients[$key]);
 
@@ -193,14 +211,127 @@ final class GbpQuotaTest extends UnitTestCase
         $this->assertArrayNotHasKey(UAMSWP_FAD_GBP_PAUSE_OPTION, $this->options);
     }
 
-    public function test_a_created_listing_is_added_to_the_cached_index_without_dropping_it(): void
+    public function test_a_created_listing_is_added_to_the_cached_index_keeping_its_original_expiry(): void
     {
         $this->transients['uamswp_fad_gbp_index'] = [['account' => 'accounts/up', 'listing' => ['name' => 'locations/1', 'storeCode' => 'old_clinic']]];
-        $sync = $this->quotaSync(['now' => 1], 1, false);
+        $this->transients['uamswp_fad_gbp_index_at'] = 1000;
+        $sync = $this->quotaSync(['now' => 1100], 1, false);
 
-        uamswp_fad_gbp_after_run($sync, [['reason' => 'Created']], 1);
+        uamswp_fad_gbp_after_run($sync, [['reason' => 'Created']], 1100);
 
         $this->assertSame(['old_clinic', 'new_clinic_0'], array_map(fn (array $entry): string => $entry['listing']['storeCode'], $this->transients['uamswp_fad_gbp_index']));
+        $this->assertSame([200], $this->transientTtls, 'the index was read 100 seconds ago, so 200 of its 300 remain');
+    }
+
+    public function test_an_index_past_its_expiry_is_dropped_instead_of_extended(): void
+    {
+        $this->transients['uamswp_fad_gbp_index'] = [['account' => 'accounts/up', 'listing' => ['name' => 'locations/1', 'storeCode' => 'old_clinic']]];
+        $this->transients['uamswp_fad_gbp_index_at'] = 1000;
+        $sync = $this->quotaSync(['now' => 1400], 1, false);
+
+        uamswp_fad_gbp_after_run($sync, [['reason' => 'Created']], 1400);
+
+        $this->assertArrayNotHasKey('uamswp_fad_gbp_index', $this->transients);
+        $this->assertSame([], $this->transientTtls);
+    }
+
+    public function test_a_missing_cached_index_is_left_missing(): void
+    {
+        $sync = $this->quotaSync(['now' => 1100], 1, false);
+
+        uamswp_fad_gbp_after_run($sync, [['reason' => 'Created']], 1100);
+
+        $this->assertArrayNotHasKey('uamswp_fad_gbp_index', $this->transients, 'nothing to patch, so nothing is written');
+        $this->assertSame([], $this->transientTtls);
+    }
+
+    public function test_a_stored_pause_later_than_the_runs_is_not_lowered(): void
+    {
+        $now = $this->utc('2026-11-03 19:00:00');
+        $this->options[UAMSWP_FAD_GBP_PAUSE_OPTION] = $now + 999999;
+        $sync = $this->quotaSync(['now' => $now, 'creates_left' => 10], 1, true);
+
+        uamswp_fad_gbp_after_run($sync, [], $now);
+
+        $this->assertSame($now + 999999, $this->options[UAMSWP_FAD_GBP_PAUSE_OPTION]);
+    }
+
+    public function test_a_budget_filter_returning_junk_falls_back_to_the_default(): void
+    {
+        foreach (['', null, 'abc', []] as $junk) {
+            Functions\when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? $junk : $value);
+
+            $this->assertSame(UAMSWP_FAD_GBP_DEFAULT_CREATE_BUDGET, uamswp_fad_gbp_create_budget(), var_export($junk, true));
+        }
+
+        Functions\when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? 0 : $value);
+        $this->assertSame(0, uamswp_fad_gbp_create_budget(), 'a deliberate 0 stays 0');
+
+        Functions\when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? -5 : $value);
+        $this->assertSame(0, uamswp_fad_gbp_create_budget(), 'a negative budget is 0');
+    }
+
+    public function test_the_day_a_run_is_counted_on_is_the_day_it_started(): void
+    {
+        $started = $this->utc('2026-11-04 07:59:00'); // still 2026-11-03 in Los Angeles
+        $sync = $this->quotaSync(['now' => $started], 2, false);
+
+        uamswp_fad_gbp_after_run($sync, [], $started);
+
+        $this->assertSame(['day' => '2026-11-03', 'count' => 2], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION]);
+    }
+
+    public function test_a_daily_refusal_in_other_words_is_still_daily(): void
+    {
+        foreach (["limit 'Create Location requests per day'", 'RequestsPerDay exceeded', 'Quota exceeded for limit per-day', 'The daily quota is exhausted'] as $message) {
+            try {
+                $this->client([[429, ['error' => ['message' => $message]]]])->location_groups();
+                $this->fail('Expected a rate limit');
+            } catch (UAMSWP_FAD_GBP_Rate_Limited $rateLimited) {
+                $this->assertTrue($rateLimited->daily, $message);
+            }
+        }
+    }
+
+    public function test_finishing_a_run_with_a_held_create_queues_the_post_and_writes_no_fingerprint(): void
+    {
+        $this->transients['uamswp_fad_gbp_attempts_77'] = 3;
+        $reset = $this->utc('2026-11-04 08:00:00');
+
+        uamswp_fad_gbp_finish_run(77, [['action' => 'create', 'reason' => 'Creates paused', 'defer_until' => $reset], ['action' => 'noop', 'reason' => 'Listing already matches']], 'hash-1');
+
+        $this->assertSame([[$reset + 60 + (77 % 600), UAMSWP_FAD_GBP_SYNC_HOOK, [77]]], $this->scheduled);
+        $this->assertSame([], $this->postMeta, 'a held create is not settled, so no fingerprint is written');
+        $this->assertArrayNotHasKey('uamswp_fad_gbp_attempts_77', $this->transients, 'the held create is not an attempt');
+    }
+
+    public function test_finishing_a_settled_run_writes_the_fingerprint_and_queues_nothing(): void
+    {
+        uamswp_fad_gbp_finish_run(77, [['action' => 'create', 'reason' => 'Created'], ['action' => 'noop', 'reason' => 'Listing already matches']], 'hash-1');
+
+        $this->assertSame([77 => ['hash-1']], $this->postMeta);
+        $this->assertSame([], $this->scheduled);
+    }
+
+    public function test_finishing_a_run_with_a_retryable_failure_counts_an_attempt_and_writes_no_fingerprint(): void
+    {
+        uamswp_fad_gbp_finish_run(77, [['action' => 'error', 'reason' => 'Google API POST failed (429): slow', 'retryable' => true]], 'hash-1');
+
+        $this->assertSame(1, $this->transients['uamswp_fad_gbp_attempts_77']);
+        $this->assertSame([], $this->postMeta);
+        $this->assertCount(1, $this->scheduled);
+    }
+
+    public function test_a_post_whose_retries_give_up_is_still_queued_for_its_held_create(): void
+    {
+        $reset = $this->utc('2026-11-04 08:00:00');
+        $this->transients['uamswp_fad_gbp_attempts_77'] = UAMSWP_FAD_GBP_MAX_ATTEMPTS;
+        uamswp_fad_gbp_finish_run(77, [
+            ['action' => 'error', 'reason' => 'Google API POST failed (429): slow', 'retryable' => true],
+            ['action' => 'create', 'reason' => 'Creates paused', 'defer_until' => $reset],
+        ], 'hash-1');
+
+        $this->assertSame([[$reset + 60 + (77 % 600), UAMSWP_FAD_GBP_SYNC_HOOK, [77]]], $this->scheduled, 'the retry gave up, the held create is queued for the reset');
     }
 
     public function test_an_update_drops_the_cached_index(): void

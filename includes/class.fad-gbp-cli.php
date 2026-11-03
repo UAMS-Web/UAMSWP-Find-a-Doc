@@ -93,44 +93,53 @@ function uamswp_fad_gbp_manual_sync(array $post_ids, ?string $silo, bool $dry_ru
             $items = array_values(array_filter($items, fn (array $item): bool => $item['silo'] === $silo));
         }
 
+        $gate = uamswp_fad_gbp_create_gate();
         $sync = new UAMSWP_FAD_GBP_Sync(
             $client,
-            ['silos' => uamswp_fad_gbp_silos(), 'modes' => $modes, 'is_production' => $production] + uamswp_fad_gbp_create_gate(),
+            ['silos' => uamswp_fad_gbp_silos(), 'modes' => $modes, 'is_production' => $production] + $gate,
             UAMSWP_FAD_GBP_Sync::build_index(uamswp_fad_gbp_index($client)),
             'uamswp_fad_gbp_log'
         );
 
         $counts = [];
         $entries = [];
+        $held = false;
 
-        // One item at a time, so a rate limit ends the run at the item that met it.
-        foreach ($items as $item) {
-            $entry = $sync->run([$item])[0];
-            $entries[] = $entry;
-            $action = (string) $entry['action'];
-            $counts[$action] = ($counts[$action] ?? 0) + 1;
-            $out(sprintf('%s  %s  %s  %s  %s', $entry['store_code'], (string) $entry['silo'], $entry['mode'], $action, $entry['reason']));
+        try {
+            // One item at a time, so a rate limit ends the run at the item that met it.
+            foreach ($items as $item) {
+                $entry = $sync->run([$item])[0];
+                $entries[] = $entry;
+                $action = (string) $entry['action'];
+                $counts[$action] = ($counts[$action] ?? 0) + 1;
+                $out(sprintf('%s  %s  %s  %s  %s', $entry['store_code'], (string) $entry['silo'], $entry['mode'], $action, $entry['reason']));
 
-            if (in_array($action, ['error', 'review'], true)) {
-                $failed = true;
+                if (in_array($action, ['error', 'review'], true)) {
+                    $failed = true;
+                }
+
+                // A held create does not end the run: updates are not paused, and later creates are held without a call.
+                if (! empty($entry['defer_until'])) {
+                    $held = true;
+                    $failed = true;
+                    $resume = (int) $entry['defer_until'];
+                }
+
+                if (! empty($entry['retryable'])) {
+                    $out('Stopped: Google is rate limiting this account. Run again later.');
+                    $failed = true;
+
+                    break;
+                }
             }
-
-            if (! empty($entry['defer_until'])) {
-                $out('Stopped: creates resume '.UAMSWP_FAD_GBP_Logic::reset_label((int) $entry['defer_until']).'. Run again after that.');
-                $failed = true;
-
-                break;
-            }
-
-            if (! empty($entry['retryable'])) {
-                $out('Stopped: Google is rate limiting this account. Run again later.');
-                $failed = true;
-
-                break;
-            }
+        } finally {
+            // The creates already made count against the day's quota even if the run ended early.
+            uamswp_fad_gbp_after_run($sync, $entries, $gate['now']);
         }
 
-        uamswp_fad_gbp_after_run($sync, $entries);
+        if ($held) {
+            $out('Creates were held back and resume '.UAMSWP_FAD_GBP_Logic::reset_label($resume ?? 0).'. Run again after that.');
+        }
 
         ksort($counts);
         $out('Done: '.($counts === [] ? 'no listings' : implode(', ', array_map(fn (string $action, int $count): string => $count.' '.$action, array_keys($counts), $counts))));
