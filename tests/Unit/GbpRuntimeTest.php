@@ -120,17 +120,17 @@ final class GbpRuntimeTest extends UnitTestCase
     public static function location_info_cases(): array
     {
         return [
-            'default brand, providers not excluded' => [['query' => '0', 'org' => '', 'exclude_providers' => '0'], ['silo' => 'uams', 'providers_excluded' => false]],
-            'default brand, providers excluded' => [['query' => '0', 'org' => '', 'exclude_providers' => '1'], ['silo' => 'uams', 'providers_excluded' => true]],
-            'partner brand, providers excluded' => [['query' => '1', 'org' => 'baptist-health', 'exclude_providers' => '1'], ['silo' => 'baptist-health', 'providers_excluded' => true]],
-            'a brand with no silo still reports the flag' => [['query' => '1', 'org' => 'dhs', 'exclude_providers' => '1'], ['silo' => null, 'providers_excluded' => true]],
-            'a never-saved field is not an exclusion' => [['query' => '', 'org' => '', 'exclude_providers' => ''], ['silo' => 'uams', 'providers_excluded' => false]],
+            'default brand, providers not excluded' => [['query' => '0', 'org' => '', 'exclude_providers' => '0'], ['id' => 321, 'silo' => 'uams', 'providers_excluded' => false]],
+            'default brand, providers excluded' => [['query' => '0', 'org' => '', 'exclude_providers' => '1'], ['id' => 321, 'silo' => 'uams', 'providers_excluded' => true]],
+            'partner brand, providers excluded' => [['query' => '1', 'org' => 'baptist-health', 'exclude_providers' => '1'], ['id' => 321, 'silo' => 'baptist-health', 'providers_excluded' => true]],
+            'a brand with no silo still reports the flag' => [['query' => '1', 'org' => 'dhs', 'exclude_providers' => '1'], ['id' => 321, 'silo' => null, 'providers_excluded' => true]],
+            'a never-saved field is not an exclusion' => [['query' => '', 'org' => '', 'exclude_providers' => ''], ['id' => 321, 'silo' => 'uams', 'providers_excluded' => false]],
         ];
     }
 
     /**
      * @param  array<string, string>  $stored
-     * @param  array{silo: ?string, providers_excluded: bool}  $expected
+     * @param  array{id: int, silo: ?string, providers_excluded: bool}  $expected
      */
     #[DataProvider('location_info_cases')]
     public function test_location_info_reads_the_silo_and_the_provider_exclusion(array $stored, array $expected): void
@@ -152,7 +152,7 @@ final class GbpRuntimeTest extends UnitTestCase
         $this->enable();
         Functions\when('get_posts')->justReturn([]);
 
-        $this->assertSame(['silo' => null, 'providers_excluded' => false], uamswp_fad_gbp_location_info('gone'));
+        $this->assertSame(['silo' => null, 'providers_excluded' => false, 'id' => 0], uamswp_fad_gbp_location_info('gone'));
     }
 
     public function test_saving_a_published_provider_schedules_one_debounced_sync(): void
