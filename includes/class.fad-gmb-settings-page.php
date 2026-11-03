@@ -364,7 +364,7 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
 
     // Limit to specific posts when asked (the sync builds one post at a time)
     if ($post_ids) {
-        $args['post__in'] = array_map('absint', (array) $post_ids);
+        $args['post__in'] = array_map(absint(...), (array) $post_ids);
     }
 
     // Restored below so a caller in the middle of a request keeps its own main query
@@ -811,7 +811,7 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         $location_floor_label = '';
                         if ($location_floor) {
                             $location_floor_value = $location_floor['value'];
-                            $location_floor_label = $location_floor['choices'][$location_floor_value];
+                            $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
                         }
                         $location_suite = get_field('location_suite', $location_source_ids['unit']);
 
@@ -826,7 +826,7 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         // if ( $location_building && $building_slug != '_none' ) {
                         //     array_push($location_addresses, $building_name);
                         // }
-                        // if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ) {
+                        // if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" && $location_floor_label !== '' ) {
                         //     array_push($location_addresses, $location_floor_label);
                         // }
                         // if ( $location_suite && !empty($location_suite) ) {
@@ -1132,7 +1132,7 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
 
     // Limit to specific posts when asked (the sync builds one post at a time)
     if ($post_ids) {
-        $args['post__in'] = array_map('absint', (array) $post_ids);
+        $args['post__in'] = array_map(absint(...), (array) $post_ids);
     }
 
     $query = new WP_Query($args);
@@ -1483,7 +1483,7 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             $location_floor_label = '';
             if ($location_floor) {
                 $location_floor_value = $location_floor['value'];
-                $location_floor_label = $location_floor['choices'][$location_floor_value];
+                $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
             }
             $location_suite = get_field('location_suite', $location_source_ids['unit']);
 
@@ -1494,16 +1494,7 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             //   Building Floor Number
             //   Suite Number
 
-            $location_addresses = [];
-            if ($location_building && $building_slug != '_none') {
-                $location_addresses[] = $building_name;
-            }
-            if ($location_floor && ! empty($location_floor_value) && $location_floor_value != '0') {
-                $location_addresses[] = $location_floor_label;
-            }
-            if ($location_suite && ! empty($location_suite)) {
-                $location_addresses[] = $location_suite;
-            }
+            $location_addresses = uamswp_location_address_parts(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite);
             $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
             $location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
             $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
@@ -1905,7 +1896,7 @@ function gmb_location_csv_export(): bool
         // raw values Google Business import expects.
         $data_row = array_map(function ($cell) {
             if (is_string($cell) && $cell !== '' && ! is_numeric($cell)
-                && strpos("=+-@\t\r", $cell[0]) !== false) {
+                && str_contains("=+-@\t\r", $cell[0])) {
                 return "'".$cell;
             }
 

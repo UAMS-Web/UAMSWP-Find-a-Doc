@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use UAMSWP_FAD_GBP_Logic;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
@@ -27,7 +28,7 @@ final class GbpLogicTest extends UnitTestCase
     /**
      * @return array<string, array{0: mixed, 1: mixed, 2: string|null}>
      */
-    public function silo_cases(): array
+    public static function silo_cases(): array
     {
         return [
             'query zero is the default brand' => ['0', '', 'uams'],
@@ -41,11 +42,10 @@ final class GbpLogicTest extends UnitTestCase
     }
 
     /**
-     * @dataProvider silo_cases
-     *
      * @param  mixed  $query
      * @param  mixed  $org
      */
+    #[DataProvider('silo_cases')]
     public function test_resolve_silo($query, $org, ?string $expected): void
     {
         $this->assertSame($expected, UAMSWP_FAD_GBP_Logic::resolve_silo($query, $org, self::SILOS));
@@ -54,7 +54,7 @@ final class GbpLogicTest extends UnitTestCase
     /**
      * @return array<string, array{0: string, 1: bool, 2: string}>
      */
-    public function mode_cases(): array
+    public static function mode_cases(): array
     {
         return [
             'live in production stays live' => ['live', true, 'live'],
@@ -67,9 +67,7 @@ final class GbpLogicTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @dataProvider mode_cases
-     */
+    #[DataProvider('mode_cases')]
     public function test_effective_mode(string $configured, bool $production, string $expected): void
     {
         $this->assertSame($expected, UAMSWP_FAD_GBP_Logic::effective_mode($configured, $production));

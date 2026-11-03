@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use UAMSWP_FAD_GBP_Logic;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
@@ -16,7 +17,7 @@ final class GbpChildAddressTest extends UnitTestCase
     /**
      * @return array<string, array{0: string, 1: string}>
      */
-    public function shortened_cases(): array
+    public static function shortened_cases(): array
     {
         return [
             'in the a hospital' => ['Specialty Clinic in the Orthopaedic and Spine Hospital', 'Specialty Clinic'],
@@ -38,9 +39,7 @@ final class GbpChildAddressTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @dataProvider shortened_cases
-     */
+    #[DataProvider('shortened_cases')]
     public function test_the_place_after_in_or_at_is_removed_in_any_letter_case(string $name, string $expected): void
     {
         $this->assertSame($expected, UAMSWP_FAD_GBP_Logic::location_name_without_place($name));
@@ -49,7 +48,7 @@ final class GbpChildAddressTest extends UnitTestCase
     /**
      * @return array<string, array{0: string}>
      */
-    public function unchanged_cases(): array
+    public static function unchanged_cases(): array
     {
         return [
             'no joiner' => ['Specialty Clinic'],
@@ -65,9 +64,7 @@ final class GbpChildAddressTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @dataProvider unchanged_cases
-     */
+    #[DataProvider('unchanged_cases')]
     public function test_any_other_name_is_left_as_it_is(string $name): void
     {
         $this->assertSame(trim($name), UAMSWP_FAD_GBP_Logic::location_name_without_place($name));

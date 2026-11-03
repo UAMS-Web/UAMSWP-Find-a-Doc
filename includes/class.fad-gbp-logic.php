@@ -24,7 +24,7 @@ class UAMSWP_FAD_GBP_Logic
      * @param  array<string, array>  $silos  Silo definitions keyed by silo name, each with a `brand` slug or null.
      * @return string|null The silo name, or null when the brand has no silo (default-deny).
      */
-    public static function resolve_silo($brand_query, $brand_org, array $silos)
+    public static function resolve_silo($brand_query, $brand_org, array $silos): null|int|string
     {
 
         if ((string) $brand_query !== '1') {
@@ -324,7 +324,7 @@ class UAMSWP_FAD_GBP_Logic
                     'postalCode' => trim((string) ($value['postalCode'] ?? '')),
                     'administrativeArea' => trim((string) ($value['administrativeArea'] ?? '')),
                     'locality' => trim((string) ($value['locality'] ?? '')),
-                    'addressLines' => array_values(array_map('trim', (array) ($value['addressLines'] ?? []))),
+                    'addressLines' => array_values(array_map(trim(...), (array) ($value['addressLines'] ?? []))),
                 ];
 
             case 'categories':

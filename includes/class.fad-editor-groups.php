@@ -8,8 +8,8 @@ declare(strict_types=1);
  * department section, a stand-alone team such as the dietitians). Each group lists the
  * Doc Profile Editor accounts that may edit its records, with one of them flagged as the
  * primary contact. A doc_editor can edit a provider or location when they are the post's
- * author or a member of one of its groups. Deleting and publishing stay with doc_admin
- * and administrators.
+ * author or a member of one of its groups. Deleting and publishing stay with administrators;
+ * a doc_admin can edit any record but can neither delete nor publish.
  *
  * Service lines can point at an editor group; providers and locations that have no group
  * of their own inherit it from their service line when they are saved.
@@ -254,9 +254,8 @@ function uamswp_fad_user_editor_groups($user_id)
  *
  * @param  int  $user_id
  * @param  int  $post_id
- * @return bool
  */
-function uamswp_fad_user_in_post_editor_group($user_id, $post_id)
+function uamswp_fad_user_in_post_editor_group($user_id, $post_id): bool
 {
     $groups = uamswp_fad_user_editor_groups($user_id);
     if (empty($groups)) {
@@ -268,7 +267,7 @@ function uamswp_fad_user_in_post_editor_group($user_id, $post_id)
         return false;
     }
 
-    return (bool) array_intersect($groups, array_map('intval', $post_groups));
+    return (bool) array_intersect($groups, array_map(intval(...), $post_groups));
 }
 
 // 4. Capability mapping: a group member is treated like the post's author for editing
@@ -348,7 +347,7 @@ function uamswp_fad_editor_group_admin_list_scope($query): void
 
     // Core set author = current user because the role lacks edit_others; widen it to the groups.
     $query->set('author', '');
-    $query->set('uamswp_editor_group_tt_ids', array_map('intval', $tt_ids));
+    $query->set('uamswp_editor_group_tt_ids', array_map(intval(...), $tt_ids));
     $query->set('uamswp_editor_group_user', $user_id);
 }
 
@@ -364,7 +363,7 @@ function uamswp_fad_editor_group_admin_list_where($where, $query)
         return $where;
     }
 
-    $in = implode(',', array_map('intval', (array) $tt_ids));
+    $in = implode(',', array_map(intval(...), (array) $tt_ids));
 
     $where .= $wpdb->prepare(
         " AND ( {$wpdb->posts}.post_author = %d OR {$wpdb->posts}.ID IN ( SELECT object_id FROM {$wpdb->term_relationships} WHERE term_taxonomy_id IN ( {$in} ) ) )",
@@ -432,8 +431,8 @@ function uamswp_fad_inherit_editor_group($post_id): bool
         return false;
     }
 
-    $current = array_map('intval', $current);
-    $previous = array_map('intval', (array) get_post_meta($post_id, '_uamswp_editor_groups_derived', true));
+    $current = array_map(intval(...), $current);
+    $previous = array_map(intval(...), (array) get_post_meta($post_id, '_uamswp_editor_groups_derived', true));
     $derived = uamswp_fad_editor_groups_from_service_line($post_id);
 
     $manual = array_diff($current, $previous);

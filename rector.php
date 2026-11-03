@@ -3,8 +3,11 @@
 declare(strict_types=1);
 
 use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
+use Rector\CodingStyle\Rector\FuncCall\VersionCompareFuncCallToConstantRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveDuplicatedReturnSelfDocblockRector;
+use Rector\DeadCode\Rector\ConstFetch\RemovePhpVersionIdCheckRector;
+use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
 use Rector\DeadCode\Rector\Property\RemoveUselessVarTagRector;
 use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
@@ -108,7 +111,15 @@ $sweepOnlyRules = [
 //     RemovePhpVersionIdCheckRector::class => $guardFile,
 //     VersionCompareFuncCallToConstantRector::class => $guardFile,
 // ];
-$neverRules = [];
+// The PHP version guard in the plugin header file shows a notice on a site whose PHP is
+// downgraded underneath the active plugin; Rector, reasoning from the 8.2 floor, would
+// delete it as dead code. Pinned to that one file; the rules still apply everywhere else.
+$guardFile = [__DIR__.'/uamswp-find-a-doc.php'];
+$neverRules = [
+    UnwrapFutureCompatibleIfPhpVersionRector::class => $guardFile,
+    RemovePhpVersionIdCheckRector::class => $guardFile,
+    VersionCompareFuncCallToConstantRector::class => $guardFile,
+];
 
 return RectorConfig::configure()
     // Filled: the directories holding first-party PHP. Never a vendor
@@ -141,7 +152,7 @@ return RectorConfig::configure()
     // order of precedence for that check is this call, then composer.json's
     // `php` require, then `config.platform.php`, then the running PHP.
     // Constants: PhpVersion::PHP_74, PHP_80, PHP_81, PHP_82, PHP_83, PHP_84.
-    ->withPhpVersion(PhpVersion::PHP_74)
+    ->withPhpVersion(PhpVersion::PHP_82)
     // Every PHP upgrade set up to the floor, and no further. With no argument
     // this reads the floor from composer.json's `require.php` (then
     // `config.platform.php`), NOT from withPhpVersion() above, and fails the

@@ -15,15 +15,6 @@ declare(strict_types=1);
 
 final class UAMSWP_FAD_GBP_Sync
 {
-    /** @var object */
-    private $client;
-
-    /** @var array{silos: array<string, array<string, mixed>>, modes: array<string, string>, is_production: bool} */
-    private array $config;
-
-    /** @var array<string, array<int, array{account: string, listing: array<string, mixed>}>> */
-    private array $index;
-
     /** @var callable(array<string, mixed>): void */
     private $logger;
 
@@ -33,11 +24,8 @@ final class UAMSWP_FAD_GBP_Sync
      * @param  array<string, array<int, array{account: string, listing: array<string, mixed>}>>  $index  From self::build_index().
      * @param  callable(array<string, mixed>): void  $logger  Receives one entry per item.
      */
-    public function __construct($client, array $config, array $index, callable $logger)
+    public function __construct(private $client, private array $config, private array $index, callable $logger)
     {
-        $this->client = $client;
-        $this->config = $config;
-        $this->index = $index;
         $this->logger = $logger;
     }
 
