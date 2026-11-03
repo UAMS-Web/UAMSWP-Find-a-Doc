@@ -384,7 +384,33 @@ const UAMSWP_FAD_GBP_LISTING_META = 'uamswp_fad_gbp_listing_id';
 const UAMSWP_FAD_GBP_LISTING_MAP_META = 'uamswp_fad_gbp_listing_ids';
 
 /**
+ * Whether another provider or location post stores a Google listing name.
+ *
+ * A copied post (a duplicate-post tool copies meta) would otherwise point at the original's listing and
+ * rewrite it. One listing belongs to one post.
+ */
+function uamswp_fad_gbp_name_held_elsewhere(int $post_id, string $name): bool
+{
+    $held = get_posts([
+        'post_type' => ['provider', 'location'],
+        'post_status' => 'any',
+        'exclude' => [$post_id],
+        'fields' => 'ids',
+        'posts_per_page' => 1,
+        'meta_query' => [
+            'relation' => 'OR',
+            ['key' => UAMSWP_FAD_GBP_LISTING_META, 'value' => $name],
+            ['key' => UAMSWP_FAD_GBP_LISTING_MAP_META, 'value' => '"'.$name.'"', 'compare' => 'LIKE'],
+        ],
+    ]);
+
+    return $held !== [];
+}
+
+/**
  * Give each item the Google location name stored for it, if any.
+ *
+ * A name another post also stores is not trusted: the item falls back to its store code.
  *
  * Done after the fingerprint is taken, so storing an ID does not make the next run look changed.
  *
@@ -401,13 +427,13 @@ function uamswp_fad_gbp_attach_stored_ids(array $items): array
         }
 
         if ($item['kind'] === 'location') {
-            $items[$key]['stored_name'] = (string) get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true);
-
-            continue;
+            $name = (string) get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true);
+        } else {
+            $map = get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
+            $name = is_array($map) ? (string) ($map[(int) ($item['location_id'] ?? 0)]['id'] ?? '') : '';
         }
 
-        $map = get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
-        $items[$key]['stored_name'] = is_array($map) ? (string) ($map[(int) ($item['location_id'] ?? 0)]['id'] ?? '') : '';
+        $items[$key]['stored_name'] = $name !== '' && ! uamswp_fad_gbp_name_held_elsewhere($post_id, $name) ? $name : '';
     }
 
     return $items;
@@ -440,7 +466,12 @@ function uamswp_fad_gbp_store_listing_ids(array $items, array $entries): void
  */
 function uamswp_fad_gbp_write_listing_id(array $item, string $name): void
 {
-    $post_id = (int) $item['post_id'];
+    $post_id = (int) ($item['post_id'] ?? 0);
+
+    // No post or location to key it by, or the listing is another post's: store nothing.
+    if ($post_id === 0 || ($item['kind'] === 'provider' && (int) ($item['location_id'] ?? 0) === 0) || uamswp_fad_gbp_name_held_elsewhere($post_id, $name)) {
+        return;
+    }
 
     if ($item['kind'] === 'location') {
         if ((string) get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true) !== $name) {
@@ -831,7 +862,10 @@ function uamswp_fad_gbp_run_post(int $post_id): void
         try {
             $entries = $sync->run($items);
             uamswp_fad_gbp_store_listing_ids($items, $entries);
-            uamswp_fad_gbp_mark_orphans($post_id, $all_items);
+
+            if (in_array('live', array_column($entries, 'mode'), true)) {
+                uamswp_fad_gbp_mark_orphans($post_id, $all_items);
+            }
         } finally {
             // The creates already made count against the day's quota even if the run ended early,
             // and a write changes what the next job should see.

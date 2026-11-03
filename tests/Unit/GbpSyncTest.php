@@ -708,4 +708,15 @@ final class GbpSyncTest extends UnitTestCase
 
         $this->assertSame(['create', 'noop'], $this->actions());
     }
+
+    public function test_a_listing_created_but_failing_its_attributes_is_still_named_on_the_entry(): void
+    {
+        $item = $this->location_item();
+        $this->client->fail_attributes = new RuntimeException('Google API PATCH failed (400): bad');
+
+        $this->sync(['uams' => 'live'])->run([$item]);
+
+        $this->assertSame(['error'], $this->actions());
+        $this->assertStringStartsWith('locations/new-', $this->log[0]['listing_name']);
+    }
 }

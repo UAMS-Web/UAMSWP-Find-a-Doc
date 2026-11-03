@@ -424,6 +424,11 @@ class UAMSWP_FAD_GBP_Logic
             return [];
         }
 
+        // A number field can come back as a float, which would print as 1.2345E+19.
+        if (is_float($value)) {
+            $value = number_format($value, 0, '', '');
+        }
+
         preg_match_all('/\d{10,}/', (string) $value, $matches);
 
         return array_values(array_unique($matches[0]));
@@ -478,24 +483,40 @@ class UAMSWP_FAD_GBP_Logic
         }
 
         $plan = ['already' => [], 'by_store_code' => [], 'by_cid' => [], 'unmatched' => []];
+        $claimed = [];
 
-        foreach ($items as $item) {
+        // Names already stored are taken, so no route hands the same listing to a second post.
+        foreach ($items as $position => $item) {
             $stored = (string) ($item['stored_name'] ?? '');
 
             if ($stored !== '' && isset($by_name[$stored])) {
                 $plan['already'][] = $item;
-
-                continue;
+                $claimed[$stored] = true;
+                unset($items[$position]);
             }
+        }
 
+        // An item with no resolved post or location cannot be stored under the right key.
+        foreach ($items as $position => $item) {
+            if ((int) ($item['post_id'] ?? 0) === 0 || ($item['kind'] === 'provider' && (int) ($item['location_id'] ?? 0) === 0)) {
+                $plan['unmatched'][] = $item;
+                unset($items[$position]);
+            }
+        }
+
+        // Store code first for every item, then CID for what is left.
+        foreach ($items as $position => $item) {
             $codes = $by_code[$item['store_code']] ?? [];
 
-            if (count($codes) === 1) {
+            if (count($codes) === 1 && ! isset($claimed[$codes[0]])) {
                 $plan['by_store_code'][] = ['item' => $item, 'name' => $codes[0]];
-
-                continue;
+                $claimed[$codes[0]] = true;
+                unset($items[$position]);
             }
+        }
 
+        foreach ($items as $item) {
+            $codes = $by_code[$item['store_code']] ?? [];
             $post_id = (int) ($item['post_id'] ?? 0);
             $eligible = $item['kind'] === 'location' || ($per_post[$post_id] ?? 0) === 1;
             $names = [];
@@ -506,8 +527,9 @@ class UAMSWP_FAD_GBP_Logic
 
             $names = array_values(array_unique($names));
 
-            if (count($names) === 1 && $codes === []) {
+            if (count($names) === 1 && $codes === [] && ! isset($claimed[$names[0]])) {
                 $plan['by_cid'][] = ['item' => $item, 'name' => $names[0]];
+                $claimed[$names[0]] = true;
 
                 continue;
             }
