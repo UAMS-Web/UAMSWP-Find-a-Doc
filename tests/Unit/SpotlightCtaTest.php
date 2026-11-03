@@ -13,6 +13,7 @@ namespace UamswpFindADoc\Tests\Unit;
 
 use Brain\Monkey\Filters;
 use Brain\Monkey\Functions;
+use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
 final class SpotlightCtaTest extends UnitTestCase
@@ -150,7 +151,7 @@ final class SpotlightCtaTest extends UnitTestCase
     /**
      * @return array<string, array{0: array<string, mixed>}>
      */
-    public function not_bookable_cases(): array
+    public static function not_bookable_cases(): array
     {
         return [
             'not eligible for appointments' => [['physician_eligible_appointments' => '0']],
@@ -163,10 +164,9 @@ final class SpotlightCtaTest extends UnitTestCase
     }
 
     /**
-     * @dataProvider not_bookable_cases
-     *
      * @param  array<string, mixed>  $changes
      */
+    #[DataProvider('not_bookable_cases')]
     public function test_a_provider_who_cannot_be_scheduled_gets_the_learn_more_band(array $changes): void
     {
         $this->fields = $changes + $this->fields;
