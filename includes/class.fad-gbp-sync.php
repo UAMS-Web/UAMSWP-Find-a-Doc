@@ -15,6 +15,9 @@ declare(strict_types=1);
 
 final class UAMSWP_FAD_GBP_Sync
 {
+    /** The longest store code Google accepts, in characters. */
+    public const STORE_CODE_MAX = 64;
+
     /** @var callable(array<string, mixed>): void */
     private $logger;
 
@@ -145,6 +148,17 @@ final class UAMSWP_FAD_GBP_Sync
 
         if ($mode === 'off') {
             return ['reason' => 'Silo '.$silo.' is off'] + $entry;
+        }
+
+        // Google rejects a longer code on every attempt with an error that does not name the cause.
+        // Checked before any create or update, so dry-run, the queue and the command all report it.
+        $length = mb_strlen($item['store_code']);
+
+        if ($length > self::STORE_CODE_MAX) {
+            return [
+                'action' => 'review',
+                'reason' => sprintf("Store code %s is %d characters, over Google's limit of %d; nothing was sent", $item['store_code'], $length, self::STORE_CODE_MAX),
+            ] + $entry;
         }
 
         $account = (string) ($this->config['silos'][$silo]['accounts'][$item['kind']] ?? '');

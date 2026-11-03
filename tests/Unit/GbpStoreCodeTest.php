@@ -1,7 +1,7 @@
 <?php
 
 /**
- * How a Business Profile store code is built, pinned before a length check changes it.
+ * How a Business Profile store code is built. The 64-character limit is enforced by the sync, not here.
  */
 
 declare(strict_types=1);
@@ -13,7 +13,7 @@ use UamswpFindADoc\Tests\Support\UnitTestCase;
 /**
  * The two table builders assemble a store code inline, inside functions that need a full WordPress
  * to run, so these tests read the source of each builder, as `GbpProviderTitleTest` does. Where a
- * running pin is possible, `GbpSyncTest` holds it: a long code reaches `create()` unchanged.
+ * running pin is possible, `GbpSyncTest` holds it: a code over 64 characters is a review and sends nothing.
  */
 final class GbpStoreCodeTest extends UnitTestCase
 {
@@ -45,7 +45,7 @@ final class GbpStoreCodeTest extends UnitTestCase
         $this->assertStringContainsString('$row[0] = $store_code;', $source);
     }
 
-    public function test_neither_builder_checks_the_length_of_a_store_code(): void
+    public function test_neither_builder_checks_the_length_of_a_store_code_because_the_sync_does(): void
     {
         foreach (['uamswp_fad_gmb_provider_table', 'uamswp_fad_gmb_location_table'] as $function) {
             $source = $this->builder_source($function);

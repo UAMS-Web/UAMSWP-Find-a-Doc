@@ -285,16 +285,55 @@ final class GbpSyncTest extends UnitTestCase
         $this->assertSame('accounts/ul', $this->client->calls[1][1]);
     }
 
-    public function test_a_store_code_longer_than_64_characters_is_sent_to_create_unchanged(): void
+    public function test_a_store_code_of_exactly_64_characters_is_sent_to_create_unchanged(): void
     {
-        $code = str_repeat('a', 34).'_'.str_repeat('b', 33);
-        $this->assertSame(68, strlen($code));
+        $code = str_repeat('a', 32).'_'.str_repeat('b', 31);
+        $this->assertSame(64, strlen($code));
 
         $this->sync()->run([$this->item(['store_code' => $code])]);
 
         $this->assertSame(['create'], $this->actions());
-        $this->assertSame($code, $this->client->calls[0][3], 'no length check sits between the item and the create call');
+        $this->assertSame($code, $this->client->calls[0][3]);
+        $this->assertSame('Created', $this->log[0]['reason']);
+    }
+
+    public function test_a_store_code_of_65_characters_is_a_review_that_names_the_code_and_sends_nothing(): void
+    {
+        $code = str_repeat('a', 33).'_'.str_repeat('b', 31);
+        $this->assertSame(65, strlen($code));
+
+        $this->sync()->run([$this->item(['store_code' => $code])]);
+
+        $this->assertSame(['review'], $this->actions());
+        $this->assertSame([], $this->client->calls, 'no Google call');
+        $this->assertStringContainsString($code, $this->log[0]['reason']);
+        $this->assertStringContainsString('65 characters', $this->log[0]['reason']);
+        $this->assertStringContainsString('limit of 64', $this->log[0]['reason']);
         $this->assertSame($code, $this->log[0]['store_code']);
+    }
+
+    public function test_the_length_check_covers_dry_run_and_an_existing_listing(): void
+    {
+        $code = str_repeat('c', 70);
+        $listing = $this->listing('accounts/up', $code, ['title' => 'Old']);
+
+        $this->sync(['uams' => 'dry-run'])->run([$this->item(['store_code' => $code])]);
+        $this->sync(listings: [$listing])->run([$this->item(['store_code' => $code])]);
+
+        $this->assertSame(['review', 'review'], $this->actions());
+        $this->assertSame('dry-run', $this->log[0]['mode']);
+        $this->assertSame([], $this->client->calls, 'an over-length code is not updated either');
+    }
+
+    public function test_an_over_length_review_stays_on_the_attention_list_until_it_is_settled(): void
+    {
+        $code = str_repeat('d', 66);
+        $this->sync()->run([$this->item(['store_code' => $code])]);
+
+        $attention = \UAMSWP_FAD_GBP_Logic::next_attention([], ['time' => 1] + $this->log[0], 1000);
+
+        $this->assertSame([$code], array_keys($attention));
+        $this->assertFalse(\UAMSWP_FAD_GBP_Logic::is_settled($this->log), 'a review is not settled, so the post is not remembered as done');
     }
 
     public function test_a_daily_limit_on_create_pauses_every_later_create_until_the_pacific_reset(): void
