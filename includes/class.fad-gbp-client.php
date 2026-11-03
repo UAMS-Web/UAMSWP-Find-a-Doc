@@ -35,6 +35,9 @@ final class UAMSWP_FAD_GBP_Client
 
     private const INFO_URL = 'https://mybusinessbusinessinformation.googleapis.com/v1';
 
+    private const MEDIA_URL = 'https://mybusiness.googleapis.com/v4';
+
+    /** Where the account groups are listed. */
     private const ACCOUNTS_URL = 'https://mybusinessaccountmanagement.googleapis.com/v1/accounts';
 
     /** The fields read back from a listing for the diff. */
@@ -242,6 +245,27 @@ final class UAMSWP_FAD_GBP_Client
             'requestId' => 'uamswp-'.substr(sha1($store_code), 0, 32),
             'validateOnly' => $validate_only ? 'true' : '',
         ]), $fields + ['storeCode' => $store_code, 'languageCode' => 'en']);
+    }
+
+    /**
+     * Add one photo to a listing by its address, through the older Google My Business v4 media endpoint.
+     *
+     * The listing is addressed by its account group and location, as `accounts/123/locations/456`. Nothing is
+     * replaced or deleted: this only adds a photo.
+     *
+     * @param  string  $account  The account group, `accounts/123`.
+     * @param  string  $location  The listing's resource name, `locations/456`.
+     * @param  string  $category  `LOGO`, `COVER` or `ADDITIONAL`.
+     * @param  string  $url  The photo's public address, which Google fetches.
+     * @return array<string, mixed>
+     */
+    public function upload_photo(string $account, string $location, string $category, string $url): array
+    {
+        return $this->request('POST', self::MEDIA_URL.'/'.$account.'/'.$location.'/media', [], [
+            'mediaFormat' => 'PHOTO',
+            'locationAssociation' => ['category' => $category],
+            'sourceUrl' => $url,
+        ]);
     }
 
     /**
