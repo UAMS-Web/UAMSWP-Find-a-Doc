@@ -120,6 +120,30 @@ final class GbpLogicTest extends UnitTestCase
         $this->assertEqualsCanonicalizing(UAMSWP_FAD_GBP_Logic::OWNED_FIELDS, array_keys($fields));
     }
 
+    public function test_photo_cells_in_a_row_never_reach_the_fields_the_sync_sends(): void
+    {
+        // The location table carries photo URLs after the description (cover photo at 19, other photos after).
+        $row = $this->row() + [18 => 'https://example.test/logo.png', 19 => 'https://example.test/cover.jpg', 20 => 'https://example.test/a.jpg,https://example.test/b.jpg'];
+
+        $fields = UAMSWP_FAD_GBP_Logic::fields_from_row($row, self::CATEGORIES);
+
+        $this->assertEqualsCanonicalizing(UAMSWP_FAD_GBP_Logic::OWNED_FIELDS, array_keys($fields), 'only owned fields are built from a row, so a create sends no photo');
+        $this->assertStringNotContainsString('example.test', (string) json_encode($fields), 'no photo URL is in the payload');
+    }
+
+    public function test_no_photo_field_is_owned_or_written_on_an_update(): void
+    {
+        foreach (['media', 'mediaItems', 'photos', 'coverPhoto', 'logo'] as $field) {
+            $this->assertNotContains($field, UAMSWP_FAD_GBP_Logic::OWNED_FIELDS, $field);
+        }
+
+        $desired = ['title' => 'New title', 'media' => ['x'], 'coverPhoto' => 'https://example.test/cover.jpg'];
+        $changed = UAMSWP_FAD_GBP_Logic::changed_fields($desired, ['title' => 'Old title']);
+
+        $this->assertSame(['title'], array_keys($changed));
+        $this->assertSame('title', UAMSWP_FAD_GBP_Logic::update_mask($changed));
+    }
+
     public function test_categories_exclude_the_primary_and_unmapped_names(): void
     {
         $fields = UAMSWP_FAD_GBP_Logic::fields_from_row($this->row(), self::CATEGORIES);
