@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace UamswpFindADoc\Tests\Unit;
 
 use Brain\Monkey\Functions;
+use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
 final class DocRoleCapabilitiesTest extends UnitTestCase
@@ -22,9 +23,14 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
         'delete_posts', 'delete_published_posts', 'delete_others_posts', 'delete_private_posts',
     ];
 
-    public static function setUpBeforeClass(): void
+    protected function setUp(): void
     {
-        parent::setUpBeforeClass();
+        parent::setUp();
+
+        // The file registers its post types on `init` at file scope, so the hook functions must exist while
+        // it loads; Brain Monkey provides them only inside a test. It loads once per process (require_once).
+        Functions\when('add_action')->justReturn(true);
+        Functions\when('add_filter')->justReturn(true);
         require_once dirname(__DIR__, 2).'/includes/class.fad-custom-post.php';
     }
 
@@ -184,7 +190,7 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
     /**
      * @return array<string, array{0: string, 1: string, 2: array<int, string>}>
      */
-    public function rights_cases(): array
+    public static function rights_cases(): array
     {
         $editor = ['read_private_posts', 'edit_posts', 'edit_published_posts'];
         $admin = ['read_private_posts', 'edit_posts', 'edit_published_posts', 'edit_others_posts', 'edit_private_posts',
@@ -202,10 +208,9 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
      * Which of read, edit, publish and delete (as WordPress checks them for a post type with map_meta_cap on)
      * each role holds.
      *
-     * @dataProvider rights_cases
-     *
      * @param  array<int, string>  $expected  The `capabilities` map keys the role holds
      */
+    #[DataProvider('rights_cases')]
     public function test_each_role_holds_these_rights_on_each_post_type(string $role, string $type, array $expected): void
     {
         $map = $this->post_type_maps()[$type];
@@ -219,7 +224,7 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
     /**
      * @return array<string, array{0: string, 1: string}>
      */
-    public function status_cases(): array
+    public static function status_cases(): array
     {
         return [
             'doc_editor on providers' => ['doc_editor', 'provider'],
@@ -234,9 +239,8 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
      * edit-published capabilities of the post type (its script reads current_user_can_publish_posts and
      * current_user_can_edit_published_posts). Both roles hold edit_published_* and neither holds publish_*,
      * so Edit Flow hides the dropdown on the edit screen of a published provider or location for both.
-     *
-     * @dataProvider status_cases
      */
+    #[DataProvider('status_cases')]
     public function test_the_capabilities_that_decide_the_status_control_on_a_published_record(string $role, string $type): void
     {
         $map = $this->post_type_maps()[$type];
