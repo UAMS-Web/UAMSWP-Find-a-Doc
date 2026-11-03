@@ -384,6 +384,82 @@ const UAMSWP_FAD_GBP_LISTING_META = 'uamswp_fad_gbp_listing_id';
 const UAMSWP_FAD_GBP_LISTING_MAP_META = 'uamswp_fad_gbp_listing_ids';
 
 /**
+ * Meta key on a location post: the addresses of the photos already sent to its listing.
+ */
+const UAMSWP_FAD_GBP_PHOTOS_META = 'uamswp_fad_gbp_photos_sent';
+
+/**
+ * The addresses of the photos already sent to the listing an item is stored against.
+ *
+ * Empty when no listing is stored, so a listing found only by its store code is sent every photo once and then recorded.
+ *
+ * @param  array<string, mixed>  $item
+ * @return array<int, string>
+ */
+function uamswp_fad_gbp_photos_sent_for(array $item): array
+{
+    $post_id = (int) ($item['post_id'] ?? 0);
+
+    if ($post_id === 0 || ($item['stored_name'] ?? '') === '') {
+        return [];
+    }
+
+    if ($item['kind'] === 'location') {
+        $sent = get_post_meta($post_id, UAMSWP_FAD_GBP_PHOTOS_META, true);
+    } else {
+        $map = get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
+        $sent = is_array($map) ? ($map[(int) ($item['location_id'] ?? 0)]['photos'] ?? []) : [];
+    }
+
+    return is_array($sent) ? array_values(array_map(strval(...), $sent)) : [];
+}
+
+/**
+ * Record the photos a run sent, on the post and listing they went to.
+ *
+ * A new listing starts its record over; an existing one adds to it. Nothing is recorded unless the listing's ID is stored
+ * on the post, since the record belongs to that listing.
+ *
+ * @param  array<string, mixed>  $item
+ * @param  array<string, mixed>  $entry
+ */
+function uamswp_fad_gbp_write_photos_sent(array $item, array $entry): void
+{
+    $post_id = (int) ($item['post_id'] ?? 0);
+    $name = (string) ($entry['listing_name'] ?? '');
+    $now_sent = array_values(array_map(strval(...), (array) ($entry['photos_sent_now'] ?? [])));
+
+    if ($post_id === 0 || $name === '' || $now_sent === []) {
+        return;
+    }
+
+    $fresh = ($entry['action'] ?? '') === 'create';
+
+    if ($item['kind'] === 'location') {
+        if ((string) get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true) !== $name) {
+            return;
+        }
+
+        $stored = get_post_meta($post_id, UAMSWP_FAD_GBP_PHOTOS_META, true);
+        $before = $fresh || ! is_array($stored) ? [] : $stored;
+        update_post_meta($post_id, UAMSWP_FAD_GBP_PHOTOS_META, array_values(array_unique(array_merge($before, $now_sent))));
+
+        return;
+    }
+
+    $map = get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
+    $location_id = (int) ($item['location_id'] ?? 0);
+
+    if (! is_array($map) || ($map[$location_id]['id'] ?? '') !== $name) {
+        return;
+    }
+
+    $before = $fresh ? [] : (array) ($map[$location_id]['photos'] ?? []);
+    $map[$location_id]['photos'] = array_values(array_unique(array_merge($before, $now_sent)));
+    update_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, $map);
+}
+
+/**
  * Whether another provider or location post stores a Google listing name.
  *
  * A copied post (a duplicate-post tool copies meta) would otherwise point at the original's listing and
@@ -434,6 +510,7 @@ function uamswp_fad_gbp_attach_stored_ids(array $items): array
         }
 
         $items[$key]['stored_name'] = $name !== '' && ! uamswp_fad_gbp_name_held_elsewhere($post_id, $name) ? $name : '';
+        $items[$key]['photos_sent'] = uamswp_fad_gbp_photos_sent_for($items[$key]);
     }
 
     return $items;
@@ -456,6 +533,7 @@ function uamswp_fad_gbp_store_listing_ids(array $items, array $entries): void
         }
 
         uamswp_fad_gbp_write_listing_id($item, $name);
+        uamswp_fad_gbp_write_photos_sent($item, $entries[$position]);
     }
 }
 
@@ -476,6 +554,9 @@ function uamswp_fad_gbp_write_listing_id(array $item, string $name): void
     if ($item['kind'] === 'location') {
         if ((string) get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true) !== $name) {
             update_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, $name);
+
+            // The photos sent belong to the listing they went to.
+            delete_post_meta($post_id, UAMSWP_FAD_GBP_PHOTOS_META);
         }
 
         return;
@@ -565,6 +646,7 @@ function uamswp_fad_gbp_items_for_provider(int $provider_id, array $categories):
         $items[] = [
             'store_code' => $store_code,
             'kind' => 'provider',
+            'photos' => UAMSWP_FAD_GBP_Logic::photos_from_row($row, false),
             'post_id' => $provider_id,
             'location_id' => $location['id'],
             'silo' => $location['silo'],

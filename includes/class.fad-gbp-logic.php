@@ -365,6 +365,63 @@ class UAMSWP_FAD_GBP_Logic
         return sha1((string) json_encode([$items, $modes, $production, $version]));
     }
 
+    /**
+     * The photos a table row carries: the logo (column 18), the cover (19) and, for a location, the other photos (20).
+     *
+     * Column 20 holds the other photos' addresses joined by commas. A photo with no address is left out. A provider's
+     * column 20 is not photos, so a provider row is read without them.
+     *
+     * @param  array  $row  A row from uamswp_fad_gmb_provider_table() or the location builder.
+     * @return array<int, array{category: string, url: string}>
+     */
+    public static function photos_from_row(array $row, bool $with_others = true): array
+    {
+        $photos = [];
+
+        foreach ([[18, 'LOGO'], [19, 'COVER']] as [$column, $category]) {
+            $url = trim((string) ($row[$column] ?? ''));
+
+            if ($url !== '') {
+                $photos[] = ['category' => $category, 'url' => $url];
+            }
+        }
+
+        foreach ($with_others ? explode(',', (string) ($row[20] ?? '')) : [] as $url) {
+            $url = trim($url);
+
+            if ($url !== '') {
+                $photos[] = ['category' => 'ADDITIONAL', 'url' => $url];
+            }
+        }
+
+        return $photos;
+    }
+
+    /**
+     * The photos not yet sent: those whose address is not among the addresses already sent for this listing.
+     *
+     * A photo is identified by its address, so an image that changed is a new address and is sent again; an
+     * unchanged one is not. The same address under two categories is sent once.
+     *
+     * @param  array<int, array{category: string, url: string}>  $photos
+     * @param  array<int, string>  $sent
+     * @return array<int, array{category: string, url: string}>
+     */
+    public static function photos_to_send(array $photos, array $sent): array
+    {
+        $pending = [];
+        $seen = array_flip($sent);
+
+        foreach ($photos as $photo) {
+            if (! isset($seen[$photo['url']])) {
+                $pending[] = $photo;
+                $seen[$photo['url']] = true;
+            }
+        }
+
+        return $pending;
+    }
+
     /** How many continuous days a listing stays orphaned before the sync closes it. */
     const ORPHAN_GRACE_DAYS = 14;
 
@@ -439,7 +496,8 @@ class UAMSWP_FAD_GBP_Logic
      */
     public static function remember_listing(array $map, int $location_id, string $name): array
     {
-        $map[$location_id] = ['id' => $name, 'orphaned_since' => null];
+        $kept = ($map[$location_id]['id'] ?? '') === $name ? (array) ($map[$location_id]['photos'] ?? []) : [];
+        $map[$location_id] = ['id' => $name, 'orphaned_since' => null] + ($kept === [] ? [] : ['photos' => $kept]);
 
         return $map;
     }
@@ -974,6 +1032,7 @@ class UAMSWP_FAD_GBP_Logic
             'fields' => self::fields_from_row($row, $category_ids),
             'unresolved' => self::unresolved_categories($row, $category_ids),
             'attributes' => self::attributes_from_row($row),
+            'photos' => self::photos_from_row($row),
         ];
     }
 
