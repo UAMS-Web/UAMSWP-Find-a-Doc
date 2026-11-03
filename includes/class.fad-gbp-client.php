@@ -30,9 +30,6 @@ final class UAMSWP_FAD_GBP_Client
     /** The fields read back from a listing for the diff. */
     private const READ_MASK = 'name,storeCode,title,storefrontAddress,latlng,phoneNumbers,websiteUri,categories,profile';
 
-    /** @var array{client_id: string, client_secret: string, refresh_token: string} */
-    private array $credentials;
-
     /** @var callable(string, string, array<string, string>, ?string): array{0: int, 1: string} */
     private $transport;
 
@@ -44,9 +41,8 @@ final class UAMSWP_FAD_GBP_Client
      * @param  array{client_id: string, client_secret: string, refresh_token: string}  $credentials
      * @param  callable(string, string, array<string, string>, ?string): array{0: int, 1: string}  $transport  Receives method, URL, headers and body; returns the HTTP status and the raw body.
      */
-    public function __construct(array $credentials, callable $transport)
+    public function __construct(private array $credentials, callable $transport)
     {
-        $this->credentials = $credentials;
         $this->transport = $transport;
     }
 
@@ -93,7 +89,7 @@ final class UAMSWP_FAD_GBP_Client
     public function request(string $method, string $url, array $query = [], ?array $body = null): array
     {
         if ($query !== []) {
-            $url .= (strpos($url, '?') === false ? '?' : '&').http_build_query($query);
+            $url .= (! str_contains($url, '?') ? '?' : '&').http_build_query($query);
         }
 
         $headers = ['Authorization' => 'Bearer '.$this->access_token()];

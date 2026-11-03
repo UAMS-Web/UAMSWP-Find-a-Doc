@@ -353,7 +353,7 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
 
     // Limit to specific posts when asked (the sync builds one post at a time)
     if ($post_ids) {
-        $args['post__in'] = array_map('absint', (array) $post_ids);
+        $args['post__in'] = array_map(absint(...), (array) $post_ids);
     }
 
     // Restored below so a caller in the middle of a request keeps its own main query
@@ -749,8 +749,8 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
 
                         $row[0] = $store_code; // . '-' . implode(",",$locations) . '-' . $location;
 
-                        // Business name
-                        $row[1] = 'UAMS Health - '.html_entity_decode($full_name);
+                        // Business name: the provider and the location this listing is for (the one in the store code)
+                        $row[1] = UAMSWP_FAD_GBP_Logic::provider_listing_title(html_entity_decode($full_name), html_entity_decode(get_the_title($location)));
 
                         // Address line 1
 
@@ -793,7 +793,7 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         $location_floor_label = '';
                         if ($location_floor) {
                             $location_floor_value = $location_floor['value'];
-                            $location_floor_label = $location_floor['choices'][$location_floor_value];
+                            $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
                         }
                         $location_suite = get_field('location_suite', $location_source_ids['unit']);
 
@@ -808,7 +808,7 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         // if ( $location_building && $building_slug != '_none' ) {
                         //     array_push($location_addresses, $building_name);
                         // }
-                        // if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ) {
+                        // if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" && $location_floor_label !== '' ) {
                         //     array_push($location_addresses, $location_floor_label);
                         // }
                         // if ( $location_suite && !empty($location_suite) ) {
@@ -834,11 +834,13 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         if ($location_building && $building_slug != '_none') {
                             $location_addresses[] = $building_name;
                         }
+                        // A location name drops the place it is "in" or "at" (a facility, city, neighborhood or street);
+                        // the title (the Business name) keeps the full name
                         if (! $location_has_parent) {
-                            $location_addresses[] = $location_title;
+                            $location_addresses[] = UAMSWP_FAD_GBP_Logic::location_name_without_place($location_title);
                         } else {
-                            $location_addresses[] = $location_parent_title;
-                            $location_addresses[] = $location_title;
+                            $location_addresses[] = UAMSWP_FAD_GBP_Logic::location_name_without_place($location_parent_title);
+                            $location_addresses[] = UAMSWP_FAD_GBP_Logic::location_name_without_place($location_title);
                         }
 
                         $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
@@ -1079,7 +1081,7 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
 
     // Limit to specific posts when asked (the sync builds one post at a time)
     if ($post_ids) {
-        $args['post__in'] = array_map('absint', (array) $post_ids);
+        $args['post__in'] = array_map(absint(...), (array) $post_ids);
     }
 
     $query = new WP_Query($args);
@@ -1423,7 +1425,7 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             $location_floor_label = '';
             if ($location_floor) {
                 $location_floor_value = $location_floor['value'];
-                $location_floor_label = $location_floor['choices'][$location_floor_value];
+                $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
             }
             $location_suite = get_field('location_suite', $location_source_ids['unit']);
 
@@ -1434,16 +1436,7 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             //   Building Floor Number
             //   Suite Number
 
-            $location_addresses = [];
-            if ($location_building && $building_slug != '_none') {
-                $location_addresses[] = $building_name;
-            }
-            if ($location_floor && ! empty($location_floor_value) && $location_floor_value != '0') {
-                $location_addresses[] = $location_floor_label;
-            }
-            if ($location_suite && ! empty($location_suite)) {
-                $location_addresses[] = $location_suite;
-            }
+            $location_addresses = uamswp_location_address_parts(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite);
             $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
             $location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
             $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';

@@ -159,7 +159,7 @@ if (! function_exists('ap_time_span')) {
 }
 
 if (! function_exists('isDate')) {
-    function isDate($value)
+    function isDate($value): bool
     {
         if (! $value) {
             return false;
@@ -388,7 +388,7 @@ if (! function_exists('uamswp_provider_name_html')) {
      * @param  string  $name  A provider name variant.
      * @return string Escaped for HTML text output, with &nbsp; preserved.
      */
-    function uamswp_provider_name_html($name)
+    function uamswp_provider_name_html($name): string|array
     {
 
         return str_replace('&amp;nbsp;', '&nbsp;', esc_html((string) $name));
@@ -548,7 +548,7 @@ if (! function_exists('uamswp_provider_names')) {
 
         // Short name possessive (e.g., "Dr. McCoy's")
 
-        if (substr($short_name, -1) == 's') {
+        if (str_ends_with($short_name, 's')) {
 
             // If the provider's name ends in "s", use an apostrophe with no "s"
             $short_name_possessive = $short_name."'";
@@ -666,50 +666,37 @@ if (! function_exists('uamswp_provider_pronouns')) {
      * @param  int  $provider_id  Provider post ID.
      * @return array subject, object, possessive, possessive_pronoun, reflexive, plural.
      */
-    function uamswp_provider_pronouns($provider_id)
+    function uamswp_provider_pronouns($provider_id): array
     {
 
         $gender = $provider_id ? get_field('physician_gender', $provider_id) : '';
 
-        switch ($gender) {
-
-            case 'female':
-                $pronouns = [
-                    'subject' => 'she',
-                    'object' => 'her',
-                    'possessive' => 'her',
-                    'possessive_pronoun' => 'hers',
-                    'reflexive' => 'herself',
-                    'plural' => false,
-                ];
-                break;
-
-            case 'male':
-                $pronouns = [
-                    'subject' => 'he',
-                    'object' => 'him',
-                    'possessive' => 'his',
-                    'possessive_pronoun' => 'his',
-                    'reflexive' => 'himself',
-                    'plural' => false,
-                ];
-                break;
-
-                // 'other', and any unexpected or empty value, use the singular they
-            default:
-                $pronouns = [
-                    'subject' => 'they',
-                    'object' => 'them',
-                    'possessive' => 'their',
-                    'possessive_pronoun' => 'theirs',
-                    'reflexive' => 'themselves',
-                    'plural' => true,
-                ];
-                break;
-
-        }
-
-        return $pronouns;
+        return match ($gender) {
+            'female' => [
+                'subject' => 'she',
+                'object' => 'her',
+                'possessive' => 'her',
+                'possessive_pronoun' => 'hers',
+                'reflexive' => 'herself',
+                'plural' => false,
+            ],
+            'male' => [
+                'subject' => 'he',
+                'object' => 'him',
+                'possessive' => 'his',
+                'possessive_pronoun' => 'his',
+                'reflexive' => 'himself',
+                'plural' => false,
+            ],
+            default => [
+                'subject' => 'they',
+                'object' => 'them',
+                'possessive' => 'their',
+                'possessive_pronoun' => 'theirs',
+                'reflexive' => 'themselves',
+                'plural' => true,
+            ],
+        };
 
     }
 
@@ -990,33 +977,25 @@ if (! function_exists('uamswp_spotlight_appointment_cta')) {
 
         } else {
 
-            // Not bookable: no scheduling prose and no appointment heading. Invite
-            // the reader to the profile with a fuller line built from the
-            // provider's occupation title (same construction as the intro).
+            // Not bookable: no scheduling prose and no appointment heading. One
+            // invitation, with the link on the profile it points to. It does not
+            // restate the page's opening "Get to know ..." line, so it needs no
+            // occupation title and reads the same with or without one.
             $cta_heading = 'Learn More';
             $phone = ''; // no scheduling number is surfaced when not bookable
 
-            $title = uamswp_provider_occupation_title($provider_id);
+            $profile_noun_link = sprintf(
+                '<a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s provider profile</a>',
+                esc_url($provider_url),
+                esc_attr($medium_name_attr),
+                $short_possessive
+            );
 
-            if ($title) {
-
-                $cta_body = sprintf(
-                    'Get to know %1$s, %2$s %3$s at UAMS Health, and %4$s to learn more.',
-                    $medium_name,
-                    uamswp_indefinite_article($title),
-                    esc_html($title),
-                    $profile_link
-                );
-
-            } else {
-
-                $cta_body = sprintf(
-                    'Get to know %1$s and %2$s to learn more.',
-                    $medium_name,
-                    $profile_link
-                );
-
-            }
+            $cta_body = sprintf(
+                'Learn more about %1$s, including background, specialties and locations, on %2$s.',
+                $medium_name,
+                $profile_noun_link
+            );
 
         }
 
@@ -1104,7 +1083,7 @@ if (! function_exists('uamswp_indefinite_article')) {
                         strtolower($phrase),
                         0,
                         strlen($exception)
-                    ) == strtolower($exception)
+                    ) === strtolower($exception)
                 ) {
 
                     // If the phrase begins with the exception key, use the key's value

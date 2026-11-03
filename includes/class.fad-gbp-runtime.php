@@ -136,7 +136,7 @@ function uamswp_fad_gbp_all_post_ids(): array
     $ids = [];
 
     foreach (['provider', 'location'] as $post_type) {
-        $ids = array_merge($ids, array_map('intval', get_posts(['post_type' => $post_type, 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids'])));
+        $ids = array_merge($ids, array_map(intval(...), get_posts(['post_type' => $post_type, 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids'])));
     }
 
     return $ids;
@@ -243,7 +243,7 @@ function uamswp_fad_gbp_queue_all(?callable $lookup = null): int
  */
 function uamswp_fad_gbp_child_location_ids(int $location_id): array
 {
-    return array_map('intval', get_posts([
+    return array_map(intval(...), get_posts([
         'post_type' => 'location',
         'post_status' => 'publish',
         'posts_per_page' => -1,
@@ -268,7 +268,7 @@ function uamswp_fad_gbp_provider_ids_for_locations(array $location_ids): array
         $clauses[] = ['key' => 'physician_locations', 'value' => '"'.$location_id.'"', 'compare' => 'LIKE'];
     }
 
-    return array_map('intval', get_posts([
+    return array_map(intval(...), get_posts([
         'post_type' => 'provider',
         'post_status' => 'publish',
         'posts_per_page' => -1,
