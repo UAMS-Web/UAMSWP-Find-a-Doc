@@ -18,10 +18,12 @@
     "postcss-discard-comments": "^5.1.1",
     "sass": "~1.26.11"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jsdom": "^26.1.0"
+  },
   "scripts": {
     "preinstall": "npx npm-force-resolutions@0.0.10",
-    "test": "node --test \"tests/build/*.test.js\""
+    "test": "node --test \"tests/build/*.test.js\" \"tests/js/*.test.js\""
   },
   "resolutions": {
     "glob-parent": "^5.1.2"
