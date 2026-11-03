@@ -66,6 +66,19 @@ final class GbpSyncTest extends UnitTestCase
                 return [];
             }
 
+            /** @var ?RuntimeException */
+            public $fail_photo;
+
+            public function upload_photo(string $account, string $location, string $category, string $url): array
+            {
+                $this->calls[] = ['upload_photo', $account, $location, $category, $url];
+                if ($this->fail_photo !== null && $url === 'https://x/fail.jpg') {
+                    throw $this->fail_photo;
+                }
+
+                return [];
+            }
+
             public function patch(string $location, array $fields, string $mask, bool $validate_only = false): array
             {
                 $this->calls[] = ['patch', $location, $fields, $mask];
@@ -718,5 +731,80 @@ final class GbpSyncTest extends UnitTestCase
 
         $this->assertSame(['error'], $this->actions());
         $this->assertStringStartsWith('locations/new-', $this->log[0]['listing_name']);
+    }
+
+    /**
+     * @return array<int, array{category: string, url: string}>
+     */
+    private function photos(): array
+    {
+        return [
+            ['category' => 'LOGO', 'url' => 'https://x/logo.png'],
+            ['category' => 'COVER', 'url' => 'https://x/cover.jpg'],
+            ['category' => 'ADDITIONAL', 'url' => 'https://x/other.jpg'],
+        ];
+    }
+
+    public function test_a_created_listing_gets_every_photo_with_its_category_and_they_are_reported_as_sent(): void
+    {
+        $this->sync(['uams' => 'live'])->run([$this->item(['photos' => $this->photos()])]);
+
+        $this->assertSame([['accounts/up', 'locations/new-1', 'LOGO', 'https://x/logo.png'], ['accounts/up', 'locations/new-1', 'COVER', 'https://x/cover.jpg'], ['accounts/up', 'locations/new-1', 'ADDITIONAL', 'https://x/other.jpg']], array_map(fn (array $call): array => array_slice($call, 1), $this->calls_of('upload_photo')));
+        $this->assertSame(['https://x/logo.png', 'https://x/cover.jpg', 'https://x/other.jpg'], $this->log[0]['photos_sent_now']);
+    }
+
+    public function test_an_update_with_unchanged_photos_makes_no_media_call_and_is_a_noop(): void
+    {
+        $item = $this->item(['photos' => $this->photos(), 'photos_sent' => ['https://x/logo.png', 'https://x/cover.jpg', 'https://x/other.jpg']]);
+        $listing = $this->listing('accounts/up', 'jane_clinic', $item['fields']);
+
+        $this->sync(['uams' => 'live'], true, [$listing])->run([$item]);
+
+        $this->assertSame(['noop'], $this->actions());
+        $this->assertSame([], $this->calls_of('upload_photo'));
+    }
+
+    public function test_an_update_sends_only_the_photo_whose_image_changed(): void
+    {
+        $photos = $this->photos();
+        $photos[1]['url'] = 'https://x/cover-new.jpg';
+        $item = $this->item(['photos' => $photos, 'photos_sent' => ['https://x/logo.png', 'https://x/cover.jpg', 'https://x/other.jpg']]);
+        $listing = $this->listing('accounts/up', 'jane_clinic', $item['fields']);
+
+        $this->sync(['uams' => 'live'], true, [$listing])->run([$item]);
+
+        $this->assertSame(['update'], $this->actions());
+        $this->assertSame(['Photos sent'], array_column($this->log, 'reason'));
+        $this->assertSame([['COVER', 'https://x/cover-new.jpg']], array_map(fn (array $call): array => array_slice($call, 3), $this->calls_of('upload_photo')));
+        $this->assertSame([], $this->calls_of('patch'), 'no field changed, so no field write');
+    }
+
+    public function test_a_dry_run_silo_reports_the_photos_it_would_send_and_sends_none(): void
+    {
+        $this->sync(['uams' => 'dry-run'])->run([$this->item(['photos' => $this->photos()])]);
+
+        $this->assertSame(['create'], $this->actions());
+        $this->assertSame(['https://x/logo.png', 'https://x/cover.jpg', 'https://x/other.jpg'], $this->log[0]['photos']);
+        $this->assertSame([], $this->client->calls);
+
+        $this->log = [];
+        $item = $this->item(['photos' => $this->photos()]);
+        $this->sync(['uams' => 'dry-run'], true, [$this->listing('accounts/up', 'jane_clinic', $item['fields'])])->run([$item]);
+
+        $this->assertSame(['https://x/logo.png', 'https://x/cover.jpg', 'https://x/other.jpg'], $this->log[0]['photos']);
+        $this->assertSame([], $this->calls_of('upload_photo'));
+    }
+
+    public function test_a_refused_photo_is_an_error_that_names_the_ones_that_went(): void
+    {
+        $this->client->fail_photo = new RuntimeException('Google API POST failed (403): no write access');
+        $photos = [['category' => 'LOGO', 'url' => 'https://x/logo.png'], ['category' => 'COVER', 'url' => 'https://x/fail.jpg'], ['category' => 'ADDITIONAL', 'url' => 'https://x/other.jpg']];
+
+        $this->sync(['uams' => 'live'])->run([$this->item(['photos' => $photos])]);
+
+        $this->assertSame(['error'], $this->actions());
+        $this->assertSame(['https://x/logo.png'], $this->log[0]['photos_sent_now']);
+        $this->assertCount(2, $this->calls_of('upload_photo'), 'it stops at the refusal');
+        $this->assertStringContainsString('403', $this->log[0]['reason']);
     }
 }
