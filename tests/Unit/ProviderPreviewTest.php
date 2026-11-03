@@ -28,11 +28,12 @@ final class ProviderPreviewTest extends UnitTestCase
     {
         parent::setUp();
         $_GET['preview'] = 'true';
+        $_GET['p'] = '89';
     }
 
     protected function tearDown(): void
     {
-        unset($_GET['preview']);
+        unset($_GET['preview'], $_GET['p'], $_GET['preview_id'], $_GET['page_id']);
         parent::tearDown();
     }
 
@@ -44,6 +45,28 @@ final class ProviderPreviewTest extends UnitTestCase
         $this->assertSame(89, uamswp_fad_preview_keep_saved_post_id(412, 89));
         $this->assertSame(89, uamswp_fad_preview_keep_saved_post_id('412', 89), 'ACF can hand the ID over as a string');
         $this->assertSame(89, uamswp_fad_preview_keep_saved_post_id(412), 'the original ID is not needed');
+    }
+
+    public function test_the_previewed_post_is_named_by_preview_id_then_p_then_page_id(): void
+    {
+        Functions\when('wp_is_post_revision')->justReturn(89);
+        Functions\when('get_post_type')->justReturn('provider');
+
+        $_GET['preview_id'] = '89';
+        unset($_GET['p']);
+        $this->assertSame(89, uamswp_fad_preview_keep_saved_post_id(412));
+
+        unset($_GET['preview_id']);
+        $_GET['page_id'] = '89';
+        $this->assertSame(89, uamswp_fad_preview_keep_saved_post_id(412));
+    }
+
+    public function test_a_revision_of_another_post_is_not_remapped_even_on_a_preview_request(): void
+    {
+        Functions\when('wp_is_post_revision')->justReturn(55);
+        Functions\when('get_post_type')->justReturn('provider');
+
+        $this->assertSame(412, uamswp_fad_preview_keep_saved_post_id(412, 55), 'the previewed post is 89, not 55');
     }
 
     public function test_the_saved_post_is_left_alone(): void
@@ -78,11 +101,13 @@ final class ProviderPreviewTest extends UnitTestCase
         $this->assertSame(412, uamswp_fad_preview_keep_saved_post_id(412, 89));
     }
 
-    public function test_the_filter_runs_after_acfs_own_handler(): void
+    public function test_the_filter_is_registered_after_acfs_own_handler(): void
     {
         $source = (string) file_get_contents(dirname(__DIR__, 2).'/includes/class.fad-acf-functions.php');
 
         $this->assertStringContainsString("add_filter('acf/validate_post_id', 'uamswp_fad_preview_keep_saved_post_id', 20, 2);", $source, 'ACF registers its handler at priority 10');
+        // The registration itself, and its priority, are checked against real WordPress in
+        // tests/Integration/ProviderPreviewRevisionTest.php.
     }
 
     public function test_the_values_are_kept_out_of_core_post_meta_so_a_revision_cannot_carry_them(): void
