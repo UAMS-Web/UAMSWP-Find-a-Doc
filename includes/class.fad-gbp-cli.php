@@ -333,6 +333,13 @@ function uamswp_fad_gbp_cli_cid_report(array $args, array $assoc): void
  */
 function uamswp_fad_gbp_cli_sync(array $args, array $assoc): void
 {
+    // The orphan report and close: the same scan the daily job runs, printed.
+    if (! empty($assoc['orphans'])) {
+        WP_CLI::halt(uamswp_fad_gbp_orphan_scan(function (string $line): void {
+            WP_CLI::line($line);
+        }, null, null, null, ! empty($assoc['dry-run'])));
+    }
+
     $post = isset($assoc['post']) ? (string) $assoc['post'] : '';
     $all = ! empty($assoc['all']);
 
