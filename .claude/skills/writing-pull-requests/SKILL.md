@@ -65,6 +65,8 @@ which the workflow calls from the skill's own directory, so a target needs the s
 workflow and nothing else. It lives here rather than beside the emoji rule because a rule
 cannot own a template; the rule that bans the glyph is `no-emoji-in-durable-records`.
 
+All three workflows are gated on `RUN_REMOTE_CI` with a job-level `if: vars.RUN_REMOTE_CI != 'false'`, so a private repository with the variable set to `false` skips them and bills no minutes, and a public repository runs them as before. A skipped job reports `skipped` and a skipped required check reports success, so while the switch is off the body checks have not read the body. The gate is in the template because a copy must match its template in full.
+
 The closing-keyword check runs [`scripts/check-closing-keyword-across-lines.mjs`](scripts/check-closing-keyword-across-lines.mjs) the same way. GitHub reads a newline as whitespace, so a status column whose last cell is `closed` above a row labelled `#N` is the directive `closed #N`, and a squash merge acts on it. The workflow reads the body through the API, and the script runs the `github-api-budget` same-line control before it reads anything. `--range` and `--commit` read commit messages instead. Reword a flagged pair: put the number first, or write the cell as something other than a bare keyword.
 
 ## Output format

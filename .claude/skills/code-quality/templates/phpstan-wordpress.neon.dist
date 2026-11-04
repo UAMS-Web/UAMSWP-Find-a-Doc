@@ -4,7 +4,7 @@
 #
 # Development dependencies:
 #   composer require --dev phpstan/phpstan szepeviktor/phpstan-wordpress "php-stubs/wordpress-stubs:^6.8"
-# Pin wordpress-stubs to 6.x (`^6.8`, as uamswp-migration-api does). A bare
+# Pin wordpress-stubs to 6.x (`^6.8`, as aether-wordpress-migration-api does). A bare
 # `composer require php-stubs/wordpress-stubs` can resolve 7.1, which breaks
 # szepeviktor/phpstan-wordpress. The extension loads the stubs itself; requiring
 # the package pins the WordPress version the stubs describe.
@@ -151,7 +151,7 @@ parameters:
     # PHPStan reads as no entries.
     ignoreErrors:
         # The entry most plugins need once the level reaches 4, from
-        # uamswp-migration-api: the PHP version guard in the plugin header.
+        # aether-wordpress-migration-api: the PHP version guard in the plugin header.
         # PHPStan analyzes at the `min` above, so
         # `version_compare(PHP_VERSION, '8.2', '<')` is always false *to the
         # analyzer*, but the guard exists precisely for the case the analyzer

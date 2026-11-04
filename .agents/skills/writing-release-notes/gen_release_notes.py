@@ -110,7 +110,7 @@ _ACRO = {"wordpress": "WordPress", "composer": "Composer", "json-ld": "JSON-LD",
          "vite": "Vite", "ssr": "SSR", "ssg": "SSG", "seo": "SEO", "acf": "ACF", "wxr": "WXR",
          "graphql": "GraphQL", "url": "URL"}
 # A word joined to a larger token is part of something a reader types -- the Composer
-# directive `@php`, the script `ci:local`, the package `uams-web/wordpress-importer`, the
+# directive `@php`, the script `ci:local`, the package `uams-web/aether-wordpress-importer`, the
 # path `config/statamic`, the extension `.php` -- so it keeps its case, exactly as a code
 # span does. Joined means preceded by a word character or `@ : / . -`, or followed by a
 # word character, `-` or `/`, or by `:` or `.` with a word character straight after. A
@@ -269,7 +269,7 @@ def bucket(subject, title, labels=(), paths=(), forced_sec=False, issue_type=Non
     conventions actually produce -- an explicit flag, labels, touched paths, the diff's
     shape, the closing issue's type and the title's own verb. It does NOT consult a
     Conventional-Commit prefix: `writing-pull-requests` and `writing-issues` both forbid
-    those on titles. Measured in UAMS-Web/wordpress-importer over `v0.17.0..v0.18.0`, 0 of
+    those on titles. Measured in UAMS-Web/aether-wordpress-importer over `v0.17.0..v0.18.0`, 0 of
     20 subjects carried one -- the prefix branches that used to sit here could never fire,
     and every tooling change fell through to `new`.
     """

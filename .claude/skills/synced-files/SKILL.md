@@ -38,7 +38,7 @@ node .claude/skills/synced-files/scripts/check-synced-files.mjs
 
 Where the repository runs the shared `local-ci` runner, its `local-ci.json` should carry a `synced-files` job that runs this command on every run. The template the `local-ci` skill ships includes it. A `local-ci.json` copied before the job was added does not get it from a sync, because the sync never writes that file: copy the job in from the template.
 
-A repository that runs GitHub Actions carries the same check as a `synced-files` job in `.github/workflows/ci.yml`, beside the quality jobs; the `code-quality` skill's `templates/ci.yml` has it. The two are the same command, so a repository on the runner and Actions together keeps both.
+A repository that runs GitHub Actions carries the same check as a `synced-files` job in `.github/workflows/ci.yml`, beside the quality jobs; the `code-quality` skill's `templates/ci-reusable.yml`, which `templates/ci.yml` calls, has it. The two are the same command, so a repository on the runner and Actions together keeps both.
 
 | Exit | Meaning |
 |------|---------|
@@ -56,10 +56,10 @@ Do not fix it by regenerating anything here. Restore the named file from git to 
 
 ## Workflow copies
 
-The sync writes no workflow under `.github/` (its one file there is the pull request template), so the workflows the shared skills ship as templates (`assign-author.yml`, `check-attribution-footer.yml` and `check-closing-keyword-across-lines.yml` from `writing-pull-requests`, `clear-handed-back.yml` from `handed-back-label`) are copied once and then drift unseen. This skill's second script compares each copy with its template:
+The sync creates no workflow under `.github/`, so the workflows the shared skills ship as templates (`assign-author.yml`, `check-attribution-footer.yml` and `check-closing-keyword-across-lines.yml` from `writing-pull-requests`, `clear-handed-back.yml` from `handed-back-label`) are copied once by the repository. When a template later changes, the sync rewrites an existing copy in the same pull request with the whole template, header included, as long as the sync App holds the `workflows` permission it needs to push workflow files (it does; see the `handed-back-label` skill). A hand edit, or a copy the sync could not push, still drifts unseen. This skill's second script compares each copy with its template:
 
 ```sh
 node .claude/skills/synced-files/scripts/check-workflow-copies.mjs
 ```
 
-A copy may rewrite its header, the comment block between the `name:` and `on:` lines; every other line must match the template, and line endings are compared as LF. A workflow the repository has not copied is skipped. `--require <file>` (repeatable, for example `--require clear-handed-back.yml`) fails on a missing copy of a workflow the repository has committed to carrying, and `--root <dir>` checks another checkout. Exit 0 means every copy present matches, 1 names each copy that differs or is missing, and 2 means the check could not run. Run it from the same place as the managed-file check: a `local-ci.json` job or a workflow step.
+The template owns the whole copy, the comment block between the `name:` and `on:` lines included, so every line must match the template; line endings are compared as LF. A repository note belongs outside the workflow file. A workflow the repository has not copied is skipped. `--require <file>` (repeatable, for example `--require clear-handed-back.yml`) fails on a missing copy of a workflow the repository has committed to carrying, and `--root <dir>` checks another checkout. Exit 0 means every copy present matches, 1 names each copy that differs or is missing, and 2 means the check could not run. Run it from the same place as the managed-file check: a `local-ci.json` job or a workflow step.
