@@ -207,7 +207,7 @@ and it is run from the repository root. It reads first-parent git history for a 
 each PR's title, body and labels **live from the GitHub API** (`gh`, REST by default), reads the
 paths each change touched from git, and applies every rule above: prefix/`[skip ci]`/merge-hint
 stripping, acronym casing (leaving backticked spans and joined names such as
-`uams-web/wordpress-importer` or `ci:local` byte-identical), the routing cascade, `&`→and with the
+`uams-web/aether-wordpress-importer` or `ci:local` byte-identical), the routing cascade, `&`→and with the
 Oxford comma, `[#N]` PR links, and backticked-short-SHA links for direct commits. It depends only
 on `git`, `gh`, and Python 3: no other setup.
 

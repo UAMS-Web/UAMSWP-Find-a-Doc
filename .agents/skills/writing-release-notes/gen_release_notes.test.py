@@ -234,7 +234,7 @@ class RoutingTest(unittest.TestCase):
     These import `bucket()` directly rather than driving the script, so they are offline and
     make no `gh` call. The prefix cases are the point: `writing-pull-requests` and
     `writing-issues` both forbid those prefixes on titles, and a squash-merging repository's
-    commit subject IS the PR title. Measured in UAMS-Web/wordpress-importer over
+    commit subject IS the PR title. Measured in UAMS-Web/aether-wordpress-importer over
     `v0.17.0..v0.18.0`, 0 of 20 subjects carried one (#1093): the branches that used to
     route on them could never fire.
     """
@@ -442,7 +442,7 @@ class AcronymCasingTest(unittest.TestCase):
 
     def test_a_backticked_package_name_survives_byte_identical(self):
         for title in (
-            "Pin `uams-web/wordpress-importer` to ^0.18",
+            "Pin `uams-web/aether-wordpress-importer` to ^0.18",
             "Bump `statamic/cms` for the Statamic 6 upgrade",
             "Run `phpstan analyse` under `config/statamic/search.php`",
         ):
@@ -488,7 +488,7 @@ class AcronymCasingTest(unittest.TestCase):
         for title in (
             "Prefix the mutate script with @php, so its children launch",
             "Run ci:local before merging",
-            "Pin uams-web/wordpress-importer and php-stubs/wordpress-stubs",
+            "Pin uams-web/aether-wordpress-importer and php-stubs/wordpress-stubs",
             "Read config/api.php",
             "Stop WordPress-importer from drifting",
         ):

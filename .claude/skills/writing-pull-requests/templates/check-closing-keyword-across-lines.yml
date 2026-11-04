@@ -9,8 +9,8 @@ name: Check closing keywords across lines
 #
 # Template: .claude/skills/writing-pull-requests/templates/check-closing-keyword-across-lines.yml
 # in UAMS-Web/uams-claude-skills, copied to .github/workflows/check-closing-keyword-across-lines.yml.
-# This header is the only part a repository may change. The synced-files skill's
-# check-workflow-copies.mjs fails when the rest differs from the template. The script it
+# The template owns the whole copy, this header included. The synced-files skill's
+# check-workflow-copies.mjs fails when the copy differs from the template. The script it
 # runs ships in the same skill, so no repository file is needed beyond the synced .claude/
 # tree.
 #
@@ -23,9 +23,13 @@ name: Check closing keywords across lines
 # the point: a body can take on the pair when the pull request opens and through any later
 # edit.
 #
-# Deliberately NOT gated on RUN_REMOTE_CI, for the same reason as `clear-handed-back.yml`:
-# that switch is off for months at a time. The job is one checkout, one API read and one Node
-# script with no dependencies.
+# Gated on RUN_REMOTE_CI like the rest of CI: the job carries
+# `if: vars.RUN_REMOTE_CI != 'false'`, so a private repository, where the variable is
+# `false`, skips it before a runner is dispatched and bills no minutes, and a public
+# repository, where the variable is unset, runs it as before. A skipped job reports
+# `skipped`, and GitHub counts a skipped required check as success, so a skipped run is
+# not a passing run: nothing has read the pull request while the switch is off. A copy
+# matches its template in full, header included, and the sync rewrites it from the template.
 #
 # The job name, `Closing keywords`, is a required status check context in the repository's
 # ruleset, the same in every repository. Renaming it means changing the ruleset.
@@ -40,6 +44,7 @@ permissions: {}
 jobs:
   check:
     name: Closing keywords
+    if: vars.RUN_REMOTE_CI != 'false'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:

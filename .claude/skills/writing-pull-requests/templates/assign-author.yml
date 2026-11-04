@@ -7,8 +7,8 @@ name: Assign author
 #
 # Template: .claude/skills/writing-pull-requests/templates/assign-author.yml in
 # UAMS-Web/uams-claude-skills, copied to .github/workflows/assign-author.yml.
-# This header is the only part a repository may change. The synced-files skill's
-# check-workflow-copies.mjs fails when the rest differs from the template.
+# The template owns the whole copy, this header included. The synced-files skill's
+# check-workflow-copies.mjs fails when the copy differs from the template.
 #
 # - `opened` assigns the pull request itself.
 # - `closed` with `merged` true assigns every same-repository issue in the pull
@@ -19,8 +19,13 @@ name: Assign author
 # the contributor, so a default assignee left on a ticket is exactly what this
 # exists to correct.
 #
-# Deliberately NOT gated on RUN_REMOTE_CI, like `clear-handed-back.yml`: that
-# switch is off for months at a time, and the job is a few API calls.
+# Gated on RUN_REMOTE_CI like the rest of CI: the job carries
+# `if: vars.RUN_REMOTE_CI != 'false'`, so a private repository, where the variable is
+# `false`, skips it before a runner is dispatched and bills no minutes, and a public
+# repository, where the variable is unset, runs it as before. A skipped job reports
+# `skipped`, and GitHub counts a skipped required check as success, so a skipped run is
+# not a passing run: nothing is assigned while the switch is off. A copy matches
+# its template in full, header included, and the sync rewrites it from the template.
 #
 # Three bounds. `closingIssuesReferences` is what the pull request DECLARES: an
 # issue closed only by a keyword in a commit message is not in it, so it is not
@@ -41,7 +46,8 @@ permissions: {}
 jobs:
   assign:
     if: >-
-      github.event.pull_request.user.type != 'Bot'
+      vars.RUN_REMOTE_CI != 'false'
+      && github.event.pull_request.user.type != 'Bot'
       && (github.event.action == 'opened'
       || (github.event.action == 'closed' && github.event.pull_request.merged == true))
     runs-on: ubuntu-latest
