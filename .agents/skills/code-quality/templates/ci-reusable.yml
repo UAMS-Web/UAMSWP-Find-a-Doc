@@ -1,0 +1,550 @@
+name: CI chain
+
+# cspell:ignore vitest
+# vitest is the name of an input and of the tool it switches on, so it cannot be reworded.
+
+# Template: .claude/skills/code-quality/templates/ci-reusable.yml in UAMS-Web/uams-claude-skills,
+# published as .github/workflows/ci.yml in UAMS-Web/uams-ci-workflows (UAMS-Web/uams-claude-skills#485).
+# A repository calls it from its own ci.yml with `uses:` and pins a tag or a commit, so it takes a change
+# when it chooses to. The caller keeps a job named `CI` that `needs:` the call, so the context a ruleset
+# requires stays `CI` (UAMS-Web/uams-claude-skills#476):
+#
+#   jobs:
+#     checks:
+#       uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@<tag or commit>
+#     ci:
+#       name: CI
+#       needs: [checks]
+#       if: always()
+#       ...
+#
+# A job called this way reports its check as `<caller job id> / <called job id>` (UAMS-Web/uams-claude-skills#476).
+#
+# What the caller must carry itself, because every job checks out the caller's repository:
+# `.github/actions/setup/action.yml` (the composite action from setup-action.yml), the synced `.claude/skills/`
+# scripts these jobs run, and the Composer scripts `test:pint`, `test:refactor`, `stan`, `test` and `mutate`.
+# A job's steps are the ones in ci.yml; this file differs in two ways: the legs are inputs, and the optional jobs
+# at the end run a command the caller names.
+#
+# Operating systems (UAMS-Web/uams-claude-skills#438, #454): every job runs as a matrix over `os`. The
+# Windows and macOS legs of a job classified for one runner are off, and of a job classified for all three are
+# on, until the caller says otherwise:
+#
+# - `linux-only: true` turns the Windows and macOS legs off for every job.
+# - `all-platform-jobs` is a space-separated list of job ids kept on all three runners whatever else is set:
+#   a job classified Linux only gains its Windows and macOS legs, and a job classified for all three keeps them
+#   under `linux-only`.
+#
+# Each job carries a `# Legs:` line saying which classification it has and why; scripts/check-templates.mjs
+# fails this template when a job is unclassified, when a job's matrix is not the one its classification
+# requires, or when the final `result` job does not need every job. The code-quality skill's "Which jobs run
+# on which operating system" section holds the evidence. A job with no recorded evidence runs on all three.
+#
+# The four optional jobs (`encoding-guard`, `vitest`, `vite-build`, `mutation-smoke`) are off unless the caller
+# turns them on, and each runs a command the caller supplies. `encoding-guard` and `vite-build` are Linux only,
+# `vitest` and `mutation-smoke` run on all three, on the seeded-fault evidence in
+# UAMS-Web/uams-claude-skills#478 (see the code-quality skill).
+#
+# The final `result` job `needs:` every job, runs `if: always()`, and fails unless each needed job succeeded.
+# A needed job reports `skipped` only when its input switched it off, and that is the one skip it accepts.
+
+on:
+  workflow_call:
+    inputs:
+      linux-only:
+        description: Run every job on ubuntu-latest only, except the jobs named in all-platform-jobs.
+        type: boolean
+        default: false
+      all-platform-jobs:
+        description: Space-separated job ids to run on all three runners whatever linux-only says.
+        type: string
+        default: ''
+      share-floor-seconds:
+        description: The summed class time, in seconds, below which the pest job's Slowest class step skips its share check (UAMS-Web/uams-claude-skills#505). 0 never skips it.
+        type: number
+        default: 10
+      mutate-paths:
+        description: Space-separated paths the mutate job selects changed PHP files from, the paths `composer mutate` passes to --path.
+        type: string
+        default: src
+      encoding-guard:
+        description: Run the encoding-guard job, which runs encoding-guard-command.
+        type: boolean
+        default: false
+      encoding-guard-command:
+        description: The shell command the encoding-guard job runs after a locked Composer install.
+        type: string
+        default: ''
+      vitest:
+        description: Run the vitest job, which runs vitest-command after npm ci.
+        type: boolean
+        default: false
+      vitest-command:
+        description: The command the vitest job runs.
+        type: string
+        default: npm run test:js
+      vite-build:
+        description: Run the vite-build job, which runs vite-build-command after a locked Composer install and npm ci.
+        type: boolean
+        default: false
+      vite-build-command:
+        description: The command the vite-build job runs.
+        type: string
+        default: npm run build
+      mutation-smoke:
+        description: Run the mutation-smoke job, which runs mutation-smoke-command with PCOV loaded.
+        type: boolean
+        default: false
+      mutation-smoke-command:
+        description: The shell command the mutation-smoke job runs after a locked Composer install.
+        type: string
+        default: ''
+      npm-version:
+        description: An npm version range to install globally before npm ci in the Node jobs; empty keeps the one Node ships.
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  composer-validate:
+    name: Composer validate (composer.lock freshness) (${{ matrix.os }})
+    # Legs: Linux only. It compares composer.json and composer.lock, which read the same on any platform.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' composer-validate ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+
+      # Fails when composer.json and composer.lock have drifted apart.
+      - run: composer validate --no-check-publish --no-check-all
+
+  synced-files:
+    name: Synced files (no hand-edited rules or skills) (${{ matrix.os }})
+    # Legs: Linux only. It hashes tracked files against the sync manifest; the repository pins line endings, so the bytes match on every platform.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' synced-files ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Fails, naming the file, when a synced rule or skill was edited by hand.
+      - run: node .claude/skills/synced-files/scripts/check-synced-files.mjs
+
+  no-emoji:
+    name: No emoji in durable records (${{ matrix.os }})
+    # Legs: Linux only. It sweeps tracked prose for banned code points with Node alone; no platform branch in the script.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' no-emoji ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Fails, naming the file, line and code point, when prose carries a banned glyph.
+      - run: node .claude/skills/writing-comments/scripts/check-no-emoji.mjs
+
+  aggregate-needs:
+    name: Aggregate needs (${{ matrix.os }})
+    # Legs: Linux only. It parses the workflow files and the allow-list with Node alone; no platform branch in the script.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' aggregate-needs ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Fails, naming the job, when a job is missing from the `needs:` list of `CI` or a
+      # fixed required name is reported by no job. Allow-list: .github/aggregate-needs-allow.json.
+      - run: node .claude/skills/code-quality/scripts/check-aggregate-needs.mjs
+
+  pint:
+    name: Pint (${{ matrix.os }})
+    needs: [composer-validate, synced-files]
+    # Legs: Linux only. Pint formats PHP source and reads the same rules on any platform.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' pint ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: composer test:pint
+
+  rector:
+    name: Rector (${{ matrix.os }})
+    needs: [pint]
+    # Legs: Linux only. Rector reads PHP source and its own config; the result does not depend on the platform.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' rector ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: composer test:refactor
+
+  phpstan:
+    name: PHPStan (${{ matrix.os }})
+    needs: [pint]
+    # Legs: Linux only. PHPStan analyses PHP source; the result does not depend on the platform.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' phpstan ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: composer stan
+
+  mutate-ignore:
+    name: Mutation annotations (none inert) (${{ matrix.os }})
+    needs: [pint]
+    # Legs: all three. The check has a branch for a CRLF runtime, and a Windows checkout can be CRLF.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(inputs.linux-only && !contains(format(' {0} ', inputs.all-platform-jobs), ' mutate-ignore ') && '["ubuntu-latest"]' || '["ubuntu-latest","windows-latest","macos-latest"]') }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+
+      # Fails, naming the file and line, on a bare marker, a tail that names no mutator,
+      # prose after a mutator list, and (on a CRLF runtime) a trailing marker. Prints the
+      # plugin revision its parsing model was measured against.
+      - run: php .claude/skills/pest-testing/scripts/check-mutate-ignore.php
+
+  mutate:
+    name: Mutation score (changed files, with PCOV) (${{ matrix.os }})
+    needs: [rector, phpstan]
+    # Legs: all three. Mutation tooling has needed Windows-only patches, and the PCOV driver is installed per platform.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(inputs.linux-only && !contains(format(' {0} ', inputs.all-platform-jobs), ' mutate ') && '["ubuntu-latest"]' || '["ubuntu-latest","windows-latest","macos-latest"]') }}
+    timeout-minutes: 45
+    # An explicit `bash` runs each step with `-eo pipefail`; the default, `bash -e`, does not,
+    # and the run step's `| tee` would then report tee's status in place of Pest's.
+    defaults:
+      run:
+        shell: bash
+    steps:
+      # Depth 2: on a pull request the checkout is GitHub's merge commit, and its first parent
+      # is the base branch it was merged onto.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+      - uses: ./.github/actions/setup
+        with:
+          coverage: pcov
+
+      # On a pull request, mutate only the PHP files under mutate-paths that the pull request
+      # adds, changes or renames. They are read from the merge commit against its first parent,
+      # so a later change on the base branch is not counted. A pull request that changes none
+      # passes with the reason printed. A push mutates everything `composer mutate` covers.
+      - name: Select the files to mutate
+        id: select
+        env:
+          EVENT: ${{ github.event_name }}
+          MUTATE_PATHS: ${{ inputs.mutate-paths }}
+        run: |
+          if [ "$EVENT" != "pull_request" ]; then
+            echo "mode=full" >> "$GITHUB_OUTPUT"
+            echo "Not a pull request: mutating everything composer mutate covers."
+            exit 0
+          fi
+          if ! git rev-parse --verify --quiet HEAD^2 > /dev/null; then
+            echo "::error::HEAD is not a merge commit, so the pull request's changes cannot be read."
+            exit 1
+          fi
+          # NUL-separated, so a name git would quote (non-ASCII, a tab) is read as it is
+          list=$(mktemp)
+          git diff -z --name-only --diff-filter=AMR HEAD^1 HEAD -- $MUTATE_PATHS > "$list"
+          files=()
+          while IFS= read -r -d '' f; do
+            [[ "$f" == *.php ]] || continue
+            if [[ "$f" == *,* || "$f" == *$'\n'* ]]; then
+              echo "::error::A changed path holds a comma or a newline, which --path cannot carry: $f"
+              exit 1
+            fi
+            files+=("$f")
+          done < "$list"
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "mode=none" >> "$GITHUB_OUTPUT"
+            echo "No PHP file under $MUTATE_PATHS is added or changed by this pull request, so there is nothing to mutate."
+            exit 0
+          fi
+          echo "Mutating ${#files[@]} changed file(s):"
+          printf '%s\n' "${files[@]}"
+          echo "mode=changed" >> "$GITHUB_OUTPUT"
+          echo "paths=$(IFS=,; echo "${files[*]}")" >> "$GITHUB_OUTPUT"
+
+      # `--min=100` makes Pest fail the step on any survivor. The run is kept in a log
+      # because a run that mutated nothing is a setup failure that Pest's exit status
+      # reports or not depending on its version and `ignore_min_score_on_zero_mutations`.
+      # Bash runs this step with pipefail, so `tee` does not hide Pest's status. A later
+      # `--path` replaces the one `composer mutate` passes. On changed files, zero mutants is
+      # left to the check step, so Pest is told not to fail it.
+      - name: Run mutation testing
+        if: steps.select.outputs.mode != 'none'
+        env:
+          MODE: ${{ steps.select.outputs.mode }}
+          PATHS: ${{ steps.select.outputs.paths }}
+        run: |
+          if [ "$MODE" = "changed" ]; then
+            composer mutate -- --min=100 --ignore-min-score-on-zero-mutations --path="$PATHS" 2>&1 | tee mutate.log
+          else
+            composer mutate -- --min=100 2>&1 | tee mutate.log
+          fi
+
+      # Reads the log, not the exit status: fails on zero mutants, and on any untested,
+      # uncovered, pending or timed-out mutant. Runs even when the step above failed, so the
+      # log's own account of the failure is printed; skipped only when nothing was selected.
+      # One exception: changed files that exist, mutated with PCOV loaded, that produce zero
+      # mutants hold no code a mutator changes (an interface, say), which is a pass. Zero
+      # mutants on a full run, or with no PCOV, still fails.
+      - name: Check the mutation run
+        if: always() && steps.select.outputs.mode != 'none'
+        env:
+          MODE: ${{ steps.select.outputs.mode }}
+        run: |
+          if [ "$MODE" = "changed" ] && sed "s/$(printf '\033')\[[0-9;]*m//g" mutate.log | grep -Eq '(^|[^0-9])0 Mutations for 0 Files created' \
+            && php -r 'exit(extension_loaded("pcov") && ini_get("pcov.enabled") ? 0 : 1);'; then
+            echo "The changed files produced no mutants: they hold no code a mutator changes, so there is nothing to test."
+            exit 0
+          fi
+          php .claude/skills/pest-testing/scripts/check-mutation-run.php mutate.log
+
+  pest:
+    name: Pest (${{ matrix.os }})
+    needs: [rector, phpstan]
+    # Legs: all three. The suite is what runs on the platforms the code ships to: paths, command-line length, BSD tools, case-insensitive file systems.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(inputs.linux-only && !contains(format(' {0} ', inputs.all-platform-jobs), ' pest ') && '["ubuntu-latest"]' || '["ubuntu-latest","windows-latest","macos-latest"]') }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+
+      # Optional: delete this step in a repository that does not run `pest --parallel`.
+      - name: Global test symbols
+        run: php .claude/skills/pest-testing/scripts/check-global-test-symbols.php tests
+
+      # `composer test` passes the extra argument to Pest, which writes the JUnit report the two
+      # checks below read. The checks run after the tests whether or not they passed, but not on
+      # a cancelled run, so a test failure is reported by the tests and a missing or empty
+      # report is reported by the checks.
+      - name: Pest
+        run: composer test -- --log-junit=junit.xml
+
+      # Fails when more tests were skipped than tests/skip-baseline.json records.
+      - name: Skip baseline
+        if: ${{ !cancelled() }}
+        run: php .claude/skills/pest-testing/scripts/check-skip-baseline.php --report=junit.xml --baseline=tests/skip-baseline.json
+
+      # Fails when one class takes over 25 percent of the summed class time, or over 900 seconds.
+      # The share check is skipped, and the step says so, when the summed class time is under the
+      # share-floor-seconds input; the 900-second backstop is checked either way.
+      - name: Slowest class
+        if: ${{ !cancelled() }}
+        run: php .claude/skills/pest-testing/scripts/check-slowest-class.php --report=junit.xml --share-ceiling=25 --ceiling=900 --share-floor=${{ inputs.share-floor-seconds }}
+
+  encoding-guard:
+    name: Encoding guard (${{ matrix.os }})
+    if: inputs.encoding-guard
+    needs: [pint]
+    # Legs: Linux only. Seeded fault failed on all three platforms and the control passed on all three (UAMS-Web/uams-claude-skills#478), so one platform sees what three do.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' encoding-guard ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # An empty command is a configuration error and fails, never a silent pass.
+      - name: Run the encoding guard
+        env:
+          COMMAND: ${{ inputs.encoding-guard-command }}
+        run: |
+          if [ -z "$COMMAND" ]; then echo "::error::encoding-guard is on but encoding-guard-command is empty"; exit 1; fi
+          bash -c "$COMMAND"
+
+  vitest:
+    name: JS unit tests (${{ matrix.os }})
+    if: inputs.vitest
+    needs: [pint]
+    # Legs: all three. Evidence (UAMS-Web/uams-claude-skills#478): the suite is platform-gated, Windows skips 10 tests and the others 5, so the job runs different tests per platform. Suites can fork real git and Node processes, and durations differ by machine.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(inputs.linux-only && !contains(format(' {0} ', inputs.all-platform-jobs), ' vitest ') && '["ubuntu-latest"]' || '["ubuntu-latest","windows-latest","macos-latest"]') }}
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Pin npm
+        if: inputs.npm-version != ''
+        env:
+          NPM_VERSION: ${{ inputs.npm-version }}
+        run: npm install -g "npm@$NPM_VERSION"
+
+      - run: npm ci
+
+      - name: Run the JS unit tests
+        env:
+          COMMAND: ${{ inputs.vitest-command }}
+        run: bash -c "$COMMAND"
+
+  vite-build:
+    name: Vite build (${{ matrix.os }})
+    if: inputs.vite-build
+    needs: [pint]
+    # Legs: Linux only. Seeded fault failed on all three platforms and the control passed on all three (UAMS-Web/uams-claude-skills#478), so one platform sees what three do.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' vite-build ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Pin npm
+        if: inputs.npm-version != ''
+        env:
+          NPM_VERSION: ${{ inputs.npm-version }}
+        run: npm install -g "npm@$NPM_VERSION"
+
+      - run: npm ci
+
+      - name: Build the assets
+        env:
+          COMMAND: ${{ inputs.vite-build-command }}
+        run: bash -c "$COMMAND"
+
+  mutation-smoke:
+    name: Mutation tooling smoke (${{ matrix.os }})
+    if: inputs.mutation-smoke
+    needs: [rector]
+    # Legs: all three. Evidence (UAMS-Web/uams-claude-skills#478): the seeded fault failed on all three platforms, but this tool's past defects were Windows-only, so the job stays on three. It gates the mutation tooling, which authors run on Windows and macOS workstations, and PCOV is installed per platform.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(inputs.linux-only && !contains(format(' {0} ', inputs.all-platform-jobs), ' mutation-smoke ') && '["ubuntu-latest"]' || '["ubuntu-latest","windows-latest","macos-latest"]') }}
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+        with:
+          coverage: pcov
+
+      - name: Run the mutation-tooling smoke
+        env:
+          COMMAND: ${{ inputs.mutation-smoke-command }}
+        run: |
+          if [ -z "$COMMAND" ]; then echo "::error::mutation-smoke is on but mutation-smoke-command is empty"; exit 1; fi
+          bash -c "$COMMAND"
+
+  # The one job that reads every other job's result. Keep `needs:` listing every other job in the
+  # file; scripts/check-templates.mjs in UAMS-Web/uams-claude-skills checks it.
+  result:
+    name: Chain result
+    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, pint, rector, phpstan, mutate-ignore, mutate, pest, encoding-guard, vitest, vite-build, mutation-smoke]
+    if: always()
+    # Legs: Linux only. It reads job results with jq.
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # `skipped` and `cancelled` fail as well as `failure`, except that an optional job its input
+      # switched off is `skipped` by design.
+      - name: Every needed job succeeded
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+          SWITCHED_OFF: ${{ format('{0}{1}{2}{3}', !inputs.encoding-guard && 'encoding-guard ' || '', !inputs.vitest && 'vitest ' || '', !inputs.vite-build && 'vite-build ' || '', !inputs.mutation-smoke && 'mutation-smoke ' || '') }}
+        run: |
+          results=$(echo "$NEEDS" | jq -r 'to_entries[] | "\(.key) \(.value.result)"')
+          echo "Needed job results:"
+          echo "$results"
+          # An empty list (an emptied `needs:`, a dropped `env:`) would run no iterations and pass having read nothing.
+          if [ -z "$results" ]; then echo "::error::No needed job results to read"; exit 1; fi
+          failed=0
+          while read -r id result; do
+            if [ "$result" = "success" ]; then continue; fi
+            if [ "$result" = "skipped" ] && [[ " $SWITCHED_OFF" == *" $id "* ]]; then continue; fi
+            echo "::error::$id reported $result"
+            failed=1
+          done <<< "$results"
+          exit "$failed"

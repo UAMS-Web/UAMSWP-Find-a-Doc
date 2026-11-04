@@ -1,0 +1,6 @@
+{
+    "value_type": "multi_select",
+    "required": false,
+    "description": "Atomic required-checks rulesets the repository receives: pr-body requires Attribution footer and Closing keywords, ci-aggregate requires CI.",
+    "allowed_values": ["pr-body", "ci-aggregate"]
+}

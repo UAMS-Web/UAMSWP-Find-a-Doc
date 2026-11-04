@@ -56,7 +56,7 @@ properties, first-class callable syntax (8.1); `readonly` classes (8.2); typed c
 `#[\Override]`, `json_validate()`, dynamic class constant fetch (8.3); asymmetric visibility,
 property hooks (8.4). Use each only where the repository's PHP constraint allows.
 
-The WordPress plugins span a wide range of floors: `uamswp-migration-api` requires `^8.2`, while
+The WordPress plugins span a wide range of floors: `aether-wordpress-migration-api` requires `^8.2`, while
 `uamswp-mcp` (`>=7.4`) and `uamswp-restrict-user-enumeration` (`>=7.0`) still support PHP 7.x.
 Check the plugin header's `Requires PHP` and `composer.json` before using anything above 7.4, and
 treat a typed class constant, an enum, or a first-class callable as unavailable until you have.
@@ -64,7 +64,7 @@ treat a typed class constant, an enum, or a first-class callable as unavailable 
 ## 2. File preamble
 
 Where the repository's `pint.json` enables Pint's `declare_strict_types` rule (`uams-statamic`
-and `uamswp-migration-api` do), every first-party PHP file opens the same way: the opening tag, a
+and `aether-wordpress-migration-api` do), every first-party PHP file opens the same way: the opening tag, a
 file-level docblock where the repository uses them, `declare(strict_types=1);`, then the
 namespace.
 
@@ -77,10 +77,10 @@ namespace.
 
 declare(strict_types=1);
 
-namespace UAMSWP\MigrationAPI;
+namespace UAMSWeb\Aether\WordPressImporter\MigrationApi;
 ```
 
-Where the repository does not enable that rule (`wordpress-importer` runs the `laravel` preset
+Where the repository does not enable that rule (`aether-wordpress-importer` runs the `laravel` preset
 with no `pint.json`), do not introduce the declaration one file at a time; enabling it is a
 repository decision made once in `pint.json`, which then adds it everywhere.
 
@@ -309,7 +309,7 @@ use Illuminate\Support\Facades\Log;
 use Statamic\Entries\Entry as StatamicEntry;
 use Statamic\Facades\Entry;
 use function Laravel\Prompts\confirm;
-use const UAMSWP\MigrationAPI\REST_NAMESPACE;
+use const UAMSWeb\Aether\WordPressImporter\MigrationApi\REST_NAMESPACE;
 ```
 
 ### WordPress overrides: the namespace rules that bite
