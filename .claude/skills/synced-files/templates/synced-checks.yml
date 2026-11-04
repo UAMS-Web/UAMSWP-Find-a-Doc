@@ -1,0 +1,95 @@
+name: Synced checks
+
+# cspell:ignore shivammathur
+
+# Delivered by the sync, not copied by hand. The sync writes this file into every target that
+# takes the `statamic-package` profile and rewrites it on every run when it differs, so the two
+# jobs below exist from a repository's first sync and cannot drift from the files they check.
+# A hand edit is overwritten by the next sync: change the template in UAMS-Web/uams-claude-skills,
+# `shared/.claude/skills/synced-files/templates/synced-checks.yml`, and let the sync bring it.
+#
+# - `Synced files (no hand-edited rules or skills)` runs the synced-files skill's checker, which
+#   fails, naming the file, when a file the sync manages was edited by hand.
+# - `Mutation instrument (a mutant child can launch)` runs the pcov-setup skill's check, which
+#   fails when `pest --mutate` could not launch a mutant child. Such a run scores every mutant
+#   killed, so a green mutation score would mean nothing. It installs the locked dependencies
+#   itself and calls the delivered script directly, so it needs no composer script and no
+#   composite action in the repository. A repository that defines a `test:mutation-instrument`
+#   composer script runs that script instead, which is how it scopes the probe child to the
+#   suites its own mutation run uses (UAMS-Web/uams-claude-skills#463).
+#
+# Both job names are required-status-check contexts in the repository's ruleset, by that exact
+# string, and match the names the add-ons' own `ci.yml` copies already carry. Renaming a job here
+# means changing every ruleset that requires it. Job names must stay unique across the workflows
+# in a repository: remove a repository's own copy of either job from its `ci.yml` once this file
+# has landed there, or two jobs report the same context.
+#
+# Gated on RUN_REMOTE_CI like the rest of CI: each job carries
+# `if: vars.RUN_REMOTE_CI != 'false'`, so a private repository, where the variable is `false`,
+# skips it before a runner is dispatched and bills no minutes, and a public repository, where
+# the variable is unset, runs it as before. A skipped job reports `skipped`, and GitHub counts a
+# skipped required check as success, so a skipped run is not a passing run: nothing has checked
+# the repository while the switch is off.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  # Lets the workflow be run on demand against a branch.
+  workflow_dispatch:
+
+# A new push to a pull request cancels that pull request's stale run. A push to the default
+# branch gets a group of its own, keyed on the commit, so a later push never cancels it. A shared
+# push group would: GitHub keeps one running and one pending run per group and cancels the
+# pending one when another is queued, whatever `cancel-in-progress` says, so a merge landing
+# during a long run would cancel the previous merge's run before it started a job.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  synced-files:
+    name: Synced files (no hand-edited rules or skills)
+    if: vars.RUN_REMOTE_CI != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Fails, naming the file, when a synced rule or skill was edited by hand.
+      - run: node .claude/skills/synced-files/scripts/check-synced-files.mjs
+
+  mutation-instrument:
+    name: Mutation instrument (a mutant child can launch)
+    if: vars.RUN_REMOTE_CI != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+
+      - run: composer install --no-interaction --no-progress --prefer-dist
+
+      # Fails when a mutant child cannot be launched, which would score every mutant killed.
+      # A repository whose bare `vendor/bin/pest` cannot run its whole suite (a host-bound Feature
+      # suite, for one) defines a `test:mutation-instrument` composer script that passes
+      # `--arg=` to the script, naming the suites its mutation run uses; this step runs that
+      # script when it exists and the delivered script directly otherwise.
+      - run: |
+          if grep -q '"test:mutation-instrument"' composer.json; then
+            composer test:mutation-instrument
+          else
+            php .claude/skills/pcov-setup/scripts/check-mutation-instrument.php
+          fi

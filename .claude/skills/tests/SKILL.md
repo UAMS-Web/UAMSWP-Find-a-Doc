@@ -41,7 +41,7 @@ A repository develops and tests on one PHP, and that is not the oldest PHP it su
 
 **The floor in every WordPress repository is PHP 8.2**, the oldest PHP any UAMS WordPress site runs, with no per-repository exception (UAMS-Web/uams-claude-skills#126). A WordPress repository whose header or `composer.json` names a lower floor raises it to 8.2 when it adopts this standard.
 
-**Every WordPress repository develops on PHP 8.4.1 and runs Pest 5.** `config.platform.php` is `8.4.1`, because every PHPUnit 13 release, which Pest 5.3 requires, needs `php >=8.4.1`; the pin also keeps Composer from resolving for a newer PHP than a teammate has. `local-ci.json`'s `php` is `8.4`. Any PHP 8.4.1 or newer installs and runs the suite.
+**Every WordPress repository develops on the latest PHP 8.4 patch, 8.4.27 today, and runs Pest 5.** `config.platform.php` is `8.4.27`, and it is raised on each 8.4 security release, here and in each repository's `composer.json` and lock (UAMS-Web/uams-claude-skills#394). It can never go below 8.4.1, because every PHPUnit 13 release, which Pest 5.3 requires, needs `php >=8.4.1`. The pin also keeps Composer from resolving for a newer PHP than a teammate has. `local-ci.json`'s `php` is `8.4`, and the local CI runner refuses, before any job, a PHP older than `config.platform.php`; a job with a `php` of its own, such as the floor lint, is not held to it.
 
 Outside WordPress, the development PHP is the one the repository's servers and developers run, never below the floor; a Laravel or Statamic application usually has one PHP for both. Choose the newest Pest major that PHP allows (repo.packagist.org, 2026-10-07):
 
@@ -376,7 +376,7 @@ The per-test conversion process (time the original, convert and audit, mutation-
 
 ## Running the suite before a pull request
 
-The GitHub Actions form of the suite job is the `pest` job in the `code-quality` skill's `templates/ci.yml`, chained after the lint jobs and sharing its composite setup action; a repository that runs Pest in Actions copies that template rather than writing the job again.
+The GitHub Actions form of the suite job is the `pest` job in the `code-quality` skill's `templates/ci-reusable.yml` (the shared workflow that `templates/ci.yml` calls), chained after the lint jobs and sharing its composite setup action; a repository that runs Pest in Actions copies that template rather than writing the job again.
 
 **In a public repository whose `ci.yml` runs the suite, run nothing locally before opening the pull request**: open it as a draft, and its remote run is the pre-PR check. Flip it to ready once every remote check on its head is green, and fix a red one by pushing to the same branch. Run a test locally while writing it, and keep a local run of the suite for the cases remote CI cannot cover: a change whose criteria name Windows or another platform it does not run, the full mutation run a coverage ticket records, and a run that needs a loaded WordPress install or the importer's host application. The [`writing-pull-requests`](../writing-pull-requests/SKILL.md) skill's *Draft state and merge order* owns this, and the pre-merge validation of a ready pull request is unchanged. The rest of this section applies where the suite has no remote run: a private repository, or a public one with no `ci.yml`.
 
