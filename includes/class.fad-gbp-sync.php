@@ -46,7 +46,7 @@ final class UAMSWP_FAD_GBP_Sync
 
     /**
      * @param  object  $client  Provides patch() and create(), as UAMSWP_FAD_GBP_Client does.
-     * @param  array{silos: array<string, array<string, mixed>>, modes: array<string, string>, is_production: bool, creates_paused_until?: int, creates_left?: ?int, now?: int, clock?: callable(): int}  $config  The last three
+     * @param  array{silos: array<string, array<string, mixed>>, modes: array<string, string>, is_production: bool, creates_paused_until?: int, creates_left?: ?int, now?: int, clock?: callable(): int}  $config  `creates_paused_until`, `creates_left`, `now` and `clock`
      *                                                                                                                                                                                                             describe Google's daily create quota: a pause in force, the creates still allowed today, and the clock.
      *                                                                                                                                                                                                             `now` is the run's start; `clock` stamps each create as it is sent (default: the current time).
      * @param  array<string, array<int, array{account: string, listing: array<string, mixed>}>>  $index  From self::build_index().
