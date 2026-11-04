@@ -801,7 +801,7 @@ function uamswp_fad_gbp_after_run(UAMSWP_FAD_GBP_Sync $sync, array $entries, ?in
             update_option(UAMSWP_FAD_GBP_COUNT_OPTION, ['day' => $day, 'count' => $before + $day_made], false);
 
             $history = get_option(UAMSWP_FAD_GBP_HISTORY_OPTION, []);
-            update_option(UAMSWP_FAD_GBP_HISTORY_OPTION, UAMSWP_FAD_GBP_Logic::add_to_history(is_array($history) ? $history : [], (string) $day, $day_made), false);
+            update_option(UAMSWP_FAD_GBP_HISTORY_OPTION, UAMSWP_FAD_GBP_Logic::add_to_history(is_array($history) ? $history : [], $day, $day_made), false);
         }
     }
 
