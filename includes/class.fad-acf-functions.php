@@ -3361,3 +3361,12 @@ unset($uamswp_workday_id_key);
  * uamswp_provider_null_empty_value() in class.fad-provider-nullable-fields.php.
  */
 add_filter('acfcdt/filter_value_before_update', 'uamswp_provider_null_empty_value', 10, 3);
+
+/**
+ * Show a provider's saved fields in a preview.
+ *
+ * ACF swaps the post for its latest revision during a preview, and the revision has no row in the provider
+ * custom table. Priority 20 runs after ACF's own handler (10). See uamswp_fad_preview_keep_saved_post_id()
+ * in class.fad-provider-preview.php.
+ */
+add_filter('acf/validate_post_id', 'uamswp_fad_preview_keep_saved_post_id', 20, 2);
