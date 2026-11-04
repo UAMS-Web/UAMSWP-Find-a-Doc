@@ -1,10 +1,13 @@
-<?php 
-session_start();
-defined('ABSPATH') or die("You can't access this file directly.");
+<?php
 
-if(isset($_REQUEST['variable']) && isset($_REQUEST['value'])) {
+declare(strict_types=1);
+
+session_start();
+defined('ABSPATH') || exit("You can't access this file directly.");
+
+if (isset($_REQUEST['variable']) && isset($_REQUEST['value'])) {
     $variable = htmlspecialchars($_REQUEST['variable']);
     $value = htmlspecialchars($_REQUEST['value']);
     $_SESSION[$variable] = $value;
-    echo ( 'Session: ' .$variable .'; Value: '. $_SESSION[$variable] .';' );
+    echo 'Session: '.$variable.'; Value: '.$_SESSION[$variable].';';
 }
