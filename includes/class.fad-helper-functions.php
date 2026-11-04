@@ -401,14 +401,14 @@ if (! function_exists('uamswp_provider_name_html')) {
  * Shared provider-derived strings.
  *
  * Extracted verbatim from templates/single-physicians.php, which is the canonical
- * runtime construction of these values. The GMB call sites
- * (includes/class.fad-gmb-settings-page.php, templates/gmb-list-provider.php)
- * build superficially similar strings from different sources -- they read the
- * physician_prefix field rather than deriving "Dr." from the degree list, they
- * use the raw clinical_title term name rather than the term's
- * clinical_specialization_title override, and they have no resident special case
- * or indefinite-article exception list. Migrating them onto these helpers would
- * change GMB output, so they are deliberately left alone.
+ * runtime construction of these values. The GMB call site
+ * (includes/class.fad-gmb-settings-page.php)
+ * builds superficially similar strings from different sources -- it reads the
+ * physician_prefix field rather than deriving "Dr." from the degree list, it
+ * uses the raw clinical_title term name rather than the term's
+ * clinical_specialization_title override, and it has no resident special case
+ * or indefinite-article exception list. Migrating it onto these helpers would
+ * change GMB output, so it is deliberately left alone.
  */
 
 // Construct the variants of a provider's name
