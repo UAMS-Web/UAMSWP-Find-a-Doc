@@ -1396,7 +1396,7 @@ while ( have_posts() ) : the_post(); ?>
 												$location_scheduling_item_title_nested = $title['location_scheduling_item_title_nested'];
 												$location_scheduling_item_title_nested = ( isset($location_scheduling_item_title_nested) && !empty($location_scheduling_item_title_nested) ) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
 												?>
-												<option value="<?= $key; ?>"<?php //echo ($key == $provider_title) ? ' selected' : ''; ?>><? echo $location_scheduling_item_title_nested; ?></option>
+												<option value="<?= $key; ?>"<?php //echo ($key == $provider_title) ? ' selected' : ''; ?>><?php echo $location_scheduling_item_title_nested; ?></option>
 											<?php endforeach; ?>
 										</select>
 										<input type="hidden" id="pid" name="pid" value="<?php echo get_the_id(); ?>">
@@ -1843,7 +1843,7 @@ while ( have_posts() ) : the_post(); ?>
 				</div>
 			</div>
 		</section> -->
-	<? }
+	<?php }
 	// End News Section
 	?>
 </main>
