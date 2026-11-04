@@ -18,10 +18,12 @@
     "postcss-discard-comments": "^5.1.1",
     "sass": "~1.26.11"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jsdom": "^26.1.0"
+  },
   "scripts": {
     "preinstall": "npx npm-force-resolutions@0.0.10",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test \"tests/build/*.test.js\" \"tests/js/*.test.js\""
   },
   "resolutions": {
     "glob-parent": "^5.1.2"
@@ -35,5 +37,9 @@
   "bugs": {
     "url": "https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues"
   },
-  "homepage": "https://github.com/UAMS-Web/UAMSWP-Find-a-Doc#readme"
+  "homepage": "https://github.com/UAMS-Web/UAMSWP-Find-a-Doc#readme",
+  "overrides": {
+    "postcss-merge-rules": "9.0.2",
+    "postcss-minify-gradients": "9.0.1"
+  }
 }
