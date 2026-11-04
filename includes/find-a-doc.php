@@ -22,6 +22,8 @@ function bootstrap(): void
     include_once __DIR__.'/class.fad-templates.php';
     include_once __DIR__.'/class.fad-acf-functions.php'; // ACF specific functions
     include_once __DIR__.'/class.fad-provider-nullable-fields.php'; // Keep unanswered provider fields empty in the custom table
+    include_once __DIR__.'/class.fad-delete-cleanup.php'; // Remove a deleted provider or location from linked records and custom tables
+    include_once __DIR__.'/class.fad-dead-link-cleanup.php'; // Admin screen: remove dead links and orphan custom-table rows left by earlier deletes
     include_once __DIR__.'/class.fad-fwp-functions.php'; // FacetWP specific functions
     include_once __DIR__.'/class.fad-functions.php';
     include_once __DIR__.'/class.fad-settings-pages.php';
@@ -29,4 +31,17 @@ function bootstrap(): void
     include_once __DIR__.'/class.fad-gmb-settings-page.php';
     include_once __DIR__.'/class.fad-editor-groups.php'; // Editor groups: who may edit which providers and locations
     include_once __DIR__.'/class.fad-edit-flow-status.php'; // Edit Flow: status dropdown on published providers and locations
+    include_once __DIR__.'/class.fad-gbp-logic.php'; // Business Profile sync: field mapping, diff, silos
+    include_once __DIR__.'/class.fad-gbp-client.php'; // Business Profile sync: Google API client
+    include_once __DIR__.'/class.fad-gbp-sync.php'; // Business Profile sync: update, create and skip decisions
+    include_once __DIR__.'/class.fad-gbp-runtime.php'; // Business Profile sync: WordPress wiring
+    include_once __DIR__.'/class.fad-gbp-settings.php'; // Business Profile sync: settings screen
+    include_once __DIR__.'/class.fad-gbp-cli.php'; // Business Profile sync: on-demand WP-CLI command
+    include_once __DIR__.'/class.fad-gbp-dashboard.php'; // Business Profile sync: Dashboard status widget
+    include_once __DIR__.'/class.fad-gbp-orphans.php'; // Business Profile sync: orphaned listings report and close
+    \uamswp_fad_gbp_register_hooks();
+    \uamswp_fad_gbp_register_settings_hooks();
+    \uamswp_fad_gbp_register_dashboard_hooks();
+    \uamswp_fad_gbp_register_orphan_hooks();
+    \uamswp_fad_gbp_register_cli();
 }
