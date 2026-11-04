@@ -169,7 +169,7 @@ const DOMAINS = [
       { statamic: 'app/Tags/FormData.php:52: `config(statamic.forms.forms)."/{$handle}.yaml"` from a tag param; traversal only if the handle is bound to request input: verify call sites' },
       { statamic: 'app/Imports/SpreadsheetImport.php: uploaded spreadsheet handling' },
       { statamic: 'app/Console/Commands/AssetsSyncFromYaml.php: globs/reads YAML by name' },
-      { statamic: 'vendor/uams-web/wordpress-importer/src/AssetDownloader.php: writes downloaded assets to disk; check the destination path is derived safely (zip-slip / `../`)' },
+      { statamic: 'vendor/uams-web/aether-wordpress-importer/src/AssetDownloader.php: writes downloaded assets to disk; check the destination path is derived safely (zip-slip / `../`)' },
       { statamic: 'app/Fieldtypes/Signature.php / app/Fieldtypes/Assets.php: stored/attached file paths' },
       { other: 'grep for filesystem calls whose path is built from input: `file_get_contents(`, `fopen(`, `file_put_contents(`, `unlink(`, `readfile(`, `include`/`require` of a variable; check for canonicalization (`realpath()` against an allowed root) or an allowlist' },
       { other: 'archive extraction (`ZipArchive::extractTo(`, `PharData`) and uploaded file names: zip-slip and `../` in an entry or file name' },
@@ -182,8 +182,8 @@ const DOMAINS = [
     guidance:
       'Find outbound HTTP/file fetches whose URL is influenced by import data or input, with no scheme/host allowlist and no block on internal addresses.',
     hotspots: [
-      { statamic: 'vendor/uams-web/wordpress-importer/src/AssetDownloader.php: downloads asset URLs taken from the WXR file (attacker-authored); check scheme/host validation and internal-network blocking' },
-      { statamic: 'vendor/uams-web/wordpress-importer/src/**/*EnumGenerator*.php: `file_get_contents`/Http against registry URLs; check the URLs are hardcoded/allowlisted, not derived from input' },
+      { statamic: 'vendor/uams-web/aether-wordpress-importer/src/AssetDownloader.php: downloads asset URLs taken from the WXR file (attacker-authored); check scheme/host validation and internal-network blocking' },
+      { statamic: 'vendor/uams-web/aether-wordpress-importer/src/**/*EnumGenerator*.php: `file_get_contents`/Http against registry URLs; check the URLs are hardcoded/allowlisted, not derived from input' },
       { statamic: 'app/Services/NewsRelease/NewsReleasePdfGenerator.php Browsershot fetches resources referenced in the rendered HTML' },
       {
         statamic:
@@ -200,9 +200,9 @@ const DOMAINS = [
     guidance:
       'Audit every XML/PDF/spreadsheet/archive parser for external-entity loading and for unbounded expansion (billion-laughs, zip/decompression bombs).',
     hotspots: [
-      { statamic: 'vendor/uams-web/wordpress-importer/src/XmlParser.php: `simplexml_load_file` flags; confirm no LIBXML_NOENT/DTDLOAD' },
-      { statamic: 'vendor/uams-web/wordpress-importer/src/XmlStreamParser.php: `XMLReader::open` with LIBXML_PARSEHUGE (entity-expansion / huge-tree DoS)' },
-      { statamic: 'vendor/uams-web/wordpress-importer/src/ImportWordPress.php: reader flag combinations' },
+      { statamic: 'vendor/uams-web/aether-wordpress-importer/src/XmlParser.php: `simplexml_load_file` flags; confirm no LIBXML_NOENT/DTDLOAD' },
+      { statamic: 'vendor/uams-web/aether-wordpress-importer/src/XmlStreamParser.php: `XMLReader::open` with LIBXML_PARSEHUGE (entity-expansion / huge-tree DoS)' },
+      { statamic: 'vendor/uams-web/aether-wordpress-importer/src/ImportWordPress.php: reader flag combinations' },
       { statamic: 'app/Services/Assets/PdfDocumentMetadataReader.php: smalot/pdfparser on uploaded PDFs (malformed-PDF DoS)' },
       { statamic: 'app/Imports/SpreadsheetImport.php: maatwebsite/excel on uploaded sheets (zip-based formats → decompression bomb / formula concerns)' },
       { other: 'grep for `simplexml_load_string(` / `simplexml_load_file(`, `DOMDocument::loadXML(` / `::load(`, `XMLReader::open(` / `::XML(` and their `LIBXML_*` flags (NOENT and DTDLOAD enable external entities; PARSEHUGE lifts the expansion limits)' },
@@ -265,7 +265,7 @@ const DOMAINS = [
       { other: 'responses, logs and error output: values written to a log or returned in an error that carry request data, credentials or personal data' },
       {
         statamic:
-          'hardcoded secrets: API keys, tokens, passwords and private keys as string literals in code, config, routes, scripts, front-end JS and tests; a real value as the default of `env(\'KEY\', \'...\')` in config; a committed `.env*` other than `.env.example`. In `wordpress-importer` the migration API key is pasted at run time and held nowhere (UAMS-Web/wordpress-importer-archive#982), so a committed value for it is a finding. Check the value is live (a placeholder or a test fixture that authenticates nowhere is info at most)',
+          'hardcoded secrets: API keys, tokens, passwords and private keys as string literals in code, config, routes, scripts, front-end JS and tests; a real value as the default of `env(\'KEY\', \'...\')` in config; a committed `.env*` other than `.env.example`. In `aether-wordpress-importer` the migration API key is pasted at run time and held nowhere (UAMS-Web/wordpress-importer-archive#982), so a committed value for it is a finding. Check the value is live (a placeholder or a test fixture that authenticates nowhere is info at most)',
         other:
           'hardcoded secrets: API keys, tokens, passwords and private keys as string literals in code, config, routes, scripts, front-end JS and tests; a real value as the default of `env(\'KEY\', \'...\')` in config; a committed `.env*` other than `.env.example`. Check the value is live (a placeholder or a test fixture that authenticates nowhere is info at most)',
       },
@@ -281,7 +281,7 @@ const DOMAINS = [
       'grep for `unserialize(`, `eval(`, `call_user_func`, `call_user_func_array`, variable-variables `$$`, `{$...}()` method dispatch, and `__call`/`__get` magic',
       {
         statamic:
-          '`unserialize()` without `[\'allowed_classes\' => false]` (or an explicit class list) on data this code did not write; prefer `json_decode()` for data. `wordpress-importer` unserializes WordPress postmeta from the export routinely, and every call there passes `allowed_classes => false`',
+          '`unserialize()` without `[\'allowed_classes\' => false]` (or an explicit class list) on data this code did not write; prefer `json_decode()` for data. `aether-wordpress-importer` unserializes WordPress postmeta from the export routinely, and every call there passes `allowed_classes => false`',
         other:
           '`unserialize()` without `[\'allowed_classes\' => false]` (or an explicit class list) on data this code did not write; prefer `json_decode()` for data',
       },
@@ -300,7 +300,7 @@ const DOMAINS = [
       'grep for `openssl_encrypt(` / `openssl_decrypt(`: an `-ecb` cipher, an empty or constant IV, or no authentication (no GCM tag, no keyed hash over the encrypted data); Laravel `Crypt::encryptString()` / `encrypt()` is the default to prefer',
       {
         statamic:
-          'grep for `Http::withoutVerifying()`, Guzzle `\'verify\' => false`, `CURLOPT_SSL_VERIFYPEER => false`, `CURLOPT_SSL_VERIFYHOST => 0`, and stream contexts with `verify_peer` / `verify_peer_name` => false, including `wordpress-importer`\'s `OutboundUrlGuard`, `GuardedHttpFetcher` and `GuardedRedirectWalk`; a self-signed dev certificate belongs in the trust store, not a disabled check',
+          'grep for `Http::withoutVerifying()`, Guzzle `\'verify\' => false`, `CURLOPT_SSL_VERIFYPEER => false`, `CURLOPT_SSL_VERIFYHOST => 0`, and stream contexts with `verify_peer` / `verify_peer_name` => false, including `aether-wordpress-importer`\'s `OutboundUrlGuard`, `GuardedHttpFetcher` and `GuardedRedirectWalk`; a self-signed dev certificate belongs in the trust store, not a disabled check',
         other:
           'grep for `Http::withoutVerifying()`, Guzzle `\'verify\' => false`, `CURLOPT_SSL_VERIFYPEER => false`, `CURLOPT_SSL_VERIFYHOST => 0`, and stream contexts with `verify_peer` / `verify_peer_name` => false; a self-signed dev certificate belongs in the trust store, not a disabled check',
       },

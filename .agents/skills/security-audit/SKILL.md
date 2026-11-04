@@ -7,8 +7,9 @@ description: >-
   deserialization, weak crypto and disabled TLS verification, validation/mass-assignment),
   adversarially verifies every candidate against the repository's trust model
   (who-controls-the-input, where auth sits, which output is raw by default), then writes a
-  severity-ranked report. After you review it, it files approved findings as GitHub issues
-  following the project `writing-issues` conventions. Also holds the checklist of insecure code
+  severity-ranked report. After you review it, it files each approved finding: an exploitable,
+  unfixed vulnerability in a public repository as a draft repository security advisory, and
+  anything else as a GitHub issue following the project `writing-issues` conventions. Also holds the checklist of insecure code
   patterns every pass and every diff review searches for: unescaped output, shell execution, code
   evaluation, unsafe deserialization, committed secrets, weak encryption, disabled TLS
   verification, and Actions expression injection. Activate when the user asks to "run a security
@@ -27,7 +28,7 @@ description: >-
 # Security audit (multi-agent, report-first)
 
 A repo-tailored security audit. It runs a bundled multi-agent **workflow** that finds →
-adversarially verifies → triages, hands you a report to review, and only then files issues. The
+adversarially verifies → triages, hands you a report to review, and only then files findings. The
 verification step is the point: most generic framework "findings" are false positives (admin
 surfaces sit behind auth and many flagged sinks turn out sanitized or editor-only), so every
 candidate is checked against the repository's real trust boundaries before it reaches you.
@@ -189,13 +190,63 @@ the markdown you author yourself: links, headings, bullets).
 ### 4. Summarize and offer to file
 
 Print a compact severity table (title · severity · file:line · confidence) and the gaps. Then ask
-which findings to file as issues; **do not file anything without explicit approval.** Offer the
+which findings to file; **do not file anything without explicit approval.** Offer the
 natural groupings: "all confirmed", "confirmed high+", "let me pick", or "none for now".
 
-### 5. File approved findings → GitHub issues
+### 5. File approved findings
 
-For each approved finding, follow the project **`writing-issues`** skill conventions exactly
-(invoke it), filing into this repository:
+**First decide where each finding goes, because an issue in a public repository is public.**
+Anyone can read it, and editing it later does not remove the text: an issue's edit history is
+public too. So the route depends on the repository's visibility and on whether the finding can be
+exploited before a fix ships:
+
+| Finding | Public repository | Private repository |
+| --- | --- | --- |
+| Exploitable and unfixed (a working attack on the code as it stands) | draft security advisory | `security` issue |
+| Hardening with no exploit (missing workflow `permissions`, a defense-in-depth gap) | `security` issue | `security` issue |
+| A dependency raised past a CVE that is already public | `security` issue | `security` issue |
+
+**Telling the first row from the others.** Ask whether the finding's exploit scenario works today,
+for an attacker the trust model admits, against the code people run: the default branch or the
+latest release. If it works against either, it is exploitable and unfixed. A hardening item has no such scenario: it narrows
+what a different defect could do. A dependency CVE is already public, so the issue discloses
+nothing new; it records the move past it. When in doubt, treat a finding as exploitable: a draft
+advisory can be closed and refiled as an issue, and a public issue cannot be taken back.
+
+**An exploitable, unfixed finding in a public repository becomes a draft repository security
+advisory, never an issue.** A draft advisory is visible only to the repository's administrators
+and the collaborators added to it, and a CVE can be requested for it before it is published. Create it through
+REST, with the body in a file:
+
+```bash
+gh api -X POST repos/{owner}/{repo}/security-advisories --input advisory.json
+```
+
+`advisory.json` carries `summary` (the title), `description` (the body below, in Markdown),
+`severity` (`critical`, `high`, `medium` or `low`) or a `cvss_vector_string`, `cwe_ids`
+(`["CWE-79"]`), and `vulnerabilities`, a list whose entries name the `package` (`ecosystem` and
+`name`: `composer` and the package name for a Composer package, `other` and the repository name
+otherwise) with `vulnerable_version_range` and, once known, `patched_versions`. Read back the
+`ghsa_id` and `state` (`draft`) the call returns.
+
+**Build the fix in the advisory's temporary private fork**, not on a branch of the public
+repository, where a branch and its pull request are public before the fix ships. Create the
+fork with `gh api -X POST repos/{owner}/{repo}/security-advisories/<ghsa_id>/forks`, push the fix
+to it, and merge it from the advisory. Publishing the advisory is a maintainer's decision and is
+not part of this step.
+
+**A finding in a private repository is filed as a `security` issue**, because repository
+security advisories are not available there: `GET repos/{owner}/{repo}/security-advisories`
+answers `404` for a private repository and lists the drafts of a public one (measured
+2026-10-29 on `UAMS-Web/uams-claude-skills`, private, and `UAMS-Web/uams-2016`, public). The
+issue is readable only by people with access to the repository. **It stays in the tracker if the
+repository is later made public**, so an open exploitable finding is fixed, or moved to a draft
+advisory after the switch and removed from the issue, before the visibility changes (see the
+`repository-settings` skill's checklist for moving a repository to public).
+
+**Filing an issue.** For each finding routed to an issue, follow the project
+**`writing-issues`** skill conventions exactly (invoke it), filing into this repository. A draft
+advisory's `summary` and `description` follow the same title and body conventions:
 
 - **Title:** imperative, fix-oriented, with inline-code markup, no trailing period
   (e.g. ``Escape `get_param` output before printing into HTML``). For a clear vuln use the bug
@@ -205,21 +256,25 @@ For each approved finding, follow the project **`writing-issues`** skill convent
   `## Acceptance criteria` task-list of observable outcomes **ending in a test item** (a regression
   test that fails on the vuln and passes after the fix). Add `## References` linking the
   absolute-branch file path.
-- **Labels / triage:** apply a severity label and route through the **`triage`** skill's state
+- **Labels / triage (an issue only):** apply a severity label and route through the **`triage`** skill's state
   machine so it lands correctly on the project board. Severity lives in the label; the board takes
   only membership and `Status` (see [`writing-issues`](../writing-issues/SKILL.md)).
+  A draft advisory carries its severity in its own `severity` field and takes no labels; it
+  does not go on the board, which holds issues and pull requests.
 - **NEVER** add the "generated by AI during triage" disclaimer (standing project rule).
 
-**Check for an existing issue first.** Run `writing-issues`' "Check for an existing issue first" step
-before filing each finding: search by *concept*, not title, and include closed issues. For security
-findings, vary the search terms across the vulnerability class / CWE (`SSRF`, `XSS`, `CWE-79`), the
-affected file / symbol, and a symptom phrase. Link/skip any match instead of opening a duplicate.
+**Check for an existing issue or advisory first.** Run `writing-issues`' "Check for an existing
+issue first" step before filing each finding, and in a public repository also list the drafts
+(`gh api repos/{owner}/{repo}/security-advisories'?state=draft&per_page=100'`): search by
+*concept*, not title, and include closed issues. For security findings, vary the search terms
+across the vulnerability class / CWE (`SSRF`, `XSS`, `CWE-79`), the affected file / symbol, and a
+symptom phrase. Link/skip any match instead of opening a duplicate.
 
 ## Guardrails
 
 - **Read-only.** This audit performs static analysis only. Do not modify source, run the app, or
-  execute an import to "prove" a finding. Dynamic confirmation belongs in the issue's
-  reproduction steps, run deliberately by a human or a follow-up task.
+  execute an import to "prove" a finding. Dynamic confirmation belongs in the filed issue's or
+  advisory's reproduction steps, run deliberately by a human or a follow-up task.
 - **Trust-boundary first.** Severity always reflects *who controls the input*: anonymous visitor
   vs. authenticated editor vs. super-admin/console. The workflow enforces this; preserve it in the
   report and issues. Don't inflate an editor-only stored issue into an anonymous critical.

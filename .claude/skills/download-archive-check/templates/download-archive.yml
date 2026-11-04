@@ -10,16 +10,19 @@ name: Download archive
 # UAMS-Web/uams-claude-skills, copied to .github/workflows/download-archive.yml in a public
 # WordPress repository. A private repository runs the same check as the `download-archive`
 # job of the shared local CI runner instead (templates/local-ci.json in the local-ci skill),
-# because it does not run Actions. This header is the only part a repository may change. The
-# synced-files skill's check-workflow-copies.mjs fails when the rest differs from the
-# template. The script it runs ships in the same skill, so no repository file is needed
-# beyond the synced .claude/ tree.
+# because it does not run Actions. The copy should match this template in full, header
+# included; the synced-files skill's check-workflow-copies.mjs does not cover this workflow.
+# The script it runs ships in the same skill, so no repository file is needed beyond the
+# synced .claude/ tree.
 #
 # It is a copied template and not a workflow that other repositories call.
 #
-# Deliberately NOT gated on RUN_REMOTE_CI, for the same reason as `clear-handed-back.yml`:
-# that switch is off for months at a time. The job is one checkout and one Node script with
-# no dependencies, and Actions minutes on a public repository are free.
+# Gated on RUN_REMOTE_CI like the rest of CI: the job carries
+# `if: vars.RUN_REMOTE_CI != 'false'`, so a private repository, where the variable is
+# `false`, skips it before a runner is dispatched and bills no minutes, and a public
+# repository, where the variable is unset, runs it as before. A skipped job reports
+# `skipped`, and GitHub counts a skipped required check as success, so a skipped run is
+# not a passing run: nothing has checked the download while the switch is off.
 
 on:
   pull_request:
@@ -31,6 +34,7 @@ permissions: {}
 
 jobs:
   download-archive:
+    if: vars.RUN_REMOTE_CI != 'false'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
