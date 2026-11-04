@@ -765,7 +765,7 @@ function uamswp_fad_gbp_create_gate(?int $now = null): array
 /**
  * Remember what a run did to the daily quota, and keep the cached index in step with its creates.
  *
- * Adds the run's creates to today's count, stores a new pause, and adds each created listing to the
+ * Adds each of the run's creates to the count of the Pacific day it was sent, stores a new pause, and adds each created listing to the
  * cached index so the next job does not re-read every group. An update still drops the cache, since
  * it changes a listing the index describes.
  *
@@ -777,13 +777,33 @@ function uamswp_fad_gbp_after_run(UAMSWP_FAD_GBP_Sync $sync, array $entries, ?in
     $made = $sync->creates_made();
 
     if ($made > 0) {
-        $day = UAMSWP_FAD_GBP_Logic::pacific_day($now);
-        $count = get_option(UAMSWP_FAD_GBP_COUNT_OPTION, []);
-        $before = is_array($count) && ($count['day'] ?? '') === $day ? (int) ($count['count'] ?? 0) : 0;
-        update_option(UAMSWP_FAD_GBP_COUNT_OPTION, ['day' => $day, 'count' => $before + $made], false);
+        // Each create counts on the Pacific day it was sent, which is the day Google counts it on: a run
+        // that crosses midnight splits its creates between the two days.
+        $by_day = [];
 
-        $history = get_option(UAMSWP_FAD_GBP_HISTORY_OPTION, []);
-        update_option(UAMSWP_FAD_GBP_HISTORY_OPTION, UAMSWP_FAD_GBP_Logic::add_to_history(is_array($history) ? $history : [], $day, $made), false);
+        foreach ($sync->create_times() as $sent_at) {
+            $day = UAMSWP_FAD_GBP_Logic::pacific_day($sent_at);
+            $by_day[$day] = ($by_day[$day] ?? 0) + 1;
+        }
+
+        // Creates with no recorded moment (not expected) fall back to the run's start.
+        $unstamped = $made - array_sum($by_day);
+
+        if ($unstamped > 0) {
+            $day = UAMSWP_FAD_GBP_Logic::pacific_day($now);
+            $by_day[$day] = ($by_day[$day] ?? 0) + $unstamped;
+        }
+
+        ksort($by_day);
+
+        foreach ($by_day as $day => $day_made) {
+            $count = get_option(UAMSWP_FAD_GBP_COUNT_OPTION, []);
+            $before = is_array($count) && ($count['day'] ?? '') === $day ? (int) ($count['count'] ?? 0) : 0;
+            update_option(UAMSWP_FAD_GBP_COUNT_OPTION, ['day' => $day, 'count' => $before + $day_made], false);
+
+            $history = get_option(UAMSWP_FAD_GBP_HISTORY_OPTION, []);
+            update_option(UAMSWP_FAD_GBP_HISTORY_OPTION, UAMSWP_FAD_GBP_Logic::add_to_history(is_array($history) ? $history : [], (string) $day, $day_made), false);
+        }
     }
 
     if ($sync->creates_paused_until() > (int) get_option(UAMSWP_FAD_GBP_PAUSE_OPTION, 0)) {
