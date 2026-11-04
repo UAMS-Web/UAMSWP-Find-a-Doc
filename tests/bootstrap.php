@@ -52,4 +52,26 @@ define('UAMS_FAD_VERSION', '0.0.0-tests');
  * Composer-autoloaded classes need no line here.
  */
 
+defined('DAY_IN_SECONDS') || define('DAY_IN_SECONDS', 86400);
+
+require_once dirname(__DIR__).'/includes/class.fad-gbp-logic.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-client.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-sync.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-runtime.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-settings.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-cli.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-dashboard.php';
+
+/*
+ * The delete cleanup registers its hooks as it loads. Load it here, inside Brain Monkey's
+ * set-up and tear-down, so those calls are made while add_action() exists and are forgotten
+ * before the first test; loaded from inside a test, they would count as that test's
+ * expectations. The tests call the registering function again to read what it registers.
+ */
+Brain\Monkey\setUp();
+
+require_once dirname(__DIR__).'/includes/class.fad-delete-cleanup.php';
+
+Brain\Monkey\tearDown();
+
 // cspell:ignore ABSPATH autoloaded

@@ -1112,7 +1112,7 @@
 		},
 		{
 			"key": "field_brandorg_google_cid_query",
-			"label": "Does this organization have a listing on Google My Business?",
+			"label": "Does this organization have a listing on Google Business Profiles?",
 			"name": "brandorg_google_cid_query",
 			"type": "button_group",
 			"instructions": "",
