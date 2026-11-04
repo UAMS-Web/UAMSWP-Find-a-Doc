@@ -271,7 +271,7 @@ final class GbpQuotaTest extends UnitTestCase
         $this->assertSame(0, uamswp_fad_gbp_create_budget(), 'a negative budget is 0');
     }
 
-    public function test_the_day_a_run_is_counted_on_is_the_day_it_started(): void
+    public function test_a_run_whose_creates_are_all_sent_before_midnight_counts_on_that_day(): void
     {
         $started = $this->utc('2026-11-04 07:59:00'); // still 2026-11-03 in Los Angeles
         $sync = $this->quotaSync(['now' => $started], 2, false);
@@ -279,6 +279,21 @@ final class GbpQuotaTest extends UnitTestCase
         uamswp_fad_gbp_after_run($sync, [], $started);
 
         $this->assertSame(['day' => '2026-11-03', 'count' => 2], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION]);
+    }
+
+    public function test_a_run_that_crosses_pacific_midnight_counts_each_create_on_the_day_it_was_sent(): void
+    {
+        $started = $this->utc('2026-11-04 07:59:50'); // 23:59:50 on 2026-11-03 in Los Angeles
+        $sent = [$this->utc('2026-11-04 07:59:55'), $this->utc('2026-11-04 08:00:05'), $this->utc('2026-11-04 08:00:06'), $this->utc('2026-11-04 08:00:07')];
+        $clock = static function () use (&$sent): int {
+            return array_shift($sent);
+        };
+        $this->options[UAMSWP_FAD_GBP_COUNT_OPTION] = ['day' => '2026-11-03', 'count' => 10];
+
+        uamswp_fad_gbp_after_run($this->quotaSync(['now' => $started, 'clock' => $clock], 4, false), [], $started);
+
+        $this->assertSame(['day' => '2026-11-04', 'count' => 3], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION], 'the budget for the new day has 3 spent, as Google counts it');
+        $this->assertSame(['2026-11-03' => 1, '2026-11-04' => 3], $this->options[UAMSWP_FAD_GBP_HISTORY_OPTION]);
     }
 
     public function test_each_run_adds_its_creates_to_the_day_in_the_history_the_dashboard_reads(): void
@@ -404,7 +419,9 @@ final class GbpQuotaTest extends UnitTestCase
         };
 
         $silos = ['uams' => ['brand' => null, 'accounts' => ['provider' => 'accounts/up', 'location' => 'accounts/ul']]];
-        $sync = new UAMSWP_FAD_GBP_Sync($client, ['silos' => $silos, 'modes' => ['uams' => 'live'], 'is_production' => true] + $gate, [], function (array $entry): void {});
+        // Unless a test sets its own clock, every create is sent at the run's start.
+        $clock = $gate['clock'] ?? static fn (): int => $gate['now'] ?? time();
+        $sync = new UAMSWP_FAD_GBP_Sync($client, ['silos' => $silos, 'modes' => ['uams' => 'live'], 'is_production' => true, 'clock' => $clock] + $gate, [], function (array $entry): void {});
         $fields = ['title' => 'T', 'storefrontAddress' => ['postalCode' => '1'], 'categories' => ['primaryCategory' => ['name' => 'c']]];
         $items = [];
 
