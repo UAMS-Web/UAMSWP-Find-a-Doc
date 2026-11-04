@@ -296,6 +296,33 @@ final class GbpQuotaTest extends UnitTestCase
         $this->assertSame(['2026-11-03' => 1, '2026-11-04' => 3], $this->options[UAMSWP_FAD_GBP_HISTORY_OPTION]);
     }
 
+    public function test_the_stored_count_describes_the_newest_day_whatever_order_the_stamps_arrive_in(): void
+    {
+        $started = $this->utc('2026-11-04 07:59:50');
+        $sent = [$this->utc('2026-11-04 08:00:05'), $this->utc('2026-11-04 07:59:55')]; // newer day first
+        $clock = static function () use (&$sent): int {
+            return array_shift($sent);
+        };
+
+        uamswp_fad_gbp_after_run($this->quotaSync(['now' => $started, 'clock' => $clock], 2, false), [], $started);
+
+        $this->assertSame(['day' => '2026-11-04', 'count' => 1], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION], 'with no count stored, the newest day is written last');
+        $this->assertSame(['2026-11-03' => 1, '2026-11-04' => 1], $this->options[UAMSWP_FAD_GBP_HISTORY_OPTION]);
+    }
+
+    public function test_a_refused_create_is_not_stamped_or_counted(): void
+    {
+        $started = $this->utc('2026-11-03 17:00:00');
+        $sync = $this->quotaSync(['now' => $started], 2, true);
+
+        $this->assertSame(2, $sync->creates_made());
+        $this->assertCount(2, $sync->create_times(), 'one stamp per successful create, none for the refusal');
+
+        uamswp_fad_gbp_after_run($sync, [], $started);
+
+        $this->assertSame(['day' => '2026-11-03', 'count' => 2], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION]);
+    }
+
     public function test_each_run_adds_its_creates_to_the_day_in_the_history_the_dashboard_reads(): void
     {
         $morning = $this->utc('2026-11-03 17:00:00');
