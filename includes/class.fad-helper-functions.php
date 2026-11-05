@@ -401,14 +401,15 @@ if (! function_exists('uamswp_provider_name_html')) {
  * Shared provider-derived strings.
  *
  * Extracted verbatim from templates/single-physicians.php, which is the canonical
- * runtime construction of these values. The GMB call sites
- * (includes/class.fad-gmb-settings-page.php, templates/gmb-list-provider.php)
- * build superficially similar strings from different sources -- they read the
- * physician_prefix field rather than deriving "Dr." from the degree list, they
- * use the raw clinical_title term name rather than the term's
- * clinical_specialization_title override, and they have no resident special case
- * or indefinite-article exception list. Migrating them onto these helpers would
- * change GMB output, so they are deliberately left alone.
+ * runtime construction of these values. The GMB call site
+ * (includes/class.fad-gmb-settings-page.php)
+ * builds superficially similar strings from different sources -- it uses the
+ * raw clinical_title term name rather than the term's
+ * clinical_specialization_title override, and it has no resident special case
+ * or indefinite-article exception list. Migrating it onto these helpers would
+ * change GMB output, so it is deliberately left alone, except for the "Dr."
+ * prefix: it and the clinical resource card take that from the 'prefix' value
+ * below, the degree rule, not from the physician_prefix field.
  */
 
 // Construct the variants of a provider's name
@@ -416,7 +417,8 @@ if (! function_exists('uamswp_provider_names')) {
 
     /**
      * @param  int  $provider_id  Provider post ID.
-     * @return array short, medium, medium_no_prefix, full, short_possessive, sort, sort_param, and _attr variants.
+     * @return array prefix ("Dr." for an M.D. or D.O., otherwise empty), short, medium, medium_no_prefix, full,
+     *               short_possessive, sort, sort_param, and _attr variants.
      */
     function uamswp_provider_names($provider_id): array
     {
@@ -424,6 +426,7 @@ if (! function_exists('uamswp_provider_names')) {
         $empty = [
             'full' => '',
             'full_attr' => '',
+            'prefix' => '',
             'medium' => '',
             'medium_attr' => '',
             'medium_no_prefix' => '',
@@ -570,6 +573,7 @@ if (! function_exists('uamswp_provider_names')) {
         return [
             'full' => $full_name,
             'full_attr' => $full_name ? uamswp_attr_conversion($full_name) : '',
+            'prefix' => $prefix,
             'medium' => $medium_name,
             'medium_attr' => $medium_name ? uamswp_attr_conversion($medium_name) : '',
             'medium_no_prefix' => $medium_no_prefix_name,
