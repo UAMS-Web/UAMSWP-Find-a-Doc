@@ -2,6 +2,8 @@
 
 /**
  * Public content registration contracts: editor features, taxonomy exposure, and REST field names.
+ *
+ * @command  vendor/bin/pest tests/Unit/ContentRegistrationTest.php
  */
 
 declare(strict_types=1);
@@ -194,3 +196,29 @@ test('REST query variables retain existing entries and allow metadata comparison
     'other query variables' => [['author', 'search', 'orderby']],
     'previous metadata entry' => [['meta_key', 'author']],
 ]);
+
+test('ACF editor styles retain hidden field labels borders and clone spacing', function (): void {
+    // Capture the public output without depending on its indentation.
+    ob_start();
+    try {
+        acf_hide_title();
+        $output = (string) ob_get_contents();
+    } finally {
+        ob_end_clean();
+    }
+
+    // Keep the entire style structure and duplicate rules, collapsing whitespace only.
+    expect(preg_replace('/\s+/', ' ', trim($output)))->toBe(
+        '<style> '
+        .'.acf-field.hide-acf-field { display: none; } '
+        .'.acf-field.hide-acf-title { border: none; padding: 6px 12px; } '
+        .'.acf-field.hide-acf-border, .acf-field[data-width]+.acf-field[data-width].hide-acf-border { border-color: transparent; } '
+        .'.acf-field.hide-acf-border .acf-taxonomy-field .categorychecklist-holder { border: none; } '
+        .'.acf-field.hide-acf-border .acf-taxonomy-field .acf-checkbox-list { padding: 0; } '
+        .'.hide-acf-title .acf-label { display: none; } '
+        .'.acf-field.pbn { padding-bottom:0; } '
+        .'.acf-fields > .uamswp-hide-clone-label.acf-field-clone.acfe-field-clone-layout-block.acfe-seamless-style > .acf-input > .acf-clone-fields > .acf-field:first-child:last-child { padding-top: 0; } '
+        .'.acf-fields > .uamswp-hide-clone-label.acf-field-clone.acfe-field-clone-layout-block.acfe-seamless-style > .acf-input > .acf-clone-fields > .acf-field:first-child:last-child > .acf-label > label { display: none; } '
+        .'</style>'
+    );
+});
