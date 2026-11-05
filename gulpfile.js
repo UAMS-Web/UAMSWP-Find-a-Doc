@@ -8,7 +8,9 @@ const notify = require('gulp-notify');
 const cssnano = require('cssnano');
 const changed = require('gulp-changed');
 const comments = require('postcss-discard-comments');
-const groupmq = require('gulp-group-css-media-queries');
+const sortMediaQueriesModule = require('postcss-sort-media-queries');
+// The package exports its function as the default under CommonJS
+const sortMediaQueries = sortMediaQueriesModule.default || sortMediaQueriesModule;
 
 var plugins = [
     autoprefixer,
@@ -16,7 +18,10 @@ var plugins = [
     // cmq,
     comments({
         removeAllButFirst: true
-    })
+    }),
+    // Group media queries after the minifier, so the output stays minified. Desktop-first keeps the
+    // order the previous grouping step gave (the default sort moves the 930-1294px query after the 1200px one)
+    sortMediaQueries({ sort: 'desktop-first' })
 ]
 
 var paths = {
@@ -32,7 +37,6 @@ function style() {
         .pipe(sass().on('error', sass.logError))
         .pipe(concat('app.scss'))
         .pipe(postcss(plugins))
-        .pipe(groupmq()) // Group media queries!
         .pipe(rename('app.css'))
         .pipe(gulp.dest(paths.styles.dest))
         .pipe(notify({ message: 'Styles task complete' }));
