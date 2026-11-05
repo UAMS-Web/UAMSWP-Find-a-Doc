@@ -81,6 +81,68 @@ final class PostTypesTest extends IntegrationTestCase
     }
 
     /**
+     * Restore the registered types' capabilities on a real administrator role.
+     */
+    public function test_administrator_receives_every_registered_content_capability(): void
+    {
+        // Capture role state so both database and in-memory grants can be restored.
+        $this->assertSame(10, has_action('admin_init', 'add_theme_caps'));
+        $administrator = get_role('administrator');
+        $this->assertNotNull($administrator);
+        $original = $administrator->capabilities;
+        $roles = wp_roles();
+        $originalRegistry = $roles->roles;
+        $originalStored = get_option($roles->role_key);
+
+        try {
+            // Remove registered grants to prevent WordPress defaults masking omissions.
+            $capabilities = [];
+            foreach (self::registeredPostTypes() as [$type]) {
+                $capabilities = array_merge($capabilities, (array) get_post_type_object($type)->cap);
+            }
+
+            $capabilities = array_unique($capabilities);
+            foreach ($capabilities as $capability) {
+                $administrator->remove_cap($capability);
+            }
+
+            $administrator->add_cap('uamswp_test_custom_cap');
+            $administrator->add_cap('uamswp_test_custom_denial', false);
+
+            // Invoke the registered callback and inspect actual WordPress role state.
+            add_theme_caps();
+            foreach ($capabilities as $capability) {
+                $this->assertTrue($administrator->has_cap($capability), $capability);
+            }
+
+            $this->assertTrue($administrator->has_cap('uamswp_test_custom_cap'));
+            $this->assertArrayHasKey('uamswp_test_custom_denial', $administrator->capabilities);
+            $this->assertFalse($administrator->capabilities['uamswp_test_custom_denial']);
+
+            // Verify persistence independently of the object the callback just mutated.
+            $stored = get_option($roles->role_key);
+            foreach ($capabilities as $capability) {
+                $this->assertTrue($roles->roles['administrator']['capabilities'][$capability] ?? false, $capability);
+                $this->assertTrue($stored['administrator']['capabilities'][$capability] ?? false, $capability);
+            }
+        } finally {
+            // Restore globals as well as stored role data, including on assertion failure.
+            foreach (array_keys($administrator->capabilities) as $capability) {
+                $administrator->remove_cap($capability);
+            }
+
+            foreach ($original as $capability => $grant) {
+                $administrator->add_cap($capability, $grant);
+            }
+        }
+
+        // Confirm cleanup restores every representation, including explicit denials.
+        $this->assertSame($original, $administrator->capabilities);
+        $this->assertSame($originalRegistry, $roles->roles);
+        $this->assertSame($originalStored, get_option($roles->role_key));
+    }
+
+    /**
      * Taxonomies actually hooked to init; condition and treatment taxonomies are not enabled.
      *
      * @return array<string, array{string, array<int, string>, bool, string}>
