@@ -162,3 +162,35 @@ test('taxonomy registration retains its associations, hierarchy, and REST exposu
     'UAMS brand organization' => ['create_brand_organization_uams_taxonomy', 'brand_organization_uams', ['location', 'provider'], true, ''],
     'brand organization' => ['create_brand_organization_taxonomy', 'brand_organization', ['location', 'provider'], true, ''],
 ]);
+
+test('provider image labels describe headshots without changing other editor labels', function (): void {
+    $labels = (object) [
+        'name' => 'Providers',
+        'add_new_item' => 'Add New Provider',
+        'featured_image' => 'Featured image',
+        'set_featured_image' => 'Set featured image',
+        'remove_featured_image' => 'Remove featured image',
+        'use_featured_image' => 'Use as featured image',
+    ];
+
+    $result = change_featured_image_labels_provider($labels);
+
+    expect((array) $result)->toBe([
+        'name' => 'Providers',
+        'add_new_item' => 'Add New Provider',
+        'featured_image' => 'Headshot',
+        'set_featured_image' => 'Set headshot',
+        'remove_featured_image' => 'Remove headshot',
+        'use_featured_image' => 'Use as headshot',
+    ]);
+});
+
+test('REST query variables retain existing entries and allow metadata comparisons', function (array $existing): void {
+    $result = provider_add_rest_query_vars($existing);
+
+    expect($result)->toBe([...$existing, 'meta_key', 'meta_value', 'meta_compare']);
+})->with([
+    'empty allow list' => [[]],
+    'other query variables' => [['author', 'search', 'orderby']],
+    'previous metadata entry' => [['meta_key', 'author']],
+]);
