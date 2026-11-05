@@ -13,6 +13,8 @@ use UamswpFindADoc\Tests\Support\IntegrationTestCase;
 /**
  * Proves the Integration suite end to end: the bootstrap boots WordPress, loads the
  * plugin on `muplugins_loaded`, and `init` has run by the time a test starts.
+ *
+ * @command  composer test:integration -- --filter PostTypesTest
  */
 final class PostTypesTest extends IntegrationTestCase
 {
@@ -78,6 +80,76 @@ final class PostTypesTest extends IntegrationTestCase
             ['author', 'search', 'meta_key', 'meta_value', 'meta_compare'],
             apply_filters('rest_query_vars', ['author', 'search'])
         );
+    }
+
+    /**
+     * Remove only the configured side metaboxes from the six content editors.
+     */
+    public function test_taxonomy_metabox_removal_preserves_other_contexts_and_screens(): void
+    {
+        // Save the complete registry, including an originally unset global.
+        $hadRegistry = \array_key_exists('wp_meta_boxes', $GLOBALS);
+        global $wp_meta_boxes;
+
+        $original = $wp_meta_boxes;
+        $screens = ['provider', 'location', 'expertise', 'clinical-resource', 'condition', 'treatment'];
+        $ids = [
+            'conditiondiv', 'treatmentdiv', 'specialtydiv', 'departmentdiv',
+            'service_linediv', 'degreediv', 'patient_typediv', 'clinical_titlediv',
+            'clinical_admin_titlediv', 'affiliationdiv', 'institute_affiliationdiv',
+            'languagediv', 'medical_termsdiv', 'medical_termdiv', 'academic_positiondiv',
+            'academic_collegediv', 'schooldiv', 'residency_yeardiv', 'academic_departmentdiv',
+            'boarddiv', 'certifying_bodydiv', 'associationdiv', 'educationtypediv', 'portaldiv',
+            'academic_titlediv', 'academic_admin_titlediv', 'recognitiondiv', 'regiondiv',
+            'location_typediv', 'gmb_cat_providerdiv', 'gmb_cat_locationdiv', 'buildingdiv',
+            'parkingdiv', 'brand_organizationdiv', 'brand_organization_uamsdiv',
+            'tagsdiv-recognition', 'tagsdiv-medical_procedures', 'custom-post-type-onomies-locations',
+        ];
+
+        try {
+            // Test slots separately: WordPress moves repeated IDs across slots.
+            $this->assertSame(10, has_action('admin_menu', 'remove_provider_meta'));
+            $this->assertSame(10, has_action('admin_head', 'acf_hide_title'));
+            foreach ([['side', 'default'], ['side', 'core'], ['normal', 'default'], ['advanced', 'default']] as [$context, $priority]) {
+                $wp_meta_boxes = [];
+                foreach ([...$screens, 'post'] as $screen) {
+                    foreach ([...$ids, 'keep-custom-box', 'tagsdiv-region'] as $id) {
+                        add_meta_box($id, 'Fixture '.$id, '__return_empty_string', $screen, $context, $priority);
+                    }
+                }
+
+                $seeded = $wp_meta_boxes;
+
+                // Confirm fixtures exist before invoking the actual removal callback.
+                foreach ($screens as $screen) {
+                    $this->assertCount(40, $seeded[$screen][$context][$priority]);
+                }
+
+                remove_provider_meta();
+                foreach ($screens as $screen) {
+                    if ($context === 'side') {
+                        foreach ($ids as $id) {
+                            $this->assertFalse($wp_meta_boxes[$screen]['side'][$priority][$id], $screen.': '.$id);
+                        }
+
+                        foreach (['keep-custom-box', 'tagsdiv-region'] as $id) {
+                            $this->assertSame($seeded[$screen]['side'][$priority][$id], $wp_meta_boxes[$screen]['side'][$priority][$id]);
+                        }
+                    } else {
+                        $this->assertSame($seeded[$screen][$context], $wp_meta_boxes[$screen][$context]);
+                    }
+                }
+
+                $this->assertSame($seeded['post'], $wp_meta_boxes['post']);
+            }
+        } finally {
+            // Restore the global registry even when a contract assertion fails.
+            if ($hadRegistry) {
+                $wp_meta_boxes = $original;
+            } else {
+                unset($GLOBALS['wp_meta_boxes']);
+            }
+        }
     }
 
     /**
