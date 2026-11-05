@@ -3476,14 +3476,13 @@ function get_provider_meta($object)
     $provider_service_line = get_field('physician_service_line', $postId);
     $resident_profile_group = get_field('physician_resident_profile_group', $postId);
     $resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
-    // if (is_array(get_term( $resident_academic_department, 'academic_department' ))) {
-    $resident_academic_department_name = is_array(get_term($resident_academic_department, 'academic_department')) ? get_term($resident_academic_department, 'academic_department')->name : '';
+    $resident_academic_department_term = get_term($resident_academic_department, 'academic_department');
+    $resident_academic_department_name = $resident_academic_department_term && ! is_wp_error($resident_academic_department_term) ? $resident_academic_department_term->name : '';
     $resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
     $resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
     $resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
-    if (is_array(get_term($resident_academic_year, 'residency_year'))) {
-        $resident_academic_year_name = is_array(get_term($resident_academic_year, 'residency_year')) ? get_term($resident_academic_year, 'residency_year')->name : '';
-    }
+    $resident_academic_year_term = get_term($resident_academic_year, 'residency_year');
+    $resident_academic_year_name = $resident_academic_year_term && ! is_wp_error($resident_academic_year_term) ? $resident_academic_year_term->name : '';
 
     $resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
     $data['physician_full_name'] = $full_name;
