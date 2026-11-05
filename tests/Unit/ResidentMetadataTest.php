@@ -55,3 +55,34 @@ test('provider residency metadata resolves term objects and preserves chief sele
     'term lookup errors' => [true, false, 'error', ', '],
     'non-resident' => [false, false, 'valid', ''],
 ]);
+
+test('provider portal metadata resolves the term name without changing its fields', function (string $result): void {
+    $error = (object) ['errors' => ['invalid_taxonomy' => ['Invalid taxonomy']]];
+    $portal = match ($result) {
+        'valid' => (object) ['name' => 'MyChart Patient Portal'],
+        'error' => $error,
+        default => null,
+    };
+    when('is_wp_error')->alias(fn ($value): bool => $value === $error);
+    when('get_term')->alias(fn ($id, string $taxonomy) => [$id, $taxonomy] === [41, 'portal'] ? $portal : null);
+    when('get_field')->alias(fn (string $field, $id): array|int|string => match (true) {
+        $field === 'physician_portal' && $id === 101 => 41,
+        $field === 'portal_content' && $id === $portal => 'Sign in to your account',
+        $field === 'portal_url' && $id === $portal => 'https://example.test/portal',
+        $field === 'physician_resident_profile_group' => [
+            'physician_resident_academic_department' => 0,
+            'physician_resident_academic_chief' => false,
+            'physician_resident_academic_year' => 0,
+        ],
+        $field === 'physician_locations' => [],
+        default => '',
+    });
+
+    $data = get_provider_meta(['id' => 101]);
+
+    expect($data['physician_portal'])->toBe([
+        'name' => $result === 'valid' ? 'MyChart Patient Portal' : '',
+        'content' => 'Sign in to your account',
+        'url' => 'https://example.test/portal',
+    ]);
+})->with(['valid', 'missing', 'error']);
