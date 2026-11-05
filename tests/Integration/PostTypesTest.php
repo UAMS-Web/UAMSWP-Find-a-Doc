@@ -59,6 +59,27 @@ final class PostTypesTest extends IntegrationTestCase
         $this->assertFalse(post_type_exists('uamswp-find-a-doc-not-a-post-type'));
     }
 
+    public function test_only_providers_receive_headshot_labels_after_registration(): void
+    {
+        $labels = get_post_type_object('provider')->labels;
+
+        $this->assertSame('Providers', $labels->name);
+        $this->assertSame('Add New Provider', $labels->add_new_item);
+        $this->assertSame('Headshot', $labels->featured_image);
+        $this->assertSame('Set headshot', $labels->set_featured_image);
+        $this->assertSame('Remove headshot', $labels->remove_featured_image);
+        $this->assertSame('Use as headshot', $labels->use_featured_image);
+        $this->assertSame('Featured image', get_post_type_object('location')->labels->featured_image);
+    }
+
+    public function test_the_legacy_rest_query_vars_hook_adds_metadata_variables(): void
+    {
+        $this->assertSame(
+            ['author', 'search', 'meta_key', 'meta_value', 'meta_compare'],
+            apply_filters('rest_query_vars', ['author', 'search'])
+        );
+    }
+
     /**
      * Taxonomies actually hooked to init; condition and treatment taxonomies are not enabled.
      *
