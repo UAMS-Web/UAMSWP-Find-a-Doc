@@ -86,3 +86,38 @@ test('provider portal metadata resolves the term name without changing its field
         'url' => 'https://example.test/portal',
     ]);
 })->with(['valid', 'missing', 'error']);
+
+test('provider publications preserve row order and one-based keys', function (array|false $publications, array $expected): void {
+    when('get_term')->justReturn();
+    when('is_wp_error')->justReturn(false);
+    when('get_field')->alias(fn (string $field, $id): array|bool|string => match ($field) {
+        'physician_select_publications' => $publications,
+        'physician_resident_profile_group' => [
+            'physician_resident_academic_department' => 0,
+            'physician_resident_academic_chief' => false,
+            'physician_resident_academic_year' => 0,
+        ],
+        'physician_locations' => [],
+        default => '',
+    });
+
+    $data = get_provider_meta(['id' => 101]);
+
+    if ($expected === []) {
+        expect($data)->not->toHaveKey('physician_pubmed');
+    } else {
+        expect($data['physician_pubmed'])->toBe($expected);
+    }
+})->with([
+    'absent selection' => [false, []],
+    'empty selection' => [[], []],
+    'selected rows' => [[
+        ['pubmed_id_pmid' => '10000001', 'pubmed_information' => 'Zulu publication'],
+        ['pubmed_id_pmid' => '10000002', 'pubmed_information' => 'Alpha publication'],
+        ['pubmed_id_pmid' => '10000003', 'pubmed_information' => ''],
+    ], [
+        1 => ['information' => 'Zulu publication'],
+        2 => ['information' => 'Alpha publication'],
+        3 => ['information' => ''],
+    ]],
+]);
