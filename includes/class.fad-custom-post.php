@@ -3845,9 +3845,11 @@ function get_provider_meta($object)
     $publications = get_field('physician_select_publications', $postId);
 
     if (! empty($publications)) {
+        $i = 1;
         foreach ($publications as $publication) {
 
             $data['physician_pubmed'][$i]['information'] = $publication['pubmed_information'];
+            $i++;
 
         }
     }

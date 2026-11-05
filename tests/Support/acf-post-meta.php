@@ -12,7 +12,8 @@
  *
  * `update_field()` also copies a list into the post's custom-table row when the
  * table has a column named like the field, as ACF Custom Database Tables does.
- * `get_field()` reads post meta only.
+ * `get_field()` reads post meta, or term meta for a `WP_Term` selector. Group and
+ * repeater fixtures supply getter-visible arrays, not ACF's internal storage.
  */
 
 declare(strict_types=1);
@@ -44,7 +45,7 @@ function uamswp_test_mirror_to_custom_table(string $field, $stored, int $post_id
     $wpdb->suppress_errors($previous);
 
     if ($column !== null) {
-        $wpdb->update($table, [$field => (string) wp_json_encode(array_map('intval', $stored))], ['post_id' => $post_id]);
+        $wpdb->update($table, [$field => (string) wp_json_encode(array_map(intval(...), $stored))], ['post_id' => $post_id]);
     }
 }
 
@@ -56,7 +57,9 @@ if (! function_exists('get_field')) {
      */
     function get_field($selector, $post_id = false, $format_value = true)
     {
-        $value = get_post_meta((int) $post_id, (string) $selector, true);
+        $value = $post_id instanceof WP_Term
+            ? get_term_meta($post_id->term_id, (string) $selector, true)
+            : get_post_meta((int) $post_id, (string) $selector, true);
 
         return $value === '' ? false : $value;
     }
@@ -70,7 +73,7 @@ if (! function_exists('get_field_object')) {
      * @param  mixed  $post_id
      * @return array{value: mixed, choices: array<mixed>}|false
      */
-    function get_field_object($selector, $post_id = false)
+    function get_field_object($selector, $post_id = false): array|false
     {
         $value = get_field($selector, $post_id);
 
@@ -86,7 +89,7 @@ if (! function_exists('update_field')) {
      */
     function update_field($selector, $value, $post_id = false): bool
     {
-        $stored = is_array($value) ? array_map('strval', $value) : (string) $value;
+        $stored = is_array($value) ? array_map(strval(...), $value) : (string) $value;
 
         $saved = (bool) update_post_meta((int) $post_id, (string) $selector, $stored);
 
