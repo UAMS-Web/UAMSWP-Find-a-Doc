@@ -310,6 +310,27 @@ final class GbpQuotaTest extends UnitTestCase
         $this->assertSame(['2026-11-03' => 1, '2026-11-04' => 1], $this->options[UAMSWP_FAD_GBP_HISTORY_OPTION]);
     }
 
+    public function test_a_late_finishing_run_keeps_the_newer_stored_day_and_its_count(): void
+    {
+        $started = $this->utc('2026-11-04 07:59:50');
+        $this->options[UAMSWP_FAD_GBP_COUNT_OPTION] = ['day' => '2026-11-04', 'count' => 7];
+
+        uamswp_fad_gbp_after_run($this->quotaSync(['now' => $started], 2, false), [], $started);
+
+        $this->assertSame(['day' => '2026-11-04', 'count' => 7], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION]);
+        $this->assertSame(['2026-11-03' => 2], $this->options[UAMSWP_FAD_GBP_HISTORY_OPTION], 'older creates still belong in the history');
+
+        $sent = [$started, $this->utc('2026-11-04 08:00:05')];
+        $clock = static function () use (&$sent): int {
+            return array_shift($sent);
+        };
+
+        uamswp_fad_gbp_after_run($this->quotaSync(['now' => $started, 'clock' => $clock], 2, false), [], $started);
+
+        $this->assertSame(['day' => '2026-11-04', 'count' => 8], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION], 'same-day creates add to the existing count, even after an older day');
+        $this->assertSame(['2026-11-03' => 3, '2026-11-04' => 1], $this->options[UAMSWP_FAD_GBP_HISTORY_OPTION]);
+    }
+
     public function test_a_refused_create_is_not_stamped_or_counted(): void
     {
         $started = $this->utc('2026-11-03 17:00:00');
