@@ -232,7 +232,7 @@
                                             $resource_count = $resource_provider_count;
                                             $associates = $resource_providers;
                                             foreach( $associates as $associate) {
-                                                $resource_provider_prefix = get_field('physician_prefix', $associate);
+                                                $resource_provider_prefix = uamswp_provider_names($associate)['prefix']; // "Dr." follows the degrees, as on the provider page
                                                 $resource_provider_first_name = get_field('physician_first_name', $associate);
                                                 $resource_provider_middle_name = get_field('physician_middle_name', $associate);
                                                 $resource_provider_last_name = get_field('physician_last_name', $associate);
