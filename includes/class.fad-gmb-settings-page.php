@@ -1690,9 +1690,11 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 }
                 $location_images = array_unique($location_images); // Remove duplicate values from the array for location images
                 $location_images_count = count($location_images); // Count how many images are in the array for location images
+                // The table is built for every location in one call, so these start empty for each location.
+                $location_gmb_cover_photo = '';
+                $location_gmb_other_photos = '';
                 if ($location_images_count > 0) {
                     $p = 1;
-                    $location_gmb_other_photos = '';
                     foreach ($location_images as $location_images_item) {
                         if ($p === 1) {
                             if (function_exists('bis_get_attachment_image')) {
