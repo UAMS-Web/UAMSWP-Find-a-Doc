@@ -3,6 +3,12 @@
 /**
  * Provider metadata formatting and optional-field contracts.
  *
+ * Seven approved equivalent mutations are ignored in get_provider_meta():
+ * three specialty initializers are overwritten before use or never read;
+ * the false-chief label is never selected; and the location counter is
+ * unread before its reset (two initializer changes and one increment).
+ * Other mutations on those expressions remain enabled.
+ *
  * @command  vendor/bin/pest --ci tests/Unit/ResidentMetadataTest.php
  */
 
