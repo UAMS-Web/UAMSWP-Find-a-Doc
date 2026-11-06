@@ -26,6 +26,7 @@
 
 declare(strict_types=1);
 
+use function Brain\Monkey\Filters\expectApplied;
 use function Brain\Monkey\Functions\when;
 
 beforeEach(function (): void {
@@ -242,6 +243,39 @@ test('location alerts preserve inheritance override concatenation and suppressio
     'empty append' => ['append', '', '', 'inherit', ['System heading', '<p>System body</p>', 'alert-info']],
     'suppress' => ['suppress', 'Local heading', '<b>Local body</b>', 'alert-danger', ['', '', 'alert-info']],
 ]);
+
+test('location metadata reflects valid field observer effects before exporting alerts', function (): void {
+    // Keep the featured override valid while making its reader effect observable.
+    $this->locationFields[101] += [
+        'location_image_override_parent_featured' => '0',
+        'location_alert_modification' => 'override',
+        'location_alert_heading' => 'Original heading',
+        'location_alert_color' => 'inherit',
+    ];
+    when('get_field')->alias(function (
+        string $field,
+        mixed $id,
+    ): mixed {
+        $value = \is_int($id) || \is_string($id)
+            ? ($this->locationFields[$id][$field] ?? false) : false;
+
+        // Model the supported name-specific ACF formatting boundary.
+        return apply_filters('acf/format_value/name='.$field, $value, $id);
+    });
+
+    // Preserve the valid value while changing another getter-visible field.
+    expectApplied('acf/format_value/name=location_image_override_parent_featured')->andReturnUsing(function (
+        string $value,
+        int $id,
+    ): string {
+        $this->locationFields[$id]['location_alert_heading'] = 'Heading supplied by observer';
+
+        return $value;
+    });
+
+    // Pin returned metadata, not the discarded value or a mock call count.
+    expect(get_location_meta(['id' => 101])['location_alert_title'])->toBe('Heading supplied by observer');
+});
 
 test('empty location metadata omits optional collections and uses public fallbacks', function (): void {
     // Exercise the same public callback with every optional selection absent.
