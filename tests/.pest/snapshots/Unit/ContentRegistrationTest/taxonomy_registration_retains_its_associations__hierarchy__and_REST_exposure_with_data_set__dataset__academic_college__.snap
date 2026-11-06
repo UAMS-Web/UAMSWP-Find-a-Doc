@@ -1,0 +1,43 @@
+{
+    "labels": {
+        "name": "UAMS Colleges",
+        "singular_name": "UAMS College",
+        "menu_name": "Colleges, UAMS",
+        "all_items": "All UAMS colleges",
+        "parent_item": "Parent UAMS college",
+        "parent_item_colon": "Parent college:",
+        "new_item_name": "New UAMS college",
+        "add_new_item": "Add New UAMS College",
+        "edit_item": "Edit UAMS college",
+        "update_item": "Update UAMS college",
+        "view_item": "View UAMS college",
+        "separate_items_with_commas": "Separate UAMS colleges with commas",
+        "add_or_remove_items": "Add or remove UAMS colleges",
+        "choose_from_most_used": "Choose from the most used",
+        "popular_items": "Popular UAMS colleges",
+        "search_items": "Search UAMS colleges",
+        "not_found": "Not Found",
+        "no_terms": "No UAMS colleges",
+        "items_list": "UAMS colleges list",
+        "items_list_navigation": "UAMS colleges list navigation"
+    },
+    "public": true,
+    "hierarchical": true,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "college",
+        "with_front": true,
+        "hierarchical": true
+    }
+}
