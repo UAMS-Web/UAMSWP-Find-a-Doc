@@ -18,15 +18,60 @@ final class UAMSWP_FAD_GBP_Sync
     /** @var callable(array<string, mixed>): void */
     private $logger;
 
+    /** The moment creates are paused until, or 0 when they are not. */
+    private int $paused_until;
+
+    /** How many creates today's budget still allows, or null for no budget. */
+    private ?int $creates_left;
+
+    private int $now;
+
+    /** How many creates this run has made. */
+    private int $creates_made = 0;
+
+    /** @var array<int, array{account: string, listing: array<string, mixed>}> */
+    private array $created = [];
+
     /**
      * @param  object  $client  Provides patch() and create(), as UAMSWP_FAD_GBP_Client does.
-     * @param  array{silos: array<string, array<string, mixed>>, modes: array<string, string>, is_production: bool}  $config
+     * @param  array{silos: array<string, array<string, mixed>>, modes: array<string, string>, is_production: bool, creates_paused_until?: int, creates_left?: ?int, now?: int}  $config  The last three
+     *                                                                                                                                                                                    describe Google's daily create quota: a pause in force, the creates still allowed today, and the clock.
      * @param  array<string, array<int, array{account: string, listing: array<string, mixed>}>>  $index  From self::build_index().
      * @param  callable(array<string, mixed>): void  $logger  Receives one entry per item.
      */
     public function __construct(private $client, private array $config, private array $index, callable $logger)
     {
         $this->logger = $logger;
+        $this->paused_until = (int) ($config['creates_paused_until'] ?? 0);
+        $this->creates_left = isset($config['creates_left']) ? max(0, (int) $config['creates_left']) : null;
+        $this->now = (int) ($config['now'] ?? time());
+    }
+
+    /**
+     * The moment creates are paused until after this run: unchanged unless Google refused a create
+     * for the day's quota.
+     */
+    public function creates_paused_until(): int
+    {
+        return $this->paused_until;
+    }
+
+    /**
+     * How many listings this run created.
+     */
+    public function creates_made(): int
+    {
+        return $this->creates_made;
+    }
+
+    /**
+     * The listings this run created, in the shape of the index.
+     *
+     * @return array<int, array{account: string, listing: array<string, mixed>}>
+     */
+    public function created(): array
+    {
+        return $this->created;
     }
 
     /**
@@ -197,17 +242,41 @@ final class UAMSWP_FAD_GBP_Sync
             return ['reason' => 'Dry run, no listing created'] + $entry;
         }
 
+        // A pause or a spent budget holds the create back until the next reset. Updates are not held.
+        if ($this->paused_until > $this->now) {
+            return $this->deferred('Creates paused until '.UAMSWP_FAD_GBP_Logic::reset_label($this->paused_until).' (daily Google limit)', $this->paused_until) + $entry;
+        }
+
+        if ($this->creates_left !== null && $this->creates_made >= $this->creates_left) {
+            $reset = UAMSWP_FAD_GBP_Logic::next_pacific_reset($this->now);
+
+            return $this->deferred('Daily create budget used, creates resume '.UAMSWP_FAD_GBP_Logic::reset_label($reset), $reset) + $entry;
+        }
+
         try {
             $created = $this->client->create($account, $item['fields'], $item['store_code']);
+        } catch (UAMSWP_FAD_GBP_Rate_Limited $rateLimited) {
+            if (! $rateLimited->daily) {
+                return $this->failure($rateLimited) + $entry;
+            }
+
+            // The day's quota is gone: hold every later create until Google resets it.
+            $this->paused_until = UAMSWP_FAD_GBP_Logic::next_pacific_reset($this->now);
+
+            return $this->deferred('Google daily create limit reached, creates paused until '.UAMSWP_FAD_GBP_Logic::reset_label($this->paused_until), $this->paused_until) + $entry;
         } catch (RuntimeException $runtimeException) {
             return $this->failure($runtimeException) + $entry;
         }
 
+        $this->creates_made++;
+
         // Remember it, so the same store code later in this run is not created a second time.
-        $this->index[$item['store_code']][] = [
+        $listing = [
             'account' => $account,
             'listing' => ['name' => (string) ($created['name'] ?? ''), 'storeCode' => $item['store_code']] + $item['fields'],
         ];
+        $this->index[$item['store_code']][] = $listing;
+        $this->created[] = $listing;
 
         // The listing exists now. A failure setting attributes is reported, and the next run
         // finds the listing by its store code and sets them as an update.
@@ -241,6 +310,19 @@ final class UAMSWP_FAD_GBP_Sync
         }
 
         return UAMSWP_FAD_GBP_Logic::changed_attributes($desired, $this->client->attributes($listing_name));
+    }
+
+    /**
+     * The log fields for a create held back until a later moment.
+     *
+     * Not an error and not retryable: the run does not count an attempt, and the entry is not settled,
+     * so the post runs again at `defer_until`.
+     *
+     * @return array<string, mixed>
+     */
+    private function deferred(string $reason, int $until): array
+    {
+        return ['reason' => $reason, 'defer_until' => $until];
     }
 
     /**

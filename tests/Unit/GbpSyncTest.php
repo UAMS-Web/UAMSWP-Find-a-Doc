@@ -90,12 +90,13 @@ final class GbpSyncTest extends UnitTestCase
 
     /**
      * @param  array<string, string>  $modes
+     * @param  array<string, int|null>  $gate  The daily create quota: `creates_paused_until`, `creates_left`, `now`.
      */
-    private function sync(array $modes = ['uams' => 'live', 'baptist-health' => 'live'], bool $production = true, array $listings = []): UAMSWP_FAD_GBP_Sync
+    private function sync(array $modes = ['uams' => 'live', 'baptist-health' => 'live'], bool $production = true, array $listings = [], array $gate = []): UAMSWP_FAD_GBP_Sync
     {
         return new UAMSWP_FAD_GBP_Sync(
             $this->client,
-            ['silos' => self::SILOS, 'modes' => $modes, 'is_production' => $production],
+            ['silos' => self::SILOS, 'modes' => $modes, 'is_production' => $production] + $gate,
             UAMSWP_FAD_GBP_Sync::build_index($listings),
             function (array $entry): void {
                 $this->log[] = $entry;
@@ -294,6 +295,99 @@ final class GbpSyncTest extends UnitTestCase
         $this->assertSame(['create'], $this->actions());
         $this->assertSame($code, $this->client->calls[0][3], 'no length check sits between the item and the create call');
         $this->assertSame($code, $this->log[0]['store_code']);
+    }
+
+    public function test_a_daily_limit_on_create_pauses_every_later_create_until_the_pacific_reset(): void
+    {
+        $now = 1793732400; // 2026-11-03 19:00 UTC, 11:00 in Los Angeles
+        $reset = 1793779200; // 2026-11-04 08:00 UTC, midnight in Los Angeles
+        $this->client->fail_create = new \UAMSWP_FAD_GBP_Rate_Limited('Google API POST failed (429): Quota exceeded ... per day', true);
+
+        $sync = $this->sync(gate: ['now' => $now]);
+        $entries = $sync->run([$this->item(['store_code' => 'a_clinic']), $this->item(['store_code' => 'b_clinic'])]);
+
+        $this->assertSame(1, count($this->client->calls), 'only the first create reached Google');
+        $this->assertSame([$reset, $reset], array_column($entries, 'defer_until'));
+        $this->assertSame($reset, $sync->creates_paused_until());
+        $this->assertEmpty(array_filter(array_column($entries, 'retryable')), 'a daily limit is not a retry');
+        $this->assertSame(['create', 'create'], array_column($entries, 'action'));
+        $this->assertFalse(\UAMSWP_FAD_GBP_Logic::is_settled($entries), 'a deferred create is not settled');
+        $this->assertSame(0, $sync->creates_made());
+    }
+
+    public function test_a_per_minute_limit_on_create_is_still_a_retry_and_pauses_nothing(): void
+    {
+        $this->client->fail_create = new \UAMSWP_FAD_GBP_Rate_Limited('Google API POST failed (429): slow down');
+
+        $sync = $this->sync(gate: ['now' => 1793732400]);
+        $entries = $sync->run([$this->item()]);
+
+        $this->assertSame('error', $entries[0]['action']);
+        $this->assertTrue($entries[0]['retryable']);
+        $this->assertArrayNotHasKey('defer_until', $entries[0]);
+        $this->assertSame(0, $sync->creates_paused_until());
+    }
+
+    public function test_a_pause_in_force_holds_creates_without_a_call_and_leaves_updates_running(): void
+    {
+        $now = 1793732400;
+        $until = $now + 3600;
+        $listing = $this->listing('accounts/up', 'old_clinic', ['title' => 'Old']);
+
+        $entries = $this->sync(listings: [$listing], gate: ['creates_paused_until' => $until, 'now' => $now])
+            ->run([$this->item(['store_code' => 'new_clinic']), $this->item(['store_code' => 'old_clinic'])]);
+
+        $this->assertSame([$until], array_column($entries, 'defer_until'));
+        $this->assertStringContainsString('Creates paused until', $entries[0]['reason']);
+        $this->assertSame('update', $entries[1]['action']);
+        $this->assertSame('Updated', $entries[1]['reason']);
+        $this->assertSame(['patch'], array_column($this->client->calls, 0));
+    }
+
+    public function test_a_pause_that_has_passed_holds_nothing(): void
+    {
+        $now = 1793732400;
+
+        $entries = $this->sync(gate: ['creates_paused_until' => $now - 1, 'now' => $now])->run([$this->item()]);
+
+        $this->assertSame('Created', $entries[0]['reason']);
+    }
+
+    public function test_the_daily_budget_stops_creates_without_a_refusal_and_counts_each_one(): void
+    {
+        $now = 1793732400;
+        $sync = $this->sync(gate: ['creates_left' => 1, 'now' => $now]);
+
+        $entries = $sync->run([$this->item(['store_code' => 'a_clinic']), $this->item(['store_code' => 'b_clinic'])]);
+
+        $this->assertSame(['Created'], [$entries[0]['reason']]);
+        $this->assertSame(1793779200, $entries[1]['defer_until']);
+        $this->assertStringContainsString('Daily create budget used', $entries[1]['reason']);
+        $this->assertSame(1, $sync->creates_made());
+        $this->assertSame(['create'], array_column($this->client->calls, 0), 'the second create never reached Google');
+        $this->assertSame(0, $sync->creates_paused_until(), 'a spent budget is not a pause');
+    }
+
+    public function test_a_run_without_a_budget_creates_without_limit(): void
+    {
+        $sync = $this->sync();
+
+        $entries = $sync->run([$this->item(['store_code' => 'a_clinic']), $this->item(['store_code' => 'b_clinic'])]);
+
+        $this->assertSame(['Created', 'Created'], array_column($entries, 'reason'));
+        $this->assertSame(2, $sync->creates_made());
+    }
+
+    public function test_each_created_listing_is_handed_back_for_the_cached_index(): void
+    {
+        $sync = $this->sync();
+        $sync->run([$this->item(['store_code' => 'a_clinic'])]);
+
+        $created = $sync->created();
+
+        $this->assertCount(1, $created);
+        $this->assertSame('accounts/up', $created[0]['account']);
+        $this->assertSame('a_clinic', $created[0]['listing']['storeCode']);
     }
 
     public function test_a_partner_silo_creates_in_its_own_group(): void

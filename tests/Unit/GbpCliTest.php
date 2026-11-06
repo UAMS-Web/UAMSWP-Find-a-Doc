@@ -258,6 +258,27 @@ final class GbpCliTest extends UnitTestCase
         $this->assertSame('Stopped: Google is rate limiting this account. Run again later.', $this->lines[1]);
     }
 
+    public function test_a_pause_on_creates_holds_them_and_still_runs_the_updates(): void
+    {
+        $this->wordpress(['uams' => 'live'], 'uamshealth.com');
+        $until = time() + 7200;
+        Functions\when('get_option')->alias(fn (string $name, $default = false) => match ($name) {
+            'uamswp_fad_gbp_modes' => ['uams' => 'live'],
+            'uamswp_fad_gbp_creates_paused_until' => $until,
+            default => $default,
+        });
+        $create = ['store_code' => 'new_clinic', 'kind' => 'provider', 'silo' => 'uams', 'excluded' => false, 'fields' => ['title' => 'T', 'storefrontAddress' => ['postalCode' => '1'], 'categories' => ['primaryCategory' => ['name' => 'c']]], 'unresolved' => [], 'attributes' => []];
+
+        $status = uamswp_fad_gbp_manual_sync([100], null, false, $this->out(), $this->client(), $this->itemsFor([100 => [$create, $this->item('a_clinic', 'uams')]]));
+
+        $this->assertSame(1, $status);
+        $this->assertStringStartsWith('new_clinic  uams  live  create  Creates paused until', $this->lines[0]);
+        $this->assertStringStartsWith('a_clinic  uams  live  update', $this->lines[1]);
+        $this->assertSame('Creates were held back and resume '.\UAMSWP_FAD_GBP_Logic::reset_label($until).'. Run again after that.', $this->lines[2]);
+        $this->assertSame(0, count(array_filter($this->calls, fn (array $call): bool => $call['method'] === 'POST' && strpos($call['url'], 'oauth2') === false)), 'no create reached Google');
+        $this->assertSame(1, $this->writes(), 'the update after the held create still ran');
+    }
+
     public function test_a_review_decision_fails_the_exit_status_and_a_create_does_not(): void
     {
         $this->wordpress(['uams' => 'dry-run']);

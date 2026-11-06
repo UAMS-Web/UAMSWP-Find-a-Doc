@@ -17,7 +17,17 @@ declare(strict_types=1);
  * A subclass, so existing handlers of RuntimeException still catch it, and the job that runs
  * the sync can tell it from a failure that retrying will not fix.
  */
-final class UAMSWP_FAD_GBP_Rate_Limited extends RuntimeException {}
+final class UAMSWP_FAD_GBP_Rate_Limited extends RuntimeException
+{
+    /**
+     * @param  bool  $daily  Google refused because a per-day quota is used up, which does not clear
+     *                       in minutes the way a per-minute limit does.
+     */
+    public function __construct(string $message = '', public readonly bool $daily = false)
+    {
+        parent::__construct($message);
+    }
+}
 
 final class UAMSWP_FAD_GBP_Client
 {
@@ -108,7 +118,10 @@ final class UAMSWP_FAD_GBP_Client
 
             $failure = 'Google API '.$method.' failed ('.$status.'): '.$message;
 
-            throw in_array($status, [429, 503], true) ? new UAMSWP_FAD_GBP_Rate_Limited($failure) : new RuntimeException($failure);
+            // Only a 429 that names a per-day quota is a daily limit; a 503 never is.
+            $daily = $status === 429 && preg_match('/per[\s-]?day|daily/i', $message) === 1;
+
+            throw in_array($status, [429, 503], true) ? new UAMSWP_FAD_GBP_Rate_Limited($failure, $daily) : new RuntimeException($failure);
         }
 
         return $data;
