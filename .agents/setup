@@ -84,6 +84,7 @@ fi
 if [[ $(git -C "$theme" rev-parse HEAD) != "$theme_ref" || ! -d "$theme/assets/scss/supporting" ]]; then
     timeout 120 git -C "$theme" fetch origin "$theme_ref"
     git -C "$theme" checkout --detach "$theme_ref"
+    git -C "$theme" restore --source="$theme_ref" --worktree -- assets/scss/supporting
 fi
 if [[ ! -f "$theme/node_modules/bootstrap/scss/_functions.scss" ]] \
     || [[ $(node -p "require('$theme/node_modules/bootstrap/package.json').version") != 4.5.2 ]]; then
