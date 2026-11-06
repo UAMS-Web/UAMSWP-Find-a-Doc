@@ -88,7 +88,7 @@ test('clinical resource metadata preserves distinct scalar fields and absent col
         'clinical_resource_text' => '<p>Resource &amp; text</p>',
         'clinical_resource_text_nci_query' => '1',
         'clinical_resource_nci_embed' => '<div>NCI content</div>',
-        'clinical_resource_infographic' => '123',
+        'clinical_resource_infographic' => 123,
         'clinical_resource_infographic_descr' => 'Image description',
         'clinical_resource_infographic_transcript' => 'Image transcript',
         'clinical_resource_video' => 'https://example.test/video',
