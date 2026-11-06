@@ -4268,7 +4268,7 @@ function get_location_meta($object)
 
     $location_portal = get_field('location_portal', $postId);
     $portal = get_term($location_portal, 'portal');
-    $data['location_portal']['name'] = is_array($portal) ? $portal->name : '';
+    $data['location_portal']['name'] = $portal && ! is_wp_error($portal) ? $portal->name : '';
     $data['location_portal']['content'] = get_field('portal_content', $portal);
     $data['location_portal']['url'] = get_field('portal_url', $portal);
 
