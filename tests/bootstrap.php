@@ -52,4 +52,11 @@ define('UAMS_FAD_VERSION', '0.0.0-tests');
  * Composer-autoloaded classes need no line here.
  */
 
+defined('DAY_IN_SECONDS') || define('DAY_IN_SECONDS', 86400);
+
+require_once dirname(__DIR__).'/includes/class.fad-gbp-logic.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-client.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-sync.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-runtime.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-settings.php';
 // cspell:ignore ABSPATH autoloaded
