@@ -1,3 +1,5 @@
+/.amp/portals/
+
 # NPM #
 ##########
 # Ignore all directories called node_modules in current folder and any subfolders.
@@ -7,3 +9,8 @@ node_modules/
 # macOS #
 ##########
 .DS_Store
+/vendor/
+/.phpunit.result.cache
+/tests/Integration/.phpunit.result.cache
+/.phpstan/
+/tests/Integration/vendor/
