@@ -118,20 +118,42 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
         $this->assertSame(['doc_editor' => 'Doc Profile Editor', 'doc_admin' => 'Doc Profile Admin'], $names);
     }
 
-    public function test_new_doc_admins_cannot_delete_content_before_capability_synchronization(): void
+    /**
+     * Preserve initial grants and explicit denials before synchronization masks them.
+     *
+     * A missing capability and an explicit false have different stored role maps.
+     */
+    public function test_new_doc_roles_retain_initial_grants_and_explicit_denials(): void
     {
+        // Capture the role maps before the later init callback can modify them.
         $created = [];
         when('add_role')->alias(function ($role, $name, $caps) use (&$created): void {
             $created[$role] = $caps;
         });
         \add_roles_on_plugin_activation();
 
+        // Distinguish explicit stored denials from absent entries for both roles.
         foreach ([
-            'delete_physicians', 'delete_others_physicians', 'delete_published_physicians', 'delete_private_physicians',
-            'delete_locations', 'delete_others_locations', 'delete_published_locations', 'delete_private_locations',
-        ] as $capability) {
+            'doc_editor' => [
+                'delete_published_physicians', 'edit_others_physicians', 'publish_physicians',
+                'delete_published_locations', 'edit_others_locations', 'publish_locations',
+            ],
+            'doc_admin' => [
+                'delete_physicians', 'delete_others_physicians', 'delete_published_physicians', 'delete_private_physicians',
+                'delete_locations', 'delete_others_locations', 'delete_published_locations', 'delete_private_locations',
+                'publish_physicians', 'publish_locations',
+            ],
+        ] as $role => $capabilities) {
+            foreach ($capabilities as $capability) {
+                $this->assertArrayHasKey($capability, $created[$role]);
+                $this->assertFalse($created[$role][$capability], "{$role}: {$capability}");
+            }
+        }
+
+        // Pin private editing before synchronization can restore a missing grant.
+        foreach (['edit_private_physicians', 'edit_private_locations'] as $capability) {
             $this->assertArrayHasKey($capability, $created['doc_admin']);
-            $this->assertFalse($created['doc_admin'][$capability], $capability);
+            $this->assertTrue($created['doc_admin'][$capability], $capability);
         }
     }
 
