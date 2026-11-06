@@ -3426,8 +3426,12 @@ function get_provider_meta($object)
 
     // Eliminate PHP errors
 
+    // These initializers are overwritten before use or never read.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $provider_specialty = '';
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $provider_specialty_term = '';
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $provider_specialty_name = '';
     $provider_occupation_title = '';
 
@@ -3479,6 +3483,8 @@ function get_provider_meta($object)
     $resident_academic_department_term = get_term($resident_academic_department, 'academic_department');
     $resident_academic_department_name = $resident_academic_department_term && ! is_wp_error($resident_academic_department_term) ? $resident_academic_department_term->name : '';
     $resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
+    // The fallback is never selected by the subsequent chief-name guard.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
     $resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
     $resident_academic_year_term = get_term($resident_academic_year, 'residency_year');
@@ -3639,6 +3645,8 @@ function get_provider_meta($object)
     } // endif
 
     // Locations
+    // This counter is unread until the conditions block resets it.
+    // @pest-mutate-ignore: DecrementInteger,IncrementInteger
     $i = 1;
     $locations = get_field('physician_locations', $postId);
 
@@ -3695,6 +3703,8 @@ function get_provider_meta($object)
             // $data['physician_locations'][$location]['map_marker'] = '<div class="marker" data-lat="'. $map['lat'] .'" data-lng="'. $map['lng'] .'" data-label="'. $i .'"></div>';
         }
 
+        // Only commented-out markup refers to this location counter.
+        // @pest-mutate-ignore: PostIncrementToPostDecrement
         $i++;
         // $data['location_link'][$location] = get_post_permalink( $location );
         // $data['location_title'] .= get_the_title( $location ) . ',';
@@ -3965,6 +3975,8 @@ function get_location_meta($object)
 
     $location_images = [];
 
+    // Both operands have the same truth value for this unchanged local.
+    // @pest-mutate-ignore: BooleanAndToBooleanOr
     if (
         $wayfinding_photo
         &&
@@ -3975,6 +3987,8 @@ function get_location_meta($object)
 
     }
 
+    // Both operands have the same truth value for this unchanged local.
+    // @pest-mutate-ignore: BooleanAndToBooleanOr
     if (
         $photo_gallery
         &&
@@ -4015,6 +4029,8 @@ function get_location_meta($object)
     $data['location_lng'] = is_array($map) ? $map['lng'] : '';
 
     $location_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
+    // The array branch overwrites this value before its only read.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $location_floor_value = '';
     $location_floor_label = '';
 
@@ -4061,6 +4077,8 @@ function get_location_meta($object)
 
     // Region
 
+    // Either string fallback fails the following object guard.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $region_name = is_object(get_term($location_region, 'region')) ? get_term($location_region, 'region') : '';
     $data['location_region'] = is_object($region_name) ? $region_name->slug : '';
 
@@ -4074,6 +4092,8 @@ function get_location_meta($object)
         foreach ($types as $type) {
 
             $type_name = get_term($type, 'location_type');
+            // Concatenation keeps this accumulator a string.
+            // @pest-mutate-ignore: NotEqualToNotIdentical
             $data['location_types'] .= $data['location_types'] != '' ? ',' : '';
             $data['location_types'] .= $type_name->name;
 
@@ -4095,6 +4115,8 @@ function get_location_meta($object)
     if ($location_clinic_phone_query) {
 
         $location_new_appointments_phone = get_field('location_new_appointments_phone', $postId); // phone number for (new) appointments
+        // This HTML is never read; the pinned formatters only transform local values.
+        // @pest-mutate-ignore: ConcatRemoveLeft,ConcatRemoveRight,ConcatSwitchSides
         $location_new_appointments_phone_link = '<a href="tel:'.format_phone_dash($location_new_appointments_phone).'" class="icon-phone">'.format_phone_us($location_new_appointments_phone).'</a>';
         $location_appointment_phone_query = get_field('field_location_appointment_phone_query', $postId); // separate number for existing appointments?
 
@@ -4108,6 +4130,8 @@ function get_location_meta($object)
     if ($location_appointment_phone_query) {
 
         $location_return_appointments_phone = get_field('location_return_appointments_phone', $postId); // phone number for existing appointments
+        // This HTML is never read; the pinned formatters only transform local values.
+        // @pest-mutate-ignore: ConcatRemoveLeft,ConcatRemoveRight,ConcatSwitchSides
         $location_return_appointments_phone_link = '<a href="tel:'.format_phone_dash($location_return_appointments_phone).'" class="icon-phone">'.format_phone_us($location_return_appointments_phone).'</a>';
 
     } else {
@@ -4287,6 +4311,8 @@ function get_location_meta($object)
 
     $location_alert_title = $location_alert_title_sys;
 
+    // Schema string choices compare identically with loose or strict equality.
+    // @pest-mutate-ignore: EqualToIdentical
     if (
         ! empty($location_alert_title_local)
         &&
@@ -4299,6 +4325,8 @@ function get_location_meta($object)
 
     $location_alert_color = $location_alert_color_sys;
 
+    // Modification and color choices are strings within the approved contract.
+    // @pest-mutate-ignore: EqualToIdentical,NotEqualToNotIdentical
     if (
         $location_alert_modification == 'override'
         &&
@@ -4311,7 +4339,9 @@ function get_location_meta($object)
 
     $location_alert_text = $location_alert_text_sys;
 
+    // Schema string choices compare identically with loose or strict equality.
     if (
+        // @pest-mutate-ignore: EqualToIdentical
         $location_alert_modification == 'override'
         &&
         ! empty($location_alert_text_local)
@@ -4319,18 +4349,30 @@ function get_location_meta($object)
 
         $location_alert_text = $location_alert_text_local;
 
-    } elseif ($location_alert_modification == 'prepend' && ! empty($location_alert_text_local)) {
+    } elseif (
+        // @pest-mutate-ignore: EqualToIdentical
+        $location_alert_modification == 'prepend' && ! empty($location_alert_text_local)
+    ) {
 
+        // The prepend choice is a schema string, not an arbitrary coerced value.
         $location_alert_text = $location_alert_text_local.$location_alert_text_sys;
 
-    } elseif ($location_alert_modification == 'append' && ! empty($location_alert_text_local)) {
+    } elseif (
+        // @pest-mutate-ignore: EqualToIdentical
+        $location_alert_modification == 'append' && ! empty($location_alert_text_local)
+    ) {
 
+        // The append choice is a schema string, not an arbitrary coerced value.
         $location_alert_text = $location_alert_text_sys.$location_alert_text_local;
 
     }
 
+    // Schema string choices compare identically with loose or strict equality.
+    // @pest-mutate-ignore: EqualToIdentical
     if ($location_alert_modification == 'suppress') {
 
+        // This local is never read or exported; title and text clear independently.
+        // @pest-mutate-ignore: TrueToFalse
         $location_alert_suppress = true;
         $location_alert_title = '';
         $location_alert_text = '';

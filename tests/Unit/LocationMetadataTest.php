@@ -3,6 +3,24 @@
 /**
  * Location metadata fallback contracts without a WordPress installation.
  *
+ * Thirty-seven approved equivalents are ignored in get_location_meta():
+ * six structurally unobservable changes, 24 discarded phone-HTML changes,
+ * and seven alert comparisons within the schema string domain.
+ * Structural cases are redundant photo truth
+ * conditions, an overwritten floor initializer, a non-object region
+ * fallback, a string-accumulator comparison, and an unread suppression flag.
+ *
+ * The phone exclusions depend on the string/absent-value contract and the
+ * uams-2020 formatter implementation at revision:
+ * cd737498b249b60b9d456d07ddbe38ad0dff6811
+ * Source repository: https://github.com/UAMS-Web/uams-2020
+ * No application-visible effects were found under those bounds; alternate
+ * implementations, malformed inputs, PCRE state, and resource failures are
+ * outside that audit. The discarded ACF featured-override read remains
+ * unexcluded because a supported hook can observe schema-valid values.
+ * Both discarded formatter-call mutations also remain enabled: their
+ * exclusions would require inline directives rather than standalone ones.
+ *
  * @command  vendor/bin/pest tests/Unit/LocationMetadataTest.php
  */
 
