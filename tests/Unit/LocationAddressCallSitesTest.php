@@ -26,7 +26,6 @@ final class LocationAddressCallSitesTest extends TestCase
             'single provider page' => ['templates/single-physicians.php', 'uamswp_location_address_2('],
             'location card' => ['templates/loops/location-card.php', 'uamswp_location_address_2('],
             'Doximity list' => ['templates/doximity-list.php', 'uamswp_location_address_2('],
-            'GMB location list' => ['templates/gmb-list-location.php', 'uamswp_location_address_parts('],
             'GMB location export' => ['includes/class.fad-gmb-settings-page.php', 'uamswp_location_address_parts('],
         ];
     }
@@ -49,8 +48,6 @@ final class LocationAddressCallSitesTest extends TestCase
             'single provider page' => ['templates/single-physicians.php', 'location'],
             'location card' => ['templates/loops/location-card.php', 'location'],
             'Doximity list' => ['templates/doximity-list.php', 'primary_appointment'],
-            'GMB location list' => ['templates/gmb-list-location.php', 'location'],
-            'GMB provider list' => ['templates/gmb-list-provider.php', 'location'],
             'GMB export' => ['includes/class.fad-gmb-settings-page.php', 'location'],
         ];
     }

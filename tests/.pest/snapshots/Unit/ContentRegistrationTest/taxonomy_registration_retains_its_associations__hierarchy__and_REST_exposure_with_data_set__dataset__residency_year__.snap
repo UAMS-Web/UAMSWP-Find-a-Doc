@@ -1,0 +1,43 @@
+{
+    "labels": {
+        "name": "Residency Years",
+        "singular_name": "Residency Year",
+        "menu_name": "Residency Years",
+        "all_items": "All Residency Years",
+        "parent_item": "Parent Residency Year",
+        "parent_item_colon": "Parent Residency Year:",
+        "new_item_name": "New Residency Year",
+        "add_new_item": "Add New Residency Year",
+        "edit_item": "Edit Residency Year",
+        "update_item": "Update Residency Year",
+        "view_item": "View Residency Year",
+        "separate_items_with_commas": "Separate residency year with commas",
+        "add_or_remove_items": "Add or remove residency years",
+        "choose_from_most_used": "Choose from the most used",
+        "popular_items": "Popular Residency Year",
+        "search_items": "Search Residency Year",
+        "not_found": "Not Found",
+        "no_terms": "No Residency Year",
+        "items_list": "Residency Year list",
+        "items_list_navigation": "Residency Year list navigation"
+    },
+    "public": true,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "residency_year",
+        "with_front": false,
+        "hierarchical": false
+    }
+}

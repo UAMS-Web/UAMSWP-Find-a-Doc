@@ -524,11 +524,11 @@ add_action('init', 'create_education_taxonomy', 0);
 
 add_action('init', 'create_building_taxonomy', 0);
 
-// Google My Business Categories for Providers
+// Google Business Profile Categories for Providers
 
 add_action('init', 'create_gmb_cat_provider_taxonomy', 0);
 
-// Google My Business Categories for Locations
+// Google Business Profile Categories for Locations
 
 add_action('init', 'create_gmb_cat_location_taxonomy', 0);
 
@@ -2507,15 +2507,15 @@ function create_location_type_taxonomy(): void
 
 }
 
-// Google My Business Categories for Providers
+// Google Business Profile Categories for Providers
 
 function create_gmb_cat_provider_taxonomy(): void
 {
 
     $labels = [
-        'name' => 'Google My Business Categories for Providers',
-        'singular_name' => 'Google My Business Category for Providers',
-        'menu_name' => 'Google My Business Categories',
+        'name' => 'Google Business Profile Categories for Providers',
+        'singular_name' => 'Google Business Profile Category for Providers',
+        'menu_name' => 'Google Business Profile Categories',
         'all_items' => 'All Categories',
         'parent_item' => 'Parent Category',
         'parent_item_colon' => 'Parent Category:',
@@ -2570,15 +2570,15 @@ function create_gmb_cat_provider_taxonomy(): void
 
 }
 
-// Google My Business Categories for Locations
+// Google Business Profile Categories for Locations
 
 function create_gmb_cat_location_taxonomy(): void
 {
 
     $labels = [
-        'name' => 'Google My Business Categories for Locations',
-        'singular_name' => 'Google My Business Category for Locations',
-        'menu_name' => 'Google My Business Categories',
+        'name' => 'Google Business Profile Categories for Locations',
+        'singular_name' => 'Google Business Profile Category for Locations',
+        'menu_name' => 'Google Business Profile Categories',
         'all_items' => 'All Categories',
         'parent_item' => 'Parent Category',
         'parent_item_colon' => 'Parent Category:',
@@ -3476,14 +3476,13 @@ function get_provider_meta($object)
     $provider_service_line = get_field('physician_service_line', $postId);
     $resident_profile_group = get_field('physician_resident_profile_group', $postId);
     $resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
-    // if (is_array(get_term( $resident_academic_department, 'academic_department' ))) {
-    $resident_academic_department_name = is_array(get_term($resident_academic_department, 'academic_department')) ? get_term($resident_academic_department, 'academic_department')->name : '';
+    $resident_academic_department_term = get_term($resident_academic_department, 'academic_department');
+    $resident_academic_department_name = $resident_academic_department_term && ! is_wp_error($resident_academic_department_term) ? $resident_academic_department_term->name : '';
     $resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
     $resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
     $resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
-    if (is_array(get_term($resident_academic_year, 'residency_year'))) {
-        $resident_academic_year_name = is_array(get_term($resident_academic_year, 'residency_year')) ? get_term($resident_academic_year, 'residency_year')->name : '';
-    }
+    $resident_academic_year_term = get_term($resident_academic_year, 'residency_year');
+    $resident_academic_year_name = $resident_academic_year_term && ! is_wp_error($resident_academic_year_term) ? $resident_academic_year_term->name : '';
 
     $resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
     $data['physician_full_name'] = $full_name;
@@ -3549,7 +3548,7 @@ function get_provider_meta($object)
     $data['physician_referral_required'] = get_field('physician_referral_required', $postId);
     $provider_portal = get_field('physician_portal', $postId);
     $portal = get_term($provider_portal, 'portal');
-    $data['physician_portal']['name'] = is_array($portal) ? $portal->name : '';
+    $data['physician_portal']['name'] = $portal && ! is_wp_error($portal) ? $portal->name : '';
     $data['physician_portal']['content'] = get_field('portal_content', $portal);
     $data['physician_portal']['url'] = get_field('portal_url', $portal);
     // $data['physician_clinical_admin_title'] = get_field( 'physician_clinical_admin_title', $postId );
@@ -3732,7 +3731,7 @@ function get_provider_meta($object)
                 $data['physician_conditions'][$condition->ID]['slug'] = $condition->post_name;
                 $condition_list .= $condition->post_title;
 
-                if (count($conditions_cpt) > $i) {
+                if (count($condition_cpt_query->posts) > $i) {
 
                     $condition_list .= ', ';
 
@@ -3777,7 +3776,7 @@ function get_provider_meta($object)
                 $data['physician_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
                 $treatment_list .= $treatment->post_title;
 
-                if (count($treatments_cpt) > $i) {
+                if (count($treatment_cpt_query->posts) > $i) {
 
                     $treatment_list .= ', ';
 
@@ -3822,7 +3821,7 @@ function get_provider_meta($object)
                 $data['physician_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
                 $expertise_list .= $expertise->post_title;
 
-                if (count($expertises) > $i) {
+                if (count($expertise_query->posts) > $i) {
 
                     $expertise_list .= ', ';
 
@@ -3846,9 +3845,11 @@ function get_provider_meta($object)
     $publications = get_field('physician_select_publications', $postId);
 
     if (! empty($publications)) {
+        $i = 1;
         foreach ($publications as $publication) {
 
             $data['physician_pubmed'][$i]['information'] = $publication['pubmed_information'];
+            $i++;
 
         }
     }
@@ -4267,7 +4268,7 @@ function get_location_meta($object)
 
     $location_portal = get_field('location_portal', $postId);
     $portal = get_term($location_portal, 'portal');
-    $data['location_portal']['name'] = is_array($portal) ? $portal->name : '';
+    $data['location_portal']['name'] = $portal && ! is_wp_error($portal) ? $portal->name : '';
     $data['location_portal']['content'] = get_field('portal_content', $portal);
     $data['location_portal']['url'] = get_field('portal_url', $portal);
 
@@ -4372,7 +4373,7 @@ function get_location_meta($object)
                 $data['location_provider'][$provider->ID]['slug'] = $provider->post_name;
                 $provider_list .= get_field('physician_full_name', $provider->ID);
 
-                if (count($providers) > $i) {
+                if (count($provider_query->posts) > $i) {
 
                     $provider_list .= ' | ';
 
@@ -4419,7 +4420,7 @@ function get_location_meta($object)
                 $data['location_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
                 $expertise_list .= $expertise->post_title;
 
-                if (count($expertises) > $i) {
+                if (count($expertise_query->posts) > $i) {
 
                     $expertise_list .= ', ';
 
@@ -4466,7 +4467,7 @@ function get_location_meta($object)
                 $data['location_conditions'][$condition->ID]['slug'] = $condition->post_name;
                 $condition_list .= $condition->post_title;
 
-                if (count($conditions_cpt) > $i) {
+                if (count($condition_cpt_query->posts) > $i) {
 
                     $condition_list .= ', ';
 
@@ -4513,7 +4514,7 @@ function get_location_meta($object)
                 $data['location_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
                 $treatment_list .= $treatment->post_title;
 
-                if (count($treatments_cpt) > $i) {
+                if (count($treatment_cpt_query->posts) > $i) {
 
                     $treatment_list .= ', ';
 
@@ -4597,7 +4598,7 @@ function get_expertise_meta($object)
                 $data['expertise_conditions'][$condition->ID]['slug'] = $condition->post_name;
                 $condition_list .= $condition->post_title;
 
-                if (count($conditions_cpt) > $i) {
+                if (count($condition_cpt_query->posts) > $i) {
 
                     $condition_list .= ', ';
 
@@ -4642,7 +4643,7 @@ function get_expertise_meta($object)
                 $data['expertise_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
                 $treatment_list .= $treatment->post_title;
 
-                if (count($treatments_cpt) > $i) {
+                if (count($treatment_cpt_query->posts) > $i) {
 
                     $treatment_list .= ', ';
 
@@ -4687,7 +4688,7 @@ function get_expertise_meta($object)
                 $data['expertise_provider'][$provider->ID]['slug'] = $provider->post_name;
                 $provider_list .= get_field('physician_full_name', $provider->ID);
 
-                if (count($providers) > $i) {
+                if (count($provider_query->posts) > $i) {
 
                     $provider_list .= ' | ';
 
@@ -4732,7 +4733,7 @@ function get_expertise_meta($object)
                 $data['expertise_location'][$location->ID]['slug'] = $location->post_name;
                 $location_list .= $location->post_title;
 
-                if (count($locations) > $i) {
+                if (count($location_query->posts) > $i) {
 
                     $location_list .= ', ';
 
@@ -4790,7 +4791,7 @@ function get_condition_meta($object): array
                 $data['condition_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
                 $expertise_list .= $expertise->post_title;
 
-                if (count($expertises) > $i) {
+                if (count($expertise_query->posts) > $i) {
 
                     $expertise_list .= ', ';
 
@@ -4835,7 +4836,7 @@ function get_condition_meta($object): array
                 $data['condition_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
                 $treatment_list .= $treatment->post_title;
 
-                if (count($treatments_cpt) > $i) {
+                if (count($treatment_cpt_query->posts) > $i) {
 
                     $treatment_list .= ', ';
 
@@ -4880,7 +4881,7 @@ function get_condition_meta($object): array
                 $data['condition_provider'][$provider->ID]['slug'] = $provider->post_name;
                 $provider_list .= get_field('physician_full_name', $provider->ID);
 
-                if (count($providers) > $i) {
+                if (count($provider_query->posts) > $i) {
 
                     $provider_list .= ' | ';
 
@@ -4925,7 +4926,7 @@ function get_condition_meta($object): array
                 $data['condition_location'][$location->ID]['slug'] = $location->post_name;
                 $location_list .= $location->post_title;
 
-                if (count($locations) > $i) {
+                if (count($location_query->posts) > $i) {
 
                     $location_list .= ', ';
 
@@ -4983,7 +4984,7 @@ function get_treatment_meta($object): array
                 $data['treatment_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
                 $expertise_list .= $expertise->post_title;
 
-                if (count($expertises) > $i) {
+                if (count($expertise_query->posts) > $i) {
 
                     $expertise_list .= ', ';
 
@@ -5028,7 +5029,7 @@ function get_treatment_meta($object): array
                 $data['treatment_conditions'][$condition->ID]['slug'] = $condition->post_name;
                 $condition_list .= $condition->post_title;
 
-                if (count($conditions_cpt) > $i) {
+                if (count($condition_cpt_query->posts) > $i) {
 
                     $condition_list .= ', ';
 
@@ -5073,7 +5074,7 @@ function get_treatment_meta($object): array
                 $data['treatment_provider'][$provider->ID]['slug'] = $provider->post_name;
                 $provider_list .= get_field('physician_full_name', $provider->ID);
 
-                if (count($providers) > $i) {
+                if (count($provider_query->posts) > $i) {
 
                     $provider_list .= ' | ';
 
@@ -5118,7 +5119,7 @@ function get_treatment_meta($object): array
                 $data['treatment_location'][$location->ID]['slug'] = $location->post_name;
                 $location_list .= $location->post_title;
 
-                if (count($locations) > $i) {
+                if (count($location_query->posts) > $i) {
 
                     $location_list .= ', ';
 

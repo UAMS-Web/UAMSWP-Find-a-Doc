@@ -14,6 +14,8 @@ use Brain\Monkey\Functions;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
+use function Brain\Monkey\Functions\when;
+
 final class DocRoleCapabilitiesTest extends UnitTestCase
 {
     /** The ten primitive capabilities a post type's `capabilities` map names for read, edit, publish and delete. */
@@ -30,8 +32,8 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
 
         // The file registers its post types on `init` at file scope, so the hook functions must exist while
         // it loads; Brain Monkey provides them only inside a test. It loads once per process (require_once).
-        Functions\when('add_action')->justReturn(true);
-        Functions\when('add_filter')->justReturn(true);
+        when('add_action')->justReturn(true);
+        when('add_filter')->justReturn(true);
         require_once dirname(__DIR__, 2).'/includes/class.fad-custom-post.php';
     }
 
@@ -43,7 +45,7 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
     private function roles_after_sync(): array
     {
         $created = [];
-        Functions\when('add_role')->alias(function ($role, $name, $caps) use (&$created) {
+        when('add_role')->alias(function ($role, $name, $caps) use (&$created): void {
             $created[$role] = $caps;
         });
         \add_roles_on_plugin_activation();
@@ -52,25 +54,21 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
         foreach ($created as $name => $caps) {
             $objects[$name] = new class($caps)
             {
-                public $capabilities;
+                public function __construct(public $capabilities) {}
 
-                public function __construct($caps)
-                {
-                    $this->capabilities = $caps;
-                }
-
-                public function add_cap($cap, $grant = true)
+                public function add_cap($cap, $grant = true): void
                 {
                     $this->capabilities[$cap] = $grant;
                 }
 
-                public function remove_cap($cap)
+                public function remove_cap($cap): void
                 {
                     unset($this->capabilities[$cap]);
                 }
             };
         }
-        Functions\when('get_role')->alias(fn ($name) => $objects[$name] ?? null);
+
+        when('get_role')->alias(fn ($name): ?object => $objects[$name] ?? null);
         \uamswp_fad_sync_doc_role_caps();
 
         $granted = [];
@@ -88,8 +86,8 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
     private function post_type_maps(): array
     {
         $maps = [];
-        Functions\when('plugin_dir_url')->justReturn('');
-        Functions\when('register_post_type')->alias(function ($type, $args) use (&$maps) {
+        when('plugin_dir_url')->justReturn('');
+        when('register_post_type')->alias(function ($type, $args) use (&$maps): void {
             $maps[$type] = $args['capabilities'];
         });
         \providers();
@@ -112,12 +110,51 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
     public function test_the_two_doc_roles_are_registered_with_these_names(): void
     {
         $names = [];
-        Functions\when('add_role')->alias(function ($role, $name) use (&$names) {
+        when('add_role')->alias(function ($role, $name) use (&$names): void {
             $names[$role] = $name;
         });
         \add_roles_on_plugin_activation();
 
         $this->assertSame(['doc_editor' => 'Doc Profile Editor', 'doc_admin' => 'Doc Profile Admin'], $names);
+    }
+
+    /**
+     * Preserve initial grants and explicit denials before synchronization masks them.
+     *
+     * A missing capability and an explicit false have different stored role maps.
+     */
+    public function test_new_doc_roles_retain_initial_grants_and_explicit_denials(): void
+    {
+        // Capture the role maps before the later init callback can modify them.
+        $created = [];
+        when('add_role')->alias(function ($role, $name, $caps) use (&$created): void {
+            $created[$role] = $caps;
+        });
+        \add_roles_on_plugin_activation();
+
+        // Distinguish explicit stored denials from absent entries for both roles.
+        foreach ([
+            'doc_editor' => [
+                'delete_published_physicians', 'edit_others_physicians', 'publish_physicians',
+                'delete_published_locations', 'edit_others_locations', 'publish_locations',
+            ],
+            'doc_admin' => [
+                'delete_physicians', 'delete_others_physicians', 'delete_published_physicians', 'delete_private_physicians',
+                'delete_locations', 'delete_others_locations', 'delete_published_locations', 'delete_private_locations',
+                'publish_physicians', 'publish_locations',
+            ],
+        ] as $role => $capabilities) {
+            foreach ($capabilities as $capability) {
+                $this->assertArrayHasKey($capability, $created[$role]);
+                $this->assertFalse($created[$role][$capability], "{$role}: {$capability}");
+            }
+        }
+
+        // Pin private editing before synchronization can restore a missing grant.
+        foreach (['edit_private_physicians', 'edit_private_locations'] as $capability) {
+            $this->assertArrayHasKey($capability, $created['doc_admin']);
+            $this->assertTrue($created['doc_admin'][$capability], $capability);
+        }
     }
 
     public function test_doc_editor_holds_exactly_these_capabilities(): void
@@ -216,7 +253,7 @@ final class DocRoleCapabilitiesTest extends UnitTestCase
         $map = $this->post_type_maps()[$type];
         $held = $this->roles_after_sync()[$role];
 
-        $granted = array_values(array_filter(self::MAP_KEYS, fn ($key) => in_array($map[$key], $held, true)));
+        $granted = array_values(array_filter(self::MAP_KEYS, fn (string $key): bool => in_array($map[$key], $held, true)));
 
         $this->assertSame($expected, $granted, "{$role} on {$type}");
     }
