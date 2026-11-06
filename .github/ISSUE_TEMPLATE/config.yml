@@ -1,0 +1,6 @@
+contact_links:
+  # uams-claude-skills:begin security-contact-link
+  - name: "Report a security vulnerability"
+    url: "https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/security/advisories/new"
+    about: "Report a vulnerability privately. Do not open a public issue for one: anyone can read it, and editing it later does not remove the text."
+  # uams-claude-skills:end security-contact-link

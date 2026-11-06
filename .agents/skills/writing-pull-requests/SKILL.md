@@ -58,7 +58,7 @@ once and keeps it current by comparing against the skill's copy:
 | --- | --- | --- |
 | `assign-author.yml` | `.github/workflows/assign-author.yml` | Assigns the pull request to its author |
 | `check-attribution-footer.yml` | `.github/workflows/check-attribution-footer.yml` | Fails a body carrying an attribution footer, a session link or `U+1F916` |
-| `check-closing-keyword-across-lines.yml` | `.github/workflows/check-closing-keyword-across-lines.yml` | Fails a body holding a closing keyword at the end of one line and an issue reference at the start of the next |
+| `check-closing-keyword-across-lines.yml` | `.github/workflows/check-closing-keyword-across-lines.yml` | Fails a body holding a closing keyword at the end of one line and an issue reference at the start of the next, and a pull request linked to an issue its body does not close with a keyword |
 
 The footer check runs [`scripts/check-attribution-footer.mjs`](scripts/check-attribution-footer.mjs),
 which the workflow calls from the skill's own directory, so a target needs the skill and the
@@ -68,6 +68,10 @@ cannot own a template; the rule that bans the glyph is `no-emoji-in-durable-reco
 All three workflows are gated on `RUN_REMOTE_CI` with a job-level `if: vars.RUN_REMOTE_CI != 'false'`, so a private repository with the variable set to `false` skips them and bills no minutes, and a public repository runs them as before. A skipped job reports `skipped` and a skipped required check reports success, so while the switch is off the body checks have not read the body. The gate is in the template because a copy must match its template in full.
 
 The closing-keyword check runs [`scripts/check-closing-keyword-across-lines.mjs`](scripts/check-closing-keyword-across-lines.mjs) the same way. GitHub reads a newline as whitespace, so a status column whose last cell is `closed` above a row labelled `#N` is the directive `closed #N`, and a squash merge acts on it. The workflow reads the body through the API, and the script runs the `github-api-budget` same-line control before it reads anything. `--range` and `--commit` read commit messages instead. Reword a flagged pair: put the number first, or write the cell as something other than a bare keyword.
+
+The same job has a second step, [`scripts/check-development-links.mjs`](scripts/check-development-links.mjs), for a close the body text does not show (UAMS-Web/uams-claude-skills#573). A branch made with `gh issue develop <n>`, or from an issue's **Create a branch** link, is linked to issue `n`, and the pull request opened from it lists `n` in `closingIssuesReferences` with no closing keyword anywhere. Measured on 2026-11-06 in `UAMS-Web/uams-statamic#600` and `#601`: each body said "leaves #N open", the field listed #N, the source was one `connected` timeline event seconds after the pull request opened, and the text check passed. The step reads the field through GraphQL and fails, naming each listed issue that no closing directive in the body resolves to. It judges the field's list against the body and nothing else: it is not a claim that merging closes the issue (a Development link alone was **not measured** to close its issue on merge; the check treats the listing as the risk, the same way the squash-message scan treats the text). The grammar of a directive is imported from `check-closing-keyword-across-lines.mjs`, so a keyword the text check recognizes is a keyword this one accepts, including a cross-repository `org/repo#N`, an issue URL and a pair across a line break. A response with an `errors` member, no `closingIssuesReferences`, or a `totalCount` above the nodes read is exit 2, because each looks like "nothing linked". The step runs on the same events as the first, so a link added in the Development panel after the last event is read at the next edit, push or reopen. The template's `issues: read` permission and the live behavior of the new step on a hosted run were **not measured** when this was written; the script was exercised against response fixtures only (macOS; the Windows run is not yet measured).
+
+**When not to use `gh issue develop`.** It is right for a pull request that finishes issue `n`. For one that is only part of `n` (an epic, or one slice of a larger ticket), create the branch from the default branch by hand (`git checkout -b <n>-<slug> origin/main`) and state the relationship as `Part of #n.` or `Refs #n.`. When a link already exists on an open pull request, remove it from the pull request's **Development** panel (the gear beside the linked issue) and edit the body, or add `Closes #n.` if the pull request does finish it; either clears the failing step on the next run.
 
 ## Output format
 
@@ -119,7 +123,7 @@ Three lifecycle rules govern *which branches* a PR targets, *when* it is opened 
 *how* its merge is sequenced. "Ready" is keyed on the repository's validation path, never on a
 green checks panel.
 
-- **One PR per integration branch, all from the issue's linked branch.** The branch is created from the default branch and linked to the issue (`gh issue develop <n> --base <default branch> --name <n>-<slug>`, or the issue's **Create a branch** link). Which PRs it gets depends on the branches the repository has, the same plan the sync applies to its own pull requests:
+- **One PR per integration branch, all from the issue's linked branch.** The branch is created from the default branch and linked to the issue (`gh issue develop <n> --base <default branch> --name <n>-<slug>`, or the issue's **Create a branch** link), for a pull request that finishes the issue; a pull request that leaves its issue open branches by hand (see **When not to use `gh issue develop`** above). Which PRs it gets depends on the branches the repository has, the same plan the sync applies to its own pull requests:
   - `dev`, `staging`, and the default branch: a ready PR to `dev`, and a draft PR to `staging` from the same branch. The `staging` draft references the `dev` PR instead of repeating its description, and stays a draft until the `dev` PR merges, whatever the next rule would otherwise say.
   - `staging` and the default branch, no `dev`: one PR to `staging`.
   - `dev` and the default branch, no `staging`: one PR to `dev`.
@@ -135,14 +139,21 @@ green checks panel.
   while you know the branch is unfinished.
 - **In a public repository, the draft's remote checks are the pre-PR check.** Its `ci.yml` runs on
   every pull request, drafts included (the `RUN_REMOTE_CI` switch reaches private repositories
-  only), and the local runner's jobs mirror it. So run nothing locally as a pre-PR check: push the
-  branch and open the pull request as a draft, docs-only ones included, and flip it to ready only
-  when every remote check on its head is green. When a check is red, fix it and push to the same
+  only), and the local runner's jobs mirror it. So the full chain is not run locally as a pre-PR
+  check: push the branch and open the pull request as a draft, docs-only ones included, and flip
+  it to ready only when every remote check on its head is green. **Before each push, run the
+  three static tools on the changed files** with the commands in the
+  `code-quality` skill's job table (where the repository carries it): Pint (`vendor/bin/pint --test`) and
+  Rector (`vendor/bin/rector --dry-run`), each given the changed PHP files, and PHPStan
+  (`composer stan`). They take seconds to about
+  a minute, and a style failure caught here saves a push and a wait. A repository without one of
+  the tools skips it. When a check is red, fix it and push to the same
   branch; the draft re-runs, and a new pull request for the same change is never the answer. Keep
   running a test locally while writing it, and keep a local run for the four cases remote CI
   cannot cover:
   - a change whose acceptance criteria name Windows or another platform remote CI does not run
-    (it runs on Ubuntu only);
+    (read the `os` matrix in its `ci.yml`: `aether-wordpress-importer`, `uams-statamic` and
+    `aether-wordpress-migration-api` run Ubuntu and Windows);
   - the full mutation run a test-coverage ticket records (remote CI runs one smoke path);
   - a run that needs a loaded WordPress install or the importer's host application;
   - any repository with no remote CI workflow, including a private one.
