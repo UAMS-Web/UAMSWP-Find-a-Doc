@@ -1,0 +1,43 @@
+{
+    "labels": {
+        "name": "Regions",
+        "singular_name": "Region",
+        "menu_name": "Regions",
+        "all_items": "All Regions",
+        "parent_item": "Parent Region",
+        "parent_item_colon": "Parent Region:",
+        "new_item_name": "New Region",
+        "add_new_item": "Add New Region",
+        "edit_item": "Edit Region",
+        "update_item": "Update Region",
+        "view_item": "View Region",
+        "separate_items_with_commas": "Separate Regions with commas",
+        "add_or_remove_items": "Add or remove Regions",
+        "choose_from_most_used": "Choose from the most used",
+        "popular_items": "Popular Regions",
+        "search_items": "Search Regions",
+        "not_found": "Not Found",
+        "no_terms": "No Regions",
+        "items_list": "Regions list",
+        "items_list_navigation": "Regions list navigation"
+    },
+    "public": true,
+    "hierarchical": true,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "region",
+        "with_front": false,
+        "hierarchical": true
+    }
+}

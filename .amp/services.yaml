@@ -1,0 +1,10 @@
+services:
+  find-a-doc-db:
+    platforms: [linux]
+    port: 3306
+    command: >-
+      sudo mariadbd --user=mysql --datadir=/var/lib/mysql
+      --bind-address=127.0.0.1 --port="$PORT"
+      --socket=/tmp/find-a-doc-mysql.sock --pid-file=/tmp/find-a-doc-mysql.pid
+      --init-file=/etc/mysql/find-a-doc-init.sql
+      --innodb-flush-log-at-trx-commit=2 --skip-log-bin

@@ -1,0 +1,43 @@
+{
+    "labels": {
+        "name": "Recognition Lists",
+        "singular_name": "Recognition List",
+        "menu_name": "Recognition Lists",
+        "all_items": "All Recognitions",
+        "parent_item": "Parent Recognition",
+        "parent_item_colon": "Parent Recognition:",
+        "new_item_name": "New Recognition",
+        "add_new_item": "Add New Recognition",
+        "edit_item": "Edit Recognition",
+        "update_item": "Update Recognition",
+        "view_item": "View Recognition",
+        "separate_items_with_commas": "Separate recognitions with commas",
+        "add_or_remove_items": "Add or remove recognitions",
+        "choose_from_most_used": "Choose from the most used",
+        "popular_items": "Popular Recognitions",
+        "search_items": "Search Recognitions",
+        "not_found": "Not Found",
+        "no_terms": "No Recognitions",
+        "items_list": "Recognitions list",
+        "items_list_navigation": "Recognitions list navigation"
+    },
+    "public": true,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "recognition",
+        "with_front": false,
+        "hierarchical": false
+    }
+}
