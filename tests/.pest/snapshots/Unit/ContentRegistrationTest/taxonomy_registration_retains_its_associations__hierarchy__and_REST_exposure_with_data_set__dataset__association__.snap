@@ -1,0 +1,39 @@
+{
+    "label": "Health Care Professional Associations",
+    "labels": {
+        "name": "Health Care Professional Associations",
+        "singular_name": "Health Care Professional Association",
+        "search_items": "Search Associations",
+        "all_items": "All Associations",
+        "edit_item": "Edit Association",
+        "update_item": "Update Association",
+        "add_new_item": "Add New Association",
+        "new_item_name": "New Association",
+        "menu_name": "Associations, Professional",
+        "view_item": "View Association",
+        "popular_items": "Popular Associations",
+        "separate_items_with_commas": "Separate associations with commas",
+        "add_or_remove_items": "Add or remove associations",
+        "choose_from_most_used": "Choose from the most used associations",
+        "not_found": "No associations found"
+    },
+    "public": true,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "association",
+        "with_front": false,
+        "hierarchical": false
+    }
+}

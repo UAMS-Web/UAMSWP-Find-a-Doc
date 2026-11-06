@@ -1,0 +1,42 @@
+{
+    "label": "Institute Affiliations",
+    "labels": {
+        "name": "Institute Affiliations",
+        "singular_name": "Institute Affiliations",
+        "search_items": "Search Institute Affiliations",
+        "all_items": "All Institute Affiliations",
+        "edit_item": "Edit Institute Affiliation",
+        "update_item": "Update Institute Affiliation",
+        "add_new_item": "Add New Institute Affiliation",
+        "new_item_name": "New Institute Affiliation",
+        "menu_name": "Affiliations, Institute",
+        "view_item": "View Institute Affiliation",
+        "popular_items": "Popular Institute Affiliation",
+        "separate_items_with_commas": "Separate institute affiliations with commas",
+        "add_or_remove_items": "Add or remove institute affiliations",
+        "choose_from_most_used": "Choose from the most used institute affiliations",
+        "not_found": "No institute affiliations found"
+    },
+    "public": true,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_in_rest": true,
+    "rest_base": "institute_affiliation",
+    "rest_controller_class": "WP_REST_Terms_Controller",
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "institute_affiliation",
+        "with_front": true,
+        "hierarchical": true
+    }
+}
