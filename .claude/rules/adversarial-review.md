@@ -27,6 +27,8 @@ A **change that ships** and a **claim that is published** (a figure, count, veri
 
 6. **Triage and close the loop.** Fix every blocker and major and every cheap, high-confidence minor. For a real bug fixed, add a regression test and **mutation-verify** it (fix disabled: red; restored: green). **Revert by copying the file aside, never with the stash** (shared across worktrees, [`worktrees`](worktrees.md)) or `git checkout --`: `cp path/to/Foo.php "$SCRATCH/Foo.fixed.php"`, `git show HEAD:path/to/Foo.php > path/to/Foo.php`, run, restore. Read *why* it went red: a control failing for the wrong reason, or a one-liner that corrupted the file, proves nothing. A **pre-existing** bug the slice touches or reuses is in scope; fix it. **Document** accepted gaps and deferred residue by name. **Re-run the gate**, then ship.
 
+   Mutation-verify with `--mutate` too; see *Mutation testing*.
+
 7. **Record the verdict.** A closed fork: on the issue per [`design-decision-forks`](design-decision-forks.md). A new open question or unspecified detail: a follow-up issue per [`writing-issues`](../skills/writing-issues/SKILL.md). Otherwise a docblock or PR-body note.
 
 ## Review questions
@@ -67,7 +69,26 @@ For each comment or docblock changed, check each statement against the code it d
 
 ### Mutation testing
 
-No Pest here (see [`tests`](../skills/tests/SKILL.md)): for each relied-on test, name the line whose removal it would catch; one that names none cannot fail.
+Run `vendor/bin/pest --mutate --class="<Namespace>\\…\\<ChangedClass>"` diff-scoped; a **survivor is a false-green test**. **`0 Mutations for 0 Files created` is a setup failure.**
+
+**The criterion is *no unexplained survivors*, never a score or a `min_score` gate.** Each survivor is **killed**, **deleted** (dead code), or **annotated with why it cannot be killed**.
+
+**Annotate with `// @pest-mutate-ignore: <Mutator>`**, never config `ignore()`/`except()`: standalone **above** the node, reason on its own line before it, **nothing after the mutator names** (prose suppresses nothing), never **bare** (suppresses the whole subtree), no **trailing whitespace**. Run [`check-mutate-ignore.php`](../skills/pest-testing/scripts/check-mutate-ignore.php) as a CI job (the `code-quality` template has one); clean means no annotation is inert, never that every one is effective.
+
+**Every run must show it executed** (a child that never launched scores a kill, so a dead run reads `100.00%`): any survivor; at 100%, a mutation-to-base `Duration:` ratio an order of magnitude below 1 is the failure (failures 0.03 to 0.08, healthy 0.64 to 4.67), near 1 re-run, but only once the base phase is shown to be test time (compare it with the tests run without `--mutate`; a padded base phase voids the ratio, and a low ratio is never waved off as padding without that comparison: [evidence](../skills/evidence-behind-rules/adversarial-review.md)); implausible perfection; else run one child by hand with the run's own test selection:
+
+```
+PEST_MUTATION_TESTING=<absolute source path> PEST_MUTATION_FILE=<replacement> vendor/bin/pest <test file> --bail --filter="<Class>::(.*)"
+```
+
+| Replacement | Required |
+| --- | --- |
+| asserted byte-identical copy | exit **0** |
+| one real mutation | **non-zero**, named assertion |
+
+Or skip the only covering test, confirm it is skipped, and require the mutant to survive.
+
+**Assert a hand-rolled mutation changed the file.** Coverage driver: PCOV or Xdebug, not phpdbg, per machine; run `php .claude/skills/pcov-setup/scripts/check-mutation-instrument.php` before trusting a score ([`pcov-setup`](../skills/pcov-setup/SKILL.md)). Track a full-coverage ticket's passes with `build-coverage-scope-csv.php`, kept current in UAMS-Web/uams-claude-skills.
 
 ### Property-based / round-trip tests
 

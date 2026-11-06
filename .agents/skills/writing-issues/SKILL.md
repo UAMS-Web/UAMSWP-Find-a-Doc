@@ -55,10 +55,13 @@ here.** When the house style changes, change it here first and reconcile the tem
 the reverse, or the two silently diverge.
 
 **The skeletons ship with this skill** in [`templates/`](templates/): `1-bug.md`, `2-feature.md`,
-`3-research-spike.md` and `4-follow-up-cleanup.md`. The sync writes no issue template under `.github/`, so a
-repository copies them once to `.github/ISSUE_TEMPLATE/` and keeps them current by comparing
-against the skill's copy. Each file opens with front matter (`name`, `about`, `type`, `labels`)
-that GitHub reads for the template chooser, followed by the sections of the inventory below.
+`3-research-spike.md` and `4-follow-up-cleanup.md`. **The sync from `UAMS-Web/uams-claude-skills` writes
+them to `.github/ISSUE_TEMPLATE/`** and keeps them current: a file it wrote carries one comment line
+after its front matter that marks it as the sync's, and is rewritten from this skill's copy on each
+sync. A file without that line is the repository's own and is left as it is, with a note in the sync
+pull request; to hand it over, replace it with the skill's copy plus the marker line. A repository whose
+templates have other names gets none created. Each file opens with front matter (`name`, `about`,
+`type`, `labels`) that GitHub reads for the template chooser, followed by the sections of the inventory below.
 
 ### The chooser's `config.yml`: a security link beside the templates
 

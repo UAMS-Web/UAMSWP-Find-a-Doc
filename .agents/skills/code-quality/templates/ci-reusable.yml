@@ -1,7 +1,7 @@
 name: CI chain
 
-# cspell:ignore vitest
-# vitest is the name of an input and of the tool it switches on, so it cannot be reworded.
+# cspell:ignore vitest vite mktemp esac
+# vitest and vite are the names of inputs and of the tools they switch on, and mktemp is the command a step runs, so none can be reworded.
 
 # Template: .claude/skills/code-quality/templates/ci-reusable.yml in UAMS-Web/uams-claude-skills,
 # published as .github/workflows/ci.yml in UAMS-Web/uams-ci-workflows (UAMS-Web/uams-claude-skills#485).
@@ -34,6 +34,12 @@ name: CI chain
 # - `all-platform-jobs` is a space-separated list of job ids kept on all three runners whatever else is set:
 #   a job classified Linux only gains its Windows and macOS legs, and a job classified for all three keeps them
 #   under `linux-only`.
+# - `windows-jobs` is a space-separated list of job ids that run on `ubuntu-latest` and `windows-latest` and not on
+#   `macos-latest`, whatever `linux-only` says: a job classified for all three loses its macOS leg, and a job classified
+#   Linux only gains its Windows leg. A job named in both lists keeps all three. Omitted, it changes nothing.
+#
+# The `mutate` job is the exception to all three inputs: it runs on `ubuntu-latest` only, because a mutation score
+# taken on a Windows leg has counted mutants the tests never detect as killed (UAMS-Web/uams-ci-workflows#13).
 #
 # Each job carries a `# Legs:` line saying which classification it has and why; scripts/check-templates.mjs
 # fails this template when a job is unclassified, when a job's matrix is not the one its classification
@@ -44,6 +50,27 @@ name: CI chain
 # turns them on, and each runs a command the caller supplies. `encoding-guard` and `vite-build` are Linux only,
 # `vitest` and `mutation-smoke` run on all three, on the seeded-fault evidence in
 # UAMS-Web/uams-claude-skills#478 (see the code-quality skill).
+#
+# The `mutate` job is on unless the caller passes `mutate: false`. A repository whose source holds no code a
+# mutator changes (an add-on template with a stub) has nothing to mutate, and the job fails a run that created
+# no mutants, so it needs a way to opt out. `mutate: false` skips the job on every leg and changes nothing else:
+# the `mutate-ignore` annotation check still runs.
+#
+# The `mutate-ignore` job scans whichever of `app`, `src` and `tests` exist unless the caller names paths in
+# `mutate-ignore-paths` (UAMS-Web/uams-claude-skills#534), for a source tree elsewhere such as a plugin's `includes`.
+#
+# What the `mutate` job mutates depends on the caller's event (UAMS-Web/uams-claude-skills#532). A pull request and
+# a push mutate only the PHP files under `mutate-paths` that the commit adds, changes or renames, so a run costs what
+# the change costs and not what the code base has grown to. A `schedule` or `workflow_dispatch` run mutates everything
+# `composer mutate` covers, under `mutate-full-timeout-minutes` (default 180) in place of the 45 minutes the others get.
+# The full pass is what catches drift from a dependency or tooling change, so a caller adds a `schedule:` trigger to its
+# own `ci.yml` (the caller template shows one). Any other event, and a pushed commit with no parent, mutates everything.
+#
+# The `pest` job is on unless the caller passes `pest: false`. A repository whose suite needs what the called
+# chain cannot give it (private submodules, a secret, a sharded run with its own reports) keeps its own Pest
+# jobs as plain jobs beside the call and lists them in the `needs:` of its `CI` job. `pest: false` skips the job
+# on every leg and changes nothing else. A `pest` job that is skipped while the input is true (a cancelled run,
+# say) still fails the `result` job.
 #
 # The final `result` job `needs:` every job, runs `if: always()`, and fails unless each needed job succeeded.
 # A needed job reports `skipped` only when its input switched it off, and that is the one skip it accepts.
@@ -59,10 +86,30 @@ on:
         description: Space-separated job ids to run on all three runners whatever linux-only says.
         type: string
         default: ''
+      windows-jobs:
+        description: Space-separated job ids to run on ubuntu-latest and windows-latest only, with no macos-latest leg, whatever linux-only says. A job also named in all-platform-jobs keeps all three.
+        type: string
+        default: ''
       share-floor-seconds:
         description: The summed class time, in seconds, below which the pest job's Slowest class step skips its share check (UAMS-Web/uams-claude-skills#505). 0 never skips it.
         type: number
         default: 10
+      pest:
+        description: Run the pest job. Pass false in a repository that runs its Pest suite as its own jobs.
+        type: boolean
+        default: true
+      mutate:
+        description: Run the mutate job. Pass false in a repository whose source holds no code a mutator changes.
+        type: boolean
+        default: true
+      mutate-full-timeout-minutes:
+        description: The timeout, in minutes, of the mutate job on a scheduled or manually dispatched run, which mutates everything composer mutate covers (UAMS-Web/uams-claude-skills#532). A pull request or a push mutates only changed files and keeps 45.
+        type: number
+        default: 180
+      mutate-ignore-paths:
+        description: Space-separated paths the mutate-ignore job scans for `@pest-mutate-ignore` annotations (UAMS-Web/uams-claude-skills#534). Empty keeps the script's own default, whichever of app, src and tests exist. A WordPress plugin names its source directory, such as includes.
+        type: string
+        default: ''
       mutate-paths:
         description: Space-separated paths the mutate job selects changed PHP files from, the paths `composer mutate` passes to --path.
         type: string
@@ -115,7 +162,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' composer-validate ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' composer-validate ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' composer-validate ') && '["ubuntu-latest","windows-latest"]' || '["ubuntu-latest"]') }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
@@ -136,7 +183,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' synced-files ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' synced-files ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' synced-files ') && '["ubuntu-latest","windows-latest"]' || '["ubuntu-latest"]') }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
@@ -155,7 +202,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' no-emoji ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' no-emoji ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' no-emoji ') && '["ubuntu-latest","windows-latest"]' || '["ubuntu-latest"]') }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
@@ -174,7 +221,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' aggregate-needs ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' aggregate-needs ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' aggregate-needs ') && '["ubuntu-latest","windows-latest"]' || '["ubuntu-latest"]') }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
@@ -195,7 +242,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' pint ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' pint ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' pint ') && '["ubuntu-latest","windows-latest"]' || '["ubuntu-latest"]') }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
@@ -210,7 +257,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' rector ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' rector ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' rector ') && '["ubuntu-latest","windows-latest"]' || '["ubuntu-latest"]') }}
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
@@ -225,7 +272,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' phpstan ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' phpstan ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' phpstan ') && '["ubuntu-latest","windows-latest"]' || '["ubuntu-latest"]') }}
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
@@ -240,7 +287,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(inputs.linux-only && !contains(format(' {0} ', inputs.all-platform-jobs), ' mutate-ignore ') && '["ubuntu-latest"]' || '["ubuntu-latest","windows-latest","macos-latest"]') }}
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' mutate-ignore ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' mutate-ignore ') && '["ubuntu-latest","windows-latest"]' || inputs.linux-only && '["ubuntu-latest"]' || '["ubuntu-latest","windows-latest","macos-latest"]') }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
@@ -249,18 +296,27 @@ jobs:
       # Fails, naming the file and line, on a bare marker, a tail that names no mutator,
       # prose after a mutator list, and (on a CRLF runtime) a trailing marker. Prints the
       # plugin revision its parsing model was measured against.
-      - run: php .claude/skills/pest-testing/scripts/check-mutate-ignore.php
+      # The paths are left unquoted on purpose, so the shell splits them into one argument each; an empty
+      # input passes none, and the script then reads whichever of app, src and tests exist.
+      - name: Check the annotations
+        shell: bash
+        env:
+          MUTATE_IGNORE_PATHS: ${{ inputs.mutate-ignore-paths }}
+        run: php .claude/skills/pest-testing/scripts/check-mutate-ignore.php $MUTATE_IGNORE_PATHS
 
   mutate:
     name: Mutation score (changed files, with PCOV) (${{ matrix.os }})
+    if: inputs.mutate
     needs: [rector, phpstan]
-    # Legs: all three. Mutation tooling has needed Windows-only patches, and the PCOV driver is installed per platform.
+    # Legs: Ubuntu only, whatever the caller passes. A Windows leg scored mutants the tests never detect as killed (UAMS-Web/uams-ci-workflows#13), so `all-platform-jobs`, `windows-jobs` and `linux-only` do not reach this matrix.
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(inputs.linux-only && !contains(format(' {0} ', inputs.all-platform-jobs), ' mutate ') && '["ubuntu-latest"]' || '["ubuntu-latest","windows-latest","macos-latest"]') }}
-    timeout-minutes: 45
+        os: [ubuntu-latest]
+    # 45 minutes for the changed files a pull request or a push selects; a scheduled or manually dispatched run
+    # mutates everything and takes the longer `mutate-full-timeout-minutes`. The event is the caller's.
+    timeout-minutes: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && inputs.mutate-full-timeout-minutes || 45 }}
     # An explicit `bash` runs each step with `-eo pipefail`; the default, `bash -e`, does not,
     # and the run step's `| tee` would then report tee's status in place of Pest's.
     defaults:
@@ -268,7 +324,7 @@ jobs:
         shell: bash
     steps:
       # Depth 2: on a pull request the checkout is GitHub's merge commit, and its first parent
-      # is the base branch it was merged onto.
+      # is the base branch it was merged onto. On a push it is the pushed commit and its parent.
       - uses: actions/checkout@v7
         with:
           fetch-depth: 2
@@ -276,25 +332,40 @@ jobs:
         with:
           coverage: pcov
 
-      # On a pull request, mutate only the PHP files under mutate-paths that the pull request
-      # adds, changes or renames. They are read from the merge commit against its first parent,
-      # so a later change on the base branch is not counted. A pull request that changes none
-      # passes with the reason printed. A push mutates everything `composer mutate` covers.
+      # On a pull request or a push, mutate only the PHP files under mutate-paths that it adds,
+      # changes or renames, read from HEAD against its first parent: the merge commit on a pull
+      # request, so a later change on the base branch is not counted, and the pushed commit on a
+      # push (a squash-merged pull request is one commit). A run that changes none passes with the
+      # reason printed. A scheduled or manually dispatched run, and a push of a commit with no
+      # parent, mutates everything `composer mutate` covers (UAMS-Web/uams-claude-skills#532).
       - name: Select the files to mutate
         id: select
         env:
           EVENT: ${{ github.event_name }}
           MUTATE_PATHS: ${{ inputs.mutate-paths }}
         run: |
-          if [ "$EVENT" != "pull_request" ]; then
-            echo "mode=full" >> "$GITHUB_OUTPUT"
-            echo "Not a pull request: mutating everything composer mutate covers."
-            exit 0
-          fi
-          if ! git rev-parse --verify --quiet HEAD^2 > /dev/null; then
-            echo "::error::HEAD is not a merge commit, so the pull request's changes cannot be read."
-            exit 1
-          fi
+          case "$EVENT" in
+            pull_request)
+              what="pull request"
+              if ! git rev-parse --verify --quiet HEAD^2 > /dev/null; then
+                echo "::error::HEAD is not a merge commit, so the pull request's changes cannot be read."
+                exit 1
+              fi
+              ;;
+            push)
+              what="push"
+              if ! git rev-parse --verify --quiet HEAD^1 > /dev/null; then
+                echo "mode=full" >> "$GITHUB_OUTPUT"
+                echo "The pushed commit has no parent, so its changes cannot be read: mutating everything composer mutate covers."
+                exit 0
+              fi
+              ;;
+            *)
+              echo "mode=full" >> "$GITHUB_OUTPUT"
+              echo "Not a pull request or a push ($EVENT): mutating everything composer mutate covers."
+              exit 0
+              ;;
+          esac
           # NUL-separated, so a name git would quote (non-ASCII, a tab) is read as it is
           list=$(mktemp)
           git diff -z --name-only --diff-filter=AMR HEAD^1 HEAD -- $MUTATE_PATHS > "$list"
@@ -309,7 +380,7 @@ jobs:
           done < "$list"
           if [ "${#files[@]}" -eq 0 ]; then
             echo "mode=none" >> "$GITHUB_OUTPUT"
-            echo "No PHP file under $MUTATE_PATHS is added or changed by this pull request, so there is nothing to mutate."
+            echo "No PHP file under $MUTATE_PATHS is added or changed by this $what, so there is nothing to mutate."
             exit 0
           fi
           echo "Mutating ${#files[@]} changed file(s):"
@@ -355,13 +426,14 @@ jobs:
 
   pest:
     name: Pest (${{ matrix.os }})
+    if: inputs.pest
     needs: [rector, phpstan]
     # Legs: all three. The suite is what runs on the platforms the code ships to: paths, command-line length, BSD tools, case-insensitive file systems.
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(inputs.linux-only && !contains(format(' {0} ', inputs.all-platform-jobs), ' pest ') && '["ubuntu-latest"]' || '["ubuntu-latest","windows-latest","macos-latest"]') }}
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' pest ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' pest ') && '["ubuntu-latest","windows-latest"]' || inputs.linux-only && '["ubuntu-latest"]' || '["ubuntu-latest","windows-latest","macos-latest"]') }}
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
@@ -399,7 +471,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' encoding-guard ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' encoding-guard ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' encoding-guard ') && '["ubuntu-latest","windows-latest"]' || '["ubuntu-latest"]') }}
     timeout-minutes: 15
     defaults:
       run:
@@ -429,7 +501,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(inputs.linux-only && !contains(format(' {0} ', inputs.all-platform-jobs), ' vitest ') && '["ubuntu-latest"]' || '["ubuntu-latest","windows-latest","macos-latest"]') }}
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' vitest ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' vitest ') && '["ubuntu-latest","windows-latest"]' || inputs.linux-only && '["ubuntu-latest"]' || '["ubuntu-latest","windows-latest","macos-latest"]') }}
     timeout-minutes: 15
     defaults:
       run:
@@ -464,7 +536,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' vite-build ') && '["ubuntu-latest","windows-latest","macos-latest"]' || '["ubuntu-latest"]') }}
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' vite-build ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' vite-build ') && '["ubuntu-latest","windows-latest"]' || '["ubuntu-latest"]') }}
     timeout-minutes: 15
     defaults:
       run:
@@ -500,7 +572,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(inputs.linux-only && !contains(format(' {0} ', inputs.all-platform-jobs), ' mutation-smoke ') && '["ubuntu-latest"]' || '["ubuntu-latest","windows-latest","macos-latest"]') }}
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' mutation-smoke ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' mutation-smoke ') && '["ubuntu-latest","windows-latest"]' || inputs.linux-only && '["ubuntu-latest"]' || '["ubuntu-latest","windows-latest","macos-latest"]') }}
     timeout-minutes: 20
     defaults:
       run:
@@ -533,7 +605,7 @@ jobs:
       - name: Every needed job succeeded
         env:
           NEEDS: ${{ toJSON(needs) }}
-          SWITCHED_OFF: ${{ format('{0}{1}{2}{3}', !inputs.encoding-guard && 'encoding-guard ' || '', !inputs.vitest && 'vitest ' || '', !inputs.vite-build && 'vite-build ' || '', !inputs.mutation-smoke && 'mutation-smoke ' || '') }}
+          SWITCHED_OFF: ${{ format('{0}{1}{2}{3}{4}{5}', !inputs.pest && 'pest ' || '', !inputs.mutate && 'mutate ' || '', !inputs.encoding-guard && 'encoding-guard ' || '', !inputs.vitest && 'vitest ' || '', !inputs.vite-build && 'vite-build ' || '', !inputs.mutation-smoke && 'mutation-smoke ' || '') }}
         run: |
           results=$(echo "$NEEDS" | jq -r 'to_entries[] | "\(.key) \(.value.result)"')
           echo "Needed job results:"
