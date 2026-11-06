@@ -284,6 +284,18 @@ final class GbpSyncTest extends UnitTestCase
         $this->assertSame('accounts/ul', $this->client->calls[1][1]);
     }
 
+    public function test_a_store_code_longer_than_64_characters_is_sent_to_create_unchanged(): void
+    {
+        $code = str_repeat('a', 34).'_'.str_repeat('b', 33);
+        $this->assertSame(68, strlen($code));
+
+        $this->sync()->run([$this->item(['store_code' => $code])]);
+
+        $this->assertSame(['create'], $this->actions());
+        $this->assertSame($code, $this->client->calls[0][3], 'no length check sits between the item and the create call');
+        $this->assertSame($code, $this->log[0]['store_code']);
+    }
+
     public function test_a_partner_silo_creates_in_its_own_group(): void
     {
         $this->sync()->run([$this->item(['silo' => 'baptist-health'])]);
