@@ -7,3 +7,14 @@ Doc Profile Editors (`doc_editor`) can edit a provider or location only when the
 - **Assign a group to a record:** administrators and `doc_admin` tick it in the Editor Groups box on the provider or location edit screen (or in Quick Edit). `doc_editor` accounts see the box but cannot change it.
 - **Groups for a service line:** edit the service line term (Providers > Service Lines) and pick its editor group. Every provider and location in that service line picks the group up when it is saved, and follows if its service line changes; groups added by hand on the record are kept. The Editor Groups screen has an "Apply service line mapping" button that does this for every existing record at once.
 - **Groups without a service line** (department sections, stand-alone teams) are plain terms that are assigned by hand.
+
+## Tests
+
+```bash
+composer install
+composer setup:integration   # the Integration suite's own Composer setup, in tests/Integration
+composer test:unit           # Pest 5 with Brain Monkey: no WordPress, no database
+composer test:integration    # PHPUnit 9.6 with wp-phpunit: needs a WordPress core tree and a test database
+```
+
+The supported PHP floor is 8.2 (`require.php` in `composer.json` and `Requires PHP` in the plugin header). Development and tests run on PHP 8.4 (`config.platform.php` is `8.4.27`), which Pest 5 needs. The Integration suite installs separately because WordPress' test suite supports PHPUnit 9 only; see the `tests` skill for the layout and for the environment variables it reads (`WP_TESTS_ABSPATH`, `WP_TESTS_DB_NAME`).
