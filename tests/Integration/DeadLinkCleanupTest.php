@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Integration;
 
+use Throwable;
 use UamswpFindADoc\Tests\Support\IntegrationTestCase;
 use WPDieException;
 
@@ -17,7 +18,7 @@ require_once __DIR__.'/../Support/acf-post-meta.php';
  * Dead IDs are numbers no post has. A link field is stored as post meta in ACF's shape (see
  * tests/Support/acf-post-meta.php), and a provider's or location's link to a record is also
  * seeded in the custom table the cleanup reads, the way ACF Custom Database Tables keeps both.
- * The custom tables are temporary tables created per test.
+ * Real InnoDB tables let SHOW TABLES discover them; per-test transactions isolate their rows.
  */
 final class DeadLinkCleanupTest extends IntegrationTestCase
 {
@@ -31,6 +32,40 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
 
     private string $locations_table;
 
+    public static function wpSetUpBeforeClass(): void
+    {
+        global $wpdb;
+
+        $created = [];
+
+        try {
+            // Before WordPress starts per-test transactions and rewrites DDL to temporary tables.
+            foreach (['uamswp_physicians', 'uamswp_locations'] as $name) {
+                $table = $wpdb->prefix.$name;
+                self::assertNotFalse($wpdb->query("CREATE TABLE {$table} (post_id bigint(20) unsigned NOT NULL, physician_locations longtext, physician_first_name varchar(50) DEFAULT NULL, PRIMARY KEY (post_id)) ENGINE=InnoDB"));
+                $created[] = $table;
+            }
+        } catch (Throwable $throwable) {
+            // PHPUnit skips class teardown if setup fails; remove only tables this setup created.
+            foreach ($created as $table) {
+                $wpdb->query("DROP TABLE IF EXISTS {$table}");
+            }
+
+            throw $throwable;
+        }
+    }
+
+    public static function wpTearDownAfterClass(): void
+    {
+        global $wpdb;
+
+        // After per-test rollback and removal of WordPress' temporary-table query filters.
+        foreach (['uamswp_physicians', 'uamswp_locations'] as $name) {
+            $table = $wpdb->prefix.$name;
+            self::assertNotFalse($wpdb->query("DROP TABLE IF EXISTS {$table}"));
+        }
+    }
+
     public function set_up(): void
     {
         parent::set_up();
@@ -40,25 +75,8 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
         $this->providers_table = $wpdb->prefix.'uamswp_physicians';
         $this->locations_table = $wpdb->prefix.'uamswp_locations';
 
-        // WordPress' test case turns CREATE TABLE into CREATE TEMPORARY TABLE for the length of a test.
-        foreach ([$this->providers_table, $this->locations_table] as $table) {
-            $wpdb->query("CREATE TABLE {$table} (post_id bigint(20) unsigned NOT NULL, physician_locations longtext, physician_first_name varchar(50) DEFAULT NULL, PRIMARY KEY (post_id))");
-        }
-
         delete_option(UAMSWP_DEAD_LINKS_RUN_OPTION);
         delete_option(UAMSWP_DEAD_LINKS_ROWS_OPTION);
-    }
-
-    public function tear_down(): void
-    {
-        global $wpdb;
-
-        // Before the parent removes the filter that makes DROP TABLE drop the temporary table only.
-        foreach ([$this->providers_table, $this->locations_table] as $table) {
-            $wpdb->query("DROP TABLE IF EXISTS {$table}");
-        }
-
-        parent::tear_down();
     }
 
     public function test_the_dry_run_lists_every_dead_id_and_orphan_row_and_changes_nothing(): void
@@ -124,7 +142,7 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
 
         $run = uamswp_dead_links_apply_step($run);
 
-        $this->assertSame([$world['provider'], self::DEAD], array_map('intval', (array) get_field('condition_physicians', $world['condition'])), 'Only the ID that is still missing is removed.');
+        $this->assertSame([$world['provider'], self::DEAD], array_map(intval(...), (array) get_field('condition_physicians', $world['condition'])), 'Only the ID that is still missing is removed.');
         $this->assertSame(1, $this->rowCount($this->providers_table, self::DEAD_ROW), 'A row whose post exists again stays.');
         $this->assertContains('skipped', array_column($run['items'], 'state'));
     }
@@ -137,8 +155,8 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
         $run = uamswp_dead_links_undo_step($run);
 
         $this->assertSame('undone', $run['status']);
-        $this->assertSame([$world['provider'], self::DEAD, self::DEAD_TWO], array_map('intval', (array) get_field('condition_physicians', $world['condition'])));
-        $this->assertSame([self::DEAD], array_map('intval', (array) get_field('treatment_procedure_locations', $world['treatment'])));
+        $this->assertSame([$world['provider'], self::DEAD, self::DEAD_TWO], array_map(intval(...), (array) get_field('condition_physicians', $world['condition'])));
+        $this->assertSame([self::DEAD], array_map(intval(...), (array) get_field('treatment_procedure_locations', $world['treatment'])));
         $this->assertSame(1, $this->rowCount($this->providers_table, self::DEAD_ROW));
         $this->assertSame('Orphan', $this->firstName($this->providers_table, self::DEAD_ROW), 'The whole row comes back.');
     }
@@ -195,7 +213,7 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
     public function test_a_check_after_the_removal_keeps_the_undo(): void
     {
         $world = $this->world();
-        $stored = uamswp_dead_links_apply_step(uamswp_dead_links_scan());
+        uamswp_dead_links_apply_step(uamswp_dead_links_scan());
 
         $this->actAs('administrator');
         $_REQUEST['_wpnonce'] = wp_create_nonce('uamswp_dead_links_scan');
@@ -221,6 +239,7 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
         foreach ($run['items'] as $i => $item) {
             $run['items'][$i]['state'] = 'pending';
         }
+
         $run['cursor'] = 0;
         $run['status'] = 'applying';
 
@@ -228,7 +247,7 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
 
         $this->assertSame(['done'], array_values(array_unique(array_column($run['items'], 'state'))), 'Written items are recognized as done, not skipped.');
 
-        $run = uamswp_dead_links_undo_step($run);
+        uamswp_dead_links_undo_step($run);
 
         $this->assertSame([$world['provider'], self::DEAD, self::DEAD_TWO], $this->ids(get_field('condition_physicians', $world['condition'])));
         $this->assertSame(1, $this->rowCount($this->providers_table, self::DEAD_ROW));
@@ -392,7 +411,7 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
         $this->insertRow($this->providers_table, $trashed, [], 'Trashed');
         $this->insertRow($this->providers_table, self::DEAD_ROW, [], 'Orphan');
 
-        return compact('provider', 'condition', 'treatment', 'location', 'trashed');
+        return ['provider' => $provider, 'condition' => $condition, 'treatment' => $treatment, 'location' => $location, 'trashed' => $trashed];
     }
 
     private function actAs(string $role): void
@@ -412,8 +431,8 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
 
         try {
             $handler();
-        } catch (RedirectCaught $caught) {
-            return $caught->getMessage();
+        } catch (RedirectCaught $redirectCaught) {
+            return $redirectCaught->getMessage();
         } finally {
             remove_filter('wp_redirect', $catch);
             unset($_REQUEST['_wpnonce'], $_GET['run']);
