@@ -6,7 +6,9 @@ Everything above the generated section below belongs to this repository and is e
 
 ## About this repository
 
-Replace this section with what an agent needs to know before working here: what the repository is, how to install and run it, how to run its tests and checks, the conventions it follows, and anything that is true of this repository alone. The shared skills and rules below cover the organization-wide conventions; do not repeat them here.
+UAMSWP-Find-a-Doc is the WordPress plugin behind Find-a-Doc on uamshealth.com: the provider, location, area of expertise, clinical resource, condition, and treatment post types and the templates that display them.
+
+Follow [`CONTRIBUTING.md`](CONTRIBUTING.md) for the issue-to-merge path: a branch from `master` linked to the issue, a ready pull request to `dev`, and a draft pull request to `staging`. It also maps each branch to the environment its pull request's test plan is run on: `dev` to the local install, `staging` to uamshealth.dev. Start each pull request body from [`.github/pull_request_template.md`](.github/pull_request_template.md).
 
 <!-- uams-claude-skills:begin -->
 ## Shared skills and rules
