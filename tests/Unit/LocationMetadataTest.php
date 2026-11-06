@@ -156,6 +156,10 @@ test('location metadata exports resolved address sources and selected taxonomy n
     $this->locationFields[302] = ['location_building' => 42];
     $this->locationFields[303] = ['location_suite' => 'Suite 19'];
     $this->locationFields[304] = ['location_map' => ['lat' => 34.7, 'lng' => -92.3]];
+    $this->locationFields[305] = [
+        'location_parking' => '<p>Use Deck B.</p>',
+        'location_parking_map' => ['lat' => 35.25, 'lng' => -93.75],
+    ];
     $this->locationFields[306] = ['location_direction' => '<p>Take the west walkway.</p>'];
     $this->locationFieldObjects[303] = ['location_building_floor' => ['value' => '2', 'choices' => ['1' => 'First floor', '2' => 'Second floor']]];
     $this->locationFields[101]['location_type'] = [44, 43];
@@ -176,6 +180,9 @@ test('location metadata exports resolved address sources and selected taxonomy n
         'location_building_floor' => 'Second floor', 'location_suite' => 'Suite 19',
         'location_lat' => 34.7, 'location_lng' => -92.3, 'location_direction' => '<p>Take the west walkway.</p>',
         'location_types' => 'Clinic,Hospital',
+        'location_parking' => '<p>Use Deck B.</p>',
+        'location_parking_link' => '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/35.25,-93.75" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>',
+        'location_directions_link' => '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/34.7,-92.3" target="_blank" aria-label="Get Directions to Clinic">Get Directions</a>',
     ];
     foreach ($expected as $key => $value) {
         expect($data[$key])->toBe($value);
@@ -224,6 +231,21 @@ test('empty location metadata omits optional collections and uses public fallbac
     expect($data)->not->toHaveKeys(['location_photo', 'location_additional_phone_numbers', 'location_modified_hours', 'location_hours']);
     expect([$data['location_lat'], $data['location_lng'], $data['location_building'], $data['location_building_floor'], $data['location_types']])->toBe(['', '', '', '', '']);
     expect([$data['location_alert_title'], $data['location_alert_text'], $data['location_alert_color']])->toBe(['', '', 'alert-warning']);
+
+    // Pin empty scalar fallbacks independently of omitted optional collections.
+    $expected = [
+        'location_address_2' => '',
+        'location_region' => '',
+        'location_provider_list' => '',
+        'location_expertise_list' => '',
+        'location_conditions_list' => '',
+        'location_treatments_list' => '',
+        'location_parking_link' => '',
+        'location_directions_link' => '',
+    ];
+    foreach ($expected as $key => $value) {
+        expect($data[$key])->toBe($value);
+    }
 });
 
 test('location appointment labels follow separate new and returning patient numbers', function (
