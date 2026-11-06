@@ -33,6 +33,11 @@ final class GbpStoredIdTest extends UnitTestCase
 
             return true;
         });
+        Functions\when('delete_post_meta')->alias(function (int $id, string $key): bool {
+            unset($this->meta[$id][$key]);
+
+            return true;
+        });
     }
 
     /**
@@ -236,5 +241,66 @@ final class GbpStoredIdTest extends UnitTestCase
     public function test_a_number_field_cid_is_not_read_in_scientific_notation(): void
     {
         $this->assertMatchesRegularExpression('/^\d{19,20}$/', UAMSWP_FAD_GBP_Logic::cids_from_value(1.2345678901234567E+19)[0]);
+    }
+
+    public function test_the_photo_rules_come_from_the_row_and_a_provider_has_no_other_photos(): void
+    {
+        $row = array_fill(0, 22, '');
+        $row[18] = 'https://x/logo.png';
+        $row[19] = 'https://x/cover.jpg';
+        $row[20] = 'https://x/a.jpg, https://x/b.jpg,';
+
+        $this->assertSame(['LOGO', 'COVER', 'ADDITIONAL', 'ADDITIONAL'], array_column(UAMSWP_FAD_GBP_Logic::photos_from_row($row), 'category'));
+        $this->assertSame(['LOGO', 'COVER'], array_column(UAMSWP_FAD_GBP_Logic::photos_from_row($row, false), 'category'));
+
+        $row[19] = '';
+
+        $this->assertSame(['LOGO', 'ADDITIONAL', 'ADDITIONAL'], array_column(UAMSWP_FAD_GBP_Logic::photos_from_row($row), 'category'), 'a provider with no wide image has the logo only');
+    }
+
+    public function test_only_photos_not_yet_sent_are_pending_and_one_address_is_sent_once(): void
+    {
+        $photos = [['category' => 'LOGO', 'url' => 'u1'], ['category' => 'COVER', 'url' => 'u2'], ['category' => 'ADDITIONAL', 'url' => 'u2'], ['category' => 'ADDITIONAL', 'url' => 'u3']];
+
+        $this->assertSame(['u2', 'u3'], array_column(UAMSWP_FAD_GBP_Logic::photos_to_send($photos, ['u1']), 'url'));
+        $this->assertSame([], UAMSWP_FAD_GBP_Logic::photos_to_send($photos, ['u1', 'u2', 'u3']));
+    }
+
+    public function test_sent_photos_are_recorded_with_the_listing_and_start_over_for_a_new_one(): void
+    {
+        $item = ['store_code' => 'c', 'kind' => 'location', 'post_id' => 7, 'location_id' => 7];
+        $this->meta[7][UAMSWP_FAD_GBP_LISTING_META] = 'locations/1';
+
+        uamswp_fad_gbp_write_photos_sent($item, ['listing_name' => 'locations/1', 'action' => 'update', 'photos_sent_now' => ['u1']]);
+        uamswp_fad_gbp_write_photos_sent($item, ['listing_name' => 'locations/1', 'action' => 'update', 'photos_sent_now' => ['u2']]);
+
+        $this->assertSame(['u1', 'u2'], $this->meta[7][UAMSWP_FAD_GBP_PHOTOS_META]);
+        $this->assertSame(['u1', 'u2'], uamswp_fad_gbp_attach_stored_ids([$item])[0]['photos_sent']);
+
+        $this->meta[7][UAMSWP_FAD_GBP_LISTING_META] = 'locations/2';
+        uamswp_fad_gbp_write_photos_sent($item, ['listing_name' => 'locations/2', 'action' => 'create', 'photos_sent_now' => ['u3']]);
+
+        $this->assertSame(['u3'], $this->meta[7][UAMSWP_FAD_GBP_PHOTOS_META]);
+    }
+
+    public function test_a_provider_s_sent_photos_are_kept_per_location_and_survive_clearing_an_orphan_date(): void
+    {
+        $item = $this->provider_item(3, 10);
+        $this->meta[3][UAMSWP_FAD_GBP_LISTING_MAP_META] = [10 => ['id' => 'locations/1', 'orphaned_since' => '2026-11-01', 'photos' => ['u1']]];
+
+        uamswp_fad_gbp_store_listing_ids([$item], [['mode' => 'live', 'listing_name' => 'locations/1', 'action' => 'update', 'photos_sent_now' => ['u2']]]);
+
+        $entry = $this->meta[3][UAMSWP_FAD_GBP_LISTING_MAP_META][10];
+        $this->assertNull($entry['orphaned_since']);
+        $this->assertSame(['u1', 'u2'], $entry['photos']);
+    }
+
+    public function test_photos_are_not_recorded_for_a_listing_whose_id_was_not_stored(): void
+    {
+        $item = ['store_code' => 'c', 'kind' => 'location', 'post_id' => 7, 'location_id' => 7];
+
+        uamswp_fad_gbp_write_photos_sent($item, ['listing_name' => 'locations/1', 'action' => 'update', 'photos_sent_now' => ['u1']]);
+
+        $this->assertSame([], $this->meta);
     }
 }
