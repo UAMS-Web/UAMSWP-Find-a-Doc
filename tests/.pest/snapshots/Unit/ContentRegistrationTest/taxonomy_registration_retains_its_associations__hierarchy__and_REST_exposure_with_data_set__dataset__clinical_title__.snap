@@ -1,0 +1,47 @@
+{
+    "label": "Clinical Titles",
+    "labels": {
+        "name": "Clinical Specializations",
+        "singular_name": "Clinical Specialization",
+        "search_items": "Search Specializations",
+        "all_items": "All Specializations",
+        "edit_item": "Edit Specialization",
+        "update_item": "Update Specialization",
+        "add_new_item": "Add New Specialization",
+        "new_item_name": "New Specialization",
+        "menu_name": "Clinical Specializations",
+        "view_item": "View Specialization",
+        "popular_items": "Popular Specialization",
+        "separate_items_with_commas": "Separate Specializations with commas",
+        "add_or_remove_items": "Add or remove Specializations",
+        "choose_from_most_used": "Choose from the most used Specializations",
+        "not_found": "No Specializations found",
+        "parent_item": "Parent Specialization",
+        "parent_item_colon": "Parent Specialization:",
+        "no_terms": "No Clinical Specializations",
+        "items_list": "Clinical Specializations list",
+        "items_list_navigation": "Clinical Specializations list navigation"
+    },
+    "public": true,
+    "hierarchical": true,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_in_rest": true,
+    "rest_base": "clinical_title",
+    "rest_controller_class": "WP_REST_Terms_Controller",
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "clinical_title",
+        "with_front": true,
+        "hierarchical": true
+    }
+}

@@ -1,9 +1,14 @@
 <?php
 
 /**
- * Public content registration contracts: editor features, taxonomy exposure, and REST field names.
+ * Public content registration contracts and read-only REST field names.
  *
- * @command  vendor/bin/pest tests/Unit/ContentRegistrationTest.php
+ * Registration snapshots pin the complete arguments passed to WordPress,
+ * including explicit defaults, labels, capabilities, menus, and rewrite options.
+ * Regenerate them only when a reviewed change intentionally changes that contract.
+ * Validate with --ci so missing snapshots fail instead of creating new baselines.
+ *
+ * @command  vendor/bin/pest --ci tests/Unit/ContentRegistrationTest.php
  */
 
 declare(strict_types=1);
@@ -26,6 +31,10 @@ test('content types retain their editor features, visibility, and REST route', f
     $callback();
 
     expect(array_keys($registered))->toBe([$type]);
+
+    // Pin the complete public registration, not just the common feature subset.
+    expect($registered[$type])->toMatchSnapshot();
+
     foreach ([
         'supports' => $supports,
         'hierarchical' => $hierarchical,
@@ -131,6 +140,9 @@ test('taxonomy registration retains its associations, hierarchy, and REST exposu
 
     expect((bool) ($args['show_in_rest'] ?? false))->toBe($rest_base !== '')
         ->and($args['rest_base'] ?? '')->toBe($rest_base);
+
+    // Preserve every explicit option, including labels and term permissions.
+    expect($args)->toMatchSnapshot();
 })->with([
     'conditions, callable but not hooked' => ['create_clinical_conditions_taxonomy', 'condition', ['provider'], false, 'condition'],
     'treatments, callable but not hooked' => ['create_clinical_treatments_taxonomy', 'treatment', ['provider'], false, 'treatment'],

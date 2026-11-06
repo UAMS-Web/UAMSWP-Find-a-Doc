@@ -1,0 +1,47 @@
+{
+    "label": "Service Lines",
+    "labels": {
+        "name": "Service Lines",
+        "singular_name": "Service Lines",
+        "search_items": "Search Service Lines",
+        "all_items": "All Service Lines",
+        "edit_item": "Edit Service Line",
+        "update_item": "Update Service Line",
+        "add_new_item": "Add New Service Line",
+        "new_item_name": "New Service Line",
+        "menu_name": "Service Lines",
+        "view_item": "View Service Line",
+        "popular_items": "Popular Service Line",
+        "separate_items_with_commas": "Separate service lines with commas",
+        "add_or_remove_items": "Add or remove service lines",
+        "choose_from_most_used": "Choose from the most used service lines",
+        "not_found": "No service lines found",
+        "parent_item": "Parent Service Line",
+        "parent_item_colon": "Parent Service Line:",
+        "no_terms": "No Service Lines",
+        "items_list": "Service Lines list",
+        "items_list_navigation": "Service Lines list navigation"
+    },
+    "public": true,
+    "hierarchical": true,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_in_rest": true,
+    "rest_base": "service_line",
+    "rest_controller_class": "WP_REST_Terms_Controller",
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "service-line",
+        "with_front": true,
+        "hierarchical": true
+    }
+}
