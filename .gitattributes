@@ -1,2 +1,6 @@
+# Orb lifecycle files never belong in the plugin download.
+/.agents export-ignore
+/.amp export-ignore
+
 # Auto detect text files and perform LF normalization
 * text=auto
