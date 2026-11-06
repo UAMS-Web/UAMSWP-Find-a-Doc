@@ -209,6 +209,49 @@ test('REST query variables retain existing entries and allow metadata comparison
     'previous metadata entry' => [['meta_key', 'author']],
 ]);
 
+test('content editors remove only the configured taxonomy side metaboxes', function (): void {
+    // Seed unrelated screens, contexts, and boxes beside every configured box.
+    $screens = ['provider', 'location', 'expertise', 'clinical-resource', 'condition', 'treatment'];
+    $ids = [
+        'conditiondiv', 'treatmentdiv', 'specialtydiv', 'departmentdiv',
+        'service_linediv', 'degreediv', 'patient_typediv', 'clinical_titlediv',
+        'clinical_admin_titlediv', 'affiliationdiv', 'institute_affiliationdiv',
+        'languagediv', 'medical_termsdiv', 'medical_termdiv', 'academic_positiondiv',
+        'academic_collegediv', 'schooldiv', 'residency_yeardiv', 'academic_departmentdiv',
+        'boarddiv', 'certifying_bodydiv', 'associationdiv', 'educationtypediv', 'portaldiv',
+        'academic_titlediv', 'academic_admin_titlediv', 'recognitiondiv', 'regiondiv',
+        'location_typediv', 'gmb_cat_providerdiv', 'gmb_cat_locationdiv', 'buildingdiv',
+        'parkingdiv', 'brand_organizationdiv', 'brand_organization_uamsdiv',
+        'tagsdiv-recognition', 'tagsdiv-medical_procedures', 'custom-post-type-onomies-locations',
+    ];
+    $boxes = [];
+    foreach ([...$screens, 'post'] as $screen) {
+        foreach (['side', 'normal', 'advanced'] as $context) {
+            $boxes[$screen][$context] = array_fill_keys([...$ids, 'keep-custom-box', 'tagsdiv-region'], true);
+        }
+    }
+
+    $expected = $boxes;
+    foreach ($screens as $screen) {
+        $expected[$screen]['side'] = array_fill_keys(['keep-custom-box', 'tagsdiv-region'], true);
+    }
+
+    // Model the removal boundary; the integration test verifies WordPress's registry.
+    when('remove_meta_box')->alias(function (
+        string $id,
+        string|array $screen,
+        string $context,
+    ) use (&$boxes): void {
+        foreach ((array) $screen as $name) {
+            unset($boxes[$name][$context][$id]);
+        }
+    });
+    remove_provider_meta();
+
+    // Compare the complete remaining editor state rather than invocation counts.
+    expect($boxes)->toBe($expected);
+});
+
 test('ACF editor styles retain hidden field labels borders and clone spacing', function (): void {
     // Capture the public output without depending on its indentation.
     ob_start();
