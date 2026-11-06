@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// cspell:ignore Larastan
 // check-repository-settings.mjs: report, for each named repository, every setting that departs
 // from the baseline in this skill's SKILL.md for the repository's visibility
 // (UAMS-Web/uams-claude-skills#358).
@@ -48,14 +49,6 @@ export const ATOMIC_CHECKS = {
 
 const DEFAULT_BRANCH_RULES = ['deletion', 'non_fast_forward', 'pull_request']
 
-/** The contexts organization ruleset 25097852 requires (the add-on set from before the sync adopted the aggregate `CI` check). */
-export const BEFORE_SYNC_CONTEXTS = [
-    'Composer validate (composer.lock freshness)', 'Guard-script tests (vitest)', 'Built assets (resources/dist matches source)',
-    'Mutation annotations (none inert)', 'Parallel-safe tests (no shared state)', 'Pint', 'Rector (gating profile)', 'Larastan (PHPStan)',
-    'Pest (Unit and Integration)', 'Compatibility (lowest statamic/cms)', 'Compatibility (PHP 8.5)', 'Attribution footer', 'Closing keywords',
-    'Required checks (ruleset matches jobs)', 'Repository guards (emoji, decision log)',
-]
-
 /**
  * The values of the `ruleset_family` property, each with the organization rules a repository holding it receives:
  * the rule types among deletion, non_fast_forward and pull_request, and the required status check contexts.
@@ -63,12 +56,7 @@ export const BEFORE_SYNC_CONTEXTS = [
 export const FAMILIES = {
     none: { rules: [], checks: [] },
     base: { rules: DEFAULT_BRANCH_RULES, checks: [] },
-    'addon-legacy': { rules: DEFAULT_BRANCH_RULES, checks: ['Attribution footer', 'CI', 'Closing keywords'] },
-    addon: { rules: DEFAULT_BRANCH_RULES, checks: BEFORE_SYNC_CONTEXTS },
 }
-
-/** The add-on family's required contexts, sorted, as the required-checks row writes them. */
-export const ADDON_CONTEXTS = [...FAMILIES.addon.checks].sort()
 
 const signature = (rules, checks) => `${[...new Set(rules)].sort().join(',')}|${[...new Set(checks)].sort().join(',')}`
 
@@ -93,10 +81,7 @@ function requiredChecks(s) {
         for (const check of rule.parameters?.required_status_checks ?? []) contexts.push(check?.context)
     }
     if (contexts.length === 0) return 'none'
-    const found = new Set(contexts)
-    // an add-on carries the organization's add-on checks and may add its own: the extra names are its own jobs
-    if (declaredFamily(s) === 'addon' && FAMILIES.addon.checks.every((context) => found.has(context))) return ADDON_CONTEXTS.join(', ')
-    return [...found].sort().join(', ')
+    return [...new Set(contexts)].sort().join(', ')
 }
 
 /** The values of the `required_checks` property: an unset or null property is an empty list, and a value outside ATOMIC_CHECKS is returned as is. */
@@ -202,7 +187,7 @@ export const BASELINE = [
     { id: 'rule_deletion', read: (s) => hasRule(s, 'deletion'), expect: { public: 'present', private: 'present' } },
     { id: 'rule_non_fast_forward', read: (s) => hasRule(s, 'non_fast_forward'), expect: { public: 'present', private: 'present' } },
     { id: 'rule_pull_request', read: (s) => hasRule(s, 'pull_request'), expect: { public: 'present', private: 'present' } },
-    { id: 'rule_required_status_checks', read: requiredChecks, expect: { public: [REQUIRED_CONTEXTS.join(', '), ADDON_CONTEXTS.join(', ')], private: 'none' } },
+    { id: 'rule_required_status_checks', read: requiredChecks, expect: { public: REQUIRED_CONTEXTS.join(', '), private: 'none' } },
     { id: 'ruleset_family', read: rulesetFamily, expect: { public: 'agrees', private: 'agrees' } },
     { id: 'required_checks', read: requiredChecksProperty, expect: { public: 'agrees', private: 'agrees' } },
 ]
@@ -257,7 +242,7 @@ export function matchingSnapshot(visibility) {
         dependabot_secrets: { secrets: [] },
         organization_variables: { variables: isPublic ? [] : [{ name: 'RUN_REMOTE_CI' }] },
         rules,
-        properties: [{ property_name: RULESET_PROPERTY, value: isPublic ? 'addon-legacy' : 'base' }],
+        properties: [{ property_name: RULESET_PROPERTY, value: 'base' }, ...(isPublic ? [{ property_name: CHECKS_PROPERTY, value: ['pr-body', 'ci-aggregate'] }] : [])],
         dependabot_yml_status: 200,
     }
 }
@@ -288,7 +273,7 @@ export function controlFailures(baseline = BASELINE) {
     for (const visibility of ['public', 'private']) {
         const good = matchingSnapshot(visibility)
         const wrongValue = structuredClone(good)
-        wrongValue.properties = [{ property_name: RULESET_PROPERTY, value: visibility === 'public' ? 'base' : 'addon-legacy' }]
+        wrongValue.properties = [{ property_name: RULESET_PROPERTY, value: 'none' }]
         if (!departures(wrongValue, baseline).some((item) => item.id === 'ruleset_family')) failed.push(`a ${visibility} property value that disagrees with the rules in effect was not reported`)
         const unset = structuredClone(good)
         unset.properties = []

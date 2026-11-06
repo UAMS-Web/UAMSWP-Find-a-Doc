@@ -14,6 +14,13 @@ name: Check closing keywords across lines
 # runs ships in the same skill, so no repository file is needed beyond the synced .claude/
 # tree.
 #
+# A second step reads the pull request's closingIssuesReferences and fails when it lists an issue
+# the body does not close with a keyword (UAMS-Web/uams-claude-skills#573). A branch made with
+# `gh issue develop <n>` is linked to issue `n`, so the pull request lists it with no keyword
+# anywhere, and the text scan above cannot see a link. The step runs on the same events as the
+# first. A link added in the Development panel after the last event is read at the next one
+# (an edit, a push, a reopen); adding a link alone is not known to start a run.
+#
 # A keyword inside a code span or a fence is reported too. The push-time scan reads the
 # squash commit message as plain text, so it is live there even where the pull request's own
 # closingIssuesReferences field does not list it.
@@ -50,6 +57,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: read
+      issues: read
     steps:
       - uses: actions/checkout@v7
 
@@ -61,3 +69,16 @@ jobs:
         run: |
           gh api "repos/$REPO/pulls/$NUMBER" --jq '.body // ""' > "$RUNNER_TEMP/body.md"
           node .claude/skills/writing-pull-requests/scripts/check-closing-keyword-across-lines.mjs --file "$RUNNER_TEMP/body.md"
+
+      - name: Check that the body closes every issue the pull request is linked to
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          owner="${REPO%%/*}"
+          name="${REPO#*/}"
+          gh api graphql \
+            -f query='query($owner: String!, $name: String!, $number: Int!) { repository(owner: $owner, name: $name) { pullRequest(number: $number) { closingIssuesReferences(first: 50) { totalCount nodes { number repository { nameWithOwner } } } } } }' \
+            -f owner="$owner" -f name="$name" -F number="$NUMBER" > "$RUNNER_TEMP/linked.json"
+          node .claude/skills/writing-pull-requests/scripts/check-development-links.mjs --repo "$REPO" --body-file "$RUNNER_TEMP/body.md" --graphql-file "$RUNNER_TEMP/linked.json"
