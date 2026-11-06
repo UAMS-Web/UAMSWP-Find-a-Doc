@@ -37,7 +37,9 @@ function bootstrap(): void
     include_once __DIR__.'/class.fad-gbp-runtime.php'; // Business Profile sync: WordPress wiring
     include_once __DIR__.'/class.fad-gbp-settings.php'; // Business Profile sync: settings screen
     include_once __DIR__.'/class.fad-gbp-cli.php'; // Business Profile sync: on-demand WP-CLI command
+    include_once __DIR__.'/class.fad-gbp-dashboard.php'; // Business Profile sync: Dashboard status widget
     \uamswp_fad_gbp_register_hooks();
     \uamswp_fad_gbp_register_settings_hooks();
+    \uamswp_fad_gbp_register_dashboard_hooks();
     \uamswp_fad_gbp_register_cli();
 }

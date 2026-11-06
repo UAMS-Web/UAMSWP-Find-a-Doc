@@ -60,6 +60,7 @@ require_once dirname(__DIR__).'/includes/class.fad-gbp-sync.php';
 require_once dirname(__DIR__).'/includes/class.fad-gbp-runtime.php';
 require_once dirname(__DIR__).'/includes/class.fad-gbp-settings.php';
 require_once dirname(__DIR__).'/includes/class.fad-gbp-cli.php';
+require_once dirname(__DIR__).'/includes/class.fad-gbp-dashboard.php';
 
 /*
  * The delete cleanup registers its hooks as it loads. Load it here, inside Brain Monkey's
