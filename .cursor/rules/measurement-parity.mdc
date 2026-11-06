@@ -34,6 +34,8 @@ Before you compare any measurement against a prior number (a suite time, a boot 
 
 5. **Know which flags change the workload rather than observe it.** A profiler is not a stopwatch. A flag that makes the runner behave differently in order to measure it has changed the thing measured, so never quote its wall time as a band time.
 
+   Under Pest, `pest --update-shards` runs the suite **functionally**, one process per test, which inflated CPU roughly 4x in `uams-statamic` and failed to finish inside a 3600s bound that a plain band clears in about 806s. Never quote its wall time as a band time, and treat any "ideal N-way" derived from its per-class totals as inflated. The same caution applies to coverage drivers: where PCOV is loaded (a per-machine install, see [`pcov-setup`](../../.claude/skills/pcov-setup/SKILL.md)), `--passthru-php` forwards only what you list, so a parent `-d pcov.enabled=0` does **not** reach the workers.
+
 6. **Distrust a harness's own verdict field; re-derive from the raw output.** Strip ANSI before parsing, and when a verdict disagrees with the raw log, believe the log.
 
 7. **Prefer more parity over more samples.** Repeat runs bound *variance*; they do nothing about *systematic* error, which is the failure this rule addresses. A verified parity checklist adds much more than another sample. Spend the time there first.
