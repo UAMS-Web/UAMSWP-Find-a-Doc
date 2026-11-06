@@ -27,6 +27,15 @@ composer test:unit           # Pest 5 with Brain Monkey: no WordPress, no databa
 composer test:integration    # PHPUnit 9.6 with wp-phpunit: needs a WordPress core tree and a test database
 ```
 
+`composer test:unit` first runs `composer test:wiring` in a fresh Pest process,
+then runs the callback suite. The wiring test under `tests/Wiring/` must observe
+the first load of the content registration file; it cannot share a process with
+callback tests that already loaded its global functions. A direct
+`vendor/bin/pest` runs only the callback suite under `tests/Unit/`. Additional
+arguments to `composer test:unit` apply only to that callback suite; the wiring
+test always runs in full. Use `--ci` when validating registration snapshots so
+a missing baseline fails instead of being created.
+
 `composer test:integration` needs, before it runs:
 
 - `composer setup:integration`, run once and again whenever `tests/Integration/composer.lock` changes.
