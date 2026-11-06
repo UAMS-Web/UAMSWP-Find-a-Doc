@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+started=$SECONDS
+scratch=$(mktemp -d)
+trap 'rm -rf "$scratch"' EXIT
+step() { printf '\n[%ss] %s\n' "$((SECONDS - started))" "$*"; }
+
+step 'Install PHP 8.4, the PHP 8.2 lint floor, and MariaDB'
+packages=(php8.4-cli php8.4-curl php8.4-mbstring php8.4-xml php8.4-mysql php8.4-zip php8.4-pcov php8.2-cli mariadb-server)
+missing=()
+for package in "${packages[@]}"; do
+    if ! dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -qx 'install ok installed'; then
+        missing+=("$package")
+    fi
+done
+if ((${#missing[@]})); then
+    if [[ ! -f /usr/share/keyrings/debsuryorg-archive-keyring.gpg ]]; then
+        curl --fail --silent --show-error --location --max-time 60 \
+            https://packages.sury.org/debsuryorg-archive-keyring.deb -o "$scratch/keyring.deb"
+        sudo dpkg -i "$scratch/keyring.deb"
+    fi
+    echo 'deb [signed-by=/usr/share/keyrings/debsuryorg-archive-keyring.gpg] https://packages.sury.org/php/ bookworm main' \
+        | sudo tee /etc/apt/sources.list.d/php.list >/dev/null
+    timeout 180 sudo apt-get update
+    timeout 600 sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends "${missing[@]}"
+fi
+sudo update-alternatives --set php /usr/bin/php8.4
+
+step 'Install the known-working Composer 2 release'
+if ! command -v composer >/dev/null || [[ $(composer --version --no-ansi 2>/dev/null) != 'Composer version 2.11.1 '* ]]; then
+    curl --fail --silent --show-error --location --max-time 60 https://getcomposer.org/installer -o "$scratch/composer-setup.php"
+    expected=$(curl --fail --silent --show-error --location --max-time 60 https://composer.github.io/installer.sig)
+    echo "$expected  $scratch/composer-setup.php" | sha384sum --check
+    timeout 120 php "$scratch/composer-setup.php" --version=2.11.1 --install-dir="$scratch" --filename=composer
+    sudo install -m 0755 "$scratch/composer" /usr/local/bin/composer
+fi
+
+step 'Install Node 22 to match CI without replacing the orb Node'
+state="$HOME/.local/share/find-a-doc"
+mkdir -p "$state"
+export PATH="$state/node/bin:$PATH"
+if [[ ! -x "$state/node/bin/node" ]] || [[ $($state/node/bin/node -p 'process.versions.node.split(".")[0]') != 22 ]]; then
+    case $(uname -m) in
+        x86_64) arch=x64 ;;
+        aarch64) arch=arm64 ;;
+        *) echo 'Unsupported Node architecture' >&2; exit 1 ;;
+    esac
+    curl --fail --silent --show-error --location --max-time 60 https://nodejs.org/dist/latest-v22.x/SHASUMS256.txt -o "$scratch/SHASUMS256.txt"
+    archive=$(awk -v suffix="-linux-$arch.tar.xz" '$2 ~ suffix "$" {print $2}' "$scratch/SHASUMS256.txt")
+    test -n "$archive"
+    curl --fail --silent --show-error --location --max-time 120 "https://nodejs.org/dist/latest-v22.x/$archive" -o "$scratch/$archive"
+    (cd "$scratch"; grep " $archive\$" SHASUMS256.txt | sha256sum --check)
+    mkdir -p "$state/node"
+    tar -xJf "$scratch/$archive" --strip-components=1 -C "$state/node"
+fi
+
+step 'Install both locked Composer trees and npm packages'
+timeout 600 composer install --no-interaction --no-progress --prefer-dist
+timeout 600 composer install --working-dir=tests/Integration --no-interaction --no-progress --prefer-dist
+timeout 300 npm ci --ignore-scripts --no-audit --no-fund
+
+step 'Prepare WordPress matching the locked wp-phpunit version'
+wordpress=/tmp/find-a-doc-wordpress
+wp_version=$(php -r '$lock = json_decode(file_get_contents("tests/Integration/composer.lock"), true, 512, JSON_THROW_ON_ERROR); foreach ($lock["packages-dev"] as $package) { if ($package["name"] === "wp-phpunit/wp-phpunit") { echo ltrim($package["version"], "v"); exit; } } exit(1);')
+installed_wp=''
+if [[ -f "$wordpress/wp-includes/version.php" ]]; then
+    installed_wp=$(php -r 'require $argv[1]; echo $wp_version;' "$wordpress/wp-includes/version.php")
+fi
+if [[ "$installed_wp" != "$wp_version" || ! -f "$wordpress/wp-settings.php" ]]; then
+    curl --fail --silent --show-error --location --max-time 120 "https://wordpress.org/wordpress-$wp_version.tar.gz" -o "$scratch/wordpress.tar.gz"
+    mkdir -p "$wordpress"
+    tar -xzf "$scratch/wordpress.tar.gz" --strip-components=1 -C "$wordpress"
+fi
+
+step 'Prepare the CI-pinned theme and Bootstrap fixture'
+theme=/tmp/find-a-doc-theme
+theme_ref=$(awk '/repository: UAMS-Web\/uams-2020/ {found=1; next} found && /ref:/ {print $2; exit}' .github/workflows/ci.yml)
+[[ "$theme_ref" =~ ^[0-9a-f]{40}$ ]]
+if [[ ! -d "$theme/.git" ]]; then
+    timeout 120 git clone --filter=blob:none --no-checkout https://github.com/UAMS-Web/uams-2020 "$theme"
+fi
+if [[ $(git -C "$theme" rev-parse HEAD) != "$theme_ref" || ! -d "$theme/assets/scss/supporting" ]]; then
+    timeout 120 git -C "$theme" fetch origin "$theme_ref"
+    git -C "$theme" checkout --detach "$theme_ref"
+    git -C "$theme" restore --source="$theme_ref" --worktree -- assets/scss/supporting
+fi
+if [[ ! -f "$theme/node_modules/bootstrap/scss/_functions.scss" ]] \
+    || [[ $(node -p "require('$theme/node_modules/bootstrap/package.json').version") != 4.5.2 ]]; then
+    timeout 300 npm install --prefix "$theme" --no-save --ignore-scripts --no-audit --no-fund bootstrap@4.5.2
+fi
+
+step 'Prepare the disposable database for the supervised service'
+if [[ ! -d /var/lib/mysql/mysql ]]; then
+    timeout 120 sudo mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+fi
+sudo tee /etc/mysql/find-a-doc-init.sql >/dev/null <<'SQL'
+CREATE DATABASE IF NOT EXISTS uamswp_find_a_doc_tests;
+CREATE USER IF NOT EXISTS 'findadoc'@'127.0.0.1' IDENTIFIED BY '';
+GRANT ALL PRIVILEGES ON uamswp_find_a_doc_tests.* TO 'findadoc'@'127.0.0.1';
+SQL
+
+step 'Persist the test environment for repository login shells'
+mkdir -p "$HOME/.config/find-a-doc"
+cat > "$HOME/.config/find-a-doc/orb-env.sh" <<'ENV'
+if [[ -f composer.json ]] && grep -q '"name": "uams-web/uamswp-find-a-doc"' composer.json; then
+    case ":$PATH:" in
+        *":$HOME/.local/share/find-a-doc/node/bin:"*) ;;
+        *) export PATH="$HOME/.local/share/find-a-doc/node/bin:$PATH" ;;
+    esac
+    export WP_TESTS_ABSPATH=/tmp/find-a-doc-wordpress
+    export WP_TESTS_DB_NAME=uamswp_find_a_doc_tests
+    export WP_TESTS_DB_USER=findadoc
+    export WP_TESTS_DB_PASSWORD=''
+    export WP_TESTS_DB_HOST=127.0.0.1
+    export UAMS_2020_THEME=/tmp/find-a-doc-theme
+fi
+ENV
+hook='[[ ! -f "$HOME/.config/find-a-doc/orb-env.sh" ]] || source "$HOME/.config/find-a-doc/orb-env.sh"'
+if ! grep -Fqx "$hook" "$HOME/.bash_profile"; then
+    printf '\n%s\n' "$hook" >> "$HOME/.bash_profile"
+fi
+
+step 'Setup ready; .agents/resume starts and checks the database after activation'
+php --version | head -1
+composer --version
+node --version
