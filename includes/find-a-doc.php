@@ -22,6 +22,7 @@ function bootstrap(): void
     include_once __DIR__.'/class.fad-templates.php';
     include_once __DIR__.'/class.fad-acf-functions.php'; // ACF specific functions
     include_once __DIR__.'/class.fad-provider-nullable-fields.php'; // Keep unanswered provider fields empty in the custom table
+    include_once __DIR__.'/class.fad-delete-cleanup.php'; // Remove a deleted provider or location from linked records and custom tables
     include_once __DIR__.'/class.fad-fwp-functions.php'; // FacetWP specific functions
     include_once __DIR__.'/class.fad-functions.php';
     include_once __DIR__.'/class.fad-settings-pages.php';
