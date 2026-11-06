@@ -641,4 +641,82 @@ final class GbpSyncTest extends UnitTestCase
         $this->assertSame([], $this->calls_of('attributes'));
         $this->assertSame([], $this->calls_of('update_attributes'));
     }
+
+    public function test_a_changed_store_code_still_finds_the_listing_by_the_stored_name_and_creates_nothing(): void
+    {
+        $item = $this->item(['store_code' => 'jane_renamed-clinic', 'stored_name' => 'locations/jane_clinic']);
+        $old = $this->listing('accounts/up', 'jane_clinic', ['phoneNumbers' => ['primaryPhone' => '501-000-0000']] + $item['fields']);
+
+        $this->sync(['uams' => 'live'], true, [$old])->run([$item]);
+
+        $this->assertSame(['update'], $this->actions());
+        $this->assertSame([], $this->calls_of('create'));
+        $this->assertSame('locations/jane_clinic', $this->calls_of('patch')[0][1]);
+        $this->assertSame('locations/jane_clinic', $this->log[0]['listing_name']);
+    }
+
+    public function test_without_the_stored_name_the_same_rename_creates_a_second_listing(): void
+    {
+        $item = $this->item(['store_code' => 'jane_renamed-clinic']);
+        $old = $this->listing('accounts/up', 'jane_clinic', $item['fields']);
+
+        $this->sync(['uams' => 'live'], true, [$old])->run([$item]);
+
+        $this->assertSame(['create'], $this->actions());
+    }
+
+    public function test_a_stored_name_no_listing_has_any_more_falls_back_to_the_store_code(): void
+    {
+        $item = $this->item(['stored_name' => 'locations/deleted']);
+        $listing = $this->listing('accounts/up', 'jane_clinic', $item['fields']);
+
+        $this->sync(['uams' => 'live'], true, [$listing])->run([$item]);
+
+        $this->assertSame(['noop'], $this->actions());
+        $this->assertSame('locations/jane_clinic', $this->log[0]['listing_name']);
+    }
+
+    public function test_a_new_store_code_held_by_another_listing_is_a_review_not_a_write(): void
+    {
+        $item = $this->item(['store_code' => 'taken', 'stored_name' => 'locations/jane_clinic']);
+        $listings = [$this->listing('accounts/up', 'jane_clinic', $item['fields']), $this->listing('accounts/up', 'taken', $item['fields'])];
+
+        $this->sync(['uams' => 'live'], true, $listings)->run([$item]);
+
+        $this->assertSame(['review'], $this->actions());
+        $this->assertSame([], $this->client->calls);
+    }
+
+    public function test_a_stored_name_in_another_group_is_still_a_review(): void
+    {
+        $item = $this->item(['store_code' => 'renamed', 'stored_name' => 'locations/jane_clinic']);
+
+        $this->sync(['uams' => 'live'], true, [$this->listing('accounts/bp', 'jane_clinic', $item['fields'])])->run([$item]);
+
+        $this->assertSame(['review'], $this->actions());
+        $this->assertSame([], $this->client->calls);
+    }
+
+    public function test_a_created_listing_is_named_on_its_entry_and_found_by_name_later_in_the_run(): void
+    {
+        $sync = $this->sync(['uams' => 'live']);
+        $sync->run([$this->item()]);
+
+        $this->assertSame('locations/new-1', $this->log[0]['listing_name']);
+
+        $sync->run([$this->item(['store_code' => 'jane_other', 'stored_name' => 'locations/new-1'])]);
+
+        $this->assertSame(['create', 'noop'], $this->actions());
+    }
+
+    public function test_a_listing_created_but_failing_its_attributes_is_still_named_on_the_entry(): void
+    {
+        $item = $this->location_item();
+        $this->client->fail_attributes = new RuntimeException('Google API PATCH failed (400): bad');
+
+        $this->sync(['uams' => 'live'])->run([$item]);
+
+        $this->assertSame(['error'], $this->actions());
+        $this->assertStringStartsWith('locations/new-', $this->log[0]['listing_name']);
+    }
 }
