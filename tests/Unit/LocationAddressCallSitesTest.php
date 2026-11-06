@@ -50,7 +50,6 @@ final class LocationAddressCallSitesTest extends TestCase
             'location card' => ['templates/loops/location-card.php', 'location'],
             'Doximity list' => ['templates/doximity-list.php', 'primary_appointment'],
             'GMB location list' => ['templates/gmb-list-location.php', 'location'],
-            'GMB provider list' => ['templates/gmb-list-provider.php', 'location'],
             'GMB export' => ['includes/class.fad-gmb-settings-page.php', 'location'],
         ];
     }
