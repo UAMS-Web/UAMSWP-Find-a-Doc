@@ -19,6 +19,12 @@ const UAMSWP_FAD_GBP_HASH_META = '_uamswp_fad_gbp_hash';
 /** How many times a rate-limited provider is retried before the job gives up. */
 const UAMSWP_FAD_GBP_MAX_ATTEMPTS = 5;
 
+/** How many recent entries the activity log keeps. */
+const UAMSWP_FAD_GBP_LOG_CAP = 300;
+
+/** How many review and error entries are kept apart from the activity log, one per store code. */
+const UAMSWP_FAD_GBP_ATTENTION_CAP = 1000;
+
 /**
  * The silos, each with the brand that selects it and the Google account group that owns its
  * provider and location listings.
@@ -448,10 +454,24 @@ function uamswp_fad_gbp_items_for_post(int $post_id, array $categories): array
 /**
  * Keep a log entry for the settings screen. Listings already in sync are not logged.
  *
+ * A review or error entry is also kept in its own list, one per store code, that routine entries
+ * cannot push out; a later settled entry for the store code removes it.
+ *
  * @param  array<string, mixed>  $entry
  */
 function uamswp_fad_gbp_log(array $entry): void
 {
+    $entry = ['time' => time()] + $entry;
+
+    $attention = get_option('uamswp_fad_gbp_attention', []);
+    $attention = is_array($attention) ? $attention : [];
+
+    $next = UAMSWP_FAD_GBP_Logic::next_attention($attention, $entry, UAMSWP_FAD_GBP_ATTENTION_CAP);
+
+    if ($next !== $attention) {
+        update_option('uamswp_fad_gbp_attention', $next, false);
+    }
+
     if (($entry['action'] ?? '') === 'noop') {
         return;
     }
@@ -459,9 +479,9 @@ function uamswp_fad_gbp_log(array $entry): void
     $log = get_option('uamswp_fad_gbp_log', []);
     $log = is_array($log) ? $log : [];
 
-    array_unshift($log, ['time' => time()] + $entry);
+    array_unshift($log, $entry);
 
-    update_option('uamswp_fad_gbp_log', array_slice($log, 0, 300), false);
+    update_option('uamswp_fad_gbp_log', array_slice($log, 0, UAMSWP_FAD_GBP_LOG_CAP), false);
 }
 
 /**
