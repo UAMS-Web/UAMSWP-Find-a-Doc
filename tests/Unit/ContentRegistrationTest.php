@@ -103,6 +103,30 @@ test('taxonomy registration retains its associations, hierarchy, and REST exposu
             ->and($args[$key])->toBe($expected);
     }
 
+    // Rewrite hierarchy is independent of taxonomy hierarchy.
+    expect($args['rewrite'])->toBe([
+        'slug' => match ($name) {
+            'service_line' => 'service-line',
+            'academic_position' => 'academic-position',
+            'academic_college' => 'college',
+            default => $name,
+        },
+        'with_front' => ! in_array($name, [
+            'school', 'residency_year', 'academic_department', 'board', 'certifying_body',
+            'association', 'educationtype', 'recognition', 'region', 'location_type',
+            'gmb_cat_provider', 'gmb_cat_location', 'building', 'parking',
+            'brand_organization_uams', 'brand_organization',
+        ], true),
+        'hierarchical' => ! in_array($name, [
+            'language', 'school', 'residency_year', 'board', 'certifying_body',
+            'association', 'educationtype', 'recognition', 'gmb_cat_provider',
+            'gmb_cat_location', 'building', 'parking',
+        ], true),
+    ]);
+    expect($args['show_in_quick_edit'] ?? $args['show_ui'])->toBe(in_array($name, [
+        'condition', 'treatment', 'location_type', 'gmb_cat_provider', 'gmb_cat_location',
+    ], true));
+
     expect((bool) ($args['show_in_rest'] ?? false))->toBe($rest_base !== '')
         ->and($args['rest_base'] ?? '')->toBe($rest_base);
 })->with([
