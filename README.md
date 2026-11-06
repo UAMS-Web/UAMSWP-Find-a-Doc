@@ -27,6 +27,13 @@ composer test:unit           # Pest 5 with Brain Monkey: no WordPress, no databa
 composer test:integration    # PHPUnit 9.6 with wp-phpunit: needs a WordPress core tree and a test database
 ```
 
+`composer test:integration` needs, before it runs:
+
+- `composer setup:integration`, run once and again whenever `tests/Integration/composer.lock` changes.
+- A MySQL server reachable at `127.0.0.1` as `root` with no password, or the `WP_TESTS_DB_HOST`, `WP_TESTS_DB_USER` and `WP_TESTS_DB_PASSWORD` variables set to match.
+- An empty database named `uamswp_find_a_doc_tests` (or the name in `WP_TESTS_DB_NAME`), for example `CREATE DATABASE uamswp_find_a_doc_tests`. WordPress' test installer drops every table in it on each run, and the suite refuses to start when the name matches the `DB_NAME` of the WordPress install it sits in.
+- A WordPress install five directories above `tests/Integration` (this checkout inside `wp-content/plugins`), or `WP_TESTS_ABSPATH` pointing at one.
+
 The supported PHP floor is 8.2 (`require.php` in `composer.json` and `Requires PHP` in the plugin header). Development and tests run on PHP 8.4 (`config.platform.php` is `8.4.27`), which Pest 5 needs. The Integration suite installs separately because WordPress' test suite supports PHPUnit 9 only; see the `tests` skill for the layout and for the environment variables it reads (`WP_TESTS_ABSPATH`, `WP_TESTS_DB_NAME`).
 
 ### Style build test
