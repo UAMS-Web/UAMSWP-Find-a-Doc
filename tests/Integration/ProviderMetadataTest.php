@@ -9,6 +9,11 @@ use UamswpFindADoc\Tests\Support\IntegrationTestCase;
 require_once __DIR__.'/../Support/acf-post-meta.php';
 require_once __DIR__.'/../Support/theme-images.php';
 
+/**
+ * Provider metadata contracts using real WordPress posts and terms.
+ *
+ * @command  composer test:integration -- --filter=ProviderMetadataTest
+ */
 final class ProviderMetadataTest extends IntegrationTestCase
 {
     private function createProvider(): int
@@ -168,5 +173,70 @@ final class ProviderMetadataTest extends IntegrationTestCase
         $expected = implode(' ', array_map(fn (int $i): string => 'word'.$i, range(1, 30)));
         $this->assertSame($bio, $data['physician_clinical_bio']);
         $this->assertSame($summary !== '' ? $summary : $expected.($words > 30 ? ' &hellip;' : ''), $data['physician_short_clinical_bio']);
+    }
+
+    /**
+     * Keep selected IDs, order, and each location's own phones and stored map.
+     */
+    public function test_selected_locations_keep_independent_phone_and_map_payloads(): void
+    {
+        // Create posts in an order different from both selection and title order.
+        $provider = $this->createProvider();
+        $alpha = (int) self::factory()->post->create(['post_type' => 'location', 'post_status' => 'publish', 'post_title' => 'Alpha Clinic', 'post_name' => 'alpha-clinic']);
+        $zulu = (int) self::factory()->post->create(['post_type' => 'location', 'post_status' => 'publish', 'post_title' => 'Zulu Clinic', 'post_name' => 'zulu-clinic']);
+        $middle = (int) self::factory()->post->create(['post_type' => 'location', 'post_status' => 'publish', 'post_title' => 'Middle Clinic', 'post_name' => 'middle-clinic']);
+        $delta = (int) self::factory()->post->create(['post_type' => 'location', 'post_status' => 'publish', 'post_title' => 'Delta Clinic', 'post_name' => 'delta-clinic']);
+        self::factory()->post->create(['post_type' => 'location', 'post_status' => 'publish', 'post_title' => 'Not selected']);
+        $this->assertArrayNotHasKey('physician_locations', get_provider_meta(['id' => $provider]));
+        update_post_meta($provider, 'physician_locations', [$zulu, $alpha, $middle, $delta]);
+
+        // Populate disabled fields as controls and use distinct phones per location.
+        foreach ([
+            $zulu => ['location_phone' => '(501) 555-0100 ext 9', 'location_clinic_phone_query' => '1', 'field_location_appointment_phone_query' => '1', 'location_new_appointments_phone' => '501.555.0101', 'location_return_appointments_phone' => '+1 501 555 0102', 'location_map' => ['lat' => 34.71, 'lng' => -92.32]],
+            $alpha => ['location_phone' => '501-555-0200', 'location_clinic_phone_query' => '0', 'field_location_appointment_phone_query' => '1', 'location_new_appointments_phone' => 'ignored new', 'location_return_appointments_phone' => 'ignored returning', 'location_map' => 'not a map'],
+            $middle => ['location_phone' => '501-555-0300', 'location_clinic_phone_query' => '1', 'field_location_appointment_phone_query' => '0', 'location_new_appointments_phone' => '501-555-0301', 'location_return_appointments_phone' => 'ignored returning'],
+            $delta => ['location_phone' => '501-555-0400', 'location_clinic_phone_query' => '1', 'field_location_appointment_phone_query' => '1', 'location_new_appointments_phone' => '501-555-0401', 'location_return_appointments_phone' => '501-555-0402', 'location_map' => ['lat' => 35.1, 'lng' => -93.2]],
+        ] as $id => $fields) {
+            foreach ($fields as $field => $value) {
+                update_post_meta($id, $field, $value);
+            }
+        }
+
+        // Compare full rows to catch stale values leaking from a previous iteration.
+        $data = get_provider_meta(['id' => $provider]);
+        $this->assertSame([
+            $zulu => [
+                'link' => get_permalink($zulu), 'title' => 'Zulu Clinic', 'slug' => 'zulu-clinic',
+                'locations_phone_title' => 'Clinic Phone Number', 'location_clinic_phone' => '(501) 555-0100 ext 9',
+                'location_phone_text' => 'Appointment Phone Numbers',
+                'location_new_appointments_phone' => '501.555.0101', 'location_new_appointments_phonetext' => 'New Patients',
+                'location_return_appointments_phone' => '+1 501 555 0102', 'location_return_appointments_phone_text' => 'Returning Patients',
+                'location_lat' => 34.71, 'location_lng' => -92.32,
+                'location_directions' => '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/34.71,-92.32" target="_blank" aria-label="Get Directions to Zulu Clinic">Get Directions</a>',
+            ],
+            $alpha => [
+                'link' => get_permalink($alpha), 'title' => 'Alpha Clinic', 'slug' => 'alpha-clinic',
+                'locations_phone_title' => 'Clinic Phone Number', 'location_clinic_phone' => '501-555-0200',
+                'location_phone_text' => 'Appointment Phone Number',
+                'location_new_appointments_phone' => '', 'location_new_appointments_phonetext' => 'New and Returning Patients',
+                'location_return_appointments_phone' => '', 'location_return_appointments_phone_text' => '',
+            ],
+            $middle => [
+                'link' => get_permalink($middle), 'title' => 'Middle Clinic', 'slug' => 'middle-clinic',
+                'locations_phone_title' => 'Clinic Phone Number', 'location_clinic_phone' => '501-555-0300',
+                'location_phone_text' => 'Appointment Phone Numbers',
+                'location_new_appointments_phone' => '501-555-0301', 'location_new_appointments_phonetext' => 'New Patients',
+                'location_return_appointments_phone' => '', 'location_return_appointments_phone_text' => '',
+            ],
+            $delta => [
+                'link' => get_permalink($delta), 'title' => 'Delta Clinic', 'slug' => 'delta-clinic',
+                'locations_phone_title' => 'Clinic Phone Number', 'location_clinic_phone' => '501-555-0400',
+                'location_phone_text' => 'Appointment Phone Numbers',
+                'location_new_appointments_phone' => '501-555-0401', 'location_new_appointments_phonetext' => 'New Patients',
+                'location_return_appointments_phone' => '501-555-0402', 'location_return_appointments_phone_text' => 'Returning Patients',
+                'location_lat' => 35.1, 'location_lng' => -93.2,
+                'location_directions' => '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/35.1,-93.2" target="_blank" aria-label="Get Directions to Delta Clinic">Get Directions</a>',
+            ],
+        ], $data['physician_locations']);
     }
 }
