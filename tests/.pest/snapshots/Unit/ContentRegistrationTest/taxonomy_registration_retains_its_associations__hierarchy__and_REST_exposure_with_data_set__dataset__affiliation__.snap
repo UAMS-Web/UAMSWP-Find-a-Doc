@@ -1,0 +1,42 @@
+{
+    "label": "Hospital Affiliations",
+    "labels": {
+        "name": "Hospital Affiliations",
+        "singular_name": "Hospital Affiliations",
+        "search_items": "Search Hospital Affiliations",
+        "all_items": "All Hospital Affiliations",
+        "edit_item": "Edit Hospital Affiliation",
+        "update_item": "Update Hospital Affiliation",
+        "add_new_item": "Add New Hospital Affiliation",
+        "new_item_name": "New Hospital Affiliation",
+        "menu_name": "Affiliations, Hospital",
+        "view_item": "View Hospital Affiliation",
+        "popular_items": "Popular Hospital Affiliation",
+        "separate_items_with_commas": "Separate hospital affiliations with commas",
+        "add_or_remove_items": "Add or remove hospital affiliations",
+        "choose_from_most_used": "Choose from the most used hospital affiliations",
+        "not_found": "No hospital affiliations found"
+    },
+    "public": true,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_in_rest": true,
+    "rest_base": "affiliation",
+    "rest_controller_class": "WP_REST_Terms_Controller",
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "affiliation",
+        "with_front": true,
+        "hierarchical": true
+    }
+}

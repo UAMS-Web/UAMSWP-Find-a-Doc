@@ -1,0 +1,43 @@
+{
+    "labels": {
+        "name": "Position Types",
+        "singular_name": "Position Type",
+        "menu_name": "Position Types, Academic",
+        "all_items": "All Position Types",
+        "parent_item": "Parent Position Type",
+        "parent_item_colon": "Parent Position Type:",
+        "new_item_name": "New Position Type",
+        "add_new_item": "Add New Position Type",
+        "edit_item": "Edit Position Type",
+        "update_item": "Update Position Type",
+        "view_item": "View Position Type",
+        "separate_items_with_commas": "Separate position types with commas",
+        "add_or_remove_items": "Add or remove position types",
+        "choose_from_most_used": "Choose from the most used",
+        "popular_items": "Popular Position Types",
+        "search_items": "Search Position Types",
+        "not_found": "Not Found",
+        "no_terms": "No Position Types",
+        "items_list": "Position Types list",
+        "items_list_navigation": "Position Types list navigation"
+    },
+    "public": true,
+    "hierarchical": true,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "academic-position",
+        "with_front": true,
+        "hierarchical": true
+    }
+}
