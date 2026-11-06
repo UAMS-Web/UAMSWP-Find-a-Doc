@@ -41,8 +41,12 @@ beforeEach(function (): void {
     $this->providerLocationMap = false;
     when('get_field')->alias(fn (string $field, mixed $id): mixed => \is_int($id)
         ? ($this->providerLocationFields[$id][$field] ?? false) : false);
-    when('get_post_meta')->alias(fn (int $id, string $key): mixed => [$id, $key] === [202, 'location_map']
-        ? $this->providerLocationMap : '');
+    when('get_post_meta')->alias(function (int $id, string $key, bool $single = false): mixed {
+        // Preserve WordPress's scalar-versus-list distinction at the read boundary.
+        $value = [$id, $key] === [202, 'location_map'] ? $this->providerLocationMap : '';
+
+        return $single ? $value : [$value];
+    });
 });
 
 test('provider location phone switches retain raw values and gate returning appointments', function (
