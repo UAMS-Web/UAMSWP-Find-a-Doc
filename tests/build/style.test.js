@@ -4,7 +4,7 @@
  * Golden-file test for the gulp style build.
  *
  * Runs gulpfile.js, unchanged, against the locked npm packages and compares the compiled
- * CSS with tests/build/app.golden.css. A dependency update that changes the output shows up
+ * CSS with tests/build/app.golden.css (one rule per line). A dependency update that changes the output shows up
  * as a diff in the golden file to review.
  *
  * The Sass entry imports the uams-2020 theme (`../../../../themes/uams-2020/...`), so the
@@ -29,6 +29,10 @@ const goldenPath = path.join(__dirname, 'app.golden.css');
 const builtCss = path.join(root, 'assets', 'css', 'app.css');
 
 const sha256 = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+
+// The build is minified, so the golden file stores one rule per line (a newline after each closing
+// brace): a changed rule is then one changed line in a diff. The same transform applies to the output.
+const onePerLine = (css) => css.replace(/\}/g, '}\n');
 
 test('the style task compiles the golden CSS', () => {
     const theme = process.env.UAMS_2020_THEME;
@@ -68,9 +72,11 @@ test('the style task compiles the golden CSS', () => {
 
         assert.ok(fs.existsSync(output), 'The style task wrote no app.css');
 
-        const actual = fs.readFileSync(output, 'utf8');
+        const compiled = fs.readFileSync(output, 'utf8');
 
-        assert.ok(actual.length > 1000, `The compiled CSS is implausibly small (${actual.length} bytes)`);
+        assert.ok(compiled.length > 1000, `The compiled CSS is implausibly small (${compiled.length} bytes)`);
+
+        const actual = onePerLine(compiled);
 
         if (process.env.UPDATE_GOLDEN === '1') {
             fs.writeFileSync(goldenPath, actual);
