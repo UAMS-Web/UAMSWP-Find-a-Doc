@@ -1,0 +1,47 @@
+{
+    "label": "Medical Degrees",
+    "labels": {
+        "name": "Clinical Degrees and Credentials",
+        "singular_name": "Clinical Degree\/Credential",
+        "search_items": "Search Degrees and Credentials",
+        "all_items": "All Degrees and Credentials",
+        "edit_item": "Edit Degree\/Credential",
+        "update_item": "Update Degree\/Credential",
+        "add_new_item": "Add New Degree\/Credential",
+        "new_item_name": "New Degree\/Credential",
+        "menu_name": "Degrees and Credentials",
+        "view_item": "View Degree\/Credential",
+        "popular_items": "Popular Degree\/Credential",
+        "separate_items_with_commas": "Separate degrees and credentials with commas",
+        "add_or_remove_items": "Add or remove degrees and credentials",
+        "choose_from_most_used": "Choose from the most used degrees and credentials",
+        "not_found": "No degrees or credentials found",
+        "parent_item": "Parent Degree\/Credential",
+        "parent_item_colon": "Parent Degree\/Credential:",
+        "no_terms": "No Clinical Degrees or Credentials",
+        "items_list": "Clinical degrees and credentials list",
+        "items_list_navigation": "Clinical degrees and credentials list navigation"
+    },
+    "public": true,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_in_rest": true,
+    "rest_base": "medical_degree",
+    "rest_controller_class": "WP_REST_Terms_Controller",
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "degree",
+        "with_front": true,
+        "hierarchical": true
+    }
+}

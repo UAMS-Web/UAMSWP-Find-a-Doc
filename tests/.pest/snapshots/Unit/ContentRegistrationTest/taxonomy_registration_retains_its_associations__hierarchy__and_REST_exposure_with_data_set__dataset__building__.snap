@@ -1,0 +1,43 @@
+{
+    "labels": {
+        "name": "Facilities",
+        "singular_name": "Facility",
+        "menu_name": "Facilities",
+        "all_items": "All Facilities",
+        "parent_item": "Parent Facility",
+        "parent_item_colon": "Parent Facility:",
+        "new_item_name": "New Facility",
+        "add_new_item": "Add New Facility",
+        "edit_item": "Edit Facility",
+        "update_item": "Update Facility",
+        "view_item": "View Facility",
+        "separate_items_with_commas": "Separate Facilities with commas",
+        "add_or_remove_items": "Add or remove Facilities",
+        "choose_from_most_used": "Choose from the most used",
+        "popular_items": "Popular Facilities",
+        "search_items": "Search Facilities",
+        "not_found": "Not Found",
+        "no_terms": "No Facilities",
+        "items_list": "Facilities list",
+        "items_list_navigation": "Facilities list navigation"
+    },
+    "public": true,
+    "hierarchical": true,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "building",
+        "with_front": false,
+        "hierarchical": false
+    }
+}
