@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+timeout 4 amp orb services ensure
+if ! timeout 5 bash -c '
+    until mariadb --connect-timeout=1 --protocol=tcp --host=127.0.0.1 --port=3306 \
+        --user=findadoc --password="" --database=uamswp_find_a_doc_tests \
+        --execute="SELECT 1 AS find_a_doc_database_ready;" 2>/dev/null; do
+        sleep 0.2
+    done
+'; then
+    echo 'Test database did not become ready; inspect amp orb service logs find-a-doc-db.' >&2
+    exit 1
+fi

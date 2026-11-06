@@ -1,0 +1,41 @@
+{
+    "label": "Academic Departments",
+    "labels": {
+        "name": "Academic Departments",
+        "singular_name": "Academic Departments",
+        "search_items": "Search Departments",
+        "all_items": "All Departments",
+        "edit_item": "Edit Department",
+        "update_item": "Update Department",
+        "add_new_item": "Add New Department",
+        "new_item_name": "New Department",
+        "menu_name": "Departments, Academic",
+        "view_item": "View Department",
+        "popular_items": "Popular Department",
+        "separate_items_with_commas": "Separate departments with commas",
+        "add_or_remove_items": "Add or remove departments",
+        "choose_from_most_used": "Choose from the most used departments",
+        "not_found": "No departments found",
+        "parent_item": "Parent Department",
+        "parent_item_colon": "Parent Department:"
+    },
+    "public": true,
+    "hierarchical": true,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "academic_department",
+        "with_front": false,
+        "hierarchical": true
+    }
+}

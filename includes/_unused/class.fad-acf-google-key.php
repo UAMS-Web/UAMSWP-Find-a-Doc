@@ -1,33 +1,34 @@
-<?php 
+<?php
 
-if( function_exists('acf_add_options_page') ) {
+declare(strict_types=1);
 
-    acf_add_options_page(array(
-		'page_title' 	=> 'Find-a-Doc Settings',
-		'menu_title'	=> 'Find-a-Doc Settings',
-		'menu_slug' 	=> 'fad-settings',
-		'capability'	=> 'edit_posts',
-		'redirect'		=> false
-    ));
-    
-    acf_add_options_sub_page(array(
-		'page_title' 	=> 'Areas of Expertise Options',
-        'menu_title'	=> 'Clinical Areas of Expertise',
-        'menu_slug' 	=> 'uamswp-fad-expertise',
-        'parent_slug'	=> 'fad-settings',
-        'redirect'		=> false
-	));
+if (function_exists('acf_add_options_page')) {
+
+    acf_add_options_page([
+        'page_title' => 'Find-a-Doc Settings',
+        'menu_title' => 'Find-a-Doc Settings',
+        'menu_slug' => 'fad-settings',
+        'capability' => 'edit_posts',
+        'redirect' => false,
+    ]);
+
+    acf_add_options_sub_page([
+        'page_title' => 'Areas of Expertise Options',
+        'menu_title' => 'Clinical Areas of Expertise',
+        'menu_slug' => 'uamswp-fad-expertise',
+        'parent_slug' => 'fad-settings',
+        'redirect' => false,
+    ]);
 
 }
 
 // Add metaboxes for Settings page
-if( function_exists('acf_add_local_field_group') ):
-
-    acf_add_local_field_group(array(
+if (function_exists('acf_add_local_field_group')) {
+    acf_add_local_field_group([
         'key' => 'group_uams_theme_settings',
         'title' => 'Theme Settings',
-        'fields' => array(
-            array(
+        'fields' => [
+            [
                 'key' => 'field_fad_google_key',
                 'label' => 'Google Maps API Key',
                 'name' => 'fad_google_key',
@@ -35,44 +36,44 @@ if( function_exists('acf_add_local_field_group') ):
                 'instructions' => '',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '50',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '',
-            ),
-        ),
-        'location' => array(
-            array(
-                array(
+            ],
+        ],
+        'location' => [
+            [
+                [
                     'param' => 'options_page',
                     'operator' => '==',
                     'value' => 'fad-settings',
-                ),
-            ),
-        ),
+                ],
+            ],
+        ],
         'menu_order' => 5,
         'position' => 'normal',
         'style' => 'seamless',
         'label_placement' => 'left',
         'instruction_placement' => 'label',
         'active' => true,
-    ));
+    ]);
+}
 
-endif;
-
-
-
-function my_acf_google_key() {
+function my_acf_google_key(): void
+{
     $key = get_field('fad_google_key', 'option');
     if ($key) {
-        acf_update_setting('google_api_key', $key); 
+        acf_update_setting('google_api_key', $key);
     }
+
     // echo "<script> console.log('PHP: ".$key ."');</script>";
 }
+
 add_action('acf/init', 'my_acf_google_key');
