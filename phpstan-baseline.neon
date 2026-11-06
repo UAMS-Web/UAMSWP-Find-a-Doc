@@ -147,7 +147,7 @@ parameters:
 		-
 			rawMessage: Function get_field not found.
 			identifier: function.notFound
-			count: 106
+			count: 94
 			path: includes/class.fad-gmb-settings-page.php
 
 		-

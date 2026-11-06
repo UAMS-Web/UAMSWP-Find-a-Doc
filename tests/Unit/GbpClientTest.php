@@ -206,4 +206,52 @@ final class GbpClientTest extends UnitTestCase
 
         $this->assertNotSame($this->query($this->calls[1]['url'])['requestId'], $this->query($this->calls[2]['url'])['requestId']);
     }
+
+    public function test_attributes_are_read_as_a_map_of_booleans(): void
+    {
+        $client = $this->client([[200, ['name' => 'locations/7/attributes', 'attributes' => [
+            ['name' => 'attributes/has_restroom', 'valueType' => 'BOOL', 'values' => [true]],
+            ['name' => 'attributes/requires_appointments', 'valueType' => 'BOOL', 'values' => [false]],
+            ['name' => 'attributes/url_menu', 'valueType' => 'URL', 'uriValues' => [['uri' => 'https://x.test']]],
+        ]]]]);
+
+        $this->assertSame(['has_restroom' => true, 'requires_appointments' => false], $client->attributes('locations/7'));
+        $this->assertSame('GET', $this->calls[1]['method']);
+        $this->assertStringContainsString('/locations/7/attributes', $this->calls[1]['url']);
+    }
+
+    public function test_a_location_with_no_attributes_reads_as_empty(): void
+    {
+        $client = $this->client([[200, ['name' => 'locations/7/attributes']]]);
+
+        $this->assertSame([], $client->attributes('locations/7'));
+    }
+
+    public function test_update_attributes_masks_exactly_the_attributes_sent(): void
+    {
+        $client = $this->client([[200, ['name' => 'locations/7/attributes']]]);
+
+        $client->update_attributes('locations/7', ['has_restroom' => true, 'requires_appointments' => false]);
+
+        $call = $this->calls[1];
+        $this->assertSame('PATCH', $call['method']);
+        $this->assertSame('attributes/has_restroom,attributes/requires_appointments', $this->query($call['url'])['attributeMask']);
+        $this->assertSame([
+            'name' => 'locations/7/attributes',
+            'attributes' => [
+                ['name' => 'attributes/has_restroom', 'values' => [true]],
+                ['name' => 'attributes/requires_appointments', 'values' => [false]],
+            ],
+        ], json_decode((string) $call['body'], true));
+    }
+
+    public function test_an_attribute_that_is_not_a_boolean_type_is_ignored_even_if_its_value_looks_like_one(): void
+    {
+        $client = $this->client([[200, ['attributes' => [
+            ['name' => 'attributes/pay_check', 'valueType' => 'ENUM', 'values' => [true]],
+            ['name' => 'attributes/has_restroom', 'valueType' => 'BOOL', 'values' => [true]],
+        ]]]]);
+
+        $this->assertSame(['has_restroom' => true], $client->attributes('locations/7'));
+    }
 }

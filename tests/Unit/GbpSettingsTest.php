@@ -102,14 +102,16 @@ final class GbpSettingsTest extends UnitTestCase
         Functions\when('get_option')->alias(function (string $name, $default = false) {
             return $name === 'uamswp_fad_gbp_modes' ? [] : $default;
         });
-        Functions\when('get_posts')->justReturn([7, 8]);
+        Functions\when('get_posts')->alias(function (array $args) {
+            return $args['post_type'] === 'provider' ? [7, 8] : [55];
+        });
         Functions\when('delete_post_meta')->justReturn(true);
         Functions\when('wp_next_scheduled')->justReturn(false);
         Functions\when('wp_schedule_single_event')->justReturn(true);
         Functions\when('add_query_arg')->alias(function (string $key, int $value, string $url): string {
             return $url.'&'.$key.'='.$value;
         });
-        Functions\expect('wp_safe_redirect')->once()->with('admin.php?page=uamswp-fad-gbp&queued=2');
+        Functions\expect('wp_safe_redirect')->once()->with('admin.php?page=uamswp-fad-gbp&queued=3');
 
         uamswp_fad_gbp_queue_all_action(false, function (string $name): string {
             return 'value-of-'.$name;
