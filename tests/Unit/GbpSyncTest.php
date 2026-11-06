@@ -103,13 +103,13 @@ final class GbpSyncTest extends UnitTestCase
 
     /**
      * @param  array<string, string>  $modes
-     * @param  array<string, int|null>  $gate  The daily create quota: `creates_paused_until`, `creates_left`, `now`.
+     * @param  array{creates_paused_until?: int, creates_left?: ?int, now?: int, clock?: callable(): int}  $gate  The daily create quota and clock.
      */
     private function sync(array $modes = ['uams' => 'live', 'baptist-health' => 'live'], bool $production = true, array $listings = [], array $gate = []): UAMSWP_FAD_GBP_Sync
     {
         return new UAMSWP_FAD_GBP_Sync(
             $this->client,
-            ['silos' => self::SILOS, 'modes' => $modes, 'is_production' => $production] + $gate,
+            ['silos' => self::SILOS, 'modes' => $modes, 'is_production' => $production] + $gate + ['clock' => static fn (): int => $gate['now'] ?? time()],
             UAMSWP_FAD_GBP_Sync::build_index($listings),
             function (array $entry): void {
                 $this->log[] = $entry;
@@ -389,6 +389,32 @@ final class GbpSyncTest extends UnitTestCase
         $this->assertSame(['create', 'create'], array_column($entries, 'action'));
         $this->assertFalse(\UAMSWP_FAD_GBP_Logic::is_settled($entries), 'a deferred create is not settled');
         $this->assertSame(0, $sync->creates_made());
+    }
+
+    public function test_a_daily_refusal_after_pacific_midnight_pauses_until_the_following_midnight(): void
+    {
+        $started = 1793779190; // 2026-11-04 07:59:50 UTC, just before Pacific midnight
+        $refused = 1793779205; // 2026-11-04 08:00:05 UTC, after Pacific midnight
+        $this->client->fail_create = new \UAMSWP_FAD_GBP_Rate_Limited('Daily quota exceeded', true);
+        $sync = $this->sync(gate: ['now' => $started, 'clock' => static fn (): int => $refused]);
+
+        $entries = $sync->run([$this->item(['store_code' => 'a_clinic']), $this->item(['store_code' => 'b_clinic'])]);
+
+        $this->assertSame([1793865600, 1793865600], array_column($entries, 'defer_until'), 'both creates wait until 2026-11-05 08:00 UTC');
+        $this->assertSame(1793865600, $sync->creates_paused_until());
+        $this->assertSame(0, $sync->creates_made());
+        $this->assertCount(1, $this->client->calls, 'the later create is held without reaching Google');
+    }
+
+    public function test_a_spent_budget_after_pacific_midnight_defers_to_the_following_midnight(): void
+    {
+        $sync = $this->sync(gate: ['creates_left' => 0, 'now' => 1793779190, 'clock' => static fn (): int => 1793779205]);
+
+        $entries = $sync->run([$this->item()]);
+
+        $this->assertSame(1793865600, $entries[0]['defer_until']);
+        $this->assertSame(0, $sync->creates_paused_until(), 'only a Google refusal stores a pause');
+        $this->assertSame([], $this->client->calls);
     }
 
     public function test_a_per_minute_limit_on_create_is_still_a_retry_and_pauses_nothing(): void
