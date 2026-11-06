@@ -1,0 +1,43 @@
+{
+    "labels": {
+        "name": "Education and Training Organizations",
+        "singular_name": "Education and Training Organization",
+        "menu_name": "Education and Training Organizations",
+        "all_items": "All Education and Training Organizations",
+        "parent_item": "Parent Education and Training Organization",
+        "parent_item_colon": "Parent Education and Training Organization:",
+        "new_item_name": "New Education and Training Organization",
+        "add_new_item": "Add New Education and Training Organization",
+        "edit_item": "Edit Education and Training Organization",
+        "update_item": "Update Education and Training Organization",
+        "view_item": "View Education and Training Organization",
+        "separate_items_with_commas": "Separate Education and Training Organization with commas",
+        "add_or_remove_items": "Add or remove Education and Training Organizations",
+        "choose_from_most_used": "Choose from the most used",
+        "popular_items": "Popular Education and Training Organizations",
+        "search_items": "Search Education and Training Organizations",
+        "not_found": "Not Found",
+        "no_terms": "No Education and Training Organizations",
+        "items_list": "Education and Training Organizations list",
+        "items_list_navigation": "Education and Training Organizations list navigation"
+    },
+    "public": true,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "school",
+        "with_front": false,
+        "hierarchical": false
+    }
+}

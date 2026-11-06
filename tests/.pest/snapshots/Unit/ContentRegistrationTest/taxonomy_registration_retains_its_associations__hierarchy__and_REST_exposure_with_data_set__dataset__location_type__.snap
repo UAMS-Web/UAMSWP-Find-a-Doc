@@ -1,0 +1,43 @@
+{
+    "labels": {
+        "name": "Location Types",
+        "singular_name": "Location Type",
+        "menu_name": "Types of Locations",
+        "all_items": "All Location Types",
+        "parent_item": "Parent Location Type",
+        "parent_item_colon": "Parent Location Type:",
+        "new_item_name": "New Location Type",
+        "add_new_item": "Add New Location Type",
+        "edit_item": "Edit Location Type",
+        "update_item": "Update Location Type",
+        "view_item": "View Location Type",
+        "separate_items_with_commas": "Separate Location Types with commas",
+        "add_or_remove_items": "Add or remove Location Types",
+        "choose_from_most_used": "Choose from the most used",
+        "popular_items": "Popular Location Types",
+        "search_items": "Search Location Types",
+        "not_found": "Not Found",
+        "no_terms": "No Location Types",
+        "items_list": "Location Types list",
+        "items_list_navigation": "Location Types list navigation"
+    },
+    "public": true,
+    "hierarchical": true,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": true,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "location_type",
+        "with_front": false,
+        "hierarchical": true
+    }
+}
