@@ -43,3 +43,13 @@ Every entry heading is `## YYYY-MM-DD`, a space, and a short title. Leave exactl
 **Rejected.** An npm override to 0.5.x: breaks the call. `postcss-combine-media-query`: breaks the mobile-first order (2 certain flips, 52 candidates). Removing the grouping step: 1 certain flip and 300 candidates against the golden file. `postcss-sort-media-queries` now: 3 certain flips (`.image` `flex-basis` at 1200 to 1294px), 6 unchecked candidates, deferred to the deliberate change. A formatter-based or one-line golden file: a new dependency, or unreadable diffs.
 
 **Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1017](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1017).
+
+## 2026-11-06 Use schema-valid inputs for metadata mutation contracts (#904)
+
+**Decision.** Use the committed ACF schema's valid values, including ordinary absent-field results, as the input boundary for provider and location metadata mutation contracts. Audit the three discarded external calls before proposing exclusions. This decision authorizes neither mutation ignores nor production deletions and does not establish that discarded calls are effect-free.
+
+**Why.** Tests should preserve the supported editing model rather than turn malformed-value coercion into a requirement. Input validity and externally observable effects are separate questions, so a discarded return value is not sufficient evidence of equivalence.
+
+**Rejected.** Treating arbitrary filter-altered types as required metadata inputs, pinning accidental loose-comparison behavior, and excluding every surviving discarded expression without examining its dependencies.
+
+**Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#904](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/904).
