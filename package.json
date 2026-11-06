@@ -39,8 +39,6 @@
   },
   "homepage": "https://github.com/UAMS-Web/UAMSWP-Find-a-Doc#readme",
   "overrides": {
-    "postcss-merge-rules": "9.0.2",
-    "postcss-minify-gradients": "9.0.1",
     "uuid": "^11.1.1"
   }
 }

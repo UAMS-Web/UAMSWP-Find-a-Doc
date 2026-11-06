@@ -13,10 +13,9 @@
 .rating a{display:inline-block;margin-top:.5em}
 .doctor-list .filter-col,.doctor-list .list-col,.location-list .filter-col,.location-list .list-col,.resource-list .filter-col,.resource-list .list-col{padding:2rem}
 .doctor-list .filter-col,.location-list .filter-col,.resource-list .filter-col{position:relative;font-size:1rem}
-.doctor-list .filter-col h2,.location-list .filter-col h2,.resource-list .filter-col h2{margin-bottom:2rem}
+.doctor-list .filter-col .filter-group,.doctor-list .filter-col h2,.location-list .filter-col .filter-group,.location-list .filter-col h2,.resource-list .filter-col .filter-group,.resource-list .filter-col h2{margin-bottom:2rem}
 .doctor-list .filter-col .close,.location-list .filter-col .close,.resource-list .filter-col .close{display:inline-block;position:absolute;top:2rem;right:2rem;min-width:26px;min-height:26px;line-height:1;overflow:hidden}
 .doctor-list .filter-col .close span,.location-list .filter-col .close span,.resource-list .filter-col .close span{display:inline-block;height:26px}
-.doctor-list .filter-col .filter-group,.location-list .filter-col .filter-group,.resource-list .filter-col .filter-group{margin-bottom:2rem}
 .doctor-list .filter-col .filter-group .az-filter,.location-list .filter-col .filter-group .az-filter,.resource-list .filter-col .filter-group .az-filter{margin:-5px}
 .doctor-list .filter-col .filter-group .custom-control:not(:last-child),.doctor-list .filter-col .filter-group .form-check:not(:last-child),.location-list .filter-col .filter-group .custom-control:not(:last-child),.location-list .filter-col .filter-group .form-check:not(:last-child),.resource-list .filter-col .filter-group .custom-control:not(:last-child),.resource-list .filter-col .filter-group .form-check:not(:last-child){margin-bottom:10px}
 .doctor-list .filter-col .filter-group .form-control,.location-list .filter-col .filter-group .form-control,.resource-list .filter-col .filter-group .form-control{font-size:1rem}
@@ -69,7 +68,7 @@
 .doctor-list .list-col .list .item .row .text .primary .btn,.location-list .list-col .list .item .row .text .primary .btn,.resource-list .list-col .list .item .row .text .primary .btn{display:none}
 .doctor-list .list-col .list .item .row .text .secondary .btn,.location-list .list-col .list .item .row .text .secondary .btn,.resource-list .list-col .list .item .row .text .secondary .btn{display:inline-block}
 .doctor-list .list-col .list-pagination,.location-list .list-col .list-pagination,.resource-list .list-col .list-pagination{margin-top:30px}
-.doctor-list .list-col .list-pagination .pagination,.location-list .list-col .list-pagination .pagination,.resource-list .list-col .list-pagination .pagination{justify-content:center}
+.doctor-info>.row,.doctor-list .list-col .list-pagination .pagination,.list-legend .az-filter,.location-list .list-col .list-pagination .pagination,.ratings-and-reviews .overall-ratings .rating,.resource-list .list-col .list-pagination .pagination{justify-content:center}
 .az-filter{display:flex;flex-wrap:wrap;padding:0;margin:-5px}
 .az-filter .custom-control,.az-filter .custom-control:not(:last-child){padding:0;min-height:0!important;margin:5px!important}
 .az-filter .custom-control .az-filter-label,.az-filter .custom-control:not(:last-child) .az-filter-label{margin:0;display:inline-block;min-width:26px;text-align:center;text-decoration:none;border:1px solid #a9a7a8;padding:2px 7px;border-radius:.25rem;background-color:#fff}
@@ -77,18 +76,15 @@
 .az-filter .custom-control .az-filter-label:focus,.az-filter .custom-control:not(:last-child) .az-filter-label:focus{box-shadow:inset 0 1px 2px rgba(0,0,0,.075),0 0 0 .2rem rgba(157,34,53,.25)}
 .az-filter .custom-control .az-filter-label[aria-disabled=true],.az-filter .custom-control:not(:last-child) .az-filter-label[aria-disabled=true]{color:#dcdadb;border-color:#dcdadb}
 .az-filter .custom-control .az-filter-label[aria-disabled=true]:active,.az-filter .custom-control .az-filter-label[aria-disabled=true]:focus,.az-filter .custom-control .az-filter-label[aria-disabled=true]:hover,.az-filter .custom-control:not(:last-child) .az-filter-label[aria-disabled=true]:active,.az-filter .custom-control:not(:last-child) .az-filter-label[aria-disabled=true]:focus,.az-filter .custom-control:not(:last-child) .az-filter-label[aria-disabled=true]:hover{border-color:#dcdadb;background-color:transparent;color:#dcdadb}
-.list-legend .az-filter{justify-content:center}
 .doctor-item dl,.location-card-list-container dl,.location-item dl{line-height:1.35}
 .doctor-item dl:last-child,.location-card-list-container dl:last-child,.location-item dl:last-child{margin-bottom:0}
 .doctor-item dl dt,.location-card-list-container dl dt,.location-item dl dt{margin:1em 0 0}
 .doctor-item dl dt:first-child,.location-card-list-container dl dt:first-child,.location-item dl dt:first-child{margin-top:0}
 .doctor-item dl dd,.location-card-list-container dl dd,.location-item dl dd{margin:.5em 0 0}
-.doctor-info>.row{justify-content:center}
 .doctor-info .text{max-width:44rem}
 .doctor-info .image{background-color:#a9a7a8;text-align:center}
 .doctor-info .page-title{width:auto;text-align:left;margin:0 0 1.125rem!important;padding-bottom:1.125rem;border-bottom:1px solid #dcdadb}
 .ratings-and-reviews .overall-ratings{margin:0 auto 2rem;text-align:center;width:33em;max-width:100%}
-.ratings-and-reviews .overall-ratings .rating{justify-content:center}
 .ratings-and-reviews .overall-ratings .card-footer{padding-top:1.25rem;padding-bottom:1.25rem}
 .ratings-and-reviews .overall-ratings .card-footer p:first-child{margin-bottom:.5em}
 .ratings-and-reviews .overall-ratings .card-footer p:last-child{margin-bottom:0}
@@ -98,10 +94,9 @@
 .conditions-treatments .list-legend{margin-top:0}
 .conditions-treatments .list-legend+.list-container{padding-top:2rem}
 .conditions-treatments .list-container .list{padding-left:0;list-style:none;margin:0 auto}
-.conditions-treatments .list-container.list-container-columns .list{text-align:left}
+.conditions-treatments .list-container.list-container-columns .list,.conditions-treatments .list-container.list-container-columns .list li a{text-align:left}
 .conditions-treatments .list-container.list-container-columns .list li{margin-top:1rem!important}
 .conditions-treatments .list-container.list-container-columns .list li:first-child{margin-top:0!important}
-.conditions-treatments .list-container.list-container-columns .list li a{text-align:left}
 .conditions-treatments .list-container.list-container-rows .list{display:flex;flex-flow:row wrap;justify-content:center;margin:-.5rem!important}
 .conditions-treatments .list-container.list-container-rows .list li{margin:.5rem}
 .conditions-treatments .list-container.list-container-rows .list li a:not(:hover){background-color:#fff}
@@ -111,7 +106,7 @@
 .card-list-container.location-card-list-container .card-list .card .btn-container{padding:0 1.25rem 1.25rem;margin:auto 0 0;justify-content:center}
 .card-list-container.location-card-list-container .card-list .card .btn-container .inner-container{margin:-5px}
 .card-list-container.location-card-list-container .card-list .card .btn-container .inner-container .btn{margin:5px}
-.single-location .page-title .subtitle{font-size:.5em}
+.single-expertise .entry-title .subtitle,.single-expertise .page-title .subtitle,.single-location .page-title .subtitle{font-size:.5em}
 .single-location dl.hours dd+dd{margin-top:.5em}
 .location-info>.row{justify-content:center}
 .location-info .text{padding:2rem!important;order:2}
@@ -157,10 +152,8 @@
 .location-directions .map .embed-responsive{max-height:100vh}
 .location-directions .text{align-self:center}
 .parking-map-container{margin-top:2rem}
-.location-alert a{color:inherit}
+.bg-white .location-alert a:not(.btn),.location-alert a{color:inherit}
 .location-alert ol li:last-child,.location-alert ol:last-child,.location-alert p:last-child,.location-alert ul li:last-child,.location-alert ul:last-child{margin-bottom:0}
-.bg-white .location-alert a:not(.btn){color:inherit}
-.single-expertise .entry-title .subtitle,.single-expertise .page-title .subtitle{font-size:.5em}
 .resource-list .list-col .item dl dt{float:left;clear:left;margin:0;padding:0}
 .resource-list .list-col .item dl dt:after{content:": ";white-space:pre}
 .resource-list .list-col .item dl dd{margin:0;padding:0}
@@ -194,7 +187,7 @@
 .ajax-filter select.form-control option:disabled,.ajax-filter select.form-control option:invalid,.ajax-filter select.form-control option[disabled]{color:#5d5b5c}
 .ajax-filter .ajax-filter-message{width:35em;max-width:100%;margin:2rem auto;font-weight:500;text-align:center}
 #providers.overflow:not(.expanded) .card-list-container{overflow:hidden;max-height:36.360875rem}
-#providers.overflow:not(.expanded) .ajax-filter-load-more{display:flex;justify-content:center;padding-top:1.0625rem;margin-top:-4.087125rem;position:relative;z-index:1;background-image:linear-gradient(180deg,hsla(0,0%,100%,0) 0,#fff 75%);background-repeat:repeat-x}
+#providers.overflow:not(.expanded) .ajax-filter-load-more{display:flex;justify-content:center;padding-top:1.0625rem;margin-top:-4.087125rem;position:relative;z-index:1;background-image:linear-gradient(180deg,hsla(0,0%,100%,0),#fff 75%);background-repeat:repeat-x}
 #providers.overflow:not(.expanded) .ajax-filter-load-more .btn{box-shadow:0 0 1rem 1rem hsla(0,0%,100%,.5)}
 #providers .card-list-container{max-height:999999999rem;transition:max-height 1s cubic-bezier(0,1,0,1)}
 #providers .ajax-filter-load-more{display:none}
