@@ -72,6 +72,7 @@ require_once dirname(__DIR__).'/includes/class.fad-gbp-orphans.php';
 Brain\Monkey\setUp();
 
 require_once dirname(__DIR__).'/includes/class.fad-delete-cleanup.php';
+require_once dirname(__DIR__).'/includes/class.fad-acf-table-map-notice.php';
 
 Brain\Monkey\tearDown();
 
