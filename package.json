@@ -23,7 +23,9 @@
   },
   "scripts": {
     "preinstall": "npx npm-force-resolutions@0.0.10",
-    "test": "node --test \"tests/build/*.test.js\" \"tests/js/*.test.js\""
+    "prepare": "node bin/install-git-hooks.mjs",
+    "check:acf-tables": "php bin/check-table-map.php assets/json/acf-tables",
+    "test":"node --test \"tests/build/*.test.js\" \"tests/js/*.test.js\""
   },
   "resolutions": {
     "glob-parent": "^5.1.2"
