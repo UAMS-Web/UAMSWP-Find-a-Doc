@@ -522,16 +522,6 @@
         ),
         49 => 
         array (
-          'name' => 'has_wheelchair_accessible_elevator',
-          'map' => 
-          array (
-            'type' => 'acf_field_name',
-            'identifier' => 'has_wheelchair_accessible_elevator',
-          ),
-          'format' => '%s',
-        ),
-        50 => 
-        array (
           'name' => 'has_wheelchair_accessible_entrance',
           'map' => 
           array (
@@ -540,7 +530,7 @@
           ),
           'format' => '%s',
         ),
-        51 => 
+        50 => 
         array (
           'name' => 'has_wheelchair_accessible_restroom',
           'map' => 
@@ -550,7 +540,7 @@
           ),
           'format' => '%s',
         ),
-        52 => 
+        51 => 
         array (
           'name' => 'has_restroom',
           'map' => 
@@ -560,63 +550,13 @@
           ),
           'format' => '%s',
         ),
-        53 => 
+        52 => 
         array (
           'name' => 'requires_appointments',
           'map' => 
           array (
             'type' => 'acf_field_name',
             'identifier' => 'requires_appointments',
-          ),
-          'format' => '%s',
-        ),
-        54 => 
-        array (
-          'name' => 'requires_temperature_check_customers',
-          'map' => 
-          array (
-            'type' => 'acf_field_name',
-            'identifier' => 'requires_temperature_check_customers',
-          ),
-          'format' => '%s',
-        ),
-        55 => 
-        array (
-          'name' => 'requires_masks_customers',
-          'map' => 
-          array (
-            'type' => 'acf_field_name',
-            'identifier' => 'requires_masks_customers',
-          ),
-          'format' => '%s',
-        ),
-        56 => 
-        array (
-          'name' => 'requires_temperature_check_staff',
-          'map' => 
-          array (
-            'type' => 'acf_field_name',
-            'identifier' => 'requires_temperature_check_staff',
-          ),
-          'format' => '%s',
-        ),
-        57 => 
-        array (
-          'name' => 'requires_masks_staff',
-          'map' => 
-          array (
-            'type' => 'acf_field_name',
-            'identifier' => 'requires_masks_staff',
-          ),
-          'format' => '%s',
-        ),
-        58 => 
-        array (
-          'name' => 'is_sanitizing_between_customers',
-          'map' => 
-          array (
-            'type' => 'acf_field_name',
-            'identifier' => 'is_sanitizing_between_customers',
           ),
           'format' => '%s',
         ),
@@ -1443,10 +1383,6 @@
       array (
         0 => 0,
       ),
-      'has_wheelchair_accessible_elevator' => 
-      array (
-        0 => 0,
-      ),
       'has_wheelchair_accessible_entrance' => 
       array (
         0 => 0,
@@ -1460,26 +1396,6 @@
         0 => 0,
       ),
       'requires_appointments' => 
-      array (
-        0 => 0,
-      ),
-      'requires_temperature_check_customers' => 
-      array (
-        0 => 0,
-      ),
-      'requires_masks_customers' => 
-      array (
-        0 => 0,
-      ),
-      'requires_temperature_check_staff' => 
-      array (
-        0 => 0,
-      ),
-      'requires_masks_staff' => 
-      array (
-        0 => 0,
-      ),
-      'is_sanitizing_between_customers' => 
       array (
         0 => 0,
       ),
