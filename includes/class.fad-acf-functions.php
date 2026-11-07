@@ -200,6 +200,29 @@ function update_facetwp_index($post_id): void
  */
 add_action('acf/save_post', 'physician_save_post', 5);
 
+/**
+ * Whether a provider's regions match a region in a remove-ontology rule.
+ *
+ * A provider matches only when every linked location is in one region and that region is
+ * listed. A provider in two different regions does not match; how a rule treats that
+ * provider is decided in UAMS-Web/UAMSWP-Find-a-Doc#1132.
+ *
+ * @param  mixed  $provider_region  The provider's `physician_region` value.
+ * @param  mixed  $remove_regions  The rule's `remove_regions` value.
+ */
+function uamswp_provider_region_in_rule($provider_region, $remove_regions): bool
+{
+    if (! is_array($provider_region) || ! is_array($remove_regions)) {
+
+        return false;
+
+    }
+
+    $distinct = array_values(array_unique($provider_region));
+
+    return count($distinct) === 1 && in_array($distinct[0], $remove_regions);
+}
+
 function physician_save_post($post_id): void
 {
 
@@ -423,6 +446,10 @@ function physician_save_post($post_id): void
             // break;
 
         } // endforeach
+
+        // Store each region once, however many locations share it
+
+        $region = array_values(array_unique($region));
 
     }
 
