@@ -38,6 +38,12 @@ The two lists usually overlap but are not copies. A check that only makes sense 
 
 The [pull request template](.github/pull_request_template.md) fills in the skeleton when a pull request is opened on GitHub.
 
+## Changing code that has no tests
+
+Before changing code that has no tests, add a test that captures what the code does now, whether or not that is what it should do, and see it pass. Commit that test on its own, then make the change. A test that now fails shows a behavior that changed: update the test if the change was intended, and fix the code if it was not.
+
+The [`tests` skill](.claude/skills/tests/SKILL.md#pinning-legacy-behavior-before-a-change) has the detail: what to capture, how to show a test catches a change, and how to name it.
+
 ## Agents
 
 Coding agents follow the same path. Their instructions are in [`AGENTS.md`](AGENTS.md) and the shared skills and rules under `.claude/`, which are synced from `UAMS-Web/uams-claude-skills`.
