@@ -357,7 +357,7 @@ function uamswp_expertise_cta() {
                                     </div>';
                                     echo $cta_action_type == 'url' ?
                                     '<div class="btn-container">
-                                        <a href="' . esc_url($cta_button_url['url']) . '" aria-label="' . esc_attr($cta_button_desc) . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. esc_attr($cta_button_target) . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . $cta_button_text . '</a>
+                                        <a href="' . esc_url($cta_button_url['url']) . '" aria-label="' . esc_attr($cta_button_desc) . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. esc_attr($cta_button_target) . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . esc_html($cta_button_text) . '</a>
                                     </div>'
                                     : '';
                                     echo $cta_action_type == 'phone' ?
