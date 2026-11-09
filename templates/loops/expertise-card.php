@@ -68,7 +68,7 @@
         <h3 class="card-title h5">
             <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="<?php echo $expertise_label; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $expertise_title_attr; ?>"><?php echo $expertise_title; ?></a></span>
             <?php if ( $parent_expertise && !$child_expertise_list ) { ?>
-                <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" aria-label="Go to Area of Expertise page for <?php echo $parent_title_attr; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $expertise_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
+                <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo esc_url($parent_url); ?>" aria-label="Go to Area of Expertise page for <?php echo esc_attr($parent_title_attr); ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $expertise_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif ?>
         </h3>
         <p class="card-text"><?php echo $expertise_excerpt; ?></p>

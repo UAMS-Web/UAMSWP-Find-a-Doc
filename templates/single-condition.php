@@ -472,7 +472,7 @@
 											</div>';
 											echo $cta_action_type == 'url' ?
 											'<div class="btn-container">
-												<a href="' . $cta_button_url['url'] . '" aria-label="' . $cta_button_desc . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. $cta_button_target . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . $cta_button_text . '</a>
+												<a href="' . esc_url($cta_button_url['url']) . '" aria-label="' . esc_attr($cta_button_desc) . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. esc_attr($cta_button_target) . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . $cta_button_text . '</a>
 											</div>'
 											: '';
 											echo $cta_action_type == 'phone' ?
@@ -620,7 +620,7 @@
 									$treatment_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($treatment_title_attr, ENT_HTML401, 'utf-8')));
 								?>
 									<li>
-										<a href="<?php echo $treatment_permalink; ?>" aria-label="Go to Treatment page for <?php echo $treatment_title_attr; ?>" class="btn btn-outline-primary"><?php echo $treatment_title; ?></a>
+										<a href="<?php echo esc_url($treatment_permalink); ?>" aria-label="Go to Treatment page for <?php echo $treatment_title_attr; ?>" class="btn btn-outline-primary"><?php echo $treatment_title; ?></a>
 									</li>
 								<?php endwhile;
 										wp_reset_postdata(); ?>

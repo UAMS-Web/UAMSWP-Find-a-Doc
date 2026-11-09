@@ -365,7 +365,7 @@ function uamswp_resource_document() {
                 $icon_file = $icon_image;
             }
         ?>
-            <li><a class="attachment-link" href="<?php echo $document_url; ?>" title="<?php echo $document_title; ?>" target="_blank"><span class="<?php echo $icon_file; ?> fa-fw"></span><span class="attachment-label"><?php echo $document_title; ?></span></a></li>
+            <li><a class="attachment-link" href="<?php echo esc_url($document_url); ?>" title="<?php echo esc_attr($document_title); ?>" target="_blank"><span class="<?php echo $icon_file; ?> fa-fw"></span><span class="attachment-label"><?php echo esc_html($document_title); ?></span></a></li>
         <?php endwhile;
         echo '</ul>';
     endif;

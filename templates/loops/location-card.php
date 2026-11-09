@@ -120,7 +120,7 @@
         <h3 class="card-title h5">
             <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" data-categorytitle="Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $location_title; ?></a></span>
             <?php if ( $parent_location && !$child_location_list ) { ?>
-                <span class="subtitle"><span class="sr-only">(</span>Part of <?php echo $parent_title_prepend; ?><a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
+                <span class="subtitle"><span class="sr-only">(</span>Part of <?php echo $parent_title_prepend; ?><a href="<?php echo esc_url($parent_url); ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif ?>
             <?php  if ( isset($l) && 1 == $l ) { ?>
                 <span class="subtitle"><span class="sr-only">, </span>Primary Location</span>
