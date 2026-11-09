@@ -15,8 +15,11 @@ description: >-
   nobody meant to close. Also covers the PR lifecycle: one PR per integration branch from the issue's linked branch (a ready PR to `dev` and a draft to `staging` where both exist), each test plan scoped to its base branch's environment, open as a draft until the branch is ready
   to validate, flip draft → ready when it is, assign an owner, state the merge order of companion
   PRs in the body, and run the repository's cspell check on new prose and identifiers before
-  opening. Activate whenever drafting, rewriting, or critiquing a GitHub pull-request title or
-  body in a UAMS-Web repository.
+  opening. Also covers the whole path of opening a pull request: ticking the issue's acceptance
+  criteria, and where a public repository has no gate session, the draft, watch, fix, tick,
+  ready sequence and the author's merge. Activate whenever drafting, rewriting, or critiquing a
+  GitHub pull-request title or body in a UAMS-Web repository, when opening a pull request,
+  ticking acceptance criteria or a test plan, or merging.
 ---
 <!--
   Synced from UAMS-Web/uams-claude-skills: shared/.claude/skills/writing-pull-requests/SKILL.md
@@ -69,7 +72,7 @@ All three workflows are gated on `RUN_REMOTE_CI` with a job-level `if: vars.RUN_
 
 The closing-keyword check runs [`scripts/check-closing-keyword-across-lines.mjs`](scripts/check-closing-keyword-across-lines.mjs) the same way. GitHub reads a newline as whitespace, so a status column whose last cell is `closed` above a row labelled `#N` is the directive `closed #N`, and a squash merge acts on it. The workflow reads the body through the API, and the script runs the `github-api-budget` same-line control before it reads anything. `--range` and `--commit` read commit messages instead. Reword a flagged pair: put the number first, or write the cell as something other than a bare keyword.
 
-The same job has a second step, [`scripts/check-development-links.mjs`](scripts/check-development-links.mjs), for a close the body text does not show (UAMS-Web/uams-claude-skills#573). A branch made with `gh issue develop <n>`, or from an issue's **Create a branch** link, is linked to issue `n`, and the pull request opened from it lists `n` in `closingIssuesReferences` with no closing keyword anywhere. Measured on 2026-11-06 in `UAMS-Web/uams-statamic#600` and `#601`: each body said "leaves #N open", the field listed #N, the source was one `connected` timeline event seconds after the pull request opened, and the text check passed. The step reads the field through GraphQL and fails, naming each listed issue that no closing directive in the body resolves to. It judges the field's list against the body and nothing else: it is not a claim that merging closes the issue (a Development link alone was **not measured** to close its issue on merge; the check treats the listing as the risk, the same way the squash-message scan treats the text). The grammar of a directive is imported from `check-closing-keyword-across-lines.mjs`, so a keyword the text check recognizes is a keyword this one accepts, including a cross-repository `org/repo#N`, an issue URL and a pair across a line break. A response with an `errors` member, no `closingIssuesReferences`, or a `totalCount` above the nodes read is exit 2, because each looks like "nothing linked". The step runs on the same events as the first, so a link added in the Development panel after the last event is read at the next edit, push or reopen. The template's `issues: read` permission and the live behavior of the new step on a hosted run were **not measured** when this was written; the script was exercised against response fixtures only (macOS; the Windows run is not yet measured).
+The same job has a second step, [`scripts/check-development-links.mjs`](scripts/check-development-links.mjs), for a close the body text does not show (UAMS-Web/uams-claude-skills#573). A branch made with `gh issue develop <n>`, or from an issue's **Create a branch** link, is linked to issue `n`, and the pull request opened from it lists `n` in `closingIssuesReferences` with no closing keyword anywhere. Measured on 2026-11-06 in `UAMS-Web/uams-statamic#600` and `#601`: each body said "leaves #N open", the field listed #N, the source was one `connected` timeline event seconds after the pull request opened, and the text check passed. The step reads the field through GraphQL and fails, naming each listed issue that no closing directive in the body resolves to. It judges the field's list against the body and nothing else. **A Development link alone closes its issue when the pull request merges into the default branch.** Measured on 2026-11-06 from merges already on record, not from a new one: `UAMS-Web/uams-statamic-archive#258`, `#260`, `#267` and `#275`, `UAMS-Web/wordpress-importer-archive#458` (whose body says it "does **not** close the ticket") and `UAMS-Web/uamswp-auditor-role#24` (`Refs #3`) each had no directive for the issue in the body, title, branch commits or merge message, and the issue's closed event, 1 to 3 seconds after the merge, names the pull request as its closer. The last two issues had to be reopened by hand. A merge into another branch does not close it: `UAMS-Web/UAMSWP-Find-a-Doc#834` merged to `dev` and #833 stayed open for 22 days until a close with no pull request or commit as its closer. On such a base the listing overstates what that merge does; the check still fails it, because it compares the field with the body and does not read the base. The sample is every merged pull request that still listed an issue with no keyword, from the 300 most recently updated in each of 82 repositories (3,234 read of 5,333), and none of them merged into the default branch and left its issue open; a link removed before the merge is not visible this way. `UAMS-Web/uams-statamic#600` and `#601` are not evidence either way, because their links were removed minutes before they merged. The grammar of a directive is imported from `check-closing-keyword-across-lines.mjs`, so a keyword the text check recognizes is a keyword this one accepts, including a cross-repository `org/repo#N`, an issue URL and a pair across a line break. This check also reads a reference wrapped in a Markdown link by its label, so the cross-repository form below (`` Closes [`org/repo#N`](url). ``) passes; the text check's grammar does not change. A response with an `errors` member, no `closingIssuesReferences`, or a `totalCount` above the nodes read is exit 2, because each looks like "nothing linked". The step runs on the same events as the first, so a link added in the Development panel after the last event is read at the next edit, push or reopen. The step has run and passed on a hosted runner (`UAMS-Web/uams-statamic` run 42303096549); a hosted run of it failing, and whether the template's `issues: read` permission is needed, are **not yet measured**. The script's failing direction was exercised on macOS, against response fixtures and against the recorded field and body of `UAMS-Web/aether-wordpress-migration-api#3`; Windows is not yet measured.
 
 **When not to use `gh issue develop`.** It is right for a pull request that finishes issue `n`. For one that is only part of `n` (an epic, or one slice of a larger ticket), create the branch from the default branch by hand (`git checkout -b <n>-<slug> origin/main`) and state the relationship as `Part of #n.` or `Refs #n.`. When a link already exists on an open pull request, remove it from the pull request's **Development** panel (the gear beside the linked issue) and edit the body, or add `Closes #n.` if the pull request does finish it; either clears the failing step on the next run.
 
@@ -158,14 +161,55 @@ green checks panel.
   - a run that needs a loaded WordPress install or the importer's host application;
   - any repository with no remote CI workflow, including a private one.
 
-  The pre-merge validation of a ready pull request is unchanged: the gate still runs it
-  (UAMS-Web/uams-claude-skills#366).
+  Where a gate session validates and merges, the pre-merge validation of a ready pull request is
+  unchanged: the gate still runs it (UAMS-Web/uams-claude-skills#366). Where none does, the
+  author finishes the path: see **Opening a pull request end to end** below.
 - **When a merge order is required, state it in the body: in the PR that must merge second.**
   File-disjoint PRs need no ordering, but when PRs must merge in sequence: a shared-surface
   branch before a dependent one, a submodule companion before its pointer bump, or a cross-repo
   pair: say so in `## Companion PRs`, naming each PR and the one-line reason it must come
   first. Put it on the *dependent* PR, where whoever is about to merge will read it, rather than
   only on the one that goes first. See **Companion PRs and merge order** below.
+
+## Opening a pull request end to end
+
+Three rules cover the whole path, each with its own condition. The first holds in every
+repository. The second and third hold only where the repository is public **and** no gate
+session validates and merges for it; the last bullet says how to tell, by reading.
+
+- **Tick the issue's acceptance criteria when the pull request opens (every repository).** Read
+  each acceptance-criteria item on the issue the pull request addresses, evaluate it against the
+  change, and tick the items the change satisfies. Leave an item unticked when the change does
+  not satisfy it, and give a one-line reason on the issue: unmet, deferred to a numbered
+  follow-up, or superseded. A pull request that only part-finishes the issue ticks only what it
+  finishes, and references the issue without a closing keyword (see **Referencing related GitHub
+  issues** below). An issue body is shared state: read it immediately before editing and change
+  only the boxes you are ticking.
+- **Draft, watch, fix, tick, ready (a public repository with no gate session).** Open the pull
+  request as a draft. Watch its checks until every one on the head has completed: read them from
+  the REST check-runs of the head commit (`gh api repos/{o}/{r}/commits/<sha>/check-runs`), and
+  count a skipped check as not passing. On a failure, fix it, push to the same branch, and watch
+  again. When the checks pass, evaluate each item of the pull request's own `## Test plan`, take
+  the steps that satisfy it, and tick an item only under the honesty rule in the **`## Test plan`
+  checklist** section below (a check that was run, with its result named). An item that cannot be
+  satisfied yet stays unticked with the reason beside it. Then flip the pull request to ready
+  (`gh pr ready <n>`) and read `draft` back from the API to confirm.
+- **Merge (a public repository with no gate session).** When a ready pull request has every
+  check on its head green and every test plan item satisfied and ticked, the author merges it,
+  after working the re-verification in the [`pre-merge-check`](../../rules/pre-merge-check.md)
+  rule against the head being merged (the head SHA must be the one the checks ran on). Merge
+  through REST with a method the repository allows, passing the head:
+  `gh api -X PUT repos/{o}/{r}/pulls/{n}/merge -f sha=<head> -f merge_method=squash`. Where a
+  gate session exists, the author stops at ready, as the lifecycle above says. Merging stays
+  subject to the repository's branch rules and to the reserved-acts rule in the author's own
+  standing instructions: this skill states a condition and does not widen anyone's grant, so an
+  author whose instructions reserve merging stops at ready.
+- **Which case applies is read, not assumed.** Public: `gh api repos/{o}/{r} --jq .private`
+  prints `false`. No gate session: the repository's own `AGENTS.md` or `CONTRIBUTING.md` (and
+  its `local-ci` setup) names no dedicated local-CI session that runs the gate and merges. A
+  repository whose documents name one has a gate session, whatever its visibility. When the
+  documents are silent or disagree, treat the repository as having a gate session and stop at
+  ready, then ask.
 
 ## Spell-check new words before opening
 

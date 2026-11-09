@@ -14,7 +14,10 @@
 // the linked issue: `Closes #N`, `Closes org/repo#N`, `Closes <issue URL>`, same line or across
 // a line break. A directive inside a code span or a fence counts too, because the push-time
 // scan of a squash message reads plain text and acts on it. The directive grammar is imported
-// from check-closing-keyword-across-lines.mjs, so the two checks cannot drift apart.
+// from check-closing-keyword-across-lines.mjs, so the two checks cannot drift apart. A reference
+// wrapped in a Markdown link is read by its label first, here and not in that grammar, because the
+// writing-pull-requests skill prescribes the form for a cross-repository close:
+// `` Closes [`org/repo#N`](url). ``
 //
 // INPUT. The raw response of the GraphQL query the workflow template runs, passed as a file
 // (`--graphql-file`) or on stdin (`--graphql-stdin`), and the body (`--body-file`). The response
@@ -27,7 +30,8 @@
 //     arm 1  body "Part of #5." with #5 linked must be reported;
 //     arm 2  body "Closes #5." with #5 linked must not be reported;
 //     arm 3  body "Closes other/repo#5." with this repository's #5 linked must be reported,
-//            so a reference to a same-numbered issue elsewhere does not satisfy the link.
+//            so a reference to a same-numbered issue elsewhere does not satisfy the link;
+//     arm 4  body "Closes [`#5`](url)." with #5 linked must not be reported.
 // Any arm failing is exit 2.
 //
 // EXIT CODES
@@ -53,6 +57,9 @@ export function resolveReference(reference, repo) {
     return `${owner === '' ? repo : owner}#${reference.slice(hash + 1)}`.toLowerCase()
 }
 
+/** The body with each Markdown link whose label is a reference replaced by that label. */
+export const unwrapLinkedReferences = (body) => body.replace(/\[`?((?:[\w.-]+\/[\w.-]+)?#\d+)`?\]\([^)\s]*\)/g, '$1')
+
 /**
  * Linked issues the body has no closing directive for.
  *
@@ -62,7 +69,7 @@ export function resolveReference(reference, repo) {
  * @return {string[]}
  */
 export function unclosedLinks(body, linked, repo) {
-    const closed = new Set(findDirectives(body).map((directive) => resolveReference(directive.reference, repo)))
+    const closed = new Set(findDirectives(unwrapLinkedReferences(body)).map((directive) => resolveReference(directive.reference, repo)))
     return linked.filter((issue) => !closed.has(issue.toLowerCase()))
 }
 
@@ -97,6 +104,7 @@ export function runControls() {
         ['arm 1 (a body that leaves the issue open is reported)', 'Part of #5.\n', ['o/r#5']],
         ['arm 2 (a keyword for the issue is not reported)', 'Closes #5.\n', []],
         ['arm 3 (a same-numbered issue elsewhere does not satisfy the link)', 'Closes other/repo#5.\n', ['o/r#5']],
+        ['arm 4 (a keyword before a reference in a Markdown link is not reported)', 'Closes [`#5`](https://github.com/o/r/issues/5).\n', []],
     ]
     for (const [name, body, expected] of arms) {
         const got = unclosedLinks(body, ['o/r#5'], CONTROL_REPO)

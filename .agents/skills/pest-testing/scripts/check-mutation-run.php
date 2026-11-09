@@ -106,7 +106,7 @@ function evaluateRun(array $run, float $min): array
 }
 
 /** @return array{0: string, 1: float}|string The log path and minimum, or a message naming the bad option. */
-function parseArguments(array $argv): array|string
+function parseArguments(array $argv)
 {
     $path = null;
     $min = 100.0;
