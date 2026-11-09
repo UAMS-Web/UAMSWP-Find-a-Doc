@@ -204,7 +204,7 @@ function breadthIgnoreMap(string $contents): array
         }
 
         if (breadthAfter($line, BREADTH_MARKER.':') !== $line) {
-            $mutatorsToIgnore = array_map(trim(...), explode(',', breadthAfter($line, BREADTH_MARKER.':')));
+            $mutatorsToIgnore = array_map('trim', explode(',', breadthAfter($line, BREADTH_MARKER.':')));
         }
 
         $map[$lineNumber + 1] = $mutatorsToIgnore ?? ['all'];
@@ -232,15 +232,17 @@ function breadthCount(Parser $parser, string $contents, string $mutator): int
 
         // Traverse once per mutant, resuming after the last mutated node, as the generator does
         $traverser = NodeTraverserFactory::create();
+        // Positional, in the constructor's own order (mutator, offset, linesToMutate, mutatorsToIgnoreByLine,
+        // hasAlreadyMutated, trackMutation), because named arguments do not parse on PHP 7.4 (UAMS-Web/uams-claude-skills#617).
         $traverser->addVisitor(new NodeVisitor(
-            mutator: $mutator,
-            offset: $offset,
-            linesToMutate: [],
-            mutatorsToIgnoreByLine: $ignoreMap,
-            hasAlreadyMutated: function () use (&$mutated): bool {
+            $mutator,
+            $offset,
+            [],
+            $ignoreMap,
+            function () use (&$mutated): bool {
                 return $mutated;
             },
-            trackMutation: function (int $nodeCount) use (&$mutated, &$offset): void {
+            function (int $nodeCount) use (&$mutated, &$offset): void {
                 $mutated = true;
                 $offset = $nodeCount;
             },
@@ -553,7 +555,7 @@ if ($mutators === []) {
     breadthFail("no mutator classes resolved from {$mutatorDir}");
 }
 
-echo 'check-mutate-ignore-breadth: '.array_sum(array_map(count(...), $mutators))." mutator classes resolved from the installed plugin\n";
+echo 'check-mutate-ignore-breadth: '.array_sum(array_map('count', $mutators))." mutator classes resolved from the installed plugin\n";
 
 $parser = PhpParserFactory::make();
 $controlFailure = breadthControlsFail($parser, $mutators);
@@ -719,11 +721,14 @@ if ($baselinePath !== null) {
 }
 
 if ($new === [] && $stale === []) {
-    echo match (true) {
-        $matched > 0 => "check-mutate-ignore-breadth: no annotation flagged outside the baseline\n",
-        $annotations === 0 => "check-mutate-ignore-breadth: no annotation to measure, and no mention of the marker that removes a mutant\n",
-        default => "check-mutate-ignore-breadth: every annotation removes exactly one mutant per named mutator\n",
-    };
+    // An if chain, not `match`, which does not parse on PHP 7.4 (UAMS-Web/uams-claude-skills#617).
+    if ($matched > 0) {
+        echo "check-mutate-ignore-breadth: no annotation flagged outside the baseline\n";
+    } elseif ($annotations === 0) {
+        echo "check-mutate-ignore-breadth: no annotation to measure, and no mention of the marker that removes a mutant\n";
+    } else {
+        echo "check-mutate-ignore-breadth: every annotation removes exactly one mutant per named mutator\n";
+    }
 
     exit(0);
 }
