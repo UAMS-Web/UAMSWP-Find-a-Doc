@@ -4,18 +4,12 @@ declare(strict_types=1);
 
 use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
 use Rector\Config\RectorConfig;
-use Rector\DeadCode\Rector\ClassMethod\RemoveDuplicatedReturnSelfDocblockRector;
 use Rector\DeadCode\Rector\Property\RemoveUselessVarTagRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamFromDimFetchKeyUseRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\StrictArrayParamDimFetchRector;
 use Rector\ValueObject\PhpVersion;
-
-// WordPress repositories: uncomment the import below together with the matching
-// `ArrayToFirstClassCallableRector::class` entry in `$sweepOnlyRules`. A `use`
-// inside that array is a parse error; keep the import here with the others.
-// use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
 
 // Shared starting Rector configuration (UAMS-Web/uams-claude-skills#10). Copy it
 // to the repository root as `rector.php`, together with `rector-sweep.php`, and
@@ -60,13 +54,11 @@ $sweepOnlyRules = [
     LocallyCalledStaticMethodToNonStaticRector::class,
 
     // Docblock removal conflicts with the PHPDoc conventions these repositories
-    // use. What they reach is past what Pint owns: Pint's docblock fixers already
-    // strip a superfluous `@var` from a typed property, so what is left for these
-    // two is inline `@var` on local variables (pinning a value that arrives
-    // untyped) and `@return $this` beside a `: static`. Those are deliberate
-    // annotations, not leftovers.
+    // use. What it reaches is past what Pint owns: Pint's docblock fixers already
+    // strip a superfluous `@var` from a typed property, so what is left for this
+    // rule is inline `@var` on local variables (pinning a value that arrives
+    // untyped). Those are deliberate annotations, not leftovers.
     RemoveUselessVarTagRector::class,
-    RemoveDuplicatedReturnSelfDocblockRector::class,
 
     // These type-declaration rules infer parameter types from how the body
     // indexes or keys an argument. On untyped public/plugin API that still
@@ -76,9 +68,11 @@ $sweepOnlyRules = [
     StrictArrayParamDimFetchRector::class,
     AddParamFromDimFetchKeyUseRector::class,
 
-    // WordPress repositories: uncomment the rule below and the matching `use`
-    // at the top of this file (not inside this array -- a `use` here is a
-    // parse error).
+    // WordPress repositories: uncomment the rule below. It is written with its
+    // fully qualified name so that this one line is the whole change: a short
+    // name with no matching `use` resolves to a class that does not exist, and
+    // Rector stops with "These rules from "$rectorConfig->skip()" do not exist"
+    // (measured at Rector 2.8.4).
     //
     // `add_action('x', [$this, 'method'])` registers a callback WordPress later
     // matches *by identity* for `remove_action()` / `has_action()`. A
@@ -86,7 +80,7 @@ $sweepOnlyRules = [
     // handle used to register can never equal the one used to remove -- hook
     // removal silently stops working, with nothing to see at the call site
     // (uamswp-migration-api docs/DECISIONS.md D-016).
-    // ArrayToFirstClassCallableRector::class,
+    // \Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector::class,
 ];
 
 // Rules skipped in BOTH profiles, scoped to one file. Use this list for a
