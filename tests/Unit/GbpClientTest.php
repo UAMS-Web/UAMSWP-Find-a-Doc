@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
+use Brain\Monkey\Functions;
 use RuntimeException;
 use UAMSWP_FAD_GBP_Client;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
@@ -95,6 +96,88 @@ final class GbpClientTest extends UnitTestCase
                 $this->assertStringNotContainsString($secret, $e->getMessage());
             }
         }
+    }
+
+    /**
+     * A client wired to the real transport, with `wp_remote_request` returning a WordPress error.
+     */
+    private function clientFailingToConnect(string $code, string $message): UAMSWP_FAD_GBP_Client
+    {
+        $error = new class($code, $message)
+        {
+            public function __construct(private string $code, private string $message) {}
+
+            public function get_error_code(): string
+            {
+                return $this->code;
+            }
+
+            public function get_error_message(): string
+            {
+                return $this->message;
+            }
+        };
+
+        Functions\when('wp_remote_request')->justReturn($error);
+        Functions\when('is_wp_error')->alias(static fn ($value): bool => $value === $error);
+
+        return new UAMSWP_FAD_GBP_Client(self::CREDENTIALS, 'uamswp_fad_gbp_transport');
+    }
+
+    public function test_a_request_that_cannot_be_made_names_the_wordpress_error_code_and_message(): void
+    {
+        $client = $this->clientFailingToConnect('http_request_failed', 'cURL error 6: Could not resolve host: oauth2.googleapis.com');
+
+        try {
+            $client->access_token();
+            $this->fail('Expected the exchange to fail.');
+        } catch (RuntimeException $e) {
+            $this->assertSame('Google token exchange failed (0): http_request_failed: cURL error 6: Could not resolve host: oauth2.googleapis.com', $e->getMessage());
+            foreach (self::CREDENTIALS as $secret) {
+                $this->assertStringNotContainsString($secret, $e->getMessage());
+            }
+            $this->assertStringNotContainsString('grant_type', $e->getMessage());
+        }
+    }
+
+    public function test_an_api_call_that_cannot_be_made_names_the_wordpress_error_code_and_message(): void
+    {
+        $client = new UAMSWP_FAD_GBP_Client(self::CREDENTIALS, function (string $method, string $url, array $headers, ?string $body): array {
+            return strpos($url, 'oauth2.googleapis.com') !== false
+                ? [200, json_encode(['access_token' => 'tok-1', 'expires_in' => 3600])]
+                : uamswp_fad_gbp_transport($method, $url, $headers, $body);
+        });
+        $error = new class
+        {
+            public function get_error_code(): string
+            {
+                return 'http_request_failed';
+            }
+
+            public function get_error_message(): string
+            {
+                return 'cURL error 28: Connection timed out';
+            }
+        };
+        Functions\when('wp_remote_request')->justReturn($error);
+        Functions\when('is_wp_error')->alias(static fn ($value): bool => $value === $error);
+
+        try {
+            $client->location_groups();
+            $this->fail('Expected the call to fail.');
+        } catch (RuntimeException $e) {
+            $this->assertStringContainsString('(0): http_request_failed: cURL error 28: Connection timed out', $e->getMessage());
+            $this->assertStringNotContainsString('tok-1', $e->getMessage());
+        }
+    }
+
+    public function test_a_status_zero_with_no_reason_keeps_the_generic_wording(): void
+    {
+        $client = new UAMSWP_FAD_GBP_Client(self::CREDENTIALS, static fn (): array => [0, '']);
+
+        $this->expectExceptionMessage('Google token exchange failed (0): no token returned');
+
+        $client->access_token();
     }
 
     public function test_an_api_failure_carries_the_status_and_googles_message(): void
