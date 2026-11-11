@@ -185,6 +185,7 @@ function uamswp_fad_gbp_queue_all(?callable $lookup = null): int
     }
 
     $queued = 0;
+    $now = time();
 
     foreach (['provider', 'location'] as $post_type) {
         foreach (array_map(intval(...), get_posts(['post_type' => $post_type, 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids'])) as $post_id) {
@@ -194,7 +195,7 @@ function uamswp_fad_gbp_queue_all(?callable $lookup = null): int
 
             // An explicit run checks every listing against Google, so it forgets what was settled.
             delete_post_meta($post_id, UAMSWP_FAD_GBP_HASH_META);
-            wp_schedule_single_event(time() + 30 + $queued * 15, UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
+            wp_schedule_single_event($now + 30 + $queued * 15, UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
             $queued++;
         }
     }
