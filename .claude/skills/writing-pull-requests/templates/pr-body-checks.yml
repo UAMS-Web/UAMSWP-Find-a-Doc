@@ -1,0 +1,79 @@
+name: Pull-request body checks
+
+# Fails a pull request whose body carries the harness attribution footer (`Attribution footer`),
+# or holds a closing directive across a line break or leaves a linked issue unclosed
+# (`Closing keywords`). Both read the body from the API, so an edit that lands between the event
+# and the run is still the text that is checked. No other check can see a body: a tree sweep
+# reads the filesystem, and a body is not on it. A squash merge makes the body the commit message
+# on the default branch.
+#
+# Template: .claude/skills/writing-pull-requests/templates/pr-body-checks.yml
+# in UAMS-Web/uams-claude-skills, copied to .github/workflows/pr-body-checks.yml.
+# The template owns the whole copy, this header included. The synced-files skill's
+# check-workflow-copies.mjs fails when the copy differs from the template.
+#
+# The checks themselves are the reusable workflow `pr-body-checks.yml` in
+# UAMS-Web/uams-ci-workflows (UAMS-Web/uams-ci-workflows#24). `uses:` names a release tag, never
+# a branch, so a change to the shared checks reaches this repository only when the tag here moves.
+# The called jobs check out this repository and run the synced scripts under
+# `.claude/skills/writing-pull-requests/scripts/`, so the repository must carry that skill.
+#
+# A job called this way reports its check as `checks / <called job name>`, which is not a name a
+# ruleset can require. The reusable workflow exposes each result as an output, and the two jobs
+# below report the required contexts, `Attribution footer` and `Closing keywords`, the same names
+# in every repository. Renaming either means changing the ruleset.
+#
+# The call and both jobs are gated on `vars.RUN_REMOTE_CI != 'false'`. Without the gate on the two
+# jobs they would fail while the switch is off, because a skipped output is not `success`; with it,
+# a private repository, where the variable is `false`, skips all three before a runner is dispatched
+# and bills no minutes. A skipped run is not a passing run: nothing has read the pull request while
+# the switch is off. The `always()` clause on the two jobs makes a failed or cancelled `checks` call
+# fail them rather than skip.
+#
+# All five trigger types are the point: a body can change when the pull request opens and through
+# any later edit. A pull request opened by `dependabot[bot]` is not checked for the footer: its
+# body is generated from upstream release notes that nobody on the repository can edit.
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, ready_for_review, synchronize]
+
+# Nothing at the workflow level; the call states the scopes the called jobs need.
+permissions: {}
+
+jobs:
+  checks:
+    if: vars.RUN_REMOTE_CI != 'false'
+    uses: UAMS-Web/uams-ci-workflows/.github/workflows/pr-body-checks.yml@v0.10.0
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+
+  attribution-footer:
+    name: Attribution footer
+    needs: [checks]
+    if: always() && vars.RUN_REMOTE_CI != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Require the called job to have succeeded
+        env:
+          RESULT: ${{ needs.checks.outputs.footer }}
+        run: |
+          echo "Attribution footer job result: $RESULT"
+          [ "$RESULT" = "success" ]
+
+  closing-keywords:
+    name: Closing keywords
+    needs: [checks]
+    if: always() && vars.RUN_REMOTE_CI != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Require the called job to have succeeded
+        env:
+          RESULT: ${{ needs.checks.outputs.keywords }}
+        run: |
+          echo "Closing keywords job result: $RESULT"
+          [ "$RESULT" = "success" ]

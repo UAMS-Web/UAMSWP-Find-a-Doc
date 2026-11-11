@@ -58,8 +58,14 @@ declare(strict_types=1);
  * USAGE
  *     php check-mutate-ignore.php [path ...]
  *
- *     Paths default to those of `app`, `src` and `tests` that exist under the project
- *     root. The root is the working directory; MUTATE_IGNORE_ROOT overrides it.
+ *     A path is a directory searched for `*.php`, or a single file of any extension, so a
+ *     project whose annotated code sits at its root (a theme's `functions.php`) can name
+ *     those files. A search does not enter a `vendor/` or `node_modules/` directory below
+ *     the path searched, at any depth, so `.` reads the project and not its dependencies;
+ *     a path named on the command line is read even when it is such a directory, or is
+ *     inside one. A file reached twice (named and also under a named directory) is read
+ *     once. Paths default to those of `app`, `src` and `tests` that exist under the
+ *     project root. The root is the working directory; MUTATE_IGNORE_ROOT overrides it.
  *     MUTATE_IGNORE_PLUGIN_DIR points at the plugin, default
  *     `<root>/vendor/pestphp/pest-plugin-mutate`. MUTATE_IGNORE_EOL (`\n` or `\r\n`)
  *     overrides the runtime separator so each branch of the line-map test can be
@@ -68,8 +74,8 @@ declare(strict_types=1);
  * EXIT
  *     0  no flagged annotation, and the controls below passed
  *     1  at least one flagged annotation
- *     2  cannot run: plugin missing, no mutator names found, a path that is not a
- *        directory, an unreadable file, or a control that failed
+ *     2  cannot run: plugin missing, no mutator names found, a path that is neither a
+ *        file nor a directory, an unreadable file, or a control that failed
  *
  * The denominator (files scanned, annotations seen, mutator names known) is printed
  * BEFORE any finding, so a run that scanned nothing cannot read as a clean one. Two
@@ -80,6 +86,52 @@ declare(strict_types=1);
 const MEASURED_VERSION = 'v5.0.2';
 const MEASURED_NODE_VISITOR_SHA256 = '26157ab3378cc9d1673019cd9a916dbdafd601a2d987c6fdd68792784dface2f';
 const MARKER = '@pest-mutate-ignore';
+
+/**
+ * Directories a search does not enter below a path it walks: an installed dependency tree
+ * holds a dependency's markers rather than this project's. The same list as the breadth
+ * check's `BREADTH_SKIPPED_DIRECTORIES`.
+ */
+const SKIPPED_DIRECTORIES = ['vendor', 'node_modules'];
+
+/**
+ * The files a run reads: a named file as given, and a directory's PHP files with any
+ * nested `vendor/` or `node_modules/` left out. Each file appears once. No declared
+ * return type: the scripts in this directory parse on PHP 7.4, which has no union types.
+ *
+ * @param  list<string>  $paths
+ * @return list<string>|string The file paths, or the path that is neither a file nor a directory.
+ */
+function filesToScan(array $paths)
+{
+    $files = [];
+
+    foreach ($paths as $path) {
+        if (is_file($path)) {
+            $files[realpath($path) ?: $path] = $path;
+
+            continue;
+        }
+
+        if (! is_dir($path)) {
+            return $path;
+        }
+
+        // Below the searched path, skip installed dependency trees at any depth
+        $walk = new RecursiveCallbackFilterIterator(
+            new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS),
+            static fn (SplFileInfo $entry): bool => ! ($entry->isDir() && in_array($entry->getFilename(), SKIPPED_DIRECTORIES, true)),
+        );
+
+        foreach (new RecursiveIteratorIterator($walk) as $file) {
+            if ($file instanceof SplFileInfo && $file->isFile() && $file->getExtension() === 'php') {
+                $files[$file->getRealPath() ?: $file->getPathname()] ??= $file->getPathname();
+            }
+        }
+    }
+
+    return array_values($files);
+}
 
 /**
  * Read the comma list a marker names, as the plugin does.
@@ -359,33 +411,27 @@ function checkMutateIgnore(array $argv): int
     $files = 0;
     $annotations = 0;
 
-    foreach ($roots as $path) {
-        if (! is_dir($path)) {
-            fwrite(STDERR, "check-mutate-ignore: not a directory: {$path}\n");
+    $paths = filesToScan($roots);
+
+    if (is_string($paths)) {
+        fwrite(STDERR, "check-mutate-ignore: not a file or directory: {$paths}\n");
+
+        return 2;
+    }
+
+    foreach ($paths as $path) {
+        $source = file_get_contents($path);
+
+        if ($source === false) {
+            fwrite(STDERR, "check-mutate-ignore: cannot read {$path}\n");
 
             return 2;
         }
 
-        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS));
-
-        foreach ($iterator as $file) {
-            if (! $file instanceof SplFileInfo || ! $file->isFile() || $file->getExtension() !== 'php') {
-                continue;
-            }
-
-            $source = file_get_contents($file->getPathname());
-
-            if ($source === false) {
-                fwrite(STDERR, "check-mutate-ignore: cannot read {$file->getPathname()}\n");
-
-                return 2;
-            }
-
-            $files++;
-            $result = scanSource($source, $file->getPathname(), $known, $lineMapLive);
-            $annotations += $result['annotations'];
-            array_push($findings, ...$result['findings']);
-        }
+        $files++;
+        $result = scanSource($source, $path, $known, $lineMapLive);
+        $annotations += $result['annotations'];
+        array_push($findings, ...$result['findings']);
     }
 
     echo 'check-mutate-ignore: scanned '.$files.' file(s), '.$annotations.' annotation(s), '.count($known)." known mutator name(s)\n";

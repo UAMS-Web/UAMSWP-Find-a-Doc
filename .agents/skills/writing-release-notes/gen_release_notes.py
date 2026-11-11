@@ -22,7 +22,7 @@ skill, the live titles are already clean; this tool only strips residual noise
 Usage:
   gen_release_notes.py [options] <prev-ref> <new-ref> --repo OWNER/NAME
 
-Example (cut v0.27.0 from the previous tag):
+Example (cut v0.27.0 from the previous tag; use `py -3` in place of `python3` on Windows):
   python3 .claude/skills/writing-release-notes/gen_release_notes.py \\
       v0.26.0 v0.27.0 --repo UAMS-Web/<repo> \\
       --lead "One-sentence milestone theme." \\
