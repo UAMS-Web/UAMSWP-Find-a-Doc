@@ -59,6 +59,11 @@ name: CI chain
 # `mutate-ignore` job, and `global-test-symbols: false`. Its WordPress integration matrix (a MySQL service, a WordPress download, single and multisite) stays a
 # plain job in the caller beside the call, listed in the `needs:` of its `CI` job; this chain does not run it.
 #
+# Two more optional jobs serve any repository (UAMS-Web/uams-claude-skills#620), each off until its boolean input is `true` and
+# Linux only: `guard` (input `guard-patterns`, extra patterns added to the built-in ones) fails when a tracked file looks like a
+# secret or personal data, and `dev-lint` (input `dev-lint-exclude`, paths to skip) runs `php -l` on every PHP file under the
+# development PHP.
+#
 # The `mutate` job is on unless the caller passes `mutate: false`. A repository whose source holds no code a
 # mutator changes (an add-on template with a stub) has nothing to mutate, and the job fails a run that created
 # no mutants, so it needs a way to opt out. `mutate: false` skips the job on every leg, and skips the `mutate-ignore` job with it (UAMS-Web/uams-claude-skills#612):
@@ -66,6 +71,8 @@ name: CI chain
 #
 # The `mutate-ignore` job scans whichever of `app`, `src` and `tests` exist unless the caller names paths in
 # `mutate-ignore-paths` (UAMS-Web/uams-claude-skills#534), for a source tree elsewhere such as a plugin's `includes`.
+# A path may be a file, so a theme whose annotated code sits at the root names `functions.php` beside its
+# directories; `.` also works, because the walk does not enter a nested `vendor/` or `node_modules/` (#627).
 #
 # What the `mutate` job mutates depends on the caller's event (UAMS-Web/uams-claude-skills#532). A pull request and
 # a push mutate only the PHP files under `mutate-paths` that the commit adds, changes or renames, so a run costs what
@@ -126,7 +133,7 @@ on:
         type: number
         default: 180
       mutate-ignore-paths:
-        description: Space-separated paths the mutate-ignore job scans for `@pest-mutate-ignore` annotations (UAMS-Web/uams-claude-skills#534). Empty keeps the script's own default, whichever of app, src and tests exist. A WordPress plugin names its source directory, such as includes.
+        description: Space-separated paths the mutate-ignore job scans for `@pest-mutate-ignore` annotations (UAMS-Web/uams-claude-skills#534). Empty keeps the script's own default, whichever of app, src and tests exist. A WordPress plugin names its source directory, such as includes. A path may be a file, such as a theme's functions.php, and a directory walk skips any nested vendor or node_modules (UAMS-Web/uams-claude-skills#627).
         type: string
         default: ''
       mutate-paths:
@@ -205,6 +212,22 @@ on:
         description: The command the phpcs job runs, the WordPress security sniffs.
         type: string
         default: composer test:phpcs
+      guard:
+        description: Run the guard job, which fails when a tracked file looks like a secret or personal data (UAMS-Web/uams-claude-skills#620).
+        type: boolean
+        default: false
+      guard-patterns:
+        description: Extra patterns for the guard job, extended regular expressions separated by spaces or newlines, matched against each tracked path. They add to the built-in ones (wp-config.php, .sql, .csv, .tsv, .xlsx, .env, .pem, .key) and never replace them.
+        type: string
+        default: ''
+      dev-lint:
+        description: Run the dev-lint job, which runs php -l on every PHP file under the development PHP (UAMS-Web/uams-claude-skills#620).
+        type: boolean
+        default: false
+      dev-lint-exclude:
+        description: Paths the dev-lint job skips, space-separated and relative to the repository root, with no spaces inside a path. vendor and node_modules are always skipped.
+        type: string
+        default: ''
 
 permissions:
   contents: read
@@ -987,11 +1010,111 @@ jobs:
           if [ -z "$COMMAND" ]; then echo "::error::phpcs is on but phpcs-command is empty"; exit 1; fi
           bash -c "$COMMAND"
 
+  guard:
+    name: Guard against tracked secrets or personal data (${{ matrix.os }})
+    if: inputs.guard
+    # Legs: Linux only. Decided on UAMS-Web/uams-claude-skills#620 from what the job reads, not from a seeded fault: it matches the names `git ls-files` prints against patterns, and the list reads the same on any platform. A caller that wants more names it in `all-platform-jobs`.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' guard ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' guard ') && '["ubuntu-latest","windows-latest"]' || '["ubuntu-latest"]') }}
+    timeout-minutes: 5
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+
+      # Fails, naming each path, when a tracked file matches a built-in pattern or one of guard-patterns. An empty file list is a failure, never a pass over nothing, and so is a pattern grep cannot read (status 2).
+      - name: Fail on a tracked secret or personal-data file
+        env:
+          EXTRA: ${{ inputs.guard-patterns }}
+        run: |
+          builtin='wp-config\.php$ \.sql(\.gz)?$ \.(csv|tsv|xlsx?)$ \.env(\.|$) \.pem$ \.key$'
+          pattern=$(printf '%s %s' "$builtin" "$EXTRA" | tr -s ' \t\n\r' '\n' | sed '/^$/d' | paste -sd '|' -)
+          files=$(git ls-files)
+          if [ -z "$files" ]; then echo "::error::git ls-files listed no tracked files, so the guard checked nothing"; exit 1; fi
+          echo "Checking $(printf '%s\n' "$files" | wc -l | tr -d ' ') tracked paths against: $pattern"
+          status=0
+          bad=$(printf '%s\n' "$files" | grep -E -- "$pattern") || status=$?
+          if [ "$status" -eq 0 ]; then
+            echo "::error::Tracked secret or personal-data file(s) detected:"
+            echo "$bad"
+            exit 1
+          fi
+          if [ "$status" -ne 1 ]; then echo "::error::grep could not run the guard pattern (status $status): $pattern"; exit 1; fi
+          echo "No tracked path matches."
+
+  dev-lint:
+    name: PHP lint (development PHP) (${{ matrix.os }})
+    if: inputs.dev-lint
+    needs: [php-version]
+    # Legs: Linux only. Decided on UAMS-Web/uams-claude-skills#620 from what the job reads, not from a seeded fault: `php -l` parses source under one PHP version and reads the same bytes the same way on any platform. A caller that wants more names it in `all-platform-jobs`.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' dev-lint ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' dev-lint ') && '["ubuntu-latest","windows-latest"]' || '["ubuntu-latest"]') }}
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+
+      # The development PHP is the minor the php-version job read from config.platform.php, or 8.4 when it names none.
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ needs.php-version.outputs.minor }}
+          coverage: none
+
+      # setup-php installs the newest patch of the minor it is given, so the pin and the runner can differ by a patch
+      # (UAMS-Web/uams-ci-workflows#25). This puts both in the log, and fails when the installed minor is not the one passed.
+      - name: Pinned and installed PHP
+        shell: bash
+        env:
+          PINNED: ${{ needs.php-version.outputs.pinned }}
+          MINOR: ${{ needs.php-version.outputs.minor }}
+        run: |
+          installed=$(php -r 'echo PHP_VERSION;')
+          echo "config.platform.php pins ${PINNED:-nothing}; installed PHP $installed"
+          case "$installed" in
+            "$MINOR".*) ;;
+            *) echo "::error::installed PHP $installed is not the $MINOR the php-version job read; does .github/actions/setup take a php-version input?"; exit 1 ;;
+          esac
+
+      # Runs php -l on every PHP file outside vendor, node_modules and dev-lint-exclude. No file found is a failure, never a pass over nothing, and so is a syntax error in any file, which is named in the log whatever the runner's log_errors setting (php -l runs with log_errors off and display_errors on, so its message is on stdout and is printed only for a file that fails).
+      - name: php -l every PHP file
+        env:
+          EXCLUDE: ${{ inputs.dev-lint-exclude }}
+        run: |
+          skip=(-not -path './vendor/*' -not -path './node_modules/*')
+          for path in $EXCLUDE; do
+            path=${path#./}
+            path=${path%/}
+            if [ -z "$path" ]; then continue; fi
+            skip+=(-not -path "./$path" -not -path "./$path/*")
+          done
+          find . -name '*.php' "${skip[@]}" -print0 > php-files.list
+          count=$(tr -cd '\0' < php-files.list | wc -c | tr -d ' ')
+          if [ "$count" -eq 0 ]; then echo "::error::No PHP files found to lint"; exit 1; fi
+          echo "Linting $count PHP files under PHP $(php -r 'echo PHP_VERSION;')"
+          failed=0
+          while IFS= read -r -d '' file; do
+            if ! out=$(php -d log_errors=0 -d display_errors=1 -l "$file" 2>&1); then
+              echo "::error file=${file#./}::php -l failed on ${file#./}"
+              echo "$out"
+              failed=$((failed + 1))
+            fi
+          done < php-files.list
+          if [ "$failed" -ne 0 ]; then echo "::error::$failed PHP file(s) failed php -l"; exit 1; fi
+
   # The one job that reads every other job's result. Keep `needs:` listing every other job in the
   # file; scripts/check-templates.mjs in UAMS-Web/uams-claude-skills checks it.
   result:
     name: Chain result
-    needs: [php-version, composer-validate, synced-files, no-emoji, aggregate-needs, pint, rector, phpstan, mutate-ignore, mutate, pest, encoding-guard, vitest, vite-build, mutation-smoke, floor-lint, download-archive, phpcs]
+    needs: [php-version, composer-validate, synced-files, no-emoji, aggregate-needs, pint, rector, phpstan, mutate-ignore, mutate, pest, encoding-guard, vitest, vite-build, mutation-smoke, floor-lint, download-archive, phpcs, guard, dev-lint]
     if: always()
     # Legs: Linux only. It reads job results with jq.
     runs-on: ubuntu-latest
@@ -1002,7 +1125,7 @@ jobs:
       - name: Every needed job succeeded
         env:
           NEEDS: ${{ toJSON(needs) }}
-          SWITCHED_OFF: ${{ format('{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}', !inputs.pest && 'pest ' || '', !inputs.mutate && 'mutate ' || '', !inputs.mutate && 'mutate-ignore ' || '', !inputs.encoding-guard && 'encoding-guard ' || '', !inputs.vitest && 'vitest ' || '', !inputs.vite-build && 'vite-build ' || '', !inputs.mutation-smoke && 'mutation-smoke ' || '', !inputs.floor-lint && 'floor-lint ' || '', !inputs.download-archive && 'download-archive ' || '', !inputs.phpcs && 'phpcs ' || '') }}
+          SWITCHED_OFF: ${{ format('{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}', !inputs.pest && 'pest ' || '', !inputs.mutate && 'mutate ' || '', !inputs.mutate && 'mutate-ignore ' || '', !inputs.encoding-guard && 'encoding-guard ' || '', !inputs.vitest && 'vitest ' || '', !inputs.vite-build && 'vite-build ' || '', !inputs.mutation-smoke && 'mutation-smoke ' || '', !inputs.floor-lint && 'floor-lint ' || '', !inputs.download-archive && 'download-archive ' || '', !inputs.phpcs && 'phpcs ' || '', !inputs.guard && 'guard ' || '', !inputs.dev-lint && 'dev-lint ' || '') }}
         run: |
           results=$(echo "$NEEDS" | jq -r 'to_entries[] | "\(.key) \(.value.result)"')
           echo "Needed job results:"

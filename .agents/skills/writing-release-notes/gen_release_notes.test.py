@@ -7,6 +7,9 @@ module name:
 
     python3 .claude/skills/writing-release-notes/gen_release_notes.test.py
 
+On Windows, where `python3` is usually the Microsoft Store alias that does not run
+scripts, use the launcher instead: `py -3 .claude/skills/writing-release-notes/gen_release_notes.test.py`.
+
 Every test is offline. The script runs over `HEAD..HEAD`, a deliberately empty
 range, so no commit is resolved and no `gh` call is made; the routing, casing
 and rendering tests import the module and drive its functions with fake

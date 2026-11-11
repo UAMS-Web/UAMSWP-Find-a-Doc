@@ -98,6 +98,12 @@ jobs:
     #   phpcs: true
     #   pest-command: composer test:unit
     #   global-test-symbols: false   # only where the pest-testing skill is not delivered (#612)
+    #
+    # Optional repository checks (UAMS-Web/uams-claude-skills#620), for any repository that wants them:
+    #   guard: true
+    #   guard-patterns: 'sentinel-key\.php$'   # extra ERE patterns, space or newline separated
+    #   dev-lint: true
+    #   dev-lint-exclude: tests-legacy tests/Integration/vendor
 
   # The one check a ruleset requires from this workflow. Keep `needs:` naming the call;
   # scripts/check-templates.mjs in UAMS-Web/uams-claude-skills checks it.

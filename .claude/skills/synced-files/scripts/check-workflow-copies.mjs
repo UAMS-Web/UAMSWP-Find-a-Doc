@@ -44,8 +44,10 @@ export const WORKFLOWS = [
     ['assign-author.yml', 'writing-pull-requests'],
     ['check-attribution-footer.yml', 'writing-pull-requests'],
     ['check-closing-keyword-across-lines.yml', 'writing-pull-requests'],
+    ['pr-body-checks.yml', 'writing-pull-requests'],
     ['clear-handed-back.yml', 'handed-back-label'],
 ]
+
 
 const asLf = (text) => text.replace(/\r\n/g, '\n')
 const LINE_BREAK = String.fromCharCode(10)

@@ -5,7 +5,9 @@ description: >-
   (`--mutate`) and code coverage (`--coverage`) under Laravel Herd on macOS and Windows, and
   how to tell a mutation run that executed from one that did not. Activate when `--mutate`
   errors with "Mutation testing requires code coverage to be enabled" or reports "0 Mutations
-  for 0 Files created", when a run reports 100% in implausible time, when mutation or coverage
+  for 0 Files created", when a run reports 100% in implausible time, when a mutation or
+  coverage run reports every file outside `src/`, `lib/` or `app/` as uncovered (`pcov.directory`),
+  when mutation or coverage
   runs are slow or falling back to Xdebug (`herd coverage`), when every `php` on a Mac dies
   with `Killed: 9`, when setting up a new machine for the adversarial-review mutation step,
   when deciding which PHP to run a mutation pass on, or when the user asks how PCOV was set up
@@ -359,6 +361,50 @@ PCOV is set up in Herd's Windows `php84` as a per-machine install (the same shap
 - **`--everything` overrides `--class`: never combine them.** With `--everything`, the run mutates every file under `--path` and ignores what `--class` names, so a command that reads as class-scoped takes hours over the whole directory and its score describes files nobody asked about. Measured in `UAMS-Web/aether-wordpress-importer` at `e6ea8a3` on macOS (Darwin 27.2.0), PHP 8.4 with PCOV, `pestphp/pest-plugin-mutate` `v5.0.1`, both runs with `--testsuite=Unit,Integration --path=src/Services/WordPressImport/Utilities`: `--class` naming one class reported `8 Mutations for 1 Files created`, and `--everything` with `--class` naming another class reported `10227 Mutations for 100 Files created`. Read the `Files created` count before letting a run continue. Without `--everything`, measured in the same repository at `018064f` on Windows 11, PHP 8.4.20 with PCOV, `pest-plugin-mutate` `v5.0.1`, same `--testsuite` and `--path`: a comma-separated `--class` list naming two classes reported `10 Mutations for 2 Files created`, so a list scopes a run. `--ignore` naming one of those two classes beside the list changed nothing (still `10 Mutations for 2 Files created`, and both files ran), so `--ignore` given a namespace-qualified class name did not drop it from a run that names classes. `--ignore` naming a sub-namespace with no `--class` printed no `Files created` line in 12 minutes, though the run had reached `Mutating application files...`, and was stopped, so whether it scopes a run is not measured. The `Files created` line prints only after the initial test run, about 6.5 minutes here, so a bound shorter than that sees no count at all.
 - **Never pass `--filter` to a `--mutate` run; scope it with `--path`.** The plugin sets every child's timeout from the initial run (its duration plus the larger of 5 seconds and 20%) and scores a timeout as caught (`(tested + timedOut) / total`). Unfiltered, the initial run is the whole suite and each child runs only the tests covering its mutant, so a survivor finishes in time. A narrow `--filter` makes the initial run and a child's tests nearly the same set, and a survivor's child overruns on its own start-up. Anything else that narrows the initial run, such as `--group` or a test-file argument, should do the same; that is inferred from the formula, not measured.
 - **Coverage report:** `vendor/bin/pest --coverage-html=build/coverage` (fast under PCOV).
+- **Every file outside `src/`, `lib/` or `app/` reported as uncovered** is a `pcov.directory` problem, not a test problem: see [When covered code sits outside the directory PCOV watches](#when-covered-code-sits-outside-the-directory-pcov-watches).
+
+## When covered code sits outside the directory PCOV watches
+
+**PCOV records coverage only for files under `pcov.directory`, and when that is unset it guesses.** It looks in the working directory for `src`, then `lib`, then `app`, takes the first it finds, and falls back to the working directory itself only when none exists (PCOV's README, `v1.0.12`). Herd's `pcov.ini` leaves the value unset. So in a repository that has one of those directories and also keeps tested code outside it (a WordPress theme's root templates, for example), every file outside the chosen directory is invisible to coverage.
+
+**The symptom: every mutant in those files reported as uncovered, with `0 tested`, while the same command on a file inside the watched directory scores normally.** It reads as tests that cover nothing; the tests are fine. Measured in `UAMS-Web/uams-2020` ([UAMS-Web/uams-2020#693](https://github.com/UAMS-Web/uams-2020/pull/693#issuecomment-6741882844)), where PCOV watched `<project>/lib`:
+
+```
+composer mutate -- --path=lib/favicon.php                        1 tested    100.00%
+composer mutate -- --path=home.php,templates/marketing.php      86 uncovered, 0 tested, 0.00%, exit 1
+```
+
+**Passing `-d pcov.directory=.` does not fix it.** A `-d` flag sets the value in the process you start, and a mutation run's workers are separate PHP processes that do not inherit it: `php -d pcov.directory=. tests/mutate.php --path=home.php,templates/marketing.php` still reported 86 uncovered. A probe shows the mechanism without a test suite: a parent script started with the flag prints `parent=[.]`, and the PHP process it starts prints `child=[]`. It works in a fresh temporary directory, so it leaves nothing in yours:
+
+```bash
+(
+  cd "$(mktemp -d)" &&
+  printf '<?php echo "child=[", ini_get("pcov.directory"), "]\\n";\n' > child.php &&
+  printf '<?php echo "parent=[", ini_get("pcov.directory"), "] "; passthru(escapeshellarg(PHP_BINARY) . " " . escapeshellarg(__DIR__ . DIRECTORY_SEPARATOR . "child.php"));\n' > parent.php &&
+  php -d pcov.directory=. parent.php
+)
+```
+
+The child's code lives in a file rather than in a nested `-r` argument because on Windows `escapeshellarg()` replaces each `"` inside an argument with a space, so a nested `-r` probe dies with a parse error there. This block was run as printed under bash and zsh on macOS; the same two-script form was measured on Windows 11 under Git Bash (Herd PHP 8.4, PCOV 1.0.12) and printed `parent=[.] child=[]`.
+
+**The fix: put `pcov.directory` in an ini file that every PHP process reads**, and run from the repository root, since `.` is the working directory. The macOS (Herd) form, the one the measurement used:
+
+```bash
+PCOV_DIR_INI="$HOME/.config/pcov-directory"
+mkdir -p "$PCOV_DIR_INI"
+printf 'pcov.directory=.\n' > "$PCOV_DIR_INI/pcov-directory.ini"
+
+HERD84="$HOME/Library/Application Support/Herd/config/php/84"
+PHP_INI_SCAN_DIR="$HERD84:$PCOV_DIR_INI" php -r 'echo phpversion("pcov") ?: "pcov NOT LOADED", " pcov.directory=[", ini_get("pcov.directory"), "]\n";'
+```
+
+The last line must print PCOV's version and `pcov.directory=[.]`. Then prefix the mutation command the same way: `PHP_INI_SCAN_DIR="$HERD84:$PCOV_DIR_INI" composer mutate -- --path=<files>`. With it, the 86-mutant run above tested 86 and scored 100.00%. The variable is inherited by every worker, which is what the `-d` flag is not.
+
+**`PHP_INI_SCAN_DIR` replaces the scan directory rather than adding to it, so it must name Herd's own directory first.** Leave Herd's out and the replacement drops `pcov.ini`, and PCOV with it: the check above prints `pcov NOT LOADED`. The leading-colon form (`PHP_INI_SCAN_DIR=":$PCOV_DIR_INI"`) does not help either: it appends to the scan directory the binary was configured with (`/usr/local/etc/php/conf.d` in Herd's build), not to Herd's own directory, which Herd's binary uses only while the variable is unset, and drops PCOV the same way. Measured on macOS, Herd PHP 8.4.27, PCOV 1.0.12; adjust `84` to the PHP version you run.
+
+**Not measured:** Windows, where Herd's PHP reads its `php.ini` and the equivalent form has not been tried; Xdebug coverage mode; and writing `pcov.directory=.` into Herd's own `pcov.ini` instead, which would apply to every project on the machine and, in a repository where the default had chosen `src/`, widen collection to the whole working directory. In `uams-2020`, `acf_fields/` and `blocks/` also sit outside `lib/` and are expected to fail the same way, which is inferred rather than measured.
+
+**CI is unaffected** where its setup sets the value itself (in `uams-2020` on its `dev` branch, the setup action passes `pcov.directory` through `setup-php`'s `ini-values`). A repository that documents its own mutation command should point its README at this section rather than restating it.
 
 ## Coverage population and instrument scripts
 
