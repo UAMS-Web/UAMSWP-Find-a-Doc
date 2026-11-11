@@ -38,7 +38,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'download_mychart_csv') {
     add_action('admin_init', 'mychart_csv_export');
 }
 
-function doximity_csv_export(): bool
+function doximity_csv_export(): false
 {
     // Check for current user privileges
     if (! current_user_can('manage_options')) {
@@ -77,7 +77,6 @@ function doximity_csv_export(): bool
     $building_name = '';
 
     if ($query->have_posts()) {
-        $table_head = [];
         $table_head[0] = 'NPI Number';
         $table_head[1] = 'First Name';
         $table_head[2] = 'Last Name';
@@ -94,7 +93,6 @@ function doximity_csv_export(): bool
         $table_head[13] = 'Specialty';
         $table_head[14] = 'Sub-Specialty';
 
-        $table_body = [];
         $row = [];
         while ($query->have_posts()) {
             $query->the_post();
@@ -134,8 +132,6 @@ function doximity_csv_export(): bool
                             $degree_valid = 'DO';
                         } elseif (in_array($degree_valid, $degree_np)) {
                             $degree_valid = 'NP';
-                        } elseif (in_array($degree_valid, $degree_pa)) {
-                            $degree_valid = 'PA';
                         } else {
                             $degree_valid = '';
                         }
@@ -176,8 +172,6 @@ function doximity_csv_export(): bool
 
                 // Email Address field
                 $e = 1;
-                $contact_type = '';
-                $contact_info = '';
                 $email_list = '';
                 if (have_rows('physician_contact_information', $post_id)) {
                     while (have_rows('physician_contact_information', $post_id)) {
@@ -220,7 +214,8 @@ function doximity_csv_export(): bool
                 $primary_appointment_zip = '';
                 $primary_appointment_phone = '';
                 $primary_appointment_fax = '';
-                if ($locations && $location_valid) {
+                // The row is only built when a location is published ($location_valid, above).
+                if ($locations) {
                     foreach ($locations as $location) {
                         if ($l < 2) {
                             if (get_post_status($location) == 'publish') {
@@ -308,7 +303,7 @@ function doximity_csv_export(): bool
     $filename = 'Doximity_List_'.time().'.csv';
     $delimiter = ',';
     $fh = @fopen('php://output', 'w');
-    fwrite($fh, $bom = (chr(0xEF).chr(0xBB).chr(0xBF)));
+    fwrite($fh, chr(0xEF).chr(0xBB).chr(0xBF));
     header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
     header('Content-Description: File Transfer');
     header('Content-type: text/csv'); // tells browser to download
@@ -372,7 +367,6 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
     $wp_query = new WP_Query($args);
 
     if ($wp_query->have_posts()) {
-        $table_head = [];
         $table_head[0] = 'Store code';
         $table_head[1] = 'Business name';
         $table_head[2] = 'Address line 1';
@@ -664,7 +658,6 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
         // $table_head[]   =  'Amenities: In-room kitchens (kitchen_in_room)';
         // $table_head[]   =  'Amenities: Wi-Fi (wi_fi)';
 
-        $table_body = [];
         while ($wp_query->have_posts()) {
             $wp_query->the_post();
             $post_id = get_the_ID();
@@ -700,23 +693,12 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
             }
 
             // Create location variables
-            $l = 1;
-            $location_title = '';
-            $location_address_1 = '';
-            $location_address_2 = '';
-            $location_city = '';
-            $location_state = '';
-            $location_zip = '';
-            $location_phone = '';
-            $location_fax = '';
-            $location_telemed_query = '';
 
             // Create the description variables
             // "Dr." follows the degrees (M.D. or D.O.), as on the provider page, not the physician_prefix field
             $prefix = uamswp_provider_names($post_id)['prefix'];
             $full_name = get_field('physician_first_name', $post_id).' '.(get_field('physician_middle_name', $post_id) ? get_field('physician_middle_name', $post_id).' ' : '').get_field('physician_last_name', $post_id).(get_field('physician_pedigree', $post_id) ? '&nbsp;'.get_field('physician_pedigree', $post_id) : '').($degree_list ? ', '.$degree_list : '');
             $medium_name = ($prefix ? $prefix.' ' : '').get_field('physician_first_name', $post_id).' '.(get_field('physician_middle_name', $post_id) ? get_field('physician_middle_name', $post_id).' ' : '').get_field('physician_last_name', $post_id);
-            $short_name = $prefix ? $prefix.'&nbsp;'.get_field('physician_last_name', $post_id) : get_field('physician_first_name', $post_id).' '.(get_field('physician_middle_name', $post_id) ? get_field('physician_middle_name', $post_id).' ' : '').get_field('physician_last_name', $post_id).(get_field('physician_pedigree', $post_id) ? '&nbsp;'.get_field('physician_pedigree', $post_id) : '');
             $resident = get_field('physician_resident', $post_id);
             $phys_title = get_field('physician_title', $post_id);
             $phys_title_name = get_term($phys_title, 'clinical_title')->name;
@@ -778,7 +760,6 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         $location_has_parent = get_field('location_parent', $location_post_id);
                         $location_parent_id = get_field('location_parent_id', $location_post_id);
                         $location_parent_title = ''; // Eliminate PHP errors
-                        $location_parent_url = ''; // Eliminate PHP errors
                         $location_parent_location = ''; // Eliminate PHP errors
                         if ($location_has_parent && $location_parent_id) {
                             $location_parent_location = get_post($location_parent_id);
@@ -787,7 +768,6 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         if ($location_parent_location) {
                             $location_post_id = $location_parent_location->ID;
                             $location_parent_title = $location_parent_location->post_title;
-                            $location_parent_url = get_permalink($location_post_id);
                         }
 
                         // Create location variables
@@ -799,14 +779,6 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                             $building_slug = $building->slug;
                             $building_name = $building->name;
                         }
-                        $location_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
-                        $location_floor_value = '';
-                        $location_floor_label = '';
-                        if ($location_floor) {
-                            $location_floor_value = $location_floor['value'];
-                            $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
-                        }
-                        $location_suite = get_field('location_suite', $location_source_ids['unit']);
 
                         // Option 1:
                         // Address Line 1 = Street address (covered above)
@@ -854,16 +826,15 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                             $location_addresses[] = UAMSWP_FAD_GBP_Logic::location_name_without_place($location_title);
                         }
 
-                        $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
+                        // The list always has a first entry and never a fourth.
+                        $location_address_2 = $location_addresses[0];
                         $location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
                         $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
-                        $location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
 
                         $location_city = get_field('location_city', $location_source_ids['street']);
                         $location_state = get_field('location_state', $location_source_ids['street']);
                         $location_zip = get_field('location_zip', $location_source_ids['street']);
                         $location_phone = get_field('location_phone', $location_child_id);
-                        $location_fax = get_field('location_fax', $location_child_id);
                         $location_hours_group = get_field('location_hours_group', $location_child_id);
                         $location_telemed_query = $location_hours_group['location_telemed_query'];
 
@@ -896,7 +867,8 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         $row[5] = $location_address_4 ? html_entity_decode($location_address_4) : '';
 
                         // Address line 5
-                        $row[6] = $location_address_5 ? html_entity_decode($location_address_5) : '';
+                        // Intentionally left blank: the list above never has a fourth entry
+                        $row[6] = '';
 
                         // Sub-locality
                         // Intentionally left blank
@@ -977,7 +949,6 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         // $row[26] = '';
 
                         // From the business
-                        $excerpt = '';
                         $bio = get_field('physician_clinical_bio', $post_id); // Get the clinical bio
                         $bio = wp_strip_all_tags($bio); // Strip all HTML tags
                         $bio = str_replace(["\n", "\r"], ' ', $bio); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
@@ -1050,7 +1021,6 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         // Value based on the relevant location profile
                         $row[50] = $location_telemed_query ? 'Yes' : '';
 
-                        $l++;
                     } else {
                         continue;
                     }
@@ -1101,7 +1071,6 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
     $query = new WP_Query($args);
 
     if ($query->have_posts()) {
-        $table_head = [];
         $table_head[0] = 'Store code';
         $table_head[1] = 'Business name';
         $table_head[2] = 'Address line 1';
@@ -1393,7 +1362,6 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
         // $table_head[]   =  'Amenities: In-room kitchens (kitchen_in_room)';
         // $table_head[]   =  'Amenities: Wi-Fi (wi_fi)';
 
-        $table_body = [];
         while ($query->have_posts()) {
             $query->the_post();
             // Parent Location
@@ -1408,8 +1376,6 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             $location_source_ids = uamswp_fad_location_source_ids($location_child_id);
             $location_has_parent = get_field('location_parent', $location_post_id);
             $location_parent_id = get_field('location_parent_id', $location_post_id);
-            $location_parent_title = ''; // Eliminate PHP errors
-            $location_parent_url = ''; // Eliminate PHP errors
             $location_parent_location = ''; // Eliminate PHP errors
             if ($location_has_parent && $location_parent_id) {
                 $location_parent_location = get_post($location_parent_id);
@@ -1417,8 +1383,6 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             // Get Post ID for Address & Image fields
             if ($location_parent_location) {
                 $location_post_id = $location_parent_location->ID;
-                $location_parent_title = $location_parent_location->post_title;
-                $location_parent_url = get_permalink($location_post_id);
             }
 
             // Get slug
@@ -1485,7 +1449,6 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             $location_state = get_field('location_state', $location_source_ids['street']);
             $location_zip = get_field('location_zip', $location_source_ids['street']);
             $location_phone = get_field('location_phone', $location_child_id);
-            $location_fax = get_field('location_fax', $location_child_id);
             $location_hours_group = get_field('location_hours_group', $location_child_id);
             $location_telemed_query = $location_hours_group['location_telemed_query'];
 
@@ -1632,7 +1595,6 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 // $row[26] =  '';
 
                 // From the business
-                $excerpt = '';
                 $descr = get_field('location_about', $location_post_id); // Get the description
                 $descr = wp_strip_all_tags($descr); // Strip all HTML tags
                 $descr = str_replace(["\n", "\r"], ' ', $descr); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
@@ -1642,12 +1604,11 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 $descr_short = str_replace(["\n", "\r"], ' ', $descr_short); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
                 $descr_short = mb_strimwidth($descr_short, 0, 747, '...'); // Truncate the string
 
+                $excerpt = '';
                 if ($descr_short) {
                     $excerpt = $descr_short;
                 } elseif ($descr) {
                     $excerpt = $descr;
-                } else {
-                    $excerpt = '';
                 }
                 $row[17] = html_entity_decode($excerpt);
 
@@ -1662,8 +1623,6 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 // Cover photo
 
                 // Image values
-                $featured_image = get_post_thumbnail_id($location_post_id); // Get the ID of location's featured image
-                $featured_img_url = get_the_post_thumbnail_url($location_post_id, 'full'); // Get the URL of location's featured image
                 $override_parent_photo = get_field('location_image_override_parent', $location_child_id); // Get toggle value of "Override Parent Images?"
                 $override_parent_photo_featured = get_field('location_image_override_parent_featured', $location_child_id); // Get toggle value of "Override Parent Featured Image?"
                 $override_parent_photo_wayfinding = get_field('location_image_override_parent_wayfinding', $location_child_id); // Get toggle value of "Override Parent Wayfinding Photo?"
@@ -1781,7 +1740,7 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
     return ['head' => $table_head, 'body' => $table_body];
 }
 
-function mychart_csv_export(): bool
+function mychart_csv_export(): false
 {
     // Check for current user privileges
     if (! current_user_can('manage_options')) {
@@ -1817,13 +1776,11 @@ function mychart_csv_export(): bool
     $table_body = [];
 
     if ($query->have_posts()) {
-        $table_head = [];
         $table_head[0] = 'SER ID';
         $table_head[1] = 'Provider Name';
         $table_head[2] = 'Provider Profile URL';
         $table_head[3] = 'Provider Photo URL';
 
-        $table_body = [];
         $row = [];
         while ($query->have_posts()) {
             $query->the_post();
@@ -1876,7 +1833,7 @@ function mychart_csv_export(): bool
     $filename = 'MyChart_List_'.time().'.csv';
     $delimiter = ',';
     $fh = @fopen('php://output', 'w');
-    fwrite($fh, $bom = (chr(0xEF).chr(0xBB).chr(0xBF)));
+    fwrite($fh, chr(0xEF).chr(0xBB).chr(0xBF));
     header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
     header('Content-Description: File Transfer');
     header('Content-type: text/csv'); // tells browser to download

@@ -60,7 +60,7 @@ parameters:
     # from 0 upward (see the code-quality skill), then raise it by one per
     # change as findings are fixed, until `max`. Lowering it is a deliberate,
     # argued change, not a quiet edit to get a red run green.
-    level: 3
+    level: 4
 
     excludePaths:
         analyseAndScan:
@@ -156,6 +156,18 @@ parameters:
         -
             identifier: return.void
             reportUnmatched: false
+        # WordPress, ACF, FacetWP and WP-CLI call a hook callback with a fixed argument list, so a
+        # callback that does not need an argument still declares it, and later arguments keep their
+        # position. All 46 reports at level 4 are callbacks of that kind.
+        -
+            identifier: function.unusedParameter
+            path: includes
+        # The PHP version guard in the plugin header shows a notice on a site whose PHP is downgraded
+        # underneath the active plugin. PHPStan analyzes at the floor, 8.2, so the guard reads as
+        # always false to it; it exists for the case the analyzer cannot model.
+        -
+            identifier: if.alwaysFalse
+            path: uamswp-find-a-doc.php
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
         # PHPStan analyzes at the `min` above, so

@@ -89,7 +89,7 @@ final class ProviderPrefixReadersTest extends UnitTestCase
 
     private function provider_table_name(int $post_id): string
     {
-        $code = $this->lines($this->source('includes/class.fad-gmb-settings-page.php'), '$prefix = uamswp_provider_names($post_id)[\'prefix\'];', '$short_name = $prefix ?');
+        $code = $this->lines($this->source('includes/class.fad-gmb-settings-page.php'), '$prefix = uamswp_provider_names($post_id)[\'prefix\'];', '$medium_name = ($prefix ?');
 
         return $this->evaluate($code, ['post_id' => $post_id, 'degree_list' => ''], 'medium_name');
     }

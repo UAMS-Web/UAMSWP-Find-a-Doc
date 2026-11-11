@@ -131,7 +131,7 @@ final class UAMSWP_FAD_GBP_Sync
     /**
      * Decide and, where the silo is live, carry out one action per item.
      *
-     * @param  array<int, array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>, excluded?: bool}>  $items
+     * @param  array<int, array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>, excluded?: bool, stored_name?: string}>  $items
      * @return array<int, array<string, mixed>> The log entries, in item order.
      */
     public function run(array $items): array
@@ -148,7 +148,7 @@ final class UAMSWP_FAD_GBP_Sync
     }
 
     /**
-     * @param  array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>, excluded?: bool}  $item
+     * @param  array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>, excluded?: bool, stored_name?: string}  $item
      * @return array<string, mixed>
      */
     private function handle(array $item): array
@@ -201,7 +201,7 @@ final class UAMSWP_FAD_GBP_Sync
 
         // The Google location ID stored on the post comes first: it survives a slug change, which
         // changes the store code. A stored ID no listing has any more falls back to the store code.
-        $stored = (string) ($item['stored_name'] ?? '');
+        $stored = $item['stored_name'] ?? '';
         $match = $stored !== '' ? ($this->by_name[$stored] ?? null) : null;
 
         if ($match !== null) {

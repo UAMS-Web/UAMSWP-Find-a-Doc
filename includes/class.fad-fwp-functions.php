@@ -286,9 +286,6 @@ add_filter('facetwp_sort_options', function ($options, $params) {
     unset($options['date_desc']);
     unset($options['date_asc']);
     if (is_post_type_archive('provider') || is_singular('provider')) {
-        $params = [
-            'template_name' => 'physicians',
-        ];
         $options = [
             'default' => [
                 'label' => __('Sort by', 'fwp'),
@@ -312,9 +309,6 @@ add_filter('facetwp_sort_options', function ($options, $params) {
         // unset( $options['date_desc'] );
         // unset( $options['date_asc'] );
     } elseif (is_post_type_archive('location') || is_singular('location')) {
-        $params = [
-            'template_name' => 'locations',
-        ];
         $options = [
             'default' => [
                 'label' => __('Sort by', 'fwp'),
@@ -338,9 +332,6 @@ add_filter('facetwp_sort_options', function ($options, $params) {
         // unset( $options['date_desc'] );
         // unset( $options['date_asc'] );
     } elseif (is_post_type_archive('clinical-resource') || is_singular('clinical-resource')) {
-        $params = [
-            'template_name' => 'clinical-resources',
-        ];
         $options = [
             'default' => [
                 'label' => __('Sort by', 'fwp'),

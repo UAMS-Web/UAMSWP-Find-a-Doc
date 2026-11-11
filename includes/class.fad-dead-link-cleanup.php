@@ -350,7 +350,7 @@ function uamswp_dead_links_unlock(): void
 function uamswp_dead_links_counts(array $run): array
 {
 
-    $counts = ['records' => 0, 'links' => 0, 'dead_ids' => 0, 'rows' => [], 'done' => 0, 'skipped' => 0, 'failed' => 0];
+    $counts = ['links' => 0, 'rows' => [], 'done' => 0, 'skipped' => 0, 'failed' => 0];
     $records = [];
     $dead_ids = [];
 
@@ -605,7 +605,6 @@ function uamswp_dead_links_undo_step(array $run, int $limit = UAMSWP_DEAD_LINKS_
 
     if ($run['status'] === 'applied') {
 
-        $run['status'] = 'undoing';
         $run['cursor'] = 0;
 
     }
@@ -631,8 +630,6 @@ function uamswp_dead_links_undo_step(array $run, int $limit = UAMSWP_DEAD_LINKS_
 
             if (! uamswp_dead_links_post_exists($item['post'])) {
 
-                $state = 'kept';
-
             } elseif ($now === $item['after'] && $item['before'] !== $item['after']) {
 
                 uamswp_dead_links_write($item['field'], $item['shape'] === 'single' ? (string) ($item['before'][0] ?? '') : $item['before'], $item['post']);
@@ -652,12 +649,9 @@ function uamswp_dead_links_undo_step(array $run, int $limit = UAMSWP_DEAD_LINKS_
 
             if (! is_array($row) || uamswp_dead_links_post_exists($item['post'])) {
 
-                $state = 'kept';
-
             } elseif ($present !== '0') {
 
                 // The row is back already: by an earlier undo step, or made again since.
-                $state = 'kept';
 
             } else {
 

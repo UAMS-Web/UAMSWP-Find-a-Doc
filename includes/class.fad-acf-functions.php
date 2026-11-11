@@ -429,7 +429,6 @@ function physician_save_post($post_id): void
         // Base arrays
 
         $region = [];
-        $portal = [];
 
         foreach ($locations as $location) {
 
@@ -883,11 +882,7 @@ function clinical_title_save_post($post_id): void
 
     // Bail early if the term is not a valid object
 
-    if (
-        ! $term
-        ||
-        ! is_object($term)
-    ) {
+    if (! $term) {
 
         return;
 
@@ -899,7 +894,7 @@ function clinical_title_save_post($post_id): void
 
     $parent_term_id = $term->parent;
     $parent_term = $parent_term_id ? (get_term_by('id', $parent_term_id, $taxonomy)) : null;
-    $parent_term = (! $parent_term || ! is_object($parent_term)) ? null : $parent_term;
+    $parent_term = $parent_term ?: null;
 
     // If parent term exists, modify term's fields
 
@@ -1233,8 +1228,6 @@ function custom_excerpt_acf(): void
     if (
         ! empty($post_id) // If the post ID is not empty ...
         &&
-        $excerpt_field_name // and if the $excerpt_field_name array has a value ...
-        &&
         array_key_exists($post_type, $excerpt_field_name)//  and if a key for the current post type exists in the array...
     ) {
 
@@ -1246,8 +1239,6 @@ function custom_excerpt_acf(): void
 
         if (
             ! $post_excerpt
-            &&
-            $excerpt_fallback_field_name // and if the $excerpt_fallback_field_name array has a value ...
             &&
             array_key_exists($post_type, $excerpt_fallback_field_name)//  and if a key for the current post type exists in the array...
         ) {
@@ -1380,16 +1371,6 @@ function fad_facetwp_cards_callback(
     $post_id = 0 // (int|string) // Optional // The post ID this block is saved to.
 ): void {
 
-    // Create id attribute allowing for custom "anchor" value.
-
-    $id = 'facetwp-cards-'.$block['id'];
-
-    if (! empty($block['anchor'])) {
-
-        $id = $block['anchor'];
-
-    }
-
     // Create class attribute allowing for custom "className" and "align" values.
 
     $className = 'facetwp-cards';
@@ -1441,16 +1422,6 @@ function fad_facetwp_blocks_callback(
     $is_preview = false, // bool // Optional // True during AJAX preview.
     $post_id = 0 // (int|string) // Optional // The post ID this block is saved to.
 ): void {
-
-    // Create id attribute allowing for custom "anchor" value.
-
-    $id = 'facetwp-block-'.$block['id'];
-
-    if (! empty($block['anchor'])) {
-
-        $id = $block['anchor'];
-
-    }
 
     // Create class attribute allowing for custom "className" and "align" values.
 
@@ -2161,15 +2132,7 @@ function uamswp_spotlight_validate_qa($valid, $value, $field, $input_name)
 
     }
 
-    if (
-        empty($value)
-        ||
-        (
-            is_array($value)
-            &&
-            count($value) < 1
-        )
-    ) {
+    if (empty($value)) {
 
         return 'A Provider Spotlight needs at least one question and answer.';
 

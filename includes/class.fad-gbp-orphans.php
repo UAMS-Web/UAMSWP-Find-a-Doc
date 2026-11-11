@@ -60,7 +60,7 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
 {
     $today = gmdate('Y-m-d', $now ?? time());
     $candidates = [];
-    $locations_for ??= static fn (int $provider_id): array => array_map(fn (array $item): int => (int) ($item['location_id'] ?? 0), uamswp_fad_gbp_items_for_provider($provider_id, []));
+    $locations_for ??= static fn (int $provider_id): array => array_map(fn (array $item): int => $item['location_id'], uamswp_fad_gbp_items_for_provider($provider_id, []));
 
     // A listing a published post still uses is never a candidate, whatever an unpublished copy of that post says.
     $live = [];
@@ -233,7 +233,6 @@ function uamswp_fad_gbp_orphan_scan(callable $out, ?UAMSWP_FAD_GBP_Client $clien
             'kind' => 'listing',
             'mode' => $mode,
             'action' => 'review',
-            'reason' => '',
             'fields' => [],
             'attributes' => [],
             'unresolved_categories' => [],
