@@ -24,8 +24,8 @@
 	<?php
 	            $full_name = get_field('physician_first_name').' '.(get_field('physician_middle_name') ? get_field('physician_middle_name').' ' : '').get_field('physician_last_name').(get_field('physician_pedigree') ? '&nbsp;'.get_field('physician_pedigree') : '').($degree_list ? ', '.$degree_list : '');
 	        $full_name_attr = $full_name;
-	        $full_name_attr = str_replace('"', '\'', $full_name_attr); // Replace double quotes with single quote
-	        $full_name_attr = str_replace('&#8217;', '\'', $full_name_attr); // Replace right single quote with single quote
+	        $full_name_attr = str_replace('"', "'", $full_name_attr); // Replace double quotes with single quote
+	        $full_name_attr = str_replace('&#8217;', "'", $full_name_attr); // Replace right single quote with single quote
 	        $full_name_attr = htmlentities($full_name_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 	        $full_name_attr = str_replace('&nbsp;', ' ', $full_name_attr); // Convert non-breaking space with normal space
 	        $full_name_attr = html_entity_decode($full_name_attr); // Convert HTML entities to their corresponding characters
@@ -188,7 +188,7 @@
 	        }
 	        ?>
 
-							<p><?php echo get_field('physician_short_clinical_bio') ? get_field('physician_short_clinical_bio') : wp_trim_words(get_field('physician_clinical_bio'), 30, ' &hellip;'); ?></p>
+							<p><?php echo get_field('physician_short_clinical_bio') ?: wp_trim_words(get_field('physician_clinical_bio'), 30, ' &hellip;'); ?></p>
 						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="View Full Profile" data-itemtitle="<?php echo $full_name_attr; ?>">Full Profile</a>
 						</div>
 						<?php
@@ -209,8 +209,8 @@
 										    if (get_post_status($location) == 'publish') {
 										        $related_location = get_the_title($location);
 										        $related_location_attr = $related_location;
-										        $related_location_attr = str_replace('"', '\'', $related_location_attr); // Replace double quotes with single quote
-										        $related_location_attr = str_replace('&#8217;', '\'', $related_location_attr); // Replace right single quote with single quote
+										        $related_location_attr = str_replace('"', "'", $related_location_attr); // Replace double quotes with single quote
+										        $related_location_attr = str_replace('&#8217;', "'", $related_location_attr); // Replace right single quote with single quote
 										        $related_location_attr = htmlentities($related_location_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 										        $related_location_attr = str_replace('&nbsp;', ' ', $related_location_attr); // Convert non-breaking space with normal space
 										        $related_location_attr = html_entity_decode($related_location_attr); // Convert HTML entities to their corresponding characters
@@ -294,7 +294,7 @@
 	                <div class="row" class="margin-top-none margin-bottom-none">
 	                    <div class="col-md-6">
 
-	                        <p><?php echo get_field('physician_short_clinical_bio') ? get_field('physician_short_clinical_bio') : wp_trim_words(get_field('physician_clinical_bio'), 30, ' &hellip;'); ?></p>
+	                        <p><?php echo get_field('physician_short_clinical_bio') ?: wp_trim_words(get_field('physician_clinical_bio'), 30, ' &hellip;'); ?></p>
 
 	                         <a class="uams-btn btn-blue btn-sm" target="_self" title="View Profile" href="<?php echo get_permalink($post->ID); ?>">View Profile</a>
 							<?php if (get_field('physician_youtube_link')) { ?>

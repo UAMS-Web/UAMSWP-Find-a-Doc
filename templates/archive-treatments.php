@@ -42,7 +42,7 @@ if (isset($_GET['alpha'])) {
 }
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html)
+function uamswp_fad_title($html): string
 {
     global $treatment_title;
     // you can add here all your conditions as if is_page(), is_category() etc..
@@ -77,7 +77,7 @@ if (isset($_GET['showall'])) {
 } else {
     // else show paged
 
-    $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+    $paged = get_query_var('paged') ?: 1;
     // number of tags to show per page
     $per_page = 40;
     $offset = ($paged - 1) * $per_page;
@@ -262,7 +262,7 @@ if (! isset($_GET['showall'])) {
         }
 
         for ($pagecount = 1; $pagecount <= $pages; $pagecount++) {
-            if ($pages != 1 && (! ($pagecount >= $paged + $range + 1 || $pagecount <= $paged - $range - 1) || $pages <= $showitems)) {
+            if ($pages != 1 && ($pagecount < $paged + $range + 1 && $pagecount > $paged - $range - 1 || $pages <= $showitems)) {
                 echo ($paged == $pagecount) ? '<li class="page-item current"><a class="page-link">'.$pagecount.'</a></li>' : '<li class="page-item"><a class="page-link" href="'.$treatment_link.'page/'.$pagecount.'/'.$alpha_url.'" class="inactive" >'.$pagecount.'</a></li>';
             }
         }

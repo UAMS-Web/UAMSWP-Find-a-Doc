@@ -7,4 +7,8 @@
 # `git blame` reads this file only when told to, once per clone:
 #   git config blame.ignoreRevsFile .git-blame-ignore-revs
 #
-# Pint reformat: adopt the laravel preset (c06d563fa6dda74a62fbbd13b92a560bf64a903d)
+# Pint reformat: adopt the laravel preset
+c06d563fa6dda74a62fbbd13b92a560bf64a903d
+
+# Format the templates and admin folder with Pint (#1228)
+77cc5f189b28307631523eb9f6f938a1890b41b0

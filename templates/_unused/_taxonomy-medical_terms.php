@@ -16,7 +16,7 @@ function custom_field_excerpt($title)
 
     return apply_filters('the_excerpt', $text);
 }
-function wpdocs_custom_excerpt_length($length)
+function wpdocs_custom_excerpt_length($length): int
 {
     return 35; // 35 words
 }

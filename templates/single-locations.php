@@ -12,8 +12,8 @@ if (empty($excerpt)) {
 }
 $page_title = get_the_title();
 $page_title_attr = $page_title;
-$page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
-$page_title_attr = str_replace('&#8217;', '\'', $page_title_attr); // Replace right single quote with single quote
+$page_title_attr = str_replace('"', "'", $page_title_attr); // Replace double quotes with single quote
+$page_title_attr = str_replace('&#8217;', "'", $page_title_attr); // Replace right single quote with single quote
 $page_title_attr = htmlentities($page_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
 $page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
@@ -92,7 +92,7 @@ if ($override_parent_photo && $parent_location && $override_parent_photo_feature
 $schema_image = '';
 if ($featured_image) {
     $schema_image = $featured_image;
-} elseif ($location_images) {
+} elseif ($location_images !== []) {
     $schema_image = $location_images[0];
 }
 if (function_exists('bis_get_attachment_image') && ! empty($schema_image)) {
@@ -276,15 +276,14 @@ $resource_query = new WP_Query($args);
 function sp_titles_desc($html)
 {
     global $excerpt;
-    $html = $excerpt;
 
-    return $html;
+    return $excerpt;
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
 $location_city = get_field('location_city', $location_source_ids['street']); // Get the location's city
-function uamswp_fad_title($html)
+function uamswp_fad_title($html): string
 {
     global $page_title_attr;
     global $location_city;
@@ -326,7 +325,7 @@ while (have_posts()) {
         $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
     }
     $location_suite = get_field('location_suite', $location_source_ids['unit']);
-    $location_address_2 = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ', true);
+    $location_address_2 = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
     $location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
 
     $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
@@ -483,8 +482,8 @@ while (have_posts()) {
         $portal_slug = $portal->slug;
         $portal_name = $portal->name;
         $portal_name_attr = $portal_name;
-        $portal_name_attr = str_replace('"', '\'', $portal_name_attr); // Replace double quotes with single quote
-        $portal_name_attr = str_replace('&#8217;', '\'', $portal_name_attr); // Replace right single quote with single quote
+        $portal_name_attr = str_replace('"', "'", $portal_name_attr); // Replace double quotes with single quote
+        $portal_name_attr = str_replace('&#8217;', "'", $portal_name_attr); // Replace right single quote with single quote
         $portal_name_attr = htmlentities($portal_name_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
         $portal_name_attr = str_replace('&nbsp;', ' ', $portal_name_attr); // Convert non-breaking space with normal space
         $portal_name_attr = html_entity_decode($portal_name_attr); // Convert HTML entities to their corresponding characters
@@ -748,7 +747,7 @@ while (have_posts()) {
                         $modified_title = $modified_hour['location_modified_hours_title'];
                         $modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
                         $modified_info = $modified_hour['location_modified_hours_information'];
-                        $modified_text .= $modified_info ? $modified_info : '';
+                        $modified_text .= $modified_info ?: '';
                         $modified_times = $modified_hour['location_modified_hours_times'];
                         $modified_hours247 = $modified_hour['location_modified_hours_24_7'];
 
@@ -1061,7 +1060,7 @@ while (have_posts()) {
 				<ul class="nav navbar-nav">
 					<?php if ($show_location_alert_section) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#location-alert" title="Jump to the section of this page with the alert regarding this location"><?php echo $location_alert_title ? $location_alert_title : 'Alert'; ?></a>
+							<a class="nav-link" href="#location-alert" title="Jump to the section of this page with the alert regarding this location"><?php echo $location_alert_title ?: 'Alert'; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ($show_closing_section) { ?>
@@ -1151,11 +1150,11 @@ while (have_posts()) {
 
     // Begin Location Alert Section
     if ($show_location_alert_section) { ?>
-	<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>" id="location-alert">
+	<section class="uams-module location-alert location-<?php echo $location_alert_color ?: 'alert-warning'; ?>" id="location-alert">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12">
-					<h2 class="module-title<?php echo empty($location_alert_title) ? ' sr-only' : ''; ?>"><?php echo $location_alert_title ? $location_alert_title : 'Alert'; ?></h2>
+					<h2 class="module-title<?php echo empty($location_alert_title) ? ' sr-only' : ''; ?>"><?php echo $location_alert_title ?: 'Alert'; ?></h2>
 					<?php echo $location_alert_text ? '<div class="module-body"><p>'.$location_alert_text.'</p></div>' : ''; ?>
 				</div>
 			</div>
@@ -1190,7 +1189,7 @@ while (have_posts()) {
 					<div class="col-xs-12">
 						<h2 class="module-title"><span class="title"><?php echo $about_section_title; ?></span></h2>
 						<div class="module-body">
-							<?php echo $location_about ? $location_about : ''; ?>
+							<?php echo $location_about ?: ''; ?>
 							<?php if ($location_youtube_link) { ?>
 								<?php if (function_exists('lyte_preparse')) {
 								    echo '<div class="alignwide">';
@@ -1466,7 +1465,7 @@ while (have_posts()) {
 							<div class="row content-split-lg">
 								<div class="col-xs-12 col-lg-7">
 									<div class="content-width">
-										<?php echo $telemed_info ? $telemed_info : '' ?>
+										<?php echo $telemed_info ?: '' ?>
 										<p>
 											<?php // Declare which patients can use the service.
                                             if ($telemed_patients == 'all') { ?>
@@ -1641,7 +1640,7 @@ while (have_posts()) {
 								<?php }
 								if ($portal_content) { ?>
 								<div class="btn-container">
-									<a href="<?php echo esc_url($portal_url); ?>" aria-label="Log in to <?php echo esc_attr($portal_name_attr); ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo esc_attr($portal_name_attr); ?>"><?php echo esc_html($portal_link_title ? $portal_link_title : 'Log in to '.$portal_name); ?></a>
+									<a href="<?php echo esc_url($portal_url); ?>" aria-label="Log in to <?php echo esc_attr($portal_name_attr); ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo esc_attr($portal_name_attr); ?>"><?php echo esc_html($portal_link_title ?: 'Log in to '.$portal_name); ?></a>
 								</div>
 								<?php } ?>
 							</div>

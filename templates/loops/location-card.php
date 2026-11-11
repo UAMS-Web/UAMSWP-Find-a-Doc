@@ -19,10 +19,10 @@ $location_source_ids = uamswp_fad_location_source_ids($id);
 
 // $child_location_list indicates whether this is a list of child locations within this location
 // Check if $child_location_list is set. Otherwise create the variable and set its value to false.
-$child_location_list = isset($child_location_list) ? $child_location_list : false;
+$child_location_list ??= false;
 
 $location_title = get_the_title($id);
-$location_title_attr = str_replace('"', '\'', $location_title);
+$location_title_attr = str_replace('"', "'", $location_title);
 $location_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($location_title_attr ?? '', ENT_HTML401, 'utf-8')));
 
 // Parent Location
@@ -46,8 +46,8 @@ if ($parent_location) {
     $parent_id = $parent_location->ID;
     $parent_title = $parent_location->post_title;
     $parent_title_attr = $parent_title;
-    $parent_title_attr = str_replace('"', '\'', $parent_title_attr); // Replace double quotes with single quote
-    $parent_title_attr = str_replace('&#8217;', '\'', $parent_title_attr); // Replace right single quote with single quote
+    $parent_title_attr = str_replace('"', "'", $parent_title_attr); // Replace double quotes with single quote
+    $parent_title_attr = str_replace('&#8217;', "'", $parent_title_attr); // Replace right single quote with single quote
     $parent_title_attr = htmlentities($parent_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space with normal space
     $parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters
@@ -86,7 +86,7 @@ if ($location_floor) {
     $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
 }
 $location_suite = get_field('location_suite', $location_source_ids['unit']);
-$location_address_2 = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ', true);
+$location_address_2 = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
 $location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
 
 $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
@@ -207,8 +207,8 @@ if ($location_closing_display || $location_modified_hours_display) {
         $alert_label = 'Learn more about the modified hours.';
     }
     $alert_label_attr = $alert_label;
-    $alert_label_attr = str_replace('"', '\'', $alert_label_attr); // Replace double quotes with single quote
-    $alert_label_attr = str_replace('&#8217;', '\'', $alert_label_attr); // Replace right single quote with single quote
+    $alert_label_attr = str_replace('"', "'", $alert_label_attr); // Replace double quotes with single quote
+    $alert_label_attr = str_replace('&#8217;', "'", $alert_label_attr); // Replace right single quote with single quote
     $alert_label_attr = htmlentities($alert_label_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $alert_label_attr = str_replace('&nbsp;', ' ', $alert_label_attr); // Convert non-breaking space with normal space
     $alert_label_attr = html_entity_decode($alert_label_attr); // Convert HTML entities to their corresponding characters

@@ -40,7 +40,7 @@ if ($resource_count > 4 && $resource_postsPerPage == -1) {
 } else {
     $resource_layout = 'card';
 }
-$resource_more = ($resource_layout == 'card' && $resource_count > $resource_postsPerPage && ($resource_more_key && ! empty($resource_more_key) && $resource_more_value && ! empty($resource_more_value))) ? true : false;
+$resource_more = $resource_layout == 'card' && $resource_count > $resource_postsPerPage && ($resource_more_key && ! empty($resource_more_key) && $resource_more_value && ! empty($resource_more_value));
 if ($resource_more_suppress) {
     $resource_more = false;
 }
@@ -48,8 +48,8 @@ $more_text = 'Want to find more resources related to '.$resource_heading_related
 $more_button_url = '/clinical-resource/?'.$resource_more_key.'='.$resource_more_value;
 $more_button_description = 'View the full list of clinical resources related to '.$resource_heading_related_name;
 $more_button_description_attr = $more_button_description;
-$more_button_description_attr = str_replace('"', '\'', $more_button_description_attr); // Replace double quotes with single quote
-$more_button_description_attr = str_replace('&#8217;', '\'', $more_button_description_attr); // Replace right single quote with single quote
+$more_button_description_attr = str_replace('"', "'", $more_button_description_attr); // Replace double quotes with single quote
+$more_button_description_attr = str_replace('&#8217;', "'", $more_button_description_attr); // Replace right single quote with single quote
 $more_button_description_attr = htmlentities($more_button_description_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $more_button_description_attr = str_replace('&nbsp;', ' ', $more_button_description_attr); // Convert non-breaking space with normal space
 $more_button_description_attr = html_entity_decode($more_button_description_attr); // Convert HTML entities to their corresponding characters

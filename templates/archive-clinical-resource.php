@@ -1,7 +1,7 @@
 <?php /* Template Name: Clinical Resources Archive */
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html)
+function uamswp_fad_title($html): string
 {
     // you can add here all your conditions as if is_page(), is_category() etc..
     $html = 'Clinical Resources | '.get_bloginfo('name');
@@ -21,7 +21,7 @@ $resource_text = get_field('clinical_resource_archive_intro_text', 'option');
 
 <div class="content-sidebar-wrap">
     <main class="container-fluid resource-list" id="genesis-content">
-        <h1 class="sr-only" itemprop="headline"><?php echo $resource_title ? $resource_title : 'Clinical Resources'; ?></h1>
+        <h1 class="sr-only" itemprop="headline"><?php echo $resource_title ?: 'Clinical Resources'; ?></h1>
         <div class="row">
             <div class="col-12 col-sm filter-col collapse">
                 <button type="button" class="close" aria-label="Close">
@@ -43,7 +43,7 @@ $resource_text = get_field('clinical_resource_archive_intro_text', 'option');
             </div>
         <!-- <section class="archive-description">
             <header class="entry-header">
-                <h1 class="entry-title" itemprop="headline"><?php echo $resource_title ? $resource_title : 'Clinical Resources'; ?></h1>
+                <h1 class="entry-title" itemprop="headline"><?php echo $resource_title ?: 'Clinical Resources'; ?></h1>
             </header>
             <?php echo $resource_text ? '<div class="entry-content clearfix" itemprop="text">'.$resource_text.'</div>' : ''; ?>
         </section> -->

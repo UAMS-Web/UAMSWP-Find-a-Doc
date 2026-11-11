@@ -1,7 +1,7 @@
 <?php
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html)
+function uamswp_fad_title($html): string
 {
     // you can add here all your conditions as if is_page(), is_category() etc..
     $html = 'Locations | '.get_bloginfo('name');

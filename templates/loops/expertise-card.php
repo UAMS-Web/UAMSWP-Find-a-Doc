@@ -9,19 +9,19 @@
 
 // $child_expertise_list indicates whether this is a list of child Areas of Expertise within this Area of Expertise
 // Check if $child_expertise_list is set. Otherwise create the variable and set its value to false.
-$child_expertise_list = isset($child_expertise_list) ? $child_expertise_list : false;
+$child_expertise_list ??= false;
 
 $expertise_title = get_the_title($id);
 $expertise_title_attr = $expertise_title;
-$expertise_title_attr = str_replace('"', '\'', $expertise_title_attr); // Replace double quotes with single quote
-$expertise_title_attr = str_replace('&#8217;', '\'', $expertise_title_attr); // Replace right single quote with single quote
+$expertise_title_attr = str_replace('"', "'", $expertise_title_attr); // Replace double quotes with single quote
+$expertise_title_attr = str_replace('&#8217;', "'", $expertise_title_attr); // Replace right single quote with single quote
 $expertise_title_attr = htmlentities($expertise_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $expertise_title_attr = str_replace('&nbsp;', ' ', $expertise_title_attr); // Convert non-breaking space with normal space
 $expertise_title_attr = html_entity_decode($expertise_title_attr); // Convert HTML entities to their corresponding characters
 
 // Parent Area of Expertise
 $expertise_parent_id = wp_get_post_parent_id($id);
-$expertise_has_parent = $expertise_parent_id ? true : false;
+$expertise_has_parent = (bool) $expertise_parent_id;
 $parent_expertise = '';
 $parent_id = '';
 $parent_title = '';
@@ -35,8 +35,8 @@ if ($parent_expertise) {
     $parent_id = $parent_expertise->ID;
     $parent_title = $parent_expertise->post_title;
     $parent_title_attr = $parent_title;
-    $parent_title_attr = str_replace('"', '\'', $parent_title_attr); // Replace double quotes with single quote
-    $parent_title_attr = str_replace('&#8217;', '\'', $parent_title_attr); // Replace right single quote with single quote
+    $parent_title_attr = str_replace('"', "'", $parent_title_attr); // Replace double quotes with single quote
+    $parent_title_attr = str_replace('&#8217;', "'", $parent_title_attr); // Replace right single quote with single quote
     $parent_title_attr = htmlentities($parent_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space with normal space
     $parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters
@@ -45,7 +45,7 @@ if ($parent_expertise) {
 
 $expertise_label = 'View Area of Expertise page for'.$expertise_title_attr;
 
-$expertise_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags(get_the_content($id));
+$expertise_excerpt = get_the_excerpt($id) ?: wp_strip_all_tags(get_the_content($id));
 $expertise_excerpt_len = strlen($expertise_excerpt);
 if ($expertise_excerpt_len > 160) {
     $expertise_excerpt = wp_trim_words($expertise_excerpt, 23, ' &hellip;');

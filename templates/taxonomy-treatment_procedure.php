@@ -24,7 +24,7 @@ if (
     $syndication = false;
 }
 
-function uamswp_keyword_hook_header()
+function uamswp_keyword_hook_header(): void
 {
     $keyword_text = '';
     if ($keywords) {
@@ -42,17 +42,15 @@ function uamswp_keyword_hook_header()
 add_action('wp_head', 'uamswp_keyword_hook_header');
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html)
+function uamswp_fad_title($html): string
 {
     // global $treatment_title;
     // you can add here all your conditions as if is_page(), is_category() etc..
     if (strlen(single_cat_title('', false)) < 21) {
-        $html = single_cat_title('', false).' | Treatments & Procedures | '.get_bloginfo('name');
-    } else {
-        $html = single_cat_title('', false).' | '.get_bloginfo('name');
+        return single_cat_title('', false).' | Treatments & Procedures | '.get_bloginfo('name');
     }
 
-    return $html;
+    return single_cat_title('', false).' | '.get_bloginfo('name');
 }
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
@@ -66,9 +64,8 @@ if (empty($excerpt)) {
 function sp_titles_desc($html)
 {
     global $excerpt;
-    $html = $excerpt;
 
-    return $html;
+    return $excerpt;
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
@@ -165,7 +162,7 @@ if ($physicians && ! empty($physicians)) {
 	<main id="genesis-content" class="treatment-item<?php echo $treatment_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title"><?php echo $treatment_title ? $treatment_title : 'Treatment & Procedure'; ?>: <?php echo single_cat_title('', false); ?></h1>
+				<h1 class="entry-title"><?php echo $treatment_title ?: 'Treatment & Procedure'; ?>: <?php echo single_cat_title('', false); ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php

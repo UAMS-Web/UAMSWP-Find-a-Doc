@@ -139,17 +139,17 @@ $short_name_attr = $short_name ? uamswp_attr_conversion($short_name) : '';
 
 // Short name possessive (e.g., "Dr. McCoy's")
 
-if (substr($short_name, -1) == 's') {
+if (str_ends_with($short_name, 's')) {
 
     // If the provider's name ends in "s"...
 
     // Use an apostrophe with no "s" when indicating the possessive form
-    $short_name_possessive = $short_name.'\'';
+    $short_name_possessive = $short_name."'";
 
 } else {
 
     // Use an apostrophe with an "s" when indicating the possessive form
-    $short_name_possessive = $short_name.'\'s';
+    $short_name_possessive = $short_name."'s";
 
 }
 
@@ -292,7 +292,7 @@ $provider_occupation_title_indef_article_exceptions = [
     'Uveitis' => 'a',
 ];
 
-if (! empty($provider_occupation_title_indef_article_exceptions)) {
+if ($provider_occupation_title_indef_article_exceptions !== []) {
 
     foreach ($provider_occupation_title_indef_article_exceptions as $exception => $indef_article) {
 
@@ -403,14 +403,13 @@ $schema_description = $excerpt;  // Used for Schema Data. Should ALWAYS have a v
 function sp_titles_desc($html)
 {
     global $excerpt;
-    $html = $excerpt;
 
-    return $html;
+    return $excerpt;
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html)
+function uamswp_fad_title($html): string
 {
     global $full_name_attr;
     global $provider_occupation_title_attr;
@@ -457,7 +456,7 @@ function be_remove_title_from_single_crumb($crumb, $args) // Because BE is the m
 
     // Genesis outputs the filtered crumb as raw HTML, so escape the provider
     // name (a plain-text ACF field, not kses-filtered).
-    return substr($crumb, 0, strrpos($crumb, $args['sep'])).$args['sep'].uamswp_provider_name_html($full_name);
+    return substr($crumb, 0, strrpos($crumb, (string) $args['sep'])).$args['sep'].uamswp_provider_name_html($full_name);
 }
 add_filter('genesis_single_crumb', 'be_remove_title_from_single_crumb', 10, 2);
 
@@ -467,7 +466,7 @@ function sp_change_title_from_provider_crumb($crumbs) // SEOPress
     global $full_name;
     $crumb = array_pop($crumbs);
     $provider_name = [$full_name, get_permalink()];
-    array_push($crumbs, $provider_name);
+    $crumbs[] = $provider_name;
 
     return $crumbs;
 }
@@ -564,13 +563,13 @@ while (have_posts()) {
     // Classes for indicating presence of content
     $provider_field_classes = '';
     if ($degrees && ! empty($degrees)) {
-        $provider_field_classes = $provider_field_classes.' has-degrees';
+        $provider_field_classes .= ' has-degrees';
     }
     if ($prefix && ! empty($prefix)) {
-        $provider_field_classes = $provider_field_classes.' has-prefix';
+        $provider_field_classes .= ' has-prefix';
     }
     if (has_post_thumbnail()) {
-        $provider_field_classes = $provider_field_classes.' has-image';
+        $provider_field_classes .= ' has-image';
         $image_age = date('Y') - get_the_date('Y', get_post_thumbnail_id()); // How old the provider image is in years
         $image_age_threshold = 10; // Set the threshold for how old a provider image can be before a new photo is needed
         if ($image_age >= $image_age_threshold) {
@@ -578,86 +577,86 @@ while (have_posts()) {
         }
     }
     if ($service_line && ! empty($service_line)) {
-        $provider_field_classes = $provider_field_classes.' has-service-line';
+        $provider_field_classes .= ' has-service-line';
     }
     if ($npi && ! empty($npi)) {
-        $provider_field_classes = $provider_field_classes.' has-npi';
+        $provider_field_classes .= ' has-npi';
     }
     if ($bio && ! empty($bio)) {
-        $provider_field_classes = $provider_field_classes.' has-clinical-bio';
+        $provider_field_classes .= ' has-clinical-bio';
     }
     if ($bio_short && ! empty($bio_short)) {
-        $provider_field_classes = $provider_field_classes.' has-short-clinical-bio';
+        $provider_field_classes .= ' has-short-clinical-bio';
     }
     if ($video && ! empty($video)) {
-        $provider_field_classes = $provider_field_classes.' has-video';
+        $provider_field_classes .= ' has-video';
     }
     // if ($conditions && !empty($conditions)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
     if ($conditions_cpt && ! empty($conditions_cpt)) {
-        $provider_field_classes = $provider_field_classes.' has-condition';
+        $provider_field_classes .= ' has-condition';
     }
     // if ($treatments && !empty($treatments)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
     if ($treatments_cpt && ! empty($treatments_cpt)) {
-        $provider_field_classes = $provider_field_classes.' has-treatment';
+        $provider_field_classes .= ' has-treatment';
     }
     if ($locations && $location_valid) {
-        $provider_field_classes = $provider_field_classes.' has-location';
+        $provider_field_classes .= ' has-location';
     }
     if ($affiliation && ! empty($affiliation)) {
-        $provider_field_classes = $provider_field_classes.' has-affiliation';
+        $provider_field_classes .= ' has-affiliation';
     }
     if ($expertises && ! empty($expertises)) {
-        $provider_field_classes = $provider_field_classes.' has-expertise';
+        $provider_field_classes .= ' has-expertise';
     }
     if ($hidden && ! empty($hidden)) {
-        $provider_field_classes = $provider_field_classes.' has-hidden';
+        $provider_field_classes .= ' has-hidden';
     }
     // Add one instance of a class (' has-academic-appt') if there is a physician_academic_appointment row with a value in either/both of the fields.
     // Add one instance of a class (' has-empty-academic-title') if there is an empty academic title field in any of the physician_academic_appointment rows.
     // Add one instance of a class (' has-empty-academic-dept') if there is an empty academic department field in any of the physician_academic_appointment rows.
     if ($college_affiliation && ! empty($college_affiliation)) {
-        $provider_field_classes = $provider_field_classes.' has-college-affiliation';
+        $provider_field_classes .= ' has-college-affiliation';
     }
     if ($position && ! empty($position)) {
-        $provider_field_classes = $provider_field_classes.' has-position';
+        $provider_field_classes .= ' has-position';
     }
     if ($bio_academic && ! empty($bio_academic)) {
-        $provider_field_classes = $provider_field_classes.' has-academic-bio';
+        $provider_field_classes .= ' has-academic-bio';
     }
     if ($bio_academic_short && ! empty($bio_academic_short)) {
-        $provider_field_classes = $provider_field_classes.' has-short-academic-bio';
+        $provider_field_classes .= ' has-short-academic-bio';
     }
     if ($office_location && ! empty($office_location)) {
-        $provider_field_classes = $provider_field_classes.' has-office-location';
+        $provider_field_classes .= ' has-office-location';
     }
     if ($office_building && ! empty($office_building)) {
-        $provider_field_classes = $provider_field_classes.' has-office-building';
+        $provider_field_classes .= ' has-office-building';
     }
     // Add one instance of a class (' has-contact-info') if there is a physician_contact_information row with a value in both of the fields.
     // Add one instance of a class (' has-empty-contact-info') if there is an empty information field in any of the physician_contact_information rows.
     // Add one instance of a class (' has-education') if there is a physician_education row with a value in either education_type or school.
     // Add one instance of a class (' has-empty-education-type') if there is an empty education_type field in any of the physician_education rows.
     if ($education && ! empty($education)) {
-        $provider_field_classes = $provider_field_classes.' has-education';
+        $provider_field_classes .= ' has-education';
     }
     // Add one instance of a class (' has-empty-education-school') if there is an empty school field in any of the physician_education rows.
     if ($boards && ! empty($boards)) {
-        $provider_field_classes = $provider_field_classes.' has-boards';
+        $provider_field_classes .= ' has-boards';
     }
     if ($associations && ! empty($associations)) {
-        $provider_field_classes = $provider_field_classes.' has-associations';
+        $provider_field_classes .= ' has-associations';
     }
     if ($bio_research && ! empty($bio_research)) {
-        $provider_field_classes = $provider_field_classes.' has-research-bio';
+        $provider_field_classes .= ' has-research-bio';
     }
     if ($research_interests && ! empty($research_interests)) {
-        $provider_field_classes = $provider_field_classes.' has-research-interests';
+        $provider_field_classes .= ' has-research-interests';
     }
     if ($research_profile && ! empty($research_profile)) {
-        $provider_field_classes = $provider_field_classes.' has-research-profile';
+        $provider_field_classes .= ' has-research-profile';
     }
     if ($pubmed_author_id && ! empty($pubmed_author_id)) {
-        $provider_field_classes = $provider_field_classes.' has-pubmed-id';
+        $provider_field_classes .= ' has-pubmed-id';
     }
     // Add one instance of a class (' has-selected-pubs') if there is a physician_select_publications row with a value in either/both of the pubmed_id_pmid and pubmed_information fields.
     // Add one instance of a class (' has-empty-selected-pub-id') if there is an empty pubmed_id_pmid field in any of the physician_select_publications rows.
@@ -666,10 +665,10 @@ while (have_posts()) {
     // Add one instance of a class (' has-empty-selected-pub-id') if there is an empty year field in any of the physician_awards rows.
     // Add one instance of a class (' has-empty-selected-pub-info') if there is an empty title field in any of the physician_awards rows.
     if ($additional_info && ! empty($additional_info)) {
-        $provider_field_classes = $provider_field_classes.' has-additional-info';
+        $provider_field_classes .= ' has-additional-info';
     }
     if ($resident && ! empty($resident)) {
-        $provider_field_classes = $provider_field_classes.' is-resident';
+        $provider_field_classes .= ' is-resident';
     }
 
     $title_append = ' by '.$short_name;
@@ -736,7 +735,7 @@ while (have_posts()) {
     }
     // }
     if ($pg_rating_valid) {
-        $provider_field_classes = $provider_field_classes.' has-ratings';
+        $provider_field_classes .= ' has-ratings';
     }
 
     // Clinical Resources
@@ -862,7 +861,7 @@ while (have_posts()) {
                         <?php
 
                             if ($provider_occupation_title && ! empty($provider_occupation_title)) { ?>
-                            <span class="subtitle"><?php echo $provider_occupation_title ? $provider_occupation_title : ''; ?></span>
+                            <span class="subtitle"><?php echo $provider_occupation_title ?: ''; ?></span>
                         <?php } ?>
                     </h1>
                     <?php
@@ -927,7 +926,7 @@ while (have_posts()) {
                                             $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
                                         }
                                         $location_suite = get_field('location_suite', $location_source_ids['unit']);
-                                        $location_address_2 = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ', true);
+                                        $location_address_2 = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
                                         $location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
 
                                         $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
@@ -1220,9 +1219,9 @@ while (have_posts()) {
             // Check video source
 
             if (
-                strpos($video, 'youtube') !== false
+                str_contains($video, 'youtube')
                 ||
-                strpos($video, 'youtu.be') !== false
+                str_contains($video, 'youtu.be')
             ) {
 
                 $video_source = 'youtube';
@@ -1501,7 +1500,7 @@ while (have_posts()) {
                             <?php if ($pubmed_author_id) { ?>
                                 <?php
                 $pubmedid = trim($pubmed_author_id);
-                                $pubmedcount = ($pubmed_author_number ? $pubmed_author_number : '3');
+                                $pubmedcount = ($pubmed_author_number ?: '3');
                                 ?>
                                 <h3>Latest Publications</h3>
                                 <p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
@@ -1890,7 +1889,7 @@ while (have_posts()) {
             echo $treatment_schema;
             echo ']';
         }
-        echo $location_schema ? $location_schema : ''; ?>
+        echo $location_schema ?: ''; ?>
   <?php if ($pg_rating_valid) { ?>
 ,
   "aggregateRating": {
