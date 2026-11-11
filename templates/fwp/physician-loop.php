@@ -188,12 +188,12 @@
 	        }
 	        ?>
 
-							<p><?php echo  get_field('physician_short_clinical_bio') ? get_field('physician_short_clinical_bio') : wp_trim_words(get_field('physician_clinical_bio'), 30, ' &hellip;'); ?></p>
+							<p><?php echo get_field('physician_short_clinical_bio') ? get_field('physician_short_clinical_bio') : wp_trim_words(get_field('physician_clinical_bio'), 30, ' &hellip;'); ?></p>
 						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="View Full Profile" data-itemtitle="<?php echo $full_name_attr; ?>">Full Profile</a>
 						</div>
 						<?php
-                        // Check for valid locations
-                        $locations = get_field('physician_locations');
+	                    // Check for valid locations
+	                    $locations = get_field('physician_locations');
 	        $location_valid = false;
 	        foreach ($locations as $location) {
 	            if (get_post_status($location) == 'publish') {
@@ -294,7 +294,7 @@
 	                <div class="row" class="margin-top-none margin-bottom-none">
 	                    <div class="col-md-6">
 
-	                        <p><?php echo  get_field('physician_short_clinical_bio') ? get_field('physician_short_clinical_bio') : wp_trim_words(get_field('physician_clinical_bio'), 30, ' &hellip;'); ?></p>
+	                        <p><?php echo get_field('physician_short_clinical_bio') ? get_field('physician_short_clinical_bio') : wp_trim_words(get_field('physician_clinical_bio'), 30, ' &hellip;'); ?></p>
 
 	                         <a class="uams-btn btn-blue btn-sm" target="_self" title="View Profile" href="<?php echo get_permalink($post->ID); ?>">View Profile</a>
 							<?php if (get_field('physician_youtube_link')) { ?>

@@ -49,7 +49,7 @@ get_header(); ?>
     <main id="genesis-content">
         <article class="entry">
             <header class="entry-header">
-                <h1 class="entry-title" itemprop="headline"><?php echo  $treatment_title ? $treatment_title : 'Treatments &amp; Procedures'; ?></h1>
+                <h1 class="entry-title" itemprop="headline"><?php echo $treatment_title ? $treatment_title : 'Treatments &amp; Procedures'; ?></h1>
             </header>
             <?php echo $treatment_text ? '<div class="entry-content clearfix" itemprop="text">'.$treatment_text.'</div>' : ''; ?>
         </article>

@@ -672,7 +672,7 @@ while (have_posts()) {
 					<?php } // endif?>
 					<h2 class="sr-only">Address</h2>
 					<p><?php echo $location_address_1; ?><br/>
-					<?php echo  $location_address_2 ? $location_address_2.'<br/>' : ($location_address_2_deprecated ? $location_address_2_deprecated.'<br/>' : ''); ?>
+					<?php echo $location_address_2 ? $location_address_2.'<br/>' : ($location_address_2_deprecated ? $location_address_2_deprecated.'<br/>' : ''); ?>
 					<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
 						<div class="btn-container">
 							<div class="inner-container">
@@ -951,7 +951,7 @@ while (have_posts()) {
                             if ($row['closed']) {
                                 echo $row['closed'] ? 'Closed</dd>' : '';
                             } else {
-                                echo  ($hour['open'] && $row['open'] != '00:00:00') ? ''.ap_time_span(strtotime($row['open']), strtotime($row['close'])).' ' : '';
+                                echo ($hour['open'] && $row['open'] != '00:00:00') ? ''.ap_time_span(strtotime($row['open']), strtotime($row['close'])).' ' : '';
                             }
                         }
                     }
@@ -1230,16 +1230,16 @@ while (have_posts()) {
 					<div class="col-xs-12<?php echo $parking_map ? ' col-md-6' : ''  ?>">
 						<?php if ($parking_map) { ?>
 							<div class="module-body">
-							<h2><?php echo  $location_parking ? 'Parking Information' : 'Directions From the Parking Area'; // Display parking heading if parking has value. Otherwise, display directions heading.?></h2>
+							<h2><?php echo $location_parking ? 'Parking Information' : 'Directions From the Parking Area'; // Display parking heading if parking has value. Otherwise, display directions heading.?></h2>
 						<?php } else { ?>
-							<h2 class="module-title"><span class="title"><?php echo  $location_parking ? 'Parking Information' : 'Directions From the Parking Area'; // Display parking heading if parking has value. Otherwise, display directions heading.?></span></h2>
+							<h2 class="module-title"><span class="title"><?php echo $location_parking ? 'Parking Information' : 'Directions From the Parking Area'; // Display parking heading if parking has value. Otherwise, display directions heading.?></span></h2>
 							<div class="module-body">
 						<?php } // endif?>
 							<?php echo $location_parking; ?>
 							<?php if ($parking_map) { ?>
 								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>
 							<?php } // endif?>
-							<?php echo  $location_parking && $location_direction ? '<h3>Directions From the Parking Area</h3>' : ''; // Display the directions heading here if there is a value for parking.?>
+							<?php echo $location_parking && $location_direction ? '<h3>Directions From the Parking Area</h3>' : ''; // Display the directions heading here if there is a value for parking.?>
 							<?php echo $location_direction; ?>
 						</div>
 					</div>

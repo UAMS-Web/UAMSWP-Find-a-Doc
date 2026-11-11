@@ -91,7 +91,7 @@
 	                <div class="row" class="margin-top-none margin-bottom-none">
 	                    <div class="col-md-6">
 
-	                        <p><?php echo  rwmb_meta('physician_short_clinical_bio') ? rwmb_meta('physician_short_clinical_bio') : wp_trim_words(rwmb_meta('physician_clinical_bio'), 30, ' &hellip;'); ?></p>
+	                        <p><?php echo rwmb_meta('physician_short_clinical_bio') ? rwmb_meta('physician_short_clinical_bio') : wp_trim_words(rwmb_meta('physician_clinical_bio'), 30, ' &hellip;'); ?></p>
 
 	                         <a class="uams-btn btn-blue btn-sm" target="_self" title="View Profile" href="<?php echo get_permalink($post->ID); ?>">View Profile</a>
 							<?php if (rwmb_meta('physician_youtube_link')) { ?>

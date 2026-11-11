@@ -106,7 +106,7 @@ final class ProviderResearchSectionTest extends UnitTestCase
 
     public function test_the_section_prints_the_interests_under_their_heading(): void
     {
-        $this->assertMatchesRegularExpression('/if\(\$research_interests\)\s*\{ \?>\s*<h3>Research Interests<\/h3>\s*<\?php\s*echo \$research_interests;/', $this->template());
+        $this->assertMatchesRegularExpression('/if \(\$research_interests\)\s*\{ \?>\s*<h3>Research Interests<\/h3>\s*<\?php\s*echo \$research_interests;/', $this->template());
     }
 
     public function test_the_jump_link_and_the_anchor_both_follow_the_decision(): void
@@ -114,6 +114,6 @@ final class ProviderResearchSectionTest extends UnitTestCase
         $source = $this->template();
 
         $this->assertMatchesRegularExpression('/<\?php if \(\$show_research_section\) \{ \?>\s*<li class="nav-item">\s*<a class="nav-link" href="#research-info">Research<\/a>/', $source);
-        $this->assertMatchesRegularExpression('/if\( \$show_research_section \): \?>\s*<section class="uams-module research-info bg-auto" id="research-info">/', $source);
+        $this->assertMatchesRegularExpression('/if \(\$show_research_section\) \{ \?>\s*<section class="uams-module research-info bg-auto" id="research-info">/', $source);
     }
 }

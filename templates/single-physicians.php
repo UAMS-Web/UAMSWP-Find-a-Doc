@@ -452,7 +452,8 @@ function uamswp_fad_title($html)
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 function be_remove_title_from_single_crumb($crumb, $args) // Because BE is the man
-{global $full_name;
+{
+    global $full_name;
 
     // Genesis outputs the filtered crumb as raw HTML, so escape the provider
     // name (a plain-text ACF field, not kses-filtered).
@@ -462,7 +463,8 @@ add_filter('genesis_single_crumb', 'be_remove_title_from_single_crumb', 10, 2);
 
 // SEOPress Breadcrumbs Fix
 function sp_change_title_from_provider_crumb($crumbs) // SEOPress
-{global $full_name;
+{
+    global $full_name;
     $crumb = array_pop($crumbs);
     $provider_name = [$full_name, get_permalink()];
     array_push($crumbs, $provider_name);
@@ -985,7 +987,7 @@ while (have_posts()) {
         }
         if ($expertise_valid) {
             ?>
-                        <dt>Area<?php echo  count($expertises) > 1 ? 's' : ''; ?> of Expertise</dt>
+                        <dt>Area<?php echo count($expertises) > 1 ? 's' : ''; ?> of Expertise</dt>
                         <?php foreach ($expertises as $expertise) {
                             if (get_post_status($expertise) == 'publish' && $expertise !== 0) {
                                 echo '<dd><a href="'.get_permalink($expertise).'" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">'.get_the_title($expertise).'</a></dd>';
@@ -1016,7 +1018,7 @@ while (have_posts()) {
                     <?php // Display all patient types
             if ($patients) {
                 ?>
-                            <dt>Patient Type<?php echo  count($patients) > 1 ? 's' : ''; ?></dt>
+                            <dt>Patient Type<?php echo count($patients) > 1 ? 's' : ''; ?></dt>
                             <?php foreach ($patients as $patient) { ?>
                                 <?php $patient_name = get_term($patient, 'patient_type');
                                 echo '<dd>'.$patient_name->name.'</dd>';
@@ -1029,7 +1031,7 @@ while (have_posts()) {
                         <dt class="sr-only">Language</dt>
                         <?php echo '<dd class="sr-only">'.$language_list.'</dd>'; ?>
                     <?php } else { ?>
-                        <dt>Language<?php echo  $language_count > 1 ? 's' : ''; ?></dt>
+                        <dt>Language<?php echo $language_count > 1 ? 's' : ''; ?></dt>
                         <?php echo '<dd>'.$language_list.'</dd>'; ?>
                     <?php } // endif?>
                     </dl>

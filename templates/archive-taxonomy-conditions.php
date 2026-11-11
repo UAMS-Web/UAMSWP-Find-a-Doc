@@ -49,7 +49,7 @@ get_header(); ?>
     <main id="genesis-content">
         <article class="entry">
             <header class="entry-header">
-                <h1 class="entry-title" itemprop="headline"><?php echo  $condition_title ? $condition_title : 'Conditions'; ?></h1>
+                <h1 class="entry-title" itemprop="headline"><?php echo $condition_title ? $condition_title : 'Conditions'; ?></h1>
             </header>
             <?php echo $condition_text ? '<div class="entry-content clearfix" itemprop="text">'.$condition_text.'</div>' : ''; ?>
         </article>

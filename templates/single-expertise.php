@@ -643,7 +643,7 @@ function uamswp_expertise_associated()
                             echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'" aria-label="Go to Area of Expertise page for '.get_the_title().'">';
                             echo get_the_title();
                             echo '</a></h3>';
-                            echo  has_excerpt() ? '<p>'.wp_trim_words(get_the_excerpt(), 30, '&nbsp;&hellip;').'</p>' : '';
+                            echo has_excerpt() ? '<p>'.wp_trim_words(get_the_excerpt(), 30, '&nbsp;&hellip;').'</p>' : '';
                             echo '</div></li>';
                         }
         wp_reset_postdata(); ?>

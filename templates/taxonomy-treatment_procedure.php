@@ -165,7 +165,7 @@ if ($physicians && ! empty($physicians)) {
 	<main id="genesis-content" class="treatment-item<?php echo $treatment_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title"><?php echo  $treatment_title ? $treatment_title : 'Treatment & Procedure'; ?>: <?php echo single_cat_title('', false); ?></h1>
+				<h1 class="entry-title"><?php echo $treatment_title ? $treatment_title : 'Treatment & Procedure'; ?>: <?php echo single_cat_title('', false); ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php
@@ -182,7 +182,7 @@ if ($physicians && ! empty($physicians)) {
                        echo '<p class="text-callout text-callout-info">Also called: '.$keyword_text.'</p>';
                    }
 ?>
-				<?php echo  $content ? ''.$content.'' : ''; ?>
+				<?php echo $content ? ''.$content.'' : ''; ?>
 				<?php
     if ($medline_type && $medline_type != 'none' && $medline_code) {
         echo display_medline_api_data(trim($medline_code), $medline_type);
