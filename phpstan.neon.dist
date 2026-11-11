@@ -56,11 +56,15 @@ parameters:
         min: 80200
         max: 80400
 
+    # One shape for a Business Profile sync item, shared by the sync class, the runtime and the CLI.
+    typeAliases:
+        GbpSyncItem: 'array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>, excluded?: bool, stored_name?: string, post_id?: int, location_id?: int, photos?: array<int, array{category: string, url: string}>, photos_sent?: array<int, string>, attributes?: array<string, bool>}'
+
     # Filled: the highest level the code passes today. Find it by running
     # from 0 upward (see the code-quality skill), then raise it by one per
     # change as findings are fixed, until `max`. Lowering it is a deliberate,
     # argued change, not a quiet edit to get a red run green.
-    level: 4
+    level: 5
 
     excludePaths:
         analyseAndScan:
@@ -168,6 +172,14 @@ parameters:
         -
             identifier: if.alwaysFalse
             path: uamswp-find-a-doc.php
+        # The page-attributes meta box runs its argument list through the
+        # `page_attributes_dropdown_pages_args` filter, as core's own meta box does, so the array
+        # reaching `wp_dropdown_pages()` is whatever a filter returned and the stub's closed shape
+        # cannot be proven for it.
+        -
+            identifier: argument.type
+            path: includes/class.fad-expertise-attributes-meta-box.php
+            count: 1
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
         # PHPStan analyzes at the `min` above, so

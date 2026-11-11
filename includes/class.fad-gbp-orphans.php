@@ -65,11 +65,11 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
     // A listing a published post still uses is never a candidate, whatever an unpublished copy of that post says.
     $live = [];
 
-    foreach (get_posts(['post_type' => 'location', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids']) as $location_id) {
-        $live = array_merge($live, uamswp_fad_gbp_stored_names(intval($location_id)));
+    foreach (uamswp_fad_ids(get_posts(['post_type' => 'location', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids'])) as $location_id) {
+        $live = array_merge($live, uamswp_fad_gbp_stored_names($location_id));
     }
 
-    $published_providers = array_map(intval(...), get_posts(['post_type' => 'provider', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids']));
+    $published_providers = uamswp_fad_ids(get_posts(['post_type' => 'provider', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids']));
 
     foreach ($published_providers as $provider_id) {
         $map = get_post_meta($provider_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
@@ -83,10 +83,9 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
 
     $live = array_flip($live);
 
-    $unpublished = get_posts(['post_type' => ['provider', 'location'], 'post_status' => ['draft', 'pending', 'private', 'future', 'trash'], 'posts_per_page' => -1, 'fields' => 'ids']);
+    $unpublished = uamswp_fad_ids(get_posts(['post_type' => ['provider', 'location'], 'post_status' => ['draft', 'pending', 'private', 'future', 'trash'], 'posts_per_page' => -1, 'fields' => 'ids']));
 
     foreach ($unpublished as $post_id) {
-        $post_id = intval($post_id);
         $names = uamswp_fad_gbp_stored_names($post_id);
 
         if ($names === []) {

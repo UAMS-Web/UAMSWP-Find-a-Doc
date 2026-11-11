@@ -819,6 +819,11 @@ function location_save_post_after($post_id): void
     }
 
     $post = get_post($post_id);
+
+    if (! $post instanceof WP_Post) {
+        return;
+    }
+
     $location_has_parent = get_field('location_parent');
     $location_parent_id = get_field('location_parent_id');
 
@@ -830,18 +835,18 @@ function location_save_post_after($post_id): void
         $location_parent_id
     ) {
 
-        $post->post_parent = $location_parent_id;
+        $post_parent = (int) $location_parent_id;
 
     } else { // clear the parent data
 
-        $post->post_parent = 0;
+        $post_parent = 0;
 
     }
 
     // Remove this filter to prevent an infinite loop
 
     remove_filter('acf/save_post', 'save_location_parent');
-    wp_update_post($post);
+    wp_update_post(['ID' => $post->ID, 'post_parent' => $post_parent]);
 
 }
 

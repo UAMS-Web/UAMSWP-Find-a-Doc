@@ -54,6 +54,7 @@ define('UAMS_FAD_VERSION', '0.0.0-tests');
 
 defined('DAY_IN_SECONDS') || define('DAY_IN_SECONDS', 86400);
 
+require_once dirname(__DIR__).'/includes/class.fad-helper-functions.php';
 require_once dirname(__DIR__).'/includes/class.fad-gbp-logic.php';
 require_once dirname(__DIR__).'/includes/class.fad-gbp-client.php';
 require_once dirname(__DIR__).'/includes/class.fad-gbp-sync.php';

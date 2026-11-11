@@ -61,7 +61,6 @@ function providers(): void
         'menu_icon' => plugin_dir_url(__FILE__).'../admin/admin-icons/physicians-icon.png',
         'show_in_admin_bar' => true,
         'show_in_nav_menus' => true,
-        'slug' => 'provider',
         'can_export' => true,
         'has_archive' => true,
         'exclude_from_search' => false,
@@ -645,7 +644,6 @@ function create_clinical_conditions_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Conditions'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -709,7 +707,6 @@ function create_clinical_treatments_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Treatments'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -899,7 +896,6 @@ function create_service_line_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Service Lines'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -969,7 +965,6 @@ function create_degrees_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Medical Degrees'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -1039,7 +1034,6 @@ function create_patient_type_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Patient Types'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -1107,7 +1101,6 @@ function create_clinical_title_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Clinical Titles'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -1179,7 +1172,6 @@ function create_clinical_admin_title_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Clinical Administrative Titles'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -1254,7 +1246,6 @@ function create_affiliations_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Hospital Affiliations'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -1313,7 +1304,6 @@ function create_institute_affiliations_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Institute Affiliations'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -1377,7 +1367,6 @@ function create_languages_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Languages'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -1770,7 +1759,6 @@ function create_academic_departments_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Academic Departments'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -1829,7 +1817,6 @@ function create_boards_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Specialty and Subspecialty Certificates'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -1888,7 +1875,6 @@ function create_certifying_body_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Certifying Bodies'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -1947,7 +1933,6 @@ function create_associations_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Health Care Professional Associations'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -2097,7 +2082,6 @@ function create_portal_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Portals'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -2173,7 +2157,6 @@ function create_academic_title_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Faculty Titles'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,
@@ -2260,7 +2243,6 @@ function create_academic_admin_title_taxonomy(): void
         'assign_terms' => 'edit_physicians',
     ];
     $args = [
-        'label' => __('Academic Administrative Titles'),
         'labels' => $labels,
         // 'description' => '',
         'public' => true,

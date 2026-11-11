@@ -103,7 +103,7 @@ class pubmed_field_on_change
         // make json api call
         $host = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&retmode=json&id={IDS}';
         // insert the pmid
-        $url = str_replace('{IDS}', $idstr, $host);
+        $url = str_replace('{IDS}', (string) $idstr, $host);
         // get json data
         $request = wp_remote_get($url);
 
@@ -389,7 +389,7 @@ function sync_provider_pg_data(): void
 
     set_transient($lock_key, time(), 2 * HOUR_IN_SECONDS);
 
-    foreach ($providers as $provider_id) {
+    foreach (uamswp_fad_ids($providers) as $provider_id) {
         // Using get_field assumes Advanced Custom Fields (ACF) is active
         $npi = absint(get_field('physician_npi', $provider_id));
         if (! $npi) {
@@ -585,8 +585,8 @@ function pg_ajax_api(): void
 		<div class="card">
 			<div class="card-header bg-transparent">
 				<div class="rating rating-center" aria-label="Average Rating">
-					<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo esc_attr($rating / 5 * 100); ?>%;"></div></div>
-					<div class="ratings-score-lg" itemprop="ratingValue"><?php echo esc_html($rating); ?><span class="sr-only"> out of 5</span></div>
+					<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo esc_attr((string) ($rating / 5 * 100)); ?>%;"></div></div>
+					<div class="ratings-score-lg" itemprop="ratingValue"><?php echo esc_html((string) $rating); ?><span class="sr-only"> out of 5</span></div>
 				</div>
 			</div>
 			<div class="card-body">
@@ -1026,7 +1026,7 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
     $provider_titles_list = [];
     $provider_regions = [];
     foreach ($providers as $provider) {
-        if (get_post_status($provider) == 'publish') {
+        if (get_post_status((int) $provider) == 'publish') {
 
             // Clinical Title
 
@@ -1148,7 +1148,7 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
                     <label class="sr-only" for="provider_region">Region</label>
                     <select name="provider_region" id="provider_region" class="form-control">
 						<option value="">Any Region</option>
-						<?php $regions = get_terms('region', 'orderby=name&hide_empty=0');
+						<?php $regions = get_terms(['taxonomy' => 'region', 'orderby' => 'name', 'hide_empty' => 0]);
 				    foreach ($regions as $region) { ?>
 							<option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $provider_regions_ids) ? '' : ' disabled'; ?><?php echo ($region->slug === $provider_region) ? ' selected' : ''; ?>><?php echo $region->name; ?></option>
 						<?php } ?>
@@ -1195,7 +1195,7 @@ function provider_ajax_filter_callback(): void
     $provider_region = '';
     if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
         if (isset($_GET['_filter_region'])) {
-            setcookie('wp_filter_region', htmlspecialchars($_GET['_filter_region']), ['expires' => '', 'path' => '/', 'domain' => $_SERVER['HTTP_HOST']]);
+            setcookie('wp_filter_region', htmlspecialchars($_GET['_filter_region']), ['expires' => 0, 'path' => '/', 'domain' => $_SERVER['HTTP_HOST']]);
         }
         $provider_region = $_COOKIE['wp_filter_region'];
     } elseif (isset($_POST['provider_region'])) {
@@ -1340,7 +1340,7 @@ function uamswp_provider_title_ajax_filter_shortcode($atts): string|false
     $provider_titles = [];
     $provider_titles_list = [];
     foreach ($providers as $provider) {
-        if (get_post_status($provider) == 'publish') {
+        if (get_post_status((int) $provider) == 'publish') {
 
             // Clinical Title
 
@@ -1524,7 +1524,7 @@ function uamswp_location_ajax_filter_shortcode($atts): string|false
     $display_region = $a['region'];
     $location_regions = [];
     foreach ($locations as $location) {
-        if (get_post_status($location) == 'publish') {
+        if (get_post_status((int) $location) == 'publish') {
             // Region
             $location_region = get_field('location_region', $location);
             if (! in_array($location_region, [false, null, ''], true)) {
@@ -1554,7 +1554,7 @@ function uamswp_location_ajax_filter_shortcode($atts): string|false
                     <label class="sr-only" for="location_region">Region</label>
                     <select name="location_region" id="location_region" class="form-control">
 						<option value="">Any Region</option>
-						<?php $regions = get_terms('region', 'orderby=name&hide_empty=0');
+						<?php $regions = get_terms(['taxonomy' => 'region', 'orderby' => 'name', 'hide_empty' => 0]);
     foreach ($regions as $region) { ?>
 							<option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $location_regions_ids) ? '' : ' disabled'; ?><?php echo ($region->slug === $location_region) ? ' selected' : ''; ?>><?php echo $region->name; ?></option>
 						<?php } ?>
@@ -1592,7 +1592,7 @@ function location_ajax_filter_callback(): void
     $location_region = '';
     if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
         if (isset($_GET['_filter_region'])) {
-            setcookie('wp_filter_region', htmlspecialchars($_GET['_filter_region']), ['expires' => '', 'path' => '/', 'domain' => $_SERVER['HTTP_HOST']]);
+            setcookie('wp_filter_region', htmlspecialchars($_GET['_filter_region']), ['expires' => 0, 'path' => '/', 'domain' => $_SERVER['HTTP_HOST']]);
         }
         $location_region = $_COOKIE['wp_filter_region'];
     } elseif (isset($_POST['location_region'])) {
@@ -1797,7 +1797,7 @@ function uamswp_attr_conversion($input): string
     $input_attr = str_replace('&#8216;', "'", $input_attr); // Replace left single quotation mark with normal space
     $input_attr = str_replace('&#8217;', "'", $input_attr); // Replace right single quotation mark with normal space
     $input_attr = str_replace('"', "'", $input_attr); // Replace double quotes with single quote
-    $input_attr = htmlentities($input_attr, false, 'UTF-8'); // Convert all applicable characters to HTML entities
+    $input_attr = htmlentities($input_attr, 0, 'UTF-8'); // Convert all applicable characters to HTML entities
     $input_attr = str_replace('&nbsp;', ' ', $input_attr); // Replace non-breaking space with normal space
     $input_attr = html_entity_decode($input_attr); // Convert HTML entities to their corresponding characters
 
