@@ -21,6 +21,7 @@ function bootstrap(): void
     // include_once (__DIR__ . '/class.fad-expertise-attributes-meta-box.php' ); // Not used in 2020
     include_once __DIR__.'/class.fad-templates.php';
     include_once __DIR__.'/class.fad-acf-functions.php'; // ACF specific functions
+    include_once __DIR__.'/class.fad-acf-table-map-notice.php'; // Admin notice when the custom table cache disagrees with the table JSON
     include_once __DIR__.'/class.fad-provider-nullable-fields.php'; // Keep unanswered provider fields empty in the custom table
     include_once __DIR__.'/class.fad-provider-preview.php'; // Read a provider's saved fields during a preview
     include_once __DIR__.'/class.fad-delete-cleanup.php'; // Remove a deleted provider or location from linked records and custom tables

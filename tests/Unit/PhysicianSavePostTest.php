@@ -169,6 +169,30 @@ test('it stores the region of every location and the portal of the first locatio
         ->and($warnings)->toBe([]);
 });
 
+test('it stores a region once when several locations share it', function (): void {
+    Functions\when('get_field')->alias(fn (string $name, $post_id) => match ($name) {
+        'location_region' => 65,
+        'location_portal' => 'Portal '.$post_id,
+        default => null,
+    });
+
+    [$acf, $warnings] = uamswp_test_run_save(uamswp_test_save_input(['field_physician_locations' => [10, 20]]));
+
+    expect($acf['field_physician_region'])->toBe([65])
+        ->and($warnings)->toBe([]);
+});
+
+test('it keeps each region once, in first-seen order, when locations repeat and mix regions', function (): void {
+    Functions\when('get_field')->alias(fn (string $name, $post_id) => match ($name) {
+        'location_region' => [10 => 66, 20 => 65, 30 => 66][$post_id],
+        default => null,
+    });
+
+    [$acf] = uamswp_test_run_save(uamswp_test_save_input(['field_physician_locations' => [10, 20, 30]]));
+
+    expect($acf['field_physician_region'])->toBe([66, 65]);
+});
+
 test('it skips a location with no region or portal value', function (): void {
     Functions\when('get_field')->alias(fn (string $name, $post_id) => $post_id === 20 ? 'Value '.$post_id : null);
 
