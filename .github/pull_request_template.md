@@ -15,7 +15,7 @@
   Closing multiple issues? Repeat the keyword: `Closes #1, Closes #2.` A comma-separated
   list links only the FIRST issue.
 
-  Pull requests from an issue's branch come in pairs: a ready one to `dev` and a draft one to `staging`. See CONTRIBUTING.md for the flow and for which environment each test plan covers.
+  Pull requests from an issue's branch go to `master`. See CONTRIBUTING.md for the flow and for which environment each test plan covers.
 -->
 
 Closes #
@@ -52,8 +52,7 @@ Closes #
 
 <!--
   Mandatory, and always last. First line: the environment this plan was run on.
-    To `dev`: Run on the local install.
-    To `staging`: Run on the staging site (uamshealth.dev) once this branch is deployed there.
+    To `master`: Run on the local install.
   `- [x]` = verified here; `- [ ]` = deferred to CI, review, or another environment. Name the
   command, URL, or observation. Check a box only for a check you actually ran.
 -->

@@ -21,7 +21,7 @@ Profiles for this repository: core, php, pest, wordpress-plugin, tests, quality.
 
 ### Contributing
 
-Follow [`CONTRIBUTING.md`](CONTRIBUTING.md) for the issue-to-merge path: a branch from `master` linked to the issue, a ready pull request to `dev`, and a draft pull request to `staging`. It also maps each branch to the environment its pull request's test plan is run on. Start each pull request body from [`.github/pull_request_template.md`](.github/pull_request_template.md).
+Follow [`CONTRIBUTING.md`](CONTRIBUTING.md) for the issue-to-merge path: a branch from `master` linked to the issue and a pull request to `master`. It also maps each branch to the environment its pull request's test plan is run on. Start each pull request body from [`.github/pull_request_template.md`](.github/pull_request_template.md).
 
 ### Rules
 
