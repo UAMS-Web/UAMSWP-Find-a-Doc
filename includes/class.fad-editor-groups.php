@@ -239,7 +239,7 @@ function uamswp_fad_user_editor_groups($user_id)
     if (is_array($terms)) {
         foreach ($terms as $term_id) {
             if (in_array($user_id, uamswp_fad_editor_group_members($term_id), true)) {
-                $groups[] = (int) $term_id;
+                $groups[] = intval($term_id);
             }
         }
     }

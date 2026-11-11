@@ -613,7 +613,7 @@ function uamswp_fad_gbp_location_info(string $slug): array
         return ['silo' => null, 'providers_excluded' => false, 'id' => 0];
     }
 
-    $location_id = (int) $ids[0];
+    $location_id = intval($ids[0]);
 
     return [
         'id' => $location_id,

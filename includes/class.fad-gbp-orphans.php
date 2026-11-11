@@ -66,7 +66,7 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
     $live = [];
 
     foreach (get_posts(['post_type' => 'location', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids']) as $location_id) {
-        $live = array_merge($live, uamswp_fad_gbp_stored_names((int) $location_id));
+        $live = array_merge($live, uamswp_fad_gbp_stored_names(intval($location_id)));
     }
 
     $published_providers = array_map(intval(...), get_posts(['post_type' => 'provider', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids']));
@@ -86,7 +86,7 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
     $unpublished = get_posts(['post_type' => ['provider', 'location'], 'post_status' => ['draft', 'pending', 'private', 'future', 'trash'], 'posts_per_page' => -1, 'fields' => 'ids']);
 
     foreach ($unpublished as $post_id) {
-        $post_id = (int) $post_id;
+        $post_id = intval($post_id);
         $names = uamswp_fad_gbp_stored_names($post_id);
 
         if ($names === []) {
