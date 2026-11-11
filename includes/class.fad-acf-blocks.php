@@ -36,6 +36,27 @@ function uams_fad_link_target_attributes($target): string
 }
 
 /**
+ * Build the call-to-action button anchor for an ACF link field.
+ *
+ * Prints the link target stored on the field, and `rel="noopener"` with a `_blank` target.
+ *
+ * @param  mixed  $link  The ACF link field array (`url`, `target`), or a falsy value when unset.
+ * @param  string  $text  The button text.
+ * @param  string  $description  The accessible label.
+ * @param  string  $button_color  The Bootstrap button color suffix.
+ * @param  string  $size  `large` adds the `btn-lg` class.
+ * @param  string  $heading  The module title for the tracking attribute.
+ */
+function uams_fad_cta_button_anchor($link, string $text, string $description, string $button_color, string $size, string $heading): string
+{
+    $link = is_array($link) ? $link : [];
+    $url = is_string($link['url'] ?? null) ? $link['url'] : '';
+    $target = $link['target'] ?? null;
+
+    return '<a href="'.esc_url($url).'" aria-label="'.esc_attr($description).'" class=" btn btn-'.$button_color.($size === 'large' ? ' btn-lg' : '').'"'.uams_fad_link_target_attributes($target).' data-moduletitle="'.$heading.'">'.esc_html($text).'</a>';
+}
+
+/**
  * Editor placeholder for a newly inserted, still-empty ACF block (ACF Blocks V3
  * always render a preview). Returns true after printing the placeholder.
  * Returns false outside block previews ($block / $is_preview not set).

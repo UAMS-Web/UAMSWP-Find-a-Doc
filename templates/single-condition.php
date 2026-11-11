@@ -418,14 +418,10 @@
 
 					$cta_button_text = '';
 					$cta_button_url = '';
-					$cta_button_target = '';
 					$cta_button_desc = '';
 					if ( $cta_action_type == 'url' ) {
 						$cta_button_text = $cta['cta_bar_button_text'];
 						$cta_button_url = $cta['cta_bar_button_url'];
-						if ( $cta_button_url ) {
-							$cta_button_target = $button_url['target'];
-						}
 						$cta_button_desc = $cta['cta_bar_button_description'];
 					}
 
@@ -472,7 +468,7 @@
 											</div>';
 											echo $cta_action_type == 'url' ?
 											'<div class="btn-container">
-												<a href="' . esc_url($cta_button_url['url']) . '" aria-label="' . esc_attr($cta_button_desc) . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. esc_attr($cta_button_target) . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . esc_html($cta_button_text) . '</a>
+												' . uams_fad_cta_button_anchor($cta_button_url, $cta_button_text, $cta_button_desc, $cta_btn_color, $cta_size, $cta_heading) . '
 											</div>'
 											: '';
 											echo $cta_action_type == 'phone' ?
