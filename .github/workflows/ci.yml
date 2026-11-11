@@ -1,7 +1,7 @@
 name: CI
 
 # Public repository: Actions minutes are free, so this workflow is the remote gate for pull
-# requests to `dev` and `staging`. It follows the shared ci.yml template in
+# requests to `master`. It follows the shared ci.yml template in
 # UAMS-Web/uams-claude-skills (.claude/skills/code-quality/templates/ci.yml), minus the jobs
 # this repository has no counterpart for: mutation testing and the mutation-annotation check.
 # The `lint-floor` job parses every shipped file on PHP 8.2, the supported floor.
@@ -19,7 +19,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [master, dev, staging]
+    branches: [master]
   # Lets the workflow be run on demand against a branch.
   workflow_dispatch:
 
