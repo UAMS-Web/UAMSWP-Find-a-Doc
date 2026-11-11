@@ -15,8 +15,8 @@ use UamswpFindADoc\Tests\Support\UnitTestCase;
  * The decision is a block inside the provider template, which needs a full WordPress and theme to
  * render, so these tests cut that block out of the template and run it against each input on its own.
  * The block reads only plain variables, so running it executes the template's own condition, not a copy.
- * The "Research Interests only" case records today's behavior: the condition reads a misspelled variable,
- * so that field alone shows no section.
+ * Research Interests alone shows the section: the condition once read a misspelled variable that was never
+ * set, so that field alone showed nothing.
  */
 final class ProviderResearchSectionTest extends UnitTestCase
 {
@@ -50,8 +50,7 @@ final class ProviderResearchSectionTest extends UnitTestCase
     {
         $block = $this->decision_block();
 
-        // The page has these five set before the block runs (empty when the field is empty). The misspelled
-        // `$esearch_interests` the condition reads is never set anywhere, so it is not set here either.
+        // The page has these five set before the block runs (empty when the field is empty).
         $inputs += ['research_bio' => '', 'research_interests' => '', 'publications' => [], 'pubmed_author_id' => '', 'research_profiles_link' => ''];
 
         // The block is the template's own text and reads only the variables passed in, so evaluating it
@@ -95,10 +94,19 @@ final class ProviderResearchSectionTest extends UnitTestCase
         $this->assertSame(['shown' => false, 'jump_links' => 0], $this->decide(['research_bio' => '', 'research_interests' => '', 'publications' => [], 'pubmed_author_id' => '', 'research_profiles_link' => '']));
     }
 
-    public function test_research_interests_alone_shows_no_section_today_because_the_condition_reads_a_misspelled_variable(): void
+    public function test_research_interests_alone_shows_the_section_and_counts_one_jump_link(): void
     {
-        $this->assertSame(['shown' => false, 'jump_links' => 0], $this->decide(['research_interests' => 'Heart failure']));
-        $this->assertStringContainsString('$esearch_interests', $this->decision_block());
+        $this->assertSame(['shown' => true, 'jump_links' => 1], $this->decide(['research_interests' => 'Heart failure']));
+    }
+
+    public function test_the_condition_reads_only_variables_the_page_sets(): void
+    {
+        $this->assertStringNotContainsString('$esearch_interests', $this->template());
+    }
+
+    public function test_the_section_prints_the_interests_under_their_heading(): void
+    {
+        $this->assertMatchesRegularExpression('/if\(\$research_interests\)\s*\{ \?>\s*<h3>Research Interests<\/h3>\s*<\?php\s*echo \$research_interests;/', $this->template());
     }
 
     public function test_the_jump_link_and_the_anchor_both_follow_the_decision(): void
