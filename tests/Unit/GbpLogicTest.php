@@ -330,7 +330,7 @@ final class GbpLogicTest extends UnitTestCase
 
         $item = UAMSWP_FAD_GBP_Logic::location_item($row, ['Medical Clinic' => 'categories/gcid:medical_clinic'], 'baptist-health');
 
-        $this->assertSame(['store_code', 'kind', 'silo', 'excluded', 'fields', 'unresolved', 'attributes'], array_keys($item));
+        $this->assertSame(['store_code', 'kind', 'silo', 'excluded', 'fields', 'unresolved', 'attributes', 'photos'], array_keys($item));
         $this->assertSame(['schmieding-outpatient-therapy', 'location', 'baptist-health', false], [$item['store_code'], $item['kind'], $item['silo'], $item['excluded']]);
         $this->assertSame('Schmieding Outpatient Therapy', $item['fields']['title']);
         $this->assertSame('categories/gcid:medical_clinic', $item['fields']['categories']['primaryCategory']['name']);
@@ -462,5 +462,11 @@ final class GbpLogicTest extends UnitTestCase
         $this->assertSame(['a', 'c'], array_column(UAMSWP_FAD_GBP_Logic::filter_entries($entries, 'review', null), 'store_code'));
         $this->assertSame(['b', 'c'], array_column(UAMSWP_FAD_GBP_Logic::filter_entries($entries, null, 'baptist-health'), 'store_code'));
         $this->assertSame(['c'], array_column(UAMSWP_FAD_GBP_Logic::filter_entries($entries, 'review', 'baptist-health'), 'store_code'));
+    }
+
+    public function test_a_photo_only_update_is_settled_but_an_error_is_not(): void
+    {
+        $this->assertTrue(UAMSWP_FAD_GBP_Logic::is_settled([['action' => 'update', 'reason' => 'Photos sent']]));
+        $this->assertFalse(UAMSWP_FAD_GBP_Logic::is_settled([['action' => 'error', 'reason' => 'Photos sent']]));
     }
 }

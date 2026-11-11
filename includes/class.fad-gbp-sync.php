@@ -218,7 +218,7 @@ final class UAMSWP_FAD_GBP_Sync
             return ['action' => 'review', 'reason' => $reason] + $entry;
         }
 
-        return $this->update($item, $entry, $match['listing'], $mode);
+        return $this->update($item, $entry, $match['listing'], $mode, $account);
     }
 
     /**
@@ -227,7 +227,7 @@ final class UAMSWP_FAD_GBP_Sync
      * @param  array<string, mixed>  $listing
      * @return array<string, mixed>
      */
-    private function update(array $item, array $entry, array $listing, string $mode): array
+    private function update(array $item, array $entry, array $listing, string $mode, string $account): array
     {
         // Named on every outcome, so the caller can store the ID of the listing that was matched.
         $entry = ['listing_name' => (string) ($listing['name'] ?? '')] + $entry;
@@ -239,11 +239,14 @@ final class UAMSWP_FAD_GBP_Sync
             return $this->failure($runtimeException) + $entry;
         }
 
-        if ($changed === [] && $attributes === []) {
+        // A photo goes only when its address is new for this listing: an unchanged image makes no call.
+        $photos = UAMSWP_FAD_GBP_Logic::photos_to_send((array) ($item['photos'] ?? []), (array) ($item['photos_sent'] ?? []));
+
+        if ($changed === [] && $attributes === [] && $photos === []) {
             return ['action' => 'noop', 'reason' => 'Listing already matches'] + $entry;
         }
 
-        $entry = ['action' => 'update', 'fields' => array_keys($changed), 'attributes' => array_keys($attributes)] + $entry;
+        $entry = ['action' => 'update', 'fields' => array_keys($changed), 'attributes' => array_keys($attributes), 'photos' => array_column($photos, 'url')] + $entry;
 
         if ($mode !== 'live') {
             return ['reason' => 'Dry run, no write made'] + $entry;
@@ -261,7 +264,15 @@ final class UAMSWP_FAD_GBP_Sync
             return $this->failure($runtimeException) + $entry;
         }
 
-        return ['reason' => 'Updated'] + $entry;
+        $sent = [];
+
+        try {
+            $this->send_photos($account, (string) $listing['name'], $photos, $sent);
+        } catch (RuntimeException $runtimeException) {
+            return $this->failure($runtimeException) + ['photos_sent_now' => $sent] + $entry;
+        }
+
+        return ['reason' => $changed === [] && $attributes === [] ? 'Photos sent' : 'Updated', 'photos_sent_now' => $sent] + $entry;
     }
 
     /**
@@ -278,7 +289,8 @@ final class UAMSWP_FAD_GBP_Sync
         }
 
         $attributes = (array) ($item['attributes'] ?? []);
-        $entry = ['action' => 'create', 'fields' => array_keys($item['fields']), 'attributes' => array_keys($attributes)] + $entry;
+        $photos = UAMSWP_FAD_GBP_Logic::photos_to_send((array) ($item['photos'] ?? []), []);
+        $entry = ['action' => 'create', 'fields' => array_keys($item['fields']), 'attributes' => array_keys($attributes), 'photos' => array_column($photos, 'url')] + $entry;
 
         if ($mode !== 'live') {
             return ['reason' => 'Dry run, no listing created'] + $entry;
@@ -337,7 +349,47 @@ final class UAMSWP_FAD_GBP_Sync
             }
         }
 
-        return ['reason' => 'Created', 'listing_name' => (string) ($created['name'] ?? '')] + $entry;
+        // A new listing gets every photo. A failure sending one is reported with the ones that went.
+        $sent = [];
+
+        if ($photos !== [] && ! empty($created['name'])) {
+            try {
+                $this->send_photos($account, (string) $created['name'], $photos, $sent);
+            } catch (RuntimeException $runtimeException) {
+                return $this->failure($runtimeException) + ['photos_sent_now' => $sent] + $entry;
+            }
+        }
+
+        return ['reason' => 'Created', 'listing_name' => (string) ($created['name'] ?? ''), 'photos_sent_now' => $sent] + $entry;
+    }
+
+    /**
+     * Send photos to a listing one at a time, noting each address as it goes.
+     *
+     * @param  array<int, array{category: string, url: string}>  $photos
+     * @param  array<int, string>  $sent  Receives the address of each photo Google accepted.
+     *
+     * @throws RuntimeException After every photo was tried, naming each refused one; a rate limit ends the sending at once.
+     */
+    private function send_photos(string $account, string $listing_name, array $photos, array &$sent): void
+    {
+        $refused = null;
+
+        foreach ($photos as $photo) {
+            try {
+                $this->client->upload_photo($account, $listing_name, $photo['category'], $photo['url']);
+                $sent[] = $photo['url'];
+            } catch (UAMSWP_FAD_GBP_Rate_Limited $rateLimited) {
+                throw $rateLimited;
+            } catch (RuntimeException $runtimeException) {
+                // One refused photo must not block the ones after it; the first refusal is the one reported.
+                $refused ??= new RuntimeException($photo['url'].': '.$runtimeException->getMessage(), 0, $runtimeException);
+            }
+        }
+
+        if ($refused instanceof RuntimeException) {
+            throw $refused;
+        }
     }
 
     /**
