@@ -35,7 +35,7 @@ final class UAMSWP_FAD_GBP_Sync
     /** @var array<int, int> The moment each create of this run was sent. */
     private array $create_times = [];
 
-    /** @var callable(): int The clock a create is stamped with. */
+    /** @var callable(): int The clock for quota resets and create stamps. */
     private $clock;
 
     /** @var array<int, array{account: string, listing: array<string, mixed>}> */
@@ -48,7 +48,7 @@ final class UAMSWP_FAD_GBP_Sync
      * @param  object  $client  Provides patch() and create(), as UAMSWP_FAD_GBP_Client does.
      * @param  array{silos: array<string, array<string, mixed>>, modes: array<string, string>, is_production: bool, creates_paused_until?: int, creates_left?: ?int, now?: int, clock?: callable(): int}  $config  `creates_paused_until`, `creates_left`, `now` and `clock`
      *                                                                                                                                                                                                             describe Google's daily create quota: a pause in force, the creates still allowed today, and the clock.
-     *                                                                                                                                                                                                             `now` is the run's start; `clock` stamps each create as it is sent (default: the current time).
+     *                                                                                                                                                                                                             `now` is the run's start; `clock` dates quota resets and stamps each create (default: the current time).
      * @param  array<string, array<int, array{account: string, listing: array<string, mixed>}>>  $index  From self::build_index().
      * @param  callable(array<string, mixed>): void  $logger  Receives one entry per item.
      */
@@ -320,7 +320,7 @@ final class UAMSWP_FAD_GBP_Sync
         }
 
         if ($this->creates_left !== null && $this->creates_made >= $this->creates_left) {
-            $reset = UAMSWP_FAD_GBP_Logic::next_pacific_reset($this->now);
+            $reset = UAMSWP_FAD_GBP_Logic::next_pacific_reset((int) ($this->clock)());
 
             return $this->deferred('Daily create budget used, creates resume '.UAMSWP_FAD_GBP_Logic::reset_label($reset), $reset) + $entry;
         }
@@ -333,7 +333,7 @@ final class UAMSWP_FAD_GBP_Sync
             }
 
             // The day's quota is gone: hold every later create until Google resets it.
-            $this->paused_until = UAMSWP_FAD_GBP_Logic::next_pacific_reset($this->now);
+            $this->paused_until = UAMSWP_FAD_GBP_Logic::next_pacific_reset((int) ($this->clock)());
 
             return $this->deferred('Google daily create limit reached, creates paused until '.UAMSWP_FAD_GBP_Logic::reset_label($this->paused_until), $this->paused_until) + $entry;
         } catch (RuntimeException $runtimeException) {

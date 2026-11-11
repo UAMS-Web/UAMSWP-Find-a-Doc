@@ -798,8 +798,12 @@ function uamswp_fad_gbp_after_run(UAMSWP_FAD_GBP_Sync $sync, array $entries, ?in
 
         foreach ($by_day as $day => $day_made) {
             $count = get_option(UAMSWP_FAD_GBP_COUNT_OPTION, []);
-            $before = is_array($count) && ($count['day'] ?? '') === $day ? (int) ($count['count'] ?? 0) : 0;
-            update_option(UAMSWP_FAD_GBP_COUNT_OPTION, ['day' => $day, 'count' => $before + $day_made], false);
+
+            // A later-finishing run must not replace a newer day's budget with an older one.
+            if (! is_array($count) || ($count['day'] ?? '') <= $day) {
+                $before = is_array($count) && ($count['day'] ?? '') === $day ? (int) ($count['count'] ?? 0) : 0;
+                update_option(UAMSWP_FAD_GBP_COUNT_OPTION, ['day' => $day, 'count' => $before + $day_made], false);
+            }
 
             $history = get_option(UAMSWP_FAD_GBP_HISTORY_OPTION, []);
             update_option(UAMSWP_FAD_GBP_HISTORY_OPTION, UAMSWP_FAD_GBP_Logic::add_to_history(is_array($history) ? $history : [], $day, $day_made), false);
