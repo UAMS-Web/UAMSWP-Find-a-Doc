@@ -88,7 +88,7 @@ function set_default_portal($field)
     if (empty($field['value'])) {
 
         $term = get_term_by('slug', 'uams-mychart', 'portal');
-        $term_id = $term->term_id;
+        $term_id = ($term->term_id ?? 0);
         $default = [$term_id];
 
         // Set field to default value
@@ -171,7 +171,7 @@ function set_default_region($value, $post_id, $field)
     }
 
     $term = get_term_by('slug', 'central', 'region');
-    $term_id = $term->term_id;
+    $term_id = ($term->term_id ?? 0);
 
     return [$term_id];
 
@@ -940,7 +940,7 @@ function clinical_title_save_post($post_id): void
 
     // Get the term's parent
 
-    $parent_term_id = $term->parent;
+    $parent_term_id = ($term->parent ?? 0);
     $parent_term = $parent_term_id ? (get_term_by('id', $parent_term_id, $taxonomy)) : null;
     $parent_term = $parent_term ?: null;
 
@@ -1283,6 +1283,8 @@ function custom_excerpt_acf(): void
 
     if (
         ! empty($post_id) // If the post ID is not empty ...
+        &&
+        $post_type !== false
         &&
         array_key_exists($post_type, $excerpt_field_name)//  and if a key for the current post type exists in the array...
     ) {
@@ -1959,7 +1961,7 @@ function uamswp_fad_acf_load_brandorg_uams($field)
 
     */
 
-    foreach ($brand_organizations as $item) {
+    foreach ((is_wp_error($brand_organizations) ? [] : $brand_organizations) as $item) {
 
         $field['choices'][$item->slug] = $item->name;
 
@@ -1998,7 +2000,7 @@ function uamswp_fad_acf_load_brandorg_3p($field)
 
     */
 
-    foreach ($brand_organizations as $item) {
+    foreach ((is_wp_error($brand_organizations) ? [] : $brand_organizations) as $item) {
 
         $field['choices'][$item->slug] = $item->name;
 
@@ -2316,14 +2318,14 @@ function uamswp_spotlight_seed_questions($value, $post_id, $field)
 
     }
 
-    if (get_post_type($post_id) !== 'clinical-resource') {
+    if (get_post_type((int) $post_id) !== 'clinical-resource') {
 
         return $value;
 
     }
 
     // Only a brand-new post
-    if (get_post_status($post_id) !== 'auto-draft') {
+    if (get_post_status((int) $post_id) !== 'auto-draft') {
 
         return $value;
 
@@ -2415,7 +2417,7 @@ function uamswp_spotlight_reconcile_providers($post_id): void
         ||
         ! is_numeric($post_id)
         ||
-        get_post_type($post_id) !== 'clinical-resource'
+        get_post_type((int) $post_id) !== 'clinical-resource'
     ) {
 
         return;
@@ -2544,7 +2546,7 @@ function uamswp_spotlight_sync_title($post_id): void
     if (
         ! is_numeric($post_id)
         ||
-        get_post_type($post_id) !== 'clinical-resource'
+        get_post_type((int) $post_id) !== 'clinical-resource'
         ||
         uamswp_spotlight_stored_type($post_id) !== 'provider_spotlight'
     ) {
@@ -2580,7 +2582,7 @@ function uamswp_spotlight_sync_title($post_id): void
 
     }
 
-    $post = get_post($post_id);
+    $post = get_post((int) $post_id);
 
     if (! $post) {
 
@@ -2608,7 +2610,7 @@ function uamswp_spotlight_sync_title($post_id): void
     // leaving the permalink on a placeholder slug. Drafts keep tracking the
     // provider until the flag is set.
 
-    if (! get_post_meta($post_id, '_uamswp_spotlight_slug_locked', true)) {
+    if (! get_post_meta((int) $post_id, '_uamswp_spotlight_slug_locked', true)) {
 
         $slug_name = trim(str_replace('&nbsp;', ' ', $names['medium_no_prefix']));
 
@@ -2625,7 +2627,7 @@ function uamswp_spotlight_sync_title($post_id): void
             // Once published, freeze: the permalink is now live.
             if (in_array($post->post_status, ['publish', 'future', 'private'], true)) {
 
-                update_post_meta($post_id, '_uamswp_spotlight_slug_locked', '1');
+                update_post_meta((int) $post_id, '_uamswp_spotlight_slug_locked', '1');
 
             }
 
@@ -2639,7 +2641,7 @@ function uamswp_spotlight_sync_title($post_id): void
 
     }
 
-    $update['ID'] = $post_id;
+    $update['ID'] = (int) $post_id;
 
     // Unhook around the nested save so this does not re-enter
 
@@ -2706,7 +2708,7 @@ function uamswp_spotlight_save($post_id): void
     if (
         ! is_numeric($post_id)
         ||
-        get_post_type($post_id) !== 'clinical-resource'
+        get_post_type((int) $post_id) !== 'clinical-resource'
         ||
         uamswp_spotlight_stored_type($post_id) !== 'provider_spotlight'
     ) {
@@ -2730,10 +2732,10 @@ function uamswp_spotlight_save($post_id): void
     if (
         $image_id
         &&
-        $image_id != get_post_thumbnail_id($post_id)
+        $image_id != get_post_thumbnail_id((int) $post_id)
     ) {
 
-        set_post_thumbnail($post_id, $image_id);
+        set_post_thumbnail((int) $post_id, $image_id);
 
     }
 
@@ -2836,7 +2838,7 @@ function uamswp_spotlight_provider_guard($post_id): void
     if (
         ! is_numeric($post_id)
         ||
-        get_post_type($post_id) !== 'provider'
+        get_post_type((int) $post_id) !== 'provider'
     ) {
 
         return;
@@ -2918,7 +2920,7 @@ function uamswp_spotlight_status_sync($new_status, $old_status, $post): void
     if (
         empty($post->ID)
         ||
-        $post->post_type !== 'clinical-resource'
+        ($post->post_type ?? '') !== 'clinical-resource'
         ||
         $new_status === $old_status
         ||
@@ -2979,7 +2981,7 @@ function uamswp_spotlight_delete_sync($post_id): void
     if (
         ! is_numeric($post_id)
         ||
-        get_post_type($post_id) !== 'clinical-resource'
+        get_post_type((int) $post_id) !== 'clinical-resource'
     ) {
 
         return;
@@ -3159,7 +3161,7 @@ function uamswp_spotlight_reconcile_ontology($post_id): void
         ||
         ! is_numeric($post_id)
         ||
-        get_post_type($post_id) !== 'clinical-resource'
+        get_post_type((int) $post_id) !== 'clinical-resource'
     ) {
 
         return;
@@ -3276,7 +3278,7 @@ function uamswp_spotlight_capture_ontology_providers($post_id): void
 
     }
 
-    $field = uamswp_spotlight_ontology_provider_field(get_post_type($post_id));
+    $field = uamswp_spotlight_ontology_provider_field(get_post_type((int) $post_id));
 
     if (! $field) {
 
@@ -3302,7 +3304,7 @@ function uamswp_spotlight_ontology_guard($post_id): void
 
     }
 
-    $field = uamswp_spotlight_ontology_provider_field(get_post_type($post_id));
+    $field = uamswp_spotlight_ontology_provider_field(get_post_type((int) $post_id));
 
     if (! $field) {
 

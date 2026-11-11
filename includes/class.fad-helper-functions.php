@@ -10,7 +10,7 @@ if (! function_exists('apStyleDate')) {
     function apStyleDate($date): string
     {
 
-        $date = strftime('%l:%M %p', strtotime($date));
+        $date = (string) strftime('%l:%M %p', strtotime($date));
 
         $date = str_replace(':00', '', $date);
 
@@ -338,9 +338,10 @@ if (! function_exists('partition')) {
  */
 function get_taxonomy_archive_link($taxonomy): string
 {
-    $tax = get_taxonomy($taxonomy);
+    $tax = get_taxonomy((string) $taxonomy);
+    $rewrite = $tax instanceof WP_Taxonomy ? $tax->rewrite : false;
 
-    return '/'.$tax->rewrite['slug'];
+    return '/'.(is_array($rewrite) ? (string) ($rewrite['slug'] ?? '') : '');
 }
 
 // function uamswp_add_blog_crumb( $crumb, $args ) {
@@ -359,8 +360,13 @@ function get_taxonomy_archive_link($taxonomy): string
 function uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs)
 {
     if (is_singular('condition') || is_singular('treatment') || is_tax('condition') || is_tax('treatment')) {
-        $taxonomy = [get_taxonomy(get_queried_object()->taxonomy)->labels->name, get_taxonomy_archive_link(get_queried_object()->taxonomy)];
-        array_splice($crumbs, -1, 0, [$taxonomy]);
+        $taxonomy_name = (string) (get_queried_object()->taxonomy ?? '');
+        $tax = get_taxonomy($taxonomy_name);
+
+        if ($tax instanceof WP_Taxonomy) {
+            $taxonomy = [$tax->labels->name, get_taxonomy_archive_link($taxonomy_name)];
+            array_splice($crumbs, -1, 0, [$taxonomy]);
+        }
     }
 
     return $crumbs;
@@ -521,7 +527,7 @@ if (! function_exists('uamswp_provider_names')) {
 
                 if (is_object($degree_term)) {
 
-                    $degree_name = $degree_term->name;
+                    $degree_name = ($degree_term->name ?? '');
                     $degree_list .= $degree_name;
                     $degree_attr_array[] = uamswp_attr_conversion($degree_name);
 
@@ -671,7 +677,7 @@ if (! function_exists('uamswp_provider_occupation_title')) {
 
                     // Get term name
 
-                    $provider_specialty_name = $provider_specialty_term->name;
+                    $provider_specialty_name = ($provider_specialty_term->name ?? '');
 
                     // Get occupational title field from term
 
@@ -969,13 +975,13 @@ if (! function_exists('uamswp_spotlight_appointment_cta')) {
         // Reusable links; both carry the same data-itemtitle as the generic band.
         $name_link = sprintf(
             '<a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s</a>',
-            esc_url($provider_url),
+            esc_url((string) $provider_url),
             esc_attr($medium_name_attr),
             $medium_name
         );
         $profile_link = sprintf(
             '<a href="%1$s" data-itemtitle="Learn more about %2$s">visit %3$s provider profile</a>',
-            esc_url($provider_url),
+            esc_url((string) $provider_url),
             esc_attr($medium_name_attr),
             $short_possessive
         );
@@ -1029,7 +1035,7 @@ if (! function_exists('uamswp_spotlight_appointment_cta')) {
 
             $profile_noun_link = sprintf(
                 '<a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s provider profile</a>',
-                esc_url($provider_url),
+                esc_url((string) $provider_url),
                 esc_attr($medium_name_attr),
                 $short_possessive
             );
@@ -1168,4 +1174,17 @@ function uamswp_fad_ids(array $items): array
     }
 
     return $ids;
+}
+
+/**
+ * The posts a query found, as post objects.
+ *
+ * `WP_Query::$posts` is typed as post objects or IDs because `fields` can ask for IDs. A caller
+ * that reads post properties passes the query through here, which keeps the objects.
+ *
+ * @return list<WP_Post>
+ */
+function uamswp_fad_query_posts(WP_Query $query): array
+{
+    return array_values(array_filter($query->posts, static fn ($post): bool => $post instanceof WP_Post));
 }

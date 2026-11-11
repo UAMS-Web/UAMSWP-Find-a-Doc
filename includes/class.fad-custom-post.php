@@ -3291,8 +3291,8 @@ function acf_hide_title(): void
  *
  * @see	https://developer.wordpress.org/reference/hooks/post_type_labels_post_type/
  *
- * @param  object  $labels  Current post type labels
- * @return object Modified post type labels
+ * @param  stdClass  $labels  Current post type labels
+ * @return stdClass Modified post type labels
  */
 function change_featured_image_labels_provider($labels)
 {
@@ -3395,7 +3395,7 @@ function get_provider_meta($object)
 
             $degree_name = get_term($degree, 'degree');
             $degree_list .= $degree_list !== '' ? ', ' : '';
-            $degree_list .= $degree_name->name;
+            $degree_list .= ($degree_name->name ?? '');
 
         } // endforeach
 
@@ -3440,7 +3440,7 @@ function get_provider_meta($object)
 
                 // Get term name
 
-                $provider_specialty_name = $provider_specialty_term->name;
+                $provider_specialty_name = ($provider_specialty_term->name ?? '');
 
                 // Get occupational title field from term
 
@@ -3477,7 +3477,7 @@ function get_provider_meta($object)
     $data['physician_full_name'] = $full_name;
     // Physician Data
     $data['physician_title'] = $provider_occupation_title; // (get_field( 'physician_title', $postId ) ? get_term( get_field( 'physician_title', $postId ), 'clinical_title' )->name : '');
-    $data['physician_service_line'] = $provider_service_line ? get_term($provider_service_line, 'service_line')->name : '';
+    $data['physician_service_line'] = $provider_service_line ? (get_term($provider_service_line, 'service_line')->name ?? '') : '';
     $data['physician_clinical_bio'] = get_field('physician_clinical_bio', $postId);
     $data['physician_short_clinical_bio'] = get_field('physician_short_clinical_bio', $postId) ?: wp_trim_words(get_field('physician_clinical_bio', $postId), 30, ' &hellip;');
     $data['physician_gender'] = get_field('physician_gender', $postId);
@@ -3492,7 +3492,7 @@ function get_provider_meta($object)
 
             $patient_name = get_term($patient, 'patient_type');
             $patient_list .= $patient_list !== '' ? ', ' : '';
-            $patient_list .= $patient_name->name;
+            $patient_list .= ($patient_name->name ?? '');
 
         } // endforeach
 
@@ -3524,7 +3524,7 @@ function get_provider_meta($object)
 
             $language_name = get_term($language, 'language');
             $language_list .= $language_list !== '' ? ', ' : '';
-            $language_list .= $language_name->name;
+            $language_list .= ($language_name->name ?? '');
 
         } // endforeach
 
@@ -3555,8 +3555,8 @@ function get_provider_meta($object)
 
         foreach ($educations as $education) {
 
-            $data['physician_education'][$i]['type'] = get_term($education['education_type'], 'educationtype')->name;
-            $data['physician_education'][$i]['school'] = get_term($education['school'], 'school')->name;
+            $data['physician_education'][$i]['type'] = (get_term($education['education_type'], 'educationtype')->name ?? '');
+            $data['physician_education'][$i]['school'] = (get_term($education['school'], 'school')->name ?? '');
             $data['physician_education'][$i]['description'] = $education['description'];
             $i++;
 
@@ -3572,8 +3572,8 @@ function get_provider_meta($object)
 
         foreach ($academic_appointments as $academic_appointment) {
 
-            $data['physician_faculty_appointment'][$i]['department'] = get_term($academic_appointment['department'], 'academic_department')->name;
-            $data['physician_faculty_appointment'][$i]['title'] = get_term($academic_appointment['academic_title_tax'], 'academic_title')->name;
+            $data['physician_faculty_appointment'][$i]['department'] = (get_term($academic_appointment['department'], 'academic_department')->name ?? '');
+            $data['physician_faculty_appointment'][$i]['title'] = (get_term($academic_appointment['academic_title_tax'], 'academic_title')->name ?? '');
             $i++;
 
         }
@@ -3588,8 +3588,8 @@ function get_provider_meta($object)
 
         foreach ($academic_admin_titles as $academic_admin_title) {
 
-            $data['physician_academic_admin_role'][$i]['department'] = get_term($academic_admin_title['department'], 'academic_department')->name;
-            $data['physician_academic_admin_role'][$i]['title'] = get_term($academic_admin_title['academic_admin_title_tax'], 'academic_admin_title')->name;
+            $data['physician_academic_admin_role'][$i]['department'] = (get_term($academic_admin_title['department'], 'academic_department')->name ?? '');
+            $data['physician_academic_admin_role'][$i]['title'] = (get_term($academic_admin_title['academic_admin_title_tax'], 'academic_admin_title')->name ?? '');
             $i++;
 
         }
@@ -3606,7 +3606,7 @@ function get_provider_meta($object)
 
             $board_name = get_term($board, 'board');
             $data['physician_boards'] .= $data['physician_boards'] != '' ? ',' : '';
-            $data['physician_boards'] .= $board_name->name;
+            $data['physician_boards'] .= ($board_name->name ?? '');
 
         } // endforeach
 
@@ -3621,7 +3621,7 @@ function get_provider_meta($object)
 
             $association_name = get_term($association, 'association');
             $data['physician_associations'] .= $data['physician_associations'] != '' ? ',' : '';
-            $data['physician_associations'] .= $association_name->name;
+            $data['physician_associations'] .= ($association_name->name ?? '');
 
         } // endforeach
 
@@ -3715,7 +3715,7 @@ function get_provider_meta($object)
             $condition_cpt_query->posts
         ) {
 
-            foreach ($condition_cpt_query->posts as $condition) {
+            foreach (uamswp_fad_query_posts($condition_cpt_query) as $condition) {
 
                 $data['physician_conditions'][$condition->ID]['link'] = get_permalink($condition->ID);
                 $data['physician_conditions'][$condition->ID]['title'] = $condition->post_title;
@@ -3760,7 +3760,7 @@ function get_provider_meta($object)
             $treatment_cpt_query->posts
         ) {
 
-            foreach ($treatment_cpt_query->posts as $treatment) {
+            foreach (uamswp_fad_query_posts($treatment_cpt_query) as $treatment) {
 
                 $data['physician_treatments'][$treatment->ID]['link'] = get_permalink($treatment->ID);
                 $data['physician_treatments'][$treatment->ID]['title'] = $treatment->post_title;
@@ -3805,7 +3805,7 @@ function get_provider_meta($object)
             $expertise_query->posts
         ) {
 
-            foreach ($expertise_query->posts as $expertise) {
+            foreach (uamswp_fad_query_posts($expertise_query) as $expertise) {
 
                 $data['physician_expertise'][$expertise->ID]['link'] = get_permalink($expertise->ID);
                 $data['physician_expertise'][$expertise->ID]['title'] = $expertise->post_title;
@@ -3892,7 +3892,7 @@ function get_location_meta($object)
 
         $post_id = $parent_location->ID;
         $parent_title = $parent_location->post_title;
-        $parent_url = user_trailingslashit(get_permalink($post_id));
+        $parent_url = user_trailingslashit((string) get_permalink($post_id));
 
     } else {
 
@@ -4033,7 +4033,7 @@ function get_location_meta($object)
     if ($location_building) {
 
         $building = get_term($location_building, 'building');
-        $building_name = $building->name;
+        $building_name = ($building->name ?? '');
 
     }
 
@@ -4063,7 +4063,7 @@ function get_location_meta($object)
     // Either string fallback fails the following object guard.
     // @pest-mutate-ignore: EmptyStringToNotEmpty
     $region_name = is_object(get_term($location_region, 'region')) ? get_term($location_region, 'region') : '';
-    $data['location_region'] = is_object($region_name) ? $region_name->slug : '';
+    $data['location_region'] = is_object($region_name) ? ($region_name->slug ?? '') : '';
 
     // Location Type
 
@@ -4078,7 +4078,7 @@ function get_location_meta($object)
             // Concatenation keeps this accumulator a string.
             // @pest-mutate-ignore: NotEqualToNotIdentical
             $data['location_types'] .= $data['location_types'] != '' ? ',' : '';
-            $data['location_types'] .= $type_name->name;
+            $data['location_types'] .= ($type_name->name ?? '');
 
         } // endforeach
 
@@ -4387,7 +4387,7 @@ function get_location_meta($object)
             $provider_query->posts
         ) {
 
-            foreach ($provider_query->posts as $provider) {
+            foreach (uamswp_fad_query_posts($provider_query) as $provider) {
 
                 $data['location_provider'][$provider->ID]['link'] = get_permalink($provider->ID);
                 $data['location_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
@@ -4434,7 +4434,7 @@ function get_location_meta($object)
             $expertise_query->posts
         ) {
 
-            foreach ($expertise_query->posts as $expertise) {
+            foreach (uamswp_fad_query_posts($expertise_query) as $expertise) {
 
                 $data['location_expertise'][$expertise->ID]['link'] = get_permalink($expertise->ID);
                 $data['location_expertise'][$expertise->ID]['title'] = $expertise->post_title;
@@ -4481,7 +4481,7 @@ function get_location_meta($object)
             $condition_cpt_query->posts
         ) {
 
-            foreach ($condition_cpt_query->posts as $condition) {
+            foreach (uamswp_fad_query_posts($condition_cpt_query) as $condition) {
 
                 $data['location_conditions'][$condition->ID]['link'] = get_permalink($condition->ID);
                 $data['location_conditions'][$condition->ID]['title'] = $condition->post_title;
@@ -4528,7 +4528,7 @@ function get_location_meta($object)
             $treatment_cpt_query->posts
         ) {
 
-            foreach ($treatment_cpt_query->posts as $treatment) {
+            foreach (uamswp_fad_query_posts($treatment_cpt_query) as $treatment) {
 
                 $data['location_treatments'][$treatment->ID]['link'] = get_permalink($treatment->ID);
                 $data['location_treatments'][$treatment->ID]['title'] = $treatment->post_title;
@@ -4616,7 +4616,7 @@ function get_expertise_meta($object)
             $condition_cpt_query->posts
         ) {
 
-            foreach ($condition_cpt_query->posts as $condition) {
+            foreach (uamswp_fad_query_posts($condition_cpt_query) as $condition) {
 
                 $data['expertise_conditions'][$condition->ID]['link'] = get_permalink($condition->ID);
                 $data['expertise_conditions'][$condition->ID]['title'] = $condition->post_title;
@@ -4661,7 +4661,7 @@ function get_expertise_meta($object)
             $treatment_cpt_query->posts
         ) {
 
-            foreach ($treatment_cpt_query->posts as $treatment) {
+            foreach (uamswp_fad_query_posts($treatment_cpt_query) as $treatment) {
 
                 $data['expertise_treatments'][$treatment->ID]['link'] = get_permalink($treatment->ID);
                 $data['expertise_treatments'][$treatment->ID]['title'] = $treatment->post_title;
@@ -4706,7 +4706,7 @@ function get_expertise_meta($object)
             $provider_query->posts
         ) {
 
-            foreach ($provider_query->posts as $provider) {
+            foreach (uamswp_fad_query_posts($provider_query) as $provider) {
 
                 $data['expertise_provider'][$provider->ID]['link'] = get_permalink($provider->ID);
                 $data['expertise_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
@@ -4751,7 +4751,7 @@ function get_expertise_meta($object)
             $location_query->posts
         ) {
 
-            foreach ($location_query->posts as $location) {
+            foreach (uamswp_fad_query_posts($location_query) as $location) {
 
                 $data['expertise_location'][$location->ID]['link'] = get_permalink($location->ID);
                 $data['expertise_location'][$location->ID]['title'] = $location->post_title;
@@ -4813,7 +4813,7 @@ function get_condition_meta($object): array
             $expertise_query->posts
         ) {
 
-            foreach ($expertise_query->posts as $expertise) {
+            foreach (uamswp_fad_query_posts($expertise_query) as $expertise) {
 
                 $data['condition_expertise'][$expertise->ID]['link'] = get_permalink($expertise->ID);
                 $data['condition_expertise'][$expertise->ID]['title'] = $expertise->post_title;
@@ -4858,7 +4858,7 @@ function get_condition_meta($object): array
             $treatment_cpt_query->posts
         ) {
 
-            foreach ($treatment_cpt_query->posts as $treatment) {
+            foreach (uamswp_fad_query_posts($treatment_cpt_query) as $treatment) {
 
                 $data['condition_treatments'][$treatment->ID]['link'] = get_permalink($treatment->ID);
                 $data['condition_treatments'][$treatment->ID]['title'] = $treatment->post_title;
@@ -4903,7 +4903,7 @@ function get_condition_meta($object): array
             $provider_query->posts
         ) {
 
-            foreach ($provider_query->posts as $provider) {
+            foreach (uamswp_fad_query_posts($provider_query) as $provider) {
 
                 $data['condition_provider'][$provider->ID]['link'] = get_permalink($provider->ID);
                 $data['condition_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
@@ -4948,7 +4948,7 @@ function get_condition_meta($object): array
             $location_query->posts
         ) {
 
-            foreach ($location_query->posts as $location) {
+            foreach (uamswp_fad_query_posts($location_query) as $location) {
 
                 $data['condition_location'][$location->ID]['link'] = get_permalink($location->ID);
                 $data['condition_location'][$location->ID]['title'] = $location->post_title;
@@ -5010,7 +5010,7 @@ function get_treatment_meta($object): array
             $expertise_query->posts
         ) {
 
-            foreach ($expertise_query->posts as $expertise) {
+            foreach (uamswp_fad_query_posts($expertise_query) as $expertise) {
 
                 $data['treatment_expertise'][$expertise->ID]['link'] = get_permalink($expertise->ID);
                 $data['treatment_expertise'][$expertise->ID]['title'] = $expertise->post_title;
@@ -5055,7 +5055,7 @@ function get_treatment_meta($object): array
             $condition_cpt_query->posts
         ) {
 
-            foreach ($condition_cpt_query->posts as $condition) {
+            foreach (uamswp_fad_query_posts($condition_cpt_query) as $condition) {
 
                 $data['treatment_conditions'][$condition->ID]['link'] = get_permalink($condition->ID);
                 $data['treatment_conditions'][$condition->ID]['title'] = $condition->post_title;
@@ -5100,7 +5100,7 @@ function get_treatment_meta($object): array
             $provider_query->posts
         ) {
 
-            foreach ($provider_query->posts as $provider) {
+            foreach (uamswp_fad_query_posts($provider_query) as $provider) {
 
                 $data['treatment_provider'][$provider->ID]['link'] = get_permalink($provider->ID);
                 $data['treatment_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
@@ -5145,7 +5145,7 @@ function get_treatment_meta($object): array
             $location_query->posts
         ) {
 
-            foreach ($location_query->posts as $location) {
+            foreach (uamswp_fad_query_posts($location_query) as $location) {
 
                 $data['treatment_location'][$location->ID]['link'] = get_permalink($location->ID);
                 $data['treatment_location'][$location->ID]['title'] = $location->post_title;
@@ -5420,7 +5420,7 @@ function get_resource_meta($object)
         $clinical_resource_query->posts
     ) {
 
-        foreach ($clinical_resource_query->posts as $resource) {
+        foreach (uamswp_fad_query_posts($clinical_resource_query) as $resource) {
 
             $data['clinical_resource_associated'][$resource->ID]['link'] = get_permalink($resource->ID);
             $data['clinical_resource_associated'][$resource->ID]['title'] = $resource->post_title;
@@ -5439,7 +5439,7 @@ function get_resource_meta($object)
         $condition_cpt_query->posts
     ) {
 
-        foreach ($condition_cpt_query->posts as $condition) {
+        foreach (uamswp_fad_query_posts($condition_cpt_query) as $condition) {
 
             $data['clinical_resource_conditions'][$condition->ID]['link'] = get_permalink($condition->ID);
             $data['clinical_resource_conditions'][$condition->ID]['title'] = $condition->post_title;
@@ -5468,7 +5468,7 @@ function get_resource_meta($object)
         $treatment_cpt_query->posts
     ) {
 
-        foreach ($treatment_cpt_query->posts as $treatment) {
+        foreach (uamswp_fad_query_posts($treatment_cpt_query) as $treatment) {
 
             $data['clinical_resource_treatments'][$treatment->ID]['link'] = get_permalink($treatment->ID);
             $data['clinical_resource_treatments'][$treatment->ID]['title'] = $treatment->post_title;
@@ -5497,7 +5497,7 @@ function get_resource_meta($object)
         $provider_query->posts
     ) {
 
-        foreach ($provider_query->posts as $provider) {
+        foreach (uamswp_fad_query_posts($provider_query) as $provider) {
 
             $data['clinical_resource_provider'][$provider->ID]['link'] = get_permalink($provider->ID);
             $data['clinical_resource_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
@@ -5526,7 +5526,7 @@ function get_resource_meta($object)
         $location_query->posts
     ) {
 
-        foreach ($location_query->posts as $location) {
+        foreach (uamswp_fad_query_posts($location_query) as $location) {
 
             $data['clinical_resource_location'][$location->ID]['link'] = get_permalink($location->ID);
             $data['clinical_resource_location'][$location->ID]['title'] = $location->post_title;
@@ -5555,7 +5555,7 @@ function get_resource_meta($object)
         $expertise_query->posts
     ) {
 
-        foreach ($expertise_query->posts as $expertise) {
+        foreach (uamswp_fad_query_posts($expertise_query) as $expertise) {
 
             $data['clinical_resource_expertise'][$expertise->ID]['link'] = get_permalink($expertise->ID);
             $data['clinical_resource_expertise'][$expertise->ID]['title'] = $expertise->post_title;

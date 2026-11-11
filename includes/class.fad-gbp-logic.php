@@ -21,11 +21,10 @@ class UAMSWP_FAD_GBP_Logic
      *
      * @param  mixed  $brand_query  The `schema_brandorg_query` value. '1' replaces the default brand.
      * @param  mixed  $brand_org  The `schema_brandorg` value, a `brand_organization` term slug.
-     * @param  array<string, array>  $silos  Silo definitions keyed by silo name, each with a `brand` slug or null.
-     * @param  array<mixed>  $silos
+     * @param  array<string, array<string, mixed>>  $silos  Silo definitions keyed by silo name, each with a `brand` slug or null.
      * @return string|null The silo name, or null when the brand has no silo (default-deny).
      */
-    public static function resolve_silo($brand_query, $brand_org, array $silos): null|int|string
+    public static function resolve_silo($brand_query, $brand_org, array $silos): ?string
     {
 
         if ((string) $brand_query !== '1') {
@@ -34,7 +33,7 @@ class UAMSWP_FAD_GBP_Logic
 
         foreach ($silos as $name => $silo) {
             if (! empty($silo['brand']) && (string) $silo['brand'] === (string) $brand_org) {
-                return $name;
+                return (string) $name;
             }
         }
 

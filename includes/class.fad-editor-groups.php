@@ -410,7 +410,7 @@ function uamswp_fad_editor_groups_from_service_line($post_id): array
     $service_lines = get_field($fields[$post_type], $post_id);
     $groups = [];
     foreach ((array) $service_lines as $service_line) {
-        $service_line_id = is_object($service_line) ? (int) $service_line->term_id : (int) $service_line;
+        $service_line_id = is_object($service_line) ? (int) ($service_line->term_id ?? 0) : (int) $service_line;
         if (! $service_line_id) {
             continue;
         }

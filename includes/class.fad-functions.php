@@ -19,7 +19,7 @@ function asp_custom_link_meta_results($results)
             if ($degrees) {
                 foreach ($degrees as $degree) {
                     $degree_name = get_term($degree, 'degree');
-                    $degree_list .= $degree_name->name;
+                    $degree_list .= ($degree_name->name ?? '');
                     if (count($degrees) > $i) {
                         $degree_list .= ', ';
                     }
@@ -692,7 +692,7 @@ add_filter('relevanssi_tax_term_additional_content', 'rlv_tax_excerpt_term_field
 add_filter('relevanssi_pre_excerpt_content', 'rlv_tax_excerpt_term_fields', 10, 2);
 /**
  * @param  mixed  $content
- * @param  mixed  $term
+ * @param  stdClass  $term
  * @return mixed
  */
 function rlv_tax_excerpt_term_fields($content, $term)
@@ -1011,8 +1011,7 @@ function get_medline_api_data($code, $type)
     }
     $url .= implode('&', $url_parameters);
     // echo $url .'<br/>';
-    $response = wp_remote_get($url);
-    $response = $response['body'];
+    $response = wp_remote_retrieve_body(wp_remote_get($url));
     $response = str_replace('None(', '', $response);
     $response = str_replace('});', '}', $response);
     // var_dump( $response );
@@ -1038,11 +1037,11 @@ function display_medline_api_data($code, $type): void
     if (isset($entry->title)) {
         // echo ('<h2>'. $entry->title->_value .'</h2>');
         // echo '<br>';
-        echo '<p>'.($entry->summary->_value).'</p>';
+        echo '<p>'.($entry->summary->_value ?? '').'</p>';
         echo '<div class="cite">';
         echo '<p><em>Courtesy of <a href="https://medlineplus.gov/">MedlinePlus</a> from the <a href="https://www.nlm.nih.gov/">National Library of Medicine</a>.</em></p>';
         echo '<p><strong>Syndicated Content Details:</strong><br />';
-        echo 'Source URL: <a href="'.esc_url($entry->link->href).'">'.esc_html($entry->link->href).'</a><br />';
+        echo 'Source URL: <a href="'.esc_url($entry->link->href ?? '').'">'.esc_html($entry->link->href ?? '').'</a><br />';
         echo 'Source Agency: <a href="https://www.nlm.nih.gov/">National Library of Medicine</a></p>';
         echo '</div>';
     } else {
@@ -1122,7 +1121,7 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
 
                         // Get term name
 
-                        $provider_specialty_name = $provider_specialty_term->name;
+                        $provider_specialty_name = ($provider_specialty_term->name ?? '');
 
                         // Get occupational title field from term
 
@@ -1204,7 +1203,7 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
                     <select name="provider_region" id="provider_region" class="form-control">
 						<option value="">Any Region</option>
 						<?php $regions = get_terms(['taxonomy' => 'region', 'orderby' => 'name', 'hide_empty' => 0]);
-				    foreach ($regions as $region) { ?>
+				    foreach ((is_wp_error($regions) ? [] : $regions) as $region) { ?>
 							<option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $provider_regions_ids) ? '' : ' disabled'; ?><?php echo ($region->slug === $provider_region) ? ' selected' : ''; ?>><?php echo $region->name; ?></option>
 						<?php } ?>
                     </select>
@@ -1364,7 +1363,7 @@ function provider_ajax_filter_callback(): void
     $search_query = new WP_Query($args);
 
     if ($search_query->have_posts() && $providers !== []) {
-        $provider_ids = $search_query->posts;
+        $provider_ids = uamswp_fad_ids($search_query->posts);
         // echo $_POST['ppp'];
         // $z=0;
         while ($search_query->have_posts()) {
@@ -1439,7 +1438,7 @@ function uamswp_provider_title_ajax_filter_shortcode($atts): string|false
 
                         // Get term name
 
-                        $provider_specialty_name = $provider_specialty_term->name;
+                        $provider_specialty_name = ($provider_specialty_term->name ?? '');
 
                         // Get occupational title field from term
 
@@ -1555,7 +1554,7 @@ function provider_title_ajax_filter_callback(): void
     $search_query = new WP_Query($args);
 
     if ($search_query->have_posts() && $providers !== []) {
-        $provider_ids = $search_query->posts;
+        $provider_ids = uamswp_fad_ids($search_query->posts);
         $title_list = [];
         while ($search_query->have_posts()) {
             $search_query->the_post();
@@ -1616,7 +1615,7 @@ function uamswp_location_ajax_filter_shortcode($atts): string|false
                     <select name="location_region" id="location_region" class="form-control">
 						<option value="">Any Region</option>
 						<?php $regions = get_terms(['taxonomy' => 'region', 'orderby' => 'name', 'hide_empty' => 0]);
-    foreach ($regions as $region) { ?>
+    foreach ((is_wp_error($regions) ? [] : $regions) as $region) { ?>
 							<option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $location_regions_ids) ? '' : ' disabled'; ?><?php echo ($region->slug === $location_region) ? ' selected' : ''; ?>><?php echo $region->name; ?></option>
 						<?php } ?>
                     </select>
@@ -1687,7 +1686,7 @@ function location_ajax_filter_callback(): void
     $region_IDs = array_unique($region_IDs);
     $region_list = [];
     foreach ($region_IDs as $region_ID) {
-        $region_list[] = get_term_by('ID', $region_ID, 'region')->slug;
+        $region_list[] = (get_term_by('ID', $region_ID, 'region')->slug ?? '');
     }
 
     // Build query for titles, based on regions
@@ -1716,7 +1715,7 @@ function location_ajax_filter_callback(): void
     $search_query = new WP_Query($args);
 
     if ($search_query->have_posts() && $locations !== []) {
-        $location_ids = $search_query->posts;
+        $location_ids = uamswp_fad_ids($search_query->posts);
         while ($search_query->have_posts()) {
             $search_query->the_post();
             $id = get_the_ID();
@@ -1849,7 +1848,7 @@ add_action('wp_enqueue_scripts', 'uamswp_fad_disable_scripts', 100);
 function uamswp_attr_conversion($input): string
 {
 
-    $input_attr = $input ?? '';
+    $input_attr = is_array($input) ? '' : (string) ($input ?? '');
 
     if (empty($input_attr)) {
         return '';

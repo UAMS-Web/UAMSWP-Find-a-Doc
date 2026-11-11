@@ -112,7 +112,7 @@ final class UAMSWP_FAD_GBP_Client
             $headers['Content-Type'] = 'application/json';
         }
 
-        [$status, $raw] = ($this->transport)($method, $url, $headers, $body === null ? null : json_encode($body));
+        [$status, $raw] = ($this->transport)($method, $url, $headers, $body === null ? null : (string) json_encode($body));
 
         $data = $raw === '' ? [] : json_decode($raw, true);
         $data = is_array($data) ? $data : [];

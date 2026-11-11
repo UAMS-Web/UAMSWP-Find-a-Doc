@@ -44,7 +44,7 @@ function uamswp_fad_gbp_dashboard_data(?int $now = null): array
     // The history starts empty when this ships, so today's figure is never lower than the counter.
     $days = UAMSWP_FAD_GBP_Logic::last_days(is_array($history) ? $history : [], $now);
     $today = count($days) - 1;
-    $days[$today]['count'] = max($days[$today]['count'], $used);
+    $days[$today] = ['day' => $days[$today]['day'], 'count' => max($days[$today]['count'], $used)];
 
     return [
         'status' => UAMSWP_FAD_GBP_Logic::dashboard_status($modes, (bool) get_transient('uamswp_fad_gbp_lock'), $paused_until, $backoff_until, $now, uamswp_fad_gbp_credentials() !== null),

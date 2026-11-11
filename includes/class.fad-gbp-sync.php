@@ -45,7 +45,7 @@ final class UAMSWP_FAD_GBP_Sync
     private array $by_name = [];
 
     /**
-     * @param  object  $client  Provides patch() and create(), as UAMSWP_FAD_GBP_Client does.
+     * @param  UAMSWP_FAD_GBP_Client  $client  The Business Profile client; a test passes a stand-in with the same methods.
      * @param  array{silos: array<string, array<string, mixed>>, modes: array<string, string>, is_production: bool, creates_paused_until?: int, creates_left?: ?int, now?: int, clock?: callable(): int}  $config  `creates_paused_until`, `creates_left`, `now` and `clock`
      *                                                                                                                                                                                                             describe Google's daily create quota: a pause in force, the creates still allowed today, and the clock.
      *                                                                                                                                                                                                             `now` is the run's start; `clock` dates quota resets and stamps each create (default: the current time).
