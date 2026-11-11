@@ -1,0 +1,50 @@
+---
+description: "Verify every claim three independent ways before a post to a third-party tracker."
+alwaysApply: true
+---
+<!--
+  Synced from UAMS-Web/uams-claude-skills: shared/.claude/rules/verify-claims-before-a-third-party-post.md
+  Edit it there, not here; the next sync overwrites this copy.
+  Delivered to this repository through the profile(s): core.
+-->
+# Rule — verify every claim three independent ways before a post to a third-party tracker
+
+**Before the operator is asked to approve a post to a tracker the organization does not own, check every claim in the draft three times, each by a different method, and record the claims and the checks on the originating ticket.** The post is an issue, a pull request, or a comment on either, on a repository outside the organization: a defect report against a dependency filed under [`filing-defects-across-repos`](filing-defects-across-repos.mdc), an upstream issue or pull request in a patch chain, a feature or documentation request.
+
+## Why this is a standing order
+
+**An upstream post cannot be corrected the way an internal artifact can.** It lands on a public tracker under a maintainer's identity, and the maintainer acts on it: reproducing it, prioritizing it, merging a fix. A wrong version, line number or reproduction output costs their time and the report's credibility, and an edit afterwards does not reach anyone who already read the original.
+
+**The draft is built from the author's own instruments**, the case [`adversarial-review`](adversarial-review.mdc) and [`an-empty-result-is-not-evidence`](an-empty-result-is-not-evidence.mdc) are written against: the probe and the material share an author, so a second pass by the same method reproduces the same blind spot. Hence the independence requirement, not just a count.
+
+## How to apply
+
+1. **Check every claim.** The kinds a draft carries:
+   - versions and revision hashes, named as the tag or commit the reading came from, never the default branch;
+   - file paths and line numbers;
+   - counts (mutants, tests, occurrences);
+   - the described behavior;
+   - the reproduction steps and the output they are said to print;
+   - the proposed fix;
+   - absence claims ("no existing report", "unchanged in the latest release").
+
+2. **Use three independent methods per claim.** A repeat of one method is not a second check. Examples of methods that are independent of each other:
+   - **Execute it.** Run the reproduction exactly as printed, in a clean directory, and compare the output with the draft character for character.
+   - **Read the source at the named revision.** Open the file at the tag or hash the draft names, and confirm the path, the line and the described behavior there.
+   - **Run a control that can give the other answer.** A negative or two-sided control that shows the check would have reported a difference: an absence search shown finding a known report, a reproduction shown passing with the fix applied.
+   - **Ask a different source.** The registry or release feed instead of the checkout, or the tracker's REST listing instead of its search.
+
+3. **Run the checks when the claims are final.** After the fix the draft describes is installed and tested, and after the last edit to the draft, so they run against what is being offered. A draft written earlier is re-verified at that point, not trusted. A change to the draft after the checks puts the touched claims back in scope.
+
+4. **Record the claims and the checks on the originating ticket before the approval is requested.** Each claim, the three methods, and each result, so the approver sees the evidence and not a bare assurance. A claim that failed any check is corrected in the draft, and the corrected claim is checked again.
+
+5. **Request the approval only after that.** Who approves is unchanged: this rule adds the evidence the approval rests on and does not move the approval.
+
+## What this does not cover
+
+- **Posts to repositories the organization owns.** Those are corrected in place, and [`adversarial-review`](adversarial-review.mdc) and [`pre-merge-check`](pre-merge-check.mdc) govern them.
+- **When the checks fall in a chain.** The lifecycle of a vendor patch, and the point at which these checks run in its tickets, belongs to the `upstream-patch-lifecycle` skill where a repository carries it. This rule owns the requirement and the skill owns only the timing.
+
+## The DRY line
+
+This file is the standing statement of **what is verified before a third-party post, and how**. Where to file a defect and how to claim it is [`filing-defects-across-repos`](filing-defects-across-repos.mdc); the skeptical pass over a change or a published claim is [`adversarial-review`](adversarial-review.mdc); the zero-needs-a-control requirement is [`an-empty-result-is-not-evidence`](an-empty-result-is-not-evidence.mdc).

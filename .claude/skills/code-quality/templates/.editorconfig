@@ -1,0 +1,26 @@
+# Editor settings that agree with Pint's `laravel` preset and the `eol=lf`
+# line in `.gitattributes`, so an editor never reformats a file the gate
+# then reformats back. Front-end indentation rules (HTML, Vue, SCSS) are not
+# here; a repository with front-end code adds its own sections below.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{php,json}]
+indent_style = space
+indent_size = 4
+
+# Two trailing spaces end a line in Markdown, so trimming would change it.
+[*.md]
+trim_trailing_whitespace = false
+indent_size = 2
+
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2

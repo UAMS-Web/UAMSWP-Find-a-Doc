@@ -5,6 +5,11 @@
  *
  */
 
+// Editor placeholder for a newly inserted, still-empty block (ACF Blocks V3).
+if ( function_exists( 'uams_fad_block_placeholder' ) && uams_fad_block_placeholder( $block ?? null, $is_preview ?? false ) ) {
+    return;
+}
+
 // Create id attribute allowing for custom "anchor" value.
 $id = '';
 if ( empty( $id ) && isset($block) ) {

@@ -1,0 +1,43 @@
+{
+    "labels": {
+        "name": "Google Business Profile Categories for Locations",
+        "singular_name": "Google Business Profile Category for Locations",
+        "menu_name": "Google Business Profile Categories",
+        "all_items": "All Categories",
+        "parent_item": "Parent Category",
+        "parent_item_colon": "Parent Category:",
+        "new_item_name": "New Category",
+        "add_new_item": "Add New Category",
+        "edit_item": "Edit Category",
+        "update_item": "Update Category",
+        "view_item": "View Category",
+        "separate_items_with_commas": "Separate Categories with commas",
+        "add_or_remove_items": "Add or remove Categories",
+        "choose_from_most_used": "Choose from the most used",
+        "popular_items": "Popular Categories",
+        "search_items": "Search Categories",
+        "not_found": "Not Found",
+        "no_terms": "No Categories",
+        "items_list": "Categories list",
+        "items_list_navigation": "Categories list navigation"
+    },
+    "public": true,
+    "hierarchical": true,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": true,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "gmb_cat_location",
+        "with_front": false,
+        "hierarchical": false
+    }
+}

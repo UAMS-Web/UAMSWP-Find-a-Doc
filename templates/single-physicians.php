@@ -375,13 +375,13 @@ if ( $expertises ) {
 		while( have_rows('remove_ontology_criteria', 'option') ): the_row();
 			$remove_region = get_sub_field('remove_regions', 'option');
 			$remove_service_line = get_sub_field('remove_service_lines', 'option');
-			if ( (!empty($remove_region) && (is_array($provider_region) && in_array(implode('',$provider_region), $remove_region))) && empty($remove_service_line) ) {
+			if ( (!empty($remove_region) && uamswp_provider_region_in_rule($provider_region, $remove_region)) && empty($remove_service_line) ) {
 				$hide_medical_ontology = true;
 				break;
 			} elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
 				$hide_medical_ontology = true;
 				break;
-			} elseif( (!empty($remove_region) && (is_array($provider_region) && in_array(implode('',$provider_region), $remove_region))) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
+			} elseif( (!empty($remove_region) && uamswp_provider_region_in_rule($provider_region, $remove_region)) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
 				$hide_medical_ontology = true;
 				break;
 			}
@@ -731,7 +731,7 @@ while ( have_posts() ) : the_post();
         }
 
         // Check if Research section should be displayed
-        if ( !empty($research_bio) || !empty($esearch_interests) || !empty ( $publications ) || $pubmed_author_id || $research_profiles_link ) {
+        if ( !empty($research_bio) || !empty($research_interests) || !empty ( $publications ) || $pubmed_author_id || $research_profiles_link ) {
             $show_research_section = true;
             $jump_link_count++;
         } else {
@@ -861,14 +861,8 @@ while ( have_posts() ) : the_post();
                                                     $location_floor_label = $location_floor['choices'][ $location_floor_value ] ?? '';
                                                 }
                                             $location_suite = get_field('location_suite', $location_source_ids['unit'] );
-                                            $location_address_2 =
-                                                ( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
-                                                . ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
-                                                . ( $location_suite ? $location_suite : '' );
-                                            $location_address_2_schema =
-                                                ( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
-                                                . ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
-                                                . ( $location_suite ? $location_suite : '' );
+                                            $location_address_2 = uamswp_location_address_2( ( $location_building && $building_slug != '_none' ), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ', true );
+                                            $location_address_2_schema = uamswp_location_address_2( ( $location_building && $building_slug != '_none' ), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ' );
 
                                             $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street'] );
                                             if (!$location_address_2) {

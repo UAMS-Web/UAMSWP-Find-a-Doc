@@ -1,0 +1,47 @@
+{
+    "label": "Clinical Administrative Titles",
+    "labels": {
+        "name": "Clinical Administrative Titles",
+        "singular_name": "Clinical Administrative Title",
+        "search_items": "Search Titles",
+        "all_items": "All Titles",
+        "edit_item": "Edit Title",
+        "update_item": "Update Title",
+        "add_new_item": "Add New Title",
+        "new_item_name": "New Title",
+        "menu_name": "Titles, Clinical Administrative",
+        "view_item": "View Title",
+        "popular_items": "Popular Title",
+        "separate_items_with_commas": "Separate Titles with commas",
+        "add_or_remove_items": "Add or remove Titles",
+        "choose_from_most_used": "Choose from the most used Titles",
+        "not_found": "No Titles found",
+        "parent_item": "Parent Title",
+        "parent_item_colon": "Parent Title:",
+        "no_terms": "No Clinical Administrative Titles",
+        "items_list": "Clinical Administrative Titles list",
+        "items_list_navigation": "Clinical Administrative Titles list navigation"
+    },
+    "public": true,
+    "hierarchical": true,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_in_rest": true,
+    "rest_base": "clinical_admin_title",
+    "rest_controller_class": "WP_REST_Terms_Controller",
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "clinical_admin_title",
+        "with_front": true,
+        "hierarchical": true
+    }
+}

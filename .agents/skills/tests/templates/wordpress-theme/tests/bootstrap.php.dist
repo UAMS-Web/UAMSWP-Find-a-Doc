@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * Unit bootstrap for a theme.
+ *
+ * The plugin template's tests/bootstrap.php with one difference: it loads
+ * functions.php, which a theme cannot avoid, instead of an includes/ directory
+ * of definitions only. The Integration suite does not come through here; it has
+ * its own Composer setup and bootstrap under tests/Integration.
+ */
+
+declare(strict_types=1);
+
+use function Brain\Monkey\Functions\when;
+use function Brain\Monkey\setUp;
+use function Brain\Monkey\tearDown;
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+require_once __DIR__.'/../vendor/antecedent/patchwork/Patchwork.php';
+
+if (! defined('ABSPATH')) {
+    define('ABSPATH', sys_get_temp_dir().'/example-theme-tests-no-wordpress/');
+}
+
+/*
+ * functions.php registers hooks and calls WordPress at file scope, so it is
+ * loaded inside one Brain Monkey session with what it calls at load time
+ * stubbed. The functions it defines outlive the session; the hooks it
+ * registered are discarded by tearDown(), so every test starts clean, and hook
+ * registration is asserted in the Integration suite.
+ *
+ * Add a stub here for each WordPress function the theme's functions.php calls
+ * at file scope (wp_get_theme(), get_stylesheet_directory_uri(), ...).
+ */
+setUp();
+
+when('get_template_directory')->justReturn(dirname(__DIR__));
+when('get_stylesheet_directory')->justReturn(dirname(__DIR__));
+
+require_once __DIR__.'/../functions.php';
+
+tearDown();
+
+// cspell:ignore ABSPATH stylesheet
