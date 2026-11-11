@@ -1014,7 +1014,7 @@ class UAMSWP_FAD_GBP_Logic
      * @param  array<int, mixed>  $row  A row from uamswp_fad_gmb_location_table().
      * @param  array<string, string>  $category_ids  Category display name => resource name.
      * @param  ?string  $silo  The location's own silo, or null when its brand has none.
-     * @return ?array{store_code: string, kind: string, silo: ?string, excluded: bool, fields: array<string, mixed>, unresolved: array<int, string>, attributes: array<string, bool>}
+     * @return ?array{store_code: string, kind: string, silo: ?string, excluded: bool, fields: array<string, mixed>, unresolved: array<int, string>, attributes: array<string, bool>, photos: array<int, array{category: string, url: string}>}
      */
     public static function location_item(array $row, array $category_ids, ?string $silo): ?array
     {

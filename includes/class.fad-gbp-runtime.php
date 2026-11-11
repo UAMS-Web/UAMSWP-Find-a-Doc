@@ -626,7 +626,7 @@ function uamswp_fad_gbp_location_info(string $slug): array
  * The sync items for one provider: one per published location the export would list them at.
  *
  * @param  array<string, string>  $categories
- * @return array<int, array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>, excluded: bool}>
+ * @return array<int, array{store_code: string, kind: string, photos: array<int, array{category: string, url: string}>, post_id: int, location_id: int, silo: ?string, excluded: bool, fields: array<string, mixed>, unresolved: array<int, string>}>
  */
 function uamswp_fad_gbp_items_for_provider(int $provider_id, array $categories): array
 {
