@@ -470,7 +470,7 @@ add_filter('facetwp_index_row', function ($params, $class) {
         if ($params['facet_name'] == 'resource_provider') {
             if (! empty($params['facet_value'])) {
                 $post = get_post((int) $params['facet_value']);
-                $post_id = $post->ID;
+                $post_id = $post->ID ?? 0;
                 $lastname = get_field('physician_last_name', $post_id);
                 $firstname = get_field('physician_first_name', $post_id);
                 $middlename = get_field('physician_middle_name', $post_id);
@@ -480,7 +480,7 @@ add_filter('facetwp_index_row', function ($params, $class) {
         } elseif (in_array($params['facet_name'], ['resource_locations', 'resource_aoe', 'resource_conditions', 'resource_treatments'])) {
             if (! empty($params['facet_value'])) {
                 $post = get_post((int) $params['facet_value']);
-                $params['facet_value'] = $post->post_name;
+                $params['facet_value'] = $post->post_name ?? '';
             }
         }
     }

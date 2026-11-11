@@ -3044,6 +3044,10 @@ function add_theme_caps(): void
     // gets the author role
     $role = get_role('administrator');
 
+    if (! $role) {
+        return;
+    }
+
     // This only works, because it accesses the class instance.
     // would allow the author to edit others' posts for current theme only
     $role->add_cap('edit_others_posts');
@@ -5417,6 +5421,8 @@ function get_resource_meta($object)
     if (
         $clinical_resources
         &&
+        $clinical_resource_query instanceof WP_Query
+        &&
         $clinical_resource_query->posts
     ) {
 
@@ -5435,6 +5441,8 @@ function get_resource_meta($object)
 
     if (
         $conditions_cpt
+        &&
+        $condition_cpt_query instanceof WP_Query
         &&
         $condition_cpt_query->posts
     ) {
@@ -5465,6 +5473,8 @@ function get_resource_meta($object)
     if (
         $treatments_cpt
         &&
+        $treatment_cpt_query instanceof WP_Query
+        &&
         $treatment_cpt_query->posts
     ) {
 
@@ -5493,6 +5503,8 @@ function get_resource_meta($object)
 
     if (
         $providers
+        &&
+        $provider_query instanceof WP_Query
         &&
         $provider_query->posts
     ) {
@@ -5523,6 +5535,8 @@ function get_resource_meta($object)
     if (
         $locations
         &&
+        $location_query instanceof WP_Query
+        &&
         $location_query->posts
     ) {
 
@@ -5551,6 +5565,8 @@ function get_resource_meta($object)
 
     if (
         $expertises
+        &&
+        $expertise_query instanceof WP_Query
         &&
         $expertise_query->posts
     ) {
