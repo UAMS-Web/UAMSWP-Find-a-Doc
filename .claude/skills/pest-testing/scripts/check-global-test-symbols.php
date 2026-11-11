@@ -129,7 +129,7 @@ function nextMeaningful(array $tokens, int $index): ?int
  *
  * @param  array{0: int, 1: string, 2: int}|string  $token
  */
-function tokenText(array|string $token): string
+function tokenText($token): string
 {
     return is_array($token) ? $token[1] : $token;
 }

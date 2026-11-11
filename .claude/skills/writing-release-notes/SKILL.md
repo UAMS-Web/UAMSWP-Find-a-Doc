@@ -114,6 +114,22 @@ generator below), and the generator emits each only when its option is passed.
 - **Use the Oxford comma**: `redirects, nav visibility, and a render guard`, not
   `redirects, nav visibility and a render guard`.
 
+## Running the generator and its tests: `py3`
+
+The commands below start with `py3`, a one-line shell function, because the interpreter's name
+differs by platform. On macOS and Linux it is `python3`. On Windows `python3` is usually the
+Microsoft Store alias (a zero-byte `python3.exe` in the `WindowsApps` folder) that
+does not run scripts, and the python.org installer creates no `python3.exe` at all; the `py -3`
+launcher (or `python`) is the interpreter there. Define it once per shell (Git Bash, bash or zsh):
+
+```bash
+py3() { if python3 -c '' >/dev/null 2>&1; then python3 "$@"; else py -3 "$@"; fi; }
+```
+
+A function rather than a variable, so it behaves the same under zsh, which does not split an
+unquoted `$PY` into a command and its argument. In PowerShell, call `py -3` directly in place of
+`py3`.
+
 ## Routing (which bucket): labels, paths and the diff, never a title prefix
 
 **A Conventional-Commit prefix is not consulted at all.** It cannot be: this skill and
@@ -190,7 +206,7 @@ both the keyword list and the path rule say *not security*. It had to be moved b
 `v0.18.0` was cut, and there was no supported way to say so.
 
 ```
-python3 .claude/skills/writing-release-notes/gen_release_notes.py v0.17.0 v0.18.0 \
+py3 .claude/skills/writing-release-notes/gen_release_notes.py v0.17.0 v0.18.0 \
     --repo UAMS-Web/<repo> \
     --lead "One-sentence milestone theme." \
     --security-item 1080
@@ -212,7 +228,7 @@ Oxford comma, `[#N]` PR links, and backticked-short-SHA links for direct commits
 on `git`, `gh`, and Python 3: no other setup.
 
 ```
-python3 .claude/skills/writing-release-notes/gen_release_notes.py <prev-tag> <new-tag> \
+py3 .claude/skills/writing-release-notes/gen_release_notes.py <prev-tag> <new-tag> \
     --repo UAMS-Web/<repo> \
     --lead "One-sentence milestone theme." \
     --breaking "<impact and required action>." \
@@ -256,7 +272,7 @@ hand is expected. Create or edit the release with it (below).
 **After touching the generator, run its tests**, from the repository root:
 
 ```bash
-python3 .claude/skills/writing-release-notes/gen_release_notes.test.py
+py3 .claude/skills/writing-release-notes/gen_release_notes.test.py
 ```
 
 They are offline: the script runs over an empty range, and the routing, casing, rendering and

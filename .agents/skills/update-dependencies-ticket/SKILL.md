@@ -1,35 +1,42 @@
 ---
 name: update-dependencies-ticket
 description: >-
-  Re-confirms the `cweagans/composer-patches` stack on every Dependabot pull request that
-  changes `composer.lock`: check out its branch in a slot, confirm every patch the repository
-  carries still applies and is still needed (whether or not its own package moved, directly or
-  transitively), retire a patch whose bug upstream
-  has fixed (in the order the `upstream-patch-lifecycle` skill sets), re-roll one that no longer
-  applies but is still needed, validate with the repository's own gate, and record the outcome
-  on the pull request. Dependabot does the dependency updates themselves; there is no periodic
-  sweep and no update-dependencies ticket. Activate when a Dependabot pull request touches
-  `composer.lock` in a repository that has `patches/`, `extra.patches` or `patches.json`, or when
-  asked whether a Dependabot bump affects a patch.
+  Two checks on every Dependabot pull request that changes `composer.lock` or
+  `package-lock.json`. First, where the repository carries `cweagans/composer-patches`: check
+  its branch out in a slot, confirm every patch still applies and is still needed (whether or not
+  its own package moved, directly or transitively), retire a patch whose bug upstream has fixed
+  (in the order the `upstream-patch-lifecycle` skill sets), re-roll one that no longer applies but
+  is still needed, validate with the repository's own gate, and record the outcome on the pull
+  request. Second, in any repository: read the changelog of each package the bump moves, list the
+  changes on APIs the repository calls, name the test that pins each or file an issue for adding
+  one, and record that table on the pull request. Dependabot does the dependency updates
+  themselves; there is no periodic sweep and no update-dependencies ticket. Activate when a
+  Dependabot pull request touches a lock file, or when asked whether a Dependabot bump affects a
+  patch or what the repository's tests pin about it.
 ---
 <!--
   Synced from UAMS-Web/uams-claude-skills: shared/.claude/skills/update-dependencies-ticket/SKILL.md
   Edit it there, not here; the next sync overwrites this copy.
   Delivered to this repository through the profile(s): php.
 -->
-<!-- cspell:ignore Dependabot dependabot gitsubmodule -->
+<!-- cspell:ignore Dependabot dependabot gitsubmodule slurpfile -->
 
-# Re-confirm composer patches on a Dependabot bump
+# Check a Dependabot bump: patches and pinned behavior
 
 **Dependabot handles dependency updates across the organization.** It opens the pull requests
 that move Composer (and npm) packages, so there is no periodic dependency sweep and no recurring
-update-dependencies ticket to file or work. This skill has one job: **when a Dependabot pull
-request changes `composer.lock`, re-confirm every composer patch the repository carries still
-applies and is still needed, and retire any whose bug upstream fixed.** Not only the patches on
+update-dependencies ticket to file or work. This skill has two jobs. The first, in a repository
+that carries composer patches: **when a Dependabot pull request changes `composer.lock`,
+re-confirm every composer patch the repository carries still applies and is still needed, and
+retire any whose bug upstream fixed.** Not only the patches on
 packages the pull request names: a patched package can move transitively, without its name in
 the title, and a patch can stop applying or stop mattering when something it touches moves. So
 the check covers every patched package, direct or not, and rides on each pull request that
 changes the lock rather than waiting for a patched package itself to be the one bumped.
+
+The second job, in every repository with or without patches, is
+[mapping the bump's changelog to the tests that pin the behavior it touches](#the-second-check-pin-what-the-bump-changes):
+a green bump says nothing about behavior no test pins.
 
 The lifecycle of a patch, its registration forms, and the removal procedure are the
 [`upstream-patch-lifecycle`](../upstream-patch-lifecycle/SKILL.md) skill. This skill is where a
@@ -132,13 +139,61 @@ patched package should not have to infer whether anybody looked.
 Then **release the slot** per the [`worktrees`](../rule-worktrees/SKILL.md) rule and refresh it, so
 its `vendor/` returns to `main`'s lock files.
 
+## The second check: pin what the bump changes
+
+Applies to every Dependabot pull request that changes `composer.lock` or `package-lock.json`, in a
+repository with or without patches. It reads files and runs `grep`, so it needs no slot. A green
+chain proves the tests that exist still pass; it says nothing about behavior no test pins, and a
+bump is the moment that behavior can change underneath the repository.
+
+1. **List what moved, transitive packages included.** Read the lock, not the title; a grouped pull
+   request moves many packages (28 on `UAMS-Web/aether-incomplete-entries#24`, whose title names
+   four). From a tree holding the branch (needs `jq`):
+
+   ```bash
+   git fetch origin
+   git show origin/main:composer.lock | jq -r --slurpfile new composer.lock '
+     def pk: [.packages[], .["packages-dev"][]] | map({(.name): .version}) | add;
+     pk as $o | ($new[0] | pk) as $n
+     | $n | to_entries[] | select($o[.key] != .value)
+     | "\(.key)  \($o[.key] // "new") -> \(.value)"'
+   ```
+
+   Compared with the same file on both sides, the command prints nothing; that is its control.
+   For `package-lock.json` the same shape applies to `.packages` keyed by path.
+2. **Read the changelog of each moved package that the repository calls**, for every release
+   between the two versions, not only the newest. Name the tag read ([`filing-defects-across-repos`](../rule-filing-defects-across-repos/SKILL.md)
+   step 8: a version string is not a revision). A package used only by the gate (static analysis,
+   formatter, refactoring) is exercised by the gate jobs themselves: say so in one line and stop.
+3. **List the changes on APIs the repository calls.** For each changelog entry, `git grep` the
+   repository's source for the class, method or option it names. An entry with no call site is
+   not listed; say how many were read and that none touched a call site.
+4. **Name the pinning test for each listed change.** Pinned means a test that fails if the
+   behavior breaks, not one that mentions the class: coverage of a file is not coverage of the
+   behavior. Cite the test file and name, and say what it covers and what it does not;
+   a partial pin is recorded as partial.
+5. **File an issue for every change that is unpinned or partly pinned**, in the repository that
+   owns the tests ([`closing-a-ticket`](../rule-closing-a-ticket/SKILL.md) step 5, written per
+   [`writing-issues`](../writing-issues/SKILL.md)), and link it from the table. The issue does not
+   hold the bump unless the change is one the repository cannot ship unpinned.
+6. **Record the table on the pull request**, in a `## Behavior this bump touches` section per
+   [`writing-pull-requests`](../writing-pull-requests/SKILL.md), written to a file and passed with
+   `--body-file` or `-F body=@…`:
+
+   | Change (link, tag read) | Call site | Pinned by | Not pinned |
+   | --- | --- | --- | --- |
+
+   A bump where no changelog entry touches a call site says that, with the number of entries
+   read, instead of an empty table.
+
 ## The Dependabot configuration
 
 `templates/dependabot.yml` is the version-update configuration this skill assumes: `composer` and `github-actions` on a weekly schedule against `main`, with minor and patch updates grouped per ecosystem so a week produces a few pull requests, and a major update left in a pull request of its own. The `github-actions` entry lists both `/` and `/.github/actions/setup`, so the composite action the `code-quality` skill's `templates/ci.yml` uses is kept current as well. Copy it once to `.github/dependabot.yml`, and drop the `npm` entry in a repository with no `package.json`. A repository that holds a package at a deliberate version adds an `ignore` list to the entry that reads it, following the commented example in the template, and records the decision beside each entry; `UAMS-Web/aether-wordpress-migration-api` does this for `wp-phpunit/wp-phpunit` (only a major held) and for the ACF fallback (held whole), and lists each pin in both of its composer entries. An ignored dependency also leaves its group. The sync never writes `.github/`, so an existing file is never overwritten.
 
 ## The DRY line
 
-This file owns one check: re-confirming the composer patch stack on a Dependabot bump. The patch
+This file owns two checks on a Dependabot bump: re-confirming the composer patch stack, and
+mapping the changelog to the tests that pin the behavior it touches. The patch
 lifecycle, its registration forms and the removal order →
 [`upstream-patch-lifecycle`](../upstream-patch-lifecycle/SKILL.md); worktree lifecycle →
 [`worktrees`](../rule-worktrees/SKILL.md); REST-vs-GraphQL →

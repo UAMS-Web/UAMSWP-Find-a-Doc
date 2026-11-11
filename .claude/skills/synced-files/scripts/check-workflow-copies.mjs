@@ -22,9 +22,10 @@
 //     is skipped as well.
 //
 // EXIT CODES
-//     0  every copy that exists matches its template
+//     0  every copy that exists matches its template (also when no copy exists at all, so a
+//        repository that has adopted none of the workflows passes)
 //     1  a copy differs, or a required copy is missing; the file and first line are named
-//     2  the check could not run: a usage error, or no copy and no template was found at all
+//     2  the check could not run: a usage error, or no template is delivered here at all
 //
 // USAGE
 //     node .claude/skills/synced-files/scripts/check-workflow-copies.mjs [--root <dir>] [--require <file>]...
@@ -43,8 +44,10 @@ export const WORKFLOWS = [
     ['assign-author.yml', 'writing-pull-requests'],
     ['check-attribution-footer.yml', 'writing-pull-requests'],
     ['check-closing-keyword-across-lines.yml', 'writing-pull-requests'],
+    ['pr-body-checks.yml', 'writing-pull-requests'],
     ['clear-handed-back.yml', 'handed-back-label'],
 ]
+
 
 const asLf = (text) => text.replace(/\r\n/g, '\n')
 const LINE_BREAK = String.fromCharCode(10)
@@ -61,11 +64,11 @@ export function templatePath(file, skill, skillsDir = SKILLS_DIR) {
 export function compareCopy({ root, file, skill, skillsDir = SKILLS_DIR, required = false }) {
     const template = templatePath(file, skill, skillsDir)
     const copy = join(root, '.github', 'workflows', file)
-    if (!existsSync(template)) return { status: 'skip', line: `${file}: the template ${template} is not delivered here, skipped.` }
+    if (!existsSync(template)) return { status: 'skip', reason: 'no-template', line: `${file}: the template ${template} is not delivered here, skipped.` }
     if (!existsSync(copy)) {
         return required
             ? { status: 1, line: `${copy} is missing. Copy the template to it: ${template}` }
-            : { status: 'skip', line: `${file}: no copy at .github/workflows/${file}, skipped.` }
+            : { status: 'skip', reason: 'no-copy', line: `${file}: no copy at .github/workflows/${file}, skipped.` }
     }
 
     let want
@@ -97,8 +100,10 @@ export function checkCopies({ root, required = [], skillsDir = SKILLS_DIR, workf
     if (unknown.length > 0) return { status: 2, lines: [`unknown workflow in --require: ${unknown.join(', ')}. Known: ${known.join(', ')}.`] }
 
     const results = workflows.map(([file, skill]) => compareCopy({ root, file, skill, skillsDir, required: required.includes(file) }))
-    if (results.every((result) => result.status === 'skip')) {
-        return { status: 2, lines: ['workflow copy check cannot run: no template was found and no copy exists.', ...results.map((result) => result.line)] }
+    // Every template missing means the check has nothing to compare against, so it cannot run. A
+    // template present with no copy is a repository that has adopted none of the workflows: clean.
+    if (results.every((result) => result.reason === 'no-template')) {
+        return { status: 2, lines: ['workflow copy check cannot run: no template is delivered here.', ...results.map((result) => result.line)] }
     }
     return { status: results.some((result) => result.status === 1) ? 1 : 0, lines: results.map((result) => result.line) }
 }

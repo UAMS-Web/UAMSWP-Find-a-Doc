@@ -6,7 +6,10 @@ description: >-
   GitHub chain that tracks it. Covers the two registration forms (`extra.patches` in
   `composer.json` for an application; a root-only `patches.json` for a package another repository
   installs, so dev patches never leak into the consumer), the mirrored-patch case where the chain
-  lives in another repository, the `afk` mode of each ticket and the cross-repo REST recipe for
+  lives in another repository, the shared patch package that replaces copies once two
+  repositories carry the same patch (layout, versioning, `require` in an application and
+  `require-dev` plus a root `patches.json` in a package, migration, `patches.lock.json`,
+  retirement), the `afk` mode of each ticket and the cross-repo REST recipe for
   making an *upstream* issue a blocker on our removal ticket, the removal procedure in its
   load-bearing dependency order (the patch comes out BEFORE the package moves, or
   `composer install` fails for everyone), when `patches.lock.json` alone is enough and when
@@ -55,7 +58,8 @@ is needed to use it). Which one a repository uses is not a style choice:
 - **An application, or a plugin nobody installs as a Composer dependency, registers in
   `extra.patches`.** Everything is in one manifest, and `composer validate` guards the lock.
 - **A package that another repository installs registers in a root-only `patches.json`, never in
-  `extra.patches`.** Composer copies the whole `extra` block verbatim into a consumer's
+  `extra.patches`** (the one exception is a shared patch package, whose `extra.patches` is its
+  purpose: see *Shared patches* below). Composer copies the whole `extra` block verbatim into a consumer's
   `composer.lock`, and the plugin's `Dependencies` resolver reads `extra.patches` out of that lock
   data for **every** package in `packages`, so an inline declaration would leak the package's
   *dev* patches into its consumer and apply them against the consumer's vendor tree. Reading a
@@ -176,6 +180,176 @@ nobody is tracking. So the standing rule: **when the originating repository reti
 check the mirror in the same week.** A mirror that was re-targeted to a different version of the
 package (a hunk rewritten for the pinned release) cannot be checked with a byte compare; check
 its removal criterion instead.
+
+### Shared patches: one package per patched upstream package
+
+Once a second repository needs the same patch, the copies stop being mirrors and become drift.
+On 2026-11-05 thirteen repositories carried seven `pest-plugin-mutate` patches, and two of the
+seven existed in three and four different versions (`UAMS-Web/uams-claude-skills#548`). The
+remedy decided there is **one shared package per patched upstream package**, for example
+`uams-web/patches-pest-plugin-mutate`, which every consumer requires in place of its own copies.
+A patch is then changed once and released once, and it retires everywhere in one release.
+
+**A patch only one repository needs stays in that repository's own registration.** The package
+holds what two or more consumers share. Creating the package repository, tagging and releasing
+it, and registering it on Packagist are the operator's acts.
+
+#### The package
+
+```text
+patches-pest-plugin-mutate/
+  composer.json
+  patches/<basename>.patch      the patch files, unchanged in form
+  README.md                     per-patch narrative: problem, fix, tracking ticket, retirement condition
+```
+
+```json
+{
+    "name": "uams-web/patches-pest-plugin-mutate",
+    "description": "Patches UAMS-Web repositories apply to pestphp/pest-plugin-mutate",
+    "type": "library",
+    "require": {
+        "pestphp/pest-plugin-mutate": "5.0.2"
+    },
+    "extra": {
+        "patches": {
+            "pestphp/pest-plugin-mutate": {
+                "<what it fixes> (temporary; see <ticket>)": "vendor/uams-web/patches-pest-plugin-mutate/patches/<basename>.patch"
+            }
+        }
+    }
+}
+```
+
+One detail in that file is chosen and two are measured. The measurements are in
+`UAMS-Web/uams-claude-skills#548`'s Findings: `cweagans/composer-patches` 2.0.0, PHP 8.4.27 and
+Composer 2.11.1, on Windows 11 and on macOS 27.3, against path repositories carrying one patch.
+Packagist resolution, several patches or several patch packages in one consumer, and an
+application whose plugin sits in `require-dev` are not yet measured.
+
+- **The upstream requirement is an exact version (chosen).** The patches are written against one
+  release, so the pin is meant to make a version mismatch fail at resolution, by Composer's own
+  rules, rather than at patch time. A mismatch was not part of the measurement.
+- **The patch path is relative to the consumer's root**, not to the package: the plugin resolves
+  a dependency's path against the root project, so it must start
+  `vendor/uams-web/patches-<package>/`. A consumer with a non-default `vendor-dir` is not covered
+  by that path.
+- **Patches are declared in `extra.patches`, not a `patches.json`.** The plugin reads a
+  dependency's `extra.patches` from the consumer's `composer.lock`, and reading a dependency's
+  patches file is unimplemented. This is the leak *Where a patch is registered* warns about, used
+  deliberately: here the dependency's patches are the point.
+
+**The listed order is the order the plugin collects the patches in** (2.0.0, source read; an
+install of several patches is not measured). Where a later patch touches lines an earlier one
+edits, it is cut against the earlier one's output, so a patch is never reordered without re-cutting
+the ones after it. Verify a set by applying it in that order to the pinned upstream tag with
+`git apply`, and show that applying one a second time fails.
+
+#### Versioning
+
+The package carries its own semantic version, and each release pins exactly one upstream version:
+
+| Change | Release |
+| --- | --- |
+| A patch's content changes, same upstream pin | patch (`1.0.1`) |
+| A patch is added or retired, or the pin moves within the upstream major | minor (`1.1.0`) |
+| The pin moves to a new upstream major | major (`2.0.0`) |
+
+A consumer requires the package with a caret range (`^1.0`) and updates it with
+`composer update uams-web/patches-<package> --with-dependencies`, so the upstream package can move
+with it. A targeted update without `--with-dependencies` holds the upstream package at its locked
+version, and Composer then stays on the newest package release pinned to that version without
+saying so. Where the consumer's other constraints hold the upstream package back, the same
+selection keeps it on an older package release.
+
+#### How a consumer requires it: the repository's shape decides, as for its own patches
+
+The same split as *Where a patch is registered*, for the same reason (decided on
+`UAMS-Web/uams-claude-skills#548`, option B, and measured there):
+
+- **An application requires the package in `require`.** The plugin applies the package's own
+  `extra.patches`, and only from `packages` in `composer.lock`: in `require-dev` the package is
+  installed and silently not applied.
+- **A package that another repository installs requires it in `require-dev`, and lists the
+  package's patch files in its own root `patches.json` by the same `vendor/` path.** Its root
+  `patches.json` applies when it is the root project; downstream, neither the patch package nor
+  the patches are installed, so a dev tool's patches never reach the application's production
+  install. The package's own declaration is skipped in that consumer, because it sits in
+  `packages-dev`, so nothing applies twice.
+
+The cost of the package form is a list kept in step: when a release adds or retires a patch, a
+package consumer edits its `patches.json` entries in the change that adopts the release, keeping
+the package's order and description keys. The patch files themselves stay in one place.
+
+#### Moving a consumer to the package
+
+1. **Take out the copies the package now ships**: their entries in `extra.patches` or
+   `patches.json`, and their files under `patches/`. A patch only this repository carries stays.
+2. **Require the package with plugins off**, so the first resolution cannot run before the files
+   exist: `composer require --no-plugins uams-web/patches-pest-plugin-mutate:^1.0` in an
+   application, with `--dev` added in a package.
+3. **In a package, add the package's patches to the root `patches.json`**, by
+   `vendor/uams-web/patches-<package>/patches/<basename>.patch`, in the package's order, with its
+   description keys.
+4. **`composer patches-relock`, then `composer patches-repatch`**, and `composer update --lock`
+   where `composer.json` changed (*The relock* below).
+5. **Place a patch this repository keeps on the same upstream package, and prove it applies
+   there.** In a package, list it after the shared entries in `patches.json`, and it applies after
+   them: prove it with `git apply` of the set in order, then this one, on the pinned upstream tag,
+   and re-cut it against the set if it does not apply. In an application, the plugin collects the
+   root `extra.patches` before a dependency's (resolver order in 2.0.0, source read), so a kept
+   patch applies *before* the shared set: cut it against the bare pinned tag, and prove the set
+   still applies after it, or move it into the package. Neither order is measured in a real
+   install (`UAMS-Web/uams-claude-skills#548`, Findings).
+6. **Confirm each patch applied** (its description appears in the `composer install` output) and
+   run the gate that proves the patched tool works (*Proving it worked*). Commit `composer.json`,
+   `composer.lock`, `patches.json` where it changed, and `patches.lock.json` together.
+
+Step 2's `composer require --no-plugins` is not itself measured: the measurement bootstrapped with
+an unscoped `composer update --no-plugins` in a throwaway project. Where `require` misbehaves, that
+is the fallback, scoped to the package (`composer update uams-web/patches-<package> --no-plugins`).
+
+#### `patches.lock.json` in a consumer
+
+The consumer's `patches.lock.json` records each shared patch with its resolved `url` and its
+`sha256`, and a `provenance` of `dependency:<upstream package>` in an application or
+`patches-file:patches.json` in a package. It **must be committed**: the first resolution runs
+before the package is installed, so with no committed `patches.lock.json` a plain
+`composer update` aborts with `The "vendor/..." file could not be downloaded`, which is why the
+migration steps above require with plugins off and then relock and repatch. Once both lock files
+are committed, a `composer install` from a deleted `vendor/` patches cleanly, with a warm or a cold
+patch cache.
+
+**A committed `patches.lock.json` is read, never re-resolved**, so adopting a new package release
+is not an ordinary dependency update. In 2.0.0 (source read) the plugin loads the patch list from
+the lock whenever the lock exists (`loadLockedPatches()` in `src/Plugin/Patches.php`), never checks
+it for freshness, and fetches each patch against its locked `sha256`. After a release that changes
+a patch, a machine with the old patch cached applies the old text and one without it fails on a
+hash mismatch; after a release that retires a patch, the lock still names it against the moved
+upstream package. So each adoption repeats the bootstrap: in a package, edit `patches.json` to
+match the release first; then
+`composer update uams-web/patches-<package> --with-dependencies --no-plugins`,
+`composer patches-relock`, `composer patches-repatch`, and a `composer install` from a deleted
+`vendor/` to show it applies cold. **A Dependabot pull request for the package needs those steps
+on its branch before it merges.** The end-to-end behavior is not yet measured.
+
+#### Retirement
+
+A patch retires from the package, not from each consumer. When an upstream release carries a fix,
+the package releases without that patch and with its pin moved to that upstream version, in one
+release, so inside the package the patch comes out in the same step the upstream package moves.
+**In each consumer the order of *Removing a patch* below still applies**: the retired entry
+leaves `patches.json` (in a package) and `patches.lock.json` is relocked in the same change that
+moves the package and the upstream package, by the adoption steps under *`patches.lock.json` in a
+consumer*. When the last patch retires, each consumer removes the package in one change, requiring
+the upstream package directly only if it did before (`pest-plugin-mutate` arrives through
+`pestphp/pest`). Where no other patch remains, the consumer also removes `patches.json`,
+`patches.lock.json` and `cweagans/composer-patches`, as *Removing a patch* says. The package
+repository is then archived.
+
+**The four-ticket chain lives once, where the package does.** Consumers carry no removal ticket of
+their own for a patch the package ships; a consumer's open item is adopting the release that
+retires it.
 
 ---
 
