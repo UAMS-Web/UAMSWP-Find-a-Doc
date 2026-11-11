@@ -223,7 +223,7 @@ if (! function_exists('partition')) {
     function partition($list, $p): array
     {
         $listlen = count($list);
-        $partlen = floor($listlen / $p);
+        $partlen = (int) floor($listlen / $p);
         $partrem = $listlen % $p;
         $partition = [];
         $mark = 0;
@@ -1105,4 +1105,30 @@ if (! function_exists('uamswp_indefinite_article')) {
 
     }
 
+}
+
+/**
+ * The IDs of a list returned by `get_posts()` or `get_terms()` with `fields` set to an ID field.
+ *
+ * Those functions are typed as returning objects or IDs whichever `fields` says, so a caller that
+ * only wants integers passes the result through here instead of casting each item.
+ *
+ * @param  array<int|string|WP_Post|WP_Term>  $items  The posts, terms or IDs to read.
+ * @return list<int>
+ */
+function uamswp_fad_ids(array $items): array
+{
+    $ids = [];
+
+    foreach ($items as $item) {
+        if ($item instanceof WP_Post) {
+            $ids[] = $item->ID;
+        } elseif ($item instanceof WP_Term) {
+            $ids[] = $item->term_id;
+        } else {
+            $ids[] = (int) $item;
+        }
+    }
+
+    return $ids;
 }

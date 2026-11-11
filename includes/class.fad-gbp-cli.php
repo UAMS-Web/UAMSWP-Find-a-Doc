@@ -18,7 +18,7 @@ declare(strict_types=1);
  * @param  bool  $dry_run  Run every silo that is not off as a dry run.
  * @param  callable(string): void  $out  Receives each line of output.
  * @param  UAMSWP_FAD_GBP_Client|null  $client  For tests; built from the credentials when null.
- * @param  (callable(int, array<string, string>): array<int, array<string, mixed>>)|null  $items_for  For tests; the items for one post.
+ * @param  (callable(int, array<string, string>): array<int, GbpSyncItem>)|null  $items_for  For tests; the items for one post.
  * @return int The exit status: 0, or 1 when anything ended in error or review, or the run could not finish.
  */
 function uamswp_fad_gbp_manual_sync(array $post_ids, ?string $silo, bool $dry_run, callable $out, ?UAMSWP_FAD_GBP_Client $client = null, ?callable $items_for = null): int
@@ -177,7 +177,7 @@ function uamswp_fad_gbp_post_cids(int $post_id): array
  *
  * @param  array<int, int>  $post_ids  Provider and location posts.
  * @param  callable(string): void  $out
- * @param  (callable(int, array<string, string>): array<int, array<string, mixed>>)|null  $items_for  For tests.
+ * @param  (callable(int, array<string, string>): array<int, GbpSyncItem>)|null  $items_for  For tests.
  * @return int 0, or 1 when the listings could not be read.
  */
 function uamswp_fad_gbp_backfill_ids(array $post_ids, bool $apply, callable $out, ?UAMSWP_FAD_GBP_Client $client = null, ?callable $items_for = null): int

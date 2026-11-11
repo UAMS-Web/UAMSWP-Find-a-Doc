@@ -237,9 +237,9 @@ function uamswp_fad_user_editor_groups($user_id)
         ]
     );
     if (is_array($terms)) {
-        foreach ($terms as $term_id) {
+        foreach (uamswp_fad_ids($terms) as $term_id) {
             if (in_array($user_id, uamswp_fad_editor_group_members($term_id), true)) {
-                $groups[] = intval($term_id);
+                $groups[] = $term_id;
             }
         }
     }
@@ -347,7 +347,7 @@ function uamswp_fad_editor_group_admin_list_scope($query): void
 
     // Core set author = current user because the role lacks edit_others; widen it to the groups.
     $query->set('author', '');
-    $query->set('uamswp_editor_group_tt_ids', array_map(intval(...), $tt_ids));
+    $query->set('uamswp_editor_group_tt_ids', uamswp_fad_ids($tt_ids));
     $query->set('uamswp_editor_group_user', $user_id);
 }
 
@@ -531,7 +531,7 @@ function uamswp_fad_sync_editor_groups(): void
                 'fields' => 'ids',
             ]
         );
-        foreach ($ids as $post_id) {
+        foreach (uamswp_fad_ids($ids) as $post_id) {
             if (uamswp_fad_inherit_editor_group($post_id)) {
                 $synced++;
             }

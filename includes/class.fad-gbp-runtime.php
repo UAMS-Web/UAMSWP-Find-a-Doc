@@ -157,7 +157,7 @@ function uamswp_fad_gbp_all_post_ids(): array
     $ids = [];
 
     foreach (['provider', 'location'] as $post_type) {
-        $ids = array_merge($ids, array_map(intval(...), get_posts(['post_type' => $post_type, 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids'])));
+        $ids = array_merge($ids, uamswp_fad_ids(get_posts(['post_type' => $post_type, 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids'])));
     }
 
     return $ids;
@@ -265,13 +265,13 @@ function uamswp_fad_gbp_queue_all(?callable $lookup = null): int
  */
 function uamswp_fad_gbp_child_location_ids(int $location_id): array
 {
-    return array_map(intval(...), get_posts([
+    return uamswp_fad_ids(get_posts([
         'post_type' => 'location',
         'post_status' => 'publish',
         'posts_per_page' => -1,
         'fields' => 'ids',
         'meta_key' => 'location_parent_id',
-        'meta_value' => $location_id,
+        'meta_value' => (string) $location_id,
     ]));
 }
 
@@ -290,7 +290,7 @@ function uamswp_fad_gbp_provider_ids_for_locations(array $location_ids): array
         $clauses[] = ['key' => 'physician_locations', 'value' => '"'.$location_id.'"', 'compare' => 'LIKE'];
     }
 
-    return array_map(intval(...), get_posts([
+    return uamswp_fad_ids(get_posts([
         'post_type' => 'provider',
         'post_status' => 'publish',
         'posts_per_page' => -1,
@@ -490,8 +490,8 @@ function uamswp_fad_gbp_name_held_elsewhere(int $post_id, string $name): bool
  *
  * Done after the fingerprint is taken, so storing an ID does not make the next run look changed.
  *
- * @param  array<int, array<string, mixed>>  $items
- * @return array<int, array<string, mixed>>
+ * @param  array<int, GbpSyncItem>  $items
+ * @return array<int, GbpSyncItem>
  */
 function uamswp_fad_gbp_attach_stored_ids(array $items): array
 {
@@ -607,13 +607,13 @@ function uamswp_fad_gbp_mark_orphans(int $post_id, array $items, ?int $now = nul
  */
 function uamswp_fad_gbp_location_info(string $slug): array
 {
-    $ids = get_posts(['name' => $slug, 'post_type' => 'location', 'post_status' => 'publish', 'posts_per_page' => 1, 'fields' => 'ids']);
+    $ids = uamswp_fad_ids(get_posts(['name' => $slug, 'post_type' => 'location', 'post_status' => 'publish', 'posts_per_page' => 1, 'fields' => 'ids']));
 
     if ($ids === []) {
         return ['silo' => null, 'providers_excluded' => false, 'id' => 0];
     }
 
-    $location_id = intval($ids[0]);
+    $location_id = $ids[0];
 
     return [
         'id' => $location_id,
@@ -626,7 +626,7 @@ function uamswp_fad_gbp_location_info(string $slug): array
  * The sync items for one provider: one per published location the export would list them at.
  *
  * @param  array<string, string>  $categories
- * @return array<int, array{store_code: string, kind: string, photos: array<int, array{category: string, url: string}>, post_id: int, location_id: int, silo: ?string, excluded: bool, fields: array<string, mixed>, unresolved: array<int, string>}>
+ * @return array<int, GbpSyncItem>
  */
 function uamswp_fad_gbp_items_for_provider(int $provider_id, array $categories): array
 {
@@ -664,7 +664,7 @@ function uamswp_fad_gbp_items_for_provider(int $provider_id, array $categories):
  * The sync item for one location, or none when it is excluded or has no store code.
  *
  * @param  array<string, string>  $categories
- * @return array<int, array<string, mixed>>
+ * @return array<int, GbpSyncItem>
  */
 function uamswp_fad_gbp_items_for_location(int $location_id, array $categories): array
 {
@@ -687,7 +687,7 @@ function uamswp_fad_gbp_items_for_location(int $location_id, array $categories):
  * The sync items for a provider or a location post.
  *
  * @param  array<string, string>  $categories
- * @return array<int, array<string, mixed>>
+ * @return array<int, GbpSyncItem>
  */
 function uamswp_fad_gbp_items_for_post(int $post_id, array $categories): array
 {

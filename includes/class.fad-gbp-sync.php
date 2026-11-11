@@ -131,7 +131,7 @@ final class UAMSWP_FAD_GBP_Sync
     /**
      * Decide and, where the silo is live, carry out one action per item.
      *
-     * @param  array<int, array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>, excluded?: bool, stored_name?: string}>  $items
+     * @param  array<int, GbpSyncItem>  $items
      * @return array<int, array<string, mixed>> The log entries, in item order.
      */
     public function run(array $items): array
@@ -148,7 +148,7 @@ final class UAMSWP_FAD_GBP_Sync
     }
 
     /**
-     * @param  array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>, excluded?: bool, stored_name?: string}  $item
+     * @param  GbpSyncItem  $item
      * @return array<string, mixed>
      */
     private function handle(array $item): array

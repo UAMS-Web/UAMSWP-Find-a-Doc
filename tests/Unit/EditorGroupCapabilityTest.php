@@ -23,6 +23,7 @@ final class EditorGroupCapabilityTest extends UnitTestCase
         Functions\when('add_action')->justReturn(true);
         Functions\when('add_filter')->justReturn(true);
         require_once dirname(__DIR__, 2).'/includes/class.fad-editor-groups.php';
+        require_once dirname(__DIR__, 2).'/includes/class.fad-helper-functions.php';
     }
 
     /**
