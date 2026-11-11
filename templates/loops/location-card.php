@@ -86,14 +86,8 @@
             $location_floor_label = $location_floor['choices'][ $location_floor_value ] ?? '';
         }
     $location_suite = get_field('location_suite', $location_source_ids['unit'] );
-    $location_address_2 =
-        ( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
-        . ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
-        . ( $location_suite ? $location_suite : '' );
-    $location_address_2_schema =
-        ( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
-        . ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
-        . ( $location_suite ? $location_suite : '' );
+    $location_address_2 = uamswp_location_address_2( ( $location_building && $building_slug != '_none' ), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ', true );
+    $location_address_2_schema = uamswp_location_address_2( ( $location_building && $building_slug != '_none' ), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ' );
 
     $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street'] );
     if (!$location_address_2) {
@@ -120,7 +114,7 @@
         <h3 class="card-title h5">
             <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" data-categorytitle="Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $location_title; ?></a></span>
             <?php if ( $parent_location && !$child_location_list ) { ?>
-                <span class="subtitle"><span class="sr-only">(</span>Part of <?php echo $parent_title_prepend; ?><a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
+                <span class="subtitle"><span class="sr-only">(</span>Part of <?php echo $parent_title_prepend; ?><a href="<?php echo esc_url($parent_url); ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif ?>
             <?php  if ( isset($l) && 1 == $l ) { ?>
                 <span class="subtitle"><span class="sr-only">, </span>Primary Location</span>

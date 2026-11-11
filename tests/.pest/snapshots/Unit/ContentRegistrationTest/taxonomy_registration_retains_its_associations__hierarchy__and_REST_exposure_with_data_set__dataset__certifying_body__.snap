@@ -1,0 +1,39 @@
+{
+    "label": "Certifying Bodies",
+    "labels": {
+        "name": "Certifying Bodies",
+        "singular_name": "Certifying Body",
+        "search_items": "Search Certifying Bodies",
+        "all_items": "All Certifying Bodies",
+        "edit_item": "Edit Certifying Body",
+        "update_item": "Update Certifying Body",
+        "add_new_item": "Add New Certifying Body",
+        "new_item_name": "New Certifying Body",
+        "menu_name": "Certification \u2014 Certifying Bodies",
+        "view_item": "View Certifying Body",
+        "popular_items": "Popular Certifying Bodies",
+        "separate_items_with_commas": "Separate Certifying Bodies With Commas",
+        "add_or_remove_items": "Add or Remove Certifying Bodies",
+        "choose_from_most_used": "Choose From the Most Used Certifying Bodies",
+        "not_found": "No Certifying Bodies Found"
+    },
+    "public": true,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "certifying_body",
+        "with_front": false,
+        "hierarchical": false
+    }
+}

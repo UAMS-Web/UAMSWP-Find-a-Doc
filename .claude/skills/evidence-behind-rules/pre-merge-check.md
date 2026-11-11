@@ -1,0 +1,225 @@
+<!--
+  Synced from UAMS-Web/uams-claude-skills: shared/.claude/skills/evidence-behind-rules/pre-merge-check.md
+  Edit it there, not here; the next sync overwrites this copy.
+  Delivered to this repository through the profile(s): core.
+-->
+<!-- cspell:ignore Disjointness oneline -->
+# `pre-merge-check`: the full text and its evidence
+
+This is the full text of the [`pre-merge-check`](../../rules/pre-merge-check.md) rule ("re-verify at the merge, not only at the build") as it stood before it was condensed in UAMS-Web/uams-claude-skills#356. It keeps the measurements, incidents and worked examples the condensed rule cites. The rule is the instruction: where the two differ, the rule governs.
+
+**A green chain is not a merge decision, and a pull request is not ready because it was ready.** The gate answers one question: **did the jobs pass on what was run?** Merging asks a different one: **should this land on `main`, in the state it will actually land in?** Those come apart, and nothing in a green run says so. Before merging any pull request (including one built in this session and watched go green) work the check below and say what it found. "The chain passed when this was opened" is evidence about a commit, a base, and a tree that may all have moved since. Running the gate is one step of the check, not the whole of it.
+
+## Why this is a standing order
+
+**Because a required pull request, where a repository has one, is not a merge gate.** Read what `main` actually enforces (`gh api repos/{o}/{r}/rulesets`, and `branches/main/protection`) rather than assume it, and **state the enforcement, never the flag**: `protected: true` invites the conclusion that something gates the merge, and `branches/main/protection` answering `404` invites the conclusion that nothing is enforced, while rulesets can make either reading wrong. A skipped check is not a passing check, and where remote CI is switched off, `skipped` is the normal appearance, which is precisely what makes it useless as a signal: it looks identical whether the branch is perfect or broken.
+
+So the enforcement mechanism is **this corpus, observed voluntarily**. That is an argument for writing the procedure down precisely, not for trusting it less. **The gate being re-run and read at the merge is the only gate there is**, unless the repository requires its checks, as the next section describes. And **the fixes a pre-merge check produces have themselves had no review**, so a pull request that changed after its check gets another one.
+
+## Making CI a merge gate: required status checks
+
+A required pull request is not a merge gate, but a required status check is one. Where a repository's CI genuinely runs on every pull request (a public repository, whose Actions minutes are not billed, is the usual case), requiring its checks turns "the gate is voluntary" into a gate the platform enforces. This section is the procedure. The check above still applies at every merge: a required check proves the jobs passed, not that the pull request should land.
+
+**Require one aggregate check, not the individual jobs.** GitHub's documentation (*Troubleshooting required status checks*, and *About protected branches*, read 2026-10-19) says a required check is satisfied by a `successful`, `skipped` or `neutral` conclusion, and that a job skipped by an `if:` condition reports success. So a ruleset that requires each job by name is satisfied by a job that never ran: in a workflow whose jobs carry an `if:` on a repository or organization variable, switching CI off makes every such check pass without anything running, and the gate opens rather than sticking. The opposite case is the one that sticks: a workflow that never starts (a path or branch filter, or `[skip ci]` in the commit message) leaves its required checks `Pending`, and the pull request cannot merge. Both statements are GitHub's documentation, not a measurement taken here.
+
+The shared CI template closes the first case with a final job named `CI` that `needs:` every other job, runs `if: always()`, and fails unless every needed job succeeded. A needed job that was `skipped` or `cancelled` counts as a failure, so the aggregate reports success only when everything ran and passed. A ruleset requires `CI` and nothing per job. How the template's remote-CI switch affects the `CI` check itself (pending, skipped or successful) is not yet measured; that measurement belongs to the template change that adds the aggregate job, and until it is recorded this procedure makes no claim about it.
+
+**1. Read what `main` enforces now.** The first call returns the effective rules from every ruleset that reaches the branch, whichever level defines them; the second lists the repository's own rulesets and the organization rulesets that apply to it:
+
+```bash
+gh api repos/{o}/{r}/rules/branches/main --jq '[.[].type]'
+gh api repos/{o}/{r}/rulesets --jq '.[] | [.id, .name, .source_type, .enforcement] | @tsv'
+```
+
+An empty list from the first means no ruleset reaches `main` at all, not that the read failed: check that a repository known to have rules returns them before reading an empty list as an answer.
+
+**2. Require three names, the same in every repository, and confirm each from a green run.** The required contexts are `CI`, `Attribution footer` and `Closing keywords`. `CI` is the aggregate job described above; the other two are the pull-request-body checks, each in its own workflow. The required context is the name a check run reports: the job's `name:` where it has one, its job id where it does not. Read the names off a commit whose workflows have run green, never off the workflow files, and confirm all three are there:
+
+```bash
+gh api repos/{o}/{r}/commits/<sha>/check-runs --jq '.check_runs[].name'
+```
+
+- **Each of the three names is reported by exactly one job in the repository.** A ruleset cannot tell two checks with one name apart. Two workflows that each call their job `check` are the common case, which is why the body checks are named `Attribution footer` and `Closing keywords`. A generic name also risks colliding with a job of the same name in another repository that shares the ruleset.
+- **The aggregate's `needs:` list is what tracks the other jobs, and the ruleset does not move.** A job added to the workflow is added to the `needs:` list of `CI` in the same change; a job renamed or removed is renamed or removed there. The ruleset keeps its three names through all of it. A job left out of `needs:` is the one way this drifts, and it fails silently: the job still runs and still shows on the pull request, but nothing required depends on it. The list is one place in one file, so a check that every other job id appears in it needs no token able to read rules: the `code-quality` skill's `check-aggregate-needs.mjs`, which the `aggregate-needs` job of its `ci.yml` template runs on every pull request. Say so in the workflow's header comment, where the next person to add a job will read it.
+- **Every job still reports and shows on the pull request.** Only the required list is short. A failing job turns `CI` red, so the pull request is blocked by the aggregate while the failing job's own check names what failed.
+
+**3. Add the checks in a ruleset that reaches this repository alone.** Which kind depends on step 1:
+
+- **No ruleset reaches `main`.** Create a repository ruleset that requires a pull request as well as the checks, so the repository gains both at once. Repository administration is enough:
+
+  ```bash
+  gh api -X POST repos/{o}/{r}/rulesets --input ruleset.json
+  ```
+
+  with a `ruleset.json` of this shape, carrying the three contexts from step 2:
+
+  ```json
+  {
+    "name": "main: pull request and checks required",
+    "target": "branch",
+    "enforcement": "active",
+    "conditions": { "ref_name": { "include": ["~DEFAULT_BRANCH"], "exclude": [] } },
+    "rules": [
+      { "type": "deletion" },
+      { "type": "non_fast_forward" },
+      { "type": "pull_request", "parameters": {
+          "required_approving_review_count": 0, "dismiss_stale_reviews_on_push": false,
+          "require_code_owner_review": false, "require_last_push_approval": false,
+          "required_review_thread_resolution": false } },
+      { "type": "required_status_checks", "parameters": {
+          "strict_required_status_checks_policy": false,
+          "required_status_checks": [
+            { "context": "CI" },
+            { "context": "Attribution footer" },
+            { "context": "Closing keywords" } ] } }
+    ]
+  }
+  ```
+
+- **The repository is already inside shared organization rulesets.** Do not add the checks to a shared ruleset. Where an organization ruleset targets repositories by id (`conditions.repository_id.repository_ids`), or by a name pattern or property that several repositories match, a required check added to it is required in every repository it reaches, and blocks every merge in a repository that has no job of that name. Put the checks in a ruleset that reaches this repository alone, carrying only the `required_status_checks` rule, and leave the shared rulesets unchanged. Rulesets layer, so the new one adds its rule to what the shared ones already enforce. Either a repository ruleset (the call above) or an organization ruleset whose `conditions.repository_id.repository_ids` holds this repository's numeric id alone does it; the organization form keeps every ruleset for the organization in one place, and needs the scope below.
+
+**Reading or writing an organization ruleset needs the `admin:org` scope**, which an ordinary token lacks. Without it, `GET orgs/{org}/rulesets/{id}` answers `404` with a message naming the scope, which reads like a missing ruleset. Adding the scope is interactive, so the operator runs it:
+
+```bash
+gh auth refresh -h github.com -s admin:org
+```
+
+**4. Verify, and read the answer from the rules rather than from the call.** `gh api repos/{o}/{r}/rules/branches/main --jq '[.[].type]'` must now list `required_status_checks` beside whatever step 1 found, and a pull request whose checks are green must read `mergeable_state` `clean`. The step that shows the gate actually gates is the negative one: a pull request with a required check red or missing reads `blocked`. Until that has been seen, the ruleset is known to exist, not known to enforce.
+
+## The check
+
+Work these in order. The early steps are cheap and can invalidate the expensive ones, so do not start at the gate.
+
+1. **State.** `mergeable_state` clean, **not a draft**, and the head is the commit you think it is.
+
+   **Draft is the author's switch.** Read `draft` from the API. The author flips a pull request from draft to ready, and announcing "ready" anywhere else is not that act: a message on a channel saying a branch is ready leaves `draft: true` on the artifact, and a draft is not a merge candidate, however green it is, so a pull request can be announced ready, be genuinely finished, and still sit indefinitely because nothing that reads the artifact can tell. `gh pr ready <n>` performs the flip; read `draft` back afterwards, because [`github-api-budget`](../../rules/github-api-budget.md) records (measured in `wordpress-importer`) that `PATCH .../pulls/{n}` accepts `draft=false`, returns `200`, and ignores it.
+
+   **Read the head SHA; never derive it.** The merge call needs the full forty characters, and every surface you see before merging (the CI summary, `git log --oneline`, the runner's own `Commit:` line) prints the abbreviated form. Padding the short one out reads as formatting rather than invention, which is exactly why it does not feel like fabricating a value at the moment it happens:
+
+   ```bash
+   gh api repos/{o}/{r}/pulls/{n} --jq '.head.sha'
+   git rev-parse HEAD
+   ```
+
+   **Those two agreeing is what discharges this step**, rather than being an extra chore on top of it: "the head is the commit you think it is" is precisely the claim that comparison settles. When they disagree, the branch moved or the local ref is stale; either way, stop.
+
+   **A `409` is not the guard that catches this.** It fired in `uamswp-migration-api` on 2026-09-05 merging #101, against a SHA padded from `5ae8e1c05` to a full-length string that named no commit, refused with `409  Head branch was modified. Review and try the merge again.` That is the same refusal a genuinely moved branch produces, and its text names that other cause, so the natural response is to re-fetch and retry, possibly with the same invented SHA. What actually prevented a wrong merge was that a fabricated hash is overwhelmingly unlikely to name a real commit. That is luck with a good success rate, not a safeguard.
+
+2. **Base freshness.** `git rev-list --count origin/<branch>..origin/main`. Non-zero means the green run was against a base that no longer exists: bring the branch up to `origin/main` per [`sync-pr-branch`](../../rules/sync-pr-branch.md) and re-run before merging. A branch behind an interacting merge is validated against code that will not exist after it lands. **When it is zero, say so; do not assume it.**
+
+3. **Trial-merge for real, and do not read the `mergeable` flag instead.** GitHub computes that field lazily and answers `null` while it is thinking, which is indistinguishable from "cannot merge" to any check that branches on truthiness. Measured on two open pull requests in `uams-statamic` read seconds apart:
+
+   ```
+   #2343   state=open   mergeable=true   mergeable_state=clean
+   #2238   state=open   mergeable=null   mergeable_state=unknown
+   ```
+
+   Both were open and neither was conflicted. The second had simply not been computed yet, and a reader who took `null` for a verdict would have drawn the opposite conclusion from the truth. Perform the merge locally, confirm it applies, and validate **the merged state** rather than the branch tip.
+
+   **Interactions with other open pull requests are part of this step.** Compare changed-file sets. Where they overlap, prove the combined state merges: a real trial merge you then abort, not `mergeable: true`, which speaks to one pair at a time. Two independently-green branches can merge to a state nothing has ever validated. Disjointness is assessed against the inputs the jobs read, not only the files the diff touches: [`sync-pr-branch`](../../rules/sync-pr-branch.md) enumerates them.
+
+4. **Run the repository's gate on the state that will land.** Step 2 brought the branch current, so the head commit is that state unless `main` moved again in between; check before the run. **Read the summary rather than the exit code** (a pipe replaces `$?` with the last command's status) and **name the commit the runner printed.**
+
+5. **Check the acceptance criteria against the diff, one at a time.** Not against the pull-request body's claims about the diff, and item by item against the issue. A criterion that will not be met is named and explained rather than left silently unchecked, per [`closing-a-ticket`](../../rules/closing-a-ticket.md); an item that cannot be verified here is reported as **deferred, never ticked**. A criterion that is already true without any work in the diff is a criterion to rewrite, not to tick.
+
+6. **Ask the forge what this merge will actually close, and do not stop at the field that answers.** A squash merge closes issues from **two** surfaces: the pull-request body, and the commit message GitHub composes when `commit_message` is omitted. Read the pull request's `closingIssuesReferences` and compare it against the set the author intends:
+
+   ```bash
+   gh api graphql -f query='{repository(owner:"<owner>",name:"<repo>"){
+     pullRequest(number:N){closingIssuesReferences(first:10){nodes{number state title}}}}}'
+   ```
+
+   **Run it against the PULL REQUEST, not the diff and not the branch commits.** A body is not in the diff, and on a squash-only repository the body is the message that reaches `main`. A `Fixes #N` written into a branch commit weeks ago is invisible in the body a reviewer reads, and the close is attributed to the merge rather than to the commit that caused it, so enumerate both surfaces. What the composed message is built from is a repository setting, and which route actually fires is open; [`github-api-budget`](../../rules/github-api-budget.md) carries the command, the pattern, the control that proves the pattern can match, and the parsing details that defeat checking by eye.
+
+   **That field is necessary and NOT sufficient, which is the part this step exists for.** Two code paths decide what closes, and they disagree by construction: the pull-request linkage parses the **body as Markdown**, while the push-time scan reads the **squash commit message as plain text**. Every Markdown construct exists only in the first. Measured on this estate:
+
+   | specimen | form | the field said | what merging did |
+   | --- | --- | --- | --- |
+   | `uams-statamic-archive#2446` | cross-line, unfenced | *(empty)* | closed a ticket its body declined to close |
+   | `uams-statamic-archive#2482` | same-line, **inside a fence** | one ticket, correct | closed a **second**, unlisted ticket |
+   | `wordpress-importer-archive#1036` | **inside a code span** | (none) | closed its target one second after the merge, same commit |
+
+   **So neither a code span nor a fenced block disarms a keyword, and both read as though they do.** `#2482` is the sharper specimen precisely because its field was *populated and accurate*: an empty field invites a second look, a correct-looking one closes the question. Its chain was green on all thirteen jobs.
+
+   **Rewording is the only remedy measured to hold.** Break the adjacency: put the number first (`#999999 is not closed by this pull request`), or write the status cell as something other than a bare keyword: then re-read the field *and* re-scan the joined plain text, which is what the push-time scan sees rather than the rendered Markdown. Neither instrument alone covers both paths.
+
+   **The cross-line shape has a script, so it need not be checked by eye.** `.claude/skills/writing-pull-requests/scripts/check-closing-keyword-across-lines.mjs` runs the enumeration from [`github-api-budget`](../../rules/github-api-budget.md) over the body read through the API (or over the branch commits with `--range`), prints both lines of each pair, and runs that rule's same-line control first, exiting 2 when it stops matching. The `check-closing-keyword-across-lines` workflow template in the same skill runs it on every pull request. It reports directives and judges none of them: whether an intended close is correct stays this step's.
+
+7. **Plumbing in the body, because the merge makes it permanent.** The composition in step 6 has a second consequence that has nothing to do with closing anything: the body's wording becomes a commit message, and `main` is not rewritten. So a body corrected after the merge fixes the page a reader visits and leaves the original text in history forever. Sweep it per [`coordination-plumbing-stays-out-of-artifacts`](../../rules/coordination-plumbing-stays-out-of-artifacts.md), which owns the sweep, its two-sided control, and the worked example of a correction that did not reach the message. **Publishing is the first chance to catch this, not the last one.**
+
+8. **Account for companion work.** Content, importer, API and sibling-repository changes land in their own repositories, and a pull request that is green alone can still be half of a change. Confirm the companion exists, say what order the two land in and which side breaks if the order is ignored, and say explicitly when there is no companion rather than leaving it unmentioned.
+
+9. **Read the open issues that name this pull request, and hold the merge when one places a condition on it.** A ticket can ask for something to happen before a pull request it does not own merges: a manual run, a decision, a behavior the suite cannot exercise. The reference then runs from the issue to the pull request, and nothing in the pull request points back, so every step above passes on a pull request whose condition is unmet. Find the issues from two directions, both REST:
+
+   ```bash
+   gh api search/issues'?q=repo:{o}/{r}+is:issue+is:open+%23<n>&per_page=100' --jq '.total_count, (.items | length), (.items[] | [.number, .title] | @tsv)'
+   gh api repos/{o}/{r}/issues/<n>/timeline'?per_page=100' --jq '.[] | select(.event == "cross-referenced" and .source.issue.state == "open" and (.source.issue.pull_request | not)) | [.source.issue.repository.full_name, .source.issue.number] | @tsv'
+   ```
+
+   Read each hit. **A hit holds the merge when its body or criteria say something must happen before this pull request merges.** A `hitl` label on an issue that names the pull request is a reason to read it for a condition, not a condition by itself. A hit that only mentions the pull request is noted in the verdict and does not hold it, and neither does the pull request's own ticket (the issue it closes).
+
+   **When one holds, do not merge.** Record in the verdict the issue (`<owner>/<repo>#<number>`), the condition in a clause, and that the merge is left for the condition's owner. The pull request is not defective, so it stays as it is: no `handed-back` label, no draft flip. Run this step again on the next pass; the condition is met when its issue closes or says so.
+
+   **The step lowers the odds of a miss and never clears one.** `search/issues` answers from an index, so a reference made minutes ago can be absent, and it matches a number written without `#` only by chance; it also returns one page, so compare the number of items read with `total_count` (the first command prints both) and walk `&page=N` when they differ. The timeline reaches an issue in another repository that names this pull request, which the search does not. Show a search finding something before reading its empty result: [`github-api-budget`](../../rules/github-api-budget.md) records both limits, and [`an-empty-result-is-not-evidence`](../../rules/an-empty-result-is-not-evidence.md) is the general requirement.
+
+   **Worked example.** `UAMS-Web/uams-claude-skills#84` moved `@google-analytics/data` across three major versions and merged green on 2026-10-14. `UAMS-Web/uams-claude-skills#86` was open and asked for a manual run with a real service-account key "before merging #84", because the plugin's tests never construct the API client. A search for `#84` returns #86, whose criteria place a condition on the merge, so this step holds #84 with the verdict "held: UAMS-Web/uams-claude-skills#86 asks for a run with a real service-account key before this merges; left for its owner".
+
+10. **Adversarially review what is actually merging**, see below.
+
+11. **Say what you found, on the pull request.** The answer is "ready" or "not yet, here is what turned up", never a bare yes. That finding is itself a published claim gating a decision, so [`adversarial-review`](../../rules/adversarial-review.md)'s trigger covers it: most sharply where it reports something checked and clean. **Comment it on the pull request before any merge decision, green or red.** A verdict that exists only in a terminal or a chat window is not a record: the pull request is where the next reader looks, and scrollback is not an artifact.
+
+## A finding in the description alone
+
+When the only finding is in the pull request's description and the gate holds the evidence for the correction (its own measurement, as on `uams-statamic-archive#3078`, where the description stated a count the gate re-measured), the gate **rewrites that passage, says in the verdict what it changed and why, and merges**. Holding the pull request for a sentence the gate can fix costs the author a day and holds up the queue, and the correction is the gate's to make because the evidence is the gate's own. The verdict names the passage before and after, the measurement behind the new text, and the command that produced it, so the author can disagree after the fact.
+
+**A description finding that needs the author's knowledge is still handed back.** That covers intent, a design choice, a claim about work done elsewhere, and anything the gate could only guess at. If the correct text is not something the gate measured or read, the pull request goes back with the finding, exactly as for a failing job.
+
+**A description edit is a body write on shared mutable state**, so the edit follows [`filing-defects-across-repos`](../../rules/filing-defects-across-repos.md): read the body immediately before writing, change only the passage named in the verdict, and read it back afterwards.
+
+**A description edit by a person clears `handed-back`, and that is not always right.** The workflow cannot tell which part of the pull request a finding was about, so a description edit on a pull request handed back for its code clears the label too. The gate's re-check then finds the head unchanged since the hand-back, hands it back again, and does **not** re-run the jobs: an unchanged head reproduces the same red, as the first step below says, and re-running it only reports old work as new.
+
+## What a red verdict does next
+
+On a red (a failing chain, or a finding a review caught on a green one) the gate does the following and **does not flip the pull request to draft**:
+
+1. **Comment the verdict on the pull request** (step 11), naming the failing job and the output. The comment carries the finding.
+2. **Record the validated head SHA** in that comment, so a later reader can tell whether the tip has moved since.
+3. **Dequeue it, and hold: do not re-pick an unmoved head.** Re-running an unchanged tip reproduces the same red and reports it as new work.
+
+4. **Apply the `handed-back` label** in the same turn as the comment. The comment carries the finding; the label carries the fact that one is outstanding. Both writes are REST (`POST` adds to the labels already there), so an exhausted GraphQL quota cannot strand a pull request in the wrong state: the argument that decided against the draft flip, pointing the other way.
+
+**Why a label and not a draft flip.** `ready -> draft` is the author's own signal (it says the author pulled the work back) so a gate emitting it impersonates the author it is reporting to, in the one field a reader uses to tell "the gate found something" from "the author withdrew this". And the flag is GraphQL-only: `PATCH .../pulls/{n}` ignores `draft` (step 1), so the flip would spend the quota [`github-api-budget`](../../rules/github-api-budget.md) exists to protect, on a signal that is already wrong on the first ground. The flip did one thing incidentally (it removed the branch from the merge queue) and the label does that deliberately. **The pull request stays ready.** The author owns that flag; the gate reports on the artifact and does not mutate state it does not own.
+
+**`handed-back` comes off when the pull request RE-ENTERS the queue (a push to the head) or a person edits its description, not when the author says it is ready, and a workflow does the removal, not the gate.** The workflow runs on `pull_request` `synchronize` and on `edited` for a body change by a person, and removes the label when it is present. The gate removed it by hand before that, and a hand removal is the step that gets missed: a pull request keeps the label after its author has pushed and drops out of the queue count while waiting to be gated. That asymmetry is the whole reason the label is better than the flag it replaces: a draft flip cleared when the author flipped back to ready, and flipping to ready *is* how a re-gate is requested, so the old marker went away before the finding was necessarily addressed. It never marked *a finding is outstanding*; it marked *the author has not responded yet*. The label clears on the state change that actually happened.
+
+**It marks a state rather than an event**, which is what makes an adoption pass retroactive: label anything currently handed back, not only hand-backs from that point on. **Check each is genuinely still outstanding before applying it**: the retroactive pass is the one place this marker can lie, and a false "a finding is outstanding" is the same class of defect as the false green everything else here is written against.
+
+**Queue depth is then `open AND not labelled`**: one query, and no separate hand-back list that has to be remembered and published.
+
+**The workflow removes it with `DELETE /repos/{o}/{r}/issues/{n}/labels/handed-back`**, which takes out that one label and leaves every other in place; the gate does not. That call is refused at the tool layer of the sessions that run the gate; the workflow runs under its own `GITHUB_TOKEN`, which the refusal does not reach. It triggers on `synchronize` (a push) and on `edited` when the body changed and the actor is not a bot, so a title-only edit, a bot's edit, opening a pull request, applying the label and a comment cannot remove it, and an event on a pull request without the label is skipped before a runner starts. Where the repository gates its other Actions jobs on a remote-CI switch, this workflow is not gated on it: with the switch off the removal would not run, and the missed removal would return for as long as the switch stayed off.
+
+**When a push did not clear it, the run is what to read.** The pull request's checks list a run of that workflow for every push to a labeled pull request. A failed run is a defect in the workflow, so ticket it: including a billing failure, which is how an exhausted Actions allowance shows up there rather than as `skipped`. A missing run means the push event never fired, and one case of that is expected rather than a defect: **a push that leaves the pull request conflicted runs no workflow at all.** GitHub runs `pull_request` workflows against the merge commit, and a pull request it cannot merge has none, so the label stays until the push that resolves the conflict, which fires the run and removes it. So a hand-back whose branch has fallen behind `main` comes back when the author syncs, not on an earlier push, and that is the right outcome, since a conflicted pull request cannot pass the gate. For any other missing run, until it is fixed, the removal that works from a gate session is a `PATCH /repos/{o}/{r}/issues/{n}` with a `labels` array, and it **replaces the whole set**, so any label left out of the array is removed with no warning. Build the array from a fresh read, never a remembered list, then read it back:
+
+```bash
+keep=$(gh api repos/{o}/{r}/issues/<n> --jq '{labels: [.labels[].name | select(. != "handed-back")]}')
+gh api -X PATCH repos/{o}/{r}/issues/<n> --input - <<< "$keep"
+gh api repos/{o}/{r}/issues/<n> --jq '[.labels[].name]'   # read back: everything but handed-back
+```
+
+**The author never applies or removes it by hand** (a push or a description edit is what removes it) and that is the same boundary as the flip, running the other way. The gate stopped mutating `draft`, which the author owns; clearing `handed-back` would forge the gate's signal: it asserts *this re-entered the queue* when it has not. An author who believes a pull request is wrongly marked says so to the gate, and leaves the label alone. **Its absence is not a green light either**: it means *not currently handed back*, not *gated and clean*, and its presence blocks nothing: push whenever ready, and the push is what re-enters the pull request.
+
+**It is a gate marker and nothing more.** Whether anything outside the gate reads or applies it is undecided and out of scope here.
+
+## Adversarial review at the merge
+
+[`adversarial-review`](../../rules/adversarial-review.md) already requires a skeptical pass before a change ships, and that rule owns the frame, the read-only prompting, the forbidden test execution, the lens catalogue and the mutation-testing floor: none of it is repeated here. But that pass ran against **the branch**, and what merges is **the branch combined with everything that landed since**. Those are different artifacts whenever the base has moved, which is most of the time. So the merge-time pass is narrow and specific:
+
+- **Review what is actually merging.** The diff **as it will exist on `main`**, at the head commit, including everything added *after* the build's own review (the part nobody has looked at) and ask what the build-time review could not have seen: an interaction with a since-merged change, a shared job input, a rule or convention added in the interim that the branch now violates. If the base has genuinely not moved and nothing was pushed after the build-time review, say so and this step is discharged by that review.
+- **Distrust the tally, and do not stop at fixing the arithmetic.** Two skeptics per finding is not a vote, it is a coin flip with a tie-break. So use an odd number of skeptics and keep blockers alive on a tie, but that is not sufficient: a unanimous 3-of-3 refutation has been wrong. **When a refuted claim is mechanically checkable: a return value, a regex, a branch: check it yourself rather than accept the verdict, whatever the margin.** Reserve the count-based rules for claims that are genuinely a matter of judgment.
+
+Where orchestration is available (Ultracode, or the user asked for a workflow), that is a `Workflow`; otherwise scale down to the same frame per that rule. Either way the review gates the *merge*, so it runs against the head commit and its findings are triaged before the merge, not after.
+
+## The DRY line
+
+This file owns **the decision to merge**: the order in which its neighbors are applied at the moment of merging, the measurement that explains why the order is the only thing enforcing it, and what the gate does with a red. It does not own the chain, the job list, or the shape of the verdict comment. The *build* gate (TDD, branch, PR, the chain) lives in [`AGENTS.md`](../../../AGENTS.md); bringing a branch current is [`sync-pr-branch`](../../rules/sync-pr-branch.md); the ship-time obligations that outlive a green build (never pushing to `main`, ticking criteria, moving the board card, giving residue a ticket) are [`closing-a-ticket`](../../rules/closing-a-ticket.md); the skeptical pass itself, and its tooling, are [`adversarial-review`](../../rules/adversarial-review.md); where you branch is [`worktrees`](../../rules/worktrees.md); the plumbing sweep is [`coordination-plumbing-stays-out-of-artifacts`](../../rules/coordination-plumbing-stays-out-of-artifacts.md). The composing behavior steps 6 and 7 rest on is measured in [`github-api-budget`](../../rules/github-api-budget.md). Don't restate any of them.
+

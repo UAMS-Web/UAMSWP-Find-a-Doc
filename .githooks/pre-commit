@@ -1,0 +1,38 @@
+#!/bin/sh
+# Block a commit that leaves the ACF table map cache out of step with the table JSON.
+#
+# Runs only when a table_*.json file or the cache is staged. It compares the STAGED copies, not
+# the working tree, so an edit that was never staged cannot satisfy or fail the check.
+# Scope: cache against table JSON only; the ACF field groups are not read.
+# Bypass with `git commit --no-verify`.
+
+dir=assets/json/acf-tables
+
+staged=$(git diff --cached --name-only --diff-filter=ACMRD -- "$dir")
+[ -z "$staged" ] && exit 0
+
+if ! command -v php >/dev/null 2>&1; then
+    echo "pre-commit: php is not on the PATH, so the table map check cannot run." >&2
+    echo "Install php, or commit with --no-verify to skip the check." >&2
+    exit 1
+fi
+
+tmp=$(mktemp -d) || exit 1
+trap 'rm -rf "$tmp"' EXIT
+mkdir -p "$tmp/.cache"
+
+for path in $(git ls-files --cached -- "$dir/.cache/_table_map.php" "$dir/table_*.json"); do
+    case "$path" in
+        */.cache/_table_map.php) git show ":$path" > "$tmp/.cache/_table_map.php" || exit 1 ;;
+        *) git show ":$path" > "$tmp/$(basename "$path")" || exit 1 ;;
+    esac
+done
+
+php bin/check-table-map.php "$tmp"
+status=$?
+
+if [ "$status" -ne 0 ]; then
+    echo "pre-commit: stage a regenerated assets/json/acf-tables/.cache/_table_map.php with the table JSON change." >&2
+fi
+
+exit "$status"

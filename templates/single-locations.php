@@ -322,14 +322,8 @@ while ( have_posts() ) : the_post(); ?>
 			$location_floor_label = $location_floor['choices'][ $location_floor_value ] ?? '';
 		}
 	$location_suite = get_field('location_suite', $location_source_ids['unit'] );
-	$location_address_2 =
-		( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
-		. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
-		. ( $location_suite ? $location_suite : '' );
-	$location_address_2_schema =
-		( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
-		. ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
-		. ( $location_suite ? $location_suite : '' );
+	$location_address_2 = uamswp_location_address_2( ( $location_building && $building_slug != '_none' ), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ', true );
+	$location_address_2_schema = uamswp_location_address_2( ( $location_building && $building_slug != '_none' ), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ' );
 
 	$location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street'] );
 	if (!$location_address_2) {
@@ -641,7 +635,7 @@ while ( have_posts() ) : the_post(); ?>
 				<div class="content-width">
 					<h1 class="page-title"><?php echo $page_title; ?>
 					<?php if ($parent_location) { ?>
-					<span class="subtitle"><span class="sr-only">(</span>Part of <?php echo $parent_title_prepend; ?><a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
+					<span class="subtitle"><span class="sr-only">(</span>Part of <?php echo $parent_title_prepend; ?><a href="<?php echo esc_url($parent_url); ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
 					<?php } // endif ?>
 					</h1>
 					<?php if ($location_closing_display) { ?>
@@ -688,7 +682,7 @@ while ( have_posts() ) : the_post(); ?>
 							</div>
 						</div>
 						<?php if( $location_web_name && $location_url ){ ?>
-							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>" target="_blank" data-categorytitle="External Link"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
+							<p><a class="btn btn-secondary" href="<?php echo esc_url($location_url['url']); ?>" target="_blank" data-categorytitle="External Link"><?php echo esc_html($location_web_name); ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php }
 						// Schema data
 						$location_schema = '"address": {
@@ -1396,7 +1390,7 @@ while ( have_posts() ) : the_post(); ?>
 												$location_scheduling_item_title_nested = $title['location_scheduling_item_title_nested'];
 												$location_scheduling_item_title_nested = ( isset($location_scheduling_item_title_nested) && !empty($location_scheduling_item_title_nested) ) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
 												?>
-												<option value="<?= $key; ?>"<?php //echo ($key == $provider_title) ? ' selected' : ''; ?>><? echo $location_scheduling_item_title_nested; ?></option>
+												<option value="<?= $key; ?>"<?php //echo ($key == $provider_title) ? ' selected' : ''; ?>><?php echo $location_scheduling_item_title_nested; ?></option>
 											<?php endforeach; ?>
 										</select>
 										<input type="hidden" id="pid" name="pid" value="<?php echo get_the_id(); ?>">
@@ -1646,7 +1640,7 @@ while ( have_posts() ) : the_post(); ?>
 								<?php }
 								if ( $portal_content ) { ?>
 								<div class="btn-container">
-									<a href="<?php echo $portal_url; ?>" aria-label="Log in to <?php echo $portal_name_attr; ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo $portal_name_attr; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
+									<a href="<?php echo esc_url($portal_url); ?>" aria-label="Log in to <?php echo esc_attr($portal_name_attr); ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo esc_attr($portal_name_attr); ?>"><?php echo esc_html($portal_link_title ? $portal_link_title : 'Log in to '. $portal_name); ?></a>
 								</div>
 								<?php } ?>
 							</div>
@@ -1843,7 +1837,7 @@ while ( have_posts() ) : the_post(); ?>
 				</div>
 			</div>
 		</section> -->
-	<? }
+	<?php }
 	// End News Section
 	?>
 </main>

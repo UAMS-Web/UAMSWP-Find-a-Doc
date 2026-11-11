@@ -5,6 +5,11 @@
  *
  */
 
+// Editor placeholder for a newly inserted, still-empty block (ACF Blocks V3).
+if ( function_exists( 'uams_fad_block_placeholder' ) && uams_fad_block_placeholder( $block ?? null, $is_preview ?? false ) ) {
+    return;
+}
+
 // Create id attribute allowing for custom "anchor" value.
 $id = '';
 if ( empty( $id ) && isset($block) ) {
@@ -142,7 +147,7 @@ if($filter_type || $filter_region || $filter_aoe || $filter_ids) {
                             <div class="more">
                                 <p class="lead"><?php echo $more_text; ?></p>
                                 <div class="cta-container">
-                                    <a href="<?php echo $more_button_url; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description_attr; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                                    <a href="<?php echo esc_url($more_button_url); ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo esc_attr($more_button_description_attr); ?>"<?php $more_button_target ? ' target="'. esc_attr($more_button_target) . '"' : '' ?>><?php echo esc_html($more_button_text); ?></a>
                                 </div>
                             </div>
                         <?php } // endif ?>

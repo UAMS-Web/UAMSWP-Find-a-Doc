@@ -1,0 +1,47 @@
+{
+    "label": "Portals",
+    "labels": {
+        "name": "Portals",
+        "singular_name": "Portal",
+        "search_items": "Search Portals",
+        "all_items": "All Portals",
+        "edit_item": "Edit Portal",
+        "update_item": "Update Portal",
+        "add_new_item": "Add New Portal",
+        "new_item_name": "New Portal",
+        "menu_name": "Portals",
+        "view_item": "View Portal",
+        "popular_items": "Popular Portal",
+        "separate_items_with_commas": "Separate portals with commas",
+        "add_or_remove_items": "Add or remove portals",
+        "choose_from_most_used": "Choose from the most used portals",
+        "not_found": "No portals found",
+        "parent_item": "Parent Portal",
+        "parent_item_colon": "Parent Portal:",
+        "no_terms": "No Portals",
+        "items_list": "Portals list",
+        "items_list_navigation": "Portals list navigation"
+    },
+    "public": true,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_in_rest": true,
+    "rest_base": "portal",
+    "rest_controller_class": "WP_REST_Terms_Controller",
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "portal",
+        "with_front": true,
+        "hierarchical": true
+    }
+}

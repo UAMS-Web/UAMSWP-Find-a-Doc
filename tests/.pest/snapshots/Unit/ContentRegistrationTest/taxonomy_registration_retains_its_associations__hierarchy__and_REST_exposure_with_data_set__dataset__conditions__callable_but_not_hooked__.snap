@@ -1,0 +1,46 @@
+{
+    "label": "Conditions",
+    "labels": {
+        "name": "Conditions",
+        "singular_name": "Condition",
+        "search_items": "Search Conditions",
+        "all_items": "All Conditions",
+        "edit_item": "Edit Condition",
+        "update_item": "Update Condition",
+        "add_new_item": "Add New Condition",
+        "new_item_name": "New Condition",
+        "menu_name": "Conditions",
+        "view_item": "View Condition",
+        "popular_items": "Popular Condition",
+        "separate_items_with_commas": "Separate conditions with commas",
+        "add_or_remove_items": "Add or remove conditions",
+        "choose_from_most_used": "Choose from the most used conditions",
+        "not_found": "No conditions found",
+        "parent_item": "Parent Condition",
+        "parent_item_colon": "Parent Condition:",
+        "no_terms": "No Conditions",
+        "items_list": "Condition list",
+        "items_list_navigation": "Condition list navigation"
+    },
+    "public": true,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_in_rest": true,
+    "rest_base": "condition",
+    "rest_controller_class": "WP_REST_Terms_Controller",
+    "show_tagcloud": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "condition",
+        "with_front": true,
+        "hierarchical": true
+    }
+}

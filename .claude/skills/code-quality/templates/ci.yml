@@ -1,0 +1,130 @@
+name: CI
+
+# cspell:ignore vitest vite
+# (the input names `vitest` and `vite-build` in the commented examples below are the tools, not misspellings)
+
+# Template: .claude/skills/code-quality/templates/ci.yml in UAMS-Web/uams-claude-skills,
+# copied to .github/workflows/ci.yml. Delete this header paragraph after reading it.
+#
+# This workflow calls the shared job chain in UAMS-Web/uams-ci-workflows and adds the one job
+# a ruleset requires, `CI`. The chain itself (Composer validate, synced files, no-emoji,
+# aggregate-needs, Pint, Rector, PHPStan, mutate-ignore, mutate, Pest, and the optional jobs) lives
+# there, in `.github/workflows/ci.yml`, whose source is
+# `.claude/skills/code-quality/templates/ci-reusable.yml` in UAMS-Web/uams-claude-skills
+# (UAMS-Web/uams-claude-skills#485). The code-quality skill's "Which jobs run on which operating
+# system" section says which job runs on which platform and why.
+#
+# - The pinned reference: `uses:` names a release tag of UAMS-Web/uams-ci-workflows, never a
+#   branch, so a change to the shared chain reaches this repository only when the tag here moves.
+#   Dependabot does not move it. scripts/check-templates.mjs in UAMS-Web/uams-claude-skills fails
+#   this template when the reference is not a tag or a full commit hash.
+# - Inputs: `with:` sets the legs and the optional jobs. `linux-only: true` runs every job on
+#   `ubuntu-latest` alone, and `all-platform-jobs` is a space-separated list of job ids kept on all
+#   three runners whatever else is set. The optional jobs (`encoding-guard`, `vitest`,
+#   `vite-build`, `mutation-smoke`) are off until their input is `true`, and each runs the command
+#   its `-command` input names. The reusable workflow's own header lists every input and its default.
+# - A WordPress plugin switches on `floor-lint`, `download-archive` and `phpcs` and may set `pest-command`
+#   (the commented example under `with:` below). Its WordPress integration matrix is not in the chain: keep it
+#   here as a plain job beside the call, and list it in the `needs:` of `CI`.
+# - What this repository must carry: the called jobs check out this repository, so it supplies
+#   `.github/actions/setup/action.yml` (copied from `.claude/skills/code-quality/templates/setup-action.yml`),
+#   the synced `.claude/skills` scripts, the Composer scripts the jobs call (`test:pint`,
+#   `test:refactor`, `stan`, `test`, `mutate`) and, for the Pest job, `tests/skip-baseline.json`.
+# - A job the repository does not need cannot be deleted from the shared chain. A repository that
+#   needs a different chain writes its own workflow instead of calling this, or adds plain jobs here
+#   beside the call and lists them in the `needs:` of `CI`.
+#
+# The last job, `CI`, is the one check a ruleset requires from this workflow (with the two
+# pull-request-body checks, `Attribution footer` and `Closing keywords`). It `needs:` the call,
+# runs `if: always()`, and fails unless the call reports `success`: a `skipped` or `cancelled`
+# call fails it. The called workflow ends in a `Chain result` job that needs every job in the
+# chain, so the call is `success` only when every job in it succeeded. A ruleset therefore never
+# lists a job by name, and the chain can gain or lose a job without a ruleset change. Do not
+# rename `CI`, and do not rename the `checks` job without changing `needs:` below.
+#
+# Private repositories pay for runner minutes. A repository that gates its Actions jobs on a
+# `RUN_REMOTE_CI` variable adds `if: vars.RUN_REMOTE_CI == 'true'` to the `checks` job, and `CI`
+# stays without the gate only in a repository that does not keep the switch (UAMS-Web/uams-claude-skills#289).
+# With the switch off a gated `CI` lets a pull request merge without any job having run, and a
+# `CI` without the gate fails every pull request. Neither is a gate: require `CI` only in a
+# repository where this workflow genuinely runs on every pull request; the pre-merge-check rule
+# says the same.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  # Lets the workflow be run on demand against a branch.
+  workflow_dispatch:
+  # The mutate job mutates only the changed files on a pull request and on a push, and everything on a scheduled
+  # or manual run, under the `mutate-full-timeout-minutes` input (default 180). To catch drift from a dependency
+  # or tooling change, uncomment a schedule (UAMS-Web/uams-claude-skills#532). A schedule runs on the default
+  # branch, and GitHub disables it after 60 days without repository activity.
+  # schedule:
+  #   - cron: '17 7 * * 1'
+
+# A new push to a pull request cancels that pull request's stale run, so a pull request keeps
+# one group. Every other run (a push to the default branch, a manual run) gets a group of its
+# own, keyed on the commit, so a later push never cancels it. A shared push group would: GitHub
+# keeps one running and one pending run per group and cancels the pending one when another is
+# queued, whatever `cancel-in-progress` says, so a merge landing during a long run would cancel
+# the previous merge's run before it started a job. Its commit would show a short, settled run
+# and the chain would never have run on it.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  # The shared chain. Its checks report as `checks / <job name> (<operating system>)`.
+  checks:
+    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.2.0
+    # with:
+    #   linux-only: true
+    #   all-platform-jobs: 'pint'
+    #   mutate-paths: src
+    #   vitest: true
+    #   vitest-command: npm run test:js
+    #
+    # A WordPress plugin (UAMS-Web/uams-claude-skills#607):
+    #   linux-only: true
+    #   mutate: false
+    #   mutate-ignore-paths: includes
+    #   floor-lint: true
+    #   floor-lint-php: '8.2'
+    #   download-archive: true
+    #   phpcs: true
+    #   pest-command: composer test:unit
+    #   global-test-symbols: false   # only where the pest-testing skill is not delivered (#612)
+    #
+    # Optional repository checks (UAMS-Web/uams-claude-skills#620), for any repository that wants them:
+    #   guard: true
+    #   guard-patterns: 'sentinel-key\.php$'   # extra ERE patterns, space or newline separated
+    #   dev-lint: true
+    #   dev-lint-exclude: tests-legacy tests/Integration/vendor
+
+  # The one check a ruleset requires from this workflow. Keep `needs:` naming the call;
+  # scripts/check-templates.mjs in UAMS-Web/uams-claude-skills checks it.
+  ci:
+    name: CI
+    needs: [checks]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # `skipped` and `cancelled` fail as well as `failure`: a call that did not run proved nothing.
+      - name: Every needed job succeeded
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "Needed job results: $RESULTS"
+          # An empty list (an emptied `needs:`, a dropped `env:`) would run no iterations and pass having read nothing.
+          if [ -z "$RESULTS" ]; then echo "::error::No needed job results to read"; exit 1; fi
+          for result in $RESULTS; do
+            if [ "$result" != "success" ]; then
+              echo "::error::A needed job reported $result"
+              exit 1
+            fi
+          done

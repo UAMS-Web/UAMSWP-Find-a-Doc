@@ -1,0 +1,10 @@
+# Commits `git blame` should skip: whole-repository reformats whose every line
+# is a style change with no author of its own. The first entry is the Pint
+# reformat commit from adopting the `laravel` preset (UAMS-Web/uams-claude-skills#10);
+# add one line per later reformat. One full 40-character commit hash per line,
+# with a comment above it saying what the commit was.
+#
+# `git blame` reads this file only when told to, once per clone:
+#   git config blame.ignoreRevsFile .git-blame-ignore-revs
+#
+# Pint reformat: adopt the laravel preset (PLACEHOLDER: replace with the hash)

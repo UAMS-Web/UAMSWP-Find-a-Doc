@@ -1,0 +1,43 @@
+{
+    "labels": {
+        "name": "UAMS Brand Organizations",
+        "singular_name": "UAMS Brand Organization",
+        "menu_name": "Brand Organizations, UAMS",
+        "all_items": "All UAMS Brand Organizations",
+        "parent_item": "Parent UAMS Brand Organization",
+        "parent_item_colon": "Parent UAMS Brand Organization:",
+        "new_item_name": "New UAMS Brand Organization",
+        "add_new_item": "Add New UAMS Brand Organization",
+        "edit_item": "Edit UAMS Brand Organization",
+        "update_item": "Update UAMS Brand Organization",
+        "view_item": "View UAMS Brand Organization",
+        "separate_items_with_commas": "Separate UAMS Brand Organizations With Commas",
+        "add_or_remove_items": "Add or Remove UAMS Brand Organizations",
+        "choose_from_most_used": "Choose from the most used",
+        "popular_items": "Popular UAMS Brand Organizations",
+        "search_items": "Search UAMS Brand Organizations",
+        "not_found": "Not Found",
+        "no_terms": "No UAMS Brand Organizations",
+        "items_list": "UAMS Brand Organizations List",
+        "items_list_navigation": "UAMS Brand Organizations List Navigation"
+    },
+    "public": true,
+    "hierarchical": true,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "brand_organization_uams",
+        "with_front": false,
+        "hierarchical": true
+    }
+}

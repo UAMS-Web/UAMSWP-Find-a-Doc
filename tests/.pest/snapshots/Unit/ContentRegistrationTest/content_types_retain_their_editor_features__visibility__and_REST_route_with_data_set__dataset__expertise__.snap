@@ -1,0 +1,70 @@
+{
+    "label": "Areas of Expertise",
+    "description": "UAMS Areas of Expertise",
+    "labels": {
+        "name": "Areas of Expertise",
+        "singular_name": "Area of Expertise",
+        "menu_name": "Areas of Expertise",
+        "name_admin_bar": "Area of Expertise",
+        "archives": "Area of Expertise Archives",
+        "attributes": "Area of Expertise Attributes",
+        "parent_item_colon": "Parent Item:",
+        "all_items": "All Areas of Expertise",
+        "add_new_item": "Add New Area of Expertise",
+        "add_new": "Add New",
+        "new_item": "New Area of Expertise",
+        "edit_item": "Edit Area of Expertise",
+        "update_item": "Update Area of Expertise",
+        "view_item": "View Area of Expertise",
+        "view_items": "View Areas of Expertise",
+        "search_items": "Search Areas of Expertise",
+        "uploaded_to_this_item": "Uploaded to this item",
+        "items_list": "Areas of expertise list",
+        "items_list_navigation": "Areas of expertise list navigation",
+        "filter_items_list": "Filter Areas of expertise list"
+    },
+    "supports": [
+        "title",
+        "editor",
+        "thumbnail",
+        "excerpt",
+        "page-attributes",
+        "revisions"
+    ],
+    "taxonomies": [
+        "treatment",
+        "condition"
+    ],
+    "hierarchical": true,
+    "capability_type": "page",
+    "public": true,
+    "show_ui": true,
+    "show_in_menu": true,
+    "menu_position": 30,
+    "menu_icon": "https:\/\/example.test\/plugin\/includes\/..\/admin\/admin-icons\/services-icon.png",
+    "show_in_admin_bar": true,
+    "show_in_nav_menus": true,
+    "can_export": true,
+    "has_archive": true,
+    "exclude_from_search": false,
+    "publicly_queryable": true,
+    "capabilities": {
+        "edit_post": "edit_expertise",
+        "read_post": "read_expertise",
+        "delete_post": "delete_expertise",
+        "edit_posts": "edit_expertises",
+        "edit_others_posts": "edit_others_expertises",
+        "publish_posts": "publish_expertises",
+        "read_private_posts": "read_private_expertises"
+    },
+    "map_meta_cap": true,
+    "show_in_rest": true,
+    "rest_base": "expertise",
+    "rest_controller_class": "WP_REST_Posts_Controller",
+    "rewrite": {
+        "slug": "expertise",
+        "with_front": true,
+        "pages": true,
+        "feeds": true
+    }
+}
