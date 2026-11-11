@@ -42,7 +42,7 @@ remove_action('genesis_before_header', 'uamswp_skip_links', 5);
 
 // Dequeue Skip Links Script
 add_action('wp_enqueue_scripts', 'child_dequeue_skip_links');
-function child_dequeue_skip_links()
+function child_dequeue_skip_links(): void
 {
     wp_dequeue_script('skip-links');
 }
@@ -55,7 +55,7 @@ add_filter('wp_nav_menu', '__return_false');
 
 remove_action('genesis_loop', 'genesis_do_loop');
 add_action('genesis_loop', 'display_provider_image');
-function display_provider_image()
+function display_provider_image(): void
 {
     // Custom WP_Query args
     $args = [
@@ -212,7 +212,7 @@ function display_provider_image()
                             }
                         }
                         echo '<td>';
-                        echo $affiliation_list ? $affiliation_list : '';
+                        echo $affiliation_list ?: '';
                         echo '</td>';
 
                         // Office Address 1 field
@@ -257,7 +257,7 @@ function display_provider_image()
                                             $primary_appointment_floor_label = $primary_appointment_floor['choices'][$primary_appointment_floor_value] ?? '';
                                         }
                                         $primary_appointment_suite = get_field('location_suite', $location_source_ids['unit']);
-                                        $primary_appointment_address_2 = uamswp_location_address_2(($primary_appointment_building && $building_slug != '_none'), $building_name ?? '', $primary_appointment_floor, $primary_appointment_floor_value, $primary_appointment_floor_label, $primary_appointment_suite, '<br />', '<br />', true);
+                                        $primary_appointment_address_2 = uamswp_location_address_2(($primary_appointment_building && $building_slug != '_none'), $building_name ?? '', $primary_appointment_floor, $primary_appointment_floor_value, $primary_appointment_floor_label, $primary_appointment_suite, '<br />', '<br />');
                                         $primary_appointment_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
                                         if (! $primary_appointment_address_2) {
                                             $primary_appointment_address_2 = $primary_appointment_address_2_deprecated;
@@ -273,37 +273,37 @@ function display_provider_image()
                             } // endforeach
                         }
                         echo '<td class="no-break">';
-                        echo $primary_appointment_address_1 ? $primary_appointment_address_1 : '';
+                        echo $primary_appointment_address_1 ?: '';
                         echo '</td>';
 
                         // Office Address 2 field
                         echo '<td class="no-break">';
-                        echo $primary_appointment_address_2 ? $primary_appointment_address_2 : '';
+                        echo $primary_appointment_address_2 ?: '';
                         echo '</td>';
 
                         // Office City field
                         echo '<td class="no-break">';
-                        echo $primary_appointment_city ? $primary_appointment_city : '';
+                        echo $primary_appointment_city ?: '';
                         echo '</td>';
 
                         // Office State field
                         echo '<td class="no-break">';
-                        echo $primary_appointment_state ? $primary_appointment_state : '';
+                        echo $primary_appointment_state ?: '';
                         echo '</td>';
 
                         // Office Zip field
                         echo '<td class="no-break">';
-                        echo $primary_appointment_zip ? $primary_appointment_zip : '';
+                        echo $primary_appointment_zip ?: '';
                         echo '</td>';
 
                         // Phone field
                         echo '<td class="no-break">';
-                        echo $primary_appointment_phone ? $primary_appointment_phone : '';
+                        echo $primary_appointment_phone ?: '';
                         echo '</td>';
 
                         // Fax field
                         echo '<td class="no-break">';
-                        echo $primary_appointment_fax ? $primary_appointment_fax : '';
+                        echo $primary_appointment_fax ?: '';
                         echo '</td>';
 
                         // Specialty field

@@ -9,20 +9,20 @@
 $page_id = get_the_ID();
 $page_title = get_the_title();
 $page_title_attr = $page_title;
-$page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
+$page_title_attr = str_replace('"', "'", $page_title_attr); // Replace double quotes with single quote
 $page_title_attr = htmlentities($page_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
 $page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
 $resource_archive_title_system = get_field('clinical_resource_archive_headline', 'option');
-$resource_archive_title = $resource_archive_title_system ? $resource_archive_title_system : 'Clinical Resource';
+$resource_archive_title = $resource_archive_title_system ?: 'Clinical Resource';
 $resource_archive_title_attr = $resource_archive_title;
-$resource_archive_title_attr = str_replace('"', '\'', $resource_archive_title_attr); // Replace double quotes with single quote
+$resource_archive_title_attr = str_replace('"', "'", $resource_archive_title_attr); // Replace double quotes with single quote
 $resource_archive_title_attr = htmlentities($resource_archive_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $resource_archive_title_attr = str_replace('&nbsp;', ' ', $resource_archive_title_attr); // Convert non-breaking space with normal space
 $resource_archive_title_attr = html_entity_decode($resource_archive_title_attr); // Convert HTML entities to their corresponding characters
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html)
+function uamswp_fad_title($html): string
 {
     global $page_title_attr;
     global $resource_archive_title_attr;
@@ -34,12 +34,10 @@ function uamswp_fad_title($html)
     $meta_title_enhanced = $page_title_attr.$meta_title_enhanced_addition.' | '.get_bloginfo('name');
     $meta_title_enhanced_chars = strlen($meta_title_enhanced);
     if ($meta_title_enhanced_chars <= $meta_title_chars_max) {
-        $html = $meta_title_enhanced;
-    } else {
-        $html = $meta_title_base;
+        return $meta_title_enhanced;
     }
 
-    return $html;
+    return $meta_title_base;
 }
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
@@ -75,7 +73,7 @@ add_filter('body_class', 'uams_default_page_body_class');
 // Add extra class to entry
 function uamswp_add_entry_class($attributes)
 {
-    $attributes['class'] = $attributes['class'].' bg-white';
+    $attributes['class'] .= ' bg-white';
 
     return $attributes;
 }
@@ -86,7 +84,7 @@ add_filter('genesis_attr_entry', 'uamswp_add_entry_class');
 remove_action('genesis_entry_header', 'genesis_do_post_title');
 add_action('genesis_entry_header', 'uamswp_resource_post_title');
 
-function uamswp_resource_post_title()
+function uamswp_resource_post_title(): void
 {
     global $resource_archive_title;
     global $resource_type_label;
@@ -197,7 +195,7 @@ if ($physicians) {
         'post__in' => $physicians,
     ];
     $physicians_query = new WP_Query($args);
-    if ($physicians_query && $physicians_query->have_posts()) {
+    if ($physicians_query instanceof WP_Query && $physicians_query->have_posts()) {
         $show_providers_section = true;
         $jump_link_count++;
     } else {
@@ -301,7 +299,7 @@ if ($jump_link_count >= $jump_link_count_min) {
 } else {
     $show_jump_links_section = false;
 }
-function uamswp_resource_text()
+function uamswp_resource_text(): void
 {
     global $resource_type_value;
     $text = get_field('clinical_resource_text');
@@ -314,7 +312,7 @@ function uamswp_resource_text()
         echo $nci_embed;
     }
 }
-function uamswp_resource_infographic()
+function uamswp_resource_infographic(): void
 {
     global $resource_type_value;
     $infographic = get_field('clinical_resource_infographic');
@@ -339,7 +337,7 @@ function uamswp_resource_infographic()
         }
     }
 }
-function uamswp_resource_document()
+function uamswp_resource_document(): void
 {
     global $resource_type_value;
     $document_descr = get_field('clinical_resource_document_descr');
@@ -373,7 +371,7 @@ function uamswp_resource_document()
                 $icon_file = $icon_powerpoint;
             } elseif ($document_url_extension == 'xls' || $document_url_extension == 'xlsx') {
                 $icon_file = $icon_excel;
-            } elseif ($document_url_extension == 'jpg' || $document_url_extension == 'jpeg' || $document_url_extension == 'gif' || $document_url_extension == 'png' || $document_url_extension == 'bmp') {
+            } elseif (in_array($document_url_extension, ['jpg', 'jpeg', 'gif', 'png', 'bmp'])) {
                 $icon_file = $icon_image;
             }
             ?>
@@ -382,7 +380,7 @@ function uamswp_resource_document()
         echo '</ul>';
     }
 }
-function uamswp_resource_physicians()
+function uamswp_resource_physicians(): void
 {
     global $show_providers_section;
     global $postsCountClass;
@@ -423,7 +421,7 @@ function uamswp_resource_physicians()
         </section>
     <?php }
     }
-function uamswp_resource_video()
+function uamswp_resource_video(): void
 {
     global $resource_type_value;
     $video = get_field('clinical_resource_video');
@@ -431,7 +429,7 @@ function uamswp_resource_video()
     $video_transcript = get_field('clinical_resource_video_transcript');
 
     $video_source = '';
-    if ((strpos($video, 'youtube') !== false) || (strpos($video, 'youtu.be') !== false)) {
+    if ((str_contains($video, 'youtube')) || (str_contains($video, 'youtu.be'))) {
         $video_source = 'youtube';
     }
 
@@ -456,7 +454,7 @@ function uamswp_resource_video()
         }
     }
 }
-function uamswp_resource_conditions_cpt()
+function uamswp_resource_conditions_cpt(): void
 {
     global $page_title;
     global $show_conditions_section;
@@ -468,7 +466,7 @@ function uamswp_resource_conditions_cpt()
         include UAMS_FAD_PATH.'/templates/loops/conditions-cpt-loop.php';
     }
 }
-function uamswp_resource_treatments_cpt()
+function uamswp_resource_treatments_cpt(): void
 {
     global $page_title;
     global $show_treatments_section;
@@ -480,7 +478,7 @@ function uamswp_resource_treatments_cpt()
         include UAMS_FAD_PATH.'/templates/loops/treatments-cpt-loop.php';
     }
 }
-function uamswp_resource_locations()
+function uamswp_resource_locations(): void
 {
     global $show_locations_section;
     global $location_query;
@@ -507,7 +505,7 @@ function uamswp_resource_locations()
     <?php
     } // endif
 }
-function uamswp_resource_associated()
+function uamswp_resource_associated(): void
 {
     global $page_title;
     global $show_related_resource_section;
@@ -524,7 +522,7 @@ function uamswp_resource_associated()
         include UAMS_FAD_PATH.'/templates/blocks/clinical-resources.php';
     }
 }
-function uamswp_resource_expertise()
+function uamswp_resource_expertise(): void
 {
     global $show_aoe_section;
     global $expertise_query;
@@ -553,7 +551,7 @@ function uamswp_resource_expertise()
 	<?php
     } // endif
 }
-function uamswp_resource_jump_links()
+function uamswp_resource_jump_links(): void
 {
     global $page_title;
     global $show_related_resource_section;
@@ -614,7 +612,7 @@ function uamswp_resource_jump_links()
         </nav>
     <?php }
     }
-function uamswp_resource_appointment()
+function uamswp_resource_appointment(): void
 {
     global $show_appointment_section;
     global $is_provider_spotlight;
@@ -663,7 +661,7 @@ function uamswp_resource_appointment()
  * Genesis entry microdata and itemprop="image" on the portrait, and nothing
  * more. No JSON-LD, and no about/mainEntity link to the provider.
  */
-function uamswp_resource_provider_spotlight()
+function uamswp_resource_provider_spotlight(): void
 {
     global $is_provider_spotlight;
     global $spotlight_provider;

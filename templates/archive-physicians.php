@@ -1,7 +1,7 @@
 <?php
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html)
+function uamswp_fad_title($html): string
 {
     // you can add here all your conditions as if is_page(), is_category() etc..
     $html = 'Providers | '.get_bloginfo('name');
@@ -35,7 +35,7 @@ function custom_field_excerpt($title)
 
     return apply_filters('the_excerpt', $text);
 }
-function wpdocs_custom_excerpt_length($length)
+function wpdocs_custom_excerpt_length($length): int
 {
     return 35; // 35 words
 }

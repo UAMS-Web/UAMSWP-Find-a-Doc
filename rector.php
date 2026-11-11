@@ -3,20 +3,28 @@
 declare(strict_types=1);
 
 use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
+use Rector\CodeQuality\Rector\Equal\UseIdenticalOverEqualWithSameTypeRector;
+use Rector\CodeQuality\Rector\Identical\SimplifyBoolIdenticalTrueRector;
+use Rector\CodingStyle\Rector\FuncCall\StrictArraySearchRector;
+use Rector\CodingStyle\Rector\FuncCall\StrictInArrayRector;
 use Rector\CodingStyle\Rector\FuncCall\VersionCompareFuncCallToConstantRector;
 use Rector\Config\RectorConfig;
+use Rector\DeadCode\Rector\Assign\RemoveUnusedVariableAssignRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveDuplicatedReturnSelfDocblockRector;
 use Rector\DeadCode\Rector\ConstFetch\RemovePhpVersionIdCheckRector;
+use Rector\DeadCode\Rector\If_\RemoveAlwaysTrueIfConditionRector;
+use Rector\DeadCode\Rector\If_\RemoveUnusedNonEmptyArrayBeforeForeachRector;
+// WordPress repositories: uncomment the import below together with the matching
+// `ArrayToFirstClassCallableRector::class` entry in `$sweepOnlyRules`. A `use`
+// inside that array is a parse error; keep the import here with the others.
 use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
 use Rector\DeadCode\Rector\Property\RemoveUselessVarTagRector;
+use Rector\DeadCode\Rector\Stmt\RemoveNextSameValueConditionRector;
 use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamFromDimFetchKeyUseRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\StrictArrayParamDimFetchRector;
-// WordPress repositories: uncomment the import below together with the matching
-// `ArrayToFirstClassCallableRector::class` entry in `$sweepOnlyRules`. A `use`
-// inside that array is a parse error; keep the import here with the others.
 use Rector\ValueObject\PhpVersion;
 
 // Shared starting Rector configuration (UAMS-Web/uams-claude-skills#10). Copy it
@@ -121,6 +129,25 @@ $neverRules = [
     VersionCompareFuncCallToConstantRector::class => $guardFile,
 ];
 
+// Templates are included into the scope of the file that loads them, and they include further
+// templates in turn. Rector sees one file at a time, so a rule that decides from where a variable
+// is assigned or what type it holds can drop an assignment a nested include reads, or unwrap a
+// condition a sibling include changes. Rector also mis-prints an unwrapped `if` that spans
+// the closing and opening PHP tags (it left a parse error in three templates). These rules are skipped under
+// templates/ only and still apply everywhere else.
+$templatesDir = [__DIR__.'/templates'];
+$neverRules = [
+    ...$neverRules,
+    RemoveAlwaysTrueIfConditionRector::class => $templatesDir,
+    RemoveUnusedVariableAssignRector::class => $templatesDir,
+    RemoveUnusedNonEmptyArrayBeforeForeachRector::class => $templatesDir,
+    RemoveNextSameValueConditionRector::class => $templatesDir,
+    UseIdenticalOverEqualWithSameTypeRector::class => $templatesDir,
+    SimplifyBoolIdenticalTrueRector::class => $templatesDir,
+    StrictInArrayRector::class => $templatesDir,
+    StrictArraySearchRector::class => $templatesDir,
+];
+
 return RectorConfig::configure()
     // Filled: the directories holding first-party PHP. Never a vendor
     // directory, and in a fork of a vendor plugin only the paths that hold our
@@ -128,6 +155,8 @@ return RectorConfig::configure()
     ->withPaths([
         __DIR__.'/uamswp-find-a-doc.php',
         __DIR__.'/includes',
+        __DIR__.'/admin',
+        __DIR__.'/templates',
     ])
     // WordPress plugins: also analyze the PHP files at the repository root (the
     // plugin header file). Uncomment for those.

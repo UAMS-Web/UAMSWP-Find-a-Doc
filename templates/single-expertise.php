@@ -9,26 +9,26 @@
 $page_id = get_the_ID();
 $page_title = get_the_title();
 $page_title_attr = $page_title;
-$page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
+$page_title_attr = str_replace('"', "'", $page_title_attr); // Replace double quotes with single quote
 $page_title_attr = htmlentities($page_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
 $page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
 $expertise_archive_title_attr = $expertise_archive_title;
-$expertise_archive_title_attr = str_replace('"', '\'', $expertise_archive_title_attr); // Replace double quotes with single quote
+$expertise_archive_title_attr = str_replace('"', "'", $expertise_archive_title_attr); // Replace double quotes with single quote
 $expertise_archive_title_attr = htmlentities($expertise_archive_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $expertise_archive_title_attr = str_replace('&nbsp;', ' ', $expertise_archive_title_attr); // Convert non-breaking space with normal space
 $expertise_archive_title_attr = html_entity_decode($expertise_archive_title_attr); // Convert HTML entities to their corresponding characters
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
 $expertise_single_name_attr = $expertise_single_name;
-$expertise_single_name_attr = str_replace('"', '\'', $expertise_single_name_attr); // Replace double quotes with single quote
+$expertise_single_name_attr = str_replace('"', "'", $expertise_single_name_attr); // Replace double quotes with single quote
 $expertise_single_name_attr = htmlentities($expertise_single_name_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $expertise_single_name_attr = str_replace('&nbsp;', ' ', $expertise_single_name_attr); // Convert non-breaking space with normal space
 $expertise_single_name_attr = html_entity_decode($expertise_single_name_attr); // Convert HTML entities to their corresponding characters
 
 // Parent Area of Expertise
 $expertise_parent_id = wp_get_post_parent_id($page_id);
-$expertise_has_parent = $expertise_parent_id ? true : false;
+$expertise_has_parent = (bool) $expertise_parent_id;
 $parent_expertise = '';
 $parent_id = '';
 $parent_title = '';
@@ -42,8 +42,8 @@ if ($parent_expertise) {
     $parent_id = $parent_expertise->ID;
     $parent_title = $parent_expertise->post_title;
     $parent_title_attr = $parent_title;
-    $parent_title_attr = str_replace('"', '\'', $parent_title_attr); // Replace double quotes with single quote
-    $parent_title_attr = str_replace('&#8217;', '\'', $parent_title_attr); // Replace right single quote with single quote
+    $parent_title_attr = str_replace('"', "'", $parent_title_attr); // Replace double quotes with single quote
+    $parent_title_attr = str_replace('&#8217;', "'", $parent_title_attr); // Replace right single quote with single quote
     $parent_title_attr = htmlentities($parent_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space with normal space
     $parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters
@@ -52,7 +52,7 @@ if ($parent_expertise) {
 }
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html)
+function uamswp_fad_title($html): string
 {
     global $page_title_attr;
     global $expertise_single_name_attr;
@@ -64,12 +64,10 @@ function uamswp_fad_title($html)
     $meta_title_enhanced = $page_title_attr.$meta_title_enhanced_addition.' | '.get_bloginfo('name');
     $meta_title_enhanced_chars = strlen($meta_title_enhanced);
     if ($meta_title_enhanced_chars <= $meta_title_chars_max) {
-        $html = $meta_title_enhanced;
-    } else {
-        $html = $meta_title_base;
+        return $meta_title_enhanced;
     }
 
-    return $html;
+    return $meta_title_base;
 }
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
@@ -92,7 +90,7 @@ add_filter('body_class', 'uams_default_page_body_class');
 // Add extra class to entry
 function uamswp_add_entry_class($attributes)
 {
-    $attributes['class'] = $attributes['class'].' bg-white';
+    $attributes['class'] .= ' bg-white';
 
     return $attributes;
 }
@@ -103,7 +101,7 @@ add_filter('genesis_attr_entry', 'uamswp_add_entry_class');
 remove_action('genesis_entry_header', 'genesis_do_post_title');
 add_action('genesis_entry_header', 'uamswp_expertise_post_title');
 
-function uamswp_expertise_post_title()
+function uamswp_expertise_post_title(): void
 {
     global $page_title;
     global $expertise_single_name;
@@ -236,7 +234,7 @@ if ($physicians) {
         'post__in' => $physicians,
     ];
     $physicians_query = new WP_Query($args);
-    if ($physicians_query && $physicians_query->have_posts()) {
+    if ($physicians_query instanceof WP_Query && $physicians_query->have_posts()) {
         $show_providers_section = true;
         $jump_link_count++;
         $provider_ids = $physicians_query->posts;
@@ -299,7 +297,7 @@ if ($jump_link_count >= $jump_link_count_min) {
     $show_jump_links_section = false;
 }
 
-function uamswp_expertise_cta()
+function uamswp_expertise_cta(): void
 {
     $cta_repeater = get_field('expertise_cta');
     if ($cta_repeater) {
@@ -326,7 +324,7 @@ function uamswp_expertise_cta()
             $cta_phone = '';
             $cta_phone_link = '';
             if ($cta_action_type == 'phone') {
-                $cta_phone_prepend = $cta['cta_bar_phone_prepend'] ? $cta['cta_bar_phone_prepend'] : 'Call';
+                $cta_phone_prepend = $cta['cta_bar_phone_prepend'] ?: 'Call';
                 $cta_phone = $cta['cta_bar_phone'];
                 $cta_phone_link = '<a href="tel:'.format_phone_dash($cta_phone).'">'.format_phone_us($cta_phone).'</a>';
             }
@@ -384,7 +382,7 @@ function uamswp_expertise_cta()
     }
 }
 
-function uamswp_expertise_physicians()
+function uamswp_expertise_physicians(): void
 {
     global $show_providers_section;
     // global $postsCountClass;
@@ -416,7 +414,7 @@ function uamswp_expertise_physicians()
 
             $provider_region = '';
             if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
-                $provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+                $provider_region = $_GET['_filter_region'] ?? $_COOKIE['wp_filter_region'];
             }
 
             $tax_query = [];
@@ -485,7 +483,7 @@ function uamswp_expertise_physicians()
         </section>
     <?php }
     }
-function uamswp_expertise_youtube()
+function uamswp_expertise_youtube(): void
 {
     $video = get_field('expertise_youtube_link');
     if ($video) { ?>
@@ -500,7 +498,7 @@ function uamswp_expertise_youtube()
         } ?>
     <?php }
     }
-function uamswp_expertise_keywords()
+function uamswp_expertise_keywords(): void
 {
     $keywords = get_field('expertise_alternate_names');
     $keyword_text = '';
@@ -516,7 +514,7 @@ function uamswp_expertise_keywords()
         echo '<p class="text-callout text-callout-info">Also called: '.$keyword_text.'</p>';
     }
 }
-function uamswp_expertise_conditions_cpt()
+function uamswp_expertise_conditions_cpt(): void
 {
     global $page_title;
     global $show_conditions_section;
@@ -528,7 +526,7 @@ function uamswp_expertise_conditions_cpt()
         include UAMS_FAD_PATH.'/templates/loops/conditions-cpt-loop.php';
     }
 }
-function uamswp_expertise_treatments_cpt()
+function uamswp_expertise_treatments_cpt(): void
 {
     global $page_title;
     global $show_treatments_section;
@@ -540,7 +538,7 @@ function uamswp_expertise_treatments_cpt()
         include UAMS_FAD_PATH.'/templates/loops/treatments-cpt-loop.php';
     }
 }
-function uamswp_expertise_locations()
+function uamswp_expertise_locations(): void
 {
     global $show_locations_section;
     global $location_query;
@@ -565,7 +563,7 @@ function uamswp_expertise_locations()
 
             $location_region = '';
             if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
-                $location_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+                $location_region = $_GET['_filter_region'] ?? $_COOKIE['wp_filter_region'];
             }
 
             $tax_query = [];
@@ -621,7 +619,7 @@ function uamswp_expertise_locations()
     <?php
     } // endif
 }
-function uamswp_expertise_associated()
+function uamswp_expertise_associated(): void
 {
     global $show_related_aoe_section;
     global $expertise_query;
@@ -655,7 +653,7 @@ function uamswp_expertise_associated()
 	<?php
     } // endif
 }
-function uamswp_expertise_header_metadata()
+function uamswp_expertise_header_metadata(): void
 {
     $keywords = get_field('expertise_alternate_names');
     if ($keywords) {
@@ -672,7 +670,7 @@ function uamswp_expertise_header_metadata()
         echo '<meta name="keywords" content="'.$keyword_text.'" />';
     }
 }
-function uamswp_expertise_podcast()
+function uamswp_expertise_podcast(): void
 {
     global $page_title;
     global $show_podcast_section;
@@ -711,7 +709,7 @@ function uamswp_expertise_podcast()
     </section>';
     }
 }
-function uamswp_expertise_resource()
+function uamswp_expertise_resource(): void
 {
     global $post;
     global $page_title;
@@ -729,7 +727,7 @@ function uamswp_expertise_resource()
         include UAMS_FAD_PATH.'/templates/blocks/clinical-resources.php';
     }
 }
-function uamswp_list_child_expertise()
+function uamswp_list_child_expertise(): void
 {
     global $page_id;
     global $page_title;
@@ -779,7 +777,7 @@ function uamswp_list_child_expertise()
         }
     }
 }
-function uamswp_expertise_appointment()
+function uamswp_expertise_appointment(): void
 {
     global $show_appointment_section;
 
@@ -803,7 +801,7 @@ function uamswp_expertise_appointment()
         </section>
     <?php }
     }
-function uamswp_expertise_jump_links()
+function uamswp_expertise_jump_links(): void
 {
     global $page_title;
     global $jump_link_count_min;

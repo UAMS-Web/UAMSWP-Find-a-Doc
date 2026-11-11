@@ -33,11 +33,11 @@ $condition_title = get_field('conditions_archive_headline', 'option');
 $condition_text = get_field('conditions_archive_intro_text', 'option');
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html)
+function uamswp_fad_title($html): string
 {
     global $condition_title;
     // you can add here all your conditions as if is_page(), is_category() etc..
-    $html = ($condition_title ? $condition_title : 'Conditions').' | '.get_bloginfo('name');
+    $html = ($condition_title ?: 'Conditions').' | '.get_bloginfo('name');
 
     return $html;
 }
@@ -49,7 +49,7 @@ get_header(); ?>
     <main id="genesis-content">
         <article class="entry">
             <header class="entry-header">
-                <h1 class="entry-title" itemprop="headline"><?php echo $condition_title ? $condition_title : 'Conditions'; ?></h1>
+                <h1 class="entry-title" itemprop="headline"><?php echo $condition_title ?: 'Conditions'; ?></h1>
             </header>
             <?php echo $condition_text ? '<div class="entry-content clearfix" itemprop="text">'.$condition_text.'</div>' : ''; ?>
         </article>
@@ -68,7 +68,7 @@ if (isset($_GET['showall'])) {
 } else {
     // else show paged
 
-    $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+    $paged = get_query_var('paged') ?: 1;
     // number of tags to show per page
     $per_page = 40;
     $offset = ($paged - 1) * $per_page;
@@ -222,7 +222,7 @@ if (! isset($_GET['showall'])) {
     $range = 1; // Number of items +/- current page
     $showitems = ($range * 2) + 1;
 
-    if ($pages == '') {
+    if ($pages == 0.0) {
         // $total_terms = wp_count_terms( $taxonomy );
         $pages = ceil($total_terms / $per_page);
         if (! $pages) {
@@ -245,7 +245,7 @@ if (! isset($_GET['showall'])) {
         }
 
         for ($pagecount = 1; $pagecount <= $pages; $pagecount++) {
-            if ($pages != 1 && (! ($pagecount >= $paged + $range + 1 || $pagecount <= $paged - $range - 1) || $pages <= $showitems)) {
+            if ($pages != 1 && ($pagecount < $paged + $range + 1 && $pagecount > $paged - $range - 1 || $pages <= $showitems)) {
                 echo ($paged == $pagecount) ? '<li class="page-item current"><a class="page-link">'.$pagecount.'</a></li>' : '<li class="page-item"><a class="page-link" href="'.get_permalink().'page/'.$pagecount.'/'.$alpha_url.'" class="inactive" >'.$pagecount.'</a></li>';
             }
         }

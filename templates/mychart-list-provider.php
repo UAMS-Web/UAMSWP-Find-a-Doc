@@ -42,7 +42,7 @@ remove_action('genesis_before_header', 'uamswp_skip_links', 5);
 
 // Dequeue Skip Links Script
 add_action('wp_enqueue_scripts', 'child_dequeue_skip_links');
-function child_dequeue_skip_links()
+function child_dequeue_skip_links(): void
 {
     wp_dequeue_script('skip-links');
 }
@@ -55,7 +55,7 @@ add_filter('wp_nav_menu', '__return_false');
 
 remove_action('genesis_loop', 'genesis_do_loop');
 add_action('genesis_loop', 'display_provider_image');
-function display_provider_image()
+function display_provider_image(): void
 {
     // Custom WP_Query args
     $args = [

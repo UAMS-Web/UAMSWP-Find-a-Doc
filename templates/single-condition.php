@@ -1,7 +1,7 @@
 <?php
 $keywords = get_field('condition_alternate');
 
-function uamswp_keyword_hook_header()
+function uamswp_keyword_hook_header(): void
 {
     global $keywords;
     $keyword_text = '';
@@ -21,29 +21,29 @@ add_action('wp_head', 'uamswp_keyword_hook_header');
 
 $page_title = get_the_title();
 $page_title_attr = $page_title;
-$page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
-$page_title_attr = str_replace('&#8217;', '\'', $page_title_attr); // Replace right single quote with single quote
+$page_title_attr = str_replace('"', "'", $page_title_attr); // Replace double quotes with single quote
+$page_title_attr = str_replace('&#8217;', "'", $page_title_attr); // Replace right single quote with single quote
 $page_title_attr = htmlentities($page_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
 $page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
 $condition_archive_title = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
 $condition_archive_title_attr = $condition_archive_title;
-$condition_archive_title_attr = str_replace('"', '\'', $condition_archive_title_attr); // Replace double quotes with single quote
-$condition_archive_title_attr = str_replace('&#8217;', '\'', $condition_archive_title_attr); // Replace right single quote with single quote
+$condition_archive_title_attr = str_replace('"', "'", $condition_archive_title_attr); // Replace double quotes with single quote
+$condition_archive_title_attr = str_replace('&#8217;', "'", $condition_archive_title_attr); // Replace right single quote with single quote
 $condition_archive_title_attr = htmlentities($condition_archive_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $condition_archive_title_attr = str_replace('&nbsp;', ' ', $condition_archive_title_attr); // Convert non-breaking space with normal space
 $condition_archive_title_attr = html_entity_decode($condition_archive_title_attr); // Convert HTML entities to their corresponding characters
 $condition_title = get_field('conditions_single_name', 'option') ?: 'Condition';
 $condition_title_attr = $condition_title;
-$condition_title_attr = str_replace('"', '\'', $condition_title_attr); // Replace double quotes with single quote
-$condition_title_attr = str_replace('&#8217;', '\'', $condition_title_attr); // Replace right single quote with single quote
+$condition_title_attr = str_replace('"', "'", $condition_title_attr); // Replace double quotes with single quote
+$condition_title_attr = str_replace('&#8217;', "'", $condition_title_attr); // Replace right single quote with single quote
 $condition_title_attr = htmlentities($condition_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $condition_title_attr = str_replace('&nbsp;', ' ', $condition_title_attr); // Convert non-breaking space with normal space
 $condition_title_attr = html_entity_decode($condition_title_attr); // Convert HTML entities to their corresponding characters
 $condition_text = get_field('conditions_archive_intro_text', 'option');
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html)
+function uamswp_fad_title($html): string
 {
     global $page_title_attr;
     global $condition_title_attr;
@@ -55,12 +55,10 @@ function uamswp_fad_title($html)
     $meta_title_enhanced = $page_title_attr.$meta_title_enhanced_addition.' | '.get_bloginfo('name');
     $meta_title_enhanced_chars = strlen($meta_title_enhanced);
     if ($meta_title_enhanced_chars <= $meta_title_chars_max) {
-        $html = $meta_title_enhanced;
-    } else {
-        $html = $meta_title_base;
+        return $meta_title_enhanced;
     }
 
-    return $html;
+    return $meta_title_base;
 }
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
@@ -77,9 +75,8 @@ if (empty($excerpt)) {
 function sp_titles_desc($html)
 {
     global $excerpt;
-    $html = $excerpt;
 
-    return $html;
+    return $excerpt;
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
@@ -183,7 +180,7 @@ if ($location_valid) {
 
         $location_region = '';
         if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
-            $location_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+            $location_region = $_GET['_filter_region'] ?? $_COOKIE['wp_filter_region'];
         }
 
         $tax_query = [];
@@ -455,7 +452,7 @@ if ($keywords) {
                     $cta_phone = '';
                     $cta_phone_link = '';
                     if ($cta_action_type == 'phone') {
-                        $cta_phone_prepend = $cta['cta_bar_phone_prepend'] ? $cta['cta_bar_phone_prepend'] : 'Call';
+                        $cta_phone_prepend = $cta['cta_bar_phone_prepend'] ?: 'Call';
                         $cta_phone = $cta['cta_bar_phone'];
                         $cta_phone_link = '<a href="tel:'.format_phone_dash($cta_phone).'">'.format_phone_us($cta_phone).'</a>';
                     }
@@ -639,7 +636,7 @@ if ($show_treatments_section) { ?>
 								    $treatment_id = get_the_ID();
 								    $treatment_permalink = get_permalink($treatment_id);
 								    $treatment_title = get_the_title();
-								    $treatment_title_attr = str_replace('"', '\'', $treatment_title);
+								    $treatment_title_attr = str_replace('"', "'", $treatment_title);
 								    $treatment_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($treatment_title_attr, ENT_HTML401, 'utf-8')));
 								    ?>
 									<li>
@@ -680,7 +677,7 @@ if ($show_providers_section) {
 
         $provider_region = '';
         if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
-            $provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+            $provider_region = $_GET['_filter_region'] ?? $_COOKIE['wp_filter_region'];
         }
 
         $tax_query = [];

@@ -11,11 +11,13 @@ declare(strict_types=1);
 if (function_exists('uams_fad_block_placeholder') && uams_fad_block_placeholder($block ?? null, $is_preview ?? false)) {
     return;
 }
+
 // Create id attribute allowing for custom "anchor" value.
 $id = '';
 if (empty($id) && isset($block)) {
     $id = $block['id'];
 }
+
 if (empty($id)) {
     $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
 }
@@ -76,9 +78,11 @@ if ($recognition_query->have_posts()) {
                 if (count($degrees) > $i) {
                     $degree_list .= ', ';
                 }
+
                 $i++;
             }
         }
+
         $full_name = get_field('physician_first_name', $id).' '.(get_field('physician_middle_name', $id) ? get_field('physician_middle_name', $id).' ' : '').get_field('physician_last_name', $id).(get_field('physician_pedigree', $id) ? '&nbsp;'.get_field('physician_pedigree', $id) : '').($degree_list ? ', '.$degree_list : '');
         $recognition_list .= '<tr>';
         $recognition_list .= '<td><a href="'.get_permalink().'" title="'.$full_name.'">'.$full_name.'</a></td>';
@@ -156,10 +160,12 @@ if ($recognition_query->have_posts()) {
         $recognition_list .= '</tr>';
 
     }
+
     $recognition_list .= '</tbody>';
     $recognition_list .= '</table>';
     $recognition_list .= '</div>'; // responsive table
 
     echo $recognition_list;
 }
+
 // endif;
