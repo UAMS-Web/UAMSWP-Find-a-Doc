@@ -78,3 +78,13 @@ The refresh token needs the `https://www.googleapis.com/auth/business.manage` sc
 **Activity log.** The settings screen keeps the 300 newest entries (listings already in sync are not logged) and shows 100. Entries for a listing left for review or that failed are also kept in a separate list, one per store code, up to 1,000, that routine entries cannot push out. A later run for the same store code that settles (nothing to change, skipped, or really created or updated) removes it. Both lists filter by action and silo.
 
 **Category names** come from the `gmb_cat_provider` and `gmb_cat_location` taxonomies and are matched to Google's categories without regard to case. A name Google has no category for is left off the listing and shown in the log.
+
+## Credits
+
+Developed and maintained by UAMS Web Services.
+
+Developers:
+
+- Josh Daugherty
+- Todd McKee
+- Brent Passmore

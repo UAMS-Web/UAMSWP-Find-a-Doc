@@ -5,8 +5,8 @@ declare(strict_types=1);
 Plugin Name: UAMSWP Find-a-doc
 Plugin URI: https://github.com/UAMS-Web/UAMSWP-Find-a-Doc
 Description: Find-a-doc plugin for uamshealth.com
-Author: uams, Todd McKee, MEd
-Author URI: https://www.uams.edu/
+Author: UAMS Web Services
+Author URI: https://communications.uams.edu/web/
 Version: 2.4.0
 Requires PHP: 8.2
 */
