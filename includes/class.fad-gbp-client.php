@@ -38,7 +38,7 @@ final class UAMSWP_FAD_GBP_Client
     private const ACCOUNTS_URL = 'https://mybusinessaccountmanagement.googleapis.com/v1/accounts';
 
     /** The fields read back from a listing for the diff. */
-    private const READ_MASK = 'name,storeCode,title,storefrontAddress,latlng,phoneNumbers,websiteUri,categories,profile';
+    private const READ_MASK = 'name,storeCode,title,storefrontAddress,latlng,phoneNumbers,websiteUri,categories,profile,metadata';
 
     /** @var callable(string, string, array<string, string>, ?string): array{0: int, 1: string} */
     private $transport;

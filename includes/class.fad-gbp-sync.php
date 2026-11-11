@@ -35,6 +35,9 @@ final class UAMSWP_FAD_GBP_Sync
     /** @var array<int, array{account: string, listing: array<string, mixed>}> */
     private array $created = [];
 
+    /** @var array<string, array{account: string, listing: array<string, mixed>}> Every listing of the index by its Google name (`locations/123`). */
+    private array $by_name = [];
+
     /**
      * @param  object  $client  Provides patch() and create(), as UAMSWP_FAD_GBP_Client does.
      * @param  array{silos: array<string, array<string, mixed>>, modes: array<string, string>, is_production: bool, creates_paused_until?: int, creates_left?: ?int, now?: int}  $config  The last three
@@ -48,6 +51,16 @@ final class UAMSWP_FAD_GBP_Sync
         $this->paused_until = (int) ($config['creates_paused_until'] ?? 0);
         $this->creates_left = isset($config['creates_left']) ? max(0, (int) $config['creates_left']) : null;
         $this->now = (int) ($config['now'] ?? time());
+
+        foreach ($index as $listings) {
+            foreach ($listings as $listing) {
+                $name = (string) ($listing['listing']['name'] ?? '');
+
+                if ($name !== '') {
+                    $this->by_name[$name] = $listing;
+                }
+            }
+        }
     }
 
     /**
@@ -168,15 +181,28 @@ final class UAMSWP_FAD_GBP_Sync
 
         $found = $this->index[$item['store_code']] ?? [];
 
-        if (count($found) > 1) {
-            return ['action' => 'review', 'reason' => 'Store code is on '.count($found).' listings'] + $entry;
-        }
+        // The Google location ID stored on the post comes first: it survives a slug change, which
+        // changes the store code. A stored ID no listing has any more falls back to the store code.
+        $stored = (string) ($item['stored_name'] ?? '');
+        $match = $stored !== '' ? ($this->by_name[$stored] ?? null) : null;
 
-        if ($found === []) {
-            return $this->create($item, $entry, $account, $mode);
-        }
+        if ($match !== null) {
+            $others = array_filter($found, fn (array $listing): bool => (string) ($listing['listing']['name'] ?? '') !== $stored);
 
-        $match = $found[0];
+            if ($others !== []) {
+                return ['action' => 'review', 'reason' => sprintf('Store code %s is already on another listing than the stored %s', $item['store_code'], $stored)] + $entry;
+            }
+        } else {
+            if (count($found) > 1) {
+                return ['action' => 'review', 'reason' => 'Store code is on '.count($found).' listings'] + $entry;
+            }
+
+            if ($found === []) {
+                return $this->create($item, $entry, $account, $mode);
+            }
+
+            $match = $found[0];
+        }
 
         if ($match['account'] !== $account) {
             $owner = $this->owning_silo($match['account']);
@@ -203,6 +229,8 @@ final class UAMSWP_FAD_GBP_Sync
      */
     private function update(array $item, array $entry, array $listing, string $mode): array
     {
+        // Named on every outcome, so the caller can store the ID of the listing that was matched.
+        $entry = ['listing_name' => (string) ($listing['name'] ?? '')] + $entry;
         $changed = UAMSWP_FAD_GBP_Logic::changed_fields($item['fields'], $listing);
 
         try {
@@ -292,8 +320,15 @@ final class UAMSWP_FAD_GBP_Sync
         $this->index[$item['store_code']][] = $listing;
         $this->created[] = $listing;
 
+        if ($listing['listing']['name'] !== '') {
+            $this->by_name[$listing['listing']['name']] = $listing;
+        }
+
         // The listing exists now. A failure setting attributes is reported, and the next run
-        // finds the listing by its store code and sets them as an update.
+        // finds the listing by its store code and sets them as an update. Its name is on the entry
+        // either way, so the caller stores the ID.
+        $entry = ['listing_name' => (string) ($created['name'] ?? '')] + $entry;
+
         if ($attributes !== [] && ! empty($created['name'])) {
             try {
                 $this->client->update_attributes((string) $created['name'], $attributes);
@@ -302,7 +337,7 @@ final class UAMSWP_FAD_GBP_Sync
             }
         }
 
-        return ['reason' => 'Created'] + $entry;
+        return ['reason' => 'Created', 'listing_name' => (string) ($created['name'] ?? '')] + $entry;
     }
 
     /**
