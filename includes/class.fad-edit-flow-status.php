@@ -17,6 +17,9 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * @param  mixed  $hook
+ */
 function uamswp_fad_edit_flow_published_status_control($hook): void
 {
 

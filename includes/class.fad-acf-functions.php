@@ -41,6 +41,10 @@ add_filter('acfcdt/settings/store_acf_values_in_core_meta', '__return_false');
  */
 add_filter('acf/settings/load_json', 'uamswp_fad_json_load_point');
 
+/**
+ * @param  mixed  $paths
+ * @return mixed
+ */
 function uamswp_fad_json_load_point($paths)
 {
 
@@ -71,6 +75,10 @@ function uamswp_fad_json_load_point($paths)
 add_filter('acf/prepare_field/key=field_physician_portal', 'set_default_portal', 20, 3);
 add_filter('acf/prepare_field/key=field_location_portal', 'set_default_portal', 20, 3);
 
+/**
+ * @param  mixed  $field
+ * @return mixed
+ */
 function set_default_portal($field)
 {
 
@@ -102,6 +110,12 @@ function set_default_portal($field)
  */
 add_filter('acf/load_value/key=field_physician_languages', 'set_default_language', 20, 3);
 
+/**
+ * @param  mixed  $value
+ * @param  mixed  $post_id
+ * @param  mixed  $field
+ * @return mixed
+ */
 function set_default_language($value, $post_id, $field)
 {
 
@@ -139,6 +153,12 @@ function set_default_language($value, $post_id, $field)
  */
 add_filter('acf/load_value/key=field_location_region', 'set_default_region', 20, 3);
 
+/**
+ * @param  mixed  $value
+ * @param  mixed  $post_id
+ * @param  mixed  $field
+ * @return mixed
+ */
 function set_default_region($value, $post_id, $field)
 {
 
@@ -165,6 +185,11 @@ function set_default_region($value, $post_id, $field)
 add_filter('acf/fields/taxonomy/wp_list_categories/key=field_location_portal', 'my_taxonomy_query', 10, 2);
 add_filter('acf/fields/taxonomy/wp_list_categories/key=field_physician_portal', 'my_taxonomy_query', 10, 2);
 
+/**
+ * @param  mixed  $args
+ * @param  mixed  $field
+ * @return mixed
+ */
 function my_taxonomy_query($args, $field)
 {
 
@@ -188,6 +213,9 @@ function my_taxonomy_query($args, $field)
  */
 add_action('acf/save_post', 'update_facetwp_index');
 
+/**
+ * @param  mixed  $post_id
+ */
 function update_facetwp_index($post_id): void
 {
 
@@ -240,6 +268,9 @@ function uamswp_provider_region_in_rule($provider_region, $remove_regions): bool
     return false;
 }
 
+/**
+ * @param  mixed  $post_id
+ */
 function physician_save_post($post_id): void
 {
 
@@ -470,7 +501,7 @@ function physician_save_post($post_id): void
 
         // Store each region once, however many locations share it
 
-        $region = array_values(array_unique($region));
+        $region = [...array_unique($region)];
 
     }
 
@@ -498,6 +529,9 @@ function physician_save_post($post_id): void
 
 add_action('acf/save_post', 'resources_save_post', 6);
 
+/**
+ * @param  mixed  $post_id
+ */
 function resources_save_post($post_id): void
 {
 
@@ -714,6 +748,9 @@ function resources_save_post($post_id): void
  */
 add_action('acf/save_post', 'location_save_post', 7);
 
+/**
+ * @param  mixed  $post_id
+ */
 function location_save_post($post_id): void
 {
 
@@ -805,6 +842,9 @@ function location_save_post($post_id): void
  */
 add_action('acf/save_post', 'location_save_post_after', 20);
 
+/**
+ * @param  mixed  $post_id
+ */
 function location_save_post_after($post_id): void
 {
 
@@ -859,6 +899,9 @@ function location_save_post_after($post_id): void
  */
 add_action('acf/save_post', 'clinical_title_save_post', 5);
 
+/**
+ * @param  mixed  $post_id
+ */
 function clinical_title_save_post($post_id): void
 {
 
@@ -1011,6 +1054,9 @@ function clinical_title_save_post($post_id): void
 
 add_action('acf/save_post', 'uamswp_sync_acf_save_post', 5);
 
+/**
+ * @param  mixed  $post_id
+ */
 function uamswp_sync_acf_save_post($post_id): void
 {
 
@@ -1097,6 +1143,11 @@ function uamswp_sync_acf_save_post($post_id): void
  * $field_key = ACF field key of field with new value
  * $value = incoming/new value
  * $post_id = $post_id being updated
+ *
+ * @param  mixed  $field_name
+ * @param  mixed  $field_key
+ * @param  mixed  $value
+ * @param  mixed  $post_id
  */
 function bidirectional_acf_update(
     $field_name, // Required // ACF field name
@@ -1364,7 +1415,7 @@ if (function_exists('acf_register_block_type')) {
 // FacetWP Cards Callback Function
 
 /**
- * @param  array  $block  The block settings and attributes.
+ * @param  array<mixed>  $block  The block settings and attributes.
  * @param  string  $content  The block inner HTML (empty).
  * @param  bool  $is_preview  True during AJAX preview.
  * @param  (int|string)  $post_id  The post ID this block is saved to.
@@ -1416,7 +1467,7 @@ function fad_facetwp_cards_callback(
 // FacetWP Block Callback Function
 
 /**
- * @param  array  $block  The block settings and attributes.
+ * @param  array<mixed>  $block  The block settings and attributes.
  * @param  string  $content  The block inner HTML (empty).
  * @param  bool  $is_preview  True during AJAX preview.
  * @param  (int|string)  $post_id  The post ID this block is saved to.
@@ -1578,6 +1629,12 @@ function location_current_prescription_pharm_message(): void
 
 add_filter('acf/fields/post_object/query/key=field_location_parent_id', 'limit_post_top_level', 10, 3);
 
+/**
+ * @param  mixed  $args
+ * @param  mixed  $field
+ * @param  mixed  $post
+ * @return mixed
+ */
 function limit_post_top_level($args, $field, $post)
 {
 
@@ -1620,6 +1677,9 @@ function limit_post_top_level($args, $field, $post)
 
 add_filter('acf/render_field_settings/type=image', 'acf_image_aspect_ratio_settings', 20);
 
+/**
+ * @param  mixed  $field
+ */
 function acf_image_aspect_ratio_settings($field): void
 {
 
@@ -1687,6 +1747,14 @@ function acf_image_aspect_ratio_settings($field): void
 
 add_filter('acf/validate_attachment/type=image', 'acf_image_aspect_ratio_validate', 10, 5);
 
+/**
+ * @param  mixed  $errors
+ * @param  mixed  $file
+ * @param  mixed  $attachment
+ * @param  mixed  $field
+ * @param  mixed  $content
+ * @return mixed
+ */
 function acf_image_aspect_ratio_validate($errors, $file, $attachment, $field, $content)
 {
 
@@ -1780,6 +1848,11 @@ function acf_image_aspect_ratio_validate($errors, $file, $attachment, $field, $c
 
 // Render shortcode(s) in provider editor's Pubmed Information (HTML) field
 
+/**
+ * @param  mixed  $value
+ * @param  mixed  $post_id
+ * @param  mixed  $field
+ */
 function pubmed_information_format_value($value, $post_id, $field): string
 {
 
@@ -1810,6 +1883,12 @@ add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'rela
 
 // 2. Add the $field and $post arguments.
 
+/**
+ * @param  mixed  $args
+ * @param  mixed  $field
+ * @param  mixed  $post_id
+ * @return mixed
+ */
 function relationship_exclude_id($args, $field, $post_id)
 {
 
@@ -1823,6 +1902,10 @@ function relationship_exclude_id($args, $field, $post_id)
 
 // Conditional Logic to check if Find-a-Doc Settings are set to allow MyChart Scheduling
 
+/**
+ * @param  mixed  $field
+ * @return mixed
+ */
 function uamswp_mychart_scheduling_query($field)
 {
 
@@ -1852,6 +1935,10 @@ add_filter('acf/load_field/key=field_fad_default_brandorg_credit', 'uamswp_fad_a
 add_filter('acf/load_field/key=field_fad_default_brandorg_locationcreated', 'uamswp_fad_acf_load_brandorg_uams'); // Default UAMS Brand Organizations as Location Created
 add_filter('acf/load_field/key=field_fad_default_brandorg_copyright', 'uamswp_fad_acf_load_brandorg_uams'); // Default UAMS Brand Organizations as Copyright Holder
 
+/**
+ * @param  mixed  $field
+ * @return mixed
+ */
 function uamswp_fad_acf_load_brandorg_uams($field)
 {
 
@@ -1887,6 +1974,10 @@ function uamswp_fad_acf_load_brandorg_uams($field)
 add_filter('acf/load_field/key=field_schema_brandorg', 'uamswp_fad_acf_load_brandorg_3p');
 add_filter('acf/load_field/key=field_schema_brandorg_multiple', 'uamswp_fad_acf_load_brandorg_3p');
 
+/**
+ * @param  mixed  $field
+ * @return mixed
+ */
 function uamswp_fad_acf_load_brandorg_3p($field)
 {
 
@@ -1925,6 +2016,10 @@ function uamswp_fad_acf_load_brandorg_3p($field)
 // the editor just picked -- and the sibling fields they just filled in --
 // can only be read back out of the submitted values.
 
+/**
+ * @param  mixed  $field_key
+ * @return mixed
+ */
 function uamswp_spotlight_submitted_value($field_key)
 {
 
@@ -1950,6 +2045,9 @@ function uamswp_spotlight_submitted_value($field_key)
 // do not post the whole field group (REST, programmatic updates), so those
 // are validated against the type the post actually has.
 
+/**
+ * @return mixed
+ */
 function uamswp_spotlight_current_type()
 {
 
@@ -1986,6 +2084,12 @@ function uamswp_is_spotlight_submission(): bool
 
 add_filter('acf/fields/post_object/query/key=field_clinical_resource_spotlight_provider', 'uamswp_spotlight_provider_query', 10, 3);
 
+/**
+ * @param  mixed  $args
+ * @param  mixed  $field
+ * @param  mixed  $post_id
+ * @return mixed
+ */
 function uamswp_spotlight_provider_query($args, $field, $post_id)
 {
 
@@ -2004,6 +2108,13 @@ function uamswp_spotlight_provider_query($args, $field, $post_id)
 
 add_filter('acf/validate_value/key=field_clinical_resource_excerpt', 'uamswp_spotlight_validate_excerpt', 10, 4);
 
+/**
+ * @param  mixed  $valid
+ * @param  mixed  $value
+ * @param  mixed  $field
+ * @param  mixed  $input_name
+ * @return mixed
+ */
 function uamswp_spotlight_validate_excerpt($valid, $value, $field, $input_name)
 {
 
@@ -2032,6 +2143,13 @@ function uamswp_spotlight_validate_excerpt($valid, $value, $field, $input_name)
 
 add_filter('acf/validate_value/key=field_clinical_resource_featured_image', 'uamswp_spotlight_validate_featured_image', 10, 4);
 
+/**
+ * @param  mixed  $valid
+ * @param  mixed  $value
+ * @param  mixed  $field
+ * @param  mixed  $input_name
+ * @return mixed
+ */
 function uamswp_spotlight_validate_featured_image($valid, $value, $field, $input_name)
 {
 
@@ -2071,6 +2189,13 @@ function uamswp_spotlight_validate_featured_image($valid, $value, $field, $input
 
 add_filter('acf/validate_value/key=field_clinical_resource_spotlight_provider', 'uamswp_spotlight_validate_provider', 10, 4);
 
+/**
+ * @param  mixed  $valid
+ * @param  mixed  $value
+ * @param  mixed  $field
+ * @param  mixed  $input_name
+ * @return mixed
+ */
 function uamswp_spotlight_validate_provider($valid, $value, $field, $input_name)
 {
 
@@ -2122,6 +2247,13 @@ function uamswp_spotlight_validate_provider($valid, $value, $field, $input_name)
 
 add_filter('acf/validate_value/key=field_clinical_resource_spotlight_qa', 'uamswp_spotlight_validate_qa', 10, 4);
 
+/**
+ * @param  mixed  $valid
+ * @param  mixed  $value
+ * @param  mixed  $field
+ * @param  mixed  $input_name
+ * @return mixed
+ */
 function uamswp_spotlight_validate_qa($valid, $value, $field, $input_name)
 {
 
@@ -2157,6 +2289,12 @@ function uamswp_spotlight_validate_qa($valid, $value, $field, $input_name)
 
 add_filter('acf/load_value/key=field_clinical_resource_spotlight_qa', 'uamswp_spotlight_seed_questions', 10, 3);
 
+/**
+ * @param  mixed  $value
+ * @param  mixed  $post_id
+ * @param  mixed  $field
+ * @return mixed
+ */
 function uamswp_spotlight_seed_questions($value, $post_id, $field)
 {
 
@@ -2208,6 +2346,10 @@ function uamswp_spotlight_seed_questions($value, $post_id, $field)
 
 // Read the stored resource type of a post, flattening the array return format
 
+/**
+ * @param  mixed  $post_id
+ * @return mixed
+ */
 function uamswp_spotlight_stored_type($post_id)
 {
 
@@ -2219,6 +2361,7 @@ function uamswp_spotlight_stored_type($post_id)
 
 // Normalize a relationship / post_object value to an array of post IDs
 /**
+ * @param  mixed  $value
  * @return int[]
  */
 function uamswp_spotlight_to_ids($value): array
@@ -2259,6 +2402,9 @@ function uamswp_spotlight_to_ids($value): array
 
 add_action('acf/save_post', 'uamswp_spotlight_reconcile_providers', 5);
 
+/**
+ * @param  mixed  $post_id
+ */
 function uamswp_spotlight_reconcile_providers($post_id): void
 {
 
@@ -2386,6 +2532,9 @@ function uamswp_spotlight_reconcile_providers($post_id): void
 
 add_action('acf/save_post', 'uamswp_spotlight_sync_title', 20);
 
+/**
+ * @param  mixed  $post_id
+ */
 function uamswp_spotlight_sync_title($post_id): void
 {
 
@@ -2508,6 +2657,10 @@ function uamswp_spotlight_sync_title($post_id): void
 // the provider's headshot. Validation (see above) refuses to save a
 // spotlight for which all three are missing.
 
+/**
+ * @param  mixed  $post_id
+ * @param  mixed  $provider_id
+ */
 function uamswp_spotlight_resolve_image($post_id, $provider_id): int
 {
 
@@ -2544,6 +2697,9 @@ function uamswp_spotlight_resolve_image($post_id, $provider_id): int
 
 add_action('acf/save_post', 'uamswp_spotlight_save', 20);
 
+/**
+ * @param  mixed  $post_id
+ */
 function uamswp_spotlight_save($post_id): void
 {
 
@@ -2602,6 +2758,10 @@ function uamswp_spotlight_save($post_id): void
 // touch one side and let ACF propagate. Both sides are checked first, so a
 // half-broken link heals and an already-correct one costs nothing.
 
+/**
+ * @param  mixed  $post_id
+ * @param  mixed  $provider_id
+ */
 function uamswp_spotlight_assert_link($post_id, $provider_id): void
 {
 
@@ -2627,6 +2787,10 @@ function uamswp_spotlight_assert_link($post_id, $provider_id): void
 
 }
 
+/**
+ * @param  mixed  $post_id
+ * @param  mixed  $provider_id
+ */
 function uamswp_spotlight_release_link($post_id, $provider_id): void
 {
 
@@ -2663,6 +2827,9 @@ function uamswp_spotlight_release_link($post_id, $provider_id): void
 
 add_action('acf/save_post', 'uamswp_spotlight_provider_guard', 20);
 
+/**
+ * @param  mixed  $post_id
+ */
 function uamswp_spotlight_provider_guard($post_id): void
 {
 
@@ -2694,6 +2861,10 @@ function uamswp_spotlight_provider_guard($post_id): void
 // locations are mapped, which is why their fields are only ever written
 // through update_field().)
 
+/**
+ * @param  mixed  $provider_id
+ * @return mixed
+ */
 function uamswp_spotlight_posts_for_provider($provider_id)
 {
 
@@ -2736,6 +2907,11 @@ function uamswp_spotlight_posts_for_provider($provider_id)
 
 add_action('transition_post_status', 'uamswp_spotlight_status_sync', 10, 3);
 
+/**
+ * @param  mixed  $new_status
+ * @param  mixed  $old_status
+ * @param  mixed  $post
+ */
 function uamswp_spotlight_status_sync($new_status, $old_status, $post): void
 {
 
@@ -2794,6 +2970,9 @@ function uamswp_spotlight_status_sync($new_status, $old_status, $post): void
 
 add_action('before_delete_post', 'uamswp_spotlight_delete_sync');
 
+/**
+ * @param  mixed  $post_id
+ */
 function uamswp_spotlight_delete_sync($post_id): void
 {
 
@@ -2840,6 +3019,9 @@ function uamswp_spotlight_delete_sync($post_id): void
 
 // clinical-resource field key => the field name, the provider source
 // field, and the ontology post's reverse-relationship field key.
+/**
+ * @return array<mixed>
+ */
 function uamswp_spotlight_ontology_map(): array
 {
 
@@ -2859,6 +3041,10 @@ function uamswp_spotlight_ontology_map(): array
 // uamswp_spotlight_assert_link(): this runs outside a spotlight's own save, so
 // ACF's save-time bidirectional pass is not available to propagate for us.
 
+/**
+ * @param  mixed  $cr_id
+ * @param  mixed  $provider_id
+ */
 function uamswp_spotlight_sync_ontology($cr_id, $provider_id): void
 {
 
@@ -2962,6 +3148,9 @@ function uamswp_spotlight_sync_ontology($cr_id, $provider_id): void
 
 add_action('acf/save_post', 'uamswp_spotlight_reconcile_ontology', 5);
 
+/**
+ * @param  mixed  $post_id
+ */
 function uamswp_spotlight_reconcile_ontology($post_id): void
 {
 
@@ -3031,6 +3220,9 @@ function uamswp_spotlight_reconcile_ontology($post_id): void
 // Ontology post type => the field on it that lists its providers (the
 // bidirectional partner of the matching physician_* field). Empty for any
 // other post type.
+/**
+ * @param  mixed  $post_type
+ */
 function uamswp_spotlight_ontology_provider_field($post_type): string
 {
 
@@ -3047,6 +3239,11 @@ function uamswp_spotlight_ontology_provider_field($post_type): string
 // Remember an ontology post's provider list across a single save, so the
 // guard can also re-sync a provider that was just REMOVED (and is therefore
 // absent from the saved value).
+/**
+ * @param  mixed  $post_id
+ * @param  mixed  $set
+ * @return mixed
+ */
 function uamswp_spotlight_ontology_providers_before($post_id, $set = null)
 {
 
@@ -3067,6 +3264,9 @@ function uamswp_spotlight_ontology_providers_before($post_id, $set = null)
 // Capture the pre-save provider list at priority 5, before ACF overwrites it
 add_action('acf/save_post', 'uamswp_spotlight_capture_ontology_providers', 5);
 
+/**
+ * @param  mixed  $post_id
+ */
 function uamswp_spotlight_capture_ontology_providers($post_id): void
 {
 
@@ -3090,6 +3290,9 @@ function uamswp_spotlight_capture_ontology_providers($post_id): void
 
 add_action('acf/save_post', 'uamswp_spotlight_ontology_guard', 20);
 
+/**
+ * @param  mixed  $post_id
+ */
 function uamswp_spotlight_ontology_guard($post_id): void
 {
 
@@ -3154,6 +3357,13 @@ function uamswp_spotlight_ontology_guard($post_id): void
 
 add_filter('acf/validate_value/key=field_location_epic_dep_ids', 'uamswp_location_validate_epic_dep_ids', 10, 4);
 
+/**
+ * @param  mixed  $valid
+ * @param  mixed  $value
+ * @param  mixed  $field
+ * @param  mixed  $input_name
+ * @return mixed
+ */
 function uamswp_location_validate_epic_dep_ids($valid, $value, $field, $input_name)
 {
 
@@ -3262,6 +3472,12 @@ function uamswp_location_validate_epic_dep_ids($valid, $value, $field, $input_na
 
 add_filter('acf/update_value/key=field_location_epic_dep_id_item', 'uamswp_location_trim_epic_dep_id', 10, 3);
 
+/**
+ * @param  mixed  $value
+ * @param  mixed  $post_id
+ * @param  mixed  $field
+ * @return mixed
+ */
 function uamswp_location_trim_epic_dep_id($value, $post_id, $field)
 {
 
@@ -3283,6 +3499,9 @@ function uamswp_location_trim_epic_dep_id($value, $post_id, $field)
 //
 // Rejected rather than repaired: the filter cannot change what is stored, and
 // an editor who sees the message learns what the field holds.
+/**
+ * @return array<mixed>
+ */
 function uamswp_workday_id_validation_rules(): array
 {
 
@@ -3295,6 +3514,13 @@ function uamswp_workday_id_validation_rules(): array
 
 }
 
+/**
+ * @param  mixed  $valid
+ * @param  mixed  $value
+ * @param  mixed  $field
+ * @param  mixed  $input_name
+ * @return mixed
+ */
 function uamswp_workday_id_validate($valid, $value, $field, $input_name)
 {
 
@@ -3346,6 +3572,12 @@ unset($uamswp_workday_id_key);
 
 // Validation trims before it checks, so store the trimmed value too; otherwise
 // " 1234567 " passes and is saved with its spaces.
+/**
+ * @param  mixed  $value
+ * @param  mixed  $post_id
+ * @param  mixed  $field
+ * @return mixed
+ */
 function uamswp_workday_id_trim($value, $post_id, $field)
 {
 

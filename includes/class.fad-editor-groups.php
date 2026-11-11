@@ -272,6 +272,13 @@ function uamswp_fad_user_in_post_editor_group($user_id, $post_id): bool
 
 // 4. Capability mapping: a group member is treated like the post's author for editing
 
+/**
+ * @param  mixed  $caps
+ * @param  mixed  $cap
+ * @param  mixed  $user_id
+ * @param  mixed  $args
+ * @return mixed
+ */
 function uamswp_fad_editor_group_map_meta_cap($caps, $cap, $user_id, $args)
 {
 
@@ -310,6 +317,9 @@ add_filter('map_meta_cap', 'uamswp_fad_editor_group_map_meta_cap', 10, 4);
 
 // 5. Admin list: a doc_editor sees their groups' records as well as their own
 
+/**
+ * @param  mixed  $query
+ */
 function uamswp_fad_editor_group_admin_list_scope($query): void
 {
 
@@ -353,6 +363,11 @@ function uamswp_fad_editor_group_admin_list_scope($query): void
 
 add_action('pre_get_posts', 'uamswp_fad_editor_group_admin_list_scope');
 
+/**
+ * @param  mixed  $where
+ * @param  mixed  $query
+ * @return mixed
+ */
 function uamswp_fad_editor_group_admin_list_where($where, $query)
 {
     global $wpdb;
@@ -460,6 +475,10 @@ function uamswp_fad_inherit_editor_group($post_id): bool
     return true;
 }
 
+/**
+ * @param  mixed  $post_id
+ * @param  mixed  $post
+ */
 function uamswp_fad_inherit_editor_group_on_save($post_id, $post): void
 {
 
@@ -479,6 +498,9 @@ add_action('save_post', 'uamswp_fad_inherit_editor_group_on_save', 20, 2);
 
 // 7. One-click backfill for records saved before the mapping existed
 
+/**
+ * @return mixed
+ */
 function uamswp_fad_editor_group_sync_url()
 {
     return wp_nonce_url(

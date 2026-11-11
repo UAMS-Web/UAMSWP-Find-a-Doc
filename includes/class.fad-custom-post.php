@@ -3374,6 +3374,10 @@ function rest_api_provider_meta(): void
 
 // Providers API
 
+/**
+ * @param  mixed  $object
+ * @return mixed
+ */
 function get_provider_meta($object)
 {
 
@@ -3853,6 +3857,10 @@ add_action('rest_api_init', 'rest_api_provider_meta');
 
 // Locations API
 
+/**
+ * @param  mixed  $object
+ * @return mixed
+ */
 function get_location_meta($object)
 {
 
@@ -4562,6 +4570,10 @@ function get_location_meta($object)
 
 // Areas of Expertise API
 
+/**
+ * @param  mixed  $object
+ * @return mixed
+ */
 function get_expertise_meta($object)
 {
 
@@ -4770,6 +4782,10 @@ function get_expertise_meta($object)
 
 // Conditions API
 
+/**
+ * @param  mixed  $object
+ * @return array<mixed>
+ */
 function get_condition_meta($object): array
 {
 
@@ -4963,6 +4979,10 @@ function get_condition_meta($object): array
 
 // Treatments API
 
+/**
+ * @param  mixed  $object
+ * @return array<mixed>
+ */
 function get_treatment_meta($object): array
 {
 
@@ -5154,6 +5174,10 @@ function get_treatment_meta($object): array
 
 // Clinical Resources API
 
+/**
+ * @param  mixed  $object
+ * @return mixed
+ */
 function get_resource_meta($object)
 {
 
@@ -5560,6 +5584,10 @@ function get_resource_meta($object)
 
 add_filter('rest_query_vars', 'provider_add_rest_query_vars');
 
+/**
+ * @param  mixed  $query_vars
+ * @return array<mixed>
+ */
 function provider_add_rest_query_vars($query_vars): array
 {
 

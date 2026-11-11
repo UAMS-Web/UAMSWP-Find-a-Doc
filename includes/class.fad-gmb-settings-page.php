@@ -335,7 +335,7 @@ function doximity_csv_export(): false
  * Shared by the CSV export and the Business Profile sync so both write identical values.
  *
  * @param  int[]  $post_ids  Limit to these provider post IDs. Empty for every published provider.
- * @return array{head: array, body: array} The header row and the data rows, keyed by column number.
+ * @return array{head: array<int, mixed>, body: array<int, array<int, mixed>>} The header row and the data rows, keyed by column number.
  */
 function uamswp_fad_gmb_provider_table($post_ids = []): array
 {
@@ -1043,7 +1043,7 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
  * Shared by the CSV export and the Business Profile sync so both write identical values.
  *
  * @param  int[]  $post_ids  Limit to these location post IDs. Empty for every published location.
- * @return array{head: array, body: array} The header row and the data rows, keyed by column number.
+ * @return array{head: array<int, mixed>, body: array<int, array<int, mixed>>} The header row and the data rows, keyed by column number.
  */
 function uamswp_fad_gmb_location_table($post_ids = []): array
 {

@@ -26,6 +26,9 @@ class UAMS_Expertise_Attributes_Meta_Box
         add_meta_box('uamsexpertiseparentdiv', 'Area of Expertise Attributes', [$this, 'expertise_attributes_meta_box'], 'expertise', 'side', 'core');
     }
 
+    /**
+     * @param  mixed  $post
+     */
     public function expertise_attributes_meta_box($post): void
     {
 
@@ -93,6 +96,9 @@ class UAMS_Expertise_Attributes_Meta_Box
     //     wp_enqueue_style( 'uamswp-fad-admin', UAMS_FAD_PATH . '/admin/css/fad-admin.css' );
     // }
 
+    /**
+     * @param  mixed  $post_ID
+     */
     public function save_postdata($post_ID = 0): int
     {
         $post_ID = (int) $post_ID;

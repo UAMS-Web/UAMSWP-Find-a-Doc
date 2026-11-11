@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 // force use of templates from plugin folder
+/**
+ * @param  mixed  $template
+ * @return mixed
+ */
 function uamswp_force_template($template)
 {
     if (is_post_type_archive('provider')) {
@@ -65,6 +69,10 @@ function uamswp_force_template($template)
 
 add_filter('template_include', 'uamswp_force_template');
 
+/**
+ * @param  mixed  $templates
+ * @return mixed
+ */
 function uamswp_taxonomy_archive_page_template($templates)
 {
     $templates['archive-taxonomy-conditions.php'] = 'Conditions Archive';
@@ -78,6 +86,10 @@ function uamswp_taxonomy_archive_page_template($templates)
 
 add_filter('theme_page_templates', 'uamswp_taxonomy_archive_page_template');
 
+/**
+ * @param  mixed  $template
+ * @return mixed
+ */
 function uamswp_redirect_page_template($template)
 {
     $post = get_post();
@@ -116,6 +128,10 @@ function provider_image_rewrite_rule(): void
 
 add_action('init', 'provider_image_rewrite_rule');
 
+/**
+ * @param  mixed  $vars
+ * @return mixed
+ */
 function provider_image_query_var($vars)
 {
     $vars[] = 'image';
@@ -136,6 +152,10 @@ function provider_image_rewrite_templates(): void
 add_action('template_redirect', 'provider_image_rewrite_templates');
 
 add_filter('body_class', 'uamswp_fad_body_class');
+/**
+ * @param  mixed  $classes
+ * @return mixed
+ */
 function uamswp_fad_body_class($classes)
 {
 

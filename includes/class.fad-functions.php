@@ -1,6 +1,10 @@
 <?php
 // Ajax Search Pro modifications
 add_filter('asp_results', 'asp_custom_link_meta_results', 1, 2);
+/**
+ * @param  mixed  $results
+ * @return mixed
+ */
 function asp_custom_link_meta_results($results)
 {
 
@@ -47,6 +51,9 @@ function asp_custom_link_meta_results($results)
 
 // Enqueue for Admin
 
+/**
+ * @param  mixed  $hook
+ */
 function uamswp_admin_scripts($hook): void
 {
 
@@ -213,6 +220,9 @@ function fad_script_register(): void
     wp_enqueue_style('fad-css', UAMS_FAD_ROOT_URL.'assets/css/style.css', [], UAMS_FAD_VERSION, 'all');
 }
 add_action('wp_enqueue_scripts', 'fad_script_register');
+/**
+ * @param  mixed  $atts
+ */
 function uams_pubmed_shortcode($atts): string
 {
 
@@ -233,6 +243,7 @@ add_filter('manage_provider_posts_columns', 'posts_provider_columns', 10);
 add_action('manage_provider_posts_custom_column', 'posts_provider_custom_columns', 10, 2);
 
 /**
+ * @param  mixed  $columns
  * @return mixed[]
  */
 function posts_provider_columns($columns): array
@@ -249,6 +260,10 @@ function posts_provider_columns($columns): array
     return $custom_columns;
 }
 
+/**
+ * @param  mixed  $column_name
+ * @param  mixed  $id
+ */
 function posts_provider_custom_columns($column_name, $id): void
 {
     if ($column_name === 'provider_post_thumbs') {
@@ -256,6 +271,10 @@ function posts_provider_custom_columns($column_name, $id): void
     }
 }
 
+/**
+ * @param  mixed  $schedules
+ * @return mixed
+ */
 function uamswp_cron_every_two_hours($schedules)
 {
     // 2 hours * 60 minutes * 60 seconds = 7200 seconds
@@ -291,6 +310,11 @@ add_filter('cron_schedules', 'uamswp_cron_every_two_hours');
 
 /**
  * 1. Safe API Fetcher with Correct JSON Parsing
+ *
+ * @param  mixed  $url
+ * @param  mixed  $max_retries
+ * @param  mixed  $delay_seconds
+ * @return mixed
  */
 function fetch_pg_api_with_retry($url, $max_retries = 3, $delay_seconds = 2)
 {
@@ -434,6 +458,9 @@ register_deactivation_hook(UAMS_FAD_PATH.'uamswp-find-a-doc.php', function (): v
 });
 
 // Get PressGaney Access Token
+/**
+ * @return mixed
+ */
 function wp_pg_get_token()
 {
     $pg_cache_key = 'pg_api_token';
@@ -483,6 +510,11 @@ function wp_pg_get_token()
 }
 
 // PressGaney JSON API Call
+/**
+ * @param  mixed  $npi
+ * @param  mixed  $count
+ * @return mixed
+ */
 function wp_pg_cached_api($npi, $count = 6)
 {
     // PressGaney requires Access-Token to retrieve data
@@ -604,6 +636,12 @@ function pg_ajax_api(): void
     wp_die();
 }
 
+/**
+ * @param  mixed  $args
+ * @param  mixed  $field
+ * @param  mixed  $post
+ * @return mixed
+ */
 function limit_to_post_parent($args, $field, $post)
 {
 
@@ -652,6 +690,11 @@ add_filter('manage_edit-treatment_columns', function ($columns) {
 /* Relevanssi Functions */
 add_filter('relevanssi_tax_term_additional_content', 'rlv_tax_excerpt_term_fields', 10, 2);
 add_filter('relevanssi_pre_excerpt_content', 'rlv_tax_excerpt_term_fields', 10, 2);
+/**
+ * @param  mixed  $content
+ * @param  mixed  $term
+ * @return mixed
+ */
 function rlv_tax_excerpt_term_fields($content, $term)
 {
     if (! isset($term->term_id)) {
@@ -920,6 +963,11 @@ function uamswp_load_by_ajax_callback(): void
 // }
 // add_action( 'init', 'register_recognition_shortcodes');
 
+/**
+ * @param  mixed  $code
+ * @param  mixed  $type
+ * @return mixed
+ */
 function get_medline_api_data($code, $type)
 {
     // if ( 'none' == $type ) {
@@ -975,6 +1023,10 @@ function get_medline_api_data($code, $type)
 
     return $json;
 }
+/**
+ * @param  mixed  $code
+ * @param  mixed  $type
+ */
 function display_medline_api_data($code, $type): void
 {
     // Get data for api
@@ -1012,6 +1064,9 @@ function display_medline_api_data($code, $type): void
 }
 
 // Provider AJAX
+/**
+ * @param  mixed  $atts
+ */
 function uamswp_provider_ajax_filter_shortcode($atts): string|false
 {
     $a = shortcode_atts([
@@ -1331,6 +1386,9 @@ function provider_ajax_filter_callback(): void
     wp_die();
 }
 // provider filter with title only
+/**
+ * @param  mixed  $atts
+ */
 function uamswp_provider_title_ajax_filter_shortcode($atts): string|false
 {
     $a = shortcode_atts([
@@ -1514,6 +1572,9 @@ function provider_title_ajax_filter_callback(): void
 }
 
 // Location AJAX functions
+/**
+ * @param  mixed  $atts
+ */
 function uamswp_location_ajax_filter_shortcode($atts): string|false
 {
     $a = shortcode_atts([
@@ -1782,6 +1843,9 @@ function uamswp_fad_disable_scripts(): void
 add_action('wp_enqueue_scripts', 'uamswp_fad_disable_scripts', 100);
 
 // Convert text string to HTML attribute-friendly text string
+/**
+ * @param  mixed  $input
+ */
 function uamswp_attr_conversion($input): string
 {
 
@@ -1823,7 +1887,7 @@ function uamswp_attr_conversion($input): string
  * parent's ID where it inherits.
  *
  * @param  int|WP_Post  $post_id  Location to resolve. Defaults to the current post.
- * @return array {
+ * @return array<mixed> {
  *
  * @type int $self       The location's own ID.
  * @type int $parent     The parent location's ID, or 0 when top-level.
