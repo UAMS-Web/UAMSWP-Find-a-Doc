@@ -62,6 +62,22 @@ if (! function_exists('get_field')) {
     }
 }
 
+if (! function_exists('get_field_object')) {
+    /**
+     * A field that was never stored reads as `false`, which is what ACF returns for it; a stored one has no choices.
+     *
+     * @param  mixed  $selector
+     * @param  mixed  $post_id
+     * @return array{value: mixed, choices: array<mixed>}|false
+     */
+    function get_field_object($selector, $post_id = false)
+    {
+        $value = get_field($selector, $post_id);
+
+        return $value === false ? false : ['value' => $value, 'choices' => []];
+    }
+}
+
 if (! function_exists('update_field')) {
     /**
      * @param  mixed  $selector
