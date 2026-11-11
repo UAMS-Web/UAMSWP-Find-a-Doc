@@ -52,7 +52,7 @@ final class UAMSWP_FAD_GBP_Client
 
     /**
      * @param  array{client_id: string, client_secret: string, refresh_token: string}  $credentials
-     * @param  callable(string, string, array<string, string>, ?string): array{0: int, 1: string}  $transport  Receives method, URL, headers and body; returns the HTTP status and the raw body.
+     * @param  callable(string, string, array<string, string>, ?string): array{0: int, 1: string}  $transport  Receives method, URL, headers and body; returns the HTTP status and the raw body. Status 0 means the request was not made, with the reason as the body.
      */
     public function __construct(private array $credentials, callable $transport)
     {
@@ -78,7 +78,9 @@ final class UAMSWP_FAD_GBP_Client
         $data = json_decode($raw, true);
 
         if ($status !== 200 || ! is_array($data) || empty($data['access_token'])) {
-            $reason = is_array($data) && isset($data['error']) ? (string) $data['error'] : 'no token returned';
+            // Status 0 means the request was never made, and the body then names why.
+            $unsent = $status === 0 && $raw !== '' ? $raw : 'no token returned';
+            $reason = is_array($data) && isset($data['error']) ? (string) $data['error'] : $unsent;
 
             throw new RuntimeException('Google token exchange failed ('.$status.'): '.$reason);
         }
@@ -117,7 +119,9 @@ final class UAMSWP_FAD_GBP_Client
 
         if ($status < 200 || $status > 299) {
             $error = isset($data['error']) && is_array($data['error']) ? $data['error'] : [];
-            $message = isset($error['message']) ? (string) $error['message'] : 'no message';
+            // Status 0 means the request was never made, and the body then names why.
+            $unsent = $status === 0 && $raw !== '' ? $raw : 'no message';
+            $message = isset($error['message']) ? (string) $error['message'] : $unsent;
 
             $failure = 'Google API '.$method.' failed ('.$status.'): '.$message;
 

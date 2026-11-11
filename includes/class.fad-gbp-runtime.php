@@ -303,14 +303,14 @@ function uamswp_fad_gbp_provider_ids_for_locations(array $location_ids): array
  * The HTTP transport for the API client.
  *
  * @param  array<string, string>  $headers
- * @return array{0: int, 1: string} The status and body; status 0 when the request could not be made.
+ * @return array{0: int, 1: string} The status and body. Status 0 means the request could not be made, and the body is then the WordPress error as `<code>: <message>`, never the request body, headers or credentials.
  */
 function uamswp_fad_gbp_transport(string $method, string $url, array $headers, ?string $body): array
 {
     $response = wp_remote_request($url, ['method' => $method, 'headers' => $headers, 'body' => $body, 'timeout' => 45]);
 
     if (is_wp_error($response)) {
-        return [0, ''];
+        return [0, $response->get_error_code().': '.$response->get_error_message()];
     }
 
     return [(int) wp_remote_retrieve_response_code($response), (string) wp_remote_retrieve_body($response)];
