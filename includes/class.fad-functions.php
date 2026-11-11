@@ -1164,7 +1164,7 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
                 </div>
 				<?php } ?>
                 <div class="col-auto">
-					<input type="hidden" id="providers-ids" name="providers-ids" value="<?php echo esc_attr(implode(',', array_map('absint', $providers))); ?>">
+					<input type="hidden" id="providers-ids" name="providers-ids" value="<?php echo esc_attr(implode(',', array_map(absint(...), $providers))); ?>">
 				</div>
 				<div class="col-auto">
 					<input type="button" id="provider_clear" name="provider_clear" value="Reset" class="btn btn-outline-primary">
@@ -1445,7 +1445,7 @@ function uamswp_provider_title_ajax_filter_shortcode($atts): string|false
                     </select>
                 </div>
                 <div class="col-auto">
-					<input type="hidden" id="providers-ids" name="providers-ids" value="<?php echo esc_attr(implode(',', array_map('absint', $providers))); ?>">
+					<input type="hidden" id="providers-ids" name="providers-ids" value="<?php echo esc_attr(implode(',', array_map(absint(...), $providers))); ?>">
 				</div>
 				<div class="col-auto">
 					<input type="button" id="provider_clear" name="provider_clear" value="Reset" class="btn btn-outline-primary">
@@ -1568,7 +1568,7 @@ function uamswp_location_ajax_filter_shortcode($atts): string|false
                     </select>
                 </div>
                 <div class="col-auto">
-					<input type="hidden" id="locations" name="locations" value="<?php echo esc_attr(implode(',', array_map('absint', $locations))); ?>">
+					<input type="hidden" id="locations" name="locations" value="<?php echo esc_attr(implode(',', array_map(absint(...), $locations))); ?>">
 					<!-- <input type="submit" id="submit" name="submit" value="Search" class="btn btn-primary"> -->
 				</div>
 				<div class="col-auto">
