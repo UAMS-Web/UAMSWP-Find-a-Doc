@@ -1538,7 +1538,7 @@ function uamswp_location_ajax_filter_shortcode($atts): string|false
         if (get_post_status($location) == 'publish') {
             // Region
             $location_region = get_field('location_region', $location);
-            if ($location_region !== false && $location_region !== null && $location_region !== '') {
+            if (! in_array($location_region, [false, null, ''], true)) {
                 foreach ((array) $location_region as $region) {
                     $location_regions[] = $region;
                 }
