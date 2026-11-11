@@ -113,7 +113,7 @@ function uamswp_fad_validate_mychart_domain($valid, $value, $field, $input)
         return $valid;
     }
 
-    $value = trim((string) $value);
+    $value = trim(uamswp_fad_str($value));
     if ($value !== '' && ! preg_match('/^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/i', $value)) {
         return 'Enter a hostname only, such as mychart.example.org, with no scheme, path, or punctuation.';
     }
@@ -136,7 +136,7 @@ function uamswp_fad_validate_mychart_instance($valid, $value, $field, $input)
         return $valid;
     }
 
-    $value = trim((string) $value);
+    $value = trim(uamswp_fad_str($value));
     if ($value !== '' && ! preg_match('/^[A-Za-z0-9._-]+$/', $value)) {
         return 'Enter a single path segment, such as MyChartPRD, using letters, numbers, dot, underscore, or dash.';
     }

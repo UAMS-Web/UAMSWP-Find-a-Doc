@@ -155,7 +155,7 @@ function uamswp_dead_links_stored_ids(string $value): array
  *
  * @param  bool  $store  Keep the result as the run and its row backup. A check made after a removal
  *                       has started passes false, so it reports without replacing the undo.
- * @return array<string, mixed> The run: `items` (each a link or a row), `counts` and `status`.
+ * @return DeadLinkRun The run: `items` (each a link or a row), `counts` and `status`.
  */
 function uamswp_dead_links_scan(bool $store = true): array
 {
@@ -264,13 +264,15 @@ function uamswp_dead_links_scan(bool $store = true): array
 
     }
 
+    /** @var array<int, DeadLinkItem> $list */
+    $list = $items;
     $run = [
         'status' => 'scanned',
         'scanned_at' => time(),
         'cursor' => 0,
-        'items' => $items,
+        'items' => $list,
+        'counts' => uamswp_dead_links_counts(['items' => $list]),
     ];
-    $run['counts'] = uamswp_dead_links_counts($run);
 
     if ($store) {
 
@@ -300,7 +302,7 @@ function uamswp_dead_links_save(string $option, array $value): bool
 
     $stored = $wpdb->get_var($wpdb->prepare("SELECT MD5(option_value) FROM {$wpdb->options} WHERE option_name = %s", $option));
 
-    return $stored === md5(maybe_serialize($value));
+    return $stored === md5(uamswp_fad_str(maybe_serialize($value)));
 
 }
 
@@ -315,7 +317,7 @@ function uamswp_dead_links_lock(): bool
 
     $held = get_option('uamswp_fad_dead_links_lock', null);
 
-    if ($held !== null && (int) $held > time() - 300) {
+    if ($held !== null && uamswp_fad_int($held) > time() - 300) {
 
         return false;
 
@@ -344,8 +346,8 @@ function uamswp_dead_links_unlock(): void
 /**
  * Totals for a run: records and links with a dead ID, distinct dead IDs, orphan rows by table.
  *
- * @param  array<string, mixed>  $run
- * @return array<string, mixed>
+ * @param  array{items: array<int, DeadLinkItem>}  $run
+ * @return DeadLinkCounts The totals, keyed by what they count.
  */
 function uamswp_dead_links_counts(array $run): array
 {
@@ -354,7 +356,7 @@ function uamswp_dead_links_counts(array $run): array
     $records = [];
     $dead_ids = [];
 
-    foreach ((array) ($run['items'] ?? []) as $item) {
+    foreach ($run['items'] as $item) {
 
         if ($item['state'] === 'done') {
 
@@ -445,8 +447,8 @@ function uamswp_dead_links_post_exists(int $post_id): bool
  * writes nothing. An item whose backup was saved by a step that then ended early keeps that backup,
  * and is written, or recognized as already written, when the step runs again.
  *
- * @param  array<string, mixed>  $run
- * @return array<string, mixed> The run, with `status` set to `applied` once every item has been handled, or `failed`.
+ * @param  DeadLinkRun  $run
+ * @return DeadLinkRun The run, with `status` set to `applied` once every item has been handled, or `failed`.
  */
 function uamswp_dead_links_apply_step(array $run, int $limit = UAMSWP_DEAD_LINKS_BATCH): array
 {
@@ -461,6 +463,7 @@ function uamswp_dead_links_apply_step(array $run, int $limit = UAMSWP_DEAD_LINKS
     // Step one: record what is about to be replaced.
     for ($i = $run['cursor']; $i < $end; $i++) {
 
+        /** @var DeadLinkItem $item */
         $item = $run['items'][$i];
 
         if ($item['state'] !== 'pending') {
@@ -503,7 +506,7 @@ function uamswp_dead_links_apply_step(array $run, int $limit = UAMSWP_DEAD_LINKS
             }
 
             // An earlier step recorded this item and ended before it was marked.
-            if ($current === $item['after']) {
+            if ($current === ($item['after'] ?? [])) {
 
                 $run['items'][$i]['state'] = 'done';
 
@@ -552,18 +555,22 @@ function uamswp_dead_links_apply_step(array $run, int $limit = UAMSWP_DEAD_LINKS
 
         $run['status'] = 'failed';
 
-        return $run;
+        /** @var DeadLinkRun $failed */
+        $failed = $run;
+
+        return $failed;
 
     }
 
     // Step two: write.
     foreach ($writes as $i) {
 
+        /** @var DeadLinkItem $item */
         $item = $run['items'][$i];
 
         if ($item['kind'] === 'link') {
 
-            uamswp_dead_links_write($item['field'], $item['shape'] === 'single' ? '' : $item['after'], $item['post']);
+            uamswp_dead_links_write($item['field'], $item['shape'] === 'single' ? '' : ($item['after'] ?? []), $item['post']);
             $run['items'][$i]['state'] = 'done';
 
             continue;
@@ -577,7 +584,9 @@ function uamswp_dead_links_apply_step(array $run, int $limit = UAMSWP_DEAD_LINKS
 
     $run['cursor'] = $end;
     $run['status'] = $end >= count($run['items']) ? 'applied' : 'applying';
-    $run['counts'] = uamswp_dead_links_counts($run);
+    /** @var array<int, DeadLinkItem> $list */
+    $list = $run['items'];
+    $run['counts'] = uamswp_dead_links_counts(['items' => $list]);
 
     if (! uamswp_dead_links_save(UAMSWP_DEAD_LINKS_RUN_OPTION, $run)) {
 
@@ -585,7 +594,10 @@ function uamswp_dead_links_apply_step(array $run, int $limit = UAMSWP_DEAD_LINKS
 
     }
 
-    return $run;
+    /** @var DeadLinkRun $result */
+    $result = $run;
+
+    return $result;
 
 }
 
@@ -595,8 +607,8 @@ function uamswp_dead_links_apply_step(array $run, int $limit = UAMSWP_DEAD_LINKS
  * A field is restored only when it still holds what the removal wrote. A row is restored only when
  * its post is still gone and no row has taken its place.
  *
- * @param  array<string, mixed>  $run
- * @return array<string, mixed> The run, with `status` set to `undone` once every item has been handled, or `failed`.
+ * @param  DeadLinkRun  $run
+ * @return DeadLinkRun The run, with `status` set to `undone` once every item has been handled, or `failed`.
  */
 function uamswp_dead_links_undo_step(array $run, int $limit = UAMSWP_DEAD_LINKS_BATCH): array
 {
@@ -614,6 +626,7 @@ function uamswp_dead_links_undo_step(array $run, int $limit = UAMSWP_DEAD_LINKS_
 
     for ($i = $run['cursor']; $i < $end; $i++) {
 
+        /** @var DeadLinkItem $item */
         $item = $run['items'][$i];
 
         if ($item['state'] !== 'done') {
@@ -630,12 +643,12 @@ function uamswp_dead_links_undo_step(array $run, int $limit = UAMSWP_DEAD_LINKS_
 
             if (! uamswp_dead_links_post_exists($item['post'])) {
 
-            } elseif ($now === $item['after'] && $item['before'] !== $item['after']) {
+            } elseif ($now === ($item['after'] ?? []) && ($item['before'] ?? []) !== ($item['after'] ?? [])) {
 
-                uamswp_dead_links_write($item['field'], $item['shape'] === 'single' ? (string) ($item['before'][0] ?? '') : $item['before'], $item['post']);
+                uamswp_dead_links_write($item['field'], $item['shape'] === 'single' ? uamswp_fad_str(($item['before'][0] ?? '')) : ($item['before'] ?? []), $item['post']);
                 $state = 'restored';
 
-            } elseif ($now === $item['before']) {
+            } elseif ($now === ($item['before'] ?? [])) {
 
                 // An earlier undo step put it back and ended before it was marked.
                 $state = 'restored';
@@ -667,7 +680,9 @@ function uamswp_dead_links_undo_step(array $run, int $limit = UAMSWP_DEAD_LINKS_
 
     $run['cursor'] = $end;
     $run['status'] = $end >= count($run['items']) ? 'undone' : 'undoing';
-    $run['counts'] = uamswp_dead_links_counts($run);
+    /** @var array<int, DeadLinkItem> $list */
+    $list = $run['items'];
+    $run['counts'] = uamswp_dead_links_counts(['items' => $list]);
 
     if (! uamswp_dead_links_save(UAMSWP_DEAD_LINKS_RUN_OPTION, $run)) {
 
@@ -675,14 +690,17 @@ function uamswp_dead_links_undo_step(array $run, int $limit = UAMSWP_DEAD_LINKS_
 
     }
 
-    return $run;
+    /** @var DeadLinkRun $result */
+    $result = $run;
+
+    return $result;
 
 }
 
 /**
  * The stored run, or null before the first dry run or when what is stored is not a run.
  *
- * @return array<string, mixed>|null
+ * @return DeadLinkRun|null
  */
 function uamswp_dead_links_run(): ?array
 {
@@ -695,7 +713,10 @@ function uamswp_dead_links_run(): ?array
 
     }
 
-    return $run;
+    /** @var DeadLinkRun $stored */
+    $stored = $run;
+
+    return $stored;
 
 }
 
@@ -715,7 +736,7 @@ function uamswp_dead_links_menu(): void
  * A removal or undo step carries the dry run it was started from, so a page that was open when a
  * newer dry run replaced the list cannot remove the newer list.
  *
- * @param  array<string, mixed>|null  $run
+ * @param  DeadLinkRun|null  $run
  */
 function uamswp_dead_links_step_url(string $action, ?array $run = null): string
 {
@@ -724,7 +745,7 @@ function uamswp_dead_links_step_url(string $action, ?array $run = null): string
 
     if ($run !== null) {
 
-        $url = add_query_arg('run', (int) $run['scanned_at'], $url);
+        $url = add_query_arg('run', uamswp_fad_int($run['scanned_at']), $url);
 
     }
 
@@ -792,7 +813,7 @@ function uamswp_dead_links_handle_scan(): void
 /**
  * Run one step of a removal or an undo, then come back for the next until the list is done.
  *
- * @param  callable(array<string, mixed>): array<string, mixed>  $step
+ * @param  callable(DeadLinkRun): DeadLinkRun  $step
  * @param  array<int, string>  $statuses  The run statuses the step may start from.
  */
 function uamswp_dead_links_run_step(string $action, array $statuses, callable $step, string $done): never
@@ -816,7 +837,7 @@ function uamswp_dead_links_run_step(string $action, array $statuses, callable $s
     }
 
     // Tied to the dry run the page was showing.
-    if ((int) ($_GET['run'] ?? 0) !== (int) $run['scanned_at']) {
+    if (uamswp_fad_int(($_GET['run'] ?? 0)) !== uamswp_fad_int($run['scanned_at'])) {
 
         uamswp_dead_links_back('stale');
 
@@ -904,7 +925,7 @@ function uamswp_dead_links_screen(): void
 
     $run = uamswp_dead_links_run();
     $status = $run['status'] ?? 'none';
-    $notice = isset($_GET['notice']) ? sanitize_key(wp_unslash($_GET['notice'])) : '';
+    $notice = isset($_GET['notice']) ? sanitize_key(uamswp_fad_str(wp_unslash($_GET['notice']))) : '';
     $messages = [
         'applied' => 'The dead links and orphan rows in the list were removed. Use Check what is left to confirm none remain.',
         'undone' => 'The removal was undone.',
@@ -958,22 +979,22 @@ function uamswp_dead_links_screen(): void
     $counts = $run['counts'];
     $states = ['scanned' => 'Dry run done; nothing has been changed.', 'applying' => 'Removal in progress.', 'applied' => 'Removed.', 'undoing' => 'Undo in progress.', 'undone' => 'Removal undone.'];
 
-    echo '<h2>Last run</h2><p>'.esc_html($states[$status] ?? $status).' Dry run of '.esc_html((string) wp_date('F j, Y g:i a', (int) $run['scanned_at'])).'.</p>';
-    echo '<ul><li>'.esc_html((string) $counts['links']).' dead links on '.esc_html((string) $counts['records']).' records ('.esc_html((string) $counts['dead_ids']).' deleted IDs)</li>';
+    echo '<h2>Last run</h2><p>'.esc_html($states[$status] ?? $status).' Dry run of '.esc_html((string) wp_date('F j, Y g:i a', uamswp_fad_int($run['scanned_at']))).'.</p>';
+    echo '<ul><li>'.esc_html(uamswp_fad_str($counts['links'])).' dead links on '.esc_html(uamswp_fad_str($counts['records'])).' records ('.esc_html(uamswp_fad_str($counts['dead_ids'])).' deleted IDs)</li>';
 
     foreach ($counts['rows'] as $table => $number) {
 
-        echo '<li>'.esc_html((string) $number).' orphan rows in <code>'.esc_html((string) $table).'</code></li>';
+        echo '<li>'.esc_html(uamswp_fad_str($number)).' orphan rows in <code>'.esc_html(uamswp_fad_str($table)).'</code></li>';
 
     }
 
-    echo '<li>'.esc_html((string) $counts['done']).' removed, '.esc_html((string) $counts['skipped']).' skipped because they were already fixed or their post had come back, '.esc_html((string) ($counts['failed'] ?? 0)).' failed</li></ul>';
+    echo '<li>'.esc_html(uamswp_fad_str($counts['done'])).' removed, '.esc_html(uamswp_fad_str($counts['skipped'])).' skipped because they were already fixed or their post had come back, '.esc_html(uamswp_fad_str($counts['failed'])).' failed</li></ul>';
 
     $check = get_transient('uamswp_fad_dead_links_check');
 
     if (is_array($check)) {
 
-        echo '<p><strong>Check made '.esc_html((string) wp_date('F j, Y g:i a', (int) $check['at'])).':</strong> '.esc_html((string) $check['links']).' dead links and '.esc_html((string) $check['rows']).' orphan rows are left.</p>';
+        echo '<p><strong>Check made '.esc_html(uamswp_fad_str(wp_date('F j, Y g:i a', uamswp_fad_int($check['at'])))).':</strong> '.esc_html(uamswp_fad_str($check['links'])).' dead links and '.esc_html(uamswp_fad_str($check['rows'])).' orphan rows are left.</p>';
 
     }
 

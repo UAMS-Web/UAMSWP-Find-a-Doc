@@ -78,8 +78,8 @@ if ($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}uams_physicians'") != "{$wp
 add_filter('rwmb_meta_boxes', 'uams_physicians_register_meta_boxes');
 
 /**
- * @param  mixed  $meta_boxes
- * @return mixed
+ * @param  array<int, array<string, mixed>>  $meta_boxes
+ * @return array<int, array<string, mixed>>
  */
 function uams_physicians_register_meta_boxes($meta_boxes)
 {
@@ -899,9 +899,9 @@ add_action('rwmb_enqueue_scripts', function (): void {
 
 add_action('rwmb_physicians_before_save_post', function ($post_id): void {
     // Create full name to store in 'physician_full_name' field
-    $first_name = $_POST['physician_first_name'];
-    $middle_name = $_POST['physician_middle_name'];
-    $last_name = $_POST['physician_last_name'];
+    $first_name = uamswp_fad_str($_POST['physician_first_name']);
+    $middle_name = uamswp_fad_str($_POST['physician_middle_name']);
+    $last_name = uamswp_fad_str($_POST['physician_last_name']);
 
     $full_name = $last_name.' '.$first_name.' '.$middle_name;
 
@@ -931,9 +931,9 @@ add_action('rwmb_physicians_before_save_post', function ($post_id): void {
 
 add_action('rwmb_physicians_after_save_post', function ($post_id): void {
     // Create full name to store in 'physician_full_name_meta' field in postmeta
-    $first_name = $_POST['physician_first_name'];
-    $middle_name = $_POST['physician_middle_name'];
-    $last_name = $_POST['physician_last_name'];
+    $first_name = uamswp_fad_str($_POST['physician_first_name']);
+    $middle_name = uamswp_fad_str($_POST['physician_middle_name']);
+    $last_name = uamswp_fad_str($_POST['physician_last_name']);
 
     $full_name = $last_name.' '.$first_name.' '.$middle_name;
 

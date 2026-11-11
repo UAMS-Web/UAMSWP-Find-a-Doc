@@ -13,7 +13,7 @@ add_action('admin_menu', 'uamswp_add_gmb_export_page', 105);
 function uamswp_fad_gmb_export_page(): void
 {
     ?>
-    <h1><?php echo $GLOBALS['title'] ?></h1>
+    <h1><?php echo uamswp_fad_str($GLOBALS['title']) ?></h1>
     <p>These will take a little time to generate, please be patient.</p>
     <h2 id="csv-header-doximity">U.S. News Doctor Finder Profiles and Doximity Profiles</h2>
     <p>Generate a spreadsheet for updating U.S. News Doctor Finder Profiles and Doximity Profiles.</p>
@@ -52,7 +52,7 @@ function doximity_csv_export(): false
 
     // Nonce Check
     $nonce = $_GET['_wpnonce'] ?? '';
-    if (! wp_verify_nonce($nonce, 'download_doximity_csv')) {
+    if (! wp_verify_nonce(uamswp_fad_str($nonce), 'download_doximity_csv')) {
         exit('Security check error');
     }
 
@@ -700,8 +700,8 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
             // Create the description variables
             // "Dr." follows the degrees (M.D. or D.O.), as on the provider page, not the physician_prefix field
             $prefix = uamswp_provider_names($post_id)['prefix'];
-            $full_name = get_field('physician_first_name', $post_id).' '.(get_field('physician_middle_name', $post_id) ? get_field('physician_middle_name', $post_id).' ' : '').get_field('physician_last_name', $post_id).(get_field('physician_pedigree', $post_id) ? '&nbsp;'.get_field('physician_pedigree', $post_id) : '').($degree_list ? ', '.$degree_list : '');
-            $medium_name = ($prefix ? $prefix.' ' : '').get_field('physician_first_name', $post_id).' '.(get_field('physician_middle_name', $post_id) ? get_field('physician_middle_name', $post_id).' ' : '').get_field('physician_last_name', $post_id);
+            $full_name = uamswp_fad_str(get_field('physician_first_name', $post_id)).' '.(uamswp_fad_str(get_field('physician_middle_name', $post_id)) ? uamswp_fad_str(get_field('physician_middle_name', $post_id)).' ' : '').uamswp_fad_str(get_field('physician_last_name', $post_id)).(uamswp_fad_str(get_field('physician_pedigree', $post_id)) ? '&nbsp;'.uamswp_fad_str(get_field('physician_pedigree', $post_id)) : '').($degree_list ? ', '.$degree_list : '');
+            $medium_name = ($prefix ? uamswp_fad_str($prefix).' ' : '').uamswp_fad_str(get_field('physician_first_name', $post_id)).' '.(uamswp_fad_str(get_field('physician_middle_name', $post_id)) ? uamswp_fad_str(get_field('physician_middle_name', $post_id)).' ' : '').uamswp_fad_str(get_field('physician_last_name', $post_id));
             $resident = get_field('physician_resident', $post_id);
             $phys_title = get_field('physician_title', $post_id);
             $phys_title_name = (get_term($phys_title, 'clinical_title')->name ?? '');
@@ -1757,7 +1757,7 @@ function mychart_csv_export(): false
 
     // Nonce Check
     $nonce = $_GET['_wpnonce'] ?? '';
-    if (! wp_verify_nonce($nonce, 'download_mychart_csv')) {
+    if (! wp_verify_nonce(uamswp_fad_str($nonce), 'download_mychart_csv')) {
         exit('Security check error');
     }
 

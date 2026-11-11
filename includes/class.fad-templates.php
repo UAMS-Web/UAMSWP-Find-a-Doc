@@ -70,8 +70,8 @@ function uamswp_force_template($template)
 add_filter('template_include', 'uamswp_force_template');
 
 /**
- * @param  mixed  $templates
- * @return mixed
+ * @param  array<string, string>  $templates
+ * @return array<string, string>
  */
 function uamswp_taxonomy_archive_page_template($templates)
 {
@@ -94,15 +94,15 @@ function uamswp_redirect_page_template($template)
 {
     $post = get_post();
     $page_template = get_post_meta($post->ID ?? 0, '_wp_page_template', true);
-    if (basename($page_template) === 'archive-taxonomy-conditions.php') {
+    if (basename(uamswp_fad_str($page_template)) === 'archive-taxonomy-conditions.php') {
         $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/archive-taxonomy-conditions.php';
     }
 
-    if (basename($page_template) === 'archive-taxonomy-treatments.php') {
+    if (basename(uamswp_fad_str($page_template)) === 'archive-taxonomy-treatments.php') {
         $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/archive-taxonomy-treatments.php';
     }
 
-    if (basename($page_template) === 'provider-image.php') {
+    if (basename(uamswp_fad_str($page_template)) === 'provider-image.php') {
         return WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/provider-image.php';
     }
 
@@ -129,8 +129,8 @@ function provider_image_rewrite_rule(): void
 add_action('init', 'provider_image_rewrite_rule');
 
 /**
- * @param  mixed  $vars
- * @return mixed
+ * @param  array<int, string>  $vars
+ * @return array<int, string>
  */
 function provider_image_query_var($vars)
 {
@@ -153,8 +153,8 @@ add_action('template_redirect', 'provider_image_rewrite_templates');
 
 add_filter('body_class', 'uamswp_fad_body_class');
 /**
- * @param  mixed  $classes
- * @return mixed
+ * @param  array<int, string>  $classes
+ * @return array<int, string>
  */
 function uamswp_fad_body_class($classes)
 {

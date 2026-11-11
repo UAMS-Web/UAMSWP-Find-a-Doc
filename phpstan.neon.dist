@@ -56,15 +56,20 @@ parameters:
         min: 80200
         max: 80400
 
-    # One shape for a Business Profile sync item, shared by the sync class, the runtime and the CLI.
+    # Shapes shared across files: a Business Profile sync item, and the dead-link cleanup's run and its items.
     typeAliases:
+        DeadLinkLink: 'array{kind: "link", state: string, post: int, field: string, shape: string, dead: array<int, int>, before?: array<int, int>, after?: array<int, int>, remove?: array<int, int>, saved?: bool}'
+        DeadLinkRow: 'array{kind: "row", state: string, post: int, table: string, saved?: bool}'
+        DeadLinkItem: 'DeadLinkLink|DeadLinkRow'
+        DeadLinkCounts: 'array{links: int, records: int, dead_ids: int, rows: array<string, int>, done: int, skipped: int, failed: int}'
+        DeadLinkRun: 'array{status: string, scanned_at: int, cursor: int, items: array<int, DeadLinkItem>, counts: DeadLinkCounts}'
         GbpSyncItem: 'array{store_code: string, kind: string, silo: ?string, fields: array<string, mixed>, unresolved: array<int, string>, excluded?: bool, stored_name?: string, post_id?: int, location_id?: int, photos?: array<int, array{category: string, url: string}>, photos_sent?: array<int, string>, attributes?: array<string, bool>}'
 
     # Filled: the highest level the code passes today. Find it by running
     # from 0 upward (see the code-quality skill), then raise it by one per
     # change as findings are fixed, until `max`. Lowering it is a deliberate,
     # argued change, not a quiet edit to get a red run green.
-    level: 8
+    level: 9
 
     excludePaths:
         analyseAndScan:

@@ -114,21 +114,21 @@ function uamswp_fad_gbp_render_entries(array $entries): void
         <tbody>
         <?php foreach ($entries as $entry) { ?>
             <tr>
-                <td><?php echo esc_html((string) wp_date('Y-m-d H:i', (int) ($entry['time'] ?? 0))); ?></td>
-                <td><code><?php echo esc_html((string) ($entry['store_code'] ?? '')); ?></code></td>
-                <td><?php echo esc_html((string) ($entry['silo'] ?? '')); ?></td>
-                <td><?php echo esc_html((string) ($entry['mode'] ?? '')); ?></td>
-                <td><?php echo esc_html((string) ($entry['action'] ?? '')); ?></td>
+                <td><?php echo esc_html((string) wp_date('Y-m-d H:i', uamswp_fad_int(($entry['time'] ?? 0)))); ?></td>
+                <td><code><?php echo esc_html(uamswp_fad_str(($entry['store_code'] ?? ''))); ?></code></td>
+                <td><?php echo esc_html(uamswp_fad_str(($entry['silo'] ?? ''))); ?></td>
+                <td><?php echo esc_html(uamswp_fad_str(($entry['mode'] ?? ''))); ?></td>
+                <td><?php echo esc_html(uamswp_fad_str(($entry['action'] ?? ''))); ?></td>
                 <td>
-                    <?php echo esc_html((string) ($entry['reason'] ?? '')); ?>
+                    <?php echo esc_html(uamswp_fad_str(($entry['reason'] ?? ''))); ?>
                     <?php if (! empty($entry['fields'])) { ?>
-                        <br><small><?php echo esc_html(implode(', ', (array) $entry['fields'])); ?></small>
+                        <br><small><?php echo esc_html(implode(', ', array_map(uamswp_fad_str(...), (array) $entry['fields']))); ?></small>
                     <?php } ?>
                     <?php if (! empty($entry['attributes'])) { ?>
-                        <br><small>Attributes: <?php echo esc_html(implode(', ', (array) $entry['attributes'])); ?></small>
+                        <br><small>Attributes: <?php echo esc_html(implode(', ', array_map(uamswp_fad_str(...), (array) $entry['attributes']))); ?></small>
                     <?php } ?>
                     <?php if (! empty($entry['unresolved_categories'])) { ?>
-                        <br><small>No Google category for: <?php echo esc_html(implode(', ', (array) $entry['unresolved_categories'])); ?></small>
+                        <br><small>No Google category for: <?php echo esc_html(implode(', ', array_map(uamswp_fad_str(...), (array) $entry['unresolved_categories']))); ?></small>
                     <?php } ?>
                 </td>
             </tr>
@@ -159,10 +159,14 @@ function uamswp_fad_gbp_render_settings_page(): void
     $modes = uamswp_fad_gbp_modes();
     $production = uamswp_fad_gbp_is_production();
     $filters = uamswp_fad_gbp_log_filters($_GET);
-    $log = get_option('uamswp_fad_gbp_log', []);
-    $log = is_array($log) ? array_slice(UAMSWP_FAD_GBP_Logic::filter_entries($log, $filters['action'], $filters['silo']), 0, 100) : [];
-    $attention = get_option('uamswp_fad_gbp_attention', []);
-    $attention = is_array($attention) ? UAMSWP_FAD_GBP_Logic::filter_entries($attention, $filters['action'], $filters['silo']) : [];
+    $stored_log = get_option('uamswp_fad_gbp_log', []);
+    /** @var array<int|string, array<string, mixed>> $log_entries */
+    $log_entries = is_array($stored_log) ? $stored_log : [];
+    $log = array_slice(UAMSWP_FAD_GBP_Logic::filter_entries($log_entries, $filters['action'], $filters['silo']), 0, 100);
+    $stored_attention = get_option('uamswp_fad_gbp_attention', []);
+    /** @var array<int|string, array<string, mixed>> $attention_entries */
+    $attention_entries = is_array($stored_attention) ? $stored_attention : [];
+    $attention = UAMSWP_FAD_GBP_Logic::filter_entries($attention_entries, $filters['action'], $filters['silo']);
     ?>
     <div class="wrap">
         <h1>Business Profile Sync</h1>
@@ -170,7 +174,7 @@ function uamswp_fad_gbp_render_settings_page(): void
             <div class="notice notice-success is-dismissible"><p>Settings saved.</p></div>
         <?php } ?>
         <?php if (isset($_GET['queued'])) { ?>
-            <div class="notice notice-success is-dismissible"><p><?php echo esc_html(sprintf('Queued a sync for %d providers and locations.', (int) $_GET['queued'])); ?></p></div>
+            <div class="notice notice-success is-dismissible"><p><?php echo esc_html(sprintf('Queued a sync for %d providers and locations.', uamswp_fad_int($_GET['queued']))); ?></p></div>
         <?php } ?>
         <p>Updates Google Business Profile listings for providers and locations when one is saved, and creates a listing when none exists. Each silo is a set of listings under one account group.</p>
 

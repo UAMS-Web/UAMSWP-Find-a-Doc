@@ -80,13 +80,13 @@ final class UAMSWP_FAD_GBP_Client
         if ($status !== 200 || ! is_array($data) || empty($data['access_token'])) {
             // Status 0 means the request was never made, and the body then names why.
             $unsent = $status === 0 && $raw !== '' ? $raw : 'no token returned';
-            $reason = is_array($data) && isset($data['error']) ? (string) $data['error'] : $unsent;
+            $reason = is_array($data) && isset($data['error']) ? uamswp_fad_str($data['error']) : $unsent;
 
             throw new RuntimeException('Google token exchange failed ('.$status.'): '.$reason);
         }
 
-        $this->token = (string) $data['access_token'];
-        $this->token_expires = time() + (int) ($data['expires_in'] ?? 3600);
+        $this->token = uamswp_fad_str($data['access_token']);
+        $this->token_expires = time() + uamswp_fad_int(($data['expires_in'] ?? 3600));
 
         return $this->token;
     }
@@ -121,7 +121,7 @@ final class UAMSWP_FAD_GBP_Client
             $error = isset($data['error']) && is_array($data['error']) ? $data['error'] : [];
             // Status 0 means the request was never made, and the body then names why.
             $unsent = $status === 0 && $raw !== '' ? $raw : 'no message';
-            $message = isset($error['message']) ? (string) $error['message'] : $unsent;
+            $message = isset($error['message']) ? uamswp_fad_str($error['message']) : $unsent;
 
             $failure = 'Google API '.$method.' failed ('.$status.'): '.$message;
 
@@ -148,12 +148,14 @@ final class UAMSWP_FAD_GBP_Client
             $data = $this->request('GET', self::ACCOUNTS_URL, array_filter(['pageSize' => 20, 'pageToken' => $page]));
 
             foreach ((array) ($data['accounts'] ?? []) as $account) {
+                $account = uamswp_fad_arr($account);
+
                 if (($account['type'] ?? '') === 'LOCATION_GROUP') {
-                    $groups[(string) $account['name']] = (string) ($account['accountName'] ?? '');
+                    $groups[uamswp_fad_str($account['name'])] = uamswp_fad_str(($account['accountName'] ?? ''));
                 }
             }
 
-            $page = (string) ($data['nextPageToken'] ?? '');
+            $page = uamswp_fad_str(($data['nextPageToken'] ?? ''));
         } while ($page !== '');
 
         return $groups;
@@ -177,10 +179,10 @@ final class UAMSWP_FAD_GBP_Client
             ]));
 
             foreach ((array) ($data['locations'] ?? []) as $location) {
-                $locations[] = $location;
+                $locations[] = uamswp_fad_arr($location);
             }
 
-            $page = (string) ($data['nextPageToken'] ?? '');
+            $page = uamswp_fad_str(($data['nextPageToken'] ?? ''));
         } while ($page !== '');
 
         return $locations;
@@ -206,12 +208,14 @@ final class UAMSWP_FAD_GBP_Client
             ]));
 
             foreach ((array) ($data['categories'] ?? []) as $category) {
+                $category = uamswp_fad_arr($category);
+
                 if (isset($category['displayName'], $category['name'])) {
-                    $ids[(string) $category['displayName']] = (string) $category['name'];
+                    $ids[uamswp_fad_str($category['displayName'])] = uamswp_fad_str($category['name']);
                 }
             }
 
-            $page = (string) ($data['nextPageToken'] ?? '');
+            $page = uamswp_fad_str(($data['nextPageToken'] ?? ''));
         } while ($page !== '');
 
         return $ids;
@@ -286,10 +290,11 @@ final class UAMSWP_FAD_GBP_Client
         $attributes = [];
 
         foreach ((array) ($data['attributes'] ?? []) as $attribute) {
-            $value = $attribute['values'][0] ?? null;
+            $attribute = uamswp_fad_arr($attribute);
+            $value = uamswp_fad_arr($attribute['values'] ?? null)[0] ?? null;
 
             if (($attribute['valueType'] ?? '') === 'BOOL' && is_bool($value)) {
-                $attributes[(string) preg_replace('#^attributes/#', '', (string) $attribute['name'])] = $value;
+                $attributes[uamswp_fad_str(preg_replace('#^attributes/#', '', uamswp_fad_str($attribute['name'])))] = $value;
             }
         }
 

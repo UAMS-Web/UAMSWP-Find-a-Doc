@@ -27,12 +27,12 @@ class UAMSWP_FAD_GBP_Logic
     public static function resolve_silo($brand_query, $brand_org, array $silos): ?string
     {
 
-        if ((string) $brand_query !== '1') {
+        if (uamswp_fad_str($brand_query) !== '1') {
             return isset($silos['uams']) ? 'uams' : null;
         }
 
         foreach ($silos as $name => $silo) {
-            if (! empty($silo['brand']) && (string) $silo['brand'] === (string) $brand_org) {
+            if (! empty($silo['brand']) && uamswp_fad_str($silo['brand']) === uamswp_fad_str($brand_org)) {
                 return (string) $name;
             }
         }
@@ -143,7 +143,7 @@ class UAMSWP_FAD_GBP_Logic
     public static function fields_from_row(array $row, array $category_ids): array
     {
 
-        $cell = (fn ($i): string => isset($row[$i]) ? trim(html_entity_decode((string) $row[$i], ENT_QUOTES, 'UTF-8')) : '');
+        $cell = (fn ($i): string => isset($row[$i]) ? trim(html_entity_decode(uamswp_fad_str($row[$i]), ENT_QUOTES, 'UTF-8')) : '');
 
         $fields = [];
 
@@ -225,7 +225,7 @@ class UAMSWP_FAD_GBP_Logic
     public static function unresolved_categories(array $row, array $category_ids): array
     {
         $lookup = self::category_lookup($category_ids);
-        $names = array_merge([(string) ($row[15] ?? '')], explode(',', (string) ($row[16] ?? '')));
+        $names = array_merge([uamswp_fad_str(($row[15] ?? ''))], explode(',', uamswp_fad_str(($row[16] ?? ''))));
         $unresolved = [];
 
         foreach ($names as $name) {
@@ -299,7 +299,7 @@ class UAMSWP_FAD_GBP_Logic
      *
      * @param  string  $field  A field name from self::OWNED_FIELDS.
      * @param  mixed  $value  The field value, or null when the live listing has none.
-     * @return mixed
+     * @return mixed The comparable form, or null when there is no value.
      */
     private static function normalize(string $field, $value)
     {
@@ -308,40 +308,42 @@ class UAMSWP_FAD_GBP_Logic
             return null;
         }
 
+        $fields = uamswp_fad_arr($value);
+
         switch ($field) {
 
             case 'phoneNumbers':
-                return ['primaryPhone' => preg_replace('/\D+/', '', (string) ($value['primaryPhone'] ?? ''))];
+                return ['primaryPhone' => preg_replace('/\D+/', '', uamswp_fad_str(($fields['primaryPhone'] ?? '')))];
 
             case 'latlng':
                 return [
-                    round((float) ($value['latitude'] ?? 0), 5),
-                    round((float) ($value['longitude'] ?? 0), 5),
+                    round(uamswp_fad_float(($fields['latitude'] ?? 0)), 5),
+                    round(uamswp_fad_float(($fields['longitude'] ?? 0)), 5),
                 ];
 
             case 'storefrontAddress':
                 return [
-                    'postalCode' => trim((string) ($value['postalCode'] ?? '')),
-                    'administrativeArea' => trim((string) ($value['administrativeArea'] ?? '')),
-                    'locality' => trim((string) ($value['locality'] ?? '')),
-                    'addressLines' => array_values(array_map(trim(...), (array) ($value['addressLines'] ?? []))),
+                    'postalCode' => trim(uamswp_fad_str(($fields['postalCode'] ?? ''))),
+                    'administrativeArea' => trim(uamswp_fad_str(($fields['administrativeArea'] ?? ''))),
+                    'locality' => trim(uamswp_fad_str(($fields['locality'] ?? ''))),
+                    'addressLines' => array_values(array_map(fn (mixed $line): string => trim(uamswp_fad_str($line)), (array) ($fields['addressLines'] ?? []))),
                 ];
 
             case 'categories':
                 $additional = [];
-                foreach ((array) ($value['additionalCategories'] ?? []) as $category) {
-                    $additional[] = (string) ($category['name'] ?? '');
+                foreach ((array) ($fields['additionalCategories'] ?? []) as $category) {
+                    $additional[] = uamswp_fad_str(uamswp_fad_arr($category)['name'] ?? '');
                 }
 
                 sort($additional);
 
                 return [
-                    'primary' => (string) ($value['primaryCategory']['name'] ?? ''),
+                    'primary' => uamswp_fad_str(uamswp_fad_arr($fields['primaryCategory'] ?? null)['name'] ?? ''),
                     'additional' => $additional,
                 ];
 
             case 'profile':
-                return ['description' => trim((string) ($value['description'] ?? ''))];
+                return ['description' => trim(uamswp_fad_str(($fields['description'] ?? '')))];
 
             default:
                 return is_string($value) ? trim($value) : $value;
@@ -379,14 +381,14 @@ class UAMSWP_FAD_GBP_Logic
         $photos = [];
 
         foreach ([[18, 'LOGO'], [19, 'COVER']] as [$column, $category]) {
-            $url = trim((string) ($row[$column] ?? ''));
+            $url = trim(uamswp_fad_str(($row[$column] ?? '')));
 
             if ($url !== '') {
                 $photos[] = ['category' => $category, 'url' => $url];
             }
         }
 
-        foreach ($with_others ? explode(',', (string) ($row[20] ?? '')) : [] as $url) {
+        foreach ($with_others ? explode(',', uamswp_fad_str(($row[20] ?? ''))) : [] as $url) {
             $url = trim($url);
 
             if ($url !== '') {
@@ -455,7 +457,7 @@ class UAMSWP_FAD_GBP_Logic
      */
     public static function is_closed(array $listing): bool
     {
-        return in_array($listing['openInfo']['status'] ?? '', ['CLOSED_PERMANENTLY', 'CLOSED_TEMPORARILY'], true);
+        return in_array(uamswp_fad_arr($listing['openInfo'] ?? null)['status'] ?? '', ['CLOSED_PERMANENTLY', 'CLOSED_TEMPORARILY'], true);
     }
 
     /**
@@ -584,14 +586,14 @@ class UAMSWP_FAD_GBP_Logic
 
         foreach ($listings as $entry) {
             $listing = $entry['listing'];
-            $name = (string) ($listing['name'] ?? '');
+            $name = uamswp_fad_str(($listing['name'] ?? ''));
             $by_name[$name] = true;
 
             if (($listing['storeCode'] ?? '') !== '') {
-                $by_code[(string) $listing['storeCode']][] = $name;
+                $by_code[uamswp_fad_str($listing['storeCode'])][] = $name;
             }
 
-            $cid = self::cid_from_maps_uri((string) ($listing['metadata']['mapsUri'] ?? ''));
+            $cid = self::cid_from_maps_uri(uamswp_fad_str(uamswp_fad_arr($listing['metadata'] ?? null)['mapsUri'] ?? ''));
 
             if ($cid !== null) {
                 $by_cid[$cid][] = $name;
@@ -601,7 +603,7 @@ class UAMSWP_FAD_GBP_Logic
         $per_post = [];
 
         foreach ($items as $item) {
-            $per_post[(int) ($item['post_id'] ?? 0)] = ($per_post[(int) ($item['post_id'] ?? 0)] ?? 0) + 1;
+            $per_post[uamswp_fad_int(($item['post_id'] ?? 0))] = ($per_post[uamswp_fad_int(($item['post_id'] ?? 0))] ?? 0) + 1;
         }
 
         $plan = ['already' => [], 'by_store_code' => [], 'by_cid' => [], 'unmatched' => []];
@@ -609,7 +611,7 @@ class UAMSWP_FAD_GBP_Logic
 
         // Names already stored are taken, so no route hands the same listing to a second post.
         foreach ($items as $position => $item) {
-            $stored = (string) ($item['stored_name'] ?? '');
+            $stored = uamswp_fad_str(($item['stored_name'] ?? ''));
 
             if ($stored !== '' && isset($by_name[$stored])) {
                 $plan['already'][] = $item;
@@ -620,7 +622,7 @@ class UAMSWP_FAD_GBP_Logic
 
         // An item with no resolved post or location cannot be stored under the right key.
         foreach ($items as $position => $item) {
-            if ((int) ($item['post_id'] ?? 0) === 0 || ($item['kind'] === 'provider' && (int) ($item['location_id'] ?? 0) === 0)) {
+            if (uamswp_fad_int(($item['post_id'] ?? 0)) === 0 || ($item['kind'] === 'provider' && uamswp_fad_int(($item['location_id'] ?? 0)) === 0)) {
                 $plan['unmatched'][] = $item;
                 unset($items[$position]);
             }
@@ -628,7 +630,7 @@ class UAMSWP_FAD_GBP_Logic
 
         // Store code first for every item, then CID for what is left.
         foreach ($items as $position => $item) {
-            $codes = $by_code[$item['store_code']] ?? [];
+            $codes = $by_code[uamswp_fad_str($item['store_code'])] ?? [];
 
             if (count($codes) === 1 && ! isset($claimed[$codes[0]])) {
                 $plan['by_store_code'][] = ['item' => $item, 'name' => $codes[0]];
@@ -638,8 +640,8 @@ class UAMSWP_FAD_GBP_Logic
         }
 
         foreach ($items as $item) {
-            $codes = $by_code[$item['store_code']] ?? [];
-            $post_id = (int) ($item['post_id'] ?? 0);
+            $codes = $by_code[uamswp_fad_str($item['store_code'])] ?? [];
+            $post_id = uamswp_fad_int(($item['post_id'] ?? 0));
             $eligible = $item['kind'] === 'location' || ($per_post[$post_id] ?? 0) === 1;
             $names = [];
 
@@ -676,7 +678,7 @@ class UAMSWP_FAD_GBP_Logic
         $known = [];
 
         foreach ($listings as $entry) {
-            $cid = self::cid_from_maps_uri((string) ($entry['listing']['metadata']['mapsUri'] ?? ''));
+            $cid = self::cid_from_maps_uri(uamswp_fad_str(uamswp_fad_arr(uamswp_fad_arr($entry['listing'])['metadata'] ?? null)['mapsUri'] ?? ''));
 
             if ($cid !== null) {
                 $listing_cids[$cid] = true;
@@ -700,10 +702,10 @@ class UAMSWP_FAD_GBP_Logic
         $without_cid = [];
 
         foreach ($listings as $entry) {
-            $cid = self::cid_from_maps_uri((string) ($entry['listing']['metadata']['mapsUri'] ?? ''));
+            $cid = self::cid_from_maps_uri(uamswp_fad_str(uamswp_fad_arr(uamswp_fad_arr($entry['listing'])['metadata'] ?? null)['mapsUri'] ?? ''));
 
             if ($cid === null || ! isset($known[$cid])) {
-                $without_cid[] = (string) ($entry['listing']['storeCode'] ?? $entry['listing']['name'] ?? '');
+                $without_cid[] = uamswp_fad_str(($entry['listing']['storeCode'] ?? $entry['listing']['name'] ?? ''));
             }
         }
 
@@ -717,9 +719,9 @@ class UAMSWP_FAD_GBP_Logic
      */
     public static function attention_key(array $entry): string
     {
-        $code = (string) ($entry['store_code'] ?? '');
+        $code = uamswp_fad_str(($entry['store_code'] ?? ''));
 
-        return $code !== '' ? $code : '~'.($entry['reason'] ?? '');
+        return $code !== '' ? $code : '~'.uamswp_fad_str($entry['reason'] ?? '');
     }
 
     /**
@@ -737,7 +739,7 @@ class UAMSWP_FAD_GBP_Logic
     public static function next_attention(array $attention, array $entry, int $cap): array
     {
         $key = self::attention_key($entry);
-        $action = (string) ($entry['action'] ?? '');
+        $action = uamswp_fad_str(($entry['action'] ?? ''));
 
         if (in_array($action, ['review', 'error'], true)) {
             // The union puts the new entry first and drops the older one for the same key.
@@ -835,7 +837,7 @@ class UAMSWP_FAD_GBP_Logic
 
         for ($back = $days - 1; $back >= 0; $back--) {
             $day = $today->modify('-'.$back.' days')->format('Y-m-d');
-            $out[] = ['day' => $day, 'count' => (int) ($history[$day] ?? 0)];
+            $out[] = ['day' => $day, 'count' => uamswp_fad_int(($history[$day] ?? 0))];
         }
 
         return $out;
@@ -950,12 +952,12 @@ class UAMSWP_FAD_GBP_Logic
         $counts = ['create' => 0, 'update' => 0, 'review' => 0, 'error' => 0];
 
         foreach ($log as $entry) {
-            if ((int) ($entry['time'] ?? 0) < $now - 86400) {
+            if (uamswp_fad_int(($entry['time'] ?? 0)) < $now - 86400) {
                 continue;
             }
 
-            $action = (string) ($entry['action'] ?? '');
-            $reason = (string) ($entry['reason'] ?? '');
+            $action = uamswp_fad_str(($entry['action'] ?? ''));
+            $reason = uamswp_fad_str(($entry['reason'] ?? ''));
 
             if (($action === 'create' && $reason === 'Created') || ($action === 'update' && $reason === 'Updated') || $action === 'review' || $action === 'error') {
                 $counts[$action]++;
@@ -1018,7 +1020,7 @@ class UAMSWP_FAD_GBP_Logic
      */
     public static function location_item(array $row, array $category_ids, ?string $silo): ?array
     {
-        $store_code = isset($row[0]) ? trim((string) $row[0]) : '';
+        $store_code = isset($row[0]) ? trim(uamswp_fad_str($row[0])) : '';
 
         if ($store_code === '') {
             return null;
@@ -1062,7 +1064,7 @@ class UAMSWP_FAD_GBP_Logic
         $attributes = [];
 
         foreach (self::ATTRIBUTE_COLUMNS as $column => $name) {
-            $cell = isset($row[$column]) ? strtolower(trim((string) $row[$column])) : '';
+            $cell = isset($row[$column]) ? strtolower(trim(uamswp_fad_str($row[$column]))) : '';
 
             if ($cell === 'yes') {
                 $attributes[$name] = true;

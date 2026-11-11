@@ -3379,7 +3379,7 @@ function rest_api_provider_meta(): void
 // Providers API
 
 /**
- * @param  mixed  $object
+ * @param  array{id: int}&array<string, mixed>  $object
  * @return mixed
  */
 function get_provider_meta($object)
@@ -3485,7 +3485,7 @@ function get_provider_meta($object)
     $data['physician_clinical_bio'] = get_field('physician_clinical_bio', $postId);
     $data['physician_short_clinical_bio'] = get_field('physician_short_clinical_bio', $postId) ?: wp_trim_words(get_field('physician_clinical_bio', $postId), 30, ' &hellip;');
     $data['physician_gender'] = get_field('physician_gender', $postId);
-    $data['physician_accepting_new_patients'] = get_post_meta($postId, 'physician_accepting_patients', true);
+    $data['physician_accepting_new_patients'] = get_post_meta(uamswp_fad_int($postId), 'physician_accepting_patients', true);
     $data['physician_second_opinion'] = get_field('physician_second_opinion', $postId);
     $patients = get_field('physician_patient_types', $postId);
     $patient_list = '';
@@ -3536,7 +3536,7 @@ function get_provider_meta($object)
 
     $data['physician_languages'] = $language_list;
     $data['physician_eligible_appointments'] = $provider_resident ? 0 : get_field('physician_eligible_appointments', $postId);
-    $data['physician_thumbnail'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center', 'portrait-3-4');
+    $data['physician_thumbnail'] = image_sizer(get_post_thumbnail_id(uamswp_fad_int($postId)), 253, 337, 'center', 'center', 'portrait-3-4');
     $data['physician_photo'] = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4');
     $data['physician_referral_required'] = get_field('physician_referral_required', $postId);
     $provider_portal = get_field('physician_portal', $postId);
@@ -3685,7 +3685,7 @@ function get_provider_meta($object)
         if (is_array($map)) {
             $data['physician_locations'][$location]['location_lat'] = $map['lat'];
             $data['physician_locations'][$location]['location_lng'] = $map['lng'];
-            $data['physician_locations'][$location]['location_directions'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'.$map['lat'].','.$map['lng'].'" target="_blank" aria-label="Get Directions to '.get_the_title($location).'">Get Directions</a>';
+            $data['physician_locations'][$location]['location_directions'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'.uamswp_fad_str($map['lat']).','.uamswp_fad_str($map['lng']).'" target="_blank" aria-label="Get Directions to '.get_the_title($location).'">Get Directions</a>';
             // $data['physician_locations'][$location]['map_marker'] = '<div class="marker" data-lat="'. $map['lat'] .'" data-lng="'. $map['lng'] .'" data-label="'. $i .'"></div>';
         }
 
@@ -3862,15 +3862,15 @@ add_action('rest_api_init', 'rest_api_provider_meta');
 // Locations API
 
 /**
- * @param  mixed  $object
+ * @param  array{id: int}&array<string, mixed>  $object
  * @return mixed
  */
 function get_location_meta($object)
 {
 
     $postId = $object['id'];
-    $data['location_title'] = get_the_title($postId);
-    $data['location_link'] = get_permalink($postId);
+    $data['location_title'] = get_the_title(uamswp_fad_int($postId));
+    $data['location_link'] = get_permalink(uamswp_fad_int($postId));
 
     // Parent Location
 
@@ -3919,7 +3919,7 @@ function get_location_meta($object)
      * child. The resolver returns the parent's ID for a group the
      * child inherits and the child's own where it overrides.
      */
-    $location_source_ids = uamswp_fad_location_source_ids($postId);
+    $location_source_ids = uamswp_fad_location_source_ids(uamswp_fad_int($postId));
 
     // Image values
 
@@ -4025,7 +4025,7 @@ function get_location_meta($object)
     if (is_array($location_floor)) {
 
         $location_floor_value = $location_floor['value'] ?? null;
-        $location_floor_label = $location_floor['choices'][$location_floor_value] ?? null;
+        $location_floor_label = uamswp_fad_arr($location_floor['choices'] ?? null)[uamswp_fad_str($location_floor_value)] ?? null;
 
     }
 
@@ -4560,11 +4560,11 @@ function get_location_meta($object)
     $data['location_parking'] = get_field('location_parking', $location_source_ids['parking']);
     $parking_map = get_field('location_parking_map', $location_source_ids['parking']);
 
-    $data['location_parking_link'] = is_array($parking_map) ? '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'.$parking_map['lat'].','.$parking_map['lng'].'" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>' : '';
+    $data['location_parking_link'] = is_array($parking_map) ? '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'.uamswp_fad_str($parking_map['lat']).','.uamswp_fad_str($parking_map['lng']).'" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>' : '';
 
     // Directions to location
 
-    $data['location_directions_link'] = is_array($map) ? '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'.$map['lat'].','.$map['lng'].'" target="_blank" aria-label="Get Directions to '.get_the_title($postId).'">Get Directions</a>' : '';
+    $data['location_directions_link'] = is_array($map) ? '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'.uamswp_fad_str($map['lat']).','.uamswp_fad_str($map['lng']).'" target="_blank" aria-label="Get Directions to '.get_the_title(uamswp_fad_int($postId)).'">Get Directions</a>' : '';
 
     return $data;
 
@@ -4575,15 +4575,15 @@ function get_location_meta($object)
 // Areas of Expertise API
 
 /**
- * @param  mixed  $object
+ * @param  array{id: int}&array<string, mixed>  $object
  * @return mixed
  */
 function get_expertise_meta($object)
 {
 
     $postId = $object['id'];
-    $data['expertise_title'] = get_the_title($postId);
-    $data['expertise_link'] = get_permalink($postId);
+    $data['expertise_title'] = get_the_title(uamswp_fad_int($postId));
+    $data['expertise_link'] = get_permalink(uamswp_fad_int($postId));
     $podcast_name = get_field('expertise_podcast_name', $postId);
     $data['expertise_podcast'] = '<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
 			</script>
@@ -4787,7 +4787,7 @@ function get_expertise_meta($object)
 // Conditions API
 
 /**
- * @param  mixed  $object
+ * @param  array{id: int}&array<string, mixed>  $object
  * @return array<mixed>
  */
 function get_condition_meta($object): array
@@ -4984,7 +4984,7 @@ function get_condition_meta($object): array
 // Treatments API
 
 /**
- * @param  mixed  $object
+ * @param  array{id: int}&array<string, mixed>  $object
  * @return array<mixed>
  */
 function get_treatment_meta($object): array
@@ -5179,7 +5179,7 @@ function get_treatment_meta($object): array
 // Clinical Resources API
 
 /**
- * @param  mixed  $object
+ * @param  array{id: int}&array<string, mixed>  $object
  * @return mixed
  */
 function get_resource_meta($object)
@@ -5193,7 +5193,7 @@ function get_resource_meta($object)
     $location_query = null;
     $expertise_query = null;
     $postId = $object['id'];
-    $resource_image = get_the_post_thumbnail_url($postId, 'large');
+    $resource_image = get_the_post_thumbnail_url(uamswp_fad_int($postId), 'large');
     $resource_type = get_field('clinical_resource_type', $postId);
     $resource_type_value = $resource_type['value'];
     $resource_type_label = $resource_type['label'];
@@ -5314,8 +5314,8 @@ function get_resource_meta($object)
     $video_descr = get_field('clinical_resource_video_descr', $postId);
     $video_transcript = get_field('clinical_resource_video_transcript', $postId);
 
-    $data['clinical_resource_title'] = get_the_title($postId);
-    $data['clinical_resource_link'] = get_permalink($postId);
+    $data['clinical_resource_title'] = get_the_title(uamswp_fad_int($postId));
+    $data['clinical_resource_link'] = get_permalink(uamswp_fad_int($postId));
     $data['clinical_resource_excerpt'] = get_field('clinical_resource_excerpt', $postId);
     $data['clinical_resource_image'] = $resource_image;
     $data['clinical_resource_type'] = $resource_type_label;
@@ -5395,7 +5395,7 @@ function get_resource_meta($object)
             $document_title = $document['document_title'];
             $document_file = $document['document_file'];
             if ($document_title && is_array($document_file)) {
-                $document_url = user_trailingslashit($document_file['url']);
+                $document_url = user_trailingslashit(uamswp_fad_str($document_file['url']));
                 $data['clinical_resource_document'][$i]['title'] = $document_title;
                 $data['clinical_resource_document'][$i]['url'] = $document_url;
             }
@@ -5601,7 +5601,7 @@ function get_resource_meta($object)
 add_filter('rest_query_vars', 'provider_add_rest_query_vars');
 
 /**
- * @param  mixed  $query_vars
+ * @param  array<int, string>  $query_vars
  * @return array<mixed>
  */
 function provider_add_rest_query_vars($query_vars): array

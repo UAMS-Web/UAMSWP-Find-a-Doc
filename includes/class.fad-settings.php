@@ -46,7 +46,7 @@ class UAMSPhysicians_Settings
 
     public function ajax_search_pro_id_callback(): void
     {
-        echo "<input name='ajax_search_pro_id' type='text' size='20' value='".get_option('ajax_search_pro_id')."' />";
+        echo "<input name='ajax_search_pro_id' type='text' size='20' value='".uamswp_fad_str(get_option('ajax_search_pro_id'))."' />";
     }
 }
 

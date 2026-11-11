@@ -25,14 +25,16 @@ function uamswp_fad_gbp_dashboard_data(?int $now = null): array
         $modes[$silo] = UAMSWP_FAD_GBP_Logic::effective_mode($mode, $production);
     }
 
-    $paused_until = (int) get_option(UAMSWP_FAD_GBP_PAUSE_OPTION, 0);
-    $backoff_until = (int) get_option(UAMSWP_FAD_GBP_BACKOFF_OPTION, 0);
+    $paused_until = uamswp_fad_int(get_option(UAMSWP_FAD_GBP_PAUSE_OPTION, 0));
+    $backoff_until = uamswp_fad_int(get_option(UAMSWP_FAD_GBP_BACKOFF_OPTION, 0));
 
     $count = get_option(UAMSWP_FAD_GBP_COUNT_OPTION, []);
-    $used = is_array($count) && ($count['day'] ?? '') === UAMSWP_FAD_GBP_Logic::pacific_day($now) ? (int) ($count['count'] ?? 0) : 0;
+    $used = is_array($count) && ($count['day'] ?? '') === UAMSWP_FAD_GBP_Logic::pacific_day($now) ? uamswp_fad_int(($count['count'] ?? 0)) : 0;
 
     $history = get_option(UAMSWP_FAD_GBP_HISTORY_OPTION, []);
     $log = get_option('uamswp_fad_gbp_log', []);
+    /** @var array<int, array<string, mixed>> $log_entries */
+    $log_entries = is_array($log) ? $log : [];
     $budget = uamswp_fad_gbp_create_budget();
     $reset = UAMSWP_FAD_GBP_Logic::next_pacific_reset($now);
 
@@ -53,7 +55,7 @@ function uamswp_fad_gbp_dashboard_data(?int $now = null): array
         'reset' => $reset,
         'days' => $days,
         'queue' => UAMSWP_FAD_GBP_Logic::queue_summary(uamswp_fad_gbp_scheduled_times(), $now, $paused_until),
-        'outcomes' => UAMSWP_FAD_GBP_Logic::outcome_counts(is_array($log) ? $log : [], $now),
+        'outcomes' => UAMSWP_FAD_GBP_Logic::outcome_counts($log_entries, $now),
     ];
 }
 

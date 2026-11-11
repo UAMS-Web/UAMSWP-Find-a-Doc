@@ -10,7 +10,7 @@ if (! function_exists('apStyleDate')) {
     function apStyleDate($date): string
     {
 
-        $date = (string) strftime('%l:%M %p', strtotime($date));
+        $date = (string) strftime('%l:%M %p', (int) strtotime(uamswp_fad_str($date)));
 
         $date = str_replace(':00', '', $date);
 
@@ -47,50 +47,50 @@ if (! function_exists('ap_date')) {
 
         // Format the weekday name.
         if ($useweekdaynames == true) {
-            $weekdayname = date('l,', $date);
+            $weekdayname = date('l,', uamswp_fad_int($date));
         } else {
             $weekdayname = '';
         }
 
         // Determine the month and set the AP Style abbreviation.
-        if (date('m', $date) === '01') {
+        if (date('m', uamswp_fad_int($date)) === '01') {
             $apmonth = 'Jan. ';
-        } elseif (date('m', $date) === '02') {
+        } elseif (date('m', uamswp_fad_int($date)) === '02') {
             $apmonth = 'Feb. ';
-        } elseif (date('m', $date) === '08') {
+        } elseif (date('m', uamswp_fad_int($date)) === '08') {
             $apmonth = 'Aug. ';
-        } elseif (date('m', $date) === '09') {
+        } elseif (date('m', uamswp_fad_int($date)) === '09') {
             $apmonth = 'Sept. ';
-        } elseif (date('m', $date) === '10') {
+        } elseif (date('m', uamswp_fad_int($date)) === '10') {
             $apmonth = 'Oct. ';
-        } elseif (date('m', $date) === '11') {
+        } elseif (date('m', uamswp_fad_int($date)) === '11') {
             $apmonth = 'Nov. ';
-        } elseif (date('m', $date) === '12') {
+        } elseif (date('m', uamswp_fad_int($date)) === '12') {
             $apmonth = 'Dec. ';
         } else {
-            $apmonth = (date('F', $date));
+            $apmonth = (date('F', uamswp_fad_int($date)));
         }
 
         // Determine whether the date is within the current year and set it.
-        if (date('Y', $date) !== date('Y')) {
-            $apyear = ', '.date('Y', $date);
+        if (date('Y', uamswp_fad_int($date)) !== date('Y')) {
+            $apyear = ', '.date('Y', uamswp_fad_int($date));
         } else {
             if ($useyear == true) {
-                $apyear = ', '.date('Y', $date);
+                $apyear = ', '.date('Y', uamswp_fad_int($date));
             } else {
                 $apyear = '';
             }
         }
 
         // Determine whether the date is the current date and set the final output.
-        if ($today == true && date('F j Y', $date) === date('F j Y')) {
+        if ($today == true && date('F j Y', uamswp_fad_int($date)) === date('F j Y')) {
             if ($captoday == true) {
                 $apdate = 'Today';
             } else {
                 $apdate = 'today';
             }
         } else {
-            $apdate = $weekdayname.' '.$apmonth.' '.date('j', $date).''.$apyear;
+            $apdate = $weekdayname.' '.$apmonth.' '.date('j', uamswp_fad_int($date)).''.$apyear;
         }
 
         return $apdate;
@@ -118,7 +118,7 @@ if (! function_exists('ap_time')) {
         // }
 
         // Format am and pm to AP Style abbreviations.
-        if (date('a', $time) === 'am') {
+        if (date('a', uamswp_fad_int($time)) === 'am') {
             $meridian = 'a.m.';
         } else {
             // `a` formats as `am` or `pm` and nothing else.
@@ -126,13 +126,13 @@ if (! function_exists('ap_time')) {
         }
 
         // Reformat 12:00 and 00:00 to noon and midnight.
-        if (date('H:i', $time) === '00:00') {
+        if (date('H:i', uamswp_fad_int($time)) === '00:00') {
             if ($capnoon == true) {
                 $aptime = 'Midnight';
             } else {
                 $aptime = 'midnight';
             }
-        } elseif (date('H:i', $time) === '12:00') {
+        } elseif (date('H:i', uamswp_fad_int($time)) === '12:00') {
             if ($capnoon == true) {
                 $aptime = 'Noon';
             } else {
@@ -140,10 +140,10 @@ if (! function_exists('ap_time')) {
             }
 
             // Eliminate trailing zeroes from times at the top of the hour and set final output.
-        } elseif (date('i', $time) === '00') {
-            $aptime = date('g', $time).' '.$meridian;
+        } elseif (date('i', uamswp_fad_int($time)) === '00') {
+            $aptime = date('g', uamswp_fad_int($time)).' '.$meridian;
         } else {
-            $aptime = date('g:i', $time).' '.$meridian;
+            $aptime = date('g:i', uamswp_fad_int($time)).' '.$meridian;
         }
 
         return $aptime;
@@ -166,7 +166,7 @@ if (! function_exists('ap_time_span')) {
     function ap_time_span($start, $end): string
     {
 
-        if (date('a', $start) === date('a', $end)) {
+        if (date('a', uamswp_fad_int($start)) === date('a', uamswp_fad_int($end))) {
             $starttime = str_replace('p.m.', '', ap_time($start));
             $starttime = str_replace('a.m.', '', $starttime);
 
@@ -187,9 +187,9 @@ if (! function_exists('isDate')) {
             return false;
         }
 
-        $date = date_parse($value);
+        $date = date_parse(uamswp_fad_str($value));
         if ($date['error_count'] == 0 && $date['warning_count'] == 0) {
-            return checkdate($date['month'], $date['day'], $date['year']);
+            return checkdate(uamswp_fad_int($date['month']), uamswp_fad_int($date['day']), uamswp_fad_int($date['year']));
         }
 
         return false;
@@ -204,7 +204,7 @@ if (! function_exists('apStyleTime')) {
     function apStyleTime($time, $capnoon = true): string
     {
 
-        $time = strtotime($time);
+        $time = (int) strtotime(uamswp_fad_str($time));
 
         // Format am and pm to AP Style abbreviations.
         if (date('a', $time) === 'am') {
@@ -243,8 +243,8 @@ if (! function_exists('apStyleTime')) {
 // Partition / Split Col function
 if (! function_exists('partition')) {
     /**
-     * @param  mixed  $list
-     * @param  mixed  $p
+     * @param  array<mixed>  $list
+     * @param  int  $p
      * @return mixed[][]
      */
     function partition($list, $p): array
@@ -256,7 +256,7 @@ if (! function_exists('partition')) {
         $mark = 0;
         for ($px = 0; $px < $p; $px++) {
             $incr = ($px < $partrem) ? $partlen + 1 : $partlen;
-            $partition[$px] = array_slice($list, $mark, $incr);
+            $partition[$px] = array_slice(uamswp_fad_arr($list), $mark, $incr);
             $mark += $incr;
         }
 
@@ -354,8 +354,8 @@ function get_taxonomy_archive_link($taxonomy): string
 // add_filter( 'genesis_archive_crumb', 'uamswp_add_blog_crumb', 10, 2 );
 // add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_fad_taxonomy_breadcrumbs_crumbs');
 /**
- * @param  mixed  $crumbs
- * @return mixed
+ * @param  array<int, mixed>  $crumbs
+ * @return array<int, mixed>
  */
 function uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs)
 {
@@ -374,9 +374,9 @@ function uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs)
 
 // Query custom table values
 /**
- * @param  mixed  $table_name
- * @param  mixed  $field_name
- * @param  mixed  $query_values
+ * @param  string  $table_name
+ * @param  string  $field_name
+ * @param  array<mixed>  $query_values
  * @return mixed
  */
 function uamswp_custom_table_query($table_name, $field_name, $query_values)
@@ -393,7 +393,7 @@ function uamswp_custom_table_query($table_name, $field_name, $query_values)
             $filter_where .= ' OR ';
         }
 
-        $filter_where .= "`$field_name` LIKE '%".$value."%'";
+        $filter_where .= "`$field_name` LIKE '%".uamswp_fad_str($value)."%'";
         $i++;
     }
 
@@ -509,7 +509,7 @@ if (! function_exists('uamswp_provider_names')) {
         ) {
 
             $degrees = array_filter($degrees);
-            $degrees = array_unique($degrees);
+            $degrees = array_unique($degrees, SORT_REGULAR);
             $degrees = array_values($degrees);
 
         }
@@ -785,7 +785,7 @@ if (! function_exists('uamswp_spotlight_default_excerpt')) {
 
         // Guard the trimmed value: the name is concatenated, so an all-empty
         // provider (e.g. deleted post) yields spaces rather than an empty string.
-        if (trim($name) === '') {
+        if (trim(uamswp_fad_str($name)) === '') {
 
             return '';
 
@@ -795,7 +795,7 @@ if (! function_exists('uamswp_spotlight_default_excerpt')) {
 
             $excerpt = sprintf(
                 'Meet %1$s, %2$s at UAMS Health, in this provider spotlight Q&A.',
-                $name,
+                uamswp_fad_str($name),
                 $title
             );
 
@@ -803,7 +803,7 @@ if (! function_exists('uamswp_spotlight_default_excerpt')) {
 
             $excerpt = sprintf(
                 'Meet %1$s of UAMS Health in this provider spotlight Q&A.',
-                $name
+                uamswp_fad_str($name)
             );
 
         }
@@ -855,7 +855,7 @@ if (! function_exists('uamswp_spotlight_default_intro')) {
         // Guard the trimmed value: the medium variant is built by concatenation,
         // so a provider with every name part empty (e.g. deleted post) yields a
         // string of spaces, not an empty string.
-        if (trim($names['medium']) === '') {
+        if (trim(uamswp_fad_str($names['medium'])) === '') {
 
             return '';
 
@@ -863,8 +863,8 @@ if (! function_exists('uamswp_spotlight_default_intro')) {
 
         // Escape the name and title parts: they come from plain-text ACF fields
         // and taxonomy term names, none kses-filtered, and land in an HTML string.
-        $medium_html = uamswp_provider_name_html($names['medium']);
-        $short_html = uamswp_provider_name_html($names['short']);
+        $medium_html = uamswp_provider_name_html(uamswp_fad_str($names['medium']));
+        $short_html = uamswp_provider_name_html(uamswp_fad_str($names['short']));
 
         if ($title) {
 
@@ -879,16 +879,16 @@ if (! function_exists('uamswp_spotlight_default_intro')) {
 
             $opening = sprintf(
                 'Get to know %1$s of UAMS Health.',
-                $medium_html
+                uamswp_fad_str($medium_html)
             );
 
         }
 
         $intro = sprintf(
             '<p>%1$s In the Q&amp;A below, %2$s shares what inspired %3$s work in healthcare, %3$s life outside of medicine, and more.</p>',
-            $opening,
-            $short_html,
-            $pronouns['possessive']
+            uamswp_fad_str($opening),
+            uamswp_fad_str($short_html),
+            uamswp_fad_str($pronouns['possessive'])
         );
 
         return apply_filters('uamswp_spotlight_intro', $intro, $provider_id, $names, $title, $pronouns);
@@ -956,8 +956,8 @@ if (! function_exists('uamswp_spotlight_appointment_cta')) {
 
         // Escaped for HTML text context. The name variants come from plain-text
         // ACF fields with no kses filtering, so they must not be echoed raw.
-        $medium_name = uamswp_provider_name_html($names['medium']);
-        $short_possessive = uamswp_provider_name_html($names['short_possessive']);
+        $medium_name = uamswp_provider_name_html(uamswp_fad_str($names['medium']));
+        $short_possessive = uamswp_provider_name_html(uamswp_fad_str($names['short_possessive']));
 
         $provider_url = get_permalink($provider_id);
 
@@ -976,13 +976,13 @@ if (! function_exists('uamswp_spotlight_appointment_cta')) {
         $name_link = sprintf(
             '<a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s</a>',
             esc_url((string) $provider_url),
-            esc_attr($medium_name_attr),
+            esc_attr(uamswp_fad_str($medium_name_attr)),
             $medium_name
         );
         $profile_link = sprintf(
             '<a href="%1$s" data-itemtitle="Learn more about %2$s">visit %3$s provider profile</a>',
             esc_url((string) $provider_url),
-            esc_attr($medium_name_attr),
+            esc_attr(uamswp_fad_str($medium_name_attr)),
             $short_possessive
         );
 
@@ -1003,7 +1003,7 @@ if (! function_exists('uamswp_spotlight_appointment_cta')) {
                 $tel_link = sprintf(
                     '<a href="tel:%1$s" class="no-break" data-itemtitle="Call to schedule with %2$s">%3$s</a>',
                     esc_attr($phone_dash),
-                    esc_attr($medium_name_attr),
+                    esc_attr(uamswp_fad_str($medium_name_attr)),
                     esc_html($phone_dash)
                 );
 
@@ -1036,7 +1036,7 @@ if (! function_exists('uamswp_spotlight_appointment_cta')) {
             $profile_noun_link = sprintf(
                 '<a href="%1$s" data-itemtitle="Learn more about %2$s">%3$s provider profile</a>',
                 esc_url((string) $provider_url),
-                esc_attr($medium_name_attr),
+                esc_attr(uamswp_fad_str($medium_name_attr)),
                 $short_possessive
             );
 
@@ -1187,4 +1187,85 @@ function uamswp_fad_ids(array $items): array
 function uamswp_fad_query_posts(WP_Query $query): array
 {
     return array_values(array_filter($query->posts, static fn ($post): bool => $post instanceof WP_Post));
+}
+
+/**
+ * The post type of a post ID that ACF or WordPress may pass as a non-ID.
+ *
+ * ACF hands `'options'`, `'term_5'` and `'user_3'` to the same hooks as a post ID; none of those is a post.
+ */
+function uamswp_fad_post_type_of(mixed $id): string|false
+{
+    return is_numeric($id) ? get_post_type((int) $id) : false;
+}
+
+/**
+ * A value read from post meta, an ACF field, a request or an option, as an array.
+ *
+ * An array comes back as it is; anything else gives an empty array.
+ *
+ * @return array<mixed>
+ */
+function uamswp_fad_arr(mixed $value): array
+{
+    return is_array($value) ? $value : [];
+}
+
+/**
+ * One submitted ACF field value, read from `$_POST['acf']` by its field key.
+ */
+function uamswp_fad_posted(string $key): mixed
+{
+    $acf = uamswp_fad_arr($_POST['acf'] ?? null);
+
+    return $acf[$key] ?? null;
+}
+
+/**
+ * Whether the submitted ACF values carry a field key.
+ */
+function uamswp_fad_posted_has(string $key): bool
+{
+    return array_key_exists($key, uamswp_fad_arr($_POST['acf'] ?? null));
+}
+
+/**
+ * Set one submitted ACF field value in `$_POST['acf']` by its field key.
+ */
+function uamswp_fad_post_set(string $key, mixed $value): void
+{
+    $acf = uamswp_fad_arr($_POST['acf'] ?? null);
+    $acf[$key] = $value;
+    $_POST['acf'] = $acf;
+}
+
+/**
+ * A value read from post meta, an ACF field, a request or an option, as a string.
+ *
+ * Scalars and null convert as a `(string)` cast does; an array or an object, which a cast would
+ * turn into a notice and the text "Array", gives an empty string.
+ */
+function uamswp_fad_str(mixed $value): string
+{
+    return is_scalar($value) ? (string) $value : '';
+}
+
+/**
+ * A value read from post meta, an ACF field, a request or an option, as an integer.
+ *
+ * Scalars and null convert as an `(int)` cast does; an array or an object gives 0.
+ */
+function uamswp_fad_int(mixed $value): int
+{
+    return is_scalar($value) ? (int) $value : 0;
+}
+
+/**
+ * A value read from post meta, an ACF field, a request or an option, as a float.
+ *
+ * Scalars and null convert as a `(float)` cast does; an array or an object gives 0.0.
+ */
+function uamswp_fad_float(mixed $value): float
+{
+    return is_scalar($value) ? (float) $value : 0.0;
 }

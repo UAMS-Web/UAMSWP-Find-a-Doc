@@ -42,8 +42,8 @@ add_filter('acfcdt/settings/store_acf_values_in_core_meta', '__return_false');
 add_filter('acf/settings/load_json', 'uamswp_fad_json_load_point');
 
 /**
- * @param  mixed  $paths
- * @return mixed
+ * @param  array<int, string>  $paths
+ * @return array<int, string>
  */
 function uamswp_fad_json_load_point($paths)
 {
@@ -76,7 +76,7 @@ add_filter('acf/prepare_field/key=field_physician_portal', 'set_default_portal',
 add_filter('acf/prepare_field/key=field_location_portal', 'set_default_portal', 20, 3);
 
 /**
- * @param  mixed  $field
+ * @param  array<string, mixed>  $field
  * @return mixed
  */
 function set_default_portal($field)
@@ -113,7 +113,7 @@ add_filter('acf/load_value/key=field_physician_languages', 'set_default_language
 /**
  * @param  mixed  $value
  * @param  mixed  $post_id
- * @param  mixed  $field
+ * @param  array<string, mixed>  $field
  * @return mixed
  */
 function set_default_language($value, $post_id, $field)
@@ -124,7 +124,7 @@ function set_default_language($value, $post_id, $field)
     // auto-draft status instead, so an editor who removes every language
     // from a saved provider does not get English back on the next load.
 
-    if (get_post_status($post_id) !== 'auto-draft' || ! empty($value)) {
+    if ((is_numeric($post_id) ? get_post_status((int) $post_id) : false) !== 'auto-draft' || ! empty($value)) {
 
         return $value;
 
@@ -156,7 +156,7 @@ add_filter('acf/load_value/key=field_location_region', 'set_default_region', 20,
 /**
  * @param  mixed  $value
  * @param  mixed  $post_id
- * @param  mixed  $field
+ * @param  array<string, mixed>  $field
  * @return mixed
  */
 function set_default_region($value, $post_id, $field)
@@ -186,8 +186,8 @@ add_filter('acf/fields/taxonomy/wp_list_categories/key=field_location_portal', '
 add_filter('acf/fields/taxonomy/wp_list_categories/key=field_physician_portal', 'my_taxonomy_query', 10, 2);
 
 /**
- * @param  mixed  $args
- * @param  mixed  $field
+ * @param  array<string, mixed>  $args
+ * @param  array<string, mixed>  $field
  * @return mixed
  */
 function my_taxonomy_query($args, $field)
@@ -274,7 +274,7 @@ function uamswp_provider_region_in_rule($provider_region, $remove_regions): bool
 function physician_save_post($post_id): void
 {
 
-    $post_type = get_post_type($post_id);
+    $post_type = uamswp_fad_post_type_of($post_id);
 
     // Bail early if no data sent or not provider post type
 
@@ -290,14 +290,14 @@ function physician_save_post($post_id): void
 
     // Create provider name combinations to store in fields
 
-    $first_name = $_POST['acf']['field_physician_first_name'] ?? '';
-    $middle_name = $_POST['acf']['field_physician_middle_name'] ?? '';
-    $last_name = $_POST['acf']['field_physician_last_name'] ?? '';
-    $pedigree = $_POST['acf']['field_physician_pedigree'] ?? '';
+    $first_name = uamswp_fad_str(uamswp_fad_posted('field_physician_first_name'));
+    $middle_name = uamswp_fad_str(uamswp_fad_posted('field_physician_middle_name'));
+    $last_name = uamswp_fad_str(uamswp_fad_posted('field_physician_last_name'));
+    $pedigree = uamswp_fad_str(uamswp_fad_posted('field_physician_pedigree'));
 
     // Create full name to store in 'physician_full_name' field (e.g., "Leonard H. McCoy, M.D.")
 
-    $degrees = $_POST['acf']['field_physician_degree'] ?? [];
+    $degrees = uamswp_fad_arr(uamswp_fad_posted('field_physician_degree'));
 
     $i = 1;
 
@@ -305,11 +305,11 @@ function physician_save_post($post_id): void
 
     $degree_list = '';
 
-    if ($degrees) {
+    if ($degrees !== []) {
 
         foreach ($degrees as $degree) {
 
-            $degree_name = get_term($degree, 'degree');
+            $degree_name = get_term(uamswp_fad_int($degree), 'degree');
             $degree_list .= ($degree_name && ! is_wp_error($degree_name)) ? $degree_name->name : '';
 
             if (count($degrees) > $i) {
@@ -326,7 +326,7 @@ function physician_save_post($post_id): void
 
     $full_name = $first_name.' '.($middle_name ? $middle_name.' ' : '').$last_name.($pedigree ? '&nbsp;'.$pedigree : '').($degree_list ? ', '.$degree_list : '');
 
-    $_POST['acf']['field_physician_full_name'] = $full_name;
+    uamswp_fad_post_set('field_physician_full_name', $full_name);
 
     // Create list of related ontology items to store in fields
 
@@ -339,7 +339,7 @@ function physician_save_post($post_id): void
 
     // Get related areas of expertise
 
-    $expertises = $_POST['acf']['field_physician_expertise'] ?? [];
+    $expertises = uamswp_fad_arr(uamswp_fad_posted('field_physician_expertise'));
 
     // Initialize variable to prevent php error
 
@@ -347,13 +347,13 @@ function physician_save_post($post_id): void
 
     // Loop through the areas of expertise and add each item's title to a list
 
-    if ($expertises) {
+    if ($expertises !== []) {
 
         $i = 1;
 
         foreach ($expertises as $expertise) {
 
-            $expertise_name = get_the_title($expertise);
+            $expertise_name = get_the_title(uamswp_fad_int($expertise));
             $expertise_list .= $expertise_name;
 
             if (count($expertises) > $i) {
@@ -372,7 +372,7 @@ function physician_save_post($post_id): void
 
     // Get related conditions
 
-    $conditions = $_POST['acf']['field_physician_conditions_cpt'] ?? [];
+    $conditions = uamswp_fad_arr(uamswp_fad_posted('field_physician_conditions_cpt'));
 
     // Initialize variable to prevent php error
 
@@ -380,13 +380,13 @@ function physician_save_post($post_id): void
 
     // Loop through the conditions and add each item's title to a list
 
-    if ($conditions) {
+    if ($conditions !== []) {
 
         $i = 1;
 
         foreach ($conditions as $condition) {
 
-            $condition_name = get_the_title($condition);
+            $condition_name = get_the_title(uamswp_fad_int($condition));
             $condition_list .= $condition_name;
 
             if (count($conditions) > $i) {
@@ -405,7 +405,7 @@ function physician_save_post($post_id): void
 
     // Get related treatments
 
-    $treatments = $_POST['acf']['field_physician_treatments_cpt'] ?? [];
+    $treatments = uamswp_fad_arr(uamswp_fad_posted('field_physician_treatments_cpt'));
 
     // Initialize variable to prevent php error
 
@@ -413,13 +413,13 @@ function physician_save_post($post_id): void
 
     // Loop through the treatments and add each item's title to a list
 
-    if ($treatments) {
+    if ($treatments !== []) {
 
         $i = 1;
 
         foreach ($treatments as $treatment) {
 
-            $treatment_name = get_the_title($treatment);
+            $treatment_name = get_the_title(uamswp_fad_int($treatment));
             $treatment_list .= $treatment_name;
 
             if (count($treatments) > $i) {
@@ -440,13 +440,13 @@ function physician_save_post($post_id): void
 
     // Store the value of the combined list in a field
 
-    $_POST['acf']['field_physician_asp_filter'] = $filter_list;
+    uamswp_fad_post_set('field_physician_asp_filter', $filter_list);
 
     // Add values from the associated locations
 
     // Get the list of locations associated with the provider
 
-    $locations = $_POST['acf']['field_physician_locations'] ?? [];
+    $locations = uamswp_fad_arr(uamswp_fad_posted('field_physician_locations'));
 
     // Stored as they are when the provider has no locations: no region, and no first portal
 
@@ -455,7 +455,7 @@ function physician_save_post($post_id): void
 
     // Get the desired values from each associated location
 
-    if ($locations) {
+    if ($locations !== []) {
 
         // Base arrays
 
@@ -509,7 +509,7 @@ function physician_save_post($post_id): void
 
     // Region
 
-    $_POST['acf']['field_physician_region'] = $region;
+    uamswp_fad_post_set('field_physician_region', $region);
 
     // Portal
 
@@ -519,7 +519,7 @@ function physician_save_post($post_id): void
      * The first portal value should be the portal value of the provider's primary
      * location.
      */
-    $_POST['acf']['field_physician_portal'] = $portal[0] ?? null;
+    uamswp_fad_post_set('field_physician_portal', $portal[0] ?? null);
 
 }
 
@@ -535,7 +535,7 @@ add_action('acf/save_post', 'resources_save_post', 6);
 function resources_save_post($post_id): void
 {
 
-    $post_type = get_post_type($post_id);
+    $post_type = uamswp_fad_post_type_of($post_id);
 
     // Bail early if no data sent or not clinical resource post type
 
@@ -560,17 +560,17 @@ function resources_save_post($post_id): void
 
     // Get related providers
 
-    $providers = $_POST['acf']['field_clinical_resource_providers'];
+    $providers = uamswp_fad_arr(uamswp_fad_posted('field_clinical_resource_providers'));
 
     // Loop through the providers and add each item's title to a list
     $provider_list = '';
-    if ($providers) {
+    if ($providers !== []) {
 
         $i = 1;
 
         foreach ($providers as $provider) {
 
-            $provider_name = get_the_title($provider);
+            $provider_name = get_the_title(uamswp_fad_int($provider));
             $provider_list .= $provider_name;
 
             if (count($providers) > $i) {
@@ -588,17 +588,17 @@ function resources_save_post($post_id): void
 
     // Get related locations
 
-    $locations = $_POST['acf']['field_clinical_resource_locations'];
+    $locations = uamswp_fad_arr(uamswp_fad_posted('field_clinical_resource_locations'));
 
     // Loop through the locations and add each item's title to a list
     $location_list = '';
-    if ($locations) {
+    if ($locations !== []) {
 
         $i = 1;
 
         foreach ($locations as $location) {
 
-            $location_name = get_the_title($location);
+            $location_name = get_the_title(uamswp_fad_int($location));
             $location_list .= $location_name;
 
             if (count($locations) > $i) {
@@ -617,17 +617,17 @@ function resources_save_post($post_id): void
 
     // Get related areas of expertise
 
-    $expertises = $_POST['acf']['field_clinical_resource_aoe'];
+    $expertises = uamswp_fad_arr(uamswp_fad_posted('field_clinical_resource_aoe'));
 
     // Loop through the areas of expertise and add each item's title to a list
     $expertise_list = '';
-    if ($expertises) {
+    if ($expertises !== []) {
 
         $i = 1;
 
         foreach ($expertises as $expertise) {
 
-            $expertise_name = get_the_title($expertise);
+            $expertise_name = get_the_title(uamswp_fad_int($expertise));
             $expertise_list .= $expertise_name;
 
             if (count($expertises) > $i) {
@@ -646,17 +646,17 @@ function resources_save_post($post_id): void
 
     // Get related conditions
 
-    $conditions = $_POST['acf']['field_clinical_resource_conditions'];
+    $conditions = uamswp_fad_arr(uamswp_fad_posted('field_clinical_resource_conditions'));
 
     // Loop through the conditions and add each item's title to a list
     $condition_list = '';
-    if ($conditions) {
+    if ($conditions !== []) {
 
         $i = 1;
 
         foreach ($conditions as $condition) {
 
-            $condition_name = get_the_title($condition);
+            $condition_name = get_the_title(uamswp_fad_int($condition));
             $condition_list .= $condition_name;
 
             if (count($conditions) > $i) {
@@ -675,17 +675,17 @@ function resources_save_post($post_id): void
 
     // Get related treatments
 
-    $treatments = $_POST['acf']['field_clinical_resource_treatments'];
+    $treatments = uamswp_fad_arr(uamswp_fad_posted('field_clinical_resource_treatments'));
 
     // Loop through the treatments and add each item's title to a list
     $treatment_list = '';
-    if ($treatments) {
+    if ($treatments !== []) {
 
         $i = 1;
 
         foreach ($treatments as $treatment) {
 
-            $treatment_name = get_the_title($treatment);
+            $treatment_name = get_the_title(uamswp_fad_int($treatment));
             $treatment_list .= $treatment_name;
 
             if (count($treatments) > $i) {
@@ -704,17 +704,17 @@ function resources_save_post($post_id): void
 
     // Get related clinical resources
 
-    $clinical_resources = $_POST['acf']['field_clinical_resource_related'];
+    $clinical_resources = uamswp_fad_arr(uamswp_fad_posted('field_clinical_resource_related'));
 
     // Loop through the clinical resources and add each item's title to a list
     $resource_list = '';
-    if ($clinical_resources) {
+    if ($clinical_resources !== []) {
 
         $i = 1;
 
         foreach ($clinical_resources as $resource) {
 
-            $resource_name = get_the_title($resource);
+            $resource_name = get_the_title(uamswp_fad_int($resource));
             $resource_list .= $resource_name;
 
             if (count($clinical_resources) > $i) {
@@ -735,7 +735,7 @@ function resources_save_post($post_id): void
 
     // Store the value of the combined list in a field
 
-    $_POST['acf']['field_clinical_resource_asp_filter'] = $filter_list;
+    uamswp_fad_post_set('field_clinical_resource_asp_filter', $filter_list);
 
 }
 
@@ -754,7 +754,7 @@ add_action('acf/save_post', 'location_save_post', 7);
 function location_save_post($post_id): void
 {
 
-    $post_type = get_post_type($post_id);
+    $post_type = uamswp_fad_post_type_of($post_id);
 
     // Bail early if no data sent or not location post type
 
@@ -770,8 +770,8 @@ function location_save_post($post_id): void
 
     // Create full name to store in 'physician_full_name' field
 
-    $featured_image = $_POST['acf']['field_location_featured_image'];
-    $wayfinding_image = $_POST['acf']['field_location_wayfinding_photo'];
+    $featured_image = uamswp_fad_posted('field_location_featured_image');
+    $wayfinding_image = uamswp_fad_posted('field_location_wayfinding_photo');
 
     // If featured image is set & wayfinding is empty, set wayfinding image to featured image
 
@@ -781,7 +781,7 @@ function location_save_post($post_id): void
         empty($wayfinding_image)
     ) {
 
-        $_POST['acf']['field_location_wayfinding_photo'] = $featured_image;
+        uamswp_fad_post_set('field_location_wayfinding_photo', $featured_image);
 
     }
 
@@ -793,12 +793,12 @@ function location_save_post($post_id): void
         $wayfinding_image
     ) {
 
-        $_POST['acf']['field_location_featured_image'] = $wayfinding_image;
+        uamswp_fad_post_set('field_location_featured_image', $wayfinding_image);
 
     }
 
-    $has_parent = $_POST['acf']['field_location_parent'];
-    $location_parent = $_POST['acf']['field_location_parent_id'];
+    $has_parent = uamswp_fad_posted('field_location_parent');
+    $location_parent = uamswp_fad_posted('field_location_parent_id');
 
     // Does this child supply its own street address, and so its own region?
 
@@ -813,9 +813,9 @@ function location_save_post($post_id): void
      * would silently discard the editor's choice.
      */
     $street_override = (
-        ! empty($_POST['acf']['field_location_address_override_parent'])
+        ! empty(uamswp_fad_posted('field_location_address_override_parent'))
         &&
-        ! empty($_POST['acf']['field_location_address_override_parent_street'])
+        ! empty(uamswp_fad_posted('field_location_address_override_parent_street'))
     );
 
     if (
@@ -829,7 +829,7 @@ function location_save_post($post_id): void
         $region = [];
         $region[] = get_field('location_region', $location_parent);
 
-        $_POST['acf']['field_location_region'] = $region;
+        uamswp_fad_post_set('field_location_region', $region);
 
     }
 
@@ -848,7 +848,7 @@ add_action('acf/save_post', 'location_save_post_after', 20);
 function location_save_post_after($post_id): void
 {
 
-    $post_type = get_post_type($post_id);
+    $post_type = uamswp_fad_post_type_of($post_id);
 
     // Bail early if not location post type
 
@@ -858,7 +858,7 @@ function location_save_post_after($post_id): void
 
     }
 
-    $post = get_post($post_id);
+    $post = is_numeric($post_id) ? get_post((int) $post_id) : null;
 
     if (! $post instanceof WP_Post) {
         return;
@@ -914,7 +914,7 @@ function clinical_title_save_post($post_id): void
     /**
      * ACF assigns the $post_id parameter by using term ID prefixed with "term_".
      */
-    $term_id = str_replace('term_', '', $post_id);
+    $term_id = str_replace('term_', '', uamswp_fad_str($post_id));
 
     // Bail early if no data sent
 
@@ -952,17 +952,17 @@ function clinical_title_save_post($post_id): void
 
         // Get the inheritance query and the parent's field value
 
-        $cms_code_inherit_query = $_POST['acf']['field_clinical_specialization_cms_code_inherit_query'];
+        $cms_code_inherit_query = uamswp_fad_posted('field_clinical_specialization_cms_code_inherit_query');
 
         // Conditionally set the field value using the parent term's field value
 
         if ($cms_code_inherit_query) {
 
             $cms_code_parent = get_field('clinical_specialization_cms_code', $parent_term);
-            $_POST['acf']['field_clinical_specialization_cms_code'] = $cms_code_parent;
+            uamswp_fad_post_set('field_clinical_specialization_cms_code', $cms_code_parent);
 
             $cms_code_parent = get_field('clinical_specialization_cms_code_type', $parent_term);
-            $_POST['acf']['field_clinical_specialization_cms_code_type'] = $cms_code_parent;
+            uamswp_fad_post_set('field_clinical_specialization_cms_code_type', $cms_code_parent);
 
         }
 
@@ -970,14 +970,14 @@ function clinical_title_save_post($post_id): void
 
         // Get the inheritance query and the parent's field value
 
-        $medicalspecialty_member_inherit_query = $_POST['acf']['field_clinical_specialization_medicalspecialty_member_inherit_query'];
+        $medicalspecialty_member_inherit_query = uamswp_fad_posted('field_clinical_specialization_medicalspecialty_member_inherit_query');
 
         // Conditionally set the field value using the parent term's field value
 
         if ($medicalspecialty_member_inherit_query) {
 
             $medicalspecialty_member_parent = get_field('clinical_specialization_medicalspecialty_member', $parent_term);
-            $_POST['acf']['field_clinical_specialization_medicalspecialty_member'] = $medicalspecialty_member_parent;
+            uamswp_fad_post_set('field_clinical_specialization_medicalspecialty_member', $medicalspecialty_member_parent);
 
         }
 
@@ -985,17 +985,17 @@ function clinical_title_save_post($post_id): void
 
         // Get the inheritance query and the parent's field value
 
-        $onetsoc_code_inherit_query = $_POST['acf']['field_clinical_specialization_onetsoc_code_inherit_query'];
+        $onetsoc_code_inherit_query = uamswp_fad_posted('field_clinical_specialization_onetsoc_code_inherit_query');
 
         // Conditionally set the field value using the parent term's field value
 
         if ($onetsoc_code_inherit_query) {
 
             $onetsoc_code_parent = get_field('clinical_specialization_onetsoc_code', $parent_term);
-            $_POST['acf']['field_clinical_specialization_onetsoc_code'] = $onetsoc_code_parent;
+            uamswp_fad_post_set('field_clinical_specialization_onetsoc_code', $onetsoc_code_parent);
 
             $onetsoc_code_parent = get_field('clinical_specialization_onetsoc_code_name', $parent_term);
-            $_POST['acf']['field_clinical_specialization_onetsoc_code_name'] = $onetsoc_code_parent;
+            uamswp_fad_post_set('field_clinical_specialization_onetsoc_code_name', $onetsoc_code_parent);
 
         }
 
@@ -1003,14 +1003,14 @@ function clinical_title_save_post($post_id): void
 
         // Get the inheritance query and the parent's field value
 
-        $isco08_code_inherit_query = $_POST['acf']['field_clinical_specialization_isco08_code_inherit_query'];
+        $isco08_code_inherit_query = uamswp_fad_posted('field_clinical_specialization_isco08_code_inherit_query');
 
         // Conditionally set the field value using the parent term's field value
 
         if ($isco08_code_inherit_query) {
 
             $isco08_code_parent = get_field('clinical_specialization_isco08_code', $parent_term);
-            $_POST['acf']['field_clinical_specialization_isco08_code'] = $isco08_code_parent;
+            uamswp_fad_post_set('field_clinical_specialization_isco08_code', $isco08_code_parent);
 
         }
 
@@ -1018,14 +1018,14 @@ function clinical_title_save_post($post_id): void
 
         // Get the inheritance query and the parent's field value
 
-        $sameas_occupation_inherit_query = $_POST['acf']['field_clinical_specialization_sameas_occupation_inherit_query'];
+        $sameas_occupation_inherit_query = uamswp_fad_posted('field_clinical_specialization_sameas_occupation_inherit_query');
 
         // Conditionally set the field value using the parent term's field value
 
         if ($sameas_occupation_inherit_query) {
 
             $sameas_occupation_parent = get_field('clinical_specialization_sameas_occupation', $parent_term);
-            $_POST['acf']['field_clinical_specialization_sameas_occupation'] = $sameas_occupation_parent;
+            uamswp_fad_post_set('field_clinical_specialization_sameas_occupation', $sameas_occupation_parent);
 
         }
 
@@ -1033,14 +1033,14 @@ function clinical_title_save_post($post_id): void
 
         // Get the inheritance query and the parent's field value
 
-        $sameas_field_inherit_query = $_POST['acf']['field_clinical_specialization_sameas_field_inherit_query'];
+        $sameas_field_inherit_query = uamswp_fad_posted('field_clinical_specialization_sameas_field_inherit_query');
 
         // Conditionally set the field value using the parent term's field value
 
         if ($sameas_field_inherit_query) {
 
             $sameas_field_parent = get_field('clinical_specialization_sameas_field', $parent_term);
-            $_POST['acf']['field_clinical_specialization_sameas_field'] = $sameas_field_parent;
+            uamswp_fad_post_set('field_clinical_specialization_sameas_field', $sameas_field_parent);
 
         }
 
@@ -1062,8 +1062,8 @@ function uamswp_sync_acf_save_post($post_id): void
 
     // Set up the variables
 
-    $post_type = get_post_type($post_id);
-    $values = $_POST['acf'];
+    $post_type = uamswp_fad_post_type_of($post_id);
+    $values = uamswp_fad_arr($_POST['acf'] ?? null);
 
     if ($post_type == 'location') {
 
@@ -1261,7 +1261,7 @@ function custom_excerpt_acf(): void
 
     // Get the post type of the current page/post
 
-    $post_type = get_post_type($post_id);
+    $post_type = uamswp_fad_post_type_of($post_id);
 
     // 1. Add post types (key) and corresponding field names (value) to be used to set the excerpt
 
@@ -1435,13 +1435,13 @@ function fad_facetwp_cards_callback(
 
     if (! empty($block['className'])) {
 
-        $className .= ' '.$block['className'];
+        $className .= ' '.uamswp_fad_str($block['className']);
 
     }
 
     if (! empty($block['align'])) {
 
-        $className .= ' align'.$block['align'];
+        $className .= ' align'.uamswp_fad_str($block['align']);
 
     }
 
@@ -1487,13 +1487,13 @@ function fad_facetwp_blocks_callback(
 
     if (! empty($block['className'])) {
 
-        $className .= ' '.$block['className'];
+        $className .= ' '.uamswp_fad_str($block['className']);
 
     }
 
     if (! empty($block['align'])) {
 
-        $className .= ' align'.$block['align'];
+        $className .= ' align'.uamswp_fad_str($block['align']);
 
     }
 
@@ -1632,8 +1632,8 @@ function location_current_prescription_pharm_message(): void
 add_filter('acf/fields/post_object/query/key=field_location_parent_id', 'limit_post_top_level', 10, 3);
 
 /**
- * @param  mixed  $args
- * @param  mixed  $field
+ * @param  array<string, mixed>  $args
+ * @param  array<string, mixed>  $field
  * @param  mixed  $post
  * @return mixed
  */
@@ -1680,7 +1680,7 @@ function limit_post_top_level($args, $field, $post)
 add_filter('acf/render_field_settings/type=image', 'acf_image_aspect_ratio_settings', 20);
 
 /**
- * @param  mixed  $field
+ * @param  array<string, mixed>  $field
  */
 function acf_image_aspect_ratio_settings($field): void
 {
@@ -1750,10 +1750,10 @@ function acf_image_aspect_ratio_settings($field): void
 add_filter('acf/validate_attachment/type=image', 'acf_image_aspect_ratio_validate', 10, 5);
 
 /**
- * @param  mixed  $errors
- * @param  mixed  $file
- * @param  mixed  $attachment
- * @param  mixed  $field
+ * @param  array<string, mixed>  $errors
+ * @param  array<string, mixed>  $file
+ * @param  array<string, mixed>  $attachment
+ * @param  array<string, mixed>  $field
  * @param  mixed  $content
  * @return mixed
  */
@@ -1784,8 +1784,8 @@ function acf_image_aspect_ratio_validate($errors, $file, $attachment, $field, $c
 
     // Make sure all values are numbers. You never know.
 
-    $ratio_width = intval($field['ratio_width']);
-    $ratio_height = intval($field['ratio_height']);
+    $ratio_width = uamswp_fad_int($field['ratio_width']);
+    $ratio_height = uamswp_fad_int($field['ratio_height']);
 
     // Make sure we don't try to divide by 0
 
@@ -1805,8 +1805,8 @@ function acf_image_aspect_ratio_validate($errors, $file, $attachment, $field, $c
 
     }
 
-    $width = intval($file['width']);
-    $height = intval($file['height']);
+    $width = uamswp_fad_int($file['width']);
+    $height = uamswp_fad_int($file['height']);
 
     // Do simple ratio math to see how tall the image is allowed to be based on width
 
@@ -1818,7 +1818,7 @@ function acf_image_aspect_ratio_validate($errors, $file, $attachment, $field, $c
 
     if (! empty($field['ratio_margin'])) {
 
-        $margin = floatval($field['ratio_margin']);
+        $margin = uamswp_fad_float($field['ratio_margin']);
 
     }
 
@@ -1853,14 +1853,14 @@ function acf_image_aspect_ratio_validate($errors, $file, $attachment, $field, $c
 /**
  * @param  mixed  $value
  * @param  mixed  $post_id
- * @param  mixed  $field
+ * @param  array<string, mixed>  $field
  */
 function pubmed_information_format_value($value, $post_id, $field): string
 {
 
     // Render shortcodes in all textarea values.
 
-    return html_entity_decode($value); // Convert HTML entities to their corresponding characters
+    return html_entity_decode(uamswp_fad_str($value)); // Convert HTML entities to their corresponding characters
 
 }
 
@@ -1886,8 +1886,8 @@ add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'rela
 // 2. Add the $field and $post arguments.
 
 /**
- * @param  mixed  $args
- * @param  mixed  $field
+ * @param  array<string, mixed>  $args
+ * @param  array<string, mixed>  $field
  * @param  mixed  $post_id
  * @return mixed
  */
@@ -1905,7 +1905,7 @@ function relationship_exclude_id($args, $field, $post_id)
 // Conditional Logic to check if Find-a-Doc Settings are set to allow MyChart Scheduling
 
 /**
- * @param  mixed  $field
+ * @param  array<string, mixed>  $field
  * @return mixed
  */
 function uamswp_mychart_scheduling_query($field)
@@ -1938,7 +1938,7 @@ add_filter('acf/load_field/key=field_fad_default_brandorg_locationcreated', 'uam
 add_filter('acf/load_field/key=field_fad_default_brandorg_copyright', 'uamswp_fad_acf_load_brandorg_uams'); // Default UAMS Brand Organizations as Copyright Holder
 
 /**
- * @param  mixed  $field
+ * @param  array<string, mixed>  $field
  * @return mixed
  */
 function uamswp_fad_acf_load_brandorg_uams($field)
@@ -1961,11 +1961,15 @@ function uamswp_fad_acf_load_brandorg_uams($field)
 
     */
 
+    $choices = uamswp_fad_arr($field['choices'] ?? []);
+
     foreach ((is_wp_error($brand_organizations) ? [] : $brand_organizations) as $item) {
 
-        $field['choices'][$item->slug] = $item->name;
+        $choices[$item->slug] = $item->name;
 
     }
+
+    $field['choices'] = $choices;
 
     return $field;
 
@@ -1977,7 +1981,7 @@ add_filter('acf/load_field/key=field_schema_brandorg', 'uamswp_fad_acf_load_bran
 add_filter('acf/load_field/key=field_schema_brandorg_multiple', 'uamswp_fad_acf_load_brandorg_3p');
 
 /**
- * @param  mixed  $field
+ * @param  array<string, mixed>  $field
  * @return mixed
  */
 function uamswp_fad_acf_load_brandorg_3p($field)
@@ -2000,11 +2004,15 @@ function uamswp_fad_acf_load_brandorg_3p($field)
 
     */
 
+    $choices = uamswp_fad_arr($field['choices'] ?? []);
+
     foreach ((is_wp_error($brand_organizations) ? [] : $brand_organizations) as $item) {
 
-        $field['choices'][$item->slug] = $item->name;
+        $choices[$item->slug] = $item->name;
 
     }
+
+    $field['choices'] = $choices;
 
     return $field;
 
@@ -2019,7 +2027,7 @@ function uamswp_fad_acf_load_brandorg_3p($field)
 // can only be read back out of the submitted values.
 
 /**
- * @param  mixed  $field_key
+ * @param  int|string  $field_key
  * @return mixed
  */
 function uamswp_spotlight_submitted_value($field_key)
@@ -2087,8 +2095,8 @@ function uamswp_is_spotlight_submission(): bool
 add_filter('acf/fields/post_object/query/key=field_clinical_resource_spotlight_provider', 'uamswp_spotlight_provider_query', 10, 3);
 
 /**
- * @param  mixed  $args
- * @param  mixed  $field
+ * @param  array<string, mixed>  $args
+ * @param  array<string, mixed>  $field
  * @param  mixed  $post_id
  * @return mixed
  */
@@ -2113,8 +2121,8 @@ add_filter('acf/validate_value/key=field_clinical_resource_excerpt', 'uamswp_spo
 /**
  * @param  mixed  $valid
  * @param  mixed  $value
- * @param  mixed  $field
- * @param  mixed  $input_name
+ * @param  array<string, mixed>  $field
+ * @param  string  $input_name
  * @return mixed
  */
 function uamswp_spotlight_validate_excerpt($valid, $value, $field, $input_name)
@@ -2133,7 +2141,7 @@ function uamswp_spotlight_validate_excerpt($valid, $value, $field, $input_name)
 
     }
 
-    if (trim((string) $value) === '') {
+    if (trim(uamswp_fad_str($value)) === '') {
 
         return 'Short Description is required.';
 
@@ -2148,8 +2156,8 @@ add_filter('acf/validate_value/key=field_clinical_resource_featured_image', 'uam
 /**
  * @param  mixed  $valid
  * @param  mixed  $value
- * @param  mixed  $field
- * @param  mixed  $input_name
+ * @param  array<string, mixed>  $field
+ * @param  string  $input_name
  * @return mixed
  */
 function uamswp_spotlight_validate_featured_image($valid, $value, $field, $input_name)
@@ -2194,8 +2202,8 @@ add_filter('acf/validate_value/key=field_clinical_resource_spotlight_provider', 
 /**
  * @param  mixed  $valid
  * @param  mixed  $value
- * @param  mixed  $field
- * @param  mixed  $input_name
+ * @param  array<string, mixed>  $field
+ * @param  string  $input_name
  * @return mixed
  */
 function uamswp_spotlight_validate_provider($valid, $value, $field, $input_name)
@@ -2222,7 +2230,7 @@ function uamswp_spotlight_validate_provider($valid, $value, $field, $input_name)
     }
 
     $provider_id = is_array($value) ? ($value[0] ?? 0) : $value;
-    $provider_id = (int) $provider_id;
+    $provider_id = uamswp_fad_int($provider_id);
 
     if (! $provider_id) {
 
@@ -2234,7 +2242,7 @@ function uamswp_spotlight_validate_provider($valid, $value, $field, $input_name)
     if (
         get_field('physician_image_wide', $provider_id)
         ||
-        get_post_thumbnail_id($provider_id)
+        get_post_thumbnail_id(uamswp_fad_int($provider_id))
     ) {
 
         return $valid;
@@ -2252,8 +2260,8 @@ add_filter('acf/validate_value/key=field_clinical_resource_spotlight_qa', 'uamsw
 /**
  * @param  mixed  $valid
  * @param  mixed  $value
- * @param  mixed  $field
- * @param  mixed  $input_name
+ * @param  array<string, mixed>  $field
+ * @param  string  $input_name
  * @return mixed
  */
 function uamswp_spotlight_validate_qa($valid, $value, $field, $input_name)
@@ -2294,7 +2302,7 @@ add_filter('acf/load_value/key=field_clinical_resource_spotlight_qa', 'uamswp_sp
 /**
  * @param  mixed  $value
  * @param  mixed  $post_id
- * @param  mixed  $field
+ * @param  array<string, mixed>  $field
  * @return mixed
  */
 function uamswp_spotlight_seed_questions($value, $post_id, $field)
@@ -2377,7 +2385,7 @@ function uamswp_spotlight_to_ids($value): array
 
     $value = is_array($value) ? $value : [$value];
 
-    return array_values(array_unique(array_filter(array_map(intval(...), $value))));
+    return array_values(array_unique(array_filter(array_map(uamswp_fad_int(...), $value))));
 
 }
 
@@ -2387,7 +2395,7 @@ function uamswp_spotlight_to_ids($value): array
 // ACF writes the submitted values at 10. Both of those matter:
 //
 //  - resources_save_post() builds the Ajax Search Pro filter string by
-//    reading $_POST['acf']['field_clinical_resource_providers'] directly,
+//    reading uamswp_fad_posted('field_clinical_resource_providers') directly,
 //    not the database, so the featured provider has to be injected into the
 //    submitted values rather than written with update_field(). Otherwise the
 //    spotlight is not findable by the provider's name.
@@ -2431,11 +2439,11 @@ function uamswp_spotlight_reconcile_providers($post_id): void
 
     $new_provider = 0;
 
-    if (isset($_POST['acf']['field_clinical_resource_spotlight_provider'])) {
+    if (uamswp_fad_posted('field_clinical_resource_spotlight_provider') !== null) {
 
-        $new_provider_value = $_POST['acf']['field_clinical_resource_spotlight_provider'];
+        $new_provider_value = uamswp_fad_posted('field_clinical_resource_spotlight_provider');
         $new_provider_value = is_array($new_provider_value) ? reset($new_provider_value) : $new_provider_value;
-        $new_provider = (int) $new_provider_value;
+        $new_provider = uamswp_fad_int($new_provider_value);
 
     }
 
@@ -2455,11 +2463,11 @@ function uamswp_spotlight_reconcile_providers($post_id): void
     // so start from the database instead -- starting from an empty array
     // would wipe the editor's providers.
 
-    $field_submitted = array_key_exists('field_clinical_resource_providers', $_POST['acf']);
+    $field_submitted = uamswp_fad_posted_has('field_clinical_resource_providers');
 
     if ($field_submitted) {
 
-        $providers = uamswp_spotlight_to_ids($_POST['acf']['field_clinical_resource_providers']);
+        $providers = uamswp_spotlight_to_ids(uamswp_fad_posted('field_clinical_resource_providers'));
 
     } else {
 
@@ -2511,7 +2519,7 @@ function uamswp_spotlight_reconcile_providers($post_id): void
 
     if ($providers !== $original) {
 
-        $_POST['acf']['field_clinical_resource_providers'] = array_map(strval(...), $providers);
+        uamswp_fad_post_set('field_clinical_resource_providers', array_map(strval(...), $providers));
 
     }
 
@@ -2568,7 +2576,7 @@ function uamswp_spotlight_sync_title($post_id): void
     // The name variants can carry &nbsp; (for a generational suffix), so
     // normalize it to a regular space for these plain-text fields.
 
-    $full = trim(str_replace('&nbsp;', ' ', $names['full']));
+    $full = trim(str_replace('&nbsp;', ' ', uamswp_fad_str($names['full'])));
 
     // The provider-name ACF fields are plain-text and receive no kses
     // filtering, so strip any markup before it is persisted into the
@@ -2612,7 +2620,7 @@ function uamswp_spotlight_sync_title($post_id): void
 
     if (! get_post_meta((int) $post_id, '_uamswp_spotlight_slug_locked', true)) {
 
-        $slug_name = trim(str_replace('&nbsp;', ' ', $names['medium_no_prefix']));
+        $slug_name = trim(str_replace('&nbsp;', ' ', uamswp_fad_str($names['medium_no_prefix'])));
 
         if ($slug_name !== '') {
 
@@ -2682,7 +2690,7 @@ function uamswp_spotlight_resolve_image($post_id, $provider_id): int
 
     }
 
-    return (int) get_post_thumbnail_id($provider_id);
+    return (int) get_post_thumbnail_id(uamswp_fad_int($provider_id));
 
 }
 
@@ -2865,9 +2873,9 @@ function uamswp_spotlight_provider_guard($post_id): void
 
 /**
  * @param  mixed  $provider_id
- * @return mixed
+ * @return array<int, int>
  */
-function uamswp_spotlight_posts_for_provider($provider_id)
+function uamswp_spotlight_posts_for_provider($provider_id): array
 {
 
     if (! $provider_id) {
@@ -2876,7 +2884,7 @@ function uamswp_spotlight_posts_for_provider($provider_id)
 
     }
 
-    return get_posts(
+    return uamswp_fad_ids(get_posts(
         [
             'post_type' => 'clinical-resource',
             'post_status' => 'publish',
@@ -2895,7 +2903,7 @@ function uamswp_spotlight_posts_for_provider($provider_id)
                 ],
             ],
         ]
-    );
+    ));
 
 }
 
@@ -2912,7 +2920,7 @@ add_action('transition_post_status', 'uamswp_spotlight_status_sync', 10, 3);
 /**
  * @param  mixed  $new_status
  * @param  mixed  $old_status
- * @param  mixed  $post
+ * @param  WP_Post  $post
  */
 function uamswp_spotlight_status_sync($new_status, $old_status, $post): void
 {
@@ -2920,7 +2928,7 @@ function uamswp_spotlight_status_sync($new_status, $old_status, $post): void
     if (
         empty($post->ID)
         ||
-        ($post->post_type ?? '') !== 'clinical-resource'
+        $post->post_type !== 'clinical-resource'
         ||
         $new_status === $old_status
         ||
@@ -3022,7 +3030,7 @@ function uamswp_spotlight_delete_sync($post_id): void
 // clinical-resource field key => the field name, the provider source
 // field, and the ontology post's reverse-relationship field key.
 /**
- * @return array<mixed>
+ * @return array<string, array{name: string, provider: string, reverse: string}>
  */
 function uamswp_spotlight_ontology_map(): array
 {
@@ -3050,7 +3058,7 @@ function uamswp_spotlight_ontology_map(): array
 function uamswp_spotlight_sync_ontology($cr_id, $provider_id): void
 {
 
-    $cr_id = (int) $cr_id;
+    $cr_id = uamswp_fad_int($cr_id);
 
     // Authorization gate for the cross-post writes below.
     //
@@ -3172,11 +3180,11 @@ function uamswp_spotlight_reconcile_ontology($post_id): void
 
     $new_provider = 0;
 
-    if (isset($_POST['acf']['field_clinical_resource_spotlight_provider'])) {
+    if (uamswp_fad_posted('field_clinical_resource_spotlight_provider') !== null) {
 
-        $value = $_POST['acf']['field_clinical_resource_spotlight_provider'];
+        $value = uamswp_fad_posted('field_clinical_resource_spotlight_provider');
         $value = is_array($value) ? reset($value) : $value;
-        $new_provider = (int) $value;
+        $new_provider = uamswp_fad_int($value);
 
     }
 
@@ -3186,7 +3194,7 @@ function uamswp_spotlight_reconcile_ontology($post_id): void
         foreach (uamswp_spotlight_ontology_map() as $cr_field => $spec) {
 
             $ids = uamswp_spotlight_to_ids(get_field($spec['provider'], $new_provider));
-            $_POST['acf'][$cr_field] = array_map(strval(...), $ids);
+            uamswp_fad_post_set($cr_field, array_map(strval(...), $ids));
 
         }
 
@@ -3198,9 +3206,9 @@ function uamswp_spotlight_reconcile_ontology($post_id): void
         // once the type changes), mirroring uamswp_spotlight_reconcile_providers.
         foreach (uamswp_spotlight_ontology_map() as $cr_field => $spec) {
 
-            if (! array_key_exists($cr_field, $_POST['acf'])) {
+            if (! uamswp_fad_posted_has($cr_field)) {
 
-                $_POST['acf'][$cr_field] = [];
+                uamswp_fad_post_set($cr_field, []);
 
             }
 
@@ -3223,7 +3231,7 @@ function uamswp_spotlight_reconcile_ontology($post_id): void
 // bidirectional partner of the matching physician_* field). Empty for any
 // other post type.
 /**
- * @param  mixed  $post_type
+ * @param  string|false  $post_type
  */
 function uamswp_spotlight_ontology_provider_field($post_type): string
 {
@@ -3243,15 +3251,15 @@ function uamswp_spotlight_ontology_provider_field($post_type): string
 // absent from the saved value).
 /**
  * @param  mixed  $post_id
- * @param  mixed  $set
- * @return mixed
+ * @param  array<int, int>|null  $set
+ * @return array<int, int>
  */
 function uamswp_spotlight_ontology_providers_before($post_id, $set = null)
 {
 
     static $store = [];
 
-    $post_id = (int) $post_id;
+    $post_id = uamswp_fad_int($post_id);
 
     if ($set !== null) {
 
@@ -3362,8 +3370,8 @@ add_filter('acf/validate_value/key=field_location_epic_dep_ids', 'uamswp_locatio
 /**
  * @param  mixed  $valid
  * @param  mixed  $value
- * @param  mixed  $field
- * @param  mixed  $input_name
+ * @param  array<string, mixed>  $field
+ * @param  string  $input_name
  * @return mixed
  */
 function uamswp_location_validate_epic_dep_ids($valid, $value, $field, $input_name)
@@ -3406,7 +3414,7 @@ function uamswp_location_validate_epic_dep_ids($valid, $value, $field, $input_na
 
         }
 
-        $dep_id = trim((string) $row[$sub_field_key]);
+        $dep_id = trim(uamswp_fad_str($row[$sub_field_key]));
 
         // A row holding nothing but whitespace has to be rejected here.
         // ACF's own required check does not catch it: acf_validate_value()
@@ -3477,7 +3485,7 @@ add_filter('acf/update_value/key=field_location_epic_dep_id_item', 'uamswp_locat
 /**
  * @param  mixed  $value
  * @param  mixed  $post_id
- * @param  mixed  $field
+ * @param  array<string, mixed>  $field
  * @return mixed
  */
 function uamswp_location_trim_epic_dep_id($value, $post_id, $field)
@@ -3502,7 +3510,7 @@ function uamswp_location_trim_epic_dep_id($value, $post_id, $field)
 // Rejected rather than repaired: the filter cannot change what is stored, and
 // an editor who sees the message learns what the field holds.
 /**
- * @return array<mixed>
+ * @return array<string, array{digits: int, label: string}>
  */
 function uamswp_workday_id_validation_rules(): array
 {
@@ -3519,8 +3527,8 @@ function uamswp_workday_id_validation_rules(): array
 /**
  * @param  mixed  $valid
  * @param  mixed  $value
- * @param  mixed  $field
- * @param  mixed  $input_name
+ * @param  array<string, mixed>  $field
+ * @param  string  $input_name
  * @return mixed
  */
 function uamswp_workday_id_validate($valid, $value, $field, $input_name)
@@ -3534,7 +3542,9 @@ function uamswp_workday_id_validate($valid, $value, $field, $input_name)
 
     $rules = uamswp_workday_id_validation_rules();
 
-    if (! isset($field['key'], $rules[$field['key']]) || ! is_string($value)) {
+    $key = uamswp_fad_str($field['key'] ?? '');
+
+    if (! isset($rules[$key]) || ! is_string($value)) {
 
         return $valid;
 
@@ -3548,14 +3558,14 @@ function uamswp_workday_id_validate($valid, $value, $field, $input_name)
 
     }
 
-    $digits = $rules[$field['key']]['digits'];
+    $digits = $rules[$key]['digits'];
 
     if (preg_match('/^[0-9]{'.$digits.'}$/', $value) !== 1) {
 
         return sprintf(
             'Enter the %1$d-digit %2$s only, e.g. %3$s.',
             $digits,
-            $rules[$field['key']]['label'],
+            $rules[$key]['label'],
             substr('123456789', 0, $digits)
         );
 
@@ -3577,7 +3587,7 @@ unset($uamswp_workday_id_key);
 /**
  * @param  mixed  $value
  * @param  mixed  $post_id
- * @param  mixed  $field
+ * @param  array<string, mixed>  $field
  * @return mixed
  */
 function uamswp_workday_id_trim($value, $post_id, $field)

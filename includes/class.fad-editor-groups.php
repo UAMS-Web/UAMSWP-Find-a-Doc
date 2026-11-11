@@ -197,7 +197,7 @@ function uamswp_fad_editor_group_members($term_id)
     foreach (['editor_group_primary_editor', 'editor_group_editors'] as $key) {
         $value = get_term_meta($term_id, $key, true);
         foreach ((array) $value as $user_id) {
-            $user_id = (int) $user_id;
+            $user_id = uamswp_fad_int($user_id);
             if ($user_id > 0) {
                 $members[] = $user_id;
             }
@@ -267,17 +267,17 @@ function uamswp_fad_user_in_post_editor_group($user_id, $post_id): bool
         return false;
     }
 
-    return (bool) array_intersect($groups, array_map(intval(...), $post_groups));
+    return (bool) array_intersect($groups, array_map(uamswp_fad_int(...), $post_groups));
 }
 
 // 4. Capability mapping: a group member is treated like the post's author for editing
 
 /**
- * @param  mixed  $caps
- * @param  mixed  $cap
- * @param  mixed  $user_id
- * @param  mixed  $args
- * @return mixed
+ * @param  array<int, string>  $caps
+ * @param  string  $cap
+ * @param  int  $user_id
+ * @param  array<int, mixed>  $args
+ * @return array<int, string>
  */
 function uamswp_fad_editor_group_map_meta_cap($caps, $cap, $user_id, $args)
 {
@@ -286,7 +286,7 @@ function uamswp_fad_editor_group_map_meta_cap($caps, $cap, $user_id, $args)
         return $caps;
     }
 
-    $post = get_post($args[0]);
+    $post = get_post(uamswp_fad_int($args[0]));
     if (! $post || ! array_key_exists($post->post_type, uamswp_fad_editor_group_post_types())) {
         return $caps;
     }
@@ -297,12 +297,12 @@ function uamswp_fad_editor_group_map_meta_cap($caps, $cap, $user_id, $args)
     }
 
     $others = $type->cap->edit_others_posts;
-    $index = array_search($others, $caps, true);
+    $index = array_search($others, uamswp_fad_arr($caps), true);
     if ($index === false) {
         return $caps; // Own post, or the role already covers it.
     }
 
-    if (! uamswp_fad_user_in_post_editor_group($user_id, $post->ID)) {
+    if (! uamswp_fad_user_in_post_editor_group(uamswp_fad_int($user_id), $post->ID)) {
         return $caps;
     }
 
@@ -318,7 +318,7 @@ add_filter('map_meta_cap', 'uamswp_fad_editor_group_map_meta_cap', 10, 4);
 // 5. Admin list: a doc_editor sees their groups' records as well as their own
 
 /**
- * @param  mixed  $query
+ * @param  WP_Query  $query
  */
 function uamswp_fad_editor_group_admin_list_scope($query): void
 {
@@ -365,7 +365,7 @@ add_action('pre_get_posts', 'uamswp_fad_editor_group_admin_list_scope');
 
 /**
  * @param  mixed  $where
- * @param  mixed  $query
+ * @param  WP_Query  $query
  * @return mixed
  */
 function uamswp_fad_editor_group_admin_list_where($where, $query)
@@ -373,12 +373,12 @@ function uamswp_fad_editor_group_admin_list_where($where, $query)
     global $wpdb;
 
     $tt_ids = $query->get('uamswp_editor_group_tt_ids');
-    $user_id = (int) $query->get('uamswp_editor_group_user');
+    $user_id = uamswp_fad_int($query->get('uamswp_editor_group_user'));
     if (empty($tt_ids) || ! $user_id) {
         return $where;
     }
 
-    $in = implode(',', array_map(intval(...), (array) $tt_ids));
+    $in = implode(',', array_map(uamswp_fad_int(...), (array) $tt_ids));
 
     $where .= $wpdb->prepare(
         " AND ( {$wpdb->posts}.post_author = %d OR {$wpdb->posts}.ID IN ( SELECT object_id FROM {$wpdb->term_relationships} WHERE term_taxonomy_id IN ( {$in} ) ) )",
@@ -417,7 +417,7 @@ function uamswp_fad_editor_groups_from_service_line($post_id): array
 
         $group = get_term_meta($service_line_id, 'service_line_editor_group', true);
         foreach ((array) $group as $group_id) {
-            $group_id = (int) $group_id;
+            $group_id = uamswp_fad_int($group_id);
             if ($group_id > 0 && term_exists($group_id, UAMSWP_FAD_EDITOR_GROUP_TAX)) {
                 $groups[] = $group_id;
             }
@@ -446,8 +446,8 @@ function uamswp_fad_inherit_editor_group($post_id): bool
         return false;
     }
 
-    $current = array_map(intval(...), $current);
-    $previous = array_map(intval(...), (array) get_post_meta($post_id, '_uamswp_editor_groups_derived', true));
+    $current = array_map(uamswp_fad_int(...), $current);
+    $previous = array_map(uamswp_fad_int(...), (array) get_post_meta($post_id, '_uamswp_editor_groups_derived', true));
     $derived = uamswp_fad_editor_groups_from_service_line($post_id);
 
     $manual = array_diff($current, $previous);
@@ -477,12 +477,12 @@ function uamswp_fad_inherit_editor_group($post_id): bool
 
 /**
  * @param  mixed  $post_id
- * @param  mixed  $post
+ * @param  WP_Post  $post
  */
 function uamswp_fad_inherit_editor_group_on_save($post_id, $post): void
 {
 
-    if (wp_is_post_autosave($post_id) || wp_is_post_revision($post_id)) {
+    if (wp_is_post_autosave(uamswp_fad_int($post_id)) || wp_is_post_revision(uamswp_fad_int($post_id))) {
         return;
     }
 
@@ -490,7 +490,7 @@ function uamswp_fad_inherit_editor_group_on_save($post_id, $post): void
         return;
     }
 
-    uamswp_fad_inherit_editor_group($post_id);
+    uamswp_fad_inherit_editor_group(uamswp_fad_int($post_id));
 }
 
 // Priority 20: after ACF has written the service line field (ACF saves on save_post at 10).
@@ -498,10 +498,7 @@ add_action('save_post', 'uamswp_fad_inherit_editor_group_on_save', 20, 2);
 
 // 7. One-click backfill for records saved before the mapping existed
 
-/**
- * @return mixed
- */
-function uamswp_fad_editor_group_sync_url()
+function uamswp_fad_editor_group_sync_url(): string
 {
     return wp_nonce_url(
         admin_url('admin-post.php?action=uamswp_fad_sync_editor_groups'),
@@ -516,7 +513,7 @@ function uamswp_fad_editor_group_sync_notice(): void
         return;
     }
 
-    $synced = isset($_GET['uamswp_synced']) ? absint($_GET['uamswp_synced']) : null; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    $synced = isset($_GET['uamswp_synced']) ? absint(uamswp_fad_str($_GET['uamswp_synced'])) : null; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
     if ($synced !== null) {
         printf(
             '<div class="notice notice-success"><p>%s</p></div>',

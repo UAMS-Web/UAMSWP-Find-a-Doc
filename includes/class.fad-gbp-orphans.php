@@ -43,7 +43,7 @@ function uamswp_fad_gbp_track_unpublish($new_status, $old_status, $post, ?int $n
         return;
     }
 
-    if ($old_status === 'publish' && (string) get_post_meta((int) ($post->ID ?? 0), UAMSWP_FAD_GBP_UNPUBLISHED_META, true) === '') {
+    if ($old_status === 'publish' && uamswp_fad_str(get_post_meta((int) ($post->ID ?? 0), UAMSWP_FAD_GBP_UNPUBLISHED_META, true)) === '') {
         update_post_meta((int) ($post->ID ?? 0), UAMSWP_FAD_GBP_UNPUBLISHED_META, gmdate('Y-m-d', $now ?? time()));
     }
 }
@@ -76,7 +76,7 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
 
         foreach (is_array($map) ? $map : [] as $entry) {
             if (is_array($entry) && ($entry['orphaned_since'] ?? null) === null && ($entry['id'] ?? '') !== '') {
-                $live[] = (string) $entry['id'];
+                $live[] = uamswp_fad_str($entry['id']);
             }
         }
     }
@@ -92,7 +92,7 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
             continue;
         }
 
-        $since = (string) get_post_meta($post_id, UAMSWP_FAD_GBP_UNPUBLISHED_META, true);
+        $since = uamswp_fad_str(get_post_meta($post_id, UAMSWP_FAD_GBP_UNPUBLISHED_META, true));
 
         if ($since === '') {
             $since = $today;
@@ -116,9 +116,11 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
         $current = null;
 
         foreach (is_array($map) ? $map : [] as $location_id => $entry) {
-            $since = (string) ($entry['orphaned_since'] ?? '');
+            $entry = uamswp_fad_arr($entry);
+            $entry_id = uamswp_fad_str($entry['id'] ?? '');
+            $since = uamswp_fad_str(($entry['orphaned_since'] ?? ''));
 
-            if ($since === '' || ($entry['id'] ?? '') === '' || isset($live[$entry['id']]) || isset($candidates[$entry['id']])) {
+            if ($since === '' || $entry_id === '' || isset($live[$entry_id]) || isset($candidates[$entry_id])) {
                 continue;
             }
 
@@ -129,7 +131,7 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
                 continue;
             }
 
-            $candidates[$entry['id']] = ['name' => $entry['id'], 'cause' => 'association removed', 'since' => $since, 'label' => get_the_title($post_id).' (post '.$post_id.') at location '.$location_id];
+            $candidates[$entry_id] = ['name' => $entry_id, 'cause' => 'association removed', 'since' => $since, 'label' => get_the_title($post_id).' (post '.$post_id.') at location '.$location_id];
         }
     }
 
@@ -144,7 +146,7 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
 function uamswp_fad_gbp_stored_names(int $post_id): array
 {
     if (get_post_type($post_id) === 'location') {
-        $name = (string) get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true);
+        $name = uamswp_fad_str(get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true));
 
         return $name === '' ? [] : [$name];
     }
@@ -155,7 +157,7 @@ function uamswp_fad_gbp_stored_names(int $post_id): array
 
     foreach (is_array($map) ? $map : [] as $entry) {
         if (is_array($entry) && ($entry['id'] ?? '') !== '') {
-            $names[] = (string) $entry['id'];
+            $names[] = uamswp_fad_str($entry['id']);
         }
     }
 
@@ -197,7 +199,7 @@ function uamswp_fad_gbp_orphan_scan(callable $out, ?UAMSWP_FAD_GBP_Client $clien
         $listings = [];
 
         foreach (uamswp_fad_gbp_index($client) as $entry) {
-            $listings[(string) ($entry['listing']['name'] ?? '')] = $entry;
+            $listings[uamswp_fad_str(($entry['listing']['name'] ?? ''))] = $entry;
         }
     } catch (RuntimeException $runtimeException) {
         $out('Stopped: '.$runtimeException->getMessage());
@@ -227,7 +229,7 @@ function uamswp_fad_gbp_orphan_scan(callable $out, ?UAMSWP_FAD_GBP_Client $clien
         $silo = uamswp_fad_gbp_silo_for_account($found['account'], $silos);
         $mode = $silo === null ? 'off' : UAMSWP_FAD_GBP_Logic::effective_mode($modes[$silo] ?? 'off', $production);
         $entry = [
-            'store_code' => (string) ($found['listing']['storeCode'] ?? $row['name']),
+            'store_code' => uamswp_fad_str(($found['listing']['storeCode'] ?? $row['name'])),
             'silo' => $silo,
             'kind' => 'listing',
             'mode' => $mode,

@@ -12,8 +12,8 @@ global $wpdb;
 add_filter('rwmb_meta_boxes', 'uams_services_register_meta_boxes');
 
 /**
- * @param  mixed  $meta_boxes
- * @return mixed
+ * @param  array<int, array<string, mixed>>  $meta_boxes
+ * @return array<int, array<string, mixed>>
  */
 function uams_services_register_meta_boxes($meta_boxes)
 {
