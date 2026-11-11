@@ -1,6 +1,6 @@
 {
   "name": "uamswp-find-a-doc",
-  "version": "1.4.0",
+  "version": "2.4.0",
   "description": "Find-a-doc plugin for uamshealth.com",
   "main": "gulpfile.js",
   "dependencies": {
