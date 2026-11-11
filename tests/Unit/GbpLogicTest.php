@@ -276,7 +276,7 @@ final class GbpLogicTest extends UnitTestCase
     /**
      * @return array<string, array{0: mixed, 1: bool}>
      */
-    public function yes_no_cases(): array
+    public static function yes_no_cases(): array
     {
         return [
             'the string ACF returns for Yes' => ['1', true],
@@ -292,10 +292,9 @@ final class GbpLogicTest extends UnitTestCase
     }
 
     /**
-     * @dataProvider yes_no_cases
-     *
      * @param  mixed  $value
      */
+    #[DataProvider('yes_no_cases')]
     public function test_a_yes_no_field_is_yes_only_for_its_stored_yes($value, bool $expected): void
     {
         $this->assertSame($expected, UAMSWP_FAD_GBP_Logic::is_yes($value));
