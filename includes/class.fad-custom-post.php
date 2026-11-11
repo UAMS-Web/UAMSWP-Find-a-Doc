@@ -3548,7 +3548,7 @@ function get_provider_meta($object)
     $data['physician_referral_required'] = get_field('physician_referral_required', $postId);
     $provider_portal = get_field('physician_portal', $postId);
     $portal = get_term($provider_portal, 'portal');
-    $data['physician_portal']['name'] = is_array($portal) ? $portal->name : '';
+    $data['physician_portal']['name'] = $portal && ! is_wp_error($portal) ? $portal->name : '';
     $data['physician_portal']['content'] = get_field('portal_content', $portal);
     $data['physician_portal']['url'] = get_field('portal_url', $portal);
     // $data['physician_clinical_admin_title'] = get_field( 'physician_clinical_admin_title', $postId );
