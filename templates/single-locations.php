@@ -635,7 +635,7 @@ while ( have_posts() ) : the_post(); ?>
 				<div class="content-width">
 					<h1 class="page-title"><?php echo $page_title; ?>
 					<?php if ($parent_location) { ?>
-					<span class="subtitle"><span class="sr-only">(</span>Part of <?php echo $parent_title_prepend; ?><a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
+					<span class="subtitle"><span class="sr-only">(</span>Part of <?php echo $parent_title_prepend; ?><a href="<?php echo esc_url($parent_url); ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
 					<?php } // endif ?>
 					</h1>
 					<?php if ($location_closing_display) { ?>
@@ -682,7 +682,7 @@ while ( have_posts() ) : the_post(); ?>
 							</div>
 						</div>
 						<?php if( $location_web_name && $location_url ){ ?>
-							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>" target="_blank" data-categorytitle="External Link"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
+							<p><a class="btn btn-secondary" href="<?php echo esc_url($location_url['url']); ?>" target="_blank" data-categorytitle="External Link"><?php echo esc_html($location_web_name); ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php }
 						// Schema data
 						$location_schema = '"address": {
@@ -1640,7 +1640,7 @@ while ( have_posts() ) : the_post(); ?>
 								<?php }
 								if ( $portal_content ) { ?>
 								<div class="btn-container">
-									<a href="<?php echo $portal_url; ?>" aria-label="Log in to <?php echo $portal_name_attr; ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo $portal_name_attr; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
+									<a href="<?php echo esc_url($portal_url); ?>" aria-label="Log in to <?php echo esc_attr($portal_name_attr); ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo esc_attr($portal_name_attr); ?>"><?php echo esc_html($portal_link_title ? $portal_link_title : 'Log in to '. $portal_name); ?></a>
 								</div>
 								<?php } ?>
 							</div>

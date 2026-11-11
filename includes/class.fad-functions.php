@@ -995,7 +995,7 @@ function display_medline_api_data($code, $type): void
         echo '<div class="cite">';
         echo '<p><em>Courtesy of <a href="https://medlineplus.gov/">MedlinePlus</a> from the <a href="https://www.nlm.nih.gov/">National Library of Medicine</a>.</em></p>';
         echo '<p><strong>Syndicated Content Details:</strong><br />';
-        echo 'Source URL: <a href="'.$entry->link->href.'">'.$entry->link->href.'</a><br />';
+        echo 'Source URL: <a href="'.esc_url($entry->link->href).'">'.esc_html($entry->link->href).'</a><br />';
         echo 'Source Agency: <a href="https://www.nlm.nih.gov/">National Library of Medicine</a></p>';
         echo '</div>';
     } else {
@@ -1008,7 +1008,7 @@ function display_medline_api_data($code, $type): void
                 echo '<div class="cite">';
                 echo '<p><em>Courtesy of <a href="https://medlineplus.gov/">MedlinePlus</a> from the <a href="https://www.nlm.nih.gov/">National Library of Medicine</a>.</em></p>';
                 echo '<p><strong>Syndicated Content Details:</strong><br />';
-                echo 'Source URL: <a href="'.$entry[$a]->link->href.'">'.$entry[$a]->link->href.'</a><br />';
+                echo 'Source URL: <a href="'.esc_url($entry[$a]->link->href).'">'.esc_html($entry[$a]->link->href).'</a><br />';
                 echo 'Source Agency: <a href="https://www.nlm.nih.gov/">National Library of Medicine</a></p>';
                 echo '</div>';
             }
@@ -1164,7 +1164,7 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
                 </div>
 				<?php } ?>
                 <div class="col-auto">
-					<input type="hidden" id="providers-ids" name="providers-ids" value="<?php echo implode(',', $providers); ?>">
+					<input type="hidden" id="providers-ids" name="providers-ids" value="<?php echo esc_attr(implode(',', array_map(absint(...), $providers))); ?>">
 				</div>
 				<div class="col-auto">
 					<input type="button" id="provider_clear" name="provider_clear" value="Reset" class="btn btn-outline-primary">
@@ -1445,7 +1445,7 @@ function uamswp_provider_title_ajax_filter_shortcode($atts): string|false
                     </select>
                 </div>
                 <div class="col-auto">
-					<input type="hidden" id="providers-ids" name="providers-ids" value="<?php echo implode(',', $providers); ?>">
+					<input type="hidden" id="providers-ids" name="providers-ids" value="<?php echo esc_attr(implode(',', array_map(absint(...), $providers))); ?>">
 				</div>
 				<div class="col-auto">
 					<input type="button" id="provider_clear" name="provider_clear" value="Reset" class="btn btn-outline-primary">
@@ -1568,7 +1568,7 @@ function uamswp_location_ajax_filter_shortcode($atts): string|false
                     </select>
                 </div>
                 <div class="col-auto">
-					<input type="hidden" id="locations" name="locations" value="<?php echo implode(',', $locations); ?>">
+					<input type="hidden" id="locations" name="locations" value="<?php echo esc_attr(implode(',', array_map(absint(...), $locations))); ?>">
 					<!-- <input type="submit" id="submit" name="submit" value="Search" class="btn btn-primary"> -->
 				</div>
 				<div class="col-auto">

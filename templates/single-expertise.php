@@ -108,7 +108,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
         echo '<span class="supertitle">'. $expertise_single_name . '</span><span class="sr-only">:</span> ';
         echo $page_title;
         if ( $parent_expertise ) {
-           echo '<span class="subtitle"><span class="sr-only">(</span>Part of <a href="' . $parent_url . '" aria-label="Go to Area of Expertise page for ' . $parent_title_attr . '" data-categorytitle="Parent Name">' . $parent_title . '</a><span class="sr-only">)</span></span>';
+           echo '<span class="subtitle"><span class="sr-only">(</span>Part of <a href="' . esc_url($parent_url) . '" aria-label="Go to Area of Expertise page for ' . esc_attr($parent_title_attr) . '" data-categorytitle="Parent Name">' . $parent_title . '</a><span class="sr-only">)</span></span>';
         } // endif
         echo '</h1>';
     }
@@ -357,7 +357,7 @@ function uamswp_expertise_cta() {
                                     </div>';
                                     echo $cta_action_type == 'url' ?
                                     '<div class="btn-container">
-                                        <a href="' . $cta_button_url['url'] . '" aria-label="' . $cta_button_desc . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. $cta_button_target . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . $cta_button_text . '</a>
+                                        <a href="' . esc_url($cta_button_url['url']) . '" aria-label="' . esc_attr($cta_button_desc) . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. esc_attr($cta_button_target) . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . esc_html($cta_button_text) . '</a>
                                     </div>'
                                     : '';
                                     echo $cta_action_type == 'phone' ?

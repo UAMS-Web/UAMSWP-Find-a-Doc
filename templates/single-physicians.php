@@ -877,7 +877,7 @@ while ( have_posts() ) : the_post();
                                     ?>
                                 <p><strong><?php echo $primary_appointment_title; ?></strong><br />
                                 <?php if ( $parent_location ) { ?>
-                                    (Part of <?php echo $parent_title_prepend; ?><a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name"><?php echo $parent_title; ?></a>)<br />
+                                    (Part of <?php echo $parent_title_prepend; ?><a href="<?php echo esc_url($parent_url); ?>" data-categorytitle="Parent Name"><?php echo $parent_title; ?></a>)<br />
                                 <?php } // endif ?>
                                 <?php echo $location_address_1; ?><br/>
                                 <?php echo $location_address_2 ? $location_address_2 . '<br/>' : ''; ?>
@@ -1442,7 +1442,7 @@ while ( have_posts() ) : the_post();
                             <?php if( $research_profiles_link ): ?>
                                 <h3>UAMS Research Profile</h3>
                                 <p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
-                                <p><a class="btn btn-outline-primary" href="<?php echo $research_profiles_link; ?>" data-categorytitle="View Research Profile">View <?php echo uamswp_provider_name_html($short_name_possessive); ?> research profile</a></p>
+                                <p><a class="btn btn-outline-primary" href="<?php echo esc_url($research_profiles_link); ?>" data-categorytitle="View Research Profile">View <?php echo uamswp_provider_name_html($short_name_possessive); ?> research profile</a></p>
                             <?php endif; ?>
                         </div>
                     </div>

@@ -460,7 +460,7 @@
 											</div>';
 											echo $cta_action_type == 'url' ?
 											'<div class="btn-container">
-												<a href="' . $cta_button_url['url'] . '" aria-label="' . $cta_button_desc . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. $cta_button_target . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . $cta_button_text . '</a>
+												<a href="' . esc_url($cta_button_url['url']) . '" aria-label="' . esc_attr($cta_button_desc) . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. esc_attr($cta_button_target) . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . esc_html($cta_button_text) . '</a>
 											</div>'
 											: '';
 											echo $cta_action_type == 'phone' ?
@@ -610,7 +610,7 @@
 									$condition_title_attr = html_entity_decode($condition_title_attr); // Convert HTML entities to their corresponding characters
 								?>
 									<li>
-										<a href="<?php echo $condition_permalink; ?>" aria-label="Go to Condition page for <?php echo $condition_title_attr; ?>" class="btn btn-outline-primary"><?php echo $condition_title; ?></a>
+										<a href="<?php echo esc_url($condition_permalink); ?>" aria-label="Go to Condition page for <?php echo $condition_title_attr; ?>" class="btn btn-outline-primary"><?php echo $condition_title; ?></a>
 									</li>
 								<?php endwhile;
 									  wp_reset_postdata(); ?>
