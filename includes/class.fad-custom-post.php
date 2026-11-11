@@ -3461,7 +3461,7 @@ function get_provider_meta($object)
 
                 // Get occupational title field from term
 
-                $provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+                $provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term);
 
                 // Set occupational title from term name as a fallback
 
@@ -5186,6 +5186,13 @@ function get_treatment_meta($object): array
 function get_resource_meta($object)
 {
 
+    // Each query is built only when its field has a value, and every read below checks that field first.
+    $clinical_resource_query = null;
+    $condition_cpt_query = null;
+    $treatment_cpt_query = null;
+    $provider_query = null;
+    $location_query = null;
+    $expertise_query = null;
     $postId = $object['id'];
     $resource_image = get_the_post_thumbnail_url($postId, 'large');
     $resource_type = get_field('clinical_resource_type', $postId);

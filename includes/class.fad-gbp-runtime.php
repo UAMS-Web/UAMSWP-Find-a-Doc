@@ -947,7 +947,7 @@ function uamswp_fad_gbp_run_post(int $post_id): void
         $modes = uamswp_fad_gbp_modes();
         $production = uamswp_fad_gbp_is_production();
         $items = uamswp_fad_gbp_items_for_post($post_id, uamswp_fad_gbp_categories($client));
-        $hash = UAMSWP_FAD_GBP_Logic::fingerprint($items, $modes, $production, defined('UAMS_FAD_VERSION') ? (string) UAMS_FAD_VERSION : '');
+        $hash = UAMSWP_FAD_GBP_Logic::fingerprint($items, $modes, $production, defined('UAMS_FAD_VERSION') ? UAMS_FAD_VERSION : '');
 
         // Nothing that decides the sync has changed since its last settled run: no Google call.
         if (get_post_meta($post_id, UAMSWP_FAD_GBP_HASH_META, true) === $hash) {

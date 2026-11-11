@@ -81,7 +81,7 @@ function uamswp_location_address_parts(
         $parts[] = $floor_label;
     }
 
-    if ($suite && ! empty($suite)) {
+    if ($suite) {
         $parts[] = $suite;
     }
 

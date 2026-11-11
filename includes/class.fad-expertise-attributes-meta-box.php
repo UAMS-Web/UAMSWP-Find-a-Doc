@@ -99,7 +99,7 @@ class UAMS_Expertise_Attributes_Meta_Box
         $post_ID = (int) $post_ID;
         $post_type = get_post_type($post_ID);
         get_post_status($post_ID);
-        if (! isset($post_type) || $post_type != 'expertise') {
+        if ($post_type != 'expertise') {
             return $post_ID;
         }
 

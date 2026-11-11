@@ -69,6 +69,13 @@ function doximity_csv_export(): bool
 
     $query = new WP_Query($args);
 
+    // Built only when there are providers, but written out below whether or not there are.
+    $table_head = [];
+    $table_body = [];
+    // Set per location, and carried from one provider to the next when a location has no building.
+    $building_slug = '';
+    $building_name = '';
+
     if ($query->have_posts()) {
         $table_head = [];
         $table_head[0] = 'NPI Number';
@@ -231,7 +238,7 @@ function doximity_csv_export(): bool
                                 $primary_appointment_floor_label = $primary_appointment_floor_value != '0' ? $primary_appointment_floor_object['choices'][$primary_appointment_floor_value] : ''; // If the floor value is not 0, get the floor selection label
                                 $primary_appointment_suite = get_field('location_suite', $location); // Get the suite input
                                 $primary_appointment_address_2_arr = []; // Create empty array for constructing Address 2 value
-                                if ($primary_appointment_building && $building_slug != '_none' && isset($building_name) && ! empty($building_name)) {
+                                if ($primary_appointment_building && $building_slug != '_none' && ! empty($building_name)) {
                                     // If the building input has a value
                                     // and if the chosen building isn't 'None'
                                     // and if the building's name exists...
@@ -339,6 +346,9 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
 {
     $table_head = [];
     $table_body = [];
+    // Set per location, and carried from one provider to the next when a location has no building.
+    $building_slug = '';
+    $building_name = '';
 
     ob_start();
     // Custom WP_Query args
@@ -877,16 +887,16 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         $row[2] = $location_address_1 ? html_entity_decode($location_address_1) : '';
 
                         // Address line 2
-                        $row[3] = ($location_address_2 && ! empty($location_address_2)) ? html_entity_decode($location_address_2) : '';
+                        $row[3] = $location_address_2 ? html_entity_decode($location_address_2) : '';
 
                         // Address line 3
-                        $row[4] = ($location_address_3 && ! empty($location_address_3)) ? html_entity_decode($location_address_3) : '';
+                        $row[4] = $location_address_3 ? html_entity_decode($location_address_3) : '';
 
                         // Address line 4
-                        $row[5] = ($location_address_4 && ! empty($location_address_4)) ? html_entity_decode($location_address_4) : '';
+                        $row[5] = $location_address_4 ? html_entity_decode($location_address_4) : '';
 
                         // Address line 5
-                        $row[6] = ($location_address_5 && ! empty($location_address_5)) ? html_entity_decode($location_address_5) : '';
+                        $row[6] = $location_address_5 ? html_entity_decode($location_address_5) : '';
 
                         // Sub-locality
                         // Intentionally left blank
@@ -1069,6 +1079,9 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
 {
     $table_head = [];
     $table_body = [];
+    // Set per location, and carried from one location to the next when one has no building.
+    $building_slug = '';
+    $building_name = '';
 
     ob_start();
     // Custom WP_Query args
@@ -1437,7 +1450,7 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             //   Building Floor Number
             //   Suite Number
 
-            $location_addresses = uamswp_location_address_parts(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite);
+            $location_addresses = uamswp_location_address_parts(($location_building && $building_slug != '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite);
             $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
             $location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
             $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
@@ -1532,13 +1545,13 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 $row[3] = ($location_address_2 && ! empty($location_address_2)) ? html_entity_decode($location_address_2) : '';
 
                 // Address line 3
-                $row[4] = ($location_address_3 && ! empty($location_address_3)) ? html_entity_decode($location_address_3) : '';
+                $row[4] = $location_address_3 ? html_entity_decode($location_address_3) : '';
 
                 // Address line 4
-                $row[5] = ($location_address_4 && ! empty($location_address_4)) ? html_entity_decode($location_address_4) : '';
+                $row[5] = $location_address_4 ? html_entity_decode($location_address_4) : '';
 
                 // Address line 5
-                $row[6] = ($location_address_5 && ! empty($location_address_5)) ? html_entity_decode($location_address_5) : '';
+                $row[6] = $location_address_5 ? html_entity_decode($location_address_5) : '';
 
                 // Sub-locality
                 // Intentionally left blank
@@ -1675,7 +1688,7 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 }
 
                 $location_images = []; // Create empty array for location images
-                if ($featured_image && ! empty($featured_image)) {
+                if ($featured_image) {
                     // If featured image exists...
                     $location_images[] = $featured_image; // add it to the array for location images
                 }
@@ -1798,6 +1811,10 @@ function mychart_csv_export(): bool
     ];
 
     $query = new WP_Query($args);
+
+    // Built only when there are providers, but written out below whether or not there are.
+    $table_head = [];
+    $table_body = [];
 
     if ($query->have_posts()) {
         $table_head = [];

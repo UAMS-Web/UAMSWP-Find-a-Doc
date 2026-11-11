@@ -38,6 +38,7 @@ includes:
 
 parameters:
     scanFiles:
+        - tgm/class-tgm-plugin-activation.php
         - vendor/php-stubs/wp-cli-stubs/wp-cli-stubs.php
         - vendor/php-stubs/wp-cli-stubs/wp-cli-commands-stubs.php
         - vendor/php-stubs/wp-cli-stubs/wp-cli-i18n-stubs.php
@@ -59,7 +60,7 @@ parameters:
     # from 0 upward (see the code-quality skill), then raise it by one per
     # change as findings are fixed, until `max`. Lowering it is a deliberate,
     # argued change, not a quiet edit to get a red run green.
-    level: 0
+    level: 1
 
     excludePaths:
         analyseAndScan:
@@ -67,8 +68,10 @@ parameters:
             - vendor
             - tgm
             - plugins
-            - tests
-            - admin
+            # The templates run in the scope of whatever includes them, so their variables and the
+            # ACF, FacetWP, Meta Box and theme functions they call are invisible to analysis: 1,006
+            # findings at level 1, 910 of them undefined variables or functions. Tracked in #1232.
+            - templates
 
     # Filled: the directories and files holding first-party PHP, including
     # the plugin header file at the root. Include tests: test bugs are real
@@ -76,7 +79,9 @@ parameters:
     # modifications.
     paths:
         - uamswp-find-a-doc.php
+        - required-plugins.php
         - includes
+        - admin
 
     # Indexed for symbols but not analyzed. `php-stubs/wordpress-stubs` covers
     # core's runtime surface and stops there: `WP_UnitTestCase`, the factories
@@ -109,8 +114,8 @@ parameters:
     #    fold a specific value).
     #
     # Example (uncomment and rename to the plugin's real constants):
-    # bootstrapFiles:
-    #     - phpstan-bootstrap.php
+    bootstrapFiles:
+        - phpstan-bootstrap.php
     # dynamicConstantNames:
     #     - MY_PLUGIN_URL
     #     - MY_PLUGIN_DIR

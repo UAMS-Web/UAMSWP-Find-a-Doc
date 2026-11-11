@@ -517,7 +517,7 @@ class UAMSWP_FAD_GBP_Logic
         foreach ($map as $location_id => $entry) {
             if (in_array((int) $location_id, $current_location_ids, true)) {
                 $map[$location_id]['orphaned_since'] = null;
-            } elseif (($entry['orphaned_since'] ?? null) === null) {
+            } elseif ($entry['orphaned_since'] === null) {
                 $map[$location_id]['orphaned_since'] = $date;
             }
         }
