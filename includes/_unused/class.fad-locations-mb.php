@@ -112,17 +112,6 @@ function uams_locations_register_meta_boxes($meta_boxes)
 
     global $wpdb;
 
-    $location_excerpt = '';
-    // Get the current post content and set as the default value for the wysiwyg field.
-    $post_id = filter_input(INPUT_GET, 'post', FILTER_SANITIZE_NUMBER_INT);
-    if (! $post_id) {
-        $post_id = filter_input(INPUT_POST, 'post_ID', FILTER_SANITIZE_NUMBER_INT);
-    }
-
-    if ($post_id) {
-        $location_excerpt = get_post_field('post_excerpt', $post_id);
-    }
-
     $meta_boxes[] = [
         'id' => 'locations',
         'title' => 'Location Information',

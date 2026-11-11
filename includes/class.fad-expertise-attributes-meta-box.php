@@ -61,7 +61,6 @@ class UAMS_Expertise_Attributes_Meta_Box
             <label class="screen-reader-text" for="parent_id"><?php _e('Parent') ?></label>
 
             <?php echo $pages;
-                $parent = get_post_meta($post->ID, 'parent', true);
                 wp_nonce_field('parent_nonce', 'parent_name');
                 ?>
 

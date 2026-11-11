@@ -491,8 +491,8 @@ class UAMSWP_FAD_GBP_Logic
      *
      * Seeing the listing again clears an orphan date.
      *
-     * @param  array<int|string, array{id: string, orphaned_since: ?string}>  $map
-     * @return array<int|string, array{id: string, orphaned_since: ?string}>
+     * @param  array<int|string, array{id: string, orphaned_since: ?string, photos?: array<int, array{category: string, url: string}>}>  $map
+     * @return array<int|string, array{id: string, orphaned_since: ?string, photos?: array<int, array{category: string, url: string}>}>
      */
     public static function remember_listing(array $map, int $location_id, string $name): array
     {
@@ -508,9 +508,9 @@ class UAMSWP_FAD_GBP_Logic
      * Only an entry that is not already dated gets a date, so the date stays the day it was first seen. An
      * entry for a location the provider still has loses any date. No entry is removed.
      *
-     * @param  array<int|string, array{id: string, orphaned_since: ?string}>  $map
+     * @param  array<int|string, array{id: string, orphaned_since: ?string, photos?: array<int, array{category: string, url: string}>}>  $map
      * @param  array<int, int>  $current_location_ids  The location posts the provider is at now.
-     * @return array<int|string, array{id: string, orphaned_since: ?string}>
+     * @return array<int|string, array{id: string, orphaned_since: ?string, photos?: array<int, array{category: string, url: string}>}>
      */
     public static function mark_orphans(array $map, array $current_location_ids, string $date): array
     {

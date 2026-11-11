@@ -75,19 +75,19 @@ parameters:
 		-
 			rawMessage: Function format_phone_dash not found.
 			identifier: function.notFound
-			count: 3
+			count: 1
 			path: includes/class.fad-custom-post.php
 
 		-
 			rawMessage: Function format_phone_us not found.
 			identifier: function.notFound
-			count: 3
+			count: 1
 			path: includes/class.fad-custom-post.php
 
 		-
 			rawMessage: Function get_field not found.
 			identifier: function.notFound
-			count: 163
+			count: 162
 			path: includes/class.fad-custom-post.php
 
 		-
@@ -141,13 +141,13 @@ parameters:
 		-
 			rawMessage: Function get_field not found.
 			identifier: function.notFound
-			count: 93
+			count: 83
 			path: includes/class.fad-gmb-settings-page.php
 
 		-
 			rawMessage: Function get_field_object not found.
 			identifier: function.notFound
-			count: 3
+			count: 2
 			path: includes/class.fad-gmb-settings-page.php
 
 		-

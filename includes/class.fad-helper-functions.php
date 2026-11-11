@@ -390,7 +390,7 @@ if (! function_exists('uamswp_provider_name_html')) {
      * @param  string  $name  A provider name variant.
      * @return string Escaped for HTML text output, with &nbsp; preserved.
      */
-    function uamswp_provider_name_html($name): string|array
+    function uamswp_provider_name_html($name): string
     {
 
         return str_replace('&amp;nbsp;', '&nbsp;', esc_html((string) $name));
@@ -574,16 +574,16 @@ if (! function_exists('uamswp_provider_names')) {
 
         return [
             'full' => $full_name,
-            'full_attr' => $full_name ? uamswp_attr_conversion($full_name) : '',
+            'full_attr' => uamswp_attr_conversion($full_name),
             'prefix' => $prefix,
             'medium' => $medium_name,
-            'medium_attr' => $medium_name ? uamswp_attr_conversion($medium_name) : '',
+            'medium_attr' => uamswp_attr_conversion($medium_name),
             'medium_no_prefix' => $medium_no_prefix_name,
             'medium_no_prefix_attr' => $medium_no_prefix_name ? uamswp_attr_conversion($medium_no_prefix_name) : '',
             'short' => $short_name,
-            'short_attr' => $short_name ? uamswp_attr_conversion($short_name) : '',
+            'short_attr' => uamswp_attr_conversion($short_name),
             'short_possessive' => $short_name_possessive,
-            'short_possessive_attr' => $short_name_possessive ? uamswp_attr_conversion($short_name_possessive) : '',
+            'short_possessive_attr' => uamswp_attr_conversion($short_name_possessive),
             'sort' => $sort_name,
             'sort_param' => $sort_name_param_value,
         ];

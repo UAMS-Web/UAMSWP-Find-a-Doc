@@ -67,14 +67,9 @@ function uamswp_fad_gbp_scheduled_times(): array
     $cron = _get_cron_array();
     $times = [];
 
-    if (! is_array($cron)) {
-        return $times;
-    }
-
     foreach ($cron as $time => $hooks) {
-        foreach ((array) ($hooks[UAMSWP_FAD_GBP_SYNC_HOOK] ?? []) as $ignored) {
-            $times[] = (int) $time;
-        }
+        // One entry per job queued at that time.
+        $times = array_merge($times, array_fill(0, count((array) ($hooks[UAMSWP_FAD_GBP_SYNC_HOOK] ?? [])), (int) $time));
     }
 
     return $times;

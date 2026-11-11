@@ -968,15 +968,9 @@ function get_medline_api_data($code, $type)
     $response = str_replace('None(', '', $response);
     $response = str_replace('});', '}', $response);
     // var_dump( $response );
-    try {
-
-        // Note that we decode the body's response since it's the actual JSON feed
-        $json = json_decode($response);
-
-    } catch (Exception) {
-        $json = null;
-    }
-    // end try/catch
+    // Note that we decode the body's response since it's the actual JSON feed.
+    // A body that is not JSON decodes to null; json_decode() throws nothing without JSON_THROW_ON_ERROR.
+    $json = json_decode($response);
     set_transient($id, $json, DAY_IN_SECONDS);
 
     return $json;
@@ -1030,7 +1024,6 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
     $display_region = $a['region'];
     $provider_titles = [];
     $provider_titles_list = [];
-    $regions = [];
     $provider_regions = [];
     foreach ($providers as $provider) {
         if (get_post_status($provider) == 'publish') {
@@ -1046,9 +1039,6 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
 
             // Eliminate PHP errors
 
-            $provider_specialty = '';
-            $provider_specialty_term = '';
-            $provider_specialty_name = '';
             $provider_occupation_title = '';
 
             if ($provider_resident) {
@@ -1363,9 +1353,6 @@ function uamswp_provider_title_ajax_filter_shortcode($atts): string|false
 
             // Eliminate PHP errors
 
-            $provider_specialty = '';
-            $provider_specialty_term = '';
-            $provider_specialty_name = '';
             $provider_occupation_title = '';
 
             if ($provider_resident) {
@@ -1535,7 +1522,6 @@ function uamswp_location_ajax_filter_shortcode($atts): string|false
     ], $atts);
     $locations = explode(',', $a['locations']);
     $display_region = $a['region'];
-    $regions = [];
     $location_regions = [];
     foreach ($locations as $location) {
         if (get_post_status($location) == 'publish') {

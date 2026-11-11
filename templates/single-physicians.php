@@ -450,7 +450,7 @@ function uamswp_fad_title($html): string
 // add_filter('seopress_titles_title', 'uamswp_fad_title', 20, 2);
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
-function be_remove_title_from_single_crumb($crumb, $args) // Because BE is the man
+function be_remove_title_from_single_crumb($crumb, $args): string // Because BE is the man
 {
     global $full_name;
 

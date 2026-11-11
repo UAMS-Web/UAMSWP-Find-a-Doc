@@ -15,15 +15,6 @@ function uams_services_register_meta_boxes($meta_boxes)
 {
 
     global $wpdb;
-    $post_id = filter_input(INPUT_GET, 'post', FILTER_SANITIZE_NUMBER_INT);
-    if (! $post_id) {
-        $post_id = filter_input(INPUT_POST, 'post_ID', FILTER_SANITIZE_NUMBER_INT);
-    }
-
-    if ($post_id) {
-        $default_content = get_post_field('excerpt', $post_id);
-    }
-
     $meta_boxes[] = [
         'id' => 'services',
         'title' => 'Medical Service Information',
