@@ -114,7 +114,7 @@ function uamswp_fad_gbp_render_entries(array $entries): void
         <tbody>
         <?php foreach ($entries as $entry) { ?>
             <tr>
-                <td><?php echo esc_html(wp_date('Y-m-d H:i', (int) ($entry['time'] ?? 0))); ?></td>
+                <td><?php echo esc_html((string) wp_date('Y-m-d H:i', (int) ($entry['time'] ?? 0))); ?></td>
                 <td><code><?php echo esc_html((string) ($entry['store_code'] ?? '')); ?></code></td>
                 <td><?php echo esc_html((string) ($entry['silo'] ?? '')); ?></td>
                 <td><?php echo esc_html((string) ($entry['mode'] ?? '')); ?></td>

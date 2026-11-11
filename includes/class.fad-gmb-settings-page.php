@@ -96,7 +96,7 @@ function doximity_csv_export(): false
         $row = [];
         while ($query->have_posts()) {
             $query->the_post();
-            $post_id = get_the_ID();
+            $post_id = (int) get_the_ID();
 
             // First, check if provider has desired degree
             $degree_md = [ // list valid versions of MD
@@ -123,7 +123,7 @@ function doximity_csv_export(): false
             if ($degrees) {
                 foreach ($degrees as $degree) {
                     $degree_term = get_term($degree, 'degree');
-                    $degree_name = $degree_term->name;
+                    $degree_name = ($degree_term->name ?? '');
                     if (($d < 2) && (in_array($degree_name, $degree_md) || in_array($degree_name, $degree_do) || in_array($degree_name, $degree_np) || in_array($degree_name, $degree_pa))) {
                         $degree_valid = $degree_name;
                         if (in_array($degree_valid, $degree_md)) {
@@ -192,7 +192,7 @@ function doximity_csv_export(): false
                 if ($affiliations) {
                     foreach ($affiliations as $affiliation) {
                         $affiliation_object = get_term($affiliation, 'affiliation');
-                        $affiliation_aha_name = get_field('affiliation_name', $affiliation_object) ?: $affiliation_object->name;
+                        $affiliation_aha_name = get_field('affiliation_name', $affiliation_object) ?: ($affiliation_object->name ?? '');
                         $affiliation_aha_id = get_field('affiliation_id', $affiliation_object);
                         $affiliation_list .= $affiliation_aha_name.($affiliation_aha_id ? ' (AHA ID: '.$affiliation_aha_id.')' : '');
                         if (count($affiliations) > $i) {
@@ -225,8 +225,8 @@ function doximity_csv_export(): false
                                 $primary_appointment_building = get_field('location_building', $location); // Get building taxonomy input
                                 if ($primary_appointment_building) {
                                     $building = get_term($primary_appointment_building, 'building'); // Get building object
-                                    $building_slug = $building->slug; // Get the building slug
-                                    $building_name = $building->name; // Get the building name
+                                    $building_slug = ($building->slug ?? ''); // Get the building slug
+                                    $building_name = ($building->name ?? ''); // Get the building name
                                 }
                                 $primary_appointment_floor_object = get_field_object('location_building_floor', $location); // Get floor object from input
                                 $primary_appointment_floor_value = $primary_appointment_floor_object['value']; // Get the floor selection value
@@ -303,6 +303,9 @@ function doximity_csv_export(): false
     $filename = 'Doximity_List_'.time().'.csv';
     $delimiter = ',';
     $fh = @fopen('php://output', 'w');
+    if ($fh === false) {
+        wp_die('The export could not open the output stream.');
+    }
     fwrite($fh, chr(0xEF).chr(0xBB).chr(0xBF));
     header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
     header('Content-Description: File Transfer');
@@ -660,7 +663,7 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
 
         while ($wp_query->have_posts()) {
             $wp_query->the_post();
-            $post_id = get_the_ID();
+            $post_id = (int) get_the_ID();
 
             // Get slug
             $profile_slug = get_post_field('post_name', $post_id);
@@ -672,7 +675,7 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
             if ($degrees) {
                 foreach ($degrees as $degree) {
                     $degree_name = get_term($degree, 'degree');
-                    $degree_list .= $degree_name->name;
+                    $degree_list .= ($degree_name->name ?? '');
                     if (count($degrees) > $d) {
                         $degree_list .= ', ';
                     }
@@ -701,7 +704,7 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
             $medium_name = ($prefix ? $prefix.' ' : '').get_field('physician_first_name', $post_id).' '.(get_field('physician_middle_name', $post_id) ? get_field('physician_middle_name', $post_id).' ' : '').get_field('physician_last_name', $post_id);
             $resident = get_field('physician_resident', $post_id);
             $phys_title = get_field('physician_title', $post_id);
-            $phys_title_name = get_term($phys_title, 'clinical_title')->name;
+            $phys_title_name = (get_term($phys_title, 'clinical_title')->name ?? '');
             $vowels = ['a', 'e', 'i', 'o', 'u'];
             if (in_array(strtolower($phys_title_name)[0], $vowels, true)) { // Defines a or an, based on whether clinical title starts with vowel
                 $phys_title_indef_article = 'an';
@@ -718,11 +721,11 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                 foreach ($provider_gmb_cats as $provider_gmb_cat) {
                     $provider_gmb_cat_term = get_term($provider_gmb_cat, 'gmb_cat_provider');
                     if ($c < 2) {
-                        $provider_gmb_cat_primary_name = esc_html($provider_gmb_cat_term->name);
+                        $provider_gmb_cat_primary_name = esc_html(($provider_gmb_cat_term->name ?? ''));
                     } elseif ($c === 2) {
-                        $provider_gmb_cat_additional_names = esc_html($provider_gmb_cat_term->name);
+                        $provider_gmb_cat_additional_names = esc_html(($provider_gmb_cat_term->name ?? ''));
                     } elseif ($c < 11) {
-                        $provider_gmb_cat_additional_names .= ', '.esc_html($provider_gmb_cat_term->name);
+                        $provider_gmb_cat_additional_names .= ', '.esc_html(($provider_gmb_cat_term->name ?? ''));
                     }
                     $c++;
                 } // endforeach
@@ -776,8 +779,8 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         $location_building = get_field('location_building', $location_source_ids['facility']);
                         if ($location_building) {
                             $building = get_term($location_building, 'building');
-                            $building_slug = $building->slug;
-                            $building_name = $building->name;
+                            $building_slug = ($building->slug ?? '');
+                            $building_name = ($building->name ?? '');
                         }
 
                         // Option 1:
@@ -985,7 +988,7 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         }
                         $row[19] = $provider_gmb_cover_photo ?: '';
                         $service_line = get_field('physician_service_line', $post_id);
-                        $service_line_name = $service_line ? get_term($service_line, 'service_line')->name : '';
+                        $service_line_name = $service_line ? (get_term($service_line, 'service_line')->name ?? '') : '';
 
                         $row[20] = $service_line_name;
 
@@ -1365,8 +1368,8 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
         while ($query->have_posts()) {
             $query->the_post();
             // Parent Location
-            $location_post_id = get_the_ID();
-            $location_child_id = get_the_ID();
+            $location_post_id = (int) get_the_ID();
+            $location_child_id = (int) get_the_ID();
             /**
              * Which location supplies each address component. A child location
              * may override any one of them, so the address fields below no
@@ -1395,8 +1398,8 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             $location_building = get_field('location_building', $location_source_ids['facility']);
             if ($location_building) {
                 $building = get_term($location_building, 'building');
-                $building_slug = $building->slug;
-                $building_name = $building->name;
+                $building_slug = ($building->slug ?? '');
+                $building_name = ($building->name ?? '');
             }
             $location_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
             $location_floor_value = '';
@@ -1460,11 +1463,11 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 foreach ($location_gmb_cats as $location_gmb_cat) {
                     $location_gmb_cat_term = get_term($location_gmb_cat, 'gmb_cat_location');
                     if ($c < 2) {
-                        $location_gmb_cat_primary_name = esc_html($location_gmb_cat_term->name);
+                        $location_gmb_cat_primary_name = esc_html(($location_gmb_cat_term->name ?? ''));
                     } elseif ($c === 2) {
-                        $location_gmb_cat_additional_names = esc_html($location_gmb_cat_term->name);
+                        $location_gmb_cat_additional_names = esc_html(($location_gmb_cat_term->name ?? ''));
                     } elseif ($c < 11) {
-                        $location_gmb_cat_additional_names .= ', '.esc_html($location_gmb_cat_term->name);
+                        $location_gmb_cat_additional_names .= ', '.esc_html(($location_gmb_cat_term->name ?? ''));
                     }
                     $c++;
                 } // endforeach
@@ -1692,7 +1695,7 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 $row[20] = $location_gmb_other_photos ?: '';
 
                 // Labels
-                $region = get_term(get_field('location_region', $location_source_ids['street']), 'region')->name;
+                $region = (get_term(get_field('location_region', $location_source_ids['street']), 'region')->name ?? '');
                 $row[21] = $region ?: '';
 
                 // AdWords location extensions phone
@@ -1784,7 +1787,7 @@ function mychart_csv_export(): false
         $row = [];
         while ($query->have_posts()) {
             $query->the_post();
-            $post_id = get_the_ID();
+            $post_id = (int) get_the_ID();
 
             // Create the Name variables
             $ser_id = get_field('physician_pid', $post_id);
@@ -1801,7 +1804,7 @@ function mychart_csv_export(): false
             // Most placements are background images inside a circular container no larger than 122x122.
             // The details window for a provider displays the full image, restricted only by the max-width of the window and Epic's 1000px maximum on image size.
             // Defining hot spots within the media library, placing them between the provider's front teeth, yields the best result.
-            $provider_mychart_photo = wp_get_attachment_image_url(get_post_thumbnail_id($post_id), 'thumbnail'); // 150x150
+            $provider_mychart_photo = wp_get_attachment_image_url((int) get_post_thumbnail_id($post_id), 'thumbnail'); // 150x150
 
             $resident = get_field('physician_resident', $post_id);
 
@@ -1833,6 +1836,9 @@ function mychart_csv_export(): false
     $filename = 'MyChart_List_'.time().'.csv';
     $delimiter = ',';
     $fh = @fopen('php://output', 'w');
+    if ($fh === false) {
+        wp_die('The export could not open the output stream.');
+    }
     fwrite($fh, chr(0xEF).chr(0xBB).chr(0xBF));
     header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
     header('Content-Description: File Transfer');

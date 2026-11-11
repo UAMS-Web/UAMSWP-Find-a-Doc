@@ -223,7 +223,7 @@ function uamswp_fad_gbp_queue_on_publish($new_status, $old_status, $post, ?calla
         return;
     }
 
-    uamswp_fad_gbp_queue_on_save((int) $post->ID, $lookup);
+    uamswp_fad_gbp_queue_on_save((int) ($post->ID ?? 0), $lookup);
 }
 
 /**

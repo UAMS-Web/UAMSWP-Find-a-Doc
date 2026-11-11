@@ -958,7 +958,7 @@ function uamswp_dead_links_screen(): void
     $counts = $run['counts'];
     $states = ['scanned' => 'Dry run done; nothing has been changed.', 'applying' => 'Removal in progress.', 'applied' => 'Removed.', 'undoing' => 'Undo in progress.', 'undone' => 'Removal undone.'];
 
-    echo '<h2>Last run</h2><p>'.esc_html($states[$status] ?? $status).' Dry run of '.esc_html(wp_date('F j, Y g:i a', (int) $run['scanned_at'])).'.</p>';
+    echo '<h2>Last run</h2><p>'.esc_html($states[$status] ?? $status).' Dry run of '.esc_html((string) wp_date('F j, Y g:i a', (int) $run['scanned_at'])).'.</p>';
     echo '<ul><li>'.esc_html((string) $counts['links']).' dead links on '.esc_html((string) $counts['records']).' records ('.esc_html((string) $counts['dead_ids']).' deleted IDs)</li>';
 
     foreach ($counts['rows'] as $table => $number) {
@@ -973,7 +973,7 @@ function uamswp_dead_links_screen(): void
 
     if (is_array($check)) {
 
-        echo '<p><strong>Check made '.esc_html(wp_date('F j, Y g:i a', (int) $check['at'])).':</strong> '.esc_html((string) $check['links']).' dead links and '.esc_html((string) $check['rows']).' orphan rows are left.</p>';
+        echo '<p><strong>Check made '.esc_html((string) wp_date('F j, Y g:i a', (int) $check['at'])).':</strong> '.esc_html((string) $check['links']).' dead links and '.esc_html((string) $check['rows']).' orphan rows are left.</p>';
 
     }
 

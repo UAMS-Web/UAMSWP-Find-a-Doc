@@ -172,7 +172,7 @@ add_action('template_redirect', function (): void {
     global $wp_query;
     if (($wp_query->get('post_type') == 'provider' || $wp_query->get('post_type') == 'location') && is_404()) {
         $redirectLink = get_post_type_archive_link($wp_query->get('post_type'));
-        wp_redirect($redirectLink, 301);
+        wp_redirect((string) $redirectLink, 301);
         exit;
     }
 });

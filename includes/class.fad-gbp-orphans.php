@@ -38,13 +38,13 @@ function uamswp_fad_gbp_track_unpublish($new_status, $old_status, $post, ?int $n
     }
 
     if ($new_status === 'publish') {
-        delete_post_meta((int) $post->ID, UAMSWP_FAD_GBP_UNPUBLISHED_META);
+        delete_post_meta((int) ($post->ID ?? 0), UAMSWP_FAD_GBP_UNPUBLISHED_META);
 
         return;
     }
 
-    if ($old_status === 'publish' && (string) get_post_meta((int) $post->ID, UAMSWP_FAD_GBP_UNPUBLISHED_META, true) === '') {
-        update_post_meta((int) $post->ID, UAMSWP_FAD_GBP_UNPUBLISHED_META, gmdate('Y-m-d', $now ?? time()));
+    if ($old_status === 'publish' && (string) get_post_meta((int) ($post->ID ?? 0), UAMSWP_FAD_GBP_UNPUBLISHED_META, true) === '') {
+        update_post_meta((int) ($post->ID ?? 0), UAMSWP_FAD_GBP_UNPUBLISHED_META, gmdate('Y-m-d', $now ?? time()));
     }
 }
 
@@ -60,7 +60,7 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
 {
     $today = gmdate('Y-m-d', $now ?? time());
     $candidates = [];
-    $locations_for ??= static fn (int $provider_id): array => array_map(fn (array $item): int => $item['location_id'], uamswp_fad_gbp_items_for_provider($provider_id, []));
+    $locations_for ??= static fn (int $provider_id): array => array_map(fn (array $item): int => (int) ($item['location_id'] ?? 0), uamswp_fad_gbp_items_for_provider($provider_id, []));
 
     // A listing a published post still uses is never a candidate, whatever an unpublished copy of that post says.
     $live = [];
