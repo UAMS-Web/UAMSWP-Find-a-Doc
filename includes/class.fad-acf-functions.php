@@ -417,6 +417,11 @@ function physician_save_post($post_id): void
 
     $locations = $_POST['acf']['field_physician_locations'] ?? [];
 
+    // Stored as they are when the provider has no locations: no region, and no first portal
+
+    $region = null;
+    $portal = [];
+
     // Get the desired values from each associated location
 
     if ($locations) {
@@ -432,7 +437,7 @@ function physician_save_post($post_id): void
 
             // Region
 
-            $location_region = get_field('location_region', $location) ?? null;
+            $location_region = get_field('location_region', $location);
 
             if ($location_region) {
 
@@ -442,7 +447,7 @@ function physician_save_post($post_id): void
 
             // Portal
 
-            $location_portal = get_field('location_portal', $location) ?? null;
+            $location_portal = get_field('location_portal', $location);
 
             if ($location_portal) {
 
@@ -484,7 +489,7 @@ function physician_save_post($post_id): void
      * The first portal value should be the portal value of the provider's primary
      * location.
      */
-    $_POST['acf']['field_physician_portal'] = $portal[0];
+    $_POST['acf']['field_physician_portal'] = $portal[0] ?? null;
 
 }
 
@@ -874,7 +879,7 @@ function clinical_title_save_post($post_id): void
 
     // Get term from ID
 
-    $term = get_term_by('id', $term_id, $taxonomy) ?? null;
+    $term = get_term_by('id', $term_id, $taxonomy);
 
     // Bail early if the term is not a valid object
 
@@ -893,7 +898,7 @@ function clinical_title_save_post($post_id): void
     // Get the term's parent
 
     $parent_term_id = $term->parent;
-    $parent_term = $parent_term_id ? (get_term_by('id', $parent_term_id, $taxonomy) ?? null) : null;
+    $parent_term = $parent_term_id ? (get_term_by('id', $parent_term_id, $taxonomy)) : null;
     $parent_term = (! $parent_term || ! is_object($parent_term)) ? null : $parent_term;
 
     // If parent term exists, modify term's fields
@@ -910,10 +915,10 @@ function clinical_title_save_post($post_id): void
 
         if ($cms_code_inherit_query) {
 
-            $cms_code_parent = get_field('clinical_specialization_cms_code', $parent_term) ?? null;
+            $cms_code_parent = get_field('clinical_specialization_cms_code', $parent_term);
             $_POST['acf']['field_clinical_specialization_cms_code'] = $cms_code_parent;
 
-            $cms_code_parent = get_field('clinical_specialization_cms_code_type', $parent_term) ?? null;
+            $cms_code_parent = get_field('clinical_specialization_cms_code_type', $parent_term);
             $_POST['acf']['field_clinical_specialization_cms_code_type'] = $cms_code_parent;
 
         }
@@ -928,7 +933,7 @@ function clinical_title_save_post($post_id): void
 
         if ($medicalspecialty_member_inherit_query) {
 
-            $medicalspecialty_member_parent = get_field('clinical_specialization_medicalspecialty_member', $parent_term) ?? null;
+            $medicalspecialty_member_parent = get_field('clinical_specialization_medicalspecialty_member', $parent_term);
             $_POST['acf']['field_clinical_specialization_medicalspecialty_member'] = $medicalspecialty_member_parent;
 
         }
@@ -943,10 +948,10 @@ function clinical_title_save_post($post_id): void
 
         if ($onetsoc_code_inherit_query) {
 
-            $onetsoc_code_parent = get_field('clinical_specialization_onetsoc_code', $parent_term) ?? null;
+            $onetsoc_code_parent = get_field('clinical_specialization_onetsoc_code', $parent_term);
             $_POST['acf']['field_clinical_specialization_onetsoc_code'] = $onetsoc_code_parent;
 
-            $onetsoc_code_parent = get_field('clinical_specialization_onetsoc_code_name', $parent_term) ?? null;
+            $onetsoc_code_parent = get_field('clinical_specialization_onetsoc_code_name', $parent_term);
             $_POST['acf']['field_clinical_specialization_onetsoc_code_name'] = $onetsoc_code_parent;
 
         }
@@ -961,7 +966,7 @@ function clinical_title_save_post($post_id): void
 
         if ($isco08_code_inherit_query) {
 
-            $isco08_code_parent = get_field('clinical_specialization_isco08_code', $parent_term) ?? null;
+            $isco08_code_parent = get_field('clinical_specialization_isco08_code', $parent_term);
             $_POST['acf']['field_clinical_specialization_isco08_code'] = $isco08_code_parent;
 
         }
@@ -976,7 +981,7 @@ function clinical_title_save_post($post_id): void
 
         if ($sameas_occupation_inherit_query) {
 
-            $sameas_occupation_parent = get_field('clinical_specialization_sameas_occupation', $parent_term) ?? null;
+            $sameas_occupation_parent = get_field('clinical_specialization_sameas_occupation', $parent_term);
             $_POST['acf']['field_clinical_specialization_sameas_occupation'] = $sameas_occupation_parent;
 
         }
@@ -991,7 +996,7 @@ function clinical_title_save_post($post_id): void
 
         if ($sameas_field_inherit_query) {
 
-            $sameas_field_parent = get_field('clinical_specialization_sameas_field', $parent_term) ?? null;
+            $sameas_field_parent = get_field('clinical_specialization_sameas_field', $parent_term);
             $_POST['acf']['field_clinical_specialization_sameas_field'] = $sameas_field_parent;
 
         }
@@ -1235,7 +1240,7 @@ function custom_excerpt_acf(): void
 
         // Get field value relevant to the current post type
 
-        $post_excerpt = get_field($excerpt_field_name[$post_type], $post_id) ?? null;
+        $post_excerpt = get_field($excerpt_field_name[$post_type], $post_id);
 
         // If excerpt is empty, get fallback field value relevant to the current post type
 
@@ -1247,7 +1252,7 @@ function custom_excerpt_acf(): void
             array_key_exists($post_type, $excerpt_fallback_field_name)//  and if a key for the current post type exists in the array...
         ) {
 
-            $post_excerpt = get_field($excerpt_fallback_field_name[$post_type], $post_id) ?? null;
+            $post_excerpt = get_field($excerpt_fallback_field_name[$post_type], $post_id);
 
             if ($post_excerpt) {
 

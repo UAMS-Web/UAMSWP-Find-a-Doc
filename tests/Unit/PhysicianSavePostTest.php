@@ -202,24 +202,20 @@ test('it skips a location with no region or portal value', function (): void {
         ->and($acf['field_physician_portal'])->toBe('Value 20');
 });
 
-test('it raises a warning and stores null for the portal when no location has one', function (): void {
+test('it raises no warning and stores null for the portal when no location has one', function (): void {
     Functions\when('get_field')->alias(fn (string $name, $post_id) => $name === 'location_region' ? 'Central Arkansas' : null);
 
     [$acf, $warnings] = uamswp_test_run_save(uamswp_test_save_input());
 
-    expect($warnings)->toBe(['Undefined array key 0'])
+    expect($warnings)->toBe([])
         ->and($acf['field_physician_region'])->toBe(['Central Arkansas'])
         ->and($acf['field_physician_portal'])->toBeNull();
 });
 
-test('it raises warnings and stores null region and portal when the provider has no locations', function (): void {
+test('it raises no warning and stores null region and portal when the provider has no locations', function (): void {
     [$acf, $warnings] = uamswp_test_run_save(uamswp_test_save_input(['field_physician_locations' => []]));
 
-    expect($warnings)->toBe([
-        'Undefined variable $region',
-        'Undefined variable $portal',
-        'Trying to access array offset on null',
-    ])
+    expect($warnings)->toBe([])
         ->and($acf['field_physician_region'])->toBeNull()
         ->and($acf['field_physician_portal'])->toBeNull();
 });
@@ -227,12 +223,7 @@ test('it raises warnings and stores null region and portal when the provider has
 test('it raises no warning for a missing posted key and reads the value as empty', function (): void {
     [$acf, $warnings] = uamswp_test_run_save(['field_physician_first_name' => 'Leonard']);
 
-    // The only warnings left are the ones from a save with no locations.
-    expect($warnings)->toBe([
-        'Undefined variable $region',
-        'Undefined variable $portal',
-        'Trying to access array offset on null',
-    ])
+    expect($warnings)->toBe([])
         ->and($acf['field_physician_full_name'])->toBe('Leonard ')
         ->and($acf['field_physician_asp_filter'])->toBe(', , ');
 });

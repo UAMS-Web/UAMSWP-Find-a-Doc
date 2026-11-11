@@ -106,7 +106,8 @@ if (! function_exists('ap_time')) {
         // Format am and pm to AP Style abbreviations.
         if (date('a', $time) === 'am') {
             $meridian = 'a.m.';
-        } elseif (date('a', $time) === 'pm') {
+        } else {
+            // `a` formats as `am` or `pm` and nothing else.
             $meridian = 'p.m.';
         }
 
@@ -183,7 +184,8 @@ if (! function_exists('apStyleTime')) {
         // Format am and pm to AP Style abbreviations.
         if (date('a', $time) === 'am') {
             $meridian = 'a.m.';
-        } elseif (date('a', $time) === 'pm') {
+        } else {
+            // `a` formats as `am` or `pm` and nothing else.
             $meridian = 'p.m.';
         }
 
@@ -636,7 +638,7 @@ if (! function_exists('uamswp_provider_occupation_title')) {
 
                     // Get occupational title field from term
 
-                    $provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+                    $provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term);
 
                     // Set occupational title from term name as a fallback
 

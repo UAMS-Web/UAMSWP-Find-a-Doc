@@ -937,6 +937,7 @@ function get_medline_api_data($code, $type)
 
     }
     $url = 'https://connect.medlineplus.gov/service?';
+    $arguments = [];
     if ($type == 'icd') {
         $arguments = [
             'mainSearchCriteria.v.cs' => '2.16.840.1.113883.6.90',
@@ -1080,7 +1081,7 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
 
                         // Get occupational title field from term
 
-                        $provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+                        $provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term);
 
                         // Set occupational title from term name as a fallback
 
@@ -1211,6 +1212,7 @@ function provider_ajax_filter_callback(): void
         $provider_region = sanitize_text_field($_POST['provider_region']);
     }
 
+    $providers = [];
     if (isset($_POST['providers'])) {
         $providers = sanitize_text_field($_POST['providers']);
         $providers = explode(',', $providers);
@@ -1316,7 +1318,7 @@ function provider_ajax_filter_callback(): void
 
     $search_query = new WP_Query($args);
 
-    if ($search_query->have_posts() && ! empty($providers)) {
+    if ($search_query->have_posts() && $providers !== []) {
         $provider_ids = $search_query->posts;
         // echo $_POST['ppp'];
         // $z=0;
@@ -1396,7 +1398,7 @@ function uamswp_provider_title_ajax_filter_shortcode($atts): string|false
 
                         // Get occupational title field from term
 
-                        $provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+                        $provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term);
 
                         // Set occupational title from term name as a fallback
 
@@ -1475,6 +1477,7 @@ function provider_title_ajax_filter_callback(): void
         $provider_title = sanitize_text_field($_POST['provider_title']);
     }
 
+    $providers = [];
     if (isset($_POST['providers'])) {
         $providers = sanitize_text_field($_POST['providers']);
         $providers = explode(',', $providers);
@@ -1506,7 +1509,7 @@ function provider_title_ajax_filter_callback(): void
 
     $search_query = new WP_Query($args);
 
-    if ($search_query->have_posts() && ! empty($providers)) {
+    if ($search_query->have_posts() && $providers !== []) {
         $provider_ids = $search_query->posts;
         $title_list = [];
         while ($search_query->have_posts()) {
@@ -1610,6 +1613,7 @@ function location_ajax_filter_callback(): void
         $location_region = sanitize_text_field($_POST['location_region']);
     }
 
+    $locations = [];
     if (isset($_POST['locations'])) {
         $locations = sanitize_text_field($_POST['locations']);
         $locations = explode(',', $locations);
@@ -1664,7 +1668,7 @@ function location_ajax_filter_callback(): void
 
     $search_query = new WP_Query($args);
 
-    if ($search_query->have_posts() && ! empty($locations)) {
+    if ($search_query->have_posts() && $locations !== []) {
         $location_ids = $search_query->posts;
         while ($search_query->have_posts()) {
             $search_query->the_post();
