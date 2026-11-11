@@ -1030,6 +1030,7 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
     $provider_titles = [];
     $provider_titles_list = [];
     $regions = [];
+    $provider_regions = [];
     foreach ($providers as $provider) {
         if (get_post_status($provider) == 'publish') {
 
@@ -1110,7 +1111,7 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
 
             $provider_region = get_field('physician_region', $provider);
 
-            foreach ($provider_region as $region) {
+            foreach (is_array($provider_region) ? $provider_region : [] as $region) {
 
                 $provider_regions[] = $region;
 
@@ -1532,12 +1533,15 @@ function uamswp_location_ajax_filter_shortcode($atts): string|false
     $locations = explode(',', $a['locations']);
     $display_region = $a['region'];
     $regions = [];
+    $location_regions = [];
     foreach ($locations as $location) {
         if (get_post_status($location) == 'publish') {
             // Region
-            $location_region[] = get_field('location_region', $location);
-            foreach ($location_region as $region) {
-                $location_regions[] = $region;
+            $location_region = get_field('location_region', $location);
+            if ($location_region !== false && $location_region !== null && $location_region !== '') {
+                foreach ((array) $location_region as $region) {
+                    $location_regions[] = $region;
+                }
             }
         }
     }
