@@ -32,7 +32,11 @@
             "@test:unit",
             "@test:integration"
         ],
-        "test:unit": "pest",
+        "test:unit": [
+            "@test:wiring @no_additional_args",
+            "pest"
+        ],
+        "test:wiring": "pest --ci tests/Wiring/ContentHooksTest.php",
         "test:integration": "@php tests/Integration/vendor/bin/phpunit --configuration tests/Integration/phpunit.xml",
         "stan": "phpstan analyse --no-progress --memory-limit=2G",
         "refactor": "rector",
@@ -45,7 +49,8 @@
     "scripts-descriptions": {
         "setup:integration": "Install the Integration suite's own Composer setup (PHPUnit 9.6, wp-phpunit, the polyfills).",
         "test": "Run both suites, each in its own process, so the Unit suite never sees WordPress.",
-        "test:unit": "Run the Pest suite that needs no WordPress and no database.",
+        "test:unit": "Run fresh-load wiring and callback tests in separate Pest processes, without WordPress or a database.",
+        "test:wiring": "Pin content hooks in a fresh Pest process before any callbacks are loaded.",
         "test:integration": "Run the PHPUnit 9.6 suite that boots WordPress through wp-phpunit against the test database."
     },
     "autoload-dev": {
