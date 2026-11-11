@@ -1,21 +1,23 @@
 <?php
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html) { 
-	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = 'Areas of Expertise | ' . get_bloginfo( "name" );
-	return $html;
+function uamswp_fad_title($html)
+{
+    // you can add here all your conditions as if is_page(), is_category() etc..
+    $html = 'Areas of Expertise | '.get_bloginfo('name');
+
+    return $html;
 }
 // add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 get_header();
 
-  add_filter( 'facetwp_template_use_archive', '__return_true' );
+add_filter('facetwp_template_use_archive', '__return_true');
 
-  $expertise_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
-  $expertise_text = get_field('expertise_archive_intro_text', 'option');
+$expertise_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
+$expertise_text = get_field('expertise_archive_intro_text', 'option');
 
- ?>
+?>
 
 <div class="content-sidebar-wrap">
     <main id="genesis-content">
@@ -23,7 +25,7 @@ get_header();
             <header class="entry-header">
                 <h1 class="entry-title" itemprop="headline"><?php echo $expertise_title; ?></h1>
             </header>
-            <?php echo ($expertise_text ? '<div class="entry-content clearfix" itemprop="text">' . $expertise_text . '</div>' : '' ); ?>
+            <?php echo $expertise_text ? '<div class="entry-content clearfix" itemprop="text">'.$expertise_text.'</div>' : ''; ?>
         </section>
         <section class="uams-module" id="expertise">
             <div class="container-fluid">
@@ -32,21 +34,21 @@ get_header();
                         <h2 class="module-title sr-only">List of Areas of Expertise</h2>
                         <div class="card-list-container">
                             <div class="card-list card-list-expertise">
-                                <?php echo facetwp_display( 'template', 'expertise' ); ?>
-                                <?php //get_template_part( 'templates/physician-loop' ); ?>
+                                <?php echo facetwp_display('template', 'expertise'); ?>
+                                <?php // get_template_part( 'templates/physician-loop' );?>
                             </div>
                         </div>
                         <div class="row list-pagination">
                             <div class="col">
-                                <?php echo facetwp_display( 'pager' ); ?>
+                                <?php echo facetwp_display('pager'); ?>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <?php // FacetWP Hide elements
-                    // Set # value depending on element
-                    ?>
+                   // Set # value depending on element
+?>
             <script>
                 (function($) {
                     $(document).on('facetwp-loaded', function() {
