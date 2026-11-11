@@ -32,6 +32,12 @@ final class UAMSWP_FAD_GBP_Sync
     /** How many creates this run has made. */
     private int $creates_made = 0;
 
+    /** @var array<int, int> The moment each create of this run was sent. */
+    private array $create_times = [];
+
+    /** @var callable(): int The clock a create is stamped with. */
+    private $clock;
+
     /** @var array<int, array{account: string, listing: array<string, mixed>}> */
     private array $created = [];
 
@@ -40,8 +46,9 @@ final class UAMSWP_FAD_GBP_Sync
 
     /**
      * @param  object  $client  Provides patch() and create(), as UAMSWP_FAD_GBP_Client does.
-     * @param  array{silos: array<string, array<string, mixed>>, modes: array<string, string>, is_production: bool, creates_paused_until?: int, creates_left?: ?int, now?: int}  $config  The last three
-     *                                                                                                                                                                                    describe Google's daily create quota: a pause in force, the creates still allowed today, and the clock.
+     * @param  array{silos: array<string, array<string, mixed>>, modes: array<string, string>, is_production: bool, creates_paused_until?: int, creates_left?: ?int, now?: int, clock?: callable(): int}  $config  `creates_paused_until`, `creates_left`, `now` and `clock`
+     *                                                                                                                                                                                                             describe Google's daily create quota: a pause in force, the creates still allowed today, and the clock.
+     *                                                                                                                                                                                                             `now` is the run's start; `clock` stamps each create as it is sent (default: the current time).
      * @param  array<string, array<int, array{account: string, listing: array<string, mixed>}>>  $index  From self::build_index().
      * @param  callable(array<string, mixed>): void  $logger  Receives one entry per item.
      */
@@ -51,6 +58,7 @@ final class UAMSWP_FAD_GBP_Sync
         $this->paused_until = (int) ($config['creates_paused_until'] ?? 0);
         $this->creates_left = isset($config['creates_left']) ? max(0, (int) $config['creates_left']) : null;
         $this->now = (int) ($config['now'] ?? time());
+        $this->clock = $config['clock'] ?? time(...);
 
         foreach ($index as $listings) {
             foreach ($listings as $listing) {
@@ -78,6 +86,16 @@ final class UAMSWP_FAD_GBP_Sync
     public function creates_made(): int
     {
         return $this->creates_made;
+    }
+
+    /**
+     * The moment each create of this run was sent, so each can be counted on the Pacific day Google counts it on.
+     *
+     * @return array<int, int>
+     */
+    public function create_times(): array
+    {
+        return $this->create_times;
     }
 
     /**
@@ -323,6 +341,7 @@ final class UAMSWP_FAD_GBP_Sync
         }
 
         $this->creates_made++;
+        $this->create_times[] = (int) ($this->clock)();
 
         // Remember it, so the same store code later in this run is not created a second time.
         $listing = [
