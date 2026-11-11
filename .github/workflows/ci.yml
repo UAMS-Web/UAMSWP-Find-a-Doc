@@ -1,20 +1,30 @@
 name: CI
 
 # Public repository: Actions minutes are free, so this workflow is the remote gate for pull
-# requests to `master`. It follows the shared ci.yml template in
-# UAMS-Web/uams-claude-skills (.claude/skills/code-quality/templates/ci.yml), minus the jobs
-# this repository has no counterpart for: mutation testing and the mutation-annotation check.
-# The `lint-floor` job parses every shipped file on PHP 8.2, the supported floor.
+# requests to `master`.
+#
+# The lint and unit chain is the shared one, `UAMS-Web/uams-ci-workflows`, called by the
+# `checks` job, so this plugin does not carry a copy that drifts. The call runs the Composer,
+# synced-files, emoji, aggregate-needs, Pint, Rector and PHPStan jobs, the unit suite as
+# `composer test:unit`, and the PHP 8.2 floor lint. It runs on Linux only and leaves mutation
+# testing off until its own ticket (`mutate: false`). `download-archive` is off in the call
+# because this repository runs that check from its own `download-archive.yml`. `phpcs` stays off:
+# this plugin has no PHPCS configuration. The chain's own header lists every input and default.
+#
+# `style-build` stays here, as this repository's own job: the golden CSS build has no
+# counterpart in the chain.
 #
 # The last job, `CI`, is the one check a ruleset requires from this workflow (with the two
-# pull-request-body checks, `Attribution footer` and `Closing keywords`). It `needs:` every
-# other job in this file, runs `if: always()`, and fails unless every needed job reports
-# `success`. Add a job here and to that `needs:` list in the same change; the aggregate-needs
-# job fails the pull request when they disagree. Do not rename `CI`.
+# pull-request-body checks, `Attribution footer` and `Closing keywords`). It `needs:` the call
+# and every plain job in this file, runs `if: always()`, and fails unless each reports
+# `success`: a `skipped` or `cancelled` result fails it. Add a plain job here and to that
+# `needs:` list in the same change; the `aggregate-needs` job in the chain fails the pull
+# request when they disagree. Do not rename `CI`, and do not rename `checks` without changing
+# `needs:` below.
 #
-# The shared setup (PHP, the Composer cache, the locked install) lives in
-# `.github/actions/setup/action.yml`, copied from the code-quality skill's setup-action.yml.
-# Its PHP default stays 8.4: the tools run on 8.4 even though the plugin supports PHP 8.2.
+# What the plugin carries for the call, because the called jobs check out this repository:
+# `.github/actions/setup/action.yml`, the synced `.claude/skills` scripts, and the Composer
+# scripts `test:pint`, `test:refactor`, `stan` and `test:unit`.
 
 on:
   pull_request:
@@ -32,129 +42,25 @@ permissions:
   contents: read
 
 jobs:
-  composer-validate:
-    name: Composer validate (composer.lock freshness)
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v7
-
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          coverage: none
-          tools: composer:v2
-
-      # Fails when composer.json and composer.lock have drifted apart.
-      - run: composer validate --no-check-publish --no-check-all
-
-  synced-files:
-    name: Synced files (no hand-edited rules or skills)
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v7
-
-      - uses: actions/setup-node@v7
-        with:
-          node-version: '22'
-
-      # Fails, naming the file, when a synced rule or skill was edited by hand.
-      - run: node .claude/skills/synced-files/scripts/check-synced-files.mjs
-
-  no-emoji:
-    name: No emoji in durable records
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v7
-
-      - uses: actions/setup-node@v7
-        with:
-          node-version: '22'
-
-      # Fails, naming the file, line and code point, when prose carries a banned glyph.
-      - run: node .claude/skills/writing-comments/scripts/check-no-emoji.mjs
-
-  aggregate-needs:
-    name: Aggregate needs
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v7
-
-      - uses: actions/setup-node@v7
-        with:
-          node-version: '22'
-
-      # Fails, naming the job, when a job is missing from the `needs:` list of `CI` or a
-      # fixed required name is reported by no job. Allow-list: .github/aggregate-needs-allow.json.
-      - run: node .claude/skills/code-quality/scripts/check-aggregate-needs.mjs
-
-  pint:
-    name: Pint
-    needs: [composer-validate, synced-files]
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v7
-      - uses: ./.github/actions/setup
-      - run: composer test:pint
-
-  rector:
-    name: Rector
-    needs: [pint]
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v7
-      - uses: ./.github/actions/setup
-      - run: composer test:refactor
-
-  phpstan:
-    name: PHPStan
-    needs: [pint]
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v7
-      - uses: ./.github/actions/setup
-      - run: composer stan
-
-  lint-floor:
-    name: Lint on the PHP floor (8.2)
-    needs: [composer-validate]
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v7
-
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          coverage: none
-
-      # Parses every shipped PHP file with the floor PHP itself. Fails, naming the file, on
-      # syntax 8.2 cannot parse. `tests/` is left out: the suite runs on the development PHP.
-      - name: php -l
-        run: |
-          count=$(find . -name '*.php' -not -path './vendor/*' -not -path './tests/*' -not -path './node_modules/*' | wc -l)
-          echo "Files to lint: $count"
-          if [ "$count" -lt 1 ]; then echo "::error::No PHP files found to lint"; exit 1; fi
-          find . -name '*.php' -not -path './vendor/*' -not -path './tests/*' -not -path './node_modules/*' -print0 | xargs -0 -n1 php -l > /dev/null
-
-  pest:
-    name: Pest
-    needs: [rector, phpstan]
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@v7
-      - uses: ./.github/actions/setup
-
-      # `failOnEmptyTestSuite` in phpunit.xml fails a run that finds no test.
-      - run: composer test:unit
-
+  # The shared chain. Its checks report as `checks / <job name> (<operating system>)`.
+  checks:
+    # Pinned to a release tag, never a branch or a commit, so a change to the chain reaches this plugin
+    # only when the pin moves.
+    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.10.1
+    with:
+      linux-only: true
+      mutate: false
+      global-test-symbols: false
+      pest-command: composer test:unit
+      floor-lint: true
+      floor-lint-php: '8.2'
+      # Parses every PHP file outside vendor, tests and node_modules with the floor PHP itself,
+      # and fails when it finds none. `tests/` is left out: the suite runs on the development PHP.
+      floor-lint-command: >-
+        count=$(find . -name '*.php' -not -path './vendor/*' -not -path './tests/*' -not -path './node_modules/*' | wc -l);
+        echo "Files to lint: $count";
+        if [ "$count" -lt 1 ]; then echo "::error::No PHP files found to lint"; exit 1; fi;
+        find . -name '*.php' -not -path './vendor/*' -not -path './tests/*' -not -path './node_modules/*' -print0 | xargs -0 -n1 php -l > /dev/null
   style-build:
     name: Style build (golden CSS)
     runs-on: ubuntu-latest
@@ -189,11 +95,11 @@ jobs:
         env:
           UAMS_2020_THEME: ${{ github.workspace }}/uams-2020
 
-  # The one check a ruleset requires from this workflow. Keep `needs:` listing every other
-  # job in the file.
+  # The one check a ruleset requires from this workflow. Keep `needs:` naming the call and
+  # every plain job above.
   ci:
     name: CI
-    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, lint-floor, style-build, pint, rector, phpstan, pest]
+    needs: [checks, style-build]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
