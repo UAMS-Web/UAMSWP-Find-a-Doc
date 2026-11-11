@@ -8,7 +8,7 @@ Everything above the generated section below belongs to this repository and is e
 
 UAMSWP-Find-a-Doc is the WordPress plugin behind Find-a-Doc on uamshealth.com: the provider, location, area of expertise, clinical resource, condition, and treatment post types and the templates that display them.
 
-Follow [`CONTRIBUTING.md`](CONTRIBUTING.md) for the issue-to-merge path: a branch from `master` linked to the issue, a ready pull request to `dev`, and a draft pull request to `staging`. It also maps each branch to the environment its pull request's test plan is run on: `dev` to the local install, `staging` to uamshealth.dev. Start each pull request body from [`.github/pull_request_template.md`](.github/pull_request_template.md).
+Follow [`CONTRIBUTING.md`](CONTRIBUTING.md) for the issue-to-merge path: a branch from `master` linked to the issue and a pull request to `master`. Start each pull request body from [`.github/pull_request_template.md`](.github/pull_request_template.md).
 
 <!-- uams-claude-skills:begin -->
 ## Shared skills and rules
