@@ -4,9 +4,8 @@
  * Pins uamswp_provider_region_in_rule(), the region check behind the remove-ontology rule
  * on the provider profile (templates/single-physicians.php).
  *
- * A provider matches only when all of their locations are in one region and that region is
- * listed. A provider in two different regions does not match, as before; how a rule treats
- * that provider is decided in UAMS-Web/UAMSWP-Find-a-Doc#1132.
+ * A provider matches when at least one of their regions is listed, even if they also have a
+ * region that is not listed (decided in UAMS-Web/UAMSWP-Find-a-Doc#1132).
  */
 
 declare(strict_types=1);
@@ -33,9 +32,19 @@ test('a provider in one region does not match a rule that lists other regions', 
     expect(uamswp_provider_region_in_rule([65, 65], [66]))->toBeFalse();
 });
 
-test('a provider in two different regions does not match, even when both are listed', function (): void {
-    expect(uamswp_provider_region_in_rule([65, 66], [65, 66]))->toBeFalse()
-        ->and(uamswp_provider_region_in_rule([65, 66], [65]))->toBeFalse();
+test('a provider in two regions matches a rule that lists either one or both', function (): void {
+    expect(uamswp_provider_region_in_rule([65, 66], [65]))->toBeTrue()
+        ->and(uamswp_provider_region_in_rule([65, 66], [66]))->toBeTrue()
+        ->and(uamswp_provider_region_in_rule([65, 66], [65, 66]))->toBeTrue();
+});
+
+test('a provider in two regions does not match a rule that lists neither', function (): void {
+    expect(uamswp_provider_region_in_rule([65, 66], [67]))->toBeFalse()
+        ->and(uamswp_provider_region_in_rule([65, 66], [67, 68]))->toBeFalse();
+});
+
+test('a listed region later in the provider list still matches', function (): void {
+    expect(uamswp_provider_region_in_rule([64, 65, 66], [66]))->toBeTrue();
 });
 
 test('a provider with no region, or a rule with no regions, does not match', function (): void {
